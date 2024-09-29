@@ -1,6 +1,4 @@
 @import "theme";
 :host {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  @include host-flex-column
 }

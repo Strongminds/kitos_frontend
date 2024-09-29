@@ -1,4 +1,5 @@
 @import "theme";
+@import "mixins";
 
 .grid-container {
   display: grid;
@@ -48,9 +49,7 @@
 }
 
 :host {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+  @include host-flex-column
 }
 
 .dialog-footer {

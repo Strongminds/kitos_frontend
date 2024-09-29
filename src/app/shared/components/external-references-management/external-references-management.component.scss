@@ -1,6 +1,6 @@
 @import "theme";
+@import "mixins.scss";
+
 :host {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  @include host-flex-column
 }

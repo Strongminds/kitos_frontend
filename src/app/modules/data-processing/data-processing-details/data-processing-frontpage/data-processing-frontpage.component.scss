@@ -1,9 +1,7 @@
 @import "mixins.scss";
 
 :host {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  @include host-flex-column
 }
 .field-all-grid-length {
   grid-column: 1 / 4;

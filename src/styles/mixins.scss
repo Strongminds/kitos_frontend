@@ -16,6 +16,12 @@
   }
 }
 
+@mixin host-flex-column {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 @mixin mat-input-adjustment {
   --mdc-typography-subtitle1-font-size: var(--font-size);
   --mdc-typography-body1-font-size: var(--font-size);
