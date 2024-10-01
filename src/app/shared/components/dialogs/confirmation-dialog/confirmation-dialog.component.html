@@ -1,4 +1,4 @@
-<app-dialog [title]="title" data-cy="confirm-dialog">
+<app-dialog [title]="title" data-cy="confirm-dialog" (enterKeypress)="OkResult()">
   <div class="confirmation-container">
     <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
   </div>

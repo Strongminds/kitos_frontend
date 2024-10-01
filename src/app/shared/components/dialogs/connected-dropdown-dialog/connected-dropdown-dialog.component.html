@@ -1,4 +1,4 @@
-<app-dialog [title]="title" overflow="none">
+<app-dialog [title]="title" overflow="none" (enterKeypress)="onSave() [disableEnterKeypress]="dropdownFormGroup.valid === false || isBusy">
   <form [formGroup]="dropdownFormGroup" (submit)="onSave()">
     <app-standard-vertical-content-grid>
       <app-connected-dropdown

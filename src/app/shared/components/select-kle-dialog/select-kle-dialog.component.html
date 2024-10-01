@@ -1,4 +1,4 @@
-<app-dialog [loading]="(isLoading | async) === true" title="Tilknyt opgave" overflow="none" i18n-title>
+<app-dialog [loading]="(isLoading | async) === true" title="Tilknyt opgave" overflow="none" i18n-title (enterKeypress)="confirm()" [disableEnterKeypress]="(canConfirm | async) !== true">
   <app-standard-vertical-content-grid>
     <app-dropdown
       text="Filtrer på hovedgruppe"

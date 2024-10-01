@@ -1,4 +1,4 @@
-<app-dialog title="">
+<app-dialog title="" (enterKeypress)="OkResult()">
   <app-standard-vertical-content-grid class="confirmation-container">
     <div class="icon-center-flexbox">
       <app-take-into-use-icon *ngIf="icon === 'take-into-use'"></app-take-into-use-icon>

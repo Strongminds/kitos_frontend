@@ -1,4 +1,4 @@
-<app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
+<app-dialog [title]="title" [closable]="true" overflow="none" i18n-title (enterKeypress)="onSave()" [disableEnterKeypress]="roleForm.valid === false || isBusy">
   <form [formGroup]="roleForm" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
       <app-connected-dropdown

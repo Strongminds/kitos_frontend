@@ -1,4 +1,4 @@
-<app-dialog title="Redigér url" i18n-title overflow="none">
+<app-dialog title="Redigér url" i18n-title overflow="none" (enterKeypress)="onSave()">
   <form [formGroup]="urlForm" (submit)="onSave()">
     <app-standard-vertical-content-grid>
       <app-textbox text="Url" i18n-text [formGroup]="urlForm" formName="url" data-cy="url-textbox"></app-textbox>

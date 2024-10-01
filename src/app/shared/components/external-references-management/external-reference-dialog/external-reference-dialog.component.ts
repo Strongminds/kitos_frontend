@@ -31,6 +31,7 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
   @Input() public title!: string;
   @Output() public cancelled = new EventEmitter();
   @Output() public saved = new EventEmitter<ExternalReferenceProperties>();
+  @Output() public enterKeypress = new EventEmitter();
 
   public readonly externalReferenceForm = new FormGroup(
     {

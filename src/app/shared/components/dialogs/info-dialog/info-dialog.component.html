@@ -1,4 +1,4 @@
-<app-dialog [title]="title">
+<app-dialog [title]="title" (enterKeypress)="Close()">
   <div class="info-container">
     <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
     <ul *ngIf="listTexts !== undefined">
