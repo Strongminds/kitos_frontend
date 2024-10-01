@@ -1,4 +1,4 @@
-<app-dialog title="Opret ny underenhed" i18n-title>
+<app-dialog title="Opret ny underenhed" i18n-title (enterKeypress)="onCreate()" [disableEnterKeypress]="createForm.invalid">
   <form [formGroup]="createForm" (ngSubmit)="onCreate()">
     <app-standard-vertical-content-grid>
       <app-textbox

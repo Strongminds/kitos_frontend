@@ -1,4 +1,4 @@
-<app-dialog title="Opret bruger" helpText="user_create" i18n-title>
+<app-dialog title="Opret bruger" helpText="user_create" i18n-title (enterKeypress)="sendCreateUserRequest()" >
   <form [formGroup]="createForm" (submit)="sendCreateUserRequest()">
     <app-standard-vertical-content-grid>
       <app-textbox

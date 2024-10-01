@@ -5,6 +5,7 @@
     backgroundColor="grey"
     [noPadding]="true"
     *ngIf="unitPermissions$ | async as permissions"
+    (enterKeypress)="onSave()"
   >
     <div class="content">
       <div class="grid-container">
