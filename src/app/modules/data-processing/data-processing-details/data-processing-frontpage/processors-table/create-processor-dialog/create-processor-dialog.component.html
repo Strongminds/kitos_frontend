@@ -1,4 +1,4 @@
-<app-dialog title="Opret databehandler" i18n-title overflow="none">
+<app-dialog title="Opret databehandler" i18n-title overflow="none" (enterKeypress)="onSubmit()" [disableEnterKeypress]="isBusy || !processorsFormGroup.valid">
   <form [formGroup]="processorsFormGroup" (submit)="onSubmit()">
     <app-standard-vertical-content-grid>
       <app-connected-dropdown

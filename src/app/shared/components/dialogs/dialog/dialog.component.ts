@@ -16,6 +16,7 @@ export class DialogComponent {
   @Input() public backgroundColor: 'white' | 'grey' = 'white';
   @Input() public noPadding = false;
   @Input() public helpText?: string;
+  @Input() public disableEnterKeypress? = false;
   @Output() public enterKeypress = new EventEmitter();
 
   constructor(protected dialog: MatDialogRef<DialogComponent>) {}
@@ -25,6 +26,6 @@ export class DialogComponent {
   }
 
   public onEnterKeypress(){
-    this.enterKeypress.emit();
+    if (!this.disableEnterKeypress) this.enterKeypress.emit();
   }
 }

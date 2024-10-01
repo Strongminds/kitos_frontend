@@ -1,4 +1,4 @@
-<app-dialog [title]="title" overflow="none">
+<app-dialog [title]="title" overflow="none" (enterKeypress)="onSubmit()" [disableEnterKeypress]="isBusy || !subprocessorsFormGroup.valid">
   <form [formGroup]="subprocessorsFormGroup" (submit)="onSubmit()">
     <app-standard-vertical-content-grid>
       <app-connected-dropdown
