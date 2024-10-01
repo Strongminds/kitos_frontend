@@ -20,6 +20,7 @@
   }"
   *ngIf="loading === false"
   ngClass=""
+  (keyup.enter)="onEnterKeypress()"
 >
   <ng-content></ng-content>
 </div>

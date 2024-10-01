@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
@@ -16,10 +16,15 @@ export class DialogComponent {
   @Input() public backgroundColor: 'white' | 'grey' = 'white';
   @Input() public noPadding = false;
   @Input() public helpText?: string;
+  @Output() public enterKeypress = new EventEmitter();
 
   constructor(protected dialog: MatDialogRef<DialogComponent>) {}
 
   public close() {
     this.dialog.close();
+  }
+
+  public onEnterKeypress(){
+    this.enterKeypress.emit();
   }
 }

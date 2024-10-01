@@ -1,4 +1,4 @@
-<app-dialog title="Tilpas kolonneopsætning" overflow="none">
+<app-dialog title="Tilpas kolonneopsætning" overflow="none" (enterKeypress)="save()">
   <app-standard-vertical-content-grid>
     <mat-dialog-content>
       <div *ngFor="let section of uniqueSections" class="section-container">
