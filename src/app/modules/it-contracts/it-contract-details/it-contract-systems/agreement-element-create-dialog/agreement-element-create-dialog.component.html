@@ -1,4 +1,4 @@
-<app-dialog title="Tilføj aftaleelement" overflow="none">
+<app-dialog title="Tilføj aftaleelement" overflow="none" (enterKeypress)="save()" [disableEnterKeypress]="agreementElementForm.valid === false || isBusy">
   <form [formGroup]="agreementElementForm" (submit)="save()">
     <app-standard-vertical-content-grid>
       <app-dropdown

@@ -1,4 +1,4 @@
-<app-dialog title="Lande der overføres til" i18n-title overflow="none">
+<app-dialog title="Lande der overføres til" i18n-title overflow="none" (enterKeypress)="onSubmit()" [disableEnterKeypress]="isBusy || !thirdCountriesFormGroup.valid">
   <form [formGroup]="thirdCountriesFormGroup" (submit)="onSubmit()">
     <app-standard-vertical-content-grid>
       <app-dropdown
