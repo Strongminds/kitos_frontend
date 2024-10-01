@@ -1,4 +1,4 @@
-<app-dialog title="Redigér data" i18n-title overflow="none">
+<app-dialog title="Redigér data" i18n-title overflow="none" (enterKeypress)="onSaveClick()" [disableEnterKeypress]="isBusy">
   <form [formGroup]="dataForm" (submit)="onSaveClick()">
     <app-standard-vertical-content-grid>
       <app-textbox

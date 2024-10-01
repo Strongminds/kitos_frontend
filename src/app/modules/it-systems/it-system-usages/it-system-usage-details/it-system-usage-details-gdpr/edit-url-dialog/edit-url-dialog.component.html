@@ -1,4 +1,4 @@
-<app-dialog title="Redigér link" i18n-title overflow="none">
+<app-dialog title="Redigér link" i18n-title overflow="none" (enterKeypress)="onSave()" [disableEnterKeypress]="isBusy">
   <form [formGroup]="simpleLinkForm" (submit)="onSave()">
     <app-standard-vertical-content-grid>
       <app-textbox

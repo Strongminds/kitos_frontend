@@ -1,4 +1,4 @@
-<app-dialog title="Relevante organisationsenheder" overflow="none">
+<app-dialog title="Relevante organisationsenheder" overflow="none" (enterKeypress)="onSave()" [disableEnterKeypress]="usingUnitForm.valid === false">
   <form [formGroup]="usingUnitForm" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
       <app-org-unit-select
