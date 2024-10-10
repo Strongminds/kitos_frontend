@@ -5039,6 +5039,34 @@
         <source>Masseopret</source>
         <target state="new">Masseopret</target>
       </trans-unit>
+      <trans-unit id="7661266723054940833" datatype="html">
+        <source>Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></source>
+        <target state="new">Information om <x id="INTERPOLATION" equiv-text="{{organizationName}}"/></target>
+      </trans-unit>
+      <trans-unit id="4335783776773944989" datatype="html">
+        <source>Kommune</source>
+        <target state="new">Kommune</target>
+      </trans-unit>
+      <trans-unit id="9090249672465718263" datatype="html">
+        <source>Interessefællesskab</source>
+        <target state="new">Interessefællesskab</target>
+      </trans-unit>
+      <trans-unit id="6156945730689256248" datatype="html">
+        <source>Virksomhed</source>
+        <target state="new">Virksomhed</target>
+      </trans-unit>
+      <trans-unit id="2261286606404354843" datatype="html">
+        <source>Anden offentlig myndighed</source>
+        <target state="new">Anden offentlig myndighed</target>
+      </trans-unit>
+      <trans-unit id="3700126250923289975" datatype="html">
+        <source>Kunne ikke opdatere organisation.</source>
+        <target state="new">Kunne ikke opdatere organisation.</target>
+      </trans-unit>
+      <trans-unit id="6280985686321240164" datatype="html">
+        <source>Organisationen blev opdateret.</source>
+        <target state="new">Organisationen blev opdateret.</target>
+      </trans-unit>
       <trans-unit id="5007829064962714817" datatype="html">
         <source>Sandt</source>
         <target state="new">Sandt</target>
@@ -5066,6 +5094,14 @@
       <trans-unit id="8007594754054323000" datatype="html">
         <source>Brugeren har ingen roller</source>
         <target state="new">Brugeren har ingen roller</target>
+      </trans-unit>
+      <trans-unit id="616679104901444882" datatype="html">
+        <source>Organisationer</source>
+        <target state="new">Organisationer</target>
+      </trans-unit>
+      <trans-unit id="2961498540444259062" datatype="html">
+        <source>Udenlandsk virksomhed</source>
+        <target state="new">Udenlandsk virksomhed</target>
       </trans-unit>
     </body>
   </file>

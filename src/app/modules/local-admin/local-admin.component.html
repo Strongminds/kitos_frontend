@@ -1,11 +1,12 @@
-<h3 i18n>Lokal admin</h3>
-<ng-container class="content">
+<h4 i18n class="title-margin">Lokal admin</h4>
+  <div class="content">
   <app-navigation-drawer>
     <app-button
       buttonStyle="tertiary"
       color="accent"
       size="large"
       routerLinkActive="active"
+      [routerLink]="[AppPath.information]"
       ><app-document-icon></app-document-icon>
       <ng-container i18n>Information</ng-container>
     </app-button>
@@ -14,6 +15,7 @@
       color="accent"
       size="large"
       routerLinkActive="active"
+      [routerLink]="[AppPath.organization]"
       ><app-organization-icon></app-organization-icon>
       <ng-container i18n>Organisation</ng-container>
     </app-button>
@@ -52,4 +54,4 @@
   </app-navigation-drawer>
 
     <router-outlet></router-outlet>
-  </ng-container>
+  </div>
