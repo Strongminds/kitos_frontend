@@ -23,6 +23,7 @@ api/v1ItContractItSystemUsageINTERNAL.service.ts
 api/v1ItContractRightINTERNAL.service.ts
 api/v1ItInterfaceINTERNAL.service.ts
 api/v1ItSystemINTERNAL.service.ts
+api/v1ItSystemLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1ItSystemUsageDataSensitivityLevelINTERNAL.service.ts
 api/v1ItSystemUsageINTERNAL.service.ts
 api/v1ItSystemUsageOptionsINTERNAL.service.ts
@@ -124,6 +125,7 @@ api/v1OrganizationPermissionsINTERNAL.service.ts
 api/v1OrganizationRightINTERNAL.service.ts
 api/v1OrganizationUnitINTERNAL.service.ts
 api/v1OrganizationUnitLifeCycleINTERNAL.service.ts
+api/v1OrganizationUnitLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1OrganizationUnitPermissionsINTERNAL.service.ts
 api/v1OrganizationUnitRegistrationINTERNAL.service.ts
 api/v1OrganizationUnitRightINTERNAL.service.ts

@@ -22,6 +22,7 @@ import { APIV1ItContractItSystemUsageINTERNALService } from './api/v1ItContractI
 import { APIV1ItContractRightINTERNALService } from './api/v1ItContractRightINTERNAL.service';
 import { APIV1ItInterfaceINTERNALService } from './api/v1ItInterfaceINTERNAL.service';
 import { APIV1ItSystemINTERNALService } from './api/v1ItSystemINTERNAL.service';
+import { APIV1ItSystemLocalRoleOptionTypesInternalV2INTERNALService } from './api/v1ItSystemLocalRoleOptionTypesInternalV2INTERNAL.service';
 import { APIV1ItSystemUsageDataSensitivityLevelINTERNALService } from './api/v1ItSystemUsageDataSensitivityLevelINTERNAL.service';
 import { APIV1ItSystemUsageINTERNALService } from './api/v1ItSystemUsageINTERNAL.service';
 import { APIV1ItSystemUsageOptionsINTERNALService } from './api/v1ItSystemUsageOptionsINTERNAL.service';
@@ -123,6 +124,7 @@ import { APIV1OrganizationPermissionsINTERNALService } from './api/v1Organizatio
 import { APIV1OrganizationRightINTERNALService } from './api/v1OrganizationRightINTERNAL.service';
 import { APIV1OrganizationUnitINTERNALService } from './api/v1OrganizationUnitINTERNAL.service';
 import { APIV1OrganizationUnitLifeCycleINTERNALService } from './api/v1OrganizationUnitLifeCycleINTERNAL.service';
+import { APIV1OrganizationUnitLocalRoleOptionTypesInternalV2INTERNALService } from './api/v1OrganizationUnitLocalRoleOptionTypesInternalV2INTERNAL.service';
 import { APIV1OrganizationUnitPermissionsINTERNALService } from './api/v1OrganizationUnitPermissionsINTERNAL.service';
 import { APIV1OrganizationUnitRegistrationINTERNALService } from './api/v1OrganizationUnitRegistrationINTERNAL.service';
 import { APIV1OrganizationUnitRightINTERNALService } from './api/v1OrganizationUnitRightINTERNAL.service';
