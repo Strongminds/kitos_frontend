@@ -4,5 +4,13 @@
   <app-organizations-grid *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Organizations">
   </app-organizations-grid>
 
-  <app-paragraph *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Roles"> PLACEHOLDER </app-paragraph>
+  <app-option-type-table
+    *ngIf="selectedSegment === LocalAdminOrganizationSegmentOption.Roles"
+    optionType="organization-unit"
+    title="Roller i din orginsation"
+    i18n-title
+    [disableAccordion]="true"
+    [expandedByDefault]="true"
+  >
+  </app-option-type-table>
 </app-card>

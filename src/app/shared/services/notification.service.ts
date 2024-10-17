@@ -7,6 +7,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { OptionTypeActions } from 'src/app/store/option-types/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
@@ -41,8 +42,15 @@ export class NotificationService implements OnDestroy {
     this.subscribeToItContractEvents();
     this.subscribeToDprEvents();
 
+    this.subscribeToLocalAdminNotifications();
+
     this.subscribeToExternalReferenceManagementEvents();
     this.subscribeToRoleNotifications();
+  }
+
+  private subscribeToLocalAdminNotifications() {
+    this.subscribeAsDefault(OptionTypeActions.updateOptionTypeSuccess, $localize`Enheden blev opdateret`);
+    this.subscribeAsError(OptionTypeActions.updateOptionTypeError, $localize`Enheden kunne ikke opdateres`);
   }
 
   private subscribeToOrganizationEvents() {
