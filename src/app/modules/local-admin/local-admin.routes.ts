@@ -4,6 +4,8 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { LocalAdminInformationComponent } from './local-admin-information/local-admin-information.component';
 import { LocalAdminComponent } from './local-admin.component';
 import { LocalAdminOrganizationComponent } from './local-admin-organization/local-admin-organization.component';
+import { LocalAdminItSystemComponent } from './local-admin-it-system/local-admin-it-system.component';
+import { LocalAdminItContractComponent } from './local-admin-it-contract/local-admin-it-contract.component';
 
 const routes: Routes = [
   {
@@ -23,6 +25,14 @@ const routes: Routes = [
         path: AppPath.organization,
         component: LocalAdminOrganizationComponent,
       },
+      {
+        path: AppPath.itSystems,
+        component: LocalAdminItSystemComponent,
+      },
+      {
+        path: AppPath.itContracts,
+        component: LocalAdminItContractComponent,
+      }
     ],
   },
 ];

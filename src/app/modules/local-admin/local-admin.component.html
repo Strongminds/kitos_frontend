@@ -24,6 +24,8 @@
       color="accent"
       size="large"
       routerLinkActive="active"
+      data-cy="local-admin-it-system-button"
+      [routerLink]="[AppPath.itSystems]"
       ><app-systems-icon></app-systems-icon>
       <ng-container i18n>IT System</ng-container>
     </app-button>
@@ -32,6 +34,7 @@
       color="accent"
       size="large"
       routerLinkActive="active"
+      [routerLink]="[AppPath.itContracts]"
       ><app-clipboard-icon></app-clipboard-icon>
       <ng-container i18n>IT kontrakt</ng-container>
     </app-button>
