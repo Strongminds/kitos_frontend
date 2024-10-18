@@ -12,7 +12,7 @@ enum LocalAdminItContractsSegmentOption {
   styleUrl: './local-admin-it-contract.component.scss',
 })
 export class LocalAdminItContractComponent {
-  public readonly LocalAdminItSystemSegmentOption = LocalAdminItContractsSegmentOption;
+  public readonly LocalAdminItContractsSegmentOption = LocalAdminItContractsSegmentOption;
 
   public selectedSegment: LocalAdminItContractsSegmentOption = LocalAdminItContractsSegmentOption.RegularOptionTypes;
 
