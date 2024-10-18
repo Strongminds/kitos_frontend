@@ -1,5 +1,4 @@
 import { Inject, Injectable, OnDestroy } from '@angular/core';
-import { Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import {
   APILocalRegularOptionResponseDTO,
@@ -27,7 +26,6 @@ export class LocalOptionTypeService implements OnDestroy {
   public subscriptions = new Subscription();
 
   constructor(
-    private store: Store,
     @Inject(APIV2ItSystemLocalBusinessTypesInternalINTERNALService)
     private businessTypeService: APIV2ItSystemLocalBusinessTypesInternalINTERNALService,
     @Inject(APIV2ItSystemLocalArchiveTypesInternalINTERNALService)
@@ -81,7 +79,7 @@ export class LocalOptionTypeService implements OnDestroy {
       return this.resolveDeleteLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
     }
   }
-  
+
   private resolveGetLocalOptionsEndpoint(
     optionType: LocalOptionType
   ): (organizationUuid: string) => Observable<Array<APILocalRoleOptionResponseDTO>> {
