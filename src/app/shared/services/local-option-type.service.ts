@@ -349,6 +349,95 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
+      //It contract regular option types
+      case 'it-contract_contract-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.contractTypeService.patchSingleItContractLocalContractTypesInternalV2PatchLocalContractType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it-contract_contract-template-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.templateTypeService.patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it-contract_purchase-form-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.purchaseFormTypeService.patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it-contract-payment-model-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.paymentModelTypeService.patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it-contract-agreement-element-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.agreementElementTypeService.patchSingleItContractLocalAgreementElementTypesInternalV2PatchLocalAgreementElementType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'it-contract-extend-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.optionExtendTypeService.patchSingleItContractLocalOptionExtendTypesInternalV2PatchLocalOptionExtendType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'it-contract-payment-frequency-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.paymentFrequencyTypeService.patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'it-contract-price-regulation-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.priceRegulationTypeService.patchSingleItContractLocalPriceRegulationTypesInternalV2PatchLocalPriceRegulationType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'it-contract_procurement-strategy-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.procurementStrategyTypeService.patchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'it-contract-termination-period-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.terminationDeadlineTypeService.patchSingleItContractLocalTerminationDeadlineTypesInternalV2PatchLocalTerminationDeadlineType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'it-contract_criticality-type':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.criticalityTypeService.patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+  
       //Role option types
       case 'organization-unit':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -366,6 +455,13 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
+        case 'it-contract':
+          return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+            this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
