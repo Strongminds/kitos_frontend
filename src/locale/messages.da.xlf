@@ -5215,6 +5215,14 @@
         <source>It system roller</source>
         <target state="new">It system roller</target>
       </trans-unit>
+      <trans-unit id="3002243841820420770" datatype="html">
+        <source>It kontrakt udfaldsrum</source>
+        <target state="new">It kontrakt udfaldsrum</target>
+      </trans-unit>
+      <trans-unit id="1866414868800228214" datatype="html">
+        <source>It kontrakt roller</source>
+        <target state="new">It kontrakt roller</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
