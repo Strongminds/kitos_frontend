@@ -4,7 +4,18 @@ import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
   APILocalRoleOptionResponseDTO,
+  APIV2ItContractLocalAgreementElementTypesInternalINTERNALService,
+  APIV2ItContractLocalContractTypesInternalINTERNALService,
+  APIV2ItContractLocalCriticalityTypesInternalINTERNALService,
+  APIV2ItContractLocalOptionExtendTypesInternalINTERNALService,
+  APIV2ItContractLocalPaymentFrequencyTypesInternalINTERNALService,
+  APIV2ItContractLocalPaymentModelTypesInternalINTERNALService,
+  APIV2ItContractLocalPriceRegulationTypesInternalINTERNALService,
+  APIV2ItContractLocalProcurementStrategyTypesInternalINTERNALService,
+  APIV2ItContractLocalPurchaseFormTypesInternalINTERNALService,
   APIV2ItContractLocalRoleOptionTypesInternalINTERNALService,
+  APIV2ItContractLocalTemplateTypesInternalINTERNALService,
+  APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTypesInternalINTERNALService,
@@ -27,6 +38,7 @@ export class LocalOptionTypeService implements OnDestroy {
   public subscriptions = new Subscription();
 
   constructor(
+    //It system regular option type services
     @Inject(APIV2ItSystemLocalBusinessTypesInternalINTERNALService)
     private businessTypeService: APIV2ItSystemLocalBusinessTypesInternalINTERNALService,
     @Inject(APIV2ItSystemLocalArchiveTypesInternalINTERNALService)
@@ -48,6 +60,31 @@ export class LocalOptionTypeService implements OnDestroy {
     @Inject(APIV2ItSystemLocalRegisterTypesInternalINTERNALService)
     private registerTypeService: APIV2ItSystemLocalRegisterTypesInternalINTERNALService,
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
+    //It contract regular option services
+    @Inject(APIV2ItContractLocalContractTypesInternalINTERNALService)
+    private contractTypeService: APIV2ItContractLocalContractTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalTemplateTypesInternalINTERNALService)
+    private templateTypeService: APIV2ItContractLocalTemplateTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalPurchaseFormTypesInternalINTERNALService)
+    private purchaseFormTypeService: APIV2ItContractLocalPurchaseFormTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalPaymentModelTypesInternalINTERNALService)
+    private paymentModelTypeService: APIV2ItContractLocalPaymentModelTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalAgreementElementTypesInternalINTERNALService)
+    private agreementElementTypeService: APIV2ItContractLocalAgreementElementTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalOptionExtendTypesInternalINTERNALService)
+    private optionExtendTypeService: APIV2ItContractLocalOptionExtendTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalPaymentFrequencyTypesInternalINTERNALService)
+    private paymentFrequencyTypeService: APIV2ItContractLocalPaymentFrequencyTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalPriceRegulationTypesInternalINTERNALService)
+    private priceRegulationTypeService: APIV2ItContractLocalPriceRegulationTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalProcurementStrategyTypesInternalINTERNALService)
+    private procurementStrategyTypeService: APIV2ItContractLocalProcurementStrategyTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService)
+    private terminationDeadlineTypeService: APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalCriticalityTypesInternalINTERNALService)
+    private criticalityTypeService: APIV2ItContractLocalCriticalityTypesInternalINTERNALService,
+
+    //Role option type services
     private organiztionUnitRoleService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService)
     private itSystemRoleService: APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService,
@@ -145,8 +182,71 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
           });
       //It contract regular option types
-
-
+      case 'it-contract_contract-type':
+        return (organizationUuid) =>
+          this.contractTypeService.getManyItContractLocalContractTypesInternalV2GetLocalContractTypes({
+            organizationUuid,
+          });
+      case 'it-contract_contract-template-type':
+        return (organizationUuid) =>
+          this.templateTypeService.getManyItContractLocalTemplateTypesInternalV2GetLocalTemplateTypes({
+            organizationUuid,
+          });
+      case 'it-contract_purchase-form-type':
+        return (organizationUuid) =>
+          this.purchaseFormTypeService.getManyItContractLocalPurchaseFormTypesInternalV2GetLocalPurchaseFormTypes({
+            organizationUuid,
+          });
+      case 'it-contract-payment-model-types':
+        return (organizationUuid) =>
+          this.paymentModelTypeService.getManyItContractLocalPaymentModelTypesInternalV2GetLocalPaymentModelTypes({
+            organizationUuid,
+          });
+      case 'it-contract-agreement-element-types':
+        return (organizationUuid) =>
+          this.agreementElementTypeService.getManyItContractLocalAgreementElementTypesInternalV2GetLocalAgreementElementTypes(
+            {
+              organizationUuid,
+            }
+          );
+      case 'it-contract-extend-types':
+        return (organizationUuid) =>
+          this.optionExtendTypeService.getManyItContractLocalOptionExtendTypesInternalV2GetLocalOptionExtendTypes({
+            organizationUuid,
+          });
+      case 'it-contract-payment-frequency-types':
+        return (organizationUuid) =>
+          this.paymentFrequencyTypeService.getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypes(
+            {
+              organizationUuid,
+            }
+          );
+      case 'it-contract-price-regulation-types':
+        return (organizationUuid) =>
+          this.priceRegulationTypeService.getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypes(
+            {
+              organizationUuid,
+            }
+          );
+      case 'it-contract_procurement-strategy-type':
+        return (organizationUuid) =>
+          this.procurementStrategyTypeService.getManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(
+            {
+              organizationUuid,
+            }
+          );
+      case 'it-contract-termination-period-types':
+        return (organizationUuid) =>
+          this.terminationDeadlineTypeService.getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypes(
+            {
+              organizationUuid,
+            }
+          );
+      case 'it-contract_criticality-type':
+        return (organizationUuid) =>
+          this.criticalityTypeService.getManyItContractLocalCriticalityTypesInternalV2GetLocalCriticalityTypes({
+            organizationUuid,
+          });
       //Role option types
       case 'organization-unit':
         return (organizationUuid) =>
