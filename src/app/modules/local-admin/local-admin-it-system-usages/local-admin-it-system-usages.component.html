@@ -1,0 +1,22 @@
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
+
+<app-card>
+  <ng-container *ngIf="selectedSegment === LocalAdminSystemUsagesSegmentOptions.UiCustomization">
+
+    <app-standard-vertical-content-grid>
+      <ng-container *ngIf="uiConfigNodeViewModels$ | async as uiConfigNodeViewModels">
+      <app-ui-config-tab-section *ngFor="let tabViewModel of uiConfigNodeViewModels[0].children"
+        [tabViewModel]="tabViewModel"
+        [formGroup]="itSystemUsageFrontpageForm"
+        (checkboxChanged)="onCheckboxChange($event)">
+      </app-ui-config-tab-section>
+    </ng-container>
+    </app-standard-vertical-content-grid>
+
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === LocalAdminSystemUsagesSegmentOptions.OptionTypes">
+  </ng-container>
+</app-card>
+
+
