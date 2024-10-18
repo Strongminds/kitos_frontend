@@ -2,13 +2,14 @@
 
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminItContractsSegmentOption.RegularOptionTypes">
-
+    <app-option-type-table optionType="it-contract" [showWriteAccess]="false"></app-option-type-table>
   </ng-container>
 
   <app-option-type-table *ngIf="selectedSegment === LocalAdminItContractsSegmentOption.RoleOptionTypes"
     optionType="it-contract"
     [expandedByDefault]="true"
     [disableAccordion]="true"
+    [showWriteAccess]="true"
   >
   </app-option-type-table>
 </app-card>
