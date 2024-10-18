@@ -714,6 +714,83 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             optionUuid,
           });
+      //It contract regular option types
+      case 'it-contract_contract-type':
+        return (organizationUuid, optionUuid) =>
+          this.contractTypeService.deleteSingleItContractLocalContractTypesInternalV2DeleteLocalContractType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-contract_contract-template-type':
+        return (organizationUuid, optionUuid) =>
+          this.templateTypeService.deleteSingleItContractLocalTemplateTypesInternalV2DeleteLocalTemplateType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-contract_purchase-form-type':
+        return (organizationUuid, optionUuid) =>
+          this.purchaseFormTypeService.deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-contract-payment-model-types':
+        return (organizationUuid, optionUuid) =>
+          this.paymentModelTypeService.deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-contract-agreement-element-types':
+        return (organizationUuid, optionUuid) =>
+          this.agreementElementTypeService.deleteSingleItContractLocalAgreementElementTypesInternalV2DeleteLocalAgreementElementType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'it-contract-extend-types':
+        return (organizationUuid, optionUuid) =>
+          this.optionExtendTypeService.deleteSingleItContractLocalOptionExtendTypesInternalV2DeleteLocalOptionExtendType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-contract-payment-frequency-types':
+        return (organizationUuid, optionUuid) =>
+          this.paymentFrequencyTypeService.deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'it-contract-price-regulation-types':
+        return (organizationUuid, optionUuid) =>
+          this.priceRegulationTypeService.deleteSingleItContractLocalPriceRegulationTypesInternalV2DeleteLocalPriceRegulationType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'it-contract_procurement-strategy-type':
+        return (organizationUuid, optionUuid) =>
+          this.procurementStrategyTypeService.deleteSingleItContractLocalProcurementStrategyTypesInternalV2DeleteLocalProcurementStrategyType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'it-contract-termination-period-types':
+        return (organizationUuid, optionUuid) =>
+          this.terminationDeadlineTypeService.deleteSingleItContractLocalTerminationDeadlineTypesInternalV2DeleteLocalTerminationDeadlineType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'it-contract_criticality-type':
+        return (organizationUuid, optionUuid) =>
+          this.criticalityTypeService.deleteSingleItContractLocalCriticalityTypesInternalV2DeleteLocalCriticalityType({
+            organizationUuid,
+            optionUuid,
+          });
 
       //Role option types
       case 'organization-unit':
@@ -727,6 +804,12 @@ export class LocalOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         return (organizationUuid, optionUuid) =>
           this.itSystemRoleService.deleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRole({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'it-contract':
+        return (organizationUuid, optionUuid) =>
+          this.itContractRoleService.deleteSingleItContractLocalRoleOptionTypesInternalV2DeleteLocalItContractRole({
             organizationUuid,
             optionUuid,
           });
