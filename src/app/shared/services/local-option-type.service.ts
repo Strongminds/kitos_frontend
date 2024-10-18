@@ -729,16 +729,20 @@ export class LocalOptionTypeService implements OnDestroy {
           });
       case 'it-contract_purchase-form-type':
         return (organizationUuid, optionUuid) =>
-          this.purchaseFormTypeService.deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormType({
-            organizationUuid,
-            optionUuid,
-          });
+          this.purchaseFormTypeService.deleteSingleItContractLocalPurchaseFormTypesInternalV2DeleteLocalPurchaseFormType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
       case 'it-contract-payment-model-types':
         return (organizationUuid, optionUuid) =>
-          this.paymentModelTypeService.deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelType({
-            organizationUuid,
-            optionUuid,
-          });
+          this.paymentModelTypeService.deleteSingleItContractLocalPaymentModelTypesInternalV2DeleteLocalPaymentModelType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
       case 'it-contract-agreement-element-types':
         return (organizationUuid, optionUuid) =>
           this.agreementElementTypeService.deleteSingleItContractLocalAgreementElementTypesInternalV2DeleteLocalAgreementElementType(
@@ -749,10 +753,12 @@ export class LocalOptionTypeService implements OnDestroy {
           );
       case 'it-contract-extend-types':
         return (organizationUuid, optionUuid) =>
-          this.optionExtendTypeService.deleteSingleItContractLocalOptionExtendTypesInternalV2DeleteLocalOptionExtendType({
-            organizationUuid,
-            optionUuid,
-          });
+          this.optionExtendTypeService.deleteSingleItContractLocalOptionExtendTypesInternalV2DeleteLocalOptionExtendType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
       case 'it-contract-payment-frequency-types':
         return (organizationUuid, optionUuid) =>
           this.paymentFrequencyTypeService.deleteSingleItContractLocalPaymentFrequencyTypesInternalV2DeleteLocalPaymentFrequencyType(
