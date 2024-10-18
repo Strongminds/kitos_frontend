@@ -4,6 +4,7 @@ import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
   APILocalRoleOptionResponseDTO,
+  APIV2ItContractLocalRoleOptionTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTypesInternalINTERNALService,
@@ -49,7 +50,9 @@ export class LocalOptionTypeService implements OnDestroy {
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
     private organiztionUnitRoleService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService)
-    private itSystemRoleService: APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService
+    private itSystemRoleService: APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService,
+    @Inject(APIV2ItContractLocalRoleOptionTypesInternalINTERNALService)
+    private itContractRoleService: APIV2ItContractLocalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public ngOnDestroy(): void {
@@ -141,6 +144,8 @@ export class LocalOptionTypeService implements OnDestroy {
           this.registerTypeService.getManyItSystemLocalRegisterTypesInternalV2GetLocalRegisterTypes({
             organizationUuid,
           });
+      //It contract regular option types
+
 
       //Role option types
       case 'organization-unit':
@@ -153,6 +158,11 @@ export class LocalOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         return (organizationUuid) =>
           this.itSystemRoleService.getManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoles({
+            organizationUuid,
+          });
+      case 'it-contract':
+        return (organizationUuid) =>
+          this.itContractRoleService.getManyItContractLocalRoleOptionTypesInternalV2GetLocalItContractRoles({
             organizationUuid,
           });
       default:
