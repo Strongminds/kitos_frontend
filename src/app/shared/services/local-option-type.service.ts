@@ -152,7 +152,7 @@ export class LocalOptionTypeService implements OnDestroy {
           );
       case 'it-system-usage':
         return (organizationUuid) =>
-          this.itSystemRoleService.getManyItSystemLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles({
+          this.itSystemRoleService.getManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoles({
             organizationUuid,
           });
       default:
