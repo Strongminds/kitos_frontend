@@ -5,7 +5,7 @@
 
   </ng-container>
 
-  <app-option-type-table *ngIf="LocalAdminItContractsSegmentOption.RoleOptionTypes"
+  <app-option-type-table *ngIf="selectedSegment === LocalAdminItContractsSegmentOption.RoleOptionTypes"
     optionType="it-contract"
     [expandedByDefault]="true"
     [disableAccordion]="true"
