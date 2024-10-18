@@ -437,7 +437,7 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
-  
+
       //Role option types
       case 'organization-unit':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -455,13 +455,13 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
-        case 'it-contract':
-          return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
-            this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
-              organizationUuid,
-              optionUuid,
-              dto: request,
-            });
+      case 'it-contract':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -538,6 +538,85 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             dto: { optionUuid },
           });
+      //It contract regular option types
+      case 'it-contract_contract-type':
+        return (organizationUuid, optionUuid) =>
+          this.contractTypeService.postSingleItContractLocalContractTypesInternalV2CreateLocalContractType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it-contract_contract-template-type':
+        return (organizationUuid, optionUuid) =>
+          this.templateTypeService.postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it-contract_purchase-form-type':
+        return (organizationUuid, optionUuid) =>
+          this.purchaseFormTypeService.postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'it-contract-payment-model-types':
+        return (organizationUuid, optionUuid) =>
+          this.paymentModelTypeService.postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it-contract-agreement-element-types':
+        return (organizationUuid, optionUuid) =>
+          this.agreementElementTypeService.postSingleItContractLocalAgreementElementTypesInternalV2CreateLocalAgreementElementType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'it-contract-extend-types':
+        return (organizationUuid, optionUuid) =>
+          this.optionExtendTypeService.postSingleItContractLocalOptionExtendTypesInternalV2CreateLocalOptionExtendType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it-contract-payment-frequency-types':
+        return (organizationUuid, optionUuid) =>
+          this.paymentFrequencyTypeService.postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'it-contract-price-regulation-types':
+        return (organizationUuid, optionUuid) =>
+          this.priceRegulationTypeService.postSingleItContractLocalPriceRegulationTypesInternalV2CreateLocalPriceRegulationType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'it-contract_procurement-strategy-type':
+        return (organizationUuid, optionUuid) =>
+          this.procurementStrategyTypeService.postSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'it-contract-termination-period-types':
+        return (organizationUuid, optionUuid) =>
+          this.terminationDeadlineTypeService.postSingleItContractLocalTerminationDeadlineTypesInternalV2CreateLocalTerminationDeadlineType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'it-contract_criticality-type':
+        return (organizationUuid, optionUuid) =>
+          this.criticalityTypeService.postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
       //Role option types
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
@@ -550,6 +629,12 @@ export class LocalOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         return (organizationUuid, optionUuid) =>
           this.itSystemRoleService.postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'it-contract':
+        return (organizationUuid, optionUuid) =>
+          this.itContractRoleService.postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole({
             organizationUuid,
             dto: { optionUuid },
           });
