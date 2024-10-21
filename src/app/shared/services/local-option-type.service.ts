@@ -5,6 +5,11 @@ import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
   APILocalRoleOptionResponseDTO,
+  APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
+  APIV2DprLocalCountryOptionTypesInternalINTERNALService,
+  APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
+  APIV2DprLocalOversightOptionTypesInternalINTERNALService,
+  APIV2DprLocalRoleOptionTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService,
   APIV2ItSystemLocalArchiveTypesInternalINTERNALService,
@@ -51,7 +56,17 @@ export class LocalOptionTypeService implements OnDestroy {
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
     private organiztionUnitRoleService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService)
-    private itSystemRoleService: APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService
+    private itSystemRoleService: APIV2ItSystemLocalRoleOptionTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalRoleOptionTypesInternalINTERNALService)
+    private dprRoleService: APIV2DprLocalRoleOptionTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalBasisForTransferTypesInternalINTERNALService)
+    private basisForTransferService: APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalOversightOptionTypesInternalINTERNALService)
+    private oversightOptionService: APIV2DprLocalOversightOptionTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalDataResponsibleTypesInternalINTERNALService)
+    private dataResponsibleService: APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalCountryOptionTypesInternalINTERNALService)
+    private countryService: APIV2DprLocalCountryOptionTypesInternalINTERNALService
   ) {}
 
   public ngOnDestroy(): void {
@@ -143,7 +158,27 @@ export class LocalOptionTypeService implements OnDestroy {
           this.registerTypeService.getManyItSystemLocalRegisterTypesInternalV2GetLocalRegisterTypes({
             organizationUuid,
           });
-
+      //Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (organizationUuid) =>
+          this.basisForTransferService.getManyDprLocalBasisForTransferTypesInternalV2GetLocalBasisForTransferTypes({
+            organizationUuid,
+          });
+      case 'data-processing-oversight-option-types':
+        return (organizationUuid) =>
+          this.oversightOptionService.getManyDprLocalOversightOptionTypesInternalV2GetLocalOversightOptionTypes({
+            organizationUuid,
+          });
+      case 'data-processing-data-responsible-types':
+        return (organizationUuid) =>
+          this.dataResponsibleService.getManyDprLocalDataResponsibleTypesInternalV2GetLocalDataResponsibleTypes({
+            organizationUuid,
+          });
+      case 'data-processing-country-types':
+        return (organizationUuid) =>
+          this.countryService.getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypes({
+            organizationUuid,
+          });
       //Role option types
       case 'organization-unit':
         return (organizationUuid) =>
@@ -155,6 +190,11 @@ export class LocalOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         return (organizationUuid) =>
           this.itSystemRoleService.getManyItSystemLocalRoleOptionTypesInternalV2GetLocalItSystemRoles({
+            organizationUuid,
+          });
+      case 'data-processing':
+        return (organizationUuid) =>
+          this.dprRoleService.getManyDprLocalRoleOptionTypesInternalV2GetLocalDprRoles({
             organizationUuid,
           });
       default:
