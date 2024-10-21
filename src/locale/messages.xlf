@@ -3967,9 +3967,6 @@
       <trans-unit id="1665695847626369659" datatype="html">
         <source>Forretningstyper</source>
       </trans-unit>
-      <trans-unit id="2389901481128357361" datatype="html">
-        <source>It system udfaldsrum</source>
-      </trans-unit>
       <trans-unit id="2554180997191376694" datatype="html">
         <source>Arkiveringstyper</source>
       </trans-unit>
@@ -3982,32 +3979,17 @@
       <trans-unit id="4314900003118162253" datatype="html">
         <source>Kategorier af registrerede i databehandlingen</source>
       </trans-unit>
-      <trans-unit id="7533326215200012439" datatype="html">
-        <source>It system roller</source>
-      </trans-unit>
       <trans-unit id="7973375106384608446" datatype="html">
         <source>Datatyper</source>
       </trans-unit>
       <trans-unit id="8977823802262029818" datatype="html">
         <source>Følsomme persondata</source>
       </trans-unit>
-      <trans-unit id="1744762132805385911" datatype="html">
-        <source>Databehandlings udfaldsrum</source>
-      </trans-unit>
       <trans-unit id="2516892896296403323" datatype="html">
         <source>Lande</source>
       </trans-unit>
-      <trans-unit id="5670250802412057944" datatype="html">
-        <source>Databehandlings roller</source>
-      </trans-unit>
       <trans-unit id="8040369184915149511" datatype="html">
         <source>Dataansvarlige</source>
-      </trans-unit>
-      <trans-unit id="1866414868800228214" datatype="html">
-        <source>It kontrakt roller</source>
-      </trans-unit>
-      <trans-unit id="3002243841820420770" datatype="html">
-        <source>It kontrakt udfaldsrum</source>
       </trans-unit>
       <trans-unit id="1476830282360846322" datatype="html">
         <source>Opsigelsesfrister</source>
@@ -4039,17 +4021,11 @@
       <trans-unit id="1338623449492001002" datatype="html">
         <source> Ikke relevant </source>
       </trans-unit>
-      <trans-unit id="1476830282360846322" datatype="html">
-        <source>Opsigelsesfrister</source>
-      </trans-unit>
       <trans-unit id="1778917295361559747" datatype="html">
         <source>Redigér forbindelsen til FK Organisation</source>
       </trans-unit>
       <trans-unit id="1830028398153172429" datatype="html">
         <source>Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.</source>
-      </trans-unit>
-      <trans-unit id="1866414868800228214" datatype="html">
-        <source>It kontrakt roller</source>
       </trans-unit>
       <trans-unit id="2012701206354685680" datatype="html">
         <source>Din organisation mangler en gyldig serviceaftale der giver KITOS adgang til data fra din kommune i FK Organisation. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.</source>
@@ -4063,17 +4039,8 @@
       <trans-unit id="266398842197719025" datatype="html">
         <source>Opret forbindelse til FK Organisation</source>
       </trans-unit>
-      <trans-unit id="2856429460614878961" datatype="html">
-        <source>Pris reguleringer</source>
-      </trans-unit>
-      <trans-unit id="3002243841820420770" datatype="html">
-        <source>It kontrakt udfaldsrum</source>
-      </trans-unit>
       <trans-unit id="3038305000121963915" datatype="html">
         <source> Alle </source>
-      </trans-unit>
-      <trans-unit id="3528465926860037088" datatype="html">
-        <source>Betalingsfrekvenser</source>
       </trans-unit>
       <trans-unit id="3613884517590485356" datatype="html">
         <source>Adgang</source>
@@ -4083,9 +4050,6 @@
       </trans-unit>
       <trans-unit id="4785447215656230108" datatype="html">
         <source> Ikke tilgængeligt </source>
-      </trans-unit>
-      <trans-unit id="4831733483690855814" datatype="html">
-        <source>Kontrakttyper</source>
       </trans-unit>
       <trans-unit id="4970524737932979706" datatype="html">
         <source>Tjek automatisk efter ventende opdateringer*</source>
@@ -4117,23 +4081,11 @@
       <trans-unit id="7185813373512757352" datatype="html">
         <source>KITOS har adgang til organisationens data via FK Organisation</source>
       </trans-unit>
-      <trans-unit id="7280622341182001048" datatype="html">
-        <source>Genanskaffelsesstrategier</source>
-      </trans-unit>
       <trans-unit id="7314347350185597624" datatype="html">
         <source>Niveauer</source>
       </trans-unit>
-      <trans-unit id="7318872809958060040" datatype="html">
-        <source>Betalingsmodeller</source>
-      </trans-unit>
       <trans-unit id="7564129223460699441" datatype="html">
         <source>* Foretager automatisk tjek hver mandag nat og sender en email med oversigt over ventende opdateringer til brugere i kommunen med rollen &quot;Lokal Administrator&quot;</source>
-      </trans-unit>
-      <trans-unit id="781230654751231655" datatype="html">
-        <source>Kontraktskabeloner</source>
-      </trans-unit>
-      <trans-unit id="7925424443502844356" datatype="html">
-        <source>Indkøbsformer</source>
       </trans-unit>
       <trans-unit id="8520370683434491577" datatype="html">
         <source>KITOS har <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>ikke<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> adgang til organisationens data via FK Organisation</source>
@@ -4143,6 +4095,9 @@
       </trans-unit>
       <trans-unit id="961883493480058344" datatype="html">
         <source>Forbind</source>
+      </trans-unit>
+      <trans-unit id="5851418291332190792" datatype="html">
+        <source>Udfaldsrum</source>
       </trans-unit>
     </body>
   </file>

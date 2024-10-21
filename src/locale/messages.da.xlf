@@ -5207,14 +5207,6 @@
         <source>Kategorier af registrerede i databehandlingen</source>
         <target state="new">Kategorier af registrerede i databehandlingen</target>
       </trans-unit>
-      <trans-unit id="2389901481128357361" datatype="html">
-        <source>It system udfaldsrum</source>
-        <target state="new">It system udfaldsrum</target>
-      </trans-unit>
-      <trans-unit id="7533326215200012439" datatype="html">
-        <source>It system roller</source>
-        <target state="new">It system roller</target>
-      </trans-unit>
       <trans-unit id="8040369184915149511" datatype="html">
         <source>Dataansvarlige</source>
         <target state="new">Dataansvarlige</target>
@@ -5222,22 +5214,6 @@
       <trans-unit id="2516892896296403323" datatype="html">
         <source>Lande</source>
         <target state="new">Lande</target>
-      </trans-unit>
-      <trans-unit id="1744762132805385911" datatype="html">
-        <source>Databehandlings udfaldsrum</source>
-        <target state="new">Databehandlings udfaldsrum</target>
-      </trans-unit>
-      <trans-unit id="5670250802412057944" datatype="html">
-        <source>Databehandlings roller</source>
-        <target state="new">Databehandlings roller</target>
-      </trans-unit>
-      <trans-unit id="3002243841820420770" datatype="html">
-        <source>It kontrakt udfaldsrum</source>
-        <target state="new">It kontrakt udfaldsrum</target>
-      </trans-unit>
-      <trans-unit id="1866414868800228214" datatype="html">
-        <source>It kontrakt roller</source>
-        <target state="new">It kontrakt roller</target>
       </trans-unit>
       <trans-unit id="4831733483690855814" datatype="html">
         <source>Kontrakttyper</source>
@@ -5387,14 +5363,6 @@
         <source>Opsigelsesfrister</source>
         <target state="new">Opsigelsesfrister</target>
       </trans-unit>
-      <trans-unit id="3002243841820420770" datatype="html">
-        <source>It kontrakt udfaldsrum</source>
-        <target state="new">It kontrakt udfaldsrum</target>
-      </trans-unit>
-      <trans-unit id="1866414868800228214" datatype="html">
-        <source>It kontrakt roller</source>
-        <target state="new">It kontrakt roller</target>
-      </trans-unit>
       <trans-unit id="41369724053306167" datatype="html">
         <source>Forbindelse til FK Organisation blev oprettet</source>
         <target state="new">Forbindelse til FK Organisation blev oprettet</target>
@@ -5418,6 +5386,10 @@
       <trans-unit id="6017792095370304684" datatype="html">
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
         <target state="new">Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</target>
+      </trans-unit>
+      <trans-unit id="5851418291332190792" datatype="html">
+        <source>Udfaldsrum</source>
+        <target state="new">Udfaldsrum</target>
       </trans-unit>
     </body>
   </file>
