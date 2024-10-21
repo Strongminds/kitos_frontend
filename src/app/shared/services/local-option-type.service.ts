@@ -65,6 +65,7 @@ export class LocalOptionTypeService implements OnDestroy {
     @Inject(APIV2ItSystemLocalRegisterTypesInternalINTERNALService)
     private registerTypeService: APIV2ItSystemLocalRegisterTypesInternalINTERNALService,
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
+    
     //It contract regular option services
     @Inject(APIV2ItContractLocalContractTypesInternalINTERNALService)
     private contractTypeService: APIV2ItContractLocalContractTypesInternalINTERNALService,
@@ -98,7 +99,7 @@ export class LocalOptionTypeService implements OnDestroy {
     private dataResponsibleService: APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
     @Inject(APIV2DprLocalCountryOptionTypesInternalINTERNALService)
     private countryService: APIV2DprLocalCountryOptionTypesInternalINTERNALService,
-     
+
     //Role option type services
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
     private organiztionUnitRoleService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
@@ -427,7 +428,7 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
-        
+
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -534,7 +535,7 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
-        
+
       case 'data-processing':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.dprRoleService.patchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRole({
