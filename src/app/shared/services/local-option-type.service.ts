@@ -88,6 +88,7 @@ export class LocalOptionTypeService implements OnDestroy {
     private terminationDeadlineTypeService: APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService,
     @Inject(APIV2ItContractLocalCriticalityTypesInternalINTERNALService)
     private criticalityTypeService: APIV2ItContractLocalCriticalityTypesInternalINTERNALService,
+
     //Data processing regular option type services
     @Inject(APIV2DprLocalBasisForTransferTypesInternalINTERNALService)
     private basisForTransferService: APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
@@ -97,6 +98,7 @@ export class LocalOptionTypeService implements OnDestroy {
     private dataResponsibleService: APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
     @Inject(APIV2DprLocalCountryOptionTypesInternalINTERNALService)
     private countryService: APIV2DprLocalCountryOptionTypesInternalINTERNALService,
+     
     //Role option type services
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
     private organiztionUnitRoleService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
@@ -197,6 +199,7 @@ export class LocalOptionTypeService implements OnDestroy {
           this.registerTypeService.getManyItSystemLocalRegisterTypesInternalV2GetLocalRegisterTypes({
             organizationUuid,
           });
+
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
         return (organizationUuid) =>
@@ -218,6 +221,7 @@ export class LocalOptionTypeService implements OnDestroy {
           this.countryService.getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypes({
             organizationUuid,
           });
+
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid) =>
@@ -391,6 +395,7 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
+
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -422,6 +427,7 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
+        
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -528,6 +534,7 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
+        
       case 'data-processing':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.dprRoleService.patchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRole({
@@ -535,6 +542,7 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
+
       case 'it-contract':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
@@ -618,6 +626,7 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             dto: { optionUuid },
           });
+
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
         return (organizationUuid, optionUuid) =>
@@ -645,6 +654,7 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             dto: { optionUuid },
           });
+
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid, optionUuid) =>
@@ -739,12 +749,14 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             dto: { optionUuid },
           });
+
       case 'data-processing':
         return (organizationUuid, optionUuid) =>
           this.dprRoleService.postSingleDprLocalRoleOptionTypesInternalV2CreateLocalDprRole({
             organizationUuid,
             dto: { optionUuid },
           });
+
       case 'it-contract':
         return (organizationUuid, optionUuid) =>
           this.itContractRoleService.postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole({
@@ -827,6 +839,7 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             optionUuid,
           });
+
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
         return (organizationUuid, optionUuid) =>
@@ -854,6 +867,7 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             optionUuid,
           });
+
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid, optionUuid) =>
@@ -953,12 +967,14 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             optionUuid,
           });
+
       case 'data-processing':
         return (organizationUuid, optionUuid) =>
           this.dprRoleService.deleteSingleDprLocalRoleOptionTypesInternalV2DeleteLocalDprRole({
             organizationUuid,
             optionUuid,
           });
+
       case 'it-contract':
         return (organizationUuid, optionUuid) =>
           this.itContractRoleService.deleteSingleItContractLocalRoleOptionTypesInternalV2DeleteLocalItContractRole({
