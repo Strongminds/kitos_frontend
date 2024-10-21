@@ -88,7 +88,15 @@ export class LocalOptionTypeService implements OnDestroy {
     private terminationDeadlineTypeService: APIV2ItContractLocalTerminationDeadlineTypesInternalINTERNALService,
     @Inject(APIV2ItContractLocalCriticalityTypesInternalINTERNALService)
     private criticalityTypeService: APIV2ItContractLocalCriticalityTypesInternalINTERNALService,
-
+    //Data processing regular option type services
+    @Inject(APIV2DprLocalBasisForTransferTypesInternalINTERNALService)
+    private basisForTransferService: APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalOversightOptionTypesInternalINTERNALService)
+    private oversightOptionService: APIV2DprLocalOversightOptionTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalDataResponsibleTypesInternalINTERNALService)
+    private dataResponsibleService: APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
+    @Inject(APIV2DprLocalCountryOptionTypesInternalINTERNALService)
+    private countryService: APIV2DprLocalCountryOptionTypesInternalINTERNALService,
     //Role option type services
     @Inject(APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService)
     private organiztionUnitRoleService: APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService,
@@ -97,15 +105,7 @@ export class LocalOptionTypeService implements OnDestroy {
     @Inject(APIV2ItContractLocalRoleOptionTypesInternalINTERNALService)
     private itContractRoleService: APIV2ItContractLocalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2DprLocalRoleOptionTypesInternalINTERNALService)
-    private dprRoleService: APIV2DprLocalRoleOptionTypesInternalINTERNALService,
-    @Inject(APIV2DprLocalBasisForTransferTypesInternalINTERNALService)
-    private basisForTransferService: APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
-    @Inject(APIV2DprLocalOversightOptionTypesInternalINTERNALService)
-    private oversightOptionService: APIV2DprLocalOversightOptionTypesInternalINTERNALService,
-    @Inject(APIV2DprLocalDataResponsibleTypesInternalINTERNALService)
-    private dataResponsibleService: APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
-    @Inject(APIV2DprLocalCountryOptionTypesInternalINTERNALService)
-    private countryService: APIV2DprLocalCountryOptionTypesInternalINTERNALService
+    private dprRoleService: APIV2DprLocalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public ngOnDestroy(): void {
@@ -217,7 +217,8 @@ export class LocalOptionTypeService implements OnDestroy {
         return (organizationUuid) =>
           this.countryService.getManyDprLocalCountryOptionTypesInternalV2GetLocalCountryOptionTypes({
             organizationUuid,
-          }); //It contract regular option types
+          });
+      //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid) =>
           this.contractTypeService.getManyItContractLocalContractTypesInternalV2GetLocalContractTypes({
@@ -852,7 +853,8 @@ export class LocalOptionTypeService implements OnDestroy {
           this.countryService.deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionType({
             organizationUuid,
             optionUuid,
-          }); //It contract regular option types
+          });
+      //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid, optionUuid) =>
           this.contractTypeService.deleteSingleItContractLocalContractTypesInternalV2DeleteLocalContractType({
