@@ -3991,6 +3991,18 @@
       <trans-unit id="8977823802262029818" datatype="html">
         <source>Følsomme persondata</source>
       </trans-unit>
+      <trans-unit id="1744762132805385911" datatype="html">
+        <source>Databehandlings udfaldsrum</source>
+      </trans-unit>
+      <trans-unit id="2516892896296403323" datatype="html">
+        <source>Lande</source>
+      </trans-unit>
+      <trans-unit id="5670250802412057944" datatype="html">
+        <source>Databehandlings roller</source>
+      </trans-unit>
+      <trans-unit id="8040369184915149511" datatype="html">
+        <source>Dataansvarlige</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

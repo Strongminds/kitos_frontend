@@ -5215,6 +5215,22 @@
         <source>It system roller</source>
         <target state="new">It system roller</target>
       </trans-unit>
+      <trans-unit id="8040369184915149511" datatype="html">
+        <source>Dataansvarlige</source>
+        <target state="new">Dataansvarlige</target>
+      </trans-unit>
+      <trans-unit id="2516892896296403323" datatype="html">
+        <source>Lande</source>
+        <target state="new">Lande</target>
+      </trans-unit>
+      <trans-unit id="1744762132805385911" datatype="html">
+        <source>Databehandlings udfaldsrum</source>
+        <target state="new">Databehandlings udfaldsrum</target>
+      </trans-unit>
+      <trans-unit id="5670250802412057944" datatype="html">
+        <source>Databehandlings roller</source>
+        <target state="new">Databehandlings roller</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
