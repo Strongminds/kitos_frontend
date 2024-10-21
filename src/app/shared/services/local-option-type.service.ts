@@ -412,6 +412,33 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             dto: { optionUuid },
           });
+      //Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (organizationUuid, optionUuid) =>
+          this.basisForTransferService.postSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferType(
+            {
+              organizationUuid,
+              dto: { optionUuid },
+            }
+          );
+      case 'data-processing-oversight-option-types':
+        return (organizationUuid, optionUuid) =>
+          this.oversightOptionService.postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'data-processing-data-responsible-types':
+        return (organizationUuid, optionUuid) =>
+          this.dataResponsibleService.postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'data-processing-country-types':
+        return (organizationUuid, optionUuid) =>
+          this.countryService.postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionType({
+            organizationUuid,
+            dto: { optionUuid },
+          });
       //Role option types
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
@@ -424,6 +451,12 @@ export class LocalOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         return (organizationUuid, optionUuid) =>
           this.itSystemRoleService.postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole({
+            organizationUuid,
+            dto: { optionUuid },
+          });
+      case 'data-processing':
+        return (organizationUuid, optionUuid) =>
+          this.dprRoleService.postSingleDprLocalRoleOptionTypesInternalV2CreateLocalDprRole({
             organizationUuid,
             dto: { optionUuid },
           });
@@ -503,7 +536,33 @@ export class LocalOptionTypeService implements OnDestroy {
             organizationUuid,
             optionUuid,
           });
-
+      //Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (organizationUuid, optionUuid) =>
+          this.basisForTransferService.deleteSingleDprLocalBasisForTransferTypesInternalV2DeleteLocalBasisForTransferType(
+            {
+              organizationUuid,
+              optionUuid,
+            }
+          );
+      case 'data-processing-oversight-option-types':
+        return (organizationUuid, optionUuid) =>
+          this.oversightOptionService.deleteSingleDprLocalOversightOptionTypesInternalV2DeleteLocalOversightOptionType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'data-processing-data-responsible-types':
+        return (organizationUuid, optionUuid) =>
+          this.dataResponsibleService.deleteSingleDprLocalDataResponsibleTypesInternalV2DeleteLocalDataResponsibleType({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'data-processing-country-types':
+        return (organizationUuid, optionUuid) =>
+          this.countryService.deleteSingleDprLocalCountryOptionTypesInternalV2DeleteLocalCountryOptionType({
+            organizationUuid,
+            optionUuid,
+          });
       //Role option types
       case 'organization-unit':
         return (organizationUuid, optionUuid) =>
@@ -516,6 +575,12 @@ export class LocalOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         return (organizationUuid, optionUuid) =>
           this.itSystemRoleService.deleteSingleItSystemLocalRoleOptionTypesInternalV2DeleteLocalItSystemRole({
+            organizationUuid,
+            optionUuid,
+          });
+      case 'data-processing':
+        return (organizationUuid, optionUuid) =>
+          this.dprRoleService.deleteSingleDprLocalRoleOptionTypesInternalV2DeleteLocalDprRole({
             organizationUuid,
             optionUuid,
           });
