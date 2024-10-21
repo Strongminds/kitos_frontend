@@ -18,7 +18,7 @@ export class LocalAdminDprComponent {
   public selectedSegment: LocalAdminDprSegmentOption = LocalAdminDprSegmentOption.RegularOptionTypes;
 
   public readonly segmentOptions: SegmentButtonOption<LocalAdminDprSegmentOption>[] = [
-    { text: $localize`Databehandlings udfaldsrum`, value: LocalAdminDprSegmentOption.RegularOptionTypes },
-    { text: $localize`Databehandlings roller`, value: LocalAdminDprSegmentOption.RoleOptionTypes },
+    { text: $localize`Udfaldsrum`, value: LocalAdminDprSegmentOption.RegularOptionTypes },
+    { text: $localize`Roller`, value: LocalAdminDprSegmentOption.RoleOptionTypes },
   ];
 }
