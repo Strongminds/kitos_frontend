@@ -8,9 +8,10 @@ import { LocalAdminInformationComponent } from './local-admin-information/local-
 import { LocalAdminOrganizationComponent } from './local-admin-organization/local-admin-organization.component';
 import { OrganizationsGridComponent } from './local-admin-organization/organizations-grid/organizations-grid.component';
 import { LocalAdminItSystemComponent } from './local-admin-it-system/local-admin-it-system.component';
+import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.component';
 
 @NgModule({
-  declarations: [LocalAdminComponent, LocalAdminInformationComponent, LocalAdminOrganizationComponent, OrganizationsGridComponent, LocalAdminItSystemComponent],
+  declarations: [LocalAdminComponent, LocalAdminInformationComponent, LocalAdminOrganizationComponent, OrganizationsGridComponent, LocalAdminItSystemComponent, LocalAdminDprComponent],
   imports: [CommonModule, ComponentsModule, SharedModule, LocalAdminRouterModule],
 })
 export class LocalAdminModule {}

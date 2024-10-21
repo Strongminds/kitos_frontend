@@ -5,6 +5,7 @@ import { LocalAdminInformationComponent } from './local-admin-information/local-
 import { LocalAdminComponent } from './local-admin.component';
 import { LocalAdminOrganizationComponent } from './local-admin-organization/local-admin-organization.component';
 import { LocalAdminItSystemComponent } from './local-admin-it-system/local-admin-it-system.component';
+import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: AppPath.itSystems,
         component: LocalAdminItSystemComponent,
+      },
+      {
+        path: AppPath.dataProcessing,
+        component: LocalAdminDprComponent
       }
     ],
   },
