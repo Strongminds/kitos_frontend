@@ -281,6 +281,37 @@ export class LocalOptionTypeService implements OnDestroy {
             optionUuid,
             dto: request,
           });
+      //Data processing regular option types
+      case 'data-processing-basis-for-transfer-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.basisForTransferService.patchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferType(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'data-processing-oversight-option-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.oversightOptionService.patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'data-processing-data-responsible-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.dataResponsibleService.patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'data-processing-country-types':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.countryService.patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
       //Role option types
       case 'organization-unit':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -294,6 +325,13 @@ export class LocalOptionTypeService implements OnDestroy {
       case 'it-system-usage':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.itSystemRoleService.patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      case 'data-processing':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+          this.dprRoleService.patchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRole({
             organizationUuid,
             optionUuid,
             dto: request,
