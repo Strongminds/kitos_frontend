@@ -13,8 +13,10 @@
       <span class="label" [ngClass]="{ visible: isExpanded }">{{ item.label }}</span>
     </app-button>
   </div>
-  <app-divider></app-divider>
 
+  <div class="divider-margin">
+    <app-divider ></app-divider>
+  </div>
   <app-button
     buttonStyle="tertiary"
     [tooltip]="isExpanded ? 'Minimer' : 'Udvid'"
