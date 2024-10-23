@@ -236,7 +236,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.subscriptions.add(
       this.store
         .select(selectContract)
-        .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)), first())
+        .pipe(filterNullish(), first(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)))
         .subscribe(([contract, hasModifyPermission]) => {
           this.initializeFormGroups(contract, hasModifyPermission);
         })
