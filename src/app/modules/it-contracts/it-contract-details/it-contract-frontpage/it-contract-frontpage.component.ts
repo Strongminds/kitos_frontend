@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first, map } from 'rxjs';
+import { combineLatestWith, map } from 'rxjs';
 import {
   APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
@@ -236,14 +236,14 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.subscriptions.add(
       this.store
         .select(selectContract)
-        .pipe(filterNullish(), first(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)))
+        .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)))
         .subscribe(([contract, hasModifyPermission]) => {
-          this.initializeFormGroups(contract, hasModifyPermission);
+          this.updateFormGroups(contract, hasModifyPermission);
         })
     );
   }
 
-  private initializeFormGroups(contract: APIItContractResponseDTO, hasModifyPermission?: boolean) {
+  private updateFormGroups(contract: APIItContractResponseDTO, hasModifyPermission?: boolean) {
     this.patchFrontPageFormGroup(contract);
     this.patchParentContractFormGroup(contract);
     this.patchResponsibleFormGroup(contract);
