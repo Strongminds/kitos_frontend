@@ -181,7 +181,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      console.log('patching frontpage', frontpage);
       this.store.dispatch(ITContractActions.patchITContract(frontpage));
     }
   }
