@@ -181,6 +181,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
+      console.log('patching frontpage', frontpage);
       this.store.dispatch(ITContractActions.patchITContract(frontpage));
     }
   }
@@ -201,7 +202,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       this.patchFrontPage({ procurement: { procurementPlan: { quarterOfYear, year } } }, valueChange);
       return;
     }
-    this.patchFrontPage({ procurement: { procurementPlan: undefined } }, valueChange);
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.patchFrontPage({ procurement: { procurementPlan: null as any } }, valueChange);
   }
 
   public searchUsers(search?: string) {

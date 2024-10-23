@@ -155,7 +155,7 @@ export class ITContractEffects {
       concatLatestFrom(() => this.store.select(selectItContractUuid)),
       switchMap(([{ itContract }, contractUuid]) => {
         if (!contractUuid) return of(ITContractActions.patchITContractError());
-
+        console.log(itContract);
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({ contractUuid, request: itContract })
           .pipe(
