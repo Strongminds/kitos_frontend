@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -19,9 +20,20 @@ import {
   selectItSystemUsageUuid,
 } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import {
+  selectITSystemUsageUIModuleConfigEnabledTabArchiving,
+  selectITSystemUsageUIModuleConfigEnabledTabGdpr,
+  selectITSystemUsageUIModuleConfigEnabledTabHierarchy,
+  selectITSystemUsageUIModuleConfigEnabledTabInterfaces,
+  selectITSystemUsageUIModuleConfigEnabledTabLocalKle,
+  selectITSystemUsageUIModuleConfigEnabledTabLocalReferences,
+  selectITSystemUsageUIModuleConfigEnabledTabNotifications,
+  selectITSystemUsageUIModuleConfigEnabledTabOrganization,
+  selectITSystemUsageUIModuleConfigEnabledTabSystemRelations,
+  selectITSystemUsageUIModuleConfigEnabledTabSystemRoles,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
-import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -35,6 +47,46 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itSystemUsageName$ = this.store.select(selectItSystemUsageName).pipe(filterNullish());
   public readonly itSystemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());
   public readonly hasDeletePermissions$ = this.store.select(selectITSystemUsageHasDeletePermission);
+
+  public readonly enableGdprTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabGdpr)
+    .pipe(filterNullish());
+
+  public readonly enableSystemRolesTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabSystemRoles)
+    .pipe(filterNullish());
+
+  public readonly enableOrganizationTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabOrganization)
+    .pipe(filterNullish());
+
+  public readonly enableSystemRelationsTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabSystemRelations)
+    .pipe(filterNullish());
+
+  public readonly enableInterfacesTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabInterfaces)
+    .pipe(filterNullish());
+
+  public readonly enableArchivingTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabArchiving)
+    .pipe(filterNullish());
+
+  public readonly enableHierarchyTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabHierarchy)
+    .pipe(filterNullish());
+
+  public readonly enableLocalKleTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabLocalKle)
+    .pipe(filterNullish());
+
+  public readonly enableNotificationsTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabNotifications)
+    .pipe(filterNullish());
+
+  public readonly enableLocalReferencesTab$ = this.store
+    .select(selectITSystemUsageUIModuleConfigEnabledTabLocalReferences)
+    .pipe(filterNullish());
 
   public readonly breadCrumbs$ = combineLatest([
     this.organizationName$,
@@ -74,54 +126,63 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`GDPR`,
       iconType: 'lock',
       route: AppPath.gdpr,
+      enabled$: this.enableGdprTab$,
     },
     {
       label: $localize`Systemroller`,
       iconType: 'roles',
       route: AppPath.roles,
+      enabled$: this.enableSystemRolesTab$,
     },
     {
       label: $localize`Organisation`,
       iconType: 'organization',
       route: AppPath.organization,
+      enabled$: this.enableOrganizationTab$,
     },
     {
       label: $localize`Relationer`,
       iconType: 'intersect',
       route: AppPath.relations,
+      enabled$: this.enableSystemRelationsTab$,
     },
     {
       label: $localize`Udstillede snitflader`,
       iconType: 'systems',
       route: AppPath.itInterfaces,
+      enabled$: this.enableInterfacesTab$,
     },
     {
       label: $localize`Arkivering`,
       iconType: 'archive',
       route: AppPath.archiving,
+      enabled$: this.enableArchivingTab$,
     },
     {
       label: $localize`Hierarki`,
       iconType: 'hierarchy',
       route: AppPath.hierarchy,
+      enabled$: this.enableHierarchyTab$,
     },
     {
       label: $localize`Lokale KLE`,
       iconType: 'table',
       route: AppPath.kle,
+      enabled$: this.enableLocalKleTab$,
     },
     {
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
+      enabled$: this.enableNotificationsTab$,
     },
     {
       label: $localize`Lokale referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
+      enabled$: this.enableLocalReferencesTab$,
     },
   ];
-
 
   constructor(
     private route: ActivatedRoute,

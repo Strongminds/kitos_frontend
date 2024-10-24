@@ -1,0 +1,19 @@
+@import "theme.scss";
+
+.form-section-top-padding {
+  padding-top: $padding-medium;
+}
+
+.center-no-fields-text {
+  text-align: center;
+}
+
+.checkbox-button-content-flex {
+  display: flex;
+  align-items: center;
+}
+
+.tooltip-margin {
+  margin-left: $padding-small;
+  margin-top: $padding-small;
+}
