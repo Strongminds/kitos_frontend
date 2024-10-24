@@ -1,6 +1,10 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { APIStsOrganizationAccessStatusResponseDTO } from 'src/app/api/v2';
+import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
+import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
+import { FkOrgChangeLogDictionary } from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
 import { adaptFkOrganizationUnit } from 'src/app/shared/models/local-admin/fk-org-consequence.model';
+import { getResponsibleEntityTextBasedOnOrigin } from '../../helpers/fk-org-helper';
 import { FkOrgActions } from './actions';
 import { FkOrgState } from './state';
 
@@ -9,10 +13,16 @@ export const fkOrgInitialState: FkOrgState = {
   accessError: undefined,
   isLoadingConnectionStatus: false,
 
+  isDeleteLoading: false,
+
   snapshot: undefined,
   updateConsequences: undefined,
   isSynchronizationDialogLoading: false,
   hasSnapshotFailed: false,
+
+  isLoadingChangelogs: false,
+  availableChangelogs: undefined,
+  changelogDictionary: undefined,
 };
 
 export const fkOrgFeature = createFeature({
@@ -100,18 +110,39 @@ export const fkOrgFeature = createFeature({
       (state): FkOrgState => ({ ...state, isSynchronizationDialogLoading: false })
     ),
 
-    on(
-      FkOrgActions.deleteAutomaticUpdateSubscription,
-      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: true })
-    ),
+    on(FkOrgActions.deleteAutomaticUpdateSubscription, (state): FkOrgState => ({ ...state, isDeleteLoading: true })),
     on(
       FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
-      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
+      (state): FkOrgState => ({ ...state, isDeleteLoading: false })
     ),
     on(
       FkOrgActions.deleteAutomaticUpdateSubscriptionError,
-      (state): FkOrgState => ({ ...state, isLoadingConnectionStatus: false })
-    )
+      (state): FkOrgState => ({ ...state, isDeleteLoading: false })
+    ),
+
+    on(FkOrgActions.getChangelog, (state): FkOrgState => ({ ...state, isLoadingChangelogs: true })),
+    on(FkOrgActions.getChangelogSuccess, (state, { changelogs }): FkOrgState => {
+      const changelogDictionary: FkOrgChangeLogDictionary = {};
+      const availableChangeLogs: DropdownOption<string>[] = [];
+      changelogs.forEach((changelog) => {
+        if (changelog.logTime) {
+          const mappedChangelog = {
+            ...changelog,
+            consequences: changelog.consequences?.map((unit) => adaptFkOrganizationUnit(unit)) ?? [],
+          };
+          changelogDictionary[changelog.logTime] = mappedChangelog;
+
+          availableChangeLogs.push({
+            value: changelog.logTime,
+            name: mapDateToString(changelog.logTime),
+            description: getResponsibleEntityTextBasedOnOrigin(changelog),
+          });
+        }
+      });
+
+      return { ...state, changelogDictionary, availableChangelogs: availableChangeLogs, isLoadingChangelogs: false };
+    }),
+    on(FkOrgActions.getChangelogError, (state): FkOrgState => ({ ...state, isLoadingChangelogs: false }))
   ),
 });
 
