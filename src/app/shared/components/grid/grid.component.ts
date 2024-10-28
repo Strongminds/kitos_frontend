@@ -115,6 +115,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console
     //Set state take for Kendo grid to correctly calculate page size and page numbers
     if (changes['data'] && this.state?.all === true) {
       this.state = { ...this.state, take: this.data?.total };
@@ -146,6 +147,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public onResizeChange(event: ColumnResizeArgs[], columns: GridColumn[]) {
+    console.log('onResizeChange', event);
     const columnsCopy = JSON.parse(JSON.stringify(columns)) as GridColumn[];
 
     if (event.length > 0) {
@@ -159,6 +161,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       const columnToChangeWidth = columnsCopy[columnIndex];
       columnToChangeWidth.width = changedColumnEvent.newWidth;
 
+      console.log(columnsCopy[columnIndex])
       this.dispatchUpdateColumnsAction(columnsCopy);
     }
   }
