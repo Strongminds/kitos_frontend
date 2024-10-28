@@ -3,6 +3,9 @@
 
 :host {
   @include page-flex-layout-max-width;
+}
+
+.title-margin {
   margin-left: $padding-medium-large;
 }
 
