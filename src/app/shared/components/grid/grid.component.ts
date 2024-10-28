@@ -115,7 +115,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console
     //Set state take for Kendo grid to correctly calculate page size and page numbers
     if (changes['data'] && this.state?.all === true) {
       this.state = { ...this.state, take: this.data?.total };
