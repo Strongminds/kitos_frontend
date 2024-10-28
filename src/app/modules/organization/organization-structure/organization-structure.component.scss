@@ -1,9 +1,14 @@
 @import "theme";
+@import 'mixins';
 
 :host {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.page-title {
+  margin-left: $padding-medium-large;
 }
 
 .card-header {
@@ -24,6 +29,7 @@
 .structure-page-flex {
   display: flex;
   gap: $padding-medium;
+  margin-top: 22px;
 }
 
 .structure-section-width {
