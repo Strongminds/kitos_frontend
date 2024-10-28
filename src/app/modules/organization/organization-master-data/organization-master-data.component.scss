@@ -1,14 +1,13 @@
 @import "mixins";
+@import 'theme';
 
 :host {
-  @include page-flex-layout-max-width
+  @include page-flex-layout-max-width;
+  margin-left: $padding-medium-large;
 }
 
 .card-top-margin {
-  margin-top: 20px;
+  margin-top: 22px;
 }
 
-.title-margin {
-  margin-top: 25px;
-  margin-left: 10px;
-}
+
