@@ -15,6 +15,7 @@ export class UiConfigComponent implements OnInit{
   constructor(private store: Store) {}
 
   @Input() moduleKey!: UIModuleConfigKey;
+  @Input() moduleEnabled$!: Observable<boolean | undefined>;
 
   public uiConfig$!: Observable<UIModuleConfig | undefined>;
 
