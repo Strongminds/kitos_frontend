@@ -15,7 +15,6 @@ import {
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import {
   PaymentRegistrationModel,
   RegistrationModel,
@@ -182,7 +181,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   );
 
   public baseInfoForm = new FormGroup({
-    parentUnitControl: new FormControl<IdentityNamePair | undefined>(undefined),
+    parentUnitControl: new FormControl<TreeNodeModel | undefined>(undefined),
     nameControl: new FormControl<string | undefined>(undefined, Validators.required),
     eanControl: new FormControl<number | undefined>(undefined),
     idControl: new FormControl<string | undefined>(undefined),
@@ -209,7 +208,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
         this.store.dispatch(OrganizationUnitActions.getRegistrations(unit.uuid));
 
         this.baseInfoForm.patchValue({
-          parentUnitControl: unit.parentOrganizationUnit,
+          parentUnitControl: this.createNodeHelpr(unit.parentOrganizationUnit as APIOrganizationUnitResponseDTO),
           nameControl: unit.name,
           eanControl: unit.ean,
           idControl: unit.unitId,
@@ -238,15 +237,6 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       );
     }
     this.dialog.close();
-  }
-
-  public onParentUnitControlBlur() {
-    this.subscriptions.add(
-      this.unit$.subscribe((unit) => {
-        const control = this.baseInfoForm.controls.parentUnitControl;
-        if (!control.value) control.patchValue(unit.parentOrganizationUnit);
-      })
-    );
   }
 
   public isRootUnit() {
@@ -363,7 +353,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       map((unit) => {
         const controls = this.baseInfoForm.controls;
         return (
-          controls.parentUnitControl.value?.uuid == unit.parentOrganizationUnit?.uuid &&
+          controls.parentUnitControl.value?.id == unit.parentOrganizationUnit?.uuid &&
           controls.nameControl.value == unit.name &&
           controls.eanControl.value == unit.ean &&
           controls.idControl.value == unit.unitId
@@ -399,7 +389,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
       name: controls.nameControl.value ?? unit.name,
     };
     const existingParentUuid = unit.parentOrganizationUnit?.uuid;
-    const formParentUuid = controls.parentUnitControl.value?.uuid;
+    const formParentUuid = controls.parentUnitControl.value?.id;
 
     return existingParentUuid === formParentUuid ? updatedUnit : { ...updatedUnit, parentUuid: formParentUuid };
   }

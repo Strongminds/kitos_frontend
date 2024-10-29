@@ -26,6 +26,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public formName?: string;
   @Input() public appendTo: string = '';
   @Input() public value?: TreeNodeModel;
+  @Input() public valueField?: string;
 
   @Output() public filterChange = new EventEmitter<string | undefined>();
   @Output() public valueChange = new EventEmitter<string | undefined>();

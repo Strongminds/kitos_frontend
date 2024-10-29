@@ -3,7 +3,7 @@
     <app-tree-node-dropdown
       *ngIf="formGroup"
       [text]="text"
-      valueField="id"
+      [valueField]="valueField ?? 'id'"
       [data]="nodes"
       [showDescription]="showDescription"
       [formGroup]="formGroup"
