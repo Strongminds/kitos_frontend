@@ -2,7 +2,7 @@
 
 <app-card>
   <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.UiCustomization">
-    <app-ui-config [moduleKey]="itSystemUsageModuleKey" [moduleEnabled$]="showItSystemModule$"></app-ui-config>
+    <app-ui-config [moduleKey]="itSystemUsageModuleKey"></app-ui-config>
   </ng-container>
 
   <ng-container *ngIf="selectedSegment === LocalAdminModuleSegmentOptionType.RegularOptionTypes">
