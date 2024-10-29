@@ -1,3 +1,4 @@
+
 <app-button
   class="button-alignment"
   (buttonClick)="onButtonClick()"
@@ -5,10 +6,11 @@
   [disabled]="disabled"
   [alignStart]="true"
   [ngClass]="{'disabled-border-color': !value}"
+  [backgroundWhite]="backgroundWhite"
 >
   <app-checkbox [value]="value" [disabled]="disabled" data-cy="button-checkbox"> </app-checkbox>
 
-  <div class="align-text">
+  <div class="align-content">
     <ng-content></ng-content>
   </div>
 </app-button>

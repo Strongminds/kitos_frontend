@@ -4490,8 +4490,8 @@
       <trans-unit id="9001961829556113608" datatype="html">
         <source>Lokal tilpasning af udfaldsrum</source>
       </trans-unit>
-      <trans-unit id="1274790689655565947" datatype="html">
-        <source>Bryd forbindelsen til FK Organisation</source>
+      <trans-unit id="1265710071714281214" datatype="html">
+        <source>Kunne ikke hente lokal tilpasning af moduler.</source>
       </trans-unit>
       <trans-unit id="1401253679062667183" datatype="html">
         <source>Oprettes forbindelsen igen efterfølgende, vil der altså kunne optræde enheder med
