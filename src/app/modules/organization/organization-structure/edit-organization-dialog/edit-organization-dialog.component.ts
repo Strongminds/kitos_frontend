@@ -44,6 +44,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;
   @Input() public rootUnitUuid$!: Observable<string>;
   @Input() public validParentOrganizationUnits$!: Observable<APIIdentityNamePairResponseDTO[]>;
+  @Input() public something$!: Observable<TreeNodeModel[]>;
 
   public readonly confirmColor: ThemePalette = 'primary';
 
@@ -220,6 +221,10 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
         if (isRootUnit) this.baseInfoForm.controls.parentUnitControl.disable();
       })
     );
+
+    this.something$.subscribe((value) => {
+      console.log(value);
+    });
   }
 
   public onSave() {
