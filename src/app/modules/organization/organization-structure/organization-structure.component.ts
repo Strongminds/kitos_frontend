@@ -9,6 +9,8 @@ import { APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
 import { CreateSubunitDialogComponent } from 'src/app/modules/organization/organization-structure/create-subunit-dialog/create-subunit-dialog.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
+  findNodeByUuid,
+  getUuidsOfEntityTreeNodeAndhildren,
   mapTreeToIdentityNamePairs,
   mapUnitsToTree,
   removeNodeAndChildren,
@@ -45,7 +47,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   );
 
   public readonly something$ = this.organizationUnits$.pipe(
-    map((organizationUnits) => { console.log(organizationUnits); return organizationUnits.map((unit) => createNode(unit))}),
+    map((organizationUnits) => organizationUnits.map((unit) => createNode(unit)))
   );
 
   public readonly currentUnitUuid$ = this.store.select(selectCurrentUnitUuid);
@@ -53,6 +55,18 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.store.select(selectExpandedNodeUuids)),
     map(([units, expandedNodeUuids]) => mapUnitsToTree(units, expandedNodeUuids))
+  );
+
+  public readonly disabledUnitsUuids$ = this.unitTree$.pipe(
+    combineLatestWith(this.store.select(selectCurrentUnitUuid)),
+    map(([organizationUnits, currentUuid]) => {
+      if (organizationUnits.length === 0) throw new Error('No units found');
+      return findNodeByUuid(organizationUnits[0], currentUuid);
+    }),
+    map((node) => {
+      if (!node) throw new Error('Node not found');
+      return getUuidsOfEntityTreeNodeAndhildren(node);
+    })
   );
 
   public readonly currentOrganizationUnit$ = this.organizationUnits$.pipe(
@@ -82,7 +96,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
       const filteredUnitTree = removeNodeAndChildren(unitTree, currentUnitUuid);
       return mapTreeToIdentityNamePairs(filteredUnitTree);
     })
-  );
+  ); //TODO: Maybe delete this once done
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
@@ -185,5 +199,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
     dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
     dialogInstance.something$ = this.something$;
+    dialogInstance.disabledUnitsUuids$ = this.disabledUnitsUuids$;
   }
 }

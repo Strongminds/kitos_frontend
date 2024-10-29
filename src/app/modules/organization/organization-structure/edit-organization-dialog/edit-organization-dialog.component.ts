@@ -20,7 +20,7 @@ import {
   PaymentRegistrationModel,
   RegistrationModel,
 } from 'src/app/shared/models/organization/organization-unit/organization-unit-registration.model';
-import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
+import { createNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
@@ -45,6 +45,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   @Input() public rootUnitUuid$!: Observable<string>;
   @Input() public validParentOrganizationUnits$!: Observable<APIIdentityNamePairResponseDTO[]>;
   @Input() public something$!: Observable<TreeNodeModel[]>;
+  @Input() public disabledUnitsUuids$!: Observable<string[]>;
 
   public readonly confirmColor: ThemePalette = 'primary';
 
@@ -404,7 +405,11 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   }
 
   private hasRegistrations<T>(registrations: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>): boolean {
-    return registrations.length > 0 ?? false;
+    return registrations.length > 0; //TODO: Maybe change this back?
+  }
+
+  public createNodeHelpr(unit: APIOrganizationUnitResponseDTO): TreeNodeModel {
+    return createNode(unit);
   }
 
   private areAllRegistrationsSelected<T>(
