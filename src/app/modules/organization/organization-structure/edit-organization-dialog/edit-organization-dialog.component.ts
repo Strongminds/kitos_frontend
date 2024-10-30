@@ -388,7 +388,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
   }
 
   private hasRegistrations<T>(registrations: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>): boolean {
-    return registrations.length > 0; //TODO: Maybe change this back?
+    return registrations.length > 0;
   }
 
   private areAllRegistrationsSelected<T>(
