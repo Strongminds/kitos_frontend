@@ -1,1 +1,9 @@
-<p>global-admin works!</p>
+<div class="header">
+  <h4 i18n class="title-margin">Lokal admin</h4>
+</div>
+
+<div class="content">
+  <app-navigation-drawer [items]="globalAdminNavigationItems"> </app-navigation-drawer>
+
+  <router-outlet></router-outlet>
+</div>

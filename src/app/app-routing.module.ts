@@ -45,7 +45,9 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: AppPath.globalAdmin
+        path: AppPath.globalAdmin,
+        loadChildren: () => import('./modules/global-admin/global-admin.module').then((m) => m.GlobalAdminModule),
+        canActivate: [AuthGuardService],
       }
     ],
   },
