@@ -4,7 +4,7 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { GlobalAdminComponent } from './global-admin.component';
 import { GlobalAdminOrganizationComponent } from './global-admin-organization/global-admin-organization.component';
 import { GlobalAdminOrganizationsComponent } from './global-admin-organizations/global-admin-organizations.component';
-import { GlobalAdminsComponent } from './global-admins/global-admins.component';
+import { GlobalAdminGlobalAdminsComponent } from './global-admin-global-admins/global-admin-global-admins.component';
 import { GlobalAdminLocalAdminsComponent } from './global-admin-local-admins/global-admin-local-admins.component';
 import { GlobalAdminItSystemComponent } from './global-admin-it-system/global-admin-it-system.component';
 import { GlobalAdminItContractComponent } from './global-admin-it-contract/global-admin-it-contract.component';
@@ -28,7 +28,7 @@ const routes: Routes = [
       },
       {
         path: AppPath.globalAdmins,
-        component: GlobalAdminsComponent,
+        component: GlobalAdminGlobalAdminsComponent,
       },
       {
         path: AppPath.localAdmins,
