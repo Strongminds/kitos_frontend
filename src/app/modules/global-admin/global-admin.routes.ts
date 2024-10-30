@@ -12,10 +12,10 @@ const routes: Routes = [
       {
         path: AppPath.root,
         pathMatch: 'full',
-        redirectTo: AppPath.organization,
+        redirectTo: AppPath.organizations,
       },
       {
-        path: AppPath.organization,
+        path: AppPath.organizations,
         component: GlobalAdminOrganizationComponent,
       }
     ]
