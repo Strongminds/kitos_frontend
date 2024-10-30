@@ -51,7 +51,7 @@ export class GlobalAdminComponent {
     },
     {
       label: $localize`Hjælpetekster`,
-      iconType: undefined,
+      iconType: 'help',
       route: AppPath.helpTexts,
     },
   ];

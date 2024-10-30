@@ -16,4 +16,5 @@ export type IconType =
   | 'intersect'
   | 'archive'
   | 'hierarchy'
+  | 'help'
   | undefined;
