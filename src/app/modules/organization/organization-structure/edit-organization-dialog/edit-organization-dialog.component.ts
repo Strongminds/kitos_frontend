@@ -207,7 +207,7 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
         this.store.dispatch(OrganizationUnitActions.getRegistrations(unit.uuid));
 
         this.baseInfoForm.patchValue({
-          parentUnitControl: this.createNodeHelpr(unit.parentOrganizationUnit as APIOrganizationUnitResponseDTO),
+          parentUnitControl: createNode(unit.parentOrganizationUnit as APIOrganizationUnitResponseDTO),
           nameControl: unit.name,
           eanControl: unit.ean,
           idControl: unit.unitId,
@@ -391,10 +391,6 @@ export class EditOrganizationDialogComponent extends BaseComponent implements On
 
   private hasRegistrations<T>(registrations: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>): boolean {
     return registrations.length > 0; //TODO: Maybe change this back?
-  }
-
-  public createNodeHelpr(unit: APIOrganizationUnitResponseDTO): TreeNodeModel {
-    return createNode(unit);
   }
 
   private areAllRegistrationsSelected<T>(
