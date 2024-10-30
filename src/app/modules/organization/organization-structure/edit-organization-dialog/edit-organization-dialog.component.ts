@@ -8,7 +8,6 @@ import { Store } from '@ngrx/store';
 import { combineLatest, combineLatestWith, first, map, Observable } from 'rxjs';
 import {
   APIChangeOrganizationUnitRegistrationV2RequestDTO,
-  APIIdentityNamePairResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIUpdateOrganizationUnitRequestDTO,
 } from 'src/app/api/v2';
@@ -42,7 +41,6 @@ import {
 export class EditOrganizationDialogComponent extends BaseComponent implements OnInit {
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;
   @Input() public rootUnitUuid$!: Observable<string>;
-  @Input() public validParentOrganizationUnits$!: Observable<APIIdentityNamePairResponseDTO[]>;
   @Input() public disabledUnitsUuids$!: Observable<string[]>;
 
   public readonly confirmColor: ThemePalette = 'primary';

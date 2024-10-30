@@ -11,9 +11,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   findNodeByUuid,
   getUuidsOfEntityTreeNodeAndhildren,
-  mapTreeToIdentityNamePairs,
   mapUnitsToTree,
-  removeNodeAndChildren,
 } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from 'src/app/shared/models/structure/entity-tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -84,14 +82,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     combineLatestWith(this.rootUnitUuid$),
     map(([uuid, rootUuid]) => uuid === rootUuid)
   );
-
-  public readonly validParentOrganizationUnits$ = this.unitTree$.pipe(
-    combineLatestWith(this.currentUnitUuid$),
-    map(([unitTree, currentUnitUuid]) => {
-      const filteredUnitTree = removeNodeAndChildren(unitTree, currentUnitUuid);
-      return mapTreeToIdentityNamePairs(filteredUnitTree);
-    })
-  ); //TODO: Maybe delete this once done
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
   public isDragDisabled$ = this.dragDisabledSubject.pipe(filterNullish());
@@ -192,7 +182,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
-    dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
     dialogInstance.disabledUnitsUuids$ = this.disabledUnitsUuids$;
   }
 }
