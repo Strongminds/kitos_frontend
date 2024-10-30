@@ -30,7 +30,6 @@ import {
 } from 'src/app/store/organization/organization-unit/selectors';
 
 import { EditOrganizationDialogComponent } from './edit-organization-dialog/edit-organization-dialog.component';
-import { createNode } from 'src/app/shared/models/tree-node.model';
 
 @Component({
   selector: 'app-organization-structure',
@@ -44,10 +43,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   public readonly unitPermissions$ = this.store.select(selectUnitPermissions);
   public readonly modificationPermission$ = this.unitPermissions$.pipe(
     map((permissions) => permissions?.canBeModified ?? false)
-  );
-
-  public readonly something$ = this.organizationUnits$.pipe(
-    map((organizationUnits) => organizationUnits.map((unit) => createNode(unit)))
   );
 
   public readonly currentUnitUuid$ = this.store.select(selectCurrentUnitUuid);
@@ -198,7 +193,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
     dialogInstance.validParentOrganizationUnits$ = this.validParentOrganizationUnits$;
-    dialogInstance.something$ = this.something$;
     dialogInstance.disabledUnitsUuids$ = this.disabledUnitsUuids$;
   }
 }
