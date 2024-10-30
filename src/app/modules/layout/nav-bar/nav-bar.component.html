@@ -70,7 +70,9 @@
         <app-menu-item [path]="AppPath.localAdmin" i18n *ngIf="user.isLocalAdmin" data-cy="local-admin-menu-item"
           >Lokal admin</app-menu-item
         >
-        <app-menu-item [path]="AppPath.globalAdmin" *ngIf="user.isGlobalAdmin" i18n>Global admin</app-menu-item>
+        <app-menu-item [path]="AppPath.globalAdmin" *ngIf="user.isGlobalAdmin" data-cy="global-admin-menu-item" i18n
+          >Global admin</app-menu-item
+        >
         <app-menu-item *ngIf="hasMultipleOrganizations$ | async" (itemClick)="showOrganizationDialog()" i18n
           >Skift organisation</app-menu-item
         >
