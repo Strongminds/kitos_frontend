@@ -11,22 +11,22 @@ export class GlobalAdminComponent {
   public readonly globalAdminNavigationItems: NavigationDrawerItem[] = [
     {
       label: $localize`Organisationer`,
-      iconType: 'organization',
+      iconType: 'roles',
       route: AppPath.organizations,
     },
     {
       label: $localize`Globale administratorer`,
-      iconType: undefined,
+      iconType: 'multiple-users',
       route: AppPath.globalAdmins,
     },
     {
       label: $localize`Lokale administratorer`,
-      iconType: undefined,
+      iconType: 'settings',
       route: AppPath.localAdmins,
     },
     {
       label: $localize`Organisation`,
-      iconType: undefined,
+      iconType: 'organization',
       route: AppPath.organization,
     },
     {
@@ -46,7 +46,7 @@ export class GlobalAdminComponent {
     },
     {
       label: $localize`Andet`,
-      iconType: undefined,
+      iconType: 'dots',
       route: AppPath.other,
     },
     {

@@ -17,4 +17,6 @@ export type IconType =
   | 'archive'
   | 'hierarchy'
   | 'help'
+  | 'settings'
+  | 'multiple-users'
   | undefined;
