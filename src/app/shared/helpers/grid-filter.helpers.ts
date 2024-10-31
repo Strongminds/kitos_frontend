@@ -25,7 +25,9 @@ export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
     case 'organization-user':
       return OrganizationUserActions.saveOrganizationUsersFilter;
     case 'local-admin-organization':
-      return OrganizationActions.saveOrganizationsFilter;
+      return OrganizationActions.saveLocalAdminOrganizationsFilter;
+    case 'global-admin-organization':
+      return OrganizationActions.saveGlobalAdminOrganizationsFilter;
     default:
       throw `Save filter action for entity type ${entityType} not implemented`;
   }
@@ -46,7 +48,9 @@ export function getApplyFilterAction(entityType: RegistrationEntityTypes) {
     case 'organization-user':
       return OrganizationUserActions.applyOrganizationUsersFilter;
     case 'local-admin-organization':
-      return OrganizationActions.applyOrganizationsFilter;
+      return OrganizationActions.applyLocalAdminOrganizationsFilter;
+    case 'global-admin-organization':
+      return OrganizationActions.applyGlobalAdminOrganizationsFilter;
     default:
       throw `Apply filter action for entity type ${entityType} not implemented`;
   }
