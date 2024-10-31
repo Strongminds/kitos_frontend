@@ -5,7 +5,7 @@ import { BehaviorSubject, first, map, Observable } from 'rxjs';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUserV2 } from 'src/app/shared/models/organization/organization-user/organization-user-v2.model';
-import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 
@@ -16,7 +16,7 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
   providers: [RoleSelectionService],
 })
 export class CopyRolesDialogComponent extends RoleSelectionBaseComponent implements OnInit {
-  @Input() user!: OrganizationUser;
+  @Input() user!: ODataOrganizationUser;
 
   constructor(private store: Store, selectionService: RoleSelectionService, actions$: Actions) {
     super(
@@ -39,7 +39,7 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
   public disabledUuids!: string[];
 
   public selectedUser$: BehaviorSubject<OrganizationUserV2 | undefined> = new BehaviorSubject<
-  OrganizationUserV2 | undefined
+    OrganizationUserV2 | undefined
   >(undefined);
 
   public selectedUserChanged(user: OrganizationUserV2 | undefined | null): void {
