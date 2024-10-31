@@ -45,7 +45,7 @@ export class OrganizationUserDropdownComponentStore extends ComponentStore<State
           })
           .pipe(
             tapResponse(
-              (users) => {console.log(users); return this.updateUsers(users)},
+              (users) => this.updateUsers(users),
               (e) => console.error(e),
               () => this.updateUsersIsLoading(false)
             )
