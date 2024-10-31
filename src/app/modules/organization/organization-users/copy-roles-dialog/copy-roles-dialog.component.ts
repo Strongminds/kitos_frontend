@@ -2,9 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, first, map, Observable } from 'rxjs';
-import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
+import { OrganizationUserV2 } from 'src/app/shared/models/organization/organization-user/organization-user-v2.model';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
@@ -38,11 +38,11 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
 
   public disabledUuids!: string[];
 
-  public selectedUser$: BehaviorSubject<APIOrganizationUserResponseDTO | undefined> = new BehaviorSubject<
-    APIOrganizationUserResponseDTO | undefined
+  public selectedUser$: BehaviorSubject<OrganizationUserV2 | undefined> = new BehaviorSubject<
+  OrganizationUserV2 | undefined
   >(undefined);
 
-  public selectedUserChanged(user: APIOrganizationUserResponseDTO | undefined | null): void {
+  public selectedUserChanged(user: OrganizationUserV2 | undefined | null): void {
     this.selectedUser$.next(user ?? undefined);
   }
 

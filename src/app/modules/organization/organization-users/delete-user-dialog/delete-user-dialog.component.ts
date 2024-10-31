@@ -3,9 +3,9 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, first, map, Observable } from 'rxjs';
-import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
+import { OrganizationUserV2 } from 'src/app/shared/models/organization/organization-user/organization-user-v2.model';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
@@ -40,8 +40,8 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
 
   public disabledUuids$!: Observable<string[]>;
 
-  public selectedUser$: BehaviorSubject<APIOrganizationUserResponseDTO | undefined> = new BehaviorSubject<
-    APIOrganizationUserResponseDTO | undefined
+  public selectedUser$: BehaviorSubject<OrganizationUserV2 | undefined> = new BehaviorSubject<
+  OrganizationUserV2 | undefined
   >(undefined);
 
   ngOnInit(): void {
@@ -55,7 +55,7 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
     this.disabledUuids$ = this.user$.pipe(map((user) => [user.Uuid]));
   }
 
-  public selectedUserChanged(user: APIOrganizationUserResponseDTO | undefined | null): void {
+  public selectedUserChanged(user: OrganizationUserV2 | undefined | null): void {
     this.selectedUser$.next(user ?? undefined);
   }
 

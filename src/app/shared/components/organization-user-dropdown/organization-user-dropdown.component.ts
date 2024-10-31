@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { OrganizationUserDropdownComponentStore } from './organization-user-dropdown.component-store';
-import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 import { map } from 'rxjs';
+import { OrganizationUserV2 } from '../../models/organization/organization-user/organization-user-v2.model';
 
 @Component({
   selector: 'app-organization-user-dropdown',
@@ -14,9 +14,9 @@ export class OrganizationUserDropdownComponent {
   @Input() public text: string | undefined;
   @Input() public disabledUuids: string[] = [];
 
-  public value: APIOrganizationUserResponseDTO | undefined;
+  public value: OrganizationUserV2 | undefined;
 
-  @Output() public userChange = new EventEmitter<APIOrganizationUserResponseDTO | undefined | null>();
+  @Output() public userChange = new EventEmitter<OrganizationUserV2 | undefined | null>();
 
   constructor(private componentStore: OrganizationUserDropdownComponentStore) {}
 
@@ -29,7 +29,7 @@ export class OrganizationUserDropdownComponent {
     this.componentStore.searchUsersInOrganization(search);
   }
 
-  public onUserChange(user: APIOrganizationUserResponseDTO | undefined | null) {
+  public onUserChange(user: OrganizationUserV2 | undefined | null) {
     this.userChange.emit(user);
   }
 }

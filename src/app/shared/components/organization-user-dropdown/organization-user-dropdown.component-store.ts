@@ -1,15 +1,19 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { APIOrganizationUserResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { APIV2OrganizationService } from 'src/app/api/v2';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, mergeMap, Observable, of } from 'rxjs';
+import { combineLatestWith, map, mergeMap, Observable, of } from 'rxjs';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { tapResponse } from '@ngrx/operators';
 import { NotificationService } from '../../services/notification.service';
+import {
+  adaptOrganizationUserV2,
+  OrganizationUserV2,
+} from '../../models/organization/organization-user/organization-user-v2.model';
 
 interface State {
-  users?: APIOrganizationUserResponseDTO[];
+  users?: OrganizationUserV2[];
   usersIsLoading: boolean;
 }
 
@@ -28,7 +32,7 @@ export class OrganizationUserDropdownComponentStore extends ComponentStore<State
   }
 
   private updateUsers = this.updater(
-    (state, users: APIOrganizationUserResponseDTO[]): State => ({
+    (state, users: OrganizationUserV2[]): State => ({
       ...state,
       users,
     })
@@ -49,6 +53,7 @@ export class OrganizationUserDropdownComponentStore extends ComponentStore<State
             nameOrEmailQuery: search,
           })
           .pipe(
+            map((users) => users.map((user) => adaptOrganizationUserV2(user))),
             tapResponse(
               (users) => this.updateUsers(users),
               (e) => {
