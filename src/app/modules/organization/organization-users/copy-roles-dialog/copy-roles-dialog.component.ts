@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { BehaviorSubject, first, map, Observable } from 'rxjs';
 import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { OrganizationUserDropdownComponent } from 'src/app/shared/components/organization-user-dropdown/organization-user-dropdown.component';
@@ -31,7 +32,7 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        this.selectedUser = undefined;
+        this.selectedUser$.next(undefined);
       })
     );
     this.disabledUuids = [this.user.Uuid];
@@ -39,10 +40,12 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
 
   public disabledUuids!: string[];
 
-  public selectedUser: APIOrganizationUserResponseDTO | undefined = undefined;
+  public selectedUser$: BehaviorSubject<APIOrganizationUserResponseDTO | undefined> = new BehaviorSubject<
+    APIOrganizationUserResponseDTO | undefined
+  >(undefined);
 
   public selectedUserChanged(user: APIOrganizationUserResponseDTO | undefined | null): void {
-    this.selectedUser = user ?? undefined;
+    this.selectedUser$.next(user ?? undefined);
   }
 
   public getSnackbarText(): string {
@@ -50,18 +53,20 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
   }
 
   public onCopyRoles(): void {
-    const selectedUser = this.selectedUser;
-    if (!selectedUser) return;
-    const request = this.getRequest(this.user);
-    this.isLoading = true;
-    this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.uuid, request));
+    this.selectedUser$.pipe(first()).subscribe((selectedUser) => {
+      if (!selectedUser) return;
+      const request = this.getRequest(this.user);
+      this.isLoading = true;
+      this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.uuid, request));
+    });
   }
 
-  public isUserSelected(): boolean {
-    return (
-      this.selectedUser !== undefined &&
-      this.dropdownComponent.value !== null &&
-      this.dropdownComponent.value !== undefined
+  public isUserSelected(): Observable<boolean> {
+    return this.selectedUser$.pipe(
+      map(
+        (user) =>
+          user !== undefined && this.dropdownComponent.value !== null && this.dropdownComponent.value !== undefined
+      )
     );
   }
 

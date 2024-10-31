@@ -50,7 +50,7 @@
           color="secondary"
           buttonStyle="secondary"
           (buttonClick)="onCopyRoles()"
-          [disabled]="!isUserSelected()"
+          [disabled]="((isUserSelected() | async) !== true)"
           i18n
           class="copy-roles-button"
         >
