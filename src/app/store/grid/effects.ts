@@ -38,6 +38,7 @@ export class GridExportEffects {
               case 'organization-user':
                 return of(OrganizationUserActions.getOrganizationUsers(odataString));
               case 'local-admin-organization':
+              case 'global-admin-organization':
                 return of(OrganizationActions.getOrganizations(odataString));
               default:
                 throw 'Grid Effects Excel export not implemented for entity type: ' + action.entityType;
