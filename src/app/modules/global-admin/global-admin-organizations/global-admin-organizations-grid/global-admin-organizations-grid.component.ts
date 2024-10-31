@@ -58,7 +58,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
   public readonly gridColumns$ = of(this.gridColumns);
 
   constructor(store: Store) {
-    super(store, 'local-admin-organization');
+    super(store, 'global-admin-organization');
   }
   ngOnInit() {
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
