@@ -1,10 +1,9 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, first, map, Observable } from 'rxjs';
 import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
-import { OrganizationUserDropdownComponent } from 'src/app/shared/components/organization-user-dropdown/organization-user-dropdown.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
@@ -18,7 +17,6 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 })
 export class CopyRolesDialogComponent extends RoleSelectionBaseComponent implements OnInit {
   @Input() user!: OrganizationUser;
-  @ViewChild(OrganizationUserDropdownComponent) dropdownComponent!: OrganizationUserDropdownComponent;
 
   constructor(private store: Store, selectionService: RoleSelectionService, actions$: Actions) {
     super(
@@ -62,12 +60,7 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
   }
 
   public isUserSelected(): Observable<boolean> {
-    return this.selectedUser$.pipe(
-      map(
-        (user) =>
-          user !== undefined && this.dropdownComponent.value !== null && this.dropdownComponent.value !== undefined
-      )
-    );
+    return this.selectedUser$.pipe(map((user) => user !== undefined));
   }
 
   public userHasAnyRight(): boolean {
