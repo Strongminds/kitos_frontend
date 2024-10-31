@@ -132,6 +132,7 @@ import { AccordionHeaderComponent } from './accordion-header/accordion-header.co
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { FileInputComponent } from './file-input/file-input.component';
 import { IconComponent } from './icon/icon.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { LocalGridComponent } from './local-grid/local-grid.component';
@@ -145,6 +146,7 @@ import { RoleTableContainerComponent } from './role-table/role-table-container/r
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { OrganizationUserDropdownComponent } from './organization-user-dropdown/organization-user-dropdown.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -264,6 +266,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LocalGridComponent,
     NavigationDrawerComponent,
     IconComponent,
+    OrganizationUserDropdownComponent,
+    FileInputComponent,
   ],
   imports: [
     CommonModule,
@@ -393,6 +397,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NavigationDrawerComponent,
     IconComponent,
     LocalGridComponent,
+    OrganizationUserDropdownComponent,
+    FileInputComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
