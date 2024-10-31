@@ -41,10 +41,6 @@ export abstract class RoleSelectionBaseComponent extends BaseComponent {
     return this.getSelectedUserRights().length > 0;
   }
 
-  public searchFn(search: string, user: OrganizationUser): boolean {
-    return user.Name.toLowerCase().includes(search.toLowerCase());
-  }
-
   protected getRequest(user: OrganizationUser): APIMutateUserRightsRequestDTO {
     const request = {
       unitRights: this.getRequestForType(user, 'organization-unit'),

@@ -1,14 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { selectAll } from 'src/app/store/organization/organization-user/selectors';
 
 @Component({
   selector: 'app-copy-roles-dialog',
@@ -40,12 +39,9 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     );
   }
 
-  public readonly users$: Observable<OrganizationUser[]> = this.store
-    .select(selectAll)
-    .pipe(map((users) => users.filter((user) => user.Uuid !== this.user.Uuid)));
-  public selectedUser: OrganizationUser | undefined = undefined;
+  public selectedUser: APIOrganizationUserResponseDTO | undefined = undefined;
 
-  public selectedUserChanged(user: OrganizationUser | undefined | null): void {
+  public selectedUserChanged(user: APIOrganizationUserResponseDTO | undefined | null): void {
     this.selectedUser = user ?? undefined;
   }
 
@@ -58,7 +54,7 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     if (!selectedUser) return;
     const request = this.getRequest(this.user);
     this.isLoading = true;
-    this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.Uuid, request));
+    this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.uuid, request));
   }
 
   public isUserSelected(): boolean {

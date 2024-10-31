@@ -1,15 +1,10 @@
 <app-scrollbar-dialog title="Kopier roller" i18n-title [nested]="true" [ngClass]="{'some-class': isAnySelected()}">
   <ng-container *ngIf="!isLoading">
     <app-standard-vertical-content-grid>
-      <app-dropdown
-        (valueChange)="selectedUserChanged($event)"
-        [data]="users$ | async"
-        textField="Name"
-        text="Kopier roller til"
-        i18n-text
-        [searchFn]="searchFn"
-      >
-      </app-dropdown>
+  
+      <app-organization-user-dropdown text="Kopier roller til" i18n-text (userChange)="selectedUserChanged($event)">
+
+      </app-organization-user-dropdown>
 
       <app-manage-user-role-table
         *ngIf="user.OrganizationUnitRights.length > 0"
