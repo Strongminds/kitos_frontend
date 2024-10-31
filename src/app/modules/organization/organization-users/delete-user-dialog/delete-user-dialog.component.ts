@@ -46,7 +46,7 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
+      this.actions$.pipe(ofType(OrganizationUserActions.transferRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
         this.selectedUser$.next(undefined);
       })
