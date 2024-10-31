@@ -3,7 +3,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
-import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
+import { OrganizationUserDropdownComponent } from 'src/app/shared/components/organization-user-dropdown/organization-user-dropdown.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
@@ -17,7 +17,7 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 })
 export class CopyRolesDialogComponent extends RoleSelectionBaseComponent implements OnInit {
   @Input() user!: OrganizationUser;
-  @ViewChild(DropdownComponent) dropdownComponent!: DropdownComponent<OrganizationUser>;
+  @ViewChild(OrganizationUserDropdownComponent) dropdownComponent!: OrganizationUserDropdownComponent;
 
   constructor(private store: Store, selectionService: RoleSelectionService, actions$: Actions) {
     super(
@@ -31,9 +31,6 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        if (this.dropdownComponent) {
-          this.dropdownComponent.clear();
-        }
         this.selectedUser = undefined;
       })
     );

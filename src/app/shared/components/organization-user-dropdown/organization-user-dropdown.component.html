@@ -2,6 +2,7 @@
   [text]="text ? text : 'Vælg bruger'"
   i18n-text
   valueField="name"
+  [(value)]="value"
   [data]="users$ | async"
   [loading]="usersIsLoading$ | async"
   (filterChange)="searchUsers($event)"

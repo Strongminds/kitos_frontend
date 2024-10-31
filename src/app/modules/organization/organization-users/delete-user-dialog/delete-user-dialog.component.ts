@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
-import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
+import { OrganizationUserDropdownComponent } from 'src/app/shared/components/organization-user-dropdown/organization-user-dropdown.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
 import { OrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -22,7 +22,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implements OnInit {
   @Input() user$!: Observable<OrganizationUser>;
   @Input() nested: boolean = false;
-  @ViewChild(DropdownComponent) dropdownComponent!: DropdownComponent<OrganizationUser>;
+  @ViewChild(OrganizationUserDropdownComponent) dropdownComponent!: OrganizationUserDropdownComponent;
 
   constructor(
     private store: Store,
@@ -46,9 +46,6 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        if (this.dropdownComponent) {
-          this.dropdownComponent.clear();
-        }
         this.selectedUser = undefined;
       })
     );
