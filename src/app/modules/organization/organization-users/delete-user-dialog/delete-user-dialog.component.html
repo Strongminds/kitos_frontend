@@ -15,7 +15,12 @@
       </app-paragraph>
 
       <ng-container *ngIf="hasRoles(user)">
-        <app-organization-user-dropdown (userChange)="selectedUserChanged($event)" text="Overfør roller til" i18n-text>
+        <app-organization-user-dropdown
+          (userChange)="selectedUserChanged($event)"
+          [disabledUuids]="(disabledUuids$ | async) ?? []"
+          text="Overfør roller til"
+          i18n-text
+        >
         </app-organization-user-dropdown>
 
         <app-manage-user-role-table

@@ -34,7 +34,10 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
         this.selectedUser = undefined;
       })
     );
+    this.disabledUuids = [this.user.Uuid];
   }
+
+  public disabledUuids!: string[];
 
   public selectedUser: APIOrganizationUserResponseDTO | undefined = undefined;
 

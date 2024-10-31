@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { APIOrganizationUserResponseDTO } from 'src/app/api/v2';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { OrganizationUserDropdownComponent } from 'src/app/shared/components/organization-user-dropdown/organization-user-dropdown.component';
@@ -40,6 +40,8 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
 
   public readonly organizationName$: Observable<string | undefined> = this.store.select(selectOrganizationName);
 
+  public disabledUuids$!: Observable<string[]>;
+
   public selectedUser: APIOrganizationUserResponseDTO | undefined = undefined;
 
   ngOnInit(): void {
@@ -49,6 +51,8 @@ export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implem
         this.selectedUser = undefined;
       })
     );
+
+    this.disabledUuids$ = this.user$.pipe(map((user) => [user.Uuid]));
   }
 
   public selectedUserChanged(user: APIOrganizationUserResponseDTO | undefined | null): void {
