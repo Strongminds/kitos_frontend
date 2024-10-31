@@ -7,7 +7,7 @@ export function adaptOrganizationUserV2(source: APIOrganizationUserResponseDTO):
     uuid: source.uuid,
     email: source.email,
     phone: source.phoneNumber,
-    name: `${source.firstName} ${source.lastName}`,
+    fullName: `${source.firstName} ${source.lastName}`,
   };
 }
 
@@ -17,5 +17,5 @@ export interface OrganizationUserV2 {
   email: string;
   phone?: string;
   uuid: string;
-  name: string;
+  fullName: string;
 }
