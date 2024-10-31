@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { combineLatestWith, mergeMap, Observable, of } from 'rxjs';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { tapResponse } from '@ngrx/operators';
+import { NotificationService } from '../../services/notification.service';
 
 interface State {
   users?: APIOrganizationUserResponseDTO[];
@@ -17,7 +18,11 @@ export class OrganizationUserDropdownComponentStore extends ComponentStore<State
   public readonly users$ = this.select((state) => state.users).pipe(filterNullish());
   public readonly usersIsLoading$ = this.select((state) => state.usersIsLoading);
 
-  constructor(private readonly organizationApiService: APIV2OrganizationService, private readonly store: Store) {
+  constructor(
+    private readonly organizationApiService: APIV2OrganizationService,
+    private readonly store: Store,
+    private notificationService: NotificationService
+  ) {
     super({ usersIsLoading: false });
     this.searchUsersInOrganization(of(undefined));
   }
@@ -46,7 +51,10 @@ export class OrganizationUserDropdownComponentStore extends ComponentStore<State
           .pipe(
             tapResponse(
               (users) => this.updateUsers(users),
-              (e) => console.error(e),
+              (e) => {
+                console.error(e);
+                this.notificationService.showError($localize`Kunne ikke hente organisations brugere`);
+              },
               () => this.updateUsersIsLoading(false)
             )
           );
