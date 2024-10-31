@@ -45,7 +45,7 @@ export class OrganizationsGridComponent extends BaseOverviewComponent implements
       extraData: organizationTypeOptions,
       hidden: false,
     },
-    {
+      {
       field: 'ForeignBusiness',
       title: $localize`Udenlandsk virksomhed`,
       section: this.sectionName,

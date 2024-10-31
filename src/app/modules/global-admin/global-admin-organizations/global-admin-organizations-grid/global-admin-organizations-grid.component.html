@@ -13,5 +13,10 @@
   [state]="gridState$ | async"
   [entityType]="globalAdminEntityType"
   (stateChange)="stateChange($event)"
+  [modifyPermission]="true"
+  [deletePermission]="true"
+  (modifyEvent)="onEditOrganization($event)"
+  (deleteEvent)="onDeleteOrganization($event)"
+
 >
 </app-grid>

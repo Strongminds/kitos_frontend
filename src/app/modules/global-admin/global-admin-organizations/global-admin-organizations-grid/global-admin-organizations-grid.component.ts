@@ -6,7 +6,7 @@ import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-s
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { organizationTypeOptions } from 'src/app/shared/models/organization/organization.model';
+import { Organization, organizationTypeOptions } from 'src/app/shared/models/organization/organization.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
@@ -78,5 +78,13 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
 
   public stateChange(gridState: GridState) {
     this.store.dispatch(OrganizationActions.updateGridState(gridState));
+  }
+
+  public onEditOrganization(organization: Organization) {
+    
+  }
+
+  public onDeleteOrganization(organization: Organization) {
+
   }
 }
