@@ -6,9 +6,9 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
-import { OrganizationActions } from 'src/app/store/organization/actions';
 
 export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
   switch (entityType) {

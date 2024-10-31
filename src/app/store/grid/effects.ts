@@ -8,9 +8,9 @@ import { ITContractActions } from '../it-contract/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from '../it-system/actions';
+import { OrganizationActions } from '../organization/actions';
 import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { GridExportActions } from './actions';
-import { OrganizationActions } from '../organization/actions';
 
 @Injectable()
 export class GridExportEffects {
