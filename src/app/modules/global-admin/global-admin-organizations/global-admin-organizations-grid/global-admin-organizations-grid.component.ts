@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
+import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { organizationTypeOptions } from 'src/app/shared/models/organization/organization.model';
@@ -52,6 +53,17 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       title: $localize`Udenlandsk virksomhed`,
       section: this.sectionName,
       hidden: false,
+    },
+    {
+      field: 'Actions',
+      title: ' ',
+      section: this.sectionName,
+      hidden: false,
+      style: 'action-buttons',
+      isSticky: true,
+      noFilter: true,
+      extraData: [{ type: 'edit' }, { type: 'delete' }] as GridActionColumn[],
+      width: 100,
     },
   ];
 
