@@ -10,7 +10,7 @@ import { User } from '../models/user.model';
 export class UserGuardService {
   constructor(private router: Router, private store: Store) {}
 
-  public canActivate(shouldUserBeAuthorized: (user: User) => boolean): Observable<boolean | UrlTree> {
+  public verifyAuthorization(shouldUserBeAuthorized: (user: User) => boolean): Observable<boolean | UrlTree> {
     return this.store.select(selectUser).pipe(
       map((user) => {
         if (user && shouldUserBeAuthorized(user)) {
