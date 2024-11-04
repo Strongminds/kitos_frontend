@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
@@ -14,6 +15,7 @@ import {
   selectOrganizationGridLoading,
   selectOrganizationGridState,
 } from 'src/app/store/organization/selectors';
+import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
 
 @Component({
   selector: 'app-global-admin-organizations-grid',
@@ -69,7 +71,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
 
   public readonly gridColumns$ = of(this.gridColumns);
 
-  constructor(store: Store) {
+  constructor(store: Store, private dialog: MatDialog) {
     super(store, 'global-admin-organization');
   }
   ngOnInit() {
@@ -80,11 +82,15 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
     this.store.dispatch(OrganizationActions.updateGridState(gridState));
   }
 
-  public onEditOrganization(organization: Organization) {
-    
+  public onEditOrganization(_: Organization) {
+
   }
 
-  public onDeleteOrganization(organization: Organization) {
+  public onDeleteOrganization(_: Organization) {
 
+  }
+
+  public onCreateOrganization() {
+    this.dialog.open(CreateOrganizationDialogComponent)
   }
 }
