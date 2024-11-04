@@ -4294,6 +4294,18 @@
       <trans-unit id="8164320094956220546" datatype="html">
         <source>Globale administratorer</source>
       </trans-unit>
+      <trans-unit id="1726345256529026369" datatype="html">
+        <source>CVR nummer</source>
+      </trans-unit>
+      <trans-unit id="2726957628797106493" datatype="html">
+        <source>Organisationens navn</source>
+      </trans-unit>
+      <trans-unit id="3812837223427328214" datatype="html">
+        <source>Rediger organisation</source>
+      </trans-unit>
+      <trans-unit id="6235190197968215704" datatype="html">
+        <source>Opret organisation</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

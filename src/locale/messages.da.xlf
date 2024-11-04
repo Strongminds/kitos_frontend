@@ -5651,6 +5651,22 @@
         <source>Hjælpetekster</source>
         <target state="new">Hjælpetekster</target>
       </trans-unit>
+      <trans-unit id="6235190197968215704" datatype="html">
+        <source>Opret organisation</source>
+        <target state="new">Opret organisation</target>
+      </trans-unit>
+      <trans-unit id="2726957628797106493" datatype="html">
+        <source>Organisationens navn</source>
+        <target state="new">Organisationens navn</target>
+      </trans-unit>
+      <trans-unit id="1726345256529026369" datatype="html">
+        <source>CVR nummer</source>
+        <target state="new">CVR nummer</target>
+      </trans-unit>
+      <trans-unit id="3812837223427328214" datatype="html">
+        <source>Rediger organisation</source>
+        <target state="new">Rediger organisation</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
