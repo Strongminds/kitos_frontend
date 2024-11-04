@@ -13,6 +13,7 @@ import {
 } from 'src/app/shared/models/organization/organization.model';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
+import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
@@ -25,7 +26,7 @@ export class EditOrganizationDialogComponent implements OnInit {
   public readonly organizationTypeOptions = organizationTypeOptions;
   public formGroup = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
-    cvr: new FormControl<string | undefined>(undefined),
+    cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCvr: new FormControl<string | undefined>(undefined),
   });

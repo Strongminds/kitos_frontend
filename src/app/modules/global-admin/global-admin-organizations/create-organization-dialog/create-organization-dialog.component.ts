@@ -9,6 +9,7 @@ import {
   OrganizationType,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization.model';
+import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 
 @Component({
@@ -20,7 +21,7 @@ export class CreateOrganizationDialogComponent {
   public readonly organizationTypeOptions = organizationTypeOptions;
   public formGroup = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
-    cvr: new FormControl<string | undefined>(undefined),
+    cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCvr: new FormControl<string | undefined>(undefined),
   });
