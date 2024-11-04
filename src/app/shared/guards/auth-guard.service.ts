@@ -8,6 +8,6 @@ export class AuthGuardService {
   constructor(private userGuardService: UserGuardService) {}
 
   canActivate(): Observable<boolean | UrlTree> {
-    return this.userGuardService.canActivate((_) => true);
+    return this.userGuardService.verifyAuthorization((_) => true);
   }
 }

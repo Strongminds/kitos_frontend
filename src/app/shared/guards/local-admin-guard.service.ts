@@ -8,6 +8,6 @@ export class LocalAdminGuardService implements CanActivate {
   constructor(private userGuardService: UserGuardService) {}
 
   canActivate(): Observable<boolean | UrlTree> {
-    return this.userGuardService.canActivate((user) => user.isLocalAdmin);
+    return this.userGuardService.verifyAuthorization((user) => user.isLocalAdmin);
   }
 }

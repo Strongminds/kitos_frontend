@@ -8,6 +8,6 @@ export class GlobalAdminGuardService implements CanActivate {
   constructor(private userGuardService: UserGuardService) {}
 
   canActivate(): Observable<boolean | UrlTree> {
-    return this.userGuardService.canActivate((user) => user.isGlobalAdmin);
+    return this.userGuardService.verifyAuthorization((user) => user.isGlobalAdmin);
   }
 }
