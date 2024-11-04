@@ -15,6 +15,7 @@ import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-oth
 import { GlobalAdminHelpTextsComponent } from './global-admin-help-texts/global-admin-help-texts.component';
 import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
 import { CreateOrganizationDialogComponent } from './global-admin-organizations/create-organization-dialog/create-organization-dialog.component';
+import { EditOrganizationDialogComponent } from './global-admin-organizations/edit-organization-dialog/edit-organization-dialog.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CreateOrganizationDialogComponent } from './global-admin-organizations/
     GlobalAdminHelpTextsComponent,
     GlobalAdminOrganizationsGridComponent,
     CreateOrganizationDialogComponent,
+    EditOrganizationDialogComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })
