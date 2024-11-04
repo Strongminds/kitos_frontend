@@ -4324,8 +4324,8 @@
       <trans-unit id="7673345037765032816" datatype="html">
         <source>organisationsenheder</source>
       </trans-unit>
-      <trans-unit id="7843941680333517057" datatype="html">
-        <source>Kunne ikke importere Excelarket</source>
+      <trans-unit id="7432199270217434187" datatype="html">
+        <source>Kunne ikke importere excel-arket</source>
       </trans-unit>
       <trans-unit id="801536030105611507" datatype="html">
         <source>Via Excel</source>
@@ -4333,8 +4333,8 @@
       <trans-unit id="848535043670651688" datatype="html">
         <source>Excelark til import af <x id="INTERPOLATION" equiv-text="{{ getEntityName() }}"/></source>
       </trans-unit>
-      <trans-unit id="8707180639932445169" datatype="html">
-        <source>Excelarket blev importeret</source>
+      <trans-unit id="1392114045066794470" datatype="html">
+        <source>Excel-arket blev importeret</source>
       </trans-unit>
       <trans-unit id="9140168255051013410" datatype="html">
         <source> Trin 1 - Hent og udfyld ark</source>

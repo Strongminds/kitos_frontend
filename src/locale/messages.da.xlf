@@ -5707,13 +5707,13 @@
         <source>Organisationsenheder</source>
         <target state="new">Organisationsenheder</target>
       </trans-unit>
-      <trans-unit id="8707180639932445169" datatype="html">
-        <source>Excelarket blev importeret</source>
-        <target state="new">Excelarket blev importeret</target>
+      <trans-unit id="1392114045066794470" datatype="html">
+        <source>Excel-arket blev importeret</source>
+        <target state="new">Excel-arket blev importeret</target>
       </trans-unit>
-      <trans-unit id="7843941680333517057" datatype="html">
-        <source>Kunne ikke importere Excelarket</source>
-        <target state="new">Kunne ikke importere Excelarket</target>
+      <trans-unit id="7432199270217434187" datatype="html">
+        <source>Kunne ikke importere excel-arket</source>
+        <target state="new">Kunne ikke importere excel-arket</target>
       </trans-unit>
     </body>
   </file>
