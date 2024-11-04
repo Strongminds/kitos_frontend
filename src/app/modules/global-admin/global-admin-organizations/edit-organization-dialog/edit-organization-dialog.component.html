@@ -1,1 +1,19 @@
-<p>edit-organization-dialog works!</p>
+<app-dialog title="Opret organisation" i18n-title>
+  <app-standard-vertical-content-grid>
+    <app-textbox text="Organisationens navn" i18n-text [formGroup]="formGroup" formName="name"></app-textbox>
+    <app-dropdown
+      text="Type"
+      [data]="organizationTypeOptions"
+      [clearable]="false"
+      [formGroup]="formGroup"
+      formName="organizationType"
+    ></app-dropdown>
+    <app-textbox text="CVR nummer" i18n-text [formGroup]="formGroup" formName="cvr"></app-textbox>
+    <app-textbox text="Udenlandsk virksomhed" i18n-text [formGroup]="formGroup" formName="foreignCvr"> </app-textbox>
+  </app-standard-vertical-content-grid>
+
+  <app-dialog-actions>
+    <app-button (buttonClick)="onEditOrganization()" [disabled]="!canSubmit()" i18n>Gem</app-button>
+    <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+  </app-dialog-actions>
+</app-dialog>

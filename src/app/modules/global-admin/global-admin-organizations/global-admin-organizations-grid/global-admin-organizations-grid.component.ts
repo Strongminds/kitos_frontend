@@ -16,6 +16,7 @@ import {
   selectOrganizationGridState,
 } from 'src/app/store/organization/selectors';
 import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
+import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
   selector: 'app-global-admin-organizations-grid',
@@ -82,15 +83,14 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
     this.store.dispatch(OrganizationActions.updateGridState(gridState));
   }
 
-  public onEditOrganization(_: Organization) {
-
+  public onEditOrganization(organization: Organization) {
+    const dialogRef = this.dialog.open(EditOrganizationDialogComponent);
+    dialogRef.componentInstance.organization = organization;
   }
 
-  public onDeleteOrganization(_: Organization) {
-
-  }
+  public onDeleteOrganization(_: Organization) {}
 
   public onCreateOrganization() {
-    this.dialog.open(CreateOrganizationDialogComponent)
+    this.dialog.open(CreateOrganizationDialogComponent);
   }
 }
