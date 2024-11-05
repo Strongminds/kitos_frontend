@@ -4,13 +4,14 @@ import { Actions, ofType } from '@ngrx/effects';
 import { filter } from 'rxjs';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 import { BaseComponent } from '../../base/base.component';
-import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
+import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 
 @Component({
   selector: 'app-global-option-type-table',
   templateUrl: './global-option-type-table.component.html',
   styleUrl: './global-option-type-table.component.scss',
+  providers: [GlobalOptionTypeTableComponentStore],
 })
 export class GlobalOptionTypeTableComponent extends BaseComponent implements OnInit {
   @Input() optionType!: GlobalAdminOptionType;
@@ -34,7 +35,10 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(GlobalOptionTypeActions.updateRegularOptionTypeSuccess),
+          ofType(
+            GlobalOptionTypeActions.updateRegularOptionTypeSuccess,
+            GlobalOptionTypeActions.createRegularOptionTypeSuccess
+          ),
           filter(({ optionType }) => optionType === this.optionType)
         )
         .subscribe(() => {
