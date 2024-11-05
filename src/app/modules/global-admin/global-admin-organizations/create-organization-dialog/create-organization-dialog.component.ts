@@ -4,6 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
+import { APIOrganizationCreateRequestDTO } from 'src/app/api/v2';
+import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import {
   defaultOrganizationType,
   OrganizationType,
@@ -38,19 +40,20 @@ export class CreateOrganizationDialogComponent {
     });
 
     const request = this.getRequest();
-    this.store.dispatch(OrganizationActions.createOrganization({ request }));
+    this.store.dispatch(OrganizationActions.createOrganization(request));
   }
 
   public onCancel(): void {
     this.dialogRef.close();
   }
 
-  private getRequest(): object {
+  private getRequest(): APIOrganizationCreateRequestDTO {
     const formValue = this.formGroup.value;
+    const type = formValue.organizationType ? formValue.organizationType : defaultOrganizationType;
     return {
-      name: formValue.name ?? undefined,
+      name: formValue.name ?? '',
       cvr: formValue.cvr ?? undefined,
-      organizationType: formValue.organizationType?.value ?? undefined,
+      type: mapOrgTypeToDtoType(type.value),
       foreignCvr: formValue.foreignCvr ?? undefined,
     };
   }

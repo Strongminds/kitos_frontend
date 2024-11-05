@@ -14,6 +14,8 @@ import {
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
+import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
+import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
@@ -52,7 +54,7 @@ export class EditOrganizationDialogComponent implements OnInit {
     });
 
     const request = this.getRequest();
-    this.store.dispatch(OrganizationActions.patchOrganization({ request }));
+    this.store.dispatch(OrganizationActions.patchOrganization(request));
   }
 
   public onCancel(): void {
@@ -63,12 +65,12 @@ export class EditOrganizationDialogComponent implements OnInit {
     return this.formGroup.valid && this.hasAnythingChanged();
   }
 
-  private getRequest(): object {
+  private getRequest(): APIOrganizationUpdateRequestDTO {
     const formValue = this.formGroup.value;
     return {
       name: formValue.name ?? undefined,
       cvr: formValue.cvr ?? undefined,
-      organizationType: formValue.organizationType?.value ?? undefined,
+      type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
       foreignCvr: formValue.foreignCvr ?? undefined,
     };
   }
