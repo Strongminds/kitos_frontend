@@ -4,8 +4,8 @@ import { Actions, ofType } from '@ngrx/effects';
 import { filter } from 'rxjs';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 import { BaseComponent } from '../../base/base.component';
-import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
 import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
+import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
 
 @Component({
   selector: 'app-global-option-type-table',
@@ -13,7 +13,7 @@ import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.
   styleUrl: './global-option-type-table.component.scss',
 })
 export class GlobalOptionTypeTableComponent extends BaseComponent implements OnInit {
-  @Input() optionType!: LocalAdminOptionType;
+  @Input() optionType!: GlobalAdminOptionType;
   @Input() title: string = '';
 
   constructor(
@@ -43,11 +43,11 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     );
   }
 
-  public onEdit(optionType: LocalAdminOptionTypeItem): void {
+  public onEdit(optionType: GlobalAdminOptionTypeItem): void {
     //todo open edit dialog
   }
 
-  public onDelete(optionType: LocalAdminOptionTypeItem): void {
+  public onDelete(optionType: GlobalAdminOptionTypeItem): void {
     //todo open delete dialog
   }
 }

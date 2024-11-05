@@ -15,10 +15,10 @@
       <tbody>
         <tr *ngFor="let optionTypeItem of optionTypeItems">
           <td>
-            <app-boolean-circle [value]="optionTypeItem.active"></app-boolean-circle>
+            <app-boolean-circle [value]="optionTypeItem.enabled"></app-boolean-circle>
           </td>
           <td>
-            <app-boolean-circle [value]="optionTypeItem.active"></app-boolean-circle>
+            <app-boolean-circle [value]="optionTypeItem.obligatory"></app-boolean-circle>
           </td>
           <td>{{ optionTypeItem.name }}</td>
           <td>

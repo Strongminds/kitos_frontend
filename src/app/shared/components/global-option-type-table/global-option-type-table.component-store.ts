@@ -4,13 +4,13 @@ import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { APIGlobalRegularOptionResponseDTO } from 'src/app/api/v2';
-import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
 import { GlobalAdminOptionTypeService } from '../../services/global-admin-option-type.service';
+import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
 
 interface State {
   isLoading: boolean;
-  optionTypeItems: LocalAdminOptionTypeItem[];
-  type: LocalAdminOptionType;
+  optionTypeItems: GlobalAdminOptionTypeItem[];
+  type: GlobalAdminOptionType;
 }
 
 @Injectable()
@@ -44,14 +44,15 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
     )
   );
 
-  private mapDtoToRegularOptionType(dto: APIGlobalRegularOptionResponseDTO): LocalAdminOptionTypeItem {
-    const item: LocalAdminOptionTypeItem = {
-      active: dto.isEnabled ?? false,
+  private mapDtoToRegularOptionType(dto: APIGlobalRegularOptionResponseDTO): GlobalAdminOptionTypeItem {
+    const item: GlobalAdminOptionTypeItem = {
+      enabled: dto.isEnabled ?? false,
       name: dto.name,
       writeAccess: false,
       description: dto.description,
       uuid: dto.uuid,
       obligatory: dto.isObligatory ?? false,
+      priority: dto.priority ?? 0,
     };
     return item;
   }
@@ -61,7 +62,7 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
   }
 
   private updateItems = this.updater(
-    (state: State, optionTypeItems: LocalAdminOptionTypeItem[]): State => ({
+    (state: State, optionTypeItems: GlobalAdminOptionTypeItem[]): State => ({
       ...state,
       optionTypeItems: optionTypeItems,
     })
