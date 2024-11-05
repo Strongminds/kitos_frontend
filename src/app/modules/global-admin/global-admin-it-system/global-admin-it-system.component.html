@@ -3,7 +3,7 @@
 <app-card>
   <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RegularOptionTypes">
     <app-standard-vertical-content-grid>
-      <app-global-option-type-table optionType="it-system_business-type" title="Forretningstyper" i18n-title>
+      <app-global-option-type-table optionType="it-system_business-type" title="Forretningstyper" i18n-title [expandedByDefault]="true">
 
       </app-global-option-type-table>
     </app-standard-vertical-content-grid>

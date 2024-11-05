@@ -23,14 +23,15 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
     super();
   }
 
-  public getRegularOptionTypeItems = this.effect<void>((trigger$) =>
+  public getOptionTypeItems = this.effect<void>((trigger$) =>
     trigger$.pipe(
       tap(() => this.updateIsLoading(true)),
       switchMap(() =>
-        this.getRegularOptionItems$().pipe(
+        this.getOptionItems$().pipe(
           map((items) => items.map(this.mapDtoToRegularOptionType)),
           tapResponse(
             (mappedItems) => {
+              this.sortByPriority(mappedItems);
               this.updateItems(mappedItems);
               this.updateIsLoading(false);
             },
@@ -43,6 +44,10 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
       )
     )
   );
+
+  private sortByPriority(items: GlobalAdminOptionTypeItem[]){
+    items.sort((a, b) => a.priority - b.priority);
+  }
 
   private mapDtoToRegularOptionType(dto: APIGlobalRoleOptionResponseDTO): GlobalAdminOptionTypeItem {
     const item: GlobalAdminOptionTypeItem = {
@@ -57,7 +62,7 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
     return item;
   }
 
-  private getRegularOptionItems$(): Observable<APIGlobalRoleOptionResponseDTO[]> {
+  private getOptionItems$(): Observable<APIGlobalRoleOptionResponseDTO[]> {
     return this.optionType$.pipe(switchMap((type) => this.globalOptionTypeService.getGlobalOptions(type)));
   }
 

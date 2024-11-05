@@ -1,5 +1,5 @@
 <ng-container *ngIf="optionTypeItems$ | async as optionTypeItems">
-  <app-accordion [title]="title">
+  <app-accordion [title]="title" [isExpandedByDefault]="expandedByDefault">
     <app-loading *ngIf="isLoading$ | async"></app-loading>
     <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">
       <thead>
@@ -20,6 +20,9 @@
           <td>
             <app-boolean-circle [value]="optionTypeItem.obligatory"></app-boolean-circle>
           </td>
+          <td>
+            TODO priority {{ optionTypeItem.priority }}
+          </td>
           <td>{{ optionTypeItem.name }}</td>
           <td>
             <app-boolean-circle [value]="optionTypeItem.writeAccess ?? false"></app-boolean-circle>
@@ -32,7 +35,7 @@
                   <app-pencil-icon></app-pencil-icon>
                 </app-icon-button>
                 <app-icon-button (buttonClick)="onDelete(optionTypeItem)">
-                  <app-x-icon></app-x-icon>
+                  <app-trashcan-icon></app-trashcan-icon>
                 </app-icon-button>
               </app-table-row-actions>
             </app-content-space-between>

@@ -16,6 +16,7 @@ import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.
 export class GlobalOptionTypeTableComponent extends BaseComponent implements OnInit {
   @Input() optionType!: GlobalAdminOptionType;
   @Input() title: string = '';
+  @Input() expandedByDefault: boolean = false;
 
   constructor(
     private componentStore: GlobalOptionTypeTableComponentStore,
@@ -30,7 +31,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
 
   public ngOnInit(): void {
     this.componentStore.setState({ isLoading: false, optionTypeItems: [], type: this.optionType });
-    this.componentStore.getRegularOptionTypeItems();
+    this.componentStore.getOptionTypeItems();
 
     this.subscriptions.add(
       this.actions$
@@ -42,7 +43,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
           filter(({ optionType }) => optionType === this.optionType)
         )
         .subscribe(() => {
-          this.componentStore.getRegularOptionTypeItems();
+          this.componentStore.getOptionTypeItems();
         })
     );
   }
