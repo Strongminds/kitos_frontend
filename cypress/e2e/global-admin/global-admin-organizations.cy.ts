@@ -25,9 +25,12 @@ describe('global-admin-organizations', () => {
     cy.getByDataCy('org-cvr').type('12345678');
     cy.getByDataCy('org-foreign-cvr').type('ja');
     cy.getByDataCy('create-org-dialog-button').click();
+
+    cy.wait('@createOrganization');
+    cy.get('app-popup-message').should('exist');
   });
 
   it('Can edit organization', () => {
-    
+
   });
 });
