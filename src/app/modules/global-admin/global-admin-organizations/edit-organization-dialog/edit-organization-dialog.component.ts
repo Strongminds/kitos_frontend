@@ -54,7 +54,7 @@ export class EditOrganizationDialogComponent implements OnInit {
     });
 
     const request = this.getRequest();
-    this.store.dispatch(OrganizationActions.patchOrganization(request));
+    this.store.dispatch(OrganizationActions.patchOrganization(request, this.organization.Uuid));
   }
 
   public onCancel(): void {

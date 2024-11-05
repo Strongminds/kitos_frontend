@@ -55,7 +55,7 @@ export const OrganizationActions = createActionGroup({
     'Patch UI Root Config success': props<{ uiRootConfig: UIRootConfig }>(),
     'Patch UI Root Config error': emptyProps(),
 
-    'Patch Organization': (request: APIOrganizationUpdateRequestDTO) => ({ request }),
+    'Patch Organization': (request: APIOrganizationUpdateRequestDTO, organizationUuid: string) => ({ request, organizationUuid }),
     'Patch Organization Success': emptyProps(),
     'Patch Organization Error': emptyProps(),
 
