@@ -6,7 +6,9 @@ import {
 } from 'src/app/api/v2';
 import { GlobalAdminOptionType } from '../models/options/global-admin-option-type.model';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root',
+})
 export class GlobalAdminOptionTypeService {
   constructor(
     @Inject(APIV2ItSystemGlobalBusinessTypesInternalINTERNALService)
