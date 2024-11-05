@@ -1,7 +1,7 @@
 import { RegularOptionType } from './regular-option-types.model';
 import { RoleOptionTypes } from './role-option-types.model';
 
-export interface AdminOptionTypeItem {
+export interface LocalAdminOptionTypeItem {
   uuid: string;
   active: boolean;
   name: string;
@@ -10,4 +10,4 @@ export interface AdminOptionTypeItem {
   obligatory: boolean;
 }
 
-export type AdminOptionType = RegularOptionType | RoleOptionTypes;
+export type LocalAdminOptionType = RegularOptionType | RoleOptionTypes;

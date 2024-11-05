@@ -2,7 +2,10 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { AdminOptionType, AdminOptionTypeItem } from 'src/app/shared/models/options/admin-option-type.model';
+import {
+  LocalAdminOptionType,
+  LocalAdminOptionTypeItem,
+} from 'src/app/shared/models/options/local-admin-option-type.model';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 
 @Component({
@@ -11,8 +14,8 @@ import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-t
   styleUrl: './edit-local-option-type-dialog.component.scss',
 })
 export class EditLocalOptionTypeDialogComponent implements OnInit {
-  @Input() optionTypeItem!: AdminOptionTypeItem;
-  @Input() optionType!: AdminOptionType;
+  @Input() optionTypeItem!: LocalAdminOptionTypeItem;
+  @Input() optionType!: LocalAdminOptionType;
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),

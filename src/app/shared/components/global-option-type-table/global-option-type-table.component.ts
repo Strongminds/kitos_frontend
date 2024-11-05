@@ -1,19 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AdminOptionType, AdminOptionTypeItem } from '../../models/options/admin-option-type.model';
-import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
-import { BaseComponent } from '../../base/base.component';
 import { filter } from 'rxjs';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
+import { BaseComponent } from '../../base/base.component';
+import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
+import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 
 @Component({
   selector: 'app-global-option-type-table',
   templateUrl: './global-option-type-table.component.html',
-  styleUrl: './global-option-type-table.component.scss'
+  styleUrl: './global-option-type-table.component.scss',
 })
-export class GlobalOptionTypeTableComponent extends BaseComponent implements OnInit{
-  @Input() optionType!: AdminOptionType;
+export class GlobalOptionTypeTableComponent extends BaseComponent implements OnInit {
+  @Input() optionType!: LocalAdminOptionType;
   @Input() title: string = '';
 
   constructor(
@@ -43,7 +43,11 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     );
   }
 
-  public onEdit(optionType: AdminOptionTypeItem): void {
+  public onEdit(optionType: LocalAdminOptionTypeItem): void {
     //todo open edit dialog
+  }
+
+  public onDelete(optionType: LocalAdminOptionTypeItem): void {
+    //todo open delete dialog
   }
 }

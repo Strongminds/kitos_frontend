@@ -1,16 +1,16 @@
-import { Injectable } from "@angular/core";
-import { AdminOptionType, AdminOptionTypeItem } from "../../models/options/admin-option-type.model";
-import { ComponentStore } from "@ngrx/component-store";
-import { Store } from "@ngrx/store";
-import { map, Observable, switchMap, tap } from "rxjs";
-import { tapResponse } from "@ngrx/operators";
-import { GlobalAdminOptionTypeService } from "../../services/global-admin-option-type.service";
-import { APIGlobalRegularOptionResponseDTO } from "src/app/api/v2";
+import { Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
+import { Store } from '@ngrx/store';
+import { map, Observable, switchMap, tap } from 'rxjs';
+import { APIGlobalRegularOptionResponseDTO } from 'src/app/api/v2';
+import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
+import { GlobalAdminOptionTypeService } from '../../services/global-admin-option-type.service';
 
 interface State {
   isLoading: boolean;
-  optionTypeItems: AdminOptionTypeItem[];
-  type: AdminOptionType;
+  optionTypeItems: LocalAdminOptionTypeItem[];
+  type: LocalAdminOptionType;
 }
 
 @Injectable()
@@ -44,8 +44,8 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
     )
   );
 
-  private mapDtoToRegularOptionType(dto: APIGlobalRegularOptionResponseDTO): AdminOptionTypeItem {
-    const item: AdminOptionTypeItem = {
+  private mapDtoToRegularOptionType(dto: APIGlobalRegularOptionResponseDTO): LocalAdminOptionTypeItem {
+    const item: LocalAdminOptionTypeItem = {
       active: dto.isEnabled ?? false,
       name: dto.name,
       writeAccess: false,
@@ -57,13 +57,11 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
   }
 
   private getRegularOptionItems$(): Observable<APIGlobalRegularOptionResponseDTO[]> {
-    return this.optionType$.pipe(
-            switchMap((type) => this.globalOptionTypeService.getGlobalRegularOptions(type))
-    );
+    return this.optionType$.pipe(switchMap((type) => this.globalOptionTypeService.getGlobalOptions(type)));
   }
 
   private updateItems = this.updater(
-    (state: State, optionTypeItems: AdminOptionTypeItem[]): State => ({
+    (state: State, optionTypeItems: LocalAdminOptionTypeItem[]): State => ({
       ...state,
       optionTypeItems: optionTypeItems,
     })

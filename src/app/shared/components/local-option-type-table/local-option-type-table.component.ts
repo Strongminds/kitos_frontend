@@ -4,7 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { filter } from 'rxjs';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 import { BaseComponent } from '../../base/base.component';
-import { AdminOptionType, AdminOptionTypeItem } from '../../models/options/admin-option-type.model';
+import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
 import { EditLocalOptionTypeDialogComponent } from './edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 import { LocalOptionTypeTableComponentStore } from './local-option-type-table.component-store';
 
@@ -15,7 +15,7 @@ import { LocalOptionTypeTableComponentStore } from './local-option-type-table.co
   providers: [LocalOptionTypeTableComponentStore],
 })
 export class LocalOptionTypeTableComponent extends BaseComponent implements OnInit {
-  @Input() optionType!: AdminOptionType;
+  @Input() optionType!: LocalAdminOptionType;
   @Input() expandedByDefault: boolean = false;
   @Input() title: string = '';
   @Input() disableAccordion: boolean = false;
@@ -51,7 +51,7 @@ export class LocalOptionTypeTableComponent extends BaseComponent implements OnIn
     );
   }
 
-  public onEdit(optionType: AdminOptionTypeItem): void {
+  public onEdit(optionType: LocalAdminOptionTypeItem): void {
     const dialogRef = this.dialog.open(EditLocalOptionTypeDialogComponent);
     dialogRef.componentInstance.optionTypeItem = optionType;
     dialogRef.componentInstance.optionType = this.optionType;

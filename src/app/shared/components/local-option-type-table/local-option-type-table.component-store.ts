@@ -5,14 +5,14 @@ import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { APILocalRoleOptionResponseDTO } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { AdminOptionType, AdminOptionTypeItem } from '../../models/options/admin-option-type.model';
+import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { LocalAdminOptionTypeService } from '../../services/local-admin-option-type.service';
 
 interface State {
   isLoading: boolean;
-  optionTypeItems: AdminOptionTypeItem[];
-  type: AdminOptionType;
+  optionTypeItems: LocalAdminOptionTypeItem[];
+  type: LocalAdminOptionType;
 }
 
 @Injectable()
@@ -26,7 +26,7 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
   }
 
   private updateItems = this.updater(
-    (state: State, optionTypeItems: AdminOptionTypeItem[]): State => ({
+    (state: State, optionTypeItems: LocalAdminOptionTypeItem[]): State => ({
       ...state,
       optionTypeItems: optionTypeItems,
     })
@@ -47,8 +47,8 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
     );
   }
 
-  private mapDtoToOptionType(dto: APILocalRoleOptionResponseDTO): AdminOptionTypeItem {
-    const item: AdminOptionTypeItem = {
+  private mapDtoToOptionType(dto: APILocalRoleOptionResponseDTO): LocalAdminOptionTypeItem {
+    const item: LocalAdminOptionTypeItem = {
       active: dto.isActive ?? false,
       name: dto.name,
       writeAccess: dto.writeAccess,

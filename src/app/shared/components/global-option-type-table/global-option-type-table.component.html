@@ -4,7 +4,9 @@
     <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">
       <thead>
         <tr>
-          <th i18n>Aktiv</th>
+          <th i18n>Tilgængelig</th>
+          <th i18n>Obligatorisk</th>
+          <th i18n>Prioritet</th>
           <th i18n>Navn</th>
           <th i18n>Skriv</th>
           <th i18n>Beskrivelse</th>
@@ -12,6 +14,9 @@
       </thead>
       <tbody>
         <tr *ngFor="let optionTypeItem of optionTypeItems">
+          <td>
+            <app-boolean-circle [value]="optionTypeItem.active"></app-boolean-circle>
+          </td>
           <td>
             <app-boolean-circle [value]="optionTypeItem.active"></app-boolean-circle>
           </td>
@@ -25,6 +30,9 @@
               <app-table-row-actions>
                 <app-icon-button (buttonClick)="onEdit(optionTypeItem)">
                   <app-pencil-icon></app-pencil-icon>
+                </app-icon-button>
+                <app-icon-button (buttonClick)="onDelete(optionTypeItem)">
+                  <app-x-icon></app-x-icon>
                 </app-icon-button>
               </app-table-row-actions>
             </app-content-space-between>
