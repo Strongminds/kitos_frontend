@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { BaseComponent } from '../../base/base.component';
 import { filter } from 'rxjs';
+import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 
 @Component({
   selector: 'app-global-option-type-table',
@@ -28,7 +29,18 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
 
   public ngOnInit(): void {
     this.componentStore.setState({ isLoading: false, optionTypeItems: [], type: this.optionType });
-    
+    this.componentStore.getRegularOptionTypeItems();
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(GlobalOptionTypeActions.updateRegularOptionTypeSuccess),
+          filter(({ optionType }) => optionType === this.optionType)
+        )
+        .subscribe(() => {
+          this.componentStore.getRegularOptionTypeItems();
+        })
+    );
   }
 
   public onEdit(optionType: AdminOptionTypeItem): void {
