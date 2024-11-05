@@ -2,24 +2,24 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { LocalOptionType, LocalOptionTypeItem } from 'src/app/shared/models/options/local-option-type.model';
+import { AdminOptionType, AdminOptionTypeItem } from 'src/app/shared/models/options/admin-option-type.model';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 
 @Component({
-  selector: 'app-edit-option-type-dialog',
-  templateUrl: './edit-option-type-dialog.component.html',
-  styleUrl: './edit-option-type-dialog.component.scss',
+  selector: 'app-edit-local-option-type-dialog',
+  templateUrl: './edit-local-option-type-dialog.component.html',
+  styleUrl: './edit-local-option-type-dialog.component.scss',
 })
-export class EditOptionTypeDialogComponent implements OnInit {
-  @Input() optionTypeItem!: LocalOptionTypeItem;
-  @Input() optionType!: LocalOptionType;
+export class EditLocalOptionTypeDialogComponent implements OnInit {
+  @Input() optionTypeItem!: AdminOptionTypeItem;
+  @Input() optionType!: AdminOptionType;
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),
     active: new FormControl<boolean | undefined>(undefined),
   });
 
-  constructor(private dialogRef: MatDialogRef<EditOptionTypeDialogComponent>, private store: Store) {}
+  constructor(private dialogRef: MatDialogRef<EditLocalOptionTypeDialogComponent>, private store: Store) {}
 
   public ngOnInit(): void {
     this.form.patchValue({

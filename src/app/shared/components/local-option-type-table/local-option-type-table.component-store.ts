@@ -5,18 +5,18 @@ import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
 import { APILocalRoleOptionResponseDTO } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { LocalOptionType, LocalOptionTypeItem } from '../../models/options/local-option-type.model';
+import { AdminOptionType, AdminOptionTypeItem } from '../../models/options/admin-option-type.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { LocalOptionTypeService } from '../../services/local-option-type.service';
 
 interface State {
   isLoading: boolean;
-  optionTypeItems: LocalOptionTypeItem[];
-  type: LocalOptionType;
+  optionTypeItems: AdminOptionTypeItem[];
+  type: AdminOptionType;
 }
 
 @Injectable()
-export class OptionTypeTableComponentStore extends ComponentStore<State> {
+export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
   public readonly optionTypeItems$ = this.select((state) => state.optionTypeItems);
   public readonly optionType$ = this.select((state) => state.type);
   public readonly isLoading$ = this.select((state) => state.isLoading);
@@ -26,7 +26,7 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
   }
 
   private updateItems = this.updater(
-    (state: State, optionTypeItems: LocalOptionTypeItem[]): State => ({
+    (state: State, optionTypeItems: AdminOptionTypeItem[]): State => ({
       ...state,
       optionTypeItems: optionTypeItems,
     })
@@ -47,8 +47,8 @@ export class OptionTypeTableComponentStore extends ComponentStore<State> {
     );
   }
 
-  private mapDtoToOptionType(dto: APILocalRoleOptionResponseDTO): LocalOptionTypeItem {
-    const item: LocalOptionTypeItem = {
+  private mapDtoToOptionType(dto: APILocalRoleOptionResponseDTO): AdminOptionTypeItem {
+    const item: AdminOptionTypeItem = {
       active: dto.isActive ?? false,
       name: dto.name,
       writeAccess: dto.writeAccess,
