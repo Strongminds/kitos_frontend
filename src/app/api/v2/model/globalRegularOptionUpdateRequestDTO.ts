@@ -11,20 +11,10 @@
  */
 
 
-export interface APIOrganizationCreateRequestDTO { 
-    name: string;
-    type: APIOrganizationCreateRequestDTO.TypeEnum;
-    cvr?: string;
-    foreignCvr?: string;
+export interface APIGlobalRegularOptionUpdateRequestDTO { 
+    isEnabled?: boolean;
+    name?: string;
+    isObligatory?: boolean;
+    description?: string;
 }
-export namespace APIOrganizationCreateRequestDTO {
-    export type TypeEnum = 'Municipality' | 'CommunityOfInterest' | 'Company' | 'OtherPublicAuthority';
-    export const TypeEnum = {
-        Municipality: 'Municipality' as TypeEnum,
-        CommunityOfInterest: 'CommunityOfInterest' as TypeEnum,
-        Company: 'Company' as TypeEnum,
-        OtherPublicAuthority: 'OtherPublicAuthority' as TypeEnum
-    };
-}
-
 
