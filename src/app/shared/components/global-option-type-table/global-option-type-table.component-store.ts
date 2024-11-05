@@ -3,9 +3,9 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { map, Observable, switchMap, tap } from 'rxjs';
-import { APIGlobalRegularOptionResponseDTO } from 'src/app/api/v2';
-import { GlobalAdminOptionTypeService } from '../../services/global-admin-option-type.service';
+import { APIGlobalRoleOptionResponseDTO } from 'src/app/api/v2';
 import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
+import { GlobalAdminOptionTypeService } from '../../services/global-admin-option-type.service';
 
 interface State {
   isLoading: boolean;
@@ -44,11 +44,11 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
     )
   );
 
-  private mapDtoToRegularOptionType(dto: APIGlobalRegularOptionResponseDTO): GlobalAdminOptionTypeItem {
+  private mapDtoToRegularOptionType(dto: APIGlobalRoleOptionResponseDTO): GlobalAdminOptionTypeItem {
     const item: GlobalAdminOptionTypeItem = {
       enabled: dto.isEnabled ?? false,
       name: dto.name,
-      writeAccess: false,
+      writeAccess: dto.writeAccess,
       description: dto.description,
       uuid: dto.uuid,
       obligatory: dto.isObligatory ?? false,
@@ -57,7 +57,7 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
     return item;
   }
 
-  private getRegularOptionItems$(): Observable<APIGlobalRegularOptionResponseDTO[]> {
+  private getRegularOptionItems$(): Observable<APIGlobalRoleOptionResponseDTO[]> {
     return this.optionType$.pipe(switchMap((type) => this.globalOptionTypeService.getGlobalOptions(type)));
   }
 
