@@ -7,7 +7,7 @@ import { APILocalRoleOptionResponseDTO } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { AdminOptionType, AdminOptionTypeItem } from '../../models/options/admin-option-type.model';
 import { filterNullish } from '../../pipes/filter-nullish';
-import { LocalOptionTypeService } from '../../services/local-option-type.service';
+import { LocalAdminOptionTypeService } from '../../services/local-admin-option-type.service';
 
 interface State {
   isLoading: boolean;
@@ -21,7 +21,7 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
   public readonly optionType$ = this.select((state) => state.type);
   public readonly isLoading$ = this.select((state) => state.isLoading);
 
-  constructor(private readonly store: Store, private localOptionTypeService: LocalOptionTypeService) {
+  constructor(private readonly store: Store, private localOptionTypeService: LocalAdminOptionTypeService) {
     super();
   }
 

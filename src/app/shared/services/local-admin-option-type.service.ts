@@ -39,7 +39,7 @@ import { AdminOptionType } from '../models/options/admin-option-type.model';
 @Injectable({
   providedIn: 'root',
 })
-export class LocalOptionTypeService implements OnDestroy {
+export class LocalAdminOptionTypeService implements OnDestroy {
   public subscriptions = new Subscription();
 
   constructor(
