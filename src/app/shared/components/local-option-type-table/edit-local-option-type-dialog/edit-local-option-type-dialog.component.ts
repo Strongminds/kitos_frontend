@@ -50,10 +50,10 @@ export class EditLocalOptionTypeDialogComponent implements OnInit {
   }
 
   public disableSaveButton(): boolean {
-    return !this.form.valid || !this.hasValuesChanged();
+    return !this.form.valid || !this.haveValuesChanged();
   }
 
-  private hasValuesChanged(): boolean {
+  private haveValuesChanged(): boolean {
     return this.hasDescriptionChanged() || this.hasActiveChanged();
   }
 

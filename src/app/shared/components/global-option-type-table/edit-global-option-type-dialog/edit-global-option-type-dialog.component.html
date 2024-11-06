@@ -1,16 +1,18 @@
 <app-dialog title="Rediger" i18n-title>
   <form [formGroup]="form">
     <app-standard-vertical-content-grid>
-      <app-textbox [disabled]="true" text="Navn" i18n-text [value]="optionTypeItem.name"></app-textbox>
+      <app-textbox
+       text="Navn"
+       i18n-text
+       [value]="form.value.name ?? undefined"></app-textbox>
       <app-checkbox
         *ngIf="!optionTypeItem.obligatory"
         [formGroup]="form"
         formName="active"
-        [value]="form.value.active ?? false"
+        [value]="form.value.obligatory ?? false"
         labelPosition="after"
-        text="Aktiv"
+        text="Obligatorisk"
         i18n-text
-        data-cy="active-checkbox"
       >
       </app-checkbox>
       <app-textarea
@@ -20,7 +22,6 @@
         formName="description"
         [value]="form.value.description ?? ''"
         class="text-area-margin-bottom"
-        data-cy="description-text-area"
       ></app-textarea>
     </app-standard-vertical-content-grid>
   </form>
