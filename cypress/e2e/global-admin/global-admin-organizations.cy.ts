@@ -19,7 +19,7 @@ describe('global-admin-organizations', () => {
       req.reply({ statusCode: 200, body: {} });
     }).as('createOrganization');
 
-    cy.getByDataCy('create-organization-button').click();
+    cy.getByDataCy('create-organization-button').scrollIntoView().click();
     cy.getByDataCy('org-name').type('Test Organization');
     cy.dropdownByCy('org-type', 'Virksomhed', true);
     cy.getByDataCy('org-cvr').type('12345678');
