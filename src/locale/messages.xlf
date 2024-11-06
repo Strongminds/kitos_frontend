@@ -3958,8 +3958,8 @@
       <trans-unit id="5097144162233589680" datatype="html">
         <source>Enheden blev opdateret</source>
       </trans-unit>
-      <trans-unit id="4100126813016547603" datatype="html">
-        <source>Organisationsroller i din orginsation</source>
+      <trans-unit id="303541399201403734" datatype="html">
+        <source>Organisationsroller i din organisation</source>
       </trans-unit>
       <trans-unit id="1665695847626369659" datatype="html">
         <source>Forretningstyper</source>
@@ -4341,6 +4341,18 @@
       </trans-unit>
       <trans-unit id="9155574452722521742" datatype="html">
         <source>brugere</source>
+      </trans-unit>
+      <trans-unit id="2166079637941616742" datatype="html">
+        <source>Organisationen kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="4203897629734325156" datatype="html">
+        <source>Organisationen blev oprettet</source>
+      </trans-unit>
+      <trans-unit id="4392124826360106905" datatype="html">
+        <source>Organisationen blev opdateret</source>
+      </trans-unit>
+      <trans-unit id="5749107076110806005" datatype="html">
+        <source>Organisationen kunne ikke oprettes</source>
       </trans-unit>
     </body>
   </file>
