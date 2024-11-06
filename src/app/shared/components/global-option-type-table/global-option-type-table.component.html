@@ -43,7 +43,7 @@
                 </app-icon-button>
                 <app-icon-button (buttonClick)="onToggleEnabled(optionTypeItem)">
                   <app-x-icon *ngIf="optionTypeItem.enabled"></app-x-icon>
-                  <app-plus-icon *ngIf="!optionTypeItem.enabled"></app-plus-icon>
+                  <app-check-icon *ngIf="!optionTypeItem.enabled"></app-check-icon>
                 </app-icon-button>
               </app-table-row-actions>
             </app-content-space-between>
