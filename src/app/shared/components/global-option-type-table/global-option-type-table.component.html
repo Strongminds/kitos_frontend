@@ -1,5 +1,8 @@
 <ng-container *ngIf="optionTypeItems$ | async as optionTypeItems">
   <app-accordion [title]="title" [isExpandedByDefault]="expandedByDefault">
+    <div style="display: flex; justify-content: flex-end;">
+          <app-button buttonStyle="primary" (buttonClick)="onCreate()" i18n> Opret type</app-button>
+    </div>
     <app-loading *ngIf="isLoading$ | async"></app-loading>
     <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">
       <thead>

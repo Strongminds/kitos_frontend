@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  APIGlobalRoleOptionCreateRequestDTO,
   APIGlobalRoleOptionResponseDTO,
   APIGlobalRoleOptionUpdateRequestDTO,
   APIV2ItSystemGlobalBusinessTypesInternalINTERNALService,
@@ -18,6 +19,10 @@ export class GlobalAdminOptionTypeService {
 
   public getGlobalOptions(optionType: GlobalAdminOptionType): Observable<Array<APIGlobalRoleOptionResponseDTO>> {
     return this.resolveGetGlobalOptionsEndpoint(optionType)();
+  }
+
+  public createGlobalOption(optionType: GlobalAdminOptionType, request: APIGlobalRoleOptionUpdateRequestDTO) {
+    return this.resolveCreateGlobalOptionEndpoint(optionType)(request);
   }
 
   public patchGlobalOption(
@@ -48,7 +53,19 @@ export class GlobalAdminOptionTypeService {
             dto: request,
           });
       default:
-        throw new Error(`Get operation is not supported for ${optionType}`);
+        throw new Error(`Patch operation is not supported for ${optionType}`);
+    }
+  }
+
+  private resolveCreateGlobalOptionEndpoint(optionType: GlobalAdminOptionType) {
+    switch (optionType) {
+      case 'it-system_business-type':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.businessTypeService.postSingleItSystemGlobalBusinessTypesInternalV2CreateBusinessType({
+            dto: request,
+          });
+      default:
+        throw new Error(`Create operation is not supported for ${optionType}`);
     }
   }
 }

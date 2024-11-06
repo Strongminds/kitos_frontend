@@ -15,9 +15,8 @@ export const GlobalOptionTypeActions = createActionGroup({
 
     'Create Regular Option Type': (
       optionType: LocalAdminOptionType,
-      optionUuid: string,
       request: APIGlobalRegularOptionCreateRequestDTO
-    ) => ({ optionType, optionUuid, request }),
+    ) => ({ optionType, request }),
     'Create Regular Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
     'Create Regular Option Type Error': () => emptyProps(),
   },

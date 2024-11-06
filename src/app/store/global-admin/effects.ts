@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, concatMap, groupBy, map, mergeMap, of } from 'rxjs';
+import { catchError, concatMap, groupBy, map, mergeMap, of, switchMap } from 'rxjs';
 import { GlobalAdminOptionTypeService } from 'src/app/shared/services/global-admin-option-type.service';
 import { GlobalOptionTypeActions } from './actions';
 
@@ -8,7 +8,7 @@ import { GlobalOptionTypeActions } from './actions';
 export class GlobalAdminOptionTypeEffects {
   constructor(private actions$: Actions, private globalOptionTypeService: GlobalAdminOptionTypeService) {}
 
-  patchOptionType$ = createEffect(() => {
+  patchGlobalOptionType$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(GlobalOptionTypeActions.updateRegularOptionType),
       groupBy((action) => action.optionUuid),
@@ -24,6 +24,18 @@ export class GlobalAdminOptionTypeEffects {
           })
         )
       )
+    );
+  });
+
+  createGlobalOptionType$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GlobalOptionTypeActions.createRegularOptionType),
+      switchMap((action) => {
+        return this.globalOptionTypeService.createGlobalOption(action.optionType, action.request).pipe(
+          map(() => GlobalOptionTypeActions.createRegularOptionTypeSuccess(action.optionType)),
+          catchError(() => of(GlobalOptionTypeActions.createRegularOptionTypeError()))
+        );
+      })
     );
   });
 }

@@ -1,0 +1,34 @@
+<app-dialog title="Rediger" i18n-title>
+  <form [formGroup]="form">
+    <app-standard-vertical-content-grid>
+      <app-textbox
+       text="Navn"
+       i18n-text
+       [formGroup]="form"
+       formName="name"
+       [value]="form.value.name ?? undefined"
+       ></app-textbox>
+      <app-checkbox
+        [formGroup]="form"
+        formName="obligatory"
+        [value]="form.value.obligatory ?? false"
+        labelPosition="after"
+        text="Obligatorisk"
+        i18n-text
+      >
+      </app-checkbox>
+      <app-textarea
+        text="Beskrivelse"
+        i18n-text
+        [formGroup]="form"
+        formName="description"
+        [value]="form.value.description ?? ''"
+        class="text-area-margin-bottom"
+      ></app-textarea>
+    </app-standard-vertical-content-grid>
+  </form>
+  <app-dialog-actions>
+    <app-button (buttonClick)="onSave()" [disabled]="disableCreateButton()" i18n> Gem </app-button>
+    <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n> Annuller </app-button>
+  </app-dialog-actions>
+</app-dialog>

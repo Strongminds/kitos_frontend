@@ -8,6 +8,7 @@ import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/o
 import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 import { Store } from '@ngrx/store';
 import { EditGlobalOptionTypeDialogComponent } from './edit-global-option-type-dialog/edit-global-option-type-dialog.component';
+import { CreateGlobalOptionTypeDialogComponent } from './create-global-option-type-dialog/create-global-option-type-dialog.component';
 
 @Component({
   selector: 'app-global-option-type-table',
@@ -54,6 +55,11 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   public onEdit(optionTypeItem: GlobalAdminOptionTypeItem): void {
     const dialogRef = this.dialog.open(EditGlobalOptionTypeDialogComponent);
     dialogRef.componentInstance.optionTypeItem = optionTypeItem;
+    dialogRef.componentInstance.optionType = this.optionType;
+  }
+
+  public onCreate(){
+    const dialogRef = this.dialog.open(CreateGlobalOptionTypeDialogComponent);
     dialogRef.componentInstance.optionType = this.optionType;
   }
 
