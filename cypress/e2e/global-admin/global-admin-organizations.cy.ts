@@ -24,8 +24,7 @@ describe('global-admin-organizations', () => {
     cy.dropdownByCy('org-type', 'Virksomhed', true);
     cy.getByDataCy('org-cvr').type('12345678');
     cy.getByDataCy('org-foreign-cvr').type('ja');
-    cy.wait(500);
-    cy.getByDataCy('create-org-dialog-button').click();
+    cy.getByDataCy('create-org-dialog-button').click({ force: true });
 
     cy.wait('@createOrganization');
     cy.get('app-popup-message').should('exist');
@@ -46,8 +45,7 @@ describe('global-admin-organizations', () => {
     cy.dropdownByCy('org-type', 'Interessefællesskab', true);
     cy.getByDataCy('org-cvr').clear().type('87654321');
     cy.getByDataCy('org-foreign-cvr').clear().type('nej');
-    cy.wait(500);
-    cy.getByDataCy('edit-org-dialog-button').click();
+    cy.getByDataCy('edit-org-dialog-button').click({force: true});
 
     cy.wait('@editOrganization');
     cy.get('app-popup-message').should('exist');
