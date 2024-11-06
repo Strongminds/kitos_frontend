@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
   templateUrl: './edit-global-option-type-dialog.component.html',
   styleUrl: './edit-global-option-type-dialog.component.scss',
 })
-export class EditGlobalOptionTypeDialogComponent {
+export class EditGlobalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;
   @Input() optionType!: GlobalAdminOptionType;
 

@@ -4,11 +4,13 @@
       <app-textbox
        text="Navn"
        i18n-text
-       [value]="form.value.name ?? undefined"></app-textbox>
+       [formGroup]="form"
+       formName="name"
+       [value]="form.value.name ?? undefined"
+       ></app-textbox>
       <app-checkbox
-        *ngIf="!optionTypeItem.obligatory"
         [formGroup]="form"
-        formName="active"
+        formName="obligatory"
         [value]="form.value.obligatory ?? false"
         labelPosition="after"
         text="Obligatorisk"
