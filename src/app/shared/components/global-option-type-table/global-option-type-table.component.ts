@@ -60,10 +60,14 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   }
 
   public onIncreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
-    //todo increase priority
+    this.onChangePriority(optionTypeItem.uuid, optionTypeItem.priority + 1);
   }
 
   public onDecreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
-    //todo decrease priority
+    this.onChangePriority(optionTypeItem.uuid, optionTypeItem.priority - 1);
+  }
+
+  private onChangePriority(optionUuid: string, newPriority: number): void {
+    //this.store.dispatch(GlobalOptionTypeActions.updateRegularOptionType(this.optionType, optionUuid, { priority: newPriority }));
   }
 }
