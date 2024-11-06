@@ -59,7 +59,7 @@ export class APIExcelService {
   }
 
   public postExcelWithFormData(
-    requestParameters: any,
+    requestParameters: PostSingleExcelOrgUnitsRequestParameters,
     type: LocalAdminImportEntityType
   ): Observable<any> {
     const entityName = this.getEntityName(type);
@@ -97,7 +97,7 @@ export class APIExcelService {
   }
 
   private postSingleExcelInternalV2PostByEntityName(
-    requestParameters: any,
+    requestParameters: PostSingleExcelOrgUnitsRequestParameters,
     entityName: string
   ): Observable<any> {
     const organizationUuid = requestParameters.organizationUuid;
@@ -200,4 +200,10 @@ export class APIExcelService {
         throw new Error('Invalid type');
     }
   }
+}
+
+export interface PostSingleExcelOrgUnitsRequestParameters {
+  organizationUuid: string;
+  importOrgUnits: boolean;
+  body: FormData;
 }
