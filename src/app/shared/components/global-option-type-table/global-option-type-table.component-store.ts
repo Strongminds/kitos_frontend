@@ -46,7 +46,7 @@ export class GlobalOptionTypeTableComponentStore extends ComponentStore<State> {
   );
 
   private sortByPriority(items: GlobalAdminOptionTypeItem[]){
-    items.sort((a, b) => a.priority - b.priority);
+    items.sort((a, b) => b.priority - a.priority);
   }
 
   private mapDtoToRegularOptionType(dto: APIGlobalRoleOptionResponseDTO): GlobalAdminOptionTypeItem {

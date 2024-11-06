@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
-import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
-import { Store } from '@ngrx/store';
-import { EditGlobalOptionTypeDialogComponent } from './edit-global-option-type-dialog/edit-global-option-type-dialog.component';
 import { CreateGlobalOptionTypeDialogComponent } from './create-global-option-type-dialog/create-global-option-type-dialog.component';
+import { EditGlobalOptionTypeDialogComponent } from './edit-global-option-type-dialog/edit-global-option-type-dialog.component';
+import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 
 @Component({
   selector: 'app-global-option-type-table',
@@ -58,14 +58,16 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     dialogRef.componentInstance.optionType = this.optionType;
   }
 
-  public onCreate(){
+  public onCreate() {
     const dialogRef = this.dialog.open(CreateGlobalOptionTypeDialogComponent);
     dialogRef.componentInstance.optionType = this.optionType;
   }
 
   public onToggleEnabled(optionTypeItem: GlobalAdminOptionTypeItem): void {
     const isEnabled = !optionTypeItem.enabled;
-    this.store.dispatch(GlobalOptionTypeActions.updateRegularOptionType(this.optionType, optionTypeItem.uuid, { isEnabled }));
+    this.store.dispatch(
+      GlobalOptionTypeActions.updateRegularOptionType(this.optionType, optionTypeItem.uuid, { isEnabled })
+    );
   }
 
   public onIncreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
@@ -77,6 +79,8 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   }
 
   private onChangePriority(optionUuid: string, newPriority: number): void {
-    //this.store.dispatch(GlobalOptionTypeActions.updateRegularOptionType(this.optionType, optionUuid, { priority: newPriority }));
+    this.store.dispatch(
+      GlobalOptionTypeActions.updateRegularOptionType(this.optionType, optionUuid, { priority: newPriority })
+    );
   }
 }
