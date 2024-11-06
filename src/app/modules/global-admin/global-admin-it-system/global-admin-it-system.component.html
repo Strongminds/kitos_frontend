@@ -8,4 +8,16 @@
       </app-global-option-type-table>
     </app-standard-vertical-content-grid>
   </ng-container>
+
+  <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RoleOptionTypes">
+    <app-standard-vertical-content-grid>
+      <app-global-option-type-table optionType="it-system-usage"
+      [disableAccordion]="true"
+      [expandedByDefault]="true"
+      createButtonLabel="role"
+      [showWriteAccess]="true"
+      >
+      </app-global-option-type-table>
+    </app-standard-vertical-content-grid>
+  </ng-container>
 </app-card>

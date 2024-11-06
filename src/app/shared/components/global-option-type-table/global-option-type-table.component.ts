@@ -20,6 +20,9 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   @Input() optionType!: GlobalAdminOptionType;
   @Input() title: string = '';
   @Input() expandedByDefault: boolean = false;
+  @Input() disableAccordion: boolean = false;
+  @Input() createButtonLabel: "role" | "type" = "type";
+  @Input() showWriteAccess: boolean = false;
 
   constructor(
     private componentStore: GlobalOptionTypeTableComponentStore,
@@ -76,6 +79,10 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
 
   public onDecreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
     this.onChangePriority(optionTypeItem.uuid, optionTypeItem.priority - 1);
+  }
+
+  public getCreateButtonType(){
+    return this.createButtonLabel === "role" ? $localize`rolle` : $localize`type`;
   }
 
   private onChangePriority(optionUuid: string, newPriority: number): void {

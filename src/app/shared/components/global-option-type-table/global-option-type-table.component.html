@@ -1,7 +1,7 @@
 <ng-container *ngIf="optionTypeItems$ | async as optionTypeItems">
-  <app-accordion [title]="title" [isExpandedByDefault]="expandedByDefault">
+  <app-accordion [title]="title" [disabled]="disableAccordion" [isExpandedByDefault]="expandedByDefault">
     <div style="display: flex; justify-content: flex-end;">
-          <app-button buttonStyle="primary" (buttonClick)="onCreate()" i18n> Opret type</app-button>
+          <app-button buttonStyle="primary" (buttonClick)="onCreate()" i18n> Opret {{ getCreateButtonType() }}</app-button>
     </div>
     <app-loading *ngIf="isLoading$ | async"></app-loading>
     <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">
@@ -11,7 +11,7 @@
           <th i18n>Obligatorisk</th>
           <th i18n>Prioritet</th>
           <th i18n>Navn</th>
-          <th i18n>Skriv</th>
+          <th *ngIf="showWriteAccess" i18n>Skriv</th>
           <th i18n>Beskrivelse</th>
         </tr>
       </thead>
@@ -34,13 +34,13 @@
             </div>
           </td>
           <td>{{ optionTypeItem.name }}</td>
-          <td>
+          <td *ngIf="showWriteAccess">
             <app-boolean-circle [value]="optionTypeItem.writeAccess ?? false"></app-boolean-circle>
           </td>
-          <td>
+          <td class="td-padding-right">
             <app-content-space-between>
               <app-paragraph i18n> {{ optionTypeItem.description }} </app-paragraph>
-              <app-table-row-actions>
+              <app-table-row-actions class="td-padding-right">
                 <app-icon-button (buttonClick)="onEdit(optionTypeItem)">
                   <app-pencil-icon></app-pencil-icon>
                 </app-icon-button>
