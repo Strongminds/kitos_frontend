@@ -37,10 +37,10 @@
           <td *ngIf="showWriteAccess">
             <app-boolean-circle [value]="optionTypeItem.writeAccess ?? false"></app-boolean-circle>
           </td>
-          <td class="td-padding-right">
+          <td>
             <app-content-space-between>
               <app-paragraph i18n> {{ optionTypeItem.description }} </app-paragraph>
-              <app-table-row-actions class="td-padding-right">
+              <app-table-row-actions>
                 <app-icon-button (buttonClick)="onEdit(optionTypeItem)">
                   <app-pencil-icon></app-pencil-icon>
                 </app-icon-button>

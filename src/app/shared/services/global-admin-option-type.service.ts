@@ -5,6 +5,7 @@ import {
   APIGlobalRoleOptionResponseDTO,
   APIGlobalRoleOptionUpdateRequestDTO,
   APIV2ItSystemGlobalBusinessTypesInternalINTERNALService,
+  APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
 import { GlobalAdminOptionType } from '../models/options/global-admin-option-type.model';
 
@@ -14,7 +15,9 @@ import { GlobalAdminOptionType } from '../models/options/global-admin-option-typ
 export class GlobalAdminOptionTypeService {
   constructor(
     @Inject(APIV2ItSystemGlobalBusinessTypesInternalINTERNALService)
-    private businessTypeService: APIV2ItSystemGlobalBusinessTypesInternalINTERNALService
+    private businessTypeService: APIV2ItSystemGlobalBusinessTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService)
+    private itSystemRoleService: APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public getGlobalOptions(optionType: GlobalAdminOptionType): Observable<Array<APIGlobalRoleOptionResponseDTO>> {
@@ -39,6 +42,8 @@ export class GlobalAdminOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return () => this.businessTypeService.getManyItSystemGlobalBusinessTypesInternalV2GetBusinessTypes();
+      case 'it-system-usage':
+        return () => this.itSystemRoleService.getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles();
       default:
         throw new Error(`Get operation is not supported for ${optionType}`);
     }
@@ -47,11 +52,16 @@ export class GlobalAdminOptionTypeService {
   private resolvePatchGlobalOptionEndpoint(optionType: GlobalAdminOptionType) {
     switch (optionType) {
       case 'it-system_business-type':
-        return (optionUuid: string, request: APIGlobalRoleOptionUpdateRequestDTO) =>
+        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.businessTypeService.patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessType({
             optionUuid,
-            dto: request,
+            dto,
           });
+      case 'it-system-usage':
+        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) => this.itSystemRoleService.patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole({
+          optionUuid,
+          dto,
+        });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }

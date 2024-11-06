@@ -21,7 +21,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   @Input() title: string = '';
   @Input() expandedByDefault: boolean = false;
   @Input() disableAccordion: boolean = false;
-  @Input() createButtonLabel: "role" | "type" = "type";
+  @Input() optionCategory: "role" | "regular" = "regular";
   @Input() showWriteAccess: boolean = false;
 
   constructor(
@@ -82,7 +82,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   }
 
   public getCreateButtonType(){
-    return this.createButtonLabel === "role" ? $localize`rolle` : $localize`type`;
+    return this.optionCategory === "role" ? $localize`rolle` : $localize`type`;
   }
 
   private onChangePriority(optionUuid: string, newPriority: number): void {
