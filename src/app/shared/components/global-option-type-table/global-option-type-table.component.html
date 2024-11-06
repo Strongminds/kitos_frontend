@@ -22,10 +22,10 @@
           </td>
           <td>
             <div class="priority-div">
-                <app-icon-button (buttonClick)="onEdit(optionTypeItem)">
+                <app-icon-button (buttonClick)="onIncreasePriority(optionTypeItem)">
                   <app-arrow-up-icon></app-arrow-up-icon>
                 </app-icon-button>
-                <app-icon-button (buttonClick)="onDelete(optionTypeItem)">
+                <app-icon-button (buttonClick)="onDecreasePriority(optionTypeItem)">
                   <app-arrow-down-icon></app-arrow-down-icon>
                 </app-icon-button>
             </div>
@@ -41,8 +41,9 @@
                 <app-icon-button (buttonClick)="onEdit(optionTypeItem)">
                   <app-pencil-icon></app-pencil-icon>
                 </app-icon-button>
-                <app-icon-button (buttonClick)="onDelete(optionTypeItem)">
-                  <app-trashcan-icon></app-trashcan-icon>
+                <app-icon-button (buttonClick)="onToggleEnabled(optionTypeItem)">
+                  <app-x-icon *ngIf="optionTypeItem.enabled"></app-x-icon>
+                  <app-plus-icon *ngIf="!optionTypeItem.enabled"></app-plus-icon>
                 </app-icon-button>
               </app-table-row-actions>
             </app-content-space-between>

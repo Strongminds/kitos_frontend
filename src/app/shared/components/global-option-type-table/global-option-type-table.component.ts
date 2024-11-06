@@ -6,6 +6,7 @@ import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
 import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-global-option-type-table',
@@ -21,7 +22,8 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   constructor(
     private componentStore: GlobalOptionTypeTableComponentStore,
     private dialog: MatDialog,
-    private actions$: Actions
+    private actions$: Actions,
+    private store: Store
   ) {
     super();
   }
@@ -52,8 +54,9 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     //todo open edit dialog
   }
 
-  public onDelete(optionTypeItem: GlobalAdminOptionTypeItem): void {
-    //todo open delete dialog
+  public onToggleEnabled(optionTypeItem: GlobalAdminOptionTypeItem): void {
+    const isEnabled = !optionTypeItem.enabled;
+    this.store.dispatch(GlobalOptionTypeActions.updateRegularOptionType(this.optionType, optionTypeItem.uuid, { isEnabled }));
   }
 
   public onIncreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
