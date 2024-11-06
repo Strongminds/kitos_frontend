@@ -48,11 +48,19 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     );
   }
 
-  public onEdit(optionType: GlobalAdminOptionTypeItem): void {
+  public onEdit(optionTypeItem: GlobalAdminOptionTypeItem): void {
     //todo open edit dialog
   }
 
-  public onDelete(optionType: GlobalAdminOptionTypeItem): void {
+  public onDelete(optionTypeItem: GlobalAdminOptionTypeItem): void {
     //todo open delete dialog
+  }
+
+  public onIncreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
+    //todo increase priority
+  }
+
+  public onDecreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
+    //todo decrease priority
   }
 }

@@ -21,7 +21,14 @@
             <app-boolean-circle [value]="optionTypeItem.obligatory"></app-boolean-circle>
           </td>
           <td>
-            TODO priority {{ optionTypeItem.priority }}
+            <div class="priority-div">
+                <app-icon-button (buttonClick)="onEdit(optionTypeItem)">
+                  <app-arrow-up-icon></app-arrow-up-icon>
+                </app-icon-button>
+                <app-icon-button (buttonClick)="onDelete(optionTypeItem)">
+                  <app-arrow-down-icon></app-arrow-down-icon>
+                </app-icon-button>
+            </div>
           </td>
           <td>{{ optionTypeItem.name }}</td>
           <td>
