@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationCreateRequestDTO } from 'src/app/api/v2';
 import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import {
@@ -19,7 +19,7 @@ import { OrganizationActions } from 'src/app/store/organization/actions';
   templateUrl: './create-organization-dialog.component.html',
   styleUrl: './create-organization-dialog.component.scss',
 })
-export class CreateOrganizationDialogComponent {
+export class CreateOrganizationDialogComponent implements OnInit {
   public readonly organizationTypeOptions = organizationTypeOptions;
   public formGroup = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
@@ -28,11 +28,21 @@ export class CreateOrganizationDialogComponent {
     foreignCvr: new FormControl<string | undefined>(undefined),
   });
 
+  public isLoading$ = new BehaviorSubject<boolean>(false);
+
   constructor(
     private dialogRef: MatDialogRef<CreateOrganizationDialogComponent>,
     private store: Store,
     private actions$: Actions
   ) {}
+
+  public ngOnInit(): void {
+    this.actions$
+      .pipe(ofType(OrganizationActions.createOrganizationSuccess, OrganizationActions.createOrganizationError))
+      .subscribe(() => {
+        this.isLoading$.next(false);
+      });
+  }
 
   public onCreateOrganization(): void {
     this.actions$.pipe(ofType(OrganizationActions.createOrganizationSuccess), first()).subscribe(() => {
@@ -40,6 +50,7 @@ export class CreateOrganizationDialogComponent {
     });
 
     const request = this.getRequest();
+    this.isLoading$.next(true);
     this.store.dispatch(OrganizationActions.createOrganization(request));
   }
 

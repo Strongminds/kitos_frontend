@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { BehaviorSubject, first } from 'rxjs';
 import {
   defaultOrganizationType,
   getOrganizationType,
@@ -25,6 +25,7 @@ import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.he
 export class EditOrganizationDialogComponent implements OnInit {
   @Input() organization!: Organization;
 
+  public isLoading$ = new BehaviorSubject<boolean>(false);
   public readonly organizationTypeOptions = organizationTypeOptions;
   public formGroup = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
@@ -46,6 +47,12 @@ export class EditOrganizationDialogComponent implements OnInit {
       foreignCvr: this.organization.ForeignBusiness,
       organizationType: getOrganizationType(this.organization.OrganizationType) ?? defaultOrganizationType,
     });
+
+    this.actions$
+      .pipe(ofType(OrganizationActions.patchOrganizationSuccess, OrganizationActions.patchOrganizationError))
+      .subscribe(() => {
+        this.isLoading$.next(false);
+      });
   }
 
   public onEditOrganization(): void {
@@ -54,6 +61,7 @@ export class EditOrganizationDialogComponent implements OnInit {
     });
 
     const request = this.getRequest();
+    this.isLoading$.next(true);
     this.store.dispatch(OrganizationActions.patchOrganization(request, this.organization.Uuid));
   }
 
