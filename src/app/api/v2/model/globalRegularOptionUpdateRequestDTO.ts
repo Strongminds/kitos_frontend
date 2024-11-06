@@ -16,5 +16,6 @@ export interface APIGlobalRegularOptionUpdateRequestDTO {
     name?: string;
     isObligatory?: boolean;
     description?: string;
+    priority?: number;
 }
 

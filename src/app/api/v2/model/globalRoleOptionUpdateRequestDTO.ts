@@ -17,5 +17,6 @@ export interface APIGlobalRoleOptionUpdateRequestDTO {
     name?: string;
     isObligatory?: boolean;
     description?: string;
+    priority?: number;
 }
 
