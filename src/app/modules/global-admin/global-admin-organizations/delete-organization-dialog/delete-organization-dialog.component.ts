@@ -61,7 +61,7 @@ export class DeleteOrganizationDialogComponent implements OnInit {
   }
 
   public getTitle(): string {
-    return $localize`Slet` + ' "' + this.organization.Name + '"';
+    return $localize`Slet` + ` "${this.organization.Name}"`;
   }
 
   public canSubmit(): Observable<boolean> {

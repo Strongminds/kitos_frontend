@@ -6,7 +6,7 @@
     </ng-container>
     <ng-container *ngIf="(hasRemovalConflicts() | async) === true">
       <app-standard-vertical-content-grid>
-        <app-removal-conflict-table [removalConflicts$]="contractConflicts$" type="contracts">
+        <app-removal-conflict-table [removalConflicts$]="contractConflicts$" type="contracts" [organizationName]="organization.Name">
         </app-removal-conflict-table>
       </app-standard-vertical-content-grid>
       <app-checkbox

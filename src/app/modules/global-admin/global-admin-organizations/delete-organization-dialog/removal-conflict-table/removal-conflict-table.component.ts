@@ -8,12 +8,13 @@ import { Observable } from 'rxjs';
 })
 export class RemovalConflictTableComponent {
   @Input() public removalConflicts$!: Observable<RemovalConflict[] | undefined>;
+  @Input() public organizationName!: string;
   @Input() public type!: RemovalConflictType;
 
   public getAccordionTitle(): string {
     switch (this.type) {
       case 'contracts':
-        return 'en titel';
+        return $localize`Kontrakt konflikter`;
       default:
         throw new Error(`Unknown removal conflict type: ${this.type}`);
     }
@@ -22,7 +23,7 @@ export class RemovalConflictTableComponent {
   public getEntityTitle(): string {
     switch (this.type) {
       case 'contracts':
-        return 'normal';
+        return $localize`Kontrakt`;
       default:
         throw new Error(`Unknown removal conflict type: ${this.type}`);
     }
@@ -40,7 +41,7 @@ export class RemovalConflictTableComponent {
   public getTooltipText(): string {
     switch (this.type) {
       case 'contracts':
-        return 'tooltip';
+        return $localize`Kontrakter hvor organisationen "${this.organizationName}" er sat som "Leverandør", og hvor feltet dermed nulstilles:`;
       default:
         throw new Error(`Unknown removal conflict type: ${this.type}`);
     }
