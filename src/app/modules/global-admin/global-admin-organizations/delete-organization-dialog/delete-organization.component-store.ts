@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
-import { map, mergeMap, Observable } from 'rxjs';
+import { mergeMap, Observable } from 'rxjs';
 import { APIOrganizationRemovalConflictsResponseDTO, APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 
 interface State {
-  consequences: OrganizationRemovalConflicts | undefined;
+  consequences: APIOrganizationRemovalConflictsResponseDTO | undefined;
 }
 
 @Injectable()
@@ -15,7 +15,7 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
   }
 
   private updateConsequences = this.updater(
-    (state, consequences: OrganizationRemovalConflicts): State => ({
+    (state, consequences: APIOrganizationRemovalConflictsResponseDTO): State => ({
       ...state,
       consequences,
     })
@@ -25,7 +25,6 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
     organizationUuid$.pipe(
       mergeMap((organizationUuid) =>
         this.apiService.getSingleOrganizationsInternalV2GetConflicts({ organizationUuid }).pipe(
-          map((conflictsDto) => mapDtoToRemovalConflicts(conflictsDto)),
           tapResponse(
             (conflicts) => this.updateConsequences(conflicts),
             (e) => console.error(e)
@@ -35,9 +34,3 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
     )
   );
 }
-
-function mapDtoToRemovalConflicts(dto: APIOrganizationRemovalConflictsResponseDTO): OrganizationRemovalConflicts {
-  return dto;
-}
-
-interface OrganizationRemovalConflicts {}

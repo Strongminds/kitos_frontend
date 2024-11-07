@@ -32,8 +32,28 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public hasConflicts(): Observable<boolean | undefined> {
-    return of(true);
+  public hasRemovalConflicts(): Observable<boolean | undefined> {
+    return this.componentStore
+      .select((state) => state.consequences)
+      .pipe(
+        map((consequences) => {
+          if (consequences === undefined) {
+            return undefined;
+          }
+
+          return (
+            this.hasConflicts(consequences.contractsInOtherOrganizationsWhereOrgIsSupplier) ||
+            this.hasConflicts(consequences.dprInOtherOrganizationsWhereOrgIsDataProcessor) ||
+            this.hasConflicts(consequences.dprInOtherOrganizationsWhereOrgIsSubDataProcessor) ||
+            this.hasConflicts(consequences.interfacesExposedOnSystemsOutsideTheOrganization) ||
+            this.hasConflicts(consequences.systemsExposingInterfacesDefinedInOtherOrganizations) ||
+            this.hasConflicts(consequences.systemsInOtherOrganizationsWhereOrgIsRightsHolder) ||
+            this.hasConflicts(consequences.systemsSetAsParentSystemToSystemsInOtherOrganizations) ||
+            this.hasConflicts(consequences.systemsWhereOrgIsArchiveSupplier) ||
+            this.hasConflicts(consequences.systemsWithUsagesOutsideTheOrganization)
+          );
+        })
+      );
   }
 
   public getTitle(): string {
@@ -41,10 +61,14 @@ export class DeleteOrganizationDialogComponent implements OnInit {
   }
 
   public canSubmit(): Observable<boolean> {
-    return this.hasConflicts().pipe(
+    return this.hasRemovalConflicts().pipe(
       map((hasConflicts) => {
         return hasConflicts === false || this.hasAcceptedConsequences;
       })
     );
+  }
+
+  private hasConflicts<T>(conflicts: T[] | undefined): boolean {
+    return conflicts !== undefined && conflicts.length > 0;
   }
 }

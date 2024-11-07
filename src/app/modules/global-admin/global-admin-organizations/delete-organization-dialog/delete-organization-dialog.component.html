@@ -1,10 +1,10 @@
 <app-scrollbar-dialog [title]="getTitle()" i18n-title>
   <app-loading *ngIf="(deletingOrganization$ | async) === true"></app-loading>
   <ng-container *ngIf="(deletingOrganization$ | async) === false">
-    <ng-container *ngIf="(hasConflicts() | async) === undefined">
+    <ng-container *ngIf="(hasRemovalConflicts() | async) === undefined">
       <app-loading></app-loading>
     </ng-container>
-    <ng-container *ngIf="(hasConflicts() | async) === true">
+    <ng-container *ngIf="(hasRemovalConflicts() | async) === true">
       <app-checkbox
         [(value)]="hasAcceptedConsequences"
         labelPosition="after"
@@ -13,7 +13,7 @@
       >
       </app-checkbox>
     </ng-container>
-    <ng-container *ngIf="(hasConflicts() | async) === false">
+    <ng-container *ngIf="(hasRemovalConflicts() | async) === false">
       <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
     </ng-container>
     <app-dialog-actions>
