@@ -74,7 +74,7 @@ export class GlobalAdminOptionTypeService {
       case 'it-system_business-type':
         return () => this.businessTypeService.getManyItSystemGlobalBusinessTypesInternalV2GetBusinessTypes();
       case 'it-system_usage-archive-type':
-        return () => this.archiveTypeService.getManyItSystemGlobalArchiveTypesInternalV2GetArchiveTypes();
+        return () => this.archiveTypeService.getManyItSystemGlobalArchiveTypesInternalV2GetGlobalArchiveTypes();
       case 'it-system_usage-archive-location-type':
         return () => this.archiveLocationService.getManyItSystemGlobalArchiveLocationsInternalV2GetArchiveLocations();
       case 'it-system_usage-archive-location-test-type':
@@ -195,7 +195,7 @@ export class GlobalAdminOptionTypeService {
           });
       case 'it-system_usage-archive-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.archiveTypeService.postSingleItSystemGlobalArchiveTypesInternalV2CreateArchiveType({
+          this.archiveTypeService.postSingleItSystemGlobalArchiveTypesInternalV2CreateGlobalArchiveType({
             dto: request,
           });
       case 'it-system_usage-archive-location-type':
