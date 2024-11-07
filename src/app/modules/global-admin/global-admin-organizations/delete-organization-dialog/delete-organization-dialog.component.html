@@ -6,12 +6,7 @@
     </ng-container>
     <ng-container *ngIf="(hasRemovalConflicts() | async) === true">
       <app-standard-vertical-content-grid>
-        <app-removal-conflict-table
-          [removalConflicts$]="contractConflicts$"
-          [header]="{ mainEntityTitle: undefined, entityTitle: 'Konflikt' }"
-          title="Kontrakt konflikter"
-          tooltipText="Kontrakter hvor organisationen Fælles Kommune er sat som Leverandør, og hvor feltet dermed nulstilles"
-        >
+        <app-removal-conflict-table [removalConflicts$]="contractConflicts$" type="contracts">
         </app-removal-conflict-table>
       </app-standard-vertical-content-grid>
       <app-checkbox

@@ -2,21 +2,21 @@
   <ng-container *ngIf="removalConflicts.length > 0">
     <app-accordion
       [isExpandedByDefault]="true"
-      [title]="title"
+      [title]="getAccordionTitle()"
       [checkboxDisabled]="true"
-      [checkboxTooltipText]="tooltipText"
+      [checkboxTooltipText]="getTooltipText()"
     >
       <app-native-table tableLayout="fixed">
         <thead>
           <tr>
-            <th *ngIf="hasMainEntity()">{{ header.mainEntityTitle }}</th>
-            <th>{{ header.entityTitle }}</th>
-            <th>{{ "organization" }}</th>
+            <th *ngIf="getMainEntityTitle() as mainEntityTitle">{{ mainEntityTitle }}</th>
+            <th>{{ getEntityTitle() }}</th>
+            <th i18n> Oprettet i organisation </th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let conflict of removalConflicts">
-            <td *ngIf="hasMainEntity()">{{ conflict.mainEntityName }}</td>
+            <td *ngIf="getMainEntityTitle()">{{ conflict.mainEntityName }}</td>
             <td>{{ conflict.entityName }}</td>
             <td>{{ conflict.organizationName }}</td>
           </tr>
