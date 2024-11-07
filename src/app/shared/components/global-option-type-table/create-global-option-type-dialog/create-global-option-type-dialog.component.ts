@@ -6,6 +6,7 @@ import { APIGlobalRoleOptionCreateRequestDTO } from 'src/app/api/v2';
 import { GlobalAdminOptionType } from 'src/app/shared/models/options/global-admin-option-type.model';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 import { EditGlobalOptionTypeDialogComponent } from '../edit-global-option-type-dialog/edit-global-option-type-dialog.component';
+import { isRoleOptionType } from 'src/app/shared/models/options/role-option-types.model';
 
 @Component({
   selector: 'app-create-global-option-type-dialog',
@@ -14,7 +15,6 @@ import { EditGlobalOptionTypeDialogComponent } from '../edit-global-option-type-
 })
 export class CreateGlobalOptionTypeDialogComponent {
   @Input() optionType!: GlobalAdminOptionType;
-  @Input() optionCategory!: "role" | "regular";
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),
@@ -35,13 +35,17 @@ export class CreateGlobalOptionTypeDialogComponent {
       name,
       isObligatory,
     };
-    if (this.optionCategory === 'role') {
+    if (this.isRoleOption()) {
       const writeAccess = formValue.writeAccess ?? undefined;
       request.writeAccess = writeAccess;
     }
 
     this.store.dispatch(GlobalOptionTypeActions.createOptionType(this.optionType, request));
     this.dialogRef.close();
+  }
+
+  public isRoleOption(){
+    return isRoleOptionType(this.optionType);
   }
 
   public onCancel(): void {

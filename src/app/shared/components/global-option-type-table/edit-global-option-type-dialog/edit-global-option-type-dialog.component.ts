@@ -2,11 +2,12 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { APIGlobalRegularOptionUpdateRequestDTO, APIGlobalRoleOptionCreateRequestDTO, APIGlobalRoleOptionUpdateRequestDTO } from 'src/app/api/v2';
+import { APIGlobalRoleOptionUpdateRequestDTO } from 'src/app/api/v2';
 import {
   GlobalAdminOptionType,
   GlobalAdminOptionTypeItem,
 } from 'src/app/shared/models/options/global-admin-option-type.model';
+import { isRoleOptionType } from 'src/app/shared/models/options/role-option-types.model';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 
 @Component({
@@ -17,7 +18,6 @@ import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 export class EditGlobalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;
   @Input() optionType!: GlobalAdminOptionType;
-  @Input() optionCategory!: "role" | "regular";
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),
@@ -48,7 +48,7 @@ export class EditGlobalOptionTypeDialogComponent implements OnInit {
       name,
       isObligatory,
     };
-    if (this.optionCategory === 'role') {
+    if (this.isRoleOption()) {
       const writeAccess = formValue.writeAccess ?? undefined;
       request.writeAccess = writeAccess;
     }
@@ -58,6 +58,10 @@ export class EditGlobalOptionTypeDialogComponent implements OnInit {
 
   public onCancel(): void {
     this.dialogRef.close();
+  }
+
+  public isRoleOption(){
+    return isRoleOptionType(this.optionType);
   }
 
   public disableSaveButton(): boolean {

@@ -9,6 +9,7 @@ import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/o
 import { CreateGlobalOptionTypeDialogComponent } from './create-global-option-type-dialog/create-global-option-type-dialog.component';
 import { EditGlobalOptionTypeDialogComponent } from './edit-global-option-type-dialog/edit-global-option-type-dialog.component';
 import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
+import { isRoleOptionType } from '../../models/options/role-option-types.model';
 
 @Component({
   selector: 'app-global-option-type-table',
@@ -57,14 +58,12 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     const componentInstance = dialogRef.componentInstance;
     componentInstance.optionTypeItem = optionTypeItem;
     componentInstance.optionType = this.optionType;
-    componentInstance.optionCategory = this.optionCategory;
   }
 
   public onCreate() {
     const dialogRef = this.dialog.open(CreateGlobalOptionTypeDialogComponent);
     const componentInstance = dialogRef.componentInstance;
     componentInstance.optionType = this.optionType;
-    componentInstance.optionCategory = this.optionCategory;
   }
 
   public onToggleEnabled(optionTypeItem: GlobalAdminOptionTypeItem): void {
@@ -81,7 +80,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   }
 
   public getCreateButtonType() {
-    return this.optionCategory === 'role' ? $localize`rolle` : $localize`type`;
+    return isRoleOptionType(this.optionType) ? $localize`rolle` : $localize`type`;
   }
 
   private onChangePriority(optionUuid: string, newPriority: number): void {

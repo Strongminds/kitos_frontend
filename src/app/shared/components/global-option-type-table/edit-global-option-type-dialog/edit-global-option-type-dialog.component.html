@@ -17,7 +17,7 @@
         i18n-text
       >
       <app-checkbox
-        *ngIf="optionCategory === 'role'"
+        *ngIf="isRoleOption()"
         [formGroup]="form"
         formName="writeAccess"
         [value]="form.value.writeAccess ?? false"
