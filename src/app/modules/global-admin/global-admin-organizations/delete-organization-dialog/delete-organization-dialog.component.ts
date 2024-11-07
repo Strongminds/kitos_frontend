@@ -3,6 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
 import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
+import { conflictTypeOptions } from './removal-conflict-table/removal-conflict-table.component';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -15,9 +16,8 @@ export class DeleteOrganizationDialogComponent implements OnInit {
 
   public hasAcceptedConsequences: boolean = false;
 
-  public readonly contractConflicts$ = this.componentStore.select(
-    (state) => state.consequences?.contractsInOtherOrganizationsWhereOrgIsSupplier
-  );
+  public readonly removalConflicts$ = this.componentStore.select((state) => state.consequences);
+  public readonly conflictTypeOptions = conflictTypeOptions;
 
   public readonly deletingOrganization$ = new BehaviorSubject<boolean>(false);
 

@@ -1,4 +1,4 @@
-<ng-container *ngIf="(removalConflicts$ | async) ?? [] as removalConflicts">
+<ng-container *ngIf="(getSpecificConflicts() | async) ?? [] as removalConflicts">
   <ng-container *ngIf="removalConflicts.length > 0">
     <app-accordion
       [isExpandedByDefault]="true"
@@ -11,7 +11,7 @@
           <tr>
             <th *ngIf="getMainEntityTitle() as mainEntityTitle">{{ mainEntityTitle }}</th>
             <th>{{ getEntityTitle() }}</th>
-            <th i18n> Oprettet i (organisation) </th>
+            <th i18n>Oprettet i (organisation)</th>
           </tr>
         </thead>
         <tbody>

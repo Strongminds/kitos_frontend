@@ -6,8 +6,14 @@
     </ng-container>
     <ng-container *ngIf="(hasRemovalConflicts() | async) === true">
       <app-standard-vertical-content-grid>
-        <app-removal-conflict-table [removalConflicts$]="contractConflicts$" type="contracts" [organizationName]="organization.Name">
-        </app-removal-conflict-table>
+        <ng-container *ngFor="let conflictType of conflictTypeOptions">
+          <app-removal-conflict-table
+            [type]="conflictType"
+            [removalConflicts$]="removalConflicts$"
+            [organizationName]="organization.Name"
+          >
+          </app-removal-conflict-table>
+        </ng-container>
       </app-standard-vertical-content-grid>
       <app-checkbox
         [(value)]="hasAcceptedConsequences"
