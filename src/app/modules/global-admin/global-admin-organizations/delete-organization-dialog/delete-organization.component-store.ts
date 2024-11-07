@@ -95,10 +95,10 @@ function mapSimpleConflictToTableItem(conflict: APISimpleConflictResponseDTO): R
   };
 }
 
-function mapMultipleConflictsToTableItem(conflict: APIMultipleConflictsResponseDTO): RemovalConflict[] {
-  return (conflict.conflicts ?? [])
+function mapMultipleConflictsToTableItem(multiConflict: APIMultipleConflictsResponseDTO): RemovalConflict[] {
+  return (multiConflict.conflicts ?? [])
     .map(mapSimpleConflictToTableItem)
-    .map((conflict) => ({ ...conflict, mainEntityName: conflict.mainEntityName }));
+    .map((conflict) => ({ ...conflict, mainEntityName: multiConflict.mainEntityName }));
 }
 
 function mapSystemUsageOutsideOrganizationConflictToTableItem(
