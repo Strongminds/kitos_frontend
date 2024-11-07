@@ -1,24 +1,26 @@
 <app-scrollbar-dialog [title]="getTitle()" i18n-title>
-  <ng-container *ngIf="(hasConflicts() | async) === undefined">
-    <app-loading></app-loading>
+  <app-loading *ngIf="(deletingOrganization$ | async) === true"></app-loading>
+  <ng-container *ngIf="(deletingOrganization$ | async) === false">
+    <ng-container *ngIf="(hasConflicts() | async) === undefined">
+      <app-loading></app-loading>
+    </ng-container>
+    <ng-container *ngIf="(hasConflicts() | async) === true">
+      <app-checkbox
+        [(value)]="hasAcceptedConsequences"
+        labelPosition="after"
+        text="Jeg forstår og accepterer ovenstående konsekvenser"
+        i18n-text
+      >
+      </app-checkbox>
+    </ng-container>
+    <ng-container *ngIf="(hasConflicts() | async) === false">
+      <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
+    </ng-container>
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Fortryd</app-button>
+      <app-button color="warn" (buttonClick)="onDelete()" [disabled]="(canSubmit() | async) === false" i18n
+        >Slet</app-button
+      >
+    </app-dialog-actions>
   </ng-container>
-  <ng-container *ngIf="(hasConflicts() | async) === true">
-    <app-checkbox
-      [(value)]="hasAcceptedConsequences"
-      labelPosition="after"
-      text="Jeg forstår og accepterer ovenstående konsekvenser"
-      i18n-text
-    >
-    </app-checkbox>
-  </ng-container>
-  <ng-container *ngIf="(hasConflicts() | async) === false"
-    >
-    <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
-  </ng-container>
-  <app-dialog-actions>
-    <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Fortryd</app-button>
-    <app-button color="warn" (buttonClick)="onDelete()" [disabled]="(canSubmit() | async) === false" i18n
-      >Slet</app-button
-    >
-  </app-dialog-actions>
 </app-scrollbar-dialog>

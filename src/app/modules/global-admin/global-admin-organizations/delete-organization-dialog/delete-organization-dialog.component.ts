@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { map, Observable, of } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
 
 @Component({
@@ -12,6 +12,8 @@ export class DeleteOrganizationDialogComponent {
   @Input() public organization!: Organization;
 
   public hasAcceptedConsequences: boolean = false;
+
+  public readonly deletingOrganization$ = new BehaviorSubject<boolean>(false);
 
   constructor(private dialogRef: MatDialogRef<DeleteOrganizationDialogComponent>) {}
 
