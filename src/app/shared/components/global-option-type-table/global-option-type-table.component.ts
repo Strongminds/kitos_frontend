@@ -19,6 +19,7 @@ import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.
 export class GlobalOptionTypeTableComponent extends BaseComponent implements OnInit {
   @Input() optionType!: GlobalAdminOptionType;
   @Input() title: string = '';
+  @Input() showDescription: boolean = true;
   @Input() expandedByDefault: boolean = false;
   @Input() disableAccordion: boolean = false;
   @Input() showWriteAccess: boolean = false;
