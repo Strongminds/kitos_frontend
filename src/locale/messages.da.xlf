@@ -5739,6 +5739,90 @@
         <source> Organisationen kan slettes uden tværgående konsekvenser. </source>
         <target state="new"> Organisationen kan slettes uden tværgående konsekvenser. </target>
       </trans-unit>
+      <trans-unit id="2586834185822046353" datatype="html">
+        <source> Opsummering af konsekvenser ifm. sletning af organisationer i Kitos </source>
+        <target state="new"> Opsummering af konsekvenser ifm. sletning af organisationer i Kitos </target>
+      </trans-unit>
+      <trans-unit id="8003706289136962438" datatype="html">
+        <source> For at sikre datakvaliteten i Kitos har Global admin mulighed for at slette en organisation (leverandør/databehandler/underdatabehandler) på trods af, at der måtte være kontrakter eller databehandler registreringer knyttet op på denne. </source>
+        <target state="new"> For at sikre datakvaliteten i Kitos har Global admin mulighed for at slette en organisation (leverandør/databehandler/underdatabehandler) på trods af, at der måtte være kontrakter eller databehandler registreringer knyttet op på denne. </target>
+      </trans-unit>
+      <trans-unit id="1954712393506662000" datatype="html">
+        <source>Oprettet i (organisation)</source>
+        <target state="new">Oprettet i (organisation)</target>
+      </trans-unit>
+      <trans-unit id="5404438658435810412" datatype="html">
+        <source>Kontrakt konflikter</source>
+        <target state="new">Kontrakt konflikter</target>
+      </trans-unit>
+      <trans-unit id="3962038613966193219" datatype="html">
+        <source>Databehandler konflikter</source>
+        <target state="new">Databehandler konflikter</target>
+      </trans-unit>
+      <trans-unit id="8453608503998332667" datatype="html">
+        <source>Underdatabehandler konflikter</source>
+        <target state="new">Underdatabehandler konflikter</target>
+      </trans-unit>
+      <trans-unit id="6385461110031941685" datatype="html">
+        <source>Interface konflikter</source>
+        <target state="new">Interface konflikter</target>
+      </trans-unit>
+      <trans-unit id="3733010339282217835" datatype="html">
+        <source>System konflikter</source>
+        <target state="new">System konflikter</target>
+      </trans-unit>
+      <trans-unit id="7630362802781892981" datatype="html">
+        <source>Interface</source>
+        <target state="new">Interface</target>
+      </trans-unit>
+      <trans-unit id="29832309535656200" datatype="html">
+        <source>System</source>
+        <target state="new">System</target>
+      </trans-unit>
+      <trans-unit id="7430680931123683253" datatype="html">
+        <source>Overordnet system for (IT-System)</source>
+        <target state="new">Overordnet system for (IT-System)</target>
+      </trans-unit>
+      <trans-unit id="2357939140042593831" datatype="html">
+        <source>IT-System (i kataloget)</source>
+        <target state="new">IT-System (i kataloget)</target>
+      </trans-unit>
+      <trans-unit id="2622746927985405569" datatype="html">
+        <source>Kontrakter hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Leverandør&quot;, og hvor feltet dermed nulstilles:</source>
+        <target state="new">Kontrakter hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Leverandør&quot;, og hvor feltet dermed nulstilles:</target>
+      </trans-unit>
+      <trans-unit id="7208038894420997842" datatype="html">
+        <source>Databehandlere hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Databehandler&quot;, og hvor feltet dermed nulstilles:</source>
+        <target state="new">Databehandlere hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Databehandler&quot;, og hvor feltet dermed nulstilles:</target>
+      </trans-unit>
+      <trans-unit id="395197573704976445" datatype="html">
+        <source>Underdatabehandlere hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Underdatabehandler&quot;, og hvor feltet dermed nulstilles:</source>
+        <target state="new">Underdatabehandlere hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er sat som &quot;Underdatabehandler&quot;, og hvor feltet dermed nulstilles:</target>
+      </trans-unit>
+      <trans-unit id="1093949945752841985" datatype="html">
+        <source>Interfaces hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; har systemer, og hvor feltet dermed nulstilles:</source>
+        <target state="new">Interfaces hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; har systemer, og hvor feltet dermed nulstilles:</target>
+      </trans-unit>
+      <trans-unit id="6804886108873639714" datatype="html">
+        <source>Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; har interfaces, og hvor feltet dermed nulstilles:</source>
+        <target state="new">Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; har interfaces, og hvor feltet dermed nulstilles:</target>
+      </trans-unit>
+      <trans-unit id="7082386595344027757" datatype="html">
+        <source>Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er rettighedshaver, og hvor feltet dermed nulstilles:</source>
+        <target state="new">Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er rettighedshaver, og hvor feltet dermed nulstilles:</target>
+      </trans-unit>
+      <trans-unit id="6211726176261229003" datatype="html">
+        <source>IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.organizationName"/>&quot;, da de er sat som &quot;Overordnet IT-System&quot; på systemer oprettet i andre organisationer:</source>
+        <target state="new">IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.organizationName"/>&quot;, da de er sat som &quot;Overordnet IT-System&quot; på systemer oprettet i andre organisationer:</target>
+      </trans-unit>
+      <trans-unit id="6331137334323579911" datatype="html">
+        <source>Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er arkivleverandør, og hvor feltet dermed nulstilles:</source>
+        <target state="new">Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; er arkivleverandør, og hvor feltet dermed nulstilles:</target>
+      </trans-unit>
+      <trans-unit id="1122204813567245757" datatype="html">
+        <source>Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; har brug, og hvor feltet dermed nulstilles:</source>
+        <target state="new">Systemer hvor organisationen &quot;<x id="PH" equiv-text="this.organizationName"/>&quot; har brug, og hvor feltet dermed nulstilles:</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
