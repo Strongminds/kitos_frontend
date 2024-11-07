@@ -140,11 +140,6 @@ export class RemovalConflictTableComponent {
   }
 }
 
-export interface RemovalConflictHeader {
-  mainEntityTitle: string | undefined;
-  entityTitle: string;
-}
-
 export interface RemovalConflict {
   mainEntityName: string | undefined;
   entityName: string;
