@@ -6,10 +6,9 @@ import { filter, map } from 'rxjs';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
-import { CreateGlobalOptionTypeDialogComponent } from './create-global-option-type-dialog/create-global-option-type-dialog.component';
-import { EditGlobalOptionTypeDialogComponent } from './edit-global-option-type-dialog/edit-global-option-type-dialog.component';
-import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 import { isRoleOptionType } from '../../models/options/role-option-types.model';
+import { GlobalOptionTypeDialogComponent } from './global-option-type-dialog/global-option-type-dialog.component';
+import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 
 @Component({
   selector: 'app-global-option-type-table',
@@ -53,18 +52,23 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     );
   }
 
-  public isHighestPriority(option: GlobalAdminOptionTypeItem){
-    return this.comparePriority(option, (max, curr) => curr.priority > max ? curr.priority : max);
+  public isHighestPriority(option: GlobalAdminOptionTypeItem) {
+    return this.comparePriority(option, (max, curr) => (curr.priority > max ? curr.priority : max));
   }
 
-  public isLowestPriority(option: GlobalAdminOptionTypeItem){
-    return this.comparePriority(option, (min, curr) => curr.priority < min ? curr.priority : min);
+  public isLowestPriority(option: GlobalAdminOptionTypeItem) {
+    return this.comparePriority(option, (min, curr) => (curr.priority < min ? curr.priority : min));
   }
 
-  private comparePriority(option: GlobalAdminOptionTypeItem, comparator: (previousValue: number,
-    currentValue: GlobalAdminOptionTypeItem,
-    currentIndex: number,
-    array: GlobalAdminOptionTypeItem[]) => number){
+  private comparePriority(
+    option: GlobalAdminOptionTypeItem,
+    comparator: (
+      previousValue: number,
+      currentValue: GlobalAdminOptionTypeItem,
+      currentIndex: number,
+      array: GlobalAdminOptionTypeItem[]
+    ) => number
+  ) {
     return this.optionTypeItems$.pipe(
       map((optionTypeItems) => {
         const boundary = optionTypeItems.reduce(comparator, 0);
@@ -74,15 +78,17 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   }
 
   public onEdit(optionTypeItem: GlobalAdminOptionTypeItem): void {
-    const dialogRef = this.dialog.open(EditGlobalOptionTypeDialogComponent);
+    const dialogRef = this.dialog.open(GlobalOptionTypeDialogComponent);
     const componentInstance = dialogRef.componentInstance;
+    componentInstance.action = 'edit';
     componentInstance.optionTypeItem = optionTypeItem;
     componentInstance.optionType = this.optionType;
   }
 
   public onCreate() {
-    const dialogRef = this.dialog.open(CreateGlobalOptionTypeDialogComponent);
+    const dialogRef = this.dialog.open(GlobalOptionTypeDialogComponent);
     const componentInstance = dialogRef.componentInstance;
+    componentInstance.action = 'create';
     componentInstance.optionType = this.optionType;
   }
 

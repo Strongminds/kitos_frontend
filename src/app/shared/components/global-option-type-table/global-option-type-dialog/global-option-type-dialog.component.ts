@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { APIGlobalRoleOptionUpdateRequestDTO } from 'src/app/api/v2';
+import { APIGlobalRoleOptionCreateRequestDTO, APIGlobalRoleOptionUpdateRequestDTO } from 'src/app/api/v2';
 import {
   GlobalAdminOptionType,
   GlobalAdminOptionTypeItem,
@@ -11,13 +11,14 @@ import { isRoleOptionType } from 'src/app/shared/models/options/role-option-type
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 
 @Component({
-  selector: 'app-edit-global-option-type-dialog',
-  templateUrl: './edit-global-option-type-dialog.component.html',
-  styleUrl: './edit-global-option-type-dialog.component.scss',
+  selector: 'app-global-option-type-dialog',
+  templateUrl: './global-option-type-dialog.component.html',
+  styleUrl: './global-option-type-dialog.component.scss',
 })
-export class EditGlobalOptionTypeDialogComponent implements OnInit {
+export class GlobalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;
   @Input() optionType!: GlobalAdminOptionType;
+  @Input() action!: 'create' | 'edit';
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),
@@ -26,15 +27,17 @@ export class EditGlobalOptionTypeDialogComponent implements OnInit {
     writeAccess: new FormControl<boolean | undefined>(undefined),
   });
 
-  constructor(private dialogRef: MatDialogRef<EditGlobalOptionTypeDialogComponent>, private store: Store) {}
+  constructor(private dialogRef: MatDialogRef<GlobalOptionTypeDialogComponent>, private store: Store) {}
 
   public ngOnInit(): void {
-    this.form.patchValue({
-      description: this.optionTypeItem.description,
-      obligatory: this.optionTypeItem.obligatory,
-      name: this.optionTypeItem.name,
-      writeAccess: this.optionTypeItem.writeAccess,
-    });
+    if (this.isEditDialog()) {
+      this.form.patchValue({
+        description: this.optionTypeItem.description,
+        obligatory: this.optionTypeItem.obligatory,
+        name: this.optionTypeItem.name,
+        writeAccess: this.optionTypeItem.writeAccess,
+      });
+    }
   }
 
   public onSave(): void {
@@ -42,8 +45,8 @@ export class EditGlobalOptionTypeDialogComponent implements OnInit {
     const description = formValue.description ?? undefined;
     const name = formValue.name ?? undefined;
     const isObligatory = formValue.obligatory ?? undefined;
-    const optionUuid = this.optionTypeItem.uuid;
-    const request: APIGlobalRoleOptionUpdateRequestDTO = {
+
+    const request: APIGlobalRoleOptionUpdateRequestDTO | APIGlobalRoleOptionCreateRequestDTO = {
       description,
       name,
       isObligatory,
@@ -52,7 +55,14 @@ export class EditGlobalOptionTypeDialogComponent implements OnInit {
       const writeAccess = formValue.writeAccess ?? undefined;
       request.writeAccess = writeAccess;
     }
-    this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, optionUuid, request));
+
+    if (this.isEditDialog()) {
+      const optionUuid = this.optionTypeItem.uuid;
+      this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, optionUuid, request));
+    } else {
+      this.store.dispatch(GlobalOptionTypeActions.createOptionType(this.optionType, request));
+    }
+    
     this.dialogRef.close();
   }
 
@@ -60,11 +70,16 @@ export class EditGlobalOptionTypeDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public isRoleOption(){
+  public isRoleOption() {
     return isRoleOptionType(this.optionType);
   }
 
+  public isEditDialog() {
+    return this.action === 'edit';
+  }
+
   public disableSaveButton(): boolean {
+    if (this.action === 'create') return !this.form.valid;
     return !this.form.valid || !this.haveValuesChanged();
   }
 

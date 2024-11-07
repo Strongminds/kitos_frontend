@@ -1,4 +1,4 @@
-<app-dialog title="Rediger" i18n-title>
+<app-dialog [title]="isEditDialog() ? 'Rediger' : 'Opret'" i18n-title>
   <form [formGroup]="form">
     <app-standard-vertical-content-grid>
       <app-textbox
@@ -16,9 +16,8 @@
         text="Obligatorisk"
         i18n-text
       >
-      </app-checkbox>
+    </app-checkbox>
       <app-checkbox
-        *ngIf="isRoleOption()"
         [formGroup]="form"
         formName="writeAccess"
         [value]="form.value.writeAccess ?? false"
@@ -38,7 +37,7 @@
     </app-standard-vertical-content-grid>
   </form>
   <app-dialog-actions>
-    <app-button (buttonClick)="onSave()" [disabled]="disableCreateButton()" i18n> Gem </app-button>
+    <app-button (buttonClick)="onSave()" [disabled]="disableSaveButton()" i18n> Gem </app-button>
     <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n> Annuller </app-button>
   </app-dialog-actions>
 </app-dialog>

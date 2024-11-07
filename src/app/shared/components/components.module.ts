@@ -148,8 +148,7 @@ import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
 import { GlobalOptionTypeTableComponent } from './global-option-type-table/global-option-type-table.component';
-import { EditGlobalOptionTypeDialogComponent } from './global-option-type-table/edit-global-option-type-dialog/edit-global-option-type-dialog.component';
-import { CreateGlobalOptionTypeDialogComponent } from './global-option-type-table/create-global-option-type-dialog/create-global-option-type-dialog.component';
+import { GlobalOptionTypeDialogComponent } from './global-option-type-table/global-option-type-dialog/global-option-type-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -272,8 +271,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OrganizationUserDropdownComponent,
     FileInputComponent,
     GlobalOptionTypeTableComponent,
-    CreateGlobalOptionTypeDialogComponent,
-    EditGlobalOptionTypeDialogComponent,
+    GlobalOptionTypeDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -406,8 +404,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OrganizationUserDropdownComponent,
     FileInputComponent,
     GlobalOptionTypeTableComponent,
-    EditGlobalOptionTypeDialogComponent,
-    CreateGlobalOptionTypeDialogComponent,
+    GlobalOptionTypeDialogComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
