@@ -64,7 +64,7 @@ export interface GetSingleExcelGetUsersByUuidRequestParams {
 })
 export class APIV1ExcelINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -208,11 +208,11 @@ export class APIV1ExcelINTERNALService {
     public getSingleExcelGetAccessRightsForEntity(requestParameters: GetSingleExcelGetAccessRightsForEntityRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json' | 'text/json', context?: HttpContext}): Observable<any> {
         const id = requestParameters.id;
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getSingleExcelGetAccessRightsForEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getSingleExcelGetAccessRightsForEntityById.');
         }
         const getEntityAccessRights = requestParameters.getEntityAccessRights;
         if (getEntityAccessRights === null || getEntityAccessRights === undefined) {
-            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleExcelGetAccessRightsForEntity.');
+            throw new Error('Required parameter getEntityAccessRights was null or undefined when calling getSingleExcelGetAccessRightsForEntityById.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -650,5 +650,3 @@ export class APIV1ExcelINTERNALService {
             }
         );
     }
-
-}
