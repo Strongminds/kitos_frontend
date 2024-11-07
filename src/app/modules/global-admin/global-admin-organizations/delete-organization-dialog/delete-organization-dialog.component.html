@@ -28,7 +28,7 @@
       <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
     </ng-container>
   </ng-container>
-  <app-dialog-actions>
+  <app-dialog-actions *ngIf="(hasRemovalConflicts() | async) === true">
     <app-checkbox
       [(value)]="hasAcceptedConsequences"
       labelPosition="after"
