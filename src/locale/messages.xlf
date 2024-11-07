@@ -4354,6 +4354,12 @@
       <trans-unit id="5749107076110806005" datatype="html">
         <source>Organisationen kunne ikke oprettes</source>
       </trans-unit>
+      <trans-unit id="6240133530435057991" datatype="html">
+        <source> Organisationen kan slettes uden tværgående konsekvenser. </source>
+      </trans-unit>
+      <trans-unit id="8445117964597330148" datatype="html">
+        <source>Jeg forstår og accepterer ovenstående konsekvenser</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -5731,6 +5731,14 @@
         <source>Organisationen kunne ikke opdateres</source>
         <target state="new">Organisationen kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="8445117964597330148" datatype="html">
+        <source>Jeg forstår og accepterer ovenstående konsekvenser</source>
+        <target state="new">Jeg forstår og accepterer ovenstående konsekvenser</target>
+      </trans-unit>
+      <trans-unit id="6240133530435057991" datatype="html">
+        <source> Organisationen kan slettes uden tværgående konsekvenser. </source>
+        <target state="new"> Organisationen kan slettes uden tværgående konsekvenser. </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
