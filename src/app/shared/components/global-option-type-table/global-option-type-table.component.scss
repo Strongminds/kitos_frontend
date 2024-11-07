@@ -4,3 +4,10 @@
   display: flex;
   gap: $padding-small;
 }
+
+.description-overflow {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+}
