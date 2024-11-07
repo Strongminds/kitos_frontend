@@ -7,10 +7,10 @@
     <ng-container *ngIf="(hasRemovalConflicts() | async) === true">
       <app-standard-vertical-content-grid>
         <app-removal-conflict-table
-          [removalConflicts]="(contractConflicts$ | async) ?? []"
+          [removalConflicts$]="contractConflicts$"
           [header]="{ mainEntityTitle: undefined, entityTitle: 'Konflikt' }"
           title="Kontrakt konflikter"
-          tooltipText="IT-Systemer som flyttes til Fælles kommune, da de er sat som Overordnet IT-System på systemer oprettet i andre organisationer:"
+          tooltipText="Kontrakter hvor organisationen Fælles Kommune er sat som Leverandør, og hvor feltet dermed nulstilles"
         >
         </app-removal-conflict-table>
       </app-standard-vertical-content-grid>

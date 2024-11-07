@@ -1,20 +1,27 @@
-<ng-container *ngIf="removalConflicts.length > 0">
-  <app-accordion [isExpandedByDefault]="true" [title]="title" [checkboxDisabled]="true" [checkboxTooltipText]="tooltipText">
-    <app-native-table tableLayout="fixed">
-      <thead>
-        <tr>
-          <th *ngIf="hasMainEntity()">{{ header.mainEntityTitle }}</th>
-          <th>{{ header.entityTitle }}</th>
-          <th>{{ "organization" }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let conflict of removalConflicts">
-          <td *ngIf="hasMainEntity()">{{ conflict.mainEntityName }}</td>
-          <td>{{ conflict.entityName }}</td>
-          <td>{{ conflict.organizationName }}</td>
-        </tr>
-      </tbody>
-    </app-native-table>
-  </app-accordion>
+<ng-container *ngIf="(removalConflicts$ | async) ?? [] as removalConflicts">
+  <ng-container *ngIf="removalConflicts.length > 0">
+    <app-accordion
+      [isExpandedByDefault]="true"
+      [title]="title"
+      [checkboxDisabled]="true"
+      [checkboxTooltipText]="tooltipText"
+    >
+      <app-native-table tableLayout="fixed">
+        <thead>
+          <tr>
+            <th *ngIf="hasMainEntity()">{{ header.mainEntityTitle }}</th>
+            <th>{{ header.entityTitle }}</th>
+            <th>{{ "organization" }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let conflict of removalConflicts">
+            <td *ngIf="hasMainEntity()">{{ conflict.mainEntityName }}</td>
+            <td>{{ conflict.entityName }}</td>
+            <td>{{ conflict.organizationName }}</td>
+          </tr>
+        </tbody>
+      </app-native-table>
+    </app-accordion>
+  </ng-container>
 </ng-container>
