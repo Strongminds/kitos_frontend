@@ -4,12 +4,12 @@ import {
   APIGlobalRoleOptionCreateRequestDTO,
   APIGlobalRoleOptionResponseDTO,
   APIGlobalRoleOptionUpdateRequestDTO,
-  APIV2ItSystemGlobalArchiveTypesInternalINTERNALService,
   APIV2ItSystemGlobalBusinessTypesInternalINTERNALService,
   APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService,
 } from 'src/app/api/v2';
 import { APIV2ItSystemGlobalArchiveLocationsInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalArchiveLocationsInternalINTERNAL.service';
 import { APIV2ItSystemGlobalArchiveTestLocationsInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalArchiveTestLocationsInternalINTERNAL.service';
+import { APIV2ItSystemGlobalArchiveTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalArchiveTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalDataTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalDataTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalFrequencyTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalFrequencyTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalInterfaceTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalInterfaceTypesInternalINTERNAL.service';
