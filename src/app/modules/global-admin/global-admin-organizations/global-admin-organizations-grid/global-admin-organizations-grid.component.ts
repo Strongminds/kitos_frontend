@@ -106,6 +106,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       width: 'auto',
       minWidth: '400px',
       maxWidth: '1200px',
+      height: 'auto',
     });
     dialogRef.componentInstance.organization = organization;
   }

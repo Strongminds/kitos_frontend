@@ -23,22 +23,24 @@
           </app-removal-conflict-table>
         </ng-container>
       </app-standard-vertical-content-grid>
-      <app-checkbox
-        [(value)]="hasAcceptedConsequences"
-        labelPosition="after"
-        text="Jeg forstår og accepterer ovenstående konsekvenser"
-        i18n-text
-      >
-      </app-checkbox>
     </ng-container>
     <ng-container *ngIf="(hasRemovalConflicts() | async) === false">
       <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
     </ng-container>
-    <app-dialog-actions>
-      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Fortryd</app-button>
-      <app-button color="warn" (buttonClick)="onDelete()" [disabled]="(canSubmit() | async) === false" i18n
-        >Slet</app-button
-      >
-    </app-dialog-actions>
   </ng-container>
+  <app-dialog-actions>
+    <app-checkbox
+      [(value)]="hasAcceptedConsequences"
+      labelPosition="after"
+      text="Jeg forstår og accepterer ovenstående konsekvenser"
+      i18n-text
+    >
+    </app-checkbox>
+  </app-dialog-actions>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Fortryd</app-button>
+    <app-button color="warn" (buttonClick)="onDelete()" [disabled]="(canSubmit() | async) === false" i18n
+      >Slet</app-button
+    >
+  </app-dialog-actions>
 </app-scrollbar-dialog>
