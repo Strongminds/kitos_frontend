@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
 
 @Component({
@@ -8,4 +9,14 @@ import { Organization } from 'src/app/shared/models/organization/organization.mo
 })
 export class DeleteOrganizationDialogComponent {
   @Input() public organization!: Organization;
+
+  constructor(private dialogRef: MatDialogRef<DeleteOrganizationDialogComponent>) {}
+
+  public onDelete(): void {
+    
+  }
+
+  public onCancel(): void {
+    this.dialogRef.close();
+  }
 }

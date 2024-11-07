@@ -1,1 +1,6 @@
-<p>delete-organization-dialog works!</p>
+<app-scrollbar-dialog title="Slet organisation" i18n-title>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Fortryd</app-button>
+    <app-button color="warn" (buttonClick)="onDelete()" i18n>Slet</app-button>
+  </app-dialog-actions>
+</app-scrollbar-dialog>
