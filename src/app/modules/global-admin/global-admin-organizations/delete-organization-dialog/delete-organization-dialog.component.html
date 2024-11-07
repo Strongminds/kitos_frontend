@@ -5,6 +5,15 @@
       <app-loading></app-loading>
     </ng-container>
     <ng-container *ngIf="(hasRemovalConflicts() | async) === true">
+      <app-standard-vertical-content-grid>
+        <app-removal-conflict-table
+          [removalConflicts]="(contractConflicts$ | async) ?? []"
+          [header]="{ mainEntityTitle: undefined, entityTitle: 'Konflikt' }"
+          title="Kontrakt konflikter"
+          tooltipText="IT-Systemer som flyttes til Fælles kommune, da de er sat som Overordnet IT-System på systemer oprettet i andre organisationer:"
+        >
+        </app-removal-conflict-table>
+      </app-standard-vertical-content-grid>
       <app-checkbox
         [(value)]="hasAcceptedConsequences"
         labelPosition="after"
