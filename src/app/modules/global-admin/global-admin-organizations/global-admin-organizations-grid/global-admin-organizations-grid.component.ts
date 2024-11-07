@@ -18,6 +18,7 @@ import {
 import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
 import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
 import { Actions, ofType } from '@ngrx/effects';
+import { DeleteOrganizationDialogComponent } from '../delete-organization-dialog/delete-organization-dialog.component';
 
 @Component({
   selector: 'app-global-admin-organizations-grid',
@@ -100,7 +101,10 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
     dialogRef.componentInstance.organization = organization;
   }
 
-  public onDeleteOrganization(_: Organization) {}
+  public onDeleteOrganization(organization: Organization) {
+    const dialogRef = this.dialog.open(DeleteOrganizationDialogComponent);
+    dialogRef.componentInstance.organization = organization;
+  }
 
   public onCreateOrganization() {
     this.dialog.open(CreateOrganizationDialogComponent);
