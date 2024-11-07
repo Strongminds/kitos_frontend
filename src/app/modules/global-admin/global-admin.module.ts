@@ -17,6 +17,7 @@ import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizati
 import { CreateOrganizationDialogComponent } from './global-admin-organizations/create-organization-dialog/create-organization-dialog.component';
 import { EditOrganizationDialogComponent } from './global-admin-organizations/edit-organization-dialog/edit-organization-dialog.component';
 import { DeleteOrganizationDialogComponent } from './global-admin-organizations/delete-organization-dialog/delete-organization-dialog.component';
+import { RemovalConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/removal-conflict-table.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DeleteOrganizationDialogComponent } from './global-admin-organizations/
     CreateOrganizationDialogComponent,
     EditOrganizationDialogComponent,
     DeleteOrganizationDialogComponent,
+    RemovalConflictTableComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })

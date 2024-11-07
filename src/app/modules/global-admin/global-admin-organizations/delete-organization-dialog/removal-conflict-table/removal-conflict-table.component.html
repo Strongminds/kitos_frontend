@@ -1,1 +1,18 @@
-<p>removal-conflict-table works!</p>
+<app-accordion [isExpandedByDefault]="true">
+  <app-native-table tableLayout="fixed">
+    <thead>
+      <tr>
+        <th>col 1</th>
+        <th>col 2</th>
+        <th>col 3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let conflict of removalConflicts">
+        <td>ayo</td>
+        <td>ayo2</td>
+        <td>ayo3</td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</app-accordion>

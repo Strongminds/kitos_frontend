@@ -41,7 +41,7 @@ export class DeleteOrganizationDialogComponent implements OnInit {
             return undefined;
           }
 
-          return (
+          /* return (
             this.hasConflicts(consequences.contractsInOtherOrganizationsWhereOrgIsSupplier) ||
             this.hasConflicts(consequences.dprInOtherOrganizationsWhereOrgIsDataProcessor) ||
             this.hasConflicts(consequences.dprInOtherOrganizationsWhereOrgIsSubDataProcessor) ||
@@ -51,7 +51,8 @@ export class DeleteOrganizationDialogComponent implements OnInit {
             this.hasConflicts(consequences.systemsSetAsParentSystemToSystemsInOtherOrganizations) ||
             this.hasConflicts(consequences.systemsWhereOrgIsArchiveSupplier) ||
             this.hasConflicts(consequences.systemsWithUsagesOutsideTheOrganization)
-          );
+          ); */
+          return false;
         })
       );
   }
