@@ -1,6 +1,6 @@
 @import "theme";
 
-.priority-div {
+.align-priority-div {
   display: flex;
   gap: $padding-small;
 }
@@ -9,5 +9,4 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
   word-break: break-word;
-
 }

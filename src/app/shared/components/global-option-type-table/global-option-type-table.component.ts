@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { filter } from 'rxjs';
+import { filter, map } from 'rxjs';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
@@ -50,6 +50,26 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
         .subscribe(() => {
           this.componentStore.getOptionTypeItems();
         })
+    );
+  }
+
+  public isHighestPriority(option: GlobalAdminOptionTypeItem){
+    return this.comparePriority(option, (max, curr) => curr.priority > max ? curr.priority : max);
+  }
+
+  public isLowestPriority(option: GlobalAdminOptionTypeItem){
+    return this.comparePriority(option, (min, curr) => curr.priority < min ? curr.priority : min);
+  }
+
+  private comparePriority(option: GlobalAdminOptionTypeItem, comparator: (previousValue: number,
+    currentValue: GlobalAdminOptionTypeItem,
+    currentIndex: number,
+    array: GlobalAdminOptionTypeItem[]) => number){
+    return this.optionTypeItems$.pipe(
+      map((optionTypeItems) => {
+        const boundary = optionTypeItems.reduce(comparator, 0);
+        return option.priority === boundary;
+      })
     );
   }
 

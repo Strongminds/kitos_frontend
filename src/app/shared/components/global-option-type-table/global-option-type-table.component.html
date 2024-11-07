@@ -24,11 +24,11 @@
             <app-boolean-circle [value]="optionTypeItem.obligatory"></app-boolean-circle>
           </td>
           <td>
-            <div class="priority-div">
-                <app-icon-button (buttonClick)="onIncreasePriority(optionTypeItem)">
+            <div class="align-priority-div">
+                <app-icon-button (buttonClick)="onIncreasePriority(optionTypeItem)" [disabled]="(isHighestPriority(optionTypeItem) | async) === true">
                   <app-arrow-up-icon></app-arrow-up-icon>
                 </app-icon-button>
-                <app-icon-button (buttonClick)="onDecreasePriority(optionTypeItem)">
+                <app-icon-button (buttonClick)="onDecreasePriority(optionTypeItem)" [disabled]="(isLowestPriority(optionTypeItem) | async) === true">
                   <app-arrow-down-icon></app-arrow-down-icon>
                 </app-icon-button>
             </div>
