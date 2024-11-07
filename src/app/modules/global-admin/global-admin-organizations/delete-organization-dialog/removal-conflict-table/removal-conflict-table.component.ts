@@ -82,7 +82,7 @@ export class RemovalConflictTableComponent {
       case 'systemsRightsHolder':
         return $localize`System`;
       case 'systemsParentSystem':
-        return $localize`System`;
+        return $localize`Overordnet system for (IT-System)`;
       case 'systemsArchiveSupplier':
         return $localize`System`;
       case 'systemsUsages':
@@ -107,7 +107,7 @@ export class RemovalConflictTableComponent {
       case 'systemsRightsHolder':
         return $localize`System`;
       case 'systemsParentSystem':
-        return $localize`System`;
+        return $localize`IT-System (i kataloget)`;
       case 'systemsArchiveSupplier':
         return $localize`System`;
       case 'systemsUsages':
@@ -132,7 +132,7 @@ export class RemovalConflictTableComponent {
       case 'systemsRightsHolder':
         return $localize`Systemer hvor organisationen "${this.organizationName}" er rettighedshaver, og hvor feltet dermed nulstilles:`;
       case 'systemsParentSystem':
-        return $localize`Systemer hvor organisationen "${this.organizationName}" er overordnet system, og hvor feltet dermed nulstilles:`;
+        return $localize`IT-Systemer som flyttes til "${this.organizationName}", da de er sat som "Overordnet IT-System" på systemer oprettet i andre organisationer:`;
       case 'systemsArchiveSupplier':
         return $localize`Systemer hvor organisationen "${this.organizationName}" er arkivleverandør, og hvor feltet dermed nulstilles:`;
       case 'systemsUsages':

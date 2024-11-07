@@ -102,7 +102,11 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
   }
 
   public onDeleteOrganization(organization: Organization) {
-    const dialogRef = this.dialog.open(DeleteOrganizationDialogComponent);
+    const dialogRef = this.dialog.open(DeleteOrganizationDialogComponent, {
+      width: 'auto',
+      minWidth: '400px',
+      maxWidth: '1200px',
+    });
     dialogRef.componentInstance.organization = organization;
   }
 
