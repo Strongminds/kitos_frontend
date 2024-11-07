@@ -44,8 +44,8 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
       this.actions$
         .pipe(
           ofType(
-            GlobalOptionTypeActions.updateRegularOptionTypeSuccess,
-            GlobalOptionTypeActions.createRegularOptionTypeSuccess
+            GlobalOptionTypeActions.updateOptionTypeSuccess,
+            GlobalOptionTypeActions.createOptionTypeSuccess
           ),
           filter(({ optionType }) => optionType === this.optionType)
         )
@@ -57,19 +57,22 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
 
   public onEdit(optionTypeItem: GlobalAdminOptionTypeItem): void {
     const dialogRef = this.dialog.open(EditGlobalOptionTypeDialogComponent);
-    dialogRef.componentInstance.optionTypeItem = optionTypeItem;
-    dialogRef.componentInstance.optionType = this.optionType;
+    const componentInstance = dialogRef.componentInstance;
+    componentInstance.optionTypeItem = optionTypeItem;
+    componentInstance.optionType = this.optionType;
   }
 
   public onCreate() {
     const dialogRef = this.dialog.open(CreateGlobalOptionTypeDialogComponent);
-    dialogRef.componentInstance.optionType = this.optionType;
+    const componentInstance = dialogRef.componentInstance;
+    componentInstance.optionType = this.optionType;
+    componentInstance.optionCategory = this.optionCategory;
   }
 
   public onToggleEnabled(optionTypeItem: GlobalAdminOptionTypeItem): void {
     const isEnabled = !optionTypeItem.enabled;
     this.store.dispatch(
-      GlobalOptionTypeActions.updateRegularOptionType(this.optionType, optionTypeItem.uuid, { isEnabled })
+      GlobalOptionTypeActions.updateOptionType(this.optionType, optionTypeItem.uuid, { isEnabled })
     );
   }
 
@@ -87,7 +90,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
 
   private onChangePriority(optionUuid: string, newPriority: number): void {
     this.store.dispatch(
-      GlobalOptionTypeActions.updateRegularOptionType(this.optionType, optionUuid, { priority: newPriority })
+      GlobalOptionTypeActions.updateOptionType(this.optionType, optionUuid, { priority: newPriority })
     );
   }
 }

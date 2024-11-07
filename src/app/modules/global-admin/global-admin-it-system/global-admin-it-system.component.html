@@ -12,9 +12,11 @@
   <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RoleOptionTypes">
     <app-standard-vertical-content-grid>
       <app-global-option-type-table optionType="it-system-usage"
+      title="IT System roller"
+      i18n-title
       [disableAccordion]="true"
       [expandedByDefault]="true"
-      createButtonLabel="role"
+      optionCategory="role"
       [showWriteAccess]="true"
       >
       </app-global-option-type-table>

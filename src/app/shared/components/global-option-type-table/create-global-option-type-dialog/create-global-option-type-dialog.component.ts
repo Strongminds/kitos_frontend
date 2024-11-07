@@ -14,11 +14,13 @@ import { EditGlobalOptionTypeDialogComponent } from '../edit-global-option-type-
 })
 export class CreateGlobalOptionTypeDialogComponent {
   @Input() optionType!: GlobalAdminOptionType;
+  @Input() optionCategory!: "role" | "regular";
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),
     name: new FormControl<string | undefined>(undefined, Validators.required),
     obligatory: new FormControl<boolean | undefined>(undefined),
+    writeAccess: new FormControl<boolean | undefined>(undefined),
   });
 
   constructor(private dialogRef: MatDialogRef<EditGlobalOptionTypeDialogComponent>, private store: Store) {}
@@ -33,7 +35,12 @@ export class CreateGlobalOptionTypeDialogComponent {
       name,
       isObligatory,
     };
-    this.store.dispatch(GlobalOptionTypeActions.createRegularOptionType(this.optionType, request));
+    if (this.optionCategory === 'role') {
+      const writeAccess = formValue.writeAccess ?? undefined;
+      request.writeAccess = writeAccess;
+    }
+
+    this.store.dispatch(GlobalOptionTypeActions.createOptionType(this.optionType, request));
     this.dialogRef.close();
   }
 

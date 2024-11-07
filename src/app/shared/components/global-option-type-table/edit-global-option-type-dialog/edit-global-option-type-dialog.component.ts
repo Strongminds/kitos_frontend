@@ -45,7 +45,7 @@ export class EditGlobalOptionTypeDialogComponent implements OnInit {
       name,
       isObligatory,
     };
-    this.store.dispatch(GlobalOptionTypeActions.updateRegularOptionType(this.optionType, optionUuid, request));
+    this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, optionUuid, request));
     this.dialogRef.close();
   }
 

@@ -10,7 +10,7 @@ export class GlobalAdminOptionTypeEffects {
 
   patchGlobalOptionType$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(GlobalOptionTypeActions.updateRegularOptionType),
+      ofType(GlobalOptionTypeActions.updateOptionType),
       groupBy((action) => action.optionUuid),
       mergeMap((group$) =>
         group$.pipe(
@@ -18,8 +18,8 @@ export class GlobalAdminOptionTypeEffects {
             return this.globalOptionTypeService
               .patchGlobalOption(action.optionType, action.optionUuid, action.request)
               .pipe(
-                map(() => GlobalOptionTypeActions.updateRegularOptionTypeSuccess(action.optionType)),
-                catchError(() => of(GlobalOptionTypeActions.updateRegularOptionTypeError()))
+                map(() => GlobalOptionTypeActions.updateOptionTypeSuccess(action.optionType)),
+                catchError(() => of(GlobalOptionTypeActions.updateOptionTypeError()))
               );
           })
         )
@@ -29,11 +29,11 @@ export class GlobalAdminOptionTypeEffects {
 
   createGlobalOptionType$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(GlobalOptionTypeActions.createRegularOptionType),
+      ofType(GlobalOptionTypeActions.createOptionType),
       switchMap((action) => {
         return this.globalOptionTypeService.createGlobalOption(action.optionType, action.request).pipe(
-          map(() => GlobalOptionTypeActions.createRegularOptionTypeSuccess(action.optionType)),
-          catchError(() => of(GlobalOptionTypeActions.createRegularOptionTypeError()))
+          map(() => GlobalOptionTypeActions.createOptionTypeSuccess(action.optionType)),
+          catchError(() => of(GlobalOptionTypeActions.createOptionTypeError()))
         );
       })
     );

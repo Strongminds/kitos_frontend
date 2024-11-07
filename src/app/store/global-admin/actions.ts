@@ -1,23 +1,23 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIGlobalRegularOptionCreateRequestDTO, APIGlobalRegularOptionUpdateRequestDTO } from 'src/app/api/v2';
+import { APIGlobalRoleOptionCreateRequestDTO, APIGlobalRoleOptionUpdateRequestDTO } from 'src/app/api/v2';
 import { LocalAdminOptionType } from 'src/app/shared/models/options/local-admin-option-type.model';
 
 export const GlobalOptionTypeActions = createActionGroup({
   source: 'GlobalOptionType',
   events: {
-    'Update Regular Option Type': (
+    'Update Option Type': (
       optionType: LocalAdminOptionType,
       optionUuid: string,
-      request: APIGlobalRegularOptionUpdateRequestDTO
+      request: APIGlobalRoleOptionUpdateRequestDTO
     ) => ({ optionType, optionUuid, request }),
-    'Update Regular Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
-    'Update Regular Option Type Error': () => emptyProps(),
+    'Update Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
+    'Update Option Type Error': () => emptyProps(),
 
-    'Create Regular Option Type': (
+    'Create Option Type': (
       optionType: LocalAdminOptionType,
-      request: APIGlobalRegularOptionCreateRequestDTO
+      request: APIGlobalRoleOptionCreateRequestDTO
     ) => ({ optionType, request }),
-    'Create Regular Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
-    'Create Regular Option Type Error': () => emptyProps(),
+    'Create Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
+    'Create Option Type Error': () => emptyProps(),
   },
 });
