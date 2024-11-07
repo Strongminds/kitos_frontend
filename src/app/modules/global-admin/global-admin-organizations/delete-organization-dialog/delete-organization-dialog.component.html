@@ -6,6 +6,14 @@
     </ng-container>
     <ng-container *ngIf="(hasRemovalConflicts() | async) === true">
       <app-standard-vertical-content-grid>
+        <app-paragraph [bold]="true" paragraphSize="x-large" i18n>
+          Opsummering af konsekvenser ifm. sletning af organisationer i Kitos
+        </app-paragraph>
+        <app-paragraph i18n>
+          For at sikre datakvaliteten i Kitos har Global admin mulighed for at slette en organisation
+          (leverandør/databehandler/underdatabehandler) på trods af, at der måtte være kontrakter eller databehandler
+          registreringer knyttet op på denne.
+        </app-paragraph>
         <ng-container *ngFor="let conflictType of conflictTypeOptions">
           <app-removal-conflict-table
             [type]="conflictType"
