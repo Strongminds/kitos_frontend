@@ -72,9 +72,8 @@ export class RemovalConflictTableComponent {
       case 'contracts':
         return $localize`Kontrakt`;
       case 'dprDataprocessor':
-        return $localize`Databehandler`;
       case 'dprSubDataprocessor':
-        return $localize`Underdatabehandler`;
+        return $localize`Databehandling`;
       case 'interfaces':
         return $localize`Interface`;
       case 'systemsExposingInterfaces':
@@ -94,12 +93,10 @@ export class RemovalConflictTableComponent {
 
   public getMainEntityTitle(): string | undefined {
     switch (this.type) {
-      case 'contracts':
-        return undefined;
       case 'dprDataprocessor':
-        return $localize`Databehandler`;
+      case 'contracts':
       case 'dprSubDataprocessor':
-        return $localize`Underdatabehandler`;
+        return undefined;
       case 'interfaces':
         return $localize`Interface`;
       case 'systemsExposingInterfaces':
@@ -122,9 +119,9 @@ export class RemovalConflictTableComponent {
       case 'contracts':
         return $localize`Kontrakter hvor organisationen "${this.organizationName}" er sat som "Leverandør", og hvor feltet dermed nulstilles:`;
       case 'dprDataprocessor':
-        return $localize`Databehandlere hvor organisationen "${this.organizationName}" er sat som "Databehandler", og hvor feltet dermed nulstilles:`;
+        return $localize`Registreringer i modulet "Databehandling", hvor organisationen "${this.organizationName}" fjernes som databehandler`;
       case 'dprSubDataprocessor':
-        return $localize`Underdatabehandlere hvor organisationen "${this.organizationName}" er sat som "Underdatabehandler", og hvor feltet dermed nulstilles:`;
+        return $localize`Registreringer i modulet "Databehandling", hvor organisationen "${this.organizationName}" fjernes som underdatabehandler`;
       case 'interfaces':
         return $localize`Interfaces hvor organisationen "${this.organizationName}" har systemer, og hvor feltet dermed nulstilles:`;
       case 'systemsExposingInterfaces':
