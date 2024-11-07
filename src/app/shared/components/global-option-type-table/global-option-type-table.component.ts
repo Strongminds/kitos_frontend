@@ -21,7 +21,6 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   @Input() title: string = '';
   @Input() expandedByDefault: boolean = false;
   @Input() disableAccordion: boolean = false;
-  @Input() optionCategory: 'role' | 'regular' = 'regular';
   @Input() showWriteAccess: boolean = false;
 
   constructor(

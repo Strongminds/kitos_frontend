@@ -18,6 +18,7 @@
       >
     </app-checkbox>
       <app-checkbox
+      *ngIf="isRoleOption()"
         [formGroup]="form"
         formName="writeAccess"
         [value]="form.value.writeAccess ?? false"
