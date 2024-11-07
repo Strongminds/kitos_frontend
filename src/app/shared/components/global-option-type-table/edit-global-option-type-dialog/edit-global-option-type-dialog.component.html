@@ -16,6 +16,16 @@
         text="Obligatorisk"
         i18n-text
       >
+      <app-checkbox
+        *ngIf="optionCategory === 'role'"
+        [formGroup]="form"
+        formName="writeAccess"
+        [value]="form.value.writeAccess ?? false"
+        labelPosition="after"
+        text="Skriverettighed"
+        i18n-text
+      >
+      </app-checkbox>
       </app-checkbox>
       <app-textarea
         text="Beskrivelse"

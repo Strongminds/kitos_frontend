@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { APIGlobalRegularOptionUpdateRequestDTO } from 'src/app/api/v2';
+import { APIGlobalRegularOptionUpdateRequestDTO, APIGlobalRoleOptionCreateRequestDTO, APIGlobalRoleOptionUpdateRequestDTO } from 'src/app/api/v2';
 import {
   GlobalAdminOptionType,
   GlobalAdminOptionTypeItem,
@@ -17,11 +17,13 @@ import { GlobalOptionTypeActions } from 'src/app/store/global-admin/actions';
 export class EditGlobalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;
   @Input() optionType!: GlobalAdminOptionType;
+  @Input() optionCategory!: "role" | "regular";
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),
     name: new FormControl<string | undefined>(undefined),
     obligatory: new FormControl<boolean | undefined>(undefined),
+    writeAccess: new FormControl<boolean | undefined>(undefined),
   });
 
   constructor(private dialogRef: MatDialogRef<EditGlobalOptionTypeDialogComponent>, private store: Store) {}
@@ -31,6 +33,7 @@ export class EditGlobalOptionTypeDialogComponent implements OnInit {
       description: this.optionTypeItem.description,
       obligatory: this.optionTypeItem.obligatory,
       name: this.optionTypeItem.name,
+      writeAccess: this.optionTypeItem.writeAccess,
     });
   }
 
@@ -40,11 +43,15 @@ export class EditGlobalOptionTypeDialogComponent implements OnInit {
     const name = formValue.name ?? undefined;
     const isObligatory = formValue.obligatory ?? undefined;
     const optionUuid = this.optionTypeItem.uuid;
-    const request: APIGlobalRegularOptionUpdateRequestDTO = {
+    const request: APIGlobalRoleOptionUpdateRequestDTO = {
       description,
       name,
       isObligatory,
     };
+    if (this.optionCategory === 'role') {
+      const writeAccess = formValue.writeAccess ?? undefined;
+      request.writeAccess = writeAccess;
+    }
     this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, optionUuid, request));
     this.dialogRef.close();
   }

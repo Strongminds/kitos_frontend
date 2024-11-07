@@ -21,7 +21,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   @Input() title: string = '';
   @Input() expandedByDefault: boolean = false;
   @Input() disableAccordion: boolean = false;
-  @Input() optionCategory: "role" | "regular" = "regular";
+  @Input() optionCategory: 'role' | 'regular' = 'regular';
   @Input() showWriteAccess: boolean = false;
 
   constructor(
@@ -43,10 +43,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(
-            GlobalOptionTypeActions.updateOptionTypeSuccess,
-            GlobalOptionTypeActions.createOptionTypeSuccess
-          ),
+          ofType(GlobalOptionTypeActions.updateOptionTypeSuccess, GlobalOptionTypeActions.createOptionTypeSuccess),
           filter(({ optionType }) => optionType === this.optionType)
         )
         .subscribe(() => {
@@ -60,6 +57,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     const componentInstance = dialogRef.componentInstance;
     componentInstance.optionTypeItem = optionTypeItem;
     componentInstance.optionType = this.optionType;
+    componentInstance.optionCategory = this.optionCategory;
   }
 
   public onCreate() {
@@ -71,9 +69,7 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
 
   public onToggleEnabled(optionTypeItem: GlobalAdminOptionTypeItem): void {
     const isEnabled = !optionTypeItem.enabled;
-    this.store.dispatch(
-      GlobalOptionTypeActions.updateOptionType(this.optionType, optionTypeItem.uuid, { isEnabled })
-    );
+    this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, optionTypeItem.uuid, { isEnabled }));
   }
 
   public onIncreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
@@ -84,8 +80,8 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
     this.onChangePriority(optionTypeItem.uuid, optionTypeItem.priority - 1);
   }
 
-  public getCreateButtonType(){
-    return this.optionCategory === "role" ? $localize`rolle` : $localize`type`;
+  public getCreateButtonType() {
+    return this.optionCategory === 'role' ? $localize`rolle` : $localize`type`;
   }
 
   private onChangePriority(optionUuid: string, newPriority: number): void {

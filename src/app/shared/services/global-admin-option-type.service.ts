@@ -58,10 +58,11 @@ export class GlobalAdminOptionTypeService {
             dto,
           });
       case 'it-system-usage':
-        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) => this.itSystemRoleService.patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole({
-          optionUuid,
-          dto,
-        });
+        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
+          this.itSystemRoleService.patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole({
+            optionUuid,
+            dto,
+          });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -73,6 +74,11 @@ export class GlobalAdminOptionTypeService {
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.businessTypeService.postSingleItSystemGlobalBusinessTypesInternalV2CreateBusinessType({
             dto: request,
+          });
+      case 'it-system-usage':
+        return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.itSystemRoleService.postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole({
+            dto,
           });
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
