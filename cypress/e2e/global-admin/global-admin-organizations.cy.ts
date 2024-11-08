@@ -19,7 +19,7 @@ describe('global-admin-organizations', () => {
       req.reply({ statusCode: 200, body: {} });
     }).as('createOrganization');
 
-    cy.getByDataCy('create-organization-button').should('be.visible').click({scrollBehavior: 'center'});
+    cy.getByDataCy('create-organization-button').should('be.visible').click({ scrollBehavior: 'center' });
     cy.getByDataCy('org-name').type('Test Organization');
     cy.dropdownByCy('org-type', 'Virksomhed', true);
     cy.getByDataCy('org-cvr').type('12345678');
@@ -49,5 +49,14 @@ describe('global-admin-organizations', () => {
 
     cy.wait('@editOrganization');
     cy.get('app-popup-message').should('exist');
+  });
+
+  it('Can delete organization with no conflicts', () => {
+    cy.intercept('GET', 'api/v2/internal/organizations/*/conflicts', {
+      statusCode: 200,
+      fixture: '.global-admin/no-conflicts.json',
+    });
+
+    cy.getByDataCy('grid-delete-button').first().click();
   });
 });
