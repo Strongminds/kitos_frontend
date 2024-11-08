@@ -1,5 +1,10 @@
 <ng-container *ngIf="optionTypeItems$ | async as optionTypeItems">
-  <app-accordion [title]="title" [disabled]="disableAccordion" [isExpandedByDefault]="expandedByDefault">
+  <app-accordion
+  [title]="title"
+  [disabled]="disableAccordion"
+  [isExpandedByDefault]="expandedByDefault"
+  data-cy="option-type-accordion"
+  >
     <div style="display: flex; justify-content: flex-end;">
           <app-button buttonStyle="primary" (buttonClick)="onCreate()" i18n> Opret {{ getCreateButtonType() }}</app-button>
     </div>
@@ -28,7 +33,11 @@
                 <app-icon-button (buttonClick)="onIncreasePriority(optionTypeItem)" [disabled]="(isHighestPriority(optionTypeItem) | async) === true">
                   <app-arrow-up-icon></app-arrow-up-icon>
                 </app-icon-button>
-                <app-icon-button (buttonClick)="onDecreasePriority(optionTypeItem)" [disabled]="(isLowestPriority(optionTypeItem) | async) === true">
+                <app-icon-button
+                (buttonClick)="onDecreasePriority(optionTypeItem)"
+                [disabled]="(isLowestPriority(optionTypeItem) | async) === true"
+                data-cy="decrease-priority-button"
+                >
                   <app-arrow-down-icon></app-arrow-down-icon>
                 </app-icon-button>
             </div>
@@ -44,7 +53,7 @@
                 <app-icon-button (buttonClick)="onEdit(optionTypeItem)">
                   <app-pencil-icon></app-pencil-icon>
                 </app-icon-button>
-                <app-icon-button (buttonClick)="onToggleEnabled(optionTypeItem)">
+                <app-icon-button (buttonClick)="onToggleEnabled(optionTypeItem)" data-cy="disable-button">
                   <app-x-icon *ngIf="optionTypeItem.enabled"></app-x-icon>
                   <app-check-icon *ngIf="!optionTypeItem.enabled"></app-check-icon>
                 </app-icon-button>
