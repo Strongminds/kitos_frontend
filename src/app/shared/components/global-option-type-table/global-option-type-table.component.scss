@@ -10,3 +10,8 @@
   overflow-wrap: break-word;
   word-break: break-word;
 }
+
+.create-button-container-align-right {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -5,8 +5,12 @@
   [isExpandedByDefault]="expandedByDefault"
   data-cy="option-type-accordion"
   >
-    <div style="display: flex; justify-content: flex-end;">
-          <app-button buttonStyle="primary" (buttonClick)="onCreate()" i18n> Opret {{ getCreateButtonType() }}</app-button>
+    <div class="create-button-container-align-right">
+          <app-button
+          buttonStyle="primary"
+          (buttonClick)="onCreate()"
+          i18n
+          data-cy="create-button"> Opret {{ getCreateButtonType() }}</app-button>
     </div>
     <app-loading *ngIf="isLoading$ | async"></app-loading>
     <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">

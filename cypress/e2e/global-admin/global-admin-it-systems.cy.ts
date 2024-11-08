@@ -21,7 +21,7 @@ describe('global-admin-organizations', () => {
   it('Can toggle business type enabled', () => {
     cy.intercept('PATCH', '/api/v2/internal/it-systems/global-option-types/business-types/*', {
       statusCode: 200,
-      body: { }
+      body: {},
     }).as('patch');
 
     cy.getByDataCy('option-type-accordion').first().click();
@@ -30,12 +30,12 @@ describe('global-admin-organizations', () => {
     cy.wait('@patch').then((interception) => {
       expect(interception.request.body.isEnabled).to.equal(false);
     });
-  })
+  });
 
   it('Can toggle business type priority', () => {
     cy.intercept('PATCH', '/api/v2/internal/it-systems/global-option-types/business-types/*', {
       statusCode: 200,
-      body: { }
+      body: {},
     }).as('patch');
 
     cy.getByDataCy('option-type-accordion').first().click();
@@ -44,12 +44,12 @@ describe('global-admin-organizations', () => {
     cy.wait('@patch').then((interception) => {
       expect(interception.request.body.priority).to.equal(17);
     });
-  })
+  });
 
   it('Can edit business type in dialog', () => {
     cy.intercept('PATCH', '/api/v2/internal/it-systems/global-option-types/business-types/*', {
       statusCode: 200,
-      body: { }
+      body: {},
     }).as('patch');
     const newName = 'someName';
 
@@ -62,5 +62,24 @@ describe('global-admin-organizations', () => {
     cy.wait('@patch').then((interception) => {
       expect(interception.request.body.name).to.equal(newName);
     });
-  })
+  });
+
+  it('Can create business type in dialog', () => {
+    cy.intercept('POST', 'api/v2/internal/it-systems/global-option-types/business-types', {
+      statusCode: 200,
+      body: {},
+    }).as('post');
+    const newName = 'someName';
+
+    cy.getByDataCy('option-type-accordion').first().click();
+    cy.getByDataCy('create-button').first().click();
+
+    cy.replaceTextByDataCy('name-textbox', newName);
+    cy.getByDataCy('obligatory-checkbox').click();
+    cy.getByDataCy('save-button').click();
+
+    cy.wait('@post').then((interception) => {
+      expect(interception.request.body.name).to.equal(newName);
+    });
+  });
 });
