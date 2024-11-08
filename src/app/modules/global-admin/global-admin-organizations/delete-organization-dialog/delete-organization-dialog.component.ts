@@ -127,14 +127,6 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     );
   }
 
-  private copyPageContentToClipBoard(contentRootId: string) {
-    const currentWindow = window.getSelection();
-    if (!currentWindow) return;
-    window.getSelection()?.selectAllChildren(document.getElementById(contentRootId) as Node);
-    document.execCommand('copy');
-    window.getSelection()?.removeAllRanges();
-  }
-
   public typeHasConflicts(conflicType: RemovalConflictType): Observable<boolean> {
     return this.getSpecificConflicts(conflicType).pipe(map((conflicts) => conflicts.length > 0));
   }
@@ -167,5 +159,13 @@ export class DeleteOrganizationDialogComponent implements OnInit {
       }),
       map((conflicts) => conflicts ?? [])
     );
+  }
+
+  private copyPageContentToClipBoard(contentRootId: string) {
+    const currentWindow = window.getSelection();
+    if (!currentWindow) return;
+    window.getSelection()?.selectAllChildren(document.getElementById(contentRootId) as Node);
+    document.execCommand('copy');
+    window.getSelection()?.removeAllRanges();
   }
 }
