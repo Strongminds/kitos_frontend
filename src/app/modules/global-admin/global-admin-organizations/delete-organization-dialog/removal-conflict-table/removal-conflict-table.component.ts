@@ -21,7 +21,7 @@ export class RemovalConflictTableComponent {
       case 'dprSubDataprocessor':
         return $localize`Underdatabehandler konflikter`;
       case 'interfaces':
-        return $localize`Interface konflikter`;
+        return $localize`Snitflade konflikter`;
       case 'systemsExposingInterfaces':
         return $localize`System konflikter`;
       case 'systemsRightsHolder':
@@ -123,9 +123,9 @@ export class RemovalConflictTableComponent {
       case 'dprSubDataprocessor':
         return $localize`Registreringer i modulet "Databehandling", hvor organisationen "${this.organizationName}" fjernes som underdatabehandler`;
       case 'interfaces':
-        return $localize`Interfaces hvor organisationen "${this.organizationName}" har systemer, og hvor feltet dermed nulstilles:`;
+        return $localize`Snitflader som flyttes til "Fælles Kommune", da de er udstillet på IT-Systemer oprettet i andre organisationer`;
       case 'systemsExposingInterfaces':
-        return $localize`Systemer hvor organisationen "${this.organizationName}" har interfaces, og hvor feltet dermed nulstilles:`;
+        return $localize`IT-Systemer som flyttes til "Fælles kommune", da de udstiller Snitflader oprettet i andre organisationer:`;
       case 'systemsRightsHolder':
         return $localize`Systemer hvor organisationen "${this.organizationName}" er rettighedshaver, og hvor feltet dermed nulstilles:`;
       case 'systemsParentSystem':
@@ -158,13 +158,25 @@ export type RemovalConflictType =
   | 'systemsUsages';
 
 export const conflictTypeOptions: RemovalConflictType[] = [
+  'systemsExposingInterfaces',
+  'systemsParentSystem',
+  'interfaces',
+  'systemsRightsHolder',
+  'systemsArchiveSupplier',
+  'systemsUsages',
+];
+
+export const simpleConflictTypeOptions: RemovalConflictType[] = [
   'contracts',
   'dprDataprocessor',
   'dprSubDataprocessor',
-  'interfaces',
+];
+
+export const otherConflictTypeOptions: RemovalConflictType[] = [
   'systemsExposingInterfaces',
-  'systemsRightsHolder',
   'systemsParentSystem',
+  'interfaces',
+  'systemsRightsHolder',
   'systemsArchiveSupplier',
   'systemsUsages',
 ];

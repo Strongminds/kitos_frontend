@@ -14,7 +14,18 @@
           (leverandør/databehandler/underdatabehandler) på trods af, at der måtte være kontrakter eller databehandler
           registreringer knyttet op på denne.
         </app-paragraph>
-        <ng-container *ngFor="let conflictType of conflictTypeOptions">
+        <ng-container *ngFor="let conflictType of simpleConflictTypeOptions">
+          <app-removal-conflict-table
+            [type]="conflictType"
+            [removalConflicts$]="removalConflicts$"
+            [organizationName]="organization.Name"
+          >
+          </app-removal-conflict-table>
+        </ng-container>
+        <app-paragraph [bold]="true" paragraphSize="x-large" i18n>
+          Øvrige konsekvenser som information til Global Admin:
+        </app-paragraph>
+        <ng-container *ngFor="let conflictType of otherConflictTypeOptions">
           <app-removal-conflict-table
             [type]="conflictType"
             [removalConflicts$]="removalConflicts$"
