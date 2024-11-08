@@ -23,7 +23,7 @@
           >
           </app-removal-conflict-table>
         </ng-container>
-        <app-paragraph [bold]="true" paragraphSize="x-large" i18n>
+        <app-paragraph *ngIf="hasOtherTypeConflicts() | async" [bold]="true" paragraphSize="x-large" i18n>
           Øvrige konsekvenser som information til Global Admin:
         </app-paragraph>
         <ng-container *ngFor="let conflictType of otherConflictTypeOptions">

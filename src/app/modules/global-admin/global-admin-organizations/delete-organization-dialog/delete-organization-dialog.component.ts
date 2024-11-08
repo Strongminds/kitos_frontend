@@ -49,6 +49,14 @@ export class DeleteOrganizationDialogComponent implements OnInit {
   }
 
   public hasAnyRemovalConflict(): Observable<boolean | undefined> {
+    return this.hasConflicts(this.simpleConflictTypeOptions.concat(this.otherConflictTypeOptions));
+  }
+
+  public hasOtherTypeConflicts(): Observable<boolean | undefined> {
+    return this.hasConflicts(this.otherConflictTypeOptions);
+  }
+
+  public hasConflicts(types: RemovalConflictType[]): Observable<boolean | undefined> {
     return this.componentStore
       .select((state) => state.consequences)
       .pipe(
@@ -57,9 +65,7 @@ export class DeleteOrganizationDialogComponent implements OnInit {
             return of(undefined);
           }
 
-          const conflictChecks$ = this.simpleConflictTypeOptions
-            .concat(this.otherConflictTypeOptions)
-            .map((type) => this.typeHasConflicts(type));
+          const conflictChecks$ = types.map((type) => this.typeHasConflicts(type));
 
           return combineLatest(conflictChecks$).pipe(
             map((conflictResults) => conflictResults.some((hasConflict) => hasConflict))
