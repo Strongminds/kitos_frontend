@@ -108,7 +108,7 @@ export class DeleteOrganizationDialogComponent implements OnInit {
   public canSubmit(): Observable<boolean> {
     return this.hasAnyRemovalConflict().pipe(
       map((hasConflicts) => {
-        return (hasConflicts === false || this.hasAcceptedConsequences);
+        return hasConflicts === false || this.hasAcceptedConsequences;
       })
     );
   }
