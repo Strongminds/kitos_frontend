@@ -4,15 +4,12 @@ import { RemovalConflict, RemovalConflictType } from '../removal-conflict-table.
 @Component({
   selector: 'app-inner-conflict-table',
   templateUrl: './inner-conflict-table.component.html',
-  styleUrl: './inner-conflict-table.component.scss'
+  styleUrl: './inner-conflict-table.component.scss',
 })
 export class InnerConflictTableComponent {
-
   @Input() public removalConflicts!: RemovalConflict[];
   @Input() public organizationName!: string;
   @Input() public type!: RemovalConflictType;
-
-  public defaultOrganizationName = 'Fælles Kommune';
 
   public getMainEntityTitle(): string | undefined {
     switch (this.type) {
