@@ -3,9 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
 import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
-import {
-  RemovalConflictType,
-} from './removal-conflict-table/removal-conflict-table.component';
+import { RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -28,9 +26,9 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     'systemsRightsHolder',
     'systemsExposingInterfaces',
     'systemsParentSystem',
+    'systemsUsages',
     'systemsArchiveSupplier',
     'interfaces',
-    'systemsUsages',
   ];
 
   public readonly deletingOrganization$ = new BehaviorSubject<boolean>(false);

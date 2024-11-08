@@ -49,14 +49,13 @@ export class RemovalConflictTableComponent {
       case 'dprSubDataprocessor':
       case 'systemsRightsHolder':
       case 'systemsArchiveSupplier':
+      case 'systemsUsages':
         return undefined;
       case 'interfaces':
         return $localize`Snitflade`;
       case 'systemsExposingInterfaces':
       case 'systemsParentSystem':
         return $localize`IT-System (i kataloget)`;
-      case 'systemsUsages':
-        return $localize`System`;
       default:
         throw new Error(`Unknown removal conflict type: ${this.type}`);
     }
@@ -78,9 +77,8 @@ export class RemovalConflictTableComponent {
       case 'systemsParentSystem':
         return $localize`Overordnet system for (IT-System)`;
       case 'systemsArchiveSupplier':
-        return $localize`IT-System (i anvendelse)`;
       case 'systemsUsages':
-        return $localize`System`;
+        return $localize`IT-System (i anvendelse)`;
       default:
         throw new Error(`Unknown removal conflict type: ${this.type}`);
     }
@@ -89,6 +87,7 @@ export class RemovalConflictTableComponent {
   public getOrganizationTitle(): string {
     switch (this.type) {
       case 'systemsArchiveSupplier':
+      case 'systemsUsages':
         return $localize`Anvendt i (organisation)`;
       default:
         return $localize`Oprettet i (organisation)`;
@@ -98,7 +97,7 @@ export class RemovalConflictTableComponent {
   public getAccordionTitle(): string {
     switch (this.type) {
       case 'contracts':
-        return $localize`Kontrakter hvor organisationen "${this.organizationName}" er sat som "Leverandør", og hvor feltet dermed nulstilles:`;
+        return $localize`Kontrakter hvor organisationen "${this.organizationName}" er sat som "Leverandør", og hvor feltet dermed nulstilles`;
       case 'dprDataprocessor':
         return $localize`Registreringer i modulet "Databehandling", hvor organisationen "${this.organizationName}" fjernes som databehandler`;
       case 'dprSubDataprocessor':
@@ -106,15 +105,15 @@ export class RemovalConflictTableComponent {
       case 'interfaces':
         return $localize`Snitflader som flyttes til "Fælles Kommune", da de er udstillet på IT-Systemer oprettet i andre organisationer`;
       case 'systemsExposingInterfaces':
-        return $localize`IT-Systemer som flyttes til "Fælles kommune", da de udstiller Snitflader oprettet i andre organisationer:`;
+        return $localize`IT-Systemer som flyttes til "Fælles kommune", da de udstiller Snitflader oprettet i andre organisationer`;
       case 'systemsRightsHolder':
         return $localize`IT-Systemer i kataloget, hvor "${this.organizationName}" er sat som "Rettighedshaver", og hvor feltet dermed nulstilles`;
       case 'systemsParentSystem':
-        return $localize`IT-Systemer som flyttes til "${this.organizationName}", da de er sat som "Overordnet IT-System" på systemer oprettet i andre organisationer:`;
+        return $localize`IT-Systemer som flyttes til "${this.organizationName}", da de er sat som "Overordnet IT-System" på systemer oprettet i andre organisationer`;
       case 'systemsArchiveSupplier':
-        return $localize`Systemer hvor organisationen "${this.organizationName}" er arkivleverandør, og hvor feltet dermed nulstilles:`;
+        return $localize`IT-Systemer hvor organisationen "${this.organizationName}" er sat som "Arkiveringsleverandør", og hvor feltet dermed nulstilles`;
       case 'systemsUsages':
-        return $localize`Systemer hvor organisationen "${this.organizationName}" har brug, og hvor feltet dermed nulstilles:`;
+        return $localize`IT-Systemer som flyttes til "Fælles kommune", da de stadig er er i anvendelse i andre organisationer`;
       default:
         throw new Error(`Unknown removal conflict type: ${this.type}`);
     }
@@ -131,9 +130,9 @@ export type RemovalConflictType =
   | 'contracts'
   | 'dprDataprocessor'
   | 'dprSubDataprocessor'
-  | 'interfaces'
-  | 'systemsExposingInterfaces'
   | 'systemsRightsHolder'
+  | 'systemsExposingInterfaces'
   | 'systemsParentSystem'
+  | 'systemsUsages'
   | 'systemsArchiveSupplier'
-  | 'systemsUsages';
+  | 'interfaces';
