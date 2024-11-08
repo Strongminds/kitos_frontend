@@ -54,9 +54,53 @@ describe('global-admin-organizations', () => {
   it('Can delete organization with no conflicts', () => {
     cy.intercept('GET', 'api/v2/internal/organizations/*/conflicts', {
       statusCode: 200,
-      fixture: '.global-admin/no-conflicts.json',
+      fixture: './global-admin/no-conflicts.json',
     });
 
     cy.getByDataCy('grid-delete-button').first().click();
+
+    cy.intercept('DELETE', 'api/v2/internal/organizations/*/delete*', { statusCode: 204, body: {} }).as(
+      'deleteOrganization'
+    );
+
+    cy.getByDataCy('delete-org-dialog-button').click();
+    cy.getByDataCy('confirm-button').click();
+
+    cy.wait('@deleteOrganization');
+
+    cy.get('app-popup-message').should('exist');
+  });
+
+  it('Can not delete organization with conflicts, if checkbox is not checked', () => {
+    cy.intercept('GET', 'api/v2/internal/organizations/*/conflicts', {
+      statusCode: 200,
+      fixture: './global-admin/with-conflicts.json',
+    });
+
+    cy.getByDataCy('grid-delete-button').first().click();
+
+    cy.getByDataCy('delete-org-dialog-button').click();
+    cy.getByDataCy('confirm-button').should('not.exist');
+  });
+
+  it('Can delete organization with conflicts, if checkbox is checked', () => {
+    cy.intercept('GET', 'api/v2/internal/organizations/*/conflicts', {
+      statusCode: 200,
+      fixture: './global-admin/with-conflicts.json',
+    }).as;
+
+    cy.getByDataCy('grid-delete-button').first().click();
+
+    cy.intercept('DELETE', 'api/v2/internal/organizations/*/delete*', { statusCode: 204, body: {} }).as(
+      'deleteOrganization'
+    );
+
+    cy.getByDataCy('consequence-checkbox').click();
+    cy.getByDataCy('delete-org-dialog-button').click();
+    cy.getByDataCy('confirm-button').click();
+
+    cy.wait('@deleteOrganization');
+
+    cy.get('app-popup-message').should('exist');
   });
 });
