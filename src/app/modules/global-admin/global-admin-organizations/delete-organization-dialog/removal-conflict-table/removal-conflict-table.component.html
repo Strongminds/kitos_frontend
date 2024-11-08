@@ -1,12 +1,12 @@
 <ng-container *ngIf="removalConflicts$ | async as removalConflicts">
-  <app-accordion *ngIf="useAccordion" [isExpandedByDefault]="true" [title]="getAccordionTitle()">
+  <app-accordion *ngIf="!isCopying" [isExpandedByDefault]="true" [title]="getAccordionTitle()">
     <app-inner-conflict-table
       [removalConflicts]="removalConflicts"
       [type]="type"
       [organizationName]="organizationName"
     ></app-inner-conflict-table>
   </app-accordion>
-  <ng-container *ngIf="!useAccordion">
+  <ng-container *ngIf="isCopying">
     <h4>{{ getAccordionTitle() }}</h4>
     <app-inner-conflict-table
       [removalConflicts]="removalConflicts"

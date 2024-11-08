@@ -11,8 +11,7 @@ export class RemovalConflictTableComponent {
   @Input() public removalConflicts$!: Observable<RemovalConflict[]>;
   @Input() public organizationName!: string;
   @Input() public type!: RemovalConflictType;
-  @Input() public isCopying!: boolean;
-  @Input() public useAccordion: boolean = true;
+  @Input() public isCopying: boolean = false;
 
   public readonly defaultOrganizationName = 'Fælles Kommune';
 

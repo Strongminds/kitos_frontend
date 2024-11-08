@@ -24,7 +24,7 @@
             [type]="conflictType"
             [removalConflicts$]="getSpecificConflicts(conflictType)"
             [organizationName]="organization.Name"
-            [useAccordion]="!isCopying"
+            [isCopying]="isCopying"
           >
           </app-removal-conflict-table>
         </ng-container>
@@ -37,7 +37,7 @@
             [type]="conflictType"
             [removalConflicts$]="getSpecificConflicts(conflictType)"
             [organizationName]="organization.Name"
-            [useAccordion]="!isCopying"
+            [isCopying]="isCopying"
           >
           </app-removal-conflict-table>
         </ng-container>
