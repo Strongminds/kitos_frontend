@@ -7,6 +7,7 @@
        [formGroup]="form"
        formName="name"
        [value]="form.value.name ?? undefined"
+       data-cy="name-textbox"
        ></app-textbox>
       <app-checkbox
         [formGroup]="form"
@@ -38,7 +39,7 @@
     </app-standard-vertical-content-grid>
   </form>
   <app-dialog-actions>
-    <app-button (buttonClick)="onSave()" [disabled]="disableSaveButton()" i18n> Gem </app-button>
+    <app-button (buttonClick)="onSave()" [disabled]="disableSaveButton()" i18n data-cy="save-button"> Gem </app-button>
     <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n> Annuller </app-button>
   </app-dialog-actions>
 </app-dialog>

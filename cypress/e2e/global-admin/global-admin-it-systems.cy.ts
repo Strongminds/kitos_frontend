@@ -45,4 +45,22 @@ describe('global-admin-organizations', () => {
       expect(interception.request.body.priority).to.equal(17);
     });
   })
+
+  it('Can edit business type in dialog', () => {
+    cy.intercept('PATCH', '/api/v2/internal/it-systems/global-option-types/business-types/*', {
+      statusCode: 200,
+      body: { }
+    }).as('patch');
+    const newName = 'someName';
+
+    cy.getByDataCy('option-type-accordion').first().click();
+    cy.getByDataCy('edit-button').first().click();
+
+    cy.replaceTextByDataCy('name-textbox', newName);
+    cy.getByDataCy('save-button').click();
+
+    cy.wait('@patch').then((interception) => {
+      expect(interception.request.body.name).to.equal(newName);
+    });
+  })
 });
