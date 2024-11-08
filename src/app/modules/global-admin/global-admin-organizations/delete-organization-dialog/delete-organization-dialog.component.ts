@@ -9,6 +9,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { Store } from '@ngrx/store';
 import { getConflictDescription } from './org-removal-conflict.helper';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -47,7 +48,8 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     private confirmActionService: ConfirmActionService,
     private actions$: Actions,
     private store: Store,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private notificationService: NotificationService
   ) {}
 
   public ngOnInit(): void {
@@ -117,6 +119,7 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     this.cdr.detectChanges();
     this.copyPageContentToClipBoard(this.conflictContentId);
     this.isCopying = false;
+    this.notificationService.showDefault($localize`Konsekvenserne er kopieret til udklipsholderen`);
   }
 
   public canSubmit(): Observable<boolean> {
