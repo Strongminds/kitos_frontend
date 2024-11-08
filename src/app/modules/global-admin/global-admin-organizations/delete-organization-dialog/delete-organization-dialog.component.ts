@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, combineLatest, first, map, Observable, of, switchMap } from 'rxjs';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
@@ -8,6 +8,7 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { Actions, ofType } from '@ngrx/effects';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { Store } from '@ngrx/store';
+import { getConflictDescription } from './org-removal-conflict.helper';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -43,7 +44,8 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     private componentStore: DeleteOrganizationComponentStore,
     private confirmActionService: ConfirmActionService,
     private actions$: Actions,
-    private store: Store
+    private store: Store,
+    private cdr: ChangeDetectorRef
   ) {}
 
   public ngOnInit(): void {
@@ -100,18 +102,19 @@ export class DeleteOrganizationDialogComponent implements OnInit {
       );
   }
 
+  public getTableTitle(type: RemovalConflictType): string {
+    return getConflictDescription(type, this.organization.Name, 'Fælles Kommune');
+  }
+
   public getTitle(): string {
     return $localize`Slet` + ` "${this.organization.Name}"`;
   }
 
   public copyConflictsToClipboard(): void {
     this.isCopying = true;
-    setTimeout(() => {
-
-    }, 500);
+    this.cdr.detectChanges();
     this.copyPageContentToClipBoard('conflict-content');
-    this.isCopying = true;
-    this.copyPageContentToClipBoard('conflict-content');
+    this.isCopying = false;
   }
 
   public canSubmit(): Observable<boolean> {

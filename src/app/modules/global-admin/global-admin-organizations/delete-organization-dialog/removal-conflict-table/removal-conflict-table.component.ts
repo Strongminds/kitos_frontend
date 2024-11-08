@@ -12,6 +12,7 @@ export class RemovalConflictTableComponent {
   @Input() public organizationName!: string;
   @Input() public type!: RemovalConflictType;
   @Input() public isCopying!: boolean;
+  @Input() public useAccordion: boolean = true;
 
   public readonly defaultOrganizationName = 'Fælles Kommune';
 

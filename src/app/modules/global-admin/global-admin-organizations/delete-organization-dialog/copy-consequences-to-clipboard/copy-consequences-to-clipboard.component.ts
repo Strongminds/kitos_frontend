@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Observable } from 'rxjs';
+import { OrganizationRemovalConflicts } from '../delete-organization.component-store';
 
 @Component({
   selector: 'app-copy-consequences-to-clipboard',
@@ -6,5 +8,6 @@ import { Component } from '@angular/core';
   styleUrl: './copy-consequences-to-clipboard.component.scss'
 })
 export class CopyConsequencesToClipboardComponent {
-
+  @Input() removalConflicts$!: Observable<OrganizationRemovalConflicts | undefined>;
+  @Input() organizationName!: string;
 }
