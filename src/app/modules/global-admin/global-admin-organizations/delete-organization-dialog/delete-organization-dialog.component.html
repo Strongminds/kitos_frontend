@@ -5,7 +5,7 @@
       <app-loading></app-loading>
     </ng-container>
     <ng-container *ngIf="(hasAnyRemovalConflict() | async) === true">
-      <app-standard-vertical-content-grid [id]="'conflict-content'">
+      <app-standard-vertical-content-grid [id]="conflictContentId">
         <app-paragraph [bold]="true" paragraphSize="x-large" i18n>
           Opsummering af konsekvenser ifm. sletning af organisationer i Kitos
         </app-paragraph>

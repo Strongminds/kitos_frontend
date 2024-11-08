@@ -39,6 +39,8 @@ export class DeleteOrganizationDialogComponent implements OnInit {
 
   public readonly deletingOrganization$ = new BehaviorSubject<boolean>(false);
 
+  public readonly conflictContentId = 'conflict-content';
+
   constructor(
     private dialogRef: MatDialogRef<DeleteOrganizationDialogComponent>,
     private componentStore: DeleteOrganizationComponentStore,
@@ -113,7 +115,7 @@ export class DeleteOrganizationDialogComponent implements OnInit {
   public copyConflictsToClipboard(): void {
     this.isCopying = true;
     this.cdr.detectChanges();
-    this.copyPageContentToClipBoard('conflict-content');
+    this.copyPageContentToClipBoard(this.conflictContentId);
     this.isCopying = false;
   }
 
