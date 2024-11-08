@@ -12,31 +12,6 @@ export class RemovalConflictTableComponent {
   @Input() public organizationName!: string;
   @Input() public type!: RemovalConflictType;
 
-  public getAccordionTitle(): string {
-    switch (this.type) {
-      case 'contracts':
-        return $localize`Kontrakt konflikter`;
-      case 'dprDataprocessor':
-        return $localize`Databehandler konflikter`;
-      case 'dprSubDataprocessor':
-        return $localize`Underdatabehandler konflikter`;
-      case 'interfaces':
-        return $localize`Snitflade konflikter`;
-      case 'systemsExposingInterfaces':
-        return $localize`System konflikter`;
-      case 'systemsRightsHolder':
-        return $localize`System konflikter`;
-      case 'systemsParentSystem':
-        return $localize`System konflikter`;
-      case 'systemsArchiveSupplier':
-        return $localize`System konflikter`;
-      case 'systemsUsages':
-        return $localize`System konflikter`;
-      default:
-        throw new Error(`Unknown removal conflict type: ${this.type}`);
-    }
-  }
-
   public getSpecificConflicts(): Observable<RemovalConflict[]> {
     return this.removalConflicts$.pipe(
       map((conflicts) => {
@@ -120,7 +95,7 @@ export class RemovalConflictTableComponent {
     }
   }
 
-  public getTooltipText(): string {
+  public getAccordionTitle(): string {
     switch (this.type) {
       case 'contracts':
         return $localize`Kontrakter hvor organisationen "${this.organizationName}" er sat som "Leverandør", og hvor feltet dermed nulstilles:`;
@@ -162,27 +137,3 @@ export type RemovalConflictType =
   | 'systemsParentSystem'
   | 'systemsArchiveSupplier'
   | 'systemsUsages';
-
-export const conflictTypeOptions: RemovalConflictType[] = [
-  'systemsExposingInterfaces',
-  'systemsParentSystem',
-  'interfaces',
-  'systemsRightsHolder',
-  'systemsArchiveSupplier',
-  'systemsUsages',
-];
-
-export const simpleConflictTypeOptions: RemovalConflictType[] = [
-  'contracts',
-  'dprDataprocessor',
-  'dprSubDataprocessor',
-];
-
-export const otherConflictTypeOptions: RemovalConflictType[] = [
-  'systemsRightsHolder',
-  'systemsExposingInterfaces',
-  'systemsParentSystem',
-  'systemsArchiveSupplier',
-  'interfaces',
-  'systemsUsages',
-];

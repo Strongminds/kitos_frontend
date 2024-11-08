@@ -1,6 +1,6 @@
 <ng-container *ngIf="(getSpecificConflicts() | async) ?? [] as removalConflicts">
   <ng-container *ngIf="removalConflicts.length > 0">
-    <app-accordion [isExpandedByDefault]="true" [title]="getTooltipText()">
+    <app-accordion [isExpandedByDefault]="true" [title]="getAccordionTitle()">
       <app-native-table tableLayout="fixed">
         <thead>
           <tr>
