@@ -56,7 +56,12 @@
       Kopier til klipholder</app-button
     >
     <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Fortryd</app-button>
-    <app-button color="warn" (buttonClick)="onDelete()" [disabled]="(canSubmit() | async) === false" i18n data-cy="delete-org-dialog-button"
+    <app-button
+      color="warn"
+      (buttonClick)="onDelete()"
+      [disabled]="(canSubmit() | async) === false"
+      i18n
+      data-cy="delete-org-dialog-button"
       >Slet</app-button
     >
   </app-dialog-actions>

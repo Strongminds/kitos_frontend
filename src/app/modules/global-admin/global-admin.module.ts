@@ -18,6 +18,8 @@ import { CreateOrganizationDialogComponent } from './global-admin-organizations/
 import { EditOrganizationDialogComponent } from './global-admin-organizations/edit-organization-dialog/edit-organization-dialog.component';
 import { DeleteOrganizationDialogComponent } from './global-admin-organizations/delete-organization-dialog/delete-organization-dialog.component';
 import { RemovalConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/removal-conflict-table.component';
+import { InnerConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/inner-conflict-table/inner-conflict-table.component';
+import { CopyConsequencesToClipboardComponent } from './global-admin-organizations/delete-organization-dialog/copy-consequences-to-clipboard/copy-consequences-to-clipboard.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +38,8 @@ import { RemovalConflictTableComponent } from './global-admin-organizations/dele
     EditOrganizationDialogComponent,
     DeleteOrganizationDialogComponent,
     RemovalConflictTableComponent,
+    InnerConflictTableComponent,
+    CopyConsequencesToClipboardComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })

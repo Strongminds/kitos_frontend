@@ -19,6 +19,7 @@ export class DeleteOrganizationDialogComponent implements OnInit {
   @Input() public organization!: Organization;
 
   public hasAcceptedConsequences: boolean = false;
+  public isCopying: boolean = false;
 
   public readonly removalConflicts$ = this.componentStore.select((state) => state.consequences);
   public readonly simpleConflictTypeOptions: RemovalConflictType[] = [
@@ -103,7 +104,15 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     return $localize`Slet` + ` "${this.organization.Name}"`;
   }
 
-  public copyConflictsToClipboard(): void {}
+  public copyConflictsToClipboard(): void {
+    this.isCopying = true;
+    setTimeout(() => {
+
+    }, 500);
+    this.copyPageContentToClipBoard('conflict-content');
+    this.isCopying = true;
+    this.copyPageContentToClipBoard('conflict-content');
+  }
 
   public canSubmit(): Observable<boolean> {
     return this.hasAnyRemovalConflict().pipe(
@@ -111,6 +120,14 @@ export class DeleteOrganizationDialogComponent implements OnInit {
         return hasConflicts === false || this.hasAcceptedConsequences;
       })
     );
+  }
+
+  private copyPageContentToClipBoard(contentRootId: string) {
+    const currentWindow = window.getSelection();
+    if (!currentWindow) return;
+    window.getSelection()?.selectAllChildren(document.getElementById(contentRootId) as Node);
+    document.execCommand('copy');
+    window.getSelection()?.removeAllRanges();
   }
 
   public typeHasConflicts(conflicType: RemovalConflictType): Observable<boolean> {

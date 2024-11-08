@@ -1,20 +1,9 @@
 <ng-container *ngIf="removalConflicts$ | async as removalConflicts">
   <app-accordion [isExpandedByDefault]="true" [title]="getAccordionTitle()">
-    <app-native-table tableLayout="fixed">
-      <thead>
-        <tr>
-          <th *ngIf="getMainEntityTitle() as mainEntityTitle">{{ mainEntityTitle }}</th>
-          <th>{{ getEntityTitle() }}</th>
-          <th>{{ getOrganizationTitle() }}</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let conflict of removalConflicts">
-          <td *ngIf="getMainEntityTitle()">{{ conflict.mainEntityName }}</td>
-          <td>{{ conflict.entityName }}</td>
-          <td>{{ conflict.organizationName }}</td>
-        </tr>
-      </tbody>
-    </app-native-table>
+    <app-inner-conflict-table
+      [removalConflicts]="removalConflicts"
+      [type]="type"
+      [organizationName]="organizationName"
+    ></app-inner-conflict-table>
   </app-accordion>
 </ng-container>
