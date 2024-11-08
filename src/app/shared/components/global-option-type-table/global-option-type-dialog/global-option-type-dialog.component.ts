@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { APIGlobalRoleOptionCreateRequestDTO, APIGlobalRoleOptionUpdateRequestDTO } from 'src/app/api/v2';
@@ -22,7 +22,7 @@ export class GlobalOptionTypeDialogComponent implements OnInit {
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),
-    name: new FormControl<string | undefined>(undefined),
+    name: new FormControl<string | undefined>(undefined, Validators.required),
     obligatory: new FormControl<boolean | undefined>(undefined),
     writeAccess: new FormControl<boolean | undefined>(undefined),
   });
@@ -62,7 +62,7 @@ export class GlobalOptionTypeDialogComponent implements OnInit {
     } else {
       this.store.dispatch(GlobalOptionTypeActions.createOptionType(this.optionType, request));
     }
-    
+
     this.dialogRef.close();
   }
 
