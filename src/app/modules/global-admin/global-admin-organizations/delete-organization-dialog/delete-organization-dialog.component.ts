@@ -8,7 +8,6 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { Actions, ofType } from '@ngrx/effects';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { Store } from '@ngrx/store';
-import { getConflictDescription } from './org-removal-conflict.helper';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
@@ -106,12 +105,8 @@ export class DeleteOrganizationDialogComponent implements OnInit {
       );
   }
 
-  public getTableTitle(type: RemovalConflictType): string {
-    return getConflictDescription(type, this.organization.Name, 'Fælles Kommune');
-  }
-
   public getTitle(): string {
-    return $localize`Slet` + ` "${this.organization.Name}"`;
+    return $localize`Slet "${this.organization.Name}"`;
   }
 
   public copyConflictsToClipboard(): void {
