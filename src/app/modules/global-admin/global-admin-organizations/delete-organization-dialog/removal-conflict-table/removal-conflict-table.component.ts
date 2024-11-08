@@ -12,6 +12,8 @@ export class RemovalConflictTableComponent {
   @Input() public organizationName!: string;
   @Input() public type!: RemovalConflictType;
 
+  public readonly defaultOrganizationName = 'Fælles Kommune';
+
   public getSpecificConflicts(): Observable<RemovalConflict[]> {
     return this.removalConflicts$.pipe(
       map((conflicts) => {
@@ -103,9 +105,9 @@ export class RemovalConflictTableComponent {
       case 'dprSubDataprocessor':
         return $localize`Registreringer i modulet "Databehandling", hvor organisationen "${this.organizationName}" fjernes som underdatabehandler`;
       case 'interfaces':
-        return $localize`Snitflader som flyttes til "Fælles Kommune", da de er udstillet på IT-Systemer oprettet i andre organisationer`;
+        return $localize`Snitflader som flyttes til "${this.defaultOrganizationName}", da de er udstillet på IT-Systemer oprettet i andre organisationer`;
       case 'systemsExposingInterfaces':
-        return $localize`IT-Systemer som flyttes til "Fælles kommune", da de udstiller Snitflader oprettet i andre organisationer`;
+        return $localize`IT-Systemer som flyttes til "${this.defaultOrganizationName}", da de udstiller Snitflader oprettet i andre organisationer`;
       case 'systemsRightsHolder':
         return $localize`IT-Systemer i kataloget, hvor "${this.organizationName}" er sat som "Rettighedshaver", og hvor feltet dermed nulstilles`;
       case 'systemsParentSystem':
@@ -113,7 +115,7 @@ export class RemovalConflictTableComponent {
       case 'systemsArchiveSupplier':
         return $localize`IT-Systemer hvor organisationen "${this.organizationName}" er sat som "Arkiveringsleverandør", og hvor feltet dermed nulstilles`;
       case 'systemsUsages':
-        return $localize`IT-Systemer som flyttes til "Fælles kommune", da de stadig er er i anvendelse i andre organisationer`;
+        return $localize`IT-Systemer som flyttes til "${this.defaultOrganizationName}", da de stadig er er i anvendelse i andre organisationer`;
       default:
         throw new Error(`Unknown removal conflict type: ${this.type}`);
     }
