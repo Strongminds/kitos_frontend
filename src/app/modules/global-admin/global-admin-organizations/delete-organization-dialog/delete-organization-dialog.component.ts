@@ -3,7 +3,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
 import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
-import { RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
+import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -48,7 +48,7 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public hasRemovalConflicts(): Observable<boolean | undefined> {
+  public hasAnyRemovalConflict(): Observable<boolean | undefined> {
     return this.componentStore
       .select((state) => state.consequences)
       .pipe(
@@ -76,8 +76,10 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     return $localize`Slet` + ` "${this.organization.Name}"`;
   }
 
+  public copyConflictsToClipboard(): void {}
+
   public canSubmit(): Observable<boolean> {
-    return this.hasRemovalConflicts().pipe(
+    return this.hasAnyRemovalConflict().pipe(
       map((hasConflicts) => {
         return hasConflicts === false || this.hasAcceptedConsequences;
       })
@@ -86,5 +88,39 @@ export class DeleteOrganizationDialogComponent implements OnInit {
 
   private hasConflicts<T>(conflicts: T[] | undefined): boolean {
     return conflicts !== undefined && conflicts.length > 0;
+  }
+
+  public typeHasConflicts(conflicType: RemovalConflictType): Observable<boolean> {
+    return this.getSpecificConflicts(conflicType).pipe(map((conflicts) => conflicts.length > 0));
+  }
+
+  public getSpecificConflicts(type: RemovalConflictType): Observable<RemovalConflict[]> {
+    return this.removalConflicts$.pipe(
+      map((conflicts) => {
+        switch (type) {
+          case 'contracts':
+            return conflicts?.contractsInOtherOrganizationsWhereOrgIsSupplier;
+          case 'dprDataprocessor':
+            return conflicts?.dprInOtherOrganizationsWhereOrgIsDataProcessor;
+          case 'dprSubDataprocessor':
+            return conflicts?.dprInOtherOrganizationsWhereOrgIsSubDataProcessor;
+          case 'interfaces':
+            return conflicts?.interfacesExposedOnSystemsOutsideTheOrganization;
+          case 'systemsExposingInterfaces':
+            return conflicts?.systemsExposingInterfacesDefinedInOtherOrganizations;
+          case 'systemsRightsHolder':
+            return conflicts?.systemsInOtherOrganizationsWhereOrgIsRightsHolder;
+          case 'systemsParentSystem':
+            return conflicts?.systemsSetAsParentSystemToSystemsInOtherOrganizations;
+          case 'systemsArchiveSupplier':
+            return conflicts?.systemsWhereOrgIsArchiveSupplier;
+          case 'systemsUsages':
+            return conflicts?.systemsWithUsagesOutsideTheOrganization;
+          default:
+            throw new Error(`Unknown removal conflict type: ${type}`);
+        }
+      }),
+      map((conflicts) => conflicts ?? [])
+    );
   }
 }

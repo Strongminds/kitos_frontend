@@ -1,10 +1,10 @@
 <app-scrollbar-dialog [title]="getTitle()" i18n-title>
   <app-loading *ngIf="(deletingOrganization$ | async) === true"></app-loading>
   <ng-container *ngIf="(deletingOrganization$ | async) === false">
-    <ng-container *ngIf="(hasRemovalConflicts() | async) === undefined">
+    <ng-container *ngIf="(hasAnyRemovalConflict() | async) === undefined">
       <app-loading></app-loading>
     </ng-container>
-    <ng-container *ngIf="(hasRemovalConflicts() | async) === true">
+    <ng-container *ngIf="(hasAnyRemovalConflict() | async) === true">
       <app-standard-vertical-content-grid>
         <app-paragraph [bold]="true" paragraphSize="x-large" i18n>
           Opsummering af konsekvenser ifm. sletning af organisationer i Kitos
@@ -16,6 +16,7 @@
         </app-paragraph>
         <ng-container *ngFor="let conflictType of simpleConflictTypeOptions">
           <app-removal-conflict-table
+            *ngIf="typeHasConflicts(conflictType) | async"
             [type]="conflictType"
             [removalConflicts$]="removalConflicts$"
             [organizationName]="organization.Name"
@@ -27,6 +28,7 @@
         </app-paragraph>
         <ng-container *ngFor="let conflictType of otherConflictTypeOptions">
           <app-removal-conflict-table
+            *ngIf="typeHasConflicts(conflictType) | async"
             [type]="conflictType"
             [removalConflicts$]="removalConflicts$"
             [organizationName]="organization.Name"
@@ -35,11 +37,11 @@
         </ng-container>
       </app-standard-vertical-content-grid>
     </ng-container>
-    <ng-container *ngIf="(hasRemovalConflicts() | async) === false">
+    <ng-container *ngIf="(hasAnyRemovalConflict() | async) === false">
       <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
     </ng-container>
   </ng-container>
-  <app-dialog-actions *ngIf="(hasRemovalConflicts() | async) === true">
+  <app-dialog-actions *ngIf="(hasAnyRemovalConflict() | async) === true">
     <app-checkbox
       [(value)]="hasAcceptedConsequences"
       labelPosition="after"
@@ -49,6 +51,9 @@
     </app-checkbox>
   </app-dialog-actions>
   <app-dialog-actions>
+    <app-button *ngIf="(hasAnyRemovalConflict() | async) === true" (buttonClick)="copyConflictsToClipboard()">
+      Kopier til klipholder</app-button
+    >
     <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Fortryd</app-button>
     <app-button color="warn" (buttonClick)="onDelete()" [disabled]="(canSubmit() | async) === false" i18n
       >Slet</app-button
