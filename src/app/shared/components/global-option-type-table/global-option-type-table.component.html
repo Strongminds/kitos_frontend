@@ -6,11 +6,11 @@
   data-cy="option-type-accordion"
   >
     <div class="create-button-container-align-right">
-          <app-button
-          buttonStyle="primary"
-          (buttonClick)="onCreate()"
-          i18n
-          data-cy="create-button"> Opret {{ getCreateButtonType() }}</app-button>
+      <app-button
+      buttonStyle="primary"
+      (buttonClick)="onCreate()"
+      i18n
+      data-cy="create-button"> Opret {{ getCreateButtonType() }}</app-button>
     </div>
     <app-loading *ngIf="isLoading$ | async"></app-loading>
     <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">
@@ -34,16 +34,16 @@
           </td>
           <td>
             <div class="align-priority-div">
-                <app-icon-button (buttonClick)="onIncreasePriority(optionTypeItem)" [disabled]="(isHighestPriority(optionTypeItem) | async) === true">
-                  <app-arrow-up-icon></app-arrow-up-icon>
-                </app-icon-button>
-                <app-icon-button
-                (buttonClick)="onDecreasePriority(optionTypeItem)"
-                [disabled]="(isLowestPriority(optionTypeItem) | async) === true"
-                data-cy="decrease-priority-button"
-                >
-                  <app-arrow-down-icon></app-arrow-down-icon>
-                </app-icon-button>
+              <app-icon-button (buttonClick)="onIncreasePriority(optionTypeItem)" [disabled]="(isHighestPriority(optionTypeItem) | async) === true">
+                <app-arrow-up-icon></app-arrow-up-icon>
+              </app-icon-button>
+              <app-icon-button
+              (buttonClick)="onDecreasePriority(optionTypeItem)"
+              [disabled]="(isLowestPriority(optionTypeItem) | async) === true"
+              data-cy="decrease-priority-button"
+              >
+                <app-arrow-down-icon></app-arrow-down-icon>
+              </app-icon-button>
             </div>
           </td>
           <td>{{ optionTypeItem.name }}</td>

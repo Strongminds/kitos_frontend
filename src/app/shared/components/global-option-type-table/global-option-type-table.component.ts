@@ -78,18 +78,21 @@ export class GlobalOptionTypeTableComponent extends BaseComponent implements OnI
   }
 
   public onEdit(optionTypeItem: GlobalAdminOptionTypeItem): void {
-    const dialogRef = this.dialog.open(GlobalOptionTypeDialogComponent);
-    const componentInstance = dialogRef.componentInstance;
+    const componentInstance = this.openDialog();
     componentInstance.action = 'edit';
     componentInstance.optionTypeItem = optionTypeItem;
-    componentInstance.optionType = this.optionType;
   }
 
   public onCreate() {
+    const componentInstance = this.openDialog();
+    componentInstance.action = 'create';
+  }
+
+  private openDialog() {
     const dialogRef = this.dialog.open(GlobalOptionTypeDialogComponent);
     const componentInstance = dialogRef.componentInstance;
-    componentInstance.action = 'create';
     componentInstance.optionType = this.optionType;
+    return componentInstance;
   }
 
   public onToggleEnabled(optionTypeItem: GlobalAdminOptionTypeItem): void {

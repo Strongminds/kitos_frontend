@@ -79,7 +79,7 @@ export class GlobalOptionTypeDialogComponent implements OnInit {
   }
 
   public disableSaveButton(): boolean {
-    if (this.action === 'create') return !this.form.valid;
+    if (!this.isEditDialog()) return !this.form.valid;
     return !this.form.valid || !this.haveValuesChanged();
   }
 
