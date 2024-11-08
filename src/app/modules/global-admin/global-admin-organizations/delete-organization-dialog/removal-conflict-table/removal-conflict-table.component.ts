@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { OrganizationRemovalConflicts } from '../delete-organization.component-store';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-removal-conflict-table',
@@ -8,41 +7,11 @@ import { OrganizationRemovalConflicts } from '../delete-organization.component-s
   styleUrl: './removal-conflict-table.component.scss',
 })
 export class RemovalConflictTableComponent {
-  @Input() public removalConflicts$!: Observable<OrganizationRemovalConflicts | undefined>;
+  @Input() public removalConflicts$!: Observable<RemovalConflict[]>;
   @Input() public organizationName!: string;
   @Input() public type!: RemovalConflictType;
 
   public readonly defaultOrganizationName = 'Fælles Kommune';
-
-  public getSpecificConflicts(): Observable<RemovalConflict[]> {
-    return this.removalConflicts$.pipe(
-      map((conflicts) => {
-        switch (this.type) {
-          case 'contracts':
-            return conflicts?.contractsInOtherOrganizationsWhereOrgIsSupplier;
-          case 'dprDataprocessor':
-            return conflicts?.dprInOtherOrganizationsWhereOrgIsDataProcessor;
-          case 'dprSubDataprocessor':
-            return conflicts?.dprInOtherOrganizationsWhereOrgIsSubDataProcessor;
-          case 'interfaces':
-            return conflicts?.interfacesExposedOnSystemsOutsideTheOrganization;
-          case 'systemsExposingInterfaces':
-            return conflicts?.systemsExposingInterfacesDefinedInOtherOrganizations;
-          case 'systemsRightsHolder':
-            return conflicts?.systemsInOtherOrganizationsWhereOrgIsRightsHolder;
-          case 'systemsParentSystem':
-            return conflicts?.systemsSetAsParentSystemToSystemsInOtherOrganizations;
-          case 'systemsArchiveSupplier':
-            return conflicts?.systemsWhereOrgIsArchiveSupplier;
-          case 'systemsUsages':
-            return conflicts?.systemsWithUsagesOutsideTheOrganization;
-          default:
-            throw new Error(`Unknown removal conflict type: ${this.type}`);
-        }
-      }),
-      map((conflicts) => conflicts ?? [])
-    );
-  }
 
   public getMainEntityTitle(): string | undefined {
     switch (this.type) {
