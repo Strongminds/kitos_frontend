@@ -41,7 +41,7 @@
       <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
     </ng-container>
   </ng-container>
-  <app-dialog-actions *ngIf="(hasAnyRemovalConflict() | async) === true">
+  <app-dialog-actions *ngIf="(hasAnyRemovalConflict() | async) === true && (deletingOrganization$ | async) === false">
     <app-checkbox
       [(value)]="hasAcceptedConsequences"
       labelPosition="after"
@@ -50,7 +50,7 @@
     >
     </app-checkbox>
   </app-dialog-actions>
-  <app-dialog-actions>
+  <app-dialog-actions *ngIf="(deletingOrganization$ | async) === false">
     <app-button *ngIf="(hasAnyRemovalConflict() | async) === true" (buttonClick)="copyConflictsToClipboard()">
       Kopier til klipholder</app-button
     >

@@ -8,7 +8,6 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { Actions, ofType } from '@ngrx/effects';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { Store } from '@ngrx/store';
-import { concatLatestFrom } from '@ngrx/operators';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -108,9 +107,8 @@ export class DeleteOrganizationDialogComponent implements OnInit {
 
   public canSubmit(): Observable<boolean> {
     return this.hasAnyRemovalConflict().pipe(
-      concatLatestFrom(() => this.deletingOrganization$),
-      map(([hasConflicts, isDeleting]) => {
-        return (hasConflicts === false || this.hasAcceptedConsequences) && !isDeleting;
+      map((hasConflicts) => {
+        return (hasConflicts === false || this.hasAcceptedConsequences);
       })
     );
   }

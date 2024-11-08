@@ -70,6 +70,9 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(OrganizationActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret`);
     this.subscribeAsError(OrganizationActions.patchOrganizationError, $localize`Organisationen kunne ikke opdateres`);
+
+    this.subscribeAsDefault(OrganizationActions.deleteOrganizationSuccess, $localize`Organisationen blev slettet`);
+    this.subscribeAsError(OrganizationActions.deleteOrganizationError, $localize`Organisationen kunne ikke slettes`);
   }
 
   private subscribeToOrganizationEvents() {
