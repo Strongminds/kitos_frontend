@@ -1,16 +1,12 @@
 <ng-container *ngIf="(getSpecificConflicts() | async) ?? [] as removalConflicts">
   <ng-container *ngIf="removalConflicts.length > 0">
-    <app-accordion
-      [isExpandedByDefault]="true"
-      [title]="getAccordionTitle()"
-      [checkboxTooltipText]="getTooltipText()"
-    >
+    <app-accordion [isExpandedByDefault]="true" [title]="getTooltipText()">
       <app-native-table tableLayout="fixed">
         <thead>
           <tr>
             <th *ngIf="getMainEntityTitle() as mainEntityTitle">{{ mainEntityTitle }}</th>
             <th>{{ getEntityTitle() }}</th>
-            <th i18n>Oprettet i (organisation)</th>
+            <th>{{ getOrganizationTitle() }}</th>
           </tr>
         </thead>
         <tbody>

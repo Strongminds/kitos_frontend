@@ -67,6 +67,26 @@ export class RemovalConflictTableComponent {
     );
   }
 
+  public getMainEntityTitle(): string | undefined {
+    switch (this.type) {
+      case 'dprDataprocessor':
+      case 'contracts':
+      case 'dprSubDataprocessor':
+      case 'systemsRightsHolder':
+      case 'systemsArchiveSupplier':
+        return undefined;
+      case 'interfaces':
+        return $localize`Snitflade`;
+      case 'systemsExposingInterfaces':
+      case 'systemsParentSystem':
+        return $localize`IT-System (i kataloget)`;
+      case 'systemsUsages':
+        return $localize`System`;
+      default:
+        throw new Error(`Unknown removal conflict type: ${this.type}`);
+    }
+  }
+
   public getEntityTitle(): string {
     switch (this.type) {
       case 'contracts':
@@ -75,15 +95,15 @@ export class RemovalConflictTableComponent {
       case 'dprSubDataprocessor':
         return $localize`Databehandling`;
       case 'interfaces':
-        return $localize`Interface`;
+        return $localize`Udstillet på i (IT-System)`;
       case 'systemsExposingInterfaces':
-        return $localize`System`;
+        return $localize`Udstillet snitflade`;
       case 'systemsRightsHolder':
-        return $localize`System`;
+        return $localize`IT-System (i kataloget)`;
       case 'systemsParentSystem':
         return $localize`Overordnet system for (IT-System)`;
       case 'systemsArchiveSupplier':
-        return $localize`System`;
+        return $localize`IT-System (i anvendelse)`;
       case 'systemsUsages':
         return $localize`System`;
       default:
@@ -91,26 +111,12 @@ export class RemovalConflictTableComponent {
     }
   }
 
-  public getMainEntityTitle(): string | undefined {
+  public getOrganizationTitle(): string {
     switch (this.type) {
-      case 'dprDataprocessor':
-      case 'contracts':
-      case 'dprSubDataprocessor':
-        return undefined;
-      case 'interfaces':
-        return $localize`Interface`;
-      case 'systemsExposingInterfaces':
-        return $localize`System`;
-      case 'systemsRightsHolder':
-        return $localize`System`;
-      case 'systemsParentSystem':
-        return $localize`IT-System (i kataloget)`;
       case 'systemsArchiveSupplier':
-        return $localize`System`;
-      case 'systemsUsages':
-        return $localize`System`;
+        return $localize`Anvendt i (organisation)`;
       default:
-        throw new Error(`Unknown removal conflict type: ${this.type}`);
+        return $localize`Oprettet i (organisation)`;
     }
   }
 
@@ -127,7 +133,7 @@ export class RemovalConflictTableComponent {
       case 'systemsExposingInterfaces':
         return $localize`IT-Systemer som flyttes til "Fælles kommune", da de udstiller Snitflader oprettet i andre organisationer:`;
       case 'systemsRightsHolder':
-        return $localize`Systemer hvor organisationen "${this.organizationName}" er rettighedshaver, og hvor feltet dermed nulstilles:`;
+        return $localize`IT-Systemer i kataloget, hvor "${this.organizationName}" er sat som "Rettighedshaver", og hvor feltet dermed nulstilles`;
       case 'systemsParentSystem':
         return $localize`IT-Systemer som flyttes til "${this.organizationName}", da de er sat som "Overordnet IT-System" på systemer oprettet i andre organisationer:`;
       case 'systemsArchiveSupplier':
@@ -173,10 +179,10 @@ export const simpleConflictTypeOptions: RemovalConflictType[] = [
 ];
 
 export const otherConflictTypeOptions: RemovalConflictType[] = [
+  'systemsRightsHolder',
   'systemsExposingInterfaces',
   'systemsParentSystem',
-  'interfaces',
-  'systemsRightsHolder',
   'systemsArchiveSupplier',
+  'interfaces',
   'systemsUsages',
 ];

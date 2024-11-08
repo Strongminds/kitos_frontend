@@ -48,10 +48,10 @@ export interface OrganizationRemovalConflicts {
   contractsInOtherOrganizationsWhereOrgIsSupplier: RemovalConflict[];
   dprInOtherOrganizationsWhereOrgIsDataProcessor: RemovalConflict[];
   dprInOtherOrganizationsWhereOrgIsSubDataProcessor: RemovalConflict[];
-  interfacesExposedOnSystemsOutsideTheOrganization: RemovalConflict[];
   systemsExposingInterfacesDefinedInOtherOrganizations: RemovalConflict[];
-  systemsInOtherOrganizationsWhereOrgIsRightsHolder: RemovalConflict[];
   systemsSetAsParentSystemToSystemsInOtherOrganizations: RemovalConflict[];
+  interfacesExposedOnSystemsOutsideTheOrganization: RemovalConflict[];
+  systemsInOtherOrganizationsWhereOrgIsRightsHolder: RemovalConflict[];
   systemsWhereOrgIsArchiveSupplier: RemovalConflict[];
   systemsWithUsagesOutsideTheOrganization: RemovalConflict[];
 }
