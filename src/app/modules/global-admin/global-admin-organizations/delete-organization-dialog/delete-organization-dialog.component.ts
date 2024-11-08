@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { BehaviorSubject, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, of, switchMap } from 'rxjs';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
 import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
 import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
@@ -52,21 +52,17 @@ export class DeleteOrganizationDialogComponent implements OnInit {
     return this.componentStore
       .select((state) => state.consequences)
       .pipe(
-        map((consequences) => {
+        switchMap((consequences) => {
           if (consequences === undefined) {
-            return undefined;
+            return of(undefined);
           }
 
-          return (
-            this.hasConflicts(consequences.contractsInOtherOrganizationsWhereOrgIsSupplier) ||
-            this.hasConflicts(consequences.dprInOtherOrganizationsWhereOrgIsDataProcessor) ||
-            this.hasConflicts(consequences.dprInOtherOrganizationsWhereOrgIsSubDataProcessor) ||
-            this.hasConflicts(consequences.interfacesExposedOnSystemsOutsideTheOrganization) ||
-            this.hasConflicts(consequences.systemsExposingInterfacesDefinedInOtherOrganizations) ||
-            this.hasConflicts(consequences.systemsInOtherOrganizationsWhereOrgIsRightsHolder) ||
-            this.hasConflicts(consequences.systemsSetAsParentSystemToSystemsInOtherOrganizations) ||
-            this.hasConflicts(consequences.systemsWhereOrgIsArchiveSupplier) ||
-            this.hasConflicts(consequences.systemsWithUsagesOutsideTheOrganization)
+          const conflictChecks$ = this.simpleConflictTypeOptions
+            .concat(this.otherConflictTypeOptions)
+            .map((type) => this.typeHasConflicts(type));
+
+          return combineLatest(conflictChecks$).pipe(
+            map((conflictResults) => conflictResults.some((hasConflict) => hasConflict))
           );
         })
       );
@@ -84,10 +80,6 @@ export class DeleteOrganizationDialogComponent implements OnInit {
         return hasConflicts === false || this.hasAcceptedConsequences;
       })
     );
-  }
-
-  private hasConflicts<T>(conflicts: T[] | undefined): boolean {
-    return conflicts !== undefined && conflicts.length > 0;
   }
 
   public typeHasConflicts(conflicType: RemovalConflictType): Observable<boolean> {
