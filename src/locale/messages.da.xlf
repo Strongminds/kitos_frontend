@@ -5815,6 +5815,18 @@
         <source>IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de stadig er er i anvendelse i andre organisationer</source>
         <target state="new">IT-Systemer som flyttes til &quot;<x id="PH" equiv-text="this.defaultOrganizationName"/>&quot;, da de stadig er er i anvendelse i andre organisationer</target>
       </trans-unit>
+      <trans-unit id="6680617402965012335" datatype="html">
+        <source>Er du sikker på at du vil slette &quot;<x id="PH" equiv-text="this.organization.Name"/>&quot;?</source>
+        <target state="new">Er du sikker på at du vil slette &quot;<x id="PH" equiv-text="this.organization.Name"/>&quot;?</target>
+      </trans-unit>
+      <trans-unit id="1330694831677403620" datatype="html">
+        <source>Organisationen blev slettet</source>
+        <target state="new">Organisationen blev slettet</target>
+      </trans-unit>
+      <trans-unit id="2520535144385263260" datatype="html">
+        <source>Organisationen kunne ikke slettes</source>
+        <target state="new">Organisationen kunne ikke slettes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

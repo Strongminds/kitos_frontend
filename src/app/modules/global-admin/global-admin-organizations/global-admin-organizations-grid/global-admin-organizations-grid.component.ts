@@ -83,7 +83,11 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(OrganizationActions.createOrganizationSuccess, OrganizationActions.patchOrganizationSuccess),
+          ofType(
+            OrganizationActions.createOrganizationSuccess,
+            OrganizationActions.patchOrganizationSuccess,
+            OrganizationActions.deleteOrganizationSuccess
+          ),
           combineLatestWith(this.gridState$)
         )
         .subscribe(([_, gridState]) => {
