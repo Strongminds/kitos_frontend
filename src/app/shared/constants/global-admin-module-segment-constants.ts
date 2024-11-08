@@ -1,4 +1,4 @@
-import { SegmentButtonOption } from "../components/segment/segment.component";
+import { SegmentButtonOption } from '../components/segment/segment.component';
 
 export enum GlobalAdminModuleSegmentOptionType {
   RegularOptionTypes = 'RegularOptionTypes',
@@ -6,6 +6,6 @@ export enum GlobalAdminModuleSegmentOptionType {
 }
 
 export const GlobalAdminModuleSegmentOptions: SegmentButtonOption<GlobalAdminModuleSegmentOptionType>[] = [
-    { text: $localize`Lokal tilpasning af udfaldsrum`, value: GlobalAdminModuleSegmentOptionType.RegularOptionTypes },
-    { text: $localize`Lokal tilpasning af roller`, value: GlobalAdminModuleSegmentOptionType.RoleOptionTypes },
-]
+  { text: $localize`Tilpasning af udfaldsrum`, value: GlobalAdminModuleSegmentOptionType.RegularOptionTypes },
+  { text: $localize`Tilpasning af roller`, value: GlobalAdminModuleSegmentOptionType.RoleOptionTypes },
+];
