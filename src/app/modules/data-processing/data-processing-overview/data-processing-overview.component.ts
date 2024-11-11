@@ -281,7 +281,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       width: 300,
       hidden: true,
       persistId: 'lastchangedname',
-    },
+    }
   ];
 
   constructor(
