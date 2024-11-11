@@ -130,9 +130,6 @@ import { APIV2ItInterfaceService } from './v2ItInterface.service';
 import { APIV2ItInterfaceInterfaceDataTypeService } from './v2ItInterfaceInterfaceDataType.service';
 import { APIV2ItInterfaceInterfaceTypeService } from './v2ItInterfaceInterfaceType.service';
 import { APIV2ItSystemService } from './v2ItSystem.service';
-import { APIV2ItSystemBusinessTypeService } from './v2ItSystemBusinessType.service';
-import { APIV2ItSystemGlobalBusinessTypesInternalINTERNALService } from './v2ItSystemGlobalBusinessTypesInternalINTERNAL.service';
-import { APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService } from './v2ItSystemGlobalRoleOptionTypesInternalINTERNAL.service';
 import { APIV2ItSystemInternalINTERNALService } from './v2ItSystemInternalINTERNAL.service';
 import { APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService } from './v2ItSystemLocalArchiveLocationTypesInternalINTERNAL.service';
 import { APIV2ItSystemLocalArchiveTestLocationTypesInternalINTERNALService } from './v2ItSystemLocalArchiveTestLocationTypesInternalINTERNAL.service';
@@ -155,8 +152,6 @@ import { APIV2ItSystemUsageMigrationINTERNALService } from './v2ItSystemUsageMig
 import { APIV2ItSystemUsageRegisteredDataCategoryTypeService } from './v2ItSystemUsageRegisteredDataCategoryType.service';
 import { APIV2ItSystemUsageRelationFrequencyTypeService } from './v2ItSystemUsageRelationFrequencyType.service';
 import { APIV2ItSystemUsageRoleTypeService } from './v2ItSystemUsageRoleType.service';
-import { APIV2ItSystemUsageSensitivePersonalDataTypeService } from './v2ItSystemUsageSensitivePersonalDataType.service';
-import { APIV2KLEInternalINTERNALService } from './v2KLEInternalINTERNAL.service';
 import { APIV2KleOptionService } from './v2KleOption.service';
 import { APIV2NotificationINTERNALService } from './v2NotificationINTERNAL.service';
 import { APIV2OrganizationService } from './v2Organization.service';

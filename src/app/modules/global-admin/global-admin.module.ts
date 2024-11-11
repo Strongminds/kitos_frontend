@@ -15,6 +15,11 @@ import { DeleteOrganizationDialogComponent } from './global-admin-organizations/
 import { RemovalConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/removal-conflict-table.component';
 import { InnerConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/inner-conflict-table/inner-conflict-table.component';
 import { GlobalAdminOtherKleComponent } from './global-admin-other/global-admin-other-kle/global-admin-other-kle.component';
+import { GlobalAdminComponent } from './global-admin.component';
+import { GlobalAdminOrganizationsComponent } from './global-admin-organizations/global-admin-organizations.component';
+import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
+import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
+import { GlobalAdminRouterModule } from './global-admin.routes';
 
 
 @NgModule({
