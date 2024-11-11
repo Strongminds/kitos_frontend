@@ -13,7 +13,7 @@
         >
           </app-checkbox>
           <app-paragraph [bold]="true" paragraphSize="large">{{ title }}</app-paragraph>
-          <ng-container *ngIf="checkboxTooltipText !== undefined">
+          <ng-container *ngIf="checkboxInTitle && checkboxDisabled && checkboxTooltipText !== undefined">
             <app-tooltip [text]="checkboxTooltipText" class="tooltip-margin">
               <app-info-icon></app-info-icon>
             </app-tooltip>
