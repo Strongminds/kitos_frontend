@@ -19,7 +19,6 @@ export class GridColumnStorageService {
     if (!cachedColumns) return null;
     const newHash = this.computeHash(this.filterOutRoleColumns(defaultColumns));
     if (existingCache.hash !== newHash) return null;
-    console.log('Returning cached columns for key:', key);
     return cachedColumns;
   }
 
