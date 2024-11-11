@@ -36,7 +36,7 @@ describe('grid columns', () => {
     });
   });
 
-  it('Invalidates columns when field has changed', () => {
+  it('Invalidates columns when title has changed', () => {
     cy.fixture('./shared/columns-with-different-title.json').then((data) => {
       const json = JSON.stringify(data);
       localStorage.setItem('data-processing-grid-columns', JSON.stringify(data));
