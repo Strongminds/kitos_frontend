@@ -39,7 +39,6 @@ import {
 
 @Injectable()
 export class ITSystemUsageEffects {
-  private readonly RoleColumnsPrefix = 'Roles.Role';
 
   constructor(
     private actions$: Actions,
