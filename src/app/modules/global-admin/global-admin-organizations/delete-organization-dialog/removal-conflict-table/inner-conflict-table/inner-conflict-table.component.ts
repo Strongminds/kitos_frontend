@@ -8,7 +8,6 @@ import { RemovalConflict, RemovalConflictType } from '../removal-conflict-table.
 })
 export class InnerConflictTableComponent {
   @Input() public removalConflicts!: RemovalConflict[];
-  @Input() public organizationName!: string;
   @Input() public type!: RemovalConflictType;
 
   public getMainEntityTitle(): string | undefined {
