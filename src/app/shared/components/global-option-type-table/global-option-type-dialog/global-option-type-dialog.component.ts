@@ -88,7 +88,18 @@ export class GlobalOptionTypeDialogComponent implements OnInit {
   }
 
   private haveValuesChanged(): boolean {
-    return this.hasDescriptionChanged() || this.hasObligatoryChanged() || this.hasNameChanged();
+    return (
+      this.hasDescriptionChanged() ||
+      this.hasObligatoryChanged() ||
+      this.hasNameChanged() ||
+      this.hasWriteAccessChanged()
+    );
+  }
+
+  private hasWriteAccessChanged() {
+    return this.isRoleOption()
+      ? this.form.value.writeAccess !== this.optionTypeItem.writeAccess
+      : false;
   }
 
   private hasDescriptionChanged(): boolean {
