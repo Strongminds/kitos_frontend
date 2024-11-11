@@ -1,4 +1,4 @@
-<app-dialog [title]="isEditDialog() ? 'Rediger' : 'Opret'" i18n-title>
+<app-dialog [title]="getDialogTitle()" i18n-title>
   <form [formGroup]="form">
     <app-standard-vertical-content-grid>
       <app-textbox

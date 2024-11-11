@@ -74,8 +74,12 @@ export class GlobalOptionTypeDialogComponent implements OnInit {
     return isRoleOptionType(this.optionType);
   }
 
-  public isEditDialog() {
+  private isEditDialog() {
     return this.action === 'edit';
+  }
+
+  public getDialogTitle(): string {
+    return this.isEditDialog() ? $localize`Rediger` : $localize`Opret`;
   }
 
   public disableSaveButton(): boolean {
