@@ -24,7 +24,6 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
-import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
@@ -34,6 +33,7 @@ import {
   selectDataProcessingUuid,
   selectOverviewRoles,
 } from './selectors';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -51,7 +51,7 @@ export class DataProcessingEffects {
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
-    private uiConfigService: UIConfigService
+    private gridColumnStorageService: GridColumnStorageService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -118,6 +118,7 @@ export class DataProcessingEffects {
       ofType(DataProcessingActions.updateGridColumns),
       map(({ gridColumns }) => {
         this.statePersistingService.set(DATA_PROCESSING_COLUMNS_ID, gridColumns);
+        this.gridColumnStorageService.setColumns(DATA_PROCESSING_COLUMNS_ID, gridColumns);
         return DataProcessingActions.updateGridColumnsSuccess(gridColumns);
       })
     );

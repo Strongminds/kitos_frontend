@@ -35,6 +35,7 @@ import { selectGridConfigModificationPermission } from 'src/app/store/user-store
 import * as GridFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Component({
   selector: 'app-data-processing-overview',
@@ -290,7 +291,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     private route: ActivatedRoute,
     private actions$: Actions,
     private statePersistingService: StatePersistingService,
-    private uiConfigService: UIConfigService
+    private uiConfigService: UIConfigService,
+    private gridColumnStorageService: GridColumnStorageService
   ) {
     super(store, 'data-processing-registration');
   }
@@ -300,6 +302,10 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());
 
     const localCacheColumns = this.statePersistingService.get<GridColumn[]>(DATA_PROCESSING_COLUMNS_ID);
+    const newCacheColumns = this.gridColumnStorageService.getColumns(DATA_PROCESSING_COLUMNS_ID, this.defaultGridColumns);
+    console.log('Equal', JSON.stringify(localCacheColumns) === JSON.stringify(newCacheColumns));
+    console.log('old', localCacheColumns);
+    console.log('new', newCacheColumns);
     if (localCacheColumns) {
       this.store.dispatch(DataProcessingActions.updateGridColumns(localCacheColumns));
     } else {
