@@ -72,6 +72,7 @@ import { APIV2ItSystemUsageRegisteredDataCategoryTypeService } from './api/v2ItS
 import { APIV2ItSystemUsageRelationFrequencyTypeService } from './api/v2ItSystemUsageRelationFrequencyType.service';
 import { APIV2ItSystemUsageRoleTypeService } from './api/v2ItSystemUsageRoleType.service';
 import { APIV2ItSystemUsageSensitivePersonalDataTypeService } from './api/v2ItSystemUsageSensitivePersonalDataType.service';
+import { APIV2KLEInternalINTERNALService } from './api/v2KLEInternalINTERNAL.service';
 import { APIV2KleOptionService } from './api/v2KleOption.service';
 import { APIV2NotificationINTERNALService } from './api/v2NotificationINTERNAL.service';
 import { APIV2OrganizationService } from './api/v2Organization.service';

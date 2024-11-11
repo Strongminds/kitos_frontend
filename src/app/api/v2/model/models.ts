@@ -102,6 +102,7 @@ export * from './journalPeriodUpdateRequestDTO';
 export * from './kLEDetailsDTO';
 export * from './kLEDetailsDTOIEnumerableVersionedKLEResponseDTO';
 export * from './kLEDetailsDTOVersionedKLEResponseDTO';
+export * from './kLEStatusResponseDTO';
 export * from './localKLEDeviationsRequestDTO';
 export * from './localKLEDeviationsResponseDTO';
 export * from './localOptionCreateRequestDTO';

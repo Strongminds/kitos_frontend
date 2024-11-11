@@ -8,6 +8,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { KLEActions } from 'src/app/store/kle/actions';
 import { ExcelImportActions } from 'src/app/store/local-admin/excel-import/actions';
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
@@ -71,6 +72,11 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(OrganizationActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret`);
     this.subscribeAsError(OrganizationActions.patchOrganizationError, $localize`Organisationen kunne ikke opdateres`);
+
+    this.subscribeAsError(KLEActions.getAdminKLEFileError, $localize`Kunne ikke hente KLE ændringer`);
+
+    this.subscribeAsDefault(KLEActions.updateAdminKLESuccess, $localize`KLE blev opdateret`);
+    this.subscribeAsError(KLEActions.updateAdminKLEError, $localize`KLE kunne ikke opdateres`);
   }
 
   private subscribeToOrganizationEvents() {
