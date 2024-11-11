@@ -23,7 +23,6 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { DataProcessingActions } from './actions';
@@ -46,7 +45,6 @@ export class DataProcessingEffects {
     private apiInternalDataProcessingRegistrationService: APIV2DataProcessingRegistrationInternalINTERNALService,
     private httpClient: HttpClient,
     private externalReferencesApiService: ExternalReferencesApiService,
-    private statePersistingService: StatePersistingService,
     @Inject(APIV1DataProcessingRegistrationINTERNALService)
     private apiv1DataProcessingService: APIV1DataProcessingRegistrationINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
@@ -128,7 +126,7 @@ export class DataProcessingEffects {
       ofType(DataProcessingActions.updateGridColumnsAndRoleColumns),
       map(({ gridColumns, gridRoleColumns }) => {
         const allColumns = gridColumns.concat(gridRoleColumns);
-        this.statePersistingService.set(DATA_PROCESSING_COLUMNS_ID, allColumns);
+        this.gridColumnStorageService.setColumns(DATA_PROCESSING_COLUMNS_ID, gridColumns);
         return DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess(allColumns);
       })
     );
