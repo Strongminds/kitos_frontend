@@ -299,9 +299,9 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
     this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());
 
-    const cachedColumns = this.gridColumnStorageService.getColumns(DATA_PROCESSING_COLUMNS_ID, this.defaultGridColumns);
-    if (cachedColumns) {
-      this.store.dispatch(DataProcessingActions.updateGridColumns(cachedColumns));
+    const existingColumns = this.gridColumnStorageService.getColumns(DATA_PROCESSING_COLUMNS_ID, this.defaultGridColumns);
+    if (existingColumns) {
+      this.store.dispatch(DataProcessingActions.updateGridColumns(existingColumns));
     } else {
       this.subscriptions.add(
         this.actions$
