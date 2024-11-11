@@ -20,7 +20,6 @@ import { transferToInsecureThirdCountriesOptions } from 'src/app/shared/models/d
 import { yearMonthIntervalOptions } from 'src/app/shared/models/data-processing/year-month-interval.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessingGridColumns,
@@ -290,7 +289,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private statePersistingService: StatePersistingService,
     private uiConfigService: UIConfigService,
     private gridColumnStorageService: GridColumnStorageService
   ) {
@@ -301,13 +299,9 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
     this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());
 
-    const localCacheColumns = this.statePersistingService.get<GridColumn[]>(DATA_PROCESSING_COLUMNS_ID);
-    const newCacheColumns = this.gridColumnStorageService.getColumns(DATA_PROCESSING_COLUMNS_ID, this.defaultGridColumns);
-    console.log('Equal', JSON.stringify(localCacheColumns) === JSON.stringify(newCacheColumns));
-    console.log('old', localCacheColumns);
-    console.log('new', newCacheColumns);
-    if (localCacheColumns) {
-      this.store.dispatch(DataProcessingActions.updateGridColumns(localCacheColumns));
+    const cachedColumns = this.gridColumnStorageService.getColumns(DATA_PROCESSING_COLUMNS_ID, this.defaultGridColumns);
+    if (cachedColumns) {
+      this.store.dispatch(DataProcessingActions.updateGridColumns(cachedColumns));
     } else {
       this.subscriptions.add(
         this.actions$

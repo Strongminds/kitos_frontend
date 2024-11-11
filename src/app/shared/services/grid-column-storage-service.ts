@@ -10,15 +10,16 @@ export class GridColumnStorageService {
 
   public setColumns(key: string, columns: GridColumn[]): void {
     const hash = this.computeHash(this.filterOutRoleColumns(columns));
-    this.localStorage.set<GridColumnCache>(key + '-test', { columns, hash });
+    this.localStorage.set<GridColumnCache>(key, { columns, hash });
   }
 
   public getColumns(key: string, defaultColumns: GridColumn[]): GridColumn[] | null {
-    const existingCache = this.localStorage.get<GridColumnCache>(key + '-test');
+    const existingCache = this.localStorage.get<GridColumnCache>(key);
     const cachedColumns = existingCache?.columns;
     if (!cachedColumns) return null;
     const newHash = this.computeHash(this.filterOutRoleColumns(defaultColumns));
     if (existingCache.hash !== newHash) return null;
+    console.log('Returning cached columns for key:', key);
     return cachedColumns;
   }
 
@@ -33,19 +34,19 @@ export class GridColumnStorageService {
 
   private hashMappedColumns(columns: GridColumn[]): string {
     const json = JSON.stringify(columns);
-    // Simple hash functio
     let hash = 0;
     for (let i = 0; i < json.length; i++) {
       const char = json.charCodeAt(i);
       hash = (hash << 5) - hash + char;
-      hash |= 0; // Convert to 32bit integer
+      hash |= 0;
     }
     return hash.toString();
   }
 
-  // marks the fields that are not relevant for hashing to a constant, as to not effect the hash
+  // Marks the fields that are not relevant for hashing, to a constant, as to not effect the hash.
+  // Needs to be extended if more fields are added to the GridColumn, which shouldn't be hashed
   private toHashableGridColumn(column: GridColumn): GridColumn {
-    return {...column, width: undefined, hidden: false, disabledByUIConfig: undefined};
+    return { ...column, width: undefined, hidden: false, disabledByUIConfig: undefined };
   }
 }
 
