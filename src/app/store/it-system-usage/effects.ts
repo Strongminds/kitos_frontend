@@ -53,8 +53,7 @@ export class ITSystemUsageEffects {
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
-    private uiConfigService: UIConfigService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
