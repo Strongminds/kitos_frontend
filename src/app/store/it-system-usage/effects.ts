@@ -21,7 +21,6 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { YesNoIrrelevantEnum } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
-import { StatePersistingService } from 'src/app/shared/services/state-persisting.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
@@ -35,6 +34,7 @@ import {
   selectOverviewSystemRoles,
   selectUsageGridColumns,
 } from './selectors';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -48,7 +48,7 @@ export class ITSystemUsageEffects {
     @Inject(APIV2ItSystemUsageInternalINTERNALService)
     private apiV2ItSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
     private externalReferencesApiService: ExternalReferencesApiService,
-    private statePersistingService: StatePersistingService,
+    private gridColumnStorageService: GridColumnStorageService,
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
@@ -92,7 +92,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumns),
       map(({ gridColumns }) => {
-        this.statePersistingService.set(USAGE_COLUMNS_ID, gridColumns);
+        this.gridColumnStorageService.setColumns(USAGE_COLUMNS_ID, gridColumns);
         return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
       })
     );
@@ -103,7 +103,7 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.updateGridColumnsAndRoleColumns),
       map(({ gridColumns, gridRoleColumns }) => {
         const allColumns = gridColumns.concat(gridRoleColumns);
-        this.statePersistingService.set(USAGE_COLUMNS_ID, allColumns);
+        this.gridColumnStorageService.setColumns(USAGE_COLUMNS_ID, allColumns);
         return ITSystemUsageActions.updateGridColumnsSuccess(allColumns);
       })
     );
