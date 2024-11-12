@@ -31,7 +31,6 @@ describe('grid columns', () => {
     cy.contains('Tilpas kolonner').click();
     cy.getByDataCy('checkbox-input').eq(2).click()
     cy.contains('Gem').click();
-    // Assertions
 
     cy.window().then((window) => {
       const dprGridColumnsString = window.localStorage.getItem('data-processing-grid-columns') ?? '';
