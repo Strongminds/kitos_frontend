@@ -19,4 +19,40 @@ export class GlobalAdminHelpTextsEffects {
       })
     );
   });
+
+  createHelpText$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(HelpTextActions.createHelpText),
+      switchMap(({ request }) => {
+        return this.helpTextsInternalService.postSingleHelpTextsInternalV2Post({ dto: request }).pipe(
+          map((helpText) => HelpTextActions.createHelpTextSuccess(helpText)),
+          catchError(() => of(HelpTextActions.createHelpTextError()))
+        );
+      })
+    );
+  });
+
+  patchHelpText$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(HelpTextActions.updateHelpText),
+      switchMap(({ key, request }) => {
+        return this.helpTextsInternalService.patchSingleHelpTextsInternalV2PatchByKey({ key, dto: request }).pipe(
+          map((helpText) => HelpTextActions.updateHelpTextSuccess(helpText)),
+          catchError(() => of(HelpTextActions.updateHelpTextError()))
+        );
+      })
+    );
+  });
+
+  deleteHelpText$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(HelpTextActions.deleteHelpText),
+      switchMap(({ key }) => {
+        return this.helpTextsInternalService.deleteSingleHelpTextsInternalV2DeleteByKey({ key }).pipe(
+          map(() => HelpTextActions.deleteHelpTextSuccess()),
+          catchError(() => of(HelpTextActions.deleteHelpTextError()))
+        );
+      })
+    );
+  });
 }

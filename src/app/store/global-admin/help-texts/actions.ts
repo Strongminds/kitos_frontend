@@ -14,7 +14,7 @@ export const HelpTextActions = createActionGroup({
     'Update Help Text Success': (helpText: APIHelpTextResponseDTO) => ({ helpText }),
     'Update Help Text Error': () => emptyProps(),
 
-    'Create Help Text': (key: string, request: APIHelpTextCreateRequestDTO) => ({ key, request }),
+    'Create Help Text': (request: APIHelpTextCreateRequestDTO) => ({ request }),
     'Create Help Text Success': (helpText: APIHelpTextResponseDTO) => ({ helpText }),
     'Create Help Text Error': () => emptyProps(),
 
