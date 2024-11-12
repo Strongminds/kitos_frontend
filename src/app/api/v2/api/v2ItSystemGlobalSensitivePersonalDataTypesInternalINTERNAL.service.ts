@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams {
+export interface PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterTypeRequestParams {
+export interface PostSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalDataRequestParams {
     dto: APIGlobalRegularOptionCreateRequestDTO;
 }
 
@@ -43,7 +43,7 @@ export interface PostSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegi
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemGlobalRegisterTypesInternalINTERNALService {
+export class APIV2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNALService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
@@ -108,10 +108,10 @@ export class APIV2ItSystemGlobalRegisterTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemGlobalRegisterTypesInternalV2GetGlobalRegisterTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
-    public getManyItSystemGlobalRegisterTypesInternalV2GetGlobalRegisterTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
-    public getManyItSystemGlobalRegisterTypesInternalV2GetGlobalRegisterTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
-    public getManyItSystemGlobalRegisterTypesInternalV2GetGlobalRegisterTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemGlobalSensitivePersonalDataTypesInternalV2GetGlobalSensitivePersonalDatas(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItSystemGlobalSensitivePersonalDataTypesInternalV2GetGlobalSensitivePersonalDatas(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalSensitivePersonalDataTypesInternalV2GetGlobalSensitivePersonalDatas(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalSensitivePersonalDataTypesInternalV2GetGlobalSensitivePersonalDatas(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -144,7 +144,7 @@ export class APIV2ItSystemGlobalRegisterTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/global-option-types/register-types`;
+        let localVarPath = `/api/v2/internal/it-systems/global-option-types/sensitive-personal-data-types`;
         return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalRegisterTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType(requestParameters: PatchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -216,7 +216,7 @@ export class APIV2ItSystemGlobalRegisterTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/global-option-types/register-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/internal/it-systems/global-option-types/sensitive-personal-data-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -235,13 +235,13 @@ export class APIV2ItSystemGlobalRegisterTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterType(requestParameters: PostSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public postSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterType(requestParameters: PostSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public postSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterType(requestParameters: PostSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public postSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterType(requestParameters: PostSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalData(requestParameters: PostSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalDataRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalData(requestParameters: PostSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalDataRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalData(requestParameters: PostSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalDataRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalData(requestParameters: PostSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalDataRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterType.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalData.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -284,7 +284,7 @@ export class APIV2ItSystemGlobalRegisterTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/global-option-types/register-types`;
+        let localVarPath = `/api/v2/internal/it-systems/global-option-types/sensitive-personal-data-types`;
         return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

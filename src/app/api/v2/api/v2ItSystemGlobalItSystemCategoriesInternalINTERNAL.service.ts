@@ -30,12 +30,12 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategoriesRequestParams {
+export interface PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategoriesRequestParams {
+export interface PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams {
     dto: APIGlobalRegularOptionCreateRequestDTO;
 }
 
@@ -43,9 +43,9 @@ export interface PostSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlob
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemGlobalItSystemCategoriessInternalINTERNALService {
+export class APIV2ItSystemGlobalItSystemCategoriesInternalINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -108,10 +108,10 @@ export class APIV2ItSystemGlobalItSystemCategoriessInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemGlobalItSystemCategoriessInternalV2GetGlobalItSystemCategoriess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
-    public getManyItSystemGlobalItSystemCategoriessInternalV2GetGlobalItSystemCategoriess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
-    public getManyItSystemGlobalItSystemCategoriessInternalV2GetGlobalItSystemCategoriess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
-    public getManyItSystemGlobalItSystemCategoriessInternalV2GetGlobalItSystemCategoriess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalItSystemCategoriessInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategoriesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(requestParameters: PatchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategoriesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategories.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategories.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -235,13 +235,13 @@ export class APIV2ItSystemGlobalItSystemCategoriessInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public postSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public postSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public postSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategoriesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(requestParameters: PostSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategoriesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategories.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories.');
         }
 
         let localVarHeaders = this.defaultHeaders;

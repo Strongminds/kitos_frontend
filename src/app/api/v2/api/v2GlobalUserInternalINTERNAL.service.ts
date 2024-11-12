@@ -19,33 +19,40 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
+import { APIOrganizationResponseDTO } from '../model/aPIOrganizationResponseDTO';
 // @ts-ignore
-import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
-// @ts-ignore
-import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
+import { APIUserReferenceResponseDTO } from '../model/aPIUserReferenceResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalDataRequestParams {
-    optionUuid: string;
-    dto: APIGlobalRegularOptionUpdateRequestDTO;
+export interface DeleteSingleGlobalUserInternalV2DeleteUserRequestParams {
+    userUuid: string;
 }
 
-export interface PostSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalDataRequestParams {
-    dto: APIGlobalRegularOptionCreateRequestDTO;
+export interface GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams {
+    userUuid: string;
+}
+
+export interface GetManyGlobalUserInternalV2GetUsersRequestParams {
+    nameOrEmailQuery?: string;
+    emailQuery?: string;
+    orderByProperty?: 'CreationOrder' | 'Name' | 'LastChanged';
+    /** 0-based page number. Use this parameter to page through the requested collection.  Offset in the source collection will be (pageSize * page)  Range: [0,2^31] Default: 0 */
+    page?: number;
+    /** Size of the page referred by \&#39;page\&#39;.  Range: [1,250] Default: 250. */
+    pageSize?: number;
 }
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
+export class APIV2GlobalUserInternalINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -105,13 +112,18 @@ export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
     }
 
     /**
+     * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemGlobalSensitivePersonalDatasInternalV2GetGlobalSensitivePersonalDatas(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
-    public getManyItSystemGlobalSensitivePersonalDatasInternalV2GetGlobalSensitivePersonalDatas(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
-    public getManyItSystemGlobalSensitivePersonalDatasInternalV2GetGlobalSensitivePersonalDatas(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
-    public getManyItSystemGlobalSensitivePersonalDatasInternalV2GetGlobalSensitivePersonalDatas(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+        const userUuid = requestParameters.userUuid;
+        if (userUuid === null || userUuid === undefined) {
+            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2DeleteUser.');
+        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -119,7 +131,6 @@ export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
-                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -144,8 +155,8 @@ export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/global-option-types/sensitive-personal-data-types`;
-        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/users/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -162,17 +173,19 @@ export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalData(requestParameters: PatchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalDataRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const optionUuid = requestParameters.optionUuid;
-        if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalData.');
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOrganizationResponseDTO>>;
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOrganizationResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetOrganizationsByUserUuid(requestParameters: GetManyGlobalUserInternalV2GetOrganizationsByUserUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const userUuid = requestParameters.userUuid;
+        if (userUuid === null || userUuid === undefined) {
+            throw new Error('Required parameter userUuid was null or undefined when calling getManyGlobalUserInternalV2GetOrganizationsByUserUuid.');
         }
-        const dto = requestParameters.dto;
-        if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalData.');
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (userUuid !== undefined && userUuid !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>userUuid, 'userUuid');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -195,16 +208,6 @@ export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/merge-patch+json',
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -216,11 +219,11 @@ export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/global-option-types/sensitive-personal-data-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/users/organizations`;
+        return this.httpClient.request<Array<APIOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: dto,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -235,13 +238,36 @@ export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalData(requestParameters: PostSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalDataRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public postSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalData(requestParameters: PostSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalDataRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public postSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalData(requestParameters: PostSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalDataRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public postSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalData(requestParameters: PostSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalDataRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const dto = requestParameters.dto;
-        if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalData.');
+    public getManyGlobalUserInternalV2GetUsers(requestParameters: GetManyGlobalUserInternalV2GetUsersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIUserReferenceResponseDTO>>;
+    public getManyGlobalUserInternalV2GetUsers(requestParameters: GetManyGlobalUserInternalV2GetUsersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIUserReferenceResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUsers(requestParameters: GetManyGlobalUserInternalV2GetUsersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIUserReferenceResponseDTO>>>;
+    public getManyGlobalUserInternalV2GetUsers(requestParameters: GetManyGlobalUserInternalV2GetUsersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const nameOrEmailQuery = requestParameters.nameOrEmailQuery;
+        const emailQuery = requestParameters.emailQuery;
+        const orderByProperty = requestParameters.orderByProperty;
+        const page = requestParameters.page;
+        const pageSize = requestParameters.pageSize;
+
+        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
+        if (nameOrEmailQuery !== undefined && nameOrEmailQuery !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>nameOrEmailQuery, 'nameOrEmailQuery');
+        }
+        if (emailQuery !== undefined && emailQuery !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>emailQuery, 'emailQuery');
+        }
+        if (orderByProperty !== undefined && orderByProperty !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>orderByProperty, 'orderByProperty');
+        }
+        if (page !== undefined && page !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>page, 'page');
+        }
+        if (pageSize !== undefined && pageSize !== null) {
+          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
+            <any>pageSize, 'pageSize');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -264,15 +290,6 @@ export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -284,11 +301,11 @@ export class APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/global-option-types/sensitive-personal-data-types`;
-        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/users`;
+        return this.httpClient.request<Array<APIUserReferenceResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: dto,
+                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
