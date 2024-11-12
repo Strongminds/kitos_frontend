@@ -88,7 +88,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
       persistId: 'mainContract',
     },
-    {
+    /* {
       field: GridFields.MainReferenceTitle,
       title: $localize`Reference`,
       style: 'title-link',
@@ -281,7 +281,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       width: 300,
       hidden: true,
       persistId: 'lastchangedname',
-    }
+    } */
   ];
 
   constructor(
