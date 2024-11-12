@@ -5,7 +5,9 @@ import {
   APIGlobalRoleOptionResponseDTO,
   APIGlobalRoleOptionUpdateRequestDTO,
   APIV2ItSystemGlobalBusinessTypesInternalINTERNALService,
+  APIV2ItSystemGlobalItSystemCategoriesInternalINTERNALService,
   APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService,
+  APIV2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNALService,
 } from 'src/app/api/v2';
 import { APIV2ItSystemGlobalArchiveLocationsInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalArchiveLocationsInternalINTERNAL.service';
 import { APIV2ItSystemGlobalArchiveTestLocationsInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalArchiveTestLocationsInternalINTERNAL.service';
@@ -13,9 +15,7 @@ import { APIV2ItSystemGlobalArchiveTypesInternalINTERNALService } from 'src/app/
 import { APIV2ItSystemGlobalDataTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalDataTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalFrequencyTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalFrequencyTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalInterfaceTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalInterfaceTypesInternalINTERNAL.service';
-import { APIV2ItSystemGlobalItSystemCategoriessInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalItSystemCategoriessInternalINTERNAL.service';
 import { APIV2ItSystemGlobalRegisterTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalRegisterTypesInternalINTERNAL.service';
-import { APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalSensitivePersonalDatasInternalINTERNAL.service';
 import { GlobalAdminOptionType } from '../models/options/global-admin-option-type.model';
 
 @Injectable({
@@ -38,10 +38,10 @@ export class GlobalAdminOptionTypeService {
     private frequencyTypeService: APIV2ItSystemGlobalFrequencyTypesInternalINTERNALService,
     @Inject(APIV2ItSystemGlobalInterfaceTypesInternalINTERNALService)
     private interfaceTypeService: APIV2ItSystemGlobalInterfaceTypesInternalINTERNALService,
-    @Inject(APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService)
-    private sensitivePersonalDataTypeService: APIV2ItSystemGlobalSensitivePersonalDatasInternalINTERNALService,
-    @Inject(APIV2ItSystemGlobalItSystemCategoriessInternalINTERNALService)
-    private itSystemCategoryService: APIV2ItSystemGlobalItSystemCategoriessInternalINTERNALService,
+    @Inject(APIV2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNALService)
+    private sensitivePersonalDataTypeService: APIV2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNALService,
+    @Inject(APIV2ItSystemGlobalItSystemCategoriesInternalINTERNALService)
+    private itSystemCategoryService: APIV2ItSystemGlobalItSystemCategoriesInternalINTERNALService,
     @Inject(APIV2ItSystemGlobalRegisterTypesInternalINTERNALService)
     private registerTypeService: APIV2ItSystemGlobalRegisterTypesInternalINTERNALService,
 
@@ -88,10 +88,10 @@ export class GlobalAdminOptionTypeService {
         return () => this.interfaceTypeService.getManyItSystemGlobalInterfaceTypesInternalV2GetGlobalInterfaceTypes();
       case 'it_system_usage-gdpr-sensitive-data-type':
         return () =>
-          this.sensitivePersonalDataTypeService.getManyItSystemGlobalSensitivePersonalDatasInternalV2GetGlobalSensitivePersonalDatas();
+          this.sensitivePersonalDataTypeService.getManyItSystemGlobalSensitivePersonalDataTypesInternalV2GetGlobalSensitivePersonalDatas();
       case 'it-system_usage-data-classification-type':
         return () =>
-          this.itSystemCategoryService.getManyItSystemGlobalItSystemCategoriessInternalV2GetGlobalItSystemCategoriess();
+          this.itSystemCategoryService.getManyItSystemGlobalItSystemCategoriesInternalV2GetGlobalItSystemCategoriess();
       case 'it_system_usage-gdpr-registered-data-category-type':
         return () => this.registerTypeService.getManyItSystemGlobalRegisterTypesInternalV2GetGlobalRegisterTypes();
 
@@ -152,7 +152,7 @@ export class GlobalAdminOptionTypeService {
           });
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
-          this.sensitivePersonalDataTypeService.patchSingleItSystemGlobalSensitivePersonalDatasInternalV2PatchGlobalSensitivePersonalData(
+          this.sensitivePersonalDataTypeService.patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(
             {
               optionUuid,
               dto,
@@ -160,7 +160,7 @@ export class GlobalAdminOptionTypeService {
           );
       case 'it-system_usage-data-classification-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
-          this.itSystemCategoryService.patchSingleItSystemGlobalItSystemCategoriessInternalV2PatchGlobalItSystemCategories(
+          this.itSystemCategoryService.patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(
             {
               optionUuid,
               dto,
@@ -227,14 +227,14 @@ export class GlobalAdminOptionTypeService {
           });
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.sensitivePersonalDataTypeService.postSingleItSystemGlobalSensitivePersonalDatasInternalV2CreateGlobalSensitivePersonalData(
+          this.sensitivePersonalDataTypeService.postSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalData(
             {
               dto: request,
             }
           );
       case 'it-system_usage-data-classification-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.itSystemCategoryService.postSingleItSystemGlobalItSystemCategoriessInternalV2CreateGlobalItSystemCategories(
+          this.itSystemCategoryService.postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(
             {
               dto: request,
             }
