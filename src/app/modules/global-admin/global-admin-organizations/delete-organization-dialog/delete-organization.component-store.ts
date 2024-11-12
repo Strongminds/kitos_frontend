@@ -29,20 +29,19 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
   );
 
   public hasConflicts(types: RemovalConflictType[]): Observable<boolean | undefined> {
-    return this.removalConflicts$
-      .pipe(
-        switchMap((consequences) => {
-          if (consequences === undefined) {
-            return of(undefined);
-          }
+    return this.removalConflicts$.pipe(
+      switchMap((consequences) => {
+        if (consequences === undefined) {
+          return of(undefined);
+        }
 
-          const conflictChecks$ = types.map((type) => this.typeHasConflicts(type));
+        const conflictChecks$ = types.map((type) => this.typeHasConflicts(type));
 
-          return combineLatest(conflictChecks$).pipe(
-            map((conflictResults) => conflictResults.some((hasConflict) => hasConflict))
-          );
-        })
-      );
+        return combineLatest(conflictChecks$).pipe(
+          map((conflictResults) => conflictResults.some((hasConflict) => hasConflict))
+        );
+      })
+    );
   }
 
   public typeHasConflicts(conflicType: RemovalConflictType): Observable<boolean> {
