@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, first, map, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, combineLatest, map, Observable, of, switchMap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -60,7 +60,16 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.deleteOrganizationSuccess, OrganizationActions.deleteOrganizationError))
+        .pipe(ofType(OrganizationActions.deleteOrganizationSuccess))
+        .subscribe(() => {
+          this.deletingOrganization$.next(false);
+          this.onCancel();
+        })
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationActions.deleteOrganizationError))
         .subscribe(() => {
           this.deletingOrganization$.next(false);
         })
@@ -68,9 +77,6 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
   }
 
   public onDelete(): void {
-    this.actions$.pipe(ofType(OrganizationActions.deleteOrganizationSuccess), first()).subscribe(() => {
-      this.onCancel();
-    });
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil slette "${this.organization.Name}"?`,
