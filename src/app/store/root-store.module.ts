@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DataProcessingEffects } from './data-processing/effects';
 import { dataProcessingFeature } from './data-processing/reducer';
+import { GlobalAdminOptionTypeEffects } from './global-admin/global-option-types/effects';
 import { GridExportEffects } from './grid/effects';
 import { exportFeature } from './grid/reducer';
 import { ITContractEffects } from './it-contract/effects';
@@ -39,7 +40,6 @@ import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
-import { GlobalAdminOptionTypeEffects } from './global-admin/effects';
 
 @NgModule({
   imports: [
