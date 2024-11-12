@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
-import { map, mergeMap, Observable, tap } from 'rxjs';
+import { combineLatest, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 import { mapConflictsDtoToOrganizationRemovalConflicts } from 'src/app/shared/helpers/removal-conflicts.helper';
 import { OrganizationRemovalConflicts } from 'src/app/shared/models/global-admin/organization-removal-conflicts.model';
@@ -27,6 +27,27 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
       removalConflicts: consequences,
     })
   );
+
+  public hasConflicts(types: RemovalConflictType[]): Observable<boolean | undefined> {
+    return this.removalConflicts$
+      .pipe(
+        switchMap((consequences) => {
+          if (consequences === undefined) {
+            return of(undefined);
+          }
+
+          const conflictChecks$ = types.map((type) => this.typeHasConflicts(type));
+
+          return combineLatest(conflictChecks$).pipe(
+            map((conflictResults) => conflictResults.some((hasConflict) => hasConflict))
+          );
+        })
+      );
+  }
+
+  public typeHasConflicts(conflicType: RemovalConflictType): Observable<boolean> {
+    return this.getSpecificConflicts(conflicType).pipe(map((conflicts) => conflicts.length > 0));
+  }
 
   public getSpecificConflicts(type: RemovalConflictType): Observable<RemovalConflict[]> {
     return this.removalConflicts$.pipe(

@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, map, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -88,29 +88,11 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
   }
 
   public hasAnyRemovalConflict(): Observable<boolean | undefined> {
-    return this.hasConflicts(this.simpleConflictTypeOptions.concat(this.otherConflictTypeOptions));
+    return this.componentStore.hasConflicts(this.simpleConflictTypeOptions.concat(this.otherConflictTypeOptions));
   }
 
   public hasOtherTypeConflicts(): Observable<boolean | undefined> {
-    return this.hasConflicts(this.otherConflictTypeOptions);
-  }
-
-  public hasConflicts(types: RemovalConflictType[]): Observable<boolean | undefined> {
-    return this.componentStore
-      .select((state) => state.removalConflicts)
-      .pipe(
-        switchMap((consequences) => {
-          if (consequences === undefined) {
-            return of(undefined);
-          }
-
-          const conflictChecks$ = types.map((type) => this.typeHasConflicts(type));
-
-          return combineLatest(conflictChecks$).pipe(
-            map((conflictResults) => conflictResults.some((hasConflict) => hasConflict))
-          );
-        })
-      );
+    return this.componentStore.hasConflicts(this.otherConflictTypeOptions);
   }
 
   public getTitle(): string {
@@ -134,7 +116,7 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
   }
 
   public typeHasConflicts(conflicType: RemovalConflictType): Observable<boolean> {
-    return this.componentStore.getSpecificConflicts(conflicType).pipe(map((conflicts) => conflicts.length > 0));
+    return this.componentStore.typeHasConflicts(conflicType);
   }
 
   public getSpecificConflicts(type: RemovalConflictType): Observable<RemovalConflict[]> {
