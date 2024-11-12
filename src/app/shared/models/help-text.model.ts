@@ -12,12 +12,20 @@ export const defaultHelpText: HelpText = {
   Title: $localize`Ingen hjælpetekst`,
 };
 
-export function adaptHelpText(apiHelpText: APIHelpTextResponseDTO): HelpText {
-  if (apiHelpText.key === undefined) throw new Error('APIHelpTextResponseDTO is missing key');
+export function adaptHelpText(apiHelpText: APIHelpTextResponseDTO): HelpText | undefined {
+  if (!apiHelpText.key) return undefined;
 
   return {
     Description: apiHelpText.description,
     Key: apiHelpText.key,
     Title: apiHelpText.title,
   };
+}
+
+export function adaptHelpTextOrThrow(dto: APIHelpTextResponseDTO): HelpText {
+  const helpText = adaptHelpText(dto);
+  if (!helpText){
+    throw new Error('Could not adapt help text');
+  }
+  return helpText;
 }

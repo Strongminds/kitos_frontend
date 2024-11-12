@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { APIV2HelpTextsInternalINTERNALService } from 'src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service';
-import { adaptHelpText } from 'src/app/shared/models/help-text.model';
+import { adaptHelpTextOrThrow } from 'src/app/shared/models/help-text.model';
 import { HelpTextActions } from './actions';
 
 @Injectable()
@@ -19,7 +19,7 @@ export class GlobalAdminHelpTextsEffects {
       switchMap(() => {
         return this.helpTextsInternalService.getManyHelpTextsInternalV2GetAll().pipe(
           map((helptextDtos) =>
-            HelpTextActions.getHelpTextsSuccess(helptextDtos.map((helptextDto) => adaptHelpText(helptextDto)))
+            HelpTextActions.getHelpTextsSuccess(helptextDtos.map((helptextDto) => adaptHelpTextOrThrow(helptextDto)))
           ),
           catchError(() => of(HelpTextActions.getHelpTextsError()))
         );
@@ -32,7 +32,7 @@ export class GlobalAdminHelpTextsEffects {
       ofType(HelpTextActions.createHelpText),
       switchMap(({ request }) => {
         return this.helpTextsInternalService.postSingleHelpTextsInternalV2Post({ dto: request }).pipe(
-          map((helpTextDto) => HelpTextActions.createHelpTextSuccess(adaptHelpText(helpTextDto))),
+          map((helpTextDto) => HelpTextActions.createHelpTextSuccess(adaptHelpTextOrThrow(helpTextDto))),
           catchError(() => of(HelpTextActions.createHelpTextError()))
         );
       })
@@ -44,7 +44,7 @@ export class GlobalAdminHelpTextsEffects {
       ofType(HelpTextActions.updateHelpText),
       switchMap(({ key, request }) => {
         return this.helpTextsInternalService.patchSingleHelpTextsInternalV2Patch({ key, dto: request }).pipe(
-          map((helpTextDto) => HelpTextActions.updateHelpTextSuccess(adaptHelpText(helpTextDto))),
+          map((helpTextDto) => HelpTextActions.updateHelpTextSuccess(adaptHelpTextOrThrow(helpTextDto))),
           catchError(() => of(HelpTextActions.updateHelpTextError()))
         );
       })

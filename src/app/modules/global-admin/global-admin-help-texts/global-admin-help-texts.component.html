@@ -1,8 +1,7 @@
 <app-card>
-  <app-card-header
-    title="Hjælpetekster"
-    i18n-title
-  ></app-card-header>
+  <h3 i18n>
+    Hjælpetekster
+  </h3>
   <ng-container *ngIf="helpTexts$ | async as helpTexts">
     <app-local-grid
       [data]="helpTexts"
