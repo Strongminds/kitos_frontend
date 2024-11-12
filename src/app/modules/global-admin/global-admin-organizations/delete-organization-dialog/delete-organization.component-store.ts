@@ -13,20 +13,23 @@ import {
 import { RemovalConflict } from './removal-conflict-table/removal-conflict-table.component';
 
 interface State {
-  consequences?: OrganizationRemovalConflicts;
+  conflicts?: OrganizationRemovalConflicts;
   isLoading: boolean;
 }
 
 @Injectable()
 export class DeleteOrganizationComponentStore extends ComponentStore<State> {
   constructor(private apiService: APIV2OrganizationsInternalINTERNALService) {
-    super({ consequences: undefined, isLoading: false });
+    super({ conflicts: undefined, isLoading: false,  });
   }
+
+  public readonly conflicts$ = this.select((state) => state.conflicts);
+  public readonly isLoading$ = this.select((state) => state.isLoading);
 
   private updateConsequences = this.updater(
     (state, consequences: OrganizationRemovalConflicts): State => ({
       ...state,
-      consequences,
+      conflicts: consequences,
     })
   );
 

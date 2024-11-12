@@ -1,15 +1,15 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, first, map, Observable, of, switchMap } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { Organization } from 'src/app/shared/models/organization/organization.model';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
 import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
-import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
-import { Actions, ofType } from '@ngrx/effects';
-import { OrganizationActions } from 'src/app/store/organization/actions';
-import { Store } from '@ngrx/store';
-import { NotificationService } from 'src/app/shared/services/notification.service';
-import { BaseComponent } from 'src/app/shared/base/base.component';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -23,7 +23,7 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
   public hasAcceptedConsequences: boolean = false;
   public isCopying: boolean = false;
 
-  public readonly removalConflicts$ = this.componentStore.select((state) => state.consequences);
+  public readonly removalConflicts$ = this.componentStore.select((state) => state.conflicts);
   public readonly isLoading$ = this.componentStore.select((state) => state.isLoading);
   public readonly simpleConflictTypeOptions: RemovalConflictType[] = [
     'contracts',
@@ -95,7 +95,7 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
 
   public hasConflicts(types: RemovalConflictType[]): Observable<boolean | undefined> {
     return this.componentStore
-      .select((state) => state.consequences)
+      .select((state) => state.conflicts)
       .pipe(
         switchMap((consequences) => {
           if (consequences === undefined) {
