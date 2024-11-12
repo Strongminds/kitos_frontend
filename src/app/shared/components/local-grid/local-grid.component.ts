@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import { ExcelExportEvent, GridComponent as KendoGridComponent, PageChangeEvent } from '@progress/kendo-angular-grid';
@@ -23,6 +23,9 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
 
   @Input() withOutline: boolean = false;
 
+  @Output() deleteEvent = new EventEmitter<T>();
+  @Output() modifyEvent = new EventEmitter<T>();
+
   public state = defaultGridState;
 
   public readonly defaultColumnWidth = 270;
@@ -35,6 +38,14 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   }
   ngOnInit(): void {
     this.actions$.pipe(ofType(GridExportActions.exportLocalData)).subscribe(() => this.excelExport());
+  }
+
+  public onModifyClick(item: T) {
+    this.modifyEvent.emit(item);
+  }
+
+  public onDeleteClick(item: T) {
+    this.deleteEvent.emit(item);
   }
 
   public onStateChange(state: GridState) {
@@ -60,7 +71,10 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public searchProperty(object: any, property: string) {
-    return get(object, property);
+    console.log(JSON.stringify(object) + ' ' + property + '   is prop');
+    const debug = get(object, property);
+    console.log(debug);
+    return debug;
   }
 
   public onExcelExport(e: ExcelExportEvent) {
