@@ -7,23 +7,23 @@ import { mapConflictsDtoToOrganizationRemovalConflicts } from 'src/app/shared/he
 import { OrganizationRemovalConflicts } from 'src/app/shared/models/global-admin/organization-removal-conflicts.model';
 
 interface State {
-  conflicts?: OrganizationRemovalConflicts;
+  removalConflicts?: OrganizationRemovalConflicts;
   isLoading: boolean;
 }
 
 @Injectable()
 export class DeleteOrganizationComponentStore extends ComponentStore<State> {
   constructor(private apiService: APIV2OrganizationsInternalINTERNALService) {
-    super({ conflicts: undefined, isLoading: false });
+    super({ removalConflicts: undefined, isLoading: false });
   }
 
-  public readonly conflicts$ = this.select((state) => state.conflicts);
+  public readonly removalConflicts$ = this.select((state) => state.removalConflicts);
   public readonly isLoading$ = this.select((state) => state.isLoading);
 
   private updateConsequences = this.updater(
     (state, consequences: OrganizationRemovalConflicts): State => ({
       ...state,
-      conflicts: consequences,
+      removalConflicts: consequences,
     })
   );
 

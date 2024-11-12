@@ -23,8 +23,8 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
   public hasAcceptedConsequences: boolean = false;
   public isCopying: boolean = false;
 
-  public readonly removalConflicts$ = this.componentStore.select((state) => state.conflicts);
-  public readonly isLoading$ = this.componentStore.select((state) => state.isLoading);
+  public readonly removalConflicts$ = this.componentStore.removalConflicts$;
+  public readonly isLoading$ = this.componentStore.isLoading$;
   public readonly simpleConflictTypeOptions: RemovalConflictType[] = [
     'contracts',
     'dprDataprocessor',
@@ -97,7 +97,7 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
 
   public hasConflicts(types: RemovalConflictType[]): Observable<boolean | undefined> {
     return this.componentStore
-      .select((state) => state.conflicts)
+      .select((state) => state.removalConflicts)
       .pipe(
         switchMap((consequences) => {
           if (consequences === undefined) {
