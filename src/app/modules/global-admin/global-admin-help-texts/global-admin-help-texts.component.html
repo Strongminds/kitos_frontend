@@ -9,13 +9,14 @@
       <th i18n>Nøgle</th>
     </thead>
     <tbody>
+
       <tr *ngFor="let helpText of helpTexts$ | async">
         <td>
-          <app-paragraph> {{ helpText.title }} </app-paragraph>
+          <app-paragraph> {{ helpText.Title }} </app-paragraph>
         </td>
         <td>
           <app-content-space-between>
-            <app-paragraph> {{ helpText.key }} </app-paragraph>
+            <app-paragraph> {{ helpText.Key }} </app-paragraph>
             <app-table-row-actions>
               <app-icon-button (buttonClick)="onEdit(helpText)">
                 <app-pencil-icon></app-pencil-icon>

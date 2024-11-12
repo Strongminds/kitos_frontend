@@ -1,6 +1,6 @@
-import { APIHelpTextResponseDTO } from "src/app/api/v2/model/helpTextResponseDTO";
+import { HelpText } from "src/app/shared/models/help-text.model";
 
 export interface HelpTextsState
 {
-  helpTexts: APIHelpTextResponseDTO[];
+  helpTexts: HelpText[];
 }

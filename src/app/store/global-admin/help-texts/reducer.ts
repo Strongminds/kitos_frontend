@@ -1,10 +1,10 @@
 import { createEntityAdapter } from "@ngrx/entity";
-import { APIHelpTextResponseDTO } from "src/app/api/v2/model/helpTextResponseDTO";
 import { HelpTextsState } from "./state";
 import { createFeature, createReducer, on } from "@ngrx/store";
 import { HelpTextActions } from "./actions";
+import { HelpText } from "src/app/shared/models/help-text.model";
 
-export const helpTextAdapter = createEntityAdapter<APIHelpTextResponseDTO>();
+export const helpTextAdapter = createEntityAdapter<HelpText>();
 
 export const helpTextsInitialState: HelpTextsState = helpTextAdapter.getInitialState({
   helpTexts: []

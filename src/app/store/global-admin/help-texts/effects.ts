@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import { catchError, map, of, switchMap } from "rxjs";
 import { APIV2HelpTextsInternalINTERNALService } from "src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service";
 import { HelpTextActions } from "./actions";
+import { adaptHelpText } from "src/app/shared/models/help-text.model";
 
 @Injectable()
 export class GlobalAdminHelpTextsEffects {
@@ -13,7 +14,7 @@ export class GlobalAdminHelpTextsEffects {
       ofType(HelpTextActions.getHelpTexts),
       switchMap(() => {
         return this.helpTextsInternalService.getManyHelpTextsInternalV2Get().pipe(
-          map((helpTexts) => HelpTextActions.getHelpTextsSuccess(helpTexts)),
+          map((helptextDtos) => HelpTextActions.getHelpTextsSuccess(helptextDtos.map(helptextDto => adaptHelpText(helptextDto)))),
           catchError(() => of(HelpTextActions.getHelpTextsError()))
         );
       })
@@ -25,7 +26,7 @@ export class GlobalAdminHelpTextsEffects {
       ofType(HelpTextActions.createHelpText),
       switchMap(({ request }) => {
         return this.helpTextsInternalService.postSingleHelpTextsInternalV2Post({ dto: request }).pipe(
-          map((helpText) => HelpTextActions.createHelpTextSuccess(helpText)),
+          map((helpTextDto) => HelpTextActions.createHelpTextSuccess(adaptHelpText(helpTextDto))),
           catchError(() => of(HelpTextActions.createHelpTextError()))
         );
       })
@@ -37,7 +38,7 @@ export class GlobalAdminHelpTextsEffects {
       ofType(HelpTextActions.updateHelpText),
       switchMap(({ key, request }) => {
         return this.helpTextsInternalService.patchSingleHelpTextsInternalV2PatchByKey({ key, dto: request }).pipe(
-          map((helpText) => HelpTextActions.updateHelpTextSuccess(helpText)),
+          map((helpTextDto) => HelpTextActions.updateHelpTextSuccess(adaptHelpText(helpTextDto))),
           catchError(() => of(HelpTextActions.updateHelpTextError()))
         );
       })
