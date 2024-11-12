@@ -17,7 +17,7 @@ export class GlobalAdminHelpTextsEffects {
     return this.actions$.pipe(
       ofType(HelpTextActions.getHelpTexts, HelpTextActions.deleteHelpTextSuccess),
       switchMap(() => {
-        return this.helpTextsInternalService.getManyHelpTextsInternalV2Get().pipe(
+        return this.helpTextsInternalService.getManyHelpTextsInternalV2GetAll().pipe(
           map((helptextDtos) =>
             HelpTextActions.getHelpTextsSuccess(helptextDtos.map((helptextDto) => adaptHelpText(helptextDto)))
           ),
@@ -43,7 +43,7 @@ export class GlobalAdminHelpTextsEffects {
     return this.actions$.pipe(
       ofType(HelpTextActions.updateHelpText),
       switchMap(({ key, request }) => {
-        return this.helpTextsInternalService.patchSingleHelpTextsInternalV2PatchByKey({ key, dto: request }).pipe(
+        return this.helpTextsInternalService.patchSingleHelpTextsInternalV2Patch({ key, dto: request }).pipe(
           map((helpTextDto) => HelpTextActions.updateHelpTextSuccess(adaptHelpText(helpTextDto))),
           catchError(() => of(HelpTextActions.updateHelpTextError()))
         );
@@ -55,7 +55,7 @@ export class GlobalAdminHelpTextsEffects {
     return this.actions$.pipe(
       ofType(HelpTextActions.deleteHelpText),
       switchMap(({ key }) => {
-        return this.helpTextsInternalService.deleteSingleHelpTextsInternalV2DeleteByKey({ key }).pipe(
+        return this.helpTextsInternalService.deleteSingleHelpTextsInternalV2Delete({ key }).pipe(
           map(() => HelpTextActions.deleteHelpTextSuccess()),
           catchError(() => of(HelpTextActions.deleteHelpTextError()))
         );
