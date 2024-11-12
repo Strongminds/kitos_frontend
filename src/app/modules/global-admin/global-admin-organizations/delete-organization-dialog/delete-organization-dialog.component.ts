@@ -59,20 +59,16 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
     this.componentStore.getConsequences(of(this.organization.Uuid));
 
     this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.deleteOrganizationSuccess))
-        .subscribe(() => {
-          this.deletingOrganization$.next(false);
-          this.onCancel();
-        })
+      this.actions$.pipe(ofType(OrganizationActions.deleteOrganizationSuccess)).subscribe(() => {
+        this.deletingOrganization$.next(false);
+        this.onCancel();
+      })
     );
 
     this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(OrganizationActions.deleteOrganizationError))
-        .subscribe(() => {
-          this.deletingOrganization$.next(false);
-        })
+      this.actions$.pipe(ofType(OrganizationActions.deleteOrganizationError)).subscribe(() => {
+        this.deletingOrganization$.next(false);
+      })
     );
   }
 
