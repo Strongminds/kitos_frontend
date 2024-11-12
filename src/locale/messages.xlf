@@ -4459,6 +4459,9 @@
       <trans-unit id="838512276710673497" datatype="html">
         <source>Hent ændringer i KLE</source>
       </trans-unit>
+      <trans-unit id="8669528431522521621" datatype="html">
+        <source> Kopier til klipholder</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

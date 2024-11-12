@@ -5871,6 +5871,10 @@
         <source>Hent ændringer i KLE</source>
         <target state="new">Hent ændringer i KLE</target>
       </trans-unit>
+      <trans-unit id="8669528431522521621" datatype="html">
+        <source> Kopier til klipholder</source>
+        <target state="new"> Kopier til klipholder</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
