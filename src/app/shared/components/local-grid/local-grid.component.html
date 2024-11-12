@@ -20,6 +20,7 @@
       [field]="column.field"
       [title]="column.title"
       [filter]="column.filter ?? 'text'"
+      [width]="column.width ?? defaultColumnWidth"
       [minResizableWidth]="
         column.minResizableWidth !== undefined
           ? column.minResizableWidth
