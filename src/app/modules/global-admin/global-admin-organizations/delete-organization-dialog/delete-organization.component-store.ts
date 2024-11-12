@@ -5,6 +5,7 @@ import { map, mergeMap, Observable, tap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 import { mapConflictsDtoToOrganizationRemovalConflicts } from 'src/app/shared/helpers/removal-conflicts.helper';
 import { OrganizationRemovalConflicts } from 'src/app/shared/models/global-admin/organization-removal-conflicts.model';
+import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
 
 interface State {
   removalConflicts?: OrganizationRemovalConflicts;
@@ -26,6 +27,36 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
       removalConflicts: consequences,
     })
   );
+
+  public getSpecificConflicts(type: RemovalConflictType): Observable<RemovalConflict[]> {
+    return this.removalConflicts$.pipe(
+      map((conflicts) => {
+        switch (type) {
+          case 'contracts':
+            return conflicts?.contractsInOtherOrganizationsWhereOrgIsSupplier;
+          case 'dprDataprocessor':
+            return conflicts?.dprInOtherOrganizationsWhereOrgIsDataProcessor;
+          case 'dprSubDataprocessor':
+            return conflicts?.dprInOtherOrganizationsWhereOrgIsSubDataProcessor;
+          case 'interfaces':
+            return conflicts?.interfacesExposedOnSystemsOutsideTheOrganization;
+          case 'systemsExposingInterfaces':
+            return conflicts?.systemsExposingInterfacesDefinedInOtherOrganizations;
+          case 'systemsRightsHolder':
+            return conflicts?.systemsInOtherOrganizationsWhereOrgIsRightsHolder;
+          case 'systemsParentSystem':
+            return conflicts?.systemsSetAsParentSystemToSystemsInOtherOrganizations;
+          case 'systemsArchiveSupplier':
+            return conflicts?.systemsWhereOrgIsArchiveSupplier;
+          case 'systemsUsages':
+            return conflicts?.systemsWithUsagesOutsideTheOrganization;
+          default:
+            throw new Error(`Unknown removal conflict type: ${type}`);
+        }
+      }),
+      map((conflicts) => conflicts ?? [])
+    );
+  }
 
   private setLoading = this.updater((state, isLoading: boolean): State => ({ ...state, isLoading }));
 
