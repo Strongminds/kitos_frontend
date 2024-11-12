@@ -9,6 +9,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { Store } from '@ngrx/store';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 
 @Component({
   selector: 'app-delete-organization-dialog',
@@ -16,7 +17,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
   styleUrl: './delete-organization-dialog.component.scss',
   providers: [DeleteOrganizationComponentStore],
 })
-export class DeleteOrganizationDialogComponent implements OnInit {
+export class DeleteOrganizationDialogComponent extends BaseComponent implements OnInit {
   @Input() public organization!: Organization;
 
   public hasAcceptedConsequences: boolean = false;
@@ -54,11 +55,13 @@ export class DeleteOrganizationDialogComponent implements OnInit {
   public ngOnInit(): void {
     this.componentStore.getConsequences(of(this.organization.Uuid));
 
-    this.actions$
-      .pipe(ofType(OrganizationActions.deleteOrganizationSuccess, OrganizationActions.deleteOrganizationError))
-      .subscribe(() => {
-        this.deletingOrganization$.next(false);
-      });
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationActions.deleteOrganizationSuccess, OrganizationActions.deleteOrganizationError))
+        .subscribe(() => {
+          this.deletingOrganization$.next(false);
+        })
+    );
   }
 
   public onDelete(): void {
