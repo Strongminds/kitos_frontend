@@ -50,7 +50,9 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
     private store: Store,
     private cdr: ChangeDetectorRef,
     private notificationService: NotificationService
-  ) {}
+  ) {
+    super();
+  }
 
   public ngOnInit(): void {
     this.componentStore.getConsequences(of(this.organization.Uuid));
