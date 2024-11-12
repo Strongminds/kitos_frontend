@@ -1,20 +1,26 @@
-import { Inject, Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, map, of, switchMap } from "rxjs";
-import { APIV2HelpTextsInternalINTERNALService } from "src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service";
-import { HelpTextActions } from "./actions";
-import { adaptHelpText } from "src/app/shared/models/help-text.model";
+import { Inject, Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { catchError, map, of, switchMap } from 'rxjs';
+import { APIV2HelpTextsInternalINTERNALService } from 'src/app/api/v2/api/v2HelpTextsInternalINTERNAL.service';
+import { adaptHelpText } from 'src/app/shared/models/help-text.model';
+import { HelpTextActions } from './actions';
 
 @Injectable()
 export class GlobalAdminHelpTextsEffects {
-  constructor(private actions$: Actions, @Inject(APIV2HelpTextsInternalINTERNALService) private helpTextsInternalService: APIV2HelpTextsInternalINTERNALService) {}
+  constructor(
+    private actions$: Actions,
+    @Inject(APIV2HelpTextsInternalINTERNALService)
+    private helpTextsInternalService: APIV2HelpTextsInternalINTERNALService
+  ) {}
 
   getHelpTexts$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(HelpTextActions.getHelpTexts),
+      ofType(HelpTextActions.getHelpTexts, HelpTextActions.deleteHelpTextSuccess),
       switchMap(() => {
         return this.helpTextsInternalService.getManyHelpTextsInternalV2Get().pipe(
-          map((helptextDtos) => HelpTextActions.getHelpTextsSuccess(helptextDtos.map(helptextDto => adaptHelpText(helptextDto)))),
+          map((helptextDtos) =>
+            HelpTextActions.getHelpTextsSuccess(helptextDtos.map((helptextDto) => adaptHelpText(helptextDto)))
+          ),
           catchError(() => of(HelpTextActions.getHelpTextsError()))
         );
       })
