@@ -40,6 +40,8 @@ import { RoleOptionTypeEffects } from './roles-option-type-store/effects';
 import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
+import { helpTextFeature } from './global-admin/help-texts/reducer';
+import { GlobalAdminHelpTextsEffects } from './global-admin/help-texts/effects';
 
 @NgModule({
   imports: [
@@ -70,6 +72,7 @@ import { userFeature } from './user-store/reducer';
     StoreModule.forFeature(organizationFeature),
     StoreModule.forFeature(uiModuleConfigFeature),
     StoreModule.forFeature(fkOrgFeature),
+    StoreModule.forFeature(helpTextFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -89,6 +92,7 @@ import { userFeature } from './user-store/reducer';
       LocalOptionTypeEffects,
       FkOrgEffects,
       GlobalAdminOptionTypeEffects,
+      GlobalAdminHelpTextsEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),

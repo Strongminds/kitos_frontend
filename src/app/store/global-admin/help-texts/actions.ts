@@ -1,20 +1,25 @@
-import { createActionGroup } from "@ngrx/store";
+import { createActionGroup, emptyProps } from '@ngrx/store';
+import { APIHelpTextCreateRequestDTO } from 'src/app/api/v2/model/helpTextCreateRequestDTO';
+import { APIHelpTextResponseDTO } from 'src/app/api/v2/model/helpTextResponseDTO';
+import { APIHelpTextUpdateRequestDTO } from 'src/app/api/v2/model/helpTextUpdateRequestDTO';
 
-export const HelpTextTypeActions = createActionGroup({
+export const HelpTextActions = createActionGroup({
   source: 'HelpText',
   events: {
-    'Update HelpText': (
-      key: string,
-      request: apihelptext
-    ) => ({ optionType, optionUuid, request }),
-    'Update Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
-    'Update Option Type Error': () => emptyProps(),
+    'Get Help Texts': emptyProps(),
+    'Get Help Texts success': (helpTexts: APIHelpTextResponseDTO[]) => ({ helpTexts }),
+    'Get Help Texts error': emptyProps(),
 
-    'Create Option Type': (
-      optionType: LocalAdminOptionType,
-      request: APIGlobalRoleOptionCreateRequestDTO
-    ) => ({ optionType, request }),
-    'Create Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
-    'Create Option Type Error': () => emptyProps(),
+    'Update Help Text': (key: string, request: APIHelpTextUpdateRequestDTO) => ({ key, request }),
+    'Update Help Text Success': (helpText: APIHelpTextResponseDTO) => ({ helpText }),
+    'Update Help Text Error': () => emptyProps(),
+
+    'Create Help Text': (key: string, request: APIHelpTextCreateRequestDTO) => ({ key, request }),
+    'Create Help Text Success': (helpText: APIHelpTextResponseDTO) => ({ helpText }),
+    'Create Help Text Error': () => emptyProps(),
+
+    'Delete Help Text': (key: string) => ({ key }),
+    'Delete Help Text Success': () => emptyProps(),
+    'Delete Help Text Error': () => emptyProps(),
   },
 });
