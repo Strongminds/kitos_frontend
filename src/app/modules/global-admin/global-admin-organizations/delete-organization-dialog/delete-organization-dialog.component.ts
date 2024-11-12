@@ -24,6 +24,7 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
   public isCopying: boolean = false;
 
   public readonly removalConflicts$ = this.componentStore.select((state) => state.consequences);
+  public readonly isLoading$ = this.componentStore.select((state) => state.isLoading);
   public readonly simpleConflictTypeOptions: RemovalConflictType[] = [
     'contracts',
     'dprDataprocessor',
