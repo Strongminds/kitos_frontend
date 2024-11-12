@@ -35,14 +35,14 @@
           <td>
             <div class="align-priority-div">
               <app-icon-button (buttonClick)="onIncreasePriority(optionTypeItem)" [disabled]="(isHighestPriority(optionTypeItem) | async) === true">
-                <app-arrow-up-icon></app-arrow-up-icon>
+                <app-arrow-up-icon [ngClass]="{'arrow-icon-disabled': (isHighestPriority(optionTypeItem) | async) === true}"></app-arrow-up-icon>
               </app-icon-button>
               <app-icon-button
               (buttonClick)="onDecreasePriority(optionTypeItem)"
               [disabled]="(isLowestPriority(optionTypeItem) | async) === true"
               data-cy="decrease-priority-button"
               >
-                <app-arrow-down-icon></app-arrow-down-icon>
+                <app-arrow-down-icon [ngClass]="{'arrow-icon-disabled': (isLowestPriority(optionTypeItem) | async) === true}"></app-arrow-down-icon>
               </app-icon-button>
             </div>
           </td>
