@@ -17,7 +17,7 @@
               {{ globalAdmin.email }}
             </app-paragraph>
             <app-table-row-actions>
-              <app-icon-button (buttonClick)="removeGlobalAdmin(globalAdmin)">
+              <app-icon-button (buttonClick)="removeGlobalAdmin(globalAdmin)" data-cy="remove-global-admin-button">
                 <app-trashcan-icon></app-trashcan-icon>
               </app-icon-button>
             </app-table-row-actions>

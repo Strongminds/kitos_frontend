@@ -16,11 +16,17 @@
     [isLoading$]="usersLoading$"
     [data$]="users$"
     (filterChange)="searchUsers($event)"
+    data-cy="add-global-admin-dropdown"
   >
   </app-connected-dropdown>
   <app-dialog-actions>
     <app-button buttonStyle="secondary" (buttonClick)="close()"> Annuller </app-button>
-    <app-button buttonStyle="primary" [disabled]="!formGroup.valid" (buttonClick)="addGlobalAdmin()">
+    <app-button
+      buttonStyle="primary"
+      [disabled]="!formGroup.valid"
+      (buttonClick)="addGlobalAdmin()"
+      data-cy="add-global-admin-dialog-button"
+    >
       Tilføj
     </app-button>
   </app-dialog-actions>
