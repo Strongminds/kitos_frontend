@@ -38,7 +38,6 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
                 this.updateHelpText(adaptHelpText(response) || defaultHelpText)},
               (e) => {
                 console.error(e)
-                this.updateHelpText(defaultHelpText)
               }
             )
           )
