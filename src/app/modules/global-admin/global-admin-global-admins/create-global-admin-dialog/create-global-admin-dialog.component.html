@@ -1,7 +1,21 @@
 <app-dialog title="Tilføj global admin" i18n-title overflow="none" i18n-title>
-  <app-dropdown> </app-dropdown>
+  <app-connected-dropdown
+    text="Vælg bruger"
+    i18n-text
+    [valueField]="'uuid'"
+    [includeItemDescription]="true"
+    itemDescriptionField="email"
+    [formGroup]="formGroup"
+    formName="user"
+    [isLoading$]="loading$"
+    [data$]="users$"
+    (filterChange)="searchUsers($event)"
+  >
+  </app-connected-dropdown>
   <app-dialog-actions>
     <app-button buttonStyle="secondary" (buttonClick)="close()"> Annuller </app-button>
-    <app-button buttonStyle="primary" (buttonClick)="addGlobalAdmin()"> Tilføj </app-button>
+    <app-button buttonStyle="primary" [disabled]="!formGroup.valid" (buttonClick)="addGlobalAdmin()">
+      Tilføj
+    </app-button>
   </app-dialog-actions>
 </app-dialog>
