@@ -4432,6 +4432,24 @@
       <trans-unit id="3879129476245182465" datatype="html">
         <source> Hjælpetekster </source>
       </trans-unit>
+      <trans-unit id="2075864540086018716" datatype="html">
+        <source>Opret hjælpetekst</source>
+      </trans-unit>
+      <trans-unit id="4408578658508232536" datatype="html">
+        <source>Denne nøgle er allerede i brug</source>
+      </trans-unit>
+      <trans-unit id="4864518029302201425" datatype="html">
+        <source> Opret Organisation </source>
+      </trans-unit>
+      <trans-unit id="529954932950278571" datatype="html">
+        <source> Opret hjælpetekst </source>
+      </trans-unit>
+      <trans-unit id="7593219051724769942" datatype="html">
+        <source>Kunne ikke oprette hjælpeteksten</source>
+      </trans-unit>
+      <trans-unit id="8563408770068903541" datatype="html">
+        <source>Hjælpeteksten blev oprettet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
