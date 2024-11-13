@@ -18,6 +18,7 @@ import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-oth
 import { GlobalAdminComponent } from './global-admin.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
 import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-admins-table/global-admins-table.component';
+import { CreateGlobalAdminDialogComponent } from './global-admin-global-admins/create-global-admin-dialog/create-global-admin-dialog.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-
     EditOrganizationDialogComponent,
     GlobalAdminOtherKleComponent,
     GlobalAdminsTableComponent,
+    CreateGlobalAdminDialogComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })
