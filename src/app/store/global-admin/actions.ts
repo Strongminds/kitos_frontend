@@ -19,5 +19,24 @@ export const GlobalOptionTypeActions = createActionGroup({
     ) => ({ optionType, request }),
     'Create Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
     'Create Option Type Error': () => emptyProps(),
+
+    'Get Global Admins': () => emptyProps(),
+  },
+});
+
+export const GlobalAdminActions = createActionGroup({
+  source: 'GlobalAdmin',
+  events: {
+    'Get Global Admins': () => emptyProps(),
+    'Get Global Admins Success': (admins: any[]) => ({ admins }),
+    'Get Global Admins Error': () => emptyProps(),
+
+    'Add Global Admin': (userUuid: string) => ({ uiserUuid: userUuid }),
+    'Add Global Admin Success': (user: any) => emptyProps(),
+    'Add Global Admin Error': () => emptyProps(),
+
+    'Remove Global Admin': (userUuid: string) => ({ userUuid }),
+    'Remove Global Admin Success': (userUuid: string) => emptyProps(),
+    'Remove Global Admin Error': () => emptyProps(),
   },
 });

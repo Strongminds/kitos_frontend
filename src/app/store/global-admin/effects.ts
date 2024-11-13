@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, groupBy, map, mergeMap, of, switchMap } from 'rxjs';
 import { GlobalAdminOptionTypeService } from 'src/app/shared/services/global-admin-option-type.service';
-import { GlobalOptionTypeActions } from './actions';
+import { GlobalAdminActions, GlobalOptionTypeActions } from './actions';
+import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
 
 @Injectable()
 export class GlobalAdminOptionTypeEffects {
-  constructor(private actions$: Actions, private globalOptionTypeService: GlobalAdminOptionTypeService) {}
+  constructor(private actions$: Actions, private globalOptionTypeService: GlobalAdminOptionTypeService, private globalUserService: APIV2GlobalUserInternalINTERNALService) {}
 
   patchGlobalOptionType$ = createEffect(() => {
     return this.actions$.pipe(
@@ -38,4 +39,15 @@ export class GlobalAdminOptionTypeEffects {
       })
     );
   });
+
+  /* getGlobalAdmins$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GlobalAdminActions.getGlobalAdmins),
+      switchMap(() => {
+        return this.globalUserService.getManyGlobalUserInternalV2GetUsers().pipe(
+
+        );
+      })
+    )
+  }); */
 }
