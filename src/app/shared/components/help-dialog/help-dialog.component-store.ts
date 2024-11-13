@@ -35,13 +35,21 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
           .pipe(
             tapResponse(
               (response) => {
-                this.updateHelpText(adaptHelpText(response) || defaultHelpText)},
-              (e) => {
-                console.error(e)
-              }
+                try {
+                  this.updateHelpText(adaptHelpText(response));
+                } catch (e) {
+                  this.handleError(e);
+                }
+              },
+              (e) => this.handleError(e)
             )
           )
       )
     )
   );
+
+  private handleError(e: unknown){
+    console.error(e);
+    this.updateHelpText(defaultHelpText);
+  }
 }
