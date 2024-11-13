@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, concatMap, groupBy, map, mergeMap, of, switchMap } from 'rxjs';
 import { GlobalAdminOptionTypeService } from 'src/app/shared/services/global-admin-option-type.service';
@@ -10,6 +10,7 @@ export class GlobalAdminOptionTypeEffects {
   constructor(
     private actions$: Actions,
     private globalOptionTypeService: GlobalAdminOptionTypeService,
+    @Inject(APIV2GlobalUserInternalINTERNALService)
     private globalUserService: APIV2GlobalUserInternalINTERNALService
   ) {}
 
