@@ -5847,6 +5847,30 @@
         <source>Er du sikker på at du vil fjerne denne bruger?</source>
         <target state="new">Er du sikker på at du vil fjerne denne bruger?</target>
       </trans-unit>
+      <trans-unit id="187245111358411106" datatype="html">
+        <source>Tilføj global admin</source>
+        <target state="new">Tilføj global admin</target>
+      </trans-unit>
+      <trans-unit id="2862661403067318737" datatype="html">
+        <source>Fjern &quot;<x id="PH" equiv-text="globalAdmin.name"/>&quot; som global administrator</source>
+        <target state="new">Fjern &quot;<x id="PH" equiv-text="globalAdmin.name"/>&quot; som global administrator</target>
+      </trans-unit>
+      <trans-unit id="2143698143009798200" datatype="html">
+        <source>Bruger tilføjet som global administrator</source>
+        <target state="new">Bruger tilføjet som global administrator</target>
+      </trans-unit>
+      <trans-unit id="6501597151436805396" datatype="html">
+        <source>Bruger kunne ikke tilføjes som global administrator</source>
+        <target state="new">Bruger kunne ikke tilføjes som global administrator</target>
+      </trans-unit>
+      <trans-unit id="7398120024174674144" datatype="html">
+        <source>Bruger fjernet som global administrator</source>
+        <target state="new">Bruger fjernet som global administrator</target>
+      </trans-unit>
+      <trans-unit id="8112199302256827297" datatype="html">
+        <source>Bruger kunne ikke fjernes som global administrator</source>
+        <target state="new">Bruger kunne ikke fjernes som global administrator</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
