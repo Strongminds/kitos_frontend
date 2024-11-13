@@ -22,6 +22,8 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
   });
 
   public readonly keyExists$ = this.componentStore.keyExists$;
+  public readonly isLoading$ = this.componentStore.isLoading$;
+
 
   constructor(
     private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,

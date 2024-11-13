@@ -36,7 +36,7 @@
 <app-dialog-actions>
   <app-button
     (buttonClick)="onCreateHelpText()"
-    [disabled]="!formGroup.valid || (keyExists$ | async) === true"
+    [disabled]="!formGroup.valid || (keyExists$ | async) === true || (isLoading$ | async) === true"
     i18n
     >Opret</app-button
   >
