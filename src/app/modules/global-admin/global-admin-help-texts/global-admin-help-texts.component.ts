@@ -27,6 +27,6 @@ export class GlobalAdminHelpTextsComponent implements OnInit {
   public onDelete(helpText: HelpText) {}
 
   public onClickCreate() {
-    const dialogRef = this.dialog.open(CreateHelpTextDialogComponent);
+    this.dialog.open(CreateHelpTextDialogComponent);
   }
 }
