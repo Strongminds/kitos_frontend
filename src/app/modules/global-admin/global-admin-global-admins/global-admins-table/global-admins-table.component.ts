@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
-import { selectAllGlobalAdmins } from 'src/app/store/global-admin/selectors';
+import { selectAllGlobalAdmins, selectGlobalAdminsLoading } from 'src/app/store/global-admin/selectors';
 import { GlobalAdminUser } from 'src/app/store/global-admin/state';
 
 @Component({
@@ -18,6 +18,7 @@ export class GlobalAdminsTableComponent implements OnInit {
   }
 
   public readonly globalAdmins$ = this.store.select(selectAllGlobalAdmins);
+  public readonly globalAdminsIsLoading$ = this.store.select(selectGlobalAdminsLoading);
 
   public removeGlobalAdmin(globalAdmin: GlobalAdminUser) {
     this.confirmActionService.confirmAction({

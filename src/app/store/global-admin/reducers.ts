@@ -8,12 +8,27 @@ export const globalAdminsAdapter = createEntityAdapter<GlobalAdminUser>({
   sortComparer: (a, b) => a.name.localeCompare(b.name),
 });
 
-const GlobalAdminsInitialState: GlobalAdminState = globalAdminsAdapter.getInitialState();
+const GlobalAdminsInitialState: GlobalAdminState = globalAdminsAdapter.getInitialState({ loading: false });
 
 export const globalAdminFeature = createFeature({
   name: 'GlobalAdmin',
   reducer: createReducer(
     GlobalAdminsInitialState,
+    on(
+      GlobalAdminActions.getGlobalAdmins,
+      GlobalAdminActions.removeGlobalAdmin,
+      GlobalAdminActions.addGlobalAdmin,
+      (state): GlobalAdminState => ({ ...state, loading: true })
+    ),
+    on(
+      GlobalAdminActions.getGlobalAdminsError,
+      GlobalAdminActions.removeGlobalAdminError,
+      GlobalAdminActions.addGlobalAdminError,
+      GlobalAdminActions.getGlobalAdminsSuccess,
+      GlobalAdminActions.removeGlobalAdminSuccess,
+      GlobalAdminActions.addGlobalAdminSuccess,
+      (state): GlobalAdminState => ({ ...state, loading: false })
+    ),
     on(
       GlobalAdminActions.getGlobalAdminsSuccess,
       (state, { admins }): GlobalAdminState => globalAdminsAdapter.setAll(admins, state)

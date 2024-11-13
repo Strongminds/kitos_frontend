@@ -1,7 +1,9 @@
 import { EntityState } from '@ngrx/entity';
 import { APIUserReferenceResponseDTO } from 'src/app/api/v2';
 
-export interface GlobalAdminState extends EntityState<GlobalAdminUser> {}
+export interface GlobalAdminState extends EntityState<GlobalAdminUser> {
+  loading: boolean;
+}
 
 export interface GlobalAdminUser {
   name: string;
