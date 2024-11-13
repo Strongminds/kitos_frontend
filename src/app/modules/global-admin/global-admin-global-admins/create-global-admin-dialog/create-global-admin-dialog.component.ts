@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-create-global-admin-dialog',
@@ -7,4 +8,13 @@ import { Component } from '@angular/core';
 })
 export class CreateGlobalAdminDialogComponent {
 
+  constructor(private dialogRef: MatDialogRef<CreateGlobalAdminDialogComponent>) {}
+
+  public close(): void {
+    this.dialogRef.close();
+  }
+
+  public addGlobalAdmin(): void {
+    
+  }
 }

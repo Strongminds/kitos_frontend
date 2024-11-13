@@ -1,1 +1,8 @@
-<p>create-global-admin-dialog works!</p>
+<app-dialog title="Tilføj global admin" i18n-title overflow="none" i18n-title>
+  <app-dropdown> </app-dropdown>
+
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" (buttonClick)="close()"> Annuller </app-button>
+    <app-button buttonStyle="primary" (buttonClick)="addGlobalAdmin()"> Tilføj </app-button>
+  </app-dialog-actions>
+</app-dialog>
