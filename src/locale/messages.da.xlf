@@ -5827,6 +5827,14 @@
         <source>KLE kunne ikke opdateres</source>
         <target state="new">KLE kunne ikke opdateres</target>
       </trans-unit>
+      <trans-unit id="3879129476245182465" datatype="html">
+        <source> Hjælpetekster </source>
+        <target state="new"> Hjælpetekster </target>
+      </trans-unit>
+      <trans-unit id="2311412587966355874" datatype="html">
+        <source>Nøgle</source>
+        <target state="new">Nøgle</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
