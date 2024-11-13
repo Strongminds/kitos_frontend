@@ -10,6 +10,11 @@
   i18n-text
   >
   </app-textbox>
+  <div class="error-paragraph-height">
+    <app-paragraph *ngIf="keyExists$ | async" color="error" i18n
+      >Denne nøgle er allerede i brug</app-paragraph
+    >
+  </div>
 
   <app-textbox
   [formGroup]="formGroup"
@@ -31,7 +36,7 @@
 <app-dialog-actions>
   <app-button
     (buttonClick)="onCreateHelpText()"
-    [disabled]="!formGroup.valid"
+    [disabled]="!formGroup.valid || (keyExists$ | async) === true"
     i18n
     >Opret</app-button
   >
