@@ -1,13 +1,12 @@
-import { createFeature, createReducer } from "@ngrx/store";
-import { GlobalAdminState } from "./state";
+import { createFeature, createReducer } from '@ngrx/store';
+import { GlobalAdminState, GlobalAdminUser } from './state';
+import { createEntityAdapter } from '@ngrx/entity';
 
-const GlobalAdminsInitialState: GlobalAdminState = {
-  globalAdmins: []
-};
+export const globalAdminsAdapter = createEntityAdapter<GlobalAdminUser>();
+
+const GlobalAdminsInitialState: GlobalAdminState = globalAdminsAdapter.getInitialState({});
 
 export const globalAdminFeature = createFeature({
   name: 'GlobalAdmin',
-  reducer: createReducer(
-    GlobalAdminsInitialState,
-  )
+  reducer: createReducer(GlobalAdminsInitialState),
 });
