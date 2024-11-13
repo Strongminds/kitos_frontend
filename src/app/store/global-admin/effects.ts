@@ -7,7 +7,11 @@ import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
 
 @Injectable()
 export class GlobalAdminOptionTypeEffects {
-  constructor(private actions$: Actions, private globalOptionTypeService: GlobalAdminOptionTypeService, private globalUserService: APIV2GlobalUserInternalINTERNALService) {}
+  constructor(
+    private actions$: Actions,
+    private globalOptionTypeService: GlobalAdminOptionTypeService,
+    private globalUserService: APIV2GlobalUserInternalINTERNALService
+  ) {}
 
   patchGlobalOptionType$ = createEffect(() => {
     return this.actions$.pipe(
@@ -40,14 +44,39 @@ export class GlobalAdminOptionTypeEffects {
     );
   });
 
-  /* getGlobalAdmins$ = createEffect(() => {
+  getGlobalAdmins$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(GlobalAdminActions.getGlobalAdmins),
       switchMap(() => {
-        return this.globalUserService.getManyGlobalUserInternalV2GetUsers().pipe(
-
+        return this.globalUserService.getManyGlobalUserInternalV2GetGlobalAdmins().pipe(
+          map((admins) => GlobalAdminActions.getGlobalAdminsSuccess(admins)),
+          catchError(() => of(GlobalAdminActions.getGlobalAdminsError()))
         );
       })
-    )
-  }); */
+    );
+  });
+
+  addGlobalAdmin$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GlobalAdminActions.addGlobalAdmin),
+      switchMap(({ userUuid }) => {
+        return this.globalUserService.postSingleGlobalUserInternalV2AddGlobalAdmin({ userUuid }).pipe(
+          map((user) => GlobalAdminActions.addGlobalAdminSuccess(user)),
+          catchError(() => of(GlobalAdminActions.addGlobalAdminError()))
+        );
+      })
+    );
+  });
+
+  removeGlobalAdmin$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(GlobalAdminActions.removeGlobalAdmin),
+      switchMap(({ userUuid }) => {
+        return this.globalUserService.deleteSingleGlobalUserInternalV2RemoveGlobalAdmin({ userUuid }).pipe(
+          map(() => GlobalAdminActions.removeGlobalAdminSuccess(userUuid)),
+          catchError(() => of(GlobalAdminActions.removeGlobalAdminError()))
+        );
+      })
+    );
+  });
 }

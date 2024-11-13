@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIGlobalRoleOptionCreateRequestDTO, APIGlobalRoleOptionUpdateRequestDTO } from 'src/app/api/v2';
+import { APIGlobalRoleOptionCreateRequestDTO, APIGlobalRoleOptionUpdateRequestDTO, APIUserReferenceResponseDTO } from 'src/app/api/v2';
 import { LocalAdminOptionType } from 'src/app/shared/models/options/local-admin-option-type.model';
 
 export const GlobalOptionTypeActions = createActionGroup({
@@ -13,10 +13,10 @@ export const GlobalOptionTypeActions = createActionGroup({
     'Update Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
     'Update Option Type Error': () => emptyProps(),
 
-    'Create Option Type': (
-      optionType: LocalAdminOptionType,
-      request: APIGlobalRoleOptionCreateRequestDTO
-    ) => ({ optionType, request }),
+    'Create Option Type': (optionType: LocalAdminOptionType, request: APIGlobalRoleOptionCreateRequestDTO) => ({
+      optionType,
+      request,
+    }),
     'Create Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
     'Create Option Type Error': () => emptyProps(),
 
@@ -28,11 +28,11 @@ export const GlobalAdminActions = createActionGroup({
   source: 'GlobalAdmin',
   events: {
     'Get Global Admins': () => emptyProps(),
-    'Get Global Admins Success': (admins: any[]) => ({ admins }),
+    'Get Global Admins Success': (admins: APIUserReferenceResponseDTO[]) => ({ admins }),
     'Get Global Admins Error': () => emptyProps(),
 
-    'Add Global Admin': (userUuid: string) => ({ uiserUuid: userUuid }),
-    'Add Global Admin Success': (user: any) => emptyProps(),
+    'Add Global Admin': (userUuid: string) => ({ userUuid }),
+    'Add Global Admin Success': (user: APIUserReferenceResponseDTO) => emptyProps(),
     'Add Global Admin Error': () => emptyProps(),
 
     'Remove Global Admin': (userUuid: string) => ({ userUuid }),
