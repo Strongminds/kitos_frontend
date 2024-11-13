@@ -2,9 +2,9 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import {
   APIGlobalRoleOptionCreateRequestDTO,
   APIGlobalRoleOptionUpdateRequestDTO,
-  APIUserReferenceResponseDTO,
 } from 'src/app/api/v2';
 import { LocalAdminOptionType } from 'src/app/shared/models/options/local-admin-option-type.model';
+import { GlobalAdminUser } from './state';
 
 export const GlobalOptionTypeActions = createActionGroup({
   source: 'GlobalOptionType',
@@ -30,11 +30,11 @@ export const GlobalAdminActions = createActionGroup({
   source: 'GlobalAdmin',
   events: {
     'Get Global Admins': () => emptyProps(),
-    'Get Global Admins Success': (admins: APIUserReferenceResponseDTO[]) => ({ admins }),
+    'Get Global Admins Success': (admins: GlobalAdminUser[]) => ({ admins }),
     'Get Global Admins Error': () => emptyProps(),
 
     'Add Global Admin': (userUuid: string) => ({ userUuid }),
-    'Add Global Admin Success': (user: APIUserReferenceResponseDTO) => ({ user }),
+    'Add Global Admin Success': (user: GlobalAdminUser) => ({ user }),
     'Add Global Admin Error': () => emptyProps(),
 
     'Remove Global Admin': (userUuid: string) => ({ userUuid }),

@@ -1,26 +1,28 @@
-<app-native-table tableLayout="fixed">
-  <thead>
-    <tr>
-      <th i18n>Navn</th>
-      <th i18n>Email</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let globalAdmin of globalAdmins">
-      <td>{{ "jacob borch" }}</td>
+<ng-container *ngIf="globalAdmins$ | async as globalAdmins">
+  <app-native-table tableLayout="fixed">
+    <thead>
+      <tr>
+        <th i18n>Navn</th>
+        <th i18n>Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let globalAdmin of globalAdmins">
+        <td>{{ globalAdmin.name }}</td>
 
-      <td>
-        <app-content-space-between>
-          <app-paragraph>
-            {{ "email@mail.dk" }}
-          </app-paragraph>
-          <app-table-row-actions>
-            <app-icon-button (buttonClick)="removeGlobalAdmin(globalAdmin)">
-              <app-trashcan-icon></app-trashcan-icon>
-            </app-icon-button>
-          </app-table-row-actions>
-        </app-content-space-between>
-      </td>
-    </tr>
-  </tbody>
-</app-native-table>
+        <td>
+          <app-content-space-between>
+            <app-paragraph>
+              {{ globalAdmin.email }}
+            </app-paragraph>
+            <app-table-row-actions>
+              <app-icon-button (buttonClick)="removeGlobalAdmin(globalAdmin)">
+                <app-trashcan-icon></app-trashcan-icon>
+              </app-icon-button>
+            </app-table-row-actions>
+          </app-content-space-between>
+        </td>
+      </tr>
+    </tbody>
+  </app-native-table>
+</ng-container>

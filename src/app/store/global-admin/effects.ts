@@ -4,6 +4,7 @@ import { catchError, concatMap, groupBy, map, mergeMap, of, switchMap } from 'rx
 import { GlobalAdminOptionTypeService } from 'src/app/shared/services/global-admin-option-type.service';
 import { GlobalAdminActions, GlobalOptionTypeActions } from './actions';
 import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
+import { adaptGlobalAdminUser } from './state';
 
 @Injectable()
 export class GlobalAdminOptionTypeEffects {
@@ -50,6 +51,7 @@ export class GlobalAdminOptionTypeEffects {
       ofType(GlobalAdminActions.getGlobalAdmins),
       switchMap(() => {
         return this.globalUserService.getManyGlobalUserInternalV2GetGlobalAdmins().pipe(
+          map((adminsDto) => adminsDto.map((userDto) => adaptGlobalAdminUser(userDto))),
           map((admins) => GlobalAdminActions.getGlobalAdminsSuccess(admins)),
           catchError(() => of(GlobalAdminActions.getGlobalAdminsError()))
         );
@@ -62,6 +64,7 @@ export class GlobalAdminOptionTypeEffects {
       ofType(GlobalAdminActions.addGlobalAdmin),
       switchMap(({ userUuid }) => {
         return this.globalUserService.postSingleGlobalUserInternalV2AddGlobalAdmin({ userUuid }).pipe(
+          map((userDto) => adaptGlobalAdminUser(userDto)),
           map((user) => GlobalAdminActions.addGlobalAdminSuccess(user)),
           catchError(() => of(GlobalAdminActions.addGlobalAdminError()))
         );

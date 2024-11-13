@@ -40,6 +40,7 @@ import { roleOptionTypeFeature } from './roles-option-type-store/reducer';
 import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
 import { GlobalAdminOptionTypeEffects } from './global-admin/effects';
+import { globalAdminFeature } from './global-admin/reducers';
 
 @NgModule({
   imports: [
@@ -70,6 +71,7 @@ import { GlobalAdminOptionTypeEffects } from './global-admin/effects';
     StoreModule.forFeature(organizationFeature),
     StoreModule.forFeature(uiModuleConfigFeature),
     StoreModule.forFeature(fkOrgFeature),
+    StoreModule.forFeature(globalAdminFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
