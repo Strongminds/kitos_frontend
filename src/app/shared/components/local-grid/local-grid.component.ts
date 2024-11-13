@@ -71,10 +71,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   }
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public searchProperty(object: any, property: string) {
-    console.log(JSON.stringify(object) + ' ' + property + '   is prop');
-    const debug = get(object, property);
-    console.log(debug);
-    return debug;
+    return get(object, property);
   }
 
   public onExcelExport(e: ExcelExportEvent) {
