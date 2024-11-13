@@ -5,6 +5,7 @@ import { GlobalAdminActions } from './actions';
 
 export const globalAdminsAdapter = createEntityAdapter<GlobalAdminUser>({
   selectId: (user) => user.uuid,
+  sortComparer: (a, b) => a.name.localeCompare(b.name),
 });
 
 const GlobalAdminsInitialState: GlobalAdminState = globalAdminsAdapter.getInitialState();

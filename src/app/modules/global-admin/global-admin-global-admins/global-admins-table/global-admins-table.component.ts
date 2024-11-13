@@ -15,19 +15,14 @@ export class GlobalAdminsTableComponent implements OnInit {
 
   public ngOnInit(): void {
     this.store.dispatch(GlobalAdminActions.getGlobalAdmins());
-
-    this.globalAdmins$.subscribe((globalAdmins) => {
-      console.log(globalAdmins);
-    });
   }
 
   public readonly globalAdmins$ = this.store.select(selectAllGlobalAdmins);
 
   public removeGlobalAdmin(globalAdmin: GlobalAdminUser) {
-    console.log(globalAdmin);
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Warning,
-      message: $localize`Fjern ${globalAdmin.name} som global administrator`,
+      message: $localize`Fjern "${globalAdmin.name}" som global administrator`,
       onConfirm: () => this.store.dispatch(GlobalAdminActions.removeGlobalAdmin(globalAdmin.uuid)),
     });
   }
