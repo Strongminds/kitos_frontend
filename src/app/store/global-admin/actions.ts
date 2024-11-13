@@ -23,8 +23,6 @@ export const GlobalOptionTypeActions = createActionGroup({
     }),
     'Create Option Type Success': (optionType: LocalAdminOptionType) => ({ optionType }),
     'Create Option Type Error': () => emptyProps(),
-
-    'Get Global Admins': () => emptyProps(),
   },
 });
 
