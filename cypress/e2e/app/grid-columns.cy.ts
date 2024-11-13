@@ -24,7 +24,6 @@ describe('grid columns', () => {
       const dprGridColumnsString = window.localStorage.getItem('data-processing-grid-columns') ?? '';
       cache = JSON.parse(dprGridColumnsString);
     });
-
   });
 
   it('Doesnt invalidate columns when visibility has been changed', () => {
@@ -36,6 +35,22 @@ describe('grid columns', () => {
       const dprGridColumnsString = window.localStorage.getItem('data-processing-grid-columns') ?? '';
       const newCache = JSON.parse(dprGridColumnsString);
       expect(newCache.hash).to.eq(cache.hash);
+    });
+  });
+
+  it('Invalidates columns when hash is different', () => {
+    const mockHashChange = {...cache, hash: '12345678'};
+    cy.window().then((window) => {
+      window.localStorage.setItem('data-processing-grid-columns', JSON.stringify(mockHashChange));
+    });
+
+    cy.visit('/data-processing');
+    cy.wait(2000);
+
+    cy.window().then((window) => {
+      const dprColumnsString = window.localStorage.getItem('data-processing-grid-columns') ?? '';
+      const newCache = JSON.parse(dprColumnsString);
+      expect(mockHashChange.hash).to.not.eq(newCache.hash);
     });
   });
 });

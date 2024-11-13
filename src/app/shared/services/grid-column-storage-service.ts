@@ -6,7 +6,9 @@ import { StatePersistingService } from './state-persisting.service';
   providedIn: 'root',
 })
 export class GridColumnStorageService {
-  constructor(private localStorage: StatePersistingService) {}
+  constructor(private localStorage: StatePersistingService) {
+    
+  }
 
   public setColumns(key: string, columns: GridColumn[]): void {
     const hash = this.computeHash(this.filterOutRoleColumns(columns));
