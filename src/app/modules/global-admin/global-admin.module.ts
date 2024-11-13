@@ -17,8 +17,9 @@ import { GlobalAdminOtherKleComponent } from './global-admin-other/global-admin-
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminComponent } from './global-admin.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
-import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-admins-table/global-admins-table.component';
 import { CreateGlobalAdminDialogComponent } from './global-admin-global-admins/create-global-admin-dialog/create-global-admin-dialog.component';
+import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-admins-table/global-admins-table.component';
+import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { CreateGlobalAdminDialogComponent } from './global-admin-global-admins/c
     GlobalAdminOtherKleComponent,
     GlobalAdminsTableComponent,
     CreateGlobalAdminDialogComponent,
+    GlobalAdminOtherUserShutdownComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })
