@@ -1,4 +1,10 @@
-<app-dialog title="Tilføj global admin" i18n-title overflow="none" i18n-title>
+<app-dialog
+  title="Tilføj global admin"
+  [loading]="(globalAdminsLoading$ | async) ?? true"
+  i18n-title
+  overflow="none"
+  i18n-title
+>
   <app-connected-dropdown
     text="Vælg bruger"
     i18n-text
@@ -7,7 +13,7 @@
     itemDescriptionField="email"
     [formGroup]="formGroup"
     formName="user"
-    [isLoading$]="loading$"
+    [isLoading$]="usersLoading$"
     [data$]="users$"
     (filterChange)="searchUsers($event)"
   >

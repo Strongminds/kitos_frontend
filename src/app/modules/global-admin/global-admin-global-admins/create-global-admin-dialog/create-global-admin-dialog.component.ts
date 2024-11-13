@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { selectAll } from 'src/app/store/organization/organization-user/selectors';
 import { CreateGlobalAdminComponentStore } from './create-global-admin.component-store';
 import { APIUserReferenceResponseDTO } from 'src/app/api/v2';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { Actions, ofType } from '@ngrx/effects';
+import { selectGlobalAdminsLoading } from 'src/app/store/global-admin/selectors';
 
 @Component({
   selector: 'app-create-global-admin-dialog',
@@ -30,7 +30,9 @@ export class CreateGlobalAdminDialogComponent extends BaseComponent implements O
   }
 
   public readonly users$ = this.componentStore.users$;
-  public readonly loading$ = this.componentStore.loading$;
+  public readonly usersLoading$ = this.componentStore.loading$;
+
+  public readonly globalAdminsLoading$ = this.store.select(selectGlobalAdminsLoading);
 
   public ngOnInit(): void {
     this.subscriptions.add(
