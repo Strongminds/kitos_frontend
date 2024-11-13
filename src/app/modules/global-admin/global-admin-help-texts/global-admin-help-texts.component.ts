@@ -38,7 +38,6 @@ export class GlobalAdminHelpTextsComponent extends BaseComponent implements OnIn
     this.subscriptions.add(
       confirmationDialogRef
         .afterClosed()
-        .pipe(first())
         .subscribe((result) => {
           if (result === true) {
             this.store.dispatch(HelpTextActions.deleteHelpText(helpText.Key));
