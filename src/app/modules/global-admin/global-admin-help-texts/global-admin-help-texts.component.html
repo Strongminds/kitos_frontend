@@ -13,6 +13,8 @@
       [data]="helpTexts"
       [columns]="columns"
       [withOutline]="true"
+      (modifyEvent)="openEditDialog($event)"
+      (deleteEvent)="openDeleteDialog($event)"
     >
     </app-local-grid>
   </ng-container>
