@@ -12,8 +12,8 @@ export const defaultHelpText: HelpText = {
   Title: $localize`Ingen hjælpetekst`,
 };
 
-export function adaptHelpText(apiHelpText: APIHelpTextResponseDTO): HelpText | undefined {
-  if (!apiHelpText.key) return undefined;
+export function adaptHelpText(apiHelpText: APIHelpTextResponseDTO): HelpText {
+  if (!apiHelpText.key) throw new Error('Could not adapt help text');
 
   return {
     Description: apiHelpText.description,
@@ -22,10 +22,3 @@ export function adaptHelpText(apiHelpText: APIHelpTextResponseDTO): HelpText | u
   };
 }
 
-export function adaptHelpTextOrThrow(dto: APIHelpTextResponseDTO): HelpText {
-  const helpText = adaptHelpText(dto);
-  if (!helpText){
-    throw new Error('Could not adapt help text');
-  }
-  return helpText;
-}
