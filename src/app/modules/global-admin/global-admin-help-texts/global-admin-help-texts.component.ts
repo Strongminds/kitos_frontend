@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { helpTextColumns } from 'src/app/shared/models/global-admin/help-text-columns';
@@ -9,6 +8,7 @@ import { HelpText } from 'src/app/shared/models/help-text.model';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { selectHelpTexts } from 'src/app/store/global-admin/help-texts/selectors';
 import { CreateHelpTextDialogComponent } from './create-help-text-dialog/create-help-text-dialog.component';
+import { EditHelpTextDialogComponent } from './edit-help-text-dialog/edit-help-text-dialog.component';
 
 @Component({
   selector: 'app-global-admin-help-texts',
@@ -27,7 +27,11 @@ export class GlobalAdminHelpTextsComponent extends BaseComponent implements OnIn
     this.store.dispatch(HelpTextActions.getHelpTexts());
   }
 
-  public openEditDialog(helpText: HelpText) {}
+  public openEditDialog(helpText: HelpText) {
+    const dialogRef = this.dialog.open(EditHelpTextDialogComponent);
+    const componentInstance = dialogRef.componentInstance;
+    componentInstance.helpText = helpText;
+  }
 
   public openDeleteDialog(helpText: HelpText) {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
@@ -36,13 +40,11 @@ export class GlobalAdminHelpTextsComponent extends BaseComponent implements OnIn
     confirmationDialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(
-      confirmationDialogRef
-        .afterClosed()
-        .subscribe((result) => {
-          if (result === true) {
-            this.store.dispatch(HelpTextActions.deleteHelpText(helpText.Key));
-          }
-        })
+      confirmationDialogRef.afterClosed().subscribe((result) => {
+        if (result === true) {
+          this.store.dispatch(HelpTextActions.deleteHelpText(helpText.Key));
+        }
+      })
     );
   }
 

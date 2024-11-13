@@ -15,7 +15,11 @@ export class GlobalAdminHelpTextsEffects {
 
   getHelpTexts$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(HelpTextActions.getHelpTexts, HelpTextActions.deleteHelpTextSuccess),
+      ofType(
+        HelpTextActions.getHelpTexts,
+        HelpTextActions.deleteHelpTextSuccess,
+        HelpTextActions.updateHelpTextSuccess
+      ),
       switchMap(() => {
         return this.helpTextsInternalService.getManyHelpTextsInternalV2GetAll().pipe(
           map((helptextDtos) =>
