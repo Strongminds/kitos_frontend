@@ -17,6 +17,7 @@ import { GlobalAdminOtherKleComponent } from './global-admin-other/global-admin-
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminComponent } from './global-admin.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
+import { CreateHelpTextDialogComponent } from './global-admin-help-texts/create-help-text-dialog/create-help-text-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { GlobalAdminRouterModule } from './global-admin.routes';
     CreateOrganizationDialogComponent,
     EditOrganizationDialogComponent,
     GlobalAdminOtherKleComponent,
+    CreateHelpTextDialogComponent
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })
