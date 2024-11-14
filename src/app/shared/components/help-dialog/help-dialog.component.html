@@ -3,5 +3,6 @@
 
   <app-dialog-actions *ngIf="(isGlobalAdmin$ | async)">
     <app-button *ngIf="(isEditable$ | async)" buttonStyle="secondary" (buttonClick)="edit()" i18n>Rediger</app-button>
+    <app-button *ngIf="(isEditable$ | async) === false" buttonStyle="secondary" (buttonClick)="create()" i18n>Opret</app-button>
   </app-dialog-actions>
 </app-dialog>

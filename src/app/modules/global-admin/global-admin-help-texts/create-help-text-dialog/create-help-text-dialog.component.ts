@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -15,6 +15,8 @@ import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.co
   providers: [CreateHelpTextDialogComponentStore],
 })
 export class CreateHelpTextDialogComponent extends BaseComponent implements OnInit {
+  @Input() existingKey: string | undefined;
+
   public readonly formGroup = new FormGroup({
     key: new FormControl<string | undefined>(undefined, Validators.required),
     title: new FormControl<string | undefined>(undefined),
@@ -31,6 +33,7 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
   ) {
     super();
   }
+
   ngOnInit(): void {
     this.subscriptions.add(
       this.formGroup.controls.key.valueChanges.pipe(debounceTime(300)).subscribe((key) => {
@@ -38,6 +41,12 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
         this.componentStore.checkIfKeyExists(key);
       })
     );
+
+    if (this.existingKey) {
+      this.formGroup.patchValue({
+        key: this.existingKey,
+      });
+    }
   }
 
   public onCreateHelpText(): void {

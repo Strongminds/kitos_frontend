@@ -44,5 +44,6 @@ export class HelpDialogComponent implements OnInit {
   public create() {
     this.dialogRef.close();
     const createDialogRef = this.dialog.open(CreateHelpTextDialogComponent);
+    createDialogRef.componentInstance.existingKey = this.helpTextKey;
   }
 }

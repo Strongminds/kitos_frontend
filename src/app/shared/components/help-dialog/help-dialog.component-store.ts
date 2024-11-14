@@ -8,7 +8,7 @@ import { adaptHelpText, defaultHelpText, HelpText } from '../../models/help-text
 
 interface State {
   helpText?: HelpText;
-  isEditable: boolean;
+  isEditable: boolean | undefined;
 }
 
 @Injectable()
