@@ -66,6 +66,10 @@ export class NotificationService implements OnDestroy {
   private subscriptToHelpTextNotifications(){
     this.subscribeAsDefault(HelpTextActions.createHelpTextSuccess, $localize`Hjælpeteksten blev oprettet`);
     this.subscribeAsError(HelpTextActions.createHelpTextError, $localize`Kunne ikke oprette hjælpeteksten`);
+    this.subscribeAsDefault(HelpTextActions.deleteHelpTextSuccess, $localize`Hjælpeteksten blev slettet`);
+    this.subscribeAsError(HelpTextActions.deleteHelpTextError, $localize`Kunne ikke slette hjælpeteksten`);
+    this.subscribeAsDefault(HelpTextActions.updateHelpTextSuccess, $localize`Hjælpeteksten blev opdateret`);
+    this.subscribeAsError(HelpTextActions.updateHelpTextError, $localize`Kunne ikke opdatere hjælpeteksten`);
   }
 
   private subscribeToLocalAdminNotifications() {
