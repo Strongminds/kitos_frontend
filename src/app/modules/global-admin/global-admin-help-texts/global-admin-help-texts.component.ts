@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { BaseComponent } from 'src/app/shared/base/base.component';
 import { helpTextColumns } from 'src/app/shared/models/global-admin/help-text-columns';
 import { HelpText } from 'src/app/shared/models/help-text.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -15,7 +14,7 @@ import { EditHelpTextDialogComponent } from '../../../shared/components/dialogs/
   templateUrl: './global-admin-help-texts.component.html',
   styleUrl: './global-admin-help-texts.component.scss',
 })
-export class GlobalAdminHelpTextsComponent extends BaseComponent implements OnInit {
+export class GlobalAdminHelpTextsComponent implements OnInit {
   public readonly helpTexts$ = this.store.select(selectHelpTexts);
   public readonly columns = helpTextColumns;
 
@@ -23,9 +22,7 @@ export class GlobalAdminHelpTextsComponent extends BaseComponent implements OnIn
     private readonly store: Store,
     private readonly dialog: MatDialog,
     private readonly confirmActionService: ConfirmActionService
-  ) {
-    super();
-  }
+  ) {}
 
   ngOnInit(): void {
     this.store.dispatch(HelpTextActions.getHelpTexts());

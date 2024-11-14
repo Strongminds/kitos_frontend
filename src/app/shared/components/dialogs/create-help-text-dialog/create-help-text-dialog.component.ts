@@ -35,8 +35,9 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
   }
 
   ngOnInit(): void {
+    const keyControl = this.formGroup.controls.key;
     this.subscriptions.add(
-      this.formGroup.controls.key.valueChanges.pipe(debounceTime(300)).subscribe((key) => {
+      keyControl.valueChanges.pipe(debounceTime(300)).subscribe((key) => {
         if (!key) return;
         this.componentStore.checkIfKeyExists(key);
       })
@@ -46,15 +47,17 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
       this.formGroup.patchValue({
         key: this.existingKey,
       });
+      keyControl.disable();
     }
   }
 
   public onCreateHelpText(): void {
     const value = this.formGroup.value;
-    if (!this.formGroup.valid || !value.key || !value.title) return;
+    const key = this.existingKey ?? value.key;
+    if (!this.formGroup.valid || !key || !value.title) return;
 
     const dto: APIHelpTextCreateRequestDTO = {
-      key: value.key,
+      key,
       title: value.title,
       description: value.description ?? undefined,
     };
