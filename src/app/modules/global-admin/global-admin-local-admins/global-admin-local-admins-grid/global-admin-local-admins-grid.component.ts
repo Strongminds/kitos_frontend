@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 
 @Component({
@@ -7,6 +8,9 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
   styleUrl: './global-admin-local-admins-grid.component.scss',
 })
 export class GlobalAdminLocalAdminsGridComponent {
+
+  data = [{organizationName: "En organisation", name: 'Jacob Borch', email: 'jacob@test.dk'}];
+
   public readonly gridColumns: GridColumn[] = [
     {
       field: 'organizationName',
@@ -22,6 +26,16 @@ export class GlobalAdminLocalAdminsGridComponent {
       field: 'email',
       title: $localize`Email`,
       hidden: false,
+    },
+    {
+      field: 'Actions',
+      title: ' ',
+      hidden: false,
+      style: 'action-buttons',
+      isSticky: true,
+      noFilter: true,
+      extraData: [{ type: 'delete' }] as GridActionColumn[],
+      width: 50,
     },
   ];
 }
