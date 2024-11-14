@@ -2,14 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { helpTextColumns } from 'src/app/shared/models/global-admin/help-text-columns';
 import { HelpText } from 'src/app/shared/models/help-text.model';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { selectHelpTexts } from 'src/app/store/global-admin/help-texts/selectors';
 import { CreateHelpTextDialogComponent } from './create-help-text-dialog/create-help-text-dialog.component';
 import { EditHelpTextDialogComponent } from './edit-help-text-dialog/edit-help-text-dialog.component';
-import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 
 @Component({
   selector: 'app-global-admin-help-texts',
@@ -20,9 +19,11 @@ export class GlobalAdminHelpTextsComponent extends BaseComponent implements OnIn
   public readonly helpTexts$ = this.store.select(selectHelpTexts);
   public readonly columns = helpTextColumns;
 
-  constructor(private readonly store: Store,
+  constructor(
+    private readonly store: Store,
     private readonly dialog: MatDialog,
-  private readonly confirmActionService: ConfirmActionService) {
+    private readonly confirmActionService: ConfirmActionService
+  ) {
     super();
   }
 
@@ -32,8 +33,7 @@ export class GlobalAdminHelpTextsComponent extends BaseComponent implements OnIn
 
   public openEditDialog(helpText: HelpText) {
     const dialogRef = this.dialog.open(EditHelpTextDialogComponent);
-    const componentInstance = dialogRef.componentInstance;
-    componentInstance.helpText = helpText;
+    dialogRef.componentInstance.helpText = helpText;
   }
 
   public openDeleteDialog(helpText: HelpText) {

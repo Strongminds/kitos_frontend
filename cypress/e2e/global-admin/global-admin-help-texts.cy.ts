@@ -33,4 +33,19 @@ describe('global-admin-help-texts', () => {
     });
     });
   });
+
+  it('Can delete help text', () => {
+    cy.intercept('DELETE', '/api/v2/internal/help-texts/*', {
+      statusCode: 200,
+      body: {},
+    }).as('delete');
+    const key = 'it-system.usage.main';
+
+    cy.getByDataCy('grid-delete-button').first().click();
+    cy.getByDataCy('confirm-button').click();
+
+    cy.wait('@delete').then((interception) => {
+      expect(interception.request.url).to.contain(key);
+  });
+  });
 });
