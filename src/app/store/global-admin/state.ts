@@ -1,20 +1,6 @@
 import { EntityState } from '@ngrx/entity';
-import { APIUserReferenceResponseDTO } from 'src/app/api/v2';
+import { GlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
 
 export interface GlobalAdminState extends EntityState<GlobalAdminUser> {
   loading: boolean;
-}
-
-export interface GlobalAdminUser {
-  name: string;
-  email: string;
-  uuid: string;
-}
-
-export function adaptGlobalAdminUser(dto: APIUserReferenceResponseDTO): GlobalAdminUser {
-  return {
-    name: dto.name,
-    email: dto.email,
-    uuid: dto.uuid,
-  };
 }

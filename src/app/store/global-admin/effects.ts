@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { GlobalAdminActions} from './actions';
 import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
-import { adaptGlobalAdminUser } from './state';
+import { adaptGlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
+import { GlobalAdminActions } from './actions';
 
 @Injectable()
 export class GlobalAdminEffects {

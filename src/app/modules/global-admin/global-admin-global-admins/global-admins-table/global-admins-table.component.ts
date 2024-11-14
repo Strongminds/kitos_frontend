@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import { GlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { selectAllGlobalAdmins, selectGlobalAdminsLoading } from 'src/app/store/global-admin/selectors';
-import { GlobalAdminUser } from 'src/app/store/global-admin/state';
 
 @Component({
   selector: 'app-global-admins-table',

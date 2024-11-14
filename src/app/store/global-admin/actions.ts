@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { GlobalAdminUser } from './state';
+import { GlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
 
 export const GlobalAdminActions = createActionGroup({
   source: 'GlobalAdmin',

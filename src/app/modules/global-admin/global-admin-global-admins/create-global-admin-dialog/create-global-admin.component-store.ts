@@ -4,8 +4,8 @@ import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { map, mergeMap, Observable, tap, withLatestFrom } from 'rxjs';
 import { APIUserReferenceResponseDTO, APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
+import { GlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
 import { selectAllGlobalAdmins } from 'src/app/store/global-admin/selectors';
-import { GlobalAdminUser } from 'src/app/store/global-admin/state';
 
 interface State {
   users: APIUserReferenceResponseDTO[];

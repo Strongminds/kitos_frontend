@@ -1,7 +1,8 @@
-import { createFeature, createReducer, on } from '@ngrx/store';
-import { GlobalAdminState, GlobalAdminUser } from './state';
 import { createEntityAdapter } from '@ngrx/entity';
+import { createFeature, createReducer, on } from '@ngrx/store';
+import { GlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
 import { GlobalAdminActions } from './actions';
+import { GlobalAdminState } from './state';
 
 export const globalAdminsAdapter = createEntityAdapter<GlobalAdminUser>({
   selectId: (user) => user.uuid,
