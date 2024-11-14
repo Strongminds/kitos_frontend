@@ -24,6 +24,8 @@ import { CreateGlobalAdminDialogComponent } from './global-admin-global-admins/c
 import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-admins-table/global-admins-table.component';
 import { CreateHelpTextDialogComponent } from './global-admin-help-texts/create-help-text-dialog/create-help-text-dialog.component';
 import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
+import { GlobalAdminOtherApiUsersComponent } from './global-admin-other/global-admin-other-api-users/global-admin-other-api-users.component';
+import { ApiUsersOrganizationsDialogComponent } from './global-admin-other/global-admin-other-api-users/api-users-organizations-dialog/api-users-organizations-dialog.component';
 
 
 @NgModule({
@@ -49,6 +51,8 @@ import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/glob
     CreateGlobalAdminDialogComponent,
     GlobalAdminOtherUserShutdownComponent,
     CreateHelpTextDialogComponent,
+    GlobalAdminOtherApiUsersComponent,
+    ApiUsersOrganizationsDialogComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })

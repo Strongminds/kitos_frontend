@@ -1,0 +1,89 @@
+<app-card>
+  <app-card-header title="Brugere med rettighedshaveradgang" i18n-title></app-card-header>
+  <ng-container *ngIf="(isLoadingUsersWithRightsholderAccess$ | async) !== true">
+    <ng-container *ngIf="usersWithRightsholderAccess$ | async as usersWithRightsholderAccess">
+      <app-native-table *ngIf="usersWithRightsholderAccess.length > 0">
+        <thead>
+          <th i18n>Organisation</th>
+          <th i18n>Navn</th>
+          <th i18n>Email</th>
+          <th i18n>API bruger</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of usersWithRightsholderAccess">
+            <td>
+              <app-paragraph paragraphSize="medium">{{ user.orgName }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="medium">{{ user.name }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="medium">{{ user.email }}</app-paragraph>
+            </td>
+            <td>
+              <app-check-positive-green-icon *ngIf="user.apiAccess"></app-check-positive-green-icon>
+              <app-check-negative-gray-icon *ngIf="user.apiAccess === false"></app-check-negative-gray-icon>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+      <app-empty-state
+        text="Ingen brugere med rettighedshaveradgang fundet"
+        i18n-text
+        context="emptyTable"
+        *ngIf="usersWithRightsholderAccess.length === 0"
+      ></app-empty-state>
+    </ng-container>
+  </ng-container>
+  <app-loading *ngIf="isLoadingUsersWithRightsholderAccess$ | async"></app-loading>
+</app-card>
+
+<app-card>
+  <app-card-header title="Brugere med tværgående rettigheder" i18n-title></app-card-header>
+  <ng-container *ngIf="(isLoadingUsersWithCrossAccess$ | async) !== true">
+    <ng-container *ngIf="usersWithCrossAccess$ | async as usersWithCrossAccess">
+      <app-native-table *ngIf="usersWithCrossAccess.length > 0">
+        <thead>
+          <th i18n>Navn</th>
+          <th i18n>Email</th>
+          <th i18n>API bruger</th>
+          <th i18n>Interessentadgang</th>
+          <th></th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of usersWithCrossAccess">
+            <td>
+              <app-paragraph paragraphSize="medium">{{ user.name }}</app-paragraph>
+            </td>
+            <td>
+              <app-paragraph paragraphSize="medium">{{ user.email }}</app-paragraph>
+            </td>
+            <td>
+              <app-check-positive-green-icon *ngIf="user.apiAccess"></app-check-positive-green-icon>
+              <app-check-negative-gray-icon *ngIf="user.apiAccess === false"></app-check-negative-gray-icon>
+            </td>
+            <td>
+              <app-check-positive-green-icon *ngIf="user.stakeholderAccess"></app-check-positive-green-icon>
+              <app-check-negative-gray-icon *ngIf="user.stakeholderAccess === false"></app-check-negative-gray-icon>
+            </td>
+            <td>
+              <app-tooltip
+                text="Vis organisationer hvor brugeren har rolle(r)"
+                (click)="showOrganizations(user.organizationsWhereActive)"
+              >
+                <app-icon-button><app-eye-icon></app-eye-icon></app-icon-button>
+              </app-tooltip>
+            </td>
+          </tr>
+        </tbody>
+      </app-native-table>
+      <app-empty-state
+        text="Ingen brugere med tværgående rettigheder fundet"
+        i18n-text
+        context="emptyTable"
+        *ngIf="usersWithCrossAccess.length === 0"
+      ></app-empty-state>
+    </ng-container>
+  </ng-container>
+  <app-loading *ngIf="isLoadingUsersWithRightsholderAccess$ | async"></app-loading>
+</app-card>
