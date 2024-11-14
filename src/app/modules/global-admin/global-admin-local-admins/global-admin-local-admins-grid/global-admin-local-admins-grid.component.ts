@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { CreateLocalAdminDialogComponent } from '../create-local-admin-dialog/create-local-admin-dialog.component';
 
 @Component({
   selector: 'app-global-admin-local-admins-grid',
@@ -9,7 +11,11 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 })
 export class GlobalAdminLocalAdminsGridComponent {
 
-  data = [{organizationName: "En organisation", name: 'Jacob Borch', email: 'jacob@test.dk'}];
+  constructor(private dialog: MatDialog) { }
+
+  data = [{organizationName: "En organisation", name: 'Jacob Borch', email: 'jacob@test.dk'},
+    {organizationName: "En anden organisation", name: 'Jense Jensen', email: 'jens@jensen.dk'}
+  ];
 
   public readonly gridColumns: GridColumn[] = [
     {
@@ -38,4 +44,8 @@ export class GlobalAdminLocalAdminsGridComponent {
       width: 50,
     },
   ];
+
+  public createLocalAdmin(): void {
+    this.dialog.open(CreateLocalAdminDialogComponent);
+  }
 }

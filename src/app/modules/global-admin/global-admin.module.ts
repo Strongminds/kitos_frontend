@@ -26,6 +26,7 @@ import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-oth
 import { GlobalAdminComponent } from './global-admin.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
 import { GlobalAdminLocalAdminsGridComponent } from './global-admin-local-admins/global-admin-local-admins-grid/global-admin-local-admins-grid.component';
+import { CreateLocalAdminDialogComponent } from './global-admin-local-admins/create-local-admin-dialog/create-local-admin-dialog.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { GlobalAdminLocalAdminsGridComponent } from './global-admin-local-admins
     CreateHelpTextDialogComponent,
     GlobalAdminOtherBrokenLinksComponent,
     GlobalAdminLocalAdminsGridComponent,
+    CreateLocalAdminDialogComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })

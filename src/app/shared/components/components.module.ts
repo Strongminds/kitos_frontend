@@ -149,6 +149,7 @@ import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.co
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
 import { GlobalOptionTypeTableComponent } from './global-option-type-table/global-option-type-table.component';
 import { GlobalOptionTypeDialogComponent } from './global-option-type-table/global-option-type-dialog/global-option-type-dialog.component';
+import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -272,6 +273,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     FileInputComponent,
     GlobalOptionTypeTableComponent,
     GlobalOptionTypeDialogComponent,
+    UserDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -405,6 +407,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     FileInputComponent,
     GlobalOptionTypeTableComponent,
     GlobalOptionTypeDialogComponent,
+    UserDropdownComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
