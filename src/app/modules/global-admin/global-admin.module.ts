@@ -20,6 +20,7 @@ import { GlobalAdminOrganizationsComponent } from './global-admin-organizations/
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
+import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { GlobalAdminRouterModule } from './global-admin.routes';
     RemovalConflictTableComponent,
     InnerConflictTableComponent,
     GlobalAdminOtherKleComponent,
+    GlobalAdminOtherUserShutdownComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })

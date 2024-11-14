@@ -4512,6 +4512,12 @@
       <trans-unit id="8669528431522521621" datatype="html">
         <source> Kopier til klipholder</source>
       </trans-unit>
+      <trans-unit id="2311412587966355874" datatype="html">
+        <source>Nøgle</source>
+      </trans-unit>
+      <trans-unit id="3879129476245182465" datatype="html">
+        <source> Hjælpetekster </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
