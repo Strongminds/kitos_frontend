@@ -1,1 +1,12 @@
-<p>global-admin-it-contract works!</p>
+<app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
+
+<app-card>
+  <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RegularOptionTypes">
+
+  </ng-container>
+
+  <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RoleOptionTypes">
+
+  </ng-container>
+
+</app-card>
