@@ -3,6 +3,7 @@
 README.md
 api.module.ts
 api/api.ts
+api/v2BrokenExternalReferencesReportInternalINTERNAL.service.ts
 api/v2DataProcessingRegistration.service.ts
 api/v2DataProcessingRegistrationBasisForTransferType.service.ts
 api/v2DataProcessingRegistrationCountryType.service.ts
@@ -18,6 +19,7 @@ api/v2DprLocalOversightOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalRoleOptionTypesInternalINTERNAL.service.ts
 api/v2GlobalUserInternalINTERNAL.service.ts
 api/v2GridLocalItContractRolesINTERNAL.service.ts
+api/v2HelpTextsInternalINTERNAL.service.ts
 api/v2ItContract.service.ts
 api/v2ItContractAgreementElementType.service.ts
 api/v2ItContractAgreementExtensionOptionType.service.ts
@@ -104,6 +106,7 @@ model/archivingCreationRequestDTO.ts
 model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
 model/baseNotificationPropertiesWriteRequestDTO.ts
+model/brokenExternalReferencesReportStatusResponseDTO.ts
 model/changeOrganizationUnitRegistrationV2RequestDTO.ts
 model/changePaymentRegistrationV2RequestDTO.ts
 model/columnConfigurationRequestDTO.ts
@@ -177,6 +180,9 @@ model/globalRegularOptionUpdateRequestDTO.ts
 model/globalRoleOptionCreateRequestDTO.ts
 model/globalRoleOptionResponseDTO.ts
 model/globalRoleOptionUpdateRequestDTO.ts
+model/helpTextCreateRequestDTO.ts
+model/helpTextResponseDTO.ts
+model/helpTextUpdateRequestDTO.ts
 model/identityNamePairResponseDTO.ts
 model/identityNamePairWithDeactivatedStatusDTO.ts
 model/immediateNotificationWriteRequestDTO.ts
@@ -301,5 +307,7 @@ model/userCollectionPermissionsResponseDTO.ts
 model/userIsPartOfCurrentOrgResponseDTO.ts
 model/userReferenceResponseDTO.ts
 model/userResponseDTO.ts
+model/userWithCrossOrganizationalRightsResponseDTO.ts
+model/userWithOrganizationResponseDTO.ts
 param.ts
 variables.ts
