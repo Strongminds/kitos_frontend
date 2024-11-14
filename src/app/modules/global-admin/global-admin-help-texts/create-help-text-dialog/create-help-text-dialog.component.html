@@ -8,6 +8,7 @@
   formName="key"
   text="Nøgle"
   i18n-text
+  data-cy="key-input"
   >
   </app-textbox>
   <div class="error-paragraph-height">
@@ -21,6 +22,7 @@
   formName="title"
   text="Titel"
   i18n-text
+  data-cy="title-input"
   >
   </app-textbox>
 
@@ -29,15 +31,17 @@
   formName="description"
   text="Beskrivelse"
   i18n-text
+  data-cy="description-input"
   >
   </app-textbox>
 </app-standard-vertical-content-grid>
 
-<app-dialog-actions>
+<app-dialog-actions data-cy="dialog-actions">
   <app-button
     (buttonClick)="onCreateHelpText()"
     [disabled]="!formGroup.valid || (keyExists$ | async) === true || (isLoading$ | async) === true"
     i18n
+    data-cy="save-button"
     >Opret</app-button
   >
   <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
