@@ -6,6 +6,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { DataProcessingEffects } from './data-processing/effects';
 import { dataProcessingFeature } from './data-processing/reducer';
+import { GlobalAdminOptionTypeEffects } from './global-admin/global-option-types/effects';
 import { GridExportEffects } from './grid/effects';
 import { exportFeature } from './grid/reducer';
 import { ITContractEffects } from './it-contract/effects';
@@ -41,6 +42,8 @@ import { UserEffects } from './user-store/effects';
 import { userFeature } from './user-store/reducer';
 import { GlobalAdminOptionTypeEffects } from './global-admin/effects';
 import { globalAdminFeature } from './global-admin/reducers';
+import { helpTextFeature } from './global-admin/help-texts/reducer';
+import { GlobalAdminHelpTextsEffects } from './global-admin/help-texts/effects';
 
 @NgModule({
   imports: [
@@ -72,6 +75,7 @@ import { globalAdminFeature } from './global-admin/reducers';
     StoreModule.forFeature(uiModuleConfigFeature),
     StoreModule.forFeature(fkOrgFeature),
     StoreModule.forFeature(globalAdminFeature),
+    StoreModule.forFeature(helpTextFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -91,6 +95,7 @@ import { globalAdminFeature } from './global-admin/reducers';
       LocalOptionTypeEffects,
       FkOrgEffects,
       GlobalAdminOptionTypeEffects,
+      GlobalAdminHelpTextsEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
