@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
+import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -20,7 +21,6 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
-import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -63,13 +63,14 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(ExcelImportActions.excelImportError, $localize`Kunne ikke importere excel-arket`);
   }
 
-  private subscriptToHelpTextNotifications(){
+  private subscriptToHelpTextNotifications() {
     this.subscribeAsDefault(HelpTextActions.createHelpTextSuccess, $localize`Hjælpeteksten blev oprettet`);
     this.subscribeAsError(HelpTextActions.createHelpTextError, $localize`Kunne ikke oprette hjælpeteksten`);
     this.subscribeAsDefault(HelpTextActions.deleteHelpTextSuccess, $localize`Hjælpeteksten blev slettet`);
     this.subscribeAsError(HelpTextActions.deleteHelpTextError, $localize`Kunne ikke slette hjælpeteksten`);
     this.subscribeAsDefault(HelpTextActions.updateHelpTextSuccess, $localize`Hjælpeteksten blev opdateret`);
     this.subscribeAsError(HelpTextActions.updateHelpTextError, $localize`Kunne ikke opdatere hjælpeteksten`);
+    this.subscribeAsError(HelpTextActions.getHelpTextsError, $localize`Kunne ikke hente hjælpetekster`);
   }
 
   private subscribeToLocalAdminNotifications() {
