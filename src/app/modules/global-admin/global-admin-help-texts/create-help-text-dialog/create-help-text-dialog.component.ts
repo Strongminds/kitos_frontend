@@ -17,7 +17,7 @@ import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.co
 export class CreateHelpTextDialogComponent extends BaseComponent implements OnInit {
   public readonly formGroup = new FormGroup({
     key: new FormControl<string | undefined>(undefined, Validators.required),
-    title: new FormControl<string | undefined>(undefined),
+    title: new FormControl<string | undefined>(undefined, Validators.required),
     description: new FormControl<string | undefined>(undefined),
   });
 
@@ -45,11 +45,11 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
 
   public onCreateHelpText(): void {
     const value = this.formGroup.value;
-    if (!this.formGroup.valid || !value.key) return;
+    if (!this.formGroup.valid || !value.key || !value.title) return;
 
     const dto: APIHelpTextCreateRequestDTO = {
       key: value.key,
-      title: value.title ?? undefined,
+      title: value.title,
       description: value.description ?? undefined,
     };
 
