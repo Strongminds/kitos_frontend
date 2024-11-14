@@ -45,7 +45,7 @@ export class CreateGlobalAdminDialogComponent extends BaseComponent implements O
   }
 
   public addGlobalAdmin(): void {
-    const selectedUser = this.formGroup.value.user ?? undefined;
+    const selectedUser = this.formGroup.value.user;
     if (!selectedUser) throw new Error('No user selected');
     this.store.dispatch(GlobalAdminActions.addGlobalAdmin(selectedUser.uuid));
   }
