@@ -48,4 +48,26 @@ describe('global-admin-help-texts', () => {
       expect(interception.request.url).to.contain(key);
   });
   });
+
+  it('Can patch help text', () => {
+    cy.intercept('PATCH', '/api/v2/internal/help-texts/*', {
+      statusCode: 200,
+      body: {},
+    }).as('patch');
+
+    const title = 'someTitle';
+    const description = 'someDescription';
+
+    cy.getByDataCy('grid-edit-button').first().click();
+    cy.replaceTextByDataCy('title-input', title);
+    cy.replaceTextByDataCy('description-input', description);
+    cy.getByDataCy('dialog-actions').within(() => {
+      cy.getByDataCy('save-button').click();
+
+      cy.wait('@patch').then((interception) => {
+      expect(interception.request.body.title).to.equal(title);
+      expect(interception.request.body.description).to.equal(description);
+    });
+    });
+  });
 });
