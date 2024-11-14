@@ -9,6 +9,7 @@ import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { selectHelpTexts } from 'src/app/store/global-admin/help-texts/selectors';
 import { CreateHelpTextDialogComponent } from './create-help-text-dialog/create-help-text-dialog.component';
 import { EditHelpTextDialogComponent } from './edit-help-text-dialog/edit-help-text-dialog.component';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 
 @Component({
   selector: 'app-global-admin-help-texts',
@@ -19,7 +20,9 @@ export class GlobalAdminHelpTextsComponent extends BaseComponent implements OnIn
   public readonly helpTexts$ = this.store.select(selectHelpTexts);
   public readonly columns = helpTextColumns;
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
+  constructor(private readonly store: Store,
+    private readonly dialog: MatDialog,
+  private readonly confirmActionService: ConfirmActionService) {
     super();
   }
 
@@ -34,18 +37,13 @@ export class GlobalAdminHelpTextsComponent extends BaseComponent implements OnIn
   }
 
   public openDeleteDialog(helpText: HelpText) {
-    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil slette hjælpeteksten?`;
-    confirmationDialogInstance.confirmColor = 'warn';
-
-    this.subscriptions.add(
-      confirmationDialogRef.afterClosed().subscribe((result) => {
-        if (result === true) {
-          this.store.dispatch(HelpTextActions.deleteHelpText(helpText.Key));
-        }
-      })
-    );
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      message: $localize`Er du sikker på, at du vil slette hjælpeteksten?`,
+      onConfirm: () => {
+        this.store.dispatch(HelpTextActions.deleteHelpText(helpText.Key));
+      },
+    });
   }
 
   public onClickCreate() {
