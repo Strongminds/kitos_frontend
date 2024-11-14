@@ -22,6 +22,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
