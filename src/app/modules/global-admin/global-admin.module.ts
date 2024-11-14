@@ -25,6 +25,7 @@ import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/glob
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminComponent } from './global-admin.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
+import { GlobalAdminLocalAdminsGridComponent } from './global-admin-local-admins/global-admin-local-admins-grid/global-admin-local-admins-grid.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { GlobalAdminRouterModule } from './global-admin.routes';
     GlobalAdminOtherUserShutdownComponent,
     CreateHelpTextDialogComponent,
     GlobalAdminOtherBrokenLinksComponent,
+    GlobalAdminLocalAdminsGridComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })
