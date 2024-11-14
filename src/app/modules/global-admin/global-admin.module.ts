@@ -4,8 +4,6 @@ import { ComponentsModule } from 'src/app/shared/components/components.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { GlobalAdminDataProcessingComponent } from './global-admin-data-processing/global-admin-data-processing.component';
 import { GlobalAdminGlobalAdminsComponent } from './global-admin-global-admins/global-admin-global-admins.component';
-import { CreateHelpTextDialogComponent } from '../../shared/components/dialogs/create-help-text-dialog/create-help-text-dialog.component';
-import { EditHelpTextDialogComponent } from '../../shared/components/dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 import { GlobalAdminHelpTextsComponent } from './global-admin-help-texts/global-admin-help-texts.component';
 import { GlobalAdminItContractComponent } from './global-admin-it-contract/global-admin-it-contract.component';
 import { GlobalAdminItSystemComponent } from './global-admin-it-system/global-admin-it-system.component';
@@ -24,7 +22,6 @@ import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizati
 import { GlobalAdminRouterModule } from './global-admin.routes';
 import { CreateGlobalAdminDialogComponent } from './global-admin-global-admins/create-global-admin-dialog/create-global-admin-dialog.component';
 import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-admins-table/global-admins-table.component';
-import { CreateHelpTextDialogComponent } from './global-admin-help-texts/create-help-text-dialog/create-help-text-dialog.component';
 import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
 
 
@@ -49,6 +46,7 @@ import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/glob
     GlobalAdminOtherKleComponent,
     GlobalAdminsTableComponent,
     GlobalAdminOtherUserShutdownComponent,
+    CreateGlobalAdminDialogComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })

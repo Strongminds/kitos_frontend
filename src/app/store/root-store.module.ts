@@ -43,7 +43,6 @@ import { userFeature } from './user-store/reducer';
 import { globalAdminFeature } from './global-admin/reducers';
 import { helpTextFeature } from './global-admin/help-texts/reducer';
 import { GlobalAdminHelpTextsEffects } from './global-admin/help-texts/effects';
-import { GlobalAdminEffects } from './global-admin/effects';
 
 @NgModule({
   imports: [
@@ -96,7 +95,6 @@ import { GlobalAdminEffects } from './global-admin/effects';
       FkOrgEffects,
       GlobalAdminOptionTypeEffects,
       GlobalAdminHelpTextsEffects,
-      GlobalAdminEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
