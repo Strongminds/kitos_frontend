@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { APIHelpTextUpdateRequestDTO } from 'src/app/api/v2/model/helpTextUpdateRequestDTO';
@@ -19,7 +19,7 @@ export class EditHelpTextDialogComponent implements OnInit {
       value: undefined,
       disabled: true,
     }),
-    title: new FormControl<string | undefined>(undefined),
+    title: new FormControl<string | undefined>(undefined, Validators.required),
     description: new FormControl<string | undefined>(undefined),
   });
 
@@ -35,10 +35,10 @@ export class EditHelpTextDialogComponent implements OnInit {
 
   public onEditHelpText() {
     const key = this.helpText.Key;
-    if (!key) return;
     const value = this.formGroup.value;
+    if (!this.formGroup.valid || !key || !value.title) return;
     const dto: APIHelpTextUpdateRequestDTO = {
-      title: value.title ?? undefined,
+      title: value.title,
       description: value.description ?? undefined,
     };
     this.store.dispatch(HelpTextActions.updateHelpText(key, dto));
