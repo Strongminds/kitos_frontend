@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { map, mergeMap, Observable, tap, withLatestFrom } from 'rxjs';
 import { APIUserReferenceResponseDTO, APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
 import { selectAllGlobalAdmins } from 'src/app/store/global-admin/selectors';
+import { GlobalAdminUser } from 'src/app/store/global-admin/state';
 
 interface State {
   users: APIUserReferenceResponseDTO[];
@@ -46,11 +47,7 @@ export class CreateGlobalAdminComponentStore extends ComponentStore<State> {
           })
           .pipe(
             withLatestFrom(this.globalAdmins$),
-            map(([users, globalAdmins]) => {
-              const globalAdminUUIDs = new Set(globalAdmins.map((admin) => admin.uuid));
-              const filteredUsers = users.filter((user) => !globalAdminUUIDs.has(user.uuid));
-              return filteredUsers;
-            }),
+            map(([users, globalAdmins]) => this.getNonGlobalAdminUsers(users, globalAdmins)),
             tapResponse(
               (filteredUsers) => this.setUsers(filteredUsers),
               (error) => console.error(error),
@@ -60,4 +57,13 @@ export class CreateGlobalAdminComponentStore extends ComponentStore<State> {
       })
     )
   );
+
+  private getNonGlobalAdminUsers(
+    users: APIUserReferenceResponseDTO[],
+    globalAdmins: GlobalAdminUser[]
+  ): APIUserReferenceResponseDTO[] {
+    const globalAdminUUIDs = new Set(globalAdmins.map((admin) => admin.uuid));
+    const filteredUsers = users.filter((user) => !globalAdminUUIDs.has(user.uuid));
+    return filteredUsers;
+  }
 }
