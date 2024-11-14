@@ -7,8 +7,8 @@ import { HelpText } from 'src/app/shared/models/help-text.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { selectHelpTexts } from 'src/app/store/global-admin/help-texts/selectors';
-import { CreateHelpTextDialogComponent } from './create-help-text-dialog/create-help-text-dialog.component';
-import { EditHelpTextDialogComponent } from './edit-help-text-dialog/edit-help-text-dialog.component';
+import { CreateHelpTextDialogComponent } from '../../../shared/components/dialogs/create-help-text-dialog/create-help-text-dialog.component';
+import { EditHelpTextDialogComponent } from '../../../shared/components/dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 
 @Component({
   selector: 'app-global-admin-help-texts',

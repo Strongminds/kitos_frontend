@@ -2,8 +2,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
-import { CreateHelpTextDialogComponent } from 'src/app/modules/global-admin/global-admin-help-texts/create-help-text-dialog/create-help-text-dialog.component';
-import { EditHelpTextDialogComponent } from 'src/app/modules/global-admin/global-admin-help-texts/edit-help-text-dialog/edit-help-text-dialog.component';
+import { CreateHelpTextDialogComponent } from 'src/app/shared/components/dialogs/create-help-text-dialog/create-help-text-dialog.component';
+import { EditHelpTextDialogComponent } from 'src/app/shared/components/dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { HelpDialogComponentStore } from './help-dialog.component-store';
 
