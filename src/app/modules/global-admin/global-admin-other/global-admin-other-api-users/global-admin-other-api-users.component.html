@@ -48,7 +48,6 @@
           <th i18n>Email</th>
           <th i18n>API bruger</th>
           <th i18n>Interessentadgang</th>
-          <th></th>
         </thead>
         <tbody>
           <tr *ngFor="let user of usersWithCrossAccess">
@@ -63,16 +62,17 @@
               <app-check-negative-gray-icon *ngIf="user.apiAccess === false"></app-check-negative-gray-icon>
             </td>
             <td>
-              <app-check-positive-green-icon *ngIf="user.stakeholderAccess"></app-check-positive-green-icon>
-              <app-check-negative-gray-icon *ngIf="user.stakeholderAccess === false"></app-check-negative-gray-icon>
-            </td>
-            <td>
-              <app-tooltip
-                text="Vis organisationer hvor brugeren har rolle(r)"
-                (click)="showOrganizations(user.organizationsWhereActive)"
-              >
-                <app-icon-button data-cy="show-organizations-button"><app-eye-icon></app-eye-icon></app-icon-button>
-              </app-tooltip>
+              <app-content-space-between>
+                <app-check-positive-green-icon *ngIf="user.stakeholderAccess"></app-check-positive-green-icon>
+                <app-check-negative-gray-icon *ngIf="user.stakeholderAccess === false"></app-check-negative-gray-icon>
+                <app-icon-button
+                  data-cy="show-organizations-button"
+                  tooltipText="Organisationer"
+                  i18n-tooltipText
+                  (click)="showOrganizations(user.organizationsWhereActive)"
+                  ><app-eye-icon></app-eye-icon
+                ></app-icon-button>
+              </app-content-space-between>
             </td>
           </tr>
         </tbody>

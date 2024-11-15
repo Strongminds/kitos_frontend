@@ -6015,9 +6015,9 @@
         <source>Bruger kunne ikke fjernes som global administrator</source>
         <target state="new">Bruger kunne ikke fjernes som global administrator</target>
       </trans-unit>
-      <trans-unit id="7201513228235159348" datatype="html">
-        <source>Organisationer hvor brugeren har rolle(r)</source>
-        <target state="new">Organisationer hvor brugeren har rolle(r)</target>
+      <trans-unit id="7347397543550454568" datatype="html">
+        <source>Organisationer hvor brugeren har roller</source>
+        <target state="new">Organisationer hvor brugeren har roller</target>
       </trans-unit>
       <trans-unit id="5416208601184646179" datatype="html">
         <source>Brugere med rettighedshaveradgang</source>

@@ -1,3 +1,5 @@
-<app-button [buttonStyle]="buttonStyle" [disabled]="disabled" [loading]="loading" (buttonClick)="onButtonClick()"
-  ><ng-content></ng-content
-></app-button>
+<app-tooltip [text]="tooltipText ?? ''">
+  <app-button [buttonStyle]="buttonStyle" [disabled]="disabled" [loading]="loading" (buttonClick)="onButtonClick()"
+    ><ng-content></ng-content
+  ></app-button>
+</app-tooltip>
