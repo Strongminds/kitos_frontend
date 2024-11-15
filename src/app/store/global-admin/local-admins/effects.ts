@@ -21,4 +21,31 @@ export class LocalAdminUserEffects {
       })
     );
   });
+
+  addLocalAdmin$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(LocalAdminUserActions.addLocalAdmin),
+      switchMap(({ organizationUuid, userUuid }) => {
+        return this.globalUserService.postSingleGlobalUserInternalV2AddLocalAdmin({ organizationUuid, userUuid }).pipe(
+          map((userDto) => adaptLocalAdminUser(userDto)),
+          map((user) => LocalAdminUserActions.addLocalAdminSuccess(user)),
+          catchError(() => of(LocalAdminUserActions.addLocalAdminError()))
+        );
+      })
+    );
+  });
+
+  removeLocalAdmin$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(LocalAdminUserActions.removeLocalAdmin),
+      switchMap(({ organizationUuid, userUuid }) => {
+        return this.globalUserService
+          .deleteSingleGlobalUserInternalV2RemoveLocalAdmin({ organizationUuid, userUuid })
+          .pipe(
+            map(() => LocalAdminUserActions.removeLocalAdminSuccess(organizationUuid, userUuid)),
+            catchError(() => of(LocalAdminUserActions.removeLocalAdminError()))
+          );
+      })
+    );
+  });
 }

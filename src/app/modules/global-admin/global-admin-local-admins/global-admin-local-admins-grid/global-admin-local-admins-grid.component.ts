@@ -4,7 +4,9 @@ import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { CreateLocalAdminDialogComponent } from '../create-local-admin-dialog/create-local-admin-dialog.component';
 import { Store } from '@ngrx/store';
-import { selectAllLocalAdmins } from 'src/app/store/global-admin/local-admins/selectors';
+import { selectAllLocalAdmins, selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
+import { LocalAdminUser } from 'src/app/shared/models/local-admin/local-admin-user.model';
+import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 
 @Component({
   selector: 'app-global-admin-local-admins-grid',
@@ -13,6 +15,7 @@ import { selectAllLocalAdmins } from 'src/app/store/global-admin/local-admins/se
 })
 export class GlobalAdminLocalAdminsGridComponent {
   public readonly localAdmins$ = this.store.select(selectAllLocalAdmins);
+  public readonly isLoading$ = this.store.select(selectLocalAdminsLoading);
 
   constructor(private dialog: MatDialog, private store: Store) {}
 
@@ -51,5 +54,11 @@ export class GlobalAdminLocalAdminsGridComponent {
 
   public createLocalAdmin(): void {
     this.dialog.open(CreateLocalAdminDialogComponent);
+  }
+
+  public deleteLocalAdmin(localAdmin: LocalAdminUser): void {
+    const userUuid = localAdmin.user.uuid;
+    const organizationUuid = localAdmin.organization.uuid;
+    this.store.dispatch(LocalAdminUserActions.removeLocalAdmin(organizationUuid, userUuid));
   }
 }

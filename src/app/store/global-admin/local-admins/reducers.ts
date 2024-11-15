@@ -17,8 +17,34 @@ export const localAdminUsersFeature = createFeature({
     LocalAdminUsersInitialState,
 
     on(
+      LocalAdminUserActions.getLocalAdmins,
+      LocalAdminUserActions.addLocalAdmin,
+      LocalAdminUserActions.removeLocalAdmin,
+      (state): LocalAdminUsersState => ({ ...state, loading: true })
+    ),
+
+    on(
+      LocalAdminUserActions.getLocalAdminsError,
+      LocalAdminUserActions.addLocalAdminError,
+      LocalAdminUserActions.removeLocalAdminError,
+      LocalAdminUserActions.getLocalAdminsSuccess,
+      LocalAdminUserActions.addLocalAdminSuccess,
+      LocalAdminUserActions.removeLocalAdminSuccess,
+      (state): LocalAdminUsersState => ({ ...state, loading: false })
+    ),
+
+    on(
       LocalAdminUserActions.getLocalAdminsSuccess,
       (state, { admins }): LocalAdminUsersState => localAdminUsersAdapter.setAll(admins, state)
+    ),
+
+    on(
+      LocalAdminUserActions.addLocalAdminSuccess,
+      (state, { user }): LocalAdminUsersState => localAdminUsersAdapter.addOne(user, state)
+    ),
+
+    on(LocalAdminUserActions.removeLocalAdminSuccess, (state, { organizationUuid, userUuid }) =>
+      localAdminUsersAdapter.removeOne(`${userUuid}-${organizationUuid}`, state)
     )
   ),
 });

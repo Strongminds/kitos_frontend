@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { Store } from '@ngrx/store';
 import { APIOrganizationResponseDTO, APIUserReferenceResponseDTO } from 'src/app/api/v2';
+import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 
 @Component({
   selector: 'app-create-local-admin-dialog',
@@ -14,7 +16,7 @@ export class CreateLocalAdminDialogComponent {
     organization: new FormControl<APIOrganizationResponseDTO | undefined>(undefined, Validators.required),
   });
 
-  constructor(private dialogRef: MatDialogRef<CreateLocalAdminDialogComponent>) {}
+  constructor(private dialogRef: MatDialogRef<CreateLocalAdminDialogComponent>, private store: Store) {}
 
   public close(): void {
     this.dialogRef.close();
@@ -22,9 +24,8 @@ export class CreateLocalAdminDialogComponent {
 
   public addLocalAdmin(): void {
     const formValue = this.formGroup.value;
-    const user = formValue.user;
-    const organization = formValue.organization;
-    console.log('User', user);
-    console.log('Organization', organization);
+    const userUuid = formValue.user.uuid;
+    const organizationUuid = formValue.organization.uuid;
+    this.store.dispatch(LocalAdminUserActions.addLocalAdmin(organizationUuid, userUuid));
   }
 }
