@@ -9,6 +9,7 @@ import {
   APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService,
   APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService,
   APIV2DprGlobalDataProcessingOversightOptionsInternalINTERNALService,
+  APIV2DprGlobalRoleOptionTypesInternalINTERNALService,
   APIV2ItContractGlobalAgreementElementTypesInternalINTERNALService,
   APIV2ItContractGlobalCriticalityTypesInternalINTERNALService,
   APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService,
@@ -100,7 +101,9 @@ export class GlobalAdminOptionTypeService {
     @Inject(APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService)
     private itSystemRoleService: APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService)
-    private itContractRoleService: APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService
+    private itContractRoleService: APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService,
+    @Inject(APIV2DprGlobalRoleOptionTypesInternalINTERNALService)
+    private dprRoleService: APIV2DprGlobalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public getGlobalOptions(optionType: GlobalAdminOptionType): Observable<Array<APIGlobalRoleOptionResponseDTO>> {
@@ -216,6 +219,8 @@ export class GlobalAdminOptionTypeService {
       case 'it-contract':
         return () =>
           this.itContractRoleService.getManyItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes();
+      case 'data-processing':
+        return () => this.dprRoleService.getManyDprGlobalRoleOptionTypesInternalV2GetDprRoles();
       default:
         throw new Error(`Get operation is not supported for ${optionType}`);
     }
@@ -432,6 +437,12 @@ export class GlobalAdminOptionTypeService {
               dto,
             }
           );
+      case 'data-processing':
+        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
+          this.dprRoleService.patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole({
+            optionUuid,
+            dto,
+          });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -620,6 +631,11 @@ export class GlobalAdminOptionTypeService {
               dto,
             }
           );
+      case 'data-processing':
+        return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.dprRoleService.postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole({
+            dto,
+          });
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }
