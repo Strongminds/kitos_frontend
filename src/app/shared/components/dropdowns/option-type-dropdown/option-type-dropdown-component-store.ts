@@ -17,6 +17,7 @@ interface State {
 @Injectable()
 export class OptionTypeDropdownComponentStore extends ComponentStore<State> {
   public readonly optionTypes$ = this.select((state) => state.optionTypes);
+  public readonly loading$ = this.select((state) => state.loading);
 
   constructor(private optionTypeService: RegularOptionTypeService, private store: Store) {
     super({ optionTypes: [], loading: false });

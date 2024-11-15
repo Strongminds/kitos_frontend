@@ -15,10 +15,12 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   @Input() optionType!: RegularOptionType;
   @Input() formGroup?: FormGroup;
   @Input() formName?: string;
+  @Input() value?: APIRegularOptionResponseDTO;
 
   @Output() valueChange = new EventEmitter<APIRegularOptionResponseDTO | null | undefined>();
 
   public readonly optionTypes$ = this.componentStore.optionTypes$;
+  public readonly loading$ = this.componentStore.loading$;
 
   public searchFn = (search: string, item: APIRegularOptionResponseDTO): boolean => {
     console.log('search', search);

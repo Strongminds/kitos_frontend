@@ -1,11 +1,13 @@
 <app-dropdown
   *ngIf="!formGroup"
   [text]="getDropdownTitle()"
+  [value]="value"
   valueField="uuid"
   [showDescription]="true"
   [data]="optionTypes$ | async"
   (valueChange)="onValueChange($event)"
   [searchFn]="searchFn"
+  [loading]="loading$ | async"
 ></app-dropdown>
 
 <app-dropdown
@@ -18,4 +20,5 @@
   [data]="optionTypes$ | async"
   (valueChange)="onValueChange($event)"
   [searchFn]="searchFn"
+  [loading]="loading$ | async"
 ></app-dropdown>
