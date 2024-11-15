@@ -1,10 +1,4 @@
-<app-button
-  [buttonStyle]="buttonStyle"
-  [disabled]="disabled"
-  [loading]="loading"
-  (buttonClick)="onButtonClick()"
-  [ngClass]="{ 'match-content-width': true }"
->
+<app-button [buttonStyle]="buttonStyle" [disabled]="disabled" [loading]="loading" (buttonClick)="onButtonClick()">
   <app-tooltip [text]="tooltipText ?? ''">
     <ng-content></ng-content>
   </app-tooltip>
