@@ -4,4 +4,6 @@
   <app-button (buttonClick)="createLocalAdmin()" i18n> Opret lokal administrator </app-button>
 </app-overview-header>
 
-<app-local-grid [data]="data" [columns]="gridColumns" [deletePermission]="true"> </app-local-grid>
+<ng-container *ngIf="localAdmins$ | async as localAdmins">
+  <app-local-grid [data]="localAdmins" [columns]="gridColumns" [deletePermission]="true"> </app-local-grid>
+</ng-container>

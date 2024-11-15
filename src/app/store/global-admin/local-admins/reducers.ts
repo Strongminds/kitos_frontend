@@ -1,6 +1,8 @@
 import { createEntityAdapter } from '@ngrx/entity';
-import { createFeature, createReducer } from '@ngrx/store';
+import { createFeature, createReducer, on } from '@ngrx/store';
 import { LocalAdminUser } from 'src/app/shared/models/local-admin/local-admin-user.model';
+import { LocalAdminUserActions } from './actions';
+import { LocalAdminUsersState } from './state';
 
 export const localAdminUsersAdapter = createEntityAdapter<LocalAdminUser>({
   selectId: (user) => `${user.user.uuid}-${user.organization.uuid}`, //Distinguish between someone who is local admin in different organizations
@@ -11,5 +13,12 @@ const LocalAdminUsersInitialState = localAdminUsersAdapter.getInitialState({ loa
 
 export const localAdminUsersFeature = createFeature({
   name: 'LocalAdminUsers',
-  reducer: createReducer(LocalAdminUsersInitialState),
+  reducer: createReducer(
+    LocalAdminUsersInitialState,
+
+    on(
+      LocalAdminUserActions.getLocalAdminsSuccess,
+      (state, { admins }): LocalAdminUsersState => localAdminUsersAdapter.setAll(admins, state)
+    )
+  ),
 });

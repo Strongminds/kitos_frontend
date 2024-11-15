@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { CreateLocalAdminDialogComponent } from '../create-local-admin-dialog/create-local-admin-dialog.component';
+import { Store } from '@ngrx/store';
+import { selectAllLocalAdmins } from 'src/app/store/global-admin/local-admins/selectors';
 
 @Component({
   selector: 'app-global-admin-local-admins-grid',
@@ -10,26 +12,28 @@ import { CreateLocalAdminDialogComponent } from '../create-local-admin-dialog/cr
   styleUrl: './global-admin-local-admins-grid.component.scss',
 })
 export class GlobalAdminLocalAdminsGridComponent {
+  public readonly localAdmins$ = this.store.select(selectAllLocalAdmins);
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private store: Store) {}
 
-  data = [{organizationName: "En organisation", name: 'Jacob Borch', email: 'jacob@test.dk'},
-    {organizationName: "En anden organisation", name: 'Jense Jensen', email: 'jens@jensen.dk'}
+  data = [
+    { organizationName: 'En organisation', name: 'Jacob Borch', email: 'jacob@test.dk' },
+    { organizationName: 'En anden organisation', name: 'Jense Jensen', email: 'jens@jensen.dk' },
   ];
 
   public readonly gridColumns: GridColumn[] = [
     {
-      field: 'organizationName',
+      field: 'organization.name',
       title: $localize`Organisation`,
       hidden: false,
     },
     {
-      field: 'name',
+      field: 'user.name',
       title: $localize`Navn`,
       hidden: false,
     },
     {
-      field: 'email',
+      field: 'user.email',
       title: $localize`Email`,
       hidden: false,
     },
