@@ -22,6 +22,7 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
+import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -64,7 +65,7 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(ExcelImportActions.excelImportError, $localize`Kunne ikke importere excel-arket`);
   }
 
-  private subscriptToHelpTextNotifications(){
+  private subscriptToHelpTextNotifications() {
     this.subscribeAsDefault(HelpTextActions.createHelpTextSuccess, $localize`Hjælpeteksten blev oprettet`);
     this.subscribeAsError(HelpTextActions.createHelpTextError, $localize`Kunne ikke oprette hjælpeteksten`);
   }
@@ -80,7 +81,6 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(OrganizationActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret`);
     this.subscribeAsError(OrganizationActions.patchOrganizationError, $localize`Organisationen kunne ikke opdateres`);
-
 
     this.subscribeAsDefault(OrganizationActions.deleteOrganizationSuccess, $localize`Organisationen blev slettet`);
     this.subscribeAsError(OrganizationActions.deleteOrganizationError, $localize`Organisationen kunne ikke slettes`);
@@ -106,6 +106,15 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(
       GlobalAdminActions.removeGlobalAdminError,
       $localize`Bruger kunne ikke fjernes som global administrator`
+    );
+
+    this.subscribeAsDefault(LocalAdminUserActions.addLocalAdminSuccess, $localize`Lokal administrator blev tilføjet`);
+    this.subscribeAsError(LocalAdminUserActions.addLocalAdminError, $localize`Lokal administrator kunne ikke tilføjes`);
+
+    this.subscribeAsDefault(LocalAdminUserActions.removeLocalAdminSuccess, $localize`Lokal administrator blev fjernet`);
+    this.subscribeAsError(
+      LocalAdminUserActions.removeLocalAdminError,
+      $localize`Lokal administrator kunne ikke fjernes`
     );
   }
 
