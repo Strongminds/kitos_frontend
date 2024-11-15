@@ -13,7 +13,7 @@ interface State {
   isLoadingUsersWithRightsholderAccess: boolean;
   isLoadingUsersWithCrossAccess: boolean;
   usersWithRightsholderAccess?: APIUserWithOrganizationResponseDTO[];
-  usersWithCrossAccess?: APIUserWithCrossOrganizationalRightsResponseDTO[];
+  usersWithCrossOrganizationalAccess?: APIUserWithCrossOrganizationalRightsResponseDTO[];
 }
 
 @Injectable()
@@ -23,7 +23,9 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
   );
   public readonly isLoadingUsersWithCrossAccess$ = this.select((state) => state.isLoadingUsersWithCrossAccess);
   public readonly usersWithRightsholderAccess$ = this.select((state) => state.usersWithRightsholderAccess);
-  public readonly usersWithCrossAccess$ = this.select((state) => state.usersWithCrossAccess);
+  public readonly usersWithCrossOrganizationalAccess$ = this.select(
+    (state) => state.usersWithCrossOrganizationalAccess
+  );
 
   constructor(
     @Inject(APIV2GlobalUserInternalINTERNALService) private userService: APIV2GlobalUserInternalINTERNALService,
@@ -51,9 +53,12 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
     })
   );
   private readonly setUsersWithCrossAccess = this.updater(
-    (state, usersWithCrossAccess: APIUserWithCrossOrganizationalRightsResponseDTO[] | undefined): State => ({
+    (
+      state,
+      usersWithCrossOrganizationalAccess: APIUserWithCrossOrganizationalRightsResponseDTO[] | undefined
+    ): State => ({
       ...state,
-      usersWithCrossAccess: usersWithCrossAccess,
+      usersWithCrossOrganizationalAccess: usersWithCrossOrganizationalAccess,
     })
   );
 

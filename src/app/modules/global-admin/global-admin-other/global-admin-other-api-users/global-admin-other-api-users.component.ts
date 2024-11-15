@@ -13,7 +13,7 @@ export class GlobalAdminOtherApiUsersComponent implements OnInit {
   public usersWithRightsholderAccess$ = this.componentStore.usersWithRightsholderAccess$;
   public isLoadingUsersWithRightsholderAccess$ = this.componentStore.isLoadingUsersWithRightsholderAccess$;
 
-  public usersWithCrossAccess$ = this.componentStore.usersWithCrossAccess$;
+  public usersWithCrossAccess$ = this.componentStore.usersWithCrossOrganizationalAccess$;
   public isLoadingUsersWithCrossAccess$ = this.componentStore.isLoadingUsersWithCrossAccess$;
 
   constructor(private componentStore: GlobalAdminOtherApiUsersComponentStore, private dialog: MatDialog) {}
