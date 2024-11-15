@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
+  APIGlobalRegularOptionUpdateRequestDTO,
   APIGlobalRoleOptionCreateRequestDTO,
   APIGlobalRoleOptionResponseDTO,
   APIGlobalRoleOptionUpdateRequestDTO,
@@ -92,7 +93,7 @@ export class GlobalAdminOptionTypeService {
     return this.resolveGetGlobalOptionsEndpoint(optionType)();
   }
 
-  public createGlobalOption(optionType: GlobalAdminOptionType, request: APIGlobalRoleOptionUpdateRequestDTO) {
+  public createGlobalOption(optionType: GlobalAdminOptionType, request: APIGlobalRoleOptionCreateRequestDTO): Observable<APIGlobalRoleOptionResponseDTO> {
     return this.resolveCreateGlobalOptionEndpoint(optionType)(request);
   }
 
@@ -249,6 +250,85 @@ export class GlobalAdminOptionTypeService {
             dto,
           });
 
+
+      //IT contract regular types
+      case 'it-contract_contract-type':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.contractTypeService.patchSingleItContractGlobalItContractTypesInternalV2PatchGlobalItContractType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract_contract-template-type':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.templateTypeService.patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract_purchase-form-type':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.purchaseFormTypeService.patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract-payment-model-types':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.paymentModelTypeService.patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract-agreement-element-types':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.agreementElementTypeService.patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract-extend-types':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.optionExtendTypeService.patchSingleItContractGlobalOptionExtendTypesInternalV2PatchGlobalOptionExtendType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract-payment-frequency-types':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.paymentFrequencyTypeService.patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract-price-regulation-types':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.priceRegulationTypeService.patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract_procurement-strategy-type':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.procurementStrategyTypeService.patchSingleItContractGlobalProcurementStrategyTypesInternalV2PatchGlobalProcurementStrategyType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract-termination-period-types':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.terminationDeadlineTypeService.patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType({
+        optionUuid,
+        dto: request,
+      });
+
+  case 'it-contract_criticality-type':
+    return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
+      this.criticalityTypeService.patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType({
+        optionUuid,
+        dto: request,
+      });
+
       //Role types
       case 'it-system-usage':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
@@ -328,6 +408,74 @@ export class GlobalAdminOptionTypeService {
           this.registerTypeService.postSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterType({
             dto: request,
           });
+
+      //IT contract regular types
+      case 'it-contract_contract-type':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.contractTypeService.postSingleItContractGlobalItContractTypesInternalV2CreateGlobalItContractType({
+            dto: request,
+          });
+
+      case 'it-contract_contract-template-type':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.templateTypeService.postSingleItContractGlobalItContractTemplateTypesInternalV2CreateGlobalItContractTemplateType({
+            dto: request,
+          });
+
+      case 'it-contract_purchase-form-type':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.purchaseFormTypeService.postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType({
+            dto: request,
+          });
+
+      case 'it-contract-payment-model-types':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.paymentModelTypeService.postSingleItContractGlobalPaymentModelTypesInternalV2CreateGlobalPaymentModelType({
+            dto: request,
+          });
+
+      case 'it-contract-agreement-element-types':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.agreementElementTypeService.postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType({
+            dto: request,
+          });
+
+      case 'it-contract-extend-types':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.optionExtendTypeService.postSingleItContractGlobalOptionExtendTypesInternalV2CreateGlobalOptionExtendType({
+            dto: request,
+          });
+
+      case 'it-contract-payment-frequency-types':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.paymentFrequencyTypeService.postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType({
+            dto: request,
+          });
+
+      case 'it-contract-price-regulation-types':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.priceRegulationTypeService.postSingleItContractGlobalPriceRegulationTypesInternalV2CreateGlobalPriceRegulationType({
+            dto: request,
+          });
+
+      case 'it-contract_procurement-strategy-type':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.procurementStrategyTypeService.postSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyType({
+            dto: request,
+          });
+
+      case 'it-contract-termination-period-types':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.terminationDeadlineTypeService.postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType({
+            dto: request,
+          });
+
+      case 'it-contract_criticality-type':
+        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.criticalityTypeService.postSingleItContractGlobalCriticalityTypesInternalV2CreateGlobalCriticalityType({
+            dto: request,
+          });
+
 
       //Role types
       case 'it-system-usage':
