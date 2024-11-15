@@ -150,6 +150,7 @@ import { VerticalContentGridSectionMarginLeftComponent } from './vertical-conten
 import { GlobalOptionTypeTableComponent } from './global-option-type-table/global-option-type-table.component';
 import { GlobalOptionTypeDialogComponent } from './global-option-type-table/global-option-type-dialog/global-option-type-dialog.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
+import { OrganizationDropdownComponent } from './organization-dropdown/organization-dropdown.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -274,6 +275,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GlobalOptionTypeTableComponent,
     GlobalOptionTypeDialogComponent,
     UserDropdownComponent,
+    OrganizationDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -408,6 +410,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GlobalOptionTypeTableComponent,
     GlobalOptionTypeDialogComponent,
     UserDropdownComponent,
+    OrganizationDropdownComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

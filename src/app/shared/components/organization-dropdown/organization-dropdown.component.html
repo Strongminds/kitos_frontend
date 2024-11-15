@@ -1,1 +1,13 @@
-<p>organization-dropdown works!</p>
+<app-connected-dropdown
+  text="Vælg organisation"
+  i18n-text
+  valueField="uuid"
+  [includeItemDescription]="true"
+  itemDescriptionField="cvr"
+  [formGroup]="formGroup"
+  formName="organization"
+  [isLoading$]="isLoading$"
+  [data$]="organizations$"
+  (filterChange)="searchOrganizations($event)"
+>
+</app-connected-dropdown>
