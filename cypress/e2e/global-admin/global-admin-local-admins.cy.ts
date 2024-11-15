@@ -38,7 +38,7 @@ describe('global-admin-local-admins', () => {
   });
 
   it('Can remove local admin', () => {
-    cy.getByDataCy('local-grid-delete-button').first().click();
+    cy.getByDataCy('grid-delete-button').first().click();
 
     cy.intercept('DELETE', 'api/v2/internal/users/*/local-admins/*', { statusCode: 204 }).as('removeLocalAdmin');
 
