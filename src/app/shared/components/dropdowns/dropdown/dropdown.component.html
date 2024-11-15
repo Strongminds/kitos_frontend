@@ -52,6 +52,7 @@
   [clearable]="clearable"
   (search)="filter$.next($event.term)"
   (change)="valueChange.emit($event)"
+  [searchFn]="searchFn"
   (clear)="onClear()"
 >
   <ng-template ng-option-tmp let-item="item">

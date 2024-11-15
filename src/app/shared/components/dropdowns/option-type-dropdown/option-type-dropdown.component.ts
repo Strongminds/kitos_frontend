@@ -20,6 +20,15 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
 
   public readonly optionTypes$ = this.componentStore.optionTypes$;
 
+  public searchFn = (search: string, item: APIRegularOptionResponseDTO): boolean => {
+    console.log('search', search);
+    return (
+      item.name.toLowerCase().includes(search.toLowerCase()) ||
+      item.description.toLowerCase().includes(search.toLowerCase())
+    );
+  };
+
+
   constructor(private componentStore: OptionTypeDropdownComponentStore) {
     super();
   }

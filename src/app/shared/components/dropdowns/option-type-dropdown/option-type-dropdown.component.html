@@ -5,6 +5,7 @@
   [showDescription]="true"
   [data]="optionTypes$ | async"
   (valueChange)="onValueChange($event)"
+  [searchFn]="searchFn"
 ></app-dropdown>
 
 <app-dropdown
@@ -16,4 +17,5 @@
   formName="type"
   [data]="optionTypes$ | async"
   (valueChange)="onValueChange($event)"
+  [searchFn]="searchFn"
 ></app-dropdown>
