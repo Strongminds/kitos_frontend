@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { APIOrganizationResponseDTO, APIUserReferenceResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
+import { selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
 
 @Component({
   selector: 'app-create-local-admin-dialog',
@@ -17,6 +18,8 @@ export class CreateLocalAdminDialogComponent extends BaseComponent implements On
     user: new FormControl<APIUserReferenceResponseDTO | undefined>(undefined, Validators.required),
     organization: new FormControl<APIOrganizationResponseDTO | undefined>(undefined, Validators.required),
   });
+
+  public readonly loading$ = this.store.select(selectLocalAdminsLoading);
 
   constructor(
     private dialogRef: MatDialogRef<CreateLocalAdminDialogComponent>,
