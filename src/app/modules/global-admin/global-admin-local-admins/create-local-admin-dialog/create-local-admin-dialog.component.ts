@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { APIOrganizationResponseDTO, APIUserReferenceResponseDTO } from 'src/app/api/v2';
 
 @Component({
@@ -13,7 +14,17 @@ export class CreateLocalAdminDialogComponent {
     organization: new FormControl<APIOrganizationResponseDTO | undefined>(undefined, Validators.required),
   });
 
-  public close(): void {}
+  constructor(private dialogRef: MatDialogRef<CreateLocalAdminDialogComponent>) {}
 
-  public addLocalAdmin(): void {}
+  public close(): void {
+    this.dialogRef.close();
+  }
+
+  public addLocalAdmin(): void {
+    const formValue = this.formGroup.value;
+    const user = formValue.user;
+    const organization = formValue.organization;
+    console.log('User', user);
+    console.log('Organization', organization);
+  }
 }
