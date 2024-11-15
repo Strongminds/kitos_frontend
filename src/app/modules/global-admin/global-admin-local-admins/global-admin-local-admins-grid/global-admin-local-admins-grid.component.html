@@ -1,10 +1,18 @@
 <app-overview-header>
   <h3 i18n>Lokale administratorer</h3>
-  <app-export-menu-button [showColumnsOnlyOption]="false"></app-export-menu-button>
+  <app-button (buttonClick)="exportToExcel()" i18n buttonStyle="secondary"><app-export-icon />Eksporter</app-button>
   <app-button (buttonClick)="createLocalAdmin()" i18n> Opret lokal administrator </app-button>
 </app-overview-header>
 
 <ng-container *ngIf="localAdmins$ | async as localAdmins">
-  <app-local-grid [data]="localAdmins" [loading]="isLoading$ | async" [columns]="gridColumns" [deletePermission]="true" (deleteEvent)="deleteLocalAdmin($event)">
+  <app-local-grid
+    [data]="localAdmins"
+    [loading]="isLoading$ | async"
+    [columns]="gridColumns"
+    [deletePermission]="true"
+    (deleteEvent)="deleteLocalAdmin($event)"
+    exportToExcelName="Lokale administratorer"
+    i18n-exportToExcelName
+  >
   </app-local-grid>
 </ng-container>

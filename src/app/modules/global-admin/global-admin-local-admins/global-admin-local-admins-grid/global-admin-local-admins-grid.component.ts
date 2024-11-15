@@ -8,6 +8,7 @@ import { selectAllLocalAdmins, selectLocalAdminsLoading } from 'src/app/store/gl
 import { LocalAdminUser } from 'src/app/shared/models/local-admin/local-admin-user.model';
 import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+import { GridExportActions } from 'src/app/store/grid/actions';
 
 @Component({
   selector: 'app-global-admin-local-admins-grid',
@@ -65,5 +66,9 @@ export class GlobalAdminLocalAdminsGridComponent {
       onConfirm: () =>
         this.store.dispatch(LocalAdminUserActions.removeLocalAdmin(localAdmin.organization.uuid, localAdmin.user.uuid)),
     });
+  }
+
+  public exportToExcel() {
+    this.store.dispatch(GridExportActions.exportLocalData());
   }
 }
