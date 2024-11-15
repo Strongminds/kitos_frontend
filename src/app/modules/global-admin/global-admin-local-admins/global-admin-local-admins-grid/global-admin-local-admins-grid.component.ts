@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { selectAllLocalAdmins, selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
 import { LocalAdminUser } from 'src/app/shared/models/local-admin/local-admin-user.model';
 import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 
 @Component({
   selector: 'app-global-admin-local-admins-grid',
@@ -17,7 +18,7 @@ export class GlobalAdminLocalAdminsGridComponent {
   public readonly localAdmins$ = this.store.select(selectAllLocalAdmins);
   public readonly isLoading$ = this.store.select(selectLocalAdminsLoading);
 
-  constructor(private dialog: MatDialog, private store: Store) {}
+  constructor(private dialog: MatDialog, private store: Store, private confirmActionService: ConfirmActionService) {}
 
   data = [
     { organizationName: 'En organisation', name: 'Jacob Borch', email: 'jacob@test.dk' },
@@ -57,8 +58,12 @@ export class GlobalAdminLocalAdminsGridComponent {
   }
 
   public deleteLocalAdmin(localAdmin: LocalAdminUser): void {
-    const userUuid = localAdmin.user.uuid;
-    const organizationUuid = localAdmin.organization.uuid;
-    this.store.dispatch(LocalAdminUserActions.removeLocalAdmin(organizationUuid, userUuid));
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      title: $localize`Slet lokal administrator`,
+      message: $localize`Er du sikker på at du vil slette "${localAdmin.user.name}" som lokal administrator for organisationen "${localAdmin.organization.name}"?`,
+      onConfirm: () =>
+        this.store.dispatch(LocalAdminUserActions.removeLocalAdmin(localAdmin.organization.uuid, localAdmin.user.uuid)),
+    });
   }
 }
