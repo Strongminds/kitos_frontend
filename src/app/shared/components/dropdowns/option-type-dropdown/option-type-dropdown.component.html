@@ -1,0 +1,19 @@
+<app-dropdown
+  *ngIf="!formGroup"
+  [text]="getDropdownTitle()"
+  valueField="uuid"
+  [showDescription]="true"
+  [data]="optionTypes$ | async"
+  (valueChange)="onValueChange($event)"
+></app-dropdown>
+
+<app-dropdown
+  *ngIf="formGroup"
+  [text]="getDropdownTitle()"
+  valueField="uuid"
+  [showDescription]="true"
+  [formGroup]="formGroup"
+  formName="type"
+  [data]="optionTypes$ | async"
+  (valueChange)="onValueChange($event)"
+></app-dropdown>
