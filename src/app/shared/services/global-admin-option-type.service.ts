@@ -4,6 +4,18 @@ import {
   APIGlobalRoleOptionCreateRequestDTO,
   APIGlobalRoleOptionResponseDTO,
   APIGlobalRoleOptionUpdateRequestDTO,
+  APIV2ItContractGlobalAgreementElementTypesInternalINTERNALService,
+  APIV2ItContractGlobalCriticalityTypesInternalINTERNALService,
+  APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService,
+  APIV2ItContractGlobalItContractTemplateTypesInternalINTERNALService,
+  APIV2ItContractGlobalItContractTypesInternalINTERNALService,
+  APIV2ItContractGlobalOptionExtendTypesInternalINTERNALService,
+  APIV2ItContractGlobalPaymentFrequencyTypesInternalINTERNALService,
+  APIV2ItContractGlobalPaymentModelTypesInternalINTERNALService,
+  APIV2ItContractGlobalPriceRegulationTypesInternalINTERNALService,
+  APIV2ItContractGlobalProcurementStrategyTypesInternalINTERNALService,
+  APIV2ItContractGlobalPurchaseFormTypesInternalINTERNALService,
+  APIV2ItContractGlobalTerminationDeadlineTypesInternalINTERNALService,
   APIV2ItSystemGlobalBusinessTypesInternalINTERNALService,
   APIV2ItSystemGlobalItSystemCategoriesInternalINTERNALService,
   APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService,
@@ -45,9 +57,35 @@ export class GlobalAdminOptionTypeService {
     @Inject(APIV2ItSystemGlobalRegisterTypesInternalINTERNALService)
     private registerTypeService: APIV2ItSystemGlobalRegisterTypesInternalINTERNALService,
 
+    //IT Contract regular types
+    @Inject(APIV2ItContractGlobalItContractTypesInternalINTERNALService)
+    private contractTypeService: APIV2ItContractGlobalItContractTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalItContractTemplateTypesInternalINTERNALService)
+    private templateTypeService: APIV2ItContractGlobalItContractTemplateTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalPurchaseFormTypesInternalINTERNALService)
+    private purchaseFormTypeService: APIV2ItContractGlobalPurchaseFormTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalPaymentModelTypesInternalINTERNALService)
+    private paymentModelTypeService: APIV2ItContractGlobalPaymentModelTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalAgreementElementTypesInternalINTERNALService)
+    private agreementElementTypeService: APIV2ItContractGlobalAgreementElementTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalOptionExtendTypesInternalINTERNALService)
+    private optionExtendTypeService: APIV2ItContractGlobalOptionExtendTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalPaymentFrequencyTypesInternalINTERNALService)
+    private paymentFrequencyTypeService: APIV2ItContractGlobalPaymentFrequencyTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalPriceRegulationTypesInternalINTERNALService)
+    private priceRegulationTypeService: APIV2ItContractGlobalPriceRegulationTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalProcurementStrategyTypesInternalINTERNALService)
+    private procurementStrategyTypeService: APIV2ItContractGlobalProcurementStrategyTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalTerminationDeadlineTypesInternalINTERNALService)
+    private terminationDeadlineTypeService: APIV2ItContractGlobalTerminationDeadlineTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalCriticalityTypesInternalINTERNALService)
+    private criticalityTypeService: APIV2ItContractGlobalCriticalityTypesInternalINTERNALService,
+
     //Role types
     @Inject(APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService)
-    private itSystemRoleService: APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService
+    private itSystemRoleService: APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService,
+    @Inject(APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService)
+    private itContractRoleService: APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService
   ) {}
 
   public getGlobalOptions(optionType: GlobalAdminOptionType): Observable<Array<APIGlobalRoleOptionResponseDTO>> {
@@ -95,9 +133,47 @@ export class GlobalAdminOptionTypeService {
       case 'it_system_usage-gdpr-registered-data-category-type':
         return () => this.registerTypeService.getManyItSystemGlobalRegisterTypesInternalV2GetGlobalRegisterTypes();
 
+
+      //It Contract regular types
+      case 'it-contract_contract-type':
+        return () => this.contractTypeService.getManyItContractGlobalItContractTypesInternalV2GetGlobalItContractTypes();
+
+      case 'it-contract_contract-template-type':
+        return () => this.templateTypeService.getManyItContractGlobalItContractTemplateTypesInternalV2GetGlobalItContractTemplateTypes();
+
+      case 'it-contract_purchase-form-type':
+        return () => this.purchaseFormTypeService.getManyItContractGlobalPurchaseFormTypesInternalV2GetGlobalPurchaseFormTypes();
+
+      case 'it-contract-payment-model-types':
+        return () => this.paymentModelTypeService.getManyItContractGlobalPaymentModelTypesInternalV2GetGlobalPaymentModelTypes();
+
+      case 'it-contract-agreement-element-types':
+        return () => this.agreementElementTypeService.getManyItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes();
+
+      case 'it-contract-extend-types':
+        return () => this.optionExtendTypeService.getManyItContractGlobalOptionExtendTypesInternalV2GetGlobalOptionExtendTypes();
+
+      case 'it-contract-payment-frequency-types':
+        return () => this.paymentFrequencyTypeService.getManyItContractGlobalPaymentFrequencyTypesInternalV2GetGlobalPaymentFreqencyTypes();
+
+      case 'it-contract-price-regulation-types':
+        return () => this.priceRegulationTypeService.getManyItContractGlobalPriceRegulationTypesInternalV2GetGlobalPriceRegulationTypes();
+
+      case 'it-contract_procurement-strategy-type':
+        return () => this.procurementStrategyTypeService.getManyItContractGlobalProcurementStrategyTypesInternalV2GetGlobalProcurementStrategyTypes();
+
+      case 'it-contract-termination-period-types':
+        return () => this.terminationDeadlineTypeService.getManyItContractGlobalTerminationDeadlineTypesInternalV2GetGlobalTerminationDeadlineTypes();
+
+      case 'it-contract_criticality-type':
+        return () => this.criticalityTypeService.getManyItContractGlobalCriticalityTypesInternalV2GetGlobalCriticalityTypes();
+
       //Role types
       case 'it-system-usage':
         return () => this.itSystemRoleService.getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles();
+      case 'it-contract':
+        return () =>
+          this.itContractRoleService.getManyItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes();
       default:
         throw new Error(`Get operation is not supported for ${optionType}`);
     }
@@ -180,6 +256,14 @@ export class GlobalAdminOptionTypeService {
             optionUuid,
             dto,
           });
+      case 'it-contract':
+        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
+          this.itContractRoleService.patchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleType(
+            {
+              optionUuid,
+              dto,
+            }
+          );
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -244,12 +328,20 @@ export class GlobalAdminOptionTypeService {
           this.registerTypeService.postSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterType({
             dto: request,
           });
+
       //Role types
       case 'it-system-usage':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.itSystemRoleService.postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole({
             dto,
           });
+      case 'it-contract':
+        return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.itContractRoleService.postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(
+            {
+              dto,
+            }
+          );
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }
