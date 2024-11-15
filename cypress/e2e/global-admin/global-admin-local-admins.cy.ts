@@ -49,5 +49,7 @@ describe('global-admin-local-admins', () => {
     cy.contains('Test organisation to').should('not.exist');
     cy.contains('Automatisk oprettet testbruger (LocalAdmin)').should('not.exist');
     cy.contains('local-local-admin-user@kitos.dk').should('not.exist');
+
+    cy.get('app-popup-message').should('exist');
   });
 });
