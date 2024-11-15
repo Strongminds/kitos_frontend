@@ -5231,9 +5231,9 @@
         <source>Betalingsfrekvenser</source>
         <target state="new">Betalingsfrekvenser</target>
       </trans-unit>
-      <trans-unit id="2856429460614878961" datatype="html">
-        <source>Pris reguleringer</source>
-        <target state="new">Pris reguleringer</target>
+      <trans-unit id="2761703062912761325" datatype="html">
+        <source>Prisreguleringer</source>
+        <target state="new">Prisreguleringer</target>
       </trans-unit>
       <trans-unit id="7280622341182001048" datatype="html">
         <source>Genanskaffelsesstrategier</source>
@@ -5342,10 +5342,6 @@
       <trans-unit id="3528465926860037088" datatype="html">
         <source>Betalingsfrekvenser</source>
         <target state="new">Betalingsfrekvenser</target>
-      </trans-unit>
-      <trans-unit id="2856429460614878961" datatype="html">
-        <source>Pris reguleringer</source>
-        <target state="new">Pris reguleringer</target>
       </trans-unit>
       <trans-unit id="7280622341182001048" datatype="html">
         <source>Genanskaffelsesstrategier</source>
@@ -6015,26 +6011,6 @@
         <source>Bruger kunne ikke fjernes som global administrator</source>
         <target state="new">Bruger kunne ikke fjernes som global administrator</target>
       </trans-unit>
-      <trans-unit id="7347397543550454568" datatype="html">
-        <source>Organisationer hvor brugeren har roller</source>
-        <target state="new">Organisationer hvor brugeren har roller</target>
-      </trans-unit>
-      <trans-unit id="5416208601184646179" datatype="html">
-        <source>Brugere med rettighedshaveradgang</source>
-        <target state="new">Brugere med rettighedshaveradgang</target>
-      </trans-unit>
-      <trans-unit id="1820535627250426225" datatype="html">
-        <source>Ingen brugere med rettighedshaveradgang fundet</source>
-        <target state="new">Ingen brugere med rettighedshaveradgang fundet</target>
-      </trans-unit>
-      <trans-unit id="4758871021670746906" datatype="html">
-        <source>Brugere med tværgående rettigheder</source>
-        <target state="new">Brugere med tværgående rettigheder</target>
-      </trans-unit>
-      <trans-unit id="6481760042736907455" datatype="html">
-        <source>Ingen brugere med tværgående rettigheder fundet</source>
-        <target state="new">Ingen brugere med tværgående rettigheder fundet</target>
-      </trans-unit>
       <trans-unit id="4517621680352863474" datatype="html">
         <source>Kunne ikke hente rapporten</source>
         <target state="new">Kunne ikke hente rapporten</target>
@@ -6058,6 +6034,30 @@
       <trans-unit id="7714872354769489847" datatype="html">
         <source>Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er &quot;Mandag i næste uge&quot;. </source>
         <target state="new">Rapporten over brudte links er endnu ikke tilgængelig. Forventet tilgængelighed er &quot;Mandag i næste uge&quot;. </target>
+      </trans-unit>
+      <trans-unit id="7347397543550454568" datatype="html">
+        <source>Organisationer hvor brugeren har roller</source>
+        <target state="new">Organisationer hvor brugeren har roller</target>
+      </trans-unit>
+      <trans-unit id="5416208601184646179" datatype="html">
+        <source>Brugere med rettighedshaveradgang</source>
+        <target state="new">Brugere med rettighedshaveradgang</target>
+      </trans-unit>
+      <trans-unit id="1820535627250426225" datatype="html">
+        <source>Ingen brugere med rettighedshaveradgang fundet</source>
+        <target state="new">Ingen brugere med rettighedshaveradgang fundet</target>
+      </trans-unit>
+      <trans-unit id="4758871021670746906" datatype="html">
+        <source>Brugere med tværgående rettigheder</source>
+        <target state="new">Brugere med tværgående rettigheder</target>
+      </trans-unit>
+      <trans-unit id="35531008245230309" datatype="html">
+        <source>Se organisationer</source>
+        <target state="new">Se organisationer</target>
+      </trans-unit>
+      <trans-unit id="6481760042736907455" datatype="html">
+        <source>Ingen brugere med tværgående rettigheder fundet</source>
+        <target state="new">Ingen brugere med tværgående rettigheder fundet</target>
       </trans-unit>
     </body>
   </file>
