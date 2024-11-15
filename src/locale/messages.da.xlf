@@ -5231,9 +5231,9 @@
         <source>Betalingsfrekvenser</source>
         <target state="new">Betalingsfrekvenser</target>
       </trans-unit>
-      <trans-unit id="2856429460614878961" datatype="html">
-        <source>Pris reguleringer</source>
-        <target state="new">Pris reguleringer</target>
+      <trans-unit id="2761703062912761325" datatype="html">
+        <source>Prisreguleringer</source>
+        <target state="new">Prisreguleringer</target>
       </trans-unit>
       <trans-unit id="7280622341182001048" datatype="html">
         <source>Genanskaffelsesstrategier</source>
@@ -5342,10 +5342,6 @@
       <trans-unit id="3528465926860037088" datatype="html">
         <source>Betalingsfrekvenser</source>
         <target state="new">Betalingsfrekvenser</target>
-      </trans-unit>
-      <trans-unit id="2856429460614878961" datatype="html">
-        <source>Pris reguleringer</source>
-        <target state="new">Pris reguleringer</target>
       </trans-unit>
       <trans-unit id="7280622341182001048" datatype="html">
         <source>Genanskaffelsesstrategier</source>
