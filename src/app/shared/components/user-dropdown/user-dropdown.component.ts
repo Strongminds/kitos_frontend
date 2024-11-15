@@ -12,6 +12,7 @@ import { APIUserReferenceResponseDTO } from 'src/app/api/v2';
 })
 export class UserDropdownComponent implements OnInit {
   @Input() formGroup!: FormGroup;
+  @Input() formName!: string;
   @Input() disabledUuids$: Observable<string[]> = of([]);
 
   public filteredUsers$!: Observable<APIUserReferenceResponseDTO[]>;

@@ -1,4 +1,11 @@
 <app-dialog title="Tilføj lokal administrator" overflow="none" i18n-title>
-  <app-user-dropdown [formGroup]="formGroup"> </app-user-dropdown>
-  <app-organization-dropdown [formGroup]="formGroup"> </app-organization-dropdown>
+  <app-standard-vertical-content-grid>
+    <app-user-dropdown formName="user" [formGroup]="formGroup"> </app-user-dropdown>
+    <app-organization-dropdown formName="organization" [formGroup]="formGroup"> </app-organization-dropdown>
+  </app-standard-vertical-content-grid>
+
+  <app-dialog-actions>
+    <app-button (buttonClick)="close()" buttonStyle="secondary" i18n> Annuller </app-button>
+    <app-button (buttonClick)="addLocalAdmin()" [disabled]="!formGroup.valid" i18n> Opret </app-button>
+  </app-dialog-actions>
 </app-dialog>

@@ -10,6 +10,7 @@ import { FormGroup } from '@angular/forms';
 })
 export class OrganizationDropdownComponent {
   @Input() formGroup!: FormGroup;
+  @Input() formName!: string;
 
   constructor(private componentStore: OrganizationDropdownComponentStore) {}
 

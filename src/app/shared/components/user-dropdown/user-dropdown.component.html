@@ -5,7 +5,7 @@
   [includeItemDescription]="true"
   itemDescriptionField="email"
   [formGroup]="formGroup"
-  formName="user"
+  [formName]="formName"
   [isLoading$]="isLoading$"
   [data$]="filteredUsers$"
   (filterChange)="searchUsers($event)"
