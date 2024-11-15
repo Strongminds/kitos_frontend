@@ -19,6 +19,7 @@ api/v2DprLocalOversightOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalRoleOptionTypesInternalINTERNAL.service.ts
 api/v2GlobalUserInternalINTERNAL.service.ts
 api/v2GridLocalItContractRolesINTERNAL.service.ts
+api/v2HelpTextsInternalINTERNAL.service.ts
 api/v2ItContract.service.ts
 api/v2ItContractAgreementElementType.service.ts
 api/v2ItContractAgreementExtensionOptionType.service.ts
@@ -179,6 +180,9 @@ model/globalRegularOptionUpdateRequestDTO.ts
 model/globalRoleOptionCreateRequestDTO.ts
 model/globalRoleOptionResponseDTO.ts
 model/globalRoleOptionUpdateRequestDTO.ts
+model/helpTextCreateRequestDTO.ts
+model/helpTextResponseDTO.ts
+model/helpTextUpdateRequestDTO.ts
 model/identityNamePairResponseDTO.ts
 model/identityNamePairWithDeactivatedStatusDTO.ts
 model/immediateNotificationWriteRequestDTO.ts
@@ -302,6 +306,9 @@ model/updateUserRequestDTO.ts
 model/userCollectionPermissionsResponseDTO.ts
 model/userIsPartOfCurrentOrgResponseDTO.ts
 model/userReferenceResponseDTO.ts
+model/userReferenceWithOrganizationResponseDTO.ts
 model/userResponseDTO.ts
+model/userWithCrossOrganizationalRightsResponseDTO.ts
+model/userWithOrganizationResponseDTO.ts
 param.ts
 variables.ts
