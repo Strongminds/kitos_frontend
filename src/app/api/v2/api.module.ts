@@ -11,6 +11,10 @@ import { APIV2DataProcessingRegistrationInternalINTERNALService } from './api/v2
 import { APIV2DataProcessingRegistrationOversightTypeService } from './api/v2DataProcessingRegistrationOversightType.service';
 import { APIV2DataProcessingRegistrationRoleTypeService } from './api/v2DataProcessingRegistrationRoleType.service';
 import { APIV2DeltaFeedService } from './api/v2DeltaFeed.service';
+import { APIV2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingCountryOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalDataProcessingOversightOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingOversightOptionsInternalINTERNAL.service';
 import { APIV2DprLocalBasisForTransferTypesInternalINTERNALService } from './api/v2DprLocalBasisForTransferTypesInternalINTERNAL.service';
 import { APIV2DprLocalCountryOptionTypesInternalINTERNALService } from './api/v2DprLocalCountryOptionTypesInternalINTERNAL.service';
 import { APIV2DprLocalDataResponsibleTypesInternalINTERNALService } from './api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service';
@@ -71,7 +75,6 @@ import { APIV2ItSystemGlobalFrequencyTypesInternalINTERNALService } from './api/
 import { APIV2ItSystemGlobalInterfaceTypesInternalINTERNALService } from './api/v2ItSystemGlobalInterfaceTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalItSystemCategoriesInternalINTERNALService } from './api/v2ItSystemGlobalItSystemCategoriesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalRegisterTypesInternalINTERNALService } from './api/v2ItSystemGlobalRegisterTypesInternalINTERNAL.service';
-import { APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService } from './api/v2ItSystemGlobalRoleOptionTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNALService } from './api/v2ItSystemGlobalSensitivePersonalDataTypesInternalINTERNAL.service';
 import { APIV2ItSystemInternalINTERNALService } from './api/v2ItSystemInternalINTERNAL.service';
 import { APIV2ItSystemLocalArchiveLocationTypesInternalINTERNALService } from './api/v2ItSystemLocalArchiveLocationTypesInternalINTERNAL.service';

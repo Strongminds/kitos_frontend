@@ -19,31 +19,31 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIGlobalRoleOptionCreateRequestDTO } from '../model/aPIGlobalRoleOptionCreateRequestDTO';
+import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
-import { APIGlobalRoleOptionResponseDTO } from '../model/aPIGlobalRoleOptionResponseDTO';
+import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
 // @ts-ignore
-import { APIGlobalRoleOptionUpdateRequestDTO } from '../model/aPIGlobalRoleOptionUpdateRequestDTO';
+import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams {
+export interface PatchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOptionRequestParams {
     optionUuid: string;
-    dto: APIGlobalRoleOptionUpdateRequestDTO;
+    dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams {
-    dto: APIGlobalRoleOptionCreateRequestDTO;
+export interface PostSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOptionRequestParams {
+    dto: APIGlobalRegularOptionCreateRequestDTO;
 }
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService {
+export class APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService {
 
     protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
@@ -108,10 +108,10 @@ export class APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRoleOptionResponseDTO>>;
-    public getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRoleOptionResponseDTO>>>;
-    public getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRoleOptionResponseDTO>>>;
-    public getManyItSystemGlobalRoleOptionTypesInternalV2GetItSystemRoles(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyDprGlobalDataProcessingDataResponsibleOptionsInternalV2GetGlobalDataProcessingDataResponsibleOptions(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
+    public getManyDprGlobalDataProcessingDataResponsibleOptionsInternalV2GetGlobalDataProcessingDataResponsibleOptions(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyDprGlobalDataProcessingDataResponsibleOptionsInternalV2GetGlobalDataProcessingDataResponsibleOptions(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
+    public getManyDprGlobalDataProcessingDataResponsibleOptionsInternalV2GetGlobalDataProcessingDataResponsibleOptions(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -144,8 +144,8 @@ export class APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/global-option-types/it-systems-roles`;
-        return this.httpClient.request<Array<APIGlobalRoleOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/dpr/global-option-types/data-processing-data-responsible-options`;
+        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -162,17 +162,17 @@ export class APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole(requestParameters: PatchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption(requestParameters: PatchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption(requestParameters: PatchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption(requestParameters: PatchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption(requestParameters: PatchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOptionRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -216,8 +216,8 @@ export class APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/global-option-types/it-systems-roles/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/dpr/global-option-types/data-processing-data-responsible-options/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: dto,
@@ -235,13 +235,13 @@ export class APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
-    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
-    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
-    public postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole(requestParameters: PostSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption(requestParameters: PostSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption(requestParameters: PostSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption(requestParameters: PostSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption(requestParameters: PostSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOptionRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole.');
+            throw new Error('Required parameter dto was null or undefined when calling postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -284,8 +284,8 @@ export class APIV2ItSystemGlobalRoleOptionTypesInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-systems/global-option-types/it-systems-roles`;
-        return this.httpClient.request<APIGlobalRoleOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/dpr/global-option-types/data-processing-data-responsible-options`;
+        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: dto,
