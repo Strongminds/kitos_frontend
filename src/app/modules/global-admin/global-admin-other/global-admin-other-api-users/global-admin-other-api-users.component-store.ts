@@ -80,14 +80,8 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
       mergeMap(() => {
         return this.userService.getManyGlobalUserInternalV2GetUsersWithCrossAccess().pipe(
           tapResponse(
-            (users) => {
-              this.notificationService.showDefault($localize`Brugeren blev slettet`);
-              this.setUsersWithCrossAccess(users);
-            },
-            (e) => {
-              console.error(e);
-              this.notificationService.showError($localize`Kunne ikke slette brugeren`);
-            },
+            (users) => this.setUsersWithCrossAccess(users),
+            (e) => console.error(e),
             () => this.setLoadingUsersWithCrossAccess(false)
           )
         );
