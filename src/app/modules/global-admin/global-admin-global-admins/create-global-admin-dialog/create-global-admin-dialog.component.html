@@ -1,5 +1,5 @@
 <app-dialog title="Tilføj global admin" overflow="none" i18n-title>
-  <app-loading *ngIf="(globalAdminsLoading$ | async)" ></app-loading>
+  <app-loading *ngIf="globalAdminsLoading$ | async"></app-loading>
   <ng-container *ngIf="(globalAdminsLoading$ | async) !== true">
     <app-connected-dropdown
       text="Vælg bruger"
@@ -15,6 +15,9 @@
       data-cy="add-global-admin-dropdown"
     >
     </app-connected-dropdown>
+
+    <app-option-type-dropdown optionType="it-system_business-type"> </app-option-type-dropdown>
+
     <app-dialog-actions>
       <app-button buttonStyle="secondary" (buttonClick)="close()"> Annuller </app-button>
       <app-button
