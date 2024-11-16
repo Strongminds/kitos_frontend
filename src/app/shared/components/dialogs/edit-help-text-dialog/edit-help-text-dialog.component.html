@@ -20,14 +20,15 @@ i18n-title>
   >
   </app-textbox>
 
-  <app-textbox
-  [formGroup]="formGroup"
-  formName="description"
-  text="Beskrivelse"
-  i18n-text
-  data-cy="description-input"
-  >
-  </app-textbox>
+  <editor
+    [init]="{
+      plugins: ['lists', 'link', 'image', 'code'],
+      height: 300,
+      base_url: [rootUrl] + '/tinymce/',
+      suffix: '.min'
+    }"
+    [formControl]="formGroup.controls.description"
+  ></editor>
 </app-standard-vertical-content-grid>
 
 <app-dialog-actions data-cy="dialog-actions">
