@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, first, map, Observable } from 'rxjs';
+import { BehaviorSubject, first, map, Observable, of } from 'rxjs';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
-import { OrganizationUserV2 } from 'src/app/shared/models/organization/organization-user/organization-user-v2.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { ShallowUser } from 'src/app/shared/models/userV2.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 
@@ -17,6 +18,10 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 })
 export class CopyRolesDialogComponent extends RoleSelectionBaseComponent implements OnInit {
   @Input() user!: ODataOrganizationUser;
+
+  public formGroup = new FormGroup({
+    user: new FormControl<ShallowUser | undefined>(undefined, Validators.required),
+  });
 
   constructor(private store: Store, selectionService: RoleSelectionService, actions$: Actions) {
     super(
@@ -30,20 +35,19 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        this.selectedUser$.next(undefined);
+        this.selectedUserUuid$.next(undefined);
+        this.formGroup.reset();
       })
     );
-    this.disabledUuids = [this.user.Uuid];
+    this.disabledUuids$ = of([this.user.Uuid]);
   }
 
-  public disabledUuids!: string[];
+  public disabledUuids$!: Observable<string[]>;
 
-  public selectedUser$: BehaviorSubject<OrganizationUserV2 | undefined> = new BehaviorSubject<
-    OrganizationUserV2 | undefined
-  >(undefined);
+  public selectedUserUuid$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(undefined);
 
-  public selectedUserChanged(user: OrganizationUserV2 | undefined | null): void {
-    this.selectedUser$.next(user ?? undefined);
+  public selectedUserChanged(userUuid: string | undefined | null): void {
+    this.selectedUserUuid$.next(userUuid ?? undefined);
   }
 
   public getSnackbarText(): string {
@@ -51,16 +55,16 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
   }
 
   public onCopyRoles(): void {
-    this.selectedUser$.pipe(first()).subscribe((selectedUser) => {
-      if (!selectedUser) return;
-      const request = this.getRequest(this.user);
-      this.isLoading = true;
-      this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUser.uuid, request));
-    });
+    const selectedUserUuid = this.formGroup.value.user?.uuid;
+    if (!selectedUserUuid) throw new Error('No user selected');
+    const request = this.getRequest(this.user);
+    this.isLoading = true;
+    console.log('Copy roles', this.user.Uuid, selectedUserUuid, request);
+    this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUserUuid, request));
   }
 
   public isUserSelected(): Observable<boolean> {
-    return this.selectedUser$.pipe(map((user) => user !== undefined));
+    return this.selectedUserUuid$.pipe(map((user) => user !== undefined));
   }
 
   public userHasAnyRight(): boolean {

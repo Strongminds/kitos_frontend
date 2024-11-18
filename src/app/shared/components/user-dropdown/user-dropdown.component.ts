@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { UserDropdownComponentStore } from './user-dropdown.component-store';
 import { combineLatestWith, map, Observable, of } from 'rxjs';
@@ -15,6 +15,9 @@ export class UserDropdownComponent implements OnInit {
   @Input() formName!: string;
   @Input() disabledUuids$: Observable<string[]> = of([]);
   @Input() searchGlobalUsers: boolean = false;
+  @Input() text: string = $localize`Vælg bruger`;
+
+  @Output() userChange = new EventEmitter<string | null | undefined>();
 
   public filteredUsers$!: Observable<APIUserReferenceResponseDTO[]>;
 
@@ -35,7 +38,11 @@ export class UserDropdownComponent implements OnInit {
   public readonly isLoading$ = this.componentStore.loading$;
   public readonly users$ = this.componentStore.users$;
 
-  public searchUsers(search: string): void {
+  public searchUsers(search: string | undefined): void {
     this.componentStore.searchUsers(search);
+  }
+
+  public onUserChange(userUuid: string | undefined | null): void {
+    this.userChange.emit(userUuid);
   }
 }
