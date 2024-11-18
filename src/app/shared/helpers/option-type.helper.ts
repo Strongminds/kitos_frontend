@@ -21,6 +21,8 @@ export function getOptionTypeName(optionType: RegularOptionType): string {
       return $localize`Kategorier af registrerede i databehandlingen`;
     case 'it-system_usage-data-classification-type':
       return $localize`Klassifikation af data i systemet`;
+    case 'it-contract_contract-type':
+      return $localize`Kontrakttype`;
     default:
       throw new Error(`Option type name not implemented for e${optionType}`);
   }

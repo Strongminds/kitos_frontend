@@ -120,6 +120,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     validTo: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     enforcedValid: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    test: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly parentContractForm = new FormGroup({
@@ -221,6 +222,11 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     }
   }
 
+  public ignoreNullReturnType<T>(item: T | null | undefined): T | undefined {
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (item as any) as T | undefined;
+  }
+
   public patchName(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
     if (!value) {
       return;
@@ -309,6 +315,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       validTo: optionalNewDate(contract.general.validity.validTo),
       enforcedValid: enforcedValid,
       notes: contract.general.notes,
+      contractType: contract.general.contractType,
+      test: contract.general.contractType,
     });
   }
 

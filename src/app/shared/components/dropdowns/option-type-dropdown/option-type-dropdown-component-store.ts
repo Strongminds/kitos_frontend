@@ -11,7 +11,7 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 interface State {
   loading: boolean;
-  optionTypes: APIRegularOptionResponseDTO[];
+  optionTypes: APIRegularOptionResponseDTO[] | undefined;
 }
 
 @Injectable()
@@ -20,7 +20,7 @@ export class OptionTypeDropdownComponentStore extends ComponentStore<State> {
   public readonly loading$ = this.select((state) => state.loading);
 
   constructor(private optionTypeService: RegularOptionTypeService, private store: Store) {
-    super({ optionTypes: [], loading: false });
+    super({ optionTypes: undefined, loading: false });
   }
 
   private readonly setOptionTypes = this.updater(

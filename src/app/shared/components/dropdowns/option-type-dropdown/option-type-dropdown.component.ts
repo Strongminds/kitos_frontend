@@ -18,7 +18,7 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   @Input() formName?: string;
   @Input() value?: APIRegularOptionResponseDTO;
 
-  @Output() valueChange = new EventEmitter<APIRegularOptionResponseDTO | null | undefined>();
+  @Output() valueChange = new EventEmitter<string | null| undefined>();
 
   public readonly optionTypes$ = this.componentStore.optionTypes$;
   public readonly loading$ = this.componentStore.loading$;
@@ -43,6 +43,9 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   }
 
   public onValueChange(item: APIRegularOptionResponseDTO | null | undefined): void {
-    this.valueChange.emit(item);
+    //The item provided by the dropdown is not actually an option, but a string, so we need to cast.
+    //eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const uuid = item as any as string;
+    this.valueChange.emit(uuid);
   }
 }
