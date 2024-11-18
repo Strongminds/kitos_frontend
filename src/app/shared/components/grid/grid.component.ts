@@ -302,7 +302,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       map(([columns, exportAllColumns]) => {
         return columns
           ? columns.filter(
-              (column) => exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))
+              (column) => column.style !== 'action-buttons' && (exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns)))
             )
           : [];
       })
