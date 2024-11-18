@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { UserDropdownComponentStore } from './user-dropdown.component-store';
 import { combineLatestWith, map, Observable, of } from 'rxjs';
-import { APIUserReferenceResponseDTO } from 'src/app/api/v2';
+import { ShallowUser } from '../../models/userV2.model';
 
 @Component({
   selector: 'app-user-dropdown',
@@ -19,7 +19,7 @@ export class UserDropdownComponent implements OnInit {
 
   @Output() userChange = new EventEmitter<string | null | undefined>();
 
-  public filteredUsers$!: Observable<APIUserReferenceResponseDTO[]>;
+  public filteredUsers$!: Observable<ShallowUser[]>;
 
   constructor(private componentStore: UserDropdownComponentStore) {}
 

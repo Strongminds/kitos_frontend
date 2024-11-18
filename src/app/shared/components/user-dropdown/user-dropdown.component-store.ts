@@ -2,17 +2,18 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { first, mergeMap, Observable, switchMap, tap } from 'rxjs';
+import { first, map, mergeMap, Observable, switchMap, tap } from 'rxjs';
 import {
   APIUserReferenceResponseDTO,
   APIV2GlobalUserInternalINTERNALService,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { ShallowUser, toShallowUser } from '../../models/userV2.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 
 interface State {
-  users: APIUserReferenceResponseDTO[];
+  users: ShallowUser[];
   searchGlobal: boolean;
   loading: boolean;
 }
@@ -32,7 +33,7 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
   }
 
   private setUsers = this.updater(
-    (state, users: APIUserReferenceResponseDTO[]): State => ({
+    (state, users: ShallowUser[]): State => ({
       ...state,
       users,
     })
@@ -57,11 +58,12 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       mergeMap((search) => {
         return this.searchUsersInternal(search).pipe(
+          map((users) => users.map(toShallowUser)),
           tapResponse(
             (filteredUsers) => this.setUsers(filteredUsers),
             (error) => console.error(error),
             () => this.setLoading(false)
-          ),
+          )
         );
       })
     )

@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, first, map, Observable, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { RoleSelectionBaseComponent } from 'src/app/shared/base/base-role-selection.component';
 import { userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
@@ -23,6 +23,8 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     user: new FormControl<ShallowUser | undefined>(undefined, Validators.required),
   });
 
+  public disabledUuids$!: Observable<string[]>;
+
   constructor(private store: Store, selectionService: RoleSelectionService, actions$: Actions) {
     super(
       selectionService,
@@ -35,19 +37,10 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.copyRolesSuccess)).subscribe(() => {
         this.selectionService.deselectAll();
-        this.selectedUserUuid$.next(undefined);
         this.formGroup.reset();
       })
     );
     this.disabledUuids$ = of([this.user.Uuid]);
-  }
-
-  public disabledUuids$!: Observable<string[]>;
-
-  public selectedUserUuid$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(undefined);
-
-  public selectedUserChanged(userUuid: string | undefined | null): void {
-    this.selectedUserUuid$.next(userUuid ?? undefined);
   }
 
   public getSnackbarText(): string {
@@ -59,12 +52,7 @@ export class CopyRolesDialogComponent extends RoleSelectionBaseComponent impleme
     if (!selectedUserUuid) throw new Error('No user selected');
     const request = this.getRequest(this.user);
     this.isLoading = true;
-    console.log('Copy roles', this.user.Uuid, selectedUserUuid, request);
     this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, selectedUserUuid, request));
-  }
-
-  public isUserSelected(): Observable<boolean> {
-    return this.selectedUserUuid$.pipe(map((user) => user !== undefined));
   }
 
   public userHasAnyRight(): boolean {
