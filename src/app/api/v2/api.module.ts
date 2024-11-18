@@ -11,6 +11,11 @@ import { APIV2DataProcessingRegistrationInternalINTERNALService } from './api/v2
 import { APIV2DataProcessingRegistrationOversightTypeService } from './api/v2DataProcessingRegistrationOversightType.service';
 import { APIV2DataProcessingRegistrationRoleTypeService } from './api/v2DataProcessingRegistrationRoleType.service';
 import { APIV2DeltaFeedService } from './api/v2DeltaFeed.service';
+import { APIV2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingCountryOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalDataProcessingOversightOptionsInternalINTERNALService } from './api/v2DprGlobalDataProcessingOversightOptionsInternalINTERNAL.service';
+import { APIV2DprGlobalRoleOptionTypesInternalINTERNALService } from './api/v2DprGlobalRoleOptionTypesInternalINTERNAL.service';
 import { APIV2DprLocalBasisForTransferTypesInternalINTERNALService } from './api/v2DprLocalBasisForTransferTypesInternalINTERNAL.service';
 import { APIV2DprLocalCountryOptionTypesInternalINTERNALService } from './api/v2DprLocalCountryOptionTypesInternalINTERNAL.service';
 import { APIV2DprLocalDataResponsibleTypesInternalINTERNALService } from './api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service';
@@ -100,6 +105,7 @@ import { APIV2KLEInternalINTERNALService } from './api/v2KLEInternalINTERNAL.ser
 import { APIV2KleOptionService } from './api/v2KleOption.service';
 import { APIV2NotificationINTERNALService } from './api/v2NotificationINTERNAL.service';
 import { APIV2OrganizationService } from './api/v2Organization.service';
+import { APIV2OrganizationGlobalCountryCodesInternalINTERNALService } from './api/v2OrganizationGlobalCountryCodesInternalINTERNAL.service';
 import { APIV2OrganizationGridInternalINTERNALService } from './api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationUnitLocalRoleOptionTypesInternalINTERNALService } from './api/v2OrganizationUnitLocalRoleOptionTypesInternalINTERNAL.service';
 import { APIV2OrganizationUnitRegistrationInternalINTERNALService } from './api/v2OrganizationUnitRegistrationInternalINTERNAL.service';

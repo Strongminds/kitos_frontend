@@ -12,6 +12,11 @@ api/v2DataProcessingRegistrationInternalINTERNAL.service.ts
 api/v2DataProcessingRegistrationOversightType.service.ts
 api/v2DataProcessingRegistrationRoleType.service.ts
 api/v2DeltaFeed.service.ts
+api/v2DprGlobalDataProcessingBasisForTransferOptionsInternalINTERNAL.service.ts
+api/v2DprGlobalDataProcessingCountryOptionsInternalINTERNAL.service.ts
+api/v2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNAL.service.ts
+api/v2DprGlobalDataProcessingOversightOptionsInternalINTERNAL.service.ts
+api/v2DprGlobalRoleOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalBasisForTransferTypesInternalINTERNAL.service.ts
 api/v2DprLocalCountryOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service.ts
@@ -101,6 +106,7 @@ api/v2KLEInternalINTERNAL.service.ts
 api/v2KleOption.service.ts
 api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
+api/v2OrganizationGlobalCountryCodesInternalINTERNAL.service.ts
 api/v2OrganizationGridInternalINTERNAL.service.ts
 api/v2OrganizationUnitLocalRoleOptionTypesInternalINTERNAL.service.ts
 api/v2OrganizationUnitRegistrationInternalINTERNAL.service.ts
