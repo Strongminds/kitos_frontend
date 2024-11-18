@@ -17,14 +17,17 @@ import { RemovalConflictTableComponent } from './global-admin-organizations/dele
 import { EditOrganizationDialogComponent } from './global-admin-organizations/edit-organization-dialog/edit-organization-dialog.component';
 import { GlobalAdminOrganizationsGridComponent } from './global-admin-organizations/global-admin-organizations-grid/global-admin-organizations-grid.component';
 import { GlobalAdminOrganizationsComponent } from './global-admin-organizations/global-admin-organizations.component';
+import { ApiUsersOrganizationsDialogComponent } from './global-admin-other/global-admin-other-api-users/api-users-organizations-dialog/api-users-organizations-dialog.component';
+import { GlobalAdminOtherApiUsersComponent } from './global-admin-other/global-admin-other-api-users/global-admin-other-api-users.component';
 import { GlobalAdminOtherBrokenLinksComponent } from './global-admin-other/global-admin-other-broken-links/global-admin-other-broken-links.component';
 import { GlobalAdminOtherKleComponent } from './global-admin-other/global-admin-other-kle/global-admin-other-kle.component';
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
+import { GlobalAdminLocalAdminsGridComponent } from './global-admin-local-admins/global-admin-local-admins-grid/global-admin-local-admins-grid.component';
+import { CreateLocalAdminDialogComponent } from './global-admin-local-admins/create-local-admin-dialog/create-local-admin-dialog.component';
 import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-admins-table/global-admins-table.component';
 import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
 import { GlobalAdminComponent } from './global-admin.component';
-
 
 @NgModule({
   declarations: [
@@ -49,6 +52,10 @@ import { GlobalAdminComponent } from './global-admin.component';
     GlobalAdminOtherUserShutdownComponent,
     CreateGlobalAdminDialogComponent,
     GlobalAdminOtherBrokenLinksComponent,
+    GlobalAdminLocalAdminsGridComponent,
+    CreateLocalAdminDialogComponent,
+    GlobalAdminOtherApiUsersComponent,
+    ApiUsersOrganizationsDialogComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })

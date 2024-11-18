@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
+import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -21,7 +22,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
-import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
+import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -75,8 +76,8 @@ export class NotificationService implements OnDestroy {
   }
 
   private subscribeToLocalAdminNotifications() {
-    this.subscribeAsDefault(LocalOptionTypeActions.updateOptionTypeSuccess, $localize`Enheden blev opdateret`);
-    this.subscribeAsError(LocalOptionTypeActions.updateOptionTypeError, $localize`Enheden kunne ikke opdateres`);
+    this.subscribeAsDefault(LocalOptionTypeActions.updateOptionTypeSuccess, $localize`Typen blev opdateret`);
+    this.subscribeAsError(LocalOptionTypeActions.updateOptionTypeError, $localize`Typen kunne ikke opdateres`);
   }
 
   private subscribeToGlobalAdminNotifications() {
@@ -85,7 +86,6 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(OrganizationActions.patchOrganizationSuccess, $localize`Organisationen blev opdateret`);
     this.subscribeAsError(OrganizationActions.patchOrganizationError, $localize`Organisationen kunne ikke opdateres`);
-
 
     this.subscribeAsDefault(OrganizationActions.deleteOrganizationSuccess, $localize`Organisationen blev slettet`);
     this.subscribeAsError(OrganizationActions.deleteOrganizationError, $localize`Organisationen kunne ikke slettes`);
@@ -111,6 +111,15 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(
       GlobalAdminActions.removeGlobalAdminError,
       $localize`Bruger kunne ikke fjernes som global administrator`
+    );
+
+    this.subscribeAsDefault(LocalAdminUserActions.addLocalAdminSuccess, $localize`Lokal administrator blev tilføjet`);
+    this.subscribeAsError(LocalAdminUserActions.addLocalAdminError, $localize`Lokal administrator kunne ikke tilføjes`);
+
+    this.subscribeAsDefault(LocalAdminUserActions.removeLocalAdminSuccess, $localize`Lokal administrator blev fjernet`);
+    this.subscribeAsError(
+      LocalAdminUserActions.removeLocalAdminError,
+      $localize`Lokal administrator kunne ikke fjernes`
     );
   }
 
