@@ -2,7 +2,7 @@ import { RegularOptionType } from '../models/options/regular-option-types.model'
 
 export function getOptionTypeName(optionType: RegularOptionType): string {
   switch (optionType) {
-    //It system types
+    //IT system types
     case 'it-system_business-type':
       return $localize`Forretningstyper`;
     case 'it-system_usage-archive-location-type':
@@ -21,8 +21,36 @@ export function getOptionTypeName(optionType: RegularOptionType): string {
       return $localize`Kategorier af registrerede i databehandlingen`;
     case 'it-system_usage-data-classification-type':
       return $localize`Klassifikation af data i systemet`;
+    //IT contract types
     case 'it-contract_contract-type':
       return $localize`Kontrakttype`;
+    case 'it-contract_contract-template-type':
+      return $localize`Kontraktskabeloner`;
+    case 'it-contract_purchase-form-type':
+      return $localize`Indkøbsformer`;
+    case 'it-contract-agreement-element-types':
+      return $localize`Aftaleelementer`;
+    case 'it-contract-extend-types':
+      return $localize`Option forlæng`;
+    case 'it-contract-payment-frequency-types':
+      return $localize`Betalingsfrekvenser`;
+    case 'it-contract-price-regulation-types':
+      return $localize`Prisreguleringer`;
+    case 'it-contract_procurement-strategy-type':
+      return $localize`Genanskaffelsesstrategier`;
+    case 'it-contract-termination-period-types':
+      return $localize`Opsigelsesfrister`;
+    case 'it-contract_criticality-type':
+      return $localize`Kritikalitet`;
+    //Data processing types
+    case 'data-processing-basis-for-transfer-types':
+      return $localize`Overførselsgrundlag`;
+    case 'data-processing-oversight-option-types':
+      return $localize`Tilsynsmuligheder`;
+    case 'data-processing-data-responsible-types':
+      return $localize`Dataansvarlige`;
+    case 'data-processing-country-types':
+      return $localize`Lande`;
     default:
       throw new Error(`Option type name not implemented for e${optionType}`);
   }
