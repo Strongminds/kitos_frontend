@@ -16,7 +16,7 @@
   valueField="uuid"
   [showDescription]="true"
   [formGroup]="formGroup"
-  formName="type"
+  [formName]="formName ?? null"
   [data]="optionTypes$ | async"
   (valueChange)="onValueChange($event)"
   [searchFn]="searchFn"
