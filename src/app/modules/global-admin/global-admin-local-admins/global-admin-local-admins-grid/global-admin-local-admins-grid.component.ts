@@ -21,11 +21,6 @@ export class GlobalAdminLocalAdminsGridComponent {
 
   constructor(private dialog: MatDialog, private store: Store, private confirmActionService: ConfirmActionService) {}
 
-  data = [
-    { organizationName: 'En organisation', name: 'Jacob Borch', email: 'jacob@test.dk' },
-    { organizationName: 'En anden organisation', name: 'Jense Jensen', email: 'jens@jensen.dk' },
-  ];
-
   public readonly gridColumns: GridColumn[] = [
     {
       field: 'organization.name',
