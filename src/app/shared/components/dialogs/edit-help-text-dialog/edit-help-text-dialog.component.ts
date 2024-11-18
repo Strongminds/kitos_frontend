@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { APIHelpTextUpdateRequestDTO } from 'src/app/api/v2/model/helpTextUpdateRequestDTO';
 import { HelpText } from 'src/app/shared/models/help-text.model';
-import { AppRootUrlResolverServiceService } from 'src/app/shared/services/app-root-url-resolver-service.service';
+import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 
 @Component({
@@ -28,7 +28,8 @@ export class EditHelpTextDialogComponent implements OnInit {
   constructor(
     private readonly dialogRef: MatDialogRef<EditHelpTextDialogComponent>,
     private store: Store,
-    private rootUrlResolver: AppRootUrlResolverServiceService) {
+    private rootUrlResolver: AppRootUrlResolverService
+  ) {
     this.rootUrl = this.rootUrlResolver.resolveRootUrl();
   }
 

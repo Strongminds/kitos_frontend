@@ -151,6 +151,7 @@ import { GlobalOptionTypeTableComponent } from './global-option-type-table/globa
 import { GlobalOptionTypeDialogComponent } from './global-option-type-table/global-option-type-dialog/global-option-type-dialog.component';
 import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
+import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -276,6 +277,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GlobalOptionTypeDialogComponent,
     EditHelpTextDialogComponent,
     CreateHelpTextDialogComponent,
+    RichTextEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -411,6 +413,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GlobalOptionTypeDialogComponent,
     EditHelpTextDialogComponent,
     CreateHelpTextDialogComponent,
+    RichTextEditorComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

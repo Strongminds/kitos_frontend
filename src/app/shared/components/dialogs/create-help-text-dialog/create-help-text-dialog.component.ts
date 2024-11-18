@@ -5,7 +5,7 @@ import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
 import { APIHelpTextCreateRequestDTO } from 'src/app/api/v2/model/helpTextCreateRequestDTO';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { AppRootUrlResolverServiceService } from 'src/app/shared/services/app-root-url-resolver-service.service';
+import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.component-store';
 
@@ -32,7 +32,7 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
     private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,
     private store: Store,
     private componentStore: CreateHelpTextDialogComponentStore,
-    private rootUrlResolver: AppRootUrlResolverServiceService
+    private rootUrlResolver: AppRootUrlResolverService
   ) {
     super();
     this.rootUrl = this.rootUrlResolver.resolveRootUrl();
