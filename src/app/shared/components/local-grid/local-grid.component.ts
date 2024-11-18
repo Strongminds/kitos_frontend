@@ -100,8 +100,6 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     }
     const processedData = process(this.data, { ...this.state, skip: 0, take: this.data.length });
 
-    console.log('processedData', processedData);
-
     return { data: processedData.data };
   }
 }
