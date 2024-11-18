@@ -29,18 +29,6 @@
     >
     </app-option-type-dropdown>
     <app-dropdown
-      *ngIf="contractTypeEnabled$ | async"
-      text="Kontrakttype"
-      i18n-text
-      data-cy="contract-type"
-      valueField="uuid"
-      [formGroup]="frontpageFormGroup"
-      formName="contractType"
-      [data]="contractTypes$ | async"
-      (valueChange)="patchFrontPage({ general: { contractTypeUuid: $event } })"
-    >
-    </app-dropdown>
-    <app-dropdown
       *ngIf="contractTemplateEnabled$ | async"
       text="Kontraktskabelon"
       i18n-text
