@@ -14,6 +14,7 @@ export class UserDropdownComponent implements OnInit {
   @Input() formGroup!: FormGroup;
   @Input() formName!: string;
   @Input() disabledUuids$: Observable<string[]> = of([]);
+  @Input() searchGlobalUsers: boolean = false;
 
   public filteredUsers$!: Observable<APIUserReferenceResponseDTO[]>;
 
@@ -27,6 +28,8 @@ export class UserDropdownComponent implements OnInit {
         return users.filter((user) => !disabledUuidsSet.has(user.uuid));
       })
     );
+
+    this.componentStore.setGlobalSearch(this.searchGlobalUsers);
   }
 
   public readonly isLoading$ = this.componentStore.loading$;
