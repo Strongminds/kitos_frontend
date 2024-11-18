@@ -5,6 +5,7 @@ import { OptionTypeDropdownComponentStore } from './option-type-dropdown-compone
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { getOptionTypeName } from 'src/app/shared/helpers/option-type.helper';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-option-type-dropdown',
@@ -18,7 +19,7 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   @Input() formName?: string;
   @Input() value?: APIRegularOptionResponseDTO;
 
-  @Output() valueChange = new EventEmitter<string | null| undefined>();
+  @Output() valueChange = new EventEmitter<string | null | undefined>();
 
   public readonly optionTypes$ = this.componentStore.optionTypes$;
   public readonly loading$ = this.componentStore.loading$;
@@ -30,7 +31,7 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
     );
   };
 
-  constructor(private componentStore: OptionTypeDropdownComponentStore) {
+  constructor(private componentStore: OptionTypeDropdownComponentStore, private store: Store) {
     super();
   }
 

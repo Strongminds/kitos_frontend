@@ -71,8 +71,6 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
 
   private doesDataContainValue(value?: any): boolean {
     if (!this.data || value === undefined || value === null) return false;
-    console.log('value:', value);
-    console.log('data:', this.data);
     return !this.data.some(
       (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
     );
