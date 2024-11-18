@@ -8,6 +8,7 @@ import { GridExportActions } from 'src/app/store/grid/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultGridState } from '../../models/grid-state.model';
+import { includedColumnInExport } from '../../helpers/grid-export.helper';
 
 @Component({
   selector: 'app-local-grid',
@@ -89,11 +90,17 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     }
   }
 
+  public getColumnsForExport(): GridColumn[] {
+    return this.columns.filter(includedColumnInExport);
+  }
+
   public allData(): ExcelExportData {
     if (!this.data || !this.state) {
       return { data: [] };
     }
     const processedData = process(this.data, { ...this.state, skip: 0, take: this.data.length });
+
+    console.log('processedData', processedData);
 
     return { data: processedData.data };
   }
