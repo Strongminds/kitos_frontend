@@ -13,6 +13,13 @@
   flex: 1 1 30%;
 }
 
+.card {
+  padding: $padding-medium;
+  border-radius: $radius-large;
+  background: $color-white;
+  margin-bottom: $padding-medium;
+}
+
 .login-button {
   width: 100%;
 }
