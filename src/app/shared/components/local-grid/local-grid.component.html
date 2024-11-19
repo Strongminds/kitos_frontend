@@ -86,6 +86,16 @@
         </div>
       </ng-template>
 
+      <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
+        <div class="column-center-content">
+          <app-checkbox
+            [value]="searchProperty(dataItem, column.field)"
+            [disabled]="column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== false : true"
+            (valueChange)="checkboxChange($event)"
+          ></app-checkbox>
+        </div>
+      </ng-template>
+
       <ng-template *ngIf="column.style === 'action-buttons'" kendoGridCellTemplate let-dataItem>
         <div class="action-buttons-container">
           <ng-container *ngFor="let button of column.extraData">

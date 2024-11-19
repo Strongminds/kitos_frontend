@@ -94,6 +94,10 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     return this.columns.filter(includedColumnInExport);
   }
 
+  public checkboxChange(value: boolean | undefined) {
+    console.log(value);
+  }
+
   public allData(): ExcelExportData {
     if (!this.data || !this.state) {
       return { data: [] };

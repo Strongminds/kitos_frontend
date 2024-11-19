@@ -19,7 +19,9 @@ export class LocalOptionGridComponent {
       field: 'active',
       title: $localize`Aktiv`,
       hidden: false,
-      style: 'boolean',
+      style: 'checkbox',
+      noFilter: true,
+      permissionsField: 'obligatory',
     },
     {
       field: 'name',
@@ -31,6 +33,7 @@ export class LocalOptionGridComponent {
       title: $localize`Skriv`,
       hidden: false,
       style: 'boolean',
+      noFilter: true,
     },
     {
       field: 'description',
