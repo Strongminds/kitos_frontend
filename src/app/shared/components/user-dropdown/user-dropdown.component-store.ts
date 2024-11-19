@@ -60,7 +60,7 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
         return this.searchUsersInternal(search).pipe(
           map((users) => users.map(toShallowUser)),
           tapResponse(
-            (filteredUsers) => this.setUsers(filteredUsers),
+            (users) => this.setUsers(users),
             (error) => console.error(error),
             () => this.setLoading(false)
           )
