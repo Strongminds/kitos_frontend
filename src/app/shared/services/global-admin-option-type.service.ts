@@ -36,6 +36,7 @@ import { APIV2ItSystemGlobalFrequencyTypesInternalINTERNALService } from 'src/ap
 import { APIV2ItSystemGlobalInterfaceTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalInterfaceTypesInternalINTERNAL.service';
 import { APIV2ItSystemGlobalRegisterTypesInternalINTERNALService } from 'src/app/api/v2/api/v2ItSystemGlobalRegisterTypesInternalINTERNAL.service';
 import { GlobalAdminOptionType } from '../models/options/global-admin-option-type.model';
+import { APIV2OrganizationUnitGlobalRoleOptionTypesInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationUnitGlobalRoleOptionTypesInternalINTERNAL.service';
 
 @Injectable({
   providedIn: 'root',
@@ -108,7 +109,9 @@ export class GlobalAdminOptionTypeService {
     @Inject(APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService)
     private itContractRoleService: APIV2ItContractGlobalItContractRoleTypesInternalINTERNALService,
     @Inject(APIV2DprGlobalRoleOptionTypesInternalINTERNALService)
-    private dprRoleService: APIV2DprGlobalRoleOptionTypesInternalINTERNALService
+    private dprRoleService: APIV2DprGlobalRoleOptionTypesInternalINTERNALService,
+    @Inject(APIV2OrganizationUnitGlobalRoleOptionTypesInternalINTERNALService)
+    private orgUnitRoleService: APIV2OrganizationUnitGlobalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public getGlobalOptions(optionType: GlobalAdminOptionType): Observable<Array<APIGlobalRoleOptionResponseDTO>> {
@@ -231,7 +234,8 @@ export class GlobalAdminOptionTypeService {
       case 'data-processing':
         return () => this.dprRoleService.getManyDprGlobalRoleOptionTypesInternalV2GetDprRoles();
       case 'organization-unit':
-        throw new Error('TODO');
+        return () =>
+          this.orgUnitRoleService.getManyOrganizationUnitGlobalRoleOptionTypesInternalV2GetOrganizationUnitRoles();
       default:
         throw new Error(`Get operation is not supported for ${optionType}`);
     }
@@ -470,7 +474,13 @@ export class GlobalAdminOptionTypeService {
             dto,
           });
       case 'organization-unit':
-        throw new Error('TODO');
+        return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
+          this.orgUnitRoleService.patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(
+            {
+              optionUuid,
+              dto,
+            }
+          );
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -680,7 +690,10 @@ export class GlobalAdminOptionTypeService {
             dto,
           });
       case 'organization-unit':
-        throw new Error('TODO');
+        return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
+          this.orgUnitRoleService.postSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRole({
+            dto,
+          });
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }
