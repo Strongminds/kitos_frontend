@@ -29,7 +29,6 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
     name: new FormControl<string | undefined>(undefined, Validators.required),
     cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
-    foreignCvr: new FormControl<string | undefined>(undefined),
     foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
   });
 

@@ -27,18 +27,8 @@
         formName="foreignCountryCode"
         valueField="uuid"
         [data]="countryCodes"
-
       ></app-dropdown>
       </ng-container>
-
-      <app-textbox
-        text="Udenlandsk virksomhed"
-        i18n-text
-        [formGroup]="formGroup"
-        formName="foreignCvr"
-        data-cy="org-foreign-cvr"
-      >
-      </app-textbox>
     </app-standard-vertical-content-grid>
 
     <app-dialog-actions>
