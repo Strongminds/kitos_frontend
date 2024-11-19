@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { selectIsAuthenticating, selectUser, selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
+import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { Actions, ofType } from '@ngrx/effects';
@@ -15,7 +15,6 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly text$ = this.frontpageComponentStore.text$;
 
   public readonly user$ = this.store.select(selectUser);
-  public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
   public readonly isAuthenticating$ = this.store.select(selectIsAuthenticating);
 
   constructor(
