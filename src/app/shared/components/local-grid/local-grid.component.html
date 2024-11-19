@@ -91,7 +91,7 @@
           <app-checkbox
             [value]="searchProperty(dataItem, column.field)"
             [disabled]="column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== false : true"
-            (valueChange)="checkboxChange($event)"
+            (valueChange)="onCheckboxChange($event, dataItem)"
           ></app-checkbox>
         </div>
       </ng-template>

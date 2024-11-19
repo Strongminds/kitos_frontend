@@ -27,6 +27,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
 
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
+  @Output() checkboxChange = new EventEmitter<CheckboxEvent<T>>();
 
   public state = defaultGridState;
 
@@ -94,8 +95,9 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     return this.columns.filter(includedColumnInExport);
   }
 
-  public checkboxChange(value: boolean | undefined) {
-    console.log(value);
+  public onCheckboxChange(value: boolean | undefined, item: T) {
+    if (value === undefined) return;
+    this.checkboxChange.emit({ value, item });
   }
 
   public allData(): ExcelExportData {
@@ -107,3 +109,8 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     return { data: processedData.data };
   }
 }
+
+export type CheckboxEvent<T> = {
+  value: boolean;
+  item: T;
+};
