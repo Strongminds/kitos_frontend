@@ -73,7 +73,7 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
     return this.searchGlobal$.pipe(
       first(),
       switchMap((searchGlobal) => {
-        return searchGlobal ? this.searchGlobally(search) : this.searchByOrganization(search);
+        return searchGlobal ? this.searchGlobally(search) : this.searchInCurrentOrgnization(search);
       })
     );
   }
@@ -84,7 +84,7 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
     });
   }
 
-  private searchByOrganization(search: string | undefined): Observable<APIUserReferenceResponseDTO[]> {
+  private searchInCurrentOrgnization(search: string | undefined): Observable<APIUserReferenceResponseDTO[]> {
     return this.store.select(selectOrganizationUuid).pipe(
       filterNullish(),
       first(),
