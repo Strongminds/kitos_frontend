@@ -14,7 +14,7 @@ interface State {
 }
 
 @Injectable()
-export class CreateOrganizationDialogComponentStore extends ComponentStore<State> {
+export class OrganizationsDialogComponentStore extends ComponentStore<State> {
   public readonly countryCodes$ = this.select((state) => state.countryCodes);
   public readonly loading$ = this.select((state) => state.loading);
 

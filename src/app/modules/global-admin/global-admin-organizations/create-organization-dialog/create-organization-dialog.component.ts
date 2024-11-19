@@ -14,15 +14,16 @@ import {
 } from 'src/app/shared/models/organization/organization.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { CreateOrganizationDialogComponentStore } from './create-organization-dialog.component-store';
+import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
+import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
 
 @Component({
   selector: 'app-create-organization-dialog',
   templateUrl: './create-organization-dialog.component.html',
   styleUrl: './create-organization-dialog.component.scss',
-  providers: [CreateOrganizationDialogComponentStore],
+  providers: [OrganizationsDialogComponentStore],
 })
-export class CreateOrganizationDialogComponent implements OnInit {
+export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   public readonly organizationTypeOptions = organizationTypeOptions;
   public formGroup = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
@@ -31,7 +32,6 @@ export class CreateOrganizationDialogComponent implements OnInit {
     foreignCvr: new FormControl<string | undefined>(undefined),
     foreignCountryCode: new FormControl<GlobalAdminOptionTypeItem | undefined>(undefined),
   });
-  public countryCodes$ = this.componentStore.countryCodes$;
 
   public isLoading$ = new BehaviorSubject<boolean>(false);
 
@@ -39,10 +39,11 @@ export class CreateOrganizationDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<CreateOrganizationDialogComponent>,
     private store: Store,
     private actions$: Actions,
-    private componentStore: CreateOrganizationDialogComponentStore
-  ) {}
+    componentStore: OrganizationsDialogComponentStore
+  ) {super(componentStore);}
 
-  public ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit();
     this.componentStore.getCountryCodes();
 
     this.actions$
