@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationCreateRequestDTO } from 'src/app/api/v2';
 import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
-import { GlobalAdminOptionTypeItem } from 'src/app/shared/models/options/global-admin-option-type.model';
 import {
   defaultOrganizationType,
   OrganizationType,
@@ -16,6 +15,7 @@ import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
 import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
+import { ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 
 @Component({
   selector: 'app-create-organization-dialog',
@@ -30,7 +30,7 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
     cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCvr: new FormControl<string | undefined>(undefined),
-    foreignCountryCode: new FormControl<GlobalAdminOptionTypeItem | undefined>(undefined),
+    foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
   });
 
   public isLoading$ = new BehaviorSubject<boolean>(false);

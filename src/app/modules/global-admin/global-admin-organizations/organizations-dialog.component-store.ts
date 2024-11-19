@@ -2,15 +2,12 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { switchMap, tap } from 'rxjs';
-import {
-  adaptGlobalAdminOptionType,
-  GlobalAdminOptionTypeItem,
-} from 'src/app/shared/models/options/global-admin-option-type.model';
+import { adaptShallowOptionType, ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import { GlobalAdminOptionTypeService } from 'src/app/shared/services/global-admin-option-type.service';
 
 interface State {
   loading: boolean;
-  countryCodes: GlobalAdminOptionTypeItem[];
+  countryCodes: ShallowOptionType[];
 }
 
 @Injectable()
@@ -23,7 +20,7 @@ export class OrganizationsDialogComponentStore extends ComponentStore<State> {
   }
 
   private readonly setCountryCodes = this.updater(
-    (state, countryCodes: GlobalAdminOptionTypeItem[]): State => ({ ...state, countryCodes })
+    (state, countryCodes: ShallowOptionType[]): State => ({ ...state, countryCodes })
   );
 
   private readonly setLoading = this.updater((state, loading: boolean): State => ({ ...state, loading }));
@@ -34,7 +31,7 @@ export class OrganizationsDialogComponentStore extends ComponentStore<State> {
       switchMap(() => {
         return this.globalAdminOptionTypesService.getGlobalOptions('organization_country-code').pipe(
           tapResponse(
-            (countryCodeDtos) => this.setCountryCodes(countryCodeDtos.map(adaptGlobalAdminOptionType)),
+            (countryCodeDtos) => this.setCountryCodes(countryCodeDtos.map(adaptShallowOptionType)),
             (e) => console.error(e),
             () => this.setLoading(false)
           )
