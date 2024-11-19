@@ -1,10 +1,13 @@
-export interface Organization {
+import { adaptShallowOptionType, ShallowOptionType } from '../options/option-type.model';
+
+export interface OrganizationOData {
   id: string;
   Uuid: string;
   Name: string;
   Cvr: string | undefined;
   OrganizationType: string;
   ForeignBusiness: string | undefined;
+  ForeignCountryCode: ShallowOptionType | undefined;
 }
 
 export interface OrganizationType {
@@ -41,20 +44,30 @@ export const organizationTypeOptions: OrganizationType[] = [
 export const defaultOrganizationType = organizationTypeOptions[0];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const adaptOrganization = (value: any): Organization | undefined => {
-  const adapted: Organization = {
+export const adaptOrganization = (value: any): OrganizationOData | undefined => {
+  const adapted: OrganizationOData = {
     id: value.Uuid,
     Uuid: value.Uuid,
     Name: value.Name,
     Cvr: value.Cvr ?? '',
     OrganizationType: adaptOrganizationType(value.TypeId).name,
     ForeignBusiness: value.ForeignCvr ?? '',
+    ForeignCountryCode: getForeignCountryCode(value),
   };
   return adapted;
 };
 
 export function getOrganizationType(name: string): OrganizationType | undefined {
   return organizationTypeOptions.find((type) => type.name === name);
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getForeignCountryCode(value: any) {
+  try {
+    return adaptShallowOptionType(value.ForeignCountryCode);
+  } catch (_) {
+    return undefined;
+  }
 }
 
 function adaptOrganizationType(typeId: number): OrganizationType {

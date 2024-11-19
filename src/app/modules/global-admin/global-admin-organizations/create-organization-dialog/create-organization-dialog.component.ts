@@ -11,7 +11,7 @@ import {
   defaultOrganizationType,
   OrganizationType,
   organizationTypeOptions,
-} from 'src/app/shared/models/organization/organization.model';
+} from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
@@ -40,7 +40,9 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
     private store: Store,
     private actions$: Actions,
     componentStore: OrganizationsDialogComponentStore
-  ) {super(componentStore);}
+  ) {
+    super(componentStore);
+  }
 
   override ngOnInit(): void {
     super.ngOnInit();

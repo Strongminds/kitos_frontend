@@ -9,10 +9,10 @@ import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.he
 import {
   defaultOrganizationType,
   getOrganizationType,
-  Organization,
+  OrganizationOData,
   OrganizationType,
   organizationTypeOptions,
-} from 'src/app/shared/models/organization/organization.model';
+} from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
@@ -25,7 +25,7 @@ import { OrganizationsDialogComponentStore } from '../organizations-dialog.compo
   styleUrl: './edit-organization-dialog.component.scss',
 })
 export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
-  @Input() organization!: Organization;
+  @Input() organization!: OrganizationOData;
 
   public isLoading$ = new BehaviorSubject<boolean>(false);
   public readonly organizationTypeOptions = organizationTypeOptions;
