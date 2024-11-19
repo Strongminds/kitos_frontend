@@ -4,6 +4,8 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
+import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
+import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import {
   defaultOrganizationType,
   getOrganizationType,
@@ -11,18 +13,18 @@ import {
   OrganizationType,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization.model';
+import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
-import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
-import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
-import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
+import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
+import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
   templateUrl: './edit-organization-dialog.component.html',
   styleUrl: './edit-organization-dialog.component.scss',
 })
-export class EditOrganizationDialogComponent implements OnInit {
+export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   @Input() organization!: Organization;
 
   public isLoading$ = new BehaviorSubject<boolean>(false);
@@ -37,10 +39,14 @@ export class EditOrganizationDialogComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<CreateOrganizationDialogComponent>,
     private store: Store,
-    private actions$: Actions
-  ) {}
+    private actions$: Actions,
+    componentStore: OrganizationsDialogComponentStore
+  ) {
+    super(componentStore);
+  }
 
-  public ngOnInit(): void {
+  override ngOnInit(): void {
+    super.ngOnInit();
     this.formGroup.patchValue({
       name: this.organization.Name,
       cvr: this.organization.Cvr,
