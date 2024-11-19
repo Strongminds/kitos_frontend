@@ -4,11 +4,9 @@
     [text]="getDropdownTitle()"
     [value]="value"
     valueField="uuid"
-    [showDescription]="true"
-    [showDescriptionLabel]="false"
+    [showDescription]="showDescription"
     [data]="optionTypes"
     (valueChange)="onValueChange($event)"
-    [searchFn]="searchFn"
     [loading]="loading$ | async"
   ></app-dropdown>
 
@@ -16,13 +14,11 @@
     *ngIf="formGroup"
     [text]="getDropdownTitle()"
     valueField="uuid"
-    [showDescription]="true"
-    [showDescriptionLabel]="false"
     [formGroup]="formGroup"
     [formName]="formName ?? null"
+    [showDescription]="showDescription"
     [data]="optionTypes"
     (valueChange)="onValueChange($event)"
-    [searchFn]="searchFn"
     [loading]="loading$ | async"
   ></app-dropdown>
 </ng-container>

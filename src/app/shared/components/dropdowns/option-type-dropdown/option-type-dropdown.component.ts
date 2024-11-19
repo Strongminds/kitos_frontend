@@ -16,6 +16,7 @@ import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types
 })
 export class OptionTypeDropdownComponent extends BaseComponent implements OnInit {
   @Input() optionType!: RegularOptionType | RoleOptionTypes;
+  @Input() showDescription: boolean = false;
   @Input() formGroup?: FormGroup;
   @Input() formName?: string;
   @Input() value?: APIRegularOptionResponseDTO;
@@ -24,13 +25,6 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
 
   public readonly optionTypes$ = this.componentStore.optionTypes$;
   public readonly loading$ = this.componentStore.loading$;
-
-  public searchFn = (search: string, item: APIRegularOptionResponseDTO): boolean => {
-    return (
-      item.name.toLowerCase().includes(search.toLowerCase()) ||
-      item.description.toLowerCase().includes(search.toLowerCase())
-    );
-  };
 
   constructor(private componentStore: OptionTypeDropdownComponentStore, private store: Store) {
     super();
@@ -45,7 +39,7 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   }
 
   public onValueChange(item: APIRegularOptionResponseDTO | null | undefined): void {
-    //The item provided by the dropdown is not actually an option, but a string, so we need to cast.
+    //The item provided by the dropdown is not actually an option, but a string, so we need to cast. (19/11/2024)
     //eslint-disable-next-line @typescript-eslint/no-explicit-any
     const uuid = item as any as string;
     this.valueChange.emit(uuid);
