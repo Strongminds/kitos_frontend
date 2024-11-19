@@ -1,1 +1,59 @@
 <h3 i18n>Min profil</h3>
+<app-card>
+  <app-form-grid>
+    <div>
+      <app-textbox
+        text="Email"
+        i18n-text
+        [formGroup]="editForm"
+        formName="email"
+        [value]="editForm.value.email ?? ''"
+        data-cy="email"
+      >
+      </app-textbox>
+      <app-paragraph *ngIf="alreadyExists$ | async" color="error" i18n data-cy="error-message"
+        >Denne email er allerede i brug.</app-paragraph
+      >
+    </div>
+    <app-textbox
+      text="Fornavn"
+      i18n-text
+      [formGroup]="editForm"
+      formName="firstName"
+      [value]="editForm.value.firstName ?? ''"
+      data-cy="firstName"
+    >
+    </app-textbox>
+    <app-textbox
+      text="Efternavn"
+      i18n-text
+      [formGroup]="editForm"
+      formName="lastName"
+      [value]="editForm.value.lastName ?? ''"
+      data-cy="lastName"
+    >
+    </app-textbox>
+    <app-textbox
+      text="Telefonnummer"
+      i18n-text
+      type="tel"
+      pattern="^\+?[0-9]*$"
+      [formGroup]="editForm"
+      formName="phoneNumber"
+      [value]="editForm.value.phoneNumber ?? ''"
+      data-cy="phoneNumber"
+    >
+    </app-textbox>
+    <app-dropdown
+      text="Primær startenhed"
+      formName="defaultStartPreference"
+      [formGroup]="editForm"
+      [data]="startPreferenceOptions"
+      [value]="editForm.value.defaultStartPreference"
+      [clearable]="false"
+      i18n-text
+      data-cy="start-preference"
+    >
+    </app-dropdown>
+  </app-form-grid>
+</app-card>
