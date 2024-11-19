@@ -6,6 +6,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationCreateRequestDTO } from 'src/app/api/v2';
 import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
+import { GlobalAdminOptionTypeItem } from 'src/app/shared/models/options/global-admin-option-type.model';
 import {
   defaultOrganizationType,
   OrganizationType,
@@ -13,11 +14,13 @@ import {
 } from 'src/app/shared/models/organization/organization.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
+import { CreateOrganizationDialogComponentStore } from './create-organization-dialog.component-store';
 
 @Component({
   selector: 'app-create-organization-dialog',
   templateUrl: './create-organization-dialog.component.html',
   styleUrl: './create-organization-dialog.component.scss',
+  providers: [CreateOrganizationDialogComponentStore],
 })
 export class CreateOrganizationDialogComponent implements OnInit {
   public readonly organizationTypeOptions = organizationTypeOptions;
@@ -26,17 +29,22 @@ export class CreateOrganizationDialogComponent implements OnInit {
     cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCvr: new FormControl<string | undefined>(undefined),
+    foreignCountryCode: new FormControl<GlobalAdminOptionTypeItem | undefined>(undefined),
   });
+  public countryCodes$ = this.componentStore.countryCodes$;
 
   public isLoading$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private dialogRef: MatDialogRef<CreateOrganizationDialogComponent>,
     private store: Store,
-    private actions$: Actions
+    private actions$: Actions,
+    private componentStore: CreateOrganizationDialogComponentStore
   ) {}
 
   public ngOnInit(): void {
+    this.componentStore.getCountryCodes();
+
     this.actions$
       .pipe(ofType(OrganizationActions.createOrganizationSuccess, OrganizationActions.createOrganizationError))
       .subscribe(() => {
@@ -65,7 +73,7 @@ export class CreateOrganizationDialogComponent implements OnInit {
       name: formValue.name ?? '',
       cvr: formValue.cvr ?? undefined,
       type: mapOrgTypeToDtoType(type.value),
-      foreignCvr: formValue.foreignCvr ?? undefined,
+      foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
     };
   }
 }

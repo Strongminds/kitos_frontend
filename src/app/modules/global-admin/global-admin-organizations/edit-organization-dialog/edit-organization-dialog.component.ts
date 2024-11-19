@@ -79,7 +79,7 @@ export class EditOrganizationDialogComponent implements OnInit {
       name: formValue.name ?? undefined,
       cvr: formValue.cvr ?? undefined,
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
-      foreignCvr: formValue.foreignCvr ?? undefined,
+      //foreignCvr: formValue.foreignCvr ?? undefined,
     };
   }
   private hasAnythingChanged(): boolean {
