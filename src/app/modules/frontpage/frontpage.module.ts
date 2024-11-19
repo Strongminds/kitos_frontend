@@ -5,9 +5,10 @@ import { FrontpageComponent } from './frontpage.component';
 import { FrontpageRouterModule } from './frontpage.routes';
 import { LoginComponent } from './login/login.component';
 import { PublicMessageComponent } from './public-message/public-message.component';
+import { EditPublicMessageDialogComponent } from './public-message/edit-public-message-dialog/edit-public-message-dialog.component';
 
 @NgModule({
-  declarations: [FrontpageComponent, LoginComponent, PublicMessageComponent],
+  declarations: [FrontpageComponent, LoginComponent, PublicMessageComponent, EditPublicMessageDialogComponent],
   imports: [ReactiveFormsModule, SharedModule, FrontpageRouterModule],
 })
 export class FrontpageModule {}

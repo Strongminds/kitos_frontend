@@ -1,3 +1,5 @@
 <div class="card" *ngIf="content">
   <p [innerHTML]="content"></p>
+
+  <app-button *ngIf="isUserGlobalAdmin$ | async" (buttonClick)="onEdit()"> Rediger </app-button>
 </div>
