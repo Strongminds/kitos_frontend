@@ -63,7 +63,8 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       hidden: false,
       extraData: 'organization_country-code',
       extraFilter: 'choice-type',
-      style: 'uuid-to-name'
+      style: 'uuid-to-name',
+      dataField: 'ForeignCountryCodeName',
     },
     {
       field: 'Actions',
