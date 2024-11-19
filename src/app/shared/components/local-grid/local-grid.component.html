@@ -75,6 +75,17 @@
         <app-paragraph>{{ searchProperty(dataItem, column.field)?.name }}</app-paragraph>
       </ng-template>
 
+      <ng-template *ngIf="column.style === 'boolean'" kendoGridCellTemplate let-dataItem>
+        <div class="items-center-container">
+          <app-boolean-circle
+            [value]="searchProperty(dataItem, column.field) === true"
+            [positiveTooltipText]="column.tooltipPositiveText ?? ''"
+            [negativeTooltipText]="column.tooltipNegativeText ?? ''"
+          >
+          </app-boolean-circle>
+        </div>
+      </ng-template>
+
       <ng-template *ngIf="column.style === 'action-buttons'" kendoGridCellTemplate let-dataItem>
         <div class="action-buttons-container">
           <ng-container *ngFor="let button of column.extraData">
