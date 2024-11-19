@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { EditPublicMessageDialogComponent } from './edit-public-message-dialog/edit-public-message-dialog.component';
+import { PublicMessageType } from 'src/app/shared/models/public-messages.model';
 
 @Component({
   selector: 'app-public-message',
@@ -12,6 +13,7 @@ import { EditPublicMessageDialogComponent } from './edit-public-message-dialog/e
 export class PublicMessageComponent {
   //eslint-disable-next-line
   @Input() content!: any;
+  @Input() type!: PublicMessageType;
 
   public readonly isUserGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
@@ -19,6 +21,8 @@ export class PublicMessageComponent {
 
   public onEdit(): void {
     const dialogRef = this.dialog.open(EditPublicMessageDialogComponent);
-    dialogRef.componentInstance.message = this.content;
+    const instance = dialogRef.componentInstance;
+    instance.message = this.content;
+    instance.type = this.type;
   }
 }
