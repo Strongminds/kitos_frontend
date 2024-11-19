@@ -98,10 +98,6 @@ export class GlobalAdminOptionTypeService {
     private dataResponsibleService: APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService,
     @Inject(APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService)
     private countryService: APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService,
-    
-    //Organization types
-    @Inject(APIV2OrganizationGlobalCountryCodesInternalINTERNALService)
-    private countryCodeService: APIV2OrganizationGlobalCountryCodesInternalINTERNALService,
 
     //Organization types
     @Inject(APIV2OrganizationGlobalCountryCodesInternalINTERNALService)
@@ -224,10 +220,6 @@ export class GlobalAdminOptionTypeService {
       case 'data-processing-country-types':
         return () =>
           this.countryService.getManyDprGlobalDataProcessingCountryOptionsInternalV2GetGlobalDataProcessingCountryOptions();
-      
-      //Organization types
-      case 'organization_country-code':
-        return () => this.countryCodeService.getManyOrganizationGlobalCountryCodesInternalV2GetCountryCodes();
 
       //Organization types
       case 'organization_country-code':
@@ -460,14 +452,6 @@ export class GlobalAdminOptionTypeService {
             dto: request,
           });
 
-      //Organization types
-      case 'organization_country-code':
-        return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-          this.countryCodeService.patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCode({
-            optionUuid,
-            dto: request,
-          });
-
       //Role types
       case 'it-system-usage':
         return (optionUuid: string, dto: APIGlobalRegularOptionUpdateRequestDTO) =>
@@ -679,13 +663,6 @@ export class GlobalAdminOptionTypeService {
               dto: dto,
             }
           );
-
-      //Organization types
-      case 'organization_country-code':
-        return (request: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.countryCodeService.postSingleOrganizationGlobalCountryCodesInternalV2CreateCountryCode({
-            dto: request,
-          });
 
       //Organization types
       case 'organization_country-code':
