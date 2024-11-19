@@ -97,7 +97,7 @@ export class GlobalAdminOptionTypeService {
     private dataResponsibleService: APIV2DprGlobalDataProcessingDataResponsibleOptionsInternalINTERNALService,
     @Inject(APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService)
     private countryService: APIV2DprGlobalDataProcessingCountryOptionsInternalINTERNALService,
-    
+
     //Organization types
     @Inject(APIV2OrganizationGlobalCountryCodesInternalINTERNALService)
     private countryCodeService: APIV2OrganizationGlobalCountryCodesInternalINTERNALService,
@@ -217,7 +217,7 @@ export class GlobalAdminOptionTypeService {
       case 'data-processing-country-types':
         return () =>
           this.countryService.getManyDprGlobalDataProcessingCountryOptionsInternalV2GetGlobalDataProcessingCountryOptions();
-      
+
       //Organization types
       case 'organization_country-code':
         return () => this.countryCodeService.getManyOrganizationGlobalCountryCodesInternalV2GetCountryCodes();
@@ -230,6 +230,8 @@ export class GlobalAdminOptionTypeService {
           this.itContractRoleService.getManyItContractGlobalItContractRoleTypesInternalV2GetGlobalItContractRoleTypes();
       case 'data-processing':
         return () => this.dprRoleService.getManyDprGlobalRoleOptionTypesInternalV2GetDprRoles();
+      case 'organization-unit':
+        throw new Error('TODO');
       default:
         throw new Error(`Get operation is not supported for ${optionType}`);
     }
@@ -401,35 +403,42 @@ export class GlobalAdminOptionTypeService {
             dto: request,
           });
 
-
       // Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
         return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-          this.basisForTransferService.patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption({
-            optionUuid,
-            dto: request,
-          });
+          this.basisForTransferService.patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
       case 'data-processing-oversight-option-types':
         return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-          this.oversightOptionService.patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption({
-            optionUuid,
-            dto: request,
-          });
+          this.oversightOptionService.patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
       case 'data-processing-data-responsible-types':
         return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-          this.dataResponsibleService.patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption({
-            optionUuid,
-            dto: request,
-          });
+          this.dataResponsibleService.patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
       case 'data-processing-country-types':
         return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
-          this.countryService.patchSingleDprGlobalDataProcessingCountryOptionsInternalV2PatchGlobalDataProcessingCountryOption({
-            optionUuid,
-            dto: request,
-          });
+          this.countryService.patchSingleDprGlobalDataProcessingCountryOptionsInternalV2PatchGlobalDataProcessingCountryOption(
+            {
+              optionUuid,
+              dto: request,
+            }
+          );
 
       //Organization types
       case 'organization_country-code':
@@ -460,6 +469,8 @@ export class GlobalAdminOptionTypeService {
             optionUuid,
             dto,
           });
+      case 'organization-unit':
+        throw new Error('TODO');
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -613,27 +624,35 @@ export class GlobalAdminOptionTypeService {
       // Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.basisForTransferService.postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption({
-            dto: dto,
-          });
+          this.basisForTransferService.postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption(
+            {
+              dto: dto,
+            }
+          );
 
       case 'data-processing-oversight-option-types':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.oversightOptionService.postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption({
-            dto: dto,
-          });
+          this.oversightOptionService.postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(
+            {
+              dto: dto,
+            }
+          );
 
       case 'data-processing-data-responsible-types':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.dataResponsibleService.postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption({
-            dto: dto,
-          });
+          this.dataResponsibleService.postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption(
+            {
+              dto: dto,
+            }
+          );
 
       case 'data-processing-country-types':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
-          this.countryService.postSingleDprGlobalDataProcessingCountryOptionsInternalV2CreateGlobalDataProcessingCountryOption({
-            dto: dto,
-          });
+          this.countryService.postSingleDprGlobalDataProcessingCountryOptionsInternalV2CreateGlobalDataProcessingCountryOption(
+            {
+              dto: dto,
+            }
+          );
 
       //Organization types
       case 'organization_country-code':
@@ -660,6 +679,8 @@ export class GlobalAdminOptionTypeService {
           this.dprRoleService.postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole({
             dto,
           });
+      case 'organization-unit':
+        throw new Error('TODO');
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }
