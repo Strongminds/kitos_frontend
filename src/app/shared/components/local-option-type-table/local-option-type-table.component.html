@@ -1,7 +1,7 @@
 <ng-container *ngIf="optionTypeItems$ | async as optionTypeItems">
   <app-accordion [title]="title" [disabled]="disableAccordion" [isExpandedByDefault]="expandedByDefault">
     <app-loading *ngIf="isLoading$ | async"></app-loading>
-    <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">
+    <!-- <app-native-table *ngIf="(isLoading$ | async) === false" tableLayout="fixed">
       <thead>
         <tr>
           <th i18n>Aktiv</th>
@@ -31,6 +31,7 @@
           </td>
         </tr>
       </tbody>
-    </app-native-table>
+    </app-native-table> -->
+    <app-local-option-grid [optionTypes]="optionTypeItems"></app-local-option-grid>
   </app-accordion>
 </ng-container>
