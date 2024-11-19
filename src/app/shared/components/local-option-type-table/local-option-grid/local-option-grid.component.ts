@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
@@ -16,11 +16,15 @@ import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-t
   templateUrl: './local-option-grid.component.html',
   styleUrl: './local-option-grid.component.scss',
 })
-export class LocalOptionGridComponent {
+export class LocalOptionGridComponent implements OnInit {
   @Input() public loading: boolean = false;
   @Input() public optionType!: LocalAdminOptionType;
   @Input() public optionTypes: LocalAdminOptionTypeItem[] = [];
-  public readonly gridColumns: GridColumn[] = [
+
+  @Input() showWriteAccess: boolean = false;
+  @Input() showDescription: boolean = true;
+  @Input() showEditButton: boolean = true;
+  private readonly gridColumns: GridColumn[] = [
     {
       field: 'active',
       title: $localize`Aktiv`,
@@ -58,7 +62,24 @@ export class LocalOptionGridComponent {
     },
   ];
 
+  public filteredGridColumns!: GridColumn[];
+
   constructor(private dialog: MatDialog, private store: Store) {}
+
+  public ngOnInit(): void {
+    this.filteredGridColumns = this.gridColumns.map((column) => {
+      switch (column.field) {
+        case 'writeAccess':
+          return { ...column, hidden: !this.showWriteAccess };
+        case 'description':
+          return { ...column, hidden: !this.showDescription };
+        case 'Actions':
+          return { ...column, hidden: !this.showEditButton };
+        default:
+          return column;
+      }
+    });
+  }
 
   public onModify(optionType: LocalAdminOptionTypeItem): void {
     const dialogRef = this.dialog.open(EditLocalOptionTypeDialogComponent);
