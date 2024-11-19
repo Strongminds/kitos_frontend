@@ -57,10 +57,13 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       hidden: false,
     },
     {
-      field: 'ForeignBusiness',
+      field: 'ForeignCountryCode',
       title: $localize`Udenlandsk virksomhed`,
       section: this.sectionName,
       hidden: false,
+      extraData: 'organization_country-code',
+      extraFilter: 'choice-type',
+      style: 'uuid-to-name'
     },
     {
       field: 'Actions',
