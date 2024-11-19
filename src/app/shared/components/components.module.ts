@@ -153,6 +153,8 @@ import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { OrganizationDropdownComponent } from './organization-dropdown/organization-dropdown.component';
 import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
+import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
+import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -280,6 +282,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OrganizationDropdownComponent,
     EditHelpTextDialogComponent,
     CreateHelpTextDialogComponent,
+    OptionTypeDropdownComponent,
+    RichTextEditorComponent,
   ],
   imports: [
     CommonModule,
@@ -417,6 +421,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OrganizationDropdownComponent,
     EditHelpTextDialogComponent,
     CreateHelpTextDialogComponent,
+    OptionTypeDropdownComponent,
+    RichTextEditorComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
