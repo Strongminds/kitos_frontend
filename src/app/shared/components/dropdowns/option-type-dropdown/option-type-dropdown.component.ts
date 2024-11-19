@@ -6,6 +6,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { getOptionTypeName } from 'src/app/shared/helpers/option-type.helper';
 import { Store } from '@ngrx/store';
+import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 
 @Component({
   selector: 'app-option-type-dropdown',
@@ -14,7 +15,7 @@ import { Store } from '@ngrx/store';
   providers: [OptionTypeDropdownComponentStore],
 })
 export class OptionTypeDropdownComponent extends BaseComponent implements OnInit {
-  @Input() optionType!: RegularOptionType;
+  @Input() optionType!: RegularOptionType | RoleOptionTypes;
   @Input() formGroup?: FormGroup;
   @Input() formName?: string;
   @Input() value?: APIRegularOptionResponseDTO;

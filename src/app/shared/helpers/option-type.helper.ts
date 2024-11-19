@@ -1,6 +1,7 @@
 import { RegularOptionType } from '../models/options/regular-option-types.model';
+import { RoleOptionTypes } from '../models/options/role-option-types.model';
 
-export function getOptionTypeName(optionType: RegularOptionType): string {
+export function getOptionTypeName(optionType: RegularOptionType | RoleOptionTypes): string {
   switch (optionType) {
     //IT system types
     case 'it-system_business-type':
@@ -51,6 +52,15 @@ export function getOptionTypeName(optionType: RegularOptionType): string {
       return $localize`Dataansvarlige`;
     case 'data-processing-country-types':
       return $localize`Lande`;
+    //Role types
+    case 'it-system-usage':
+      return $localize`IT System roller`;
+    case 'it-contract':
+      return $localize`IT Kontrakt roller`;
+    case 'data-processing':
+      return $localize`Databehandlingsroller`;
+    case 'organization-unit':
+      return 'Organisationsroller';
     default:
       throw new Error(`Option type name not implemented for e${optionType}`);
   }
