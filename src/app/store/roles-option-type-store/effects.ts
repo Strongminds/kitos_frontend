@@ -9,9 +9,6 @@ import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { RoleOptionTypeActions } from './actions';
 import { selectHasValidCache } from './selectors';
-import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
-import { isRoleOptionType } from 'src/app/shared/models/options/role-option-types.model';
-import { RegularOptionTypeActions } from '../regular-option-type-store/actions';
 
 @Injectable()
 export class RoleOptionTypeEffects {
@@ -35,19 +32,6 @@ export class RoleOptionTypeEffects {
           catchError(() => of(RoleOptionTypeActions.getOptionsError(params.optionType)))
         )
       )
-    );
-  });
-
-  resetOptionsIfUpdated$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(LocalOptionTypeActions.updateOptionTypeSuccess),
-      switchMap(({ optionType }) => {
-        if (isRoleOptionType(optionType)) {
-          return of(RoleOptionTypeActions.getOptions(optionType));
-        } else {
-          return of(RegularOptionTypeActions.getOptions(optionType));
-        }
-      })
     );
   });
 }
