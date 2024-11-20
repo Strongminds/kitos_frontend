@@ -15,7 +15,6 @@
         i18n-text
         [formGroup]="editForm"
         formName="email"
-        [value]="editForm.value.email ?? ''"
         data-cy="email"
         (validatedValueChange)="validateEmail($event)"
       >
@@ -29,7 +28,6 @@
       i18n-text
       [formGroup]="editForm"
       formName="firstName"
-      [value]="editForm.value.firstName ?? ''"
       data-cy="firstName"
       (validatedValueChange)="firstNameChange($event)"
     >
@@ -39,7 +37,6 @@
       i18n-text
       [formGroup]="editForm"
       formName="lastName"
-      [value]="editForm.value.lastName ?? ''"
       data-cy="lastName"
       (validatedValueChange)="lastNameChange($event)"
     >
@@ -51,7 +48,6 @@
       pattern="^\+?[0-9]*$"
       [formGroup]="editForm"
       formName="phoneNumber"
-      [value]="editForm.value.phoneNumber ?? ''"
       data-cy="phoneNumber"
       (valueChange)="onChange({ phoneNumber: $event })"
     >
