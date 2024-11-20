@@ -1,4 +1,4 @@
-@import 'theme';
+@import "theme";
 
 .card {
   padding: $padding-medium;
@@ -7,7 +7,14 @@
   margin-bottom: $padding-medium;
 }
 
+.divider-margin {
+  margin-top: $padding-small;
+  margin-bottom: $padding-small;
+}
+
 app-button {
-  display: inline-block;
+  width: fit-content;
+  display: block;
+  margin: auto;
   margin-top: $padding-medium;
 }
