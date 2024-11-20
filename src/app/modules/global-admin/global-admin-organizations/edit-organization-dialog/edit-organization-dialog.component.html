@@ -19,17 +19,15 @@
         data-cy="org-type"
       ></app-dropdown>
       <app-textbox text="CVR nummer" i18n-text [formGroup]="formGroup" formName="cvr" data-cy="org-cvr"></app-textbox>
-      <ng-container *ngIf="countryCodes$ | async as countryCodes">
-        <app-dropdown
-       text="Udenlandsk virksomhed"
-       i18n-text
-       [formGroup]="formGroup"
-       valueField="uuid"
-       textField="name"
-       formName="foreignCountryCode"
-       [data]="countryCodes"
-     ></app-dropdown>
-     </ng-container>
+      <app-dropdown
+        text="Udenlandsk virksomhed"
+        i18n-text
+        [formGroup]="formGroup"
+        valueField="uuid"
+        textField="name"
+        formName="foreignCountryCode"
+        [data]="countryCodes$ | async"
+      ></app-dropdown>
     </app-standard-vertical-content-grid>
 
     <app-dialog-actions>

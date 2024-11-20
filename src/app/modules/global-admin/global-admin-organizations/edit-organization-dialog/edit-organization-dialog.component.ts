@@ -48,6 +48,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
 
   override ngOnInit(): void {
     super.ngOnInit();
+
     this.formGroup.patchValue({
       name: this.organization.Name,
       cvr: this.organization.Cvr,
@@ -97,7 +98,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     return (
       this.hasChange(formValue.name, org.Name) ||
       this.hasChange(formValue.cvr, org.Cvr) ||
-      this.hasChange(formValue.foreignCountryCode, adaptShallowOptionTypeFromOData(org.ForeignCountryCode)) ||
+      //this.hasChange(formValue.foreignCountryCode, adaptShallowOptionTypeFromOData(org.ForeignCountryCode)) ||
       this.hasChange(formValue.organizationType?.name, org.OrganizationType)
     );
   }
