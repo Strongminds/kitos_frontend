@@ -39,6 +39,8 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
+import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
+import { ContractId } from '../../constants/it-contracts-grid-column-constants';
 
 @Component({
   selector: 'app-grid',
@@ -78,7 +80,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private actions$: Actions,
     private store: Store,
     private dialog: MatDialog,
-    private localStorage: StatePersistingService
+    private localStorage: StatePersistingService,
+    private confirmActionService: ConfirmActionService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -213,24 +216,21 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
           throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
       }
     } else {
-      const dialogRef = this.dialog.open(ConfirmationDialogComponent);
-      const dialogInstance = dialogRef.componentInstance;
-      dialogInstance.bodyText = $localize`Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.`;
-      dialogInstance.confirmColor = 'warn';
-
-      this.subscriptions.add(
-        dialogRef.afterClosed().subscribe((result) => {
-          if (result === true) {
-            switch (this.entityType) {
-              case 'it-system':
-                this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
-                break;
-              default:
-                throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
-            }
-          }
-        })
-      );
+      switch (this.entityType) {
+        case 'it-system':
+          this.confirmActionService.confirmAction({
+            category: ConfirmActionCategory.Warning,
+            message: $localize`Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.`,
+            onConfirm: () =>
+              this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid)),
+            onReject: () => {
+              //Make the checkbox snap back
+            },
+          });
+          break;
+        default:
+          throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
+      }
     }
   }
 
@@ -303,10 +303,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       map(([columns, exportAllColumns]) => {
         return columns
           ? columns
-          .filter(includedColumnInExport)
-          .filter(
-              (column) => (exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns)))
-            )
+              .filter(includedColumnInExport)
+              .filter(
+                (column) =>
+                  exportAllColumns || (!column.hidden && (!this.isExcelOnlyColumn(column) || exportAllColumns))
+              )
           : [];
       })
     );
