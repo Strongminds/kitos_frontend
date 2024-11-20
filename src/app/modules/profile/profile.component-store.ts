@@ -33,7 +33,7 @@ export class ProfileComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([userUuid, organizationUuid]) => {
-        return this.userService.getManyUsersInternalV2GetUserByUuid({ organizationUuid, userUuid }).pipe(
+        return this.userService.getSingleUsersInternalV2GetUserByUuid({ organizationUuid, userUuid }).pipe(
           tapResponse(
             (user) => this.setUser(user as APIUserResponseDTO),
             (e) => console.error(e),
