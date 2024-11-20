@@ -1,4 +1,4 @@
-<app-dialog title="Rediger organisation" i18n-title>
+<app-dialog title="Rediger organisation" i18n-title overflow="none">
   <app-loading *ngIf="isLoading$ | async"></app-loading>
   <ng-container *ngIf="(isLoading$ | async) === false">
     <app-standard-vertical-content-grid>
