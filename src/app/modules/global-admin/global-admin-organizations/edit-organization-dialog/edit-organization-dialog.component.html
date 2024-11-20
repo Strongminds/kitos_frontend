@@ -24,8 +24,9 @@
        text="Udenlandsk virksomhed"
        i18n-text
        [formGroup]="formGroup"
-       formName="foreignCountryCode"
        valueField="uuid"
+       textField="name"
+       formName="foreignCountryCode"
        [data]="countryCodes"
      ></app-dropdown>
      </ng-container>
