@@ -140,7 +140,6 @@ import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer
 import { NumberCircleComponent } from './number-circle/number-circle.component';
 import { EditLocalOptionTypeDialogComponent } from './local-option-type-table/edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 import { LocalOptionTypeTableComponent } from './local-option-type-table/local-option-type-table.component';
-import { OrganizationUserDropdownComponent } from './organization-user-dropdown/organization-user-dropdown.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
@@ -275,7 +274,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     LocalGridComponent,
     NavigationDrawerComponent,
     IconComponent,
-    OrganizationUserDropdownComponent,
     FileInputComponent,
     GlobalOptionTypeTableComponent,
     GlobalOptionTypeDialogComponent,
@@ -415,7 +413,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NavigationDrawerComponent,
     IconComponent,
     LocalGridComponent,
-    OrganizationUserDropdownComponent,
     FileInputComponent,
     GlobalOptionTypeTableComponent,
     GlobalOptionTypeDialogComponent,
