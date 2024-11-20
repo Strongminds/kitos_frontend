@@ -14,7 +14,7 @@ enum LocalAdminOrganizationSegmentOption {
 export class LocalAdminOrganizationComponent {
   public readonly LocalAdminOrganizationSegmentOption = LocalAdminOrganizationSegmentOption;
 
-  public selectedSegment: LocalAdminOrganizationSegmentOption = LocalAdminOrganizationSegmentOption.Roles; //TODO, revert this after development
+  public selectedSegment: LocalAdminOrganizationSegmentOption = LocalAdminOrganizationSegmentOption.Organizations;
 
   public readonly segmentOptions: SegmentButtonOption<LocalAdminOrganizationSegmentOption>[] = [
     { text: $localize`Organisationer`, value: LocalAdminOrganizationSegmentOption.Organizations },
