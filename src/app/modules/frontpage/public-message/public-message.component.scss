@@ -9,12 +9,11 @@
 
 .divider-margin {
   margin-top: $padding-medium;
-  margin-bottom: $padding-small;
+  margin-bottom: $padding-medium-large;
 }
 
 app-button {
   width: fit-content;
   display: block;
   margin: auto;
-  margin-top: $padding-medium;
 }
