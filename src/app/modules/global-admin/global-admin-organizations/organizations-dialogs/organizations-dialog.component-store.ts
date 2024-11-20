@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
-import { switchMap, tap } from 'rxjs';
+import { first, switchMap, tap } from 'rxjs';
 import { ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import { GlobalAdminOptionTypeService } from 'src/app/shared/services/global-admin-option-type.service';
 
@@ -27,6 +27,7 @@ export class OrganizationsDialogComponentStore extends ComponentStore<State> {
 
   public getCountryCodes = this.effect<void>((trigger$) =>
     trigger$.pipe(
+      first(),
       tap(() => this.setLoading(true)),
       switchMap(() => {
         return this.globalAdminOptionTypesService.getGlobalOptions('organization_country-code').pipe(
