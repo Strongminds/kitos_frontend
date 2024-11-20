@@ -16,8 +16,8 @@ import {
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { GlobalAdminOrganizationsDialogBaseComponent } from '../organizations-dialogs/global-admin-organizations-dialog-base.component';
-import { OrganizationsDialogComponentStore } from '../organizations-dialogs/organizations-dialog.component-store';
+import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
+import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',

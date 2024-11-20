@@ -19,9 +19,9 @@ import {
   selectOrganizationGridLoading,
   selectOrganizationGridState,
 } from 'src/app/store/organization/selectors';
-import { DeleteOrganizationDialogComponent } from '../delete-organization-dialog/delete-organization-dialog.component';
-import { EditOrganizationDialogComponent } from '../edit-organization-dialog/edit-organization-dialog.component';
 import { CreateOrganizationDialogComponent } from '../organizations-dialogs/create-organization-dialog/create-organization-dialog.component';
+import { DeleteOrganizationDialogComponent } from '../organizations-dialogs/delete-organization-dialog/delete-organization-dialog.component';
+import { EditOrganizationDialogComponent } from '../organizations-dialogs/edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
   selector: 'app-global-admin-organizations-grid',
