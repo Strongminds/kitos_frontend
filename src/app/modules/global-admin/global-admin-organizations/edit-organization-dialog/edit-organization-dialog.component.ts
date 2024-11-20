@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
 import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
-import { ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import {
   defaultOrganizationType,
   getOrganizationType,
@@ -16,9 +15,8 @@ import {
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { CreateOrganizationDialogComponent } from '../create-organization-dialog/create-organization-dialog.component';
-import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
-import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
+import { GlobalAdminOrganizationsDialogBaseComponent } from '../organizations-dialogs/global-admin-organizations-dialog-base.component';
+import { OrganizationsDialogComponentStore } from '../organizations-dialogs/organizations-dialog.component-store';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
@@ -35,11 +33,11 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     name: new FormControl<string | undefined>(undefined, Validators.required),
     cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
-    foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
+    //  foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
   });
 
   constructor(
-    private dialogRef: MatDialogRef<CreateOrganizationDialogComponent>,
+    private dialogRef: MatDialogRef<EditOrganizationDialogComponent>,
     private store: Store,
     private actions$: Actions,
     componentStore: OrganizationsDialogComponentStore
@@ -52,7 +50,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     this.formGroup.patchValue({
       name: this.organization.Name,
       cvr: this.organization.Cvr,
-      foreignCountryCode: this.organization.ForeignCountryCode,
+      // foreignCountryCode: this.organization.ForeignCountryCode,
       organizationType: getOrganizationType(this.organization.OrganizationType) ?? defaultOrganizationType,
     });
 
@@ -87,7 +85,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       name: formValue.name ?? undefined,
       cvr: formValue.cvr ?? undefined,
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
-      foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
+      //  foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
     };
   }
 
@@ -98,7 +96,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     return (
       this.hasChange(formValue.name, org.Name) ||
       this.hasChange(formValue.cvr, org.Cvr) ||
-      this.hasChange(formValue.foreignCountryCode, org.ForeignCountryCode) ||
+      //     this.hasChange(formValue.foreignCountryCode, org.ForeignCountryCode) ||
       this.hasChange(formValue.organizationType?.name, org.OrganizationType)
     );
   }

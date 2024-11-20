@@ -10,7 +10,6 @@ import { GlobalAdminItContractComponent } from './global-admin-it-contract/globa
 import { GlobalAdminItSystemComponent } from './global-admin-it-system/global-admin-it-system.component';
 import { GlobalAdminLocalAdminsComponent } from './global-admin-local-admins/global-admin-local-admins.component';
 import { GlobalAdminOrganizationComponent } from './global-admin-organization/global-admin-organization.component';
-import { CreateOrganizationDialogComponent } from './global-admin-organizations/create-organization-dialog/create-organization-dialog.component';
 import { DeleteOrganizationDialogComponent } from './global-admin-organizations/delete-organization-dialog/delete-organization-dialog.component';
 import { InnerConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/inner-conflict-table/inner-conflict-table.component';
 import { RemovalConflictTableComponent } from './global-admin-organizations/delete-organization-dialog/removal-conflict-table/removal-conflict-table.component';
@@ -28,6 +27,7 @@ import { CreateLocalAdminDialogComponent } from './global-admin-local-admins/cre
 import { GlobalAdminsTableComponent } from './global-admin-global-admins/global-admins-table/global-admins-table.component';
 import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/global-admin-other-user-shutdown/global-admin-other-user-shutdown.component';
 import { GlobalAdminComponent } from './global-admin.component';
+import { CreateOrganizationDialogComponent } from './global-admin-organizations/organizations-dialogs/create-organization-dialog/create-organization-dialog.component';
 
 @NgModule({
   declarations: [

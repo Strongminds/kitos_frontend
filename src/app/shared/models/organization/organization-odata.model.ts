@@ -48,7 +48,7 @@ export const adaptOrganization = (value: any): OrganizationOData | undefined => 
     Name: value.Name,
     Cvr: value.Cvr ?? '',
     OrganizationType: adaptOrganizationType(value.TypeId).name,
-   ForeignCountryCode: value.ForeignCountryCode
+    ForeignCountryCode: value.ForeignCountryCode,
   };
   return adapted;
 };
