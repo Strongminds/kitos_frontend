@@ -45,8 +45,8 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
             (response: APIPublicMessagesResponseDTO) => this.updateText(response),
             (e) => {
               console.error(e);
-              this.updateLoading(false);
-            }
+            },
+            () => this.updateLoading(false)
           )
         )
       )
