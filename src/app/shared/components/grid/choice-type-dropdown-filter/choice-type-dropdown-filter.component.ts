@@ -11,6 +11,8 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { FilterDropdownOption } from '../dropdown-filter/dropdown-filter.component';
+import { GlobalRegularOptionType } from 'src/app/shared/models/options/global-regular-option-types.model';
+import { GlobalAdminOptionTypeService } from 'src/app/shared/services/global-admin-option-type.service';
 
 @Component({
   selector: 'app-choice-type-dropdown-filter',
@@ -20,7 +22,7 @@ import { FilterDropdownOption } from '../dropdown-filter/dropdown-filter.compone
 export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
-  @Input() choiceTypeName: RegularOptionType = 'it-system_business-type';
+  @Input() choiceTypeName: RegularOptionType | GlobalRegularOptionType = 'it-system_business-type';
   @Input() shouldFilterByChoiceTypeName: boolean = false;
   @Input() sortOptions?: boolean;
   @Input() entityType!: RegistrationEntityTypes;
@@ -29,16 +31,27 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
 
   public chosenOption?: FilterDropdownOption;
 
-  constructor(filterService: FilterService, private store: Store, private actions$: Actions) {
+  constructor(filterService: FilterService, private store: Store, private actions$: Actions,
+    private globalAdminOptionTypeService: GlobalAdminOptionTypeService
+  ) {
     super(filterService);
   }
 
   ngOnInit(): void {
-    this.store.dispatch(RegularOptionTypeActions.getOptions(this.choiceTypeName));
-    this.options$ = this.store.select(selectRegularOptionTypes(this.choiceTypeName)).pipe(
-      map((options) => options?.map((option) => ({ name: option.name, value: option.uuid })) ?? []),
-      map((options) => this.applySorting(options, this.sortOptions))
+    if (this.isGlobalRegularOptionType(this.choiceTypeName)) {
+      this.options$ = this.globalAdminOptionTypeService.getGlobalOptions(this.choiceTypeName).pipe(
+        map((options) => options?.map((option) => ({ name: option.name, value: option.uuid })) ?? []),
+        map((options) => this.applySorting(options, this.sortOptions))
+      );
+    }
+    else {
+      const choiceTypeName = this.choiceTypeName as RegularOptionType;
+      this.store.dispatch(RegularOptionTypeActions.getOptions(choiceTypeName));
+      this.options$ = this.store.select(selectRegularOptionTypes(choiceTypeName)).pipe(
+        map((options) => options?.map((option) => ({ name: option.name, value: option.uuid })) ?? []),
+        map((options) => this.applySorting(options, this.sortOptions))
     );
+    }
 
     this.chosenOption = this.getColumnFilter()?.value;
 
@@ -52,6 +65,10 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
       });
     };
     initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
+  }
+
+  private isGlobalRegularOptionType(s: string): s is GlobalRegularOptionType {
+    return ['organization_country-code'].includes(s);
   }
 
   private applySorting(options: FilterDropdownOption[], sortOptions: boolean | undefined): FilterDropdownOption[] {
