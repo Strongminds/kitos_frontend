@@ -51,7 +51,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     this.formGroup.patchValue({
       name: this.organization.Name,
       cvr: this.organization.Cvr,
-      foreignCountryCode: adaptShallowOptionTypeFromOData(this.organization.ForeignCountryCode),
+      foreignCountryCode: this.getInitialForeignCountryCodeValue(this.organization.ForeignCountryCode),
       organizationType: getOrganizationType(this.organization.OrganizationType) ?? defaultOrganizationType,
     });
 
@@ -90,6 +90,12 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     };
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private getInitialForeignCountryCodeValue(source: any){
+    if (source === null) return undefined;
+    return adaptShallowOptionTypeFromOData(source);
+  }
+
   private hasAnythingChanged(): boolean {
     const formValue = this.formGroup.value;
     const org = this.organization;
@@ -97,7 +103,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     return (
       this.hasChange(formValue.name, org.Name) ||
       this.hasChange(formValue.cvr, org.Cvr) ||
-      this.hasChange(formValue.foreignCountryCode, adaptShallowOptionTypeFromOData(org.ForeignCountryCode)) ||
+      this.hasChange(formValue.foreignCountryCode, this.getInitialForeignCountryCodeValue(org.ForeignCountryCode)) ||
       this.hasChange(formValue.organizationType?.name, org.OrganizationType)
     );
   }
