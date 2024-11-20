@@ -4,7 +4,7 @@ export interface OrganizationOData {
   Name: string;
   Cvr: string | undefined;
   OrganizationType: string;
- ForeignCountryCode: { Name: string };
+  ForeignCountryCode: { Name: string; Uuid: string; Description: string };
 }
 
 export interface OrganizationType {
