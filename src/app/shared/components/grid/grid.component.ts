@@ -37,10 +37,8 @@ import { GridState } from '../../models/grid-state.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { StatePersistingService } from '../../services/state-persisting.service';
-import { ConfirmationDialogComponent } from '../dialogs/confirmation-dialog/confirmation-dialog.component';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
-import { ContractId } from '../../constants/it-contracts-grid-column-constants';
 
 @Component({
   selector: 'app-grid',
