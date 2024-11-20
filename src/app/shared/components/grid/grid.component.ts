@@ -206,7 +206,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (!columnUuid) return;
     if (value === true) {
       switch (this.entityType) {
-        case 'it-system-usage':
+        case 'it-system':
           this.store.dispatch(ITSystemUsageActions.createItSystemUsage(columnUuid));
           break;
         default:
@@ -222,7 +222,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         dialogRef.afterClosed().subscribe((result) => {
           if (result === true) {
             switch (this.entityType) {
-              case 'it-system-usage':
+              case 'it-system':
                 this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
                 break;
               default:
