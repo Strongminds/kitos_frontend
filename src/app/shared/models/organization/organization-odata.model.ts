@@ -1,12 +1,10 @@
-import { adaptShallowOptionType, ShallowOptionType } from '../options/option-type.model';
-
 export interface OrganizationOData {
   id: string;
   Uuid: string;
   Name: string;
   Cvr: string | undefined;
   OrganizationType: string;
-  ForeignCountryCode: ShallowOptionType | undefined;
+ ForeignCountryCode: { Name: string };
 }
 
 export interface OrganizationType {
@@ -50,22 +48,13 @@ export const adaptOrganization = (value: any): OrganizationOData | undefined => 
     Name: value.Name,
     Cvr: value.Cvr ?? '',
     OrganizationType: adaptOrganizationType(value.TypeId).name,
-    ForeignCountryCode: getForeignCountryCode(value),
+   ForeignCountryCode: value.ForeignCountryCode
   };
   return adapted;
 };
 
 export function getOrganizationType(name: string): OrganizationType | undefined {
   return organizationTypeOptions.find((type) => type.name === name);
-}
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getForeignCountryCode(value: any) {
-  try {
-    return adaptShallowOptionType(value.ForeignCountryCode);
-  } catch (_) {
-    return undefined;
-  }
 }
 
 function adaptOrganizationType(typeId: number): OrganizationType {
