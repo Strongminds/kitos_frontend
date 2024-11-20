@@ -1,6 +1,6 @@
 <div class="card">
-  <p [innerHTML]="content"></p>
-
+  <p *ngIf="content" [innerHTML]="content"></p>
+  <app-empty-state [text]="'Ingen besked at vise'" [context]="'emptyUpdate'" i18n-text *ngIf="!content"></app-empty-state>
   <app-divider />
   <app-button *ngIf="isUserGlobalAdmin$ | async" (buttonClick)="onEdit()" data-cy="edit-public-message-button" i18n>
     Rediger
