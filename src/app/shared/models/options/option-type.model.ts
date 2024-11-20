@@ -14,10 +14,10 @@ export type ShallowOptionType = {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function adaptShallowOptionType(source: any): ShallowOptionType {
-  if (!source.uuid) throw new Error('No uuid found on source when adapting shallow option type');
+  if (!source.Uuid) throw new Error('No uuid found on source when adapting shallow option type');
   return {
-    uuid: source.uuid,
-    name: source.name,
-    description: source.description,
+    uuid: source.Uuid,
+    name: source.Name,
+    description: source.Description,
   };
 }
