@@ -26,7 +26,7 @@ describe('global-admin-organizations', () => {
       req.reply({ statusCode: 200, body: {} });
     }).as('editOrganization');
 
-    cy.getByDataCy('org-cvr').clear().type('87654321');
+    cy.replaceTextByDataCy('org-cvr', '87654321');
     cy.dropdownByCy('org-type', 'Interessefællesskab', true);
     cy.dropdownByCy('foreign-country-code', 'NO', true);
     cy.replaceTextByDataCy('org-name', 'Test Organization2');
@@ -48,10 +48,10 @@ describe('global-admin-organizations', () => {
     }).as('createOrganization');
 
     cy.getByDataCy('create-organization-button').should('be.visible').click({ scrollBehavior: 'center' });
-    cy.getByDataCy('org-name').type('Test Organization');
+    cy.replaceTextByDataCy('org-name', 'Test Organization');
     cy.dropdownByCy('org-type', 'Virksomhed', true);
     cy.dropdownByCy('foreign-country-code', 'NO', true);
-    cy.getByDataCy('org-cvr').type('12345678');
+    cy.replaceTextByDataCy('org-cvr', '12345678');
     cy.getByDataCy('create-org-dialog-button').click();
 
     cy.wait('@createOrganization');
