@@ -155,6 +155,7 @@ import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog
 import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
+import { ProxyCheckboxComponent } from './proxy-checkbox/proxy-checkbox.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -284,6 +285,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OptionTypeDropdownComponent,
     RichTextEditorComponent,
     LocalOptionGridComponent,
+    ProxyCheckboxComponent,
   ],
   imports: [
     CommonModule,
@@ -423,6 +425,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OptionTypeDropdownComponent,
     RichTextEditorComponent,
     LocalOptionGridComponent,
+    ProxyCheckboxComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

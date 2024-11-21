@@ -194,12 +194,13 @@
 
       <ng-template *ngIf="column.style === 'checkbox'" kendoGridCellTemplate let-dataItem>
         <div class="column-center-content">
-          <app-checkbox
+          <app-proxy-checkbox
             *ngIf="column.idField"
-            [value]="searchProperty(dataItem, column.field)"
+            [checked]="searchProperty(dataItem, column.field)"
             [disabled]="column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== true : false"
-            (valueChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
-          ></app-checkbox>
+            [entityUuid]="searchProperty(dataItem, column.idField)"
+            (attemptChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
+          ></app-proxy-checkbox>
         </div>
       </ng-template>
 
@@ -238,10 +239,18 @@
       >
         <div class="action-buttons-container">
           <ng-container *ngFor="let button of column.extraData">
-            <app-icon-button *ngIf="button.type === 'edit' && modifyPermission" (click)="onModifyClick(dataItem)" data-cy="grid-edit-button">
+            <app-icon-button
+              *ngIf="button.type === 'edit' && modifyPermission"
+              (click)="onModifyClick(dataItem)"
+              data-cy="grid-edit-button"
+            >
               <app-pencil-icon></app-pencil-icon>
             </app-icon-button>
-            <app-icon-button *ngIf="button.type === 'delete' && deletePermission" (click)="onDeleteClick(dataItem)" data-cy="grid-delete-button">
+            <app-icon-button
+              *ngIf="button.type === 'delete' && deletePermission"
+              (click)="onDeleteClick(dataItem)"
+              data-cy="grid-delete-button"
+            >
               <app-trashcan-icon></app-trashcan-icon>
             </app-icon-button>
           </ng-container>
