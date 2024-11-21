@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
@@ -7,8 +6,8 @@ import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-optio
 import { BaseComponent } from '../../base/base.component';
 import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
 import { isRoleOptionType } from '../../models/options/role-option-types.model';
-import { GlobalOptionTypeDialogComponent } from './global-option-type-dialog/global-option-type-dialog.component';
 import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
+import { DialogOpenerService } from '../../services/dialog-opener.service';
 
 @Component({
   selector: 'app-global-option-type-view',
@@ -26,9 +25,9 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
 
   constructor(
     private componentStore: GlobalOptionTypeTableComponentStore,
-    private dialog: MatDialog,
     private actions$: Actions,
-    private store: Store
+    private store: Store,
+    private dialogOpener: DialogOpenerService
   ) {
     super();
   }
@@ -77,22 +76,9 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
     );
   }
 
-  public onEdit(optionTypeItem: GlobalAdminOptionTypeItem): void {
-    const componentInstance = this.openDialog();
-    componentInstance.action = 'edit';
-    componentInstance.optionTypeItem = optionTypeItem;
-  }
-
   public onCreate() {
-    const componentInstance = this.openDialog();
+    const componentInstance = this.dialogOpener.openGlobalOptionTypeDialog(this.optionType);
     componentInstance.action = 'create';
-  }
-
-  private openDialog() {
-    const dialogRef = this.dialog.open(GlobalOptionTypeDialogComponent);
-    const componentInstance = dialogRef.componentInstance;
-    componentInstance.optionType = this.optionType;
-    return componentInstance;
   }
 
   public onToggleEnabled(optionTypeItem: GlobalAdminOptionTypeItem): void {

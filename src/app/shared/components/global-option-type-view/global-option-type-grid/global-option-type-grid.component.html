@@ -1,1 +1,9 @@
-<p>global-option-type-grid works!</p>
+<app-local-grid
+  [loading]="loading"
+  [data]="optionTypeItems"
+  [columns]="filteredGridColumns"
+  [modifyPermission]="true"
+  [deletePermission]="true"
+  [fitSizeToContent]="true"
+  (modifyEvent)="onEdit($event)"
+></app-local-grid>

@@ -3,11 +3,23 @@
 <app-card>
   <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RegularOptionTypes">
     <app-standard-vertical-content-grid>
-      <app-global-option-type-view optionType="it-system_business-type" title="Forretningstyper" i18n-title></app-global-option-type-view>
+      <app-global-option-type-view
+        optionType="it-system_business-type"
+        title="Forretningstyper"
+        i18n-title
+      ></app-global-option-type-view>
 
-      <app-global-option-type-view optionType="it-system_usage-archive-type" title="Arkiveringstyper" i18n-title></app-global-option-type-view>
+      <app-global-option-type-view
+        optionType="it-system_usage-archive-type"
+        title="Arkiveringstyper"
+        i18n-title
+      ></app-global-option-type-view>
 
-      <app-global-option-type-view optionType="it-system_usage-archive-location-type" title="Arkiveringssted" i18n-title>
+      <app-global-option-type-view
+        optionType="it-system_usage-archive-location-type"
+        title="Arkiveringssted"
+        i18n-title
+      >
       </app-global-option-type-view>
 
       <app-global-option-type-view
@@ -41,7 +53,7 @@
         i18n-title
       >
       </app-global-option-type-view>
-      
+
       <app-global-option-type-view
         optionType="it-system_usage-data-classification-type"
         title="Klassifikation af data i systemet"
@@ -53,12 +65,13 @@
 
   <ng-container *ngIf="selectedSegment === GlobalAdminModuleSegmentOptionType.RoleOptionTypes">
     <app-standard-vertical-content-grid>
-      <app-global-option-type-view optionType="it-system-usage"
-      title="IT System roller"
-      i18n-title
-      [disableAccordion]="true"
-      [expandedByDefault]="true"
-      [showWriteAccess]="true"
+      <app-global-option-type-view
+        optionType="it-system-usage"
+        title="IT System roller"
+        i18n-title
+        [disableAccordion]="true"
+        [expandedByDefault]="true"
+        [showWriteAccess]="true"
       >
       </app-global-option-type-view>
     </app-standard-vertical-content-grid>
