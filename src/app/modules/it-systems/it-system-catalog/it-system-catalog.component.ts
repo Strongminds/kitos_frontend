@@ -17,6 +17,7 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectITSystemHasCreateCollectionPermission,
@@ -37,6 +38,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   public readonly gridColumns$ = this.store.select(selectSystemGridColumns);
 
   public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
+  public readonly hasCreateUsagePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
 
   private readonly systemSectionName = CATALOG_SECTION_NAME;
   public readonly defaultGridColumns: GridColumn[] = [
@@ -188,6 +190,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
   ngOnInit(): void {
     this.store.dispatch(ITSystemActions.getITSystemCollectionPermissions());
+    this.store.dispatch(ITSystemUsageActions.getITSystemUsageCollectionPermissions());
 
     const existingColumns = this.gridColumnStorageService.getColumns(CATALOG_COLUMNS_ID, this.defaultGridColumns);
     if (existingColumns) {

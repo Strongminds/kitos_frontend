@@ -54,6 +54,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Input() state?: GridState | null;
   @Input() exportToExcelName?: string | null;
 
+  @Input() createPermission?: boolean | null;
   @Input() modifyPermission?: boolean | null;
   @Input() deletePermission?: boolean | null;
 
