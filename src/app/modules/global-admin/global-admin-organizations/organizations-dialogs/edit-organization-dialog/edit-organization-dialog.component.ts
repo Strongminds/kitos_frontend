@@ -88,17 +88,8 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       cvr: formValue.cvr ?? undefined,
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
       foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
-      updateForeignCountryCode: this.shouldUpdateForeignCountryCode(),
+      updateForeignCountryCode: this.foreignCountryCodeHasChange(),
     };
-  }
-
-  private shouldUpdateForeignCountryCode(): boolean {
-    const formValue = this.formGroup.value;
-    return (
-      (formValue.foreignCountryCode === undefined && this.organization.ForeignCountryCode !== null) ||
-      (formValue.foreignCountryCode !== undefined && this.organization.ForeignCountryCode === null) ||
-      formValue.foreignCountryCode?.uuid !== this.organization.ForeignCountryCode.Uuid
-    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -111,12 +102,20 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     const formValue = this.formGroup.value;
     const org = this.organization;
 
+    console.log(formValue.foreignCountryCode)
+    console.log(this.getInitialForeignCountryCodeValue(org.ForeignCountryCode))
     return (
       this.hasChange(formValue.name, org.Name) ||
       this.hasChange(formValue.cvr, org.Cvr) ||
-      this.hasChange(formValue.foreignCountryCode, this.getInitialForeignCountryCodeValue(org.ForeignCountryCode)) ||
+      this.foreignCountryCodeHasChange() ||
       this.hasChange(formValue.organizationType?.name, org.OrganizationType)
     );
+  }
+
+  private foreignCountryCodeHasChange(): boolean {
+    const initialValue = this.getInitialForeignCountryCodeValue(this.organization.ForeignCountryCode);
+    const currentvalue = this.formGroup.value.foreignCountryCode;
+    return !((initialValue === undefined && currentvalue === undefined) || (initialValue?.uuid === currentvalue?.uuid));
   }
 
   private hasChange<T>(formValue: T | null | undefined, orginialValue: T | undefined): boolean {
