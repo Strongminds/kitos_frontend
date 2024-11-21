@@ -82,6 +82,8 @@ export class GlobalOptionTypeGridComponent implements OnInit {
           return { ...column, hidden: !this.showWriteAccess };
         case 'description':
           return { ...column, hidden: !this.showDescription };
+        case 'priority':
+          return { ...column, extraData: this.optionType };
         default:
           return column;
       }

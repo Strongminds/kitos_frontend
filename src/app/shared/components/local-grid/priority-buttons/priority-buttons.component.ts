@@ -35,6 +35,7 @@ export class PriorityButtonsComponent {
   }
 
   private onChangePriority(optionUuid: string, newPriority: number): void {
+    console.log('Type', this.optionType);
     this.store.dispatch(
       GlobalOptionTypeActions.updateOptionType(this.optionType, optionUuid, { priority: newPriority })
     );

@@ -97,11 +97,11 @@
         </div>
       </ng-template>
 
-      <ng-template *ngIf="column.style === 'priority-buttons' && optionType" kendoGridCellTemplate let-dataItem>
+      <ng-template *ngIf="column.style === 'priority-buttons'" kendoGridCellTemplate let-dataItem>
         <div>
           <app-priority-buttons
             [optionTypeItem]="dataItem"
-            [optionType]="optionType"
+            [optionType]="column.extraData"
             [priority]="searchProperty(dataItem, column.field)"
           ></app-priority-buttons>
         </div>
