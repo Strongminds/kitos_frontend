@@ -1,20 +1,22 @@
+import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
+import { toODataString } from '@progress/kendo-data-query';
+import { compact } from 'lodash';
+import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
+import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
 import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { adaptOrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
+import { adaptOrganization } from 'src/app/shared/models/organization/organization.model';
+import { mapUIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationActions } from './actions';
-import { HttpClient } from '@angular/common/http';
-import { adaptOrganization } from 'src/app/shared/models/organization/organization.model';
-import { OData } from 'src/app/shared/models/odata.model';
-import { compact } from 'lodash';
-import { toODataString } from '@progress/kendo-data-query';
-import { mapUIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
+import { selectHasValidUIRootConfigCache } from './selectors';
 
 @Injectable()
 export class OrganizationEffects {
@@ -156,8 +158,12 @@ export class OrganizationEffects {
   getUIRootConfig$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationActions.getUIRootConfig),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([, organizationUuid]) =>
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectHasValidUIRootConfigCache()),
+      ]),
+      filter(([_, __, validCache]) => !validCache),
+      switchMap(([_, organizationUuid]) =>
         this.organizationInternalService.getSingleOrganizationsInternalV2GetUIRootConfig({ organizationUuid }).pipe(
           map((responseDto) => {
             const uiRootConfig = mapUIRootConfig(responseDto);
