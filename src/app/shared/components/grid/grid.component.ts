@@ -77,7 +77,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   constructor(
     private actions$: Actions,
     private store: Store,
-    private dialog: MatDialog,
     private localStorage: StatePersistingService,
     private confirmActionService: ConfirmActionService
   ) {
