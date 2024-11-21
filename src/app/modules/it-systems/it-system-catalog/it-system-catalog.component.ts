@@ -18,6 +18,7 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectITSystemUsageHasCreateCollectionPermission } from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectITSystemHasCreateCollectionPermission,
@@ -38,7 +39,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   public readonly gridColumns$ = this.store.select(selectSystemGridColumns);
 
   public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
-  public readonly hasCreateUsagePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
+  public readonly hasCreateUsagePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   private readonly systemSectionName = CATALOG_SECTION_NAME;
   public readonly defaultGridColumns: GridColumn[] = [
