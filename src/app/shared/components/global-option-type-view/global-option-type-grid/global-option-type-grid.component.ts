@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import {
@@ -12,10 +12,10 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
   templateUrl: './global-option-type-grid.component.html',
   styleUrl: './global-option-type-grid.component.scss',
 })
-export class GlobalOptionTypeGridComponent implements OnInit {
+export class GlobalOptionTypeGridComponent implements OnChanges {
   @Input() loading: boolean = false;
   @Input() optionType!: GlobalAdminOptionType;
-  @Input() optionTypeItems: GlobalAdminOptionTypeItem[] = [];
+  @Input() optionTypeItems!: GlobalAdminOptionTypeItem[];
 
   @Input() showWriteAccess!: boolean;
   @Input() showDescription!: boolean;
@@ -75,15 +75,25 @@ export class GlobalOptionTypeGridComponent implements OnInit {
 
   constructor(private dialogOpenerService: DialogOpenerService) {}
 
-  public ngOnInit(): void {
+  public ngOnChanges(changes: SimpleChanges): void {
+    if (changes['optionTypeItems'] && this.optionTypeItems) {
+      this.updateFilteredGridColumns();
+    }
+  }
+
+  private updateFilteredGridColumns(): void {
     this.filteredGridColumns = this.gridColumns.map((column) => {
       switch (column.field) {
         case 'writeAccess':
           return { ...column, hidden: !this.showWriteAccess };
         case 'description':
           return { ...column, hidden: !this.showDescription };
-        case 'priority':
-          return { ...column, extraData: this.optionType };
+        case 'priority': {
+          const priorities = this.optionTypeItems.map((item) => item.priority);
+          const minPriority = Math.min(...priorities);
+          const maxPriority = Math.max(...priorities);
+          return { ...column, extraData: { optionType: this.optionType, minPriority, maxPriority } };
+        }
         default:
           return column;
       }

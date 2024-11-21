@@ -15,6 +15,8 @@ export class PriorityButtonsComponent {
   @Input() priority: number = 0;
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;
   @Input() optionType!: GlobalAdminOptionType;
+  @Input() maxPriority!: number;
+  @Input() minPriority!: number;
 
   constructor(private store: Store) {}
 
@@ -27,11 +29,11 @@ export class PriorityButtonsComponent {
   }
 
   public isLowestPriority(): boolean {
-    return false; //TODO: Implement
+    return this.priority === this.minPriority;
   }
 
   public isHighestPriority(): boolean {
-    return false; //TODO: Implement
+    return this.priority === this.maxPriority;
   }
 
   private onChangePriority(optionUuid: string, newPriority: number): void {

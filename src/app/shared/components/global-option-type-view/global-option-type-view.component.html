@@ -10,8 +10,8 @@
         Opret {{ getCreateButtonType() }}</app-button
       >
     </div>
-    <app-loading *ngIf="isLoading$ | async"></app-loading>
     <app-global-option-type-grid
+      [loading]="(isLoading$ | async) !== false"
       [optionType]="optionType"
       [optionTypeItems]="optionTypeItems"
       [showDescription]="showDescription"

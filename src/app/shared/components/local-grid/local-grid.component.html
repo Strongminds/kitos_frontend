@@ -101,7 +101,9 @@
         <div>
           <app-priority-buttons
             [optionTypeItem]="dataItem"
-            [optionType]="column.extraData"
+            [optionType]="column.extraData.optionType"
+            [minPriority]="column.extraData.minPriority"
+            [maxPriority]="column.extraData.maxPriority"
             [priority]="searchProperty(dataItem, column.field)"
           ></app-priority-buttons>
         </div>
