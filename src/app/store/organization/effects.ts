@@ -32,15 +32,17 @@ export class OrganizationEffects {
       switchMap(({ odataString }) => {
         const fixedOdataString = applyQueryFixes(odataString);
 
-        return this.httpClient.get<OData>(`/odata/Organizations?${fixedOdataString}&$expand=ForeignCountryCode&$count=true`).pipe(
-          map((data) =>
-            OrganizationActions.getOrganizationsSuccess(
-              compact(data.value.map(adaptOrganization)),
-              data['@odata.count']
-            )
-          ),
-          catchError(() => of(OrganizationActions.getOrganizationsError()))
-        );
+        return this.httpClient
+          .get<OData>(`/odata/Organizations?${fixedOdataString}&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true`)
+          .pipe(
+            map((data) =>
+              OrganizationActions.getOrganizationsSuccess(
+                compact(data.value.map(adaptOrganization)),
+                data['@odata.count']
+              )
+            ),
+            catchError(() => of(OrganizationActions.getOrganizationsError()))
+          );
       })
     );
   });
