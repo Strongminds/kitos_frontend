@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import {
@@ -67,7 +67,8 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
       isSticky: true,
       noFilter: true,
       extraData: [{ type: 'edit' }, { type: 'delete' }] as GridActionColumn[],
-      width: 50,
+      width: 100,
+      minResizableWidth: 100,
     },
   ];
 
