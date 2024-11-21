@@ -6,6 +6,9 @@ import {
   GlobalAdminOptionTypeItem,
 } from 'src/app/shared/models/options/global-admin-option-type.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
+import { BooleanChange } from '../../local-grid/local-grid.component';
+import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-global-option-type-grid',
@@ -52,7 +55,7 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
     },
     {
       field: 'writeAccess',
-      title: $localize`Skriveadgang`,
+      title: $localize`Skriv`,
       hidden: false,
       noFilter: true,
       style: 'boolean',
@@ -63,13 +66,13 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
       hidden: false,
     },
     {
-      field: 'Actions',
+      field: 'enabled',
       title: ' ',
       hidden: false,
       style: 'action-buttons',
       isSticky: true,
       noFilter: true,
-      extraData: [{ type: 'edit' }, { type: 'delete' }] as GridActionColumn[],
+      extraData: [{ type: 'edit' }, { type: 'toggle' }] as GridActionColumn[],
       width: 100,
       minResizableWidth: 100,
     },
@@ -77,7 +80,7 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
 
   public filteredGridColumns!: GridColumn[];
 
-  constructor(private dialogOpenerService: DialogOpenerService) {}
+  constructor(private dialogOpenerService: DialogOpenerService, private store: Store) {}
 
   public ngOnChanges(changes: SimpleChanges): void {
     if (changes['optionTypeItems'] && this.optionTypeItems) {
@@ -108,5 +111,10 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
     const componentInstance = this.dialogOpenerService.openGlobalOptionTypeDialog(this.optionType);
     componentInstance.action = 'edit';
     componentInstance.optionTypeItem = optionTypeItem;
+  }
+
+  public onToggleChange(toggleEvent: BooleanChange<GlobalAdminOptionTypeItem>): void {
+    const { value, item } = toggleEvent;
+    this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, item.uuid, { isEnabled: value }));
   }
 }

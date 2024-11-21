@@ -126,6 +126,12 @@
             >
               <app-trashcan-icon></app-trashcan-icon>
             </app-icon-button>
+            <app-toggle-button
+              *ngIf="button.type === 'toggle'"
+              (valueChange)="onToggleChange($event, dataItem)"
+              [value]="searchProperty(dataItem, column.field)"
+            >
+            </app-toggle-button>
           </ng-container>
         </div>
       </ng-template>

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { filter, map } from 'rxjs';
+import { filter } from 'rxjs';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { BaseComponent } from '../../base/base.component';
 import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
@@ -51,39 +51,9 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
     );
   }
 
-  public isHighestPriority(option: GlobalAdminOptionTypeItem) {
-    return this.comparePriority(option, (max, curr) => (curr.priority > max ? curr.priority : max));
-  }
-
-  public isLowestPriority(option: GlobalAdminOptionTypeItem) {
-    return this.comparePriority(option, (min, curr) => (curr.priority < min ? curr.priority : min));
-  }
-
-  private comparePriority(
-    option: GlobalAdminOptionTypeItem,
-    comparator: (
-      previousValue: number,
-      currentValue: GlobalAdminOptionTypeItem,
-      currentIndex: number,
-      array: GlobalAdminOptionTypeItem[]
-    ) => number
-  ) {
-    return this.optionTypeItems$.pipe(
-      map((optionTypeItems) => {
-        const boundary = optionTypeItems.reduce(comparator, 1);
-        return option.priority === boundary;
-      })
-    );
-  }
-
   public onCreate() {
     const componentInstance = this.dialogOpener.openGlobalOptionTypeDialog(this.optionType);
     componentInstance.action = 'create';
-  }
-
-  public onToggleEnabled(optionTypeItem: GlobalAdminOptionTypeItem): void {
-    const isEnabled = !optionTypeItem.enabled;
-    this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, optionTypeItem.uuid, { isEnabled }));
   }
 
   public onIncreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
