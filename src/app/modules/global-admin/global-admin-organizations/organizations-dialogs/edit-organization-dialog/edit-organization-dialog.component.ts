@@ -101,9 +101,6 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
   private hasAnythingChanged(): boolean {
     const formValue = this.formGroup.value;
     const org = this.organization;
-
-    console.log(formValue.foreignCountryCode)
-    console.log(this.getInitialForeignCountryCodeValue(org.ForeignCountryCode))
     return (
       this.hasChange(formValue.name, org.Name) ||
       this.hasChange(formValue.cvr, org.Cvr) ||

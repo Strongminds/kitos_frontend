@@ -15,6 +15,29 @@ describe('global-admin-organizations', () => {
     cy.setup(true, 'global-admin/organizations');
   });
 
+  it('Can edit organization', () => {
+    cy.getByDataCy('grid-edit-button').first().click();
+
+    cy.intercept('PATCH', 'api/v2/internal/organizations/*/patch', (req) => {
+      expect(req.body.name).to.eq('Test Organization2');
+      expect(req.body.type).to.eq('CommunityOfInterest');
+      expect(req.body.cvr).to.eq('87654321');
+      expect(req.body.foreignCountryCodeUuid).to.eq('0a8c896b-d540-4504-b15a-ae4f5f1e490n');
+      req.reply({ statusCode: 200, body: {} });
+    }).as('editOrganization');
+
+    cy.getByDataCy('org-cvr').clear().type('87654321');
+    cy.dropdownByCy('org-type', 'Interessefællesskab', true);
+    cy.dropdownByCy('foreign-country-code', 'NO', true);
+    cy.replaceTextByDataCy('org-name', 'Test Organization2');
+    cy.getByDataCy('org-cvr').click();
+
+    cy.getByDataCy('edit-org-dialog-button').click();
+
+    cy.wait('@editOrganization');
+    cy.get('app-popup-message').should('exist');
+  });
+
   it('Can create organization', () => {
     cy.intercept('POST', 'api/v2/internal/organizations/create', (req) => {
       expect(req.body.name).to.eq('Test Organization');
@@ -32,27 +55,6 @@ describe('global-admin-organizations', () => {
     cy.getByDataCy('create-org-dialog-button').click();
 
     cy.wait('@createOrganization');
-    cy.get('app-popup-message').should('exist');
-  });
-
-  it('Can edit organization', () => {
-    cy.getByDataCy('grid-edit-button').first().click();
-
-    cy.intercept('PATCH', 'api/v2/internal/organizations/*/patch', (req) => {
-      expect(req.body.name).to.eq('Test Organization2');
-      expect(req.body.type).to.eq('CommunityOfInterest');
-      expect(req.body.cvr).to.eq('87654321');
-      expect(req.body.foreignCountryCodeUuid).to.eq('0a8c896b-d540-4504-b15a-ae4f5f1e490n');
-      req.reply({ statusCode: 200, body: {} });
-    }).as('editOrganization');
-
-    cy.getByDataCy('org-name').clear().type('Test Organization2');
-    cy.dropdownByCy('org-type', 'Interessefællesskab', true);
-    cy.getByDataCy('org-cvr').clear().type('87654321');
-    cy.dropdownByCy('foreign-country-code', 'NO', true);
-    cy.getByDataCy('edit-org-dialog-button').click();
-
-    cy.wait('@editOrganization');
     cy.get('app-popup-message').should('exist');
   });
 
