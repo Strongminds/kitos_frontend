@@ -26,6 +26,7 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
       title: $localize`Tilgængelig`,
       hidden: false,
       noFilter: true,
+      width: 100,
       style: 'boolean',
     },
     {
@@ -33,6 +34,7 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
       title: $localize`Obligatorisk`,
       hidden: false,
       noFilter: true,
+      width: 100,
       style: 'boolean',
     },
     {
@@ -40,6 +42,7 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
       title: $localize`Prioritet`,
       hidden: false,
       noFilter: true,
+      width: 100,
       style: 'priority-buttons',
     },
     {
