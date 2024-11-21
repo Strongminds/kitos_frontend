@@ -88,7 +88,17 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       cvr: formValue.cvr ?? undefined,
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
       foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
+      updateForeignCountryCode: this.shouldUpdateForeignCountryCode(),
     };
+  }
+
+  private shouldUpdateForeignCountryCode(): boolean {
+    const formValue = this.formGroup.value;
+    return (
+      (formValue.foreignCountryCode === undefined && this.organization.ForeignCountryCode !== null) ||
+      (formValue.foreignCountryCode !== undefined && this.organization.ForeignCountryCode === null) ||
+      formValue.foreignCountryCode?.uuid !== this.organization.ForeignCountryCode.Uuid
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
