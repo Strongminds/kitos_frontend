@@ -46,7 +46,7 @@ export class OrganizationsGridComponent extends BaseOverviewComponent implements
       hidden: false,
     },
     {
-      field: 'ForeignBusiness',
+      field: 'ForeignCountryCode.Name',
       title: $localize`Udenlandsk virksomhed`,
       section: this.sectionName,
       hidden: false,
