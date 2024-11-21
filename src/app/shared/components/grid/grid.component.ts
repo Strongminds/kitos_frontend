@@ -219,9 +219,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
             message: $localize`Er du sikker på at du vil fjerne den lokale anvendelse af systemet? Dette sletter ikke systemet, men vil slette alle lokale detaljer vedrørende anvendelsen.`,
             onConfirm: () =>
               this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid)),
-            onReject: () => {
-              //Make the checkbox snap back
-            },
           });
           break;
         default:
