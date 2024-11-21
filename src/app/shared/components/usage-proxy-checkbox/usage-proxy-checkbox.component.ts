@@ -42,6 +42,9 @@ export class UsageProxyCheckboxComponent implements OnInit {
   }
 
   public onClick(event: MouseEvent) {
+    if (this.disabled) {
+      return;
+    }
     event.preventDefault();
     event.stopPropagation();
 

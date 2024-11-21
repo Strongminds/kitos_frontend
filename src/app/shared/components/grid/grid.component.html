@@ -197,7 +197,7 @@
           <app-usage-proxy-checkbox
             *ngIf="column.idField"
             [checked]="searchProperty(dataItem, column.field)"
-            [disabled]="column.permissionsField ? searchProperty(dataItem, column.permissionsField) !== true : false"
+            [disabled]="modifyPermission !== true"
             [entityUuid]="searchProperty(dataItem, column.idField)"
             (attemptChange)="checkboxChange($event, searchProperty(dataItem, column.idField))"
           ></app-usage-proxy-checkbox>
