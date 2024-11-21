@@ -5,8 +5,13 @@ describe('global-admin-organizations', () => {
     cy.requireIntercept();
 
     cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
-    cy.intercept('/api/v2/internal/organizations/global-option-types/country-codes', { fixture: './global-admin/country-codes.json' });
-    cy.intercept('/odata/Organizations?$skip=0&$top=100&$expand=ForeignCountryCode&$count=true', { fixture: './global-admin/organizations.json' });
+    cy.intercept('/api/v2/internal/organizations/global-option-types/country-codes', {
+      fixture: './global-admin/country-codes.json',
+    });
+    cy.intercept(
+      '/odata/Organizations?$skip=0&$top=100&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true',
+      { fixture: './global-admin/organizations.json' }
+    );
     cy.setup(true, 'global-admin/organizations');
   });
 
