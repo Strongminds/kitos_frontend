@@ -4,11 +4,11 @@ import { filter } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
-  selector: 'app-proxy-checkbox',
-  templateUrl: './proxy-checkbox.component.html',
-  styleUrls: ['./proxy-checkbox.component.scss'],
+  selector: 'app-usage-proxy-checkbox',
+  templateUrl: './usage-proxy-checkbox.component.html',
+  styleUrls: ['./usage-proxy-checkbox.component.scss'],
 })
-export class ProxyCheckboxComponent implements OnInit {
+export class UsageProxyCheckboxComponent implements OnInit {
   @Input() checked: boolean = false;
   @Input() disabled: boolean = false;
   @Input() entityUuid!: string;
