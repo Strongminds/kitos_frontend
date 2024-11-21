@@ -146,8 +146,8 @@ import { RoleTableContainerComponent } from './role-table/role-table-container/r
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { GlobalOptionTypeTableComponent } from './global-option-type-table/global-option-type-table.component';
-import { GlobalOptionTypeDialogComponent } from './global-option-type-table/global-option-type-dialog/global-option-type-dialog.component';
+import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
+import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { OrganizationDropdownComponent } from './organization-dropdown/organization-dropdown.component';
 import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
@@ -275,7 +275,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NavigationDrawerComponent,
     IconComponent,
     FileInputComponent,
-    GlobalOptionTypeTableComponent,
+    GlobalOptionTypeViewComponent,
     GlobalOptionTypeDialogComponent,
     UserDropdownComponent,
     OrganizationDropdownComponent,
@@ -414,7 +414,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     IconComponent,
     LocalGridComponent,
     FileInputComponent,
-    GlobalOptionTypeTableComponent,
+    GlobalOptionTypeViewComponent,
     GlobalOptionTypeDialogComponent,
     UserDropdownComponent,
     OrganizationDropdownComponent,

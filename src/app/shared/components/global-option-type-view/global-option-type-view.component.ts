@@ -11,12 +11,12 @@ import { GlobalOptionTypeDialogComponent } from './global-option-type-dialog/glo
 import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 
 @Component({
-  selector: 'app-global-option-type-table',
-  templateUrl: './global-option-type-table.component.html',
-  styleUrl: './global-option-type-table.component.scss',
+  selector: 'app-global-option-type-view',
+  templateUrl: './global-option-type-view.component.html',
+  styleUrl: './global-option-type-view.component.scss',
   providers: [GlobalOptionTypeTableComponentStore],
 })
-export class GlobalOptionTypeTableComponent extends BaseComponent implements OnInit {
+export class GlobalOptionTypeViewComponent extends BaseComponent implements OnInit {
   @Input() optionType!: GlobalAdminOptionType;
   @Input() title: string = '';
   @Input() showDescription: boolean = true;
