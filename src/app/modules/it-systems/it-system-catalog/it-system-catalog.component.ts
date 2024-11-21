@@ -212,6 +212,10 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
+
+    this.hasCreateUsagePermission$.subscribe((permission) => {
+      console.log('Usage permission:', permission);
+    });
   }
 
   public stateChange(gridState: GridState) {
