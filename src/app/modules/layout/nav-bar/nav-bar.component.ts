@@ -45,7 +45,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   public goToOldKitos() {
-    this.router.navigateByUrl('/');
+    window.location.href = '/';
   }
 
   public logout() {
