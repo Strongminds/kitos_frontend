@@ -97,6 +97,16 @@
         </div>
       </ng-template>
 
+      <ng-template *ngIf="column.style === 'priority-buttons' && optionType" kendoGridCellTemplate let-dataItem>
+        <div>
+          <app-priority-buttons
+            [optionTypeItem]="dataItem"
+            [optionType]="optionType"
+            [priority]="searchProperty(dataItem, column.field)"
+          ></app-priority-buttons>
+        </div>
+      </ng-template>
+
       <ng-template *ngIf="column.style === 'action-buttons'" kendoGridCellTemplate let-dataItem>
         <div class="action-buttons-container">
           <ng-container *ngFor="let button of column.extraData">

@@ -156,6 +156,7 @@ import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/op
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
 import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
+import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -286,6 +287,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     RichTextEditorComponent,
     LocalOptionGridComponent,
     GlobalOptionTypeGridComponent,
+    PriorityButtonsComponent,
   ],
   imports: [
     CommonModule,
@@ -425,6 +427,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OptionTypeDropdownComponent,
     RichTextEditorComponent,
     LocalOptionGridComponent,
+    PriorityButtonsComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

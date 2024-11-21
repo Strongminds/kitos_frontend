@@ -9,6 +9,7 @@ import { BaseComponent } from '../../base/base.component';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultGridState } from '../../models/grid-state.model';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
+import { GlobalAdminOptionType } from '../../models/options/global-admin-option-type.model';
 
 @Component({
   selector: 'app-local-grid',
@@ -25,6 +26,8 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() deletePermission?: boolean | null;
   @Input() withOutline: boolean = false;
   @Input() fitSizeToContent: boolean = false;
+
+  @Input() optionType?: GlobalAdminOptionType;
 
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
