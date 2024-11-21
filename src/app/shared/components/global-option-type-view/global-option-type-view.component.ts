@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { BaseComponent } from '../../base/base.component';
-import { GlobalAdminOptionType, GlobalAdminOptionTypeItem } from '../../models/options/global-admin-option-type.model';
+import { GlobalAdminOptionType } from '../../models/options/global-admin-option-type.model';
 import { isRoleOptionType } from '../../models/options/role-option-types.model';
 import { GlobalOptionTypeTableComponentStore } from './global-option-type-table.component-store';
 import { DialogOpenerService } from '../../services/dialog-opener.service';
@@ -26,7 +25,6 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
   constructor(
     private componentStore: GlobalOptionTypeTableComponentStore,
     private actions$: Actions,
-    private store: Store,
     private dialogOpener: DialogOpenerService
   ) {
     super();
@@ -56,21 +54,7 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
     componentInstance.action = 'create';
   }
 
-  public onIncreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
-    this.onChangePriority(optionTypeItem.uuid, optionTypeItem.priority + 1);
-  }
-
-  public onDecreasePriority(optionTypeItem: GlobalAdminOptionTypeItem): void {
-    this.onChangePriority(optionTypeItem.uuid, optionTypeItem.priority - 1);
-  }
-
   public getCreateButtonType() {
     return isRoleOptionType(this.optionType) ? $localize`rolle` : $localize`type`;
-  }
-
-  private onChangePriority(optionUuid: string, newPriority: number): void {
-    this.store.dispatch(
-      GlobalOptionTypeActions.updateOptionType(this.optionType, optionUuid, { priority: newPriority })
-    );
   }
 }
