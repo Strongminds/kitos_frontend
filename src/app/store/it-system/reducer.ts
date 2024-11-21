@@ -95,11 +95,11 @@ export const itSystemFeature = createFeature({
       ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess,
       (state, { itSystemUuid }): ITSystemState => {
         const itSystem = state.entities[itSystemUuid];
-      if (!itSystem) {
-        return state;
-      }
-      const newSystem = { ...itSystem, IsInUse: false };
-      return { ...state, entities: { ...state.entities, [itSystemUuid]: newSystem } };
+        if (!itSystem) {
+          return state;
+        }
+        const newSystem = { ...itSystem, IsInUse: false };
+        return { ...state, entities: { ...state.entities, [itSystemUuid]: newSystem } };
       }
     )
   ),
