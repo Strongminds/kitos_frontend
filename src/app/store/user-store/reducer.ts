@@ -62,17 +62,6 @@ export const userFeature = createFeature({
       UserActions.getUserGridPermissionsSuccess,
       (state, { response }): UserState => ({ ...state, gridPermissions: response })
     ),
-    on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization })),
-
-    on(UserActions.resetOnOrganizationUpdate, (state, { organization }): UserState => {
-      const user = state.user;
-      if (!user) return state;
-      user.isLocalAdmin = false;
-
-      return {
-        ...state,
-        organization,
-      };
-    })
+    on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization }))
   ),
 });
