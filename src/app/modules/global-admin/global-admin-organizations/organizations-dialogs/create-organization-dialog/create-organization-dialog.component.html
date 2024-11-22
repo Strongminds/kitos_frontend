@@ -32,6 +32,7 @@
     </app-standard-vertical-content-grid>
 
     <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
       <app-button
         (buttonClick)="onCreateOrganization()"
         [disabled]="!formGroup.valid"
@@ -39,7 +40,6 @@
         data-cy="create-org-dialog-button"
         >Opret</app-button
       >
-      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
     </app-dialog-actions>
   </ng-container>
 </app-dialog>
