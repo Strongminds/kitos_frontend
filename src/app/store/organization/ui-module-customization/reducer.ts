@@ -9,7 +9,6 @@ export const uiModuleConfigAdapter = createEntityAdapter<UIModuleCustomization>(
 
 export const UIModuleConfigInitialState: UIModuleConfigState = uiModuleConfigAdapter.getInitialState({
   uiModuleConfigs: [],
-  uiModuleConfigCachetimes: [],
 });
 
 export const uiModuleConfigFeature = createFeature({
