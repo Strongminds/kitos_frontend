@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 
@@ -96,7 +96,8 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private store: Store,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private matDialog: MatDialog
+    private matDialog: MatDialog,
+    private router: Router
   ) {
     super();
   }
@@ -108,15 +109,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
     );
-
-    this.store
-      .select(selectUserDefaultUnitUuid)
-      .pipe(first())
-      .subscribe((uuid) => {
-        if (uuid) {
-          this.store.dispatch(OrganizationUnitActions.updateCurrentUnitUuid(uuid));
-        }
-      });
 
     this.subscriptions.add(
       this.currentUnitUuid$.subscribe((uuid) => {
@@ -134,6 +126,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
           this.store.dispatch(OrganizationUnitActions.updateCurrentUnitUuid(uuid));
         })
     );
+
+    this.store
+      .select(selectUserDefaultUnitUuid)
+      .pipe(first())
+      .subscribe((uuid) => {
+        if (uuid) {
+          this.router.navigate([`organization/structure/${uuid}`]);
+        }
+      });
   }
 
   changeDragState(): void {
@@ -153,6 +154,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
           this.store.dispatch(OrganizationUnitActions.updateHierarchy(unit, units));
         })
     );
+
     this.store.dispatch(
       OrganizationUnitActions.patchOrganizationUnit(event.movedNodeUuid, {
         parentUuid: event.targetParentNodeUuid,

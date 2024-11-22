@@ -1,6 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { User } from 'src/app/shared/models/user.model';
-import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { UserActions } from './actions';
 import { UserState } from './state';
 
@@ -66,11 +65,8 @@ export const userFeature = createFeature({
     ),
     on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization })),
 
-    on(OrganizationUserActions.updateUserSuccess, (state, { user }): UserState => {
-      if (user.uuid === state.user?.uuid)
-        return { ...state, user: { ...state.user, defaultUnitUuid: user.defaultOrganizationUnit?.uuid } as User };
-
-      return state;
+    on(UserActions.updateUserDefaultUnitState, (state, { unitUuid }): UserState => {
+      return { ...state, user: { ...state.user, defaultUnitUuid: unitUuid } as User };
     })
   ),
 });
