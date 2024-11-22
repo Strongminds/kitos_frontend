@@ -10,6 +10,7 @@ import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
 import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
+import { adaptOrganization } from 'src/app/shared/models/organization/organization-odata.model';
 import { adaptOrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
 import { adaptOrganization } from 'src/app/shared/models/organization/organization.model';
 import { mapUIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
@@ -35,15 +36,17 @@ export class OrganizationEffects {
       switchMap(({ odataString }) => {
         const fixedOdataString = applyQueryFixes(odataString);
 
-        return this.httpClient.get<OData>(`/odata/Organizations?${fixedOdataString}&$count=true`).pipe(
-          map((data) =>
-            OrganizationActions.getOrganizationsSuccess(
-              compact(data.value.map(adaptOrganization)),
-              data['@odata.count']
-            )
-          ),
-          catchError(() => of(OrganizationActions.getOrganizationsError()))
-        );
+        return this.httpClient
+          .get<OData>(`/odata/Organizations?${fixedOdataString}&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true`)
+          .pipe(
+            map((data) =>
+              OrganizationActions.getOrganizationsSuccess(
+                compact(data.value.map(adaptOrganization)),
+                data['@odata.count']
+              )
+            ),
+            catchError(() => of(OrganizationActions.getOrganizationsError()))
+          );
       })
     );
   });
