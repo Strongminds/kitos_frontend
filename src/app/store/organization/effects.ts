@@ -12,7 +12,6 @@ import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organiza
 import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
 import { adaptOrganization } from 'src/app/shared/models/organization/organization-odata.model';
 import { adaptOrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
-import { adaptOrganization } from 'src/app/shared/models/organization/organization.model';
 import { mapUIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { UserActions } from '../user-store/actions';
