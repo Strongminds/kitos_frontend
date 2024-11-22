@@ -4,8 +4,3 @@ import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config
 export interface UIModuleConfigState {
   uiModuleConfigs: UIModuleConfig[];
 }
-
-export interface UIModuleConfigCacheTime {
-  module: UIModuleConfigKey;
-  cacheTime: number | undefined;
-}
