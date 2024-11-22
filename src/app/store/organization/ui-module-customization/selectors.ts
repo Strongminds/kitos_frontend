@@ -15,7 +15,7 @@ export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => M
       selectUIModuleCustomizationState,
       () => new Date(),
       (state, now) =>
-        hasValidCache(state.uiModuleConfigCachetimes.find((cache) => cache.module === module)?.cacheTime, now)
+        hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
     )
 );
 
