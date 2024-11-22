@@ -155,6 +155,7 @@ import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog
 import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
+import { UsageProxyCheckboxComponent } from './usage-proxy-checkbox/usage-proxy-checkbox.component';
 import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
 import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
 import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
@@ -287,6 +288,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OptionTypeDropdownComponent,
     RichTextEditorComponent,
     LocalOptionGridComponent,
+    UsageProxyCheckboxComponent,
     GlobalOptionTypeGridComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
@@ -429,6 +431,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OptionTypeDropdownComponent,
     RichTextEditorComponent,
     LocalOptionGridComponent,
+    UsageProxyCheckboxComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
   ],
