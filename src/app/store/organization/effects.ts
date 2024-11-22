@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { toODataString } from '@progress/kendo-data-query';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, of, switchMap, tap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
@@ -14,6 +14,7 @@ import { adaptOrganizationPermissions } from 'src/app/shared/models/organization
 import { adaptOrganization } from 'src/app/shared/models/organization/organization.model';
 import { mapUIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { UserActions } from '../user-store/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationActions } from './actions';
 import { selectHasValidUIRootConfigCache } from './selectors';
@@ -157,7 +158,7 @@ export class OrganizationEffects {
 
   getUIRootConfig$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationActions.getUIRootConfig),
+      ofType(OrganizationActions.getUIRootConfig, UserActions.resetOnOrganizationUpdate),
       concatLatestFrom(() => [
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectHasValidUIRootConfigCache()),
