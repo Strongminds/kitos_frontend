@@ -47,6 +47,7 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
       noFilter: true,
       width: 100,
       style: 'priority-buttons',
+      sortable: false,
     },
     {
       field: 'name',
