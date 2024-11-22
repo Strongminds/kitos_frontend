@@ -1,4 +1,6 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { User } from 'src/app/shared/models/user.model';
+import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { UserActions } from './actions';
 import { UserState } from './state';
 
@@ -62,6 +64,13 @@ export const userFeature = createFeature({
       UserActions.getUserGridPermissionsSuccess,
       (state, { response }): UserState => ({ ...state, gridPermissions: response })
     ),
-    on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization }))
+    on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization })),
+
+    on(OrganizationUserActions.updateUserSuccess, (state, { user }): UserState => {
+      if (user.uuid === state.user?.uuid)
+        return { ...state, user: { ...state.user, defaultUnitUuid: user.defaultOrganizationUnit?.uuid } as User };
+
+      return state;
+    })
   ),
 });

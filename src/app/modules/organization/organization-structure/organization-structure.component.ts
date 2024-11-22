@@ -18,7 +18,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 import { MatDialog } from '@angular/material/dialog';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
-import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { selectOrganizationUuid, selectUserDefaultUnitUuid } from 'src/app/store/user-store/selectors';
 
 import {
   selectCurrentUnitUuid,
@@ -108,6 +108,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .pipe(first())
         .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
     );
+
+    this.store
+      .select(selectUserDefaultUnitUuid)
+      .pipe(first())
+      .subscribe((uuid) => {
+        if (uuid) {
+          this.store.dispatch(OrganizationUnitActions.updateCurrentUnitUuid(uuid));
+        }
+      });
 
     this.subscriptions.add(
       this.currentUnitUuid$.subscribe((uuid) => {
