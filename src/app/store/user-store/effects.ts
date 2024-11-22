@@ -47,7 +47,10 @@ export class UserEffects {
           })
           .pipe(
             tap(() => this.cookieService.removeAll()),
-            map((userDTO: APIUserDTOApiReturnDTO) => UserActions.loginSuccess(adaptUser(userDTO.response))),
+            concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+            map(([userDTO, organizationUuid]) =>
+              UserActions.loginSuccess(adaptUser((userDTO as APIUserDTOApiReturnDTO).response, organizationUuid))
+            ),
             catchError(() => of(UserActions.loginError()))
           )
       )
@@ -74,7 +77,10 @@ export class UserEffects {
       tap(() => this.cookieService.removeAll()),
       mergeMap(() =>
         this.authorizeService.getSingleAuthorizeGetLogin().pipe(
-          map((userDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
+          concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+          map(([userDTO, organizationUuid]) =>
+            UserActions.authenticateSuccess(adaptUser(userDTO.response, organizationUuid))
+          ),
           catchError(() => of(UserActions.authenticateError()))
         )
       )
