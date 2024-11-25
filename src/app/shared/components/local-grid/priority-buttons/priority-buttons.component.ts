@@ -12,7 +12,6 @@ import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-optio
   styleUrl: './priority-buttons.component.scss',
 })
 export class PriorityButtonsComponent {
-  @Input() priority: number = 0;
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;
   @Input() optionType!: GlobalAdminOptionType;
   @Input() maxPriority!: number;
@@ -29,11 +28,11 @@ export class PriorityButtonsComponent {
   }
 
   public isLowestPriority(): boolean {
-    return this.priority === this.minPriority;
+    return this.optionTypeItem.priority === this.minPriority;
   }
 
   public isHighestPriority(): boolean {
-    return this.priority === this.maxPriority;
+    return this.optionTypeItem.priority === this.maxPriority;
   }
 
   private onChangePriority(optionUuid: string, newPriority: number): void {
