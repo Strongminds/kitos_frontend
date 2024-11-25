@@ -26,7 +26,7 @@ export interface ODataOrganizationUser {
 }
 
 export interface Right {
-  role: { name: string; uuid: string; id: number };
+  role: { name: string; uuid: string; roleId: number };
   entity: { name: string; uuid: string };
   writeAccess: boolean;
 }
@@ -63,7 +63,6 @@ export const adaptOrganizationUser = (value: any): ODataOrganizationUser | undef
     ItContractRights: value.ItContractRights.map(adaptEntityRights),
     DataProcessingRegistrationRights: value.DataProcessingRegistrationRights.map(adaptEntityRights),
   };
-
   return adaptedUser;
 };
 
@@ -75,7 +74,7 @@ function checkIfUserHasRole(roleName: string, userRights: any[]): boolean {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptEntityRights(right: any): Right {
   return {
-    role: { name: right.Role.Name, uuid: right.Role.Uuid, id: right.Id },
+    role: { name: right.Role.Name, uuid: right.Role.Uuid, roleId: right.RoleId },
     entity: { name: right.Object.Name, uuid: right.Object.Uuid },
     writeAccess: right.Role.HasWriteAccess,
   };
@@ -84,7 +83,7 @@ function adaptEntityRights(right: any): Right {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function adaptItSystemRights(rights: any): Right {
   return {
-    role: { name: rights.Role.Name, uuid: rights.Role.Uuid, id: rights.Id },
+    role: { name: rights.Role.Name, uuid: rights.Role.Uuid, roleId: rights.RoleId },
     entity: { name: rights.Object.ItSystem.Name, uuid: rights.Object.Uuid },
     writeAccess: rights.Role.HasWriteAccess,
   };
