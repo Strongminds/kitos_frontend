@@ -1,5 +1,9 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import { APIOrganizationGridPermissionsResponseDTO, APIOrganizationResponseDTO, APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
+import {
+  APIOrganizationGridPermissionsResponseDTO,
+  APIOrganizationResponseDTO,
+  APIOrganizationUpdateRequestDTO,
+} from 'src/app/api/v2';
 import { Login } from 'src/app/shared/models/login.model';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -31,5 +35,7 @@ export const UserActions = createActionGroup({
     'Patch organization': props<{ request: APIOrganizationUpdateRequestDTO }>(),
     'Patch organization success': (organization: APIOrganizationResponseDTO) => organization,
     'Patch organization error': emptyProps(),
+
+    'Reset Password': (email: string) => ({ email }),
   },
 });
