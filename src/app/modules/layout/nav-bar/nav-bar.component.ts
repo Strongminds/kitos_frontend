@@ -32,7 +32,6 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(OrganizationActions.getUIRootConfig());
     this.subscriptions.add(
       this.actions$.pipe(ofType(UserActions.loginSuccess)).subscribe(({ user }) => {
         if (user?.defaultStartPage) this.navigateToUserDefaultStartPage(user.defaultStartPage);
