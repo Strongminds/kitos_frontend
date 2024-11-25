@@ -1,5 +1,4 @@
 import { APIUserDTO } from 'src/app/api/v1';
-import { isUserLocalAdminIn } from '../helpers/user-helper';
 
 export interface User {
   id: number;
@@ -7,11 +6,10 @@ export interface User {
   email: string;
   fullName: string;
   isGlobalAdmin: boolean;
-  isLocalAdmin: boolean;
   organizationRights: { organizationUuid?: string; role: number }[];
 }
 
-export const adaptUser = (apiUser?: APIUserDTO, currentOrganizationUuid?: string): User | undefined => {
+export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
   if (apiUser?.id === undefined || apiUser?.uuid === undefined || apiUser?.email === undefined) return;
 
   return {
@@ -20,7 +18,6 @@ export const adaptUser = (apiUser?: APIUserDTO, currentOrganizationUuid?: string
     email: apiUser.email,
     fullName: apiUser?.fullName ?? '',
     isGlobalAdmin: apiUser?.isGlobalAdmin ?? false,
-    isLocalAdmin: isUserLocalAdminIn(apiUser.organizationRights ?? [], currentOrganizationUuid ?? ''),
     organizationRights:
       apiUser.organizationRights?.map((right) => ({
         organizationUuid: right.organizationUuid,
