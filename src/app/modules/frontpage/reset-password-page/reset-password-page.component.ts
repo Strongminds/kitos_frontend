@@ -8,17 +8,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class ResetPasswordPageComponent {
   public readonly formGroup = new FormGroup({
-    email: new FormControl<string | undefined>(undefined, [Validators.email]),
+    email: new FormControl<string | undefined>(undefined, [Validators.email, Validators.required]),
   });
 
   public onSendEmail(): void {}
-
-  public canSend(): boolean {
-    return this.formGroup.valid && !this.isEmailEmpty();
-  }
-
-  public isEmailEmpty(): boolean {
-    const emailValue = this.formGroup.value.email;
-    return emailValue === undefined || emailValue === '' || emailValue === null;
-  }
 }
