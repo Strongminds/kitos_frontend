@@ -15,6 +15,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { ProfileComponentStore } from './profile.component-store';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   templateUrl: 'profile.component.html',
@@ -22,7 +23,7 @@ import { ProfileComponentStore } from './profile.component-store';
   providers: [ProfileComponentStore],
 })
 export class ProfileComponent extends BaseComponent implements OnInit {
-  public startPreferenceOptions = startPreferenceChoiceOptions;
+  public startPreferenceOptions = this.userService.getAvailableStartPreferenceOptions();
   public readonly isLoading$ = this.componentStore.isLoading$;
   public readonly user$ = this.componentStore.user$;
   public readonly alreadyExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -38,7 +39,11 @@ export class ProfileComponent extends BaseComponent implements OnInit {
 
   private currentEmail = '';
 
-  constructor(private store: Store, private componentStore: ProfileComponentStore, private actions$: Actions) {
+  constructor(
+    private store: Store,
+    private componentStore: ProfileComponentStore,
+    private actions$: Actions,
+    private userService: UserService) {
     super();
   }
 
