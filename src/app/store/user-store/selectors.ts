@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { userFeature } from './reducer';
+import { isUserLocalAdminIn } from 'src/app/shared/helpers/user-helper';
 
 export const {
   selectUser,
@@ -22,6 +23,11 @@ export const selectOrganizationType = createSelector(
 
 export const selectUserIsGlobalAdmin = createSelector(selectUser, (user) => user?.isGlobalAdmin ?? false);
 export const selectUserUuid = createSelector(selectUser, (user) => user?.uuid);
+export const selectUserIsCurrentlyLocalAdmin = createSelector(
+  selectUser,
+  selectOrganizationUuid,
+  (user, organizationUuid) => isUserLocalAdminIn(user?.organizationRights, organizationUuid)
+);
 
 export const selectHasCheckedUserAndOrganization = createSelector(
   selectUser,
