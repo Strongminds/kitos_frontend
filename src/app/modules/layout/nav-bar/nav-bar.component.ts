@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, combineLatestWith, filter, tap } from 'rxjs';
+import { combineLatest, combineLatestWith, filter, switchMap, tap, withLatestFrom } from 'rxjs';
 import { APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
@@ -36,7 +36,10 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(UserActions.resetOnOrganizationUpdate), combineLatestWith(this.user$, this.uiRootConfig$))
+        .pipe(
+          ofType(UserActions.resetOnOrganizationUpdate),
+          withLatestFrom(this.user$, this.uiRootConfig$)
+        )
         .subscribe(([_, user, uiRootConfig]) => {
           const userDefaultStartPage = user?.defaultStartPage;
           if (!userDefaultStartPage || this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)) return;
