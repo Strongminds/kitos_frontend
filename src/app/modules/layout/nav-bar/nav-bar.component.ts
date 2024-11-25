@@ -3,18 +3,18 @@ import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, combineLatestWith, filter, switchMap, tap, withLatestFrom } from 'rxjs';
+import { combineLatest, filter, tap, withLatestFrom } from 'rxjs';
 import { APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
+import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectHasMultipleOrganizations, selectOrganizationName, selectUser } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
-import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 @Component({
   selector: 'app-nav-bar',
@@ -34,19 +34,27 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setupUseUserDefaultStartPage();
+    this.setupGetUIRootConfigOnNavigation();
+  }
+
+  private setupUseUserDefaultStartPage() {
     this.subscriptions.add(
       this.actions$
-        .pipe(
-          ofType(UserActions.resetOnOrganizationUpdate),
-          withLatestFrom(this.user$, this.uiRootConfig$)
-        )
+        .pipe(ofType(UserActions.resetOnOrganizationUpdate), withLatestFrom(this.user$, this.uiRootConfig$))
         .subscribe(([_, user, uiRootConfig]) => {
           const userDefaultStartPage = user?.defaultStartPage;
-          if (!userDefaultStartPage || this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)) return;
+          if (
+            !userDefaultStartPage ||
+            this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)
+          )
+            return;
           this.navigateToUserDefaultStartPage(userDefaultStartPage);
         })
     );
+  }
 
+  private setupGetUIRootConfigOnNavigation() {
     this.subscriptions.add(
       combineLatest([this.user$, this.router.events])
         .pipe(
@@ -57,9 +65,12 @@ export class NavBarComponent extends BaseComponent implements OnInit {
     );
   }
 
-  private userDefaultStartPageDisabledInOrganization(userDefaultStartPage: StartPreferenceChoice, uiRootConfig: UIRootConfig): boolean {
+  private userDefaultStartPageDisabledInOrganization(
+    userDefaultStartPage: StartPreferenceChoice,
+    uiRootConfig: UIRootConfig
+  ): boolean {
     const startPageValue = userDefaultStartPage.value;
-    switch (startPageValue){
+    switch (startPageValue) {
       case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
         return !uiRootConfig.showItSystemModule;
       case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
