@@ -30,6 +30,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(OrganizationActions.getUIRootConfig());
     this.subscriptions.add(
       combineLatest([this.user$, this.router.events])
         .pipe(
@@ -42,6 +43,10 @@ export class NavBarComponent extends BaseComponent implements OnInit {
 
   public showOrganizationDialog() {
     this.dialog.open(ChooseOrganizationComponent);
+  }
+
+  public goToOldKitos() {
+    window.location.href = '/';
   }
 
   public logout() {
