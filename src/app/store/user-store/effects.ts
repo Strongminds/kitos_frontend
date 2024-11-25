@@ -47,10 +47,8 @@ export class UserEffects {
           })
           .pipe(
             tap(() => this.cookieService.removeAll()),
-            map(
-              (userDTO: APIUserDTOApiReturnDTO) => UserActions.loginSuccess(adaptUser(userDTO.response)),
-              catchError(() => of(UserActions.loginError()))
-            )
+            map((userDTO: APIUserDTOApiReturnDTO) => UserActions.loginSuccess(adaptUser(userDTO.response))),
+            catchError(() => of(UserActions.loginError()))
           )
       )
     );
