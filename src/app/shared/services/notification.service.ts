@@ -40,11 +40,7 @@ export class NotificationService implements OnDestroy {
   }
 
   public subscribeOnActions() {
-    this.subscribeAsDefault(UserActions.loginSuccess, $localize`Du er nu logget ind`);
-    this.subscribeAsError(UserActions.loginError, $localize`Kunne ikke logge ind`);
-
-    this.subscribeAsDefault(UserActions.logoutSuccess, $localize`Du er nu logget ud`);
-    this.subscribeAsError(UserActions.logoutError, $localize`Kunne ikke logge ud`);
+    this.subscribeToFrontPageEvents();
 
     this.subscribeToExcelImportActions();
 
@@ -61,7 +57,8 @@ export class NotificationService implements OnDestroy {
     this.subscribeToFkOrganizationEvents();
     this.subscriptToHelpTextNotifications();
   }
-  subscribeToExcelImportActions() {
+
+  private subscribeToExcelImportActions() {
     this.subscribeAsDefault(ExcelImportActions.excelImportSuccess, $localize`Excel-arket blev importeret`);
     this.subscribeAsError(ExcelImportActions.excelImportError, $localize`Kunne ikke importere excel-arket`);
   }
@@ -579,6 +576,22 @@ export class NotificationService implements OnDestroy {
         DataProcessingActions.removeExternalReferenceError
       ),
       $localize`Referencen kunne ikke slettes`
+    );
+  }
+
+  private subscribeToFrontPageEvents(): void {
+    this.subscribeAsDefault(UserActions.loginSuccess, $localize`Du er nu logget ind`);
+    this.subscribeAsError(UserActions.loginError, $localize`Kunne ikke logge ind`);
+
+    this.subscribeAsDefault(UserActions.logoutSuccess, $localize`Du er nu logget ud`);
+    this.subscribeAsError(UserActions.logoutError, $localize`Kunne ikke logge ud`);
+
+    this.actions$.pipe(ofType(UserActions.resetPasswordRequestSuccess)).subscribe(({ email }) => {
+      this.showDefault($localize`En email er blevet sent til '${email}'`);
+    });
+    this.subscribeAsError(
+      UserActions.resetPasswordRequestError,
+      $localize`Der skete en fejl under afsendelse af email`
     );
   }
 

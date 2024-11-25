@@ -18,6 +18,6 @@ export class ResetPasswordPageComponent {
   public onSendEmail(): void {
     const email = this.formGroup.value.email;
     if (!email) return;
-    this.store.dispatch(UserActions.resetPassword(email)); //TODO: Maybe implement some kind of loading spinner at this point
+    this.store.dispatch(UserActions.resetPasswordRequest(email)); //TODO: Maybe implement some kind of loading spinner at this point
   }
 }

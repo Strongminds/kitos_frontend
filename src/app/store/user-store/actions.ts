@@ -36,6 +36,8 @@ export const UserActions = createActionGroup({
     'Patch organization success': (organization: APIOrganizationResponseDTO) => organization,
     'Patch organization error': emptyProps(),
 
-    'Reset Password': (email: string) => ({ email }),
+    'Reset Password Request': (email: string) => ({ email }),
+    'Reset Password Request Success': (email: string) => ({ email }),
+    'Reset Password Request Error': emptyProps(),
   },
 });

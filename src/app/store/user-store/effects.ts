@@ -5,7 +5,11 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap } from 'rxjs';
-import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
+import {
+  APIUserDTOApiReturnDTO,
+  APIV1AuthorizeINTERNALService,
+  APIV1PasswordResetRequestINTERNALService,
+} from 'src/app/api/v1';
 import { APIOrganizationGridPermissionsResponseDTO } from 'src/app/api/v2';
 import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
@@ -28,7 +32,8 @@ export class UserEffects {
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private organizationGridService: APIV2OrganizationGridInternalINTERNALService,
     @Inject(APIV2OrganizationsInternalINTERNALService)
-    private organizationInternalService: APIV2OrganizationsInternalINTERNALService
+    private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
+    private resetPasswordService: APIV1PasswordResetRequestINTERNALService
   ) {}
 
   login$ = createEffect(() => {
@@ -134,6 +139,18 @@ export class UserEffects {
             map((organizationResponseDto) => UserActions.patchOrganizationSuccess(organizationResponseDto)),
             catchError(() => of(UserActions.patchOrganizationError()))
           )
+      )
+    );
+  });
+
+  resetPassword$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.resetPasswordRequest),
+      switchMap(({ email }) =>
+        this.resetPasswordService.postSinglePasswordResetRequestPost({ input: { email } }).pipe(
+          map(() => UserActions.resetPasswordRequestSuccess(email)),
+          catchError(() => of(UserActions.resetPasswordRequestError()))
+        )
       )
     );
   });
