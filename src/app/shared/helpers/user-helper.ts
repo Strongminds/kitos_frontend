@@ -6,8 +6,6 @@ export function isUserLocalAdminIn(
     return false;
   }
   const localAdminEnumValue = 1;
-  console.log('organizationRights', organizationRights);
-  console.log('organizationUuid', organizationUuid);
   return (
     organizationRights
       ?.filter((right) => right.organizationUuid === organizationUuid)
