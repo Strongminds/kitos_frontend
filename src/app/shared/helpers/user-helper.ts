@@ -1,6 +1,6 @@
 import { OrganizationRight } from '../models/organization-right.model';
 
-export function isUserLocalAdminIn(
+export function rightsIncludesLocalAdminInOrg(
   organizationRights: OrganizationRight[] | undefined,
   organizationUuid: string | undefined
 ): boolean {
