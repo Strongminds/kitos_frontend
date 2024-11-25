@@ -6,11 +6,10 @@ describe('local-admin dpr', () => {
     cy.intercept('/api/v2/internal/organizations/*/permissions', {
       fixture: './organizations/organization-permissions-local-admin.json',
     });
-    cy.setup(true);
+    cy.setup(true, 'local-admin/data-processing');
   });
 
   it('Can hide dpr module', () => {
-    cy.setup(true, 'local-admin/data-processing');
     cy.getByDataCy('dpr-nav-bar-item').should('exist');
     cy.intercept('PATCH', 'api/v2/internal/organizations/*/ui-root-config', {
       fixture: './local-admin/dpr/ui-root-config-no-dpr-module.json',
