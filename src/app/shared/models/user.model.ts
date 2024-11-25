@@ -1,4 +1,5 @@
 import { APIUserDTO } from 'src/app/api/v1';
+import { adaptV1OrganizationRights, OrganizationRight } from './organization-right.model';
 
 export interface User {
   id: number;
@@ -6,7 +7,7 @@ export interface User {
   email: string;
   fullName: string;
   isGlobalAdmin: boolean;
-  organizationRights: { organizationUuid?: string; role: number }[];
+  organizationRights: OrganizationRight[];
 }
 
 export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
@@ -18,10 +19,6 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
     email: apiUser.email,
     fullName: apiUser?.fullName ?? '',
     isGlobalAdmin: apiUser?.isGlobalAdmin ?? false,
-    organizationRights:
-      apiUser.organizationRights?.map((right) => ({
-        organizationUuid: right.organizationUuid,
-        role: (right as any).role,
-      })) ?? [],
+    organizationRights: adaptV1OrganizationRights(apiUser?.organizationRights ?? []),
   };
 };

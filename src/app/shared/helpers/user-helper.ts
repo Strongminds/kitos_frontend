@@ -1,5 +1,7 @@
+import { OrganizationRight } from '../models/organization-right.model';
+
 export function isUserLocalAdminIn(
-  organizationRights: any[] | undefined,
+  organizationRights: OrganizationRight[] | undefined,
   organizationUuid: string | undefined
 ): boolean {
   if (!organizationUuid || !organizationUuid) {
@@ -9,7 +11,7 @@ export function isUserLocalAdminIn(
   return (
     organizationRights
       ?.filter((right) => right.organizationUuid === organizationUuid)
-      .map((right) => (right as any).role)
+      .map((right) => right.role)
       .includes(localAdminEnumValue) ?? false
   );
 }
