@@ -1,4 +1,8 @@
 import { APIUserDTO } from 'src/app/api/v1';
+import {
+  mapStartPreferenceChoiceFromV1,
+  StartPreferenceChoice,
+} from './organization/organization-user/start-preference.model';
 
 export interface User {
   id: number;
@@ -7,6 +11,7 @@ export interface User {
   fullName: string;
   isGlobalAdmin: boolean;
   isLocalAdmin: boolean;
+  defaultStartPage: StartPreferenceChoice | undefined;
 }
 
 const localAdminEnumValue = 1;
@@ -23,5 +28,6 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
     isLocalAdmin:
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       apiUser.organizationRights?.map((right) => (right as any).role).includes(localAdminEnumValue) ?? false,
+    defaultStartPage: mapStartPreferenceChoiceFromV1(apiUser.defaultUserStartPreference),
   };
 };
