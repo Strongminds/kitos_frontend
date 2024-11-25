@@ -13,6 +13,7 @@ export enum AppPath {
   itSystemCatalogDetails = 'it-system-catalog/:uuid',
 
   frontpage = 'frontpage',
+  passwordReset = 'password-reset',
   contracts = 'contracts',
 
   itContracts = 'it-contracts',

@@ -5,6 +5,7 @@ import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { StartupGuardService } from './shared/guards/startup-guard.service';
 import { LocalAdminGuardService } from './shared/guards/local-admin-guard.service';
 import { GlobalAdminGuardService } from './shared/guards/global-admin-guard.service';
+import { ResetPasswordPageComponent } from './modules/frontpage/reset-password-page/reset-password-page.component';
 
 const routes: Routes = [
   {
@@ -14,6 +15,10 @@ const routes: Routes = [
       {
         path: AppPath.root,
         loadChildren: () => import('./modules/frontpage/frontpage.module').then((m) => m.FrontpageModule),
+      },
+      {
+        path: AppPath.passwordReset,
+        component: ResetPasswordPageComponent,
       },
       {
         path: AppPath.organization,
@@ -50,7 +55,7 @@ const routes: Routes = [
         path: AppPath.globalAdmin,
         loadChildren: () => import('./modules/global-admin/global-admin.module').then((m) => m.GlobalAdminModule),
         canActivate: [GlobalAdminGuardService],
-      }
+      },
     ],
   },
 ];
