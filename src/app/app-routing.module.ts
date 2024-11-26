@@ -7,7 +7,6 @@ import { GlobalAdminGuardService } from './shared/guards/global-admin-guard.serv
 import { LocalAdminGuardService } from './shared/guards/local-admin-guard.service';
 import { StartupGuardService } from './shared/guards/startup-guard.service';
 import { ResetPasswordComponent } from './modules/frontpage/reset-password/reset-password.component';
-import { ResetPasswordSuccessComponent } from './modules/frontpage/reset-password-success/reset-password-success.component';
 
 const routes: Routes = [
   {
@@ -17,10 +16,6 @@ const routes: Routes = [
   {
     path: `${AppPath.passwordReset}/:id`,
     component: ResetPasswordComponent,
-  },
-  {
-    path: AppPath.passwordResetSuccess,
-    component: ResetPasswordSuccessComponent,
   },
   {
     path: AppPath.root,

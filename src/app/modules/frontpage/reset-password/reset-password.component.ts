@@ -38,8 +38,8 @@ export class ResetPasswordComponent implements OnInit {
   public ngOnInit(): void {
     this.requestId$.pipe(first()).subscribe((requestId) => this.componentStore.getPasswordResetRequest(requestId));
 
-    this.actions$.pipe(ofType(UserActions.resetPassword), first()).subscribe(() => {
-      this.router.navigate([AppPath.passwordResetSuccess]);
+    this.actions$.pipe(ofType(UserActions.resetPasswordSuccess), first()).subscribe(() => {
+      this.router.navigate([AppPath.root]);
     });
 
     this.formGroup.valueChanges.subscribe((value) => {
