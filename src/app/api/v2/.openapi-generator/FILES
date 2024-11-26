@@ -267,7 +267,6 @@ model/organizationUsageWriteRequestDTO.ts
 model/organizationUserResponseDTO.ts
 model/outgoingSystemRelationResponseDTO.ts
 model/oversightDateDTO.ts
-model/passwordResetRequestV2DTO.ts
 model/passwordResetResponseDTO.ts
 model/paymentRegistrationResponseDTO.ts
 model/paymentRequestDTO.ts
@@ -282,6 +281,8 @@ model/recommendedArchiveDutyResponseDTO.ts
 model/registrationHierarchyNodeWithActivationStatusResponseDTO.ts
 model/regularOptionExtendedResponseDTO.ts
 model/regularOptionResponseDTO.ts
+model/requestPasswordResetRequestDTO.ts
+model/resetPasswordRequestDTO.ts
 model/resourceCollectionPermissionsResponseDTO.ts
 model/resourcePermissionsResponseDTO.ts
 model/rightsHolderCreateItInterfaceRequestDTO.ts
