@@ -150,4 +150,21 @@ export class UserEffects {
       )
     );
   });
+
+  resetPassword$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.resetPassword),
+      switchMap(({ requestId, password }) =>
+        this.resetPasswordService
+          .postSinglePasswordResetInternalV2PostPasswordReset({
+            requestId,
+            request: { password },
+          })
+          .pipe(
+            map(() => UserActions.resetPasswordSuccess()),
+            catchError(() => of(UserActions.resetPasswordError()))
+          )
+      )
+    );
+  });
 }

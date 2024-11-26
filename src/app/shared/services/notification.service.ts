@@ -593,6 +593,9 @@ export class NotificationService implements OnDestroy {
       UserActions.resetPasswordRequestError,
       $localize`Der skete en fejl under afsendelse af email`
     );
+
+    this.subscribeAsDefault(UserActions.resetPasswordSuccess, $localize`Dit password er blevet nulstillet`);
+    this.subscribeAsError(UserActions.resetPasswordError, $localize`Dit password kunne ikke nulstilles`);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
