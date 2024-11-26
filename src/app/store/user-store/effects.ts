@@ -139,7 +139,7 @@ export class UserEffects {
     );
   });
 
-  resetPassword$ = createEffect(() => {
+  sendResetPasswordRequest$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.resetPasswordRequest),
       switchMap(({ email }) =>

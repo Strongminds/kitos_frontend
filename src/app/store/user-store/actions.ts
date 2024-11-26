@@ -44,5 +44,9 @@ export const UserActions = createActionGroup({
     'Get Reset Password Request': (requestId: string) => ({ requestId }),
     'Get Reset Password Request Success': (response: APIPasswordResetResponseDTO) => ({ response }),
     'Get Reset Password Request Error': emptyProps(),
+
+    'Reset Password': (requestId: string, password: string) => ({ requestId, password }),
+    'Reset Password Success': emptyProps(),
+    'Reset Password Error': emptyProps(),
   },
 });
