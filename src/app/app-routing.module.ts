@@ -9,7 +9,7 @@ import { StartupGuardService } from './shared/guards/startup-guard.service';
 
 const routes: Routes = [
   {
-    path: AppPath.sendPasswordReset,
+    path: AppPath.passwordReset,
     component: SendPasswordResetRequestComponent,
   },
   {
