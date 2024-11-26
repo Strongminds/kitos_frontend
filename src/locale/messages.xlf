@@ -4660,6 +4660,30 @@
       <trans-unit id="7225215805628203543" datatype="html">
         <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gamle brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
       </trans-unit>
+      <trans-unit id="1492491332269133030" datatype="html">
+        <source> Bemærk at linkets gyldighed udløber efter 10 dage. Du skal derfor nå at nulstille dit password inden da. </source>
+      </trans-unit>
+      <trans-unit id="1910138790709309910" datatype="html">
+        <source>kan du anmode om at nulstille det her.</source>
+      </trans-unit>
+      <trans-unit id="3006097408675799565" datatype="html">
+        <source> Send email </source>
+      </trans-unit>
+      <trans-unit id="3732788840591611874" datatype="html">
+        <source>Hvis du har glemt dit password, </source>
+      </trans-unit>
+      <trans-unit id="374396670767482335" datatype="html">
+        <source> Hvis du har glemt passwordet til din KITOS bruger, kan du få tilsendt en email med et link til at nulstille det. </source>
+      </trans-unit>
+      <trans-unit id="5907250541324437176" datatype="html">
+        <source>Der skete en fejl under afsendelse af email</source>
+      </trans-unit>
+      <trans-unit id="6909996073768217346" datatype="html">
+        <source>En email er blevet sent til &apos;<x id="PH" equiv-text="email"/>&apos;</source>
+      </trans-unit>
+      <trans-unit id="8383847967683586849" datatype="html">
+        <source>Glemt password?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

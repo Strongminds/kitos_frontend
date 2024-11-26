@@ -6135,6 +6135,38 @@
         <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gamle brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
         <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gamle brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
       </trans-unit>
+      <trans-unit id="3732788840591611874" datatype="html">
+        <source>Hvis du har glemt dit password, </source>
+        <target state="new">Hvis du har glemt dit password, </target>
+      </trans-unit>
+      <trans-unit id="1910138790709309910" datatype="html">
+        <source>kan du anmode om at nulstille det her.</source>
+        <target state="new">kan du anmode om at nulstille det her.</target>
+      </trans-unit>
+      <trans-unit id="8383847967683586849" datatype="html">
+        <source>Glemt password?</source>
+        <target state="new">Glemt password?</target>
+      </trans-unit>
+      <trans-unit id="374396670767482335" datatype="html">
+        <source> Hvis du har glemt passwordet til din KITOS bruger, kan du få tilsendt en email med et link til at nulstille det. </source>
+        <target state="new"> Hvis du har glemt passwordet til din KITOS bruger, kan du få tilsendt en email med et link til at nulstille det. </target>
+      </trans-unit>
+      <trans-unit id="1492491332269133030" datatype="html">
+        <source> Bemærk at linkets gyldighed udløber efter 10 dage. Du skal derfor nå at nulstille dit password inden da. </source>
+        <target state="new"> Bemærk at linkets gyldighed udløber efter 10 dage. Du skal derfor nå at nulstille dit password inden da. </target>
+      </trans-unit>
+      <trans-unit id="3006097408675799565" datatype="html">
+        <source> Send email </source>
+        <target state="new"> Send email </target>
+      </trans-unit>
+      <trans-unit id="6909996073768217346" datatype="html">
+        <source>En email er blevet sent til &apos;<x id="PH" equiv-text="email"/>&apos;</source>
+        <target state="new">En email er blevet sent til &apos;<x id="PH" equiv-text="email"/>&apos;</target>
+      </trans-unit>
+      <trans-unit id="5907250541324437176" datatype="html">
+        <source>Der skete en fejl under afsendelse af email</source>
+        <target state="new">Der skete en fejl under afsendelse af email</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
