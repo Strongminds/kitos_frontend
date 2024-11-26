@@ -114,6 +114,7 @@ api/v2OrganizationUnitRegistrationInternalINTERNAL.service.ts
 api/v2OrganizationUnitRoleType.service.ts
 api/v2OrganizationUnitsInternalINTERNAL.service.ts
 api/v2OrganizationsInternalINTERNAL.service.ts
+api/v2PasswordResetInternalINTERNAL.service.ts
 api/v2PublicMessagesINTERNAL.service.ts
 api/v2StsOrganizationSynchronizationInternalINTERNAL.service.ts
 api/v2UsersInternalINTERNAL.service.ts
@@ -266,6 +267,8 @@ model/organizationUsageWriteRequestDTO.ts
 model/organizationUserResponseDTO.ts
 model/outgoingSystemRelationResponseDTO.ts
 model/oversightDateDTO.ts
+model/passwordResetRequestV2DTO.ts
+model/passwordResetResponseDTO.ts
 model/paymentRegistrationResponseDTO.ts
 model/paymentRequestDTO.ts
 model/paymentResponseDTO.ts

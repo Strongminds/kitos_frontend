@@ -142,6 +142,8 @@ export * from './organizationUsageWriteRequestDTO';
 export * from './organizationUserResponseDTO';
 export * from './outgoingSystemRelationResponseDTO';
 export * from './oversightDateDTO';
+export * from './passwordResetRequestV2DTO';
+export * from './passwordResetResponseDTO';
 export * from './paymentRegistrationResponseDTO';
 export * from './paymentRequestDTO';
 export * from './paymentResponseDTO';
