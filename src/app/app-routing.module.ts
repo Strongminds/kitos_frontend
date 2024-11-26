@@ -6,11 +6,16 @@ import { AuthGuardService } from './shared/guards/auth-guard.service';
 import { GlobalAdminGuardService } from './shared/guards/global-admin-guard.service';
 import { LocalAdminGuardService } from './shared/guards/local-admin-guard.service';
 import { StartupGuardService } from './shared/guards/startup-guard.service';
+import { ResetPasswordComponent } from './modules/frontpage/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
     path: AppPath.passwordReset,
     component: SendPasswordResetRequestComponent,
+  },
+  {
+    path: `${AppPath.passwordReset}/:id`,
+    component: ResetPasswordComponent,
   },
   {
     path: AppPath.root,

@@ -3,6 +3,7 @@ import {
   APIOrganizationGridPermissionsResponseDTO,
   APIOrganizationResponseDTO,
   APIOrganizationUpdateRequestDTO,
+  APIPasswordResetResponseDTO,
 } from 'src/app/api/v2';
 import { Login } from 'src/app/shared/models/login.model';
 import { User } from 'src/app/shared/models/user.model';
@@ -39,5 +40,9 @@ export const UserActions = createActionGroup({
     'Reset Password Request': (email: string) => ({ email }),
     'Reset Password Request Success': (email: string) => ({ email }),
     'Reset Password Request Error': emptyProps(),
+
+    'Get Reset Password Request': (requestId: string) => ({ requestId }),
+    'Get Reset Password Request Success': (response: APIPasswordResetResponseDTO) => ({ response }),
+    'Get Reset Password Request Error': emptyProps(),
   },
 });
