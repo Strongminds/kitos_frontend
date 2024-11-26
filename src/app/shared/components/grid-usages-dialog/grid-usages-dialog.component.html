@@ -4,9 +4,12 @@
         <th i18n-title> Organisation </th>
         <tr *ngFor="let organization of data.usages">
           <td>
-            <app-paragraph>
+            <div class="align-content-apart">
+              <app-paragraph [bold]="true">
               {{organization}}
             </app-paragraph>
+            <app-button i18n (buttonClick)="clickMigrateUsage()">Flyt</app-button>
+            </div>
           </td>
         </tr>
       </tbody>
