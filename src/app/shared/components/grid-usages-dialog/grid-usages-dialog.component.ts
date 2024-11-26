@@ -14,7 +14,7 @@ import { GridUsagesDialogComponentStore } from './grid-usages-dialog.component-s
   styleUrls: ['./grid-usages-dialog.component.scss'],
   providers: [GridUsagesDialogComponentStore],
 })
-export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
+export class GridUsagesDialogComponent extends BaseComponent {
   public readonly organizationName$ = this.store.select(selectOrganizationName).pipe(filterNullish());
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
   public readonly unusedItSystemsInOrganization$ = this.componentStore.unusedItSystemsInOrganization$;
@@ -29,10 +29,6 @@ export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
-    this.componentStore.getUnusedItSystemsInOrganization(this.organizationUuid$);
-  }
-
   public clickMigrateUsage() {
     this.subscriptions.add(
       this.organizationName$
@@ -44,10 +40,15 @@ export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
             componentInstance.dropdownText = $localize`Vælg IT system`;
             componentInstance.data$ = this.unusedItSystemsInOrganization$;
             componentInstance.isLoading$ = this.loadingUnusedItSystemsInOrganization$;
+            componentInstance.filterChange.subscribe((nameContent) => this.onFilterChange(nameContent));
             // componentInstance.nested = true;
           })
         )
         .subscribe()
     );
+  }
+
+  public onFilterChange(nameContent: string) {
+    this.componentStore.getUnusedItSystemsInOrganization(nameContent)(this.organizationUuid$);
   }
 }

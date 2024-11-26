@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { IdentityNamePair, mapIdentityNamePair } from '../../models/identity-name-pair.model';
 import { ComponentStore } from '@ngrx/component-store';
-import { mergeMap, Observable } from 'rxjs';
+import { mergeMap, Observable, of, withLatestFrom } from 'rxjs';
 import { APIV2ItSystemUsageMigrationINTERNALService } from 'src/app/api/v2';
 import { tapResponse } from '@ngrx/operators';
 import { filterNullish } from '../../pipes/filter-nullish';
@@ -37,18 +37,30 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
     })
   );
 
-  public getUnusedItSystemsInOrganization = this.effect((organizationUuid$: Observable<string>, nameContent: string = '') =>
-    organizationUuid$.pipe(
-      mergeMap((organizationUuid) => {
-        this.updateLoading(true);
-        return this.itSystemUsageMigrationService.getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization({ organizationUuid, nameContent, numberOfItSystems: 25  }).pipe(
-          tapResponse(
-            (dtos) => this.updateUnusedItSystemsInOrganization(dtos.map(mapIdentityNamePair).filter(x => x !== undefined)),
-            (error) => console.error(error),
-            () => this.updateLoading(false)
-          )
-        )
-      }
-    )
-  ));
+  public getUnusedItSystemsInOrganization = (nameContent: string) => this.effect(
+    (organizationUuid$: Observable<string>) =>
+      organizationUuid$.pipe(
+        withLatestFrom(of(nameContent)),
+        mergeMap(([organizationUuid, nameContent]) => {
+          this.updateLoading(true);
+          return this.itSystemUsageMigrationService
+            .getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization({
+              organizationUuid,
+              nameContent,
+              numberOfItSystems: 25,
+            })
+            .pipe(
+              tapResponse(
+                (dtos) =>
+                  this.updateUnusedItSystemsInOrganization(
+                    dtos.map(mapIdentityNamePair).filter((x) => x !== undefined)
+                  ),
+                (error) => console.error(error),
+                () => this.updateLoading(false)
+              )
+            );
+        })
+      )
+  );
+
 }
