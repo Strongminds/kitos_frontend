@@ -28,6 +28,7 @@ import {
 } from 'src/app/store/it-system/selectors';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
+import { concatLatestFrom } from '@ngrx/operators';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
@@ -155,13 +156,13 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     this.subscriptions.add(
       confirmationDialogRef
         .afterClosed()
-        .pipe(first(), combineLatestWith(this.itSystemUuid$))
+        .pipe(concatLatestFrom(() => this.itSystemUuid$))
         .subscribe(([result, systemUuid]) => {
           if (result === undefined) return;
 
           if (shouldBeInUse) {
             if (result === true) {
-              this.subscribeToUsageCreatedAction();
+              this.navigateToUsageOnUsageCreatedSuccess();
             }
 
             this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
@@ -271,7 +272,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     );
   }
 
-  private subscribeToUsageCreatedAction() {
+  private navigateToUsageOnUsageCreatedSuccess() {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess))
