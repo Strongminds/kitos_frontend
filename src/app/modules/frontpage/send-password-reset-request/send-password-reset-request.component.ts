@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store';
 import { UserActions } from 'src/app/store/user-store/actions';
 
 @Component({
-  selector: 'app-reset-password-page',
-  templateUrl: './reset-password-page.component.html',
-  styleUrl: './reset-password-page.component.scss',
+  selector: 'app-send-password-reset-request',
+  templateUrl: './send-password-reset-request.component.html',
+  styleUrl: './send-password-reset-request.component.scss',
 })
-export class ResetPasswordPageComponent {
+export class SendPasswordResetRequestComponent {
   public readonly formGroup = new FormGroup({
     email: new FormControl<string | undefined>(undefined, [Validators.email, Validators.required]),
   });

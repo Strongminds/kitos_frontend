@@ -1,16 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SendPasswordResetRequestComponent } from './modules/frontpage/send-password-reset-request/send-password-reset-request.component';
 import { AppPath } from './shared/enums/app-path';
 import { AuthGuardService } from './shared/guards/auth-guard.service';
-import { StartupGuardService } from './shared/guards/startup-guard.service';
-import { LocalAdminGuardService } from './shared/guards/local-admin-guard.service';
 import { GlobalAdminGuardService } from './shared/guards/global-admin-guard.service';
-import { ResetPasswordPageComponent } from './modules/frontpage/reset-password-page/reset-password-page.component';
+import { LocalAdminGuardService } from './shared/guards/local-admin-guard.service';
+import { StartupGuardService } from './shared/guards/startup-guard.service';
 
 const routes: Routes = [
   {
-    path: AppPath.passwordReset,
-    component: ResetPasswordPageComponent,
+    path: AppPath.sendPasswordReset,
+    component: SendPasswordResetRequestComponent,
   },
   {
     path: AppPath.root,

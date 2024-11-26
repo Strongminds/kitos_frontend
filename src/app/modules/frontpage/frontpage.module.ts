@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { PublicMessageComponent } from './public-message/public-message.component';
 import { EditPublicMessageDialogComponent } from './public-message/edit-public-message-dialog/edit-public-message-dialog.component';
 import { ResetPasswordTextLinkComponent } from './reset-password-text-link/reset-password-text-link.component';
-import { ResetPasswordPageComponent } from './reset-password-page/reset-password-page.component';
+import { SendPasswordResetRequestComponent } from './send-password-reset-request/send-password-reset-request.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +16,7 @@ import { ResetPasswordPageComponent } from './reset-password-page/reset-password
     PublicMessageComponent,
     EditPublicMessageDialogComponent,
     ResetPasswordTextLinkComponent,
-    ResetPasswordPageComponent,
+    SendPasswordResetRequestComponent,
   ],
   imports: [ReactiveFormsModule, SharedModule, FrontpageRouterModule],
 })
