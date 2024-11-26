@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { rightsIncludesLocalAdminInOrg } from 'src/app/shared/helpers/user-helper';
+import { rightsIncludesLocalAdminInOrg } from 'src/app/shared/helpers/role-helpers';
 import { userFeature } from './reducer';
 
 export const {
