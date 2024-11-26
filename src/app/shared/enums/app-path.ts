@@ -14,6 +14,7 @@ export enum AppPath {
 
   frontpage = 'frontpage',
   passwordReset = 'password-reset',
+  passwordResetSuccess = 'password-reset-success',
   contracts = 'contracts',
 
   itContracts = 'it-contracts',

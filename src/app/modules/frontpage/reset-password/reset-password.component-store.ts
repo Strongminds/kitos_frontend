@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { Actions, ofType } from '@ngrx/effects';
 import { tapResponse } from '@ngrx/operators';
 import { finalize, mergeMap, Observable, tap } from 'rxjs';
 import { APIPasswordResetResponseDTO, APIV2PasswordResetInternalINTERNALService } from 'src/app/api/v2';
-import { UserActions } from 'src/app/store/user-store/actions';
 
 interface State {
   email: string | undefined;
@@ -14,12 +12,8 @@ interface State {
 
 @Injectable()
 export class ResetPasswordComponentStore extends ComponentStore<State> {
-  constructor(private resetPasswordService: APIV2PasswordResetInternalINTERNALService, private actions$: Actions) {
+  constructor(private resetPasswordService: APIV2PasswordResetInternalINTERNALService) {
     super({ email: undefined, loading: true, resetPasswordSuccess: false });
-
-    this.actions$.pipe(ofType(UserActions.resetPasswordSuccess)).subscribe(() => {
-      this.setSuccess(true);
-    });
   }
 
   public readonly email$ = this.select((state) => state.email);

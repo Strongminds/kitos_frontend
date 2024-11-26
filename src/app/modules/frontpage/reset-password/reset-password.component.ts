@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { first, map, Observable } from 'rxjs';
 import { ResetPasswordComponentStore } from './reset-password.component-store';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { UserActions } from 'src/app/store/user-store/actions';
+import { Actions, ofType } from '@ngrx/effects';
 
 @Component({
   selector: 'app-reset-password',
@@ -29,11 +30,17 @@ export class ResetPasswordComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private componentStore: ResetPasswordComponentStore,
-    private store: Store
+    private store: Store,
+    private actions$: Actions,
+    private router: Router
   ) {}
 
   public ngOnInit(): void {
     this.requestId$.pipe(first()).subscribe((requestId) => this.componentStore.getPasswordResetRequest(requestId));
+
+    this.actions$.pipe(ofType(UserActions.resetPassword), first()).subscribe(() => {
+      this.router.navigate([AppPath.passwordResetSuccess]);
+    });
 
     this.formGroup.valueChanges.subscribe((value) => {
       if (value.password !== value.confirmPassword) {
