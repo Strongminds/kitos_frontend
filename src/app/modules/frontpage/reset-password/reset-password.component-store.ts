@@ -25,7 +25,6 @@ export class ResetPasswordComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       mergeMap((requestId) => {
         return this.resetPasswordService.getSinglePasswordResetInternalV2GetPasswordReset({ requestId }).pipe(
-          tap((response) => console.log(response)),
           tapResponse(
             (response: APIPasswordResetResponseDTO) => this.setEmail(response.email),
             (_) => this.setEmail(undefined)
