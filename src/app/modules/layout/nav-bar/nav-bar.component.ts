@@ -47,8 +47,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
           if (
             !userDefaultStartPage ||
             this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)
-          )
-            return;
+          ) return;
           this.navigateToUserDefaultStartPage(userDefaultStartPage);
         })
     );
@@ -72,7 +71,6 @@ export class NavBarComponent extends BaseComponent implements OnInit {
     const startPageValue = userDefaultStartPage.value;
     switch (startPageValue) {
       case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
-        return !uiRootConfig.showItSystemModule;
       case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
         return !uiRootConfig.showItSystemModule;
       case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
@@ -93,7 +91,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
     const startPageValue = userDefaultStartPage.value;
     switch (startPageValue) {
       case APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite:
-        return '';
+        return AppPath.root;
       case APIUserResponseDTO.DefaultUserStartPreferenceEnum.Organization:
         return `${AppPath.organization}/${AppPath.structure}`;
       case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
