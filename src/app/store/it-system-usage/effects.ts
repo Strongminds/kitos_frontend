@@ -554,6 +554,7 @@ export class ITSystemUsageEffects {
   createItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.createItSystemUsage),
+      first(),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ itSystemUuid }, organizationUuid]) =>
         this.apiV2ItSystemUsageService
