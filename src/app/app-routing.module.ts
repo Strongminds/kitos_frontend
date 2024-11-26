@@ -9,16 +9,16 @@ import { ResetPasswordPageComponent } from './modules/frontpage/reset-password-p
 
 const routes: Routes = [
   {
+    path: AppPath.passwordReset,
+    component: ResetPasswordPageComponent,
+  },
+  {
     path: AppPath.root,
     canActivate: [StartupGuardService],
     children: [
       {
         path: AppPath.root,
         loadChildren: () => import('./modules/frontpage/frontpage.module').then((m) => m.FrontpageModule),
-      },
-      {
-        path: AppPath.passwordReset,
-        component: ResetPasswordPageComponent,
       },
       {
         path: AppPath.organization,
