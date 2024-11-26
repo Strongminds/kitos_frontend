@@ -18,6 +18,7 @@ export class ConnectedDropdownDialogComponent<T> extends BaseComponent implement
   @Input() public isLoading$!: Observable<boolean>;
   @Input() public successActionType!: string;
   @Input() public errorActionType!: string;
+  @Input() public nested: boolean = false;
   @Output() public save = new EventEmitter<APIIdentityNamePairResponseDTO>();
   @Output() public filterChange = new EventEmitter<string>();
 
