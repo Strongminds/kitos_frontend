@@ -8,7 +8,7 @@
               <app-paragraph [bold]="true">
               {{organization}}
             </app-paragraph>
-            <app-button i18n (buttonClick)="clickMigrateUsage()">Flyt</app-button>
+            <app-button i18n (buttonClick)="clickMigrateUsage()" *ngIf="isGlobalAdmin$ | async">Flyt</app-button>
             </div>
           </td>
         </tr>

@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { selectOrganizationName, selectOrganizationUuid, selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { GridUsagesDropdownDialogComponent } from '../grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
@@ -14,6 +14,7 @@ import { GridUsagesDropdownDialogComponent } from '../grid-usages-dropdown-dialo
 export class GridUsagesDialogComponent extends BaseComponent {
   public readonly organizationName$ = this.store.select(selectOrganizationName).pipe(filterNullish());
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
+  public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { usages: string[]; title: string },
