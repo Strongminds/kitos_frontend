@@ -131,34 +131,35 @@ import '@progress/kendo-angular-intl/locales/da/all';
 import { AccordionHeaderComponent } from './accordion-header/accordion-header.component';
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
+import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
+import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
 import { FileInputComponent } from './file-input/file-input.component';
+import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
+import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
+import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
+import { GridUsagesDropdownDialogComponent } from './grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
 import { IconComponent } from './icon/icon.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { LocalGridComponent } from './local-grid/local-grid.component';
+import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
+import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
+import { EditLocalOptionTypeDialogComponent } from './local-option-type-view/edit-local-option-type-dialog/edit-local-option-type-dialog.component';
+import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
+import { LocalOptionTypeViewComponent } from './local-option-type-view/local-option-type-view.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
-import { EditLocalOptionTypeDialogComponent } from './local-option-type-view/edit-local-option-type-dialog/edit-local-option-type-dialog.component';
-import { LocalOptionTypeViewComponent } from './local-option-type-view/local-option-type-view.component';
+import { OrganizationDropdownComponent } from './organization-dropdown/organization-dropdown.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
+import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
-import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
-import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
-import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
-import { OrganizationDropdownComponent } from './organization-dropdown/organization-dropdown.component';
-import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
-import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
-import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
-import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
-import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
 import { UsageProxyCheckboxComponent } from './usage-proxy-checkbox/usage-proxy-checkbox.component';
-import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
-import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
-import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
+import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
+import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -292,6 +293,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GlobalOptionTypeGridComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
+    GridUsagesDropdownDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -434,6 +436,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageProxyCheckboxComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
+    GridUsagesDropdownDialogComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
