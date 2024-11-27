@@ -3,6 +3,7 @@ import {
   mapStartPreferenceChoiceFromV1,
   StartPreferenceChoice,
 } from './organization/organization-user/start-preference.model';
+import { adaptV1OrganizationRights, OrganizationRight } from './organization-right.model';
 
 export interface User {
   id: number;
@@ -10,11 +11,9 @@ export interface User {
   email: string;
   fullName: string;
   isGlobalAdmin: boolean;
-  isLocalAdmin: boolean;
   defaultStartPage: StartPreferenceChoice | undefined;
+  organizationRights: OrganizationRight[];
 }
-
-const localAdminEnumValue = 1;
 
 export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
   if (apiUser?.id === undefined || apiUser?.uuid === undefined || apiUser?.email === undefined) return;
@@ -25,9 +24,7 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
     email: apiUser.email,
     fullName: apiUser?.fullName ?? '',
     isGlobalAdmin: apiUser?.isGlobalAdmin ?? false,
-    isLocalAdmin:
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      apiUser.organizationRights?.map((right) => (right as any).role).includes(localAdminEnumValue) ?? false,
+    organizationRights: adaptV1OrganizationRights(apiUser?.organizationRights ?? []),
     defaultStartPage: mapStartPreferenceChoiceFromV1(apiUser.defaultUserStartPreference),
-  };
+ };
 };
