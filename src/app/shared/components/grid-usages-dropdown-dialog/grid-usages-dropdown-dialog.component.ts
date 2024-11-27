@@ -16,6 +16,7 @@ export class GridUsagesDropdownDialogComponent {
   @Input() public organizationUuid$!: Observable<string>;
   @Input() public usingOrganizationUuid!: string;
   @Input() public sourceItSystemUuid!: string;
+  @Input() rowEntityIdentifier!: string;
 
   public readonly unusedItSystemsInOrganization$ = this.componentStore.unusedItSystemsInOrganization$;
   public readonly loadingUnusedItSystemsInOrganization$ = this.componentStore.select((state) => state.loading);
@@ -33,5 +34,6 @@ export class GridUsagesDropdownDialogComponent {
     componentInstance.usingOrganizationUuid$ = of(this.usingOrganizationUuid);
     componentInstance.targetItSystemUuid = targetItSystem.uuid;
     componentInstance.sourceItSystemUuid = this.sourceItSystemUuid;
+    componentInstance.rowEntityIdentifier = this.rowEntityIdentifier;
   }
 }

@@ -14,6 +14,7 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
   @Input() public sourceItSystemUuid!: string;
   @Input() public targetItSystemUuid!: string;
   @Input() public usingOrganizationUuid$!: Observable<string>;
+  @Input() rowEntityIdentifier!: string | undefined;
 
   public readonly migration$ = this.componentStore.migration$;
   public readonly loading$ = this.componentStore.loading$;
@@ -24,8 +25,7 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('Target UUID:', this.targetItSystemUuid);
-
+    //todo add row entity identifier here to use for getting sourceUsageUuid to be passed to migration endpoint
     this.componentStore.getMigration(this.targetItSystemUuid)(this.usingOrganizationUuid$);
   }
 

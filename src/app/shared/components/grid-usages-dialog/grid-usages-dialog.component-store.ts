@@ -71,7 +71,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
           return this.itSystemUsageMigrationService
             .getSingleItSystemUsageMigrationV2Get({
               toSystemUuid: targetItSystemUuid,
-              usageUuid: 'todo make this the usag euuid',
+              usageUuid: 'todo make this the usage uuid',
             })
             .pipe(
               tapResponse(

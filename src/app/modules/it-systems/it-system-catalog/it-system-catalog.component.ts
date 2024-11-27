@@ -115,6 +115,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     {
       field: 'Usages',
       dataField: 'Name',
+      idField: 'Uuid',
       title: $localize`IT System: Anvendes af`,
       section: this.systemSectionName,
       style: 'usages',

@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { GridUsagesDialogComponent } from '../grid-usages-dialog/grid-usages-dialog.component';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { GridUsagesDialogComponent } from '../grid-usages-dialog/grid-usages-dialog.component';
 
 @Component({
   selector: 'app-usage-link',
@@ -15,14 +15,17 @@ export class UsageLinkComponent {
   @Input() usages!: string[];
   @Input() name: string = '';
   @Input() type: RegistrationEntityTypes | undefined;
-
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input() rowEntityIdentifier: string | undefined;
 
   onUsageClick(event: Event) {
     event.preventDefault();
     const dialogRef = this.dialog.open(GridUsagesDialogComponent, {
       data: { usages: this.usages, title: this.getTitle() },
     });
-    dialogRef.componentInstance.type = this.type;
+    const componentInstance = dialogRef.componentInstance;
+    componentInstance.type = this.type;
+    componentInstance.rowEntityIdentifier = this.rowEntityIdentifier;
   }
 
   getTitle() {
@@ -31,7 +34,7 @@ export class UsageLinkComponent {
 
   getPrefix() {
     switch (this.type) {
-     case 'it-interface':
+      case 'it-interface':
         return $localize`Organisationer der anvender snitfladen: `;
       case 'it-system':
         return $localize`Anveldelser af `;

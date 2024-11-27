@@ -223,6 +223,7 @@
           [type]="column.entityType"
           [name]="searchProperty(dataItem, column.dataField)"
           [usages]="searchProperty(dataItem, column.field)"
+          [rowEntityIdentifier]="searchProperty(dataItem, column.idField ?? 'Uuid')"
         >
         </app-usage-link>
       </ng-template>
