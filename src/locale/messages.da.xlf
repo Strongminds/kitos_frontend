@@ -6191,6 +6191,14 @@
         <source> Din anmodning om at nulstille dit password blev ikke fundet i systemet. Det kan allerede være brugt, eller den kan være udløbet. Gå til <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;[&apos;/&apos;, routerLink]&quot;&gt;"/>Glemt password?<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> og prøv igen. </source>
         <target state="new"> Din anmodning om at nulstille dit password blev ikke fundet i systemet. Det kan allerede være brugt, eller den kan være udløbet. Gå til <x id="START_LINK" ctype="x-a" equiv-text="&lt;a [routerLink]=&quot;[&apos;/&apos;, routerLink]&quot;&gt;"/>Glemt password?<x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a&gt;"/> og prøv igen. </target>
       </trans-unit>
+      <trans-unit id="706676642418633166" datatype="html">
+        <source>Dit password er blevet nulstillet</source>
+        <target state="new">Dit password er blevet nulstillet</target>
+      </trans-unit>
+      <trans-unit id="640398851777061837" datatype="html">
+        <source>Dit password kunne ikke nulstilles</source>
+        <target state="new">Dit password kunne ikke nulstilles</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

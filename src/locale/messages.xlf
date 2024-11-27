@@ -4702,6 +4702,12 @@
       <trans-unit id="6473069953333383452" datatype="html">
         <source>Email adresse</source>
       </trans-unit>
+      <trans-unit id="640398851777061837" datatype="html">
+        <source>Dit password kunne ikke nulstilles</source>
+      </trans-unit>
+      <trans-unit id="706676642418633166" datatype="html">
+        <source>Dit password er blevet nulstillet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
