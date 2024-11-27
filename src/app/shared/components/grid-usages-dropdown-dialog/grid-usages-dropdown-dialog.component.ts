@@ -1,9 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
-import { IdentityNamePair } from '../../models/identity-name-pair.model';
-import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 import { MatDialog } from '@angular/material/dialog';
+import { Observable, of } from 'rxjs';
+import { IdentityNamePair } from '../../models/identity-name-pair.model';
 import { GridUsagesConsequencesDialogComponent } from '../grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
+import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
 @Component({
   selector: 'app-grid-usages-dropdown-dialog',
@@ -14,6 +14,8 @@ import { GridUsagesConsequencesDialogComponent } from '../grid-usages-consequenc
 export class GridUsagesDropdownDialogComponent {
   @Input() public organizationName$!: Observable<string>;
   @Input() public organizationUuid$!: Observable<string>;
+  @Input() public usingOrganizationUuid!: string;
+  @Input() public sourceItSystemUuid!: string;
 
   public readonly unusedItSystemsInOrganization$ = this.componentStore.unusedItSystemsInOrganization$;
   public readonly loadingUnusedItSystemsInOrganization$ = this.componentStore.select((state) => state.loading);
@@ -24,11 +26,12 @@ export class GridUsagesDropdownDialogComponent {
     this.componentStore.getUnusedItSystemsInOrganization(nameContent)(this.organizationUuid$);
   }
 
-  public onConfirm(itSystemIdentityNamePair: IdentityNamePair) {
+  public onConfirm(targetItSystem: IdentityNamePair) {
     const dialogRef = this.dialog.open(GridUsagesConsequencesDialogComponent);
     const componentInstance = dialogRef.componentInstance;
     componentInstance.title = $localize`Flytning af IT systemanvendelse`;
-
-    componentInstance.targetItSystemUuid = itSystemIdentityNamePair.uuid;
+    componentInstance.usingOrganizationUuid$ = of(this.usingOrganizationUuid);
+    componentInstance.targetItSystemUuid = targetItSystem.uuid;
+    componentInstance.sourceItSystemUuid = this.sourceItSystemUuid;
   }
 }

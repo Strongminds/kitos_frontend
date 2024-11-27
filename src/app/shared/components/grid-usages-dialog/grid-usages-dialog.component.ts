@@ -7,6 +7,7 @@ import {
   selectUserIsGlobalAdmin,
 } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
+import { IdentityNamePair } from '../../models/identity-name-pair.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { GridUsagesDropdownDialogComponent } from '../grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
@@ -18,13 +19,14 @@ import { GridUsagesDropdownDialogComponent } from '../grid-usages-dropdown-dialo
 })
 export class GridUsagesDialogComponent extends BaseComponent {
   @Input() type!: RegistrationEntityTypes | undefined;
+  @Input() sourceItSystemUuid!: string;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName).pipe(filterNullish());
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { usages: string[]; title: string },
+    @Inject(MAT_DIALOG_DATA) public data: { usages: IdentityNamePair[]; title: string },
     private readonly dialog: MatDialog,
     private readonly store: Store
   ) {
@@ -35,12 +37,14 @@ export class GridUsagesDialogComponent extends BaseComponent {
     return this.type === 'it-system';
   }
 
-  public clickMigrateUsage() {
+  public clickMigrateUsage($event: IdentityNamePair) {
     const dialogRef = this.dialog.open(GridUsagesDropdownDialogComponent, {
       width: '1000px',
     });
     const componentInstance = dialogRef.componentInstance;
     componentInstance.organizationName$ = this.organizationName$;
     componentInstance.organizationUuid$ = this.organizationUuid$;
+    componentInstance.usingOrganizationUuid = $event.uuid;
+    componentInstance.sourceItSystemUuid = this.sourceItSystemUuid;
   }
 }
