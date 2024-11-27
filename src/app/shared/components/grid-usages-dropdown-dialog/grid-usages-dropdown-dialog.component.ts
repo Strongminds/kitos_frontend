@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { IdentityNamePair } from '../../models/identity-name-pair.model';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 import { MatDialog } from '@angular/material/dialog';
+import { GridUsagesConsequencesDialogComponent } from '../grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
 
 @Component({
   selector: 'app-grid-usages-dropdown-dialog',
@@ -24,8 +25,10 @@ export class GridUsagesDropdownDialogComponent {
   }
 
   public onConfirm(itSystemIdentityNamePair: IdentityNamePair) {
-    console.log('Clicked on IT system with uuid:', itSystemIdentityNamePair.uuid);
+    const dialogRef = this.dialog.open(GridUsagesConsequencesDialogComponent);
+    const componentInstance = dialogRef.componentInstance;
+    componentInstance.title = $localize`Flytning af IT systemanvendelse`;
 
-    //todo open 3rd dialog layer
+    componentInstance.targetItSystemUuid = itSystemIdentityNamePair.uuid;
   }
 }

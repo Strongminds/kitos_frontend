@@ -160,6 +160,7 @@ import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.co
 import { UsageProxyCheckboxComponent } from './usage-proxy-checkbox/usage-proxy-checkbox.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { GridUsagesConsequencesDialogComponent } from './grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -294,6 +295,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     PriorityButtonsComponent,
     ToggleButtonComponent,
     GridUsagesDropdownDialogComponent,
+    GridUsagesConsequencesDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -437,6 +439,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     PriorityButtonsComponent,
     ToggleButtonComponent,
     GridUsagesDropdownDialogComponent,
+    GridUsagesConsequencesDialogComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
