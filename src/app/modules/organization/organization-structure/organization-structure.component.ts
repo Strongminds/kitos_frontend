@@ -27,6 +27,7 @@ import {
   selectUnitPermissions,
 } from 'src/app/store/organization/organization-unit/selectors';
 
+import { AppPath } from 'src/app/shared/enums/app-path';
 import { EditOrganizationUnitDialogComponent } from './edit-organization-unit-dialog/edit-organization-unit-dialog.component';
 
 @Component({
@@ -134,7 +135,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
           .pipe(combineLatestWith(this.organizationUnits$), first())
           .subscribe(([uuid, units]) => {
             if (uuid) {
-              this.router.navigate([`organization/structure/${uuid}`]);
+              this.router.navigate([`${AppPath.organization}/${AppPath.structure}/${uuid}`]);
               this.store.dispatch(OrganizationUnitActions.addExpandedNode(this.findParentUuids(units, uuid)));
             }
           });

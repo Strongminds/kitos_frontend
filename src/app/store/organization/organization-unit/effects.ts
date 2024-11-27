@@ -36,7 +36,6 @@ export class OrganizationUnitEffects {
   ) {}
 
   getOrganizationUnits$ = createEffect(() => {
-    // eslint-disable-next-line @ngrx/avoid-cyclic-effects
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.getOrganizationUnits),
       concatLatestFrom(() => [
@@ -61,7 +60,6 @@ export class OrganizationUnitEffects {
     );
   });
   getOrganizationUnitsPaged$ = createEffect(() => {
-    // eslint-disable-next-line @ngrx/avoid-cyclic-effects
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.getOrganizationUnitsPaged),
       concatLatestFrom(() => [
