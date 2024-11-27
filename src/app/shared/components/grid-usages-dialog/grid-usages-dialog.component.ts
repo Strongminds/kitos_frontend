@@ -41,7 +41,8 @@ export class GridUsagesDialogComponent extends BaseComponent {
             componentInstance.data$ = this.unusedItSystemsInOrganization$;
             componentInstance.isLoading$ = this.loadingUnusedItSystemsInOrganization$;
             componentInstance.filterChange.subscribe((nameContent) => this.onFilterChange(nameContent));
-            // componentInstance.nested = true;
+            componentInstance.confirmButtonText = $localize`Se konsekvenser`
+            componentInstance.nested = true;
           })
         )
         .subscribe()

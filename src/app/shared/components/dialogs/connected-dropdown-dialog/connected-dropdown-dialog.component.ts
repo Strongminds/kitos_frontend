@@ -19,6 +19,7 @@ export class ConnectedDropdownDialogComponent<T> extends BaseComponent implement
   @Input() public successActionType!: string;
   @Input() public errorActionType!: string;
   @Input() public nested: boolean = false;
+  @Input() public confirmButtonText = $localize`Tilføj`
   @Output() public save = new EventEmitter<APIIdentityNamePairResponseDTO>();
   @Output() public filterChange = new EventEmitter<string>();
 
