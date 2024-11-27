@@ -107,7 +107,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     this.subscriptions.add(
       this.rootUnitUuid$
         .pipe(first())
-        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode(uuid)))
+        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode([uuid])))
     );
 
     this.subscriptions.add(
@@ -127,21 +127,26 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         })
     );
 
-    this.store
-      .select(selectUserDefaultUnitUuid)
-      .pipe(first())
-      .subscribe((uuid) => {
-        if (uuid) {
-          this.router.navigate([`organization/structure/${uuid}`]);
-        }
-      });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUnitActions.getOrganizationUnitsSuccess)).subscribe(() => {
+        this.store
+          .select(selectUserDefaultUnitUuid)
+          .pipe(combineLatestWith(this.organizationUnits$), first())
+          .subscribe(([uuid, units]) => {
+            if (uuid) {
+              this.router.navigate([`organization/structure/${uuid}`]);
+              this.store.dispatch(OrganizationUnitActions.addExpandedNode(this.findParentUuids(units, uuid)));
+            }
+          });
+      })
+    );
   }
 
-  changeDragState(): void {
+  public changeDragState(): void {
     this.dragDisabledSubject.next(!this.dragDisabledSubject.value);
   }
 
-  moveNode(event: EntityTreeNodeMoveResult): void {
+  public moveNode(event: EntityTreeNodeMoveResult): void {
     this.subscriptions.add(
       this.actions$
         .pipe(
@@ -162,11 +167,11 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     );
   }
 
-  nodeExpandClick(node: EntityTreeNode<APIOrganizationUnitResponseDTO>): void {
+  public nodeExpandClick(node: EntityTreeNode<APIOrganizationUnitResponseDTO>): void {
     if (node.isExpanded) {
       this.store.dispatch(OrganizationUnitActions.removeExpandedNode(node.uuid));
     } else {
-      this.store.dispatch(OrganizationUnitActions.addExpandedNode(node.uuid));
+      this.store.dispatch(OrganizationUnitActions.addExpandedNode([node.uuid]));
     }
   }
 
@@ -177,7 +182,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.parentUnitName$ = this.currentUnitName$;
   }
 
-  onClickEdit() {
+  public onClickEdit() {
     this.setupEditDialog();
   }
 
@@ -194,5 +199,15 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     dialogInstance.unit$ = this.currentOrganizationUnit$;
     dialogInstance.rootUnitUuid$ = this.rootUnitUuid$;
     dialogInstance.disabledUnitsUuids$ = this.disabledUnitsUuids$;
+  }
+
+  private findParentUuids(units: APIOrganizationUnitResponseDTO[], uuid: string): string[] {
+    const unit = units.find((u) => u.uuid === uuid);
+    if (!unit || !unit.parentOrganizationUnit) {
+      return [];
+    }
+
+    const parentUuid = unit.parentOrganizationUnit.uuid;
+    return [parentUuid, ...this.findParentUuids(units, parentUuid)];
   }
 }

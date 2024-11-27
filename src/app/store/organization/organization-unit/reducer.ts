@@ -26,6 +26,9 @@ export const organizationUnitInitialState: OrganizationUnitState = organizationU
   cacheTime: undefined,
   expandedNodeUuids: [],
 
+  pagedUnits: undefined,
+  pagedUnitsCacheTime: undefined,
+
   registrations: undefined,
   isLoadingRegistrations: false,
 
@@ -45,12 +48,19 @@ export const organizationUnitFeature = createFeature({
   name: 'OrganizationUnit',
   reducer: createReducer(
     organizationUnitInitialState,
-    on(OrganizationUnitActions.getOrganizationUnits, (state): OrganizationUnitState => ({ ...state })),
     on(
       OrganizationUnitActions.getOrganizationUnitsSuccess,
       (state, { units }): OrganizationUnitState => ({
         ...organizationUnitAdapter.setAll(units, state),
         cacheTime: new Date().getTime(),
+      })
+    ),
+    on(
+      OrganizationUnitActions.getOrganizationUnitsPagedSuccess,
+      (state, { units }): OrganizationUnitState => ({
+        ...state,
+        pagedUnits: units,
+        pagedUnitsCacheTime: new Date().getTime(),
       })
     ),
     on(OrganizationUnitActions.patchOrganizationUnitSuccess, (state, { unit }) => {
@@ -69,13 +79,13 @@ export const organizationUnitFeature = createFeature({
       return { ...organizationUnitAdapter.setAll(nodesCopy, state) };
     }),
 
-    on(
-      OrganizationUnitActions.addExpandedNode,
-      (state, { uuid }): OrganizationUnitState => ({
+    on(OrganizationUnitActions.addExpandedNode, (state, { uuids }): OrganizationUnitState => {
+      const uniqueUuids = Array.from(new Set([...state.expandedNodeUuids, ...uuids]));
+      return {
         ...state,
-        expandedNodeUuids: [...state.expandedNodeUuids, uuid],
-      })
-    ),
+        expandedNodeUuids: uniqueUuids,
+      };
+    }),
     on(
       OrganizationUnitActions.removeExpandedNode,
       (state, { uuid }): OrganizationUnitState => ({
