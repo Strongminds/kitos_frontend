@@ -19,9 +19,10 @@ export class UsageLinkComponent {
 
   onUsageClick(event: Event) {
     event.preventDefault();
-    this.dialog.open(GridUsagesDialogComponent, {
+    const dialogRef = this.dialog.open(GridUsagesDialogComponent, {
       data: { usages: this.usages, title: this.getTitle() },
     });
+    dialogRef.componentInstance.type = this.type;
   }
 
   getTitle() {
