@@ -1,11 +1,11 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
-import { Organization } from 'src/app/shared/models/organization/organization.model';
+import { OrganizationOData } from 'src/app/shared/models/organization/organization-odata.model';
 import { OrganizationActions } from './actions';
 import { OrganizationState } from './state';
 
-export const organizationAdapter = createEntityAdapter<Organization>();
+export const organizationAdapter = createEntityAdapter<OrganizationOData>();
 
 export const organizationInitialState: OrganizationState = organizationAdapter.getInitialState({
   total: 0,
@@ -17,6 +17,7 @@ export const organizationInitialState: OrganizationState = organizationAdapter.g
   organizationMasterDataRoles: null,
   permissions: null,
   uiRootConfig: null,
+  uiRootConfigCacheTime: undefined,
 });
 
 export const organizationFeature = createFeature({
@@ -82,13 +83,13 @@ export const organizationFeature = createFeature({
         gridState,
       })
     ),
-    on(
-      OrganizationActions.getUIRootConfigSuccess,
-      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig })
-    ),
+    on(OrganizationActions.getUIRootConfigSuccess, (state, { uiRootConfig }): OrganizationState => {
+      const newCacheTime = new Date().getTime();
+      return { ...state, uiRootConfig, uiRootConfigCacheTime: newCacheTime };
+    }),
     on(
       OrganizationActions.patchUIRootConfigSuccess,
-      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig })
+      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig, uiRootConfigCacheTime: undefined })
     )
   ),
 });

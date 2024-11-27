@@ -4645,17 +4645,20 @@
       <trans-unit id="6820190168933872381" datatype="html">
         <source>Tilpasning af landekoder</source>
       </trans-unit>
-      <trans-unit id="3441632359299611513" datatype="html">
-        <source>Organisationsroller</source>
-      </trans-unit>
       <trans-unit id="283333195670837592" datatype="html">
         <source>Beskeden kunne ikke opdateres</source>
+      </trans-unit>
+      <trans-unit id="3441632359299611513" datatype="html">
+        <source>Organisationsroller</source>
       </trans-unit>
       <trans-unit id="4945999259997160926" datatype="html">
         <source>Beskeden blev opdateret</source>
       </trans-unit>
       <trans-unit id="586395525837431806" datatype="html">
         <source>Primær organisationsenhed</source>
+      </trans-unit>
+      <trans-unit id="7225215805628203543" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gamle brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
       </trans-unit>
     </body>
   </file>

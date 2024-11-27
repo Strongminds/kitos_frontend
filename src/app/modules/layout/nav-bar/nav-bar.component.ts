@@ -7,7 +7,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectHasMultipleOrganizations, selectHasTriedAuthenticating, selectOrganizationName, selectUser } from 'src/app/store/user-store/selectors';
+import { selectHasMultipleOrganizations, selectOrganizationName, selectUser, selectUserIsCurrentlyLocalAdmin } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
 
@@ -23,21 +23,30 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
   public readonly uiRootConfig$ = this.store.select(selectUIRootConfig);
+  public readonly isUserCurrentyLocalAdmin$ = this.store.select(selectUserIsCurrentlyLocalAdmin);
 
   constructor(private store: Store, private dialog: MatDialog, private router: Router) {
     super();
   }
 
   ngOnInit(): void {
+    this.store.dispatch(OrganizationActions.getUIRootConfig());
     this.subscriptions.add(
-      combineLatest([this.user$, this.router.events]).pipe(
-        filter(([user, event]) => user !== undefined && event instanceof NavigationEnd),
-        tap(() => this.store.dispatch(OrganizationActions.getUIRootConfig()))
-      ).subscribe());
+      combineLatest([this.user$, this.router.events])
+        .pipe(
+          filter(([user, event]) => user !== undefined && event instanceof NavigationEnd),
+          tap(() => this.store.dispatch(OrganizationActions.getUIRootConfig()))
+        )
+        .subscribe()
+    );
   }
 
   public showOrganizationDialog() {
     this.dialog.open(ChooseOrganizationComponent);
+  }
+
+  public goToOldKitos() {
+    window.location.href = '/';
   }
 
   public logout() {

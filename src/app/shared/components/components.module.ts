@@ -146,8 +146,8 @@ import { RoleTableContainerComponent } from './role-table/role-table-container/r
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { GlobalOptionTypeTableComponent } from './global-option-type-table/global-option-type-table.component';
-import { GlobalOptionTypeDialogComponent } from './global-option-type-table/global-option-type-dialog/global-option-type-dialog.component';
+import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
+import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { OrganizationDropdownComponent } from './organization-dropdown/organization-dropdown.component';
 import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
@@ -155,6 +155,10 @@ import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog
 import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { LocalOptionGridComponent } from './local-option-type-view/local-option-grid/local-option-grid.component';
+import { UsageProxyCheckboxComponent } from './usage-proxy-checkbox/usage-proxy-checkbox.component';
+import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
+import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
+import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -275,7 +279,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     NavigationDrawerComponent,
     IconComponent,
     FileInputComponent,
-    GlobalOptionTypeTableComponent,
+    GlobalOptionTypeViewComponent,
     GlobalOptionTypeDialogComponent,
     UserDropdownComponent,
     OrganizationDropdownComponent,
@@ -284,6 +288,10 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OptionTypeDropdownComponent,
     RichTextEditorComponent,
     LocalOptionGridComponent,
+    UsageProxyCheckboxComponent,
+    GlobalOptionTypeGridComponent,
+    PriorityButtonsComponent,
+    ToggleButtonComponent,
   ],
   imports: [
     CommonModule,
@@ -414,7 +422,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     IconComponent,
     LocalGridComponent,
     FileInputComponent,
-    GlobalOptionTypeTableComponent,
+    GlobalOptionTypeViewComponent,
     GlobalOptionTypeDialogComponent,
     UserDropdownComponent,
     OrganizationDropdownComponent,
@@ -423,6 +431,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     OptionTypeDropdownComponent,
     RichTextEditorComponent,
     LocalOptionGridComponent,
+    UsageProxyCheckboxComponent,
+    PriorityButtonsComponent,
+    ToggleButtonComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
