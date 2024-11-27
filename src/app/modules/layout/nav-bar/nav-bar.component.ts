@@ -44,13 +44,19 @@ export class NavBarComponent extends BaseComponent implements OnInit {
         .pipe(ofType(UserActions.resetOnOrganizationUpdate), withLatestFrom(this.user$, this.uiRootConfig$))
         .subscribe(([_, user, uiRootConfig]) => {
           const userDefaultStartPage = user?.defaultStartPage;
-          if (
-            !userDefaultStartPage ||
-            this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)
-          ) return;
-          this.navigateToUserDefaultStartPage(userDefaultStartPage);
+          if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig)) this.navigateToUserDefaultStartPage(userDefaultStartPage!);
         })
     );
+  }
+
+  private shouldGoToUserDefaultStartPage(userDefaultStartPage: StartPreferenceChoice | undefined, uiRootConfig: UIRootConfig): boolean {
+    return this.isOnStartPage() &&
+      userDefaultStartPage !== undefined &&
+      !this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig);
+  }
+
+  private isOnStartPage(): boolean {
+    return this.router.url.replace('/', '') === AppPath.root;
   }
 
   private setupGetUIRootConfigOnNavigation() {
