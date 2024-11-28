@@ -69,7 +69,7 @@ export const organizationUnitFeature = createFeature({
           id: unit.uuid,
           changes: unit,
         },
-        state
+        { ...state, pagedUnitsCacheTime: undefined }
       );
     }),
     on(OrganizationUnitActions.getOrganizationUnitsError, (state): OrganizationUnitState => ({ ...state })),
@@ -110,6 +110,7 @@ export const organizationUnitFeature = createFeature({
 
       (state, { unit }): OrganizationUnitState => ({
         ...organizationUnitAdapter.addOne(unit, state),
+        pagedUnitsCacheTime: undefined,
       })
     ),
 

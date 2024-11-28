@@ -104,7 +104,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   ngOnInit(): void {
-    this.goToDefaultUnit();
+    this.subscribeToDefaultOrgUnitRedirect();
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
     this.subscriptions.add(
       this.rootUnitUuid$
@@ -199,7 +199,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     return [parentUuid, ...this.findParentUuids(units, parentUuid)];
   }
 
-  private goToDefaultUnit() {
+  private subscribeToDefaultOrgUnitRedirect() {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUnitActions.getOrganizationUnitsSuccess)).subscribe(() => {
         this.store
