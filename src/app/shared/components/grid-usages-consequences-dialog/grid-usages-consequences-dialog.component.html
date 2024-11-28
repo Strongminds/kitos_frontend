@@ -60,34 +60,35 @@
               <th i18n>Kontrakt</th>
             </thead>
             <tbody>
-              <tr *ngFor="let consequence of consequences">
-                <td>
-                  Navn: {{formatSystemName(relation.fromSystem.name,relation.fromSystem.deactivated) }}
+              <tr *ngFor="let relation of migration.affectedRelations">
+                <td i18n>
+                  Navn: {{formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}
                   <br />
-                  Uuid: {{relation.fromSystem.uuid}}
+                  Uuid: {{relation.fromSystem?.uuid}}
               </td>
-              <td>
-                  Navn: {{formatSystemName(relation.toSystem.name,relation.toSystem.deactivated) }}
+              <td i18n>
+                  Navn: {{formatSystemName(relation.toSystem?.name,relation.toSystem?.deactivated) }}
                   <br />
-                  Uuid: {{ relation.toSystem.uuid}}
+                  Uuid: {{ relation.toSystem?.uuid}}
               </td>
               <td>
                   {{relation.description}}
               </td>
-              <td>
-                  Navn: {{relation.interface.name}}
+              <td i18n>
+                  Navn: {{relation._interface?.name}}
                   <br />
-                  Uuid: {{relation.interface.uuid}}
+                  Uuid: {{relation._interface?.uuid}}
               </td>
               <td>
-                  {{relation.frequencyType.name}}
+                  {{relation.frequencyType?.name}}
               </td>
-              <td ng-if="relation.contract">
+              <td *ngIf="relation.contract" i18n>
                   Navn: {{relation.contract.name}}
                   <br />
                   Uuid: {{relation.contract.uuid}}
               </td>
-              <td ng-if="!relation.contract">Ingen kontrakt</td>
+              <td *ngIf="!relation.contract" i18n>
+                Ingen kontrakt</td>
               </tr>
             </tbody>
           </app-native-table>

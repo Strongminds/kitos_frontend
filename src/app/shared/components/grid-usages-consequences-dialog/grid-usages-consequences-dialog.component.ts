@@ -82,4 +82,9 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
       })
     );
   }
+
+  public formatSystemName(name: string | undefined, deactivated: boolean | undefined){
+    if (!name) return '';
+    return deactivated ? $localize`${name} (Ikke tilgængeligt)` : name
+  }
 }
