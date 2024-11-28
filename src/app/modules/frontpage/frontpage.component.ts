@@ -44,9 +44,8 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
         window.location.href = '/LoginHandler.ashx';
       },
       confirmationType: 'OkCancel',
-      title: 'Single Sign-On (SSO)',
-      message:
-        'After completing the SSO process, you will be redirected to the old UI. You can then return to the new UI',
+      title: $localize`Single Sign-On (SSO)`,
+      message: $localize`Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui`,
     });
   }
 }
