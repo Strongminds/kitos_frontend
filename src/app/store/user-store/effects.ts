@@ -105,7 +105,7 @@ export class UserEffects {
       ofType(UserActions.resetOnOrganizationUpdate),
       switchMap(() =>
         this.store.select(selectUIRootConfig).pipe(
-          filter((config) => !!config),
+          filterNullish(),
           withLatestFrom(this.store.select(selectUser))
         )
       ),
