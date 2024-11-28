@@ -10,6 +10,8 @@ import {
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { IdentityNamePair, mapIdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { filterNullish } from '../../../../pipes/filter-nullish';
+import { Store } from '@ngrx/store';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 
 interface State {
   loading: boolean;
@@ -33,7 +35,8 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
     private readonly itSystemUsageMigrationService: APIV2ItSystemUsageMigrationINTERNALService,
     @Inject(APIV2ItSystemUsageInternalINTERNALService)
     private readonly itSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private store: Store
   ) {
     super({
       loading: false,
@@ -126,6 +129,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
             tapResponse(
               (_) => {
                 this.notificationService.showDefault($localize`Systemanvendelsen blev flyttet`);
+                this.store.dispatch(ITSystemActions.getITSystems(''));
               },
               (error) => {
                 this.notificationService.showError($localize`Systemanvendelsen kunne ikke flyttes`);
