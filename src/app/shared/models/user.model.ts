@@ -13,6 +13,7 @@ export interface User {
   isGlobalAdmin: boolean;
   defaultStartPage: StartPreferenceChoice | undefined;
   organizationRights: OrganizationRight[];
+  defaultUnitUuid?: string;
 }
 
 export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
@@ -26,5 +27,6 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
     isGlobalAdmin: apiUser?.isGlobalAdmin ?? false,
     organizationRights: adaptV1OrganizationRights(apiUser?.organizationRights ?? []),
     defaultStartPage: mapStartPreferenceChoiceFromV1(apiUser.defaultUserStartPreference),
- };
+    defaultUnitUuid: apiUser.defaultOrganizationUnitUuid,
+  };
 };
