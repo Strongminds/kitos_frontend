@@ -26,7 +26,7 @@ export class AppComponent extends BaseComponent implements OnInit {
     private dialog: MatDialog,
     private organizationService: OrganizationService,
     private materialIconsService: MaterialIconsConfigService,
-    private externalReferencesService: ExternalReferencesStoreAdapterService
+    private externalReferencesService: ExternalReferencesStoreAdapterService,
   ) {
     super();
   }

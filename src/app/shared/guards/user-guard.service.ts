@@ -10,14 +10,17 @@ import { User } from '../models/user.model';
 export class UserGuardService {
   constructor(private router: Router, private store: Store) {}
 
-  public verifyAuthorization(shouldUserBeAuthorized: (user: User) => boolean): Observable<boolean | UrlTree> {
+  public verifyAuthorization(
+    shouldUserBeAuthorized: (user: User) => boolean,
+    returnUrl?: string
+  ): Observable<boolean | UrlTree> {
     return this.store.select(selectUser).pipe(
       map((user) => {
         if (user && shouldUserBeAuthorized(user)) {
           return true;
         } else {
           // Redirect unauthorized users
-          return this.router.parseUrl(AppPath.root);
+          return this.router.createUrlTree([AppPath.root], { queryParams: { returnUrl } });
         }
       })
     );

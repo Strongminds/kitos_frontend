@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { UrlTree } from '@angular/router';
+import { RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UserGuardService } from './user-guard.service';
 
@@ -7,7 +7,7 @@ import { UserGuardService } from './user-guard.service';
 export class AuthGuardService {
   constructor(private userGuardService: UserGuardService) {}
 
-  canActivate(): Observable<boolean | UrlTree> {
-    return this.userGuardService.verifyAuthorization((_) => true);
+  canActivate(state: RouterStateSnapshot): Observable<boolean | UrlTree> {
+    return this.userGuardService.verifyAuthorization((_) => true, state.url);
   }
 }
