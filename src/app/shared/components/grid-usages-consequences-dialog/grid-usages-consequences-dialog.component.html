@@ -30,20 +30,20 @@
         </app-native-table>
       </app-card>
 
-      <app-card *ngIf="migration.affectedContracts !== undefined && migration.affectedContracts.length > 0">
+      <app-card *ngIf="hasContractsConsequences() | async">
         <app-usage-migration-consequences-table
         title="Følgende registreringer i modulet 'Kontrakter' berøres:"
         i18n-title
-        [consequences]="migration.affectedContracts"
+        [consequences]="migration.affectedContracts ?? []"
         >
         </app-usage-migration-consequences-table>
       </app-card>
 
-      <app-card *ngIf="migration.affectedDataProcessingRegistrations !== undefined && migration.affectedDataProcessingRegistrations.length > 0">
+      <app-card *ngIf="hasDprConsequences() | async">
         <app-usage-migration-consequences-table
         title="Følgende registreringer i modulet 'Databehandling' berøres:"
         i18n-title
-        [consequences]="migration.affectedDataProcessingRegistrations"
+        [consequences]="migration.affectedDataProcessingRegistrations ?? []"
         >
         </app-usage-migration-consequences-table>
       </app-card>

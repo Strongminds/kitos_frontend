@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { map, Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
@@ -37,29 +37,49 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public hasConsequences() {
+  public hasConsequences(): Observable<boolean> {
+    return combineLatest([
+      this.hasContractsConsequences(),
+      this.hasDprConsequences(),
+      this.hasRelationsConsequences(),
+    ]).pipe(map((results) => results.some((result) => result === true)));
+  }
+
+  public hasContractsConsequences() {
+    return this.migration$.pipe(
+      filterNullish(),
+      map((migration) => {
+        return migration.affectedContracts && migration.affectedContracts.length > 0;
+      })
+    );
+  }
+
+  public hasDprConsequences() {
     return this.migration$.pipe(
       filterNullish(),
       map((migration) => {
         return (
-          migration.affectedContracts &&
-          migration.affectedContracts.length > 0 &&
-          migration.affectedDataProcessingRegistrations &&
-          migration.affectedDataProcessingRegistrations.length > 0 &&
-          migration.affectedRelations &&
-          migration.affectedRelations.length > 0
+          migration.affectedDataProcessingRegistrations && migration.affectedDataProcessingRegistrations.length > 0
         );
       })
     );
   }
 
+  public hasRelationsConsequences() {
+    return this.migration$.pipe(
+      filterNullish(),
+      map((migration) => {
+        return migration.affectedRelations && migration.affectedRelations.length > 0;
+      })
+    );
+  }
+
   public isConfirmDisabled() {
-    return this.hasConsequences()
-      .pipe(
-        map((hasConsequences) => {
-          if (!hasConsequences) return false;
-          return !this.hasAcceptedConsequences;
-        })
-      );
+    return this.hasConsequences().pipe(
+      map((hasConsequences) => {
+        if (!hasConsequences) return false;
+        return !this.hasAcceptedConsequences;
+      })
+    );
   }
 }
