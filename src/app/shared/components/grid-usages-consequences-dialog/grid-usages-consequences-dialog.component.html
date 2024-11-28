@@ -31,20 +31,24 @@
       </app-card>
 
       <app-card *ngIf="migration.affectedContracts !== undefined && migration.affectedContracts.length > 0">
-        <app-paragraph i18n [bold]="true" paragraphSize="medium">Følgende registreringer i modulet "Databehandling" berøres:</app-paragraph>
-        <app-native-table>
-          <thead>
-            <th i18n>Uuid</th>
-            <th i18n>Navn</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let contract of migration.affectedContracts">
-              <td>{{ contract.uuid }}</td>
-              <td>{{ contract.name }}</td>
-            </tr>
-          </tbody>
-        </app-native-table>
+        <app-usage-migration-consequences-table
+        title="Følgende registreringer i modulet 'Kontrakter' berøres:"
+        i18n-title
+        [consequences]="migration.affectedContracts"
+        >
+        </app-usage-migration-consequences-table>
       </app-card>
+
+      <app-card *ngIf="migration.affectedDataProcessingRegistrations !== undefined && migration.affectedDataProcessingRegistrations.length > 0">
+        <app-usage-migration-consequences-table
+        title="Følgende registreringer i modulet 'Databehandling' berøres:"
+        i18n-title
+        [consequences]="migration.affectedDataProcessingRegistrations"
+        >
+        </app-usage-migration-consequences-table>
+      </app-card>
+
+
     </ng-container>
   </app-standard-vertical-content-grid>
 
