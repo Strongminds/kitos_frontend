@@ -41,7 +41,8 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
   }
 
   public onConfirm() {
-    this.dialog.closeAll();
+    this.componentStore.executeMigration(this.targetItSystemUuid)(this.rowEntityIdentifier)(this.usingOrganizationUuid$);
+    //this.dialog.closeAll();
   }
 
   public hasConsequences(): Observable<boolean> {

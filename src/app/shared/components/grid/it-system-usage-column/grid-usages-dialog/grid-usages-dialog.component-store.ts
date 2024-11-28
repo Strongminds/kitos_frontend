@@ -7,6 +7,7 @@ import {
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { IdentityNamePair, mapIdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { filterNullish } from '../../../../pipes/filter-nullish';
 
@@ -31,7 +32,8 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
     @Inject(APIV2ItSystemUsageMigrationINTERNALService)
     private readonly itSystemUsageMigrationService: APIV2ItSystemUsageMigrationINTERNALService,
     @Inject(APIV2ItSystemUsageInternalINTERNALService)
-    private readonly itSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService
+    private readonly itSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
+    private notificationService: NotificationService
   ) {
     super({
       loading: false,
@@ -87,6 +89,45 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
                   this.updateMigration(migration);
                 },
                 (error) => {
+                  console.error(error);
+                },
+                () => this.updateLoading(false)
+              )
+            );
+        })
+      )
+    );
+
+  public executeMigration = (targetItSystemUuid: string) => (sourceItSystemUuid: string) =>
+    this.effect((usingOrganizationUuid$: Observable<string>) =>
+      usingOrganizationUuid$.pipe(
+        withLatestFrom(of(targetItSystemUuid), of(sourceItSystemUuid)),
+        mergeMap(([usingOrganizationUuid, targetItSystemUuid, sourceItSystemUuid]) => {
+          this.updateLoading(true);
+          return this.itSystemUsageInternalService
+            .getManyItSystemUsageInternalV2GetItSystemUsages({
+              organizationUuid: usingOrganizationUuid,
+            })
+            .pipe(
+              mergeMap((usages) => {
+                const usage = usages.find((usage) => usage.systemContext.uuid === sourceItSystemUuid);
+                if (!usage) {
+                  throw new Error('Usage not found');
+                }
+                return this.itSystemUsageMigrationService.postSingleItSystemUsageMigrationV2ExecuteMigration(
+                  {
+                    toSystemUuid: targetItSystemUuid,
+                    usageUuid: usage.uuid,
+                  },
+                  'response'
+                );
+              }),
+              tapResponse(
+                (_) => {
+                  this.notificationService.showDefault($localize`Systemanvendelsen blev flyttet`);
+                },
+                (error) => {
+                  this.notificationService.showError($localize`Systemanvendelsen kunne ikke flyttes`);
                   console.error(error);
                 },
                 () => this.updateLoading(false)
