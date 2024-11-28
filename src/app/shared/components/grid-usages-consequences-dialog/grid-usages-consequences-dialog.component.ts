@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { combineLatest, map, Observable } from 'rxjs';
 import { filterNullish } from '../../pipes/filter-nullish';
+import { ClipboardService } from '../../services/clipboard.service';
 import { NotificationService } from '../../services/notification.service';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
@@ -26,8 +27,9 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
     private readonly dialogRef: MatDialogRef<GridUsagesConsequencesDialogComponent>,
     private readonly componentStore: GridUsagesDialogComponentStore,
     private readonly cdr: ChangeDetectorRef,
+    private readonly dialog: MatDialog,
     private readonly notificationService: NotificationService,
-    private readonly dialog: MatDialog
+    private readonly clipboardService: ClipboardService
   ) {}
 
   ngOnInit(): void {
@@ -94,18 +96,8 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
   }
 
   public copyConsequencesToClipboard() {
-    // this.isCopying = true;
     this.cdr.detectChanges();
-    this.copyPageContentToClipBoard(this.consequencesContentId);
-    // this.isCopying = false;
+    this.clipboardService.copyContentToClipBoardById(this.consequencesContentId);
     this.notificationService.showDefault($localize`Konsekvenserne er kopieret til udklipsholderen`);
-  }
-
-  private copyPageContentToClipBoard(contentRootId: string) {
-    const currentWindow = window.getSelection();
-    if (!currentWindow) return;
-    window.getSelection()?.selectAllChildren(document.getElementById(contentRootId) as Node);
-    document.execCommand('copy');
-    window.getSelection()?.removeAllRanges();
   }
 }
