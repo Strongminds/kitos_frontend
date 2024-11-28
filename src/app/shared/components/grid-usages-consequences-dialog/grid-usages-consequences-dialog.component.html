@@ -47,8 +47,52 @@
         >
         </app-usage-migration-consequences-table>
       </app-card>
-
-
+      <app-card *ngIf="hasRelationsConsequences() | async">
+        <app-native-table>
+          <app-paragraph i18n [bold]="true" paragraphSize="medium">Følgende systemrelationer berøres:</app-paragraph>
+          <app-native-table>
+            <thead>
+              <th i18n>Anvendersystem</th>
+              <th i18n>Udstillersystem</th>
+              <th i18n>Relationsbeskrivelse</th>
+              <th i18n>Snitflade der fjernes fra relationen</th>
+              <th i18n>Frekvens</th>
+              <th i18n>Kontrakt</th>
+            </thead>
+            <tbody>
+              <tr *ngFor="let consequence of consequences">
+                <td>
+                  Navn: {{formatSystemName(relation.fromSystem.name,relation.fromSystem.deactivated) }}
+                  <br />
+                  Uuid: {{relation.fromSystem.uuid}}
+              </td>
+              <td>
+                  Navn: {{formatSystemName(relation.toSystem.name,relation.toSystem.deactivated) }}
+                  <br />
+                  Uuid: {{ relation.toSystem.uuid}}
+              </td>
+              <td>
+                  {{relation.description}}
+              </td>
+              <td>
+                  Navn: {{relation.interface.name}}
+                  <br />
+                  Uuid: {{relation.interface.uuid}}
+              </td>
+              <td>
+                  {{relation.frequencyType.name}}
+              </td>
+              <td ng-if="relation.contract">
+                  Navn: {{relation.contract.name}}
+                  <br />
+                  Uuid: {{relation.contract.uuid}}
+              </td>
+              <td ng-if="!relation.contract">Ingen kontrakt</td>
+              </tr>
+            </tbody>
+          </app-native-table>
+        </app-native-table>
+      </app-card>
     </ng-container>
     <app-dialog-actions *ngIf="hasConsequences() | async">
       <app-checkbox
