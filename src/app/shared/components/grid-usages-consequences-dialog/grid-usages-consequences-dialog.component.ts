@@ -17,6 +17,7 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
 
   public readonly migration$ = this.componentStore.migration$;
   public readonly loading$ = this.componentStore.loading$;
+  public hasAcceptedConsequences: boolean = false;
 
   constructor(
     private readonly dialogRef: MatDialogRef<GridUsagesConsequencesDialogComponent>,
@@ -33,5 +34,9 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
 
   public onConfirm() {
     this.dialogRef.close();
+  }
+
+  public confirmDisabled() {
+    return !this.hasAcceptedConsequences;
   }
 }

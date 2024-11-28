@@ -51,6 +51,15 @@
 
     </ng-container>
     <app-dialog-actions>
+      <app-checkbox
+        [(value)]="hasAcceptedConsequences"
+        labelPosition="after"
+        text="Jeg forstår og accepterer ovenstående konsekvenser"
+        i18n-text
+      >
+      </app-checkbox>
+    </app-dialog-actions>
+    <app-dialog-actions>
       <app-button
         (buttonClick)="onCancel()"
         i18n
@@ -59,6 +68,7 @@
       <app-button
         (buttonClick)="onConfirm()"
         i18n
+        [disabled]="confirmDisabled()"
         >
         Gennemfør flytning
       </app-button>
