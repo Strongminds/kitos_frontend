@@ -1,7 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { combineLatest, map, Observable } from 'rxjs';
 import { filterNullish } from '../../pipes/filter-nullish';
+import { NotificationService } from '../../services/notification.service';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
 @Component({
@@ -19,10 +20,13 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
   public readonly migration$ = this.componentStore.migration$;
   public readonly loading$ = this.componentStore.loading$;
   public hasAcceptedConsequences: boolean = false;
+  public readonly consequencesContentId = 'consequences-content';
 
   constructor(
     private readonly dialogRef: MatDialogRef<GridUsagesConsequencesDialogComponent>,
-    private readonly componentStore: GridUsagesDialogComponentStore
+    private readonly componentStore: GridUsagesDialogComponentStore,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -83,12 +87,24 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
     );
   }
 
-  public formatSystemName(name: string | undefined, deactivated: boolean | undefined){
+  public formatSystemName(name: string | undefined, deactivated: boolean | undefined) {
     if (!name) return '';
-    return deactivated ? $localize`${name} (Ikke tilgængeligt)` : name
+    return deactivated ? $localize`${name} (Ikke tilgængeligt)` : name;
   }
 
-  public copyConsequencesToClipboard(){
-    
+  public copyConsequencesToClipboard() {
+    // this.isCopying = true;
+    this.cdr.detectChanges();
+    this.copyPageContentToClipBoard(this.consequencesContentId);
+    // this.isCopying = false;
+    this.notificationService.showDefault($localize`Konsekvenserne er kopieret til udklipsholderen`);
+  }
+
+  private copyPageContentToClipBoard(contentRootId: string) {
+    const currentWindow = window.getSelection();
+    if (!currentWindow) return;
+    window.getSelection()?.selectAllChildren(document.getElementById(contentRootId) as Node);
+    document.execCommand('copy');
+    window.getSelection()?.removeAllRanges();
   }
 }
