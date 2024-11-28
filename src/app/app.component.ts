@@ -10,6 +10,10 @@ import { OrganizationService } from './shared/services/organization.service';
 import { RoleOptionTypeService } from './shared/services/role-option-type.service';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating } from './store/user-store/selectors';
+import { Actions, ofType } from '@ngrx/effects';
+import { ActivatedRoute, Router } from '@angular/router';
+import { first } from 'rxjs';
+import { AppPath } from './shared/enums/app-path';
 
 @Component({
   selector: 'app-root',
@@ -27,11 +31,21 @@ export class AppComponent extends BaseComponent implements OnInit {
     private organizationService: OrganizationService,
     private materialIconsService: MaterialIconsConfigService,
     private externalReferencesService: ExternalReferencesStoreAdapterService,
+    private actions$: Actions,
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     super();
   }
 
   ngOnInit() {
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(UserActions.resetOnOrganizationUpdate)).subscribe(() => {
+        const returnUrl = this.route.snapshot.queryParams['returnUrl'] ?? [AppPath.root];
+        this.router.navigate([returnUrl[0]]);
+      })
+    );
+
     this.materialIconsService.configureCustomIcons();
     this.ensureUserIsPartOfAnOrganization();
     this.notificationService.subscribeOnActions();
