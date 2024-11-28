@@ -11,10 +11,9 @@ import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usage
 })
 export class GridUsagesConsequencesDialogComponent implements OnInit {
   @Input() public title!: string;
-  @Input() public sourceItSystemUuid!: string;
   @Input() public targetItSystemUuid!: string;
   @Input() public usingOrganizationUuid$!: Observable<string>;
-  @Input() rowEntityIdentifier!: string | undefined;
+  @Input() rowEntityIdentifier!: string;
 
   public readonly migration$ = this.componentStore.migration$;
   public readonly loading$ = this.componentStore.loading$;
@@ -25,8 +24,7 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //todo add row entity identifier here to use for getting sourceUsageUuid to be passed to migration endpoint
-    this.componentStore.getMigration(this.targetItSystemUuid)(this.usingOrganizationUuid$);
+    this.componentStore.getMigration(this.targetItSystemUuid)(this.rowEntityIdentifier)(this.usingOrganizationUuid$);
   }
 
   public onCancel() {

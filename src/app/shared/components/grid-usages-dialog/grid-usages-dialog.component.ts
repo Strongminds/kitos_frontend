@@ -19,7 +19,6 @@ import { GridUsagesDropdownDialogComponent } from '../grid-usages-dropdown-dialo
 })
 export class GridUsagesDialogComponent extends BaseComponent {
   @Input() type!: RegistrationEntityTypes | undefined;
-  @Input() sourceItSystemUuid!: string;
   @Input() rowEntityIdentifier!: string | undefined;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName).pipe(filterNullish());
@@ -47,7 +46,6 @@ export class GridUsagesDialogComponent extends BaseComponent {
     componentInstance.organizationName$ = this.organizationName$;
     componentInstance.organizationUuid$ = this.organizationUuid$;
     componentInstance.usingOrganizationUuid = $event.uuid;
-    componentInstance.sourceItSystemUuid = this.sourceItSystemUuid;
     componentInstance.rowEntityIdentifier = this.rowEntityIdentifier;
   }
 }

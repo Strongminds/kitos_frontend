@@ -58,33 +58,42 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
     })
   );
 
-  public getMigration = (targetItSystemUuid: string) =>
+  public getMigration = (targetItSystemUuid: string) => (sourceItSystemUuid: string) =>
     this.effect((usingOrganizationUuid$: Observable<string>) =>
       usingOrganizationUuid$.pipe(
-        withLatestFrom(of(targetItSystemUuid)),
-        mergeMap(([usingOrganizationUuid, targetItSystemUuid]) => {
+        withLatestFrom(of(targetItSystemUuid), of(sourceItSystemUuid)),
+        mergeMap(([usingOrganizationUuid, targetItSystemUuid, sourceItSystemUuid]) => {
           this.updateLoading(true);
-
-          const sourceUsage = this.itSystemUsageInternalService.getManyItSystemUsageInternalV2GetItSystemUsages({
-            organizationUuid: usingOrganizationUuid,
-          });
-          return this.itSystemUsageMigrationService
-            .getSingleItSystemUsageMigrationV2Get({
-              toSystemUuid: targetItSystemUuid,
-              usageUuid: 'todo make this the usage uuid',
+          return this.itSystemUsageInternalService
+            .getManyItSystemUsageInternalV2GetItSystemUsages({
+              organizationUuid: usingOrganizationUuid,
             })
             .pipe(
+              mergeMap((usages) => {
+                const usage = usages.find((usage) => usage.systemContext.uuid === sourceItSystemUuid);
+                if (!usage) {
+                  throw new Error('Usage not found');
+                }
+                return this.itSystemUsageMigrationService
+                  .getSingleItSystemUsageMigrationV2Get({
+                    toSystemUuid: targetItSystemUuid,
+                    usageUuid: usage.uuid,
+                  });
+              }),
               tapResponse(
                 (migration) => {
                   this.updateMigration(migration);
                 },
-                (error) => console.error(error),
+                (error) => {
+                  console.error(error);
+                },
                 () => this.updateLoading(false)
               )
             );
         })
       )
     );
+
 
   public getUnusedItSystemsInOrganization = (nameContent: string) =>
     this.effect((organizationUuid$: Observable<string>) =>
