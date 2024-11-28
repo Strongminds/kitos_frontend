@@ -41,9 +41,7 @@ export class GridUsagesDialogComponent extends BaseComponent {
       width: '1000px',
     });
     const componentInstance = dialogRef.componentInstance;
-    componentInstance.usingOrganizationName = $event.name;
-    componentInstance.usingOrganizationUuid = $event.uuid;
-    componentInstance.usingOrganizationUuid = $event.uuid;
+    componentInstance.usingOrganization = $event;
     componentInstance.rowEntityIdentifier = this.rowEntityIdentifier;
   }
 }

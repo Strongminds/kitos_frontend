@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
 @Component({
@@ -12,7 +12,7 @@ import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usage
 export class GridUsagesConsequencesDialogComponent implements OnInit {
   @Input() public title!: string;
   @Input() public targetItSystemUuid!: string;
-  @Input() public usingOrganizationUuid!: string;
+  @Input() public usingOrganizationUuid$!: Observable<string>;
   @Input() rowEntityIdentifier!: string;
 
   public readonly migration$ = this.componentStore.migration$;
@@ -24,7 +24,7 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.componentStore.getMigration(this.targetItSystemUuid)(this.rowEntityIdentifier)(of(this.usingOrganizationUuid));
+    this.componentStore.getMigration(this.targetItSystemUuid)(this.rowEntityIdentifier)(this.usingOrganizationUuid$);
   }
 
   public onCancel() {

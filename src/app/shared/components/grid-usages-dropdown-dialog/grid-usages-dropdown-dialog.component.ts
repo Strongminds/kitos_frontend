@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
 import { IdentityNamePair } from '../../models/identity-name-pair.model';
@@ -11,25 +11,28 @@ import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usage
   styleUrl: './grid-usages-dropdown-dialog.component.scss',
   providers: [GridUsagesDialogComponentStore],
 })
-export class GridUsagesDropdownDialogComponent {
-  @Input() public usingOrganizationName!: string;
-  @Input() public usingOrganizationUuid!: string;
+export class GridUsagesDropdownDialogComponent implements OnInit{
   @Input() rowEntityIdentifier!: string;
+  @Input() usingOrganization!: IdentityNamePair;
 
   public readonly unusedItSystemsInOrganization$ = this.componentStore.unusedItSystemsInOrganization$;
   public readonly loadingUnusedItSystemsInOrganization$ = this.componentStore.select((state) => state.loading);
+  private usingOrganizationUuid$ = of('');
 
   constructor(private readonly componentStore: GridUsagesDialogComponentStore, private readonly dialog: MatDialog) {}
+  ngOnInit(): void {
+    this.usingOrganizationUuid$ = of(this.usingOrganization.uuid)
+  }
 
   public onFilterChange(nameContent: string) {
-    this.componentStore.getUnusedItSystemsInOrganization(nameContent)(of(this.usingOrganizationUuid));
+    this.componentStore.getUnusedItSystemsInOrganization(nameContent)(this.usingOrganizationUuid$);
   }
 
   public onConfirm(targetItSystem: IdentityNamePair) {
     const dialogRef = this.dialog.open(GridUsagesConsequencesDialogComponent);
     const componentInstance = dialogRef.componentInstance;
     componentInstance.title = $localize`Flytning af IT systemanvendelse`;
-    componentInstance.usingOrganizationUuid = this.usingOrganizationUuid;
+    componentInstance.usingOrganizationUuid$ = this.usingOrganizationUuid$;
     componentInstance.targetItSystemUuid = targetItSystem.uuid;
     componentInstance.rowEntityIdentifier = this.rowEntityIdentifier;
   }
