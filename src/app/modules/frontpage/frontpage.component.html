@@ -19,7 +19,7 @@
       <app-reset-password-text-link></app-reset-password-text-link>
     </div>
 
-    <div class="sso-button">
+    <div class="sso-button" *ngIf="(user$ | async) === undefined && (isAuthenticating$ | async) === false">
       <app-button (buttonClick)="goToSSO()">Log ind via fælleskommunal adgangsstyring</app-button>
     </div>
     <app-public-message type="status-messages" [content]="text.statusMessages"></app-public-message>
