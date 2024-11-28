@@ -87,4 +87,8 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
     if (!name) return '';
     return deactivated ? $localize`${name} (Ikke tilgængeligt)` : name
   }
+
+  public copyConsequencesToClipboard(){
+    
+  }
 }
