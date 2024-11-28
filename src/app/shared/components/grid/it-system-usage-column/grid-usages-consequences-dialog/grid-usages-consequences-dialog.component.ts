@@ -5,6 +5,7 @@ import { filterNullish } from '../../../../pipes/filter-nullish';
 import { ClipboardService } from '../../../../services/clipboard.service';
 import { NotificationService } from '../../../../services/notification.service';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 
 @Component({
   selector: 'app-grid-usages-consequences-dialog',
@@ -12,7 +13,7 @@ import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usage
   styleUrl: './grid-usages-consequences-dialog.component.scss',
   providers: [GridUsagesDialogComponentStore],
 })
-export class GridUsagesConsequencesDialogComponent implements OnInit {
+export class GridUsagesConsequencesDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
   @Input() public targetItSystemUuid!: string;
   @Input() public usingOrganizationUuid$!: Observable<string>;
@@ -30,7 +31,7 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
     private readonly dialog: MatDialog,
     private readonly notificationService: NotificationService,
     private readonly clipboardService: ClipboardService
-  ) {}
+  ) {super();}
 
   ngOnInit(): void {
     this.componentStore.getMigration(this.targetItSystemUuid)(this.rowEntityIdentifier)(this.usingOrganizationUuid$);
@@ -41,8 +42,12 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
   }
 
   public onConfirm() {
-    this.componentStore.executeMigration(this.targetItSystemUuid)(this.rowEntityIdentifier)(this.usingOrganizationUuid$);
-    //this.dialog.closeAll();
+    this.subscriptions.add(
+      this.componentStore.executeMigration(this.targetItSystemUuid, this.rowEntityIdentifier, this.usingOrganizationUuid$)
+        .subscribe(({
+          next: () => this.dialog.closeAll(),
+        }))
+    );
   }
 
   public hasConsequences(): Observable<boolean> {

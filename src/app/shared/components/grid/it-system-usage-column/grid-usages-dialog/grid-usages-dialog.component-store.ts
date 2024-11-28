@@ -98,43 +98,43 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       )
     );
 
-  public executeMigration = (targetItSystemUuid: string) => (sourceItSystemUuid: string) =>
-    this.effect((usingOrganizationUuid$: Observable<string>) =>
-      usingOrganizationUuid$.pipe(
-        withLatestFrom(of(targetItSystemUuid), of(sourceItSystemUuid)),
-        mergeMap(([usingOrganizationUuid, targetItSystemUuid, sourceItSystemUuid]) => {
-          this.updateLoading(true);
-          return this.itSystemUsageInternalService
-            .getManyItSystemUsageInternalV2GetItSystemUsages({
-              organizationUuid: usingOrganizationUuid,
-            })
-            .pipe(
-              mergeMap((usages) => {
-                const usage = usages.find((usage) => usage.systemContext.uuid === sourceItSystemUuid);
-                if (!usage) {
-                  throw new Error('Usage not found');
-                }
-                return this.itSystemUsageMigrationService.postSingleItSystemUsageMigrationV2ExecuteMigration(
-                  {
-                    toSystemUuid: targetItSystemUuid,
-                    usageUuid: usage.uuid,
-                  },
-                  'response'
-                );
-              }),
-              tapResponse(
-                (_) => {
-                  this.notificationService.showDefault($localize`Systemanvendelsen blev flyttet`);
+  public executeMigration = (
+    targetItSystemUuid: string,
+    sourceItSystemUuid: string,
+    usingOrganizationUuid$: Observable<string>
+  ) =>
+    usingOrganizationUuid$.pipe(
+      withLatestFrom(of(targetItSystemUuid), of(sourceItSystemUuid)),
+      mergeMap(([usingOrganizationUuid, targetItSystemUuid, sourceItSystemUuid]) => {
+        this.updateLoading(true);
+        return this.itSystemUsageInternalService
+          .getManyItSystemUsageInternalV2GetItSystemUsages({
+            organizationUuid: usingOrganizationUuid,
+          })
+          .pipe(
+            mergeMap((usages) => {
+              const usage = usages.find((u) => u.systemContext.uuid === sourceItSystemUuid);
+              if (!usage) throw new Error('Usage not found');
+              return this.itSystemUsageMigrationService.postSingleItSystemUsageMigrationV2ExecuteMigration(
+                {
+                  toSystemUuid: targetItSystemUuid,
+                  usageUuid: usage.uuid,
                 },
-                (error) => {
-                  this.notificationService.showError($localize`Systemanvendelsen kunne ikke flyttes`);
-                  console.error(error);
-                },
-                () => this.updateLoading(false)
-              )
-            );
-        })
-      )
+                'response'
+              );
+            }),
+            tapResponse(
+              (_) => {
+                this.notificationService.showDefault($localize`Systemanvendelsen blev flyttet`);
+              },
+              (error) => {
+                this.notificationService.showError($localize`Systemanvendelsen kunne ikke flyttes`);
+                console.error(error);
+              },
+              () => this.updateLoading(false)
+            )
+          );
+      })
     );
 
   public getUnusedItSystemsInOrganization = (nameContent: string) =>
