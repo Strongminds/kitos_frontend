@@ -50,7 +50,20 @@
 
 
     </ng-container>
+    <app-dialog-actions>
+      <app-button
+        (buttonClick)="onCancel()"
+        i18n
+      >
+      Annuler</app-button>
+      <app-button
+        (buttonClick)="onConfirm()"
+        i18n
+        >
+        Gennemfør flytning
+      </app-button>
+    </app-dialog-actions>
+    <app-loading *ngIf="(loading$ | async) === true"></app-loading>
   </app-standard-vertical-content-grid>
 
-  <app-loading *ngIf="(loading$ | async) === true"></app-loading>
 </app-scrollbar-dialog>

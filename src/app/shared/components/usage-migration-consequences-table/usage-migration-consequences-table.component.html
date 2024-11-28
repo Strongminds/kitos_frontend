@@ -1,13 +1,13 @@
 <app-paragraph i18n [bold]="true" paragraphSize="medium">{{ title }}</app-paragraph>
-        <app-native-table>
-          <thead>
-            <th i18n>Uuid</th>
-            <th i18n>Navn</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let consequence of consequences">
-              <td>{{ consequence.uuid }}</td>
-              <td>{{ consequence.name }}</td>
-            </tr>
-          </tbody>
-        </app-native-table>
+<app-native-table>
+  <thead>
+    <th i18n>Uuid</th>
+    <th i18n>Navn</th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let consequence of consequences">
+      <td>{{ consequence.uuid }}</td>
+      <td>{{ consequence.name }}</td>
+    </tr>
+  </tbody>
+</app-native-table>

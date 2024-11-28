@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
 @Component({
@@ -31,5 +31,7 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public onMigrate() {}
+  public onConfirm() {
+    this.dialogRef.close();
+  }
 }

@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
-import { mergeMap, Observable, of, withLatestFrom } from 'rxjs';
+import { mergeMap, Observable, of, tap, withLatestFrom } from 'rxjs';
 import {
   APIItSystemUsageMigrationV2ResponseDTO,
   APIV2ItSystemUsageInternalINTERNALService,
@@ -74,11 +74,10 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
                 if (!usage) {
                   throw new Error('Usage not found');
                 }
-                return this.itSystemUsageMigrationService
-                  .getSingleItSystemUsageMigrationV2Get({
-                    toSystemUuid: targetItSystemUuid,
-                    usageUuid: usage.uuid,
-                  });
+                return this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2Get({
+                  toSystemUuid: targetItSystemUuid,
+                  usageUuid: usage.uuid,
+                });
               }),
               tapResponse(
                 (migration) => {
