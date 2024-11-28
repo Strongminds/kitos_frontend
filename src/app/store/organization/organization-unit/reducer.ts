@@ -79,7 +79,7 @@ export const organizationUnitFeature = createFeature({
       return { ...organizationUnitAdapter.setAll(nodesCopy, state) };
     }),
 
-    on(OrganizationUnitActions.addExpandedNode, (state, { uuids }): OrganizationUnitState => {
+    on(OrganizationUnitActions.addExpandedNodes, (state, { uuids }): OrganizationUnitState => {
       const uniqueUuids = Array.from(new Set([...state.expandedNodeUuids, ...uuids]));
       return {
         ...state,

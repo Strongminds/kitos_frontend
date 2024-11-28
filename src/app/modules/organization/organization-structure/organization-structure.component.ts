@@ -104,11 +104,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   ngOnInit(): void {
+    this.goToDefaultUnit();
     this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
     this.subscriptions.add(
       this.rootUnitUuid$
         .pipe(first())
-        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNode([uuid])))
+        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNodes([uuid])))
     );
 
     this.subscriptions.add(
@@ -126,20 +127,6 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         .subscribe((uuid) => {
           this.store.dispatch(OrganizationUnitActions.updateCurrentUnitUuid(uuid));
         })
-    );
-
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUnitActions.getOrganizationUnitsSuccess)).subscribe(() => {
-        this.store
-          .select(selectUserDefaultUnitUuid)
-          .pipe(combineLatestWith(this.organizationUnits$), first())
-          .subscribe(([uuid, units]) => {
-            if (uuid) {
-              this.router.navigate([`${AppPath.organization}/${AppPath.structure}/${uuid}`]);
-              this.store.dispatch(OrganizationUnitActions.addExpandedNode(this.findParentUuids(units, uuid)));
-            }
-          });
-      })
     );
   }
 
@@ -172,7 +159,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     if (node.isExpanded) {
       this.store.dispatch(OrganizationUnitActions.removeExpandedNode(node.uuid));
     } else {
-      this.store.dispatch(OrganizationUnitActions.addExpandedNode([node.uuid]));
+      this.store.dispatch(OrganizationUnitActions.addExpandedNodes([node.uuid]));
     }
   }
 
@@ -210,5 +197,21 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
     const parentUuid = unit.parentOrganizationUnit.uuid;
     return [parentUuid, ...this.findParentUuids(units, parentUuid)];
+  }
+
+  private goToDefaultUnit() {
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUnitActions.getOrganizationUnitsSuccess)).subscribe(() => {
+        this.store
+          .select(selectUserDefaultUnitUuid)
+          .pipe(combineLatestWith(this.organizationUnits$), first())
+          .subscribe(([uuid, units]) => {
+            if (uuid) {
+              this.router.navigate([`${AppPath.organization}/${AppPath.structure}/${uuid}`]);
+              this.store.dispatch(OrganizationUnitActions.addExpandedNodes(this.findParentUuids(units, uuid)));
+            }
+          });
+      })
+    );
   }
 }

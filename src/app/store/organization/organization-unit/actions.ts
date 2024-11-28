@@ -66,7 +66,7 @@ export const OrganizationUnitActions = createActionGroup({
       unit,
       units,
     }),
-    'Add expanded node': (uuids: string[]) => ({ uuids }),
+    'Add expanded nodes': (uuids: string[]) => ({ uuids }),
     'Remove expanded node': (uuid: string) => ({ uuid }),
 
     'Add organization unit role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),

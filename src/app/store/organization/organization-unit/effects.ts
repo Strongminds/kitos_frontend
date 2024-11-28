@@ -59,7 +59,9 @@ export class OrganizationUnitEffects {
       })
     );
   });
+
   getOrganizationUnitsPaged$ = createEffect(() => {
+    // eslint-disable-next-line @ngrx/avoid-cyclic-effects
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.getOrganizationUnitsPaged),
       concatLatestFrom(() => [
