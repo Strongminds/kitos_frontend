@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
@@ -20,7 +21,8 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
   constructor(
     private frontpageComponentStore: FrontpageComponentStore,
     private store: Store,
-    private actions$: Actions
+    private actions$: Actions,
+    private confirmActionService: ConfirmActionService
   ) {
     super();
   }
@@ -36,6 +38,15 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
   }
 
   goToSSO(): void {
-    window.location.href = '/LoginHandler.ashx';
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Neutral,
+      onConfirm: () => {
+        window.location.href = '/LoginHandler.ashx';
+      },
+      confirmationType: 'OkCancel',
+      title: 'Single Sign-On (SSO)',
+      message:
+        'After completing the SSO process, you will be redirected to the old UI. You can then return to the new UI',
+    });
   }
 }
