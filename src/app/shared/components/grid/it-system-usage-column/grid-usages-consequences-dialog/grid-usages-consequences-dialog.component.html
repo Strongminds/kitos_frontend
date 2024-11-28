@@ -107,19 +107,26 @@
       </app-checkbox>
     </app-dialog-actions>
     <app-dialog-actions>
-      <app-button *ngIf="hasConsequences() | async" (buttonClick)="copyConsequencesToClipboard()" i18n buttonStyle="secondary">
+      <app-button
+      *ngIf="hasConsequences() | async"
+      (buttonClick)="copyConsequencesToClipboard()"
+      i18n
+      buttonStyle="secondary"
+      [disabled]="(loading$ | async) === true"
+      >
         Kopier til klipholder</app-button
       >
       <app-button
         (buttonClick)="onCancel()"
         i18n
         buttonStyle="secondary"
+        [disabled]="(loading$ | async) === true"
       >
       Annuller</app-button>
       <app-button
         (buttonClick)="onConfirm()"
         i18n
-        [disabled]="(isConfirmDisabled() | async) === true"
+        [disabled]="(isConfirmDisabled() | async) === true || (loading$ | async) === true"
         color="warn"
         >
         Gennemfør flytning
