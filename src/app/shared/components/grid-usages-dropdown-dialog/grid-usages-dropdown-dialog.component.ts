@@ -12,26 +12,24 @@ import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usage
   providers: [GridUsagesDialogComponentStore],
 })
 export class GridUsagesDropdownDialogComponent {
-  @Input() public organizationName$!: Observable<string>;
-  @Input() public organizationUuid$!: Observable<string>;
+  @Input() public usingOrganizationName!: string;
   @Input() public usingOrganizationUuid!: string;
   @Input() rowEntityIdentifier!: string;
 
   public readonly unusedItSystemsInOrganization$ = this.componentStore.unusedItSystemsInOrganization$;
   public readonly loadingUnusedItSystemsInOrganization$ = this.componentStore.select((state) => state.loading);
 
-  constructor(private readonly componentStore: GridUsagesDialogComponentStore, private readonly dialog: MatDialog) {
-  }
+  constructor(private readonly componentStore: GridUsagesDialogComponentStore, private readonly dialog: MatDialog) {}
 
   public onFilterChange(nameContent: string) {
-    this.componentStore.getUnusedItSystemsInOrganization(nameContent)(this.organizationUuid$);
+    this.componentStore.getUnusedItSystemsInOrganization(nameContent)(of(this.usingOrganizationUuid));
   }
 
   public onConfirm(targetItSystem: IdentityNamePair) {
     const dialogRef = this.dialog.open(GridUsagesConsequencesDialogComponent);
     const componentInstance = dialogRef.componentInstance;
     componentInstance.title = $localize`Flytning af IT systemanvendelse`;
-    componentInstance.usingOrganizationUuid$ = of(this.usingOrganizationUuid);
+    componentInstance.usingOrganizationUuid = this.usingOrganizationUuid;
     componentInstance.targetItSystemUuid = targetItSystem.uuid;
     componentInstance.rowEntityIdentifier = this.rowEntityIdentifier;
   }

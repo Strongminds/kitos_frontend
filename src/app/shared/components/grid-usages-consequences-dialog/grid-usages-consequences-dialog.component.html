@@ -10,7 +10,7 @@
 I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at:
   </app-paragraph>
   <app-paragraph *ngIf="(migration$ | async) as migration">
-    {{ migration.fromSystem?.name }}
+    {{ migration | json }}
   </app-paragraph>
   <app-loading *ngIf="(loading$ | async) === true"></app-loading>
 </app-scrollbar-dialog>

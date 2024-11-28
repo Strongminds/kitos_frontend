@@ -21,12 +21,10 @@ export class GridUsagesDialogComponent extends BaseComponent {
   @Input() type!: RegistrationEntityTypes | undefined;
   @Input() rowEntityIdentifier!: string | undefined;
 
-  public readonly organizationName$ = this.store.select(selectOrganizationName).pipe(filterNullish());
-  public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { usages: IdentityNamePair[]; title: string },
+    @Inject(MAT_DIALOG_DATA) public data: { usingOrganizations: IdentityNamePair[]; title: string },
     private readonly dialog: MatDialog,
     private readonly store: Store
   ) {
@@ -43,8 +41,8 @@ export class GridUsagesDialogComponent extends BaseComponent {
       width: '1000px',
     });
     const componentInstance = dialogRef.componentInstance;
-    componentInstance.organizationName$ = this.organizationName$;
-    componentInstance.organizationUuid$ = this.organizationUuid$;
+    componentInstance.usingOrganizationName = $event.name;
+    componentInstance.usingOrganizationUuid = $event.uuid;
     componentInstance.usingOrganizationUuid = $event.uuid;
     componentInstance.rowEntityIdentifier = this.rowEntityIdentifier;
   }

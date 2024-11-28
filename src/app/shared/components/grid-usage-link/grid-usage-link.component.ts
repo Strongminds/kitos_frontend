@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { IdentityNamePair } from '../../models/identity-name-pair.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { GridUsagesDialogComponent } from '../grid-usages-dialog/grid-usages-dialog.component';
 
@@ -12,7 +13,7 @@ import { GridUsagesDialogComponent } from '../grid-usages-dialog/grid-usages-dia
 export class UsageLinkComponent {
   constructor(private dialog: MatDialog) {}
 
-  @Input() usages!: string[];
+  @Input() usingOrganizations!: IdentityNamePair[];
   @Input() name: string = '';
   @Input() type: RegistrationEntityTypes | undefined;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,7 +22,7 @@ export class UsageLinkComponent {
   onUsageClick(event: Event) {
     event.preventDefault();
     const dialogRef = this.dialog.open(GridUsagesDialogComponent, {
-      data: { usages: this.usages, title: this.getTitle() },
+      data: { usingOrganizations: this.usingOrganizations, title: this.getTitle() },
     });
     const componentInstance = dialogRef.componentInstance;
     componentInstance.type = this.type;
