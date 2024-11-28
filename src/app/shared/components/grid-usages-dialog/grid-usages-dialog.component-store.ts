@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
-import { mergeMap, Observable, of, tap, withLatestFrom } from 'rxjs';
+import { mergeMap, Observable, of, withLatestFrom } from 'rxjs';
 import {
   APIItSystemUsageMigrationV2ResponseDTO,
   APIV2ItSystemUsageInternalINTERNALService,
@@ -23,6 +23,9 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   );
   public readonly migration$ = this.select((state) => state.migration);
   public readonly loading$ = this.select((state) => state.loading);
+
+  //28/11/24 The API endpoint expects a number from 1 to 25.
+  private readonly numberOfItSystemsPerQuery = 25;
 
   constructor(
     @Inject(APIV2ItSystemUsageMigrationINTERNALService)
@@ -93,7 +96,6 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       )
     );
 
-
   public getUnusedItSystemsInOrganization = (nameContent: string) =>
     this.effect((organizationUuid$: Observable<string>) =>
       organizationUuid$.pipe(
@@ -104,7 +106,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
             .getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization({
               organizationUuid,
               nameContent,
-              numberOfItSystems: 25,
+              numberOfItSystems: this.numberOfItSystemsPerQuery,
             })
             .pipe(
               tapResponse(
