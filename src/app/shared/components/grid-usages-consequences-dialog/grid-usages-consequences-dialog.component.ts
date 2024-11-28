@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
+import { filterNullish } from '../../pipes/filter-nullish';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
 @Component({
@@ -36,7 +37,29 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public confirmDisabled() {
-    return !this.hasAcceptedConsequences;
+  public hasConsequences() {
+    return this.migration$.pipe(
+      filterNullish(),
+      map((migration) => {
+        return (
+          migration.affectedContracts &&
+          migration.affectedContracts.length > 0 &&
+          migration.affectedDataProcessingRegistrations &&
+          migration.affectedDataProcessingRegistrations.length > 0 &&
+          migration.affectedRelations &&
+          migration.affectedRelations.length > 0
+        );
+      })
+    );
+  }
+
+  public isConfirmDisabled() {
+    return this.hasConsequences()
+      .pipe(
+        map((hasConsequences) => {
+          if (!hasConsequences) return false;
+          return !this.hasAcceptedConsequences;
+        })
+      );
   }
 }
