@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { combineLatest, map, Observable } from 'rxjs';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { NotificationService } from '../../services/notification.service';
@@ -26,7 +26,8 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
     private readonly dialogRef: MatDialogRef<GridUsagesConsequencesDialogComponent>,
     private readonly componentStore: GridUsagesDialogComponentStore,
     private readonly cdr: ChangeDetectorRef,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -38,7 +39,7 @@ export class GridUsagesConsequencesDialogComponent implements OnInit {
   }
 
   public onConfirm() {
-    this.dialogRef.close();
+    this.dialog.closeAll();
   }
 
   public hasConsequences(): Observable<boolean> {
