@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { IdentityNamePair } from '../../models/identity-name-pair.model';
-import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { IdentityNamePair } from '../../../../models/identity-name-pair.model';
+import { RegistrationEntityTypes } from '../../../../models/registrations/registration-entity-categories.model';
 import { GridUsagesDialogComponent } from '../grid-usages-dialog/grid-usages-dialog.component';
 
 @Component({

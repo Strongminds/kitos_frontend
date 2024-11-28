@@ -7,8 +7,8 @@ import {
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
-import { IdentityNamePair, mapIdentityNamePair } from '../../models/identity-name-pair.model';
-import { filterNullish } from '../../pipes/filter-nullish';
+import { IdentityNamePair, mapIdentityNamePair } from '../../../../models/identity-name-pair.model';
+import { filterNullish } from '../../../../pipes/filter-nullish';
 
 interface State {
   loading: boolean;

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable, of } from 'rxjs';
-import { IdentityNamePair } from '../../models/identity-name-pair.model';
+import { of } from 'rxjs';
+import { IdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { GridUsagesConsequencesDialogComponent } from '../grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
@@ -11,7 +11,7 @@ import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usage
   styleUrl: './grid-usages-dropdown-dialog.component.scss',
   providers: [GridUsagesDialogComponentStore],
 })
-export class GridUsagesDropdownDialogComponent implements OnInit{
+export class GridUsagesDropdownDialogComponent implements OnInit {
   @Input() rowEntityIdentifier!: string;
   @Input() usingOrganization!: IdentityNamePair;
 
@@ -21,7 +21,7 @@ export class GridUsagesDropdownDialogComponent implements OnInit{
 
   constructor(private readonly componentStore: GridUsagesDialogComponentStore, private readonly dialog: MatDialog) {}
   ngOnInit(): void {
-    this.usingOrganizationUuid$ = of(this.usingOrganization.uuid)
+    this.usingOrganizationUuid$ = of(this.usingOrganization.uuid);
   }
 
   public onFilterChange(nameContent: string) {
@@ -29,9 +29,7 @@ export class GridUsagesDropdownDialogComponent implements OnInit{
   }
 
   public onConfirm(targetItSystem: IdentityNamePair) {
-    const dialogRef = this.dialog.open(GridUsagesConsequencesDialogComponent,
-      { width: '1000px' }
-    );
+    const dialogRef = this.dialog.open(GridUsagesConsequencesDialogComponent, { width: '1000px' });
     const componentInstance = dialogRef.componentInstance;
     componentInstance.title = $localize`Flytning af IT systemanvendelse`;
     componentInstance.usingOrganizationUuid$ = this.usingOrganizationUuid$;

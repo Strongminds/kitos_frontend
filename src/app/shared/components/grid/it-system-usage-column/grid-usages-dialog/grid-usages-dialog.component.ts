@@ -1,15 +1,10 @@
 import { Component, Inject, Input } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import {
-  selectOrganizationName,
-  selectOrganizationUuid,
-  selectUserIsGlobalAdmin,
-} from 'src/app/store/user-store/selectors';
-import { BaseComponent } from '../../base/base.component';
-import { IdentityNamePair } from '../../models/identity-name-pair.model';
-import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { filterNullish } from '../../pipes/filter-nullish';
+import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
+import { BaseComponent } from '../../../../base/base.component';
+import { IdentityNamePair } from '../../../../models/identity-name-pair.model';
+import { RegistrationEntityTypes } from '../../../../models/registrations/registration-entity-categories.model';
 import { GridUsagesDropdownDialogComponent } from '../grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
 
 @Component({

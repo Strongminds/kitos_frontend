@@ -1,9 +1,9 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { combineLatest, map, Observable } from 'rxjs';
-import { filterNullish } from '../../pipes/filter-nullish';
-import { ClipboardService } from '../../services/clipboard.service';
-import { NotificationService } from '../../services/notification.service';
+import { filterNullish } from '../../../../pipes/filter-nullish';
+import { ClipboardService } from '../../../../services/clipboard.service';
+import { NotificationService } from '../../../../services/notification.service';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
 @Component({
