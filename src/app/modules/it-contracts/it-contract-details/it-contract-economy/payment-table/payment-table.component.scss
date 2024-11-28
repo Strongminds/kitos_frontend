@@ -14,6 +14,6 @@
   position: -webkit-sticky; /* For Safari */
   position: sticky;
   left: 0;
-  background-color: white; /* Adjust as needed */
+  background-color: $color-white; /* Adjust as needed */
   z-index: 1; /* Ensure it stays above other columns */
 }
