@@ -1,18 +1,21 @@
 <app-scrollbar-dialog
   [title]="title"
 >
-<app-paragraph
-  [bold]="true"
-  paragraphSize="x-large"
-  i18n> Opsummering af konsekvenser ved flytning af anvendelse</app-paragraph>
+  <app-paragraph
+    [bold]="true"
+    paragraphSize="x-large"
+    i18n
+  >Opsummering af konsekvenser ved flytning af anvendelse</app-paragraph>
+
   <app-standard-vertical-content-grid>
     <app-paragraph i18n>
       For at sikre datakvaliteten i Kitos – og f.eks. komme redundante registreringer til livs - har global admin mulighed for at flytte jeres anvendelse fra et IT-system til et andet.
-  I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at:
+      I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at:
     </app-paragraph>
+
     <ng-container *ngIf="(migration$ | async) as migration">
-      <app-card >
-          <app-paragraph i18n [bold]="true" paragraphSize="medium">Systemanvendelsen flyttes:</app-paragraph>
+      <app-card>
+        <app-paragraph i18n [bold]="true" paragraphSize="medium">Systemanvendelsen flyttes:</app-paragraph>
         <app-native-table>
           <thead>
             <th i18n>Fra</th>
@@ -26,9 +29,24 @@
           </tbody>
         </app-native-table>
       </app-card>
-    </ng-container>
 
-      </app-standard-vertical-content-grid>
+      <app-card *ngIf="migration.affectedContracts !== undefined && migration.affectedContracts.length > 0">
+        <app-paragraph i18n [bold]="true" paragraphSize="medium">Følgende registreringer i modulet "Databehandling" berøres:</app-paragraph>
+        <app-native-table>
+          <thead>
+            <th i18n>Uuid</th>
+            <th i18n>Navn</th>
+          </thead>
+          <tbody>
+            <tr *ngFor="let contract of migration.affectedContracts">
+              <td>{{ contract.uuid }}</td>
+              <td>{{ contract.name }}</td>
+            </tr>
+          </tbody>
+        </app-native-table>
+      </app-card>
+    </ng-container>
+  </app-standard-vertical-content-grid>
 
   <app-loading *ngIf="(loading$ | async) === true"></app-loading>
 </app-scrollbar-dialog>
