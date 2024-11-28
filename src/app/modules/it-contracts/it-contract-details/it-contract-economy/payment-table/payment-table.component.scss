@@ -5,3 +5,15 @@
   flex-direction: column;
   width: 100%;
 }
+
+.payment-table {
+  overflow: auto;
+}
+
+.sticky-column {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky;
+  left: 0;
+  background-color: white; /* Adjust as needed */
+  z-index: 1; /* Ensure it stays above other columns */
+}
