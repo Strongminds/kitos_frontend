@@ -8,6 +8,7 @@
   confirmButtonText="Se konsekvenser"
   i18n-confirmButtonText
   [nested]="true"
+  [enableRepeatConfirmWithSameData]="true"
   (filterChange)="onFilterChange($event)"
   (save)="onConfirm($event)"
 ></app-connected-dropdown-dialog>
