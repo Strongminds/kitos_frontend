@@ -33,7 +33,6 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
   public readonly uiRootConfig$ = this.store.select(selectUIRootConfig).pipe(filterNullish());
-  public readonly uiRootConfig$ = this.store.select(selectUIRootConfig).pipe(filterNullish());
   public readonly isUserCurrentyLocalAdmin$ = this.store.select(selectUserIsCurrentlyLocalAdmin);
 
   constructor(private store: Store, private dialog: MatDialog, private router: Router, private actions$: Actions) {
