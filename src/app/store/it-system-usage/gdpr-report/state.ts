@@ -1,12 +1,6 @@
 import { EntityState } from '@ngrx/entity';
-import { APIGdprReportResponseDTO } from 'src/app/api/v2';
+import { GdprReport } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-report.model';
 
 export interface GdprReportState extends EntityState<GdprReport> {
   cacheTime: number | undefined;
-}
-
-export interface GdprReport {}
-
-export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
-  return {};
 }
