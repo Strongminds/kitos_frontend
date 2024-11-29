@@ -1,5 +1,7 @@
 import { APIGdprReportResponseDTO } from 'src/app/api/v2';
+import { mapToYesNoDontKnowEnum, YesNoDontKnowOptions } from '../../yes-no-dont-know.model';
 import { HostedAt, mapHostedAt } from './hosted-at.model';
+import { mapPreRiskAssessmentEnum, PreRiskAssessment } from './pre-risk-assessment.model';
 
 export interface GdprReport {
   systemUuid: string;
@@ -8,18 +10,18 @@ export interface GdprReport {
   personalData?: boolean;
   sensitiveData?: boolean;
   legalData?: boolean;
-  businessCritical?: APIGdprReportResponseDTO.BusinessCriticalEnum;
+  businessCritical?: YesNoDontKnowOptions;
   dataProcessingAgreementConcluded?: boolean;
   linkToDirectory?: boolean;
   sensitiveDataTypes: Array<string>;
-  riskAssessment?: APIGdprReportResponseDTO.RiskAssessmentEnum;
+  riskAssessment?: YesNoDontKnowOptions;
   riskAssessmentDate?: string;
   plannedRiskAssessmentDate?: string;
-  preRiskAssessment?: APIGdprReportResponseDTO.PreRiskAssessmentEnum;
+  preRiskAssessment?: PreRiskAssessment;
   personalDataCpr?: boolean;
   personalDataSocialProblems?: boolean;
   personalDataSocialOtherPrivateMatters?: boolean;
-  dpia?: APIGdprReportResponseDTO.DpiaEnum;
+  dpia?: YesNoDontKnowOptions;
   hostedAt?: HostedAt;
 }
 
@@ -32,18 +34,18 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     personalData: dto.personalData,
     sensitiveData: dto.sensitiveData,
     legalData: dto.legalData,
-    businessCritical: dto.businessCritical,
+    businessCritical: mapToYesNoDontKnowEnum(dto.businessCritical),
     dataProcessingAgreementConcluded: dto.dataProcessingAgreementConcluded,
     linkToDirectory: dto.linkToDirectory,
     sensitiveDataTypes: dto.sensitiveDataTypes ?? [],
-    riskAssessment: dto.riskAssessment,
+    riskAssessment: mapToYesNoDontKnowEnum(dto.riskAssessment),
     riskAssessmentDate: dto.riskAssessmentDate,
     plannedRiskAssessmentDate: dto.plannedRiskAssessmentDate,
-    preRiskAssessment: dto.preRiskAssessment,
+    preRiskAssessment: mapPreRiskAssessmentEnum(dto.preRiskAssessment),
     personalDataCpr: dto.personalDataCpr,
     personalDataSocialProblems: dto.personalDataSocialProblems,
     personalDataSocialOtherPrivateMatters: dto.personalDataSocialOtherPrivateMatters,
-    dpia: dto.dpia,
+    dpia: mapToYesNoDontKnowEnum(dto.dpia),
     hostedAt: mapHostedAt(dto.hostedAt),
   };
 }
