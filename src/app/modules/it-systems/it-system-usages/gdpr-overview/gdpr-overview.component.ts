@@ -20,6 +20,7 @@ export class GdprOverviewComponent {
     },
   ];
 
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   public readonly fakeData: any[] = [
     {
       a: '123',
