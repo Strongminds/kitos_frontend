@@ -20,7 +20,7 @@ export class GdprReportEffects {
 
   getGdprReport$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(GdprReportActions.getGDPRReport),
+      ofType(GdprReportActions.getGDPRReports),
       concatLatestFrom(() => [
         this.store.select(selectOrganizationUuid),
         this.store.select(selectGdprReportHasValidCache),
@@ -30,8 +30,8 @@ export class GdprReportEffects {
       filterNullish(),
       switchMap((organizationUuid) =>
         this.gdprReportService.getManyGdprExportReportInternalV2GetGdprReport({ organizationUuid }).pipe(
-          map((reports) => GdprReportActions.getGDPRReportSuccess(reports.map(adaptGdprReport))),
-          catchError(() => of(GdprReportActions.getGDPRReportError()))
+          map((reports) => GdprReportActions.getGDPRReportsSuccess(reports.map(adaptGdprReport))),
+          catchError(() => of(GdprReportActions.getGDPRReportsError()))
         )
       )
     );
