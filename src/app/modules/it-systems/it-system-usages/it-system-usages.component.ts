@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -44,6 +45,7 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { GdprOverviewDialogComponent } from './gdpr-overview-dialog/gdpr-overview-dialog.component';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -516,7 +518,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
-    private uiConfigService: UIConfigService
+    private uiConfigService: UIConfigService,
+    private dialog: MatDialog
   ) {
     super(store, 'it-system-usage');
   }
@@ -563,6 +566,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   public openGdprOverview(): void {
-
+    this.dialog.open(GdprOverviewDialogComponent);
   }
 }
