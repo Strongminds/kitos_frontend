@@ -10,8 +10,6 @@ import { OrganizationService } from './shared/services/organization.service';
 import { RoleOptionTypeService } from './shared/services/role-option-type.service';
 import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating } from './store/user-store/selectors';
-import { Actions } from '@ngrx/effects';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -28,16 +26,12 @@ export class AppComponent extends BaseComponent implements OnInit {
     private dialog: MatDialog,
     private organizationService: OrganizationService,
     private materialIconsService: MaterialIconsConfigService,
-    private externalReferencesService: ExternalReferencesStoreAdapterService,
-    private actions$: Actions,
-    private router: Router,
-    private route: ActivatedRoute
+    private externalReferencesService: ExternalReferencesStoreAdapterService
   ) {
     super();
   }
 
   ngOnInit() {
-
     this.materialIconsService.configureCustomIcons();
     this.ensureUserIsPartOfAnOrganization();
     this.notificationService.subscribeOnActions();
