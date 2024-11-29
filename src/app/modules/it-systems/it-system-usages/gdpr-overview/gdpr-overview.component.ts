@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { GdprReportActions } from 'src/app/store/it-system-usage/gdpr-report/actions';
+import { selectGdprReports } from 'src/app/store/it-system-usage/gdpr-report/selectors';
 
 @Component({
   selector: 'app-gdpr-overview',
@@ -9,26 +12,20 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 export class GdprOverviewComponent {
   public readonly gridColumns: GridColumn[] = [
     {
-      field: 'a',
+      field: '',
       title: 'test',
       hidden: false,
     },
     {
-      field: 'b',
+      field: '',
       title: 'test 2',
       hidden: false,
     },
   ];
 
-  //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public readonly fakeData: any[] = [
-    {
-      a: '123',
-      b: '456',
-    },
-    {
-      a: 'abc',
-      b: 'def',
-    },
-  ];
+  public readonly gdprReports$ = this.store.select(selectGdprReports);
+
+  constructor(private store: Store) {
+    this.store.dispatch(GdprReportActions.getGDPRReports());
+  }
 }

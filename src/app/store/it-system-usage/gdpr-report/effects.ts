@@ -23,7 +23,7 @@ export class GdprReportEffects {
       ofType(GdprReportActions.getGDPRReports),
       concatLatestFrom(() => [
         this.store.select(selectOrganizationUuid),
-        this.store.select(selectGdprReportHasValidCache),
+        this.store.select(selectGdprReportHasValidCache()),
       ]),
       filter(([_, __, validCache]) => !validCache),
       map(([, organizationUuid]) => organizationUuid),

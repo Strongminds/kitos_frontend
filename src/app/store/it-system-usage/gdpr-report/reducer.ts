@@ -4,7 +4,9 @@ import { GdprReport } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-repo
 import { GdprReportActions } from './actions';
 import { GdprReportState } from './state';
 
-export const gdprReportsAdapter = createEntityAdapter<GdprReport>();
+export const gdprReportsAdapter = createEntityAdapter<GdprReport>({
+  selectId: (report: GdprReport) => report.systemUuid,
+});
 
 export const initialGdprReportState: GdprReportState = gdprReportsAdapter.getInitialState({
   cacheTime: undefined,

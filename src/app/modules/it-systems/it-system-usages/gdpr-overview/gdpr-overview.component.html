@@ -1,1 +1,3 @@
-<app-local-grid [columns]="gridColumns" [data]="fakeData"></app-local-grid>
+<ng-container *ngIf="gdprReports$ | async as gdprReports">
+  <app-local-grid [columns]="gridColumns" [data]="gdprReports"></app-local-grid>
+</ng-container>
