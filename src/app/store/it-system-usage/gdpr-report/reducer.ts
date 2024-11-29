@@ -3,6 +3,7 @@ import { createFeature, createReducer, on } from '@ngrx/store';
 import { GdprReport } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-report.model';
 import { GdprReportActions } from './actions';
 import { GdprReportState } from './state';
+import { ITSystemUsageActions } from '../actions';
 
 export const gdprReportsAdapter = createEntityAdapter<GdprReport>({
   selectId: (report: GdprReport) => report.systemUuid,
@@ -21,6 +22,18 @@ export const gdprReportFeature = createFeature({
         ...gdprReportsAdapter.setAll(report, state),
         cacheTime: new Date().getTime(),
       };
-    })
+    }),
+
+    on(
+      ITSystemUsageActions.removeITSystemUsageSuccess,
+      ITSystemUsageActions.createItSystemUsageSuccess,
+      ITSystemUsageActions.patchITSystemUsageSuccess, //TODO: Might be incomplete
+      (state): GdprReportState => {
+        return {
+          ...state,
+          cacheTime: undefined,
+        };
+      }
+    )
   ),
 });
