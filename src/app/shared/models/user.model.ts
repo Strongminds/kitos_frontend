@@ -1,9 +1,9 @@
 import { APIUserDTO } from 'src/app/api/v1';
+import { adaptV1OrganizationRights, OrganizationRight } from './organization-right.model';
 import {
   mapStartPreferenceChoiceFromV1,
   StartPreferenceChoice,
 } from './organization/organization-user/start-preference.model';
-import { adaptV1OrganizationRights, OrganizationRight } from './organization-right.model';
 
 export interface User {
   id: number;
@@ -13,6 +13,7 @@ export interface User {
   isGlobalAdmin: boolean;
   defaultStartPage: StartPreferenceChoice | undefined;
   organizationRights: OrganizationRight[];
+  defaultUnitUuid?: string;
 }
 
 export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
@@ -26,5 +27,6 @@ export const adaptUser = (apiUser?: APIUserDTO): User | undefined => {
     isGlobalAdmin: apiUser?.isGlobalAdmin ?? false,
     organizationRights: adaptV1OrganizationRights(apiUser?.organizationRights ?? []),
     defaultStartPage: mapStartPreferenceChoiceFromV1(apiUser.defaultUserStartPreference),
- };
+    defaultUnitUuid: apiUser.defaultOrganizationUnitUuid,
+  };
 };

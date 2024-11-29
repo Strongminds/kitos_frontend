@@ -12,7 +12,12 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectHasMultipleOrganizations, selectOrganizationName, selectUser, selectUserIsCurrentlyLocalAdmin } from 'src/app/store/user-store/selectors';
+import {
+  selectHasMultipleOrganizations,
+  selectOrganizationName,
+  selectUser,
+  selectUserIsCurrentlyLocalAdmin,
+} from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
 
@@ -27,6 +32,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly user$ = this.store.select(selectUser);
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasMultipleOrganizations$ = this.store.select(selectHasMultipleOrganizations);
+  public readonly uiRootConfig$ = this.store.select(selectUIRootConfig).pipe(filterNullish());
   public readonly uiRootConfig$ = this.store.select(selectUIRootConfig).pipe(filterNullish());
   public readonly isUserCurrentyLocalAdmin$ = this.store.select(selectUserIsCurrentlyLocalAdmin);
 
@@ -45,15 +51,21 @@ export class NavBarComponent extends BaseComponent implements OnInit {
         .pipe(ofType(UserActions.resetOnOrganizationUpdate), withLatestFrom(this.user$, this.uiRootConfig$))
         .subscribe(([_, user, uiRootConfig]) => {
           const userDefaultStartPage = user?.defaultStartPage;
-          if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig)) this.navigateToUserDefaultStartPage(userDefaultStartPage!);
+          if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig))
+            this.navigateToUserDefaultStartPage(userDefaultStartPage!);
         })
     );
   }
 
-  private shouldGoToUserDefaultStartPage(userDefaultStartPage: StartPreferenceChoice | undefined, uiRootConfig: UIRootConfig): boolean {
-    return this.isOnStartPage() &&
+  private shouldGoToUserDefaultStartPage(
+    userDefaultStartPage: StartPreferenceChoice | undefined,
+    uiRootConfig: UIRootConfig
+  ): boolean {
+    return (
+      this.isOnStartPage() &&
       userDefaultStartPage !== undefined &&
-      !this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig);
+      !this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)
+    );
   }
 
   private isOnStartPage(): boolean {
