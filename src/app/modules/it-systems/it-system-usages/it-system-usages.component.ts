@@ -561,4 +561,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   override rowIdSelect(event: CellClickEvent) {
     super.rowIdSelect(event, this.router, this.route);
   }
+
+  public openGdprOverview(): void {
+
+  }
 }
