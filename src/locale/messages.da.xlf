@@ -6207,6 +6207,30 @@
         <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
         <target state="new">Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</target>
       </trans-unit>
+      <trans-unit id="5742019875153950367" datatype="html">
+        <source>CPR-nr</source>
+        <target state="new">CPR-nr</target>
+      </trans-unit>
+      <trans-unit id="830692856183381932" datatype="html">
+        <source>Straffesager og lovovertrædelser</source>
+        <target state="new">Straffesager og lovovertrædelser</target>
+      </trans-unit>
+      <trans-unit id="5070345773267732947" datatype="html">
+        <source>Valgte følsomme personoplysninger</source>
+        <target state="new">Valgte følsomme personoplysninger</target>
+      </trans-unit>
+      <trans-unit id="1251282400133851613" datatype="html">
+        <source>Databehandleraftale</source>
+        <target state="new">Databehandleraftale</target>
+      </trans-unit>
+      <trans-unit id="8903078294616420624" datatype="html">
+        <source>Hvad viste seneste risikovurdering</source>
+        <target state="new">Hvad viste seneste risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="9044497579857463520" datatype="html">
+        <source>IT-Systemet driftes</source>
+        <target state="new">IT-Systemet driftes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

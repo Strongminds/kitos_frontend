@@ -4714,6 +4714,24 @@
       <trans-unit id="530214592421461833" datatype="html">
         <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
       </trans-unit>
+      <trans-unit id="1251282400133851613" datatype="html">
+        <source>Databehandleraftale</source>
+      </trans-unit>
+      <trans-unit id="5070345773267732947" datatype="html">
+        <source>Valgte følsomme personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="5742019875153950367" datatype="html">
+        <source>CPR-nr</source>
+      </trans-unit>
+      <trans-unit id="830692856183381932" datatype="html">
+        <source>Straffesager og lovovertrædelser</source>
+      </trans-unit>
+      <trans-unit id="8903078294616420624" datatype="html">
+        <source>Hvad viste seneste risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="9044497579857463520" datatype="html">
+        <source>IT-Systemet driftes</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
