@@ -8,7 +8,7 @@
               <app-paragraph [bold]="true">
               {{ usage.name }}
             </app-paragraph>
-            <app-button i18n (buttonClick)="clickMigrateUsage(usage)" *ngIf="isItSystemDialog() && (canExecuteMigration$ | async)">Flyt</app-button>
+            <app-button i18n (buttonClick)="clickMigrateUsage(usage)" *ngIf="isItSystemDialog() && (canExecuteMigration$ | async)" data-cy="migrate-button">Flyt</app-button>
             </div>
           </td>
         </tr>
