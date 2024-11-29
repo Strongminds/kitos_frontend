@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, first } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, first } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateUserRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -14,7 +14,9 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { UserActions } from 'src/app/store/user-store/actions';
 import { ProfileComponentStore } from './profile.component-store';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   templateUrl: 'profile.component.html',
@@ -22,10 +24,13 @@ import { ProfileComponentStore } from './profile.component-store';
   providers: [ProfileComponentStore],
 })
 export class ProfileComponent extends BaseComponent implements OnInit {
-  public startPreferenceOptions = startPreferenceChoiceOptions;
+  public startPreferenceOptions = this.userService.getAvailableStartPreferenceOptions();
   public readonly isLoading$ = this.componentStore.isLoading$;
   public readonly user$ = this.componentStore.user$;
   public readonly alreadyExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private readonly currentDefaultUnitUuid$: BehaviorSubject<string | undefined> = new BehaviorSubject<
+    string | undefined
+  >(undefined);
 
   public editForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -38,7 +43,11 @@ export class ProfileComponent extends BaseComponent implements OnInit {
 
   private currentEmail = '';
 
-  constructor(private store: Store, private componentStore: ProfileComponentStore, private actions$: Actions) {
+  constructor(
+    private store: Store,
+    private componentStore: ProfileComponentStore,
+    private actions$: Actions,
+    private userService: UserService) {
     super();
   }
 
@@ -56,6 +65,8 @@ export class ProfileComponent extends BaseComponent implements OnInit {
           defaultStartPreference: mapStartPreferenceChoice(user.defaultUserStartPreference),
           defaultOrganizationUnit: user.defaultOrganizationUnit,
         });
+
+        this.currentDefaultUnitUuid$.next(user.defaultOrganizationUnit?.uuid);
       }
     });
 
@@ -76,6 +87,17 @@ export class ProfileComponent extends BaseComponent implements OnInit {
 
         this.changeEmailValidityState(true);
       })
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationUserActions.updateUserSuccess), combineLatestWith(this.currentDefaultUnitUuid$))
+        .subscribe(([{ user }, currentUnitUuid]) => {
+          if (user.defaultOrganizationUnit?.uuid === currentUnitUuid) return;
+
+          this.store.dispatch(UserActions.updateUserDefaultUnitState(user.defaultOrganizationUnit?.uuid));
+          this.currentDefaultUnitUuid$.next(user.defaultOrganizationUnit?.uuid);
+        })
     );
   }
 
