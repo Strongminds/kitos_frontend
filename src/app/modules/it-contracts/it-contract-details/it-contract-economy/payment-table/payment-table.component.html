@@ -12,8 +12,6 @@
         <th i18n>Dato</th>
         <th i18n>Note</th>
         <th i18n>Audit</th>
-        <th></th>
-        <!-- Makes sure the buttons doesn't "fall out" when resizing to a small window -->
       </thead>
       <tbody>
         <tr *ngFor="let payment of payments$ | async">
@@ -39,9 +37,7 @@
             <app-paragraph paragraphSize="small">{{ (payment.auditDate | appDate) ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
-            <app-paragraph paragraphSize="small" class="might-overflow" [cropOnOverflow]="true">{{
-              payment.note ?? nullPlaceholder
-            }}</app-paragraph>
+            <app-paragraph paragraphSize="small">{{ payment.note ?? nullPlaceholder }}</app-paragraph>
           </td>
           <td>
             <app-content-space-between>
@@ -62,8 +58,6 @@
               </ng-container>
             </app-content-space-between>
           </td>
-          <td></td>
-          <!-- Makes sure the buttons doesn't "fall out" when resizing to a small window -->
         </tr>
       </tbody>
     </app-native-table>

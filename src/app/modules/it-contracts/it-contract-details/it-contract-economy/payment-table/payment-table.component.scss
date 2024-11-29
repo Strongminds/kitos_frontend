@@ -1,4 +1,5 @@
 @import "mixins.scss";
+@include native-table-sticky-column;
 
 :host {
   display: flex;
@@ -8,12 +9,4 @@
 
 .payment-table {
   overflow: auto;
-}
-
-.sticky-column {
-  position: -webkit-sticky; /* For Safari */
-  position: sticky;
-  left: 0;
-  background-color: $color-white; /* Adjust as needed */
-  z-index: 1; /* Ensure it stays above other columns */
 }
