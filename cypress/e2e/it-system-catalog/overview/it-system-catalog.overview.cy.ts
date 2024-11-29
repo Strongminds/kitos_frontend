@@ -21,22 +21,23 @@ describe('it-system-catalog', () => {
     cy.intercept('/api/v2/internal/it-system-usages/search*', {
       fixture: './it-system-usage/it-system-usages-v2.json',
     });
-    cy.intercept('api/v2/internal/it-system-usages/*/migration?*', {
+    cy.intercept('GET', 'api/v2/internal/it-system-usages/*/migration?*', {
       fixture: './it-system-catalog/migration.json',
-    }).as('getMigration');
-    cy.intercept('POST', 'api/v2/internal/it-system-usages/*/migration?toSystemUuid=*').as('executeMigration');
+    });
+    cy.intercept('POST', 'api/v2/internal/it-system-usages/*/migration?*', {
+      fixture: '',
+    }).as('executeMigration');
 
     cy.getByDataCy('grid-usages-link').first().click();
     cy.getByDataCy('migrate-button').first().click();
     cy.getByDataCy(connectedDropdown).type('System 2');
     cy.dropdownByCy(connectedDropdown, 'System 2', true);
     cy.getByDataCy('confirm-button').click();
-
-
     cy.getByDataCy('execute-migration-button').click();
+
+    const system2Uuid = 'ede11fff-cf8d-4fb4-8b89-d8822cce64b0';
     cy.wait('@executeMigration').then((interception) => {
-      console.log(interception.request.body)
-      expect(interception.request.body.toSystemUuid).to.equal('8d843a6f-2424-43d6-90b8-916a72e615ce');
+      expect(interception.request.query['toSystemUuid']).to.equal(system2Uuid);
     });
   });
 
