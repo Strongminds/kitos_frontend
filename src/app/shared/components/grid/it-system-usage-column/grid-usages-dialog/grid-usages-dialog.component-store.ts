@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { mergeMap, Observable, of, switchMap, withLatestFrom } from 'rxjs';
+import { map, mergeMap, Observable, of, switchMap, withLatestFrom } from 'rxjs';
 import {
   APIItSystemUsageMigrationPermissionsResponseDTO,
   APIItSystemUsageMigrationV2ResponseDTO,
@@ -108,81 +108,78 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
 
   public getMigration = (targetItSystemUuid: string) => (sourceItSystemUuid: string) =>
     this.effect((usingOrganizationUuid$: Observable<string>) =>
-      usingOrganizationUuid$.pipe(
-        withLatestFrom(of(targetItSystemUuid), of(sourceItSystemUuid)),
-        mergeMap(([usingOrganizationUuid, targetItSystemUuid, sourceItSystemUuid]) => {
-          this.updateLoading(true);
-          return this.itSystemUsageInternalService
+      this.getUsageUuid(usingOrganizationUuid$, sourceItSystemUuid).pipe(
+        mergeMap((usageUuid) =>
+          this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2Get({
+            toSystemUuid: targetItSystemUuid,
+            usageUuid,
+          })
+        ),
+        tapResponse(
+          (migration: APIItSystemUsageMigrationV2ResponseDTO) => {
+            this.updateMigration(migration);
+          },
+          (error) => {
+            console.error(error);
+          },
+          () => this.updateLoading(false)
+        )
+      )
+    );
+
+
+    public executeMigration = (
+      targetItSystemUuid: string,
+      sourceItSystemUuid: string,
+      usingOrganizationUuid$: Observable<string>
+    ) =>
+      this.getUsageUuid(usingOrganizationUuid$, sourceItSystemUuid).pipe(
+        mergeMap((usageUuid) =>
+          this.itSystemUsageMigrationService.postSingleItSystemUsageMigrationV2ExecuteMigration(
+            {
+              toSystemUuid: targetItSystemUuid,
+              usageUuid,
+            },
+            'response'
+          )
+        ),
+        tapResponse(
+          (_) => {
+            this.notificationService.showDefault($localize`Systemanvendelsen blev flyttet`);
+            this.store.select(selectSystemGridState).subscribe((state) => {
+              const systemGridStateAsODataString = toODataString(state);
+              this.store.dispatch(ITSystemActions.getITSystems(systemGridStateAsODataString));
+            });
+          },
+          (error) => {
+            this.notificationService.showError($localize`Systemanvendelsen kunne ikke flyttes`);
+            console.error(error);
+          },
+          () => this.updateLoading(false)
+        )
+      );
+
+
+    private getUsageUuid(usingOrganizationUuid$: Observable<string>, sourceItSystemUuid: string): Observable<string> {
+      return usingOrganizationUuid$.pipe(
+        mergeMap((usingOrganizationUuid) =>
+          this.itSystemUsageInternalService
             .getManyItSystemUsageInternalV2GetItSystemUsages({
               organizationUuid: usingOrganizationUuid,
             })
             .pipe(
-              mergeMap((usages) => {
-                const usage = usages.find((usage) => usage.systemContext.uuid === sourceItSystemUuid);
+              map((usages) => {
+                const usage = usages.find((u) => u.systemContext.uuid === sourceItSystemUuid);
                 if (!usage) {
                   throw new Error('Usage not found');
                 }
-                return this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2Get({
-                  toSystemUuid: targetItSystemUuid,
-                  usageUuid: usage.uuid,
-                });
-              }),
-              tapResponse(
-                (migration) => {
-                  this.updateMigration(migration);
-                },
-                (error) => {
-                  console.error(error);
-                },
-                () => this.updateLoading(false)
-              )
-            );
-        })
-      )
-    );
-
-  public executeMigration = (
-    targetItSystemUuid: string,
-    sourceItSystemUuid: string,
-    usingOrganizationUuid$: Observable<string>
-  ) =>
-    usingOrganizationUuid$.pipe(
-      withLatestFrom(of(targetItSystemUuid), of(sourceItSystemUuid)),
-      mergeMap(([usingOrganizationUuid, targetItSystemUuid, sourceItSystemUuid]) => {
-        this.updateLoading(true);
-        return this.itSystemUsageInternalService
-          .getManyItSystemUsageInternalV2GetItSystemUsages({
-            organizationUuid: usingOrganizationUuid,
-          })
-          .pipe(
-            mergeMap((usages) => {
-              const usage = usages.find((u) => u.systemContext.uuid === sourceItSystemUuid);
-              if (!usage) throw new Error('Usage not found');
-              return this.itSystemUsageMigrationService.postSingleItSystemUsageMigrationV2ExecuteMigration(
-                {
-                  toSystemUuid: targetItSystemUuid,
-                  usageUuid: usage.uuid,
-                },
-                'response'
-              );
-            }),
-            tapResponse(
-              (_) => {
-                this.notificationService.showDefault($localize`Systemanvendelsen blev flyttet`);
-                this.store.select(selectSystemGridState).subscribe((state) => {
-                  const systemGridStateAsODataString = toODataString(state);
-                  this.store.dispatch(ITSystemActions.getITSystems(systemGridStateAsODataString));
-                });
-              },
-              (error) => {
-                this.notificationService.showError($localize`Systemanvendelsen kunne ikke flyttes`);
-                console.error(error);
-              },
-              () => this.updateLoading(false)
+                return usage.uuid;
+              })
             )
-          );
-      })
-    );
+        )
+      );
+    }
+
 
   public getUnusedItSystemsInOrganization = (nameContent: string) =>
     this.effect((organizationUuid$: Observable<string>) =>
