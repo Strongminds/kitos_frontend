@@ -2,15 +2,17 @@ import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { map, mergeMap, Observable, of, switchMap, withLatestFrom } from 'rxjs';
+import { mergeMap, Observable, of, switchMap, withLatestFrom } from 'rxjs';
 import {
   APIItSystemUsageMigrationPermissionsResponseDTO,
   APIItSystemUsageMigrationV2ResponseDTO,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
+import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { selectSystemGridState } from 'src/app/store/it-system/selectors';
 import { IdentityNamePair, mapIdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { filterNullish } from '../../../../pipes/filter-nullish';
 
@@ -51,7 +53,10 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   }
 
   private allowExecuteMigration$() {
-    return this.select((state) => state.migrationPermissions?.commands?.find((c) => c.id === this.executeMigrationCommandId)?.canExecute === true);
+    return this.select(
+      (state) =>
+        state.migrationPermissions?.commands?.find((c) => c.id === this.executeMigrationCommandId)?.canExecute === true
+    );
   }
 
   private updateLoading = this.updater(
@@ -164,7 +169,10 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
             tapResponse(
               (_) => {
                 this.notificationService.showDefault($localize`Systemanvendelsen blev flyttet`);
-                this.store.dispatch(ITSystemActions.getITSystems(''));
+                this.store.select(selectSystemGridState).subscribe((state) => {
+                  const systemGridStateAsODataString = toODataString(state);
+                  this.store.dispatch(ITSystemActions.getITSystems(systemGridStateAsODataString));
+                });
               },
               (error) => {
                 this.notificationService.showError($localize`Systemanvendelsen kunne ikke flyttes`);
