@@ -18,11 +18,12 @@ import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectSystemGridState } from 'src/app/store/it-system/selectors';
 import { IdentityNamePair, mapIdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { filterNullish } from '../../../../pipes/filter-nullish';
+import { adaptItSystemUsageMigration, ItSystemUsageMigration } from 'src/app/shared/models/it-system-usage/migrations/it-system-usage-migration.model';
 
 interface State {
   loading: boolean;
   unusedItSystemsInOrganization: IdentityNamePair[] | undefined;
-  migration: APIItSystemUsageMigrationV2ResponseDTO | undefined;
+  migration: ItSystemUsageMigration | undefined;
   migrationPermissions: ItSystemUsageMigrationPermissions | undefined;
 }
 
@@ -77,7 +78,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   );
 
   private updateMigration = this.updater(
-    (state, migration: APIItSystemUsageMigrationV2ResponseDTO): State => ({
+    (state, migration: ItSystemUsageMigration | undefined): State => ({
       ...state,
       migration,
     })
@@ -119,8 +120,8 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
           })
         ),
         tapResponse(
-          (migration: APIItSystemUsageMigrationV2ResponseDTO) => {
-            this.updateMigration(migration);
+          (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
+            this.updateMigration(adaptItSystemUsageMigration(migrationDto));
           },
           (error) => {
             console.error(error);
