@@ -1,6 +1,7 @@
 <app-dialog [title]="title" overflow="none" [nested]="nested">
   <form [formGroup]="dropdownFormGroup" (submit)="onSave()">
     <app-standard-vertical-content-grid>
+      <app-paragraph *ngIf="description" i18n>{{ description }}</app-paragraph>
       <app-connected-dropdown
         [text]="dropdownText"
         valueField="uuid"

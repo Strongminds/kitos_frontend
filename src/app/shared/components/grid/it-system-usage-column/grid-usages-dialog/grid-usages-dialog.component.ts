@@ -41,7 +41,7 @@ export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
   public clickMigrateUsage($event: IdentityNamePair) {
     if (!this.rowEntityIdentifier) throw new Error('Row entity identifier is missing');
     const dialogRef = this.dialog.open(GridUsagesDropdownDialogComponent, {
-      width: '1000px',
+      width: '700px',
     });
     const componentInstance = dialogRef.componentInstance;
     componentInstance.usingOrganization = $event;

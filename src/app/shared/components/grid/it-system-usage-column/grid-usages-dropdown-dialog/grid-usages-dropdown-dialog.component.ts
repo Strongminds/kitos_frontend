@@ -28,6 +28,10 @@ export class GridUsagesDropdownDialogComponent implements OnInit {
     this.componentStore.getUnusedItSystemsInOrganization(nameContent)(this.usingOrganizationUuid$);
   }
 
+  public getTitle(){
+    return `Anvendelsen kan flyttes til IT systemer, som endnu ikke er anvendt i ${this.usingOrganization.name}.`;
+  }
+
   public onConfirm(targetItSystem: IdentityNamePair) {
     const dialogRef = this.dialog.open(GridUsagesConsequencesDialogComponent, { width: '1000px' });
     const componentInstance = dialogRef.componentInstance;
