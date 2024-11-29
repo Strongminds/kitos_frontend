@@ -40,7 +40,9 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
         //Because of that we have to check if returnUrl is an array or not
         let returnUrl = this.route.snapshot.queryParams['returnUrl'] ?? [AppPath.root];
         returnUrl = Array.isArray(returnUrl) ? returnUrl[0] : returnUrl;
-        this.router.navigate([returnUrl]);
+        if (returnUrl && returnUrl !== '' && returnUrl !== AppPath.root) {
+          this.router.navigate([returnUrl]);
+        }
       })
     );
     this.frontpageComponentStore.getText();
