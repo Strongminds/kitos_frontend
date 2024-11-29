@@ -1,11 +1,11 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { combineLatest, map, Observable } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from '../../../../pipes/filter-nullish';
 import { ClipboardService } from '../../../../services/clipboard.service';
 import { NotificationService } from '../../../../services/notification.service';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
-import { BaseComponent } from 'src/app/shared/base/base.component';
 
 @Component({
   selector: 'app-grid-usages-consequences-dialog',
@@ -21,6 +21,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
 
   public readonly migration$ = this.componentStore.migration$;
   public readonly loading$ = this.componentStore.loading$;
+
   public hasAcceptedConsequences: boolean = false;
   public readonly consequencesContentId = 'consequences-content';
 
@@ -31,7 +32,9 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
     private readonly dialog: MatDialog,
     private readonly notificationService: NotificationService,
     private readonly clipboardService: ClipboardService
-  ) {super();}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
     this.componentStore.getMigration(this.targetItSystemUuid)(this.rowEntityIdentifier)(this.usingOrganizationUuid$);
@@ -43,10 +46,11 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
 
   public onConfirm() {
     this.subscriptions.add(
-      this.componentStore.executeMigration(this.targetItSystemUuid, this.rowEntityIdentifier, this.usingOrganizationUuid$)
-        .subscribe(({
+      this.componentStore
+        .executeMigration(this.targetItSystemUuid, this.rowEntityIdentifier, this.usingOrganizationUuid$)
+        .subscribe({
           next: () => this.dialog.closeAll(),
-        }))
+        })
     );
   }
 

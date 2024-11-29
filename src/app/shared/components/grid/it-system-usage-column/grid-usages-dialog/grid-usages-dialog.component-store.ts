@@ -1,22 +1,24 @@
 import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
-import { mergeMap, Observable, of, withLatestFrom } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { map, mergeMap, Observable, of, switchMap, withLatestFrom } from 'rxjs';
 import {
+  APIItSystemUsageMigrationPermissionsResponseDTO,
   APIItSystemUsageMigrationV2ResponseDTO,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { IdentityNamePair, mapIdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { filterNullish } from '../../../../pipes/filter-nullish';
-import { Store } from '@ngrx/store';
-import { ITSystemActions } from 'src/app/store/it-system/actions';
 
 interface State {
   loading: boolean;
   unusedItSystemsInOrganization: IdentityNamePair[] | undefined;
   migration: APIItSystemUsageMigrationV2ResponseDTO | undefined;
+  migrationPermissions: APIItSystemUsageMigrationPermissionsResponseDTO | undefined;
 }
 
 @Injectable()
@@ -26,9 +28,11 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   );
   public readonly migration$ = this.select((state) => state.migration);
   public readonly loading$ = this.select((state) => state.loading);
+  public readonly canExecuteMigration$ = this.allowExecuteMigration$();
 
   //28/11/24 The API endpoint expects a number from 1 to 25.
   private readonly numberOfItSystemsPerQuery = 25;
+  private readonly executeMigrationCommandId = 'system-usage-migration_execute';
 
   constructor(
     @Inject(APIV2ItSystemUsageMigrationINTERNALService)
@@ -42,7 +46,12 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       loading: false,
       unusedItSystemsInOrganization: undefined,
       migration: undefined,
+      migrationPermissions: undefined,
     });
+  }
+
+  private allowExecuteMigration$() {
+    return this.select((state) => state.migrationPermissions?.commands?.find((c) => c.id === this.executeMigrationCommandId)?.canExecute === true);
   }
 
   private updateLoading = this.updater(
@@ -64,6 +73,32 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       ...state,
       migration,
     })
+  );
+
+  private updateMigrationPermissions = this.updater(
+    (state, migrationPermissions: APIItSystemUsageMigrationPermissionsResponseDTO): State => ({
+      ...state,
+      migrationPermissions,
+    })
+  );
+
+  public getMigrationPermissions = this.effect<void>((trigger$) =>
+    trigger$.pipe(
+      switchMap(() => {
+        this.updateLoading(true);
+        return this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2GetPermissions().pipe(
+          tapResponse(
+            (permissions) => {
+              this.updateMigrationPermissions(permissions);
+            },
+            (error) => {
+              console.error(error);
+            },
+            () => this.updateLoading(false)
+          )
+        );
+      })
+    )
   );
 
   public getMigration = (targetItSystemUuid: string) => (sourceItSystemUuid: string) =>
