@@ -566,6 +566,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   public openGdprOverview(): void {
-    this.dialog.open(GdprOverviewDialogComponent);
+    this.dialog.open(GdprOverviewDialogComponent, { width: '90%' });
   }
 }

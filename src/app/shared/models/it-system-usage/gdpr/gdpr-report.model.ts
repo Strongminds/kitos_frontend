@@ -26,7 +26,6 @@ export interface GdprReport {
 }
 
 export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
-  console.log(dto);
   if (!dto.systemUuid) throw new Error('Missing systemUuid');
   return {
     systemUuid: dto.systemUuid,
