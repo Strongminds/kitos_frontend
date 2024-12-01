@@ -12,7 +12,7 @@
   (sortChange)="onSortChange($event)"
   (pageChange)="onPageChange($event)"
   style="width: 100%"
-  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent }"
+  [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent}"
 >
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column

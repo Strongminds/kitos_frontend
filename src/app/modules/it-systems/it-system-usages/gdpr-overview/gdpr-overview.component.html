@@ -1,3 +1,3 @@
 <ng-container *ngIf="gdprReports$ | async as gdprReports">
-  <app-local-grid [columns]="gridColumns" [data]="gdprReports"></app-local-grid>
+  <app-local-grid [columns]="gridColumns" [data]="gdprReports" height="800px" [withOutline]="true"></app-local-grid>
 </ng-container>
