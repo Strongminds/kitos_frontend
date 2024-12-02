@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NavigationEnd, Router } from '@angular/router';
-import { Actions, ofType } from '@ngrx/effects';
+import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, filter, tap, withLatestFrom } from 'rxjs';
+import { combineLatest, filter, tap } from 'rxjs';
 import { APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
-import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
@@ -40,35 +39,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setupUseUserDefaultStartPage();
     this.setupGetUIRootConfigOnNavigation();
-  }
-
-  private setupUseUserDefaultStartPage() {
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(UserActions.resetOnOrganizationUpdate), withLatestFrom(this.user$, this.uiRootConfig$))
-        .subscribe(([_, user, uiRootConfig]) => {
-          const userDefaultStartPage = user?.defaultStartPage;
-          if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig))
-            this.navigateToUserDefaultStartPage(userDefaultStartPage!);
-        })
-    );
-  }
-
-  private shouldGoToUserDefaultStartPage(
-    userDefaultStartPage: StartPreferenceChoice | undefined,
-    uiRootConfig: UIRootConfig
-  ): boolean {
-    return (
-      this.isOnStartPage() &&
-      userDefaultStartPage !== undefined &&
-      !this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)
-    );
-  }
-
-  private isOnStartPage(): boolean {
-    return this.router.url.replace('/', '') === AppPath.root;
   }
 
   private setupGetUIRootConfigOnNavigation() {
@@ -80,29 +51,6 @@ export class NavBarComponent extends BaseComponent implements OnInit {
         )
         .subscribe()
     );
-  }
-
-  private userDefaultStartPageDisabledInOrganization(
-    userDefaultStartPage: StartPreferenceChoice,
-    uiRootConfig: UIRootConfig
-  ): boolean {
-    const startPageValue = userDefaultStartPage.value;
-    switch (startPageValue) {
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
-        return !uiRootConfig.showItSystemModule;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
-        return !uiRootConfig.showItContractModule;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
-        return !uiRootConfig.showDataProcessing;
-      default:
-        return false;
-    }
-  }
-
-  private navigateToUserDefaultStartPage(userDefaultStartPage: StartPreferenceChoice) {
-    const path = this.getUserDefaultStartPagePath(userDefaultStartPage);
-    this.router.navigate([path]);
   }
 
   private getUserDefaultStartPagePath(userDefaultStartPage: StartPreferenceChoice): string {
