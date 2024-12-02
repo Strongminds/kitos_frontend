@@ -10,6 +10,7 @@ import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-
 import { of } from 'rxjs';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
+import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
 
 @Component({
   selector: 'app-gdpr-overview',
@@ -149,5 +150,11 @@ export class GdprOverviewComponent {
 
   constructor(private store: Store, private uiConfigService: UIConfigService) {
     this.store.dispatch(GdprReportActions.getGDPRReports());
+  }
+
+  public getExportName(): string {
+    const currentDate = new Date();
+    const formattedDate = mapDateToString(currentDate);
+    return `kitos_gdpr_report-${formattedDate}`;
   }
 }
