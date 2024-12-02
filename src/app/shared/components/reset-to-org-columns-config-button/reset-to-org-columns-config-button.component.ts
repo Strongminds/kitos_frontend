@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
@@ -10,6 +10,9 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { NotificationService } from '../../services/notification.service';
+import { selectItSystemUsageLastSeenGridConfig } from 'src/app/store/it-system-usage/selectors';
+import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
+import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
@@ -19,8 +22,10 @@ import { NotificationService } from '../../services/notification.service';
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public gridColumns$!: Observable<GridColumn[]>;
-  @Input() public lastSeenGridConfig$: Observable<APIOrganizationGridConfigurationResponseDTO | undefined> | undefined;
 
+  @Output() public itemClick = new EventEmitter<void>();
+
+  public lastSeenGridConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined> | undefined;
   public hasChanged: boolean = true;
 
   public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`;
@@ -28,6 +33,8 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {}
 
   public ngOnInit(): void {
+    this.lastSeenGridConfig$ = this.getGridConfig();
+
     if (!this.lastSeenGridConfig$) {
       this.hasChanged = false;
       return;
@@ -65,6 +72,19 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
         return ITContractActions.initializeITContractLastSeenGridConfigurationSuccess;
       case 'data-processing-registration':
         return DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationSuccess;
+      default:
+        throw new Error('Unsupported entity type');
+    }
+  }
+
+  private getGridConfig(): Observable<APIOrganizationGridConfigurationResponseDTO | undefined> | undefined {
+    switch (this.entityType) {
+      case 'it-system-usage':
+        return this.store.select(selectItSystemUsageLastSeenGridConfig);
+      case 'it-contract':
+        return this.store.select(selectItContractLastSeenGridConfig);
+      case 'data-processing-registration':
+        return this.store.select(selectDataProcessingLastSeenGridConfig);
       default:
         throw new Error('Unsupported entity type');
     }

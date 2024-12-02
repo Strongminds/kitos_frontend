@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
+import { GridColumn } from '../../models/grid-column.model';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-filter-options-button',
@@ -13,6 +15,8 @@ import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-fi
 })
 export class FilterOptionsButtonComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;
+  @Input() hasResetButton: boolean = false;
+  @Input() gridColumns$!: Observable<GridColumn[]>;
 
   public disabled: boolean = false;
 

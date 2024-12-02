@@ -2,11 +2,6 @@
   <h3 i18n>IT Kontrakter</h3>
   <app-help-button helpTextKey="it-contract.overview"></app-help-button>
   <app-filter-options-button entityType="it-contract"></app-filter-options-button>
-  <app-reset-to-org-columns-config-button
-    [gridColumns$]="gridColumns$"
-    entityType="it-contract"
-    [lastSeenGridConfig$]="lastSeenGridConfig$"
-  ></app-reset-to-org-columns-config-button>
   <app-local-admin-column-config-button
     *ngIf="hasConfigModificationPermissions$ | async"
     [columns$]="gridColumns$"
