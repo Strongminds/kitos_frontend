@@ -6,8 +6,10 @@ import { riskAssessmentResultOptions } from 'src/app/shared/models/it-system-usa
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { GdprReportActions } from 'src/app/store/it-system-usage/gdpr-report/actions';
 import { selectGdprReports } from 'src/app/store/it-system-usage/gdpr-report/selectors';
-import { selectUIModuleCustomizationState } from 'src/app/store/organization/ui-module-customization/selectors';
 import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
+import { of } from 'rxjs';
+import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
   selector: 'app-gdpr-overview',
@@ -15,7 +17,7 @@ import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-
   styleUrl: './gdpr-overview.component.scss',
 })
 export class GdprOverviewComponent {
-  public readonly gridColumns: GridColumn[] = [
+  private readonly gridColumns: GridColumn[] = [
     {
       field: GdprFields.SYSTEM_UUID,
       title: $localize`UUID`,
@@ -139,11 +141,13 @@ export class GdprOverviewComponent {
     },
   ];
 
-  public readonly filteredGridColumns = this.store.select(selectUIModuleCustomizationState);
+  public readonly filteredGridColumns$ = of(this.gridColumns).pipe(
+    this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.Gdpr)
+  );
 
   public readonly gdprReports$ = this.store.select(selectGdprReports);
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private uiConfigService: UIConfigService) {
     this.store.dispatch(GdprReportActions.getGDPRReports());
   }
 }
