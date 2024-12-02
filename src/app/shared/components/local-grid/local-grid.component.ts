@@ -55,6 +55,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   }
 
   public onStateChange(state: GridState) {
+    console.log('state', state);
     this.state = state;
   }
 

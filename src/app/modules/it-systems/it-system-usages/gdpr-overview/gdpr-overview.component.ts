@@ -75,7 +75,6 @@ export class GdprOverviewComponent {
       field: GdprFields.SENSITIVE_DATA_TYPES,
       title: $localize`Valgte følsomme personoplysninger`,
       hidden: false,
-      // TODO: How to handle this type
     },
     {
       field: GdprFields.BUSINESS_CRITICAL_NAME,
@@ -108,7 +107,6 @@ export class GdprOverviewComponent {
       title: $localize`Dato for seneste risikovurdering`,
       hidden: false,
       style: 'date',
-      filter: 'date',
       width: 350,
     },
     {
@@ -116,7 +114,6 @@ export class GdprOverviewComponent {
       title: $localize`Dato for planlagt risikovurdering`,
       hidden: false,
       style: 'date',
-      filter: 'date',
       width: 350,
     },
     {
