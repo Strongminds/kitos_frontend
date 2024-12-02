@@ -62,7 +62,11 @@ export class LocalAdminColumnConfigButtonComponent {
 
   private mapColumnsToGridConfigurationRequest(columns: GridColumn[]): APIColumnConfigurationRequestDTO[] {
     return columns
-      .map((column, index) => ({ persistId: column.persistId, index, visible: !column.hidden }))
+      .map((column, index) => ({
+        persistId: column.persistId,
+        index,
+        visible: !column.hidden && !column.disabledByUIConfig,
+      }))
       .filter((column) => column.visible)
       .map(({ persistId, index }) => ({ persistId, index }));
   }
