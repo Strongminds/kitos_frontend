@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { combineLatest, map, Observable, of } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
@@ -408,6 +408,5 @@ export class GridUIConfigService {
         },
       ])
     );
-    return of([]);
   }
 }
