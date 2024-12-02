@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { combineLatest, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { filterNullish } from '../../../../pipes/filter-nullish';
 import { ClipboardService } from '../../../../services/clipboard.service';
 import { NotificationService } from '../../../../services/notification.service';
@@ -17,7 +19,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   @Input() public title!: string;
   @Input() public targetItSystemUuid!: string;
   @Input() public usingOrganizationUuid$!: Observable<string>;
-  @Input() rowEntityIdentifier!: string;
+  @Input() sourceItSystemUuid!: string;
 
   public readonly migration$ = this.componentStore.migration$;
   public readonly loading$ = this.componentStore.loading$;
@@ -31,13 +33,27 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
     private readonly cdr: ChangeDetectorRef,
     private readonly dialog: MatDialog,
     private readonly notificationService: NotificationService,
-    private readonly clipboardService: ClipboardService
+    private readonly clipboardService: ClipboardService,
+    private readonly actions$: Actions
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.componentStore.getMigration(this.targetItSystemUuid)(this.rowEntityIdentifier)(this.usingOrganizationUuid$);
+    this.componentStore.getMigration(this.targetItSystemUuid)(this.sourceItSystemUuid)(this.usingOrganizationUuid$);
+    //this.componentStore.getMigration(this.targetItSystemUuid, this.sourceItSystemUuid, this.usingOrganizationUuid$);
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
+        this.dialog.closeAll();
+      })
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationError)).subscribe(() => {
+        this.componentStore.finishLoading();
+      })
+    );
   }
 
   public onCancel() {
@@ -45,13 +61,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   }
 
   public onConfirm() {
-    this.subscriptions.add(
-      this.componentStore
-        .executeMigration(this.targetItSystemUuid, this.rowEntityIdentifier, this.usingOrganizationUuid$)
-        .subscribe({
-          next: () => this.dialog.closeAll(),
-        })
-    );
+    this.componentStore.executeMigration(this.targetItSystemUuid);
   }
 
   public hasConsequences(): Observable<boolean> {

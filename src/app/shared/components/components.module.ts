@@ -138,6 +138,10 @@ import { FileInputComponent } from './file-input/file-input.component';
 import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
 import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
 import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
+import { GridUsagesConsequencesDialogComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
+import { UsageMigrationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-consequences-table/usage-migration-consequences-table.component';
+import { GridUsagesDialogComponent } from './grid/it-system-usage-column/grid-usages-dialog/grid-usages-dialog.component';
+import { GridUsagesDropdownDialogComponent } from './grid/it-system-usage-column/grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
 import { IconComponent } from './icon/icon.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { LocalGridComponent } from './local-grid/local-grid.component';
@@ -155,13 +159,9 @@ import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
-import { UsageMigrationConsequencesTableComponent } from './usage-migration-consequences-table/usage-migration-consequences-table.component';
 import { UsageProxyCheckboxComponent } from './usage-proxy-checkbox/usage-proxy-checkbox.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { GridUsagesDialogComponent } from './grid/it-system-usage-column/grid-usages-dialog/grid-usages-dialog.component';
-import { GridUsagesDropdownDialogComponent } from './grid/it-system-usage-column/grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
-import { GridUsagesConsequencesDialogComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();

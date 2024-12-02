@@ -28,7 +28,7 @@ export class GridUsagesDropdownDialogComponent implements OnInit {
     this.componentStore.getUnusedItSystemsInOrganization(nameContent)(this.usingOrganizationUuid$);
   }
 
-  public getTitle(){
+  public getTitle() {
     return `Anvendelsen kan flyttes til IT systemer, som endnu ikke er anvendt i ${this.usingOrganization.name}.`;
   }
 
@@ -38,6 +38,6 @@ export class GridUsagesDropdownDialogComponent implements OnInit {
     componentInstance.title = $localize`Flytning af IT systemanvendelse`;
     componentInstance.usingOrganizationUuid$ = this.usingOrganizationUuid$;
     componentInstance.targetItSystemUuid = targetItSystem.uuid;
-    componentInstance.rowEntityIdentifier = this.rowEntityIdentifier;
+    componentInstance.sourceItSystemUuid = this.rowEntityIdentifier;
   }
 }

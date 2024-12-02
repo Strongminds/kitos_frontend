@@ -6,8 +6,16 @@
   </thead>
   <tbody>
     <tr *ngFor="let consequence of consequences">
-      <td>{{ consequence.uuid }}</td>
-      <td>{{ consequence.name }}</td>
+      <td>
+        <app-paragraph>
+          {{ consequence.uuid }}
+        </app-paragraph>
+      </td>
+      <td>
+        <app-paragraph>
+          {{ consequence.name }}
+        </app-paragraph>
+      </td>
     </tr>
   </tbody>
 </app-native-table>

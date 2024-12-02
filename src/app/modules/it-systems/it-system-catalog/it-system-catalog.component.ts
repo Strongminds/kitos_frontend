@@ -205,7 +205,10 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemActions.createItSystemSuccess), combineLatestWith(this.gridState$))
+        .pipe(
+          ofType(ITSystemActions.createItSystemSuccess, ITSystemActions.executeUsageMigrationSuccess),
+          combineLatestWith(this.gridState$)
+        )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
         })

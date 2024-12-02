@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { map, mergeMap, Observable, of, switchMap, withLatestFrom } from 'rxjs';
+import { combineLatestWith, map, mergeMap, Observable, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import {
   APIItSystemUsageMigrationV2ResponseDTO,
   APIV2ItSystemUsageInternalINTERNALService,
@@ -18,7 +18,6 @@ import {
 } from 'src/app/shared/models/it-system-usage/migrations/it-system-usage-migration.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
-import { selectSystemGridState } from 'src/app/store/it-system/selectors';
 import { IdentityNamePair, mapIdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { filterNullish } from '../../../../pipes/filter-nullish';
 
@@ -27,6 +26,7 @@ interface State {
   unusedItSystemsInOrganization: IdentityNamePair[] | undefined;
   migration: ItSystemUsageMigration | undefined;
   migrationPermissions: ItSystemUsageMigrationPermissions | undefined;
+  usageUuid?: string;
 }
 
 @Injectable()
@@ -37,6 +37,8 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   public readonly migration$ = this.select((state) => state.migration);
   public readonly loading$ = this.select((state) => state.loading);
   public readonly canExecuteMigration$ = this.allowExecuteMigration$();
+  //Updated after getting consequenes
+  public readonly usageUuid$ = this.select((state) => state.usageUuid);
 
   //28/11/24 The API endpoint expects a number from 1 to 25.
   private readonly numberOfItSystemsPerQuery = 25;
@@ -93,6 +95,13 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
     })
   );
 
+  private updateUsageUuid = this.updater(
+    (state, usageUuid: string): State => ({
+      ...state,
+      usageUuid,
+    })
+  );
+
   public getMigrationPermissions = this.effect<void>((trigger$) =>
     trigger$.pipe(
       switchMap(() => {
@@ -111,57 +120,46 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       })
     )
   );
-
   public getMigration = (targetItSystemUuid: string) => (sourceItSystemUuid: string) =>
     this.effect((usingOrganizationUuid$: Observable<string>) =>
       this.getUsageUuid(usingOrganizationUuid$, sourceItSystemUuid).pipe(
-        mergeMap((usageUuid) =>
-          this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2Get({
+        mergeMap((usageUuid) => {
+          this.updateLoading(true);
+          this.updateUsageUuid(usageUuid);
+          return this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2Get({
             toSystemUuid: targetItSystemUuid,
             usageUuid,
-          })
-        ),
+          });
+        }),
         tapResponse(
+          //finally block is not working in this context for some reason
           (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
             this.updateMigration(adaptItSystemUsageMigration(migrationDto));
+            this.updateLoading(false);
           },
           (error) => {
             console.error(error);
-          },
-          () => this.updateLoading(false)
+            this.updateLoading(false);
+          }
         )
       )
     );
 
-  public executeMigration = (
-    targetItSystemUuid: string,
-    sourceItSystemUuid: string,
-    usingOrganizationUuid$: Observable<string>
-  ) =>
-    this.getUsageUuid(usingOrganizationUuid$, sourceItSystemUuid).pipe(
-      mergeMap((usageUuid) =>
-        this.itSystemUsageMigrationService.postSingleItSystemUsageMigrationV2ExecuteMigration(
-          {
-            toSystemUuid: targetItSystemUuid,
-            usageUuid,
-          },
-          'response'
-        )
-      ),
-      tapResponse(
-        (_) => {
-          this.notificationService.showDefault($localize`Systemanvendelsen blev flyttet`);
-          this.store.select(selectSystemGridState).subscribe((state) => {
-            this.store.dispatch(ITSystemActions.updateGridState(state));
-          });
-        },
-        (error) => {
-          this.notificationService.showError($localize`Systemanvendelsen kunne ikke flyttes`);
-          console.error(error);
-        },
-        () => this.updateLoading(false)
-      )
-    );
+  public executeMigration = this.effect((targetItSystemUuid$: Observable<string>) =>
+    targetItSystemUuid$.pipe(
+      combineLatestWith(this.usageUuid$.pipe(filterNullish())),
+      tap((_) => {
+        this.updateLoading(true);
+      }),
+      tap(([targetItSystemUuid, usageUuid]) => {
+        this.store.dispatch(ITSystemActions.executeUsageMigration(targetItSystemUuid, usageUuid));
+      })
+    )
+  );
+
+  public finishLoading = () => {
+    this.updateLoading(false);
+  };
 
   private getUsageUuid(usingOrganizationUuid$: Observable<string>, sourceItSystemUuid: string): Observable<string> {
     return usingOrganizationUuid$.pipe(
