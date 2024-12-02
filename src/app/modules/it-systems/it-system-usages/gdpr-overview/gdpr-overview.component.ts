@@ -21,7 +21,7 @@ export class GdprOverviewComponent {
   private readonly gridColumns: GridColumn[] = [
     {
       field: GdprFields.SYSTEM_UUID,
-      title: $localize`UUID`,
+      title: $localize`System UUID`,
       hidden: false,
     },
     {

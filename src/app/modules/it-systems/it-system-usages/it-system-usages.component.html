@@ -14,8 +14,7 @@
     [lastSeenGridConfig$]="lastSeenGridConfig$"
   >
   </app-local-admin-column-config-button>
-  <app-button (buttonClick)="openGdprOverview()"> GDPR Overblik </app-button>
-  <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
+  <app-export-menu-button [enabledGdprExport]="true" [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button entityType="it-system-usage" [columns]="gridColumns$ | async"></app-hide-show-button>
 </app-overview-header>
 

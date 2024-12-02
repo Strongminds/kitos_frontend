@@ -45,7 +45,6 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { GdprOverviewDialogComponent } from './gdpr-overview-dialog/gdpr-overview-dialog.component';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -563,9 +562,5 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
   override rowIdSelect(event: CellClickEvent) {
     super.rowIdSelect(event, this.router, this.route);
-  }
-
-  public openGdprOverview(): void {
-    this.dialog.open(GdprOverviewDialogComponent, { width: '90%', height: '90%', maxHeight: '1100px' });
   }
 }
