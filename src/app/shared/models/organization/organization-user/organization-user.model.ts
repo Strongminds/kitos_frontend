@@ -63,7 +63,6 @@ export const adaptOrganizationUser = (value: any): ODataOrganizationUser | undef
     ItContractRights: value.ItContractRights.map(adaptEntityRights),
     DataProcessingRegistrationRights: value.DataProcessingRegistrationRights.map(adaptEntityRights),
   };
-
   return adaptedUser;
 };
 
