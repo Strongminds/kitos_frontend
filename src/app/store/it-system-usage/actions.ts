@@ -168,5 +168,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Initialize IT System Usage Last Seen Grid Configuration': () => emptyProps(),
     'Initialize IT System Usage Last Seen Grid Configuration Success': (response: APIOrganizationGridConfigurationResponseDTO) => ({response}),
     'Initialize IT System Usage Last Seen Grid Configuration Error': () => emptyProps(),
+
+    'Execute Usage Migration': (targetItSystemUuid: string, rowEntityIdentifier: string, usingOrganizationUuid: string >) => ({}),
   },
 });

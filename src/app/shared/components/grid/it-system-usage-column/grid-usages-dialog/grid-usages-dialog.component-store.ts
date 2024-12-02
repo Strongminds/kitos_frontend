@@ -8,17 +8,19 @@ import {
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
 import {
   adaptItSystemUsageMigrationPermissions,
   ItSystemUsageMigrationPermissions,
 } from 'src/app/shared/models/it-system-usage/migrations/it-system-usage-migration-permissions.model';
+import {
+  adaptItSystemUsageMigration,
+  ItSystemUsageMigration,
+} from 'src/app/shared/models/it-system-usage/migrations/it-system-usage-migration.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectSystemGridState } from 'src/app/store/it-system/selectors';
 import { IdentityNamePair, mapIdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { filterNullish } from '../../../../pipes/filter-nullish';
-import { adaptItSystemUsageMigration, ItSystemUsageMigration } from 'src/app/shared/models/it-system-usage/migrations/it-system-usage-migration.model';
 
 interface State {
   loading: boolean;
@@ -150,8 +152,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
         (_) => {
           this.notificationService.showDefault($localize`Systemanvendelsen blev flyttet`);
           this.store.select(selectSystemGridState).subscribe((state) => {
-            const systemGridStateAsODataString = toODataString(state);
-            this.store.dispatch(ITSystemActions.getITSystems(systemGridStateAsODataString));
+            this.store.dispatch(ITSystemActions.updateGridState(state));
           });
         },
         (error) => {
