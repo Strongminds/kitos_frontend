@@ -42,6 +42,7 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableGdpr,
   selectITSystemUsageEnableLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectGridConfigModificationPermission, selectOrganizationName } from 'src/app/store/user-store/selectors';
@@ -510,6 +511,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
 
   public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
   public readonly enableUsagePeriod$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
+  public readonly enabledGdpr$ = this.store.select(selectITSystemUsageEnableGdpr);
 
   constructor(
     store: Store,
