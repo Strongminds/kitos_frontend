@@ -13,7 +13,7 @@ export interface GdprReport {
   businessCritical?: YesNoDontKnowOptions;
   dataProcessingAgreementConcluded?: boolean;
   linkToDirectory?: boolean;
-  sensitiveDataTypes: Array<string>;
+  sensitiveDataTypes: string;
   riskAssessment?: YesNoDontKnowOptions;
   riskAssessmentDate?: string;
   plannedRiskAssessmentDate?: string;
@@ -37,7 +37,7 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     businessCritical: mapToYesNoDontKnowEnum(dto.businessCritical),
     dataProcessingAgreementConcluded: dto.dataProcessingAgreementConcluded,
     linkToDirectory: dto.linkToDirectory,
-    sensitiveDataTypes: dto.sensitiveDataTypes ?? [],
+    sensitiveDataTypes: dto.sensitiveDataTypes?.join(', ') ?? '',
     riskAssessment: mapToYesNoDontKnowEnum(dto.riskAssessment),
     riskAssessmentDate: dto.riskAssessmentDate,
     plannedRiskAssessmentDate: dto.plannedRiskAssessmentDate,
