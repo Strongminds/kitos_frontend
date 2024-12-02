@@ -16,7 +16,7 @@ import { Observable } from 'rxjs';
 export class FilterOptionsButtonComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;
   @Input() hasResetButton: boolean = false;
-  @Input() gridColumns$!: Observable<GridColumn[]>;
+  @Input() gridColumns$?: Observable<GridColumn[]>;
 
   public disabled: boolean = false;
 

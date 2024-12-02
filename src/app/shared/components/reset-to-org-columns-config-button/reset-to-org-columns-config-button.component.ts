@@ -1,7 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Actions, ofType } from '@ngrx/effects';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { first, Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -13,6 +12,7 @@ import { NotificationService } from '../../services/notification.service';
 import { selectItSystemUsageLastSeenGridConfig } from 'src/app/store/it-system-usage/selectors';
 import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
 import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
+import { concatLatestFrom } from '@ngrx/operators';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
@@ -23,40 +23,16 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public gridColumns$!: Observable<GridColumn[]>;
 
-  @Output() public itemClick = new EventEmitter<void>();
-
-  public lastSeenGridConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined> | undefined;
-  public hasChanged: boolean = true;
+  public lastSeenGridConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined>;
 
   public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`;
 
-  constructor(private store: Store, private notificationService: NotificationService, private actions$: Actions) {}
+  constructor(private store: Store, private notificationService: NotificationService) {}
 
   public ngOnInit(): void {
     this.lastSeenGridConfig$ = this.getGridConfig();
 
-    if (!this.lastSeenGridConfig$) {
-      this.hasChanged = false;
-      return;
-    }
-    this.gridColumns$.subscribe((columns) => {
-      this.updateHasChanged(columns);
-    });
-
-    this.actions$.pipe(ofType(this.getInitializeGridConfigSuccessAction())).subscribe(() => {
-      //This ensures that the hasChanged property is initialized correctly
-      this.gridColumns$.pipe(first()).subscribe((columns) => {
-        this.updateHasChanged(columns);
-      });
-    });
-
     this.dispatchInitializeAction();
-  }
-
-  private updateHasChanged(columns: GridColumn[]): void {
-    this.lastSeenGridConfig$!.pipe(first()).subscribe((config) => {
-      this.hasChanged = this.areColumnsDifferentFromConfig(columns, config);
-    });
   }
 
   public resetColumnsConfig(): void {
@@ -64,20 +40,16 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
     this.notificationService.showDefault($localize`Kolonnevisning gendannet til organisationens standardopsætning`);
   }
 
-  private getInitializeGridConfigSuccessAction() {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        return ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess;
-      case 'it-contract':
-        return ITContractActions.initializeITContractLastSeenGridConfigurationSuccess;
-      case 'data-processing-registration':
-        return DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationSuccess;
-      default:
-        throw new Error('Unsupported entity type');
-    }
+  public hasChanges(): Observable<boolean> {
+    return this.gridColumns$.pipe(
+      concatLatestFrom(() => this.lastSeenGridConfig$),
+      map(([gridColumns, config]) => {
+        return this.areColumnsDifferentFromConfig(gridColumns, config);
+      })
+    );
   }
 
-  private getGridConfig(): Observable<APIOrganizationGridConfigurationResponseDTO | undefined> | undefined {
+  private getGridConfig(): Observable<APIOrganizationGridConfigurationResponseDTO | undefined> {
     switch (this.entityType) {
       case 'it-system-usage':
         return this.store.select(selectItSystemUsageLastSeenGridConfig);
