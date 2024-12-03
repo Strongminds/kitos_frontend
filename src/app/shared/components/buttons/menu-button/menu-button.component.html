@@ -22,7 +22,7 @@
   (mouseenter)="onMouseEnter()"
   (mouseleave)="onMouseLeave()"
 >
-  <span #content>
+  <span #content (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()">
     <ng-content></ng-content>
   </span>
 </mat-menu>
