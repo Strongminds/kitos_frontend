@@ -4738,6 +4738,9 @@
       <trans-unit id="8145441157302108078" datatype="html">
         <source>System UUID</source>
       </trans-unit>
+      <trans-unit id="584908652240507318" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

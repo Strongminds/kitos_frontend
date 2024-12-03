@@ -6235,6 +6235,10 @@
         <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </source>
         <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </target>
       </trans-unit>
+      <trans-unit id="584908652240507318" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
