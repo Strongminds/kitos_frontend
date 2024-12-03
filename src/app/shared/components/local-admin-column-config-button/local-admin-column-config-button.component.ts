@@ -9,8 +9,6 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { NotificationService } from '../../services/notification.service';
 
 @Component({
   selector: 'app-local-admin-column-config-button',
