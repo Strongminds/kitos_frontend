@@ -27,7 +27,7 @@ export const gdprReportFeature = createFeature({
     on(
       ITSystemUsageActions.removeITSystemUsageSuccess,
       ITSystemUsageActions.createItSystemUsageSuccess,
-      ITSystemUsageActions.patchITSystemUsageSuccess, //TODO: Might be incomplete
+      ITSystemUsageActions.patchITSystemUsageSuccess,
       (state): GdprReportState => {
         return {
           ...state,
