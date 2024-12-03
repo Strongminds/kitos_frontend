@@ -22,12 +22,11 @@ export class GdprReportEffects {
     return this.actions$.pipe(
       ofType(GdprReportActions.getGDPRReports),
       concatLatestFrom(() => [
-        this.store.select(selectOrganizationUuid),
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectGdprReportHasValidCache()),
       ]),
       filter(([_, __, validCache]) => !validCache),
       map(([, organizationUuid]) => organizationUuid),
-      filterNullish(),
       switchMap((organizationUuid) =>
         this.gdprReportService.getManyGdprExportReportInternalV2GetGdprReport({ organizationUuid }).pipe(
           map((reports) => GdprReportActions.getGDPRReportsSuccess(reports.map(adaptGdprReport))),
