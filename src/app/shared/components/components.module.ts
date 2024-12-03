@@ -159,7 +159,6 @@ import { UsageProxyCheckboxComponent } from './usage-proxy-checkbox/usage-proxy-
 import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
 import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
 import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
-import { SomethingMenuComponent } from './buttons/menu-button/something-menu/something-menu.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -293,7 +292,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GlobalOptionTypeGridComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
-    SomethingMenuComponent,
   ],
   imports: [
     CommonModule,
@@ -436,7 +434,6 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageProxyCheckboxComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
-    SomethingMenuComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
