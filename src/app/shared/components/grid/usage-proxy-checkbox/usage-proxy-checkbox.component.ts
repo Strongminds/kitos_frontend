@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { Actions, ofType } from '@ngrx/effects';
 import { filter } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { ITSystemActions } from 'src/app/store/it-system/actions';
 
 @Component({
   selector: 'app-usage-proxy-checkbox',

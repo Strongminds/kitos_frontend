@@ -112,17 +112,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       );
     }
 
-    this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
-      this.refreshPage();
-    });
-
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
-  }
-
-  private refreshPage() {
-    location.reload();
   }
 
   ngOnChanges(changes: SimpleChanges) {
