@@ -329,8 +329,8 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(ITInterfaceActions.addITInterfaceDataSuccess, $localize`Snitflade data blev oprettet`);
     this.subscribeAsError(ITInterfaceActions.addITInterfaceDataError, $localize`Snitflade data kunne ikke oprettes`);
 
-    this.showDefault($localize`Systemanvendelsen blev flyttet`);
-    this.showError($localize`Systemanvendelsen kunne ikke flyttes`);
+    this.subscribeAsDefault(ITSystemActions.executeUsageMigrationSuccess, $localize`Systemanvendelsen blev flyttet`);
+    this.subscribeAsError(ITSystemActions.executeUsageMigrationError, $localize`Systemanvendelsen kunne ikke flyttes`);
   }
 
   private subscribeToItContractEvents() {

@@ -46,7 +46,7 @@ export class ITSystemEffects {
     );
   });
 
-  getitSystems$ = createEffect(() => {
+  getItSystems$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystems),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),

@@ -142,6 +142,7 @@ import { GridUsagesConsequencesDialogComponent } from './grid/it-system-usage-co
 import { UsageMigrationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-consequences-table/usage-migration-consequences-table.component';
 import { GridUsagesDialogComponent } from './grid/it-system-usage-column/grid-usages-dialog/grid-usages-dialog.component';
 import { GridUsagesDropdownDialogComponent } from './grid/it-system-usage-column/grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
+import { UsageProxyCheckboxComponent } from './grid/usage-proxy-checkbox/usage-proxy-checkbox.component';
 import { IconComponent } from './icon/icon.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { LocalGridComponent } from './local-grid/local-grid.component';
@@ -159,7 +160,6 @@ import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
-import { UsageProxyCheckboxComponent } from './usage-proxy-checkbox/usage-proxy-checkbox.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
 

@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
+import { Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
@@ -78,7 +79,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private actions$: Actions,
     private store: Store,
     private localStorage: StatePersistingService,
-    private confirmActionService: ConfirmActionService
+    private confirmActionService: ConfirmActionService,
+    private router: Router
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -110,15 +112,17 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       );
     }
 
+    this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
+      this.refreshPage();
+    });
+
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
     this.onSortChange(sort);
+  }
 
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemActions.executeUsageMigration)).subscribe(() => {
-        this.grid.refresh();
-      });
-    );
+  private refreshPage() {
+    location.reload();
   }
 
   ngOnChanges(changes: SimpleChanges) {
