@@ -21,6 +21,6 @@ export class ExportMenuButtonComponent {
   }
 
   public openGdprOverview(): void {
-    this.dialog.open(GdprOverviewDialogComponent, { width: '90%', height: '90%', maxHeight: '1100px' });
+    this.dialog.open(GdprOverviewDialogComponent, { width: '90%', height: '90%', maxHeight: '1200px' });
   }
 }
