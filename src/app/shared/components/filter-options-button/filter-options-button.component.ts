@@ -23,19 +23,19 @@ export class FilterOptionsButtonComponent implements OnInit {
     this.disabled = !this.gridFilterService.getColumnsFromLocalStorage(this.entityType);
   }
 
-  onSaveClick() {
+  onSaveFilter() {
     this.disabled = false;
     this.gridFilterService.dispatchSaveFilterAction(this.entityType);
     this.notificationService.showDefault($localize`Filtre og sortering gemt`);
   }
 
-  onApplyClck() {
+  onApplyFilter() {
     if (this.disabled) return;
     this.gridFilterService.dispatchApplyFilterAction(this.entityType);
     this.notificationService.showDefault($localize`Anvender gemte filtre og sortering`);
   }
 
-  onDeleteClick() {
+  onDeleteFilter() {
     if (this.disabled) return;
     this.disabled = true;
     this.gridFilterService.deleteFilterFromLocalStorage(this.entityType);
