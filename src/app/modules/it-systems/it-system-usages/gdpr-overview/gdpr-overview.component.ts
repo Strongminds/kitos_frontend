@@ -11,6 +11,7 @@ import { of } from 'rxjs';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { mapDateToString } from 'src/app/shared/helpers/date.helpers';
+import { GDPR_REPORT_FILE_PREEFIX } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-gdpr-overview',
@@ -152,6 +153,6 @@ export class GdprOverviewComponent {
   public getExportName(): string {
     const currentDate = new Date();
     const formattedDate = mapDateToString(currentDate);
-    return `kitos_gdpr_report-${formattedDate}`;
+    return `${GDPR_REPORT_FILE_PREEFIX}-${formattedDate}`;
   }
 }
