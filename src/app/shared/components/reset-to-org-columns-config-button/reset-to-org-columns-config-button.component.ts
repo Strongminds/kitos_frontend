@@ -8,7 +8,6 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { NotificationService } from '../../services/notification.service';
 import { selectItSystemUsageLastSeenGridConfig } from 'src/app/store/it-system-usage/selectors';
 import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
 import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
@@ -27,7 +26,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
 
   public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`;
 
-  constructor(private store: Store, private notificationService: NotificationService) {}
+  constructor(private store: Store) {}
 
   public ngOnInit(): void {
     this.lastSeenGridConfig$ = this.getGridConfig();
@@ -37,7 +36,6 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
 
   public resetColumnsConfig(): void {
     this.dispatchResetConfigAction();
-    this.notificationService.showDefault($localize`Kolonnevisning gendannet til organisationens standardopsætning`);
   }
 
   public hasChanges(): Observable<boolean> {

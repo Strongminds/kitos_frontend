@@ -42,6 +42,7 @@ export class NotificationService implements OnDestroy {
   public subscribeOnActions() {
     this.subscribeToFrontPageEvents();
 
+    this.subscribeToGridEvents();
     this.subscribeToExcelImportActions();
 
     this.subscribeToOrganizationEvents();
@@ -56,6 +57,26 @@ export class NotificationService implements OnDestroy {
     this.subscribeToRoleNotifications();
     this.subscribeToFkOrganizationEvents();
     this.subscriptToHelpTextNotifications();
+  }
+
+  private subscribeToGridEvents() {
+    this.subscribeMultipleDefault(
+      ofType(
+        ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess,
+        ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess,
+        DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess
+      ),
+      $localize`Kolonnevisning gendannet til organisationens standardopsætning`
+    );
+
+    this.subscribeMultipleDefault(
+      ofType(
+        ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError,
+        ITContractActions.resetToOrganizationITContractColumnConfigurationError,
+        DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError
+      ),
+      $localize`Kolonnevisnining gendannet til standardopsætning`
+    );
   }
 
   private subscribeToExcelImportActions() {
