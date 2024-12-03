@@ -4,9 +4,7 @@ import { NavigationEnd, Router } from '@angular/router';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
-import { APIUserResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
@@ -51,26 +49,6 @@ export class NavBarComponent extends BaseComponent implements OnInit {
         )
         .subscribe()
     );
-  }
-
-  private getUserDefaultStartPagePath(userDefaultStartPage: StartPreferenceChoice): string {
-    const startPageValue = userDefaultStartPage.value;
-    switch (startPageValue) {
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite:
-        return AppPath.root;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.Organization:
-        return `${AppPath.organization}/${AppPath.structure}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
-        return `${AppPath.itSystems}/${AppPath.itSystemCatalog}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
-        return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
-        return AppPath.itContracts;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
-        return AppPath.dataProcessing;
-      default:
-        throw new Error(`Unknown start page: ${startPageValue}`);
-    }
   }
 
   public showOrganizationDialog() {
