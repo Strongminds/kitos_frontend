@@ -9,6 +9,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { NotificationService } from '../../services/notification.service';
 
 @Component({
@@ -23,7 +24,6 @@ export class LocalAdminColumnConfigButtonComponent {
 
   constructor(
     private store: Store,
-    private notificationService: NotificationService,
     private confirmActionService: ConfirmActionService,
     private actions$: Actions
   ) {}
@@ -39,7 +39,6 @@ export class LocalAdminColumnConfigButtonComponent {
             this.dispatchResetAction();
           });
         });
-        this.notificationService.showDefault($localize`Kolonneopsætningen er gemt for organisationen`);
       },
     });
   }
@@ -53,9 +52,6 @@ export class LocalAdminColumnConfigButtonComponent {
         this.actions$.pipe(ofType(this.getDeleteSuccessConfigAction()), first()).subscribe(() => {
           this.dispatchResetAction();
         });
-        this.notificationService.showDefault(
-          $localize`Organisationens kolonneopsætningen er slettet og overblikket er nulstillet`
-        );
       },
     });
   }

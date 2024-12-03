@@ -77,6 +77,42 @@ export class NotificationService implements OnDestroy {
       ),
       $localize`Kolonnevisnining gendannet til standardopsætning`
     );
+
+    this.subscribeMultipleDefault(
+      ofType(
+        ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess,
+        ITContractActions.saveOrganizationalITContractColumnConfigurationSuccess,
+        DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationSuccess
+      ),
+      $localize`Kolonneopsætning gemt for organisationen`
+    );
+
+    this.subscribeMultipleError(
+      ofType(
+        ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationError,
+        ITContractActions.saveOrganizationalITContractColumnConfigurationError,
+        DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationError
+      ),
+      $localize`Kolonneopsætning kunne ikke gemmes for organisationen`
+    );
+
+    this.subscribeMultipleDefault(
+      ofType(
+        ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess,
+        ITContractActions.deleteOrganizationalITContractColumnConfigurationSuccess,
+        DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationSuccess
+      ),
+      $localize`Kolonneopsætning slettet for organisationen`
+    );
+
+    this.subscribeMultipleError(
+      ofType(
+        ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError,
+        ITContractActions.deleteOrganizationalITContractColumnConfigurationError,
+        DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationError
+      ),
+      $localize`Kolonneopsætning kunne ikke slettes for organisationen`
+    );
   }
 
   private subscribeToExcelImportActions() {
