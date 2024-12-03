@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -519,8 +518,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
-    private uiConfigService: UIConfigService,
-    private dialog: MatDialog
+    private uiConfigService: UIConfigService
   ) {
     super(store, 'it-system-usage');
   }
