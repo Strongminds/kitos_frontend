@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
@@ -79,8 +78,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private actions$: Actions,
     private store: Store,
     private localStorage: StatePersistingService,
-    private confirmActionService: ConfirmActionService,
-    private router: Router
+    private confirmActionService: ConfirmActionService
   ) {
     super();
     this.allData = this.allData.bind(this);

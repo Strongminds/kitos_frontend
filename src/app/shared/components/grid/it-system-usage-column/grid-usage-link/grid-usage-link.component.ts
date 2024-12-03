@@ -16,7 +16,6 @@ export class UsageLinkComponent {
   @Input() usingOrganizations!: IdentityNamePair[];
   @Input() name: string = '';
   @Input() type: RegistrationEntityTypes | undefined;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() rowEntityIdentifier: string | undefined;
 
   onUsageClick(event: Event) {

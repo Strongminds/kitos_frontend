@@ -41,7 +41,6 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
 
   ngOnInit(): void {
     this.componentStore.getMigration(this.targetItSystemUuid)(this.sourceItSystemUuid)(this.usingOrganizationUuid$);
-    //this.componentStore.getMigration(this.targetItSystemUuid, this.sourceItSystemUuid, this.usingOrganizationUuid$);
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {

@@ -6215,9 +6215,9 @@
         <source>Opsummering af konsekvenser ved flytning af anvendelse</source>
         <target state="new">Opsummering af konsekvenser ved flytning af anvendelse</target>
       </trans-unit>
-      <trans-unit id="7496756777691506814" datatype="html">
-        <source> For at sikre datakvaliteten i Kitos – og f.eks. komme redundante registreringer til livs - har global admin mulighed for at flytte jeres anvendelse fra et IT-system til et andet. I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at: </source>
-        <target state="new"> For at sikre datakvaliteten i Kitos – og f.eks. komme redundante registreringer til livs - har global admin mulighed for at flytte jeres anvendelse fra et IT-system til et andet. I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at: </target>
+      <trans-unit id="3461864776628861706" datatype="html">
+        <source> For at sikre datakvaliteten i Kitos - og f.eks. komme redundante registreringer til livs - har global admin mulighed for at flytte jeres anvendelse fra et IT-system til et andet. I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at: </source>
+        <target state="new"> For at sikre datakvaliteten i Kitos - og f.eks. komme redundante registreringer til livs - har global admin mulighed for at flytte jeres anvendelse fra et IT-system til et andet. I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at: </target>
       </trans-unit>
       <trans-unit id="675329187201757494" datatype="html">
         <source>Systemanvendelsen flyttes:</source>
@@ -6256,12 +6256,12 @@
         <target state="new">Snitflade der fjernes fra relationen</target>
       </trans-unit>
       <trans-unit id="5799543738662413355" datatype="html">
-        <source> Navn: <x id="INTERPOLATION" equiv-text="{{formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{relation.fromSystem?.uuid}}"/> </source>
-        <target state="new"> Navn: <x id="INTERPOLATION" equiv-text="{{formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{relation.fromSystem?.uuid}}"/> </target>
+        <source> Navn: <x id="INTERPOLATION" equiv-text="{{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.fromSystem?.uuid }}"/> </source>
+        <target state="new"> Navn: <x id="INTERPOLATION" equiv-text="{{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.fromSystem?.uuid }}"/> </target>
       </trans-unit>
-      <trans-unit id="8704491168900754431" datatype="html">
-        <source> Ingen kontrakt</source>
-        <target state="new"> Ingen kontrakt</target>
+      <trans-unit id="2302937686366976379" datatype="html">
+        <source>Ingen kontrakt </source>
+        <target state="new">Ingen kontrakt </target>
       </trans-unit>
       <trans-unit id="2777061395808179395" datatype="html">
         <source> Annuller</source>
@@ -6306,6 +6306,16 @@
       <trans-unit id="3160778630868662456" datatype="html">
         <source>Uuid</source>
         <target state="new">Uuid</target>
+      </trans-unit>
+      <trans-unit id="8861382415598843076" datatype="html">
+        <source>
+          <x id="START_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="p-arrow-right-icon&gt;"/>
+          <x id="CLOSE_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&gt;"/>
+        </source>
+        <target state="new">
+          <x id="START_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="p-arrow-right-icon&gt;"/>
+          <x id="CLOSE_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&gt;"/>
+        </target>
       </trans-unit>
     </body>
   </file>
