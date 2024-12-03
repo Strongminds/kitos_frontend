@@ -6,8 +6,7 @@
   (mouseleave)="onMouseLeave()"
 >
   <ng-container *ngIf="iconType">
-    <app-export-icon *ngIf="iconType === 'export'"> </app-export-icon>
-    <app-more-horizontal-icon *ngIf="iconType === 'dots'"> </app-more-horizontal-icon>
+    <app-icon [iconType]="iconType"></app-icon>
   </ng-container>
   <ng-content select="[title]"></ng-content>
   <ng-container i18n>{{ title }}</ng-container>
