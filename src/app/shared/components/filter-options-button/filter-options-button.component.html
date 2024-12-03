@@ -1,11 +1,25 @@
 <app-menu-button i18n-title buttonStyle="tertiary" iconType="dots">
+  <div class="center">
+    <app-paragraph [bold]="true">Filter</app-paragraph>
+  </div>
   <app-menu-button-item i18n (itemClick)="onSaveClick()"> Gem </app-menu-button-item>
   <app-menu-button-item i18n [disabled]="disabled" (itemClick)="onApplyClck()"> Anvend </app-menu-button-item>
   <app-menu-button-item i18n [disabled]="disabled" (itemClick)="onDeleteClick()"> Slet </app-menu-button-item>
+  <app-divider></app-divider>
+  <div class="center">
+    <app-paragraph [bold]="true">Opsætning</app-paragraph>
+  </div>
   <app-reset-to-org-columns-config-button
     *ngIf="hasResetButton && gridColumns$"
     [gridColumns$]="gridColumns$"
     [entityType]="entityType"
   >
   </app-reset-to-org-columns-config-button>
+  <app-menu-button-item> Gem </app-menu-button-item>
+  <app-menu-button-item> Slet </app-menu-button-item>
+  <app-divider></app-divider>
+  <div class="center">
+    <app-paragraph [bold]="true">Handlinger</app-paragraph>
+  </div>
+  <app-menu-button-item> Opret </app-menu-button-item>
 </app-menu-button>
