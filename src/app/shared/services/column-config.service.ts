@@ -6,10 +6,16 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { APIColumnConfigurationRequestDTO } from 'src/app/api/v2';
+import { Observable } from 'rxjs';
+import { selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
+import { selectContractGridColumns } from 'src/app/store/it-contract/selectors';
+import { selectDataProcessingGridColumns } from 'src/app/store/data-processing/selectors';
+import { UIConfigService } from './ui-config-services/ui-config.service';
+import { UIModuleConfigKey } from '../enums/ui-module-config-key';
 
 @Injectable({ providedIn: 'root' })
 export class ColumnConfigService {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private uiConfigService: UIConfigService) {}
 
   public dispatchSaveAction(entityType: RegistrationEntityTypes, columns: GridColumn[]) {
     const mappedColumns = this.mapColumnsToGridConfigurationRequest(columns);
@@ -77,6 +83,38 @@ export class ColumnConfigService {
         return DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationSuccess;
       default:
         throw new Error(`No delete action success defined for entity type: ${entityType}`);
+    }
+  }
+
+  public getGridColumns(entityType: RegistrationEntityTypes): Observable<GridColumn[]> {
+    return this.getRawGridColumns(entityType).pipe(
+      this.uiConfigService.filterGridColumnsByUIConfig(this.entityTypeToModuleConfigKey(entityType))
+    );
+  }
+
+  private entityTypeToModuleConfigKey(entityType: RegistrationEntityTypes): UIModuleConfigKey {
+    switch (entityType) {
+      case 'it-system-usage':
+        return UIModuleConfigKey.ItSystemUsage;
+      case 'it-contract':
+        return UIModuleConfigKey.ItContract;
+      case 'data-processing-registration':
+        return UIModuleConfigKey.DataProcessingRegistrations;
+      default:
+        throw new Error(`No module config key defined for entity type: ${entityType}`);
+    }
+  }
+
+  private getRawGridColumns(entityType: RegistrationEntityTypes): Observable<GridColumn[]> {
+    switch (entityType) {
+      case 'it-system-usage':
+        return this.store.select(selectUsageGridColumns);
+      case 'it-contract':
+        return this.store.select(selectContractGridColumns);
+      case 'data-processing-registration':
+        return this.store.select(selectDataProcessingGridColumns);
+      default:
+        throw new Error(`No column configuration defined for entity type: ${entityType}`);
     }
   }
 

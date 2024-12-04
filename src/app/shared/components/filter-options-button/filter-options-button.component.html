@@ -3,17 +3,13 @@
     <app-paragraph [bold]="true">Filter</app-paragraph>
   </div>
   <app-menu-button-item i18n (itemClick)="onSaveFilter()"> Gem </app-menu-button-item>
-  <app-menu-button-item i18n [disabled]="disabled" (itemClick)="onApplyFilter()"> Anvend </app-menu-button-item>
-  <app-menu-button-item i18n [disabled]="disabled" (itemClick)="onDeleteFilter()"> Slet </app-menu-button-item>
+  <app-menu-button-item i18n [disabled]="!filterExists()" (itemClick)="onApplyFilter()"> Anvend </app-menu-button-item>
+  <app-menu-button-item i18n [disabled]="!filterExists()" (itemClick)="onDeleteFilter()"> Slet </app-menu-button-item>
   <app-divider></app-divider>
   <div class="center">
     <app-paragraph [bold]="true">Opsætning</app-paragraph>
   </div>
-  <app-reset-to-org-columns-config-button
-    *ngIf="hasResetButton && gridColumns$"
-    [gridColumns$]="gridColumns$"
-    [entityType]="entityType"
-  >
+  <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
   </app-reset-to-org-columns-config-button>
   <app-menu-button-item> Gem </app-menu-button-item>
   <app-menu-button-item> Slet </app-menu-button-item>

@@ -12,6 +12,7 @@ import { selectItSystemUsageLastSeenGridConfig } from 'src/app/store/it-system-u
 import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
 import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
 import { concatLatestFrom } from '@ngrx/operators';
+import { ColumnConfigService } from '../../services/column-config.service';
 
 @Component({
   selector: 'app-reset-to-org-columns-config-button',
@@ -20,13 +21,12 @@ import { concatLatestFrom } from '@ngrx/operators';
 })
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
-  @Input() public gridColumns$!: Observable<GridColumn[]>;
 
   public lastSeenGridConfig$!: Observable<APIOrganizationGridConfigurationResponseDTO | undefined>;
 
   public readonly tooltipText = $localize`OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på 'Gendan kolonneopsætning' for at benytte den gældende opsætning.`;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store, private columnConfigService: ColumnConfigService) {}
 
   public ngOnInit(): void {
     this.lastSeenGridConfig$ = this.getGridConfig();
@@ -39,7 +39,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   }
 
   public hasChanges(): Observable<boolean> {
-    return this.gridColumns$.pipe(
+    return this.columnConfigService.getGridColumns(this.entityType).pipe(
       concatLatestFrom(() => this.lastSeenGridConfig$),
       map(([gridColumns, config]) => {
         return this.areColumnsDifferentFromConfig(gridColumns, config);
