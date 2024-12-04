@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -39,6 +39,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   }
 
   public hasChanges(): Observable<boolean> {
+    if (this.entityType === 'organization-user') return of(false);
     return this.columnConfigService.getGridColumns(this.entityType).pipe(
       concatLatestFrom(() => this.lastSeenGridConfig$),
       map(([gridColumns, config]) => {
@@ -56,7 +57,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
       case 'data-processing-registration':
         return this.store.select(selectDataProcessingLastSeenGridConfig);
       default:
-        throw new Error('Unsupported entity type');
+        return of(undefined);
     }
   }
 
@@ -107,7 +108,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
         this.store.dispatch(DataProcessingActions.initializeDataProcessingLastSeenGridConfiguration());
         break;
       default:
-        throw new Error('Unsupported entity type');
+        break;
     }
   }
 }

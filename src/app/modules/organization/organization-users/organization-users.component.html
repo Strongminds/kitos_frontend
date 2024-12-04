@@ -1,7 +1,11 @@
 <app-overview-header>
   <h3 i18n>Brugere</h3>
   <app-help-button helpTextKey="organization.user"></app-help-button>
-  <app-grid-options-button entityType="organization-user" [createPermission$]="hasCreatePermission$"></app-grid-options-button>
+  <app-grid-options-button
+    entityType="organization-user"
+    [hasResetButton]="true"
+    [createPermission$]="hasCreatePermission$"
+  ></app-grid-options-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button [columns]="gridColumns$ | async" entityType="organization-user"></app-hide-show-button>
 </app-overview-header>

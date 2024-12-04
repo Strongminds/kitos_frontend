@@ -5,7 +5,7 @@
   <app-grid-filter-buttons [entityType]="entityType"></app-grid-filter-buttons>
   <ng-container *ngIf="hasResetButton || hasColumnConfigButtons">
     <app-divider></app-divider>
-    <div class="center">
+    <div *ngIf="hasColumnConfigButtons" class="center">
       <app-paragraph [bold]="true" i18n>Opsætning</app-paragraph>
     </div>
     <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
