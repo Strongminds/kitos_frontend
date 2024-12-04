@@ -3,25 +3,21 @@
     <app-paragraph [bold]="true" i18n>Filter</app-paragraph>
   </div>
   <app-grid-filter-buttons [entityType]="entityType"></app-grid-filter-buttons>
-  <ng-container *ngIf="hasResetButton || hasColumnConfigButtons">
+  <ng-container *ngIf="hasColumnConfigButtons && (hasConfigGridPermission$ | async) === true">
     <app-divider></app-divider>
-    <div *ngIf="hasColumnConfigButtons" class="center">
+    <div class="center">
       <app-paragraph [bold]="true" i18n>Opsætning</app-paragraph>
     </div>
-    <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
-    </app-reset-to-org-columns-config-button>
-    <app-grid-column-config-buttons
-      *ngIf="hasColumnConfigButtons"
-      [entityType]="entityType"
-    ></app-grid-column-config-buttons>
+    <app-grid-column-config-buttons [entityType]="entityType"></app-grid-column-config-buttons>
   </ng-container>
+  <app-divider></app-divider>
+  <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
+  </app-reset-to-org-columns-config-button>
   <ng-container *ngIf="createPermission$">
-    <app-divider></app-divider>
     <app-create-entity-button [entityType]="entityType" [hasCreatePermission$]="createPermission$">
     </app-create-entity-button>
   </ng-container>
   <ng-container *ngIf="getHelpTextKey()">
-    <app-divider></app-divider>
     <app-menu-button-item (itemClick)="openHelpTextDialog()">
       <app-help-icon></app-help-icon> Hjælp
     </app-menu-button-item>

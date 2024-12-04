@@ -3,6 +3,8 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { Observable } from 'rxjs';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-grid-options-button',
@@ -15,7 +17,9 @@ export class GridOptionsButtonComponent {
   @Input() hasColumnConfigButtons: boolean = false;
   @Input() createPermission$?: Observable<boolean | undefined>;
 
-  constructor(private dialog: MatDialog) {}
+  public readonly hasConfigGridPermission$ = this.store.select(selectGridConfigModificationPermission);
+
+  constructor(private dialog: MatDialog, private store: Store) {}
 
   public getHelpTextKey(): string | undefined {
     switch (this.entityType) {
