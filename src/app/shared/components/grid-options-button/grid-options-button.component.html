@@ -10,7 +10,9 @@
     </div>
     <app-grid-column-config-buttons [entityType]="entityType"></app-grid-column-config-buttons>
   </ng-container>
-  <app-divider></app-divider>
+  <app-divider
+    *ngIf="hasResetButton || createPermission$ !== undefined || getHelpTextKey() !== undefined"
+  ></app-divider>
   <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
   </app-reset-to-org-columns-config-button>
   <ng-container *ngIf="createPermission$">
