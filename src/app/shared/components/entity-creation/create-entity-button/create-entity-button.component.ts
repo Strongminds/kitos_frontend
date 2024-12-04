@@ -1,6 +1,5 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { CreateEntityWithNameDialogComponent } from '../create-entity-with-name-dialog/create-entity-with-name-dialog.component';
@@ -14,7 +13,6 @@ import { CreateUserDialogComponent } from 'src/app/modules/organization/organiza
 })
 export class CreateEntityButtonComponent extends BaseComponent {
   @Input() public entityType!: RegistrationEntityTypes;
-  @Input() public hasCreatePermission$!: Observable<boolean | undefined>;
 
   constructor(private dialog: MatDialog) {
     super();
