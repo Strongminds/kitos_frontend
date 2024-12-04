@@ -4759,6 +4759,9 @@
       <trans-unit id="844753732077135788" datatype="html">
         <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </source>
       </trans-unit>
+      <trans-unit id="7970981235010102529" datatype="html">
+        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
