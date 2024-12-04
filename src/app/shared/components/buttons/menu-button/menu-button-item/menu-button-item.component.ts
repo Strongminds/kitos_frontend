@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IconType } from 'src/app/shared/models/icon-type';
 
 @Component({
   selector: 'app-menu-button-item',
@@ -8,7 +7,6 @@ import { IconType } from 'src/app/shared/models/icon-type';
 })
 export class MenuButtonItemComponent {
   @Input() disabled: boolean = false;
-  @Input() icon: IconType = undefined;
   @Output() itemClick = new EventEmitter();
 
   onClick() {
