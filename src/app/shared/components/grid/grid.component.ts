@@ -38,6 +38,7 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
+import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-grid',
@@ -281,6 +282,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
               });
               break;
             }
+            case 'page-link-array':
+              {
+                const array = transformedItem[column.dataField as string];
+                const excelValue = array.map((item: { value: string }) => item.value).join(', ');
+                transformedItem[field] = excelValue;
+              }
+              break;
             default:
               break;
           }
