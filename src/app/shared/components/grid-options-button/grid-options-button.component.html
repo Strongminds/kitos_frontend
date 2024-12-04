@@ -19,7 +19,7 @@
     <app-create-entity-button [entityType]="entityType"> </app-create-entity-button>
   </ng-container>
   <ng-container *ngIf="getHelpTextKey()">
-    <app-menu-button-item (itemClick)="openHelpTextDialog()">
+    <app-menu-button-item (itemClick)="openHelpTextDialog()" i18n>
       <app-help-icon></app-help-icon> Hjælp
     </app-menu-button-item>
   </ng-container>

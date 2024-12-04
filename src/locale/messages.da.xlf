@@ -4203,10 +4203,6 @@
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter viste kolonner </source>
         <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter viste kolonner </target>
       </trans-unit>
-      <trans-unit id="8788430039871490844" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter GDPR data </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter GDPR data </target>
-      </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
         <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </target>
@@ -4466,10 +4462,6 @@
       <trans-unit id="6510461966645751823" datatype="html">
         <source> Gem </source>
         <target state="new"> Gem </target>
-      </trans-unit>
-      <trans-unit id="5282046193109027726" datatype="html">
-        <source> Anvend </source>
-        <target state="new"> Anvend </target>
       </trans-unit>
       <trans-unit id="5513078980496116959" datatype="html">
         <source> Slet </source>
@@ -6199,10 +6191,6 @@
         <source>Kolonneopsætning kunne ikke slettes for organisationen</source>
         <target state="new">Kolonneopsætning kunne ikke slettes for organisationen</target>
       </trans-unit>
-      <trans-unit id="6170873047373242361" datatype="html">
-        <source> Opret </source>
-        <target state="new"> Opret </target>
-      </trans-unit>
       <trans-unit id="8829497237648100098" datatype="html">
         <source>Filter</source>
         <target state="new">Filter</target>
@@ -6254,6 +6242,26 @@
       <trans-unit id="793272841717310926" datatype="html">
         <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </source>
         <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </target>
+      </trans-unit>
+      <trans-unit id="624474564558550925" datatype="html">
+        <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;app-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;/app-plus-icon-blue&gt;"/> Opret </source>
+        <target state="new"><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;app-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;/app-plus-icon-blue&gt;"/> Opret </target>
+      </trans-unit>
+      <trans-unit id="844753732077135788" datatype="html">
+        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </source>
+        <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </target>
+      </trans-unit>
+      <trans-unit id="7413119087194289434" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </target>
+      </trans-unit>
+      <trans-unit id="5606291731600881005" datatype="html">
+        <source><x id="START_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;app-filter-icon&gt;"/><x id="CLOSE_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;/app-filter-icon&gt;"/> Anvend </source>
+        <target state="new"><x id="START_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;app-filter-icon&gt;"/><x id="CLOSE_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;/app-filter-icon&gt;"/> Anvend </target>
+      </trans-unit>
+      <trans-unit id="6740986467507484529" datatype="html">
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </target>
       </trans-unit>
     </body>
   </file>
