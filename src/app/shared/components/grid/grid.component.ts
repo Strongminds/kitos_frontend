@@ -38,7 +38,6 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
-import { style } from '@angular/animations';
 
 @Component({
   selector: 'app-grid',
