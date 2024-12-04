@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { CreateEntityWithNameDialogComponent } from '../create-entity-with-name-dialog/create-entity-with-name-dialog.component';
+import { CreateInterfaceDialogComponent } from 'src/app/modules/it-systems/it-system-interfaces/create-interface-dialog/create-interface-dialog.component';
 
 @Component({
   selector: 'app-create-entity-button',
@@ -34,9 +35,13 @@ export class CreateEntityButtonComponent extends BaseComponent {
   }
 
   public openCreateDialog() {
-    const dialogRef = this.dialog.open(CreateEntityWithNameDialogComponent);
-    const dialogInstance = dialogRef.componentInstance as CreateEntityWithNameDialogComponent;
-    dialogInstance.entityType = this.entityType;
-    dialogInstance.title = this.getCreateTitle();
+    if (this.entityType === 'it-interface') {
+      this.dialog.open(CreateInterfaceDialogComponent);
+    } else {
+      const dialogRef = this.dialog.open(CreateEntityWithNameDialogComponent);
+      const dialogInstance = dialogRef.componentInstance as CreateEntityWithNameDialogComponent;
+      dialogInstance.entityType = this.entityType;
+      dialogInstance.title = this.getCreateTitle();
+    }
   }
 }

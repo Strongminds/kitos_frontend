@@ -3,20 +3,21 @@
     <app-paragraph [bold]="true" i18n>Filter</app-paragraph>
   </div>
   <app-grid-filter-buttons [entityType]="entityType"></app-grid-filter-buttons>
-  <app-divider></app-divider>
-  <div class="center">
-    <app-paragraph [bold]="true" i18n>Opsætning</app-paragraph>
-  </div>
-  <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
-  </app-reset-to-org-columns-config-button>
-  <app-grid-column-config-buttons
-    *ngIf="(hasGridConfigPermission$ | async) === true"
-    [entityType]="entityType"
-  ></app-grid-column-config-buttons>
-  <app-divider></app-divider>
-  <div class="center">
-    <app-paragraph [bold]="true" i18n>Handlinger</app-paragraph>
-  </div>
-  <app-create-entity-button [entityType]="entityType" [hasCreatePermission$]="createPermission$">
-  </app-create-entity-button>
+  <ng-container *ngIf="hasResetButton || hasColumnConfigButtons">
+    <app-divider></app-divider>
+    <div class="center">
+      <app-paragraph [bold]="true" i18n>Opsætning</app-paragraph>
+    </div>
+    <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
+    </app-reset-to-org-columns-config-button>
+    <app-grid-column-config-buttons
+      *ngIf="hasColumnConfigButtons"
+      [entityType]="entityType"
+    ></app-grid-column-config-buttons>
+  </ng-container>
+  <ng-container *ngIf="createPermission$">
+    <app-divider></app-divider>
+    <app-create-entity-button [entityType]="entityType" [hasCreatePermission$]="createPermission$">
+    </app-create-entity-button>
+  </ng-container>
 </app-menu-button>

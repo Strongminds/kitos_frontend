@@ -1,4 +1,6 @@
-<app-menu-button-item (itemClick)="onSaveColumnConfig()" i18n> Gem </app-menu-button-item>
-<app-menu-button-item [disabled]="(hasGridConfig$ | async) === false" (itemClick)="onDeleteColumnConfig()" i18n>
-  Slet
-</app-menu-button-item>
+<ng-container *ngIf="(hasGridConfigPermission$ | async) === true">
+  <app-menu-button-item (itemClick)="onSaveColumnConfig()" i18n> Gem </app-menu-button-item>
+  <app-menu-button-item [disabled]="(hasGridConfig$ | async) === false" (itemClick)="onDeleteColumnConfig()" i18n>
+    Slet
+  </app-menu-button-item>
+</ng-container>

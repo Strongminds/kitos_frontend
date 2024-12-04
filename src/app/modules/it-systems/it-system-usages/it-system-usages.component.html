@@ -4,8 +4,8 @@
   <app-help-button helpTextKey="it-system.overview"></app-help-button>
   <app-grid-options-button
     [hasResetButton]="true"
+    [hasColumnConfigButtons]="true"
     entityType="it-system-usage"
-    [createPermission$]="hasCreatePermission$"
   ></app-grid-options-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button entityType="it-system-usage" [columns]="gridColumns$ | async"></app-hide-show-button>

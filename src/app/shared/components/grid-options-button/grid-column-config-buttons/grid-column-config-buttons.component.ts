@@ -1,9 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { first, map, Observable } from 'rxjs';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ColumnConfigService } from 'src/app/shared/services/column-config.service';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-grid-column-config-buttons',
@@ -16,10 +18,12 @@ export class GridColumnConfigButtonsComponent implements OnInit {
   constructor(
     private confirmActionService: ConfirmActionService,
     private columnConfigService: ColumnConfigService,
-    private actions$: Actions
+    private actions$: Actions,
+    private store: Store
   ) {}
 
-  public hasGridConfig$!: Observable<boolean>;
+  public readonly hasGridConfigPermission$ = this.store.select(selectGridConfigModificationPermission);
+  public hasGridConfig$?: Observable<boolean>;
 
   public ngOnInit(): void {
     this.hasGridConfig$ = this.columnConfigService.getGridConfig(this.entityType).pipe(map((config) => !!config));
