@@ -4,7 +4,7 @@
       *ngIf="formGroup"
       [text]="text"
       valueField="id"
-      [data]="nodes"
+      [data]="nodes$ | async"
       [showDescription]="showDescription"
       [formGroup]="formGroup"
       [formName]="formName ?? null"

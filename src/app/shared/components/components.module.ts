@@ -158,6 +158,7 @@ import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-c
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';
 import { RoleTableContainerComponent } from './role-table/role-table-container/role-table-container.component';
+import { SectionComponent } from './section/section.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
@@ -298,6 +299,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GridUsagesDropdownDialogComponent,
     GridUsagesConsequencesDialogComponent,
     UsageMigrationConsequencesTableComponent,
+    SectionComponent,
   ],
   imports: [
     CommonModule,
@@ -443,6 +445,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GridUsagesDropdownDialogComponent,
     GridUsagesConsequencesDialogComponent,
     UsageMigrationConsequencesTableComponent,
+    SectionComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
