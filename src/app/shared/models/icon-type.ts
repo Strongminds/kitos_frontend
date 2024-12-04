@@ -19,4 +19,7 @@ export type IconType =
   | 'help'
   | 'settings'
   | 'multiple-users'
+  | 'reload'
+  | 'disk'
+  | 'blue-plus'
   | undefined;

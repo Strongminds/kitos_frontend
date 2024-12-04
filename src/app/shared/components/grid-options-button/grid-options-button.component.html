@@ -20,4 +20,10 @@
     <app-create-entity-button [entityType]="entityType" [hasCreatePermission$]="createPermission$">
     </app-create-entity-button>
   </ng-container>
+  <ng-container *ngIf="getHelpTextKey()">
+    <app-divider></app-divider>
+    <app-menu-button-item (itemClick)="openHelpTextDialog()">
+      <app-help-icon></app-help-icon> Hjælp
+    </app-menu-button-item>
+  </ng-container>
 </app-menu-button>

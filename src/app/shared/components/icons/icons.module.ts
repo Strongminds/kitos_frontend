@@ -58,6 +58,8 @@ import { WhiteCircleIconComponent } from './white-circle-icon.component';
 import { XIconComponent } from './x-icon.component';
 import { WhiteXIconComponent } from './white-x-icon.component';
 import { EmptyUpdateIconComponent } from './empty-update-icon.component';
+import { ReloadIconComponent } from './reload-icon.component';
+import { DiskIconComponent } from './disk-icon.component';
 
 @NgModule({
   imports: [],
@@ -121,6 +123,8 @@ import { EmptyUpdateIconComponent } from './empty-update-icon.component';
     CheckIconComponent,
     WhiteXIconComponent,
     EmptyUpdateIconComponent,
+    ReloadIconComponent,
+    DiskIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -182,6 +186,8 @@ import { EmptyUpdateIconComponent } from './empty-update-icon.component';
     CheckIconComponent,
     WhiteXIconComponent,
     EmptyUpdateIconComponent,
+    ReloadIconComponent,
+    DiskIconComponent,
   ],
   providers: [],
 })

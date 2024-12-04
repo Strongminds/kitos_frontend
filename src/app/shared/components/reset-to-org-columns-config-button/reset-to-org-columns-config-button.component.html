@@ -1,4 +1,5 @@
-<app-menu-button-item buttonStyle="secondary" (itemClick)="resetColumnsConfig()">
+<app-menu-button-item [icon] buttonStyle="secondary" (itemClick)="resetColumnsConfig()">
+  <app-reload-icon></app-reload-icon>
   Gendan
   <app-tooltip [text]="tooltipText">
     <app-warning-icon *ngIf="hasChanges() | async"> </app-warning-icon>
