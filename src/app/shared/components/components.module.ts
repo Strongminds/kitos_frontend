@@ -160,6 +160,7 @@ import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-
 import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
 import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
 import { GridFilterButtonsComponent } from './grid-options-button/grid-filter-buttons/grid-filter-buttons.component';
+import { GridColumnConfigButtonsComponent } from './grid-options-button/grid-column-config-buttons/grid-column-config-buttons.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -294,6 +295,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     PriorityButtonsComponent,
     ToggleButtonComponent,
     GridFilterButtonsComponent,
+    GridColumnConfigButtonsComponent,
   ],
   imports: [
     CommonModule,

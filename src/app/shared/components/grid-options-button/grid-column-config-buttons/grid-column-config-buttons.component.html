@@ -1,0 +1,4 @@
+<app-menu-button-item (itemClick)="onSaveColumnConfig()"> Gem </app-menu-button-item>
+<app-menu-button-item [disabled]="(hasGridConfig$ | async) === false" (itemClick)="onDeleteColumnConfig()">
+  Slet
+</app-menu-button-item>

@@ -1,0 +1,3 @@
+<app-menu-button-item i18n (itemClick)="onSaveFilter()"> Gem </app-menu-button-item>
+  <app-menu-button-item i18n [disabled]="!filterExists()" (itemClick)="onApplyFilter()"> Anvend </app-menu-button-item>
+  <app-menu-button-item i18n [disabled]="!filterExists()" (itemClick)="onDeleteFilter()"> Slet </app-menu-button-item>

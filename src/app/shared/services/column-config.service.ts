@@ -5,11 +5,14 @@ import { RegistrationEntityTypes } from '../models/registrations/registration-en
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
-import { APIColumnConfigurationRequestDTO } from 'src/app/api/v2';
+import { APIColumnConfigurationRequestDTO, APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { Observable } from 'rxjs';
-import { selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
-import { selectContractGridColumns } from 'src/app/store/it-contract/selectors';
-import { selectDataProcessingGridColumns } from 'src/app/store/data-processing/selectors';
+import { selectItSystemUsageLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
+import { selectContractGridColumns, selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
+import {
+  selectDataProcessingGridColumns,
+  selectDataProcessingLastSeenGridConfig,
+} from 'src/app/store/data-processing/selectors';
 import { UIConfigService } from './ui-config-services/ui-config.service';
 import { UIModuleConfigKey } from '../enums/ui-module-config-key';
 
@@ -90,6 +93,21 @@ export class ColumnConfigService {
     return this.getRawGridColumns(entityType).pipe(
       this.uiConfigService.filterGridColumnsByUIConfig(this.entityTypeToModuleConfigKey(entityType))
     );
+  }
+
+  public getGridConfig(
+    entityType: RegistrationEntityTypes
+  ): Observable<APIOrganizationGridConfigurationResponseDTO | undefined> {
+    switch (entityType) {
+      case 'it-system-usage':
+        return this.store.select(selectItSystemUsageLastSeenGridConfig);
+      case 'it-contract':
+        return this.store.select(selectItContractLastSeenGridConfig);
+      case 'data-processing-registration':
+        return this.store.select(selectDataProcessingLastSeenGridConfig);
+      default:
+        throw new Error(`No grid config defined for entity type: ${entityType}`);
+    }
   }
 
   private entityTypeToModuleConfigKey(entityType: RegistrationEntityTypes): UIModuleConfigKey {

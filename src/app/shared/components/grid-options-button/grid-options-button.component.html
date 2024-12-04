@@ -1,0 +1,18 @@
+<app-menu-button i18n-title buttonStyle="tertiary" iconType="dots">
+  <div class="center">
+    <app-paragraph [bold]="true">Filter</app-paragraph>
+  </div>
+  <app-grid-filter-buttons [entityType]="entityType"></app-grid-filter-buttons>
+  <app-divider></app-divider>
+  <div class="center">
+    <app-paragraph [bold]="true">Opsætning</app-paragraph>
+  </div>
+  <app-reset-to-org-columns-config-button *ngIf="hasResetButton" [entityType]="entityType">
+  </app-reset-to-org-columns-config-button>
+  <app-grid-column-config-buttons [entityType]="entityType"></app-grid-column-config-buttons>
+  <app-divider></app-divider>
+  <div class="center">
+    <app-paragraph [bold]="true">Handlinger</app-paragraph>
+  </div>
+  <app-menu-button-item> Opret </app-menu-button-item>
+</app-menu-button>
