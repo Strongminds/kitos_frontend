@@ -288,6 +288,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
                 transformedItem[field] = excelValue;
               }
               break;
+            case 'usages': {
+              const usages = transformedItem[column.field as string];
+              transformedItem[field] = usages.length;
+            }
+            break;
             default:
               break;
           }
