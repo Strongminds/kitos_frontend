@@ -53,7 +53,6 @@ export interface ITContract {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptITContract = (value: any): ITContract | undefined => {
   if (!value.SourceEntityUuid) return;
-  console.log(value);
   const procurementPlan =
     value.ProcurementPlanQuarter == null || value.ProcurementPlanYear == null
       ? ''
