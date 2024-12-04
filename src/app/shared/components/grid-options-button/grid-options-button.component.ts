@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { Observable } from 'rxjs';
 
@@ -12,10 +12,4 @@ export class GridOptionsButtonComponent {
   @Input() hasResetButton: boolean = false;
   @Input() hasColumnConfigButtons: boolean = false;
   @Input() createPermission$?: Observable<boolean | undefined>;
-
-  @Output() createAction = new EventEmitter<void>();
-
-  public onCreateAction(): void {
-    this.createAction.emit();
-  }
 }
