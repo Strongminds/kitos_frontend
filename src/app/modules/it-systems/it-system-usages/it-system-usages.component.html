@@ -2,10 +2,10 @@
   <h3 i18n>IT Systemer i {{ organizationName$ | async }}</h3>
 
   <app-help-button helpTextKey="it-system.overview"></app-help-button>
-  <app-filter-options-button
+  <app-grid-options-button
     [hasResetButton]="true"
     entityType="it-system-usage"
-  ></app-filter-options-button>
+  ></app-grid-options-button>
   <app-local-admin-column-config-button
     *ngIf="hasConfigModificationPermissions$ | async"
     [columns$]="gridColumns$"

@@ -80,7 +80,7 @@ import { CreateExternalReferenceDialogComponent } from './external-references-ma
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
-import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
+import { GridOptionsButtonComponent } from './grid-options-button/grid-options-button.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
 import { UsageLinkComponent } from './grid-usage-link/grid-usage-link.component';
 import { GridUsagesDialogComponent } from './grid-usages-dialog/grid-usages-dialog.component';
@@ -159,6 +159,7 @@ import { UsageProxyCheckboxComponent } from './usage-proxy-checkbox/usage-proxy-
 import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
 import { PriorityButtonsComponent } from './local-grid/priority-buttons/priority-buttons.component';
 import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
+import { GridFilterButtonsComponent } from './grid-options-button/grid-filter-buttons/grid-filter-buttons.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -252,7 +253,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ChoiceTypeDropdownFilterComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
-    FilterOptionsButtonComponent,
+    GridOptionsButtonComponent,
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
@@ -292,6 +293,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GlobalOptionTypeGridComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
+    GridFilterButtonsComponent,
   ],
   imports: [
     CommonModule,
@@ -402,7 +404,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MenuButtonItemComponent,
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
-    FilterOptionsButtonComponent,
+    GridOptionsButtonComponent,
     CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
