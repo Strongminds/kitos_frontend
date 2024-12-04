@@ -13,7 +13,6 @@ export class GridFilterButtonsComponent {
   constructor(private gridFilterService: GridFilterService) {}
 
   public onSaveFilter() {
-    console.log('onSaveFilter');
     this.gridFilterService.dispatchSaveFilterAction(this.entityType);
   }
 
