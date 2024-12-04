@@ -2218,9 +2218,6 @@
       <trans-unit id="3318684326606065904" datatype="html">
         <source>IT Snitfladekatalog</source>
       </trans-unit>
-      <trans-unit id="4228561755384188385" datatype="html">
-        <source>Opret snitflade</source>
-      </trans-unit>
       <trans-unit id="5104191650715256667" datatype="html">
         <source>Link til beskrivelse</source>
       </trans-unit>
@@ -2951,9 +2948,6 @@
       </trans-unit>
       <trans-unit id="5196182293976445965" datatype="html">
         <source>Brugere</source>
-      </trans-unit>
-      <trans-unit id="4682105837825490873" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Opret bruge"/> Opret bruger</source>
       </trans-unit>
       <trans-unit id="6802157665227007548" datatype="html">
         <source>Brugere Overblik</source>
@@ -4723,14 +4717,11 @@
       <trans-unit id="6170873047373242361" datatype="html">
         <source> Opret </source>
       </trans-unit>
-      <trans-unit id="7509771663301293190" datatype="html">
-        <source>Handlinger</source>
-      </trans-unit>
-      <trans-unit id="8742981323499059323" datatype="html">
-        <source> Slet </source>
-      </trans-unit>
       <trans-unit id="8829497237648100098" datatype="html">
         <source>Filter</source>
+      </trans-unit>
+      <trans-unit id="750443968962429760" datatype="html">
+        <source>Opret Bruger</source>
       </trans-unit>
     </body>
   </file>

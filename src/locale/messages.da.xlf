@@ -2055,10 +2055,6 @@
         <source>Opret Snitflade</source>
         <target state="new">Opret Snitflade</target>
       </trans-unit>
-      <trans-unit id="4228561755384188385" datatype="html">
-        <source>Opret snitflade</source>
-        <target state="new">Opret snitflade</target>
-      </trans-unit>
       <trans-unit id="7055470758930166695" datatype="html">
         <source>Opret IT Kontrakt</source>
         <target state="new">Opret IT Kontrakt</target>
@@ -4839,10 +4835,6 @@
         <source>Tværgående rettigheder</source>
         <target state="new">Tværgående rettigheder</target>
       </trans-unit>
-      <trans-unit id="4682105837825490873" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Opret bruge"/> Opret bruger</source>
-        <target state="new"><x id="START_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="p-plus-icon&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON" ctype="x-app_plus_icon" equiv-text="Opret bruge"/> Opret bruger</target>
-      </trans-unit>
       <trans-unit id="534383122406365407" datatype="html">
         <source>Start side</source>
         <target state="new">Start side</target>
@@ -6215,10 +6207,6 @@
         <source> Opret </source>
         <target state="new"> Opret </target>
       </trans-unit>
-      <trans-unit id="8742981323499059323" datatype="html">
-        <source> Slet </source>
-        <target state="new"> Slet </target>
-      </trans-unit>
       <trans-unit id="8829497237648100098" datatype="html">
         <source>Filter</source>
         <target state="new">Filter</target>
@@ -6227,9 +6215,9 @@
         <source>Opsætning</source>
         <target state="new">Opsætning</target>
       </trans-unit>
-      <trans-unit id="7509771663301293190" datatype="html">
-        <source>Handlinger</source>
-        <target state="new">Handlinger</target>
+      <trans-unit id="750443968962429760" datatype="html">
+        <source>Opret Bruger</source>
+        <target state="new">Opret Bruger</target>
       </trans-unit>
     </body>
   </file>
