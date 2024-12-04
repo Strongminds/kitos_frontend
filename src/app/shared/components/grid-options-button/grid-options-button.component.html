@@ -1,11 +1,11 @@
 <app-menu-button buttonStyle="tertiary" iconType="dots" data-cy="grid-options-button">
-  <div class="center">
+  <div class="section-text">
     <app-paragraph [bold]="true" i18n>Filter</app-paragraph>
   </div>
   <app-grid-filter-buttons [entityType]="entityType"></app-grid-filter-buttons>
   <ng-container *ngIf="hasColumnConfigButtons && (hasConfigGridPermission$ | async) === true">
     <app-divider></app-divider>
-    <div class="center">
+    <div class="section-text">
       <app-paragraph [bold]="true" i18n>Opsætning</app-paragraph>
     </div>
     <app-grid-column-config-buttons [entityType]="entityType"></app-grid-column-config-buttons>
