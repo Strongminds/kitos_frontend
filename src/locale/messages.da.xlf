@@ -6211,6 +6211,26 @@
         <source>Kolonneopsætning kunne ikke slettes for organisationen</source>
         <target state="new">Kolonneopsætning kunne ikke slettes for organisationen</target>
       </trans-unit>
+      <trans-unit id="6170873047373242361" datatype="html">
+        <source> Opret </source>
+        <target state="new"> Opret </target>
+      </trans-unit>
+      <trans-unit id="8742981323499059323" datatype="html">
+        <source> Slet </source>
+        <target state="new"> Slet </target>
+      </trans-unit>
+      <trans-unit id="8829497237648100098" datatype="html">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+      </trans-unit>
+      <trans-unit id="3413433407323398362" datatype="html">
+        <source>Opsætning</source>
+        <target state="new">Opsætning</target>
+      </trans-unit>
+      <trans-unit id="7509771663301293190" datatype="html">
+        <source>Handlinger</source>
+        <target state="new">Handlinger</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

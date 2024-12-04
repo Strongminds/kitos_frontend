@@ -4717,6 +4717,21 @@
       <trans-unit id="7580609476449791815" datatype="html">
         <source>Kolonneopsætning kunne ikke gemmes for organisationen</source>
       </trans-unit>
+      <trans-unit id="3413433407323398362" datatype="html">
+        <source>Opsætning</source>
+      </trans-unit>
+      <trans-unit id="6170873047373242361" datatype="html">
+        <source> Opret </source>
+      </trans-unit>
+      <trans-unit id="7509771663301293190" datatype="html">
+        <source>Handlinger</source>
+      </trans-unit>
+      <trans-unit id="8742981323499059323" datatype="html">
+        <source> Slet </source>
+      </trans-unit>
+      <trans-unit id="8829497237648100098" datatype="html">
+        <source>Filter</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
