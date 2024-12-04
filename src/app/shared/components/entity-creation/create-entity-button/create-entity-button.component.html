@@ -1,3 +1,8 @@
-<app-button *ngIf="hasCreatePermission$ | async" (buttonClick)="openCreateDialog()" i18n data-cy="create-button">{{
-  createTitle
-}}</app-button>
+<app-menu-button-item
+  *ngIf="hasCreatePermission$ | async"
+  (itemClick)="openCreateDialog()"
+  i18n
+  data-cy="create-button"
+>
+  Opret
+</app-menu-button-item>

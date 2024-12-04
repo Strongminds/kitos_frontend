@@ -4,23 +4,13 @@
   <app-grid-options-button
     [hasResetButton]="true"
     entityType="data-processing-registration"
+    [createPermission$]="hasCreatePermission$"
   ></app-grid-options-button>
-  <app-local-admin-column-config-button
-    *ngIf="hasConfigModificationPermissions$ | async"
-    [columns$]="gridColumns$"
-    entityType="data-processing-registration"
-    [lastSeenGridConfig$]="lastSeenGridConfig$"
-  >
-  </app-local-admin-column-config-button>
   <app-export-menu-button [exportMethod]="onExcelExport"></app-export-menu-button>
   <app-hide-show-button
     [columns]="gridColumns$ | async"
     entityType="data-processing-registration"
   ></app-hide-show-button>
-  <app-create-entity-button
-    entityType="data-processing-registration"
-    [hasCreatePermission$]="hasCreatePermission$"
-  ></app-create-entity-button>
 </app-overview-header>
 
 <app-grid

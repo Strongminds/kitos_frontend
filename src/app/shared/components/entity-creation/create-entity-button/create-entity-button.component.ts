@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -10,30 +10,24 @@ import { CreateEntityWithNameDialogComponent } from '../create-entity-with-name-
   templateUrl: './create-entity-button.component.html',
   styleUrl: './create-entity-button.component.scss',
 })
-export class CreateEntityButtonComponent extends BaseComponent implements OnInit {
+export class CreateEntityButtonComponent extends BaseComponent {
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public hasCreatePermission$!: Observable<boolean | undefined>;
-
-  public createTitle!: string;
 
   constructor(private dialog: MatDialog) {
     super();
   }
 
-  ngOnInit(): void {
+  private getCreateTitle(): string {
     switch (this.entityType) {
       case 'it-contract':
-        this.createTitle = $localize`Opret IT Kontrakt`;
-        break;
+        return $localize`Opret IT Kontrakt`;
       case 'it-system':
-        this.createTitle = $localize`Opret IT System`;
-        break;
+        return $localize`Opret IT System`;
       case 'it-interface':
-        this.createTitle = $localize`Opret Snitflade`;
-        break;
+        return $localize`Opret Snitflade`;
       case 'data-processing-registration':
-        this.createTitle = $localize`Opret Registering`;
-        break;
+        return $localize`Opret Registering`;
       default:
         throw `Entity type ${this.entityType} not supported.`;
     }
@@ -43,6 +37,6 @@ export class CreateEntityButtonComponent extends BaseComponent implements OnInit
     const dialogRef = this.dialog.open(CreateEntityWithNameDialogComponent);
     const dialogInstance = dialogRef.componentInstance as CreateEntityWithNameDialogComponent;
     dialogInstance.entityType = this.entityType;
-    dialogInstance.title = this.createTitle;
+    dialogInstance.title = this.getCreateTitle();
   }
 }
