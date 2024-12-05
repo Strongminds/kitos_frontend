@@ -24,7 +24,7 @@ export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationS
   return <HierachyNodeWithParentUuid[]>tree;
 };
 
-export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expandedNodeUuids?: string[]) => {
+export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expandedNodeUuids: string[]) => {
   const mappedHierarchy = units.map<HierachyNodeWithParentUuid>((unit) => ({
     uuid: unit.uuid,
     name: unit.name,
