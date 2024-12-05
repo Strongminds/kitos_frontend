@@ -6,6 +6,8 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
+import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
+import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -22,8 +24,6 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
-import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
-import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -42,6 +42,7 @@ export class NotificationService implements OnDestroy {
   public subscribeOnActions() {
     this.subscribeToFrontPageEvents();
 
+    this.subscribeToGridEvents();
     this.subscribeToExcelImportActions();
 
     this.subscribeToOrganizationEvents();
@@ -56,6 +57,62 @@ export class NotificationService implements OnDestroy {
     this.subscribeToRoleNotifications();
     this.subscribeToFkOrganizationEvents();
     this.subscriptToHelpTextNotifications();
+  }
+
+  private subscribeToGridEvents() {
+    this.subscribeMultipleDefault(
+      ofType(
+        ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess,
+        ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess,
+        DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess
+      ),
+      $localize`Kolonnevisning gendannet til organisationens standardopsætning`
+    );
+
+    this.subscribeMultipleDefault(
+      ofType(
+        ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError,
+        ITContractActions.resetToOrganizationITContractColumnConfigurationError,
+        DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError
+      ),
+      $localize`Kolonnevisnining gendannet til standardopsætning`
+    );
+
+    this.subscribeMultipleDefault(
+      ofType(
+        ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess,
+        ITContractActions.saveOrganizationalITContractColumnConfigurationSuccess,
+        DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationSuccess
+      ),
+      $localize`Kolonneopsætning gemt for organisationen`
+    );
+
+    this.subscribeMultipleError(
+      ofType(
+        ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationError,
+        ITContractActions.saveOrganizationalITContractColumnConfigurationError,
+        DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationError
+      ),
+      $localize`Kolonneopsætning kunne ikke gemmes for organisationen`
+    );
+
+    this.subscribeMultipleDefault(
+      ofType(
+        ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess,
+        ITContractActions.deleteOrganizationalITContractColumnConfigurationSuccess,
+        DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationSuccess
+      ),
+      $localize`Kolonneopsætning slettet for organisationen`
+    );
+
+    this.subscribeMultipleError(
+      ofType(
+        ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError,
+        ITContractActions.deleteOrganizationalITContractColumnConfigurationError,
+        DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationError
+      ),
+      $localize`Kolonneopsætning kunne ikke slettes for organisationen`
+    );
   }
 
   private subscribeToExcelImportActions() {
@@ -328,6 +385,9 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(ITInterfaceActions.addITInterfaceDataSuccess, $localize`Snitflade data blev oprettet`);
     this.subscribeAsError(ITInterfaceActions.addITInterfaceDataError, $localize`Snitflade data kunne ikke oprettes`);
+
+    this.subscribeAsDefault(ITSystemActions.executeUsageMigrationSuccess, $localize`Systemanvendelsen blev flyttet`);
+    this.subscribeAsError(ITSystemActions.executeUsageMigrationError, $localize`Systemanvendelsen kunne ikke flyttes`);
   }
 
   private subscribeToItContractEvents() {
