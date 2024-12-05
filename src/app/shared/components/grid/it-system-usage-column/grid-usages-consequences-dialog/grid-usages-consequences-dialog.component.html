@@ -12,30 +12,14 @@
 
     <ng-container *ngIf="(loading$ | async) !== true">
       <ng-container *ngIf="migration$ | async as migration">
+        <!-- System consequences -->
         <app-card>
-          <app-paragraph i18n [bold]="true" paragraphSize="medium">Systemanvendelsen flyttes:</app-paragraph>
-          <app-native-table>
-            <thead>
-              <th i18n>Fra</th>
-              <th i18n>Til</th>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <app-paragraph>
-                    {{ migration.fromSystem?.name }}
-                  </app-paragraph>
-                </td>
-                <td>
-                  <app-paragraph>
-                    {{ migration.toSystem?.name }}
-                  </app-paragraph>
-                </td>
-              </tr>
-            </tbody>
-          </app-native-table>
+          <app-usage-migration-system-consequences-table
+            [migration]="migration"
+          ></app-usage-migration-system-consequences-table>
         </app-card>
 
+        <!-- Contract consequences -->
         <app-card *ngIf="hasContractsConsequences() | async">
           <app-usage-migration-consequences-table
             title="Følgende registreringer i modulet 'Kontrakter' berøres:"
@@ -45,6 +29,14 @@
           </app-usage-migration-consequences-table>
         </app-card>
 
+        <!-- Existing usage relation consequences -->
+        <app-card *ngIf="hasRelationsConsequences() | async">
+          <app-usage-migration-relation-consequences-table
+            [migration]="migration"
+          ></app-usage-migration-relation-consequences-table>
+        </app-card>
+
+        <!-- DPR consequences -->
         <app-card *ngIf="hasDprConsequences() | async">
           <app-usage-migration-consequences-table
             title="Følgende registreringer i modulet 'Databehandling' berøres:"
@@ -53,71 +45,11 @@
           >
           </app-usage-migration-consequences-table>
         </app-card>
-        <app-card *ngIf="hasRelationsConsequences() | async">
-          <app-native-table>
-            <app-paragraph i18n [bold]="true" paragraphSize="medium">Følgende systemrelationer berøres:</app-paragraph>
-            <app-native-table>
-              <thead>
-                <th i18n>Anvendersystem</th>
-                <th i18n>Udstillersystem</th>
-                <th i18n>Relationsbeskrivelse</th>
-                <th i18n>Snitflade der fjernes fra relationen</th>
-                <th i18n>Frekvens</th>
-                <th i18n>Kontrakt</th>
-              </thead>
-              <tbody>
-                <tr *ngFor="let relation of migration.affectedRelations">
-                  <td>
-                    <app-paragraph i18n>
-                      Navn: {{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}
-                      <br />
-                      Uuid: {{ relation.fromSystem?.uuid }}
-                    </app-paragraph>
-                  </td>
-                  <td>
-                    <app-paragraph i18n>
-                      Navn: {{ formatSystemName(relation.toSystem?.name, relation.toSystem?.deactivated) }}
-                      <br />
-                      Uuid: {{ relation.toSystem?.uuid }}
-                    </app-paragraph>
-                  </td>
-                  <td>
-                    <app-paragraph>
-                      {{ relation.description }}
-                    </app-paragraph>
-                  </td>
-                  <td>
-                    <app-paragraph i18n>
-                      Navn: {{ relation.interface?.name }}
-                      <br />
-                      Uuid: {{ relation.interface?.uuid }}
-                    </app-paragraph>
-                  </td>
-                  <td>
-                    <app-paragraph>
-                      {{ relation.frequencyType?.name }}
-                    </app-paragraph>
-                  </td>
-                  <td *ngIf="relation.contract">
-                    <app-paragraph i18n>
-                      Navn: {{ relation.contract.name }}
-                      <br />
-                      Uuid: {{ relation.contract.uuid }}
-                    </app-paragraph>
-                  </td>
-                  <td *ngIf="!relation.contract">
-                    <app-paragraph i18n>Ingen kontrakt </app-paragraph>
-                  </td>
-                </tr>
-              </tbody>
-            </app-native-table>
-          </app-native-table>
-        </app-card>
       </ng-container>
     </ng-container>
   </app-standard-vertical-content-grid>
 
-  <app-dialog-actions *ngIf="hasConsequences() | async">
+  <app-dialog-actions *ngIf="migration$ | async">
     <app-checkbox
       [(value)]="hasAcceptedConsequences"
       labelPosition="after"
@@ -128,7 +60,7 @@
   </app-dialog-actions>
   <app-dialog-actions>
     <app-button
-      *ngIf="hasConsequences() | async"
+      *ngIf="migration$ | async"
       (buttonClick)="copyConsequencesToClipboard()"
       i18n
       buttonStyle="secondary"

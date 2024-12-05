@@ -162,6 +162,8 @@ import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { UsageMigrationRelationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-relation-consequences-table/usage-migration-relation-consequences-table.component';
+import { UsageMigrationSystemConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-system-consequences-table/usage-migration-system-consequences-table.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -298,6 +300,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GridUsagesDropdownDialogComponent,
     GridUsagesConsequencesDialogComponent,
     UsageMigrationConsequencesTableComponent,
+    UsageMigrationRelationConsequencesTableComponent,
+    UsageMigrationSystemConsequencesTableComponent,
   ],
   imports: [
     CommonModule,
