@@ -169,7 +169,7 @@ export class ColumnConfigService {
     columns: GridColumn[],
     config: APIOrganizationGridConfigurationResponseDTO | undefined
   ): boolean {
-    if (!config || !config.visibleColumns) return true;
+    if (!config || !config.visibleColumns) return false;
 
     const visibleColumns = columns.filter((column) => !column.hidden && !column.disabledByUIConfig);
 
