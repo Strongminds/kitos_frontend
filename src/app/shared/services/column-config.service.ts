@@ -169,15 +169,19 @@ export class ColumnConfigService {
     columns: GridColumn[],
     config: APIOrganizationGridConfigurationResponseDTO | undefined
   ): boolean {
-    if (!config) return false;
-    const visibleColumns = columns.filter((column) => !column.hidden);
-    const configColumns = config.visibleColumns;
-    if (!configColumns) return false;
-    if (visibleColumns.length !== configColumns.length) return true;
-    const zipped = visibleColumns.map((column, index) => ({ column, configColumn: configColumns[index] }));
-    const isDifferentFromConfig = zipped.some(
-      ({ column, configColumn }) => column.persistId !== configColumn.persistId
-    );
+    if (!config || !config.visibleColumns) return true;
+
+    const visibleColumns = columns.filter((column) => !column.hidden && !column.disabledByUIConfig);
+
+    if (visibleColumns.length !== config.visibleColumns.length) return true;
+
+    const visiblePersistIds = visibleColumns.map((column) => column.persistId);
+    const configPersistIds = config.visibleColumns.map((column) => column.persistId);
+
+    const persistIdSet = new Set(visiblePersistIds);
+
+    const isDifferentFromConfig = configPersistIds.some((persistId) => !persistIdSet.has(persistId));
+
     return isDifferentFromConfig;
   }
 }
