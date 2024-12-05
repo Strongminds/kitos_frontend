@@ -60,6 +60,7 @@ import { WhiteXIconComponent } from './white-x-icon.component';
 import { EmptyUpdateIconComponent } from './empty-update-icon.component';
 import { ReloadIconComponent } from './reload-icon.component';
 import { DiskIconComponent } from './disk-icon.component';
+import { MoreHorizontalWarningIconComponent } from './more-horizontal-warning-icon.component';
 
 @NgModule({
   imports: [],
@@ -125,6 +126,7 @@ import { DiskIconComponent } from './disk-icon.component';
     EmptyUpdateIconComponent,
     ReloadIconComponent,
     DiskIconComponent,
+    MoreHorizontalWarningIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -188,6 +190,7 @@ import { DiskIconComponent } from './disk-icon.component';
     EmptyUpdateIconComponent,
     ReloadIconComponent,
     DiskIconComponent,
+    MoreHorizontalWarningIconComponent,
   ],
   providers: [],
 })

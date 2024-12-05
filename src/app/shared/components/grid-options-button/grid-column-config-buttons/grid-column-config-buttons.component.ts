@@ -26,7 +26,7 @@ export class GridColumnConfigButtonsComponent implements OnInit {
   public hasGridConfig$?: Observable<boolean>;
 
   public ngOnInit(): void {
-    this.hasGridConfig$ = this.columnConfigService.getGridConfig(this.entityType).pipe(map((config) => !!config));
+    this.hasGridConfig$ = this.columnConfigService.getGridConfig(this.entityType)?.pipe(map((config) => !!config));
   }
 
   public onSaveColumnConfig(): void {

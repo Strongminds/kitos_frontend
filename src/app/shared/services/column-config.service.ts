@@ -6,7 +6,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { APIColumnConfigurationRequestDTO, APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { selectItSystemUsageLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
 import { selectContractGridColumns, selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
 import {
@@ -15,6 +15,7 @@ import {
 } from 'src/app/store/data-processing/selectors';
 import { UIConfigService } from './ui-config-services/ui-config.service';
 import { UIModuleConfigKey } from '../enums/ui-module-config-key';
+import { concatLatestFrom } from '@ngrx/operators';
 
 @Injectable({ providedIn: 'root' })
 export class ColumnConfigService {
@@ -89,6 +90,23 @@ export class ColumnConfigService {
     }
   }
 
+  public hasChanges(entityType: RegistrationEntityTypes): Observable<boolean> {
+    switch (entityType) {
+      case 'it-system-usage':
+      case 'it-contract':
+      case 'data-processing-registration': {
+        return this.getGridColumns(entityType).pipe(
+          concatLatestFrom(() => this.getGridConfig(entityType)),
+          map(([gridColumns, config]) => {
+            return this.areColumnsDifferentFromConfig(gridColumns, config);
+          })
+        );
+      }
+      default:
+        return of(false);
+    }
+  }
+
   public getGridColumns(entityType: RegistrationEntityTypes): Observable<GridColumn[]> {
     return this.getRawGridColumns(entityType).pipe(
       this.uiConfigService.filterGridColumnsByUIConfig(this.entityTypeToModuleConfigKey(entityType))
@@ -106,7 +124,7 @@ export class ColumnConfigService {
       case 'data-processing-registration':
         return this.store.select(selectDataProcessingLastSeenGridConfig);
       default:
-        throw new Error(`No grid config defined for entity type: ${entityType}`);
+        return of(undefined);
     }
   }
 
@@ -145,5 +163,21 @@ export class ColumnConfigService {
       }))
       .filter((column) => column.visible)
       .map(({ persistId, index }) => ({ persistId, index }));
+  }
+
+  private areColumnsDifferentFromConfig(
+    columns: GridColumn[],
+    config: APIOrganizationGridConfigurationResponseDTO | undefined
+  ): boolean {
+    if (!config) return false;
+    const visibleColumns = columns.filter((column) => !column.hidden);
+    const configColumns = config.visibleColumns;
+    if (!configColumns) return false;
+    if (visibleColumns.length !== configColumns.length) return true;
+    const zipped = visibleColumns.map((column, index) => ({ column, configColumn: configColumns[index] }));
+    const isDifferentFromConfig = zipped.some(
+      ({ column, configColumn }) => column.persistId !== configColumn.persistId
+    );
+    return isDifferentFromConfig;
   }
 }

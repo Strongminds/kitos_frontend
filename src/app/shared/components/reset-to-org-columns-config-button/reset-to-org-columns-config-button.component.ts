@@ -1,17 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { GridColumn } from '../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { selectItSystemUsageLastSeenGridConfig } from 'src/app/store/it-system-usage/selectors';
-import { selectItContractLastSeenGridConfig } from 'src/app/store/it-contract/selectors';
-import { selectDataProcessingLastSeenGridConfig } from 'src/app/store/data-processing/selectors';
-import { concatLatestFrom } from '@ngrx/operators';
 import { ColumnConfigService } from '../../services/column-config.service';
 
 @Component({
@@ -29,7 +24,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   constructor(private store: Store, private columnConfigService: ColumnConfigService) {}
 
   public ngOnInit(): void {
-    this.lastSeenGridConfig$ = this.getGridConfig();
+    this.lastSeenGridConfig$ = this.columnConfigService?.getGridConfig(this.entityType);
 
     this.dispatchInitializeAction();
   }
@@ -39,42 +34,7 @@ export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   }
 
   public hasChanges(): Observable<boolean> {
-    if (this.entityType === 'organization-user') return of(false);
-    return this.columnConfigService.getGridColumns(this.entityType).pipe(
-      concatLatestFrom(() => this.lastSeenGridConfig$),
-      map(([gridColumns, config]) => {
-        return this.areColumnsDifferentFromConfig(gridColumns, config);
-      })
-    );
-  }
-
-  private getGridConfig(): Observable<APIOrganizationGridConfigurationResponseDTO | undefined> {
-    switch (this.entityType) {
-      case 'it-system-usage':
-        return this.store.select(selectItSystemUsageLastSeenGridConfig);
-      case 'it-contract':
-        return this.store.select(selectItContractLastSeenGridConfig);
-      case 'data-processing-registration':
-        return this.store.select(selectDataProcessingLastSeenGridConfig);
-      default:
-        return of(undefined);
-    }
-  }
-
-  private areColumnsDifferentFromConfig(
-    columns: GridColumn[],
-    config: APIOrganizationGridConfigurationResponseDTO | undefined
-  ): boolean {
-    if (!config) return false;
-    const visibleColumns = columns.filter((column) => !column.hidden);
-    const configColumns = config.visibleColumns;
-    if (!configColumns) return false;
-    if (visibleColumns.length !== configColumns.length) return true;
-    const zipped = visibleColumns.map((column, index) => ({ column, configColumn: configColumns[index] }));
-    const isDifferentFromConfig = zipped.some(
-      ({ column, configColumn }) => column.persistId !== configColumn.persistId
-    );
-    return isDifferentFromConfig;
+    return this.columnConfigService.hasChanges(this.entityType);
   }
 
   private dispatchResetConfigAction(): void {

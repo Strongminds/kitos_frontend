@@ -22,4 +22,5 @@ export type IconType =
   | 'reload'
   | 'disk'
   | 'blue-plus'
+  | 'dots-warning'
   | undefined;
