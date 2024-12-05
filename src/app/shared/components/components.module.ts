@@ -140,6 +140,8 @@ import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-
 import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
 import { GridUsagesConsequencesDialogComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
 import { UsageMigrationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-consequences-table/usage-migration-consequences-table.component';
+import { UsageMigrationRelationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-relation-consequences-table/usage-migration-relation-consequences-table.component';
+import { UsageMigrationSystemConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-system-consequences-table/usage-migration-system-consequences-table.component';
 import { GridUsagesDialogComponent } from './grid/it-system-usage-column/grid-usages-dialog/grid-usages-dialog.component';
 import { GridUsagesDropdownDialogComponent } from './grid/it-system-usage-column/grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
 import { UsageProxyCheckboxComponent } from './grid/usage-proxy-checkbox/usage-proxy-checkbox.component';
@@ -299,6 +301,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GridUsagesDropdownDialogComponent,
     GridUsagesConsequencesDialogComponent,
     UsageMigrationConsequencesTableComponent,
+    UsageMigrationRelationConsequencesTableComponent,
+    UsageMigrationSystemConsequencesTableComponent,
     SectionComponent,
   ],
   imports: [

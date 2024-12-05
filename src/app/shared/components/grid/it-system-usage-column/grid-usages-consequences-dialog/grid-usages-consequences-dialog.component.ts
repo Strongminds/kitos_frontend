@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { combineLatest, map, Observable } from 'rxjs';
@@ -18,7 +18,7 @@ import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usage
 export class GridUsagesConsequencesDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
   @Input() public targetItSystemUuid!: string;
-  @Input() public usingOrganizationUuid$!: Observable<string>;
+  @Input() public usingOrganizationUuid!: string;
   @Input() sourceItSystemUuid!: string;
 
   public readonly migration$ = this.componentStore.migration$;
@@ -27,12 +27,14 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   public hasAcceptedConsequences: boolean = false;
   public readonly consequencesContentId = 'consequences-content';
 
+  public isCopingToClipboard = false;
+
   constructor(
     private readonly dialogRef: MatDialogRef<GridUsagesConsequencesDialogComponent>,
-    private readonly componentStore: GridUsagesDialogComponentStore,
-    private readonly cdr: ChangeDetectorRef,
+    @Inject(GridUsagesDialogComponentStore) private readonly componentStore: GridUsagesDialogComponentStore,
     private readonly dialog: MatDialog,
     private readonly notificationService: NotificationService,
+    private readonly cdr: ChangeDetectorRef,
     private readonly clipboardService: ClipboardService,
     private readonly actions$: Actions
   ) {
@@ -40,7 +42,11 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   }
 
   ngOnInit(): void {
-    this.componentStore.getMigration(this.targetItSystemUuid)(this.sourceItSystemUuid)(this.usingOrganizationUuid$);
+    this.componentStore.getMigration({
+      targetItSystemUuid: this.targetItSystemUuid,
+      sourceItSystemUuid: this.sourceItSystemUuid,
+      usingOrganizationUuid: this.usingOrganizationUuid,
+    });
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
@@ -109,14 +115,11 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
     );
   }
 
-  public formatSystemName(name: string | undefined, deactivated: boolean | undefined) {
-    if (!name) return '';
-    return deactivated ? $localize`${name} (Ikke tilgængeligt)` : name;
-  }
-
   public copyConsequencesToClipboard() {
+    this.isCopingToClipboard = true;
     this.cdr.detectChanges();
     this.clipboardService.copyContentToClipBoardById(this.consequencesContentId);
     this.notificationService.showDefault($localize`Konsekvenserne er kopieret til udklipsholderen`);
+    this.isCopingToClipboard = false;
   }
 }

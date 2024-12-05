@@ -4768,9 +4768,6 @@
       <trans-unit id="4608505263107769625" datatype="html">
         <source>Flytning af IT systemanvendelse</source>
       </trans-unit>
-      <trans-unit id="4743129658174909579" datatype="html">
-        <source>Søg efter enhed</source>
-      </trans-unit>
       <trans-unit id="5534770235477902796" datatype="html">
         <source><x id="PH" equiv-text="name"/> (Ikke tilgængeligt)</source>
       </trans-unit>
@@ -4801,12 +4798,6 @@
       <trans-unit id="755423434074400156" datatype="html">
         <source>Fra</source>
       </trans-unit>
-      <trans-unit id="7734486507642287615" datatype="html">
-        <source>Antal niveauer</source>
-      </trans-unit>
-      <trans-unit id="7864242390343441005" datatype="html">
-        <source> Medtag overordnede enheder </source>
-      </trans-unit>
       <trans-unit id="8049796118142183556" datatype="html">
         <source> Gennemfør flytning </source>
       </trans-unit>
@@ -4818,6 +4809,21 @@
           <x id="START_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="p-arrow-right-icon&gt;"/>
           <x id="CLOSE_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&gt;"/>
         </source>
+      </trans-unit>
+      <trans-unit id="1960552588321913023" datatype="html">
+        <source> Navn: <x id="INTERPOLATION" equiv-text="{{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.fromSystem?.uuid }}"/> </source>
+      </trans-unit>
+      <trans-unit id="4030902832094624639" datatype="html">
+        <source>Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface.uuid }}"/></source>
+      </trans-unit>
+      <trans-unit id="4743129658174909579" datatype="html">
+        <source>Søg efter enhed</source>
+      </trans-unit>
+      <trans-unit id="7734486507642287615" datatype="html">
+        <source>Antal niveauer</source>
+      </trans-unit>
+      <trans-unit id="7864242390343441005" datatype="html">
+        <source> Medtag overordnede enheder </source>
       </trans-unit>
     </body>
   </file>

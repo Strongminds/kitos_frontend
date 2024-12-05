@@ -21,6 +21,12 @@ import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { IdentityNamePair, mapIdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { filterNullish } from '../../../../pipes/filter-nullish';
 
+export interface GetMigrationModel {
+  targetItSystemUuid: string;
+  sourceItSystemUuid: string;
+  usingOrganizationUuid: string;
+}
+
 interface State {
   loading: boolean;
   unusedItSystemsInOrganization: IdentityNamePair[] | undefined;
@@ -120,30 +126,33 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       })
     )
   );
-  public getMigration = (targetItSystemUuid: string) => (sourceItSystemUuid: string) =>
-    this.effect((usingOrganizationUuid$: Observable<string>) =>
-      this.getUsageUuid(usingOrganizationUuid$, sourceItSystemUuid).pipe(
-        mergeMap((usageUuid) => {
-          this.updateLoading(true);
-          this.updateUsageUuid(usageUuid);
-          return this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2Get({
-            toSystemUuid: targetItSystemUuid,
-            usageUuid,
-          });
-        }),
-        tapResponse(
-          //finally block is not working in this context for some reason
-          (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
-            this.updateMigration(adaptItSystemUsageMigration(migrationDto));
-            this.updateLoading(false);
-          },
-          (error) => {
-            console.error(error);
-            this.updateLoading(false);
-          }
+  public getMigration = this.effect((getModel: Observable<GetMigrationModel>) =>
+    getModel.pipe(
+      mergeMap(({ targetItSystemUuid, sourceItSystemUuid, usingOrganizationUuid }) =>
+        this.getUsageUuid(usingOrganizationUuid, sourceItSystemUuid).pipe(
+          mergeMap((usageUuid) => {
+            this.updateLoading(true);
+            this.updateUsageUuid(usageUuid);
+            return this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2Get({
+              toSystemUuid: targetItSystemUuid,
+              usageUuid,
+            });
+          }),
+          tapResponse(
+            //finally block is not working in this context for some reason
+            (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
+              this.updateMigration(adaptItSystemUsageMigration(migrationDto));
+              this.updateLoading(false);
+            },
+            (error) => {
+              console.error(error);
+              this.updateLoading(false);
+            }
+          )
         )
       )
-    );
+    )
+  );
 
   public executeMigration = this.effect((targetItSystemUuid$: Observable<string>) =>
     targetItSystemUuid$.pipe(
@@ -161,24 +170,20 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
     this.updateLoading(false);
   };
 
-  private getUsageUuid(usingOrganizationUuid$: Observable<string>, sourceItSystemUuid: string): Observable<string> {
-    return usingOrganizationUuid$.pipe(
-      mergeMap((usingOrganizationUuid) =>
-        this.itSystemUsageInternalService
-          .getManyItSystemUsageInternalV2GetItSystemUsages({
-            organizationUuid: usingOrganizationUuid,
-          })
-          .pipe(
-            map((usages) => {
-              const usage = usages.find((u) => u.systemContext.uuid === sourceItSystemUuid);
-              if (!usage) {
-                throw new Error('Usage not found');
-              }
-              return usage.uuid;
-            })
-          )
-      )
-    );
+  private getUsageUuid(usingOrganizationUuid: string, sourceItSystemUuid: string): Observable<string> {
+    return this.itSystemUsageInternalService
+      .getManyItSystemUsageInternalV2GetItSystemUsages({
+        organizationUuid: usingOrganizationUuid,
+      })
+      .pipe(
+        map((usages) => {
+          const usage = usages.find((u) => u.systemContext.uuid === sourceItSystemUuid);
+          if (!usage) {
+            throw new Error('Usage not found');
+          }
+          return usage.uuid;
+        })
+      );
   }
 
   public getUnusedItSystemsInOrganization = (nameContent: string) =>
