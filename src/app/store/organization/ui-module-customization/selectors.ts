@@ -73,11 +73,13 @@ const createDprItContractsFieldSelector = (fieldKey: string) =>
 export const selectDprEnableMainContract = createDprItContractsFieldSelector('mainContract');
 export const selectDprEnableAssociatedContracts = createDprItContractsFieldSelector('associatedContracts');
 
-export const selectDprEnableScheduledInspectionDate = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'oversight',
-  'scheduledInspectionDate'
-);
+//DPR -> Oversight field selectors
+const createDprOversightFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, 'oversight', fieldKey);
+export const selectDprEnabledOversightInterval = createDprOversightFieldSelector('oversightInterval');
+export const selectDprEnableScheduledInspectionDate = createDprOversightFieldSelector('scheduledInspectionDate');
+export const selectDprEnableOversightOptions = createDprOversightFieldSelector('oversightOptions');
+export const selectDprEnableOversights = createDprOversightFieldSelector('oversights');
 
 //IT system usage
 const createItSystemUsageTabEnabledSelector = (tabKey: string) =>

@@ -55,17 +55,25 @@ export const DataProcessingUiBluePrint = {
         },
         associatedContracts: {
           text: $localize`Tilknyttede kontrakter`,
-        }
+        },
       },
     },
     oversight: {
       text: $localize`Tilsyn`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
-      isObligatory: true,
       children: {
+        oversightInterval: {
+          text: $localize`Tilsynsinterval`,
+        },
         scheduledInspectionDate: {
           text: $localize`Kommende planlagt tilsyn`,
         },
+        oversightOptions: {
+          text: $localize`Tilsynsmuligheder`,
+        },
+        oversights: {
+          text: $localize`Gennemførte og kommende tilsyn`,
+        }
       },
     },
     roles: {
