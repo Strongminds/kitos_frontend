@@ -3039,13 +3039,10 @@
         <source>Eksporter</source>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/>Eksporter alle kolonner </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter alle kolonner </source>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/>Eksporter viste kolonner </source>
-      </trans-unit>
-      <trans-unit id="8788430039871490844" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon/&gt;"/>Eksporter GDPR data </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter viste kolonner </source>
       </trans-unit>
       <trans-unit id="7150593562313015326" datatype="html">
         <source>
@@ -4714,6 +4711,36 @@
       <trans-unit id="530214592421461833" datatype="html">
         <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
       </trans-unit>
+      <trans-unit id="1251282400133851613" datatype="html">
+        <source>Databehandleraftale</source>
+      </trans-unit>
+      <trans-unit id="5070345773267732947" datatype="html">
+        <source>Valgte følsomme personoplysninger</source>
+      </trans-unit>
+      <trans-unit id="5742019875153950367" datatype="html">
+        <source>CPR-nr</source>
+      </trans-unit>
+      <trans-unit id="830692856183381932" datatype="html">
+        <source>Straffesager og lovovertrædelser</source>
+      </trans-unit>
+      <trans-unit id="8903078294616420624" datatype="html">
+        <source>Hvad viste seneste risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="9044497579857463520" datatype="html">
+        <source>IT-Systemet driftes</source>
+      </trans-unit>
+      <trans-unit id="1111247473583328296" datatype="html">
+        <source>GDPR Rapporter</source>
+      </trans-unit>
+      <trans-unit id="793272841717310926" datatype="html">
+        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </source>
+      </trans-unit>
+      <trans-unit id="8145441157302108078" datatype="html">
+        <source>System UUID</source>
+      </trans-unit>
+      <trans-unit id="584908652240507318" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</source>
+      </trans-unit>
       <trans-unit id="1162347843657363489" datatype="html">
         <source>Er du sikker på, at du vil slette systemet?</source>
       </trans-unit>
@@ -4726,6 +4753,9 @@
       <trans-unit id="1830101552093999120" datatype="html">
         <source>Flytning af systemanvendelse</source>
       </trans-unit>
+      <trans-unit id="2302937686366976379" datatype="html">
+        <source>Ingen kontrakt </source>
+      </trans-unit>
       <trans-unit id="2777061395808179395" datatype="html">
         <source> Annuller</source>
       </trans-unit>
@@ -4737,6 +4767,9 @@
       </trans-unit>
       <trans-unit id="3435289656656147253" datatype="html">
         <source>Systemanvendelsen blev flyttet</source>
+      </trans-unit>
+      <trans-unit id="3461864776628861706" datatype="html">
+        <source> For at sikre datakvaliteten i Kitos - og f.eks. komme redundante registreringer til livs - har global admin mulighed for at flytte jeres anvendelse fra et IT-system til et andet. I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at: </source>
       </trans-unit>
       <trans-unit id="4119129839407806781" datatype="html">
         <source>Flyt</source>
@@ -4774,9 +4807,6 @@
       <trans-unit id="7427455824915144243" datatype="html">
         <source>Til</source>
       </trans-unit>
-      <trans-unit id="3461864776628861706" datatype="html">
-        <source> For at sikre datakvaliteten i Kitos - og f.eks. komme redundante registreringer til livs - har global admin mulighed for at flytte jeres anvendelse fra et IT-system til et andet. I forbindelse med, at global admin har flyttet jeres system anvendelse fra et IT-system til et andet, kan det oplyses at: </source>
-      </trans-unit>
       <trans-unit id="755423434074400156" datatype="html">
         <source>Fra</source>
       </trans-unit>
@@ -4785,9 +4815,6 @@
       </trans-unit>
       <trans-unit id="8142942652373616531" datatype="html">
         <source>Vælg IT system</source>
-      </trans-unit>
-      <trans-unit id="2302937686366976379" datatype="html">
-        <source>Ingen kontrakt </source>
       </trans-unit>
       <trans-unit id="8861382415598843076" datatype="html">
         <source>
