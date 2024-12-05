@@ -6382,8 +6382,20 @@
         <target state="new"> Navn: <x id="INTERPOLATION" equiv-text="{{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.fromSystem?.uuid }}"/> </target>
       </trans-unit>
       <trans-unit id="4030902832094624639" datatype="html">
-        <source>Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface?.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface?.uuid }}"/></source>
-        <target state="new">Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface?.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface?.uuid }}"/></target>
+        <source>Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface.uuid }}"/></source>
+        <target state="new">Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface.uuid }}"/></target>
+      </trans-unit>
+      <trans-unit id="5463227515602023886" datatype="html">
+        <source>Sidst redigeret af bruger</source>
+        <target state="new">Sidst redigeret af bruger</target>
+      </trans-unit>
+      <trans-unit id="4106659631682454209" datatype="html">
+        <source>Sidst redigeret dato</source>
+        <target state="new">Sidst redigeret dato</target>
+      </trans-unit>
+      <trans-unit id="3604722267089766233" datatype="html">
+        <source>Databehandler afftale indgået</source>
+        <target state="new">Databehandler afftale indgået</target>
       </trans-unit>
     </body>
   </file>
