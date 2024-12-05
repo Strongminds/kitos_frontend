@@ -1,4 +1,8 @@
-<app-menu-button buttonStyle="tertiary" iconType="dots" data-cy="grid-options-button">
+<app-menu-button
+  buttonStyle="tertiary"
+  [iconType]="(hasChanges$ | async) ? 'dots-warning' : 'dots'"
+  data-cy="grid-options-button"
+>
   <div class="section-text">
     <app-paragraph [bold]="true" i18n>Filter</app-paragraph>
   </div>
