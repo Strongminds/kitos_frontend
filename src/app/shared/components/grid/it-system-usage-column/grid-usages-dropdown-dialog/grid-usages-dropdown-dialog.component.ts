@@ -28,7 +28,7 @@ export class GridUsagesDropdownDialogComponent {
   }
 
   public onConfirm(targetItSystem: IdentityNamePair) {
-    const dialogRef = this.dialog.open(GridUsagesConsequencesDialogComponent, { width: '1000px' });
+    const dialogRef = this.dialog.open(GridUsagesConsequencesDialogComponent, { width: 'auto' });
     const componentInstance = dialogRef.componentInstance;
     componentInstance.title = $localize`Flytning af IT systemanvendelse`;
     componentInstance.usingOrganizationUuid = this.usingOrganization.uuid;

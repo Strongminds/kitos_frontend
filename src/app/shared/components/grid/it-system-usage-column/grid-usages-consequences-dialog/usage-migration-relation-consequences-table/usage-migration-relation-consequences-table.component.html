@@ -30,10 +30,10 @@
         </app-paragraph>
       </td>
       <td>
-        <app-paragraph i18n>
-          Navn: {{ relation.interface?.name }}
+        <app-paragraph i18n *ngIf="relation.interface">
+          Navn: {{ relation.interface.name }}
           <br />
-          Uuid: {{ relation.interface?.uuid }}
+          Uuid: {{ relation.interface.uuid }}
         </app-paragraph>
       </td>
       <td>
@@ -77,7 +77,7 @@
         <td>
           {{ relation.description }}
         </td>
-        <td i18n>Navn: {{ relation.interface?.name }} Uuid: {{ relation.interface?.uuid }}</td>
+        <td i18n *ngIf="relation.interface">Navn: {{ relation.interface.name }} Uuid: {{ relation.interface.uuid }}</td>
         <td>
           {{ relation.frequencyType?.name }}
         </td>
