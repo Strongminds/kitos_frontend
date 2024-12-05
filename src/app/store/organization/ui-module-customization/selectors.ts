@@ -14,8 +14,7 @@ export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => M
     createSelector(
       selectUIModuleCustomizationState,
       () => new Date(),
-      (state, now) =>
-        hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
+      (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
     )
 );
 
@@ -54,7 +53,20 @@ export const selectDprEnableOversight = createDprTabEnabledSelector('oversight')
 export const selectDprEnableRoles = createDprTabEnabledSelector('roles');
 export const selectDprEnableNotifications = createDprTabEnabledSelector('notifications');
 export const selectDprEnableReferences = createDprTabEnabledSelector('references');
-//Field selectors
+
+//DPR > frontpage field selectors
+const createDprFrontPageFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, 'frontPage', fieldKey);
+export const selectDprEnableName = createDprFrontPageFieldSelector('name');
+export const selectDprEnableDataResponsible = createDprFrontPageFieldSelector('dataResponsible');
+export const selectDprEnableStatus = createDprFrontPageFieldSelector('status');
+export const selectDprEnableLastChangedBy = createDprFrontPageFieldSelector('lastChangedBy');
+export const selectDprEnableLastChangedAt = createDprFrontPageFieldSelector('lastChangedAt');
+export const selectDprEnableAgreementConcluded = createDprFrontPageFieldSelector('agreementConcluded');
+export const selectDprEnableTransferBasis = createDprFrontPageFieldSelector('transferBasis');
+export const selectDprEnableProcessors = createDprFrontPageFieldSelector('processors');
+export const selectDprEnableSubProcessors = createDprFrontPageFieldSelector('subProcessors');
+
 export const selectDprEnableMainContract = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'itContracts',

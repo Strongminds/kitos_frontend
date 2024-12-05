@@ -11,6 +11,36 @@ export const DataProcessingUiBluePrint = {
       text: $localize`Forside`,
       isObligatory: true,
       helpText: uiConfigHelpTexts.cannotChangeTab,
+      children: {
+        name: {
+          text: $localize`Navn`,
+          isObligatory: true,
+        },
+        dataResponsible: {
+          text: $localize`Dataansvarlig`,
+        },
+        status: {
+          text: $localize`Status`,
+        },
+        lastChangedBy: {
+          text: $localize`Sidst redigeret af bruger`,
+        },
+        lastChangedAt: {
+          text: $localize`Sidst redigeret dato`,
+        },
+        agreementConcluded: {
+          text: $localize`Databehandler afftale indgået`,
+        },
+        transferBasis: {
+          text: $localize`Overførselsgrundlag`,
+        },
+        processors: {
+          text: $localize`Databehandlere`,
+        },
+        subProcessors: {
+          text: $localize`Underdatabehandlere`,
+        }
+      },
     },
     itSystems: {
       text: $localize`IT Systemer`,
