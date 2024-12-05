@@ -9,4 +9,5 @@ import { IdentityNamePair } from '../../../../../models/identity-name-pair.model
 export class UsageMigrationConsequencesTableComponent {
   @Input() title!: string;
   @Input() consequences!: IdentityNamePair[];
+  @Input() isCopingToClipboard: boolean = false;
 }

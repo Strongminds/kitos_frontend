@@ -8,4 +8,5 @@ import { ItSystemUsageMigration } from 'src/app/shared/models/it-system-usage/mi
 })
 export class UsageMigrationSystemConsequencesTableComponent {
   @Input() migration!: ItSystemUsageMigration;
+  @Input() isCopingToClipboard: boolean = false;
 }

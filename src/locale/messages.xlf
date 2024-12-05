@@ -4822,6 +4822,12 @@
           <x id="CLOSE_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&gt;"/>
         </source>
       </trans-unit>
+      <trans-unit id="1960552588321913023" datatype="html">
+        <source> Navn: <x id="INTERPOLATION" equiv-text="{{ formatSystemName(relation.fromSystem?.name, relation.fromSystem?.deactivated) }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.fromSystem?.uuid }}"/> </source>
+      </trans-unit>
+      <trans-unit id="4030902832094624639" datatype="html">
+        <source>Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface?.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface?.uuid }}"/></source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

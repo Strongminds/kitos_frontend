@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { combineLatest, map, Observable } from 'rxjs';
@@ -27,11 +27,14 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   public hasAcceptedConsequences: boolean = false;
   public readonly consequencesContentId = 'consequences-content';
 
+  public isCopingToClipboard = false;
+
   constructor(
     private readonly dialogRef: MatDialogRef<GridUsagesConsequencesDialogComponent>,
     private readonly componentStore: GridUsagesDialogComponentStore,
     private readonly dialog: MatDialog,
     private readonly notificationService: NotificationService,
+    private readonly cdr: ChangeDetectorRef,
     private readonly clipboardService: ClipboardService,
     private readonly actions$: Actions
   ) {
@@ -113,7 +116,10 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   }
 
   public copyConsequencesToClipboard() {
+    this.isCopingToClipboard = true;
+    this.cdr.detectChanges();
     this.clipboardService.copyContentToClipBoardById(this.consequencesContentId);
     this.notificationService.showDefault($localize`Konsekvenserne er kopieret til udklipsholderen`);
+    this.isCopingToClipboard = false;
   }
 }

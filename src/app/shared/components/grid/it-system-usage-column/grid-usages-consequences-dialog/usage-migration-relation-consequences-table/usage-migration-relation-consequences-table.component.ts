@@ -8,6 +8,7 @@ import { ItSystemUsageMigration } from 'src/app/shared/models/it-system-usage/mi
 })
 export class UsageMigrationRelationConsequencesTableComponent {
   @Input() migration!: ItSystemUsageMigration;
+  @Input() isCopingToClipboard: boolean = false;
 
   public formatSystemName(name: string | undefined, deactivated: boolean | undefined) {
     if (!name) return '';
