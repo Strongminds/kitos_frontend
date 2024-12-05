@@ -67,11 +67,12 @@ export const selectDprEnableTransferBasis = createDprFrontPageFieldSelector('tra
 export const selectDprEnableProcessors = createDprFrontPageFieldSelector('processors');
 export const selectDprEnableSubProcessors = createDprFrontPageFieldSelector('subProcessors');
 
-export const selectDprEnableMainContract = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.DataProcessingRegistrations,
-  'itContracts',
-  'mainContract'
-);
+//DPR -> IT Contract field selectors
+const createDprItContractsFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, 'itContracts', fieldKey);
+export const selectDprEnableMainContract = createDprItContractsFieldSelector('mainContract');
+export const selectDprEnableAssociatedContracts = createDprItContractsFieldSelector('associatedContracts');
+
 export const selectDprEnableScheduledInspectionDate = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.DataProcessingRegistrations,
   'oversight',

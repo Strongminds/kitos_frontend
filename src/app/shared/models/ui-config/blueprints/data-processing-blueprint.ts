@@ -39,22 +39,23 @@ export const DataProcessingUiBluePrint = {
         },
         subProcessors: {
           text: $localize`Underdatabehandlere`,
-        }
+        },
       },
     },
     itSystems: {
       text: $localize`IT Systemer`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
-      isObligatory: true,
     },
     itContracts: {
       text: $localize`IT Kontrakter`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
-      isObligatory: true,
       children: {
         mainContract: {
           text: $localize`Hvilken kontrakt skal angive om databehandlingen er aktiv`,
         },
+        associatedContracts: {
+          text: $localize`Tilknyttede kontrakter`,
+        }
       },
     },
     oversight: {
