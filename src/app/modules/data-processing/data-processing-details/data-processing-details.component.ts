@@ -25,6 +25,7 @@ import {
   selectDprEnableItContracts,
   selectDprEnableItSystems,
   selectDprEnableNotifications,
+  selectDprEnableOversight,
   selectDprEnableReferences,
   selectDprEnableRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
@@ -45,9 +46,11 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
 
   public readonly itSystemsEnabled$ = this.store.select(selectDprEnableItSystems);
   public readonly itContractsEnabled$ = this.store.select(selectDprEnableItContracts);
+  public readonly oversightEnabled$ = this.store.select(selectDprEnableOversight);
   public readonly dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
   public readonly dprNotificationsEnabled$ = this.store.select(selectDprEnableNotifications);
   public readonly dprReferencesEnabled$ = this.store.select(selectDprEnableReferences);
+
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
 
@@ -87,6 +90,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`Tilsyn`,
       iconType: 'clipboard',
       route: AppPath.oversight,
+      enabled$: this.oversightEnabled$,
     },
     {
       label: $localize`Databehandlingsroller`,
