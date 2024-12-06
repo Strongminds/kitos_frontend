@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatest, combineLatestWith, map } from 'rxjs';
+import { combineLatestWith, map } from 'rxjs';
 import {
   APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
@@ -27,9 +27,14 @@ import {
   selectItContractsEnableAgreementPeriod,
   selectItContractsEnableContractType,
   selectItContractsEnableCriticality,
+  selectItContractsEnabledCreatedBy,
+  selectItContractsEnabledlastModifedBy,
+  selectItContractsEnabledlastModifedDate,
   selectItContractsEnableExternalSigner,
   selectItContractsEnableInternalSigner,
   selectItContractsEnableIsActive,
+  selectItContractsEnableNotes,
+  selectItContractsEnableParentContract,
   selectItContractsEnableProcurementInitiated,
   selectItContractsEnableProcurementPlan,
   selectItContractsEnableProcurementStrategy,
@@ -39,6 +44,7 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
+import { combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-contract-frontpage',
@@ -172,25 +178,29 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   public readonly contractIdEnabled$ = this.store.select(selectItContractEnableContractId);
   public readonly contractTypeEnabled$ = this.store.select(selectItContractsEnableContractType);
-
   public readonly contractTemplateEnabled$ = this.store.select(selectItContractsEnableTemplate);
   public readonly contractCriticalityEnabled$ = this.store.select(selectItContractsEnableCriticality);
   public readonly contractPurchaseFormEnabled$ = this.store.select(selectItContractsEnablePurchaseForm);
+  public readonly contractIsActiveEnabled$ = this.store.select(selectItContractsEnableIsActive);
+  public readonly contractAgreementPeriodEnabled$ = this.store.select(selectItContractsEnableAgreementPeriod);
+  public readonly contractNotesEnabled$ = this.store.select(selectItContractsEnableNotes);
+  public readonly contractParentContractEnabled$ = this.store.select(selectItContractsEnableParentContract);
+
+  public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableInternalSigner);
+  public readonly contractExternalSignerEnabled$ = this.store.select(selectItContractsEnableExternalSigner);
 
   public readonly contractProcurementStrategyEnabled$ = this.store.select(selectItContractsEnableProcurementStrategy);
   public readonly contractProcurementPlanEnabled$ = this.store.select(selectItContractsEnableProcurementPlan);
   public readonly contractProcurementInitiatedEnabled$ = this.store.select(selectItContractsEnableProcurementInitiated);
-  public readonly showProcurementCard$ = combineLatest([
+  public readonly showProcurementCard$ = combineBooleansWithOr([
     this.contractProcurementStrategyEnabled$,
     this.contractProcurementPlanEnabled$,
     this.contractProcurementInitiatedEnabled$,
-  ]).pipe(map(([strategy, plan, initiated]) => strategy || plan || initiated));
+  ]);
 
-  public readonly contractExternalSignerEnabled$ = this.store.select(selectItContractsEnableExternalSigner);
-  public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableInternalSigner);
-
-  public readonly contractAgreementPeriodEnabled$ = this.store.select(selectItContractsEnableAgreementPeriod);
-  public readonly contractIsActiveEnabled$ = this.store.select(selectItContractsEnableIsActive);
+  public readonly contractsCreatedByEnabled$ = this.store.select(selectItContractsEnabledCreatedBy);
+  public readonly contractsLastModifiedByEnabled$ = this.store.select(selectItContractsEnabledlastModifedBy);
+  public readonly contractsLastModifiedDateEnabled$ = this.store.select(selectItContractsEnabledlastModifedDate);
 
   constructor(
     private readonly store: Store,
