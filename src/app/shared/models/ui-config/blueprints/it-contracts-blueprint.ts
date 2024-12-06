@@ -80,6 +80,17 @@ export const ItContractsUiBluePrint = {
     itSystems: {
       text: $localize`IT Systemer`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      children: {
+        agreementElements: {
+          text: $localize`Aftaleelementer`,
+        },
+        systemUsages: {
+          text: $localize`IT Systemer`,
+        },
+        relations: {
+          text: $localize`Relationer`,
+        },
+      },
     },
     dataProcessing: {
       text: $localize`Databehandling`,

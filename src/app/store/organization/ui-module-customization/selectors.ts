@@ -130,10 +130,9 @@ export const selectItContractEnableContractRoles = createItContractsTabEnabledSe
 export const selectItContractEnableHierarchy = createItContractsTabEnabledSelector('hierarchy');
 export const selectItContractEnableAdvis = createItContractsTabEnabledSelector('advice');
 export const selectItContractEnableReferences = createItContractsTabEnabledSelector('references');
-//Field selectors
+//Contracts > Frontpage selectors
 const createItContractFrontpageFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'frontPage', fieldKey);
-//Frontpage fields
 export const selectItContractEnableContractId = createItContractFrontpageFieldSelector('contractId');
 export const selectItContractsEnableContractType = createItContractFrontpageFieldSelector('contractType');
 export const selectItContractsEnableTemplate = createItContractFrontpageFieldSelector('template');
@@ -155,11 +154,16 @@ export const selectItContractsEnableProcurementPlan = createItContractFrontpageF
 export const selectItContractsEnableProcurementInitiated =
   createItContractFrontpageFieldSelector('procurementInitiated');
 
-  export const selectItContractsEnabledCreatedBy = createItContractFrontpageFieldSelector('createdBy');
-  export const selectItContractsEnabledlastModifedBy = createItContractFrontpageFieldSelector('lastModifiedBy');
-  export const selectItContractsEnabledlastModifedDate = createItContractFrontpageFieldSelector('lastModifiedDate');
+export const selectItContractsEnabledCreatedBy = createItContractFrontpageFieldSelector('createdBy');
+export const selectItContractsEnabledlastModifedBy = createItContractFrontpageFieldSelector('lastModifiedBy');
+export const selectItContractsEnabledlastModifedDate = createItContractFrontpageFieldSelector('lastModifiedDate');
 
-
+//Contracts > IT Systems
+const createItContractsItSystemsFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'itSystems', fieldKey);
+export const selectItContractEnableAgreementElements = createItContractsItSystemsFieldSelector('agreementElements');
+export const selectItContractEnableSystemUsages = createItContractsItSystemsFieldSelector('systemUsages');
+export const selectItContractEnableRelations = createItContractsItSystemsFieldSelector('relations');
 
 //Other fields
 export const selectItContractsEnableAgreementDeadlines = createFieldOrGroupEnabledSelector(
