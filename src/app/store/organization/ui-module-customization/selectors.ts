@@ -146,6 +146,7 @@ export const selectItContractsEnableParentContract = createItContractFrontpageFi
 
 export const selectItContractsEnableResponsibleUnit = createItContractFrontpageFieldSelector('responsibleUnit');
 export const selectItContractsEnableInternalSigner = createItContractFrontpageFieldSelector('internalSigner');
+
 export const selectIContractsEnableSupplier = createItContractFrontpageFieldSelector('supplier');
 export const selectItContractsEnableExternalSigner = createItContractFrontpageFieldSelector('externalSigner');
 

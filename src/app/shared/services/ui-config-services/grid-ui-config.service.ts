@@ -29,19 +29,28 @@ import {
   selectDprEnableStatus,
   selectDprEnableSubProcessors,
   selectDprEnableTransferBasis,
+  selectIContractsEnableSupplier,
   selectItContractEnableContractId,
   selectItContractEnableContractRoles,
   selectItContractsEnableAgreementDeadlines,
   selectItContractsEnableAgreementPeriod,
   selectItContractsEnableContractType,
   selectItContractsEnableCriticality,
+  selectItContractsEnabledCreatedBy,
+  selectItContractsEnabledlastModifedBy,
+  selectItContractsEnabledlastModifedDate,
   selectItContractsEnableExternalPayment,
+  selectItContractsEnableExternalSigner,
   selectItContractsEnableInternalSigner,
+  selectItContractsEnableIsActive,
+  selectItContractsEnableNotes,
+  selectItContractsEnableParentContract,
   selectItContractsEnablePaymentModel,
   selectItContractsEnableProcurementInitiated,
   selectItContractsEnableProcurementPlan,
   selectItContractsEnableProcurementStrategy,
   selectItContractsEnablePurchaseForm,
+  selectItContractsEnableResponsibleUnit,
   selectItContractsEnableTemplate,
   selectItContractsEnableTermination,
   selectITSystemUsageEnableFrontPageUsagePeriod,
@@ -57,6 +66,7 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
+import { combineBooleansWithAnd } from '../../helpers/observable-helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -94,33 +104,44 @@ export class GridUIConfigService {
       this.store
         .select(selectShowDataProcessingRegistrations)
         .pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
-      this.store.select(selectItContractEnableContractId).pipe(shouldEnable([ContractFields.ContractId])),
 
+      //Frontpage
+      this.store.select(selectItContractEnableContractId).pipe(shouldEnable([ContractFields.ContractId])),
+      this.store.select(selectItContractsEnableContractType).pipe(shouldEnable([ContractFields.ContractTypeUuid])),
+      this.store.select(selectItContractsEnableTemplate).pipe(shouldEnable([ContractFields.ContractTemplateUuid])),
+      this.store.select(selectItContractsEnableCriticality).pipe(shouldEnable([ContractFields.CriticalityUuid])),
+      this.store.select(selectItContractsEnablePurchaseForm).pipe(shouldEnable([ContractFields.PurchaseFormUuid])),
+      this.store.select(selectItContractsEnableIsActive).pipe(shouldEnable([ContractFields.IsActive])),
       this.store
         .select(selectItContractsEnableAgreementPeriod)
         .pipe(shouldEnable([ContractFields.Concluded, ContractFields.ExpirationDate])),
+      this.store.select(selectItContractsEnableNotes).pipe(shouldEnable([])),
 
-      this.store.select(selectItContractsEnableCriticality).pipe(shouldEnable([ContractFields.CriticalityUuid])),
+      this.store.select(selectItContractsEnableParentContract).pipe(shouldEnable([ContractFields.ParentContractName])),
 
+      this.store
+        .select(selectItContractsEnableResponsibleUnit)
+        .pipe(shouldEnable([ContractFields.ResponsibleOrgUnitName])),
       this.store.select(selectItContractsEnableInternalSigner).pipe(shouldEnable([ContractFields.ContractSigner])),
 
-      this.store.select(selectItContractsEnableContractType).pipe(shouldEnable([ContractFields.ContractTypeUuid])),
-
-      this.store.select(selectItContractsEnableTemplate).pipe(shouldEnable([ContractFields.ContractTemplateUuid])),
-
-      this.store.select(selectItContractsEnablePurchaseForm).pipe(shouldEnable([ContractFields.PurchaseFormUuid])),
+      this.store.select(selectIContractsEnableSupplier).pipe(shouldEnable([ContractFields.SupplierName])),
+      this.store.select(selectItContractsEnableExternalSigner).pipe(shouldEnable([])),
 
       this.store
         .select(selectItContractsEnableProcurementStrategy)
         .pipe(shouldEnable([ContractFields.ProcurementStrategyUuid])),
-
       this.store
         .select(selectItContractsEnableProcurementPlan)
         .pipe(shouldEnable([ContractFields.ProcurementPlanYear])),
-
       this.store
         .select(selectItContractsEnableProcurementInitiated)
         .pipe(shouldEnable([ContractFields.ProcurementInitiated])),
+
+      this.store.select(selectItContractsEnabledCreatedBy).pipe(shouldEnable([])),
+      this.store
+        .select(selectItContractsEnabledlastModifedBy)
+        .pipe(shouldEnable([ContractFields.LastEditedByUserName])),
+      this.store.select(selectItContractsEnabledlastModifedDate).pipe(shouldEnable([ContractFields.LastEditedAtDate])),
 
       this.store
         .select(selectItContractsEnableExternalPayment)
@@ -163,26 +184,19 @@ export class GridUIConfigService {
 
   private getItSystemUsageGridConfig(): Observable<UIConfigGridApplication[]> {
     const configObservables: Observable<UIConfigGridApplication>[] = [
-      combineLatest([
+      combineBooleansWithAnd([
         this.store.select(selectShowItContractModule),
         this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
-      ]).pipe(
-        map(([itContractModuleEnabled, selectContractActive]) => itContractModuleEnabled && selectContractActive),
-        shouldEnable([UsageFields.MainContractIsActive])
-      ),
-      combineLatest([
+      ]).pipe(shouldEnable([UsageFields.MainContractIsActive])),
+      combineBooleansWithAnd([
         this.store.select(selectShowItContractModule),
         this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
-      ]).pipe(
-        map(([itContractModuleEnabled]) => itContractModuleEnabled),
-        shouldEnable([UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv])
-      ),
+      ]).pipe(shouldEnable([UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv])),
 
-      combineLatest([
+      combineBooleansWithAnd([
         this.store.select(selectShowDataProcessingRegistrations),
         this.store.select(selectITSystemUsageEnableGdpr),
       ]).pipe(
-        map(([dataProcessingModuleEnabled, enableGdpr]) => dataProcessingModuleEnabled && enableGdpr),
         shouldEnable([
           UsageFields.DataProcessingRegistrationsConcludedAsCsv,
           UsageFields.DataProcessingRegistrationNamesAsCsv,
@@ -268,23 +282,17 @@ export class GridUIConfigService {
       this.store.select(selectDprEnableProcessors).pipe(shouldEnable([DprFields.DataProcessorNamesAsCsv])),
       this.store.select(selectDprEnableSubProcessors).pipe(shouldEnable([DprFields.SubDataProcessorNamesAsCsv])),
       // IT Systems Configuration
-      combineLatest([this.store.select(selectShowItSystemModule), this.store.select(selectDprEnableItSystems)]).pipe(
-        map(([itSystemModuleEnabled, itSystemsEnabled]) => itSystemModuleEnabled && itSystemsEnabled),
-        shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv])
-      ),
+      combineBooleansWithAnd([
+        this.store.select(selectShowItSystemModule),
+        this.store.select(selectDprEnableItSystems),
+      ]).pipe(shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv])),
 
       // Contracts Configurations
       this.store.select(selectDprEnableMainContract).pipe(shouldEnable([DprFields.ActiveAccordingToMainContract])),
-      combineLatest([
+      combineBooleansWithAnd([
         this.store.select(selectShowItContractModule),
         this.store.select(selectDprEnableAssociatedContracts),
-      ]).pipe(
-        map(
-          ([itContractsModuleEnabled, associatedContractsEnabled]) =>
-            itContractsModuleEnabled && associatedContractsEnabled
-        ),
-        shouldEnable([DprFields.ContractNamesAsCsv])
-      ),
+      ]).pipe(shouldEnable([DprFields.ContractNamesAsCsv])),
 
       // Oversight Configurations
       this.store.select(selectDprEnabledOversightInterval).pipe(shouldEnable([DprFields.OversightInterval])),
