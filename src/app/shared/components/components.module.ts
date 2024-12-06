@@ -80,8 +80,8 @@ import { CreateExternalReferenceDialogComponent } from './external-references-ma
 import { EditExternalReferenceDialogComponent } from './external-references-management/edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferenceDialogComponent } from './external-references-management/external-reference-dialog/external-reference-dialog.component';
 import { ExternalReferencesManagementComponent } from './external-references-management/external-references-management.component';
-import { FilterOptionsButtonComponent } from './filter-options-button/filter-options-button.component';
 import { FormGridComponent } from './form-grid/form-grid.component';
+import { GridOptionsButtonComponent } from './grid-options-button/grid-options-button.component';
 import { ChoiceTypeDropdownFilterComponent } from './grid/choice-type-dropdown-filter/choice-type-dropdown-filter.component';
 import { DateFilterComponent } from './grid/date-filter/date-filter.component';
 import { DropdownColumnDataFilterComponent } from './grid/dropdown-column-data-filter/dropdown-column-data-filter.component';
@@ -138,6 +138,8 @@ import { FileInputComponent } from './file-input/file-input.component';
 import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
 import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
 import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
+import { GridColumnConfigButtonsComponent } from './grid-options-button/grid-column-config-buttons/grid-column-config-buttons.component';
+import { GridFilterButtonsComponent } from './grid-options-button/grid-filter-buttons/grid-filter-buttons.component';
 import { GridUsagesConsequencesDialogComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
 import { UsageMigrationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-consequences-table/usage-migration-consequences-table.component';
 import { UsageMigrationRelationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-relation-consequences-table/usage-migration-relation-consequences-table.component';
@@ -258,7 +260,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ChoiceTypeDropdownFilterComponent,
     MenuButtonComponent,
     MenuButtonItemComponent,
-    FilterOptionsButtonComponent,
+    GridOptionsButtonComponent,
     DropdownColumnDataFilterComponent,
     GridUsagesDialogComponent,
     UsageLinkComponent,
@@ -298,6 +300,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GlobalOptionTypeGridComponent,
     PriorityButtonsComponent,
     ToggleButtonComponent,
+    GridFilterButtonsComponent,
+    GridColumnConfigButtonsComponent,
     GridUsagesDropdownDialogComponent,
     GridUsagesConsequencesDialogComponent,
     UsageMigrationConsequencesTableComponent,
@@ -414,7 +418,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     MenuButtonItemComponent,
     LocalAdminColumnConfigButtonComponent,
     ExportMenuButtonComponent,
-    FilterOptionsButtonComponent,
+    GridOptionsButtonComponent,
     CreateSubunitDialogComponent,
     DragAndDropTreeComponent,
     ResetToOrgColumnsConfigButtonComponent,
