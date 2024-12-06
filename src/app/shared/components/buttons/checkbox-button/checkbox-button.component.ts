@@ -10,6 +10,7 @@ export class CheckboxButtonComponent {
   @Input() disabled: boolean = false;
   @Input() backgroundWhite: boolean = false;
   @Input() isLarge: boolean = false;
+  @Input() tooltip?: string;
 
   @Output() valueChange = new EventEmitter<boolean>();
 
