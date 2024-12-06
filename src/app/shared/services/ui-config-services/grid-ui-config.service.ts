@@ -80,280 +80,174 @@ export class GridUIConfigService {
   }
 
   private getItContractGridConfig(): Observable<UIConfigGridApplication[]> {
-    const enabledContractId$ = this.store.select(selectItContractEnableContractId);
-    const enabledAgreementPeriod$ = this.store.select(selectItContractsEnableAgreementPeriod);
-    const enabledCriticality$ = this.store.select(selectItContractsEnableCriticality);
-    const enabledInternalSigner$ = this.store.select(selectItContractsEnableInternalSigner);
-    const enabledContractType$ = this.store.select(selectItContractsEnableContractType);
-    const enabledContractTemplate$ = this.store.select(selectItContractsEnableTemplate);
-    const enabledPurchaseForm$ = this.store.select(selectItContractsEnablePurchaseForm);
-    const enabledProcurementStrategy$ = this.store.select(selectItContractsEnableProcurementStrategy);
-    const enabledProcurementPlan$ = this.store.select(selectItContractsEnableProcurementPlan);
-    const enabledProcurementInitiated$ = this.store.select(selectItContractsEnableProcurementInitiated);
-    const enabledExternalPayment$ = this.store.select(selectItContractsEnableExternalPayment);
-    const enabledPaymentModel$ = this.store.select(selectItContractsEnablePaymentModel);
-    const enabledAgreementDeadlines$ = this.store.select(selectItContractsEnableAgreementDeadlines);
-    const enabledTermination$ = this.store.select(selectItContractsEnableTermination);
-    const enabledContractRoles$ = this.store.select(selectItContractEnableContractRoles);
+    const configObservables: Observable<UIConfigGridApplication>[] = [
+      this.store
+        .select(selectShowItSystemModule)
+        .pipe(
+          shouldEnable([
+            ContractFields.ItSystemUsages,
+            ContractFields.NumberOfAssociatedSystemRelations,
+            ContractFields.SourceEntityUuid,
+          ])
+        ),
 
-    const itSystemModuleEnabled$ = this.store.select(selectShowItSystemModule);
-    const dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
+      this.store
+        .select(selectShowDataProcessingRegistrations)
+        .pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
+      this.store.select(selectItContractEnableContractId).pipe(shouldEnable([ContractFields.ContractId])),
 
-    return combineLatest([
-      enabledContractId$,
-      enabledAgreementPeriod$,
-      enabledCriticality$,
-      enabledInternalSigner$,
-      enabledContractType$,
-      enabledContractTemplate$,
-      enabledPurchaseForm$,
-      enabledProcurementStrategy$,
-      enabledProcurementPlan$,
-      enabledProcurementInitiated$,
-      enabledExternalPayment$,
-      enabledPaymentModel$,
-      enabledAgreementDeadlines$,
-      enabledTermination$,
-      enabledContractRoles$,
-      itSystemModuleEnabled$,
-      dataProcessingModuleEnabled$,
-    ]).pipe(
-      map(
-        ([
-          enabledContractId,
-          enabledAgreementPeriod,
-          enabledCriticality,
-          enabledInternalSigner,
-          enabledContractType,
-          enabledContractTemplate,
-          enabledPurchaseForm,
-          enabledProcurementStrategy,
-          enabledProcurementPlan,
-          enabledProcurementInitiated,
-          enabledExternalPayment,
-          enabledPaymentModel,
-          enabledAgreementDeadlines,
-          enabledTermination,
-          enabledContractRoles,
-          itSystemModuleEnabled,
-          dataProcessingModuleEnabled,
-        ]): UIConfigGridApplication[] => [
-          {
-            shouldEnable: itSystemModuleEnabled,
-            columnNamesToConfigure: [
-              ContractFields.ItSystemUsages,
-              ContractFields.NumberOfAssociatedSystemRelations,
-              ContractFields.SourceEntityUuid,
-            ],
-          },
-          {
-            shouldEnable: dataProcessingModuleEnabled,
-            columnNamesToConfigure: [ContractFields.DataProcessingAgreements],
-          },
-          {
-            shouldEnable: enabledContractId,
-            columnNamesToConfigure: [ContractFields.ContractId],
-          },
-          {
-            shouldEnable: enabledAgreementPeriod,
-            columnNamesToConfigure: [ContractFields.Concluded, ContractFields.ExpirationDate],
-          },
-          {
-            shouldEnable: enabledCriticality,
-            columnNamesToConfigure: [ContractFields.CriticalityUuid],
-          },
-          {
-            shouldEnable: enabledInternalSigner,
-            columnNamesToConfigure: [ContractFields.ContractSigner],
-          },
-          {
-            shouldEnable: enabledContractType,
-            columnNamesToConfigure: [ContractFields.ContractTypeUuid],
-          },
-          {
-            shouldEnable: enabledContractTemplate,
-            columnNamesToConfigure: [ContractFields.ContractTemplateUuid],
-          },
-          {
-            shouldEnable: enabledPurchaseForm,
-            columnNamesToConfigure: [ContractFields.PurchaseFormUuid],
-          },
-          {
-            shouldEnable: enabledProcurementStrategy,
-            columnNamesToConfigure: [ContractFields.ProcurementStrategyUuid],
-          },
-          {
-            shouldEnable: enabledProcurementPlan,
-            columnNamesToConfigure: [ContractFields.ProcurementPlanYear],
-          },
-          {
-            shouldEnable: enabledProcurementInitiated,
-            columnNamesToConfigure: [ContractFields.ProcurementInitiated],
-          },
-          {
-            shouldEnable: enabledExternalPayment,
-            columnNamesToConfigure: [
-              ContractFields.AccumulatedAcquisitionCost,
-              ContractFields.AccumulatedOperationCost,
-              ContractFields.AccumulatedOtherCost,
-              ContractFields.LatestAuditDate,
-              ContractFields.AuditStatusWhite,
-              ContractFields.AuditStatusYellow,
-              ContractFields.AuditStatusRed,
-              ContractFields.AuditStatusGreen,
-            ],
-          },
-          {
-            shouldEnable: enabledPaymentModel,
-            columnNamesToConfigure: [
-              ContractFields.OperationRemunerationBegunDate,
-              ContractFields.PaymentModelUuid,
-              ContractFields.PaymentFrequencyUuid,
-            ],
-          },
-          {
-            shouldEnable: enabledAgreementDeadlines,
-            columnNamesToConfigure: [
-              ContractFields.Duration,
-              ContractFields.OptionExtendUuid,
-              ContractFields.IrrevocableTo,
-            ],
-          },
-          {
-            shouldEnable: enabledTermination,
-            columnNamesToConfigure: [ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt],
-          },
-          {
-            shouldEnable: enabledContractRoles,
-            columnNamesToConfigure: [],
-            columnNameSubstringsToConfigure: ['Roles.Role'],
-          },
-        ]
-      )
-    );
+      this.store
+        .select(selectItContractsEnableAgreementPeriod)
+        .pipe(shouldEnable([ContractFields.Concluded, ContractFields.ExpirationDate])),
+
+      this.store.select(selectItContractsEnableCriticality).pipe(shouldEnable([ContractFields.CriticalityUuid])),
+
+      this.store.select(selectItContractsEnableInternalSigner).pipe(shouldEnable([ContractFields.ContractSigner])),
+
+      this.store.select(selectItContractsEnableContractType).pipe(shouldEnable([ContractFields.ContractTypeUuid])),
+
+      this.store.select(selectItContractsEnableTemplate).pipe(shouldEnable([ContractFields.ContractTemplateUuid])),
+
+      this.store.select(selectItContractsEnablePurchaseForm).pipe(shouldEnable([ContractFields.PurchaseFormUuid])),
+
+      this.store
+        .select(selectItContractsEnableProcurementStrategy)
+        .pipe(shouldEnable([ContractFields.ProcurementStrategyUuid])),
+
+      this.store
+        .select(selectItContractsEnableProcurementPlan)
+        .pipe(shouldEnable([ContractFields.ProcurementPlanYear])),
+
+      this.store
+        .select(selectItContractsEnableProcurementInitiated)
+        .pipe(shouldEnable([ContractFields.ProcurementInitiated])),
+
+      this.store
+        .select(selectItContractsEnableExternalPayment)
+        .pipe(
+          shouldEnable([
+            ContractFields.AccumulatedAcquisitionCost,
+            ContractFields.AccumulatedOperationCost,
+            ContractFields.AccumulatedOtherCost,
+            ContractFields.LatestAuditDate,
+            ContractFields.AuditStatusWhite,
+            ContractFields.AuditStatusYellow,
+            ContractFields.AuditStatusRed,
+            ContractFields.AuditStatusGreen,
+          ])
+        ),
+
+      this.store
+        .select(selectItContractsEnablePaymentModel)
+        .pipe(
+          shouldEnable([
+            ContractFields.OperationRemunerationBegunDate,
+            ContractFields.PaymentModelUuid,
+            ContractFields.PaymentFrequencyUuid,
+          ])
+        ),
+
+      this.store
+        .select(selectItContractsEnableAgreementDeadlines)
+        .pipe(shouldEnable([ContractFields.Duration, ContractFields.OptionExtendUuid, ContractFields.IrrevocableTo])),
+
+      this.store
+        .select(selectItContractsEnableTermination)
+        .pipe(shouldEnable([ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt])),
+
+      this.store.select(selectItContractEnableContractRoles).pipe(shouldEnable([], ['Roles.Role'])),
+    ];
+
+    return combineLatest(configObservables);
   }
 
   private getItSystemUsageGridConfig(): Observable<UIConfigGridApplication[]> {
-    const enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
-    const enableUsagePeriod$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
-    const enableSelectContractToDetermineIfItSystemIsActive$ = this.store.select(
-      selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive
-    );
-    const enableOrganization$ = this.store.select(selectITSystemUsageEnableTabOrganization);
-    const enableSystemRoles$ = this.store.select(selectITSystemUsageEnableTabSystemRoles);
-    const enableReferences$ = this.store.select(selectITSystemUsageEnableLocalReferences);
-    const enableGdpr$ = this.store.select(selectITSystemUsageEnableGdpr);
-    const enableArchiving$ = this.store.select(selectITSystemUsageEnableTabArchiving);
-    const enableSystemRelations$ = this.store.select(selectITSystemUsageEnableSystemRelations);
-    const itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
-    const dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
+    const configObservables: Observable<UIConfigGridApplication>[] = [
+      combineLatest([
+        this.store.select(selectShowItContractModule),
+        this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
+      ]).pipe(
+        map(([itContractModuleEnabled, selectContractActive]) => itContractModuleEnabled && selectContractActive),
+        shouldEnable([UsageFields.MainContractIsActive])
+      ),
+      combineLatest([
+        this.store.select(selectShowItContractModule),
+        this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
+      ]).pipe(
+        map(([itContractModuleEnabled]) => itContractModuleEnabled),
+        shouldEnable([UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv])
+      ),
 
-    return combineLatest([
-      enableLifeCycleStatus$,
-      enableUsagePeriod$,
-      enableSelectContractToDetermineIfItSystemIsActive$,
-      enableOrganization$,
-      enableSystemRoles$,
-      enableReferences$,
-      enableGdpr$,
-      enableArchiving$,
-      enableSystemRelations$,
-      itContractsModuleEnabled$,
-      dataProcessingModuleEnabled$,
-    ]).pipe(
-      map(
-        ([
-          enableLifeCycleStatus,
-          enableUsagePeriod,
-          enableSelectContractToDetermineIfItSystemIsActive,
-          enableOrganization,
-          enableSystemRoles,
-          enableReferences,
-          enableGdpr,
-          enableArchiving,
-          enableSystemRelations,
-          itContractsModuleEnabled,
-          dataProcessingModuleEnabled,
-        ]): UIConfigGridApplication[] => [
-          {
-            shouldEnable: itContractsModuleEnabled && enableSelectContractToDetermineIfItSystemIsActive,
-            columnNamesToConfigure: [UsageFields.MainContractIsActive],
-          },
-          {
-            shouldEnable: itContractsModuleEnabled,
-            columnNamesToConfigure: [UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv],
-          },
-          {
-            shouldEnable: dataProcessingModuleEnabled && enableGdpr,
-            columnNamesToConfigure: [
-              UsageFields.DataProcessingRegistrationsConcludedAsCsv,
-              UsageFields.DataProcessingRegistrationNamesAsCsv,
-            ],
-          },
-          {
-            shouldEnable: enableLifeCycleStatus,
-            columnNamesToConfigure: [UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle],
-          },
-          {
-            shouldEnable: enableUsagePeriod,
-            columnNamesToConfigure: [
-              UsageFields.ExpirationDate,
-              UsageFields.Concluded,
-              UsageFields.ActiveAccordingToValidityPeriod,
-            ],
-          },
-          {
-            shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
-            columnNamesToConfigure: [UsageFields.MainContractSupplierName],
-          },
-          {
-            shouldEnable: enableOrganization,
-            columnNamesToConfigure: [
-              UsageFields.ResponsibleOrganizationUnitName,
-              UsageFields.RelevantOrganizationUnitNamesAsCsv,
-            ],
-          },
-          {
-            shouldEnable: enableSystemRoles,
-            columnNamesToConfigure: [],
-            columnNameSubstringsToConfigure: ['Roles.Role'],
-          },
-          {
-            shouldEnable: enableReferences,
-            columnNamesToConfigure: [UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId],
-          },
-          {
-            shouldEnable: enableGdpr,
-            columnNamesToConfigure: [
-              UsageFields.SensitiveDataLevelsAsCsv,
-              UsageFields.LocalReferenceDocumentId,
-              UsageFields.RiskSupervisionDocumentationName,
-              UsageFields.LinkToDirectoryName,
-              UsageFields.HostedAt,
-              UsageFields.GeneralPurpose,
-              UsageFields.RiskAssessmentDate,
-              UsageFields.PlannedRiskAssessmentDate,
-            ],
-          },
-          {
-            shouldEnable: enableArchiving,
-            columnNamesToConfigure: [
-              UsageFields.ArchiveDuty,
-              UsageFields.IsHoldingDocument,
-              UsageFields.ActiveArchivePeriodEndDate,
-            ],
-          },
-          {
-            shouldEnable: enableSystemRelations,
-            columnNamesToConfigure: [
-              UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv,
-              UsageFields.DependsOnInterfacesNamesAsCsv,
-              UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv,
-            ],
-          },
-        ]
-      )
-    );
+      combineLatest([
+        this.store.select(selectShowDataProcessingRegistrations),
+        this.store.select(selectITSystemUsageEnableGdpr),
+      ]).pipe(
+        map(([dataProcessingModuleEnabled, enableGdpr]) => dataProcessingModuleEnabled && enableGdpr),
+        shouldEnable([
+          UsageFields.DataProcessingRegistrationsConcludedAsCsv,
+          UsageFields.DataProcessingRegistrationNamesAsCsv,
+        ])
+      ),
+
+      this.store
+        .select(selectITSystemUsageEnableLifeCycleStatus)
+        .pipe(shouldEnable([UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle])),
+
+      this.store
+        .select(selectITSystemUsageEnableFrontPageUsagePeriod)
+        .pipe(
+          shouldEnable([UsageFields.ExpirationDate, UsageFields.Concluded, UsageFields.ActiveAccordingToValidityPeriod])
+        ),
+
+      this.store
+        .select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive)
+        .pipe(shouldEnable([UsageFields.MainContractSupplierName])),
+
+      this.store
+        .select(selectITSystemUsageEnableTabOrganization)
+        .pipe(
+          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
+        ),
+
+      this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
+
+      this.store
+        .select(selectITSystemUsageEnableLocalReferences)
+        .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
+
+      this.store
+        .select(selectITSystemUsageEnableGdpr)
+        .pipe(
+          shouldEnable([
+            UsageFields.SensitiveDataLevelsAsCsv,
+            UsageFields.LocalReferenceDocumentId,
+            UsageFields.RiskSupervisionDocumentationName,
+            UsageFields.LinkToDirectoryName,
+            UsageFields.HostedAt,
+            UsageFields.GeneralPurpose,
+            UsageFields.RiskAssessmentDate,
+            UsageFields.PlannedRiskAssessmentDate,
+          ])
+        ),
+
+      this.store
+        .select(selectITSystemUsageEnableTabArchiving)
+        .pipe(
+          shouldEnable([UsageFields.ArchiveDuty, UsageFields.IsHoldingDocument, UsageFields.ActiveArchivePeriodEndDate])
+        ),
+
+      this.store
+        .select(selectITSystemUsageEnableSystemRelations)
+        .pipe(
+          shouldEnable([
+            UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv,
+            UsageFields.DependsOnInterfacesNamesAsCsv,
+            UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv,
+          ])
+        ),
+    ];
+
+    return combineLatest(configObservables);
   }
 
   private getDataProcessingGridConfig(): Observable<UIConfigGridApplication[]> {
