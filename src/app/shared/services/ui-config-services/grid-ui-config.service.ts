@@ -1,3 +1,4 @@
+/* eslint-disable @ngrx/avoid-combining-selectors */
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable } from 'rxjs';
@@ -356,161 +357,61 @@ export class GridUIConfigService {
   }
 
   private getDataProcessingGridConfig(): Observable<UIConfigGridApplication[]> {
-    const itSystemsEnabled$ = this.store.select(selectDprEnableItSystems);
-    const dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
+    const configObservables: Observable<UIConfigGridApplication>[] = [
+      // Frontpage Configurations
+      this.store.select(selectDprEnableDataResponsible).pipe(shouldEnable([DprFields.DataResponsibleUuid])),
+      this.store.select(selectDprEnableStatus).pipe(shouldEnable([DprFields.IsActive])),
+      this.store
+        .select(selectDprEnableLastChangedBy)
+        .pipe(shouldEnable([DprFields.LastChangedById, DprFields.LastChangedByName])),
+      this.store.select(selectDprEnableLastChangedAt).pipe(shouldEnable([DprFields.LastChangedAt])),
+      this.store
+        .select(selectDprEnableAgreementConcluded)
+        .pipe(shouldEnable([DprFields.IsAgreementConcluded, DprFields.AgreementConcludedAt])),
+      this.store
+        .select(selectDprEnableTransferBasis)
+        .pipe(shouldEnable([DprFields.BasisForTransferUuid, DprFields.TransferToInsecureThirdCountries])),
+      this.store.select(selectDprEnableProcessors).pipe(shouldEnable([DprFields.DataProcessorNamesAsCsv])),
+      this.store.select(selectDprEnableSubProcessors).pipe(shouldEnable([DprFields.SubDataProcessorNamesAsCsv])),
+      // IT Systems Configuration
+      combineLatest([this.store.select(selectShowItSystemModule), this.store.select(selectDprEnableItSystems)]).pipe(
+        map(([itSystemModuleEnabled, itSystemsEnabled]) => itSystemModuleEnabled && itSystemsEnabled),
+        shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv])
+      ),
 
-    const dataResponsibleEnabled$ = this.store.select(selectDprEnableDataResponsible);
-    const statusEnabled$ = this.store.select(selectDprEnableStatus);
-    const lastChangedByEnabled$ = this.store.select(selectDprEnableLastChangedBy);
-    const lastChangedAtEnabled$ = this.store.select(selectDprEnableLastChangedAt);
-    const agreementConcludedEnabled$ = this.store.select(selectDprEnableAgreementConcluded);
-    const transferBasisEnabled$ = this.store.select(selectDprEnableTransferBasis);
-    const processorsEnabled$ = this.store.select(selectDprEnableProcessors);
-    const subProcessorsEnabled$ = this.store.select(selectDprEnableSubProcessors);
+      // Contracts Configurations
+      this.store.select(selectDprEnableMainContract).pipe(shouldEnable([DprFields.ActiveAccordingToMainContract])),
+      combineLatest([
+        this.store.select(selectShowItContractModule),
+        this.store.select(selectDprEnableAssociatedContracts),
+      ]).pipe(
+        map(
+          ([itContractsModuleEnabled, associatedContractsEnabled]) =>
+            itContractsModuleEnabled && associatedContractsEnabled
+        ),
+        shouldEnable([DprFields.ContractNamesAsCsv])
+      ),
 
-    const mainContract$ = this.store.select(selectDprEnableMainContract);
-    const associatedContractsEnabled$ = this.store.select(selectDprEnableAssociatedContracts);
+      // Oversight Configurations
+      this.store.select(selectDprEnabledOversightInterval).pipe(shouldEnable([DprFields.OversightInterval])),
+      this.store
+        .select(selectDprEnableScheduledInspectionDate)
+        .pipe(shouldEnable([DprFields.OversightScheduledInspectionDate])),
+      this.store.select(selectDprEnableOversightOptions).pipe(shouldEnable([DprFields.OversightOptionNamesAsCsv])),
+      this.store
+        .select(selectDprEnableOversights)
+        .pipe(shouldEnable([DprFields.IsOversightCompleted, DprFields.LatestOversightDate])),
 
-    const oversightIntervalEnabled$ = this.store.select(selectDprEnabledOversightInterval);
-    const nextOversightEnabled$ = this.store.select(selectDprEnableScheduledInspectionDate);
-    const oversightOptionsEnabled$ = this.store.select(selectDprEnableOversightOptions);
-    const oversightsEnabled$ = this.store.select(selectDprEnableOversights);
+      // Roles Configuration
+      this.store.select(selectDprEnableRoles).pipe(shouldEnable([], ['Roles.Role'])),
 
-    const referenceEnabled$ = this.store.select(selectDprEnableReferences);
-    const itSystemModuleEnabled$ = this.store.select(selectShowItSystemModule);
-    const itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
+      // References Configuration
+      this.store
+        .select(selectDprEnableReferences)
+        .pipe(shouldEnable([DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId])),
+    ];
 
-    return combineLatest([
-      itSystemsEnabled$,
-      dprRolesEnabled$,
-
-      dataResponsibleEnabled$,
-      statusEnabled$,
-      lastChangedByEnabled$,
-      lastChangedAtEnabled$,
-      agreementConcludedEnabled$,
-      transferBasisEnabled$,
-      processorsEnabled$,
-      subProcessorsEnabled$,
-
-      mainContract$,
-      associatedContractsEnabled$,
-
-      oversightIntervalEnabled$,
-      nextOversightEnabled$,
-      oversightOptionsEnabled$,
-      oversightsEnabled$,
-
-      referenceEnabled$,
-      itSystemModuleEnabled$,
-      itContractsModuleEnabled$,
-    ]).pipe(
-      map(
-        ([
-          itSystemsEnabled,
-          dprRolesEnabled,
-
-          dataResponsibleEnabled,
-          statusEnabled,
-          lastChangedByEnabled,
-          lastChangedAtEnabled,
-          agreementConcludedEnabled,
-          transferBasisEnabled,
-          processorsEnabled,
-          subProcessorsEnabled,
-
-          mainContractEnabled,
-          associatedContractsEnabled,
-
-          oversightIntervalEnabled,
-          scheduledInspectionDate,
-          oversightOptionsEnabled,
-          oversightsEnabled,
-
-          referenceEnabled,
-          itSystemModuleEnabled,
-          itContractsModuleEnabled,
-        ]): UIConfigGridApplication[] => {
-          return [
-            //Frontpage
-            {
-              shouldEnable: dataResponsibleEnabled,
-              columnNamesToConfigure: [DprFields.DataResponsibleUuid],
-            },
-            {
-              shouldEnable: statusEnabled,
-              columnNamesToConfigure: [DprFields.IsActive],
-            },
-            {
-              shouldEnable: lastChangedByEnabled,
-              columnNamesToConfigure: [DprFields.LastChangedById, DprFields.LastChangedByName],
-            },
-            {
-              shouldEnable: lastChangedAtEnabled,
-              columnNamesToConfigure: [DprFields.LastChangedAt],
-            },
-            {
-              shouldEnable: agreementConcludedEnabled,
-              columnNamesToConfigure: [DprFields.IsAgreementConcluded, DprFields.AgreementConcludedAt],
-            },
-            {
-              shouldEnable: transferBasisEnabled,
-              columnNamesToConfigure: [DprFields.BasisForTransferUuid, DprFields.TransferToInsecureThirdCountries],
-            },
-            {
-              shouldEnable: processorsEnabled,
-              columnNamesToConfigure: [DprFields.DataProcessorNamesAsCsv],
-            },
-            {
-              shouldEnable: subProcessorsEnabled,
-              columnNamesToConfigure: [DprFields.SubDataProcessorNamesAsCsv],
-            },
-            // IT Systems
-            {
-              shouldEnable: itSystemModuleEnabled && itSystemsEnabled,
-              columnNamesToConfigure: [DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv],
-            },
-            //Contracts
-            {
-              shouldEnable: mainContractEnabled,
-              columnNamesToConfigure: [DprFields.ActiveAccordingToMainContract],
-            },
-            {
-              shouldEnable: itContractsModuleEnabled && associatedContractsEnabled,
-              columnNamesToConfigure: [DprFields.ContractNamesAsCsv],
-            },
-            //Oversight
-            {
-              shouldEnable: oversightIntervalEnabled,
-              columnNamesToConfigure: [DprFields.OversightInterval],
-            },
-            {
-              shouldEnable: scheduledInspectionDate,
-              columnNamesToConfigure: [DprFields.OversightScheduledInspectionDate],
-            },
-            {
-              shouldEnable: oversightOptionsEnabled,
-              columnNamesToConfigure: [DprFields.OversightOptionNamesAsCsv],
-            },
-            {
-              shouldEnable: oversightsEnabled,
-              columnNamesToConfigure: [DprFields.IsOversightCompleted, DprFields.LatestOversightDate],
-            },
-            //Roles
-            {
-              shouldEnable: dprRolesEnabled,
-              columnNamesToConfigure: [],
-              columnNameSubstringsToConfigure: ['Roles.Role'],
-            },
-            //References
-            {
-              shouldEnable: referenceEnabled,
-              columnNamesToConfigure: [DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId],
-            },
-          ];
-        }
-      )
-    );
+    return combineLatest(configObservables);
   }
 
   private getGdprGridConfig(): Observable<UIConfigGridApplication[]> {
