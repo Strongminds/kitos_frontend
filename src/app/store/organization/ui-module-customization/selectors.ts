@@ -42,6 +42,11 @@ export const selectModuleConfig = (module: UIModuleConfigKey) =>
     return state.uiModuleConfigs.find((c) => c.module == module);
   });
 
+export const selectUIConfigLoading = createSelector(
+  selectUIModuleCustomizationState,
+  (state: UIModuleConfigState) => state.loading
+);
+
 //Data processing
 const createDprTabEnabledSelector = (tabKey: string) =>
   createTabEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, tabKey);
