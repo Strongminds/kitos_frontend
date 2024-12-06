@@ -43,9 +43,15 @@ export const ItContractsUiBluePrint = {
         parentContract: {
           text: $localize`Overordnet kontrakt`,
         },
+        responsibleUnit: {
+          text: $localize`Ansvarlig enhed`,
+        },
         internalSigner: {
           text: $localize`Kontraktunderskriver`,
           helpText: "Herunder: 'Underskriver', 'Underskrevet' og 'Dato'",
+        },
+        supplier: {
+          text: $localize`Leverandør`,
         },
         externalSigner: {
           text: $localize`Leverandørs underskrift`,

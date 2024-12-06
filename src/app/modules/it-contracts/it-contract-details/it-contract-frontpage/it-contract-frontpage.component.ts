@@ -23,6 +23,7 @@ import {
   selectItContractValidity,
 } from 'src/app/store/it-contract/selectors';
 import {
+  selectIContractsEnableSupplier,
   selectItContractEnableContractId,
   selectItContractsEnableAgreementPeriod,
   selectItContractsEnableContractType,
@@ -39,6 +40,7 @@ import {
   selectItContractsEnableProcurementPlan,
   selectItContractsEnableProcurementStrategy,
   selectItContractsEnablePurchaseForm,
+  selectItContractsEnableResponsibleUnit,
   selectItContractsEnableTemplate,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
@@ -186,8 +188,19 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly contractNotesEnabled$ = this.store.select(selectItContractsEnableNotes);
   public readonly contractParentContractEnabled$ = this.store.select(selectItContractsEnableParentContract);
 
+  public readonly contractResponsibleUnitEnabled$ = this.store.select(selectItContractsEnableResponsibleUnit);
   public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableInternalSigner);
+  public readonly showResponsibleCard$ = combineBooleansWithOr([
+    this.contractResponsibleUnitEnabled$,
+    this.contractInternalSignerEnabled$,
+  ]);
+
+  public readonly contractSupplierEnabled$ = this.store.select(selectIContractsEnableSupplier);
   public readonly contractExternalSignerEnabled$ = this.store.select(selectItContractsEnableExternalSigner);
+  public readonly showSupplierCard$ = combineBooleansWithOr([
+    this.contractSupplierEnabled$,
+    this.contractExternalSignerEnabled$,
+  ]);
 
   public readonly contractProcurementStrategyEnabled$ = this.store.select(selectItContractsEnableProcurementStrategy);
   public readonly contractProcurementPlanEnabled$ = this.store.select(selectItContractsEnableProcurementPlan);
@@ -201,6 +214,11 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly contractsCreatedByEnabled$ = this.store.select(selectItContractsEnabledCreatedBy);
   public readonly contractsLastModifiedByEnabled$ = this.store.select(selectItContractsEnabledlastModifedBy);
   public readonly contractsLastModifiedDateEnabled$ = this.store.select(selectItContractsEnabledlastModifedDate);
+  public readonly showHistoryCard$ = combineBooleansWithOr([
+    this.contractsCreatedByEnabled$,
+    this.contractsLastModifiedByEnabled$,
+    this.contractsLastModifiedDateEnabled$,
+  ]);
 
   constructor(
     private readonly store: Store,

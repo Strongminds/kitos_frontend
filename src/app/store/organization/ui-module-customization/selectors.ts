@@ -144,7 +144,9 @@ export const selectItContractsEnableAgreementPeriod = createItContractFrontpageF
 export const selectItContractsEnableNotes = createItContractFrontpageFieldSelector('notes');
 export const selectItContractsEnableParentContract = createItContractFrontpageFieldSelector('parentContract');
 
+export const selectItContractsEnableResponsibleUnit = createItContractFrontpageFieldSelector('responsibleUnit');
 export const selectItContractsEnableInternalSigner = createItContractFrontpageFieldSelector('internalSigner');
+export const selectIContractsEnableSupplier = createItContractFrontpageFieldSelector('supplier');
 export const selectItContractsEnableExternalSigner = createItContractFrontpageFieldSelector('externalSigner');
 
 export const selectItContractsEnableProcurementStrategy = createItContractFrontpageFieldSelector('procurementStrategy');
@@ -153,8 +155,8 @@ export const selectItContractsEnableProcurementInitiated =
   createItContractFrontpageFieldSelector('procurementInitiated');
 
   export const selectItContractsEnabledCreatedBy = createItContractFrontpageFieldSelector('createdBy');
-  export const selectItContractsEnabledlastModifedBy = createItContractFrontpageFieldSelector('lastModifedBy');
-  export const selectItContractsEnabledlastModifedDate = createItContractFrontpageFieldSelector('lastModifedDate');
+  export const selectItContractsEnabledlastModifedBy = createItContractFrontpageFieldSelector('lastModifiedBy');
+  export const selectItContractsEnabledlastModifedDate = createItContractFrontpageFieldSelector('lastModifiedDate');
 
 
 
