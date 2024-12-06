@@ -94,6 +94,7 @@ export class GridUIConfigService {
     const enabledAgreementDeadlines$ = this.store.select(selectItContractsEnableAgreementDeadlines);
     const enabledTermination$ = this.store.select(selectItContractsEnableTermination);
     const enabledContractRoles$ = this.store.select(selectItContractEnableContractRoles);
+
     const itSystemModuleEnabled$ = this.store.select(selectShowItSystemModule);
     const dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
@@ -513,14 +514,24 @@ export class GridUIConfigService {
   }
 
   private getGdprGridConfig(): Observable<UIConfigGridApplication[]> {
-    const enabledPlannedRiskAssesmentDate$ = this.store.select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate);
-    return combineLatest([enabledPlannedRiskAssesmentDate$]).pipe(
-      map(([enabledPlannedRiskAssesmentDate]) => [
-        {
-          shouldEnable: enabledPlannedRiskAssesmentDate,
-          columnNamesToConfigure: [GdprFields.PLANNED_RISK_ASSESSMENT_DATE],
-        },
-      ])
-    );
+    return combineLatest([
+      this.store
+        .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
+        .pipe(shouldEnable([GdprFields.PLANNED_RISK_ASSESSMENT_DATE])),
+    ]);
   }
+}
+
+function shouldEnable(
+  columnNamesToConfigure: string[],
+  columnNameSubstringsToConfigure: string[] = []
+): (source: Observable<boolean>) => Observable<UIConfigGridApplication> {
+  return (source: Observable<boolean>) =>
+    source.pipe(
+      map((shouldEnable) => ({
+        shouldEnable,
+        columnNamesToConfigure,
+        columnNameSubstringsToConfigure,
+      }))
+    );
 }
