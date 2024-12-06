@@ -281,7 +281,7 @@ export class GridUIConfigService {
 
   private getDataProcessingGridConfig(): Observable<UIConfigGridApplication[]> {
     const configObservables: Observable<UIConfigGridApplication>[] = [
-      // Frontpage Configurations
+      // Frontpage
       this.store.select(selectDprEnableDataResponsible).pipe(shouldEnable([DprFields.DataResponsibleUuid])),
       this.store.select(selectDprEnableStatus).pipe(shouldEnable([DprFields.IsActive])),
       this.store
@@ -296,20 +296,20 @@ export class GridUIConfigService {
         .pipe(shouldEnable([DprFields.BasisForTransferUuid, DprFields.TransferToInsecureThirdCountries])),
       this.store.select(selectDprEnableProcessors).pipe(shouldEnable([DprFields.DataProcessorNamesAsCsv])),
       this.store.select(selectDprEnableSubProcessors).pipe(shouldEnable([DprFields.SubDataProcessorNamesAsCsv])),
-      // IT Systems Configuration
+      // IT Systems
       combineBooleansWithAnd([
         this.store.select(selectShowItSystemModule),
         this.store.select(selectDprEnableItSystems),
       ]).pipe(shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv])),
 
-      // Contracts Configurations
+      // Contracts
       this.store.select(selectDprEnableMainContract).pipe(shouldEnable([DprFields.ActiveAccordingToMainContract])),
       combineBooleansWithAnd([
         this.store.select(selectShowItContractModule),
         this.store.select(selectDprEnableAssociatedContracts),
       ]).pipe(shouldEnable([DprFields.ContractNamesAsCsv])),
 
-      // Oversight Configurations
+      // Oversight
       this.store.select(selectDprEnabledOversightInterval).pipe(shouldEnable([DprFields.OversightInterval])),
       this.store
         .select(selectDprEnableScheduledInspectionDate)
@@ -319,10 +319,10 @@ export class GridUIConfigService {
         .select(selectDprEnableOversights)
         .pipe(shouldEnable([DprFields.IsOversightCompleted, DprFields.LatestOversightDate])),
 
-      // Roles Configuration
+      // Roles
       this.store.select(selectDprEnableRoles).pipe(shouldEnable([], ['Roles.Role'])),
 
-      // References Configuration
+      // References
       this.store
         .select(selectDprEnableReferences)
         .pipe(shouldEnable([DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId])),
