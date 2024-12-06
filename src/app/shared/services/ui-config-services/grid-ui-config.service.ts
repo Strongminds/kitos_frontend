@@ -32,6 +32,8 @@ import {
   selectIContractsEnableSupplier,
   selectItContractEnableContractId,
   selectItContractEnableContractRoles,
+  selectItContractEnableDataProcessing,
+  selectItContractEnableReferences,
   selectItContractEnableRelations,
   selectItContractEnableSystemUsages,
   selectItContractsEnableAgreementDeadlines,
@@ -143,9 +145,10 @@ export class GridUIConfigService {
       ]).pipe(shouldEnable([ContractFields.NumberOfAssociatedSystemRelations])),
 
       //Data processing
-      this.store
-        .select(selectShowDataProcessingRegistrations)
-        .pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
+      combineBooleansWithAnd([
+        this.store.select(selectShowDataProcessingRegistrations),
+        this.store.select(selectItContractEnableDataProcessing),
+      ]).pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
 
       //Aggreement periods
       this.store
@@ -182,7 +185,13 @@ export class GridUIConfigService {
           ])
         ),
 
+      //Contract Roles
       this.store.select(selectItContractEnableContractRoles).pipe(shouldEnable([], ['Roles.Role'])),
+
+      //References
+      this.store
+        .select(selectItContractEnableReferences)
+        .pipe(shouldEnable([ContractFields.ActiveReferenceTitle, ContractFields.ActiveReferenceExternalReferenceId])),
     ];
 
     return combineLatest(configObservables);
