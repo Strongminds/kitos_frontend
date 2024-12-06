@@ -130,7 +130,7 @@ export const selectItContractEnableContractRoles = createItContractsTabEnabledSe
 export const selectItContractEnableHierarchy = createItContractsTabEnabledSelector('hierarchy');
 export const selectItContractEnableAdvis = createItContractsTabEnabledSelector('advice');
 export const selectItContractEnableReferences = createItContractsTabEnabledSelector('references');
-//Contracts > Frontpage selectors
+//Contracts > Frontpage
 const createItContractFrontpageFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'frontPage', fieldKey);
 export const selectItContractEnableContractId = createItContractFrontpageFieldSelector('contractId');
@@ -171,23 +171,12 @@ const createItContractsDeadlinesFieldSelector = (fieldKey: string) =>
 export const selectItContractsEnableAgreementDeadlines = createItContractsDeadlinesFieldSelector('agreementDeadlines');
 export const selectItContractsEnableTermination = createItContractsDeadlinesFieldSelector('termination');
 
-export const selectItContractsEnablePaymentModel = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy',
-  'paymentModel'
-);
-
-export const selectItContractsEnableExternalPayment = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy',
-  'extPayment'
-);
-
-export const selectItContractsEnableInternalPayment = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'economy',
-  'intPayment'
-);
+//Contracts > Economy
+const createItContractsEconomyFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'economy', fieldKey);
+export const selectItContractsEnablePaymentModel = createItContractsEconomyFieldSelector('paymentModel');
+export const selectItContractsEnableExternalPayment = createItContractsEconomyFieldSelector('extPayment');
+export const selectItContractsEnableInternalPayment = createItContractsEconomyFieldSelector('intPayment');
 
 function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: string): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);

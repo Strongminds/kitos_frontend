@@ -156,6 +156,7 @@ export class GridUIConfigService {
         .select(selectItContractsEnableTermination)
         .pipe(shouldEnable([ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt])),
 
+      //Economy
       this.store
         .select(selectItContractsEnableExternalPayment)
         .pipe(
@@ -180,10 +181,6 @@ export class GridUIConfigService {
             ContractFields.PaymentFrequencyUuid,
           ])
         ),
-
-      this.store
-        .select(selectItContractsEnableTermination)
-        .pipe(shouldEnable([ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt])),
 
       this.store.select(selectItContractEnableContractRoles).pipe(shouldEnable([], ['Roles.Role'])),
     ];
