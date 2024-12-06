@@ -1,6 +1,5 @@
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { uiConfigHelpTexts } from '../ui-config-helptexts';
-import { last } from 'lodash';
 
 export const ItContractsUiBluePrint = {
   module: UIModuleConfigKey.ItContract,
@@ -32,7 +31,7 @@ export const ItContractsUiBluePrint = {
         purchaseForm: {
           text: $localize`Indkøbsform`,
         },
-        sActive: {
+        isActive: {
           text: $localize`Gyldig`,
         },
         agreementPeriod: {
@@ -65,11 +64,11 @@ export const ItContractsUiBluePrint = {
           text: $localize`Oprettet af`,
         },
         lastModifiedBy: {
-          text: $localize`Sidst redigeret af`,
+          text: $localize`Sidst redigeret (bruger)`,
         },
         lastModifiedDate: {
-          text: $localize`Sidst redigeret dato`,
-        }
+          text: $localize`Sidst redigeret (dato)`,
+        },
       },
     },
     itSystems: {

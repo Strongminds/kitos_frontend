@@ -139,14 +139,25 @@ export const selectItContractsEnableContractType = createItContractFrontpageFiel
 export const selectItContractsEnableTemplate = createItContractFrontpageFieldSelector('template');
 export const selectItContractsEnableCriticality = createItContractFrontpageFieldSelector('criticality');
 export const selectItContractsEnablePurchaseForm = createItContractFrontpageFieldSelector('purchaseForm');
+export const selectItContractsEnableIsActive = createItContractFrontpageFieldSelector('isActive');
+export const selectItContractsEnableAgreementPeriod = createItContractFrontpageFieldSelector('agreementPeriod');
+export const selectItContractsEnableNotes = createItContractFrontpageFieldSelector('notes');
+export const selectItContractsEnableParentContract = createItContractFrontpageFieldSelector('parentContract');
+
+export const selectItContractsEnableInternalSigner = createItContractFrontpageFieldSelector('internalSigner');
+export const selectItContractsEnableExternalSigner = createItContractFrontpageFieldSelector('externalSigner');
+
 export const selectItContractsEnableProcurementStrategy = createItContractFrontpageFieldSelector('procurementStrategy');
 export const selectItContractsEnableProcurementPlan = createItContractFrontpageFieldSelector('procurementPlan');
 export const selectItContractsEnableProcurementInitiated =
   createItContractFrontpageFieldSelector('procurementInitiated');
-export const selectItContractsEnableExternalSigner = createItContractFrontpageFieldSelector('externalSigner');
-export const selectItContractsEnableInternalSigner = createItContractFrontpageFieldSelector('internalSigner');
-export const selectItContractsEnableAgreementPeriod = createItContractFrontpageFieldSelector('agreementPeriod');
-export const selectItContractsEnableIsActive = createItContractFrontpageFieldSelector('isActive');
+
+  export const selectItContractsEnabledCreatedBy = createItContractFrontpageFieldSelector('createdBy');
+  export const selectItContractsEnabledlastModifedBy = createItContractFrontpageFieldSelector('lastModifedBy');
+  export const selectItContractsEnabledlastModifedDate = createItContractFrontpageFieldSelector('lastModifedDate');
+
+
+
 //Other fields
 export const selectItContractsEnableAgreementDeadlines = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.ItContract,

@@ -59,6 +59,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
   public readonly economyTabEnabled$ = this.store.select(selectItContractEnableEconomy);
   public readonly contractRolesTabEnabled$ = this.store.select(selectItContractEnableContractRoles);
   public readonly notificationsTabEnabled$ = this.store.select(selectItContractEnableAdvis);
+
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
 
@@ -138,7 +139,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       })
     );
   }
-
+  
   public showDeleteDialog(): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
