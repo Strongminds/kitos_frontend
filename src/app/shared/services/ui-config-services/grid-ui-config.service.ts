@@ -32,6 +32,8 @@ import {
   selectIContractsEnableSupplier,
   selectItContractEnableContractId,
   selectItContractEnableContractRoles,
+  selectItContractEnableRelations,
+  selectItContractEnableSystemUsages,
   selectItContractsEnableAgreementDeadlines,
   selectItContractsEnableAgreementPeriod,
   selectItContractsEnableContractType,
@@ -91,20 +93,6 @@ export class GridUIConfigService {
 
   private getItContractGridConfig(): Observable<UIConfigGridApplication[]> {
     const configObservables: Observable<UIConfigGridApplication>[] = [
-      this.store
-        .select(selectShowItSystemModule)
-        .pipe(
-          shouldEnable([
-            ContractFields.ItSystemUsages,
-            ContractFields.NumberOfAssociatedSystemRelations,
-            ContractFields.SourceEntityUuid,
-          ])
-        ),
-
-      this.store
-        .select(selectShowDataProcessingRegistrations)
-        .pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
-
       //Frontpage
       this.store.select(selectItContractEnableContractId).pipe(shouldEnable([ContractFields.ContractId])),
       this.store.select(selectItContractsEnableContractType).pipe(shouldEnable([ContractFields.ContractTypeUuid])),
@@ -142,6 +130,22 @@ export class GridUIConfigService {
         .select(selectItContractsEnabledlastModifedBy)
         .pipe(shouldEnable([ContractFields.LastEditedByUserName])),
       this.store.select(selectItContractsEnabledlastModifedDate).pipe(shouldEnable([ContractFields.LastEditedAtDate])),
+
+      // IT Systems
+      combineBooleansWithAnd([
+        this.store.select(selectItContractEnableSystemUsages),
+        this.store.select(selectShowItSystemModule),
+      ]).pipe(shouldEnable([ContractFields.ItSystemUsages, ContractFields.ItSystemUsageUuidsAsCsv])),
+
+      combineBooleansWithAnd([
+        this.store.select(selectItContractEnableRelations),
+        this.store.select(selectShowItSystemModule),
+      ]).pipe(shouldEnable([ContractFields.NumberOfAssociatedSystemRelations])),
+
+      //Databehandling
+      this.store
+        .select(selectShowDataProcessingRegistrations)
+        .pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
 
       this.store
         .select(selectItContractsEnableExternalPayment)
