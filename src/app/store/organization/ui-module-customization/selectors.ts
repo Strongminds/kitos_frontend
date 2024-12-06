@@ -158,25 +158,18 @@ export const selectItContractsEnabledCreatedBy = createItContractFrontpageFieldS
 export const selectItContractsEnabledlastModifedBy = createItContractFrontpageFieldSelector('lastModifiedBy');
 export const selectItContractsEnabledlastModifedDate = createItContractFrontpageFieldSelector('lastModifiedDate');
 
-//Contracts > IT Systems
+// Contracts > IT Systems
 const createItContractsItSystemsFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'itSystems', fieldKey);
 export const selectItContractEnableAgreementElements = createItContractsItSystemsFieldSelector('agreementElements');
 export const selectItContractEnableSystemUsages = createItContractsItSystemsFieldSelector('systemUsages');
 export const selectItContractEnableRelations = createItContractsItSystemsFieldSelector('relations');
 
-//Other fields
-export const selectItContractsEnableAgreementDeadlines = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'deadlines',
-  'agreementDeadlines'
-);
-
-export const selectItContractsEnableTermination = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItContract,
-  'deadlines',
-  'termination'
-);
+//Contracts > Deadlines
+const createItContractsDeadlinesFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'deadlines', fieldKey);
+export const selectItContractsEnableAgreementDeadlines = createItContractsDeadlinesFieldSelector('agreementDeadlines');
+export const selectItContractsEnableTermination = createItContractsDeadlinesFieldSelector('termination');
 
 export const selectItContractsEnablePaymentModel = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.ItContract,

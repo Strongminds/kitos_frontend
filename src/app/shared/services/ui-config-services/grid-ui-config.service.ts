@@ -142,10 +142,19 @@ export class GridUIConfigService {
         this.store.select(selectShowItSystemModule),
       ]).pipe(shouldEnable([ContractFields.NumberOfAssociatedSystemRelations])),
 
-      //Databehandling
+      //Data processing
       this.store
         .select(selectShowDataProcessingRegistrations)
         .pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
+
+      //Aggreement periods
+      this.store
+        .select(selectItContractsEnableAgreementDeadlines)
+        .pipe(shouldEnable([ContractFields.Duration, ContractFields.OptionExtendUuid, ContractFields.IrrevocableTo])),
+
+      this.store
+        .select(selectItContractsEnableTermination)
+        .pipe(shouldEnable([ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt])),
 
       this.store
         .select(selectItContractsEnableExternalPayment)
@@ -171,10 +180,6 @@ export class GridUIConfigService {
             ContractFields.PaymentFrequencyUuid,
           ])
         ),
-
-      this.store
-        .select(selectItContractsEnableAgreementDeadlines)
-        .pipe(shouldEnable([ContractFields.Duration, ContractFields.OptionExtendUuid, ContractFields.IrrevocableTo])),
 
       this.store
         .select(selectItContractsEnableTermination)
