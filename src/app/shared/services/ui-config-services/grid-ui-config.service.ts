@@ -62,6 +62,7 @@ import {
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableDescription,
+  selectITSystemUsageEnableDocumentBearing,
   selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
   selectITSystemUsageEnableGdprConductedRiskAssessment,
@@ -71,6 +72,7 @@ import {
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableIncomingRelations,
+  selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
@@ -290,18 +292,20 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableIncomingRelations)
         .pipe(shouldEnable([UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv])),
+
+      //Archiving
+      this.store.select(selectITSystemUsageEnableTabArchiving).pipe(shouldEnable([UsageFields.ArchiveDuty])),
+      this.store.select(selectITSystemUsageEnableDocumentBearing).pipe(shouldEnable([UsageFields.IsHoldingDocument])),
+      this.store
+        .select(selectITSystemUsageEnableJournalPeriods)
+        .pipe(shouldEnable([UsageFields.ActiveArchivePeriodEndDate])),
+
       //Roles
       this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
 
       this.store
         .select(selectITSystemUsageEnableLocalReferences)
         .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
-
-      this.store
-        .select(selectITSystemUsageEnableTabArchiving)
-        .pipe(
-          shouldEnable([UsageFields.ArchiveDuty, UsageFields.IsHoldingDocument, UsageFields.ActiveArchivePeriodEndDate])
-        ),
     ];
 
     return combineLatest(configObservables);
