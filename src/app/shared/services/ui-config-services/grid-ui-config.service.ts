@@ -64,8 +64,12 @@ import {
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
-  selectITSystemUsageEnableGdpr,
+  selectITSystemUsageEnableGdprConductedRiskAssessment,
+  selectITSystemUsageEnableGdprDataTypes,
+  selectITSystemUsageEnableGdprDocumentation,
+  selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
+  selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
@@ -80,7 +84,7 @@ import {
   selectITSystemUsageEnableVersion,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
-import { combineBooleansWithAnd, combineBooleansWithOr } from '../../helpers/observable-helpers';
+import { combineBooleansWithAnd } from '../../helpers/observable-helpers';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 
 @Injectable({
@@ -252,21 +256,20 @@ export class GridUIConfigService {
       ),
 
       //GDPR
-
       this.store
-        .select(selectITSystemUsageEnableGdpr)
-        .pipe(
-          shouldEnable([
-            UsageFields.SensitiveDataLevelsAsCsv,
-            UsageFields.LocalReferenceDocumentId,
-            UsageFields.RiskSupervisionDocumentationName,
-            UsageFields.LinkToDirectoryName,
-            UsageFields.HostedAt,
-            UsageFields.GeneralPurpose,
-            UsageFields.RiskAssessmentDate,
-            UsageFields.PlannedRiskAssessmentDate,
-          ])
-        ),
+        .select(selectITSystemUsageEnableGdprDataTypes)
+        .pipe(shouldEnable([UsageFields.SensitiveDataLevelsAsCsv])),
+      this.store
+        .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
+        .pipe(shouldEnable([UsageFields.RiskAssessmentDate, UsageFields.RiskSupervisionDocumentationName])),
+      this.store
+        .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
+        .pipe(shouldEnable([UsageFields.PlannedRiskAssessmentDate])),
+      this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
+      this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
+      this.store
+        .select(selectITSystemUsageEnableGdprDocumentation)
+        .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
 
       this.store
         .select(selectITSystemUsageEnableTabOrganization)
