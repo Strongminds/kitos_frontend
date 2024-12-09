@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable } from 'rxjs';
 import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
+import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
-import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import {
   selectShowDataProcessingRegistrations,
   selectShowItContractModule,
@@ -125,59 +125,59 @@ export class GridUIConfigService {
         ]): UIConfigGridApplication[] => [
           {
             shouldEnable: itSystemModuleEnabled,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               ContractFields.ItSystemUsages,
               ContractFields.NumberOfAssociatedSystemRelations,
               ContractFields.SourceEntityUuid,
-            ],
+            ]),
           },
           {
             shouldEnable: dataProcessingModuleEnabled,
-            columnNamesToConfigure: [ContractFields.DataProcessingAgreements],
+            columnNamesToConfigure: new Set([ContractFields.DataProcessingAgreements]),
           },
           {
             shouldEnable: enabledContractId,
-            columnNamesToConfigure: [ContractFields.ContractId],
+            columnNamesToConfigure: new Set([ContractFields.ContractId]),
           },
           {
             shouldEnable: enabledAgreementPeriod,
-            columnNamesToConfigure: [ContractFields.Concluded, ContractFields.ExpirationDate],
+            columnNamesToConfigure: new Set([ContractFields.Concluded, ContractFields.ExpirationDate]),
           },
           {
             shouldEnable: enabledCriticality,
-            columnNamesToConfigure: [ContractFields.CriticalityUuid],
+            columnNamesToConfigure: new Set([ContractFields.CriticalityUuid]),
           },
           {
             shouldEnable: enabledInternalSigner,
-            columnNamesToConfigure: [ContractFields.ContractSigner],
+            columnNamesToConfigure: new Set([ContractFields.ContractSigner]),
           },
           {
             shouldEnable: enabledContractType,
-            columnNamesToConfigure: [ContractFields.ContractTypeUuid],
+            columnNamesToConfigure: new Set([ContractFields.ContractTypeUuid]),
           },
           {
             shouldEnable: enabledContractTemplate,
-            columnNamesToConfigure: [ContractFields.ContractTemplateUuid],
+            columnNamesToConfigure: new Set([ContractFields.ContractTemplateUuid]),
           },
           {
             shouldEnable: enabledPurchaseForm,
-            columnNamesToConfigure: [ContractFields.PurchaseFormUuid],
+            columnNamesToConfigure: new Set([ContractFields.PurchaseFormUuid]),
           },
           {
             shouldEnable: enabledProcurementStrategy,
-            columnNamesToConfigure: [ContractFields.ProcurementStrategyUuid],
+            columnNamesToConfigure: new Set([ContractFields.ProcurementStrategyUuid]),
           },
           {
             shouldEnable: enabledProcurementPlan,
-            columnNamesToConfigure: [ContractFields.ProcurementPlanYear],
+            columnNamesToConfigure: new Set([ContractFields.ProcurementPlanYear]),
           },
           {
             shouldEnable: enabledProcurementInitiated,
-            columnNamesToConfigure: [ContractFields.ProcurementInitiated],
+            columnNamesToConfigure: new Set([ContractFields.ProcurementInitiated]),
           },
           {
             shouldEnable: enabledExternalPayment,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               ContractFields.AccumulatedAcquisitionCost,
               ContractFields.AccumulatedOperationCost,
               ContractFields.AccumulatedOtherCost,
@@ -186,32 +186,32 @@ export class GridUIConfigService {
               ContractFields.AuditStatusYellow,
               ContractFields.AuditStatusRed,
               ContractFields.AuditStatusGreen,
-            ],
+            ]),
           },
           {
             shouldEnable: enabledPaymentModel,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               ContractFields.OperationRemunerationBegunDate,
               ContractFields.PaymentModelUuid,
               ContractFields.PaymentFrequencyUuid,
-            ],
+            ]),
           },
           {
             shouldEnable: enabledAgreementDeadlines,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               ContractFields.Duration,
               ContractFields.OptionExtendUuid,
               ContractFields.IrrevocableTo,
-            ],
+            ]),
           },
           {
             shouldEnable: enabledTermination,
-            columnNamesToConfigure: [ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt],
+            columnNamesToConfigure: new Set([ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt]),
           },
           {
             shouldEnable: enabledContractRoles,
-            columnNamesToConfigure: [],
-            columnNameSubstringsToConfigure: ['Roles.Role'],
+            columnNamesToConfigure: new Set([]),
+            columnNameSubstringsToConfigure: new Set(['Roles.Role']),
           },
         ]
       )
@@ -262,54 +262,57 @@ export class GridUIConfigService {
         ]): UIConfigGridApplication[] => [
           {
             shouldEnable: itContractsModuleEnabled && enableSelectContractToDetermineIfItSystemIsActive,
-            columnNamesToConfigure: [UsageFields.MainContractIsActive],
+            columnNamesToConfigure: new Set([UsageFields.MainContractIsActive]),
           },
           {
             shouldEnable: itContractsModuleEnabled,
-            columnNamesToConfigure: [UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv],
+            columnNamesToConfigure: new Set([
+              UsageFields.MainContractSupplierName,
+              UsageFields.AssociatedContractsNamesCsv,
+            ]),
           },
           {
             shouldEnable: dataProcessingModuleEnabled && enableGdpr,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               UsageFields.DataProcessingRegistrationsConcludedAsCsv,
               UsageFields.DataProcessingRegistrationNamesAsCsv,
-            ],
+            ]),
           },
           {
             shouldEnable: enableLifeCycleStatus,
-            columnNamesToConfigure: [UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle],
+            columnNamesToConfigure: new Set([UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle]),
           },
           {
             shouldEnable: enableUsagePeriod,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               UsageFields.ExpirationDate,
               UsageFields.Concluded,
               UsageFields.ActiveAccordingToValidityPeriod,
-            ],
+            ]),
           },
           {
             shouldEnable: enableSelectContractToDetermineIfItSystemIsActive,
-            columnNamesToConfigure: [UsageFields.MainContractSupplierName],
+            columnNamesToConfigure: new Set([UsageFields.MainContractSupplierName]),
           },
           {
             shouldEnable: enableOrganization,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               UsageFields.ResponsibleOrganizationUnitName,
               UsageFields.RelevantOrganizationUnitNamesAsCsv,
-            ],
+            ]),
           },
           {
             shouldEnable: enableSystemRoles,
-            columnNamesToConfigure: [],
-            columnNameSubstringsToConfigure: ['Roles.Role'],
+            columnNamesToConfigure: new Set([]),
+            columnNameSubstringsToConfigure: new Set(['Roles.Role']),
           },
           {
             shouldEnable: enableReferences,
-            columnNamesToConfigure: [UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId],
+            columnNamesToConfigure: new Set([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId]),
           },
           {
             shouldEnable: enableGdpr,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               UsageFields.SensitiveDataLevelsAsCsv,
               UsageFields.LocalReferenceDocumentId,
               UsageFields.RiskSupervisionDocumentationName,
@@ -318,23 +321,23 @@ export class GridUIConfigService {
               UsageFields.GeneralPurpose,
               UsageFields.RiskAssessmentDate,
               UsageFields.PlannedRiskAssessmentDate,
-            ],
+            ]),
           },
           {
             shouldEnable: enableArchiving,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               UsageFields.ArchiveDuty,
               UsageFields.IsHoldingDocument,
               UsageFields.ActiveArchivePeriodEndDate,
-            ],
+            ]),
           },
           {
             shouldEnable: enableSystemRelations,
-            columnNamesToConfigure: [
+            columnNamesToConfigure: new Set([
               UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv,
               UsageFields.DependsOnInterfacesNamesAsCsv,
               UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv,
-            ],
+            ]),
           },
         ]
       )
@@ -369,28 +372,28 @@ export class GridUIConfigService {
           return [
             {
               shouldEnable: itSystemModuleEnabled,
-              columnNamesToConfigure: [DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv],
+              columnNamesToConfigure: new Set([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv]),
             },
             {
               shouldEnable: itContractsModuleEnabled,
-              columnNamesToConfigure: [DprFields.ContractNamesAsCsv, DprFields.ActiveAccordingToMainContract],
+              columnNamesToConfigure: new Set([DprFields.ContractNamesAsCsv, DprFields.ActiveAccordingToMainContract]),
             },
             {
               shouldEnable: mainContractEnabled,
-              columnNamesToConfigure: [DprFields.ActiveAccordingToMainContract],
+              columnNamesToConfigure: new Set([DprFields.ActiveAccordingToMainContract]),
             },
             {
               shouldEnable: dprRolesEnabled,
-              columnNamesToConfigure: [],
-              columnNameSubstringsToConfigure: ['Roles.Role'],
+              columnNamesToConfigure: new Set([]),
+              columnNameSubstringsToConfigure: new Set(['Roles.Role']),
             },
             {
               shouldEnable: referenceEnabled,
-              columnNamesToConfigure: [DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId],
+              columnNamesToConfigure: new Set([DprFields.MainReferenceTitle, DprFields.MainReferenceUserAssignedId]),
             },
             {
               shouldEnable: scheduledInspectionDate,
-              columnNamesToConfigure: [DprFields.OversightScheduledInspectionDate],
+              columnNamesToConfigure: new Set([DprFields.OversightScheduledInspectionDate]),
             },
           ];
         }
@@ -404,7 +407,7 @@ export class GridUIConfigService {
       map(([enabledPlannedRiskAssesmentDate]) => [
         {
           shouldEnable: enabledPlannedRiskAssesmentDate,
-          columnNamesToConfigure: [GdprFields.PLANNED_RISK_ASSESSMENT_DATE],
+          columnNamesToConfigure: new Set([GdprFields.PLANNED_RISK_ASSESSMENT_DATE]),
         },
       ])
     );
