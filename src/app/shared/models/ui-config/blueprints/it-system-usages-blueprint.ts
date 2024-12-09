@@ -140,6 +140,39 @@ export const ItSystemUsageUiBluePrint = {
     },
     archiving: {
       text: $localize`Arkivering`,
+      children: {
+        archiveDuty: {
+          text: $localize`Arkiveringspligt`,
+          isObligatory: true,
+        },
+        archiveType: {
+          text: $localize`Arkivtype`,
+        },
+        archiveLocation: {
+          text: $localize`Arkiveringssted`,
+        },
+        archiveSupplier: {
+          text: $localize`Arkiveringsleverandør`,
+        },
+        archiveTestLocation: {
+          text: $localize`Arkivteststed`,
+        },
+        archiveFrequency: {
+          text: $localize`Arkiveringsfrekvens`,
+        },
+        documentBearing: {
+          text: $localize`Dokumentbærende`,
+        },
+        active: {
+          text: $localize`Er der arkiveret fra systemet?`,
+        },
+        notes: {
+          text: $localize`Arkiveringsbemærkninger`,
+        },
+        journalPeriods: {
+          text: $localize`Journalperioder`,
+        },
+      },
     },
     hierarchy: {
       text: $localize`Hierarki`,

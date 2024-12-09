@@ -163,6 +163,22 @@ const createItSystemUsageRelationsFieldSelector = (fieldKey: string) =>
 export const selectITSystemUsageEnableOutgoingRelations = createItSystemUsageRelationsFieldSelector('outgoing');
 export const selectITSystemUsageEnableIncomingRelations = createItSystemUsageRelationsFieldSelector('incoming');
 
+//IT system usage > Archiving
+const createItSystemUsageArchivingFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'archiving', fieldKey);
+
+export const selectITSystemUsageEnableArchiveDuty = createItSystemUsageArchivingFieldSelector('archiveDuty');
+export const selectITSystemUsageEnableArchiveType = createItSystemUsageArchivingFieldSelector('archiveType');
+export const selectITSystemUsageEnableArchiveLocation = createItSystemUsageArchivingFieldSelector('archiveLocation');
+export const selectITSystemUsageEnableArchiveSupplier = createItSystemUsageArchivingFieldSelector('archiveSupplier');
+export const selectITSystemUsageEnableArchiveTestLocation =
+  createItSystemUsageArchivingFieldSelector('archiveTestLocation');
+export const selectITSystemUsageEnableArchiveFrequency = createItSystemUsageArchivingFieldSelector('archiveFrequency');
+export const selectITSystemUsageEnableDocumentBearing = createItSystemUsageArchivingFieldSelector('documentBearing');
+export const selectITSystemUsageEnableActive = createItSystemUsageArchivingFieldSelector('active');
+export const selectITSystemUsageEnableNotes = createItSystemUsageArchivingFieldSelector('notes');
+export const selectITSystemUsageEnableJournalPeriods = createItSystemUsageArchivingFieldSelector('journalPeriods');
+
 //IT contracts
 const createItContractsTabEnabledSelector = (tabKey: string) =>
   createTabEnabledSelector(UIModuleConfigKey.ItContract, tabKey);
