@@ -27,7 +27,7 @@ export class HideShowDialogComponent implements OnInit {
   ngOnInit() {
     this.columnsCopy = this.columns
       .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
-      .filter((column) => column.disabledByUIConfig !== true)
+      .filter((column) => column.disabledByUIConfig !== true || column.required)
       .map((column) => ({ ...column }));
     this.uniqueSections = Array.from(new Set(this.columnsCopy.map((column) => column.section!)));
   }
