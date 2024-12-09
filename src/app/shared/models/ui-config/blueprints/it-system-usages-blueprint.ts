@@ -107,6 +107,15 @@ export const ItSystemUsageUiBluePrint = {
         plannedRiskAssessmentDate: {
           text: $localize`Dato for planlagt risikovurdering`,
         },
+        conductedRiskAssessment: {
+          text: $localize`Foretaget risikovurdering`,
+        },
+        dpiaConducted: {
+          text: $localize`Gennemført DPIA / Konsekvensanalyse`,
+        },
+        retentionPeriod: {
+          text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
+        },
       },
     },
     systemRoles: {

@@ -17,6 +17,10 @@ import {
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnabledRegisteredCategories,
+  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
+  selectITSystemUsageEnableGdprConductedRiskAssessment,
+  selectITSystemUsageEnableGdprDpiaConducted,
+  selectITSystemUsageEnableGdprRetentionPeriod,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
@@ -31,14 +35,14 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
     super();
   }
 
-  public readonly showGeneralInfoCard$ = combineBooleansWithOr([
+  public readonly showGeneralInfo$ = combineBooleansWithOr([
     this.store.select(selectITSystemUsageEnableGdprPurpose),
     this.store.select(selectITSystemUsageEnableGdprBusinessCritical),
     this.store.select(selectITSystemUsageEnableGdprHostedAt),
     this.store.select(selectITSystemUsageEnableGdprDocumentation),
   ]);
 
-  public readonly showDataSensitivityCard$ = combineBooleansWithOr([
+  public readonly showDataSensitivity$ = combineBooleansWithOr([
     this.store.select(selectITSystemUsageEnableGdprNoPersonalData),
     this.store.select(selectITSystemUsageEnableGdprNormalPersonalData),
     this.store.select(selectITSystemUsageEnableGdprSensitivePersonalData),
@@ -48,6 +52,24 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   public readonly registeredCategoriesEnabled$ = this.store.select(selectITSystemUsageEnabledRegisteredCategories);
   public readonly technicalPrecautionsEnabled$ = this.store.select(selectITSystemUsageEnableGdprTechnicalPrecautions);
   public readonly userSupervisionEnabled$ = this.store.select(selectITSystemUsageEnableGdprUserSupervision);
+
+  public readonly showRiskAssessment$ = combineBooleansWithOr([
+    this.store.select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate),
+    this.store.select(selectITSystemUsageEnableGdprConductedRiskAssessment),
+  ]);
+
+  public readonly showDpiaConducted$ = this.store.select(selectITSystemUsageEnableGdprDpiaConducted);
+  public readonly showRetentionPeriod$ = this.store.select(selectITSystemUsageEnableGdprRetentionPeriod);
+
+  public readonly showMoreInformationCard$ = combineBooleansWithOr([
+    this.showDataSensitivity$,
+    this.registeredCategoriesEnabled$,
+    this.technicalPrecautionsEnabled$,
+    this.userSupervisionEnabled$,
+    this.showRiskAssessment$,
+    this.showDpiaConducted$,
+    this.showRetentionPeriod$,
+  ]);
 
   public disableFormsIfNoPermissions(controls: AbstractControl[]) {
     this.subscriptions.add(

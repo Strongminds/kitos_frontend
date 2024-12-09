@@ -151,6 +151,10 @@ export const selectITSystemUsageEnableGdprTechnicalPrecautions =
 export const selectITSystemUsageEnableGdprUserSupervision = createItSystemUsageGdprFieldSelector('userSupervision');
 export const selectITSystemUsageEnableGdprPlannedRiskAssessmentDate =
   createItSystemUsageGdprFieldSelector('plannedRiskAssessmentDate');
+export const selectITSystemUsageEnableGdprConductedRiskAssessment =
+  createItSystemUsageGdprFieldSelector('conductedRiskAssessment');
+export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
+export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
 
 //IT contracts
 const createItContractsTabEnabledSelector = (tabKey: string) =>
