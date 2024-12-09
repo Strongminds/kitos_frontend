@@ -57,16 +57,25 @@ import {
   selectItContractsEnableResponsibleUnit,
   selectItContractsEnableTemplate,
   selectItContractsEnableTermination,
+  selectITSystemUsageEnableAmountOfUsers,
+  selectITSystemUsageEnableDataClassification,
+  selectITSystemUsageEnableDescription,
+  selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
   selectITSystemUsageEnableGdpr,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
+  selectITSystemUsageEnableLastEditedAt,
+  selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
+  selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableSystemRelations,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
+  selectITSystemUsageEnableTakenIntoUsageBy,
+  selectITSystemUsageEnableVersion,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
@@ -199,6 +208,25 @@ export class GridUIConfigService {
 
   private getItSystemUsageGridConfig(): Observable<UIConfigGridApplication[]> {
     const configObservables: Observable<UIConfigGridApplication>[] = [
+      //Frontpage
+      this.store.select(selectITSystemUsageEnabledSystemId).pipe(shouldEnable([UsageFields.LocalSystemId])),
+      this.store.select(selectITSystemUsageEnableVersion).pipe(shouldEnable([UsageFields.Version])),
+      this.store.select(selectITSystemUsageEnableAmountOfUsers).pipe(shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableDataClassification).pipe(shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableDescription).pipe(shouldEnable([UsageFields.SystemDescription])),
+      this.store.select(selectITSystemUsageEnableTakenIntoUsageBy).pipe(shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableLastEditedBy).pipe(shouldEnable([UsageFields.LastChangedByName])),
+      this.store.select(selectITSystemUsageEnableLastEditedAt).pipe(shouldEnable([UsageFields.LastChangedAt])),
+      this.store
+        .select(selectITSystemUsageEnableLifeCycleStatus)
+        .pipe(shouldEnable([UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle])),
+      this.store
+        .select(selectITSystemUsageEnableFrontPageUsagePeriod)
+        .pipe(
+          shouldEnable([UsageFields.ExpirationDate, UsageFields.Concluded, UsageFields.ActiveAccordingToValidityPeriod])
+        ),
+      this.store.select(selectITSystemUsageEnableStatus).pipe(shouldEnable([])),
+
       combineBooleansWithAnd([
         this.store.select(selectShowItContractModule),
         this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
@@ -217,16 +245,6 @@ export class GridUIConfigService {
           UsageFields.DataProcessingRegistrationNamesAsCsv,
         ])
       ),
-
-      this.store
-        .select(selectITSystemUsageEnableLifeCycleStatus)
-        .pipe(shouldEnable([UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle])),
-
-      this.store
-        .select(selectITSystemUsageEnableFrontPageUsagePeriod)
-        .pipe(
-          shouldEnable([UsageFields.ExpirationDate, UsageFields.Concluded, UsageFields.ActiveAccordingToValidityPeriod])
-        ),
 
       this.store
         .select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive)
