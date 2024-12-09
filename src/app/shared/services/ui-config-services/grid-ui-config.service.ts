@@ -60,6 +60,7 @@ import {
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableAssociatedContracts,
   selectITSystemUsageEnableDataClassification,
+  selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
@@ -239,9 +240,10 @@ export class GridUIConfigService {
         this.store.select(selectITSystemUsageEnableAssociatedContracts),
       ]).pipe(shouldEnable([UsageFields.AssociatedContractsNamesCsv])),
 
+      //Data processing
       combineBooleansWithAnd([
         this.store.select(selectShowDataProcessingRegistrations),
-        this.store.select(selectITSystemUsageEnableGdpr),
+        this.store.select(selectITSystemUsageEnableDataProcessing),
       ]).pipe(
         shouldEnable([
           UsageFields.DataProcessingRegistrationsConcludedAsCsv,
