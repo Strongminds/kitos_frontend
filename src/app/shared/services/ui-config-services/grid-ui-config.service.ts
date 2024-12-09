@@ -3,9 +3,9 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { combineLatest, map, Observable } from 'rxjs';
 import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
+import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
-import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import {
   selectShowDataProcessingRegistrations,
   selectShowItContractModule,
@@ -80,8 +80,8 @@ import {
   selectITSystemUsageEnableVersion,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
-import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 import { combineBooleansWithAnd } from '../../helpers/observable-helpers';
+import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 
 @Injectable({
   providedIn: 'root',
@@ -367,8 +367,8 @@ function shouldEnable(
     source.pipe(
       map((shouldEnable) => ({
         shouldEnable,
-        columnNamesToConfigure,
-        columnNameSubstringsToConfigure,
+        columnNamesToConfigure: new Set(columnNamesToConfigure),
+        columnNameSubstringsToConfigure: new Set(columnNameSubstringsToConfigure),
       }))
     );
 }
