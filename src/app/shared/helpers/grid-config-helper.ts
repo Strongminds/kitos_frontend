@@ -18,11 +18,10 @@ function filterColumnsByUIConfig(columns: GridColumn[] | null): GridColumn[] | n
   if (!columns) {
     return null;
   }
-  return columns.filter(column => !column.disabledByUIConfig);
+  return columns.map((column) => ({ ...column, hidden: column.hidden || (column.disabledByUIConfig ?? false) }));
 }
 
 export function filterGridColumnsByUIConfig(): (source: Observable<GridColumn[] | null>) => Observable<GridColumn[]> {
-  return (source: Observable<GridColumn[] | null>) => source.pipe(
-    map(columns => filterColumnsByUIConfig(columns) || [])
-  );
+  return (source: Observable<GridColumn[] | null>) =>
+    source.pipe(map((columns) => filterColumnsByUIConfig(columns) || []));
 }
