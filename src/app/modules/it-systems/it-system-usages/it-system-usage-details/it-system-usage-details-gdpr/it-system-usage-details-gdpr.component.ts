@@ -61,7 +61,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   public readonly showDpiaConducted$ = this.store.select(selectITSystemUsageEnableGdprDpiaConducted);
   public readonly showRetentionPeriod$ = this.store.select(selectITSystemUsageEnableGdprRetentionPeriod);
 
-  public readonly showMoreInformationCard$ = combineBooleansWithOr([
+  public readonly showMoreInformation$ = combineBooleansWithOr([
     this.showDataSensitivity$,
     this.registeredCategoriesEnabled$,
     this.technicalPrecautionsEnabled$,

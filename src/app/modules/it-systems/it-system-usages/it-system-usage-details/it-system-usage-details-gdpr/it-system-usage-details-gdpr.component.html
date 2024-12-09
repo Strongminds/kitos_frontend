@@ -4,7 +4,7 @@
   [disableLinkControl]="disableLinkControls"
 ></app-general-info-section>
 
-<app-card *ngIf="showMoreInformationCard$ | async">
+<app-card *ngIf="showMoreInformation$ | async">
   <app-card-header title="Yderligere information" helpTextKey="it-system.usage.GDPR" i18n-title></app-card-header>
   <app-standard-vertical-content-grid>
     <app-data-sensitivity-section
