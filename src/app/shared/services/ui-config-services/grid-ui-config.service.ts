@@ -213,8 +213,8 @@ export class GridUIConfigService {
       this.store.select(selectITSystemUsageEnableVersion).pipe(shouldEnable([UsageFields.Version])),
       this.store.select(selectITSystemUsageEnableAmountOfUsers).pipe(shouldEnable([])),
       this.store.select(selectITSystemUsageEnableDataClassification).pipe(shouldEnable([])),
-      this.store.select(selectITSystemUsageEnableDescription).pipe(shouldEnable([UsageFields.SystemDescription])),
-      this.store.select(selectITSystemUsageEnableTakenIntoUsageBy).pipe(shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableDescription).pipe(shouldEnable([UsageFields.Note])),
+      this.store.select(selectITSystemUsageEnableTakenIntoUsageBy).pipe(shouldEnable([UsageFields.ObjectOwnerName])),
       this.store.select(selectITSystemUsageEnableLastEditedBy).pipe(shouldEnable([UsageFields.LastChangedByName])),
       this.store.select(selectITSystemUsageEnableLastEditedAt).pipe(shouldEnable([UsageFields.LastChangedAt])),
       this.store
