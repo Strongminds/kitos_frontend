@@ -74,11 +74,12 @@ import {
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableLocalReferences,
+  selectITSystemUsageEnableRelevantUnits,
+  selectITSystemUsageEnableResponsibleUnit,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableSystemRelations,
   selectITSystemUsageEnableTabArchiving,
-  selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
   selectITSystemUsageEnableVersion,
@@ -271,11 +272,15 @@ export class GridUIConfigService {
         .select(selectITSystemUsageEnableGdprDocumentation)
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
 
+      //Organization
+
       this.store
-        .select(selectITSystemUsageEnableTabOrganization)
-        .pipe(
-          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
-        ),
+        .select(selectITSystemUsageEnableResponsibleUnit)
+        .pipe(shouldEnable([UsageFields.ResponsibleOrganizationUnitName])),
+
+      this.store
+        .select(selectITSystemUsageEnableRelevantUnits)
+        .pipe(shouldEnable([UsageFields.RelevantOrganizationUnitNamesAsCsv])),
 
       this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
 
