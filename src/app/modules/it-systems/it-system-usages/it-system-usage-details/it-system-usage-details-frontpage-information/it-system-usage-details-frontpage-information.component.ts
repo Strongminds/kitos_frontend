@@ -10,7 +10,7 @@ import {
   dateGreaterThanOrEqualControlValidator,
   dateLessThanControlValidator,
 } from 'src/app/shared/helpers/form.helpers';
-import { combineBooleansWithAnd, combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
+import { combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
