@@ -155,7 +155,7 @@ export const ItSystemUsageUiBluePrint = {
           text: $localize`Arkiveringsleverandør`,
         },
         archiveTestLocation: {
-          text: $localize`Arkivteststed`,
+          text: $localize`Arkiveringsteststed`,
         },
         archiveFrequency: {
           text: $localize`Arkiveringsfrekvens`,
