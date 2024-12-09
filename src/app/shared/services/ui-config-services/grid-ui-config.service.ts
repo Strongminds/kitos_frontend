@@ -58,6 +58,7 @@ import {
   selectItContractsEnableTemplate,
   selectItContractsEnableTermination,
   selectITSystemUsageEnableAmountOfUsers,
+  selectITSystemUsageEnableAssociatedContracts,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnabledSystemId,
@@ -159,7 +160,7 @@ export class GridUIConfigService {
         this.store.select(selectItContractEnableDataProcessing),
       ]).pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
 
-      //Aggreement periods
+      //Agreement periods
       this.store
         .select(selectItContractsEnableAgreementDeadlines)
         .pipe(shouldEnable([ContractFields.Duration, ContractFields.OptionExtendUuid, ContractFields.IrrevocableTo])),
@@ -227,14 +228,16 @@ export class GridUIConfigService {
         ),
       this.store.select(selectITSystemUsageEnableStatus).pipe(shouldEnable([])),
 
+      //Contracts
       combineBooleansWithAnd([
         this.store.select(selectShowItContractModule),
         this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
-      ]).pipe(shouldEnable([UsageFields.MainContractIsActive])),
+      ]).pipe(shouldEnable([UsageFields.MainContractIsActive, UsageFields.MainContractSupplierName])),
+
       combineBooleansWithAnd([
         this.store.select(selectShowItContractModule),
-        this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
-      ]).pipe(shouldEnable([UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv])),
+        this.store.select(selectITSystemUsageEnableAssociatedContracts),
+      ]).pipe(shouldEnable([UsageFields.AssociatedContractsNamesCsv])),
 
       combineBooleansWithAnd([
         this.store.select(selectShowDataProcessingRegistrations),
