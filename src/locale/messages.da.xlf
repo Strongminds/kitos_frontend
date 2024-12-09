@@ -6397,6 +6397,14 @@
         <source> Medtag overordnede enheder </source>
         <target state="new"> Medtag overordnede enheder </target>
       </trans-unit>
+      <trans-unit id="8068831618296287831" datatype="html">
+        <source>System ID</source>
+        <target state="new">System ID</target>
+      </trans-unit>
+      <trans-unit id="8677745733624593339" datatype="html">
+        <source>Klassifikation af data</source>
+        <target state="new">Klassifikation af data</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
