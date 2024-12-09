@@ -6405,6 +6405,22 @@
         <source>Klassifikation af data</source>
         <target state="new">Klassifikation af data</target>
       </trans-unit>
+      <trans-unit id="4444328125924097461" datatype="html">
+        <source>Relevante organisationsenheder </source>
+        <target state="new">Relevante organisationsenheder </target>
+      </trans-unit>
+      <trans-unit id="2526296220627158527" datatype="html">
+        <source>Relationer til andre systemer</source>
+        <target state="new">Relationer til andre systemer</target>
+      </trans-unit>
+      <trans-unit id="5224755622036276546" datatype="html">
+        <source>Relationer fra andre systemer</source>
+        <target state="new">Relationer fra andre systemer</target>
+      </trans-unit>
+      <trans-unit id="2016413730949071333" datatype="html">
+        <source>Arkiveringsfrekvens</source>
+        <target state="new">Arkiveringsfrekvens</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
