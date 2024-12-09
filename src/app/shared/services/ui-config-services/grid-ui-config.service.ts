@@ -252,10 +252,6 @@ export class GridUIConfigService {
       ),
 
       this.store
-        .select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive)
-        .pipe(shouldEnable([UsageFields.MainContractSupplierName])),
-
-      this.store
         .select(selectITSystemUsageEnableTabOrganization)
         .pipe(
           shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
