@@ -6369,6 +6369,18 @@
         <source>Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface.uuid }}"/></source>
         <target state="new">Navn: <x id="INTERPOLATION" equiv-text="{{ relation.interface.name }}"/> Uuid: <x id="INTERPOLATION_1" equiv-text="{{ relation.interface.uuid }}"/></target>
       </trans-unit>
+      <trans-unit id="5463227515602023886" datatype="html">
+        <source>Sidst redigeret af bruger</source>
+        <target state="new">Sidst redigeret af bruger</target>
+      </trans-unit>
+      <trans-unit id="4106659631682454209" datatype="html">
+        <source>Sidst redigeret dato</source>
+        <target state="new">Sidst redigeret dato</target>
+      </trans-unit>
+      <trans-unit id="3604722267089766233" datatype="html">
+        <source>Databehandler afftale indgået</source>
+        <target state="new">Databehandler afftale indgået</target>
+      </trans-unit>
       <trans-unit id="4743129658174909579" datatype="html">
         <source>Søg efter enhed</source>
         <target state="new">Søg efter enhed</target>
@@ -6377,13 +6389,13 @@
         <source>Antal niveauer</source>
         <target state="new">Antal niveauer</target>
       </trans-unit>
-      <trans-unit id="7864242390343441005" datatype="html">
-        <source> Medtag overordnede enheder </source>
-        <target state="new"> Medtag overordnede enheder </target>
-      </trans-unit>
       <trans-unit id="1754540017409263785" datatype="html">
         <source>Når denne er valgt, medtagesenhedens overordnede i hierarkiet</source>
         <target state="new">Når denne er valgt, medtagesenhedens overordnede i hierarkiet</target>
+      </trans-unit>
+      <trans-unit id="7864242390343441005" datatype="html">
+        <source> Medtag overordnede enheder </source>
+        <target state="new"> Medtag overordnede enheder </target>
       </trans-unit>
     </body>
   </file>
