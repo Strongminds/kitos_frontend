@@ -57,16 +57,35 @@ import {
   selectItContractsEnableResponsibleUnit,
   selectItContractsEnableTemplate,
   selectItContractsEnableTermination,
+  selectITSystemUsageEnableAmountOfUsers,
+  selectITSystemUsageEnableAssociatedContracts,
+  selectITSystemUsageEnableDataClassification,
+  selectITSystemUsageEnableDataProcessing,
+  selectITSystemUsageEnableDescription,
+  selectITSystemUsageEnableDocumentBearing,
+  selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
-  selectITSystemUsageEnableGdpr,
+  selectITSystemUsageEnableGdprConductedRiskAssessment,
+  selectITSystemUsageEnableGdprDataTypes,
+  selectITSystemUsageEnableGdprDocumentation,
+  selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
+  selectITSystemUsageEnableGdprPurpose,
+  selectITSystemUsageEnableIncomingRelations,
+  selectITSystemUsageEnableJournalPeriods,
+  selectITSystemUsageEnableLastEditedAt,
+  selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableLocalReferences,
+  selectITSystemUsageEnableOutgoingRelations,
+  selectITSystemUsageEnableRelevantUnits,
+  selectITSystemUsageEnableResponsibleUnit,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
-  selectITSystemUsageEnableSystemRelations,
+  selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableTabArchiving,
-  selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
+  selectITSystemUsageEnableTakenIntoUsageBy,
+  selectITSystemUsageEnableVersion,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { combineBooleansWithAnd } from '../../helpers/observable-helpers';
@@ -150,7 +169,7 @@ export class GridUIConfigService {
         this.store.select(selectItContractEnableDataProcessing),
       ]).pipe(shouldEnable([ContractFields.DataProcessingAgreements])),
 
-      //Aggreement periods
+      //Agreement periods
       this.store
         .select(selectItContractsEnableAgreementDeadlines)
         .pipe(shouldEnable([ContractFields.Duration, ContractFields.OptionExtendUuid, ContractFields.IrrevocableTo])),
@@ -199,18 +218,40 @@ export class GridUIConfigService {
 
   private getItSystemUsageGridConfig(): Observable<UIConfigGridApplication[]> {
     const configObservables: Observable<UIConfigGridApplication>[] = [
+      //Frontpage
+      this.store.select(selectITSystemUsageEnabledSystemId).pipe(shouldEnable([UsageFields.LocalSystemId])),
+      this.store.select(selectITSystemUsageEnableVersion).pipe(shouldEnable([UsageFields.Version])),
+      this.store.select(selectITSystemUsageEnableAmountOfUsers).pipe(shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableDataClassification).pipe(shouldEnable([])),
+      this.store.select(selectITSystemUsageEnableDescription).pipe(shouldEnable([UsageFields.Note])),
+      this.store.select(selectITSystemUsageEnableTakenIntoUsageBy).pipe(shouldEnable([UsageFields.ObjectOwnerName])),
+      this.store.select(selectITSystemUsageEnableLastEditedBy).pipe(shouldEnable([UsageFields.LastChangedByName])),
+      this.store.select(selectITSystemUsageEnableLastEditedAt).pipe(shouldEnable([UsageFields.LastChangedAt])),
+      this.store
+        .select(selectITSystemUsageEnableLifeCycleStatus)
+        .pipe(shouldEnable([UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle])),
+      this.store
+        .select(selectITSystemUsageEnableFrontPageUsagePeriod)
+        .pipe(
+          shouldEnable([UsageFields.ExpirationDate, UsageFields.Concluded, UsageFields.ActiveAccordingToValidityPeriod])
+        ),
+      this.store.select(selectITSystemUsageEnableStatus).pipe(shouldEnable([])),
+
+      //Contracts
       combineBooleansWithAnd([
         this.store.select(selectShowItContractModule),
         this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
-      ]).pipe(shouldEnable([UsageFields.MainContractIsActive])),
-      combineBooleansWithAnd([
-        this.store.select(selectShowItContractModule),
-        this.store.select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive),
-      ]).pipe(shouldEnable([UsageFields.MainContractSupplierName, UsageFields.AssociatedContractsNamesCsv])),
+      ]).pipe(shouldEnable([UsageFields.MainContractIsActive, UsageFields.MainContractSupplierName])),
 
       combineBooleansWithAnd([
+        this.store.select(selectShowItContractModule),
+        this.store.select(selectITSystemUsageEnableAssociatedContracts),
+      ]).pipe(shouldEnable([UsageFields.AssociatedContractsNamesCsv])),
+
+      //Data processing
+      combineBooleansWithAnd([
         this.store.select(selectShowDataProcessingRegistrations),
-        this.store.select(selectITSystemUsageEnableGdpr),
+        this.store.select(selectITSystemUsageEnableDataProcessing),
       ]).pipe(
         shouldEnable([
           UsageFields.DataProcessingRegistrationsConcludedAsCsv,
@@ -218,62 +259,53 @@ export class GridUIConfigService {
         ])
       ),
 
+      //GDPR
       this.store
-        .select(selectITSystemUsageEnableLifeCycleStatus)
-        .pipe(shouldEnable([UsageFields.LifeCycleStatus, UsageFields.ActiveAccordingToLifeCycle])),
+        .select(selectITSystemUsageEnableGdprDataTypes)
+        .pipe(shouldEnable([UsageFields.SensitiveDataLevelsAsCsv])),
+      this.store
+        .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
+        .pipe(shouldEnable([UsageFields.RiskAssessmentDate, UsageFields.RiskSupervisionDocumentationName])),
+      this.store
+        .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
+        .pipe(shouldEnable([UsageFields.PlannedRiskAssessmentDate])),
+      this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
+      this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
+      this.store
+        .select(selectITSystemUsageEnableGdprDocumentation)
+        .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
 
+      //Organization
       this.store
-        .select(selectITSystemUsageEnableFrontPageUsagePeriod)
+        .select(selectITSystemUsageEnableResponsibleUnit)
+        .pipe(shouldEnable([UsageFields.ResponsibleOrganizationUnitName])),
+      this.store
+        .select(selectITSystemUsageEnableRelevantUnits)
+        .pipe(shouldEnable([UsageFields.RelevantOrganizationUnitNamesAsCsv])),
+
+      //Relations
+      this.store
+        .select(selectITSystemUsageEnableOutgoingRelations)
         .pipe(
-          shouldEnable([UsageFields.ExpirationDate, UsageFields.Concluded, UsageFields.ActiveAccordingToValidityPeriod])
+          shouldEnable([UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv, UsageFields.DependsOnInterfacesNamesAsCsv])
         ),
-
       this.store
-        .select(selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive)
-        .pipe(shouldEnable([UsageFields.MainContractSupplierName])),
+        .select(selectITSystemUsageEnableIncomingRelations)
+        .pipe(shouldEnable([UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv])),
 
+      //Archiving
+      this.store.select(selectITSystemUsageEnableTabArchiving).pipe(shouldEnable([UsageFields.ArchiveDuty])),
+      this.store.select(selectITSystemUsageEnableDocumentBearing).pipe(shouldEnable([UsageFields.IsHoldingDocument])),
       this.store
-        .select(selectITSystemUsageEnableTabOrganization)
-        .pipe(
-          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
-        ),
+        .select(selectITSystemUsageEnableJournalPeriods)
+        .pipe(shouldEnable([UsageFields.ActiveArchivePeriodEndDate])),
 
+      //Roles
       this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
 
       this.store
         .select(selectITSystemUsageEnableLocalReferences)
         .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
-
-      this.store
-        .select(selectITSystemUsageEnableGdpr)
-        .pipe(
-          shouldEnable([
-            UsageFields.SensitiveDataLevelsAsCsv,
-            UsageFields.LocalReferenceDocumentId,
-            UsageFields.RiskSupervisionDocumentationName,
-            UsageFields.LinkToDirectoryName,
-            UsageFields.HostedAt,
-            UsageFields.GeneralPurpose,
-            UsageFields.RiskAssessmentDate,
-            UsageFields.PlannedRiskAssessmentDate,
-          ])
-        ),
-
-      this.store
-        .select(selectITSystemUsageEnableTabArchiving)
-        .pipe(
-          shouldEnable([UsageFields.ArchiveDuty, UsageFields.IsHoldingDocument, UsageFields.ActiveArchivePeriodEndDate])
-        ),
-
-      this.store
-        .select(selectITSystemUsageEnableSystemRelations)
-        .pipe(
-          shouldEnable([
-            UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv,
-            UsageFields.DependsOnInterfacesNamesAsCsv,
-            UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv,
-          ])
-        ),
     ];
 
     return combineLatest(configObservables);
