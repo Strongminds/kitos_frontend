@@ -70,15 +70,16 @@ import {
   selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
+  selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableLocalReferences,
+  selectITSystemUsageEnableOutgoingRelations,
   selectITSystemUsageEnableRelevantUnits,
   selectITSystemUsageEnableResponsibleUnit,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
-  selectITSystemUsageEnableSystemRelations,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
@@ -273,15 +274,23 @@ export class GridUIConfigService {
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
 
       //Organization
-
       this.store
         .select(selectITSystemUsageEnableResponsibleUnit)
         .pipe(shouldEnable([UsageFields.ResponsibleOrganizationUnitName])),
-
       this.store
         .select(selectITSystemUsageEnableRelevantUnits)
         .pipe(shouldEnable([UsageFields.RelevantOrganizationUnitNamesAsCsv])),
 
+      //Relations
+      this.store
+        .select(selectITSystemUsageEnableOutgoingRelations)
+        .pipe(
+          shouldEnable([UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv, UsageFields.DependsOnInterfacesNamesAsCsv])
+        ),
+      this.store
+        .select(selectITSystemUsageEnableIncomingRelations)
+        .pipe(shouldEnable([UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv])),
+      //Roles
       this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
 
       this.store
@@ -292,16 +301,6 @@ export class GridUIConfigService {
         .select(selectITSystemUsageEnableTabArchiving)
         .pipe(
           shouldEnable([UsageFields.ArchiveDuty, UsageFields.IsHoldingDocument, UsageFields.ActiveArchivePeriodEndDate])
-        ),
-
-      this.store
-        .select(selectITSystemUsageEnableSystemRelations)
-        .pipe(
-          shouldEnable([
-            UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv,
-            UsageFields.DependsOnInterfacesNamesAsCsv,
-            UsageFields.IncomingRelatedItSystemUsagesNamesAsCsv,
-          ])
         ),
     ];
 

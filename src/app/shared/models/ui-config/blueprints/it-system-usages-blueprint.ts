@@ -126,6 +126,14 @@ export const ItSystemUsageUiBluePrint = {
     },
     systemRelations: {
       text: $localize`Relationer`,
+      children: {
+        outgoing: {
+          text: $localize`Relationer til andre systemer`,
+        },
+        incoming: {
+          text: $localize`Relationer fra andre systemer`,
+        },
+      },
     },
     interfaces: {
       text: $localize`Udstillede snitflader`,

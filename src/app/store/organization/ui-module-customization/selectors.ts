@@ -157,6 +157,12 @@ const createItSystemUsageOrganizationFieldSelector = (fieldKey: string) =>
 export const selectITSystemUsageEnableResponsibleUnit = createItSystemUsageOrganizationFieldSelector('responsibleUnit');
 export const selectITSystemUsageEnableRelevantUnits = createItSystemUsageOrganizationFieldSelector('relevantUnits');
 
+//IT System Usage > Relations
+const createItSystemUsageRelationsFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'systemRelations', fieldKey);
+export const selectITSystemUsageEnableOutgoingRelations = createItSystemUsageRelationsFieldSelector('outgoing');
+export const selectITSystemUsageEnableIncomingRelations = createItSystemUsageRelationsFieldSelector('incoming');
+
 //IT contracts
 const createItContractsTabEnabledSelector = (tabKey: string) =>
   createTabEnabledSelector(UIModuleConfigKey.ItContract, tabKey);
