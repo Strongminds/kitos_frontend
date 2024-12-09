@@ -138,12 +138,7 @@ export const selectITSystemUsageEnableGdprPurpose = createItSystemUsageGdprField
 export const selectITSystemUsageEnableGdprBusinessCritical = createItSystemUsageGdprFieldSelector('businessCritical');
 export const selectITSystemUsageEnableGdprHostedAt = createItSystemUsageGdprFieldSelector('hostedAt');
 export const selectITSystemUsageEnableGdprDocumentation = createItSystemUsageGdprFieldSelector('documentation');
-export const selectITSystemUsageEnableGdprNoPersonalData = createItSystemUsageGdprFieldSelector('noPersonalData');
-export const selectITSystemUsageEnableGdprNormalPersonalData =
-  createItSystemUsageGdprFieldSelector('normalPersonalData');
-export const selectITSystemUsageEnableGdprSensitivePersonalData =
-  createItSystemUsageGdprFieldSelector('sensitivePersonalData');
-export const selectITSystemUsageEnableGdprLegalData = createItSystemUsageGdprFieldSelector('legalData');
+export const selectITSystemUsageEnableGdprDataTypes = createItSystemUsageGdprFieldSelector('dataTypes');
 export const selectITSystemUsageEnabledRegisteredCategories =
   createItSystemUsageGdprFieldSelector('registeredCategories');
 export const selectITSystemUsageEnableGdprTechnicalPrecautions =

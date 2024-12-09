@@ -80,7 +80,7 @@ import {
   selectITSystemUsageEnableVersion,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
-import { combineBooleansWithAnd } from '../../helpers/observable-helpers';
+import { combineBooleansWithAnd, combineBooleansWithOr } from '../../helpers/observable-helpers';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 
 @Injectable({
@@ -251,17 +251,7 @@ export class GridUIConfigService {
         ])
       ),
 
-      this.store
-        .select(selectITSystemUsageEnableTabOrganization)
-        .pipe(
-          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
-        ),
-
-      this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
-
-      this.store
-        .select(selectITSystemUsageEnableLocalReferences)
-        .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
+      //GDPR
 
       this.store
         .select(selectITSystemUsageEnableGdpr)
@@ -277,6 +267,18 @@ export class GridUIConfigService {
             UsageFields.PlannedRiskAssessmentDate,
           ])
         ),
+
+      this.store
+        .select(selectITSystemUsageEnableTabOrganization)
+        .pipe(
+          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
+        ),
+
+      this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
+
+      this.store
+        .select(selectITSystemUsageEnableLocalReferences)
+        .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
 
       this.store
         .select(selectITSystemUsageEnableTabArchiving)

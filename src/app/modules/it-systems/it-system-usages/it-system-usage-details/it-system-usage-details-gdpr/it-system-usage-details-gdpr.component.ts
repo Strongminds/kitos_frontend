@@ -10,10 +10,6 @@ import {
   selectITSystemUsageEnableGdprBusinessCritical,
   selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprDocumentation,
-  selectITSystemUsageEnableGdprLegalData,
-  selectITSystemUsageEnableGdprNoPersonalData,
-  selectITSystemUsageEnableGdprNormalPersonalData,
-  selectITSystemUsageEnableGdprSensitivePersonalData,
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnabledRegisteredCategories,
@@ -21,6 +17,7 @@ import {
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprDpiaConducted,
   selectITSystemUsageEnableGdprRetentionPeriod,
+  selectITSystemUsageEnableGdprDataTypes,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
@@ -42,12 +39,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
     this.store.select(selectITSystemUsageEnableGdprDocumentation),
   ]);
 
-  public readonly showDataSensitivity$ = combineBooleansWithOr([
-    this.store.select(selectITSystemUsageEnableGdprNoPersonalData),
-    this.store.select(selectITSystemUsageEnableGdprNormalPersonalData),
-    this.store.select(selectITSystemUsageEnableGdprSensitivePersonalData),
-    this.store.select(selectITSystemUsageEnableGdprLegalData),
-  ]);
+  public readonly showDataTypes$ = this.store.select(selectITSystemUsageEnableGdprDataTypes);
 
   public readonly registeredCategoriesEnabled$ = this.store.select(selectITSystemUsageEnabledRegisteredCategories);
   public readonly technicalPrecautionsEnabled$ = this.store.select(selectITSystemUsageEnableGdprTechnicalPrecautions);
@@ -62,7 +54,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   public readonly showRetentionPeriod$ = this.store.select(selectITSystemUsageEnableGdprRetentionPeriod);
 
   public readonly showMoreInformation$ = combineBooleansWithOr([
-    this.showDataSensitivity$,
+    this.showDataTypes$,
     this.registeredCategoriesEnabled$,
     this.technicalPrecautionsEnabled$,
     this.userSupervisionEnabled$,

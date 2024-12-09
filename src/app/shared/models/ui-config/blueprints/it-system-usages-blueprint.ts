@@ -83,17 +83,8 @@ export const ItSystemUsageUiBluePrint = {
         documentation: {
           text: $localize`Link til fortegnelse`,
         },
-        noPersonalData: {
-          text: $localize`Ingen personoplysninger`,
-        },
-        normalPersonalData: {
-          text: $localize`Almindelige personoplysninger`,
-        },
-        sensitivePersonalData: {
-          text: $localize`Følsomme personoplysninger`,
-        },
-        legalData: {
-          text: $localize`Straffedomme og lovovertrædelser`,
+        dataTypes: {
+          text: $localize`Hvilke typer data indeholder systemet?`,
         },
         registeredCategories: {
           text: $localize`Hvilke kategorier af registrerede indgår i databehandlingen?`,

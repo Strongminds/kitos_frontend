@@ -8,7 +8,7 @@
   <app-card-header title="Yderligere information" helpTextKey="it-system.usage.GDPR" i18n-title></app-card-header>
   <app-standard-vertical-content-grid>
     <app-data-sensitivity-section
-      *ngIf="showDataSensitivity$ | async"
+      *ngIf="showDataTypes$ | async"
       (noPermissions)="disableFormsIfNoPermissions($event)"
       data-cy="data-sensitivity-accordion"
     ></app-data-sensitivity-section>

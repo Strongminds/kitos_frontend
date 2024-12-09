@@ -16,12 +16,6 @@ import {
   selectItSystemUsageGdprSensitivePersonalData,
   selectItSystemUsageGdprSpecificPersonalData,
 } from 'src/app/store/it-system-usage/selectors';
-import {
-  selectITSystemUsageEnableGdprNoPersonalData,
-  selectITSystemUsageEnableGdprLegalData,
-  selectITSystemUsageEnableGdprNormalPersonalData,
-  selectITSystemUsageEnableGdprSensitivePersonalData,
-} from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
@@ -74,11 +68,6 @@ export class DataSensitivitySectionComponent extends BaseComponent implements On
 
   public readonly sensitivePersonDataForm = new FormGroup({}, { updateOn: 'change' });
   public hasModifyPermissions$ = this.store.select(selectITSystemUsageHasModifyPermission);
-
-  public readonly noPersonalDataEnabled$ = this.store.select(selectITSystemUsageEnableGdprNoPersonalData);
-  public readonly normalPersonalDataEnabled$ = this.store.select(selectITSystemUsageEnableGdprNormalPersonalData);
-  public readonly sensitiveDataEnabled$ = this.store.select(selectITSystemUsageEnableGdprSensitivePersonalData);
-  public readonly legalDataEnabled$ = this.store.select(selectITSystemUsageEnableGdprLegalData);
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();
