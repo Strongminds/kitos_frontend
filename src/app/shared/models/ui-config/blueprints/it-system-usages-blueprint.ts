@@ -12,12 +12,43 @@ export const ItSystemUsageUiBluePrint = {
       isObligatory: true,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
       children: {
+        name: {
+          text: $localize`Navn`,
+          isObligatory: true,
+        },
+        systemId: {
+          text: $localize`System ID`,
+        },
+        version: {
+          text: $localize`Version`,
+        },
+        amountOfUsers: {
+          text: $localize`Antal brugere`,
+        },
+        dataClassification: {
+          text: $localize`Klassifikation af data`,
+        },
+        description: {
+          text: $localize`Beskrivelse`,
+        },
+        takenIntoUsageBy: {
+          text: $localize`Taget i anvendelse af`,
+        },
+        lastEditedBy: {
+          text: $localize`Sidst redigeret (bruger)`,
+        },
+        lastEditedAt: {
+          text: $localize`Sidst redigeret (dato)`,
+        },
+        lifeCycleStatus: {
+          text: $localize`Livscyklus`,
+        },
         usagePeriod: {
           text: $localize`Datofelter`,
           helpText: $localize`Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse”`,
         },
-        lifeCycleStatus: {
-          text: $localize`Livscyklus`,
+        status: {
+          text: $localize`Status`,
         },
       },
     },
