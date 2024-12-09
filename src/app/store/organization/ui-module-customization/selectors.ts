@@ -122,11 +122,14 @@ export const selectITSystemUsageEnableLifeCycleStatus = createItSystemUsageFront
 export const selectITSystemUsageEnableFrontPageUsagePeriod = createItSystemUsageFrontPageFieldSelector('usagePeriod');
 export const selectITSystemUsageEnableStatus = createItSystemUsageFrontPageFieldSelector('status');
 
-export const selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'contracts',
-  'selectContractToDetermineIfItSystemIsActive'
-);
+//IT System Usage > Contracts
+const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'contracts', fieldKey);
+export const selectITSystemUsageEnableAssociatedContracts =
+  createItSystemUsageContractsFieldSelector('associatedContracts');
+export const selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive =
+  createItSystemUsageContractsFieldSelector('selectContractToDetermineIfItSystemIsActive');
+
 export const selectITSystemUsageEnableGdprPlannedRiskAssessmentDate = createFieldOrGroupEnabledSelector(
   UIModuleConfigKey.ItSystemUsage,
   'gdpr',
