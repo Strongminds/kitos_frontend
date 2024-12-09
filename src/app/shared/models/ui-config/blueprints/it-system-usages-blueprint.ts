@@ -54,9 +54,11 @@ export const ItSystemUsageUiBluePrint = {
     },
     contracts: {
       text: $localize`Kontrakter`,
-      isObligatory: true,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
       children: {
+        associatedContracts: {
+          text: $localize`Tilknyttede kontrakter`,
+        },
         selectContractToDetermineIfItSystemIsActive: {
           text: $localize`Hvilken kontrakt skal afgøre om IT systemet er aktivt`,
         },
