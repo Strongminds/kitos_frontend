@@ -66,7 +66,6 @@ export const ItSystemUsageUiBluePrint = {
     },
     dataProcessing: {
       text: $localize`Databehandling`,
-      isObligatory: true,
       helpText: $localize`Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra`,
     },
     gdpr: {

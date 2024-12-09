@@ -90,6 +90,9 @@ export const selectDprEnableOversights = createDprOversightFieldSelector('oversi
 const createItSystemUsageTabEnabledSelector = (tabKey: string) =>
   createTabEnabledSelector(UIModuleConfigKey.ItSystemUsage, tabKey);
 //IT system tabs
+export const selectITSystemUsageEnableFrontpage = createItSystemUsageTabEnabledSelector('frontPage');
+export const selectITSystemUsageEnableContracts = createItSystemUsageTabEnabledSelector('contracts');
+export const selectITSystemUsageEnableDataProcessing = createItSystemUsageTabEnabledSelector('dataProcessing');
 export const selectITSystemUsageEnableGdpr = createItSystemUsageTabEnabledSelector('gdpr');
 export const selectITSystemUsageEnableTabSystemRoles = createItSystemUsageTabEnabledSelector('systemRoles');
 export const selectITSystemUsageEnableTabOrganization = createItSystemUsageTabEnabledSelector('organization');
