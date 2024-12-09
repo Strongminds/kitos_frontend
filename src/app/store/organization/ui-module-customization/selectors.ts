@@ -130,11 +130,27 @@ export const selectITSystemUsageEnableAssociatedContracts =
 export const selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive =
   createItSystemUsageContractsFieldSelector('selectContractToDetermineIfItSystemIsActive');
 
-export const selectITSystemUsageEnableGdprPlannedRiskAssessmentDate = createFieldOrGroupEnabledSelector(
-  UIModuleConfigKey.ItSystemUsage,
-  'gdpr',
-  'plannedRiskAssessmentDate'
-);
+//IT System Usage > GDPR
+const createItSystemUsageGdprFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'gdpr', fieldKey);
+
+export const selectITSystemUsageEnableGdprPurpose = createItSystemUsageGdprFieldSelector('purpose');
+export const selectITSystemUsageEnableGdprBusinessCritical = createItSystemUsageGdprFieldSelector('businessCritical');
+export const selectITSystemUsageEnableGdprHostedAt = createItSystemUsageGdprFieldSelector('hostedAt');
+export const selectITSystemUsageEnableGdprDocumentation = createItSystemUsageGdprFieldSelector('documentation');
+export const selectITSystemUsageEnableGdprNoPersonalData = createItSystemUsageGdprFieldSelector('noPersonalData');
+export const selectITSystemUsageEnableGdprNormalPersonalData =
+  createItSystemUsageGdprFieldSelector('normalPersonalData');
+export const selectITSystemUsageEnableGdprSensitivePersonalData =
+  createItSystemUsageGdprFieldSelector('sensitivePersonalData');
+export const selectITSystemUsageEnableGdprLegalData = createItSystemUsageGdprFieldSelector('legalData');
+export const selectITSystemUsageEnabledRegisteredCategories =
+  createItSystemUsageGdprFieldSelector('registeredCategories');
+export const selectITSystemUsageEnableGdprTechnicalPrecautions =
+  createItSystemUsageGdprFieldSelector('technicalPrecautions');
+export const selectITSystemUsageEnableGdprUserSupervision = createItSystemUsageGdprFieldSelector('userSupervision');
+export const selectITSystemUsageEnableGdprPlannedRiskAssessmentDate =
+  createItSystemUsageGdprFieldSelector('plannedRiskAssessmentDate');
 
 //IT contracts
 const createItContractsTabEnabledSelector = (tabKey: string) =>

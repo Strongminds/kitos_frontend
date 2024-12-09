@@ -71,6 +71,39 @@ export const ItSystemUsageUiBluePrint = {
     gdpr: {
       text: $localize`GDPR`,
       children: {
+        purpose: {
+          text: $localize`Systemets overordnede formål`,
+        },
+        businessCritical: {
+          text: $localize`Forretningskritisk IT-System`,
+        },
+        hostedAt: {
+          text: $localize`IT-Systemet driftes`,
+        },
+        documentation: {
+          text: $localize`Link til fortegnelse`,
+        },
+        noPersonalData: {
+          text: $localize`Ingen personoplysninger`,
+        },
+        normalPersonalData: {
+          text: $localize`Almindelige personoplysninger`,
+        },
+        sensitivePersonalData: {
+          text: $localize`Følsomme personoplysninger`,
+        },
+        legalData: {
+          text: $localize`Straffedomme og lovovertrædelser`,
+        },
+        registeredCategories: {
+          text: $localize`Hvilke kategorier af registrerede indgår i databehandlingen?`,
+        },
+        technicalPrecautions: {
+          text: $localize`Implementeret passende tekniske foranstaltninger`,
+        },
+        userSupervision: {
+          text: $localize`Logning af brugerkontrol`,
+        },
         plannedRiskAssessmentDate: {
           text: $localize`Dato for planlagt risikovurdering`,
         },

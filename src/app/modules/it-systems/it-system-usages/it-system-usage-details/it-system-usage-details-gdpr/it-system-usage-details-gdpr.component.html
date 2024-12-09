@@ -1,4 +1,5 @@
 <app-general-info-section
+  *ngIf="showGeneralInfoCard$ | async"
   (noPermissions)="disableFormsIfNoPermissions($event)"
   [disableLinkControl]="disableLinkControls"
 ></app-general-info-section>
@@ -7,19 +8,23 @@
   <app-card-header title="Yderligere information" helpTextKey="it-system.usage.GDPR" i18n-title></app-card-header>
   <app-standard-vertical-content-grid>
     <app-data-sensitivity-section
+      *ngIf="showDataSensitivityCard$ | async"
       (noPermissions)="disableFormsIfNoPermissions($event)"
       data-cy="data-sensitivity-accordion"
     ></app-data-sensitivity-section>
     <app-registered-data-categories-section
+      *ngIf="registeredCategoriesEnabled$ | async"
       (noPermissions)="disableFormsIfNoPermissions($event)"
       data-cy="registed-categories-accordion"
     ></app-registered-data-categories-section>
     <app-gdpr-technical-precautions-section
+      *ngIf="technicalPrecautionsEnabled$ | async"
       (noPermissions)="disableFormsIfNoPermissions($event)"
       [disableLinkControl]="disableLinkControls"
       data-cy="technical-precautions-accordion"
     ></app-gdpr-technical-precautions-section>
     <app-gdpr-user-supervision-section
+      *ngIf="userSupervisionEnabled$ | async"
       (noPermissions)="disableFormsIfNoPermissions($event)"
       data-cy="user-supervision-accordion"
     ></app-gdpr-user-supervision-section>
