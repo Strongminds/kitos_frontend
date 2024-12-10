@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { ActionCreator, Store } from '@ngrx/store';
-import { catchError, combineLatestWith, concatMap, filter, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, concatMap, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APICustomizedUINodeRequestDTO,
   APICustomizedUINodeResponseDTO,
@@ -36,9 +36,11 @@ export class UIModuleCustomizationEffects {
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectHasValidUIModuleConfigCache(module)),
       ]),
-      filter(([_, __, validCache]) => !validCache),
-      concatMap(([{ module: moduleName }, organizationUuid]) =>
-        this.organizationInternalService
+      mergeMap(([{ module: moduleName }, organizationUuid, validCache]) => {
+        if (validCache) {
+          return of(UIModuleConfigActions.resetLoading());
+        }
+        return this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
             map((uiModuleCustomizationDto) =>
@@ -49,8 +51,8 @@ export class UIModuleCustomizationEffects {
               )
             ),
             catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
-          )
-      )
+          );
+      })
     );
   });
 
