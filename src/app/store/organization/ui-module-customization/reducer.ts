@@ -9,7 +9,6 @@ export const uiModuleConfigAdapter = createEntityAdapter<UIModuleCustomization>(
 
 export const UIModuleConfigInitialState: UIModuleConfigState = uiModuleConfigAdapter.getInitialState({
   uiModuleConfigs: [],
-  gridUIModuleCache: [],
   loading: false,
 });
 
@@ -65,17 +64,6 @@ export const uiModuleConfigFeature = createFeature({
           loading: false,
         };
       }
-    ),
-
-    on(
-      UIModuleConfigActions.updateGridUIModuleCache,
-      (state, { module }): UIModuleConfigState => ({
-        ...state,
-        gridUIModuleCache: [
-          ...state.gridUIModuleCache.filter((entry) => entry.module !== module),
-          { module, cacheTime: new Date().getTime() },
-        ],
-      })
     )
   ),
 });

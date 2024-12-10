@@ -1,6 +1,5 @@
 /* eslint-disable @ngrx/avoid-combining-selectors */
 import { Injectable } from '@angular/core';
-import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatest, combineLatestWith, map, Observable } from 'rxjs';
 import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
@@ -30,7 +29,6 @@ import {
   selectDprEnableStatus,
   selectDprEnableSubProcessors,
   selectDprEnableTransferBasis,
-  selectGridUIModuleConfigCache,
   selectIContractsEnableSupplier,
   selectItContractEnableContractId,
   selectItContractEnableContractRoles,
@@ -88,28 +86,26 @@ export class GridUIConfigService {
     return (source) =>
       source.pipe(
         combineLatestWith(this.getUIConfigApplications(moduleKey)),
-        concatLatestFrom(() => this.store.select(selectGridUIModuleConfigCache(moduleKey))),
-        map(([[gridColumns, uiConfig], validCache]) => {
-          if (validCache) {
-            return gridColumns;
-          }
+        map(([gridColumns, uiConfig]) => {
           return this.applyAllUIConfigToGridColumns(uiConfig, gridColumns);
         }),
-        //tap((_) => this.store.dispatch(UIModuleConfigActions.updateGridUIModuleCache({ module: moduleKey }))),
         filterGridColumnsByUIConfig()
       );
   }
 
-  public isColumnEnabled(application: UIConfigGridApplication, column: GridColumn) {
-    if (
-      application.columnNamesToConfigure.has(column.field) ||
-      Array.from(application.columnNameSubstringsToConfigure || []).some((substring) =>
-        column.field.includes(substring)
-      )
-    ) {
-      return application.shouldEnable;
+  public isColumnEnabled(column: GridColumn, applications: UIConfigGridApplication[]) {
+    let enabled = true;
+
+    for (const app of applications) {
+      const result = this.verifyColumn(app, column);
+      if (result !== null) {
+        if (result === false) {
+          enabled = false;
+        }
+        break;
+      }
     }
-    return null;
+    return enabled;
   }
 
   public getUIConfigApplications(moduleKey: UIModuleConfigKey): Observable<UIConfigGridApplication[]> {
@@ -399,6 +395,18 @@ export class GridUIConfigService {
     });
 
     return updatedColumns;
+  }
+
+  private verifyColumn(application: UIConfigGridApplication, column: GridColumn) {
+    if (
+      application.columnNamesToConfigure.has(column.field) ||
+      Array.from(application.columnNameSubstringsToConfigure || []).some((substring) =>
+        column.field.includes(substring)
+      )
+    ) {
+      return application.shouldEnable;
+    }
+    return null;
   }
 }
 

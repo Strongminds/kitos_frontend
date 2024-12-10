@@ -327,18 +327,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public isColumnEnabled(applications: true | UIConfigGridApplication[], column: GridColumn): boolean {
     if (applications === true) return true;
 
-    let enabled = true;
-
-    for (const app of applications) {
-      const result = this.gridUIConfigService.isColumnEnabled(app, column);
-      if (result !== null) {
-        if (result === false) {
-          enabled = false;
-        }
-        break;
-      }
-    }
-    return enabled;
+    return this.gridUIConfigService.isColumnEnabled(column, applications);
   }
 
   private isExcelOnlyColumn(column: GridColumn): boolean {

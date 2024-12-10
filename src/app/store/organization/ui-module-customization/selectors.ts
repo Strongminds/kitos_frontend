@@ -17,14 +17,6 @@ export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => M
       (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
     )
 );
-export const selectGridUIModuleConfigCache: (module: UIModuleConfigKey) => MemoizedSelector<any, boolean> = memoize(
-  (module: UIModuleConfigKey) =>
-    createSelector(
-      selectUIModuleCustomizationState,
-      () => new Date(),
-      (state, now) => hasValidCache(state.gridUIModuleCache.find((config) => config.module === module)?.cacheTime, now)
-    )
-);
 
 export const selectModuleConfig = (module: UIModuleConfigKey) =>
   createSelector(selectUIModuleCustomizationState, (state: UIModuleConfigState) => {

@@ -7,7 +7,11 @@
     entityType="it-system-usage"
   ></app-grid-options-button>
   <app-export-menu-button [enabledGdprExport]="true" [exportMethod]="onExcelExport"></app-export-menu-button>
-  <app-hide-show-button entityType="it-system-usage" [columns]="gridColumns$ | async"></app-hide-show-button>
+  <app-hide-show-button
+    entityType="it-system-usage"
+    [columns]="gridColumns$ | async"
+    [uiConfigApplications]="uiConfigApplications$ | async"
+  ></app-hide-show-button>
 </app-overview-header>
 
 <app-grid
