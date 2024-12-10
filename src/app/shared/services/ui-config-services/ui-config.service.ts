@@ -122,11 +122,15 @@ export class UIConfigService {
   }
 
   public isChildOfTab(tabFullKey: string, fieldKey: string) {
-    return fieldKey.startsWith(tabFullKey + '.');
+    return this.isTab(tabFullKey) && fieldKey.startsWith(tabFullKey + '.');
   }
 
   public isTab(key: string): boolean {
     return this.countDots(key) === 1;
+  }
+
+  public isField(key: string): boolean {
+    return this.countDots(key) === 2;
   }
 
   private countDots(key: string): number {

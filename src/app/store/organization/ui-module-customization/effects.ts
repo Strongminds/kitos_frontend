@@ -128,11 +128,22 @@ export class UIModuleCustomizationEffects {
     if (rootToUpdate) {
       rootToUpdate.enabled = newEnabledState;
     }
+
     const rootToUpdateKey = rootToUpdate?.key;
-    if (this.shouldUpdateChildren(rootToUpdateKey)) {
+    if (this.uiConfigService.isTab(rootToUpdateKey)) {
       return {
         nodes: this.updateChildrenInRequestDto(rootToUpdateKey, newEnabledState, existingNodes),
       };
+    } else if (this.uiConfigService.isField(rootToUpdateKey)) {
+      const parent = this.findParentNode(rootToUpdateKey, existingNodes);
+      if (!parent) {
+        throw new Error('Parent node not found for field');
+      }
+      const children = this.getChildrenOfTab(parent.key, existingNodes);
+      if (this.allChildrenHasSameValue(newEnabledState, children)) {
+        parent.enabled = newEnabledState;
+      }
+      return { nodes: existingNodes as APICustomizedUINodeRequestDTO[] };
     } else {
       return { nodes: existingNodes as APICustomizedUINodeRequestDTO[] };
     }
@@ -151,7 +162,21 @@ export class UIModuleCustomizationEffects {
     }) as APICustomizedUINodeRequestDTO[];
   }
 
-  private shouldUpdateChildren(rootKey: string | undefined) {
-    return rootKey && this.uiConfigService.isTab(rootKey);
+  private findParentNode(
+    fieldKey: string,
+    existingNodes: APICustomizedUINodeResponseDTO[]
+  ): APICustomizedUINodeResponseDTO | undefined {
+    return existingNodes.find((node) => this.uiConfigService.isChildOfTab(node.key, fieldKey));
+  }
+
+  private allChildrenHasSameValue(enabled: boolean | undefined, children: APICustomizedUINodeResponseDTO[]): boolean {
+    return children.every((child) => child.enabled === enabled);
+  }
+
+  private getChildrenOfTab(
+    tabKey: string,
+    existingNodes: APICustomizedUINodeResponseDTO[]
+  ): APICustomizedUINodeResponseDTO[] {
+    return existingNodes.filter((node) => this.uiConfigService.isChildOfTab(tabKey, node.key));
   }
 }
