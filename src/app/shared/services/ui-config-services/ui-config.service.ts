@@ -28,6 +28,11 @@ export class UIConfigService {
     return { module, moduleConfigViewModel, cacheTime: undefined };
   }
 
+  public getAllKeysOfBlueprint(moduleKey: UIModuleConfigKey): string[] {
+    const blueprint = this.getUIBlueprintWithFullKeys(moduleKey);
+    return this.flattenUINodeBlueprintKeys(blueprint);
+  }
+
   private findCustomizedUINode(customizationList: UINodeCustomization[], fullKey: string): UINodeCustomization | null {
     return customizationList.find((elem) => elem.fullKey === fullKey) || null;
   }
@@ -160,5 +165,24 @@ export class UIConfigService {
     });
 
     return updatedColumns;
+  }
+
+  private flattenUINodeBlueprintKeys(root: UINodeBlueprint): string[] {
+    let result: string[] = [];
+
+    // If the current node has a fullKey, add it to the list.
+    if (root.fullKey !== undefined) {
+      result.push(root.fullKey);
+    }
+
+    // If there are children, recursively flatten them and merge into the result.
+    if (root.children) {
+      for (const key in root.children) {
+        const child = root.children[key];
+        result = result.concat(this.flattenUINodeBlueprintKeys(child));
+      }
+    }
+
+    return result;
   }
 }

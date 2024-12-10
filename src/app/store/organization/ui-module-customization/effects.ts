@@ -64,9 +64,10 @@ export class UIModuleCustomizationEffects {
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
+            map((nodes) => this.addMissingNodes(nodes.nodes, moduleName)),
             switchMap((existingUICustomization) => {
               const requestDto = this.getUIModuleCustomizationUpdateRequestDto(
-                existingUICustomization.nodes,
+                existingUICustomization,
                 updatedNodeRequest
               );
 
@@ -175,5 +176,16 @@ export class UIModuleCustomizationEffects {
     existingNodes: APICustomizedUINodeResponseDTO[]
   ): APICustomizedUINodeResponseDTO[] {
     return existingNodes.filter((node) => this.uiConfigService.isChildOfTab(tabKey, node.key));
+  }
+
+  private addMissingNodes(
+    response: APICustomizedUINodeResponseDTO[],
+    module: UIModuleConfigKey
+  ): APICustomizedUINodeResponseDTO[] {
+    const allKeys = this.uiConfigService.getAllKeysOfBlueprint(module);
+    const existingKeys = new Set(response.map((node) => node.key));
+    const missingKeys = allKeys.filter((key) => !existingKeys.has(key));
+    const nodesToAdd = missingKeys.map((key) => ({ key, enabled: true }));
+    return [...response, ...nodesToAdd];
   }
 }
