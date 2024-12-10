@@ -72,6 +72,7 @@ import {
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableIncomingRelations,
+  selectITSystemUsageEnableInheritedKle,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -303,6 +304,12 @@ export class GridUIConfigService {
       //Roles
       this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
 
+      //KLE
+      this.store
+        .select(selectITSystemUsageEnableInheritedKle)
+        .pipe(shouldEnable([UsageFields.ItSystemKLEIdsAsCsv, UsageFields.ItSystemKLENamesAsCsv])),
+
+      //References
       this.store
         .select(selectITSystemUsageEnableLocalReferences)
         .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),

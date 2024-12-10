@@ -179,6 +179,12 @@ export const selectITSystemUsageEnableActive = createItSystemUsageArchivingField
 export const selectITSystemUsageEnableNotes = createItSystemUsageArchivingFieldSelector('notes');
 export const selectITSystemUsageEnableJournalPeriods = createItSystemUsageArchivingFieldSelector('journalPeriods');
 
+//IT system usage > KLE
+const createItSystemUsageKleFieldSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'localKle', fieldKey);
+export const selectITSystemUsageEnableInheritedKle = createItSystemUsageKleFieldSelector('inheritedKle');
+export const selectITSystemUsageEnableLocalKle = createItSystemUsageKleFieldSelector('localKle');
+
 //IT contracts
 const createItContractsTabEnabledSelector = (tabKey: string) =>
   createTabEnabledSelector(UIModuleConfigKey.ItContract, tabKey);

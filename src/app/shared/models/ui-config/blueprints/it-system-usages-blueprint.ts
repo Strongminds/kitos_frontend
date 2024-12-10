@@ -179,6 +179,14 @@ export const ItSystemUsageUiBluePrint = {
     },
     localKle: {
       text: $localize`Lokale KLE`,
+      children: {
+        inheritedKle: {
+          text: $localize`Nedarvede opgaver (Data fra IT Systemkataloget)`,
+        },
+        localKle: {
+          text: $localize`Lokale tilknyttede opgaver`,
+        },
+      },
     },
     advice: {
       text: $localize`Advis`,
