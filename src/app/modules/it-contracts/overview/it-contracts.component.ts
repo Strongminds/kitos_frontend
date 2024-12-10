@@ -40,10 +40,9 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
   public readonly gridData$ = this.store.select(selectContractGridData);
   public readonly gridState$ = this.store.select(selectContractGridState);
-  public readonly gridColumns$ = this.store
-    .select(selectContractGridColumns)
-    .pipe(this.configService.filterGridColumnsByUIConfig(UIModuleConfigKey.ItContract));
+  public readonly gridColumns$ = this.store.select(selectContractGridColumns);
   public readonly hasCreatePermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
+  public readonly uiConfigApplications$ = this.configService.getUIConfigApplications(UIModuleConfigKey.ItContract);
 
   constructor(
     store: Store,

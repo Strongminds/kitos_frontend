@@ -43,9 +43,10 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
   public readonly gridData$ = this.store.select(selectDataProcessingGridData);
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
-  public readonly gridColumns$ = this.store
-    .select(selectDataProcessingGridColumns)
-    .pipe(this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.DataProcessingRegistrations));
+  public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns);
+  public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(
+    UIModuleConfigKey.DataProcessingRegistrations
+  );
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
   private readonly activeOptions = [

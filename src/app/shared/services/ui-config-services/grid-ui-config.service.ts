@@ -1,7 +1,8 @@
 /* eslint-disable @ngrx/avoid-combining-selectors */
 import { Injectable } from '@angular/core';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { combineLatest, combineLatestWith, filter, map, Observable } from 'rxjs';
+import { combineLatest, combineLatestWith, map, Observable } from 'rxjs';
 import * as DprFields from 'src/app/shared/constants/data-processing-grid-column-constants';
 import * as GdprFields from 'src/app/shared/constants/gdpr-overview-grid-column-constants';
 import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
@@ -86,17 +87,29 @@ export class GridUIConfigService {
   ): (source: Observable<GridColumn[]>) => Observable<GridColumn[]> {
     return (source) =>
       source.pipe(
-        combineLatestWith(
-          this.getUIConfigApplications(moduleKey),
-          this.store.select(selectGridUIModuleConfigCache(moduleKey))
-        ),
-        filter(([_, __, validCache]) => {
-          return !validCache;
+        combineLatestWith(this.getUIConfigApplications(moduleKey)),
+        concatLatestFrom(() => this.store.select(selectGridUIModuleConfigCache(moduleKey))),
+        map(([[gridColumns, uiConfig], validCache]) => {
+          if (validCache) {
+            return gridColumns;
+          }
+          return this.applyAllUIConfigToGridColumns(uiConfig, gridColumns);
         }),
-        map(([gridColumns, uiConfig]) => this.applyAllUIConfigToGridColumns(uiConfig, gridColumns)),
         //tap((_) => this.store.dispatch(UIModuleConfigActions.updateGridUIModuleCache({ module: moduleKey }))),
         filterGridColumnsByUIConfig()
       );
+  }
+
+  public isColumnEnabled(application: UIConfigGridApplication, column: GridColumn) {
+    if (
+      application.columnNamesToConfigure.has(column.field) ||
+      Array.from(application.columnNameSubstringsToConfigure || []).some((substring) =>
+        column.field.includes(substring)
+      )
+    ) {
+      return application.shouldEnable;
+    }
+    return null;
   }
 
   public getUIConfigApplications(moduleKey: UIModuleConfigKey): Observable<UIConfigGridApplication[]> {

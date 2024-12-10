@@ -53,9 +53,11 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
-  public readonly gridColumns$ = this.store
-    .select(selectUsageGridColumns)
-    .pipe(this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.ItSystemUsage));
+  public readonly gridColumns$ = this.store.select(selectUsageGridColumns); /* .pipe(
+    this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.ItSystemUsage),
+    tap(() => this.store.dispatch(UIModuleConfigActions.updateGridUIModuleCache(UIModuleConfigKey.ItSystemUsage)))
+  ); */
+  public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(UIModuleConfigKey.ItSystemUsage);
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
