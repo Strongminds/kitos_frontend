@@ -135,10 +135,7 @@ export class UIModuleCustomizationEffects {
         nodes: this.updateChildrenInRequestDto(rootToUpdateKey, newEnabledState, existingNodes),
       };
     } else if (this.uiConfigService.isField(rootToUpdateKey)) {
-      const parent = this.findParentNode(rootToUpdateKey, existingNodes);
-      if (!parent) {
-        throw new Error('Parent node not found for field');
-      }
+      const parent = this.findParentNode(rootToUpdateKey, existingNodes)!;
       const children = this.getChildrenOfTab(parent.key, existingNodes);
       if (this.allChildrenHasSameValue(newEnabledState, children)) {
         parent.enabled = newEnabledState;
