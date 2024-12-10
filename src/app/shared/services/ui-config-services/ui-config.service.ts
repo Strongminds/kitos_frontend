@@ -117,31 +117,6 @@ export class UIConfigService {
     return (key.match(/\./g) || []).length;
   }
 
-  private applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
-    applications.forEach((application) => (columns = this.applyUIConfigToGridColumns(application, columns)));
-    return columns;
-  }
-
-  private applyUIConfigToGridColumns(application: UIConfigGridApplication, columns: GridColumn[]) {
-    const updatedColumns = columns.map((column) => {
-      if (
-        application.columnNamesToConfigure.has(column.field) ||
-        Array.from(application.columnNameSubstringsToConfigure || []).some((substring) =>
-          column.field.includes(substring)
-        )
-      ) {
-        return {
-          ...column,
-          hidden: column.hidden || !application.shouldEnable,
-          disabledByUIConfig: !application.shouldEnable,
-        };
-      }
-      return column;
-    });
-
-    return updatedColumns;
-  }
-
   private flattenUINodeBlueprintKeys(root: UINodeBlueprint): string[] {
     let result: string[] = [];
 
