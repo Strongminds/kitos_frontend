@@ -65,9 +65,11 @@ import {
   selectITSystemUsageEnableDocumentBearing,
   selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableGdprBusinessCritical,
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprDataTypes,
   selectITSystemUsageEnableGdprDocumentation,
+  selectITSystemUsageEnableGdprDpiaConducted,
   selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
@@ -373,8 +375,48 @@ export class GridUIConfigService {
   private getGdprGridConfig(): Observable<UIConfigGridApplication[]> {
     return combineLatest([
       this.store
+        .select(selectITSystemUsageEnableGdprDataTypes)
+        .pipe(
+          shouldEnable([
+            GdprFields.NO_DATA,
+            GdprFields.PERSONAL_DATA,
+            GdprFields.PERSONAL_DATA_CPR,
+            GdprFields.PERSONAL_DATA_SOCIAL_PROBLEMS,
+            GdprFields.PERSONAL_DATA_SOCIAL_OTHER_PRIVATE_MATTERS,
+            GdprFields.SENSITIVE_DATA,
+            GdprFields.LEGAL_DATA,
+            GdprFields.SENSITIVE_DATA_TYPES,
+          ])
+        ),
+
+      this.store
+        .select(selectITSystemUsageEnableGdprBusinessCritical)
+        .pipe(shouldEnable([GdprFields.BUSINESS_CRITICAL_NAME])),
+
+      this.store
+        .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
+        .pipe(
+          shouldEnable([
+            GdprFields.RISK_ASSESSMENT_NAME,
+            GdprFields.RISK_ASSESSMENT_DATE,
+            GdprFields.PRE_RISK_ASSESSMENT_NAME,
+          ])
+        ),
+
+      this.store
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([GdprFields.PLANNED_RISK_ASSESSMENT_DATE])),
+
+      this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([GdprFields.DPIA_NAME])),
+
+      this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([GdprFields.HOSTED_AT_NAME])),
+
+      combineBooleansWithAnd([
+        this.store.select(selectITSystemUsageEnableDataProcessing),
+        this.store.select(selectShowDataProcessingRegistrations),
+      ]).pipe(shouldEnable([GdprFields.DATA_PROCESSING_AGREEMENT_CONCLUDED])),
+
+      this.store.select(selectITSystemUsageEnableGdprDocumentation).pipe(shouldEnable([GdprFields.LINK_TO_DIRECTORY])),
     ]);
   }
 }

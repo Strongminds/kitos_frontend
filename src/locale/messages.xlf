@@ -4876,6 +4876,9 @@
       <trans-unit id="5224755622036276546" datatype="html">
         <source>Relationer fra andre systemer</source>
       </trans-unit>
+      <trans-unit id="4491906435283548133" datatype="html">
+        <source>Lokale tilknyttede opgaver</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
