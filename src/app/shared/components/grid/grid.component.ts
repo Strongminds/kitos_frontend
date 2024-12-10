@@ -278,7 +278,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
             case 'excel-only': {
               const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
               roleEmailKeys.forEach((key) => {
-                const prefixedKey = `Roles.${key}`;
+                const prefixedKey = `Roles.${key}.email`;
                 if (prefixedKey === field) {
                   transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
                 }
