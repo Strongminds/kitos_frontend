@@ -22,7 +22,7 @@ export function roleDtoToRoleGridColumns(
       persistId: `${rolePrefix(entityType)}${role.id}`,
     },
     {
-      field: `Roles.Role${role.id}.email`,
+      field: `Roles.Role${role.id}`,
       title: `${role.name} Email#`,
       section: sectionName,
       style: 'excel-only',

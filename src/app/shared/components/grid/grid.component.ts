@@ -276,13 +276,15 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
               transformedItem[field] = transformedItem[`${column.dataField}`];
               break;
             case 'excel-only': {
-              const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
-              roleEmailKeys.forEach((key) => {
-                const prefixedKey = `Roles.${key}`;
-                if (prefixedKey === field) {
-                  transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
-                }
-              });
+              if (transformedItem.RoleEmails) {
+                const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
+                roleEmailKeys.forEach((key) => {
+                  const prefixedKey = `Roles.${key}`;
+                  if (prefixedKey === field) {
+                    transformedItem[`${column.title}`] = transformedItem.RoleEmails[key];
+                  }
+                });
+              }
               break;
             }
             case 'page-link-array':
