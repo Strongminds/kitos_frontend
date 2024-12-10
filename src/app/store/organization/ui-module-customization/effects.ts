@@ -116,7 +116,7 @@ export class UIModuleCustomizationEffects {
         nodes: [...existingNodes, updatedNode],
       };
     }
-
+    console.log('rootToUpdate', rootToUpdate);
     return this.updateUIModuleCustomizationInRequestDto(existingNodes, updatedNode, rootToUpdate);
   }
 
@@ -129,21 +129,22 @@ export class UIModuleCustomizationEffects {
     if (rootToUpdate) {
       rootToUpdate.enabled = newEnabledState;
     }
-
     const rootToUpdateKey = rootToUpdate?.key;
-    if (this.shouldUpdateChildren(rootToUpdateKey, newEnabledState)) {
-      const childrenToUpdate = existingNodes.filter((node) =>
-        this.uiConfigService.isChildOfTab(rootToUpdateKey!, node.key)
-      );
-      childrenToUpdate.forEach((c) => (c.enabled = newEnabledState));
+    if (this.shouldUpdateChildren(rootToUpdateKey)) {
+      console.log('rootToUpdateKey', rootToUpdateKey);
+      const updatedNodes = existingNodes.map((node) => {
+        if (this.uiConfigService.isChildOfTab(rootToUpdateKey!, node.key)) {
+          return { ...node, enabled: newEnabledState };
+        }
+        return node;
+      }) as APICustomizedUINodeRequestDTO[];
+      return { nodes: updatedNodes };
+    } else {
+      return { nodes: existingNodes as APICustomizedUINodeRequestDTO[] };
     }
-
-    return {
-      nodes: existingNodes as APICustomizedUINodeRequestDTO[],
-    };
   }
 
-  private shouldUpdateChildren(rootKey: string | undefined, isEnabling: boolean | undefined) {
-    return !isEnabling && rootKey && this.uiConfigService.isTab(rootKey);
+  private shouldUpdateChildren(rootKey: string | undefined) {
+    return rootKey && this.uiConfigService.isTab(rootKey);
   }
 }
