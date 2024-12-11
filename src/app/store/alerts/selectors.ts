@@ -1,11 +1,16 @@
 import { createSelector } from '@ngrx/store';
 import { AlertsState, RelatedEntityType } from './state';
-import { alertsFeature } from './reducers';
+import { alertsAdapter, alertsFeature } from './reducers';
 
 export const { selectAlertsState } = alertsFeature;
 
+const { selectAll } = alertsAdapter.getSelectors();
+
 export const selectAlertsByType = (entityType: RelatedEntityType) =>
-  createSelector(selectAlertsState, (state: AlertsState) => state.alerts[entityType]);
+  createSelector(selectAlertsState, (state: AlertsState) => {
+    const entityState = state.alerts[entityType];
+    return selectAll(entityState);
+  });
 
 export const selectAllAlertCount = createSelector(selectAlertsState, (state: AlertsState) => {
   return Object.values(RelatedEntityType).reduce((total, type) => {
