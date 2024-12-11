@@ -29,8 +29,11 @@ export function adaptUserNotification(notification: APINotificationResponseDTO):
 
 function adaptRecipentsToCsv(recipients: APIRecipientResponseDTO | undefined): string {
   if (!recipients) return '';
-  return (
-    recipients.emailRecipients?.map((x) => x.email).join(', ') ??
-    '' + recipients.roleRecipients?.map((x) => x.role).join(', ')
-  );
+
+  const emails = recipients.emailRecipients?.map((recipient) => recipient.email) ?? [];
+  const roles = recipients.roleRecipients?.map((recipient) => recipient.role?.name) ?? [];
+  return emails
+    .concat(...roles)
+    .filter((x) => x !== undefined)
+    .join(', ');
 }
