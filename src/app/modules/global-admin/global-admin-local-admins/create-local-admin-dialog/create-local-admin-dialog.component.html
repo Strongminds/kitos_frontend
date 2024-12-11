@@ -4,7 +4,12 @@
     <app-standard-vertical-content-grid>
       <app-user-dropdown formName="user" [formGroup]="formGroup" [searchGlobalUsers]="true" data-cy="user-dropdown">
       </app-user-dropdown>
-      <app-organization-dropdown formName="organization" [formGroup]="formGroup" data-cy="organization-dropdown">
+      <app-organization-dropdown
+        formName="organization"
+        [formGroup]="formGroup"
+        [disabledOrganizationUuids$]=""
+        data-cy="organization-dropdown"
+      >
       </app-organization-dropdown>
     </app-standard-vertical-content-grid>
 
