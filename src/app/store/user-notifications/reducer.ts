@@ -26,7 +26,6 @@ export const notificationFeature = createFeature({
     on(UserNotificationActions.getNotificationsSuccess, (state, { ownerResourceType, notifications }) => {
       switch (ownerResourceType) {
         case 'ItSystemUsage':
-          console.log(notifications);
           return {
             ...state,
             usageNotifications: systemNotificationsAdapter.setAll(notifications, state.usageNotifications),

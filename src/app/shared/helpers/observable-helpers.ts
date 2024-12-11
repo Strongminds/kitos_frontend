@@ -19,6 +19,11 @@ export function combineBooleansWithOr(observables: Observable<boolean>[]): Obser
   return combineLatest(observables).pipe(map((values: boolean[]) => values.some((value) => value)));
 }
 
+/**
+ * Debug operator that logs the value of the observable.
+ * @param label - Optional label to prepend to the log message.
+ * @returns An operator function that logs the value of the observable.
+ */
 export function debugPipe<T>(label?: string) {
   return tap<T>((value) => {
     if (label) {
