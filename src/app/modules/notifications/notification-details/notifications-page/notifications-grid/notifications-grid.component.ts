@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { mapEntityTypeToOwnerResourceType } from 'src/app/shared/helpers/entity-type.helper';
-import { debugPipe } from 'src/app/shared/helpers/observable-helpers';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
@@ -29,9 +28,7 @@ export class NotificationsGridComponent implements OnInit {
 
     const ownerResourceType = mapEntityTypeToOwnerResourceType(this.entityType);
     this.store.dispatch(UserNotificationActions.getNotifications(ownerResourceType));
-    this.notifications$ = this.store
-      .select(selectNotificationsByType(ownerResourceType))
-      .pipe(debugPipe('notifications'));
+    this.notifications$ = this.store.select(selectNotificationsByType(ownerResourceType));
   }
 
   private initializeGridColumns() {
