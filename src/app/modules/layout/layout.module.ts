@@ -10,7 +10,6 @@ import { EnvRibbonComponent } from './env-ribbon/env-ribbon.component';
 import { MenuItemComponent } from './menu-item/menu-item.component';
 import { MenuComponent } from './menu/menu.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
-import { NotificationDetailsComponent } from './notification-details/notification-details.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +18,6 @@ import { NotificationDetailsComponent } from './notification-details/notificatio
     MenuItemComponent,
     EnvRibbonComponent,
     ChooseOrganizationComponent,
-    NotificationDetailsComponent,
   ],
   imports: [CommonModule, RouterModule, MatToolbarModule, MatBadgeModule, MatMenuModule, SharedModule],
   exports: [NavBarComponent],
