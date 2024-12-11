@@ -17,6 +17,7 @@ export const initialNotificationsState: NotificationState = {
   usageNotifications: systemNotificationsAdapter.getInitialState(),
   contractNotifications: contractNotificationsAdapter.getInitialState(),
   dataProcessingNotifications: dprNotificationsAdapter.getInitialState(),
+  cacheTime: {},
 };
 
 export const notificationFeature = createFeature({
@@ -24,28 +25,49 @@ export const notificationFeature = createFeature({
   reducer: createReducer(
     initialNotificationsState,
     on(UserNotificationActions.getNotificationsSuccess, (state, { ownerResourceType, notifications }) => {
+      let newState = { ...state };
       switch (ownerResourceType) {
         case 'ItSystemUsage':
-          return {
-            ...state,
-            usageNotifications: systemNotificationsAdapter.setAll(notifications, state.usageNotifications),
+          newState = {
+            ...newState,
+            usageNotifications: systemNotificationsAdapter.setAll(notifications, newState.usageNotifications),
           };
+          break;
         case 'ItContract':
-          return {
-            ...state,
-            contractNotifications: contractNotificationsAdapter.setAll(notifications, state.contractNotifications),
+          newState = {
+            ...newState,
+            contractNotifications: contractNotificationsAdapter.setAll(notifications, newState.contractNotifications),
           };
+          break;
         case 'DataProcessingRegistration':
-          return {
-            ...state,
+          newState = {
+            ...newState,
             dataProcessingNotifications: dprNotificationsAdapter.setAll(
               notifications,
-              state.dataProcessingNotifications
+              newState.dataProcessingNotifications
             ),
           };
+          break;
         default:
-          return state;
+          return newState;
       }
+
+      return {
+        ...newState,
+        cacheTime: {
+          ...newState.cacheTime,
+          [ownerResourceType]: Date.now(),
+        },
+      };
+    }),
+    on(UserNotificationActions.notificationCreated, (state, { ownerResourceType }): NotificationState => {
+      return {
+        ...state,
+        cacheTime: {
+          ...state.cacheTime,
+          [ownerResourceType]: undefined,
+        },
+      };
     })
   ),
 });

@@ -4885,6 +4885,12 @@
       <trans-unit id="9117861173318709156" datatype="html">
         <source>Notifikationer</source>
       </trans-unit>
+      <trans-unit id="2513003037040133293" datatype="html">
+        <source>Modtager</source>
+      </trans-unit>
+      <trans-unit id="6546355986883757646" datatype="html">
+        <source>Ikke angivet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

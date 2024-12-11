@@ -1,13 +1,8 @@
 <app-segment [buttons]="segmentOptions" [(selected)]="selectedSegment"> </app-segment>
 
-<app-card>
-  <app-notifications-grid
-    *ngIf="selectedSegment === NotificationSegmentType.Notifications"
-    [entityType]="entityType"
-  ></app-notifications-grid>
+<app-notifications-grid
+  *ngIf="selectedSegment === NotificationSegmentType.Notifications"
+  [entityType]="entityType"
+></app-notifications-grid>
 
-  <app-alerts-grid
-    *ngIf="selectedSegment === NotificationSegmentType.Alerts"
-    [entityType]="entityType"
-  ></app-alerts-grid>
-</app-card>
+<app-alerts-grid *ngIf="selectedSegment === NotificationSegmentType.Alerts" [entityType]="entityType"></app-alerts-grid>

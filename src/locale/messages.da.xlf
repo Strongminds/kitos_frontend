@@ -6433,6 +6433,14 @@
         <source>Advarsler</source>
         <target state="new">Advarsler</target>
       </trans-unit>
+      <trans-unit id="2513003037040133293" datatype="html">
+        <source>Modtager</source>
+        <target state="new">Modtager</target>
+      </trans-unit>
+      <trans-unit id="6546355986883757646" datatype="html">
+        <source>Ikke angivet</source>
+        <target state="new">Ikke angivet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

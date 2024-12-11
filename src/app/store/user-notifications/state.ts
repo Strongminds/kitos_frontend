@@ -5,6 +5,9 @@ export interface NotificationState {
   usageNotifications: EntityState<UserNotification>;
   contractNotifications: EntityState<UserNotification>;
   dataProcessingNotifications: EntityState<UserNotification>;
+  cacheTime: {
+    [key in APINotificationResponseDTO.OwnerResourceTypeEnum]?: number;
+  };
 }
 
 export interface UserNotification extends APINotificationResponseDTO {
