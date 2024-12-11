@@ -9,6 +9,8 @@ import { NotifcationsRouterModule } from './notifications.routes';
 import { NotificationDetailsItContractsComponent } from './notification-details/notification-details-it-contracts/notification-details-it-contracts.component';
 import { NotificationDetailsDataProcessingComponent } from './notification-details/notification-details-data-processing/notification-details-data-processing.component';
 import { NotificationsPageComponent } from './notification-details/notifications-page/notifications-page.component';
+import { NotificationsGridComponent } from './notification-details/notifications-page/notifications-grid/notifications-grid.component';
+import { AlertsGridComponent } from './notification-details/notifications-page/alerts-grid/alerts-grid.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,8 @@ import { NotificationsPageComponent } from './notification-details/notifications
     NotificationDetailsItContractsComponent,
     NotificationDetailsDataProcessingComponent,
     NotificationsPageComponent,
+    NotificationsGridComponent,
+    AlertsGridComponent,
   ],
   imports: [CommonModule, ComponentsModule, RouterModule, SharedModule, NotifcationsRouterModule],
 })

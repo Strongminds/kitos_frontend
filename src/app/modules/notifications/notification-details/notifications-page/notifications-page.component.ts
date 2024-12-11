@@ -16,7 +16,7 @@ export class NotificationsPageComponent {
   @Input() entityType!: RegistrationEntityTypes;
 
   public selectedSegment = NotificationSegmentType.Notifications;
-  public readonly notificationSegmenType = NotificationSegmentType;
+  public readonly NotificationSegmentType = NotificationSegmentType;
   public readonly segmentOptions: SegmentButtonOption<NotificationSegmentType>[] = [
     {
       value: NotificationSegmentType.Notifications,
