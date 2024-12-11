@@ -114,6 +114,19 @@
         </div>
       </ng-template>
 
+      <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
+        <app-paragraph [cropOnOverflow]="true">
+          <app-details-page-link
+            *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
+            linkFontSize="small"
+            [itemType]="column.entityType"
+            [itemUuid]="itemUuid"
+            [subpagePath]="column.extraData"
+            >{{ searchProperty(dataItem, column.field) }}</app-details-page-link
+          >
+        </app-paragraph>
+      </ng-template>
+
       <ng-template *ngIf="column.style === 'action-buttons'" kendoGridCellTemplate let-dataItem>
         <div class="action-buttons-container">
           <ng-container *ngFor="let button of column.extraData">
