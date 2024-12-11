@@ -51,6 +51,8 @@ import { gdprReportFeature } from './it-system-usage/gdpr-report/reducer';
 import { GdprReportEffects } from './it-system-usage/gdpr-report/effects';
 import { notificationFeature } from './user-notifications/reducer';
 import { UserNotificationsEffects } from './user-notifications/effects';
+import { alertsFeature } from './alerts/reducers';
+import { AlertsEffects } from './alerts/effects';
 
 @NgModule({
   imports: [
@@ -86,6 +88,7 @@ import { UserNotificationsEffects } from './user-notifications/effects';
     StoreModule.forFeature(localAdminUsersFeature),
     StoreModule.forFeature(gdprReportFeature),
     StoreModule.forFeature(notificationFeature),
+    StoreModule.forFeature(alertsFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
@@ -111,6 +114,7 @@ import { UserNotificationsEffects } from './user-notifications/effects';
       PublicMessageEffects,
       GdprReportEffects,
       UserNotificationsEffects,
+      AlertsEffects,
     ]),
     RouterModule.forRoot([]),
     StoreRouterConnectingModule.forRoot(),
