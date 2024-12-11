@@ -12,7 +12,13 @@ import { MenuComponent } from './menu/menu.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 @NgModule({
-  declarations: [NavBarComponent, MenuComponent, MenuItemComponent, EnvRibbonComponent, ChooseOrganizationComponent],
+  declarations: [
+    NavBarComponent,
+    MenuComponent,
+    MenuItemComponent,
+    EnvRibbonComponent,
+    ChooseOrganizationComponent,
+  ],
   imports: [CommonModule, RouterModule, MatToolbarModule, MatBadgeModule, MatMenuModule, SharedModule],
   exports: [NavBarComponent],
 })
