@@ -19,55 +19,46 @@ export class AlertsGridComponent implements OnInit {
 
   public alerts$!: Observable<Alert[]>;
 
-  public gridColumns!: GridColumn[];
+  public readonly gridColumns: GridColumn[] = [
+    {
+      title: $localize`Type`,
+      hidden: false,
+      field: 'alertType',
+    },
+    {
+      title: $localize`Navn`,
+      hidden: false,
+      field: 'name',
+    },
+    {
+      title: $localize`Dato`,
+      hidden: false,
+      field: 'created',
+    },
+    {
+      title: $localize`Besked`,
+      hidden: false,
+      field: 'message',
+    },
+    {
+      field: 'Actions',
+      title: ' ',
+      hidden: false,
+      style: 'action-buttons',
+      isSticky: true,
+      noFilter: true,
+      extraData: [{ type: 'delete' }] as GridActionColumn[],
+      width: 50,
+    },
+  ];
 
   constructor(private store: Store) {}
 
   ngOnInit(): void {
-    //We have to initialize the grid columns here because the entityType is not available in the constructor
-    this.initializeGridColumns();
-
     const relatedEntityType = mapEntityTypeToRelatedEntityType(this.entityType);
     this.alerts$ = this.store.select(selectAlertsByType(relatedEntityType));
     this.store.dispatch(AlertActions.getAlerts(relatedEntityType));
   }
 
-  public deleteAlert(alert: Alert): void {
-
-  }
-
-  private initializeGridColumns() {
-    this.gridColumns = [
-      {
-        title: $localize`Type`,
-        hidden: false,
-        field: 'alertType',
-      },
-      {
-        title: $localize`Navn`,
-        hidden: false,
-        field: 'name',
-      },
-      {
-        title: $localize`Dato`,
-        hidden: false,
-        field: 'created',
-      },
-      {
-        title: $localize`Besked`,
-        hidden: false,
-        field: 'message',
-      },
-      {
-        field: 'Actions',
-        title: ' ',
-        hidden: false,
-        style: 'action-buttons',
-        isSticky: true,
-        noFilter: true,
-        extraData: [{ type: 'delete' }] as GridActionColumn[],
-        width: 50,
-      },
-    ];
-  }
+  public deleteAlert(alert: Alert): void {}
 }
