@@ -51,9 +51,8 @@ export class NotificationsButtonComponent {
   private getModuleRoute(): string {
     const currentRoute = this.router.url;
     const splitRoutes = currentRoute.split('/');
-    if (splitRoutes.length < 2) return AppPath.notifications;
+    if (splitRoutes.length < 2) return AppPath.root;
     const moduleRoute = splitRoutes[1];
-    console.log(moduleRoute);
     return moduleRoute;
   }
 
