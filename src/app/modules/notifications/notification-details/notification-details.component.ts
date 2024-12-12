@@ -18,7 +18,7 @@ export class NotificationDetailsComponent {
     {
       label: $localize`IT System`,
       iconType: 'systems',
-      route: AppPath.itSystemUsages,
+      route: AppPath.itSystems,
       enabled$: this.store.select(selectShowItSystemModule),
     },
     {

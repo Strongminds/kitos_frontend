@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { combineLatest, map, Observable } from 'rxjs';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
+import {
+  selectShowItSystemModule,
+  selectShowItContractModule,
+  selectShowDataProcessingRegistrations,
+} from 'src/app/store/organization/selectors';
 
 @Component({
   selector: 'app-notifications-button',
@@ -12,24 +18,53 @@ import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 export class NotificationsButtonComponent {
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
 
+  private readonly itSystemsEnabled$ = this.store.select(selectShowItSystemModule);
+  private readonly itContractsEnabled$ = this.store.select(selectShowItContractModule);
+  private readonly dataProcessingEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
+
   constructor(private store: Store, private router: Router) {}
 
   public navigateToNotifications() {
-    console.log('Navigating to notifications');
+    const subRoute = this.getSubroute();
+    if (subRoute === AppPath.root) {
+      //Let UI Customization decide the default page
+      this.getDefaultNotificationPage().subscribe((defaultPage) => {
+        this.router.navigate([`${AppPath.notifications}/${defaultPage}`]);
+      });
+    } else {
+      this.router.navigate([`${AppPath.notifications}/${subRoute}`]);
+    }
+  }
+
+  private getSubroute(): string {
+    const moduleRoute = this.getModuleRoute();
+    switch (moduleRoute) {
+      case AppPath.itSystems:
+      case AppPath.itContracts:
+      case AppPath.dataProcessing:
+        return moduleRoute;
+      default:
+        return AppPath.root;
+    }
+  }
+
+  private getModuleRoute(): string {
     const currentRoute = this.router.url;
-    console.log('Current route:', currentRoute);
-    if (currentRoute.replaceAll('/', '').startsWith(AppPath.itSystems)) {
-      this.router.navigate([`${AppPath.notifications}/${AppPath.itSystems}`]);
-      return;
-    }
-    if (currentRoute.replaceAll('/', '').startsWith(AppPath.itContracts)) {
-      this.router.navigate([`${AppPath.notifications}/${AppPath.itContracts}`]);
-      return;
-    }
-    if (currentRoute.replaceAll('/', '').startsWith(AppPath.dataProcessing)) {
-      this.router.navigate([`${AppPath.notifications}/${AppPath.dataProcessing}`]);
-      return;
-    }
-    this.router.navigate([AppPath.notifications]);
+    const splitRoutes = currentRoute.split('/');
+    if (splitRoutes.length < 2) return AppPath.notifications;
+    const moduleRoute = splitRoutes[1];
+    console.log(moduleRoute);
+    return moduleRoute;
+  }
+
+  private getDefaultNotificationPage(): Observable<string> {
+    return combineLatest([this.itSystemsEnabled$, this.itContractsEnabled$, this.dataProcessingEnabled$]).pipe(
+      map(([itSystemsEnabled, itContractsEnabled, dataProcessingEnabled]) => {
+        if (itSystemsEnabled) return AppPath.itSystems;
+        if (itContractsEnabled) return AppPath.itContracts;
+        if (dataProcessingEnabled) return AppPath.dataProcessing;
+        return AppPath.root;
+      })
+    );
   }
 }

@@ -11,9 +11,9 @@ const routes: Routes = [
     path: AppPath.root,
     component: NotificationDetailsComponent,
     children: [
-      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itSystemUsages },
+      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itSystems },
       {
-        path: AppPath.itSystemUsages,
+        path: AppPath.itSystems,
         component: NotificationDetailsItSystemUsagesComponent,
       },
       {
