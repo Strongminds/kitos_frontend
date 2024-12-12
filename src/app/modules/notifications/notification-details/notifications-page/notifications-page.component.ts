@@ -3,7 +3,7 @@ import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.c
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 
 enum NotificationSegmentType {
-  Notifications = 'notifications',
+  Advis = 'advis',
   Alerts = 'alerts',
 }
 
@@ -15,12 +15,12 @@ enum NotificationSegmentType {
 export class NotificationsPageComponent {
   @Input() entityType!: RegistrationEntityTypes;
 
-  public selectedSegment = NotificationSegmentType.Notifications;
+  public selectedSegment = NotificationSegmentType.Advis;
   public readonly NotificationSegmentType = NotificationSegmentType;
   public readonly segmentOptions: SegmentButtonOption<NotificationSegmentType>[] = [
     {
-      value: NotificationSegmentType.Notifications,
-      text: $localize`Notifikationer`,
+      value: NotificationSegmentType.Advis,
+      text: $localize`Advis`,
     },
     {
       value: NotificationSegmentType.Alerts,

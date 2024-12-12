@@ -5,7 +5,7 @@ import { AlertActions } from './actions';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { selectOrganizationUuid, selectUserUuid } from '../user-store/selectors';
-import { catchError, filter, map, of, switchMap } from 'rxjs';
+import { catchError, filter, map, mergeMap, of } from 'rxjs';
 import { mapRelatedEntityTypeToDTO } from 'src/app/shared/helpers/entity-type.helper';
 import { adaptAlert } from './state';
 
@@ -18,7 +18,7 @@ export class AlertsEffects {
       ofType(AlertActions.getAlerts),
       concatLatestFrom(() => [this.store.select(selectUserUuid), this.store.select(selectOrganizationUuid)]),
       filter(([_, userUuid, organizationUuid]) => userUuid !== undefined && organizationUuid !== undefined),
-      switchMap(([{ entityType }, userUuid, organizationUuid]) => {
+      mergeMap(([{ entityType }, userUuid, organizationUuid]) => {
         return this.alertsService
           .getManyAlertsV2GetByOrganizationAndUser({
             organizationUuid: organizationUuid!,

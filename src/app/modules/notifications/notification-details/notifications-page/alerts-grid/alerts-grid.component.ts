@@ -55,7 +55,7 @@ export class AlertsGridComponent implements OnInit {
         hidden: false,
         style: 'page-link',
         entityType: this.entityType,
-        idField: 'uuid',
+        idField: 'entityUuid',
         extraData: 'notifications',
         field: 'name',
       },

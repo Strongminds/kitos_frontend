@@ -13,6 +13,7 @@
 
 export interface APIAlertResponseDTO { 
     uuid: string;
+    entityUuid: string;
     name?: string;
     alertType?: APIAlertResponseDTO.AlertTypeEnum;
     message?: string;

@@ -13,7 +13,8 @@ export enum RelatedEntityType {
 
 export interface Alert {
   uuid: string;
-  name?: string;
+  entityUuid: string;
+  name: string;
   alertType: APIAlertResponseDTO.AlertTypeEnum;
   message?: string;
   created?: string;
@@ -22,7 +23,8 @@ export interface Alert {
 export function adaptAlert(alert: APIAlertResponseDTO): Alert {
   return {
     uuid: alert.uuid,
-    name: alert.name,
+    entityUuid: alert.entityUuid,
+    name: alert.name ?? $localize`Ikke angivet`,
     alertType: alert.alertType ?? 'Advis', //The only alert type atm (11/12/2024)
     message: alert.message,
     created: alert.created,
