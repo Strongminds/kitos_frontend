@@ -28,7 +28,7 @@ describe('Notifications', () => {
   });
 
   it('Can see alerts', () => {
-    cy.setup(true, 'notifications');
+    cy.setup(true, 'notifications', undefined, false);
     cy.contains('Advarsler').click();
 
     cy.contains('Ikke navngivet').should('exist');
@@ -37,7 +37,7 @@ describe('Notifications', () => {
   });
 
   it('Can delete alert', () => {
-    cy.setup(true, 'notifications');
+    cy.setup(true, 'notifications', undefined, false);
     cy.contains('Advarsler').click();
 
     cy.intercept('DELETE', 'api/v2/internal/alerts/*', { statusCode: 204 }).as('deleteAlert');
