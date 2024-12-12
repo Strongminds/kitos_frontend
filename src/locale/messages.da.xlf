@@ -4019,10 +4019,6 @@
         <source>Til og med</source>
         <target state="new">Til og med</target>
       </trans-unit>
-      <trans-unit id="1970230514684887514" datatype="html">
-        <source>Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
-        <target state="new">Vælg <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
-      </trans-unit>
       <trans-unit id="791950660812381145" datatype="html">
         <source>Side</source>
         <target state="new">Side</target>
@@ -4038,10 +4034,6 @@
       <trans-unit id="1624430972791085553" datatype="html">
         <source>Din søgning gav intet resultat</source>
         <target state="new">Din søgning gav intet resultat</target>
-      </trans-unit>
-      <trans-unit id="794998269041924184" datatype="html">
-        <source>Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></source>
-        <target state="new">Søg på <x id="INTERPOLATION" equiv-text="{{ column.title }}"/></target>
       </trans-unit>
       <trans-unit id="5993658344140519640" datatype="html">
         <source>Anvendes</source>
@@ -6396,6 +6388,10 @@
       <trans-unit id="7864242390343441005" datatype="html">
         <source> Medtag overordnede enheder </source>
         <target state="new"> Medtag overordnede enheder </target>
+      </trans-unit>
+      <trans-unit id="1164724015350728554" datatype="html">
+        <source>Søg...</source>
+        <target state="new">Søg...</target>
       </trans-unit>
     </body>
   </file>

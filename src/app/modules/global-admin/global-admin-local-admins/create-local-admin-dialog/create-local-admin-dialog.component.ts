@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, first, map } from 'rxjs';
 import { APIOrganizationResponseDTO, APIUserReferenceResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
@@ -34,7 +34,10 @@ export class CreateLocalAdminDialogComponent extends BaseComponent implements On
 
   public formGroup: FormGroup = new FormGroup({
     user: new FormControl<APIUserReferenceResponseDTO | undefined>(undefined, Validators.required),
-    organization: new FormControl<APIOrganizationResponseDTO | undefined>(undefined, Validators.required),
+    organization: new FormControl<APIOrganizationResponseDTO | undefined>(
+      { value: undefined, disabled: true },
+      Validators.required
+    ),
   });
 
   constructor(
@@ -62,5 +65,20 @@ export class CreateLocalAdminDialogComponent extends BaseComponent implements On
     const userUuid = formValue.user.uuid;
     const organizationUuid = formValue.organization.uuid;
     this.store.dispatch(LocalAdminUserActions.addLocalAdmin(organizationUuid, userUuid));
+  }
+
+  public updateDisabledOrganizationUuids(): void {
+    const userUuid = this.formGroup.get('user')?.value?.uuid;
+    const organizationControl = this.formGroup.get('organization');
+    if (!userUuid) {
+      this.disabledOrganizationUuids$.next([]);
+      organizationControl?.disable();
+      return;
+    }
+    this.localAdminOrganizations$.pipe(first()).subscribe((localAdminOrganizations) => {
+      const disabledOrganizationUuids = localAdminOrganizations[userUuid] || [];
+      this.disabledOrganizationUuids$.next(disabledOrganizationUuids);
+      organizationControl?.enable();
+    });
   }
 }

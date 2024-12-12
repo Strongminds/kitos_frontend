@@ -25,7 +25,10 @@ export class OrganizationDropdownComponent extends BaseComponent implements OnIn
   public readonly organizations$ = this.componentStore.organizations$.pipe(
     combineLatestWith(this.disabledOrganizationUuidsSubject$),
     map(([organizations, disabledOrganizationUuids]) =>
-      organizations.filter((org) => !disabledOrganizationUuids.includes(org.uuid))
+      organizations.map((org) => ({
+        ...org,
+        disabled: disabledOrganizationUuids.includes(org.uuid),
+      }))
     )
   );
 
