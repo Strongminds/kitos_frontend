@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
 import { AlertsState, RelatedEntityType } from './state';
 import { alertsAdapter, alertsFeature } from './reducers';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 
 export const { selectAlertsState } = alertsFeature;
 
@@ -11,6 +12,16 @@ export const selectAlertsByType = (entityType: RelatedEntityType) =>
     const entityState = state.alerts[entityType];
     return selectAll(entityState);
   });
+
+export const selectAlertCacheTime = (entityType: RelatedEntityType) =>
+  createSelector(
+    selectAlertsState,
+    () => new Date(),
+    (state, time) => {
+      const cacheTime = state.cacheTimes[entityType];
+      return hasValidCache(cacheTime, time);
+    }
+  );
 
 export const selectAllAlertCount = createSelector(selectAlertsState, (state: AlertsState) => {
   return Object.values(RelatedEntityType).reduce((total, type) => {

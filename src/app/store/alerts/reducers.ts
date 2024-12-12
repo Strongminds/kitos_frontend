@@ -13,6 +13,11 @@ export const initialAlertsState: AlertsState = {
     [RelatedEntityType.ItContract]: alertsAdapter.getInitialState(),
     [RelatedEntityType.DataProcessingRegistration]: alertsAdapter.getInitialState(),
   },
+  cacheTimes: {
+    [RelatedEntityType.ItSystemUsage]: undefined,
+    [RelatedEntityType.ItContract]: undefined,
+    [RelatedEntityType.DataProcessingRegistration]: undefined,
+  },
 };
 
 export const alertsFeature = createFeature({
@@ -25,6 +30,10 @@ export const alertsFeature = createFeature({
         alerts: {
           ...state.alerts,
           [entityType]: alertsAdapter.setAll(alerts, state.alerts[entityType]),
+        },
+        cacheTimes: {
+          ...state.cacheTimes,
+          [entityType]: Date.now(),
         },
       };
     }),

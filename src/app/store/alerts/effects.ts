@@ -8,6 +8,7 @@ import { selectOrganizationUuid, selectUserUuid } from '../user-store/selectors'
 import { catchError, filter, map, mergeMap, of } from 'rxjs';
 import { mapRelatedEntityTypeToDTO } from 'src/app/shared/helpers/entity-type.helper';
 import { adaptAlert } from './state';
+import { selectAlertCacheTime } from './selectors';
 
 @Injectable()
 export class AlertsEffects {
@@ -16,8 +17,15 @@ export class AlertsEffects {
   getAlerts$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(AlertActions.getAlerts),
-      concatLatestFrom(() => [this.store.select(selectUserUuid), this.store.select(selectOrganizationUuid)]),
-      filter(([_, userUuid, organizationUuid]) => userUuid !== undefined && organizationUuid !== undefined),
+      concatLatestFrom(({ entityType }) => [
+        this.store.select(selectUserUuid),
+        this.store.select(selectOrganizationUuid),
+        this.store.select(selectAlertCacheTime(entityType)),
+      ]),
+      filter(
+        ([_, userUuid, organizationUuid, hasValidCache]) =>
+          userUuid !== undefined && organizationUuid !== undefined && !hasValidCache
+      ),
       mergeMap(([{ entityType }, userUuid, organizationUuid]) => {
         return this.alertsService
           .getManyAlertsV2GetByOrganizationAndUser({

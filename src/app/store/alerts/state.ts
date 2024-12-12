@@ -3,6 +3,7 @@ import { APIAlertResponseDTO } from 'src/app/api/v2';
 
 export interface AlertsState {
   alerts: { [key in RelatedEntityType]: EntityState<Alert> };
+  cacheTimes: { [key in RelatedEntityType]: number | undefined };
 }
 
 export enum RelatedEntityType {
