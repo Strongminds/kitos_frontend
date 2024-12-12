@@ -55,6 +55,16 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       permissionsField: 'CanChangeUsageStatus',
     },
     {
+      field: 'Disabled',
+      title: $localize`Status`,
+      section: this.systemSectionName,
+      filter: 'boolean',
+      entityType: 'it-system-usage',
+      style: 'reverse-chip',
+      hidden: false,
+      persistId: 'isActive',
+    },
+    {
       field: 'Parent.Name',
       title: $localize`Overordnet IT System`,
       section: this.systemSectionName,
