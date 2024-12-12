@@ -9,7 +9,7 @@ export const AlertActions = createActionGroup({
     'Get alerts error': emptyProps(),
 
     'Delete alert': (entitType: RelatedEntityType, alertUuid: string) => ({ entitType, alertUuid }),
-    'Delete alert success': (entitType: RelatedEntityType, alertUuid: string) => ({ entitType, alertUuid }),
+    'Delete alert success': (entityType: RelatedEntityType, alertUuid: string) => ({ entityType, alertUuid }),
     'Delete alert error': emptyProps(),
   },
 });

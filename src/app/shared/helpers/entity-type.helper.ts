@@ -29,3 +29,18 @@ export function mapEntityTypeToRelatedEntityType(entityType: RegistrationEntityT
       throw new Error(`Related entity type for entity type: ${entityType} does not exist`);
   }
 }
+
+export function mapRelatedEntityTypeToDTO(
+  entityType: RelatedEntityType
+): 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration' {
+  switch (entityType) {
+    case RelatedEntityType.ItSystemUsage:
+      return 'itSystemUsage';
+    case RelatedEntityType.ItContract:
+      return 'itContract';
+    case RelatedEntityType.DataProcessingRegistration:
+      return 'dataProcessingRegistration';
+    default:
+      throw new Error(`Related entity type for entity type: ${entityType} does not exist`);
+  }
+}

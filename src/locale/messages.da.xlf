@@ -6441,6 +6441,26 @@
         <source>Ikke angivet</source>
         <target state="new">Ikke angivet</target>
       </trans-unit>
+      <trans-unit id="3349798521063634552" datatype="html">
+        <source>Slet advarsel</source>
+        <target state="new">Slet advarsel</target>
+      </trans-unit>
+      <trans-unit id="250985142269881011" datatype="html">
+        <source>Er du sikker på, at du vil slette advarslen?</source>
+        <target state="new">Er du sikker på, at du vil slette advarslen?</target>
+      </trans-unit>
+      <trans-unit id="4279066211673456731" datatype="html">
+        <source>Besked</source>
+        <target state="new">Besked</target>
+      </trans-unit>
+      <trans-unit id="6309084160312780879" datatype="html">
+        <source>Advarslen blev slettet</source>
+        <target state="new">Advarslen blev slettet</target>
+      </trans-unit>
+      <trans-unit id="7821102703466673779" datatype="html">
+        <source>Advarslen kunne ikke slettes</source>
+        <target state="new">Advarslen kunne ikke slettes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

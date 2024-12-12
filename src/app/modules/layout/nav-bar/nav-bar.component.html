@@ -56,7 +56,7 @@
 
     <span>
       <app-button
-        matBadge="0"
+        [matBadge]="alertsCount$ | async"
         matBadgeColor="primary"
         buttonStyle="secondary"
         [routerLink]="AppPath.notifications"
