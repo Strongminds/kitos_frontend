@@ -1,0 +1,9 @@
+<app-button
+  [matBadge]="alertsCount$ | async"
+  matBadgeColor="primary"
+  buttonStyle="secondary"
+  (buttonClick)="navigateToNotifications()"
+  class="notification-button"
+>
+  <app-notification-icon></app-notification-icon>
+</app-button>

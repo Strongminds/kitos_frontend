@@ -55,15 +55,7 @@
     <app-spacer></app-spacer>
 
     <span>
-      <app-button
-        [matBadge]="alertsCount$ | async"
-        matBadgeColor="primary"
-        buttonStyle="secondary"
-        [routerLink]="AppPath.notifications"
-        class="notification-button"
-      >
-        <app-notification-icon></app-notification-icon>
-      </app-button>
+      <app-notifications-button></app-notifications-button>
 
       <span class="separator"></span>
 
