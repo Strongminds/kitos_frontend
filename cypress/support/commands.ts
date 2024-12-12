@@ -27,6 +27,8 @@ Cypress.Commands.add('setup', (authenticate?: boolean, urlPath?: string, uiCusto
     fixture: uiCustomizationFixturePath ?? './shared/it-contracts-ui-customization.json',
   });
 
+  //cy.intercept('GET', 'api/v2/internal/alerts/organization/*/user/*/*', { body: [], statusCode: 200 });
+
   cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
     fixture: './shared/ui-root-config.json',
   });
