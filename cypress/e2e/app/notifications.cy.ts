@@ -50,5 +50,7 @@ describe('Notifications', () => {
     cy.contains('Ikke navngivet').should('not.exist');
     cy.contains('12-12-2024').should('not.exist');
     cy.contains('Advis kunne ikke sendes').should('not.exist');
+
+    cy.get('app-popup-message').should('exist');
   });
 });
