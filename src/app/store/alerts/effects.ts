@@ -5,7 +5,7 @@ import { AlertActions } from './actions';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { selectOrganizationUuid, selectUserUuid } from '../user-store/selectors';
-import { catchError, filter, map, mergeMap, of } from 'rxjs';
+import { catchError, filter, map, mergeMap, of, switchMap } from 'rxjs';
 import { mapRelatedEntityTypeToDTO } from 'src/app/shared/helpers/entity-type.helper';
 import { adaptAlert } from './state';
 import { selectAlertCacheTime } from './selectors';
@@ -36,6 +36,22 @@ export class AlertsEffects {
           .pipe(
             map((alerts) => AlertActions.getAlertsSuccess(entityType, alerts.map(adaptAlert))),
             catchError(() => of(AlertActions.getAlertsError()))
+          );
+      })
+    );
+  });
+
+  deleteAlert$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(AlertActions.deleteAlert),
+      switchMap(({ entitType, alertUuid }) => {
+        return this.alertsService
+          .deleteSingleAlertsV2DeleteAlert({
+            alertUuid,
+          })
+          .pipe(
+            map(() => AlertActions.deleteAlertSuccess(entitType, alertUuid)),
+            catchError(() => of(AlertActions.deleteAlertError()))
           );
       })
     );
