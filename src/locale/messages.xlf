@@ -3021,10 +3021,10 @@
         <source>Eksporter</source>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter alle kolonner </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </source>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter viste kolonner </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </source>
       </trans-unit>
       <trans-unit id="7150593562313015326" datatype="html">
         <source>
@@ -4712,7 +4712,7 @@
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</source>
       </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
-        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </source>
+        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
       </trans-unit>
       <trans-unit id="8145441157302108078" datatype="html">
         <source>System UUID</source>
@@ -4851,6 +4851,27 @@
       </trans-unit>
       <trans-unit id="7864242390343441005" datatype="html">
         <source> Medtag overordnede enheder </source>
+      </trans-unit>
+      <trans-unit id="8068831618296287831" datatype="html">
+        <source>System ID</source>
+      </trans-unit>
+      <trans-unit id="8677745733624593339" datatype="html">
+        <source>Klassifikation af data</source>
+      </trans-unit>
+      <trans-unit id="2016413730949071333" datatype="html">
+        <source>Arkiveringsfrekvens</source>
+      </trans-unit>
+      <trans-unit id="2526296220627158527" datatype="html">
+        <source>Relationer til andre systemer</source>
+      </trans-unit>
+      <trans-unit id="4444328125924097461" datatype="html">
+        <source>Relevante organisationsenheder </source>
+      </trans-unit>
+      <trans-unit id="5224755622036276546" datatype="html">
+        <source>Relationer fra andre systemer</source>
+      </trans-unit>
+      <trans-unit id="4491906435283548133" datatype="html">
+        <source>Lokale tilknyttede opgaver</source>
       </trans-unit>
       <trans-unit id="1164724015350728554" datatype="html">
         <source>Søg...</source>
