@@ -44,6 +44,7 @@ describe('it-contract-notifications', () => {
     });
     cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
     cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('api/v2/internal/it-contracts/applied-procurement-plans/*', { body: [] });
     cy.setup(true, 'it-contracts');
     cy.intercept('/api/v2/internal/notifications/ItContract*', {
       fixture: './it-contracts/notifications/it-contract-notifications.json',
@@ -51,7 +52,6 @@ describe('it-contract-notifications', () => {
     cy.intercept('/api/v2/it-contract-role-types*', {
       fixture: './it-contracts/notifications/it-contract-role-types.json',
     });
-    cy.intercept('api/v2/internal/it-contracts/applied-procurement-plans/*', { body: [] });
 
     cy.contains('Contract 1').click();
     cy.navigateToDetailsSubPage('Advis');
