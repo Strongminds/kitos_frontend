@@ -26,6 +26,8 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
 
   isRemoving: false,
   lastSeenGridConfig: undefined,
+
+  appliedProcurementPlans: undefined,
 });
 
 export const itContractFeature = createFeature({
