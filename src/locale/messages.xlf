@@ -3277,8 +3277,8 @@
       <trans-unit id="785705451816912190" datatype="html">
         <source>Indtast et heltal</source>
       </trans-unit>
-      <trans-unit id="7183340572551759368" datatype="html">
-        <source>OBS: Opsætning af overblik afviger fra kommunens standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
+      <trans-unit id="1759972015530743313" datatype="html">
+        <source>OBS: Opsætning af overblik afviger fra din organisations standardoverblik. Tryk på &apos;Gendan kolonneopsætning&apos; for at benytte den gældende opsætning.</source>
       </trans-unit>
       <trans-unit id="2961782936302807216" datatype="html">
         <source>Kolonnevisning gendannet til organisationens standardopsætning</source>
