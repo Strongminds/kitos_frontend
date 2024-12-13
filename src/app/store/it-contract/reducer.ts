@@ -189,6 +189,13 @@ export const itContractFeature = createFeature({
           lastSeenGridConfig: response,
         };
       }
-    )
+    ),
+
+    on(ITContractActions.getAppliedProcurementPlansSuccess, (state, { response }): ITContractState => {
+      return {
+        ...state,
+        appliedProcurementPlans: response,
+      };
+    })
   ),
 });
