@@ -193,7 +193,7 @@
           ><app-trashcan-icon></app-trashcan-icon> Slet enhed</app-button
         >
       </div>
-      <div class="right-buttons" *ngIf="(anyRegistrations$ | async) !== true">
+      <div class="right-buttons" *ngIf="(anyRegistrations$ | async) === true">
         <app-button
           buttonStyle="secondary"
           [color]="'accent'"
