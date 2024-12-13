@@ -2,6 +2,6 @@
   class="full-width"
   [column]="column"
   [filter]="filter"
-  [options]="(optionsObservable | async) ?? []"
+  [options]="(options$ | async) ?? []"
   [entityType]="entityType"
 ></app-dropdown-filter>

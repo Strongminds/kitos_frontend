@@ -103,7 +103,6 @@
             <app-dropdown-column-data-filter
               [column]="columnFilter"
               [filter]="filter"
-              [data$]="data$"
               [serviceKey]="column.extraData"
               [columnName]="column.field"
               *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'dropdown-from-column-data'"

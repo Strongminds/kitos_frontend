@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
-import { ColumnComponent, FilterService, GridDataResult } from '@progress/kendo-angular-grid';
+import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { first, Observable } from 'rxjs';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
@@ -23,10 +23,9 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
   @Input() columnName!: string;
   @Input() serviceKey!: GridDataKey;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  @Input() data$!: Observable<GridDataResult | null>;
   @Input() entityType!: RegistrationEntityTypes;
 
-  public optionsObservable!: Observable<FilterDropdownOption[]>;
+  public options$!: Observable<FilterDropdownOption[]>;
 
   constructor(
     filterService: FilterService,
@@ -37,13 +36,13 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
   }
 
   ngOnInit(): void {
-    this.optionsObservable = this.columnFilterDataService.get(this.serviceKey);
+    this.options$ = this.columnFilterDataService.get(this.serviceKey);
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
       this.actions$
         .pipe(
           ofType(GridSavedFilterActions.dropdownDataOptionsUpdated),
-          concatLatestFrom(() => this.optionsObservable),
+          concatLatestFrom(() => this.options$),
           first()
         )
         .subscribe(([payload, options]) => {
