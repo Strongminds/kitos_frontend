@@ -1,14 +1,15 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { Store } from '@ngrx/store';
 import { ColumnComponent, FilterService, GridDataResult } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { first, Observable } from 'rxjs';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { ColumnFilterDataService, GridDataKey } from 'src/app/shared/services/grid-data.service';
 import { GridSavedFilterActions } from 'src/app/store/grid/actions';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownFilterComponent, FilterDropdownOption } from '../dropdown-filter/dropdown-filter.component';
+import { concatLatestFrom } from '@ngrx/operators';
 
 @Component({
   selector: 'app-dropdown-column-data-filter',
@@ -20,39 +21,40 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
   @Input() columnName!: string;
+  @Input() serviceKey!: GridDataKey;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() data$!: Observable<GridDataResult | null>;
-  @Input() options: FilterDropdownOption[] = [];
   @Input() entityType!: RegistrationEntityTypes;
 
-  constructor(filterService: FilterService, private actions$: Actions, private store: Store) {
+  public optionsObservable!: Observable<FilterDropdownOption[]>;
+
+  constructor(
+    filterService: FilterService,
+    private actions$: Actions,
+    private columnFilterDataService: ColumnFilterDataService
+  ) {
     super(filterService);
   }
 
   ngOnInit(): void {
-    this.data$.subscribe((gridData) => {
-      const dataObject = gridData?.data as object[];
-      const possibleOptions: string[] = [];
-      dataObject.forEach((data) => {
-        const columnData = this.getProperty(data, this.columnName as keyof typeof data);
-        possibleOptions.push(columnData);
-      });
-      const uniqueOptions = Array.from(new Set(possibleOptions)).filter((option) => option);
-      this.options = uniqueOptions.map((option) => ({ name: option, value: option } as FilterDropdownOption));
-      this.store.dispatch(GridSavedFilterActions.dropdownDataOptionsUpdated(this.columnName, this.entityType));
-    });
+    this.optionsObservable = this.columnFilterDataService.get(this.serviceKey);
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
-      this.actions$.pipe(ofType(GridSavedFilterActions.dropdownDataOptionsUpdated)).pipe(first()).subscribe((payload) => {
-        if (payload.column !== this.columnName || this.entityType !== payload.entityType) {
-          return;
-        }
-        const newValue = filter?.value;
-        const newOption = this.options.find((option) => option.value === newValue);
-        this.dropdownFilter.chosenOption = newOption;
-      });
+      this.actions$
+        .pipe(
+          ofType(GridSavedFilterActions.dropdownDataOptionsUpdated),
+          concatLatestFrom(() => this.optionsObservable),
+          first()
+        )
+        .subscribe(([payload, options]) => {
+          if (payload.column !== this.columnName || this.entityType !== payload.entityType) {
+            return;
+          }
+          const newValue = filter?.value;
+          const newOption = options.find((option) => option.value === newValue);
+          this.dropdownFilter.chosenOption = newOption;
+        });
     };
-
     initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod);
   }
 

@@ -21,6 +21,7 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { GridDataKey } from 'src/app/shared/services/grid-data.service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
@@ -208,6 +209,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       title: $localize`Genanskaffelsesplan`,
       section: this.contractSection,
       extraFilter: 'dropdown-from-column-data',
+      extraData: GridDataKey.appliedProcurementPlans,
       width: 300,
       hidden: false,
       persistId: 'procurementPlanYear',
@@ -447,6 +449,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   ngOnInit(): void {
     const existingColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, this.defaultGridColumns);
 
+    this.store.dispatch(ITContractActions.getAppliedProcurementPlans());
     this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
 
     if (existingColumns) {
