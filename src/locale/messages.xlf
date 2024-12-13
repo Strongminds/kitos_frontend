@@ -2877,9 +2877,6 @@
       <trans-unit id="7299188518201836340" datatype="html">
         <source>Gentag email*</source>
       </trans-unit>
-      <trans-unit id="9193480723158679191" datatype="html">
-        <source>Primær startenhed</source>
-      </trans-unit>
       <trans-unit id="2223233384489817608" datatype="html">
         <source>Send advis om oprettelse</source>
       </trans-unit>
@@ -4905,6 +4902,9 @@
       </trans-unit>
       <trans-unit id="987801205594216692" datatype="html">
         <source> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </source>
+      </trans-unit>
+      <trans-unit id="4917104049079759478" datatype="html">
+        <source>Primær startmodul</source>
       </trans-unit>
     </body>
   </file>

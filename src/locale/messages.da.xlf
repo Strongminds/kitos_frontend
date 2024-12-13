@@ -4767,10 +4767,6 @@
         <source>Gentag email*</source>
         <target state="new">Gentag email*</target>
       </trans-unit>
-      <trans-unit id="9193480723158679191" datatype="html">
-        <source>Primær startenhed</source>
-        <target state="new">Primær startenhed</target>
-      </trans-unit>
       <trans-unit id="4827595865645899279" datatype="html">
         <source> Særlige roller i organisationen </source>
         <target state="new"> Særlige roller i organisationen </target>
@@ -6460,6 +6456,10 @@
       <trans-unit id="1164724015350728554" datatype="html">
         <source>Søg...</source>
         <target state="new">Søg...</target>
+      </trans-unit>
+      <trans-unit id="4917104049079759478" datatype="html">
+        <source>Primær startmodul</source>
+        <target state="new">Primær startmodul</target>
       </trans-unit>
     </body>
   </file>
