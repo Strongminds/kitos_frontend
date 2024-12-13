@@ -51,6 +51,7 @@ describe('it-contract-notifications', () => {
     cy.intercept('/api/v2/it-contract-role-types*', {
       fixture: './it-contracts/notifications/it-contract-role-types.json',
     });
+    cy.intercept('api/v2/internal/it-contracts/applied-procurement-plans/*', { body: [] });
 
     cy.contains('Contract 1').click();
     cy.navigateToDetailsSubPage('Advis');
