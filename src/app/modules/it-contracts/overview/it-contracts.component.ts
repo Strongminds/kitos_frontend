@@ -20,8 +20,8 @@ import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
+import { GridDataKey } from 'src/app/shared/services/column-filter-data.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
-import { GridDataKey } from 'src/app/shared/services/grid-data.service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {

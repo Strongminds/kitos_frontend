@@ -1,15 +1,15 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { ColumnComponent, FilterService, GridDataResult } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
 import { first, Observable } from 'rxjs';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
-import { ColumnFilterDataService, GridDataKey } from 'src/app/shared/services/grid-data.service';
+import { ColumnFilterDataService, GridDataKey } from 'src/app/shared/services/column-filter-data.service';
 import { GridSavedFilterActions } from 'src/app/store/grid/actions';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownFilterComponent, FilterDropdownOption } from '../dropdown-filter/dropdown-filter.component';
-import { concatLatestFrom } from '@ngrx/operators';
 
 @Component({
   selector: 'app-dropdown-column-data-filter',
