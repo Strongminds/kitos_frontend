@@ -3,7 +3,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { ColumnComponent, FilterService, GridDataResult } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
-import { Observable } from 'rxjs';
+import { first, Observable } from 'rxjs';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { GridSavedFilterActions } from 'src/app/store/grid/actions';
@@ -43,7 +43,7 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
     });
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
-      this.actions$.pipe(ofType(GridSavedFilterActions.dropdownDataOptionsUpdated)).subscribe((payload) => {
+      this.actions$.pipe(ofType(GridSavedFilterActions.dropdownDataOptionsUpdated)).pipe(first()).subscribe((payload) => {
         if (payload.column !== this.columnName || this.entityType !== payload.entityType) {
           return;
         }
