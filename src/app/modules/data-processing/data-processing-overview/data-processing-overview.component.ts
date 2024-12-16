@@ -328,6 +328,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
 
     this.setupUnclickableColumns();
 
+    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
+
     this.subscriptions.add(
       this.actions$
         .pipe(
