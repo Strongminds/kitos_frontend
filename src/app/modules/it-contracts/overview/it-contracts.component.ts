@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
@@ -484,12 +485,13 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError))
-        .subscribe(() => {
-          this.gridColumns$.pipe(first()).subscribe((columns) => {
-            const columnsToShow = getColumnsToShow(columns, this.defaultGridColumns);
-            this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
-          });
+        .pipe(
+          ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError),
+          concatLatestFrom(() => this.gridColumns$)
+        )
+        .subscribe(([_, gridColumns]) => {
+          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
+          this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
         })
     );
   }
