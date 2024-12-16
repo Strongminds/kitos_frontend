@@ -125,6 +125,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       hidden: false,
       noFilter: true,
       width: 200,
+      sortable: false,
     },
     {
       field: 'Organization.Name',
