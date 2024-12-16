@@ -479,8 +479,6 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
-
     this.actions$
       .pipe(ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError))
       .subscribe(() => {
