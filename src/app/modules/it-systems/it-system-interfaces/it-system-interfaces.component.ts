@@ -149,7 +149,6 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     store: Store,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
     private actions$: Actions,
     private gridColumnStorageService: GridColumnStorageService
   ) {
