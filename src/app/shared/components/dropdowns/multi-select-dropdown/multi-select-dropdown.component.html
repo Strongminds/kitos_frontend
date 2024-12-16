@@ -1,4 +1,5 @@
 <ng-select
+  #selectDropdown
   class="{{ size }} "
   [placeholder]="text"
   [items]="data ?? []"
@@ -17,7 +18,7 @@
   [closeOnSelect]="false"
   [(ngModel)]="selectedValuesModel"
   addTagText="Create New"
-  [addTag]="includeAddTag ? CreateNew : false"
+  [addTag]="includeAddTag ? onCreateNew : false"
 >
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
     <div class="select-option-row" (click)="onSelected(item)">

@@ -1,10 +1,22 @@
 <app-scrollbar-dialog [title]="title" [closable]="true" overflow="none" i18n-title data-cy="notifications-dialog">
   <form [formGroup]="notificationForm">
     <app-multi-select-dropdown
-      text="Til modtagere via email"
+      text="Modtager"
       i18n-text
       [data]="receiverOptions"
       [includeAddTag]="true"
+      (selectedEvent)="receiversChanged($event)"
+      (cleared)="receiversCleared()"
+      (addTag)="receiverAdded($event)"
+    ></app-multi-select-dropdown>
+    <app-multi-select-dropdown
+      text="CCs"
+      i18n-text
+      [data]="receiverOptions"
+      [includeAddTag]="true"
+      (selectedEvent)="ccsChanged($event)"
+      (cleared)="ccsCleared()"
+      (addTag)="ccAdded($event)"
     ></app-multi-select-dropdown>
     <app-standard-vertical-content-grid [numColumns]="3">
       <app-standard-vertical-content-grid>

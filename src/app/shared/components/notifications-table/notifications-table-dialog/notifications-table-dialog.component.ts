@@ -7,6 +7,7 @@ import {
   APIRegularOptionResponseDTO,
   APIRoleRecipientResponseDTO,
 } from 'src/app/api/v2';
+import { EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import {
   atLeastOneCheckboxCheckedValidator,
   atLeastOneNonEmptyValidator,
@@ -54,6 +55,10 @@ export class NotificationsTableDialogComponent implements OnInit {
   @Input() public confirmText!: string;
 
   public receiverOptions: MultiSelectDropdownItem<string>[] = [];
+  public ccOptions: MultiSelectDropdownItem<string>[] = [];
+
+  private selectedReceivers: string[] = [];
+  private selectedCcs: string[] = [];
 
   public readonly emailRecepientsForm = new FormGroup({
     emailRecipientsFormArray: new FormArray([
@@ -143,6 +148,47 @@ export class NotificationsTableDialogComponent implements OnInit {
     this.receiverOptions = this.rolesOptions.map((option: APIRegularOptionResponseDTO) =>
       mapRegularOptionToMultiSelectItem(option)
     );
+    this.ccOptions = this.rolesOptions.map((option: APIRegularOptionResponseDTO) =>
+      mapRegularOptionToMultiSelectItem(option)
+    );
+  }
+
+  public receiversChanged(roles: string[]): void {
+    this.selectedReceivers = roles;
+  }
+
+  public ccsChanged(roles: string[]): void {
+    this.selectedCcs = roles;
+  }
+
+  public receiversCleared(): void {
+    this.selectedReceivers = [];
+  }
+
+  public ccsCleared(): void {
+    this.selectedCcs = [];
+  }
+
+  public ccAdded(cc: MultiSelectDropdownItem<string>): void {
+    //validate email
+    const emailPattern = EMAIL_REGEX_PATTERN;
+    if (!emailPattern.test(cc.value)) {
+      this.notificationService.showError($localize`"${cc.value}" is not a valid email address`);
+      return;
+    }
+
+    this.selectedCcs.push(cc.value);
+  }
+
+  public receiverAdded(receiver: MultiSelectDropdownItem<string>): void {
+    //validate email
+    const emailPattern = EMAIL_REGEX_PATTERN;
+    if (!emailPattern.test(receiver.value)) {
+      this.notificationService.showError($localize`"${receiver.value}" is not a valid email address`);
+      return;
+    }
+
+    this.selectedReceivers.push(receiver.value);
   }
 
   public hasImmediateNotification = () =>
