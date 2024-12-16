@@ -11,9 +11,10 @@ import {
 } from '@angular/core';
 import { debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
+import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
   selector: 'app-multi-select-dropdown',
@@ -30,6 +31,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public data?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
   @Input() public includeAddTag = false;
+  @Input() public tagValidation: 'email' | 'none' = 'none';
 
   @Output() public valueChange = new EventEmitter<T[] | undefined>();
   @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
@@ -52,7 +54,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   public readonly loadingText = $localize`Henter data`;
   public readonly notFoundText = $localize`Ingen data fundet`;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
+  constructor(private el: ElementRef, private renderer: Renderer2, private notificationService: NotificationService) {
     super();
   }
 
@@ -120,18 +122,20 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public onCreateNew = (tag: string) => {
+    if (this.tagValidation === 'email' && !EMAIL_REGEX_PATTERN.test(tag)) {
+      this.notificationService.showError($localize`Ugyldig email`);
+      return;
+    }
     const newTag = { name: tag, value: tag as T, selected: false };
     this.addValue(newTag);
     this.emitSelectedEvent(this.selectedValues);
-    console.log(this.selectDropdown);
 
-    this.selectDropdown.filterValue = null;
-    console.log(this.selectedValues);
-    console.log(this.selectedValuesModel);
-    console.log(this.selectDropdown);
-    this.selectDropdown.itemsList.resetFilteredItems();
-    console.log(this.selectedValues);
-    console.log(this.selectedValuesModel);
+    //If we immediately close the dropdown, the tag will not be added to the list
+    //We need to close the dropdown in order to refresh filtering
+    setTimeout(() => {
+      this.selectDropdown.close();
+    }, 1);
+
     return newTag;
   };
 

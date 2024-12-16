@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import {
   APIBaseNotificationPropertiesWriteRequestDTO,
   APIEmailRecipientResponseDTO,
+  APIEmailRecipientWriteRequestDTO,
   APINotificationResponseDTO,
   APIRegularOptionResponseDTO,
   APIRoleOptionResponseDTO,
@@ -15,8 +16,9 @@ import {
 } from 'src/app/api/v2';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
+import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
 import { BaseComponent } from '../../base/base.component';
-import { NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT, NOTIFICATIONS_DIALOG_DEFAULT_WIDTH } from '../../constants/constants';
+import { EMAIL_REGEX_PATTERN } from '../../constants/constants';
 import { NotificationEntityType, NotificationEntityTypeEnum } from '../../models/notification-entity-types';
 import { notificationRepetitionFrequencyOptions } from '../../models/notification-repetition-frequency.model';
 import { notificationTypeOptions } from '../../models/notification-type.model';
@@ -29,7 +31,6 @@ import { NotificationService } from '../../services/notification.service';
 import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
 import { NotificationsTableSentDialogComponent } from './notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
-import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
 
 @Component({
   selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
@@ -132,33 +133,13 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         this.setupDialogDefaults(componentInstance, options);
         (componentInstance.title = $localize`Redigér advis`), (componentInstance.confirmText = $localize`Gem`);
         componentInstance.onConfirm = () =>
-          this.onEdit(
-            componentInstance.notificationForm,
-            componentInstance.roleRecipientsForm,
-            componentInstance.roleCcsForm,
-            componentInstance.emailRecipientsFormArray,
-            componentInstance.emailCcsFormArray,
-            componentInstance.notification?.uuid
-          );
+          this.onEdit(componentInstance.notificationForm, componentInstance.notification?.uuid);
       })
     );
   }
 
-  public onEdit(
-    notificationForm: FormGroup,
-    roleRecipientsForm: FormGroup,
-    roleCcsForm: FormGroup,
-    emailRecipientsFormArray: FormArray,
-    emailCcsFormArray: FormArray,
-    notificationUuid: string | undefined
-  ) {
-    const basePropertiesDto = this.getBasePropertiesDto(
-      notificationForm,
-      roleRecipientsForm,
-      roleCcsForm,
-      emailRecipientsFormArray,
-      emailCcsFormArray
-    );
+  public onEdit(notificationForm: FormGroup, notificationUuid: string | undefined) {
+    const basePropertiesDto = this.getBasePropertiesDto(notificationForm);
     if (basePropertiesDto && notificationUuid) {
       const notificationControls = notificationForm.controls;
       const notificationType = notificationControls['notificationTypeControl'].value;
@@ -185,14 +166,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         const componentInstance = dialogRef.componentInstance;
         this.setupDialogDefaults(componentInstance, options);
         (componentInstance.title = $localize`Tilføj advis`), (componentInstance.confirmText = $localize`Tilføj`);
-        componentInstance.onConfirm = () =>
-          this.save(
-            componentInstance.notificationForm,
-            componentInstance.roleRecipientsForm,
-            componentInstance.roleCcsForm,
-            componentInstance.emailRecipientsFormArray,
-            componentInstance.emailCcsFormArray
-          );
+        componentInstance.onConfirm = () => this.save(componentInstance.notificationForm);
       })
     );
   }
@@ -212,20 +186,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     this.notificationDialog.closeAll();
   }
 
-  private save(
-    notificationForm: FormGroup,
-    roleRecipientsForm: FormGroup,
-    roleCcsForm: FormGroup,
-    emailRecipientsFormArray: FormArray,
-    emailCcsFormArray: FormArray
-  ) {
-    const basePropertiesDto = this.getBasePropertiesDto(
-      notificationForm,
-      roleRecipientsForm,
-      roleCcsForm,
-      emailRecipientsFormArray,
-      emailCcsFormArray
-    );
+  private save(notificationForm: FormGroup) {
+    const basePropertiesDto = this.getBasePropertiesDto(notificationForm);
     if (basePropertiesDto) {
       const notificationType = notificationForm.controls['notificationTypeControl'].value;
       if (notificationType === this.notificationTypeRepeat) {
@@ -266,8 +228,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   private openNotificationsTableDialog(config?: MatDialogConfig<unknown> | undefined) {
     const paddedConfig: MatDialogConfig<unknown> = config ?? {};
-    paddedConfig.width = `${NOTIFICATIONS_DIALOG_DEFAULT_WIDTH}px`;
-    paddedConfig.height = `${NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT}px`;
+    paddedConfig.height = '90%';
     return this.notificationDialog.open(NotificationsTableDialogComponent, paddedConfig);
   }
 
@@ -301,38 +262,29 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     return undefined;
   }
 
-  private getBasePropertiesDto(
-    notificationForm: FormGroup,
-    roleRecipientsForm: FormGroup,
-    roleCcsForm: FormGroup,
-    emailRecipientsFormArray: FormArray,
-    emailCcsFormArray: FormArray
-  ): APIBaseNotificationPropertiesWriteRequestDTO | undefined {
+  private getBasePropertiesDto(notificationForm: FormGroup): APIBaseNotificationPropertiesWriteRequestDTO | undefined {
     const notificationControls = notificationForm.controls;
     const subject = notificationControls['subjectControl'].value;
     const body = notificationControls['bodyControl'].value;
 
-    const roleRecipients = this.getRecipientDtosFromCheckboxes(roleRecipientsForm);
-    const emailRecipients = emailRecipientsFormArray.controls
-      .filter((control) => this.valueIsNotEmptyString(control.value))
-      .map((control) => {
-        return { email: control.value };
-      });
+    const receivers = notificationControls['receivers'].value;
+    const ccs = notificationControls['ccs'].value;
 
-    const roleCcs = this.getRecipientDtosFromCheckboxes(roleCcsForm);
-    const emailCcs = emailCcsFormArray.controls
-      .filter((control) => this.valueIsNotEmptyString(control.value))
-      .map((control) => {
-        return { email: control.value };
-      });
+    const mappedReceivers = this.getEmailAndRoleRecipients(receivers);
+    const mappedCcs = this.getEmailAndRoleRecipients(ccs);
 
-    if (subject && body && (roleRecipients.length > 0 || emailRecipients.length > 0)) {
+    const emailReceivers = mappedReceivers.emailRecipients;
+    const roleReceivers = mappedReceivers.roleRecipients;
+    const emailCcs = mappedCcs.emailRecipients;
+    const roleCcs = mappedCcs.roleRecipients;
+
+    if (subject && body && (roleReceivers.length > 0 || emailReceivers.length > 0)) {
       return {
         subject: subject,
         body: body,
         receivers: {
-          roleRecipients: roleRecipients,
-          emailRecipients: emailRecipients,
+          roleRecipients: roleReceivers,
+          emailRecipients: emailReceivers,
         },
         ccs: {
           roleRecipients: roleCcs,
@@ -370,6 +322,21 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
       if (control?.value) recipients.push({ roleUuid: controlKey });
     }
     return recipients;
+  }
+
+  private getEmailAndRoleRecipients(recipients: string[]) {
+    const emailRecipients: APIEmailRecipientWriteRequestDTO[] = [];
+    const roleRecipients: { roleUuid: string }[] = [];
+
+    recipients.forEach((recipient) => {
+      if (EMAIL_REGEX_PATTERN.test(recipient)) {
+        emailRecipients.push({ email: recipient });
+      } else {
+        roleRecipients.push({ roleUuid: recipient });
+      }
+    });
+
+    return { emailRecipients, roleRecipients };
   }
 
   private valueIsNotEmptyString(value: string | undefined) {
