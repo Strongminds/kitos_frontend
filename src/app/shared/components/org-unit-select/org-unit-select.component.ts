@@ -22,6 +22,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public text = '';
   @Input() public showDescription = false;
   @Input() public clearable = true;
+  @Input() public disableLoading = false;
 
   @Input() public formGroup?: FormGroup;
   @Input() public formName?: string;
@@ -35,8 +36,9 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
     filterNullish(),
     map((organizationUnits) => organizationUnits.map((unit) => createNode(unit, this.disabledUnitsUuids)))
   );
-  public readonly isLoaded$ = this.store.select(selectPagedOrganizationUnitHasValidCache);
-
+  public readonly isLoaded$ = this.store
+    .select(selectPagedOrganizationUnitHasValidCache)
+    .pipe(map((hasValidCache) => this.disableLoading || hasValidCache));
   constructor(private readonly store: Store) {
     super();
   }
