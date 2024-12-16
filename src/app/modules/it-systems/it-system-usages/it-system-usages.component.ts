@@ -540,7 +540,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.updateUnclickableColumns(this.defaultGridColumns);
       this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
     }
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
 
     this.actions$
       .pipe(ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError))
