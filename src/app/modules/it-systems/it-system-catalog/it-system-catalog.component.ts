@@ -104,6 +104,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: KLE_SECTION_NAME,
       filter: 'text',
       hidden: true,
+      sortable: false,
     },
     {
       field: 'KLENames',
@@ -111,6 +112,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: KLE_SECTION_NAME,
       filter: 'text',
       hidden: false,
+      sortable: false,
     },
     {
       field: 'Usages',
