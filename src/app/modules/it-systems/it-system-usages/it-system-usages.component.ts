@@ -39,7 +39,6 @@ import {
   selectUsageGridColumns,
   selectUsageGridRoleColumns,
 } from 'src/app/store/it-system-usage/selectors';
-import { selectPagedOrganizationUnitHasValidCache } from 'src/app/store/organization/organization-unit/selectors';
 import {
   selectITSystemUsageEnableFrontPageUsagePeriod,
   selectITSystemUsageEnableGdpr,
@@ -52,10 +51,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   styleUrls: ['it-system-usages.component.scss'],
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
-  public readonly isLoading$ = combineBooleansWithOr([
-    this.store.select(selectIsLoading),
-    this.store.select(selectPagedOrganizationUnitHasValidCache).pipe(map((hasValidCache) => !hasValidCache)),
-  ]);
+  public readonly isLoading$ = combineBooleansWithOr([this.store.select(selectIsLoading)]);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
