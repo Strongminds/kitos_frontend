@@ -315,7 +315,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       );
     }
 
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
       this.actions$
@@ -327,14 +327,16 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
 
     this.setupUnclickableColumns();
 
-    this.actions$
-      .pipe(ofType(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError))
-      .subscribe(() => {
-        this.gridColumns$.pipe(first()).subscribe((columns) => {
-          const columnsToShow = getColumnsToShow(columns, this.defaultGridColumns);
-          this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
-        });
-      });
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError))
+        .subscribe(() => {
+          this.gridColumns$.pipe(first()).subscribe((columns) => {
+            const columnsToShow = getColumnsToShow(columns, this.defaultGridColumns);
+            this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
+          });
+        })
+    );
   }
 
   private setupUnclickableColumns() {

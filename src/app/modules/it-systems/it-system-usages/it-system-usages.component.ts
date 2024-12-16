@@ -541,14 +541,16 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
     }
 
-    this.actions$
-      .pipe(ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError))
-      .subscribe(() => {
-        this.gridColumns$.pipe(first()).subscribe((columns) => {
-          const columnsToShow = getColumnsToShow(columns, this.defaultGridColumns);
-          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
-        });
-      });
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError))
+        .subscribe(() => {
+          this.gridColumns$.pipe(first()).subscribe((columns) => {
+            const columnsToShow = getColumnsToShow(columns, this.defaultGridColumns);
+            this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
+          });
+        })
+    );
   }
 
   public stateChange(gridState: GridState) {

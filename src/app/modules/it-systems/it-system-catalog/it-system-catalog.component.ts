@@ -201,7 +201,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       this.store.dispatch(ITSystemActions.updateGridColumns(this.defaultGridColumns));
     }
 
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
       this.actions$
