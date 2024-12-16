@@ -2,13 +2,8 @@ import { AfterViewInit, Component, ElementRef, EventEmitter, Input, OnInit, Outp
 import { debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
+import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-
-export interface MultiSelectDropdownItem<T> {
-  name: string;
-  value: T;
-  selected: boolean;
-}
 
 @Component({
   selector: 'app-multi-select-dropdown',
@@ -24,6 +19,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
   @Input() public data?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
+  @Input() public includeAddTag = false;
 
   @Output() public valueChange = new EventEmitter<T[] | undefined>();
   @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
@@ -35,6 +31,9 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Output() public selectedEvent = new EventEmitter<T[]>();
   @Output() public filterChange = new EventEmitter<string | undefined>();
 
+  CreateNew(city: unknown) {
+    alert('Create New Clicked : ' + city);
+  }
   public focused = false;
   public readonly filter$ = new Subject<string>();
 

@@ -1,5 +1,11 @@
 <app-scrollbar-dialog [title]="title" [closable]="true" overflow="none" i18n-title data-cy="notifications-dialog">
   <form [formGroup]="notificationForm">
+    <app-multi-select-dropdown
+      text="Til modtagere via email"
+      i18n-text
+      [data]="receiverOptions"
+      [includeAddTag]="true"
+    ></app-multi-select-dropdown>
     <app-standard-vertical-content-grid [numColumns]="3">
       <app-standard-vertical-content-grid>
         <app-accordion title="Til modtagere via email" i18n-title data-cy="email-recipient-accordion">

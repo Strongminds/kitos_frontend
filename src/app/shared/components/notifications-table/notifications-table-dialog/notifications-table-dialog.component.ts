@@ -14,6 +14,10 @@ import {
   dateGreaterThanOrEqualToDateValidator,
 } from 'src/app/shared/helpers/form.helpers';
 import {
+  MultiSelectDropdownItem,
+  mapRegularOptionToMultiSelectItem,
+} from 'src/app/shared/models/dropdown-option.model';
+import {
   NotificationRepetitionFrequency,
   mapNotificationRepetitionFrequency,
 } from 'src/app/shared/models/notification-repetition-frequency.model';
@@ -48,6 +52,8 @@ export class NotificationsTableDialogComponent implements OnInit {
     notificationUuid?: string
   ) => void;
   @Input() public confirmText!: string;
+
+  public receiverOptions: MultiSelectDropdownItem<string>[] = [];
 
   public readonly emailRecepientsForm = new FormGroup({
     emailRecipientsFormArray: new FormArray([
@@ -134,6 +140,9 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.canEdit = false;
       this.disableForms();
     }
+    this.receiverOptions = this.rolesOptions.map((option: APIRegularOptionResponseDTO) =>
+      mapRegularOptionToMultiSelectItem(option)
+    );
   }
 
   public hasImmediateNotification = () =>
@@ -206,7 +215,7 @@ export class NotificationsTableDialogComponent implements OnInit {
       this.setupEmailRecipientData(this.notification.receivers?.emailRecipients, this.emailRecipientsFormArray);
       this.setupEmailRecipientData(this.notification.cCs?.emailRecipients, this.emailCcsFormArray);
     } else {
-      // 20240528: HACK: Validation dehaviour should be determined by permissions instead
+      // 20240528: HACK: Validation behaviour should be determined by permissions instead
       notificationControls.fromDateControl.addValidators(dateGreaterThanOrEqualToDateValidator(today));
       notificationControls.fromDateControl.updateValueAndValidity();
     }
