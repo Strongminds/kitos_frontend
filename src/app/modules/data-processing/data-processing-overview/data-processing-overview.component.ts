@@ -316,8 +316,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       );
     }
 
-    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
-
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(DataProcessingActions.createDataProcessingSuccess), combineLatestWith(this.gridState$))
