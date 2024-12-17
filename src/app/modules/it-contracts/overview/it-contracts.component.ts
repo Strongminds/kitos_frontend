@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -37,7 +37,6 @@ import {
 @Component({
   templateUrl: 'it-contracts.component.html',
   styleUrls: ['it-contracts.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ITContractsComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectContractGridLoading);

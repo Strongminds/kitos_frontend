@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -49,7 +49,6 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 @Component({
   templateUrl: 'it-system-usages.component.html',
   styleUrls: ['it-system-usages.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);

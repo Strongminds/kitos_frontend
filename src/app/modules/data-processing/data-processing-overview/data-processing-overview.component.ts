@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -39,7 +39,6 @@ import {
   selector: 'app-data-processing-overview',
   templateUrl: './data-processing-overview.component.html',
   styleUrl: './data-processing-overview.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DataProcessingOverviewComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
