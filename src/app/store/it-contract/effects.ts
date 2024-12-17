@@ -16,6 +16,7 @@ import {
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { cacheFilter } from 'src/app/shared/helpers/observable-helpers';
 import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
@@ -28,9 +29,11 @@ import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
 import {
+  selectAppliedProcurementPlansCache,
   selectContractGridColumns,
   selectItContractDataProcessingRegistrations,
   selectItContractExternalReferences,
+  selectITContractGridConfigCache,
   selectItContractPayments,
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
@@ -598,9 +601,10 @@ export class ITContractEffects {
     );
   });
 
-  initializeITContractLastSeenGridConfig$ = createEffect(() => {
+  getOrganizationalGridConfig$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.initializeITContractLastSeenGridConfiguration),
+      cacheFilter(this.store.select(selectITContractGridConfigCache)),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
         this.apiV2organizationalGridInternalService
@@ -619,6 +623,7 @@ export class ITContractEffects {
   getAppliedProcurementPlans$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getAppliedProcurementPlans),
+      cacheFilter(this.store.select(selectAppliedProcurementPlansCache)),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) => {
         return this.apiInternalItContractService

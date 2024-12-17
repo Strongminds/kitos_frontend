@@ -67,12 +67,17 @@ export const selectItContractExternalPayments = createSelector(
 );
 export const selectItContractPayments = createSelector(selectContract, (confirm) => confirm?.payments);
 
-export const selectItContractLastSeenGridConfig = createSelector(
+export const selectItContractGridConfig = createSelector(
   selectITContractState,
-  (state) => state.lastSeenGridConfig
+  (state) => state.organizationGridConfig.value
+);
+export const selectITContractGridConfigCache = createSelector(
+  selectITContractState,
+  (state) => state.organizationGridConfig
 );
 
-export const selectAppliedProcurementPlans = createSelector(
+export const selectAppliedProcurementPlansCache = createSelector(
   selectITContractState,
   (state) => state.appliedProcurementPlans
 );
+export const selectAppliedProcurementPlans = createSelector(selectAppliedProcurementPlansCache, (cache) => cache.value);

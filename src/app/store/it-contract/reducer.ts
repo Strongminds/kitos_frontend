@@ -1,6 +1,8 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { CONTRACT_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
+import { emptyCache, newCache } from 'src/app/shared/models/cache-item.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
@@ -25,9 +27,9 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   collectionPermissions: undefined,
 
   isRemoving: false,
-  lastSeenGridConfig: undefined,
+  organizationGridConfig: emptyCache(),
 
-  appliedProcurementPlans: undefined,
+  appliedProcurementPlans: emptyCache(),
 });
 
 export const itContractFeature = createFeature({
@@ -169,7 +171,7 @@ export const itContractFeature = createFeature({
       (state, { response }): ITContractState => {
         return {
           ...state,
-          lastSeenGridConfig: response,
+          organizationGridConfig: newCache(response),
         };
       }
     ),
@@ -177,7 +179,7 @@ export const itContractFeature = createFeature({
     on(ITContractActions.resetToOrganizationITContractColumnConfigurationError, (state): ITContractState => {
       return {
         ...state,
-        lastSeenGridConfig: undefined,
+        organizationGridConfig: newCache<APIOrganizationGridConfigurationResponseDTO>(undefined),
       };
     }),
 
@@ -186,7 +188,7 @@ export const itContractFeature = createFeature({
       (state, { response }): ITContractState => {
         return {
           ...state,
-          lastSeenGridConfig: response,
+          organizationGridConfig: newCache(response),
         };
       }
     ),
@@ -194,7 +196,7 @@ export const itContractFeature = createFeature({
     on(ITContractActions.getAppliedProcurementPlansSuccess, (state, { response }): ITContractState => {
       return {
         ...state,
-        appliedProcurementPlans: response,
+        appliedProcurementPlans: newCache(response),
       };
     })
   ),

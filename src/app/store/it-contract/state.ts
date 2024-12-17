@@ -6,6 +6,7 @@ import {
   APIOrganizationGridConfigurationResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
 } from 'src/app/api/v2';
+import { Cached } from 'src/app/shared/models/cache-item.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
@@ -25,6 +26,6 @@ export interface ITContractState extends EntityState<ITContract> {
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
   isRemoving: boolean;
 
-  lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
-  appliedProcurementPlans: APIAppliedProcurementPlanResponseDTO[] | undefined;
+  organizationGridConfig: Cached<APIOrganizationGridConfigurationResponseDTO>;
+  appliedProcurementPlans: Cached<APIAppliedProcurementPlanResponseDTO[]>;
 }
