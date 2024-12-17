@@ -20,7 +20,7 @@ import {
 } from 'src/app/shared/constants/persistent-state-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
-import { combineBooleansWithOr } from 'src/app/shared/helpers/observable-helpers';
+import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
@@ -52,7 +52,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   styleUrls: ['it-system-usages.component.scss'],
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
-  public readonly isLoading$ = combineBooleansWithOr([
+  public readonly isLoading$ = combineOR([
     this.store.select(selectIsLoading),
     this.store.select(selectPagedOrganizationUnitHasValidCache).pipe(map((isLoaded) => !isLoaded)),
   ]);
