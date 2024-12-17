@@ -5,8 +5,11 @@
         text="Modtager"
         i18n-text
         [data]="receiverOptions"
+        [initialSelectedValues]="initialSelectedReceiverValues"
         [includeAddTag]="true"
         tagValidation="email"
+        [disabled]="!canEdit"
+        [isRequired]="true"
         (selectedEvent)="receipientsChanged($event, true)"
         (cleared)="receipientsCleared(true)"
         (addTag)="receipientsAdded($event, true)"
@@ -15,8 +18,10 @@
         text="CCs"
         i18n-text
         [data]="receiverOptions"
+        [initialSelectedValues]="initialSelectedCcValues"
         [includeAddTag]="true"
         tagValidation="email"
+        [disabled]="!canEdit"
         (selectedEvent)="receipientsChanged($event, false)"
         (cleared)="receipientsCleared(false)"
         (addTag)="receipientsAdded($event, false)"
@@ -106,11 +111,18 @@
       <app-rich-text-editor [formControl]="notificationForm.controls.bodyControl"></app-rich-text-editor>
 
       <app-dialog-actions class="dialog-footer">
-        <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="onCancel()">Annuller</app-button>
+        <app-button
+          buttonStyle="secondary"
+          size="large"
+          i18n
+          [disabled]="(isSaving$ | async) === true"
+          (buttonClick)="onCancel()"
+          >Annuller</app-button
+        >
         <app-button
           type="submit"
           size="large"
-          [disabled]="canEdit === false || notificationForm.invalid"
+          [disabled]="canEdit === false || notificationForm.invalid || (isSaving$ | async) === true"
           i18n
           (buttonClick)="handleClickConfirm()"
           data-cy="confirm-button"

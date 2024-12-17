@@ -1,5 +1,6 @@
 import {
   AfterViewInit,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   EventEmitter,
@@ -29,9 +30,11 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public size: 'medium' | 'large' = 'large';
 
   @Input() public data?: MultiSelectDropdownItem<T>[] | null;
+  @Input() public initialSelectedValues?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
   @Input() public includeAddTag = false;
   @Input() public tagValidation: 'email' | 'none' = 'none';
+  @Input() public isRequired = false;
 
   @Output() public valueChange = new EventEmitter<T[] | undefined>();
   @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
@@ -54,7 +57,12 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   public readonly loadingText = $localize`Henter data`;
   public readonly notFoundText = $localize`Ingen data fundet`;
 
-  constructor(private el: ElementRef, private renderer: Renderer2, private notificationService: NotificationService) {
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+    private notificationService: NotificationService,
+    private cdRef: ChangeDetectorRef
+  ) {
     super();
   }
 
@@ -82,6 +90,11 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     const ngSelectElement = this.el.nativeElement.querySelector('ng-select');
     this.renderer.removeClass(ngSelectElement, 'ng-select-multiple');
     this.renderer.addClass(ngSelectElement, 'ng-select-single');
+
+    if (this.initialSelectedValues) {
+      this.setValues(this.initialSelectedValues);
+      this.cdRef.detectChanges();
+    }
   }
 
   public setValues(values: MultiSelectDropdownItem<T>[]) {

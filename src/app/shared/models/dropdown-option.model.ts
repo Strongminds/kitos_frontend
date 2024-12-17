@@ -1,4 +1,10 @@
-import { APIOrganizationUserResponseDTO, APIRegularOptionResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
+import {
+  APIEmailRecipientResponseDTO,
+  APIOrganizationUserResponseDTO,
+  APIRegularOptionResponseDTO,
+  APIRoleOptionResponseDTO,
+  APIRoleRecipientResponseDTO,
+} from 'src/app/api/v2';
 import { NO_TEXT, YES_TEXT } from '../constants/constants';
 
 export interface DropdownOption<T> {
@@ -42,5 +48,27 @@ export const mapRegularOptionToMultiSelectItem = (
     name: option.name,
     value: option.uuid,
     selected: false,
+  };
+};
+
+export const mapEmailOptionToMultiSelectItem = (
+  option: APIEmailRecipientResponseDTO,
+  selected: boolean
+): MultiSelectDropdownItem<string> => {
+  return {
+    name: option.email ?? '',
+    value: option.email ?? '',
+    selected: selected,
+  };
+};
+
+export const mapRoleOptionToMultiSelectItem = (
+  option: APIRoleRecipientResponseDTO,
+  selected: boolean
+): MultiSelectDropdownItem<string> => {
+  return {
+    name: option.role?.name ?? '',
+    value: option.role?.uuid ?? '',
+    selected: selected,
   };
 };

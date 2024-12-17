@@ -15,6 +15,8 @@
   (blur)="onBlur()"
   [items]="data ?? []"
   [multiple]="true"
+  [required]="isRequired"
+  [disabled]="disabled"
   [closeOnSelect]="false"
   [(ngModel)]="selectedValuesModel"
   addTagText="Create New"
