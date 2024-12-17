@@ -115,17 +115,10 @@ export const dataProcessingFeature = createFeature({
     }),
 
     on(DataProcessingActions.getDataProcessingOverviewRolesSuccess, (state, { roles }): DataProcessingState => {
-      const roleColumns: GridColumn[] = [];
-      roles?.forEach((role) => {
-        const roleGridColumns = roleDtoToRoleGridColumns(
-          role,
-          DATA_PROCESSING_ROLES_SECTION_NAME,
-          'data-processing-registration'
-        );
-        roleGridColumns.forEach((column) => {
-          roleColumns.push(column);
-        });
-      });
+      const roleColumns =
+        roles?.flatMap((role) =>
+          roleDtoToRoleGridColumns(role, DATA_PROCESSING_ROLES_SECTION_NAME, 'data-processing-registration')
+        ) ?? [];
       return { ...state, gridRoleColumns: roleColumns, overviewRoles: roles };
     }),
 
