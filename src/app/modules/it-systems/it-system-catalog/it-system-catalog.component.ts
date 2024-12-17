@@ -63,11 +63,11 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       extraData: [
         {
           name: $localize`Aktivt`,
-          value: true,
+          value: false,
         },
         {
           name: $localize`Ikke aktivt`,
-          value: false,
+          value: true,
         },
       ],
       style: 'reverse-chip',
