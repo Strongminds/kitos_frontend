@@ -455,8 +455,10 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     this.store.dispatch(ITContractActions.getItContractOverviewRoles());
 
     if (existingColumns) {
+      console.log('existingColumns', existingColumns);
       this.store.dispatch(ITContractActions.updateGridColumns(existingColumns));
     } else {
+      console.log('defaultGridColumns', this.defaultGridColumns);
       this.subscriptions.add(
         this.actions$
           .pipe(
