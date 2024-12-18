@@ -33,7 +33,6 @@ import {
   selectContractGridColumns,
   selectItContractDataProcessingRegistrations,
   selectItContractExternalReferences,
-  selectITContractGridConfigCache,
   selectItContractPayments,
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
@@ -605,7 +604,6 @@ export class ITContractEffects {
   getOrganizationalGridConfig$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.initializeITContractLastSeenGridConfiguration),
-      cacheFilter(this.store.select(selectITContractGridConfigCache)),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
         this.apiV2organizationalGridInternalService

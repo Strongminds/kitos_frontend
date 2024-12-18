@@ -1,6 +1,5 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { APIOrganizationGridConfigurationResponseDTO } from 'src/app/api/v2';
 import { CONTRACT_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { emptyCache, newCache } from 'src/app/shared/models/cache-item.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
@@ -26,7 +25,7 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   collectionPermissions: undefined,
 
   isRemoving: false,
-  organizationGridConfig: emptyCache(),
+  organizationGridConfig: undefined,
 
   appliedProcurementPlans: emptyCache(),
 });
@@ -153,9 +152,8 @@ export const itContractFeature = createFeature({
       })
     ),
     on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
-      const gridRoleColumns = roles?.flatMap((role) =>
-        roleDtoToRoleGridColumns(role, CONTRACT_ROLES_SECTION_NAME, 'it-contract')
-      ) ?? [];
+      const gridRoleColumns =
+        roles?.flatMap((role) => roleDtoToRoleGridColumns(role, CONTRACT_ROLES_SECTION_NAME, 'it-contract')) ?? [];
       return { ...state, gridRoleColumns, contractRoles: roles };
     }),
 
@@ -164,7 +162,7 @@ export const itContractFeature = createFeature({
       (state, { response }): ITContractState => {
         return {
           ...state,
-          organizationGridConfig: newCache(response),
+          organizationGridConfig: response,
         };
       }
     ),
@@ -172,7 +170,7 @@ export const itContractFeature = createFeature({
     on(ITContractActions.resetToOrganizationITContractColumnConfigurationError, (state): ITContractState => {
       return {
         ...state,
-        organizationGridConfig: newCache<APIOrganizationGridConfigurationResponseDTO>(undefined),
+        organizationGridConfig: undefined,
       };
     }),
 
@@ -181,7 +179,7 @@ export const itContractFeature = createFeature({
       (state, { response }): ITContractState => {
         return {
           ...state,
-          organizationGridConfig: newCache(response),
+          organizationGridConfig: response,
         };
       }
     ),

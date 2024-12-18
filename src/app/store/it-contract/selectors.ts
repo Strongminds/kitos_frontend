@@ -69,10 +69,6 @@ export const selectItContractPayments = createSelector(selectContract, (confirm)
 
 export const selectItContractGridConfig = createSelector(
   selectITContractState,
-  (state) => state.organizationGridConfig.value
-);
-export const selectITContractGridConfigCache = createSelector(
-  selectITContractState,
   (state) => state.organizationGridConfig
 );
 

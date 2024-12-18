@@ -27,6 +27,6 @@ export interface ITContractState extends EntityState<ITContract> {
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
   isRemoving: boolean;
 
-  organizationGridConfig: Cached<APIOrganizationGridConfigurationResponseDTO>;
+  organizationGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
   appliedProcurementPlans: Cached<APIAppliedProcurementPlanResponseDTO[]>;
 }
