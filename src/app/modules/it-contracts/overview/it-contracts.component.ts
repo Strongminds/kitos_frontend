@@ -452,11 +452,11 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
 
     this.store.dispatch(ITContractActions.getAppliedProcurementPlans());
     this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
+    this.store.dispatch(ITContractActions.getItContractOverviewRoles());
 
     if (existingColumns) {
       this.store.dispatch(ITContractActions.updateGridColumns(existingColumns));
     } else {
-      this.store.dispatch(ITContractActions.getItContractOverviewRoles());
       this.subscriptions.add(
         this.actions$
           .pipe(
