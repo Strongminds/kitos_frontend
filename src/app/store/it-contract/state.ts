@@ -1,4 +1,5 @@
 import { EntityState } from '@ngrx/entity';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIAppliedProcurementPlanResponseDTO,
   APIItContractPermissionsResponseDTO,
@@ -17,7 +18,7 @@ export interface ITContractState extends EntityState<ITContract> {
   gridState: GridState;
   gridColumns: GridColumn[];
   gridRoleColumns: GridColumn[];
-  contractRoles: { id: number; name: string }[] | undefined;
+  contractRoles: APIBusinessRoleDTO[] | undefined;
 
   loading: boolean | undefined;
   itContract: APIItContractResponseDTO | undefined;

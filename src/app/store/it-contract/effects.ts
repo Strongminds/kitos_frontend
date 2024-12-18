@@ -40,6 +40,7 @@ import {
   selectItContractUuid,
   selectOverviewContractRoles,
 } from './selectors';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 
 @Injectable()
 export class ITContractEffects {
@@ -668,7 +669,7 @@ function mapPayments(payments: APIPaymentResponseDTO[]): APIPaymentRequestDTO[] 
   return payments.map((p) => ({ ...p, organizationUnitUuid: p.organizationUnit?.uuid }));
 }
 
-function applyQueryFixes(odataString: string, roles: { id: number; name: string }[] | undefined) {
+function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | undefined) {
   let convertedString = replaceProcurementFilter(odataString);
   convertedString = convertedString
     .replace(/CriticalityUuid eq '([\w-]+)'/, 'CriticalityUuid eq $1')
