@@ -299,10 +299,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       this.defaultGridColumns
     );
     if (existingColumns) {
-      console.log('existingColumns', existingColumns);
       this.store.dispatch(DataProcessingActions.updateGridColumns(existingColumns));
     } else {
-      console.log('existingColumns', existingColumns);
       this.subscriptions.add(
         this.actions$
           .pipe(

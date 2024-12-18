@@ -11,7 +11,6 @@ export class GridColumnStorageService {
   }
 
   public setColumns(key: string, columns: GridColumn[]): void {
-    console.log('setColumns', key, columns);
     const hash = this.computeHash(this.filterOutRoleColumns(columns));
     this.localStorage.set<GridColumnCache>(key, { columns, hash });
   }

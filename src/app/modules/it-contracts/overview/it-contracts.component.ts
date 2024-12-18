@@ -448,6 +448,10 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   ];
 
   ngOnInit(): void {
+    this.gridColumns$.subscribe((columns) => {
+      console.log('columns', columns);
+    });
+
     const existingColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, this.defaultGridColumns);
 
     this.store.dispatch(ITContractActions.getAppliedProcurementPlans());
@@ -455,10 +459,8 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     this.store.dispatch(ITContractActions.getItContractOverviewRoles());
 
     if (existingColumns) {
-      console.log('existingColumns', existingColumns);
       this.store.dispatch(ITContractActions.updateGridColumns(existingColumns));
     } else {
-      console.log('defaultGridColumns', this.defaultGridColumns);
       this.subscriptions.add(
         this.actions$
           .pipe(
