@@ -247,7 +247,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
     );
   }
-
+  
   private updateDefaultColumns(): void {
     this.store.dispatch(ITSystemActions.updateGridColumns(this.defaultGridColumns));
   }
