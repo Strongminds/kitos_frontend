@@ -1,8 +1,8 @@
 import { concatLatestFrom } from '@ngrx/operators';
 import { Observable, combineLatest } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-import { hasValidCache } from './date.helpers';
 import { Cached } from '../models/cache-item.model';
+import { hasValidCache } from './date.helpers';
 
 /**
  * Combines an array of boolean Observables using logical AND.
@@ -37,7 +37,7 @@ export function debugPipe<T>(label?: string) {
   });
 }
 
-export function cacheFilter<T>(cached$: Observable<Cached<T>>) {
+export function filterByValidCache<T>(cached$: Observable<Cached<T>>) {
   return (source$: Observable<unknown>) =>
     source$.pipe(
       concatLatestFrom(() => cached$),

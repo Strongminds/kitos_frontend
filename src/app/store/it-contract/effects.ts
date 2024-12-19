@@ -5,6 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIContractPaymentsDataResponseDTO,
   APIItContractResponseDTO,
@@ -16,7 +17,7 @@ import {
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
-import { cacheFilter } from 'src/app/shared/helpers/observable-helpers';
+import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
 import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
@@ -39,7 +40,6 @@ import {
   selectItContractUuid,
   selectOverviewContractRoles,
 } from './selectors';
-import { APIBusinessRoleDTO } from 'src/app/api/v1';
 
 @Injectable()
 export class ITContractEffects {
@@ -622,7 +622,7 @@ export class ITContractEffects {
   getAppliedProcurementPlans$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getAppliedProcurementPlans),
-      cacheFilter(this.store.select(selectAppliedProcurementPlansCache)),
+      filterByValidCache(this.store.select(selectAppliedProcurementPlansCache)),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) => {
         return this.apiInternalItContractService
