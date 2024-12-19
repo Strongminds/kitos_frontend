@@ -197,7 +197,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   private openNotificationsTableDialog(config?: MatDialogConfig<unknown> | undefined) {
     const paddedConfig: MatDialogConfig<unknown> = config ?? {};
-    paddedConfig.height = '90%';
+    paddedConfig.height = '95%';
+    paddedConfig.maxHeight = '750px';
     return this.notificationDialog.open(NotificationsTableDialogComponent, paddedConfig);
   }
 

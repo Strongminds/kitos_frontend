@@ -34,6 +34,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public loading: boolean | null = false;
   @Input() public includeAddTag = false;
   @Input() public tagValidation: 'email' | 'none' = 'none';
+  @Input() public addTagText: string = $localize`Tilføj email`;
   @Input() public isRequired = false;
 
   @Output() public valueChange = new EventEmitter<T[] | undefined>();

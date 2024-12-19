@@ -19,7 +19,7 @@
   [disabled]="disabled"
   [closeOnSelect]="false"
   [(ngModel)]="selectedValuesModel"
-  addTagText="Create New"
+  [addTagText]="addTagText"
   [addTag]="includeAddTag ? onCreateNew : false"
 >
   <ng-template ng-option-tmp let-item="item" let-item$="item$">

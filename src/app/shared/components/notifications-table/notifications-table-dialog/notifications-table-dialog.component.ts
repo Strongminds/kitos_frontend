@@ -363,8 +363,13 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     this.isRepeated = isRepeated;
 
     if (isRepeated) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
       this.notificationForm.controls.repetitionControl.setValidators([Validators.required]);
-      this.notificationForm.controls.fromDateControl.setValidators([Validators.required]);
+      this.notificationForm.controls.fromDateControl.setValidators([
+        Validators.required,
+        dateGreaterThanOrEqualToDateValidator(today),
+      ]);
     } else {
       this.notificationForm.controls.repetitionControl.setValidators([]);
       this.notificationForm.controls.fromDateControl.setValidators([]);
