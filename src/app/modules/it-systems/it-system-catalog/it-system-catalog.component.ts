@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import {
   ARCHIVE_SECTION_NAME,
   CATALOG_COLUMNS_ID,
@@ -62,14 +63,15 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       entityType: 'it-system',
       extraData: [
         {
-          name: $localize`Aktivt`,
-          value: true,
-        },
-        {
-          name: $localize`Ikke aktivt`,
+          name: $localize`Tilgængeligt`,
           value: false,
         },
+        {
+          name: $localize`Ikke tilgængelig`,
+          value: true,
+        },
       ],
+      booleanValueDisplay: BooleanValueDisplayType.AvailableNotAvailable,
       style: 'reverse-chip',
       hidden: false,
       persistId: 'isActive',
@@ -247,7 +249,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
     );
   }
-  
+
   private updateDefaultColumns(): void {
     this.store.dispatch(ITSystemActions.updateGridColumns(this.defaultGridColumns));
   }

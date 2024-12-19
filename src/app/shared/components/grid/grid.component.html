@@ -139,18 +139,10 @@
         <ng-template *ngIf="column.style === 'chip'" kendoGridCellTemplate let-dataItem>
           <div class="items-center-container overflow-hidden-container" #chip>
             <app-status-chip
-              *ngIf="!checkOverflow(chip)"
               [type]="column.entityType"
               [value]="searchProperty(dataItem, column.field)"
               [valueDisplayType]="column.booleanValueDisplay"
-              [overflows]="false"
-            ></app-status-chip>
-            <app-status-chip
-              *ngIf="checkOverflow(chip)"
-              [type]="column.entityType"
-              [value]="searchProperty(dataItem, column.field)"
-              [valueDisplayType]="column.booleanValueDisplay"
-              [overflows]="true"
+              [overflows]="checkOverflow(chip)"
             ></app-status-chip>
           </div>
         </ng-template>
@@ -159,15 +151,17 @@
           <div class="items-center-container overflow-hidden-container" #chip>
             <app-status-chip
               *ngIf="!checkOverflow(chip)"
-              type="it-interface"
+              [type]="column.entityType"
               [value]="searchProperty(dataItem, column.field)"
+              [valueDisplayType]="column.booleanValueDisplay"
               [reverseValues]="true"
               [overflows]="false"
             ></app-status-chip>
             <app-status-chip
               *ngIf="checkOverflow(chip)"
-              type="it-interface"
+              [type]="column.entityType"
               [value]="searchProperty(dataItem, column.field)"
+              [valueDisplayType]="column.booleanValueDisplay"
               [reverseValues]="true"
               [overflows]="true"
             ></app-status-chip>
