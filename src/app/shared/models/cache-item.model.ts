@@ -10,7 +10,7 @@ export function newCache<T>(value: T | undefined): Cached<T> {
   };
 }
 
-export function emptyCache<T>(): Cached<T> {
+export function resetCache<T>(): Cached<T> {
   return {
     value: undefined,
     cacheTime: undefined,

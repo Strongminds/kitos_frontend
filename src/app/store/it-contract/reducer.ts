@@ -1,7 +1,7 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { CONTRACT_ROLES_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
-import { emptyCache, newCache } from 'src/app/shared/models/cache-item.model';
+import { newCache, resetCache } from 'src/app/shared/models/cache-item.model';
 import { defaultGridState } from 'src/app/shared/models/grid-state.model';
 import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
@@ -27,7 +27,7 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   isRemoving: false,
   organizationGridConfig: undefined,
 
-  appliedProcurementPlans: emptyCache(),
+  appliedProcurementPlans: resetCache(),
 });
 
 export const itContractFeature = createFeature({
