@@ -115,7 +115,6 @@ export class DataProcessingEffects {
     return this.actions$.pipe(
       ofType(DataProcessingActions.updateGridColumns),
       map(({ gridColumns }) => {
-        console.log('gridColumns', gridColumns);
         this.gridColumnStorageService.setColumns(DATA_PROCESSING_COLUMNS_ID, gridColumns);
         return DataProcessingActions.updateGridColumnsSuccess(gridColumns);
       })
