@@ -63,7 +63,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       entityType: 'it-system',
       extraData: [
         {
-          name: $localize`Tilgængeligt`,
+          name: $localize`Tilgængelig`,
           value: false,
         },
         {
