@@ -54,6 +54,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       hidden: false,
       style: 'checkbox',
       permissionsField: 'CanChangeUsageStatus',
+      sortable: false,
     },
     {
       field: 'Disabled',
