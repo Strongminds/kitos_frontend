@@ -36,7 +36,11 @@ export function debugPipe<T>(label?: string) {
     }
   });
 }
-
+/**
+ *
+ * @param cached$ - Observable of Cached<T> object
+ * @returns An operator function that filters out the source observable if the cache is not valid.
+ */
 export function filterByValidCache<T>(cached$: Observable<Cached<T>>) {
   return (source$: Observable<unknown>) =>
     source$.pipe(
