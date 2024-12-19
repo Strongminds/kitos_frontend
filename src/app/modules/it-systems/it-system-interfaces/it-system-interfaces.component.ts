@@ -163,7 +163,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
       this.store.dispatch(ITInterfaceActions.updateGridColumns(this.defaultGridColumns));
     }
 
-    this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
+    this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
       this.actions$
