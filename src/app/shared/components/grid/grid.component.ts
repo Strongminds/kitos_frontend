@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -45,6 +45,7 @@ import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-c
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
@@ -243,9 +244,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (!this.data || !this.state) {
       return { data: [] };
     }
-    this.data$.pipe(first()).subscribe((data) => {
-      this.data = data;
-    });
+    this.subscriptions.add(
+      this.data$.pipe(first()).subscribe((data) => {
+        this.data = data;
+      })
+    );
     const processedData = process(this.data.data, { ...this.state, skip: 0, take: this.data.total });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formattedData = processedData.data.map((item: any) => {
@@ -361,18 +364,22 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   private initializeFilterSubscriptions() {
-    this.actions$.pipe(ofType(getSaveFilterAction(this.entityType))).subscribe(({ localStoreKey }) => {
-      this.saveFilter(localStoreKey);
-    });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(getSaveFilterAction(this.entityType))).subscribe(({ localStoreKey }) => {
+        this.saveFilter(localStoreKey);
+      })
+    );
 
-    this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
-      const newState = {
-        ...this.state,
-        filter: this.mapCompositeFilterStringDatesToDateObjects(state.filter),
-        sort: state.sort,
-      };
-      this.onStateChange(newState);
-    });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
+        const newState = {
+          ...this.state,
+          filter: this.mapCompositeFilterStringDatesToDateObjects(state.filter),
+          sort: state.sort,
+        };
+        this.onStateChange(newState);
+      })
+    );
   }
 
   private mapCompositeFilterStringDatesToDateObjects(
