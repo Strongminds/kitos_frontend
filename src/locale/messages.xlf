@@ -4888,6 +4888,12 @@
       <trans-unit id="7658261238857316374" datatype="html">
         <source>Ugyldig email</source>
       </trans-unit>
+      <trans-unit id="1927431106338973301" datatype="html">
+        <source>Vælg modtagere som mail eller rolle.</source>
+      </trans-unit>
+      <trans-unit id="9124494925493981512" datatype="html">
+        <source>Tilføj email</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

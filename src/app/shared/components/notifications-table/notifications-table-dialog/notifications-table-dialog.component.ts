@@ -290,7 +290,10 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     const notificationControls = this.notificationForm.controls;
 
     this.subscriptions.add(
-      notificationControls.fromDateControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip())
+      notificationControls.fromDateControl.valueChanges.subscribe(() => {
+        this.toggleShowDateOver28Tooltip();
+        this.notificationForm.controls.toDateControl.updateValueAndValidity();
+      })
     );
     this.subscriptions.add(
       notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip())
@@ -312,19 +315,25 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
         mapNotificationRepetitionFrequency(this.notification.repetitionFrequency)
       );
 
-      const emailRecipients =
+      const emailRecipientsSet = new Set(
         this.notification.receivers?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ??
-        [];
-      const roleRecipients =
-        this.notification.receivers?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ??
-        [];
-      const emailCcs =
-        this.notification.cCs?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ?? [];
-      const roleCcs =
-        this.notification.cCs?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? [];
+          []
+      );
+      const roleRecipientsSet = new Set(
+        this.notification.receivers?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? []
+      );
+      const emailCcsSet = new Set(
+        this.notification.cCs?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ?? []
+      );
+      const roleCcsSet = new Set(
+        this.notification.cCs?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? []
+      );
 
-      this.receiverOptions = [...this.receiverOptions, ...emailRecipients, ...roleRecipients];
-      this.ccOptions = [...this.ccOptions, ...emailCcs, ...roleCcs];
+      this.receiverOptions = Array.from(new Set([...this.receiverOptions, ...emailRecipientsSet]));
+      this.ccOptions = Array.from(new Set([...this.ccOptions, ...emailCcsSet]));
+
+      this.updateSelectedRoles(roleRecipientsSet, this.receiverOptions);
+      this.updateSelectedRoles(roleCcsSet, this.ccOptions);
 
       this.initialSelectedReceiverValues = this.receiverOptions.filter((option) => option.selected);
       this.initialSelectedCcValues = this.ccOptions.filter((option) => option.selected);
@@ -398,5 +407,12 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   private onDialogActionComplete() {
     this.store.dispatch(UserNotificationActions.notificationCreated(this.ownerResourceType));
     this.onCancel();
+  }
+
+  private updateSelectedRoles(set: Set<MultiSelectDropdownItem<string>>, options: MultiSelectDropdownItem<string>[]) {
+    set.forEach((item) => {
+      const option = options.find((option) => option.value === item.value);
+      if (option) option.selected = true;
+    });
   }
 }
