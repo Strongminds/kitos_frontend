@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -45,6 +45,7 @@ import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-c
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
