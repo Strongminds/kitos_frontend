@@ -50,7 +50,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly yesNoOptions = yesNoOptions.map((option) => ({ id: option.value, label: option.name }));
 
   public readonly agreementConcludedValue$ = new BehaviorSubject<YesNoIrrelevantEnum | undefined>(undefined);
-  public readonly isAgreementConcluded$ = this.agreementConcludedValue$.pipe(map((value) => value === 'Yes'));
+  public readonly isAgreementConcluded$ = this.agreementConcludedValue$.pipe(map((value) => value === 'YES'));
 
   public readonly hasSubprocessorsValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
   public readonly isHasSubprocessorsTrue$ = this.hasSubprocessorsValue$.pipe(map((value) => value === 'Yes'));
@@ -157,6 +157,6 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
   public patchAgreementConcluded(value: YesNoIrrelevantEnum | undefined) {
     this.agreementConcludedValue$.next(value);
-    this.patchFrontPage({ general: { isAgreementConcluded: value } });
+   // this.patchFrontPage({ general: { isAgreementConcluded: value } });
   }
 }

@@ -6,9 +6,9 @@ export interface YesNoIrrelevantOptions {
 }
 
 export enum YesNoIrrelevantEnum {
-  Yes = 'Yes',
-  No = 'No',
-  Irrelevant = 'Irrelevant',
+  Yes = 'YES',
+  No = 'NO',
+  Irrelevant = 'IRRELEVANT',
   Undecided = 'Undecided',
 }
 

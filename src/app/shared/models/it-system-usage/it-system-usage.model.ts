@@ -1,3 +1,4 @@
+import { APIDataProcessingRegistrationGeneralDataResponseDTO } from 'src/app/api/v2';
 import { entityWithUnavailableName } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
@@ -7,7 +8,7 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
-import { mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
+import { mapToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 
@@ -58,6 +59,7 @@ export interface ITSystemUsage {
   DataProcessingRegistrationsConcludedAsCsv: YesNoDontKnowOptions | undefined;
   DataProcessingRegistrationNamesAsCsv: string;
   DataProcessingRegistrations: { id: string; value: string }[];
+  DataProcessingRegistrationsConcluded: { id: string; value: string }[];
   OutgoingRelatedItSystemUsages: { id: string; value: string }[];
   DependsOnInterfaces: { id: string; value: string }[];
   IncomingRelatedItSystemUsages: { id: string; value: string }[];
@@ -125,6 +127,15 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
       (registration: { DataProcessingRegistrationUuid: string; DataProcessingRegistrationName: string }) => ({
         id: registration.DataProcessingRegistrationUuid,
         value: registration.DataProcessingRegistrationName,
+      })
+    ),
+    DataProcessingRegistrationsConcluded: value.DataProcessingRegistrations?.map(
+      (registration: {
+        DataProcessingRegistrationUuid: string;
+        IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
+      }) => ({
+        id: registration.DataProcessingRegistrationUuid,
+        value: mapToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name,
       })
     ),
     OutgoingRelatedItSystemUsages: value.OutgoingRelatedItSystemUsages?.map(

@@ -419,7 +419,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: DATA_PROCESSING_SECTION_NAME,
       style: 'page-link-array',
       entityType: 'data-processing-registration',
-      dataField: 'DataProcessingRegistrations',
+      dataField: 'DataProcessingRegistrationsConcluded',
      // extraFilter: 'enum',
       width: 360,
      // extraData: yesNoIrrelevantOptionsGrid,
