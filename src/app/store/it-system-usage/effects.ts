@@ -707,15 +707,15 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
   convertedString = convertedString
     .replace(
       new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('\\w+')`, 'i'),
-      'DataProcessingRegistrations/any(c: c/IsAgreementConcluded eq $1)'
+      'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'
     )
-    .replace(
-      new RegExp(
-        `DataProcessingRegistrations\\/any\\(c: c\\/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}'\\)`,
-        'i'
-      ),
-      dprUndecidedQuery
-    );
+    // .replace(
+    //   new RegExp(
+    //     `DataProcessingRegistrations\\/any\\(c: c\\/IsAgreementConcluded eq '${YesNoIrrelevantEnum.Undecided}'\\)`,
+    //     'i'
+    //   ),
+    //   dprUndecidedQuery
+    // );
 
   systemRoles?.forEach((role) => {
     convertedString = convertedString.replace(
