@@ -24,7 +24,12 @@ export const yesNoIrrelevantOptionsGrid: YesNoIrrelevantOptions[] = [
   { name: $localize`Ikke relevant`, value: 'Ikke relevant' },
 ];
 
-export const fromCapitalizedString = (
+export function mapCapitalizedStringToYesNoIrrelevantEnum(source: string): YesNoIrrelevantOptions | undefined {
+  const value = fromCapitalizedString(source);
+  return mapToYesNoIrrelevantEnum(value);
+}
+
+const fromCapitalizedString = (
   value: string
 ): APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum => {
   switch (value) {
