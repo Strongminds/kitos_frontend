@@ -55,4 +55,3 @@ export interface GridColumn {
   booleanValueDisplay?: BooleanValueDisplayType; // Defines how boolean values should be displayed. If not set, RegistrationEntityTypes will be used to derive the display type
   disabledByUIConfig?: boolean;
 }
-
