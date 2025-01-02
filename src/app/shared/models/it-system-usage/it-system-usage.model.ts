@@ -8,7 +8,11 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
-import { mapToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
+import {
+  fromCapitalizedString,
+  mapToYesNoIrrelevantEnum,
+  mapToYesNoIrrelevantEnumGrid,
+} from '../yes-no-irrelevant.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 
@@ -135,7 +139,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
         IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
       }) => ({
         id: registration.DataProcessingRegistrationUuid,
-        value: mapToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name,
+        value: mapToYesNoIrrelevantEnum(fromCapitalizedString(registration.IsAgreementConcluded))?.name,
       })
     ),
     OutgoingRelatedItSystemUsages: value.OutgoingRelatedItSystemUsages?.map(

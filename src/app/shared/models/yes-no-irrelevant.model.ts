@@ -6,9 +6,9 @@ export interface YesNoIrrelevantOptions {
 }
 
 export enum YesNoIrrelevantEnum {
-  Yes = 'YES',
-  No = 'NO',
-  Irrelevant = 'IRRELEVANT',
+  Yes = 'Yes',
+  No = 'No',
+  Irrelevant = 'Irrelevant',
   Undecided = 'Undecided',
 }
 
@@ -23,6 +23,23 @@ export const yesNoIrrelevantOptionsGrid: YesNoIrrelevantOptions[] = [
   { name: $localize`Nej`, value: 'Nej' },
   { name: $localize`Ikke relevant`, value: 'Ikke relevant' },
 ];
+
+export const fromCapitalizedString = (
+  value: string
+): APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum => {
+  switch (value) {
+    case 'YES':
+      return YesNoIrrelevantEnum.Yes;
+    case 'NO':
+      return YesNoIrrelevantEnum.No;
+    case 'IRRELEVANT':
+      return YesNoIrrelevantEnum.Irrelevant;
+    case 'UNDECIDED':
+      return YesNoIrrelevantEnum.Undecided;
+    default:
+      throw new Error(`Unknown value for conversion into API yes/no/irrelevant enum: ${value}`);
+  }
+};
 
 export const mapToYesNoIrrelevantEnum = (
   value?: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum
