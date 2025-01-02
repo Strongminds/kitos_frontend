@@ -232,7 +232,7 @@
             linkFontSize="small"
             [itemType]="column.entityType"
             [itemUuid]="itemUuid"
-            >{{ searchProperty(dataItem, column.field) }}
+            >{{ searchProperty(dataItem, column.field)?.name }}
             </app-details-page-link>
           </app-paragraph>
         </ng-template>
