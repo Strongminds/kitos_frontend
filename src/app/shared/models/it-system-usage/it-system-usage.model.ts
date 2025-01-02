@@ -132,15 +132,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
         value: registration.DataProcessingRegistrationName,
       })
     ),
-    DataProcessingRegistrationsConcluded: value.DataProcessingRegistrations?.map(
-      (registration: {
-        DataProcessingRegistrationUuid: string;
-        IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
-      }) => ({
-        id: registration.DataProcessingRegistrationUuid,
-        value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name,
-      })
-    ),
+    DataProcessingRegistrationsConcluded: getDataProcessingRegistrationsConcluded(value),
     OutgoingRelatedItSystemUsages: value.OutgoingRelatedItSystemUsages?.map(
       (relatedItSystem: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
         id: relatedItSystem.ItSystemUsageUuid,
@@ -173,3 +165,23 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
   };
 };
+
+function getDataProcessingRegistrationsConcluded(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  value: any
+): { id: string; value: string }[] {
+  const registrations = value.DataProcessingRegistrations?.map(
+    (registration: {
+      DataProcessingRegistrationUuid: string;
+      IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
+    }) => ({
+      id: registration.DataProcessingRegistrationUuid,
+      value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)
+    })
+  ).filter((r: { value: string }) => r.value !== undefined);
+
+  return registrations.map((r: { id: string; value: { name: string } }) => ({
+    id: r.id,
+    value: r.value.name,
+  }));
+}

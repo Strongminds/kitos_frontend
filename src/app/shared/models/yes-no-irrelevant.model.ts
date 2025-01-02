@@ -31,7 +31,7 @@ export function mapCapitalizedStringToYesNoIrrelevantEnum(source: string): YesNo
 
 const fromCapitalizedString = (
   value: string
-): APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum => {
+): APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum | undefined => {
   switch (value) {
     case 'YES':
       return APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum.Yes;
