@@ -34,15 +34,16 @@ const fromCapitalizedString = (
 ): APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum => {
   switch (value) {
     case 'YES':
-      return YesNoIrrelevantEnum.Yes;
+      return APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum.Yes;
     case 'NO':
-      return YesNoIrrelevantEnum.No;
+      return APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum.No;
     case 'IRRELEVANT':
-      return YesNoIrrelevantEnum.Irrelevant;
+      return APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum.Irrelevant;
     case 'UNDECIDED':
-      return YesNoIrrelevantEnum.Undecided;
+    case null:
+      return APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum.Undecided;
     default:
-      throw new Error(`Unknown value for conversion into API yes/no/irrelevant enum: ${value}`);
+      throw new Error(`Unknown value for conversion into API yes/no/irrelevant/undecided enum: ${value}`);
   }
 };
 

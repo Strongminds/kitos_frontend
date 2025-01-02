@@ -8,7 +8,10 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { YesNoDontKnowOptions } from '../yes-no-dont-know.model';
-import { mapCapitalizedStringToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
+import {
+  mapCapitalizedStringToYesNoIrrelevantEnum,
+  mapToYesNoIrrelevantEnumGrid,
+} from '../yes-no-irrelevant.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 
