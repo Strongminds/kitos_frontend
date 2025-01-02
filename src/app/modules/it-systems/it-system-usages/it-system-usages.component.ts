@@ -414,7 +414,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'GeneralPurpose',
     },
     {
-      field: GridFields.DataProcessingRegistrationsConcludedAsCsv,
+      field: GridFields.DataProcessingRegistrationsConcluded,
       title: $localize`Databehandleraftale er indgået`,
       section: DATA_PROCESSING_SECTION_NAME,
       style: 'page-link-array',
