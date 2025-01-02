@@ -28,7 +28,11 @@
         [title]="column.title"
         [sortable]="column.sortable ?? true"
         [filter]="column.filter ?? 'text'"
-        [width]="column.width ?? column.style === 'date' ? defaultDateColumnWidth : defaultColumnWidth"
+        [width]="column.width !== undefined
+          ? column.width
+          : column.style === 'date'
+            ? defaultDateColumnWidth
+            : defaultColumnWidth"
         [sticky]="column.isSticky ?? false"
         [minResizableWidth]="
           column.minResizableWidth !== undefined
