@@ -41,9 +41,7 @@ export interface GridColumn {
     | 'uuid-to-name'
     | 'excel-only'
     | 'action-buttons'
-    | 'priority-buttons'
-    | 'enum-page-link'
-    ; //Style of the column
+    | 'priority-buttons'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden
@@ -56,4 +54,3 @@ export interface GridColumn {
   booleanValueDisplay?: BooleanValueDisplayType; // Defines how boolean values should be displayed. If not set, RegistrationEntityTypes will be used to derive the display type
   disabledByUIConfig?: boolean;
 }
-
