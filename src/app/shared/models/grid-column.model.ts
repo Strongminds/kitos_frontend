@@ -42,6 +42,7 @@ export interface GridColumn {
     | 'excel-only'
     | 'action-buttons'
     | 'priority-buttons'
+    | 'enum-page-link'
     ; //Style of the column
   width?: number;
   minResizableWidth?: number;
