@@ -57,7 +57,6 @@ export interface ITSystemUsage {
   GeneralPurpose: string;
   DataProcessingRegistrationsConcludedAsCsv: YesNoDontKnowOptions | undefined;
   DataProcessingRegistrationNamesAsCsv: string;
-  MainDataProcessingRegistrationUuid: string;
   DataProcessingRegistrations: { id: string; value: string }[];
   OutgoingRelatedItSystemUsages: { id: string; value: string }[];
   DependsOnInterfaces: { id: string; value: string }[];
@@ -75,7 +74,6 @@ export interface ITSystemUsage {
 export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
   if (!value.SourceEntityUuid) return;
 
-  const mainDpr = value.DataProcessingRegistrations?.[0];
   return {
     id: value.SourceEntityUuid,
     SystemActive: value.SystemActive,
@@ -129,7 +127,6 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
         value: registration.DataProcessingRegistrationName,
       })
     ),
-    MainDataProcessingRegistrationUuid: mainDpr.DataProcessingRegistrationUuid,
     OutgoingRelatedItSystemUsages: value.OutgoingRelatedItSystemUsages?.map(
       (relatedItSystem: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
         id: relatedItSystem.ItSystemUsageUuid,
