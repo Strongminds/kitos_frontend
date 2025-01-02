@@ -75,7 +75,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public readonly defaultColumnWidth = 270;
   public readonly defaultMinimumColumnWidth = 55;
-  public readonly defaultDateColumnWidth = 350;
+  public readonly defaultDateMinimumColumnWidth = 120;
 
   constructor(
     private actions$: Actions,

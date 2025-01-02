@@ -36,7 +36,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
 
   public readonly defaultColumnWidth = 270;
   public readonly defaultMinimumColumnWidth = 50;
-  public readonly defaultDateColumnWidth = 350;
+  public readonly defaultMinimumDateColumnWidth = 120;
 
   constructor(private actions$: Actions) {
     super();
