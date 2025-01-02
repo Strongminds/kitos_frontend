@@ -36,7 +36,6 @@ export const HostedAt = 'HostedAt';
 export const GeneralPurpose = 'GeneralPurpose';
 export const DataProcessingRegistrationsConcludedAsCsv = 'DataProcessingRegistrationsConcludedAsCsv';
 export const DataProcessingRegistrationNamesAsCsv = 'DataProcessingRegistrationNamesAsCsv';
-export const DataProcessingRegistrationsConcluded = 'DataProcessingRegistrationsConcluded';
 export const OutgoingRelatedItSystemUsagesNamesAsCsv = 'OutgoingRelatedItSystemUsagesNamesAsCsv';
 export const DependsOnInterfacesNamesAsCsv = 'DependsOnInterfacesNamesAsCsv';
 export const IncomingRelatedItSystemUsagesNamesAsCsv = 'IncomingRelatedItSystemUsagesNamesAsCsv';
