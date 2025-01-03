@@ -139,6 +139,13 @@
         >
           <app-paragraph [cropOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
         </ng-template>
+        <ng-template
+          *ngIf="column.style === 'default-wrap'"
+          kendoGridCellTemplate
+          let-dataItem
+        >
+          <app-paragraph [wrapOnOverflow]="true">{{ searchProperty(dataItem, column.field) }}</app-paragraph>
+        </ng-template>
         <ng-template *ngIf="column.style === 'primary'" kendoGridCellTemplate let-dataItem>
           <div class="paragraph wrap-on-overflow bold-font">{{ searchProperty(dataItem, column.field) }}</div>
         </ng-template>
