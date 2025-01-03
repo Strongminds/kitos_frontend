@@ -40,5 +40,6 @@ export const EMAIL_REGEX_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export const DEFAULT_COLUMN_WIDTH = 270;
 export const DEFAULT_COLUMN_MINIMUM_WIDTH = 55;
+export const DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH = 120;
 export const DEFAULT_DATE_COLUMN_WIDTH = 220;
 export const DEFAULT_DATE_COLUMN_MINIMUM_WIDTH = 140;

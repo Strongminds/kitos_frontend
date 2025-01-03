@@ -34,6 +34,7 @@ import {
   DEFAULT_COLUMN_WIDTH,
   DEFAULT_DATE_COLUMN_MINIMUM_WIDTH,
   DEFAULT_DATE_COLUMN_WIDTH,
+  DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
 } from '../../constants/constants';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
@@ -82,6 +83,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public readonly defaultColumnWidth = DEFAULT_COLUMN_WIDTH;
   public readonly defaultMinimumColumnWidth = DEFAULT_COLUMN_MINIMUM_WIDTH;
   public readonly defaultDateColumnWidth = DEFAULT_DATE_COLUMN_WIDTH;
+  public readonly defaultPrimaryColumnMinimumWidth = DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH;
   public readonly defaultMinimumDateColumnWidth = DEFAULT_DATE_COLUMN_MINIMUM_WIDTH;
 
   constructor(

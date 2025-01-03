@@ -39,7 +39,9 @@
             ? column.minResizableWidth
             : column.filter === 'date'
             ? defaultMinimumDateColumnWidth
-            : defaultMinimumColumnWidth
+            : column.style === 'primary'
+              ? defaultPrimaryColumnMinimumWidth
+              : defaultMinimumColumnWidth
         "
         headerClass="mygrid-header-cell"
       >
