@@ -85,6 +85,10 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     this.showDragInfo();
   }
 
+  private isHierarchyNode(item: EntityTreeNode<T>): item is HierachyNodeWithParentUuid {
+    return (item as HierachyNodeWithParentUuid).parentUuid !== undefined;
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public drop(event: any) {
     if (!this.dropActionTodo) return;
@@ -99,7 +103,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
     const draggedItem = this.nodeLookup[draggedItemUuid];
     const newContainer = targetListUuid !== null ? this.nodeLookup[targetListUuid].children : this.nodes;
-    const oldParentUuid = (draggedItem as HierachyNodeWithParentUuid).parentUuid;
+    const oldParentUuid = this.isHierarchyNode(draggedItem) ? draggedItem.parentUuid : undefined;
 
     switch (this.dropActionTodo.action) {
       case 'before':
