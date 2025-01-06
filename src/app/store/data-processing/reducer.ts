@@ -106,13 +106,6 @@ export const dataProcessingFeature = createFeature({
       };
     }),
 
-    on(DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): DataProcessingState => {
-      return {
-        ...state,
-        gridColumns,
-      };
-    }),
-
     on(DataProcessingActions.getDataProcessingOverviewRolesSuccess, (state, { roles }): DataProcessingState => {
       const roleColumns =
         roles?.flatMap((role) =>

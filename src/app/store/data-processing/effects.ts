@@ -121,17 +121,6 @@ export class DataProcessingEffects {
     );
   });
 
-  updateGridColumnsAndRoleColumns$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(DataProcessingActions.updateGridColumnsAndRoleColumns),
-      map(({ gridColumns, gridRoleColumns }) => {
-        const allColumns = gridColumns.concat(gridRoleColumns);
-        this.gridColumnStorageService.setColumns(DATA_PROCESSING_COLUMNS_ID, allColumns);
-        return DataProcessingActions.updateGridColumnsAndRoleColumnsSuccess(allColumns);
-      })
-    );
-  });
-
   deleteDataProcessing$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.deleteDataProcessing),
