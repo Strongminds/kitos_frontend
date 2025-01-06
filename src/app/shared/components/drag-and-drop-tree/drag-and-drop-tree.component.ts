@@ -1,7 +1,11 @@
 import { DOCUMENT } from '@angular/common';
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
+import {
+  EntityTreeNode,
+  EntityTreeNodeMoveResult,
+  HierachyNodeWithParentUuid,
+} from '../../models/structure/entity-tree-node.model';
 
 interface DropInfo {
   targetId: string;
@@ -97,18 +101,27 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     const draggedItem = this.nodeLookup[draggedItemUuid];
 
     const newContainer = targetListUuid !== null ? this.nodeLookup[targetListUuid].children : this.nodes;
-
+    const asHierarchyNode = draggedItem as HierachyNodeWithParentUuid;
+    const oldparent = asHierarchyNode.parentUuid;
     switch (this.dropActionTodo.action) {
       case 'before':
       case 'after':
         this.insertDraggedItem(newContainer, draggedItem, this.dropActionTodo.targetId, this.dropActionTodo.action);
-        this.nodeMoved.emit({ movedNodeUuid: draggedItemUuid, targetParentNodeUuid: targetListUuid! });
+        this.nodeMoved.emit({
+          movedNodeUuid: draggedItemUuid,
+          targetParentNodeUuid: targetListUuid!,
+          movedNodeParentUuid: oldparent,
+        });
         break;
 
       case 'inside':
-        this.nodeLookup[this.dropActionTodo.targetId].children.push(draggedItem);
+        if (oldparent !== targetListUuid) this.nodeLookup[this.dropActionTodo.targetId].children.push(draggedItem);
         this.nodeLookup[this.dropActionTodo.targetId].isExpanded = true;
-        this.nodeMoved.emit({ movedNodeUuid: draggedItemUuid, targetParentNodeUuid: this.dropActionTodo.targetId });
+        this.nodeMoved.emit({
+          movedNodeUuid: draggedItemUuid,
+          targetParentNodeUuid: this.dropActionTodo.targetId,
+          movedNodeParentUuid: oldparent,
+        });
         break;
     }
 
@@ -166,6 +179,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private insertDraggedItem(newContainer: any[], draggedItem: any, targetId: string, action: string): void {
     const targetIndex = newContainer.findIndex((c) => c.uuid === targetId);
+     if (newContainer.some((c) => c.uuid === draggedItem.uuid)) return;
     if (action === 'before') {
       newContainer.splice(targetIndex, 0, draggedItem);
     } else {

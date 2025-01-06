@@ -18,4 +18,5 @@ export interface HierachyNodeWithParentUuid extends EntityTreeNode<never> {
 export interface EntityTreeNodeMoveResult {
   movedNodeUuid: string;
   targetParentNodeUuid: string;
+  movedNodeParentUuid?: string | undefined;
 }
