@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
-import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first, map } from 'rxjs';
@@ -20,7 +19,6 @@ import {
   USAGE_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -519,41 +517,22 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   ngOnInit() {
-    const existingColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, this.defaultGridColumns);
-    this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
-    if (existingColumns) {
-      this.store.dispatch(ITSystemUsageActions.updateGridColumns(existingColumns));
-    } else {
-      this.subscriptions.add(
-        this.actions$
-          .pipe(
-            ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
-            combineLatestWith(this.store.select(selectUsageGridRoleColumns)),
-            first()
-          )
-          .subscribe(([_, gridRoleColumns]) => {
-            this.store.dispatch(
-              ITSystemUsageActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
-            );
-          })
-      );
-      this.updateUnclickableColumns(this.defaultGridColumns);
-      this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
-    }
+    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
+    this.actions$
+    .pipe(
+      ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
+      combineLatestWith(this.store.select(selectUsageGridRoleColumns)),
+      first()
+    )
+    .subscribe(([_, roleColumns]) => {
+      const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
+      const existingColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, defaultColumnsAndRoles);
+      const columns = existingColumns ?? defaultColumnsAndRoles;
+      this.store.dispatch(ITSystemUsageActions.updateGridColumns(columns));
+    });
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
-          concatLatestFrom(() => this.gridColumns$)
-        )
-        .subscribe(([_, gridColumns]) => {
-          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
-        })
-    );
+    this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());
   }
 
   public stateChange(gridState: GridState) {
