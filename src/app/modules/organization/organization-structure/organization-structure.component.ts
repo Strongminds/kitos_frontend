@@ -135,7 +135,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   moveNode(event: EntityTreeNodeMoveResult): void {
-    if (event.movedNodeParentUuid === event.targetParentNodeUuid) {
+    if (this.isMovingToCurrentLevel(event)) {
       this.store.dispatch(OrganizationUnitActions.invalidPatchAttempt());
       return;
     }
@@ -160,7 +160,11 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     );
   }
 
-  public nodeExpandClick(node: EntityTreeNode<APIOrganizationUnitResponseDTO>): void {
+  isMovingToCurrentLevel(event: EntityTreeNodeMoveResult): boolean {
+    return event.movedNodeParentUuid === event.targetParentNodeUuid;
+  }
+
+  nodeExpandClick(node: EntityTreeNode<APIOrganizationUnitResponseDTO>): void {
     if (node.isExpanded) {
       this.store.dispatch(OrganizationUnitActions.removeExpandedNode(node.uuid));
     } else {
