@@ -170,18 +170,13 @@ function getDataProcessingRegistrationsConcluded(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any
 ): { id: string; value: string }[] {
-  const registrations = value.DataProcessingRegistrations?.map(
+  return value.DataProcessingRegistrations?.map(
     (registration: {
       DataProcessingRegistrationUuid: string;
       IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
     }) => ({
       id: registration.DataProcessingRegistrationUuid,
-      value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)
+      value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name
     })
   ).filter((r: { value: string }) => r.value !== undefined);
-
-  return registrations.map((r: { id: string; value: { name: string } }) => ({
-    id: r.id,
-    value: r.value.name,
-  }));
 }
