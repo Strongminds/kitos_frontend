@@ -337,7 +337,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public checkOverflow(element: any) {
-    return element.offsetWidth < 75;
+    return element.offsetWidth < 90;
   }
 
   private isExcelOnlyColumn(column: GridColumn): boolean {

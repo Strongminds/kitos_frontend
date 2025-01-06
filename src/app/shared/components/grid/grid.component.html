@@ -146,7 +146,7 @@
               [type]="column.entityType"
               [value]="searchProperty(dataItem, column.field)"
               [valueDisplayType]="column.booleanValueDisplay"
-              [overflows]="checkOverflow(chip)"
+              [elementLength]="chip.offsetWidth"
               [reverseValues]="column.style === 'reverse-chip'"
             ></app-status-chip>
           </div>

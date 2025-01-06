@@ -22,6 +22,7 @@ export class StatusChipComponent implements OnInit {
   @Input() public reverseValues?: boolean = false;
   @Input() public valueDisplayType?: BooleanValueDisplayType | null;
   @Input() public overflows?: boolean = false;
+  @Input() public elementLength?: number;
   public trueString?: string;
   public falseString?: string;
 
@@ -39,6 +40,15 @@ export class StatusChipComponent implements OnInit {
 
   public isError(): boolean {
     return this.value === this.reverseValues;
+  }
+
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public isOverflowing(): boolean {
+    return this.elementLength !== undefined && this.elementLength < this.stringLength();
+  }
+
+  private stringLength(): number {
+    return Math.max(this.trueString?.length ?? 0, this.falseString?.length ?? 0) * 8;
   }
 
   private setTrueFalseStringsFromEntityStatusTexts(type: RegistrationEntityTypes) {
