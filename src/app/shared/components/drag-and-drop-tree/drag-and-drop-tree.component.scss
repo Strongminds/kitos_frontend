@@ -205,6 +205,13 @@ app-details-page-link {
   cursor: pointer;
 }
 
+.no-select {
+  user-select: none; /* Standard syntax */
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+}
+
 .checkbox-color {
   ::ng-deep {
     svg {

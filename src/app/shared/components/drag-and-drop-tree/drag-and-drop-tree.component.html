@@ -12,7 +12,7 @@
   >
     <!-- displayDefaultNodeColorOnly ? node.color :  -->
     <div
-      [class]="'drag-container node-wrapper node-' + getNodeColor(node)"
+      [class]="'drag-container node-wrapper no-select node-' + getNodeColor(node)"
       [style.--dynamic-width.px]="14 * (level - 1)"
       [style.--dynamic-left.px]="15 * (level - 1)"
       [ngClass]="{
