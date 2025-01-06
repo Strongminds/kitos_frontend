@@ -144,6 +144,10 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
           this.store.dispatch(OrganizationUnitActions.updateHierarchy(unit, units));
         })
     );
+     if (event.movedNodeParentUuid === event.targetParentNodeUuid){
+       console.log('Invalid move operation')
+       return
+     }
     this.store.dispatch(
       OrganizationUnitActions.patchOrganizationUnit(event.movedNodeUuid, {
         parentUuid: event.targetParentNodeUuid,
