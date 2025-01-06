@@ -537,8 +537,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
             );
           })
       );
-      this.updateUnclickableColumns(this.defaultGridColumns);
-      this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
     }
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
@@ -554,6 +552,9 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
           this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
         })
     );
+
+    this.updateUnclickableColumns(this.defaultGridColumns);
+    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
   }
 
   public stateChange(gridState: GridState) {
