@@ -63,10 +63,12 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     };
     const targetListUuid = this.getParentNodeId(this.dropActionTodo.targetId, this.nodes, 'main');
     const targetRect = container.getBoundingClientRect();
-    const oneThird = targetRect.height / 3;
+    const oneThirdOfRectangle = targetRect.height / 3;
+    const oneSixthOfRectangle = targetRect.height / 6;
+    const pointerPositionYInRectangle = event.pointerPosition.y - targetRect.top;
 
     // before
-    if (event.pointerPosition.y - targetRect.top < oneThird) {
+    if (pointerPositionYInRectangle < oneSixthOfRectangle) {
       //if target uuid is main, it should be placed after the node
       if (targetListUuid === 'main') {
         this.dropActionTodo['action'] = 'inside';
@@ -75,7 +77,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
       }
     }
     // after
-    else if (event.pointerPosition.y - targetRect.top > 2 * oneThird) {
+    else if (pointerPositionYInRectangle > 2 * oneThirdOfRectangle) {
       this.dropActionTodo['action'] = 'after';
     }
     // inside
