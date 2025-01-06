@@ -134,7 +134,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     this.dragDisabledSubject.next(!this.dragDisabledSubject.value);
   }
 
-  public moveNode(event: EntityTreeNodeMoveResult): void {
+  moveNode(event: EntityTreeNodeMoveResult): void {
+    if (event.movedNodeParentUuid === event.targetParentNodeUuid) {
+      this.store.dispatch(OrganizationUnitActions.invalidPatchAttempt());
+      return;
+    }
+
     this.subscriptions.add(
       this.actions$
         .pipe(
@@ -147,6 +152,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
           this.store.dispatch(OrganizationUnitActions.updateHierarchy(unit, units));
         })
     );
+    
     this.store.dispatch(
       OrganizationUnitActions.patchOrganizationUnit(event.movedNodeUuid, {
         parentUuid: event.targetParentNodeUuid,

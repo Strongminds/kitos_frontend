@@ -203,7 +203,11 @@ export class NotificationService implements OnDestroy {
     );
     this.subscribeAsError(
       OrganizationUnitActions.createOrganizationSubunitError,
-      $localize`Fejl! Enheden kunne ikke oprettes!`
+      $localize`Enheden kunne ikke oprettes`
+    );
+    this.subscribeAsError(
+      OrganizationUnitActions.invalidPatchAttempt,
+      $localize`Enheden er allerede placeret på dette lag i organisationen`
     );
 
     this.subscribeAsDefault(
