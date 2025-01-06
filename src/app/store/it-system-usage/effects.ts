@@ -97,17 +97,6 @@ export class ITSystemUsageEffects {
     );
   });
 
-  updateGridColumnsAndRoleColumns$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITSystemUsageActions.updateGridColumnsAndRoleColumns),
-      map(({ gridColumns, gridRoleColumns }) => {
-        const allColumns = gridColumns.concat(gridRoleColumns);
-        this.gridColumnStorageService.setColumns(USAGE_COLUMNS_ID, allColumns);
-        return ITSystemUsageActions.updateGridColumnsSuccess(allColumns);
-      })
-    );
-  });
-
   getItSystemUsageOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getItSystemUsageOverviewRoles),

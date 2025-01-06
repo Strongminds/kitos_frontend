@@ -135,13 +135,6 @@ export const itSystemUsageFeature = createFeature({
       };
     }),
 
-    on(ITSystemUsageActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITSystemUsageState => {
-      return {
-        ...state,
-        gridColumns,
-      };
-    }),
-
     on(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess, (state, { roles }): ITSystemUsageState => {
       const gridRoleColumns =
         roles?.flatMap((role) => roleDtoToRoleGridColumns(role, SYSTEMS_ROLES_SECTION_NAME, 'it-system-usage')) ?? [];
