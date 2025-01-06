@@ -119,7 +119,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
         break;
 
       case 'inside':
-        if (oldParentUuid !== targetListUuid) this.nodeLookup[this.dropActionTodo.targetId].children.push(draggedItem);
+        if (oldParentUuid !== this.dropActionTodo.targetId) this.updateNodeHierarchy(draggedItem, this.dropActionTodo.targetId);
         this.nodeLookup[this.dropActionTodo.targetId].isExpanded = true;
         this.nodeMoved.emit({
           movedNodeUuid: draggedItemUuid,
@@ -130,6 +130,11 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     }
 
     this.clearDragInfo(true);
+  }
+
+  private updateNodeHierarchy(node: EntityTreeNode<T>, parentUuid: string) {
+      if (this.isHierarchyNode(node)) node.parentUuid = parentUuid;
+      this.nodeLookup[parentUuid].children.push(node);
   }
 
   public expandClick(node: EntityTreeNode<T>) {
