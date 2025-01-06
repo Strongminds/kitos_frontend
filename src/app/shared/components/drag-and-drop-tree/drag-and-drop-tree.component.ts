@@ -90,15 +90,13 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
     if (targetListUuid === 'main') {
       if (this.dropActionTodo.action === 'before') return;
-
       targetListUuid = this.dropActionTodo.targetId;
     }
 
     const draggedItem = this.nodeLookup[draggedItemUuid];
-
     const newContainer = targetListUuid !== null ? this.nodeLookup[targetListUuid].children : this.nodes;
-    const asHierarchyNode = draggedItem as HierachyNodeWithParentUuid;
-    const oldparent = asHierarchyNode.parentUuid;
+    const oldParentUuid = (draggedItem as HierachyNodeWithParentUuid).parentUuid;
+
     switch (this.dropActionTodo.action) {
       case 'before':
       case 'after':
@@ -106,17 +104,17 @@ export class DragAndDropTreeComponent<T> implements OnInit {
         this.nodeMoved.emit({
           movedNodeUuid: draggedItemUuid,
           targetParentNodeUuid: targetListUuid!,
-          movedNodeParentUuid: oldparent,
+          movedNodeParentUuid: oldParentUuid,
         });
         break;
 
       case 'inside':
-        if (oldparent !== targetListUuid) this.nodeLookup[this.dropActionTodo.targetId].children.push(draggedItem);
+        if (oldParentUuid !== targetListUuid) this.nodeLookup[this.dropActionTodo.targetId].children.push(draggedItem);
         this.nodeLookup[this.dropActionTodo.targetId].isExpanded = true;
         this.nodeMoved.emit({
           movedNodeUuid: draggedItemUuid,
           targetParentNodeUuid: this.dropActionTodo.targetId,
-          movedNodeParentUuid: oldparent,
+          movedNodeParentUuid: oldParentUuid,
         });
         break;
     }
@@ -164,9 +162,15 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private insertDraggedItem(newContainer: any[], draggedItem: any, targetId: string, action: string): void {
+  private insertDraggedItem(
+    newContainer: EntityTreeNode<T>[],
+    draggedItem: EntityTreeNode<T>,
+    targetId: string,
+    action: string
+  ): void {
+    if (newContainer.some((node) => node.uuid === draggedItem.uuid)) return;
+
     const targetIndex = newContainer.findIndex((c) => c.uuid === targetId);
-     if (newContainer.some((c) => c.uuid === draggedItem.uuid)) return;
     if (action === 'before') {
       newContainer.splice(targetIndex, 0, draggedItem);
     } else {
