@@ -113,17 +113,6 @@ export class ITContractEffects {
     );
   });
 
-  updateGridColumnsAndRoleColumns$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITContractActions.updateGridColumnsAndRoleColumns),
-      map(({ gridColumns, gridRoleColumns }) => {
-        const columns = gridColumns.concat(gridRoleColumns);
-        this.gridColumnStorageService.setColumns(CONTRACT_COLUMNS_ID, columns);
-        return ITContractActions.updateGridColumnsAndRoleColumnsSuccess(columns);
-      })
-    );
-  });
-
   getItContractOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getItContractOverviewRoles),

@@ -137,12 +137,6 @@ export const itContractFeature = createFeature({
         gridColumns,
       };
     }),
-    on(ITContractActions.updateGridColumnsAndRoleColumnsSuccess, (state, { gridColumns }): ITContractState => {
-      return {
-        ...state,
-        gridColumns,
-      };
-    }),
     on(
       ITContractActions.updateGridState,
       (state, { gridState }): ITContractState => ({
