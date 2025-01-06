@@ -51,6 +51,7 @@ export const OrganizationUnitActions = createActionGroup({
     }),
     'Patch organization unit Success': (unit: APIOrganizationUnitResponseDTO) => ({ unit }),
     'Patch organization unit Error': emptyProps(),
+    'Invalid patch attempt': emptyProps(),
 
     'Update hierarchy': (unit: APIOrganizationUnitResponseDTO, units: APIOrganizationUnitResponseDTO[]) => ({
       unit,

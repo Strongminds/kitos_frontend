@@ -132,6 +132,11 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   }
 
   moveNode(event: EntityTreeNodeMoveResult): void {
+    if (event.movedNodeParentUuid === event.targetParentNodeUuid) {
+      this.store.dispatch(OrganizationUnitActions.invalidPatchAttempt());
+      return;
+    }
+
     this.subscriptions.add(
       this.actions$
         .pipe(
@@ -144,10 +149,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
           this.store.dispatch(OrganizationUnitActions.updateHierarchy(unit, units));
         })
     );
-     if (event.movedNodeParentUuid === event.targetParentNodeUuid){
-       console.log('Invalid move operation')
-       return
-     }
+
     this.store.dispatch(
       OrganizationUnitActions.patchOrganizationUnit(event.movedNodeUuid, {
         parentUuid: event.targetParentNodeUuid,
