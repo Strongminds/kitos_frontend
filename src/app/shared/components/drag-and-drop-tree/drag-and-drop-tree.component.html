@@ -10,7 +10,6 @@
     [attr.data-id]="node.uuid"
     [attr.id]="'node-' + node.uuid"
   >
-    <!-- displayDefaultNodeColorOnly ? node.color :  -->
     <div
       [class]="'drag-container node-wrapper no-select node-' + getNodeColor(node)"
       [style.--dynamic-width.px]="14 * (level - 1)"

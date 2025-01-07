@@ -36,6 +36,8 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   nodeLookup: { [key: string]: EntityTreeNode<T> } = {};
   dropActionTodo: DropInfo | null = null;
 
+  private readonly nodeStandardColor = 'standard';
+
   constructor(@Inject(DOCUMENT) private document: Document) {}
 
   ngOnInit(): void {
@@ -130,7 +132,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
   }
 
   public getNodeColor(node: EntityTreeNode<T>) {
-    return this.displayDefaultNodeColorOnly ? 'standard' : node.color;
+    return this.displayDefaultNodeColorOnly ? this.nodeStandardColor : node.color;
   }
 
   private getParentNodeId(id: string, nodesToSearch: EntityTreeNode<T>[], parentId: string): string | null {

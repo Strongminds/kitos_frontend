@@ -1,1 +1,1 @@
-export type EntityTreeNodeColors = 'blue' | 'green' | 'white';
+export type EntityTreeNodeColors = 'blue' | 'green';
