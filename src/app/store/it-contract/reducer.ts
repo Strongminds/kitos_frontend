@@ -16,7 +16,7 @@ export const itContactInitialState: ITContractState = itContactAdapter.getInitia
   gridState: defaultGridState,
   gridColumns: [],
   gridRoleColumns: [],
-  contractRoles: [],
+  contractRoles: resetCache(),
 
   loading: undefined,
   itContract: undefined,
@@ -148,7 +148,7 @@ export const itContractFeature = createFeature({
     on(ITContractActions.getItContractOverviewRolesSuccess, (state, { roles }): ITContractState => {
       const gridRoleColumns =
         roles?.flatMap((role) => roleDtoToRoleGridColumns(role, CONTRACT_ROLES_SECTION_NAME, 'it-contract')) ?? [];
-      return { ...state, gridRoleColumns, contractRoles: roles };
+      return { ...state, gridRoleColumns, contractRoles: newCache(roles) };
     }),
 
     on(
