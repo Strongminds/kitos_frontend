@@ -7,6 +7,8 @@ import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model'
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { ITContractActions } from './actions';
 import { ITContractState } from './state';
+import { GlobalAdminActions } from '../global-admin/actions';
+import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
 
 export const itContactAdapter = createEntityAdapter<ITContract>();
 
@@ -183,6 +185,20 @@ export const itContractFeature = createFeature({
         ...state,
         appliedProcurementPlans: newCache(response),
       };
-    })
+    }),
+
+    on(
+      GlobalOptionTypeActions.createOptionTypeSuccess,
+      GlobalOptionTypeActions.updateOptionTypeSuccess,
+      (state, { optionType }): ITContractState => {
+        if (optionType !== 'it-contract') {
+          return state;
+        }
+        return {
+          ...state,
+          contractRoles: resetCache(),
+        };
+      }
+    )
   ),
 });
