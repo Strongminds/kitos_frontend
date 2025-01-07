@@ -44,3 +44,10 @@
   align-items: center;
   gap: 8px;
 }
+
+.title-wrap-on-overflow {
+  padding-top: 20px;
+  padding-left: 20px;
+  word-wrap: break-word;
+  max-width: 90%;
+}
