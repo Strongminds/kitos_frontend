@@ -39,7 +39,9 @@ import {
   selectItContractSystemUsages,
   selectItContractUuid,
   selectOverviewContractRoles,
+  selectOverviewContractRolesCache,
 } from './selectors';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 
 @Injectable()
 export class ITContractEffects {
@@ -116,14 +118,20 @@ export class ITContractEffects {
   getItContractOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getItContractOverviewRoles),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([_, organizationUuid]) =>
-        this.apiRoleService.getSingleGridLocalItContractRolesV2GetByOrganizationUuid({ organizationUuid }).pipe(
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectOverviewContractRolesCache),
+      ]),
+      switchMap(([_, organizationUuid, cache]) => {
+        if (hasValidCache(cache.cacheTime)) {
+          return of(ITContractActions.getItContractOverviewRolesSuccess(cache.value));
+        }
+        return this.apiRoleService.getSingleGridLocalItContractRolesV2GetByOrganizationUuid({ organizationUuid }).pipe(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           map((contractRoles: any) => ITContractActions.getItContractOverviewRolesSuccess(contractRoles)),
           catchError(() => of(ITContractActions.getItContractOverviewRolesError()))
-        )
-      )
+        );
+      })
     );
   });
 
