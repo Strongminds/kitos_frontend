@@ -31,8 +31,10 @@ import {
   selectDataProcessingGridColumns,
   selectDataProcessingUuid,
   selectOverviewRoles,
+  selectOverviewRolesCache,
 } from './selectors';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -92,15 +94,21 @@ export class DataProcessingEffects {
   getDataProcessingOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessingOverviewRoles),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([_, organizationUuid]) =>
-        this.apiv1DataProcessingService
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectOverviewRolesCache),
+      ]),
+      switchMap(([_, organizationUuid, cache]) => {
+        if (hasValidCache(cache.cacheTime)) {
+          return of(DataProcessingActions.getDataProcessingOverviewRolesSuccess(cache.value));
+        }
+        return this.apiv1DataProcessingService
           .getSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByUuid({ organizationUuid })
           .pipe(
             map((result) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(result.response.roles)),
             catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
-          )
-      )
+          );
+      })
     );
   });
 
@@ -630,7 +638,6 @@ export class DataProcessingEffects {
       )
     );
   });
-
 }
 
 function mapSubDataProcessors(

@@ -7,8 +7,8 @@ import { ITContract } from 'src/app/shared/models/it-contract/it-contract.model'
 import { roleDtoToRoleGridColumns } from '../helpers/role-column-helpers';
 import { ITContractActions } from './actions';
 import { ITContractState } from './state';
-import { GlobalAdminActions } from '../global-admin/actions';
 import { GlobalOptionTypeActions } from '../global-admin/global-option-types/actions';
+import { LocalOptionTypeActions } from '../local-admin/local-option-types/actions';
 
 export const itContactAdapter = createEntityAdapter<ITContract>();
 
@@ -190,6 +190,7 @@ export const itContractFeature = createFeature({
     on(
       GlobalOptionTypeActions.createOptionTypeSuccess,
       GlobalOptionTypeActions.updateOptionTypeSuccess,
+      LocalOptionTypeActions.updateOptionTypeSuccess,
       (state, { optionType }): ITContractState => {
         if (optionType !== 'it-contract') {
           return state;
