@@ -29,6 +29,13 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { BaseComponent } from '../../base/base.component';
+import {
+  DEFAULT_COLUMN_MINIMUM_WIDTH,
+  DEFAULT_COLUMN_WIDTH,
+  DEFAULT_DATE_COLUMN_MINIMUM_WIDTH,
+  DEFAULT_DATE_COLUMN_WIDTH,
+  DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
+} from '../../constants/constants';
 import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
@@ -73,9 +80,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   public displayedColumns?: string[];
   public dataSource = new MatTableDataSource<T>();
 
-  public readonly defaultColumnWidth = 270;
-  public readonly defaultMinimumColumnWidth = 55;
-  public readonly defaultDateColumnWidth = 350;
+  public readonly defaultColumnWidth = DEFAULT_COLUMN_WIDTH;
+  public readonly defaultMinimumColumnWidth = DEFAULT_COLUMN_MINIMUM_WIDTH;
+  public readonly defaultDateColumnWidth = DEFAULT_DATE_COLUMN_WIDTH;
+  public readonly defaultPrimaryColumnMinimumWidth = DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH;
+  public readonly defaultMinimumDateColumnWidth = DEFAULT_DATE_COLUMN_MINIMUM_WIDTH;
 
   constructor(
     private actions$: Actions,
@@ -243,9 +252,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (!this.data || !this.state) {
       return { data: [] };
     }
-    this.data$.pipe(first()).subscribe((data) => {
-      this.data = data;
-    });
+    this.subscriptions.add(
+      this.data$.pipe(first()).subscribe((data) => {
+        this.data = data;
+      })
+    );
     const processedData = process(this.data.data, { ...this.state, skip: 0, take: this.data.total });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formattedData = processedData.data.map((item: any) => {
@@ -335,11 +346,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return this.gridUIConfigService.isColumnEnabled(column, applications);
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public checkOverflow(element: any) {
-    return element.offsetWidth < 75;
-  }
-
   private isExcelOnlyColumn(column: GridColumn): boolean {
     return column.style === 'excel-only';
   }
@@ -361,18 +367,22 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   private initializeFilterSubscriptions() {
-    this.actions$.pipe(ofType(getSaveFilterAction(this.entityType))).subscribe(({ localStoreKey }) => {
-      this.saveFilter(localStoreKey);
-    });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(getSaveFilterAction(this.entityType))).subscribe(({ localStoreKey }) => {
+        this.saveFilter(localStoreKey);
+      })
+    );
 
-    this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
-      const newState = {
-        ...this.state,
-        filter: this.mapCompositeFilterStringDatesToDateObjects(state.filter),
-        sort: state.sort,
-      };
-      this.onStateChange(newState);
-    });
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(getApplyFilterAction(this.entityType))).subscribe(({ state }) => {
+        const newState = {
+          ...this.state,
+          filter: this.mapCompositeFilterStringDatesToDateObjects(state.filter),
+          sort: state.sort,
+        };
+        this.onStateChange(newState);
+      })
+    );
   }
 
   private mapCompositeFilterStringDatesToDateObjects(

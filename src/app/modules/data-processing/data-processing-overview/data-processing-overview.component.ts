@@ -133,7 +133,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'date',
       style: 'date',
-      width: 350,
       hidden: true,
       persistId: 'changed',
     },
@@ -216,7 +215,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'date',
       style: 'date',
-      width: 350,
       hidden: true,
       persistId: 'agreementConcludedAt',
     },
@@ -256,7 +254,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
       filter: 'date',
       style: 'date',
-      width: 350,
       persistId: 'scheduledInspectionDate',
     },
     {
@@ -266,7 +263,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
       filter: 'date',
       style: 'date',
-      width: 350,
       persistId: 'latestOversightDate',
     },
     {
@@ -291,30 +287,25 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   }
 
   ngOnInit(): void {
-    this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
-    this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());
+    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
-    const existingColumns = this.gridColumnStorageService.getColumns(
-      DATA_PROCESSING_COLUMNS_ID,
-      this.defaultGridColumns
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(DataProcessingActions.getDataProcessingOverviewRolesSuccess),
+          combineLatestWith(this.store.select(selectDataProcessingRoleColumns)),
+          first()
+        )
+        .subscribe(([_, roleColumns]) => {
+          const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
+          const existingColumns = this.gridColumnStorageService.getColumns(
+            DATA_PROCESSING_COLUMNS_ID,
+            defaultColumnsAndRoles
+          );
+          const columns = existingColumns ?? defaultColumnsAndRoles;
+          this.store.dispatch(DataProcessingActions.updateGridColumns(columns));
+        })
     );
-    if (existingColumns) {
-      this.store.dispatch(DataProcessingActions.updateGridColumns(existingColumns));
-    } else {
-      this.subscriptions.add(
-        this.actions$
-          .pipe(
-            ofType(DataProcessingActions.getDataProcessingOverviewRolesSuccess),
-            combineLatestWith(this.store.select(selectDataProcessingRoleColumns)),
-            first()
-          )
-          .subscribe(([_, gridRoleColumns]) => {
-            this.store.dispatch(
-              DataProcessingActions.updateGridColumnsAndRoleColumns(this.defaultGridColumns, gridRoleColumns)
-            );
-          })
-      );
-    }
 
     this.subscriptions.add(
       this.actions$
@@ -323,8 +314,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
           this.stateChange(gridState);
         })
     );
-
-    this.setupUnclickableColumns();
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
@@ -339,11 +328,8 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
           this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
         })
     );
-  }
-
-  private setupUnclickableColumns() {
-    this.updateUnclickableColumns(this.defaultGridColumns);
-    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
+    this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
+    this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());
   }
 
   public stateChange(gridState: GridState) {
