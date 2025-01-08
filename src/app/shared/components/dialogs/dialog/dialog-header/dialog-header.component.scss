@@ -35,14 +35,13 @@
     }
   }
 
-  &.title-wrap-on-overflow {
-    h3 {
-      word-wrap: break-word;
-      max-width: 90%;
-    }
-  }
+
 }
 
+h3 {
+  word-wrap: break-word;
+  max-width: 90%;
+}
 .title-align-bottom {
   align-items: center;
 }
