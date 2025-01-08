@@ -34,6 +34,13 @@
       margin-right: 0;
     }
   }
+
+  &.title-wrap-on-overflow {
+    h3 {
+      word-wrap: break-word;
+      max-width: 90%;
+    }
+  }
 }
 
 .title-align-bottom {
@@ -45,9 +52,4 @@
   gap: 8px;
 }
 
-.title-wrap-on-overflow {
-  padding-top: 20px;
-  padding-left: 20px;
-  word-wrap: break-word;
-  max-width: 90%;
-}
+
