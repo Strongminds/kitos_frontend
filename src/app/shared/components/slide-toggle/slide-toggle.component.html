@@ -1,4 +1,5 @@
 <div *ngIf="formGroup" [formGroup]="formGroup">
+  <kendo-switch offLabel="" onLabel="" size="small"></kendo-switch>
   <mat-slide-toggle [labelPosition]="labelPosition" [formControlName]="formName" (change)="toggle($event.checked)">{{
     text
   }}</mat-slide-toggle>

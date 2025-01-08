@@ -1,1 +1,16 @@
 @import "theme";
+
+::ng-deep {
+  .k-switch-on:focus .k-switch-track,
+  .k-switch-on.k-focus .k-switch-track {
+    outline: $color-primary-darker !important;
+  }
+  .k-switch-off:focus .k-switch-track,
+  .k-switch-off.k-focus .k-switch-track {
+    outline: none !important;
+  }
+  .k-switch-on .k-switch-track {
+    border-color: $color-primary !important;
+    background-color: $color-primary !important;
+  }
+}
