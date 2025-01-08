@@ -79,6 +79,14 @@
         formName="status"
         [info]="statusText$ | async"
       ></app-textbox>
+      <app-slide-toggle
+        *ngIf="contractIsActiveEnabled$ | async"
+        text="Gennemtving gyldighed"
+        i18n-text
+        labelPosition="after"
+        [formGroup]="frontpageFormGroup"
+        formName="enforcedValid"
+      ></app-slide-toggle>
       <app-checkbox
         *ngIf="contractIsActiveEnabled$ | async"
         text="Gennemtving gyldighed"
