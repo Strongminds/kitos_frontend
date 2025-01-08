@@ -45,6 +45,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
         scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point
         min: this.minLength,
         max: this.maxLength,
+        thousandsSeparator: '.',
       });
     });
   }
