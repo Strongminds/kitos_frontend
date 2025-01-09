@@ -181,8 +181,9 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   }
 
   private setupTakeOutOfUseDialog(confirmationDialogInstance: IconConfirmationDialogComponent) {
-    confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne anvendelse af systemet?`;
-    confirmationDialogInstance.bodyText = $localize`Du sletter alle lokale detaljer vedrørerende systemet, men det sletter ikke systemet`;
+    confirmationDialogInstance.title = $localize`Er du sikker på at du vil fjerne den lokale anvendelse af systemet?
+`;
+    confirmationDialogInstance.bodyText = $localize`Dette sletter de lokale registreringer vedrørerende systemet i kommunen, men sletter ikke stamdata om systemet i IT System Kataloget.`;
     confirmationDialogInstance.icon = 'not-in-use';
     confirmationDialogInstance.confirmColor = 'warn';
     confirmationDialogInstance.customConfirmText = $localize`Bekræft`;

@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { IconConfirmationDialogComponent } from 'src/app/shared/components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { combineAND } from 'src/app/shared/helpers/observable-helpers';
@@ -40,7 +41,6 @@ import {
   selectITSystemUsageEnableTabSystemRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { ITSystemUsageRemoveComponent } from './it-system-usage-remove/it-system-usage-remove.component';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -229,6 +229,34 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   public showRemoveDialog() {
-    this.dialog.open(ITSystemUsageRemoveComponent);
+    const confirmationDialogRef = this.dialog.open(IconConfirmationDialogComponent);
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess)).subscribe(() => {
+        confirmationDialogRef.close();
+        this.notificationService.showDefault($localize`Systemanvendelsen er slettet`);
+        this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+      })
+    );
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as IconConfirmationDialogComponent;
+    confirmationDialogInstance.confirmationType = 'Custom';
+    confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?`;
+    confirmationDialogInstance.bodyText = $localize`Dette sletter de lokale registreringer vedrørerende systemet i kommunen, men sletter ikke stamdata om systemet i IT System Kataloget.`;
+    confirmationDialogInstance.icon = 'not-in-use';
+    confirmationDialogInstance.confirmColor = 'warn';
+    confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
+    confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
+
+    this.subscriptions.add(
+      confirmationDialogRef.afterClosed().subscribe((result) => {
+        this.tryTakeOutOfUse(result);
+      })
+    );
+  }
+
+  private tryTakeOutOfUse(dialogResult: boolean) {
+    if (dialogResult) {
+      this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
+    }
   }
 }
