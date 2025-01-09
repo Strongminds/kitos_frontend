@@ -4,7 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first, map } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import * as GridFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
@@ -40,7 +40,6 @@ import {
   selectUsageGridColumns,
   selectUsageGridRoleColumns,
 } from 'src/app/store/it-system-usage/selectors';
-import { selectPagedOrganizationUnitHasValidCache } from 'src/app/store/organization/organization-unit/selectors';
 import {
   selectITSystemUsageEnableFrontPageUsagePeriod,
   selectITSystemUsageEnableGdpr,
@@ -53,10 +52,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   styleUrls: ['it-system-usages.component.scss'],
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
-  public readonly isLoading$ = combineOR([
-    this.store.select(selectIsLoading),
-    this.store.select(selectPagedOrganizationUnitHasValidCache).pipe(map((isLoaded) => !isLoaded)),
-  ]);
+  public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
