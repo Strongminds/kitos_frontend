@@ -13,6 +13,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   @Input() public maxLength = Number.MAX_SAFE_INTEGER;
   @Input() public numberType: 'integer' | undefined = 'integer';
   @Input() public placeholder = $localize`Indtast et heltal`;
+  @Input() public useThousandsSeparator = false; // 9/1/25 NOTE if set to true, emitted values will be strings that need to be converted back into numbers using helpers/string.helpers.ts:toNumberWithoutThousandsSeparators(source)
 
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
 
@@ -45,7 +46,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
         scale: this.getScale(), //x == 0 -> integers, x > 0 -> number of digits after point
         min: this.minLength,
         max: this.maxLength,
-        thousandsSeparator: '.',
+        thousandsSeparator: this.useThousandsSeparator ? '.' : '',
       });
     });
   }

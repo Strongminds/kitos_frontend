@@ -7,6 +7,7 @@ import { distinctUntilChanged } from 'rxjs';
 import { APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
+import { toNumberWithoutThousandsSeparators } from 'src/app/shared/helpers/string.helpers';
 import { AuditModel, baseAuditStatusValue, mapAuditModel } from 'src/app/shared/models/it-contract/audit-model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { TreeNodeModel, createNode } from 'src/app/shared/models/tree-node.model';
@@ -71,7 +72,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITContractActions.addItContractPaymentSuccess, ITContractActions.updateItContractPaymentSuccess))
-        .subscribe((result) => {
+        .subscribe((_) => {
           this.close();
         })
     );
@@ -108,9 +109,9 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
 
     const request = {
       organizationUnitUuid: orgUnitUuid,
-      acquisition: this.paymentForm.controls.acquisition.value,
-      operation: this.paymentForm.controls.operation.value,
-      other: this.paymentForm.controls.other.value,
+      acquisition: toNumberWithoutThousandsSeparators(this.paymentForm.controls.acquisition.value),
+      operation: toNumberWithoutThousandsSeparators(this.paymentForm.controls.operation.value),
+      other: toNumberWithoutThousandsSeparators(this.paymentForm.controls.other.value),
       accountingEntry: this.paymentForm.controls.accountingEntry.value,
       auditStatus: this.paymentForm.controls.auditStatus.value?.id,
       auditDate: this.paymentForm.controls.auditDate.value?.toISOString(),
