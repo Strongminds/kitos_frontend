@@ -66,7 +66,7 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
   }
 
   public toggleButtonText(): string {
-    return this.movingMode ? 'Færdig' : 'Flyt';
+    return this.movingMode ? $localize`Færdig` : $localize`Omstrukturer`;
   }
 
   public getToggleIcon(): IconType {
