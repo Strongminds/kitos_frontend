@@ -8,10 +8,10 @@ describe('data-processing-notifications', () => {
     cy.setupDataProcessingIntercepts();
     cy.setup(true, 'data-processing');
 
-    cy.intercept('/api/v2/data-processing-registrations/fce05ba6-cbb0-4d52-bd33-156f1ef29c72/permissions', {
+    cy.intercept('/api/v2/data-processing-registrations/*/permissions', {
       fixture: './shared/permissions.json',
     });
-    cy.intercept('/api/v2/data-processing-registrations/fce05ba6-cbb0-4d52-bd33-156f1ef29c72', {
+    cy.intercept('/api/v2/data-processing-registrations/*', {
       fixture: './dpr/data-processing-registrations.json',
     });
 
@@ -19,7 +19,7 @@ describe('data-processing-notifications', () => {
   });
 
   it('Can show empty notification page', () => {
-    cy.intercept('/api/v2/data-processing-registrations/fce05ba6-cbb0-4d52-bd33-156f1ef29c72', {
+    cy.intercept('/api/v2/data-processing-registrations/*', {
       fixture: './dpr/data-processing-registrations.json',
     });
     cy.intercept('/api/v2/data-processing-registration-role-types*', {
