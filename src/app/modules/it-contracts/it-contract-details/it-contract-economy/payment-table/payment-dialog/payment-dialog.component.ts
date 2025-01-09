@@ -101,21 +101,21 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     if (this.paymentForm.invalid) {
       return;
     }
-    const orgUnitUuid = this.paymentForm.controls.organizationUnit.value?.id;
+    const controls = this.paymentForm.controls;
+    const orgUnitUuid = controls.organizationUnit.value?.id;
     if (orgUnitUuid === undefined) {
       return;
     }
     this.isBusy = true;
-
     const request = {
       organizationUnitUuid: orgUnitUuid,
-      acquisition: toNumberWithoutThousandsSeparators(this.paymentForm.controls.acquisition.value),
-      operation: toNumberWithoutThousandsSeparators(this.paymentForm.controls.operation.value),
-      other: toNumberWithoutThousandsSeparators(this.paymentForm.controls.other.value),
-      accountingEntry: this.paymentForm.controls.accountingEntry.value,
-      auditStatus: this.paymentForm.controls.auditStatus.value?.id,
-      auditDate: this.paymentForm.controls.auditDate.value?.toISOString(),
-      note: this.paymentForm.controls.note.value,
+      acquisition: toNumberWithoutThousandsSeparators(controls.acquisition.value),
+      operation: toNumberWithoutThousandsSeparators(controls.operation.value),
+      other: toNumberWithoutThousandsSeparators(controls.other.value),
+      accountingEntry: controls.accountingEntry.value,
+      auditStatus: controls.auditStatus.value?.id,
+      auditDate: controls.auditDate.value?.toISOString(),
+      note: controls.note.value,
     } as APIPaymentRequestDTO;
 
     if (this.isEdit) {

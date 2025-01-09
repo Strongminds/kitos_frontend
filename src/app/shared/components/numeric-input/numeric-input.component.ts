@@ -69,7 +69,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
   private getNumberCaptureExpression() {
     switch (this.numberType) {
       case 'integer':
-        //ensures that no other values than numbers and optionally a coma is not returned
+        //ensures that no other values than numbers are returned
         return ONLY_DIGITS_REGEX;
       default:
         return null;
