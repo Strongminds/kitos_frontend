@@ -70,6 +70,6 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
   }
 
   public getToggleIcon(): IconType {
-    return this.movingMode ? 'bookmark' : 'hierarchy';
+    return this.movingMode ? 'check' : 'reorder';
   }
 }
