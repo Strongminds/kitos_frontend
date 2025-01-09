@@ -29,6 +29,7 @@ import {
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
@@ -95,6 +96,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     private notificationService: NotificationService,
     private actions$: Actions,
     private dialog: MatDialog,
+    private dialogOpenerService: DialogOpenerService,
     private componentStore: ITSystemCatalogDetailsComponentStore
   ) {
     super();
@@ -133,13 +135,11 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   }
 
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
-    const confirmationDialogRef = this.dialog.open(IconConfirmationDialogComponent);
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance as IconConfirmationDialogComponent;
-    confirmationDialogInstance.confirmationType = 'Custom';
+    let confirmationDialogRef;
     if (takingIntoUse) {
-      this.setupTakeIntoUseDialog(confirmationDialogInstance);
+      confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
     } else {
-      this.setupTakeOutOfUseDialog(confirmationDialogInstance);
+      confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
     }
 
     this.subscriptions.add(

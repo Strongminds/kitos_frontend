@@ -1,16 +1,15 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { IconConfirmationDialogComponent } from 'src/app/shared/components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { combineAND } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
@@ -175,7 +174,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     private store: Store,
     private actions$: Actions,
     private notificationService: NotificationService,
-    private dialog: MatDialog
+    private dialogOpenerService: DialogOpenerService
   ) {
     super();
   }
@@ -229,7 +228,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   public showRemoveDialog() {
-    const confirmationDialogRef = this.dialog.open(IconConfirmationDialogComponent);
+    const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess)).subscribe(() => {
@@ -238,25 +237,13 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
         this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
       })
     );
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance as IconConfirmationDialogComponent;
-    confirmationDialogInstance.confirmationType = 'Custom';
-    confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?`;
-    confirmationDialogInstance.bodyText = $localize`Dette sletter de lokale registreringer vedrørerende systemet i kommunen, men sletter ikke stamdata om systemet i IT System Kataloget.`;
-    confirmationDialogInstance.icon = 'not-in-use';
-    confirmationDialogInstance.confirmColor = 'warn';
-    confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
-    confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
 
     this.subscriptions.add(
       confirmationDialogRef.afterClosed().subscribe((result) => {
-        this.tryTakeOutOfUse(result);
+        if (result) {
+          this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
+        }
       })
     );
-  }
-
-  private tryTakeOutOfUse(dialogResult: boolean) {
-    if (dialogResult) {
-      this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
-    }
   }
 }
