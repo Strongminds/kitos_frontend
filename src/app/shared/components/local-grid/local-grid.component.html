@@ -4,9 +4,11 @@
   [skip]="state.skip ?? 0"
   [loading]="loading || false"
   [pageable]="true"
-  [sortable]="true"
   [filterable]="true"
   [reorderable]="true"
+  [sortable]="!reorderable"
+  [rowReorderable]="reorderable"
+  (rowReorder)="onRowReorder($event)"
   [resizable]="true"
   (filterChange)="onFilterChange($event)"
   (sortChange)="onSortChange($event)"
@@ -14,6 +16,7 @@
   style="width: 100%"
   [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent }"
 >
+  <kendo-grid-rowreorder-column *ngIf="reorderable" [width]="40"></kendo-grid-rowreorder-column>
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column
       *ngIf="!column.hidden"
@@ -23,14 +26,14 @@
       [filter]="column.filter ?? 'text'"
       [width]="column.width ?? defaultColumnWidth"
       [minResizableWidth]="
-      column.minResizableWidth !== undefined
-        ? column.minResizableWidth
-        : column.filter === 'date'
-        ? defaultMinimumDateColumnWidth
-        : column.style === 'primary'
+        column.minResizableWidth !== undefined
+          ? column.minResizableWidth
+          : column.filter === 'date'
+          ? defaultMinimumDateColumnWidth
+          : column.style === 'primary'
           ? defaultPrimaryColumnMinimumWidth
           : defaultMinimumColumnWidth
-    "
+      "
       headerClass="mygrid-header-cell"
     >
       <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">

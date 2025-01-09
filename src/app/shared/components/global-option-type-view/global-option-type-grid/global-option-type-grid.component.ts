@@ -6,7 +6,7 @@ import {
   GlobalAdminOptionTypeItem,
 } from 'src/app/shared/models/options/global-admin-option-type.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
-import { BooleanChange } from '../../local-grid/local-grid.component';
+import { BooleanChange, RowReorderingEvent } from '../../local-grid/local-grid.component';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { Store } from '@ngrx/store';
 
@@ -19,6 +19,7 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
   @Input() loading: boolean = false;
   @Input() optionType!: GlobalAdminOptionType;
   @Input() optionTypeItems!: GlobalAdminOptionTypeItem[];
+  @Input() reordering!: boolean;
 
   @Input() showWriteAccess!: boolean;
   @Input() showDescription!: boolean;
@@ -117,5 +118,10 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
   public onToggleChange(toggleEvent: BooleanChange<GlobalAdminOptionTypeItem>): void {
     const { value, item } = toggleEvent;
     this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, item.uuid, { isEnabled: value }));
+  }
+
+  public onRowReorder(event: RowReorderingEvent<GlobalAdminOptionTypeItem>): void {
+    console.log(event);
+    this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, event.from.item.uuid, { priority: event.to.item.priority }));
   }
 }
