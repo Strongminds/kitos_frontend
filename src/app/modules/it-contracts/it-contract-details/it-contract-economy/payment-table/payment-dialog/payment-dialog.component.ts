@@ -7,7 +7,7 @@ import { distinctUntilChanged } from 'rxjs';
 import { APIPaymentRequestDTO, APIPaymentResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
-import { toNumberWithoutThousandsSeparators } from 'src/app/shared/helpers/string.helpers';
+import { fromStringToNumber } from 'src/app/shared/helpers/string.helpers';
 import { AuditModel, baseAuditStatusValue, mapAuditModel } from 'src/app/shared/models/it-contract/audit-model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { TreeNodeModel, createNode } from 'src/app/shared/models/tree-node.model';
@@ -109,9 +109,9 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
     this.isBusy = true;
     const request = {
       organizationUnitUuid: orgUnitUuid,
-      acquisition: toNumberWithoutThousandsSeparators(controls.acquisition.value),
-      operation: toNumberWithoutThousandsSeparators(controls.operation.value),
-      other: toNumberWithoutThousandsSeparators(controls.other.value),
+      acquisition: fromStringToNumber(controls.acquisition.value),
+      operation: fromStringToNumber(controls.operation.value),
+      other: fromStringToNumber(controls.other.value),
       accountingEntry: controls.accountingEntry.value,
       auditStatus: controls.auditStatus.value?.id,
       auditDate: controls.auditDate.value?.toISOString(),
