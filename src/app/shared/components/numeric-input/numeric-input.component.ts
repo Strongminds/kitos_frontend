@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
+import { ONLY_DIGITS_REGEX } from '../../constants/regex-constants';
 
 @Component({
   selector: 'app-numeric-input',
@@ -69,7 +70,7 @@ export class NumericInputComponent extends BaseFormComponent<number | undefined>
     switch (this.numberType) {
       case 'integer':
         //ensures that no other values than numbers and optionally a coma is not returned
-        return /[^0-9]/g;
+        return ONLY_DIGITS_REGEX;
       default:
         return null;
     }

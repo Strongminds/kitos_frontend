@@ -1,3 +1,5 @@
+import { ONLY_DIGITS_REGEX } from "../constants/regex-constants";
+
 export function isEmptyOrUndefined(s: string | undefined) {
   return !s || s.length === 0;
 }
@@ -8,7 +10,7 @@ export function entityWithUnavailableName(name: string, available: boolean): str
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function toNumberWithoutThousandsSeparators(source: any): number {
-  const sourceAsNumericString = source.toString().replace(/[^0-9]/g, '');
+  const sourceAsNumericString = source.toString().replace(ONLY_DIGITS_REGEX, '');
   if (!sourceAsNumericString) throw new Error('Invalid input provided for conversion into number');
   return parseInt(sourceAsNumericString);
 }
