@@ -42,15 +42,6 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
       style: 'boolean',
     },
     {
-      field: 'priority',
-      title: $localize`Prioritet`,
-      hidden: false,
-      noFilter: true,
-      width: 100,
-      style: 'priority-buttons',
-      sortable: false,
-    },
-    {
       field: 'name',
       title: $localize`Navn`,
       hidden: false,
@@ -121,7 +112,6 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
   }
 
   public onRowReorder(event: RowReorderingEvent<GlobalAdminOptionTypeItem>): void {
-    console.log(event);
     this.store.dispatch(GlobalOptionTypeActions.updateOptionType(this.optionType, event.from.item.uuid, { priority: event.to.item.priority }));
   }
 }

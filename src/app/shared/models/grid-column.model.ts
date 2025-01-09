@@ -41,9 +41,7 @@ export interface GridColumn {
     | 'page-link-array'
     | 'uuid-to-name'
     | 'excel-only'
-    | 'action-buttons'
-    | 'priority-buttons'
-    ; //Style of the column
+    | 'action-buttons'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden
