@@ -228,22 +228,28 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   public showRemoveDialog() {
-    const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
-
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess)).subscribe(() => {
-        confirmationDialogRef.close();
-        this.notificationService.showDefault($localize`Systemanvendelsen er slettet`);
-        this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
-      })
-    );
+      this.organizationName$.pipe(
+      map((organizationName) => {
+        const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
 
-    this.subscriptions.add(
-      confirmationDialogRef.afterClosed().subscribe((result) => {
-        if (result) {
-          this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
-        }
+        this.subscriptions.add(
+          this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess)).subscribe(() => {
+            confirmationDialogRef.close();
+            this.notificationService.showDefault($localize`Systemanvendelsen er slettet`);
+            this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+          })
+        );
+
+        this.subscriptions.add(
+          confirmationDialogRef.afterClosed().subscribe((result) => {
+            if (result) {
+              this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
+            }
+          })
+        );
       })
+    ).subscribe()
     );
   }
 }

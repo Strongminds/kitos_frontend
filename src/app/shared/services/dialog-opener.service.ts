@@ -39,12 +39,12 @@ export class DialogOpenerService {
     return dialogRef;
   }
 
-  public openTakeSystemOutOfUseDialog(): MatDialogRef<IconConfirmationDialogComponent> {
+  public openTakeSystemOutOfUseDialog(organizatioName: string | undefined = undefined): MatDialogRef<IconConfirmationDialogComponent> {
     const dialogRef = this.dialog.open(IconConfirmationDialogComponent);
     const confirmationDialogInstance = dialogRef.componentInstance as IconConfirmationDialogComponent;
     confirmationDialogInstance.confirmationType = 'Custom';
     confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?`;
-    confirmationDialogInstance.bodyText = $localize`Dette sletter de lokale registreringer vedrørerende systemet i kommunen, men sletter ikke stamdata om systemet i IT System Kataloget.`;
+    confirmationDialogInstance.bodyText = $localize`Dette sletter de lokale registreringer vedrørerende systemet i ${organizatioName ?? 'kommunen'}, men sletter ikke stamdata om systemet i IT System Kataloget.`;
     confirmationDialogInstance.icon = 'not-in-use';
     confirmationDialogInstance.confirmColor = 'warn';
     confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
