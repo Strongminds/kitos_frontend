@@ -113,7 +113,7 @@ describe('it-system-usage', () => {
 
     cy.get('app-dialog').within(() => {
       cy.contains('Fortryd');
-      cy.contains('Fjern anvendelse').click();
+      cy.contains('Bekræft').click();
     });
 
     cy.contains('IT Systemer i Fælles Kommune');

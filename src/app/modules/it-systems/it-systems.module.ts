@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { ITSystemUsageRemoveComponent } from '../../shared/components/it-system-usage-remove/it-system-usage-remove.component';
 import { ItSystemCatalogDetailsFrontpageComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details-frontpage/it-system-catalog-details-frontpage.component';
 import { ItSystemCatalogDetailsComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-details.component';
 import { ItSystemCatalogInterfacesComponent } from './it-system-catalog/it-system-catalog-details/it-system-catalog-interfaces/it-system-catalog-interfaces.component';
@@ -65,7 +64,6 @@ import { KleTableComponent } from './shared/kle-table/kle-table.component';
     ITSystemUsageDetailsComponent,
     ITSystemUsageDetailsFrontpageComponent,
     ITSystemUsageDetailsContractsComponent,
-    ITSystemUsageRemoveComponent,
     ITSystemUsageDetailsFrontpageInformationComponent,
     ITSystemUsageDetailsFrontpageCatalogComponent,
     ItSystemUsageDetailsDataProcessingComponent,
