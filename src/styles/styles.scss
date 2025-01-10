@@ -20,12 +20,3 @@ body {
 a {
   text-decoration: none;
 }
-
-/* Sometimes the arrow or line is an SVG icon or "pseudo-element" */
-.k-drop-hint .k-icon,
-.k-reorder-indicator .k-icon,
-.k-drop-hint .k-svg-icon path,
-.k-reorder-indicator .k-svg-icon path {
-  color: $color-primary-10 !important;
-  fill: $color-primary-10 !important;
-}
