@@ -4195,10 +4195,6 @@
         <source>Dokument ID/Sagsnr.</source>
         <target state="new">Dokument ID/Sagsnr.</target>
       </trans-unit>
-      <trans-unit id="4394041055231779573" datatype="html">
-        <source>Anskaffelse.</source>
-        <target state="new">Anskaffelse.</target>
-      </trans-unit>
       <trans-unit id="2352567075185759105" datatype="html">
         <source>Driftsvederlag begyndt</source>
         <target state="new">Driftsvederlag begyndt</target>
@@ -5631,10 +5627,6 @@
         <source> Opret <x id="INTERPOLATION" equiv-text="{{ getCreateButtonType() }}"/></source>
         <target state="new"> Opret <x id="INTERPOLATION" equiv-text="{{ getCreateButtonType() }}"/></target>
       </trans-unit>
-      <trans-unit id="5917198681445260585" datatype="html">
-        <source>Prioritet</source>
-        <target state="new">Prioritet</target>
-      </trans-unit>
       <trans-unit id="859814391749202360" datatype="html">
         <source>rolle</source>
         <target state="new">rolle</target>
@@ -6432,6 +6424,10 @@
       <trans-unit id="5088079663399937603" datatype="html">
         <source>Dette sletter de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizatioName ?? &apos;kommunen&apos;"/>, men sletter ikke stamdata om systemet i IT System Kataloget.</source>
         <target state="new">Dette sletter de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizatioName ?? &apos;kommunen&apos;"/>, men sletter ikke stamdata om systemet i IT System Kataloget.</target>
+      </trans-unit>
+      <trans-unit id="3143168575358371654" datatype="html">
+        <source>Omstrukturer</source>
+        <target state="new">Omstrukturer</target>
       </trans-unit>
     </body>
   </file>
