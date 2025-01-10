@@ -145,7 +145,6 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     this.rowReordering.emit({
       from: { item: from.dataItem, index: from.rowIndex },
       to: { item: actualTo, index: toIndex },
-      dropPosition: event.dropPosition,
     });
   }
 }
@@ -158,7 +157,6 @@ export type BooleanChange<T> = {
 export type RowReorderingEvent<T> = {
   from: Indexed<T>;
   to: Indexed<T>;
-  dropPosition: DropPosition;
 };
 
 export type Indexed<T> = {
