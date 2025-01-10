@@ -11,9 +11,6 @@ import { CompositeFilterDescriptor, SortDescriptor, process } from '@progress/ke
 import { get } from 'lodash';
 import { GridExportActions } from 'src/app/store/grid/actions';
 import { BaseComponent } from '../../base/base.component';
-import { includedColumnInExport } from '../../helpers/grid-export.helper';
-import { GridColumn } from '../../models/grid-column.model';
-import { GridState, defaultGridState } from '../../models/grid-state.model';
 import {
   DEFAULT_COLUMN_MINIMUM_WIDTH,
   DEFAULT_COLUMN_WIDTH,
@@ -21,6 +18,10 @@ import {
   DEFAULT_DATE_COLUMN_WIDTH,
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
 } from '../../constants/constants';
+import { includedColumnInExport } from '../../helpers/grid-export.helper';
+import { GridColumn } from '../../models/grid-column.model';
+import { GridState, defaultGridState } from '../../models/grid-state.model';
+import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events.model';
 
 @Component({
   selector: 'app-local-grid',
@@ -162,18 +163,3 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     });
   }
 }
-
-export type BooleanChange<T> = {
-  value: boolean;
-  item: T;
-};
-
-export type RowReorderingEvent<T> = {
-  from: Indexed<T>;
-  to: Indexed<T>;
-};
-
-export type Indexed<T> = {
-  item: T;
-  index: number;
-};

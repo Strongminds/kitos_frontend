@@ -1,14 +1,14 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Store } from '@ngrx/store';
 import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { BooleanChange, RowReorderingEvent } from 'src/app/shared/models/grid/grid-events.model';
 import {
   GlobalAdminOptionType,
   GlobalAdminOptionTypeItem,
 } from 'src/app/shared/models/options/global-admin-option-type.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
-import { BooleanChange, RowReorderingEvent } from '../../local-grid/local-grid.component';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
-import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'app-global-option-type-grid',
