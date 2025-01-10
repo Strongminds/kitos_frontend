@@ -9,7 +9,8 @@
   max-width: 100%;
 }
 
-.align-empty-state-left {
-   float: left;
-   padding-left: $padding-large;
+.sticky-empty-state {
+  position: fixed;
+  left: 50%;
+  z-index: 1000; /* Ensure it is above other content */
 }
