@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -231,7 +231,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     this.subscriptions.add(
       this.organizationName$.pipe(
         first(),
-        map((organizationName) => {
+        tap((organizationName) => {
           const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
 
           this.subscriptions.add(
