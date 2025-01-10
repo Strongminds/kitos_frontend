@@ -88,12 +88,6 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
           return { ...column, hidden: !this.showWriteAccess };
         case 'description':
           return { ...column, hidden: !this.showDescription };
-        case 'priority': {
-          const priorities = this.optionTypeItems.map((item) => item.priority);
-          const minPriority = Math.min(...priorities);
-          const maxPriority = Math.max(...priorities);
-          return { ...column, extraData: { optionType: this.optionType, minPriority, maxPriority } };
-        }
         default:
           return column;
       }
