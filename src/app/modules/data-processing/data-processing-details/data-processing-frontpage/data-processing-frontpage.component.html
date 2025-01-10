@@ -54,7 +54,7 @@
       formName="lastChangedBy"
     >
     </app-textbox>
-    <app-textbox
+    <app-datepicker
       *ngIf="lastChangedAtEnabled$ | async"
       text="Sidst redigeret: Dato"
       i18n-text
@@ -62,7 +62,7 @@
       [formGroup]="frontpageFormGroup"
       formName="lastChangedAt"
     >
-    </app-textbox>
+    </app-datepicker>
     <ng-container *ngIf="agreementConcludedEnabled$ | async">
       <app-dropdown
         text="Databehandleraftale er indgået"
