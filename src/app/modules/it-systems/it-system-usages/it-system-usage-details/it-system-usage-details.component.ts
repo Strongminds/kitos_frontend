@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -230,25 +230,26 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public showRemoveDialog() {
     this.subscriptions.add(
       this.organizationName$.pipe(
-      map((organizationName) => {
-        const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+        first(),
+        map((organizationName) => {
+          const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
 
-        this.subscriptions.add(
-          this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess)).subscribe(() => {
-            confirmationDialogRef.close();
-            this.notificationService.showDefault($localize`Systemanvendelsen er slettet`);
-            this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
-          })
-        );
+          this.subscriptions.add(
+            this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess), first()).subscribe(() => {
+              confirmationDialogRef.close();
+              this.notificationService.showDefault($localize`Systemanvendelsen blev slettet`);
+              this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+            })
+          );
 
-        this.subscriptions.add(
-          confirmationDialogRef.afterClosed().subscribe((result) => {
-            if (result) {
-              this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
-            }
-          })
-        );
-      })
+          this.subscriptions.add(
+            confirmationDialogRef.afterClosed().pipe(first()).subscribe((result) => {
+              if (result) {
+                this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
+              }
+            })
+          );
+        })
     ).subscribe()
     );
   }

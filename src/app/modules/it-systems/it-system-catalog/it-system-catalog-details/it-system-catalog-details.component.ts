@@ -137,13 +137,14 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
 
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
     this.subscriptions.add(
-      this.organizationName$.subscribe((organizationName) => {
-        let confirmationDialogRef;
-        if (takingIntoUse) {
-          confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
-        } else {
-          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
-        }
+      this.organizationName$.pipe(first())
+        .subscribe((organizationName) => {
+          let confirmationDialogRef;
+          if (takingIntoUse) {
+            confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
+          } else {
+            confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+          }
 
         this.subscriptions.add(
           confirmationDialogRef
@@ -152,14 +153,14 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
             .subscribe(([result, systemUuid]) => {
               if (result === undefined) return;
 
-              if (takingIntoUse) {
-                this.tryTakeIntoUse(result, systemUuid);
-                return;
-              }
-              this.tryTakeOutOfUse(result, systemUuid);
-            })
-        );
-      })
+                if (takingIntoUse) {
+                  this.tryTakeIntoUse(result, systemUuid);
+                  return;
+                }
+                this.tryTakeOutOfUse(result, systemUuid);
+              })
+          );
+        })
     );
   }
 
