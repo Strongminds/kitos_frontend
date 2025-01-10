@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angu
 import { Actions, ofType } from '@ngrx/effects';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
+  DropPosition,
   ExcelExportEvent,
   GridComponent as KendoGridComponent,
   PageChangeEvent,
@@ -133,12 +134,18 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   }
 
   public onRowReorder(event: RowReorderEvent) {
+    console.log(event);
     if (!event.draggedRows[0] || !event.dropTargetRow) return;
     const from = event.draggedRows[0];
-    const to = event.dropTargetRow;
+    let toIndex = event.dropTargetRow.rowIndex;
+    if (event.dropPosition === 'after') {
+      toIndex++;
+    }
+    const actualTo = this.data[toIndex];
     this.rowReordering.emit({
       from: { item: from.dataItem, index: from.rowIndex },
-      to: { item: to.dataItem, index: to.rowIndex },
+      to: { item: actualTo, index: toIndex },
+      dropPosition: event.dropPosition,
     });
   }
 }
@@ -151,6 +158,7 @@ export type BooleanChange<T> = {
 export type RowReorderingEvent<T> = {
   from: Indexed<T>;
   to: Indexed<T>;
+  dropPosition: DropPosition;
 };
 
 export type Indexed<T> = {

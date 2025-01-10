@@ -20,3 +20,10 @@
   height: auto;
   max-height: 1000px;
 }
+
+/* Only while the grid is in "dragging" mode, disable text selection */
+.k-grid-dragging,
+.k-grid-dragging * {
+  user-select: none !important;
+}
+

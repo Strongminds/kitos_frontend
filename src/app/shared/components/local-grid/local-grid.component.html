@@ -16,7 +16,12 @@
   style="width: 100%"
   [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent }"
 >
-  <kendo-grid-rowreorder-column *ngIf="reorderable" [width]="40"></kendo-grid-rowreorder-column>
+  <kendo-grid-rowreorder-column
+    class="drag-handle"
+    *ngIf="reorderable"
+    [width]="40"
+  ></kendo-grid-rowreorder-column>
+  <ng-template #dragHintTemplate> THIS IS A HINT </ng-template>
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column
       *ngIf="!column.hidden"
