@@ -79,6 +79,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: true,
       noFilter: true,
+      sortable: false,
     },
     {
       field: 'HasApiAccess',
