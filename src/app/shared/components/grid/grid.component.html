@@ -324,8 +324,11 @@
     </div>
   </ng-template>
   <ng-template kendoGridNoRecordsTemplate>
-    <img src="assets/img/empty-system.svg" />
-    <p i18n>Din søgning gav intet resultat</p>
+      <div class="align-empty-state-left">
+           <img src="assets/img/empty-system.svg" />
+           <p i18n>Din søgning gav intet resultat</p>
+      </div>
+
   </ng-template>
 
   <kendo-grid-excel [fileName]="getExportName()" [fetchData]="allData" [filterable]="true">
