@@ -42,7 +42,7 @@ export interface GridColumn {
     | 'uuid-to-name'
     | 'excel-only'
     | 'action-buttons'
-    | 'priority-buttons'
+    | 'integer-with-thousands-separator'
     ; //Style of the column
   width?: number;
   minResizableWidth?: number;
