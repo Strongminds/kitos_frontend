@@ -4,7 +4,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first, map } from 'rxjs';
+import { combineLatestWith, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import * as GridFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
@@ -21,13 +21,13 @@ import {
 } from 'src/app/shared/constants/persistent-state-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
-import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
+import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
@@ -40,7 +40,6 @@ import {
   selectUsageGridColumns,
   selectUsageGridRoleColumns,
 } from 'src/app/store/it-system-usage/selectors';
-import { selectPagedOrganizationUnitHasValidCache } from 'src/app/store/organization/organization-unit/selectors';
 import {
   selectITSystemUsageEnableFrontPageUsagePeriod,
   selectITSystemUsageEnableGdpr,
@@ -53,10 +52,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
   styleUrls: ['it-system-usages.component.scss'],
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
-  public readonly isLoading$ = combineOR([
-    this.store.select(selectIsLoading),
-    this.store.select(selectPagedOrganizationUnitHasValidCache).pipe(map((isLoaded) => !isLoaded)),
-  ]);
+  public readonly isLoading$ = this.store.select(selectIsLoading);
   public readonly gridData$ = this.store.select(selectGridData);
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
@@ -503,6 +499,27 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       hidden: false,
       persistId: 'note',
+    },
+    {
+      field: GridFields.UserCount,
+      title: $localize`Antal brugere`,
+      section: this.systemSectionName,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: numberOfExpectedUsersOptionsGrid,
+      hidden: true,
+      persistId: 'userCount',
+    },
+    {
+      field: GridFields.ItSystemCategoriesUuid,
+      dataField: 'ItSystemCategoriesName',
+      title: $localize`Klassifikation af data i systemet`,
+      section: this.systemSectionName,
+      extraData: 'it-system_usage-data-classification-type',
+      extraFilter: 'choice-type',
+      style: 'uuid-to-name',
+      hidden: true,
+      persistId: 'itSystemCategoriesUuid',
     },
   ];
 
