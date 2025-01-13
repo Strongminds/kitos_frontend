@@ -218,6 +218,7 @@
               [itemType]="column.entityType"
               [itemUuid]="itemUuid"
               [subpagePath]="column.extraData"
+              [itemPathIncludesModule]="true"
               >{{ dataItem | searchProperty: column.field }}</app-details-page-link
             >
           </app-paragraph>

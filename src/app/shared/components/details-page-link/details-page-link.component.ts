@@ -16,8 +16,12 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public itemType: RegistrationEntityTypes | undefined;
   @Input() public subpagePath?: string;
   @Input() public disableRedirect = false;
+  @Input() public itemPathIncludesModule = false;
 
   private setDetailsPagePath(resourceUrlSegment: string) {
+    if (this.itemPathIncludesModule){
+      resourceUrlSegment = resourceUrlSegment.split('/')[0];
+    }
     let path = `/${resourceUrlSegment}/${this.itemUuid}`;
     if (this.subpagePath) {
       path += `/${this.subpagePath}`;

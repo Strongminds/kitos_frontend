@@ -14,6 +14,7 @@ import {
 } from '../yes-no-irrelevant.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
+import { AppPath } from '../../enums/app-path';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -77,8 +78,8 @@ export interface ITSystemUsage {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getParentItSystemLinkUuid(value: any){
-  if (value.ParentItSystemUsageUuid) return value.ParentItSystemUsageUuid;
-  return value.ParentItSystemUuid;
+  if (value.ParentItSystemUsageUuid) return `${AppPath.itSystemUsages}/${value.ParentItSystemUsageUuid}`;
+  return `${AppPath.itSystemCatalog}/${value.ParentItSystemUuid}`;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
