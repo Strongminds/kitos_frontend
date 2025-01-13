@@ -62,7 +62,6 @@ describe('organization-users', () => {
   it('Can delete it contract role', () => {
     cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-    //('[data-cy="delete-role-button-Budgetansvarlig"]')
     cy.getByDataCy('delete-role-button-Budgetansvarlig').click();
     cy.contains('Ja').click();
 
