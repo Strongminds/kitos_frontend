@@ -34,8 +34,6 @@
       margin-right: 0;
     }
   }
-
-
 }
 
 h3 {
@@ -51,4 +49,9 @@ h3 {
   gap: 8px;
 }
 
+.something {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
 
