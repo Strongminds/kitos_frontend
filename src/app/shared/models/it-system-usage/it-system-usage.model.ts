@@ -76,6 +76,12 @@ export interface ITSystemUsage {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
+function getParentItSystemLinkUuid(value: any){
+  if (value.ParentItSystemUsageUuid) return value.ParentItSystemUsageUuid;
+  return value.ParentItSystemUuid;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
   if (!value.SourceEntityUuid) return;
 
@@ -90,7 +96,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     SystemDescription: value.SystemDescription,
     ExternalSystemUuid: value.ExternalSystemUuid,
     ParentItSystemName: value.ParentItSystemName,
-    ParentItSystemUuid: value.ParentItSystemUuid,
+    ParentItSystemUuid: getParentItSystemLinkUuid(value),
     SystemName: entityWithUnavailableName(value.SystemName, value.SystemActive),
     Version: value.Version,
     LocalCallName: value.LocalCallName,
