@@ -216,7 +216,7 @@
               *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
               linkFontSize="small"
               [itemType]="column.entityType"
-              [itemUuid]="itemUuid"
+              [itemPath]="itemUuid"
               [subpagePath]="column.extraData"
               >{{ dataItem | searchProperty: column.field }}</app-details-page-link
             >
@@ -226,10 +226,10 @@
         <ng-template *ngIf="column.style === 'page-link-with-submodule' && column.idField" kendoGridCellTemplate let-dataItem>
           <app-paragraph [cropOnOverflow]="true">
             <app-details-page-link
-              *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
+              *ngIf="searchProperty(dataItem, column.idField) as itemPath"
               linkFontSize="small"
               [itemType]="column.entityType"
-              [itemUuid]="itemUuid"
+              [itemPath]="itemPath"
               [subpagePath]="column.extraData"
               [itemPathIncludesSubmodule]="true"
               >{{ dataItem | searchProperty: column.field }}</app-details-page-link
@@ -279,7 +279,7 @@
             <ng-container *ngIf="column.dataField">
               <div>
                 <ng-container *ngFor="let item of searchProperty(dataItem, column.dataField) as data; let i = index">
-                <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemUuid]="item.id">{{
+                <app-details-page-link linkFontSize="small" [itemType]="column.entityType" [itemPath]="item.id">{{
                   item.value
                 }}</app-details-page-link
                 >{{ i < data.length - 1 ? ", " : "" }}

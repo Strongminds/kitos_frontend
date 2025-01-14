@@ -11,7 +11,7 @@ import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 export class DetailsPageLinkComponent implements OnInit {
   public detailsPageRouterPath: string | null = null;
 
-  @Input() public itemUuid?: string;
+  @Input() public itemPath?: string;
   @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public itemType: RegistrationEntityTypes | undefined;
   @Input() public subpagePath?: string;
@@ -19,7 +19,7 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public itemPathIncludesSubmodule = false;
 
   private setDetailsPagePath(resourceUrlSegment: string) {
-    let path = `/${resourceUrlSegment}/${this.itemUuid}`;
+    let path = `/${resourceUrlSegment}/${this.itemPath}`;
     if (this.subpagePath) {
       path += `/${this.subpagePath}`;
     }
@@ -36,7 +36,7 @@ export class DetailsPageLinkComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    const isValid = this.itemUuid != undefined && this.itemType != undefined;
+    const isValid = this.itemPath != undefined && this.itemType != undefined;
     if (isValid) {
       switch (this.itemType) {
         case 'data-processing-registration':
@@ -61,7 +61,7 @@ export class DetailsPageLinkComponent implements OnInit {
           console.error('Unmapped link itemType', this.itemType);
       }
     } else {
-      console.error('Details page link incorrectly configured. Got (uuid,type)', this.itemUuid, this.itemType);
+      console.error('Details page link incorrectly configured. Got (uuid,type)', this.itemPath, this.itemType);
     }
   }
 }
