@@ -210,7 +210,7 @@
           </app-paragraph>
         </ng-template>
 
-        <ng-template *ngIf="column.style === 'page-link' && column.idField" kendoGridCellTemplate let-dataItem>
+        <ng-template *ngIf="(column.style === 'page-link' || column.style === 'page-link-with-submodule') && column.idField" kendoGridCellTemplate let-dataItem>
           <app-paragraph [cropOnOverflow]="true">
             <app-details-page-link
               *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
@@ -218,20 +218,7 @@
               [itemType]="column.entityType"
               [itemPath]="itemUuid"
               [subpagePath]="column.extraData"
-              >{{ dataItem | searchProperty: column.field }}</app-details-page-link
-            >
-          </app-paragraph>
-        </ng-template>
-
-        <ng-template *ngIf="column.style === 'page-link-with-submodule' && column.idField" kendoGridCellTemplate let-dataItem>
-          <app-paragraph [cropOnOverflow]="true">
-            <app-details-page-link
-              *ngIf="searchProperty(dataItem, column.idField) as itemPath"
-              linkFontSize="small"
-              [itemType]="column.entityType"
-              [itemPath]="itemPath"
-              [subpagePath]="column.extraData"
-              [itemPathIncludesSubmodule]="true"
+              [itemPathIncludesSubmodule]="column.style === 'page-link-with-submodule'"
               >{{ dataItem | searchProperty: column.field }}</app-details-page-link
             >
           </app-paragraph>
