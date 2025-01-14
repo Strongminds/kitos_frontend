@@ -10,66 +10,56 @@
     [attr.data-id]="node.uuid"
     [attr.id]="'node-' + node.uuid"
   >
-    <div class="flex-roman-numerals">
-      <div
-        [class]="'drag-container node-wrapper no-select node-' + getNodeColor(node)"
-        [style.--dynamic-width.px]="14 * (level - 1)"
-        [style.--dynamic-left.px]="15 * (level - 1)"
-        [ngClass]="{
-          'root-node-wrapper': node.isRoot === true,
-          'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
-          'current-node-green': node.uuid === currentNodeUuid && node.color === 'green',
-          'checkbox-color': checkboxNodes === true
-        }"
-        data-cy="node"
+    <div
+      [class]="'drag-container node-wrapper no-select node-' + getNodeColor(node)"
+      [style.--dynamic-width.px]="14 * (level - 1)"
+      [style.--dynamic-left.px]="15 * (level - 1)"
+      [ngClass]="{
+        'root-node-wrapper': node.isRoot === true,
+        'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
+        'current-node-green': node.uuid === currentNodeUuid && node.color === 'green',
+        'checkbox-color': checkboxNodes === true
+      }"
+      data-cy="node"
+    >
+      <ng-container
+        *ngIf="checkboxNodes === false && node.children.length && (maxLevel === undefined || maxLevel > level)"
       >
-        <ng-container
-          *ngIf="checkboxNodes === false && node.children.length && (maxLevel === undefined || maxLevel > level)"
-        >
-          <app-chevron-down-icon
-            class="chevron-icon"
-            *ngIf="node.isExpanded"
-            (click)="expandClick(node)"
-          ></app-chevron-down-icon>
-          <app-chevron-right-icon
-            class="chevron-icon"
-            *ngIf="!node.isExpanded"
-            (click)="expandClick(node)"
-          ></app-chevron-right-icon>
-        </ng-container>
-        <ng-container *ngIf="checkboxNodes === true">
-          <app-checkbox
-            [(value)]="node.status"
-            [disabled]="disableCheck"
-            (valueChange)="checkNode(node)"
-          ></app-checkbox>
-          <app-details-page-link
-            [itemType]="itemType"
-            linkFontSize="small"
-            [itemUuid]="node.uuid"
-            [disableRedirect]="disableRedirect"
-            (click)="checkNodeTextClick(node)"
-          >
-            {{ level }}. {{ node.name }}
-          </app-details-page-link>
-        </ng-container>
+        <app-chevron-down-icon
+          class="chevron-icon"
+          *ngIf="node.isExpanded"
+          (click)="expandClick(node)"
+        ></app-chevron-down-icon>
+        <app-chevron-right-icon
+          class="chevron-icon"
+          *ngIf="!node.isExpanded"
+          (click)="expandClick(node)"
+        ></app-chevron-right-icon>
+      </ng-container>
+      <ng-container *ngIf="checkboxNodes === true">
+        <app-checkbox [(value)]="node.status" [disabled]="disableCheck" (valueChange)="checkNode(node)"></app-checkbox>
         <app-details-page-link
-          *ngIf="checkboxNodes === false"
           [itemType]="itemType"
           linkFontSize="small"
           [itemUuid]="node.uuid"
           [disableRedirect]="disableRedirect"
-          (click)="disableRedirect ? expandClick(node) : null"
+          (click)="checkNodeTextClick(node)"
         >
-          <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
+          {{ level }}. {{ node.name }}
         </app-details-page-link>
-        <app-drag-icon *ngIf="!disableDrag && !node.isRoot" cdkDragHandle data-cy="drag-icon"></app-drag-icon>
-      </div>
-      <!-- <app-chip state="neutral">
-        {{ getRomanNumeral(level) }}
-      </app-chip> -->
+      </ng-container>
+      <app-details-page-link
+        *ngIf="checkboxNodes === false"
+        [itemType]="itemType"
+        linkFontSize="small"
+        [itemUuid]="node.uuid"
+        [disableRedirect]="disableRedirect"
+        (click)="disableRedirect ? expandClick(node) : null"
+      >
+        <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
+      </app-details-page-link>
+      <app-drag-icon *ngIf="!disableDrag && !node.isRoot" cdkDragHandle data-cy="drag-icon"></app-drag-icon>
     </div>
-
     <ng-container *ngIf="maxLevel === undefined || maxLevel > level">
       <div
         *ngIf="node.isExpanded && node.children.length"
