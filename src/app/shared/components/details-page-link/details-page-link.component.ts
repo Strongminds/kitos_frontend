@@ -16,17 +16,23 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public itemType: RegistrationEntityTypes | undefined;
   @Input() public subpagePath?: string;
   @Input() public disableRedirect = false;
-  @Input() public itemPathIncludesModule = false;
+  @Input() public itemPathIncludesSubmodule = false;
 
   private setDetailsPagePath(resourceUrlSegment: string) {
-    if (this.itemPathIncludesModule){
-      resourceUrlSegment = resourceUrlSegment.split('/')[0];
-    }
     let path = `/${resourceUrlSegment}/${this.itemUuid}`;
     if (this.subpagePath) {
       path += `/${this.subpagePath}`;
     }
     this.detailsPageRouterPath = path;
+  }
+
+  private setDetailsPagePathWithSubmodule(resourceUrlSegment: string) {
+    if (this.itemPathIncludesSubmodule){
+      const segmentWithoutSubmodule = resourceUrlSegment.split('/')[0];
+      this.setDetailsPagePath(segmentWithoutSubmodule);
+      return;
+    }
+    this.setDetailsPagePath(resourceUrlSegment);
   }
 
   public ngOnInit(): void {
@@ -40,16 +46,16 @@ export class DetailsPageLinkComponent implements OnInit {
           this.setDetailsPagePath(AppPath.itContracts);
           break;
         case 'it-interface':
-          this.setDetailsPagePath(`${AppPath.itSystems}/${AppPath.itInterfaces}`);
+          this.setDetailsPagePathWithSubmodule(`${AppPath.itSystems}/${AppPath.itInterfaces}`);
           break;
         case 'it-system':
-          this.setDetailsPagePath(`${AppPath.itSystems}/${AppPath.itSystemCatalog}`);
+          this.setDetailsPagePathWithSubmodule(`${AppPath.itSystems}/${AppPath.itSystemCatalog}`);
           break;
         case 'it-system-usage':
-          this.setDetailsPagePath(`${AppPath.itSystems}/${AppPath.itSystemUsages}`);
+          this.setDetailsPagePathWithSubmodule(`${AppPath.itSystems}/${AppPath.itSystemUsages}`);
           break;
         case 'organization':
-          this.setDetailsPagePath(`${AppPath.organization}/${AppPath.structure}`);
+          this.setDetailsPagePathWithSubmodule(`${AppPath.organization}/${AppPath.structure}`);
           break;
         default:
           console.error('Unmapped link itemType', this.itemType);

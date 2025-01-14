@@ -218,7 +218,20 @@
               [itemType]="column.entityType"
               [itemUuid]="itemUuid"
               [subpagePath]="column.extraData"
-              [itemPathIncludesModule]="true"
+              >{{ dataItem | searchProperty: column.field }}</app-details-page-link
+            >
+          </app-paragraph>
+        </ng-template>
+
+        <ng-template *ngIf="column.style === 'page-link-with-submodule' && column.idField" kendoGridCellTemplate let-dataItem>
+          <app-paragraph [cropOnOverflow]="true">
+            <app-details-page-link
+              *ngIf="searchProperty(dataItem, column.idField) as itemUuid"
+              linkFontSize="small"
+              [itemType]="column.entityType"
+              [itemUuid]="itemUuid"
+              [subpagePath]="column.extraData"
+              [itemPathIncludesSubmodule]="true"
               >{{ dataItem | searchProperty: column.field }}</app-details-page-link
             >
           </app-paragraph>
@@ -332,11 +345,8 @@
     </div>
   </ng-template>
   <ng-template kendoGridNoRecordsTemplate>
-      <div class="sticky-empty-state">
     <img src="assets/img/empty-system.svg" />
     <p i18n>Din søgning gav intet resultat</p>
-</div>
-
   </ng-template>
 
   <kendo-grid-excel [fileName]="getExportName()" [fetchData]="allData" [filterable]="true">

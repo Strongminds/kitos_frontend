@@ -34,6 +34,7 @@ export interface GridColumn {
     | 'enum'
     | 'link'
     | 'page-link'
+    | 'page-link-with-submodule'
     | 'title-link'
     | 'checkbox'
     | 'date'
@@ -42,8 +43,7 @@ export interface GridColumn {
     | 'uuid-to-name'
     | 'excel-only'
     | 'action-buttons'
-    | 'integer-with-thousands-separator'
-    ; //Style of the column
+    | 'integer-with-thousands-separator'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden
