@@ -3,7 +3,7 @@
     ><app-status-chip
       *ngIf="statusEnabled$ | async"
       type="data-processing-registration"
-      [title]="invalidDprMessage"
+      [title]="dprInactiveMessage$ | async"
       [value]="isValid$ | async"
     >
     </app-status-chip
