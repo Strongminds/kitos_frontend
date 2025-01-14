@@ -4891,6 +4891,9 @@
       <trans-unit id="5001288584084190416" datatype="html">
         <source>&lt;10</source>
       </trans-unit>
+      <trans-unit id="5574110711255436459" datatype="html">
+        <source>Følgende gør databehandlingen inaktiv: Den markerede kontrakt</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

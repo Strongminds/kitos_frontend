@@ -40,7 +40,7 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
   styleUrl: './data-processing-frontpage.component.scss',
 })
 export class DataProcessingFrontpageComponent extends BaseComponent implements OnInit {
-  public readonly invalidDprMessage = $localize`Følgende gør databehandlingen inaktiv: Kontrakt der gør databehandlingen aktiv`;
+  public readonly invalidDprMessage = $localize`Følgende gør databehandlingen inaktiv: Den markerede kontrakt`;
 
   public readonly basisForTransferTypes$ = this.store.select(
     selectRegularOptionTypes('data-processing-basis-for-transfer-types')
