@@ -1,8 +1,7 @@
 <app-card>
-  <app-card-header
-    title="Databehandling information"
-    i18n-title
-    helpTextKey="data-processing.edit-registration.main"
+  <app-card-header title="Databehandling information" i18n-title helpTextKey="data-processing.edit-registration.main"
+    ><app-status-chip *ngIf="statusEnabled$ | async" type="data-processing-registration" [value]="isValid$ | async">
+    </app-status-chip
   ></app-card-header>
 
   <app-form-grid [formGroup]="frontpageFormGroup">

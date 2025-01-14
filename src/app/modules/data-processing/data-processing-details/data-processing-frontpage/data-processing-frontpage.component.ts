@@ -19,6 +19,7 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessing,
   selectDataProcessingHasModifyPermissions,
+  selectDataProcessingIsValid,
 } from 'src/app/store/data-processing/selectors';
 import {
   selectDprEnableAgreementConcluded,
@@ -54,6 +55,8 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
 
   public readonly hasSubprocessorsValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
   public readonly isHasSubprocessorsTrue$ = this.hasSubprocessorsValue$.pipe(map((value) => value === 'Yes'));
+
+  public readonly isValid$ = this.store.select(selectDataProcessingIsValid);
 
   public readonly frontpageFormGroup = new FormGroup({
     name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
