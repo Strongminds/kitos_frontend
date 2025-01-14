@@ -45,7 +45,7 @@
           [disableRedirect]="disableRedirect"
           (click)="checkNodeTextClick(node)"
         >
-          {{ level }}. {{ node.name }}
+          <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
         </app-details-page-link>
       </ng-container>
       <app-details-page-link
