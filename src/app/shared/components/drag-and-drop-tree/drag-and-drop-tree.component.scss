@@ -243,14 +243,3 @@ app-details-page-link {
 .current-node-green .level-indicator-color {
   color: $color-neutral-80 !important;
 }
-
-.flex-roman-numerals {
-  display: flex;
-  margin-bottom: $padding-medium;
-  align-items: center;
-  flex-direction: row;
-}
-
-.flex-roman-numerals > * {
-  margin-right: 10px;
-}
