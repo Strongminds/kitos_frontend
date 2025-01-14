@@ -11,7 +11,7 @@
       </h3>
       <app-help-button
         [helpTextKey]="helpText"
-        [ngStyle]="{ visibility: helpText ? 'visible' : 'hidden' }"
+        [ngClass]="{ 'hide-help-button': !helpText }"
       ></app-help-button>
     </div>
   </div>
