@@ -96,7 +96,6 @@
   padding: $padding-small;
   z-index: 50;
   margin: 0px;
-  margin-bottom: $padding-medium;
   display: flex;
   align-items: center;
 }
@@ -234,4 +233,24 @@ app-details-page-link {
       color: $color-white !important;
     }
   }
+}
+
+.level-indicator-color {
+  color: $color-neutral-60 !important;
+}
+
+.current-node-blue .level-indicator-color,
+.current-node-green .level-indicator-color {
+  color: $color-neutral-80 !important;
+}
+
+.flex-roman-numerals {
+  display: flex;
+  margin-bottom: $padding-medium;
+  align-items: center;
+  flex-direction: row;
+}
+
+.flex-roman-numerals > * {
+  margin-right: 10px;
 }
