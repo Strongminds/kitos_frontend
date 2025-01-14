@@ -9,7 +9,10 @@
           {{ title }}
         </span>
       </h3>
-      <app-help-button *ngIf="helpText" [helpTextKey]="helpText"></app-help-button>
+      <app-help-button
+        [helpTextKey]="helpText"
+        [ngStyle]="{ visibility: helpText ? 'visible' : 'hidden' }"
+      ></app-help-button>
     </div>
   </div>
 </ng-container>
