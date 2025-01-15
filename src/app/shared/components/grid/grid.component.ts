@@ -151,10 +151,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public onPageChange(event: PageChangeEvent) {
+    console.log('event', event);
     this.onStateChange({ ...this.state, skip: event.skip, take: event.take });
   }
 
   public onPageSizeChange(pageSize?: number) {
+    console.log('pageSize', pageSize);
     const take = pageSize ?? this.data?.total;
     this.onStateChange({ ...this.state, skip: 0, take, all: pageSize ? false : true });
   }
