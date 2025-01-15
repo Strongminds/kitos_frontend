@@ -5,9 +5,11 @@ export interface GridState extends State {
   all?: boolean;
 }
 
+export const DEFAULT_GRID_TAKE = 60;
+
 export const defaultGridState: GridState = {
   skip: 0,
-  take: 60,
+  take: DEFAULT_GRID_TAKE,
 }
 
 export const toODataString = (gridState: GridState, settings?: ODataSettings) => {

@@ -1,7 +1,7 @@
 <kendo-grid
   [data]="data$ | async"
   [loading]="loading || false"
-  [pageSize]="60"
+  [pageSize]="defaultGridTake"
   [skip]="state?.skip"
   [filter]="state?.filter"
   [sort]="state?.sort"
