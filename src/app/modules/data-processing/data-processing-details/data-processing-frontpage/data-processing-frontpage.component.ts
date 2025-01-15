@@ -60,6 +60,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly dataProcessing$ = this.store.select(selectDataProcessing);
   public readonly dprInactiveMessage$ = this.dataProcessing$.pipe(
     map((dpr) => {
+      if (dpr?.general.valid) return undefined;
       const reasonsForInactivity = [dpr?.general.valid ? undefined : $localize`Den markerede kontrakt er inaktiv`];
 
       return $localize`Følgende gør databehandlingen inaktiv: ` + '\n' + toBulletPoints(reasonsForInactivity);
