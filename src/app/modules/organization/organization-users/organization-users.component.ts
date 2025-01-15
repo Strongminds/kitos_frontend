@@ -62,7 +62,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       field: 'Email',
       title: $localize`Email`,
       section: this.organizationUserSectionName,
-      style: 'primary',
       hidden: false,
       width: 350,
     },
