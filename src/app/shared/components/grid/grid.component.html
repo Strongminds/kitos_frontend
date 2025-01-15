@@ -1,7 +1,7 @@
 <kendo-grid
   [data]="data$ | async"
   [loading]="loading || false"
-  [pageSize]="state?.take"
+  [pageSize]="45"
   [skip]="state?.skip"
   [filter]="state?.filter"
   [sort]="state?.sort"
@@ -17,6 +17,8 @@
   (cellClick)="onCellClick($event)"
   (columnResize)="onResizeChange($event, columns)"
   (excelExport)="onExcelExport($event)"
+  [rowHeight]="63"
+  scrollable="virtual"
   style="width: 100%"
   *ngIf="columns$ | async as columns"
 >
