@@ -5,7 +5,7 @@ export interface GridState extends State {
   all?: boolean;
 }
 
-export const DEFAULT_GRID_TAKE = 60;
+export const DEFAULT_GRID_TAKE = 70;
 
 export const defaultGridState: GridState = {
   skip: 0,
