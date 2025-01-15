@@ -6,7 +6,7 @@ export function entityWithUnavailableName(name: string, available: boolean): str
   return available ? name : $localize`${name} (Ikke tilgængeligt)`;
 }
 
-export function toBulletPoints(s: (string | undefined)[]): string {
+export function toBulletPoints(s: Array<string | undefined>): string {
   return s
     .filter((x) => x)
     .map((x) => `• ${x}`)
