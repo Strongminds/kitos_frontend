@@ -27,7 +27,7 @@ export interface ITSystemUsage {
   ExternalSystemUuid: string;
   ParentItSystemName: string;
   ParentItSystemUuid: string;
-  ParentItSystemLinkPath: string;
+  ParentItSystemLinkPath?: string;
   SystemName: string;
   Version: string;
   LocalCallName: string;
@@ -80,7 +80,8 @@ export interface ITSystemUsage {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getParentItSystemLinkPath(value: any){
   if (value.ParentItSystemUsageUuid) return `${AppPath.itSystemUsages}/${value.ParentItSystemUsageUuid}`;
-  return `${AppPath.itSystemCatalog}/${value.ParentItSystemUuid}`;
+  if (value.ParentItSystemUuid) return `${AppPath.itSystemCatalog}/${value.ParentItSystemUuid}`;
+  return undefined;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
