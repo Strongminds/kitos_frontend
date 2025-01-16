@@ -10,6 +10,12 @@ import { RegistrationEntityTypes } from '../models/registrations/registration-en
 import { BaseComponent } from './base.component';
 import { selectGridState } from 'src/app/store/it-system-usage/selectors';
 import { first } from 'rxjs';
+import { selectDataProcessingGridState } from 'src/app/store/data-processing/selectors';
+import { selectContractGridState } from 'src/app/store/it-contract/selectors';
+import { selectInterfaceGridState } from 'src/app/store/it-system-interfaces/selectors';
+import { selectSystemGridState } from 'src/app/store/it-system/selectors';
+import { selectOrganizationUserGridState } from 'src/app/store/organization/organization-user/selectors';
+import { selectOrganizationGridState } from 'src/app/store/organization/selectors';
 
 @Component({
   template: '',
@@ -62,6 +68,19 @@ export class BaseOverviewComponent extends BaseComponent {
     switch (this.entityType) {
       case 'it-system-usage':
         return selectGridState;
+      case 'data-processing-registration':
+        return selectDataProcessingGridState;
+      case 'it-contract':
+        return selectContractGridState;
+      case 'it-interface':
+        return selectInterfaceGridState;
+      case 'it-system':
+        return selectSystemGridState;
+      case 'organization-user':
+        return selectOrganizationUserGridState;
+      case 'global-admin-organization':
+      case 'local-admin-organization':
+        return selectOrganizationGridState;
       default:
         throw new Error('Invalid entity type');
     }
