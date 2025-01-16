@@ -34,7 +34,7 @@ export interface GridColumn {
     | 'enum'
     | 'link'
     | 'page-link'
-    | 'page-link-with-submodule'
+    | 'page-link-array-with-submodules'
     | 'title-link'
     | 'checkbox'
     | 'date'

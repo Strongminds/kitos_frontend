@@ -27,7 +27,7 @@ export interface ITSystemUsage {
   ExternalSystemUuid: string;
   ParentItSystemName: string;
   ParentItSystemUuid: string;
-  ParentItSystemLinkPath?: string;
+  ParentSystemLinkPaths: {value: string, id: string}[];
   SystemName: string;
   Version: string;
   LocalCallName: string;
@@ -77,11 +77,27 @@ export interface ITSystemUsage {
   RoleEmails: RoleAssignmentEmailsMaps;
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getParentItSystemLinkPath(value: any){
-  if (value.ParentItSystemUsageUuid) return `${AppPath.itSystemUsages}/${value.ParentItSystemUsageUuid}`;
-  if (value.ParentItSystemUuid) return `${AppPath.itSystemCatalog}/${value.ParentItSystemUuid}`;
-  return undefined;
+function getParentItSystemLinkPaths(value: {
+  ParentItSystemUsageUuid: string | undefined,
+  ParentItSystemUuid: string | undefined,
+  ParentItSystemName: string | undefined })
+  {
+    const links: {id: string, value: string}[] = [];
+    if (!value.ParentItSystemUuid || !value.ParentItSystemName) return links;
+
+    links.push({
+      id: `${AppPath.itSystemCatalog}/${value.ParentItSystemUuid}`,
+      value: value.ParentItSystemName
+    });
+
+    if (value.ParentItSystemUsageUuid) {
+      links.push({
+        id: `${AppPath.itSystemUsages}/${value.ParentItSystemUsageUuid}`,
+        value: $localize`Gå til systemanvendelse`
+      });
+    }
+
+    return links;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -89,6 +105,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
   if (!value.SourceEntityUuid) return;
 
   return {
+    ParentSystemLinkPaths: getParentItSystemLinkPaths(value),
     id: value.SourceEntityUuid,
     SystemActive: value.SystemActive,
     ActiveAccordingToValidityPeriod: value.ActiveAccordingToValidityPeriod,
@@ -100,7 +117,6 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ExternalSystemUuid: value.ExternalSystemUuid,
     ParentItSystemName: value.ParentItSystemName,
     ParentItSystemUuid: value.ParentItSystemUuid,
-    ParentItSystemLinkPath: getParentItSystemLinkPath(value),
     SystemName: entityWithUnavailableName(value.SystemName, value.SystemActive),
     Version: value.Version,
     LocalCallName: value.LocalCallName,
