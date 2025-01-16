@@ -67,7 +67,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     },
     {
       field: 'ObjectOwner.Name',
-      title: $localize`Sidst redigeret: Bruger`,
+      title: $localize`Oprettet af: Bruger`,
       section: this.organizationUserSectionName,
       hidden: false,
       width: 350,
