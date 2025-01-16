@@ -21,10 +21,12 @@ export class NotificationsPageComponent {
     {
       value: NotificationSegmentType.Advis,
       text: $localize`Kommende advis`,
+      dataCy: 'advis-segment',
     },
     {
       value: NotificationSegmentType.Alerts,
       text: $localize`Ulæste advarsler`,
+      dataCy: 'alerts-segment',
     },
   ];
 }
