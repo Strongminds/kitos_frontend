@@ -157,6 +157,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       style: 'page-link-array-with-submodules',
       entityType: 'it-system',
+      linkArraySeparator: ' - ',
       width: 320,
       hidden: true,
       persistId: 'parentsysname',

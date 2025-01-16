@@ -273,7 +273,7 @@
                 >{{
                   item.value
                 }}</app-details-page-link
-                >{{ i < data.length - 1 ? ", " : "" }}
+                >{{ i < data.length - 1 ? (column.linkArraySeparator ?? ', ') : "" }}
               </ng-container>
               </div>
 
