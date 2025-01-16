@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { MemoizedSelector, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { GridExportActions } from 'src/app/store/grid/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -10,7 +10,6 @@ import { RegistrationEntityTypes } from '../models/registrations/registration-en
 import { BaseComponent } from './base.component';
 import { selectGridState } from 'src/app/store/it-system-usage/selectors';
 import { first } from 'rxjs';
-import { GridState } from '../models/grid-state.model';
 
 @Component({
   template: '',
@@ -18,16 +17,12 @@ import { GridState } from '../models/grid-state.model';
 export class BaseOverviewComponent extends BaseComponent {
   protected unclickableColumnFields: string[] = [];
 
-  private stateSelector!: MemoizedSelector<string, GridState>;
-
   constructor(
     protected store: Store,
     @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
   ) {
     super();
     this.store.dispatch(UserActions.getUserGridPermissions());
-
-    this.stateSelector;
   }
 
   protected updateUnclickableColumns(currentColumns: GridColumn[]) {
