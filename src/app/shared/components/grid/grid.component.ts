@@ -40,7 +40,7 @@ import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
-import { DEFAULT_GRID_TAKE, GridState } from '../../models/grid-state.model';
+import { DEFAULT_VIRTUALIZTION_PAGE_SIZE, GridState } from '../../models/grid-state.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
@@ -75,7 +75,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   private data: GridData | null = null;
 
-  public readonly defaultGridTake = DEFAULT_GRID_TAKE;
+  public readonly virtualPageSize = DEFAULT_VIRTUALIZTION_PAGE_SIZE;
 
   public readyToExport$ = this.store.select(selectReadyToExport);
   public exportAllColumns$ = this.store.select(selectExportAllColumns);
