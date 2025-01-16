@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { first, map, Observable, of } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
@@ -16,6 +16,8 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 export class UserInfoDialogComponent extends BaseComponent {
   @Input() user$!: Observable<ODataOrganizationUser>;
   @Input() hasModificationPermission$!: Observable<boolean | undefined>;
+
+  public $loading = of(false);
 
   constructor(
     private store: Store,
@@ -41,7 +43,19 @@ export class UserInfoDialogComponent extends BaseComponent {
   }
 
   public onSendAdvis(user: ODataOrganizationUser): void {
+    this.$loading = of(true);
     this.store.dispatch(OrganizationUserActions.sendNotification(user.Uuid));
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(OrganizationUserActions.sendNotificationSuccess),
+          first(),
+          map(() => {
+            this.$loading = of(false);
+          })
+        )
+        .subscribe()
+    );
   }
 
   public getFullName(user: ODataOrganizationUser): string {
