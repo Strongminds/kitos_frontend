@@ -32,12 +32,9 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
       this.actions$
         .pipe(
           ofType(OrganizationUserActions.sendNotificationSuccess),
-          first(),
-          map(() => {
-            this.$loading = of(false);
-          })
-        )
-        .subscribe()
+          first())
+        .subscribe(() => this.$loading = of(false)
+      )
     );
   }
 
