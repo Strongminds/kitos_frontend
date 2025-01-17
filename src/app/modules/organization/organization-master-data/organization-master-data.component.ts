@@ -208,7 +208,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
-  public patchDataResponsibleCvr(cvr: string | undefined ) {
+  public patchDataResponsibleCvr(cvr: string | undefined) {
     this.patchMasterDataRolesDataResponsible(false, cvr);
   }
 
@@ -217,17 +217,27 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     newCvr: string | undefined = undefined
   ) {
     if (this.dataResponsibleForm.valid) {
-      const dataResponsible: APIDataResponsibleRequestDTO = {};
-      const controls = this.dataResponsibleForm.controls;
-      if (newCvr === undefined) newCvr = controls.cvrControl.value ?? undefined;
-      const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
-      dataResponsible.address = controls.addressControl.value ?? undefined;
-      dataResponsible.cvr = newCvr;
-      dataResponsible.email = email ?? undefined;
-      dataResponsible.name = controls.nameControl.value ?? undefined;
-      dataResponsible.phone = controls.phoneControl.value ?? undefined;
+      this.subscriptions.add(
+        this.organizationMasterDataRoles$.pipe(first()).subscribe((masterDataRoles) => {
+          const dataResponsible = masterDataRoles.DataResponsible;
+          const dataResponsibleDto: APIDataResponsibleRequestDTO = {};
+          const controls = this.dataResponsibleForm.controls;
 
-      this.store.dispatch(OrganizationActions.patchMasterDataRoles({ request: { dataResponsible } }));
+          if (newCvr === undefined) newCvr = controls.cvrControl.value ?? undefined;
+          if (newCvr === dataResponsible.cvr) return;
+
+          const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
+          dataResponsibleDto.address = controls.addressControl.value ?? undefined;
+          dataResponsibleDto.cvr = newCvr;
+          dataResponsibleDto.email = email ?? undefined;
+          dataResponsibleDto.name = controls.nameControl.value ?? undefined;
+          dataResponsibleDto.phone = controls.phoneControl.value ?? undefined;
+
+          this.store.dispatch(
+            OrganizationActions.patchMasterDataRoles({ request: { dataResponsible: dataResponsibleDto } })
+          );
+        })
+      );
     }
   }
 
@@ -255,18 +265,26 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
   public patchMasterDataRolesDataProtectionAdvisor(newCvr: string | undefined = undefined) {
     if (this.dataProtectionAdvisorForm.valid) {
-      const dataProtectionAdvisor: APIDataProtectionAdvisorRequestDTO = {};
-      const controls = this.dataProtectionAdvisorForm.controls;
-      if (newCvr === undefined) newCvr = controls.cvrControl.value ?? undefined;
-      dataProtectionAdvisor.address = controls.addressControl.value ?? undefined;
-      dataProtectionAdvisor.cvr = newCvr;
-      dataProtectionAdvisor.email = controls.emailControl.value ?? undefined;
-      dataProtectionAdvisor.name = controls.nameControl.value ?? undefined;
-      dataProtectionAdvisor.phone = controls.phoneControl.value ?? undefined;
+      this.subscriptions.add(
+        this.organizationMasterDataRoles$.pipe(first()).subscribe((masterDataRoles) => {
+          const dataProtectionAdvisor = masterDataRoles.DataProtectionAdvisor;
+          const dataProtectionAdvisorDto: APIDataProtectionAdvisorRequestDTO = {};
+          const controls = this.dataProtectionAdvisorForm.controls;
 
-      this.store.dispatch(
-        OrganizationActions.patchMasterDataRoles({
-          request: { dataProtectionAdvisor },
+          if (newCvr === undefined) newCvr = controls.cvrControl.value ?? undefined;
+          if (newCvr === dataProtectionAdvisor.cvr) return;
+
+          dataProtectionAdvisorDto.address = controls.addressControl.value ?? undefined;
+          dataProtectionAdvisorDto.cvr = newCvr;
+          dataProtectionAdvisorDto.email = controls.emailControl.value ?? undefined;
+          dataProtectionAdvisorDto.name = controls.nameControl.value ?? undefined;
+          dataProtectionAdvisorDto.phone = controls.phoneControl.value ?? undefined;
+
+          this.store.dispatch(
+            OrganizationActions.patchMasterDataRoles({
+              request: { dataProtectionAdvisor: dataProtectionAdvisorDto },
+            })
+          );
         })
       );
     }
