@@ -208,13 +208,21 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
-  public patchMasterDataRolesDataResponsible(useEmailFromDropdown: boolean = false) {
+  public patchDataResponsibleCvr(cvr: string | undefined ) {
+    this.patchMasterDataRolesDataResponsible(false, cvr);
+  }
+
+  public patchMasterDataRolesDataResponsible(
+    useEmailFromDropdown: boolean = false,
+    newCvr: string | undefined = undefined
+  ) {
     if (this.dataResponsibleForm.valid) {
       const dataResponsible: APIDataResponsibleRequestDTO = {};
       const controls = this.dataResponsibleForm.controls;
+      if (newCvr === undefined) newCvr = controls.cvrControl.value ?? undefined;
       const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
       dataResponsible.address = controls.addressControl.value ?? undefined;
-      dataResponsible.cvr = controls.cvrControl.value ?? undefined;
+      dataResponsible.cvr = newCvr;
       dataResponsible.email = email ?? undefined;
       dataResponsible.name = controls.nameControl.value ?? undefined;
       dataResponsible.phone = controls.phoneControl.value ?? undefined;
@@ -241,12 +249,17 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
-  public patchMasterDataRolesDataProtectionAdvisor() {
+  public patchDataProtectionAdvisorCvr(cvr: string | undefined) {
+    this.patchMasterDataRolesDataProtectionAdvisor(cvr);
+  }
+
+  public patchMasterDataRolesDataProtectionAdvisor(newCvr: string | undefined = undefined) {
     if (this.dataProtectionAdvisorForm.valid) {
       const dataProtectionAdvisor: APIDataProtectionAdvisorRequestDTO = {};
       const controls = this.dataProtectionAdvisorForm.controls;
+      if (newCvr === undefined) newCvr = controls.cvrControl.value ?? undefined;
       dataProtectionAdvisor.address = controls.addressControl.value ?? undefined;
-      dataProtectionAdvisor.cvr = controls.cvrControl.value ?? undefined;
+      dataProtectionAdvisor.cvr = newCvr;
       dataProtectionAdvisor.email = controls.emailControl.value ?? undefined;
       dataProtectionAdvisor.name = controls.nameControl.value ?? undefined;
       dataProtectionAdvisor.phone = controls.phoneControl.value ?? undefined;
