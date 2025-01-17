@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, first, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
@@ -30,11 +30,8 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.subscriptions.add(
       this.actions$
-        .pipe(
-          ofType(OrganizationUserActions.sendNotificationSuccess),
-          first())
-        .subscribe(() => this.$sendingNotification.next(false)
-      )
+        .pipe(ofType(OrganizationUserActions.sendNotificationSuccess))
+        .subscribe(() => this.$sendingNotification.next(false))
     );
   }
 
