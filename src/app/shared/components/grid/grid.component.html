@@ -17,7 +17,7 @@
   (cellClick)="onCellClick($event)"
   (columnResize)="onResizeChange($event, columns)"
   (excelExport)="onExcelExport($event)"
-  [rowHeight]="63"
+  [rowHeight]="gridRowHeight"
   scrollable="virtual"
   style="width: 100%"
   *ngIf="columns$ | async as columns"
