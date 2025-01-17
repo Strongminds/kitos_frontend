@@ -74,6 +74,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Output() modifyEvent = new EventEmitter<T>();
 
   private data: GridData | null = null;
+  private readonly RolesExtraDataLabel = 'roles';
+  private readonly EmailColumnField = '.email';
 
   public readyToExport$ = this.store.select(selectReadyToExport);
   public exportAllColumns$ = this.store.select(selectExportAllColumns);
@@ -342,11 +344,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
               .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
           : [];
 
-        const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === 'roles');
+        const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === this.RolesExtraDataLabel);
         const roleColumnFieldsToExport = new Set(roleColumnsInExport.map((column) => column.field));
         return columnsToExport.filter(
           (column) =>
-            !this.isExcelOnlyColumn(column) || roleColumnFieldsToExport.has(column.field.replaceAll('.email', ''))
+            !this.isExcelOnlyColumn(column) || roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
         );
       })
     );
