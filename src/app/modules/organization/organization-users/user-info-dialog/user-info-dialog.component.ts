@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, first, map, Observable, of } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
@@ -17,7 +17,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;
   @Input() hasModificationPermission$!: Observable<boolean | undefined>;
 
-  public $loading = of(false);
+  public $sendingNotification = new BehaviorSubject(false);
 
   constructor(
     private store: Store,
@@ -33,7 +33,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
         .pipe(
           ofType(OrganizationUserActions.sendNotificationSuccess),
           first())
-        .subscribe(() => this.$loading = of(false)
+        .subscribe(() => this.$sendingNotification.next(false)
       )
     );
   }
@@ -53,7 +53,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   }
 
   public onSendAdvis(user: ODataOrganizationUser): void {
-    this.$loading = of(true);
+    this.$sendingNotification.next(true);
     this.store.dispatch(OrganizationUserActions.sendNotification(user.Uuid));
   }
 
