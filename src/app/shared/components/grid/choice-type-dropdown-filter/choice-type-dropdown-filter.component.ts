@@ -11,7 +11,6 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { FilterDropdownOption } from '../dropdown-filter/dropdown-filter.component';
-import { debugPipe } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-choice-type-dropdown-filter',
