@@ -1,5 +1,5 @@
 import { Actions, ofType } from '@ngrx/effects';
-import { FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
+import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { map, Subject, takeUntil } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -9,6 +9,8 @@ import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
+import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
+import { GridState, toODataString } from '../models/grid-state.model';
 
 export function getSaveFilterAction(entityType: RegistrationEntityTypes) {
   switch (entityType) {
@@ -79,4 +81,25 @@ export function initializeApplyFilterSubscription(
       ) as FilterDescriptor | undefined;
       updateFilter(matchingFilter);
     });
+}
+
+export function convertUsageState(gridState: GridState): any {
+  if (!gridState.filter) {
+    return ITSystemUsageActions.getITSystemUsages(toODataString(gridState), undefined);
+  }
+  const filters = gridState.filter?.filters;
+  const responsibleUnitFilter = filters.find((filter) => isResponsibleUnitFilter(filter)) as
+    | FilterDescriptor
+    | undefined;
+  if (!responsibleUnitFilter) {
+    return ITSystemUsageActions.getITSystemUsages(toODataString(gridState), undefined);
+  }
+  const filtersWithoutResponsibleUnit = filters.filter((filter) => !isResponsibleUnitFilter(filter));
+  const responsibleUnitUuid = responsibleUnitFilter?.value as string | undefined;
+  const newState: GridState = { ...gridState, filter: { ...gridState.filter, filters: filtersWithoutResponsibleUnit } };
+  return ITSystemUsageActions.getITSystemUsages(toODataString(newState, { utcDates: true }), responsibleUnitUuid);
+}
+
+function isResponsibleUnitFilter(filter: CompositeFilterDescriptor | FilterDescriptor): boolean {
+  return !isCompositeFilterDescriptor(filter) && filter.field === UsageFields.ResponsibleOrganizationUnitName;
 }

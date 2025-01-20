@@ -6,11 +6,11 @@ import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from '../data-processing/actions';
 import { ITContractActions } from '../it-contract/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
-import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from '../it-system/actions';
 import { OrganizationActions } from '../organization/actions';
 import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { GridExportActions } from './actions';
+import { convertUsageState } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Injectable()
 export class GridExportEffects {
@@ -26,7 +26,7 @@ export class GridExportEffects {
             const odataString = toODataString(gridState);
             switch (action.entityType) {
               case 'it-system-usage':
-                return of(ITSystemUsageActions.getITSystemUsages(odataString));
+                return of(convertUsageState(gridState));
               case 'it-system':
                 return of(ITSystemActions.getITSystems(odataString));
               case 'it-contract':
