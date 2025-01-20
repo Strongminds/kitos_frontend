@@ -38,5 +38,5 @@ export const IrrevocableTo = 'IrrevocableTo';
 export const TerminatedAt = 'TerminatedAt';
 export const LastEditedByUserName = 'LastEditedByUserName';
 export const LastEditedAtDate = 'LastEditedAtDate';
-export const ItSystemUsageUuidsAsCsv = 'ItSystemUsagesSystemUuidCsv';
+export const ItSystemUsageUuidsAsCsv = 'ItSystemUsageUuidsAsCsv';
 
