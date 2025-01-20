@@ -342,9 +342,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       map(([columns, exportAllColumns, uiConfigApplications]) => {
         const columnsToExport = columns
           ? columns
-            .filter(includedColumnInExport)
-            .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
-            .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
+              .filter(includedColumnInExport)
+              .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
+              .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
           : [];
 
         const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === this.RolesExtraDataLabel);
