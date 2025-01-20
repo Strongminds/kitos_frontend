@@ -665,14 +665,22 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       )
       .replace(/BasisForTransferUuid eq '([\w-]+)'/, 'BasisForTransferUuid eq $1')
       .replace(/DataResponsibleUuid eq '([\w-]+)'/, 'DataResponsibleUuid eq $1')
-      .replace(/OversightOptionNamesAsCsv eq '([^']*)'/, "contains(OversightOptionNamesAsCsv, '$1')")
-      .replace(/(TransferToInsecureThirdCountries)\s+eq\s+'(Undecided)'/, "$1 eq '$2' or $1 eq null");
+      .replace(/OversightOptionNamesAsCsv eq '([^']*)'/, "contains(OversightOptionNamesAsCsv, '$1')");
   });
 
-  fixedOdataString = fixedOdataString.replace(
-    /TransferToInsecureThirdCountries eq 'Undecided'/,
-    "TransferToInsecureThirdCountries eq 'Undecided' or TransferToInsecureThirdCountries eq null"
-  );
+  fixedOdataString = fixedOdataString
+    .replace(
+      /TransferToInsecureThirdCountries eq 'Undecided'/,
+      "(TransferToInsecureThirdCountries eq 'Undecided' or TransferToInsecureThirdCountries eq null)"
+    )
+    .replace(
+      /IsAgreementConcluded eq 'UNDECIDED'/,
+      "(IsAgreementConcluded eq 'UNDECIDED' or IsAgreementConcluded eq null)"
+    )
+    .replace(
+      /IsOversightCompleted eq 'Undecided'/,
+      "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)"
+    );
 
   return fixedOdataString;
 }
