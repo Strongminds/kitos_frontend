@@ -693,8 +693,8 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       'IncomingRelatedItSystemUsages/any(c: $1c/ItSystemUsageName$2)'
     )
     .replace(
-      new RegExp(`RelevantOrganizationUnitNamesAsCsv eq '(\\w+)'`, 'i'),
-      'RelevantOrganizationUnits/any(c: c/OrganizationUnitId eq $1)'
+      new RegExp(`RelevantOrganizationUnitNamesAsCsv eq '([^']+)'`, 'i'),
+      "RelevantOrganizationUnits/any(c: c/OrganizationUnitName eq '$1')"
     )
     .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)')
     .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')
