@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { AppPath } from '../../enums/app-path';
+import { getDetailsPageLink } from '../../helpers/link.helpers';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 
@@ -27,7 +27,7 @@ export class DetailsPageLinkComponent implements OnInit {
   }
 
   private setDetailsPagePathWithSubmodule(resourceUrlSegment: string) {
-    if (this.itemPathIncludesSubmodule){
+    if (this.itemPathIncludesSubmodule) {
       const segmentWithoutSubmodule = resourceUrlSegment.split('/')[0];
       this.setDetailsPagePath(segmentWithoutSubmodule);
       return;
@@ -36,32 +36,9 @@ export class DetailsPageLinkComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    const isValid = this.itemPath != undefined && this.itemType != undefined;
-    if (isValid) {
-      switch (this.itemType) {
-        case 'data-processing-registration':
-          this.setDetailsPagePath(AppPath.dataProcessing);
-          break;
-        case 'it-contract':
-          this.setDetailsPagePath(AppPath.itContracts);
-          break;
-        case 'it-interface':
-          this.setDetailsPagePathWithSubmodule(`${AppPath.itSystems}/${AppPath.itInterfaces}`);
-          break;
-        case 'it-system':
-          this.setDetailsPagePathWithSubmodule(`${AppPath.itSystems}/${AppPath.itSystemCatalog}`);
-          break;
-        case 'it-system-usage':
-          this.setDetailsPagePathWithSubmodule(`${AppPath.itSystems}/${AppPath.itSystemUsages}`);
-          break;
-        case 'organization':
-          this.setDetailsPagePathWithSubmodule(`${AppPath.organization}/${AppPath.structure}`);
-          break;
-        default:
-          console.error('Unmapped link itemType', this.itemType);
-      }
-    } else {
-      console.error('Details page link incorrectly configured. Got (uuid,type)', this.itemPath, this.itemType);
+    const path = getDetailsPageLink(this.itemPath, this.itemType, this.subpagePath, this.itemPathIncludesSubmodule);
+    if (path) {
+      this.detailsPageRouterPath = path;
     }
   }
 }

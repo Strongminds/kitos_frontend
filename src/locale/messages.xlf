@@ -4681,9 +4681,6 @@
       <trans-unit id="5606291731600881005" datatype="html">
         <source><x id="START_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;app-filter-icon&gt;"/><x id="CLOSE_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;/app-filter-icon&gt;"/> Anvend </source>
       </trans-unit>
-      <trans-unit id="624474564558550925" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;app-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;/app-plus-icon-blue&gt;"/> Opret </source>
-      </trans-unit>
       <trans-unit id="6740986467507484529" datatype="html">
         <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </source>
       </trans-unit>
@@ -4825,9 +4822,6 @@
       <trans-unit id="4491906435283548133" datatype="html">
         <source>Lokale tilknyttede opgaver</source>
       </trans-unit>
-      <trans-unit id="5550616292634600838" datatype="html">
-        <source>Advarsler</source>
-      </trans-unit>
       <trans-unit id="9117861173318709156" datatype="html">
         <source>Notifikationer</source>
       </trans-unit>
@@ -4896,6 +4890,12 @@
       </trans-unit>
       <trans-unit id="4766365470163586672" datatype="html">
         <source>Den markerede kontrakt er inaktiv</source>
+      </trans-unit>
+      <trans-unit id="6454412951656065343" datatype="html">
+        <source>Ulæste advarsler</source>
+      </trans-unit>
+      <trans-unit id="7018355465405167274" datatype="html">
+        <source>Kommende advis</source>
       </trans-unit>
       <trans-unit id="7473666767554000615" datatype="html">
         <source>Gå til systemanvendelse</source>

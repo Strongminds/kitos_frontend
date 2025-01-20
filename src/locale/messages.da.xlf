@@ -6155,10 +6155,6 @@
         <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
         <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </target>
       </trans-unit>
-      <trans-unit id="624474564558550925" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;app-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;/app-plus-icon-blue&gt;"/> Opret </source>
-        <target state="new"><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;app-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;/app-plus-icon-blue&gt;"/> Opret </target>
-      </trans-unit>
       <trans-unit id="844753732077135788" datatype="html">
         <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </source>
         <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </target>
@@ -6357,10 +6353,6 @@
         <source>Notifikationer</source>
         <target state="new">Notifikationer</target>
       </trans-unit>
-      <trans-unit id="5550616292634600838" datatype="html">
-        <source>Advarsler</source>
-        <target state="new">Advarsler</target>
-      </trans-unit>
       <trans-unit id="2513003037040133293" datatype="html">
         <source>Modtager</source>
         <target state="new">Modtager</target>
@@ -6448,6 +6440,14 @@
       <trans-unit id="4440751846878487949" datatype="html">
         <source>Følgende gør databehandlingen inaktiv: </source>
         <target state="new">Følgende gør databehandlingen inaktiv: </target>
+      </trans-unit>
+      <trans-unit id="7018355465405167274" datatype="html">
+        <source>Kommende advis</source>
+        <target state="new">Kommende advis</target>
+      </trans-unit>
+      <trans-unit id="6454412951656065343" datatype="html">
+        <source>Ulæste advarsler</source>
+        <target state="new">Ulæste advarsler</target>
       </trans-unit>
       <trans-unit id="7473666767554000615" datatype="html">
         <source>Gå til systemanvendelse</source>
