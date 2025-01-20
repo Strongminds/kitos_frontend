@@ -16,7 +16,6 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
   @Input() override filter!: CompositeFilterDescriptor;
   @Input() override column!: ColumnComponent;
   @Input() entityType!: RegistrationEntityTypes;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 
   public chosenOption?: TreeNodeModel;
 
