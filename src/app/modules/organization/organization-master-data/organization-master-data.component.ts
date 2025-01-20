@@ -212,9 +212,14 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     this.patchMasterDataRolesDataResponsible(false, cvr);
   }
 
+  private getValidCvrUpdate(newCvr: string | undefined, formControl: FormControl): string | undefined{
+    if (newCvr !== undefined) return newCvr;
+    return formControl.value ?? undefined;
+  }
+
   public patchMasterDataRolesDataResponsible(
     useEmailFromDropdown: boolean = false,
-    newCvr: string | undefined = undefined
+    cvrEvent: string | undefined = undefined
   ) {
     if (this.dataResponsibleForm.valid) {
       this.subscriptions.add(
@@ -223,7 +228,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           const dataResponsibleDto: APIDataResponsibleRequestDTO = {};
           const controls = this.dataResponsibleForm.controls;
 
-          if (newCvr === undefined) newCvr = controls.cvrControl.value ?? undefined;
+          const newCvr = this.getValidCvrUpdate(cvrEvent, controls.cvrControl);
           if (newCvr === dataResponsible.cvr) return;
 
           const email = useEmailFromDropdown ? controls.emailControlDropdown.value?.name : controls.emailControl.value;
@@ -263,7 +268,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     this.patchMasterDataRolesDataProtectionAdvisor(cvr);
   }
 
-  public patchMasterDataRolesDataProtectionAdvisor(newCvr: string | undefined = undefined) {
+  public patchMasterDataRolesDataProtectionAdvisor(cvrEvent: string | undefined = undefined) {
     if (this.dataProtectionAdvisorForm.valid) {
       this.subscriptions.add(
         this.organizationMasterDataRoles$.pipe(first()).subscribe((masterDataRoles) => {
@@ -271,7 +276,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           const dataProtectionAdvisorDto: APIDataProtectionAdvisorRequestDTO = {};
           const controls = this.dataProtectionAdvisorForm.controls;
 
-          if (newCvr === undefined) newCvr = controls.cvrControl.value ?? undefined;
+          const newCvr = this.getValidCvrUpdate(cvrEvent, controls.cvrControl);
           if (newCvr === dataProtectionAdvisor.cvr) return;
 
           dataProtectionAdvisorDto.address = controls.addressControl.value ?? undefined;
