@@ -4897,6 +4897,9 @@
       <trans-unit id="4766365470163586672" datatype="html">
         <source>Den markerede kontrakt er inaktiv</source>
       </trans-unit>
+      <trans-unit id="7473666767554000615" datatype="html">
+        <source>Gå til systemanvendelse</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

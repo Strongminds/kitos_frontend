@@ -6449,6 +6449,10 @@
         <source>Følgende gør databehandlingen inaktiv: </source>
         <target state="new">Følgende gør databehandlingen inaktiv: </target>
       </trans-unit>
+      <trans-unit id="7473666767554000615" datatype="html">
+        <source>Gå til systemanvendelse</source>
+        <target state="new">Gå til systemanvendelse</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
