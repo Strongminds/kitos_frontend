@@ -665,8 +665,14 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       )
       .replace(/BasisForTransferUuid eq '([\w-]+)'/, 'BasisForTransferUuid eq $1')
       .replace(/DataResponsibleUuid eq '([\w-]+)'/, 'DataResponsibleUuid eq $1')
-      .replace(/OversightOptionNamesAsCsv eq '([^']*)'/, "contains(OversightOptionNamesAsCsv, '$1')");
+      .replace(/OversightOptionNamesAsCsv eq '([^']*)'/, "contains(OversightOptionNamesAsCsv, '$1')")
+      .replace(/(TransferToInsecureThirdCountries)\s+eq\s+'(Undecided)'/, "$1 eq '$2' or $1 eq null");
   });
+
+  fixedOdataString = fixedOdataString.replace(
+    /TransferToInsecureThirdCountries eq 'Undecided'/,
+    "TransferToInsecureThirdCountries eq 'Undecided' or TransferToInsecureThirdCountries eq null"
+  );
 
   return fixedOdataString;
 }
