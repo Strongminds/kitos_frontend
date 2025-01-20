@@ -18,23 +18,6 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public disableRedirect = false;
   @Input() public itemPathIncludesSubmodule = false;
 
-  private setDetailsPagePath(resourceUrlSegment: string) {
-    let path = `/${resourceUrlSegment}/${this.itemPath}`;
-    if (this.subpagePath) {
-      path += `/${this.subpagePath}`;
-    }
-    this.detailsPageRouterPath = path;
-  }
-
-  private setDetailsPagePathWithSubmodule(resourceUrlSegment: string) {
-    if (this.itemPathIncludesSubmodule) {
-      const segmentWithoutSubmodule = resourceUrlSegment.split('/')[0];
-      this.setDetailsPagePath(segmentWithoutSubmodule);
-      return;
-    }
-    this.setDetailsPagePath(resourceUrlSegment);
-  }
-
   public ngOnInit(): void {
     const path = getDetailsPageLink(this.itemPath, this.itemType, this.subpagePath, this.itemPathIncludesSubmodule);
     if (path) {
