@@ -42,7 +42,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
         : this.updateFilter({
             field: this.column.field,
             operator: 'eq',
-            value: option.name,
+            value: option.id,
           })
     );
   }
