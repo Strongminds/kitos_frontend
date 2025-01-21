@@ -2,6 +2,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import { map, Subscription } from 'rxjs';
 import * as UsageFields from 'src/app/shared/constants/it-system-usage-grid-column-constants';
+import * as ContractFields from 'src/app/shared/constants/it-contracts-grid-column-constants';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
