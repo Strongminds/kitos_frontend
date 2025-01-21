@@ -88,14 +88,14 @@ export function initializeApplyFilterSubscription(
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function usageGridStateToAction(gridState: GridState): any {
   if (!gridState.filter) {
-    return ITSystemUsageActions.getITSystemUsages(toODataString(gridState), undefined);
+    return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }), undefined);
   }
   const filters = gridState.filter?.filters;
   const responsibleUnitFilter = filters.find((filter) => isResponsibleUnitFilter(filter)) as
     | FilterDescriptor
     | undefined;
   if (!responsibleUnitFilter) {
-    return ITSystemUsageActions.getITSystemUsages(toODataString(gridState), undefined);
+    return ITSystemUsageActions.getITSystemUsages(toODataString(gridState, { utcDates: true }), undefined);
   }
   const filtersWithoutResponsibleUnit = filters.filter((filter) => !isResponsibleUnitFilter(filter));
   const responsibleUnitUuid = responsibleUnitFilter?.value as string | undefined;
