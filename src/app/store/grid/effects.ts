@@ -5,7 +5,6 @@ import { mergeMap } from 'rxjs/operators';
 import { contractsGridStateToAction, usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from '../data-processing/actions';
-import { ITContractActions } from '../it-contract/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
 import { ITSystemActions } from '../it-system/actions';
 import { OrganizationActions } from '../organization/actions';
