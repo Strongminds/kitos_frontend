@@ -675,11 +675,7 @@ export class ITSystemUsageEffects {
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
   let convertedString = odataString
     .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(a: $1a/KLEId$2)')
-
-    convertedString = convertedString
     .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(b: $1b/KLEName$2)')
-
-    convertedString = convertedString
     .replace(
       new RegExp(`SensitiveDataLevelsAsCsv eq ('\\w+')`, 'i'),
       (_, p1) =>
@@ -702,9 +698,8 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
        )
     .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(h: $1h/ItContractName$2)')
     .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')
-    .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1');
-
-  convertedString = convertedString.replace(
+    .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1')
+    .replace(
     new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('[^']+')`, 'i'),
     'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'
   );
