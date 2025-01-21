@@ -36,7 +36,6 @@ import {
   selectOverviewSystemRolesCache,
   selectUsageGridColumns,
 } from './selectors';
-import { replaceDuplicateRangeVariables } from 'src/app/shared/helpers/odata-query.helpers';
 
 @Injectable()
 export class ITSystemUsageEffects {

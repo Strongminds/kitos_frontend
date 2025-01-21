@@ -14,7 +14,6 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
-import { replaceDuplicateRangeVariables } from 'src/app/shared/helpers/odata-query.helpers';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -223,10 +222,9 @@ function applyQueryFixes(odataString: string) {
   const objectOwnerColumn = 'ObjectOwner.Name';
   const nameColumn = 'Name';
 
-  odataString = odataString
+  return odataString
     .replace(getNameFilterPattern(objectOwnerColumn), `$1concat(concat(ObjectOwner/Name, ' '), ObjectOwner/LastName)$2`)
     .replace(getNameFilterPattern(nameColumn), `$1concat(concat(Name, ' '), LastName)$2`);
-  return replaceDuplicateRangeVariables(odataString);
 }
 
 function getNameFilterPattern(column: string) {
