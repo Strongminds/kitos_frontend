@@ -35,11 +35,9 @@ export function replaceDuplicateRangeVariables(odataString: string): string {
   const generateRangeVariable = () => `c${rangeVariableIndex++}`;
   const anyOrAllRegex = /(\/any|\/all)\((\w+):/g;
 
-  const defaultRangeVariable = 'c';
+  const existingRangeVariables = new Set<string>();
 
-  const existingRangeVariables = new Set<string>(defaultRangeVariable); //todo just added this to set for dev purpose
-
-  const firstPass = odataString.replace(anyOrAllRegex, (match, odataKeyword, rangeVariable, offset, fullString) => {
+  const firstPass = odataString.replace(anyOrAllRegex, (odataKeyword, rangeVariable) => {
     let newRangeVariable = rangeVariable;
 
     if (existingRangeVariables.has(rangeVariable)) {
