@@ -11,7 +11,7 @@ import {
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
-import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
+import { replaceDuplicateRangeVariables, replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -268,6 +268,6 @@ function applyQueryFixes(odataString: string): string {
     'LastChangedByUser',
     lastChangedByUserSearchedProperties
   );
-
+  fixedOdataString = replaceDuplicateRangeVariables(fixedOdataString);
   return fixedOdataString;
 }

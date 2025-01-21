@@ -18,7 +18,7 @@ import {
 } from 'src/app/api/v2';
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
-import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
+import { replaceDuplicateRangeVariables, replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
@@ -697,6 +697,7 @@ function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | unde
     lastChangedByUserSearchedProperties
   );
 
+  convertedString = replaceDuplicateRangeVariables(convertedString);
   return convertedString;
 }
 

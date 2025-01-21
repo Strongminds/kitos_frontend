@@ -30,6 +30,25 @@ export const replaceQueryByMultiplePropertyContains = (
   return filterUrl;
 };
 
+export function replaceDuplicateRangeVariables(odataString: string): string {
+  let rangeVariableIndex = 0;
+  const generateRangeVariable = () => `c${rangeVariableIndex++}`;
+  const nestedAnyOrAllRegex = /(\/any|\/all)\((\w+):/g;
+
+  const existingRangeVariables = new Set<string>();
+
+  return odataString.replace(nestedAnyOrAllRegex, (match, odataKeyword, rangeVariable) => {
+    if (existingRangeVariables.has(rangeVariable)) {
+      const newVariable = generateRangeVariable();
+      existingRangeVariables.add(newVariable);
+      return `${odataKeyword}(${newVariable}:`;
+    } else {
+      existingRangeVariables.add(rangeVariable);
+      return match;
+    }
+  });
+}
+
 export const replaceOptionQuery = (filterUrl: string, optionName: string, emptyOptionKey: number): string => {
   if (filterUrl.indexOf(optionName) === -1) {
     return filterUrl; // optionName not found in filter so return original filter. Can be updated to .includes() instead of .indexOf() in later typescript versions

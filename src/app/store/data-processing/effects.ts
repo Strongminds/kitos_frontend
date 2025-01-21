@@ -35,6 +35,7 @@ import {
 } from './selectors';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { replaceDuplicateRangeVariables } from 'src/app/shared/helpers/odata-query.helpers';
 
 @Injectable()
 export class DataProcessingEffects {
@@ -668,5 +669,6 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       .replace(/OversightOptionNamesAsCsv eq '([^']*)'/, "contains(OversightOptionNamesAsCsv, '$1')");
   });
 
+  fixedOdataString = replaceDuplicateRangeVariables(fixedOdataString);
   return fixedOdataString;
 }

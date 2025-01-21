@@ -18,6 +18,7 @@ import { UserActions } from '../user-store/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationActions } from './actions';
 import { selectHasValidUIRootConfigCache } from './selectors';
+import { replaceDuplicateRangeVariables } from 'src/app/shared/helpers/odata-query.helpers';
 
 @Injectable()
 export class OrganizationEffects {
@@ -238,5 +239,6 @@ export class OrganizationEffects {
 }
 
 function applyQueryFixes(odataString: string) {
-  return odataString.replaceAll('ForeignBusiness', 'ForeignCvr').replaceAll('OrganizationType', 'TypeId');
+  odataString = odataString.replaceAll('ForeignBusiness', 'ForeignCvr').replaceAll('OrganizationType', 'TypeId');
+  return replaceDuplicateRangeVariables(odataString);
 }
