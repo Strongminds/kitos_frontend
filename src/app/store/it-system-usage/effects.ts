@@ -675,8 +675,12 @@ export class ITSystemUsageEffects {
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
   let convertedString = odataString
-    .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEId$2)')
-    .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEName$2)')
+    .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(a: $1a/KLEId$2)')
+
+    convertedString = convertedString
+    .replace(/(\w+\()ItSystemKLENamesAsCsv(.*\))/, 'ItSystemTaskRefs/any(b: $1b/KLEName$2)')
+
+    convertedString = convertedString
     .replace(
       new RegExp(`SensitiveDataLevelsAsCsv eq ('\\w+')`, 'i'),
       (_, p1) =>
@@ -686,18 +690,18 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     )
     .replace(
       /(\w+\()DataProcessingRegistrationNamesAsCsv(.*\))/,
-      'DataProcessingRegistrations/any(c: $1c/DataProcessingRegistrationName$2)'
+      'DataProcessingRegistrations/any(d: $1d/DataProcessingRegistrationName$2)'
     )
-    .replace(/(\w+\()DependsOnInterfacesNamesAsCsv(.*\))/, 'DependsOnInterfaces/any(c: $1c/InterfaceName$2)')
+    .replace(/(\w+\()DependsOnInterfacesNamesAsCsv(.*\))/, 'DependsOnInterfaces/any(e: $1e/InterfaceName$2)')
     .replace(
       /(\w+\()IncomingRelatedItSystemUsagesNamesAsCsv(.*\))/,
-      'IncomingRelatedItSystemUsages/any(c: $1c/ItSystemUsageName$2)'
+      'IncomingRelatedItSystemUsages/any(f: $1f/ItSystemUsageName$2)'
     )
     .replace(
       new RegExp(`RelevantOrganizationUnitNamesAsCsv eq '(\\w+)'`, 'i'),
-      'RelevantOrganizationUnits/any(c: c/OrganizationUnitId eq $1)'
+      'RelevantOrganizationUnits/any(g: g/OrganizationUnitId eq $1)'
     )
-    .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(c: $1c/ItContractName$2)')
+    .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(h: $1h/ItContractName$2)')
     .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')
     .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1');
 
@@ -706,13 +710,13 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'
   );
 
+  //todo need separate var names for each role or not?
   systemRoles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
-      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
+      `RoleAssignments/any(i: $1i/UserFullName$2 and i/RoleId eq ${role.id})`
     );
   });
 
-  convertedString = replaceDuplicateRangeVariables(convertedString);
   return convertedString;
 }
