@@ -672,6 +672,27 @@ export class ITSystemUsageEffects {
   });
 }
 
+function handleDuplicateOdataRangeVariables(odataString: string): string {
+  let rangeVariableIndex = 0;
+
+  const generateRangeVariable = () => `c${rangeVariableIndex++}`;
+
+  const nestedAnyOrAllRegex = /(\/any|\/all)\((\w+):/g;
+
+  const existingRangeVariables = new Set<string>();
+
+  return odataString.replace(nestedAnyOrAllRegex, (match, odataKeyword, rangeVariable) => {
+    if (existingRangeVariables.has(rangeVariable)) {
+      const newVariable = generateRangeVariable();
+      existingRangeVariables.add(newVariable);
+      return `${odataKeyword}(${newVariable}:`;
+    } else {
+      existingRangeVariables.add(rangeVariable);
+      return match;
+    }
+  });
+}
+
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
   let convertedString = odataString
     .replace(/(\w+\()ItSystemKLEIdsAsCsv(.*\))/, 'ItSystemTaskRefs/any(c: $1c/KLEId$2)')
@@ -712,5 +733,6 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     );
   });
 
+  convertedString = handleDuplicateOdataRangeVariables(convertedString);
   return convertedString;
 }
