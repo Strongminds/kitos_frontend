@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
+import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from '../data-processing/actions';
 import { ITContractActions } from '../it-contract/actions';
@@ -10,7 +11,6 @@ import { ITSystemActions } from '../it-system/actions';
 import { OrganizationActions } from '../organization/actions';
 import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { GridExportActions } from './actions';
-import { convertUsageState } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Injectable()
 export class GridExportEffects {
@@ -26,7 +26,7 @@ export class GridExportEffects {
             const odataString = toODataString(gridState);
             switch (action.entityType) {
               case 'it-system-usage':
-                return of(convertUsageState(gridState));
+                return of(usageGridStateToAction(gridState));
               case 'it-system':
                 return of(ITSystemActions.getITSystems(odataString));
               case 'it-contract':

@@ -15,6 +15,7 @@ import {
 } from 'src/app/api/v2';
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -35,7 +36,6 @@ import {
   selectOverviewSystemRolesCache,
   selectUsageGridColumns,
 } from './selectors';
-import { convertUsageState } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -83,7 +83,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridState),
       map(({ gridState }) => {
-        return convertUsageState(gridState);
+        return usageGridStateToAction(gridState);
       })
     );
   });
