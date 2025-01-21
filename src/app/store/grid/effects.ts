@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { mergeMap } from 'rxjs/operators';
-import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
+import { contractsGridStateToAction, usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { DataProcessingActions } from '../data-processing/actions';
 import { ITContractActions } from '../it-contract/actions';
@@ -30,7 +30,7 @@ export class GridExportEffects {
               case 'it-system':
                 return of(ITSystemActions.getITSystems(odataString));
               case 'it-contract':
-                return of(ITContractActions.getITContracts(odataString));
+                return of(contractsGridStateToAction(gridState));
               case 'data-processing-registration':
                 return of(DataProcessingActions.getDataProcessings(odataString));
               case 'it-interface':
