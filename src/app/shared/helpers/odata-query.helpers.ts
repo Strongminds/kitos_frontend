@@ -33,20 +33,28 @@ export const replaceQueryByMultiplePropertyContains = (
 export function replaceDuplicateRangeVariables(odataString: string): string {
   let rangeVariableIndex = 0;
   const generateRangeVariable = () => `c${rangeVariableIndex++}`;
-  const nestedAnyOrAllRegex = /(\/any|\/all)\((\w+):/g;
+  const anyOrAllRegex = /(\/any|\/all)\((\w+):/g;
 
-  const existingRangeVariables = new Set<string>();
+  const defaultRangeVariable = 'c';
 
-  return odataString.replace(nestedAnyOrAllRegex, (match, odataKeyword, rangeVariable) => {
+  const existingRangeVariables = new Set<string>(defaultRangeVariable); //todo just added this to set for dev purpose
+
+  const firstPass = odataString.replace(anyOrAllRegex, (match, odataKeyword, rangeVariable, offset, fullString) => {
+    let newRangeVariable = rangeVariable;
+
     if (existingRangeVariables.has(rangeVariable)) {
-      const newVariable = generateRangeVariable();
-      existingRangeVariables.add(newVariable);
-      return `${odataKeyword}(${newVariable}:`;
-    } else {
-      existingRangeVariables.add(rangeVariable);
-      return match;
+      newRangeVariable = generateRangeVariable();
     }
+    existingRangeVariables.add(newRangeVariable);
+    return `${odataKeyword}(${newRangeVariable}:`;
   });
+  const regex = /any\(c(\d+): contains\(c\//g;
+
+  const secondPass = firstPass.replace(regex, (match, num) => {
+    return `any(c${num}: contains(c${num}/`;
+  });
+
+  return secondPass;
 }
 
 export const replaceOptionQuery = (filterUrl: string, optionName: string, emptyOptionKey: number): string => {
