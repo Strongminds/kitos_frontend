@@ -85,6 +85,7 @@ export function initializeApplyFilterSubscription(
  * Usage has a filter for responsible unit. Unlike the other filters, this value is query parameter, and needs to be handled differently.
  * The this method takes a gridState, and extracts the responsible unit filter, and returns an action for fetching the appropiate data for usages.
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function usageGridStateToAction(gridState: GridState): any {
   if (!gridState.filter) {
     return ITSystemUsageActions.getITSystemUsages(toODataString(gridState), undefined);
