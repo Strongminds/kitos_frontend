@@ -1,4 +1,7 @@
-<div class="grid-container" [style.grid-template-columns]="'repeat(' + numColumns + ', 1fr)'">
+<div
+  class="grid-container"
+  [style.grid-template-columns]="'repeat(' + numColumns + ', 1fr)'"
+  [ngClass]="{ 'with-gap': noGap === false }"
+>
   <ng-content></ng-content>
 </div>
-
