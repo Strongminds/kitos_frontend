@@ -704,7 +704,6 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'
   );
 
-  //todo need separate var names for each role or not?
   systemRoles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
