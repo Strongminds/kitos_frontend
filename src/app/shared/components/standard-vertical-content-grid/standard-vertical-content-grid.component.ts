@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class StandardVerticalContentGridComponent {
   @Input() numColumns = 1;
-  @Input() noGap = false;
+  @Input() withGap = true;
 }

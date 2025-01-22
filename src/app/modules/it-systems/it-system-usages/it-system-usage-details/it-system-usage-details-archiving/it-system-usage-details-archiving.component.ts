@@ -246,8 +246,10 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
             documentBearing: archive.documentBearing,
           });
 
-          if (hasModifyPermission) {
+          if (hasModifyPermission && archive.archiveDuty) {
             this.archiveForm.enable();
+          } else if (hasModifyPermission && !archive.archiveDuty) {
+            this.archiveForm.controls.archiveDuty.enable();
           } else {
             this.archiveForm.disable();
           }
