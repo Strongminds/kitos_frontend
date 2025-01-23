@@ -14,6 +14,7 @@ export interface GridDataCacheChunk {
   providedIn: 'root',
 })
 export class GridDataCacheService {
+
   private cache: GridDataCache = {
     chunks: [],
     total: 0,
@@ -55,10 +56,16 @@ export class GridDataCacheService {
   }
 
   public reset() {
-    this.cache = {
-      chunks: [],
-      total: 0,
-    };
+    if (!this.isEmpty()){
+      this.cache = {
+        chunks: [],
+        total: 0,
+      };
+    }
+  }
+
+  private isEmpty(){
+    return this.cache.chunks.length === 0 && this.cache.total === 0;
   }
 
   public getTotal() {

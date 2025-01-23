@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, interval, map, merge, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -57,6 +57,16 @@ export class ITSystemUsageEffects {
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
     private gridDataCacheService: GridDataCacheService
   ) {}
+
+  private readonly twoMinutes = 120000;
+
+  invalidateGridDataCache$ = createEffect(() => {
+    return interval(this.twoMinutes)
+      .pipe(map(() => {
+        this.gridDataCacheService.reset();
+        return ITSystemUsageActions.invalidateGridDataCacheSuccess();
+      }))
+  });
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
