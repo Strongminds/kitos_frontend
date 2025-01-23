@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GridState } from '../models/grid-state.model';
 
 interface GridDataCache {
   chunks: (GridDataCacheChunk | undefined)[];
@@ -56,6 +57,7 @@ export class GridDataCacheService {
   }
 
   public reset() {
+    console.log('cahce resetting at ' + new Date().toLocaleTimeString());
     if (!this.isEmpty()){
       this.cache = {
         chunks: [],
@@ -70,5 +72,37 @@ export class GridDataCacheService {
 
   public getTotal() {
     return this.cache.total;
+  }
+
+  public shouldResetOnGridStateChange(newState: GridState, previousState: GridState){
+    //todo make more concise with json stringify loop?
+
+    // Compare 'take'
+    if (newState.take !== previousState.take) {
+      return true;
+    }
+
+    // Compare 'all'
+    if (newState.all !== previousState.all) {
+      return true;
+    }
+
+    // Compare 'sort'
+    if (JSON.stringify(newState.sort) !== JSON.stringify(previousState.sort)) {
+      return true;
+    }
+
+    // Compare 'filter'
+    if (JSON.stringify(newState.filter) !== JSON.stringify(previousState.filter)) {
+      return true;
+    }
+
+    // Compare 'group'
+    if (JSON.stringify(newState.group) !== JSON.stringify(previousState.group)) {
+      return true;
+    }
+
+    // If none of the properties other than 'skip' differ, return false
+    return false;
   }
 }

@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, interval, map, merge, mergeMap, of, switchMap, tap } from 'rxjs';
+import { catchError, interval, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -28,6 +28,7 @@ import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
+  selectGridState,
   selectItSystemUsageExternalReferences,
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
@@ -36,6 +37,7 @@ import {
   selectItSystemUsageUuid,
   selectOverviewSystemRoles,
   selectOverviewSystemRolesCache,
+  selectPreviousGridState,
   selectUsageGridColumns,
 } from './selectors';
 
@@ -61,23 +63,35 @@ export class ITSystemUsageEffects {
   private readonly twoMinutes = 120000;
 
   invalidateGridDataCache$ = createEffect(() => {
-    return interval(this.twoMinutes)
-      .pipe(map(() => {
+    return interval(this.twoMinutes).pipe(
+      map(() => {
         this.gridDataCacheService.reset();
         return ITSystemUsageActions.invalidateGridDataCacheSuccess();
-      }))
+      })
+    );
   });
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsages),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewSystemRoles)]),
-      switchMap(([{ odataString, responsibleUnitUuid, gridState }, organizationUuid, systemRoles]) => {
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewSystemRoles),
+        this.store.select(selectPreviousGridState)]),
+      switchMap(([{ odataString, responsibleUnitUuid, gridState }, organizationUuid, systemRoles, previousGridState]) => {
+
+        console.log(JSON.stringify(gridState) + '  is curr + prev gridstate ' + JSON.stringify(previousGridState))
+        //todo turn below into tryResetCache(new, prev) so cacheService handles the bool logic
+        if (this.gridDataCacheService.shouldResetOnGridStateChange(gridState!, previousGridState)) {
+          console.log('triggered by state change')
+          this.gridDataCacheService.reset();
+        }
+
         const skip = gridState?.skip ?? 0;
         const take = gridState?.take ?? 0;
 
+        console.log(JSON.stringify(gridState) + '  is gridstate in get effect')
+
         const chunkSkip = Math.floor(skip / 50) * 50; //todo expose these conversions from cache service so clients dont need to know chunksize
-          //also consider taking skip and take as args to cache.get() so service handles extracting range from chunks
+        //also consider taking skip and take as args to cache.get() so service handles extracting range from chunks
         const chunkTake = Math.ceil((skip + take) / 50) * 50 - chunkSkip;
 
         const chunkIndexStart = chunkSkip / 50;
@@ -86,6 +100,7 @@ export class ITSystemUsageEffects {
         const cachedData = this.gridDataCacheService.get(chunkIndexStart, chunkCount);
 
         if (cachedData !== undefined) {
+          console.log('using cache')
           const startReturnData = skip - chunkSkip;
           const endReturnSlice = startReturnData + take;
           const data = cachedData.slice(startReturnData, endReturnSlice);
@@ -109,6 +124,8 @@ export class ITSystemUsageEffects {
           )
           .pipe(
             map((data) => {
+              console.log('using api')
+
               const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
               const total = data['@odata.count'];
               this.gridDataCacheService.set(chunkIndexStart, dataItems, total);
@@ -141,7 +158,7 @@ export class ITSystemUsageEffects {
         return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
       })
     );
-  })
+  });
 
   getItSystemUsageOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
