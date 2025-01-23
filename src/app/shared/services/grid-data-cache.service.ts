@@ -37,10 +37,12 @@ export class GridDataCacheService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public set(index: number, count: number, data: any[]){
-    while (index < count / 50){
+    let currentPass = 0;
+    const passesToDo = count / 50;
+    while (currentPass < passesToDo){
       this.cache[index] = {
-        skip: index * 50,
-        data: data.slice(index * 50, ++index * 50)
+        skip: index++ * 50,
+        data: data.slice(currentPass * 50, ++currentPass * 50)
       };
     }
     console.log('done')
