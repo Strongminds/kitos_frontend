@@ -18,10 +18,10 @@
   (columnResize)="onResizeChange($event, columns)"
   (excelExport)="onExcelExport($event)"
   [rowHeight]="gridRowHeight"
+  scrollable="virtual"
   style="width: 100%"
   *ngIf="columns$ | async as columns"
 >
-  <!-- scrollable="virtual" -->
   <ng-container *ngFor="let column of columns">
     <ng-container *ngIf="uiConfigApplications$ === null || (uiConfigApplications$ | async) as uiConfigApplications">
       <kendo-grid-column
@@ -335,9 +335,12 @@
     </div>
   </ng-template>
   <ng-template kendoGridNoRecordsTemplate>
-    <div class="sticky-empty-state">
-      <img src="assets/img/empty-system.svg" />
-      <p i18n>Din søgning gav intet resultat</p>
+    <!-- The empty state fails due to the transform: translateY(0px) style on the table -->
+    <div class="sticky-empty-state-container">
+      <div class="sticky-empty-state">
+        <img src="assets/img/empty-system.svg" />
+        <p i18n>Din søgning gav intet resultat</p>
+      </div>
     </div>
   </ng-template>
 
