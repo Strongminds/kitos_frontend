@@ -18,10 +18,10 @@
   (columnResize)="onResizeChange($event, columns)"
   (excelExport)="onExcelExport($event)"
   [rowHeight]="gridRowHeight"
-  scrollable="virtual"
   style="width: 100%"
   *ngIf="columns$ | async as columns"
 >
+  <!-- scrollable="virtual" -->
   <ng-container *ngFor="let column of columns">
     <ng-container *ngIf="uiConfigApplications$ === null || (uiConfigApplications$ | async) as uiConfigApplications">
       <kendo-grid-column

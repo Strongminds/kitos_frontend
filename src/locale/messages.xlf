@@ -1618,9 +1618,6 @@
       <trans-unit id="6596251357335554776" datatype="html">
         <source>Databehandling status</source>
       </trans-unit>
-      <trans-unit id="5993805561016422745" datatype="html">
-        <source>Sidst ændret ID</source>
-      </trans-unit>
       <trans-unit id="8301908070745025965" datatype="html">
         <source>Sidst ændret dato</source>
       </trans-unit>
@@ -2497,9 +2494,6 @@
       <trans-unit id="2771143625208565970" datatype="html">
         <source>Er du sikker på, at du vil gendanne den nedarvede opgave?</source>
       </trans-unit>
-      <trans-unit id="2215280136136225166" datatype="html">
-        <source>Vælg relevante organisationsenheder</source>
-      </trans-unit>
       <trans-unit id="8110069076489111551" datatype="html">
         <source>Relevant organisationsenhed tilføjet</source>
       </trans-unit>
@@ -3104,8 +3098,8 @@
       <trans-unit id="5971174733845305410" datatype="html">
         <source>Organisationer der anvender snitfladen: </source>
       </trans-unit>
-      <trans-unit id="7036234166279182867" datatype="html">
-        <source>Anveldelser af </source>
+      <trans-unit id="176817350007584756" datatype="html">
+        <source>Anvendelser af </source>
       </trans-unit>
       <trans-unit id="7256302874737708702" datatype="html">
         <source>Fra og med</source>

@@ -365,10 +365,6 @@
         <source>Tilpas kolonner</source>
         <target state="new">Tilpas kolonner</target>
       </trans-unit>
-      <trans-unit id="5993805561016422745" datatype="html">
-        <source>Sidst ændret ID</source>
-        <target state="new">Sidst ændret ID</target>
-      </trans-unit>
       <trans-unit id="4248719406441251270" datatype="html">
         <source>IT System information</source>
         <target state="new">IT System information</target>
@@ -992,10 +988,6 @@
       <trans-unit id="2771143625208565970" datatype="html">
         <source>Er du sikker på, at du vil gendanne den nedarvede opgave?</source>
         <target state="new">Er du sikker på, at du vil gendanne den nedarvede opgave?</target>
-      </trans-unit>
-      <trans-unit id="2215280136136225166" datatype="html">
-        <source>Vælg relevante organisationsenheder</source>
-        <target state="new">Vælg relevante organisationsenheder</target>
       </trans-unit>
       <trans-unit id="15293030230281939" datatype="html">
         <source>Tilføj</source>
@@ -4155,9 +4147,9 @@
         <source>Organisationer der anvender snitfladen: </source>
         <target state="new">Organisationer der anvender snitfladen: </target>
       </trans-unit>
-      <trans-unit id="7036234166279182867" datatype="html">
-        <source>Anveldelser af </source>
-        <target state="new">Anveldelser af </target>
+      <trans-unit id="176817350007584756" datatype="html">
+        <source>Anvendelser af </source>
+        <target state="new">Anvendelser af </target>
       </trans-unit>
       <trans-unit id="6475857440782400398" datatype="html">
         <source>Filtre og sortering gemt</source>
