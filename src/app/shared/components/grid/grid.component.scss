@@ -14,3 +14,13 @@
   left: 50%;
   z-index: 1000; /* Ensure it is above other content */
 }
+
+.toolbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.number-container {
+  padding-right: $padding-large;
+}

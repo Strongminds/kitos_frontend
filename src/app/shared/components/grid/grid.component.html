@@ -353,6 +353,8 @@
   </kendo-grid-excel>
 
   <ng-template kendoGridToolbarTemplate position="bottom">
-    {{totalDataAmount()}} resultater
+    <div class="toolbar-container">
+      <div i18n class="number-container">{{ totalDataAmount() }} resultater</div>
+    </div>
   </ng-template>
 </kendo-grid>
