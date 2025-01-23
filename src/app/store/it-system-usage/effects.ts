@@ -81,8 +81,8 @@ export class ITSystemUsageEffects {
 
         if (cachedDataChunks !== undefined){
           const data = cachedDataChunks.slice(skip, skip + take);
-          //todo the default version returns complete length probably for total, need to do that here too
-          return of(ITSystemUsageActions.getITSystemUsagesSuccess(data, data.length));
+          //todo the default version returns complete length for virtual scrolling, need to do that here too
+          return of(ITSystemUsageActions.getITSystemUsagesSuccess(data, 300));
         }
 
         //if not, call api with skip 0 take 100
@@ -107,7 +107,9 @@ export class ITSystemUsageEffects {
               const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
               this.gridDataCacheService.set(chunkIndexStart, dataItems.length, dataItems);
 
-              const returnData = dataItems.slice(skip, skip + take);
+              const startReturnData = skip - chunkSkip;
+              const endReturnData = startReturnData + take;
+              const returnData = dataItems.slice(startReturnData, endReturnData);
               return ITSystemUsageActions.getITSystemUsagesSuccess(
                 returnData,
                 data['@odata.count']

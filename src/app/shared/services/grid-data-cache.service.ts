@@ -40,9 +40,8 @@ export class GridDataCacheService {
     while (index < count / 50){
       this.cache[index] = {
         skip: index * 50,
-        data: data.slice(index * 50, (index + 1) * 50)
+        data: data.slice(index * 50, ++index * 50)
       };
-      index++;
     }
     console.log('done')
   }
