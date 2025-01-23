@@ -63,32 +63,26 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.getITSystemUsages),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewSystemRoles)]),
       switchMap(([{ odataString, responsibleUnitUuid, gridState }, organizationUuid, systemRoles]) => {
-        // grab skip and take
         const skip = gridState?.skip ?? 0;
         const take = gridState?.take ?? 0;
 
-        //convert skip and take into a chunkSize-divisible range that wraps them so if it's skip 12 take 70 it will get 0-140,
-        //ie call odata with skip 0 and take 100
-        const chunkSkip = Math.floor(skip / 50) * 50;
+        const chunkSkip = Math.floor(skip / 50) * 50; //todo expose these conversions from cache service so clients dont need to know chunksize
+          //also consider taking skip and take as args to cache.get() so service handles extracting range from chunks
         const chunkTake = Math.ceil((skip + take) / 50) * 50 - chunkSkip;
 
         const chunkIndexStart = chunkSkip / 50;
         const chunkCount = chunkTake / 50;
-        //ask cacheservice if it has the data for 0-50 and 50-100.
-        // if it does, get it as a concatenated array and return the range 12-82 from that array to be set into visual store
-        //if it doesnt have the full range ignore the cache and call api
-        const cachedDataChunks = this.gridDataCacheService.get(chunkIndexStart, chunkCount);
 
-        if (cachedDataChunks !== undefined) {
+        const cachedData = this.gridDataCacheService.get(chunkIndexStart, chunkCount);
+
+        if (cachedData !== undefined) {
           const startReturnData = skip - chunkSkip;
           const endReturnSlice = startReturnData + take;
-          const data = cachedDataChunks.slice(startReturnData, endReturnSlice);
-          //todo the default version returns complete length for virtual scrolling, need to do that here too
-          //maybe by also caching the totalcount the first time api runs or even each time
-          return of(ITSystemUsageActions.getITSystemUsagesSuccess(data, 300));
-        }
+          const data = cachedData.slice(startReturnData, endReturnSlice);
+          const total = this.gridDataCacheService.getTotal();
 
-        //if not, call api with skip 0 take 100
+          return of(ITSystemUsageActions.getITSystemUsagesSuccess(data, total));
+        }
 
         const newGridState = {
           ...gridState,
@@ -96,8 +90,6 @@ export class ITSystemUsageEffects {
           take: chunkTake,
         };
         const newOdataString = toODataString(newGridState, { utcDates: true });
-        //then set chunks at index 0+1 in cache with the retrieved data
-        //this effect returns the range 12-82 from the retrieved data to be set into visual store
 
         const convertedString = applyQueryFixes(newOdataString, systemRoles);
         //const convertedString = applyQueryFixes(odataString, systemRoles);
@@ -108,12 +100,13 @@ export class ITSystemUsageEffects {
           .pipe(
             map((data) => {
               const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
-              this.gridDataCacheService.set(chunkIndexStart, dataItems);
+              const total = data['@odata.count'];
+              this.gridDataCacheService.set(chunkIndexStart, dataItems, total);
 
               const startReturnData = skip - chunkSkip;
               const endReturnData = startReturnData + take;
               const returnData = dataItems.slice(startReturnData, endReturnData);
-              return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, data['@odata.count']);
+              return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
             }),
             catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
           );
@@ -138,7 +131,7 @@ export class ITSystemUsageEffects {
         return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
       })
     );
-  });
+  })
 
   getItSystemUsageOverviewRoles = createEffect(() => {
     return this.actions$.pipe(
