@@ -20,7 +20,7 @@ export class GridDataCacheService {
   public get(startIndex: number, chunkCount: number){
     if (this.cache.length === 0) return undefined;
     //todo if any undefineds in the chunk slice, return undef
-    const chunksInSlice = this.cache.slice(startIndex, startIndex + chunkCount);
+    const chunksInSlice = this.cache.slice(startIndex, startIndex + chunkCount).filter(chunk => chunk !== undefined);
 
     if (chunksInSlice.length !== chunkCount) return undefined;
 
