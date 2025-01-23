@@ -66,17 +66,15 @@ export class ITSystemUsageEffects {
         const skip = gridState?.skip ?? 0;
         const take = gridState?.take ?? 0;
 
-        const chunkSkip = Math.floor(skip / 50) * 50; //todo expose these conversions from cache service so clients dont need to know chunksize
-          //also consider taking skip and take as args to cache.get() so service handles extracting range from chunks
-        const chunkTake = Math.ceil((skip + take) / 50) * 50 - chunkSkip;
+        const chunkGridState = this.gridDataCacheService.adaptGridStateToChunkSize(gridState);
 
-        const chunkIndexStart = chunkSkip / 50;
-        const chunkCount = chunkTake / 50;
+        const chunkIndexStart = chunkGridState.skip / 50;
+        const chunkCount = chunkGridState.take / 50;
 
         const cachedData = this.gridDataCacheService.get(chunkIndexStart, chunkCount);
 
         if (cachedData !== undefined) {
-          const startReturnData = skip - chunkSkip;
+          const startReturnData = skip - chunkGridState.skip;
           const endReturnSlice = startReturnData + take;
           const data = cachedData.slice(startReturnData, endReturnSlice);
           const total = this.gridDataCacheService.getTotal();
@@ -84,12 +82,8 @@ export class ITSystemUsageEffects {
           return of(ITSystemUsageActions.getITSystemUsagesSuccess(data, total));
         }
 
-        const newGridState = {
-          ...gridState,
-          skip: chunkSkip,
-          take: chunkTake,
-        };
-        const newOdataString = toODataString(newGridState, { utcDates: true });
+
+        const newOdataString = toODataString(chunkGridState, { utcDates: true });
 
         const convertedString = applyQueryFixes(newOdataString, systemRoles);
         //const convertedString = applyQueryFixes(odataString, systemRoles);
@@ -103,7 +97,7 @@ export class ITSystemUsageEffects {
               const total = data['@odata.count'];
               this.gridDataCacheService.set(chunkIndexStart, dataItems, total);
 
-              const startReturnData = skip - chunkSkip;
+              const startReturnData = skip - chunkGridState.skip;
               const endReturnData = startReturnData + take;
               const returnData = dataItems.slice(startReturnData, endReturnData);
               return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);

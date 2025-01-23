@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { GridState } from '../models/grid-state.model';
 
 interface GridDataCache {
   chunks: (GridDataCacheChunk | undefined)[];
@@ -63,5 +64,23 @@ export class GridDataCacheService {
 
   public getTotal() {
     return this.cache.total;
+  }
+
+  public adaptGridStateToChunkSize(gridState: GridState | undefined) {
+    if (gridState === undefined) return { skip: 0, take: 0 }; //todo handle this better when gridState arg on getUsages action becomes mandatory instead of odatastring
+
+    const skip = gridState?.skip ?? 0;
+    const take = gridState?.take ?? 0;
+    const chunkSkip = Math.floor(skip / 50) * 50;
+    const chunkTake = Math.ceil((skip + take) / 50) * 50 - chunkSkip;
+
+    const chunkIndexStart = chunkSkip / 50;
+    const chunkCount = chunkTake / 50;
+
+    return {
+      ...gridState,
+      skip: chunkSkip,
+      take: chunkTake,
+    };
   }
 }
