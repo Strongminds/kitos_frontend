@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { chunk } from 'cypress/types/lodash';
 
 
 export interface GridDataCacheChunk{
@@ -20,6 +21,9 @@ export class GridDataCacheService {
     if (this.cache.length === 0) return undefined;
     //todo if any undefineds in the chunk slice, return undef
     const chunksInSlice = this.cache.slice(startIndex, startIndex + chunkCount);
+
+    if (chunksInSlice.length !== chunkCount) return undefined;
+
     const concatenatedData = [];
 
     for(const chunk of chunksInSlice){
@@ -36,9 +40,11 @@ export class GridDataCacheService {
     while (index < count / 50){
       this.cache[index] = {
         skip: index * 50,
-        data: data.slice(index * 50, index++ * 50)
+        data: data.slice(index * 50, (index + 1) * 50)
       };
+      index++;
     }
+    console.log('done')
   }
 
   public reset(){
