@@ -17,7 +17,7 @@ import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-cons
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
-import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
+import { adaptITSystemUsage, ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
@@ -36,6 +36,8 @@ import {
   selectOverviewSystemRolesCache,
   selectUsageGridColumns,
 } from './selectors';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
+import { toODataString } from 'src/app/shared/models/grid-state.model';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -52,26 +54,64 @@ export class ITSystemUsageEffects {
     @Inject(APIV1ItSystemUsageOptionsINTERNALService)
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService
+    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsages),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectOverviewSystemRoles)]),
-      switchMap(([{ odataString, responsibleUnitUuid }, organizationUuid, systemRoles]) => {
-        //Redirect consolidated field search towards optimized search targets
-        const convertedString = applyQueryFixes(odataString, systemRoles);
+      switchMap(([{ odataString, responsibleUnitUuid, gridState }, organizationUuid, systemRoles]) => {
+        // grab skip and take
+        const skip = gridState?.skip ?? 0;
+        const take = gridState?.take ?? 0;
+
+        //convert skip and take into a chunkSize-divisible range that wraps them so if it's skip 12 take 70 it will get 0-140,
+        //ie call odata with skip 0 and take 100
+        const chunkSkip = Math.floor(skip / 50) * 50;
+        const chunkTake = Math.ceil((skip + take) / 50) * 50 - chunkSkip;
+
+        const chunkIndexStart = chunkSkip / 50;
+        const chunkCount = chunkTake / 50;
+        //ask cacheservice if it has the data for 0-50 and 50-100.
+        // if it does, get it as a concatenated array and return the range 12-82 from that array to be set into visual store
+          //if it doesnt have the full range ignore the cache and call api
+        const cachedDataChunks = this.gridDataCacheService.get(chunkIndexStart, chunkCount);
+
+        if (cachedDataChunks !== undefined){
+          const data = cachedDataChunks.slice(skip, skip + take);
+          //todo the default version returns complete length probably for total, need to do that here too
+          return of(ITSystemUsageActions.getITSystemUsagesSuccess(data, data.length));
+        }
+
+        //if not, call api with skip 0 take 100
+
+        const newGridState = {
+          ...gridState,
+          skip: chunkSkip,
+          take: chunkTake
+        }
+        const newOdataString = toODataString(newGridState, { utcDates: true });
+        //then set chunks at index 0+1 in cache with the retrieved data
+        //this effect returns the range 12-82 from the retrieved data to be set into visual store
+
+        const convertedString = applyQueryFixes(newOdataString, systemRoles);
+        //const convertedString = applyQueryFixes(odataString, systemRoles);
         return this.httpClient
           .get<OData>(
             `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${convertedString}&$count=true`
           )
           .pipe(
-            map((data) =>
-              ITSystemUsageActions.getITSystemUsagesSuccess(
-                compact(data.value.map(adaptITSystemUsage)),
+            map((data) =>{
+              const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
+              this.gridDataCacheService.set(chunkIndexStart, dataItems.length, dataItems);
+
+              const returnData = dataItems.slice(skip, skip + take);
+              return ITSystemUsageActions.getITSystemUsagesSuccess(
+                returnData,
                 data['@odata.count']
-              )
+              )}
             ),
             catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
           );
