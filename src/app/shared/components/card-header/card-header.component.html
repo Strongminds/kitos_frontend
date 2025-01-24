@@ -1,4 +1,7 @@
 <h6>{{ title }}</h6>
 <ng-content></ng-content>
 <span *ngIf="spacer" class="space"></span>
+<app-button *ngIf="extraButtonTitle" (buttonClick)="extraButtonClicked.emit()" data-cy="extra-header-button">{{
+  extraButtonTitle
+}}</app-button>
 <app-help-button *ngIf="helpTextKey" [helpTextKey]="helpTextKey" data-cy="help-button"></app-help-button>
