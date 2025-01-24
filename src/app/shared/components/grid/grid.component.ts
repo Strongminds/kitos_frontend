@@ -272,15 +272,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     }
     const processedData = process(this.data.data, { skip: 0, take: this.data.total });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    let exportColumns: GridColumn[] = [];
+    let formattedData: any[] = [];
     this.getFilteredExportColumns$()
       .pipe(first())
       .subscribe((columns) => {
-        exportColumns = columns;
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        formattedData = processedData.data.map((item: any) => transformRow(item, columns)); //NOTE: How to handle this properly?
       });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const formattedData = processedData.data.map((item: any) => transformRow(item, exportColumns));
-
     return { data: formattedData };
   }
 

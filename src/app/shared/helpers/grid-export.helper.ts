@@ -4,6 +4,12 @@ export function includedColumnInExport(column: GridColumn): boolean {
   return column.style !== 'action-buttons' && !column.disabledByUIConfig;
 }
 
+/**
+ * @param item An item representiung a row in the grid
+ * @param exportColumns The columns to be exported
+ * @returns The row with the column values transformed into something appropiate for the export
+ */
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function transformRow(item: any, exportColumns: GridColumn[]): any {
   const transformedItem = { ...item };
   exportColumns.forEach((column) => {
@@ -49,6 +55,9 @@ export function transformRow(item: any, exportColumns: GridColumn[]): any {
             const usages = transformedItem[column.field as string];
             transformedItem[field] = usages.length;
           }
+          break;
+        case 'title-link':
+          transformedItem[field] = transformedItem[column.idField ?? ''];
           break;
         default:
           break;
