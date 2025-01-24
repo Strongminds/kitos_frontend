@@ -24,7 +24,6 @@ export class RichTextEditorComponent {
 
   constructor(private readonly rootUrlResolver: AppRootUrlResolverService) {
     this.rootUrl = this.rootUrlResolver.resolveRootUrl();
-
   }
 
   writeValue(value: any): void {
