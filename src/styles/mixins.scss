@@ -445,6 +445,10 @@
       }
     }
 
+    table {
+      transform: none !important;
+    }
+
     .k-column-title {
       color: $color-primary-dark;
     }
