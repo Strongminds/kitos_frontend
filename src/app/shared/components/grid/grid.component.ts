@@ -278,6 +278,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       .subscribe((columns) => {
         exportColumns = columns;
       });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const formattedData = processedData.data.map((item: any) => transformRow(item, exportColumns));
 
     return { data: formattedData };

@@ -57,7 +57,3 @@ export function transformRow(item: any, exportColumns: GridColumn[]): any {
   });
   return transformedItem;
 }
-
-export function getValueToExport(gridColumn: GridColumn, item: any): string {
-  return "";
-}
