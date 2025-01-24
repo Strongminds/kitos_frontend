@@ -149,6 +149,8 @@ export class GdprOverviewComponent {
       field: GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION_NAME,
       title: $localize`Dokumentation til teknisk foranstaltning`,
       hidden: false,
+      style: 'title-link',
+      idField: GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION, //BEFORE MERGING: REMEMBER TO HANDLE EXPORT
     },
     {
       field: GdprFields.USER_SUPERVISION,
@@ -161,6 +163,8 @@ export class GdprOverviewComponent {
       field: GdprFields.USER_SUPERVISION_DOCUMENTATION_NAME,
       title: $localize`Dokumentation til brugerkontrol`,
       hidden: false,
+      style: 'title-link',
+      idField: GdprFields.USER_SUPERVISION_DOCUMENTATION, 
     },
     {
       field: GdprFields.NEXT_DATA_RETENTION_EVALUATION_DATE,
