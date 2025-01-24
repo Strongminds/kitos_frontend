@@ -132,6 +132,13 @@ export class GdprOverviewComponent {
       extraFilter: 'enum',
     },
     {
+      field: GdprFields.DPIA_DATE,
+      title: $localize`Dato for seneste DPIA / Konsekvensanalyse`,
+      hidden: false,
+      style: 'date',
+      width: 350,
+    },
+    {
       field: GdprFields.HOSTED_AT_NAME,
       title: $localize`IT-Systemet driftes`,
       hidden: false,

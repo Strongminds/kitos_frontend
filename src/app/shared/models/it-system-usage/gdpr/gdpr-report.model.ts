@@ -22,7 +22,14 @@ export interface GdprReport {
   personalDataSocialProblems?: boolean;
   personalDataSocialOtherPrivateMatters?: boolean;
   dpia?: YesNoDontKnowOptions;
+  dpiaDate?: string;
   hostedAt?: HostedAt;
+  technicalSupervisionDocumentationUrl?: string;
+  technicalSupervisionDocumentationUrlName?: string;
+  userSupervision?: YesNoDontKnowOptions;
+  userSupervisionDocumentationUrl?: string;
+  userSupervisionDocumentationUrlName?: string;
+  nextDataRetentionEvaluationDate?: string;
 }
 
 export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
