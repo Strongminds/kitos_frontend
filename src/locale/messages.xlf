@@ -4900,6 +4900,9 @@
       <trans-unit id="7610119555318059028" datatype="html">
         <source>DPIA gennemført</source>
       </trans-unit>
+      <trans-unit id="3415736924888217227" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

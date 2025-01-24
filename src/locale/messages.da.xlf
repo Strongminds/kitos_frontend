@@ -6445,6 +6445,10 @@
         <source>Gå til systemanvendelse</source>
         <target state="new">Gå til systemanvendelse</target>
       </trans-unit>
+      <trans-unit id="3415736924888217227" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</source>
+        <target state="new"><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</target>
+      </trans-unit>
       <trans-unit id="7610119555318059028" datatype="html">
         <source>DPIA gennemført</source>
         <target state="new">DPIA gennemført</target>
