@@ -145,6 +145,29 @@ export class GdprOverviewComponent {
       extraData: hostedAtOptions,
       extraFilter: 'enum',
     },
+    {
+      field: GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION_NAME,
+      title: $localize`Dokumentation til teknisk foranstaltning`,
+      hidden: false,
+    },
+    {
+      field: GdprFields.USER_SUPERVISION,
+      title: $localize`Brugerkontrol`,
+      hidden: false,
+      extraData: yesNoDontKnowOptions,
+      extraFilter: 'enum',
+    },
+    {
+      field: GdprFields.USER_SUPERVISION_DOCUMENTATION_NAME,
+      title: $localize`Dokumentation til brugerkontrol`,
+      hidden: false,
+    },
+    {
+      field: GdprFields.NEXT_DATA_RETENTION_EVALUATION_DATE,
+      title: $localize`Dato for hvornår næste gang data må slettes`,
+      hidden: false,
+      style: 'date',
+    },
   ];
 
   public readonly filteredGridColumns$ = of(this.gridColumns).pipe(

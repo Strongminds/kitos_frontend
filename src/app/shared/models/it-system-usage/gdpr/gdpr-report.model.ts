@@ -53,6 +53,21 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     personalDataSocialProblems: dto.personalDataSocialProblems,
     personalDataSocialOtherPrivateMatters: dto.personalDataSocialOtherPrivateMatters,
     dpia: mapToYesNoDontKnowEnum(dto.dpia),
+    dpiaDate: TEMP(dto).dpiaDate,
     hostedAt: mapHostedAt(dto.hostedAt),
+    technicalSupervisionDocumentationUrl: TEMP(dto).technicalSupervisionDocumentationUrl,
+    technicalSupervisionDocumentationUrlName: TEMP(dto).technicalSupervisionDocumentationUrlName,
+    userSupervision: mapToYesNoDontKnowEnum(TEMP(dto).userSupervision),
+    userSupervisionDocumentationUrl: TEMP(dto).userSupervisionDocumentationUrl,
+    userSupervisionDocumentationUrlName: TEMP(dto).userSupervisionDocumentationUrlName,
+    nextDataRetentionEvaluationDate: TEMP(dto).nextDataRetentionEvaluationDate,
   };
+}
+
+/**
+ * Temporary function to handle the fact that the API response type is not updated. SHOULD BE REMOVED before merge
+ */
+//eslint-disable-next-line @typescript-eslint/no-explicit-any
+function TEMP(dto: APIGdprReportResponseDTO): any {
+  return dto;
 }
