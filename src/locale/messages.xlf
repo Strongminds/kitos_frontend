@@ -4894,6 +4894,9 @@
       <trans-unit id="7473666767554000615" datatype="html">
         <source>Gå til systemanvendelse</source>
       </trans-unit>
+      <trans-unit id="3415736924888217227" datatype="html">
+        <source><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
