@@ -79,7 +79,7 @@ export class ITSystemUsageEffects {
         this.store.select(selectPreviousGridState),
       ]),
       switchMap(
-        ([{ odataString, responsibleUnitUuid, gridState }, organizationUuid, systemRoles, previousGridState]) => {
+        ([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
           console.log(JSON.stringify(gridState) + '  is curr + prev gridstate ' + JSON.stringify(previousGridState));
           this.gridDataCacheService.tryResetOnGridStateChange(gridState!, previousGridState);
 
