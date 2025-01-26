@@ -78,62 +78,56 @@ export class ITSystemUsageEffects {
         this.store.select(selectOverviewSystemRoles),
         this.store.select(selectPreviousGridState),
       ]),
-      switchMap(
-        ([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
-          console.log(JSON.stringify(gridState) + '  is curr + prev gridstate ' + JSON.stringify(previousGridState));
-          this.gridDataCacheService.tryResetOnGridStateChange(gridState!, previousGridState);
+      switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
+        console.log(JSON.stringify(gridState) + '  is curr + prev gridstate ' + JSON.stringify(previousGridState));
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState!, previousGridState);
 
-          const skip = gridState?.skip ?? 0;
-          const take = gridState?.take ?? 0;
+        const skip = gridState?.skip ?? 0;
+        const take = gridState?.take ?? 0;
 
-          console.log(JSON.stringify(gridState) + '  is gridstate in get effect');
+        const chunkSkip = Math.floor(skip / 50) * 50; //todo expose these conversions from cache service so clients dont need to know chunksize
+        //also consider taking skip and take as args to cache.get() so service handles extracting range from chunks
+        const chunkTake = Math.ceil((skip + take) / 50) * 50 - chunkSkip;
 
-          const chunkSkip = Math.floor(skip / 50) * 50; //todo expose these conversions from cache service so clients dont need to know chunksize
-          //also consider taking skip and take as args to cache.get() so service handles extracting range from chunks
-          const chunkTake = Math.ceil((skip + take) / 50) * 50 - chunkSkip;
+        const chunkIndexStart = chunkSkip / 50;
+        const chunkCount = chunkTake / 50;
 
-          const chunkIndexStart = chunkSkip / 50;
-          const chunkCount = chunkTake / 50;
+        const startReturnData = skip - chunkSkip;
+        const endReturnSlice = startReturnData + take;
 
-          const newGridState = this.gridDataCacheService.toChunkGridState(gridState!);
-          const cachedData = this.gridDataCacheService.get(chunkIndexStart, chunkCount);
+        const newGridState = this.gridDataCacheService.toChunkGridState(gridState!);
+        const cachedData = this.gridDataCacheService.get(chunkIndexStart, chunkCount, startReturnData, endReturnSlice);
 
-          if (cachedData !== undefined) {
-            console.log('using cache');
-            const startReturnData = skip - chunkSkip;
-            const endReturnSlice = startReturnData + take;
-            const data = cachedData.slice(startReturnData, endReturnSlice);
-            const total = this.gridDataCacheService.getTotal();
-
-            return of(ITSystemUsageActions.getITSystemUsagesSuccess(data, total));
-          }
-
-
-          const newOdataString = toODataString(newGridState, { utcDates: true });
-
-          const convertedString = applyQueryFixes(newOdataString, systemRoles);
-          //const convertedString = applyQueryFixes(odataString, systemRoles);
-          return this.httpClient
-            .get<OData>(
-              `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${convertedString}&$count=true`
-            )
-            .pipe(
-              map((data) => {
-                console.log('using api');
-
-                const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
-                const total = data['@odata.count'];
-                this.gridDataCacheService.set(chunkIndexStart, dataItems, total);
-
-                const startReturnData = skip - chunkSkip;
-                const endReturnData = startReturnData + take;
-                const returnData = dataItems.slice(startReturnData, endReturnData);
-                return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
-              }),
-              catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
-            );
+        //todo call get with range on servie and reutrn that if it is not undef, otherwise continue
+        if (cachedData !== undefined) {
+          console.log('using cache');
+          const total = this.gridDataCacheService.getTotal();
+          return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedData, total));
         }
-      )
+
+        const newOdataString = toODataString(newGridState, { utcDates: true });
+        const convertedString = applyQueryFixes(newOdataString, systemRoles);
+
+        return this.httpClient
+          .get<OData>(
+            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${convertedString}&$count=true`
+          )
+          .pipe(
+            map((data) => {
+              console.log('using api');
+
+              const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
+              const total = data['@odata.count'];
+              this.gridDataCacheService.set(chunkIndexStart, dataItems, total);
+              const startReturnData = skip - chunkSkip;
+              const endReturnData = startReturnData + take;
+
+              const returnData = dataItems.slice(startReturnData, endReturnData);
+              return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
+            }),
+            catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
+          );
+      })
     );
   });
 

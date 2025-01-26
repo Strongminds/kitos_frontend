@@ -37,7 +37,7 @@ export class GridDataCacheService {
     };
   }
 
-  public get(startIndex: number, chunkCount: number) {
+  public get(startIndex: number, chunkCount: number, startRagne: number, endRange: number) {
     const cachedChunks = this.cache.chunks;
     if (cachedChunks.length === 0) return undefined;
     const chunksInSlice = cachedChunks
@@ -54,7 +54,7 @@ export class GridDataCacheService {
       }
       concatenatedData.push(...chunk.data);
     }
-    return concatenatedData;
+    return concatenatedData.slice(startRagne, endRange);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
