@@ -56,6 +56,12 @@ export class GridDataCacheService {
     }
   }
 
+  public tryResetOnGridStateChange(currState: GridState, prevState: GridState) {
+    if (this.shouldResetOnGridStateChange(currState, prevState)) {
+      this.reset();
+    }
+  }
+
   public reset() {
     console.log('cahce resetting at ' + new Date().toLocaleTimeString());
     if (!this.isEmpty()){
