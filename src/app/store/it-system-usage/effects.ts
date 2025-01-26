@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, interval, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, interval, map, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -63,12 +63,13 @@ export class ITSystemUsageEffects {
 
   invalidateGridDataCache$ = createEffect(() => {
     return interval(this.twoMinutes).pipe(
-      map(() => {
+      tap(() => {
         this.gridDataCacheService.reset();
         return ITSystemUsageActions.invalidateGridDataCacheSuccess();
       })
     );
-  });
+  },
+{dispatch: false});
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
@@ -98,7 +99,6 @@ export class ITSystemUsageEffects {
         const newGridState = this.gridDataCacheService.toChunkGridState(gridState!);
         const cachedData = this.gridDataCacheService.get(chunkIndexStart, chunkCount, startReturnData, endReturnSlice);
 
-        //todo call get with range on servie and reutrn that if it is not undef, otherwise continue
         if (cachedData !== undefined) {
           console.log('using cache');
           const total = this.gridDataCacheService.getTotal();
