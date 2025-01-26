@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { GridState } from '../models/grid-state.model';
+import { GRID_DATA_CACHE_CHUNK_SIZE } from '../constants/constants';
 
 interface GridDataCache {
   chunks: (GridDataCacheChunk | undefined)[];
@@ -16,12 +17,25 @@ export interface GridDataCacheChunk {
 })
 export class GridDataCacheService {
 
+  private chunkSize = GRID_DATA_CACHE_CHUNK_SIZE;
   private cache: GridDataCache = {
     chunks: [],
     total: 0,
   };
 
   constructor() {}
+
+  public toChunkGridState(gridState: GridState): GridState {
+    const skip = gridState.skip ?? 0;
+    const take = gridState.take ?? 0;
+    const chunkSkip = Math.floor(skip / this.chunkSize) * this.chunkSize;
+    const chunkTake = Math.ceil((skip + take) / this.chunkSize) * this.chunkSize - chunkSkip;
+    return {
+      ...gridState,
+      skip: chunkSkip,
+      take: chunkTake,
+    };
+  }
 
   public get(startIndex: number, chunkCount: number) {
     const cachedChunks = this.cache.chunks;
@@ -47,11 +61,11 @@ export class GridDataCacheService {
   public set(index: number, data: any[], total: number) {
     this.cache.total = total;
     let currentPass = 0;
-    const passesToDo = data.length / 50;
+    const passesToDo = data.length / this.chunkSize;
     while (currentPass < passesToDo) {
       this.cache.chunks[index] = {
-        skip: index++ * 50,
-        data: data.slice(currentPass * 50, ++currentPass * 50),
+        skip: index++ * this.chunkSize,
+        data: data.slice(currentPass * this.chunkSize, ++currentPass * this.chunkSize),
       };
     }
   }

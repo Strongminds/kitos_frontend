@@ -95,6 +95,7 @@ export class ITSystemUsageEffects {
           const chunkIndexStart = chunkSkip / 50;
           const chunkCount = chunkTake / 50;
 
+          const newGridState = this.gridDataCacheService.toChunkGridState(gridState!);
           const cachedData = this.gridDataCacheService.get(chunkIndexStart, chunkCount);
 
           if (cachedData !== undefined) {
@@ -107,11 +108,7 @@ export class ITSystemUsageEffects {
             return of(ITSystemUsageActions.getITSystemUsagesSuccess(data, total));
           }
 
-          const newGridState = {
-            ...gridState,
-            skip: chunkSkip,
-            take: chunkTake,
-          };
+
           const newOdataString = toODataString(newGridState, { utcDates: true });
 
           const convertedString = applyQueryFixes(newOdataString, systemRoles);
