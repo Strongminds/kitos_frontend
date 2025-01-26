@@ -61,15 +61,17 @@ export class ITSystemUsageEffects {
 
   private readonly twoMinutes = 120000;
 
-  invalidateGridDataCache$ = createEffect(() => {
-    return interval(this.twoMinutes).pipe(
-      tap(() => {
-        this.gridDataCacheService.reset();
-        return ITSystemUsageActions.invalidateGridDataCacheSuccess();
-      })
-    );
-  },
-{dispatch: false});
+  invalidateGridDataCache$ = createEffect(
+    () => {
+      return interval(this.twoMinutes).pipe(
+        tap(() => {
+          this.gridDataCacheService.reset();
+          return ITSystemUsageActions.invalidateGridDataCacheSuccess();
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
@@ -81,7 +83,7 @@ export class ITSystemUsageEffects {
       ]),
       switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
         console.log(JSON.stringify(gridState) + '  is curr + prev gridstate ' + JSON.stringify(previousGridState));
-        this.gridDataCacheService.tryResetOnGridStateChange(gridState!, previousGridState);
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
         const skip = gridState?.skip ?? 0;
         const take = gridState?.take ?? 0;
@@ -90,14 +92,18 @@ export class ITSystemUsageEffects {
         //also consider taking skip and take as args to cache.get() so service handles extracting range from chunks
         const chunkTake = Math.ceil((skip + take) / 50) * 50 - chunkSkip;
 
+        //måske passe gridstate og chunkgridstate ind til get for det er nemme wrappers.
+        // ellers bare den alm gridstate?
+        //og så kan cache beregne det hele ud fra den pr operation?
         const chunkIndexStart = chunkSkip / 50;
         const chunkCount = chunkTake / 50;
 
         const startReturnData = skip - chunkSkip;
         const endReturnSlice = startReturnData + take;
 
-        const newGridState = this.gridDataCacheService.toChunkGridState(gridState!);
-        const cachedData = this.gridDataCacheService.get(chunkIndexStart, chunkCount, startReturnData, endReturnSlice);
+        const newGridState = this.gridDataCacheService.toChunkGridState(gridState);
+        const cachedData = this.gridDataCacheService.get(gridState, newGridState);
+
 
         if (cachedData !== undefined) {
           console.log('using cache');
