@@ -88,22 +88,10 @@ export class ITSystemUsageEffects {
         const skip = gridState?.skip ?? 0;
         const take = gridState?.take ?? 0;
 
-        const chunkSkip = Math.floor(skip / 50) * 50; //todo expose these conversions from cache service so clients dont need to know chunksize
-        //also consider taking skip and take as args to cache.get() so service handles extracting range from chunks
-        const chunkTake = Math.ceil((skip + take) / 50) * 50 - chunkSkip;
-
-        //måske passe gridstate og chunkgridstate ind til get for det er nemme wrappers.
-        // ellers bare den alm gridstate?
-        //og så kan cache beregne det hele ud fra den pr operation?
-        const chunkIndexStart = chunkSkip / 50;
-        const chunkCount = chunkTake / 50;
-
-        const startReturnData = skip - chunkSkip;
-        const endReturnSlice = startReturnData + take;
+        const chunkSkip = Math.floor(skip / 50) * 50;
 
         const newGridState = this.gridDataCacheService.toChunkGridState(gridState);
         const cachedData = this.gridDataCacheService.get(gridState, newGridState);
-
 
         if (cachedData !== undefined) {
           console.log('using cache');
@@ -124,7 +112,7 @@ export class ITSystemUsageEffects {
 
               const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
               const total = data['@odata.count'];
-              this.gridDataCacheService.set(chunkIndexStart, dataItems, total);
+              this.gridDataCacheService.set(newGridState, dataItems, total);
               const startReturnData = skip - chunkSkip;
               const endReturnData = startReturnData + take;
 

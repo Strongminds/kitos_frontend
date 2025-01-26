@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { GridState } from '../models/grid-state.model';
 import { GRID_DATA_CACHE_CHUNK_SIZE } from '../constants/constants';
+import { GridState } from '../models/grid-state.model';
 
 interface GridDataCache {
   chunks: (GridDataCacheChunk | undefined)[];
@@ -16,7 +16,6 @@ export interface GridDataCacheChunk {
   providedIn: 'root',
 })
 export class GridDataCacheService {
-
   private chunkSize = GRID_DATA_CACHE_CHUNK_SIZE;
   private cache: GridDataCache = {
     chunks: [],
@@ -40,9 +39,9 @@ export class GridDataCacheService {
 
   public get(gridState: GridState, chunkGridState: GridState) {
     const skip = gridState?.skip ?? 0;
-    const chunkSkip = Math.floor(skip / 50) * 50;
-    const startIndex = (chunkGridState.skip ?? 0) / 50;
-    const chunkCount = (chunkGridState.take ?? 0) / 50;
+    const chunkSkip = Math.floor(skip / this.chunkSize) * this.chunkSize;
+    const startIndex = (chunkGridState.skip ?? 0) / this.chunkSize;
+    const chunkCount = (chunkGridState.take ?? 0) / this.chunkSize;
 
     const startRange = (gridState.skip ?? 0) - chunkSkip;
     const endRange = startRange + (gridState.take ?? 0);
@@ -63,15 +62,17 @@ export class GridDataCacheService {
       }
       concatenatedData.push(...chunk.data);
     }
-    return concatenatedData.slice(startRagne, endRange);
+    return concatenatedData.slice(startRange, endRange);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  public set(index: number, data: any[], total: number) {
+  public set(chunkGridState: GridState, data: any[], total: number) {
+    let index = (chunkGridState.skip ?? 0) / this.chunkSize;
     this.cache.total = total;
     let currentPass = 0;
     const passesToDo = data.length / this.chunkSize;
     while (currentPass < passesToDo) {
+      //todo turn into "for i in range passesToDo"
       this.cache.chunks[index] = {
         skip: index++ * this.chunkSize,
         data: data.slice(currentPass * this.chunkSize, ++currentPass * this.chunkSize),
@@ -87,7 +88,7 @@ export class GridDataCacheService {
 
   public reset() {
     console.log('cahce resetting at ' + new Date().toLocaleTimeString());
-    if (!this.isEmpty()){
+    if (!this.isEmpty()) {
       this.cache = {
         chunks: [],
         total: 0,
@@ -95,7 +96,7 @@ export class GridDataCacheService {
     }
   }
 
-  private isEmpty(){
+  private isEmpty() {
     return this.cache.chunks.length === 0 && this.cache.total === 0;
   }
 
@@ -103,7 +104,7 @@ export class GridDataCacheService {
     return this.cache.total;
   }
 
-  public shouldResetOnGridStateChange(newState: GridState, previousState: GridState){
+  public shouldResetOnGridStateChange(newState: GridState, previousState: GridState) {
     //todo make more concise with json stringify loop?
 
     // Compare 'take'
