@@ -43,11 +43,11 @@ export class GridDataCacheService {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public set(gridState: GridState, data: any[], total: number) {
     let cacheIndex = this.getCacheStartIndex(gridState);
-    const passesToDo = data.length / this.chunkSize;
+    const passesToDo = Math.ceil(data.length / this.chunkSize);
 
     for (let i = 0; i < passesToDo; i++) {
       this.cache.chunks[cacheIndex++] = {
-        data: data.slice(i * this.chunkSize, i + 1 * this.chunkSize),
+        data: data.slice(i * this.chunkSize, (i + 1) * this.chunkSize),
       };
     }
     this.cache.total = total;
@@ -98,34 +98,26 @@ export class GridDataCacheService {
   }
 
   public shouldResetOnGridStateChange(newState: GridState, previousState: GridState) {
-    //todo make more concise with json stringify loop?
-
-    // Compare 'take'
     if (newState.take !== previousState.take) {
       return true;
     }
 
-    // Compare 'all'
     if (newState.all !== previousState.all) {
       return true;
     }
 
-    // Compare 'sort'
     if (JSON.stringify(newState.sort) !== JSON.stringify(previousState.sort)) {
       return true;
     }
 
-    // Compare 'filter'
     if (JSON.stringify(newState.filter) !== JSON.stringify(previousState.filter)) {
       return true;
     }
 
-    // Compare 'group'
     if (JSON.stringify(newState.group) !== JSON.stringify(previousState.group)) {
       return true;
     }
 
-    // If none of the properties other than 'skip' differ, return false
     return false;
   }
 
