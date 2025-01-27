@@ -33,9 +33,7 @@
       <p class="select-option-text-margin">
         {{ item.name }}
       </p>
-      <app-icon-button *ngIf="item.isTag" (buttonClick)="removeTag(item)">
-        <app-x-icon></app-x-icon>
-      </app-icon-button>
+      <app-button buttonStyle="tertiary" *ngIf="item.isTag" (buttonClick)="removeTag(item)" iconType="x" class="remove-tag-button"> </app-button>
     </div>
   </ng-template>
   <ng-template ng-multi-label-tmp let-items="items">

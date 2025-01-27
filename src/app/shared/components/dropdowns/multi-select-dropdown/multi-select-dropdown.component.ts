@@ -104,6 +104,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public addValue(value: MultiSelectDropdownItem<T>) {
+    this.data?.push(value);
     this.selectedValuesModel.push(value);
     this.selectedValues = this.selectedValuesModel.map((item) => item.value);
   }
