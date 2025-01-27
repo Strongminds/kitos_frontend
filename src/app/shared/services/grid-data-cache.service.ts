@@ -58,15 +58,12 @@ export class GridDataCacheService {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public set(gridState: GridState, data: any[], total: number) {
-    const chunkSkip = this.getChunkSkip(gridState.skip);
-    let index = chunkSkip / this.chunkSize;
-    let currentPass = 0;
+    let cacheIndex = this.getCacheStartIndex(gridState);
     const passesToDo = data.length / this.chunkSize;
 
-    while (currentPass < passesToDo) {
-      //todo turn into "for i in range passesToDo"
-      this.cache.chunks[index++] = {
-        data: data.slice(currentPass * this.chunkSize, ++currentPass * this.chunkSize),
+    for (let i = 0; i < passesToDo; i++) {
+      this.cache.chunks[cacheIndex++] = {
+        data: data.slice(i * this.chunkSize, i + 1 * this.chunkSize),
       };
     }
     this.cache.total = total;
