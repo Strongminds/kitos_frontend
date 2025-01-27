@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APIItSystemResponseDTO,
   APIV2ItSystemService,
@@ -12,16 +12,15 @@ import {
 } from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystem, ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemActions } from './actions';
 import { selectItSystemExternalReferences, selectItSystemUuid, selectPreviousGridState } from './selectors';
-import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 
 @Injectable()
 export class ITSystemEffects {
@@ -54,12 +53,12 @@ export class ITSystemEffects {
       ofType(ITSystemActions.getITSystems),
       concatLatestFrom(() => [
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
-        this.store.select(selectPreviousGridState)
+        this.store.select(selectPreviousGridState),
       ]),
       switchMap(([{ gridState }, organizationUuid, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.get(gridState);
+        const cachedData = this.gridDataCacheService.getData(gridState);
         if (cachedData !== undefined) {
           const cachedTotal = this.gridDataCacheService.getTotal();
           return of(ITSystemActions.getITSystemsSuccess(cachedData, cachedTotal));
@@ -82,7 +81,9 @@ export class ITSystemEffects {
           .pipe(
             map((data) => {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const dataItems = compact(data.value.map((value: any) => adaptITSystem(value, organizationUuid))) as ITSystem[];
+              const dataItems = compact(
+                data.value.map((value: any) => adaptITSystem(value, organizationUuid))
+              ) as ITSystem[];
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
 

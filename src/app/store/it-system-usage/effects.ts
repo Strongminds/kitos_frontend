@@ -55,7 +55,7 @@ export class ITSystemUsageEffects {
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
-    private gridDataCacheService: GridDataCacheService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getItSystemUsages$ = createEffect(() => {
@@ -69,7 +69,7 @@ export class ITSystemUsageEffects {
       switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.get(gridState);
+        const cachedData = this.gridDataCacheService.getData(gridState);
         if (cachedData !== undefined) {
           const cachedTotal = this.gridDataCacheService.getTotal();
           return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedData, cachedTotal));

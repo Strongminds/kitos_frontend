@@ -86,7 +86,7 @@ export class ITContractEffects {
       switchMap(([{ gridState }, organizationUuid, contractRoles, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.get(gridState);
+        const cachedData = this.gridDataCacheService.getData(gridState);
         if (cachedData !== undefined) {
           const cachedTotal = this.gridDataCacheService.getTotal();
           return of(ITContractActions.getITContractsSuccess(cachedData, cachedTotal));

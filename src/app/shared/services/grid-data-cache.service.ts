@@ -24,7 +24,7 @@ export class GridDataCacheService {
 
   constructor() {}
 
-  public get(gridState: GridState) {
+  public getData(gridState: GridState) {
     const cacheChunks = this.cache.chunks;
     if (cacheChunks.length === 0) return undefined;
 

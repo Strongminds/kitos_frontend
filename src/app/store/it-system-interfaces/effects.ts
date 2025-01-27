@@ -35,7 +35,7 @@ export class ITInterfaceEffects {
       switchMap(([{ gridState }, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.get(gridState);
+        const cachedData = this.gridDataCacheService.getData(gridState);
         if (cachedData !== undefined) {
           const cachedTotal = this.gridDataCacheService.getTotal();
           return of(ITInterfaceActions.getITInterfacesSuccess(cachedData, cachedTotal));
