@@ -73,6 +73,9 @@ import {
   selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
+  selectITSystemUsageEnableGdprRetentionPeriod,
+  selectITSystemUsageEnableGdprTechnicalPrecautions,
+  selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
   selectITSystemUsageEnableJournalPeriods,
@@ -433,6 +436,7 @@ export class GridUIConfigService {
             GdprFields.RISK_ASSESSMENT_NAME,
             GdprFields.RISK_ASSESSMENT_DATE,
             GdprFields.PRE_RISK_ASSESSMENT_NAME,
+            GdprFields.RISK_ASSESMENT_NOTES,
           ])
         ),
 
@@ -440,7 +444,9 @@ export class GridUIConfigService {
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([GdprFields.PLANNED_RISK_ASSESSMENT_DATE])),
 
-      this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([GdprFields.DPIA_NAME])),
+      this.store
+        .select(selectITSystemUsageEnableGdprDpiaConducted)
+        .pipe(shouldEnable([GdprFields.DPIA_NAME, GdprFields.DPIA_DATE])),
 
       this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([GdprFields.HOSTED_AT_NAME])),
 
@@ -450,6 +456,18 @@ export class GridUIConfigService {
       ]).pipe(shouldEnable([GdprFields.DATA_PROCESSING_AGREEMENT_CONCLUDED])),
 
       this.store.select(selectITSystemUsageEnableGdprDocumentation).pipe(shouldEnable([GdprFields.LINK_TO_DIRECTORY])),
+
+      this.store
+        .select(selectITSystemUsageEnableGdprTechnicalPrecautions)
+        .pipe(shouldEnable([GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION_NAME])),
+
+      this.store
+        .select(selectITSystemUsageEnableGdprUserSupervision)
+        .pipe(shouldEnable([GdprFields.USER_SUPERVISION, GdprFields.USER_SUPERVISION_DOCUMENTATION_NAME])),
+
+      this.store
+        .select(selectITSystemUsageEnableGdprRetentionPeriod)
+        .pipe(shouldEnable([GdprFields.NEXT_DATA_RETENTION_EVALUATION_DATE])),
     ]);
   }
 
