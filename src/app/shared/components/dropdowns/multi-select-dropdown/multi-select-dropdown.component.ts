@@ -140,7 +140,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
       this.notificationService.showError($localize`Ugyldig email`);
       return;
     }
-    const newTag = { name: tag, value: tag as T, selected: false };
+    const newTag = { name: tag, value: tag as T, selected: false, isTag: true };
     this.addValue(newTag);
     this.emitSelectedEvent(this.selectedValues);
 
@@ -152,6 +152,15 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
     return newTag;
   };
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public removeTag(item: MultiSelectDropdownItem<T>) {
+    if (this.data) {
+      this.data = this.data.filter((d) => d !== item);
+    }
+    this.selectedValuesModel = this.selectedValuesModel.filter((d) => d !== item);
+    this.selectedValues = this.selectedValues.filter((v) => v !== item.value);
+  }
 
   private updateSelectedValues(value: T) {
     const index = this.selectedValues.indexOf(value);
