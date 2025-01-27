@@ -15,6 +15,7 @@ export const RISK_ASSESSMENT_NAME = 'riskAssessment.name';
 export const RISK_ASSESSMENT_DATE = 'riskAssessmentDate';
 export const PLANNED_RISK_ASSESSMENT_DATE = 'plannedRiskAssessmentDate';
 export const PRE_RISK_ASSESSMENT_NAME = 'preRiskAssessment.name';
+export const RISK_ASSESMENT_NOTES = 'riskAssessmentNotes';
 export const DPIA_NAME = 'dpia.name';
 export const DPIA_DATE = 'dpiaDate';
 export const HOSTED_AT_NAME = 'hostedAt.name';

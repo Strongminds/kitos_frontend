@@ -18,6 +18,7 @@ export interface GdprReport {
   riskAssessmentDate?: string;
   plannedRiskAssessmentDate?: string;
   preRiskAssessment?: PreRiskAssessment;
+  riskAssessmentNotes?: string;
   personalDataCpr?: boolean;
   personalDataSocialProblems?: boolean;
   personalDataSocialOtherPrivateMatters?: boolean;
@@ -49,6 +50,7 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     riskAssessmentDate: dto.riskAssessmentDate,
     plannedRiskAssessmentDate: dto.plannedRiskAssessmentDate,
     preRiskAssessment: mapPreRiskAssessmentEnum(dto.preRiskAssessment),
+    riskAssessmentNotes: TEMP(dto).riskAssessmentNotes,
     personalDataCpr: dto.personalDataCpr,
     personalDataSocialProblems: dto.personalDataSocialProblems,
     personalDataSocialOtherPrivateMatters: dto.personalDataSocialOtherPrivateMatters,

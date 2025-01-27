@@ -134,6 +134,11 @@ export class GdprOverviewComponent {
       extraData: riskAssessmentResultOptions,
     },
     {
+      field: GdprFields.RISK_ASSESMENT_NOTES,
+      title: $localize`Bemærkninger til risikovurdering`,
+      hidden: false,
+    },
+    {
       field: GdprFields.DPIA_NAME,
       title: $localize`Gennemført DPIA / Konsekvensanalyse`,
       hidden: false,
