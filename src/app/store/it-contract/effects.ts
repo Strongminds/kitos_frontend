@@ -103,7 +103,7 @@ export class ITContractEffects {
           )
           .pipe(
             map((data) => {
-              const dataItems = compact(data.value.map(adaptITContract)) as ITContract[];
+              const dataItems = compact(data.value.map(adaptITContract));
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
 

@@ -54,7 +54,7 @@ export class ITInterfaceEffects {
           )
           .pipe(
             map((data) => {
-              const dataItems = compact(data.value.map(adaptITInterface)) as ITInterface[];
+              const dataItems = compact(data.value.map(adaptITInterface));
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
 

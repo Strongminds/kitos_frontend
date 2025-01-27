@@ -54,7 +54,7 @@ export class GridExportEffects {
               case 'it-interface':
                 return of(ITInterfaceActions.getITInterfaces(gridState));
               case 'organization-user':
-                return of(OrganizationUserActions.getOrganizationUsers(odataString));
+                return of(OrganizationUserActions.getOrganizationUsers(gridState));
               case 'local-admin-organization':
               case 'global-admin-organization':
                 return of(OrganizationActions.getOrganizations(odataString));

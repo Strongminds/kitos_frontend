@@ -99,9 +99,7 @@ export class DataProcessingEffects {
           )
           .pipe(
             map((data) => {
-              const dataItems = compact(
-                data.value.map(adaptDataProcessingRegistration)
-              ) as DataProcessingRegistration[];
+              const dataItems = compact(data.value.map(adaptDataProcessingRegistration));
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
 

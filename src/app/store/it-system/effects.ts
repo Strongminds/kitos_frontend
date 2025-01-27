@@ -83,7 +83,7 @@ export class ITSystemEffects {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               const dataItems = compact(
                 data.value.map((value: any) => adaptITSystem(value, organizationUuid))
-              ) as ITSystem[];
+              );
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
 

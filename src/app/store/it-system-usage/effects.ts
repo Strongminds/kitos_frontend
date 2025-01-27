@@ -84,7 +84,7 @@ export class ITSystemUsageEffects {
           )
           .pipe(
             map((data) => {
-              const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
+              const dataItems = compact(data.value.map(adaptITSystemUsage));
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
 

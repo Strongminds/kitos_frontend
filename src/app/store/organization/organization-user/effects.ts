@@ -12,8 +12,10 @@ import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
+import { selectPreviousGridState } from './selectors';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -22,15 +24,25 @@ export class OrganizationUserEffects {
     private store: Store,
     private httpClient: HttpClient,
     @Inject(APIV2UsersInternalINTERNALService) private apiService: APIV2UsersInternalINTERNALService,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getOrganizationUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUsers),
-      combineLatestWith(this.store.select(selectOrganizationUuid)),
-      switchMap(([{ odataString }, organizationUuid]) => {
-        const fixedOdataString = applyQueryFixes(odataString);
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectPreviousGridState)]),
+      switchMap(([{ gridState }, organizationUuid, previousGridState]) => {
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+
+        const cachedData = this.gridDataCacheService.getData(gridState);
+        if (cachedData !== undefined) {
+          const cachedTotal = this.gridDataCacheService.getTotal();
+          return of(OrganizationUserActions.getOrganizationUsersSuccess(cachedData, cachedTotal));
+        }
+
+        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
+        const fixedOdataString = applyQueryFixes(cacheableOdataString);
 
         return this.httpClient
           .get<OData>(
@@ -42,12 +54,14 @@ export class OrganizationUserEffects {
               `DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&${fixedOdataString}&$count=true`
           )
           .pipe(
-            map((data) =>
-              OrganizationUserActions.getOrganizationUsersSuccess(
-                compact(data.value.map(adaptOrganizationUser)),
-                data['@odata.count']
-              )
-            ),
+            map((data) => {
+              const dataItems = compact(data.value.map(adaptOrganizationUser));
+              const total = data['@odata.count'];
+              this.gridDataCacheService.set(gridState, dataItems, total);
+
+              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+              return OrganizationUserActions.getOrganizationUsersSuccess(returnData, total);
+            }),
             catchError(() => of(OrganizationUserActions.getOrganizationUsersError()))
           );
       })
@@ -57,7 +71,7 @@ export class OrganizationUserEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.updateGridState),
-      map(({ gridState }) => OrganizationUserActions.getOrganizationUsers(toODataString(gridState)))
+      map(({ gridState }) => OrganizationUserActions.getOrganizationUsers(gridState))
     );
   });
 
