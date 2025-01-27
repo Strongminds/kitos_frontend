@@ -24,7 +24,7 @@ export const ITContractActions = createActionGroup({
     'Get IT Contract': (contractUuid: string) => ({ contractUuid }),
     'Get IT Contract Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Get IT Contract Error': emptyProps(),
-    'Get IT Contracts': (odataString: string) => ({ odataString }),
+    'Get IT Contracts': (gridState: GridState) => ({ gridState }),
     'Get IT Contracts Success': (itContracts: ITContract[], total: number) => ({ itContracts, total }),
     'Get IT Contracts Error': emptyProps(),
     'Update Grid State': (gridState: GridState) => ({ gridState }),

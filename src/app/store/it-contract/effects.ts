@@ -17,15 +17,16 @@ import {
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
 import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
-import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
+import { adaptITContract, ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITContractActions } from './actions';
@@ -40,8 +41,8 @@ import {
   selectItContractUuid,
   selectOverviewContractRoles,
   selectOverviewContractRolesCache,
+  selectPreviousGridState,
 } from './selectors';
-import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 
 @Injectable()
 export class ITContractEffects {
@@ -58,7 +59,8 @@ export class ITContractEffects {
     private apiRoleService: APIV2GridLocalItContractRolesINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getItContract$ = createEffect(() => {
@@ -79,19 +81,35 @@ export class ITContractEffects {
       concatLatestFrom(() => [
         this.store.select(selectOrganizationUuid),
         this.store.select(selectOverviewContractRoles),
+        this.store.select(selectPreviousGridState),
       ]),
-      switchMap(([{ odataString }, organizationUuid, contractRoles]) => {
-        const convertedString = applyQueryFixes(odataString, contractRoles);
+      switchMap(([{ gridState }, organizationUuid, contractRoles, previousGridState]) => {
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+
+        const cachedData = this.gridDataCacheService.get(gridState);
+        if (cachedData !== undefined) {
+          const cachedTotal = this.gridDataCacheService.getTotal();
+          return of(ITContractActions.getITContractsSuccess(cachedData, cachedTotal));
+        }
+
+        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
+        const fixedOdataString = applyQueryFixes(cacheableOdataString, contractRoles);
+
         return this.httpClient
           .get<OData>(
             `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
             DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),
-            ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&${convertedString}&$count=true`
+            ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&${fixedOdataString}&$count=true`
           )
           .pipe(
-            map((data) =>
-              ITContractActions.getITContractsSuccess(compact(data.value.map(adaptITContract)), data['@odata.count'])
-            ),
+            map((data) => {
+              const dataItems = compact(data.value.map(adaptITContract)) as ITContract[];
+              const total = data['@odata.count'];
+              this.gridDataCacheService.set(gridState, dataItems, total);
+
+              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+              return ITContractActions.getITContractsSuccess(returnData, total);
+            }),
             catchError(() => of(ITContractActions.getITContractsError()))
           );
       })
@@ -101,7 +119,7 @@ export class ITContractEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridState),
-      map(({ gridState }) => ITContractActions.getITContracts(toODataString(gridState)))
+      map(({ gridState }) => ITContractActions.getITContracts(gridState))
     );
   });
 
@@ -681,7 +699,7 @@ function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | unde
       /contains\(DataProcessingAgreements,(.*?)\)/,
       'DataProcessingAgreements/any(c: contains(c/DataProcessingRegistrationName,$1))'
     )
-    .replace("ItSystemUsageUuidsAsCsv", "ItSystemUsagesSystemUuidCsv");
+    .replace('ItSystemUsageUuidsAsCsv', 'ItSystemUsagesSystemUuidCsv');
   roles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
