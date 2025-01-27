@@ -13,5 +13,5 @@ jobs:
         with:
           node-version: lts/*
 
-      - run: yarn --frozen-lockfile
-      - run: yarn build
+      - run: ./DeploymentScrtips/CI_Build.ps1
+        shell: pwsh
