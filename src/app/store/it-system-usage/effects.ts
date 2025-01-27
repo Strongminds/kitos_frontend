@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, interval, map, mergeMap, of, switchMap, tap } from 'rxjs';
+import { catchError, filter, interval, map, merge, mergeMap, of, switchMap, tap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -39,6 +39,7 @@ import {
   selectPreviousGridState,
   selectUsageGridColumns,
 } from './selectors';
+import { NavigationEnd, Router } from '@angular/router';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -56,15 +57,21 @@ export class ITSystemUsageEffects {
     private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
-    private gridDataCacheService: GridDataCacheService
+    private gridDataCacheService: GridDataCacheService,
+    private router: Router
   ) {}
 
   private readonly twoMinutes = 120000;
 
   invalidateGridDataCache$ = createEffect(
     () => {
-      return interval(this.twoMinutes).pipe(
+      return merge(
+        interval(this.twoMinutes),
+        this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
+      )
+       .pipe(
         tap(() => {
+          console.log('Invalidating cache');
           this.gridDataCacheService.reset();
           return ITSystemUsageActions.invalidateGridDataCacheSuccess();
         })
