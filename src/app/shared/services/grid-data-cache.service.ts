@@ -29,7 +29,6 @@ export class GridDataCacheService {
     const take = gridState.take ?? 0;
     const chunkSkip = Math.floor(skip / this.chunkSize) * this.chunkSize;
     const chunkTake = Math.ceil((skip + take) / this.chunkSize) * this.chunkSize - chunkSkip;
-    console.log('new grid is skip ' + chunkSkip + ' take ' + chunkTake);
     return {
       ...gridState,
       skip: chunkSkip,
@@ -37,11 +36,13 @@ export class GridDataCacheService {
     };
   }
 
-  public get(gridState: GridState, chunkGridState: GridState) {
-    const skip = gridState?.skip ?? 0;
+  public get(gridState: GridState) {
+    const skip = gridState.skip ?? 0;
+    const take = gridState.take ?? 0;
     const chunkSkip = Math.floor(skip / this.chunkSize) * this.chunkSize;
-    const startIndex = (chunkGridState.skip ?? 0) / this.chunkSize;
-    const chunkCount = (chunkGridState.take ?? 0) / this.chunkSize;
+    const chunkTake = Math.ceil((skip + take) / this.chunkSize) * this.chunkSize - chunkSkip;
+    const startIndex = chunkSkip / this.chunkSize;
+    const chunkCount = chunkTake / this.chunkSize;
 
     const startRange = (gridState.skip ?? 0) - chunkSkip;
     const endRange = startRange + (gridState.take ?? 0);

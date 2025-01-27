@@ -71,7 +71,6 @@ export class ITSystemUsageEffects {
       )
        .pipe(
         tap(() => {
-          console.log('Invalidating cache');
           this.gridDataCacheService.reset();
           return ITSystemUsageActions.invalidateGridDataCacheSuccess();
         })
@@ -98,7 +97,8 @@ export class ITSystemUsageEffects {
         const chunkSkip = Math.floor(skip / 50) * 50;
 
         const newGridState = this.gridDataCacheService.toChunkGridState(gridState);
-        const cachedData = this.gridDataCacheService.get(gridState, newGridState);
+        
+        const cachedData = this.gridDataCacheService.get(gridState);
 
         if (cachedData !== undefined) {
           console.log('using cache');
