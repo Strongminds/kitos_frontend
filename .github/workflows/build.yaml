@@ -7,7 +7,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      KENDO_UI_LICENSE: var.KENDO_UI_LICENSE
+      KENDO_UI_LICENSE: ${{ var.KENDO_UI_LICENSE }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
