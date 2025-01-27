@@ -13,5 +13,5 @@ jobs:
         with:
           node-version: lts/*
 
-      - run: ./DeploymentScripts/CI_Build.ps1
-        shell: pwsh
+      - shell: pwsh
+        run: .\DeploymentScripts\Ci_Build.ps1
