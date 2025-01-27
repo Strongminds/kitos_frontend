@@ -52,7 +52,7 @@ export class GridExportEffects {
               case 'data-processing-registration':
                 return of(DataProcessingActions.getDataProcessings(odataString));
               case 'it-interface':
-                return of(ITInterfaceActions.getITInterfaces(odataString));
+                return of(ITInterfaceActions.getITInterfaces(gridState));
               case 'organization-user':
                 return of(OrganizationUserActions.getOrganizationUsers(odataString));
               case 'local-admin-organization':
