@@ -1,6 +1,6 @@
 <app-accordion
   [title]="title"
-  [isExpandedByDefault]="(isExpanded$ | async) ?? false"
+  [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"
 >
   <app-form-grid [formGroup]="formGroup">

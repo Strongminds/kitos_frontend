@@ -7,7 +7,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class AccordionComponent {
   @Input() title: string | undefined;
-  @Input() isExpandedByDefault = false;
+  @Input() isExpanded = false;
   @Input() disabled = false;
   @Input() checkboxInTitle = false;
   @Input() checkboxDisabled = false;

@@ -1,6 +1,6 @@
 <app-accordion
   title="Hvilke kategorier af registrerede indgår i databehandlingen?"
-  [isExpandedByDefault]="(isExpanded$ | async) ?? false"
+  [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"
   i18n-title
 >
