@@ -88,7 +88,6 @@ export class ITSystemUsageEffects {
         this.store.select(selectPreviousGridState),
       ]),
       switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
-        console.log(JSON.stringify(gridState) + '  is curr + prev gridstate ' + JSON.stringify(previousGridState));
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
         //todo avoid these calcs maybe by always getting the data from the cache
@@ -114,14 +113,11 @@ export class ITSystemUsageEffects {
           .pipe(
             map((data) => {
               console.log('using api');
-
               const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
-              const startReturnData = skip - chunkSkip;
-              const endReturnData = startReturnData + take;
 
-              const returnData = dataItems.slice(startReturnData, endReturnData);
+              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
               return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
             }),
             catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))

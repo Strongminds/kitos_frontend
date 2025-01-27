@@ -37,23 +37,7 @@ export class GridDataCacheService {
 
     if (chunksInSlice.length !== chunkCount) return undefined;
 
-    return this.sliceDataFromChunks(chunksInSlice, gridState);
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private sliceDataFromChunks(chunks: GridDataCacheChunk[], gridState: GridState) {
-    const concatenatedData = [];
-    for (const chunk of chunks) {
-      if (chunk === undefined) {
-        return undefined;
-      }
-      concatenatedData.push(...chunk.data);
-    }
-
-    const chunkSkip = this.getChunkSkip(gridState.skip);
-    const startSlice = (gridState.skip ?? 0) - chunkSkip;
-    const endSlice = startSlice + (gridState.take ?? 0);
-    return concatenatedData.slice(startSlice, endSlice);
+    return this.gridStateSliceFromChunks(chunksInSlice, gridState);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -83,6 +67,27 @@ export class GridDataCacheService {
         total: 0,
       };
     }
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public gridStateSliceFromArray(data: any[], gridState: GridState) {
+    const chunkSkip = this.getChunkSkip(gridState.skip);
+    const startSlice = (gridState.skip ?? 0) - chunkSkip;
+    const endSlice = startSlice + (gridState.take ?? 0);
+
+    return data.slice(startSlice, endSlice);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private gridStateSliceFromChunks(chunks: GridDataCacheChunk[], gridState: GridState) {
+    const concatenatedData = [];
+    for (const chunk of chunks) {
+      if (chunk === undefined) {
+        return undefined;
+      }
+      concatenatedData.push(...chunk.data);
+    }
+    return this.gridStateSliceFromArray(concatenatedData, gridState);
   }
 
   private isEmpty() {
