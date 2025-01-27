@@ -91,7 +91,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   ]);
 
   public readonly expandAllButtonText$ = this.allExpanded$.pipe(
-    map((allExpanded) => (allExpanded ? $localize`Fravælg alle` : $localize`Vælg alle`))
+    map((allExpanded) => (allExpanded ? $localize`Luk alle` : $localize`Åben alle`))
   );
 
   public disableFormsIfNoPermissions(controls: AbstractControl[]) {

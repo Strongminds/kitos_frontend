@@ -5,13 +5,15 @@
 ></app-general-info-section>
 
 <app-card *ngIf="showMoreInformation$ | async">
-  <app-card-header
-    title="Yderligere information"
-    [extraButtonTitle]="(expandAllButtonText$ | async) ?? ''"
-    (extraButtonClicked)="changeAllClick()"
-    helpTextKey="it-system.usage.GDPR"
-    i18n-title
-  ></app-card-header>
+  <app-card-header title="Yderligere information" helpTextKey="it-system.usage.GDPR" i18n-title
+    ><app-button
+      secondary-content
+      (buttonClick)="changeAllClick()"
+      buttonStyle="secondary"
+      data-cy="extra-header-button"
+      >{{ expandAllButtonText$ | async }}</app-button
+    ></app-card-header
+  >
   <app-standard-vertical-content-grid>
     <app-data-sensitivity-section
       *ngIf="showDataTypes$ | async"
