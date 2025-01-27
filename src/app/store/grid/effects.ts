@@ -41,7 +41,6 @@ export class GridExportEffects {
         return of(action).pipe(
           mergeMap((action) => {
             const gridState = action.gridState;
-            const odataString = toODataString(gridState);
             switch (action.entityType) {
               case 'it-system-usage':
                 return of(usageGridStateToAction(gridState));
@@ -57,7 +56,7 @@ export class GridExportEffects {
                 return of(OrganizationUserActions.getOrganizationUsers(gridState));
               case 'local-admin-organization':
               case 'global-admin-organization':
-                return of(OrganizationActions.getOrganizations(odataString));
+                return of(OrganizationActions.getOrganizations(gridState));
               default:
                 throw 'Grid Effects Excel export not implemented for entity type: ' + action.entityType;
             }

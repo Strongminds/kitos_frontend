@@ -18,6 +18,8 @@ import { UserActions } from '../user-store/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationActions } from './actions';
 import { selectHasValidUIRootConfigCache } from './selectors';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
+import { selectPreviousGridState } from './organization-user/selectors';
 
 @Injectable()
 export class OrganizationEffects {
@@ -26,23 +28,42 @@ export class OrganizationEffects {
     private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
     private actions$: Actions,
     private store: Store,
-    private httpClient: HttpClient
+    private httpClient: HttpClient,
+    private gridDataCacheService: GridDataCacheService,
   ) {}
 
   getOrganizations$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationActions.getOrganizations),
-      switchMap(({ odataString }) => {
-        const fixedOdataString = applyQueryFixes(odataString);
+      concatLatestFrom(() =>
+      this.store.select(selectPreviousGridState)),
+      switchMap(([{ gridState }, previousGridState]) => {
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+
+        const cachedData = this.gridDataCacheService.getData(gridState);
+        if (cachedData !== undefined) {
+          const cachedTotal = this.gridDataCacheService.getTotal();
+          return of(OrganizationActions.getOrganizationsSuccess(cachedData, cachedTotal));
+        }
+
+        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
+        const fixedOdataString = applyQueryFixes(cacheableOdataString);
 
         return this.httpClient
           .get<OData>(`/odata/Organizations?${fixedOdataString}&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true`)
           .pipe(
-            map((data) =>
-              OrganizationActions.getOrganizationsSuccess(
-                compact(data.value.map(adaptOrganization)),
-                data['@odata.count']
+            map((data) => {
+              const dataItems = compact(data.value.map(adaptOrganization));
+              const total = data['@odata.count'];
+              this.gridDataCacheService.set(gridState, dataItems, total);
+
+              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+
+              return OrganizationActions.getOrganizationsSuccess(
+                returnData, total
               )
+            }
+
             ),
             catchError(() => of(OrganizationActions.getOrganizationsError()))
           );
@@ -54,7 +75,7 @@ export class OrganizationEffects {
     return this.actions$.pipe(
       ofType(OrganizationActions.updateGridState),
       map(({ gridState }) => {
-        return OrganizationActions.getOrganizations(toODataString(gridState));
+        return OrganizationActions.getOrganizations(gridState);
       })
     );
   });
