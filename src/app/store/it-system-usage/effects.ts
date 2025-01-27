@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, filter, interval, map, merge, mergeMap, of, switchMap, tap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -57,25 +56,9 @@ export class ITSystemUsageEffects {
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
     private gridDataCacheService: GridDataCacheService,
-    private router: Router
   ) {}
 
-  private readonly twoMinutes = 120000;
 
-  invalidateGridDataCache$ = createEffect(
-    () => {
-      return merge(
-        interval(this.twoMinutes),
-        this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
-      ).pipe(
-        tap(() => {
-          this.gridDataCacheService.reset();
-          return ITSystemUsageActions.invalidateGridDataCacheSuccess();
-        })
-      );
-    },
-    { dispatch: false }
-  );
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(

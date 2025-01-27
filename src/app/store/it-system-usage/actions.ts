@@ -178,6 +178,5 @@ export const ITSystemUsageActions = createActionGroup({
       response: APIOrganizationGridConfigurationResponseDTO
     ) => ({ response }),
     'Initialize IT System Usage Last Seen Grid Configuration Error': () => emptyProps(),
-    'Invalidate grid data cache success': () => emptyProps(),
   },
 });

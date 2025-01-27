@@ -21,7 +21,7 @@ import {
 import { cloneDeep, get } from 'lodash';
 import { combineLatest, first, map, Observable, of } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
-import { GridExportActions } from 'src/app/store/grid/actions';
+import { GridActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
@@ -255,7 +255,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   private excelExport(): void {
     if (this.grid) {
       this.grid.saveAsExcel();
-      this.store.dispatch(GridExportActions.exportCompleted({ ...this.state, all: false }, this.entityType));
+      this.store.dispatch(GridActions.exportCompleted({ ...this.state, all: false }, this.entityType));
     }
   }
 
@@ -334,11 +334,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public getFilteredExportColumns$() {
-    return combineLatest([
-      this.columns$,
-      this.exportAllColumns$,
-      this.uiConfigApplications$ ?? of([])
-    ]).pipe(
+    return combineLatest([this.columns$, this.exportAllColumns$, this.uiConfigApplications$ ?? of([])]).pipe(
       map(([columns, exportAllColumns, uiConfigApplications]) => {
         const columnsToExport = columns
           ? columns
@@ -351,7 +347,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         const roleColumnFieldsToExport = new Set(roleColumnsInExport.map((column) => column.field));
         return columnsToExport.filter(
           (column) =>
-            !this.isExcelOnlyColumn(column) || roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
+            !this.isExcelOnlyColumn(column) ||
+            roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
         );
       })
     );
