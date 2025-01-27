@@ -97,7 +97,7 @@ export class ITSystemUsageEffects {
         const chunkSkip = Math.floor(skip / 50) * 50;
 
         const newGridState = this.gridDataCacheService.toChunkGridState(gridState);
-        
+
         const cachedData = this.gridDataCacheService.get(gridState);
 
         if (cachedData !== undefined) {
@@ -119,7 +119,7 @@ export class ITSystemUsageEffects {
 
               const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
               const total = data['@odata.count'];
-              this.gridDataCacheService.set(newGridState, dataItems, total);
+              this.gridDataCacheService.set(gridState, dataItems, total);
               const startReturnData = skip - chunkSkip;
               const endReturnData = startReturnData + take;
 
