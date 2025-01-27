@@ -11,4 +11,8 @@ export class CardHeaderComponent {
   @Input() public helpTextKey?: string;
   @Input() public extraButtonTitle?: string;
   @Output() public extraButtonClicked = new EventEmitter<void>();
+
+  public onExtraButtonClicked() {
+    this.extraButtonClicked.emit();
+  }
 }

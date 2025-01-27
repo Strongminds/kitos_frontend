@@ -14,8 +14,13 @@ export class AccordionComponent {
   @Input() checkboxValue = false;
   @Input() checkboxTooltipText: string | undefined = undefined;
   @Output() checkboxChanged = new EventEmitter<boolean>();
+  @Output() expandedChanged = new EventEmitter<boolean>();
 
   public onCheckboxToggled($event: boolean | undefined) {
     this.checkboxChanged.emit($event ?? false);
+  }
+
+  public onExpandedChanged(expanded: boolean) {
+    this.expandedChanged.emit(expanded);
   }
 }
