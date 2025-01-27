@@ -46,7 +46,7 @@ export class GridExportEffects {
               case 'it-system-usage':
                 return of(usageGridStateToAction(gridState));
               case 'it-system':
-                return of(ITSystemActions.getITSystems(odataString));
+                return of(ITSystemActions.getITSystems(gridState));
               case 'it-contract':
                 return of(ITContractActions.getITContracts(odataString));
               case 'data-processing-registration':

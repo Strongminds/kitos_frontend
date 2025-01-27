@@ -58,8 +58,6 @@ export class ITSystemUsageEffects {
     private gridDataCacheService: GridDataCacheService,
   ) {}
 
-
-
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsages),
@@ -73,9 +71,8 @@ export class ITSystemUsageEffects {
 
         const cachedData = this.gridDataCacheService.get(gridState);
         if (cachedData !== undefined) {
-          console.log('using cache');
-          const total = this.gridDataCacheService.getTotal();
-          return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedData, total));
+          const cachedTotal = this.gridDataCacheService.getTotal();
+          return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedData, cachedTotal));
         }
 
         const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
@@ -87,7 +84,6 @@ export class ITSystemUsageEffects {
           )
           .pipe(
             map((data) => {
-              console.log('using api');
               const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
