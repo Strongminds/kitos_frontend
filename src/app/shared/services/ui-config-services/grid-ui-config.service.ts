@@ -314,6 +314,10 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableGdprDocumentation)
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
+      this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([UsageFields.DpiaConducted])),
+      this.store
+        .select(selectITSystemUsageEnableGdprBusinessCritical)
+        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
 
       //Organization
       this.store
