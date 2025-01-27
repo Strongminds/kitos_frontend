@@ -143,7 +143,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
       this.notificationService.showError($localize`Ugyldig email`);
       return;
     }
-    const newTag = { name: tag, value: tag as T, selected: false, isTag: true };
+    const newTag = { name: tag, value: tag as T, selected: false };
     this.addValue(newTag);
     this.emitSelectedEvent(this.selectedValues);
 
