@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
+import { ODataSettings } from '@progress/kendo-data-query/dist/npm/odata.operators';
 import { GRID_DATA_CACHE_CHUNK_SIZE } from '../constants/constants';
-import { GridState } from '../models/grid-state.model';
+import { GridState, toODataString } from '../models/grid-state.model';
 
 interface GridDataCache {
   chunks: (GridDataCacheChunk | undefined)[];
@@ -24,33 +25,14 @@ export class GridDataCacheService {
 
   constructor() {}
 
-  public toChunkGridState(gridState: GridState): GridState {
-    const skip = gridState.skip ?? 0;
-    const take = gridState.take ?? 0;
-    const chunkSkip = Math.floor(skip / this.chunkSize) * this.chunkSize;
-    const chunkTake = Math.ceil((skip + take) / this.chunkSize) * this.chunkSize - chunkSkip;
-    return {
-      ...gridState,
-      skip: chunkSkip,
-      take: chunkTake,
-    };
-  }
-
   public get(gridState: GridState) {
-    const skip = gridState.skip ?? 0;
-    const take = gridState.take ?? 0;
-    const chunkSkip = Math.floor(skip / this.chunkSize) * this.chunkSize;
-    const chunkTake = Math.ceil((skip + take) / this.chunkSize) * this.chunkSize - chunkSkip;
-    const startIndex = chunkSkip / this.chunkSize;
-    const chunkCount = chunkTake / this.chunkSize;
-
-    const startRange = (gridState.skip ?? 0) - chunkSkip;
-    const endRange = startRange + (gridState.take ?? 0);
+    const cacheStartIndex = this.getCacheStartIndex(gridState);
+    const chunkCount = this.getChunkCount(gridState);
 
     const cachedChunks = this.cache.chunks;
     if (cachedChunks.length === 0) return undefined;
     const chunksInSlice = cachedChunks
-      .slice(startIndex, startIndex + chunkCount)
+      .slice(cacheStartIndex, cacheStartIndex + chunkCount)
       .filter((chunk) => chunk !== undefined);
 
     if (chunksInSlice.length !== chunkCount) return undefined;
@@ -63,17 +45,17 @@ export class GridDataCacheService {
       }
       concatenatedData.push(...chunk.data);
     }
-    return concatenatedData.slice(startRange, endRange);
+
+    return this.sliceDataFromChunks(concatenatedData, gridState);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public set(gridState: GridState, data: any[], total: number) {
-    const skip = gridState.skip ?? 0;
-    const chunkSkip = Math.floor(skip / this.chunkSize) * this.chunkSize;
+    const chunkSkip = this.getChunkSkip(gridState.skip);
     let index = chunkSkip / this.chunkSize;
-    this.cache.total = total;
     let currentPass = 0;
     const passesToDo = data.length / this.chunkSize;
+
     while (currentPass < passesToDo) {
       //todo turn into "for i in range passesToDo"
       this.cache.chunks[index] = {
@@ -81,6 +63,7 @@ export class GridDataCacheService {
         data: data.slice(currentPass * this.chunkSize, ++currentPass * this.chunkSize),
       };
     }
+    this.cache.total = total;
   }
 
   public tryResetOnGridStateChange(currState: GridState, prevState: GridState) {
@@ -137,5 +120,45 @@ export class GridDataCacheService {
 
     // If none of the properties other than 'skip' differ, return false
     return false;
+  }
+
+  private getChunkSkip(skip: number | undefined) {
+    return Math.floor((skip ?? 0) / this.chunkSize) * this.chunkSize;
+  }
+
+  private getChunkTake(gridState: GridState) {
+    const skip = gridState.skip ?? 0;
+    const take = gridState.take ?? 0;
+    const chunkSkip = this.getChunkSkip(gridState.skip);
+    return Math.ceil((skip + take) / this.chunkSize) * this.chunkSize - chunkSkip;
+  }
+
+  private getCacheStartIndex(gridState: GridState) {
+    return this.getChunkSkip(gridState.skip) / this.chunkSize;
+  }
+
+  private getChunkCount(gridState: GridState) {
+    const chunkTake = this.getChunkTake(gridState);
+    return chunkTake / this.chunkSize;
+  }
+
+  public toCacheableODataString(gridState: GridState, settings?: ODataSettings) {
+    const chunkSkip = this.getChunkSkip(gridState.skip);
+    const chunkTake = this.getChunkTake(gridState);
+    console.log('skip ' + chunkSkip + ' take ' + chunkTake);
+    const cacheableGridState = {
+      ...gridState,
+      skip: chunkSkip,
+      take: chunkTake,
+    };
+    return toODataString(cacheableGridState, settings);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private sliceDataFromChunks(concatenatedData: any[], gridState: GridState) {
+    const chunkSkip = this.getChunkSkip(gridState.skip);
+    const startRange = (gridState.skip ?? 0) - chunkSkip;
+    const endRange = startRange + (gridState.take ?? 0);
+    return concatenatedData.slice(startRange, endRange);
   }
 }

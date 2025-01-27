@@ -91,12 +91,10 @@ export class ITSystemUsageEffects {
         console.log(JSON.stringify(gridState) + '  is curr + prev gridstate ' + JSON.stringify(previousGridState));
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
+        //todo avoid these calcs maybe by always getting the data from the cache
         const skip = gridState?.skip ?? 0;
         const take = gridState?.take ?? 0;
-
         const chunkSkip = Math.floor(skip / 50) * 50;
-
-        const newGridState = this.gridDataCacheService.toChunkGridState(gridState);
 
         const cachedData = this.gridDataCacheService.get(gridState);
 
@@ -106,12 +104,12 @@ export class ITSystemUsageEffects {
           return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedData, total));
         }
 
-        const newOdataString = toODataString(newGridState, { utcDates: true });
-        const convertedString = applyQueryFixes(newOdataString, systemRoles);
+        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
+        const fixedOdataString = applyQueryFixes(cacheableOdataString, systemRoles);
 
         return this.httpClient
           .get<OData>(
-            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${convertedString}&$count=true`
+            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) => {
