@@ -36,6 +36,8 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public tagValidation: 'email' | 'none' = 'none';
   @Input() public addTagText: string = $localize`Tilføj email`;
   @Input() public isRequired = false;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  @Input() public isTagFn: (item: any) => boolean = () => false;
 
   @Output() public valueChange = new EventEmitter<T[] | undefined>();
   @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();

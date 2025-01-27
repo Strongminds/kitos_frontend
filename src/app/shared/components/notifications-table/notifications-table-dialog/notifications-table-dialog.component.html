@@ -12,6 +12,7 @@
           tagValidation="email"
           [disabled]="!canEdit"
           [isRequired]="true"
+          [isTagFn]="isTagAnEmail"
           (selectedEvent)="receipientsChanged($event, true)"
           (cleared)="receipientsCleared(true)"
           (addTag)="receipientsAdded($event, true)"
