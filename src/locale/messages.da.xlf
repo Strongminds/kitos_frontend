@@ -6457,6 +6457,30 @@
         <source>Forretningskritisk</source>
         <target state="new">Forretningskritisk</target>
       </trans-unit>
+      <trans-unit id="3601299378626386756" datatype="html">
+        <source>Bemærkninger til risikovurdering</source>
+        <target state="new">Bemærkninger til risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="1870392441094924700" datatype="html">
+        <source>Dato for seneste DPIA / Konsekvensanalyse</source>
+        <target state="new">Dato for seneste DPIA / Konsekvensanalyse</target>
+      </trans-unit>
+      <trans-unit id="5098221578566106270" datatype="html">
+        <source>Dokumentation til teknisk foranstaltning</source>
+        <target state="new">Dokumentation til teknisk foranstaltning</target>
+      </trans-unit>
+      <trans-unit id="7370934238044947213" datatype="html">
+        <source>Brugerkontrol</source>
+        <target state="new">Brugerkontrol</target>
+      </trans-unit>
+      <trans-unit id="7783045105356638349" datatype="html">
+        <source>Dokumentation til brugerkontrol</source>
+        <target state="new">Dokumentation til brugerkontrol</target>
+      </trans-unit>
+      <trans-unit id="4272850826703284078" datatype="html">
+        <source>Dato for hvornår næste gang data må slettes</source>
+        <target state="new">Dato for hvornår næste gang data må slettes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
