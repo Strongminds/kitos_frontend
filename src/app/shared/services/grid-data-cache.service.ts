@@ -60,7 +60,6 @@ export class GridDataCacheService {
   }
 
   public reset() {
-    console.log('cahce resetting at ' + new Date().toLocaleTimeString());
     if (!this.isEmpty()) {
       this.cache = {
         chunks: [],
@@ -153,7 +152,6 @@ export class GridDataCacheService {
   public toCacheableODataString(gridState: GridState, settings?: ODataSettings) {
     const chunkSkip = this.getChunkSkip(gridState.skip);
     const chunkTake = this.getChunkTake(gridState);
-    console.log('skip ' + chunkSkip + ' take ' + chunkTake);
     const cacheableGridState = {
       ...gridState,
       skip: chunkSkip,

@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { NavigationEnd, Router } from '@angular/router';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
@@ -16,7 +17,6 @@ import {
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage, ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -39,7 +39,6 @@ import {
   selectPreviousGridState,
   selectUsageGridColumns,
 } from './selectors';
-import { NavigationEnd, Router } from '@angular/router';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -68,8 +67,7 @@ export class ITSystemUsageEffects {
       return merge(
         interval(this.twoMinutes),
         this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
-      )
-       .pipe(
+      ).pipe(
         tap(() => {
           this.gridDataCacheService.reset();
           return ITSystemUsageActions.invalidateGridDataCacheSuccess();
@@ -90,13 +88,7 @@ export class ITSystemUsageEffects {
       switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        //todo avoid these calcs maybe by always getting the data from the cache
-        const skip = gridState?.skip ?? 0;
-        const take = gridState?.take ?? 0;
-        const chunkSkip = Math.floor(skip / 50) * 50;
-
         const cachedData = this.gridDataCacheService.get(gridState);
-
         if (cachedData !== undefined) {
           console.log('using cache');
           const total = this.gridDataCacheService.getTotal();
