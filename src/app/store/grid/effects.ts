@@ -4,10 +4,9 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { interval, merge, of } from 'rxjs';
 import { filter, mergeMap, tap } from 'rxjs/operators';
 import { TWO_MINUTES_IN_MILLISECONDS } from 'src/app/shared/constants/constants';
-import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
+import { usageGridStateToAction, contractsGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { DataProcessingActions } from '../data-processing/actions';
-import { ITContractActions } from '../it-contract/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
 import { ITSystemActions } from '../it-system/actions';
 import { OrganizationActions } from '../organization/actions';
@@ -46,7 +45,7 @@ export class GridExportEffects {
               case 'it-system':
                 return of(ITSystemActions.getITSystems(gridState));
               case 'it-contract':
-                return of(ITContractActions.getITContracts(gridState));
+                return of(contractsGridStateToAction(gridState));
               case 'data-processing-registration':
                 return of(DataProcessingActions.getDataProcessings(gridState));
               case 'it-interface':

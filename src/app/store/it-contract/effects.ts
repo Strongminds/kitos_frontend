@@ -43,6 +43,7 @@ import {
   selectOverviewContractRolesCache,
   selectPreviousGridState,
 } from './selectors';
+import { contractsGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Injectable()
 export class ITContractEffects {
@@ -83,7 +84,7 @@ export class ITContractEffects {
         this.store.select(selectOverviewContractRoles),
         this.store.select(selectPreviousGridState),
       ]),
-      switchMap(([{ gridState }, organizationUuid, contractRoles, previousGridState]) => {
+      switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, contractRoles, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
         const cachedRange = this.gridDataCacheService.get(gridState);
@@ -96,9 +97,10 @@ export class ITContractEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
+           `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
             DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),
-            ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&${fixedOdataString}&$count=true`
+            ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
+          
           )
           .pipe(
             map((data) => {
@@ -118,7 +120,7 @@ export class ITContractEffects {
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridState),
-      map(({ gridState }) => ITContractActions.getITContracts(gridState))
+      map(({ gridState }) => contractsGridStateToAction(gridState))
     );
   });
 
@@ -702,7 +704,7 @@ function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | unde
   roles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
-      `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
+      `RoleAssignments/any(d: $1d/UserFullName$2 and d/RoleId eq ${role.id})`
     );
   });
 

@@ -131,7 +131,14 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
     const sort: SortDescriptor[] = this.getLocalStorageSort();
     if (!sort) return;
-    this.onSortChange(sort);
+    this.subscriptions.add(
+      this.columns$.pipe(first()).subscribe((columns) => {
+        //This check prevents stale state from being used to sort the grid
+        const columnToBeSorted = columns?.find((column) => column.field === sort[0].field);
+        if (!columnToBeSorted || columnToBeSorted.sortable === false) return;
+        this.onSortChange(sort);
+      })
+    );
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -358,6 +365,10 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (applications === true) return true;
 
     return this.gridUIConfigService.isColumnEnabled(column, applications);
+  }
+
+  public totalDataAmount(): number {
+    return this.data?.total ?? 0;
   }
 
   private isExcelOnlyColumn(column: GridColumn): boolean {

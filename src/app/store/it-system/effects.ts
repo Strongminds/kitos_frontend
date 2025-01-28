@@ -11,8 +11,12 @@ import {
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
-import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
-import { adaptITSystem, ITSystem } from 'src/app/shared/models/it-system/it-system.model';
+import {
+  castContainsFieldToString,
+  replaceQueryByMultiplePropertyContains,
+} from 'src/app/shared/helpers/odata-query.helpers';
+import { toODataString } from 'src/app/shared/models/grid-state.model';
+import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
@@ -273,8 +277,10 @@ export class ITSystemEffects {
 function applyQueryFixes(odataString: string): string {
   let fixedOdataString = odataString
     .replace(/(\w+\()KLEIds(.*\))/, 'TaskRefs/any(c: $1c/TaskKey$2)')
-    .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(c: $1c/Description$2)')
-    .replace(/contains\(Uuid,/, "contains(CAST(Uuid, 'Edm.String'),");
+    .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(d: $1d/Description$2)');
+
+  fixedOdataString = castContainsFieldToString(fixedOdataString, 'Uuid');
+  fixedOdataString = castContainsFieldToString(fixedOdataString, 'ExternalUuid');
 
   const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
   fixedOdataString = replaceQueryByMultiplePropertyContains(
@@ -283,6 +289,5 @@ function applyQueryFixes(odataString: string): string {
     'LastChangedByUser',
     lastChangedByUserSearchedProperties
   );
-
   return fixedOdataString;
 }

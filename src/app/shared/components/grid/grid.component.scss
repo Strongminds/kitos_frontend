@@ -11,6 +11,16 @@
 
 .sticky-empty-state {
   position: fixed;
-  left: 50%;
-  z-index: 1000; /* Ensure it is above other content */
+  left: 45%;
+  z-index: 1000;
+}
+
+.toolbar-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.result-amount-padding {
+  padding-right: $padding-large;
 }
