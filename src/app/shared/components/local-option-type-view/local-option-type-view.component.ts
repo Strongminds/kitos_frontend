@@ -19,6 +19,7 @@ export class LocalOptionTypeViewComponent extends BaseComponent implements OnIni
   @Input() expandedByDefault: boolean = false;
   @Input() title: string = '';
   @Input() disableAccordion: boolean = false;
+  @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
 
   @Input() showWriteAccess: boolean = false;
   @Input() showDescription: boolean = true;
