@@ -3,14 +3,16 @@ import { ODataSettings } from '@progress/kendo-data-query/dist/npm/odata.operato
 import { GRID_DATA_CACHE_CHUNK_SIZE } from '../constants/constants';
 import { GridDataCache, GridDataCacheChunk, GridDataCacheRange } from '../models/grid-data.model';
 import { GridState, toODataString } from '../models/grid-state.model';
+import { isEqual } from 'lodash';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GridDataCacheService {
   private emptyCacheRange = {
-    data: undefined, total: 0,
-  }
+    data: undefined,
+    total: 0,
+  };
   private chunkSize = GRID_DATA_CACHE_CHUNK_SIZE;
   private cache: GridDataCache = {
     chunks: [],
@@ -104,44 +106,42 @@ export class GridDataCacheService {
       return true;
     }
 
-    if (JSON.stringify(newState.sort) !== JSON.stringify(previousState.sort)) {
+    if (isEqual(newState.sort, previousState.sort)) return true;
+
+    if (!isEqual(newState.filter, previousState.filter)) {
       return true;
     }
 
-    if (JSON.stringify(newState.filter) !== JSON.stringify(previousState.filter)) {
-      return true;
-    }
-
-    if (JSON.stringify(newState.group) !== JSON.stringify(previousState.group)) {
+    if (!isEqual(newState.group, previousState.group)) {
       return true;
     }
 
     return false;
   }
 
-  private getChunkSkip(skip: number | undefined) {
+  private getChunkedSkip(skip: number | undefined) {
     return Math.floor((skip ?? 0) / this.chunkSize) * this.chunkSize;
   }
 
-  private getChunkTake(gridState: GridState) {
+  private getChunkedTake(gridState: GridState) {
     const skip = gridState.skip ?? 0;
     const take = gridState.take ?? 0;
-    const chunkSkip = this.getChunkSkip(gridState.skip);
+    const chunkSkip = this.getChunkedSkip(gridState.skip);
     return Math.ceil((skip + take) / this.chunkSize) * this.chunkSize - chunkSkip;
   }
 
   private getCacheStartIndex(gridState: GridState) {
-    return this.getChunkSkip(gridState.skip) / this.chunkSize;
+    return this.getChunkedSkip(gridState.skip) / this.chunkSize;
   }
 
   private getChunkCount(gridState: GridState) {
-    const chunkTake = this.getChunkTake(gridState);
+    const chunkTake = this.getChunkedTake(gridState);
     return chunkTake / this.chunkSize;
   }
 
-  public toCacheableODataString(gridState: GridState, settings?: ODataSettings) {
-    const chunkSkip = this.getChunkSkip(gridState.skip);
-    const chunkTake = this.getChunkTake(gridState);
+  public toChunkedODataString(gridState: GridState, settings?: ODataSettings) {
+    const chunkSkip = this.getChunkedSkip(gridState.skip);
+    const chunkTake = this.getChunkedTake(gridState);
     const cacheableGridState = {
       ...gridState,
       skip: chunkSkip,
