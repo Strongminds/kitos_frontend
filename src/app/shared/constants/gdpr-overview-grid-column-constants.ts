@@ -25,3 +25,4 @@ export const USER_SUPERVISION = 'userSupervision.name';
 export const USER_SUPERVISION_DOCUMENTATION = 'userSupervisionDocumentationUrl';
 export const USER_SUPERVISION_DOCUMENTATION_NAME = 'userSupervisionDocumentationUrlName';
 export const NEXT_DATA_RETENTION_EVALUATION_DATE = 'nextDataRetentionEvaluationDate';
+export const COUNTRIES_SUBJECT_TO_DATA_TRANSFER = 'insecureCountriesSubjectToDataTransfer';

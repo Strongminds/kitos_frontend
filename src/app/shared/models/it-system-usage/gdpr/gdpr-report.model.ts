@@ -31,6 +31,7 @@ export interface GdprReport {
   userSupervisionDocumentationUrl?: string;
   userSupervisionDocumentationUrlName?: string;
   nextDataRetentionEvaluationDate?: string;
+  insecureCountriesSubjectToDataTransfer: string;
 }
 
 export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
@@ -63,5 +64,6 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     userSupervisionDocumentationUrl: dto.userSupervisionDocumentationUrl,
     userSupervisionDocumentationUrlName: dto.userSupervisionDocumentationUrlName,
     nextDataRetentionEvaluationDate: dto.nextDataRetentionEvaluationDate,
+    insecureCountriesSubjectToDataTransfer: (dto as any).insecureCountriesSubjectToDataTransfer.join(', ') ?? '',
   };
 }

@@ -186,6 +186,11 @@ export class GdprOverviewComponent {
       hidden: false,
       style: 'date',
     },
+    {
+      field: GdprFields.COUNTRIES_SUBJECT_TO_DATA_TRANSFER,
+      title: $localize`Lande som data overføres til`,
+      hidden: false,
+    },
   ];
 
   public readonly filteredGridColumns$ = of(this.gridColumns).pipe(
