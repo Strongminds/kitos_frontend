@@ -5,7 +5,6 @@ import { interval, merge, of } from 'rxjs';
 import { filter, mergeMap, tap } from 'rxjs/operators';
 import { TWO_MINUTES_IN_MILLISECONDS } from 'src/app/shared/constants/constants';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { DataProcessingActions } from '../data-processing/actions';
 import { ITContractActions } from '../it-contract/actions';

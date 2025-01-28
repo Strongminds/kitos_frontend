@@ -3,9 +3,8 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { toODataString } from '@progress/kendo-data-query';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, filter, map, of, switchMap, tap } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
@@ -14,12 +13,12 @@ import { adaptOrganization } from 'src/app/shared/models/organization/organizati
 import { adaptOrganizationPermissions } from 'src/app/shared/models/organization/organization-permissions.model';
 import { mapUIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { UserActions } from '../user-store/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationActions } from './actions';
-import { selectHasValidUIRootConfigCache } from './selectors';
-import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectPreviousGridState } from './organization-user/selectors';
+import { selectHasValidUIRootConfigCache } from './selectors';
 
 @Injectable()
 export class OrganizationEffects {
@@ -29,28 +28,28 @@ export class OrganizationEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private gridDataCacheService: GridDataCacheService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getOrganizations$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationActions.getOrganizations),
-      concatLatestFrom(() =>
-      this.store.select(selectPreviousGridState)),
+      concatLatestFrom(() => this.store.select(selectPreviousGridState)),
       switchMap(([{ gridState }, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.getData(gridState);
-        if (cachedData !== undefined) {
-          const cachedTotal = this.gridDataCacheService.getTotal();
-          return of(OrganizationActions.getOrganizationsSuccess(cachedData, cachedTotal));
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(OrganizationActions.getOrganizationsSuccess(cachedRange.data, cachedRange.total));
         }
 
         const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
         const fixedOdataString = applyQueryFixes(cacheableOdataString);
 
         return this.httpClient
-          .get<OData>(`/odata/Organizations?${fixedOdataString}&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true`)
+          .get<OData>(
+            `/odata/Organizations?${fixedOdataString}&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true`
+          )
           .pipe(
             map((data) => {
               const dataItems = compact(data.value.map(adaptOrganization));
@@ -59,12 +58,8 @@ export class OrganizationEffects {
 
               const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
 
-              return OrganizationActions.getOrganizationsSuccess(
-                returnData, total
-              )
-            }
-
-            ),
+              return OrganizationActions.getOrganizationsSuccess(returnData, total);
+            }),
             catchError(() => of(OrganizationActions.getOrganizationsError()))
           );
       })

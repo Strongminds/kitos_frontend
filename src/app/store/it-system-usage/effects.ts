@@ -17,7 +17,7 @@ import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-cons
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
-import { adaptITSystemUsage, ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
+import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
@@ -69,10 +69,9 @@ export class ITSystemUsageEffects {
       switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.getData(gridState);
-        if (cachedData !== undefined) {
-          const cachedTotal = this.gridDataCacheService.getTotal();
-          return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedData, cachedTotal));
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedRange.data, cachedRange.total));
         }
 
         const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });

@@ -20,7 +20,7 @@ import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-c
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
 import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
-import { adaptITContract, ITContract } from 'src/app/shared/models/it-contract/it-contract.model';
+import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -86,10 +86,9 @@ export class ITContractEffects {
       switchMap(([{ gridState }, organizationUuid, contractRoles, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.getData(gridState);
-        if (cachedData !== undefined) {
-          const cachedTotal = this.gridDataCacheService.getTotal();
-          return of(ITContractActions.getITContractsSuccess(cachedData, cachedTotal));
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(ITContractActions.getITContractsSuccess(cachedRange.data, cachedRange.total));
         }
 
         const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });

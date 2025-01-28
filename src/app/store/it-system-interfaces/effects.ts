@@ -7,8 +7,10 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { INTERFACE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
-import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
-import { adaptITInterface, ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
+import {
+    replaceQueryByMultiplePropertyContains,
+} from 'src/app/shared/helpers/odata-query.helpers';
+import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
@@ -35,10 +37,9 @@ export class ITInterfaceEffects {
       switchMap(([{ gridState }, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.getData(gridState);
-        if (cachedData !== undefined) {
-          const cachedTotal = this.gridDataCacheService.getTotal();
-          return of(ITInterfaceActions.getITInterfacesSuccess(cachedData, cachedTotal));
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(ITInterfaceActions.getITInterfacesSuccess(cachedRange.data, cachedRange.total));
         }
 
         const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState);

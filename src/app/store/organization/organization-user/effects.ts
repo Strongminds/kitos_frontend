@@ -35,10 +35,9 @@ export class OrganizationUserEffects {
       switchMap(([{ gridState }, organizationUuid, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.getData(gridState);
-        if (cachedData !== undefined) {
-          const cachedTotal = this.gridDataCacheService.getTotal();
-          return of(OrganizationUserActions.getOrganizationUsersSuccess(cachedData, cachedTotal));
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(OrganizationUserActions.getOrganizationUsersSuccess(cachedRange.data, cachedRange.total));
         }
 
         const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });

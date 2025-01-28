@@ -58,10 +58,9 @@ export class ITSystemEffects {
       switchMap(([{ gridState }, organizationUuid, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedData = this.gridDataCacheService.getData(gridState);
-        if (cachedData !== undefined) {
-          const cachedTotal = this.gridDataCacheService.getTotal();
-          return of(ITSystemActions.getITSystemsSuccess(cachedData, cachedTotal));
+        const cachedRange = this.gridDataCacheService.get(gridState);
+        if (cachedRange.data !== undefined) {
+          return of(ITSystemActions.getITSystemsSuccess(cachedRange.data, cachedRange.total));
         }
 
         const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState);
@@ -81,9 +80,7 @@ export class ITSystemEffects {
           .pipe(
             map((data) => {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              const dataItems = compact(
-                data.value.map((value: any) => adaptITSystem(value, organizationUuid))
-              );
+              const dataItems = compact(data.value.map((value: any) => adaptITSystem(value, organizationUuid)));
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
 

@@ -1,21 +1,16 @@
 import { Injectable } from '@angular/core';
 import { ODataSettings } from '@progress/kendo-data-query/dist/npm/odata.operators';
 import { GRID_DATA_CACHE_CHUNK_SIZE } from '../constants/constants';
+import { GridDataCache, GridDataCacheChunk, GridDataCacheRange } from '../models/grid-data.model';
 import { GridState, toODataString } from '../models/grid-state.model';
 
-interface GridDataCache {
-  chunks: (GridDataCacheChunk | undefined)[];
-  total: number;
-}
-
-export interface GridDataCacheChunk {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  data: any[];
-}
 @Injectable({
   providedIn: 'root',
 })
 export class GridDataCacheService {
+  private emptyCacheRange = {
+    data: undefined, total: 0,
+  }
   private chunkSize = GRID_DATA_CACHE_CHUNK_SIZE;
   private cache: GridDataCache = {
     chunks: [],
@@ -24,20 +19,23 @@ export class GridDataCacheService {
 
   constructor() {}
 
-  public getData(gridState: GridState) {
+  public get(gridState: GridState): GridDataCacheRange {
     const cacheChunks = this.cache.chunks;
-    if (cacheChunks.length === 0) return undefined;
+    if (cacheChunks.length === 0) return this.emptyCacheRange;
 
     const cacheStartIndex = this.getCacheStartIndex(gridState);
     const chunkCount = this.getChunkCount(gridState);
 
-    const chunksInSlice = cacheChunks
+    const relevantChunks = cacheChunks
       .slice(cacheStartIndex, cacheStartIndex + chunkCount)
       .filter((chunk) => chunk !== undefined);
 
-    if (chunksInSlice.length !== chunkCount) return undefined;
+    if (relevantChunks.length !== chunkCount) return this.emptyCacheRange;
 
-    return this.gridStateSliceFromChunks(chunksInSlice, gridState);
+    return {
+      data: this.gridStateSliceFromChunks(relevantChunks, gridState),
+      total: this.cache.total,
+    }
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
