@@ -18,6 +18,7 @@ import {
 } from 'src/app/api/v2';
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { contractsGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
 import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
@@ -43,7 +44,6 @@ import {
   selectOverviewContractRolesCache,
   selectPreviousGridState,
 } from './selectors';
-import { contractsGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Injectable()
 export class ITContractEffects {
@@ -92,15 +92,14 @@ export class ITContractEffects {
           return of(ITContractActions.getITContractsSuccess(cachedRange.data, cachedRange.total));
         }
 
-        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
         const fixedOdataString = applyQueryFixes(cacheableOdataString, contractRoles);
 
         return this.httpClient
           .get<OData>(
-           `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
+            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
             DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),
             ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
-          
           )
           .pipe(
             map((data) => {

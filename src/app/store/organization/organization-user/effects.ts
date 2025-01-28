@@ -3,7 +3,6 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { toODataString } from '@progress/kendo-data-query';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
@@ -40,7 +39,7 @@ export class OrganizationUserEffects {
           return of(OrganizationUserActions.getOrganizationUsersSuccess(cachedRange.data, cachedRange.total));
         }
 
-        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
         const fixedOdataString = applyQueryFixes(cacheableOdataString);
 
         return this.httpClient

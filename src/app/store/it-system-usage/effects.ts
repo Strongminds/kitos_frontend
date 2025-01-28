@@ -16,6 +16,7 @@ import {
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
+import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -38,7 +39,6 @@ import {
   selectPreviousGridState,
   selectUsageGridColumns,
 } from './selectors';
-import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
 
 @Injectable()
 export class ITSystemUsageEffects {
@@ -75,7 +75,7 @@ export class ITSystemUsageEffects {
           return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedRange.data, cachedRange.total));
         }
 
-        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
         const fixedOdataString = applyQueryFixes(cacheableOdataString, systemRoles);
 
         return this.httpClient

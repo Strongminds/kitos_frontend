@@ -7,7 +7,10 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { INTERFACE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
-import { castContainsFieldToString, replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
+import {
+  castContainsFieldToString,
+  replaceQueryByMultiplePropertyContains,
+} from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -40,7 +43,7 @@ export class ITInterfaceEffects {
           return of(ITInterfaceActions.getITInterfacesSuccess(cachedRange.data, cachedRange.total));
         }
 
-        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState);
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState);
         const fixedOdataString = applyQueryFixes(cacheableOdataString);
 
         return this.httpClient

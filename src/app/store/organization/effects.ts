@@ -43,7 +43,7 @@ export class OrganizationEffects {
           return of(OrganizationActions.getOrganizationsSuccess(cachedRange.data, cachedRange.total));
         }
 
-        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
         const fixedOdataString = applyQueryFixes(cacheableOdataString);
 
         return this.httpClient

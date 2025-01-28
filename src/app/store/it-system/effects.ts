@@ -15,7 +15,6 @@ import {
   castContainsFieldToString,
   replaceQueryByMultiplePropertyContains,
 } from 'src/app/shared/helpers/odata-query.helpers';
-import { toODataString } from 'src/app/shared/models/grid-state.model';
 import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -67,7 +66,7 @@ export class ITSystemEffects {
           return of(ITSystemActions.getITSystemsSuccess(cachedRange.data, cachedRange.total));
         }
 
-        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState);
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState);
         const fixedOdataString = applyQueryFixes(cacheableOdataString);
 
         return this.httpClient

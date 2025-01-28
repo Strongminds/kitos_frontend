@@ -37,7 +37,7 @@ export class GridDataCacheService {
     return {
       data: this.gridStateSliceFromChunks(relevantChunks, gridState),
       total: this.cache.total,
-    }
+    };
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -60,17 +60,15 @@ export class GridDataCacheService {
   }
 
   public reset() {
-    if (!this.isEmpty()) {
-      this.cache = {
-        chunks: [],
-        total: 0,
-      };
-    }
+    this.cache = {
+      chunks: [],
+      total: 0,
+    };
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public gridStateSliceFromArray(data: any[], gridState: GridState) {
-    const chunkSkip = this.getChunkSkip(gridState.skip);
+    const chunkSkip = this.getChunkedSkip(gridState.skip);
     const startSlice = (gridState.skip ?? 0) - chunkSkip;
     const endSlice = startSlice + (gridState.take ?? 0);
 
@@ -87,10 +85,6 @@ export class GridDataCacheService {
       concatenatedData.push(...chunk.data);
     }
     return this.gridStateSliceFromArray(concatenatedData, gridState);
-  }
-
-  private isEmpty() {
-    return this.cache.chunks.length === 0 && this.cache.total === 0;
   }
 
   public getTotal() {

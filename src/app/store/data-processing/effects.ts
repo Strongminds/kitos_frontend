@@ -86,7 +86,7 @@ export class DataProcessingEffects {
           return of(DataProcessingActions.getDataProcessingsSuccess(cachedRange.data, cachedRange.total));
         }
 
-        const cacheableOdataString = this.gridDataCacheService.toCacheableODataString(gridState, { utcDates: true });
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
         const fixedOdataString = applyQueryFixes(cacheableOdataString, overviewRoles);
 
         return this.httpClient
