@@ -164,7 +164,7 @@ export class GdprOverviewComponent {
       title: $localize`Dokumentation til teknisk foranstaltning`,
       hidden: false,
       style: 'title-link',
-      idField: GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION, //BEFORE MERGING: REMEMBER TO HANDLE EXPORT
+      idField: GdprFields.TECHNICAL_SUPERVISION_DOCUMENTATION,
     },
     {
       field: GdprFields.USER_SUPERVISION,
