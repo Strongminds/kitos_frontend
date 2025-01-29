@@ -374,7 +374,6 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   private toggleRepetitionFields(isRepeated: boolean) {
     this.isRepeated = isRepeated;
-    console.log('isRepeated  ', isRepeated);
     if (isRepeated) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -389,8 +388,9 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       this.notificationForm.controls.fromDateControl.patchValue(undefined);
       this.notificationForm.controls.toDateControl.patchValue(undefined);
     }
-    console.log(this.notificationForm.controls.repetitionControl.validator + ' is repet validation');
-    console.log(this.notificationForm.controls.fromDateControl.validator + ' is fromdate validation');
+
+    this.notificationForm.controls.repetitionControl.updateValueAndValidity();
+    this.notificationForm.controls.fromDateControl.updateValueAndValidity();
   }
 
   private toggleShowDateOver28Tooltip() {
