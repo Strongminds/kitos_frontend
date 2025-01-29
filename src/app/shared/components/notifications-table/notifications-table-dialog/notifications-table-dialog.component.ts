@@ -119,11 +119,16 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   }
 
   public receipientsChanged(roles: string[], isReceivers: boolean): void {
+    console.log('recipients changed')
     this.getReceipientsControl(isReceivers).setValue(roles);
-  }
+    this.getReceipientsControl(isReceivers).updateValueAndValidity();
+  } 
 
   public receipientsCleared(isReceivers: boolean): void {
+    console.log('recipients cleared')
+
     this.getReceipientsControl(isReceivers).setValue([]);
+    this.getReceipientsControl(isReceivers).updateValueAndValidity();
   }
 
   public receipientsAdded(receipient: MultiSelectDropdownItem<string>, isReceivers: boolean): void {
