@@ -400,6 +400,16 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     }
   }
 
+  public repetitionIsInvalid(){
+    return this.repeatIsSelected() && this.notificationForm.controls.repetitionControl.invalid;
+  }
+
+
+
+  public bodyIsInvalid(){
+    return this.notificationForm.controls.bodyControl.invalid;
+  }
+
   private disableForms() {
     this.notificationForm.disable();
   }
