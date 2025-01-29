@@ -113,7 +113,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
       if (!this.notification?.active) {
         this.canEdit = false;
-        this.disableForms();
+        this.disableForm();
       }
     }
   }
@@ -132,6 +132,9 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   public hasImmediateNotification = () =>
     this.notification && this.notification.notificationType !== this.notificationTypeRepeat.value;
+
+  public hasRepeatNotification = () =>
+    this.notification && this.notification.notificationType === this.notificationTypeRepeat.value;
 
   public onCancel() {
     this.dialogRef.close();
@@ -353,10 +356,10 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   private setupDisabledStateAndValidators() {
     if (this.hasImmediateNotification()) {
       this.canEdit = false;
-      this.disableForms();
+      this.disableForm();
     }
 
-    if (this.notification && this.notification.notificationType === this.notificationTypeRepeat.value) {
+    if (this.hasRepeatNotification()) {
       this.toggleRepetitionFields(true);
       this.notificationForm.controls.notificationTypeControl.disable();
       this.notificationForm.controls.repetitionControl.disable();
@@ -371,7 +374,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   private toggleRepetitionFields(isRepeated: boolean) {
     this.isRepeated = isRepeated;
-
+    console.log('isRepeated  ', isRepeated);
     if (isRepeated) {
       const today = new Date();
       today.setHours(0, 0, 0, 0);
@@ -386,6 +389,8 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       this.notificationForm.controls.fromDateControl.patchValue(undefined);
       this.notificationForm.controls.toDateControl.patchValue(undefined);
     }
+    console.log(this.notificationForm.controls.repetitionControl.validator + ' is repet validation');
+    console.log(this.notificationForm.controls.fromDateControl.validator + ' is fromdate validation');
   }
 
   private toggleShowDateOver28Tooltip() {
@@ -413,7 +418,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     return this.notificationForm.controls.bodyControl.invalid;
   }
 
-  private disableForms() {
+  private disableForm() {
     this.notificationForm.disable();
   }
 
