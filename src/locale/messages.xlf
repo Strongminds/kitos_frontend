@@ -4909,9 +4909,6 @@
       <trans-unit id="3601299378626386756" datatype="html">
         <source>Bemærkninger til risikovurdering</source>
       </trans-unit>
-      <trans-unit id="4272850826703284078" datatype="html">
-        <source>Dato for hvornår næste gang data må slettes</source>
-      </trans-unit>
       <trans-unit id="5098221578566106270" datatype="html">
         <source>Dokumentation til teknisk foranstaltning</source>
       </trans-unit>
@@ -4920,6 +4917,15 @@
       </trans-unit>
       <trans-unit id="7783045105356638349" datatype="html">
         <source>Dokumentation til brugerkontrol</source>
+      </trans-unit>
+      <trans-unit id="2091835326580621436" datatype="html">
+        <source>Seneste tilsyn bemærkning</source>
+      </trans-unit>
+      <trans-unit id="2380273627031892685" datatype="html">
+        <source>Lande som data overføres til</source>
+      </trans-unit>
+      <trans-unit id="8408216526511596009" datatype="html">
+        <source>Dato for næste gang data må slettes</source>
       </trans-unit>
     </body>
   </file>

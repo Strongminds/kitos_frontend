@@ -6477,9 +6477,17 @@
         <source>Dokumentation til brugerkontrol</source>
         <target state="new">Dokumentation til brugerkontrol</target>
       </trans-unit>
-      <trans-unit id="4272850826703284078" datatype="html">
-        <source>Dato for hvornår næste gang data må slettes</source>
-        <target state="new">Dato for hvornår næste gang data må slettes</target>
+      <trans-unit id="2091835326580621436" datatype="html">
+        <source>Seneste tilsyn bemærkning</source>
+        <target state="new">Seneste tilsyn bemærkning</target>
+      </trans-unit>
+      <trans-unit id="8408216526511596009" datatype="html">
+        <source>Dato for næste gang data må slettes</source>
+        <target state="new">Dato for næste gang data må slettes</target>
+      </trans-unit>
+      <trans-unit id="2380273627031892685" datatype="html">
+        <source>Lande som data overføres til</source>
+        <target state="new">Lande som data overføres til</target>
       </trans-unit>
     </body>
   </file>
