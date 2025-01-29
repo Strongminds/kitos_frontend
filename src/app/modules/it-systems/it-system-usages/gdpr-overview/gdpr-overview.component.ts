@@ -182,7 +182,7 @@ export class GdprOverviewComponent {
     },
     {
       field: GdprFields.NEXT_DATA_RETENTION_EVALUATION_DATE,
-      title: $localize`Dato for hvornår næste gang data må slettes`,
+      title: $localize`Dato for næste gang data må slettes`,
       hidden: false,
       style: 'date',
     },

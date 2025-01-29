@@ -277,7 +277,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       .pipe(first())
       .subscribe((columns) => {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        formattedData = processedData.data.map((item: any) => transformRow(item, columns)); //NOTE: How to handle this properly?
+        formattedData = processedData.data.map((item: any) => transformRow(item, columns));
       });
     return { data: formattedData };
   }
