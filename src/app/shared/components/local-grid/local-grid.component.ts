@@ -9,7 +9,7 @@ import {
 } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor, process } from '@progress/kendo-data-query';
 import { get } from 'lodash';
-import { GridExportActions } from 'src/app/store/grid/actions';
+import { GridActions } from 'src/app/store/grid/actions';
 import { BaseComponent } from '../../base/base.component';
 import {
   DEFAULT_COLUMN_MINIMUM_WIDTH,
@@ -18,7 +18,7 @@ import {
   DEFAULT_DATE_COLUMN_WIDTH,
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
 } from '../../constants/constants';
-import { includedColumnInExport } from '../../helpers/grid-export.helper';
+import { includedColumnInExport, transformRow } from '../../helpers/grid-export.helper';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultLocalGridState } from '../../models/grid-state.model';
 import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events.model';
@@ -38,7 +38,6 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() deletePermission?: boolean | null;
   @Input() withOutline: boolean = false;
   @Input() fitSizeToContent: boolean = false;
-  @Input() height?: string;
   @Input() reorderable: boolean = false;
   @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
 
@@ -61,7 +60,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     this.allData = this.allData.bind(this);
   }
   ngOnInit(): void {
-    this.actions$.pipe(ofType(GridExportActions.exportLocalData)).subscribe(() => this.excelExport());
+    this.actions$.pipe(ofType(GridActions.exportLocalData)).subscribe(() => this.excelExport());
   }
 
   public onModifyClick(item: T) {
@@ -130,8 +129,10 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
       return { data: [] };
     }
     const processedData = process(this.data, { ...this.state, skip: 0, take: this.data.length });
+    const columns = this.getColumnsForExport();
+    const transformedData = processedData.data.map((item) => transformRow(item, columns));
 
-    return { data: processedData.data };
+    return { data: transformedData };
   }
 
   public onRowReorder(event: RowReorderEvent) {
