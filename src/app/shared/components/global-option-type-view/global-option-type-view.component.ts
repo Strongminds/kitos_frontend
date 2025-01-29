@@ -23,6 +23,7 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
   @Input() disableAccordion: boolean = false;
   @Input() showWriteAccess: boolean = false;
   @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
+  @Input() fitSizeToContent = true;
 
   constructor(
     private componentStore: GlobalOptionTypeTableComponentStore,
