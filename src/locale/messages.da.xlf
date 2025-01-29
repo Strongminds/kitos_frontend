@@ -6489,6 +6489,14 @@
         <source>Lande som data overføres til</source>
         <target state="new">Lande som data overføres til</target>
       </trans-unit>
+      <trans-unit id="5905238958958627451" datatype="html">
+        <source>Luk alle</source>
+        <target state="new">Luk alle</target>
+      </trans-unit>
+      <trans-unit id="4228008094140791845" datatype="html">
+        <source>Åben alle</source>
+        <target state="new">Åben alle</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

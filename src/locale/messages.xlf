@@ -4927,6 +4927,12 @@
       <trans-unit id="8408216526511596009" datatype="html">
         <source>Dato for næste gang data må slettes</source>
       </trans-unit>
+      <trans-unit id="4228008094140791845" datatype="html">
+        <source>Åben alle</source>
+      </trans-unit>
+      <trans-unit id="5905238958958627451" datatype="html">
+        <source>Luk alle</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
