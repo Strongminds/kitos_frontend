@@ -107,6 +107,7 @@
         formName="repetitionControl"
         [data]="notificationRepetitionFrequencyOptions"
         [ngClass]="{'invalid-input-border': repetitionIsInvalid()}"
+        (openDropdown)="toggleIsSelectingRepetition()"
       >
       </app-dropdown>
 

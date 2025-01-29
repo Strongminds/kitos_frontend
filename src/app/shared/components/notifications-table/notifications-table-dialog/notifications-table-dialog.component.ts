@@ -84,6 +84,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   public rootUrl: string;
   public canEdit = true;
   private isEdit = false;
+  private isSelectingRepetition = false;
 
   constructor(
     private readonly appRootUrlResolverService: AppRootUrlResolverService,
@@ -401,10 +402,12 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   }
 
   public repetitionIsInvalid(){
-    return this.repeatIsSelected() && this.notificationForm.controls.repetitionControl.invalid;
+    return !this.isSelectingRepetition && this.repeatIsSelected() && this.notificationForm.controls.repetitionControl.invalid;
   }
 
-
+  public toggleIsSelectingRepetition() {
+    this.isSelectingRepetition = !this.isSelectingRepetition;
+  }
 
   public bodyIsInvalid(){
     return this.notificationForm.controls.bodyControl.invalid;
