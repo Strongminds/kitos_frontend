@@ -43,7 +43,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   public readonly migration$ = this.select((state) => state.migration);
   public readonly loading$ = this.select((state) => state.loading);
   public readonly canExecuteMigration$ = this.allowExecuteMigration$();
-  //Updated after getting consequenes
+  //Updated after getting consequences
   public readonly usageUuid$ = this.select((state) => state.usageUuid);
 
   //28/11/24 The API endpoint expects a number from 1 to 25.
