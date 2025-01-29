@@ -5,6 +5,8 @@
       <thead>
         <th i18n>Titel</th>
         <th i18n>Evt. DokumentID/Sagsnr./Anden Reference</th>
+        <th>Sidst ændret</th>
+        <th>Sidst ændret af</th>
         <th i18n>Vises i overblik</th>
       </thead>
       <tbody>
@@ -21,6 +23,8 @@
               externalReference.documentId
             }}</app-paragraph>
           </td>
+          <td>{{ externalReference.lastChangedDate | appDate }}</td>
+          <td>{{ externalReference.lastChangedBy }}</td>
           <td>
             <app-content-space-between>
               <app-paragraph paragraphSize="small"

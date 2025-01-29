@@ -103,8 +103,8 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
                 url: externalReference.url,
                 masterReference: externalReference.masterReference,
                 commands: this.getCommands(externalReference, externalReferences),
-                lastChangedBy: (externalReference as any).lastChangedBy,
-                lastChangedDate: (externalReference as any).lastChanged,
+                lastChangedBy: (externalReference as any).lastChangedByUsername,
+                lastChangedDate: (externalReference as any).lastChangedDate,
               }))
               .sort((a, b) => a.title.localeCompare(b.title))
           )
