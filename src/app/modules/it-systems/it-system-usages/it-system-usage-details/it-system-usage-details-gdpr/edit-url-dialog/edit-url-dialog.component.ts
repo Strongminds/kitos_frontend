@@ -31,9 +31,9 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   public disableSave(){
     if (this.isBusy) return true;
     const controls = this.simpleLinkForm.controls;
-    if (controls.name.value && !controls.url.value) return true;
-    if (controls.url.value && !controls.name.value) return true;
-    return false
+    const name = controls.name.value;
+    const url = controls.url.value;
+    return ((name && !url) || (url && !name));
   }
 
   ngOnInit(): void {
