@@ -398,7 +398,9 @@ export class GridUIConfigService {
       this.store.select(selectDprEnableOversightOptions).pipe(shouldEnable([DprFields.OversightOptionNamesAsCsv])),
       this.store
         .select(selectDprEnableOversights)
-        .pipe(shouldEnable([DprFields.IsOversightCompleted, DprFields.LatestOversightDate])),
+        .pipe(
+          shouldEnable([DprFields.IsOversightCompleted, DprFields.LatestOversightDate, DprFields.LatestOversightRemark])
+        ),
 
       // Roles
       this.store.select(selectDprEnableRoles).pipe(shouldEnable([], ['Roles.Role'])),
@@ -472,6 +474,10 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableGdprRetentionPeriod)
         .pipe(shouldEnable([GdprFields.NEXT_DATA_RETENTION_EVALUATION_DATE])),
+
+      this.store
+        .select(selectDprEnableTransferBasis)
+        .pipe(shouldEnable([GdprFields.COUNTRIES_SUBJECT_TO_DATA_TRANSFER])),
     ]);
   }
 
