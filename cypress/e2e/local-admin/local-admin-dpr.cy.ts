@@ -23,4 +23,8 @@ describe('local-admin dpr', () => {
     });
     cy.getByDataCy('dpr-nav-bar-item').should('not.exist');
   });
+
+  it('Can see non editable option type info text', () => {
+    cy.getByDataCy('local-admin-regular-option-types').click();
+  })
 });

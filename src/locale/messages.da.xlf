@@ -6497,6 +6497,18 @@
         <source>Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</source>
         <target state="new">Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</target>
       </trans-unit>
+      <trans-unit id="9007353493777604696" datatype="html">
+        <source>Data og dokumenter bevares (B)</source>
+        <target state="new">Data og dokumenter bevares (B)</target>
+      </trans-unit>
+      <trans-unit id="4958882387568728993" datatype="html">
+        <source>Data og dokumenter kasseres (K)</source>
+        <target state="new">Data og dokumenter kasseres (K)</target>
+      </trans-unit>
+      <trans-unit id="1337323295460285381" datatype="html">
+        <source>Data bevares, dokumenter kan kasseres</source>
+        <target state="new">Data bevares, dokumenter kan kasseres</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
