@@ -21,7 +21,7 @@ export const archiveDutyChoiceOptions: ArchiveDutyChoice[] = [
   },
   {
     name: ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
-    value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.PreserveDataDiscardOption,
+    value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.PreserveDataCanDiscardDocuments,
   },
   {
     name: $localize`Ved ikke`,

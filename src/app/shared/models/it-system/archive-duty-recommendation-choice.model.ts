@@ -21,7 +21,7 @@ export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationCh
   },
   {
     name: ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.PreserveDataDiscardOption,
+    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.PreserveDataCanDiscardDocuments,
   },
   {
     name: $localize`Ved ikke`,

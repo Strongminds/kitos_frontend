@@ -49,13 +49,13 @@ export interface APIArchivingUpdateRequestDTO {
     documentBearing?: boolean;
 }
 export namespace APIArchivingUpdateRequestDTO {
-    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown' | 'PreserveDataDiscardOption';
+    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown' | 'PreserveDataCanDiscardDocuments';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,
         B: 'B' as ArchiveDutyEnum,
         K: 'K' as ArchiveDutyEnum,
         Unknown: 'Unknown' as ArchiveDutyEnum,
-        PreserveDataDiscardOption: 'PreserveDataDiscardOption' as ArchiveDutyEnum
+        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as ArchiveDutyEnum
     };
 }
 
