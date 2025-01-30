@@ -13,7 +13,7 @@
   (filterChange)="onFilterChange($event)"
   (sortChange)="onSortChange($event)"
   (pageChange)="onPageChange($event)"
-  [scrollable]="scrollable"
+  [scrollable]="reorderable ? 'scrollable' : scrollable"
   style="width: 100%"
   [ngClass]="{ 'grid-outline': withOutline, 'fit-size-to-content': fitSizeToContent, dragging: reorderable, 'expand-height-to-content': !fitSizeToContent }"
 >
