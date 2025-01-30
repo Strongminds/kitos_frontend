@@ -174,14 +174,12 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
     return this.itSystemUsageInternalService
       .getManyItSystemUsageInternalV2GetItSystemUsages({
         organizationUuid: usingOrganizationUuid,
+        systemUuid: sourceItSystemUuid,
       })
       .pipe(
         map((usages) => {
-          const usage = usages.find((u) => u.systemContext.uuid === sourceItSystemUuid);
-          if (!usage) {
-            throw new Error('Usage not found');
-          }
-          return usage.uuid;
+          if (!(usages.length === 1)) throw new Error(`Invalid number of usages received for organizationUuid ${usingOrganizationUuid} and systemUuid ${sourceItSystemUuid}: ${usages.length}`)
+          return usages[0].uuid;
         })
       );
   }
