@@ -119,16 +119,15 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   }
 
   public receipientsChanged(roles: string[], isReceivers: boolean): void {
-    console.log('recipients changed')
-    this.getReceipientsControl(isReceivers).setValue(roles);
-    this.getReceipientsControl(isReceivers).updateValueAndValidity();
-  } 
+    const control = this.getReceipientsControl(isReceivers);
+    control.setValue(roles);
+    control.updateValueAndValidity();
+  }
 
   public receipientsCleared(isReceivers: boolean): void {
-    console.log('recipients cleared')
-
-    this.getReceipientsControl(isReceivers).setValue([]);
-    this.getReceipientsControl(isReceivers).updateValueAndValidity();
+    const control = this.getReceipientsControl(isReceivers);
+    control.setValue([]);
+    control.updateValueAndValidity();
   }
 
   public receipientsAdded(receipient: MultiSelectDropdownItem<string>, isReceivers: boolean): void {
@@ -411,15 +410,17 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     }
   }
 
-  public repetitionIsInvalid(){
-    return !this.isSelectingRepetition && this.repeatIsSelected() && this.notificationForm.controls.repetitionControl.invalid;
+  public repetitionIsInvalid() {
+    return (
+      !this.isSelectingRepetition && this.repeatIsSelected() && this.notificationForm.controls.repetitionControl.invalid
+    );
   }
 
   public toggleIsSelectingRepetition() {
     this.isSelectingRepetition = !this.isSelectingRepetition;
   }
 
-  public bodyIsInvalid(){
+  public bodyIsInvalid() {
     return this.notificationForm.controls.bodyControl.invalid;
   }
 
