@@ -7,6 +7,7 @@ import { BaseComponent } from '../../base/base.component';
 import { LocalAdminOptionType, LocalAdminOptionTypeItem } from '../../models/options/local-admin-option-type.model';
 import { EditLocalOptionTypeDialogComponent } from './edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 import { LocalOptionTypeTableComponentStore } from './local-option-type-table.component-store';
+import { ONLY_EDITABLE_BY_GLOBAL_ADMIN_TEXT } from '../../constants/constants';
 
 @Component({
   selector: 'app-local-option-type-view',
@@ -31,6 +32,8 @@ export class LocalOptionTypeViewComponent extends BaseComponent implements OnIni
   ) {
     super();
   }
+
+  public readonly onlyEditableByGlobalAdminText = ONLY_EDITABLE_BY_GLOBAL_ADMIN_TEXT;
 
   public readonly optionTypeItems$ = this.componentStore.optionTypeItems$;
   public readonly isLoading$ = this.componentStore.isLoading$;

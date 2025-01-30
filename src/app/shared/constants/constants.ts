@@ -51,3 +51,5 @@ export const STRING_FIELD_MAX_LENGTH = 100;
 export const GRID_ROW_HEIGHT = 63;
 
 export const MAX_DIALOG_HEIGHT = '750px';
+
+export const ONLY_EDITABLE_BY_GLOBAL_ADMIN_TEXT = $localize`Disse felter kan kun redigeres af OS2Kitos sekretariatet`;

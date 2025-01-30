@@ -5,7 +5,7 @@
   [checkboxValue]="tabViewModel.isEnabled ?? false"
   [checkboxDisabled]="(tabViewModel.isObligatory ?? false) || (moduleEnabled$ | async) === false"
   (checkboxChanged)="onCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })"
-  [checkboxTooltipText]="tabViewModel.helpText"
+  [tooltipText]="tabViewModel.helpText"
 >
   <app-divider></app-divider>
 
