@@ -6,6 +6,12 @@ describe('local-admin dpr', () => {
     cy.intercept('/api/v2/internal/organizations/*/permissions', {
       fixture: './organizations/organization-permissions-local-admin.json',
     });
+
+    cy.intercept('api/v2/internal/data-processing/*/local-option-types/country-option-types', {fixture: './local-admin/dpr/local-country-option-types.json'});
+    cy.intercept('api/v2/internal/data-processing/*/local-option-types/basis-for-transfer-types', {fixture: './local-admin/dpr/local-basis-for-transfer-types.json'});
+    cy.intercept('api/v2/internal/data-processing/*/local-option-types/data-responsible-types', {fixture: './local-admin/dpr/local-data-responsible-types.json'});
+    cy.intercept('api/v2/internal/data-processing/*/local-option-types/oversight-option-types', {fixture: './local-admin/dpr/local-oversight-option-types.json'});
+
     cy.setup(true, 'local-admin/data-processing');
   });
 
