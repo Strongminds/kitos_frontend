@@ -2,7 +2,7 @@ import { APIRecommendedArchiveDutyResponseDTO } from 'src/app/api/v2';
 import {
   ARCHIVE_B_TYPE_TEXT,
   ARCHIVE_K_TYPE_TEXT,
-  ARCHIVE_PRESERVE_DATA_DISCARD_OPTION_TEXT,
+  ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
 } from '../../constants/constants';
 
 export interface ArchiveDutyRecommendationChoice {
@@ -20,7 +20,7 @@ export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationCh
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum.K,
   },
   {
-    name: ARCHIVE_PRESERVE_DATA_DISCARD_OPTION_TEXT,
+    name: ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum.PreserveDataDiscardOption,
   },
   {
