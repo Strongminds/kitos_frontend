@@ -54,4 +54,4 @@ export const MAX_DIALOG_HEIGHT = '750px';
 
 export const ARCHIVE_B_TYPE_TEXT = $localize`Data og dokumenter bevares (B)`;
 export const ARCHIVE_K_TYPE_TEXT = $localize`Data og dokumenter kasseres (K)`;
-export const ARCHIVE_PRESERVE_DATA_DISCARD_OPTION_TEXT = $localize`Data bevares men udvalgte eller alle dokumenter kan kasseres`;
+export const ARCHIVE_PRESERVE_DATA_DISCARD_OPTION_TEXT = $localize`Data bevares, udvalgte/alle dokumenter kasseres`;
