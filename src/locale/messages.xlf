@@ -4936,6 +4936,9 @@
       <trans-unit id="5403965240191598284" datatype="html">
         <source>Disse felter kan kun redigeres af OS2Kitos sekretariatet</source>
       </trans-unit>
+      <trans-unit id="8520887315607855926" datatype="html">
+        <source>Dette udfald er obligatorisk og kan kun redigeres af OS2Kitos sekretariatet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

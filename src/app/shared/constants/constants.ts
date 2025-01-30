@@ -53,3 +53,4 @@ export const GRID_ROW_HEIGHT = 63;
 export const MAX_DIALOG_HEIGHT = '750px';
 
 export const ONLY_EDITABLE_BY_GLOBAL_ADMIN_TEXT = $localize`Disse felter kan kun redigeres af OS2Kitos sekretariatet`;
+export const OBLIGATORY_LOCAL_OPTION_HELP_TEXT = $localize`Dette udfald er obligatorisk og kan kun redigeres af OS2Kitos sekretariatet`;

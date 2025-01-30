@@ -6501,6 +6501,10 @@
         <source>Disse felter kan kun redigeres af OS2Kitos sekretariatet</source>
         <target state="new">Disse felter kan kun redigeres af OS2Kitos sekretariatet</target>
       </trans-unit>
+      <trans-unit id="8520887315607855926" datatype="html">
+        <source>Dette udfald er obligatorisk og kan kun redigeres af OS2Kitos sekretariatet</source>
+        <target state="new">Dette udfald er obligatorisk og kan kun redigeres af OS2Kitos sekretariatet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
