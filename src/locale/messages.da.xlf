@@ -1479,14 +1479,6 @@
         <source>Måned</source>
         <target state="new">Måned</target>
       </trans-unit>
-      <trans-unit id="2021928621838842498" datatype="html">
-        <source>B</source>
-        <target state="new">B</target>
-      </trans-unit>
-      <trans-unit id="2735420972741760581" datatype="html">
-        <source>K</source>
-        <target state="new">K</target>
-      </trans-unit>
       <trans-unit id="1117664735791660807" datatype="html">
         <source>Ved ikke</source>
         <target state="new">Ved ikke</target>
