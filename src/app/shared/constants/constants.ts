@@ -51,3 +51,7 @@ export const STRING_FIELD_MAX_LENGTH = 100;
 export const GRID_ROW_HEIGHT = 63;
 
 export const MAX_DIALOG_HEIGHT = '750px';
+
+export const ARCHIVE_B_TYPE_TEXT = $localize`Data og dokumenter bevares (B)`;
+export const ARCHIVE_K_TYPE_TEXT = $localize`Data og dokumenter kasseres (K)`;
+export const ARCHIVE_PRESERVE_DATA_DISCARD_OPTION_TEXT = $localize`Data bevares men udvalgte eller alle dokumenter kan kasseres`;

@@ -1,4 +1,9 @@
 import { APIArchivingRegistrationsResponseDTO } from 'src/app/api/v2';
+import {
+  ARCHIVE_B_TYPE_TEXT,
+  ARCHIVE_K_TYPE_TEXT,
+  ARCHIVE_PRESERVE_DATA_DISCARD_OPTION_TEXT,
+} from '../../constants/constants';
 
 export interface ArchiveDutyChoice {
   name: string;
@@ -7,11 +12,11 @@ export interface ArchiveDutyChoice {
 
 export const archiveDutyChoiceOptions: ArchiveDutyChoice[] = [
   {
-    name: $localize`B`,
+    name: ARCHIVE_B_TYPE_TEXT,
     value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.B,
   },
   {
-    name: $localize`K`,
+    name: ARCHIVE_K_TYPE_TEXT,
     value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.K,
   },
   {
@@ -19,7 +24,7 @@ export const archiveDutyChoiceOptions: ArchiveDutyChoice[] = [
     value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.Unknown,
   },
   {
-    name: $localize`Opbevar data, mulighed for kassering af doukemnter`,
+    name: ARCHIVE_PRESERVE_DATA_DISCARD_OPTION_TEXT,
     value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.PreserveDataDiscardOption,
   },
 ];
