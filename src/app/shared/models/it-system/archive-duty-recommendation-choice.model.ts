@@ -3,7 +3,7 @@ import {
   ARCHIVE_B_TYPE_TEXT,
   ARCHIVE_K_TYPE_TEXT,
   ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
-} from '../../constants/constants';
+} from '../../constants/archive.constants';
 
 export interface ArchiveDutyRecommendationChoice {
   name: string;

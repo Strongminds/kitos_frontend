@@ -4933,8 +4933,8 @@
       <trans-unit id="9007353493777604696" datatype="html">
         <source>Data og dokumenter bevares (B)</source>
       </trans-unit>
-      <trans-unit id="1219926775470840801" datatype="html">
-        <source>Data bevares, udvalgte/alle kan dokumenter kasseres</source>
+      <trans-unit id="1337323295460285381" datatype="html">
+        <source>Data bevares, dokumenter kan kasseres</source>
       </trans-unit>
     </body>
   </file>
