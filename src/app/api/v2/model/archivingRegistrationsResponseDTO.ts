@@ -39,12 +39,13 @@ export interface APIArchivingRegistrationsResponseDTO {
     journalPeriods: Array<APIJournalPeriodResponseDTO>;
 }
 export namespace APIArchivingRegistrationsResponseDTO {
-    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown';
+    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown' | 'PreserveDataDiscardOption';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,
         B: 'B' as ArchiveDutyEnum,
         K: 'K' as ArchiveDutyEnum,
-        Unknown: 'Unknown' as ArchiveDutyEnum
+        Unknown: 'Unknown' as ArchiveDutyEnum,
+        PreserveDataDiscardOption: 'PreserveDataDiscardOption' as ArchiveDutyEnum
     };
 }
 

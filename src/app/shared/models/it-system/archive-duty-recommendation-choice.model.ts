@@ -18,6 +18,10 @@ export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationCh
     name: $localize`Ved ikke`,
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation,
   },
+  {
+    name: $localize`Opbevar data, mulighed for kassering af doukemnter`,
+    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.PreserveDataDiscardOption,
+  },
 ];
 
 export const mapArchiveDutyRecommendationChoice = (

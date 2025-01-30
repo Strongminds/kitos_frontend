@@ -18,6 +18,10 @@ export const archiveDutyChoiceOptions: ArchiveDutyChoice[] = [
     name: $localize`Ved ikke`,
     value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.Unknown,
   },
+  {
+    name: $localize`Opbevar data, mulighed for kassering af doukemnter`,
+    value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.PreserveDataDiscardOption,
+  },
 ];
 
 export const mapArchiveDutyChoice = (
