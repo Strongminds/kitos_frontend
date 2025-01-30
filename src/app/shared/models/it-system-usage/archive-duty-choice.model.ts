@@ -20,12 +20,12 @@ export const archiveDutyChoiceOptions: ArchiveDutyChoice[] = [
     value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.K,
   },
   {
-    name: $localize`Ved ikke`,
-    value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.Unknown,
-  },
-  {
     name: ARCHIVE_PRESERVE_DATA_DISCARD_OPTION_TEXT,
     value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.PreserveDataDiscardOption,
+  },
+  {
+    name: $localize`Ved ikke`,
+    value: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum.Unknown,
   },
 ];
 

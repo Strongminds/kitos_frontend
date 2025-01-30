@@ -6497,9 +6497,9 @@
         <source>Data og dokumenter kasseres (K)</source>
         <target state="new">Data og dokumenter kasseres (K)</target>
       </trans-unit>
-      <trans-unit id="8979685620310883836" datatype="html">
-        <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
-        <target state="new">Data bevares men udvalgte eller alle dokumenter kan kasseres</target>
+      <trans-unit id="2117199501177616692" datatype="html">
+        <source>Data bevares, udvalgte/alle dokumenter kasseres</source>
+        <target state="new">Data bevares, udvalgte/alle dokumenter kasseres</target>
       </trans-unit>
     </body>
   </file>

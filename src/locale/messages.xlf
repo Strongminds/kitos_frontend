@@ -4930,11 +4930,11 @@
       <trans-unit id="4958882387568728993" datatype="html">
         <source>Data og dokumenter kasseres (K)</source>
       </trans-unit>
-      <trans-unit id="8979685620310883836" datatype="html">
-        <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
-      </trans-unit>
       <trans-unit id="9007353493777604696" datatype="html">
         <source>Data og dokumenter bevares (B)</source>
+      </trans-unit>
+      <trans-unit id="2117199501177616692" datatype="html">
+        <source>Data bevares, udvalgte/alle dokumenter kasseres</source>
       </trans-unit>
     </body>
   </file>

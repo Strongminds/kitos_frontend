@@ -20,12 +20,12 @@ export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationCh
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum.K,
   },
   {
-    name: $localize`Ved ikke`,
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation,
-  },
-  {
     name: ARCHIVE_PRESERVE_DATA_DISCARD_OPTION_TEXT,
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum.PreserveDataDiscardOption,
+  },
+  {
+    name: $localize`Ved ikke`,
+    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation,
   },
 ];
 
