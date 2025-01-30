@@ -4933,6 +4933,9 @@
       <trans-unit id="5905238958958627451" datatype="html">
         <source>Luk alle</source>
       </trans-unit>
+      <trans-unit id="5403965240191598284" datatype="html">
+        <source>Disse felter kan kun redigeres af OS2Kitos sekretariatet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
