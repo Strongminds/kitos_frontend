@@ -84,6 +84,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   public rootUrl: string;
   public canEdit = true;
   private isEdit = false;
+  private isSelectingRepetition = false;
 
   constructor(
     private readonly appRootUrlResolverService: AppRootUrlResolverService,
@@ -118,11 +119,15 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   }
 
   public receipientsChanged(roles: string[], isReceivers: boolean): void {
-    this.getReceipientsControl(isReceivers).setValue(roles);
+    const control = this.getReceipientsControl(isReceivers);
+    control.setValue(roles);
+    control.updateValueAndValidity();
   }
 
   public receipientsCleared(isReceivers: boolean): void {
-    this.getReceipientsControl(isReceivers).setValue([]);
+    const control = this.getReceipientsControl(isReceivers);
+    control.setValue([]);
+    control.updateValueAndValidity();
   }
 
   public receipientsAdded(receipient: MultiSelectDropdownItem<string>, isReceivers: boolean): void {
@@ -403,6 +408,20 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
       this.showDateOver28Tooltip = dayOfMonth > 28 && repetitionIsMonthOrMore;
     }
+  }
+
+  public repetitionIsInvalid() {
+    return (
+      !this.isSelectingRepetition && this.repeatIsSelected() && this.notificationForm.controls.repetitionControl.invalid
+    );
+  }
+
+  public toggleIsSelectingRepetition() {
+    this.isSelectingRepetition = !this.isSelectingRepetition;
+  }
+
+  public bodyIsInvalid() {
+    return this.notificationForm.controls.bodyControl.invalid;
   }
 
   private disableForm() {
