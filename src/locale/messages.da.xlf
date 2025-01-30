@@ -6497,13 +6497,13 @@
         <source>Åben alle</source>
         <target state="new">Åben alle</target>
       </trans-unit>
-      <trans-unit id="5403965240191598284" datatype="html">
-        <source>Disse felter kan kun redigeres af OS2Kitos sekretariatet</source>
-        <target state="new">Disse felter kan kun redigeres af OS2Kitos sekretariatet</target>
+      <trans-unit id="3407863117871869655" datatype="html">
+        <source>Dette udfaldsrum kan kun redigeres af OS2Kitos sekretariatet</source>
+        <target state="new">Dette udfaldsrum kan kun redigeres af OS2Kitos sekretariatet</target>
       </trans-unit>
-      <trans-unit id="8520887315607855926" datatype="html">
-        <source>Dette udfald er obligatorisk og kan kun redigeres af OS2Kitos sekretariatet</source>
-        <target state="new">Dette udfald er obligatorisk og kan kun redigeres af OS2Kitos sekretariatet</target>
+      <trans-unit id="9044278666187230003" datatype="html">
+        <source>Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</source>
+        <target state="new">Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</target>
       </trans-unit>
     </body>
   </file>
