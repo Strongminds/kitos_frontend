@@ -227,12 +227,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return get(object, property);
   }
 
-  public checkboxChange(value: boolean | undefined, columnUuid?: string) {
-    if (!columnUuid) return;
+  public checkboxChange(value: boolean | undefined, columnSystemUuid?: string) {
+    if (!columnSystemUuid) return;
     if (value === true) {
       switch (this.entityType) {
         case 'it-system':
-          this.store.dispatch(ITSystemUsageActions.createItSystemUsage(columnUuid));
+          this.handleTakeSystemIntoUse(columnSystemUuid);
           break;
         default:
           throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
@@ -240,7 +240,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     } else {
       switch (this.entityType) {
         case 'it-system':
-          this.handleTakeSystemOutOfUse(columnUuid);
+          this.handleTakeSystemOutOfUse(columnSystemUuid);
           break;
         default:
           throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
@@ -248,15 +248,34 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     }
   }
 
-  private handleTakeSystemOutOfUse(columnUuid: string | undefined) {
-    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
+  private handleTakeSystemIntoUse(systemUuid: string) {
+    this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
     this.subscriptions.add(
-      dialogRef.afterClosed().subscribe((result: boolean) => {
-        if (result && columnUuid !== undefined) {
-          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
+      this.actions$.pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess)).subscribe(() => {
+        if (this.state) {
+          this.store.dispatch(ITSystemActions.getITSystems(this.state));
         }
       })
     );
+  }
+
+  private handleTakeSystemOutOfUse(systemUuid: string) {
+    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result && systemUuid !== undefined) {
+          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
+        }
+      })
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess)).subscribe(() => {
+        if (this.state) {
+          this.store.dispatch(ITSystemActions.getITSystems(this.state));
+        }
+      })
+    )
   }
 
   private excelExport(): void {
