@@ -178,7 +178,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       })
       .pipe(
         map((usages) => {
-          if (!(usages.length === 1)) throw new Error(`Invalid number of usages received for organizationUuid ${usingOrganizationUuid} and systemUuid ${sourceItSystemUuid}: ${usages.length}`)
+          if ((usages.length !== 1)) throw new Error(`Invalid number of usages received for organizationUuid ${usingOrganizationUuid} and systemUuid ${sourceItSystemUuid}: ${usages.length}`)
           return usages[0].uuid;
         })
       );
