@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { combineLatestWith, map, mergeMap, Observable, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import {
   APIItSystemUsageMigrationV2ResponseDTO,
+  APIItSystemUsageSearchResultResponseDTO,
   APIV2ItSystemUsageInternalINTERNALService,
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
@@ -178,10 +179,15 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       })
       .pipe(
         map((usages) => {
-          if ((usages.length !== 1)) throw new Error(`Invalid number of usages received for organizationUuid ${usingOrganizationUuid} and systemUuid ${sourceItSystemUuid}: ${usages.length}`)
-          return usages[0].uuid;
+          return this.getPresumedSingleUsage(usages, usingOrganizationUuid, sourceItSystemUuid);
         })
       );
+  }
+
+  //31/1/25 This is a niche situation where a single usage has to be retrieved without knowing its uuid in advance, and did not warrant an API change on its own.
+  private getPresumedSingleUsage(usages: APIItSystemUsageSearchResultResponseDTO[], usingOrganizationUuid: string, sourceItSystemUuid: string){
+    if ((usages.length !== 1)) throw new Error(`Invalid number of usages received for organizationUuid ${usingOrganizationUuid} and systemUuid ${sourceItSystemUuid}: ${usages.length}`)
+    return usages[0].uuid;
   }
 
   public getUnusedItSystemsInOrganization = (nameContent: string) =>
