@@ -19,7 +19,7 @@ import {
   SortDescriptor,
 } from '@progress/kendo-data-query';
 import { cloneDeep, get } from 'lodash';
-import { combineLatest, first, map, Observable, of } from 'rxjs';
+import { combineLatest, debounceTime, first, map, Observable, of } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
@@ -34,6 +34,7 @@ import {
   DEFAULT_COLUMN_WIDTH,
   DEFAULT_DATE_COLUMN_MINIMUM_WIDTH,
   DEFAULT_DATE_COLUMN_WIDTH,
+  DEFAULT_INPUT_DEBOUNCE_TIME,
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
   GRID_ROW_HEIGHT,
 } from '../../constants/constants';
@@ -252,7 +253,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess))
+        .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess), debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME))
         .subscribe(() => this.dispatchGetSystems())
     );
   }
@@ -269,7 +270,10 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess))
+        .pipe(
+          ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
+          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)
+        )
         .subscribe(() => this.dispatchGetSystems())
     );
   }
