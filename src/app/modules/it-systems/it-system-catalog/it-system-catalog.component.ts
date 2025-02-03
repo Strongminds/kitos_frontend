@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, debounceTime, first, withLatestFrom } from 'rxjs';
+import { combineLatestWith, debounceTime, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
@@ -275,7 +276,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
           ofType(ITSystemUsageActions.createItSystemUsageSuccess),
           first(),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          withLatestFrom(this.gridState$)
+          concatLatestFrom(() => this.gridState$)
         )
         .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
     );
@@ -297,7 +298,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
           ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
           first(),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          withLatestFrom(this.gridState$)
+          concatLatestFrom(() => this.gridState$)
         )
         .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
     );
