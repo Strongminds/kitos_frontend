@@ -251,11 +251,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   private handleTakeSystemIntoUse(systemUuid: string) {
     this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess)).subscribe(() => {
-        if (this.state) {
-          this.store.dispatch(ITSystemActions.getITSystems(this.state));
-        }
-      })
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess))
+        .subscribe(() => this.dispatchGetSystems())
     );
   }
 
@@ -270,12 +268,16 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     );
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess)).subscribe(() => {
-        if (this.state) {
-          this.store.dispatch(ITSystemActions.getITSystems(this.state));
-        }
-      })
-    )
+      this.actions$
+        .pipe(ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess))
+        .subscribe(() => this.dispatchGetSystems())
+    );
+  }
+
+  private dispatchGetSystems() {
+    if (this.state) {
+      this.store.dispatch(ITSystemActions.getITSystems(this.state));
+    }
   }
 
   private excelExport(): void {
