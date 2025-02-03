@@ -4955,9 +4955,9 @@
         <source>Kunne ikke logge ind</source>
         <target state="new">Kunne ikke logge ind</target>
       </trans-unit>
-      <trans-unit id="248156203023560452" datatype="html">
-        <source>Feltet er opdateret.</source>
-        <target state="new">Feltet er opdateret.</target>
+      <trans-unit id="6789380386863340836" datatype="html">
+        <source>Feltet blev opdateret.</source>
+        <target state="new">Feltet blev opdateret.</target>
       </trans-unit>
       <trans-unit id="1533849682778732403" datatype="html">
         <source>Feltet kunne ikke opdateres.</source>
@@ -6488,6 +6488,14 @@
       <trans-unit id="4228008094140791845" datatype="html">
         <source>Åben alle</source>
         <target state="new">Åben alle</target>
+      </trans-unit>
+      <trans-unit id="3407863117871869655" datatype="html">
+        <source>Dette udfaldsrum kan kun redigeres af OS2Kitos sekretariatet</source>
+        <target state="new">Dette udfaldsrum kan kun redigeres af OS2Kitos sekretariatet</target>
+      </trans-unit>
+      <trans-unit id="9044278666187230003" datatype="html">
+        <source>Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</source>
+        <target state="new">Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</target>
       </trans-unit>
       <trans-unit id="9007353493777604696" datatype="html">
         <source>Data og dokumenter bevares (B)</source>
