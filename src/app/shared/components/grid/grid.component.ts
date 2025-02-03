@@ -276,7 +276,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   private dispatchGetSystems() {
     if (this.state) {
-      this.store.dispatch(ITSystemActions.getITSystems(this.state));
+      this.store.dispatch(ITSystemActions.getITSystems(this.state, true));
     }
   }
 

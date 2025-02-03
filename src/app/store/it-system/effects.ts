@@ -58,8 +58,8 @@ export class ITSystemEffects {
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectPreviousGridState),
       ]),
-      switchMap(([{ gridState }, organizationUuid, previousGridState]) => {
-        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+      switchMap(([{ gridState, dataChangedInGrid }, organizationUuid, previousGridState]) => {
+        this.gridDataCacheService.tryResetOnGridStateOrDataChange(gridState, previousGridState, dataChangedInGrid);
 
         const cachedRange = this.gridDataCacheService.get(gridState);
         if (cachedRange.data !== undefined) {
