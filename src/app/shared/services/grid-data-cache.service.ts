@@ -135,7 +135,6 @@ export class GridDataCacheService {
   }
 
   public toChunkedODataString(gridState: GridState, settings?: ODataSettings) {
-    console.log('gridState', gridState);
     if (gridState.all) return toODataString(gridState, settings);
     const chunkSkip = this.getChunkedSkip(gridState.skip);
     const chunkTake = this.getChunkedTake(gridState);

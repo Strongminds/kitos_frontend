@@ -263,7 +263,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   private excelExport(): void {
     if (this.grid) {
-      console.log('Exporting data');
       this.grid.saveAsExcel();
       this.store.dispatch(GridActions.exportCompleted({ ...this.state, all: false }, this.entityType));
     }
