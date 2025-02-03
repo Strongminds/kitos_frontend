@@ -25,6 +25,8 @@ export const ITSystemActions = createActionGroup({
     'Update Grid Columns': (gridColumns: GridColumn[]) => ({ gridColumns }),
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 
+    'Update Grid Data From Grid': (gridState: GridState) => ({ gridState }),
+
     'Get IT System Permissions': (systemUuid: string) => ({ systemUuid }),
     'Get IT System Permissions Success ': (permissions?: APIResourcePermissionsResponseDTO) => ({
       permissions,

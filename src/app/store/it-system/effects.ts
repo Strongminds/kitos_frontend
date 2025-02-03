@@ -114,6 +114,13 @@ export class ITSystemEffects {
     );
   });
 
+  updateGridDataFromGrid$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemActions.updateGridDataFromGrid),
+      map(({ gridState }) => ITSystemActions.getITSystems(gridState, true))
+    )
+  });
+
   deleteItSystem$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.deleteITSystem),

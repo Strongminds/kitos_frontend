@@ -254,7 +254,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess), debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME))
-        .subscribe(() => this.dispatchGetSystems())
+        .subscribe(() => this.dispatchGetSystemsOnDataUpdate())
     );
   }
 
@@ -274,13 +274,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
           ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)
         )
-        .subscribe(() => this.dispatchGetSystems())
+        .subscribe(() => this.dispatchGetSystemsOnDataUpdate())
     );
   }
 
-  private dispatchGetSystems() {
+  private dispatchGetSystemsOnDataUpdate() {
     if (this.state) {
-      this.store.dispatch(ITSystemActions.getITSystems(this.state, true));
+      this.store.dispatch(ITSystemActions.updateGridDataFromGrid(this.state));
     }
   }
 
