@@ -23,3 +23,4 @@ $password = $Env:MsDeployPassword
   -source:dirPath="$deployment_packages_dir" `
   -allowUntrusted `
   -dest:dirPath="`"C:\inetpub\kitos-frontend`",computerName=`"$computerName`",userName=`"$username`",password=`"$password`",authtype=`"Basic`",includeAcls=`"False`""
+if ($LASTEXITCODE -ne 0) { Throw "FAILED TO DEPLOY to $computerName" }
