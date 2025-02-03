@@ -273,6 +273,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       this.actions$
         .pipe(
           ofType(ITSystemUsageActions.createItSystemUsageSuccess),
+          first(),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
           withLatestFrom(this.gridState$)
         )
@@ -294,6 +295,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       this.actions$
         .pipe(
           ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
+          first(),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
           withLatestFrom(this.gridState$)
         )
