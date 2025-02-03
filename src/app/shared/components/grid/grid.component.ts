@@ -228,12 +228,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     return get(object, property);
   }
 
-  public checkboxChange(value: boolean | undefined, columnSystemUuid?: string) {
-    if (!columnSystemUuid) return;
+  public checkboxChange(value: boolean | undefined, rowEntityUuid?: string) {
+    if (!rowEntityUuid) return;
     if (value === true) {
       switch (this.entityType) {
         case 'it-system':
-          this.handleTakeSystemIntoUse(columnSystemUuid);
+          this.handleTakeSystemIntoUse(rowEntityUuid);
           break;
         default:
           throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
@@ -241,7 +241,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     } else {
       switch (this.entityType) {
         case 'it-system':
-          this.handleTakeSystemOutOfUse(columnSystemUuid);
+          this.handleTakeSystemOutOfUse(rowEntityUuid);
           break;
         default:
           throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
