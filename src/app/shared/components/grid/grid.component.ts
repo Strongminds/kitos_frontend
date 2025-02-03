@@ -19,7 +19,7 @@ import {
   SortDescriptor,
 } from '@progress/kendo-data-query';
 import { cloneDeep, get } from 'lodash';
-import { combineLatest, debounceTime, first, map, Observable, of } from 'rxjs';
+import { combineLatest, first, map, Observable, of } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
@@ -34,7 +34,6 @@ import {
   DEFAULT_COLUMN_WIDTH,
   DEFAULT_DATE_COLUMN_MINIMUM_WIDTH,
   DEFAULT_DATE_COLUMN_WIDTH,
-  DEFAULT_INPUT_DEBOUNCE_TIME,
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
   GRID_ROW_HEIGHT,
 } from '../../constants/constants';
@@ -46,9 +45,9 @@ import { DEFAULT_VIRTUALIZTION_PAGE_SIZE, GridState } from '../../models/grid-st
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
-import { DialogOpenerService } from '../../services/dialog-opener.service';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
+import { CheckboxChange } from '../../models/grid/grid-events.model';
 
 @Component({
   selector: 'app-grid',
@@ -74,6 +73,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
+  @Output() checkboxChange = new EventEmitter<CheckboxChange>();
 
   private data: GridData | null = null;
   private readonly RolesExtraDataLabel = 'roles';
@@ -98,7 +98,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private store: Store,
     private localStorage: StatePersistingService,
     private gridUIConfigService: GridUIConfigService,
-    private dialogOpenerService: DialogOpenerService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -223,65 +222,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     e.workbook.sheets[0].title = this.exportToExcelName;
   }
 
+  public onCheckboxChange(value: boolean | undefined, rowEntityUuid?: string){
+    this.checkboxChange.emit({ value, rowEntityUuid });
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public searchProperty(object: any, property: string) {
     return get(object, property);
-  }
-
-  public checkboxChange(value: boolean | undefined, rowEntityUuid?: string) {
-    if (!rowEntityUuid) return;
-    if (value === true) {
-      switch (this.entityType) {
-        case 'it-system':
-          this.handleTakeSystemIntoUse(rowEntityUuid);
-          break;
-        default:
-          throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
-      }
-    } else {
-      switch (this.entityType) {
-        case 'it-system':
-          this.handleTakeSystemOutOfUse(rowEntityUuid);
-          break;
-        default:
-          throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
-      }
-    }
-  }
-
-  private handleTakeSystemIntoUse(systemUuid: string) {
-    this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
-    this.subscriptions.add(
-      this.actions$
-        .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess), debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME))
-        .subscribe(() => this.dispatchGetSystemsOnDataUpdate())
-    );
-  }
-
-  private handleTakeSystemOutOfUse(systemUuid: string) {
-    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
-    this.subscriptions.add(
-      dialogRef.afterClosed().subscribe((result: boolean) => {
-        if (result && systemUuid !== undefined) {
-          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
-        }
-      })
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
-          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)
-        )
-        .subscribe(() => this.dispatchGetSystemsOnDataUpdate())
-    );
-  }
-
-  private dispatchGetSystemsOnDataUpdate() {
-    if (this.state) {
-      this.store.dispatch(ITSystemActions.updateGridDataFromGrid(this.state));
-    }
   }
 
   private excelExport(): void {
