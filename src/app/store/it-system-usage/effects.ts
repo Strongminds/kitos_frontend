@@ -89,6 +89,7 @@ export class ITSystemUsageEffects {
               this.gridDataCacheService.set(gridState, dataItems, total);
 
               const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+              console.log(returnData.length)
               return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
             }),
             catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
