@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('it-system-usage', () => {
   const itSystemUsageBaseUrl = '/api/v2/it-system-usages/*';
