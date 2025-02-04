@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first } from 'rxjs';
+import { combineLatestWith, debounceTime, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
+import * as CatalogFields from 'src/app/shared/constants/it-system-catalog-grid-column-constants';
 import {
   ARCHIVE_SECTION_NAME,
   CATALOG_COLUMNS_ID,
@@ -16,7 +19,9 @@ import {
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { CheckboxChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageHasCreateCollectionPermission } from 'src/app/store/it-system-usage/selectors';
@@ -45,8 +50,8 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   private readonly systemSectionName = CATALOG_SECTION_NAME;
   public readonly defaultGridColumns: GridColumn[] = [
     {
-      field: 'IsInUse',
-      idField: 'Uuid',
+      field: CatalogFields.IS_IN_USE,
+      idField: CatalogFields.UUID,
       title: $localize`Anvendes`,
       width: 100,
       section: this.systemSectionName,
@@ -57,7 +62,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       sortable: false,
     },
     {
-      field: 'Disabled',
+      field: CatalogFields.DISABLED,
       title: $localize`Status`,
       section: this.systemSectionName,
       filter: 'boolean',
@@ -79,21 +84,21 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       persistId: 'isActive',
     },
     {
-      field: 'Parent.Name',
+      field: CatalogFields.PARENT_NAME,
       title: $localize`Overordnet IT System`,
       section: this.systemSectionName,
       width: 320,
       hidden: true,
     },
     {
-      field: 'PreviousName',
+      field: CatalogFields.PREVIOUS_NAME,
       title: $localize`Tidligere Systemnavn`,
       section: this.systemSectionName,
       width: 320,
       hidden: false,
     },
     {
-      field: 'Name',
+      field: CatalogFields.NAME,
       title: $localize`IT systemnavn`,
       section: this.systemSectionName,
       style: 'primary',
@@ -101,13 +106,13 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       required: true,
     },
     {
-      field: 'ExternalUuid',
+      field: CatalogFields.EXTERNAL_UUID,
       title: $localize`IT-System (Eksternt UUID)`,
       section: this.systemSectionName,
       hidden: true,
     },
     {
-      field: 'AccessModifier',
+      field: CatalogFields.ACCESS_MODIFIER,
       title: $localize`Synlighed`,
       section: this.systemSectionName,
       extraFilter: 'enum',
@@ -116,14 +121,14 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       hidden: true,
     },
     {
-      field: 'BusinessType.Name',
+      field: CatalogFields.BUSINESS_TYPE_NAME,
       title: $localize`Forretningstype`,
       section: this.systemSectionName,
       hidden: false,
     },
     { field: 'BelongsTo.Name', title: $localize`Rettighedshaver`, section: this.systemSectionName, hidden: false },
     {
-      field: 'KLEIds',
+      field: CatalogFields.KLE_IDS,
       title: $localize`KLE ID`,
       section: KLE_SECTION_NAME,
       filter: 'text',
@@ -131,7 +136,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       sortable: false,
     },
     {
-      field: 'KLENames',
+      field: CatalogFields.KLE_NAMES,
       title: $localize`KLE Navn`,
       section: KLE_SECTION_NAME,
       filter: 'text',
@@ -139,9 +144,9 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       sortable: false,
     },
     {
-      field: 'Usages',
+      field: CatalogFields.USAGES,
       dataField: 'Name',
-      idField: 'Uuid',
+      idField: CatalogFields.UUID,
       title: $localize`IT System: Anvendes af`,
       section: this.systemSectionName,
       style: 'usages',
@@ -152,19 +157,19 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       sortable: false,
     },
     {
-      field: 'Organization.Name',
+      field: CatalogFields.ORGANIZATION_NAME,
       title: $localize`Oprettet af: Organisation`,
       section: this.systemSectionName,
       hidden: true,
     },
     {
-      field: 'LastChangedByUser.Name',
+      field: CatalogFields.LAST_CHANGED_BY_USER_NAME,
       title: $localize`Sidst redigeret: Bruger`,
       section: this.systemSectionName,
       hidden: true,
     },
     {
-      field: 'LastChanged',
+      field: CatalogFields.LAST_CHANGED,
       title: $localize`Sidst redigeret`,
       section: this.systemSectionName,
       width: 350,
@@ -173,24 +178,24 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       hidden: false,
     },
     {
-      field: 'Reference.Title',
+      field: CatalogFields.REFERENCE_TITLE,
       title: $localize`Reference`,
       section: REFERENCE_SECTION_NAME,
-      idField: 'Reference.URL',
+      idField: CatalogFields.REFERENCE_URL,
       style: 'title-link',
       hidden: false,
     },
     {
-      field: 'Reference.ExternalReferenceId',
+      field: CatalogFields.REFERENCE_EXTERNAL_REFERENCE_ID,
       title: $localize`Dokument ID / Sagsnr.`,
       section: REFERENCE_SECTION_NAME,
       width: 320,
       hidden: true,
     },
-    { field: 'Uuid', title: $localize`UUID`, section: this.systemSectionName, hidden: true, width: 320 },
-    { field: 'Description', title: $localize`Beskrivelse`, section: this.systemSectionName, hidden: true },
+    { field: CatalogFields.UUID, title: $localize`UUID`, section: this.systemSectionName, hidden: true, width: 320 },
+    { field: CatalogFields.DESCRIPTION, title: $localize`Beskrivelse`, section: this.systemSectionName, hidden: true },
     {
-      field: 'ArchiveDuty',
+      field: CatalogFields.ARCHIVE_DUTY,
       title: $localize`Rigsarkivets vejledning til arkivering`,
       section: ARCHIVE_SECTION_NAME,
       extraFilter: 'enum',
@@ -200,7 +205,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       width: 360,
     },
     {
-      field: 'ArchiveDutyComment',
+      field: CatalogFields.ARCHIVE_DUTY_COMMENT,
       title: $localize`Bemærkning fra Rigsarkivet`,
       section: ARCHIVE_SECTION_NAME,
       hidden: true,
@@ -212,7 +217,8 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
+    private dialogOpenerService: DialogOpenerService
   ) {
     super(store, 'it-system');
   }
@@ -250,6 +256,59 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
     );
+  }
+
+  public handleSystemUsageChange(event: CheckboxChange) {
+    const rowEntityUuid = event.rowEntityUuid;
+    if (!rowEntityUuid) return;
+
+    if (event.value === true) {
+      this.handleTakeSystemIntoUse(rowEntityUuid);
+    } else {
+      this.handleTakeSystemOutOfUse(rowEntityUuid);
+    }
+  }
+
+  private handleTakeSystemIntoUse(systemUuid: string) {
+    this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITSystemUsageActions.createItSystemUsageSuccess),
+          first(),
+          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+          concatLatestFrom(() => this.gridState$)
+        )
+        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+    );
+  }
+
+  private handleTakeSystemOutOfUse(systemUuid: string) {
+    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
+    this.subscriptions.add(
+      dialogRef.afterClosed().subscribe((result: boolean) => {
+        if (result && systemUuid !== undefined) {
+          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
+        }
+      })
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
+          first(),
+          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+          concatLatestFrom(() => this.gridState$)
+        )
+        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+    );
+  }
+
+  private dispatchGetSystemsOnDataUpdate(gridState: GridState | undefined) {
+    if (gridState) {
+      this.store.dispatch(ITSystemActions.updateGridDataFromGrid(gridState));
+    }
   }
 
   private updateDefaultColumns(): void {

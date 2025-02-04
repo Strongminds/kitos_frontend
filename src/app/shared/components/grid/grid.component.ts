@@ -45,9 +45,11 @@ import { DEFAULT_VIRTUALIZTION_PAGE_SIZE, GridState } from '../../models/grid-st
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
-import { DialogOpenerService } from '../../services/dialog-opener.service';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
+import { concatLatestFrom } from '@ngrx/operators';
+import { filterNullish } from '../../pipes/filter-nullish';
+import { CheckboxChange } from '../../models/grid/grid-events.model';
 
 @Component({
   selector: 'app-grid',
@@ -73,6 +75,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
+  @Output() checkboxChange = new EventEmitter<CheckboxChange>();
 
   private data: GridData | null = null;
   private readonly RolesExtraDataLabel = 'roles';
@@ -97,7 +100,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private store: Store,
     private localStorage: StatePersistingService,
     private gridUIConfigService: GridUIConfigService,
-    private dialogOpenerService: DialogOpenerService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -222,41 +224,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     e.workbook.sheets[0].title = this.exportToExcelName;
   }
 
+  public onCheckboxChange(value: boolean | undefined, rowEntityUuid?: string){
+    this.checkboxChange.emit({ value, rowEntityUuid });
+  }
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public searchProperty(object: any, property: string) {
     return get(object, property);
-  }
-
-  public checkboxChange(value: boolean | undefined, columnUuid?: string) {
-    if (!columnUuid) return;
-    if (value === true) {
-      switch (this.entityType) {
-        case 'it-system':
-          this.store.dispatch(ITSystemUsageActions.createItSystemUsage(columnUuid));
-          break;
-        default:
-          throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
-      }
-    } else {
-      switch (this.entityType) {
-        case 'it-system':
-          this.handleTakeSystemOutOfUse(columnUuid);
-          break;
-        default:
-          throw `Checkbox change for entity type ${this.entityType} not implemented: grid.component.ts`;
-      }
-    }
-  }
-
-  private handleTakeSystemOutOfUse(columnUuid: string | undefined) {
-    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
-    this.subscriptions.add(
-      dialogRef.afterClosed().subscribe((result: boolean) => {
-        if (result && columnUuid !== undefined) {
-          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(columnUuid));
-        }
-      })
-    );
   }
 
   private excelExport(): void {
@@ -270,19 +244,23 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     if (!this.data || !this.state) {
       return { data: [] };
     }
-    const processedData = process(this.data.data, { skip: 0, take: this.data.total });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let formattedData: any[] = [];
-    this.getFilteredExportColumns$()
-      .pipe(first())
-      .subscribe((columns) => {
+    this.data$
+      .pipe(
+        filterNullish(),
+        concatLatestFrom(() => this.getFilteredExportColumns$()),
+        first()
+      )
+      .subscribe(([data, exportColumns]) => {
+        const processedData = process(data.data, { skip: 0, take: data.data.length });
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        formattedData = processedData.data.map((item: any) => transformRow(item, columns));
+        formattedData = processedData.data.map((item: any) => transformRow(item, exportColumns));
       });
     return { data: formattedData };
   }
 
-  public getFilteredExportColumns$() {
+  public getFilteredExportColumns$(): Observable<GridColumn[]> {
     return combineLatest([this.columns$, this.exportAllColumns$, this.uiConfigApplications$ ?? of([])]).pipe(
       map(([columns, exportAllColumns, uiConfigApplications]) => {
         const columnsToExport = columns
