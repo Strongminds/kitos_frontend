@@ -120,10 +120,18 @@
         formName="subjectControl"
         data-cy="subject-textbox"
       ></app-textbox>
+<div>
+        <a [text]="getEntityLink()" i18n>
+          Gå til {{ getLocalEntityName() }}
+        </a>
+      </div>
       <app-rich-text-editor
         [formControl]="notificationForm.controls.bodyControl"
         [ngClass]="{ 'invalid-input-border': bodyIsInvalid() }"
-      ></app-rich-text-editor>
+        defaultEditorContent="hello world"
+      >
+
+    </app-rich-text-editor>
 
       <app-dialog-actions class="dialog-footer">
         <app-button
