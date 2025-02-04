@@ -109,10 +109,11 @@ export class GlobalOptionTypeGridComponent implements OnChanges {
 
   public onRowReorder(event: RowReorderingEvent<GlobalAdminOptionTypeItem>): void {
     const fromItemUuid = event.from.item.uuid;
-    if (fromItemUuid === event.to.item.uuid) return;
+    const toItem = event.to.item;
+    if (fromItemUuid === toItem.uuid) return;
     this.store.dispatch(
       GlobalOptionTypeActions.updateOptionType(this.optionType, fromItemUuid, {
-        priority: event.to.item.priority,
+        priority: toItem.priority,
       })
     );
   }
