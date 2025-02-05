@@ -208,6 +208,7 @@
         color: $color-neutral;
         overflow: hidden;
         text-overflow: ellipsis;
+        //100px takes the 'x' clear button, and the chevron into account so ellipsis is shown before them
         max-width: calc(100% - 100px);
 
         .ng-value-label {
