@@ -101,10 +101,6 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
           this.externalReferencesComponentStore.getExternalReferences(this.entityType)(entityWithUuid.uuid);
         })
     );
-
-    this.externalReferences$.subscribe(() => {
-      console.log('External references updated');
-    });
   }
 
   getCommands(
