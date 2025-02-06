@@ -1,7 +1,12 @@
 <app-dialog title="Redigér url" i18n-title overflow="none">
   <form [formGroup]="urlForm" (submit)="onSave()">
     <app-standard-vertical-content-grid>
-      <app-textbox text="Url" i18n-text [formGroup]="urlForm" formName="url" data-cy="url-textbox"></app-textbox>
+      <div>
+        <app-textbox text="Url" i18n-text [formGroup]="urlForm" formName="url" data-cy="url-textbox"></app-textbox>
+        <app-paragraph paragraphSize="small" color="error" *ngIf="showValidationError" i18n
+          >It looks like the url is incorrect. Make sure it starts with "https://"</app-paragraph
+        >
+      </div>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="edit-url-cancel-button" i18n
           >Annuller</app-button
