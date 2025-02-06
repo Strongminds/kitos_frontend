@@ -4951,8 +4951,8 @@
       <trans-unit id="6000192550087006178" datatype="html">
         <source>databehandling</source>
       </trans-unit>
-      <trans-unit id="7023661654201920042" datatype="html">
-        <source> Gå til <x id="INTERPOLATION" equiv-text="{{ getLocalEntityName() }}"/> </source>
+      <trans-unit id="48406484342345837" datatype="html">
+        <source>&lt;a href=&quot;<x id="PH" equiv-text="this.getEntityLink()"/>&quot;&gt;Gå til <x id="PH_1" equiv-text="this.getEntityName()"/>&lt;/a&gt;</source>
       </trans-unit>
     </body>
   </file>
