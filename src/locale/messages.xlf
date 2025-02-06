@@ -4942,6 +4942,18 @@
       <trans-unit id="9007353493777604696" datatype="html">
         <source>Data og dokumenter bevares (B)</source>
       </trans-unit>
+      <trans-unit id="3609485978604004141" datatype="html">
+        <source>kontrakt</source>
+      </trans-unit>
+      <trans-unit id="4284262710394423144" datatype="html">
+        <source>systemanvendelse</source>
+      </trans-unit>
+      <trans-unit id="6000192550087006178" datatype="html">
+        <source>databehandling</source>
+      </trans-unit>
+      <trans-unit id="7023661654201920042" datatype="html">
+        <source> Gå til <x id="INTERPOLATION" equiv-text="{{ getLocalEntityName() }}"/> </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
