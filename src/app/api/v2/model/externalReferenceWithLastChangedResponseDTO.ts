@@ -11,7 +11,9 @@
  */
 
 
-export interface APIExternalReferenceDataResponseDTO { 
+export interface APIExternalReferenceWithLastChangedResponseDTO { 
+    lastChangedByUsername?: string;
+    lastChangedDate?: string;
     uuid?: string;
     /**
      * Reference title as shown in KITOS UI
