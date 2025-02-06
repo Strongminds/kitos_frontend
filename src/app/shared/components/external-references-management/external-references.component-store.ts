@@ -22,7 +22,7 @@ export class ExternalReferencesComponentStore extends ComponentStore<State> {
     super({ externalReferences: [] });
   }
 
-  readonly externalReferences$ = this.select((state) => state.externalReferences);
+  public readonly externalReferences$ = this.select((state) => state.externalReferences);
 
   private readonly setExternalReferences = this.updater(
     (state, externalReferences: APIExternalReferenceWithLastChangedResponseDTO[]): State => ({
@@ -50,9 +50,9 @@ export class ExternalReferencesComponentStore extends ComponentStore<State> {
   ): (entityUuid: string) => Observable<APIExternalReferenceWithLastChangedResponseDTO[]> {
     switch (entityType) {
       case 'it-system':
-        return (systemUsageUuid) =>
-          this.externalReferenceService.getManyExternalReferencesInternalV2GetItSystemUsageReferences({
-            systemUsageUuid,
+        return (systemUuid) =>
+          this.externalReferenceService.getManyExternalReferencesInternalV2GetItSystemReferences({
+            systemUuid,
           });
       case 'it-system-usage':
         return (systemUsageUuid) =>

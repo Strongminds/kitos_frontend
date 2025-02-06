@@ -2,6 +2,7 @@
 
 describe('it-system-catalog', () => {
   const itSystemBaseUrl = '/api/v2/it-systems/*';
+  const refsBaseUrl = '/api/v2/internal/external-references/it-systems/*';
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemCatalogIntercepts();
@@ -9,6 +10,10 @@ describe('it-system-catalog', () => {
   });
 
   it('can show external references', () => {
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/normal-external-references.json',
+    });
+
     cy.contains('System 3').click();
 
     cy.navigateToDetailsSubPage('Referencer');
@@ -17,8 +22,8 @@ describe('it-system-catalog', () => {
   });
 
   it('can show no external references', () => {
-    cy.intercept('/api/v2/it-systems/*', {
-      fixture: './it-system-catalog/external-references/it-system-no-external-references.json',
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/no-external-references.json',
     });
 
     cy.contains('System 3').click();
@@ -29,9 +34,15 @@ describe('it-system-catalog', () => {
   });
 
   it('can add external reference and override master reference', () => {
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/normal-external-references.json',
+    });
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Referencer');
 
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/extra-external-references.json',
+    });
     cy.externalReferencesSaveAndValidate(
       false,
       true,
@@ -42,12 +53,16 @@ describe('it-system-catalog', () => {
   });
 
   it('can add external reference with required master reference, when no reference is present', () => {
-    cy.intercept('/api/v2/it-systems/*', {
-      fixture: './it-system-catalog/external-references/it-system-no-external-references.json',
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/no-external-references.json',
     });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Referencer');
+
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/extra-external-references.json',
+    });
 
     cy.externalReferencesSaveAndValidate(
       true,
