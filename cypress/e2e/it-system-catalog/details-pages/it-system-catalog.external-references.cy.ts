@@ -41,7 +41,7 @@ describe('it-system-catalog', () => {
     cy.navigateToDetailsSubPage('Referencer');
 
     cy.intercept(refsBaseUrl, {
-      fixture: './external-references/extra-external-references.json',
+      fixture: './it-system-catalog/external-references/extra-external-references2.json',
     });
     cy.externalReferencesSaveAndValidate(
       false,
@@ -61,7 +61,7 @@ describe('it-system-catalog', () => {
     cy.navigateToDetailsSubPage('Referencer');
 
     cy.intercept(refsBaseUrl, {
-      fixture: './external-references/extra-external-references.json',
+      fixture: './external-references/single-added-reference.json',
     });
 
     cy.externalReferencesSaveAndValidate(
@@ -69,13 +69,21 @@ describe('it-system-catalog', () => {
       false,
       false,
       itSystemBaseUrl,
-      './it-system-usage/external-references/it-system-usage-with-extra-external-reference.json'
+      './it-system-catalog/external-references/it-system-with-extra-external-reference.json'
     );
   });
 
   it('can modify external reference, and assign new Master reference', () => {
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/normal-external-references.json',
+    });
+
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Referencer');
+
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/edited-extra-external-reference.json',
+    });
 
     cy.externalReferencesSaveAndValidate(
       false,
@@ -86,10 +94,17 @@ describe('it-system-catalog', () => {
       'Valid url'
     );
   });
-
   it('can modify external reference master reference', () => {
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/normal-external-references.json',
+    });
+
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Referencer');
+
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/edited-extra-external-reference.json',
+    });
 
     cy.externalReferencesSaveAndValidate(
       true,
@@ -102,6 +117,10 @@ describe('it-system-catalog', () => {
   });
 
   it('can delete non master external reference', () => {
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/normal-external-references.json',
+    });
+
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Referencer');
 
@@ -110,6 +129,8 @@ describe('it-system-catalog', () => {
     cy.getRowForElementContent(referenceTitleToRemove)
       .first()
       .within(() => cy.get('app-trashcan-icon').click({ force: true }));
+
+    cy.intercept(refsBaseUrl, { fixture: './external-references/with-deleted-external-references.json' });
 
     cy.verifyYesNoConfirmationDialogAndConfirm(
       'PATCH',
@@ -123,6 +144,10 @@ describe('it-system-catalog', () => {
   });
 
   it('can not delete master external reference', () => {
+    cy.intercept(refsBaseUrl, {
+      fixture: './external-references/normal-external-references.json',
+    });
+
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Referencer');
 
