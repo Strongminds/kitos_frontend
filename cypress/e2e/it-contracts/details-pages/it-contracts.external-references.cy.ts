@@ -67,8 +67,8 @@ describe('it-contracts.external-references', () => {
   });
 
   it('can not delete master external reference', () => {
-    cy.intercept('/api/v2/it-contracts/*', {
-      fixture: './it-contracts/it-contract-with-extra-external-reference.json',
+    cy.intercept(refsUrl, {
+      fixture: './external-references/extra-external-references.json',
     });
     cy.contains('Contract 1').click();
     cy.navigateToDetailsSubPage('Referencer');

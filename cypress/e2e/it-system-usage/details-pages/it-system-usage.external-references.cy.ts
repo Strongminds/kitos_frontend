@@ -75,6 +75,7 @@ describe('it-system-usage', () => {
   });
 
   it('can modify external reference, and assign new Master reference', () => {
+
     cy.intercept(refsBaseUrl, {
       fixture: './it-system-usage/external-references/normal-external-references.json',
     });
