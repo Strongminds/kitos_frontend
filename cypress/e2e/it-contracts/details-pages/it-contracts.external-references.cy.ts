@@ -1,7 +1,8 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('it-contracts.external-references', () => {
   const itContractBaseUrl = '/api/v2/it-contracts/*';
+  const refsUrl = '/api/v2/internal/external-references/it-contracts/*';
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupContractIntercepts();
@@ -9,8 +10,8 @@ describe('it-contracts.external-references', () => {
   });
 
   it('can show external references', () => {
-    cy.intercept('/api/v2/it-contracts/*', {
-      fixture: './it-contracts/it-contract-with-extra-external-reference.json',
+    cy.intercept(refsUrl, {
+      fixture: './external-references/normal-external-references.json',
     });
     cy.contains('Contract 1').click();
 
@@ -20,6 +21,9 @@ describe('it-contracts.external-references', () => {
   });
 
   it('can show no external references', () => {
+    cy.intercept(refsUrl, {
+      fixture: './external-references/no-external-references.json',
+    });
     cy.contains('Contract').click();
     cy.navigateToDetailsSubPage('Referencer');
 
@@ -28,31 +32,36 @@ describe('it-contracts.external-references', () => {
   });
 
   it('can add external reference with required master reference, when no reference is present', () => {
-    cy.contains('Contract 1').click();
-    cy.navigateToDetailsSubPage('Referencer');
-
-    cy.externalReferencesSaveAndValidate(
-      true,
-      false,
-      false,
-      itContractBaseUrl,
-      './it-contracts/it-contract-with-edited-extra-external-reference.json'
-    );
-  });
-
-  it('can modify external reference, and assign new Master reference', () => {
-    cy.intercept('/api/v2/it-contracts/*', {
-      fixture: './it-contracts/it-contract-with-extra-external-reference.json',
+    cy.intercept(refsUrl, {
+      fixture: './external-references/no-external-references.json',
     });
     cy.contains('Contract 1').click();
     cy.navigateToDetailsSubPage('Referencer');
 
+    cy.intercept(refsUrl, {
+      fixture: './external-references/single-added-reference.json',
+    });
+
+    cy.externalReferencesSaveAndValidate(true, false, false, itContractBaseUrl, './it-contracts/it-contract.json');
+  });
+
+  it('can modify external reference, and assign new Master reference', () => {
+    cy.intercept(refsUrl, {
+      fixture: './external-references/normal-external-references.json',
+    });
+    cy.contains('Contract 1').click();
+    cy.navigateToDetailsSubPage('Referencer');
+
+    cy.intercept(refsUrl, {
+      fixture: './external-references/edited-extra-external-reference.json',
+    });
+
     cy.externalReferencesSaveAndValidate(
       false,
       true,
       true,
       itContractBaseUrl,
-      './it-contracts/it-contract-with-edited-extra-external-reference.json',
+      './it-contracts/it-contract-with-external-references.json',
       'Valid url'
     );
   });
