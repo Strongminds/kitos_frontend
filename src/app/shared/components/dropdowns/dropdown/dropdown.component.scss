@@ -11,9 +11,5 @@
 
 ng-select {
   font-size: large;
-}
-
-
-ng-select {
-  @include input-background-white
+  @include input-background-white;
 }
