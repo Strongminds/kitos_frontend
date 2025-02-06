@@ -208,6 +208,8 @@
         color: $color-neutral;
         overflow: hidden;
         text-overflow: ellipsis;
+        //100px takes the 'x' clear button, and the chevron into account so ellipsis is shown before them
+        max-width: calc(100% - 100px);
 
         .ng-value-label {
           overflow: hidden;
@@ -392,7 +394,13 @@
 
 @mixin mat-textbox-overflow-adjustment() {
   ::ng-deep .mat-mdc-form-field-flex > .mat-mdc-form-field-infix {
-    overflow: hidden;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 100%;
+
+    input {
+      text-overflow: ellipsis !important;
+    }
   }
 }
 
