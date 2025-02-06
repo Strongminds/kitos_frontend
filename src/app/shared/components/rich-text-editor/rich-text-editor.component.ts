@@ -1,8 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { AfterViewInit, Component, forwardRef, Input, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, forwardRef, Input, ViewChild } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.service';
 import { EditorComponent } from '@tinymce/tinymce-angular';
+import { HALF_SECOND_IN_MILLISECONDS } from '../../constants/constants';
 
 @Component({
   selector: 'app-rich-text-editor',
@@ -31,15 +32,14 @@ export class RichTextEditorComponent implements AfterViewInit{
   constructor(private readonly rootUrlResolver: AppRootUrlResolverService,
   ) {
     this.rootUrl = this.rootUrlResolver.resolveRootUrl();
-
   }
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      if (this.editorRef?.editor) {
-        this.editorRef.editor.setContent(this.defaultEditorContent || 'dummy text');
+      if (this.editorRef?.editor && this.defaultEditorContent) {
+        this.editorRef.editor.setContent(this.defaultEditorContent);
       }
-    }, 500);
+    }, HALF_SECOND_IN_MILLISECONDS);
   }
 
   writeValue(value: any): void {
