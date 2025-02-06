@@ -39,6 +39,8 @@ export const DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES = [
   'usages',
   'action-buttons',
   'checkbox',
+  'page-link-array',
+  'page-link-array-with-submodules',
 ];
 export const DEFAULT_CHANGELOG_SIZE = 5; //(as per old UI) the size of the changelog should always be 5, this could change in the future
 
