@@ -5,21 +5,15 @@ export function getNewGridColumnsBasedOnConfig(
   columnConfigs: APIColumnConfigurationResponseDTO[],
   columns: GridColumn[]
 ): GridColumn[] {
+  const columnConfigMap = new Map(columnConfigs.map(config => [config.persistId, config.index]));
   const columnsWithHiddenState = columns.map((col) => ({
     ...col,
-    hidden: !columnConfigs.some((config) => columnIsConfigTarget(col, config)),
+    hidden: !columnConfigMap.has(col.persistId),
   }));
+  
   return columnsWithHiddenState.sort((a, b) => {
-    const aIndex = getColumnIndexFromConfig(columnConfigs, a);
-    const bIndex = getColumnIndexFromConfig(columnConfigs, b);
+    const aIndex = columnConfigMap.get(a.persistId) ?? -1;
+    const bIndex = columnConfigMap.get(b.persistId) ?? -1;
     return aIndex - bIndex;
   });
-}
-
-function getColumnIndexFromConfig(columnConfigs: APIColumnConfigurationResponseDTO[], column: GridColumn) {
-  return columnConfigs.findIndex((config) => columnIsConfigTarget(column, config))
-}
-
-function columnIsConfigTarget(column: GridColumn, columnConfig: APIColumnConfigurationResponseDTO){
-  return column.persistId === columnConfig.persistId;
 }
