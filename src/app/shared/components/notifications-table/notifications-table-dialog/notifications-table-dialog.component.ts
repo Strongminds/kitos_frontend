@@ -122,6 +122,10 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     }
   }
 
+  public getDefaultNotificationBody(){
+    return $localize`<a href="${this.getEntityLink()}">Gå til ${ this.getEntityName() }</a>`
+  }
+
   public getEntityLink(){
     const modulePath = this.getEntityModulePath();
     return `${this.rootUrl}/${modulePath}/${this.ownerEntityUuid}`;
@@ -139,7 +143,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     }
   }
 
-  public getLocalEntityName() {
+  public getEntityName() {
     switch (this.ownerResourceType) {
       case 'ItSystemUsage':
         return $localize`systemanvendelse`;
