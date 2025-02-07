@@ -11,6 +11,7 @@ import {
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
+import { AppPath } from 'src/app/shared/enums/app-path';
 import {
   dateGreaterThanOrEqualControlValidator,
   dateGreaterThanOrEqualToDateValidator,
@@ -94,8 +95,8 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableDialogComponent>,
     private readonly componentStore: NotificationsTableComponentStore,
-    private readonly store: Store
-  ) {
+    private readonly store: Store,
+    ) {
     super();
     this.rootUrl = this.appRootUrlResolverService.resolveRootUrl();
   }
@@ -118,6 +119,38 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
         this.canEdit = false;
         this.disableForm();
       }
+    }
+  }
+
+  public getDefaultNotificationBody(){
+    return $localize`<a href="${this.getEntityLink()}">Gå til ${ this.getEntityName() }</a>`
+  }
+
+  public getEntityLink(){
+    const modulePath = this.getEntityModulePath();
+    return `${this.rootUrl}/${modulePath}/${this.ownerEntityUuid}`;
+
+  }
+
+  private getEntityModulePath(){
+    switch (this.ownerResourceType) {
+      case 'ItSystemUsage':
+        return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
+      case 'DataProcessingRegistration':
+        return AppPath.dataProcessing;
+      case 'ItContract':
+        return AppPath.itContracts;
+    }
+  }
+
+  public getEntityName() {
+    switch (this.ownerResourceType) {
+      case 'ItSystemUsage':
+        return $localize`systemanvendelse`;
+      case 'DataProcessingRegistration':
+        return $localize`databehandling`;
+      case 'ItContract':
+        return $localize`kontrakt`;
     }
   }
 
