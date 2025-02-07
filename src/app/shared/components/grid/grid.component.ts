@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
@@ -19,7 +20,7 @@ import {
   SortDescriptor,
 } from '@progress/kendo-data-query';
 import { cloneDeep, get } from 'lodash';
-import { combineLatest, first, map, Observable, of } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, first, map, Observable, of } from 'rxjs';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
@@ -34,6 +35,7 @@ import {
   DEFAULT_COLUMN_WIDTH,
   DEFAULT_DATE_COLUMN_MINIMUM_WIDTH,
   DEFAULT_DATE_COLUMN_WIDTH,
+  DEFAULT_INPUT_DEBOUNCE_TIME,
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
   GRID_ROW_HEIGHT,
 } from '../../constants/constants';
@@ -42,14 +44,13 @@ import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-fi
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { DEFAULT_VIRTUALIZTION_PAGE_SIZE, GridState } from '../../models/grid-state.model';
+import { CheckboxChange } from '../../models/grid/grid-events.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
+import { filterNullish } from '../../pipes/filter-nullish';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
-import { concatLatestFrom } from '@ngrx/operators';
-import { filterNullish } from '../../pipes/filter-nullish';
-import { CheckboxChange } from '../../models/grid/grid-events.model';
 
 @Component({
   selector: 'app-grid',
@@ -80,6 +81,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   private data: GridData | null = null;
   private readonly RolesExtraDataLabel = 'roles';
   private readonly EmailColumnField = '.email';
+  private stateChangeSubject = new BehaviorSubject<GridState | null>(null);
 
   public readonly virtualPageSize = DEFAULT_VIRTUALIZTION_PAGE_SIZE;
 
@@ -107,12 +109,23 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   ngOnInit(): void {
     this.subscriptions.add(
+      this.stateChangeSubject
+        .pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME))
+        .subscribe((state) => {
+          if (state){
+            this.stateChange.emit(state);
+          }
+        })
+    );
+
+    this.subscriptions.add(
       this.readyToExport$.subscribe((ready) => {
         if (ready) {
           this.excelExport();
         }
       })
     );
+
     this.subscriptions.add(
       this.data$.subscribe((data) => {
         this.data = data;
@@ -152,7 +165,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public onStateChange(state: GridState) {
     this.state = state;
-    this.stateChange.emit(state);
+    this.stateChangeSubject.next(state);
   }
 
   public onFilterChange(filter: CompositeFilterDescriptor | undefined) {
