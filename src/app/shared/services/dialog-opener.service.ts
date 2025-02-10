@@ -19,7 +19,7 @@ export class DialogOpenerService {
 
   public openEditUserDialog(user: ODataOrganizationUser, nested: boolean): MatDialogRef<EditUserDialogComponent> {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
-      height: 'auto',
+      height: '660px',
       maxHeight: MAX_DIALOG_HEIGHT,
     });
     dialogRef.componentInstance.user = user;
@@ -32,7 +32,7 @@ export class DialogOpenerService {
     nested: boolean
   ): MatDialogRef<DeleteUserDialogComponent> {
     const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
-      height: '95%',
+      height: 'auto',
       maxHeight: '90vh%',
     });
     dialogRef.componentInstance.user$ = user$;
