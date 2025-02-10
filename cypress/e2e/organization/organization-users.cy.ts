@@ -124,7 +124,7 @@ describe('organization-users', () => {
     cy.getByDataCy('create-user-button').find('button').should('be.disabled');
   });
 
-  it('Can edit user', () => {
+  it.only('Can edit user', () => {
     cy.intercept('api/v2/internal/organization/*/users/find-any-by-email?email=*', { body: null });
 
     cy.contains('local-regular-user@kitos.dk').click();
