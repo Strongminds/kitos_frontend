@@ -47,8 +47,9 @@ export function GetOptionsBasedOnRights(
   organziationRights: OrganizationRight[],
   organizationUuid: string
 ): MultiSelectDropdownItem<APIUserResponseDTO.RolesEnum>[] {
-  const isLocalAdmin = hasRoleInOrganization(organziationRights, organizationUuid, LOCAL_ADMIN_ROLE);
-  const isOrgAdmin = hasRoleInOrganization(organziationRights, organizationUuid, ORGANIZATION_ADMIN_ROLE);
+  const hasRole = (role: number) => hasRoleInOrganization(organziationRights, organizationUuid, role);
+  const isLocalAdmin = hasRole(LOCAL_ADMIN_ROLE);
+  const isOrgAdmin = hasRole(ORGANIZATION_ADMIN_ROLE);
   return userRoleChoiceOptions.map((option) =>
     mapUserRoleChoiceToMultiSelectOption(isGlobalAdmin, isLocalAdmin, isOrgAdmin, option)
   );
