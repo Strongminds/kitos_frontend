@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('organization-users', () => {
   beforeEach(() => {
@@ -171,5 +171,9 @@ describe('organization-users', () => {
     cy.contains('Ja').click();
 
     cy.wait('@deleteUser');
+  });
+
+  it('Organization admins can only change the organization admin role', () => {
+    cy.intercept('sad');
   });
 });

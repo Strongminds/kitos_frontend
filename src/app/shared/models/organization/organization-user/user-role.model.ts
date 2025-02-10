@@ -1,4 +1,8 @@
 import { APIUserResponseDTO } from 'src/app/api/v2';
+import { MultiSelectDropdownItem } from '../../dropdown-option.model';
+import { OrganizationRight } from '../../organization-right.model';
+import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
+import { LOCAL_ADMIN_ROLE, ORGANIZATION_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
 
 export interface UserRoleChoice {
   name: string;
@@ -32,3 +36,27 @@ export const userRoleChoiceOptions: UserRoleChoice[] = [
 export const mapUserRoleChoice = (value?: APIUserResponseDTO.RolesEnum): UserRoleChoice | undefined => {
   return userRoleChoiceOptions.find((option) => option.value === value);
 };
+
+export function GetOptionsBasedOnRights(
+  isGlobalAdmin: boolean,
+  organziationRights: OrganizationRight[],
+  organizationUuid: string
+): MultiSelectDropdownItem<APIUserResponseDTO.RolesEnum>[] {
+  const isLocalAdmin = hasRoleInOrganization(organziationRights, organizationUuid, LOCAL_ADMIN_ROLE);
+  const isOrgAdmin = hasRoleInOrganization(organziationRights, organizationUuid, ORGANIZATION_ADMIN_ROLE);
+  return userRoleChoiceOptions.map((option) =>
+    mapUserRoleChoiceToMultiSelectOption(isGlobalAdmin, isLocalAdmin, isOrgAdmin, option)
+  );
+}
+
+function mapUserRoleChoiceToMultiSelectOption(
+  isGlobalAdmin: boolean,
+  isLocalAdmin: boolean,
+  isOrgAdmin: boolean,
+  item: UserRoleChoice
+): MultiSelectDropdownItem<APIUserResponseDTO.RolesEnum> {
+  if (isGlobalAdmin || isLocalAdmin) return { ...item, disabled: false };
+  if (item.value === APIUserResponseDTO.RolesEnum.OrganizationModuleAdmin && isOrgAdmin)
+    return { ...item, disabled: false };
+  return { ...item, disabled: true };
+}

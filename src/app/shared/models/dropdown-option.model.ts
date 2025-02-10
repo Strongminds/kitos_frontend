@@ -23,6 +23,7 @@ export interface MultiSelectDropdownItem<T> {
   name: string;
   value: T;
   selected: boolean;
+  disabled?: boolean
 }
 
 export const mapUserToOption = (user: APIOrganizationUserResponseDTO): RoleDropdownOption => {

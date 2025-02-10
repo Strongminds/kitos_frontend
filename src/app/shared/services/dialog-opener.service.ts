@@ -19,7 +19,7 @@ export class DialogOpenerService {
 
   public openEditUserDialog(user: ODataOrganizationUser, nested: boolean): MatDialogRef<EditUserDialogComponent> {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
-      height: '95%',
+      height: 'auto',
       maxHeight: MAX_DIALOG_HEIGHT,
     });
     dialogRef.componentInstance.user = user;

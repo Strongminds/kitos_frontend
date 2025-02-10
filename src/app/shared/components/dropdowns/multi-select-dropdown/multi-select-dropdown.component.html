@@ -30,6 +30,7 @@
         type="checkbox"
         [(ngModel)]="item$.selected"
         [ngModelOptions]="{ standalone: true }"
+        [disabled]="item.disabled"
       />
       <p class="select-option-text-margin">
         {{ item.name }}

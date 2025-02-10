@@ -1,7 +1,8 @@
 import { createSelector } from '@ngrx/store';
-import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
-import { userFeature } from './reducer';
 import { LOCAL_ADMIN_ROLE, ORGANIZATION_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
+import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
+import { GetOptionsBasedOnRights } from 'src/app/shared/models/organization/organization-user/user-role.model';
+import { userFeature } from './reducer';
 
 export const {
   selectUser,
@@ -54,4 +55,13 @@ export const selectGridPermissions = createSelector(selectUserState, (state) => 
 export const selectGridConfigModificationPermission = createSelector(
   selectGridPermissions,
   (permissions) => permissions?.hasConfigModificationPermissions
+);
+
+export const selectAvailableRoleDropdownValues = createSelector(
+  selectUserIsGlobalAdmin,
+  selectUserOrganizationRights,
+  selectOrganizationUuid,
+  (isGlobalAdmin, organizationRights, organizationUuid) => {
+    return GetOptionsBasedOnRights(isGlobalAdmin, organizationRights ?? [], organizationUuid ?? '');
+  }
 );
