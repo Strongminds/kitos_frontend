@@ -64,6 +64,7 @@
         [data]="roleOptions$ | async"
         (selectedEvent)="rolesChanged($event)"
         (cleared)="rolesCleared()"
+        data-cy="roles-dropdown"
       ></app-multi-select-dropdown>
 
       <ng-container *ngIf="isGlobalAdmin$ | async">

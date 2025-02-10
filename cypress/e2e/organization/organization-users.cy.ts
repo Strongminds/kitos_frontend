@@ -173,7 +173,20 @@ describe('organization-users', () => {
     cy.wait('@deleteUser');
   });
 
-  it('Organization admins can only change the organization admin role', () => {
-    cy.intercept('sad');
+  it('Organization admins can only change the organization admin role on users', () => {
+    cy.setup(false);
+    cy.intercept(
+      'odata/ItSystemUsageOverviewReadModels?organizationUuid=3dc52c64-3706-40f4-bf58-45035bb376da&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=undefined&$skip=0&$top=100&$count=true'
+    );
+    cy.login('./shared/authorize-organization-admin.json');
+    cy.visit('/organization/users');
+
+    cy.getByDataCy('grid-edit-button').first().click();
+    cy.getByDataCy('roles-dropdown').click();
+
+    cy.getByDataCy('local-admin-option').find('input').should('be.disabled');
+    cy.getByDataCy('system-admin-option').find('input').should('be.disabled');
+    cy.getByDataCy('contract-admin-option').find('input').should('be.disabled');
+    cy.getByDataCy('organization-admin-option').find('input').should('be.enabled');
   });
 });

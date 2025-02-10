@@ -8,6 +8,7 @@ export interface UserRoleChoice {
   name: string;
   value: APIUserResponseDTO.RolesEnum;
   selected: boolean;
+  dataCy?: string;
 }
 
 export const userRoleChoiceOptions: UserRoleChoice[] = [
@@ -15,21 +16,25 @@ export const userRoleChoiceOptions: UserRoleChoice[] = [
     name: $localize`Lokal admin`,
     value: APIUserResponseDTO.RolesEnum.LocalAdmin,
     selected: false,
+    dataCy: 'local-admin-option',
   },
   {
     name: $localize`Organisations admin`,
     value: APIUserResponseDTO.RolesEnum.OrganizationModuleAdmin,
     selected: false,
+    dataCy: 'organization-admin-option',
   },
   {
     name: $localize`System admin`,
     value: APIUserResponseDTO.RolesEnum.SystemModuleAdmin,
     selected: false,
+    dataCy: 'system-admin-option',
   },
   {
     name: $localize`Kontrakt admin`,
     value: APIUserResponseDTO.RolesEnum.ContractModuleAdmin,
     selected: false,
+    dataCy: 'contract-admin-option',
   },
 ];
 
