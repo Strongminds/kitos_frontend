@@ -176,7 +176,7 @@ describe('organization-users', () => {
   it('Organization admins can only change the organization admin role on users', () => {
     cy.setup(false);
     cy.intercept(
-      'odata/ItSystemUsageOverviewReadModels?organizationUuid=3dc52c64-3706-40f4-bf58-45035bb376da&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=undefined&$skip=0&$top=100&$count=true'
+      'odata/ItSystemUsageOverviewReadModels?*'
     );
     cy.login('./shared/authorize-organization-admin.json');
     cy.visit('/organization/users');
