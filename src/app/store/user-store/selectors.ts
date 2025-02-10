@@ -1,6 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import { rightsIncludesLocalAdminInOrg } from 'src/app/shared/helpers/role-helpers';
+import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
 import { userFeature } from './reducer';
+import { LOCAL_ADMIN_ROLE, ORGANIZATION_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
 
 export const {
   selectUser,
@@ -25,10 +26,17 @@ export const selectUserIsGlobalAdmin = createSelector(selectUser, (user) => user
 export const selectUserUuid = createSelector(selectUser, (user) => user?.uuid);
 export const selectUserOrganizationUuid = createSelector(selectUser, (user) => user?.defaultOrganizationUuid);
 export const selectUserOrganizationName = createSelector(selectUser, (user) => user?.defaultOrganizationName);
+export const selectUserOrganizationRights = createSelector(selectUser, (user) => user?.organizationRights);
 export const selectUserIsCurrentlyLocalAdmin = createSelector(
-  selectUser,
+  selectUserOrganizationRights,
   selectOrganizationUuid,
-  (user, organizationUuid) => rightsIncludesLocalAdminInOrg(user?.organizationRights, organizationUuid)
+  (userOrgRights, organizationUuid) => hasRoleInOrganization(userOrgRights, organizationUuid, LOCAL_ADMIN_ROLE)
+);
+
+export const selectUserIsOrganizationAdmin = createSelector(
+  selectUserOrganizationRights,
+  selectOrganizationUuid,
+  (userOrgRights, organizationUuid) => hasRoleInOrganization(userOrgRights, organizationUuid, ORGANIZATION_ADMIN_ROLE)
 );
 
 export const selectUserDefaultUnitUuid = createSelector(selectUser, (user) => user?.defaultUnitUuid);
