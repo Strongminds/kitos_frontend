@@ -49,7 +49,7 @@
 </ng-container>
 
 <ng-container *ngIf="(simpleLink$ | async) === undefined || (simpleLink$ | async)?.name === null">
-  <mat-form-field class="{{ size }}" (click)="onIconClick()">
+  <mat-form-field class="{{ size }}" (click)="onIconClick()" data-cy="empty-link-textbox">
     <mat-label>{{ title }}</mat-label>
     <input matInput type="text" readonly [disabled]="isDisabled" data-cy="link-textbox-input" />
     <app-icon-button *ngIf="!isDisabled" matSuffix data-cy="edit-link-button"
