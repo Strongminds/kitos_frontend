@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { LOCAL_ADMIN_ROLE, ORGANIZATION_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
+import { LOCAL_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
 import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
 import { GetOptionsBasedOnRights } from 'src/app/shared/models/organization/organization-user/user-role.model';
 import { userFeature } from './reducer';
