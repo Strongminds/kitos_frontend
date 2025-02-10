@@ -21,9 +21,10 @@
   [(ngModel)]="selectedValuesModel"
   [addTagText]="addTagText"
   [addTag]="includeAddTag ? onCreateNew : false"
+  data-cy="multi-select-dropdown"
 >
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
-    <div class="select-option-row" (click)="onSelected(item)">
+    <div class="select-option-row" (click)="onSelected(item)" data-cy="select-option">
       <input
         id="item-{{ item.name }}"
         type="checkbox"
