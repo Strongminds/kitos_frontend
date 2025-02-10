@@ -119,17 +119,18 @@ describe('it-system-usage', () => {
   });
 
   it('Can not create a notification after clearing the recipients', () => {
+    const notificationDialog = cy.getByDataCy('notifications-dialog');
     cy.getByDataCy('add-notification-button').click();
 
     cy.getByDataCy('recipient-dropdown').click();
     cy.getByDataCy('select-option').first().click();
-    cy.getByDataCy('notifications-dialog').click(); //Click elsewhere to unfocus and close the dropdown
+    notificationDialog.click(); //Click elsewhere to unfocus and close the dropdown
     cy.getByDataCy('subject-textbox').type('testSubject');
     cy.setTinyMceContent('rich-text-editor', 'testBody');
     cy.getIframe().click({ force: true });
     cy.getByDataCy('notifications-dialog').click();
     cy.get('ng-select').first().find('.ng-clear-wrapper').click();
-    cy.getByDataCy('notifications-dialog').click(); //Click elsewhere to unfocus the dropdown and trigger form validation
+    notificationDialog.click(); //Click elsewhere to unfocus the dropdown and trigger form validation
 
     cy.getByDataCy('confirm-button').within(() => {
       cy.getByDataCy('mat-button').should('be.disabled');
