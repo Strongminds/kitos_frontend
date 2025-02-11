@@ -40,6 +40,18 @@ export interface APIGeneralDataUpdateRequestDTO {
     systemVersion?: string;
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity?: APIItSystemUsageValidityWriteRequestDTO;
-    containsAITechnology?: boolean;
+    /**
+     * Whether the system usage is known to include any kind of AI technology
+     */
+    containsAITechnology?: APIGeneralDataUpdateRequestDTO.ContainsAITechnologyEnum;
 }
+export namespace APIGeneralDataUpdateRequestDTO {
+    export type ContainsAITechnologyEnum = 'No' | 'Yes' | 'Undecided';
+    export const ContainsAITechnologyEnum = {
+        No: 'No' as ContainsAITechnologyEnum,
+        Yes: 'Yes' as ContainsAITechnologyEnum,
+        Undecided: 'Undecided' as ContainsAITechnologyEnum
+    };
+}
+
 

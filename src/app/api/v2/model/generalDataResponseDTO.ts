@@ -35,6 +35,15 @@ export interface APIGeneralDataResponseDTO {
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity: APIItSystemUsageValidityResponseDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
-    containsAITechnology?: boolean;
+    containsAITechnology?: APIGeneralDataResponseDTO.ContainsAITechnologyEnum;
 }
+export namespace APIGeneralDataResponseDTO {
+    export type ContainsAITechnologyEnum = 'No' | 'Yes' | 'Undecided';
+    export const ContainsAITechnologyEnum = {
+        No: 'No' as ContainsAITechnologyEnum,
+        Yes: 'Yes' as ContainsAITechnologyEnum,
+        Undecided: 'Undecided' as ContainsAITechnologyEnum
+    };
+}
+
 
