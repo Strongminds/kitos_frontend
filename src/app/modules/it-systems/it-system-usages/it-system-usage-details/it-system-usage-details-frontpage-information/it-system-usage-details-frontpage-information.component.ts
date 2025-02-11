@@ -34,6 +34,7 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableAmountOfUsers,
+  selectITSystemUsageEnableContainsAITechnology,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
@@ -80,6 +81,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly lifeCycleStatusEnabled$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
   public readonly usagePeriodEnabled$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
   public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
+  public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
 
   public readonly showSystemUsageCard$ = combineOR([
     this.takenIntoUsageByEnabled$,

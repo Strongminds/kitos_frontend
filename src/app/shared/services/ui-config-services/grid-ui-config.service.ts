@@ -59,6 +59,7 @@ import {
   selectItContractsEnableTermination,
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableAssociatedContracts,
+  selectITSystemUsageEnableContainsAITechnology,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableDescription,
@@ -276,6 +277,7 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableDataClassification)
         .pipe(shouldEnable([UsageFields.ItSystemCategoriesUuid])),
+      this.store.select(selectITSystemUsageEnableContainsAITechnology).pipe(shouldEnable([UsageFields.ContainsAITechnology])),
 
       //Contracts
       combineAND([
