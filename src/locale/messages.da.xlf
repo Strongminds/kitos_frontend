@@ -6525,6 +6525,26 @@
         <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
         <target state="new">Data bevares men udvalgte eller alle dokumenter kan kasseres</target>
       </trans-unit>
+      <trans-unit id="8902690316511427918" datatype="html">
+        <source>Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</source>
+        <target state="new">Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</target>
+      </trans-unit>
+      <trans-unit id="2479737654708088517" datatype="html">
+        <source>Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</source>
+        <target state="new">Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</target>
+      </trans-unit>
+      <trans-unit id="2796922842108938919" datatype="html">
+        <source>Dette filtrerer på visning af aktiv/ikke aktive systemer, efter om datoen på den tilknyttet kontrakt fra kontrakt modulet er udløbet.</source>
+        <target state="new">Dette filtrerer på visning af aktiv/ikke aktive systemer, efter om datoen på den tilknyttet kontrakt fra kontrakt modulet er udløbet.</target>
+      </trans-unit>
+      <trans-unit id="284714971201171083" datatype="html">
+        <source>Dette filtrerer på visning efter systemets livscyklus markeret på system forsiden.</source>
+        <target state="new">Dette filtrerer på visning efter systemets livscyklus markeret på system forsiden.</target>
+      </trans-unit>
+      <trans-unit id="5562185284759780688" datatype="html">
+        <source>Dette filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</source>
+        <target state="new">Dette filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
