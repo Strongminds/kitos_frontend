@@ -151,12 +151,6 @@ export const selectITSystemUsageEnableGdprConductedRiskAssessment =
 export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
 export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
 
-//IT System Usage > Organization
-const createItSystemUsageOrganizationFieldSelector = (fieldKey: string) =>
-  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'organization', fieldKey);
-export const selectITSystemUsageEnableResponsibleUnit = createItSystemUsageOrganizationFieldSelector('responsibleUnit');
-export const selectITSystemUsageEnableRelevantUnits = createItSystemUsageOrganizationFieldSelector('relevantUnits');
-
 //IT System Usage > Relations
 const createItSystemUsageRelationsFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'systemRelations', fieldKey);
