@@ -95,7 +95,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.getEntititySelector()
+      this.getEntitySelector()
         .pipe(filterNullish())
         .subscribe((entityWithUuid) => {
           this.externalReferencesComponentStore.getExternalReferences(this.entityType)(entityWithUuid.uuid);
@@ -130,7 +130,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
     };
   }
 
-  private getEntititySelector(): Observable<HasUuid | undefined> {
+  private getEntitySelector(): Observable<HasUuid | undefined> {
     switch (this.entityType) {
       case 'it-system':
         return this.store.select(selectItSystem);
