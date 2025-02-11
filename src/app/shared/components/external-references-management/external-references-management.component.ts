@@ -50,7 +50,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
   public editReference(externalReference: ExternalReferenceViewModel): void {
     this.externalReferences$.pipe(first()).subscribe((externalReferences) => {
       const createDialogComponent = this.dialogService.open(EditExternalReferenceDialogComponent).componentInstance;
-      const enforceLockedMaster = this.shouldEnforceMaster(externalReferences, externalReference);
+      const enforceLockedMaster = this.shouldEnforceMasterReference(externalReferences, externalReference);
       createDialogComponent.entityType = this.entityType;
       createDialogComponent.masterReferenceIsReadOnly = enforceLockedMaster;
       createDialogComponent.initialModel = {
@@ -61,7 +61,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
     });
   }
 
-  private shouldEnforceMaster(
+  private shouldEnforceMasterReference(
     externalReferences: ExternalReferenceViewModel[],
     externalReference?: ExternalReferenceViewModel
   ) {
@@ -83,7 +83,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
   public createReference(): void {
     this.externalReferences$.pipe(first()).subscribe((externalReferences) => {
       const createDialogComponent = this.dialogService.open(CreateExternalReferenceDialogComponent).componentInstance;
-      const enforceLockedMaster = this.shouldEnforceMaster(externalReferences);
+      const enforceLockedMaster = this.shouldEnforceMasterReference(externalReferences);
       createDialogComponent.entityType = this.entityType;
       createDialogComponent.masterReferenceIsReadOnly = enforceLockedMaster;
       createDialogComponent.initialModel = {
