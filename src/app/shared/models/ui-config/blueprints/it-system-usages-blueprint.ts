@@ -29,7 +29,7 @@ export const ItSystemUsageUiBluePrint = {
           text: $localize`Klassifikation af data`,
         },
         description: {
-          text: $localize`Beskrivelse`,
+          text: $localize`Note`,
         },
         takenIntoUsageBy: {
           text: $localize`Taget i anvendelse af`,
