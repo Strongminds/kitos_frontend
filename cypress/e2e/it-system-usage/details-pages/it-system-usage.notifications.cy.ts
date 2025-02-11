@@ -36,9 +36,9 @@ describe('it-system-usage', () => {
         cy.contains('Forretningsejer');
       });
 
-    const expectedFromDate = "24-02-2024";
+    const expectedFromDate = '24-02-2024';
     const expectedLastSent = expectedFromDate;
-    const expectedToDate = "26-02-2024";
+    const expectedToDate = '26-02-2024';
 
     cy.getRowForElementContent('test2')
       .first()
@@ -116,5 +116,24 @@ describe('it-system-usage', () => {
             expect(body.receivers.emailRecipients).to.deep.eq(expectedProperties.receivers.emailRecipients);
           });
       });
+  });
+
+  it('Can not create a notification after clearing the recipients', () => {
+    const notificationDialogSelector = 'notifications-dialog';
+    cy.getByDataCy('add-notification-button').click();
+
+    cy.getByDataCy('recipient-dropdown').click();
+    cy.getByDataCy('select-option').first().click();
+    cy.getByDataCy(notificationDialogSelector).click(); //Click elsewhere to unfocus and close the dropdown
+    cy.getByDataCy('subject-textbox').type('testSubject');
+    cy.setTinyMceContent('rich-text-editor', 'testBody');
+    cy.getIframe().click({ force: true });
+    cy.getByDataCy(notificationDialogSelector).click();
+    cy.get('ng-select').first().find('.ng-clear-wrapper').click();
+    cy.getByDataCy(notificationDialogSelector).click(); //Click elsewhere to unfocus the dropdown and trigger form validation
+
+    cy.getByDataCy('confirm-button').within(() => {
+      cy.getByDataCy('mat-button').should('be.disabled');
+    });
   });
 });

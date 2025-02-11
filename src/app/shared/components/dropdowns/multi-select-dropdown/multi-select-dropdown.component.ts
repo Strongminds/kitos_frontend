@@ -120,6 +120,8 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public onClear() {
+    this.selectedValues = [];
+    this.selectedValuesModel = [];
     this.filter$.next('');
     this.cleared.emit();
   }
