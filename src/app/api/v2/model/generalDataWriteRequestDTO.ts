@@ -36,5 +36,6 @@ export interface APIGeneralDataWriteRequestDTO {
     systemVersion?: string;
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity?: APIItSystemUsageValidityWriteRequestDTO;
+    containsAITechnology?: boolean;
 }
 

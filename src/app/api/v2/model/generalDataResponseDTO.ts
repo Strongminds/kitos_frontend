@@ -35,5 +35,6 @@ export interface APIGeneralDataResponseDTO {
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity: APIItSystemUsageValidityResponseDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
+    containsAITechnology?: boolean;
 }
 

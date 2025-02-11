@@ -40,5 +40,6 @@ export interface APIGeneralDataUpdateRequestDTO {
     systemVersion?: string;
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity?: APIItSystemUsageValidityWriteRequestDTO;
+    containsAITechnology?: boolean;
 }
 
