@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
-import { YesNoDontKnowOptions, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
+import { YesNoDontKnowOption, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import {
   selectITSystemUsageHasModifyPermission,
@@ -28,7 +28,7 @@ export class GdprUserSupervisionSectionComponent extends BaseAccordionComponent 
   public disableLinkControl = true;
   public readonly formGroup = new FormGroup(
     {
-      yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
+      yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       dateControl: new FormControl<Date | undefined>(undefined),
     },
     { updateOn: 'blur' }

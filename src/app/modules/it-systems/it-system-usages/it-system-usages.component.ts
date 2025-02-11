@@ -21,7 +21,6 @@ import {
 } from 'src/app/shared/constants/persistent-state-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
-import { booleanDropdownOptions } from 'src/app/shared/models/dropdown-option.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
@@ -31,6 +30,7 @@ import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
+import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -59,7 +59,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
   public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(UIModuleConfigKey.ItSystemUsage);
-  public readonly booleanDropdownOptions = booleanDropdownOptions;
+  public readonly aiTechnologyOptions = yesNoOptions;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
@@ -548,12 +548,12 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: GridFields.ContainsAITechnology,
       title: $localize`Indeholder AI-teknologi`,
-      style: 'boolean',
+      style: 'enum',
       section: this.systemSectionName,
       hidden: true,
       persistId: 'containsAITechnology',
-      filter: 'boolean',
-      extraData: this.booleanDropdownOptions
+      extraFilter: 'enum',
+      extraData: this.aiTechnologyOptions,
     },
   ];
 

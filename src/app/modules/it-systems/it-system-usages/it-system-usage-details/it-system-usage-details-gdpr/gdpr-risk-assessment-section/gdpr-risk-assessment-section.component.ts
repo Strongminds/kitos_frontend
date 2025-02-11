@@ -11,7 +11,7 @@ import {
 } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
-  YesNoDontKnowOptions,
+  YesNoDontKnowOption,
   mapToYesNoDontKnowEnum,
   yesNoDontKnowOptions,
 } from 'src/app/shared/models/yes-no-dont-know.model';
@@ -51,7 +51,7 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
   public readonly riskAssessmentFormGroup = new FormGroup(
     {
       plannedDateControl: new FormControl<Date | undefined>(undefined),
-      yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
+      yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       conductedDateControl: new FormControl<Date | undefined>(undefined),
       assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>(undefined),
       notesControl: new FormControl<string | undefined>(undefined),
