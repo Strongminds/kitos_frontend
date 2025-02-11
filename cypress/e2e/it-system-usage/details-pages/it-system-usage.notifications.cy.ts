@@ -118,7 +118,7 @@ describe('it-system-usage', () => {
       });
   });
 
-  it.only('Can not create a notification after clearing the recipients', () => {
+  it('Can not create a notification after clearing the recipients', () => {
     const notificationDialogSelector = 'notifications-dialog';
     cy.getByDataCy('add-notification-button').click();
 
