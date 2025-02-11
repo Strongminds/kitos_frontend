@@ -11,6 +11,7 @@ import {
 } from 'src/app/shared/helpers/form.helpers';
 import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
+import { booleanDropdownOptions, DropdownOption, toBooleanDropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
@@ -61,10 +62,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl(''),
+      aiTechnology: new FormControl<DropdownOption<boolean> | undefined>(undefined),
     },
     { updateOn: 'blur' }
   );
 
+  public readonly booleanDropdownOptions = booleanDropdownOptions;
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
   public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
@@ -160,6 +163,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers),
             dataClassification: general.dataClassification,
             notes: general.notes,
+            aiTechnology: toBooleanDropdownOption(general.containsAITechnology),
           })
         )
     );
