@@ -21,6 +21,7 @@ import {
 } from 'src/app/shared/constants/persistent-state-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { booleanDropdownOptions } from 'src/app/shared/models/dropdown-option.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
@@ -58,6 +59,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
   public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(UIModuleConfigKey.ItSystemUsage);
+  public readonly booleanDropdownOptions = booleanDropdownOptions;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
@@ -550,6 +552,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: this.systemSectionName,
       hidden: true,
       persistId: 'containsAITechnology',
+      filter: 'boolean',
+      extraData: this.booleanDropdownOptions
     },
   ];
 
