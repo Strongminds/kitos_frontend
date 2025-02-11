@@ -543,6 +543,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: true,
       persistId: 'isBusinessCritical',
     },
+    {
+      field: GridFields.ContainsAITechnology,
+      title: $localize`Indeholder AI-teknologi`,
+      style: 'boolean',
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'containsAITechnology',
+    },
   ];
 
   public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);

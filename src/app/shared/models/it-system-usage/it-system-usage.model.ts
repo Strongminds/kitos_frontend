@@ -77,6 +77,7 @@ export interface ITSystemUsage {
   RoleEmails: RoleAssignmentEmailsMaps;
   DpiaConducted: YesNoDontKnowOptions | undefined;
   IsBusinessCritical: YesNoDontKnowOptions | undefined;
+  ContainsAITechnology: boolean | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -195,6 +196,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
     DpiaConducted: mapFromCapitalizedStringToYesNoDontKnowEnum(value.DPIAConducted),
     IsBusinessCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsBusinessCritical),
+    ContainsAITechnology: value.ContainsAITechnology,
   };
   return adaptedSystem;
 };
