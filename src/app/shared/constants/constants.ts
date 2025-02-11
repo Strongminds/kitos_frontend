@@ -11,6 +11,7 @@ export const NOTIFICATIONS_DIALOG_DEFAULT_HEIGHT = 870;
 
 export const DEFAULT_INPUT_DEBOUNCE_TIME = 300;
 export const TWO_MINUTES_IN_MILLISECONDS = 120000;
+export const HALF_SECOND_IN_MILLISECONDS = 500;
 
 export const DEFAULT_NOTIFICATION_DURATION = 3500;
 
@@ -39,6 +40,8 @@ export const DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES = [
   'usages',
   'action-buttons',
   'checkbox',
+  'page-link-array',
+  'page-link-array-with-submodules',
 ];
 export const DEFAULT_CHANGELOG_SIZE = 5; //(as per old UI) the size of the changelog should always be 5, this could change in the future
 

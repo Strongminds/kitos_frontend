@@ -1,5 +1,7 @@
 import { createSelector } from '@ngrx/store';
-import { rightsIncludesLocalAdminInOrg } from 'src/app/shared/helpers/role-helpers';
+import { LOCAL_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
+import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
+import { GetOptionsBasedOnRights } from 'src/app/shared/models/organization/organization-user/user-role.model';
 import { userFeature } from './reducer';
 
 export const {
@@ -25,10 +27,11 @@ export const selectUserIsGlobalAdmin = createSelector(selectUser, (user) => user
 export const selectUserUuid = createSelector(selectUser, (user) => user?.uuid);
 export const selectUserOrganizationUuid = createSelector(selectUser, (user) => user?.defaultOrganizationUuid);
 export const selectUserOrganizationName = createSelector(selectUser, (user) => user?.defaultOrganizationName);
+export const selectUserOrganizationRights = createSelector(selectUser, (user) => user?.organizationRights);
 export const selectUserIsCurrentlyLocalAdmin = createSelector(
-  selectUser,
+  selectUserOrganizationRights,
   selectOrganizationUuid,
-  (user, organizationUuid) => rightsIncludesLocalAdminInOrg(user?.organizationRights, organizationUuid)
+  (userOrgRights, organizationUuid) => hasRoleInOrganization(userOrgRights, organizationUuid, LOCAL_ADMIN_ROLE)
 );
 
 export const selectUserDefaultUnitUuid = createSelector(selectUser, (user) => user?.defaultUnitUuid);
@@ -46,4 +49,13 @@ export const selectGridPermissions = createSelector(selectUserState, (state) => 
 export const selectGridConfigModificationPermission = createSelector(
   selectGridPermissions,
   (permissions) => permissions?.hasConfigModificationPermissions
+);
+
+export const selectAvailableRoleDropdownValues = createSelector(
+  selectUserIsGlobalAdmin,
+  selectUserOrganizationRights,
+  selectOrganizationUuid,
+  (isGlobalAdmin, organizationRights, organizationUuid) => {
+    return GetOptionsBasedOnRights(isGlobalAdmin, organizationRights ?? [], organizationUuid ?? '');
+  }
 );
