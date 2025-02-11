@@ -6505,10 +6505,6 @@
         <source>Data og dokumenter kasseres (K)</source>
         <target state="new">Data og dokumenter kasseres (K)</target>
       </trans-unit>
-      <trans-unit id="1337323295460285381" datatype="html">
-        <source>Data bevares, dokumenter kan kasseres</source>
-        <target state="new">Data bevares, dokumenter kan kasseres</target>
-      </trans-unit>
       <trans-unit id="4284262710394423144" datatype="html">
         <source>systemanvendelse</source>
         <target state="new">systemanvendelse</target>
@@ -6524,6 +6520,10 @@
       <trans-unit id="48406484342345837" datatype="html">
         <source>&lt;a href=&quot;<x id="PH" equiv-text="this.getEntityLink()"/>&quot;&gt;Gå til <x id="PH_1" equiv-text="this.getEntityName()"/>&lt;/a&gt;</source>
         <target state="new">&lt;a href=&quot;<x id="PH" equiv-text="this.getEntityLink()"/>&quot;&gt;Gå til <x id="PH_1" equiv-text="this.getEntityName()"/>&lt;/a&gt;</target>
+      </trans-unit>
+      <trans-unit id="8979685620310883836" datatype="html">
+        <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
+        <target state="new">Data bevares men udvalgte eller alle dokumenter kan kasseres</target>
       </trans-unit>
     </body>
   </file>
