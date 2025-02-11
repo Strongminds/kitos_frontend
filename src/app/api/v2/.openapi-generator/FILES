@@ -23,6 +23,7 @@ api/v2DprLocalCountryOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalDataResponsibleTypesInternalINTERNAL.service.ts
 api/v2DprLocalOversightOptionTypesInternalINTERNAL.service.ts
 api/v2DprLocalRoleOptionTypesInternalINTERNAL.service.ts
+api/v2ExternalReferencesInternalINTERNAL.service.ts
 api/v2GdprExportReportInternalINTERNAL.service.ts
 api/v2GlobalUserInternalINTERNAL.service.ts
 api/v2GridLocalItContractRolesINTERNAL.service.ts
@@ -192,6 +193,7 @@ model/expectedUsersIntervalDTO.ts
 model/extendedRoleAssignmentResponseDTO.ts
 model/externalReferenceDataResponseDTO.ts
 model/externalReferenceDataWriteRequestDTO.ts
+model/externalReferenceWithLastChangedResponseDTO.ts
 model/gDPRRegistrationsResponseDTO.ts
 model/gDPRWriteRequestDTO.ts
 model/gdprReportResponseDTO.ts
