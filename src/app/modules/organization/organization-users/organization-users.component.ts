@@ -167,6 +167,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       section: this.organizationUserSectionName,
       hidden: false,
       style: 'action-buttons',
+      sortable: false,
       isSticky: true,
       noFilter: true,
       extraData: [{ type: 'edit' }, { type: 'delete' }] as GridActionColumn[],

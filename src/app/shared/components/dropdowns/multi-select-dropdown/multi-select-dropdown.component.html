@@ -24,12 +24,13 @@
   data-cy="multi-select-dropdown"
 >
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
-    <div class="select-option-row" (click)="onSelected(item)" data-cy="select-option">
+    <div class="select-option-row" (click)="onSelected(item)" [attr.data-cy]="item.dataCy">
       <input
         id="item-{{ item.name }}"
         type="checkbox"
         [(ngModel)]="item$.selected"
         [ngModelOptions]="{ standalone: true }"
+        [disabled]="item.disabled"
       />
       <p class="select-option-text-margin">
         {{ item.name }}
