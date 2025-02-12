@@ -182,7 +182,7 @@ export const ITContractActions = createActionGroup({
     'Get applied procurement plans error': emptyProps(),
 
     'Create and associate contract': (contractName: string, usageUuid: string) => ({ contractName, usageUuid }),
-    'Create and associate contract success': (contractUuid: string) => ({ contractUuid }),
+    'Create and associate contract success': (usageUuid: string) => ({ usageUuid }),
     'Create and associate contract error': emptyProps(),
   },
 });

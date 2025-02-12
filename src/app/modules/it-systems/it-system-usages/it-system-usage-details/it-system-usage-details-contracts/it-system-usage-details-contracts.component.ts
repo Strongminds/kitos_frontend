@@ -23,6 +23,8 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateAndAssociateContractDialogComponent } from './create-and-associate-contract-dialog/create-and-associate-contract-dialog.component';
+import { Actions, ofType } from '@ngrx/effects';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 
 @Component({
   templateUrl: 'it-system-usage-details-contracts.component.html',
@@ -53,7 +55,8 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     private readonly store: Store,
     private readonly contractsStore: ItSystemUsageDetailsContractsComponentStore,
     private readonly notificationService: NotificationService,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly actions$: Actions
   ) {
     super();
   }
@@ -86,6 +89,13 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .select(selectItSystemUsageUuid)
         .pipe(filterNullish())
         .subscribe((itSystemUsageUuid) => this.contractsStore.getAssociatedContracts(itSystemUsageUuid))
+    );
+
+    //Reload associated contracts when a new contract is created and associated to the system usage
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITContractActions.createAndAssociateContractSuccess)).subscribe(({ usageUuid }) => {
+        this.contractsStore.getAssociatedContracts(usageUuid);
+      })
     );
 
     // Disable forms if user does not have rights to modify
