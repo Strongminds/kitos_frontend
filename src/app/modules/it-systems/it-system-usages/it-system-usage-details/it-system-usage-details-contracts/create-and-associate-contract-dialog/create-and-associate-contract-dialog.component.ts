@@ -20,7 +20,7 @@ export class CreateAndAssociateContractDialogComponent {
 
   public createAndRegisterContract() {
     const contractName = this.formGroup.controls.contractName.value;
-    if (!contractName) throw new Error('No  name is required');
+    if (!contractName) throw new Error('No contract name provided');
     this.store.dispatch(ITContractActions.createAndAssociateContract(contractName, this.usageToAssociateUuid));
     this.closeDialog();
   }
