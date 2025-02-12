@@ -61,7 +61,7 @@
           context="searchResult"
           i18n-text
         ></app-empty-state>
-        <app-collection-extension-button (clicked)="createAndRegisterContract()" text="Opret og registrer" i18n-text></app-collection-extension-button>
+        <app-collection-extension-button *ngIf="contractCreationPermission$ | async" (clicked)="createAndRegisterContract()" text="Opret og registrer" i18n-text></app-collection-extension-button>
       </app-standard-vertical-content-grid>
     </ng-container>
   </ng-container>

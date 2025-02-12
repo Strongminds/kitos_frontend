@@ -25,6 +25,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateAndAssociateContractDialogComponent } from './create-and-associate-contract-dialog/create-and-associate-contract-dialog.component';
 import { Actions, ofType } from '@ngrx/effects';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { selectItContractHasCollectionCreatePermissions } from 'src/app/store/it-contract/selectors';
 
 @Component({
   templateUrl: 'it-system-usage-details-contracts.component.html',
@@ -50,6 +51,8 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   public readonly contractToDetermineIsActiveEnabled$ = this.store.select(
     selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive
   );
+
+  public readonly contractCreationPermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 
   constructor(
     private readonly store: Store,
