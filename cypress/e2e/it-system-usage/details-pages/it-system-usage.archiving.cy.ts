@@ -16,6 +16,16 @@ describe('it-system-usage', () => {
     });
   });
 
+  it('can view but not edit information from catalog', () => {
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' });
+    openArchiveTab();
+
+    cy.getByDataCy('catalog-segment').click();
+    cy.contains('B').get('input').should('be.disabled');
+    cy.getByDataCy('catalog-archive-duty-comment-textarea').get('textarea').should('be.disabled').should('have.value', 'Old comment');
+
+  });
+
   it('fields are disabled if archiveDuty is not selected ', () => {
     cy.intercept('/api/v2/it-system-usages/*', {
       fixture: './it-system-usage/archiving/it-system-usage-no-archiving.json',
