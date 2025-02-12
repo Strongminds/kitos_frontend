@@ -101,7 +101,30 @@ describe('it-system-usage', () => {
     });
   });
 
-  it('Can create and associate contract, if no associated contracts exist', () => {
-    
-  })
+  it.only('Can create and associate contract, if no associated contracts exist', () => {
+    const usageUuid = '85cc6bd8-da66-4d4e-8e56-4dbc16e5c109'; //Comes from it-system-usage.json
+    cy.contains('System 3').click();
+
+    cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
+    cy.intercept('/api/v2/it-contracts*', []);
+
+    cy.navigateToDetailsSubPage('Kontrakter');
+
+    cy.getByDataCy('create-and-associate-contract-dialog-button').click();
+    cy.getByDataCy('contract-name-input').type('New contract');
+
+    cy.intercept('POST', '/api/v2/it-contracts', (req) => {
+      expect(req.body).to.have.property('name', 'New contract');
+      expect(req.body.systemUsageUuids).to.be.an('array').that.has.lengthOf(1);
+      expect(req.body.systemUsageUuids[0]).to.equal(usageUuid);
+    });
+
+    cy.intercept('/api/v2/it-contracts*', {fixture: './it-contracts/it-contracts-with-newly-associated-contract.json'}).as('getContracts');
+
+    cy.getByDataCy('create-and-associate-contract-button').click();
+
+    cy.wait('@getContracts');
+    cy.contains('New contract');
+
+  });
 });
