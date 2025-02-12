@@ -101,7 +101,7 @@ describe('it-system-usage', () => {
     });
   });
 
-  it.only('Can create and associate contract, if no associated contracts exist', () => {
+  it('Can create and associate contract, if no associated contracts exist', () => {
     const usageUuid = '85cc6bd8-da66-4d4e-8e56-4dbc16e5c109'; //Comes from it-system-usage.json
     cy.contains('System 3').click();
 
@@ -128,4 +128,5 @@ describe('it-system-usage', () => {
 
     cy.get('app-popup-message').should('exist');
   });
+
 });
