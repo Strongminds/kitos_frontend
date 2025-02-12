@@ -123,7 +123,7 @@ describe('it-system-usage', () => {
     cy.getByDataCy('add-notification-button').click();
 
     cy.getByDataCy('recipient-dropdown').click();
-    cy.getByDataCy('select-option').first().click();
+    cy.get('.select-option-row').first().click();
     cy.getByDataCy(notificationDialogSelector).click(); //Click elsewhere to unfocus and close the dropdown
     cy.getByDataCy('subject-textbox').type('testSubject');
     cy.setTinyMceContent('rich-text-editor', 'testBody');

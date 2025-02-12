@@ -5,11 +5,11 @@ export function compareByRoleName(a: IRoleAssignment, b: IRoleAssignment): numbe
   return a.assignment.role.name.localeCompare(b.assignment.role.name);
 }
 
-const localAdminEnumValue = 1;
 
-export function rightsIncludesLocalAdminInOrg(
+export function hasRoleInOrganization(
   organizationRights: OrganizationRight[] | undefined,
-  organizationUuid: string | undefined
+  organizationUuid: string | undefined,
+  roleEnumValue: number
 ): boolean {
   if (!organizationUuid || !organizationRights) {
     return false;
@@ -18,6 +18,6 @@ export function rightsIncludesLocalAdminInOrg(
     organizationRights
       ?.filter((right) => right.organizationUuid === organizationUuid)
       .map((right) => right.role)
-      .includes(localAdminEnumValue) ?? false
+      .includes(roleEnumValue) ?? false
   );
 }
