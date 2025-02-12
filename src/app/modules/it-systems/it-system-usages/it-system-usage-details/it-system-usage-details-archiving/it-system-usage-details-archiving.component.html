@@ -1,5 +1,5 @@
-<app-segment [buttons]="showingOptions" [(selected)]="selected"></app-segment>
-  <app-card *ngIf="selected === FrontpageSelectOption.local">
+<app-segment [buttons]="itSystemUsageModuleSegmentOptions" [(selected)]="selected"></app-segment>
+  <app-card *ngIf="selected === ItSystemUsageModuleSegmentOption.Usage">
     <app-card-header title="Arkivering" helpTextKey="it-system.usage.archiving" i18n-title></app-card-header>
     <app-form-grid [formGroup]="archiveForm">
       <div>
@@ -111,7 +111,7 @@
       ></app-textarea>
     </app-form-grid>
   </app-card>
-  <app-card *ngIf="(journalPeriodsEnabled$ | async) && selected === FrontpageSelectOption.local">
+  <app-card *ngIf="(journalPeriodsEnabled$ | async) && selected === ItSystemUsageModuleSegmentOption.Usage">
     <app-card-header title="Journalperioder" helpTextKey="it-system.usage.archiving.periods" i18n-title></app-card-header>
     <app-standard-vertical-content-grid>
       <app-native-table *ngIf="anyJournalPeriods$ | async">
@@ -171,7 +171,7 @@
     </app-standard-vertical-content-grid>
   </app-card>
 
-  <app-card *ngIf="selected === FrontpageSelectOption.catalog">
+  <app-card *ngIf="selected === ItSystemUsageModuleSegmentOption.Catalog">
     <app-card-header title="Arkivering" helpTextKey="it-system.usage.archiving" i18n-title></app-card-header>
     <app-form-grid>
        <app-textbox

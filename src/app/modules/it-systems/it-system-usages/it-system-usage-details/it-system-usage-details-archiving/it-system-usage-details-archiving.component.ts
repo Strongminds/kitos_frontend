@@ -15,6 +15,10 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/c
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { ARCHIVE_TEXT } from 'src/app/shared/constants/constants';
 import {
+  ItSystemUsageModuleSegmentOption,
+  itSystemUsageModuleSegmentOptions,
+} from 'src/app/shared/constants/it-system-usage-module-segment-constants';
+import {
   ArchiveDutyChoice,
   archiveDutyChoiceOptions,
   mapArchiveDutyChoice,
@@ -45,12 +49,6 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './write-dialog/it-system-usage-details-journal-period-write-dialog.component';
-import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
-
-enum FrontpageSelectOption {
-  local = 'local',
-  catalog = 'catalog',
-}
 
 @Component({
   selector: 'app-it-system-usage-details-archiving',
@@ -59,13 +57,9 @@ enum FrontpageSelectOption {
   providers: [ItSystemUsageDetailsArchivingComponentStore],
 })
 export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implements OnInit {
-  public readonly FrontpageSelectOption = FrontpageSelectOption;
-  public selected = FrontpageSelectOption.local;
-
-    public showingOptions: SegmentButtonOption<FrontpageSelectOption>[] = [
-      { text: $localize`Lokal data fra kommunen`, value: FrontpageSelectOption.local },
-      { text: $localize`Data fra IT Systemkataloget`, value: FrontpageSelectOption.catalog },
-    ];
+  public ItSystemUsageModuleSegmentOption = ItSystemUsageModuleSegmentOption;
+  public selected = ItSystemUsageModuleSegmentOption.Usage;
+  public itSystemUsageModuleSegmentOptions = itSystemUsageModuleSegmentOptions;
 
   private readonly journalFrequencyInputUpperLimit = 100;
 
