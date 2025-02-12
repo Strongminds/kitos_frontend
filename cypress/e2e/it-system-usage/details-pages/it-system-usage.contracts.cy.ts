@@ -126,5 +126,6 @@ describe('it-system-usage', () => {
     cy.wait('@getContracts');
     cy.contains('New contract');
 
+    cy.get('app-popup-message').should('exist');
   });
 });
