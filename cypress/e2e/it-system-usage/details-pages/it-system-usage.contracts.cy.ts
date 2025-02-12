@@ -100,4 +100,8 @@ describe('it-system-usage', () => {
       cy.contains('Ikke gyldig');
     });
   });
+
+  it('Can create and associate contract, if no associated contracts exist', () => {
+    
+  })
 });

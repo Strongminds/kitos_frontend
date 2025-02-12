@@ -73,6 +73,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   }
 
   public ngOnInit(): void {
+    this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_contract-type'));
 
     //Update form on changes
