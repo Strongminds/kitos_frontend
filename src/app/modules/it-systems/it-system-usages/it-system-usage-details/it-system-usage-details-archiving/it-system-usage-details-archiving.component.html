@@ -172,7 +172,17 @@
   </app-card>
 
   <app-card *ngIf="selected === ItSystemUsageModuleSegmentOption.Catalog">
-    <app-card-header title="Arkivering" helpTextKey="it-system.usage.archiving.catalog" i18n-title></app-card-header>
+    <app-card-header title="Arkivering" [spacer]="false" helpTextKey="it-system.usage.archiving.catalog" i18n-title>
+      <app-details-page-link
+      *ngIf="itSystemCatalogItemUuid$ | async as systemUuid"
+      class="catalog-link"
+      itemType="it-system"
+      [itemPath]="systemUuid"
+      subpagePath="archiving"
+      i18n
+      >Gå til IT Systemkataloget</app-details-page-link
+    >
+    </app-card-header>
     <app-form-grid>
        <app-textbox
           text="Rigsarkivets vejledning til arkivering"

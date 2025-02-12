@@ -36,6 +36,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasModifyPermission,
   selectItSystemUsageArchiving,
+  selectItSystemUsageSystemContextUuid,
 } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystem, selectItSystemRecomendedArchiveDutyComment } from 'src/app/store/it-system/selectors';
 import {
@@ -131,6 +132,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   public readonly activeEnabled$ = this.store.select(selectITSystemUsageEnableActive);
   public readonly notesEnabled$ = this.store.select(selectITSystemUsageEnableNotes);
   public readonly journalPeriodsEnabled$ = this.store.select(selectITSystemUsageEnableJournalPeriods);
+  public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
 
   constructor(
     private readonly store: Store,
