@@ -4975,6 +4975,18 @@
       <trans-unit id="5906499730586056252" datatype="html">
         <source>Opret og registrer</source>
       </trans-unit>
+      <trans-unit id="3531169621040073341" datatype="html">
+        <source>Indeholder AI-teknologi</source>
+      </trans-unit>
+      <trans-unit id="3888819941059729884" datatype="html">
+        <source>Kontrakt oprettet og tilknyttet</source>
+      </trans-unit>
+      <trans-unit id="4965924264660200872" datatype="html">
+        <source>Kontrakt kunne ikke oprettes</source>
+      </trans-unit>
+      <trans-unit id="5655648815512279384" datatype="html">
+        <source> Opret og registrer </source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
