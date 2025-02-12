@@ -4954,6 +4954,9 @@
       <trans-unit id="8979685620310883836" datatype="html">
         <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
       </trans-unit>
+      <trans-unit id="3531169621040073341" datatype="html">
+        <source>Indeholder AI-teknologi</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

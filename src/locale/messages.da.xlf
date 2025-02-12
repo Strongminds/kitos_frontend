@@ -6525,6 +6525,10 @@
         <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
         <target state="new">Data bevares men udvalgte eller alle dokumenter kan kasseres</target>
       </trans-unit>
+      <trans-unit id="3531169621040073341" datatype="html">
+        <source>Indeholder AI-teknologi</source>
+        <target state="new">Indeholder AI-teknologi</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

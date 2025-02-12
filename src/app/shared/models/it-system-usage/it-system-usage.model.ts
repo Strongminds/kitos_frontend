@@ -1,4 +1,5 @@
 import { APIDataProcessingRegistrationGeneralDataResponseDTO } from 'src/app/api/v2';
+import { AppPath } from '../../enums/app-path';
 import { entityWithUnavailableName } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
@@ -8,11 +9,11 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
-import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOptions } from '../yes-no-dont-know.model';
+import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
+import { mapCapitalizedStringToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
-import { AppPath } from '../../enums/app-path';
-import { mapCapitalizedStringToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
+import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -59,7 +60,7 @@ export interface ITSystemUsage {
   LinkToDirectoryUrl: string;
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
-  DataProcessingRegistrationsConcludedAsCsv: YesNoDontKnowOptions | undefined;
+  DataProcessingRegistrationsConcludedAsCsv: YesNoDontKnowOption | undefined;
   DataProcessingRegistrationNamesAsCsv: string;
   DataProcessingRegistrations: { id: string; value: string }[];
   DataProcessingRegistrationsConcluded: { id: string; value: string }[];
@@ -75,8 +76,9 @@ export interface ITSystemUsage {
   UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
-  DpiaConducted: YesNoDontKnowOptions | undefined;
-  IsBusinessCritical: YesNoDontKnowOptions | undefined;
+  DpiaConducted: YesNoDontKnowOption | undefined;
+  IsBusinessCritical: YesNoDontKnowOption | undefined;
+  ContainsAITechnology: YesNoOption | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -195,6 +197,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
     DpiaConducted: mapFromCapitalizedStringToYesNoDontKnowEnum(value.DPIAConducted),
     IsBusinessCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsBusinessCritical),
+    ContainsAITechnology: mapToYesNoEnum(value.ContainsAITechnology),
   };
   return adaptedSystem;
 };

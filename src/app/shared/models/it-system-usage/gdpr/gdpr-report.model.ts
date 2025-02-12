@@ -1,5 +1,5 @@
 import { APIGdprReportResponseDTO } from 'src/app/api/v2';
-import { mapToYesNoDontKnowEnum, YesNoDontKnowOptions } from '../../yes-no-dont-know.model';
+import { mapToYesNoDontKnowEnum, YesNoDontKnowOption } from '../../yes-no-dont-know.model';
 import { HostedAt, mapHostedAt } from './hosted-at.model';
 import { mapPreRiskAssessmentEnum, PreRiskAssessment } from './pre-risk-assessment.model';
 
@@ -10,11 +10,11 @@ export interface GdprReport {
   personalData?: boolean;
   sensitiveData?: boolean;
   legalData?: boolean;
-  businessCritical?: YesNoDontKnowOptions;
+  businessCritical?: YesNoDontKnowOption;
   dataProcessingAgreementConcluded?: boolean;
   linkToDirectory?: boolean;
   sensitiveDataTypes: string;
-  riskAssessment?: YesNoDontKnowOptions;
+  riskAssessment?: YesNoDontKnowOption;
   riskAssessmentDate?: string;
   plannedRiskAssessmentDate?: string;
   preRiskAssessment?: PreRiskAssessment;
@@ -22,12 +22,12 @@ export interface GdprReport {
   personalDataCpr?: boolean;
   personalDataSocialProblems?: boolean;
   personalDataSocialOtherPrivateMatters?: boolean;
-  dpia?: YesNoDontKnowOptions;
+  dpia?: YesNoDontKnowOption;
   dpiaDate?: string;
   hostedAt?: HostedAt;
   technicalSupervisionDocumentationUrl?: string;
   technicalSupervisionDocumentationUrlName?: string;
-  userSupervision?: YesNoDontKnowOptions;
+  userSupervision?: YesNoDontKnowOption;
   userSupervisionDocumentationUrl?: string;
   userSupervisionDocumentationUrlName?: string;
   nextDataRetentionEvaluationDate?: string;
