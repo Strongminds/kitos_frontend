@@ -54,12 +54,16 @@
         </tbody>
       </app-native-table>
     </ng-container>
-    <app-empty-state
-      *ngIf="(anyContracts$ | async) === false"
-      text='Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"'
-      context="searchResult"
-      i18n-text
-    ></app-empty-state>
+    <ng-container *ngIf="(anyContracts$ | async) === false">
+      <app-standard-vertical-content-grid>
+        <app-empty-state
+          text='Systemet er ikke omfattet af registreringer i modulet "IT Kontrakter"'
+          context="searchResult"
+          i18n-text
+        ></app-empty-state>
+        <app-collection-extension-button (clicked)="createAndRegisterContract()" text="Opret og registrer" i18n-text></app-collection-extension-button>
+      </app-standard-vertical-content-grid>
+    </ng-container>
   </ng-container>
 </app-card>
 <app-card *ngIf="(isLoading$ | async) === false && (contractToDetermineIsActiveEnabled$ | async)">

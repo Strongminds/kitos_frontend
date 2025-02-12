@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, filter } from 'rxjs';
+import { combineLatestWith, filter, first } from 'rxjs';
 import { APIItContractResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -21,6 +21,8 @@ import {
   selectITSystemUsageEnableAssociatedContracts,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateAndAssociateContractDialogComponent } from './create-and-associate-contract-dialog/create-and-associate-contract-dialog.component';
 
 @Component({
   templateUrl: 'it-system-usage-details-contracts.component.html',
@@ -50,7 +52,8 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   constructor(
     private readonly store: Store,
     private readonly contractsStore: ItSystemUsageDetailsContractsComponentStore,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly dialog: MatDialog
   ) {
     super();
   }
@@ -92,6 +95,18 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
         .subscribe(() => {
           this.contractSelectionForm.disable();
+        })
+    );
+  }
+
+  public createAndRegisterContract() {
+    this.subscriptions.add(
+      this.store
+        .select(selectItSystemUsageUuid)
+        .pipe(filterNullish(), first())
+        .subscribe((itSystemUsageUuid) => {
+          const dialogRef = this.dialog.open(CreateAndAssociateContractDialogComponent);
+          dialogRef.componentInstance.usageToAssociateUuid = itSystemUsageUuid;
         })
     );
   }

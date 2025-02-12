@@ -4969,6 +4969,12 @@
       <trans-unit id="8902690316511427918" datatype="html">
         <source>Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</source>
       </trans-unit>
+      <trans-unit id="2353526137738121108" datatype="html">
+        <source>Opret og registrer kontrakt</source>
+      </trans-unit>
+      <trans-unit id="5906499730586056252" datatype="html">
+        <source>Opret og registrer</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

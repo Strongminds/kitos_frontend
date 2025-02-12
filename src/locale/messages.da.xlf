@@ -6545,6 +6545,14 @@
         <source>Dette filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</source>
         <target state="new">Dette filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</target>
       </trans-unit>
+      <trans-unit id="2353526137738121108" datatype="html">
+        <source>Opret og registrer kontrakt</source>
+        <target state="new">Opret og registrer kontrakt</target>
+      </trans-unit>
+      <trans-unit id="5906499730586056252" datatype="html">
+        <source>Opret og registrer</source>
+        <target state="new">Opret og registrer</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
