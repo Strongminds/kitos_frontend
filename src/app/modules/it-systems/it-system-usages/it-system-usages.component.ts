@@ -30,6 +30,7 @@ import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
+import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -58,6 +59,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
   public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(UIModuleConfigKey.ItSystemUsage);
+  public readonly aiTechnologyOptions = yesNoOptions;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
@@ -546,6 +548,16 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraData: yesNoDontKnowOptions,
       hidden: true,
       persistId: 'isBusinessCritical',
+    },
+    {
+      field: GridFields.ContainsAITechnology,
+      title: $localize`Indeholder AI-teknologi`,
+      style: 'enum',
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'containsAITechnology',
+      extraFilter: 'enum',
+      extraData: this.aiTechnologyOptions,
     },
   ];
 

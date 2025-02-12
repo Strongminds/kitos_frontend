@@ -50,6 +50,9 @@ export const ItSystemUsageUiBluePrint = {
         status: {
           text: $localize`Status`,
         },
+        containsAITechnology: {
+          text: $localize`Indeholder AI-teknologi`,
+        }
       },
     },
     contracts: {

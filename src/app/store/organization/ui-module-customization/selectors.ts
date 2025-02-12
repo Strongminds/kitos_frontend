@@ -121,6 +121,7 @@ export const selectITSystemUsageEnableLastEditedAt = createItSystemUsageFrontPag
 export const selectITSystemUsageEnableLifeCycleStatus = createItSystemUsageFrontPageFieldSelector('lifeCycleStatus');
 export const selectITSystemUsageEnableFrontPageUsagePeriod = createItSystemUsageFrontPageFieldSelector('usagePeriod');
 export const selectITSystemUsageEnableStatus = createItSystemUsageFrontPageFieldSelector('status');
+export const selectITSystemUsageEnableContainsAITechnology = createItSystemUsageFrontPageFieldSelector('containsAITechnology');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
