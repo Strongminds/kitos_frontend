@@ -23,6 +23,10 @@ import {
   archiveDutyChoiceOptions,
   mapArchiveDutyChoice,
 } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
+import {
+  mapRecommendedArchiveDutyComment,
+  mapRecommendedArchiveDutyToString,
+} from 'src/app/shared/models/recommended-archive-duty.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
@@ -33,7 +37,7 @@ import {
   selectITSystemUsageHasModifyPermission,
   selectItSystemUsageArchiving,
 } from 'src/app/store/it-system-usage/selectors';
-import { selectItSystemRecomendedArchiveDutyComment } from 'src/app/store/it-system/selectors';
+import { selectItSystem, selectItSystemRecomendedArchiveDutyComment } from 'src/app/store/it-system/selectors';
 import {
   selectITSystemUsageEnableActive,
   selectITSystemUsageEnableArchiveFrequency,
@@ -60,6 +64,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   public ItSystemUsageModuleSegmentOption = ItSystemUsageModuleSegmentOption;
   public selected = ItSystemUsageModuleSegmentOption.Usage;
   public itSystemUsageModuleSegmentOptions = itSystemUsageModuleSegmentOptions;
+  public itSystem$ = this.store.select(selectItSystem);
 
   private readonly journalFrequencyInputUpperLimit = 100;
 
@@ -80,6 +85,11 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     },
     { updateOn: 'blur' }
   );
+
+  public readonly catalogForm = new FormGroup({
+    archiveDuty: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    archiveDutyComment: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+  });
 
   public readonly archiving$ = this.store.select(selectItSystemUsageArchiving);
   public readonly journalPeriods$ = this.archiving$.pipe(
@@ -136,8 +146,20 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     this.dispatchGetRegularOptionTypes();
     this.subscribeToArchiveDutyChanges();
     this.initializeArchiveForm();
+    this.setupCatalogForm();
 
     this.subscribeToJournalPeriodsChanges();
+  }
+
+  private setupCatalogForm() {
+    this.subscriptions.add(
+      this.itSystem$.pipe(filterNullish()).subscribe((itSystem) => {
+        this.catalogForm.patchValue({
+          archiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty),
+          archiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
+        });
+      })
+    );
   }
 
   public supplierFilterChange(search?: string) {

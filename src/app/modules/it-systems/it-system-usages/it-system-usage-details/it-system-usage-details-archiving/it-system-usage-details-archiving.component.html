@@ -177,14 +177,16 @@
        <app-textbox
           text="Rigsarkivets vejledning til arkivering"
           i18n-text
-          [disabled]="true"
+          [formGroup]="catalogForm"
+          formName="archiveDuty"
         ></app-textbox>
         <app-textarea
           *ngIf="notesEnabled$ | async"
           class="notes-column-span"
           text="Bemærkning fra Rigsarkivet"
           i18n-text
-          [disabled]="true"
+          [formGroup]="catalogForm"
+          formName="archiveDutyComment"
       ></app-textarea>
     </app-form-grid>
 
