@@ -26,6 +26,7 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
@@ -562,7 +563,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: true,
       persistId: 'catalogArchiveDuty',
       extraFilter: 'enum',
-      extraData: archiveDutyChoiceOptions,
+      extraData: archiveDutyRecommendationChoiceOptions,
     },
     {
       field: GridFields.CatalogArchiveDutyComment,
