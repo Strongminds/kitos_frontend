@@ -45,6 +45,12 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './write-dialog/it-system-usage-details-journal-period-write-dialog.component';
+import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
+
+enum FrontpageSelectOption {
+  local = 'local',
+  catalog = 'catalog',
+}
 
 @Component({
   selector: 'app-it-system-usage-details-archiving',
@@ -53,6 +59,14 @@ import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './write-d
   providers: [ItSystemUsageDetailsArchivingComponentStore],
 })
 export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implements OnInit {
+  public readonly FrontpageSelectOption = FrontpageSelectOption;
+  public selected = FrontpageSelectOption.local;
+
+    public showingOptions: SegmentButtonOption<FrontpageSelectOption>[] = [
+      { text: $localize`Lokal data fra kommunen`, value: FrontpageSelectOption.local },
+      { text: $localize`Data fra IT Systemkataloget`, value: FrontpageSelectOption.catalog },
+    ];
+
   private readonly journalFrequencyInputUpperLimit = 100;
 
   public readonly archiveForm = new FormGroup(
