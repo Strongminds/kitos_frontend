@@ -52,7 +52,7 @@ export const ItSystemUsageUiBluePrint = {
         },
         containsAITechnology: {
           text: $localize`Indeholder AI-teknologi`,
-        }
+        },
       },
     },
     contracts: {
@@ -174,6 +174,13 @@ export const ItSystemUsageUiBluePrint = {
         },
         journalPeriods: {
           text: $localize`Journalperioder`,
+        },
+        catalogArchiveDuty: {
+          text: $localize`Rigsarkivets vejledning til arkivering`
+        }
+        ,
+        catalogArchiveDutyComment: {
+          text: $localize`Bemærkning fra Rigsarkivet`
         },
       },
     },

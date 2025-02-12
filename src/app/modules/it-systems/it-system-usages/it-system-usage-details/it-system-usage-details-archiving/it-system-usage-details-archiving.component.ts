@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { first, map } from 'rxjs';
+import { combineLatestWith, first, map } from 'rxjs';
 import {
   APIArchivingUpdateRequestDTO,
   APIIdentityNamePairResponseDTO,
@@ -46,6 +46,8 @@ import {
   selectITSystemUsageEnableArchiveSupplier,
   selectITSystemUsageEnableArchiveTestLocation,
   selectITSystemUsageEnableArchiveType,
+  selectITSystemUsageEnableCatalogArchiveDuty,
+  selectITSystemUsageEnableCatalogArchiveDutyComment,
   selectITSystemUsageEnableDocumentBearing,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableNotes,
@@ -133,6 +135,8 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   public readonly notesEnabled$ = this.store.select(selectITSystemUsageEnableNotes);
   public readonly journalPeriodsEnabled$ = this.store.select(selectITSystemUsageEnableJournalPeriods);
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
+  public readonly catalogArchiveDutyEnabled$ = this.store.select(selectITSystemUsageEnableCatalogArchiveDuty);
+  public readonly catalogArchiveDutyCommentEnabled$ = this.store.select(selectITSystemUsageEnableCatalogArchiveDutyComment);
 
   constructor(
     private readonly store: Store,
@@ -149,7 +153,6 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     this.subscribeToArchiveDutyChanges();
     this.initializeArchiveForm();
     this.setupCatalogForm();
-
     this.subscribeToJournalPeriodsChanges();
   }
 
@@ -162,6 +165,12 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
         });
       })
     );
+  }
+
+  public disableCatalogArchivingSegment(){
+    return this.catalogArchiveDutyEnabled$.pipe(
+    combineLatestWith(this.catalogArchiveDutyCommentEnabled$),
+    map(([catalogArchiveDutyEnabled, catalogArchiveDutyCommentEnabled]) => !catalogArchiveDutyEnabled && !catalogArchiveDutyCommentEnabled))
   }
 
   public supplierFilterChange(search?: string) {
