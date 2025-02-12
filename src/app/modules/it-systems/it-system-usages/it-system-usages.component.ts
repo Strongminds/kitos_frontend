@@ -59,7 +59,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly gridState$ = this.store.select(selectGridState);
   public readonly gridColumns$ = this.store.select(selectUsageGridColumns);
   public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(UIModuleConfigKey.ItSystemUsage);
-  public readonly aiTechnologyOptions = yesNoOptions;
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
@@ -553,7 +552,25 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: true,
       persistId: 'containsAITechnology',
       extraFilter: 'enum',
-      extraData: this.aiTechnologyOptions,
+      extraData: yesNoOptions,
+    },
+    {
+      field: GridFields.CatalogArchiveDuty,
+      title: $localize`Rigsarkivets vejledning til arkivering`,
+      style: 'enum',
+      section: ARCHIVE_SECTION_NAME,
+      hidden: true,
+      persistId: 'catalogArchiveDuty',
+      extraFilter: 'enum',
+      extraData: archiveDutyChoiceOptions,
+    },
+    {
+      field: GridFields.CatalogArchiveDutyComment,
+      title: $localize`Bemærkning fra Rigsarkivet`,
+      style: 'default',
+      section: ARCHIVE_SECTION_NAME,
+      hidden: true,
+      persistId: 'catalogArchiveDutyComment',
     },
   ];
 
