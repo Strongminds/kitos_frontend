@@ -155,7 +155,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     const dialogRef = this.dialog.open(LinkWriteDialogComponent);
     const instance = dialogRef.componentInstance as LinkWriteDialogComponent;
     instance.url$ = this.interfaceUrlReference$;
-    instance.submitMethod.subscribe((url) => this.updateUrl(url));
+    instance.submitMethod.pipe(first()).subscribe((url) => this.updateUrl(url));
   }
 
   public updateUrl(url: string) {
