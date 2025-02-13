@@ -73,7 +73,7 @@
       text="Ansvarlig enhed"
       i18n-text
       [formGroup]="frontpageFormGroup"
-      (valueChange)="patchResponsibleUnit($event)"
+      (valueChange)="patchFrontPage({ general: { responsibleOrganizationUnitUuid: $event } })"
       formName="responsibleOrgUnit"
     >
     </app-org-unit-select>

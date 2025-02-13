@@ -177,8 +177,4 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     this.agreementConcludedValue$.next(value);
     this.patchFrontPage({ general: { isAgreementConcluded: value } });
   }
-
-  public patchResponsibleUnit(value: string | undefined) {
-    this.patchFrontPage({ general: { responsibleOrganizationUnitUuid: value } });
-  }
 }
