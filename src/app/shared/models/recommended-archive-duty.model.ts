@@ -7,7 +7,10 @@ export const mapRecommendedArchiveDutyToString = (value: APIRecommendedArchiveDu
     case APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation:
       return $localize`Ingen vejledning`;
     default:
-      return value.id;
+      return value.id; //tager værdi direkte fra dto, skal gennem mapping i archive-duty-recommendation-choice
+        //for det er forkert at denne ikke får den nye længere enumtekst med
+        //dog overvej "ved ikke" vs "ingen vejledning?" Men det skal frontend vel ikke bestemme
+
   }
 };
 

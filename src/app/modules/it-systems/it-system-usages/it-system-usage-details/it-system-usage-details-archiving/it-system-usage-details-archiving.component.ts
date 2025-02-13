@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first, map } from 'rxjs';
+import { first, map } from 'rxjs';
 import {
   APIArchivingUpdateRequestDTO,
   APIIdentityNamePairResponseDTO,
@@ -68,7 +68,6 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   public ItSystemUsageModuleSegmentOption = ItSystemUsageModuleSegmentOption;
   public selected = ItSystemUsageModuleSegmentOption.Usage;
   public itSystemUsageModuleSegmentOptions = itSystemUsageModuleSegmentOptions;
-  public itSystem$ = this.store.select(selectItSystem);
 
   private readonly journalFrequencyInputUpperLimit = 100;
 
@@ -89,11 +88,6 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     },
     { updateOn: 'blur' }
   );
-
-  public readonly catalogForm = new FormGroup({
-    archiveDuty: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    archiveDutyComment: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-  });
 
   public readonly archiving$ = this.store.select(selectItSystemUsageArchiving);
   public readonly journalPeriods$ = this.archiving$.pipe(
@@ -153,19 +147,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
     this.dispatchGetRegularOptionTypes();
     this.subscribeToArchiveDutyChanges();
     this.initializeArchiveForm();
-    this.setupCatalogForm();
     this.subscribeToJournalPeriodsChanges();
-  }
-
-  private setupCatalogForm() {
-    this.subscriptions.add(
-      this.itSystem$.pipe(filterNullish()).subscribe((itSystem) => {
-        this.catalogForm.patchValue({
-          archiveDuty: mapRecommendedArchiveDutyToString(itSystem.recommendedArchiveDuty),
-          archiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
-        });
-      })
-    );
   }
 
   public disableCatalogArchivingSegment(){
