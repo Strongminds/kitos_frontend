@@ -33,7 +33,15 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     const controls = this.simpleLinkForm.controls;
     const name = controls.name.value;
     const url = controls.url.value;
-    return (name && !url) || (name === null && url === null);
+    return this.hasNameWithoutUrl(url, name) || this.hasNoChanges(url, name);
+  }
+
+  private hasNameWithoutUrl(url: string | undefined | null, name: string | undefined | null){
+    return name && !url;
+  }
+
+  private hasNoChanges(url: string | undefined | null, name: string | undefined | null){
+    return url === this.simpleLink?.url && name === this.simpleLink?.name;
   }
 
   ngOnInit(): void {
