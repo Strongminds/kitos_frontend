@@ -61,7 +61,7 @@ export class LinkTextboxComponent extends BaseComponent {
   public hasNoLink(){
     return this.simpleLink$
       .pipe(map((simpleLink) => {
-        return !simpleLink || simpleLink.url === null;
+        return !simpleLink || !simpleLink.url;
       }));
   }
 
