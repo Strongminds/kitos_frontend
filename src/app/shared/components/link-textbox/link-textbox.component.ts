@@ -41,7 +41,7 @@ export class LinkTextboxComponent extends BaseComponent {
         const name = simpleLink?.name;
         if (isEmptyOrUndefined(url) && isEmptyOrUndefined(name)) return null;
 
-        const title = (isEmptyOrUndefined(name)) ? this.placeholder : name;
+        const title = isEmptyOrUndefined(name) ? this.placeholder : name;
         if (this.validateSimpleLinkUrl(simpleLink?.url)) {
           return title;
         }
