@@ -49,6 +49,15 @@ export class LinkTextboxComponent extends BaseComponent {
       }));
   }
 
+  public enableClearX(){
+    return this.simpleLink$
+      .pipe(map((simpleLink) => {
+        const url = simpleLink?.url;
+        const name = simpleLink?.name;
+        return !(isEmptyOrUndefined(url) && isEmptyOrUndefined(name));
+      }));
+  }
+
   public validateSimpleLinkUrl(url: string | undefined) {
     return isEmptyOrUndefined(url) || validateUrl(url);
   }
