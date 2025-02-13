@@ -1,8 +1,9 @@
-@import "theme";
-@import "mixins";
-
 :host {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.notes-column-span {
+  grid-column: span 3;
 }
