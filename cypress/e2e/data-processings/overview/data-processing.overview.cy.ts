@@ -40,7 +40,7 @@ describe('data-processing', () => {
   });
 
   //Incomplete test, but feel free to add to it when adding more fields
-  it.only('Can show dataprocessing fields', () => {
+  it('Can show dataprocessing fields', () => {
     cy.contains('Tilpas').click();
     cy.contains('Ansvarlig org. enhed').click();
     cy.contains('Gem').click();
