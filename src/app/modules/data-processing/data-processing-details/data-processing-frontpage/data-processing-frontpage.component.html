@@ -75,6 +75,7 @@
       [formGroup]="frontpageFormGroup"
       (valueChange)="patchFrontPage({ general: { responsibleOrganizationUnitUuid: $event } })"
       formName="responsibleOrgUnit"
+      data-cy="responsible-unit-select"
     >
     </app-org-unit-select>
     <ng-container *ngIf="agreementConcludedEnabled$ | async">

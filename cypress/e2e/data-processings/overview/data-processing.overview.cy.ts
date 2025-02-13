@@ -10,8 +10,11 @@ describe('data-processing', () => {
       fixture: 'dpr/data-processing-options.json',
     });
     cy.intercept('/api/v2/data-processing-registrations/permissions*', { fixture: 'shared/create-permissions.json' });
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
+    cy.intercept('GET', 'api/v2/organizations/*/organization-units?pageSize=*', {
+      fixture: './organizations/organization-units.json',
+    });
     cy.setup(true, 'data-processing');
   });
 
@@ -34,5 +37,14 @@ describe('data-processing', () => {
     // The name field waits for 500ms before calling the backend to verify if the name already exists
     cy.wait(500);
     cy.getByDataCy('name-error').should('exist');
+  });
+
+  //Incomplete test, but feel free to add to it when adding more fields
+  it.only('Can show dataprocessing fields', () => {
+    cy.contains('Tilpas').click();
+    cy.contains('Ansvarlig org. enhed').click();
+    cy.contains('Gem').click();
+
+    cy.contains('En enhed').should('exist');
   });
 });
