@@ -38,14 +38,14 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  // public disableSaveButton() {
-  //   this.url$.pipe(
-  //     map((existingUrl) => {
-  //       const formUrl = this.urlForm.value.url;
-  //       return existingUrl === formUrl; //or both are empty
-  //   })
-  // );
-  // }
+  public disableSaveButton() {
+    return this.url$.pipe(
+      map((existingUrl) => {
+        const formUrl = this.urlForm.value.url;
+        return existingUrl === formUrl;
+    })
+  );
+  }
 
   onCancel() {
     this.dialogRef.close();
