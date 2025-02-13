@@ -158,7 +158,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     instance.submitMethod.subscribe((url) => this.updateUrl(url));
   }
 
-  private updateUrl(url: string) {
+  public updateUrl(url: string) {
     this.store.dispatch(ITInterfaceActions.updateITInterface({ urlReference: url }));
   }
 
