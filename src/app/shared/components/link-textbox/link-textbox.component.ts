@@ -58,6 +58,13 @@ export class LinkTextboxComponent extends BaseComponent {
       }));
   }
 
+  public hasNoLink(){
+    return this.simpleLink$
+      .pipe(map((simpleLink) => {
+        return !simpleLink || simpleLink.url === null;
+      }));
+  }
+
   public validateSimpleLinkUrl(url: string | undefined) {
     return isEmptyOrUndefined(url) || validateUrl(url);
   }
