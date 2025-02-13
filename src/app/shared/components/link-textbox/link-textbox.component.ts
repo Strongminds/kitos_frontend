@@ -36,12 +36,12 @@ export class LinkTextboxComponent extends BaseComponent {
     return this.simpleLink$
       .pipe(map((simpleLink) => {
         const url = simpleLink?.url;
-        const name = simpleLink?.name;
-
         if (this.isLinkOnly) return url;
+
+        const name = simpleLink?.name;
         if (isEmptyOrUndefined(url) && isEmptyOrUndefined(name)) return null;
 
-        const title = (name && name.length > 0) ? name : this.placeholder; //todo use emptyorundef here in reverse
+        const title = (isEmptyOrUndefined(name)) ? this.placeholder : name;
         if (this.validateSimpleLinkUrl(simpleLink?.url)) {
           return title;
         }
