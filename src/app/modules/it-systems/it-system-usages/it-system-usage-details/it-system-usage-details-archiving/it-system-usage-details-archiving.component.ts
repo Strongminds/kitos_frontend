@@ -56,6 +56,7 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from './write-dialog/it-system-usage-details-journal-period-write-dialog.component';
+import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving',
@@ -168,9 +169,7 @@ export class ItSystemUsageDetailsArchivingComponent extends BaseComponent implem
   }
 
   public disableCatalogArchivingSegment(){
-    return this.catalogArchiveDutyEnabled$.pipe(
-    combineLatestWith(this.catalogArchiveDutyCommentEnabled$),
-    map(([catalogArchiveDutyEnabled, catalogArchiveDutyCommentEnabled]) => !catalogArchiveDutyEnabled && !catalogArchiveDutyCommentEnabled))
+    return combineOR([this.catalogArchiveDutyEnabled$, this.catalogArchiveDutyCommentEnabled$]).pipe(invertBooleanValue());
   }
 
   public supplierFilterChange(search?: string) {
