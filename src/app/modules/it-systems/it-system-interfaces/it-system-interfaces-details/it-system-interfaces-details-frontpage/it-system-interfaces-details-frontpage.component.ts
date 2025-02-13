@@ -152,10 +152,13 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   }
 
   public openUpdateUrlDialog() {
+    if (this.dialog.openDialogs.length > 0) return;
+    
     const dialogRef = this.dialog.open(LinkWriteDialogComponent);
     const instance = dialogRef.componentInstance as LinkWriteDialogComponent;
     instance.url$ = this.interfaceUrlReference$;
-    instance.submitMethod.pipe(first()).subscribe((url) => this.updateUrl(url));
+    console.log('opening in frontapge');
+    instance.submitMethod.subscribe((url) => this.updateUrl(url));
   }
 
   public updateUrl(url: string) {
