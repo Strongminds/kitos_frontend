@@ -35,8 +35,12 @@ export class LinkTextboxComponent extends BaseComponent {
   public getLinkText(){
     return this.simpleLink$
       .pipe(map((simpleLink) => {
-        if (this.isLinkOnly) return simpleLink?.url;
+        const url = simpleLink?.url;
         const name = simpleLink?.name;
+
+        if (this.isLinkOnly) return url;
+        if (isEmptyOrUndefined(url) && isEmptyOrUndefined(name)) return null;
+
         const title = (name && name.length > 0) ? name : this.placeholder;
         if (this.validateSimpleLinkUrl(simpleLink?.url)) {
           return title;
