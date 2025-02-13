@@ -69,7 +69,14 @@
       formName="lastChangedAt"
     >
     </app-datepicker>
-    <app-org-unit-select text="Ansvarlig enhed"> </app-org-unit-select>
+    <app-org-unit-select
+      text="Ansvarlig enhed"
+      i18n-text
+      [formGroup]="frontpageFormGroup"
+      (valueChange)="patchResponsibleUnit($event)"
+      formName="responsibleOrgUnit"
+    >
+    </app-org-unit-select>
     <ng-container *ngIf="agreementConcludedEnabled$ | async">
       <app-dropdown
         text="Databehandleraftale er indgået"
