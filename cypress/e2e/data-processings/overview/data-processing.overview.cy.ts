@@ -39,8 +39,8 @@ describe('data-processing', () => {
     cy.getByDataCy('name-error').should('exist');
   });
 
-  //Incomplete test, but feel free to add to it when adding more fields
-  it('Can show dataprocessing fields', () => {
+  //Feel to free to add more field tests here when extending the overview
+  it('Can show responsible unit in grid', () => {
     cy.contains('Tilpas').click();
     cy.contains('Ansvarlig org. enhed').click();
     cy.contains('Gem').click();
