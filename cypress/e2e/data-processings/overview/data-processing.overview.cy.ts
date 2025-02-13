@@ -15,10 +15,10 @@ describe('data-processing', () => {
     cy.intercept('GET', 'api/v2/organizations/*/organization-units?pageSize=*', {
       fixture: './organizations/organization-units.json',
     });
-    cy.setup(true, 'data-processing');
   });
 
   it('can show data processing grid', () => {
+    cy.setup(true, 'data-processing');
     cy.get('h3').should('have.text', 'Databehandling');
 
     cy.contains('Dpa 1');
@@ -27,6 +27,7 @@ describe('data-processing', () => {
   });
 
   it('cant create if name already exists', () => {
+    cy.setup(true, 'data-processing');
     cy.intercept('/api/v2/data-processing-registrations?nameEquals*', {
       fixture: './dpr/data-processings-name-exists-search.json',
     });
@@ -41,10 +42,18 @@ describe('data-processing', () => {
 
   //Feel to free to add more field tests here when extending the overview
   it('Can show responsible unit in grid', () => {
+    cy.setup(true, 'data-processing');
     cy.contains('Tilpas').click();
     cy.contains('Ansvarlig org. enhed').click();
     cy.contains('Gem').click();
 
     cy.contains('En enhed').should('exist');
+  });
+
+  it('Can not see responsible unit, if disabled by UI customization', () => {
+    cy.setup(true, 'data-processing', './shared/ui-customization/dpr-responsible-unit-disabled.json');
+
+    cy.contains('Tilpas').click();
+    cy.contains('Ansvarlig org. enhed').should('not.exist');
   });
 });

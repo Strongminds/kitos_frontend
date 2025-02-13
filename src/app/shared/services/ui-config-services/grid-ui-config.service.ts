@@ -24,6 +24,7 @@ import {
   selectDprEnableOversights,
   selectDprEnableProcessors,
   selectDprEnableReferences,
+  selectDprEnableResponsibleOrgUnit,
   selectDprEnableRoles,
   selectDprEnableScheduledInspectionDate,
   selectDprEnableStatus,
@@ -277,7 +278,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableDataClassification)
         .pipe(shouldEnable([UsageFields.ItSystemCategoriesUuid])),
-      this.store.select(selectITSystemUsageEnableContainsAITechnology).pipe(shouldEnable([UsageFields.ContainsAITechnology])),
+      this.store
+        .select(selectITSystemUsageEnableContainsAITechnology)
+        .pipe(shouldEnable([UsageFields.ContainsAITechnology])),
 
       //Contracts
       combineAND([
@@ -380,6 +383,7 @@ export class GridUIConfigService {
         .pipe(shouldEnable([DprFields.BasisForTransferUuid, DprFields.TransferToInsecureThirdCountries])),
       this.store.select(selectDprEnableProcessors).pipe(shouldEnable([DprFields.DataProcessorNamesAsCsv])),
       this.store.select(selectDprEnableSubProcessors).pipe(shouldEnable([DprFields.SubDataProcessorNamesAsCsv])),
+      this.store.select(selectDprEnableResponsibleOrgUnit).pipe(shouldEnable([DprFields.ResponsibleOrgUnitName])),
       // IT Systems
       combineAND([this.store.select(selectShowItSystemModule), this.store.select(selectDprEnableItSystems)]).pipe(
         shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv])

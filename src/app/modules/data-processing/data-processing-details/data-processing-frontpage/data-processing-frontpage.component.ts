@@ -29,6 +29,7 @@ import {
   selectDprEnableLastChangedAt,
   selectDprEnableLastChangedBy,
   selectDprEnableProcessors,
+  selectDprEnableResponsibleOrgUnit,
   selectDprEnableStatus,
   selectDprEnableSubProcessors,
   selectDprEnableTransferBasis,
@@ -94,6 +95,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly transferBasisEnabled$ = this.store.select(selectDprEnableTransferBasis);
   public readonly processorsEnabled$ = this.store.select(selectDprEnableProcessors);
   public readonly subProcessorsEnabled$ = this.store.select(selectDprEnableSubProcessors);
+  public readonly responsibleUnitEnabled$ = this.store.select(selectDprEnableResponsibleOrgUnit);
 
   constructor(private store: Store, private notificationService: NotificationService) {
     super();

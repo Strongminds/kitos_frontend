@@ -70,6 +70,7 @@
     >
     </app-datepicker>
     <app-org-unit-select
+      *ngIf="responsibleUnitEnabled$ | async"
       text="Ansvarlig enhed"
       i18n-text
       [formGroup]="frontpageFormGroup"
