@@ -110,7 +110,7 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
-    cy.getByDataCy('create-and-associate-contract-dialog-button').click();
+    cy.getByDataCy('open-create-and-associate-contract-dialog-button').click();
     cy.getByDataCy('contract-name-input').type('New contract');
 
     cy.intercept('POST', '/api/v2/it-contracts', (req) => {
@@ -139,7 +139,7 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
-    cy.getByDataCy('create-and-associate-contract-dialog-button').should('not.exist');
+    cy.getByDataCy('open-create-and-associate-contract-dialog-button').should('not.exist');
   });
 
   it('Can not create and associate contract, if no permission to create contract', () => {
@@ -152,7 +152,7 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
-    cy.getByDataCy('create-and-associate-contract-dialog-button').should('not.exist');
+    cy.getByDataCy('open-create-and-associate-contract-dialog-button').should('not.exist');
   });
 
   it('Can not create and associate contract, if name is empty or already exists', () => {
@@ -163,7 +163,7 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
-    cy.getByDataCy('create-and-associate-contract-dialog-button').click();
+    cy.getByDataCy('open-create-and-associate-contract-dialog-button').click();
     cy.getByDataCy('create-and-associate-contract-button').find('button').should('be.disabled'); //Disabled because name is empty
 
     cy.intercept('/api/v2/it-contracts?nameEquals=*', [{ name: 'Existing contract' }]);
