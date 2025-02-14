@@ -1,4 +1,5 @@
+@import "mixins";
+
 .invalid-input-border {
-  border: red solid 1px;
-  border-radius: 10px;
+  @include invalid-input-border;
 }
