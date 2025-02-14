@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { first } from 'rxjs';
@@ -33,16 +33,21 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     const controls = this.simpleLinkForm.controls;
     const name = controls.name.value;
     const url = controls.url.value;
-    return this.hasNameWithoutUrl(url, name) || this.hasNoChanges(url, name);
+    return this.hasNameWithoutUrl(url, name) || this.hasNoChanges(name);
+  }
+
+  public urlIsInvalid(){
+    return this.simpleLinkForm.controls.url.value === this.simpleLink?.url;
   }
 
   private hasNameWithoutUrl(url: string | undefined | null, name: string | undefined | null){
     return name && !url;
   }
 
-  private hasNoChanges(url: string | undefined | null, name: string | undefined | null){
-    return url === this.simpleLink?.url && name === this.simpleLink?.name;
+  private hasNoChanges(name: string | undefined | null){
+    return this.urlIsInvalid() && name === this.simpleLink?.name;
   }
+
 
   ngOnInit(): void {
     if (this.simpleLink) {
