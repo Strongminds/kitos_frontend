@@ -48,3 +48,5 @@ export const ItSystemCategoriesUuid = 'ItSystemCategoriesUuid';
 export const DpiaConducted = 'DpiaConducted';
 export const IsBusinessCritical = 'IsBusinessCritical';
 export const ContainsAITechnology = 'ContainsAITechnology';
+export const CatalogArchiveDuty = 'CatalogArchiveDuty';
+export const CatalogArchiveDutyComment = 'CatalogArchiveDutyComment';
