@@ -25,6 +25,7 @@
         formName="archiveDutyComment"
         data-cy="catalog-archive-duty-comment-textarea"
         *ngIf="catalogArchiveDutyCommentEnabled$ | async"
+        [disabled]="true"
     ></app-textarea>
   </app-form-grid>
 
