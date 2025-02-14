@@ -23,8 +23,19 @@ describe('it-system-usage', () => {
     cy.getByDataCy('catalog-segment').click();
     cy.contains('B').get('input').should('be.disabled');
     cy.getByDataCy('catalog-archive-duty-comment-textarea').get('textarea').should('be.disabled').should('have.value', 'Old comment');
-
   });
+
+  it('can follow catalog link from archiving catalog segment', () => {
+    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' });
+    cy.intercept('/api/v2/it-system-usages?organizationUuid=*', { fixture: './it-system-usage/it-system-usage' });
+    cy.intercept('/api/v2/it-systems/*/permissions', { fixture: './it-system-catalog/it-system-permissions.json' });
+    openArchiveTab();
+
+    cy.getByDataCy('catalog-segment').click();
+    cy.contains('Gå til IT Systemkataloget').click();
+    cy.contains('IT Systemkatalog')
+    cy.url().should('contain', 'it-system-catalog')
+  })
 
   it('fields are disabled if archiveDuty is not selected ', () => {
     cy.intercept('/api/v2/it-system-usages/*', {
