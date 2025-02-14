@@ -2,7 +2,5 @@
 @import "mixins";
 
 :host {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+  @include page-flex-layout-max-width;
 }
