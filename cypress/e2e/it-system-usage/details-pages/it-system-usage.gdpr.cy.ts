@@ -181,7 +181,7 @@ describe('it-system-usage', () => {
         verifyGdprPatchRequest({ technicalPrecautionsApplied: ['Encryption'] }, 'patchAddPrecaution');
         verifyLinkTextAndPressEdit('technical-precautions-documentation-link', 'newName: newUrl');
       });
-    verifyLinkEditDialog();
+    verifyLinkEditDialogAndPerformEdit();
   });
 
   it('can edit user supervision', () => {
@@ -205,7 +205,7 @@ describe('it-system-usage', () => {
 
         verifyLinkTextAndPressEdit('base-date-url-section-selector', 'newName: newUrl');
       });
-    verifyLinkEditDialog();
+    verifyLinkEditDialogAndPerformEdit();
   });
 
   it('can edit risk assessment', () => {
@@ -228,8 +228,16 @@ describe('it-system-usage', () => {
     verifyAppNotification();
 
     verifyLinkTextAndPressEdit('risk-documentation-link', 'newName: newUrl');
-    verifyLinkEditDialog();
+    verifyLinkEditDialogAndPerformEdit();
   });
+
+  it.only('cannot save directory documentation with unchanged url', () => {
+    verifyLinkTextAndPressEdit('directory-documentation-link', 'newName: newUrl');
+
+    cy.get('app-edit-url-dialog').within(() => {
+      verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
+    });
+  })
 
   it('can edit retention period', () => {
     cy.getByDataCy('retention-period-accordion').click();
@@ -261,7 +269,7 @@ function verifyGdprPatchRequest(gdprUpdate: object, requestAlias?: string) {
 function verifyLinkTextbox(textboxSelector: string, textboxText: string) {
   verifyLinkTextAndPressEdit(textboxSelector, textboxText);
 
-  verifyLinkEditDialog();
+  verifyLinkEditDialogAndPerformEdit();
 }
 
 function verifyLinkTextAndPressEdit(textboxSelector: string, textboxText: string) {
@@ -270,7 +278,7 @@ function verifyLinkTextAndPressEdit(textboxSelector: string, textboxText: string
   });
 }
 
-function verifyLinkEditDialog() {
+function verifyLinkEditDialogAndPerformEdit() {
   cy.get('app-edit-url-dialog').within(() => {
     cy.getByDataCy('link-name-textbox').type('Test');
     cy.getByDataCy('link-url-textbox').type('https://test.dk');
@@ -279,6 +287,11 @@ function verifyLinkEditDialog() {
   });
 
   verifyAppNotification();
+}
+
+function verifyDialogConfirmButtonDisabledByReactiveForm(dataCySelector: string){
+  cy.getByDataCy(dataCySelector).click();
+  cy.getByDataCy(dataCySelector).should('exist');
 }
 
 function verifyAppNotification() {

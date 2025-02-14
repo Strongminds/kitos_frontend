@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('it-system-usage', () => {
+describe('generic components', () => {
   beforeEach(() => {
     cy.requireIntercept();
   });
