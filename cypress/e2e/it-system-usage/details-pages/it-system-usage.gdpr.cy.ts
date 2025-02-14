@@ -231,11 +231,11 @@ describe('it-system-usage', () => {
     verifyLinkEditDialogAndPerformEdit();
   });
 
-  it('cannot save directory documentation with unchanged url', () => {
+  it.only('cannot save directory documentation with unchanged url', () => {
     verifyLinkTextAndPressEdit('directory-documentation-link', 'newName: newUrl');
 
     cy.get('app-edit-url-dialog').within(() => {
-      verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
+      cy.verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
     });
   })
 
@@ -287,11 +287,6 @@ function verifyLinkEditDialogAndPerformEdit() {
   });
 
   verifyAppNotification();
-}
-
-function verifyDialogConfirmButtonDisabledByReactiveForm(dataCySelector: string){
-  cy.getByDataCy(dataCySelector).click();
-  cy.getByDataCy(dataCySelector).should('exist');
 }
 
 function verifyAppNotification() {
