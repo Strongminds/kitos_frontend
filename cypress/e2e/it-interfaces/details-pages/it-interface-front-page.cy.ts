@@ -20,10 +20,7 @@ describe('it-system-interfaces', () => {
   });
 
   it('interface information area fields contain correct data, and can be edited', () => {
-    cy.intercept('/api/v2/it-interfaces/*', {
-      fixture: './it-interfaces/it-interface.json',
-    });
-    goToInterfaceDetails();
+    setupRegularInterfaceDetails();
     cy.intercept('PATCH', '/api/v2/it-interfaces/*', { fixture: './it-interfaces/it-interface.json' }).as('patch');
 
     const nameSelector = 'interface-name';
@@ -89,10 +86,7 @@ describe('it-system-interfaces', () => {
   });
 
   it('can add interface data', () => {
-    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
-      fixture: './it-interfaces/it-interface.json',
-    });
-    goToInterfaceDetails();
+    setupRegularInterfaceDetails();
 
     cy.getByDataCy('add-data-button').click();
     cy.get('app-dialog').within(() => {
@@ -104,10 +98,7 @@ describe('it-system-interfaces', () => {
   });
 
   it('can edit interface data', () => {
-    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
-      fixture: './it-interfaces/it-interface.json',
-    });
-    goToInterfaceDetails();
+    setupRegularInterfaceDetails();
 
     cy.getByDataCy('edit-data-button').click();
     cy.get('app-dialog').within(() => {
@@ -119,17 +110,14 @@ describe('it-system-interfaces', () => {
   });
 
   it('deactivate button should be visible', () => {
-    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
-      fixture: './it-interfaces/it-interface.json',
-    });
-    goToInterfaceDetails();
+    setupRegularInterfaceDetails();
 
     cy.getByDataCy('deactivate-interface-button').should('exist');
     cy.getByDataCy('activate-interface-button').should('not.exist');
   });
 
   it('activate button should be visible', () => {
-    cy.intercept('/api/v2/it-interfaces/27c3e673-1111-46dc-8e44-2ba278901eae', {
+    cy.intercept('/api/v2/it-interfaces/*', {
       fixture: './it-interfaces/it-interface-deactivated.json',
     });
     goToInterfaceDetails();
@@ -137,7 +125,18 @@ describe('it-system-interfaces', () => {
     cy.getByDataCy('activate-interface-button').should('exist');
     cy.getByDataCy('deactivate-interface-button').should('not.exist');
   });
+
+  it('cannot save link with unchanged url', () => {
+    setupRegularInterfaceDetails();
+  });
 });
+
+function setupRegularInterfaceDetails(){
+  cy.intercept('/api/v2/it-interfaces/*', {
+    fixture: './it-interfaces/it-interface.json',
+  });
+  goToInterfaceDetails();
+}
 
 function verifyInterfaceFrontPagePatchRequest(request: object) {
   cy.verifyRequestUsingDeepEq('patch', 'request.body', request);
