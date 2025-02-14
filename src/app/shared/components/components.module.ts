@@ -140,6 +140,7 @@ import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-
 import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
 import { GridColumnConfigButtonsComponent } from './grid-options-button/grid-column-config-buttons/grid-column-config-buttons.component';
 import { GridFilterButtonsComponent } from './grid-options-button/grid-filter-buttons/grid-filter-buttons.component';
+import { GridCellComponent } from './grid/grid-cell/grid-cell.component';
 import { GridUsagesConsequencesDialogComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
 import { UsageMigrationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-consequences-table/usage-migration-consequences-table.component';
 import { UsageMigrationRelationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-relation-consequences-table/usage-migration-relation-consequences-table.component';
@@ -166,6 +167,11 @@ import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { TextCellComponent } from './grid/grid-cell/cell-types/text-cell/text-cell.component';
+import { StatusCellComponent } from './grid/grid-cell/cell-types/status-cell/status-cell.component';
+import { ThousandSeperatorCellComponent } from './grid/grid-cell/cell-types/thousand-seperator-cell/thousand-seperator-cell.component';
+import { DefaultWrapCellComponent } from './grid/grid-cell/cell-types/default-wrap-cell/default-wrap-cell.component';
+import { PrimaryCellComponent } from './grid/grid-cell/cell-types/primary-cell/primary-cell.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -305,6 +311,12 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageMigrationRelationConsequencesTableComponent,
     UsageMigrationSystemConsequencesTableComponent,
     SectionComponent,
+    GridCellComponent,
+    TextCellComponent,
+    StatusCellComponent,
+    ThousandSeperatorCellComponent,
+    DefaultWrapCellComponent,
+    PrimaryCellComponent,
   ],
   imports: [
     CommonModule,
