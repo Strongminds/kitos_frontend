@@ -79,6 +79,8 @@ export interface ITSystemUsage {
   DpiaConducted: YesNoDontKnowOption | undefined;
   IsBusinessCritical: YesNoDontKnowOption | undefined;
   ContainsAITechnology: YesNoOption | undefined;
+  CatalogArchiveDuty: ArchiveDutyChoice | undefined;
+  CatalogArchiveDutyComment: string | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -198,6 +200,8 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     DpiaConducted: mapFromCapitalizedStringToYesNoDontKnowEnum(value.DPIAConducted),
     IsBusinessCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsBusinessCritical),
     ContainsAITechnology: mapToYesNoEnum(value.ContainsAITechnology),
+    CatalogArchiveDuty: mapArchiveDutyChoice(value.CatalogArchiveDuty),
+    CatalogArchiveDutyComment: value.CatalogArchiveDutyComment,
   };
   return adaptedSystem;
 };
