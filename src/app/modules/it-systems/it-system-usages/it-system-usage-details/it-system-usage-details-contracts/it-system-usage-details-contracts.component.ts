@@ -95,7 +95,6 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .subscribe((itSystemUsageUuid) => this.contractsStore.getAssociatedContracts(itSystemUsageUuid))
     );
 
-    //Reload associated contracts when a new contract is created and associated to the system usage
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.createAndAssociateContractSuccess)).subscribe(({ usageUuid }) => {
         this.contractsStore.getAssociatedContracts(usageUuid);
@@ -113,7 +112,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     );
   }
 
-  public createAndRegisterContract() {
+  public openCreateAndRegisterContractDialog() {
     this.subscriptions.add(
       this.store
         .select(selectItSystemUsageUuid)

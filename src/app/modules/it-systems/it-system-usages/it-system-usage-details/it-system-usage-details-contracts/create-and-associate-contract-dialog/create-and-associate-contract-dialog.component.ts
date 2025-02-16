@@ -50,6 +50,15 @@ export class CreateAndAssociateContractDialogComponent extends BaseComponent imp
           });
         })
     );
+    this.subscriptions.add(
+      this.alreadyExists$.subscribe((alreadyExists) => {
+        if (alreadyExists) {
+          this.formGroup.controls.contractName.setErrors({ alreadyExists: true });
+        } else {
+          this.formGroup.controls.contractName.setErrors(null);
+        }
+      })
+    );
   }
 
   public createAndRegisterContract() {
