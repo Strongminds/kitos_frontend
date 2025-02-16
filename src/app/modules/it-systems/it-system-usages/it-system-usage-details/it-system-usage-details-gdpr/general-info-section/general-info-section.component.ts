@@ -7,7 +7,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
-  YesNoDontKnowOptions,
+  YesNoDontKnowOption,
   mapToYesNoDontKnowEnum,
   yesNoDontKnowOptions,
 } from 'src/app/shared/models/yes-no-dont-know.model';
@@ -16,10 +16,10 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableGdprBusinessCritical,
-  selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprDocumentation,
+  selectITSystemUsageEnableGdprHostedAt,
+  selectITSystemUsageEnableGdprPurpose,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
@@ -38,7 +38,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly generalInformationForm = new FormGroup(
     {
       purpose: new FormControl(''),
-      businessCritical: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
+      businessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       hostedAt: new FormControl<HostedAt | undefined>(undefined),
     },
     { updateOn: 'blur' }

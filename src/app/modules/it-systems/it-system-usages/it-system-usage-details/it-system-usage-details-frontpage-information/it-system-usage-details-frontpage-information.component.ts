@@ -22,6 +22,8 @@ import {
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
+import { YesNoDontKnowOption } from 'src/app/shared/models/yes-no-dont-know.model';
+import { mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -33,6 +35,7 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableAmountOfUsers,
+  selectITSystemUsageEnableContainsAITechnology,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
@@ -61,10 +64,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl(''),
+      aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
     { updateOn: 'blur' }
   );
 
+  public readonly aiTechnologyOptions = yesNoOptions;
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
   public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
@@ -77,6 +82,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly lifeCycleStatusEnabled$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
   public readonly usagePeriodEnabled$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
   public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
+  public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
 
   public readonly showSystemUsageCard$ = combineOR([
     this.takenIntoUsageByEnabled$,
@@ -160,6 +166,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers),
             dataClassification: general.dataClassification,
             notes: general.notes,
+            aiTechnology: mapToYesNoEnum(general.containsAITechnology),
           })
         )
     );
