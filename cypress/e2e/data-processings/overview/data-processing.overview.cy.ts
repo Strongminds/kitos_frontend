@@ -40,12 +40,11 @@ describe('data-processing', () => {
     cy.getByDataCy('name-error').should('exist');
   });
 
-  //Feel to free to add more field tests here when extending the overview
   it('Can show responsible unit in grid', () => {
     cy.setup(true, 'data-processing');
-    cy.contains('Tilpas').click();
+    cy.getByDataCy('column-config-button').click();
     cy.contains('Ansvarlig org. enhed').click();
-    cy.contains('Gem').click();
+    cy.getByDataCy('column-config-dialog-save-button').click();
 
     cy.contains('En enhed').should('exist');
   });
@@ -53,7 +52,7 @@ describe('data-processing', () => {
   it('Can not see responsible unit, if disabled by UI customization', () => {
     cy.setup(true, 'data-processing', './shared/ui-customization/dpr-responsible-unit-disabled.json');
 
-    cy.contains('Tilpas').click();
+    cy.getByDataCy('column-config-button').click();
     cy.contains('Ansvarlig org. enhed').should('not.exist');
   });
 });

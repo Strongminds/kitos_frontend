@@ -6,7 +6,7 @@ import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequ
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
-import { TreeNodeModel } from 'src/app/shared/models/tree-node.model';
+import { createIdentityPairNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
   YesNoIrrelevantEnum,
@@ -121,8 +121,8 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             agreementConcluded: agreementConcludedValue,
             agreementConclusionDate: optionalNewDate(dpr.general.agreementConcludedAt),
             agreementRemarks: dpr.general.isAgreementConcludedRemark,
-            responsibleOrgUnit: dpr.general.responsibleOrganizationUnit
-              ? ({ id: responsibleOrgUnit?.uuid, name: responsibleOrgUnit?.name } as TreeNodeModel)
+            responsibleOrgUnit: responsibleOrgUnit
+              ? createIdentityPairNode(responsibleOrgUnit.name, responsibleOrgUnit.uuid)
               : undefined,
           });
 
