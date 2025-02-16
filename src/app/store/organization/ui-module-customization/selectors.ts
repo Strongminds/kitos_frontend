@@ -121,6 +121,7 @@ export const selectITSystemUsageEnableLastEditedAt = createItSystemUsageFrontPag
 export const selectITSystemUsageEnableLifeCycleStatus = createItSystemUsageFrontPageFieldSelector('lifeCycleStatus');
 export const selectITSystemUsageEnableFrontPageUsagePeriod = createItSystemUsageFrontPageFieldSelector('usagePeriod');
 export const selectITSystemUsageEnableStatus = createItSystemUsageFrontPageFieldSelector('status');
+export const selectITSystemUsageEnableContainsAITechnology = createItSystemUsageFrontPageFieldSelector('containsAITechnology');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
@@ -172,6 +173,9 @@ export const selectITSystemUsageEnableDocumentBearing = createItSystemUsageArchi
 export const selectITSystemUsageEnableActive = createItSystemUsageArchivingFieldSelector('active');
 export const selectITSystemUsageEnableNotes = createItSystemUsageArchivingFieldSelector('notes');
 export const selectITSystemUsageEnableJournalPeriods = createItSystemUsageArchivingFieldSelector('journalPeriods');
+export const selectITSystemUsageEnableCatalogArchiveDuty = createItSystemUsageArchivingFieldSelector('catalogArchiveDuty');
+export const selectITSystemUsageEnableCatalogArchiveDutyComment = createItSystemUsageArchivingFieldSelector('catalogArchiveDutyComment');
+
 
 //IT system usage > KLE
 const createItSystemUsageKleFieldSelector = (fieldKey: string) =>
