@@ -6569,6 +6569,10 @@
         <source>Kontrakt kunne ikke oprettes</source>
         <target state="new">Kontrakt kunne ikke oprettes</target>
       </trans-unit>
+      <trans-unit id="2590340397431371543" datatype="html">
+        <source>Hybrid</source>
+        <target state="new">Hybrid</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
