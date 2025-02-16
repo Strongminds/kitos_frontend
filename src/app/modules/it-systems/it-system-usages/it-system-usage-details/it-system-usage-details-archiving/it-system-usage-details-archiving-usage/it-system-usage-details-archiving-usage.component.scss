@@ -4,3 +4,7 @@
 :host {
   @include page-flex-layout-max-width;
 }
+
+.notes-column-span {
+  grid-column: span 3;
+}

@@ -4954,6 +4954,24 @@
       <trans-unit id="8979685620310883836" datatype="html">
         <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
       </trans-unit>
+      <trans-unit id="2479737654708088517" datatype="html">
+        <source>Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</source>
+      </trans-unit>
+      <trans-unit id="5207851183117045385" datatype="html">
+        <source>Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</source>
+      </trans-unit>
+      <trans-unit id="2306616791979379771" datatype="html">
+        <source>Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</source>
+      </trans-unit>
+      <trans-unit id="4274186331072716554" datatype="html">
+        <source>Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</source>
+      </trans-unit>
+      <trans-unit id="8902690316511427918" datatype="html">
+        <source>Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</source>
+      </trans-unit>
+      <trans-unit id="2590340397431371543" datatype="html">
+        <source>Hybrid</source>
+      </trans-unit>
       <trans-unit id="3531169621040073341" datatype="html">
         <source>Indeholder AI-teknologi</source>
       </trans-unit>
