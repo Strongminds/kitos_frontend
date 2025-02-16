@@ -17,3 +17,7 @@ mat-form-field {
 
   @include mat-input-adjustment;
 }
+
+.disabled {
+  color: $color-neutral-80 !important;
+}

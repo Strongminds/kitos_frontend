@@ -26,10 +26,12 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
+import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -546,6 +548,34 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraData: yesNoDontKnowOptions,
       hidden: true,
       persistId: 'isBusinessCritical',
+    },
+    {
+      field: GridFields.ContainsAITechnology,
+      title: $localize`Indeholder AI-teknologi`,
+      style: 'enum',
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'containsAITechnology',
+      extraFilter: 'enum',
+      extraData: yesNoOptions,
+    },
+    {
+      field: GridFields.CatalogArchiveDuty,
+      title: $localize`Rigsarkivets vejledning til arkivering`,
+      style: 'enum',
+      section: ARCHIVE_SECTION_NAME,
+      hidden: true,
+      persistId: 'catalogArchiveDuty',
+      extraFilter: 'enum',
+      extraData: archiveDutyRecommendationChoiceOptions,
+    },
+    {
+      field: GridFields.CatalogArchiveDutyComment,
+      title: $localize`Bemærkning fra Rigsarkivet`,
+      style: 'default',
+      section: ARCHIVE_SECTION_NAME,
+      hidden: true,
+      persistId: 'catalogArchiveDutyComment',
     },
   ];
 

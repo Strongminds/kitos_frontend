@@ -5,7 +5,7 @@ import { Observable, combineLatest, filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO, APISimpleLinkDTO } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-import { YesNoDontKnowOptions, yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
+import { YesNoDontKnowOption, yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
@@ -30,7 +30,7 @@ export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent impl
   @Input() documentation$!: Observable<APISimpleLinkDTO | undefined>;
 
   @Input() formGroup!: FormGroup<{
-    yesNoDontKnowControl: FormControl<YesNoDontKnowOptions | null | undefined>;
+    yesNoDontKnowControl: FormControl<YesNoDontKnowOption | null | undefined>;
     dateControl: FormControl<Date | null | undefined>;
   }>;
 

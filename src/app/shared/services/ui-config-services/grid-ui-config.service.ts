@@ -59,6 +59,9 @@ import {
   selectItContractsEnableTermination,
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableAssociatedContracts,
+  selectITSystemUsageEnableCatalogArchiveDuty,
+  selectITSystemUsageEnableCatalogArchiveDutyComment,
+  selectITSystemUsageEnableContainsAITechnology,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableDescription,
@@ -276,6 +279,7 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableDataClassification)
         .pipe(shouldEnable([UsageFields.ItSystemCategoriesUuid])),
+      this.store.select(selectITSystemUsageEnableContainsAITechnology).pipe(shouldEnable([UsageFields.ContainsAITechnology])),
 
       //Contracts
       combineAND([
@@ -343,6 +347,8 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableJournalPeriods)
         .pipe(shouldEnable([UsageFields.ActiveArchivePeriodEndDate])),
+      this.store.select(selectITSystemUsageEnableCatalogArchiveDuty).pipe(shouldEnable([UsageFields.CatalogArchiveDuty])),
+      this.store.select(selectITSystemUsageEnableCatalogArchiveDutyComment).pipe(shouldEnable([UsageFields.CatalogArchiveDutyComment])),
 
       //Roles
       this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
