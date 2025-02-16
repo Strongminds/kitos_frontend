@@ -180,6 +180,9 @@ export const selectITSystemUsageEnableDocumentBearing = createItSystemUsageArchi
 export const selectITSystemUsageEnableActive = createItSystemUsageArchivingFieldSelector('active');
 export const selectITSystemUsageEnableNotes = createItSystemUsageArchivingFieldSelector('notes');
 export const selectITSystemUsageEnableJournalPeriods = createItSystemUsageArchivingFieldSelector('journalPeriods');
+export const selectITSystemUsageEnableCatalogArchiveDuty = createItSystemUsageArchivingFieldSelector('catalogArchiveDuty');
+export const selectITSystemUsageEnableCatalogArchiveDutyComment = createItSystemUsageArchivingFieldSelector('catalogArchiveDutyComment');
+
 
 //IT system usage > KLE
 const createItSystemUsageKleFieldSelector = (fieldKey: string) =>
