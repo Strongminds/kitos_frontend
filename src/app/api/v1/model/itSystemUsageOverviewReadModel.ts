@@ -42,6 +42,7 @@ export interface APIItSystemUsageOverviewReadModel {
     parentItSystemDisabled?: boolean;
     parentItSystemUsageUuid?: string;
     version?: string;
+    containsAITechnology?: boolean;
     localCallName?: string;
     localSystemId?: string;
     roleAssignments?: Array<APIItSystemUsageOverviewRoleAssignmentReadModel>;
