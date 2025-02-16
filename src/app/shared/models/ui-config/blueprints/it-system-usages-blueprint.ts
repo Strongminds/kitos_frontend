@@ -117,15 +117,6 @@ export const ItSystemUsageUiBluePrint = {
     },
     organization: {
       text: $localize`Organisation`,
-      children: {
-        responsibleUnit: {
-          text: $localize`Ansvarlig organisationsenhed`,
-        },
-        relevantUnits: {
-          text: $localize`Relevante organisationsenheder
-`,
-        },
-      },
     },
     systemRelations: {
       text: $localize`Relationer`,
