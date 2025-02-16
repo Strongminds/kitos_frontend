@@ -87,11 +87,10 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableOutgoingRelations,
-  selectITSystemUsageEnableRelevantUnits,
-  selectITSystemUsageEnableResponsibleUnit,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableTabArchiving,
+  selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
   selectITSystemUsageEnableVersion,
@@ -325,11 +324,10 @@ export class GridUIConfigService {
 
       //Organization
       this.store
-        .select(selectITSystemUsageEnableResponsibleUnit)
-        .pipe(shouldEnable([UsageFields.ResponsibleOrganizationUnitName])),
-      this.store
-        .select(selectITSystemUsageEnableRelevantUnits)
-        .pipe(shouldEnable([UsageFields.RelevantOrganizationUnitNamesAsCsv])),
+        .select(selectITSystemUsageEnableTabOrganization)
+        .pipe(
+          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
+        ),
 
       //Relations
       this.store

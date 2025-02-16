@@ -20,10 +20,6 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
-import {
-  selectITSystemUsageEnableRelevantUnits,
-  selectITSystemUsageEnableResponsibleUnit,
-} from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-system-usage-details-organization',
@@ -67,9 +63,6 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     relevantUnit: new FormControl<TreeNodeModel | undefined>(undefined),
   });
   public includeParents = false;
-
-  public readonly responsibleUnitEnabled$ = this.store.select(selectITSystemUsageEnableResponsibleUnit);
-  public readonly relevantUnitsEnabled$ = this.store.select(selectITSystemUsageEnableRelevantUnits);
 
   constructor(private readonly store: Store) {
     super();
