@@ -56,6 +56,8 @@ import { ItSystemInterfacesTableComponent } from './shared/it-system-interfaces-
 import { ItSystemKleOverviewComponent } from './shared/it-system-kle-overview/it-system-kle-overview.component';
 import { KleTableComponent } from './shared/kle-table/kle-table.component';
 import { CreateAndAssociateContractDialogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-contracts/create-and-associate-contract-dialog/create-and-associate-contract-dialog.component';
+import { ItSystemUsageDetailsArchivingCatalogComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving-catalog/it-system-usage-details-archiving-catalog.component';
+import { ItSystemUsageDetailsArchivingUsageComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-archiving/it-system-usage-details-archiving-usage/it-system-usage-details-archiving-usage.component';
 
 @NgModule({
   declarations: [
@@ -112,6 +114,8 @@ import { CreateAndAssociateContractDialogComponent } from './it-system-usages/it
     GdprOverviewComponent,
     GdprOverviewDialogComponent,
     CreateAndAssociateContractDialogComponent,
+    ItSystemUsageDetailsArchivingCatalogComponent,
+    ItSystemUsageDetailsArchivingUsageComponent,
   ],
   imports: [CommonModule, SharedModule, ITSystemsRouterModule, MatInputModule, MatProgressSpinnerModule],
 })
