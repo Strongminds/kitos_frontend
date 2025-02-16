@@ -19,9 +19,13 @@ import { LocalAdminImportOrganizationComponent } from './local-admin-import/loca
 import { FkOrgWriteDialogComponent } from './local-admin-import/local-admin-import-organization/fk-org-write-dialog/fk-org-write-dialog.component';
 import { UiConfigComponent } from './ui-config/ui-config.component';
 import { LocalAdminInformationComponent } from './local-admin-information/local-admin-information.component';
+import { LocalAdminItSystemUsageUiCustomizationComponent } from './local-admin-it-system-usage/local-admin-it-system-usage-ui-customization/local-admin-it-system-usage-ui-customization.component';
+import { LocalAdminItSystemUsageRoleOptionTypesComponent } from './local-admin-it-system-usage/local-admin-it-system-usage-role-option-types/local-admin-it-system-usage-role-option-types.component';
+import { LocalAdminItSystemUsageOptionTypesComponent } from './local-admin-it-system-usage/local-admin-it-system-usage-option-types/local-admin-it-system-usage-option-types.component';
 
 @NgModule({
-  declarations: [ LocalAdminComponent,
+  declarations: [
+    LocalAdminComponent,
     LocalAdminInformationComponent,
     LocalAdminOrganizationComponent,
     OrganizationsGridComponent,
@@ -37,7 +41,10 @@ import { LocalAdminInformationComponent } from './local-admin-information/local-
     FkOrgChangelogComponent,
     LocalAdminImportFkOrgComponent,
     LocalAdminBaseExcelExportComponent,
-    UiConfigComponent
+    UiConfigComponent,
+    LocalAdminItSystemUsageUiCustomizationComponent,
+    LocalAdminItSystemUsageRoleOptionTypesComponent,
+    LocalAdminItSystemUsageOptionTypesComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, LocalAdminRouterModule],
 })
