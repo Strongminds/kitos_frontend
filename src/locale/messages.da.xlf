@@ -6525,13 +6525,33 @@
         <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
         <target state="new">Data bevares men udvalgte eller alle dokumenter kan kasseres</target>
       </trans-unit>
-      <trans-unit id="2590340397431371543" datatype="html">
-        <source>Hybrid</source>
-        <target state="new">Hybrid</target>
+      <trans-unit id="8902690316511427918" datatype="html">
+        <source>Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</source>
+        <target state="new">Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</target>
+      </trans-unit>
+      <trans-unit id="2479737654708088517" datatype="html">
+        <source>Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</source>
+        <target state="new">Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</target>
+      </trans-unit>
+      <trans-unit id="5207851183117045385" datatype="html">
+        <source>Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</source>
+        <target state="new">Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</target>
+      </trans-unit>
+      <trans-unit id="2306616791979379771" datatype="html">
+        <source>Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</source>
+        <target state="new">Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</target>
+      </trans-unit>
+      <trans-unit id="4274186331072716554" datatype="html">
+        <source>Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</source>
+        <target state="new">Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</target>
       </trans-unit>
       <trans-unit id="3531169621040073341" datatype="html">
         <source>Indeholder AI-teknologi</source>
         <target state="new">Indeholder AI-teknologi</target>
+      </trans-unit>
+      <trans-unit id="2590340397431371543" datatype="html">
+        <source>Hybrid</source>
+        <target state="new">Hybrid</target>
       </trans-unit>
     </body>
   </file>
