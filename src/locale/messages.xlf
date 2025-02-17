@@ -4801,9 +4801,6 @@
       <trans-unit id="2526296220627158527" datatype="html">
         <source>Relationer til andre systemer</source>
       </trans-unit>
-      <trans-unit id="4444328125924097461" datatype="html">
-        <source>Relevante organisationsenheder </source>
-      </trans-unit>
       <trans-unit id="5224755622036276546" datatype="html">
         <source>Relationer fra andre systemer</source>
       </trans-unit>
@@ -4984,8 +4981,11 @@
       <trans-unit id="5655648815512279384" datatype="html">
         <source> Opret og registrer </source>
       </trans-unit>
-      <trans-unit id="2590340397431371543" datatype="html">
-        <source>Hybrid</source>
+      <trans-unit id="2353526137738121108" datatype="html">
+        <source>Opret og registrer kontrakt</source>
+      </trans-unit>
+      <trans-unit id="5906499730586056252" datatype="html">
+        <source>Opret og registrer</source>
       </trans-unit>
     </body>
   </file>

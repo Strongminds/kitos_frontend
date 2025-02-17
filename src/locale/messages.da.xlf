@@ -6313,10 +6313,6 @@
         <source>Klassifikation af data</source>
         <target state="new">Klassifikation af data</target>
       </trans-unit>
-      <trans-unit id="4444328125924097461" datatype="html">
-        <source>Relevante organisationsenheder </source>
-        <target state="new">Relevante organisationsenheder </target>
-      </trans-unit>
       <trans-unit id="2526296220627158527" datatype="html">
         <source>Relationer til andre systemer</source>
         <target state="new">Relationer til andre systemer</target>
@@ -6564,6 +6560,18 @@
       <trans-unit id="2590340397431371543" datatype="html">
         <source>Hybrid</source>
         <target state="new">Hybrid</target>
+      </trans-unit>
+      <trans-unit id="2353526137738121108" datatype="html">
+        <source>Opret og registrer kontrakt</source>
+        <target state="new">Opret og registrer kontrakt</target>
+      </trans-unit>
+      <trans-unit id="5655648815512279384" datatype="html">
+        <source> Opret og registrer </source>
+        <target state="new"> Opret og registrer </target>
+      </trans-unit>
+      <trans-unit id="5906499730586056252" datatype="html">
+        <source>Opret og registrer</source>
+        <target state="new">Opret og registrer</target>
       </trans-unit>
     </body>
   </file>
