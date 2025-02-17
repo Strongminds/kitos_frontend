@@ -172,6 +172,7 @@ import { StatusCellComponent } from './grid/grid-cell/cell-types/status-cell/sta
 import { ThousandSeperatorCellComponent } from './grid/grid-cell/cell-types/thousand-seperator-cell/thousand-seperator-cell.component';
 import { DefaultWrapCellComponent } from './grid/grid-cell/cell-types/default-wrap-cell/default-wrap-cell.component';
 import { PrimaryCellComponent } from './grid/grid-cell/cell-types/primary-cell/primary-cell.component';
+import { BooleanCellComponent } from './grid/grid-cell/cell-types/boolean-cell/boolean-cell.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -317,6 +318,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ThousandSeperatorCellComponent,
     DefaultWrapCellComponent,
     PrimaryCellComponent,
+    BooleanCellComponent,
   ],
   imports: [
     CommonModule,

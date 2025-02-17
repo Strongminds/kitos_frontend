@@ -145,17 +145,6 @@
           <app-grid-cell [column]="columnConfig" [dataItem]="dataItem"></app-grid-cell>
         </ng-template>
 
-        <ng-template *ngIf="columnConfig.style === 'boolean'" kendoGridCellTemplate let-dataItem>
-          <div class="items-center-container">
-            <app-boolean-circle
-              [value]="(dataItem | searchProperty : columnConfig.field) === true"
-              [positiveTooltipText]="columnConfig.tooltipPositiveText ?? ''"
-              [negativeTooltipText]="columnConfig.tooltipNegativeText ?? ''"
-            >
-            </app-boolean-circle>
-          </div>
-        </ng-template>
-
         <ng-template *ngIf="columnConfig.style === 'date'" kendoGridCellTemplate let-dataItem>
           <app-paragraph>{{ dataItem | searchProperty : columnConfig.field | appDate }}</app-paragraph>
         </ng-template>
