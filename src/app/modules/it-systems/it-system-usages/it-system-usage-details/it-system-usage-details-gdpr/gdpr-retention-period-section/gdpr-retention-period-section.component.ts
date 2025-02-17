@@ -6,7 +6,7 @@ import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
-  YesNoDontKnowOptions,
+  YesNoDontKnowOption,
   mapToYesNoDontKnowEnum,
   yesNoDontKnowOptions,
 } from 'src/app/shared/models/yes-no-dont-know.model';
@@ -31,7 +31,7 @@ export class GdprRetentionPeriodSectionComponent extends BaseAccordionComponent 
 
   public readonly formGroup = new FormGroup(
     {
-      yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
+      yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       dateControl: new FormControl<Date | undefined>(undefined),
       frequencyControl: new FormControl<number | undefined>(undefined),
     },

@@ -7,6 +7,15 @@ import {
 } from 'src/app/api/v2';
 import { NO_TEXT, YES_TEXT } from '../constants/constants';
 
+export const booleanDropdownOptions: DropdownOption<boolean>[] = [
+  { value: true, name: YES_TEXT },
+  { value: false, name: NO_TEXT },
+];
+
+export function toBooleanDropdownOption(value: boolean | undefined){
+  return booleanDropdownOptions.find(option => option.value === value) ?? undefined;
+}
+
 export interface DropdownOption<T> {
   value: T;
   name: string;
@@ -23,6 +32,8 @@ export interface MultiSelectDropdownItem<T> {
   name: string;
   value: T;
   selected: boolean;
+  disabled?: boolean;
+  dataCy?: string;
 }
 
 export const mapUserToOption = (user: APIOrganizationUserResponseDTO): RoleDropdownOption => {

@@ -118,7 +118,7 @@ export class ITSystemEffects {
     return this.actions$.pipe(
       ofType(ITSystemActions.updateGridDataFromGrid),
       map(({ gridState }) => ITSystemActions.getITSystems(gridState, true))
-    )
+    );
   });
 
   deleteItSystem$ = createEffect(() => {
@@ -283,7 +283,10 @@ export class ITSystemEffects {
 function applyQueryFixes(odataString: string): string {
   let fixedOdataString = odataString
     .replace(/(\w+\()KLEIds(.*\))/, 'TaskRefs/any(c: $1c/TaskKey$2)')
-    .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(d: $1d/Description$2)');
+    .replace(/(\w+\()KLENames(.*\))/, 'TaskRefs/any(d: $1d/Description$2)')
+    .replace('ReferenceTitle', 'Reference/Title')
+    .replace('ReferenceURL', 'Reference/URL')
+    .replace('ReferenceExternalReferenceId', 'Reference/ExternalReferenceId');
 
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'Uuid');
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'ExternalUuid');

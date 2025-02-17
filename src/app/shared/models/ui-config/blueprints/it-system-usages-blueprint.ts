@@ -29,7 +29,7 @@ export const ItSystemUsageUiBluePrint = {
           text: $localize`Klassifikation af data`,
         },
         description: {
-          text: $localize`Beskrivelse`,
+          text: $localize`Note`,
         },
         takenIntoUsageBy: {
           text: $localize`Taget i anvendelse af`,
@@ -49,6 +49,9 @@ export const ItSystemUsageUiBluePrint = {
         },
         status: {
           text: $localize`Status`,
+        },
+        containsAITechnology: {
+          text: $localize`Indeholder AI-teknologi`,
         },
       },
     },
@@ -114,15 +117,6 @@ export const ItSystemUsageUiBluePrint = {
     },
     organization: {
       text: $localize`Organisation`,
-      children: {
-        responsibleUnit: {
-          text: $localize`Ansvarlig organisationsenhed`,
-        },
-        relevantUnits: {
-          text: $localize`Relevante organisationsenheder
-`,
-        },
-      },
     },
     systemRelations: {
       text: $localize`Relationer`,
@@ -171,6 +165,13 @@ export const ItSystemUsageUiBluePrint = {
         },
         journalPeriods: {
           text: $localize`Journalperioder`,
+        },
+        catalogArchiveDuty: {
+          text: $localize`Rigsarkivets vejledning til arkivering`
+        }
+        ,
+        catalogArchiveDutyComment: {
+          text: $localize`Bemærkning fra Rigsarkivet`
         },
       },
     },

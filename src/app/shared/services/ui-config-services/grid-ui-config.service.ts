@@ -59,6 +59,9 @@ import {
   selectItContractsEnableTermination,
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableAssociatedContracts,
+  selectITSystemUsageEnableCatalogArchiveDuty,
+  selectITSystemUsageEnableCatalogArchiveDutyComment,
+  selectITSystemUsageEnableContainsAITechnology,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableDescription,
@@ -84,11 +87,10 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableOutgoingRelations,
-  selectITSystemUsageEnableRelevantUnits,
-  selectITSystemUsageEnableResponsibleUnit,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableTabArchiving,
+  selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
   selectITSystemUsageEnableVersion,
@@ -276,6 +278,7 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableDataClassification)
         .pipe(shouldEnable([UsageFields.ItSystemCategoriesUuid])),
+      this.store.select(selectITSystemUsageEnableContainsAITechnology).pipe(shouldEnable([UsageFields.ContainsAITechnology])),
 
       //Contracts
       combineAND([
@@ -321,11 +324,10 @@ export class GridUIConfigService {
 
       //Organization
       this.store
-        .select(selectITSystemUsageEnableResponsibleUnit)
-        .pipe(shouldEnable([UsageFields.ResponsibleOrganizationUnitName])),
-      this.store
-        .select(selectITSystemUsageEnableRelevantUnits)
-        .pipe(shouldEnable([UsageFields.RelevantOrganizationUnitNamesAsCsv])),
+        .select(selectITSystemUsageEnableTabOrganization)
+        .pipe(
+          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
+        ),
 
       //Relations
       this.store
@@ -343,6 +345,8 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableJournalPeriods)
         .pipe(shouldEnable([UsageFields.ActiveArchivePeriodEndDate])),
+      this.store.select(selectITSystemUsageEnableCatalogArchiveDuty).pipe(shouldEnable([UsageFields.CatalogArchiveDuty])),
+      this.store.select(selectITSystemUsageEnableCatalogArchiveDutyComment).pipe(shouldEnable([UsageFields.CatalogArchiveDutyComment])),
 
       //Roles
       this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),

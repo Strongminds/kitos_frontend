@@ -82,6 +82,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       style: 'reverse-chip',
       hidden: false,
       persistId: 'isActive',
+      helpText: $localize`Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.`,
     },
     {
       field: CatalogFields.PARENT_NAME,

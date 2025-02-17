@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('organization-users', () => {
   beforeEach(() => {
@@ -171,5 +171,22 @@ describe('organization-users', () => {
     cy.contains('Ja').click();
 
     cy.wait('@deleteUser');
+  });
+
+  it('Organization admins can only change the organization admin role on users', () => {
+    cy.setup(false);
+    cy.intercept(
+      'odata/ItSystemUsageOverviewReadModels?*'
+    );
+    cy.login('./shared/authorize-organization-admin.json');
+    cy.visit('/organization/users');
+
+    cy.getByDataCy('grid-edit-button').first().click();
+    cy.getByDataCy('roles-dropdown').click();
+
+    cy.getByDataCy('local-admin-option').find('input').should('be.disabled');
+    cy.getByDataCy('system-admin-option').find('input').should('be.disabled');
+    cy.getByDataCy('contract-admin-option').find('input').should('be.disabled');
+    cy.getByDataCy('organization-admin-option').find('input').should('be.enabled');
   });
 });

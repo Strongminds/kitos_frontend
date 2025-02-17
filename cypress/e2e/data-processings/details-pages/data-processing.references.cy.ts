@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('data-processing-references', () => {
   beforeEach(() => {
@@ -9,6 +9,10 @@ describe('data-processing-references', () => {
   });
 
   it('Can show empty references page', () => {
+    cy.intercept('/api/v2/internal/external-references/data-processing/*', {
+      fixture: './external-references/no-external-references.json',
+    });
+
     cy.contains('Dpa 1').click();
     cy.navigateToDetailsSubPage('Referencer');
   });
