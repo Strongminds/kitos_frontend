@@ -150,12 +150,6 @@
           ></app-grid-cell>
         </ng-template>
 
-        <ng-template *ngIf="columnConfig.style === 'uuid-to-name'" kendoGridCellTemplate let-dataItem>
-          <app-paragraph *ngIf="columnConfig.dataField" [cropOnOverflow]="true">{{
-            searchProperty(dataItem, columnConfig.dataField)
-          }}</app-paragraph>
-        </ng-template>
-
         <ng-template
           *ngIf="columnConfig.style === 'action-buttons' && (modifyPermission || deletePermission)"
           kendoGridCellTemplate

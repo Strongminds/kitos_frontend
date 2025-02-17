@@ -59,3 +59,9 @@
   [column]="column"
   [dataItem]="dataItem"
 ></app-page-link-array-cell>
+
+<app-uuid-to-name-cell
+  *ngIf="column.style === 'uuid-to-name'"
+  [column]="column"
+  [dataItem]="dataItem"
+></app-uuid-to-name-cell>

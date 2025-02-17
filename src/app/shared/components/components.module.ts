@@ -182,6 +182,7 @@ import { PageLinkCellComponent } from './grid/grid-cell/cell-types/page-link-cel
 import { CheckboxCellComponent } from './grid/grid-cell/cell-types/checkbox-cell/checkbox-cell.component';
 import { UsagesCellComponent } from './grid/grid-cell/cell-types/usages-cell/usages-cell.component';
 import { PageLinkArrayCellComponent } from './grid/grid-cell/cell-types/page-link-array-cell/page-link-array-cell.component';
+import { UuidToNameCellComponent } from './grid/grid-cell/cell-types/uuid-to-name-cell/uuid-to-name-cell.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -337,6 +338,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     CheckboxCellComponent,
     UsagesCellComponent,
     PageLinkArrayCellComponent,
+    UuidToNameCellComponent,
   ],
   imports: [
     CommonModule,
