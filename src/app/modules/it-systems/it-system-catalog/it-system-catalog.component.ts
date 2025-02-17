@@ -263,7 +263,6 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
   public handleSystemUsageChange(event: BooleanChange<ITSystem>) {
     const systemUuid = event.item.Uuid;
-    if (!systemUuid) return;
 
     if (event.value === true) {
       this.handleTakeSystemIntoUse(systemUuid);
