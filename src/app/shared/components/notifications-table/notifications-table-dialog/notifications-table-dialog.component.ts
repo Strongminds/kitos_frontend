@@ -272,7 +272,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     const emailCcs = mappedCcs.emailRecipients;
     const roleCcs = mappedCcs.roleRecipients;
 
-    if (subject && (roleReceivers.length > 0 || emailReceivers.length > 0)) {
+    if (subject && this.hasRecipients(roleReceivers, emailReceivers)) {
       return {
         subject: subject,
         body: body,
@@ -287,6 +287,10 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       };
     }
     return undefined;
+  }
+
+  private hasRecipients(roleReceivers: { roleUuid: string }[], emailReceivers: APIEmailRecipientWriteRequestDTO[]){
+    return roleReceivers.length > 0 || emailReceivers.length > 0;
   }
 
   private saveScheduledNotification(scheduledNotificationDto: APIScheduledNotificationWriteRequestDTO) {
