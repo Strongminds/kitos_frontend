@@ -237,8 +237,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     e.workbook.sheets[0].title = this.exportToExcelName;
   }
 
-  public onCheckboxChange(value: boolean | undefined, rowEntityUuid?: string){
-    this.checkboxChange.emit({ value, rowEntityUuid });
+  public onCheckboxChange(event: CheckboxChange){
+    this.checkboxChange.emit(event);
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

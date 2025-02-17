@@ -58,6 +58,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       noFilter: true,
       hidden: false,
       style: 'checkbox',
+      entityType: 'it-system',
       permissionsField: 'CanChangeUsageStatus',
       sortable: false,
     },

@@ -177,6 +177,9 @@ import { BooleanCellComponent } from './grid/grid-cell/cell-types/boolean-cell/b
 import { DateCellComponent } from './grid/grid-cell/cell-types/date-cell/date-cell.component';
 import { EnumCellComponent } from './grid/grid-cell/cell-types/enum-cell/enum-cell.component';
 import { LinkCellComponent } from './grid/grid-cell/cell-types/link-cell/link-cell.component';
+import { TitleLinkCellComponent } from './grid/grid-cell/cell-types/title-link-cell/title-link-cell.component';
+import { PageLinkCellComponent } from './grid/grid-cell/cell-types/page-link-cell/page-link-cell.component';
+import { CheckboxCellComponent } from './grid/grid-cell/cell-types/checkbox-cell/checkbox-cell.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -327,6 +330,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DateCellComponent,
     EnumCellComponent,
     LinkCellComponent,
+    TitleLinkCellComponent,
+    PageLinkCellComponent,
+    CheckboxCellComponent,
   ],
   imports: [
     CommonModule,

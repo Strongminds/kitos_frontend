@@ -56,9 +56,11 @@ export class UsageProxyCheckboxComponent implements OnInit {
   public onClick(event: any) {
     this.switch.updateValue(!event);
     this.attemptChange.emit(event);
+    this.preventDefault(event);
   }
 
   public preventDefault(event: Event) {
+    console.log('UsageProxyCheckboxComponent.preventDefault', event);
     event.preventDefault();
     event.stopPropagation();
   }

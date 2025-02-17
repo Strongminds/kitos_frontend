@@ -30,3 +30,23 @@
 <app-enum-cell *ngIf="column.style === 'enum'" [column]="column" [dataItem]="dataItem"> </app-enum-cell>
 
 <app-link-cell *ngIf="column.style === 'link'" [column]="column" [dataItem]="dataItem"> </app-link-cell>
+
+<app-title-link-cell
+  *ngIf="column.style === 'title-link' && column.idField"
+  [column]="column"
+  [dataItem]="dataItem"
+></app-title-link-cell>
+
+<app-page-link-cell
+  *ngIf="column.style === 'page-link' && column.idField"
+  [column]="column"
+  [dataItem]="dataItem"
+></app-page-link-cell>
+
+<app-checkbox-cell
+  *ngIf="column.style === 'checkbox'"
+  [column]="column"
+  [dataItem]="dataItem"
+  (checkboxChange)="onCheckboxChange($event)"
+>
+</app-checkbox-cell>

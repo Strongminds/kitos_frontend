@@ -1,0 +1,17 @@
+<div class="column-center-content">
+  <ng-container *ngIf="column.idField">
+    <app-checkbox
+      *ngIf="column.entityType !== 'it-system'"
+      [value]="dataItem | searchProperty : column.field"
+      [disabled]="column.permissionsField ? (dataItem | searchProperty : column.permissionsField) !== true : false"
+      (valueChange)="onCheckboxChange($event, getProperty(column.idField))"
+    ></app-checkbox>
+    <app-usage-proxy-checkbox
+      *ngIf="column.entityType === 'it-system'"
+      [checked]="dataItem | searchProperty : column.field"
+      [disabled]="column.permissionsField ? getProperty(column.permissionsField) !== true || !createPermission : false"
+      [entityUuid]="getProperty(column.idField)"
+      (attemptChange)="onCheckboxChange($event, getProperty(column.idField))"
+    ></app-usage-proxy-checkbox>
+  </ng-container>
+</div>
