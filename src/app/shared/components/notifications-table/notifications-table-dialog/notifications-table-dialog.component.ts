@@ -75,7 +75,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     repetitionControl: new FormControl<NotificationRepetitionFrequency | undefined>(undefined),
     fromDateControl: new FormControl<Date | undefined>(undefined),
     toDateControl: new FormControl<Date | undefined>(undefined),
-    bodyControl: new FormControl<string | undefined>(undefined, Validators.required),
+    bodyControl: new FormControl<string | undefined>(undefined),
   });
 
   public readonly notificationTypeOptions = notificationTypeOptions;
@@ -272,7 +272,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     const emailCcs = mappedCcs.emailRecipients;
     const roleCcs = mappedCcs.roleRecipients;
 
-    if (subject && body && (roleReceivers.length > 0 || emailReceivers.length > 0)) {
+    if (subject && (roleReceivers.length > 0 || emailReceivers.length > 0)) {
       return {
         subject: subject,
         body: body,
