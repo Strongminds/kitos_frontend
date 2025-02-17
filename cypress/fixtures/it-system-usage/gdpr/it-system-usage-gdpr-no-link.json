@@ -54,17 +54,17 @@
     },
     {
       "uuid": "bb7bfc61-de3d-4337-a84e-0d99e46d0b4e",
-      "title": "Reference1",
-      "documentId": "Document id",
-      "url": "url",
-      "masterReference": true
+      "title": "Valid url",
+      "documentId": "document2",
+      "url": "https://www.google.com",
+      "masterReference": false
     },
     {
       "uuid": "ec77cd49-e8ed-47e2-8d3b-188e095ea6fc",
       "title": "No url Master reference",
       "documentId": "document3",
       "url": "",
-      "masterReference": false
+      "masterReference": true
     }
   ],
   "archiving": {
@@ -95,11 +95,11 @@
     ]
   },
   "gdpr": {
-    "purpose": null,
-    "businessCritical": 1,
-    "hostedAt": 1,
+    "purpose": "Test purpose",
+    "businessCritical": "Yes",
+    "hostedAt": "OnPremise",
     "directoryDocumentation": { "name": null, "url": null },
-    "dataSensitivityLevels": [0, 1, 3, 2],
+    "dataSensitivityLevels": ["LegalData"],
     "sensitivePersonData": [
       { "uuid": "c2dd266c-3b84-49a0-8dc4-9d57b5dbc26b", "name": "Oplysninger om race og etnisk oprindelse" },
       { "uuid": "c5bcfcd6-d7db-40c8-a1dd-23be7c0f81c5", "name": "Helbredsoplysninger" },
@@ -108,30 +108,22 @@
       { "uuid": "239471f6-3174-447f-adab-6b43bef27dd9", "name": "Biometriske data" }
     ],
     "specificPersonalData": [],
-    "registeredDataCategories": [
-      { "uuid": "62e54633-4bf3-411b-9cb6-e0091b696f26", "name": "Børn" },
-      { "uuid": "9df94815-2b64-4623-b628-bb28fc573c93", "name": "Unge" },
-      { "uuid": "0649c6cb-59db-4a78-bcfe-64185c03dc35", "name": "Forældre" },
-      { "uuid": "5d4e81c8-93e5-4650-9384-c307581c82d1", "name": "Lærere" },
-      { "uuid": "8e86d494-a19b-4bd6-8ed8-20841e7ad16f", "name": "Virksomheder" },
-      { "uuid": "708db5e0-46f6-42fe-975b-bd97c2e5cb18", "name": "Fagpersonale" },
-      { "uuid": "4c73fd25-e32c-4b8b-854d-e9fe2627e812", "name": "Ældre" }
-    ],
-    "technicalPrecautionsInPlace": 1,
+    "registeredDataCategories": [],
+    "technicalPrecautionsInPlace": "No",
     "technicalPrecautionsApplied": [2, 0, 1],
-    "technicalPrecautionsDocumentation": { "name": null, "url": null },
-    "userSupervision": 1,
-    "userSupervisionDate": null,
-    "userSupervisionDocumentation": { "name": null, "url": null },
+    "technicalPrecautionsDocumentation": { "name": "newName", "url": "newUrl" },
+    "userSupervision": "No",
+    "userSupervisionDate": "0001-01-01T00:00:00Z",
+    "userSupervisionDocumentation": { "name": "newName", "url": "newUrl" },
     "riskAssessmentConducted": 1,
     "riskAssessmentConductedDate": null,
     "riskAssessmentResult": null,
-    "riskAssessmentDocumentation": { "name": null, "url": null },
+    "riskAssessmentDocumentation": { "name": "newName", "url": "newUrl" },
     "riskAssessmentNotes": null,
     "plannedRiskAssessmentDate": null,
     "dpiaConducted": 1,
     "dpiaDate": null,
-    "dpiaDocumentation": { "name": null, "url": null },
+    "dpiaDocumentation": { "name": "newName", "url": "newUrl" },
     "retentionPeriodDefined": 1,
     "nextDataRetentionEvaluationDate": null,
     "dataRetentionEvaluationFrequencyInMonths": 0

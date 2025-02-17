@@ -66,6 +66,7 @@ export * from './expectedUsersIntervalDTO';
 export * from './extendedRoleAssignmentResponseDTO';
 export * from './externalReferenceDataResponseDTO';
 export * from './externalReferenceDataWriteRequestDTO';
+export * from './externalReferenceWithLastChangedResponseDTO';
 export * from './gDPRRegistrationsResponseDTO';
 export * from './gDPRWriteRequestDTO';
 export * from './gdprReportResponseDTO';

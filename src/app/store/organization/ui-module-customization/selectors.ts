@@ -121,6 +121,7 @@ export const selectITSystemUsageEnableLastEditedAt = createItSystemUsageFrontPag
 export const selectITSystemUsageEnableLifeCycleStatus = createItSystemUsageFrontPageFieldSelector('lifeCycleStatus');
 export const selectITSystemUsageEnableFrontPageUsagePeriod = createItSystemUsageFrontPageFieldSelector('usagePeriod');
 export const selectITSystemUsageEnableStatus = createItSystemUsageFrontPageFieldSelector('status');
+export const selectITSystemUsageEnableContainsAITechnology = createItSystemUsageFrontPageFieldSelector('containsAITechnology');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
@@ -151,12 +152,6 @@ export const selectITSystemUsageEnableGdprConductedRiskAssessment =
 export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
 export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
 
-//IT System Usage > Organization
-const createItSystemUsageOrganizationFieldSelector = (fieldKey: string) =>
-  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'organization', fieldKey);
-export const selectITSystemUsageEnableResponsibleUnit = createItSystemUsageOrganizationFieldSelector('responsibleUnit');
-export const selectITSystemUsageEnableRelevantUnits = createItSystemUsageOrganizationFieldSelector('relevantUnits');
-
 //IT System Usage > Relations
 const createItSystemUsageRelationsFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'systemRelations', fieldKey);
@@ -178,6 +173,9 @@ export const selectITSystemUsageEnableDocumentBearing = createItSystemUsageArchi
 export const selectITSystemUsageEnableActive = createItSystemUsageArchivingFieldSelector('active');
 export const selectITSystemUsageEnableNotes = createItSystemUsageArchivingFieldSelector('notes');
 export const selectITSystemUsageEnableJournalPeriods = createItSystemUsageArchivingFieldSelector('journalPeriods');
+export const selectITSystemUsageEnableCatalogArchiveDuty = createItSystemUsageArchivingFieldSelector('catalogArchiveDuty');
+export const selectITSystemUsageEnableCatalogArchiveDutyComment = createItSystemUsageArchivingFieldSelector('catalogArchiveDutyComment');
+
 
 //IT system usage > KLE
 const createItSystemUsageKleFieldSelector = (fieldKey: string) =>

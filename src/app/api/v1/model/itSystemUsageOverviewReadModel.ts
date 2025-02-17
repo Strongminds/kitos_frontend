@@ -42,6 +42,7 @@ export interface APIItSystemUsageOverviewReadModel {
     parentItSystemDisabled?: boolean;
     parentItSystemUsageUuid?: string;
     version?: string;
+    containsAITechnology?: boolean;
     localCallName?: string;
     localSystemId?: string;
     roleAssignments?: Array<APIItSystemUsageOverviewRoleAssignmentReadModel>;
@@ -122,11 +123,12 @@ export namespace APIItSystemUsageOverviewReadModel {
         Operational: 'Operational' as LifeCycleStatusEnum,
         PhasingOut: 'PhasingOut' as LifeCycleStatusEnum
     };
-    export type HostedAtEnum = 'UNDECIDED' | 'ONPREMISE' | 'EXTERNAL';
+    export type HostedAtEnum = 'UNDECIDED' | 'ONPREMISE' | 'EXTERNAL' | 'HYBRID';
     export const HostedAtEnum = {
         Undecided: 'UNDECIDED' as HostedAtEnum,
         Onpremise: 'ONPREMISE' as HostedAtEnum,
-        External: 'EXTERNAL' as HostedAtEnum
+        External: 'EXTERNAL' as HostedAtEnum,
+        Hybrid: 'HYBRID' as HostedAtEnum
     };
     export type UserCountEnum = 'BELOWTEN' | 'TENTOFIFTY' | 'FIFTYTOHUNDRED' | 'HUNDREDPLUS' | 'UNDECIDED';
     export const UserCountEnum = {

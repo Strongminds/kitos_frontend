@@ -10,7 +10,7 @@ import {
   APIIdentityNamePairResponseDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { YesNoOptions, mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
+import { YesNoOption, mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { selectDataProcessingSubProcessors } from 'src/app/store/data-processing/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
@@ -38,7 +38,7 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
   public readonly subprocessorsFormGroup = new FormGroup({
     subprocessor: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined, [Validators.required]),
     basisForTransfer: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
-    transferToInsecureCountry: new FormControl<YesNoOptions | undefined>({ value: undefined, disabled: true }),
+    transferToInsecureCountry: new FormControl<YesNoOption | undefined>({ value: undefined, disabled: true }),
     insecureThirdCountrySubjectToDataProcessing: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
       value: undefined,
       disabled: true,

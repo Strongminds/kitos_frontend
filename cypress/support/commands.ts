@@ -233,18 +233,24 @@ Cypress.Commands.add('testCanShowExternalReferences', () => {
       documentId: 'document1',
       expectedInvalidUrl: 'www.google.com',
       masterReference: false,
+      lastChangedByUsername: 'Jens Jensen',
+      lastChangedDate: '24-01-2025',
     },
     {
       title: 'Valid url',
       documentId: 'document2',
       expectedValidUrl: 'https://www.google.com',
       masterReference: false,
+      lastChangedByUsername: 'Bruger123',
+      lastChangedDate: '25-01-2025',
     },
     {
       title: 'No url Master reference',
       documentId: 'document3',
       url: '',
       masterReference: true,
+      lastChangedByUsername: 'En tredje bruger',
+      lastChangedDate: '26-01-2025',
     },
   ];
 
@@ -263,6 +269,8 @@ Cypress.Commands.add('testCanShowExternalReferences', () => {
     if (expectedRow.expectedValidUrl) {
       row().verifyExternalReferenceHrefValue(expectedRow.title, expectedRow.expectedValidUrl);
     }
+    row().contains(expectedRow.lastChangedByUsername);
+    row().contains(expectedRow.lastChangedDate);
   });
 });
 

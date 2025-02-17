@@ -11,7 +11,7 @@ import {
 } from 'src/app/shared/models/it-system-usage/gdpr/technical-precautions.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
-  YesNoDontKnowOptions,
+  YesNoDontKnowOption,
   mapToYesNoDontKnowEnum,
   yesNoDontKnowOptions,
 } from 'src/app/shared/models/yes-no-dont-know.model';
@@ -45,7 +45,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionCompo
 
   public readonly mainFormGroup = new FormGroup(
     {
-      yesNoDontKnowControl: new FormControl<YesNoDontKnowOptions | undefined>(undefined),
+      yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
     { updateOn: 'blur' }
   );

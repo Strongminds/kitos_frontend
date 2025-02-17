@@ -1,3 +1,4 @@
+import { NO_TEXT, YES_TEXT } from '../constants/constants';
 import { GridColumn } from '../models/grid-column.model';
 import { validateUrl } from './link.helpers';
 
@@ -27,6 +28,11 @@ export function transformRow(item: any, exportColumns: GridColumn[]): any {
           if (typeof transformedItem[field] === 'object') {
             const enumValue = transformedItem[field];
             transformedItem[field] = enumValue.name;
+          }
+          break;
+        case 'boolean':
+          {
+            transformedItem[field] = transformedItem[field] ? YES_TEXT : NO_TEXT;
           }
           break;
         case 'uuid-to-name':
