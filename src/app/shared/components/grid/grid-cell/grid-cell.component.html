@@ -24,3 +24,9 @@
 <app-primary-cell *ngIf="column.style === 'primary'" [column]="column" [dataItem]="dataItem"> </app-primary-cell>
 
 <app-boolean-cell *ngIf="column.style === 'boolean'" [column]="column" [dataItem]="dataItem"> </app-boolean-cell>
+
+<app-date-cell *ngIf="column.style === 'date'" [column]="column" [dataItem]="dataItem"> </app-date-cell>
+
+<app-enum-cell *ngIf="column.style === 'enum'" [column]="column" [dataItem]="dataItem"> </app-enum-cell>
+
+<app-link-cell *ngIf="column.style === 'link'" [column]="column" [dataItem]="dataItem"> </app-link-cell>

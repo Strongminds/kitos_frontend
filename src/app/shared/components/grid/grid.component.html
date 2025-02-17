@@ -145,25 +145,6 @@
           <app-grid-cell [column]="columnConfig" [dataItem]="dataItem"></app-grid-cell>
         </ng-template>
 
-        <ng-template *ngIf="columnConfig.style === 'date'" kendoGridCellTemplate let-dataItem>
-          <app-paragraph>{{ dataItem | searchProperty : columnConfig.field | appDate }}</app-paragraph>
-        </ng-template>
-
-        <ng-template *ngIf="columnConfig.style === 'enum'" kendoGridCellTemplate let-dataItem>
-          <app-paragraph [cropOnOverflow]="true">{{
-            (dataItem | searchProperty : columnConfig.field)?.name
-          }}</app-paragraph>
-        </ng-template>
-
-        <ng-template *ngIf="columnConfig.style === 'link'" kendoGridCellTemplate let-dataItem>
-          <app-paragraph [cropOnOverflow]="true">
-            <app-external-page-link
-              [url]="dataItem | searchProperty : columnConfig.field"
-              linkFontSize="small"
-            ></app-external-page-link>
-          </app-paragraph>
-        </ng-template>
-
         <ng-template *ngIf="columnConfig.style === 'title-link'" kendoGridCellTemplate let-dataItem>
           <app-paragraph [cropOnOverflow]="true">
             <app-external-page-link
@@ -229,7 +210,7 @@
           >
           </app-usage-link>
         </ng-template>
-        
+
         <ng-template
           *ngIf="columnConfig.style === 'page-link-array' || columnConfig.style === 'page-link-array-with-submodules'"
           kendoGridCellTemplate

@@ -174,6 +174,9 @@ import { ThousandSeperatorCellComponent } from './grid/grid-cell/cell-types/thou
 import { DefaultWrapCellComponent } from './grid/grid-cell/cell-types/default-wrap-cell/default-wrap-cell.component';
 import { PrimaryCellComponent } from './grid/grid-cell/cell-types/primary-cell/primary-cell.component';
 import { BooleanCellComponent } from './grid/grid-cell/cell-types/boolean-cell/boolean-cell.component';
+import { DateCellComponent } from './grid/grid-cell/cell-types/date-cell/date-cell.component';
+import { EnumCellComponent } from './grid/grid-cell/cell-types/enum-cell/enum-cell.component';
+import { LinkCellComponent } from './grid/grid-cell/cell-types/link-cell/link-cell.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -321,6 +324,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DefaultWrapCellComponent,
     PrimaryCellComponent,
     BooleanCellComponent,
+    DateCellComponent,
+    EnumCellComponent,
+    LinkCellComponent,
   ],
   imports: [
     CommonModule,
