@@ -153,31 +153,6 @@
             [deletePermission]="deletePermission ?? false"
           ></app-grid-cell>
         </ng-template>
-
-        <ng-template
-          *ngIf="columnConfig.style === 'action-buttons' && (modifyPermission || deletePermission)"
-          kendoGridCellTemplate
-          let-dataItem
-        >
-          <div class="action-buttons-container">
-            <ng-container *ngFor="let button of columnConfig.extraData">
-              <app-icon-button
-                *ngIf="button.type === 'edit' && modifyPermission"
-                (click)="onModifyClick(dataItem)"
-                data-cy="grid-edit-button"
-              >
-                <app-pencil-icon></app-pencil-icon>
-              </app-icon-button>
-              <app-icon-button
-                *ngIf="button.type === 'delete' && deletePermission"
-                (click)="onDeleteClick(dataItem)"
-                data-cy="grid-delete-button"
-              >
-                <app-trashcan-icon></app-trashcan-icon>
-              </app-icon-button>
-            </ng-container>
-          </div>
-        </ng-template>
       </kendo-grid-column>
     </ng-container>
   </ng-container>
