@@ -51,3 +51,5 @@
   (checkboxChange)="onCheckboxChange($event)"
 >
 </app-checkbox-cell>
+
+<app-usages-cell *ngIf="column.style === 'usages'" [column]="column" [dataItem]="dataItem"></app-usages-cell>
