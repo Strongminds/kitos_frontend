@@ -34,6 +34,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() columns!: GridColumn[];
   @Input() loading: boolean | null = false;
   @Input() exportToExcelName?: string | null;
+  @Input() createPermission?: boolean | null;
   @Input() modifyPermission?: boolean | null;
   @Input() deletePermission?: boolean | null;
   @Input() withOutline: boolean = false;
