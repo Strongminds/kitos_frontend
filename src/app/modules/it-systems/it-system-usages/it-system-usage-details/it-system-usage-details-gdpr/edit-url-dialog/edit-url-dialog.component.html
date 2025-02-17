@@ -15,7 +15,6 @@
         [formGroup]="simpleLinkForm"
         formName="url"
         data-cy="link-url-textbox"
-        [ngClass]="{ 'invalid-input-border': urlIsInvalid() }"
       ></app-textbox>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="edit-url-cancel-button" i18n

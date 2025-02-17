@@ -1,7 +1,7 @@
 <app-dialog title="Redigér url" i18n-title overflow="none">
   <form [formGroup]="urlForm" (submit)="onSave()">
     <app-standard-vertical-content-grid>
-      <app-textbox text="Url" i18n-text [formGroup]="urlForm" formName="url" data-cy="url-textbox" [ngClass]="{ 'invalid-input-border': (urlIsInvalid() | async) === true }"
+      <app-textbox text="Url" i18n-text [formGroup]="urlForm" formName="url" data-cy="url-textbox"
       ></app-textbox>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="edit-url-cancel-button" i18n

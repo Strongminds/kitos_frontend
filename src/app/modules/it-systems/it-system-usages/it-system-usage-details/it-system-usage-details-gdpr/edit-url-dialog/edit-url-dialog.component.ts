@@ -32,7 +32,7 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     return this.isBusy || this.hasNoChanges();
   }
 
-  public urlIsInvalid(){
+  private urlIsInvalid(){
     return this.simpleLinkForm.controls.url.value === this.simpleLink?.url;
   }
 
