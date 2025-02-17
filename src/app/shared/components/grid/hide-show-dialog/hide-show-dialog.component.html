@@ -22,7 +22,9 @@
     </mat-dialog-content>
     <app-dialog-actions>
       <app-button buttonStyle="secondary" (buttonClick)="close()" i18n>Annuller</app-button>
-      <app-button buttonStyle="primary" (buttonClick)="save()" i18n>Gem</app-button>
+      <app-button buttonStyle="primary" (buttonClick)="save()" i18n data-cy="column-config-dialog-save-button"
+        >Gem</app-button
+      >
     </app-dialog-actions>
   </app-standard-vertical-content-grid>
 </app-dialog>

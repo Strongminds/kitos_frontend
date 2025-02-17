@@ -42,7 +42,7 @@ export interface APIItSystemUsageOverviewReadModel {
     parentItSystemDisabled?: boolean;
     parentItSystemUsageUuid?: string;
     version?: string;
-    containsAITechnology?: boolean;
+    containsAITechnology?: APIItSystemUsageOverviewReadModel.ContainsAITechnologyEnum;
     localCallName?: string;
     localSystemId?: string;
     roleAssignments?: Array<APIItSystemUsageOverviewRoleAssignmentReadModel>;
@@ -105,8 +105,16 @@ export interface APIItSystemUsageOverviewReadModel {
     associatedContracts?: Array<APIItSystemUsageOverviewItContractReadModel>;
     dpiaConducted?: APIItSystemUsageOverviewReadModel.DpiaConductedEnum;
     isBusinessCritical?: APIItSystemUsageOverviewReadModel.IsBusinessCriticalEnum;
+    catalogArchiveDuty?: APIItSystemUsageOverviewReadModel.CatalogArchiveDutyEnum;
+    catalogArchiveDutyComment?: string;
 }
 export namespace APIItSystemUsageOverviewReadModel {
+    export type ContainsAITechnologyEnum = 'Yes' | 'No' | 'Undecided';
+    export const ContainsAITechnologyEnum = {
+        Yes: 'Yes' as ContainsAITechnologyEnum,
+        No: 'No' as ContainsAITechnologyEnum,
+        Undecided: 'Undecided' as ContainsAITechnologyEnum
+    };
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown' | 'PreserveDataCanDiscardDocuments';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,
@@ -151,6 +159,14 @@ export namespace APIItSystemUsageOverviewReadModel {
         Yes: 'YES' as IsBusinessCriticalEnum,
         Dontknow: 'DONTKNOW' as IsBusinessCriticalEnum,
         Undecided: 'UNDECIDED' as IsBusinessCriticalEnum
+    };
+    export type CatalogArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments';
+    export const CatalogArchiveDutyEnum = {
+        Undecided: 'Undecided' as CatalogArchiveDutyEnum,
+        B: 'B' as CatalogArchiveDutyEnum,
+        K: 'K' as CatalogArchiveDutyEnum,
+        NoRecommendation: 'NoRecommendation' as CatalogArchiveDutyEnum,
+        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as CatalogArchiveDutyEnum
     };
 }
 

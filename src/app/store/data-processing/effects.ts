@@ -697,7 +697,8 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     .replace(
       /IsOversightCompleted eq 'Undecided'/,
       "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)"
-    );
+    )
+    .replace(/ResponsibleOrgUnitName eq '([\w-]+)'/, 'ResponsibleOrgUnitUuid eq $1');
 
   return fixedOdataString;
 }
