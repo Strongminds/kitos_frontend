@@ -10,9 +10,9 @@ export class ReadonlyLinkTextboxComponent {
   @Input() isDisabled = false;
   @Input() public size: 'medium' | 'large' = 'large';
 
-  @Output() public fieldClick = new EventEmitter<void>();
+  @Output() public iconClick = new EventEmitter<void>();
 
-  public onFieldClick(): void {
-    this.fieldClick.emit();
+  public onIconClick(): void {
+    this.iconClick.emit();
   }
 }
