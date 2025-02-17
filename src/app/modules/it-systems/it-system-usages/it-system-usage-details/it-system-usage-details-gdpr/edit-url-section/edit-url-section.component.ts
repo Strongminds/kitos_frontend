@@ -24,7 +24,13 @@ export class EditUrlSectionComponent extends BaseComponent {
     super();
   }
 
+  private hasOpenDialogs(){
+    return this.dialog.openDialogs.length > 0;
+  }
+
   public openDirectoryUrlDialog(simpleLink?: SimpleLink | undefined) {
+    if (this.hasOpenDialogs()) return;
+    
     const dialog = this.dialog.open(EditUrlDialogComponent);
     const dialogInstance = dialog.componentInstance;
 

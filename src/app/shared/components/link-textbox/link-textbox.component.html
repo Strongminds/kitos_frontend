@@ -58,7 +58,7 @@
   </ng-container>
 </ng-container>
 
-<ng-container *ngIf="(simpleLink$ | async) === undefined || (simpleLink$ | async)?.name === null">
+<ng-container *ngIf="hasNoLink() | async">
   <app-readonly-link-textbox
     [size]="size"
     [title]="title"
