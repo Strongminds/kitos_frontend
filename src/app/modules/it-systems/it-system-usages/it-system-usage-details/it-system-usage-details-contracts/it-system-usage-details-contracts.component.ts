@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, filter } from 'rxjs';
+import { combineLatestWith, filter, first } from 'rxjs';
 import { APIItContractResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -21,6 +21,11 @@ import {
   selectITSystemUsageEnableAssociatedContracts,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateAndAssociateContractDialogComponent } from './create-and-associate-contract-dialog/create-and-associate-contract-dialog.component';
+import { Actions, ofType } from '@ngrx/effects';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { selectItContractHasCollectionCreatePermissions } from 'src/app/store/it-contract/selectors';
 
 @Component({
   templateUrl: 'it-system-usage-details-contracts.component.html',
@@ -47,10 +52,14 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive
   );
 
+  public readonly contractCreationPermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
+
   constructor(
     private readonly store: Store,
     private readonly contractsStore: ItSystemUsageDetailsContractsComponentStore,
-    private readonly notificationService: NotificationService
+    private readonly notificationService: NotificationService,
+    private readonly dialog: MatDialog,
+    private readonly actions$: Actions
   ) {
     super();
   }
@@ -64,6 +73,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   }
 
   public ngOnInit(): void {
+    this.store.dispatch(ITContractActions.getITContractCollectionPermissions());
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_contract-type'));
 
     //Update form on changes
@@ -85,6 +95,12 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .subscribe((itSystemUsageUuid) => this.contractsStore.getAssociatedContracts(itSystemUsageUuid))
     );
 
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITContractActions.createAndAssociateContractSuccess)).subscribe(({ usageUuid }) => {
+        this.contractsStore.getAssociatedContracts(usageUuid);
+      })
+    );
+
     // Disable forms if user does not have rights to modify
     this.subscriptions.add(
       this.store
@@ -92,6 +108,18 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
         .subscribe(() => {
           this.contractSelectionForm.disable();
+        })
+    );
+  }
+
+  public openCreateAndRegisterContractDialog() {
+    this.subscriptions.add(
+      this.store
+        .select(selectItSystemUsageUuid)
+        .pipe(filterNullish(), first())
+        .subscribe((itSystemUsageUuid) => {
+          const dialogRef = this.dialog.open(CreateAndAssociateContractDialogComponent);
+          dialogRef.componentInstance.usageToAssociateUuid = itSystemUsageUuid;
         })
     );
   }
