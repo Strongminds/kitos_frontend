@@ -46,8 +46,7 @@ export class LinkTextboxComponent extends BaseComponent {
           return title;
         }
         return `${title}: ${simpleLink?.url}`;
-      })
-    );
+      }));
   }
 
   public enableClearX(){
@@ -68,9 +67,5 @@ export class LinkTextboxComponent extends BaseComponent {
 
   public validateSimpleLinkUrl(url: string | undefined) {
     return isEmptyOrUndefined(url) || validateUrl(url);
-  }
-
-  public isUrlEmpty(url: string | undefined) {
-    return isEmptyOrUndefined(url);
   }
 }
