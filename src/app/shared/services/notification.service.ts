@@ -458,6 +458,12 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(ITContractActions.removeItContractPaymentSuccess, $localize`Betalingen blev slettet`);
     this.subscribeAsError(ITContractActions.removeItContractPaymentError, $localize`Betalingen kunne ikke slettes`);
+
+    this.subscribeAsDefault(
+      ITContractActions.createAndAssociateContractSuccess,
+      $localize`Kontrakt oprettet og tilknyttet`
+    );
+    this.subscribeAsError(ITContractActions.createAndAssociateContractError, $localize`Kontrakt kunne ikke oprettes`);
   }
 
   private subscribeToDprEvents() {
