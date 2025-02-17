@@ -120,8 +120,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     this.toggleChange.emit({ value, item });
   }
 
-  public onCheckboxChange(value: boolean | undefined, item: T) {
-    if (value === undefined) return;
+  public onCheckboxChange(value: boolean, item: T) {
     this.checkboxChange.emit({ value, item });
   }
 

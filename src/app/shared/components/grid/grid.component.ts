@@ -44,7 +44,7 @@ import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-fi
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { DEFAULT_VIRTUALIZTION_PAGE_SIZE, GridState } from '../../models/grid-state.model';
-import { CheckboxChange } from '../../models/grid/grid-events.model';
+import { BooleanChange, CheckboxChange } from '../../models/grid/grid-events.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
@@ -76,7 +76,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
-  @Output() checkboxChange = new EventEmitter<CheckboxChange>();
+  @Output() checkboxChange = new EventEmitter<BooleanChange<T>>();
 
   private data: GridData | null = null;
   private readonly RolesExtraDataLabel = 'roles';
@@ -101,7 +101,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private actions$: Actions,
     private store: Store,
     private localStorage: StatePersistingService,
-    private gridUIConfigService: GridUIConfigService,
+    private gridUIConfigService: GridUIConfigService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -109,13 +109,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.stateChangeSubject
-        .pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME))
-        .subscribe((state) => {
-          if (state){
-            this.stateChange.emit(state);
-          }
-        })
+      this.stateChangeSubject.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe((state) => {
+        if (state) {
+          this.stateChange.emit(state);
+        }
+      })
     );
 
     this.subscriptions.add(
@@ -237,8 +235,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     e.workbook.sheets[0].title = this.exportToExcelName;
   }
 
-  public onCheckboxChange(event: CheckboxChange){
-    this.checkboxChange.emit(event);
+  public onCheckboxChange(value: boolean, item: T) {
+    this.checkboxChange.emit({ value, item });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

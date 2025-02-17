@@ -145,7 +145,7 @@
           <app-grid-cell
             [column]="columnConfig"
             [dataItem]="dataItem"
-            (checkboxChange)="onCheckboxChange($event)"
+            (checkboxChange)="onCheckboxChange($event, dataItem)"
             (modifyEvent)="onModifyClick(dataItem)"
             (deleteEvent)="onDeleteClick(dataItem)"
             [createPermission]="createPermission ?? false"

@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { BaseCellComponent } from '../../base-cell.component';
-import { CheckboxChange } from 'src/app/shared/models/grid/grid-events.model';
 
 @Component({
   selector: 'app-checkbox-cell',
@@ -8,9 +7,10 @@ import { CheckboxChange } from 'src/app/shared/models/grid/grid-events.model';
   styleUrl: './checkbox-cell.component.scss',
 })
 export class CheckboxCellComponent extends BaseCellComponent {
-  @Output() public checkboxChange = new EventEmitter<CheckboxChange>();
+  @Output() public checkboxChange = new EventEmitter<boolean>();
 
-  public onCheckboxChange(value: boolean | undefined, rowEntityUuid?: string): void {
-    this.checkboxChange.emit({ value, rowEntityUuid });
+  public onCheckboxChange(value: boolean | undefined): void {
+    if (value === undefined) return;
+    this.checkboxChange.emit(value);
   }
 }
