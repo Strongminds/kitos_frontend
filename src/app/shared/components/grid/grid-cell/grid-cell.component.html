@@ -72,6 +72,7 @@
   [dataItem]="dataItem"
   [modifyPermission]="modifyPermission"
   [deletePermission]="deletePermission"
+  (toggleEvent)="onToggleEvent($event)"
   (modifyEvent)="onModifyEvent()"
   (deleteEvent)="onDeleteEvent()"
   ></app-action-buttons-cell>

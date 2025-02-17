@@ -8,6 +8,7 @@ import { BaseCellComponent } from './base-cell.component';
 })
 export class GridCellComponent extends BaseCellComponent {
   @Output() public checkboxChange = new EventEmitter<boolean>();
+  @Output() public toggleEvent = new EventEmitter<boolean>();
   @Output() public modifyEvent = new EventEmitter<void>();
   @Output() public deleteEvent = new EventEmitter<void>();
 
@@ -21,5 +22,9 @@ export class GridCellComponent extends BaseCellComponent {
 
   public onDeleteEvent(): void {
     this.deleteEvent.emit();
+  }
+
+  public onToggleEvent(value: boolean): void {
+    this.toggleEvent.emit(value);
   }
 }
