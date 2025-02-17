@@ -160,12 +160,17 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     instance.submitMethod.subscribe((url) => this.updateUrl(url));
   }
 
-  private hasOpenDialogs(){
-    return this.dialog.openDialogs.length > 0;
+  public resetUrl() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.store.dispatch(ITInterfaceActions.updateITInterface({ urlReference: null as any }));
   }
 
-  public updateUrl(url: string) {
+  private updateUrl(url: string) {
     this.store.dispatch(ITInterfaceActions.updateITInterface({ urlReference: url }));
+  }
+
+  private hasOpenDialogs(){
+    return this.dialog.openDialogs.length > 0;
   }
 
   private subscribeToItInterface(): void {
