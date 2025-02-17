@@ -32,18 +32,38 @@ export class LinkTextboxComponent extends BaseComponent {
     }
   }
 
-  public getLinkText() {
-    return this.simpleLink$.pipe(
-      map((simpleLink) => {
-        if (this.isLinkOnly) return simpleLink?.url;
+  public getLinkText(){
+    return this.simpleLink$
+      .pipe(map((simpleLink) => {
+        const url = simpleLink?.url;
+        if (this.isLinkOnly) return url;
+
         const name = simpleLink?.name;
-        const title = name && name.length > 0 ? name : this.placeholder;
+        if (isEmptyOrUndefined(url) && isEmptyOrUndefined(name)) return null;
+
+        const title = isEmptyOrUndefined(name) ? this.placeholder : name;
         if (this.validateSimpleLinkUrl(simpleLink?.url)) {
           return title;
         }
         return `${title}: ${simpleLink?.url}`;
       })
     );
+  }
+
+  public enableClearX(){
+    return this.simpleLink$
+      .pipe(map((simpleLink) => {
+        const url = simpleLink?.url;
+        const name = simpleLink?.name;
+        return !(isEmptyOrUndefined(url) && isEmptyOrUndefined(name));
+      }));
+  }
+
+  public hasNoLink(){
+    return this.simpleLink$
+      .pipe(map((simpleLink) => {
+        return !simpleLink || !simpleLink.url;
+      }));
   }
 
   public validateSimpleLinkUrl(url: string | undefined) {

@@ -47,6 +47,11 @@ Cypress.Commands.add(
   }
 );
 
+Cypress.Commands.add('verifyDialogConfirmButtonDisabledByReactiveForm', (dataCySelector: string) => {
+  cy.getByDataCy(dataCySelector).click();
+  cy.getByDataCy(dataCySelector).should('exist');
+})
+
 Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json') => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
   cy.intercept('/api/Authorize', { fixture: authorizeFixturePath }).as('authorize');

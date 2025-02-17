@@ -35,6 +35,11 @@
   overflow: hidden;
 }
 
+@mixin invalid-input-border {
+  border: red solid 1px;
+  border-radius: 10px;
+}
+
 @mixin mat-input-adjustment {
   --mdc-typography-subtitle1-font-size: var(--font-size);
   --mdc-typography-body1-font-size: var(--font-size);

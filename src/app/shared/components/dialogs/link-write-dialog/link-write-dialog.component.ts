@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 
 @Component({
@@ -36,6 +36,15 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
 
     this.submitMethod.emit(url);
     this.dialogRef.close();
+  }
+
+  public hasNoChange() {
+    return this.url$.pipe(
+      map((existingUrl) => {
+        const formUrl = this.urlForm.value.url;
+        return existingUrl === formUrl;
+      })
+    );
   }
 
   onCancel() {

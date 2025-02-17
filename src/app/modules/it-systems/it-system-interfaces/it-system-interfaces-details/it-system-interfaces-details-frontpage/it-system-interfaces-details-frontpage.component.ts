@@ -35,6 +35,7 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { InterfaceDataWriteDialogComponent } from './interface-data-write-dialog/interface-data-write-dialog.component';
 import { ITSystemInterfacesDetailsFrontpageComponentStore } from './it-system-interfaces-details-frontpage.component-store';
+import { hasOpenDialogs } from 'src/app/shared/helpers/dialog.helpers';
 
 @Component({
   selector: 'app-it-system-interfaces-details-frontpage',
@@ -152,6 +153,8 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   }
 
   public openUpdateUrlDialog() {
+    if (hasOpenDialogs(this.dialog)) return;
+
     const dialogRef = this.dialog.open(LinkWriteDialogComponent);
     const instance = dialogRef.componentInstance as LinkWriteDialogComponent;
     instance.url$ = this.interfaceUrlReference$;
