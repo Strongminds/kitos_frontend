@@ -186,11 +186,12 @@ export namespace APIItSystemUsageDTO {
         Dontknow: 'DONTKNOW' as AnsweringDataDPIAEnum,
         Undecided: 'UNDECIDED' as AnsweringDataDPIAEnum
     };
-    export type HostedAtEnum = 'UNDECIDED' | 'ONPREMISE' | 'EXTERNAL';
+    export type HostedAtEnum = 'UNDECIDED' | 'ONPREMISE' | 'EXTERNAL' | 'HYBRID';
     export const HostedAtEnum = {
         Undecided: 'UNDECIDED' as HostedAtEnum,
         Onpremise: 'ONPREMISE' as HostedAtEnum,
-        External: 'EXTERNAL' as HostedAtEnum
+        External: 'EXTERNAL' as HostedAtEnum,
+        Hybrid: 'HYBRID' as HostedAtEnum
     };
 }
 
