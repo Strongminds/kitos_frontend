@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { debounceTime, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 
 @Component({
@@ -34,7 +35,7 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
     );
 
     this.subscriptions.add(
-      this.urlForm.controls.url.valueChanges.pipe(debounceTime(300)).subscribe(() => {
+      this.urlForm.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe(() => {
         this.showValidationError = this.isUrlEmptyOrValid() === false;
       })
     );

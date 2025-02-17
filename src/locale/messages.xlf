@@ -4942,6 +4942,12 @@
       <trans-unit id="9007353493777604696" datatype="html">
         <source>Data og dokumenter bevares (B)</source>
       </trans-unit>
+      <trans-unit id="5116512435284562651" datatype="html">
+        <source>Webadressen er ugyldigt. Sørg for, at det begynder med &quot;https://&quot; </source>
+      </trans-unit>
+      <trans-unit id="827789006314961987" datatype="html">
+        <source>Webadressen er ugyldigt. Sørg for, at det begynder med &quot;https://&quot;</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

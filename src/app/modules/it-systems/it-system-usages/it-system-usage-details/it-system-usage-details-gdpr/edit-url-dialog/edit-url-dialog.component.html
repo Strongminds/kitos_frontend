@@ -18,8 +18,8 @@
           data-cy="link-url-textbox"
         ></app-textbox>
         <app-paragraph paragraphSize="small" color="error" *ngIf="showValidationError" i18n
-          >It looks like the url is incorrect. Make sure it starts with "https://"</app-paragraph
-        >
+          >Webadressen er ugyldigt. Sørg for, at det begynder med "https://"
+        </app-paragraph>
       </div>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="edit-url-cancel-button" i18n
