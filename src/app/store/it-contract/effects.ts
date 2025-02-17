@@ -478,6 +478,23 @@ export class ITContractEffects {
     );
   });
 
+  createAndAssociateContract$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractActions.createAndAssociateContract),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ contractName, usageUuid }, organizationUuid]) =>
+        this.apiItContractService
+          .postSingleItContractV2PostItContract({
+            request: { name: contractName, organizationUuid, systemUsageUuids: [usageUuid] },
+          })
+          .pipe(
+            map(() => ITContractActions.createAndAssociateContractSuccess(usageUuid)),
+            catchError(() => of(ITContractActions.createAndAssociateContractError()))
+          )
+      )
+    );
+  });
+
   addItContractPayment$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.addItContractPayment),
