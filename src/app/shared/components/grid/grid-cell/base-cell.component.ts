@@ -8,6 +8,8 @@ export class BaseCellComponent extends BaseComponent {
   @Input() dataItem!: any;
   @Input() column!: GridColumn;
   @Input() createPermission!: boolean;
+  @Input() modifyPermission!: boolean;
+  @Input() deletePermission!: boolean;
 
   //Pipes are not allowed in method calls, so we need to use a getter method
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

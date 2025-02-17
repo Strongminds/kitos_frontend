@@ -65,3 +65,13 @@
   [column]="column"
   [dataItem]="dataItem"
 ></app-uuid-to-name-cell>
+
+<app-action-buttons-cell
+  *ngIf="column.style === 'action-buttons' && (modifyPermission || deletePermission)"
+  [column]="column"
+  [dataItem]="dataItem"
+  [modifyPermission]="modifyPermission"
+  [deletePermission]="deletePermission"
+  (modifyEvent)="onModifyEvent()"
+  (deleteEvent)="onDeleteEvent()"
+  ></app-action-buttons-cell>

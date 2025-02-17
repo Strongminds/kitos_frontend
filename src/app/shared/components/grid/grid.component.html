@@ -146,7 +146,11 @@
             [column]="columnConfig"
             [dataItem]="dataItem"
             (checkboxChange)="onCheckboxChange($event)"
+            (modifyEvent)="onModifyClick(dataItem)"
+            (deleteEvent)="onDeleteClick(dataItem)"
             [createPermission]="createPermission ?? false"
+            [modifyPermission]="modifyPermission ?? false"
+            [deletePermission]="deletePermission ?? false"
           ></app-grid-cell>
         </ng-template>
 

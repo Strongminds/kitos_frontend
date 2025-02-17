@@ -7,10 +7,20 @@ import { BaseCellComponent } from './base-cell.component';
   templateUrl: './grid-cell.component.html',
   styleUrl: './grid-cell.component.scss',
 })
-export class GridCellComponent extends BaseCellComponent {
+export class GridCellComponent<T> extends BaseCellComponent {
   @Output() public checkboxChange = new EventEmitter<CheckboxChange>();
+  @Output() public modifyEvent = new EventEmitter<void>();
+  @Output() public deleteEvent = new EventEmitter<void>();
 
   public onCheckboxChange(event: CheckboxChange): void {
     this.checkboxChange.emit(event);
+  }
+
+  public onModifyEvent(): void {
+    this.modifyEvent.emit();
+  }
+
+  public onDeleteEvent(): void {
+    this.deleteEvent.emit();
   }
 }
