@@ -272,6 +272,14 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       hidden: true,
       persistId: 'lastchangedname',
     },
+    {
+      field: GridFields.ResponsibleOrgUnitName,
+      title: $localize`Ansvarlig org. enhed`,
+      section: DATA_PROCESSING_SECTION_NAME,
+      hidden: true,
+      extraFilter: 'organization-unit',
+      persistId: 'responsibleUnitName',
+    },
   ];
 
   constructor(

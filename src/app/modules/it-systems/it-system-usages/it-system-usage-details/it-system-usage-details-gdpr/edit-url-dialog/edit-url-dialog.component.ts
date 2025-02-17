@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { debounceTime, first } from 'rxjs';
@@ -21,7 +21,7 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
 
   public readonly simpleLinkForm = new FormGroup({
     name: new FormControl<string | undefined>(undefined),
-    url: new FormControl<string | undefined>(undefined, Validators.required),
+    url: new FormControl<string | undefined>(undefined),
   });
 
   public isBusy = false;
@@ -32,9 +32,15 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   }
 
   public disableSave() {
-    if (this.isBusy) return true;
+    return this.isBusy || this.hasNoChanges();
+  }
 
-    return this.simpleLinkForm.invalid;
+  private urlIsInvalid() {
+    return this.simpleLinkForm.controls.url.value === this.simpleLink?.url;
+  }
+
+  private hasNoChanges() {
+    return this.urlIsInvalid() && this.simpleLinkForm.controls.name.value === this.simpleLink?.name;
   }
 
   ngOnInit(): void {
@@ -45,14 +51,12 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
       });
     }
 
-    //on success close the dialog
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchITSystemUsageSuccess), first())
         .subscribe(() => this.dialogRef.close())
     );
 
-    //on error set isBusy to false
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageActions.patchITSystemUsageError)).subscribe(() => {
         this.isBusy = false;

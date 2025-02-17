@@ -6545,9 +6545,33 @@
         <source>Indeholder AI-teknologi</source>
         <target state="new">Indeholder AI-teknologi</target>
       </trans-unit>
+      <trans-unit id="3888819941059729884" datatype="html">
+        <source>Kontrakt oprettet og tilknyttet</source>
+        <target state="new">Kontrakt oprettet og tilknyttet</target>
+      </trans-unit>
+      <trans-unit id="4965924264660200872" datatype="html">
+        <source>Kontrakt kunne ikke oprettes</source>
+        <target state="new">Kontrakt kunne ikke oprettes</target>
+      </trans-unit>
       <trans-unit id="2590340397431371543" datatype="html">
         <source>Hybrid</source>
         <target state="new">Hybrid</target>
+      </trans-unit>
+      <trans-unit id="2590340397431371543" datatype="html">
+        <source>Hybrid</source>
+        <target state="new">Hybrid</target>
+      </trans-unit>
+      <trans-unit id="2353526137738121108" datatype="html">
+        <source>Opret og registrer kontrakt</source>
+        <target state="new">Opret og registrer kontrakt</target>
+      </trans-unit>
+      <trans-unit id="5655648815512279384" datatype="html">
+        <source> Opret og registrer </source>
+        <target state="new"> Opret og registrer </target>
+      </trans-unit>
+      <trans-unit id="5906499730586056252" datatype="html">
+        <source>Opret og registrer</source>
+        <target state="new">Opret og registrer</target>
       </trans-unit>
       <trans-unit id="5116512435284562651" datatype="html">
         <source>Webadressen er ugyldigt. Sørg for, at det begynder med &quot;https://&quot; </source>
