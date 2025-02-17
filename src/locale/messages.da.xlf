@@ -6533,29 +6533,17 @@
         <source>Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</source>
         <target state="new">Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</target>
       </trans-unit>
-      <trans-unit id="2796922842108938919" datatype="html">
-        <source>Dette filtrerer på visning af aktiv/ikke aktive systemer, efter om datoen på den tilknyttet kontrakt fra kontrakt modulet er udløbet.</source>
-        <target state="new">Dette filtrerer på visning af aktiv/ikke aktive systemer, efter om datoen på den tilknyttet kontrakt fra kontrakt modulet er udløbet.</target>
+      <trans-unit id="5207851183117045385" datatype="html">
+        <source>Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</source>
+        <target state="new">Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</target>
       </trans-unit>
-      <trans-unit id="284714971201171083" datatype="html">
-        <source>Dette filtrerer på visning efter systemets livscyklus markeret på system forsiden.</source>
-        <target state="new">Dette filtrerer på visning efter systemets livscyklus markeret på system forsiden.</target>
+      <trans-unit id="2306616791979379771" datatype="html">
+        <source>Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</source>
+        <target state="new">Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</target>
       </trans-unit>
-      <trans-unit id="5562185284759780688" datatype="html">
-        <source>Dette filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</source>
-        <target state="new">Dette filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</target>
-      </trans-unit>
-      <trans-unit id="2353526137738121108" datatype="html">
-        <source>Opret og registrer kontrakt</source>
-        <target state="new">Opret og registrer kontrakt</target>
-      </trans-unit>
-      <trans-unit id="5906499730586056252" datatype="html">
-        <source>Opret og registrer</source>
-        <target state="new">Opret og registrer</target>
-      </trans-unit>
-      <trans-unit id="5655648815512279384" datatype="html">
-        <source> Opret og registrer </source>
-        <target state="new"> Opret og registrer </target>
+      <trans-unit id="4274186331072716554" datatype="html">
+        <source>Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</source>
+        <target state="new">Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.</target>
       </trans-unit>
       <trans-unit id="3531169621040073341" datatype="html">
         <source>Indeholder AI-teknologi</source>
@@ -6568,6 +6556,10 @@
       <trans-unit id="4965924264660200872" datatype="html">
         <source>Kontrakt kunne ikke oprettes</source>
         <target state="new">Kontrakt kunne ikke oprettes</target>
+      </trans-unit>
+      <trans-unit id="2590340397431371543" datatype="html">
+        <source>Hybrid</source>
+        <target state="new">Hybrid</target>
       </trans-unit>
       <trans-unit id="2590340397431371543" datatype="html">
         <source>Hybrid</source>

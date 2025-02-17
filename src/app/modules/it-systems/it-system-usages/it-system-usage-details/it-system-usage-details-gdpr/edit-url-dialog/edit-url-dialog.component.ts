@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { first } from 'rxjs';
@@ -19,7 +19,7 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
 
   public readonly simpleLinkForm = new FormGroup({
     name: new FormControl<string | undefined>(undefined),
-    url: new FormControl<string | undefined>(undefined),
+    url: new FormControl<string | undefined>(undefined, Validators.required),
   });
 
   public isBusy = false;
@@ -30,10 +30,8 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
 
   public disableSave() {
     if (this.isBusy) return true;
-    const controls = this.simpleLinkForm.controls;
-    const name = controls.name.value;
-    const url = controls.url.value;
-    return name && !url;
+
+    return this.simpleLinkForm.invalid;
   }
 
   ngOnInit(): void {
@@ -65,7 +63,7 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     const url = this.simpleLinkForm.value.url;
 
     this.isBusy = true;
-    this.submitMethod.emit({ name: name, url: url });
+    this.submitMethod.emit({ name: name ?? '', url: url });
   }
 
   onCancel() {

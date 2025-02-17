@@ -24,6 +24,7 @@ import {
   selectDprEnableOversights,
   selectDprEnableProcessors,
   selectDprEnableReferences,
+  selectDprEnableResponsibleOrgUnit,
   selectDprEnableRoles,
   selectDprEnableScheduledInspectionDate,
   selectDprEnableStatus,
@@ -87,11 +88,10 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableOutgoingRelations,
-  selectITSystemUsageEnableRelevantUnits,
-  selectITSystemUsageEnableResponsibleUnit,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableTabArchiving,
+  selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
   selectITSystemUsageEnableVersion,
@@ -279,7 +279,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableDataClassification)
         .pipe(shouldEnable([UsageFields.ItSystemCategoriesUuid])),
-      this.store.select(selectITSystemUsageEnableContainsAITechnology).pipe(shouldEnable([UsageFields.ContainsAITechnology])),
+      this.store
+        .select(selectITSystemUsageEnableContainsAITechnology)
+        .pipe(shouldEnable([UsageFields.ContainsAITechnology])),
 
       //Contracts
       combineAND([
@@ -325,11 +327,10 @@ export class GridUIConfigService {
 
       //Organization
       this.store
-        .select(selectITSystemUsageEnableResponsibleUnit)
-        .pipe(shouldEnable([UsageFields.ResponsibleOrganizationUnitName])),
-      this.store
-        .select(selectITSystemUsageEnableRelevantUnits)
-        .pipe(shouldEnable([UsageFields.RelevantOrganizationUnitNamesAsCsv])),
+        .select(selectITSystemUsageEnableTabOrganization)
+        .pipe(
+          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
+        ),
 
       //Relations
       this.store
@@ -384,6 +385,7 @@ export class GridUIConfigService {
         .pipe(shouldEnable([DprFields.BasisForTransferUuid, DprFields.TransferToInsecureThirdCountries])),
       this.store.select(selectDprEnableProcessors).pipe(shouldEnable([DprFields.DataProcessorNamesAsCsv])),
       this.store.select(selectDprEnableSubProcessors).pipe(shouldEnable([DprFields.SubDataProcessorNamesAsCsv])),
+      this.store.select(selectDprEnableResponsibleOrgUnit).pipe(shouldEnable([DprFields.ResponsibleOrgUnitName])),
       // IT Systems
       combineAND([this.store.select(selectShowItSystemModule), this.store.select(selectDprEnableItSystems)]).pipe(
         shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv])

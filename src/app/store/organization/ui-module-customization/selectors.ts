@@ -71,6 +71,7 @@ export const selectDprEnableAgreementConcluded = createDprFrontPageFieldSelector
 export const selectDprEnableTransferBasis = createDprFrontPageFieldSelector('transferBasis');
 export const selectDprEnableProcessors = createDprFrontPageFieldSelector('processors');
 export const selectDprEnableSubProcessors = createDprFrontPageFieldSelector('subProcessors');
+export const selectDprEnableResponsibleOrgUnit = createDprFrontPageFieldSelector('responsibleOrgUnit');
 
 //DPR -> IT Contract
 const createDprItContractsFieldSelector = (fieldKey: string) =>
@@ -151,12 +152,6 @@ export const selectITSystemUsageEnableGdprConductedRiskAssessment =
   createItSystemUsageGdprFieldSelector('conductedRiskAssessment');
 export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
 export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
-
-//IT System Usage > Organization
-const createItSystemUsageOrganizationFieldSelector = (fieldKey: string) =>
-  createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'organization', fieldKey);
-export const selectITSystemUsageEnableResponsibleUnit = createItSystemUsageOrganizationFieldSelector('responsibleUnit');
-export const selectITSystemUsageEnableRelevantUnits = createItSystemUsageOrganizationFieldSelector('relevantUnits');
 
 //IT System Usage > Relations
 const createItSystemUsageRelationsFieldSelector = (fieldKey: string) =>

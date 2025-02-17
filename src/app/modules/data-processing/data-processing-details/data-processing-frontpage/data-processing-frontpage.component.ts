@@ -6,6 +6,7 @@ import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequ
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
+import { createIdentityPairNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
   YesNoIrrelevantEnum,
@@ -28,6 +29,7 @@ import {
   selectDprEnableLastChangedAt,
   selectDprEnableLastChangedBy,
   selectDprEnableProcessors,
+  selectDprEnableResponsibleOrgUnit,
   selectDprEnableStatus,
   selectDprEnableSubProcessors,
   selectDprEnableTransferBasis,
@@ -78,6 +80,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     agreementConcluded: new FormControl<YesNoIrrelevantOptions | undefined>({ value: undefined, disabled: true }),
     agreementConclusionDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     agreementRemarks: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    responsibleOrgUnit: new FormControl<TreeNodeModel | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly transferBasisFormGroup = new FormGroup({
@@ -92,6 +95,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly transferBasisEnabled$ = this.store.select(selectDprEnableTransferBasis);
   public readonly processorsEnabled$ = this.store.select(selectDprEnableProcessors);
   public readonly subProcessorsEnabled$ = this.store.select(selectDprEnableSubProcessors);
+  public readonly responsibleUnitEnabled$ = this.store.select(selectDprEnableResponsibleOrgUnit);
 
   constructor(private store: Store, private notificationService: NotificationService) {
     super();
@@ -106,6 +110,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dpr, hasModifyPermission]) => {
           const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded);
+          const responsibleOrgUnit = dpr.general.responsibleOrganizationUnit;
           this.frontpageFormGroup.patchValue({
             name: dpr.name,
             status: dpr.general.valid ? `Aktiv` : `Inaktiv`,
@@ -116,6 +121,9 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             agreementConcluded: agreementConcludedValue,
             agreementConclusionDate: optionalNewDate(dpr.general.agreementConcludedAt),
             agreementRemarks: dpr.general.isAgreementConcludedRemark,
+            responsibleOrgUnit: responsibleOrgUnit
+              ? createIdentityPairNode(responsibleOrgUnit.name, responsibleOrgUnit.uuid)
+              : undefined,
           });
 
           this.transferBasisFormGroup.patchValue({
