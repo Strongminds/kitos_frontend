@@ -207,6 +207,12 @@ declare namespace Cypress {
      * @param dataCySelector: selector for target element
      */
     hoverByDataCy(dataCySelector: string): Chainable<Subject>;
+
+  /**
+   * Verify that a confirm button in a dialog is disabled by Angular reactive forms (and not by html attribute, so 'should.be.disabled' does not work)
+   * @param dataCySelector: selector for target element
+   */
+    verifyDialogConfirmButtonDisabledByReactiveForm(dataCySelector: string): Chainable<Subject>;
   }
 
   // Intercept commands
