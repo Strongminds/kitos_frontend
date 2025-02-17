@@ -19,7 +19,7 @@ import {
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { BooleanChange, CheckboxChange } from 'src/app/shared/models/grid/grid-events.model';
+import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';

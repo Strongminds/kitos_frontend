@@ -44,7 +44,7 @@ import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-fi
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
 import { DEFAULT_VIRTUALIZTION_PAGE_SIZE, GridState } from '../../models/grid-state.model';
-import { BooleanChange, CheckboxChange } from '../../models/grid/grid-events.model';
+import { BooleanChange } from '../../models/grid/grid-events.model';
 import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
