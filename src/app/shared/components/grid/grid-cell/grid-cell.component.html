@@ -53,3 +53,9 @@
 </app-checkbox-cell>
 
 <app-usages-cell *ngIf="column.style === 'usages'" [column]="column" [dataItem]="dataItem"></app-usages-cell>
+
+<app-page-link-array-cell
+  *ngIf="column.style === 'page-link-array' || column.style === 'page-link-array-with-submodules'"
+  [column]="column"
+  [dataItem]="dataItem"
+></app-page-link-array-cell>

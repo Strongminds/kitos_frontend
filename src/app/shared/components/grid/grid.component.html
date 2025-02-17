@@ -150,40 +150,6 @@
           ></app-grid-cell>
         </ng-template>
 
-        <ng-template *ngIf="columnConfig.style === 'usages'" kendoGridCellTemplate let-dataItem>
-          <app-usage-link
-            *ngIf="columnConfig.dataField"
-            [type]="columnConfig.entityType"
-            [name]="searchProperty(dataItem, columnConfig.dataField)"
-            [usingOrganizations]="dataItem | searchProperty : columnConfig.field"
-            [rowEntityIdentifier]="searchProperty(dataItem, columnConfig.idField ?? 'Uuid')"
-          >
-          </app-usage-link>
-        </ng-template>
-
-        <ng-template
-          *ngIf="columnConfig.style === 'page-link-array' || columnConfig.style === 'page-link-array-with-submodules'"
-          kendoGridCellTemplate
-          let-dataItem
-        >
-          <app-paragraph [cropOnOverflow]="true">
-            <ng-container *ngIf="columnConfig.dataField">
-              <div>
-                <ng-container
-                  *ngFor="let item of searchProperty(dataItem, columnConfig.dataField) as data; let i = index"
-                >
-                  <app-details-page-link
-                    linkFontSize="small"
-                    [itemType]="columnConfig.entityType"
-                    [itemPath]="item.id"
-                    [itemPathIncludesSubmodule]="columnConfig.style === 'page-link-array-with-submodules'"
-                    >{{ item.value }}</app-details-page-link
-                  >{{ i < data.length - 1 ? columnConfig.linkArraySeparator ?? ", " : "" }}
-                </ng-container>
-              </div>
-            </ng-container>
-          </app-paragraph>
-        </ng-template>
         <ng-template *ngIf="columnConfig.style === 'uuid-to-name'" kendoGridCellTemplate let-dataItem>
           <app-paragraph *ngIf="columnConfig.dataField" [cropOnOverflow]="true">{{
             searchProperty(dataItem, columnConfig.dataField)

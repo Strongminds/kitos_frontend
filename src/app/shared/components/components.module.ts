@@ -181,6 +181,7 @@ import { TitleLinkCellComponent } from './grid/grid-cell/cell-types/title-link-c
 import { PageLinkCellComponent } from './grid/grid-cell/cell-types/page-link-cell/page-link-cell.component';
 import { CheckboxCellComponent } from './grid/grid-cell/cell-types/checkbox-cell/checkbox-cell.component';
 import { UsagesCellComponent } from './grid/grid-cell/cell-types/usages-cell/usages-cell.component';
+import { PageLinkArrayCellComponent } from './grid/grid-cell/cell-types/page-link-array-cell/page-link-array-cell.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -335,6 +336,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     PageLinkCellComponent,
     CheckboxCellComponent,
     UsagesCellComponent,
+    PageLinkArrayCellComponent,
   ],
   imports: [
     CommonModule,
