@@ -14,5 +14,11 @@
     >
       <app-trashcan-icon></app-trashcan-icon>
     </app-icon-button>
+    <app-toggle-button
+      *ngIf="button.type === 'toggle'"
+      (valueChange)="onToggleChange($event)"
+      [value]="getProperty(column.field)"
+    >
+    </app-toggle-button>
   </ng-container>
 </div>

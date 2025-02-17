@@ -1,11 +1,13 @@
 <div class="column-center-content">
   <ng-container *ngIf="column.idField">
-    <app-checkbox
-      *ngIf="column.entityType !== 'it-system'"
-      [value]="dataItem | searchProperty : column.field"
-      [disabled]="column.permissionsField ? (dataItem | searchProperty : column.permissionsField) !== true : false"
-      (valueChange)="onCheckboxChange($event, getProperty(column.idField))"
-    ></app-checkbox>
+    <app-tooltip [text]="column?.tooltipFn(dataItem) ?? ''">
+      <app-checkbox
+        [value]="getProperty(column.field)"
+        [disabled]="column.permissionsField ? getProperty(column.permissionsField) !== false : true"
+        (valueChange)="onCheckboxChange($event, dataItem)"
+        data-cy="grid-checkbox"
+      ></app-checkbox>
+    </app-tooltip>
     <app-usage-proxy-checkbox
       *ngIf="column.entityType === 'it-system'"
       [checked]="dataItem | searchProperty : column.field"

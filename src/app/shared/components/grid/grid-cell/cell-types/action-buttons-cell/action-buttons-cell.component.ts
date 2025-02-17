@@ -6,9 +6,10 @@ import { BaseCellComponent } from '../../base-cell.component';
   templateUrl: './action-buttons-cell.component.html',
   styleUrl: './action-buttons-cell.component.scss',
 })
-export class ActionButtonsCellComponent<T> extends BaseCellComponent {
+export class ActionButtonsCellComponent extends BaseCellComponent {
   @Output() public modifyEvent = new EventEmitter<void>();
   @Output() public deleteEvent = new EventEmitter<void>();
+  @Output() public toggleEvent = new EventEmitter<boolean>();
 
   public onModifyClick(): void {
     this.modifyEvent.emit();
@@ -16,5 +17,9 @@ export class ActionButtonsCellComponent<T> extends BaseCellComponent {
 
   public onDeleteClick(): void {
     this.deleteEvent.emit();
+  }
+
+  public onToggleChange(event: boolean): void {
+    this.toggleEvent.emit(event);
   }
 }
