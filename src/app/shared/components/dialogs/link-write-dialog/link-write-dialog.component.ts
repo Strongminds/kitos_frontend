@@ -38,7 +38,7 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
     this.dialogRef.close();
   }
 
-  public urlIsInvalid(){
+  public hasNoChange() {
     return this.url$.pipe(
       map((existingUrl) => {
         const formUrl = this.urlForm.value.url;
