@@ -47,6 +47,7 @@
   *ngIf="column.style === 'checkbox'"
   [column]="column"
   [dataItem]="dataItem"
+  [createPermission]="createPermission"
   (checkboxChange)="onCheckboxChange($event)"
 >
 </app-checkbox-cell>

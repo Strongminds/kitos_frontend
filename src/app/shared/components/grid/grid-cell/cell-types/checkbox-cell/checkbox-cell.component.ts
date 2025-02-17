@@ -11,7 +11,6 @@ export class CheckboxCellComponent extends BaseCellComponent {
   @Output() public checkboxChange = new EventEmitter<CheckboxChange>();
 
   public onCheckboxChange(value: boolean | undefined, rowEntityUuid?: string): void {
-    console.log('CheckboxCellComponent.onCheckboxChange', value, rowEntityUuid);
     this.checkboxChange.emit({ value, rowEntityUuid });
   }
 }
