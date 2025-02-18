@@ -1,12 +1,2 @@
-.overflow-hidden-container {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 100%;
-}
-
-.items-center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+@import "mixins";
+@include grid-style;
