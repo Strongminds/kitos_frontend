@@ -6573,13 +6573,13 @@
         <source>Opret og registrer</source>
         <target state="new">Opret og registrer</target>
       </trans-unit>
-      <trans-unit id="5116512435284562651" datatype="html">
-        <source>Webadressen er ugyldigt. Sørg for, at det begynder med &quot;https://&quot; </source>
-        <target state="new">Webadressen er ugyldigt. Sørg for, at det begynder med &quot;https://&quot; </target>
+      <trans-unit id="5878940564313218703" datatype="html">
+        <source>Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot; </source>
+        <target state="new">Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot; </target>
       </trans-unit>
-      <trans-unit id="827789006314961987" datatype="html">
-        <source>Webadressen er ugyldigt. Sørg for, at det begynder med &quot;https://&quot;</source>
-        <target state="new">Webadressen er ugyldigt. Sørg for, at det begynder med &quot;https://&quot;</target>
+      <trans-unit id="8066999230194125800" datatype="html">
+        <source>Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot;</source>
+        <target state="new">Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot;</target>
       </trans-unit>
     </body>
   </file>
