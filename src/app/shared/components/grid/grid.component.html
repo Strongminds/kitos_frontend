@@ -273,7 +273,7 @@
           >
           </app-usage-link>
         </ng-template>
-        
+
         <ng-template
           *ngIf="columnConfig.style === 'page-link-array' || columnConfig.style === 'page-link-array-with-submodules'"
           kendoGridCellTemplate
@@ -283,14 +283,15 @@
             <ng-container *ngIf="columnConfig.dataField">
               <div>
                 <ng-container
-                  *ngFor="let item of searchProperty(dataItem, columnConfig.dataField) as data; let i = index"
+                  *ngFor="let collectionItem of searchProperty(dataItem, columnConfig.dataField) as data; let i = index"
                 >
                   <app-details-page-link
                     linkFontSize="small"
                     [itemType]="columnConfig.entityType"
-                    [itemPath]="item.id"
+                    [itemPath]="collectionItem.id"
                     [itemPathIncludesSubmodule]="columnConfig.style === 'page-link-array-with-submodules'"
-                    >{{ item.value }}</app-details-page-link
+                    [toolTip]="columnConfig.itemTooltipField ? searchProperty(collectionItem, columnConfig.itemTooltipField) : undefined"
+                    >{{ collectionItem.value }}</app-details-page-link
                   >{{ i < data.length - 1 ? columnConfig.linkArraySeparator ?? ", " : "" }}
                 </ng-container>
               </div>

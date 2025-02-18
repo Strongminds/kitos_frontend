@@ -17,6 +17,7 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public subpagePath?: string;
   @Input() public disableRedirect = false;
   @Input() public itemPathIncludesSubmodule = false;
+  @Input() public toolTip?: string;
 
   public ngOnInit(): void {
     const path = getDetailsPageLink(this.itemPath, this.itemType, this.subpagePath, this.itemPathIncludesSubmodule);

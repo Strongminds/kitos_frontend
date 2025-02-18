@@ -59,4 +59,5 @@ export interface GridColumn {
   disabledByUIConfig?: boolean;
   linkArraySeparator?: ', ' | ' - ';
   helpText?: string;
+  itemTooltipField?: string;
 }
