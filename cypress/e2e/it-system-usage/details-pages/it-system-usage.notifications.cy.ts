@@ -90,13 +90,10 @@ describe('it-system-usage', () => {
         cy.getByDataCy('subject-textbox').type('testSubject');
         cy.setTinyMceContent('rich-text-editor', 'testBody');
         cy.getIframe().click({ force: true });
-        //Clicks twice to first defocus body editor and update form value, then save the notification.
-        //This is required because Cypress interacts with the editor by "setting" content rather than typing.
-        cy.getByDataCy('confirm-button').click();
 
         cy.intercept(
           'POST',
-          '/api/v2/internal/notifications/ItSystemUsage/85cc6bd8-da66-4d4e-8e56-4dbc16e5c109/immediate',
+          '/api/v2/internal/notifications/ItSystemUsage/*/immediate',
           { fixture: './it-system-usage/notifications/it-system-usage-post-notification.json' }
         ).as('postNewNotification');
         cy.getByDataCy('confirm-button').click();
