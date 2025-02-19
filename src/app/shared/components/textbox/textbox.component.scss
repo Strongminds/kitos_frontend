@@ -4,6 +4,7 @@
 :host {
   display: flex;
   flex: 1;
+  font-size: 14px !important;
 }
 
 mat-form-field {
@@ -30,4 +31,8 @@ app-trashcan-icon:hover {
 
 mat-form-field {
   @include input-background-white;
+}
+
+input {
+  @include medium-font-size;
 }
