@@ -16,3 +16,7 @@ ng-select {
 :host ::ng-deep .ng-select-container {
   background-color: $color-white;
 }
+
+ng-select.medium ::ng-deep .ng-value * {
+  font-size: 16px !important;
+}

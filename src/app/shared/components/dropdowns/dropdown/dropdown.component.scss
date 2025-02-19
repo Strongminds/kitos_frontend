@@ -13,3 +13,7 @@ ng-select {
   font-size: large;
   @include input-background-white;
 }
+
+ng-select.medium ::ng-deep .ng-value * {
+  font-size: 16px !important;
+}
