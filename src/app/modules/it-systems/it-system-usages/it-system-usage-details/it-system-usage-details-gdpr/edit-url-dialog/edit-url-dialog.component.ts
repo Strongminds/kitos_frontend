@@ -2,8 +2,10 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
-import { first } from 'rxjs';
+import { debounceTime, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
+import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
@@ -23,6 +25,7 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   });
 
   public isBusy = false;
+  public showValidationError = false;
 
   constructor(private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>, private readonly actions$: Actions) {
     super();
@@ -59,6 +62,12 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
         this.isBusy = false;
       })
     );
+
+    this.subscriptions.add(
+      this.simpleLinkForm.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe(() => {
+        this.showValidationError = this.isUrlEmptyOrValid() === false;
+      })
+    );
   }
 
   onSave() {
@@ -72,5 +81,10 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
 
   onCancel() {
     this.dialogRef.close();
+  }
+
+  private isUrlEmptyOrValid() {
+    const url = this.simpleLinkForm.value.url;
+    return !url || validateUrl(url);
   }
 }
