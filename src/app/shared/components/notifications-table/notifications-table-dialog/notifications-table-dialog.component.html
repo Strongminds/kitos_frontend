@@ -122,7 +122,6 @@
       ></app-textbox>
       <app-rich-text-editor
         [formControl]="notificationForm.controls.bodyControl"
-        [ngClass]="{ 'invalid-input-border': bodyIsInvalid() }"
         [defaultEditorContent]="getDefaultNotificationBody()"
       >
     </app-rich-text-editor>
