@@ -413,7 +413,7 @@
   &.medium {
     --height: 48px;
     --font-size: 14px;
-    --offset: 17px;
+    --offset: 16px;
     --scale: calc(10 / 14);
   }
 
@@ -643,5 +643,25 @@
 @mixin medium-font-size {
   &.medium {
     font-size: 16px !important;
+  }
+}
+
+@mixin ng-select-medium-styles {
+  ng-select.medium {
+    ::ng-deep {
+      .ng-value * {
+        font-size: 16px !important;
+      }
+
+      .ng-has-value .ng-placeholder {
+        top: 5px !important;
+      }
+    }
+
+    &.ng-select-opened {
+      ::ng-deep .ng-placeholder {
+        top: 5px !important;
+      }
+    }
   }
 }

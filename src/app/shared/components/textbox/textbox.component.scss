@@ -18,6 +18,11 @@ app-x-icon {
   flex-direction: column;
 }
 
+app-search-icon {
+  display: flex;
+  padding-bottom: 3px;
+}
+
 app-trashcan-icon:hover {
   cursor: pointer;
 }
