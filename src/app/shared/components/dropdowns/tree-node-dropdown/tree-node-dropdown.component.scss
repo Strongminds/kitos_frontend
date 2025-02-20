@@ -16,3 +16,5 @@ ng-select {
 :host ::ng-deep .ng-select-container {
   background-color: $color-white;
 }
+
+@include ng-select-medium-styles;

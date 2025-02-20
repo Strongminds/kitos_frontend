@@ -1,0 +1,15 @@
+<app-paragraph [cropOnOverflow]="true">
+  <ng-container *ngIf="column.dataField">
+    <div>
+      <ng-container *ngFor="let item of getProperty(column.dataField) as data; let i = index">
+        <app-details-page-link
+          linkFontSize="small"
+          [itemType]="column.entityType"
+          [itemPath]="item.id"
+          [itemPathIncludesSubmodule]="column.style === 'page-link-array-with-submodules'"
+          >{{ item.value }}</app-details-page-link
+        >{{ i < data.length - 1 ? column.linkArraySeparator ?? ", " : "" }}
+      </ng-container>
+    </div>
+  </ng-container>
+</app-paragraph>
