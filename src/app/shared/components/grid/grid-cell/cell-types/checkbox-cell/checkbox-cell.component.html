@@ -1,5 +1,5 @@
 <div class="column-center-content">
-  <app-tooltip *ngIf="column.entityType !== 'it-system'" [text]="column?.tooltipFn(dataItem) ?? ''">
+  <app-tooltip *ngIf="column.entityType !== 'it-system'" [text]="getTooltipText()">
     <app-checkbox
       [value]="getProperty(column.field)"
       [disabled]="column.permissionsField ? getProperty(column.permissionsField) !== false : true"

@@ -13,4 +13,8 @@ export class CheckboxCellComponent extends BaseCellComponent {
     if (value === undefined) return;
     this.checkboxChange.emit(value);
   }
+
+  public getTooltipText(): string {
+    return this.column.tooltipFn ? this.column.tooltipFn(this.dataItem) : '';
+  }
 }
