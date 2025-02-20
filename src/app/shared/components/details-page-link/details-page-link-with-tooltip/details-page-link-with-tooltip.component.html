@@ -1,10 +1,11 @@
 <app-tooltip [text]="toolTip" class="display-in-row">
-    <a
-  class="details-page-link-{{ linkFontSize }}"
-  *ngIf="detailsPageRouterPath"
-  [routerLink]="disableRedirect ? null : detailsPageRouterPath"
-  >
-  <ng-content></ng-content>
-  </a>
+    <app-details-page-link
+    linkFontSize="small"
+    [itemType]="itemType"
+    [itemPath]="itemPath"
+    [itemPathIncludesSubmodule]="itemPathIncludesSubmodule"
+    >
+      <ng-content></ng-content>
+    </app-details-page-link>
 </app-tooltip>
 
