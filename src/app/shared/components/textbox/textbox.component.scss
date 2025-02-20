@@ -41,3 +41,7 @@ mat-form-field {
 input {
   @include medium-font-size;
 }
+
+input.medium {
+  padding-top: 3px;
+}
