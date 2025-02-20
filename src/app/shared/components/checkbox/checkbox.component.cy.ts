@@ -1,13 +1,13 @@
 import { CheckboxComponent } from './checkbox.component';
 import { SharedModule } from '../../shared.module';
 
-it('Can mount', () => {
+it('Checkbox has correct text and emits correct values', () => {
   const onChangeSpy = cy.spy().as('onChange');
   const buttonText = 'Checkbox text';
   cy.mount(CheckboxComponent, {
     componentProperties: {
-      text: buttonText, //@Input() text: string;
-      valueChange: { emit: onChangeSpy } as any, //@Output() valueChange: EventEmitter<boolean> = new EventEmitter();
+      text: buttonText, // @Input() text: string;
+      valueChange: { emit: onChangeSpy } as any, // @Output() valueChange: EventEmitter<boolean> = new EventEmitter();
     },
     imports: [SharedModule],
   });
