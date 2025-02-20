@@ -430,6 +430,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraData: yesNoIrrelevantOptionsGrid,
       hidden: true,
       persistId: 'dataProcessingAgreementConcluded',
+      itemTooltipField: 'name',
     },
     {
       field: GridFields.DataProcessingRegistrationNamesAsCsv,

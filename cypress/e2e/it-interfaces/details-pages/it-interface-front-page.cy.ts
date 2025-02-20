@@ -126,7 +126,7 @@ describe('it-system-interfaces', () => {
     cy.getByDataCy('deactivate-interface-button').should('not.exist');
   });
 
-  it.only('cannot save link with unchanged url', () => {
+  it('cannot save link with unchanged url', () => {
     setupRegularInterfaceDetails();
     cy.getByDataCy('interface-link').getByDataCy('edit-link-button').click();
 
