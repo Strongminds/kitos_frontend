@@ -285,12 +285,21 @@
                 <ng-container
                   *ngFor="let collectionItem of searchProperty(dataItem, columnConfig.dataField) as data; let i = index"
                 >
-                  <app-details-page-link
+                <app-details-page-link-with-tooltip
+                    *ngIf="columnConfig.itemTooltipField"
+                    [toolTip]="searchProperty(collectionItem, columnConfig.itemTooltipField) ?? ''"
                     linkFontSize="small"
                     [itemType]="columnConfig.entityType"
                     [itemPath]="collectionItem.id"
                     [itemPathIncludesSubmodule]="columnConfig.style === 'page-link-array-with-submodules'"
-                    [toolTip]="columnConfig.itemTooltipField ? searchProperty(collectionItem, columnConfig.itemTooltipField) : undefined"
+                    >{{ collectionItem.value }}
+                </app-details-page-link-with-tooltip>
+                  <app-details-page-link
+                    *ngIf="!columnConfig.itemTooltipField"
+                    linkFontSize="small"
+                    [itemType]="columnConfig.entityType"
+                    [itemPath]="collectionItem.id"
+                    [itemPathIncludesSubmodule]="columnConfig.style === 'page-link-array-with-submodules'"
                     >{{ collectionItem.value }}</app-details-page-link
                   >{{ i < data.length - 1 ? columnConfig.linkArraySeparator ?? ", " : "" }}
                 </ng-container>
