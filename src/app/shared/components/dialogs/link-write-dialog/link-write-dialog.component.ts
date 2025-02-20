@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Actions } from '@ngrx/effects';
-import { map, Observable } from 'rxjs';
+import { debounceTime, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
+import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 
 @Component({
   selector: 'app-link-write-dialog',
@@ -18,9 +19,12 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
     url: new FormControl<string | undefined>(undefined),
   });
 
-  constructor(private readonly dialogRef: MatDialogRef<LinkWriteDialogComponent>, private readonly actions$: Actions) {
+  public showValidationError = false;
+
+  constructor(private readonly dialogRef: MatDialogRef<LinkWriteDialogComponent>) {
     super();
   }
+
   ngOnInit(): void {
     this.subscriptions.add(
       this.url$.subscribe((url) => {
@@ -29,9 +33,15 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
         });
       })
     );
+
+    this.subscriptions.add(
+      this.urlForm.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe(() => {
+        this.showValidationError = this.isUrlEmptyOrValid() === false;
+      })
+    );
   }
 
-  onSave() {
+  public onSave() {
     const url = this.urlForm.value.url;
 
     this.submitMethod.emit(url);
@@ -47,7 +57,12 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
     );
   }
 
-  onCancel() {
+  public onCancel() {
     this.dialogRef.close();
+  }
+
+  public isUrlEmptyOrValid() {
+    const url = this.urlForm.value.url;
+    return !url || validateUrl(url);
   }
 }
