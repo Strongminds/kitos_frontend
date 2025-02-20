@@ -23,6 +23,7 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public showDescription = false;
   @Input() public clearable = true;
   @Input() public disableLoading = false;
+  @Input() public size: 'medium' | 'large' = 'large';
 
   @Input() public formGroup?: FormGroup;
   @Input() public formName?: string;

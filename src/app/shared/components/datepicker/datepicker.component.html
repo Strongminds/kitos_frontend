@@ -9,6 +9,7 @@
     [matDatepicker]="picker"
     [formControlName]="formName"
     (dateChange)="formDateInputValueChange($event)"
+    class="{{ size }}"
     (focus)="focus(true)"
     (blur)="focus(false)"
     #input
@@ -36,6 +37,7 @@
     [matDatepicker]="picker"
     [disabled]="disabled"
     [value]="value"
+    class="{{ size }}"
     (dateChange)="dateInputChanged($event)"
   />
   <mat-datepicker-toggle *ngIf="!disabled" [disableRipple]="true" matIconSuffix [for]="picker" >

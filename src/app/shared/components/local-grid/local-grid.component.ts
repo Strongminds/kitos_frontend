@@ -34,6 +34,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() columns!: GridColumn[];
   @Input() loading: boolean | null = false;
   @Input() exportToExcelName?: string | null;
+  @Input() createPermission?: boolean | null;
   @Input() modifyPermission?: boolean | null;
   @Input() deletePermission?: boolean | null;
   @Input() withOutline: boolean = false;
@@ -119,8 +120,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     this.toggleChange.emit({ value, item });
   }
 
-  public onCheckboxChange(value: boolean | undefined, item: T) {
-    if (value === undefined) return;
+  public onCheckboxChange(value: boolean, item: T) {
     this.checkboxChange.emit({ value, item });
   }
 
