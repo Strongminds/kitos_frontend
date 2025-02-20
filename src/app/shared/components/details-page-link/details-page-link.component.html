@@ -1,10 +1,9 @@
-<a
-class="details-page-link-{{ linkFontSize }}"
-*ngIf="detailsPageRouterPath"
-[routerLink]="disableRedirect ? null : detailsPageRouterPath"
->
-<ng-content></ng-content>
-</a>
-<app-content-with-tooltip *ngIf="toolTip" [description]="toolTip">
-</app-content-with-tooltip>
-
+<app-tooltip *ngIf="toolTip" [text]="toolTip">
+    <a
+  class="details-page-link-{{ linkFontSize }}"
+  *ngIf="detailsPageRouterPath"
+  [routerLink]="disableRedirect ? null : detailsPageRouterPath"
+  >
+  <ng-content></ng-content>
+  </a>
+</app-tooltip>
