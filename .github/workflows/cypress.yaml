@@ -31,3 +31,23 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}
+
+  cypress-component:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cypress Component Tests
+        uses: cypress-io/github-action@v6
+        with:
+          # Override the default command to run component tests
+          command: run-ct
+          # Optionally, if your component tests need a server, you can add start/wait-on parameters.
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}
