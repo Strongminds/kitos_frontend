@@ -662,16 +662,18 @@
       ::ng-deep .ng-placeholder {
         top: 5px !important;
       }
+    }
   }
+}
 
-  @mixin details-page-link-font-sizes {
-    .details-page-link-medium {
-      font-size: $link-font-size-medium;
-    }
-    .details-page-link-small {
-      font-size: $link-font-size-small;
-    }
-    .details-page-link-x-small {
-      font-size: $link-font-size-x-small;
-    }
+@mixin details-page-link-font-sizes {
+  .details-page-link-medium {
+    font-size: $link-font-size-medium;
   }
+  .details-page-link-small {
+    font-size: $link-font-size-small;
+  }
+  .details-page-link-x-small {
+    font-size: $link-font-size-x-small;
+  }
+}
