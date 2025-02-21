@@ -224,6 +224,16 @@
               "headless": true
             }
           }
+        },
+        "component": {
+          "builder": "@cypress/schematic:cypress",
+          "options": {
+            "configFile": "cypress-ci.config.ts",
+            "devServerTarget": "kitos-web:serve",
+            "testingType": "component",
+            "watch": false,
+            "headless": true
+          }
         }
       }
     }
