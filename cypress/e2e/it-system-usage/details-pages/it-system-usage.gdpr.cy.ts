@@ -231,7 +231,7 @@ describe('it-system-usage', () => {
     verifyLinkEditDialogAndPerformEdit();
   });
 
-  it.only('cannot save directory documentation with unchanged url', () => {
+  it('cannot save directory documentation with unchanged url', () => {
     verifyLinkTextAndPressEdit('directory-documentation-link', 'newName: newUrl');
 
     cy.get('app-edit-url-dialog').within(() => {
