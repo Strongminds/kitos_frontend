@@ -10,6 +10,7 @@ it('Emits open event clicking empty link textbox', () => {
     componentProperties: {
       title: 'Title',
       simpleLink$: of({ url: undefined, name: undefined }),
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       iconClick: { emit: onClickSpy } as any,
     },
     imports: [AppModule],
