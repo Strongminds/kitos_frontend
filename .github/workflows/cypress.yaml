@@ -45,7 +45,7 @@ jobs:
         uses: cypress-io/github-action@v6
         with:
           # Override the default command to run component tests
-          command: run-ct
+          command: yarn cypress run-ct
           # Optionally, if your component tests need a server, you can add start/wait-on parameters.
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
