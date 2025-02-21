@@ -378,7 +378,7 @@
       --font-size: 14px;
       --bottom: 2px;
       --offset: 8px;
-      --scale: calc(12 / 14);
+      --scale: calc(10 / 14);
     }
 
     &.large {
@@ -413,8 +413,8 @@
   &.medium {
     --height: 48px;
     --font-size: 14px;
-    --offset: 17px;
-    --scale: calc(12 / 14);
+    --offset: 16px;
+    --scale: calc(10 / 14);
   }
 
   &.large {
@@ -477,7 +477,7 @@
     }
 
     .k-grid-header .k-header {
-      height: 64px;
+      height: 48px;
       padding: 0px 16px;
     }
 
@@ -511,7 +511,7 @@
     }
 
     .k-grid tbody tr {
-      height: 63px !important;
+      height: 56px !important;
       position: relative;
     }
 
@@ -640,14 +640,38 @@
   }
 }
 
-@mixin details-page-link-font-sizes {
-  .details-page-link-medium {
-    font-size: $link-font-size-medium;
-  }
-  .details-page-link-small {
-    font-size: $link-font-size-small;
-  }
-  .details-page-link-x-small {
-    font-size: $link-font-size-x-small;
+@mixin medium-font-size {
+  &.medium {
+    font-size: 16px !important;
   }
 }
+
+@mixin ng-select-medium-styles {
+  ng-select.medium {
+    ::ng-deep {
+      .ng-value * {
+        font-size: 16px !important;
+      }
+
+      .ng-has-value .ng-placeholder {
+        top: 5px !important;
+      }
+    }
+
+    &.ng-select-opened {
+      ::ng-deep .ng-placeholder {
+        top: 5px !important;
+      }
+  }
+
+  @mixin details-page-link-font-sizes {
+    .details-page-link-medium {
+      font-size: $link-font-size-medium;
+    }
+    .details-page-link-small {
+      font-size: $link-font-size-small;
+    }
+    .details-page-link-x-small {
+      font-size: $link-font-size-x-small;
+    }
+  }
