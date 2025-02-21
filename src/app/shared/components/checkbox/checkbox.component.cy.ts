@@ -1,5 +1,5 @@
 import { CheckboxComponent } from './checkbox.component';
-import { SharedModule } from '../../shared.module';
+import { AppModule } from 'src/app/app.module';
 
 it('Checkbox has correct text and emits correct values', () => {
   const onChangeSpy = cy.spy().as('onChange');
@@ -9,7 +9,7 @@ it('Checkbox has correct text and emits correct values', () => {
       text: buttonText, // @Input() text: string;
       valueChange: { emit: onChangeSpy } as any, // @Output() valueChange: EventEmitter<boolean> = new EventEmitter();
     },
-    imports: [SharedModule],
+    imports: [AppModule],
   });
   cy.getByDataCy('checkbox-input').click();
   cy.get('@onChange').should('have.been.calledWith', true);
