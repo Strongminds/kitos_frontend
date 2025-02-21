@@ -19,8 +19,9 @@ import {
 import { accessModifierOptions } from 'src/app/shared/models/access-modifier.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { CheckboxChange } from 'src/app/shared/models/grid/grid-events.model';
+import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
+import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -58,6 +59,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       noFilter: true,
       hidden: false,
       style: 'checkbox',
+      entityType: 'it-system',
       permissionsField: 'CanChangeUsageStatus',
       sortable: false,
     },
@@ -259,14 +261,13 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     );
   }
 
-  public handleSystemUsageChange(event: CheckboxChange) {
-    const rowEntityUuid = event.rowEntityUuid;
-    if (!rowEntityUuid) return;
+  public handleSystemUsageChange(event: BooleanChange<ITSystem>) {
+    const systemUuid = event.item.Uuid;
 
     if (event.value === true) {
-      this.handleTakeSystemIntoUse(rowEntityUuid);
+      this.handleTakeSystemIntoUse(systemUuid);
     } else {
-      this.handleTakeSystemOutOfUse(rowEntityUuid);
+      this.handleTakeSystemOutOfUse(systemUuid);
     }
   }
 

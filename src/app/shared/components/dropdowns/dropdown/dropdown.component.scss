@@ -13,3 +13,5 @@ ng-select {
   font-size: large;
   @include input-background-white;
 }
+
+@include ng-select-medium-styles;
