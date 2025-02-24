@@ -6581,6 +6581,18 @@
         <source>Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot;</source>
         <target state="new">Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot;</target>
       </trans-unit>
+      <trans-unit id="5827469881532042511" datatype="html">
+        <source>DBS Navn</source>
+        <target state="new">DBS Navn</target>
+      </trans-unit>
+      <trans-unit id="148234676016705932" datatype="html">
+        <source>DBS Databehandler</source>
+        <target state="new">DBS Databehandler</target>
+      </trans-unit>
+      <trans-unit id="4136809415055934477" datatype="html">
+        <source>DBS Systemnavn</source>
+        <target state="new">DBS Systemnavn</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
