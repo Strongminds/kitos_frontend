@@ -215,7 +215,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     },
     {
       field: CatalogFields.DBS_SYSTEM_NAME,
-      title: $localize`DBS Systemnavn`,
+      title: $localize`DBS Navn`,
       section: this.systemSectionName,
       hidden: true,
     },

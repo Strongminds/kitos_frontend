@@ -62,7 +62,7 @@ describe('it-system-catalog', () => {
 
   it('Can show DBS fields in grid', () => {
     cy.getByDataCy('column-config-button').click();
-    cy.contains('DBS Systemnavn').click();
+    cy.contains('DBS Navn').click();
     cy.contains('DBS Databehandler').click();
     cy.getByDataCy('column-config-dialog-save-button').click();
 
