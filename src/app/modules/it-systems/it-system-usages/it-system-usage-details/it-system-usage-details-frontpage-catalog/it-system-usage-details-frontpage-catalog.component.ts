@@ -44,6 +44,8 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
       disabled: true,
     }),
     description: new FormControl({ value: '', disabled: true }),
+    dbsName: new FormControl({ value: '', disabled: true }),
+    dbsDataProcessorName: new FormControl({ value: '', disabled: true }),
   });
 
   public readonly businessTypes$ = this.store
@@ -90,6 +92,8 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             recommendedArchiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
+            dbsName: (itSystem as any).dbsName,
+            dbsDataProcessorName: (itSystem as any).dbsDataProcessor
           })
         )
     );
