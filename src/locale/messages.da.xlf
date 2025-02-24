@@ -6589,10 +6589,6 @@
         <source>DBS Databehandler</source>
         <target state="new">DBS Databehandler</target>
       </trans-unit>
-      <trans-unit id="4136809415055934477" datatype="html">
-        <source>DBS Systemnavn</source>
-        <target state="new">DBS Systemnavn</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>
