@@ -93,7 +93,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
             dbsName: (itSystem as any).dbsName,
-            dbsDataProcessorName: (itSystem as any).dbsDataProcessor
+            dbsDataProcessorName: (itSystem as any).dbsDataProcessorName,
           })
         )
     );

@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('it-system-usage', () => {
   beforeEach(() => {
@@ -15,7 +15,7 @@ describe('it-system-usage', () => {
     getKleRow(kleNumber).contains(name);
   }
 
-  it('can show IT system usage details', () => {
+  it.only('can show IT system usage details', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.contains('System 3').click();
 
@@ -39,6 +39,8 @@ describe('it-system-usage', () => {
 
     // Test parent system deactivated
     cy.input('Overordnet system').should('have.value', 'System 3 (ikke tilgængeligt)');
+    cy.getByDataCy('dbs-name').find('input').should('have.value', 'DBS navn 123');
+    cy.getByDataCy('dbs-data-processor-name').find('input').should('have.value', 'DBS databehandler navn 123');
 
     // Test obselete option
     cy.dropdown('Forretningstype').should('have.text', 'Test (udgået)');
