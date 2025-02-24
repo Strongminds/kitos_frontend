@@ -221,7 +221,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     },
     {
       field: CatalogFields.DBS_DATA_PROCESSOR_NAME,
-      title: $localize`DBS Databehandlernavn`,
+      title: $localize`DBS Databehandler`,
       section: this.systemSectionName,
       hidden: true,
     },

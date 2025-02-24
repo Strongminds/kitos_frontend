@@ -59,4 +59,14 @@ describe('it-system-catalog', () => {
     cy.wait(500);
     cy.getByDataCy('name-error').should('exist');
   });
+
+  it.only('Can show DBS fields in grid', () => {
+    cy.getByDataCy('column-config-button').click();
+    cy.contains('DBS Systemnavn').click();
+    cy.contains('DBS Databehandler').click();
+    cy.getByDataCy('column-config-dialog-save-button').click();
+
+    cy.contains('DBS navn 123');
+    cy.contains('DBS databehandler navn 123');
+  });
 });
