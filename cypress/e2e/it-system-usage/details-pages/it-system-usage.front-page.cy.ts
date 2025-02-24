@@ -15,7 +15,7 @@ describe('it-system-usage', () => {
     getKleRow(kleNumber).contains(name);
   }
 
-  it.only('can show IT system usage details', () => {
+  it('can show IT system usage details', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.contains('System 3').click();
 

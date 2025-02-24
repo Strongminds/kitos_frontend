@@ -27,7 +27,7 @@ describe('data-processing-front-page', () => {
     cy.contains('En enhed').should('exist');
   });
 
-  it.only('Can not see responsible unit dropdown, if disabled by UI customization', () => {
+  it('Can not see responsible unit dropdown, if disabled by UI customization', () => {
     cy.setup(true, 'data-processing', './shared/ui-customization/dpr-responsible-unit-disabled.json');
     cy.contains('Dpa 1').click().wait(500);
 

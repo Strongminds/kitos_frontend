@@ -60,7 +60,7 @@ describe('it-system-catalog', () => {
     cy.getByDataCy('name-error').should('exist');
   });
 
-  it.only('Can show DBS fields in grid', () => {
+  it('Can show DBS fields in grid', () => {
     cy.getByDataCy('column-config-button').click();
     cy.contains('DBS Systemnavn').click();
     cy.contains('DBS Databehandler').click();
