@@ -197,6 +197,7 @@ export * from './uIRootConfigUpdateRequestDTO';
 export * from './unitAccessRightsResponseDTO';
 export * from './unitAccessRightsWithUnitDataResponseDTO';
 export * from './updateContractRequestDTO';
+export * from './updateDBSPropertiesRequestDTO';
 export * from './updateDataProcessingRegistrationRequestDTO';
 export * from './updateExternalReferenceDataWriteRequestDTO';
 export * from './updateItInterfaceRequestDTO';

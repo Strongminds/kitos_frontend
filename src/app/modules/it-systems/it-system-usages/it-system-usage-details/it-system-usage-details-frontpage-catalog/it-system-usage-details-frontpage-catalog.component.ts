@@ -92,8 +92,8 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             recommendedArchiveDutyComment: mapRecommendedArchiveDutyComment(itSystem.recommendedArchiveDuty),
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
-            dbsName: (itSystem as any).dbsName,
-            dbsDataProcessorName: (itSystem as any).dbsDataProcessorName,
+            dbsName: itSystem.dbsName,
+            dbsDataProcessorName: itSystem.dbsDataProcessorName,
           })
         )
     );

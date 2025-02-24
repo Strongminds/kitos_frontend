@@ -9,16 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIRecipientWriteRequestDTO } from './recipientWriteRequestDTO';
 
 
-export interface APIBaseNotificationPropertiesWriteRequestDTO { 
-    /**
-     * Subject of the Notification
-     */
-    subject: string;
-    body?: string;
-    ccs?: APIRecipientWriteRequestDTO;
-    receivers: APIRecipientWriteRequestDTO;
+export interface APIUpdateDBSPropertiesRequestDTO { 
+    systemName?: string;
+    dataProcessorName?: string;
 }
 

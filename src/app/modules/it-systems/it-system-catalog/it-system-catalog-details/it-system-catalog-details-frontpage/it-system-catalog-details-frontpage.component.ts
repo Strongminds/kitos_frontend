@@ -183,8 +183,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             recommendedArchiveDutyComment: itSystem.recommendedArchiveDuty.comment,
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
-            dbsName: (itSystem as any).dbsName,
-            dbsDataProcessorName: (itSystem as any).dbsDataProcessorName,
+            dbsName: itSystem.dbsName,
+            dbsDataProcessorName:  itSystem.dbsDataProcessorName,
           });
 
           if (hasModifyPermission) {

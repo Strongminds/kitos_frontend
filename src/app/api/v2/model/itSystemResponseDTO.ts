@@ -30,6 +30,8 @@ export interface APIItSystemResponseDTO {
      */
     scope: APIItSystemResponseDTO.ScopeEnum;
     organizationContext: APIShallowOrganizationResponseDTO;
+    dbsName?: string;
+    dbsDataProcessorName?: string;
     /**
      * UUID for IT-System
      */
