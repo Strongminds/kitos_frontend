@@ -5,7 +5,6 @@ import { Store } from '@ngrx/store';
 import { first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
@@ -27,7 +26,6 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
     private frontpageComponentStore: FrontpageComponentStore,
     private store: Store,
     private actions$: Actions,
-    private confirmActionService: ConfirmActionService,
     private router: Router,
     private route: ActivatedRoute
   ) {
@@ -53,17 +51,5 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
         this.frontpageComponentStore.getText();
       })
     );
-  }
-
-  goToSSO(): void {
-    this.confirmActionService.confirmAction({
-      category: ConfirmActionCategory.Neutral,
-      onConfirm: () => {
-        window.location.href = '/LoginHandler.ashx';
-      },
-      confirmationType: 'OkCancel',
-      title: $localize`Single Sign-On (SSO)`,
-      message: $localize`Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui`,
-    });
   }
 }

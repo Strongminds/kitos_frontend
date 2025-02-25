@@ -1,4 +1,5 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component } from '@angular/core';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 
 @Component({
   selector: 'app-sso-button',
@@ -6,9 +7,17 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './sso-button.component.scss',
 })
 export class SsoButtonComponent {
-  @Output() buttonClick = new EventEmitter<void>();
+  constructor(private confirmActionService: ConfirmActionService) {}
 
-  public onButtonClick() {
-    this.buttonClick.emit();
+  goToSSO(): void {
+    this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Neutral,
+      onConfirm: () => {
+        window.location.href = '/LoginHandler.ashx';
+      },
+      confirmationType: 'OkCancel',
+      title: $localize`Single Sign-On (SSO)`,
+      message: $localize`Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui`,
+    });
   }
 }
