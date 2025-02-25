@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -21,6 +21,7 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
 
   public readonly user$ = this.store.select(selectUser);
   public readonly isAuthenticating$ = this.store.select(selectIsAuthenticating);
+  public isAuthenticated$ = this.store.select(selectUser).pipe(map((user) => !!user));
 
   constructor(
     private frontpageComponentStore: FrontpageComponentStore,

@@ -1,8 +1,10 @@
 <app-loading *ngIf="loading$ | async"></app-loading>
 
-<div class="container">
-  <div class="left">
-    <app-login-v2></app-login-v2>
+<ng-container *ngIf="(isAuthenticated$ | async) !== true">
+  <div class="container">
+    <div class="left">
+      <app-login></app-login>
+    </div>
+    <div class="right"></div>
   </div>
-  <div class="right"></div>
-</div>
+</ng-container>
