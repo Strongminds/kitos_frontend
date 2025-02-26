@@ -1,7 +1,7 @@
+@import "mixins";
+
 .center-item {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include center-items-container;
 }
 
 .title {

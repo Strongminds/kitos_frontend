@@ -31,7 +31,42 @@ app-login {
 
 .grid-container {
   display: grid;
-  grid-template-columns: auto auto;
   justify-content: center;
   align-items: center;
+}
+
+.authenticated-grid-columns {
+  grid-template-columns: auto auto auto;
+}
+
+.login-grid-columns {
+  grid-template-columns: auto auto;
+}
+
+.authenticated-frontpage {
+  height: $content-height;
+  display: flex;
+  justify-content: center;
+}
+
+.center-item {
+  @include center-items-container;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  text-wrap: wrap;
+  margin-bottom: 0px !important;
+}
+
+.info-section-container {
+  padding: 56px;
+}
+
+.info-section-max-width {
+  max-width: 580px;
 }

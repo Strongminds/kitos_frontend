@@ -6,8 +6,7 @@
       <app-login></app-login>
     </div>
     <div class="right">
-      <div class="grid-container">
-
+      <div class="grid-container login-grid-columns">
         <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
         <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
         <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
@@ -18,3 +17,29 @@
     </div>
   </div>
 </ng-container>
+<div class="authenticated-frontpage">
+  <app-standard-vertical-content-grid>
+    <app-standard-vertical-content-grid class="info-section-container">
+      <div class="center-item">
+        <h2 class="title info-section-max-width">Kitos er Kommunernes IT Overblikssystem</h2>
+      </div>
+      <div class="center-item">
+        <app-paragraph class="center-text info-section-max-width" [dimmed]="true">
+          Kitos er en open-source web-baseret løsning, der anvendes af 76 kommuner. Kitos skaber overblik over den
+          samlede kommunale IT-portefølje.
+        </app-paragraph>
+      </div>
+      <div class="center-item">
+        <app-button i18n>Læs mere om Kitos</app-button>
+      </div>
+    </app-standard-vertical-content-grid>
+    <div class="grid-container authenticated-grid-columns">
+      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
+      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
+      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
+      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
+      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
+      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
+    </div>
+  </app-standard-vertical-content-grid>
+</div>
