@@ -16,7 +16,7 @@ import { FrontpageComponentStore } from './frontpage.component-store';
 })
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;
-  public readonly text$ = this.frontpageComponentStore.text$;
+  public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$;
 
   public readonly user$ = this.store.select(selectUser);
   public readonly isAuthenticating$ = this.store.select(selectIsAuthenticating);

@@ -11,8 +11,8 @@ export class PublicMessageEffects {
   editPublicMessage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(GlobalAdminPublicMessageActions.editPublicMessages),
-      switchMap(({ request }) =>
-        this.publicMessageService.patchSinglePublicMessagesV2Patch({ body: request }).pipe(
+      switchMap(({ messageUuid, request }) =>
+        this.publicMessageService.patchSinglePublicMessagesV2Patch({ messageUuid, body: request }).pipe(
           map((response) => GlobalAdminPublicMessageActions.editPublicMessagesSuccess(response)),
           catchError(() => of(GlobalAdminPublicMessageActions.editPublicMessagesError()))
         )

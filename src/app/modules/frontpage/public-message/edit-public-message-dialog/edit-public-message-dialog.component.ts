@@ -3,7 +3,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { APIPublicMessagesRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { PublicMessageType } from 'src/app/shared/models/public-messages.model';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
@@ -47,10 +46,10 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
 
   public onSave(): void {
     const request = this.getRequest();
-    this.store.dispatch(GlobalAdminPublicMessageActions.editPublicMessages(request));
+    this.store.dispatch(GlobalAdminPublicMessageActions.editPublicMessages('', request));
   }
 
-  private getRequest(): APIPublicMessagesRequestDTO {
+  private getRequest(): object {
     const newMessage = this.formGroup.value.message ?? undefined;
     switch (this.type) {
       case 'about':

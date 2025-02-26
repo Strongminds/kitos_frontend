@@ -9,16 +9,22 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIRecipientWriteRequestDTO } from './recipientWriteRequestDTO';
 
 
-export interface APIBaseNotificationPropertiesWriteRequestDTO { 
-    /**
-     * Subject of the Notification
-     */
-    subject: string;
-    body?: string;
-    ccs?: APIRecipientWriteRequestDTO;
-    receivers: APIRecipientWriteRequestDTO;
+export interface APIPublicMessageResponseDTO { 
+    uuid?: string;
+    title?: string;
+    longDescription?: string;
+    shortDescription?: string;
+    status?: APIPublicMessageResponseDTO.StatusEnum;
+    link?: string;
 }
+export namespace APIPublicMessageResponseDTO {
+    export type StatusEnum = 'Active' | 'Inactive';
+    export const StatusEnum = {
+        Active: 'Active' as StatusEnum,
+        Inactive: 'Inactive' as StatusEnum
+    };
+}
+
 

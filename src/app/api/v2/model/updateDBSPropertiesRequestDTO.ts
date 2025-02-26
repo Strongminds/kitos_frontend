@@ -11,11 +11,8 @@
  */
 
 
-export interface APIPublicMessagesRequestDTO { 
-    about?: string;
-    guides?: string;
-    statusMessages?: string;
-    misc?: string;
-    contactInfo?: string;
+export interface APIUpdateDBSPropertiesRequestDTO { 
+    systemName?: string;
+    dataProcessorName?: string;
 }
 
