@@ -214,9 +214,12 @@ function getDataProcessingRegistrationsConcluded(
     (registration: {
       DataProcessingRegistrationUuid: string;
       IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
+      DataProcessingRegistrationName: string;
     }) => ({
       id: registration.DataProcessingRegistrationUuid,
       value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name,
+      name: registration.DataProcessingRegistrationName,
+
     })
   ).filter((r: { value: string }) => r.value !== undefined);
 }

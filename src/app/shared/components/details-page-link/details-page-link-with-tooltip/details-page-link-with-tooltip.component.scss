@@ -4,3 +4,7 @@
 :host {
   @include details-page-link-font-sizes;
 }
+
+.display-in-row {
+  display: inline-block;
+}

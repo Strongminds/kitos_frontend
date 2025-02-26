@@ -14,6 +14,11 @@ export class BaseCellComponent extends BaseComponent {
   //Pipes are not allowed in method calls, so we need to use a getter method
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getProperty(propertyName: string): any {
-    return this.dataItem[propertyName];
+    return this.getPropertyFromObject(this.dataItem, propertyName);
+  }
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  getPropertyFromObject(object: any, propertyName: string): any {
+    return object[propertyName];
   }
 }
