@@ -9,14 +9,12 @@ import { EditPublicMessageDialogComponent } from './public-message/edit-public-m
 import { ResetPasswordTextLinkComponent } from './reset-password-text-link/reset-password-text-link.component';
 import { SendPasswordResetRequestComponent } from './send-password-reset-request/send-password-reset-request.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
-import { LoginV2Component } from './login-v2/login-v2.component';
 import { SsoButtonComponent } from './sso-button/sso-button.component';
 
 @NgModule({
   declarations: [
     FrontpageComponent,
     LoginComponent,
-    LoginV2Component,
     SsoButtonComponent,
     PublicMessageComponent,
     EditPublicMessageDialogComponent,
