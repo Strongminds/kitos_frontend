@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { EditPublicMessageDialogComponent } from './edit-public-message-dialog/edit-public-message-dialog.component';
 import { PublicMessage } from 'src/app/shared/models/public-message.model';
+import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 
 @Component({
   selector: 'app-public-message',
@@ -10,6 +11,8 @@ import { PublicMessage } from 'src/app/shared/models/public-message.model';
 })
 export class PublicMessageComponent {
   @Input() publicMessage!: PublicMessage;
+
+  public readonly statusDisplayType = BooleanValueDisplayType.NormalUnstable;
 
   constructor(private dialog: MatDialog) {}
 

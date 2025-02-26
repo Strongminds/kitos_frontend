@@ -27,6 +27,7 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
     uuid: '',
     title: 'Vejledninger',
     shortDescription: 'Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.',
+    status: true,
   };
 
   constructor(

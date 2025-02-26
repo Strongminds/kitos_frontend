@@ -9,15 +9,37 @@ describe('PublicMessageComponent', () => {
     shortDescription: 'This is a short description',
   };
 
-  it('Can see title and shortdescription', () => {
-    cy.mount(PublicMessageComponent, {
-      componentProperties: {
-        publicMessage: examplePublicMessage,
-      },
-      imports: [FrontpageModule],
-    });
+  it('Can see title and short description', () => {
+    mountComponent(examplePublicMessage);
 
     cy.contains(examplePublicMessage.title as string);
     cy.contains(examplePublicMessage.shortDescription as string);
   });
+
+  it('Has active status chip when active', () => {
+    mountComponent({ ...examplePublicMessage, status: true });
+
+    cy.get('app-status-chip').contains('Normal drift');
+  });
+
+  it('Has inactive status chip when not active', () => {
+    mountComponent({ ...examplePublicMessage, status: false });
+
+    cy.get('app-status-chip').contains('Ustabil drift');
+  });
+
+  it('Has no status chip when status is undefined', () => {
+    mountComponent(examplePublicMessage);
+
+    cy.get('app-chip').should('not.exist');
+  });
 });
+
+function mountComponent(publicMessage: PublicMessage) {
+  cy.mount(PublicMessageComponent, {
+    componentProperties: {
+      publicMessage,
+    },
+    imports: [FrontpageModule],
+  });
+}
