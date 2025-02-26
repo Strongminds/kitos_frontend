@@ -31,6 +31,8 @@ export interface ITSystem {
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
   Usages: IdentityNamePair[];
+  DbsName?: string;
+  DbsDataProcessorName?: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -72,5 +74,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     BelongsTo: { Name: value.BelongsTo?.Name },
     BusinessType: value.BusinessType,
     Usages: mappedUsages,
+    DbsName: value.DBSName,
+    DbsDataProcessorName: value.DBSDataProcessorName,
   };
 };

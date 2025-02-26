@@ -71,6 +71,7 @@ api/v2ItInterfaceInterfaceDataType.service.ts
 api/v2ItInterfaceInterfaceType.service.ts
 api/v2ItSystem.service.ts
 api/v2ItSystemBusinessType.service.ts
+api/v2ItSystemDBS.service.ts
 api/v2ItSystemGlobalArchiveLocationsInternalINTERNAL.service.ts
 api/v2ItSystemGlobalArchiveTestLocationsInternalINTERNAL.service.ts
 api/v2ItSystemGlobalArchiveTypesInternalINTERNAL.service.ts
@@ -325,6 +326,7 @@ model/uIRootConfigUpdateRequestDTO.ts
 model/unitAccessRightsResponseDTO.ts
 model/unitAccessRightsWithUnitDataResponseDTO.ts
 model/updateContractRequestDTO.ts
+model/updateDBSPropertiesRequestDTO.ts
 model/updateDataProcessingRegistrationRequestDTO.ts
 model/updateExternalReferenceDataWriteRequestDTO.ts
 model/updateItInterfaceRequestDTO.ts

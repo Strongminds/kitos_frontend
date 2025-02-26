@@ -83,6 +83,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
       disabled: true,
     }),
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    dbsName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    dbsDataProcessorName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly nationalArchivesText = ARCHIVE_TEXT;
@@ -181,6 +183,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             recommendedArchiveDutyComment: itSystem.recommendedArchiveDuty.comment,
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
+            dbsName: itSystem.dbsName,
+            dbsDataProcessorName:  itSystem.dbsDataProcessorName,
           });
 
           if (hasModifyPermission) {
@@ -204,6 +208,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           //Uuids should always be disabled
           this.itSystemFrontpageFormGroup.controls.uuid.disable();
           this.itSystemFrontpageFormGroup.controls.externalUuid.disable();
+          this.itSystemFrontpageFormGroup.controls.dbsName.disable();
+          this.itSystemFrontpageFormGroup.controls.dbsDataProcessorName.disable();
         })
     );
   }

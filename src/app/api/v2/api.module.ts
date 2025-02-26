@@ -70,6 +70,7 @@ import { APIV2ItInterfaceInterfaceDataTypeService } from './api/v2ItInterfaceInt
 import { APIV2ItInterfaceInterfaceTypeService } from './api/v2ItInterfaceInterfaceType.service';
 import { APIV2ItSystemService } from './api/v2ItSystem.service';
 import { APIV2ItSystemBusinessTypeService } from './api/v2ItSystemBusinessType.service';
+import { APIV2ItSystemDBSService } from './api/v2ItSystemDBS.service';
 import { APIV2ItSystemGlobalArchiveLocationsInternalINTERNALService } from './api/v2ItSystemGlobalArchiveLocationsInternalINTERNAL.service';
 import { APIV2ItSystemGlobalArchiveTestLocationsInternalINTERNALService } from './api/v2ItSystemGlobalArchiveTestLocationsInternalINTERNAL.service';
 import { APIV2ItSystemGlobalArchiveTypesInternalINTERNALService } from './api/v2ItSystemGlobalArchiveTypesInternalINTERNAL.service';
