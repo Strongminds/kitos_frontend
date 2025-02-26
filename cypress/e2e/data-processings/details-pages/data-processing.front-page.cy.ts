@@ -22,12 +22,13 @@ describe('data-processing-front-page', () => {
   it('Can show responsible unit on startup', () => {
     const responsibleUnit = { name: 'En enhed', uuid: '0c2c1b3b-0b1b-4b3b-8b3b-0b1b3b0b1b3b' };
     cy.intercept('api/v2/organizations/*/organization-units?pageSize=*', { body: [responsibleUnit] });
+    cy.setup(true, 'data-processing');
     cy.contains('Dpa 1').click();
 
     cy.contains('En enhed').should('exist');
   });
 
-  it.only('Can not see responsible unit dropdown, if disabled by UI customization', () => {
+  it('Can not see responsible unit dropdown, if disabled by UI customization', () => {
     cy.setup(true, 'data-processing', './shared/ui-customization/dpr-responsible-unit-disabled.json');
     cy.contains('Dpa 1').click().wait(500);
 
