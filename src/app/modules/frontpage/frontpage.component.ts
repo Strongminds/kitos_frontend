@@ -9,6 +9,7 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
+import { PublicMessage } from 'src/app/shared/models/public-message.model';
 
 @Component({
   templateUrl: 'frontpage.component.html',
@@ -21,6 +22,12 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly user$ = this.store.select(selectUser);
   public readonly isAuthenticating$ = this.store.select(selectIsAuthenticating);
   public isAuthenticated$ = this.store.select(selectUser).pipe(map((user) => !!user));
+
+  public readonly temp: PublicMessage = {
+    uuid: '',
+    title: 'Vejledninger',
+    shortDescription: 'Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.',
+  };
 
   constructor(
     private frontpageComponentStore: FrontpageComponentStore,
