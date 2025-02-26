@@ -8,6 +8,7 @@ export enum BooleanValueDisplayType {
   ActiveInactive = 'active-inactive',
   ValidInvalid = 'valid-invalid',
   AvailableNotAvailable = 'available-not-available',
+  NormalUnstable = 'normal-unstable',
 }
 
 @Component({
@@ -67,6 +68,10 @@ export class StatusChipComponent implements OnInit {
       case BooleanValueDisplayType.AvailableNotAvailable:
         this.trueString = $localize`Tilgængelig`;
         this.falseString = $localize`Ikke tilgængelig`;
+        break;
+      case BooleanValueDisplayType.NormalUnstable:
+        this.trueString = $localize`Normal drift`;
+        this.falseString = $localize`Ustabil drift`;
         break;
       default:
         console.error('Invalid value display type');

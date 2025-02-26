@@ -434,15 +434,11 @@
 
   .loading-container {
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-items-container;
   }
 
   .items-center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-items-container;
   }
 
   :host ::ng-deep {
@@ -605,19 +601,15 @@
   }
 
   .action-buttons-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include center-items-container;
     gap: 8px;
   }
 }
 
 @mixin dialog-footer-no-padding() {
   .dialog-footer {
+    @include center-items-container;
     background-color: $color-white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     width: 100%;
     box-sizing: border-box;
     position: sticky;
@@ -676,4 +668,10 @@
   .details-page-link-x-small {
     font-size: $link-font-size-x-small;
   }
+}
+
+@mixin center-items-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

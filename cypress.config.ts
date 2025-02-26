@@ -1,9 +1,9 @@
-import { defineConfig } from "cypress";
+import { defineConfig } from 'cypress';
 
 export default defineConfig({
   e2e: {
-    projectId: "gxw2cv",
-    baseUrl: "http://localhost:4200",
+    projectId: 'gxw2cv',
+    baseUrl: 'http://localhost:4200',
     video: false,
     viewportWidth: 1440,
     viewportHeight: 1000,
@@ -12,9 +12,11 @@ export default defineConfig({
 
   component: {
     devServer: {
-      framework: "angular",
-      bundler: "webpack",
+      framework: 'angular',
+      bundler: 'webpack',
     },
-    specPattern: "**/*.cy.ts",
+    viewportWidth: 1440,
+    viewportHeight: 1000,
+    specPattern: '**/*.cy.ts',
   },
 });

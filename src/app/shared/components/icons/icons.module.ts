@@ -62,6 +62,7 @@ import { XIconComponent } from './x-icon.component';
 import { ReloadIconComponent } from './reload-icon.component';
 import { DiskIconComponent } from './disk-icon.component';
 import { MoreHorizontalWarningIconComponent } from './more-horizontal-warning-icon.component';
+import { ExternalLinkIconComponent } from './external-link-icon.component';
 
 @NgModule({
   imports: [],
@@ -129,6 +130,7 @@ import { MoreHorizontalWarningIconComponent } from './more-horizontal-warning-ic
     DiskIconComponent,
     MoreHorizontalWarningIconComponent,
     ArrowRightIconComponent,
+    ExternalLinkIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -194,6 +196,7 @@ import { MoreHorizontalWarningIconComponent } from './more-horizontal-warning-ic
     DiskIconComponent,
     MoreHorizontalWarningIconComponent,
     ArrowRightIconComponent,
+    ExternalLinkIconComponent,
   ],
   providers: [],
 })
