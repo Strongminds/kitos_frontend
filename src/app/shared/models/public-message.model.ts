@@ -1,4 +1,4 @@
-import { APIPublicMessageRequestDTO, APIPublicMessageResponseDTO } from 'src/app/api/v2';
+import { APIPublicMessageResponseDTO } from 'src/app/api/v2';
 import { HasUuid } from './has-uuid';
 
 export interface PublicMessage extends HasUuid {

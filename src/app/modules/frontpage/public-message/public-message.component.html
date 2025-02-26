@@ -1,7 +1,7 @@
 <app-card>
-  <div class="top-container">
+  <div (click)="onEdit()" class="top-container">
     <div class="icon-container">
-      <app-clipboard-icon></app-clipboard-icon>
+      <app-icon [iconType]="iconType"></app-icon>
     </div>
 
     <div class="link-container">

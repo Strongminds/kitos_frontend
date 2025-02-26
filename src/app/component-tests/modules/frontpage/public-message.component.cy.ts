@@ -9,11 +9,12 @@ describe('PublicMessageComponent', () => {
     shortDescription: 'This is a short description',
   };
 
-  it('Can see title and short description', () => {
+  it('Can see title, short description and icon', () => {
     mountComponent(examplePublicMessage);
 
     cy.contains(examplePublicMessage.title!);
     cy.contains(examplePublicMessage.shortDescription!);
+    cy.get('app-document-icon').should('exist');
   });
 
   it('Has active status chip when active', () => {
@@ -39,6 +40,7 @@ function mountComponent(publicMessage: PublicMessage) {
   cy.mount(PublicMessageComponent, {
     componentProperties: {
       publicMessage,
+      iconType: 'document',
     },
     imports: [FrontpageModule],
   });
