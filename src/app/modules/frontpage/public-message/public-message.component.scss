@@ -5,7 +5,7 @@
   display: flex;
   flex-direction: column;
   max-width: 340px;
-  margin: 16px;
+  width: fit-content;
 }
 
 .top-container {
@@ -30,4 +30,8 @@
 
 .padding {
   padding: 4px;
+}
+
+app-card {
+  margin: 12px;
 }
