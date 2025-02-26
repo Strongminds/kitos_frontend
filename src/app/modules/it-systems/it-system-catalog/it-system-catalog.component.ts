@@ -213,6 +213,18 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: ARCHIVE_SECTION_NAME,
       hidden: true,
     },
+    {
+      field: CatalogFields.DBS_SYSTEM_NAME,
+      title: $localize`DBS Navn`,
+      section: this.systemSectionName,
+      hidden: true,
+    },
+    {
+      field: CatalogFields.DBS_DATA_PROCESSOR_NAME,
+      title: $localize`DBS Databehandler`,
+      section: this.systemSectionName,
+      hidden: true,
+    },
   ];
 
   constructor(

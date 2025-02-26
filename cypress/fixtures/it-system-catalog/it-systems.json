@@ -205,7 +205,9 @@
         "Name": "Automatisk oprettet testbruger",
         "LastName": "(GlobalAdmin)"
       },
-      "Reference": null
+      "Reference": null,
+      "DBSName": "DBS navn 123",
+      "DBSDataProcessorName": "DBS databehandler navn 123"
     }
   ]
 }

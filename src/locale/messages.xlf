@@ -4993,6 +4993,12 @@
       <trans-unit id="8066999230194125800" datatype="html">
         <source>Webadressen er ugyldig. Sørg for, at den begynder med &quot;https://&quot;</source>
       </trans-unit>
+      <trans-unit id="148234676016705932" datatype="html">
+        <source>DBS Databehandler</source>
+      </trans-unit>
+      <trans-unit id="5827469881532042511" datatype="html">
+        <source>DBS Navn</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

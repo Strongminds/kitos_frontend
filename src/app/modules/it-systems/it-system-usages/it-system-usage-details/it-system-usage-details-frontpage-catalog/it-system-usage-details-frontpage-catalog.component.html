@@ -77,6 +77,16 @@
         [reference]="reference"
       ></app-external-reference>
     </app-contentbox>
+    <app-textbox text="DBS Navn" [formGroup]="itSystemInformationForm" formName="dbsName" data-cy="dbs-name" i18n-text>
+    </app-textbox>
+    <app-textbox
+      text="DBS Databehandler"
+      [formGroup]="itSystemInformationForm"
+      formName="dbsDataProcessorName"
+      data-cy="dbs-data-processor-name"
+      i18n-text
+    >
+    </app-textbox>
     <app-textarea
       class="notes"
       text="Beskrivelse"
