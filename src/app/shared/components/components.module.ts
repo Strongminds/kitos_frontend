@@ -130,6 +130,7 @@ import '@progress/kendo-angular-intl/locales/da/all';
 import { AccordionHeaderComponent } from './accordion-header/accordion-header.component';
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
+import { DetailsPageLinkWithTooltipComponent } from './details-page-link/details-page-link-with-tooltip/details-page-link-with-tooltip.component';
 import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
 import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
@@ -149,6 +150,7 @@ import { GridUsagesDialogComponent } from './grid/it-system-usage-column/grid-us
 import { GridUsagesDropdownDialogComponent } from './grid/it-system-usage-column/grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
 import { UsageProxyCheckboxComponent } from './grid/usage-proxy-checkbox/usage-proxy-checkbox.component';
 import { IconComponent } from './icon/icon.component';
+import { ReadonlyLinkTextboxComponent } from './link-textbox/readonly-link-textbox/readonly-link-textbox.component';
 import { LocalAdminColumnConfigButtonComponent } from './local-admin-column-config-button/local-admin-column-config-button.component';
 import { LocalGridComponent } from './local-grid/local-grid.component';
 import { ToggleButtonComponent } from './local-grid/toggle-button/toggle-button.component';
@@ -167,7 +169,6 @@ import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { ReadonlyLinkTextboxComponent } from './link-textbox/readonly-link-textbox/readonly-link-textbox.component';
 import { TextCellComponent } from './grid/grid-cell/cell-types/text-cell/text-cell.component';
 import { StatusCellComponent } from './grid/grid-cell/cell-types/status-cell/status-cell.component';
 import { ThousandSeperatorCellComponent } from './grid/grid-cell/cell-types/thousand-seperator-cell/thousand-seperator-cell.component';
@@ -341,6 +342,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     PageLinkArrayCellComponent,
     UuidToNameCellComponent,
     ActionButtonsCellComponent,
+    DetailsPageLinkWithTooltipComponent,
   ],
   imports: [
     CommonModule,
@@ -486,6 +488,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     GridUsagesConsequencesDialogComponent,
     UsageMigrationConsequencesTableComponent,
     SectionComponent,
+    DetailsPageLinkWithTooltipComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
