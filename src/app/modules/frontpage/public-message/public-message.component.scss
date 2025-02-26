@@ -6,26 +6,28 @@
   flex-direction: column;
   max-width: 340px;
   margin: 16px;
-  position: relative;
+}
+
+.top-container {
+  overflow: hidden;
 }
 
 .icon-container {
+  @include center-items-container;
   background-color: $color-primary-20;
   width: 40px;
   height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: $radius-large;
   margin-bottom: $padding-medium-large;
+  float: left;
+}
+
+.link-container {
+  @include center-items-container;
+  gap: 8px;
+  float: right;
 }
 
 .padding {
   padding: 4px;
-}
-
-.top-right-corner {
-  position: absolute;
-  top: 24px;
-  right: 24px;
 }

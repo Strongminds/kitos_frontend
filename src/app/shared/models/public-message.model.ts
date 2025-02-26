@@ -5,10 +5,22 @@ export interface PublicMessage extends HasUuid {
   title?: string;
   shortDescription?: string;
   longDescription?: string;
-  status?: APIPublicMessageRequestDTO.StatusEnum;
+  status?: boolean;
   link?: string;
 }
 
 export function adaptPublicMessage(dto: APIPublicMessageResponseDTO): PublicMessage {
-  return { ...dto, uuid: dto.uuid! };
+  return { ...dto, uuid: dto.uuid!, status: adaptStatusType(dto.status) };
+}
+
+function adaptStatusType(status?: APIPublicMessageResponseDTO.StatusEnum): boolean | undefined {
+  if (!status) return undefined;
+  switch (status) {
+    case APIPublicMessageResponseDTO.StatusEnum.Active:
+      return true;
+    case APIPublicMessageResponseDTO.StatusEnum.Inactive:
+      return false;
+    default:
+      throw new Error(`Unknown status type: ${status}`);
+  }
 }

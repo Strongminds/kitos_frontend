@@ -1,10 +1,13 @@
 <app-card>
-  <div class="icon-container">
-    <app-clipboard-icon></app-clipboard-icon>
-  </div>
+  <div class="top-container">
+    <div class="icon-container">
+      <app-clipboard-icon></app-clipboard-icon>
+    </div>
 
-  <div class="top-right-corner">
-    <app-external-link-icon></app-external-link-icon>
+    <div class="link-container">
+      <app-status-chip [value]="publicMessage.status" type="it-system"></app-status-chip>
+      <app-external-link-icon></app-external-link-icon>
+    </div>
   </div>
 
   <app-paragraph paragraphSize="large" [bold]="true"> {{ publicMessage.title }}</app-paragraph>
