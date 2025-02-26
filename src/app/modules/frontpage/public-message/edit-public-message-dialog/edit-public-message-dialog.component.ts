@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { PublicMessageType } from 'src/app/shared/models/public-messages.model';
+import { PublicMessage } from 'src/app/shared/models/public-message.model';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 
 @Component({
@@ -13,11 +13,12 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
   styleUrl: './edit-public-message-dialog.component.scss',
 })
 export class EditPublicMessageDialogComponent extends BaseComponent implements OnInit {
-  @Input() public message: string | undefined;
-  @Input() public type!: PublicMessageType;
+  @Input() publicMessage!: PublicMessage;
 
   public formGroup = new FormGroup({
-    message: new FormControl<string | undefined>(undefined),
+    title: new FormControl<string | undefined>(undefined),
+    shortDescription: new FormControl<string | undefined>(undefined),
+    longDescription: new FormControl<string | undefined>(undefined),
   });
 
   constructor(
@@ -29,9 +30,6 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   }
 
   ngOnInit(): void {
-    this.formGroup.patchValue({
-      message: this.message,
-    });
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(GlobalAdminPublicMessageActions.editPublicMessagesSuccess)).subscribe(() => {
@@ -45,25 +43,6 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   }
 
   public onSave(): void {
-    const request = this.getRequest();
-    this.store.dispatch(GlobalAdminPublicMessageActions.editPublicMessages('', request));
-  }
-
-  private getRequest(): object {
-    const newMessage = this.formGroup.value.message ?? undefined;
-    switch (this.type) {
-      case 'about':
-        return { about: newMessage };
-      case 'contact-info':
-        return { contactInfo: newMessage };
-      case 'guides':
-        return { guides: newMessage };
-      case 'status-messages':
-        return { statusMessages: newMessage };
-      case 'misc':
-        return { misc: newMessage };
-      default:
-        throw new Error('Invalid message type');
-    }
+    this.store.dispatch(GlobalAdminPublicMessageActions.editPublicMessages('', {}));
   }
 }

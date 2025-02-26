@@ -28,6 +28,7 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
     title: 'Vejledninger',
     shortDescription: 'Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.',
     status: true,
+    longDescription: '<h2>OBS: Dette er et testmilj&oslash; for os2kitos</h2>',
   };
 
   constructor(

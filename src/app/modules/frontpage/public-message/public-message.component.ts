@@ -4,6 +4,7 @@ import { EditPublicMessageDialogComponent } from './edit-public-message-dialog/e
 import { PublicMessage } from 'src/app/shared/models/public-message.model';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { IconType } from 'src/app/shared/models/icon-type';
+import { PublicMessageDialogComponent } from './public-message-dialog/public-message-dialog.component';
 
 @Component({
   selector: 'app-public-message',
@@ -19,6 +20,7 @@ export class PublicMessageComponent {
   constructor(private dialog: MatDialog) {}
 
   public onEdit(): void {
-    const dialogRef = this.dialog.open(EditPublicMessageDialogComponent);
+    const dialogRef = this.dialog.open(PublicMessageDialogComponent);
+    dialogRef.componentInstance.publicMessage = this.publicMessage;
   }
 }
