@@ -3,6 +3,11 @@
     <app-clipboard-icon></app-clipboard-icon>
   </div>
 
+  <div class="top-right-corner">
+    <app-external-link-icon></app-external-link-icon>
+  </div>
+
   <app-paragraph paragraphSize="large" [bold]="true"> {{ publicMessage.title }}</app-paragraph>
+  <div class="padding"></div>
   <app-paragraph [dimmed]="true" paragraphSize="medium"> {{ publicMessage.shortDescription }}</app-paragraph>
 </app-card>

@@ -5,6 +5,8 @@
   display: flex;
   flex-direction: column;
   max-width: 340px;
+  margin: 16px;
+  position: relative;
 }
 
 .icon-container {
@@ -15,4 +17,15 @@
   align-items: center;
   justify-content: center;
   border-radius: $radius-large;
+  margin-bottom: $padding-medium-large;
+}
+
+.padding {
+  padding: 4px;
+}
+
+.top-right-corner {
+  position: absolute;
+  top: 24px;
+  right: 24px;
 }
