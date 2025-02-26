@@ -12,8 +12,8 @@ describe('PublicMessageComponent', () => {
   it('Can see title and short description', () => {
     mountComponent(examplePublicMessage);
 
-    cy.contains(examplePublicMessage.title as string);
-    cy.contains(examplePublicMessage.shortDescription as string);
+    cy.contains(examplePublicMessage.title!);
+    cy.contains(examplePublicMessage.shortDescription!);
   });
 
   it('Has active status chip when active', () => {
