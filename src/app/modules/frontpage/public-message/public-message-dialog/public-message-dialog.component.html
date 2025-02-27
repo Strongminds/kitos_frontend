@@ -1,7 +1,7 @@
-<app-dialog [title]="publicMessage.title">
+<app-dialog *ngIf="publicMessage$ | async as publicMessage" [title]="publicMessage.title">
   <p [innerHTML]="publicMessage.longDescription"></p>
 
   <app-dialog-actions *ngIf="(isGlobalAdmin$ | async) === true">
-    <app-button (buttonClick)="openEditDialog()" i18n> Rediger </app-button>
+    <app-button (buttonClick)="openEditDialog(publicMessage)" i18n> Rediger </app-button>
   </app-dialog-actions>
 </app-dialog>

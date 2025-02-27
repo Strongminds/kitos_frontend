@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, model, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -9,7 +9,9 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
-import { PublicMessage } from 'src/app/shared/models/public-message.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { PublicMessageConfig } from './public-message/public-message.component';
+import { IconType } from '@progress/kendo-angular-icons';
 
 @Component({
   templateUrl: 'frontpage.component.html',
@@ -17,19 +19,47 @@ import { PublicMessage } from 'src/app/shared/models/public-message.model';
 })
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;
-  public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$;
+  public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$.pipe(
+    filterNullish(),
+    map((messages) => messages?.slice(0, 6))
+  );
+
+  public readonly messageConfigs: PublicMessageConfig[] = [
+    {
+      iconType: 'document',
+      mode: 'normal',
+      index: 0,
+    },
+    {
+      iconType: 'document',
+      mode: 'normal',
+      index: 1,
+    },
+    {
+      iconType: 'document',
+      mode: 'normal',
+      index: 2,
+    },
+    {
+      iconType: 'document',
+      mode: 'normal',
+      index: 3,
+    },
+    {
+      iconType: 'document',
+      mode: 'normal',
+      index: 4,
+    },
+    {
+      iconType: 'document',
+      mode: 'normal',
+      index: 5,
+    },
+  ];
 
   public readonly user$ = this.store.select(selectUser);
   public readonly isAuthenticating$ = this.store.select(selectIsAuthenticating);
   public isAuthenticated$ = this.store.select(selectUser).pipe(map((user) => !!user));
-
-  public readonly temp: PublicMessage = {
-    uuid: '',
-    title: 'Vejledninger',
-    shortDescription: 'Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.',
-    status: true,
-    longDescription: '<h2>OBS: Dette er et testmilj&oslash; for os2kitos</h2>',
-  };
 
   constructor(
     private frontpageComponentStore: FrontpageComponentStore,

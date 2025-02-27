@@ -7,12 +7,12 @@
     </div>
     <div class="right">
       <div class="grid-container login-grid-columns">
-        <app-public-message mode="compact" [publicMessage]="temp" iconType="document"></app-public-message>
-        <app-public-message mode="compact" [publicMessage]="temp" iconType="document"></app-public-message>
-        <app-public-message mode="compact" [publicMessage]="temp" iconType="document"></app-public-message>
-        <app-public-message mode="compact" [publicMessage]="temp" iconType="document"></app-public-message>
-        <app-public-message mode="compact" [publicMessage]="temp" iconType="document"></app-public-message>
-        <app-public-message mode="compact" [publicMessage]="temp" iconType="document"></app-public-message>
+        <app-public-message
+          *ngFor="let config of messageConfigs"
+          mode="compact"
+          [config]="config"
+          iconType="document"
+        ></app-public-message>
       </div>
     </div>
   </div>
@@ -34,12 +34,12 @@
       </div>
     </app-standard-vertical-content-grid>
     <div class="grid-container authenticated-grid-columns">
-      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
-      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
-      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
-      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
-      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
-      <app-public-message [publicMessage]="temp" iconType="document"></app-public-message>
+      <app-public-message
+        *ngFor="let config of messageConfigs"
+        mode="compact"
+        [config]="config"
+        iconType="document"
+      ></app-public-message>
     </div>
   </app-standard-vertical-content-grid>
 </div>
