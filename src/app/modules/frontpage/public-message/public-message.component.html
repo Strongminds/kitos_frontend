@@ -2,7 +2,7 @@
   *ngIf="publicMessage$ | async as publicMessage"
   [ngStyle]="{ 'min-height': mode === 'compact' ? '171px' : '150px' }"
 >
-  <div (click)="onEdit()" class="top-container">
+  <div (click)="onEdit()" class="top-container" data-cy="open-public-message">
     <div class="icon-container">
       <app-icon [iconType]="config.iconType"></app-icon>
     </div>

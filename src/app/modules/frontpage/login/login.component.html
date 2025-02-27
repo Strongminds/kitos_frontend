@@ -23,7 +23,7 @@
     ></app-textbox>
     <app-checkbox labelPosition="after" [formGroup]="loginForm" formName="remember" text="Log mig ikke ud">
     </app-checkbox>
-    <app-button type="submit" [disabled]="!loginForm.valid" i18n> Log ind</app-button>
+    <app-button type="submit" [disabled]="!loginForm.valid" data-cy="login-button" i18n> Log ind</app-button>
     <app-reset-password-text-link class="center-item"></app-reset-password-text-link>
   </app-standard-vertical-content-grid>
 </form>

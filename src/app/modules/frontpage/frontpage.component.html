@@ -1,22 +1,20 @@
 <app-loading *ngIf="loading$ | async"></app-loading>
 
-<ng-container *ngIf="(isAuthenticated$ | async) !== true">
-  <div class="container">
-    <div class="left">
-      <div (click)="goToKitosPage()" class="top-left-corner">
-        <app-help-icon></app-help-icon>
-        <app-paragraph [bold]="true"> Hvad er Kitos?</app-paragraph>
-      </div>
-      <app-login> </app-login>
+<div *ngIf="(isAuthenticated$ | async) !== true" class="container">
+  <div class="left">
+    <div (click)="goToKitosPage()" class="top-left-corner">
+      <app-help-icon></app-help-icon>
+      <app-paragraph [bold]="true"> Hvad er Kitos?</app-paragraph>
     </div>
-    <div class="right">
-      <div class="grid-container login-grid-columns">
-        <app-public-message *ngFor="let config of messageConfigs" mode="compact" [config]="config"></app-public-message>
-      </div>
+    <app-login> </app-login>
+  </div>
+  <div class="right">
+    <div class="grid-container login-grid-columns">
+      <app-public-message *ngFor="let config of messageConfigs" mode="compact" [config]="config"></app-public-message>
     </div>
   </div>
-</ng-container>
-<div class="authenticated-frontpage">
+</div>
+<div *ngIf="(isAuthenticated$ | async) === true" class="authenticated-frontpage">
   <app-standard-vertical-content-grid>
     <app-standard-vertical-content-grid class="info-section-container">
       <div class="center-item">

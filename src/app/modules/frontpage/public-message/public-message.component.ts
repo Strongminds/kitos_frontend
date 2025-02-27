@@ -32,7 +32,6 @@ export class PublicMessageComponent implements OnInit {
   constructor(private dialog: MatDialog, private readonly componentStore: FrontpageComponentStore) {}
 
   public ngOnInit(): void {
-    this.componentStore.getText();
     this.publicMessage$ = this.componentStore.publicMessages$.pipe(
       filterNullish(),
       map((messages) => messages[this.config.index])
