@@ -8,7 +8,6 @@ import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
 import { map, Observable } from 'rxjs';
 import { FrontpageComponentStore } from '../frontpage.component-store';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { debugPipe } from 'src/app/shared/helpers/observable-helpers';
 
 export interface PublicMessageConfig {
   iconType: IconType;
@@ -38,7 +37,6 @@ export class PublicMessageComponent implements OnInit {
       filterNullish(),
       map((messages) => messages[this.config.index])
     );
-    this.publicMessage$.pipe(debugPipe('publicMessage$')).subscribe();
   }
 
   public onEdit(): void {

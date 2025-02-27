@@ -60,7 +60,6 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   }
 
   private createRequest(): APIPublicMessageRequestDTO {
-    console.log(this.formGroup.value.status);
     return {
       title: this.formGroup.value.title ?? undefined,
       shortDescription: this.formGroup.value.shortDescription ?? undefined,

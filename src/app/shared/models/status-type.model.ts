@@ -11,7 +11,7 @@ export const statusTypeOptions: StatusType[] = [
     value: APIPublicMessageRequestDTO.StatusEnum.Active,
   },
   {
-    name: $localize`Ustabel drift`,
+    name: $localize`Ustabil drift`,
     value: APIPublicMessageRequestDTO.StatusEnum.Inactive,
   },
 ];

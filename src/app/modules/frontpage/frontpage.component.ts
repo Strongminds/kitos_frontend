@@ -1,4 +1,4 @@
-import { Component, model, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -9,7 +9,6 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { PublicMessageConfig } from './public-message/public-message.component';
 
 @Component({
@@ -18,10 +17,7 @@ import { PublicMessageConfig } from './public-message/public-message.component';
 })
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;
-  public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$.pipe(
-    filterNullish(),
-    map((messages) => messages?.slice(0, 6))
-  );
+  public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$;
 
   public readonly messageConfigs: PublicMessageConfig[] = [
     {
