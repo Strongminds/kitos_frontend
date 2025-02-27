@@ -83,7 +83,7 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
     );
   }
 
-  public goToKitosPage(): void {
+  public goToMarketingPage(): void {
     window.open(this.kitosMarketingUrl, '_blank');
   }
 }
