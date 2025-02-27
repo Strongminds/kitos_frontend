@@ -7,12 +7,7 @@
     </div>
     <div class="right">
       <div class="grid-container login-grid-columns">
-        <app-public-message
-          *ngFor="let config of messageConfigs"
-          mode="compact"
-          [config]="config"
-          iconType="document"
-        ></app-public-message>
+        <app-public-message *ngFor="let config of messageConfigs" mode="compact" [config]="config"></app-public-message>
       </div>
     </div>
   </div>
@@ -30,16 +25,11 @@
         </app-paragraph>
       </div>
       <div class="center-item">
-        <app-button i18n>Læs mere om Kitos</app-button>
+        <app-button (buttonClick)="goToKitosPage()" i18n>Læs mere om Kitos</app-button>
       </div>
     </app-standard-vertical-content-grid>
     <div class="grid-container authenticated-grid-columns">
-      <app-public-message
-        *ngFor="let config of messageConfigs"
-        mode="compact"
-        [config]="config"
-        iconType="document"
-      ></app-public-message>
+      <app-public-message *ngFor="let config of messageConfigs" mode="normal" [config]="config"></app-public-message>
     </div>
   </app-standard-vertical-content-grid>
 </div>

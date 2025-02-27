@@ -19,6 +19,8 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;
   public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$;
 
+  private readonly kitosMarketingUrl = 'https://www.os2.eu/os2kitos';
+
   public readonly messageConfigs: PublicMessageConfig[] = [
     {
       iconType: 'clipboard',
@@ -79,5 +81,9 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
         this.frontpageComponentStore.getText();
       })
     );
+  }
+
+  public goToKitosPage(): void {
+    window.open(this.kitosMarketingUrl, '_blank');
   }
 }
