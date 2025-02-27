@@ -9,15 +9,11 @@ describe('SsoButtonComponent', () => {
     cy.get('app-lock-icon').should('exist');
   });
 
-  it('Can click and emit event', () => {
-    const clickSpy = cy.spy().as('buttonClick');
+  it('Can click and get SSO dialog', () => {
     cy.mount(SsoButtonComponent, {
-      imports: [FrontpageModule],
-      //eslint-disable-next-line @typescript-eslint/no-explicit-any
-      componentProperties: { buttonClick: { emit: clickSpy } } as any,
-    });
+      imports: [FrontpageModule],    });
 
     cy.get('button').click({ force: true });
-    cy.get('@buttonClick').should('have.been.calledOnce');
+    cy.contains("Log ind med SSO");
   });
 });
