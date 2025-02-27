@@ -12,7 +12,6 @@ import { debugPipe } from 'src/app/shared/helpers/observable-helpers';
 
 export interface PublicMessageConfig {
   iconType: IconType;
-  mode: 'normal' | 'compact';
   index: number;
 }
 
@@ -26,6 +25,7 @@ export interface PublicMessageConfig {
 })
 export class PublicMessageComponent implements OnInit {
   @Input() config!: PublicMessageConfig;
+  @Input() mode: 'normal' | 'compact' = 'normal';
 
   public publicMessage$!: Observable<PublicMessage>;
   public readonly statusDisplayType = BooleanValueDisplayType.NormalUnstable;

@@ -63,6 +63,8 @@ import { ReloadIconComponent } from './reload-icon.component';
 import { DiskIconComponent } from './disk-icon.component';
 import { MoreHorizontalWarningIconComponent } from './more-horizontal-warning-icon.component';
 import { ExternalLinkIconComponent } from './external-link-icon.component';
+import { CalendarIconComponent } from './calendar-icon.component';
+import { MailIconComponent } from './mail-icon.component';
 
 @NgModule({
   imports: [],
@@ -131,6 +133,8 @@ import { ExternalLinkIconComponent } from './external-link-icon.component';
     MoreHorizontalWarningIconComponent,
     ArrowRightIconComponent,
     ExternalLinkIconComponent,
+    CalendarIconComponent,
+    MailIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -197,6 +201,8 @@ import { ExternalLinkIconComponent } from './external-link-icon.component';
     MoreHorizontalWarningIconComponent,
     ArrowRightIconComponent,
     ExternalLinkIconComponent,
+    CalendarIconComponent,
+    MailIconComponent,
   ],
   providers: [],
 })

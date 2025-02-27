@@ -11,7 +11,6 @@ import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/sel
 import { FrontpageComponentStore } from './frontpage.component-store';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { PublicMessageConfig } from './public-message/public-message.component';
-import { IconType } from '@progress/kendo-angular-icons';
 
 @Component({
   templateUrl: 'frontpage.component.html',
@@ -26,33 +25,27 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
 
   public readonly messageConfigs: PublicMessageConfig[] = [
     {
-      iconType: 'document',
-      mode: 'normal',
+      iconType: 'clipboard',
       index: 0,
     },
     {
       iconType: 'document',
-      mode: 'normal',
       index: 1,
     },
     {
-      iconType: 'document',
-      mode: 'normal',
+      iconType: 'settings',
       index: 2,
     },
     {
-      iconType: 'document',
-      mode: 'normal',
+      iconType: 'calendar',
       index: 3,
     },
     {
-      iconType: 'document',
-      mode: 'normal',
+      iconType: 'multiple-users',
       index: 4,
     },
     {
-      iconType: 'document',
-      mode: 'normal',
+      iconType: 'mail',
       index: 5,
     },
   ];
