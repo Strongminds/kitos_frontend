@@ -20,7 +20,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   public formGroup = new FormGroup({
     title: new FormControl<string | undefined>(undefined, Validators.required),
     status: new FormControl<StatusType | undefined>(undefined),
-    shortDescription: new FormControl<string | undefined>(undefined, Validators.required),
+    shortDescription: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(105)]),
     longDescription: new FormControl<string | undefined>(undefined),
   });
 
