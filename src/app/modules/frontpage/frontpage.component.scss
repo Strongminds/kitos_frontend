@@ -70,3 +70,14 @@ app-login {
 .info-section-max-width {
   max-width: 580px;
 }
+
+.top-left-corner {
+  :hover {
+    cursor: pointer;
+  }
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  gap: $padding-small;
+  @include center-items-container;
+}

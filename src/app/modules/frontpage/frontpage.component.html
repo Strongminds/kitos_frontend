@@ -3,7 +3,11 @@
 <ng-container *ngIf="(isAuthenticated$ | async) !== true">
   <div class="container">
     <div class="left">
-      <app-login></app-login>
+      <div (click)="goToKitosPage()" class="top-left-corner">
+        <app-help-icon></app-help-icon>
+        <app-paragraph [bold]="true"> Hvad er Kitos?</app-paragraph>
+      </div>
+      <app-login> </app-login>
     </div>
     <div class="right">
       <div class="grid-container login-grid-columns">
