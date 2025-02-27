@@ -24,11 +24,11 @@ describe('frontpage', () => {
   });
 });
 
-function assertCanGoToMarketingPage(authenticated: boolean, intiator: () => void) {
-  cy.setup(authenticated);
+function assertCanGoToMarketingPage(authenticate: boolean, initiator: () => void) {
+  cy.setup(authenticate);
   cy.window().then((win) => {
     cy.stub(win, 'open').as('windowOpen');
   });
-  intiator();
+  initiator();
   cy.get('@windowOpen').should('be.calledWith', marketingPageUrl);
 }
