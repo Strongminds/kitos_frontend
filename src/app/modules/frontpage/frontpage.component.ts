@@ -21,32 +21,19 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
 
   private readonly kitosMarketingUrl = 'https://www.os2.eu/os2kitos';
 
-  public readonly messageConfigs: PublicMessageConfig[] = [
-    {
-      iconType: 'clipboard',
-      index: 0,
-    },
-    {
-      iconType: 'document',
-      index: 1,
-    },
-    {
-      iconType: 'settings',
-      index: 2,
-    },
-    {
-      iconType: 'calendar',
-      index: 3,
-    },
-    {
-      iconType: 'multiple-users',
-      index: 4,
-    },
-    {
-      iconType: 'mail',
-      index: 5,
-    },
-  ];
+  public readonly messageConfigs: PublicMessageConfig[] = (
+    [
+      { iconType: 'clipboard' },
+      { iconType: 'document' },
+      { iconType: 'settings' },
+      { iconType: 'calendar' },
+      { iconType: 'multiple-users' },
+      { iconType: 'mail' },
+    ] as const
+  ).map((config, index) => ({
+    ...config,
+    index,
+  }));
 
   public readonly user$ = this.store.select(selectUser);
   public readonly isAuthenticating$ = this.store.select(selectIsAuthenticating);
