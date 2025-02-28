@@ -4561,14 +4561,8 @@
       <trans-unit id="1492491332269133030" datatype="html">
         <source> Bemærk at linkets gyldighed udløber efter 10 dage. Du skal derfor nå at nulstille dit password inden da. </source>
       </trans-unit>
-      <trans-unit id="1910138790709309910" datatype="html">
-        <source>kan du anmode om at nulstille det her.</source>
-      </trans-unit>
       <trans-unit id="3006097408675799565" datatype="html">
         <source> Send email </source>
-      </trans-unit>
-      <trans-unit id="3732788840591611874" datatype="html">
-        <source>Hvis du har glemt dit password, </source>
       </trans-unit>
       <trans-unit id="374396670767482335" datatype="html">
         <source> Hvis du har glemt passwordet til din KITOS bruger, kan du få tilsendt en email med et link til at nulstille det. </source>
@@ -5007,6 +5001,27 @@
       </trans-unit>
       <trans-unit id="8056066478947543702" datatype="html">
         <source> Luk </source>
+      </trans-unit>
+      <trans-unit id="1666143166173347781" datatype="html">
+        <source>Kitos er Kommunernes IT Overblikssystem</source>
+      </trans-unit>
+      <trans-unit id="2966213553381382988" datatype="html">
+        <source> Glemt dit password? </source>
+      </trans-unit>
+      <trans-unit id="5622823507924395173" datatype="html">
+        <source> Kitos er en open-source web-baseret løsning, der anvendes af 76 kommuner. Kitos skaber overblik over den samlede kommunale IT-portefølje. </source>
+      </trans-unit>
+      <trans-unit id="622752670487596537" datatype="html">
+        <source> Hvad er Kitos?</source>
+      </trans-unit>
+      <trans-unit id="6429720393055416101" datatype="html">
+        <source> eller </source>
+      </trans-unit>
+      <trans-unit id="820049001498537565" datatype="html">
+        <source>Log ind med SSO</source>
+      </trans-unit>
+      <trans-unit id="8924400491805013399" datatype="html">
+        <source>Log mig ikke ud</source>
       </trans-unit>
     </body>
   </file>
