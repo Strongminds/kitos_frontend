@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Login } from 'src/app/shared/models/login.model';
@@ -10,14 +10,18 @@ import { UserActions } from 'src/app/store/user-store/actions';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public readonly loginForm = new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', Validators.required),
-    remember: new FormControl(false, Validators.required),
+    email: new FormControl('', [Validators.email]),
+    password: new FormControl(''),
+    remember: new FormControl(false),
   });
 
   constructor(private store: Store) {}
+
+  ngOnInit(): void {
+    console.log('LoginComponent initialized');
+  }
 
   public login() {
     const login: Login = {
@@ -30,5 +34,9 @@ export class LoginComponent {
     this.store.dispatch(UserActions.login(login));
 
     this.loginForm.patchValue({ password: '' });
+  }
+
+  public disableLoginButton(): boolean {
+    return this.loginForm.value.email === '' || this.loginForm.value.password === '';
   }
 }
