@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { SSO_LOGIN_HANDLER_PATH } from 'src/app/shared/constants/constants';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 
 @Component({
@@ -9,11 +10,13 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 export class SsoButtonComponent {
   constructor(private confirmActionService: ConfirmActionService) {}
 
+  public readonly buttonText = $localize`Log ind med SSO`;
+
   goToSSO(): void {
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Neutral,
       onConfirm: () => {
-        window.location.href = '/LoginHandler.ashx';
+        window.location.href = SSO_LOGIN_HANDLER_PATH;
       },
       confirmationType: 'OkCancel',
       title: $localize`Single Sign-On (SSO)`,
