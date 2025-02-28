@@ -39,8 +39,8 @@ describe('it-system-usage', () => {
 
     // Test parent system deactivated
     cy.input('Overordnet system').should('have.value', 'System 3 (ikke tilgængeligt)');
-    cy.getByDataCy('dbs-name').find('input').should('have.value', 'DBS navn 123');
-    cy.getByDataCy('dbs-data-processor-name').find('input').should('have.value', 'DBS databehandler navn 123');
+    cy.getByDataCy('legal-name').find('input').should('have.value', 'DBS navn 123');
+    cy.getByDataCy('legal-data-processor-name').find('input').should('have.value', 'DBS databehandler navn 123');
 
     // Test obselete option
     cy.dropdown('Forretningstype').should('have.text', 'Test (udgået)');
