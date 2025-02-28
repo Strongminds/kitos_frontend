@@ -71,7 +71,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
 
   private getStatusValue(): APIPublicMessageRequestDTO.StatusEnum | undefined {
     const value = this.formGroup.value.status?.value ?? null;
-    //We need to allow null, to reset the value, but the generateed model does not allow it, so we have to cast
+    //We need to allow null, to reset the value, but the generateed model does not allow it, so we have to cast (28/02/2025)
     return value as APIPublicMessageRequestDTO.StatusEnum | undefined;
   }
 }
