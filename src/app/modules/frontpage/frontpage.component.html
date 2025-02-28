@@ -2,7 +2,7 @@
 
 <div *ngIf="(isAuthenticated$ | async) !== true" class="container">
   <div class="left">
-    <div (click)="goToKitosPage()" class="top-left-corner">
+    <div (click)="goToMarketingPage()" class="top-left-corner">
       <app-help-icon></app-help-icon>
       <app-paragraph [bold]="true"> Hvad er Kitos?</app-paragraph>
     </div>
@@ -27,7 +27,7 @@
         </app-paragraph>
       </div>
       <div class="center-item">
-        <app-button (buttonClick)="goToKitosPage()" i18n>Læs mere om Kitos</app-button>
+        <app-button (buttonClick)="goToMarketingPage()" i18n>Læs mere om Kitos</app-button>
       </div>
     </app-standard-vertical-content-grid>
     <div class="grid-container authenticated-grid-columns">
