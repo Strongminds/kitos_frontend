@@ -60,10 +60,11 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   }
 
   private createRequest(): APIPublicMessageRequestDTO {
+    const value = this.formGroup.value;
     return {
-      title: this.formGroup.value.title ?? undefined,
-      shortDescription: this.formGroup.value.shortDescription ?? undefined,
-      longDescription: this.formGroup.value.longDescription ?? undefined,
+      title: value.title ?? undefined,
+      shortDescription: value.shortDescription ?? undefined,
+      longDescription: value.longDescription ?? undefined,
       status: this.getStatusValue(),
     };
   }
