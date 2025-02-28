@@ -10,6 +10,7 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
 import { PublicMessageConfig } from './public-message/public-message.component';
+import { KITOS_MARKETING_PAGE_URL } from 'src/app/shared/constants/constants';
 
 @Component({
   templateUrl: 'frontpage.component.html',
@@ -18,8 +19,6 @@ import { PublicMessageConfig } from './public-message/public-message.component';
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;
   public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$;
-
-  private readonly kitosMarketingUrl = 'https://www.os2.eu/os2kitos';
 
   public readonly messageConfigs: PublicMessageConfig[] = (
     [
@@ -71,6 +70,6 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
   }
 
   public goToMarketingPage(): void {
-    window.open(this.kitosMarketingUrl, '_blank');
+    window.open(KITOS_MARKETING_PAGE_URL, '_blank');
   }
 }
