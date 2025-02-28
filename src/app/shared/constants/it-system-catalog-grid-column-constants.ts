@@ -21,5 +21,5 @@ export const DESCRIPTION = 'Description';
 export const ARCHIVE_DUTY = 'ArchiveDuty';
 export const ARCHIVE_DUTY_COMMENT = 'ArchiveDutyComment';
 
-export const DBS_SYSTEM_NAME = 'DbsName';
-export const DBS_DATA_PROCESSOR_NAME = 'DbsDataProcessorName';
+export const LEGAL_SYSTEM_NAME = 'LegalName';
+export const LEGAL_DATA_PROCESSOR_NAME = 'LegalDataProcessorName';

@@ -206,8 +206,8 @@
         "LastName": "(GlobalAdmin)"
       },
       "Reference": null,
-      "DBSName": "DBS navn 123",
-      "DBSDataProcessorName": "DBS databehandler navn 123"
+      "LegalName": "DBS navn 123",
+      "LegalDataProcessorName": "DBS databehandler navn 123"
     }
   ]
 }
