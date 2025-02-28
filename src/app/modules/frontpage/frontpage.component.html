@@ -1,6 +1,5 @@
-<app-loading *ngIf="loading$ | async"></app-loading>
-
 <div *ngIf="(isAuthenticated$ | async) !== true" class="container">
+  <app-loading *ngIf="loading$ | async"></app-loading>
   <div class="left">
     <div (click)="goToMarketingPage()" class="top-left-corner">
       <app-help-icon></app-help-icon>
