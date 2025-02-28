@@ -9,6 +9,9 @@
 
 .top-container {
   overflow: hidden;
+  :hover {
+    cursor: pointer !important;
+  }
 }
 
 .icon-container {

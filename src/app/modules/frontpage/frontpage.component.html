@@ -4,7 +4,7 @@
   <div class="left">
     <div (click)="goToMarketingPage()" class="top-left-corner">
       <app-help-icon></app-help-icon>
-      <app-paragraph [bold]="true"> Hvad er Kitos?</app-paragraph>
+      <app-paragraph [bold]="true" i18n> Hvad er Kitos?</app-paragraph>
     </div>
     <app-login> </app-login>
   </div>
@@ -18,10 +18,10 @@
   <app-standard-vertical-content-grid>
     <app-standard-vertical-content-grid class="info-section-container">
       <div class="center-item">
-        <h2 class="title info-section-max-width">Kitos er Kommunernes IT Overblikssystem</h2>
+        <h2 class="title info-section-max-width" i18n>Kitos er Kommunernes IT Overblikssystem</h2>
       </div>
       <div class="center-item">
-        <app-paragraph class="center-text info-section-max-width" [dimmed]="true">
+        <app-paragraph class="center-text info-section-max-width" [dimmed]="true" i18n>
           Kitos er en open-source web-baseret løsning, der anvendes af 76 kommuner. Kitos skaber overblik over den
           samlede kommunale IT-portefølje.
         </app-paragraph>
