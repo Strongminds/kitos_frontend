@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Login } from 'src/app/shared/models/login.model';
@@ -10,7 +10,7 @@ import { UserActions } from 'src/app/store/user-store/actions';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   public readonly loginForm = new FormGroup({
     email: new FormControl('', [Validators.email]),
     password: new FormControl(''),
@@ -18,10 +18,6 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(private store: Store) {}
-
-  ngOnInit(): void {
-    console.log('LoginComponent initialized');
-  }
 
   public login() {
     const login: Login = {
