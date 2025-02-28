@@ -1,0 +1,5 @@
+@import "theme";
+
+::ng-deep button.mat-mdc-button-base {
+  border-color: $color-neutral-40 !important;
+}
