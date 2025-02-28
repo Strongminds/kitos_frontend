@@ -1,6 +1,6 @@
 <app-card
   *ngIf="publicMessage$ | async as publicMessage"
-  [ngStyle]="{ 'min-height': mode === 'compact' ? '171px' : '150px' }"
+  [ngClass]="{ 'compact-height': mode === 'compact', 'normal-height': mode === 'normal' }"
 >
   <div (click)="onEdit()" class="top-container" data-cy="open-public-message">
     <div class="icon-container">
