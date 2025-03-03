@@ -49,6 +49,6 @@ export function filterByValidCache<T>(cached$: Observable<Cached<T>>) {
     );
 }
 
-export function mapArray<T, U>(fn: (item: T, index: number, array: T[]) => U): OperatorFunction<T[], U[]> {
+export function mapArray<T, U>(fn: (item: T) => U): OperatorFunction<T[], U[]> {
   return map((arr: T[]) => arr.map(fn));
 }
