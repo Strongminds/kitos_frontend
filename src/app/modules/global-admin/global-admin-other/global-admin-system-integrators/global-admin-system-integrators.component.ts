@@ -26,12 +26,12 @@ export class GlobalAdminSystemIntegratorsComponent extends BaseComponent impleme
   public readonly gridColumns: GridColumn[] = [
     {
       field: 'name',
-      title: 'Navn',
+      title: $localize`Navn`,
       hidden: false,
     },
     {
       field: 'email',
-      title: 'Email',
+      title: $localize`Email`,
       hidden: false,
     },
     createGridActionColumn(['delete']),
