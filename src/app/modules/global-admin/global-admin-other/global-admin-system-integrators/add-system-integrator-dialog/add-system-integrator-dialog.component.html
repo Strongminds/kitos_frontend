@@ -5,12 +5,13 @@
       [disabledUuids$]="systemIntegratorUuids$"
       formName="user"
       [searchGlobalUsers]="true"
+      data-cy="add-system-integrator-dropdown"
     >
     </app-user-dropdown>
 
     <app-dialog-actions>
       <app-button buttonStyle="secondary" (buttonClick)="closeDialog()" i18n> Annuller </app-button>
-      <app-button buttonStyle="primary" type="submit" [disabled]="!formGroup.valid" i18n> Opret </app-button>
+      <app-button type="submit" [disabled]="!formGroup.valid" data-cy="add-system-integrator-button" i18n> Opret </app-button>
     </app-dialog-actions>
   </form>
 </app-dialog>

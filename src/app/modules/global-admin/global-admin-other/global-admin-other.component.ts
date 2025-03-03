@@ -16,8 +16,12 @@ export class GlobalAdminOtherComponent {
   public selectedSegment = GlobalAdminOtherSegmentOptionType.UserManagement;
 
   public readonly segmentOptions = [
-    { text: $localize`Brugerstyring`, value: GlobalAdminOtherSegmentOptionType.UserManagement },
-    { text: $localize`API-brugere`, value: GlobalAdminOtherSegmentOptionType.APIUsers },
-    { text: $localize`Diverse`, value: GlobalAdminOtherSegmentOptionType.Misc },
+    {
+      text: $localize`Brugerstyring`,
+      value: GlobalAdminOtherSegmentOptionType.UserManagement,
+      dataCy: 'user-management-segment',
+    },
+    { text: $localize`API-brugere`, value: GlobalAdminOtherSegmentOptionType.APIUsers, dataCy: 'api-users-segment' },
+    { text: $localize`Diverse`, value: GlobalAdminOtherSegmentOptionType.Misc, dataCy: 'misc-segment' },
   ];
 }
