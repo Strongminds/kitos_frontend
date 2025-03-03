@@ -6633,9 +6633,21 @@
         <source>Diverse</source>
         <target state="new">Diverse</target>
       </trans-unit>
-      <trans-unit id="1165134833481303333" datatype="html">
-        <source> Opret System Integrator</source>
-        <target state="new"> Opret System Integrator</target>
+      <trans-unit id="5423741656801177932" datatype="html">
+        <source> Opret Systemintegrator</source>
+        <target state="new"> Opret Systemintegrator</target>
+      </trans-unit>
+      <trans-unit id="7241391520100148399" datatype="html">
+        <source>Opret Systemintegrator</source>
+        <target state="new">Opret Systemintegrator</target>
+      </trans-unit>
+      <trans-unit id="3984565971698645463" datatype="html">
+        <source>Ændringer gemt</source>
+        <target state="new">Ændringer gemt</target>
+      </trans-unit>
+      <trans-unit id="1862687234657090800" datatype="html">
+        <source>Ændringer kunne ikke gemmes</source>
+        <target state="new">Ændringer kunne ikke gemmes</target>
       </trans-unit>
     </body>
   </file>

@@ -86,7 +86,7 @@ describe('global-admin other', () => {
     });
   });
 
-  it('Can add and delete system integrator', () => {
+  it('Can add, delete and see system integrators', () => {
     const userToSelect = { name: 'Jens Jensen', email: 'jens@jensen.dk', uuid: 'd4efec33-2aea-4d89-927a-5d5899f6e616' };
 
     //Add system integrator

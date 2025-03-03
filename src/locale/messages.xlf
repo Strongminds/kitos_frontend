@@ -5023,8 +5023,8 @@
       <trans-unit id="8924400491805013399" datatype="html">
         <source>Log mig ikke ud</source>
       </trans-unit>
-      <trans-unit id="1165134833481303333" datatype="html">
-        <source> Opret System Integrator</source>
+      <trans-unit id="5423741656801177932" datatype="html">
+        <source> Opret Systemintegrator</source>
       </trans-unit>
       <trans-unit id="6077242221566477767" datatype="html">
         <source>API-brugere</source>
@@ -5034,6 +5034,15 @@
       </trans-unit>
       <trans-unit id="6690985920092272336" datatype="html">
         <source>Brugerstyring</source>
+      </trans-unit>
+      <trans-unit id="1862687234657090800" datatype="html">
+        <source>Ændringer kunne ikke gemmes</source>
+      </trans-unit>
+      <trans-unit id="3984565971698645463" datatype="html">
+        <source>Ændringer gemt</source>
+      </trans-unit>
+      <trans-unit id="7241391520100148399" datatype="html">
+        <source>Opret Systemintegrator</source>
       </trans-unit>
     </body>
   </file>
