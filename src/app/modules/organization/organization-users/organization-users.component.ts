@@ -9,7 +9,7 @@ import {
   ORGANIZATION_USER_COLUMNS_ID,
   ORGANIZATION_USER_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { createGridActionColumn, GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
