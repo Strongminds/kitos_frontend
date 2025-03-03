@@ -29,7 +29,7 @@ export class SystemIntegratorComponentStore extends ComponentStore<State> {
     })
   );
 
-  public getSystemIntegrators = this.effect<void>((trigger$) =>
+  public readonly getSystemIntegrators = this.effect<void>((trigger$) =>
     trigger$.pipe(
       tap(() => this.setLoading(true)),
       switchMap(() =>
