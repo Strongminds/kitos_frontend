@@ -1,0 +1,12 @@
+<app-card>
+  <app-card-header title="System integratorer"> </app-card-header>
+  <app-collection-extension-button
+    class="create-button"
+    text=" Opret System Integrator"
+    i18n-text
+  ></app-collection-extension-button>
+  <ng-container *ngIf="systemIntegrators$ | async as systemIntegrators">
+    <app-local-grid [data]="systemIntegrators" [loading]="false" [columns]="gridColumns" [deletePermission]="true">
+    </app-local-grid>
+  </ng-container>
+</app-card>

@@ -1,10 +1,10 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { GlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
 import { GlobalAdminActions } from './actions';
 import { GlobalAdminState } from './state';
+import { ShallowUser } from 'src/app/shared/models/userV2.model';
 
-export const globalAdminsAdapter = createEntityAdapter<GlobalAdminUser>({
+export const globalAdminsAdapter = createEntityAdapter<ShallowUser>({
   selectId: (user) => user.uuid,
   sortComparer: (a, b) => a.name.localeCompare(b.name),
 });
