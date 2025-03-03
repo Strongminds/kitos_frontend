@@ -9,10 +9,11 @@ import { NotificationService } from './shared/services/notification.service';
 import { OrganizationService } from './shared/services/organization.service';
 import { RoleOptionTypeService } from './shared/services/role-option-type.service';
 import { UserActions } from './store/user-store/actions';
-import { selectIsAuthenticating } from './store/user-store/selectors';
+import { selectIsAuthenticating, selectUser } from './store/user-store/selectors';
 import { Actions, ofType } from '@ngrx/effects';
 import { RelatedEntityType } from './store/alerts/state';
 import { AlertActions } from './store/alerts/actions';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,6 +22,7 @@ import { AlertActions } from './store/alerts/actions';
 })
 export class AppComponent extends BaseComponent implements OnInit {
   public isAuthenticating$ = this.store.select(selectIsAuthenticating);
+  public isAuthenticated$ = this.store.select(selectUser).pipe(map((user) => !!user));
 
   constructor(
     private store: Store,

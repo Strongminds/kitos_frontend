@@ -1,10 +1,10 @@
 [
   {
       "uuid": "c769bffc-129f-493f-b283-f1dfe16c1f3b",
-      "title": "Vejledninger",
-      "longDescription": "<h3><strong>Kitos - Kommunernes IT OverbliksSystem</strong></h3>\n<div>Kitos er en web-baseret l&oslash;sning, der anvendes af 77 kommuddner.</div>\n<div>Kitos skaber overblik over den samlede kommunale IT-portef&oslash;lje.</div>\n<div>&nbsp;</div>\n<div>Det digitale f&aelig;llesskab OS2 s&oslash;rger for forvaltning af Kitos. P&aring; <a title=\"Om KITOS \" href=\"https://os2.eu/produkt/os2kitos\" target=\"_blank\" rel=\"noopener\">os2.eu</a> kan I l&aelig;se mere om Kitos baggrund og form&aring;l.&nbsp;</div>\n<div>\n<h3><strong>OS2kitos styregruppen</strong></h3>\n<div>Se hvem der sidder i OS2kitos <a href=\"https://os2.eu/wiki/styregruppe-os2kitos\" target=\"_blank\" rel=\"noopener\">styregruppe</a></div>\n<div>\n<h3><strong>Tilslut&nbsp;din kommune til&nbsp;Kitos</strong></h3>\n<div>L&aelig;s om hvordan jeres kommuner kan komme p&aring; l&oslash;sningen og en beskrivelse af governance-modellen for OS2kitos&nbsp;<a href=\"https://os2.eu/dokument/ny-tilslutnings-og-samarbejdsaftale-os2kitos\" target=\"_blank\" rel=\"noopener\">her.</a></div>\n<div>&nbsp;</div>\n</div>\n</div>",
-      "shortDescription": "Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.",
-      "status": null,
+      "title": "Ny titel",
+      "longDescription": "Lang beskrivelse.",
+      "shortDescription": "Kort beskrivelse.",
+      "status": "Inactive",
       "link": "https://google.com"
   },
   {

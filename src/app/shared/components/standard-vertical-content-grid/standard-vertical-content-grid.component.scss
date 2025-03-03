@@ -2,7 +2,6 @@
 
 .grid-container {
   display: grid;
-
   &.with-gap {
     gap: $padding-medium;
   }

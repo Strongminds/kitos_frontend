@@ -12,9 +12,9 @@ import { UserActions } from 'src/app/store/user-store/actions';
 })
 export class LoginComponent {
   public readonly loginForm = new FormGroup({
-    email: new FormControl('', [Validators.email, Validators.required]),
-    password: new FormControl('', Validators.required),
-    remember: new FormControl(false, Validators.required),
+    email: new FormControl('', [Validators.email]),
+    password: new FormControl(''),
+    remember: new FormControl(false),
   });
 
   constructor(private store: Store) {}
@@ -30,5 +30,9 @@ export class LoginComponent {
     this.store.dispatch(UserActions.login(login));
 
     this.loginForm.patchValue({ password: '' });
+  }
+
+  public disableLoginButton(): boolean {
+    return this.loginForm.value.email === '' || this.loginForm.value.password === '';
   }
 }

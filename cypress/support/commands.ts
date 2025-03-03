@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { verifyArrayContainsObject } from 'cypress/support/request-verification';
-import { Method, RouteMatcher } from 'Cypress/types/net-stubbing';
+import { Method, RouteMatcher } from 'cypress/types/net-stubbing';
 
 Cypress.Commands.add(
   'setup',
@@ -50,7 +50,7 @@ Cypress.Commands.add(
 Cypress.Commands.add('verifyDialogConfirmButtonDisabledByReactiveForm', (dataCySelector: string) => {
   cy.getByDataCy(dataCySelector).click();
   cy.getByDataCy(dataCySelector).should('exist');
-})
+});
 
 Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json') => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
@@ -58,7 +58,7 @@ Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json')
 
   cy.contains('Email').parent().find('input').type('test@test.com');
   cy.contains('Password').parent().find('input').type('123456');
-  cy.contains('Log ind').click();
+  cy.getByDataCy('login-button').click();
 
   cy.wait('@authorize');
 });

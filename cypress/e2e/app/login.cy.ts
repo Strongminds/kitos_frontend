@@ -1,6 +1,8 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('login', () => {
+
+
   beforeEach(() => {
     cy.requireIntercept();
     cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
@@ -13,7 +15,7 @@ describe('login', () => {
     cy.intercept('/api/Authorize', { statusCode: 401, fixture: './shared/authorize-401.json' });
     cy.contains('Email').parent().find('input').type('test@test.com');
     cy.contains('Password').parent().find('input').type('123456');
-    cy.contains('Log ind').click();
+    cy.getByDataCy('login-button').click();
 
     cy.contains('Kunne ikke logge ind');
   });

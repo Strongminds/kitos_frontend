@@ -280,8 +280,8 @@ model/paymentRegistrationResponseDTO.ts
 model/paymentRequestDTO.ts
 model/paymentResponseDTO.ts
 model/procurementPlanDTO.ts
-model/publicMessagesRequestDTO.ts
-model/publicMessagesResponseDTO.ts
+model/publicMessageRequestDTO.ts
+model/publicMessageResponseDTO.ts
 model/recipientResponseDTO.ts
 model/recipientWriteRequestDTO.ts
 model/recommendedArchiveDutyRequestDTO.ts

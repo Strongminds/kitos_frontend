@@ -1,7 +1,30 @@
 <app-dialog title="Rediger" i18n-title>
-  <app-rich-text-editor [formControl]="formGroup.controls.message"></app-rich-text-editor>
-  <app-dialog-actions>
-    <app-button buttonStyle="secondary" (buttonClick)="close()" i18n> Annuller </app-button>
-    <app-button (buttonClick)="onSave()" data-cy="save-public-message-button" i18n> Gem </app-button>
-  </app-dialog-actions>
+  <form [formGroup]="formGroup" (ngSubmit)="onSave()">
+    <app-standard-vertical-content-grid>
+      <app-textbox text="Titel" [formGroup]="formGroup" formName="title" data-cy="title"></app-textbox>
+      <app-dropdown
+        [data]="statusTypeOptions"
+        text="Status"
+        [formGroup]="formGroup"
+        formName="status"
+        data-cy="status"
+      ></app-dropdown>
+      <app-textarea
+        text="Beskrivelse"
+        [formGroup]="formGroup"
+        formName="shortDescription"
+        data-cy="short-description"
+      ></app-textarea>
+      <app-rich-text-editor
+        [formControl]="formGroup.controls.longDescription"
+        data-cy="long-description"
+      ></app-rich-text-editor>
+    </app-standard-vertical-content-grid>
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="close()" i18n> Luk </app-button>
+      <app-button type="submit" [disabled]="!formGroup.valid" data-cy="save-public-message-button" i18n>
+        Gem
+      </app-button>
+    </app-dialog-actions>
+  </form>
 </app-dialog>

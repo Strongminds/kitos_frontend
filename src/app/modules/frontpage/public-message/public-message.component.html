@@ -1,15 +1,19 @@
-<div class="card">
-  <p *ngIf="content" [innerHTML]="content"></p>
-  <app-empty-state
-    [text]="'Ingen besked at vise'"
-    [context]="'emptyUpdate'"
-    i18n-text
-    *ngIf="!content"
-  ></app-empty-state>
-  <ng-container *ngIf="isUserGlobalAdmin$ | async">
-    <div class="divider-margin">
-      <app-divider></app-divider>
+<app-card
+  *ngIf="publicMessage$ | async as publicMessage"
+  [ngClass]="{ 'compact-height': mode === 'compact', 'normal-height': mode === 'normal' }"
+>
+  <div (click)="onEdit()" class="top-container" data-cy="open-public-message">
+    <div class="icon-container">
+      <app-icon [iconType]="config.iconType"></app-icon>
     </div>
-    <app-button (buttonClick)="onEdit()" data-cy="edit-public-message-button" i18n> Rediger </app-button>
-  </ng-container>
-</div>
+
+    <div class="link-container">
+      <app-status-chip [value]="activeStatus(publicMessage)" [valueDisplayType]="statusDisplayType"></app-status-chip>
+      <app-external-link-icon></app-external-link-icon>
+    </div>
+  </div>
+
+  <app-paragraph paragraphSize="large" [bold]="true"> {{ publicMessage.title }}</app-paragraph>
+  <div class="padding"></div>
+  <app-paragraph [dimmed]="true" paragraphSize="medium"> {{ publicMessage.shortDescription }}</app-paragraph>
+</app-card>
