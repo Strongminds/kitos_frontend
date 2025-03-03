@@ -5,6 +5,7 @@ import { IconType } from '../../models/icon-type';
   selector: 'app-icon',
   templateUrl: './icon.component.html',
   styleUrl: './icon.component.scss',
+  host: { style: 'display: contents' },
 })
 export class IconComponent {
   @Input() iconType!: IconType;

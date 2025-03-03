@@ -1,28 +1,36 @@
-<app-loading *ngIf="loading$ | async"></app-loading>
-
-<ng-container *ngIf="(loading$ | async) === false && (text$ | async) as text">
-  <div class="card-column">
-    <app-public-message type="about" [content]="text.about"></app-public-message>
-    <app-public-message type="contact-info" [content]="text.contactInfo"></app-public-message>
+<div *ngIf="(isAuthenticated$ | async) !== true" class="container">
+  <app-loading *ngIf="loading$ | async"></app-loading>
+  <div class="left">
+    <div (click)="goToMarketingPage()" class="top-left-corner">
+      <app-help-icon></app-help-icon>
+      <app-paragraph [bold]="true" i18n> Hvad er Kitos?</app-paragraph>
+    </div>
+    <app-login> </app-login>
   </div>
-
-  <div class="card-column">
-    <app-public-message type="guides" [content]="text.guides"></app-public-message>
+  <div class="right">
+    <div class="grid-container login-grid-columns">
+      <app-public-message *ngFor="let config of messageConfigs" mode="compact" [config]="config"></app-public-message>
+    </div>
   </div>
-
-  <div class="card-column">
-    <div class="card" *ngIf="(user$ | async) === undefined && (isAuthenticating$ | async) === false">
-      <app-login></app-login>
-      <div class="divider-margin">
-        <app-divider></app-divider>
+</div>
+<div *ngIf="(isAuthenticated$ | async) === true" class="authenticated-frontpage">
+  <app-standard-vertical-content-grid>
+    <app-standard-vertical-content-grid class="info-section-container">
+      <div class="center-item">
+        <h2 class="title info-section-max-width" i18n>Kitos er Kommunernes IT Overblikssystem</h2>
       </div>
-      <app-reset-password-text-link></app-reset-password-text-link>
+      <div class="center-item">
+        <app-paragraph class="center-text info-section-max-width" [dimmed]="true" i18n>
+          Kitos er en open-source web-baseret løsning, der anvendes af 76 kommuner. Kitos skaber overblik over den
+          samlede kommunale IT-portefølje.
+        </app-paragraph>
+      </div>
+      <div class="center-item">
+        <app-button (buttonClick)="goToMarketingPage()" i18n>Læs mere om Kitos</app-button>
+      </div>
+    </app-standard-vertical-content-grid>
+    <div class="grid-container authenticated-grid-columns">
+      <app-public-message *ngFor="let config of messageConfigs" mode="normal" [config]="config"></app-public-message>
     </div>
-
-    <div class="sso-button" *ngIf="(user$ | async) === undefined && (isAuthenticating$ | async) === false">
-      <app-button (buttonClick)="goToSSO()">Log ind via fælleskommunal adgangsstyring</app-button>
-    </div>
-    <app-public-message type="status-messages" [content]="text.statusMessages"></app-public-message>
-    <app-public-message type="misc" [content]="text.misc"></app-public-message>
-  </div>
-</ng-container>
+  </app-standard-vertical-content-grid>
+</div>

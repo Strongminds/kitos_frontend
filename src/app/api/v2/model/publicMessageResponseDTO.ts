@@ -11,11 +11,20 @@
  */
 
 
-export interface APIPublicMessagesRequestDTO { 
-    about?: string;
-    guides?: string;
-    statusMessages?: string;
-    misc?: string;
-    contactInfo?: string;
+export interface APIPublicMessageResponseDTO { 
+    uuid?: string;
+    title?: string;
+    longDescription?: string;
+    shortDescription?: string;
+    status?: APIPublicMessageResponseDTO.StatusEnum;
+    link?: string;
 }
+export namespace APIPublicMessageResponseDTO {
+    export type StatusEnum = 'Active' | 'Inactive';
+    export const StatusEnum = {
+        Active: 'Active' as StatusEnum,
+        Inactive: 'Inactive' as StatusEnum
+    };
+}
+
 

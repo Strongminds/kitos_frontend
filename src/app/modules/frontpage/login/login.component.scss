@@ -1,16 +1,10 @@
-@import "theme";
+@import "mixins";
 
-form {
-  display: flex;
-  flex-direction: column;
-  gap: $padding-medium;
+.center-item {
+  @include center-items-container;
 }
 
-.form-buttons {
-  display: flex;
-  justify-content: space-between;
-
-  app-button {
-    min-width: 160px;
-  }
+.title {
+  text-align: center;
+  text-wrap: wrap;
 }

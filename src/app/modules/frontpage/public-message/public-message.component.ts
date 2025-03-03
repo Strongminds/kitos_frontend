@@ -1,28 +1,56 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
-import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
-import { EditPublicMessageDialogComponent } from './edit-public-message-dialog/edit-public-message-dialog.component';
-import { PublicMessageType } from 'src/app/shared/models/public-messages.model';
+import { PublicMessage } from 'src/app/shared/models/public-message.model';
+import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
+import { IconType } from 'src/app/shared/models/icon-type';
+import { PublicMessageDialogComponent } from './public-message-dialog/public-message-dialog.component';
+import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
+import { map, Observable } from 'rxjs';
+import { FrontpageComponentStore } from '../frontpage.component-store';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+
+export interface PublicMessageConfig {
+  iconType: IconType;
+  index: number;
+}
 
 @Component({
   selector: 'app-public-message',
   templateUrl: './public-message.component.html',
-  styleUrl: './public-message.component.scss',
+  styleUrls: ['./public-message.component.scss'],
+  host: {
+    '[style.width]': "mode === 'compact' ? '352px' : '452px'",
+  },
 })
-export class PublicMessageComponent {
-  //eslint-disable-next-line
-  @Input() content!: any;
-  @Input() type!: PublicMessageType;
+export class PublicMessageComponent implements OnInit {
+  @Input() config!: PublicMessageConfig;
+  @Input() mode: 'normal' | 'compact' = 'normal';
 
-  public readonly isUserGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
+  public publicMessage$!: Observable<PublicMessage>;
+  public readonly statusDisplayType = BooleanValueDisplayType.NormalUnstable;
 
-  constructor(private readonly store: Store, private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private readonly componentStore: FrontpageComponentStore) {}
+
+  public ngOnInit(): void {
+    this.publicMessage$ = this.componentStore.publicMessages$.pipe(
+      filterNullish(),
+      map((messages) => messages[this.config.index])
+    );
+  }
 
   public onEdit(): void {
-    const dialogRef = this.dialog.open(EditPublicMessageDialogComponent);
-    const instance = dialogRef.componentInstance;
-    instance.message = this.content;
-    instance.type = this.type;
+    const dialogRef = this.dialog.open(PublicMessageDialogComponent);
+    dialogRef.componentInstance.publicMessage$ = this.publicMessage$;
+  }
+
+  public activeStatus(publicMessage: PublicMessage): boolean | undefined {
+    switch (publicMessage.status?.value) {
+      case APIPublicMessageRequestDTO.StatusEnum.Active:
+        return true;
+      case APIPublicMessageRequestDTO.StatusEnum.Inactive:
+        return false;
+      default:
+        return undefined;
+    }
   }
 }
