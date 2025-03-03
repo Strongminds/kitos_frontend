@@ -65,7 +65,7 @@ export class GlobalAdminSystemIntegratorsComponent extends BaseComponent impleme
   public deleteSystemIntegrator(systemIntegrator: ShallowUser): void {
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Warning,
-      message: `Er du sikker på at du vil fjerne "${systemIntegrator.name}"'s rettighed som System Integrator?`,
+      message: $localize`Er du sikker på at du vil fjerne "${systemIntegrator.name}"'s rettighed som Systemintegrator?`,
       onConfirm: () =>
         this.store.dispatch(GlobalAdminSystemIntegratorActions.editSystemIntegrator(systemIntegrator.uuid, false)),
     });
