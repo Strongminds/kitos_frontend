@@ -12,6 +12,7 @@ export function createGridActionColumn(types: GridColumnActionType[]): GridColum
     title: ' ',
     hidden: false,
     style: 'action-buttons',
+    sortable: false,
     isSticky: true,
     noFilter: true,
     extraData: types.map((type) => ({ type })) as GridActionColumn[],

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { selectAllGlobalAdmins } from 'src/app/store/global-admin/selectors';
@@ -24,16 +24,7 @@ export class GlobalAdminSystemIntegratorsComponent {
       title: 'Email',
       hidden: false,
     },
-    {
-      field: 'Actions',
-      title: ' ',
-      hidden: false,
-      style: 'action-buttons',
-      isSticky: true,
-      noFilter: true,
-      extraData: [{ type: 'delete' }] as GridActionColumn[],
-      width: 50,
-    }
+    createGridActionColumn(['delete']),
   ];
 
   constructor(private readonly store: Store) {
