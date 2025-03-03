@@ -2,12 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { APIUserReferenceResponseDTO } from 'src/app/api/v2';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { Actions, ofType } from '@ngrx/effects';
 import { selectAllGlobalAdmins, selectGlobalAdminsLoading } from 'src/app/store/global-admin/selectors';
 import { map } from 'rxjs';
+import { ShallowUser } from 'src/app/shared/models/userV2.model';
 
 @Component({
   selector: 'app-create-global-admin-dialog',
@@ -16,7 +16,7 @@ import { map } from 'rxjs';
 })
 export class CreateGlobalAdminDialogComponent extends BaseComponent implements OnInit {
   public formGroup = new FormGroup({
-    user: new FormControl<APIUserReferenceResponseDTO | undefined>(undefined, Validators.required)
+    user: new FormControl<ShallowUser | undefined>(undefined, Validators.required),
   });
 
   constructor(

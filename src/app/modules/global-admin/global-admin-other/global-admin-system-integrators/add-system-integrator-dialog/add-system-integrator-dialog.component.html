@@ -1,1 +1,16 @@
-<p>add-system-integrator-dialog works!</p>
+<app-dialog title="Opret System Integrator" overflow="none" i18n-title>
+  <form [formGroup]="formGroup" (ngSubmit)="addSystemIntegrator()">
+    <app-user-dropdown
+      [formGroup]="formGroup"
+      [disabledUuids$]="systemIntegratorUuids$"
+      formName="user"
+      [searchGlobalUsers]="true"
+    >
+    </app-user-dropdown>
+
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="closeDialog()" i18n> Annuller </app-button>
+      <app-button buttonStyle="primary" type="submit" [disabled]="!formGroup.valid" i18n> Opret </app-button>
+    </app-dialog-actions>
+  </form>
+</app-dialog>
