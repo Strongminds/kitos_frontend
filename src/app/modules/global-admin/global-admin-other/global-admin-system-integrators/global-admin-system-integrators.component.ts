@@ -10,7 +10,6 @@ import { AddSystemIntegratorDialogComponent } from './add-system-integrator-dial
 import { GlobalAdminSystemIntegratorActions } from 'src/app/store/global-admin/system-integrators/actions';
 import { Actions, ofType } from '@ngrx/effects';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { map } from 'rxjs';
 import { toUuid } from 'src/app/shared/models/has-uuid';
 import { mapArray } from 'src/app/shared/helpers/observable-helpers';
 
@@ -22,6 +21,7 @@ import { mapArray } from 'src/app/shared/helpers/observable-helpers';
 })
 export class GlobalAdminSystemIntegratorsComponent extends BaseComponent implements OnInit {
   public readonly systemIntegrators$ = this.componentStore.systemIntegrators$;
+  public readonly loading$ = this.componentStore.loading$;
 
   public readonly gridColumns: GridColumn[] = [
     {

@@ -1,20 +1,18 @@
 <app-card>
-  <app-card-header title="System integratorer"> </app-card-header>
+  <app-card-header title="Systemintegratorer"> </app-card-header>
   <app-collection-extension-button
     class="create-button"
-    text=" Opret System Integrator"
+    text=" Opret Systemintegrator"
     (clicked)="openAddSystemIntegratorDialog()"
     i18n-text
   ></app-collection-extension-button>
   <ng-container *ngIf="systemIntegrators$ | async as systemIntegrators">
     <app-local-grid
       [data]="systemIntegrators"
-      [loading]="false"
+      [loading]="loading$ | async"
       [columns]="gridColumns"
       [deletePermission]="true"
       (deleteEvent)="deleteSystemIntegrator($event)"
-      exportToExcelName="System Integratorer"
-      i18n-exportToExcelName
     >
     </app-local-grid>
   </ng-container>
