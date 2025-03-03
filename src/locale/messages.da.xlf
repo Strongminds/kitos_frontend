@@ -6621,6 +6621,22 @@
         <source>Log ind med SSO</source>
         <target state="new">Log ind med SSO</target>
       </trans-unit>
+      <trans-unit id="6690985920092272336" datatype="html">
+        <source>Brugerstyring</source>
+        <target state="new">Brugerstyring</target>
+      </trans-unit>
+      <trans-unit id="6077242221566477767" datatype="html">
+        <source>API-brugere</source>
+        <target state="new">API-brugere</target>
+      </trans-unit>
+      <trans-unit id="6584322019872984203" datatype="html">
+        <source>Diverse</source>
+        <target state="new">Diverse</target>
+      </trans-unit>
+      <trans-unit id="1165134833481303333" datatype="html">
+        <source> Opret System Integrator</source>
+        <target state="new"> Opret System Integrator</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

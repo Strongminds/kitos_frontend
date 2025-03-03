@@ -5023,6 +5023,18 @@
       <trans-unit id="8924400491805013399" datatype="html">
         <source>Log mig ikke ud</source>
       </trans-unit>
+      <trans-unit id="1165134833481303333" datatype="html">
+        <source> Opret System Integrator</source>
+      </trans-unit>
+      <trans-unit id="6077242221566477767" datatype="html">
+        <source>API-brugere</source>
+      </trans-unit>
+      <trans-unit id="6584322019872984203" datatype="html">
+        <source>Diverse</source>
+      </trans-unit>
+      <trans-unit id="6690985920092272336" datatype="html">
+        <source>Brugerstyring</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
