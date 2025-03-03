@@ -19,23 +19,24 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APILegalPropertyUpdateRequestDTO } from '../model/aPILegalPropertyUpdateRequestDTO';
+import { APITokenIntrospectionRequest } from '../model/aPITokenIntrospectionRequest';
+// @ts-ignore
+import { APITokenIntrospectionResponse } from '../model/aPITokenIntrospectionResponse';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams {
-    systemUuid: string;
-    request: APILegalPropertyUpdateRequestDTO;
+export interface PostSingleTokenV2IntrospectRequestParams {
+    request: APITokenIntrospectionRequest;
 }
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2ItSystemDBSService {
+export class APIV2TokenService {
 
     protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
@@ -101,17 +102,13 @@ export class APIV2ItSystemDBSService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemDBSV2PatchDbsProperties(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public patchSingleItSystemDBSV2PatchDbsProperties(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public patchSingleItSystemDBSV2PatchDbsProperties(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public patchSingleItSystemDBSV2PatchDbsProperties(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const systemUuid = requestParameters.systemUuid;
-        if (systemUuid === null || systemUuid === undefined) {
-            throw new Error('Required parameter systemUuid was null or undefined when calling patchSingleItSystemDBSV2PatchDbsProperties.');
-        }
+    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APITokenIntrospectionResponse>;
+    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APITokenIntrospectionResponse>>;
+    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APITokenIntrospectionResponse>>;
+    public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling patchSingleItSystemDBSV2PatchDbsProperties.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleTokenV2Introspect.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -136,7 +133,6 @@ export class APIV2ItSystemDBSService {
 
         // to determine the Content-Type header
         const consumes: string[] = [
-            'application/merge-patch+json',
             'application/json'
         ];
         const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
@@ -155,8 +151,8 @@ export class APIV2ItSystemDBSService {
             }
         }
 
-        let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "systemUuid", value: systemUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/dbs`;
-        return this.httpClient.request<object>('patch', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/token/validate`;
+        return this.httpClient.request<APITokenIntrospectionResponse>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: request,
