@@ -9,7 +9,7 @@ import {
   ORGANIZATION_USER_COLUMNS_ID,
   ORGANIZATION_USER_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
-import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn, GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
@@ -161,18 +161,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       sortable: false,
       tooltipNegativeText: this.negativeTooltipText,
     },
-    {
-      field: 'Actions',
-      title: ' ',
-      section: this.organizationUserSectionName,
-      hidden: false,
-      style: 'action-buttons',
-      sortable: false,
-      isSticky: true,
-      noFilter: true,
-      extraData: [{ type: 'edit' }, { type: 'delete' }] as GridActionColumn[],
-      width: 100,
-    },
+    createGridActionColumn(['edit', 'delete']),
   ];
 
   constructor(

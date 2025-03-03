@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { mapEntityTypeToRelatedEntityType } from 'src/app/shared/helpers/entity-type.helper';
-import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -70,16 +70,7 @@ export class AlertsGridComponent implements OnInit {
         hidden: false,
         field: 'message',
       },
-      {
-        field: 'Actions',
-        title: ' ',
-        hidden: false,
-        style: 'action-buttons',
-        isSticky: true,
-        noFilter: true,
-        extraData: [{ type: 'delete' }] as GridActionColumn[],
-        width: 50,
-      },
+      createGridActionColumn(['delete']),
     ];
   }
 }

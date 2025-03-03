@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import {
@@ -56,16 +56,7 @@ export class LocalOptionGridComponent implements OnInit {
       title: $localize`Beskrivelse`,
       hidden: false,
     },
-    {
-      field: 'Actions',
-      title: ' ',
-      hidden: false,
-      style: 'action-buttons',
-      isSticky: true,
-      noFilter: true,
-      extraData: [{ type: 'edit' }] as GridActionColumn[],
-      width: 50,
-    },
+    createGridActionColumn(['edit']),
   ];
 
   public filteredGridColumns!: GridColumn[];

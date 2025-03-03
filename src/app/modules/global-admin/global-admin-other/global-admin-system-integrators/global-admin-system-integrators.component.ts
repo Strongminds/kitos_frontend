@@ -19,6 +19,21 @@ export class GlobalAdminSystemIntegratorsComponent {
       title: 'Navn',
       hidden: false,
     },
+    {
+      field: 'email',
+      title: 'Email',
+      hidden: false,
+    },
+    {
+      field: 'Actions',
+      title: ' ',
+      hidden: false,
+      style: 'action-buttons',
+      isSticky: true,
+      noFilter: true,
+      extraData: [{ type: 'delete' }] as GridActionColumn[],
+      width: 50,
+    }
   ];
 
   constructor(private readonly store: Store) {
