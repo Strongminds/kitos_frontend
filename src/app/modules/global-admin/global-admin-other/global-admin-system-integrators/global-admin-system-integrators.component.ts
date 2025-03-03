@@ -12,6 +12,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { map } from 'rxjs';
 import { toUuid } from 'src/app/shared/models/has-uuid';
+import { mapArray } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-global-admin-system-integrators',
@@ -58,9 +59,7 @@ export class GlobalAdminSystemIntegratorsComponent extends BaseComponent impleme
 
   public openAddSystemIntegratorDialog(): void {
     const dialogRef = this.dialog.open(AddSystemIntegratorDialogComponent);
-    dialogRef.componentInstance.systemIntegratorUuids$ = this.componentStore.systemIntegrators$.pipe(
-      map((systemIntegrators) => systemIntegrators.map(toUuid))
-    );
+    dialogRef.componentInstance.systemIntegratorUuids$ = this.componentStore.systemIntegrators$.pipe(mapArray(toUuid));
   }
 
   public deleteSystemIntegrator(systemIntegrator: ShallowUser): void {

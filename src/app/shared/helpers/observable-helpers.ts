@@ -1,5 +1,5 @@
 import { concatLatestFrom } from '@ngrx/operators';
-import { Observable, combineLatest } from 'rxjs';
+import { Observable, OperatorFunction, combineLatest } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { Cached } from '../models/cache-item.model';
 import { hasValidCache } from './date.helpers';
@@ -47,4 +47,8 @@ export function filterByValidCache<T>(cached$: Observable<Cached<T>>) {
       concatLatestFrom(() => cached$),
       filter(([, cache]) => !hasValidCache(cache?.cacheTime))
     );
+}
+
+export function mapArray<T, U>(fn: (item: T, index: number, array: T[]) => U): OperatorFunction<T[], U[]> {
+  return map((arr: T[]) => arr.map(fn));
 }

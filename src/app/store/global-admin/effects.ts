@@ -4,6 +4,7 @@ import { catchError, map, of, switchMap } from 'rxjs';
 import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
 import { GlobalAdminActions } from './actions';
 import { toShallowUser } from 'src/app/shared/models/userV2.model';
+import { mapArray } from 'src/app/shared/helpers/observable-helpers';
 
 @Injectable()
 export class GlobalAdminEffects {
@@ -18,7 +19,7 @@ export class GlobalAdminEffects {
       ofType(GlobalAdminActions.getGlobalAdmins),
       switchMap(() => {
         return this.globalUserService.getManyGlobalUserInternalV2GetGlobalAdmins().pipe(
-          map((adminsDto) => adminsDto.map(toShallowUser)),
+          mapArray(toShallowUser),
           map((admins) => GlobalAdminActions.getGlobalAdminsSuccess(admins)),
           catchError(() => of(GlobalAdminActions.getGlobalAdminsError()))
         );
