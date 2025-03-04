@@ -5044,6 +5044,9 @@
       <trans-unit id="7241391520100148399" datatype="html">
         <source>Opret Systemintegrator</source>
       </trans-unit>
+      <trans-unit id="3659417500377682001" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

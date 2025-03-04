@@ -6649,6 +6649,10 @@
         <source>Ændringer kunne ikke gemmes</source>
         <target state="new">Ændringer kunne ikke gemmes</target>
       </trans-unit>
+      <trans-unit id="3659417500377682001" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</source>
+        <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
