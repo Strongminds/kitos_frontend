@@ -74,6 +74,6 @@
     "comment": "Old comment",
     "id": "B"
   },
-  "dbsName": "Et DBS navn",
-  "dbsDataProcessorName": "Et DBS databehandler navn"
+  "legalName": "Et DBS navn",
+  "legalDataProcessorName": "Et DBS databehandler navn"
 }

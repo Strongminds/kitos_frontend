@@ -28,10 +28,12 @@ describe('global-admin other', () => {
     });
 
     cy.intercept('/odata/Organizations?$skip=0&$top=100&$count=true', { fixture: './global-admin/organizations.json' });
+    cy.intercept('api/v2/internal/users/system-integrators', { body: [] });
     cy.setup(true, 'global-admin/other');
   });
 
   it('can perform kle update', () => {
+    cy.getByDataCy('misc-segment').click();
     cy.intercept('api/v2/internal/kle/status', { fixture: './global-admin/kle-status-not-up-to-date.json' });
 
     cy.intercept('api/v2/internal/kle/changes', {
@@ -63,6 +65,7 @@ describe('global-admin other', () => {
   });
 
   it('can get broken links report', () => {
+    cy.getByDataCy('misc-segment').click();
     cy.intercept('api/v2/internal/broken-external-references-report/current/csv', {
       fixture: './global-admin/external-report.csv',
     });
@@ -75,10 +78,44 @@ describe('global-admin other', () => {
   });
 
   it('can get Api user organizations', () => {
+    cy.getByDataCy('api-users-segment').click();
     cy.getByDataCy('show-organizations-button').first().click();
 
     cy.getByDataCy('organizations-dialog').within(() => {
       cy.contains('Fælles Kommune');
     });
+  });
+
+  it('Can add, delete and see system integrators', () => {
+    const userToSelect = { name: 'Jens Jensen', email: 'jens@jensen.dk', uuid: 'd4efec33-2aea-4d89-927a-5d5899f6e616' };
+
+    //Add system integrator
+    cy.intercept('api/v2/internal/users/search', { body: [userToSelect] });
+
+    cy.getByDataCy('open-add-system-integrator-dialog-button').click();
+    cy.getByDataCy('add-system-integrator-dropdown').click();
+    cy.dropdownByCy('add-system-integrator-dropdown', 'Jens Jensen', true);
+
+    cy.intercept('api/v2/internal/users/system-integrators', { body: [userToSelect] });
+
+    cy.intercept('PATCH', 'api/v2/internal/users/system-integrators/*', { statusCode: 204 });
+
+    cy.getByDataCy('add-system-integrator-button').click();
+
+    cy.contains(userToSelect.name);
+    cy.contains(userToSelect.email);
+    cy.get('app-popup-message').should('exist');
+
+    //Delete system integrator
+    cy.intercept('api/v2/internal/users/system-integrators/*', { statusCode: 204 });
+
+    cy.intercept('api/v2/internal/users/system-integrators', { body: [] });
+
+    cy.getByDataCy('grid-delete-button').click();
+    cy.getByDataCy('confirm-button').click();
+
+    cy.contains(userToSelect.name).should('not.exist');
+    cy.contains(userToSelect.email).should('not.exist');
+    cy.get('app-popup-message').should('exist');
   });
 });

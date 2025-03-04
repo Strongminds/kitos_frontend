@@ -97,11 +97,11 @@ describe('it-system-catalog', () => {
 
   it('Can see, but not edit, DBS name and DBS data processor name', () => {
     goToDetails();
-    cy.getByDataCy('dbs-name').find('input').should('be.disabled');
-    cy.getByDataCy('dbs-data-processor-name').find('input').should('be.disabled');
+    cy.getByDataCy('legal-name').find('input').should('be.disabled');
+    cy.getByDataCy('legal-data-processor-name').find('input').should('be.disabled');
 
-    cy.getByDataCy('dbs-name').find('input').should('have.value', 'Et DBS navn');
-    cy.getByDataCy('dbs-data-processor-name').find('input').should('have.value', 'Et DBS databehandler navn');
+    cy.getByDataCy('legal-name').find('input').should('have.value', 'Et DBS navn');
+    cy.getByDataCy('legal-data-processor-name').find('input').should('have.value', 'Et DBS databehandler navn');
   });
 });
 

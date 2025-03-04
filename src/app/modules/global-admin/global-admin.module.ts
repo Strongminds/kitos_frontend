@@ -28,6 +28,8 @@ import { GlobalAdminOtherUserShutdownComponent } from './global-admin-other/glob
 import { GlobalAdminOtherComponent } from './global-admin-other/global-admin-other.component';
 import { GlobalAdminComponent } from './global-admin.component';
 import { GlobalAdminRouterModule } from './global-admin.routes';
+import { GlobalAdminSystemIntegratorsComponent } from './global-admin-other/global-admin-system-integrators/global-admin-system-integrators.component';
+import { AddSystemIntegratorDialogComponent } from './global-admin-other/global-admin-system-integrators/add-system-integrator-dialog/add-system-integrator-dialog.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +58,8 @@ import { GlobalAdminRouterModule } from './global-admin.routes';
     CreateLocalAdminDialogComponent,
     GlobalAdminOtherApiUsersComponent,
     ApiUsersOrganizationsDialogComponent,
+    GlobalAdminSystemIntegratorsComponent,
+    AddSystemIntegratorDialogComponent,
   ],
   imports: [CommonModule, ComponentsModule, SharedModule, GlobalAdminRouterModule],
 })

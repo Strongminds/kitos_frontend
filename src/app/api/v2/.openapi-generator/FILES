@@ -121,6 +121,7 @@ api/v2OrganizationsInternalINTERNAL.service.ts
 api/v2PasswordResetInternalINTERNAL.service.ts
 api/v2PublicMessagesINTERNAL.service.ts
 api/v2StsOrganizationSynchronizationInternalINTERNAL.service.ts
+api/v2Token.service.ts
 api/v2UsersInternalINTERNAL.service.ts
 configuration.ts
 encoder.ts
@@ -135,6 +136,7 @@ model/baseNotificationPropertiesWriteRequestDTO.ts
 model/brokenExternalReferencesReportStatusResponseDTO.ts
 model/changeOrganizationUnitRegistrationV2RequestDTO.ts
 model/changePaymentRegistrationV2RequestDTO.ts
+model/claimResponse.ts
 model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
 model/commandPermissionResponseDTO.ts
@@ -240,6 +242,7 @@ model/kLEDetailsDTO.ts
 model/kLEDetailsDTOIEnumerableVersionedKLEResponseDTO.ts
 model/kLEDetailsDTOVersionedKLEResponseDTO.ts
 model/kLEStatusResponseDTO.ts
+model/legalPropertiesUpdateRequestDTO.ts
 model/localKLEDeviationsRequestDTO.ts
 model/localKLEDeviationsResponseDTO.ts
 model/localOptionCreateRequestDTO.ts
@@ -317,6 +320,8 @@ model/stsOrganizationOrgUnitDTO.ts
 model/stsOrganizationSynchronizationDetailsResponseDTO.ts
 model/systemRelationWriteRequestDTO.ts
 model/systemWithUsageOutsideOrganizationConflictResponseDTO.ts
+model/tokenIntrospectionRequest.ts
+model/tokenIntrospectionResponse.ts
 model/trackingEventResponseDTO.ts
 model/transferOrganizationUnitRegistrationV2RequestDTO.ts
 model/uIModuleCustomizationRequestDTO.ts
@@ -326,7 +331,6 @@ model/uIRootConfigUpdateRequestDTO.ts
 model/unitAccessRightsResponseDTO.ts
 model/unitAccessRightsWithUnitDataResponseDTO.ts
 model/updateContractRequestDTO.ts
-model/updateDBSPropertiesRequestDTO.ts
 model/updateDataProcessingRegistrationRequestDTO.ts
 model/updateExternalReferenceDataWriteRequestDTO.ts
 model/updateItInterfaceRequestDTO.ts

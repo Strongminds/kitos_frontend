@@ -2,8 +2,9 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { APIV2GlobalUserInternalINTERNALService } from 'src/app/api/v2';
-import { adaptGlobalAdminUser } from 'src/app/shared/models/global-admin/global-admin-user.model';
 import { GlobalAdminActions } from './actions';
+import { toShallowUser } from 'src/app/shared/models/userV2.model';
+import { mapArray } from 'src/app/shared/helpers/observable-helpers';
 
 @Injectable()
 export class GlobalAdminEffects {
@@ -18,7 +19,7 @@ export class GlobalAdminEffects {
       ofType(GlobalAdminActions.getGlobalAdmins),
       switchMap(() => {
         return this.globalUserService.getManyGlobalUserInternalV2GetGlobalAdmins().pipe(
-          map((adminsDto) => adminsDto.map((userDto) => adaptGlobalAdminUser(userDto))),
+          mapArray(toShallowUser),
           map((admins) => GlobalAdminActions.getGlobalAdminsSuccess(admins)),
           catchError(() => of(GlobalAdminActions.getGlobalAdminsError()))
         );
@@ -31,7 +32,7 @@ export class GlobalAdminEffects {
       ofType(GlobalAdminActions.addGlobalAdmin),
       switchMap(({ userUuid }) => {
         return this.globalUserService.postSingleGlobalUserInternalV2AddGlobalAdmin({ userUuid }).pipe(
-          map((userDto) => adaptGlobalAdminUser(userDto)),
+          map(toShallowUser),
           map((user) => GlobalAdminActions.addGlobalAdminSuccess(user)),
           catchError(() => of(GlobalAdminActions.addGlobalAdminError()))
         );

@@ -25,6 +25,7 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
 import { AlertActions } from 'src/app/store/alerts/actions';
+import { GlobalAdminSystemIntegratorActions } from 'src/app/store/global-admin/system-integrators/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -186,6 +187,12 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(
       GlobalAdminPublicMessageActions.editPublicMessagesError,
       $localize`Beskeden kunne ikke opdateres`
+    );
+
+    this.subscribeAsDefault(GlobalAdminSystemIntegratorActions.editSystemIntegratorSuccess, $localize`Ændringer gemt`);
+    this.subscribeAsError(
+      GlobalAdminSystemIntegratorActions.editSystemIntegratorError,
+      $localize`Ændringer kunne ikke gemmes`
     );
   }
 

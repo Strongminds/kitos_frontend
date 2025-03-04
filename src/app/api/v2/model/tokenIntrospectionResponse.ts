@@ -9,10 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIClaimResponse } from './claimResponse';
 
 
-export interface APIUpdateDBSPropertiesRequestDTO { 
-    systemName?: string;
-    dataProcessorName?: string;
+export interface APITokenIntrospectionResponse { 
+    active?: boolean;
+    expiration?: string;
+    claims?: Array<APIClaimResponse>;
 }
 

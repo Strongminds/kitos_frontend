@@ -6621,6 +6621,38 @@
         <source>Log ind med SSO</source>
         <target state="new">Log ind med SSO</target>
       </trans-unit>
+      <trans-unit id="6690985920092272336" datatype="html">
+        <source>Brugerstyring</source>
+        <target state="new">Brugerstyring</target>
+      </trans-unit>
+      <trans-unit id="6077242221566477767" datatype="html">
+        <source>API-brugere</source>
+        <target state="new">API-brugere</target>
+      </trans-unit>
+      <trans-unit id="6584322019872984203" datatype="html">
+        <source>Diverse</source>
+        <target state="new">Diverse</target>
+      </trans-unit>
+      <trans-unit id="5423741656801177932" datatype="html">
+        <source> Opret Systemintegrator</source>
+        <target state="new"> Opret Systemintegrator</target>
+      </trans-unit>
+      <trans-unit id="7241391520100148399" datatype="html">
+        <source>Opret Systemintegrator</source>
+        <target state="new">Opret Systemintegrator</target>
+      </trans-unit>
+      <trans-unit id="3984565971698645463" datatype="html">
+        <source>Ændringer gemt</source>
+        <target state="new">Ændringer gemt</target>
+      </trans-unit>
+      <trans-unit id="1862687234657090800" datatype="html">
+        <source>Ændringer kunne ikke gemmes</source>
+        <target state="new">Ændringer kunne ikke gemmes</target>
+      </trans-unit>
+      <trans-unit id="3659417500377682001" datatype="html">
+        <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</source>
+        <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

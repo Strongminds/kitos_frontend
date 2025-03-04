@@ -39,6 +39,6 @@
   "created": null,
   "createdBy": { "uuid": "2baacf6b-9e3b-4ebf-b23f-45646b7ddada", "name": "Global admin" },
   "recommendedArchiveDuty": { "comment": null, "id": "NoRecommendation" },
-  "dbsName": "DBS navn 123",
-  "dbsDataProcessorName": "DBS databehandler navn 123"
+  "legalName": "DBS navn 123",
+  "legalDataProcessorName": "DBS databehandler navn 123"
 }

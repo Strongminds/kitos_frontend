@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { GridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { LocalAdminUser } from 'src/app/shared/models/local-admin/local-admin-user.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -37,16 +37,7 @@ export class GlobalAdminLocalAdminsGridComponent {
       title: $localize`Email`,
       hidden: false,
     },
-    {
-      field: 'Actions',
-      title: ' ',
-      hidden: false,
-      style: 'action-buttons',
-      isSticky: true,
-      noFilter: true,
-      extraData: [{ type: 'delete' }] as GridActionColumn[],
-      width: 50,
-    },
+    createGridActionColumn(['delete']),
   ];
 
   public createLocalAdmin(): void {
