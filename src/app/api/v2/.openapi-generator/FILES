@@ -242,7 +242,7 @@ model/kLEDetailsDTO.ts
 model/kLEDetailsDTOIEnumerableVersionedKLEResponseDTO.ts
 model/kLEDetailsDTOVersionedKLEResponseDTO.ts
 model/kLEStatusResponseDTO.ts
-model/legalPropertyUpdateRequestDTO.ts
+model/legalPropertiesUpdateRequestDTO.ts
 model/localKLEDeviationsRequestDTO.ts
 model/localKLEDeviationsResponseDTO.ts
 model/localOptionCreateRequestDTO.ts

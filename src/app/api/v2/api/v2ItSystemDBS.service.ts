@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APILegalPropertyUpdateRequestDTO } from '../model/aPILegalPropertyUpdateRequestDTO';
+import { APILegalPropertiesUpdateRequestDTO } from '../model/aPILegalPropertiesUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 
 export interface PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams {
     systemUuid: string;
-    request: APILegalPropertyUpdateRequestDTO;
+    request: APILegalPropertiesUpdateRequestDTO;
 }
 
 

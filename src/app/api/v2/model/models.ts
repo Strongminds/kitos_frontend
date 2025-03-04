@@ -113,7 +113,7 @@ export * from './kLEDetailsDTO';
 export * from './kLEDetailsDTOIEnumerableVersionedKLEResponseDTO';
 export * from './kLEDetailsDTOVersionedKLEResponseDTO';
 export * from './kLEStatusResponseDTO';
-export * from './legalPropertyUpdateRequestDTO';
+export * from './legalPropertiesUpdateRequestDTO';
 export * from './localKLEDeviationsRequestDTO';
 export * from './localKLEDeviationsResponseDTO';
 export * from './localOptionCreateRequestDTO';

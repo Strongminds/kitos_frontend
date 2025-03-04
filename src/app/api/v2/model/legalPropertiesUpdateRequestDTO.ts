@@ -11,7 +11,7 @@
  */
 
 
-export interface APILegalPropertyUpdateRequestDTO { 
+export interface APILegalPropertiesUpdateRequestDTO { 
     systemName?: string;
     dataProcessorName?: string;
 }
