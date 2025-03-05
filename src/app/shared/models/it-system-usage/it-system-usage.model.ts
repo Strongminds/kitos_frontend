@@ -60,7 +60,7 @@ export interface ITSystemUsage {
   LinkToDirectoryUrl: string;
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
-  DataProcessingRegistrationsConcludedAsCsv: string; //YesNoDontKnowOption | undefined;
+  DataProcessingRegistrationsConcludedAsCsv: string;
   DataProcessingRegistrationNamesAsCsv: string;
   DataProcessingRegistrations: { id: string; value: string }[];
   DataProcessingRegistrationsConcluded: { id: string; value: string }[];
