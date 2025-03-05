@@ -2,22 +2,21 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first, map, Observable } from 'rxjs';
-import { APIExternalReferenceDataResponseDTO, APIExternalReferenceWithLastChangedResponseDTO } from 'src/app/api/v2';
+import { APIExternalReferenceWithLastChangedResponseDTO } from 'src/app/api/v2';
+import { selectDataProcessing } from 'src/app/store/data-processing/selectors';
 import { ExternalReferencesManagmentActions } from 'src/app/store/external-references-management/actions';
+import { selectContract } from 'src/app/store/it-contract/selectors';
+import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystem } from 'src/app/store/it-system/selectors';
 import { BaseComponent } from '../../base/base.component';
-import { ExternalReferenceCommandsViewModel } from '../../models/external-references/external-reference-commands-view.model';
 import { ExternalReferenceViewModel } from '../../models/external-references/external-reference-view.model';
+import { HasUuid } from '../../models/has-uuid';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
+import { filterNullish } from '../../pipes/filter-nullish';
 import { ConfirmActionCategory, ConfirmActionService } from '../../services/confirm-action.service';
 import { CreateExternalReferenceDialogComponent } from './create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferencesComponentStore } from './external-references.component-store';
-import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
-import { selectItSystem } from 'src/app/store/it-system/selectors';
-import { selectContract } from 'src/app/store/it-contract/selectors';
-import { selectDataProcessing } from 'src/app/store/data-processing/selectors';
-import { filterNullish } from '../../pipes/filter-nullish';
-import { HasUuid } from '../../models/has-uuid';
 
 @Component({
   selector: 'app-external-references-management[entityType][hasModifyPermission]',
@@ -33,7 +32,7 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
   public readonly externalReferenceViewModels$ = this.externalReferencesComponentStore.externalReferences$.pipe(
     map((externalReferences) =>
       externalReferences
-        .map((externalReference) => this.mapExternalReferenceToViewModel(externalReference, externalReferences))
+        .map((externalReference) => this.mapExternalReferenceToViewModel(externalReference))
         .sort((a, b) => a.title.localeCompare(b.title))
     )
   );
@@ -102,21 +101,8 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
         })
     );
   }
-
-  getCommands(
-    externalReference: APIExternalReferenceDataResponseDTO,
-    allReferences: Array<APIExternalReferenceDataResponseDTO>
-  ): ExternalReferenceCommandsViewModel | null {
-    if (!this.hasModifyPermission) return null;
-    return {
-      edit: true,
-      delete: !externalReference.masterReference || allReferences.length === 1,
-    };
-  }
-
   private mapExternalReferenceToViewModel(
-    externalReference: APIExternalReferenceWithLastChangedResponseDTO,
-    externalReferences: Array<APIExternalReferenceWithLastChangedResponseDTO>
+    externalReference: APIExternalReferenceWithLastChangedResponseDTO
   ): ExternalReferenceViewModel {
     return {
       uuid: externalReference.uuid ?? '',
@@ -124,7 +110,6 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
       title: externalReference.title,
       url: externalReference.url,
       masterReference: externalReference.masterReference,
-      commands: this.getCommands(externalReference, externalReferences),
       lastChangedBy: externalReference.lastChangedByUsername,
       lastChangedDate: externalReference.lastChangedDate,
     };
