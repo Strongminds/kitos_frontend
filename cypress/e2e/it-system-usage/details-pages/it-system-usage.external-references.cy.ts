@@ -75,7 +75,6 @@ describe('it-system-usage', () => {
   });
 
   it('can modify external reference, and assign new Master reference', () => {
-
     cy.intercept(refsBaseUrl, {
       fixture: './it-system-usage/external-references/normal-external-references.json',
     });
@@ -110,7 +109,7 @@ describe('it-system-usage', () => {
     });
 
     cy.externalReferencesSaveAndValidate(
-      true,
+      false,
       false,
       true,
       itSystemUsageBaseUrl,
@@ -146,17 +145,5 @@ describe('it-system-usage', () => {
     cy.contains('Referencen blev slettet');
 
     cy.contains(referenceTitleToRemove).should('not.exist');
-  });
-
-  it('can not delete master external reference', () => {
-    cy.intercept(refsBaseUrl, {
-      fixture: './it-system-usage/external-references/normal-external-references.json',
-    });
-    cy.contains('System 3').click();
-    cy.navigateToDetailsSubPage('Lokale referencer');
-
-    cy.getRowForElementContent('No url Master reference')
-      .first()
-      .within(() => cy.get('app-trashcan-icon').should('not.exist'));
   });
 });

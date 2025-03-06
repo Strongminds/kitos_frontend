@@ -46,27 +46,23 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
     super();
   }
 
-  public editReference(externalReference: ExternalReferenceViewModel): void {
-    this.externalReferenceViewModels$.pipe(first()).subscribe((externalReferences) => {
-      const createDialogComponent = this.dialogService.open(EditExternalReferenceDialogComponent).componentInstance;
-      const enforceLockedMaster = this.shouldEnforceMasterReference(externalReferences, externalReference);
-      createDialogComponent.entityType = this.entityType;
-      createDialogComponent.masterReferenceIsReadOnly = enforceLockedMaster;
-      createDialogComponent.initialModel = {
-        ...externalReference,
-        masterReference: enforceLockedMaster,
-      };
-      createDialogComponent.referenceUuid = externalReference.uuid;
-    });
+  ngOnInit(): void {
+    this.subscriptions.add(
+      this.getEntitySelector()
+        .pipe(filterNullish())
+        .subscribe((entityWithUuid) => {
+          this.externalReferencesComponentStore.getExternalReferences(this.entityType)(entityWithUuid.uuid);
+        })
+    );
   }
 
-  private shouldEnforceMasterReference(
-    externalReferences: ExternalReferenceViewModel[],
-    externalReference?: ExternalReferenceViewModel
-  ) {
-    const noMaster = externalReferences.filter((x) => x.masterReference).length === 0;
-    const enforceLockedMaster = externalReference?.masterReference || noMaster;
-    return enforceLockedMaster;
+  public editReference(externalReference: ExternalReferenceViewModel): void {
+    const createDialogComponent = this.dialogService.open(EditExternalReferenceDialogComponent).componentInstance;
+    createDialogComponent.entityType = this.entityType;
+    createDialogComponent.initialModel = {
+      ...externalReference,
+    };
+    createDialogComponent.referenceUuid = externalReference.uuid;
   }
 
   public removeReference(referenceUuid: string): void {
@@ -92,15 +88,15 @@ export class ExternalReferencesManagementComponent extends BaseComponent impleme
     });
   }
 
-  ngOnInit(): void {
-    this.subscriptions.add(
-      this.getEntitySelector()
-        .pipe(filterNullish())
-        .subscribe((entityWithUuid) => {
-          this.externalReferencesComponentStore.getExternalReferences(this.entityType)(entityWithUuid.uuid);
-        })
-    );
+  private shouldEnforceMasterReference(
+    externalReferences: ExternalReferenceViewModel[],
+    externalReference?: ExternalReferenceViewModel
+  ) {
+    const noMaster = externalReferences.filter((x) => x.masterReference).length === 0;
+    const enforceLockedMaster = externalReference?.masterReference || noMaster;
+    return enforceLockedMaster;
   }
+
   private mapExternalReferenceToViewModel(
     externalReference: APIExternalReferenceWithLastChangedResponseDTO
   ): ExternalReferenceViewModel {
