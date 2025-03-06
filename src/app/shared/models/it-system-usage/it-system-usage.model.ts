@@ -10,10 +10,10 @@ import {
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
 import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
-import { mapCapitalizedStringToYesNoIrrelevantEnum, mapToYesNoIrrelevantEnumGrid } from '../yes-no-irrelevant.model';
+import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
+import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
-import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -60,7 +60,7 @@ export interface ITSystemUsage {
   LinkToDirectoryUrl: string;
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
-  DataProcessingRegistrationsConcludedAsCsv: YesNoDontKnowOption | undefined;
+  DataProcessingRegistrationsConcludedAsCsv: string;
   DataProcessingRegistrationNamesAsCsv: string;
   DataProcessingRegistrations: { id: string; value: string }[];
   DataProcessingRegistrationsConcluded: { id: string; value: string }[];
@@ -154,9 +154,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
     GeneralPurpose: value.GeneralPurpose,
-    DataProcessingRegistrationsConcludedAsCsv: mapToYesNoIrrelevantEnumGrid(
-      value.DataProcessingRegistrationsConcludedAsCsv
-    ),
+    DataProcessingRegistrationsConcludedAsCsv: value.DataProcessingRegistrationsConcludedAsCsv,
     DataProcessingRegistrationNamesAsCsv: value.DataProcessingRegistrationNamesAsCsv,
     DataProcessingRegistrations: value.DataProcessingRegistrations?.map(
       (registration: { DataProcessingRegistrationUuid: string; DataProcessingRegistrationName: string }) => ({
@@ -219,7 +217,6 @@ function getDataProcessingRegistrationsConcluded(
       id: registration.DataProcessingRegistrationUuid,
       value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name,
       name: registration.DataProcessingRegistrationName,
-
     })
   ).filter((r: { value: string }) => r.value !== undefined);
 }
