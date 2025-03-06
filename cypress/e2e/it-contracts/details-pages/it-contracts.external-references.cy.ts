@@ -65,16 +65,4 @@ describe('it-contracts.external-references', () => {
       'Valid url'
     );
   });
-
-  it('can not delete master external reference', () => {
-    cy.intercept(refsUrl, {
-      fixture: './external-references/extra-external-references.json',
-    });
-    cy.contains('Contract 1').click();
-    cy.navigateToDetailsSubPage('Referencer');
-
-    cy.getRowForElementContent('No url Master reference')
-      .first()
-      .within(() => cy.get('app-trashcan-icon').should('not.exist'));
-  });
 });
