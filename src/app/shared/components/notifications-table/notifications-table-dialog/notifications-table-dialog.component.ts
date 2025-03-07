@@ -95,8 +95,8 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableDialogComponent>,
     private readonly componentStore: NotificationsTableComponentStore,
-    private readonly store: Store,
-    ) {
+    private readonly store: Store
+  ) {
     super();
     this.rootUrl = this.appRootUrlResolverService.resolveRootUrl();
   }
@@ -122,17 +122,16 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     }
   }
 
-  public getDefaultNotificationBody(){
-    return $localize`<a href="${this.getEntityLink()}">Gå til ${ this.getEntityName() }</a>`
+  public getDefaultNotificationBody() {
+    return $localize`<a href="${this.getEntityLink()}">Gå til ${this.getEntityName()}</a>`;
   }
 
-  public getEntityLink(){
+  public getEntityLink() {
     const modulePath = this.getEntityModulePath();
     return `${this.rootUrl}/${modulePath}/${this.ownerEntityUuid}`;
-
   }
 
-  private getEntityModulePath(){
+  private getEntityModulePath() {
     switch (this.ownerResourceType) {
       case 'ItSystemUsage':
         return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
@@ -259,7 +258,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   private getBasePropertiesDto(notificationForm: FormGroup): APIBaseNotificationPropertiesWriteRequestDTO | undefined {
     const notificationControls = notificationForm.controls;
     const subject = notificationControls['subjectControl'].value;
-    const body = notificationControls['bodyControl'].value;
+    const body = notificationControls['bodyControl'].value ?? this.getDefaultNotificationBody();
 
     const receivers = notificationControls['receivers'].value;
     const ccs = notificationControls['ccs'].value;
@@ -289,7 +288,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     return undefined;
   }
 
-  private hasRecipients(roleReceivers: { roleUuid: string }[], emailReceivers: APIEmailRecipientWriteRequestDTO[]){
+  private hasRecipients(roleReceivers: { roleUuid: string }[], emailReceivers: APIEmailRecipientWriteRequestDTO[]) {
     return roleReceivers.length > 0 || emailReceivers.length > 0;
   }
 

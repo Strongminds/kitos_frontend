@@ -15,6 +15,11 @@ describe('public messages', () => {
 
   it('Can not edit public messages if not global admin', () => {
     cy.setup(false);
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
+    cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {
+      fixture: './it-system-usage/options.json',
+    });
     cy.login('./shared/authorize-no-rights.json');
 
     cy.getByDataCy('open-public-message').first().click();
