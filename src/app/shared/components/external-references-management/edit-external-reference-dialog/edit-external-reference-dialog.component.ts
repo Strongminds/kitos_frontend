@@ -17,7 +17,6 @@ import { CreateExternalReferenceDialogComponent } from '../create-external-refer
 export class EditExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public referenceUuid!: string;
   @Input() public entityType!: RegistrationEntityTypes;
-  @Input() public masterReferenceIsReadOnly!: boolean;
   @Input() public initialModel!: ExternalReferenceProperties;
   public busy = false;
   constructor(

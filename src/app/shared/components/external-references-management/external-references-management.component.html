@@ -31,16 +31,11 @@
                 <app-paragraph paragraphSize="small"
                   ><app-boolean-circle [value]="externalReference.masterReference"></app-boolean-circle
                 ></app-paragraph>
-                <app-table-row-actions *ngIf="externalReference.commands">
-                  <app-icon-button
-                    *ngIf="externalReference.commands.edit"
-                    data-cy="edit-reference-button"
-                    (buttonClick)="editReference(externalReference)"
+                <app-table-row-actions *ngIf="hasModifyPermission">
+                  <app-icon-button data-cy="edit-reference-button" (buttonClick)="editReference(externalReference)"
                     ><app-pencil-icon></app-pencil-icon
                   ></app-icon-button>
-                  <app-icon-button
-                    *ngIf="externalReference.commands.delete"
-                    (buttonClick)="removeReference(externalReference.uuid)"
+                  <app-icon-button (buttonClick)="removeReference(externalReference.uuid)"
                     ><app-trashcan-icon></app-trashcan-icon
                   ></app-icon-button>
                 </app-table-row-actions>
