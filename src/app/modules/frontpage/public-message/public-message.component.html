@@ -9,7 +9,12 @@
 
     <div class="link-container">
       <app-status-chip [value]="activeStatus(publicMessage)" [valueDisplayType]="statusDisplayType"></app-status-chip>
-      <app-button buttonStyle="tertiary" (buttonClick)="openPublicMessageDialog()" data-cy="open-public-message">
+      <app-button
+        size="small"
+        buttonStyle="tertiary"
+        (buttonClick)="openPublicMessageDialog()"
+        data-cy="open-public-message"
+      >
         Læs mere
       </app-button>
     </div>
