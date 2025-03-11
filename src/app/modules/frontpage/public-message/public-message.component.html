@@ -13,7 +13,15 @@
     </div>
   </div>
 
-  <app-paragraph paragraphSize="large" [bold]="true"> {{ publicMessage.title }}</app-paragraph>
+  <app-external-page-link
+    *ngIf="publicMessage.link"
+    [url]="publicMessage.link"
+    [title]="publicMessage.title"
+    linkFontSize="large"
+  ></app-external-page-link>
+  <app-paragraph *ngIf="!publicMessage.link" paragraphSize="large" [bold]="true">
+    {{ publicMessage.title }}</app-paragraph
+  >
   <div class="padding"></div>
   <app-paragraph [dimmed]="true" paragraphSize="medium"> {{ publicMessage.shortDescription }}</app-paragraph>
 </app-card>

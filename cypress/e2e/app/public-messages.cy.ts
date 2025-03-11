@@ -63,7 +63,6 @@ describe('public messages', () => {
     cy.wait('@getPublicMessages');
 
     cy.contains(titleInput);
-    //TODO: Assert you can click link
     cy.contains(shortDescriptionInput);
     cy.contains(longDescriptionInput);
     cy.contains('Ustabil drift');
@@ -73,7 +72,11 @@ describe('public messages', () => {
 });
 
 function assertPublicMessageIsCorrect() {
+  cy.window().then((win) => {
+    cy.stub(win, 'open').as('windowOpen');
+  });
   cy.contains('Vejledninger');
+  cy.get('@windowOpen').should('be.calledWith', 'https://www.google.com');
   cy.contains('Normal drift');
   cy.contains('Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.');
 
