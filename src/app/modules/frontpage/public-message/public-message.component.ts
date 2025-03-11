@@ -38,7 +38,7 @@ export class PublicMessageComponent implements OnInit {
     );
   }
 
-  public onEdit(): void {
+  public openPublicMessageDialog(): void {
     const dialogRef = this.dialog.open(PublicMessageDialogComponent);
     dialogRef.componentInstance.publicMessage$ = this.publicMessage$;
   }
