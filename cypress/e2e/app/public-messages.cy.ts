@@ -75,8 +75,8 @@ function assertPublicMessageIsCorrect() {
   cy.window().then((win) => {
     cy.stub(win, 'open').as('windowOpen');
   });
-  cy.contains('Vejledninger');
-  cy.get('@windowOpen').should('be.calledWith', 'https://www.google.com');
+  cy.contains('Vejledninger').click();
+  cy.get('@windowOpen').should('be.calledWith', "https://www.google.com/");
   cy.contains('Normal drift');
   cy.contains('Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.');
 
