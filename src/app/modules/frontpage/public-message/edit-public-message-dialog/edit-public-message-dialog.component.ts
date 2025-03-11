@@ -22,6 +22,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
     status: new FormControl<StatusType | undefined>(undefined),
     shortDescription: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(105)]),
     longDescription: new FormControl<string | undefined>(undefined),
+    url: new FormControl<string | undefined>(undefined),
   });
 
   public readonly statusTypeOptions = statusTypeOptions;
@@ -40,6 +41,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
       status: this.publicMessage.status,
       shortDescription: this.publicMessage.shortDescription,
       longDescription: this.publicMessage.longDescription,
+      url: this.publicMessage.link,
     });
 
     this.subscriptions.add(
@@ -65,6 +67,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
       title: value.title ?? undefined,
       shortDescription: value.shortDescription ?? undefined,
       longDescription: value.longDescription ?? undefined,
+      link: value.url ?? undefined,
       status: this.getStatusValue(),
     };
   }

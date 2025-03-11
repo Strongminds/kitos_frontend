@@ -50,6 +50,7 @@ describe('public messages', () => {
       expect(req.body.status).to.eq('Inactive');
       expect(req.body.shortDescription).to.eq(shortDescriptionInput);
       expect(req.body.longDescription).to.eq('<p>' + longDescriptionInput + '</p>');
+      expect(req.body.link).to.eq('https://www.youtube.com');
       req.reply({});
     });
 
@@ -62,6 +63,7 @@ describe('public messages', () => {
     cy.wait('@getPublicMessages');
 
     cy.contains(titleInput);
+    //TODO: Assert you can click link
     cy.contains(shortDescriptionInput);
     cy.contains(longDescriptionInput);
     cy.contains('Ustabil drift');
