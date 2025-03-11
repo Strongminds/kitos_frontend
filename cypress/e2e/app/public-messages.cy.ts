@@ -37,6 +37,7 @@ describe('public messages', () => {
     const longDescriptionInput = 'Lang beskrivelse.';
 
     cy.getByDataCy('title').clear().type(titleInput);
+    cy.getByDataCy('url').clear().type('https://www.youtube.com');
     cy.getByDataCy('status').click();
     cy.get('.ng-option').eq(1).click();
     cy.getByDataCy('short-description').clear().type(shortDescriptionInput);

@@ -2,6 +2,7 @@
   <form [formGroup]="formGroup" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
       <app-textbox text="Titel" [formGroup]="formGroup" formName="title" data-cy="title"></app-textbox>
+      <app-textbox text="URL" [formGroup]="formGroup" formName="url" i18n-text data-cy="url"></app-textbox>
       <app-dropdown
         [data]="statusTypeOptions"
         text="Status"
