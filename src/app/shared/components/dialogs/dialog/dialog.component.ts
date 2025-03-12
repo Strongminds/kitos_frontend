@@ -8,6 +8,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class DialogComponent {
   @Input() public title?: string;
+  @Input() public url?: string;
   @Input() public icon?: 'help';
   @Input() public loading = false;
   @Input() public closable = true;

@@ -6,13 +6,15 @@
     <div class="container">
       <h3 class="title-align-bottom">
         <span class="title-container">
-          {{ title }}
+          <a *ngIf="url" class="title-container" [href]="url" target="_blank">
+            {{ title }}
+          </a>
+          <span *ngIf="!url" class="title-container">
+            {{ title }}
+          </span>
         </span>
       </h3>
-      <app-help-button
-        [helpTextKey]="helpText"
-        [ngClass]="{ 'hide-help-button': !helpText }"
-      ></app-help-button>
+      <app-help-button [helpTextKey]="helpText" [ngClass]="{ 'hide-help-button': !helpText }"></app-help-button>
     </div>
   </div>
 </ng-container>
