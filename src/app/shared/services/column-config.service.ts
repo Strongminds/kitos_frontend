@@ -19,10 +19,7 @@ import { GridUIConfigService } from './ui-config-services/grid-ui-config.service
 
 @Injectable({ providedIn: 'root' })
 export class ColumnConfigService {
-  constructor(
-    private store: Store,
-    private gridUiConfigService: GridUIConfigService
-  ) {}
+  constructor(private store: Store, private gridUiConfigService: GridUIConfigService) {}
 
   public dispatchSaveAction(entityType: RegistrationEntityTypes, columns: GridColumn[]) {
     const mappedColumns = this.mapColumnsToGridConfigurationRequest(columns);
@@ -172,19 +169,16 @@ export class ColumnConfigService {
     columns: GridColumn[],
     config: APIOrganizationGridConfigurationResponseDTO | undefined
   ): boolean {
-    if (!config || !config.visibleColumns) return false;
+    if (!config?.visibleColumns) return false;
 
-    const visibleColumns = columns.filter((column) => !column.hidden && !column.disabledByUIConfig);
+    const visibleColumnPersistIds = new Set(
+      columns.filter((column) => !column.hidden && !column.disabledByUIConfig).map((column) => column.persistId)
+    );
 
-    if (visibleColumns.length !== config.visibleColumns.length) return true;
+    const configPersistIds = new Set(
+      config.visibleColumns.map((column) => column.persistId).filter((x) => visibleColumnPersistIds.has(x))
+    );
 
-    const visiblePersistIds = visibleColumns.map((column) => column.persistId);
-    const configPersistIds = config.visibleColumns.map((column) => column.persistId);
-
-    const persistIdSet = new Set(visiblePersistIds);
-
-    const isDifferentFromConfig = configPersistIds.some((persistId) => !persistIdSet.has(persistId));
-
-    return isDifferentFromConfig;
+    return areSetsEqual(visibleColumnPersistIds, configPersistIds);
   }
 }
