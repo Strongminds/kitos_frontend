@@ -43,6 +43,10 @@ input {
   color: $color-negative;
 }
 
+.incorrect-link-color:hover {
+  color: $color-negative;
+}
+
 span {
   color: $color-neutral-80;
 }
