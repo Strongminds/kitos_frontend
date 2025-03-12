@@ -63,7 +63,7 @@ describe('public messages', () => {
 
     cy.wait('@getPublicMessages');
 
-    cy.contains(titleInput).should('have.attr', 'href', linkInput);
+    cy.contains(titleInput).isLinkTo(linkInput);
     cy.contains(shortDescriptionInput);
     cy.contains(longDescriptionInput);
     cy.contains('Ustabil drift');
@@ -73,10 +73,11 @@ describe('public messages', () => {
 });
 
 function assertPublicMessageIsCorrect() {
-  cy.contains('Vejledninger').should('have.attr', 'href', 'https://google.com').should('have.attr', 'target', '_blank');
+  cy.contains('Vejledninger').isLinkTo('https://google.com');
   cy.contains('Normal drift');
   cy.contains('Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.');
 
   cy.getByDataCy('open-public-message').first().click();
+  cy.getByDataCy('dialog-title-link').isLinkTo('https://google.com');
   cy.contains('Tilslut din kommune til Kitos');
 }
