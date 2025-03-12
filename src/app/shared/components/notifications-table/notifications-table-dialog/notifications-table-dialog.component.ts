@@ -258,7 +258,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
   private getBasePropertiesDto(notificationForm: FormGroup): APIBaseNotificationPropertiesWriteRequestDTO | undefined {
     const notificationControls = notificationForm.controls;
     const subject = notificationControls['subjectControl'].value;
-    const body = notificationControls['bodyControl'].value ?? this.getDefaultNotificationBody();
+    const body = notificationControls['bodyControl'].value;
 
     const receivers = notificationControls['receivers'].value;
     const ccs = notificationControls['ccs'].value;
@@ -393,6 +393,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       today.setHours(0, 0, 0, 0);
       notificationControls.fromDateControl.addValidators(dateGreaterThanOrEqualToDateValidator(today));
       notificationControls.fromDateControl.updateValueAndValidity();
+      notificationControls.bodyControl.setValue(this.getDefaultNotificationBody());
     }
   }
 

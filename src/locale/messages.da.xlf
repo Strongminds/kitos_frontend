@@ -6653,6 +6653,10 @@
         <source>Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</source>
         <target state="new">Er du sikker på at du vil fjerne &quot;<x id="PH" equiv-text="systemIntegrator.name"/>&quot;&apos;s rettighed som Systemintegrator?</target>
       </trans-unit>
+      <trans-unit id="7847315002899056423" datatype="html">
+        <source>Primært startmodul</source>
+        <target state="new">Primært startmodul</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
