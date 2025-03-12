@@ -35,9 +35,10 @@ describe('public messages', () => {
     const titleInput = 'Ny titel';
     const shortDescriptionInput = 'Kort beskrivelse.';
     const longDescriptionInput = 'Lang beskrivelse.';
+    const linkInput = 'https://www.youtube.com';
 
     cy.getByDataCy('title').clear().type(titleInput);
-    cy.getByDataCy('url').clear().type('https://www.youtube.com');
+    cy.getByDataCy('url').clear().type(linkInput);
     cy.getByDataCy('status').click();
     cy.get('.ng-option').eq(1).click();
     cy.getByDataCy('short-description').clear().type(shortDescriptionInput);
@@ -50,7 +51,7 @@ describe('public messages', () => {
       expect(req.body.status).to.eq('Inactive');
       expect(req.body.shortDescription).to.eq(shortDescriptionInput);
       expect(req.body.longDescription).to.eq('<p>' + longDescriptionInput + '</p>');
-      expect(req.body.link).to.eq('https://www.youtube.com');
+      expect(req.body.link).to.eq(linkInput);
       req.reply({});
     });
 
@@ -72,11 +73,7 @@ describe('public messages', () => {
 });
 
 function assertPublicMessageIsCorrect() {
-  cy.window().then((win) => {
-    cy.stub(win, 'open').as('windowOpen');
-  });
-  cy.contains('Vejledninger').click();
-  cy.get('@windowOpen').should('be.calledWith', "https://www.google.com/");
+  cy.contains('Vejledninger').should('have.attr', 'href', 'https://google.com').should('have.attr', 'target', '_blank');
   cy.contains('Normal drift');
   cy.contains('Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.');
 
