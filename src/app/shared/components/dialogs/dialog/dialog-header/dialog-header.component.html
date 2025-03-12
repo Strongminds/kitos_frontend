@@ -6,10 +6,10 @@
     <div class="container">
       <h3 class="title-align-bottom">
         <span class="title-container" data-cy="dialog-title">
-          <a *ngIf="url" class="title-container" [href]="url" target="_blank" data-cy="dialog-title-link">
+          <a *ngIf="url" [href]="url" target="_blank" data-cy="dialog-title-link">
             {{ title }}
           </a>
-          <span *ngIf="!url" class="title-container">
+          <span *ngIf="!url">
             {{ title }}
           </span>
         </span>
