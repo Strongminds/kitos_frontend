@@ -176,12 +176,12 @@ export class ColumnConfigService {
 
     const disabledByUiPersistIds = new Set(columns.filter((column) => column.disabledByUIConfig).map(toPersistId));
 
-    const visibleColumnPersistIds = new Set(
-      columns.filter((column) => !column.hidden && !column.disabledByUIConfig).map(toPersistId)
-    );
-
     const configPersistIds = new Set(
       config.visibleColumns.map(toPersistId).filter((x) => !disabledByUiPersistIds.has(x))
+    );
+
+    const visibleColumnPersistIds = new Set(
+      columns.filter((column) => !column.hidden && !column.disabledByUIConfig).map(toPersistId)
     );
 
     return !areSetsEqual(visibleColumnPersistIds, configPersistIds);
