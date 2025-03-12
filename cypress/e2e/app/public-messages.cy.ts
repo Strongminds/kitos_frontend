@@ -63,7 +63,7 @@ describe('public messages', () => {
 
     cy.wait('@getPublicMessages');
 
-    cy.contains(titleInput);
+    cy.contains(titleInput).should('have.attr', 'href', linkInput);
     cy.contains(shortDescriptionInput);
     cy.contains(longDescriptionInput);
     cy.contains('Ustabil drift');
