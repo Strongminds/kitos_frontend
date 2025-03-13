@@ -91,6 +91,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         validationErrors.includes('StartDateNotPassed') ? this.notYetValidText : undefined,
         validationErrors.includes('EndDatePassed') ? this.expiredText : undefined,
         validationErrors.includes('TerminationPeriodExceeded') ? this.terminationPeriodExceededText : undefined,
+        validationErrors.includes('InvalidParentContract') ? this.invalidParentContractText : undefined,
       ];
       return text + '\n' + toBulletPoints(errorMessages);
     })
@@ -99,6 +100,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   private readonly notYetValidText = $localize`'Gyldig fra' er endnu ikke passeret`;
   private readonly expiredText = $localize`'Gyldig til' er overskredet`;
   private readonly terminationPeriodExceededText = $localize`Kontrakten er opsagt og evt. opsigelsesfrist er overskredet`;
+  private readonly invalidParentContractText = $localize`Den overordnede kontrakt er ikke gyldig`;
 
   public readonly users$ = this.componentStore.users$.pipe(
     map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid })))
