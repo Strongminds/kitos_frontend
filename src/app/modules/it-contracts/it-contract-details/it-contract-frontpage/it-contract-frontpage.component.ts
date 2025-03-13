@@ -91,14 +91,16 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         validationErrors.includes('StartDateNotPassed') ? this.notYetValidText : undefined,
         validationErrors.includes('EndDatePassed') ? this.expiredText : undefined,
         validationErrors.includes('TerminationPeriodExceeded') ? this.terminationPeriodExceededText : undefined,
+        validationErrors.includes('InvalidParentContract') ? this.invalidParentContractText : undefined,
       ];
-      return text + "\n" + toBulletPoints(errorMessages);
+      return text + '\n' + toBulletPoints(errorMessages);
     })
   );
 
   private readonly notYetValidText = $localize`'Gyldig fra' er endnu ikke passeret`;
   private readonly expiredText = $localize`'Gyldig til' er overskredet`;
   private readonly terminationPeriodExceededText = $localize`Kontrakten er opsagt og evt. opsigelsesfrist er overskredet`;
+  private readonly invalidParentContractText = $localize`Den overordnede kontrakt er ikke gyldig`;
 
   public readonly users$ = this.componentStore.users$.pipe(
     map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid })))
@@ -126,6 +128,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   public readonly parentContractForm = new FormGroup({
     parentContract: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
+    requireValidParent: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly responsibleFormGroup = new FormGroup({
@@ -338,7 +341,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   }
 
   private patchParentContractFormGroup(contract: APIItContractResponseDTO) {
-    this.parentContractForm.patchValue({ parentContract: contract.parentContract });
+    this.parentContractForm.patchValue({
+      parentContract: contract.parentContract,
+      requireValidParent: contract.general.validity.requireValidParent,
+    });
   }
 
   private patchResponsibleFormGroup(contract: APIItContractResponseDTO) {
