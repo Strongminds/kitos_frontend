@@ -92,7 +92,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         validationErrors.includes('EndDatePassed') ? this.expiredText : undefined,
         validationErrors.includes('TerminationPeriodExceeded') ? this.terminationPeriodExceededText : undefined,
       ];
-      return text + "\n" + toBulletPoints(errorMessages);
+      return text + '\n' + toBulletPoints(errorMessages);
     })
   );
 
@@ -126,6 +126,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   public readonly parentContractForm = new FormGroup({
     parentContract: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
+    requireValidParent: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly responsibleFormGroup = new FormGroup({

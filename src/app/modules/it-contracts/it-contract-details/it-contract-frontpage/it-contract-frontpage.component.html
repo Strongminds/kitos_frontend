@@ -129,19 +129,31 @@
     i18n-title
   ></app-card-header>
 
-  <app-connected-dropdown
-    text="Overordnet kontrakt"
-    i18n-text
-    data-cy="parent-contract"
-    valueField="uuid"
-    [formGroup]="parentContractForm"
-    formName="parentContract"
-    [data$]="validParentContracts$"
-    [isLoading$]="contractsIsLoading$"
-    (filterChange)="searchParentContracts($event)"
-    (valueChange)="patchFrontPage({ parentContractUuid: $event })"
-  >
-  </app-connected-dropdown>
+  <app-form-grid>
+    <app-connected-dropdown
+      text="Overordnet kontrakt"
+      i18n-text
+      data-cy="parent-contract"
+      class="input-two-thirds-column-width"
+      valueField="uuid"
+      [formGroup]="parentContractForm"
+      formName="parentContract"
+      [data$]="validParentContracts$"
+      [isLoading$]="contractsIsLoading$"
+      (filterChange)="searchParentContracts($event)"
+      (valueChange)="patchFrontPage({ parentContractUuid: $event })"
+    >
+    </app-connected-dropdown>
+    <app-checkbox
+      [formGroup]="parentContractForm"
+      formName="requireValidParent"
+      (valueChange)="patchFrontPage({ general: { validity: {} } })"
+      labelPosition="after"
+      text="Invalider ved ugyldig overordnet kontrakt"
+      i18n-text
+      data-cy="require-valid-parent"
+    ></app-checkbox>
+  </app-form-grid>
 </app-card>
 
 <app-card *ngIf="showResponsibleCard$ | async">
