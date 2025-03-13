@@ -73,11 +73,12 @@ describe('public messages', () => {
 });
 
 function assertPublicMessageIsCorrect() {
-  cy.contains('Vejledninger').isLinkTo('https://google.com');
+  const expectedLink = 'https://google.com';
+  cy.contains('Vejledninger').isLinkTo(expectedLink);
   cy.contains('Normal drift');
   cy.contains('Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.');
 
   cy.getByDataCy('open-public-message').first().click();
-  cy.getByDataCy('dialog-title-link').isLinkTo('https://google.com');
+  cy.getByDataCy('dialog-title-link').isLinkTo(expectedLink);
   cy.contains('Tilslut din kommune til Kitos');
 }
