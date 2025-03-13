@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIClaimResponse } from './claimResponse';
+import { APIClaimResponseDTO } from './claimResponseDTO';
 
 
-export interface APITokenIntrospectionResponse { 
+export interface APITokenIntrospectionResponseDTO { 
     active?: boolean;
     expiration?: string;
-    claims?: Array<APIClaimResponse>;
+    claims?: Array<APIClaimResponseDTO>;
 }
 
