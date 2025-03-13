@@ -1,6 +1,6 @@
 import { entityWithUnavailableName } from '../../helpers/string.helpers';
 import { AccessModifierChoice, mapAccessModifierEnumToAccessModifierChoice } from '../access-modifier.model';
-import { IdentityNamePair } from '../identity-name-pair.model';
+import { IdentityNamePairWithDeactivatedStatus } from '../identity-name-pair.model';
 import {
   ArchiveDutyRecommendationChoice,
   mapArchiveDutyRecommendationChoice,
@@ -30,7 +30,8 @@ export interface ITSystem {
   CanChangeUsageStatus: boolean;
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
-  Usages: IdentityNamePair[];
+  ActiveUsages: IdentityNamePairWithDeactivatedStatus[];
+  InactiveUsages: IdentityNamePairWithDeactivatedStatus[];
   LegalName?: string;
   LegalDataProcessorName?: string;
 }
@@ -40,11 +41,26 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
   if (!value.Uuid) return;
   const isDisabled = value.Disabled;
 
-  const mappedUsages: IdentityNamePair[] = value.Usages.map(
-    (usage: { Organization: { Name: string; Uuid: string } }) => {
-      return { name: usage.Organization.Name, uuid: usage.Organization.Uuid };
+  const mappedUsages: IdentityNamePairWithDeactivatedStatus[] = value.Usages.map(
+    (usage: {
+      Organization: { Name: string; Uuid: string };
+      IsActiveAccordingToDateFields: boolean;
+      IsActiveAccordingToLifeCycle: boolean;
+      IsActiveAccordingToMainContract: boolean;
+    }) => {
+      return {
+        name: usage.Organization.Name,
+        uuid: usage.Organization.Uuid,
+        deactivated:
+          !usage.IsActiveAccordingToDateFields &&
+          !usage.IsActiveAccordingToLifeCycle &&
+          !usage.IsActiveAccordingToMainContract,
+      };
     }
   );
+
+  const activeUsages = mappedUsages.filter((usage) => !usage.deactivated);
+  const inactiveUsages = mappedUsages.filter((usage) => usage.deactivated);
   const reference = value.Reference;
 
   return {
@@ -73,7 +89,8 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     CanChangeUsageStatus: !isDisabled,
     BelongsTo: { Name: value.BelongsTo?.Name },
     BusinessType: value.BusinessType,
-    Usages: mappedUsages,
+    ActiveUsages: activeUsages,
+    InactiveUsages: inactiveUsages,
     LegalName: value.LegalName,
     LegalDataProcessorName: value.LegalDataProcessorName,
   };
