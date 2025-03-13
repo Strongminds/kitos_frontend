@@ -62,7 +62,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
   private readonly defaultGridColumns: GridColumn[] = [
     {
       field: GridFields.IsActive,
-      title: $localize`Gyldig/Ikke Gyldig`,
+      title: $localize`Status`,
       section: this.contractSection,
       filter: 'boolean',
       extraData: [
