@@ -31,6 +31,7 @@
       optionType="it-contract_contract-type"
       [formGroup]="frontpageFormGroup"
       formName="contractType"
+      data-cy="contract-type"
       (valueChange)="patchFrontPage({ general: { contractTypeUuid: ignoreNullReturnType($event) } })"
     >
     </app-option-type-dropdown>
