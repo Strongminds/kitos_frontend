@@ -8,6 +8,7 @@ import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
 import { map, Observable } from 'rxjs';
 import { FrontpageComponentStore } from '../frontpage.component-store';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 
 export interface PublicMessageConfig {
   iconType: IconType;
@@ -41,6 +42,11 @@ export class PublicMessageComponent implements OnInit {
   public openPublicMessageDialog(): void {
     const dialogRef = this.dialog.open(PublicMessageDialogComponent);
     dialogRef.componentInstance.publicMessage$ = this.publicMessage$;
+  }
+
+  public hasValidUrl(publicMessage: PublicMessage): boolean {
+    const url = publicMessage.link;
+    return !!url && validateUrl(url);
   }
 
   public activeStatus(publicMessage: PublicMessage): boolean | undefined {

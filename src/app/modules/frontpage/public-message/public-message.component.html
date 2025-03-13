@@ -21,12 +21,12 @@
   </div>
 
   <app-external-page-link
-    *ngIf="publicMessage.link"
+    *ngIf="hasValidUrl(publicMessage)"
     [url]="publicMessage.link"
     [title]="publicMessage.title"
     linkFontSize="large"
   ></app-external-page-link>
-  <app-paragraph *ngIf="!publicMessage.link" paragraphSize="large" [bold]="true">
+  <app-paragraph *ngIf="!hasValidUrl(publicMessage)" paragraphSize="large" [bold]="true">
     {{ publicMessage.title }}</app-paragraph
   >
   <div class="padding"></div>
