@@ -35,8 +35,10 @@ describe('public messages', () => {
     const titleInput = 'Ny titel';
     const shortDescriptionInput = 'Kort beskrivelse.';
     const longDescriptionInput = 'Lang beskrivelse.';
+    const linkInput = 'https://www.youtube.com';
 
     cy.getByDataCy('title').clear().type(titleInput);
+    cy.getByDataCy('url').clear().type(linkInput);
     cy.getByDataCy('status').click();
     cy.get('.ng-option').eq(1).click();
     cy.getByDataCy('short-description').clear().type(shortDescriptionInput);
@@ -49,6 +51,7 @@ describe('public messages', () => {
       expect(req.body.status).to.eq('Inactive');
       expect(req.body.shortDescription).to.eq(shortDescriptionInput);
       expect(req.body.longDescription).to.eq('<p>' + longDescriptionInput + '</p>');
+      expect(req.body.link).to.eq(linkInput);
       req.reply({});
     });
 
@@ -60,7 +63,7 @@ describe('public messages', () => {
 
     cy.wait('@getPublicMessages');
 
-    cy.contains(titleInput);
+    cy.contains(titleInput).isLinkTo(linkInput);
     cy.contains(shortDescriptionInput);
     cy.contains(longDescriptionInput);
     cy.contains('Ustabil drift');
@@ -70,10 +73,12 @@ describe('public messages', () => {
 });
 
 function assertPublicMessageIsCorrect() {
-  cy.contains('Vejledninger');
+  const expectedLink = 'https://google.com';
+  cy.contains('Vejledninger').isLinkTo(expectedLink);
   cy.contains('Normal drift');
   cy.contains('Skabeloner til brug ved oprettelse af IT-Systemer, leverandører og snitflader finder du her.');
 
   cy.getByDataCy('open-public-message').first().click();
+  cy.getByDataCy('dialog-title-link').isLinkTo(expectedLink);
   cy.contains('Tilslut din kommune til Kitos');
 }
