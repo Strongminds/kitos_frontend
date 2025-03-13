@@ -339,7 +339,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   }
 
   private patchParentContractFormGroup(contract: APIItContractResponseDTO) {
-    this.parentContractForm.patchValue({ parentContract: contract.parentContract });
+    this.parentContractForm.patchValue({
+      parentContract: contract.parentContract,
+      requireValidParent: contract.general.validity.requireValidParent,
+    });
   }
 
   private patchResponsibleFormGroup(contract: APIItContractResponseDTO) {
