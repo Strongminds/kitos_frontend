@@ -39,6 +39,14 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   }
 
   ngOnInit(): void {
+    this.formGroup.patchValue({
+      title: this.publicMessage.title,
+      status: this.publicMessage.status,
+      shortDescription: this.publicMessage.shortDescription,
+      longDescription: this.publicMessage.longDescription,
+      url: this.publicMessage.link,
+    });
+
     this.subscriptions.add(
       this.actions$.pipe(ofType(GlobalAdminPublicMessageActions.editPublicMessagesSuccess)).subscribe(() => {
         this.close();
@@ -50,14 +58,6 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
         this.showUrlError = !this.isUrlEmptyOrValid(url ?? undefined);
       })
     );
-
-    this.formGroup.patchValue({
-      title: this.publicMessage.title,
-      status: this.publicMessage.status,
-      shortDescription: this.publicMessage.shortDescription,
-      longDescription: this.publicMessage.longDescription,
-      url: this.publicMessage.link,
-    });
   }
 
   public close(): void {

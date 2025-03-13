@@ -5,7 +5,6 @@ import { PublicMessage } from 'src/app/shared/models/public-message.model';
 import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { EditPublicMessageDialogComponent } from '../edit-public-message-dialog/edit-public-message-dialog.component';
 import { Observable } from 'rxjs';
-import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 
 @Component({
   selector: 'app-public-message-dialog',
@@ -23,9 +22,4 @@ export class PublicMessageDialogComponent {
     const dialogRef = this.dialog.open(EditPublicMessageDialogComponent);
     dialogRef.componentInstance.publicMessage = publicMessage;
   }
-
-  public hasValidUrl(publicMessage: PublicMessage): boolean {
-      const url = publicMessage.link;
-      return !!url && validateUrl(url);
-    }
 }
