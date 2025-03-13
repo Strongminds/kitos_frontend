@@ -7,7 +7,7 @@ describe('it-contracts.frontpage', () => {
     cy.setup(true, 'it-contracts');
   });
 
-  it.only('contains all required fields', () => {
+  it('contains all required fields', () => {
     cy.contains('Contract 1').click();
 
     cy.inputByCy('contract-name').clear().type('Newname');
@@ -45,10 +45,11 @@ describe('it-contracts.frontpage', () => {
     cy.getByDataCy('contract-modified').find('input').should('have.value', '03-04-2024');
   });
 
-  it('can select parent contract', () => {
+  it.only('can select parent contract and set it as required', () => {
     cy.contains('Contract 1').click();
 
     cy.dropdownByCy('parent-contract', 'The valid contract', true);
+    cy.getByDataCy('require-valid-parent').find('input').click();
     cy.get('app-popup-message').should('exist');
   });
 });
