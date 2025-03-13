@@ -213,6 +213,8 @@ declare namespace Cypress {
      * @param dataCySelector: selector for target element
      */
     verifyDialogConfirmButtonDisabledByReactiveForm(dataCySelector: string): Chainable<Subject>;
+
+    isLinkTo(expectedHref: string, expectedTarget?: string): Chainable<Subject>;
   }
 
   // Intercept commands

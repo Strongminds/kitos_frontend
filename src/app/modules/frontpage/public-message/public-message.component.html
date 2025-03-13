@@ -2,18 +2,33 @@
   *ngIf="publicMessage$ | async as publicMessage"
   [ngClass]="{ 'compact-height': mode === 'compact', 'normal-height': mode === 'normal' }"
 >
-  <div (click)="onEdit()" class="top-container" data-cy="open-public-message">
+  <div class="top-container">
     <div class="icon-container">
       <app-icon [iconType]="config.iconType"></app-icon>
     </div>
 
     <div class="link-container">
       <app-status-chip [value]="activeStatus(publicMessage)" [valueDisplayType]="statusDisplayType"></app-status-chip>
-      <app-external-link-icon></app-external-link-icon>
+      <app-button
+        size="x-small"
+        buttonStyle="tertiary"
+        (buttonClick)="openPublicMessageDialog()"
+        data-cy="open-public-message"
+      >
+        Læs mere
+      </app-button>
     </div>
   </div>
 
-  <app-paragraph paragraphSize="large" [bold]="true"> {{ publicMessage.title }}</app-paragraph>
+  <app-external-page-link
+    *ngIf="hasValidUrl(publicMessage)"
+    [url]="publicMessage.link"
+    [title]="publicMessage.title"
+    linkFontSize="large"
+  ></app-external-page-link>
+  <app-paragraph *ngIf="!hasValidUrl(publicMessage)" paragraphSize="large" [bold]="true">
+    {{ publicMessage.title }}</app-paragraph
+  >
   <div class="padding"></div>
   <app-paragraph [dimmed]="true" paragraphSize="medium"> {{ publicMessage.shortDescription }}</app-paragraph>
 </app-card>
