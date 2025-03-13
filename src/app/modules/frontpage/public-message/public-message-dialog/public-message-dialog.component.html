@@ -1,4 +1,8 @@
-<app-dialog *ngIf="publicMessage$ | async as publicMessage" [title]="publicMessage.title" [url]="publicMessage.link">
+<app-dialog
+  *ngIf="publicMessage$ | async as publicMessage"
+  [title]="publicMessage.title"
+  [url]="hasValidUrl(publicMessage) ? publicMessage.link : undefined"
+>
   <p [innerHTML]="publicMessage.longDescription"></p>
 
   <app-dialog-actions *ngIf="(isGlobalAdmin$ | async) === true">
