@@ -13,7 +13,7 @@ export declare type ExtendedThemePalette = ThemePalette | 'secondary';
 export class ButtonComponent {
   @Input() public buttonStyle: ButtonStyle = 'primary';
   @Input() public color: ExtendedThemePalette = 'primary';
-  @Input() public size: 'small' | 'medium' | 'large' = 'medium';
+  @Input() public size: 'x-small' | 'small' | 'medium' | 'large' = 'medium';
   @Input() public disabled = false;
   @Input() public loading: boolean | null = false;
   @Input() public type: 'button' | 'submit' = 'button';

@@ -25,6 +25,11 @@ button.mat-mdc-button-base {
   }
 
   &.small {
+    height: 48px;
+    font-size: 14px;
+  }
+
+  &.x-small {
     height: 40px;
     font-size: 14px;
   }
