@@ -45,7 +45,7 @@ describe('it-contracts.frontpage', () => {
     cy.getByDataCy('contract-modified').find('input').should('have.value', '03-04-2024');
   });
 
-  it.only('can select parent contract and set it as required', () => {
+  it('can select parent contract and set it as required', () => {
     cy.contains('Contract 1').click();
 
     cy.dropdownByCy('parent-contract', 'The valid contract', true);
