@@ -1,6 +1,10 @@
 @import "theme";
 
 :host {
+  .external-page-link-large {
+    font-size: $link-font-size-large;
+  }
+
   .external-page-link-medium {
     font-size: $link-font-size-medium;
   }

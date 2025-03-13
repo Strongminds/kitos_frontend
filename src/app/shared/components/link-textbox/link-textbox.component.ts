@@ -32,9 +32,9 @@ export class LinkTextboxComponent extends BaseComponent {
     }
   }
 
-  public getLinkText(){
-    return this.simpleLink$
-      .pipe(map((simpleLink) => {
+  public getLinkText() {
+    return this.simpleLink$.pipe(
+      map((simpleLink) => {
         const url = simpleLink?.url;
         if (this.isLinkOnly) return url;
 
@@ -50,20 +50,22 @@ export class LinkTextboxComponent extends BaseComponent {
     );
   }
 
-  public enableClearX(){
-    return this.simpleLink$
-      .pipe(map((simpleLink) => {
+  public enableClearX() {
+    return this.simpleLink$.pipe(
+      map((simpleLink) => {
         const url = simpleLink?.url;
         const name = simpleLink?.name;
         return !(isEmptyOrUndefined(url) && isEmptyOrUndefined(name));
-      }));
+      })
+    );
   }
 
-  public hasNoLink(){
-    return this.simpleLink$
-      .pipe(map((simpleLink) => {
+  public hasNoLink() {
+    return this.simpleLink$.pipe(
+      map((simpleLink) => {
         return !simpleLink || !simpleLink.url;
-      }));
+      })
+    );
   }
 
   public validateSimpleLinkUrl(url: string | undefined) {
