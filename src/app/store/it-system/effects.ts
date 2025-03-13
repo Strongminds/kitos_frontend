@@ -76,7 +76,7 @@ export class ITSystemEffects {
               `TaskRefs($select=Description,TaskKey),` +
               `Parent($select=Name,Disabled),` +
               `Organization($select=Id,Name),` +
-              `Usages($select=*;$expand=Organization($select=Uuid,Name)),` +
+              `Usages($select=IsActiveAccordingToDateFields;$expand=Organization($select=Uuid,Name)),` +
               `LastChangedByUser($select=Name,LastName),` +
               `Reference($select=Title,URL,ExternalReferenceId)&${fixedOdataString}&$count=true`
           )

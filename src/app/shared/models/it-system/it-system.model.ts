@@ -52,8 +52,8 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
         name: usage.Organization.Name,
         uuid: usage.Organization.Uuid,
         deactivated:
-          !usage.IsActiveAccordingToDateFields &&
-          !usage.IsActiveAccordingToLifeCycle &&
+          !usage.IsActiveAccordingToDateFields ||
+          !usage.IsActiveAccordingToLifeCycle ||
           !usage.IsActiveAccordingToMainContract,
       };
     }

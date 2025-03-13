@@ -8,7 +8,8 @@ export const ACCESS_MODIFIER = 'AccessModifier';
 export const BUSINESS_TYPE_NAME = 'BusinessType.Name';
 export const KLE_IDS = 'KLEIds';
 export const KLE_NAMES = 'KLENames';
-export const USAGES = 'Usages';
+export const ACTIVE_USAGES = 'ActiveUsages';
+export const INACTIVE_USAGES = 'InactiveUsages';
 
 export const ORGANIZATION_NAME = 'Organization.Name';
 export const LAST_CHANGED_BY_USER_NAME = 'LastChangedByUser.Name';
