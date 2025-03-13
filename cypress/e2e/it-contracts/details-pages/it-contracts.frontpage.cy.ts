@@ -7,7 +7,7 @@ describe('it-contracts.frontpage', () => {
     cy.setup(true, 'it-contracts');
   });
 
-  it('contains all required fields', () => {
+  it.only('contains all required fields', () => {
     cy.contains('Contract 1').click();
 
     cy.inputByCy('contract-name').clear().type('Newname');
@@ -47,5 +47,8 @@ describe('it-contracts.frontpage', () => {
 
   it('can select parent contract', () => {
     cy.contains('Contract 1').click();
+
+    cy.dropdownByCy('parent-contract', 'The valid contract', true);
+    cy.get('app-popup-message').should('exist');
   });
 });
