@@ -4127,10 +4127,6 @@
         <source>Ikke relevant</source>
         <target state="new">Ikke relevant</target>
       </trans-unit>
-      <trans-unit id="1009604288211177304" datatype="html">
-        <source>IT System: Anvendes af</source>
-        <target state="new">IT System: Anvendes af</target>
-      </trans-unit>
       <trans-unit id="5971174733845305410" datatype="html">
         <source>Organisationer der anvender snitfladen: </source>
         <target state="new">Organisationer der anvender snitfladen: </target>
@@ -4150,10 +4146,6 @@
       <trans-unit id="7767407618981285037" datatype="html">
         <source>Filtre og sortering slettet</source>
         <target state="new">Filtre og sortering slettet</target>
-      </trans-unit>
-      <trans-unit id="374566596275178480" datatype="html">
-        <source>Gyldig/Ikke Gyldig</source>
-        <target state="new">Gyldig/Ikke Gyldig</target>
       </trans-unit>
       <trans-unit id="3576761254218207442" datatype="html">
         <source>Ansvarlig org. enhed</source>
@@ -6656,6 +6648,14 @@
       <trans-unit id="7847315002899056423" datatype="html">
         <source>Primært startmodul</source>
         <target state="new">Primært startmodul</target>
+      </trans-unit>
+      <trans-unit id="8824818283356104077" datatype="html">
+        <source>IT System: Anvendes af (aktiv)</source>
+        <target state="new">IT System: Anvendes af (aktiv)</target>
+      </trans-unit>
+      <trans-unit id="2142184279660750378" datatype="html">
+        <source>IT System: Anvendes af (inaktiv)</source>
+        <target state="new">IT System: Anvendes af (inaktiv)</target>
       </trans-unit>
     </body>
   </file>

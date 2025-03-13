@@ -1918,9 +1918,6 @@
       <trans-unit id="2836495158620557333" datatype="html">
         <source>Ingen relationer tilføjet endnu</source>
       </trans-unit>
-      <trans-unit id="374566596275178480" datatype="html">
-        <source>Gyldig/Ikke Gyldig</source>
-      </trans-unit>
       <trans-unit id="3576761254218207442" datatype="html">
         <source>Ansvarlig org. enhed</source>
       </trans-unit>
@@ -2109,9 +2106,6 @@
       </trans-unit>
       <trans-unit id="1997450671589092744" datatype="html">
         <source>KLE Navn</source>
-      </trans-unit>
-      <trans-unit id="1009604288211177304" datatype="html">
-        <source>IT System: Anvendes af</source>
       </trans-unit>
       <trans-unit id="8250403116701993773" datatype="html">
         <source>Oprettet af: Organisation</source>
@@ -5049,6 +5043,12 @@
       </trans-unit>
       <trans-unit id="7847315002899056423" datatype="html">
         <source>Primært startmodul</source>
+      </trans-unit>
+      <trans-unit id="2142184279660750378" datatype="html">
+        <source>IT System: Anvendes af (inaktiv)</source>
+      </trans-unit>
+      <trans-unit id="8824818283356104077" datatype="html">
+        <source>IT System: Anvendes af (aktiv)</source>
       </trans-unit>
     </body>
   </file>
