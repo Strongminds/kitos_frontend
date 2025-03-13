@@ -16,13 +16,11 @@ import { UIModuleConfigKey } from '../enums/ui-module-config-key';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { GridUIConfigService } from './ui-config-services/grid-ui-config.service';
+import { areSetsEqual } from '../helpers/set-helpers';
 
 @Injectable({ providedIn: 'root' })
 export class ColumnConfigService {
-  constructor(
-    private store: Store,
-    private gridUiConfigService: GridUIConfigService
-  ) {}
+  constructor(private store: Store, private gridUiConfigService: GridUIConfigService) {}
 
   public dispatchSaveAction(entityType: RegistrationEntityTypes, columns: GridColumn[]) {
     const mappedColumns = this.mapColumnsToGridConfigurationRequest(columns);
@@ -172,19 +170,20 @@ export class ColumnConfigService {
     columns: GridColumn[],
     config: APIOrganizationGridConfigurationResponseDTO | undefined
   ): boolean {
-    if (!config || !config.visibleColumns) return false;
+    if (!config?.visibleColumns) return false;
 
-    const visibleColumns = columns.filter((column) => !column.hidden && !column.disabledByUIConfig);
+    const toPersistId = (obj: { persistId?: string }) => obj.persistId;
 
-    if (visibleColumns.length !== config.visibleColumns.length) return true;
+    const disabledByUiPersistIds = new Set(columns.filter((column) => column.disabledByUIConfig).map(toPersistId));
 
-    const visiblePersistIds = visibleColumns.map((column) => column.persistId);
-    const configPersistIds = config.visibleColumns.map((column) => column.persistId);
+    const configPersistIds = new Set(
+      config.visibleColumns.map(toPersistId).filter((x) => !disabledByUiPersistIds.has(x))
+    );
 
-    const persistIdSet = new Set(visiblePersistIds);
+    const visibleColumnPersistIds = new Set(
+      columns.filter((column) => !column.hidden && !column.disabledByUIConfig).map(toPersistId)
+    );
 
-    const isDifferentFromConfig = configPersistIds.some((persistId) => !persistIdSet.has(persistId));
-
-    return isDifferentFromConfig;
+    return !areSetsEqual(visibleColumnPersistIds, configPersistIds);
   }
 }
