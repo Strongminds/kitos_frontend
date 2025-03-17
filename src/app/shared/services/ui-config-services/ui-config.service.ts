@@ -40,7 +40,7 @@ export class UIConfigService {
       helpText: node.helpText,
       fullKey: nodeFullKey,
       isObligatory: node.isObligatory ?? false,
-      isEnabled: true,
+      isEnabled: !node.disableByDefault,
       disableIfSubtreeDisabled: node.disableIfSubtreeDisabled,
     };
 
