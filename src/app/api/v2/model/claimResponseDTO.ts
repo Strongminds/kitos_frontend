@@ -11,7 +11,7 @@
  */
 
 
-export interface APIClaimResponse { 
+export interface APIClaimResponseDTO { 
     type?: string;
     value?: string;
 }

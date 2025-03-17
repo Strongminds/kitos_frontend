@@ -136,7 +136,7 @@ model/baseNotificationPropertiesWriteRequestDTO.ts
 model/brokenExternalReferencesReportStatusResponseDTO.ts
 model/changeOrganizationUnitRegistrationV2RequestDTO.ts
 model/changePaymentRegistrationV2RequestDTO.ts
-model/claimResponse.ts
+model/claimResponseDTO.ts
 model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
 model/commandPermissionResponseDTO.ts
@@ -321,7 +321,7 @@ model/stsOrganizationSynchronizationDetailsResponseDTO.ts
 model/systemRelationWriteRequestDTO.ts
 model/systemWithUsageOutsideOrganizationConflictResponseDTO.ts
 model/tokenIntrospectionRequest.ts
-model/tokenIntrospectionResponse.ts
+model/tokenIntrospectionResponseDTO.ts
 model/trackingEventResponseDTO.ts
 model/transferOrganizationUnitRegistrationV2RequestDTO.ts
 model/uIModuleCustomizationRequestDTO.ts
