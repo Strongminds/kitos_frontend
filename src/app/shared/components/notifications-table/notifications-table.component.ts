@@ -170,7 +170,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   }
 
   public canDelete(notification: APINotificationResponseDTO): boolean {
-    if (notification.notificationType === 'Repeat') {
+    if (notification.notificationType === this.notificationTypeRepeat.value) {
       return !notification.active && !notification.lastSent;
     } else {
       return notification.active ?? false;
