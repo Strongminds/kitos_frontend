@@ -88,7 +88,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     );
   }
 
-  public nodeExpandClick(node: EntityTreeNode<string>): void {
+  public nodeExpandClick(node: EntityTreeNode<APIIdentityNamePairResponseDTO>): void {
     node.isExpanded = !node.isExpanded;
   }
 

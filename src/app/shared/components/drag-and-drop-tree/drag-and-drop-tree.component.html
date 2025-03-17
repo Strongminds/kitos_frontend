@@ -42,7 +42,7 @@
           linkFontSize="small"
           [itemPath]="node.uuid"
           [disableRedirect]="disableRedirect"
-          (click)="disableRedirect ? null : expandClick(node)"
+          (click)="expandClick(node)"
         >
           <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
         </app-details-page-link>
