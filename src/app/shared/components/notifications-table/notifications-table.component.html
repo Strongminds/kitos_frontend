@@ -104,7 +104,7 @@
                 <!-- 20240527 - Removal should be determined by permissions and not logic like this -- permissions currently not passed in NotificationResponseDTO -->
                 <app-icon-button
                   (buttonClick)="onRemove(notification)"
-                  *ngIf="!notification.active && !notification.lastSent"
+                  *ngIf="canDelete(notification)"
                 >
                   <app-trashcan-icon></app-trashcan-icon>
                 </app-icon-button>

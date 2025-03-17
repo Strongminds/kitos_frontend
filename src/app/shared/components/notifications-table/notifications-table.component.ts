@@ -169,6 +169,14 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     this.notificationDialog.closeAll();
   }
 
+  public canDelete(notification: APINotificationResponseDTO): boolean {
+    if (notification.notificationType === this.notificationTypeRepeat.value) {
+      return !notification.active && !notification.lastSent;
+    } else {
+      return notification.active ?? false;
+    }
+  }
+
   private getRolesOptionTypes() {
     const option = this.getRolesOptionType();
     if (!option) return new Observable<APIRoleOptionResponseDTO[]>();
