@@ -29,6 +29,11 @@ button.mat-mdc-button-base {
     font-size: 14px;
   }
 
+  &.x-small {
+    height: 40px;
+    font-size: 14px;
+  }
+
   // Accent label color varies from accent color by design
   &.mat-accent {
     color: $color-neutral-dark;

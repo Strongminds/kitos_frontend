@@ -32,7 +32,7 @@ export const ItContractsUiBluePrint = {
           text: $localize`Indkøbsform`,
         },
         isActive: {
-          text: $localize`Gyldig`,
+          text: $localize`Status`,
         },
         agreementPeriod: {
           text: $localize`Gyldig fra/til`,

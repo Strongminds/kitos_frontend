@@ -384,6 +384,10 @@ Cypress.Commands.add('hoverByDataCy', (dataCySelector) => {
   cy.getByDataCy(dataCySelector).trigger('mouseenter');
 });
 
+Cypress.Commands.add('isLinkTo', { prevSubject: true }, (subject, expectedHref, expectedTarget = '_blank') => {
+  cy.wrap(subject).should('have.attr', 'href', expectedHref).and('have.attr', 'target', expectedTarget);
+});
+
 function getElementParentWithSelector(elementName: string, selector: string) {
   return cy.contains(elementName).parentsUntil(selector).parent();
 }

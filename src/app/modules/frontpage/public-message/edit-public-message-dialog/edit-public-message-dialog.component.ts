@@ -5,6 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 import { PublicMessage } from 'src/app/shared/models/public-message.model';
 import { StatusType, statusTypeOptions } from 'src/app/shared/models/status-type.model';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
@@ -22,9 +23,12 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
     status: new FormControl<StatusType | undefined>(undefined),
     shortDescription: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(105)]),
     longDescription: new FormControl<string | undefined>(undefined),
+    url: new FormControl<string | undefined>(undefined),
   });
 
   public readonly statusTypeOptions = statusTypeOptions;
+
+  public showUrlError = false;
 
   constructor(
     private store: Store,
@@ -35,18 +39,25 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   }
 
   ngOnInit(): void {
-    this.formGroup.patchValue({
-      title: this.publicMessage.title,
-      status: this.publicMessage.status,
-      shortDescription: this.publicMessage.shortDescription,
-      longDescription: this.publicMessage.longDescription,
-    });
-
     this.subscriptions.add(
       this.actions$.pipe(ofType(GlobalAdminPublicMessageActions.editPublicMessagesSuccess)).subscribe(() => {
         this.close();
       })
     );
+
+    this.subscriptions.add(
+      this.formGroup.controls.url.valueChanges.subscribe((url) => {
+        this.showUrlError = !this.isUrlEmptyOrValid(url ?? undefined);
+      })
+    );
+
+    this.formGroup.patchValue({
+      title: this.publicMessage.title,
+      status: this.publicMessage.status,
+      shortDescription: this.publicMessage.shortDescription,
+      longDescription: this.publicMessage.longDescription,
+      url: this.publicMessage.link,
+    });
   }
 
   public close(): void {
@@ -59,12 +70,17 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
     this.store.dispatch(GlobalAdminPublicMessageActions.editPublicMessages(messageUuid, request));
   }
 
+  private isUrlEmptyOrValid(url?: string) {
+    return !url || validateUrl(url);
+  }
+
   private createRequest(): APIPublicMessageRequestDTO {
     const value = this.formGroup.value;
     return {
       title: value.title ?? undefined,
       shortDescription: value.shortDescription ?? undefined,
       longDescription: value.longDescription ?? undefined,
+      link: value.url ?? undefined,
       status: this.getStatusValue(),
     };
   }
