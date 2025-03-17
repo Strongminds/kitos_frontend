@@ -88,6 +88,10 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     );
   }
 
+  public nodeExpandClick(node: EntityTreeNode<string>): void {
+    node.isExpanded = !node.isExpanded;
+  }
+
   public patchResponsibleUnit(uuid?: string) {
     this.store.dispatch(
       ITSystemUsageActions.patchITSystemUsage({
