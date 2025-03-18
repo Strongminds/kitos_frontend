@@ -33,6 +33,10 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
     cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
 
+    cy.getByDataCy('web-accessibility-compliance').within(() => cy.contains('Ja'));
+    cy.inputByCy('last-web-accessibility-check').should('have.value', '27-02-2025');
+    cy.textareaByCy('web-accessibility-notes').should('have.value', 'en note om tilgængelighed');
+
     cy.contains('Data fra IT Systemkataloget').click();
 
     cy.contains('Ikke tilgængeligt');

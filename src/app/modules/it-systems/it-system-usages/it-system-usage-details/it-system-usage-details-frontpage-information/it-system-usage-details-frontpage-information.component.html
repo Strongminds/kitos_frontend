@@ -145,9 +145,10 @@
       [formGroup]="webAccessibilityForm"
       formName="webAccessibilityCompliance"
       [data]="yesNoPartiallyOptions"
-      text="Webtilgængelighed"
+      text="Er systemet webtilgængeligt"
       (valueChange)="patchGeneral({ webAccessibilityCompliance: $event })"
       i18n-text
+      data-cy="web-accessibility-compliance"
     ></app-dropdown>
     <app-datepicker
       [formGroup]="webAccessibilityForm"
@@ -155,6 +156,7 @@
       (validatedValueChange)="patchGeneral({ lastWebAccessibilityCheck: $event.value?.toDateString() }, $event)"
       text="Sidste leverandør tjek"
       i18n-text
+      data-cy="last-web-accessibility-check"
     ></app-datepicker>
     <app-textarea
       [formGroup]="webAccessibilityForm"
@@ -163,6 +165,7 @@
       class="field-all-grid-length"
       text="Noter"
       i18n-text
+      data-cy="web-accessibility-notes"
     ></app-textarea>
   </form>
 </app-card>
