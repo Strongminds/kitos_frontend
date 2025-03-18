@@ -63,7 +63,7 @@
       formName="aiTechnology"
       (valueChange)="patchGeneral({ containsAITechnology: $event })"
       [data]="aiTechnologyOptions"
-      >
+    >
     </app-dropdown>
     <app-textarea
       *ngIf="descriptionEnabled$ | async"
@@ -135,5 +135,14 @@
       formName="valid"
       [info]="invalidReason$ | async"
     ></app-textbox>
+  </form>
+</app-card>
+
+<app-card>
+  <app-card-header title="Webtilgængelighed" helpTextKey="it-system.usage.accessibility" i18n-title></app-card-header>
+  <form>
+    <app-dropdown text="Webtilgængelighed" i18n-text></app-dropdown>
+    <app-datepicker text="Sidste leverandør tjek"></app-datepicker>
+    <app-textarea class="field-all-grid-length" text="Noter"></app-textarea>
   </form>
 </app-card>

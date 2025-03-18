@@ -106,6 +106,8 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     { updateOn: 'blur' }
   );
 
+  public readonly webAccessibilityForm = new FormGroup({});
+
   public readonly numberOfExpectedUsersOptions = numberOfExpectedUsersOptions;
   public readonly lifeCycleStatusOptions = lifeCycleStatusOptions;
 
