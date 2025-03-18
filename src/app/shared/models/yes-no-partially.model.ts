@@ -11,19 +11,6 @@ export enum YesNoPartiallyEnum {
   Partially = 'Partially',
 }
 
-function toYesNoPartiallyEnum(value: APIGeneralDataResponseDTO.WebAccessibilityComplianceEnum): YesNoPartiallyEnum {
-  switch (value) {
-    case 'Yes':
-      return YesNoPartiallyEnum.Yes;
-    case 'No':
-      return YesNoPartiallyEnum.No;
-    case 'Partially':
-      return YesNoPartiallyEnum.Partially;
-    default:
-      throw new Error(`Unknown value for conversion into API yes/no/partially enum: ${value}`);
-  }
-}
-
 export const yesNoPartiallyOptions: YesNoPartiallyOption[] = [
   { name: 'Ja', value: YesNoPartiallyEnum.Yes },
   { name: 'Nej', value: YesNoPartiallyEnum.No },
@@ -31,7 +18,7 @@ export const yesNoPartiallyOptions: YesNoPartiallyOption[] = [
 ];
 
 export function mapToYesNoPartiallyEnum(
-  value: APIGeneralDataResponseDTO.WebAccessibilityComplianceEnum
+  value: APIGeneralDataResponseDTO.WebAccessibilityComplianceEnum | undefined
 ): YesNoPartiallyOption | undefined {
-  return yesNoPartiallyOptions.find((option) => option.value === toYesNoPartiallyEnum(value));
+  return yesNoPartiallyOptions.find((option) => option.value === value);
 }

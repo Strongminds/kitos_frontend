@@ -23,6 +23,11 @@ import {
 } from 'src/app/shared/models/number-of-expected-users.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoDontKnowOption } from 'src/app/shared/models/yes-no-dont-know.model';
+import {
+  mapToYesNoPartiallyEnum,
+  YesNoPartiallyOption,
+  yesNoPartiallyOptions,
+} from 'src/app/shared/models/yes-no-partially.model';
 import { mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -106,10 +111,15 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     { updateOn: 'blur' }
   );
 
-  public readonly webAccessibilityForm = new FormGroup({});
+  public readonly webAccessibilityForm = new FormGroup({
+    webAccessibilityCompliance: new FormControl<YesNoPartiallyOption | undefined>(undefined),
+    lastWebAccessibilityCheck: new FormControl<Date | undefined>(undefined),
+    webAccessibilityNotes: new FormControl(''),
+  });
 
   public readonly numberOfExpectedUsersOptions = numberOfExpectedUsersOptions;
   public readonly lifeCycleStatusOptions = lifeCycleStatusOptions;
+  public readonly yesNoPartiallyOptions = yesNoPartiallyOptions;
 
   public readonly itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
   public readonly dataClassificationTypes$ = this.store
@@ -143,7 +153,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
-
     // Disable forms if user does not have rights to modify
     this.subscriptions.add(
       this.store
@@ -160,7 +169,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       this.store
         .select(selectItSystemUsageGeneral)
         .pipe(filterNullish())
-        .subscribe((general) =>
+        .subscribe((general) => {
           this.itSystemInformationForm.patchValue({
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
@@ -169,8 +178,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
-          })
-        )
+          });
+
+          this.webAccessibilityForm.patchValue({
+            webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance),
+            lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck),
+            webAccessibilityNotes: general.webAccessibilityNotes,
+          });
+        })
     );
 
     // Set initial state of application form
