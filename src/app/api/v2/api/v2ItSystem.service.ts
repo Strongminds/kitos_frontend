@@ -27,11 +27,11 @@ import { APIExternalReferenceDataResponseDTO } from '../model/aPIExternalReferen
 // @ts-ignore
 import { APIExternalReferenceDataWriteRequestDTO } from '../model/aPIExternalReferenceDataWriteRequestDTO';
 // @ts-ignore
+import { APIItSystemHierarchyNodeResponseDTO } from '../model/aPIItSystemHierarchyNodeResponseDTO';
+// @ts-ignore
 import { APIItSystemPermissionsResponseDTO } from '../model/aPIItSystemPermissionsResponseDTO';
 // @ts-ignore
 import { APIItSystemResponseDTO } from '../model/aPIItSystemResponseDTO';
-// @ts-ignore
-import { APIRegistrationHierarchyNodeWithActivationStatusResponseDTO } from '../model/aPIRegistrationHierarchyNodeWithActivationStatusResponseDTO';
 // @ts-ignore
 import { APIResourceCollectionPermissionsResponseDTO } from '../model/aPIResourceCollectionPermissionsResponseDTO';
 // @ts-ignore
@@ -429,9 +429,9 @@ export class APIV2ItSystemService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemV2GetHierarchy(requestParameters: GetManyItSystemV2GetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>;
-    public getManyItSystemV2GetHierarchy(requestParameters: GetManyItSystemV2GetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>>;
-    public getManyItSystemV2GetHierarchy(requestParameters: GetManyItSystemV2GetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>>;
+    public getManyItSystemV2GetHierarchy(requestParameters: GetManyItSystemV2GetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemHierarchyNodeResponseDTO>>;
+    public getManyItSystemV2GetHierarchy(requestParameters: GetManyItSystemV2GetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemHierarchyNodeResponseDTO>>>;
+    public getManyItSystemV2GetHierarchy(requestParameters: GetManyItSystemV2GetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemHierarchyNodeResponseDTO>>>;
     public getManyItSystemV2GetHierarchy(requestParameters: GetManyItSystemV2GetHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
@@ -470,7 +470,7 @@ export class APIV2ItSystemService {
         }
 
         let localVarPath = `/api/v2/it-systems/${this.configuration.encodeParam({name: "uuid", value: uuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/hierarchy`;
-        return this.httpClient.request<Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIItSystemHierarchyNodeResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
