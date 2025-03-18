@@ -162,6 +162,16 @@ describe('it-system-usage', () => {
       .should('deep.eq', { general: { validity: { validFrom: 'Tue May 31 2022' } } });
 
     cy.contains('Feltet blev opdateret');
+
+    expectGeneralPropertyUpdate({ webAccessibilityCompliance: 'No' }, () =>
+      cy.dropdown('Er systemet webtilgængeligt', 'Nej')
+    );
+    expectGeneralPropertyUpdate({ lastWebAccessibilityCheck: 'Thu Mar 27 2025' }, () =>
+      cy.inputByCy('last-web-accessibility-check').clear().type('27032025').blur()
+    );
+    expectGeneralPropertyUpdate({ webAccessibilityNotes: 'ny note' }, () =>
+      cy.textareaByCy('web-accessibility-notes').clear().type('ny note').blur()
+    );
   });
 
   it('does not override focused form fields', () => {
@@ -193,3 +203,18 @@ describe('it-system-usage', () => {
     cy.contains('"Slutdato for anvendelse" er ugyldig');
   });
 });
+
+function expectGeneralPropertyUpdate(generalBody: object, initiator: () => void) {
+  const randomPatchName = Math.random().toString(36).substring(7);
+  cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
+    randomPatchName
+  );
+
+  initiator();
+
+  cy.wait('@' + randomPatchName)
+    .its('request.body')
+    .should('deep.eq', {
+      general: generalBody,
+    });
+}
