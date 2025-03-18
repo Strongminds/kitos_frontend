@@ -12,9 +12,9 @@ export enum YesNoPartiallyEnum {
 }
 
 export const yesNoPartiallyOptions: YesNoPartiallyOption[] = [
-  { name: 'Ja', value: YesNoPartiallyEnum.Yes },
-  { name: 'Nej', value: YesNoPartiallyEnum.No },
-  { name: 'Delvist', value: YesNoPartiallyEnum.Partially },
+  { name: $localize`Ja`, value: YesNoPartiallyEnum.Yes },
+  { name: $localize`Nej`, value: YesNoPartiallyEnum.No },
+  { name: $localize`Delvist`, value: YesNoPartiallyEnum.Partially },
 ];
 
 export function mapToYesNoPartiallyEnum(
