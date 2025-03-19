@@ -235,7 +235,7 @@ app-details-page-link {
 
 .checkbox-color {
   ::ng-deep {
-    svg {
+    mat-checkbox svg {
       color: $color-white !important;
     }
   }
