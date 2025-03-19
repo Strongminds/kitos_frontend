@@ -4151,10 +4151,6 @@
         <source>Filtre og sortering slettet</source>
         <target state="new">Filtre og sortering slettet</target>
       </trans-unit>
-      <trans-unit id="374566596275178480" datatype="html">
-        <source>Gyldig/Ikke Gyldig</source>
-        <target state="new">Gyldig/Ikke Gyldig</target>
-      </trans-unit>
       <trans-unit id="3576761254218207442" datatype="html">
         <source>Ansvarlig org. enhed</source>
         <target state="new">Ansvarlig org. enhed</target>
@@ -6656,6 +6652,30 @@
       <trans-unit id="7847315002899056423" datatype="html">
         <source>Primært startmodul</source>
         <target state="new">Primært startmodul</target>
+      </trans-unit>
+      <trans-unit id="6505837149972184227" datatype="html">
+        <source>Webtilgængelighed (WCAG)</source>
+        <target state="new">Webtilgængelighed (WCAG)</target>
+      </trans-unit>
+      <trans-unit id="3990765908365003353" datatype="html">
+        <source>Webtilgængelighed</source>
+        <target state="new">Webtilgængelighed</target>
+      </trans-unit>
+      <trans-unit id="623060952116105946" datatype="html">
+        <source>Hvornår leverandøren har udført gennemsynet</source>
+        <target state="new">Hvornår leverandøren har udført gennemsynet</target>
+      </trans-unit>
+      <trans-unit id="7365276035901827569" datatype="html">
+        <source>Seneste web tilgængelighedskontrol</source>
+        <target state="new">Seneste web tilgængelighedskontrol</target>
+      </trans-unit>
+      <trans-unit id="5200200492652807397" datatype="html">
+        <source>Noter om webtilgængelighed</source>
+        <target state="new">Noter om webtilgængelighed</target>
+      </trans-unit>
+      <trans-unit id="8637037167675157753" datatype="html">
+        <source>Delvist</source>
+        <target state="new">Delvist</target>
       </trans-unit>
     </body>
   </file>
