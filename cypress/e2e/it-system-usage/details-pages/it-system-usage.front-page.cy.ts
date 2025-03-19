@@ -163,9 +163,7 @@ describe('it-system-usage', () => {
 
     cy.contains('Feltet blev opdateret');
 
-    expectGeneralPropertyUpdate({ webAccessibilityCompliance: 'No' }, () =>
-      cy.dropdown('Er systemet webtilgængeligt', 'Nej')
-    );
+    expectGeneralPropertyUpdate({ webAccessibilityCompliance: 'No' }, () => cy.dropdown('Webtilgængelighed', 'Nej'));
     expectGeneralPropertyUpdate({ lastWebAccessibilityCheck: 'Thu Mar 27 2025' }, () =>
       cy.inputByCy('last-web-accessibility-check').clear().type('27032025').blur()
     );
