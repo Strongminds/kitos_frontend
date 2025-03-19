@@ -31,6 +31,7 @@ import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
+import { yesNoPartiallyOptions } from 'src/app/shared/models/yes-no-partially.model';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
@@ -577,6 +578,33 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: ARCHIVE_SECTION_NAME,
       hidden: true,
       persistId: 'catalogArchiveDutyComment',
+    },
+    {
+      field: GridFields.WebAccessibilityCompliance,
+      title: $localize`Webtilgængelighed`,
+      style: 'enum',
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'webAccessibilityCompliance',
+      extraFilter: 'enum',
+      extraData: yesNoPartiallyOptions,
+    },
+    {
+      field: GridFields.LastWebAccessibilityCheck,
+      title: $localize`Seneste webtilgængelighedskontrol`,
+      section: this.systemSectionName,
+      style: 'date',
+      filter: 'date',
+      width: 350,
+      hidden: true,
+      persistId: 'lastWebAccessibilityCheck',
+    },
+    {
+      field: GridFields.WebAccessibilityNotes,
+      title: $localize`Noter om webtilgængelighed`,
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'webAccessibilityNotes',
     },
   ];
 

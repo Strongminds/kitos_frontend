@@ -107,6 +107,9 @@ export interface APIItSystemUsageOverviewReadModel {
     isBusinessCritical?: APIItSystemUsageOverviewReadModel.IsBusinessCriticalEnum;
     catalogArchiveDuty?: APIItSystemUsageOverviewReadModel.CatalogArchiveDutyEnum;
     catalogArchiveDutyComment?: string;
+    webAccessibilityCompliance?: APIItSystemUsageOverviewReadModel.WebAccessibilityComplianceEnum;
+    lastWebAccessibilityCheck?: string;
+    webAccessibilityNotes?: string;
 }
 export namespace APIItSystemUsageOverviewReadModel {
     export type ContainsAITechnologyEnum = 'Yes' | 'No' | 'Undecided';
@@ -167,6 +170,12 @@ export namespace APIItSystemUsageOverviewReadModel {
         K: 'K' as CatalogArchiveDutyEnum,
         NoRecommendation: 'NoRecommendation' as CatalogArchiveDutyEnum,
         PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as CatalogArchiveDutyEnum
+    };
+    export type WebAccessibilityComplianceEnum = 'No' | 'Yes' | 'Partially';
+    export const WebAccessibilityComplianceEnum = {
+        No: 'No' as WebAccessibilityComplianceEnum,
+        Yes: 'Yes' as WebAccessibilityComplianceEnum,
+        Partially: 'Partially' as WebAccessibilityComplianceEnum
     };
 }
 

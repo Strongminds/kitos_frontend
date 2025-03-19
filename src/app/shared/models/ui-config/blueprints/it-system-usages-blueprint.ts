@@ -53,6 +53,9 @@ export const ItSystemUsageUiBluePrint = {
         containsAITechnology: {
           text: $localize`Indeholder AI-teknologi`,
         },
+        webAccessibility: {
+          text: $localize`Webtilgængelighed (WCAG)`,
+        },
       },
     },
     contracts: {
@@ -167,11 +170,10 @@ export const ItSystemUsageUiBluePrint = {
           text: $localize`Journalperioder`,
         },
         catalogArchiveDuty: {
-          text: $localize`Rigsarkivets vejledning til arkivering`
-        }
-        ,
+          text: $localize`Rigsarkivets vejledning til arkivering`,
+        },
         catalogArchiveDutyComment: {
-          text: $localize`Bemærkning fra Rigsarkivet`
+          text: $localize`Bemærkning fra Rigsarkivet`,
         },
       },
     },
