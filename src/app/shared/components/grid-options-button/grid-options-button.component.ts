@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { Observable } from 'rxjs';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
@@ -12,7 +12,7 @@ import { ColumnConfigService } from '../../services/column-config.service';
   templateUrl: './grid-options-button.component.html',
   styleUrl: './grid-options-button.component.scss',
 })
-export class GridOptionsButtonComponent implements OnInit {
+export class GridOptionsButtonComponent {
   @Input() entityType!: RegistrationEntityTypes;
   @Input() hasResetButton: boolean = false;
   @Input() hasColumnConfigButtons: boolean = false;
@@ -20,12 +20,10 @@ export class GridOptionsButtonComponent implements OnInit {
 
   public readonly hasConfigGridPermission$ = this.store.select(selectGridConfigModificationPermission);
 
-  public hasChanges$!: Observable<boolean>;
-
   constructor(private dialog: MatDialog, private store: Store, private columnConfigService: ColumnConfigService) {}
 
-  public ngOnInit(): void {
-    this.hasChanges$ = this.columnConfigService.hasChanges(this.entityType);
+  public hasChanges$(): Observable<boolean> {
+    return this.columnConfigService.hasChanges(this.entityType);
   }
 
   public getHelpTextKey(): string | undefined {
