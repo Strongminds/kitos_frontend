@@ -6665,9 +6665,9 @@
         <source>Hvornår leverandøren har udført gennemsynet</source>
         <target state="new">Hvornår leverandøren har udført gennemsynet</target>
       </trans-unit>
-      <trans-unit id="7365276035901827569" datatype="html">
-        <source>Seneste web tilgængelighedskontrol</source>
-        <target state="new">Seneste web tilgængelighedskontrol</target>
+      <trans-unit id="5315655945623152182" datatype="html">
+        <source>Seneste webtilgængelighedskontrol</source>
+        <target state="new">Seneste webtilgængelighedskontrol</target>
       </trans-unit>
       <trans-unit id="5200200492652807397" datatype="html">
         <source>Noter om webtilgængelighed</source>
