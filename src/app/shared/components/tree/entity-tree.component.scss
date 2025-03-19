@@ -160,3 +160,8 @@ app-paragraph {
 app-status-chip {
   margin-bottom: $padding-medium;
 }
+
+.checkbox-row {
+  display: flex;
+  gap: 1rem;
+}

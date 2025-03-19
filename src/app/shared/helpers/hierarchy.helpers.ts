@@ -1,6 +1,7 @@
 import { arrayToTree } from 'performant-array-to-tree';
 import {
   APIItContractResponseDTO,
+  APIItSystemHierarchyNodeResponseDTO,
   APIOrganizationUnitResponseDTO,
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
   APIStsOrganizationOrgUnitDTO,
@@ -14,6 +15,23 @@ export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationS
     name: node.node.name,
     isRoot: !node.parent,
     status: node.deactivated === false,
+    parentUuid: node.parent?.uuid,
+    children: [],
+    color: 'blue',
+    isExpanded: false,
+  }));
+  const tree = arrayToTree(mappedHierarchy, { id: 'uuid', parentId: 'parentUuid', dataField: null });
+
+  return <HierachyNodeWithParentUuid[]>tree;
+};
+
+export const mapSystemToTree = (hierarchy: APIItSystemHierarchyNodeResponseDTO[]) => {
+  const mappedHierarchy = hierarchy.map<HierachyNodeWithParentUuid>((node) => ({
+    uuid: node.node.uuid,
+    name: node.node.name,
+    isRoot: !node.parent,
+    status: node.deactivated === false,
+    extraStatus: node.isInUse,
     parentUuid: node.parent?.uuid,
     children: [],
     color: 'blue',
