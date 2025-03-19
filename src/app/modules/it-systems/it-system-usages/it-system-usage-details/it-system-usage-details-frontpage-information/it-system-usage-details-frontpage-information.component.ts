@@ -209,6 +209,19 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           })
         )
     );
+
+    this.subscriptions.add(
+      this.webAccessibilityForm.controls.webAccessibilityCompliance.valueChanges.subscribe((value) => {
+        const hasValue = !!value;
+        if (hasValue) {
+          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.enable();
+          this.webAccessibilityForm.controls.webAccessibilityNotes.enable();
+        } else {
+          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.disable();
+          this.webAccessibilityForm.controls.webAccessibilityNotes.disable();
+        }
+      })
+    );
   }
 
   public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
