@@ -102,7 +102,6 @@ import { filterGridColumnsByUIConfig } from '../../helpers/grid-config-helper';
 import { combineAND } from '../../helpers/observable-helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
-import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
 
 @Injectable({
   providedIn: 'root',
