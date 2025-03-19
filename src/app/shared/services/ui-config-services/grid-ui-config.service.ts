@@ -95,12 +95,14 @@ import {
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
   selectITSystemUsageEnableVersion,
+  selectITSystemUsageEnableWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { filterGridColumnsByUIConfig } from '../../helpers/grid-config-helper';
 import { combineAND } from '../../helpers/observable-helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
+import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -283,6 +285,16 @@ export class GridUIConfigService {
         .select(selectITSystemUsageEnableContainsAITechnology)
         .pipe(shouldEnable([UsageFields.ContainsAITechnology])),
 
+      this.store
+        .select(selectITSystemUsageEnableWebAccessibility)
+        .pipe(
+          shouldEnable([
+            UsageFields.WebAccessibilityCompliance,
+            UsageFields.LastWebAccessibilityCheck,
+            UsageFields.WebAccessibilityNotes,
+          ])
+        ),
+
       //Contracts
       combineAND([
         this.store.select(selectShowItContractModule),
@@ -348,8 +360,12 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableJournalPeriods)
         .pipe(shouldEnable([UsageFields.ActiveArchivePeriodEndDate])),
-      this.store.select(selectITSystemUsageEnableCatalogArchiveDuty).pipe(shouldEnable([UsageFields.CatalogArchiveDuty])),
-      this.store.select(selectITSystemUsageEnableCatalogArchiveDutyComment).pipe(shouldEnable([UsageFields.CatalogArchiveDutyComment])),
+      this.store
+        .select(selectITSystemUsageEnableCatalogArchiveDuty)
+        .pipe(shouldEnable([UsageFields.CatalogArchiveDuty])),
+      this.store
+        .select(selectITSystemUsageEnableCatalogArchiveDutyComment)
+        .pipe(shouldEnable([UsageFields.CatalogArchiveDutyComment])),
 
       //Roles
       this.store.select(selectITSystemUsageEnableTabSystemRoles).pipe(shouldEnable([], ['Roles.Role'])),
