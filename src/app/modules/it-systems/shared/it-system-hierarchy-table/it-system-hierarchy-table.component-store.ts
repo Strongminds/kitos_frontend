@@ -3,12 +3,12 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap } from 'rxjs';
-import { APIRegistrationHierarchyNodeWithActivationStatusResponseDTO, APIV2ItSystemService } from 'src/app/api/v2';
+import { APIItSystemHierarchyNodeResponseDTO, APIV2ItSystemService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 interface State {
   loading: boolean;
-  hierarchy?: Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>;
+  hierarchy?: Array<APIItSystemHierarchyNodeResponseDTO>;
 }
 
 @Injectable()
@@ -21,7 +21,7 @@ export class ItSystemHierarchyTableComponentStore extends ComponentStore<State> 
   }
 
   private updateHierarchy = this.updater(
-    (state, hierarchy: Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>): State => ({
+    (state, hierarchy: Array<APIItSystemHierarchyNodeResponseDTO>): State => ({
       ...state,
       hierarchy,
     })

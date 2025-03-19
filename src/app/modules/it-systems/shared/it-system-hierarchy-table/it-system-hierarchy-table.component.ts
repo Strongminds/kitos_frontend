@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { map } from 'rxjs';
-import { mapToTree } from 'src/app/shared/helpers/hierarchy.helpers';
+import { mapSystemToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { ItSystemHierarchyTableComponentStore } from './it-system-hierarchy-table.component-store';
 
 @Component({
@@ -11,7 +11,7 @@ import { ItSystemHierarchyTableComponentStore } from './it-system-hierarchy-tabl
 })
 export class ItSystemHierarchyTableComponent implements OnInit {
   public readonly isLoading$ = this.componentStore.isLoading$;
-  public readonly treeNodes$ = this.componentStore.hierarchy$.pipe(map((hierarchy) => mapToTree(hierarchy)));
+  public readonly treeNodes$ = this.componentStore.hierarchy$.pipe(map((hierarchy) => mapSystemToTree(hierarchy)));
 
   @Input() public systemUuid!: string;
 

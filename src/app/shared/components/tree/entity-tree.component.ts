@@ -13,9 +13,12 @@ export class EntityTreeComponent<T> implements OnInit {
   public readonly treeControl = new NestedTreeControl<EntityTreeNode<T>>((node) => node.children);
   public readonly dataSource = new MatTreeNestedDataSource<EntityTreeNode<T>>();
   public toggleStatusText = 'status';
+  public toggleExtraStatusText = 'extra-status';
+  public showExtraStatusValue = false;
 
   @Input() public showStatus = false;
   @Input() public hideStatusButton = false;
+  @Input() public showExtraStatus = true;
   @Input() public itemType!: RegistrationEntityTypes;
   @Input() public currentNodeUuid?: string;
   @Input() public set nodes(nodes: EntityTreeNode<T>[]) {
@@ -32,6 +35,7 @@ export class EntityTreeComponent<T> implements OnInit {
       case 'it-system-usage':
       case 'it-system':
         this.toggleStatusText = $localize`Vis tilgængelighed`;
+        this.toggleExtraStatusText = $localize`Vis anvendelse`;
         break;
       case 'it-contract':
         this.toggleStatusText = $localize`Vis gyldighed`;

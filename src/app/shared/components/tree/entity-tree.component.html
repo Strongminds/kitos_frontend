@@ -66,3 +66,11 @@
   (valueChange)="showStatus = $event === true"
   labelPosition="after"
 ></app-checkbox>
+
+<app-checkbox
+  *ngIf="showExtraStatus"
+  [text]="toggleExtraStatusText"
+  [value]="showExtraStatusValue"
+  (valueChange)="showExtraStatusValue = $event === true"
+  labelPosition="after"
+></app-checkbox>
