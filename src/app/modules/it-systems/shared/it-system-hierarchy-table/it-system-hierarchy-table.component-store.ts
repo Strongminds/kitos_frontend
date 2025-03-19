@@ -1,10 +1,12 @@
 import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { tapResponse } from '@ngrx/operators';
+import { concatLatestFrom, tapResponse } from '@ngrx/operators';
+import { Store } from '@ngrx/store';
 
-import { Observable, mergeMap } from 'rxjs';
-import { APIItSystemHierarchyNodeResponseDTO, APIV2ItSystemService } from 'src/app/api/v2';
+import { Observable, mergeMap, tap } from 'rxjs';
+import { APIItSystemHierarchyNodeResponseDTO, APIV2ItSystemInternalINTERNALService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 interface State {
   loading: boolean;
@@ -16,7 +18,10 @@ export class ItSystemHierarchyTableComponentStore extends ComponentStore<State> 
   public readonly hierarchy$ = this.select((state) => state.hierarchy).pipe(filterNullish());
   public readonly isLoading$ = this.select((state) => state.loading).pipe(filterNullish());
 
-  constructor(@Inject(APIV2ItSystemService) private apiItSystemService: APIV2ItSystemService) {
+  constructor(
+    private store: Store,
+    @Inject(APIV2ItSystemInternalINTERNALService) private apiItSystemService: APIV2ItSystemInternalINTERNALService
+  ) {
     super({ loading: false });
   }
 
@@ -36,9 +41,10 @@ export class ItSystemHierarchyTableComponentStore extends ComponentStore<State> 
 
   public getHierarchy = this.effect((itSystemUuid$: Observable<string>) =>
     itSystemUuid$.pipe(
-      mergeMap((uuid) => {
-        this.updateIsLoading(true);
-        return this.apiItSystemService.getManyItSystemV2GetHierarchy({ uuid }).pipe(
+      tap(() => this.updateIsLoading(true)),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      mergeMap(([systemUuid, organizationUuid]) => {
+        return this.apiItSystemService.getManyItSystemInternalV2GetHierarchy({ organizationUuid, systemUuid }).pipe(
           tapResponse(
             (hierarchy) => this.updateHierarchy(hierarchy),
             (e) => console.error(e),
