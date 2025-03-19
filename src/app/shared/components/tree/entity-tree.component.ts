@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatTreeNestedDataSource } from '@angular/material/tree';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode } from '../../models/structure/entity-tree-node.model';
+import { BooleanValueDisplayType } from '../status-chip/status-chip.component';
 
 @Component({
   selector: 'app-entity-tree[nodes][itemType]',
@@ -18,7 +19,7 @@ export class EntityTreeComponent<T> implements OnInit {
 
   @Input() public showStatus = false;
   @Input() public hideStatusButton = false;
-  @Input() public showExtraStatus = true;
+  @Input() public showExtraStatus = false;
   @Input() public itemType!: RegistrationEntityTypes;
   @Input() public currentNodeUuid?: string;
   @Input() public set nodes(nodes: EntityTreeNode<T>[]) {
@@ -26,6 +27,7 @@ export class EntityTreeComponent<T> implements OnInit {
     this.treeControl.dataNodes = nodes;
     this.treeControl.expandAll();
   }
+  @Input() public extraStatusDisplayType?: BooleanValueDisplayType;
 
   public readonly hasChild = (_: number, node: EntityTreeNode<T>) => node.children?.length > 0;
 
