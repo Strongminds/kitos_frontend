@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-describe('it-system-usage', () => {
+describe('it-system-usage contracts', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
@@ -131,7 +131,7 @@ describe('it-system-usage', () => {
     cy.get('app-popup-message').should('exist');
   });
 
-  it('Can not create and associate contract, if associated contracts exist', () => {
+  it('Can create and associate contract, if associated contracts exist', () => {
     cy.contains('System 3').click();
 
     cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
@@ -139,7 +139,7 @@ describe('it-system-usage', () => {
 
     cy.navigateToDetailsSubPage('Kontrakter');
 
-    cy.getByDataCy('open-create-and-associate-contract-dialog-button').should('not.exist');
+    cy.getByDataCy('open-create-and-associate-contract-dialog-button').should('exist');
   });
 
   it('Can not create and associate contract, if no permission to create contract', () => {
