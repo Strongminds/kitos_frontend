@@ -138,7 +138,7 @@
   </form>
 </app-card>
 
-<app-card>
+<app-card *ngIf="webAccessiblityEnabled$ | async">
   <app-card-header
     title="Webtilgængelighed (WCAG)"
     helpTextKey="it-system.usage.accessibility"

@@ -51,6 +51,7 @@ import {
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableTakenIntoUsageBy,
   selectITSystemUsageEnableVersion,
+  selectITSystemUsageEnableWebAccessibility,
   selectITSystemUsageEnabledSystemId,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
@@ -88,6 +89,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly usagePeriodEnabled$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
   public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
   public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
+  public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
 
   public readonly showSystemUsageCard$ = combineOR([
     this.takenIntoUsageByEnabled$,
