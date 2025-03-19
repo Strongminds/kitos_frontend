@@ -591,7 +591,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.LastWebAccessibilityCheck,
-      title: $localize`Seneste web tilgængelighedskontrol`,
+      title: $localize`Seneste webtilgængelighedskontrol`,
       section: this.systemSectionName,
       style: 'date',
       filter: 'date',
