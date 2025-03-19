@@ -139,13 +139,17 @@
 </app-card>
 
 <app-card>
-  <app-card-header title="Webtilgængelighed" helpTextKey="it-system.usage.accessibility" i18n-title></app-card-header>
+  <app-card-header
+    title="Webtilgængelighed (WCAG)"
+    helpTextKey="it-system.usage.accessibility"
+    i18n-title
+  ></app-card-header>
   <form [formGroup]="webAccessibilityForm">
     <app-dropdown
       [formGroup]="webAccessibilityForm"
       formName="webAccessibilityCompliance"
       [data]="yesNoPartiallyOptions"
-      text="Er systemet webtilgængeligt"
+      text="Webtilgængelighed"
       (valueChange)="patchGeneral({ webAccessibilityCompliance: $event })"
       i18n-text
       data-cy="web-accessibility-compliance"
@@ -154,7 +158,7 @@
       [formGroup]="webAccessibilityForm"
       formName="lastWebAccessibilityCheck"
       (validatedValueChange)="patchGeneral({ lastWebAccessibilityCheck: $event.value?.toDateString() }, $event)"
-      text="Sidste leverandør tjek"
+      text="Hvornår leverandøren har udført gennemsynet"
       i18n-text
       data-cy="last-web-accessibility-check"
     ></app-datepicker>
