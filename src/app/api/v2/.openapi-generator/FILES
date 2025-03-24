@@ -224,6 +224,7 @@ model/itInterfaceDataRequestDTO.ts
 model/itInterfaceDataResponseDTO.ts
 model/itInterfacePermissionsResponseDTO.ts
 model/itInterfaceResponseDTO.ts
+model/itSystemHierarchyNodeResponseDTO.ts
 model/itSystemPermissionsResponseDTO.ts
 model/itSystemResponseDTO.ts
 model/itSystemSearchResponseDTO.ts
