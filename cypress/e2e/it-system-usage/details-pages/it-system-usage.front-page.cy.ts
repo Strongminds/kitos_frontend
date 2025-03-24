@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('it-system-usage', () => {
+describe('it-system-usage.frontpage', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
@@ -163,7 +163,9 @@ describe('it-system-usage', () => {
 
     cy.contains('Feltet blev opdateret');
 
-    expectGeneralPropertyUpdate({ webAccessibilityCompliance: 'No' }, () => cy.dropdown('Webtilgængelighed', 'Nej'));
+    expectGeneralPropertyUpdate({ webAccessibilityCompliance: 'No' }, () =>
+      cy.dropdownByCy('web-accessibility-compliance', 'Nej', true)
+    );
     expectGeneralPropertyUpdate({ lastWebAccessibilityCheck: 'Thu Mar 27 2025' }, () =>
       cy.inputByCy('last-web-accessibility-check').clear().type('27032025').blur()
     );
