@@ -9,12 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIClaimResponse } from './claimResponse';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface APITokenIntrospectionResponse { 
-    active?: boolean;
-    expiration?: string;
-    claims?: Array<APIClaimResponse>;
+export interface APIItSystemHierarchyNodeResponseDTO { 
+    isInUse?: boolean;
+    /**
+     * Active status of the node
+     */
+    deactivated?: boolean;
+    node: APIIdentityNamePairResponseDTO;
+    parent?: APIIdentityNamePairResponseDTO;
 }
 
