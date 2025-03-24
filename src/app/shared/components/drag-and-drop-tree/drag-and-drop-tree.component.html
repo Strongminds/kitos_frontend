@@ -36,13 +36,17 @@
         ></app-chevron-right-icon>
       </ng-container>
       <ng-container *ngIf="checkboxNodes === true">
-        <app-checkbox [(value)]="node.status" [disabled]="disableCheck"></app-checkbox>
+        <app-checkbox
+          [value]="node.status"
+          [disabled]="disableCheck"
+          (valueChange)="checkNode(node)"
+          (click)="$event.stopPropagation()"
+        ></app-checkbox>
         <app-details-page-link
           [itemType]="itemType"
           linkFontSize="small"
           [itemPath]="node.uuid"
           [disableRedirect]="disableRedirect"
-          (click)="expandClick(node)"
         >
           <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
         </app-details-page-link>
