@@ -73,16 +73,14 @@
   <app-checkbox
     *ngIf="hideStatusButton === false"
     [text]="toggleStatusText"
-    [value]="showStatus"
-    (valueChange)="showStatus = $event === true"
+    [(value)]="showStatus"
     labelPosition="after"
   ></app-checkbox>
 
   <app-checkbox
     *ngIf="showExtraStatus"
     [text]="toggleExtraStatusText"
-    [value]="showExtraStatusValue"
-    (valueChange)="showExtraStatusValue = $event === true"
+    [(value)]="showExtraStatusValue"
     labelPosition="after"
   ></app-checkbox>
 </div>
