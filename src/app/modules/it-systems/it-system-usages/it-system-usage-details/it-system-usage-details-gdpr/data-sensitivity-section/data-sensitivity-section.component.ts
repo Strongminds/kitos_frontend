@@ -6,7 +6,6 @@ import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { specificPersonalDataOptions } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
-import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -37,9 +36,7 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
   public readonly specificPersonalData$ = this.store
     .select(selectItSystemUsageGdprSpecificPersonalData)
     .pipe(filterNullish());
-  public readonly sensitivePersonalData$ = this.store
-    .select(selectItSystemUsageGdprSensitivePersonalData)
-    .pipe(filterNullish());
+  public readonly sensitivePersonalData$ = this.store.select(selectItSystemUsageGdprSensitivePersonalData);
 
   public readonly dataSensitivityLevelOptions = dataSensitivityLevelOptions;
   public readonly specificPersonalDataOptions = specificPersonalDataOptions;
@@ -120,6 +117,10 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
           this.toggleControlState(newControl, this.dataSensitivityLevelForm.controls.SensitiveDataControl.value);
       });
       this.sensitivePersonalData$.subscribe((sensitivePersonData) => {
+        if (!sensitivePersonData || sensitivePersonData.length === 0) {
+          this.sensitivePersonDataForm.reset();
+          return;
+        }
         sensitivePersonData.forEach((type) => {
           if (type) {
             const control = this.sensitivePersonDataForm.get(type.uuid);
@@ -130,48 +131,60 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
     });
   }
 
-  public patchDataSensitivityLevels(valueChange?: ValidatedValueChange<unknown>) {
+  public patchDataSensitivityLevelNone(valueChange?: boolean | undefined) {
+    if (valueChange) {
+      if (this.dataSensitivityLevelForm.controls.PersonDataControl.value)
+        this.dataSensitivityLevelForm.controls.PersonDataControl.patchValue(false);
+
+      if (this.dataSensitivityLevelForm.controls.SensitiveDataControl.value)
+        this.dataSensitivityLevelForm.controls.SensitiveDataControl.patchValue(false);
+
+      if (this.dataSensitivityLevelForm.controls.LegalDataControl.value)
+        this.dataSensitivityLevelForm.controls.LegalDataControl.patchValue(false);
+    }
+
+    this.patchDataSensitivityLevels();
+  }
+
+  public patchDataSensitivityLevelPersonData(valueChange?: boolean | undefined) {
+    if (valueChange && this.dataSensitivityLevelForm.controls.NoneControl.value) {
+      this.dataSensitivityLevelForm.controls.NoneControl.patchValue(false);
+    }
+
+    this.patchDataSensitivityLevels();
+  }
+
+  public patchDataSensitivityLevels() {
     const dataSensitivityLevelEnums = dataSensitivityLevelOptions.map((option) => option.value);
     this.patchCheckboxFormData<APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum>(
       this.dataSensitivityLevelForm,
       this.dataSensitivityLevelsDtoField,
-      valueChange,
       dataSensitivityLevelEnums
     );
     this.toggleFormStates();
   }
 
-  public patchSpecificPersonalData(valueChange?: ValidatedValueChange<unknown>) {
+  public patchSpecificPersonalData() {
     const specificPersonalDataEnums = specificPersonalDataOptions.map((option) => option.value);
     this.patchCheckboxFormData<APIGDPRWriteRequestDTO.SpecificPersonalDataEnum>(
       this.specificPersonalDataForm,
       this.specificPersonalDataDtoField,
-      valueChange,
       specificPersonalDataEnums
     );
   }
 
-  public patchSensitivePersonalData(valueChange?: ValidatedValueChange<unknown>) {
-    this.patchCheckboxFormData(this.sensitivePersonDataForm, this.sensitivePersonalDataDtoField, valueChange);
+  public patchSensitivePersonalData() {
+    this.patchCheckboxFormData(this.sensitivePersonDataForm, this.sensitivePersonalDataDtoField);
   }
 
-  private patchCheckboxFormData<T>(
-    form: FormGroup,
-    dtoField: string,
-    valueChange?: ValidatedValueChange<unknown>,
-    options?: T[]
-  ) {
-    if (valueChange && !valueChange.valid) {
-      this.notificationService.showInvalidFormField(valueChange.text);
+  private patchCheckboxFormData<T>(form: FormGroup, dtoField: string, options?: T[]) {
+    let newData: T[] | string[];
+    if (options) {
+      newData = this.getEnumFormData(form, options);
     } else {
-      let newData: T[] | string[];
-      if (options) {
-        newData = this.getEnumFormData(form, options);
-      } else {
-        newData = this.getChoiceTypeFormData(form);
-      }
-      this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr: { [dtoField]: newData } }));
+      newData = this.getChoiceTypeFormData(form);
     }
+    this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr: { [dtoField]: newData } }));
   }
 
   private getEnumFormData<T>(form: FormGroup, options: T[]): T[] {
