@@ -146,6 +146,18 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   ngOnInit() {
+    this.subscriptions.add(
+      this.webAccessibilityForm.controls.webAccessibilityCompliance.valueChanges.subscribe((value) => {
+        const hasValue = !!value;
+        if (hasValue) {
+          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.enable();
+          this.webAccessibilityForm.controls.webAccessibilityNotes.enable();
+        } else {
+          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.disable();
+          this.webAccessibilityForm.controls.webAccessibilityNotes.disable();
+        }
+      })
+    );
     // Add custom date validators
     this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
       this.itSystemApplicationForm.controls.validTo
@@ -163,6 +175,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .subscribe(() => {
           this.itSystemInformationForm.disable();
           this.itSystemApplicationForm.disable();
+          this.webAccessibilityForm.disable();
         })
     );
 
@@ -208,19 +221,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
               : $localize`Systemet er ikke aktivt`,
           })
         )
-    );
-
-    this.subscriptions.add(
-      this.webAccessibilityForm.controls.webAccessibilityCompliance.valueChanges.subscribe((value) => {
-        const hasValue = !!value;
-        if (hasValue) {
-          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.enable();
-          this.webAccessibilityForm.controls.webAccessibilityNotes.enable();
-        } else {
-          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.disable();
-          this.webAccessibilityForm.controls.webAccessibilityNotes.disable();
-        }
-      })
     );
   }
 
