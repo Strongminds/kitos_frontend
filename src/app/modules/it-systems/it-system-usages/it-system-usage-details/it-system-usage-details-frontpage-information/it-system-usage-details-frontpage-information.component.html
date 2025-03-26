@@ -159,6 +159,7 @@
       formName="lastWebAccessibilityCheck"
       (validatedValueChange)="patchGeneral({ lastWebAccessibilityCheck: $event.value?.toDateString() }, $event)"
       text="Hvornår leverandøren har udført gennemsynet"
+      class="two-thirds-column-width"
       i18n-text
       data-cy="last-web-accessibility-check"
     ></app-datepicker>
@@ -166,7 +167,7 @@
       [formGroup]="webAccessibilityForm"
       formName="webAccessibilityNotes"
       (valueChange)="patchGeneral({ webAccessibilityNotes: $event })"
-      class="notes"
+      class="full-width"
       text="Noter"
       i18n-text
       data-cy="web-accessibility-notes"
