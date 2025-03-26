@@ -69,7 +69,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       systemVersion: new FormControl(''),
       numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
-      notes: new FormControl(''),
+      notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
     { updateOn: 'blur' }
