@@ -16,6 +16,7 @@ import {
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
+import { findUnitParentUuids } from 'src/app/shared/helpers/hierarchy.helpers';
 import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
@@ -25,6 +26,7 @@ import { ExternalReferencesApiService } from 'src/app/shared/services/external-r
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { getNewGridColumnsBasedOnConfig } from '../helpers/grid-config-helper';
+import { selectOrganizationUnits } from '../organization/organization-unit/selectors';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
@@ -168,17 +170,52 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageResponsibleUnit),
         this.store.select(selectItSystemUsageUsingOrganizationUnits),
+        this.store.select(selectOrganizationUnits),
       ]),
-      mergeMap(([{ usingUnitToRemoveUuid }, responsibleUnit, usingUnits]) => {
-        const unitUuids = usingUnits?.filter((x) => x.uuid !== usingUnitToRemoveUuid).map((x) => x.uuid);
+      mergeMap(([{ usingUnitToRemoveUuid, includeParents }, responsibleUnit, usingUnits, organizationUnits]) => {
+        let unitUuids = usingUnits?.filter((x) => x.uuid !== usingUnitToRemoveUuid).map((x) => x.uuid);
+
+        if (includeParents) {
+          const parentUuids = findUnitParentUuids(organizationUnits, usingUnitToRemoveUuid);
+          unitUuids = unitUuids.filter((uuid) => !parentUuids.includes(uuid));
+        }
+
         const requestBody = {
           organizationUsage: {
             usingOrganizationUnitUuids: unitUuids,
-            responsibleOrganizationUnitUuid: responsibleUnit?.uuid === usingUnitToRemoveUuid ? null : undefined,
+            responsibleOrganizationUnitUuid:
+              responsibleUnit?.uuid && unitUuids.includes(responsibleUnit?.uuid) ? null : undefined,
           },
         } as APIUpdateItSystemUsageRequestDTO;
 
         return of(ITSystemUsageActions.patchITSystemUsage(requestBody, $localize`Relevant organisationsenhed fjernet`));
+      })
+    );
+  });
+
+  addItSystemUsageUsingUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addITSystemUsageUsingUnit),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageUsingOrganizationUnits),
+        this.store.select(selectOrganizationUnits),
+      ]),
+      mergeMap(([{ usingUnitToAddUuid, includeParents }, usingUnits, organizationUnits]) => {
+        const unitUuids = usingUnits?.map((x) => x.uuid);
+        unitUuids.push(usingUnitToAddUuid);
+
+        if (includeParents) {
+          const parentUuids = findUnitParentUuids(organizationUnits, usingUnitToAddUuid);
+          const nonExistingParentUuids = parentUuids.filter((uuid) => !unitUuids.includes(uuid));
+          unitUuids.push(...nonExistingParentUuids);
+        }
+
+        return of(
+          ITSystemUsageActions.patchITSystemUsage(
+            { organizationUsage: { usingOrganizationUnitUuids: unitUuids } },
+            $localize`Relevant organisationsenhed tilføjet`
+          )
+        );
       })
     );
   });

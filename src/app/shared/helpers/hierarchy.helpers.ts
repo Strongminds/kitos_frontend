@@ -157,3 +157,12 @@ export function findNodeByUuid(node: EntityTreeNode<never>, uuid: string): Entit
 
   return undefined;
 }
+
+export function findUnitParentUuids(units: APIOrganizationUnitResponseDTO[], uuid: string): string[] {
+  const unit = units.find((u) => u.uuid === uuid);
+  const parent = unit?.parentOrganizationUnit;
+  if (!unit || !parent?.uuid) {
+    return [];
+  }
+  return [parent.uuid, ...findUnitParentUuids(units, parent.uuid)];
+}
