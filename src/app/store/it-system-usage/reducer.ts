@@ -86,6 +86,11 @@ export const itSystemUsageFeature = createFeature({
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage: itSystemUsage })
     ),
 
+    on(
+      ITSystemUsageActions.addITSystemUsageUsingUnitSuccess,
+      (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage: itSystemUsage })
+    ),
+
     on(ITSystemUsageActions.patchITSystemUsage, (state): ITSystemUsageState => ({ ...state, isPatching: true })),
 
     on(
