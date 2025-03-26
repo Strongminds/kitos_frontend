@@ -12,6 +12,7 @@ export const userInitialState: UserState = {
   organization: undefined,
   hasMultipleOrganizations: undefined,
   gridPermissions: undefined,
+  ssoErrorCode: undefined,
 };
 
 export const userFeature = createFeature({
@@ -67,6 +68,8 @@ export const userFeature = createFeature({
 
     on(UserActions.updateUserDefaultUnitState, (state, { unitUuid }): UserState => {
       return { ...state, user: { ...state.user, defaultUnitUuid: unitUuid } as User };
-    })
+    }),
+
+    on(UserActions.updateSSOErrorCode, (state, { ssoErrorCode }): UserState => ({ ...state, ssoErrorCode }))
   ),
 });

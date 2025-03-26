@@ -11,6 +11,7 @@ import { SendPasswordResetRequestComponent } from './send-password-reset-request
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { SsoButtonComponent } from './sso-button/sso-button.component';
 import { PublicMessageDialogComponent } from './public-message/public-message-dialog/public-message-dialog.component';
+import { SsoErrorComponent } from './login/sso-error/sso-error.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { PublicMessageDialogComponent } from './public-message/public-message-di
     ResetPasswordTextLinkComponent,
     SendPasswordResetRequestComponent,
     ResetPasswordComponent,
+    SsoErrorComponent,
   ],
   imports: [ReactiveFormsModule, SharedModule, FrontpageRouterModule],
 })

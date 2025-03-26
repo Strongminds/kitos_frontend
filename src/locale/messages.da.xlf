@@ -6661,6 +6661,38 @@
         <source>Vis anvendelse</source>
         <target state="new">Vis anvendelse</target>
       </trans-unit>
+      <trans-unit id="5474256442200014742" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Uklassificeret SSO fejl<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Uklassificeret SSO fejl<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="4132159806644812524" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Den bruger, som du er logget på med, har ikke adgang til Kitos<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Den bruger, som du er logget på med, har ikke adgang til Kitos<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="3518048498271698663" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong &gt;"/>Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er ukendt<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/></source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong &gt;"/>Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er ukendt<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/></target>
+      </trans-unit>
+      <trans-unit id="8929635997675667785" datatype="html">
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong &gt;"/>Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/></source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong &gt;"/>Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/></target>
+      </trans-unit>
+      <trans-unit id="3606013648406401255" datatype="html">
+        <source> Prøv igen og kontakt venligst Kitos sekretariatet, hvis problemet fortsætter</source>
+        <target state="new"> Prøv igen og kontakt venligst Kitos sekretariatet, hvis problemet fortsætter</target>
+      </trans-unit>
+      <trans-unit id="4082842369475273113" datatype="html">
+        <source> Kontakt venligst din lokale IT administrator for at få tildelt adgang til Kitos</source>
+        <target state="new"> Kontakt venligst din lokale IT administrator for at få tildelt adgang til Kitos</target>
+      </trans-unit>
+      <trans-unit id="4172062469313536052" datatype="html">
+        <source> Kontakt venligst Kitos sekretariatet, hvis I ønsker at tilslutte jer samarbejdet omkring Kitos</source>
+        <target state="new"> Kontakt venligst Kitos sekretariatet, hvis I ønsker at tilslutte jer samarbejdet omkring Kitos</target>
+      </trans-unit>
+      <trans-unit id="8809613748564697708" datatype="html">
+        <source> Kontakt venligst din lokale IT administrator</source>
+        <target state="new"> Kontakt venligst din lokale IT administrator</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { SsoErrorCode } from 'src/app/shared/enums/sso-error-code';
 import { Login } from 'src/app/shared/models/login.model';
 import { resetStateAction } from 'src/app/store/meta/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -34,5 +35,9 @@ export class LoginComponent {
 
   public disableLoginButton(): boolean {
     return this.loginForm.value.email === '' || this.loginForm.value.password === '';
+  }
+
+  public compareErrorCode(code: SsoErrorCode, expectedErrorCode: SsoErrorCode): boolean {
+    return Number(code) === Number(expectedErrorCode);
   }
 }

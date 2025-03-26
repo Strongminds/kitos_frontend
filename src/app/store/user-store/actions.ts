@@ -5,6 +5,7 @@ import {
   APIOrganizationUpdateRequestDTO,
   APIPasswordResetResponseDTO,
 } from 'src/app/api/v2';
+import { SsoErrorCode } from 'src/app/shared/enums/sso-error-code';
 import { Login } from 'src/app/shared/models/login.model';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -50,5 +51,7 @@ export const UserActions = createActionGroup({
     'Reset Password': (requestId: string, password: string) => ({ requestId, password }),
     'Reset Password Success': emptyProps(),
     'Reset Password Error': emptyProps(),
+
+    'Update SSO Error Code': (ssoErrorCode: SsoErrorCode) => ({ ssoErrorCode }),
   },
 });
