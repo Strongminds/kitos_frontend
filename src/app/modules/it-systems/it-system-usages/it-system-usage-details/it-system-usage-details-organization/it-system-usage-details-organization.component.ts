@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, filter, first, map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIOrganizationUnitResponseDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { MAX_INTEGER } from 'src/app/shared/constants/constants';
 import { mapUnitsWithSelectedUnitsToTree } from 'src/app/shared/helpers/hierarchy.helpers';
@@ -136,43 +136,10 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   }
 
   private onSave(selectedUnitUuid: string) {
-    this.usedUnitUuids$.pipe(first()).subscribe((unitUuids) => {
-      unitUuids.push(selectedUnitUuid);
-
-      if (this.includeParents) {
-        this.organizationUnits$.pipe(first()).subscribe((unitTree) => {
-          const parentUuids = this.findParentUuids(unitTree, selectedUnitUuid);
-          const nonExistingParentUuids = parentUuids.filter((uuid) => !unitUuids.includes(uuid));
-          unitUuids.push(...nonExistingParentUuids);
-
-          this.dispatchUpdateHierarchy(unitUuids);
-        });
-        return;
-      }
-
-      this.dispatchUpdateHierarchy(unitUuids);
-    });
-  }
-
-  private dispatchUpdateHierarchy(unitUuids: string[]) {
-    this.store.dispatch(
-      ITSystemUsageActions.patchITSystemUsage(
-        { organizationUsage: { usingOrganizationUnitUuids: unitUuids } },
-        $localize`Relevant organisationsenhed tilføjet`
-      )
-    );
+    this.store.dispatch(ITSystemUsageActions.addITSystemUsageUsingUnit(selectedUnitUuid, this.includeParents));
   }
 
   private deleteUsedByUnit(unit: APIIdentityNamePairResponseDTO) {
-    this.store.dispatch(ITSystemUsageActions.removeITSystemUsageUsingUnit(unit.uuid));
-  }
-
-  private findParentUuids(units: APIOrganizationUnitResponseDTO[], uuid: string): string[] {
-    const unit = units.find((u) => u.uuid === uuid);
-    const parent = unit?.parentOrganizationUnit;
-    if (!unit || !parent?.uuid) {
-      return [];
-    }
-    return [parent.uuid, ...this.findParentUuids(units, parent.uuid)];
+    this.store.dispatch(ITSystemUsageActions.removeITSystemUsageUsingUnit(unit.uuid, this.includeParents));
   }
 }
