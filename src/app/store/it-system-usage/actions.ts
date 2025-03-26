@@ -20,7 +20,10 @@ import { ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-u
 export const ITSystemUsageActions = createActionGroup({
   source: 'ITSystemUsage',
   events: {
-    'Get IT System Usages': (gridState: GridState, responsibleUnitUuid: string | undefined) => ({ gridState, responsibleUnitUuid }),
+    'Get IT System Usages': (gridState: GridState, responsibleUnitUuid: string | undefined) => ({
+      gridState,
+      responsibleUnitUuid,
+    }),
     'Get IT System Usages Success ': (itSystemUsages: ITSystemUsage[], total: number) => ({ itSystemUsages, total }),
     'Get IT System Usages Error': emptyProps(),
 
@@ -55,9 +58,19 @@ export const ITSystemUsageActions = createActionGroup({
     }),
     'Patch IT System Usage Error': (customErrorText?: string) => ({ customErrorText }),
 
-    'Remove IT System Usage Using Unit': (usingUnitToRemoveUuid: string) => ({ usingUnitToRemoveUuid }),
+    'Remove IT System Usage Using Unit': (usingUnitToRemoveUuid: string, includeParents: boolean) => ({
+      usingUnitToRemoveUuid,
+      includeParents,
+    }),
     'Remove IT System Usage Using Unit Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Remove IT System Usage Using Unit Error': emptyProps(),
+
+    'Add IT System Usage Using Unit': (usingUnitToAddUuid: string, includeParents: boolean) => ({
+      usingUnitToAddUuid,
+      includeParents,
+    }),
+    'Add IT System Usage Using Unit Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
+    'Add IT System Usage Using Unit Error': emptyProps(),
 
     'Get IT System Usage Permissions': (systemUsageUuid: string) => ({ systemUsageUuid }),
     'Get IT System Usage Permissions Success ': (permissions?: APIResourcePermissionsResponseDTO) => ({
