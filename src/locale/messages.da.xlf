@@ -6661,6 +6661,30 @@
         <source>Vis anvendelse</source>
         <target state="new">Vis anvendelse</target>
       </trans-unit>
+      <trans-unit id="6505837149972184227" datatype="html">
+        <source>Webtilgængelighed (WCAG)</source>
+        <target state="new">Webtilgængelighed (WCAG)</target>
+      </trans-unit>
+      <trans-unit id="3990765908365003353" datatype="html">
+        <source>Webtilgængelighed</source>
+        <target state="new">Webtilgængelighed</target>
+      </trans-unit>
+      <trans-unit id="623060952116105946" datatype="html">
+        <source>Hvornår leverandøren har udført gennemsynet</source>
+        <target state="new">Hvornår leverandøren har udført gennemsynet</target>
+      </trans-unit>
+      <trans-unit id="5315655945623152182" datatype="html">
+        <source>Seneste webtilgængelighedskontrol</source>
+        <target state="new">Seneste webtilgængelighedskontrol</target>
+      </trans-unit>
+      <trans-unit id="5200200492652807397" datatype="html">
+        <source>Noter om webtilgængelighed</source>
+        <target state="new">Noter om webtilgængelighed</target>
+      </trans-unit>
+      <trans-unit id="8637037167675157753" datatype="html">
+        <source>Delvist</source>
+        <target state="new">Delvist</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -23,6 +23,11 @@ import {
 } from 'src/app/shared/models/number-of-expected-users.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoDontKnowOption } from 'src/app/shared/models/yes-no-dont-know.model';
+import {
+  mapToYesNoPartiallyEnum,
+  YesNoPartiallyOption,
+  yesNoPartiallyOptions,
+} from 'src/app/shared/models/yes-no-partially.model';
 import { mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -46,6 +51,7 @@ import {
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableTakenIntoUsageBy,
   selectITSystemUsageEnableVersion,
+  selectITSystemUsageEnableWebAccessibility,
   selectITSystemUsageEnabledSystemId,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
@@ -63,7 +69,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       systemVersion: new FormControl(''),
       numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
-      notes: new FormControl(''),
+      notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
     { updateOn: 'blur' }
@@ -83,6 +89,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly usagePeriodEnabled$ = this.store.select(selectITSystemUsageEnableFrontPageUsagePeriod);
   public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
   public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
+  public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
 
   public readonly showSystemUsageCard$ = combineOR([
     this.takenIntoUsageByEnabled$,
@@ -106,8 +113,15 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     { updateOn: 'blur' }
   );
 
+  public readonly webAccessibilityForm = new FormGroup({
+    webAccessibilityCompliance: new FormControl<YesNoPartiallyOption | undefined>(undefined),
+    lastWebAccessibilityCheck: new FormControl<Date | undefined>(undefined),
+    webAccessibilityNotes: new FormControl(''),
+  });
+
   public readonly numberOfExpectedUsersOptions = numberOfExpectedUsersOptions;
   public readonly lifeCycleStatusOptions = lifeCycleStatusOptions;
+  public readonly yesNoPartiallyOptions = yesNoPartiallyOptions;
 
   public readonly itSystemUsageValid$ = this.store.select(selectItSystemUsageValid);
   public readonly dataClassificationTypes$ = this.store
@@ -141,7 +155,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
-
     // Disable forms if user does not have rights to modify
     this.subscriptions.add(
       this.store
@@ -150,15 +163,28 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .subscribe(() => {
           this.itSystemInformationForm.disable();
           this.itSystemApplicationForm.disable();
+          this.webAccessibilityForm.disable();
         })
     );
 
+    this.subscriptions.add(
+      this.webAccessibilityForm.controls.webAccessibilityCompliance.valueChanges.subscribe((value) => {
+        const hasValue = !!value;
+        if (hasValue && !this.webAccessibilityForm.disabled) {
+          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.enable();
+          this.webAccessibilityForm.controls.webAccessibilityNotes.enable();
+        } else {
+          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.disable();
+          this.webAccessibilityForm.controls.webAccessibilityNotes.disable();
+        }
+      })
+    );
     // Set initial state of information form
     this.subscriptions.add(
       this.store
         .select(selectItSystemUsageGeneral)
         .pipe(filterNullish())
-        .subscribe((general) =>
+        .subscribe((general) => {
           this.itSystemInformationForm.patchValue({
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
@@ -167,8 +193,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
-          })
-        )
+          });
+
+          this.webAccessibilityForm.patchValue({
+            webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance),
+            lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck),
+            webAccessibilityNotes: general.webAccessibilityNotes,
+          });
+        })
     );
 
     // Set initial state of application form
