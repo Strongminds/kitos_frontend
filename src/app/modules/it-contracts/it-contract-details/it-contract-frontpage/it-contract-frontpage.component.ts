@@ -225,6 +225,15 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit(): void {
+    this.subscriptions.add(
+      this.parentContractForm.controls.parentContract.valueChanges.subscribe((value) => {
+        if (value) {
+          this.parentContractForm.controls.requireValidParent.enable();
+        } else {
+          this.parentContractForm.controls.requireValidParent.disable();
+        }
+      })
+    );
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_contract-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_contract-template-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_criticality-type'));
@@ -387,11 +396,19 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   private enableFormGroups(hasModifyPermission?: boolean) {
     if (hasModifyPermission) {
       this.frontpageFormGroup.enable();
-      this.parentContractForm.enable();
+      this.enableParentContractForm();
       this.responsibleFormGroup.enable();
       this.supplierFormGroup.enable();
       this.procurementFormGroup.enable();
     }
     this.frontpageFormGroup.controls.status.disable();
+  }
+
+  private enableParentContractForm() {
+    const formgroup = this.parentContractForm;
+    formgroup.controls.parentContract.enable();
+    if (formgroup.value.parentContract) {
+      formgroup.controls.requireValidParent.enable();
+    }
   }
 }
