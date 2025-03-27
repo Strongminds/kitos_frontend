@@ -33,6 +33,8 @@ export class DialogOpenerService {
   ): MatDialogRef<DeleteUserDialogComponent> {
     const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
       height: 'auto',
+      minWidth: '600px',
+      maxWidth: '800px',
       maxHeight: '90vh%',
     });
     dialogRef.componentInstance.user$ = user$;

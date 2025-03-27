@@ -51,6 +51,24 @@
     </app-standard-vertical-content-grid>
     <app-dialog-actions *ngIf="!isLoading">
       <app-button
+        *ngIf="isAllSelected(user) && hasRoles(user)"
+        buttonStyle="secondary"
+        color="accent"
+        (buttonClick)="deselectAll()"
+        i18n
+      >
+        Fravælg alle
+      </app-button>
+      <app-button
+        *ngIf="!isAllSelected(user) && hasRoles(user)"
+        buttonStyle="secondary"
+        color="accent"
+        (buttonClick)="selectAll(user)"
+        i18n
+      >
+        Vælg alle
+      </app-button>
+      <app-button
         *ngIf="hasRoles(user)"
         buttonStyle="secondary"
         color="warn"
