@@ -146,18 +146,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   ngOnInit() {
-    this.subscriptions.add(
-      this.webAccessibilityForm.controls.webAccessibilityCompliance.valueChanges.subscribe((value) => {
-        const hasValue = !!value;
-        if (hasValue) {
-          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.enable();
-          this.webAccessibilityForm.controls.webAccessibilityNotes.enable();
-        } else {
-          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.disable();
-          this.webAccessibilityForm.controls.webAccessibilityNotes.disable();
-        }
-      })
-    );
     // Add custom date validators
     this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
       this.itSystemApplicationForm.controls.validTo
@@ -179,6 +167,18 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         })
     );
 
+    this.subscriptions.add(
+      this.webAccessibilityForm.controls.webAccessibilityCompliance.valueChanges.subscribe((value) => {
+        const hasValue = !!value;
+        if (hasValue && !this.webAccessibilityForm.disabled) {
+          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.enable();
+          this.webAccessibilityForm.controls.webAccessibilityNotes.enable();
+        } else {
+          this.webAccessibilityForm.controls.lastWebAccessibilityCheck.disable();
+          this.webAccessibilityForm.controls.webAccessibilityNotes.disable();
+        }
+      })
+    );
     // Set initial state of information form
     this.subscriptions.add(
       this.store
