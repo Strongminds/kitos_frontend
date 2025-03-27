@@ -50,3 +50,6 @@ export const IsBusinessCritical = 'IsBusinessCritical';
 export const ContainsAITechnology = 'ContainsAITechnology';
 export const CatalogArchiveDuty = 'CatalogArchiveDuty';
 export const CatalogArchiveDutyComment = 'CatalogArchiveDutyComment';
+export const WebAccessibilityCompliance = 'WebAccessibilityCompliance';
+export const LastWebAccessibilityCheck = 'LastWebAccessibilityCheck';
+export const WebAccessibilityNotes = 'WebAccessibilityNotes';
