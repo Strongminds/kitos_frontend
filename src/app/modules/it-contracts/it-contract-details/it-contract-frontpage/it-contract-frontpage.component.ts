@@ -225,12 +225,13 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit(): void {
+    const parentContractControl = this.parentContractForm.controls;
     this.subscriptions.add(
-      this.parentContractForm.controls.parentContract.valueChanges.subscribe((value) => {
+      parentContractControl.parentContract.valueChanges.subscribe((value) => {
         if (value) {
-          this.parentContractForm.controls.requireValidParent.enable();
+          parentContractControl.requireValidParent.enable();
         } else {
-          this.parentContractForm.controls.requireValidParent.disable();
+          parentContractControl.requireValidParent.disable();
         }
       })
     );

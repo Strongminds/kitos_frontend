@@ -6685,6 +6685,18 @@
         <source>Delvist</source>
         <target state="new">Delvist</target>
       </trans-unit>
+      <trans-unit id="1913854439835710431" datatype="html">
+        <source>Kræv gyldig overordnet kontrakt</source>
+        <target state="new">Kræv gyldig overordnet kontrakt</target>
+      </trans-unit>
+      <trans-unit id="6607280942083882467" datatype="html">
+        <source>Kontrakten arver sin overdnets kontrakts gyldighed, og er derfor gyldig trods af at:</source>
+        <target state="new">Kontrakten arver sin overdnets kontrakts gyldighed, og er derfor gyldig trods af at:</target>
+      </trans-unit>
+      <trans-unit id="3654247776975529872" datatype="html">
+        <source>Den overordnede kontrakt er ikke gyldig</source>
+        <target state="new">Den overordnede kontrakt er ikke gyldig</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
