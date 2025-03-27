@@ -72,16 +72,15 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly isValid$ = this.store.select(selectItContractIsValid).pipe(filterNullish());
   public readonly statusText$ = this.store.select(selectItContractValidity).pipe(
     map((validity) => {
-      if (
-        (validity?.valid && validity?.enforcedValid === false) ||
-        (validity?.enforcedValid && validity?.validationErrors?.length === 0)
-      ) {
+      if (validity?.validationErrors?.length === 0) {
         return '';
       }
 
       let text = '';
       if (validity?.enforcedValid) {
         text += $localize`Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:`;
+      } else if (validity?.requireValidParent) {
+        text += $localize`Kontrakten arver sin overdnets kontrakts gyldighed, og er derfor gyldig trods af at:`;
       } else {
         text += $localize`Følgende gør kontrakten ugyldig:`;
       }
