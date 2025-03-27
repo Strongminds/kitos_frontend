@@ -6653,13 +6653,13 @@
         <source>Primært startmodul</source>
         <target state="new">Primært startmodul</target>
       </trans-unit>
-      <trans-unit id="1657500676073292614" datatype="html">
-        <source>Invalider ved ugyldig overordnet kontrakt</source>
-        <target state="new">Invalider ved ugyldig overordnet kontrakt</target>
+      <trans-unit id="8373896753514601426" datatype="html">
+        <source>Anvendes ikke</source>
+        <target state="new">Anvendes ikke</target>
       </trans-unit>
-      <trans-unit id="3654247776975529872" datatype="html">
-        <source>Den overordnede kontrakt er ikke gyldig</source>
-        <target state="new">Den overordnede kontrakt er ikke gyldig</target>
+      <trans-unit id="6457416557932664753" datatype="html">
+        <source>Vis anvendelse</source>
+        <target state="new">Vis anvendelse</target>
       </trans-unit>
     </body>
   </file>

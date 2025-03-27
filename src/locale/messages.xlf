@@ -5047,11 +5047,11 @@
       <trans-unit id="7847315002899056423" datatype="html">
         <source>Primært startmodul</source>
       </trans-unit>
-      <trans-unit id="1657500676073292614" datatype="html">
-        <source>Invalider ved ugyldig overordnet kontrakt</source>
+      <trans-unit id="6457416557932664753" datatype="html">
+        <source>Vis anvendelse</source>
       </trans-unit>
-      <trans-unit id="3654247776975529872" datatype="html">
-        <source>Den overordnede kontrakt er ikke gyldig</source>
+      <trans-unit id="8373896753514601426" datatype="html">
+        <source>Anvendes ikke</source>
       </trans-unit>
     </body>
   </file>

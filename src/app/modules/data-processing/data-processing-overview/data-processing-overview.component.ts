@@ -76,7 +76,6 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       title: $localize`Status (Markeret kontrakt)`,
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'boolean',
-      extraData: this.activeOptions,
       entityType: 'data-processing-registration',
       style: 'chip',
       width: 340,

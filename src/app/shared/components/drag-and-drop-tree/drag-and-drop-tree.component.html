@@ -21,11 +21,9 @@
         'checkbox-color': checkboxNodes === true
       }"
       data-cy="node"
-      (click)="checkboxNodes ? checkNode(node) : disableRedirect ? expandClick(node) : goToNode(node)"
+      (click)="disableRedirect ? expandClick(node) : goToNode(node)"
     >
-      <ng-container
-        *ngIf="checkboxNodes === false && node.children.length && (maxLevel === undefined || maxLevel > level)"
-      >
+      <ng-container *ngIf="node.children.length && (maxLevel === undefined || maxLevel > level)">
         <app-chevron-down-icon
           class="chevron-icon"
           *ngIf="node.isExpanded"
@@ -38,13 +36,17 @@
         ></app-chevron-right-icon>
       </ng-container>
       <ng-container *ngIf="checkboxNodes === true">
-        <app-checkbox [(value)]="node.status" [disabled]="disableCheck"></app-checkbox>
+        <app-checkbox
+          [value]="node.status"
+          [disabled]="disableCheck"
+          (valueChange)="checkNode(node)"
+          (click)="$event.stopPropagation()"
+        ></app-checkbox>
         <app-details-page-link
           [itemType]="itemType"
           linkFontSize="small"
           [itemPath]="node.uuid"
           [disableRedirect]="disableRedirect"
-          (click)="checkNodeTextClick(node)"
         >
           <span class="level-indicator-color">{{ level }}.</span> {{ node.name }}
         </app-details-page-link>

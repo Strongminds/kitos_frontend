@@ -95,6 +95,7 @@ export * from './itInterfaceDataRequestDTO';
 export * from './itInterfaceDataResponseDTO';
 export * from './itInterfacePermissionsResponseDTO';
 export * from './itInterfaceResponseDTO';
+export * from './itSystemHierarchyNodeResponseDTO';
 export * from './itSystemPermissionsResponseDTO';
 export * from './itSystemResponseDTO';
 export * from './itSystemSearchResponseDTO';

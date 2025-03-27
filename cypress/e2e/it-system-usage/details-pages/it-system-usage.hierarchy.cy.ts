@@ -8,7 +8,9 @@ describe('it-system-usage', () => {
   });
 
   it('shows simple hierarchy', () => {
-    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: './it-system-usage/hierarchy.json' });
+    cy.intercept('/api/v2/internal/organization/*/it-systems/*/hierarchy', {
+      fixture: './it-system-usage/hierarchy.json',
+    });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Hierarki');
@@ -20,7 +22,9 @@ describe('it-system-usage', () => {
   });
 
   it('shows complex hierarchy', () => {
-    cy.intercept('/api/v2/it-systems/*/hierarchy', { fixture: './it-system-usage/hierarchy-complex.json' });
+    cy.intercept('/api/v2/internal/organization/*/it-systems/*/hierarchy', {
+      fixture: './it-system-usage/hierarchy-complex.json',
+    });
 
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('Hierarki');
