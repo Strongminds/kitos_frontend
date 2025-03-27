@@ -79,7 +79,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       let text = '';
       if (validity?.enforcedValid) {
         text += $localize`Gyldigheden er gennemtvunget og kontrakten er derfor gyldig på trods af at:`;
-      } else if (validity?.requireValidParent) {
+      } else if (validity?.requireValidParent && validity.valid) {
         text += $localize`Kontrakten arver sin overdnets kontrakts gyldighed, og er derfor gyldig trods af at:`;
       } else {
         text += $localize`Følgende gør kontrakten ugyldig:`;
