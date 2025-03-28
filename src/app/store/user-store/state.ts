@@ -1,5 +1,8 @@
-
-import { APIOrganizationGridPermissionsResponseDTO, APIOrganizationResponseDTO } from 'src/app/api/v2';
+import {
+  APIIdentityNamePairResponseDTO,
+  APIOrganizationGridPermissionsResponseDTO,
+  APIOrganizationResponseDTO,
+} from 'src/app/api/v2';
 import { User } from 'src/app/shared/models/user.model';
 
 export interface UserState {
@@ -11,4 +14,5 @@ export interface UserState {
   organization: APIOrganizationResponseDTO | undefined;
   hasMultipleOrganizations: boolean | undefined;
   gridPermissions: APIOrganizationGridPermissionsResponseDTO | undefined;
+  defaultUnit: APIIdentityNamePairResponseDTO | undefined;
 }

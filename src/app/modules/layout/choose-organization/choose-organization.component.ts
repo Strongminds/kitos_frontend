@@ -28,7 +28,7 @@ export class ChooseOrganizationComponent implements OnInit {
     private store: Store,
     private componentStore: ChooseOrganizationComponentStore
   ) {
-    this.closable = !dialog.disableClose ?? true;
+    this.closable = dialog.disableClose !== true;
   }
 
   ngOnInit() {

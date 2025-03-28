@@ -1,5 +1,6 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
 import {
+  APIIdentityNamePairResponseDTO,
   APIOrganizationGridPermissionsResponseDTO,
   APIOrganizationResponseDTO,
   APIOrganizationUpdateRequestDTO,
@@ -50,5 +51,9 @@ export const UserActions = createActionGroup({
     'Reset Password': (requestId: string, password: string) => ({ requestId, password }),
     'Reset Password Success': emptyProps(),
     'Reset Password Error': emptyProps(),
+
+    'Get User Default Unit': (organizationUuid: string) => ({ organizationUuid }),
+    'Get User Default Unit Success': (unit: APIIdentityNamePairResponseDTO) => ({ unit }),
+    'Get User Default Unit Error': emptyProps(),
   },
 });

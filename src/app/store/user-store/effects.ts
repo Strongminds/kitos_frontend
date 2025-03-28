@@ -4,20 +4,24 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
-import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
-import { APIOrganizationGridPermissionsResponseDTO, APIUserResponseDTO, APIV2PasswordResetInternalINTERNALService } from 'src/app/api/v2';
+import {
+  APIOrganizationGridPermissionsResponseDTO,
+  APIUserResponseDTO,
+  APIV2PasswordResetInternalINTERNALService,
+} from 'src/app/api/v2';
 import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
+import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
+import { selectUIRootConfig } from '../organization/selectors';
 import { UserActions } from './actions';
 import { selectOrganizationUuid, selectUser } from './selectors';
-import { selectUIRootConfig } from '../organization/selectors';
-import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
-import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 
 @Injectable()
 export class UserEffects {
@@ -100,25 +104,31 @@ export class UserEffects {
     );
   });
 
-  useUserDefaultStartPageOnLogin$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.resetOnOrganizationUpdate),
-      switchMap(() =>
-        this.store.select(selectUIRootConfig).pipe(
-          filterNullish(),
-          withLatestFrom(this.store.select(selectUser))
-        )
-      ),
-      tap(([uiRootConfig, user]) => {
-        const userDefaultStartPage = user?.defaultStartPage;
-        if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig)) {
-          this.navigateToUserDefaultStartPage(userDefaultStartPage!);
-        }
-      })
-    );
-  }, { dispatch: false });
+  useUserDefaultStartPageOnLogin$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(UserActions.resetOnOrganizationUpdate),
+        switchMap(() =>
+          this.store.select(selectUIRootConfig).pipe(filterNullish(), withLatestFrom(this.store.select(selectUser)))
+        ),
+        tap(([uiRootConfig, user]) => {
+          const userDefaultStartPage = user?.defaultStartPage;
+          if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig)) {
+            this.navigateToUserDefaultStartPage(userDefaultStartPage!);
+          }
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
+  /* getDefaultUnit$ = createEffect(() => {
+    return this this.actions$.pipe(
+      ofType(UserActions.getUserDefaultUnit),
+      switchMap(({ organizationUuid }) =>
 
+    )
+  }); */
 
   private shouldGoToUserDefaultStartPage(
     userDefaultStartPage: StartPreferenceChoice | undefined,

@@ -12,6 +12,7 @@ export const userInitialState: UserState = {
   organization: undefined,
   hasMultipleOrganizations: undefined,
   gridPermissions: undefined,
+  defaultUnit: undefined,
 };
 
 export const userFeature = createFeature({
