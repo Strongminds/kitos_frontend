@@ -5080,6 +5080,30 @@
       <trans-unit id="8481160601059811611" datatype="html">
         <source>Kontrakten arver sin overordnede kontrakts gyldighed, og er derfor gyldig trods af at:</source>
       </trans-unit>
+      <trans-unit id="3606013648406401255" datatype="html">
+        <source> Prøv igen og kontakt venligst Kitos sekretariatet, hvis problemet fortsætter</source>
+      </trans-unit>
+      <trans-unit id="4082842369475273113" datatype="html">
+        <source> Kontakt venligst din lokale IT administrator for at få tildelt adgang til Kitos</source>
+      </trans-unit>
+      <trans-unit id="4172062469313536052" datatype="html">
+        <source> Kontakt venligst Kitos sekretariatet, hvis I ønsker at tilslutte jer samarbejdet omkring Kitos</source>
+      </trans-unit>
+      <trans-unit id="8809613748564697708" datatype="html">
+        <source> Kontakt venligst din lokale IT administrator</source>
+      </trans-unit>
+      <trans-unit id="1440318310489375093" datatype="html">
+        <source>Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale</source>
+      </trans-unit>
+      <trans-unit id="4639924666969098557" datatype="html">
+        <source>Uklassificeret SSO fejl</source>
+      </trans-unit>
+      <trans-unit id="5141417027258638490" datatype="html">
+        <source>Den bruger, som du er logget på med, har ikke adgang til Kitos</source>
+      </trans-unit>
+      <trans-unit id="5448518196835237176" datatype="html">
+        <source>Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er ukendt</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

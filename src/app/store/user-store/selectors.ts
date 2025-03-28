@@ -59,3 +59,5 @@ export const selectAvailableRoleDropdownValues = createSelector(
     return GetOptionsBasedOnRights(isGlobalAdmin, organizationRights ?? [], organizationUuid ?? '');
   }
 );
+
+export const selectSsoErrorCode = createSelector(selectUserState, (state) => state.ssoErrorCode);
