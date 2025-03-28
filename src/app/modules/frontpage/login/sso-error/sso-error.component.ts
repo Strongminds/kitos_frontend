@@ -1,7 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SsoErrorCode } from 'src/app/shared/enums/sso-error-code';
-import { selectSsoErrorCode } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-sso-error',
@@ -9,7 +8,8 @@ import { selectSsoErrorCode } from 'src/app/store/user-store/selectors';
   styleUrl: './sso-error.component.scss',
 })
 export class SsoErrorComponent {
-  public readonly ssoErrorCode$ = this.store.select(selectSsoErrorCode);
+  @Input() public ssoErrorCode!: SsoErrorCode;
+
   public readonly errorCodes = SsoErrorCode;
 
   constructor(private store: Store) {}
