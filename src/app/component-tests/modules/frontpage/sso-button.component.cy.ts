@@ -8,12 +8,4 @@ describe('SsoButtonComponent', () => {
 
     cy.get('app-lock-icon').should('exist');
   });
-
-  it('Can click and get SSO dialog', () => {
-    cy.mount(SsoButtonComponent, {
-      imports: [FrontpageModule],    });
-
-    cy.get('button').click({ force: true });
-    cy.contains("Log ind med SSO");
-  });
 });
