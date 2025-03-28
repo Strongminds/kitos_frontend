@@ -12,3 +12,11 @@
     grid-column: 1 / 4;
   }
 }
+
+.input-two-thirds-column-width {
+  grid-column: span 2;
+}
+
+.flex {
+  display: flex;
+}

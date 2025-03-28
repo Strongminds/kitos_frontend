@@ -16,10 +16,6 @@ button.mat-mdc-button-base {
   border-radius: $radius-large;
   border-color: var(--mdc-text-button-label-text-color);
 
-  &.icon-button {
-    padding-right: 12px !important;
-  }
-
   &.large {
     height: 56px;
   }
