@@ -55,5 +55,9 @@ export const UserActions = createActionGroup({
     'Get User Default Unit': (organizationUuid: string) => ({ organizationUuid }),
     'Get User Default Unit Success': (unit: APIIdentityNamePairResponseDTO) => ({ unit }),
     'Get User Default Unit Error': emptyProps(),
+
+    'Set User Default Unit': (organizationUnitUuid: string) => ({ organizationUnitUuid }),
+    'Set User Default Unit Success': emptyProps(),
+    'Set User Default Unit Error': emptyProps(),
   },
 });

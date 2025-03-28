@@ -10,6 +10,7 @@ import {
   APIOrganizationGridPermissionsResponseDTO,
   APIUserResponseDTO,
   APIV2PasswordResetInternalINTERNALService,
+  APIV2UsersInternalINTERNALService,
 } from 'src/app/api/v2';
 import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
@@ -21,7 +22,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
 import { selectUIRootConfig } from '../organization/selectors';
 import { UserActions } from './actions';
-import { selectOrganizationUuid, selectUser } from './selectors';
+import { selectOrganizationUuid, selectUser, selectUserUuid } from './selectors';
 
 @Injectable()
 export class UserEffects {
@@ -36,7 +37,10 @@ export class UserEffects {
     private organizationGridService: APIV2OrganizationGridInternalINTERNALService,
     @Inject(APIV2OrganizationsInternalINTERNALService)
     private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
-    private resetPasswordService: APIV2PasswordResetInternalINTERNALService
+    @Inject(APIV2PasswordResetInternalINTERNALService)
+    private resetPasswordService: APIV2PasswordResetInternalINTERNALService,
+    @Inject(APIV2UsersInternalINTERNALService)
+    private userInternalService: APIV2UsersInternalINTERNALService
   ) {}
 
   login$ = createEffect(() => {
@@ -122,72 +126,6 @@ export class UserEffects {
     { dispatch: false }
   );
 
-  /* getDefaultUnit$ = createEffect(() => {
-    return this this.actions$.pipe(
-      ofType(UserActions.getUserDefaultUnit),
-      switchMap(({ organizationUuid }) =>
-
-    )
-  }); */
-
-  private shouldGoToUserDefaultStartPage(
-    userDefaultStartPage: StartPreferenceChoice | undefined,
-    uiRootConfig: UIRootConfig
-  ): boolean {
-    return (
-      this.isOnStartPage() &&
-      userDefaultStartPage !== undefined &&
-      !this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)
-    );
-  }
-
-  private isOnStartPage(): boolean {
-    return this.router.url.replace('/', '') === AppPath.root;
-  }
-
-  private userDefaultStartPageDisabledInOrganization(
-    userDefaultStartPage: StartPreferenceChoice,
-    uiRootConfig: UIRootConfig
-  ): boolean {
-    const startPageValue = userDefaultStartPage.value;
-    switch (startPageValue) {
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
-        return !uiRootConfig.showItSystemModule;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
-        return !uiRootConfig.showItContractModule;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
-        return !uiRootConfig.showDataProcessing;
-      default:
-        return false;
-    }
-  }
-
-  private navigateToUserDefaultStartPage(userDefaultStartPage: StartPreferenceChoice) {
-    const path = this.getUserDefaultStartPagePath(userDefaultStartPage);
-    this.router.navigate([path]);
-  }
-
-  private getUserDefaultStartPagePath(userDefaultStartPage: StartPreferenceChoice): string {
-    const startPageValue = userDefaultStartPage.value;
-    switch (startPageValue) {
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite:
-        return AppPath.root;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.Organization:
-        return `${AppPath.organization}/${AppPath.structure}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
-        return `${AppPath.itSystems}/${AppPath.itSystemCatalog}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
-        return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
-        return AppPath.itContracts;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
-        return AppPath.dataProcessing;
-      default:
-        throw new Error(`Unknown start page: ${startPageValue}`);
-    }
-  }
-
   goToRootOnAuthenticateFailed$ = createEffect(
     () => {
       return this.actions$.pipe(
@@ -261,4 +199,95 @@ export class UserEffects {
       )
     );
   });
+
+  getDefaultUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.getUserDefaultUnit),
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([{ organizationUuid }, userUuid]) =>
+        this.userInternalService.getSingleUsersInternalV2GetUserDefaultUnit({ organizationUuid, userUuid }).pipe(
+          map(
+            (unit) => UserActions.getUserDefaultUnitSuccess(unit),
+            catchError(() => of(UserActions.getUserDefaultUnitError()))
+          )
+        )
+      )
+    );
+  });
+
+  setDefaultUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.setUserDefaultUnit),
+      combineLatestWith(
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectUserUuid).pipe(filterNullish())
+      ),
+      switchMap(([{ organizationUnitUuid }, organizationUuid, userUuid]) =>
+        this.userInternalService
+          .patchSingleUsersInternalV2PatchDefaultOrgUnit({ organizationUuid, userUuid, organizationUnitUuid })
+          .pipe(
+            map(() => UserActions.setUserDefaultUnitSuccess()),
+            catchError(() => of(UserActions.setUserDefaultUnitError()))
+          )
+      )
+    );
+  });
+
+  private shouldGoToUserDefaultStartPage(
+    userDefaultStartPage: StartPreferenceChoice | undefined,
+    uiRootConfig: UIRootConfig
+  ): boolean {
+    return (
+      this.isOnStartPage() &&
+      userDefaultStartPage !== undefined &&
+      !this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)
+    );
+  }
+
+  private isOnStartPage(): boolean {
+    return this.router.url.replace('/', '') === AppPath.root;
+  }
+
+  private userDefaultStartPageDisabledInOrganization(
+    userDefaultStartPage: StartPreferenceChoice,
+    uiRootConfig: UIRootConfig
+  ): boolean {
+    const startPageValue = userDefaultStartPage.value;
+    switch (startPageValue) {
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
+        return !uiRootConfig.showItSystemModule;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
+        return !uiRootConfig.showItContractModule;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
+        return !uiRootConfig.showDataProcessing;
+      default:
+        return false;
+    }
+  }
+
+  private navigateToUserDefaultStartPage(userDefaultStartPage: StartPreferenceChoice) {
+    const path = this.getUserDefaultStartPagePath(userDefaultStartPage);
+    this.router.navigate([path]);
+  }
+
+  private getUserDefaultStartPagePath(userDefaultStartPage: StartPreferenceChoice): string {
+    const startPageValue = userDefaultStartPage.value;
+    switch (startPageValue) {
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite:
+        return AppPath.root;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.Organization:
+        return `${AppPath.organization}/${AppPath.structure}`;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
+        return `${AppPath.itSystems}/${AppPath.itSystemCatalog}`;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
+        return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
+        return AppPath.itContracts;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
+        return AppPath.dataProcessing;
+      default:
+        throw new Error(`Unknown start page: ${startPageValue}`);
+    }
+  }
 }
