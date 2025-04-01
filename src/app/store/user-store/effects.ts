@@ -20,6 +20,7 @@ import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.mod
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
+import { selectPagedOrganizationUnits } from '../organization/organization-unit/selectors';
 import { selectUIRootConfig } from '../organization/selectors';
 import { UserActions } from './actions';
 import { selectOrganizationUuid, selectUser, selectUserUuid } from './selectors';
@@ -203,13 +204,13 @@ export class UserEffects {
   getDefaultUnit$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.getUserDefaultUnit),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      combineLatestWith(this.store.select(selectUserUuid).pipe(filterNullish())),
       switchMap(([{ organizationUuid }, userUuid]) =>
         this.userInternalService.getSingleUsersInternalV2GetUserDefaultUnit({ organizationUuid, userUuid }).pipe(
-          map(
-            (unit) => UserActions.getUserDefaultUnitSuccess(unit),
-            catchError(() => of(UserActions.getUserDefaultUnitError()))
-          )
+          map((unit) => {
+            return UserActions.getUserDefaultUnitSuccess(unit);
+          }),
+          catchError(() => of(UserActions.getUserDefaultUnitError()))
         )
       )
     );
@@ -218,15 +219,26 @@ export class UserEffects {
   setDefaultUnit$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.setUserDefaultUnit),
-      combineLatestWith(
+      concatLatestFrom(() => [
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
-        this.store.select(selectUserUuid).pipe(filterNullish())
-      ),
-      switchMap(([{ organizationUnitUuid }, organizationUuid, userUuid]) =>
+        this.store.select(selectUserUuid).pipe(filterNullish()),
+        this.store.select(selectPagedOrganizationUnits).pipe(filterNullish()),
+      ]),
+      switchMap(([{ organizationUnitUuid }, organizationUuid, userUuid, organizationUnits]) =>
         this.userInternalService
-          .patchSingleUsersInternalV2PatchDefaultOrgUnit({ organizationUuid, userUuid, organizationUnitUuid })
+          .patchSingleUsersInternalV2PatchDefaultOrgUnit({
+            organizationUuid,
+            userUuid,
+            organizationUnitUuid: organizationUnitUuid,
+          })
           .pipe(
-            map(() => UserActions.setUserDefaultUnitSuccess()),
+            map(() => {
+              const defaultUnit = organizationUnits.find((unit) => unit.uuid === organizationUnitUuid);
+              if (!defaultUnit) {
+                return UserActions.setUserDefaultUnitError();
+              }
+              return UserActions.setUserDefaultUnitSuccess(defaultUnit);
+            }),
             catchError(() => of(UserActions.setUserDefaultUnitError()))
           )
       )

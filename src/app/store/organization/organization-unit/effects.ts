@@ -69,7 +69,10 @@ export class OrganizationUnitEffects {
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
         this.store.select(selectPagedOrganizationUnitHasValidCache),
       ]),
-      filter(([_, __, validCache]) => {
+      filter(([{ ignoreCache }, __, validCache]) => {
+        if (ignoreCache) {
+          return true;
+        }
         return !validCache;
       }),
       switchMap(([{ units, currentPage, pageSize }, organizationUuid]) =>

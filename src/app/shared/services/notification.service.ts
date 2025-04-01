@@ -2,12 +2,14 @@ import { Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { AlertActions } from 'src/app/store/alerts/actions';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/actions';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
+import { GlobalAdminSystemIntegratorActions } from 'src/app/store/global-admin/system-integrators/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -24,8 +26,6 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
-import { AlertActions } from 'src/app/store/alerts/actions';
-import { GlobalAdminSystemIntegratorActions } from 'src/app/store/global-admin/system-integrators/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -248,6 +248,9 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(OrganizationUserActions.updateUserSuccess, $localize`Brugeren blev opdateret`);
     this.subscribeAsError(OrganizationUserActions.updateUserError, $localize`Brugeren kunne ikke opdateres`);
+
+    this.subscribeAsDefault(UserActions.setUserDefaultUnitSuccess, $localize`Brugeren blev opdateret`);
+    this.subscribeAsError(UserActions.setUserDefaultUnitError, $localize`Brugeren kunne ikke opdateres`);
 
     this.subscribeAsDefault(OrganizationUserActions.createUserSuccess, $localize`Bruger blev oprettet`);
     this.subscribeAsError(OrganizationUserActions.createUserError, $localize`Bruger kunne ikke oprettes`);

@@ -4822,9 +4822,6 @@
       <trans-unit id="1164724015350728554" datatype="html">
         <source>Søg...</source>
       </trans-unit>
-      <trans-unit id="987801205594216692" datatype="html">
-        <source> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </source>
-      </trans-unit>
       <trans-unit id="4917104049079759478" datatype="html">
         <source>Primær startmodul</source>
       </trans-unit>
@@ -5079,6 +5076,9 @@
       </trans-unit>
       <trans-unit id="8481160601059811611" datatype="html">
         <source>Kontrakten arver sin overordnede kontrakts gyldighed, og er derfor gyldig trods af at:</source>
+      </trans-unit>
+      <trans-unit id="8435640758869757683" datatype="html">
+        <source> Du kan kun tilknytte en primær organisationsenhed, i organisationer du har en rolle i. </source>
       </trans-unit>
     </body>
   </file>

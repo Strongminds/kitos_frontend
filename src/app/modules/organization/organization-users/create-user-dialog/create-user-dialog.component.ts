@@ -2,17 +2,19 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatest, debounceTime, first, map } from 'rxjs';
 import { APICreateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
+import { UserService } from 'src/app/shared/services/user.service';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
+import { selectUserUuid } from 'src/app/store/user-store/selectors';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
-import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-create-user-dialog',
@@ -66,10 +68,22 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
   ngOnInit(): void {
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess))
-        .subscribe(() => {
+        .pipe(
+          ofType(OrganizationUserActions.createUserSuccess),
+          concatLatestFrom(() => this.store.select(selectUserUuid))
+        )
+        .subscribe(([{ user }, userUuid]) => {
+          //In a rare event User creates himself, we need to reload the page to get the new user data
+          if (user.uuid === userUuid) {
+            window.location.reload();
+          }
           this.onCancel();
         })
+    );
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUserActions.updateUserSuccess)).subscribe(() => {
+        this.onCancel();
+      })
     );
 
     this.subscriptions.add(

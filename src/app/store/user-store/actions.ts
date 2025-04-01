@@ -38,8 +38,6 @@ export const UserActions = createActionGroup({
     'Patch organization success': (organization: APIOrganizationResponseDTO) => organization,
     'Patch organization error': emptyProps(),
 
-    'Update user default unit state': (unitUuid: string | undefined) => ({ unitUuid }),
-
     'Reset Password Request': (email: string) => ({ email }),
     'Reset Password Request Success': (email: string) => ({ email }),
     'Reset Password Request Error': emptyProps(),
@@ -57,7 +55,7 @@ export const UserActions = createActionGroup({
     'Get User Default Unit Error': emptyProps(),
 
     'Set User Default Unit': (organizationUnitUuid: string) => ({ organizationUnitUuid }),
-    'Set User Default Unit Success': emptyProps(),
+    'Set User Default Unit Success': (organizationUnit: APIIdentityNamePairResponseDTO) => ({ organizationUnit }),
     'Set User Default Unit Error': emptyProps(),
   },
 });
