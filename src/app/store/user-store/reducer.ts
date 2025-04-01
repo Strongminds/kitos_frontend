@@ -11,6 +11,7 @@ export const userInitialState: UserState = {
   organization: undefined,
   hasMultipleOrganizations: undefined,
   gridPermissions: undefined,
+  ssoErrorCode: undefined,
   defaultUnit: undefined,
 };
 
@@ -65,6 +66,7 @@ export const userFeature = createFeature({
     ),
     on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization })),
 
+    on(UserActions.updateSSOErrorCode, (state, { ssoErrorCode }): UserState => ({ ...state, ssoErrorCode })),
     on(UserActions.getUserDefaultUnitSuccess, (state, { unit }): UserState => ({ ...state, defaultUnit: unit })),
     on(UserActions.getUserDefaultUnitError, (state): UserState => ({ ...state, defaultUnit: undefined })),
     on(

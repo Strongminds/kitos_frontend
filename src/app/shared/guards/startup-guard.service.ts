@@ -14,6 +14,11 @@ export class StartupGuardService {
   canActivate(state: RouterStateSnapshot): Observable<boolean | UrlTree> {
     // Extract the route from the URL
     const fullUrl = (state as any)._routerState.url;
+
+    const urlTree: UrlTree = this.urlSerializer.parse(fullUrl);
+    const ssoErrorCode = urlTree.queryParams['ssoErrorCode'];
+    if (ssoErrorCode) this.store.dispatch(UserActions.updateSSOErrorCode(ssoErrorCode));
+
     const returnUrl = extractRoute(this.urlSerializer, fullUrl);
 
     // Dispatch user authentication and wait for user organization to have been checked

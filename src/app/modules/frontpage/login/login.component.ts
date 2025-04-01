@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { Login } from 'src/app/shared/models/login.model';
 import { resetStateAction } from 'src/app/store/meta/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
+import { selectSsoErrorCode } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-login',
@@ -16,6 +17,8 @@ export class LoginComponent {
     password: new FormControl(''),
     remember: new FormControl(false),
   });
+
+  public readonly ssoErrorCode$ = this.store.select(selectSsoErrorCode);
 
   constructor(private store: Store) {}
 

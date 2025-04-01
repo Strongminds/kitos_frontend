@@ -3,6 +3,14 @@
 .grid-container {
   display: grid;
   &.with-gap {
-    gap: $padding-medium;
+    &.small-gap {
+      gap: $padding-small;
+    }
+    &.medium-gap {
+      gap: $padding-medium;
+    }
+    &.large-gap {
+      gap: $padding-large;
+    }
   }
 }

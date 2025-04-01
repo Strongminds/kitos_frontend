@@ -3,6 +3,7 @@ import {
   APIOrganizationGridPermissionsResponseDTO,
   APIOrganizationResponseDTO,
 } from 'src/app/api/v2';
+import { SsoErrorCode } from 'src/app/shared/enums/sso-error-code';
 import { User } from 'src/app/shared/models/user.model';
 
 export interface UserState {
@@ -14,5 +15,7 @@ export interface UserState {
   organization: APIOrganizationResponseDTO | undefined;
   hasMultipleOrganizations: boolean | undefined;
   gridPermissions: APIOrganizationGridPermissionsResponseDTO | undefined;
+
+  ssoErrorCode: SsoErrorCode | undefined;
   defaultUnit: APIIdentityNamePairResponseDTO | undefined;
 }

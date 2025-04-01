@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -16,7 +17,6 @@ import {
 } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
-import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 
 @Component({
   selector: 'app-nav-bar',
@@ -58,7 +58,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   public goToOldKitos() {
-    window.location.href = '/';
+    window.location.href = '/old';
   }
 
   public logout() {

@@ -4,13 +4,13 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { KITOS_MARKETING_PAGE_URL } from 'src/app/shared/constants/constants';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
 import { PublicMessageConfig } from './public-message/public-message.component';
-import { KITOS_MARKETING_PAGE_URL } from 'src/app/shared/constants/constants';
 
 @Component({
   templateUrl: 'frontpage.component.html',
