@@ -4,20 +4,26 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
-import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
-import { APIOrganizationGridPermissionsResponseDTO, APIUserResponseDTO, APIV2PasswordResetInternalINTERNALService } from 'src/app/api/v2';
+import {
+  APIOrganizationGridPermissionsResponseDTO,
+  APIUserResponseDTO,
+  APIV2PasswordResetInternalINTERNALService,
+  APIV2UsersInternalINTERNALService,
+} from 'src/app/api/v2';
 import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
+import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { adaptUser } from 'src/app/shared/models/user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { resetOrganizationStateAction, resetStateAction } from '../meta/actions';
-import { UserActions } from './actions';
-import { selectOrganizationUuid, selectUser } from './selectors';
+import { selectPagedOrganizationUnits } from '../organization/organization-unit/selectors';
 import { selectUIRootConfig } from '../organization/selectors';
-import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
-import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
+import { UserActions } from './actions';
+import { selectOrganizationUuid, selectUser, selectUserUuid } from './selectors';
 
 @Injectable()
 export class UserEffects {
@@ -32,7 +38,10 @@ export class UserEffects {
     private organizationGridService: APIV2OrganizationGridInternalINTERNALService,
     @Inject(APIV2OrganizationsInternalINTERNALService)
     private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
-    private resetPasswordService: APIV2PasswordResetInternalINTERNALService
+    @Inject(APIV2PasswordResetInternalINTERNALService)
+    private resetPasswordService: APIV2PasswordResetInternalINTERNALService,
+    @Inject(APIV2UsersInternalINTERNALService)
+    private userInternalService: APIV2UsersInternalINTERNALService
   ) {}
 
   login$ = createEffect(() => {
@@ -100,83 +109,23 @@ export class UserEffects {
     );
   });
 
-  useUserDefaultStartPageOnLogin$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(UserActions.resetOnOrganizationUpdate),
-      switchMap(() =>
-        this.store.select(selectUIRootConfig).pipe(
-          filterNullish(),
-          withLatestFrom(this.store.select(selectUser))
-        )
-      ),
-      tap(([uiRootConfig, user]) => {
-        const userDefaultStartPage = user?.defaultStartPage;
-        if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig)) {
-          this.navigateToUserDefaultStartPage(userDefaultStartPage!);
-        }
-      })
-    );
-  }, { dispatch: false });
-
-
-
-  private shouldGoToUserDefaultStartPage(
-    userDefaultStartPage: StartPreferenceChoice | undefined,
-    uiRootConfig: UIRootConfig
-  ): boolean {
-    return (
-      this.isOnStartPage() &&
-      userDefaultStartPage !== undefined &&
-      !this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)
-    );
-  }
-
-  private isOnStartPage(): boolean {
-    return this.router.url.replace('/', '') === AppPath.root;
-  }
-
-  private userDefaultStartPageDisabledInOrganization(
-    userDefaultStartPage: StartPreferenceChoice,
-    uiRootConfig: UIRootConfig
-  ): boolean {
-    const startPageValue = userDefaultStartPage.value;
-    switch (startPageValue) {
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
-        return !uiRootConfig.showItSystemModule;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
-        return !uiRootConfig.showItContractModule;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
-        return !uiRootConfig.showDataProcessing;
-      default:
-        return false;
-    }
-  }
-
-  private navigateToUserDefaultStartPage(userDefaultStartPage: StartPreferenceChoice) {
-    const path = this.getUserDefaultStartPagePath(userDefaultStartPage);
-    this.router.navigate([path]);
-  }
-
-  private getUserDefaultStartPagePath(userDefaultStartPage: StartPreferenceChoice): string {
-    const startPageValue = userDefaultStartPage.value;
-    switch (startPageValue) {
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite:
-        return AppPath.root;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.Organization:
-        return `${AppPath.organization}/${AppPath.structure}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
-        return `${AppPath.itSystems}/${AppPath.itSystemCatalog}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
-        return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
-        return AppPath.itContracts;
-      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
-        return AppPath.dataProcessing;
-      default:
-        throw new Error(`Unknown start page: ${startPageValue}`);
-    }
-  }
+  useUserDefaultStartPageOnLogin$ = createEffect(
+    () => {
+      return this.actions$.pipe(
+        ofType(UserActions.resetOnOrganizationUpdate),
+        switchMap(() =>
+          this.store.select(selectUIRootConfig).pipe(filterNullish(), withLatestFrom(this.store.select(selectUser)))
+        ),
+        tap(([uiRootConfig, user]) => {
+          const userDefaultStartPage = user?.defaultStartPage;
+          if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig)) {
+            this.navigateToUserDefaultStartPage(userDefaultStartPage!);
+          }
+        })
+      );
+    },
+    { dispatch: false }
+  );
 
   goToRootOnAuthenticateFailed$ = createEffect(
     () => {
@@ -251,4 +200,106 @@ export class UserEffects {
       )
     );
   });
+
+  getDefaultUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.getUserDefaultUnit),
+      combineLatestWith(this.store.select(selectUserUuid).pipe(filterNullish())),
+      switchMap(([{ organizationUuid }, userUuid]) =>
+        this.userInternalService.getSingleUsersInternalV2GetUserDefaultUnit({ organizationUuid, userUuid }).pipe(
+          map((unit) => {
+            return UserActions.getUserDefaultUnitSuccess(unit);
+          }),
+          catchError(() => of(UserActions.getUserDefaultUnitError()))
+        )
+      )
+    );
+  });
+
+  setDefaultUnit$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.setUserDefaultUnit),
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectUserUuid).pipe(filterNullish()),
+        this.store.select(selectPagedOrganizationUnits).pipe(filterNullish()),
+      ]),
+      switchMap(([{ organizationUnitUuid }, organizationUuid, userUuid, organizationUnits]) =>
+        this.userInternalService
+          .patchSingleUsersInternalV2PatchDefaultOrgUnit({
+            organizationUuid,
+            userUuid,
+            organizationUnitUuid: organizationUnitUuid,
+          })
+          .pipe(
+            map(() => {
+              const defaultUnit = organizationUnits.find((unit) => unit.uuid === organizationUnitUuid);
+              if (!defaultUnit) {
+                return UserActions.setUserDefaultUnitError();
+              }
+              return UserActions.setUserDefaultUnitSuccess(defaultUnit);
+            }),
+            catchError(() => of(UserActions.setUserDefaultUnitError()))
+          )
+      )
+    );
+  });
+
+  private shouldGoToUserDefaultStartPage(
+    userDefaultStartPage: StartPreferenceChoice | undefined,
+    uiRootConfig: UIRootConfig
+  ): boolean {
+    return (
+      this.isOnStartPage() &&
+      userDefaultStartPage !== undefined &&
+      !this.userDefaultStartPageDisabledInOrganization(userDefaultStartPage, uiRootConfig)
+    );
+  }
+
+  private isOnStartPage(): boolean {
+    return this.router.url.replace('/', '') === AppPath.root;
+  }
+
+  private userDefaultStartPageDisabledInOrganization(
+    userDefaultStartPage: StartPreferenceChoice,
+    uiRootConfig: UIRootConfig
+  ): boolean {
+    const startPageValue = userDefaultStartPage.value;
+    switch (startPageValue) {
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
+        return !uiRootConfig.showItSystemModule;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
+        return !uiRootConfig.showItContractModule;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
+        return !uiRootConfig.showDataProcessing;
+      default:
+        return false;
+    }
+  }
+
+  private navigateToUserDefaultStartPage(userDefaultStartPage: StartPreferenceChoice) {
+    const path = this.getUserDefaultStartPagePath(userDefaultStartPage);
+    this.router.navigate([path]);
+  }
+
+  private getUserDefaultStartPagePath(userDefaultStartPage: StartPreferenceChoice): string {
+    const startPageValue = userDefaultStartPage.value;
+    switch (startPageValue) {
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite:
+        return AppPath.root;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.Organization:
+        return `${AppPath.organization}/${AppPath.structure}`;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemCatalog:
+        return `${AppPath.itSystems}/${AppPath.itSystemCatalog}`;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItSystemUsage:
+        return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.ItContract:
+        return AppPath.itContracts;
+      case APIUserResponseDTO.DefaultUserStartPreferenceEnum.DataProcessing:
+        return AppPath.dataProcessing;
+      default:
+        throw new Error(`Unknown start page: ${startPageValue}`);
+    }
+  }
 }

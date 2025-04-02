@@ -1,5 +1,4 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { User } from 'src/app/shared/models/user.model';
 import { UserActions } from './actions';
 import { UserState } from './state';
 
@@ -13,6 +12,7 @@ export const userInitialState: UserState = {
   hasMultipleOrganizations: undefined,
   gridPermissions: undefined,
   ssoErrorCode: undefined,
+  defaultUnit: undefined,
 };
 
 export const userFeature = createFeature({
@@ -66,10 +66,12 @@ export const userFeature = createFeature({
     ),
     on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization })),
 
-    on(UserActions.updateUserDefaultUnitState, (state, { unitUuid }): UserState => {
-      return { ...state, user: { ...state.user, defaultUnitUuid: unitUuid } as User };
-    }),
-
-    on(UserActions.updateSSOErrorCode, (state, { ssoErrorCode }): UserState => ({ ...state, ssoErrorCode }))
+    on(UserActions.updateSSOErrorCode, (state, { ssoErrorCode }): UserState => ({ ...state, ssoErrorCode })),
+    on(UserActions.getUserDefaultUnitSuccess, (state, { unit }): UserState => ({ ...state, defaultUnit: unit })),
+    on(UserActions.getUserDefaultUnitError, (state): UserState => ({ ...state, defaultUnit: undefined })),
+    on(
+      UserActions.setUserDefaultUnitSuccess,
+      (state, { organizationUnit }): UserState => ({ ...state, defaultUnit: organizationUnit })
+    )
   ),
 });

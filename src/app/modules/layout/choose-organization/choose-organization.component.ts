@@ -28,7 +28,7 @@ export class ChooseOrganizationComponent implements OnInit {
     private store: Store,
     private componentStore: ChooseOrganizationComponentStore
   ) {
-    this.closable = !dialog.disableClose ?? true;
+    this.closable = dialog.disableClose !== true;
   }
 
   ngOnInit() {
@@ -43,6 +43,7 @@ export class ChooseOrganizationComponent implements OnInit {
       .pipe(first())
       .subscribe((organizationUuid) => {
         if (organization.uuid !== organizationUuid) {
+          this.store.dispatch(UserActions.getUserDefaultUnit(organization.uuid));
           this.store.dispatch(UserActions.resetOnOrganizationUpdate(organization));
         }
         this.dialog.close();
