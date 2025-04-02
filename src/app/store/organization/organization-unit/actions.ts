@@ -30,11 +30,13 @@ export const OrganizationUnitActions = createActionGroup({
     'Get organization units paged': (
       pageSize?: number,
       currentPage?: number,
-      units?: APIOrganizationUnitResponseDTO[]
+      units?: APIOrganizationUnitResponseDTO[],
+      ignoreCache?: boolean
     ) => ({
       units,
       currentPage,
       pageSize,
+      ignoreCache,
     }),
     'Get organization units paged Success': (units: APIOrganizationUnitResponseDTO[]) => ({
       units,

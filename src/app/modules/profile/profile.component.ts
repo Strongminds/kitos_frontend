@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateUserRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -17,8 +17,8 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 import { UserActions } from 'src/app/store/user-store/actions';
 import {
   selectOrganizationUuid,
-  selectUserOrganizationName,
-  selectUserOrganizationUuid,
+  selectUserDefaultUnit,
+  selectUserOrganizationRights,
 } from 'src/app/store/user-store/selectors';
 import { ProfileComponentStore } from './profile.component-store';
 
@@ -31,14 +31,14 @@ export class ProfileComponent extends BaseComponent implements OnInit {
   public startPreferenceOptions = this.userService.getAvailableStartPreferenceOptions();
   public readonly isLoading$ = this.componentStore.isLoading$;
   public readonly user$ = this.componentStore.user$;
-  public readonly isUserInPrimaryOrganization$ = this.store.select(selectUserOrganizationUuid).pipe(
-    filterNullish(),
+  public readonly hasRoleInOrganization$ = this.store.select(selectUserOrganizationRights).pipe(
     combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-    map(([userOrganizationUuid, organizationUuid]) => {
-      return userOrganizationUuid === organizationUuid;
+    map(([organizationRights, organizationUuid]) => {
+      if (!organizationRights) return false;
+      return organizationRights.some((right) => right.organizationUuid === organizationUuid);
     })
   );
-  public readonly userOrganizationName$ = this.store.select(selectUserOrganizationName);
+  public readonly userDefaultUnit$ = this.store.select(selectUserDefaultUnit);
 
   public readonly alreadyExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly currentDefaultUnitUuid$: BehaviorSubject<string | undefined> = new BehaviorSubject<
@@ -77,12 +77,29 @@ export class ProfileComponent extends BaseComponent implements OnInit {
           email: user.email,
           phoneNumber: user.phoneNumber,
           defaultStartPreference: mapStartPreferenceChoice(user.defaultUserStartPreference),
-          defaultOrganizationUnit: user.defaultOrganizationUnit,
         });
 
         this.currentDefaultUnitUuid$.next(user.defaultOrganizationUnit?.uuid);
       }
     });
+
+    this.subscriptions.add(
+      this.userDefaultUnit$
+        .pipe(combineLatestWith(this.hasRoleInOrganization$))
+        .subscribe(([defaultUnit, hasRoleInOrganization]) => {
+          let defaultUnitToPatch = defaultUnit;
+          if (!hasRoleInOrganization) {
+            defaultUnitToPatch = undefined;
+            this.editForm.controls.defaultOrganizationUnit.disable();
+          }
+
+          this.editForm.controls.defaultOrganizationUnit.enable();
+
+          this.editForm.patchValue({
+            defaultOrganizationUnit: defaultUnitToPatch,
+          });
+        })
+    );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.verifyUserEmailSuccess)).subscribe(({ email }) => {
@@ -105,22 +122,19 @@ export class ProfileComponent extends BaseComponent implements OnInit {
 
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationUserActions.updateUserSuccess), combineLatestWith(this.currentDefaultUnitUuid$))
-        .subscribe(([{ user }, currentUnitUuid]) => {
-          if (user.defaultOrganizationUnit?.uuid === currentUnitUuid) return;
+        .pipe(ofType(UserActions.setUserDefaultUnitSuccess), combineLatestWith(this.currentDefaultUnitUuid$))
+        .subscribe(([{ organizationUnit }, currentUnitUuid]) => {
+          if (organizationUnit.uuid === currentUnitUuid) return;
 
-          this.store.dispatch(UserActions.updateUserDefaultUnitState(user.defaultOrganizationUnit?.uuid));
-          this.currentDefaultUnitUuid$.next(user.defaultOrganizationUnit?.uuid);
+          this.currentDefaultUnitUuid$.next(organizationUnit.uuid);
         })
     );
   }
 
   public onChange(request: APIUpdateUserRequestDTO): void {
-    this.subscriptions.add(
-      this.user$.pipe(filterNullish(), first()).subscribe((user) => {
-        if (user.uuid) this.store.dispatch(OrganizationUserActions.updateUser(user.uuid, request));
-      })
-    );
+    if (!request.defaultOrganizationUnitUuid) return;
+
+    this.store.dispatch(UserActions.setUserDefaultUnit(request.defaultOrganizationUnitUuid));
   }
 
   public emailChange(email: string): void {

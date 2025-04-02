@@ -6047,14 +6047,6 @@
         <source>Dit password kunne ikke nulstilles</source>
         <target state="new">Dit password kunne ikke nulstilles</target>
       </trans-unit>
-      <trans-unit id="2223640905439252475" datatype="html">
-        <source>Single Sign-On (SSO)</source>
-        <target state="new">Single Sign-On (SSO)</target>
-      </trans-unit>
-      <trans-unit id="530214592421461833" datatype="html">
-        <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
-        <target state="new">Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</target>
-      </trans-unit>
       <trans-unit id="303883128089787443" datatype="html">
         <source>Kolonnevisnining gendannet til standardopsætning</source>
         <target state="new">Kolonnevisnining gendannet til standardopsætning</target>
@@ -6344,10 +6336,6 @@
       <trans-unit id="7821102703466673779" datatype="html">
         <source>Advarslen kunne ikke slettes</source>
         <target state="new">Advarslen kunne ikke slettes</target>
-      </trans-unit>
-      <trans-unit id="987801205594216692" datatype="html">
-        <source> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </source>
-        <target state="new"> For at ændre din primære organisationsenhed, skal du skifte til &quot;<x id="INTERPOLATION" equiv-text="{{ userOrganizationName$ | async }}"/>&quot;. </target>
       </trans-unit>
       <trans-unit id="1164724015350728554" datatype="html">
         <source>Søg...</source>
@@ -6728,6 +6716,10 @@
       <trans-unit id="1440318310489375093" datatype="html">
         <source>Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale</source>
         <target state="new">Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale</target>
+      </trans-unit>
+      <trans-unit id="8435640758869757683" datatype="html">
+        <source> Du kan kun tilknytte en primær organisationsenhed, i organisationer du har en rolle i. </source>
+        <target state="new"> Du kan kun tilknytte en primær organisationsenhed, i organisationer du har en rolle i. </target>
       </trans-unit>
     </body>
   </file>
