@@ -21,6 +21,7 @@ import { ItContractSystemsComponent } from './it-contract-details/it-contract-sy
 import { ItContractsRootComponent } from './it-contracts-root.component';
 import { ITContractsRouterModule } from './it-contracts.routes';
 import { ITContractsComponent } from './overview/it-contracts.component';
+import { DeleteUserDialogComponent } from './it-contract-details/delete-user-dialog/delete-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     ColorCircleComponent,
     PaymentDialogComponent,
     AuditPickerComponent,
+    DeleteUserDialogComponent,
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })
