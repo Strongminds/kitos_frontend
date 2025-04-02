@@ -79,6 +79,10 @@ export class StatusChipComponent implements OnInit {
         this.trueString = $localize`Anvendes`;
         this.falseString = $localize`Anvendes ikke`;
         break;
+      case BooleanValueDisplayType.RequiresValidParent:
+        this.trueString = $localize`Nedarver`;
+        this.falseString = $localize`Nedarver ikke`;
+        break;
       default:
         console.error('Invalid value display type');
         break;

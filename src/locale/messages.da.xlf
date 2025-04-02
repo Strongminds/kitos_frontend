@@ -6047,14 +6047,6 @@
         <source>Dit password kunne ikke nulstilles</source>
         <target state="new">Dit password kunne ikke nulstilles</target>
       </trans-unit>
-      <trans-unit id="2223640905439252475" datatype="html">
-        <source>Single Sign-On (SSO)</source>
-        <target state="new">Single Sign-On (SSO)</target>
-      </trans-unit>
-      <trans-unit id="530214592421461833" datatype="html">
-        <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
-        <target state="new">Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</target>
-      </trans-unit>
       <trans-unit id="303883128089787443" datatype="html">
         <source>Kolonnevisnining gendannet til standardopsætning</source>
         <target state="new">Kolonnevisnining gendannet til standardopsætning</target>
@@ -6685,10 +6677,6 @@
         <source>Delvist</source>
         <target state="new">Delvist</target>
       </trans-unit>
-      <trans-unit id="1913854439835710431" datatype="html">
-        <source>Kræv gyldig overordnet kontrakt</source>
-        <target state="new">Kræv gyldig overordnet kontrakt</target>
-      </trans-unit>
       <trans-unit id="8481160601059811611" datatype="html">
         <source>Kontrakten arver sin overordnede kontrakts gyldighed, og er derfor gyldig trods af at:</source>
         <target state="new">Kontrakten arver sin overordnede kontrakts gyldighed, og er derfor gyldig trods af at:</target>
@@ -6728,6 +6716,22 @@
       <trans-unit id="1440318310489375093" datatype="html">
         <source>Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale</source>
         <target state="new">Den bruger, som du forsøger at logge på med, er ukendt i det fælleskommunale STS Organisation eller tilhører en kommune uden godkendt serviceaftale</target>
+      </trans-unit>
+      <trans-unit id="7741594211409337213" datatype="html">
+        <source>Nedarv den overordnedes gyldighed</source>
+        <target state="new">Nedarv den overordnedes gyldighed</target>
+      </trans-unit>
+      <trans-unit id="810543436502151784" datatype="html">
+        <source>Nedarver</source>
+        <target state="new">Nedarver</target>
+      </trans-unit>
+      <trans-unit id="4604630012212940269" datatype="html">
+        <source>Nedarver ikke</source>
+        <target state="new">Nedarver ikke</target>
+      </trans-unit>
+      <trans-unit id="2813580300767889762" datatype="html">
+        <source>Nedarver kontrakten sin overordnedes gyldighed</source>
+        <target state="new">Nedarver kontrakten sin overordnedes gyldighed</target>
       </trans-unit>
     </body>
   </file>

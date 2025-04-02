@@ -4597,12 +4597,6 @@
       <trans-unit id="706676642418633166" datatype="html">
         <source>Dit password er blevet nulstillet</source>
       </trans-unit>
-      <trans-unit id="2223640905439252475" datatype="html">
-        <source>Single Sign-On (SSO)</source>
-      </trans-unit>
-      <trans-unit id="530214592421461833" datatype="html">
-        <source>Efter du er logget ind med SSO, bliver du omdirigeret til den gamle brugerflade. Så kan du vende tilbage til den nye brugerflade på https://kitos.dk/ui</source>
-      </trans-unit>
       <trans-unit id="303883128089787443" datatype="html">
         <source>Kolonnevisnining gendannet til standardopsætning</source>
       </trans-unit>
@@ -5071,9 +5065,6 @@
       <trans-unit id="8637037167675157753" datatype="html">
         <source>Delvist</source>
       </trans-unit>
-      <trans-unit id="1913854439835710431" datatype="html">
-        <source>Kræv gyldig overordnet kontrakt</source>
-      </trans-unit>
       <trans-unit id="3654247776975529872" datatype="html">
         <source>Den overordnede kontrakt er ikke gyldig</source>
       </trans-unit>
@@ -5103,6 +5094,18 @@
       </trans-unit>
       <trans-unit id="5448518196835237176" datatype="html">
         <source>Den bruger, som du forsøger at logge på med, kan ikke autooprettes i Kitos da brugerens organisation er ukendt</source>
+      </trans-unit>
+      <trans-unit id="2813580300767889762" datatype="html">
+        <source>Nedarver kontrakten sin overordnedes gyldighed</source>
+      </trans-unit>
+      <trans-unit id="4604630012212940269" datatype="html">
+        <source>Nedarver ikke</source>
+      </trans-unit>
+      <trans-unit id="7741594211409337213" datatype="html">
+        <source>Nedarv den overordnedes gyldighed</source>
+      </trans-unit>
+      <trans-unit id="810543436502151784" datatype="html">
+        <source>Nedarver</source>
       </trans-unit>
     </body>
   </file>
