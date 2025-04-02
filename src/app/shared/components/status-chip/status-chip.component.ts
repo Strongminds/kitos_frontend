@@ -10,6 +10,7 @@ export enum BooleanValueDisplayType {
   AvailableNotAvailable = 'available-not-available',
   NormalUnstable = 'normal-unstable',
   InUseNotInUse = 'in-use-not-in-use',
+  RequiresValidParent = 'requires-valid-parent',
 }
 
 @Component({

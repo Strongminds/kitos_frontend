@@ -9,8 +9,12 @@ import {
 import { IdentityNamePair } from '../models/identity-name-pair.model';
 import { EntityTreeNode, HierachyNodeWithParentUuid } from '../models/structure/entity-tree-node.model';
 
-export const mapToTree = (hierarchy: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO[]) => {
-  const mappedHierarchy = hierarchy.map<HierachyNodeWithParentUuid>((node) => mapHierarchyNode(node));
+export const mapToTree = (hierarchy: APIItContractHiera[]) => {
+  const mappedHierarchy = hierarchy.map<HierachyNodeWithParentUuid>((node) => {
+    const hierarchyNode = mapHierarchyNode(node);
+    hierarchyNode.extraStatus = node;
+    return hierarchyNode;
+  });
   const tree = arrayToTree(mappedHierarchy, { id: 'uuid', parentId: 'parentUuid', dataField: null });
 
   return <HierachyNodeWithParentUuid[]>tree;
