@@ -12,6 +12,7 @@ import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-numb
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
+import { UserActions } from 'src/app/store/user-store/actions';
 import { selectUserUuid } from 'src/app/store/user-store/selectors';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
@@ -69,21 +70,15 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(OrganizationUserActions.createUserSuccess),
+          ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess),
           concatLatestFrom(() => this.store.select(selectUserUuid))
         )
         .subscribe(([{ user }, userUuid]) => {
-          //In a rare event User creates himself, we need to reload the page to get the new user data
           if (user.uuid === userUuid) {
-            window.location.reload();
+            this.store.dispatch(UserActions.authenticate());
           }
           this.onCancel();
         })
-    );
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(OrganizationUserActions.updateUserSuccess)).subscribe(() => {
-        this.onCancel();
-      })
     );
 
     this.subscriptions.add(

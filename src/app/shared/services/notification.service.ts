@@ -246,14 +246,23 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(OrganizationUserActions.sendNotificationSuccess, $localize`Besked sendt`);
     this.subscribeAsError(OrganizationUserActions.sendNotificationError, $localize`Beskeden kunne ikke sendes`);
 
-    this.subscribeAsDefault(OrganizationUserActions.updateUserSuccess, $localize`Brugeren blev opdateret`);
-    this.subscribeAsError(OrganizationUserActions.updateUserError, $localize`Brugeren kunne ikke opdateres`);
+    this.subscribeMultipleDefault(
+      ofType(
+        OrganizationUserActions.updateUserSuccess,
+        UserActions.setUserDefaultUnitSuccess,
+        OrganizationUserActions.createUserSuccess
+      ),
+      $localize`Brugeren blev opdateret`
+    );
 
-    this.subscribeAsDefault(UserActions.setUserDefaultUnitSuccess, $localize`Brugeren blev opdateret`);
-    this.subscribeAsError(UserActions.setUserDefaultUnitError, $localize`Brugeren kunne ikke opdateres`);
-
-    this.subscribeAsDefault(OrganizationUserActions.createUserSuccess, $localize`Bruger blev oprettet`);
-    this.subscribeAsError(OrganizationUserActions.createUserError, $localize`Bruger kunne ikke oprettes`);
+    this.subscribeMultipleError(
+      ofType(
+        OrganizationUserActions.updateUserError,
+        UserActions.setUserDefaultUnitError,
+        OrganizationUserActions.createUserError
+      ),
+      $localize`Brugeren kunne ikke opdateres`
+    );
 
     this.subscribeAsError(OrganizationActions.getMasterDataError, this.getMasterDataError);
     this.subscribeAsDefault(OrganizationActions.patchMasterDataSuccess, this.patchMasterDataSuccess);
