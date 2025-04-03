@@ -8,6 +8,10 @@ export function validateUrl(url?: string): boolean {
   return regexp.test(url.toLowerCase());
 }
 
+export function isUrlEmptyOrValid(url?: string): boolean {
+  return !url || validateUrl(url);
+}
+
 export function validateExternalReferenceUrl(externalRef?: string): boolean {
   if (!externalRef) return false;
 

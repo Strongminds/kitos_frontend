@@ -3,7 +3,7 @@ import { AbstractControl, FormControl, FormGroup, ValidatorFn } from '@angular/f
 import { debounceTime } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
-import { validateUrl } from 'src/app/shared/helpers/link.helpers';
+import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 
 @Component({
@@ -81,7 +81,7 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
       this.externalReferenceForm.controls.url.valueChanges
         .pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME))
         .subscribe((url) => {
-          this.showUrlError = !this.isUrlEmptyOrValid(url ?? undefined);
+          this.showUrlError = !isUrlEmptyOrValid(url ?? undefined);
         })
     );
   }
@@ -113,9 +113,5 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
 
       return null;
     };
-  }
-
-  private isUrlEmptyOrValid(url?: string) {
-    return !url || validateUrl(url);
   }
 }
