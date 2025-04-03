@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { mapToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
@@ -17,6 +18,7 @@ export class ItContractHierarchyComponent extends BaseComponent implements OnIni
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());
   public readonly hierarchy$ = this.componentStore.hierarchy$.pipe(map((hierarchy) => mapToTree(hierarchy)));
   public readonly isLoading$ = this.componentStore.isLoading$;
+  public readonly extraStatusDisplayTypeValue = BooleanValueDisplayType.RequiresValidParent;
 
   constructor(private readonly store: Store, private readonly componentStore: ItContractHierarchyComponentStore) {
     super();

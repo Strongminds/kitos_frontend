@@ -3607,14 +3607,8 @@
       <trans-unit id="4260496326052651673" datatype="html">
         <source>Brugeren blev opdateret</source>
       </trans-unit>
-      <trans-unit id="1945093732206878937" datatype="html">
-        <source>Bruger blev oprettet</source>
-      </trans-unit>
       <trans-unit id="7702390112614253672" datatype="html">
         <source>Brugeren kunne ikke opdateres</source>
-      </trans-unit>
-      <trans-unit id="755329899946556802" datatype="html">
-        <source>Bruger kunne ikke oprettes</source>
       </trans-unit>
       <trans-unit id="1985017503817569842" datatype="html">
         <source>Tildelingen blev tilføjet</source>
@@ -5062,9 +5056,6 @@
       <trans-unit id="8637037167675157753" datatype="html">
         <source>Delvist</source>
       </trans-unit>
-      <trans-unit id="1913854439835710431" datatype="html">
-        <source>Kræv gyldig overordnet kontrakt</source>
-      </trans-unit>
       <trans-unit id="3654247776975529872" datatype="html">
         <source>Den overordnede kontrakt er ikke gyldig</source>
       </trans-unit>
@@ -5097,6 +5088,18 @@
       </trans-unit>
       <trans-unit id="8435640758869757683" datatype="html">
         <source> Du kan kun tilknytte en primær organisationsenhed, i organisationer du har en rolle i. </source>
+      </trans-unit>
+      <trans-unit id="2813580300767889762" datatype="html">
+        <source>Nedarver kontrakten sin overordnedes gyldighed</source>
+      </trans-unit>
+      <trans-unit id="4604630012212940269" datatype="html">
+        <source>Nedarver ikke</source>
+      </trans-unit>
+      <trans-unit id="7741594211409337213" datatype="html">
+        <source>Nedarv den overordnedes gyldighed</source>
+      </trans-unit>
+      <trans-unit id="810543436502151784" datatype="html">
+        <source>Nedarver</source>
       </trans-unit>
     </body>
   </file>

@@ -41,6 +41,7 @@ export class EntityTreeComponent<T> implements OnInit {
         break;
       case 'it-contract':
         this.toggleStatusText = $localize`Vis gyldighed`;
+        this.toggleExtraStatusText = $localize`Nedarver kontrakten sin overordnedes gyldighed`;
         break;
       default:
         throw 'Unsupported item type:' + this.itemType;
