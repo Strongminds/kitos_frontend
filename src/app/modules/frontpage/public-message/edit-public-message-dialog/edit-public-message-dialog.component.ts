@@ -3,8 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { debounceTime } from 'rxjs';
 import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 import { PublicMessage } from 'src/app/shared/models/public-message.model';
 import { StatusType, statusTypeOptions } from 'src/app/shared/models/status-type.model';
@@ -46,7 +48,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
     );
 
     this.subscriptions.add(
-      this.formGroup.controls.url.valueChanges.subscribe((url) => {
+      this.formGroup.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe((url) => {
         this.showUrlError = !this.isUrlEmptyOrValid(url ?? undefined);
       })
     );
