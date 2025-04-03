@@ -356,6 +356,8 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
+      idField: 'green',
+      style: 'contract-audit',
       persistId: 'auditStatus', //These colors also differ from the old UI as they are 4 seperate columns. Need to be handled later
     },
     {
@@ -364,6 +366,8 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
+      idField: 'red',
+      style: 'contract-audit',
       persistId: 'auditStatusRed',
     },
     {
@@ -372,6 +376,8 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
+      idField: 'yellow',
+      style: 'contract-audit',
       persistId: 'auditStatusYellow',
     },
     {
@@ -380,6 +386,8 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
       hidden: false,
+      idField: 'white',
+      style: 'contract-audit',
       persistId: 'auditStatusWhite',
     },
     {
