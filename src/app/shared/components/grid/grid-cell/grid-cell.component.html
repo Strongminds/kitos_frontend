@@ -66,6 +66,8 @@
   [dataItem]="dataItem"
 ></app-uuid-to-name-cell>
 
+<app-audit-cell *ngIf="column.style === 'contract-audit'" [column]="column" [dataItem]="dataItem"></app-audit-cell>
+
 <app-action-buttons-cell
   *ngIf="column.style === 'action-buttons' && (modifyPermission || deletePermission)"
   [column]="column"
@@ -75,4 +77,4 @@
   (toggleEvent)="onToggleEvent($event)"
   (modifyEvent)="onModifyEvent()"
   (deleteEvent)="onDeleteEvent()"
-  ></app-action-buttons-cell>
+></app-action-buttons-cell>

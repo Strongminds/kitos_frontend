@@ -1,0 +1,18 @@
+<ng-container *ngIf="getProperty(column.field)">
+  <app-white-circle-number-icon
+    *ngIf="column.idField === 'white'"
+    [number]="getProperty(column.field)"
+  ></app-white-circle-number-icon>
+  <app-green-circle-number-icon
+    *ngIf="column.idField === 'green'"
+    [number]="getProperty(column.field)"
+  ></app-green-circle-number-icon>
+  <app-red-circle-number-icon
+    *ngIf="column.idField === 'red'"
+    [number]="getProperty(column.field)"
+  ></app-red-circle-number-icon>
+  <app-orange-circle-number-icon
+    *ngIf="column.idField === 'yellow'"
+    [number]="getProperty(column.field)"
+  ></app-orange-circle-number-icon>
+</ng-container>

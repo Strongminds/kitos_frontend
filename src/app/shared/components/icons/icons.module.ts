@@ -7,6 +7,7 @@ import { ArrowRightIconComponent } from './arrow-right-icon.component';
 import { ArrowUpIconComponent } from './arrow-up-icon.component';
 import { BookmarkIconComponent } from './bookmark.component';
 import { BulkCreateIconComponent } from './bulk-create-icon.component';
+import { CalendarIconComponent } from './calendar-icon.component';
 import { CheckIconComponent } from './check-icon.component';
 import { CheckNegativeGrayIconComponent } from './check-negative-gray.component';
 import { CheckPositiveGreenIconComponent } from './check-positive-green.component';
@@ -16,6 +17,7 @@ import { ChevronRightIconComponent } from './chevron-right-icon.component';
 import { ClipboardIconComponent } from './clipboard-icon.component';
 import { CollapseCircleIconComponent } from './collapse-circle-icon.component';
 import { CollapseIconComponent } from './collapse-icon.component';
+import { DiskIconComponent } from './disk-icon.component';
 import { DocumentIconComponent } from './document-icon.component';
 import { DragIconComponent } from './drag-icon.component';
 import { EmptySearchIconComponent } from './empty-search-icon.component';
@@ -23,11 +25,13 @@ import { EmptyUpdateIconComponent } from './empty-update-icon.component';
 import { ExpandCircleIconComponent } from './expand-circle-icon.component';
 import { ExpandIconComponent } from './expand-icon.component';
 import { ExportIconComponent } from './export-icon.component';
+import { ExternalLinkIconComponent } from './external-link-icon.component';
 import { EyeIconComponent } from './eye-icon.component';
 import { FilterIconComponent } from './filter.component';
 import { FkOrgColorIconComponent } from './fk-org-color.component';
 import { FolderImportantComponent } from './folder-important.component';
 import { GreenCircleIconComponent } from './green-circle-icon.component';
+import { GreenCircleNumberIconComponent } from './green-circle-with-number-icon.component';
 import { HelpIconComponent } from './help.component';
 import { HierarchyIconComponent } from './hierarchy-icon.component';
 import { InfoIconComponent } from './info-icon.component';
@@ -36,17 +40,22 @@ import { KitosKIconComponent } from './kitos-k-icon.component';
 import { KitosUnitColorIconComponent } from './kitos-unit-color.component';
 import { LockIconComponent } from './lock-icon.component';
 import { LogoutIconComponent } from './logout-icon.component';
+import { MailIconComponent } from './mail-icon.component';
 import { MoneyIconComponent } from './money-icon.component';
 import { MoreHorizontalIconComponent } from './more-horizontal-icon.component';
+import { MoreHorizontalWarningIconComponent } from './more-horizontal-warning-icon.component';
 import { MultipleUsersIconComponent } from './multiple-users-icon.component';
 import { NotInUseIconComponent } from './not-in-use-icon.component';
 import { NotificationIconComponent } from './notification-icon.component';
 import { OrangeCircleIconComponent } from './orange-circle-icon.component';
+import { OrangeCircleNumberIconComponent } from './orange-circle-with-number-icon.component';
 import { OrganizationIconComponent } from './organization-icon.component';
 import { PencilIconComponent } from './pencil-icon.compnent';
 import { PlusIconBlueComponent } from './plus-icon-blue.component';
 import { PlusIconComponent } from './plus-icon.component';
 import { RedCircleIconComponent } from './red-circle-icon.component';
+import { RedCircleNumberIconComponent } from './red-circle-with-number-icon.component';
+import { ReloadIconComponent } from './reload-icon.component';
 import { ReorderIconComponent } from './reorder-icon.component';
 import { RolesIconComponent } from './roles-icon.component';
 import { SearchIconComponent } from './search-icon.component';
@@ -57,14 +66,9 @@ import { TakeIntoUseIconComponent } from './take-into-use-icon.component';
 import { TrashcanIconComponent } from './trashcan-icon.component';
 import { WarningIconComponent } from './warning-icon.component';
 import { WhiteCircleIconComponent } from './white-circle-icon.component';
+import { WhiteCircleNumberIconComponent } from './white-circle-with-number-icon.component';
 import { WhiteXIconComponent } from './white-x-icon.component';
 import { XIconComponent } from './x-icon.component';
-import { ReloadIconComponent } from './reload-icon.component';
-import { DiskIconComponent } from './disk-icon.component';
-import { MoreHorizontalWarningIconComponent } from './more-horizontal-warning-icon.component';
-import { ExternalLinkIconComponent } from './external-link-icon.component';
-import { CalendarIconComponent } from './calendar-icon.component';
-import { MailIconComponent } from './mail-icon.component';
 
 @NgModule({
   imports: [],
@@ -135,6 +139,10 @@ import { MailIconComponent } from './mail-icon.component';
     ExternalLinkIconComponent,
     CalendarIconComponent,
     MailIconComponent,
+    WhiteCircleNumberIconComponent,
+    OrangeCircleNumberIconComponent,
+    GreenCircleNumberIconComponent,
+    RedCircleNumberIconComponent,
   ],
   declarations: [
     ChevronDownIconComponent,
@@ -203,6 +211,10 @@ import { MailIconComponent } from './mail-icon.component';
     ExternalLinkIconComponent,
     CalendarIconComponent,
     MailIconComponent,
+    WhiteCircleNumberIconComponent,
+    OrangeCircleNumberIconComponent,
+    GreenCircleNumberIconComponent,
+    RedCircleNumberIconComponent,
   ],
   providers: [],
 })

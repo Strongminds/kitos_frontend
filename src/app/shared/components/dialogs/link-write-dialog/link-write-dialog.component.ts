@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { debounceTime, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
-import { validateUrl } from 'src/app/shared/helpers/link.helpers';
+import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 
 @Component({
   selector: 'app-link-write-dialog',
@@ -36,7 +36,7 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
 
     this.subscriptions.add(
       this.urlForm.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe(() => {
-        this.showValidationError = this.isUrlEmptyOrValid() === false;
+        this.showValidationError = isUrlEmptyOrValid(this.urlForm.value.url ?? undefined) === false;
       })
     );
   }
@@ -59,10 +59,5 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
 
   public onCancel() {
     this.dialogRef.close();
-  }
-
-  public isUrlEmptyOrValid() {
-    const url = this.urlForm.value.url;
-    return !url || validateUrl(url);
   }
 }

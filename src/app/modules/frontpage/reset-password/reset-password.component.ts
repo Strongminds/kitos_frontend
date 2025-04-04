@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { first, map, Observable } from 'rxjs';
-import { ResetPasswordComponentStore } from './reset-password.component-store';
-import { AppPath } from 'src/app/shared/enums/app-path';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { UserActions } from 'src/app/store/user-store/actions';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { first, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { AppPath } from 'src/app/shared/enums/app-path';
+import { UserActions } from 'src/app/store/user-store/actions';
+import { ResetPasswordComponentStore } from './reset-password.component-store';
 
 @Component({
   selector: 'app-reset-password',
@@ -39,7 +39,7 @@ export class ResetPasswordComponent extends BaseComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.requestId$.pipe(first()).subscribe((requestId) => this.componentStore.getPasswordResetRequest(requestId));
+    this.componentStore.getPasswordResetRequest(this.requestId$);
 
     this.actions$.pipe(ofType(UserActions.resetPasswordSuccess), first()).subscribe(() => {
       this.router.navigate([AppPath.root]);

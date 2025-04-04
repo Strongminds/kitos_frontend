@@ -185,6 +185,7 @@ import { UsagesCellComponent } from './grid/grid-cell/cell-types/usages-cell/usa
 import { PageLinkArrayCellComponent } from './grid/grid-cell/cell-types/page-link-array-cell/page-link-array-cell.component';
 import { UuidToNameCellComponent } from './grid/grid-cell/cell-types/uuid-to-name-cell/uuid-to-name-cell.component';
 import { ActionButtonsCellComponent } from './grid/grid-cell/cell-types/action-buttons-cell/action-buttons-cell.component';
+import { AuditCellComponent } from './grid/grid-cell/cell-types/audit-cell/audit-cell.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -343,6 +344,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UuidToNameCellComponent,
     ActionButtonsCellComponent,
     DetailsPageLinkWithTooltipComponent,
+    AuditCellComponent,
   ],
   imports: [
     CommonModule,
