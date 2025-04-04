@@ -5,14 +5,14 @@ import { Component, Input } from '@angular/core';
   styles: '',
   template: `
     <svg width="39" height="46" viewBox="0 0 39 46" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect x="4.5" y="11.5" width="23" height="23" rx="11.5" fill="white" stroke="#67707E" />
+      <rect x="4.5" y="11.5" width="23" height="23" rx="11.5" fill="#FFB020" stroke="#FFB020" />
       <rect x="9.5" y="16.5" width="13" height="13" rx="6.5" fill="#FFB020" stroke="#FFB020" />
       <text
         x="16"
         y="24"
         font-size="10"
         font-weight="bold"
-        fill="black"
+        fill="white"
         text-anchor="middle"
         alignment-baseline="middle"
       >
