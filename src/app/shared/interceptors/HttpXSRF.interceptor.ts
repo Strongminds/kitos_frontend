@@ -42,7 +42,7 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
       mergeMap((token) =>
         next.handle(req.clone({ headers: req.headers.set(XSRFTOKEN, token) })).pipe(
           catchError((error) => {
-            //Backend returns 400 if the token is invalid
+            //On status code 400 (possible invalid XSFR token), we need to refresh the token and retry the request as the token might have been invalidated by another tab
             if (error.status == 400) {
               return this.authorizeService.getSingleAuthorizeGetAntiForgeryToken().pipe(
                 map((newToken) => newToken.toString()),
