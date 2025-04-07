@@ -19,19 +19,16 @@ export class CtrlClickDirective implements OnInit, OnDestroy {
   }
 
   private onCaptureClick(event: MouseEvent): void {
-    if (!this.routerLink) return
-    const ctrlOrMiddleMouseButtonClicked = event.ctrlKey || event.button === 1;
-    if (!ctrlOrMiddleMouseButtonClicked) return;
+    if (!this.routerLink) return;
 
-    if (event.ctrlKey || event.metaKey || event.button === 1) {
+    if (!(event.ctrlKey || event.button === 1)) return;
 
-      const relativeUrl = this.router.serializeUrl(this.routerLink.urlTree ?? new UrlTree());
-      const fullUrl = window.location.origin + relativeUrl;
+    const relativeUrl = this.router.serializeUrl(this.routerLink.urlTree ?? new UrlTree());
+    const fullUrl = window.location.origin + relativeUrl;
 
-      window.open(fullUrl, '_blank');
+    window.open(fullUrl, '_blank');
 
-      event.preventDefault();
-      event.stopImmediatePropagation();
-    }
+    event.preventDefault();
+    event.stopImmediatePropagation();
   }
 }
