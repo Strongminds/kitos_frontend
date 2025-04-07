@@ -11,9 +11,9 @@ export class GridExportService {
   constructor(private appDatePipe: AppDatePipe) {}
 
   /**
-   * @param item An item representiung a row in the grid
+   * @param item An item representing a row in the grid
    * @param exportColumns The columns to be exported
-   * @returns The row with the column values transformed into something appropiate for the export
+   * @returns The row with the column values transformed into something appropriate for the export
    */
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
   public transformRow(item: any, exportColumns: GridColumn[]): any {
