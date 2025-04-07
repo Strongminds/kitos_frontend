@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { combineLatest, first, map, Observable } from 'rxjs';
+import { combineLatest, map, Observable, of } from 'rxjs';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import {
@@ -24,17 +24,16 @@ export class NotificationsButtonComponent {
 
   constructor(private store: Store, private router: Router) {}
 
-  public navigateToNotifications() {
+  public getFullRoute$(): Observable<string> {
+    return this.getSubRoute$().pipe(map((route) => `notifications/${route}`));
+  }
+
+  private getSubRoute$(): Observable<string> {
     const subRoute = this.getSubroute();
     if (subRoute === AppPath.root) {
-      //Let UI Customization decide the default page
-      this.getDefaultNotificationPage()
-        .pipe(first())
-        .subscribe((defaultPage) => {
-          this.router.navigate([`${AppPath.notifications}/${defaultPage}`]);
-        });
+      return this.getDefaultNotificationPage();
     } else {
-      this.router.navigate([`${AppPath.notifications}/${subRoute}`]);
+      return of(subRoute);
     }
   }
 
