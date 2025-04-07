@@ -21,7 +21,7 @@ export class CtrlClickDirective implements OnInit, OnDestroy {
   private onCaptureClick(event: MouseEvent): void {
     if (!this.routerLink) return;
 
-    if (!(event.ctrlKey || event.button === 1)) return;
+    if (!event.ctrlKey) return;
 
     const relativeUrl = this.router.serializeUrl(this.routerLink.urlTree ?? new UrlTree());
     const fullUrl = window.location.origin + relativeUrl;
