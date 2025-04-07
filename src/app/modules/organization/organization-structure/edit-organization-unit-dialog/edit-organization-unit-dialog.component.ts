@@ -15,6 +15,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { STRING_FIELD_MAX_LENGTH } from 'src/app/shared/constants/constants';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { combineAND, combineOR } from 'src/app/shared/helpers/observable-helpers';
 import {
   PaymentRegistrationModel,
   RegistrationModel,
@@ -95,57 +96,23 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
     map((registrations) => this.areAllRegistrationsSelected(registrations))
   );
 
-  public readonly anyRegistrations$ = combineLatest([
+  public readonly anyRegistrations$ = combineOR([
     this.hasOrganizationUnitRights$,
     this.hasItContractRegistrations$,
     this.hasInternalPayments$,
     this.hasExternalPayments$,
     this.hasResponsibleSystems$,
     this.hasRelevantSystems$,
-  ]).pipe(
-    map(
-      ([
-        hasOrganizationUnitRights,
-        hasItContractRegistrations,
-        hasInternalPayments,
-        hasExternalPayments,
-        hasResponsibleSystems,
-        hasRelevantSystems,
-      ]) =>
-        hasOrganizationUnitRights ||
-        hasItContractRegistrations ||
-        hasInternalPayments ||
-        hasExternalPayments ||
-        hasResponsibleSystems ||
-        hasRelevantSystems
-    )
-  );
+  ]);
 
-  public readonly allRegistrationsSelected$ = combineLatest([
+  public readonly allRegistrationsSelected$ = combineAND([
     this.allOrganizationUnitRightsSelected$,
     this.allItContractRegistrationsSelected$,
     this.allInternalPaymentsSelected$,
     this.allExternalPaymentsSelected$,
     this.allResponsibleSystemsSelected$,
     this.allRelevantSystemsSelected$,
-  ]).pipe(
-    map(
-      ([
-        allOrganizationUnitRightsSelected,
-        allItContractRegistrationsSelected,
-        allInternalPaymentsSelected,
-        allExternalPaymentsSelected,
-        allResponsibleSystemsSelected,
-        allRelevantSystemsSelected,
-      ]) =>
-        allOrganizationUnitRightsSelected &&
-        allItContractRegistrationsSelected &&
-        allInternalPaymentsSelected &&
-        allExternalPaymentsSelected &&
-        allResponsibleSystemsSelected &&
-        allRelevantSystemsSelected
-    )
-  );
+  ]);
 
   private readonly combinedRegistrations$ = combineLatest([
     this.organizationUnitRegistrations$,
