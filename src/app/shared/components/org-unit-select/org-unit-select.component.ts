@@ -7,6 +7,7 @@ import {
   selectPagedOrganizationUnitHasValidCache,
   selectPagedOrganizationUnits,
 } from 'src/app/store/organization/organization-unit/selectors';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from '../../base/base.component';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants/constants';
 import { createNode, TreeNodeModel } from '../../models/tree-node.model';
@@ -45,10 +46,20 @@ export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.store.dispatch(OrganizationUnitActions.getOrganizationUnitsPaged(BOUNDED_PAGINATION_QUERY_MAX_SIZE));
+    this.subscriptions.add(
+      this.store.select(selectOrganizationUuid).subscribe((_) => {
+        this.dispatchGetOrganizationUnits();
+      })
+    );
   }
 
   public onSelectionChange(selectedValue: TreeNodeModel | null | undefined): void {
     this.valueChange.emit(selectedValue as string | undefined);
+  }
+
+  private dispatchGetOrganizationUnits(): void {
+    this.store.dispatch(
+      OrganizationUnitActions.getOrganizationUnitsPaged(BOUNDED_PAGINATION_QUERY_MAX_SIZE, undefined, undefined, true)
+    );
   }
 }

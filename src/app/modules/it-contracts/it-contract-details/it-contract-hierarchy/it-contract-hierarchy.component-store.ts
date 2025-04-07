@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { Inject, Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap } from 'rxjs';
 import {
@@ -18,7 +19,10 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
   public readonly hierarchy$ = this.select((state) => state.hierarchy).pipe(filterNullish());
   public readonly isLoading$ = this.select((state) => state.loading);
 
-  constructor(private apiItContractInternalService: APIV2ItContractInternalINTERNALService) {
+  constructor(
+    @Inject(APIV2ItContractInternalINTERNALService)
+    private apiItContractInternalService: APIV2ItContractInternalINTERNALService
+  ) {
     super({ loading: false });
   }
 

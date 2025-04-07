@@ -18,10 +18,11 @@ import {
   DEFAULT_DATE_COLUMN_WIDTH,
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
 } from '../../constants/constants';
-import { includedColumnInExport, transformRow } from '../../helpers/grid-export.helper';
+import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultLocalGridState } from '../../models/grid-state.model';
 import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events.model';
+import { GridExportService } from '../../services/grid-export.service';
 
 @Component({
   selector: 'app-local-grid',
@@ -56,7 +57,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   public readonly defaultMinimumDateColumnWidth = DEFAULT_DATE_COLUMN_MINIMUM_WIDTH;
   public readonly defaultPrimaryColumnMinimumWidth = DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH;
 
-  constructor(private actions$: Actions) {
+  constructor(private actions$: Actions, private readonly gridExportService: GridExportService) {
     super();
     this.allData = this.allData.bind(this);
   }
@@ -130,7 +131,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
     }
     const processedData = process(this.data, { ...this.state, skip: 0, take: this.data.length });
     const columns = this.getColumnsForExport();
-    const transformedData = processedData.data.map((item) => transformRow(item, columns));
+    const transformedData = processedData.data.map((item) => this.gridExportService.transformRow(item, columns));
 
     return { data: transformedData };
   }

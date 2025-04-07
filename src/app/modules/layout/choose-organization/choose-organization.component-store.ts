@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
-import { ComponentStore } from '@ngrx/component-store';import { tapResponse } from '@ngrx/operators';
+import { Inject, Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
+import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap, tap } from 'rxjs';
 import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
@@ -16,7 +17,7 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
   public readonly organizations$ = this.select((state) => state.organizations);
   public readonly loading$ = this.select((state) => state.loading);
 
-  constructor(private apiOrganizationService: APIV2OrganizationService) {
+  constructor(@Inject(APIV2OrganizationService) private apiOrganizationService: APIV2OrganizationService) {
     super({ loading: false });
   }
 

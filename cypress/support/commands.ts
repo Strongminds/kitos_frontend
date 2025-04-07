@@ -29,6 +29,8 @@ Cypress.Commands.add(
       fixture: uiCustomizationFixturePath ?? './shared/it-contracts-ui-customization.json',
     });
 
+    cy.intercept('api/v2/internal/organization/*/users/*/default-unit', { statusCode: 400 });
+
     if (interceptAlerts !== false) {
       cy.intercept('GET', 'api/v2/internal/alerts/organization/*/user/*/*', { body: [], statusCode: 200 });
     }

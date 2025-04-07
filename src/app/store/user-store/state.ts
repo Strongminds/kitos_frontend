@@ -1,4 +1,8 @@
-import { APIOrganizationGridPermissionsResponseDTO, APIOrganizationResponseDTO } from 'src/app/api/v2';
+import {
+  APIIdentityNamePairResponseDTO,
+  APIOrganizationGridPermissionsResponseDTO,
+  APIOrganizationResponseDTO,
+} from 'src/app/api/v2';
 import { SsoErrorCode } from 'src/app/shared/enums/sso-error-code';
 import { User } from 'src/app/shared/models/user.model';
 
@@ -13,4 +17,5 @@ export interface UserState {
   gridPermissions: APIOrganizationGridPermissionsResponseDTO | undefined;
 
   ssoErrorCode: SsoErrorCode | undefined;
+  defaultUnit: APIIdentityNamePairResponseDTO | undefined;
 }
