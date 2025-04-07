@@ -74,7 +74,12 @@ export class GridExportService {
               transformedItem[field] = exportValue;
             }
             break;
-
+          case 'date':
+            {
+              const date = transformedItem[field] as Date;
+              transformedItem[field] = this.appDatePipe.transform(date) ?? '';
+            }
+            break;
           default:
             break;
         }
