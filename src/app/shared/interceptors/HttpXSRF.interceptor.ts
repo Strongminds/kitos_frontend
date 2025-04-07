@@ -33,7 +33,10 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
         return this.authorizeService.getSingleAuthorizeGetAntiForgeryToken().pipe(
           map((antiForgeryToken) => antiForgeryToken.toString()),
           tap((newToken) => this.store.dispatch(UserActions.updateXSRFToken(newToken))),
-          catchError(() => of(''))
+          catchError((error) => {
+            console.error('Token fetch failed', error);
+            return of('');
+          })
         );
       }),
       mergeMap((token) =>
