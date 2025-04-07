@@ -31,7 +31,7 @@ export class NotificationsButtonComponent {
   private getSubRoute$(): Observable<string> {
     const subRoute = this.getSubroute();
     if (subRoute === AppPath.root) {
-      return this.getDefaultNotificationPage();
+      return this.getDefaultNotificationPage$();
     } else {
       return of(subRoute);
     }
@@ -57,7 +57,7 @@ export class NotificationsButtonComponent {
     return moduleRoute;
   }
 
-  private getDefaultNotificationPage(): Observable<string> {
+  private getDefaultNotificationPage$(): Observable<string> {
     return combineLatest([this.itSystemsEnabled$, this.itContractsEnabled$, this.dataProcessingEnabled$]).pipe(
       map(([itSystemsEnabled, itContractsEnabled, dataProcessingEnabled]) => {
         if (itSystemsEnabled) return AppPath.itSystems;
