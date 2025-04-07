@@ -1,0 +1,7 @@
+<app-dialog [title]="title" i18n-title data-cy="bulk-action-dialog">
+  <app-standard-vertical-content-grid> </app-standard-vertical-content-grid>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()">Cancel</app-button>
+    <app-button size="large" (buttonClick)="OkResult()" data-cy="confirm-button">Confirm</app-button>
+  </app-dialog-actions>
+</app-dialog>
