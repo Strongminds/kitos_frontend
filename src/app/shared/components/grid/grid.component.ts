@@ -39,7 +39,7 @@ import {
   DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH,
   GRID_ROW_HEIGHT,
 } from '../../constants/constants';
-import { includedColumnInExport, transformRow } from '../../helpers/grid-export.helper';
+import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { getApplyFilterAction, getSaveFilterAction } from '../../helpers/grid-filter.helpers';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridData } from '../../models/grid-data.model';
@@ -49,6 +49,7 @@ import { SavedFilterState } from '../../models/grid/saved-filter-state.model';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 import { filterNullish } from '../../pipes/filter-nullish';
+import { GridExportService } from '../../services/grid-export.service';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
 
@@ -101,7 +102,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private actions$: Actions,
     private store: Store,
     private localStorage: StatePersistingService,
-    private gridUIConfigService: GridUIConfigService
+    private gridUIConfigService: GridUIConfigService,
+    private readonly gridExportService: GridExportService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -266,7 +268,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       .subscribe(([data, exportColumns]) => {
         const processedData = process(data.data, { skip: 0, take: data.data.length });
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        formattedData = processedData.data.map((item: any) => transformRow(item, exportColumns));
+        formattedData = processedData.data.map((item: any) => this.gridExportService.transformRow(item, exportColumns));
       });
     return { data: formattedData };
   }
