@@ -15,9 +15,9 @@
             />
           </div>
 
-        <div matSuffix class="suffix-icons" *ngIf="!isDisabled">
-          <span (click)="onClearClick()" *ngIf="enableClearX() | async">x</span>
-
+          <div matSuffix class="suffix-icons" *ngIf="!isDisabled">
+            <span (click)="onClearClick()" *ngIf="enableClearX() | async">x</span>
+D
             <app-icon-button (buttonClick)="onIconClick()" data-cy="edit-link-button"
               ><app-pencil-icon></app-pencil-icon>
             </app-icon-button>
