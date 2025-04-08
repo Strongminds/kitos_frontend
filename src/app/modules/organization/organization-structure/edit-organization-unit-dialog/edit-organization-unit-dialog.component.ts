@@ -15,13 +15,14 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { STRING_FIELD_MAX_LENGTH } from 'src/app/shared/constants/constants';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { combineAND, combineOR } from 'src/app/shared/helpers/observable-helpers';
+import { combineAND, combineOR, mapArray } from 'src/app/shared/helpers/observable-helpers';
 import {
   PaymentRegistrationModel,
   RegistrationModel,
 } from 'src/app/shared/models/organization/organization-unit/organization-unit-registration.model';
 import { createNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import {
@@ -123,26 +124,15 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
     this.responsibleSystemsRegistrations$,
   ]);
 
-  public readonly selectedRegistrationsCount$ = this.combinedRegistrations$.pipe(
-    map(([organizationUnit, itContract, internalPayments, externalPayments, responsibleSystems, relevantSystems]) => {
-      const selectedOrganizationUnitCount = organizationUnit.filter((registration) => registration.isSelected).length;
-      const selectedItContractCount = itContract.filter((registration) => registration.isSelected).length;
-      const selectedInternalPaymentsCount = internalPayments.filter((payment) => payment.isSelected).length;
-      const selectedExternalPaymentsCount = externalPayments.filter((payment) => payment.isSelected).length;
-      const selectedResponsibleSystemsCount = responsibleSystems.filter(
-        (registration) => registration.isSelected
-      ).length;
-      const selectedRelevantSystemsCount = relevantSystems.filter((registration) => registration.isSelected).length;
+  public readonly isAnyRegistrationSelected$ = this.combinedRegistrations$.pipe(
+    map((allRegistrations) => allRegistrations.some(this.hasRegistrationsSelected))
+  );
 
-      return (
-        selectedOrganizationUnitCount +
-        selectedItContractCount +
-        selectedInternalPaymentsCount +
-        selectedExternalPaymentsCount +
-        selectedResponsibleSystemsCount +
-        selectedRelevantSystemsCount
-      );
-    })
+  public readonly noRegistrationsSelected$ = this.isAnyRegistrationSelected$.pipe(invertBooleanValue());
+
+  public readonly selectedRegistrationsCount$ = this.combinedRegistrations$.pipe(
+    mapArray((registrations) => registrations.filter((registration) => registration.isSelected).length),
+    map((registrationsCounts) => registrationsCounts.reduce((acc, count) => acc + count, 0))
   );
 
   public baseInfoForm = new FormGroup({
@@ -362,6 +352,12 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
 
   private hasRegistrations<T>(registrations: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>): boolean {
     return registrations.length > 0;
+  }
+
+  private hasRegistrationsSelected<T>(
+    registration: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>
+  ): boolean {
+    return registration.some((registration) => registration.isSelected);
   }
 
   private areAllRegistrationsSelected<T>(
