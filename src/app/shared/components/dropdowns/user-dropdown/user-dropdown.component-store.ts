@@ -9,8 +9,8 @@ import {
   APIV2OrganizationService,
 } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { ShallowUser, toShallowUser } from '../../models/userV2.model';
-import { filterNullish } from '../../pipes/filter-nullish';
+import { ShallowUser, toShallowUser } from '../../../models/userV2.model';
+import { filterNullish } from '../../../pipes/filter-nullish';
 
 interface State {
   users: ShallowUser[];

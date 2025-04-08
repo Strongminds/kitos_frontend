@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
-import { Observable, mergeMap } from 'rxjs';
+import { Observable, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
   APIV2ItContractInternalINTERNALService,
@@ -53,5 +53,26 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
         );
       })
     )
+  );
+
+  public sendTransferRequest = this.effect(
+    (request$: Observable<{ currentParentUuid: string; parentUuid: string; uuids: string[] }>) =>
+      request$.pipe(
+        tap(this.updateIsLoading(true)),
+        switchMap((request) =>
+          this.apiItContractInternalService
+            .patchSingleItContractInternalV2TransferItContractRange({
+              parentUuid: request.parentUuid,
+              request: { contractUuids: request.uuids },
+            })
+            .pipe(
+              tapResponse(
+                () => this.getHierarchy(request.currentParentUuid),
+                (e) => console.error(e),
+                () => this.updateIsLoading(false)
+              )
+            )
+        )
+      )
   );
 }

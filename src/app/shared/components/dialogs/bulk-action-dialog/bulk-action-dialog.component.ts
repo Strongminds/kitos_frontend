@@ -48,6 +48,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   @Input() public dropdownType!: 'user' | 'it-contract';
   @Input() public dropdownDisabledUuids$!: Observable<string[]>;
   @Input() public dropdownTitle!: string;
+  @Input() public dropdownOptions?: TDropdownOption[];
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public successActionTypes!: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

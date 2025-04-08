@@ -11,8 +11,14 @@
       [text]="dropdownTitle"
       [formGroup]="formGroup"
       formName="option"
-      i18-text
     ></app-user-dropdown>
+    <app-contracts-dropdown
+      *ngIf="dropdownType === 'it-contract'"
+      [disabledUuids$]="dropdownDisabledUuids$"
+      [text]="dropdownTitle"
+      [formGroup]="formGroup"
+      formName="option"
+    ></app-contracts-dropdown>
     <ng-container *ngFor="let section of sections">
       <app-bulk-action-dialog-section
         *ngIf="section.options.length > 0"

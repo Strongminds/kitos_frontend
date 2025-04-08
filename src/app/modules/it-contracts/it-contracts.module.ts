@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DeleteContractDialogComponent } from './it-contract-details/delete-contract-dialog/delete-contract-dialog.component';
 import { ItContractDeadlinesComponent } from './it-contract-details/it-contract-deadlines/it-contract-deadlines.component';
 import { ItContractDetailsComponent } from './it-contract-details/it-contract-details.component';
 import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it-contract-dpr.component';
@@ -21,7 +22,6 @@ import { ItContractSystemsComponent } from './it-contract-details/it-contract-sy
 import { ItContractsRootComponent } from './it-contracts-root.component';
 import { ITContractsRouterModule } from './it-contracts.routes';
 import { ITContractsComponent } from './overview/it-contracts.component';
-import { DeleteUserDialogComponent } from './it-contract-details/delete-user-dialog/delete-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,7 @@ import { DeleteUserDialogComponent } from './it-contract-details/delete-user-dia
     ColorCircleComponent,
     PaymentDialogComponent,
     AuditPickerComponent,
-    DeleteUserDialogComponent,
+    DeleteContractDialogComponent,
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })

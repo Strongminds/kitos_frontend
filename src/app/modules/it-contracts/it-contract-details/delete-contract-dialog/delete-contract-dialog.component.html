@@ -1,0 +1,22 @@
+<app-dialog title="Delete contract" i18n-title data-cy="confirm-dialog">
+  <app-standard-vertical-content-grid *ngIf="contractUuid$ | async as contractUuid">
+    <ng-container *ngIf="hierarchy$ | async as hierarchy">
+      <ng-container>
+        <ng-container *ngIf="hierarchy.length > 0; else noHierarchy">
+          <app-paragraph paragraphSize="medium" i18n
+            >Contract contains children contracts. Those will be deleted together with master, if you want to avoid that
+            transfer them to a different parent contract</app-paragraph
+          >
+          <app-button (buttonClick)="openTransferDialog(contractUuid, hierarchy)">Open contracts transfer</app-button>
+        </ng-container>
+        <ng-template #noHierarchy>
+          <app-paragraph paragraphSize="medium" i18n>Er du sikker på, at du vil slette kontrakten</app-paragraph>
+        </ng-template>
+      </ng-container>
+    </ng-container>
+  </app-standard-vertical-content-grid>
+  <app-dialog-actions>
+    <!-- <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()">Cancel</app-button>
+    <app-button size="large" (buttonClick)="OkResult()" data-cy="confirm-button">Confirm</app-button> -->
+  </app-dialog-actions>
+</app-dialog>

@@ -135,8 +135,10 @@ import { BulkActionDialogSectionComponent } from './dialogs/bulk-action-dialog/b
 import { BulkActionDialogComponent } from './dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
 import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
+import { ContractsDropdownComponent } from './dropdowns/contracts-dropdown/contracts-dropdown.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
+import { UserDropdownComponent } from './dropdowns/user-dropdown/user-dropdown.component';
 import { FileInputComponent } from './file-input/file-input.component';
 import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
 import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
@@ -185,7 +187,6 @@ import { RoleTableContainerComponent } from './role-table/role-table-container/r
 import { SectionComponent } from './section/section.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
-import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
@@ -347,6 +348,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     DetailsPageLinkWithTooltipComponent,
     BulkActionDialogComponent,
     BulkActionDialogSectionComponent,
+    ContractsDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -493,6 +495,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageMigrationConsequencesTableComponent,
     SectionComponent,
     DetailsPageLinkWithTooltipComponent,
+    ContractsDropdownComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
