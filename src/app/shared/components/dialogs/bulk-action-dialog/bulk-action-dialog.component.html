@@ -1,7 +1,67 @@
-<app-dialog [title]="title" i18n-title data-cy="bulk-action-dialog">
-  <app-standard-vertical-content-grid> </app-standard-vertical-content-grid>
+<app-scrollbar-dialog
+  [title]="title"
+  [nested]="true"
+  [ngClass]="{ 'removed-padding': isAnySelected() }"
+  data-cy="bulk-action-dialog"
+>
+  <app-standard-vertical-content-grid>
+    <app-user-dropdown
+      *ngIf="dropdownType === 'user'"
+      [disabledUuids$]="dropdownDisabledUuids$"
+      [text]="dropdownTitle"
+      [formGroup]="formGroup"
+      formName="option"
+      i18-text
+    ></app-user-dropdown>
+    <ng-container *ngFor="let section of sections">
+      <app-bulk-action-dialog-section
+        *ngIf="section.options.length > 0"
+        [options]="section.options"
+        [entityType]="section.entityType"
+        [title]="section.title"
+        [primaryColumnTitle]="section.primaryColumnTitle"
+        [secondaryColumnTitle]="section.secondaryColumnTitle"
+      ></app-bulk-action-dialog-section
+    ></ng-container>
+  </app-standard-vertical-content-grid>
   <app-dialog-actions>
-    <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()">Cancel</app-button>
-    <app-button size="large" (buttonClick)="OkResult()" data-cy="confirm-button">Confirm</app-button>
+    <app-standard-vertical-content-grid>
+      <app-snackbar-actions *ngIf="isAnySelected()">
+        <app-paragraph color="white" paragraphSize="medium" [dimmed]="true">{{ getSnackbarText() }}</app-paragraph>
+
+        <app-button
+          *ngFor="let button of actionButtons"
+          [color]="button.color"
+          [buttonStyle]="button.buttonStyle"
+          (buttonClick)="emitSelectedOptionsResult(button)"
+          class="copy-roles-button"
+          [disabled]="formGroup.invalid"
+        >
+          {{ button.text }}
+        </app-button>
+      </app-snackbar-actions>
+      <app-content-space-between class="action-buttons">
+        <app-button
+          [disabled]="!isAnySelected()"
+          buttonStyle="secondary"
+          color="accent"
+          (buttonClick)="deselectAll()"
+          i18n
+        >
+          Fravælg alle
+        </app-button>
+        <app-button
+          [disabled]="isAllSelected()"
+          buttonStyle="secondary"
+          color="accent"
+          (buttonClick)="selectAll()"
+          i18n
+        >
+          Vælg alle
+        </app-button>
+      </app-content-space-between>
+    </app-standard-vertical-content-grid>
+    <!-- <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()">Cancel</app-button>
+<app-button size="large" (buttonClick)="OkResult()" data-cy="confirm-button">Confirm</app-button> -->
   </app-dialog-actions>
-</app-dialog>
+</app-scrollbar-dialog>

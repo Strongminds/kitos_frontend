@@ -46,4 +46,8 @@ export class EntitySelectionService<TEntity, TTypes> {
     const sets = Array.from(this.selectedItems.values());
     return sets.flatMap((set) => Array.from(set));
   }
+
+  isAnySelected(): boolean {
+    return this.getSelectedItems().length > 0;
+  }
 }

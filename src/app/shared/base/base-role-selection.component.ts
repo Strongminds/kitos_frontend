@@ -38,7 +38,7 @@ export abstract class RoleSelectionBaseComponent extends BaseComponent {
   }
 
   public isAnySelected(): boolean {
-    return this.getSelectedUserRights().length > 0;
+    return this.selectionService.isAnySelected();
   }
 
   protected getRequest(user: ODataOrganizationUser): APIMutateUserRightsRequestDTO {

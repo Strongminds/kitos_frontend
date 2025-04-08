@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { EntitySelectionService } from 'src/app/shared/services/entity-selector-service';
+import { BulkActionOption } from '../bulk-action-dialog.component';
 
 @Component({
   selector: 'app-bulk-action-dialog-section',
@@ -9,25 +9,24 @@ import { EntitySelectionService } from 'src/app/shared/services/entity-selector-
   styleUrl: './bulk-action-dialog-section.component.scss',
 })
 export class BulkActionDialogSectionComponent implements OnInit {
-  @Input() public options!: APIIdentityNamePairResponseDTO[];
+  @Input() public options!: BulkActionOption[];
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public title!: string;
   @Input() public primaryColumnTitle!: string;
   @Input() public secondaryColumnTitle?: string;
+  //@Input() public selectionService!: EntitySelectionService<BulkActionOption, RegistrationEntityTypes>;
 
-  constructor(
-    private selectionService: EntitySelectionService<APIIdentityNamePairResponseDTO, RegistrationEntityTypes>
-  ) {}
+  constructor(private selectionService: EntitySelectionService<BulkActionOption, RegistrationEntityTypes>) {}
 
   ngOnInit(): void {
     this.selectionService.initSelectedItems([this.entityType]);
   }
 
-  public isOptionSelected(option: APIIdentityNamePairResponseDTO): boolean {
+  public isOptionSelected(option: BulkActionOption): boolean {
     return this.selectionService.isItemSelected(this.entityType, option);
   }
 
-  public roleSelectionChanged(option: APIIdentityNamePairResponseDTO, value: boolean | undefined): void {
+  public optionSelectionChanged(option: BulkActionOption, value: boolean | undefined): void {
     if (value) {
       this.selectionService.selectItem(this.entityType, option);
     } else {
@@ -35,7 +34,7 @@ export class BulkActionDialogSectionComponent implements OnInit {
     }
   }
 
-  public allRoleSelectedChanged(value: boolean | undefined): void {
+  public allOptionsSelectedChanged(value: boolean | undefined): void {
     if (value) {
       this.selectionService.selectAllOfType(this.entityType, this.options);
     } else {

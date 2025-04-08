@@ -1,9 +1,9 @@
-<app-accordion [title]="title">
+<app-accordion [title]="title" [isExpanded]="true">
   <app-native-table tableLayout="fixed">
     <thead>
       <tr>
         <th width="5%">
-          <app-checkbox [value]="isAllSelected()" (valueChange)="allRoleSelectedChanged($event)"></app-checkbox>
+          <app-checkbox [value]="isAllSelected()" (valueChange)="allOptionsSelectedChanged($event)"></app-checkbox>
         </th>
         <th>{{ primaryColumnTitle }}</th>
         <th>{{ secondaryColumnTitle }}</th>
@@ -13,12 +13,12 @@
       <tr *ngFor="let option of options">
         <td>
           <app-checkbox
-            [value]="isRightSelected(option)"
-            (valueChange)="roleSelectionChanged(option, $event)"
+            [value]="isOptionSelected(option)"
+            (valueChange)="optionSelectionChanged(option, $event)"
           ></app-checkbox>
         </td>
-        <td>{{ right.entity.name }}</td>
-        <td>{{ right.role.name }}</td>
+        <td>{{ option.name }}</td>
+        <td>{{ option.secondaryName }}</td>
       </tr>
     </tbody>
   </app-native-table>
