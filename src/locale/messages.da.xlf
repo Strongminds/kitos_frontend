@@ -4179,22 +4179,6 @@
         <source>Audit dato</source>
         <target state="new">Audit dato</target>
       </trans-unit>
-      <trans-unit id="7714110594292272072" datatype="html">
-        <source>Audit status: grøn</source>
-        <target state="new">Audit status: grøn</target>
-      </trans-unit>
-      <trans-unit id="5825713374970966816" datatype="html">
-        <source>Audit status: rød</source>
-        <target state="new">Audit status: rød</target>
-      </trans-unit>
-      <trans-unit id="5083080824036369784" datatype="html">
-        <source>Audit status: gul</source>
-        <target state="new">Audit status: gul</target>
-      </trans-unit>
-      <trans-unit id="7902716833517761584" datatype="html">
-        <source>Audit status: hvid</source>
-        <target state="new">Audit status: hvid</target>
-      </trans-unit>
       <trans-unit id="5445471729146930289" datatype="html">
         <source>Varighed</source>
         <target state="new">Varighed</target>
@@ -6716,6 +6700,10 @@
       <trans-unit id="2813580300767889762" datatype="html">
         <source>Nedarver kontrakten sin overordnedes gyldighed</source>
         <target state="new">Nedarver kontrakten sin overordnedes gyldighed</target>
+      </trans-unit>
+      <trans-unit id="1620385434838836828" datatype="html">
+        <source>Audit status</source>
+        <target state="new">Audit status</target>
       </trans-unit>
     </body>
   </file>

@@ -6,6 +6,7 @@ import {
   RoleAssignmentsMap,
 } from '../helpers/read-model-role-assignments';
 import { mapToYesNoEnum } from '../yes-no.model';
+import { OverviewAuditModel } from './audit-model';
 
 export interface ITContract {
   id: string;
@@ -39,6 +40,7 @@ export interface ITContract {
   AccumulatedOperationCost: number;
   AccumulatedOtherCost: number;
   LatestAuditDate: Date;
+  AuditStatus: OverviewAuditModel;
   AuditStatusGreen: number;
   AuditStatusRed: number;
   AuditStatusWhite: number;
@@ -64,6 +66,14 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     value.ProcurementPlanQuarter == null || value.ProcurementPlanYear == null
       ? ''
       : formatProcurementPlan(value.ProcurementPlanYear, value.ProcurementPlanQuarter);
+
+  const audit = {
+    max: value.AuditStatusGreen + value.AuditStatusRed + value.AuditStatusWhite + value.AuditStatusYellow,
+    green: value.AuditStatusGreen,
+    red: value.AuditStatusRed,
+    yellow: value.AuditStatusYellow,
+    white: value.AuditStatusWhite,
+  } as OverviewAuditModel;
   return {
     id: value.SourceEntityUuid,
     IsActive: value.IsActive,
@@ -105,6 +115,7 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     AccumulatedOtherCost: value.AccumulatedOtherCost,
     OperationRemunerationBegunDate: value.OperationRemunerationBegunDate,
     LatestAuditDate: value.LatestAuditDate,
+    AuditStatus: audit,
     AuditStatusGreen: value.AuditStatusGreen,
     AuditStatusRed: value.AuditStatusRed,
     AuditStatusWhite: value.AuditStatusWhite,
