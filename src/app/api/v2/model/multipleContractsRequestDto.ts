@@ -13,5 +13,6 @@
 
 export interface APIMultipleContractsRequestDto { 
     contractUuids: Array<string>;
+    parentUuid?: string;
 }
 

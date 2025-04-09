@@ -71,7 +71,6 @@ export interface PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequest
 }
 
 export interface PatchSingleItContractInternalV2TransferItContractRangeRequestParams {
-    parentUuid: string;
     request: APIMultipleContractsRequestDto;
 }
 
@@ -602,10 +601,6 @@ export class APIV2ItContractInternalINTERNALService {
     public patchSingleItContractInternalV2TransferItContractRange(requestParameters: PatchSingleItContractInternalV2TransferItContractRangeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
     public patchSingleItContractInternalV2TransferItContractRange(requestParameters: PatchSingleItContractInternalV2TransferItContractRangeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
     public patchSingleItContractInternalV2TransferItContractRange(requestParameters: PatchSingleItContractInternalV2TransferItContractRangeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const parentUuid = requestParameters.parentUuid;
-        if (parentUuid === null || parentUuid === undefined) {
-            throw new Error('Required parameter parentUuid was null or undefined when calling patchSingleItContractInternalV2TransferItContractRange.');
-        }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
             throw new Error('Required parameter request was null or undefined when calling patchSingleItContractInternalV2TransferItContractRange.');
@@ -652,7 +647,7 @@ export class APIV2ItContractInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "parentUuid", value: parentUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/transfer`;
+        let localVarPath = `/api/v2/internal/it-contracts/transfer`;
         return this.httpClient.request<object>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
