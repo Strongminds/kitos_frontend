@@ -49,44 +49,7 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
   }
 
   public openTransferDialog(contractUuid: string): void {
-    const dialogRef = this.dialog.open(BulkActionDialogComponent, {
-      width: '50%',
-      minWidth: '600px',
-      maxWidth: '800px',
-      height: 'auto',
-      maxHeight: '90vh%',
-    });
-
-    const dialogActions = [
-      {
-        text: $localize`Transfer`,
-        color: 'secondary',
-        buttonStyle: 'secondary',
-        callback: (result) => this.transferSelectedContracts(result, contractUuid),
-      },
-    ] as BulkActionButton[];
-
-    const dialogSections = [
-      {
-        options$: this.getHierarchy$(contractUuid),
-        entityType: 'it-contract',
-        title: $localize`Children contracts`,
-        primaryColumnTitle: $localize`Kontrakt`,
-        secondaryColumnTitle: $localize`Overordnet kontrakt`,
-      },
-    ] as BulkActionSection[];
-
-    const instance = dialogRef.componentInstance;
-    instance.title = $localize`Transfer contracts`;
-    instance.emptyStateText = $localize`No contracts aligible for transfer have been found`;
-    instance.snackbarText = $localize`Choose how to handle the contracts`;
-    instance.sections = dialogSections;
-    instance.actionButtons = dialogActions;
-    instance.dropdownTitle = $localize`Overordnet kontrakt`;
-    instance.dropdownDisabledUuids$ = this.hierarchy$.pipe(map((hierarchy) => hierarchy.map((node) => node.node.uuid)));
-    instance.dropdownType = 'it-contract';
-    instance.allowEmptyDropdownSelection = true;
-    instance.isLoading$ = this.componentStore.isLoading$;
+    const dialogRef = this.setupDialog(contractUuid);
 
     this.hierarchy$
       .pipe(
@@ -130,5 +93,48 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     };
 
     this.componentStore.sendTransferRequest(request);
+  }
+
+  private setupDialog(contractUuid: string) {
+    const dialogRef = this.dialog.open(BulkActionDialogComponent, {
+      width: '50%',
+      minWidth: '600px',
+      maxWidth: '800px',
+      height: 'auto',
+      maxHeight: '90vh%',
+    });
+
+    const dialogActions = [
+      {
+        text: $localize`Transfer`,
+        color: 'secondary',
+        buttonStyle: 'secondary',
+        callback: (result) => this.transferSelectedContracts(result, contractUuid),
+      },
+    ] as BulkActionButton[];
+
+    const dialogSections = [
+      {
+        options$: this.getHierarchy$(contractUuid),
+        entityType: 'it-contract',
+        title: $localize`Children contracts`,
+        primaryColumnTitle: $localize`Kontrakt`,
+        secondaryColumnTitle: $localize`Overordnet kontrakt`,
+      },
+    ] as BulkActionSection[];
+
+    const instance = dialogRef.componentInstance;
+    instance.title = $localize`Transfer contracts`;
+    instance.emptyStateText = $localize`No contracts aligible for transfer have been found`;
+    instance.snackbarText = $localize`Choose how to handle the contracts`;
+    instance.sections = dialogSections;
+    instance.actionButtons = dialogActions;
+    instance.dropdownTitle = $localize`Overordnet kontrakt`;
+    instance.dropdownDisabledUuids$ = this.hierarchy$.pipe(map((hierarchy) => hierarchy.map((node) => node.node.uuid)));
+    instance.dropdownType = 'it-contract';
+    instance.allowEmptyDropdownSelection = true;
+    instance.isLoading$ = this.componentStore.isLoading$;
+
+    return dialogRef;
   }
 }

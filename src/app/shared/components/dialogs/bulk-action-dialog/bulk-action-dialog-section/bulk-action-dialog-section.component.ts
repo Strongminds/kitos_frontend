@@ -14,7 +14,6 @@ export class BulkActionDialogSectionComponent implements OnInit {
   @Input() public title!: string;
   @Input() public primaryColumnTitle!: string;
   @Input() public secondaryColumnTitle?: string;
-  //@Input() public selectionService!: EntitySelectionService<BulkActionOption, RegistrationEntityTypes>;
 
   constructor(private selectionService: EntitySelectionService<BulkActionOption, RegistrationEntityTypes>) {}
 

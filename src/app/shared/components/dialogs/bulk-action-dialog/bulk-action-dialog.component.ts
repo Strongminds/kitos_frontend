@@ -90,7 +90,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
 
     // Dynamically update the validator based on allowEmptyDropdownSelection
     if (!this.allowEmptyDropdownSelection) {
-      this.formGroup.get('option')?.setValidators(Validators.required); // Add required validator
+      this.formGroup.get('option')?.setValidators(Validators.required);
     }
   }
 

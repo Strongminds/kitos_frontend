@@ -146,36 +146,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       },
     ] as BulkActionButton[];
 
-    const dialogSections = [
-      {
-        options$: this.mapUserRights(this.user.OrganizationUnitRights),
-        entityType: 'organization-unit',
-        title: $localize`Organisationsenhedroller`,
-        primaryColumnTitle: $localize`Organisationsenhed`,
-        secondaryColumnTitle: $localize`Rolle`,
-      },
-      {
-        options$: this.mapUserRights(this.user.ItContractRights),
-        entityType: 'it-contract',
-        title: $localize`Kontraktroller`,
-        primaryColumnTitle: $localize`Kontrakt`,
-        secondaryColumnTitle: $localize`Rolle`,
-      },
-      {
-        options$: this.mapUserRights(this.user.ItSystemRights),
-        entityType: 'it-system',
-        title: $localize`Systemroller`,
-        primaryColumnTitle: $localize`System`,
-        secondaryColumnTitle: $localize`Rolle`,
-      },
-      {
-        options$: this.mapUserRights(this.user.DataProcessingRegistrationRights),
-        entityType: 'data-processing-registration',
-        title: $localize`Databehandlingsroller`,
-        primaryColumnTitle: $localize`Databehandling`,
-        secondaryColumnTitle: $localize`Rolle`,
-      },
-    ] as BulkActionSection[];
+    const dialogSections = this.getCopyDialogSections();
 
     const dialogRef = this.dialog.open(BulkActionDialogComponent, {
       width: '50%',
@@ -184,6 +155,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       height: 'auto',
       maxHeight: '90vh%',
     });
+
     const instance = dialogRef.componentInstance;
     instance.title = $localize`Kopier roller`;
     instance.snackbarText = $localize`Vælg handling for valgte roller`;
@@ -316,5 +288,38 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
   private getEmailControl(): AbstractControl {
     return this.createForm.get('email')!;
+  }
+
+  private getCopyDialogSections(): BulkActionSection[] {
+    return [
+      {
+        options$: this.mapUserRights(this.user.OrganizationUnitRights),
+        entityType: 'organization-unit',
+        title: $localize`Organisationsenhedroller`,
+        primaryColumnTitle: $localize`Organisationsenhed`,
+        secondaryColumnTitle: $localize`Rolle`,
+      },
+      {
+        options$: this.mapUserRights(this.user.ItContractRights),
+        entityType: 'it-contract',
+        title: $localize`Kontraktroller`,
+        primaryColumnTitle: $localize`Kontrakt`,
+        secondaryColumnTitle: $localize`Rolle`,
+      },
+      {
+        options$: this.mapUserRights(this.user.ItSystemRights),
+        entityType: 'it-system',
+        title: $localize`Systemroller`,
+        primaryColumnTitle: $localize`System`,
+        secondaryColumnTitle: $localize`Rolle`,
+      },
+      {
+        options$: this.mapUserRights(this.user.DataProcessingRegistrationRights),
+        entityType: 'data-processing-registration',
+        title: $localize`Databehandlingsroller`,
+        primaryColumnTitle: $localize`Databehandling`,
+        secondaryColumnTitle: $localize`Rolle`,
+      },
+    ] as BulkActionSection[];
   }
 }
