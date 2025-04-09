@@ -1,38 +1,48 @@
 <app-scrollbar-dialog
   [title]="title"
   [nested]="true"
-  [ngClass]="{ 'removed-padding': isAnySelected() }"
+  [ngClass]="{ 'removed-padding': isAnySelected() || (checkIfContainsData$() | async) === false }"
   data-cy="bulk-action-dialog"
 >
-  <app-standard-vertical-content-grid>
-    <app-user-dropdown
-      *ngIf="dropdownType === 'user'"
-      [disabledUuids$]="dropdownDisabledUuids$"
-      [text]="dropdownTitle"
-      [formGroup]="formGroup"
-      formName="option"
-    ></app-user-dropdown>
-    <app-contracts-dropdown
-      *ngIf="dropdownType === 'it-contract'"
-      [disabledUuids$]="dropdownDisabledUuids$"
-      [text]="dropdownTitle"
-      [formGroup]="formGroup"
-      formName="option"
-    ></app-contracts-dropdown>
-    <ng-container *ngFor="let section of sections">
-      <app-bulk-action-dialog-section
-        *ngIf="section.options.length > 0"
-        [options]="section.options"
-        [entityType]="section.entityType"
-        [title]="section.title"
-        [primaryColumnTitle]="section.primaryColumnTitle"
-        [secondaryColumnTitle]="section.secondaryColumnTitle"
-      ></app-bulk-action-dialog-section
-    ></ng-container>
-  </app-standard-vertical-content-grid>
-  <app-dialog-actions>
+  <app-paragraph *ngIf="!isLoading && (checkIfContainsData$() | async) === false" paragraphSize="medium">{{
+    emptyStateText
+  }}</app-paragraph>
+  <ng-container *ngIf="(checkIfContainsData$() | async) === true">
+    <ng-container *ngIf="!isLoading">
+      <app-standard-vertical-content-grid>
+        <app-user-dropdown
+          *ngIf="dropdownType === 'user'"
+          [disabledUuids$]="dropdownDisabledUuids$"
+          [text]="dropdownTitle"
+          [formGroup]="formGroup"
+          formName="option"
+        ></app-user-dropdown>
+        <app-contracts-dropdown
+          *ngIf="dropdownType === 'it-contract'"
+          [disabledUuids$]="dropdownDisabledUuids$"
+          [text]="dropdownTitle"
+          [formGroup]="formGroup"
+          formName="option"
+        ></app-contracts-dropdown>
+        <ng-container *ngFor="let section of sections">
+          <ng-container *ngIf="section.options$ | async as options">
+            <app-bulk-action-dialog-section
+              *ngIf="options.length > 0"
+              [options]="options"
+              [entityType]="section.entityType"
+              [title]="section.title"
+              [primaryColumnTitle]="section.primaryColumnTitle"
+              [secondaryColumnTitle]="section.secondaryColumnTitle"
+            ></app-bulk-action-dialog-section>
+          </ng-container>
+        </ng-container>
+      </app-standard-vertical-content-grid>
+    </ng-container>
+    <app-loading *ngIf="isLoading"></app-loading>
+  </ng-container>
+  <app-dialog-actions *ngIf="(checkIfContainsData$() | async) === true">
     <app-standard-vertical-content-grid>
-      <app-snackbar-actions *ngIf="isAnySelected()">
+      <app-snackbar-actions *ngIf="isAnySelected() && !isLoading">
         <app-paragraph color="white" paragraphSize="medium" [dimmed]="true">{{ getSnackbarText() }}</app-paragraph>
 
         <app-button
@@ -57,7 +67,7 @@
           Fravælg alle
         </app-button>
         <app-button
-          [disabled]="isAllSelected()"
+          [disabled]="(isAllSelected$() | async) ?? false"
           buttonStyle="secondary"
           color="accent"
           (buttonClick)="selectAll()"

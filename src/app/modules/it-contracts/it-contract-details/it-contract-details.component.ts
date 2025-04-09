@@ -145,6 +145,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.deleteITContractSuccess)).subscribe(() => {
+        this.dialog.closeAll();
         this.router.navigate([`${AppPath.itContracts}`]);
       })
     );
@@ -152,21 +153,6 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
 
   public showDeleteDialog(): void {
     this.dialog.open(DeleteContractDialogComponent);
-    /* const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil slette kontrakten?`;
-    confirmationDialogInstance.confirmColor = 'warn';
-
-    this.subscriptions.add(
-      confirmationDialogRef
-        .afterClosed()
-        .pipe(first())
-        .subscribe((result) => {
-          if (result === true) {
-            this.store.dispatch(ITContractActions.deleteITContract());
-          }
-        })
-    ); */
   }
 
   private subscribeToUuidNavigation(): void {

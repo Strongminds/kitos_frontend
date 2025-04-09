@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
-import { Observable } from 'rxjs';
+import { combineLatest, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
@@ -20,7 +20,7 @@ export interface BulkActionButton {
   callback: (result: BulkActionResult) => void;
 }
 export interface BulkActionSection {
-  options: BulkActionOption[];
+  options$: Observable<BulkActionOption[]>;
   entityType: RegistrationEntityTypes;
   title: string;
   primaryColumnTitle: string;
@@ -28,7 +28,7 @@ export interface BulkActionSection {
 }
 export interface BulkActionResult {
   selectedOptions: Record<string, BulkActionOption[]>;
-  selectedEntityId: string;
+  selectedEntityId?: string;
 }
 
 @Component({
@@ -42,6 +42,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   implements OnInit
 {
   @Input() public title = $localize`Bekræft handling`;
+  @Input() public emptyStateText = $localize`Ingen data`;
   @Input() public snackbarText = $localize``;
   @Input() public sections!: BulkActionSection[];
   @Input() public actionButtons!: BulkActionButton[];
@@ -54,9 +55,10 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   @Input() public successActionTypes!: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public errorActionTypes!: any;
+  @Input() public isLoading$?: Observable<boolean>;
 
   public formGroup = new FormGroup({
-    option: new FormControl<TDropdownOption | undefined>(undefined, Validators.required),
+    option: new FormControl<TDropdownOption | undefined>(undefined),
   });
   public isLoading = false;
 
@@ -68,6 +70,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   }
 
   ngOnInit(): void {
+    // Subscriptions support 2 cases: Actions and a Component Store
     this.subscriptions.add(
       this.actions$.pipe(ofType(this.successActionTypes)).subscribe(() => {
         this.selectionService.deselectAll();
@@ -79,20 +82,26 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
         this.isLoading = false;
       })
     );
+    this.subscriptions.add(
+      this.isLoading$?.subscribe((isLoading) => {
+        this.isLoading = isLoading;
+      })
+    );
 
     // Dynamically update the validator based on allowEmptyDropdownSelection
-    if (this.allowEmptyDropdownSelection) {
-      this.formGroup.get('option')?.clearValidators(); // Remove all validators
-    } else {
+    if (!this.allowEmptyDropdownSelection) {
       this.formGroup.get('option')?.setValidators(Validators.required); // Add required validator
     }
-    this.formGroup.get('option')?.updateValueAndValidity(); // Update the form control's validity
   }
 
-  public isAllSelected() {
-    return this.sections.every((section) =>
-      this.selectionService.isAllOfTypeSelected(section.entityType, section.options)
+  public isAllSelected$(): Observable<boolean> {
+    // Combine all section.options observables
+    const optionsObservables = this.sections.map((section) =>
+      section.options$.pipe(map((options) => this.selectionService.isAllOfTypeSelected(section.entityType, options)))
     );
+
+    // Combine the results of all observables and check if all are true
+    return combineLatest(optionsObservables).pipe(map((results) => results.every((isSelected) => isSelected)));
   }
 
   public isAnySelected(): boolean {
@@ -105,7 +114,11 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
 
   public selectAll(): void {
     this.sections.forEach((section) => {
-      this.selectionService.selectAllOfType(section.entityType, section.options);
+      this.subscriptions.add(
+        section.options$.subscribe((options) => {
+          this.selectionService.selectAllOfType(section.entityType, options);
+        })
+      );
     });
   }
 
@@ -117,13 +130,10 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
     });
 
     const selectedEntityId = this.formGroup.value.option?.uuid;
-    if (!selectedEntityId) {
-      return;
-    }
 
     const result: BulkActionResult = {
       selectedOptions,
-      selectedEntityId: selectedEntityId.toString(),
+      selectedEntityId: selectedEntityId?.toString(),
     };
 
     this.isLoading = true;
@@ -132,6 +142,18 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
 
   public getSnackbarText(): string {
     return $localize`${this.snackbarText} ${this.buttonNumberText()}`;
+  }
+
+  public checkIfContainsData$(): Observable<boolean> {
+    // Combine all section.options$ observables
+    const optionsObservables = this.sections.map(
+      (section) => section.options$.pipe(map((options) => options.length > 0)) // Check if options array is not empty
+    );
+
+    // Combine the results of all observables and check if any are true
+    return combineLatest(optionsObservables).pipe(
+      map((results) => results.some((hasData) => hasData)) // Check if any section contains data
+    );
   }
 
   private buttonNumberText(): string {

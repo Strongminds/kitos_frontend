@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { debounceTime, of } from 'rxjs';
+import { debounceTime, Observable, of } from 'rxjs';
 import { APIMutateRightRequestDTO, APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
@@ -148,28 +148,28 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
     const dialogSections = [
       {
-        options: this.mapUserRights(this.user.OrganizationUnitRights),
+        options$: this.mapUserRights(this.user.OrganizationUnitRights),
         entityType: 'organization-unit',
         title: $localize`Organisationsenhedroller`,
         primaryColumnTitle: $localize`Organisationsenhed`,
         secondaryColumnTitle: $localize`Rolle`,
       },
       {
-        options: this.mapUserRights(this.user.ItContractRights),
+        options$: this.mapUserRights(this.user.ItContractRights),
         entityType: 'it-contract',
         title: $localize`Kontraktroller`,
         primaryColumnTitle: $localize`Kontrakt`,
         secondaryColumnTitle: $localize`Rolle`,
       },
       {
-        options: this.mapUserRights(this.user.ItSystemRights),
+        options$: this.mapUserRights(this.user.ItSystemRights),
         entityType: 'it-system',
         title: $localize`Systemroller`,
         primaryColumnTitle: $localize`System`,
         secondaryColumnTitle: $localize`Rolle`,
       },
       {
-        options: this.mapUserRights(this.user.DataProcessingRegistrationRights),
+        options$: this.mapUserRights(this.user.DataProcessingRegistrationRights),
         entityType: 'data-processing-registration',
         title: $localize`Databehandlingsroller`,
         primaryColumnTitle: $localize`Databehandling`,
@@ -203,21 +203,30 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       contractRights: this.mapResult(result, 'it-contract'),
       dataProcessingRights: this.mapResult(result, 'data-processing-registration'),
     };
+
+    if (!result.selectedEntityId) {
+      throw new Error('Selected entity ID is undefined');
+    }
     this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, result.selectedEntityId, request));
   }
 
   private mapResult(result: BulkActionResult, type: RegistrationEntityTypes): APIMutateRightRequestDTO[] {
+    if (!result.selectedEntityId) {
+      throw new Error('Selected entity ID is undefined');
+    }
     return result.selectedOptions[type].map((option) =>
-      mapToCopyRoleRequestDTO(this.user.Uuid, option.id as number, result.selectedEntityId)
+      mapToCopyRoleRequestDTO(this.user.Uuid, option.id as number, result.selectedEntityId!)
     );
   }
 
-  private mapUserRights(rights: Right[]): BulkActionOption[] {
-    return rights.map((right) => ({
-      id: right.role.id,
-      name: right.entity.name,
-      secondaryName: right.role.name,
-    }));
+  private mapUserRights(rights: Right[]): Observable<BulkActionOption[]> {
+    return of(
+      rights.map((right) => ({
+        id: right.role.id,
+        name: right.entity.name,
+        secondaryName: right.role.name,
+      }))
+    );
   }
 
   private hasAnythingChanged(): boolean {

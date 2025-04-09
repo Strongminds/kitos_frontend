@@ -1,15 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map } from 'rxjs';
-import { APIRegistrationHierarchyNodeWithActivationStatusResponseDTO } from 'src/app/api/v2';
+import { map, Observable, takeWhile } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   BulkActionButton,
   BulkActionDialogComponent,
+  BulkActionOption,
+  BulkActionResult,
   BulkActionSection,
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from '../it-contract-hierarchy/it-contract-hierarchy.component-store';
 
@@ -20,49 +24,31 @@ import { ItContractHierarchyComponentStore } from '../it-contract-hierarchy/it-c
   providers: [ItContractHierarchyComponentStore],
 })
 export class DeleteContractDialogComponent extends BaseComponent implements OnInit {
-  public readonly hierarchy$ = this.componentStore.hierarchy$;
+  public readonly hierarchy$ = this.componentStore.subHierarchy$;
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());
+
+  public isLoading = false;
 
   constructor(
     private readonly store: Store,
     private readonly componentStore: ItContractHierarchyComponentStore,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
+    private readonly actions$: Actions
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.componentStore.getHierarchy(this.contractUuid$);
+    this.componentStore.getSubHierarchy(this.contractUuid$);
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITContractActions.deleteITContractError)).subscribe(() => {
+        this.isLoading = false;
+      })
+    );
   }
-  public openTransferDialog(
-    contractUuid: string,
-    hierarchy: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO[]
-  ): void {
-    const dialogActions = [
-      {
-        text: $localize`Transfer`,
-        color: 'secondary',
-        buttonStyle: 'secondary',
-        callback: (result) => console.log(result),
-      },
-    ] as BulkActionButton[];
 
-    const dialogSections = [
-      {
-        options: hierarchy
-          .filter((node) => node.node.uuid !== contractUuid)
-          .map((node) => ({
-            id: node.node.uuid,
-            name: node.node.name,
-            secondaryName: node.parent?.name,
-          })),
-        entityType: 'it-contract',
-        title: $localize`Children contracts`,
-        primaryColumnTitle: $localize`Kontrakt`,
-        secondaryColumnTitle: $localize`Overordnet kontrakt`,
-      },
-    ] as BulkActionSection[];
-
+  public openTransferDialog(contractUuid: string): void {
     const dialogRef = this.dialog.open(BulkActionDialogComponent, {
       width: '50%',
       minWidth: '600px',
@@ -70,8 +56,29 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
       height: 'auto',
       maxHeight: '90vh%',
     });
+
+    const dialogActions = [
+      {
+        text: $localize`Transfer`,
+        color: 'secondary',
+        buttonStyle: 'secondary',
+        callback: (result) => this.transferSelectedContracts(result, contractUuid),
+      },
+    ] as BulkActionButton[];
+
+    const dialogSections = [
+      {
+        options$: this.getHierarchy$(contractUuid),
+        entityType: 'it-contract',
+        title: $localize`Children contracts`,
+        primaryColumnTitle: $localize`Kontrakt`,
+        secondaryColumnTitle: $localize`Overordnet kontrakt`,
+      },
+    ] as BulkActionSection[];
+
     const instance = dialogRef.componentInstance;
     instance.title = $localize`Transfer contracts`;
+    instance.emptyStateText = $localize`No contracts aligible for transfer have been found`;
     instance.snackbarText = $localize`Choose how to handle the contracts`;
     instance.sections = dialogSections;
     instance.actionButtons = dialogActions;
@@ -79,7 +86,49 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     instance.dropdownDisabledUuids$ = this.hierarchy$.pipe(map((hierarchy) => hierarchy.map((node) => node.node.uuid)));
     instance.dropdownType = 'it-contract';
     instance.allowEmptyDropdownSelection = true;
-    //instance.successActionTypes = OrganizationUserActions.copyRolesSuccess;
-    //instance.errorActionTypes = OrganizationUserActions.copyRolesError;
+    instance.isLoading$ = this.componentStore.isLoading$;
+
+    this.hierarchy$
+      .pipe(
+        takeWhile((hierarchy) => hierarchy.length > 1, true) // Keep the subscription while the condition is true
+      )
+      .subscribe((hierarchy) => {
+        if (hierarchy.length <= 1) {
+          dialogRef.close();
+        }
+      });
+  }
+
+  public getHierarchy$(contractUuid: string): Observable<BulkActionOption[]> {
+    return this.hierarchy$.pipe(
+      map((hierarchy) =>
+        hierarchy
+          .filter((node) => node.node.uuid !== contractUuid)
+          .map((node) => ({
+            id: node.node.uuid,
+            name: node.node.name,
+            secondaryName: node.parent?.name,
+          }))
+      )
+    );
+  }
+
+  public cancel() {
+    this.dialog.closeAll();
+  }
+
+  public confirm() {
+    this.isLoading = true;
+    this.store.dispatch(ITContractActions.deleteITContract());
+  }
+
+  private transferSelectedContracts(result: BulkActionResult, contractUuid: string) {
+    const request = {
+      currentParentUuid: contractUuid,
+      parentUuid: result.selectedEntityId,
+      uuids: result.selectedOptions['it-contract'].map((option) => option.id.toString()),
+    };
+
+    this.componentStore.sendTransferRequest(request);
   }
 }

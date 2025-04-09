@@ -12,11 +12,13 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 interface State {
   loading: boolean;
   hierarchy?: Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>;
+  subHierarchy?: Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>;
 }
 
 @Injectable()
 export class ItContractHierarchyComponentStore extends ComponentStore<State> {
   public readonly hierarchy$ = this.select((state) => state.hierarchy).pipe(filterNullish());
+  public readonly subHierarchy$ = this.select((state) => state.subHierarchy).pipe(filterNullish());
   public readonly isLoading$ = this.select((state) => state.loading);
 
   constructor(
@@ -30,6 +32,13 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
     (state, hierarchy: Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>): State => ({
       ...state,
       hierarchy,
+    })
+  );
+
+  private updateSubHierarchy = this.updater(
+    (state, subHierarchy: Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>): State => ({
+      ...state,
+      subHierarchy,
     })
   );
 
@@ -55,21 +64,39 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
     )
   );
 
+  public getSubHierarchy = this.effect((itContractUuid$: Observable<string>) =>
+    itContractUuid$.pipe(
+      mergeMap((uuid) => {
+        this.updateIsLoading(true);
+        return this.apiItContractInternalService
+          .getManyItContractInternalV2GetSubHierarchy({ contractUuid: uuid })
+          .pipe(
+            tapResponse(
+              (hierarchy) => this.updateSubHierarchy(hierarchy),
+              (e) => console.error(e),
+              () => this.updateIsLoading(false)
+            )
+          );
+      })
+    )
+  );
+
   public sendTransferRequest = this.effect(
-    (request$: Observable<{ currentParentUuid: string; parentUuid: string; uuids: string[] }>) =>
+    (request$: Observable<{ currentParentUuid: string; parentUuid: string | undefined; uuids: string[] }>) =>
       request$.pipe(
         tap(this.updateIsLoading(true)),
         switchMap((request) =>
           this.apiItContractInternalService
             .patchSingleItContractInternalV2TransferItContractRange({
-              parentUuid: request.parentUuid,
-              request: { contractUuids: request.uuids },
+              request: { contractUuids: request.uuids, parentUuid: request.parentUuid },
             })
             .pipe(
               tapResponse(
                 () => this.getHierarchy(request.currentParentUuid),
-                (e) => console.error(e),
-                () => this.updateIsLoading(false)
+                (e) => {
+                  console.error(e);
+                  this.updateIsLoading(false);
+                }
               )
             )
         )

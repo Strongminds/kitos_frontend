@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { mergeMap, Observable, tap } from 'rxjs';
@@ -14,7 +14,7 @@ export class ContractDropdownComponentStore extends ComponentStore<State> {
   public readonly contracts$ = this.select((state) => state.contracts);
   public readonly loading$ = this.select((state) => state.loading);
 
-  constructor(private readonly itContractService: APIV2ItContractService) {
+  constructor(@Inject(APIV2ItContractService) private readonly itContractService: APIV2ItContractService) {
     super({ contracts: [], loading: false });
   }
 

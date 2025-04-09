@@ -60,6 +60,10 @@ export interface GetManyItContractInternalV2GetHierarchyRequestParams {
     contractUuid: string;
 }
 
+export interface GetManyItContractInternalV2GetSubHierarchyRequestParams {
+    contractUuid: string;
+}
+
 export interface PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams {
     contractUuid: string;
     request: APIRoleAssignmentRequestDTO;
@@ -432,6 +436,64 @@ export class APIV2ItContractInternalINTERNALService {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/hierarchy`;
+        return this.httpClient.request<Array<APIItContractHierarchyNodeResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getManyItContractInternalV2GetSubHierarchy(requestParameters: GetManyItContractInternalV2GetSubHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItContractHierarchyNodeResponseDTO>>;
+    public getManyItContractInternalV2GetSubHierarchy(requestParameters: GetManyItContractInternalV2GetSubHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItContractHierarchyNodeResponseDTO>>>;
+    public getManyItContractInternalV2GetSubHierarchy(requestParameters: GetManyItContractInternalV2GetSubHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItContractHierarchyNodeResponseDTO>>>;
+    public getManyItContractInternalV2GetSubHierarchy(requestParameters: GetManyItContractInternalV2GetSubHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const contractUuid = requestParameters.contractUuid;
+        if (contractUuid === null || contractUuid === undefined) {
+            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetSubHierarchy.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sub-hierarchy`;
         return this.httpClient.request<Array<APIItContractHierarchyNodeResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
