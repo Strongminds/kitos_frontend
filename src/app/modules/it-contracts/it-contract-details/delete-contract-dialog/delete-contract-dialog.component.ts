@@ -51,15 +51,17 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
   public openTransferDialog(contractUuid: string): void {
     const dialogRef = this.setupDialog(contractUuid);
 
-    this.hierarchy$
-      .pipe(
-        takeWhile((hierarchy) => hierarchy.length > 1, true) // Keep the subscription while the condition is true
-      )
-      .subscribe((hierarchy) => {
-        if (hierarchy.length <= 1) {
-          dialogRef.close();
-        }
-      });
+    this.subscriptions.add(
+      this.hierarchy$
+        .pipe(
+          takeWhile((hierarchy) => hierarchy.length > 1, true) // Keep the subscription while the condition is true
+        )
+        .subscribe((hierarchy) => {
+          if (hierarchy.length <= 1) {
+            dialogRef.close();
+          }
+        })
+    );
   }
 
   public getHierarchy$(contractUuid: string): Observable<BulkActionOption[]> {
