@@ -78,6 +78,7 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     instance.dropdownTitle = $localize`Overordnet kontrakt`;
     instance.dropdownDisabledUuids$ = this.hierarchy$.pipe(map((hierarchy) => hierarchy.map((node) => node.node.uuid)));
     instance.dropdownType = 'it-contract';
+    instance.allowEmptyDropdownSelection = true;
     //instance.successActionTypes = OrganizationUserActions.copyRolesSuccess;
     //instance.errorActionTypes = OrganizationUserActions.copyRolesError;
   }

@@ -49,6 +49,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   @Input() public dropdownDisabledUuids$!: Observable<string[]>;
   @Input() public dropdownTitle!: string;
   @Input() public dropdownOptions?: TDropdownOption[];
+  @Input() public allowEmptyDropdownSelection = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public successActionTypes!: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -78,6 +79,14 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
         this.isLoading = false;
       })
     );
+
+    // Dynamically update the validator based on allowEmptyDropdownSelection
+    if (this.allowEmptyDropdownSelection) {
+      this.formGroup.get('option')?.clearValidators(); // Remove all validators
+    } else {
+      this.formGroup.get('option')?.setValidators(Validators.required); // Add required validator
+    }
+    this.formGroup.get('option')?.updateValueAndValidity(); // Update the form control's validity
   }
 
   public isAllSelected() {
