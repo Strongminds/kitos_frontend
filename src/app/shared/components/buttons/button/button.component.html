@@ -1,5 +1,6 @@
 <app-tooltip [text]="tooltip ?? ''">
   <button
+    appCtrlClick
     mat-button
     class="{{ size }}"
     [ngClass]="{
@@ -17,7 +18,7 @@
     }"
     [color]="color"
     [disabled]="disabled || loading"
-      [type]="type"
+    [type]="type"
     (click)="onButtonClick()"
     data-cy="mat-button"
   >
