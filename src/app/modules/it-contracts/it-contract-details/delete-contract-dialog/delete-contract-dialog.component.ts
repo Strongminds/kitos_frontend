@@ -12,7 +12,9 @@ import {
   BulkActionResult,
   BulkActionSection,
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
+import { mapArray } from 'src/app/shared/helpers/observable-helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from '../it-contract-hierarchy/it-contract-hierarchy.component-store';
@@ -33,7 +35,8 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     private readonly store: Store,
     private readonly componentStore: ItContractHierarchyComponentStore,
     private readonly dialog: MatDialog,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly confirmationService: ConfirmActionService
   ) {
     super();
   }
@@ -80,8 +83,18 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
   }
 
   public confirm() {
-    this.isLoading = true;
-    this.store.dispatch(ITContractActions.deleteITContract());
+    this.subHierarchy$.pipe(first()).subscribe((hierarchy) => {
+      if (hierarchy?.length <= 1) {
+        this.store.dispatch(ITContractActions.deleteITContract());
+        return;
+      }
+
+      this.confirmationService.confirmAction({
+        category: ConfirmActionCategory.Warning,
+        message: $localize`Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?`,
+        onConfirm: () => this.store.dispatch(ITContractActions.deleteITContract()),
+      });
+    });
   }
 
   private transferSelectedContracts(result: BulkActionResult, contractUuid: string) {
@@ -129,12 +142,11 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     instance.sections = dialogSections;
     instance.actionButtons = dialogActions;
     instance.dropdownTitle = $localize`Overordnet kontrakt`;
-    instance.dropdownDisabledUuids$ = this.subHierarchy$.pipe(
-      map((hierarchy) => hierarchy.map((node) => node.node.uuid))
-    );
+    instance.dropdownDisabledUuids$ = this.subHierarchy$.pipe(mapArray((node) => node.node.uuid));
     instance.dropdownType = 'it-contract';
     instance.allowEmptyDropdownSelection = true;
     instance.isLoading$ = this.componentStore.isLoading$;
+    instance.requireConfirmation = true;
 
     return dialogRef;
   }

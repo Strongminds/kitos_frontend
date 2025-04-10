@@ -6771,6 +6771,14 @@
           <x id="PH_1" equiv-text="this.buttonNumberText()"/>
         </target>
       </trans-unit>
+      <trans-unit id="4534305672667817010" datatype="html">
+        <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
+        <target state="new">Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</target>
+      </trans-unit>
+      <trans-unit id="609393622749372398" datatype="html">
+        <source>Er du sikker på at du vil overføre de valgte kontrakter?</source>
+        <target state="new">Er du sikker på at du vil overføre de valgte kontrakter?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

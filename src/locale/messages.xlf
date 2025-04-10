@@ -5140,6 +5140,12 @@
       <trans-unit id="8750750261302099129" datatype="html">
         <source>Vælg handling for valgte roller</source>
       </trans-unit>
+      <trans-unit id="4534305672667817010" datatype="html">
+        <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
+      </trans-unit>
+      <trans-unit id="609393622749372398" datatype="html">
+        <source>Er du sikker på at du vil overføre de valgte kontrakter?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

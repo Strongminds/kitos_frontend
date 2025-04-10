@@ -1,33 +1,36 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Injectable } from '@angular/core';
+import { HasId } from '../models/has-id';
 
 @Injectable()
-export class EntitySelectionService<TEntity, TTypes> {
-  private selectedItems: Map<TTypes, Set<TEntity>> = new Map();
+export class EntitySelectionService<TEntity extends HasId, TTypes> {
+  private selectedItems: Map<TTypes, Map<any, TEntity>> = new Map();
 
   initSelectedItems(entityTypes: TTypes[]): void {
     entityTypes.forEach((type) => {
-      this.selectedItems.set(type, new Set());
+      this.selectedItems.set(type, new Map());
     });
   }
 
   selectItem(entityType: TTypes, entity: TEntity): void {
-    this.selectedItems.get(entityType)?.add(entity);
+    this.selectedItems.get(entityType)?.set(entity.id, entity);
   }
 
   deselectItem(entityType: TTypes, entity: TEntity): void {
-    this.selectedItems.get(entityType)?.delete(entity);
+    this.selectedItems.get(entityType)?.delete(entity.id);
   }
 
   isItemSelected(entityType: TTypes, entity: TEntity): boolean {
-    return this.selectedItems.get(entityType)?.has(entity) ?? false;
+    return this.selectedItems.get(entityType)?.has(entity.id) ?? false;
   }
 
-  selectAllOfType(entityType: TTypes, entity: TEntity[]): void {
-    this.selectedItems.set(entityType, new Set(entity));
+  selectAllOfType(entityType: TTypes, entities: TEntity[]): void {
+    const entityMap = new Map(entities.map((entity) => [entity.id, entity]));
+    this.selectedItems.set(entityType, entityMap);
   }
 
   deselectAllOfType(entityType: TTypes): void {
-    this.selectedItems.set(entityType, new Set());
+    this.selectedItems.set(entityType, new Map());
   }
 
   deselectAll(): void {
@@ -43,8 +46,8 @@ export class EntitySelectionService<TEntity, TTypes> {
   }
 
   getSelectedItems(): TEntity[] {
-    const sets = Array.from(this.selectedItems.values());
-    return sets.flatMap((set) => Array.from(set));
+    const maps = Array.from(this.selectedItems.values());
+    return maps.flatMap((map) => Array.from(map.values()));
   }
 
   isAnySelected(): boolean {

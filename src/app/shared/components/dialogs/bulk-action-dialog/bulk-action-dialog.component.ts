@@ -1,10 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
-import { combineLatest, map, Observable } from 'rxjs';
+import { combineLatest, first, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { EntitySelectionService } from 'src/app/shared/services/entity-selector-service';
 import { ExtendedThemePalette } from '../../buttons/button/button.component';
 
@@ -46,6 +47,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   @Input() public snackbarText = $localize``;
   @Input() public sections!: BulkActionSection[];
   @Input() public actionButtons!: BulkActionButton[];
+  @Input() public requireConfirmation = false;
   @Input() public dropdownType!: 'user' | 'it-contract';
   @Input() public dropdownDisabledUuids$!: Observable<string[]>;
   @Input() public dropdownTitle!: string;
@@ -64,27 +66,38 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
 
   constructor(
     public readonly selectionService: EntitySelectionService<BulkActionOption, RegistrationEntityTypes>,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
+    private readonly confirmationService: ConfirmActionService,
+    private readonly cdRef: ChangeDetectorRef
   ) {
     super();
   }
 
   ngOnInit(): void {
     // Subscriptions support 2 cases: Actions and a Component Store
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(this.successActionTypes)).subscribe(() => {
-        this.selectionService.deselectAll();
-        this.formGroup.reset();
-      })
-    );
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(this.successActionTypes, this.errorActionTypes)).subscribe(() => {
-        this.isLoading = false;
-      })
-    );
+    if (this.successActionTypes) {
+      this.subscriptions.add(
+        this.actions$.pipe(ofType(this.successActionTypes)).subscribe(() => {
+          this.isLoading = false;
+          this.selectionService.deselectAll();
+          this.formGroup.reset();
+          this.cdRef.detectChanges();
+        })
+      );
+    }
+    if (this.errorActionTypes) {
+      this.subscriptions.add(
+        this.actions$.pipe(ofType(this.errorActionTypes)).subscribe(() => {
+          this.isLoading = false;
+          this.cdRef.detectChanges();
+        })
+      );
+    }
+
     this.subscriptions.add(
       this.isLoading$?.subscribe((isLoading) => {
         this.isLoading = isLoading;
+        this.cdRef.detectChanges();
       })
     );
 
@@ -115,7 +128,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   public selectAll(): void {
     this.sections.forEach((section) => {
       this.subscriptions.add(
-        section.options$.subscribe((options) => {
+        section.options$.pipe(first()).subscribe((options) => {
           this.selectionService.selectAllOfType(section.entityType, options);
         })
       );
@@ -123,6 +136,19 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   }
 
   public emitSelectedOptionsResult(button: BulkActionButton): void {
+    if (this.requireConfirmation) {
+      this.confirmationService.confirmAction({
+        category: ConfirmActionCategory.Warning,
+        message: $localize`Er du sikker på at du vil overføre de valgte kontrakter?`,
+        onConfirm: () => this.confirmedResult(button),
+      });
+      return;
+    }
+
+    this.confirmedResult(button);
+  }
+
+  private confirmedResult(button: BulkActionButton): void {
     const selectedOptions: Record<string, BulkActionOption[]> = {};
 
     this.sections.forEach((section) => {
