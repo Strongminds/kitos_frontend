@@ -3715,9 +3715,6 @@
       <trans-unit id="3048587120469429420" datatype="html">
         <source>Kunne ikke kopiere roller</source>
       </trans-unit>
-      <trans-unit id="7680003617143986371" datatype="html">
-        <source>Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
-      </trans-unit>
       <trans-unit id="8526724513361212996" datatype="html">
         <source>Roller kopieret</source>
       </trans-unit>
@@ -5100,6 +5097,48 @@
       </trans-unit>
       <trans-unit id="810543436502151784" datatype="html">
         <source>Nedarver</source>
+      </trans-unit>
+      <trans-unit id="2581887775164854038" datatype="html">
+        <source>Kopier roller til</source>
+      </trans-unit>
+      <trans-unit id="29832309535656200" datatype="html">
+        <source>System</source>
+      </trans-unit>
+      <trans-unit id="3051919120993673498" datatype="html">
+        <source>
+          <x id="PH" equiv-text="this.snackbarText"/>
+          <x id="PH_1" equiv-text="this.buttonNumberText()"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="3118206486836195151" datatype="html">
+        <source>Der er ikke flere kontrakter at overføre</source>
+      </trans-unit>
+      <trans-unit id="4197097943225405677" datatype="html">
+        <source>Overfør kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4416290763660062288" datatype="html">
+        <source/>
+      </trans-unit>
+      <trans-unit id="4451069668768368167" datatype="html">
+        <source>Underordnet kontrakter</source>
+      </trans-unit>
+      <trans-unit id="5050471481386035781" datatype="html">
+        <source>Slet kontrakt</source>
+      </trans-unit>
+      <trans-unit id="6176199424956130195" datatype="html">
+        <source>Ingen data</source>
+      </trans-unit>
+      <trans-unit id="6872051229214902883" datatype="html">
+        <source>Vælg handling for kontrakter</source>
+      </trans-unit>
+      <trans-unit id="8402696305361715603" datatype="html">
+        <source>Transfer</source>
+      </trans-unit>
+      <trans-unit id="862924224019392737" datatype="html">
+        <source>Er du sikker på du vil slette denne kontrakt? Kontraktens underordnede kontrakter vil blive slettet sammen med den. De underordnede kontrakter kan også overføres til en anden kontrakt. </source>
+      </trans-unit>
+      <trans-unit id="8750750261302099129" datatype="html">
+        <source>Vælg handling for valgte roller</source>
       </trans-unit>
     </body>
   </file>

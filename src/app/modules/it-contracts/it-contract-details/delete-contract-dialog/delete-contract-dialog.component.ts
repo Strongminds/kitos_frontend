@@ -125,7 +125,7 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     const instance = dialogRef.componentInstance;
     instance.title = $localize`Overfør kontrakter`;
     instance.emptyStateText = $localize`Der er ikke flere kontrakter at overføre`;
-    instance.snackbarText = $localize`Choose how to handle the contracts`;
+    instance.snackbarText = $localize`Vælg handling for kontrakter`;
     instance.sections = dialogSections;
     instance.actionButtons = dialogActions;
     instance.dropdownTitle = $localize`Overordnet kontrakt`;

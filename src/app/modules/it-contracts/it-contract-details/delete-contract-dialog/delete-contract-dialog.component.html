@@ -3,11 +3,9 @@
     <ng-container *ngIf="subHierarchy$ | async as hierarchy">
       <ng-container *ngIf="hierarchy.length > 1">
         <app-paragraph paragraphSize="medium" i18n
-          >Kontrakten har underkontrakter. Disse vil blive slettet sammen med hovedkontrakten.
+          >Er du sikker på du vil slette denne kontrakt? Kontraktens underordnede kontrakter vil blive slettet sammen
+          med den. De underordnede kontrakter kan også overføres til en anden kontrakt.
         </app-paragraph>
-        <app-paragraph paragraphSize="medium" i18n
-          >Hvis du vil undgå dette, så overfør dem til en anden kontrakt</app-paragraph
-        >
       </ng-container>
       <app-paragraph *ngIf="hierarchy.length <= 1" paragraphSize="medium" i18n
         >Er du sikker på, at du vil slette kontrakten?</app-paragraph
