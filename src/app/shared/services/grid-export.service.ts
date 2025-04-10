@@ -84,9 +84,11 @@ export class GridExportService {
           case 'contract-audit':
             {
               const audit = transformedItem[field] as OverviewAuditModel;
-              transformedItem[
-                field
-              ] = $localize`Hvid: ${audit.white}, Rød: ${audit.red}, Gul: ${audit.yellow}, Grøn: ${audit.green}, Max: ${audit.max}`;
+
+              transformedItem[field] =
+                audit.total === 0
+                  ? ''
+                  : $localize`Hvid: ${audit.white}, Rød: ${audit.red}, Gul: ${audit.yellow}, Grøn: ${audit.green}, Max: ${audit.total}`;
             }
             break;
           default:

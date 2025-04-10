@@ -64,7 +64,7 @@ export const adaptITContract = (value: any): ITContract | undefined => {
       : formatProcurementPlan(value.ProcurementPlanYear, value.ProcurementPlanQuarter);
 
   const audit = {
-    max: value.AuditStatusGreen + value.AuditStatusRed + value.AuditStatusWhite + value.AuditStatusYellow,
+    total: value.AuditStatusGreen + value.AuditStatusRed + value.AuditStatusWhite + value.AuditStatusYellow,
     green: value.AuditStatusGreen,
     red: value.AuditStatusRed,
     yellow: value.AuditStatusYellow,

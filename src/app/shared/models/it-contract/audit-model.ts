@@ -1,7 +1,7 @@
 import { APIPaymentResponseDTO } from 'src/app/api/v2';
 
 export interface OverviewAuditModel {
-  max: number;
+  total: number;
   green: number;
   red: number;
   yellow: number;
