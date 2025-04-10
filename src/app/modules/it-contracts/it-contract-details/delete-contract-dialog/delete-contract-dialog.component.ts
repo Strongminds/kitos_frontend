@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { map, Observable, takeWhile } from 'rxjs';
+import { filter, first, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   BulkActionButton,
@@ -24,7 +24,7 @@ import { ItContractHierarchyComponentStore } from '../it-contract-hierarchy/it-c
   providers: [ItContractHierarchyComponentStore],
 })
 export class DeleteContractDialogComponent extends BaseComponent implements OnInit {
-  public readonly hierarchy$ = this.componentStore.subHierarchy$;
+  public readonly subHierarchy$ = this.componentStore.subHierarchy$;
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());
 
   public isLoading = false;
@@ -52,20 +52,17 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     const dialogRef = this.setupDialog(contractUuid);
 
     this.subscriptions.add(
-      this.hierarchy$
+      this.subHierarchy$
         .pipe(
-          takeWhile((hierarchy) => hierarchy.length > 1, true) // Keep the subscription while the condition is true
+          filter((hierarchy) => hierarchy.length <= 1),
+          first()
         )
-        .subscribe((hierarchy) => {
-          if (hierarchy.length <= 1) {
-            dialogRef.close();
-          }
-        })
+        .subscribe(() => dialogRef.close())
     );
   }
 
   public getHierarchy$(contractUuid: string): Observable<BulkActionOption[]> {
-    return this.hierarchy$.pipe(
+    return this.subHierarchy$.pipe(
       map((hierarchy) =>
         hierarchy
           .filter((node) => node.node.uuid !== contractUuid)
@@ -119,20 +116,22 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
       {
         options$: this.getHierarchy$(contractUuid),
         entityType: 'it-contract',
-        title: $localize`Children contracts`,
+        title: $localize`Underordnet kontrakter`,
         primaryColumnTitle: $localize`Kontrakt`,
         secondaryColumnTitle: $localize`Overordnet kontrakt`,
       },
     ] as BulkActionSection[];
 
     const instance = dialogRef.componentInstance;
-    instance.title = $localize`Transfer contracts`;
-    instance.emptyStateText = $localize`No contracts aligible for transfer have been found`;
+    instance.title = $localize`Overfør kontrakter`;
+    instance.emptyStateText = $localize`Der er ikke flere kontrakter at overføre`;
     instance.snackbarText = $localize`Choose how to handle the contracts`;
     instance.sections = dialogSections;
     instance.actionButtons = dialogActions;
     instance.dropdownTitle = $localize`Overordnet kontrakt`;
-    instance.dropdownDisabledUuids$ = this.hierarchy$.pipe(map((hierarchy) => hierarchy.map((node) => node.node.uuid)));
+    instance.dropdownDisabledUuids$ = this.subHierarchy$.pipe(
+      map((hierarchy) => hierarchy.map((node) => node.node.uuid))
+    );
     instance.dropdownType = 'it-contract';
     instance.allowEmptyDropdownSelection = true;
     instance.isLoading$ = this.componentStore.isLoading$;

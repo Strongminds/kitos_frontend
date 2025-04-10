@@ -158,7 +158,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
     const instance = dialogRef.componentInstance;
     instance.title = $localize`Kopier roller`;
-    instance.emptyStateText = $localize`No user roles have been found`;
+    instance.emptyStateText = $localize`Brugeren har ingen roller`;
     instance.snackbarText = $localize`Vælg handling for valgte roller`;
     instance.sections = dialogSections;
     instance.actionButtons = dialogActions;

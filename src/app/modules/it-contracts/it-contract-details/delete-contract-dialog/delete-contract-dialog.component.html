@@ -1,29 +1,35 @@
-<app-dialog title="Delete contract" i18n-title data-cy="confirm-dialog">
-  <app-standard-vertical-content-grid *ngIf="contractUuid$ | async as contractUuid">
-    <ng-container *ngIf="hierarchy$ | async as hierarchy">
-      <ng-container>
-        <ng-container *ngIf="hierarchy.length > 1">
-          <app-paragraph paragraphSize="medium" i18n
-            >Contract contains children contracts. Those will be deleted together with master, if you want to avoid that
-            transfer them to a different parent contract</app-paragraph
-          >
-          <app-button
-            (buttonClick)="openTransferDialog(contractUuid)"
-            [disabled]="isLoading"
-            buttonStyle="secondary"
-            color="warn"
-            i18n
-            >Open contracts transfer</app-button
-          >
-        </ng-container>
-        <app-paragraph paragraphSize="medium" i18n>Er du sikker på, at du vil slette kontrakten</app-paragraph>
+<app-dialog title="Slet kontrakt" i18n-title data-cy="confirm-dialog" *ngIf="contractUuid$ | async as contractUuid">
+  <app-standard-vertical-content-grid>
+    <ng-container *ngIf="subHierarchy$ | async as hierarchy">
+      <ng-container *ngIf="hierarchy.length > 1">
+        <app-paragraph paragraphSize="medium" i18n
+          >Kontrakten har underkontrakter. Disse vil blive slettet sammen med hovedkontrakten.
+        </app-paragraph>
+        <app-paragraph paragraphSize="medium" i18n
+          >Hvis du vil undgå dette, så overfør dem til en anden kontrakt</app-paragraph
+        >
       </ng-container>
+      <app-paragraph *ngIf="hierarchy.length <= 1" paragraphSize="medium" i18n
+        >Er du sikker på, at du vil slette kontrakten?</app-paragraph
+      >
     </ng-container>
   </app-standard-vertical-content-grid>
   <app-dialog-actions>
     <app-button buttonStyle="secondary" (buttonClick)="cancel()" [disabled]="isLoading" size="large" i18n
       >Nej</app-button
     >
+    <ng-container *ngIf="subHierarchy$ | async as hierarchy">
+      <app-button
+        *ngIf="hierarchy.length > 1"
+        (buttonClick)="openTransferDialog(contractUuid)"
+        [disabled]="isLoading"
+        buttonStyle="secondary"
+        color="warn"
+        size="large"
+        i18n
+        >Overfør kontrakter</app-button
+      >
+    </ng-container>
     <app-button (buttonClick)="confirm()" color="warn" data-cy="confirm-button" [disabled]="isLoading" size="large" i18n
       >Ja</app-button
     >

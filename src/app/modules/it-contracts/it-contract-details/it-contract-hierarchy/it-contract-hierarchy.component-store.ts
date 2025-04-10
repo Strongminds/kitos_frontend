@@ -92,7 +92,7 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
             })
             .pipe(
               tapResponse(
-                () => this.getHierarchy(request.currentParentUuid),
+                () => this.getSubHierarchy(request.currentParentUuid),
                 (e) => {
                   console.error(e);
                   this.updateIsLoading(false);
