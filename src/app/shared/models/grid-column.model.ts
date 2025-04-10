@@ -43,7 +43,8 @@ export interface GridColumn {
     | 'uuid-to-name'
     | 'excel-only'
     | 'action-buttons'
-    | 'integer-with-thousands-separator'; //Style of the column
+    | 'integer-with-thousands-separator'
+    | 'contract-audit'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden

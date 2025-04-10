@@ -1936,18 +1936,6 @@
       <trans-unit id="5960176024187087505" datatype="html">
         <source>Audit dato</source>
       </trans-unit>
-      <trans-unit id="7714110594292272072" datatype="html">
-        <source>Audit status: grøn</source>
-      </trans-unit>
-      <trans-unit id="5825713374970966816" datatype="html">
-        <source>Audit status: rød</source>
-      </trans-unit>
-      <trans-unit id="5083080824036369784" datatype="html">
-        <source>Audit status: gul</source>
-      </trans-unit>
-      <trans-unit id="7902716833517761584" datatype="html">
-        <source>Audit status: hvid</source>
-      </trans-unit>
       <trans-unit id="5445471729146930289" datatype="html">
         <source>Varighed</source>
       </trans-unit>
@@ -5100,6 +5088,12 @@
       </trans-unit>
       <trans-unit id="810543436502151784" datatype="html">
         <source>Nedarver</source>
+      </trans-unit>
+      <trans-unit id="1620385434838836828" datatype="html">
+        <source>Audit status</source>
+      </trans-unit>
+      <trans-unit id="3407587864810413529" datatype="html">
+        <source>Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.max"/></source>
       </trans-unit>
     </body>
   </file>

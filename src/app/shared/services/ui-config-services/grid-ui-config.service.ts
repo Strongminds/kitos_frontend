@@ -227,10 +227,7 @@ export class GridUIConfigService {
             ContractFields.AccumulatedOperationCost,
             ContractFields.AccumulatedOtherCost,
             ContractFields.LatestAuditDate,
-            ContractFields.AuditStatusWhite,
-            ContractFields.AuditStatusYellow,
-            ContractFields.AuditStatusRed,
-            ContractFields.AuditStatusGreen,
+            ContractFields.AuditStatus,
           ])
         ),
 
