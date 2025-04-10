@@ -44,7 +44,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
 {
   @Input() public title = $localize`Bekræft handling`;
   @Input() public emptyStateText = $localize`Ingen data`;
-  @Input() public snackbarText = $localize``;
+  @Input() public snackbarText = $localize`Vælge`;
   @Input() public sections!: BulkActionSection[];
   @Input() public actionButtons!: BulkActionButton[];
   @Input() public requireConfirmation = false;
