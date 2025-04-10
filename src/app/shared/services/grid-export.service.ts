@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { NO_TEXT, YES_TEXT } from '../constants/constants';
 import { validateUrl } from '../helpers/link.helpers';
 import { GridColumn } from '../models/grid-column.model';
+import { OverviewAuditModel } from '../models/it-contract/audit-model';
 import { AppDatePipe } from '../pipes/app-date.pipe';
 
 @Injectable({
@@ -78,6 +79,16 @@ export class GridExportService {
             {
               const date = transformedItem[field] as Date;
               transformedItem[field] = this.appDatePipe.transform(date) ?? '';
+            }
+            break;
+          case 'contract-audit':
+            {
+              const audit = transformedItem[field] as OverviewAuditModel;
+
+              transformedItem[field] =
+                audit.total === 0
+                  ? ''
+                  : $localize`Hvid: ${audit.white}, Rød: ${audit.red}, Gul: ${audit.yellow}, Grøn: ${audit.green}, Max: ${audit.total}`;
             }
             break;
           default:

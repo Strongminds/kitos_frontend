@@ -146,6 +146,7 @@ import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-
 import { GridColumnConfigButtonsComponent } from './grid-options-button/grid-column-config-buttons/grid-column-config-buttons.component';
 import { GridFilterButtonsComponent } from './grid-options-button/grid-filter-buttons/grid-filter-buttons.component';
 import { ActionButtonsCellComponent } from './grid/grid-cell/cell-types/action-buttons-cell/action-buttons-cell.component';
+import { AuditCellComponent } from './grid/grid-cell/cell-types/audit-cell/audit-cell.component';
 import { BooleanCellComponent } from './grid/grid-cell/cell-types/boolean-cell/boolean-cell.component';
 import { CheckboxCellComponent } from './grid/grid-cell/cell-types/checkbox-cell/checkbox-cell.component';
 import { DateCellComponent } from './grid/grid-cell/cell-types/date-cell/date-cell.component';
@@ -346,6 +347,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UuidToNameCellComponent,
     ActionButtonsCellComponent,
     DetailsPageLinkWithTooltipComponent,
+    AuditCellComponent,
     BulkActionDialogComponent,
     BulkActionDialogSectionComponent,
     ContractsDropdownComponent,

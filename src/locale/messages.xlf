@@ -1936,18 +1936,6 @@
       <trans-unit id="5960176024187087505" datatype="html">
         <source>Audit dato</source>
       </trans-unit>
-      <trans-unit id="7714110594292272072" datatype="html">
-        <source>Audit status: grøn</source>
-      </trans-unit>
-      <trans-unit id="5825713374970966816" datatype="html">
-        <source>Audit status: rød</source>
-      </trans-unit>
-      <trans-unit id="5083080824036369784" datatype="html">
-        <source>Audit status: gul</source>
-      </trans-unit>
-      <trans-unit id="7902716833517761584" datatype="html">
-        <source>Audit status: hvid</source>
-      </trans-unit>
       <trans-unit id="5445471729146930289" datatype="html">
         <source>Varighed</source>
       </trans-unit>
@@ -5098,6 +5086,12 @@
       <trans-unit id="810543436502151784" datatype="html">
         <source>Nedarver</source>
       </trans-unit>
+      <trans-unit id="1620385434838836828" datatype="html">
+        <source>Audit status</source>
+      </trans-unit>
+      <trans-unit id="3407587864810413529" datatype="html">
+        <source>Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.total"/></source>
+      </trans-unit>
       <trans-unit id="2581887775164854038" datatype="html">
         <source>Kopier roller til</source>
       </trans-unit>
@@ -5116,14 +5110,20 @@
       <trans-unit id="4197097943225405677" datatype="html">
         <source>Overfør kontrakter</source>
       </trans-unit>
-      <trans-unit id="4416290763660062288" datatype="html">
-        <source/>
-      </trans-unit>
       <trans-unit id="4451069668768368167" datatype="html">
         <source>Underordnet kontrakter</source>
       </trans-unit>
+      <trans-unit id="4534305672667817010" datatype="html">
+        <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
+      </trans-unit>
       <trans-unit id="5050471481386035781" datatype="html">
         <source>Slet kontrakt</source>
+      </trans-unit>
+      <trans-unit id="5681409232995626808" datatype="html">
+        <source>Vælge</source>
+      </trans-unit>
+      <trans-unit id="609393622749372398" datatype="html">
+        <source>Er du sikker på at du vil overføre de valgte kontrakter?</source>
       </trans-unit>
       <trans-unit id="6176199424956130195" datatype="html">
         <source>Ingen data</source>
@@ -5139,12 +5139,6 @@
       </trans-unit>
       <trans-unit id="8750750261302099129" datatype="html">
         <source>Vælg handling for valgte roller</source>
-      </trans-unit>
-      <trans-unit id="4534305672667817010" datatype="html">
-        <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
-      </trans-unit>
-      <trans-unit id="609393622749372398" datatype="html">
-        <source>Er du sikker på at du vil overføre de valgte kontrakter?</source>
       </trans-unit>
     </body>
   </file>

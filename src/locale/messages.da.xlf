@@ -4179,22 +4179,6 @@
         <source>Audit dato</source>
         <target state="new">Audit dato</target>
       </trans-unit>
-      <trans-unit id="7714110594292272072" datatype="html">
-        <source>Audit status: grøn</source>
-        <target state="new">Audit status: grøn</target>
-      </trans-unit>
-      <trans-unit id="5825713374970966816" datatype="html">
-        <source>Audit status: rød</source>
-        <target state="new">Audit status: rød</target>
-      </trans-unit>
-      <trans-unit id="5083080824036369784" datatype="html">
-        <source>Audit status: gul</source>
-        <target state="new">Audit status: gul</target>
-      </trans-unit>
-      <trans-unit id="7902716833517761584" datatype="html">
-        <source>Audit status: hvid</source>
-        <target state="new">Audit status: hvid</target>
-      </trans-unit>
       <trans-unit id="5445471729146930289" datatype="html">
         <source>Varighed</source>
         <target state="new">Varighed</target>
@@ -6713,6 +6697,14 @@
         <source>Nedarver kontrakten sin overordnedes gyldighed</source>
         <target state="new">Nedarver kontrakten sin overordnedes gyldighed</target>
       </trans-unit>
+      <trans-unit id="1620385434838836828" datatype="html">
+        <source>Audit status</source>
+        <target state="new">Audit status</target>
+      </trans-unit>
+      <trans-unit id="3407587864810413529" datatype="html">
+        <source>Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.total"/></source>
+        <target state="new">Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.total"/></target>
+      </trans-unit>
       <trans-unit id="5050471481386035781" datatype="html">
         <source>Slet kontrakt</source>
         <target state="new">Slet kontrakt</target>
@@ -6724,6 +6716,10 @@
       <trans-unit id="4197097943225405677" datatype="html">
         <source>Overfør kontrakter</source>
         <target state="new">Overfør kontrakter</target>
+      </trans-unit>
+      <trans-unit id="4534305672667817010" datatype="html">
+        <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
+        <target state="new">Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</target>
       </trans-unit>
       <trans-unit id="8402696305361715603" datatype="html">
         <source>Transfer</source>
@@ -6757,9 +6753,13 @@
         <source>Ingen data</source>
         <target state="new">Ingen data</target>
       </trans-unit>
-      <trans-unit id="4416290763660062288" datatype="html">
-        <source/>
-        <target state="new"/>
+      <trans-unit id="5681409232995626808" datatype="html">
+        <source>Vælge</source>
+        <target state="new">Vælge</target>
+      </trans-unit>
+      <trans-unit id="609393622749372398" datatype="html">
+        <source>Er du sikker på at du vil overføre de valgte kontrakter?</source>
+        <target state="new">Er du sikker på at du vil overføre de valgte kontrakter?</target>
       </trans-unit>
       <trans-unit id="3051919120993673498" datatype="html">
         <source>
@@ -6770,14 +6770,6 @@
           <x id="PH" equiv-text="this.snackbarText"/>
           <x id="PH_1" equiv-text="this.buttonNumberText()"/>
         </target>
-      </trans-unit>
-      <trans-unit id="4534305672667817010" datatype="html">
-        <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
-        <target state="new">Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</target>
-      </trans-unit>
-      <trans-unit id="609393622749372398" datatype="html">
-        <source>Er du sikker på at du vil overføre de valgte kontrakter?</source>
-        <target state="new">Er du sikker på at du vil overføre de valgte kontrakter?</target>
       </trans-unit>
     </body>
   </file>
