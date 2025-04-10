@@ -355,6 +355,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       title: $localize`Audit status`,
       section: ECONOMY_SECTION_NAME,
       noFilter: true,
+      sortable: false,
       hidden: false,
       idField: 'audit-status',
       style: 'contract-audit',

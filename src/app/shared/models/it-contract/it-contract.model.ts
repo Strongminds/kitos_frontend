@@ -41,10 +41,6 @@ export interface ITContract {
   AccumulatedOtherCost: number;
   LatestAuditDate: Date;
   AuditStatus: OverviewAuditModel;
-  AuditStatusGreen: number;
-  AuditStatusRed: number;
-  AuditStatusWhite: number;
-  AuditStatusYellow: number;
   OperationRemunerationBegunDate: Date;
   PaymentModelName: string;
   PaymentFrequencyName: string;
@@ -116,10 +112,6 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     OperationRemunerationBegunDate: value.OperationRemunerationBegunDate,
     LatestAuditDate: value.LatestAuditDate,
     AuditStatus: audit,
-    AuditStatusGreen: value.AuditStatusGreen,
-    AuditStatusRed: value.AuditStatusRed,
-    AuditStatusWhite: value.AuditStatusWhite,
-    AuditStatusYellow: value.AuditStatusYellow,
     PaymentModelName: value.PaymentModelName,
     PaymentFrequencyName: value.PaymentFrequencyName,
     Duration: value.Duration,

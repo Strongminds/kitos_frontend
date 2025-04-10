@@ -5092,6 +5092,9 @@
       <trans-unit id="1620385434838836828" datatype="html">
         <source>Audit status</source>
       </trans-unit>
+      <trans-unit id="3407587864810413529" datatype="html">
+        <source>Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.max"/></source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
