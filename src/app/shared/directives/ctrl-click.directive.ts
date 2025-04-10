@@ -26,10 +26,11 @@ export class CtrlClickDirective implements OnInit, OnDestroy {
     if (!event.ctrlKey && event.button !== 1) return;
 
     const relativeUrl = this.router.serializeUrl(this.routerLink.urlTree ?? new UrlTree());
-    const fullUrl = window.location.origin + relativeUrl;
+    const baseHref = document.querySelector('base')?.getAttribute('href') || '/';
+
+    const fullUrl = window.location.origin + baseHref.replace(/\/?$/, '/') + relativeUrl.replace(/^\//, '');
 
     window.open(fullUrl, '_blank');
-
     event.preventDefault();
     event.stopImmediatePropagation();
   }
