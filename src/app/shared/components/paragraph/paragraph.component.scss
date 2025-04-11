@@ -65,7 +65,7 @@
 /* expand content to its full length on mouseover */
 .might-overflow:hover {
   text-overflow: clip;
-  word-break: break-all;
+  word-break: keep-all;
   white-space: normal;
 }
 
