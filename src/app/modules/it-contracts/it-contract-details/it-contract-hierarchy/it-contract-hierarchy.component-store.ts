@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
+import { Store } from '@ngrx/store';
 
 import { Observable, mergeMap, switchMap, tap } from 'rxjs';
 import {
@@ -8,6 +9,7 @@ import {
   APIV2ItContractInternalINTERNALService,
 } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 
 interface State {
   loading: boolean;
@@ -23,7 +25,8 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
 
   constructor(
     @Inject(APIV2ItContractInternalINTERNALService)
-    private apiItContractInternalService: APIV2ItContractInternalINTERNALService
+    private apiItContractInternalService: APIV2ItContractInternalINTERNALService,
+    private store: Store
   ) {
     super({ loading: false });
   }
@@ -92,7 +95,11 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
             })
             .pipe(
               tapResponse(
-                () => this.getSubHierarchy(request.currentParentUuid),
+                () => {
+                  this.store.dispatch(ITContractActions.transferContractsSuccess());
+
+                  return this.getSubHierarchy(request.currentParentUuid);
+                },
                 (e) => {
                   console.error(e);
                   this.updateIsLoading(false);

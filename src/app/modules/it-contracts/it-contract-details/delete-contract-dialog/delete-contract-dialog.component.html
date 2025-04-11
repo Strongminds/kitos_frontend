@@ -1,6 +1,6 @@
 <app-dialog title="Slet kontrakt" i18n-title data-cy="confirm-dialog" *ngIf="contractUuid$ | async as contractUuid">
   <app-standard-vertical-content-grid>
-    <ng-container *ngIf="subHierarchy$ | async as hierarchy">
+    <div *ngIf="subHierarchy$ | async as hierarchy" class="text-container">
       <ng-container *ngIf="hierarchy.length > 1">
         <app-paragraph paragraphSize="medium" i18n
           >Er du sikker på du vil slette denne kontrakt? Kontraktens underordnede kontrakter vil blive slettet sammen
@@ -10,7 +10,7 @@
       <app-paragraph *ngIf="hierarchy.length <= 1" paragraphSize="medium" i18n
         >Er du sikker på, at du vil slette kontrakten?</app-paragraph
       >
-    </ng-container>
+    </div>
   </app-standard-vertical-content-grid>
   <app-dialog-actions>
     <app-button buttonStyle="secondary" (buttonClick)="cancel()" [disabled]="isLoading" size="large" i18n
