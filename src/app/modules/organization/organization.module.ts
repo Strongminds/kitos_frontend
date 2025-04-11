@@ -9,15 +9,14 @@ import { RegistrationsRolesSectionComponent } from './organization-structure/edi
 import { OrganizationStructureComponent } from './organization-structure/organization-structure.component';
 import { OrganizationUnitRoleTableComponent } from './organization-structure/organization-unit-role-table/organization-unit-role-table.component';
 import { CreateUserDialogComponent } from './organization-users/create-user-dialog/create-user-dialog.component';
+import { DeleteUserDialogComponent } from './organization-users/delete-user-dialog/delete-user-dialog.component';
+import { EditUserDialogComponent } from './organization-users/edit-user-dialog/edit-user-dialog.component';
+import { ManageUserRoleTableComponent } from './organization-users/manage-user-role-table/manage-user-role-table.component';
 import { OrganizationUsersComponent } from './organization-users/organization-users.component';
 import { UserInfoDialogComponent } from './organization-users/user-info-dialog/user-info-dialog.component';
-import { EditUserDialogComponent } from './organization-users/edit-user-dialog/edit-user-dialog.component';
+import { UserRoleTableComponent } from './organization-users/user-info-dialog/user-role-table/user-role-table.component';
 import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
-import { CopyRolesDialogComponent } from './organization-users/copy-roles-dialog/copy-roles-dialog.component';
-import { ManageUserRoleTableComponent } from './organization-users/copy-roles-dialog/manage-user-role-table/manage-user-role-table.component';
-import { UserRoleTableComponent } from './organization-users/user-info-dialog/user-role-table/user-role-table.component';
-import { DeleteUserDialogComponent } from './organization-users/delete-user-dialog/delete-user-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +33,6 @@ import { DeleteUserDialogComponent } from './organization-users/delete-user-dial
     OrganizationUnitRoleTableComponent,
     EditUserDialogComponent,
     CreateUserDialogComponent,
-    CopyRolesDialogComponent,
     ManageUserRoleTableComponent,
     DeleteUserDialogComponent,
   ],

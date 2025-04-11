@@ -131,16 +131,37 @@ import { AccordionHeaderComponent } from './accordion-header/accordion-header.co
 import { BooleanCircleComponent } from './boolean-circle/boolean-circle.component';
 import { CheckboxButtonComponent } from './buttons/checkbox-button/checkbox-button.component';
 import { DetailsPageLinkWithTooltipComponent } from './details-page-link/details-page-link-with-tooltip/details-page-link-with-tooltip.component';
+import { BulkActionDialogSectionComponent } from './dialogs/bulk-action-dialog/bulk-action-dialog-section/bulk-action-dialog-section.component';
+import { BulkActionDialogComponent } from './dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { CreateHelpTextDialogComponent } from './dialogs/create-help-text-dialog/create-help-text-dialog.component';
 import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
+import { ContractsDropdownComponent } from './dropdowns/contracts-dropdown/contracts-dropdown.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
+import { UserDropdownComponent } from './dropdowns/user-dropdown/user-dropdown.component';
 import { FileInputComponent } from './file-input/file-input.component';
 import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
 import { GlobalOptionTypeGridComponent } from './global-option-type-view/global-option-type-grid/global-option-type-grid.component';
 import { GlobalOptionTypeViewComponent } from './global-option-type-view/global-option-type-view.component';
 import { GridColumnConfigButtonsComponent } from './grid-options-button/grid-column-config-buttons/grid-column-config-buttons.component';
 import { GridFilterButtonsComponent } from './grid-options-button/grid-filter-buttons/grid-filter-buttons.component';
+import { ActionButtonsCellComponent } from './grid/grid-cell/cell-types/action-buttons-cell/action-buttons-cell.component';
+import { AuditCellComponent } from './grid/grid-cell/cell-types/audit-cell/audit-cell.component';
+import { BooleanCellComponent } from './grid/grid-cell/cell-types/boolean-cell/boolean-cell.component';
+import { CheckboxCellComponent } from './grid/grid-cell/cell-types/checkbox-cell/checkbox-cell.component';
+import { DateCellComponent } from './grid/grid-cell/cell-types/date-cell/date-cell.component';
+import { DefaultWrapCellComponent } from './grid/grid-cell/cell-types/default-wrap-cell/default-wrap-cell.component';
+import { EnumCellComponent } from './grid/grid-cell/cell-types/enum-cell/enum-cell.component';
+import { LinkCellComponent } from './grid/grid-cell/cell-types/link-cell/link-cell.component';
+import { PageLinkArrayCellComponent } from './grid/grid-cell/cell-types/page-link-array-cell/page-link-array-cell.component';
+import { PageLinkCellComponent } from './grid/grid-cell/cell-types/page-link-cell/page-link-cell.component';
+import { PrimaryCellComponent } from './grid/grid-cell/cell-types/primary-cell/primary-cell.component';
+import { StatusCellComponent } from './grid/grid-cell/cell-types/status-cell/status-cell.component';
+import { TextCellComponent } from './grid/grid-cell/cell-types/text-cell/text-cell.component';
+import { ThousandSeperatorCellComponent } from './grid/grid-cell/cell-types/thousand-seperator-cell/thousand-seperator-cell.component';
+import { TitleLinkCellComponent } from './grid/grid-cell/cell-types/title-link-cell/title-link-cell.component';
+import { UsagesCellComponent } from './grid/grid-cell/cell-types/usages-cell/usages-cell.component';
+import { UuidToNameCellComponent } from './grid/grid-cell/cell-types/uuid-to-name-cell/uuid-to-name-cell.component';
 import { GridCellComponent } from './grid/grid-cell/grid-cell.component';
 import { GridUsagesConsequencesDialogComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
 import { UsageMigrationConsequencesTableComponent } from './grid/it-system-usage-column/grid-usages-consequences-dialog/usage-migration-consequences-table/usage-migration-consequences-table.component';
@@ -167,25 +188,7 @@ import { RoleTableContainerComponent } from './role-table/role-table-container/r
 import { SectionComponent } from './section/section.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
-import { UserDropdownComponent } from './user-dropdown/user-dropdown.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
-import { TextCellComponent } from './grid/grid-cell/cell-types/text-cell/text-cell.component';
-import { StatusCellComponent } from './grid/grid-cell/cell-types/status-cell/status-cell.component';
-import { ThousandSeperatorCellComponent } from './grid/grid-cell/cell-types/thousand-seperator-cell/thousand-seperator-cell.component';
-import { DefaultWrapCellComponent } from './grid/grid-cell/cell-types/default-wrap-cell/default-wrap-cell.component';
-import { PrimaryCellComponent } from './grid/grid-cell/cell-types/primary-cell/primary-cell.component';
-import { BooleanCellComponent } from './grid/grid-cell/cell-types/boolean-cell/boolean-cell.component';
-import { DateCellComponent } from './grid/grid-cell/cell-types/date-cell/date-cell.component';
-import { EnumCellComponent } from './grid/grid-cell/cell-types/enum-cell/enum-cell.component';
-import { LinkCellComponent } from './grid/grid-cell/cell-types/link-cell/link-cell.component';
-import { TitleLinkCellComponent } from './grid/grid-cell/cell-types/title-link-cell/title-link-cell.component';
-import { PageLinkCellComponent } from './grid/grid-cell/cell-types/page-link-cell/page-link-cell.component';
-import { CheckboxCellComponent } from './grid/grid-cell/cell-types/checkbox-cell/checkbox-cell.component';
-import { UsagesCellComponent } from './grid/grid-cell/cell-types/usages-cell/usages-cell.component';
-import { PageLinkArrayCellComponent } from './grid/grid-cell/cell-types/page-link-array-cell/page-link-array-cell.component';
-import { UuidToNameCellComponent } from './grid/grid-cell/cell-types/uuid-to-name-cell/uuid-to-name-cell.component';
-import { ActionButtonsCellComponent } from './grid/grid-cell/cell-types/action-buttons-cell/action-buttons-cell.component';
-import { AuditCellComponent } from './grid/grid-cell/cell-types/audit-cell/audit-cell.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -345,6 +348,9 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     ActionButtonsCellComponent,
     DetailsPageLinkWithTooltipComponent,
     AuditCellComponent,
+    BulkActionDialogComponent,
+    BulkActionDialogSectionComponent,
+    ContractsDropdownComponent,
   ],
   imports: [
     CommonModule,
@@ -491,6 +497,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     UsageMigrationConsequencesTableComponent,
     SectionComponent,
     DetailsPageLinkWithTooltipComponent,
+    ContractsDropdownComponent,
   ],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },

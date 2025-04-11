@@ -59,3 +59,11 @@ export function userHasAnyRights(user: ODataOrganizationUser): boolean {
 export function roleToCopyRoleRequestDTO(user: ODataOrganizationUser, role: Right): APIMutateRightRequestDTO {
   return { userUuid: user.Uuid, roleId: role.role.id, entityUuid: role.entity.uuid };
 }
+
+export function mapToCopyRoleRequestDTO(
+  userUuid: string,
+  roleId: number,
+  entityUuid: string
+): APIMutateRightRequestDTO {
+  return { userUuid: userUuid, roleId: roleId, entityUuid: entityUuid };
+}

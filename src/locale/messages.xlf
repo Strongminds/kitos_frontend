@@ -3703,9 +3703,6 @@
       <trans-unit id="3048587120469429420" datatype="html">
         <source>Kunne ikke kopiere roller</source>
       </trans-unit>
-      <trans-unit id="7680003617143986371" datatype="html">
-        <source>Vælg handling for valgte roller <x id="PH" equiv-text="this.buttonNumberText()"/></source>
-      </trans-unit>
       <trans-unit id="8526724513361212996" datatype="html">
         <source>Roller kopieret</source>
       </trans-unit>
@@ -5093,7 +5090,55 @@
         <source>Audit status</source>
       </trans-unit>
       <trans-unit id="3407587864810413529" datatype="html">
-        <source>Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.max"/></source>
+        <source>Hvid: <x id="PH" equiv-text="audit.white"/>, Rød: <x id="PH_1" equiv-text="audit.red"/>, Gul: <x id="PH_2" equiv-text="audit.yellow"/>, Grøn: <x id="PH_3" equiv-text="audit.green"/>, Max: <x id="PH_4" equiv-text="audit.total"/></source>
+      </trans-unit>
+      <trans-unit id="2581887775164854038" datatype="html">
+        <source>Kopier roller til</source>
+      </trans-unit>
+      <trans-unit id="29832309535656200" datatype="html">
+        <source>System</source>
+      </trans-unit>
+      <trans-unit id="3051919120993673498" datatype="html">
+        <source>
+          <x id="PH" equiv-text="this.snackbarText"/>
+          <x id="PH_1" equiv-text="this.buttonNumberText()"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="3118206486836195151" datatype="html">
+        <source>Der er ikke flere kontrakter at overføre</source>
+      </trans-unit>
+      <trans-unit id="4197097943225405677" datatype="html">
+        <source>Overfør kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4451069668768368167" datatype="html">
+        <source>Underordnet kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4534305672667817010" datatype="html">
+        <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
+      </trans-unit>
+      <trans-unit id="5050471481386035781" datatype="html">
+        <source>Slet kontrakt</source>
+      </trans-unit>
+      <trans-unit id="5681409232995626808" datatype="html">
+        <source>Vælge</source>
+      </trans-unit>
+      <trans-unit id="609393622749372398" datatype="html">
+        <source>Er du sikker på at du vil overføre de valgte kontrakter?</source>
+      </trans-unit>
+      <trans-unit id="6176199424956130195" datatype="html">
+        <source>Ingen data</source>
+      </trans-unit>
+      <trans-unit id="6872051229214902883" datatype="html">
+        <source>Vælg handling for kontrakter</source>
+      </trans-unit>
+      <trans-unit id="8402696305361715603" datatype="html">
+        <source>Transfer</source>
+      </trans-unit>
+      <trans-unit id="862924224019392737" datatype="html">
+        <source>Er du sikker på du vil slette denne kontrakt? Kontraktens underordnede kontrakter vil blive slettet sammen med den. De underordnede kontrakter kan også overføres til en anden kontrakt. </source>
+      </trans-unit>
+      <trans-unit id="8750750261302099129" datatype="html">
+        <source>Vælg handling for valgte roller</source>
       </trans-unit>
     </body>
   </file>

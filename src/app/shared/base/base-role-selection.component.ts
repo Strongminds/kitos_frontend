@@ -1,9 +1,9 @@
 import { Actions } from '@ngrx/effects';
 import { APIMutateRightRequestDTO, APIMutateUserRightsRequestDTO } from 'src/app/api/v2';
-import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { roleToCopyRoleRequestDTO } from '../helpers/user-role.helpers';
 import { ODataOrganizationUser, Right } from '../models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
+import { RoleSelectionService } from '../services/role-selector-service';
 import { BaseComponent } from './base.component';
 
 export abstract class RoleSelectionBaseComponent extends BaseComponent {
@@ -38,7 +38,7 @@ export abstract class RoleSelectionBaseComponent extends BaseComponent {
   }
 
   public isAnySelected(): boolean {
-    return this.getSelectedUserRights().length > 0;
+    return this.selectionService.isAnySelected();
   }
 
   protected getRequest(user: ODataOrganizationUser): APIMutateUserRightsRequestDTO {

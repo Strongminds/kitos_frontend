@@ -1,10 +1,10 @@
-@import 'theme';
+@import "theme";
 
 app-standard-vertical-content-grid {
   width: 100%;
 }
 
-.copy-roles-button {
+.perform-action-button {
   flex: none;
 }
 
@@ -16,6 +16,6 @@ app-dialog-actions {
   padding-top: 0px !important;
 }
 
-.some-class ::ng-deep .content {
+.removed-padding ::ng-deep .content {
   padding-bottom: 0px !important;
 }
