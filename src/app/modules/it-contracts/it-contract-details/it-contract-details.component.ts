@@ -3,9 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { combineAND } from 'src/app/shared/helpers/observable-helpers';
@@ -31,6 +30,7 @@ import {
   selectItContractEnableItSystems,
   selectItContractEnableReferences,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { DeleteContractDialogComponent } from './delete-contract-dialog/delete-contract-dialog.component';
 
 @Component({
   selector: 'app-it-contract-details',
@@ -145,27 +145,14 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.deleteITContractSuccess)).subscribe(() => {
+        this.dialog.closeAll();
         this.router.navigate([`${AppPath.itContracts}`]);
       })
     );
   }
 
   public showDeleteDialog(): void {
-    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
-    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil slette kontrakten?`;
-    confirmationDialogInstance.confirmColor = 'warn';
-
-    this.subscriptions.add(
-      confirmationDialogRef
-        .afterClosed()
-        .pipe(first())
-        .subscribe((result) => {
-          if (result === true) {
-            this.store.dispatch(ITContractActions.deleteITContract());
-          }
-        })
-    );
+    this.dialog.open(DeleteContractDialogComponent);
   }
 
   private subscribeToUuidNavigation(): void {

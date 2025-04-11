@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { DeleteContractDialogComponent } from './it-contract-details/delete-contract-dialog/delete-contract-dialog.component';
 import { ItContractDeadlinesComponent } from './it-contract-details/it-contract-deadlines/it-contract-deadlines.component';
 import { ItContractDetailsComponent } from './it-contract-details/it-contract-details.component';
 import { ItContractDprComponent } from './it-contract-details/it-contract-dpr/it-contract-dpr.component';
@@ -41,6 +42,7 @@ import { ITContractsComponent } from './overview/it-contracts.component';
     ColorCircleComponent,
     PaymentDialogComponent,
     AuditPickerComponent,
+    DeleteContractDialogComponent,
   ],
   imports: [ITContractsRouterModule, CommonModule, SharedModule, MatSelectModule, NgSelectModule],
 })

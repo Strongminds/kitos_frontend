@@ -253,6 +253,7 @@ model/localRegularOptionUpdateRequestDTO.ts
 model/localRoleOptionResponseDTO.ts
 model/models.ts
 model/multipleConflictsResponseDTO.ts
+model/multipleContractsRequestDto.ts
 model/mutateRightRequestDTO.ts
 model/mutateUserRightsRequestDTO.ts
 model/namedEntityV2DTO.ts

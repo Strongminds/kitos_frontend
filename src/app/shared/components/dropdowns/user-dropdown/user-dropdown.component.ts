@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
-import { UserDropdownComponentStore } from './user-dropdown.component-store';
 import { combineLatestWith, map, Observable, of } from 'rxjs';
-import { ShallowUser } from '../../models/userV2.model';
+import { ShallowUser } from '../../../models/userV2.model';
+import { UserDropdownComponentStore } from './user-dropdown.component-store';
 
 @Component({
   selector: 'app-user-dropdown',

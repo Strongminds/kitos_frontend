@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { mapToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from './it-contract-hierarchy.component-store';
 
@@ -20,10 +22,20 @@ export class ItContractHierarchyComponent extends BaseComponent implements OnIni
   public readonly isLoading$ = this.componentStore.isLoading$;
   public readonly extraStatusDisplayTypeValue = BooleanValueDisplayType.RequiresValidParent;
 
-  constructor(private readonly store: Store, private readonly componentStore: ItContractHierarchyComponentStore) {
+  constructor(
+    private readonly store: Store,
+    private readonly componentStore: ItContractHierarchyComponentStore,
+    private readonly actions$: Actions
+  ) {
     super();
   }
   ngOnInit(): void {
     this.componentStore.getHierarchy(this.contractUuid$);
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITContractActions.transferContractsSuccess)).subscribe(() => {
+        this.componentStore.getHierarchy(this.contractUuid$);
+      })
+    );
   }
 }

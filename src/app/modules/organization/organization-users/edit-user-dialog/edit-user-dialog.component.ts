@@ -2,23 +2,34 @@ import { AfterViewInit, Component, Input, OnInit, ViewChild } from '@angular/cor
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { debounceTime } from 'rxjs';
-import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
+import { debounceTime, Observable, of } from 'rxjs';
+import { APIMutateRightRequestDTO, APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
+import {
+  BulkActionButton,
+  BulkActionDialogComponent,
+  BulkActionOption,
+  BulkActionResult,
+  BulkActionSection,
+} from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { MultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
-import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { mapToCopyRoleRequestDTO } from 'src/app/shared/helpers/user-role.helpers';
+import {
+  ODataOrganizationUser,
+  Right,
+} from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import {
   mapUserRoleChoice,
   UserRoleChoice,
 } from 'src/app/shared/models/organization/organization-user/user-role.model';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
-import { CopyRolesDialogComponent } from '../copy-roles-dialog/copy-roles-dialog.component';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -126,14 +137,69 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   public onCopyRoles(): void {
-    const dialogRef = this.dialog.open(CopyRolesDialogComponent, {
+    const dialogActions = [
+      {
+        text: $localize`Kopier roller`,
+        color: 'secondary',
+        buttonStyle: 'secondary',
+        callback: (result) => this.copyRoles(result),
+      },
+    ] as BulkActionButton[];
+
+    const dialogSections = this.getCopyDialogSections();
+
+    const dialogRef = this.dialog.open(BulkActionDialogComponent, {
       width: '50%',
       minWidth: '600px',
       maxWidth: '800px',
       height: 'auto',
       maxHeight: '90vh%',
     });
-    dialogRef.componentInstance.user = this.user;
+
+    const instance = dialogRef.componentInstance;
+    instance.title = $localize`Kopier roller`;
+    instance.emptyStateText = $localize`Brugeren har ingen roller`;
+    instance.snackbarText = $localize`Vælg handling for valgte roller`;
+    instance.sections = dialogSections;
+    instance.actionButtons = dialogActions;
+    instance.dropdownTitle = $localize`Kopier roller til`;
+    instance.dropdownDisabledUuids$ = of([this.user.Uuid]);
+    instance.dropdownType = 'user';
+    instance.successActionTypes = OrganizationUserActions.copyRolesSuccess;
+    instance.errorActionTypes = OrganizationUserActions.copyRolesError;
+  }
+
+  private copyRoles(result: BulkActionResult): void {
+    const request = {
+      unitRights: this.mapResult(result, 'organization-unit'),
+      systemRights: this.mapResult(result, 'it-system'),
+      contractRights: this.mapResult(result, 'it-contract'),
+      dataProcessingRights: this.mapResult(result, 'data-processing-registration'),
+    };
+
+    if (!result.selectedEntityId) {
+      throw new Error('Selected entity ID is undefined');
+    }
+    this.store.dispatch(OrganizationUserActions.copyRoles(this.user.Uuid, result.selectedEntityId, request));
+  }
+
+  private mapResult(result: BulkActionResult, type: RegistrationEntityTypes): APIMutateRightRequestDTO[] {
+    if (!result.selectedEntityId) {
+      throw new Error('Selected entity ID is undefined');
+    }
+    return result.selectedOptions[type].map((option) =>
+      mapToCopyRoleRequestDTO(this.user.Uuid, option.id as number, result.selectedEntityId!)
+    );
+  }
+
+  private mapUserRights(rights: Right[]): Observable<BulkActionOption[]> {
+    return of(
+      rights.map((right) => ({
+        id: right.role.id,
+        name: right.entity.name,
+        secondaryName: right.role.name,
+      }))
+    );
   }
 
   private hasAnythingChanged(): boolean {
@@ -223,5 +289,38 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
   private getEmailControl(): AbstractControl {
     return this.createForm.get('email')!;
+  }
+
+  private getCopyDialogSections(): BulkActionSection[] {
+    return [
+      {
+        options$: this.mapUserRights(this.user.OrganizationUnitRights),
+        entityType: 'organization-unit',
+        title: $localize`Organisationsenhedroller`,
+        primaryColumnTitle: $localize`Organisationsenhed`,
+        secondaryColumnTitle: $localize`Rolle`,
+      },
+      {
+        options$: this.mapUserRights(this.user.ItContractRights),
+        entityType: 'it-contract',
+        title: $localize`Kontraktroller`,
+        primaryColumnTitle: $localize`Kontrakt`,
+        secondaryColumnTitle: $localize`Rolle`,
+      },
+      {
+        options$: this.mapUserRights(this.user.ItSystemRights),
+        entityType: 'it-system',
+        title: $localize`Systemroller`,
+        primaryColumnTitle: $localize`System`,
+        secondaryColumnTitle: $localize`Rolle`,
+      },
+      {
+        options$: this.mapUserRights(this.user.DataProcessingRegistrationRights),
+        entityType: 'data-processing-registration',
+        title: $localize`Databehandlingsroller`,
+        primaryColumnTitle: $localize`Databehandling`,
+        secondaryColumnTitle: $localize`Rolle`,
+      },
+    ] as BulkActionSection[];
   }
 }

@@ -160,10 +160,12 @@ export class ITContractEffects {
       switchMap(([_, contractUuid]) => {
         if (!contractUuid) return of(ITContractActions.deleteITContractError());
 
-        return this.apiItContractService.deleteSingleItContractV2DeleteItContract({ contractUuid }).pipe(
-          map(() => ITContractActions.deleteITContractSuccess()),
-          catchError(() => of(ITContractActions.deleteITContractError()))
-        );
+        return this.apiInternalItContractService
+          .deleteSingleItContractInternalV2DeleteItContractWithChildren({ contractUuid })
+          .pipe(
+            map(() => ITContractActions.deleteITContractSuccess()),
+            catchError(() => of(ITContractActions.deleteITContractError()))
+          );
       })
     );
   });
