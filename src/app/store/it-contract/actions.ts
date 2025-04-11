@@ -186,5 +186,6 @@ export const ITContractActions = createActionGroup({
     'Create and associate contract error': emptyProps(),
 
     'Transfer contracts success': emptyProps(),
+    'Transfer contracts error': emptyProps(),
   },
 });

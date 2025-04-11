@@ -145,8 +145,9 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     instance.dropdownDisabledUuids$ = this.subHierarchy$.pipe(mapArray((node) => node.node.uuid));
     instance.dropdownType = 'it-contract';
     instance.allowEmptyDropdownSelection = true;
-    instance.isLoading$ = this.componentStore.isLoading$;
     instance.requireConfirmation = true;
+    instance.successActionTypes = ITContractActions.transferContractsSuccess;
+    instance.errorActionTypes = ITContractActions.transferContractsError;
 
     return dialogRef;
   }

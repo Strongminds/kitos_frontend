@@ -57,7 +57,6 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   @Input() public successActionTypes!: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public errorActionTypes!: any;
-  @Input() public isLoading$?: Observable<boolean>;
 
   public formGroup = new FormGroup({
     option: new FormControl<TDropdownOption | undefined>(undefined),
@@ -93,14 +92,6 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
         })
       );
     }
-
-    this.subscriptions.add(
-      this.isLoading$?.subscribe((isLoading) => {
-        this.isLoading = isLoading;
-        this.cdRef.detectChanges();
-      })
-    );
-
     // Dynamically update the validator based on allowEmptyDropdownSelection
     if (!this.allowEmptyDropdownSelection) {
       this.formGroup.get('option')?.setValidators(Validators.required);

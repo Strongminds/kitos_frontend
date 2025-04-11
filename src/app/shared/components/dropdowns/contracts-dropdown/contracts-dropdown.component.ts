@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { combineLatestWith, map, Observable, of } from 'rxjs';
 import { APIItContractResponseDTO } from 'src/app/api/v2';
@@ -23,7 +23,7 @@ export class ContractsDropdownComponent implements OnInit {
 
   public filteredContracts$!: Observable<APIItContractResponseDTO[]>;
 
-  constructor(private componentStore: ContractDropdownComponentStore) {}
+  constructor(@Inject(ContractDropdownComponentStore) private componentStore: ContractDropdownComponentStore) {}
 
   ngOnInit(): void {
     this.filteredContracts$ = this.contracts$.pipe(

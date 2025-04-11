@@ -97,13 +97,13 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
               tapResponse(
                 () => {
                   this.store.dispatch(ITContractActions.transferContractsSuccess());
-
                   return this.getSubHierarchy(request.currentParentUuid);
                 },
                 (e) => {
                   console.error(e);
-                  this.updateIsLoading(false);
-                }
+                  this.store.dispatch(ITContractActions.transferContractsError());
+                },
+                () => this.updateIsLoading(false)
               )
             )
         )
