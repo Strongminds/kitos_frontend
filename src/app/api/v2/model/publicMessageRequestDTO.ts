@@ -17,12 +17,23 @@ export interface APIPublicMessageRequestDTO {
     shortDescription?: string;
     status?: APIPublicMessageRequestDTO.StatusEnum;
     link?: string;
+    iconType?: APIPublicMessageRequestDTO.IconTypeEnum;
+    isMain?: boolean;
 }
 export namespace APIPublicMessageRequestDTO {
     export type StatusEnum = 'Active' | 'Inactive';
     export const StatusEnum = {
         Active: 'Active' as StatusEnum,
         Inactive: 'Inactive' as StatusEnum
+    };
+    export type IconTypeEnum = 'Instructions' | 'Templates' | 'OperationalStatus' | 'Events' | 'ContactPerson' | 'Contact';
+    export const IconTypeEnum = {
+        Instructions: 'Instructions' as IconTypeEnum,
+        Templates: 'Templates' as IconTypeEnum,
+        OperationalStatus: 'OperationalStatus' as IconTypeEnum,
+        Events: 'Events' as IconTypeEnum,
+        ContactPerson: 'ContactPerson' as IconTypeEnum,
+        Contact: 'Contact' as IconTypeEnum
     };
 }
 
