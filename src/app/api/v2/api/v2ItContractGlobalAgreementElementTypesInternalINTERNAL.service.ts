@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuidRequestParams {
+export interface PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItContractGlobalAgreementElementTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
