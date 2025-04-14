@@ -9611,10 +9611,10 @@ thunky@^1.0.2:
   resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-6.8.4.tgz#53e1313ebfe5524b24c0fa45937d51fda058632d"
   integrity sha512-okoJyxuPv1gzASxQDNgQbnUXOdAIyoOSXcXcZZu7tiW0PSKEdf3SdASxPBupRj+64/E3elHwVRnzSdo82Emqbg==
 
-tinymce@^7.3.0:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-7.3.0.tgz#929b5d6d151b7d5e6f2efdaa802484834c42872c"
-  integrity sha512-Ls4PgYlpk73XAxBSBqbVmSl8Mb3DuNfgF01GZ0lY6/MOEVRl3IL+VxC1Oe6165e8WqbqVsxO3Qj/PmoYNvQKGQ==
+tinymce@^7.4.0:
+  version "7.4.0"
+  resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-7.4.0.tgz#d148069dcf8a76bf59bb409b13441a62629c48ef"
+  integrity sha512-54e3cYr1Fm8+fr8+p0kDcCD+nnP5y1qCLLGcJVPukx5UJQVVFfNTMuWgbVRTC9BMio7l80nod28IMIsraSe7SQ==
 
 tmp@^0.0.33:
   version "0.0.33"
