@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams {
+export interface PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuidRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItContractGlobalTerminationDeadlineTypesInternalINTERNALServic
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineTypeByOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

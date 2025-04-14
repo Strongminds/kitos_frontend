@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeRequestParams {
+export interface PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuidRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2OrganizationGlobalCountryCodesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCode(requestParameters: PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCode(requestParameters: PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCode(requestParameters: PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCode(requestParameters: PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuid(requestParameters: PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuid(requestParameters: PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuid(requestParameters: PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuid(requestParameters: PatchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCode.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCode.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCodeByOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

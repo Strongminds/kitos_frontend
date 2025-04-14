@@ -26,14 +26,14 @@ export namespace APIPublicMessageRequestDTO {
         Active: 'Active' as StatusEnum,
         Inactive: 'Inactive' as StatusEnum
     };
-    export type IconTypeEnum = 'Instructions' | 'Templates' | 'OperationalStatus' | 'Events' | 'ContactPerson' | 'Contact';
+    export type IconTypeEnum = 'Document' | 'Clipboard' | 'Settings' | 'Calendar' | 'MultipleUsers' | 'Mail';
     export const IconTypeEnum = {
-        Instructions: 'Instructions' as IconTypeEnum,
-        Templates: 'Templates' as IconTypeEnum,
-        OperationalStatus: 'OperationalStatus' as IconTypeEnum,
-        Events: 'Events' as IconTypeEnum,
-        ContactPerson: 'ContactPerson' as IconTypeEnum,
-        Contact: 'Contact' as IconTypeEnum
+        Document: 'Document' as IconTypeEnum,
+        Clipboard: 'Clipboard' as IconTypeEnum,
+        Settings: 'Settings' as IconTypeEnum,
+        Calendar: 'Calendar' as IconTypeEnum,
+        MultipleUsers: 'MultipleUsers' as IconTypeEnum,
+        Mail: 'Mail' as IconTypeEnum
     };
 }
 
