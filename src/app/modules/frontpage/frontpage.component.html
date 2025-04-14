@@ -30,7 +30,11 @@
       </div>
     </app-standard-vertical-content-grid>
     <div class="grid-container authenticated-grid-columns">
-      <app-public-message *ngFor="let config of messageConfigs" mode="normal" [config]="config"></app-public-message>
+      <app-public-message
+        *ngFor="let publicMessage of publicMessages$ | async"
+        mode="normal"
+        [publicMessage]="publicMessage"
+      ></app-public-message>
     </div>
   </app-standard-vertical-content-grid>
 </div>

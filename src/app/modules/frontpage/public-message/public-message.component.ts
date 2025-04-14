@@ -1,14 +1,12 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PublicMessage } from 'src/app/shared/models/public-message.model';
-import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
-import { IconType } from 'src/app/shared/models/icon-type';
-import { PublicMessageDialogComponent } from './public-message-dialog/public-message-dialog.component';
 import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
-import { map, Observable } from 'rxjs';
-import { FrontpageComponentStore } from '../frontpage.component-store';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { validateUrl } from 'src/app/shared/helpers/link.helpers';
+import { IconType } from 'src/app/shared/models/icon-type';
+import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
+import { FrontpageComponentStore } from '../frontpage.component-store';
+import { PublicMessageDialogComponent } from './public-message-dialog/public-message-dialog.component';
 
 export interface PublicMessageConfig {
   iconType: IconType;
@@ -23,25 +21,18 @@ export interface PublicMessageConfig {
     '[style.width]': "mode === 'compact' ? '352px' : '452px'",
   },
 })
-export class PublicMessageComponent implements OnInit {
+export class PublicMessageComponent {
   @Input() config!: PublicMessageConfig;
   @Input() mode: 'normal' | 'compact' = 'normal';
+  @Input() publicMessage!: PublicMessage;
 
-  public publicMessage$!: Observable<PublicMessage>;
   public readonly statusDisplayType = BooleanValueDisplayType.NormalUnstable;
 
   constructor(private dialog: MatDialog, private readonly componentStore: FrontpageComponentStore) {}
 
-  public ngOnInit(): void {
-    this.publicMessage$ = this.componentStore.publicMessages$.pipe(
-      filterNullish(),
-      map((messages) => messages[this.config.index])
-    );
-  }
-
   public openPublicMessageDialog(): void {
     const dialogRef = this.dialog.open(PublicMessageDialogComponent);
-    dialogRef.componentInstance.publicMessage$ = this.publicMessage$;
+    dialogRef.componentInstance.publicMessage = this.publicMessage;
   }
 
   public hasValidUrl(publicMessage: PublicMessage): boolean {

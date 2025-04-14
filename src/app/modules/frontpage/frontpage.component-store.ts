@@ -4,7 +4,7 @@ import { tapResponse } from '@ngrx/operators';
 
 import { switchMap, tap } from 'rxjs';
 import { APIPublicMessageResponseDTO, APIV2PublicMessagesINTERNALService } from 'src/app/api/v2';
-import { adaptPublicMessage, PublicMessage } from 'src/app/shared/models/public-message.model';
+import { adaptPublicMessage, PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 
 interface FrontpageComponentStoreState {
   loading: boolean;

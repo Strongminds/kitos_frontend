@@ -8,8 +8,9 @@ import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
-import { PublicMessage } from 'src/app/shared/models/public-message.model';
-import { StatusType, statusTypeOptions } from 'src/app/shared/models/status-type.model';
+import { iconTypeOptions, PublicMessageIconType } from 'src/app/shared/models/public-messages/icon-type.model';
+import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
+import { StatusType, statusTypeOptions } from 'src/app/shared/models/public-messages/status-type.model';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 
 @Component({
@@ -19,6 +20,7 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
 })
 export class EditPublicMessageDialogComponent extends BaseComponent implements OnInit {
   @Input() publicMessage!: PublicMessage;
+  @Input() isMain: boolean = false;
 
   public formGroup = new FormGroup({
     title: new FormControl<string | undefined>(undefined, Validators.required),
@@ -26,9 +28,11 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
     shortDescription: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(105)]),
     longDescription: new FormControl<string | undefined>(undefined),
     url: new FormControl<string | undefined>(undefined),
+    iconType: new FormControl<PublicMessageIconType | undefined>(undefined),
   });
 
   public readonly statusTypeOptions = statusTypeOptions;
+  public readonly iconTypeOptions = iconTypeOptions;
 
   public showUrlError = false;
 
@@ -59,6 +63,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
       shortDescription: this.publicMessage.shortDescription,
       longDescription: this.publicMessage.longDescription,
       url: this.publicMessage.link,
+      iconType: this.publicMessage.iconType,
     });
   }
 
@@ -80,6 +85,8 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
       longDescription: value.longDescription ?? undefined,
       link: value.url ?? undefined,
       status: this.getStatusValue(),
+      iconType: this.getIconTypeValue() ?? undefined,
+      isMain: this.isMain,
     };
   }
 
@@ -87,5 +94,11 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
     const value = this.formGroup.value.status?.value ?? null;
     //We need to allow null, to reset the value, but the generateed model does not allow it, so we have to cast (28/02/2025)
     return value as APIPublicMessageRequestDTO.StatusEnum | undefined;
+  }
+
+  private getIconTypeValue(): APIPublicMessageRequestDTO.IconTypeEnum | undefined {
+    const value = this.formGroup.value.iconType?.value ?? null;
+    //We need to allow null, to reset the value, but the generateed model does not allow it, so we have to cast (28/02/2025)
+    return value as APIPublicMessageRequestDTO.IconTypeEnum | undefined;
   }
 }

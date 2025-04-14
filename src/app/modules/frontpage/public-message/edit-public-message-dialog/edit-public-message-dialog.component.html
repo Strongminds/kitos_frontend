@@ -17,10 +17,18 @@
       ></app-dropdown>
       <app-textarea
         text="Beskrivelse"
+        i18n-text
         [formGroup]="formGroup"
         formName="shortDescription"
         data-cy="short-description"
       ></app-textarea>
+      <app-dropdown
+        text="Icon"
+        i18n-text
+        [formGroup]="formGroup"
+        formName="iconType"
+        data-cy="icon-type"
+      ></app-dropdown>
       <app-rich-text-editor
         [formControl]="formGroup.controls.longDescription"
         data-cy="long-description"

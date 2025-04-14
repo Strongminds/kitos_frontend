@@ -1,10 +1,7 @@
-<app-card
-  *ngIf="publicMessage$ | async as publicMessage"
-  [ngClass]="{ 'compact-height': mode === 'compact', 'normal-height': mode === 'normal' }"
->
+<app-card [ngClass]="{ 'compact-height': mode === 'compact', 'normal-height': mode === 'normal' }">
   <div class="top-container">
     <div class="icon-container">
-      <app-icon [iconType]="config.iconType"></app-icon>
+      <app-icon [iconType]="publicMessage.iconType?.icon"></app-icon>
     </div>
 
     <div class="link-container">
