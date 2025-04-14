@@ -1,16 +1,18 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { KITOS_MARKETING_PAGE_URL } from 'src/app/shared/constants/constants';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
-import { selectIsAuthenticating, selectUser } from 'src/app/store/user-store/selectors';
+import { selectIsAuthenticating, selectUser, selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
-import { PublicMessageConfig } from './public-message/public-message.component';
+import { EditPublicMessageDialogComponent } from './public-message/edit-public-message-dialog/edit-public-message-dialog.component';
 
 @Component({
   templateUrl: 'frontpage.component.html',
@@ -18,21 +20,16 @@ import { PublicMessageConfig } from './public-message/public-message.component';
 })
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;
-  public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$;
 
-  public readonly messageConfigs: PublicMessageConfig[] = (
-    [
-      { iconType: 'clipboard' },
-      { iconType: 'document' },
-      { iconType: 'settings' },
-      { iconType: 'calendar' },
-      { iconType: 'multiple-users' },
-      { iconType: 'mail' },
-    ] as const
-  ).map((config, index) => ({
-    ...config,
-    index,
-  }));
+  public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$.pipe(
+    filterNullish(),
+    map((messages) => messages.filter((message) => !message.isMain))
+  );
+  public readonly mainPublicMessage$ = this.frontpageComponentStore.publicMessages$.pipe(
+    filterNullish(),
+    map((messages) => messages.find((message) => message.isMain))
+  );
+  public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
   public readonly user$ = this.store.select(selectUser);
   public readonly isAuthenticating$ = this.store.select(selectIsAuthenticating);
@@ -43,7 +40,8 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
     private store: Store,
     private actions$: Actions,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -60,16 +58,23 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
         }
       })
     );
-    this.frontpageComponentStore.getText();
+    this.frontpageComponentStore.getPublicMessages();
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(GlobalAdminPublicMessageActions.editPublicMessagesSuccess)).subscribe(() => {
-        this.frontpageComponentStore.getText();
+        this.frontpageComponentStore.getPublicMessages();
       })
     );
   }
 
-  public goToMarketingPage(): void {
-    window.open(KITOS_MARKETING_PAGE_URL, '_blank');
+  public goToMarketingPage(url: string): void {
+    window.open(url, '_blank');
+  }
+
+  public openEditDialog(publicMessage: PublicMessage): void {
+    const dialogRef = this.dialog.open(EditPublicMessageDialogComponent);
+    const instance = dialogRef.componentInstance;
+    instance.publicMessage = publicMessage;
+    instance.isMain = true;
   }
 }

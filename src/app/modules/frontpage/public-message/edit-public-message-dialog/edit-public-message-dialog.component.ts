@@ -22,10 +22,16 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   @Input() publicMessage!: PublicMessage;
   @Input() isMain: boolean = false;
 
+  private readonly maxDefaultDescriptionLength = 105;
+  private readonly maxMainDescriptionLength = 200;
+
   public formGroup = new FormGroup({
     title: new FormControl<string | undefined>(undefined, Validators.required),
     status: new FormControl<StatusType | undefined>(undefined),
-    shortDescription: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(105)]),
+    shortDescription: new FormControl<string | undefined>(undefined, [
+      Validators.required,
+      Validators.maxLength(this.maxDefaultDescriptionLength),
+    ]),
     longDescription: new FormControl<string | undefined>(undefined),
     url: new FormControl<string | undefined>(undefined),
     iconType: new FormControl<PublicMessageIconType | undefined>(undefined),
@@ -57,6 +63,8 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
       })
     );
 
+    const maxLength = this.isMain ? this.maxMainDescriptionLength : this.maxDefaultDescriptionLength;
+    this.formGroup.controls.shortDescription.setValidators([Validators.required, Validators.maxLength(maxLength)]);
     this.formGroup.patchValue({
       title: this.publicMessage.title,
       status: this.publicMessage.status,

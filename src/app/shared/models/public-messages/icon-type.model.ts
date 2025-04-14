@@ -9,34 +9,34 @@ export interface PublicMessageIconType {
 
 export const iconTypeOptions: PublicMessageIconType[] = [
   {
-    name: $localize`Document`,
+    name: $localize`Dokument`,
     icon: 'document',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.Contact,
+    value: APIPublicMessageRequestDTO.IconTypeEnum.Document,
   },
   {
-    name: $localize`Clipboard`,
+    name: $localize`Udklipsholder`,
     icon: 'clipboard',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.ContactPerson,
+    value: APIPublicMessageRequestDTO.IconTypeEnum.Clipboard,
   },
   {
-    name: $localize`Settings`,
+    name: $localize`Indstillinger`,
     icon: 'settings',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.Events,
+    value: APIPublicMessageRequestDTO.IconTypeEnum.Settings,
   },
   {
-    name: $localize`Calendar`,
+    name: $localize`Kalendar`,
     icon: 'calendar',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.Instructions,
+    value: APIPublicMessageRequestDTO.IconTypeEnum.Calendar,
   },
   {
-    name: $localize`Multiple Users`,
+    name: $localize`Brugere`,
     icon: 'multiple-users',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.OperationalStatus,
+    value: APIPublicMessageRequestDTO.IconTypeEnum.MultipleUsers,
   },
   {
     name: $localize`Mail`,
     icon: 'mail',
-    value: APIPublicMessageRequestDTO.IconTypeEnum.Templates,
+    value: APIPublicMessageRequestDTO.IconTypeEnum.Mail,
   },
 ];
 

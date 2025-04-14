@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
@@ -12,7 +13,7 @@ import { EditPublicMessageDialogComponent } from '../edit-public-message-dialog/
   styleUrl: './public-message-dialog.component.scss',
 })
 export class PublicMessageDialogComponent {
-  @Input() publicMessage!: PublicMessage;
+  @Input() publicMessage$!: Observable<PublicMessage>;
 
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
