@@ -20,13 +20,16 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
 })
 export class EditPublicMessageDialogComponent extends BaseComponent implements OnInit {
   @Input() publicMessage!: PublicMessage;
-  @Input() isMain: boolean = false;
 
   private readonly maxDefaultDescriptionLength = 105;
   private readonly maxMainDescriptionLength = 200;
+  private readonly maxTitleLength = 50;
 
   public formGroup = new FormGroup({
-    title: new FormControl<string | undefined>(undefined, Validators.required),
+    title: new FormControl<string | undefined>(undefined, [
+      Validators.required,
+      Validators.maxLength(this.maxTitleLength),
+    ]),
     status: new FormControl<StatusType | undefined>(undefined),
     shortDescription: new FormControl<string | undefined>(undefined, [
       Validators.required,
@@ -63,7 +66,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
       })
     );
 
-    const maxLength = this.isMain ? this.maxMainDescriptionLength : this.maxDefaultDescriptionLength;
+    const maxLength = this.publicMessage.isMain ? this.maxMainDescriptionLength : this.maxDefaultDescriptionLength;
     this.formGroup.controls.shortDescription.setValidators([Validators.required, Validators.maxLength(maxLength)]);
     this.formGroup.patchValue({
       title: this.publicMessage.title,
@@ -94,7 +97,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
       link: value.url ?? undefined,
       status: this.getStatusValue(),
       iconType: this.getIconTypeValue() ?? undefined,
-      isMain: this.isMain,
+      isMain: this.publicMessage.isMain,
     };
   }
 

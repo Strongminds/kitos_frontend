@@ -26,10 +26,10 @@
       *ngIf="mainPublicMessage$ | async as mainPublicMessage"
     >
       <div class="center-item">
-        <h2 class="title info-section-max-width" i18n>{{ mainPublicMessage.title }}</h2>
+        <h2 class="title info-section-max-width">{{ mainPublicMessage.title }}</h2>
       </div>
       <div class="center-item">
-        <app-paragraph class="center-text info-section-max-width" [dimmed]="true" i18n>
+        <app-paragraph class="center-text info-section-max-width" [dimmed]="true">
           {{ mainPublicMessage.shortDescription }}
         </app-paragraph>
       </div>

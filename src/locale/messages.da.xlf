@@ -1059,10 +1059,10 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="mainPublicMessage.title }}"/>
+          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="mainPublicMessage.title }}"/>
+          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
         </target>
       </trans-unit>
       <trans-unit id="5796886515252568996" datatype="html">
@@ -2237,10 +2237,10 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ mainPublicMessage.shortDescription }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="{{ mainPublicMessage.shortDescription }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
         </target>
       </trans-unit>
       <trans-unit id="6561297272812700053" datatype="html">

@@ -75,6 +75,5 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
     const dialogRef = this.dialog.open(EditPublicMessageDialogComponent);
     const instance = dialogRef.componentInstance;
     instance.publicMessage = publicMessage;
-    instance.isMain = true;
   }
 }
