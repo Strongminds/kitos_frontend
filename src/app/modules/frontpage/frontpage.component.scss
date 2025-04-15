@@ -51,6 +51,7 @@ app-login {
 
 .center-item {
   @include center-items-container;
+  gap: $padding-small;
 }
 
 .center-text {

@@ -65,5 +65,4 @@ export const MAX_DIALOG_HEIGHT = '750px';
 export const NON_EDITABLE_LOCAL_OPTION_TYPE_CATEGORY_HELP_TEXT = $localize`Dette udfaldsrum kan kun redigeres af OS2Kitos sekretariatet`;
 export const OBLIGATORY_LOCAL_OPTION_HELP_TEXT = $localize`Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet`;
 
-export const KITOS_MARKETING_PAGE_URL = 'https://www.os2.eu/os2kitos';
 export const SSO_LOGIN_HANDLER_PATH = '/LoginHandler.ashx';

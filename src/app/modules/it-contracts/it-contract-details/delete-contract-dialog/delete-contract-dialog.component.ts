@@ -92,7 +92,10 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
       this.confirmationService.confirmAction({
         category: ConfirmActionCategory.Warning,
         message: $localize`Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?`,
-        onConfirm: () => this.store.dispatch(ITContractActions.deleteITContract()),
+        onConfirm: () => {
+          this.isLoading = true;
+          return this.store.dispatch(ITContractActions.deleteITContract());
+        },
       });
     });
   }

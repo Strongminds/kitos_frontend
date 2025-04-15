@@ -1,7 +1,7 @@
-<app-dialog title="Rediger" i18n-title>
+<app-scrollbar-dialog title="Rediger" i18n-title>
   <form [formGroup]="formGroup" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
-      <app-textbox text="Titel" [formGroup]="formGroup" formName="title" data-cy="title"></app-textbox>
+      <app-textbox text="Titel" i18n-text [formGroup]="formGroup" formName="title" data-cy="title"></app-textbox>
       <div>
         <app-textbox text="URL" [formGroup]="formGroup" formName="url" i18n-text data-cy="url"></app-textbox>
         <app-paragraph paragraphSize="small" color="error" *ngIf="showUrlError" i18n
@@ -9,19 +9,32 @@
         >
       </div>
       <app-dropdown
+        *ngIf="!publicMessage.isMain"
         [data]="statusTypeOptions"
         text="Status"
+        i18n-text
         [formGroup]="formGroup"
         formName="status"
         data-cy="status"
       ></app-dropdown>
       <app-textarea
         text="Beskrivelse"
+        i18n-text
         [formGroup]="formGroup"
         formName="shortDescription"
         data-cy="short-description"
       ></app-textarea>
+      <app-dropdown
+        *ngIf="!publicMessage.isMain"
+        text="Ikon"
+        i18n-text
+        [data]="iconTypeOptions"
+        [formGroup]="formGroup"
+        formName="iconType"
+        data-cy="icon-type"
+      ></app-dropdown>
       <app-rich-text-editor
+        *ngIf="!publicMessage.isMain"
         [formControl]="formGroup.controls.longDescription"
         data-cy="long-description"
       ></app-rich-text-editor>
@@ -33,4 +46,4 @@
       </app-button>
     </app-dialog-actions>
   </form>
-</app-dialog>
+</app-scrollbar-dialog>
