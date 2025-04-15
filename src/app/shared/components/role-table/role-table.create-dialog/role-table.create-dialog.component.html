@@ -1,6 +1,18 @@
 <app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="roleForm" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
+      <app-multi-select-dropdown
+        text="Vælg bruger"
+        valueField="uuid"
+        [data]="users$ | async"
+        [isLoading$]="isLoading$"
+        [showSearchHelpText$]="selectUserResultIsLimited$"
+        (filterChange)="userFilterChange($event)"
+        (valueChange)="userChange($event)"
+        i18n-text
+        [formGroup]="roleForm"
+        formName="user"
+      ></app-multi-select-dropdown>
       <app-connected-dropdown
         text="Vælg bruger"
         valueField="uuid"
