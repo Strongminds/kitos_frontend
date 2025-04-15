@@ -5,7 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
-import { Subject, map } from 'rxjs';
+import { BehaviorSubject, Subject, map } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -33,11 +33,11 @@ import { RoleTableComponentStore } from '../role-table.component-store';
 })
 export class RoleTableCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly roleForm = new FormGroup({
-    user: new FormControl<APIOrganizationUserResponseDTO | undefined>(
+    role: new FormControl<APIRoleOptionResponseDTO | undefined>(
       { value: undefined, disabled: false },
       Validators.required
     ),
-    role: new FormControl<APIRoleOptionResponseDTO | undefined>(
+    user: new FormControl<APIOrganizationUserResponseDTO[] | undefined>(
       { value: undefined, disabled: true },
       Validators.required
     ),
@@ -55,13 +55,16 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   public readonly isLoading$ = this.componentStore.usersIsLoading$;
 
   public roles$ = new Subject<Array<RoleDropdownOption>>();
+  public existingUserUuids$ = new BehaviorSubject<string[]>([]);
   public selectedUserUuid$ = new Subject<string>();
+  public selectedRoleUuid$ = new Subject<string>();
 
   public readonly selectUserResultIsLimited$ = this.componentStore.selectUserResultIsLimited$;
 
   public isBusy = false;
 
   private userRoleUuidsDictionary: Dictionary<string[]> = {};
+  private roleUserUuidsDictionary: Dictionary<string[]> = {};
 
   constructor(
     private readonly store: Store,
@@ -74,15 +77,17 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   ngOnInit() {
+    this.userFilterChange(undefined);
+
     //map assigned roles for each user to enable quick lookup
     this.userRoles.forEach((role) => {
-      const userUuid = role.assignment.user.uuid;
-      let rolesUuids = this.userRoleUuidsDictionary[userUuid];
-      if (!rolesUuids) {
-        rolesUuids = [];
-        this.userRoleUuidsDictionary[userUuid] = rolesUuids;
+      const roleUuid = role.assignment.role.uuid;
+      let userUuids = this.roleUserUuidsDictionary[roleUuid];
+      if (!userUuids) {
+        userUuids = [];
+        this.roleUserUuidsDictionary[roleUuid] = userUuids;
       }
-      rolesUuids.push(role.assignment.role.uuid);
+      userUuids.push(role.assignment.user.uuid);
     });
 
     //assign roles onInit, because optionType is not available before
@@ -101,6 +106,12 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
           const availableRoles = roles.filter((x) => !rolesAssignedToUserUuids?.includes(x.uuid));
           this.roles$.next(availableRoles);
         })
+    );
+    this.subscriptions.add(
+      this.selectedRoleUuid$.subscribe((roleUuid) => {
+        const userUuids = this.roleUserUuidsDictionary[roleUuid];
+        this.existingUserUuids$.next(userUuids ?? []);
+      })
     );
 
     this.subscriptions.add(
@@ -138,7 +149,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     this.componentStore.getUsers(filter);
   }
 
-  public userChange(userUuid?: string | null) {
+  public userChange(userUuid?: string[] | null) {
     const roleControl = this.roleForm.controls['role'];
     roleControl.reset();
 
@@ -150,7 +161,22 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     //enable role dropdown
     roleControl.enable();
-    this.selectedUserUuid$.next(userUuid);
+    //this.selectedUserUuid$.next(userUuid);
+  }
+
+  public roleChange(roleUuid?: string | null) {
+    const userControl = this.roleForm.controls['user'];
+    userControl.reset();
+
+    //if role is null disable the user dropdown
+    if (!roleUuid) {
+      userControl.disable();
+      return;
+    }
+
+    //enable user dropdown
+    userControl.enable();
+    this.selectedRoleUuid$.next(roleUuid);
   }
 
   public onSave() {

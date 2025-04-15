@@ -1,19 +1,8 @@
 <app-dialog [title]="title" [closable]="true" overflow="none" i18n-title>
   <form [formGroup]="roleForm" (ngSubmit)="onSave()">
     <app-standard-vertical-content-grid>
-      <app-multi-select-dropdown
-        text="Vælg bruger"
-        valueField="uuid"
-        [data]="users$ | async"
-        [isLoading$]="isLoading$"
-        [showSearchHelpText$]="selectUserResultIsLimited$"
-        (filterChange)="userFilterChange($event)"
-        (valueChange)="userChange($event)"
-        i18n-text
-        [formGroup]="roleForm"
-        formName="user"
-      ></app-multi-select-dropdown>
-      <app-connected-dropdown
+      <!-- [showSearchHelpText$]="selectUserResultIsLimited$" -->
+      <!-- <app-connected-dropdown
         text="Vælg bruger"
         valueField="uuid"
         [data$]="users$"
@@ -25,7 +14,7 @@
         [formGroup]="roleForm"
         formName="user"
         [includeItemDescription]="true"
-      ></app-connected-dropdown>
+      ></app-connected-dropdown> -->
       <app-dropdown
         text="Vælg rolle"
         valueField="uuid"
@@ -35,6 +24,16 @@
         formName="role"
         [showDescription]="true"
       ></app-dropdown>
+      <app-multi-select-dropdown
+        text="Vælg bruger"
+        valueField="uuid"
+        [data]="users$ | async"
+        (filterChange)="userFilterChange($event)"
+        (valueChange)="userChange($event)"
+        i18n-text
+        [formGroup]="roleForm"
+        formName="user"
+      ></app-multi-select-dropdown>
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" (buttonClick)="onCancel()" i18n>Annuller</app-button>
