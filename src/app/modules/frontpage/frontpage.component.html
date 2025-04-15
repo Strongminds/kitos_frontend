@@ -12,7 +12,7 @@
   <div class="right">
     <div class="grid-container login-grid-columns">
       <app-public-message
-        *ngFor="let publicMessage of publicMessages$ | async"
+        *ngFor="let publicMessage of standardPublicMessages$ | async"
         mode="compact"
         [publicMessageUuid]="publicMessage.uuid"
       ></app-public-message>
@@ -48,7 +48,7 @@
     </app-standard-vertical-content-grid>
     <div class="grid-container authenticated-grid-columns">
       <app-public-message
-        *ngFor="let publicMessage of publicMessages$ | async"
+        *ngFor="let publicMessage of standardPublicMessages$ | async"
         mode="normal"
         [publicMessageUuid]="publicMessage.uuid"
       ></app-public-message>

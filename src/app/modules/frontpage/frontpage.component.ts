@@ -21,7 +21,7 @@ import { EditPublicMessageDialogComponent } from './public-message/edit-public-m
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;
 
-  public readonly publicMessages$ = this.frontpageComponentStore.publicMessages$.pipe(
+  public readonly standardPublicMessages$ = this.frontpageComponentStore.publicMessages$.pipe(
     filterNullish(),
     map((messages) => messages.filter((message) => !message.isMain))
   );
