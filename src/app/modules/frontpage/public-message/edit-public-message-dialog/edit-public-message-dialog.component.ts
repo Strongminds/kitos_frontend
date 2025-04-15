@@ -106,7 +106,6 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
 
   private getIconTypeValue(): APIPublicMessageRequestDTO.IconTypeEnum | undefined {
     const value = this.formGroup.value.iconType?.value ?? null;
-    //We need to allow null, to reset the value, but the generateed model does not allow it, so we have to cast (28/02/2025)
     return value as APIPublicMessageRequestDTO.IconTypeEnum | undefined;
   }
 }

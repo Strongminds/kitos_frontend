@@ -5140,9 +5140,6 @@
       <trans-unit id="1412916315741996751" datatype="html">
         <source>Udklipsholder</source>
       </trans-unit>
-      <trans-unit id="3074987902485823708" datatype="html">
-        <source>Icon</source>
-      </trans-unit>
       <trans-unit id="5979549623650471307" datatype="html">
         <source>Dokument</source>
       </trans-unit>
@@ -5151,6 +5148,9 @@
       </trans-unit>
       <trans-unit id="7872550646351072421" datatype="html">
         <source>Indstillinger</source>
+      </trans-unit>
+      <trans-unit id="4334674530466993946" datatype="html">
+        <source>Ikon</source>
       </trans-unit>
     </body>
   </file>

@@ -6763,10 +6763,6 @@
           <x id="PH_1" equiv-text="this.buttonNumberText()"/>
         </target>
       </trans-unit>
-      <trans-unit id="3074987902485823708" datatype="html">
-        <source>Icon</source>
-        <target state="new">Icon</target>
-      </trans-unit>
       <trans-unit id="5979549623650471307" datatype="html">
         <source>Dokument</source>
         <target state="new">Dokument</target>
@@ -6786,6 +6782,10 @@
       <trans-unit id="1292737233370901804" datatype="html">
         <source>Mail</source>
         <target state="new">Mail</target>
+      </trans-unit>
+      <trans-unit id="4334674530466993946" datatype="html">
+        <source>Ikon</source>
+        <target state="new">Ikon</target>
       </trans-unit>
     </body>
   </file>
