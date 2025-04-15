@@ -1059,10 +1059,10 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="saveText }}"/>
+          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="saveText }}"/>
+          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
         </target>
       </trans-unit>
       <trans-unit id="5796886515252568996" datatype="html">
@@ -6545,14 +6545,6 @@
         <source> Hvad er Kitos?</source>
         <target state="new"> Hvad er Kitos?</target>
       </trans-unit>
-      <trans-unit id="1666143166173347781" datatype="html">
-        <source>Kitos er Kommunernes IT Overblikssystem</source>
-        <target state="new">Kitos er Kommunernes IT Overblikssystem</target>
-      </trans-unit>
-      <trans-unit id="5622823507924395173" datatype="html">
-        <source> Kitos er en open-source web-baseret løsning, der anvendes af 76 kommuner. Kitos skaber overblik over den samlede kommunale IT-portefølje. </source>
-        <target state="new"> Kitos er en open-source web-baseret løsning, der anvendes af 76 kommuner. Kitos skaber overblik over den samlede kommunale IT-portefølje. </target>
-      </trans-unit>
       <trans-unit id="6429720393055416101" datatype="html">
         <source> eller </source>
         <target state="new"> eller </target>
@@ -6770,6 +6762,30 @@
           <x id="PH" equiv-text="this.snackbarText"/>
           <x id="PH_1" equiv-text="this.buttonNumberText()"/>
         </target>
+      </trans-unit>
+      <trans-unit id="5979549623650471307" datatype="html">
+        <source>Dokument</source>
+        <target state="new">Dokument</target>
+      </trans-unit>
+      <trans-unit id="1412916315741996751" datatype="html">
+        <source>Udklipsholder</source>
+        <target state="new">Udklipsholder</target>
+      </trans-unit>
+      <trans-unit id="7872550646351072421" datatype="html">
+        <source>Indstillinger</source>
+        <target state="new">Indstillinger</target>
+      </trans-unit>
+      <trans-unit id="6897943711350574955" datatype="html">
+        <source>Kalendar</source>
+        <target state="new">Kalendar</target>
+      </trans-unit>
+      <trans-unit id="1292737233370901804" datatype="html">
+        <source>Mail</source>
+        <target state="new">Mail</target>
+      </trans-unit>
+      <trans-unit id="4334674530466993946" datatype="html">
+        <source>Ikon</source>
+        <target state="new">Ikon</target>
       </trans-unit>
     </body>
   </file>

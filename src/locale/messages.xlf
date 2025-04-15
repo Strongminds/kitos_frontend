@@ -2529,7 +2529,7 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="saveText }}"/>
+          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
         </source>
       </trans-unit>
       <trans-unit id="5796886515252568996" datatype="html">
@@ -4969,14 +4969,8 @@
       <trans-unit id="8056066478947543702" datatype="html">
         <source> Luk </source>
       </trans-unit>
-      <trans-unit id="1666143166173347781" datatype="html">
-        <source>Kitos er Kommunernes IT Overblikssystem</source>
-      </trans-unit>
       <trans-unit id="2966213553381382988" datatype="html">
         <source> Glemt dit password? </source>
-      </trans-unit>
-      <trans-unit id="5622823507924395173" datatype="html">
-        <source> Kitos er en open-source web-baseret løsning, der anvendes af 76 kommuner. Kitos skaber overblik over den samlede kommunale IT-portefølje. </source>
       </trans-unit>
       <trans-unit id="622752670487596537" datatype="html">
         <source> Hvad er Kitos?</source>
@@ -5139,6 +5133,24 @@
       </trans-unit>
       <trans-unit id="8750750261302099129" datatype="html">
         <source>Vælg handling for valgte roller</source>
+      </trans-unit>
+      <trans-unit id="1292737233370901804" datatype="html">
+        <source>Mail</source>
+      </trans-unit>
+      <trans-unit id="1412916315741996751" datatype="html">
+        <source>Udklipsholder</source>
+      </trans-unit>
+      <trans-unit id="5979549623650471307" datatype="html">
+        <source>Dokument</source>
+      </trans-unit>
+      <trans-unit id="6897943711350574955" datatype="html">
+        <source>Kalendar</source>
+      </trans-unit>
+      <trans-unit id="7872550646351072421" datatype="html">
+        <source>Indstillinger</source>
+      </trans-unit>
+      <trans-unit id="4334674530466993946" datatype="html">
+        <source>Ikon</source>
       </trans-unit>
     </body>
   </file>
