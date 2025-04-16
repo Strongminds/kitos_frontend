@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
@@ -40,8 +40,8 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   public readonly validParentContracts$ = this.select((state) => state.validParentContracts).pipe(filterNullish());
 
   constructor(
-    private readonly organizationApiService: APIV2OrganizationService,
-    private readonly apiItContractService: APIV2ItContractService,
+    @Inject(APIV2OrganizationService) private readonly organizationApiService: APIV2OrganizationService,
+    @Inject(APIV2ItContractService) private readonly apiItContractService: APIV2ItContractService,
     private readonly store: Store
   ) {
     super({ usersIsLoading: false, organizationsIsLoading: false, contractsLoading: false });
