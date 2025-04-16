@@ -134,6 +134,7 @@ model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
 model/baseNotificationPropertiesWriteRequestDTO.ts
 model/brokenExternalReferencesReportStatusResponseDTO.ts
+model/bulkRoleAssignmentRequestDTO.ts
 model/changeOrganizationUnitRegistrationV2RequestDTO.ts
 model/changePaymentRegistrationV2RequestDTO.ts
 model/claimResponseDTO.ts
@@ -274,6 +275,7 @@ model/organizationRegistrationUnitResponseDTO.ts
 model/organizationRemovalConflictsResponseDTO.ts
 model/organizationResponseDTO.ts
 model/organizationUnitResponseDTO.ts
+model/organizationUnitRoleAssignmentResponseDTO.ts
 model/organizationUnitRolesResponseDTO.ts
 model/organizationUpdateRequestDTO.ts
 model/organizationUsageResponseDTO.ts
