@@ -12,8 +12,8 @@ export const booleanDropdownOptions: DropdownOption<boolean>[] = [
   { value: false, name: NO_TEXT },
 ];
 
-export function toBooleanDropdownOption(value: boolean | undefined){
-  return booleanDropdownOptions.find(option => option.value === value) ?? undefined;
+export function toBooleanDropdownOption(value: boolean | undefined) {
+  return booleanDropdownOptions.find((option) => option.value === value) ?? undefined;
 }
 
 export interface DropdownOption<T> {
@@ -34,13 +34,15 @@ export interface MultiSelectDropdownItem<T> {
   selected: boolean;
   disabled?: boolean;
   dataCy?: string;
+  description?: string;
 }
 
-export const mapUserToOption = (user: APIOrganizationUserResponseDTO): RoleDropdownOption => {
+export const mapUserToOption = (user: APIOrganizationUserResponseDTO): MultiSelectDropdownItem<string> => {
   return {
-    uuid: user.uuid,
+    value: user.uuid,
     name: user.name,
     description: user.email,
+    selected: false,
   };
 };
 

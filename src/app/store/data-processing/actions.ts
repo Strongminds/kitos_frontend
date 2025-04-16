@@ -64,7 +64,7 @@ export const DataProcessingActions = createActionGroup({
     ) => ({ collectionPermissions }),
     'Get Data Processing Collection Permissions Error': emptyProps(),
 
-    'Add Data Processing Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
+    'Add Data Processing Role': (userUuids: string[], roleUuid: string) => ({ userUuids, roleUuid }),
     'Add Data Processing Role Success': (dataProcessing: APIDataProcessingRegistrationResponseDTO) => ({
       dataProcessing,
     }),

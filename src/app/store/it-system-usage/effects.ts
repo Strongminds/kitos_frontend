@@ -273,11 +273,11 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.addItSystemUsageRole),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuid, roleUuid }, usageUuid]) =>
+      mergeMap(([{ userUuids, roleUuid }, usageUuid]) =>
         this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchAddRoleAssignment({
+          .patchSingleItSystemUsageV2PatchAddBulkRoleAssignment({
             systemUsageUuid: usageUuid,
-            request: { userUuid: userUuid, roleUuid: roleUuid },
+            request: { userUuids: userUuids, roleUuid: roleUuid },
           })
           .pipe(
             map((usage) => ITSystemUsageActions.addItSystemUsageRoleSuccess(usage)),
