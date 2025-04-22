@@ -49,6 +49,7 @@
         formName="defaultStartPreference"
         [formGroup]="createForm"
         [data]="startPreferenceOptions | async"
+        dropdownPosition="top"
         [value]="createForm.value.defaultStartPreference"
         [clearable]="false"
         i18n-text

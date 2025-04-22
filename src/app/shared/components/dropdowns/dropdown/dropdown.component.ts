@@ -15,6 +15,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   @Input() public clearable: boolean = true;
   @Input() public searchFn?: (search: string, item: T) => boolean;
   @Input() public showDescriptionLabel: boolean = true;
+  @Input() dropdownPosition: 'top' | 'bottom' | 'auto' = 'auto';
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
   @Output() public cleared = new EventEmitter();
@@ -23,7 +24,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   override ngOnInit() {
     super.ngOnInit();
 
-    // Add obselete value when both value and data are present if data does not contain current form value
+    // Add obsolete value when both value and data are present if data does not contain current form value
     this.subscriptions.add(
       combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) =>
         this.addObsoleteToValueIfMissingInData(value)

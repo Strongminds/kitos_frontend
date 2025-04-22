@@ -12,6 +12,7 @@
     [searchFn]="searchFn"
     [appendTo]="appendTo"
     [clearable]="clearable"
+    [dropdownPosition]="dropdownPosition"
     (search)="filter$.next($event.term)"
     (change)="formSelectionChange($event)"
     (clear)="onClear()"
