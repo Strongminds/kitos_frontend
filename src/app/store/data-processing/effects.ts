@@ -375,7 +375,7 @@ export class DataProcessingEffects {
       concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
       mergeMap(([{ userUuids, roleUuid }, dprUuid]) =>
         this.apiInternalDataProcessingRegistrationService
-          .patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment({
+          .patchSingleDataProcessingRegistrationInternalV2PatchAddBulkRoleAssignment({
             dprUuid: dprUuid,
             request: { userUuids: userUuids, roleUuid: roleUuid },
           })
