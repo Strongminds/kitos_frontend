@@ -72,7 +72,53 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
   ngOnInit() {
     this.userFilterChange(undefined);
+    this.setupExistingUsersPerRoleDictionary();
 
+    this.selectRoleOptions();
+
+    this.subscribeToRoleSelectionChanges();
+    this.subscribeToRoleOptionTypeActions();
+  }
+
+  public userFilterChange(filter?: string) {
+    this.componentStore.getUsers(filter);
+  }
+
+  public userChange(userUuids: string[]) {
+    this.selectedUserUuids = userUuids;
+  }
+
+  public roleChange(roleUuid?: string | null) {
+    if (!roleUuid) {
+      this.isRoleSelected = false;
+      return;
+    }
+
+    this.isRoleSelected = true;
+    this.selectedUserUuids = [];
+    this.resetSubject$.next();
+    this.selectedRoleUuid$.next(roleUuid);
+  }
+
+  public onSave() {
+    if (!this.roleForm.valid) return;
+
+    const roleUuid = this.roleForm.value.role?.uuid;
+    if (this.selectedUserUuids.length === 0 || !roleUuid) return;
+
+    this.isBusy = true;
+    this.roleOptionTypeService.dispatchAddEntityRoleAction(this.selectedUserUuids, roleUuid, this.entityType);
+  }
+
+  public onCancel() {
+    this.dialog.close();
+  }
+
+  public isValid() {
+    return this.roleForm.valid && this.selectedUserUuids.length > 0;
+  }
+
+  private setupExistingUsersPerRoleDictionary() {
     this.userRoles.forEach((role) => {
       const roleUuid = role.assignment.role.uuid;
       let existingUserUuids = this.roleUserUuidsDictionary[roleUuid];
@@ -82,7 +128,9 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       }
       existingUserUuids.push(role.assignment.user.uuid);
     });
+  }
 
+  private selectRoleOptions() {
     this.subscriptions.add(
       this.store
         .select(selectRoleOptionTypes(this.entityType))
@@ -91,14 +139,18 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
           this.availableRoles$.next(roles);
         })
     );
+  }
 
+  private subscribeToRoleSelectionChanges() {
     this.subscriptions.add(
       this.selectedRoleUuid$.subscribe((roleUuid) => {
         const userUuids = this.roleUserUuidsDictionary[roleUuid];
         this.existingUserUuids$.next(userUuids ?? []);
       })
     );
+  }
 
+  private subscribeToRoleOptionTypeActions() {
     this.subscriptions.add(
       this.actions$
         .pipe(
@@ -128,45 +180,5 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
           this.isBusy = false;
         })
     );
-  }
-
-  public userFilterChange(filter?: string) {
-    this.componentStore.getUsers(filter);
-  }
-
-  public userChange(userUuids: string[]) {
-    this.selectedUserUuids = userUuids;
-  }
-
-  public roleChange(roleUuid?: string | null) {
-    //if role is null disable the user dropdown
-    if (!roleUuid) {
-      this.isRoleSelected = false;
-      return;
-    }
-
-    //enable user dropdown
-    this.isRoleSelected = true;
-    this.selectedUserUuids = [];
-    this.resetSubject$.next();
-    this.selectedRoleUuid$.next(roleUuid);
-  }
-
-  public onSave() {
-    if (!this.roleForm.valid) return;
-
-    const roleUuid = this.roleForm.value.role?.uuid;
-    if (this.selectedUserUuids.length === 0 || !roleUuid) return;
-
-    this.isBusy = true;
-    this.roleOptionTypeService.dispatchAddEntityRoleAction(this.selectedUserUuids, roleUuid, this.entityType);
-  }
-
-  public onCancel() {
-    this.dialog.close();
-  }
-
-  public isValid() {
-    return this.roleForm.valid && this.selectedUserUuids.length > 0;
   }
 }
