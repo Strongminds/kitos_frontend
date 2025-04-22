@@ -5,7 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subject, combineLatest, map } from 'rxjs';
-import { APIOrganizationUserResponseDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
+import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapUserToOption } from 'src/app/shared/models/dropdown-option.model';
 import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
@@ -17,7 +17,6 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
-import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { RoleTableComponentStore } from '../role-table.component-store';
 
@@ -33,10 +32,6 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       { value: undefined, disabled: false },
       Validators.required
     ),
-    user: new FormControl<APIOrganizationUserResponseDTO[] | undefined>(
-      { value: undefined, disabled: true },
-      Validators.required
-    ),
   });
 
   @Input() public userRoles: Array<IRoleAssignment> = [];
@@ -45,12 +40,12 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   @Input() public title!: string;
 
   public availableRoles$ = new BehaviorSubject<APIRoleOptionResponseDTO[]>([]);
-  public readonly users$ = this.componentStore.users$.pipe(
+  public existingUserUuids$ = new BehaviorSubject<string[]>([]);
+
+  private readonly users$ = this.componentStore.users$.pipe(
     filterNullish(),
     map((users) => users?.map((user) => mapUserToOption(user)))
   );
-  public existingUserUuids$ = new BehaviorSubject<string[]>([]);
-
   public readonly filteredUsers$ = combineLatest([this.users$, this.existingUserUuids$]).pipe(
     map(([users, existingUserUuids]) => users.filter((user) => !existingUserUuids.includes(user.value)))
   );
@@ -62,7 +57,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   public resetSubject$ = new Subject<void>();
 
   public readonly selectUserResultIsLimited$ = this.componentStore.selectUserResultIsLimited$;
-  public userUuids: string[] = [];
+  public selectedUserUuids: string[] = [];
 
   public isBusy = false;
   public isRoleSelected = false;
@@ -80,18 +75,16 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   ngOnInit() {
-    this.store.dispatch(RoleOptionTypeActions.getOptions(this.entityType));
     this.userFilterChange(undefined);
 
-    //map assigned roles for each user to enable quick lookup
     this.userRoles.forEach((role) => {
       const roleUuid = role.assignment.role.uuid;
-      let userUuids = this.roleUserUuidsDictionary[roleUuid];
-      if (!userUuids) {
-        userUuids = [];
-        this.roleUserUuidsDictionary[roleUuid] = userUuids;
+      let existingUserUuids = this.roleUserUuidsDictionary[roleUuid];
+      if (!existingUserUuids) {
+        existingUserUuids = [];
+        this.roleUserUuidsDictionary[roleUuid] = existingUserUuids;
       }
-      userUuids.push(role.assignment.user.uuid);
+      existingUserUuids.push(role.assignment.user.uuid);
     });
 
     this.subscriptions.add(
@@ -102,6 +95,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
           this.availableRoles$.next(roles);
         })
     );
+
     this.subscriptions.add(
       this.selectedRoleUuid$.subscribe((roleUuid) => {
         const userUuids = this.roleUserUuidsDictionary[roleUuid];
@@ -145,13 +139,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   }
 
   public userChange(userUuids: string[]) {
-    this.userUuids = userUuids;
+    this.selectedUserUuids = userUuids;
   }
 
   public roleChange(roleUuid?: string | null) {
-    const userControl = this.roleForm.controls['user'];
-    userControl.reset();
-
     //if role is null disable the user dropdown
     if (!roleUuid) {
       this.isRoleSelected = false;
@@ -160,6 +151,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
 
     //enable user dropdown
     this.isRoleSelected = true;
+    this.selectedUserUuids = [];
     this.resetSubject$.next();
     this.selectedRoleUuid$.next(roleUuid);
   }
@@ -168,13 +160,17 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     if (!this.roleForm.valid) return;
 
     const roleUuid = this.roleForm.value.role?.uuid;
-    if (this.userUuids.length === 0 || !roleUuid) return;
+    if (this.selectedUserUuids.length === 0 || !roleUuid) return;
 
     this.isBusy = true;
-    this.roleOptionTypeService.dispatchAddEntityRoleAction(this.userUuids, roleUuid, this.entityType);
+    this.roleOptionTypeService.dispatchAddEntityRoleAction(this.selectedUserUuids, roleUuid, this.entityType);
   }
 
   public onCancel() {
     this.dialog.close();
+  }
+
+  public isValid() {
+    return this.roleForm.valid && this.selectedUserUuids.length > 0;
   }
 }

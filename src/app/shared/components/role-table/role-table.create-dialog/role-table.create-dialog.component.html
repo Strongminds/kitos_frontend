@@ -3,9 +3,9 @@
     <app-standard-vertical-content-grid>
       <app-dropdown
         text="Vælg rolle"
+        i18n-text
         valueField="uuid"
         [data]="availableRoles$ | async"
-        i18n-text
         [formGroup]="roleForm"
         formName="role"
         [showDescription]="true"
@@ -13,18 +13,17 @@
       ></app-dropdown>
       <app-multi-select-dropdown
         text="Vælg bruger"
-        valueField="uuid"
+        i18n-text
         [data]="filteredUsers$ | async"
         (filterChange)="userFilterChange($event)"
         (selectedEvent)="userChange($event)"
         [disabled]="!isRoleSelected"
         [resetSubject$]="resetSubject$"
-        i18n-text
       ></app-multi-select-dropdown>
 
       <app-dialog-actions>
         <app-button buttonStyle="secondary" size="large" (buttonClick)="onCancel()" i18n>Annuller</app-button>
-        <app-button type="submit" size="large" [disabled]="roleForm.valid === false || isBusy" i18n>Tilføj</app-button>
+        <app-button type="submit" size="large" [disabled]="isValid() === false || isBusy" i18n>Tilføj</app-button>
       </app-dialog-actions>
     </app-standard-vertical-content-grid>
   </form>
