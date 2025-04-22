@@ -36,6 +36,8 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public tagValidation: 'email' | 'none' = 'none';
   @Input() public addTagText: string = $localize`Tilføj email`;
   @Input() public isRequired = false;
+  @Input() public showDescription = false;
+  @Input() public useCustomFilter = false;
 
   @Input() public resetSubject$?: Subject<void>;
 
@@ -76,6 +78,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
   ngOnInit() {
     // Debounce update of dropdown filter with more then 1 character
+    //if (!this.useCustomFilter) {
     this.subscriptions.add(
       this.filter$
         .pipe(
@@ -85,6 +88,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         )
         .subscribe((filter) => this.filterChange.emit(filter))
     );
+    //}
 
     if (this.resetSubject$) {
       this.subscriptions.add(
@@ -119,6 +123,18 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     this.data?.push(value);
     this.selectedValuesModel.push(value);
     this.selectedValues = this.selectedValuesModel.map((item) => item.value);
+  }
+
+  public onFilterChange(filter: string) {
+    if (this.useCustomFilter) {
+      this.filter$.next(filter);
+    }
+    this.filterChange.emit(filter);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public externalSearch(_: string, __: any) {
+    return true;
   }
 
   public onFocus() {

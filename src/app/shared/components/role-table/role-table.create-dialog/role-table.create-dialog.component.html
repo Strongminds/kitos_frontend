@@ -19,6 +19,8 @@
         (selectedEvent)="userChange($event)"
         [disabled]="!isRoleSelected"
         [resetSubject$]="resetSubject$"
+        [showDescription]="true"
+        [useCustomFilter]="true"
       ></app-multi-select-dropdown>
 
       <app-dialog-actions>

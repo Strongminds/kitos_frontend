@@ -42,11 +42,11 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   public availableRoles$ = new BehaviorSubject<APIRoleOptionResponseDTO[]>([]);
   public existingUserUuids$ = new BehaviorSubject<string[]>([]);
 
-  private readonly users$ = this.componentStore.users$.pipe(
+  private readonly mappedUsers$ = this.componentStore.users$.pipe(
     filterNullish(),
     map((users) => users?.map((user) => mapUserToOption(user)))
   );
-  public readonly filteredUsers$ = combineLatest([this.users$, this.existingUserUuids$]).pipe(
+  public readonly filteredUsers$ = combineLatest([this.mappedUsers$, this.existingUserUuids$]).pipe(
     map(([users, existingUserUuids]) => users.filter((user) => !existingUserUuids.includes(user.value)))
   );
 
