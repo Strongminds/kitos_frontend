@@ -19,6 +19,7 @@
         (selectedEvent)="userChange($event)"
         [disabled]="!isRoleSelected"
         [resetSubject$]="resetSubject$"
+        [loading]="isLoading$ | async"
         [showDescription]="true"
         [useCustomFilter]="true"
       ></app-multi-select-dropdown>

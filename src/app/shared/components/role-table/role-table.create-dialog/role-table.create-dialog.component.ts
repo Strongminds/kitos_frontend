@@ -39,9 +39,9 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   @Input() public entityUuid!: string;
   @Input() public title!: string;
 
-  public availableRoles$ = new BehaviorSubject<APIRoleOptionResponseDTO[]>([]);
-  public existingUserUuids$ = new BehaviorSubject<string[]>([]);
+  public readonly availableRoles$ = new BehaviorSubject<APIRoleOptionResponseDTO[]>([]);
 
+  private readonly existingUserUuids$ = new BehaviorSubject<string[]>([]);
   private readonly mappedUsers$ = this.componentStore.users$.pipe(
     filterNullish(),
     map((users) => users?.map((user) => mapUserToOption(user)))
@@ -51,17 +51,13 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   );
 
   public readonly isLoading$ = this.componentStore.usersIsLoading$;
-
-  public selectedRoleUuid$ = new Subject<string>();
-
   public resetSubject$ = new Subject<void>();
-
-  public readonly selectUserResultIsLimited$ = this.componentStore.selectUserResultIsLimited$;
-  public selectedUserUuids: string[] = [];
 
   public isBusy = false;
   public isRoleSelected = false;
 
+  private readonly selectedRoleUuid$ = new Subject<string>();
+  private selectedUserUuids: string[] = [];
   private roleUserUuidsDictionary: Dictionary<string[]> = {};
 
   constructor(

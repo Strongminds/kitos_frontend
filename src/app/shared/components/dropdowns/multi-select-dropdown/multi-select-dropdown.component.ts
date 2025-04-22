@@ -78,7 +78,6 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
   ngOnInit() {
     // Debounce update of dropdown filter with more then 1 character
-    //if (!this.useCustomFilter) {
     this.subscriptions.add(
       this.filter$
         .pipe(
@@ -88,7 +87,6 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         )
         .subscribe((filter) => this.filterChange.emit(filter))
     );
-    //}
 
     if (this.resetSubject$) {
       this.subscriptions.add(
