@@ -125,13 +125,6 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     this.selectedValues = this.selectedValuesModel.map((item) => item.value);
   }
 
-  public onFilterChange(filter: string) {
-    if (this.useCustomFilter) {
-      this.filter$.next(filter);
-    }
-    this.filterChange.emit(filter);
-  }
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public externalSearch(_: string, __: any) {
     return true;
