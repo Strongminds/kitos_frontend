@@ -64,7 +64,7 @@ export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implem
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    // Update data subject to be used in calculating obselete values
+    // Update data subject to be used in calculating obsolete values
     if (this.formName && changes['data'] && this.data) {
       this.formDataSubject$.next(this.data);
     }

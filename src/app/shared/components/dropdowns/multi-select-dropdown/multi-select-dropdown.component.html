@@ -21,6 +21,7 @@
   [(ngModel)]="selectedValuesModel"
   [addTagText]="addTagText"
   [addTag]="includeAddTag ? onCreateNew : false"
+  [dropdownPosition]="dropdownPosition"
   data-cy="multi-select-dropdown"
 >
   <ng-template ng-option-tmp let-item="item" let-item$="item$">

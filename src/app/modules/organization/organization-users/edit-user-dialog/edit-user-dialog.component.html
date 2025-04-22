@@ -62,6 +62,7 @@
         i18n-text
         [formGroup]="createForm"
         formName="roles"
+        dropdownPosition="top"
         [data]="roleOptions$ | async"
         (selectedEvent)="rolesChanged($event)"
         (cleared)="rolesCleared()"

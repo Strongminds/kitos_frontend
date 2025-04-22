@@ -38,6 +38,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public isRequired = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public isTagFn: (item: any) => boolean = () => false;
+  @Input() dropdownPosition: 'top' | 'bottom' | 'auto' = 'auto';
 
   @Output() public valueChange = new EventEmitter<T[] | undefined>();
   @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
