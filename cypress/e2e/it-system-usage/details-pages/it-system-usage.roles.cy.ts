@@ -94,11 +94,12 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/**/users*', { fixture: './shared/users.json' });
     cy.contains('Tilføj rolle').click();
 
-    //select user from the dropdown
-    cy.dropdown('Vælg bruger', 'Automatisk oprettet testbruger (GlobalAdmin)', true);
-
     //select role from the dropdown
     cy.dropdown('Vælg rolle', 'TestRole', true);
+
+    //select user from the dropdown
+    cy.dropdown('Vælg bruger', 'Automatisk oprettet testbruger (GlobalAdmin)', true);
+    cy.dropdown('Vælg bruger', 'Automatisk oprettet testbruger (LocalAdmin)', true);
 
     //validate can click the 'save' button
     cy.intercept('/api/v2/it-system-usages/**/add', {});
