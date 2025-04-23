@@ -436,11 +436,11 @@ export class ITContractEffects {
     return this.actions$.pipe(
       ofType(ITContractActions.addItContractRole),
       concatLatestFrom(() => this.store.select(selectItContractUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuid, roleUuid }, contractUuid]) =>
+      mergeMap(([{ userUuids, roleUuid }, contractUuid]) =>
         this.apiInternalItContractService
-          .patchSingleItContractInternalV2PatchAddRoleAssignment({
+          .patchSingleItContractInternalV2PatchAddBulkRoleAssignment({
             contractUuid: contractUuid,
-            request: { userUuid: userUuid, roleUuid: roleUuid },
+            request: { userUuids: userUuids, roleUuid: roleUuid },
           })
           .pipe(
             map((usage) => ITContractActions.addItContractRoleSuccess(usage)),

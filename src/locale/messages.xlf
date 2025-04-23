@@ -5152,6 +5152,9 @@
       <trans-unit id="4334674530466993946" datatype="html">
         <source>Ikon</source>
       </trans-unit>
+      <trans-unit id="8053985576501192145" datatype="html">
+        <source>Vælg brugere</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

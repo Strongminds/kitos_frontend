@@ -14,7 +14,6 @@ import { debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
-import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
@@ -32,15 +31,20 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public data?: MultiSelectDropdownItem<T>[] | null;
   @Input() public initialSelectedValues?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
+
   @Input() public includeAddTag = false;
   @Input() public tagValidation: 'email' | 'none' = 'none';
   @Input() public addTagText: string = $localize`Tilføj email`;
   @Input() public isRequired = false;
+  @Input() public showDescription = false;
+  @Input() public useExternalSearch = false;
+
+  @Input() public resetSubject$?: Subject<void>;
+
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public isTagFn: (item: any) => boolean = () => false;
 
   @Output() public valueChange = new EventEmitter<T[] | undefined>();
-  @Output() public validatedValueChange = new EventEmitter<ValidatedValueChange<T[] | undefined>>();
 
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
@@ -83,6 +87,14 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         )
         .subscribe((filter) => this.filterChange.emit(filter))
     );
+
+    if (this.resetSubject$) {
+      this.subscriptions.add(
+        this.resetSubject$.subscribe(() => {
+          this.onClear();
+        })
+      );
+    }
   }
 
   ngAfterViewInit() {
@@ -109,6 +121,11 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     this.data?.push(value);
     this.selectedValuesModel.push(value);
     this.selectedValues = this.selectedValuesModel.map((item) => item.value);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  public externalSearch(_: string, __: any) {
+    return true;
   }
 
   public onFocus() {

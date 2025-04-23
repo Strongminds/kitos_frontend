@@ -16,16 +16,16 @@ import {
   APIV2OrganizationUnitsInternalINTERNALService,
 } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { IRoleAssignment, mapDTOsToRoleAssignment } from '../models/helpers/read-model-role-assignments';
-import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
-import { filterNullish } from '../pipes/filter-nullish';
-import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
-import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
+import { filterNullish } from '../pipes/filter-nullish';
 
 @Injectable({
   providedIn: 'root',
@@ -166,19 +166,19 @@ export class RoleOptionTypeService implements OnDestroy {
     )(entityUuid).pipe(map((roles) => roles.map(mapDTOsToRoleAssignment)));
   }
 
-  public dispatchAddEntityRoleAction(userUuid: string, roleUuid: string, entityType: RoleOptionTypes) {
+  public dispatchAddEntityRoleAction(userUuids: string[], roleUuid: string, entityType: RoleOptionTypes) {
     switch (entityType) {
       case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.addItSystemUsageRole(userUuid, roleUuid));
+        this.store.dispatch(ITSystemUsageActions.addItSystemUsageRole(userUuids, roleUuid));
         break;
       case 'it-contract':
-        this.store.dispatch(ITContractActions.addItContractRole(userUuid, roleUuid));
+        this.store.dispatch(ITContractActions.addItContractRole(userUuids, roleUuid));
         break;
       case 'data-processing':
-        this.store.dispatch(DataProcessingActions.addDataProcessingRole(userUuid, roleUuid));
+        this.store.dispatch(DataProcessingActions.addDataProcessingRole(userUuids, roleUuid));
         break;
       case 'organization-unit':
-        this.store.dispatch(OrganizationUnitActions.addOrganizationUnitRole(userUuid, roleUuid));
+        this.store.dispatch(OrganizationUnitActions.addOrganizationUnitRole(userUuids, roleUuid));
         break;
     }
   }

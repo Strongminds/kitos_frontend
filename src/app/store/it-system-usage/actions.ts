@@ -84,7 +84,7 @@ export const ITSystemUsageActions = createActionGroup({
     ) => ({ permissions }),
     'Get IT System Usage Collection Permissions Error': emptyProps(),
 
-    'Add It System Usage Role': (userUuid: string, roleUuid: string) => ({ userUuid, roleUuid }),
+    'Add It System Usage Role': (userUuids: string[], roleUuid: string) => ({ userUuids, roleUuid }),
     'Add It System Usage Role Success': (itSystemUsage: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Add It System Usage Role Error': emptyProps(),
 

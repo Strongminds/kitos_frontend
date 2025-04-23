@@ -373,11 +373,11 @@ export class DataProcessingEffects {
     return this.actions$.pipe(
       ofType(DataProcessingActions.addDataProcessingRole),
       concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuid, roleUuid }, dprUuid]) =>
+      mergeMap(([{ userUuids, roleUuid }, dprUuid]) =>
         this.apiInternalDataProcessingRegistrationService
-          .patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment({
+          .patchSingleDataProcessingRegistrationInternalV2PatchAddBulkRoleAssignment({
             dprUuid: dprUuid,
-            request: { userUuid: userUuid, roleUuid: roleUuid },
+            request: { userUuids: userUuids, roleUuid: roleUuid },
           })
           .pipe(
             map((role) => DataProcessingActions.addDataProcessingRoleSuccess(role)),

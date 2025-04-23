@@ -8,6 +8,7 @@
   [clearAllText]="clearAllText"
   [loadingText]="loadingText"
   [notFoundText]="notFoundText"
+  [searchFn]="useExternalSearch ? externalSearch : null"
   (search)="filter$.next($event.term)"
   (clear)="onClear()"
   (focus)="onFocus()"
@@ -32,9 +33,15 @@
         [ngModelOptions]="{ standalone: true }"
         [disabled]="item.disabled"
       />
-      <p class="select-option-text-margin">
+      <p class="select-option-text-margin" *ngIf="!showDescription || !item.description">
         {{ item.name }}
       </p>
+      <div *ngIf="item.description && showDescription" class="item-with-description">
+        {{ item.name }}
+        <app-paragraph *ngIf="item.description && showDescription" paragraphSize="small">{{
+          item.description
+        }}</app-paragraph>
+      </div>
       <div *ngIf="isTagFn(item)" class="ng-clear-wrapper remove-tag-button" (click)="removeTag(item)">
         <span class="ng-clear">x</span>
       </div>
