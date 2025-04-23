@@ -84,8 +84,8 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     this.componentStore.getUsers(filter);
   }
 
-  public userChange(userUuids: string[]) {
-    this.selectedUserUuids = userUuids;
+  public userChange(userUuids?: string[]) {
+    this.selectedUserUuids = userUuids ?? [];
   }
 
   public roleChange(roleUuid?: string | null) {

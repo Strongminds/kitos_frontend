@@ -17,7 +17,7 @@
         [data]="filteredUsers$ | async"
         (filterChange)="userFilterChange($event)"
         (selectedEvent)="userChange($event)"
-        (cleared)="userChange([])"
+        (cleared)="userChange()"
         [disabled]="!isRoleSelected"
         [resetSubject$]="resetSubject$"
         [loading]="isLoading$ | async"
