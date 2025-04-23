@@ -12,16 +12,17 @@
         (valueChange)="roleChange($event)"
       ></app-dropdown>
       <app-multi-select-dropdown
-        text="Vælg bruger"
+        text="Vælg brugere"
         i18n-text
         [data]="filteredUsers$ | async"
         (filterChange)="userFilterChange($event)"
         (selectedEvent)="userChange($event)"
+        (cleared)="userChange([])"
         [disabled]="!isRoleSelected"
         [resetSubject$]="resetSubject$"
         [loading]="isLoading$ | async"
         [showDescription]="true"
-        [useCustomFilter]="true"
+        [useExternalSearch]="true"
       ></app-multi-select-dropdown>
 
       <app-dialog-actions>

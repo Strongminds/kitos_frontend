@@ -37,7 +37,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public addTagText: string = $localize`Tilføj email`;
   @Input() public isRequired = false;
   @Input() public showDescription = false;
-  @Input() public useCustomFilter = false;
+  @Input() public useExternalSearch = false;
 
   @Input() public resetSubject$?: Subject<void>;
 

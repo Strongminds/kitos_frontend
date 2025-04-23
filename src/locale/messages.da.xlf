@@ -6787,6 +6787,10 @@
         <source>Ikon</source>
         <target state="new">Ikon</target>
       </trans-unit>
+      <trans-unit id="8053985576501192145" datatype="html">
+        <source>Vælg brugere</source>
+        <target state="new">Vælg brugere</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -8,7 +8,7 @@
   [clearAllText]="clearAllText"
   [loadingText]="loadingText"
   [notFoundText]="notFoundText"
-  [searchFn]="useCustomFilter ? externalSearch : null"
+  [searchFn]="useExternalSearch ? externalSearch : null"
   (search)="filter$.next($event.term)"
   (clear)="onClear()"
   (focus)="onFocus()"
@@ -36,7 +36,7 @@
       <p class="select-option-text-margin" *ngIf="!showDescription || !item.description">
         {{ item.name }}
       </p>
-      <div *ngIf="item.description && showDescription" class="description">
+      <div *ngIf="item.description && showDescription" class="item-with-description">
         {{ item.name }}
         <app-paragraph *ngIf="item.description && showDescription" paragraphSize="small">{{
           item.description
