@@ -11,30 +11,14 @@
  */
 
 
-export interface APIPublicMessageRequestDTO { 
-    title?: string;
-    longDescription?: string;
-    shortDescription?: string;
-    status?: APIPublicMessageRequestDTO.StatusEnum;
-    link?: string;
-    iconType?: APIPublicMessageRequestDTO.IconTypeEnum;
-    isMain?: boolean;
+export interface APIBulkRoleAssignmentRequestDTO { 
+    /**
+     * UUID of the role option  Constraints:      - Role must be available in the organization
+     */
+    roleUuid: string;
+    /**
+     * UUIDs of users  Constraints:      - every User must be a member of the organization
+     */
+    userUuids: Array<string>;
 }
-export namespace APIPublicMessageRequestDTO {
-    export type StatusEnum = 'Active' | 'Inactive';
-    export const StatusEnum = {
-        Active: 'Active' as StatusEnum,
-        Inactive: 'Inactive' as StatusEnum
-    };
-    export type IconTypeEnum = 'Document' | 'Clipboard' | 'Settings' | 'Calendar' | 'MultipleUsers' | 'Mail';
-    export const IconTypeEnum = {
-        Document: 'Document' as IconTypeEnum,
-        Clipboard: 'Clipboard' as IconTypeEnum,
-        Settings: 'Settings' as IconTypeEnum,
-        Calendar: 'Calendar' as IconTypeEnum,
-        MultipleUsers: 'MultipleUsers' as IconTypeEnum,
-        Mail: 'Mail' as IconTypeEnum
-    };
-}
-
 

@@ -243,3 +243,9 @@ input[type="checkbox"] {
   margin-left: auto;
   padding-right: $padding-small;
 }
+
+.item-with-description {
+  margin-top: $padding-small;
+  margin-bottom: $padding-small;
+  line-height: 110%;
+}

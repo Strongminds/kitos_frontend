@@ -4,11 +4,15 @@
 >
   <div class="top-container">
     <div class="icon-container">
-      <app-icon [iconType]="config.iconType"></app-icon>
+      <app-icon [iconType]="getIconType(publicMessage)"></app-icon>
     </div>
 
     <div class="link-container">
-      <app-status-chip [value]="activeStatus(publicMessage)" [valueDisplayType]="statusDisplayType"></app-status-chip>
+      <app-status-chip
+        [value]="activeStatus(publicMessage)"
+        [valueDisplayType]="statusDisplayType"
+        data-cy="public-message-status"
+      ></app-status-chip>
       <app-button
         size="x-small"
         buttonStyle="tertiary"

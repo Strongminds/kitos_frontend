@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { PublicMessage } from 'src/app/shared/models/public-message.model';
-import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
-import { EditPublicMessageDialogComponent } from '../edit-public-message-dialog/edit-public-message-dialog.component';
 import { Observable } from 'rxjs';
 import { validateUrl } from 'src/app/shared/helpers/link.helpers';
+import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
+import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
+import { EditPublicMessageDialogComponent } from '../edit-public-message-dialog/edit-public-message-dialog.component';
 
 @Component({
   selector: 'app-public-message-dialog',
@@ -25,7 +25,7 @@ export class PublicMessageDialogComponent {
   }
 
   public hasValidUrl(publicMessage: PublicMessage): boolean {
-      const url = publicMessage.link;
-      return !!url && validateUrl(url);
-    }
+    const url = publicMessage.link;
+    return !!url && validateUrl(url);
+  }
 }

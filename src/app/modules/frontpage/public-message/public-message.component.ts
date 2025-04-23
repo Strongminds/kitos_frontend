@@ -1,14 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { PublicMessage } from 'src/app/shared/models/public-message.model';
-import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
-import { IconType } from 'src/app/shared/models/icon-type';
-import { PublicMessageDialogComponent } from './public-message-dialog/public-message-dialog.component';
-import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
 import { map, Observable } from 'rxjs';
-import { FrontpageComponentStore } from '../frontpage.component-store';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
+import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { validateUrl } from 'src/app/shared/helpers/link.helpers';
+import { IconType } from 'src/app/shared/models/icon-type';
+import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { FrontpageComponentStore } from '../frontpage.component-store';
+import { PublicMessageDialogComponent } from './public-message-dialog/public-message-dialog.component';
 
 export interface PublicMessageConfig {
   iconType: IconType;
@@ -24,18 +24,20 @@ export interface PublicMessageConfig {
   },
 })
 export class PublicMessageComponent implements OnInit {
-  @Input() config!: PublicMessageConfig;
-  @Input() mode: 'normal' | 'compact' = 'normal';
+  @Input() mode!: 'normal' | 'compact';
+  @Input() publicMessageUuid!: string;
 
   public publicMessage$!: Observable<PublicMessage>;
+  private readonly publicMessages$ = this.componentStore.publicMessages$.pipe(filterNullish());
+
   public readonly statusDisplayType = BooleanValueDisplayType.NormalUnstable;
 
   constructor(private dialog: MatDialog, private readonly componentStore: FrontpageComponentStore) {}
 
-  public ngOnInit(): void {
-    this.publicMessage$ = this.componentStore.publicMessages$.pipe(
-      filterNullish(),
-      map((messages) => messages[this.config.index])
+  ngOnInit(): void {
+    // Initialize publicMessage$ by filtering publicMessages$ for the message with the matching UUID
+    this.publicMessage$ = this.publicMessages$.pipe(
+      map((messages) => messages.find((message) => message.uuid === this.publicMessageUuid)!)
     );
   }
 
@@ -58,5 +60,9 @@ export class PublicMessageComponent implements OnInit {
       default:
         return undefined;
     }
+  }
+
+  public getIconType(publicMessage: PublicMessage): IconType {
+    return publicMessage.iconType?.icon ?? 'document';
   }
 }

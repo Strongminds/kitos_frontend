@@ -4,7 +4,7 @@ import { tapResponse } from '@ngrx/operators';
 
 import { switchMap, tap } from 'rxjs';
 import { APIPublicMessageResponseDTO, APIV2PublicMessagesINTERNALService } from 'src/app/api/v2';
-import { adaptPublicMessage, PublicMessage } from 'src/app/shared/models/public-message.model';
+import { adaptPublicMessage, PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 
 interface FrontpageComponentStoreState {
   loading: boolean;
@@ -29,7 +29,7 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
     })
   );
 
-  private updateText = this.updater(
+  private updatePublicMessages = this.updater(
     (state, publicMessages: PublicMessage[]): FrontpageComponentStoreState => ({
       ...state,
       loading: false,
@@ -37,13 +37,13 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
     })
   );
 
-  public getText = this.effect<void>((trigger$) =>
+  public getPublicMessages = this.effect<void>((trigger$) =>
     trigger$.pipe(
       tap(() => this.updateLoading(true)),
       switchMap(() =>
         this.apiTextService.getManyPublicMessagesV2Get().pipe(
           tapResponse(
-            (response: APIPublicMessageResponseDTO[]) => this.updateText(response.map(adaptPublicMessage)),
+            (response: APIPublicMessageResponseDTO[]) => this.updatePublicMessages(response.map(adaptPublicMessage)),
             (e) => {
               console.error(e);
             },
