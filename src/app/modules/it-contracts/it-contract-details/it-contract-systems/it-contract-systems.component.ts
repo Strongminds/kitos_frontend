@@ -19,10 +19,11 @@ import { ItContractSystemsComponentStore } from './it-contract-systems.component
 import { selectItContractEnableAgreementElements, selectItContractEnableSystemUsages, selectItContractEnableRelations } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-it-contract-systems',
-  templateUrl: './it-contract-systems.component.html',
-  styleUrl: './it-contract-systems.component.scss',
-  providers: [ItContractSystemsComponentStore],
+    selector: 'app-it-contract-systems',
+    templateUrl: './it-contract-systems.component.html',
+    styleUrl: './it-contract-systems.component.scss',
+    providers: [ItContractSystemsComponentStore],
+    standalone: false
 })
 export class ItContractSystemsComponent extends BaseComponent implements OnInit {
   public readonly systemAgreementElements$ = this.store

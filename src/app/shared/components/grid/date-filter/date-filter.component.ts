@@ -12,9 +12,10 @@ interface DateFilterOption {
 }
 
 @Component({
-  selector: 'app-date-filter',
-  templateUrl: 'date-filter.component.html',
-  styleUrls: ['date-filter.component.scss'],
+    selector: 'app-date-filter',
+    templateUrl: 'date-filter.component.html',
+    styleUrls: ['date-filter.component.scss'],
+    standalone: false
 })
 export class DateFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

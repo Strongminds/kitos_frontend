@@ -3,9 +3,10 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { AppPath } from 'src/app/shared/enums/app-path';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: 'menu.component.html',
-  styleUrls: ['menu.component.scss'],
+    selector: 'app-menu',
+    templateUrl: 'menu.component.html',
+    styleUrls: ['menu.component.scss'],
+    standalone: false
 })
 export class MenuComponent implements DoCheck {
   @Input() title?: string | null = '';

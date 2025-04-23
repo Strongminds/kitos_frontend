@@ -21,9 +21,10 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
-  selector: 'app-gdpr-technical-precautions-section',
-  templateUrl: './gdpr-technical-precautions-section.component.html',
-  styleUrls: ['./gdpr-technical-precautions-section.component.scss'],
+    selector: 'app-gdpr-technical-precautions-section',
+    templateUrl: './gdpr-technical-precautions-section.component.html',
+    styleUrls: ['./gdpr-technical-precautions-section.component.scss'],
+    standalone: false
 })
 export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

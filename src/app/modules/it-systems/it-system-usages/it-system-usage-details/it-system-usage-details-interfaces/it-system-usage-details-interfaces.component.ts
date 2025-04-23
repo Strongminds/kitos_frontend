@@ -4,9 +4,10 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { selectItSystemUsageContextSystemUuid } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
-  selector: 'app-it-system-usage-details-interfaces',
-  templateUrl: './it-system-usage-details-interfaces.component.html',
-  styleUrls: ['./it-system-usage-details-interfaces.component.scss']
+    selector: 'app-it-system-usage-details-interfaces',
+    templateUrl: './it-system-usage-details-interfaces.component.html',
+    styleUrls: ['./it-system-usage-details-interfaces.component.scss'],
+    standalone: false
 })
 export class ItSystemUsageDetailsInterfacesComponent extends BaseComponent {
 

@@ -8,9 +8,10 @@ import { selectIsDeleteLoading } from 'src/app/store/local-admin/fk-org/selector
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
-  selector: 'app-fk-org-delete-dialog',
-  templateUrl: './fk-org-delete-dialog.component.html',
-  styleUrl: './fk-org-delete-dialog.component.scss',
+    selector: 'app-fk-org-delete-dialog',
+    templateUrl: './fk-org-delete-dialog.component.html',
+    styleUrl: './fk-org-delete-dialog.component.scss',
+    standalone: false
 })
 export class FkOrgDeleteDialogComponent extends BaseComponent implements OnInit {
   public readonly isDeleteLoading$ = this.store.select(selectIsDeleteLoading);

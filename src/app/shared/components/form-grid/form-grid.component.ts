@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-form-grid',
-  templateUrl: './form-grid.component.html',
-  styleUrls: ['./form-grid.component.scss'],
+    selector: 'app-form-grid',
+    templateUrl: './form-grid.component.html',
+    styleUrls: ['./form-grid.component.scss'],
+    standalone: false
 })
 export class FormGridComponent {
   @Input() public formGroup!: FormGroup;

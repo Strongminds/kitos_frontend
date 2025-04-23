@@ -5,9 +5,10 @@ import { BaseDropdownComponent } from 'src/app/shared/base/base-dropdown.compone
 import { AuditModel, baseAuditStatusValue } from 'src/app/shared/models/it-contract/audit-model';
 
 @Component({
-  selector: 'app-audit-picker',
-  templateUrl: './audit-picker.component.html',
-  styleUrl: './audit-picker.component.scss',
+    selector: 'app-audit-picker',
+    templateUrl: './audit-picker.component.html',
+    styleUrl: './audit-picker.component.scss',
+    standalone: false
 })
 export class AuditPickerComponent extends BaseDropdownComponent<AuditModel | null> implements OnInit, OnChanges {
   @Output() public openDropdown = new EventEmitter();

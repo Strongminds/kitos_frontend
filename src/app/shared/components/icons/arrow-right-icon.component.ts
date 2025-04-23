@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-arrow-right-icon',
-  styles: [':host {display: contents}'],
-  templateUrl: './arrow-right.svg',
+    selector: 'app-arrow-right-icon',
+    styles: [':host {display: contents}'],
+    templateUrl: './arrow-right.svg',
+    standalone: false
 })
 export class ArrowRightIconComponent {}

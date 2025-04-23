@@ -9,9 +9,10 @@ import {
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 
 @Component({
-  selector: 'app-edit-local-option-type-dialog',
-  templateUrl: './edit-local-option-type-dialog.component.html',
-  styleUrl: './edit-local-option-type-dialog.component.scss',
+    selector: 'app-edit-local-option-type-dialog',
+    templateUrl: './edit-local-option-type-dialog.component.html',
+    styleUrl: './edit-local-option-type-dialog.component.scss',
+    standalone: false
 })
 export class EditLocalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: LocalAdminOptionTypeItem;

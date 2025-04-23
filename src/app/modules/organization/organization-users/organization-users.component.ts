@@ -31,9 +31,10 @@ import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.com
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 
 @Component({
-  selector: 'app-organization-users',
-  templateUrl: './organization-users.component.html',
-  styleUrl: './organization-users.component.scss',
+    selector: 'app-organization-users',
+    templateUrl: './organization-users.component.html',
+    styleUrl: './organization-users.component.scss',
+    standalone: false
 })
 export class OrganizationUsersComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectOrganizationUserGridLoading);

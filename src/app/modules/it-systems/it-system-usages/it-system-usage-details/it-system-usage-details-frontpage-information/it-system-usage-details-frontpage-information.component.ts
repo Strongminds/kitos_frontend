@@ -57,9 +57,10 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 @Component({
-  selector: 'app-it-system-usage-details-frontpage-information',
-  templateUrl: 'it-system-usage-details-frontpage-information.component.html',
-  styleUrls: ['it-system-usage-details-frontpage-information.component.scss'],
+    selector: 'app-it-system-usage-details-frontpage-information',
+    templateUrl: 'it-system-usage-details-frontpage-information.component.html',
+    styleUrls: ['it-system-usage-details-frontpage-information.component.scss'],
+    standalone: false
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(

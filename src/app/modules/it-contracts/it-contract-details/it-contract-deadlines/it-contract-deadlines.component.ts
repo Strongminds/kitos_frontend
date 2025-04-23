@@ -30,9 +30,10 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
-  selector: 'app-it-contract-deadlines',
-  templateUrl: './it-contract-deadlines.component.html',
-  styleUrl: './it-contract-deadlines.component.scss',
+    selector: 'app-it-contract-deadlines',
+    templateUrl: './it-contract-deadlines.component.html',
+    styleUrl: './it-contract-deadlines.component.scss',
+    standalone: false
 })
 export class ItContractDeadlinesComponent extends BaseComponent implements OnInit {
   private readonly deadlineDurationYearsUpperLimit = 100;

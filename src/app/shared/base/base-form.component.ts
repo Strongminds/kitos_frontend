@@ -4,7 +4,8 @@ import { ValidatedValueChange } from '../models/validated-value-change.model';
 import { BaseComponent } from './base.component';
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export class BaseFormComponent<T> extends BaseComponent implements OnInit {
   @Input() public text = '';

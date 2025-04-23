@@ -7,9 +7,10 @@ import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { ExternalReferenceProperties } from 'src/app/shared/models/external-references/external-reference-properties.model';
 
 @Component({
-  selector: 'app-external-reference-dialog[externalReferenceProperties][title]',
-  templateUrl: './external-reference-dialog.component.html',
-  styleUrls: ['./external-reference-dialog.component.scss'],
+    selector: 'app-external-reference-dialog[externalReferenceProperties][title]',
+    templateUrl: './external-reference-dialog.component.html',
+    styleUrls: ['./external-reference-dialog.component.scss'],
+    standalone: false
 })
 export class ExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public externalReferenceProperties!: ExternalReferenceProperties;

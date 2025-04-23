@@ -13,9 +13,10 @@ import { ExcelImportActions } from 'src/app/store/local-admin/excel-import/actio
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
-  selector: 'app-local-admin-base-excel-export',
-  templateUrl: './local-admin-base-excel-export.component.html',
-  styleUrl: './local-admin-base-excel-export.component.scss',
+    selector: 'app-local-admin-base-excel-export',
+    templateUrl: './local-admin-base-excel-export.component.html',
+    styleUrl: './local-admin-base-excel-export.component.scss',
+    standalone: false
 })
 export class LocalAdminBaseExcelExportComponent extends BaseComponent {
   @Input() public type!: LocalAdminImportEntityType;

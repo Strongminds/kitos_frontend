@@ -5,9 +5,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectITSystemUsageHasModifyPermission, selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
-  selector: 'app-it-system-usage-details-notifications',
-  templateUrl: './it-system-usage-details-notifications.component.html',
-  styleUrls: ['./it-system-usage-details-notifications.component.scss']
+    selector: 'app-it-system-usage-details-notifications',
+    templateUrl: './it-system-usage-details-notifications.component.html',
+    styleUrls: ['./it-system-usage-details-notifications.component.scss'],
+    standalone: false
 })
 export class ItSystemUsageDetailsNotificationsComponent extends BaseComponent {
   public readonly systemUsageUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-snackbar-actions',
-  templateUrl: './snackbar-actions.component.html',
-  styleUrl: './snackbar-actions.component.scss'
+    selector: 'app-snackbar-actions',
+    templateUrl: './snackbar-actions.component.html',
+    styleUrl: './snackbar-actions.component.scss',
+    standalone: false
 })
 export class SnackbarActionsComponent {
 

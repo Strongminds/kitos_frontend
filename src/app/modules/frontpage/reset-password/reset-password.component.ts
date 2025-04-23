@@ -10,10 +10,11 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { ResetPasswordComponentStore } from './reset-password.component-store';
 
 @Component({
-  selector: 'app-reset-password',
-  templateUrl: './reset-password.component.html',
-  styleUrl: './reset-password.component.scss',
-  providers: [ResetPasswordComponentStore],
+    selector: 'app-reset-password',
+    templateUrl: './reset-password.component.html',
+    styleUrl: './reset-password.component.scss',
+    providers: [ResetPasswordComponentStore],
+    standalone: false
 })
 export class ResetPasswordComponent extends BaseComponent implements OnInit {
   public readonly requestId$: Observable<string> = this.route.params.pipe(map((params) => params['id']));

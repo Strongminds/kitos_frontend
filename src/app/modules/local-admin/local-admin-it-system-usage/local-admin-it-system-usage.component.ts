@@ -3,9 +3,10 @@ import { LocalAdminModuleSegmentOptions, LocalAdminModuleSegmentOptionType } fro
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
-  selector: 'app-local-admin-it-system-usage',
-  templateUrl: './local-admin-it-system-usage.component.html',
-  styleUrl: './local-admin-it-system-usage.component.scss',
+    selector: 'app-local-admin-it-system-usage',
+    templateUrl: './local-admin-it-system-usage.component.html',
+    styleUrl: './local-admin-it-system-usage.component.scss',
+    standalone: false
 })
 export class LocalAdminItSystemUsageComponent {
   public readonly LocalAdminModuleSegmentOptionType = LocalAdminModuleSegmentOptionType;

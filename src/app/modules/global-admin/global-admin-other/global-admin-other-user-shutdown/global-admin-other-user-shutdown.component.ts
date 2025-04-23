@@ -6,10 +6,11 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { GlobalAdminOtherUserShutdownComponentStore } from './global-admin-other-user-shutdown.component-store';
 
 @Component({
-  selector: 'app-global-admin-other-user-shutdown',
-  templateUrl: './global-admin-other-user-shutdown.component.html',
-  styleUrl: './global-admin-other-user-shutdown.component.scss',
-  providers: [GlobalAdminOtherUserShutdownComponentStore],
+    selector: 'app-global-admin-other-user-shutdown',
+    templateUrl: './global-admin-other-user-shutdown.component.html',
+    styleUrl: './global-admin-other-user-shutdown.component.scss',
+    providers: [GlobalAdminOtherUserShutdownComponentStore],
+    standalone: false
 })
 export class GlobalAdminOtherUserShutdownComponent extends BaseComponent {
   public readonly isLoading$ = this.componentStore.isLoading$;

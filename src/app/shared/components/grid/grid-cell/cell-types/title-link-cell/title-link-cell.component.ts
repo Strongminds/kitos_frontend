@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { BaseCellComponent } from '../../base-cell.component';
 
 @Component({
-  selector: 'app-title-link-cell',
-  templateUrl: './title-link-cell.component.html',
-  styleUrl: './title-link-cell.component.scss'
+    selector: 'app-title-link-cell',
+    templateUrl: './title-link-cell.component.html',
+    styleUrl: './title-link-cell.component.scss',
+    standalone: false
 })
 export class TitleLinkCellComponent extends BaseCellComponent {
 

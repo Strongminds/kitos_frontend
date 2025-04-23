@@ -8,9 +8,10 @@ enum NotificationSegmentType {
 }
 
 @Component({
-  selector: 'app-notifications-page',
-  templateUrl: './notifications-page.component.html',
-  styleUrl: './notifications-page.component.scss',
+    selector: 'app-notifications-page',
+    templateUrl: './notifications-page.component.html',
+    styleUrl: './notifications-page.component.scss',
+    standalone: false
 })
 export class NotificationsPageComponent {
   @Input() entityType!: RegistrationEntityTypes;

@@ -5,9 +5,10 @@ import { GdprOverviewDialogComponent } from 'src/app/modules/it-systems/it-syste
 import { selectITSystemUsageEnableGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-export-menu-button',
-  templateUrl: './export-menu-button.component.html',
-  styleUrl: './export-menu-button.component.scss',
+    selector: 'app-export-menu-button',
+    templateUrl: './export-menu-button.component.html',
+    styleUrl: './export-menu-button.component.scss',
+    standalone: false
 })
 export class ExportMenuButtonComponent {
   @Input() exportMethod!: (exportAllColumns: boolean) => void;

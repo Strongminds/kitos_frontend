@@ -7,9 +7,10 @@ import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants'
 import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 
 @Component({
-  selector: 'app-link-write-dialog',
-  templateUrl: './link-write-dialog.component.html',
-  styleUrl: './link-write-dialog.component.scss',
+    selector: 'app-link-write-dialog',
+    templateUrl: './link-write-dialog.component.html',
+    styleUrl: './link-write-dialog.component.scss',
+    standalone: false
 })
 export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public url$!: Observable<string | undefined>;

@@ -24,10 +24,11 @@ import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/us
 import { OrganizationMasterDataComponentStore } from './organization-master-data.component-store';
 
 @Component({
-  selector: 'app-organization-master-data',
-  templateUrl: './organization-master-data.component.html',
-  styleUrl: './organization-master-data.component.scss',
-  providers: [OrganizationMasterDataComponentStore],
+    selector: 'app-organization-master-data',
+    templateUrl: './organization-master-data.component.html',
+    styleUrl: './organization-master-data.component.scss',
+    providers: [OrganizationMasterDataComponentStore],
+    standalone: false
 })
 export class OrganizationMasterDataComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);

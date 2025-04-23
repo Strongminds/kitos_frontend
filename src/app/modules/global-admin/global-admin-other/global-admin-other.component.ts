@@ -7,9 +7,10 @@ export enum GlobalAdminOtherSegmentOptionType {
 }
 
 @Component({
-  selector: 'app-global-admin-other',
-  templateUrl: './global-admin-other.component.html',
-  styleUrl: './global-admin-other.component.scss',
+    selector: 'app-global-admin-other',
+    templateUrl: './global-admin-other.component.html',
+    styleUrl: './global-admin-other.component.scss',
+    standalone: false
 })
 export class GlobalAdminOtherComponent {
   public readonly SegmentType = GlobalAdminOtherSegmentOptionType;

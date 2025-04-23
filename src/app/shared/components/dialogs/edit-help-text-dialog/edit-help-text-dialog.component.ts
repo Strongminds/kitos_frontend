@@ -8,9 +8,10 @@ import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 
 @Component({
-  selector: 'app-edit-help-text-dialog',
-  templateUrl: './edit-help-text-dialog.component.html',
-  styleUrl: './edit-help-text-dialog.component.scss',
+    selector: 'app-edit-help-text-dialog',
+    templateUrl: './edit-help-text-dialog.component.html',
+    styleUrl: './edit-help-text-dialog.component.scss',
+    standalone: false
 })
 export class EditHelpTextDialogComponent implements OnInit {
   @Input() helpText!: HelpText;

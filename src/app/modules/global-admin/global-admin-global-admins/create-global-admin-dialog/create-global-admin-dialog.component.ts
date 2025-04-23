@@ -10,9 +10,10 @@ import { map } from 'rxjs';
 import { ShallowUser } from 'src/app/shared/models/userV2.model';
 
 @Component({
-  selector: 'app-create-global-admin-dialog',
-  templateUrl: './create-global-admin-dialog.component.html',
-  styleUrl: './create-global-admin-dialog.component.scss',
+    selector: 'app-create-global-admin-dialog',
+    templateUrl: './create-global-admin-dialog.component.html',
+    styleUrl: './create-global-admin-dialog.component.scss',
+    standalone: false
 })
 export class CreateGlobalAdminDialogComponent extends BaseComponent implements OnInit {
   public formGroup = new FormGroup({

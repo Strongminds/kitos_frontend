@@ -20,10 +20,11 @@ import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-org
 import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
 
 @Component({
-  selector: 'app-edit-organization-unit-dialog',
-  templateUrl: './edit-organization-dialog.component.html',
-  styleUrl: './edit-organization-dialog.component.scss',
-  providers: [OrganizationsDialogComponentStore],
+    selector: 'app-edit-organization-unit-dialog',
+    templateUrl: './edit-organization-dialog.component.html',
+    styleUrl: './edit-organization-dialog.component.scss',
+    providers: [OrganizationsDialogComponentStore],
+    standalone: false
 })
 export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   @Input() organization!: OrganizationOData;

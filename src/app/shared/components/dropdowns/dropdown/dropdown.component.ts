@@ -5,9 +5,10 @@ import { combineLatest } from 'rxjs';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 
 @Component({
-  selector: 'app-dropdown',
-  templateUrl: 'dropdown.component.html',
-  styleUrls: ['dropdown.component.scss'],
+    selector: 'app-dropdown',
+    templateUrl: 'dropdown.component.html',
+    styleUrls: ['dropdown.component.scss'],
+    standalone: false
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;

@@ -4,9 +4,10 @@ import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 import { IconType } from 'src/app/shared/models/icon-type';
 
 @Component({
-  selector: 'app-menu-button',
-  templateUrl: './menu-button.component.html',
-  styleUrls: ['./menu-button.component.scss'],
+    selector: 'app-menu-button',
+    templateUrl: './menu-button.component.html',
+    styleUrls: ['./menu-button.component.scss'],
+    standalone: false
 })
 export class MenuButtonComponent {
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;

@@ -30,10 +30,11 @@ import { NotificationsTableSentDialogComponent } from './notifications-table-sen
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
 
 @Component({
-  selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
-  templateUrl: './notifications-table.component.html',
-  styleUrls: ['./notifications-table.component.scss'],
-  providers: [NotificationsTableComponentStore],
+    selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
+    templateUrl: './notifications-table.component.html',
+    styleUrls: ['./notifications-table.component.scss'],
+    providers: [NotificationsTableComponentStore],
+    standalone: false
 })
 export class NotificationsTableComponent extends BaseComponent implements OnInit {
   @Input() entityUuid!: string;

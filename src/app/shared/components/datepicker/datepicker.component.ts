@@ -5,9 +5,10 @@ import * as moment from 'moment';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
-  selector: 'app-datepicker',
-  templateUrl: 'datepicker.component.html',
-  styleUrls: ['datepicker.component.scss'],
+    selector: 'app-datepicker',
+    templateUrl: 'datepicker.component.html',
+    styleUrls: ['datepicker.component.scss'],
+    standalone: false
 })
 export class DatePickerComponent extends BaseFormComponent<Date | undefined> implements AfterViewInit, OnDestroy {
   @Input() public icon?: 'search';

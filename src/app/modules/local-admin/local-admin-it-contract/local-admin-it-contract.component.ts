@@ -3,9 +3,10 @@ import { LocalAdminModuleSegmentOptions, LocalAdminModuleSegmentOptionType } fro
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
-  selector: 'app-local-admin-it-contract',
-  templateUrl: './local-admin-it-contract.component.html',
-  styleUrl: './local-admin-it-contract.component.scss',
+    selector: 'app-local-admin-it-contract',
+    templateUrl: './local-admin-it-contract.component.html',
+    styleUrl: './local-admin-it-contract.component.scss',
+    standalone: false
 })
 export class LocalAdminItContractComponent {
   public readonly LocalAdminModuleSegmentOptionType = LocalAdminModuleSegmentOptionType;

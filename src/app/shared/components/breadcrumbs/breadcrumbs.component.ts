@@ -3,9 +3,10 @@ import { BreadCrumbContext } from '../../models/breadcrumbs/breadcrumb-context.m
 import { BreadCrumb } from '../../models/breadcrumbs/breadcrumb.model';
 
 @Component({
-  selector: 'app-breadcrumbs',
-  templateUrl: 'breadcrumbs.component.html',
-  styleUrls: ['breadcrumbs.component.scss'],
+    selector: 'app-breadcrumbs',
+    templateUrl: 'breadcrumbs.component.html',
+    styleUrls: ['breadcrumbs.component.scss'],
+    standalone: false
 })
 export class BreadcrumbsComponent {
   public breadCrumbs?: { item: BreadCrumb; context: BreadCrumbContext }[];

@@ -4,9 +4,10 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { selectItSystemUuid } from 'src/app/store/it-system/selectors';
 
 @Component({
-  selector: 'app-it-system-catalog-interfaces',
-  templateUrl: './it-system-catalog-interfaces.component.html',
-  styleUrl: './it-system-catalog-interfaces.component.scss',
+    selector: 'app-it-system-catalog-interfaces',
+    templateUrl: './it-system-catalog-interfaces.component.html',
+    styleUrl: './it-system-catalog-interfaces.component.scss',
+    standalone: false
 })
 export class ItSystemCatalogInterfacesComponent extends BaseComponent {
   public readonly systemUuid$ = this.store.select(selectItSystemUuid);

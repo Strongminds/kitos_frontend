@@ -21,9 +21,10 @@ export interface SystemRelationModel {
 }
 
 @Component({
-  selector: 'app-relation-table[relations][emptyText]',
-  templateUrl: './relation-table.component.html',
-  styleUrls: ['./relation-table.component.scss'],
+    selector: 'app-relation-table[relations][emptyText]',
+    templateUrl: './relation-table.component.html',
+    styleUrls: ['./relation-table.component.scss'],
+    standalone: false
 })
 export class RelationTableComponent extends BaseComponent {
   @Input() public relations!: Array<SystemRelationModel>;

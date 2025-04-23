@@ -9,8 +9,9 @@ import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-cust
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
-  templateUrl: 'data-processing.component.html',
-  styleUrls: ['data-processing.component.scss'],
+    templateUrl: 'data-processing.component.html',
+    styleUrls: ['data-processing.component.scss'],
+    standalone: false
 })
 export class DataProcessingComponent extends BaseComponent implements OnInit {
   constructor(private store: Store, private router: Router) {

@@ -11,9 +11,10 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
-  selector: 'app-registered-data-categories-section',
-  templateUrl: './registered-data-categories-section.component.html',
-  styleUrls: ['./registered-data-categories-section.component.scss'],
+    selector: 'app-registered-data-categories-section',
+    templateUrl: './registered-data-categories-section.component.html',
+    styleUrls: ['./registered-data-categories-section.component.scss'],
+    standalone: false
 })
 export class RegisteredDataCategoriesSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

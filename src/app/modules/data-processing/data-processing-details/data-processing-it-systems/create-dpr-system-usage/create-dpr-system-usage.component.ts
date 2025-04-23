@@ -11,10 +11,11 @@ import { selectDataProcessingSystems } from 'src/app/store/data-processing/selec
 import { CreateDprSystemUsageDialogComponentStore } from './create-dpr-system-usage.component-store';
 
 @Component({
-  selector: 'app-create-dpr-system-usage',
-  templateUrl: './create-dpr-system-usage.component.html',
-  styleUrl: './create-dpr-system-usage.component.scss',
-  providers: [CreateDprSystemUsageDialogComponentStore],
+    selector: 'app-create-dpr-system-usage',
+    templateUrl: './create-dpr-system-usage.component.html',
+    styleUrl: './create-dpr-system-usage.component.scss',
+    providers: [CreateDprSystemUsageDialogComponentStore],
+    standalone: false
 })
 export class CreateDprSystemUsageComponent extends BaseComponent implements OnInit {
   public readonly systemUsages$ = this.componentStore.systemUsages$;

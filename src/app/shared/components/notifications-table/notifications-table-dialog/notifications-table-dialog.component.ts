@@ -39,10 +39,11 @@ import { UserNotificationActions } from 'src/app/store/user-notifications/action
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
 
 @Component({
-  selector: 'app-notifications-table-dialog',
-  templateUrl: './notifications-table-dialog.component.html',
-  styleUrl: './notifications-table-dialog.component.scss',
-  providers: [NotificationsTableComponentStore],
+    selector: 'app-notifications-table-dialog',
+    templateUrl: './notifications-table-dialog.component.html',
+    styleUrl: './notifications-table-dialog.component.scss',
+    providers: [NotificationsTableComponentStore],
+    standalone: false
 })
 export class NotificationsTableDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;

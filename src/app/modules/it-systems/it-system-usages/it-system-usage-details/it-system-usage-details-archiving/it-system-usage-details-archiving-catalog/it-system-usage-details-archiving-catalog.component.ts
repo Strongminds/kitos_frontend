@@ -9,9 +9,10 @@ import { selectItSystem } from 'src/app/store/it-system/selectors';
 import { selectITSystemUsageEnableCatalogArchiveDuty, selectITSystemUsageEnableCatalogArchiveDutyComment } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-it-system-usage-details-archiving-catalog',
-  templateUrl: './it-system-usage-details-archiving-catalog.component.html',
-  styleUrl: './it-system-usage-details-archiving-catalog.component.scss',
+    selector: 'app-it-system-usage-details-archiving-catalog',
+    templateUrl: './it-system-usage-details-archiving-catalog.component.html',
+    styleUrl: './it-system-usage-details-archiving-catalog.component.scss',
+    standalone: false
 })
 export class ItSystemUsageDetailsArchivingCatalogComponent extends BaseComponent implements OnInit {
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);

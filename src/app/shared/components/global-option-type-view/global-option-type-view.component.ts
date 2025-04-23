@@ -10,10 +10,11 @@ import { DialogOpenerService } from '../../services/dialog-opener.service';
 import { IconType } from '../../models/icon-type';
 
 @Component({
-  selector: 'app-global-option-type-view',
-  templateUrl: './global-option-type-view.component.html',
-  styleUrl: './global-option-type-view.component.scss',
-  providers: [GlobalOptionTypeTableComponentStore],
+    selector: 'app-global-option-type-view',
+    templateUrl: './global-option-type-view.component.html',
+    styleUrl: './global-option-type-view.component.scss',
+    providers: [GlobalOptionTypeTableComponentStore],
+    standalone: false
 })
 export class GlobalOptionTypeViewComponent extends BaseComponent implements OnInit {
   @Input() optionType!: GlobalAdminOptionType;

@@ -22,9 +22,10 @@ import { OrganizationUnitActions } from 'src/app/store/organization/organization
 import { selectOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
 
 @Component({
-  selector: 'app-it-system-usage-details-organization',
-  templateUrl: './it-system-usage-details-organization.component.html',
-  styleUrls: ['./it-system-usage-details-organization.component.scss'],
+    selector: 'app-it-system-usage-details-organization',
+    templateUrl: './it-system-usage-details-organization.component.html',
+    styleUrls: ['./it-system-usage-details-organization.component.scss'],
+    standalone: false
 })
 export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent implements OnInit {
   public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);

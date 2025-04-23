@@ -22,9 +22,10 @@ import {
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
-  selector: 'app-fk-org-write-dialog',
-  templateUrl: './fk-org-write-dialog.component.html',
-  styleUrl: './fk-org-write-dialog.component.scss',
+    selector: 'app-fk-org-write-dialog',
+    templateUrl: './fk-org-write-dialog.component.html',
+    styleUrl: './fk-org-write-dialog.component.scss',
+    standalone: false
 })
 export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() isEdit: boolean = false;

@@ -5,10 +5,11 @@ import { BaseComponent } from '../../base/base.component';
 import { OrganizationDropdownComponentStore } from './organization-dropdown.component-store';
 
 @Component({
-  selector: 'app-organization-dropdown',
-  templateUrl: './organization-dropdown.component.html',
-  styleUrl: './organization-dropdown.component.scss',
-  providers: [OrganizationDropdownComponentStore],
+    selector: 'app-organization-dropdown',
+    templateUrl: './organization-dropdown.component.html',
+    styleUrl: './organization-dropdown.component.scss',
+    providers: [OrganizationDropdownComponentStore],
+    standalone: false
 })
 export class OrganizationDropdownComponent extends BaseComponent implements OnInit {
   @Input() formGroup!: FormGroup;

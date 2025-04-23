@@ -2,9 +2,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { BaseCellComponent } from '../../base-cell.component';
 
 @Component({
-  selector: 'app-action-buttons-cell',
-  templateUrl: './action-buttons-cell.component.html',
-  styleUrl: './action-buttons-cell.component.scss',
+    selector: 'app-action-buttons-cell',
+    templateUrl: './action-buttons-cell.component.html',
+    styleUrl: './action-buttons-cell.component.scss',
+    standalone: false
 })
 export class ActionButtonsCellComponent extends BaseCellComponent {
   @Output() public modifyEvent = new EventEmitter<void>();

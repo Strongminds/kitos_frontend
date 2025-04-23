@@ -3,9 +3,10 @@ import { LocalAdminModuleSegmentOptions, LocalAdminModuleSegmentOptionType } fro
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
-  selector: 'app-local-admin-dpr',
-  templateUrl: './local-admin-dpr.component.html',
-  styleUrl: './local-admin-dpr.component.scss',
+    selector: 'app-local-admin-dpr',
+    templateUrl: './local-admin-dpr.component.html',
+    styleUrl: './local-admin-dpr.component.scss',
+    standalone: false
 })
 export class LocalAdminDprComponent {
   public readonly LocalAdminModuleSegmentOptionType = LocalAdminModuleSegmentOptionType;

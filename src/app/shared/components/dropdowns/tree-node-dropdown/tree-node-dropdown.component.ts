@@ -4,9 +4,10 @@ import { Dictionary } from '../../../models/primitives/dictionary.model';
 import { TreeNodeModel } from '../../../models/tree-node.model';
 
 @Component({
-  selector: 'app-tree-node-dropdown',
-  templateUrl: './tree-node-dropdown.component.html',
-  styleUrls: ['./tree-node-dropdown.component.scss'],
+    selector: 'app-tree-node-dropdown',
+    templateUrl: './tree-node-dropdown.component.html',
+    styleUrls: ['./tree-node-dropdown.component.scss'],
+    standalone: false
 })
 export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel> implements OnInit {
   @Input() public appendTo: string = '';

@@ -13,9 +13,10 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
-  selector: 'app-country-create-dialog',
-  templateUrl: './country-create-dialog.component.html',
-  styleUrl: './country-create-dialog.component.scss',
+    selector: 'app-country-create-dialog',
+    templateUrl: './country-create-dialog.component.html',
+    styleUrl: './country-create-dialog.component.scss',
+    standalone: false
 })
 export class CountryCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly thirdCountries$ = this.store.select(selectRegularOptionTypes('data-processing-country-types')).pipe(

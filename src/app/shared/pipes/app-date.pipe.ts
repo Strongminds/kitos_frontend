@@ -3,7 +3,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 import { DEFAULT_DATE_FORMAT } from '../constants/constants';
 
 @Pipe({
-  name: 'appDate',
+    name: 'appDate',
+    standalone: false
 })
 export class AppDatePipe extends DatePipe implements PipeTransform {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
