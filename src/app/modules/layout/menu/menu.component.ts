@@ -15,6 +15,7 @@ export class MenuComponent implements DoCheck {
 
   public hasContent = false;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private menuTimeout?: any;
 
   @ViewChild('content') private content?: ElementRef;

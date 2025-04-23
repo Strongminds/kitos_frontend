@@ -46,7 +46,7 @@ jobs:
       - name: Cypress Component Tests
         uses: cypress-io/github-action@v6
         with:
-          command: yarn cypress run-ct
+          command: yarn cypress run --component
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}

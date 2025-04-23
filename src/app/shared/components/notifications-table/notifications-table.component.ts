@@ -30,11 +30,11 @@ import { NotificationsTableSentDialogComponent } from './notifications-table-sen
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
 
 @Component({
-    selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
-    templateUrl: './notifications-table.component.html',
-    styleUrls: ['./notifications-table.component.scss'],
-    providers: [NotificationsTableComponentStore],
-    standalone: false
+  selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
+  templateUrl: './notifications-table.component.html',
+  styleUrls: ['./notifications-table.component.scss'],
+  providers: [NotificationsTableComponentStore],
+  standalone: false,
 })
 export class NotificationsTableComponent extends BaseComponent implements OnInit {
   @Input() entityUuid!: string;
@@ -138,7 +138,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         const componentInstance = dialogRef.componentInstance;
         componentInstance.notification = notification;
         this.setupDialogDefaults(componentInstance, options);
-        (componentInstance.title = $localize`Redigér advis`), (componentInstance.confirmText = $localize`Gem`);
+        componentInstance.title = $localize`Redigér advis`;
+        componentInstance.confirmText = $localize`Gem`;
       })
     );
   }
@@ -150,7 +151,8 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         const dialogRef = this.openNotificationsTableDialog();
         const componentInstance = dialogRef.componentInstance;
         this.setupDialogDefaults(componentInstance, options);
-        (componentInstance.title = $localize`Tilføj advis`), (componentInstance.confirmText = $localize`Tilføj`);
+        componentInstance.title = $localize`Tilføj advis`;
+        componentInstance.confirmText = $localize`Tilføj`;
       })
     );
   }
