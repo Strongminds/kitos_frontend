@@ -2543,6 +2543,14 @@
     "@progress/kendo-angular-schematics" "18.5.2"
     tslib "^2.3.1"
 
+"@progress/kendo-angular-pager@^18.5.2":
+  version "18.5.2"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-pager/-/kendo-angular-pager-18.5.2.tgz#0b648b13a338107a22934edbc5f445d6e83417a1"
+  integrity sha512-WKUDzzCAwuNIR+HZyHMAPqvrIbuLfVQ3OlN8/u8V9lzjEFjKKGdvoBHtUsT6bjxbriYMzopcj4bieYnxzOZxpg==
+  dependencies:
+    "@progress/kendo-angular-schematics" "18.5.2"
+    tslib "^2.3.1"
+
 "@progress/kendo-angular-pdf-export@18.5.2":
   version "18.5.2"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-pdf-export/-/kendo-angular-pdf-export-18.5.2.tgz#258ac7418eae0f04f937ea5b0332886bd6404616"
@@ -2577,6 +2585,14 @@
     "@progress/kendo-angular-schematics" "18.5.2"
     "@types/semver" "^7.5.0"
     semver "^7.5.3"
+
+"@progress/kendo-angular-toolbar@^18.5.2":
+  version "18.5.2"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-toolbar/-/kendo-angular-toolbar-18.5.2.tgz#398ab69a36c2190beba6ec02fd8661215d8793ba"
+  integrity sha512-5V+YPJ1nG/Tq1M9kC5sgDsP5eimjBimPjf4eSB2WdCTYgrXgh8WE2/O3zCv+p6V7af2EQlOcbYqBVIyff4GXnA==
+  dependencies:
+    "@progress/kendo-angular-schematics" "18.5.2"
+    tslib "^2.3.1"
 
 "@progress/kendo-angular-treeview@18.5.2":
   version "18.5.2"

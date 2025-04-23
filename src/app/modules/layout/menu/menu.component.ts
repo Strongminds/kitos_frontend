@@ -3,10 +3,10 @@ import { MatMenuTrigger } from '@angular/material/menu';
 import { AppPath } from 'src/app/shared/enums/app-path';
 
 @Component({
-    selector: 'app-menu',
-    templateUrl: 'menu.component.html',
-    styleUrls: ['menu.component.scss'],
-    standalone: false
+  selector: 'app-menu',
+  templateUrl: 'menu.component.html',
+  styleUrls: ['menu.component.scss'],
+  standalone: false,
 })
 export class MenuComponent implements DoCheck {
   @Input() title?: string | null = '';
@@ -15,7 +15,7 @@ export class MenuComponent implements DoCheck {
 
   public hasContent = false;
 
-  private menuTimeout?: NodeJS.Timeout;
+  private menuTimeout?: any;
 
   @ViewChild('content') private content?: ElementRef;
 
