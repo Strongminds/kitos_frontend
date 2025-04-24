@@ -59,7 +59,7 @@ export class UIModuleCustomizationEffects {
   putUIModuleCustomization$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UIModuleConfigActions.putUIModuleCustomization),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       concatMap(([{ module: moduleName, updatedNodeRequest }, organizationUuid]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })

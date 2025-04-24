@@ -10,6 +10,7 @@ import { roleOptionTypeFeature, roleOptionTypeInitialState } from '../roles-opti
 import { initialNotificationsState, notificationFeature } from '../user-notifications/reducer';
 import { userFeature, userInitialState } from '../user-store/reducer';
 import { resetOrganizationStateAction, resetStateAction } from './actions';
+import { uiModuleConfigFeature, UIModuleConfigInitialState } from '../organization/ui-module-customization/reducer';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
@@ -23,6 +24,7 @@ export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
       [notificationFeature.name]: initialNotificationsState,
       [alertsFeature.name]: initialAlertsState,
       [organizationFeature.name]: organizationInitialState,
+      [uiModuleConfigFeature.name]: UIModuleConfigInitialState,
     };
 
     switch (action.type) {
