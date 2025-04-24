@@ -36,7 +36,7 @@ describe('it-system-usage', () => {
       'Dato for seneste risikovurdering',
       'Dato for seneste risikovurdering',
     ];
-    const lifeCycleColumnNames = ['ActiveAccordingToLifeCycle', 'LifeCycleStatus'];
+    const lifeCycleColumnNames = ['LifeCycleStatus'];
     const disabledColumns = gpdrColumnNames.concat(lifeCycleColumnNames);
 
     disabledColumns.forEach((columnName) => {
