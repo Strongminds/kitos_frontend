@@ -180,6 +180,7 @@
         formName="responsibleEntitySignedBy"
         [data$]="users$"
         [isLoading$]="usersIsLoading$"
+        [addTag]="true"
         (filterChange)="searchUsers($event)"
         (valueChange)="patchFrontPage({ responsible: { signedBy: $event } })"
       ></app-connected-dropdown>
