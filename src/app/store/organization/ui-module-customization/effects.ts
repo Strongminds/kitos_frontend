@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { ActionCreator, Store } from '@ngrx/store';
-import { catchError, combineLatestWith, concatMap, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, concatMap, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APICustomizedUINodeRequestDTO,
   APICustomizedUINodeResponseDTO,
@@ -15,6 +15,7 @@ import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config
 import { adaptUIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
+import { UserActions } from '../../user-store/actions';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { UIModuleConfigActions } from './actions';
 import { selectHasValidUIModuleConfigCache } from './selectors';
@@ -28,6 +29,31 @@ export class UIModuleCustomizationEffects {
     private store: Store,
     private uiConfigService: UIConfigService
   ) {}
+
+  updateUIModuleConfigOnOrgChange$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.resetOnOrganizationUpdate),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      mergeMap(([_, organizationUuid]) => {
+        console.log('the new effect$');
+        const moduleName = UIModuleConfigKey.ItSystemUsage; //todo for all modules, also "gdpr"?
+
+        //todo reuse return call from getUIModuleConfig$
+        return this.organizationInternalService
+          .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
+          .pipe(
+            map((uiModuleCustomizationDto) =>
+              this.combineBlueprintWithCustomizationDto(
+                uiModuleCustomizationDto,
+                moduleName,
+                UIModuleConfigActions.getUIModuleConfigSuccess
+              )
+            ),
+            catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
+          );
+      })
+    );
+  });
 
   getUIModuleConfig$ = createEffect(() => {
     return this.actions$.pipe(
@@ -102,6 +128,7 @@ export class UIModuleCustomizationEffects {
     const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
     const moduleCustomizationNodes = uiModuleCustomization?.nodes ?? [];
     const uiModuleConfig = this.uiConfigService.buildUIModuleConfig(moduleCustomizationNodes, module);
+    console.log('succes ui config', uiModuleConfig);
     return successAction({
       uiModuleConfig: uiModuleConfig,
     });
