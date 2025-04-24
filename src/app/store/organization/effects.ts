@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
@@ -197,7 +197,7 @@ export class OrganizationEffects {
   patchUIRootConfig$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationActions.patchUIRootConfig),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ dto }, organizationUuid]) =>
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2PatchUIRootConfig({ dto, organizationUuid })
