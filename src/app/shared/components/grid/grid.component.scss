@@ -1,5 +1,5 @@
-@use "theme";
-@use "mixins";
+@use "../../../../styles/theme.scss";
+@use "../../../../styles/mixins.scss";
 
 @include mixins.grid-style;
 
