@@ -55,6 +55,7 @@
       [formGroup]="frontpageFormGroup"
       formName="criticality"
       valueField="uuid"
+      [showDescription]="true"
       [data]="criticalityTypes$ | async"
       (valueChange)="patchFrontPage({ general: { criticalityUuid: $event } })"
     ></app-dropdown>
