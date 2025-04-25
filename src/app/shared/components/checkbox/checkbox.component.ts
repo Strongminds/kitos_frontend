@@ -9,6 +9,7 @@ import { ThemePalette } from '@angular/material/core';
 })
 export class CheckboxComponent extends BaseFormComponent<boolean> {
   @Input() labelPosition: 'before' | 'after' = 'before';
+  @Input() tooltip: string = '';
   @Input() public color: ThemePalette = undefined;
   @Input() invertCheckedValue: boolean = false;
 

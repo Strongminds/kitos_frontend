@@ -146,13 +146,14 @@
       (valueChange)="patchFrontPage({ parentContractUuid: $event })"
     >
     </app-connected-dropdown>
+
     <app-checkbox
       [formGroup]="parentContractForm"
       formName="requireValidParent"
       (valueChange)="patchFrontPage({ general: { validity: { requireValidParent: $event } } })"
       labelPosition="after"
       text="Nedarv den overordnedes gyldighed"
-      class="flex"
+      tooltip="Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt."
       i18n-text
       data-cy="require-valid-parent"
     ></app-checkbox>
