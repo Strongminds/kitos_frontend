@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { ActionCreator, Store } from '@ngrx/store';
-import { catchError, concatMap, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, concatMap, forkJoin, from, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APICustomizedUINodeRequestDTO,
   APICustomizedUINodeResponseDTO,
@@ -30,27 +30,41 @@ export class UIModuleCustomizationEffects {
     private uiConfigService: UIConfigService
   ) {}
 
-  updateUIModuleConfigOnOrgChange$ = createEffect(() => {
+  updateUIModuleConfigsOnOrgChange$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.resetOnOrganizationUpdate),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      concatLatestFrom(() =>
+        this.store.select(selectOrganizationUuid).pipe(filterNullish())
+      ),
       mergeMap(([_, organizationUuid]) => {
-        console.log('the new effect$');
-        const moduleName = UIModuleConfigKey.ItSystemUsage; //todo for all modules, also "gdpr"?
+        const moduleNames = [
+          UIModuleConfigKey.ItSystemUsage,
+          UIModuleConfigKey.DataProcessingRegistrations,
+          UIModuleConfigKey.ItContract,
+          UIModuleConfigKey.Gdpr
+        ];
 
-        //todo reuse return call from getUIModuleConfig$
-        return this.organizationInternalService
-          .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
-          .pipe(
-            map((uiModuleCustomizationDto) =>
-              this.combineBlueprintWithCustomizationDto(
-                uiModuleCustomizationDto,
-                moduleName,
-                UIModuleConfigActions.getUIModuleConfigSuccess
-              )
-            ),
-            catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
-          );
+        const requests = moduleNames.map((moduleName) =>
+          this.organizationInternalService
+            .getSingleOrganizationsInternalV2GetUIModuleCustomization({
+              moduleName,
+              organizationUuid
+            })
+            .pipe(
+              map((uiModuleCustomizationDto) =>
+                this.combineBlueprintWithCustomizationDto(
+                  uiModuleCustomizationDto,
+                  moduleName,
+                  UIModuleConfigActions.getUIModuleConfigSuccess
+                )
+              ),
+              catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
+            )
+        );
+
+        return forkJoin(requests).pipe(
+          mergeMap((actions) => from(actions))
+        );
       })
     );
   });
