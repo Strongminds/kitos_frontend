@@ -559,6 +559,12 @@
       cursor: default;
       border-bottom: none;
     }
+
+    .not-sortable {
+      ::ng-deep span {
+        cursor: default !important;
+      }
+    }
   }
 
   .column-title {
