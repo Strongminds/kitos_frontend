@@ -49,7 +49,6 @@ export class ChooseOrganizationComponent implements OnInit {
           this.store.dispatch(UserActions.getUserDefaultUnit(organization.uuid));
           this.store.dispatch(UserActions.resetOnOrganizationUpdate(organization));
           this.store.dispatch(OrganizationActions.getUIRootConfig());
-          this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
         }
         this.dialog.close();
       });
