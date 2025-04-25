@@ -6791,6 +6791,14 @@
         <source>Vælg brugere</source>
         <target state="new">Vælg brugere</target>
       </trans-unit>
+      <trans-unit id="1281858338231957865" datatype="html">
+        <source>Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt.</source>
+        <target state="new">Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt.</target>
+      </trans-unit>
+      <trans-unit id="8653808192316183108" datatype="html">
+        <source>Nedarv overordnet kontrakts gyldighed</source>
+        <target state="new">Nedarv overordnet kontrakts gyldighed</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

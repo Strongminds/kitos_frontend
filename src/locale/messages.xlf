@@ -5155,6 +5155,12 @@
       <trans-unit id="8053985576501192145" datatype="html">
         <source>Vælg brugere</source>
       </trans-unit>
+      <trans-unit id="1281858338231957865" datatype="html">
+        <source>Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt.</source>
+      </trans-unit>
+      <trans-unit id="8653808192316183108" datatype="html">
+        <source>Nedarv overordnet kontrakts gyldighed</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
