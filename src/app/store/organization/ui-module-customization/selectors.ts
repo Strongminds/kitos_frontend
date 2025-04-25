@@ -212,6 +212,7 @@ export const selectItContractsEnableIsActive = createItContractFrontpageFieldSel
 export const selectItContractsEnableAgreementPeriod = createItContractFrontpageFieldSelector('agreementPeriod');
 export const selectItContractsEnableNotes = createItContractFrontpageFieldSelector('notes');
 export const selectItContractsEnableParentContract = createItContractFrontpageFieldSelector('parentContract');
+export const selectItContractsEnableUseParentValidity = createItContractFrontpageFieldSelector('useParentValidity');
 
 export const selectItContractsEnableResponsibleUnit = createItContractFrontpageFieldSelector('responsibleUnit');
 export const selectItContractsEnableInternalSigner = createItContractFrontpageFieldSelector('internalSigner');
