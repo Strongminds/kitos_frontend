@@ -12,10 +12,11 @@ import { CountryCreateDialogComponent } from '../../third-countries-table/countr
 import { CreateProcessorDialogComponentStore } from './create-processor-dialog.component-store';
 
 @Component({
-  selector: 'app-create-processor-dialog',
-  templateUrl: './create-processor-dialog.component.html',
-  styleUrl: './create-processor-dialog.component.scss',
-  providers: [CreateProcessorDialogComponentStore],
+    selector: 'app-create-processor-dialog',
+    templateUrl: './create-processor-dialog.component.html',
+    styleUrl: './create-processor-dialog.component.scss',
+    providers: [CreateProcessorDialogComponentStore],
+    standalone: false
 })
 export class CreateProcessorDialogComponent extends BaseComponent implements OnInit {
   public readonly organizations$ = this.componentStore.organizations$;

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-x-icon',
-  styles: [':host {display: contents}'],
-  templateUrl: './x.svg',
+    selector: 'app-x-icon',
+    styles: [':host {display: contents}'],
+    templateUrl: './x.svg',
+    standalone: false
 })
 export class XIconComponent {}

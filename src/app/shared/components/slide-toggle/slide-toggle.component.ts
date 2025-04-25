@@ -3,9 +3,10 @@ import { ThemePalette } from '@angular/material/core';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
-  selector: 'app-slide-toggle',
-  templateUrl: './slide-toggle.component.html',
-  styleUrl: './slide-toggle.component.scss',
+    selector: 'app-slide-toggle',
+    templateUrl: './slide-toggle.component.html',
+    styleUrl: './slide-toggle.component.scss',
+    standalone: false
 })
 export class SlideToggleComponent extends BaseFormComponent<boolean> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

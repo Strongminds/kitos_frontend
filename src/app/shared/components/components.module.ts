@@ -138,6 +138,7 @@ import { EditHelpTextDialogComponent } from './dialogs/edit-help-text-dialog/edi
 import { ContractsDropdownComponent } from './dropdowns/contracts-dropdown/contracts-dropdown.component';
 import { MultiSelectDropdownComponent } from './dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { OptionTypeDropdownComponent } from './dropdowns/option-type-dropdown/option-type-dropdown.component';
+import { OrganizationDropdownComponent } from './dropdowns/organization-dropdown/organization-dropdown.component';
 import { UserDropdownComponent } from './dropdowns/user-dropdown/user-dropdown.component';
 import { FileInputComponent } from './file-input/file-input.component';
 import { GlobalOptionTypeDialogComponent } from './global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
@@ -180,7 +181,6 @@ import { LocalOptionGridComponent } from './local-option-type-view/local-option-
 import { LocalOptionTypeViewComponent } from './local-option-type-view/local-option-type-view.component';
 import { NavigationDrawerComponent } from './navigation-drawer/navigation-drawer.component';
 import { NumberCircleComponent } from './number-circle/number-circle.component';
-import { OrganizationDropdownComponent } from './organization-dropdown/organization-dropdown.component';
 import { ResetToOrgColumnsConfigButtonComponent } from './reset-to-org-columns-config-button/reset-to-org-columns-config-button.component';
 import { RichTextEditorComponent } from './rich-text-editor/rich-text-editor.component';
 import { RoleRowComponent } from './role-table/role-row/role-row.component';

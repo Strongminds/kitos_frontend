@@ -5,9 +5,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectITSystemUsageHasModifyPermission } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
-  selector: 'app-it-system-usage-details-external-references',
-  templateUrl: './it-system-usage-details-external-references.component.html',
-  styleUrls: ['./it-system-usage-details-external-references.component.scss'],
+    selector: 'app-it-system-usage-details-external-references',
+    templateUrl: './it-system-usage-details-external-references.component.html',
+    styleUrls: ['./it-system-usage-details-external-references.component.scss'],
+    standalone: false
 })
 export class ItSystemUsageDetailsExternalReferencesComponent extends BaseComponent {
   public readonly hasModifyPermission$ = this.store

@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
-  selector: 'app-textbox',
-  templateUrl: 'textbox.component.html',
-  styleUrls: ['textbox.component.scss'],
+    selector: 'app-textbox',
+    templateUrl: 'textbox.component.html',
+    styleUrls: ['textbox.component.scss'],
+    standalone: false
 })
 export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public clearable = false;

@@ -7,9 +7,10 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
-  templateUrl: 'organization.component.html',
-  styleUrls: ['organization.component.scss'],
-  selector: 'app-organization',
+    templateUrl: 'organization.component.html',
+    styleUrls: ['organization.component.scss'],
+    selector: 'app-organization',
+    standalone: false
 })
 export class OrganizationComponent extends BaseComponent implements OnInit {
   constructor(private store: Store, private router: Router) {

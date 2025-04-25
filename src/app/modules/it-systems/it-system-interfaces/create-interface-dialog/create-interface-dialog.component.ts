@@ -7,10 +7,11 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 
 @Component({
-  selector: 'app-create-interface-dialog',
-  templateUrl: './create-interface-dialog.component.html',
-  styleUrl: './create-interface-dialog.component.scss',
-  providers: [CreateEntityDialogComponentStore],
+    selector: 'app-create-interface-dialog',
+    templateUrl: './create-interface-dialog.component.html',
+    styleUrl: './create-interface-dialog.component.scss',
+    providers: [CreateEntityDialogComponentStore],
+    standalone: false
 })
 export class CreateInterfaceDialogComponent extends BaseCreateEntityDialogComponent implements OnInit {
   override entityType = 'it-interface' as RegistrationEntityTypes;

@@ -10,6 +10,7 @@ import { ExternalReferenceProperties } from 'src/app/shared/models/external-refe
   selector: 'app-external-reference-dialog[externalReferenceProperties][title]',
   templateUrl: './external-reference-dialog.component.html',
   styleUrls: ['./external-reference-dialog.component.scss'],
+  standalone: false,
 })
 export class ExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public externalReferenceProperties!: ExternalReferenceProperties;
@@ -74,7 +75,6 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
       title: this.externalReferenceProperties.title,
       url: this.externalReferenceProperties.url,
     });
-    this.externalReferenceForm.controls.title;
     this.busy = this.isBusy;
 
     this.subscriptions.add(

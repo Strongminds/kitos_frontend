@@ -2,7 +2,8 @@ import { Component } from "@angular/core";
 import { GlobalAdminModuleSegmentOptions, GlobalAdminModuleSegmentOptionType } from "src/app/shared/constants/global-admin-module-segment-constants";
 
 @Component({
-  template: ''
+    template: '',
+    standalone: false
 })
 export class BaseGlobalAdminModuleTabComponent {
   public readonly GlobalAdminModuleSegmentOptionType = GlobalAdminModuleSegmentOptionType;

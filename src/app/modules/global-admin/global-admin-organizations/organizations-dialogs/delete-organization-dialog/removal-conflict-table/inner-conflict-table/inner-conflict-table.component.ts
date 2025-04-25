@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { RemovalConflict, RemovalConflictType } from '../removal-conflict-table.component';
 
 @Component({
-  selector: 'app-inner-conflict-table',
-  templateUrl: './inner-conflict-table.component.html',
-  styleUrl: './inner-conflict-table.component.scss',
+    selector: 'app-inner-conflict-table',
+    templateUrl: './inner-conflict-table.component.html',
+    styleUrl: './inner-conflict-table.component.scss',
+    standalone: false
 })
 export class InnerConflictTableComponent {
   @Input() public removalConflicts!: RemovalConflict[];

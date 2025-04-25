@@ -5,10 +5,11 @@ import { GridUsagesConsequencesDialogComponent } from '../grid-usages-consequenc
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
 @Component({
-  selector: 'app-grid-usages-dropdown-dialog',
-  templateUrl: './grid-usages-dropdown-dialog.component.html',
-  styleUrl: './grid-usages-dropdown-dialog.component.scss',
-  providers: [GridUsagesDialogComponentStore],
+    selector: 'app-grid-usages-dropdown-dialog',
+    templateUrl: './grid-usages-dropdown-dialog.component.html',
+    styleUrl: './grid-usages-dropdown-dialog.component.scss',
+    providers: [GridUsagesDialogComponentStore],
+    standalone: false
 })
 export class GridUsagesDropdownDialogComponent {
   @Input() rowEntityIdentifier!: string;

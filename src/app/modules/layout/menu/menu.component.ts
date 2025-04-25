@@ -6,6 +6,7 @@ import { AppPath } from 'src/app/shared/enums/app-path';
   selector: 'app-menu',
   templateUrl: 'menu.component.html',
   styleUrls: ['menu.component.scss'],
+  standalone: false,
 })
 export class MenuComponent implements DoCheck {
   @Input() title?: string | null = '';
@@ -14,7 +15,8 @@ export class MenuComponent implements DoCheck {
 
   public hasContent = false;
 
-  private menuTimeout?: NodeJS.Timeout;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private menuTimeout?: any;
 
   @ViewChild('content') private content?: ElementRef;
 

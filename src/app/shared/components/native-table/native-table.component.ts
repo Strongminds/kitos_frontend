@@ -1,9 +1,10 @@
 import { Component, Input } from '@angular/core';
 
 @Component({
-  selector: 'app-native-table',
-  templateUrl: './native-table.component.html',
-  styleUrls: ['./native-table.component.scss'],
+    selector: 'app-native-table',
+    templateUrl: './native-table.component.html',
+    styleUrls: ['./native-table.component.scss'],
+    standalone: false
 })
 export class NativeTableComponent {
   @Input() public tableLayout: 'fixed' | 'auto' = 'auto';

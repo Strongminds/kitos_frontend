@@ -21,9 +21,10 @@ interface ModuleTabInfo {
 }
 
 @Component({
-  selector: 'app-local-admin',
-  templateUrl: './local-admin.component.html',
-  styleUrl: './local-admin.component.scss',
+    selector: 'app-local-admin',
+    templateUrl: './local-admin.component.html',
+    styleUrl: './local-admin.component.scss',
+    standalone: false
 })
 export class LocalAdminComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;

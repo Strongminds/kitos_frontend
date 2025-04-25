@@ -8,9 +8,10 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { CreateEntityWithNameDialogComponent } from '../create-entity-with-name-dialog/create-entity-with-name-dialog.component';
 
 @Component({
-  selector: 'app-create-entity-button',
-  templateUrl: './create-entity-button.component.html',
-  styleUrl: './create-entity-button.component.scss',
+    selector: 'app-create-entity-button',
+    templateUrl: './create-entity-button.component.html',
+    styleUrl: './create-entity-button.component.scss',
+    standalone: false
 })
 export class CreateEntityButtonComponent extends BaseComponent {
   @Input() public entityType!: RegistrationEntityTypes;

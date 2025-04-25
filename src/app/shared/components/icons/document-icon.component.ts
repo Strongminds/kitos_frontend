@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-document-icon',
-  styles: [':host {display: contents}'],
-  templateUrl: './document.svg',
+    selector: 'app-document-icon',
+    styles: [':host {display: contents}'],
+    templateUrl: './document.svg',
+    standalone: false
 })
 export class DocumentIconComponent {}

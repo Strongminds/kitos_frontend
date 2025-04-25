@@ -9,9 +9,10 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 
 @Component({
-  selector: 'app-user-info-dialog',
-  templateUrl: './user-info-dialog.component.html',
-  styleUrl: './user-info-dialog.component.scss',
+    selector: 'app-user-info-dialog',
+    templateUrl: './user-info-dialog.component.html',
+    styleUrl: './user-info-dialog.component.scss',
+    standalone: false
 })
 export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;

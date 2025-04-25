@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { OrganizationsDialogComponentStore } from './organizations-dialog.component-store';
 
 @Component({
-  template: '',
-  providers: [OrganizationsDialogComponentStore],
+    template: '',
+    providers: [OrganizationsDialogComponentStore],
+    standalone: false
 })
 export class GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   protected countryCodes$ = this.componentStore.countryCodes$;

@@ -19,10 +19,11 @@ import { EditExternalReferenceDialogComponent } from './edit-external-reference-
 import { ExternalReferencesComponentStore } from './external-references.component-store';
 
 @Component({
-  selector: 'app-external-references-management[entityType][hasModifyPermission]',
-  templateUrl: './external-references-management.component.html',
-  styleUrls: ['./external-references-management.component.scss'],
-  providers: [ExternalReferencesComponentStore],
+    selector: 'app-external-references-management[entityType][hasModifyPermission]',
+    templateUrl: './external-references-management.component.html',
+    styleUrls: ['./external-references-management.component.scss'],
+    providers: [ExternalReferencesComponentStore],
+    standalone: false
 })
 export class ExternalReferencesManagementComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;

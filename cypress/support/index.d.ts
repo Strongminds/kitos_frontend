@@ -16,7 +16,7 @@ declare namespace Cypress {
     /**
      * Login using form.
      */
-    login(authorizeFixturePath: string): void;
+    login(authorizeFixturePath?: string): void;
 
     /**
      * Require all api request to be intercepted.

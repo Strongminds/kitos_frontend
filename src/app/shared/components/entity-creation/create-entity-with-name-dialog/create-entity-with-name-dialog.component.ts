@@ -8,10 +8,11 @@ import { BaseCreateEntityDialogComponent } from '../base-create-entity-dialog-co
 import { CreateEntityDialogComponentStore } from '../create-entity-dialog.component-store';
 
 @Component({
-  selector: 'app-create-entity-with-name-dialog',
-  templateUrl: './create-entity-with-name-dialog.component.html',
-  styleUrl: './create-entity-with-name-dialog.component.scss',
-  providers: [CreateEntityDialogComponentStore],
+    selector: 'app-create-entity-with-name-dialog',
+    templateUrl: './create-entity-with-name-dialog.component.html',
+    styleUrl: './create-entity-with-name-dialog.component.scss',
+    providers: [CreateEntityDialogComponentStore],
+    standalone: false
 })
 export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogComponent implements OnInit {
   public createForm = new FormGroup({

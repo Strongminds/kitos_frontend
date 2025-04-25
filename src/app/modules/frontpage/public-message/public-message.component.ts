@@ -16,12 +16,13 @@ export interface PublicMessageConfig {
 }
 
 @Component({
-  selector: 'app-public-message',
-  templateUrl: './public-message.component.html',
-  styleUrls: ['./public-message.component.scss'],
-  host: {
-    '[style.width]': "mode === 'compact' ? '352px' : '452px'",
-  },
+    selector: 'app-public-message',
+    templateUrl: './public-message.component.html',
+    styleUrls: ['./public-message.component.scss'],
+    host: {
+        '[style.width]': "mode === 'compact' ? '352px' : '452px'",
+    },
+    standalone: false
 })
 export class PublicMessageComponent implements OnInit {
   @Input() mode!: 'normal' | 'compact';

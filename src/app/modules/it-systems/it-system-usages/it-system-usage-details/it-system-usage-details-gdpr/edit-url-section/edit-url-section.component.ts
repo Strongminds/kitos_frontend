@@ -8,9 +8,10 @@ import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.compo
 import { hasOpenDialogs } from 'src/app/shared/helpers/dialog.helpers';
 
 @Component({
-  selector: 'app-edit-url-section',
-  templateUrl: './edit-url-section.component.html',
-  styleUrls: ['./edit-url-section.component.scss'],
+    selector: 'app-edit-url-section',
+    templateUrl: './edit-url-section.component.html',
+    styleUrls: ['./edit-url-section.component.scss'],
+    standalone: false
 })
 export class EditUrlSectionComponent extends BaseComponent {
   @Input() title!: string;

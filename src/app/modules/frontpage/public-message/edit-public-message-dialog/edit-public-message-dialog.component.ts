@@ -14,9 +14,10 @@ import { StatusType, statusTypeOptions } from 'src/app/shared/models/public-mess
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 
 @Component({
-  selector: 'app-edit-public-message-dialog',
-  templateUrl: './edit-public-message-dialog.component.html',
-  styleUrl: './edit-public-message-dialog.component.scss',
+    selector: 'app-edit-public-message-dialog',
+    templateUrl: './edit-public-message-dialog.component.html',
+    styleUrl: './edit-public-message-dialog.component.scss',
+    standalone: false
 })
 export class EditPublicMessageDialogComponent extends BaseComponent implements OnInit {
   @Input() publicMessage!: PublicMessage;

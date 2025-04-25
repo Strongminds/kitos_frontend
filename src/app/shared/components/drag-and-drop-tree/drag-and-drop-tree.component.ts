@@ -11,9 +11,10 @@ interface DropInfo {
 }
 
 @Component({
-  selector: 'app-drag-and-drop-tree[nodes][itemType]',
-  templateUrl: './drag-and-drop-tree.component.html',
-  styleUrls: ['./drag-and-drop-tree.component.scss'],
+    selector: 'app-drag-and-drop-tree[nodes][itemType]',
+    templateUrl: './drag-and-drop-tree.component.html',
+    styleUrls: ['./drag-and-drop-tree.component.scss'],
+    standalone: false
 })
 export class DragAndDropTreeComponent<T> implements OnInit {
   public toggleStatusText = 'status';

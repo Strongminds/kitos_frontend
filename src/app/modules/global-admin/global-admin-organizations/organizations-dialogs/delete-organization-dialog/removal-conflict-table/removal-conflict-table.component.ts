@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-removal-conflict-table',
-  templateUrl: './removal-conflict-table.component.html',
-  styleUrl: './removal-conflict-table.component.scss',
+    selector: 'app-removal-conflict-table',
+    templateUrl: './removal-conflict-table.component.html',
+    styleUrl: './removal-conflict-table.component.scss',
+    standalone: false
 })
 export class RemovalConflictTableComponent {
   @Input() public removalConflicts$!: Observable<RemovalConflict[]>;

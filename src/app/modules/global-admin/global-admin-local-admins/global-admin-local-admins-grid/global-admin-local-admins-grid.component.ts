@@ -11,9 +11,10 @@ import { GridActions } from 'src/app/store/grid/actions';
 import { CreateLocalAdminDialogComponent } from '../create-local-admin-dialog/create-local-admin-dialog.component';
 
 @Component({
-  selector: 'app-global-admin-local-admins-grid',
-  templateUrl: './global-admin-local-admins-grid.component.html',
-  styleUrl: './global-admin-local-admins-grid.component.scss',
+    selector: 'app-global-admin-local-admins-grid',
+    templateUrl: './global-admin-local-admins-grid.component.html',
+    styleUrl: './global-admin-local-admins-grid.component.scss',
+    standalone: false
 })
 export class GlobalAdminLocalAdminsGridComponent {
   public readonly localAdmins$ = this.store.select(selectAllLocalAdmins);

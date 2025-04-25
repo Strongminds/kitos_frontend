@@ -7,9 +7,10 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { RegistrationBaseComponent } from '../registration-base.component';
 
 @Component({
-  selector: 'app-registrations-page-details-section',
-  templateUrl: './registrations-page-details-section.component.html',
-  styleUrl: './registrations-page-details-section.component.scss',
+    selector: 'app-registrations-page-details-section',
+    templateUrl: './registrations-page-details-section.component.html',
+    styleUrl: './registrations-page-details-section.component.scss',
+    standalone: false
 })
 export class RegistrationsPageDetailsSectionComponent extends RegistrationBaseComponent<APINamedEntityWithEnabledStatusDTO> {
   @Input() public registrations$!: Observable<Array<RegistrationModel<APINamedEntityV2DTO>>>;

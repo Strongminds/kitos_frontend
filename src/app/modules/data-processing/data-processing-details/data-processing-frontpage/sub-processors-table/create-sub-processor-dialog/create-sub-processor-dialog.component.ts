@@ -19,10 +19,11 @@ import { CountryCreateDialogComponent } from '../../third-countries-table/countr
 import { CreateSubProcessorDialogComponentStore } from './create-sub-processor-dialog.component-store';
 
 @Component({
-  selector: 'app-create-sub-processor-dialog',
-  templateUrl: './create-sub-processor-dialog.component.html',
-  styleUrl: './create-sub-processor-dialog.component.scss',
-  providers: [CreateSubProcessorDialogComponentStore],
+    selector: 'app-create-sub-processor-dialog',
+    templateUrl: './create-sub-processor-dialog.component.html',
+    styleUrl: './create-sub-processor-dialog.component.scss',
+    providers: [CreateSubProcessorDialogComponentStore],
+    standalone: false
 })
 export class CreateSubProcessorDialogComponent extends BaseComponent implements OnInit {
   @Input() public subprocessor: APIDataProcessorRegistrationSubDataProcessorResponseDTO | undefined;

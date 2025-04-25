@@ -13,9 +13,10 @@ export interface FilterDropdownOption {
 }
 
 @Component({
-  selector: 'app-dropdown-filter',
-  templateUrl: './dropdown-filter.component.html',
-  styleUrl: './dropdown-filter.component.scss',
+    selector: 'app-dropdown-filter',
+    templateUrl: './dropdown-filter.component.html',
+    styleUrl: './dropdown-filter.component.scss',
+    standalone: false
 })
 export class DropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

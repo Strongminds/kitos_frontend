@@ -33,9 +33,10 @@ import {
 import { DeleteContractDialogComponent } from './delete-contract-dialog/delete-contract-dialog.component';
 
 @Component({
-  selector: 'app-it-contract-details',
-  templateUrl: './it-contract-details.component.html',
-  styleUrl: './it-contract-details.component.scss',
+    selector: 'app-it-contract-details',
+    templateUrl: './it-contract-details.component.html',
+    styleUrl: './it-contract-details.component.scss',
+    standalone: false
 })
 export class ItContractDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

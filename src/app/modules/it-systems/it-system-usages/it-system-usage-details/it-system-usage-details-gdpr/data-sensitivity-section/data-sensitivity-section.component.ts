@@ -19,9 +19,10 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
-  selector: 'app-data-sensitivity-section',
-  templateUrl: './data-sensitivity-section.component.html',
-  styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
+    selector: 'app-data-sensitivity-section',
+    templateUrl: './data-sensitivity-section.component.html',
+    styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
+    standalone: false
 })
 export class DataSensitivitySectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

@@ -14,9 +14,10 @@ export enum BooleanValueDisplayType {
 }
 
 @Component({
-  selector: 'app-status-chip',
-  templateUrl: 'status-chip.component.html',
-  styleUrls: ['status-chip.component.scss'],
+    selector: 'app-status-chip',
+    templateUrl: 'status-chip.component.html',
+    styleUrls: ['status-chip.component.scss'],
+    standalone: false
 })
 export class StatusChipComponent implements OnInit {
   @Input() public type?: RegistrationEntityTypes;

@@ -12,9 +12,10 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
-  selector: 'app-gdpr-dpia-conducted-section',
-  templateUrl: './gdpr-dpia-conducted-section.component.html',
-  styleUrls: ['./gdpr-dpia-conducted-section.component.scss'],
+    selector: 'app-gdpr-dpia-conducted-section',
+    templateUrl: './gdpr-dpia-conducted-section.component.html',
+    styleUrls: ['./gdpr-dpia-conducted-section.component.scss'],
+    standalone: false
 })
 export class GdprDpiaConductedSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

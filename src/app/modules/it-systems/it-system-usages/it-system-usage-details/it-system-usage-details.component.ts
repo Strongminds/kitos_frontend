@@ -42,8 +42,9 @@ import {
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
-  templateUrl: 'it-system-usage-details.component.html',
-  styleUrls: ['it-system-usage-details.component.scss'],
+    templateUrl: 'it-system-usage-details.component.html',
+    styleUrls: ['it-system-usage-details.component.scss'],
+    standalone: false
 })
 export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

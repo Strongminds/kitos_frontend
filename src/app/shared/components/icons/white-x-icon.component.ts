@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-white-x-icon',
-  styles: [':host {display: contents}'],
-  templateUrl: './trailing-icon.svg',
+    selector: 'app-white-x-icon',
+    styles: [':host {display: contents}'],
+    templateUrl: './trailing-icon.svg',
+    standalone: false
 })
 export class WhiteXIconComponent {}

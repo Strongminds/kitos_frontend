@@ -14,9 +14,10 @@ import { TreeNodeModel, createNode } from 'src/app/shared/models/tree-node.model
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 
 @Component({
-  selector: 'app-payment-dialog',
-  templateUrl: './payment-dialog.component.html',
-  styleUrl: './payment-dialog.component.scss',
+    selector: 'app-payment-dialog',
+    templateUrl: './payment-dialog.component.html',
+    styleUrl: './payment-dialog.component.scss',
+    standalone: false
 })
 export class PaymentDialogComponent extends BaseComponent implements OnInit {
   @Input() public paymentType!: PaymentTypes;

@@ -5,9 +5,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractHasModifyPermissions, selectItContractUuid } from 'src/app/store/it-contract/selectors';
 
 @Component({
-  selector: 'app-it-contract-roles',
-  templateUrl: './it-contract-roles.component.html',
-  styleUrl: './it-contract-roles.component.scss',
+    selector: 'app-it-contract-roles',
+    templateUrl: './it-contract-roles.component.html',
+    styleUrl: './it-contract-roles.component.scss',
+    standalone: false
 })
 export class ItContractRolesComponent extends BaseComponent {
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());

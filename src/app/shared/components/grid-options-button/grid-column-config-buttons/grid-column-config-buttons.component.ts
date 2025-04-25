@@ -8,9 +8,10 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { selectGridConfigModificationPermission } from 'src/app/store/user-store/selectors';
 
 @Component({
-  selector: 'app-grid-column-config-buttons',
-  templateUrl: './grid-column-config-buttons.component.html',
-  styleUrl: './grid-column-config-buttons.component.scss',
+    selector: 'app-grid-column-config-buttons',
+    templateUrl: './grid-column-config-buttons.component.html',
+    styleUrl: './grid-column-config-buttons.component.scss',
+    standalone: false
 })
 export class GridColumnConfigButtonsComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;

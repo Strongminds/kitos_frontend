@@ -38,9 +38,10 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
-  selector: 'app-data-processing-frontpage',
-  templateUrl: './data-processing-frontpage.component.html',
-  styleUrl: './data-processing-frontpage.component.scss',
+    selector: 'app-data-processing-frontpage',
+    templateUrl: './data-processing-frontpage.component.html',
+    styleUrl: './data-processing-frontpage.component.scss',
+    standalone: false
 })
 export class DataProcessingFrontpageComponent extends BaseComponent implements OnInit {
   public readonly basisForTransferTypes$ = this.store.select(

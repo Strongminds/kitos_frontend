@@ -21,10 +21,11 @@ import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/sel
 import { RoleTableComponentStore } from '../role-table.component-store';
 
 @Component({
-  selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
-  templateUrl: './role-table.create-dialog.component.html',
-  styleUrls: ['./role-table.create-dialog.component.scss'],
-  providers: [RoleTableComponentStore],
+    selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
+    templateUrl: './role-table.create-dialog.component.html',
+    styleUrls: ['./role-table.create-dialog.component.scss'],
+    providers: [RoleTableComponentStore],
+    standalone: false
 })
 export class RoleTableCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly roleForm = new FormGroup({

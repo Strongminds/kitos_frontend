@@ -11,9 +11,10 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
-  selector: 'app-interface-data-write-dialog',
-  templateUrl: './interface-data-write-dialog.component.html',
-  styleUrl: './interface-data-write-dialog.component.scss',
+    selector: 'app-interface-data-write-dialog',
+    templateUrl: './interface-data-write-dialog.component.html',
+    styleUrl: './interface-data-write-dialog.component.scss',
+    standalone: false
 })
 export class InterfaceDataWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public existingData: APIItInterfaceDataResponseDTO | undefined;

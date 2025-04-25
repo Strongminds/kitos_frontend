@@ -6,9 +6,10 @@ import { UIConfigGridApplication } from 'src/app/shared/models/ui-config/ui-conf
 import { HideShowDialogComponent } from '../hide-show-dialog/hide-show-dialog.component';
 
 @Component({
-  selector: 'app-hide-show-button[columns][entityType]',
-  templateUrl: './hide-show-button.component.html',
-  styleUrl: './hide-show-button.component.scss',
+    selector: 'app-hide-show-button[columns][entityType]',
+    templateUrl: './hide-show-button.component.html',
+    styleUrl: './hide-show-button.component.scss',
+    standalone: false
 })
 export class HideShowButtonComponent {
   @Input() columns!: GridColumn[] | null;

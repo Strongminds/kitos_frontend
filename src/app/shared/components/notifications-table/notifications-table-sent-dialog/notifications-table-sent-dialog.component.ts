@@ -6,10 +6,11 @@ import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
 
 @Component({
-  selector: 'app-notifications-table-sent-dialog',
-  templateUrl: './notifications-table-sent-dialog.component.html',
-  styleUrl: './notifications-table-sent-dialog.component.scss',
-  providers: [NotificationsTableComponentStore]
+    selector: 'app-notifications-table-sent-dialog',
+    templateUrl: './notifications-table-sent-dialog.component.html',
+    styleUrl: './notifications-table-sent-dialog.component.scss',
+    providers: [NotificationsTableComponentStore],
+    standalone: false
 })
 export class NotificationsTableSentDialogComponent implements OnInit {
   @Input() public title!: string;

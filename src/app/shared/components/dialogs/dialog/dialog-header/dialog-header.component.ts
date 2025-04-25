@@ -3,9 +3,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog.component';
 
 @Component({
-  selector: 'app-dialog-header',
-  templateUrl: './dialog-header.component.html',
-  styleUrl: './dialog-header.component.scss',
+    selector: 'app-dialog-header',
+    templateUrl: './dialog-header.component.html',
+    styleUrl: './dialog-header.component.scss',
+    standalone: false
 })
 export class DialogHeaderComponent {
   @Input() public title?: string;

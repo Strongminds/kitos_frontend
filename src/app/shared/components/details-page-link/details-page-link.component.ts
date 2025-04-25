@@ -4,9 +4,10 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 
 @Component({
-  selector: 'app-details-page-link',
-  templateUrl: './details-page-link.component.html',
-  styleUrls: ['./details-page-link.component.scss'],
+    selector: 'app-details-page-link',
+    templateUrl: './details-page-link.component.html',
+    styleUrls: ['./details-page-link.component.scss'],
+    standalone: false
 })
 export class DetailsPageLinkComponent implements OnInit {
   public detailsPageRouterPath: string | null = null;

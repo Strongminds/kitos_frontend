@@ -4,7 +4,8 @@ import { debounceTime } from 'rxjs/operators';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants/constants';
 
 @Directive({
-  selector: '[appAfterValueChanged]',
+    selector: '[appAfterValueChanged]',
+    standalone: false
 })
 export class AfterValueChangedDirective<T> implements OnDestroy {
   @Output()

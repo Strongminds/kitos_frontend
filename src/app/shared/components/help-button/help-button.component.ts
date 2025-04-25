@@ -3,9 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 
 @Component({
-  selector: 'app-help-button',
-  templateUrl: 'help-button.component.html',
-  styleUrls: ['help-button.component.scss'],
+    selector: 'app-help-button',
+    templateUrl: 'help-button.component.html',
+    styleUrls: ['help-button.component.scss'],
+    standalone: false
 })
 export class HelpButtonComponent {
   @Input() public helpTextKey?: string;

@@ -31,9 +31,10 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-data-processing-details',
-  templateUrl: './data-processing-details.component.html',
-  styleUrl: './data-processing-details.component.scss',
+    selector: 'app-data-processing-details',
+    templateUrl: './data-processing-details.component.html',
+    styleUrl: './data-processing-details.component.scss',
+    standalone: false
 })
 export class DataProcessingDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

@@ -2,7 +2,8 @@ import { Directive, ElementRef, OnDestroy, OnInit, Optional } from '@angular/cor
 import { Router, RouterLink, UrlTree } from '@angular/router';
 
 @Directive({
-  selector: '[appCtrlClick]',
+    selector: '[appCtrlClick]',
+    standalone: false
 })
 export class CtrlClickDirective implements OnInit, OnDestroy {
   private captureClickListener!: (event: MouseEvent) => void;

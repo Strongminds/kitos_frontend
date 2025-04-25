@@ -9,10 +9,11 @@ import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option
 import { ItSystemInterfacesTableComponentStore } from './it-system-interfaces-table.component-store';
 
 @Component({
-  selector: 'app-it-system-interfaces-table[systemUuid]',
-  templateUrl: './it-system-interfaces-table.component.html',
-  styleUrls: ['./it-system-interfaces-table.component.scss'],
-  providers: [ItSystemInterfacesTableComponentStore],
+    selector: 'app-it-system-interfaces-table[systemUuid]',
+    templateUrl: './it-system-interfaces-table.component.html',
+    styleUrls: ['./it-system-interfaces-table.component.scss'],
+    providers: [ItSystemInterfacesTableComponentStore],
+    standalone: false
 })
 export class ItSystemInterfacesTableComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;

@@ -3,9 +3,10 @@ import { MatDialog } from '@angular/material/dialog';
 import { CreateGlobalAdminDialogComponent } from './create-global-admin-dialog/create-global-admin-dialog.component';
 
 @Component({
-  selector: 'app-global-admin-global-admins',
-  templateUrl: './global-admin-global-admins.component.html',
-  styleUrl: './global-admin-global-admins.component.scss',
+    selector: 'app-global-admin-global-admins',
+    templateUrl: './global-admin-global-admins.component.html',
+    styleUrl: './global-admin-global-admins.component.scss',
+    standalone: false
 })
 export class GlobalAdminGlobalAdminsComponent {
   constructor(private dialog: MatDialog) {}

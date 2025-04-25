@@ -14,9 +14,10 @@ import {
 } from 'src/app/store/organization/selectors';
 
 @Component({
-  selector: 'app-organizations-grid',
-  templateUrl: './organizations-grid.component.html',
-  styleUrl: './organizations-grid.component.scss',
+    selector: 'app-organizations-grid',
+    templateUrl: './organizations-grid.component.html',
+    styleUrl: './organizations-grid.component.scss',
+    standalone: false
 })
 export class OrganizationsGridComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;

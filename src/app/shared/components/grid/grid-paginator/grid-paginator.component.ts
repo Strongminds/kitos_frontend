@@ -3,9 +3,10 @@ import { PageSizeItem } from 'src/app/shared/models/page-size-item.model';
 import { GridState } from '../../../models/grid-state.model';
 
 @Component({
-  selector: 'app-grid-paginator',
-  templateUrl: 'grid-paginator.component.html',
-  styleUrls: ['grid-paginator.component.scss'],
+    selector: 'app-grid-paginator',
+    templateUrl: 'grid-paginator.component.html',
+    styleUrls: ['grid-paginator.component.scss'],
+    standalone: false
 })
 export class GridPaginatorComponent implements OnInit {
   @Input() state?: GridState | null;
