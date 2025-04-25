@@ -14,10 +14,11 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
-  selector: 'app-delete-user-dialog',
-  templateUrl: './delete-user-dialog.component.html',
-  styleUrl: './delete-user-dialog.component.scss',
-  providers: [RoleSelectionService],
+    selector: 'app-delete-user-dialog',
+    templateUrl: './delete-user-dialog.component.html',
+    styleUrl: './delete-user-dialog.component.scss',
+    providers: [RoleSelectionService],
+    standalone: false
 })
 export class DeleteUserDialogComponent extends RoleSelectionBaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;

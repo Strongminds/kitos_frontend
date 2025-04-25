@@ -5,8 +5,9 @@ import {
 } from 'src/app/shared/constants/it-system-usage-module-segment-constants';
 
 @Component({
-  templateUrl: 'it-system-usage-details-frontpage.component.html',
-  styleUrls: ['it-system-usage-details-frontpage.component.scss'],
+    templateUrl: 'it-system-usage-details-frontpage.component.html',
+    styleUrls: ['it-system-usage-details-frontpage.component.scss'],
+    standalone: false
 })
 export class ITSystemUsageDetailsFrontpageComponent {
   public ItSystemUsageModuleSegmentOption = ItSystemUsageModuleSegmentOption;

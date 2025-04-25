@@ -6,9 +6,10 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { UserActions } from 'src/app/store/user-store/actions';
 
 @Component({
-  selector: 'app-send-password-reset-request',
-  templateUrl: './send-password-reset-request.component.html',
-  styleUrl: './send-password-reset-request.component.scss',
+    selector: 'app-send-password-reset-request',
+    templateUrl: './send-password-reset-request.component.html',
+    styleUrl: './send-password-reset-request.component.scss',
+    standalone: false
 })
 export class SendPasswordResetRequestComponent extends BaseComponent {
   public readonly formGroup = new FormGroup({

@@ -50,10 +50,11 @@ import { ItSystemUsageDetailsArchivingComponentStore } from '../it-system-usage-
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from '../write-dialog/it-system-usage-details-journal-period-write-dialog.component';
 
 @Component({
-  selector: 'app-it-system-usage-details-archiving-usage',
-  templateUrl: './it-system-usage-details-archiving-usage.component.html',
-  styleUrl: './it-system-usage-details-archiving-usage.component.scss',
-  providers: [ItSystemUsageDetailsArchivingComponentStore],
+    selector: 'app-it-system-usage-details-archiving-usage',
+    templateUrl: './it-system-usage-details-archiving-usage.component.html',
+    styleUrl: './it-system-usage-details-archiving-usage.component.scss',
+    providers: [ItSystemUsageDetailsArchivingComponentStore],
+    standalone: false
 })
 export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent implements OnInit {
   private readonly journalFrequencyInputUpperLimit = 100;

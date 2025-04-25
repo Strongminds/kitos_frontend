@@ -14,9 +14,10 @@ import {
 import { CreateDprSystemUsageComponent } from './create-dpr-system-usage/create-dpr-system-usage.component';
 
 @Component({
-  selector: 'app-data-processing-it-systems',
-  templateUrl: './data-processing-it-systems.component.html',
-  styleUrl: './data-processing-it-systems.component.scss',
+    selector: 'app-data-processing-it-systems',
+    templateUrl: './data-processing-it-systems.component.html',
+    styleUrl: './data-processing-it-systems.component.scss',
+    standalone: false
 })
 export class DataProcessingItSystemsComponent extends BaseComponent {
   public readonly systemUsages$ = this.store.select(selectDataProcessingSystems).pipe(filterNullish());

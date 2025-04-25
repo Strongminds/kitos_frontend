@@ -4,9 +4,10 @@ import { BreadCrumbContext } from '../../models/breadcrumbs/breadcrumb-context.m
 import { BreadCrumb } from '../../models/breadcrumbs/breadcrumb.model';
 
 @Component({
-  selector: 'app-breadcrumb[breadCrumb][context]',
-  templateUrl: './breadcrumb.component.html',
-  styleUrls: ['./breadcrumb.component.scss'],
+    selector: 'app-breadcrumb[breadCrumb][context]',
+    templateUrl: './breadcrumb.component.html',
+    styleUrls: ['./breadcrumb.component.scss'],
+    standalone: false
 })
 export class BreadcrumbComponent {
   @Input() public breadCrumb!: BreadCrumb;

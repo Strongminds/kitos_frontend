@@ -15,10 +15,11 @@ import {
 import { ItContractDataProcessingRegistrationsComponentStore } from './it-contract-dpr.component-store';
 
 @Component({
-  selector: 'app-it-contract-dpr',
-  templateUrl: './it-contract-dpr.component.html',
-  styleUrl: './it-contract-dpr.component.scss',
-  providers: [ItContractDataProcessingRegistrationsComponentStore],
+    selector: 'app-it-contract-dpr',
+    templateUrl: './it-contract-dpr.component.html',
+    styleUrl: './it-contract-dpr.component.scss',
+    providers: [ItContractDataProcessingRegistrationsComponentStore],
+    standalone: false
 })
 export class ItContractDprComponent extends BaseComponent {
   public readonly dataProcessingRegistrations$ = this.store

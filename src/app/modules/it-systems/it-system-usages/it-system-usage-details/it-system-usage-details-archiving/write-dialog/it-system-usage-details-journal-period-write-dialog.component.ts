@@ -10,9 +10,10 @@ import { dateGreaterThanOrEqualControlValidator, dateLessThanOrEqualControlValid
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
-  selector: 'app-it-system-usage-details-journal-period-write-dialog',
-  templateUrl: './it-system-usage-details-journal-period-write-dialog.component.html',
-  styleUrls: ['./it-system-usage-details-journal-period-write-dialog.component.scss'],
+    selector: 'app-it-system-usage-details-journal-period-write-dialog',
+    templateUrl: './it-system-usage-details-journal-period-write-dialog.component.html',
+    styleUrls: ['./it-system-usage-details-journal-period-write-dialog.component.scss'],
+    standalone: false
 })
 export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public journalPeriod?: APIJournalPeriodResponseDTO | undefined;

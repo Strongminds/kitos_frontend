@@ -33,10 +33,11 @@ export interface BulkActionResult {
 }
 
 @Component({
-  selector: 'app-bulk-action-dialog',
-  templateUrl: './bulk-action-dialog.component.html',
-  styleUrl: './bulk-action-dialog.component.scss',
-  providers: [EntitySelectionService],
+    selector: 'app-bulk-action-dialog',
+    templateUrl: './bulk-action-dialog.component.html',
+    styleUrl: './bulk-action-dialog.component.scss',
+    providers: [EntitySelectionService],
+    standalone: false
 })
 export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   extends BaseComponent

@@ -10,9 +10,10 @@ import { ExternalReferencesManagmentActions } from 'src/app/store/external-refer
 import { CreateExternalReferenceDialogComponent } from '../create-external-reference-dialog/create-external-reference-dialog.component';
 
 @Component({
-  selector: 'app-edit-external-reference-dialog[initialModel][referenceUuid][entityType][masterReferenceIsReadOnly]',
-  templateUrl: './edit-external-reference-dialog.component.html',
-  styleUrls: ['./edit-external-reference-dialog.component.scss'],
+    selector: 'app-edit-external-reference-dialog[initialModel][referenceUuid][entityType][masterReferenceIsReadOnly]',
+    templateUrl: './edit-external-reference-dialog.component.html',
+    styleUrls: ['./edit-external-reference-dialog.component.scss'],
+    standalone: false
 })
 export class EditExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public referenceUuid!: string;

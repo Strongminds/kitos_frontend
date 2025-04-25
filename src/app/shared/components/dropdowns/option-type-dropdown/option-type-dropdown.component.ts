@@ -9,10 +9,11 @@ import { Store } from '@ngrx/store';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 
 @Component({
-  selector: 'app-option-type-dropdown',
-  templateUrl: './option-type-dropdown.component.html',
-  styleUrl: './option-type-dropdown.component.scss',
-  providers: [OptionTypeDropdownComponentStore],
+    selector: 'app-option-type-dropdown',
+    templateUrl: './option-type-dropdown.component.html',
+    styleUrl: './option-type-dropdown.component.scss',
+    providers: [OptionTypeDropdownComponentStore],
+    standalone: false
 })
 export class OptionTypeDropdownComponent extends BaseComponent implements OnInit {
   @Input() optionType!: RegularOptionType | RoleOptionTypes;

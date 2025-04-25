@@ -4,9 +4,10 @@ import { filter } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
-  selector: 'app-usage-proxy-checkbox',
-  templateUrl: './usage-proxy-checkbox.component.html',
-  styleUrls: ['./usage-proxy-checkbox.component.scss'],
+    selector: 'app-usage-proxy-checkbox',
+    templateUrl: './usage-proxy-checkbox.component.html',
+    styleUrls: ['./usage-proxy-checkbox.component.scss'],
+    standalone: false
 })
 export class UsageProxyCheckboxComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

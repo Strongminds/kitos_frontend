@@ -18,7 +18,8 @@ import {
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export class RegistrationBaseComponent<T> extends BaseComponent implements OnInit {
   @Input() public unitUuid!: string;

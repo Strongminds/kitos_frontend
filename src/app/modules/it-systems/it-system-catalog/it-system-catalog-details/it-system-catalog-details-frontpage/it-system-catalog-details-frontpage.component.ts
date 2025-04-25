@@ -40,10 +40,11 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catalog-details-frontpage.component-store';
 
 @Component({
-  selector: 'app-it-system-catalog-details-frontpage',
-  templateUrl: './it-system-catalog-details-frontpage.component.html',
-  styleUrl: './it-system-catalog-details-frontpage.component.scss',
-  providers: [ITSystemCatalogDetailsFrontpageComponentStore],
+    selector: 'app-it-system-catalog-details-frontpage',
+    templateUrl: './it-system-catalog-details-frontpage.component.html',
+    styleUrl: './it-system-catalog-details-frontpage.component.scss',
+    providers: [ITSystemCatalogDetailsFrontpageComponentStore],
+    standalone: false
 })
 export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly itSystemIsActive$ = this.store.select(selectItSystemIsActive);

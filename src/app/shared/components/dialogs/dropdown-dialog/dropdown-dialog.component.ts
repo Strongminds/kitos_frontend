@@ -7,9 +7,10 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConnectedDropdownDialogComponent } from '../connected-dropdown-dialog/connected-dropdown-dialog.component';
 
 @Component({
-  selector: 'app-dropdown-dialog',
-  templateUrl: './dropdown-dialog.component.html',
-  styleUrl: './dropdown-dialog.component.scss',
+    selector: 'app-dropdown-dialog',
+    templateUrl: './dropdown-dialog.component.html',
+    styleUrl: './dropdown-dialog.component.scss',
+    standalone: false
 })
 export class DropdownDialogComponent<T> extends BaseComponent implements OnInit {
   @Input() public title!: string;

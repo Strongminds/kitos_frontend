@@ -20,9 +20,10 @@ import {
 } from 'src/app/store/it-system-interfaces/selectors';
 
 @Component({
-  selector: 'app-it-system-interfaces',
-  templateUrl: './it-system-interfaces.component.html',
-  styleUrl: './it-system-interfaces.component.scss',
+    selector: 'app-it-system-interfaces',
+    templateUrl: './it-system-interfaces.component.html',
+    styleUrl: './it-system-interfaces.component.scss',
+    standalone: false
 })
 export class ItSystemInterfacesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectInterfaceGridLoading);

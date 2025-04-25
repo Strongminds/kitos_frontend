@@ -14,10 +14,11 @@ import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
-  selector: 'app-org-unit-role-table',
-  templateUrl: 'organization-unit-role-table.component.html',
-  styleUrls: ['organization-unit-role-table.component.scss'],
-  providers: [RoleTableComponentStore],
+    selector: 'app-org-unit-role-table',
+    templateUrl: 'organization-unit-role-table.component.html',
+    styleUrls: ['organization-unit-role-table.component.scss'],
+    providers: [RoleTableComponentStore],
+    standalone: false
 })
 export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent implements OnInit {
   @Input() public unitName!: string;

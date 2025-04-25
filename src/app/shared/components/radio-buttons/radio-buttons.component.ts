@@ -7,9 +7,10 @@ export interface RadioButtonOption<TOptionIdType> {
 }
 
 @Component({
-  selector: 'app-radio-buttons[options]',
-  templateUrl: './radio-buttons.component.html',
-  styleUrls: ['./radio-buttons.component.scss'],
+    selector: 'app-radio-buttons[options]',
+    templateUrl: './radio-buttons.component.html',
+    styleUrls: ['./radio-buttons.component.scss'],
+    standalone: false
 })
 export class RadioButtonsComponent<TOptionIdType> extends BaseFormComponent<TOptionIdType> {
   @Input() public options!: Array<RadioButtonOption<TOptionIdType>>;

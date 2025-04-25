@@ -4,10 +4,11 @@ import { ApiUsersOrganizationsDialogComponent } from './api-users-organizations-
 import { GlobalAdminOtherApiUsersComponentStore } from './global-admin-other-api-users.component-store';
 
 @Component({
-  selector: 'app-global-admin-other-api-users',
-  templateUrl: './global-admin-other-api-users.component.html',
-  styleUrl: './global-admin-other-api-users.component.scss',
-  providers: [GlobalAdminOtherApiUsersComponentStore],
+    selector: 'app-global-admin-other-api-users',
+    templateUrl: './global-admin-other-api-users.component.html',
+    styleUrl: './global-admin-other-api-users.component.scss',
+    providers: [GlobalAdminOtherApiUsersComponentStore],
+    standalone: false
 })
 export class GlobalAdminOtherApiUsersComponent implements OnInit {
   public usersWithRightsholderAccess$ = this.componentStore.usersWithRightsholderAccess$;

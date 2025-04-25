@@ -18,10 +18,11 @@ import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
 
 @Component({
-  selector: 'app-create-user-dialog',
-  templateUrl: './create-user-dialog.component.html',
-  styleUrl: './create-user-dialog.component.scss',
-  providers: [CreateUserDialogComponentStore],
+    selector: 'app-create-user-dialog',
+    templateUrl: './create-user-dialog.component.html',
+    styleUrl: './create-user-dialog.component.scss',
+    providers: [CreateUserDialogComponentStore],
+    standalone: false
 })
 export class CreateUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   public readonly noExistingUser$ = this.componentStore.noUserInOtherOrgs$;

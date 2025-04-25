@@ -4,9 +4,10 @@ import { EntitySelectionService } from 'src/app/shared/services/entity-selector-
 import { BulkActionOption } from '../bulk-action-dialog.component';
 
 @Component({
-  selector: 'app-bulk-action-dialog-section',
-  templateUrl: './bulk-action-dialog-section.component.html',
-  styleUrl: './bulk-action-dialog-section.component.scss',
+    selector: 'app-bulk-action-dialog-section',
+    templateUrl: './bulk-action-dialog-section.component.html',
+    styleUrl: './bulk-action-dialog-section.component.scss',
+    standalone: false
 })
 export class BulkActionDialogSectionComponent implements OnInit {
   @Input() public options!: BulkActionOption[];

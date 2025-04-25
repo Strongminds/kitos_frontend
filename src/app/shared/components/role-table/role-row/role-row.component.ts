@@ -4,10 +4,11 @@ import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 
 @Component({
-  // eslint-disable-next-line @angular-eslint/component-selector
-  selector: '[role-row]',
-  templateUrl: './role-row.component.html',
-  styleUrl: './role-row.component.scss',
+    // eslint-disable-next-line @angular-eslint/component-selector
+    selector: '[role-row]',
+    templateUrl: './role-row.component.html',
+    styleUrl: './role-row.component.scss',
+    standalone: false
 })
 export class RoleRowComponent {
   @Input() role!: IRoleAssignment;

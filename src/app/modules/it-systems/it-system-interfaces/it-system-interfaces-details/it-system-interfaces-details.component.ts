@@ -26,9 +26,10 @@ import {
 } from 'src/app/store/it-system-interfaces/selectors';
 
 @Component({
-  selector: 'app-it-system-interfaces-details',
-  templateUrl: './it-system-interfaces-details.component.html',
-  styleUrl: './it-system-interfaces-details.component.scss',
+    selector: 'app-it-system-interfaces-details',
+    templateUrl: './it-system-interfaces-details.component.html',
+    styleUrl: './it-system-interfaces-details.component.scss',
+    standalone: false
 })
 export class ItSystemInterfacesDetailsComponent extends BaseComponent implements OnInit {
   private readonly interfacesRootPath = `${AppPath.itSystems}/${AppPath.itInterfaces}`;

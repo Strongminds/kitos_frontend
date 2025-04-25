@@ -4,9 +4,9 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class StatePersistingService {
-  public get<T>(token: string): T {
+  public get<T>(token: string): T | null {
     const settings = localStorage.getItem(token);
-    return settings ? JSON.parse(settings) : settings;
+    return settings ? JSON.parse(settings) : null;
   }
   public set<T>(token: string, data: T): void {
     localStorage.setItem(token, JSON.stringify(data));

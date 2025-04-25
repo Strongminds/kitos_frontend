@@ -35,8 +35,9 @@ import {
 } from 'src/app/store/it-contract/selectors';
 
 @Component({
-  templateUrl: 'it-contracts.component.html',
-  styleUrls: ['it-contracts.component.scss'],
+    templateUrl: 'it-contracts.component.html',
+    styleUrls: ['it-contracts.component.scss'],
+    standalone: false
 })
 export class ITContractsComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectContractGridLoading);

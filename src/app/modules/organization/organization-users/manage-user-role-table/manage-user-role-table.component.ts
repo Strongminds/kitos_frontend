@@ -12,9 +12,10 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 
 @Component({
-  selector: 'app-manage-user-role-table',
-  templateUrl: './manage-user-role-table.component.html',
-  styleUrl: './manage-user-role-table.component.scss',
+    selector: 'app-manage-user-role-table',
+    templateUrl: './manage-user-role-table.component.html',
+    styleUrl: './manage-user-role-table.component.scss',
+    standalone: false
 })
 export class ManageUserRoleTableComponent {
   @Input() user!: ODataOrganizationUser;

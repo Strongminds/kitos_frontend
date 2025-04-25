@@ -12,9 +12,10 @@ import { selectITSystemHasModifyPermission, selectItSystemKleUuids } from 'src/a
 import { KleCommandEventArgs, SelectedKle } from '../../../shared/kle-table/kle-table.component';
 
 @Component({
-  selector: 'app-it-system-catalog-kle',
-  templateUrl: './it-system-catalog-kle.component.html',
-  styleUrl: './it-system-catalog-kle.component.scss',
+    selector: 'app-it-system-catalog-kle',
+    templateUrl: './it-system-catalog-kle.component.html',
+    styleUrl: './it-system-catalog-kle.component.scss',
+    standalone: false
 })
 export class ItSystemCatalogKleComponent extends BaseComponent implements OnInit {
   private disabledKleUuids: Array<string> = [];

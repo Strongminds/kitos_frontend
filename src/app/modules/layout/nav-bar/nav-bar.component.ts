@@ -19,9 +19,10 @@ import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
 
 @Component({
-  selector: 'app-nav-bar',
-  templateUrl: 'nav-bar.component.html',
-  styleUrls: ['nav-bar.component.scss'],
+    selector: 'app-nav-bar',
+    templateUrl: 'nav-bar.component.html',
+    styleUrls: ['nav-bar.component.scss'],
+    standalone: false
 })
 export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;

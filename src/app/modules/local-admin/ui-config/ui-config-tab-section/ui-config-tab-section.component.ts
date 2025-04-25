@@ -9,9 +9,10 @@ import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-cust
 import { selectUIConfigLoading } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-ui-config-tab-section',
-  templateUrl: './ui-config-tab-section.component.html',
-  styleUrl: './ui-config-tab-section.component.scss',
+    selector: 'app-ui-config-tab-section',
+    templateUrl: './ui-config-tab-section.component.html',
+    styleUrl: './ui-config-tab-section.component.scss',
+    standalone: false
 })
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;

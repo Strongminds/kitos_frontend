@@ -13,9 +13,10 @@ import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { FilterDropdownOption } from '../dropdown-filter/dropdown-filter.component';
 
 @Component({
-  selector: 'app-choice-type-dropdown-filter',
-  templateUrl: './choice-type-dropdown-filter.component.html',
-  styleUrl: './choice-type-dropdown-filter.component.scss',
+    selector: 'app-choice-type-dropdown-filter',
+    templateUrl: './choice-type-dropdown-filter.component.html',
+    styleUrl: './choice-type-dropdown-filter.component.scss',
+    standalone: false
 })
 export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

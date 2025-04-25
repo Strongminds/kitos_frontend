@@ -10,9 +10,10 @@ import {
 } from 'src/app/store/kle/selectors';
 
 @Component({
-  selector: 'app-global-admin-other-kle',
-  templateUrl: './global-admin-other-kle.component.html',
-  styleUrl: './global-admin-other-kle.component.scss',
+    selector: 'app-global-admin-other-kle',
+    templateUrl: './global-admin-other-kle.component.html',
+    styleUrl: './global-admin-other-kle.component.scss',
+    standalone: false
 })
 export class GlobalAdminOtherKleComponent extends BaseComponent implements OnInit {
   public readonly kleStatus$ = this.store.select(selectAdminKleStatus);

@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-readonly-link-textbox',
-  templateUrl: './readonly-link-textbox.component.html',
-  styleUrl: './readonly-link-textbox.component.scss',
+    selector: 'app-readonly-link-textbox',
+    templateUrl: './readonly-link-textbox.component.html',
+    styleUrl: './readonly-link-textbox.component.scss',
+    standalone: false
 })
 export class ReadonlyLinkTextboxComponent {
   @Input() public title!: string;

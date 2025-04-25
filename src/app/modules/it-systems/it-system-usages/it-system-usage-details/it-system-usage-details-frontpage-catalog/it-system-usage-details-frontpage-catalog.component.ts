@@ -20,10 +20,11 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-usage-details-frontpage-catalog.component-store';
 
 @Component({
-  selector: 'app-it-system-usage-details-frontpage-catalog',
-  templateUrl: 'it-system-usage-details-frontpage-catalog.component.html',
-  styleUrls: ['it-system-usage-details-frontpage-catalog.component.scss'],
-  providers: [ITSystemUsageDetailsFrontpageCatalogComponentStore],
+    selector: 'app-it-system-usage-details-frontpage-catalog',
+    templateUrl: 'it-system-usage-details-frontpage-catalog.component.html',
+    styleUrls: ['it-system-usage-details-frontpage-catalog.component.scss'],
+    providers: [ITSystemUsageDetailsFrontpageCatalogComponentStore],
+    standalone: false
 })
 export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;

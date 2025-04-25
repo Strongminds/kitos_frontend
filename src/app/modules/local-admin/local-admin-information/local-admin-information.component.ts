@@ -17,9 +17,10 @@ import {
 } from 'src/app/store/user-store/selectors';
 
 @Component({
-  selector: 'app-local-admin-information',
-  templateUrl: './local-admin-information.component.html',
-  styleUrl: './local-admin-information.component.scss',
+    selector: 'app-local-admin-information',
+    templateUrl: './local-admin-information.component.html',
+    styleUrl: './local-admin-information.component.scss',
+    standalone: false
 })
 export class LocalAdminInformationComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);

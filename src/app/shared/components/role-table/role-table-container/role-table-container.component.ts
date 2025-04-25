@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Observable } from 'rxjs';
 
 @Component({
-  selector: 'app-role-table-container',
-  templateUrl: './role-table-container.component.html',
-  styleUrl: './role-table-container.component.scss'
+    selector: 'app-role-table-container',
+    templateUrl: './role-table-container.component.html',
+    styleUrl: './role-table-container.component.scss',
+    standalone: false
 })
 export class RoleTableContainerComponent {
 

@@ -13,9 +13,10 @@ import { EditLocalOptionTypeDialogComponent } from '../edit-local-option-type-di
 import { OBLIGATORY_LOCAL_OPTION_HELP_TEXT } from 'src/app/shared/constants/constants';
 
 @Component({
-  selector: 'app-local-option-grid',
-  templateUrl: './local-option-grid.component.html',
-  styleUrl: './local-option-grid.component.scss',
+    selector: 'app-local-option-grid',
+    templateUrl: './local-option-grid.component.html',
+    styleUrl: './local-option-grid.component.scss',
+    standalone: false
 })
 export class LocalOptionGridComponent implements OnInit {
   @Input() public loading: boolean = false;

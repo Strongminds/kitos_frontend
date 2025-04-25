@@ -9,9 +9,10 @@ import { YesNoDontKnowOption, yesNoDontKnowOptions } from 'src/app/shared/models
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
-  selector: 'app-gdpr-base-date-url-section',
-  templateUrl: './gdpr-base-date-url-section.component.html',
-  styleUrls: ['./gdpr-base-date-url-section.component.scss'],
+    selector: 'app-gdpr-base-date-url-section',
+    templateUrl: './gdpr-base-date-url-section.component.html',
+    styleUrls: ['./gdpr-base-date-url-section.component.scss'],
+    standalone: false
 })
 export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent implements OnInit {
   @Input() public title!: string;

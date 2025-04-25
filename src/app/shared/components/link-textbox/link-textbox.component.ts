@@ -6,9 +6,10 @@ import { isEmptyOrUndefined } from '../../helpers/string.helpers';
 import { SimpleLink } from '../../models/SimpleLink.model';
 
 @Component({
-  selector: 'app-link-textbox',
-  templateUrl: './link-textbox.component.html',
-  styleUrls: ['./link-textbox.component.scss'],
+    selector: 'app-link-textbox',
+    templateUrl: './link-textbox.component.html',
+    styleUrls: ['./link-textbox.component.scss'],
+    standalone: false
 })
 export class LinkTextboxComponent extends BaseComponent {
   @Input() public title!: string;

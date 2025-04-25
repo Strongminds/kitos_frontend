@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { IdentityNamePair } from '../../../../../models/identity-name-pair.model';
 
 @Component({
-  selector: 'app-usage-migration-consequences-table',
-  templateUrl: './usage-migration-consequences-table.component.html',
-  styleUrl: './usage-migration-consequences-table.component.scss',
+    selector: 'app-usage-migration-consequences-table',
+    templateUrl: './usage-migration-consequences-table.component.html',
+    styleUrl: './usage-migration-consequences-table.component.scss',
+    standalone: false
 })
 export class UsageMigrationConsequencesTableComponent {
   @Input() title!: string;

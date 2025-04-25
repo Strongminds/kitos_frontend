@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { ParagraphFontSizeTypes } from '../../models/sizes/paragraph-font-sizes.model';
 
 @Component({
-  selector: 'app-content-with-info',
-  templateUrl: './content-with-info.component.html',
-  styleUrl: './content-with-info.component.scss',
+    selector: 'app-content-with-info',
+    templateUrl: './content-with-info.component.html',
+    styleUrl: './content-with-info.component.scss',
+    standalone: false
 })
 export class ContentWithInfoComponent {
   @Input() public text!: string;

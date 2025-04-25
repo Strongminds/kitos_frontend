@@ -3,9 +3,10 @@ import { Observable } from 'rxjs';
 import { IconType } from '../../models/icon-type';
 
 @Component({
-  selector: 'app-navigation-drawer',
-  templateUrl: './navigation-drawer.component.html',
-  styleUrl: './navigation-drawer.component.scss',
+    selector: 'app-navigation-drawer',
+    templateUrl: './navigation-drawer.component.html',
+    styleUrl: './navigation-drawer.component.scss',
+    standalone: false
 })
 export class NavigationDrawerComponent {
   @Input() items: NavigationDrawerItem[] = [];

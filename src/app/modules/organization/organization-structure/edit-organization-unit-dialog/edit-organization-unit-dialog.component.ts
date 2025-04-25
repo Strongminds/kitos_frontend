@@ -37,9 +37,10 @@ import {
 } from 'src/app/store/organization/organization-unit/selectors';
 
 @Component({
-  selector: 'app-edit-organization-unit-dialog',
-  templateUrl: './edit-organization-unit-dialog.component.html',
-  styleUrl: './edit-organization-unit-dialog.component.scss',
+    selector: 'app-edit-organization-unit-dialog',
+    templateUrl: './edit-organization-unit-dialog.component.html',
+    styleUrl: './edit-organization-unit-dialog.component.scss',
+    standalone: false
 })
 export class EditOrganizationUnitDialogComponent extends BaseComponent implements OnInit {
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;

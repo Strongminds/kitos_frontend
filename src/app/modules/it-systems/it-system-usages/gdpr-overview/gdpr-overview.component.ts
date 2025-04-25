@@ -14,9 +14,10 @@ import { GdprReportActions } from 'src/app/store/it-system-usage/gdpr-report/act
 import { selectGdprReports } from 'src/app/store/it-system-usage/gdpr-report/selectors';
 
 @Component({
-  selector: 'app-gdpr-overview',
-  templateUrl: './gdpr-overview.component.html',
-  styleUrl: './gdpr-overview.component.scss',
+    selector: 'app-gdpr-overview',
+    templateUrl: './gdpr-overview.component.html',
+    styleUrl: './gdpr-overview.component.scss',
+    standalone: false
 })
 export class GdprOverviewComponent {
   private readonly gridColumns: GridColumn[] = [

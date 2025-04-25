@@ -1,12 +1,10 @@
 /// <reference types="cypress" />
 
 describe('login', () => {
-
-
   beforeEach(() => {
     cy.requireIntercept();
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', {statusCode: 404, body: {}});
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', {statusCode: 404, body: {}});
+    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup();
   });
 
@@ -112,7 +110,7 @@ describe('login', () => {
     });
     cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
 
-    cy.visit('it-systems/it-system-usages');
+    cy.contains('IT Systemer').click();
     cy.contains('System 3').click();
     cy.contains('Systeminformation');
 
@@ -125,6 +123,7 @@ describe('login', () => {
       cy.dropdown('Organisation', 'Organisation 1', true);
     });
 
+    cy.contains('System 3').click();
     cy.contains('Systeminformation');
 
     cy.get('app-nav-bar').contains('Test User').trigger('mouseenter');

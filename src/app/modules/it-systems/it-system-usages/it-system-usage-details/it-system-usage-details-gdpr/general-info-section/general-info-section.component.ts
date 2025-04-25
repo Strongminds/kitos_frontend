@@ -23,9 +23,10 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-general-info-section',
-  templateUrl: './general-info-section.component.html',
-  styleUrls: ['./general-info-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
+    selector: 'app-general-info-section',
+    templateUrl: './general-info-section.component.html',
+    styleUrls: ['./general-info-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
+    standalone: false
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
   @Input() disableLinkControl!: Observable<void>;

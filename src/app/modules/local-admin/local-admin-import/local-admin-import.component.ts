@@ -3,9 +3,10 @@ import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.c
 import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
 
 @Component({
-  selector: 'app-local-admin-import',
-  templateUrl: './local-admin-import.component.html',
-  styleUrl: './local-admin-import.component.scss',
+    selector: 'app-local-admin-import',
+    templateUrl: './local-admin-import.component.html',
+    styleUrl: './local-admin-import.component.scss',
+    standalone: false
 })
 export class LocalAdminImportComponent {
   public readonly contractsType = LocalAdminImportEntityType.contracts;

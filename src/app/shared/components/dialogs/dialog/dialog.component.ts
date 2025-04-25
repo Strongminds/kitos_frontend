@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: 'dialog.component.html',
-  styleUrls: ['dialog.component.scss'],
+    selector: 'app-dialog',
+    templateUrl: 'dialog.component.html',
+    styleUrls: ['dialog.component.scss'],
+    standalone: false
 })
 export class DialogComponent {
   @Input() public title?: string;

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-take-into-use-icon',
-  styles: [':host {display: contents}'],
-  templateUrl: './take-into-use.svg',
+    selector: 'app-take-into-use-icon',
+    styles: [':host {display: contents}'],
+    templateUrl: './take-into-use.svg',
+    standalone: false
 })
 export class TakeIntoUseIconComponent {}

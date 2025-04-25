@@ -50,10 +50,11 @@ import { ItContractFrontpageComponentStore } from './it-contract-frontpage.compo
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 
 @Component({
-  selector: 'app-it-contract-frontpage',
-  templateUrl: './it-contract-frontpage.component.html',
-  styleUrl: './it-contract-frontpage.component.scss',
-  providers: [ItContractFrontpageComponentStore],
+    selector: 'app-it-contract-frontpage',
+    templateUrl: './it-contract-frontpage.component.html',
+    styleUrl: './it-contract-frontpage.component.scss',
+    providers: [ItContractFrontpageComponentStore],
+    standalone: false
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
   public readonly contractTemplates$ = this.store

@@ -9,10 +9,11 @@ import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants'
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 
 @Component({
-  selector: 'app-create-and-associate-contract-dialog',
-  templateUrl: './create-and-associate-contract-dialog.component.html',
-  styleUrl: './create-and-associate-contract-dialog.component.scss',
-  providers: [CreateEntityDialogComponentStore],
+    selector: 'app-create-and-associate-contract-dialog',
+    templateUrl: './create-and-associate-contract-dialog.component.html',
+    styleUrl: './create-and-associate-contract-dialog.component.scss',
+    providers: [CreateEntityDialogComponentStore],
+    standalone: false
 })
 export class CreateAndAssociateContractDialogComponent extends BaseComponent implements OnInit {
   @Input() public usageToAssociateUuid!: string;

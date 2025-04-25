@@ -18,10 +18,11 @@ import { ShallowOptionType } from 'src/app/shared/models/options/option-type.mod
 import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
 
 @Component({
-  selector: 'app-create-organization-dialog',
-  templateUrl: './create-organization-dialog.component.html',
-  styleUrl: './create-organization-dialog.component.scss',
-  providers: [OrganizationsDialogComponentStore],
+    selector: 'app-create-organization-dialog',
+    templateUrl: './create-organization-dialog.component.html',
+    styleUrl: './create-organization-dialog.component.scss',
+    providers: [OrganizationsDialogComponentStore],
+    standalone: false
 })
 export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   public readonly organizationTypeOptions = organizationTypeOptions;

@@ -6,9 +6,10 @@ import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
 import { selectAllGlobalAdmins, selectGlobalAdminsLoading } from 'src/app/store/global-admin/selectors';
 
 @Component({
-  selector: 'app-global-admins-table',
-  templateUrl: './global-admins-table.component.html',
-  styleUrl: './global-admins-table.component.scss',
+    selector: 'app-global-admins-table',
+    templateUrl: './global-admins-table.component.html',
+    styleUrl: './global-admins-table.component.scss',
+    standalone: false
 })
 export class GlobalAdminsTableComponent implements OnInit {
   constructor(private confirmActionService: ConfirmActionService, private store: Store) {}

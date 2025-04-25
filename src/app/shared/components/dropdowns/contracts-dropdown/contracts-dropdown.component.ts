@@ -5,10 +5,11 @@ import { APIItContractResponseDTO } from 'src/app/api/v2';
 import { ContractDropdownComponentStore } from './contracts-dropdown.component-store';
 
 @Component({
-  selector: 'app-contracts-dropdown',
-  templateUrl: './contracts-dropdown.component.html',
-  styleUrl: './contracts-dropdown.component.scss',
-  providers: [ContractDropdownComponentStore],
+    selector: 'app-contracts-dropdown',
+    templateUrl: './contracts-dropdown.component.html',
+    styleUrl: './contracts-dropdown.component.scss',
+    providers: [ContractDropdownComponentStore],
+    standalone: false
 })
 export class ContractsDropdownComponent implements OnInit {
   @Input() formGroup!: FormGroup;

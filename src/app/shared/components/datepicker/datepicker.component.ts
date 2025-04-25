@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
-import IMask, { AnyMaskedOptions } from 'imask';
+import IMask from 'imask';
 import * as moment from 'moment';
 import { BaseFormComponent } from '../../base/base-form.component';
 
@@ -8,6 +8,7 @@ import { BaseFormComponent } from '../../base/base-form.component';
   selector: 'app-datepicker',
   templateUrl: 'datepicker.component.html',
   styleUrls: ['datepicker.component.scss'],
+  standalone: false,
 })
 export class DatePickerComponent extends BaseFormComponent<Date | undefined> implements AfterViewInit, OnDestroy {
   @Input() public icon?: 'search';
@@ -38,7 +39,7 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
     this.mask?.updateValue();
   }
 
-  private mask?: IMask.InputMask<AnyMaskedOptions>;
+  private mask?: InstanceType<typeof IMask.InputMask>;
 
   @ViewChild('input', { read: ViewContainerRef }) public input!: ViewContainerRef;
 

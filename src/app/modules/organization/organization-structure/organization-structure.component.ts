@@ -32,9 +32,10 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { EditOrganizationUnitDialogComponent } from './edit-organization-unit-dialog/edit-organization-unit-dialog.component';
 
 @Component({
-  selector: 'app-organization-structure',
-  templateUrl: './organization-structure.component.html',
-  styleUrl: './organization-structure.component.scss',
+    selector: 'app-organization-structure',
+    templateUrl: './organization-structure.component.html',
+    styleUrl: './organization-structure.component.scss',
+    standalone: false
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());

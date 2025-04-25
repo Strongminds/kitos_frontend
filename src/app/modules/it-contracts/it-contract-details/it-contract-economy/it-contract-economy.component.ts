@@ -25,9 +25,10 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
-  selector: 'app-it-contract-economy',
-  templateUrl: './it-contract-economy.component.html',
-  styleUrl: './it-contract-economy.component.scss',
+    selector: 'app-it-contract-economy',
+    templateUrl: './it-contract-economy.component.html',
+    styleUrl: './it-contract-economy.component.scss',
+    standalone: false
 })
 export class ItContractEconomyComponent extends BaseComponent implements OnInit {
   public readonly paymentFrequencyOptions$ = this.store.select(

@@ -10,9 +10,10 @@ import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 @Component({
-  selector: 'app-edit-url-dialog',
-  templateUrl: './edit-url-dialog.component.html',
-  styleUrls: ['./edit-url-dialog.component.scss'],
+    selector: 'app-edit-url-dialog',
+    templateUrl: './edit-url-dialog.component.html',
+    styleUrls: ['./edit-url-dialog.component.scss'],
+    standalone: false
 })
 export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   @Input() simpleLink?: SimpleLink | undefined;

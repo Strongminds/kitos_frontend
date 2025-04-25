@@ -39,9 +39,10 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
-  selector: 'app-data-processing-oversight',
-  templateUrl: './data-processing-oversight.component.html',
-  styleUrl: './data-processing-oversight.component.scss',
+    selector: 'app-data-processing-oversight',
+    templateUrl: './data-processing-oversight.component.html',
+    styleUrl: './data-processing-oversight.component.scss',
+    standalone: false
 })
 export class DataProcessingOversightComponent extends BaseComponent implements OnInit {
   public readonly oversightOptions$ = this.store.select(selectDataProcessingOversightOptions).pipe(filterNullish());

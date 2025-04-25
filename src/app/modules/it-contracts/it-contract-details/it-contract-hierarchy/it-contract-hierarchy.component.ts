@@ -11,10 +11,11 @@ import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from './it-contract-hierarchy.component-store';
 
 @Component({
-  selector: 'app-it-contract-hierarchy',
-  templateUrl: './it-contract-hierarchy.component.html',
-  styleUrl: './it-contract-hierarchy.component.scss',
-  providers: [ItContractHierarchyComponentStore],
+    selector: 'app-it-contract-hierarchy',
+    templateUrl: './it-contract-hierarchy.component.html',
+    styleUrl: './it-contract-hierarchy.component.scss',
+    providers: [ItContractHierarchyComponentStore],
+    standalone: false
 })
 export class ItContractHierarchyComponent extends BaseComponent implements OnInit {
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());

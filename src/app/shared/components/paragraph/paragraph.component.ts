@@ -4,9 +4,10 @@ import { ParagraphFontSizeTypes } from '../../models/sizes/paragraph-font-sizes.
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
 
 @Component({
-  selector: 'app-paragraph',
-  templateUrl: './paragraph.component.html',
-  styleUrls: ['./paragraph.component.scss'],
+    selector: 'app-paragraph',
+    templateUrl: './paragraph.component.html',
+    styleUrls: ['./paragraph.component.scss'],
+    standalone: false
 })
 export class ParagraphComponent {
   @Input() public paragraphSize: ParagraphFontSizeTypes = 'small';

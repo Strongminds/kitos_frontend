@@ -21,9 +21,10 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-it-system-usage-details-kle',
-  templateUrl: './it-system-usage-details-kle.component.html',
-  styleUrls: ['./it-system-usage-details-kle.component.scss'],
+    selector: 'app-it-system-usage-details-kle',
+    templateUrl: './it-system-usage-details-kle.component.html',
+    styleUrls: ['./it-system-usage-details-kle.component.scss'],
+    standalone: false
 })
 export class ItSystemUsageDetailsKleComponent extends BaseComponent implements OnInit {
   private disabledKleUuids: Array<string> = [];

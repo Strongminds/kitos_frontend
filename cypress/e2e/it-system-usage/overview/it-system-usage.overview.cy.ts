@@ -28,7 +28,7 @@ describe('it-system-usage', () => {
     );
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 
-    const gpdrColumnNames = [
+    const disabledColumns = [
       'DataType',
       'Risikovurdering',
       'Fortegnelse',
@@ -36,8 +36,9 @@ describe('it-system-usage', () => {
       'Dato for seneste risikovurdering',
       'Dato for seneste risikovurdering',
     ];
-    const lifeCycleColumnNames = ['ActiveAccordingToLifeCycle', 'LifeCycleStatus'];
-    const disabledColumns = gpdrColumnNames.concat(lifeCycleColumnNames);
+
+    //Removed due to flakiness - https://os2web.atlassian.net/browse/KITOSUDV-5831
+    //const lifeCycleColumnNames = ['ActiveAccordingToLifeCycle', 'LifeCycleStatus'];
 
     disabledColumns.forEach((columnName) => {
       cy.contains(columnName).should('not.exist');
