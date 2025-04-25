@@ -21,6 +21,8 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
   @Input() public formGroup!: FormGroup<any>;
   @Input() public formName!: string;
   @Input() public includeItemDescription = false;
+  @Input() public addTag = false;
+  @Input() public addTagText = $localize`Vælg`;
   @Output() public filterChange = new EventEmitter<string>();
   @Output() public valueChange = new EventEmitter<string>();
 

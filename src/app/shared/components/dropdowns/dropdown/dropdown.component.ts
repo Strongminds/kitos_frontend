@@ -16,6 +16,8 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   @Input() public clearable: boolean = true;
   @Input() public searchFn?: (search: string, item: T) => boolean;
   @Input() public showDescriptionLabel: boolean = true;
+  @Input() public addTag = false;
+  @Input() public addTagText = $localize`Vælg`;
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
   @Output() public cleared = new EventEmitter();
