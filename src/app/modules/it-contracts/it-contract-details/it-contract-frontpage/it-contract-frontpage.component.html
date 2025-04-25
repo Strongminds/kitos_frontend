@@ -148,6 +148,7 @@
     </app-connected-dropdown>
 
     <app-checkbox
+      *ngIf="useParentValidityEnabled$ | async"
       [formGroup]="parentContractForm"
       formName="requireValidParent"
       (valueChange)="patchFrontPage({ general: { validity: { requireValidParent: $event } } })"
