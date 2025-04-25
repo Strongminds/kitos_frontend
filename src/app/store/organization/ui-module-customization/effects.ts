@@ -33,38 +33,18 @@ export class UIModuleCustomizationEffects {
   updateUIModuleConfigsOnOrgChange$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.resetOnOrganizationUpdate),
-      concatLatestFrom(() =>
-        this.store.select(selectOrganizationUuid).pipe(filterNullish())
-      ),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([_, organizationUuid]) => {
         const moduleNames = [
           UIModuleConfigKey.ItSystemUsage,
           UIModuleConfigKey.DataProcessingRegistrations,
           UIModuleConfigKey.ItContract,
-          UIModuleConfigKey.Gdpr
+          UIModuleConfigKey.Gdpr,
         ];
 
-        const requests = moduleNames.map((moduleName) =>
-          this.organizationInternalService
-            .getSingleOrganizationsInternalV2GetUIModuleCustomization({
-              moduleName,
-              organizationUuid
-            })
-            .pipe(
-              map((uiModuleCustomizationDto) =>
-                this.combineBlueprintWithCustomizationDto(
-                  uiModuleCustomizationDto,
-                  moduleName,
-                  UIModuleConfigActions.getUIModuleConfigSuccess
-                )
-              ),
-              catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
-            )
-        );
+        const requests = moduleNames.map((moduleName) => this.getUIModuleConfigFromApi(moduleName, organizationUuid));
 
-        return forkJoin(requests).pipe(
-          mergeMap((actions) => from(actions))
-        );
+        return forkJoin(requests).pipe(mergeMap((actions) => from(actions)));
       })
     );
   });
@@ -80,18 +60,7 @@ export class UIModuleCustomizationEffects {
         if (validCache) {
           return of(UIModuleConfigActions.resetLoading());
         }
-        return this.organizationInternalService
-          .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
-          .pipe(
-            map((uiModuleCustomizationDto) =>
-              this.combineBlueprintWithCustomizationDto(
-                uiModuleCustomizationDto,
-                moduleName,
-                UIModuleConfigActions.getUIModuleConfigSuccess
-              )
-            ),
-            catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
-          );
+        return this.getUIModuleConfigFromApi(moduleName, organizationUuid);
       })
     );
   });
@@ -133,6 +102,24 @@ export class UIModuleCustomizationEffects {
       )
     );
   });
+
+  private getUIModuleConfigFromApi(moduleName: UIModuleConfigKey, organizationUuid: string) {
+    return this.organizationInternalService
+      .getSingleOrganizationsInternalV2GetUIModuleCustomization({
+        moduleName,
+        organizationUuid,
+      })
+      .pipe(
+        map((uiModuleCustomizationDto) =>
+          this.combineBlueprintWithCustomizationDto(
+            uiModuleCustomizationDto,
+            moduleName,
+            UIModuleConfigActions.getUIModuleConfigSuccess
+          )
+        ),
+        catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
+      );
+  }
 
   private combineBlueprintWithCustomizationDto<T extends { uiModuleConfig: UIModuleConfig }>(
     uiModuleCustomizationDto: APIUIModuleCustomizationResponseDTO,
