@@ -5,9 +5,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageContextSystemUuid } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
-  selector: 'app-it-system-usage-details-hierarchy',
-  templateUrl: './it-system-usage-details-hierarchy.component.html',
-  styleUrls: ['./it-system-usage-details-hierarchy.component.scss'],
+    selector: 'app-it-system-usage-details-hierarchy',
+    templateUrl: './it-system-usage-details-hierarchy.component.html',
+    styleUrls: ['./it-system-usage-details-hierarchy.component.scss'],
+    standalone: false
 })
 export class ItSystemUsageDetailsHierarchyComponent extends BaseComponent {
   public readonly systemUuid$ = this.store.select(selectItSystemUsageContextSystemUuid).pipe(filterNullish());

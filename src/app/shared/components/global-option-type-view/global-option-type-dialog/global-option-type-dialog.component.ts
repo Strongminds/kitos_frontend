@@ -11,9 +11,10 @@ import { isRoleOptionType } from 'src/app/shared/models/options/role-option-type
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
 
 @Component({
-  selector: 'app-global-option-type-dialog',
-  templateUrl: './global-option-type-dialog.component.html',
-  styleUrl: './global-option-type-dialog.component.scss',
+    selector: 'app-global-option-type-dialog',
+    templateUrl: './global-option-type-dialog.component.html',
+    styleUrl: './global-option-type-dialog.component.scss',
+    standalone: false
 })
 export class GlobalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;

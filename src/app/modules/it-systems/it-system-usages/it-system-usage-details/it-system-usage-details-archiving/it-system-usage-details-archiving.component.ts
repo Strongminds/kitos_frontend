@@ -13,10 +13,11 @@ import {
 import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
 
 @Component({
-  selector: 'app-it-system-usage-details-archiving',
-  templateUrl: './it-system-usage-details-archiving.component.html',
-  styleUrls: ['./it-system-usage-details-archiving.component.scss'],
-  providers: [ItSystemUsageDetailsArchivingComponentStore],
+    selector: 'app-it-system-usage-details-archiving',
+    templateUrl: './it-system-usage-details-archiving.component.html',
+    styleUrls: ['./it-system-usage-details-archiving.component.scss'],
+    providers: [ItSystemUsageDetailsArchivingComponentStore],
+    standalone: false
 })
 export class ItSystemUsageDetailsArchivingComponent {
   public ItSystemUsageModuleSegmentOption = ItSystemUsageModuleSegmentOption;

@@ -7,9 +7,10 @@ import { STRING_FIELD_MAX_LENGTH } from 'src/app/shared/constants/constants';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
-  selector: 'app-create-subunit-dialog',
-  templateUrl: './create-subunit-dialog.component.html',
-  styleUrl: './create-subunit-dialog.component.scss',
+    selector: 'app-create-subunit-dialog',
+    templateUrl: './create-subunit-dialog.component.html',
+    styleUrl: './create-subunit-dialog.component.scss',
+    standalone: false
 })
 export class CreateSubunitDialogComponent {
   @Input() parentUnitUuid$!: Observable<string>;

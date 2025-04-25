@@ -8,9 +8,10 @@ import { ConfirmActionCategory, ConfirmActionService } from '../../services/conf
 import { ColumnConfigService } from '../../services/column-config.service';
 
 @Component({
-  selector: 'app-local-admin-column-config-button',
-  templateUrl: './local-admin-column-config-button.component.html',
-  styleUrl: './local-admin-column-config-button.component.scss',
+    selector: 'app-local-admin-column-config-button',
+    templateUrl: './local-admin-column-config-button.component.html',
+    styleUrl: './local-admin-column-config-button.component.scss',
+    standalone: false
 })
 export class LocalAdminColumnConfigButtonComponent {
   @Input() columns$!: Observable<GridColumn[]>;

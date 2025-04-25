@@ -7,10 +7,11 @@ import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors
 import { ItSystemUsageDetailsDataProcessingComponentStore } from './it-system-usage-details-data-processing.component-store';
 
 @Component({
-  selector: 'app-it-system-usage-details-data-processing',
-  templateUrl: './it-system-usage-details-data-processing.component.html',
-  styleUrls: ['./it-system-usage-details-data-processing.component.scss'],
-  providers: [ItSystemUsageDetailsDataProcessingComponentStore],
+    selector: 'app-it-system-usage-details-data-processing',
+    templateUrl: './it-system-usage-details-data-processing.component.html',
+    styleUrls: ['./it-system-usage-details-data-processing.component.scss'],
+    providers: [ItSystemUsageDetailsDataProcessingComponentStore],
+    standalone: false
 })
 export class ItSystemUsageDetailsDataProcessingComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.dataProcessingComponentStore.associatedDataProcessingRegistrationsIsLoading$;

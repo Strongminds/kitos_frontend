@@ -9,9 +9,10 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ChooseOrganizationComponentStore } from './choose-organization.component-store';
 
 @Component({
-  templateUrl: 'choose-organization.component.html',
-  styleUrls: ['choose-organization.component.scss'],
-  providers: [ChooseOrganizationComponentStore],
+    templateUrl: 'choose-organization.component.html',
+    styleUrls: ['choose-organization.component.scss'],
+    providers: [ChooseOrganizationComponentStore],
+    standalone: false
 })
 export class ChooseOrganizationComponent implements OnInit {
   public closable = true;

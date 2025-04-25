@@ -24,9 +24,10 @@ import { DeleteOrganizationDialogComponent } from '../organizations-dialogs/dele
 import { EditOrganizationDialogComponent } from '../organizations-dialogs/edit-organization-dialog/edit-organization-dialog.component';
 
 @Component({
-  selector: 'app-global-admin-organizations-grid',
-  templateUrl: './global-admin-organizations-grid.component.html',
-  styleUrl: './global-admin-organizations-grid.component.scss',
+    selector: 'app-global-admin-organizations-grid',
+    templateUrl: './global-admin-organizations-grid.component.html',
+    styleUrl: './global-admin-organizations-grid.component.scss',
+    standalone: false
 })
 export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;

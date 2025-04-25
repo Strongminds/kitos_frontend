@@ -5,9 +5,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractHasModifyPermissions, selectItContractUuid } from 'src/app/store/it-contract/selectors';
 
 @Component({
-  selector: 'app-it-contract-notifications',
-  templateUrl: './it-contract-notifications.component.html',
-  styleUrl: './it-contract-notifications.component.scss'
+    selector: 'app-it-contract-notifications',
+    templateUrl: './it-contract-notifications.component.html',
+    styleUrl: './it-contract-notifications.component.scss',
+    standalone: false
 })
 export class ItContractNotificationsComponent extends BaseComponent {
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());

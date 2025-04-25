@@ -12,9 +12,10 @@ import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 
 @Component({
-  selector: 'app-reset-to-org-columns-config-button',
-  templateUrl: './reset-to-org-columns-config-button.component.html',
-  styleUrl: './reset-to-org-columns-config-button.component.scss',
+    selector: 'app-reset-to-org-columns-config-button',
+    templateUrl: './reset-to-org-columns-config-button.component.html',
+    styleUrl: './reset-to-org-columns-config-button.component.scss',
+    standalone: false
 })
 export class ResetToOrgColumnsConfigButtonComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;

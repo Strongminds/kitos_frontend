@@ -5,9 +5,10 @@ import { Observable, Subject, map, pairwise, startWith } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 
 @Component({
-  selector: 'app-connected-dropdown[text][valueField][filterChange][formGroup][formName]',
-  templateUrl: './connected-dropdown.component.html',
-  styleUrls: ['./connected-dropdown.component.scss'],
+    selector: 'app-connected-dropdown[text][valueField][filterChange][formGroup][formName]',
+    templateUrl: './connected-dropdown.component.html',
+    styleUrls: ['./connected-dropdown.component.scss'],
+    standalone: false
 })
 export class ConnectedDropdownComponent<T> extends BaseComponent implements OnInit {
   @Input() public text!: string;

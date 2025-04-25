@@ -9,9 +9,10 @@ import { selectItSystemKleUuids, selectItSystemLoading } from 'src/app/store/it-
 import { KleCommandEventArgs, SelectedKle, SelectedKleCommand } from '../kle-table/kle-table.component';
 
 @Component({
-  selector: 'app-it-system-kle-overview',
-  templateUrl: './it-system-kle-overview.component.html',
-  styleUrls: ['./it-system-kle-overview.component.scss'],
+    selector: 'app-it-system-kle-overview',
+    templateUrl: './it-system-kle-overview.component.html',
+    styleUrls: ['./it-system-kle-overview.component.scss'],
+    standalone: false
 })
 export class ItSystemKleOverviewComponent extends BaseComponent implements OnInit {
   constructor(private readonly store: Store) {

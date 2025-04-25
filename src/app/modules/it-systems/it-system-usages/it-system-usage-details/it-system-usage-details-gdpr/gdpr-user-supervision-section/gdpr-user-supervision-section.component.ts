@@ -12,9 +12,10 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
-  selector: 'app-gdpr-user-supervision-section',
-  templateUrl: './gdpr-user-supervision-section.component.html',
-  styleUrls: ['./gdpr-user-supervision-section.component.scss'],
+    selector: 'app-gdpr-user-supervision-section',
+    templateUrl: './gdpr-user-supervision-section.component.html',
+    styleUrls: ['./gdpr-user-supervision-section.component.scss'],
+    standalone: false
 })
 export class GdprUserSupervisionSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

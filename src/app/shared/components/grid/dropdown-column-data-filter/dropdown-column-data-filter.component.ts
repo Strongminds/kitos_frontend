@@ -10,9 +10,10 @@ import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownFilterComponent, FilterDropdownOption } from '../dropdown-filter/dropdown-filter.component';
 
 @Component({
-  selector: 'app-dropdown-column-data-filter',
-  templateUrl: './dropdown-column-data-filter.component.html',
-  styleUrl: './dropdown-column-data-filter.component.scss',
+    selector: 'app-dropdown-column-data-filter',
+    templateUrl: './dropdown-column-data-filter.component.html',
+    styleUrl: './dropdown-column-data-filter.component.scss',
+    standalone: false
 })
 export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @ViewChild(DropdownFilterComponent) dropdownFilter!: DropdownFilterComponent;

@@ -19,10 +19,11 @@ import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-d
 import { selectITSystemUsageEnableIncomingRelations, selectITSystemUsageEnableOutgoingRelations } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-it-system-usage-details-relations',
-  templateUrl: './it-system-usage-details-relations.component.html',
-  styleUrls: ['./it-system-usage-details-relations.component.scss'],
-  providers: [ItSystemUsageDetailsRelationsComponentStore],
+    selector: 'app-it-system-usage-details-relations',
+    templateUrl: './it-system-usage-details-relations.component.html',
+    styleUrls: ['./it-system-usage-details-relations.component.scss'],
+    providers: [ItSystemUsageDetailsRelationsComponentStore],
+    standalone: false
 })
 export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implements OnInit {
   public readonly usageName$ = this.store.select(selectItSystemUsageName);

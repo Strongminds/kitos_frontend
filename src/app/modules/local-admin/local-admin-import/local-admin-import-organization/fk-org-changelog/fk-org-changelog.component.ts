@@ -16,9 +16,10 @@ import {
 } from 'src/app/store/local-admin/fk-org/selectors';
 
 @Component({
-  selector: 'app-fk-org-changelog',
-  templateUrl: './fk-org-changelog.component.html',
-  styleUrl: './fk-org-changelog.component.scss',
+    selector: 'app-fk-org-changelog',
+    templateUrl: './fk-org-changelog.component.html',
+    styleUrl: './fk-org-changelog.component.scss',
+    standalone: false
 })
 export class FkOrgChangelogComponent implements OnInit {
   public readonly isLoadingChangelogs$ = this.store.select(selectIsLoadingChangelogs);

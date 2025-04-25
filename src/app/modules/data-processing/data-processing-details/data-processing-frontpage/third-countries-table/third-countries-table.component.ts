@@ -15,9 +15,10 @@ import {
 import { CountryCreateDialogComponent } from './country-create-dialog/country-create-dialog.component';
 
 @Component({
-  selector: 'app-third-countries-table',
-  templateUrl: './third-countries-table.component.html',
-  styleUrl: './third-countries-table.component.scss',
+    selector: 'app-third-countries-table',
+    templateUrl: './third-countries-table.component.html',
+    styleUrl: './third-countries-table.component.scss',
+    standalone: false
 })
 export class ThirdCountriesTableComponent extends BaseComponent {
   @Output() public readonly patchEvent = new EventEmitter<APIUpdateDataProcessingRegistrationRequestDTO>();

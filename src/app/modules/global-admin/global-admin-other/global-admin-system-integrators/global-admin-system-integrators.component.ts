@@ -14,10 +14,11 @@ import { toUuid } from 'src/app/shared/models/has-uuid';
 import { mapArray } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
-  selector: 'app-global-admin-system-integrators',
-  templateUrl: './global-admin-system-integrators.component.html',
-  styleUrl: './global-admin-system-integrators.component.scss',
-  providers: [SystemIntegratorComponentStore],
+    selector: 'app-global-admin-system-integrators',
+    templateUrl: './global-admin-system-integrators.component.html',
+    styleUrl: './global-admin-system-integrators.component.scss',
+    providers: [SystemIntegratorComponentStore],
+    standalone: false
 })
 export class GlobalAdminSystemIntegratorsComponent extends BaseComponent implements OnInit {
   public readonly systemIntegrators$ = this.componentStore.systemIntegrators$;

@@ -15,8 +15,9 @@ import { FrontpageComponentStore } from './frontpage.component-store';
 import { EditPublicMessageDialogComponent } from './public-message/edit-public-message-dialog/edit-public-message-dialog.component';
 
 @Component({
-  templateUrl: 'frontpage.component.html',
-  styleUrls: ['frontpage.component.scss'],
+    templateUrl: 'frontpage.component.html',
+    styleUrls: ['frontpage.component.scss'],
+    standalone: false
 })
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;

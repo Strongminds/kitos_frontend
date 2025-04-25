@@ -7,9 +7,10 @@ import { selectModuleVisibility } from 'src/app/store/organization/selectors';
 import { selectModuleConfig } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-ui-config',
-  templateUrl: './ui-config.component.html',
-  styleUrl: './ui-config.component.scss',
+    selector: 'app-ui-config',
+    templateUrl: './ui-config.component.html',
+    styleUrl: './ui-config.component.scss',
+    standalone: false
 })
 export class UiConfigComponent implements OnInit {
   constructor(private store: Store) {}

@@ -8,9 +8,10 @@ import { Store } from '@ngrx/store';
 import { ColumnConfigService } from '../../services/column-config.service';
 
 @Component({
-  selector: 'app-grid-options-button',
-  templateUrl: './grid-options-button.component.html',
-  styleUrl: './grid-options-button.component.scss',
+    selector: 'app-grid-options-button',
+    templateUrl: './grid-options-button.component.html',
+    styleUrl: './grid-options-button.component.scss',
+    standalone: false
 })
 export class GridOptionsButtonComponent {
   @Input() entityType!: RegistrationEntityTypes;

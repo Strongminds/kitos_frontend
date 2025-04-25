@@ -3,9 +3,10 @@ import { APIExternalReferenceDataResponseDTO } from 'src/app/api/v2';
 import { validateExternalReferenceUrl } from '../../helpers/link.helpers';
 
 @Component({
-  selector: 'app-external-reference',
-  templateUrl: 'external-reference.component.html',
-  styleUrls: ['external-reference.component.scss'],
+    selector: 'app-external-reference',
+    templateUrl: 'external-reference.component.html',
+    styleUrls: ['external-reference.component.scss'],
+    standalone: false
 })
 export class ExternalReferenceComponent implements OnInit {
   @Input() public reference?: APIExternalReferenceDataResponseDTO;

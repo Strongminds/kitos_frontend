@@ -8,9 +8,10 @@ import { NumericInputComponent } from '../../numeric-input/numeric-input.compone
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 
 @Component({
-  selector: 'app-numeric-filter',
-  templateUrl: './numeric-filter.component.html',
-  styleUrl: './numeric-filter.component.scss',
+    selector: 'app-numeric-filter',
+    templateUrl: './numeric-filter.component.html',
+    styleUrl: './numeric-filter.component.scss',
+    standalone: false
 })
 export class NumericFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @ViewChild(NumericInputComponent) public numericInput!: NumericInputComponent;

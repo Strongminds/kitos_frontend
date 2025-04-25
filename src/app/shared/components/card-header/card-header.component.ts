@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-card-header',
-  templateUrl: 'card-header.component.html',
-  styleUrls: ['card-header.component.scss'],
+    selector: 'app-card-header',
+    templateUrl: 'card-header.component.html',
+    styleUrls: ['card-header.component.scss'],
+    standalone: false
 })
 export class CardHeaderComponent {
   @Input() public title?: string;

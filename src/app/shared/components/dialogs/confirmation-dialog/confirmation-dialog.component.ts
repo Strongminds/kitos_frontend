@@ -6,9 +6,10 @@ import { CONFIRM_TEXT, DECLINE_TEXT, NO_TEXT, YES_TEXT } from '../../../constant
 import { ConfirmationStyle } from '../../../models/confirmation/confirmation-style.model';
 
 @Component({
-  selector: 'app-confirmation-dialog',
-  templateUrl: './confirmation-dialog.component.html',
-  styleUrls: ['./confirmation-dialog.component.scss'],
+    selector: 'app-confirmation-dialog',
+    templateUrl: './confirmation-dialog.component.html',
+    styleUrls: ['./confirmation-dialog.component.scss'],
+    standalone: false
 })
 export class ConfirmationDialogComponent extends BaseComponent implements OnInit {
   @Input() public title = $localize`Bekræft handling`;

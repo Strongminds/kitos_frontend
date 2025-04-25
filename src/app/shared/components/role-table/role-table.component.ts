@@ -12,10 +12,11 @@ import { BaseRoleTableComponent } from '../../base/base-role-table.component';
 import { compareByRoleName } from '../../helpers/role-helpers';
 
 @Component({
-  selector: 'app-role-table[entityType][hasModifyPermission]',
-  templateUrl: './role-table.component.html',
-  styleUrls: ['./role-table.component.scss'],
-  providers: [RoleTableComponentStore],
+    selector: 'app-role-table[entityType][hasModifyPermission]',
+    templateUrl: './role-table.component.html',
+    styleUrls: ['./role-table.component.scss'],
+    providers: [RoleTableComponentStore],
+    standalone: false
 })
 export class RoleTableComponent extends BaseRoleTableComponent implements OnInit {
   public readonly roles$ = this.componentStore.roles$.pipe(

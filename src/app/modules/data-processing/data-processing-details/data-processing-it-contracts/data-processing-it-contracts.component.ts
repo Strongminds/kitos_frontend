@@ -16,9 +16,10 @@ import {
 import { selectDprEnableAssociatedContracts, selectDprEnableMainContract } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-data-processing-it-contracts',
-  templateUrl: './data-processing-it-contracts.component.html',
-  styleUrl: './data-processing-it-contracts.component.scss',
+    selector: 'app-data-processing-it-contracts',
+    templateUrl: './data-processing-it-contracts.component.html',
+    styleUrl: './data-processing-it-contracts.component.scss',
+    standalone: false
 })
 export class DataProcessingItContractsComponent extends BaseComponent implements OnInit {
   public readonly mainContract$ = this.store.select(selectDataProcessingMainContract);

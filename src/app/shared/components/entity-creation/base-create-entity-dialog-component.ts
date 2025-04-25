@@ -12,7 +12,10 @@ import { AppPath } from '../../enums/app-path';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { CreateEntityDialogComponentStore } from './create-entity-dialog.component-store';
 
-@Component({ template: '' })
+@Component({
+    template: '',
+    standalone: false
+})
 export class BaseCreateEntityDialogComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public title!: string;

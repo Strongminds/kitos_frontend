@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-menu-button-item',
-  templateUrl: './menu-button-item.component.html',
-  styleUrls: ['./menu-button-item.component.scss']
+    selector: 'app-menu-button-item',
+    templateUrl: './menu-button-item.component.html',
+    styleUrls: ['./menu-button-item.component.scss'],
+    standalone: false
 })
 export class MenuButtonItemComponent {
   @Input() disabled: boolean = false;

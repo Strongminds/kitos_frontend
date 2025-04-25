@@ -7,9 +7,10 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { selectSsoErrorCode } from 'src/app/store/user-store/selectors';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.scss'],
+    standalone: false
 })
 export class LoginComponent {
   public readonly loginForm = new FormGroup({

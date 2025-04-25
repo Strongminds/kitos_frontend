@@ -19,7 +19,8 @@ import { ConfirmActionCategory, ConfirmActionService } from '../services/confirm
 import { RoleOptionTypeService } from '../services/role-option-type.service';
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export abstract class BaseRoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RoleOptionTypes;

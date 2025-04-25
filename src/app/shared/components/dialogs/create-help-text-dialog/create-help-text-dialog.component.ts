@@ -10,10 +10,11 @@ import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.component-store';
 
 @Component({
-  selector: 'app-create-help-text-dialog',
-  templateUrl: './create-help-text-dialog.component.html',
-  styleUrl: './create-help-text-dialog.component.scss',
-  providers: [CreateHelpTextDialogComponentStore],
+    selector: 'app-create-help-text-dialog',
+    templateUrl: './create-help-text-dialog.component.html',
+    styleUrl: './create-help-text-dialog.component.scss',
+    providers: [CreateHelpTextDialogComponentStore],
+    standalone: false
 })
 export class CreateHelpTextDialogComponent extends BaseComponent implements OnInit {
   @Input() existingKey: string | undefined;

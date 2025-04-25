@@ -8,9 +8,10 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
 @Component({
-  selector: 'app-string-filter',
-  templateUrl: './string-filter.component.html',
-  styleUrl: './string-filter.component.scss',
+    selector: 'app-string-filter',
+    templateUrl: './string-filter.component.html',
+    styleUrl: './string-filter.component.scss',
+    standalone: false
 })
 export class StringFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @ViewChild(TextBoxComponent) public textBox!: TextBoxComponent;

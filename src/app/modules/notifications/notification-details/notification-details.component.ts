@@ -9,9 +9,10 @@ import {
 } from 'src/app/store/organization/selectors';
 
 @Component({
-  selector: 'app-notification-details',
-  templateUrl: './notification-details.component.html',
-  styleUrl: './notification-details.component.scss',
+    selector: 'app-notification-details',
+    templateUrl: './notification-details.component.html',
+    styleUrl: './notification-details.component.scss',
+    standalone: false
 })
 export class NotificationDetailsComponent {
   public readonly navItems: NavigationDrawerItem[] = [

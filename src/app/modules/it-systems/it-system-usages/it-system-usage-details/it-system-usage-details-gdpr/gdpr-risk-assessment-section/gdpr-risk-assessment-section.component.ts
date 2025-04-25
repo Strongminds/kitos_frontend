@@ -24,9 +24,10 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
-  selector: 'app-gdpr-risk-assessment-section',
-  templateUrl: './gdpr-risk-assessment-section.component.html',
-  styleUrls: ['./gdpr-risk-assessment-section.component.scss'],
+    selector: 'app-gdpr-risk-assessment-section',
+    templateUrl: './gdpr-risk-assessment-section.component.html',
+    styleUrls: ['./gdpr-risk-assessment-section.component.scss'],
+    standalone: false
 })
 export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

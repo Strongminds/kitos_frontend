@@ -3,9 +3,10 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog.component';
 
 @Component({
-  selector: 'app-scrollbar-dialog',
-  templateUrl: './scrollbar-dialog.component.html',
-  styleUrl: './scrollbar-dialog.component.scss',
+    selector: 'app-scrollbar-dialog',
+    templateUrl: './scrollbar-dialog.component.html',
+    styleUrl: './scrollbar-dialog.component.scss',
+    standalone: false
 })
 export class ScrollbarDialogComponent {
   @Input() public title?: string;

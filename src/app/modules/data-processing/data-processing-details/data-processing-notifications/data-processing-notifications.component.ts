@@ -5,9 +5,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectDataProcessingHasModifyPermissions, selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 
 @Component({
-  selector: 'app-data-processing-notifications',
-  templateUrl: './data-processing-notifications.component.html',
-  styleUrl: './data-processing-notifications.component.scss'
+    selector: 'app-data-processing-notifications',
+    templateUrl: './data-processing-notifications.component.html',
+    styleUrl: './data-processing-notifications.component.scss',
+    standalone: false
 })
 export class DataProcessingNotificationsComponent extends BaseComponent {
   public readonly dataProcessingUuid$ = this.store.select(selectDataProcessingUuid).pipe(filterNullish());

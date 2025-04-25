@@ -15,9 +15,10 @@ import {
 import { CreateSubProcessorDialogComponent } from './create-sub-processor-dialog/create-sub-processor-dialog.component';
 
 @Component({
-  selector: 'app-sub-processors-table',
-  templateUrl: './sub-processors-table.component.html',
-  styleUrl: './sub-processors-table.component.scss',
+    selector: 'app-sub-processors-table',
+    templateUrl: './sub-processors-table.component.html',
+    styleUrl: './sub-processors-table.component.scss',
+    standalone: false
 })
 export class SubProcessorsTableComponent extends BaseComponent {
   public readonly subprocessors$ = this.store.select(selectDataProcessingSubProcessors).pipe(filterNullish());

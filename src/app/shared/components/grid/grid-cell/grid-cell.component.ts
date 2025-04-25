@@ -2,9 +2,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { BaseCellComponent } from './base-cell.component';
 
 @Component({
-  selector: 'app-grid-cell',
-  templateUrl: './grid-cell.component.html',
-  styleUrl: './grid-cell.component.scss',
+    selector: 'app-grid-cell',
+    templateUrl: './grid-cell.component.html',
+    styleUrl: './grid-cell.component.scss',
+    standalone: false
 })
 export class GridCellComponent extends BaseCellComponent {
   @Output() public checkboxChange = new EventEmitter<boolean>();

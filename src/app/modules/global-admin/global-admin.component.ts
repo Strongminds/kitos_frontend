@@ -3,9 +3,10 @@ import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawe
 import { AppPath } from 'src/app/shared/enums/app-path';
 
 @Component({
-  selector: 'app-global-admin',
-  templateUrl: './global-admin.component.html',
-  styleUrl: './global-admin.component.scss',
+    selector: 'app-global-admin',
+    templateUrl: './global-admin.component.html',
+    styleUrl: './global-admin.component.scss',
+    standalone: false
 })
 export class GlobalAdminComponent {
   public readonly globalAdminNavigationItems: NavigationDrawerItem[] = [

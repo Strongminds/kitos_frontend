@@ -7,9 +7,10 @@ import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 
 @Component({
-  selector: 'app-connected-dropdown-dialog',
-  templateUrl: './connected-dropdown-dialog.component.html',
-  styleUrl: './connected-dropdown-dialog.component.scss',
+    selector: 'app-connected-dropdown-dialog',
+    templateUrl: './connected-dropdown-dialog.component.html',
+    styleUrl: './connected-dropdown-dialog.component.scss',
+    standalone: false
 })
 export class ConnectedDropdownDialogComponent<T> extends BaseComponent implements OnInit {
   @Input() public title!: string;

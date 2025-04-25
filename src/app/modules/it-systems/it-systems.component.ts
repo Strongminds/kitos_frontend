@@ -9,9 +9,10 @@ import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-cust
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
-  templateUrl: 'it-systems.component.html',
-  styleUrls: ['it-systems.component.scss'],
-  selector: 'app-systems',
+    templateUrl: 'it-systems.component.html',
+    styleUrls: ['it-systems.component.scss'],
+    selector: 'app-systems',
+    standalone: false
 })
 export class ITSystemsComponent extends BaseComponent implements OnInit {
   constructor(private store: Store, private router: Router) {

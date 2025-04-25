@@ -14,9 +14,10 @@ import { createNode, TreeNodeModel } from '../../models/tree-node.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 
 @Component({
-  selector: 'app-org-unit-select',
-  templateUrl: './org-unit-select.component.html',
-  styleUrls: ['./org-unit-select.component.scss'],
+    selector: 'app-org-unit-select',
+    templateUrl: './org-unit-select.component.html',
+    styleUrls: ['./org-unit-select.component.scss'],
+    standalone: false
 })
 export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public disabledUnitsUuids?: string[] = [];

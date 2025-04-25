@@ -64,6 +64,7 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     userSupervisionDocumentationUrl: dto.userSupervisionDocumentationUrl,
     userSupervisionDocumentationUrlName: dto.userSupervisionDocumentationUrlName,
     nextDataRetentionEvaluationDate: dto.nextDataRetentionEvaluationDate,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     insecureCountriesSubjectToDataTransfer: (dto as any).insecureCountriesSubjectToDataTransfer.join(', ') ?? '',
   };
 }

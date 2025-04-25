@@ -11,10 +11,8 @@ import { selectITSystemUsageHasDeletePermission } from 'src/app/store/it-system-
 import { selectItSystemUuid } from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
-interface State {}
-
 @Injectable()
-export class ITSystemCatalogDetailsComponentStore extends ComponentStore<State> {
+export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object> {
   public readonly usageModifyPermission$ = this.store
     .select(selectITSystemUsageHasDeletePermission)
     .pipe(filterNullish());

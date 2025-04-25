@@ -3,9 +3,10 @@ import { BaseFormComponent } from '../../base/base-form.component';
 import { ThemePalette } from '@angular/material/core';
 
 @Component({
-  selector: 'app-checkbox',
-  templateUrl: 'checkbox.component.html',
-  styleUrls: ['checkbox.component.scss'],
+    selector: 'app-checkbox',
+    templateUrl: 'checkbox.component.html',
+    styleUrls: ['checkbox.component.scss'],
+    standalone: false
 })
 export class CheckboxComponent extends BaseFormComponent<boolean> {
   @Input() labelPosition: 'before' | 'after' = 'before';

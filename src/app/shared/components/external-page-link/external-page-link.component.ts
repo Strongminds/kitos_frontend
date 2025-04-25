@@ -3,9 +3,10 @@ import { validateExternalReferenceUrl, validateUrl } from '../../helpers/link.he
 import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 
 @Component({
-  selector: 'app-external-page-link',
-  templateUrl: './external-page-link.component.html',
-  styleUrls: ['./external-page-link.component.scss'],
+    selector: 'app-external-page-link',
+    templateUrl: './external-page-link.component.html',
+    styleUrls: ['./external-page-link.component.scss'],
+    standalone: false
 })
 export class ExternalPageLinkComponent implements OnInit {
   @Input() public url: string | undefined = '';

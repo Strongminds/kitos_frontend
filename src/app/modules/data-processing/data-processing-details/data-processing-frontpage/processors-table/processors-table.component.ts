@@ -14,9 +14,10 @@ import {
 import { CreateProcessorDialogComponent } from './create-processor-dialog/create-processor-dialog.component';
 
 @Component({
-  selector: 'app-processors-table',
-  templateUrl: './processors-table.component.html',
-  styleUrl: './processors-table.component.scss',
+    selector: 'app-processors-table',
+    templateUrl: './processors-table.component.html',
+    styleUrl: './processors-table.component.scss',
+    standalone: false
 })
 export class ProcessorsTableComponent extends BaseComponent {
   public readonly processors$ = this.store.select(selectDataProcessingProcessors).pipe(filterNullish());

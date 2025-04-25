@@ -6,9 +6,10 @@ import { IconType } from 'src/app/shared/models/icon-type';
 export declare type ExtendedThemePalette = ThemePalette | 'secondary';
 
 @Component({
-  selector: 'app-button',
-  templateUrl: 'button.component.html',
-  styleUrls: ['button.component.scss'],
+    selector: 'app-button',
+    templateUrl: 'button.component.html',
+    styleUrls: ['button.component.scss'],
+    standalone: false
 })
 export class ButtonComponent {
   @Input() public buttonStyle: ButtonStyle = 'primary';

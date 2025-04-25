@@ -10,9 +10,10 @@ import { CreateHelpTextDialogComponent } from '../../../shared/components/dialog
 import { EditHelpTextDialogComponent } from '../../../shared/components/dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 
 @Component({
-  selector: 'app-global-admin-help-texts',
-  templateUrl: './global-admin-help-texts.component.html',
-  styleUrl: './global-admin-help-texts.component.scss',
+    selector: 'app-global-admin-help-texts',
+    templateUrl: './global-admin-help-texts.component.html',
+    styleUrl: './global-admin-help-texts.component.scss',
+    standalone: false
 })
 export class GlobalAdminHelpTextsComponent implements OnInit {
   public readonly helpTexts$ = this.store.select(selectHelpTexts);

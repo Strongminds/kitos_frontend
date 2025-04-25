@@ -10,10 +10,11 @@ import { NotificationService } from '../../../../services/notification.service';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
 
 @Component({
-  selector: 'app-grid-usages-consequences-dialog',
-  templateUrl: './grid-usages-consequences-dialog.component.html',
-  styleUrl: './grid-usages-consequences-dialog.component.scss',
-  providers: [GridUsagesDialogComponentStore],
+    selector: 'app-grid-usages-consequences-dialog',
+    templateUrl: './grid-usages-consequences-dialog.component.html',
+    styleUrl: './grid-usages-consequences-dialog.component.scss',
+    providers: [GridUsagesDialogComponentStore],
+    standalone: false
 })
 export class GridUsagesConsequencesDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;

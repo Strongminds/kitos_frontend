@@ -23,9 +23,10 @@ import {
 import { ProfileComponentStore } from './profile.component-store';
 
 @Component({
-  templateUrl: 'profile.component.html',
-  styleUrls: ['profile.component.scss'],
-  providers: [ProfileComponentStore],
+    templateUrl: 'profile.component.html',
+    styleUrls: ['profile.component.scss'],
+    providers: [ProfileComponentStore],
+    standalone: false
 })
 export class ProfileComponent extends BaseComponent implements OnInit {
   public startPreferenceOptions = this.userService.getAvailableStartPreferenceOptions();

@@ -3,9 +3,10 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { GridFilterService } from 'src/app/shared/services/grid-filter.service';
 
 @Component({
-  selector: 'app-grid-filter-buttons',
-  templateUrl: './grid-filter-buttons.component.html',
-  styleUrl: './grid-filter-buttons.component.scss',
+    selector: 'app-grid-filter-buttons',
+    templateUrl: './grid-filter-buttons.component.html',
+    styleUrl: './grid-filter-buttons.component.scss',
+    standalone: false
 })
 export class GridFilterButtonsComponent {
   @Input() entityType!: RegistrationEntityTypes;

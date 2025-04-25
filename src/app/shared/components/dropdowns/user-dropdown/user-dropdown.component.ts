@@ -5,10 +5,11 @@ import { ShallowUser } from '../../../models/userV2.model';
 import { UserDropdownComponentStore } from './user-dropdown.component-store';
 
 @Component({
-  selector: 'app-user-dropdown',
-  templateUrl: './user-dropdown.component.html',
-  styleUrl: './user-dropdown.component.scss',
-  providers: [UserDropdownComponentStore],
+    selector: 'app-user-dropdown',
+    templateUrl: './user-dropdown.component.html',
+    styleUrl: './user-dropdown.component.scss',
+    providers: [UserDropdownComponentStore],
+    standalone: false
 })
 export class UserDropdownComponent implements OnInit {
   @Input() formGroup!: FormGroup;

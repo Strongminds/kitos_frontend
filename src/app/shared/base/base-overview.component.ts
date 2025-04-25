@@ -18,7 +18,8 @@ import { RegistrationEntityTypes } from '../models/registrations/registration-en
 import { BaseComponent } from './base.component';
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export class BaseOverviewComponent extends BaseComponent {
   protected unclickableColumnFields: string[] = [];

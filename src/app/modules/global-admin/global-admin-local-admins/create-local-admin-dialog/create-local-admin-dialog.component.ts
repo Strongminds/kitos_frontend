@@ -10,9 +10,10 @@ import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/a
 import { selectAllLocalAdmins, selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
 
 @Component({
-  selector: 'app-create-local-admin-dialog',
-  templateUrl: './create-local-admin-dialog.component.html',
-  styleUrl: './create-local-admin-dialog.component.scss',
+    selector: 'app-create-local-admin-dialog',
+    templateUrl: './create-local-admin-dialog.component.html',
+    styleUrl: './create-local-admin-dialog.component.scss',
+    standalone: false
 })
 export class CreateLocalAdminDialogComponent extends BaseComponent implements OnInit {
   public readonly localAdminOrganizations$ = this.store.select(selectAllLocalAdmins).pipe(

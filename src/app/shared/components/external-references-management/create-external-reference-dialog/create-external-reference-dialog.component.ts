@@ -9,9 +9,10 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { ExternalReferencesManagmentActions } from 'src/app/store/external-references-management/actions';
 
 @Component({
-  selector: 'app-create-external-reference-dialog[initialModel][masterReferenceIsReadOnly][entityType]',
-  templateUrl: './create-external-reference-dialog.component.html',
-  styleUrls: ['./create-external-reference-dialog.component.scss'],
+    selector: 'app-create-external-reference-dialog[initialModel][masterReferenceIsReadOnly][entityType]',
+    templateUrl: './create-external-reference-dialog.component.html',
+    styleUrls: ['./create-external-reference-dialog.component.scss'],
+    standalone: false
 })
 export class CreateExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;

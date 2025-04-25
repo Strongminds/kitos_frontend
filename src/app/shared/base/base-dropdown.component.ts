@@ -5,7 +5,8 @@ import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants/constants';
 import { BaseFormComponent } from './base-form.component';
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
   @Input() public data?: T[] | null;

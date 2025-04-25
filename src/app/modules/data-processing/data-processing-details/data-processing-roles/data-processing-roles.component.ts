@@ -6,9 +6,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectDataProcessingHasModifyPermissions, selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 
 @Component({
-  selector: 'app-data-processing-roles',
-  templateUrl: './data-processing-roles.component.html',
-  styleUrl: './data-processing-roles.component.scss'
+    selector: 'app-data-processing-roles',
+    templateUrl: './data-processing-roles.component.html',
+    styleUrl: './data-processing-roles.component.scss',
+    standalone: false
 })
 export class DataProcessingRolesComponent extends BaseComponent {
   public readonly dataProcessingUuid$ = this.store.select(selectDataProcessingUuid).pipe(filterNullish());

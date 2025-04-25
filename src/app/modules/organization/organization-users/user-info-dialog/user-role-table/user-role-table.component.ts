@@ -19,9 +19,10 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
-  selector: 'app-user-role-table',
-  templateUrl: './user-role-table.component.html',
-  styleUrl: './user-role-table.component.scss',
+    selector: 'app-user-role-table',
+    templateUrl: './user-role-table.component.html',
+    styleUrl: './user-role-table.component.scss',
+    standalone: false
 })
 export class UserRoleTableComponent {
   @Input() user!: ODataOrganizationUser;
