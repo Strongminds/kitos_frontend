@@ -20,11 +20,11 @@ import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from '../it-contract-hierarchy/it-contract-hierarchy.component-store';
 
 @Component({
-    selector: 'app-delete-contract-dialog',
-    templateUrl: './delete-contract-dialog.component.html',
-    styleUrl: './delete-contract-dialog.component.scss',
-    providers: [ItContractHierarchyComponentStore],
-    standalone: false
+  selector: 'app-delete-contract-dialog',
+  templateUrl: './delete-contract-dialog.component.html',
+  styleUrl: './delete-contract-dialog.component.scss',
+  providers: [ItContractHierarchyComponentStore],
+  standalone: false,
 })
 export class DeleteContractDialogComponent extends BaseComponent implements OnInit {
   public readonly subHierarchy$ = this.componentStore.subHierarchy$;
@@ -122,7 +122,7 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
 
     const dialogActions = [
       {
-        text: $localize`Transfer`,
+        text: $localize`Overfør`,
         color: 'secondary',
         buttonStyle: 'secondary',
         callback: (result) => this.transferSelectedContracts(result, contractUuid),
