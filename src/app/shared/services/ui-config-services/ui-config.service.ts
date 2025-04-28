@@ -84,8 +84,11 @@ export class UIConfigService {
         return DataProcessingUiBluePrint;
       case UIModuleConfigKey.Gdpr:
         return GdprUiBluePrint;
-      default:
-        throw new Error(`No blueprint found for module ${module}`);
+      default: {
+        const error = `No blueprint found for module ${module}`;
+        console.error(error);
+        throw new Error(error);
+      }
     }
   }
 
