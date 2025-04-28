@@ -129,7 +129,6 @@ export class UIModuleCustomizationEffects {
     const uiModuleCustomization = adaptUIModuleCustomization(uiModuleCustomizationDto);
     const moduleCustomizationNodes = uiModuleCustomization?.nodes ?? [];
     const uiModuleConfig = this.uiConfigService.buildUIModuleConfig(moduleCustomizationNodes, module);
-    console.log('succes ui config', uiModuleConfig);
     return successAction({
       uiModuleConfig: uiModuleConfig,
     });
