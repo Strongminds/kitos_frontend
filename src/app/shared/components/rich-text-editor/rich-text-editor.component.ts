@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AfterViewInit, Component, forwardRef, Input, ViewChild } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
+import { EditorComponent } from '@tinymce/tinymce-angular';
 import { HALF_SECOND_IN_MILLISECONDS } from '../../constants/constants';
 import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.service';
 
@@ -15,7 +15,6 @@ import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.
       useExisting: forwardRef(() => RichTextEditorComponent),
       multi: true,
     },
-    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
   ],
   standalone: false,
 })
