@@ -1,16 +1,16 @@
-@import "theme";
+@use "theme";
 
 .grid-container {
   display: grid;
   &.with-gap {
     &.small-gap {
-      gap: $padding-small;
+      gap: theme.$padding-small;
     }
     &.medium-gap {
-      gap: $padding-medium;
+      gap: theme.$padding-medium;
     }
     &.large-gap {
-      gap: $padding-large;
+      gap: theme.$padding-large;
     }
   }
 }

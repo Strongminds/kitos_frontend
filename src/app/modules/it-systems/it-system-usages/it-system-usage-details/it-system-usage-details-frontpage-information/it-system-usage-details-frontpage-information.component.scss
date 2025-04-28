@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   display: flex;
@@ -10,7 +10,7 @@
 form {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: $padding-large;
+  grid-gap: theme.$padding-large;
 
   .two-thirds-column-width {
     grid-column: span 2;

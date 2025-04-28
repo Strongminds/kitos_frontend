@@ -1,9 +1,9 @@
-@import "theme";
+@use "theme";
 
 :host {
   display: flex;
   flex: 1;
-  gap: $padding-small;
+  gap: theme.$padding-small;
 }
 
 app-datepicker {
@@ -14,9 +14,9 @@ app-datepicker {
   // Make option dropdown a fixed width and hide button
   .date-option-dropdown {
     flex: 0 0 60px;
-    color: $color-primary-dark;
-    border-radius: $radius-large;
-    border-color: $color-neutral-40;
+    color: theme.$color-primary-dark;
+    border-radius: theme.$radius-large;
+    border-color: theme.$color-neutral-40;
     height: 48px;
 
     .k-input-inner {
@@ -30,12 +30,12 @@ app-datepicker {
 
   .date-option-dropdown:hover {
     box-sizing: border-box;
-    background-color: $color-primary-10;
-    border: 1px solid $color-primary !important;
+    background-color: theme.$color-primary-10;
+    border: 1px solid theme.$color-primary !important;
   }
   .date-option-dropdown:active {
     box-sizing: border-box;
-    background-color: $color-primary-20;
-    border: 1px solid $color-primary !important;
+    background-color: theme.$color-primary-20;
+    border: 1px solid theme.$color-primary !important;
   }
 }

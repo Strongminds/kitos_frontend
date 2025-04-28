@@ -1,2 +1,2 @@
-@import "mixins";
-@include grid-style;
+@use "mixins";
+@include mixins.grid-style;
