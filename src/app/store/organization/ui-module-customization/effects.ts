@@ -39,9 +39,10 @@ export class UIModuleCustomizationEffects {
           UIModuleConfigKey.ItSystemUsage,
           UIModuleConfigKey.DataProcessingRegistrations,
           UIModuleConfigKey.ItContract,
-          UIModuleConfigKey.Gdpr,
         ];
-        const requestActions = moduleNames.map((moduleName) => this.getUIModuleConfigFromApi(moduleName, organizationUuid));
+        const requestActions = moduleNames.map((moduleName) =>
+          this.getUIModuleConfigFromApi(moduleName, organizationUuid)
+        );
         return forkJoin(requestActions).pipe(mergeMap((actions) => from(actions)));
       })
     );
