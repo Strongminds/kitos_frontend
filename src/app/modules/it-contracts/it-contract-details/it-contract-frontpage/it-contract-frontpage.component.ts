@@ -43,6 +43,7 @@ import {
   selectItContractsEnablePurchaseForm,
   selectItContractsEnableResponsibleUnit,
   selectItContractsEnableTemplate,
+  selectItContractsEnableUseParentValidity,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -187,6 +188,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly contractAgreementPeriodEnabled$ = this.store.select(selectItContractsEnableAgreementPeriod);
   public readonly contractNotesEnabled$ = this.store.select(selectItContractsEnableNotes);
   public readonly contractParentContractEnabled$ = this.store.select(selectItContractsEnableParentContract);
+  public readonly useParentValidityEnabled$ = this.store.select(selectItContractsEnableUseParentValidity);
 
   public readonly contractResponsibleUnitEnabled$ = this.store.select(selectItContractsEnableResponsibleUnit);
   public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableInternalSigner);
