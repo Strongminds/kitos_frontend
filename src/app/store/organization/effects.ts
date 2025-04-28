@@ -4,7 +4,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, filter, map, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
+import { mergeMap } from 'rxjs/internal/operators/mergeMap';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
@@ -182,7 +183,7 @@ export class OrganizationEffects {
         this.store.select(selectHasValidUIRootConfigCache()),
       ]),
       filter(([_, __, validCache]) => !validCache),
-      switchMap(([_, organizationUuid]) =>
+      mergeMap(([_, organizationUuid]) =>
         this.organizationInternalService.getSingleOrganizationsInternalV2GetUIRootConfig({ organizationUuid }).pipe(
           map((responseDto) => {
             const uiRootConfig = mapUIRootConfig(responseDto);
