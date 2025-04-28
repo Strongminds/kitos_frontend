@@ -1,24 +1,25 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AfterViewInit, Component, forwardRef, Input, ViewChild } from '@angular/core';
 import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.service';
-import { EditorComponent } from '@tinymce/tinymce-angular';
+import { EditorComponent, TINYMCE_SCRIPT_SRC } from '@tinymce/tinymce-angular';
 import { HALF_SECOND_IN_MILLISECONDS } from '../../constants/constants';
+import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.service';
 
 @Component({
-    selector: 'app-rich-text-editor',
-    templateUrl: './rich-text-editor.component.html',
-    styleUrl: './rich-text-editor.component.scss',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => RichTextEditorComponent),
-            multi: true,
-        },
-    ],
-    standalone: false
+  selector: 'app-rich-text-editor',
+  templateUrl: './rich-text-editor.component.html',
+  styleUrl: './rich-text-editor.component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RichTextEditorComponent),
+      multi: true,
+    },
+    { provide: TINYMCE_SCRIPT_SRC, useValue: 'tinymce/tinymce.min.js' },
+  ],
+  standalone: false,
 })
-export class RichTextEditorComponent implements AfterViewInit{
+export class RichTextEditorComponent implements AfterViewInit {
   @Input() formControl!: FormControl;
   @Input() defaultEditorContent: string | undefined = undefined;
 
@@ -26,12 +27,10 @@ export class RichTextEditorComponent implements AfterViewInit{
 
   public rootUrl: string;
 
-
   private onChange: (value: any) => void = () => {};
   private onTouched: () => void = () => {};
 
-  constructor(private readonly rootUrlResolver: AppRootUrlResolverService,
-  ) {
+  constructor(private readonly rootUrlResolver: AppRootUrlResolverService) {
     this.rootUrl = this.rootUrlResolver.resolveRootUrl();
   }
 
