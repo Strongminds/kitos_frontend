@@ -20,12 +20,12 @@ export class UsageLinkComponent {
 
   onUsageClick(event: Event) {
     event.preventDefault();
-    const dialogRef = this.dialog.open(GridUsagesDialogComponent, {
-      data: { usingOrganizations: this.usingOrganizations, title: this.getTitle() },
-    });
+    const dialogRef = this.dialog.open(GridUsagesDialogComponent);
     const componentInstance = dialogRef.componentInstance;
     componentInstance.type = this.type;
     componentInstance.rowEntityIdentifier = this.rowEntityIdentifier;
+    componentInstance.usingOrganizations = this.usingOrganizations;
+    componentInstance.title = this.getTitle();
   }
 
   getTitle() {
