@@ -8,6 +8,7 @@ import { UserActions } from '../../user-store/actions';
 import { concatLatestFrom } from '@ngrx/operators';
 import { selectUserUuid } from '../../user-store/selectors';
 import { Store } from '@ngrx/store';
+import { OrganizationUserActions } from '../../organization/organization-user/actions';
 
 @Injectable()
 export class LocalAdminUserEffects {
@@ -59,13 +60,19 @@ export class LocalAdminUserEffects {
 
   updateUserAuthentication$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(LocalAdminUserActions.addLocalAdminSuccess, LocalAdminUserActions.removeLocalAdminSuccess),
+      ofType(
+        LocalAdminUserActions.addLocalAdminSuccess,
+        LocalAdminUserActions.removeLocalAdminSuccess,
+        OrganizationUserActions.updateUserSuccess
+      ),
       map((action) => {
         switch (action.type) {
           case LocalAdminUserActions.addLocalAdminSuccess.type:
             return action.user.user.uuid;
           case LocalAdminUserActions.removeLocalAdminSuccess.type:
             return action.userUuid;
+          case OrganizationUserActions.updateUserSuccess.type:
+            return action.user.uuid;
         }
       }),
       concatLatestFrom(() => this.store.select(selectUserUuid)),

@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -12,9 +12,10 @@ import { adaptOrganizationUser } from 'src/app/shared/models/organization/organi
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
-import { selectOrganizationUuid } from '../../user-store/selectors';
+import { selectOrganizationUuid, selectUserUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
 import { selectPreviousGridState } from './selectors';
+import { debugPipe } from 'src/app/shared/helpers/observable-helpers';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -226,6 +227,15 @@ export class OrganizationUserEffects {
             catchError(() => of(OrganizationUserActions.verifyUserEmailError()))
           )
       )
+    );
+  });
+
+  updatePermissionsOnUserEdit = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(OrganizationUserActions.updateUserSuccess),
+      concatLatestFrom(() => this.store.select(selectUserUuid).pipe(filterNullish())),
+      filter(([{ user: editedUser }, currentUserUuid]) => editedUser.uuid === currentUserUuid),
+      map(() => OrganizationUserActions.getOrganizationUserPermissions())
     );
   });
 }
