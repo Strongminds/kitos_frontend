@@ -30,7 +30,7 @@ export class UIModuleCustomizationEffects {
     private uiConfigService: UIConfigService
   ) {}
 
-  updateUIModuleConfigsOnOrgChange$ = createEffect(() => {
+  updateAllUIModuleConfigsOnOrgChange$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.resetOnOrganizationUpdate),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
@@ -41,10 +41,8 @@ export class UIModuleCustomizationEffects {
           UIModuleConfigKey.ItContract,
           UIModuleConfigKey.Gdpr,
         ];
-
-        const requests = moduleNames.map((moduleName) => this.getUIModuleConfigFromApi(moduleName, organizationUuid));
-
-        return forkJoin(requests).pipe(mergeMap((actions) => from(actions)));
+        const requestActions = moduleNames.map((moduleName) => this.getUIModuleConfigFromApi(moduleName, organizationUuid));
+        return forkJoin(requestActions).pipe(mergeMap((actions) => from(actions)));
       })
     );
   });

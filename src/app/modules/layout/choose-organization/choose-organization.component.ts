@@ -8,8 +8,6 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ChooseOrganizationComponentStore } from './choose-organization.component-store';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
-import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 @Component({
   templateUrl: 'choose-organization.component.html',
