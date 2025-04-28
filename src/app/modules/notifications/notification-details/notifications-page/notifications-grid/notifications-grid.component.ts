@@ -9,9 +9,10 @@ import { selectNotificationsByType } from 'src/app/store/user-notifications/sele
 import { UserNotification } from 'src/app/store/user-notifications/state';
 
 @Component({
-  selector: 'app-notifications-grid',
-  templateUrl: './notifications-grid.component.html',
-  styleUrl: './notifications-grid.component.scss',
+    selector: 'app-notifications-grid',
+    templateUrl: './notifications-grid.component.html',
+    styleUrl: './notifications-grid.component.scss',
+    standalone: false
 })
 export class NotificationsGridComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;

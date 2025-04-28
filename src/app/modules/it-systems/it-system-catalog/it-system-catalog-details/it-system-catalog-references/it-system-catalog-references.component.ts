@@ -5,9 +5,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectITSystemHasModifyPermission } from 'src/app/store/it-system/selectors';
 
 @Component({
-  selector: 'app-it-system-catalog-references',
-  templateUrl: './it-system-catalog-references.component.html',
-  styleUrl: './it-system-catalog-references.component.scss',
+    selector: 'app-it-system-catalog-references',
+    templateUrl: './it-system-catalog-references.component.html',
+    styleUrl: './it-system-catalog-references.component.scss',
+    standalone: false
 })
 export class ItSystemCatalogReferencesComponent extends BaseComponent {
   public readonly hasModifyPermission$ = this.store.select(selectITSystemHasModifyPermission).pipe(filterNullish());

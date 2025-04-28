@@ -23,9 +23,10 @@ export interface SystemRelationDialogFormModel {
 }
 
 @Component({
-  selector: 'app-system-relation-dialog[title][saveText][relationForm]',
-  templateUrl: './system-relation-dialog.component.html',
-  styleUrls: ['./system-relation-dialog.component.scss'],
+    selector: 'app-system-relation-dialog[title][saveText][relationForm]',
+    templateUrl: './system-relation-dialog.component.html',
+    styleUrls: ['./system-relation-dialog.component.scss'],
+    standalone: false
 })
 export class SystemRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;

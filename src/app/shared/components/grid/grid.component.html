@@ -47,7 +47,7 @@
             ? defaultPrimaryColumnMinimumWidth
             : defaultMinimumColumnWidth
         "
-        headerClass="mygrid-header-cell"
+        [headerClass]="{ 'mygrid-header-cell': true, 'not-sortable': columnConfig.sortable === false }"
       >
         <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
           <app-paragraph [bold]="true" color="primary-dark" class="sort-icon"

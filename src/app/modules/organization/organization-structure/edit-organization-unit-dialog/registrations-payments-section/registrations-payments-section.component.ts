@@ -5,9 +5,10 @@ import { PaymentRegistrationModel } from 'src/app/shared/models/organization/org
 import { RegistrationBaseComponent } from '../registration-base.component';
 
 @Component({
-  selector: 'app-registrations-payments-section',
-  templateUrl: './registrations-payments-section.component.html',
-  styleUrl: './registrations-payments-section.component.scss',
+    selector: 'app-registrations-payments-section',
+    templateUrl: './registrations-payments-section.component.html',
+    styleUrl: './registrations-payments-section.component.scss',
+    standalone: false
 })
 export class RegistrationsPaymentsSectionComponent
   extends RegistrationBaseComponent<APINamedEntityV2DTO>

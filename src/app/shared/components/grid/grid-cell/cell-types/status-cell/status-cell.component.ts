@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { BaseCellComponent } from '../../base-cell.component';
 
 @Component({
-  selector: 'app-status-cell',
-  templateUrl: './status-cell.component.html',
-  styleUrl: './status-cell.component.scss'
+    selector: 'app-status-cell',
+    templateUrl: './status-cell.component.html',
+    styleUrl: './status-cell.component.scss',
+    standalone: false
 })
 export class StatusCellComponent extends BaseCellComponent {
 

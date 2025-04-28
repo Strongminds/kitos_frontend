@@ -8,9 +8,10 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
-  selector: 'app-it-system-usage-details-roles',
-  templateUrl: './it-system-usage-details-roles.component.html',
-  styleUrls: ['./it-system-usage-details-roles.component.scss'],
+    selector: 'app-it-system-usage-details-roles',
+    templateUrl: './it-system-usage-details-roles.component.html',
+    styleUrls: ['./it-system-usage-details-roles.component.scss'],
+    standalone: false
 })
 export class ItSystemUsageDetailsRolesComponent extends BaseComponent {
   public readonly systemUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());

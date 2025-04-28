@@ -20,9 +20,10 @@ import { FkOrgDeleteDialogComponent } from '../fk-org-delete-dialog/fk-org-delet
 import { FkOrgWriteDialogComponent } from '../fk-org-write-dialog/fk-org-write-dialog.component';
 
 @Component({
-  selector: 'app-local-admin-import-fk-org',
-  templateUrl: './local-admin-import-fk-org.component.html',
-  styleUrl: './local-admin-import-fk-org.component.scss',
+    selector: 'app-local-admin-import-fk-org',
+    templateUrl: './local-admin-import-fk-org.component.html',
+    styleUrl: './local-admin-import-fk-org.component.scss',
+    standalone: false
 })
 export class LocalAdminImportFkOrgComponent extends BaseComponent implements OnInit {
   public readonly synchronizationStatus$ = this.store.select(selectSynchronizationStatus);

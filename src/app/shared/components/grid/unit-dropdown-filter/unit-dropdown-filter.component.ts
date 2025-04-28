@@ -11,9 +11,10 @@ import { selectPagedOrganizationUnits } from 'src/app/store/organization/organiz
 import { first } from 'rxjs';
 
 @Component({
-  selector: 'app-unit-dropdown-filter',
-  templateUrl: './unit-dropdown-filter.component.html',
-  styleUrl: './unit-dropdown-filter.component.scss',
+    selector: 'app-unit-dropdown-filter',
+    templateUrl: './unit-dropdown-filter.component.html',
+    styleUrl: './unit-dropdown-filter.component.scss',
+    standalone: false
 })
 export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

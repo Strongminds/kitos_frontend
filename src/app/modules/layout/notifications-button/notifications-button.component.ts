@@ -11,9 +11,10 @@ import {
 } from 'src/app/store/organization/selectors';
 
 @Component({
-  selector: 'app-notifications-button',
-  templateUrl: './notifications-button.component.html',
-  styleUrl: './notifications-button.component.scss',
+    selector: 'app-notifications-button',
+    templateUrl: './notifications-button.component.html',
+    styleUrl: './notifications-button.component.scss',
+    standalone: false
 })
 export class NotificationsButtonComponent {
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);

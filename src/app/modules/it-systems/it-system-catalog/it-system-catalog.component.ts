@@ -36,8 +36,9 @@ import {
 } from 'src/app/store/it-system/selectors';
 
 @Component({
-  templateUrl: './it-system-catalog.component.html',
-  styleUrl: './it-system-catalog.component.scss',
+    templateUrl: './it-system-catalog.component.html',
+    styleUrl: './it-system-catalog.component.scss',
+    standalone: false
 })
 export class ItSystemCatalogComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSystemGridLoading);

@@ -38,10 +38,11 @@ import { ITSystemInterfacesDetailsFrontpageComponentStore } from './it-system-in
 import { hasOpenDialogs } from 'src/app/shared/helpers/dialog.helpers';
 
 @Component({
-  selector: 'app-it-system-interfaces-details-frontpage',
-  templateUrl: './it-system-interfaces-details-frontpage.component.html',
-  styleUrl: './it-system-interfaces-details-frontpage.component.scss',
-  providers: [ITSystemInterfacesDetailsFrontpageComponentStore],
+    selector: 'app-it-system-interfaces-details-frontpage',
+    templateUrl: './it-system-interfaces-details-frontpage.component.html',
+    styleUrl: './it-system-interfaces-details-frontpage.component.scss',
+    providers: [ITSystemInterfacesDetailsFrontpageComponentStore],
+    standalone: false
 })
 export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly interfaceTypeOptions$ = this.store

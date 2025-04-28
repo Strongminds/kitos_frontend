@@ -8,10 +8,11 @@ import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-rel
 import { SystemRelationDialogFormModel } from '../system-relation-dialog/system-relation-dialog.component';
 
 @Component({
-  selector: 'app-create-relation-dialog',
-  templateUrl: './create-relation-dialog.component.html',
-  styleUrls: ['./create-relation-dialog.component.scss'],
-  providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
+    selector: 'app-create-relation-dialog',
+    templateUrl: './create-relation-dialog.component.html',
+    styleUrls: ['./create-relation-dialog.component.scss'],
+    providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
+    standalone: false
 })
 export class CreateRelationDialogComponent extends BaseComponent {
   public relationForm = new FormGroup<SystemRelationDialogFormModel>({

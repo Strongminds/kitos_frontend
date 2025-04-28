@@ -7,9 +7,10 @@ enum LocalAdminOrganizationSegmentOption {
 }
 
 @Component({
-  selector: 'app-local-admin-organization',
-  templateUrl: './local-admin-organization.component.html',
-  styleUrl: './local-admin-organization.component.scss',
+    selector: 'app-local-admin-organization',
+    templateUrl: './local-admin-organization.component.html',
+    styleUrl: './local-admin-organization.component.scss',
+    standalone: false
 })
 export class LocalAdminOrganizationComponent {
   public readonly LocalAdminOrganizationSegmentOption = LocalAdminOrganizationSegmentOption;

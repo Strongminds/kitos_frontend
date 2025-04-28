@@ -3,7 +3,8 @@ import { Observable } from 'rxjs';
 import { BaseComponent } from './base.component';
 
 @Component({
-  template: '',
+    template: '',
+    standalone: false
 })
 export class BaseAccordionComponent extends BaseComponent {
   @Input() public isExpanded$?: Observable<boolean>;

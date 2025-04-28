@@ -2,9 +2,10 @@ import { Component } from '@angular/core';
 import { BaseGlobalAdminModuleTabComponent } from '../base-global-admin-module-tab';
 
 @Component({
-  selector: 'app-global-admin-it-system',
-  templateUrl: './global-admin-it-system.component.html',
-  styleUrl: './global-admin-it-system.component.scss'
+    selector: 'app-global-admin-it-system',
+    templateUrl: './global-admin-it-system.component.html',
+    styleUrl: './global-admin-it-system.component.scss',
+    standalone: false
 })
 export class GlobalAdminItSystemComponent extends BaseGlobalAdminModuleTabComponent {
 }

@@ -36,9 +36,10 @@ import {
 } from 'src/app/store/data-processing/selectors';
 
 @Component({
-  selector: 'app-data-processing-overview',
-  templateUrl: './data-processing-overview.component.html',
-  styleUrl: './data-processing-overview.component.scss',
+    selector: 'app-data-processing-overview',
+    templateUrl: './data-processing-overview.component.html',
+    styleUrl: './data-processing-overview.component.scss',
+    standalone: false
 })
 export class DataProcessingOverviewComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);

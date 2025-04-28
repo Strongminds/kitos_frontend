@@ -43,6 +43,7 @@ import {
   selectItContractsEnablePurchaseForm,
   selectItContractsEnableResponsibleUnit,
   selectItContractsEnableTemplate,
+  selectItContractsEnableUseParentValidity,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -50,10 +51,11 @@ import { ItContractFrontpageComponentStore } from './it-contract-frontpage.compo
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 
 @Component({
-  selector: 'app-it-contract-frontpage',
-  templateUrl: './it-contract-frontpage.component.html',
-  styleUrl: './it-contract-frontpage.component.scss',
-  providers: [ItContractFrontpageComponentStore],
+    selector: 'app-it-contract-frontpage',
+    templateUrl: './it-contract-frontpage.component.html',
+    styleUrl: './it-contract-frontpage.component.scss',
+    providers: [ItContractFrontpageComponentStore],
+    standalone: false
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
   public readonly contractTemplates$ = this.store
@@ -186,6 +188,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly contractAgreementPeriodEnabled$ = this.store.select(selectItContractsEnableAgreementPeriod);
   public readonly contractNotesEnabled$ = this.store.select(selectItContractsEnableNotes);
   public readonly contractParentContractEnabled$ = this.store.select(selectItContractsEnableParentContract);
+  public readonly useParentValidityEnabled$ = this.store.select(selectItContractsEnableUseParentValidity);
 
   public readonly contractResponsibleUnitEnabled$ = this.store.select(selectItContractsEnableResponsibleUnit);
   public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableInternalSigner);

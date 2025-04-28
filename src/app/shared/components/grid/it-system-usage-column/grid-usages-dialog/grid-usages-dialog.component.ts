@@ -9,10 +9,11 @@ import { GridUsagesDropdownDialogComponent } from '../grid-usages-dropdown-dialo
 import { GridUsagesDialogComponentStore } from './grid-usages-dialog.component-store';
 
 @Component({
-  selector: 'app-usages',
-  templateUrl: './grid-usages-dialog.component.html',
-  styleUrls: ['./grid-usages-dialog.component.scss'],
-  providers: [GridUsagesDialogComponentStore],
+    selector: 'app-usages',
+    templateUrl: './grid-usages-dialog.component.html',
+    styleUrls: ['./grid-usages-dialog.component.scss'],
+    providers: [GridUsagesDialogComponentStore],
+    standalone: false
 })
 export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
   @Input() type!: RegistrationEntityTypes | undefined;

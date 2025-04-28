@@ -18,9 +18,10 @@ interface KleChoiceViewModel extends APIKLEDetailsDTO {
 }
 
 @Component({
-  selector: 'app-select-kle-dialog',
-  templateUrl: './select-kle-dialog.component.html',
-  styleUrls: ['./select-kle-dialog.component.scss'],
+    selector: 'app-select-kle-dialog',
+    templateUrl: './select-kle-dialog.component.html',
+    styleUrls: ['./select-kle-dialog.component.scss'],
+    standalone: false
 })
 export class SelectKleDialogComponent extends BaseComponent implements OnInit {
   public readonly isLoading = new BehaviorSubject<boolean>(false);

@@ -28,9 +28,10 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractHasCollectionCreatePermissions } from 'src/app/store/it-contract/selectors';
 
 @Component({
-  templateUrl: 'it-system-usage-details-contracts.component.html',
-  styleUrls: ['it-system-usage-details-contracts.component.scss'],
-  providers: [ItSystemUsageDetailsContractsComponentStore],
+    templateUrl: 'it-system-usage-details-contracts.component.html',
+    styleUrls: ['it-system-usage-details-contracts.component.scss'],
+    providers: [ItSystemUsageDetailsContractsComponentStore],
+    standalone: false
 })
 export class ITSystemUsageDetailsContractsComponent extends BaseComponent implements OnInit {
   public readonly mainContract$ = this.store.select(selectItSystemUsageMainContract);

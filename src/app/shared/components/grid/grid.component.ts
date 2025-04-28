@@ -57,6 +57,7 @@ import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-c
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
+  standalone: false,
 })
 export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
@@ -313,7 +314,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   private getLocalStorageSort(): SortDescriptor[] {
-    return this.localStorage.get(this.localStorageSortKey());
+    return this.localStorage.get(this.localStorageSortKey()) ?? [];
   }
 
   private setLocalStorageSort(sort: SortDescriptor[] | undefined) {

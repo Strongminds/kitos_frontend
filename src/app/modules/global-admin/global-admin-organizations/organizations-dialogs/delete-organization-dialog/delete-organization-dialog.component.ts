@@ -13,10 +13,11 @@ import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/r
 import { ClipboardService } from 'src/app/shared/services/clipboard.service';
 
 @Component({
-  selector: 'app-delete-organization-dialog',
-  templateUrl: './delete-organization-dialog.component.html',
-  styleUrl: './delete-organization-dialog.component.scss',
-  providers: [DeleteOrganizationComponentStore],
+    selector: 'app-delete-organization-dialog',
+    templateUrl: './delete-organization-dialog.component.html',
+    styleUrl: './delete-organization-dialog.component.scss',
+    providers: [DeleteOrganizationComponentStore],
+    standalone: false
 })
 export class DeleteOrganizationDialogComponent extends BaseComponent implements OnInit {
   @Input() public organization!: OrganizationOData;

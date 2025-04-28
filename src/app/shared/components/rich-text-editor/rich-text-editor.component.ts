@@ -6,16 +6,17 @@ import { EditorComponent } from '@tinymce/tinymce-angular';
 import { HALF_SECOND_IN_MILLISECONDS } from '../../constants/constants';
 
 @Component({
-  selector: 'app-rich-text-editor',
-  templateUrl: './rich-text-editor.component.html',
-  styleUrl: './rich-text-editor.component.scss',
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => RichTextEditorComponent),
-      multi: true,
-    },
-  ],
+    selector: 'app-rich-text-editor',
+    templateUrl: './rich-text-editor.component.html',
+    styleUrl: './rich-text-editor.component.scss',
+    providers: [
+        {
+            provide: NG_VALUE_ACCESSOR,
+            useExisting: forwardRef(() => RichTextEditorComponent),
+            multi: true,
+        },
+    ],
+    standalone: false
 })
 export class RichTextEditorComponent implements AfterViewInit{
   @Input() formControl!: FormControl;

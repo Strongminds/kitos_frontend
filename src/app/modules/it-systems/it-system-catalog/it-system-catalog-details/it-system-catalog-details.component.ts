@@ -32,9 +32,10 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
 
 @Component({
-  templateUrl: './it-system-catalog-details.component.html',
-  styleUrl: './it-system-catalog-details.component.scss',
-  providers: [ITSystemCatalogDetailsComponentStore],
+    templateUrl: './it-system-catalog-details.component.html',
+    styleUrl: './it-system-catalog-details.component.scss',
+    providers: [ITSystemCatalogDetailsComponentStore],
+    standalone: false
 })
 export class ItSystemCatalogDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

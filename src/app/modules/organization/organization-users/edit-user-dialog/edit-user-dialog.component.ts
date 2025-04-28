@@ -32,10 +32,11 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 
 @Component({
-  selector: 'app-edit-user-dialog',
-  templateUrl: './edit-user-dialog.component.html',
-  styleUrl: './edit-user-dialog.component.scss',
-  providers: [CreateUserDialogComponentStore],
+    selector: 'app-edit-user-dialog',
+    templateUrl: './edit-user-dialog.component.html',
+    styleUrl: './edit-user-dialog.component.scss',
+    providers: [CreateUserDialogComponentStore],
+    standalone: false
 })
 export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit, AfterViewInit {
   @Input() public user!: ODataOrganizationUser;

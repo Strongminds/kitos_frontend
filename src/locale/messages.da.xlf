@@ -2249,10 +2249,10 @@
       </trans-unit>
       <trans-unit id="7493428362965307555" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot;&gt; &lt;/ng-container&gt; &lt;button"/>
+          <x id="INTERPOLATION" equiv-text="&quot; &gt; &lt;/ng-container&gt; &lt;bu"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot;&gt; &lt;/ng-container&gt; &lt;button"/>
+          <x id="INTERPOLATION" equiv-text="&quot; &gt; &lt;/ng-container&gt; &lt;bu"/>
         </target>
         <note priority="1" from="description">The text for the SplitButton aria-label</note>
         <note priority="1" from="meaning">kendo.splitbutton.splitButtonLabel</note>
@@ -3162,7 +3162,7 @@
       <trans-unit id="5332162737795508854" datatype="html">
         <source>Columns</source>
         <target state="new">Columns</target>
-        <note priority="1" from="description">The text shown in the column menu for the columns item</note>
+        <note priority="1" from="description">The text for the Grid Column Chooser and Column Chooser toolbar tool</note>
         <note priority="1" from="meaning">kendo.grid.columns</note>
       </trans-unit>
       <trans-unit id="5849203148124173556" datatype="html">
@@ -3315,11 +3315,11 @@
         <note priority="1" from="description">The text of the title and aria-label attributes applied to the expand icon of group rows.</note>
         <note priority="1" from="meaning">kendo.grid.groupExpand</note>
       </trans-unit>
-      <trans-unit id="5939232818993851320" datatype="html">
+      <trans-unit id="4742914884195495203" datatype="html">
         <source>Select page</source>
         <target state="new">Select page</target>
         <note priority="1" from="description">The text of the title and aria-label attributes applied to the page chooser in the Grid Pager</note>
-        <note priority="1" from="meaning">kendo.grid.selectPage</note>
+        <note priority="1" from="meaning">kendo.grid.pagerSelectPage</note>
       </trans-unit>
       <trans-unit id="6555488355487907527" datatype="html">
         <source>Top toolbar</source>
@@ -6790,6 +6790,188 @@
       <trans-unit id="8053985576501192145" datatype="html">
         <source>Vælg brugere</source>
         <target state="new">Vælg brugere</target>
+      </trans-unit>
+      <trans-unit id="1281858338231957865" datatype="html">
+        <source>Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt.</source>
+        <target state="new">Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt.</target>
+      </trans-unit>
+      <trans-unit id="8653808192316183108" datatype="html">
+        <source>Nedarv overordnet kontrakts gyldighed</source>
+        <target state="new">Nedarv overordnet kontrakts gyldighed</target>
+      </trans-unit>
+      <trans-unit id="6360019495709584643" datatype="html">
+        <source>Type a page number</source>
+        <target state="new">Type a page number</target>
+        <note priority="1" from="description">The text of the aria-label attribute applied to the input element for entering the page number</note>
+        <note priority="1" from="meaning">kendo.grid.pagerInputLabel</note>
+      </trans-unit>
+      <trans-unit id="2281955701430052538" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="&quot; i18n-removeConfirmationDialogTitle="/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="&quot; i18n-removeConfirmationDialogTitle="/>
+        </target>
+        <note priority="1" from="description">The default text of a form validation error when using external editing.</note>
+        <note priority="1" from="meaning">kendo.grid.formValidationErrorText</note>
+      </trans-unit>
+      <trans-unit id="9130988197537985781" datatype="html">
+        <source>Please confirm</source>
+        <target state="new">Please confirm</target>
+        <note priority="1" from="description">The title of the built-in remove item confirmation Dialog</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogTitle</note>
+      </trans-unit>
+      <trans-unit id="2144512323940687374" datatype="html">
+        <source>Are you sure you want to delete this item?</source>
+        <target state="new">Are you sure you want to delete this item?</target>
+        <note priority="1" from="description">The content of the built-in remove item confirmation Dialog</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogContent</note>
+      </trans-unit>
+      <trans-unit id="7831598438145269124" datatype="html">
+        <source>Yes</source>
+        <target state="new">Yes</target>
+        <note priority="1" from="description">The text of the built-in remove item confirmation Dialog confirm action button</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogConfirmText</note>
+      </trans-unit>
+      <trans-unit id="5538270010027711668" datatype="html">
+        <source>No</source>
+        <target state="new">No</target>
+        <note priority="1" from="description">The text of the built-in remove item confirmation Dialog reject action button</note>
+        <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogRejectText</note>
+      </trans-unit>
+      <trans-unit id="639527922029546265" datatype="html">
+        <source>Edit</source>
+        <target state="new">Edit</target>
+        <note priority="1" from="description">The title of the built-in external editing form container</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingTitle</note>
+      </trans-unit>
+      <trans-unit id="6806557244499949355" datatype="html">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note priority="1" from="description">The text of the external editing form Save button</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingSaveText</note>
+      </trans-unit>
+      <trans-unit id="2224878318274179684" datatype="html">
+        <source>Cancel</source>
+        <target state="new">Cancel</target>
+        <note priority="1" from="description">The text of the external editing form Cancel button</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingCancelText</note>
+      </trans-unit>
+      <trans-unit id="1493345812229818724" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title for the Close button.</note>
+        <note priority="1" from="meaning">kendo.colorpicker.closeButton</note>
+      </trans-unit>
+      <trans-unit id="1461683135245713706" datatype="html">
+        <source>Choose Color</source>
+        <target state="new">Choose Color</target>
+        <note priority="1" from="description">The title for the ActionSheet when in adaptive mode.</note>
+        <note priority="1" from="meaning">kendo.colorpicker.adaptiveTitle</note>
+      </trans-unit>
+      <trans-unit id="2574527919448072107" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="&quot; &gt;&lt;/ng-cont"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="&quot; &gt;&lt;/ng-cont"/>
+        </target>
+        <note priority="1" from="description">The value of the aria-label attribute of the input fields.</note>
+        <note priority="1" from="meaning">kendo.otpinput.ariaLabel</note>
+      </trans-unit>
+      <trans-unit id="2124176984717923206" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="&quot; i18"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="&quot; i18"/>
+        </target>
+        <note priority="1" from="description">The value of the aria-label attribute of the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.ariaLabel</note>
+      </trans-unit>
+      <trans-unit id="7169522157181311670" datatype="html">
+        <source>Go to the first page</source>
+        <target state="new">Go to the first page</target>
+        <note priority="1" from="description">The label for the first page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.firstPage</note>
+      </trans-unit>
+      <trans-unit id="3173443332469111280" datatype="html">
+        <source>Go to the previous page</source>
+        <target state="new">Go to the previous page</target>
+        <note priority="1" from="description">The label for the previous page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.previousPage</note>
+      </trans-unit>
+      <trans-unit id="2977649834936444534" datatype="html">
+        <source>Go to the next page</source>
+        <target state="new">Go to the next page</target>
+        <note priority="1" from="description">The label for the next page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.nextPage</note>
+      </trans-unit>
+      <trans-unit id="4302174378452165800" datatype="html">
+        <source>Go to the last page</source>
+        <target state="new">Go to the last page</target>
+        <note priority="1" from="description">The label for the last page button in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.lastPage</note>
+      </trans-unit>
+      <trans-unit id="8678868632586383003" datatype="html">
+        <source>Page</source>
+        <target state="new">Page</target>
+        <note priority="1" from="description">The label before the current page number in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.page</note>
+      </trans-unit>
+      <trans-unit id="2438575870810538060" datatype="html">
+        <source>of</source>
+        <target state="new">of</target>
+        <note priority="1" from="description">The label before the total pages number in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.of</note>
+      </trans-unit>
+      <trans-unit id="2330948786674386987" datatype="html">
+        <source>Page Number</source>
+        <target state="new">Page Number</target>
+        <note priority="1" from="description">The label for the pager input in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.pageNumberInputTitle</note>
+      </trans-unit>
+      <trans-unit id="3496480700570244582" datatype="html">
+        <source>items</source>
+        <target state="new">items</target>
+        <note priority="1" from="description">The label after the total pages number in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.items</note>
+      </trans-unit>
+      <trans-unit id="1737032542950161383" datatype="html">
+        <source>items per page</source>
+        <target state="new">items per page</target>
+        <note priority="1" from="description">The label for the page size chooser in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.itemsPerPage</note>
+      </trans-unit>
+      <trans-unit id="2001603891643955632" datatype="html">
+        <source>Select page</source>
+        <target state="new">Select page</target>
+        <note priority="1" from="description">The text of the title and aria-label attributes applied to the page chooser in the Pager</note>
+        <note priority="1" from="meaning">kendo.pager.selectPage</note>
+      </trans-unit>
+      <trans-unit id="8477550023881248885" datatype="html">
+        <source>Type a page number</source>
+        <target state="new">Type a page number</target>
+        <note priority="1" from="description">The text of the aria-label attribute applied to the input element for entering the page number.</note>
+        <note priority="1" from="meaning">kendo.pager.inputLabel</note>
+      </trans-unit>
+      <trans-unit id="6762596725712096287" datatype="html">
+        <source>More tools</source>
+        <target state="new">More tools</target>
+        <note priority="1" from="description">The title of the **more tools** button in a responsive ToolBar</note>
+        <note priority="1" from="meaning">kendo.toolbar.moreToolsTitle</note>
+      </trans-unit>
+      <trans-unit id="3543857959141568934" datatype="html">
+        <source>Scroll left</source>
+        <target state="new">Scroll left</target>
+        <note priority="1" from="description">The title for the **Previous Tool** button when the Toolbar is scrollable.</note>
+        <note priority="1" from="meaning">kendo.toolbar.previousToolButton</note>
+      </trans-unit>
+      <trans-unit id="9125528523516170497" datatype="html">
+        <source>Scroll right</source>
+        <target state="new">Scroll right</target>
+        <note priority="1" from="description">The title for the **Next Tool** button when the Toolbar is scrollable.</note>
+        <note priority="1" from="meaning">kendo.toolbar.nextToolButton</note>
       </trans-unit>
     </body>
   </file>

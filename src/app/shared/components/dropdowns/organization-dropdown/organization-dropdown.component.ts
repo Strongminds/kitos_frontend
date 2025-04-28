@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, combineLatestWith, map, Observable } from 'rxjs';
-import { BaseComponent } from '../../base/base.component';
+import { BaseComponent } from '../../../base/base.component';
 import { OrganizationDropdownComponentStore } from './organization-dropdown.component-store';
 
 @Component({
@@ -9,6 +9,7 @@ import { OrganizationDropdownComponentStore } from './organization-dropdown.comp
   templateUrl: './organization-dropdown.component.html',
   styleUrl: './organization-dropdown.component.scss',
   providers: [OrganizationDropdownComponentStore],
+  standalone: false,
 })
 export class OrganizationDropdownComponent extends BaseComponent implements OnInit {
   @Input() formGroup!: FormGroup;

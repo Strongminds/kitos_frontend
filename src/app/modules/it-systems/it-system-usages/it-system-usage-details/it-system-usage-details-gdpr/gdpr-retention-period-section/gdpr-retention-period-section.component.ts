@@ -15,9 +15,10 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 
 @Component({
-  selector: 'app-gdpr-retention-period-section',
-  templateUrl: './gdpr-retention-period-section.component.html',
-  styleUrls: ['./gdpr-retention-period-section.component.scss'],
+    selector: 'app-gdpr-retention-period-section',
+    templateUrl: './gdpr-retention-period-section.component.html',
+    styleUrls: ['./gdpr-retention-period-section.component.scss'],
+    standalone: false
 })
 export class GdprRetentionPeriodSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

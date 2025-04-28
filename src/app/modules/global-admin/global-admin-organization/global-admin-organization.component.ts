@@ -8,9 +8,10 @@ enum GlobalAdminOrganizationSegmentOptionType {
 
 
 @Component({
-  selector: 'app-global-admin-organization',
-  templateUrl: './global-admin-organization.component.html',
-  styleUrl: './global-admin-organization.component.scss'
+    selector: 'app-global-admin-organization',
+    templateUrl: './global-admin-organization.component.html',
+    styleUrl: './global-admin-organization.component.scss',
+    standalone: false
 })
 export class GlobalAdminOrganizationComponent {
   public readonly GlobalAdminOrganizationSegmentOptionType = GlobalAdminOrganizationSegmentOptionType;

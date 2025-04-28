@@ -131,7 +131,7 @@
     i18n-title
   ></app-card-header>
 
-  <app-form-grid>
+  <app-form-grid [formGroup]="parentContractForm">
     <app-connected-dropdown
       text="Overordnet kontrakt"
       i18n-text
@@ -146,12 +146,16 @@
       (valueChange)="patchFrontPage({ parentContractUuid: $event })"
     >
     </app-connected-dropdown>
+
     <app-checkbox
+      *ngIf="useParentValidityEnabled$ | async"
       [formGroup]="parentContractForm"
       formName="requireValidParent"
       (valueChange)="patchFrontPage({ general: { validity: { requireValidParent: $event } } })"
       labelPosition="after"
       text="Nedarv den overordnedes gyldighed"
+      tooltip="Hvis dette er sat, så vil den pågældende kontrakts status, altid være denne samme, som dens overordnede kontrakt."
+      i18n-tooltip
       class="flex"
       i18n-text
       data-cy="require-valid-parent"
@@ -181,6 +185,7 @@
         formName="responsibleEntitySignedBy"
         [data$]="users$"
         [isLoading$]="usersIsLoading$"
+        [addTag]="true"
         (filterChange)="searchUsers($event)"
         (valueChange)="patchFrontPage({ responsible: { signedBy: $event } })"
       ></app-connected-dropdown>

@@ -29,9 +29,10 @@ export interface SelectedKleDetails extends APIKLEDetailsDTO {
 }
 
 @Component({
-  selector: 'app-kle-table[selectedKles]',
-  templateUrl: './kle-table.component.html',
-  styleUrls: ['./kle-table.component.scss'],
+    selector: 'app-kle-table[selectedKles]',
+    templateUrl: './kle-table.component.html',
+    styleUrls: ['./kle-table.component.scss'],
+    standalone: false
 })
 export class KleTableComponent extends BaseComponent implements OnInit {
   @Input() public hasModifyPermission = false;

@@ -6,9 +6,10 @@ import { EntityTreeNode } from '../../models/structure/entity-tree-node.model';
 import { BooleanValueDisplayType } from '../status-chip/status-chip.component';
 
 @Component({
-  selector: 'app-entity-tree[nodes][itemType]',
-  templateUrl: './entity-tree.component.html',
-  styleUrls: ['./entity-tree.component.scss'],
+    selector: 'app-entity-tree[nodes][itemType]',
+    templateUrl: './entity-tree.component.html',
+    styleUrls: ['./entity-tree.component.scss'],
+    standalone: false
 })
 export class EntityTreeComponent<T> implements OnInit {
   public readonly treeControl = new NestedTreeControl<EntityTreeNode<T>>((node) => node.children);

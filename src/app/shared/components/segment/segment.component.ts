@@ -7,9 +7,10 @@ export interface SegmentButtonOption<T> {
 }
 
 @Component({
-  selector: 'app-segment',
-  templateUrl: 'segment.component.html',
-  styleUrls: ['segment.component.scss'],
+    selector: 'app-segment',
+    templateUrl: 'segment.component.html',
+    styleUrls: ['segment.component.scss'],
+    standalone: false
 })
 export class SegmentComponent<T> {
   @Input() public buttons: SegmentButtonOption<T>[] = [];

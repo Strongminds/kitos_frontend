@@ -5,9 +5,10 @@ import { selectAllPopupMessages } from 'src/app/store/popup-messages/selectors';
 import { BaseComponent } from '../../base/base.component';
 
 @Component({
-  selector: 'app-popup-messages',
-  templateUrl: './popup-messages.component.html',
-  styleUrls: ['./popup-messages.component.scss'],
+    selector: 'app-popup-messages',
+    templateUrl: './popup-messages.component.html',
+    styleUrls: ['./popup-messages.component.scss'],
+    standalone: false
 })
 export class PopupMessagesComponent extends BaseComponent {
   public readonly activePopupMessages$ = this.store.select(selectAllPopupMessages);

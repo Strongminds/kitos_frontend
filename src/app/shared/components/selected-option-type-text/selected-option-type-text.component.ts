@@ -7,9 +7,10 @@ export interface BaseSelectedOptionTypeTextModel {
 }
 
 @Component({
-  selector: 'app-selected-option-type-text[availableOptions]',
-  templateUrl: './selected-option-type-text.component.html',
-  styleUrls: ['./selected-option-type-text.component.scss'],
+    selector: 'app-selected-option-type-text[availableOptions]',
+    templateUrl: './selected-option-type-text.component.html',
+    styleUrls: ['./selected-option-type-text.component.scss'],
+    standalone: false
 })
 export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTextModel> implements OnInit {
   public selectedOptionText = '';

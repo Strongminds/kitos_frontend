@@ -3,9 +3,10 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { LinkFontSizes } from 'src/app/shared/models/sizes/link-font-sizes.model';
 
 @Component({
-  selector: 'app-details-page-link-with-tooltip',
-  templateUrl: './details-page-link-with-tooltip.component.html',
-  styleUrl: './details-page-link-with-tooltip.component.scss'
+    selector: 'app-details-page-link-with-tooltip',
+    templateUrl: './details-page-link-with-tooltip.component.html',
+    styleUrl: './details-page-link-with-tooltip.component.scss',
+    standalone: false
 })
 export class DetailsPageLinkWithTooltipComponent {
     @Input() public itemPath?: string;

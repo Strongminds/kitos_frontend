@@ -12,9 +12,10 @@ import { selectItContractSystemAgreementElements } from 'src/app/store/it-contra
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 
 @Component({
-  selector: 'app-agreement-element-create-dialog',
-  templateUrl: './agreement-element-create-dialog.component.html',
-  styleUrl: './agreement-element-create-dialog.component.scss',
+    selector: 'app-agreement-element-create-dialog',
+    templateUrl: './agreement-element-create-dialog.component.html',
+    styleUrl: './agreement-element-create-dialog.component.scss',
+    standalone: false
 })
 export class AgreementElementCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly agreementElementTypes$ = this.store

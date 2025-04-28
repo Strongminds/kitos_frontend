@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-folder-important-icon',
-  styles: [':host {display: contents}'],
-  templateUrl: './folder-important.svg',
+    selector: 'app-folder-important-icon',
+    styles: [':host {display: contents}'],
+    templateUrl: './folder-important.svg',
+    standalone: false
 })
 export class FolderImportantComponent {}

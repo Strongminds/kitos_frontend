@@ -11,9 +11,10 @@ import { selectAlertsByType } from 'src/app/store/alerts/selectors';
 import { Alert, RelatedEntityType } from 'src/app/store/alerts/state';
 
 @Component({
-  selector: 'app-alerts-grid',
-  templateUrl: './alerts-grid.component.html',
-  styleUrl: './alerts-grid.component.scss',
+    selector: 'app-alerts-grid',
+    templateUrl: './alerts-grid.component.html',
+    styleUrl: './alerts-grid.component.scss',
+    standalone: false
 })
 export class AlertsGridComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;

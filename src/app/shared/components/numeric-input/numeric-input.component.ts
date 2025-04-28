@@ -4,9 +4,10 @@ import { BaseFormComponent } from '../../base/base-form.component';
 import { ONLY_DIGITS_REGEX } from '../../constants/regex-constants';
 
 @Component({
-  selector: 'app-numeric-input',
-  templateUrl: './numeric-input.component.html',
-  styleUrls: ['./numeric-input.component.scss'],
+    selector: 'app-numeric-input',
+    templateUrl: './numeric-input.component.html',
+    styleUrls: ['./numeric-input.component.scss'],
+    standalone: false
 })
 export class NumericInputComponent extends BaseFormComponent<number | undefined> implements AfterViewInit, OnDestroy {
   @Input() public size: 'medium' | 'large' = 'large';

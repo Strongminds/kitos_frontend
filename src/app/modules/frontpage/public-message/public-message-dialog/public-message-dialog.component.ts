@@ -8,9 +8,10 @@ import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { EditPublicMessageDialogComponent } from '../edit-public-message-dialog/edit-public-message-dialog.component';
 
 @Component({
-  selector: 'app-public-message-dialog',
-  templateUrl: './public-message-dialog.component.html',
-  styleUrl: './public-message-dialog.component.scss',
+    selector: 'app-public-message-dialog',
+    templateUrl: './public-message-dialog.component.html',
+    styleUrl: './public-message-dialog.component.scss',
+    standalone: false
 })
 export class PublicMessageDialogComponent {
   @Input() publicMessage$!: Observable<PublicMessage>;

@@ -10,9 +10,10 @@ import { ChooseOrganizationComponentStore } from './choose-organization.componen
 import { OrganizationActions } from 'src/app/store/organization/actions';
 
 @Component({
-  templateUrl: 'choose-organization.component.html',
-  styleUrls: ['choose-organization.component.scss'],
-  providers: [ChooseOrganizationComponentStore],
+    templateUrl: 'choose-organization.component.html',
+    styleUrls: ['choose-organization.component.scss'],
+    providers: [ChooseOrganizationComponentStore],
+    standalone: false
 })
 export class ChooseOrganizationComponent implements OnInit {
   public closable = true;

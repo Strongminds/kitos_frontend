@@ -11,9 +11,10 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { selectDataProcessingOversightDates } from 'src/app/store/data-processing/selectors';
 
 @Component({
-  selector: 'app-write-oversight-date-dialog',
-  templateUrl: './write-oversight-date-dialog.component.html',
-  styleUrl: './write-oversight-date-dialog.component.scss',
+    selector: 'app-write-oversight-date-dialog',
+    templateUrl: './write-oversight-date-dialog.component.html',
+    styleUrl: './write-oversight-date-dialog.component.scss',
+    standalone: false
 })
 export class WriteOversightDateDialogComponent extends BaseComponent implements OnInit {
   @Input() public oversightDate: APIOversightDateDTO | undefined;

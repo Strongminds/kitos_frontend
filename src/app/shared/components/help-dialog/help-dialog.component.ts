@@ -8,9 +8,10 @@ import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { HelpDialogComponentStore } from './help-dialog.component-store';
 
 @Component({
-  templateUrl: 'help-dialog.component.html',
-  styleUrls: ['help-dialog.component.scss'],
-  providers: [HelpDialogComponentStore],
+    templateUrl: 'help-dialog.component.html',
+    styleUrls: ['help-dialog.component.scss'],
+    providers: [HelpDialogComponentStore],
+    standalone: false
 })
 export class HelpDialogComponent implements OnInit {
   @Input() helpTextKey?: string;

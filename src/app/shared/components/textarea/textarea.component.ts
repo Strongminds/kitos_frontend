@@ -2,9 +2,10 @@ import { AfterViewInit, Component, Input } from '@angular/core';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({
-  selector: 'app-textarea',
-  templateUrl: 'textarea.component.html',
-  styleUrls: ['textarea.component.scss'],
+    selector: 'app-textarea',
+    templateUrl: 'textarea.component.html',
+    styleUrls: ['textarea.component.scss'],
+    standalone: false
 })
 export class TextAreaComponent extends BaseFormComponent<string> implements AfterViewInit {
   @Input() public autosizeMinRows = 4;

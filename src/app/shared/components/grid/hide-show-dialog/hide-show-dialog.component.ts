@@ -13,9 +13,10 @@ import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 
 @Component({
-  selector: 'app-hide-show-dialog',
-  templateUrl: './hide-show-dialog.component.html',
-  styleUrl: './hide-show-dialog.component.scss',
+    selector: 'app-hide-show-dialog',
+    templateUrl: './hide-show-dialog.component.html',
+    styleUrl: './hide-show-dialog.component.scss',
+    standalone: false
 })
 export class HideShowDialogComponent implements OnInit {
   @Input() columns!: GridColumn[];

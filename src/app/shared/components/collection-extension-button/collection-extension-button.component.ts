@@ -2,9 +2,10 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ButtonStyle } from '../../models/buttons/button-style.model';
 
 @Component({
-  selector: 'app-collection-extension-button[text]',
-  templateUrl: './collection-extension-button.component.html',
-  styleUrls: ['./collection-extension-button.component.scss'],
+    selector: 'app-collection-extension-button[text]',
+    templateUrl: './collection-extension-button.component.html',
+    styleUrls: ['./collection-extension-button.component.scss'],
+    standalone: false
 })
 export class CollectionExtensionButtonComponent {
   @Input() public text!: string;

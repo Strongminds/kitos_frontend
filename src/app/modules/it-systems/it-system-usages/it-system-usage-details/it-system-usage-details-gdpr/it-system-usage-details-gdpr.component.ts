@@ -30,9 +30,10 @@ type UsageGDPRSection =
   | 'retention-period';
 
 @Component({
-  selector: 'app-it-system-usage-details-gdpr',
-  templateUrl: './it-system-usage-details-gdpr.component.html',
-  styleUrls: ['./it-system-usage-details-gdpr.component.scss'],
+    selector: 'app-it-system-usage-details-gdpr',
+    templateUrl: './it-system-usage-details-gdpr.component.html',
+    styleUrls: ['./it-system-usage-details-gdpr.component.scss'],
+    standalone: false
 })
 export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   @Output() disableLinkControls = new EventEmitter<void>();

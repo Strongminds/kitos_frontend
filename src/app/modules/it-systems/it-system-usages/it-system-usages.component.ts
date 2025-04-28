@@ -52,8 +52,9 @@ import {
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
-  templateUrl: 'it-system-usages.component.html',
-  styleUrls: ['it-system-usages.component.scss'],
+    templateUrl: 'it-system-usages.component.html',
+    styleUrls: ['it-system-usages.component.scss'],
+    standalone: false
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);

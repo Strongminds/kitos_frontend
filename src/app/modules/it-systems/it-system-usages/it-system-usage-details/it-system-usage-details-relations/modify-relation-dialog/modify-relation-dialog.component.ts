@@ -9,10 +9,11 @@ import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-rel
 import { SystemRelationDialogFormModel } from '../system-relation-dialog/system-relation-dialog.component';
 
 @Component({
-  selector: 'app-modify-relation-dialog[relationModel]',
-  templateUrl: './modify-relation-dialog.component.html',
-  styleUrls: ['./modify-relation-dialog.component.scss'],
-  providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
+    selector: 'app-modify-relation-dialog[relationModel]',
+    templateUrl: './modify-relation-dialog.component.html',
+    styleUrls: ['./modify-relation-dialog.component.scss'],
+    providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
+    standalone: false
 })
 export class ModifyRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public relationModel!: SystemRelationModel;

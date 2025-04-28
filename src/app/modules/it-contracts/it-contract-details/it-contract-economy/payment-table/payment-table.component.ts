@@ -12,9 +12,10 @@ import { selectItContractHasModifyPermissions } from 'src/app/store/it-contract/
 import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
 
 @Component({
-  selector: 'app-payment-table[title][helpTextKey][paymentType]',
-  templateUrl: './payment-table.component.html',
-  styleUrl: './payment-table.component.scss',
+    selector: 'app-payment-table[title][helpTextKey][paymentType]',
+    templateUrl: './payment-table.component.html',
+    styleUrl: './payment-table.component.scss',
+    standalone: false
 })
 export class PaymentTableComponent extends BaseComponent {
   @Input() public title!: string;

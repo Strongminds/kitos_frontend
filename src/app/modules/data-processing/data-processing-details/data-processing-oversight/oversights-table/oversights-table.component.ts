@@ -15,9 +15,10 @@ import {
 import { WriteOversightDateDialogComponent } from './write-oversight-date-dialog/write-oversight-date-dialog.component';
 
 @Component({
-  selector: 'app-oversights-table',
-  templateUrl: './oversights-table.component.html',
-  styleUrl: './oversights-table.component.scss',
+    selector: 'app-oversights-table',
+    templateUrl: './oversights-table.component.html',
+    styleUrl: './oversights-table.component.scss',
+    standalone: false
 })
 export class OversightsTableComponent extends BaseComponent {
   public readonly oversightDates$ = this.store.select(selectDataProcessingOversightDates).pipe(filterNullish());
