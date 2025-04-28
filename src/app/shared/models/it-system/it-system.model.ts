@@ -44,7 +44,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     (usage: { Organization: { Name: string; Uuid: string } }) => {
       return { name: usage.Organization.Name, uuid: usage.Organization.Uuid };
     }
-  );
+  ).sort((a: IdentityNamePair, b: IdentityNamePair) => a.name.localeCompare(b.name));
   const reference = value.Reference;
 
   return {
