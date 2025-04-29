@@ -18,12 +18,13 @@ import { GridUsagesDialogComponentStore } from './grid-usages-dialog.component-s
 export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
   @Input() type!: RegistrationEntityTypes | undefined;
   @Input() rowEntityIdentifier!: string | undefined;
+  @Input() usingOrganizations!: IdentityNamePair[];
+  @Input() title!: string;
 
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
   public readonly canExecuteMigration$ = this.componentStore.canExecuteMigration$;
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { usingOrganizations: IdentityNamePair[]; title: string },
     private readonly dialog: MatDialog,
     private readonly store: Store,
     private readonly componentStore: GridUsagesDialogComponentStore

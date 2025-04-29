@@ -36,10 +36,15 @@ export class RichTextEditorComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      if (this.editorRef?.editor && this.defaultEditorContent) {
+      if (this.editorHasNoContent() && this.defaultEditorContent) {
         this.editorRef.editor.setContent(this.defaultEditorContent);
       }
     }, HALF_SECOND_IN_MILLISECONDS);
+  }
+
+  private editorHasNoContent(){
+    const editor = this.editorRef?.editor;
+    return editor && editor.getContent() == undefined
   }
 
   writeValue(value: any): void {
