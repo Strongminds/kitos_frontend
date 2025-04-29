@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UIModuleConfigKey } from '../../enums/ui-module-config-key';
 import { DataProcessingUiBluePrint } from '../../models/ui-config/blueprints/data-processing-blueprint';
+import { GdprUiBluePrint } from '../../models/ui-config/blueprints/gdpr-blueprint';
 import { ItContractsUiBluePrint } from '../../models/ui-config/blueprints/it-contracts-blueprint';
 import { ItSystemUsageUiBluePrint } from '../../models/ui-config/blueprints/it-system-usages-blueprint';
 import { UIConfigNodeViewModel } from '../../models/ui-config/ui-config-node-view-model.model';
@@ -81,8 +82,13 @@ export class UIConfigService {
         return ItContractsUiBluePrint;
       case UIModuleConfigKey.DataProcessingRegistrations:
         return DataProcessingUiBluePrint;
-      default:
-        throw new Error(`No blueprint found for module ${module}`);
+      case UIModuleConfigKey.Gdpr:
+        return GdprUiBluePrint;
+      default: {
+        const error = `No blueprint found for module ${module}`;
+        console.error(error);
+        throw new Error(error);
+      }
     }
   }
 
