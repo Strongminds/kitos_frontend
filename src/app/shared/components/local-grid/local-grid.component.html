@@ -6,7 +6,7 @@
   [pageable]="true"
   [filterable]="true"
   [reorderable]="true"
-  [sortable]="!reorderable"
+  [sortable]="false"
   [rowReorderable]="reorderable"
   (rowReorder)="onRowReorder($event)"
   [resizable]="true"
@@ -22,7 +22,13 @@
     'expand-height-to-content': !fitSizeToContent
   }"
 >
-  <kendo-grid-rowreorder-column class="drag-handle" *ngIf="reorderable" [width]="40"></kendo-grid-rowreorder-column>
+  <kendo-grid-rowreorder-column class="drag-handle" *ngIf="reorderable" [width]="40">
+    <ng-template kendoGridRowDragHintTemplate let-dataItem>
+      <div class="hint-wrapper">
+        <span>{{ dataItem.name }}</span>
+      </div>
+    </ng-template>
+  </kendo-grid-rowreorder-column>
   <ng-container *ngFor="let column of columns">
     <kendo-grid-column
       *ngIf="!column.hidden"

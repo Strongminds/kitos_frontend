@@ -25,10 +25,10 @@ import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events
 import { GridExportService } from '../../services/grid-export.service';
 
 @Component({
-    selector: 'app-local-grid',
-    templateUrl: './local-grid.component.html',
-    styleUrl: './local-grid.component.scss',
-    standalone: false
+  selector: 'app-local-grid',
+  templateUrl: './local-grid.component.html',
+  styleUrl: './local-grid.component.scss',
+  standalone: false,
 })
 export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
@@ -138,6 +138,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   }
 
   public onRowReorder(event: RowReorderEvent) {
+    console.log('RowReorder event:', event);
     if (!event.draggedRows?.length || !event.dropTargetRow) return;
 
     const fromRow = event.draggedRows[0];

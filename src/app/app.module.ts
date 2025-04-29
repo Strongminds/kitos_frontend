@@ -13,6 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { RootStoreModule } from './store/root-store.module';
 
 import '@progress/kendo-angular-intl/locales/da/all';
+import { DragAndDropModule } from '@progress/kendo-angular-utils';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +28,7 @@ import '@progress/kendo-angular-intl/locales/da/all';
     ApiV1Module.forRoot(apiConfigV1Factory),
     ApiV2Module.forRoot(apiConfigV2Factory),
     GridModule,
+    DragAndDropModule,
     ExcelModule,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
