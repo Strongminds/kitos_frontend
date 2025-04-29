@@ -7,6 +7,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ChooseOrganizationComponentStore } from './choose-organization.component-store';
+import { OrganizationActions } from 'src/app/store/organization/actions';
 
 @Component({
     templateUrl: 'choose-organization.component.html',
@@ -46,6 +47,7 @@ export class ChooseOrganizationComponent implements OnInit {
         if (organization.uuid !== organizationUuid) {
           this.store.dispatch(UserActions.getUserDefaultUnit(organization.uuid));
           this.store.dispatch(UserActions.resetOnOrganizationUpdate(organization));
+          this.store.dispatch(OrganizationActions.getUIRootConfig());
         }
         this.dialog.close();
       });
