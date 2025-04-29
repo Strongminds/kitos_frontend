@@ -1,0 +1,5 @@
+@import "mixins";
+
+.two-thirds-column-width {
+  @include two-thirds-column-width;
+}
