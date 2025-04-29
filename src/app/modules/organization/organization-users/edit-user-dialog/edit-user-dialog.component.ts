@@ -54,7 +54,6 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     ]),
     phoneNumber: new FormControl<string | undefined>(undefined, phoneNumberLengthValidator()),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
-    roles: new FormControl<UserRoleChoice[] | undefined>(undefined),
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
     hasStakeholderAccess: new FormControl<boolean | undefined>(undefined),
