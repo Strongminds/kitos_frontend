@@ -1,7 +1,6 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatDatepickerInputEvent } from '@angular/material/datepicker';
 import IMask from 'imask';
-import * as moment from 'moment';
 import { BaseFormComponent } from '../../base/base-form.component';
 
 @Component({

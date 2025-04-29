@@ -78,7 +78,7 @@
     "ngx-cookie": "^6.0.1",
     "performant-array-to-tree": "^1.11.0",
     "rxjs": "~7.8.2",
-    "tinymce": "^7.4.0",
+    "tinymce": "^7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.0"
   },
