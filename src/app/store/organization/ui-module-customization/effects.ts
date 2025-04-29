@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { ActionCreator, Store } from '@ngrx/store';
-import { catchError, combineLatestWith, concatMap, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, concatMap, forkJoin, from, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APICustomizedUINodeRequestDTO,
   APICustomizedUINodeResponseDTO,
@@ -15,6 +15,7 @@ import { UIModuleConfig } from 'src/app/shared/models/ui-config/ui-module-config
 import { adaptUIModuleCustomization } from 'src/app/shared/models/ui-config/ui-module-customization.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { UIConfigService } from 'src/app/shared/services/ui-config-services/ui-config.service';
+import { UserActions } from '../../user-store/actions';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { UIModuleConfigActions } from './actions';
 import { selectHasValidUIModuleConfigCache } from './selectors';
@@ -29,6 +30,24 @@ export class UIModuleCustomizationEffects {
     private uiConfigService: UIConfigService
   ) {}
 
+  updateAllUIModuleConfigsOnOrgChange$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UserActions.resetOnOrganizationUpdate),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      mergeMap(([_, organizationUuid]) => {
+        const moduleNames = [
+          UIModuleConfigKey.ItSystemUsage,
+          UIModuleConfigKey.DataProcessingRegistrations,
+          UIModuleConfigKey.ItContract,
+        ];
+        const requestActions = moduleNames.map((moduleName) =>
+          this.getUIModuleConfigFromApi(moduleName, organizationUuid)
+        );
+        return forkJoin(requestActions).pipe(mergeMap((actions) => from(actions)));
+      })
+    );
+  });
+
   getUIModuleConfig$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UIModuleConfigActions.getUIModuleConfig),
@@ -40,18 +59,7 @@ export class UIModuleCustomizationEffects {
         if (validCache) {
           return of(UIModuleConfigActions.resetLoading());
         }
-        return this.organizationInternalService
-          .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
-          .pipe(
-            map((uiModuleCustomizationDto) =>
-              this.combineBlueprintWithCustomizationDto(
-                uiModuleCustomizationDto,
-                moduleName,
-                UIModuleConfigActions.getUIModuleConfigSuccess
-              )
-            ),
-            catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
-          );
+        return this.getUIModuleConfigFromApi(moduleName, organizationUuid);
       })
     );
   });
@@ -59,7 +67,7 @@ export class UIModuleCustomizationEffects {
   putUIModuleCustomization$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UIModuleConfigActions.putUIModuleCustomization),
-      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       concatMap(([{ module: moduleName, updatedNodeRequest }, organizationUuid]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
@@ -93,6 +101,24 @@ export class UIModuleCustomizationEffects {
       )
     );
   });
+
+  private getUIModuleConfigFromApi(moduleName: UIModuleConfigKey, organizationUuid: string) {
+    return this.organizationInternalService
+      .getSingleOrganizationsInternalV2GetUIModuleCustomization({
+        moduleName,
+        organizationUuid,
+      })
+      .pipe(
+        map((uiModuleCustomizationDto) =>
+          this.combineBlueprintWithCustomizationDto(
+            uiModuleCustomizationDto,
+            moduleName,
+            UIModuleConfigActions.getUIModuleConfigSuccess
+          )
+        ),
+        catchError(() => of(UIModuleConfigActions.getUIModuleConfigError()))
+      );
+  }
 
   private combineBlueprintWithCustomizationDto<T extends { uiModuleConfig: UIModuleConfig }>(
     uiModuleCustomizationDto: APIUIModuleCustomizationResponseDTO,
