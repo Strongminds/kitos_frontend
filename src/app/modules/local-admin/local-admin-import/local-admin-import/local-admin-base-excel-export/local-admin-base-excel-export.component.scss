@@ -1,8 +1,8 @@
-@import "mixins";
-@import "theme";
+@use "mixins";
+@use "theme";
 
 :host {
-  @include page-flex-layout-max-width;
+  @include mixins.page-flex-layout-max-width;
 }
 
 .inline-block-button {
