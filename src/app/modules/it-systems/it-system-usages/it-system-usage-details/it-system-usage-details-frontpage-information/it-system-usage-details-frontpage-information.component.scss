@@ -13,7 +13,7 @@ form {
   grid-gap: theme.$padding-large;
 
   .two-thirds-column-width {
-    grid-column: span 2;
+    @include mixins.two-thirds-column-width;
   }
 
   .full-width {
