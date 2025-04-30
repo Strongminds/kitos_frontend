@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
+import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { dataProcessingAdapter, dataProcessingFeature } from './reducer';
-import { getRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 
 const { selectDataProcessingState } = dataProcessingFeature;
 
@@ -108,5 +108,5 @@ export const selectDataProcessingRights = createSelector(
 
 export const selectDataProcessingRightUuidPairs = createSelector(
   selectDataProcessingRights,
-  getRoleAssignmentsRequests
+  mapToRoleAssignmentsRequests
 );
