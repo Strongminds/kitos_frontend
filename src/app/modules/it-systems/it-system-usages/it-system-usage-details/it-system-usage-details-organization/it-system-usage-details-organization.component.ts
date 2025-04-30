@@ -103,14 +103,16 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
 
   public nodeExpandClick(node: EntityTreeNode<APIIdentityNamePairResponseDTO>): void {
     node.isExpanded = !node.isExpanded;
+
+    const nodeUuid = node.uuid;
     if (node.isExpanded) {
       // Add the unitUuid if it's not already in the array
-      if (!this.expandedUnitUuids?.includes(node.uuid)) {
-        this.expandedUnitUuids?.push(node.uuid);
+      if (!this.expandedUnitUuids?.includes(nodeUuid)) {
+        this.expandedUnitUuids?.push(nodeUuid);
       }
     } else {
       // Remove the unitUuid if it exists in the array
-      this.expandedUnitUuids = this.expandedUnitUuids?.filter((uuid) => uuid !== node.uuid);
+      this.expandedUnitUuids = this.expandedUnitUuids?.filter((uuid) => uuid !== nodeUuid);
     }
   }
 
