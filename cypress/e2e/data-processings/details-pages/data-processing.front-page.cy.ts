@@ -46,17 +46,36 @@ describe('data-processing-front-page', () => {
       uuid: '0c2c1b3b-0b1b-4b3b-8b3b-0b1b3b0b1b3b',
       name: 'En anden enhed',
     };
-    cy.intercept('api/v2/organizations/*/organization-units?pageSize=*', { body: [responsibleUnitToSelect] });
+    const existingUnit = {
+      parentOrganizationUnit: null,
+      ean: null,
+      unitId: null,
+      origin: 'Kitos',
+      uuid: '0c2c1b3b-0b1b-4b3b-8b3b-0b1b3b0b1aaa',
+      name: 'En enhed',
+    };
+    cy.intercept('api/v2/organizations/*/organization-units?pageSize=*', {
+      body: [responsibleUnitToSelect, existingUnit],
+    });
     cy.contains('Dpa 1').click();
-
-    cy.getByDataCy('responsible-unit-select').click();
 
     cy.intercept('PATCH', 'api/v2/data-processing-registrations/*', (req) => {
       expect(req.body.general.responsibleOrganizationUnitUuid).to.be.equal(responsibleUnitToSelect.uuid);
       req.reply({ body: { general: { responsibleOrganizationUnit: responsibleUnitToSelect } } });
     }).as('patchResponsibleUnit');
 
+    cy.getByDataCy('responsible-unit-select').click();
     cy.contains(responsibleUnitToSelect.name).click();
+
+    cy.contains(responsibleUnitToSelect.name).should('exist');
+
+    cy.get('app-popup-message').should('exist');
+
+    cy.intercept('PATCH', 'api/v2/data-processing-registrations/*', (req) => {
+      cy.setup(true, 'data-processing');
+      expect(req.body.general.responsibleOrganizationUnitUuid).to.be.equal(null);
+      req.reply({ body: { general: { responsibleOrganizationUnit: null } } });
+    }).as('patchResponsibleUnit');
 
     cy.contains(responsibleUnitToSelect.name).should('exist');
 
