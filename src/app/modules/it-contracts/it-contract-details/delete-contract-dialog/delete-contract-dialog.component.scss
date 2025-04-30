@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 .text-container {
-  margin-bottom: $padding-small-medium;
+  margin-bottom: theme.$padding-small-medium;
 }

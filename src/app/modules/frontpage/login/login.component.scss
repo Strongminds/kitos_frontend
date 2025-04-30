@@ -1,7 +1,7 @@
-@import "mixins";
+@use "mixins";
 
 .center-item {
-  @include center-items-container;
+  @include mixins.center-items-container;
 }
 
 .title {

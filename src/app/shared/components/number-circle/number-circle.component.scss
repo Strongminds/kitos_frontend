@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 .circle {
   width: 25px;
@@ -10,9 +10,9 @@
 }
 
 .color-primary {
-  background-color: $color-primary-base;
+  background-color: theme.$color-primary-base;
 }
 
 .color-light-grey {
-  background-color: $color-neutral-20;
+  background-color: theme.$color-neutral-20;
 }

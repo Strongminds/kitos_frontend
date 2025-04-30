@@ -1,13 +1,13 @@
-@import 'theme';
+@use 'theme';
 
 .container {
-  border: solid $color-primary-60 1px !important;
-  border-radius: $radius-large !important;
+  border: solid theme.$color-primary-60 1px !important;
+  border-radius: theme.$radius-large !important;
   overflow: auto;
-  padding-top: $padding-medium;
+  padding-top: theme.$padding-medium;
 }
 
 td {
-  color : $color-neutral-dark;
+  color : theme.$color-neutral-dark;
   word-wrap: break-word;
 }
