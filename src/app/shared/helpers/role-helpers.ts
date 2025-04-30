@@ -1,10 +1,10 @@
+import { APIRoleAssignmentRequestDTO, APIRoleAssignmentResponseDTO } from 'src/app/api/v2';
 import { IRoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { OrganizationRight } from '../models/organization-right.model';
 
 export function compareByRoleName(a: IRoleAssignment, b: IRoleAssignment): number {
   return a.assignment.role.name.localeCompare(b.assignment.role.name);
 }
-
 
 export function hasRoleInOrganization(
   organizationRights: OrganizationRight[] | undefined,
@@ -20,4 +20,15 @@ export function hasRoleInOrganization(
       .map((right) => right.role)
       .includes(roleEnumValue) ?? false
   );
+}
+
+function roleAssignmentToRequest(roleAssignment: APIRoleAssignmentResponseDTO): APIRoleAssignmentRequestDTO {
+  return {
+    roleUuid: roleAssignment.role.uuid,
+    userUuid: roleAssignment.user.uuid,
+  };
+}
+
+export function getRoleAssignmentsRequests(roles?: APIRoleAssignmentResponseDTO[]): APIRoleAssignmentRequestDTO[] {
+  return roles?.map(roleAssignmentToRequest) ?? [];
 }
