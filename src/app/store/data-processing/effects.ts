@@ -31,6 +31,7 @@ import { DataProcessingActions } from './actions';
 import {
   selectDataProcessingExternalReferences,
   selectDataProcessingGridColumns,
+  selectDataProcessingRightUuidPairs,
   selectDataProcessingUuid,
   selectOverviewRoles,
   selectOverviewRolesCache,
@@ -372,18 +373,22 @@ export class DataProcessingEffects {
   addDataProcessingRole$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.addDataProcessingRole),
-      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuids, roleUuid }, dprUuid]) =>
-        this.apiInternalDataProcessingRegistrationService
-          .patchSingleDataProcessingRegistrationInternalV2PatchAddBulkRoleAssignment({
-            dprUuid: dprUuid,
-            request: { userUuids: userUuids, roleUuid: roleUuid },
+      concatLatestFrom(() => [
+        this.store.select(selectDataProcessingRightUuidPairs),
+        this.store.select(selectDataProcessingUuid).pipe(filterNullish()),
+      ]),
+      switchMap(([{ userUuids, roleUuid }, existingRoles, dprUuid]) => {
+        var rolesToAdd = userUuids.map((userUuid) => ({ userUuid, roleUuid }));
+        return this.dataProcessingService
+          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
+            uuid: dprUuid,
+            request: { roles: existingRoles.concat(rolesToAdd) },
           })
           .pipe(
             map((role) => DataProcessingActions.addDataProcessingRoleSuccess(role)),
             catchError(() => of(DataProcessingActions.addDataProcessingRoleError()))
-          )
-      )
+          );
+      })
     );
   });
 

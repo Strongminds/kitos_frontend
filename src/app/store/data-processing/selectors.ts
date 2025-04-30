@@ -15,11 +15,13 @@ export const selectPreviousGridState = createSelector(selectDataProcessingState,
 
 export const selectDataProcessingGridData = createSelector(selectAll, selectTotal, (data, total) => ({ data, total }));
 export const selectDataProcessingGridColumns = createSelector(selectDataProcessingState, (state) => state.gridColumns);
-export const selectDataProcessingRoleColumns = createSelector(selectDataProcessingState, (state) => state.gridRoleColumns);
+export const selectDataProcessingRoleColumns = createSelector(
+  selectDataProcessingState,
+  (state) => state.gridRoleColumns
+);
 
 export const selectOverviewRolesCache = createSelector(selectDataProcessingState, (state) => state.overviewRoles);
 export const selectOverviewRoles = createSelector(selectOverviewRolesCache, (cache) => cache.value);
-
 
 export const selectDataProcessingLoading = createSelector(selectDataProcessingState, (state) => state.loading);
 export const selectDataProcessing = createSelector(selectDataProcessingState, (state) => state.dataProcessing);
@@ -93,4 +95,17 @@ export const selectDataProcessingOversightDates = createSelector(
   (state) => state?.oversight?.oversightDates
 );
 
-export const selectDataProcessingLastSeenGridConfig = createSelector(selectDataProcessingState, (state) => state.lastSeenGridConfig);
+export const selectDataProcessingLastSeenGridConfig = createSelector(
+  selectDataProcessingState,
+  (state) => state.lastSeenGridConfig
+);
+
+export const selectDataProcessingRights = createSelector(
+  selectDataProcessing,
+  (dataProcessing) => dataProcessing?.roles
+);
+
+export const selectDataProcessingRightUuidPairs = createSelector(
+  selectDataProcessingRights,
+  (roles) => roles?.map((role) => ({ userUuid: role.user.uuid, roleUuid: role.role.uuid })) || []
+);
