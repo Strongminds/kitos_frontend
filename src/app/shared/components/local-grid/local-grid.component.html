@@ -22,7 +22,7 @@
     'expand-height-to-content': !fitSizeToContent
   }"
 >
-  <kendo-grid-rowreorder-column class="drag-handle" *ngIf="reorderable" [width]="40">
+  <kendo-grid-rowreorder-column *ngIf="reorderable" [width]="40">
     <ng-template kendoGridRowDragHintTemplate let-dataItem>
       <span>{{ dataItem.name }}</span>
     </ng-template>
