@@ -17,10 +17,10 @@ import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.m
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
 @Component({
-    selector: 'app-multi-select-dropdown',
-    templateUrl: './multi-select-dropdown.component.html',
-    styleUrl: './multi-select-dropdown.component.scss',
-    standalone: false
+  selector: 'app-multi-select-dropdown',
+  templateUrl: './multi-select-dropdown.component.html',
+  styleUrl: './multi-select-dropdown.component.scss',
+  standalone: false,
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
   @Input() public text = '';
