@@ -38,7 +38,14 @@ describe('data-processing-front-page', () => {
 
   it('Can patch and clear responsible unit', () => {
     cy.setup(true, 'data-processing');
-    const responsibleUnitToSelect = { name: 'En anden enhed', uuid: '0c2c1b3b-0b1b-4b3b-8b3b-0b1b3b0b1b3b' };
+    const responsibleUnitToSelect = {
+      parentOrganizationUnit: null,
+      ean: null,
+      unitId: null,
+      origin: 'Kitos',
+      uuid: '0c2c1b3b-0b1b-4b3b-8b3b-0b1b3b0b1b3b',
+      name: 'En anden enhed',
+    };
     cy.intercept('api/v2/organizations/*/organization-units?pageSize=*', { body: [responsibleUnitToSelect] });
     cy.contains('Dpa 1').click();
 
