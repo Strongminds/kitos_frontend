@@ -166,7 +166,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   }
 
   private searchUnitTreeForExpandedUnits(unitTree: EntityTreeNode<never>[]): string[] {
-    let expandedUuids: string[] = []; //unitTree.filter((unit) => unit.isExpanded).map((unit) => unit.uuid);
+    let expandedUuids: string[] = [];
     unitTree.forEach((unit) => {
       if (unit.isExpanded) {
         expandedUuids.push(unit.uuid);
