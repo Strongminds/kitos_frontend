@@ -32,13 +32,13 @@ import { OrganizationUserActions } from 'src/app/store/organization/organization
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 
 @Component({
-    selector: 'app-edit-user-dialog',
-    templateUrl: './edit-user-dialog.component.html',
-    styleUrl: './edit-user-dialog.component.scss',
-    providers: [CreateUserDialogComponentStore],
-    standalone: false
+  selector: 'app-edit-user-dialog',
+  templateUrl: './edit-user-dialog.component.html',
+  styleUrl: './edit-user-dialog.component.scss',
+  providers: [CreateUserDialogComponentStore],
+  standalone: false,
 })
-export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit, AfterViewInit {
+export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   @Input() public user!: ODataOrganizationUser;
   @Input() public isNested!: boolean;
   @ViewChild(MultiSelectDropdownComponent)
@@ -54,7 +54,6 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     ]),
     phoneNumber: new FormControl<string | undefined>(undefined, phoneNumberLengthValidator()),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
-    roles: new FormControl<UserRoleChoice[] | undefined>(undefined),
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
     hasStakeholderAccess: new FormControl<boolean | undefined>(undefined),
@@ -105,14 +104,15 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
         }
       })
     );
+    const initialValues = this.getUserRoleChoices();
+    this.selectedRoles = initialValues.map((role) => role.value);
   }
 
-  public ngAfterViewInit(): void {
+  public getUserRoleChoices(): UserRoleChoice[] {
     const initialValues = this.getSelectableRolesThatUserHas()
       .map((role) => mapUserRoleChoice(role))
       .filter((role) => role !== undefined);
-    this.multiSelectDropdown.setValues(initialValues);
-    this.selectedRoles = initialValues.map((role) => role.value);
+    return initialValues;
   }
 
   public onSave(): void {
