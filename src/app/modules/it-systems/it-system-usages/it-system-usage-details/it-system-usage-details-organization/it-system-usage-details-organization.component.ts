@@ -22,10 +22,10 @@ import { OrganizationUnitActions } from 'src/app/store/organization/organization
 import { selectOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
 
 @Component({
-    selector: 'app-it-system-usage-details-organization',
-    templateUrl: './it-system-usage-details-organization.component.html',
-    styleUrls: ['./it-system-usage-details-organization.component.scss'],
-    standalone: false
+  selector: 'app-it-system-usage-details-organization',
+  templateUrl: './it-system-usage-details-organization.component.html',
+  styleUrls: ['./it-system-usage-details-organization.component.scss'],
+  standalone: false,
 })
 export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent implements OnInit {
   public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);
@@ -38,6 +38,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
       return units.map((x) => x.uuid);
     })
   );
+  private expandedUnitUuids: string[] | undefined = undefined;
 
   public readonly hasModifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
   public readonly isPatching$ = this.store.select(selectItSystemUsageIsPatching);
@@ -45,7 +46,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.usedUnitUuids$),
-    map(([units, selectedUuids]) => mapUnitsWithSelectedUnitsToTree(units, selectedUuids))
+    map(([units, selectedUuids]) => mapUnitsWithSelectedUnitsToTree(units, selectedUuids, this.expandedUnitUuids))
   );
 
   public readonly rootUnitUuid$ = this.unitTree$.pipe(
@@ -87,10 +88,32 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
         this.relevantUnitsForm.disable();
       })
     );
+
+    this.subscriptions.add(
+      this.unitTree$
+        .pipe(
+          filter((unitTree) => unitTree.length > 0),
+          first()
+        )
+        .subscribe((unitTree) => {
+          this.expandedUnitUuids = this.searchUnitTreeForExpandedUnits(unitTree);
+        })
+    );
   }
 
   public nodeExpandClick(node: EntityTreeNode<APIIdentityNamePairResponseDTO>): void {
     node.isExpanded = !node.isExpanded;
+
+    const nodeUuid = node.uuid;
+    if (node.isExpanded) {
+      // Add the unitUuid if it's not already in the array
+      if (!this.expandedUnitUuids?.includes(nodeUuid)) {
+        this.expandedUnitUuids?.push(nodeUuid);
+      }
+    } else {
+      // Remove the unitUuid if it exists in the array
+      this.expandedUnitUuids = this.expandedUnitUuids?.filter((uuid) => uuid !== nodeUuid);
+    }
   }
 
   public patchResponsibleUnit(uuid?: string) {
@@ -142,5 +165,20 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
 
   private deleteUsedByUnit(unit: APIIdentityNamePairResponseDTO) {
     this.store.dispatch(ITSystemUsageActions.removeITSystemUsageUsingUnit(unit.uuid, this.includeParents));
+  }
+
+  private searchUnitTreeForExpandedUnits(unitTree: EntityTreeNode<never>[]): string[] {
+    let expandedUuids: string[] = [];
+    unitTree.forEach((unit) => {
+      if (unit.isExpanded) {
+        expandedUuids.push(unit.uuid);
+      }
+
+      if (unit.children.length > 0) {
+        expandedUuids = expandedUuids.concat(this.searchUnitTreeForExpandedUnits(unit.children));
+      }
+    });
+
+    return expandedUuids;
   }
 }
