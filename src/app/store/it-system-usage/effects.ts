@@ -34,6 +34,8 @@ import {
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
+  selectItSystemUsageRights,
+  selectItSystemUsageRightUuidPairs,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
   selectOverviewSystemRoles,
@@ -269,21 +271,27 @@ export class ITSystemUsageEffects {
     );
   });
 
-  addItSystemUsageRole$ = createEffect(() => {
+  bulkAddItSystemUsageRoles$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.addItSystemUsageRole),
-      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuids, roleUuid }, usageUuid]) =>
-        this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchAddBulkRoleAssignment({
-            systemUsageUuid: usageUuid,
-            request: { userUuids: userUuids, roleUuid: roleUuid },
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageRightUuidPairs),
+        this.store.select(selectItSystemUsageUuid).pipe(filterNullish()),
+      ]),
+      switchMap(([{ userUuids, roleUuid }, existingRoles, systemUsageUuid]) => {
+        var rolesToAdd = userUuids.map((userUuid) => ({ userUuid, roleUuid }));
+        return this.apiV2ItSystemUsageService
+          .patchSingleItSystemUsageV2PatchSystemUsage({
+            systemUsageUuid,
+            request: {
+              roles: existingRoles.concat(rolesToAdd),
+            },
           })
           .pipe(
             map((usage) => ITSystemUsageActions.addItSystemUsageRoleSuccess(usage)),
             catchError(() => of(ITSystemUsageActions.addItSystemUsageRoleError()))
-          )
-      )
+          );
+      })
     );
   });
 
