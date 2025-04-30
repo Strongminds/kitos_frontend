@@ -10,20 +10,18 @@ import { RoleOptionTypeService } from '../../services/role-option-type.service';
 import { RoleTableComponentStore } from './role-table.component-store';
 import { BaseRoleTableComponent } from '../../base/base-role-table.component';
 import { compareByRoleName } from '../../helpers/role-helpers';
+import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
+import { EditRoleDialogComponent } from './role-row/edit-role-dialog/edit-role-dialog.component';
 
 @Component({
-    selector: 'app-role-table[entityType][hasModifyPermission]',
-    templateUrl: './role-table.component.html',
-    styleUrls: ['./role-table.component.scss'],
-    providers: [RoleTableComponentStore],
-    standalone: false
+  selector: 'app-role-table[entityType][hasModifyPermission]',
+  templateUrl: './role-table.component.html',
+  styleUrls: ['./role-table.component.scss'],
+  providers: [RoleTableComponentStore],
+  standalone: false,
 })
 export class RoleTableComponent extends BaseRoleTableComponent implements OnInit {
-  public readonly roles$ = this.componentStore.roles$.pipe(
-    map((roles) =>
-      roles.sort(compareByRoleName)
-    )
-  );
+  public readonly roles$ = this.componentStore.roles$.pipe(map((roles) => roles.sort(compareByRoleName)));
 
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
 
@@ -44,5 +42,12 @@ export class RoleTableComponent extends BaseRoleTableComponent implements OnInit
         this.openAddNewDialog(userRoles, entityUuid);
       })
     );
+  }
+
+  public onEdit(role: IRoleAssignment) {
+    console.log('Edit dialog clicked', role);
+    const dialogRef = this.dialog.open(EditRoleDialogComponent);
+    dialogRef.componentInstance.roleType = this.entityType;
+    dialogRef.componentInstance.initialValue = role;
   }
 }

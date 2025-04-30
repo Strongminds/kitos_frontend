@@ -1,1 +1,8 @@
-<p>edit-role-dialog works!</p>
+<app-dialog title="Rediger rolle" i18n-title overflow="none">
+  <app-standard-vertical-content-grid>
+    <form>
+      <app-user-dropdown></app-user-dropdown>
+      <app-option-type-dropdown [optionType]="roleType"></app-option-type-dropdown>
+    </form>
+  </app-standard-vertical-content-grid>
+</app-dialog>
