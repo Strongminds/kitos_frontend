@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   height: 100%;
@@ -14,14 +14,14 @@
 .left {
   flex-grow: 1;
   background-color: white;
-  @include center-items-container;
+  @include mixins.center-items-container;
 }
 
 .right {
   width: 40%;
   min-width: 800px;
-  background-color: $color-primary-10;
-  @include center-items-container;
+  background-color: theme.$color-primary-10;
+  @include mixins.center-items-container;
 }
 
 app-login {
@@ -44,14 +44,14 @@ app-login {
 }
 
 .authenticated-frontpage {
-  height: $content-height;
+  height: theme.$content-height;
   display: flex;
   justify-content: center;
 }
 
 .center-item {
-  @include center-items-container;
-  gap: $padding-small;
+  @include mixins.center-items-container;
+  gap: theme.$padding-small;
 }
 
 .center-text {
@@ -79,6 +79,6 @@ app-login {
   position: absolute;
   top: 16px;
   left: 16px;
-  gap: $padding-small;
-  @include center-items-container;
+  gap: theme.$padding-small;
+  @include mixins.center-items-container;
 }

@@ -1,10 +1,10 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
-@include dialog-footer-with-padding;
+@include mixins.dialog-footer-with-padding;
 
 editor {
-  padding-top: $padding-medium;
+  padding-top: theme.$padding-medium;
 }
 
 ::ng-deep .mat-dialog-content-padding {
@@ -12,5 +12,5 @@ editor {
 }
 
 .invalid-input-border {
-  @include invalid-input-border;
+  @include mixins.invalid-input-border;
 }

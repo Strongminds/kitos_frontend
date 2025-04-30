@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   display: flex;
@@ -12,17 +12,17 @@
 }
 
 .icon-container {
-  @include center-items-container;
-  background-color: $color-primary-20;
+  @include mixins.center-items-container;
+  background-color: theme.$color-primary-20;
   width: 40px;
   height: 40px;
-  border-radius: $radius-large;
-  margin-bottom: $padding-medium-large;
+  border-radius: theme.$radius-large;
+  margin-bottom: theme.$padding-medium-large;
   float: left;
 }
 
 .link-container {
-  @include center-items-container;
+  @include mixins.center-items-container;
   gap: 8px;
   float: right;
 }
