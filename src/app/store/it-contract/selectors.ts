@@ -80,3 +80,10 @@ export const selectAppliedProcurementPlansCache = createSelector(
   (state) => state.appliedProcurementPlans
 );
 export const selectAppliedProcurementPlans = createSelector(selectAppliedProcurementPlansCache, (cache) => cache.value);
+
+export const selectItContractRights = createSelector(selectContract, (contract) => contract?.roles);
+
+export const selectItContractRightUuidPairs = createSelector(
+  selectItContractRights,
+  (roles) => roles?.map((role) => ({ userUuid: role.user.uuid, roleUuid: role.role.uuid })) || []
+);
