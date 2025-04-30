@@ -2,13 +2,15 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Dictionary } from '@ngrx/entity';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
+import { EditRoleDialogComponent } from './edit-role-dialog/edit-role-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-    // eslint-disable-next-line @angular-eslint/component-selector
-    selector: '[role-row]',
-    templateUrl: './role-row.component.html',
-    styleUrl: './role-row.component.scss',
-    standalone: false
+  // eslint-disable-next-line @angular-eslint/component-selector
+  selector: '[role-row]',
+  templateUrl: './role-row.component.html',
+  styleUrl: './role-row.component.scss',
+  standalone: false,
 })
 export class RoleRowComponent {
   @Input() role!: IRoleAssignment;
@@ -18,7 +20,13 @@ export class RoleRowComponent {
 
   @Output() removeRole = new EventEmitter<IRoleAssignment>();
 
+  constructor(private readonly dialog: MatDialog) {}
+
   public onRemoveClick(): void {
     this.removeRole.emit(this.role);
+  }
+
+  public onEditClick(): void {
+    const dialogRef = this.dialog.open(EditRoleDialogComponent);
   }
 }
