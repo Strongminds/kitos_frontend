@@ -10,12 +10,6 @@
   padding-top: 0;
 }
 
-:host ::ng-deep {
-  tr {
-    cursor: default !important;
-  }
-}
-
 .fit-size-to-content {
   height: auto;
   max-height: 1000px;
