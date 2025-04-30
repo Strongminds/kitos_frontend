@@ -768,5 +768,10 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     );
   });
 
+  convertedString = convertedString.replace(
+    /LifeCycleStatus eq 'Undecided'/,
+    "(LifeCycleStatus eq 'Undecided' or LifeCycleStatus eq null)"
+  );
+
   return convertedString;
 }
