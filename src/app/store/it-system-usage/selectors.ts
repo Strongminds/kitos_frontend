@@ -137,3 +137,10 @@ export const selectItSystemUsageLastSeenGridConfig = createSelector(
 );
 
 export const selectItSystemUsageIsPatching = createSelector(selectITSystemUsageState, (state) => state.isPatching);
+
+export const selectItSystemUsageRights = createSelector(selectItSystemUsage, (state) => state?.roles);
+
+export const selectItSystemUsageRightUuidPairs = createSelector(
+  selectItSystemUsageRights,
+  (roles) => roles?.map((role) => ({ userUuid: role.user.uuid, roleUuid: role.role.uuid })) || []
+);
