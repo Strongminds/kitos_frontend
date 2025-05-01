@@ -5125,9 +5125,6 @@
       <trans-unit id="6872051229214902883" datatype="html">
         <source>Vælg handling for kontrakter</source>
       </trans-unit>
-      <trans-unit id="8402696305361715603" datatype="html">
-        <source>Transfer</source>
-      </trans-unit>
       <trans-unit id="862924224019392737" datatype="html">
         <source>Er du sikker på du vil slette denne kontrakt? Kontraktens underordnede kontrakter vil blive slettet sammen med den. De underordnede kontrakter kan også overføres til en anden kontrakt. </source>
       </trans-unit>
@@ -5301,6 +5298,9 @@
         <source>Please confirm</source>
         <note priority="1" from="description">The title of the built-in remove item confirmation Dialog</note>
         <note priority="1" from="meaning">kendo.grid.removeConfirmationDialogTitle</note>
+      </trans-unit>
+      <trans-unit id="2933189791607650811" datatype="html">
+        <source>Rediger rolle</source>
       </trans-unit>
     </body>
   </file>

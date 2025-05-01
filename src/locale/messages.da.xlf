@@ -6713,10 +6713,6 @@
         <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
         <target state="new">Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</target>
       </trans-unit>
-      <trans-unit id="8402696305361715603" datatype="html">
-        <source>Transfer</source>
-        <target state="new">Transfer</target>
-      </trans-unit>
       <trans-unit id="4451069668768368167" datatype="html">
         <source>Underordnet kontrakter</source>
         <target state="new">Underordnet kontrakter</target>
@@ -6972,6 +6968,10 @@
         <target state="new">Scroll right</target>
         <note priority="1" from="description">The title for the **Next Tool** button when the Toolbar is scrollable.</note>
         <note priority="1" from="meaning">kendo.toolbar.nextToolButton</note>
+      </trans-unit>
+      <trans-unit id="2933189791607650811" datatype="html">
+        <source>Rediger rolle</source>
+        <target state="new">Rediger rolle</target>
       </trans-unit>
     </body>
   </file>
