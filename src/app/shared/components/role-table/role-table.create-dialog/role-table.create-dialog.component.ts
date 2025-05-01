@@ -156,10 +156,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRoleSuccess,
-            ITContractActions.addItContractRoleSuccess,
-            DataProcessingActions.addDataProcessingRoleSuccess,
-            OrganizationUnitActions.addOrganizationUnitRoleSuccess
+            ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
+            ITContractActions.bulkAddItContractRoleSuccess,
+            DataProcessingActions.bulkAddDataProcessingRoleSuccess,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess
           )
         )
         .subscribe(() => {
@@ -171,10 +171,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRoleError,
-            ITContractActions.addItContractRoleError,
-            DataProcessingActions.addDataProcessingRoleError,
-            OrganizationUnitActions.addOrganizationUnitRoleError
+            ITSystemUsageActions.bulkAddItSystemUsageRoleError,
+            ITContractActions.bulkAddItContractRoleError,
+            DataProcessingActions.bulkAddDataProcessingRoleError,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleError
           )
         )
         .subscribe(() => {

@@ -434,7 +434,7 @@ export class ITContractEffects {
 
   addItContractRole$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITContractActions.addItContractRole),
+      ofType(ITContractActions.bulkAddItContractRole),
       concatLatestFrom(() => this.store.select(selectItContractUuid).pipe(filterNullish())),
       mergeMap(([{ userUuids, roleUuid }, contractUuid]) =>
         this.apiInternalItContractService
@@ -443,8 +443,8 @@ export class ITContractEffects {
             request: { userUuids: userUuids, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => ITContractActions.addItContractRoleSuccess(usage)),
-            catchError(() => of(ITContractActions.addItContractRoleError()))
+            map((usage) => ITContractActions.bulkAddItContractRoleSuccess(usage)),
+            catchError(() => of(ITContractActions.bulkAddItContractRoleError()))
           )
       )
     );

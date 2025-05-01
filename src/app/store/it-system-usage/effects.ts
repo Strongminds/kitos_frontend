@@ -271,7 +271,7 @@ export class ITSystemUsageEffects {
 
   addItSystemUsageRole$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.addItSystemUsageRole),
+      ofType(ITSystemUsageActions.bulkAddItSystemUsageRole),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ userUuids, roleUuid }, usageUuid]) =>
         this.apiV2ItSystemUsageService
@@ -280,8 +280,8 @@ export class ITSystemUsageEffects {
             request: { userUuids: userUuids, roleUuid: roleUuid },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.addItSystemUsageRoleSuccess(usage)),
-            catchError(() => of(ITSystemUsageActions.addItSystemUsageRoleError()))
+            map((usage) => ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess(usage)),
+            catchError(() => of(ITSystemUsageActions.bulkAddItSystemUsageRoleError()))
           )
       )
     );

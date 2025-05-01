@@ -170,7 +170,7 @@ export class OrganizationUnitEffects {
 
   addOrganizationUnitRoleAssignment$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationUnitActions.addOrganizationUnitRole),
+      ofType(OrganizationUnitActions.bulkAddOrganizationUnitRole),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       concatLatestFrom(() => this.store.select(selectCurrentUnitUuid).pipe(filterNullish())),
       switchMap(([[{ userUuids, roleUuid }, organizationUuid], organizationUnitUuid]) =>
@@ -184,8 +184,8 @@ export class OrganizationUnitEffects {
             },
           })
           .pipe(
-            map(() => OrganizationUnitActions.addOrganizationUnitRoleSuccess()),
-            catchError(() => of(OrganizationUnitActions.addOrganizationUnitRoleError()))
+            map(() => OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess()),
+            catchError(() => of(OrganizationUnitActions.bulkAddOrganizationUnitRoleError()))
           )
       )
     );

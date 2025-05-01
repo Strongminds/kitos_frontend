@@ -63,10 +63,10 @@ export class RoleOptionTypeService implements OnDestroy {
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRoleSuccess,
-            ITContractActions.addItContractRoleSuccess,
-            DataProcessingActions.addDataProcessingRoleSuccess,
-            OrganizationUnitActions.addOrganizationUnitRoleSuccess
+            ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
+            ITContractActions.bulkAddItContractRoleSuccess,
+            DataProcessingActions.bulkAddDataProcessingRoleSuccess,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess
           )
         )
         .subscribe(() => this.dispatchAddSuccess())
@@ -169,16 +169,16 @@ export class RoleOptionTypeService implements OnDestroy {
   public dispatchAddEntityRoleAction(userUuids: string[], roleUuid: string, entityType: RoleOptionTypes) {
     switch (entityType) {
       case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.addItSystemUsageRole(userUuids, roleUuid));
+        this.store.dispatch(ITSystemUsageActions.bulkAddItSystemUsageRole(userUuids, roleUuid));
         break;
       case 'it-contract':
-        this.store.dispatch(ITContractActions.addItContractRole(userUuids, roleUuid));
+        this.store.dispatch(ITContractActions.bulkAddItContractRole(userUuids, roleUuid));
         break;
       case 'data-processing':
-        this.store.dispatch(DataProcessingActions.addDataProcessingRole(userUuids, roleUuid));
+        this.store.dispatch(DataProcessingActions.bulkAddDataProcessingRole(userUuids, roleUuid));
         break;
       case 'organization-unit':
-        this.store.dispatch(OrganizationUnitActions.addOrganizationUnitRole(userUuids, roleUuid));
+        this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid));
         break;
     }
   }
