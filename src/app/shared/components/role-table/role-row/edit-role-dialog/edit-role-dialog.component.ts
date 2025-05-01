@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { BehaviorSubject, first, map, Observable } from 'rxjs';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
-import { debugPipe, mapArray } from 'src/app/shared/helpers/observable-helpers';
 import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { ShallowUser } from 'src/app/shared/models/userV2.model';
@@ -52,11 +51,11 @@ export class EditRoleDialogComponent implements OnInit {
     const role = formControls.role.value;
     if (!user || !role) throw new Error('User or role is undefined');
 
-    this.roleOptionService.dispatchRemoveEntityRoleAction(this.initialValue, this.roleType);
-
     this.actions$.pipe(ofType(this.deleteSuccessAction()), first()).subscribe(() => {
       this.roleOptionService.dispatchAddEntityRoleAction([user.uuid], role.uuid, this.roleType);
     });
+
+    this.roleOptionService.dispatchRemoveEntityRoleAction(this.initialValue, this.roleType);
 
     this.closeDialog();
   }
@@ -67,16 +66,11 @@ export class EditRoleDialogComponent implements OnInit {
 
   public roleAssignmentExists$(): Observable<boolean> {
     return this.componentStore.roles$.pipe(
-      mapArray((role) => ({
-        userUuid: role.assignment.user.uuid,
-        roleUuid: role.assignment.role.uuid,
-      })),
-      debugPipe('entityRoleAndUuidPairs$'),
-      map((roleAssignmentPairs) =>
-        roleAssignmentPairs.some(
-          (pair) =>
-            pair.userUuid === this.formGroup.controls.user.value?.uuid &&
-            pair.roleUuid === this.formGroup.controls.role.value?.uuid
+      map((roleAssignments) =>
+        roleAssignments.some(
+          (role) =>
+            role.assignment.user.uuid === this.formGroup.controls.user.value?.uuid &&
+            role.assignment.role.uuid === this.formGroup.controls.role.value?.uuid
         )
       )
     );
