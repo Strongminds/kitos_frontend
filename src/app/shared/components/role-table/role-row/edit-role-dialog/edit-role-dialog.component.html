@@ -1,12 +1,13 @@
 <app-dialog title="Rediger rolle" i18n-title overflow="none">
   <form (ngSubmit)="onSave()" [formGroup]="formGroup">
     <app-standard-vertical-content-grid>
-      <app-user-dropdown [formGroup]="formGroup" formName="user"></app-user-dropdown>
+      <app-user-dropdown [formGroup]="formGroup" formName="user" data-cy="user-dropdown"></app-user-dropdown>
       <app-option-type-dropdown
         [optionType]="roleType"
         [showDescription]="true"
         [formGroup]="formGroup"
         formName="role"
+        data-cy="role-dropdown"
       ></app-option-type-dropdown>
     </app-standard-vertical-content-grid>
     <app-paragraph *ngIf="roleAssignmentExists$() | async" color="error" i18n
@@ -14,7 +15,7 @@
     >
     <app-dialog-actions>
       <app-button buttonStyle="secondary" (buttonClick)="closeDialog()" i18n> Annuller</app-button>
-      <app-button type="submit" [disabled]="(canSave$() | async) !== true" i18n> Gem </app-button>
+      <app-button type="submit" [disabled]="(canSave$() | async) !== true" data-cy="save-button" i18n> Gem </app-button>
     </app-dialog-actions>
   </form>
 </app-dialog>

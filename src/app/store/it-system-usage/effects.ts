@@ -34,7 +34,6 @@ import {
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
-  selectItSystemUsageRights,
   selectItSystemUsageRightUuidPairs,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,

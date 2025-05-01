@@ -103,11 +103,48 @@ describe('it-system-usage', () => {
   it.only('Can edit system role', () => {
     cy.contains('System 3').click();
 
+    const exisitingRole = {
+      user: {
+        email: 'local-global-admin-user@kitos.dk',
+        uuid: '8dd56b52-3f35-4f13-8d19-0d06b704ba02',
+        name: 'Automatisk oprettet testbruger (GlobalAdmin)',
+      },
+      role: { uuid: '345869e5-9ee3-4568-a10a-7d4ab018d02e', name: 'Changemanager' },
+    };
     setupRoleIntercepts();
+
+    cy.intercept('/api/v2/**/roles', { body: [exisitingRole] });
 
     cy.navigateToDetailsSubPage('Systemroller');
 
-    cy.contains('Changemanager');
+    cy.intercept('/api/v2/**/users*', { fixture: './shared/users.json' });
+
+    cy.getByDataCy('edit-role-button').first().click();
+
+    cy.getByDataCy('save-button').find('button').should('be.disabled');
+    cy.dropdownByCy('user-dropdown', 'Automatisk oprettet testbruger (LocalAdmin)', true);
+    cy.getByDataCy('save-button').find('button').should('be.enabled');
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*/roles/remove', {
+      fixture: './it-system-usage/it-system-usage.json',
+    }).as('deleteRoleRequest');
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
+      'updateRoleRequest'
+    );
+
+    cy.getByDataCy('save-button').click();
+
+    cy.wait('@deleteRoleRequest').then(({ request }) => {
+      expect(request.body).to.deep.equal({
+        roleUuid: exisitingRole.role.uuid,
+        userUuid: exisitingRole.user.uuid,
+      });
+    });
+
+    cy.wait('@updateRoleRequest');
+
+    cy.get('app-popup-message').should('exist');
   });
 });
 
