@@ -1,8 +1,17 @@
 <app-dialog title="Rediger rolle" i18n-title overflow="none">
-  <app-standard-vertical-content-grid>
-    <form>
-      <app-user-dropdown></app-user-dropdown>
-      <app-option-type-dropdown [optionType]="roleType"></app-option-type-dropdown>
-    </form>
-  </app-standard-vertical-content-grid>
+  <form (ngSubmit)="onSave()" [formGroup]="formGroup">
+    <app-standard-vertical-content-grid>
+      <app-user-dropdown [formGroup]="formGroup" formName="user"></app-user-dropdown>
+      <app-option-type-dropdown
+        [optionType]="roleType"
+        [showDescription]="true"
+        [formGroup]="formGroup"
+        formName="role"
+      ></app-option-type-dropdown>
+    </app-standard-vertical-content-grid>
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" data-cy="cancel-button" i18n> Annuller</app-button>
+      <app-button type="submit" [disabled]="!formGroup.valid" data-cy="save-button" i18n> Gem </app-button>
+    </app-dialog-actions>
+  </form>
 </app-dialog>
