@@ -1,4 +1,4 @@
-import { Component, Injector, Input, OnInit, ViewContainerRef } from '@angular/core';
+import { Component, Injector, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
