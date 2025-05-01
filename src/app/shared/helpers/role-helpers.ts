@@ -29,6 +29,6 @@ function roleAssignmentToRequest(roleAssignment: APIRoleAssignmentResponseDTO): 
   };
 }
 
-export function getRoleAssignmentsRequests(roles?: APIRoleAssignmentResponseDTO[]): APIRoleAssignmentRequestDTO[] {
+export function mapToRoleAssignmentsRequests(roles?: APIRoleAssignmentResponseDTO[]): APIRoleAssignmentRequestDTO[] {
   return roles?.map(roleAssignmentToRequest) ?? [];
 }

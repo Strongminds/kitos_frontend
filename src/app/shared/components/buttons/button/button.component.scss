@@ -85,9 +85,6 @@ button.mat-mdc-button-base {
 }
 
 .center-icon {
-  ::ng-deep svg {
-    display: block;
-  }
   display: flex;
   justify-content: center;
   align-items: center;

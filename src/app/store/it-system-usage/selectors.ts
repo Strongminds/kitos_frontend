@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
-import { getRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
+import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { mapDataSensitivityLevel } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
@@ -141,4 +141,7 @@ export const selectItSystemUsageIsPatching = createSelector(selectITSystemUsageS
 
 export const selectItSystemUsageRights = createSelector(selectItSystemUsage, (state) => state?.roles);
 
-export const selectItSystemUsageRightUuidPairs = createSelector(selectItSystemUsageRights, getRoleAssignmentsRequests);
+export const selectItSystemUsageRightUuidPairs = createSelector(
+  selectItSystemUsageRights,
+  mapToRoleAssignmentsRequests
+);

@@ -36,7 +36,7 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     private readonly store: Store,
     private readonly componentStore: ItContractHierarchyComponentStore,
     private readonly dialog: MatDialog,
-    private openerService: DialogOpenerService,
+    private readonly openerService: DialogOpenerService,
     private readonly actions$: Actions,
     private readonly confirmationService: ConfirmActionService
   ) {

@@ -94,10 +94,6 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     return `${user.FirstName} ${user.LastName}`;
   }
 
-  public shouldShowContent(user: ODataOrganizationUser): boolean {
-    return this.hasRoles(user) && !this.isLoading;
-  }
-
   public openTransferDialog(user: ODataOrganizationUser): void {
     const dialogRef = this.openerService.openUserRoleSelectionDialog(user);
 
