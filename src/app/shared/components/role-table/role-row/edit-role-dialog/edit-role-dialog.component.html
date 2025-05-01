@@ -11,7 +11,7 @@
     </app-standard-vertical-content-grid>
     <app-dialog-actions>
       <app-button buttonStyle="secondary" (buttonClick)="closeDialog()" i18n> Annuller</app-button>
-      <app-button type="submit" [disabled]="!formGroup.valid" i18n> Gem </app-button>
+      <app-button type="submit" [disabled]="!canSave()" i18n> Gem </app-button>
     </app-dialog-actions>
   </form>
 </app-dialog>
