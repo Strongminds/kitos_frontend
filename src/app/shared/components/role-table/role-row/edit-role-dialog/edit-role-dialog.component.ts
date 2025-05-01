@@ -51,4 +51,11 @@ export class EditRoleDialogComponent implements OnInit {
   public closeDialog(): void {
     this.dialogRef.close();
   }
+
+  public canSave(): boolean {
+    var hasChanges =
+      this.initialValue.assignment.role.uuid !== this.formGroup.controls.role.value?.uuid ||
+      this.initialValue.assignment.user.uuid !== this.formGroup.controls.user.value?.uuid;
+    return hasChanges && this.formGroup.valid;
+  }
 }
