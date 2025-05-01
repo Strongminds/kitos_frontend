@@ -17,10 +17,11 @@ import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { filterNullish } from '../pipes/filter-nullish';
 import { ConfirmActionCategory, ConfirmActionService } from '../services/confirm-action.service';
 import { RoleOptionTypeService } from '../services/role-option-type.service';
+import { EditRoleDialogComponent } from '../components/role-table/role-row/edit-role-dialog/edit-role-dialog.component';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export abstract class BaseRoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RoleOptionTypes;
@@ -88,6 +89,13 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
       message: $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.assignment.role.name}" til brugeren "${role.assignment.user.name}"?`,
       onConfirm: () => this.roleOptionTypeService.dispatchRemoveEntityRoleAction(role, this.entityType),
     });
+  }
+
+  public onEdit(role: IRoleAssignment) {
+    console.log('Edit dialog clicked', role);
+    const dialogRef = this.dialog.open(EditRoleDialogComponent);
+    dialogRef.componentInstance.roleType = this.entityType;
+    dialogRef.componentInstance.initialValue = role;
   }
 
   protected getRoles() {

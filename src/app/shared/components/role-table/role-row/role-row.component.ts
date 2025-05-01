@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Dictionary } from '@ngrx/entity';
+import { first } from 'rxjs';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 
@@ -23,7 +24,6 @@ export class RoleRowComponent {
   }
 
   public onEditClick(): void {
-    console.log('Edit role clicked', this.role);
     this.editRole.emit(this.role);
   }
 }
