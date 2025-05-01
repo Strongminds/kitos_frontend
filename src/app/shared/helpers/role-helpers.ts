@@ -1,4 +1,5 @@
 import { RoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { APIRoleAssignmentRequestDTO, APIRoleAssignmentResponseDTO } from 'src/app/api/v2';
 import { OrganizationRight } from '../models/organization-right.model';
 
 export function compareByRoleName(a: RoleAssignment, b: RoleAssignment): number {
@@ -19,4 +20,15 @@ export function hasRoleInOrganization(
       .map((right) => right.role)
       .includes(roleEnumValue) ?? false
   );
+}
+
+function roleAssignmentToRequest(roleAssignment: APIRoleAssignmentResponseDTO): APIRoleAssignmentRequestDTO {
+  return {
+    roleUuid: roleAssignment.role.uuid,
+    userUuid: roleAssignment.user.uuid,
+  };
+}
+
+export function mapToRoleAssignmentsRequests(roles?: APIRoleAssignmentResponseDTO[]): APIRoleAssignmentRequestDTO[] {
+  return roles?.map(roleAssignmentToRequest) ?? [];
 }

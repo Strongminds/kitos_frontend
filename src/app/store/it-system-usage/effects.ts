@@ -34,6 +34,8 @@ import {
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
+  selectItSystemUsageRights,
+  selectItSystemUsageRightUuidPairs,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
   selectOverviewSystemRoles,
@@ -269,21 +271,27 @@ export class ITSystemUsageEffects {
     );
   });
 
-  addItSystemUsageRole$ = createEffect(() => {
+  bulkAddItSystemUsageRoles$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.bulkAddItSystemUsageRole),
-      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuids, roleUuid }, usageUuid]) =>
-        this.apiV2ItSystemUsageService
-          .patchSingleItSystemUsageV2PatchAddBulkRoleAssignment({
-            systemUsageUuid: usageUuid,
-            request: { userUuids: userUuids, roleUuid: roleUuid },
+      ofType(ITSystemUsageActions.buklAddItSystemUsageRole),
+      concatLatestFrom(() => [
+        this.store.select(selectItSystemUsageRightUuidPairs),
+        this.store.select(selectItSystemUsageUuid).pipe(filterNullish()),
+      ]),
+      switchMap(([{ userUuids, roleUuid }, existingRoles, systemUsageUuid]) => {
+        var rolesToAdd = userUuids.map((userUuid) => ({ userUuid, roleUuid }));
+        return this.apiV2ItSystemUsageService
+          .patchSingleItSystemUsageV2PatchSystemUsage({
+            systemUsageUuid,
+            request: {
+              roles: existingRoles.concat(rolesToAdd),
+            },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess(usage)),
-            catchError(() => of(ITSystemUsageActions.bulkAddItSystemUsageRoleError()))
-          )
-      )
+            map((usage) => ITSystemUsageActions.buklAddItSystemUsageRoleSuccess(usage)),
+            catchError(() => of(ITSystemUsageActions.buklAddItSystemUsageRoleError()))
+          );
+      })
     );
   });
 
