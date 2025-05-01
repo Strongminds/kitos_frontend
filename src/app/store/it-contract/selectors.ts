@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { itContactAdapter, itContractFeature } from './reducer';
 import { getRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
+import { itContactAdapter, itContractFeature } from './reducer';
 
 const { selectITContractState } = itContractFeature;
 

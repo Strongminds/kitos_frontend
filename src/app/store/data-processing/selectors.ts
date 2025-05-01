@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { dataProcessingAdapter, dataProcessingFeature } from './reducer';
 import { getRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
+import { dataProcessingAdapter, dataProcessingFeature } from './reducer';
 
 const { selectDataProcessingState } = dataProcessingFeature;
 
