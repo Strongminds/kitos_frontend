@@ -7,14 +7,14 @@ import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants/constants';
-import { IRoleAssignment } from '../../models/helpers/read-model-role-assignments';
+import { RoleAssignment } from '../../models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from '../../models/options/role-option-types.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { RoleOptionTypeService } from '../../services/role-option-type.service';
 
 interface State {
   rolesLoading: boolean;
-  roles?: Array<IRoleAssignment>;
+  roles?: Array<RoleAssignment>;
   usersLoading: boolean;
   users?: Array<APIOrganizationUserResponseDTO>;
 }
@@ -44,7 +44,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
   }
 
   private updateRoles = this.updater(
-    (state, roles: Array<IRoleAssignment>): State => ({
+    (state, roles: Array<RoleAssignment>): State => ({
       ...state,
       roles,
     })

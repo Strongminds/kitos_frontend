@@ -3,7 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
-import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
+import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { ShallowUser } from 'src/app/shared/models/userV2.model';
 
@@ -15,7 +15,7 @@ import { ShallowUser } from 'src/app/shared/models/userV2.model';
 })
 export class EditRoleDialogComponent implements OnInit {
   @Input() public roleType!: RoleOptionTypes;
-  @Input() public initialValue!: IRoleAssignment;
+  @Input() public initialValue!: RoleAssignment;
 
   public readonly formGroup = new FormGroup({
     role: new FormControl<APIRegularOptionResponseDTO | undefined>(undefined, Validators.required),

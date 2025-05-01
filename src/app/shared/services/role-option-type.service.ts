@@ -23,7 +23,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
-import { IRoleAssignment, mapDTOsToRoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { mapDTOsToRoleAssignment, RoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { filterNullish } from '../pipes/filter-nullish';
 
@@ -159,7 +159,7 @@ export class RoleOptionTypeService implements OnDestroy {
     entityUuid: string,
     entityType: RoleOptionTypes,
     organizationUuid: string
-  ): Observable<Array<IRoleAssignment>> {
+  ): Observable<Array<RoleAssignment>> {
     return this.resolveGetEntityRolesEndpoints(
       entityType,
       organizationUuid
@@ -183,7 +183,7 @@ export class RoleOptionTypeService implements OnDestroy {
     }
   }
 
-  public dispatchRemoveEntityRoleAction(role: IRoleAssignment, entityType: RoleOptionTypes) {
+  public dispatchRemoveEntityRoleAction(role: RoleAssignment, entityType: RoleOptionTypes) {
     const userUuid = role.assignment.user.uuid;
     const roleUuid = role.assignment.role.uuid;
     switch (entityType) {
