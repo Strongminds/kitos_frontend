@@ -52,9 +52,9 @@ import {
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
-    templateUrl: 'it-system-usages.component.html',
-    styleUrls: ['it-system-usages.component.scss'],
-    standalone: false
+  templateUrl: 'it-system-usages.component.html',
+  styleUrls: ['it-system-usages.component.scss'],
+  standalone: false,
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);
@@ -635,11 +635,19 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const existingColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, defaultColumnsAndRoles);
-          const columns = existingColumns ?? defaultColumnsAndRoles;
-          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columns));
+          const localStorageColumns = this.gridColumnStorageService.getColumns(
+            USAGE_COLUMNS_ID,
+            defaultColumnsAndRoles
+          );
+          const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
+
+          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToUse));
+          if (!localStorageColumns) {
+            this.store.dispatch(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration());
+          }
         })
     );
+    
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
