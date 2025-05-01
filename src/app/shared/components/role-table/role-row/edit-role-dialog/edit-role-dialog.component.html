@@ -10,8 +10,8 @@
       ></app-option-type-dropdown>
     </app-standard-vertical-content-grid>
     <app-dialog-actions>
-      <app-button buttonStyle="secondary" data-cy="cancel-button" i18n> Annuller</app-button>
-      <app-button type="submit" [disabled]="!formGroup.valid" data-cy="save-button" i18n> Gem </app-button>
+      <app-button buttonStyle="secondary" (buttonClick)="closeDialog()" i18n> Annuller</app-button>
+      <app-button type="submit" [disabled]="!formGroup.valid" i18n> Gem </app-button>
     </app-dialog-actions>
   </form>
 </app-dialog>

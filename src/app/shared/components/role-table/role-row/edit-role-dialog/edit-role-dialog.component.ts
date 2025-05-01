@@ -45,6 +45,10 @@ export class EditRoleDialogComponent implements OnInit {
     this.roleOptionService.dispatchRemoveEntityRoleAction(this.initialValue, this.roleType);
     this.roleOptionService.dispatchAddEntityRoleAction([user.uuid], role.uuid, this.roleType);
 
+    this.closeDialog();
+  }
+
+  public closeDialog(): void {
     this.dialogRef.close();
   }
 }
