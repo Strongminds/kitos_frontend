@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { GridColumn } from '../models/grid-column.model';
-import { StatePersistingService } from './state-persisting.service';
+import { LocalStorageService } from './state-persisting.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GridColumnStorageService {
-  constructor(private localStorage: StatePersistingService) {}
+  constructor(private localStorage: LocalStorageService) {}
 
   public setColumns(key: string, columns: GridColumn[]): void {
     const hash = this.computeHash(columns);

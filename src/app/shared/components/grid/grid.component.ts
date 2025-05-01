@@ -50,7 +50,7 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { GridExportService } from '../../services/grid-export.service';
-import { StatePersistingService } from '../../services/state-persisting.service';
+import { LocalStorageService } from '../../services/state-persisting.service';
 import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
 
 @Component({
@@ -102,7 +102,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   constructor(
     private actions$: Actions,
     private store: Store,
-    private localStorage: StatePersistingService,
+    private localStorage: LocalStorageService,
     private gridUIConfigService: GridUIConfigService,
     private readonly gridExportService: GridExportService
   ) {
