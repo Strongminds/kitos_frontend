@@ -30,8 +30,6 @@ export class EditRoleDialogComponent implements OnInit {
     user: new FormControl<ShallowUser | undefined>(undefined, Validators.required),
   });
 
-  public readonly roleType$ = new BehaviorSubject<RoleOptionTypes | undefined>(undefined);
-
   constructor(
     private readonly dialogRef: MatDialogRef<EditRoleDialogComponent>,
     private readonly roleOptionService: RoleOptionTypeService,
