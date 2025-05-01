@@ -387,8 +387,8 @@ export class DataProcessingEffects {
           .pipe(
             map((role) => DataProcessingActions.bulkAddDataProcessingRoleSuccess(role)),
             catchError(() => of(DataProcessingActions.bulkAddDataProcessingRoleError()))
-          )
-      )
+          );
+      })
     );
   });
 
