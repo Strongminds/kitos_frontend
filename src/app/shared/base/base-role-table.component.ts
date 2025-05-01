@@ -92,7 +92,6 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
   }
 
   public onEdit(role: RoleAssignment) {
-    console.log('Edit dialog clicked', role);
     const dialogRef = this.dialog.open(EditRoleDialogComponent);
     dialogRef.componentInstance.roleType = this.entityType;
     dialogRef.componentInstance.initialValue = role;
