@@ -9,11 +9,11 @@ import { Store } from '@ngrx/store';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 
 @Component({
-    selector: 'app-option-type-dropdown',
-    templateUrl: './option-type-dropdown.component.html',
-    styleUrl: './option-type-dropdown.component.scss',
-    providers: [OptionTypeDropdownComponentStore],
-    standalone: false
+  selector: 'app-option-type-dropdown',
+  templateUrl: './option-type-dropdown.component.html',
+  styleUrl: './option-type-dropdown.component.scss',
+  providers: [OptionTypeDropdownComponentStore],
+  standalone: false,
 })
 export class OptionTypeDropdownComponent extends BaseComponent implements OnInit {
   @Input() optionType!: RegularOptionType | RoleOptionTypes;
@@ -21,6 +21,7 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   @Input() formGroup?: FormGroup;
   @Input() formName?: string;
   @Input() value?: APIRegularOptionResponseDTO;
+  @Input() dropdownTitle?: string;
 
   @Output() valueChange = new EventEmitter<string | null | undefined>();
 
@@ -36,7 +37,7 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   }
 
   public getDropdownTitle(): string {
-    return getOptionTypeName(this.optionType);
+    return this.dropdownTitle ?? getOptionTypeName(this.optionType);
   }
 
   public onValueChange(item: APIRegularOptionResponseDTO | null | undefined): void {
