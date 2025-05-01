@@ -647,7 +647,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
           }
         })
     );
-    
+
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
@@ -656,9 +656,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
           ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
           concatLatestFrom(() => this.gridColumns$)
         )
-        .subscribe(([_, gridColumns]) => {
-          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
+        .subscribe(([_, gridColumnsFromState]) => {
+          const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
+          const existingColumnsAreCorrect = this.gridColumnStorageService.columnsAreEqual(
+            gridColumnsFromState,
+            columnsToShow
+          );
+          if (!existingColumnsAreCorrect) {
+            this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
+          }
         })
     );
 

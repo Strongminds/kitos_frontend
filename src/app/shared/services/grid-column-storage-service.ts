@@ -27,6 +27,13 @@ export class GridColumnStorageService {
     return this.hashMappedColumns(hashableColumns);
   }
 
+  public columnsAreEqual(columns1: GridColumn[], columns2: GridColumn[]): boolean {
+    if (columns1.length !== columns2.length) return false;
+    const hash1 = this.computeHash(columns1);
+    const hash2 = this.computeHash(columns2);
+    return hash1 === hash2;
+  }
+
   private hashMappedColumns(columns: GridColumn[]): string {
     const json = JSON.stringify(columns);
     let hash = 0;
