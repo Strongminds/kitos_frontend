@@ -6973,6 +6973,10 @@
         <source>Rediger rolle</source>
         <target state="new">Rediger rolle</target>
       </trans-unit>
+      <trans-unit id="4577772021742281224" datatype="html">
+        <source>Brugeren har allerede denne rolle.</source>
+        <target state="new">Brugeren har allerede denne rolle.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

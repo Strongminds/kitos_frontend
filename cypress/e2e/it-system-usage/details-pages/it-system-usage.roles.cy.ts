@@ -1,4 +1,4 @@
-/// <reference types="Cypress" />
+/// <reference types="cypress" />
 
 describe('it-system-usage', () => {
   beforeEach(() => {
@@ -12,10 +12,7 @@ describe('it-system-usage', () => {
 
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-system-usage-role-types*', {
-      fixture: './it-system-usage/roles/it-system-usage-available-roles.json',
-    });
-    cy.intercept('/api/v2/**/roles', { fixture: './it-system-usage/roles/it-system-usage-roles.json' });
+    setupRoleIntercepts();
 
     cy.navigateToDetailsSubPage('Systemroller');
 
@@ -84,10 +81,7 @@ describe('it-system-usage', () => {
   it('can add new System role', () => {
     cy.contains('System 3').click();
 
-    cy.intercept('/api/v2/it-system-usage-role-types*', {
-      fixture: './it-system-usage/roles/it-system-usage-available-roles.json',
-    });
-    cy.intercept('/api/v2/**/roles', { fixture: './it-system-usage/roles/it-system-usage-roles.json' });
+    setupRoleIntercepts();
 
     cy.navigateToDetailsSubPage('Systemroller');
 
@@ -105,4 +99,21 @@ describe('it-system-usage', () => {
     cy.intercept('/api/v2/it-system-usages/**/add', {});
     cy.get('app-dialog').contains('Tilføj').click();
   });
+
+  it.only('Can edit system role', () => {
+    cy.contains('System 3').click();
+
+    setupRoleIntercepts();
+
+    cy.navigateToDetailsSubPage('Systemroller');
+
+    cy.contains('Changemanager');
+  });
 });
+
+function setupRoleIntercepts() {
+  cy.intercept('/api/v2/it-system-usage-role-types*', {
+    fixture: './it-system-usage/roles/it-system-usage-available-roles.json',
+  });
+  cy.intercept('/api/v2/**/roles', { fixture: './it-system-usage/roles/it-system-usage-roles.json' });
+}

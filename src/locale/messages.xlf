@@ -5302,6 +5302,9 @@
       <trans-unit id="2933189791607650811" datatype="html">
         <source>Rediger rolle</source>
       </trans-unit>
+      <trans-unit id="4577772021742281224" datatype="html">
+        <source>Brugeren har allerede denne rolle.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
