@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Injector, Input, OnInit, ViewContainerRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Dictionary } from '@ngrx/entity';
@@ -95,6 +95,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     const dialogRef = this.dialog.open(EditRoleDialogComponent);
     dialogRef.componentInstance.roleType = this.entityType;
     dialogRef.componentInstance.initialValue = role;
+    dialogRef.componentInstance.componentStore = this.componentStore;
   }
 
   protected getRoles() {

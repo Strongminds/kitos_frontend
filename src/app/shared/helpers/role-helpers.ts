@@ -1,6 +1,11 @@
 import { RoleAssignment } from '../models/helpers/read-model-role-assignments';
-import { APIRoleAssignmentRequestDTO, APIRoleAssignmentResponseDTO } from 'src/app/api/v2';
+import {
+  APINamedEntityWithUserFullNameV2DTO,
+  APIRoleAssignmentRequestDTO,
+  APIRoleAssignmentResponseDTO,
+} from 'src/app/api/v2';
 import { OrganizationRight } from '../models/organization-right.model';
+import { RegistrationModel } from '../models/organization/organization-unit/organization-unit-registration.model';
 
 export function compareByRoleName(a: RoleAssignment, b: RoleAssignment): number {
   return a.assignment.role.name.localeCompare(b.assignment.role.name);

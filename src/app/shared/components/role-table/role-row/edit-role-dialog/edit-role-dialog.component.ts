@@ -1,18 +1,19 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
-import { BehaviorSubject, map, Observable, switchMap } from 'rxjs';
-import { APIRegularOptionResponseDTO, APIRoleAssignmentRequestDTO } from 'src/app/api/v2';
-import { debugPipe } from 'src/app/shared/helpers/observable-helpers';
+import { BehaviorSubject, first, map, Observable } from 'rxjs';
+import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import { debugPipe, mapArray } from 'src/app/shared/helpers/observable-helpers';
 import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { ShallowUser } from 'src/app/shared/models/userV2.model';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
-import { selectDataProcessingRightUuidPairs } from 'src/app/store/data-processing/selectors';
-import { selectItContractRightUuidPairs } from 'src/app/store/it-contract/selectors';
-import { selectItSystemUsageRightUuidPairs } from 'src/app/store/it-system-usage/selectors';
+import { RoleTableComponentStore } from '../../role-table.component-store';
+import { Actions, ofType } from '@ngrx/effects';
+import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
   selector: 'app-edit-role-dialog',
@@ -23,7 +24,7 @@ import { selectItSystemUsageRightUuidPairs } from 'src/app/store/it-system-usage
 export class EditRoleDialogComponent implements OnInit {
   @Input() public roleType!: RoleOptionTypes;
   @Input() public initialValue!: RoleAssignment;
-  @Input() public entityUuid!: string;
+  @Input() public componentStore!: RoleTableComponentStore;
 
   public readonly formGroup = new FormGroup({
     role: new FormControl<APIRegularOptionResponseDTO | undefined>(undefined, Validators.required),
@@ -32,35 +33,17 @@ export class EditRoleDialogComponent implements OnInit {
 
   public readonly roleType$ = new BehaviorSubject<RoleOptionTypes | undefined>(undefined);
 
-  public readonly entityRoleAndUuidPairs$ = this.roleType$.pipe(
-    filterNullish(),
-    switchMap((roleType) => {
-      switch (roleType) {
-        case 'it-system-usage':
-          return this.store.select(selectItSystemUsageRightUuidPairs);
-        case 'it-contract':
-          return this.store.select(selectItContractRightUuidPairs);
-        case 'data-processing':
-          return this.store.select(selectDataProcessingRightUuidPairs);
-        case 'organization-unit':
-          throw new Error('Not implemented yet');
-      }
-    })
-  );
-
   constructor(
     private readonly dialogRef: MatDialogRef<EditRoleDialogComponent>,
     private readonly roleOptionService: RoleOptionTypeService,
-    private readonly store: Store
+    private readonly actions$: Actions
   ) {}
 
   ngOnInit(): void {
     this.formGroup.patchValue({
-      role: { ...this.initialValue.assignment.role, description: '' }, //The description value in the form is not used
+      role: { ...this.initialValue.assignment.role, description: '' },
       user: this.initialValue.assignment.user,
     });
-
-    this.roleType$.next(this.roleType);
   }
 
   public onSave(): void {
@@ -70,7 +53,10 @@ export class EditRoleDialogComponent implements OnInit {
     if (!user || !role) throw new Error('User or role is undefined');
 
     this.roleOptionService.dispatchRemoveEntityRoleAction(this.initialValue, this.roleType);
-    this.roleOptionService.dispatchAddEntityRoleAction([user.uuid], role.uuid, this.roleType);
+
+    this.actions$.pipe(ofType(this.deleteSuccessAction()), first()).subscribe(() => {
+      this.roleOptionService.dispatchAddEntityRoleAction([user.uuid], role.uuid, this.roleType);
+    });
 
     this.closeDialog();
   }
@@ -80,7 +66,12 @@ export class EditRoleDialogComponent implements OnInit {
   }
 
   public roleAssignmentExists$(): Observable<boolean> {
-    return this.entityRoleAndUuidPairs$.pipe(
+    return this.componentStore.roles$.pipe(
+      mapArray((role) => ({
+        userUuid: role.assignment.user.uuid,
+        roleUuid: role.assignment.role.uuid,
+      })),
+      debugPipe('entityRoleAndUuidPairs$'),
       map((roleAssignmentPairs) =>
         roleAssignmentPairs.some(
           (pair) =>
@@ -93,5 +84,18 @@ export class EditRoleDialogComponent implements OnInit {
 
   public canSave$(): Observable<boolean> {
     return this.roleAssignmentExists$().pipe(map((exists) => !exists && this.formGroup.valid));
+  }
+
+  private deleteSuccessAction() {
+    switch (this.roleType) {
+      case 'it-system-usage':
+        return ITSystemUsageActions.removeItSystemUsageRoleSuccess;
+      case 'it-contract':
+        return ITContractActions.removeItContractRoleSuccess;
+      case 'data-processing':
+        return DataProcessingActions.removeDataProcessingRoleSuccess;
+      case 'organization-unit':
+        return OrganizationUnitActions.deleteOrganizationUnitRoleSuccess;
+    }
   }
 }
