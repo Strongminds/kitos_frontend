@@ -27,7 +27,7 @@ export class OptionTypeDropdownComponent extends BaseComponent implements OnInit
   public readonly optionTypes$ = this.componentStore.optionTypes$;
   public readonly loading$ = this.componentStore.loading$;
 
-  constructor(private componentStore: OptionTypeDropdownComponentStore, private store: Store) {
+  constructor(private componentStore: OptionTypeDropdownComponentStore) {
     super();
   }
 
