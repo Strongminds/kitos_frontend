@@ -9,9 +9,10 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/store/roles-option-type-store/selectors';
+import { EditRoleDialogComponent } from '../components/role-table/role-row/edit-role-dialog/edit-role-dialog.component';
 import { RoleTableComponentStore } from '../components/role-table/role-table.component-store';
 import { RoleTableCreateDialogComponent } from '../components/role-table/role-table.create-dialog/role-table.create-dialog.component';
-import { IRoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { RoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { RoleOptionTypeTexts } from '../models/options/role-option-texts.model';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { filterNullish } from '../pipes/filter-nullish';
@@ -19,8 +20,8 @@ import { ConfirmActionCategory, ConfirmActionService } from '../services/confirm
 import { RoleOptionTypeService } from '../services/role-option-type.service';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export abstract class BaseRoleTableComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RoleOptionTypes;
@@ -82,12 +83,20 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     );
   }
 
-  public onRemove(role: IRoleAssignment) {
+  public onRemove(role: RoleAssignment) {
     this.confirmationService.confirmAction({
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil fjerne tildelingen af rollen "${role.assignment.role.name}" til brugeren "${role.assignment.user.name}"?`,
       onConfirm: () => this.roleOptionTypeService.dispatchRemoveEntityRoleAction(role, this.entityType),
     });
+  }
+
+  public onEdit(role: RoleAssignment) {
+    const dialogRef = this.dialog.open(EditRoleDialogComponent);
+    dialogRef.componentInstance.roleType = this.entityType;
+    dialogRef.componentInstance.initialValue = role;
+    dialogRef.componentInstance.componentStore = this.componentStore;
+    dialogRef.componentInstance.title = $localize`Rediger ${this.entityName.toLocaleLowerCase()}`;
   }
 
   protected getRoles() {
@@ -98,7 +107,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     );
   }
 
-  protected openAddNewDialog(userRoles: IRoleAssignment[], entityUuid: string) {
+  protected openAddNewDialog(userRoles: RoleAssignment[], entityUuid: string) {
     const dialogRef = this.dialog.open(RoleTableCreateDialogComponent);
     dialogRef.componentInstance.userRoles = userRoles;
     dialogRef.componentInstance.entityType = this.entityType;

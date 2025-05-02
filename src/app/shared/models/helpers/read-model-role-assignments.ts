@@ -36,7 +36,7 @@ export function mapRoleAssignmentsToEmails(roleAssignments: any): RoleAssignment
   return emailsPerRole;
 }
 
-export class RegularRoleAssignment implements IRoleAssignment {
+export class RegularRoleAssignment implements RoleAssignment {
   public assignment: APIExtendedRoleAssignmentResponseDTO;
 
   constructor(assignment: APIExtendedRoleAssignmentResponseDTO) {
@@ -44,7 +44,7 @@ export class RegularRoleAssignment implements IRoleAssignment {
   }
 }
 
-export class OrganizationUnitRoleAssignment implements IRoleAssignment {
+export class OrganizationUnitRoleAssignment implements RoleAssignment {
   public assignment: APIExtendedRoleAssignmentResponseDTO;
   public unitName: string;
   public unitUuid: string;
@@ -57,7 +57,7 @@ export class OrganizationUnitRoleAssignment implements IRoleAssignment {
   }
 }
 
-export interface IRoleAssignment {
+export interface RoleAssignment {
   assignment: APIExtendedRoleAssignmentResponseDTO;
   unitName?: string;
   unitUuid?: string;
@@ -65,7 +65,7 @@ export interface IRoleAssignment {
 
 export function mapDTOsToRoleAssignment(
   roleAssignment: APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO
-): IRoleAssignment {
+): RoleAssignment {
   if (isAPIOrganizationUnitRolesResponseDTO(roleAssignment)) {
     return new OrganizationUnitRoleAssignment(roleAssignment);
   } else {

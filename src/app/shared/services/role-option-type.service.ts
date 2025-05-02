@@ -23,7 +23,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
-import { IRoleAssignment, mapDTOsToRoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { mapDTOsToRoleAssignment, RoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { filterNullish } from '../pipes/filter-nullish';
 
@@ -63,10 +63,10 @@ export class RoleOptionTypeService implements OnDestroy {
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRoleSuccess,
-            ITContractActions.addItContractRoleSuccess,
-            DataProcessingActions.addDataProcessingRoleSuccess,
-            OrganizationUnitActions.addOrganizationUnitRoleSuccess
+            ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
+            ITContractActions.bulkAddItContractRoleSuccess,
+            DataProcessingActions.bulkAddDataProcessingRoleSuccess,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess
           )
         )
         .subscribe(() => this.dispatchAddSuccess())
@@ -159,7 +159,7 @@ export class RoleOptionTypeService implements OnDestroy {
     entityUuid: string,
     entityType: RoleOptionTypes,
     organizationUuid: string
-  ): Observable<Array<IRoleAssignment>> {
+  ): Observable<Array<RoleAssignment>> {
     return this.resolveGetEntityRolesEndpoints(
       entityType,
       organizationUuid
@@ -169,21 +169,21 @@ export class RoleOptionTypeService implements OnDestroy {
   public dispatchAddEntityRoleAction(userUuids: string[], roleUuid: string, entityType: RoleOptionTypes) {
     switch (entityType) {
       case 'it-system-usage':
-        this.store.dispatch(ITSystemUsageActions.addItSystemUsageRole(userUuids, roleUuid));
+        this.store.dispatch(ITSystemUsageActions.bulkAddItSystemUsageRole(userUuids, roleUuid));
         break;
       case 'it-contract':
-        this.store.dispatch(ITContractActions.addItContractRole(userUuids, roleUuid));
+        this.store.dispatch(ITContractActions.bulkAddItContractRole(userUuids, roleUuid));
         break;
       case 'data-processing':
-        this.store.dispatch(DataProcessingActions.addDataProcessingRole(userUuids, roleUuid));
+        this.store.dispatch(DataProcessingActions.bulkAddDataProcessingRole(userUuids, roleUuid));
         break;
       case 'organization-unit':
-        this.store.dispatch(OrganizationUnitActions.addOrganizationUnitRole(userUuids, roleUuid));
+        this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid));
         break;
     }
   }
 
-  public dispatchRemoveEntityRoleAction(role: IRoleAssignment, entityType: RoleOptionTypes) {
+  public dispatchRemoveEntityRoleAction(role: RoleAssignment, entityType: RoleOptionTypes) {
     const userUuid = role.assignment.user.uuid;
     const roleUuid = role.assignment.role.uuid;
     switch (entityType) {
