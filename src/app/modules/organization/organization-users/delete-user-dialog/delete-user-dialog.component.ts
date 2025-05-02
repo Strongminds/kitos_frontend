@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, filter, first, map, Observable, of } from 'rxjs';
+import { combineLatest, filter, first, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   BulkActionButton,
@@ -11,10 +11,7 @@ import {
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { getUserRoleSelectionDialogSections } from 'src/app/shared/helpers/bulk-action.helpers';
 import { getRoleActionRequest, userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
-import {
-  ODataOrganizationUser,
-  Right,
-} from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
@@ -35,11 +32,6 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   public readonly organizationName$: Observable<string | undefined> = this.store.select(selectOrganizationName);
 
   public isLoading: boolean = false;
-
-  private organizationUnitRights$: Observable<Right[]> = of([]);
-  private itContractRights$: Observable<Right[]> = of([]);
-  private itSystemRights$: Observable<Right[]> = of([]);
-  private dprRights$: Observable<Right[]> = of([]);
 
   constructor(
     private store: Store,
@@ -62,11 +54,6 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
         this.onClose();
       })
     );
-
-    this.organizationUnitRights$ = this.user$.pipe(map((user) => user.OrganizationUnitRights));
-    this.itContractRights$ = this.user$.pipe(map((user) => user.ItContractRights));
-    this.itSystemRights$ = this.user$.pipe(map((user) => user.ItSystemRights));
-    this.dprRights$ = this.user$.pipe(map((user) => user.DataProcessingRegistrationRights));
   }
 
   public hasRoles(user: ODataOrganizationUser): boolean {
@@ -112,12 +99,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     instance.successActionTypes = OrganizationUserActions.transferRolesSuccess;
     instance.errorActionTypes = OrganizationUserActions.transferRolesError;
     instance.actionButtons = dialogActions;
-    instance.sections = getUserRoleSelectionDialogSections(
-      this.organizationUnitRights$,
-      this.itContractRights$,
-      this.itSystemRights$,
-      this.dprRights$
-    );
+    instance.sections = getUserRoleSelectionDialogSections(this.user$);
   }
 
   private transferRoles(
@@ -136,8 +118,13 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   private closeDialogIfNoRightsLeftAfterTransfer(dialogRef: MatDialogRef<BulkActionDialogComponent<any>, any>) {
+    const organizationUnitRights$ = this.user$.pipe(map((user) => user.OrganizationUnitRights));
+    const itContractRights$ = this.user$.pipe(map((user) => user.ItContractRights));
+    const itSystemRights$ = this.user$.pipe(map((user) => user.ItSystemRights));
+    const dprRights$ = this.user$.pipe(map((user) => user.DataProcessingRegistrationRights));
+
     this.subscriptions.add(
-      combineLatest([this.organizationUnitRights$, this.itSystemRights$, this.itContractRights$, this.dprRights$])
+      combineLatest([organizationUnitRights$, itSystemRights$, itContractRights$, dprRights$])
         .pipe(
           filter(
             ([unitRights, systemRights, contractRights, dprRights]) =>

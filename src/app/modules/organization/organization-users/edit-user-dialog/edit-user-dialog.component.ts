@@ -150,12 +150,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     instance.dropdownTitle = $localize`Kopier roller til`;
     instance.successActionTypes = OrganizationUserActions.copyRolesSuccess;
     instance.errorActionTypes = OrganizationUserActions.copyRolesError;
-    instance.sections = getUserRoleSelectionDialogSections(
-      of(this.user.OrganizationUnitRights),
-      of(this.user.ItContractRights),
-      of(this.user.ItSystemRights),
-      of(this.user.DataProcessingRegistrationRights)
-    );
+    instance.sections = getUserRoleSelectionDialogSections(of(this.user));
   }
 
   private copyRoles(result: BulkActionResult): void {

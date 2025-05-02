@@ -1,38 +1,33 @@
 import { Observable, map } from 'rxjs';
 import { BulkActionSection } from '../components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
-import { Right } from '../models/organization/organization-user/organization-user.model';
+import { ODataOrganizationUser } from '../models/organization/organization-user/organization-user.model';
 import { mapUserRightsToBulkOptions } from './user-role.helpers';
 
-export function getUserRoleSelectionDialogSections(
-  unitRights: Observable<Right[]>,
-  contractRights: Observable<Right[]>,
-  systemRights: Observable<Right[]>,
-  dataProcessingRights: Observable<Right[]>
-): BulkActionSection[] {
+export function getUserRoleSelectionDialogSections(user$: Observable<ODataOrganizationUser>): BulkActionSection[] {
   return [
     {
-      options$: unitRights.pipe(map(mapUserRightsToBulkOptions)),
+      options$: user$.pipe(map((user) => mapUserRightsToBulkOptions(user.OrganizationUnitRights))),
       entityType: 'organization-unit',
       title: $localize`Organisationsenhedroller`,
       primaryColumnTitle: $localize`Organisationsenhed`,
       secondaryColumnTitle: $localize`Rolle`,
     },
     {
-      options$: contractRights.pipe(map(mapUserRightsToBulkOptions)),
+      options$: user$.pipe(map((user) => mapUserRightsToBulkOptions(user.ItContractRights))),
       entityType: 'it-contract',
       title: $localize`Kontraktroller`,
       primaryColumnTitle: $localize`Kontrakt`,
       secondaryColumnTitle: $localize`Rolle`,
     },
     {
-      options$: systemRights.pipe(map(mapUserRightsToBulkOptions)),
+      options$: user$.pipe(map((user) => mapUserRightsToBulkOptions(user.ItSystemRights))),
       entityType: 'it-system',
       title: $localize`Systemroller`,
       primaryColumnTitle: $localize`System`,
       secondaryColumnTitle: $localize`Rolle`,
     },
     {
-      options$: dataProcessingRights.pipe(map(mapUserRightsToBulkOptions)),
+      options$: user$.pipe(map((user) => mapUserRightsToBulkOptions(user.DataProcessingRegistrationRights))),
       entityType: 'data-processing-registration',
       title: $localize`Databehandlingsroller`,
       primaryColumnTitle: $localize`Databehandling`,
