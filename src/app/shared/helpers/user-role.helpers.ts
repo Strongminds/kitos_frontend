@@ -1,4 +1,8 @@
-import { APIMutateRightRequestDTO } from 'src/app/api/v2';
+import { APIMutateRightRequestDTO, APIMutateUserRightsRequestDTO } from 'src/app/api/v2';
+import {
+  BulkActionOption,
+  BulkActionResult,
+} from '../components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { ODataOrganizationUser, Right } from '../models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
@@ -60,10 +64,38 @@ export function roleToCopyRoleRequestDTO(user: ODataOrganizationUser, role: Righ
   return { userUuid: user.Uuid, roleId: role.role.id, entityUuid: role.entity.uuid };
 }
 
-export function mapToCopyRoleRequestDTO(
-  userUuid: string,
-  roleId: number,
-  entityUuid: string
-): APIMutateRightRequestDTO {
+export function mapUserRightsToBulkOptions(rights: Right[]): BulkActionOption[] {
+  return rights.map((right) => ({
+    id: right.role.id,
+    name: right.entity.name,
+    secondaryName: right.role.name,
+  }));
+}
+
+export function getRoleActionRequest(
+  result: BulkActionResult,
+  user: ODataOrganizationUser
+): APIMutateUserRightsRequestDTO {
+  return {
+    unitRights: mapBulkActionResultsToMutateRightRequestDTOs(result, 'organization-unit', user),
+    systemRights: mapBulkActionResultsToMutateRightRequestDTOs(result, 'it-system', user),
+    contractRights: mapBulkActionResultsToMutateRightRequestDTOs(result, 'it-contract', user),
+    dataProcessingRights: mapBulkActionResultsToMutateRightRequestDTOs(result, 'data-processing-registration', user),
+  };
+}
+
+function mapBulkActionResultsToMutateRightRequestDTOs(
+  result: BulkActionResult,
+  type: RegistrationEntityTypes,
+  user: ODataOrganizationUser
+): APIMutateRightRequestDTO[] {
+  if (!result.selectedEntityId) {
+    throw new Error('Selected entity ID is undefined');
+  }
+  return result.selectedOptions[type].map((option) =>
+    mapToToMutateRightRequestDTO(user.Uuid, option.id as number, result.selectedEntityId!)
+  );
+}
+function mapToToMutateRightRequestDTO(userUuid: string, roleId: number, entityUuid: string): APIMutateRightRequestDTO {
   return { userUuid: userUuid, roleId: roleId, entityUuid: entityUuid };
 }
