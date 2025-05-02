@@ -1,16 +1,15 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ParagraphFontSizeTypes } from '../../models/sizes/paragraph-font-sizes.model';
-import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
-import { NgClass, NgIf } from '@angular/common';
 import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
 import { HelpIconComponent } from '../icons/help.component';
 
 @Component({
-    selector: 'app-paragraph',
-    templateUrl: './paragraph.component.html',
-    styleUrls: ['./paragraph.component.scss'],
-    imports: [NgClass, NgIf, IconButtonComponent, HelpIconComponent]
+  selector: 'app-paragraph',
+  templateUrl: './paragraph.component.html',
+  styleUrls: ['./paragraph.component.scss'],
+  imports: [CommonModule, IconButtonComponent, HelpIconComponent],
 })
 export class ParagraphComponent {
   @Input() public paragraphSize: ParagraphFontSizeTypes = 'small';
@@ -26,7 +25,9 @@ export class ParagraphComponent {
   constructor(private dialog: MatDialog) {}
 
   public openHelpTextDialog() {
-    const dialogRef = this.dialog.open(HelpDialogComponent);
-    dialogRef.componentInstance.helpTextKey = this.helpTextKey;
+    import('../help-dialog/help-dialog.component').then(({ HelpDialogComponent }) => {
+      const dialogRef = this.dialog.open(HelpDialogComponent);
+      dialogRef.componentInstance.helpTextKey = this.helpTextKey;
+    });
   }
 }

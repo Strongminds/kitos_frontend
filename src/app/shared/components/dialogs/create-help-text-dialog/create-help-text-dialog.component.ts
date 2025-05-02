@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Component, forwardRef, Inject, Input, OnInit } from '@angular/core';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
@@ -7,23 +8,35 @@ import { APIHelpTextCreateRequestDTO } from 'src/app/api/v2/model/helpTextCreate
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
-import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.component-store';
-import { DialogComponent } from '../dialog/dialog.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { DividerComponent } from '../../divider/divider.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { RichTextEditorComponent } from '../../rich-text-editor/rich-text-editor.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../textbox/textbox.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { ParagraphComponent } from '../../paragraph/paragraph.component';
-import { DividerComponent } from '../../divider/divider.component';
-import { RichTextEditorComponent } from '../../rich-text-editor/rich-text-editor.component';
 import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../buttons/button/button.component';
+import { DialogComponent } from '../dialog/dialog.component';
+import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.component-store';
 
 @Component({
-    selector: 'app-create-help-text-dialog',
-    templateUrl: './create-help-text-dialog.component.html',
-    styleUrl: './create-help-text-dialog.component.scss',
-    providers: [CreateHelpTextDialogComponentStore],
-    imports: [DialogComponent, StandardVerticalContentGridComponent, TextBoxComponent, FormsModule, ReactiveFormsModule, NgIf, ParagraphComponent, DividerComponent, RichTextEditorComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-create-help-text-dialog',
+  templateUrl: './create-help-text-dialog.component.html',
+  styleUrl: './create-help-text-dialog.component.scss',
+  providers: [CreateHelpTextDialogComponentStore],
+  imports: [
+    forwardRef(() => DialogComponent),
+    CommonModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    ParagraphComponent,
+    DividerComponent,
+    RichTextEditorComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateHelpTextDialogComponent extends BaseComponent implements OnInit {
   @Input() existingKey: string | undefined;
@@ -39,7 +52,7 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
   public rootUrl: string;
 
   constructor(
-    private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,
+    @Inject(MatDialogRef<CreateHelpTextDialogComponent>) private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,
     private store: Store,
     private componentStore: CreateHelpTextDialogComponentStore,
     private rootUrlResolver: AppRootUrlResolverService

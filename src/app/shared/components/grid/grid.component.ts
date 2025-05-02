@@ -1,10 +1,28 @@
+import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { ExcelExportData } from '@progress/kendo-angular-excel-export';
-import { CellClickEvent, ColumnReorderEvent, ColumnResizeArgs, ExcelExportEvent, GridComponent as KendoGridComponent, PageChangeEvent, ColumnComponent, HeaderTemplateDirective, FilterCellTemplateDirective, CellTemplateDirective, CustomMessagesComponent, LoadingTemplateDirective, NoRecordsTemplateDirective, ExcelComponent, ToolbarTemplateDirective } from '@progress/kendo-angular-grid';
+import { ExcelExportData, KENDO_EXCELEXPORT } from '@progress/kendo-angular-excel-export';
+import {
+  CellClickEvent,
+  CellTemplateDirective,
+  ColumnComponent,
+  ColumnReorderEvent,
+  ColumnResizeArgs,
+  CustomMessagesComponent,
+  ExcelComponent,
+  ExcelExportEvent,
+  FilterCellTemplateDirective,
+  HeaderTemplateDirective,
+  GridComponent as KendoGridComponent,
+  LoadingTemplateDirective,
+  NoRecordsTemplateDirective,
+  PageChangeEvent,
+  ToolbarTemplateDirective,
+} from '@progress/kendo-angular-grid';
+import { PagerTemplateDirective } from '@progress/kendo-angular-pager';
 import {
   CompositeFilterDescriptor,
   FilterDescriptor,
@@ -45,59 +63,58 @@ import { filterNullish } from '../../pipes/filter-nullish';
 import { GridExportService } from '../../services/grid-export.service';
 import { StatePersistingService } from '../../services/state-persisting.service';
 import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { ArrowDownIconComponent } from '../icons/arrow-down-icon.component';
+import { ArrowUpIconComponent } from '../icons/arrow-up-icon.component';
+import { HelpIconComponent } from '../icons/help.component';
+import { LoadingComponent } from '../loading/loading.component';
 import { ParagraphComponent } from '../paragraph/paragraph.component';
 import { TooltipComponent } from '../tooltip/tooltip.component';
-import { HelpIconComponent } from '../icons/help.component';
-import { ArrowUpIconComponent } from '../icons/arrow-up-icon.component';
-import { ArrowDownIconComponent } from '../icons/arrow-down-icon.component';
-import { StringFilterComponent } from './string-filter/string-filter.component';
-import { NumericFilterComponent } from './numeric-filter/numeric-filter.component';
-import { DateFilterComponent } from './date-filter/date-filter.component';
-import { DropdownFilterComponent } from './dropdown-filter/dropdown-filter.component';
-import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdown-filter.component';
 import { ChoiceTypeDropdownFilterComponent } from './choice-type-dropdown-filter/choice-type-dropdown-filter.component';
+import { DateFilterComponent } from './date-filter/date-filter.component';
 import { DropdownColumnDataFilterComponent } from './dropdown-column-data-filter/dropdown-column-data-filter.component';
+import { DropdownFilterComponent } from './dropdown-filter/dropdown-filter.component';
 import { GridCellComponent } from './grid-cell/grid-cell.component';
-import { PagerTemplateDirective } from '@progress/kendo-angular-pager';
 import { GridPaginatorComponent } from './grid-paginator/grid-paginator.component';
-import { LoadingComponent } from '../loading/loading.component';
+import { NumericFilterComponent } from './numeric-filter/numeric-filter.component';
+import { StringFilterComponent } from './string-filter/string-filter.component';
+import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdown-filter.component';
 
 @Component({
-    selector: 'app-grid',
-    templateUrl: 'grid.component.html',
-    styleUrls: ['grid.component.scss'],
-    imports: [
-        NgIf,
-        KendoGridComponent,
-        NgFor,
-        ColumnComponent,
-        HeaderTemplateDirective,
-        ParagraphComponent,
-        TooltipComponent,
-        HelpIconComponent,
-        ArrowUpIconComponent,
-        ArrowDownIconComponent,
-        FilterCellTemplateDirective,
-        StringFilterComponent,
-        NumericFilterComponent,
-        DateFilterComponent,
-        DropdownFilterComponent,
-        UnitDropdownFilterComponent,
-        ChoiceTypeDropdownFilterComponent,
-        DropdownColumnDataFilterComponent,
-        CellTemplateDirective,
-        GridCellComponent,
-        PagerTemplateDirective,
-        GridPaginatorComponent,
-        CustomMessagesComponent,
-        LoadingTemplateDirective,
-        LoadingComponent,
-        NoRecordsTemplateDirective,
-        ExcelComponent,
-        ToolbarTemplateDirective,
-        AsyncPipe,
-    ],
+  selector: 'app-grid',
+  templateUrl: 'grid.component.html',
+  styleUrls: ['grid.component.scss'],
+  imports: [
+    CommonModule,
+    KendoGridComponent,
+    NgFor,
+    ColumnComponent,
+    HeaderTemplateDirective,
+    ParagraphComponent,
+    TooltipComponent,
+    HelpIconComponent,
+    ArrowUpIconComponent,
+    ArrowDownIconComponent,
+    FilterCellTemplateDirective,
+    StringFilterComponent,
+    NumericFilterComponent,
+    DateFilterComponent,
+    DropdownFilterComponent,
+    UnitDropdownFilterComponent,
+    ChoiceTypeDropdownFilterComponent,
+    DropdownColumnDataFilterComponent,
+    CellTemplateDirective,
+    GridCellComponent,
+    PagerTemplateDirective,
+    GridPaginatorComponent,
+    CustomMessagesComponent,
+    LoadingTemplateDirective,
+    LoadingComponent,
+    NoRecordsTemplateDirective,
+    ExcelComponent,
+    ToolbarTemplateDirective,
+    AsyncPipe,
+    KENDO_EXCELEXPORT,
+  ],
 })
 export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
