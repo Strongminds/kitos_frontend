@@ -24,6 +24,7 @@ export class EditRoleDialogComponent implements OnInit {
   @Input() public roleType!: RoleOptionTypes;
   @Input() public initialValue!: RoleAssignment;
   @Input() public componentStore!: RoleTableComponentStore;
+  @Input() public title!: string;
 
   public readonly formGroup = new FormGroup({
     role: new FormControl<APIRegularOptionResponseDTO | undefined>(undefined, Validators.required),

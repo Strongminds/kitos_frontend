@@ -1,4 +1,4 @@
-<app-dialog title="Rediger rolle" i18n-title overflow="none">
+<app-dialog [title]="title" overflow="none">
   <form (ngSubmit)="onSave()" [formGroup]="formGroup">
     <app-standard-vertical-content-grid>
       <app-user-dropdown [formGroup]="formGroup" formName="user" data-cy="user-dropdown"></app-user-dropdown>
