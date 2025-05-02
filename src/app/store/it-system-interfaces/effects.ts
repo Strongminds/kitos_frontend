@@ -48,11 +48,11 @@ export class ITInterfaceEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/ItInterfaces?$expand=Interface($select=Name),
-            ObjectOwner($select=Name,LastName),
-            Organization($select=Name),
-            ExhibitedBy($expand=ItSystem($select=Id,Name,Uuid,Disabled;$expand=BelongsTo($select=Name))),
-            LastChangedByUser($select=Name,LastName),DataRows($expand=DataType($select=Name))&${fixedOdataString}&$count=true`
+            `/odata/ItInterfaces?$expand=Interface($select=Name),` +
+              `ObjectOwner($select=Name,LastName),` +
+              `Organization($select=Name),` +
+              `ExhibitedBy($expand=ItSystem($select=Id,Name,Uuid,Disabled;$expand=BelongsTo($select=Name))),` +
+              `LastChangedByUser($select=Name,LastName),DataRows($expand=DataType($select=Name))&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) => {

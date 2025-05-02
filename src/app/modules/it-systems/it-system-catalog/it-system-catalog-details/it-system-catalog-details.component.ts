@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -29,19 +30,27 @@ import {
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
-import { NgIf, AsyncPipe } from '@angular/common';
 import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
-import { DetailsHeaderComponent } from '../../../../shared/components/details-header/details-header.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
-import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { DetailsHeaderComponent } from '../../../../shared/components/details-header/details-header.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
 
 @Component({
-    templateUrl: './it-system-catalog-details.component.html',
-    styleUrl: './it-system-catalog-details.component.scss',
-    providers: [ITSystemCatalogDetailsComponentStore],
-    imports: [NgIf, BreadcrumbsComponent, DetailsHeaderComponent, ButtonComponent, NavigationDrawerComponent, RouterOutlet, LoadingComponent, AsyncPipe]
+  templateUrl: './it-system-catalog-details.component.html',
+  styleUrl: './it-system-catalog-details.component.scss',
+  providers: [ITSystemCatalogDetailsComponentStore],
+  imports: [
+    NgIf,
+    BreadcrumbsComponent,
+    DetailsHeaderComponent,
+    ButtonComponent,
+    NavigationDrawerComponent,
+    RouterOutlet,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -144,14 +153,13 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
 
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
     this.subscriptions.add(
-      this.organizationName$.pipe(first())
-        .subscribe((organizationName) => {
-          let confirmationDialogRef;
-          if (takingIntoUse) {
-            confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
-          } else {
-            confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
-          }
+      this.organizationName$.pipe(first()).subscribe((organizationName) => {
+        let confirmationDialogRef;
+        if (takingIntoUse) {
+          confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
+        } else {
+          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+        }
 
         this.subscriptions.add(
           confirmationDialogRef
@@ -160,14 +168,14 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
             .subscribe(([result, systemUuid]) => {
               if (result === undefined) return;
 
-                if (takingIntoUse) {
-                  this.tryTakeIntoUse(result, systemUuid);
-                  return;
-                }
-                this.tryTakeOutOfUse(result, systemUuid);
-              })
-          );
-        })
+              if (takingIntoUse) {
+                this.tryTakeIntoUse(result, systemUuid);
+                return;
+              }
+              this.tryTakeOutOfUse(result, systemUuid);
+            })
+        );
+      })
     );
   }
 
@@ -229,8 +237,8 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
           distinctUntilChanged() //Ensures we get changes if navigation occurs between systems
         )
         .subscribe((itSystemUuid) => {
-          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
+          this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
           this.store.dispatch(ITSystemUsageActions.getITSystemUsageCollectionPermissions());
         })
     );

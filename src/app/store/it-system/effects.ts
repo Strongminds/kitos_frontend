@@ -71,14 +71,14 @@ export class ITSystemEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/ItSystems?$expand=BusinessType($select=Name),
-          BelongsTo($select=Name),
-          TaskRefs($select=Description,TaskKey),
-          Parent($select=Name,Disabled),
-          Organization($select=Id,Name),
-          Usages($select=OrganizationId;$expand=Organization($select=Uuid,Name)),
-          LastChangedByUser($select=Name,LastName),
-          Reference($select=Title,URL,ExternalReferenceId)&${fixedOdataString}&$count=true`
+            `/odata/ItSystems?$expand=BusinessType($select=Name),` +
+              `BelongsTo($select=Name),` +
+              `TaskRefs($select=Description,TaskKey),` +
+              `Parent($select=Name,Disabled),` +
+              `Organization($select=Id,Name),` +
+              `Usages($select=OrganizationId;$expand=Organization($select=Uuid,Name)),` +
+              `LastChangedByUser($select=Name,LastName),` +
+              `Reference($select=Title,URL,ExternalReferenceId)&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) => {

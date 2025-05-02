@@ -98,9 +98,9 @@ export class ITContractEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
-            DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),
-            ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
+            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),` +
+              `DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),` +
+              `ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) => {
