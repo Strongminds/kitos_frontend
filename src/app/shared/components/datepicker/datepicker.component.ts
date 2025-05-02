@@ -1,7 +1,7 @@
 import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
 import {
   MatDatepicker,
   MatDatepickerInput,
@@ -14,7 +14,6 @@ import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
-import { ComponentsModule } from '../components.module';
 
 @Component({
   selector: 'app-datepicker',
@@ -33,7 +32,7 @@ import { ComponentsModule } from '../components.module';
     MatIcon,
     MatDatepickerToggleIcon,
     MatDatepicker,
-    ComponentsModule,
+    MatNativeDateModule,
   ],
   providers: [
     {

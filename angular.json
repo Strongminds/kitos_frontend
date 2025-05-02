@@ -136,7 +136,7 @@
               "vendorChunk": true
             },
             "dev": {
-              "sourceMap": true,
+              "sourceMap": false,
               "namedChunks": true,
               "vendorChunk": true,
               "extractLicenses": false,
@@ -144,6 +144,9 @@
               "optimization": false,
               "buildOptimizer": false,
               "budgets": [],
+              "customWebpackConfig": {
+                "path": "./webpack.config.js"
+              },
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -175,6 +178,7 @@
               "optimization": false,
               "vendorChunk": true,
               "extractLicenses": false,
+              "sourceMap": true,
               "namedChunks": true,
               "outputHashing": "none",
               "budgets": []

@@ -207,7 +207,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.columns$.pipe(first()).subscribe((columns) => {
         //This check prevents stale state from being used to sort the grid
-        const columnToBeSorted = columns?.find((column) => column.field === sort[0].field);
+        const columnToBeSorted = columns?.find((column) => column?.field === sort[0]?.field);
         if (!columnToBeSorted || columnToBeSorted.sortable === false) return;
         this.onSortChange(sort);
       })

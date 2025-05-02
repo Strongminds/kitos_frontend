@@ -18,8 +18,8 @@ import { RegistrationEntityTypes } from '../models/registrations/registration-en
 import { BaseComponent } from './base.component';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class BaseOverviewComponent extends BaseComponent {
   protected unclickableColumnFields: string[] = [];
@@ -35,8 +35,12 @@ export class BaseOverviewComponent extends BaseComponent {
   protected updateUnclickableColumns(currentColumns: GridColumn[]) {
     this.unclickableColumnFields = [];
     currentColumns.forEach((column) => {
-      if (column.style && DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES.includes(column.style)) {
-        this.unclickableColumnFields.push(column.field);
+      if (column && column.style && DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES.includes(column.style)) {
+        if (column.field) {
+          this.unclickableColumnFields.push(column.field);
+        } else {
+          console.warn('Column is missing the "field" property:', column);
+        }
       }
     });
   }
