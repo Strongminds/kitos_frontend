@@ -136,8 +136,13 @@
               "vendorChunk": true
             },
             "dev": {
-              "sourceMap": false,
+              "sourceMap": true,
               "namedChunks": true,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "outputHashing": "none",
+              "optimization": false,
+              "buildOptimizer": false,
               "budgets": [],
               "fileReplacements": [
                 {
