@@ -70,7 +70,6 @@ function mountComponent(exampleContract1: BulkActionOption, exampleContract2: Bu
       dropdownDisabledUuids$: of([]),
       dropdownType: 'it-contract',
       allowEmptyDropdownSelection: true,
-      isLoading$: of(false),
     },
     providers: [{ provide: MatDialogRef, useValue: { close: cy.spy().as('close') } }],
     imports: [ComponentsModule, AppModule],
