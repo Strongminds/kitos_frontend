@@ -5296,9 +5296,6 @@
       <trans-unit id="6973173527205023878" datatype="html">
         <source> Overfør roller </source>
       </trans-unit>
-      <trans-unit id="7788193785121346142" datatype="html">
-        <source> Anuller </source>
-      </trans-unit>
       <trans-unit id="8006200185320958273" datatype="html">
         <source> Denne handling kan ikke fortrydes. </source>
       </trans-unit>
@@ -5307,6 +5304,12 @@
       </trans-unit>
       <trans-unit id="9190795738522963148" datatype="html">
         <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? </source>
+      </trans-unit>
+      <trans-unit id="2933189791607650811" datatype="html">
+        <source>Rediger rolle</source>
+      </trans-unit>
+      <trans-unit id="4577772021742281224" datatype="html">
+        <source>Brugeren har allerede denne rolle.</source>
       </trans-unit>
     </body>
   </file>

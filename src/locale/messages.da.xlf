@@ -6969,10 +6969,6 @@
         <source> Denne handling kan ikke fortrydes. </source>
         <target state="new"> Denne handling kan ikke fortrydes. </target>
       </trans-unit>
-      <trans-unit id="7788193785121346142" datatype="html">
-        <source> Anuller </source>
-        <target state="new"> Anuller </target>
-      </trans-unit>
       <trans-unit id="6973173527205023878" datatype="html">
         <source> Overfør roller </source>
         <target state="new"> Overfør roller </target>
@@ -6980,6 +6976,14 @@
       <trans-unit id="866125510857454253" datatype="html">
         <source>Overfør roller</source>
         <target state="new">Overfør roller</target>
+      </trans-unit>
+      <trans-unit id="2933189791607650811" datatype="html">
+        <source>Rediger rolle</source>
+        <target state="new">Rediger rolle</target>
+      </trans-unit>
+      <trans-unit id="4577772021742281224" datatype="html">
+        <source>Brugeren har allerede denne rolle.</source>
+        <target state="new">Brugeren har allerede denne rolle.</target>
       </trans-unit>
     </body>
   </file>
