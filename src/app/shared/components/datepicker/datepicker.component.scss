@@ -1,5 +1,5 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
   display: flex;
@@ -41,19 +41,19 @@ mat-form-field {
   .mat-mdc-icon-button-ripple,
   .mdc-icon-button__ripple,
   .mat-ripple {
-    border-radius: $radius-large;
+    border-radius: theme.$radius-large;
   }
 
   @include mat-date-input-adjustment;
-  @include mat-input-adjustment;
+  @include mixins.mat-input-adjustment;
 }
 
 ::ng-deep {
   .mat-calendar-body-selected {
-    color: $color-white !important;
+    color: theme.$color-white !important;
   }
 }
 
 input {
-  @include medium-font-size;
+  @include mixins.medium-font-size;
 }

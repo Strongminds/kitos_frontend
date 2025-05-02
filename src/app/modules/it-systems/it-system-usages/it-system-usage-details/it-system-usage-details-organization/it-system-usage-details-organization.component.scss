@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 :host {
   display: flex;
@@ -14,7 +14,7 @@
 form {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
-  grid-gap: $padding-large;
+  grid-gap: theme.$padding-large;
 }
 
 .org-unit-select-container {

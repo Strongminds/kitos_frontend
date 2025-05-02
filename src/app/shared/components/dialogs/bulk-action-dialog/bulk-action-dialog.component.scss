@@ -1,4 +1,4 @@
-@import "theme";
+@use "theme";
 
 app-standard-vertical-content-grid {
   width: 100%;
@@ -9,7 +9,7 @@ app-standard-vertical-content-grid {
 }
 
 .action-buttons * {
-  padding: $padding-small;
+  padding: theme.$padding-small;
 }
 
 app-dialog-actions {

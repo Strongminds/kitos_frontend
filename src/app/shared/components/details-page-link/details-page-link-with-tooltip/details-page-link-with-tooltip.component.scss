@@ -1,8 +1,8 @@
-@import "theme";
-@import "mixins";
+@use "theme";
+@use "mixins";
 
 :host {
-  @include details-page-link-font-sizes;
+  @include mixins.details-page-link-font-sizes;
 }
 
 .display-in-row {

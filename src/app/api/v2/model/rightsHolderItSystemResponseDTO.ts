@@ -57,5 +57,9 @@ export interface APIRightsHolderItSystemResponseDTO {
     created: string;
     createdBy: APIIdentityNamePairResponseDTO;
     recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
+    /**
+     * A list of unique suppliers associated with each usage’s main contract.
+     */
+    mainContractSuppliers: Array<APIIdentityNamePairResponseDTO>;
 }
 

@@ -37,6 +37,7 @@ import {
   selectItContractDataProcessingRegistrations,
   selectItContractExternalReferences,
   selectItContractPayments,
+  selectItContractRightUuidPairs,
   selectItContractSystemAgreementElements,
   selectItContractSystemUsages,
   selectItContractUuid,
@@ -432,21 +433,27 @@ export class ITContractEffects {
     );
   });
 
-  addItContractRole$ = createEffect(() => {
+  bulkAddItContractRoles$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.addItContractRole),
-      concatLatestFrom(() => this.store.select(selectItContractUuid).pipe(filterNullish())),
-      mergeMap(([{ userUuids, roleUuid }, contractUuid]) =>
-        this.apiInternalItContractService
-          .patchSingleItContractInternalV2PatchAddBulkRoleAssignment({
-            contractUuid: contractUuid,
-            request: { userUuids: userUuids, roleUuid: roleUuid },
+      concatLatestFrom(() => [
+        this.store.select(selectItContractRightUuidPairs),
+        this.store.select(selectItContractUuid).pipe(filterNullish()),
+      ]),
+      switchMap(([{ userUuids, roleUuid }, existingRoles, contractUuid]) => {
+        var rolesToAdd = userUuids.map((userUuid) => ({ userUuid, roleUuid }));
+        return this.apiItContractService
+          .patchSingleItContractV2PatchItContract({
+            contractUuid,
+            request: {
+              roles: existingRoles.concat(rolesToAdd),
+            },
           })
           .pipe(
             map((usage) => ITContractActions.addItContractRoleSuccess(usage)),
             catchError(() => of(ITContractActions.addItContractRoleError()))
-          )
-      )
+          );
+      })
     );
   });
 

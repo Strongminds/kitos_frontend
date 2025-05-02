@@ -681,3 +681,7 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin two-thirds-column-width {
+  grid-column: span 2;
+}

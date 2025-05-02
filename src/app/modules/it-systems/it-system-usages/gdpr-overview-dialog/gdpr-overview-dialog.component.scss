@@ -1,7 +1,7 @@
-@import 'theme';
+@use 'theme';
 
 ::ng-deep app-dialog .content{
-  padding-top: $padding-medium !important;
+  padding-top: theme.$padding-medium !important;
 }
 
 app-overview-header {

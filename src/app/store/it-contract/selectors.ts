@@ -1,4 +1,5 @@
 import { createSelector } from '@ngrx/store';
+import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { itContactAdapter, itContractFeature } from './reducer';
 
 const { selectITContractState } = itContractFeature;
@@ -80,3 +81,7 @@ export const selectAppliedProcurementPlansCache = createSelector(
   (state) => state.appliedProcurementPlans
 );
 export const selectAppliedProcurementPlans = createSelector(selectAppliedProcurementPlansCache, (cache) => cache.value);
+
+export const selectItContractRights = createSelector(selectContract, (contract) => contract?.roles);
+
+export const selectItContractRightUuidPairs = createSelector(selectItContractRights, mapToRoleAssignmentsRequests);
