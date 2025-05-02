@@ -5305,11 +5305,11 @@
       <trans-unit id="9190795738522963148" datatype="html">
         <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? </source>
       </trans-unit>
-      <trans-unit id="2933189791607650811" datatype="html">
-        <source>Rediger rolle</source>
-      </trans-unit>
       <trans-unit id="4577772021742281224" datatype="html">
         <source>Brugeren har allerede denne rolle.</source>
+      </trans-unit>
+      <trans-unit id="5299437974151521850" datatype="html">
+        <source>Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
       </trans-unit>
     </body>
   </file>

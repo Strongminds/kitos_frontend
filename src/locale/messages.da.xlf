@@ -6977,13 +6977,13 @@
         <source>Overfør roller</source>
         <target state="new">Overfør roller</target>
       </trans-unit>
-      <trans-unit id="2933189791607650811" datatype="html">
-        <source>Rediger rolle</source>
-        <target state="new">Rediger rolle</target>
-      </trans-unit>
       <trans-unit id="4577772021742281224" datatype="html">
         <source>Brugeren har allerede denne rolle.</source>
         <target state="new">Brugeren har allerede denne rolle.</target>
+      </trans-unit>
+      <trans-unit id="5299437974151521850" datatype="html">
+        <source>Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
+        <target state="new">Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></target>
       </trans-unit>
     </body>
   </file>
