@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,21 +12,29 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser, selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
-import { FrontpageComponentStore } from './frontpage.component-store';
-import { EditPublicMessageDialogComponent } from './public-message/edit-public-message-dialog/edit-public-message-dialog.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { LoadingComponent } from '../../shared/components/loading/loading.component';
-import { HelpIconComponent } from '../../shared/components/icons/help.component';
-import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
-import { LoginComponent } from './login/login.component';
-import { PublicMessageComponent } from './public-message/public-message.component';
-import { StandardVerticalContentGridComponent } from '../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ButtonComponent } from '../../shared/components/buttons/button/button.component';
+import { HelpIconComponent } from '../../shared/components/icons/help.component';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
+import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { FrontpageComponentStore } from './frontpage.component-store';
+import { LoginComponent } from './login/login.component';
+import { EditPublicMessageDialogComponent } from './public-message/edit-public-message-dialog/edit-public-message-dialog.component';
+import { PublicMessageComponent } from './public-message/public-message.component';
 
 @Component({
-    templateUrl: 'frontpage.component.html',
-    styleUrls: ['frontpage.component.scss'],
-    imports: [NgIf, LoadingComponent, HelpIconComponent, ParagraphComponent, LoginComponent, NgFor, PublicMessageComponent, StandardVerticalContentGridComponent, ButtonComponent, AsyncPipe]
+  templateUrl: 'frontpage.component.html',
+  styleUrls: ['frontpage.component.scss'],
+  imports: [
+    CommonModule,
+    LoadingComponent,
+    HelpIconComponent,
+    ParagraphComponent,
+    LoginComponent,
+    PublicMessageComponent,
+    StandardVerticalContentGridComponent,
+    ButtonComponent,
+  ],
 })
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;
