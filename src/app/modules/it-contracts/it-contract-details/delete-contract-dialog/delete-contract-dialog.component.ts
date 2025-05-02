@@ -7,7 +7,6 @@ import { filter, first, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   BulkActionButton,
-  BulkActionDialogComponent,
   BulkActionOption,
   BulkActionResult,
   BulkActionSection,
@@ -15,6 +14,7 @@ import {
 import { mapArray } from 'src/app/shared/helpers/observable-helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from '../it-contract-hierarchy/it-contract-hierarchy.component-store';
@@ -36,6 +36,7 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     private readonly store: Store,
     private readonly componentStore: ItContractHierarchyComponentStore,
     private readonly dialog: MatDialog,
+    private readonly openerService: DialogOpenerService,
     private readonly actions$: Actions,
     private readonly confirmationService: ConfirmActionService
   ) {
@@ -112,13 +113,7 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
   }
 
   private setupDialog(contractUuid: string) {
-    const dialogRef = this.dialog.open(BulkActionDialogComponent, {
-      width: '50%',
-      minWidth: '600px',
-      maxWidth: '800px',
-      height: 'auto',
-      maxHeight: '90vh%',
-    });
+    const dialogRef = this.openerService.openBulkActionDialog();
 
     const dialogActions = [
       {
