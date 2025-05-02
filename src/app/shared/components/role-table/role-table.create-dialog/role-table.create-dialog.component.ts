@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 
@@ -19,13 +19,20 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { RoleTableComponentStore } from '../role-table.component-store';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent } from '../../dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
     templateUrl: './role-table.create-dialog.component.html',
     styleUrls: ['./role-table.create-dialog.component.scss'],
     providers: [RoleTableComponentStore],
-    standalone: false
+    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, MultiSelectDropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
 })
 export class RoleTableCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly roleForm = new FormGroup({

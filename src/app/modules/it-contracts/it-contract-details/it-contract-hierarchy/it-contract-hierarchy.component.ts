@@ -9,13 +9,18 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from './it-contract-hierarchy.component-store';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { EntityTreeComponent } from '../../../../shared/components/tree/entity-tree.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 
 @Component({
     selector: 'app-it-contract-hierarchy',
     templateUrl: './it-contract-hierarchy.component.html',
     styleUrl: './it-contract-hierarchy.component.scss',
     providers: [ItContractHierarchyComponentStore],
-    standalone: false
+    imports: [CardComponent, CardHeaderComponent, NgIf, EntityTreeComponent, LoadingComponent, AsyncPipe]
 })
 export class ItContractHierarchyComponent extends BaseComponent implements OnInit {
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());

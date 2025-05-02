@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, map } from 'rxjs';
 import {
@@ -49,13 +49,28 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { OptionTypeDropdownComponent } from '../../../../shared/components/dropdowns/option-type-dropdown/option-type-dropdown.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
+import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { ConnectedDropdownComponent } from '../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
+import { RadioButtonsComponent } from '../../../../shared/components/radio-buttons/radio-buttons.component';
 
 @Component({
     selector: 'app-it-contract-frontpage',
     templateUrl: './it-contract-frontpage.component.html',
     styleUrl: './it-contract-frontpage.component.scss',
     providers: [ItContractFrontpageComponentStore],
-    standalone: false
+    imports: [CardComponent, CardHeaderComponent, NgIf, StatusChipComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, OptionTypeDropdownComponent, DropdownComponent, StandardVerticalContentGridComponent, CheckboxComponent, DatePickerComponent, TextAreaComponent, ConnectedDropdownComponent, OrgUnitSelectComponent, RadioButtonsComponent, AsyncPipe]
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
   public readonly contractTemplates$ = this.store

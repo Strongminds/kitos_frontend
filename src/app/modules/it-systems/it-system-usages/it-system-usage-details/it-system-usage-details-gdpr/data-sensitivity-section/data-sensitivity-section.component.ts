@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
@@ -17,12 +17,16 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
+import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
+import { ContentWithInfoComponent } from '../../../../../../shared/components/content-with-info/content-with-info.component';
+import { NgFor, AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-data-sensitivity-section',
     templateUrl: './data-sensitivity-section.component.html',
     styleUrls: ['./data-sensitivity-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
-    standalone: false
+    imports: [AccordionComponent, FormsModule, ReactiveFormsModule, CheckboxComponent, ContentWithInfoComponent, NgFor, AsyncPipe]
 })
 export class DataSensitivitySectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

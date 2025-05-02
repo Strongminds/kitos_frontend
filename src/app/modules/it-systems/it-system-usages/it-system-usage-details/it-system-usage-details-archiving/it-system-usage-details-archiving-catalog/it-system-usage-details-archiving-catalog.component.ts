@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapRecommendedArchiveDutyComment, mapRecommendedArchiveDutyToString } from 'src/app/shared/models/recommended-archive-duty.model';
@@ -7,12 +7,19 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageSystemContextUuid } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystem } from 'src/app/store/it-system/selectors';
 import { selectITSystemUsageEnableCatalogArchiveDuty, selectITSystemUsageEnableCatalogArchiveDutyComment } from 'src/app/store/organization/ui-module-customization/selectors';
+import { CardComponent } from '../../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { DetailsPageLinkComponent } from '../../../../../../shared/components/details-page-link/details-page-link.component';
+import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
+import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
+import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
 
 @Component({
     selector: 'app-it-system-usage-details-archiving-catalog',
     templateUrl: './it-system-usage-details-archiving-catalog.component.html',
     styleUrl: './it-system-usage-details-archiving-catalog.component.scss',
-    standalone: false
+    imports: [CardComponent, CardHeaderComponent, NgIf, DetailsPageLinkComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, TextAreaComponent, AsyncPipe]
 })
 export class ItSystemUsageDetailsArchivingCatalogComponent extends BaseComponent implements OnInit {
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);

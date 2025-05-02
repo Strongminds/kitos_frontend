@@ -1,12 +1,14 @@
 import { Component, Input } from '@angular/core';
 import { BreadCrumbContext } from '../../models/breadcrumbs/breadcrumb-context.model';
 import { BreadCrumb } from '../../models/breadcrumbs/breadcrumb.model';
+import { NgIf, NgFor } from '@angular/common';
+import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 
 @Component({
     selector: 'app-breadcrumbs',
     templateUrl: 'breadcrumbs.component.html',
     styleUrls: ['breadcrumbs.component.scss'],
-    standalone: false
+    imports: [NgIf, NgFor, BreadcrumbComponent]
 })
 export class BreadcrumbsComponent {
   public breadCrumbs?: { item: BreadCrumb; context: BreadCrumbContext }[];

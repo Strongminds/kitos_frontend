@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -8,12 +8,22 @@ import { APIJournalPeriodResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { dateGreaterThanOrEqualControlValidator, dateLessThanOrEqualControlValidator } from 'src/app/shared/helpers/form.helpers';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
+import { NgIf } from '@angular/common';
+import { TextBoxInfoComponent } from '../../../../../../shared/components/textbox-info/textbox-info.component';
+import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
+import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
+import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
     selector: 'app-it-system-usage-details-journal-period-write-dialog',
     templateUrl: './it-system-usage-details-journal-period-write-dialog.component.html',
     styleUrls: ['./it-system-usage-details-journal-period-write-dialog.component.scss'],
-    standalone: false
+    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DatePickerComponent, NgIf, TextBoxInfoComponent, ParagraphComponent, TextBoxComponent, CheckboxComponent, DialogActionsComponent, ButtonComponent]
 })
 export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public journalPeriod?: APIJournalPeriodResponseDTO | undefined;

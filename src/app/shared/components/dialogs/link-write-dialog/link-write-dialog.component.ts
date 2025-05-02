@@ -1,16 +1,23 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { debounceTime, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
+import { DialogComponent } from '../dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../textbox/textbox.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
     selector: 'app-link-write-dialog',
     templateUrl: './link-write-dialog.component.html',
     styleUrl: './link-write-dialog.component.scss',
-    standalone: false
+    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
 })
 export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public url$!: Observable<string | undefined>;

@@ -9,6 +9,13 @@ import { PublicMessage } from 'src/app/shared/models/public-messages/public-mess
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { FrontpageComponentStore } from '../frontpage.component-store';
 import { PublicMessageDialogComponent } from './public-message-dialog/public-message-dialog.component';
+import { NgIf, NgClass, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { IconComponent } from '../../../shared/components/icon/icon.component';
+import { StatusChipComponent } from '../../../shared/components/status-chip/status-chip.component';
+import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
+import { ExternalPageLinkComponent } from '../../../shared/components/external-page-link/external-page-link.component';
+import { ParagraphComponent } from '../../../shared/components/paragraph/paragraph.component';
 
 export interface PublicMessageConfig {
   iconType: IconType;
@@ -22,7 +29,7 @@ export interface PublicMessageConfig {
     host: {
         '[style.width]': "mode === 'compact' ? '352px' : '452px'",
     },
-    standalone: false
+    imports: [NgIf, CardComponent, NgClass, IconComponent, StatusChipComponent, ButtonComponent, ExternalPageLinkComponent, ParagraphComponent, AsyncPipe]
 })
 export class PublicMessageComponent implements OnInit {
   @Input() mode!: 'normal' | 'compact';

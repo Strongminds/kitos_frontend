@@ -34,11 +34,18 @@ import {
   selectSystemGridLoading,
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
 
 @Component({
     templateUrl: './it-system-catalog.component.html',
     styleUrl: './it-system-catalog.component.scss',
-    standalone: false
+    imports: [OverviewHeaderComponent, NgIf, GridOptionsButtonComponent, ExportMenuButtonComponent, HideShowButtonComponent, CreateEntityButtonComponent, GridComponent, AsyncPipe]
 })
 export class ItSystemCatalogComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSystemGridLoading);

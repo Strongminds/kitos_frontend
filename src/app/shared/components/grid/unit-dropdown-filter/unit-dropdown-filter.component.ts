@@ -9,12 +9,13 @@ import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-f
 import { Store } from '@ngrx/store';
 import { selectPagedOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
 import { first } from 'rxjs';
+import { OrgUnitSelectComponent } from '../../org-unit-select/org-unit-select.component';
 
 @Component({
     selector: 'app-unit-dropdown-filter',
     templateUrl: './unit-dropdown-filter.component.html',
     styleUrl: './unit-dropdown-filter.component.scss',
-    standalone: false
+    imports: [OrgUnitSelectComponent]
 })
 export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

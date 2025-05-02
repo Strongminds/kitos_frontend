@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
@@ -29,12 +29,17 @@ import {
   selectDprEnableReferences,
   selectDprEnableRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
+import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 @Component({
     selector: 'app-data-processing-details',
     templateUrl: './data-processing-details.component.html',
     styleUrl: './data-processing-details.component.scss',
-    standalone: false
+    imports: [NgIf, BreadcrumbsComponent, ButtonComponent, NavigationDrawerComponent, RouterOutlet, LoadingComponent, AsyncPipe]
 })
 export class DataProcessingDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

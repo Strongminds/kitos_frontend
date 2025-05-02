@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
@@ -24,12 +24,18 @@ import {
   selectInterfaceUuid,
   selectIsInterfaceLoading,
 } from 'src/app/store/it-system-interfaces/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { DetailsHeaderComponent } from '../../../../shared/components/details-header/details-header.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 
 @Component({
     selector: 'app-it-system-interfaces-details',
     templateUrl: './it-system-interfaces-details.component.html',
     styleUrl: './it-system-interfaces-details.component.scss',
-    standalone: false
+    imports: [NgIf, BreadcrumbsComponent, DetailsHeaderComponent, ButtonComponent, NavigationDrawerComponent, RouterOutlet, LoadingComponent, AsyncPipe]
 })
 export class ItSystemInterfacesDetailsComponent extends BaseComponent implements OnInit {
   private readonly interfacesRootPath = `${AppPath.itSystems}/${AppPath.itInterfaces}`;

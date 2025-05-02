@@ -17,13 +17,20 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { CreateRelationDialogComponent } from './create-relation-dialog/create-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-details-relations.component-store';
 import { selectITSystemUsageEnableIncomingRelations, selectITSystemUsageEnableOutgoingRelations } from 'src/app/store/organization/ui-module-customization/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { RelationTableComponent } from './relation-table/relation-table.component';
+import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 
 @Component({
     selector: 'app-it-system-usage-details-relations',
     templateUrl: './it-system-usage-details-relations.component.html',
     styleUrls: ['./it-system-usage-details-relations.component.scss'],
     providers: [ItSystemUsageDetailsRelationsComponentStore],
-    standalone: false
+    imports: [NgIf, CardComponent, CardHeaderComponent, StandardVerticalContentGridComponent, RelationTableComponent, CollectionExtensionButtonComponent, LoadingComponent, AsyncPipe]
 })
 export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implements OnInit {
   public readonly usageName$ = this.store.select(selectItSystemUsageName);

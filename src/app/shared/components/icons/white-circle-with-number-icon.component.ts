@@ -19,8 +19,7 @@ import { Component, Input } from '@angular/core';
         {{ number }}
       </text>
     </svg>
-  `,
-    standalone: false
+  `
 })
 export class WhiteCircleNumberIconComponent {
   @Input() number?: number;

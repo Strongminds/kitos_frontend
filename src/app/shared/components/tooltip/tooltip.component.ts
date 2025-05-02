@@ -1,10 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { MatTooltip } from '@angular/material/tooltip';
+import { NgClass } from '@angular/common';
 
 @Component({
     selector: 'app-tooltip[text]',
     templateUrl: './tooltip.component.html',
     styleUrls: ['./tooltip.component.scss'],
-    standalone: false
+    imports: [MatTooltip, NgClass]
 })
 export class TooltipComponent {
   @Input() text!: string;

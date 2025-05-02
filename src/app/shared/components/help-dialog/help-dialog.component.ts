@@ -6,12 +6,16 @@ import { CreateHelpTextDialogComponent } from 'src/app/shared/components/dialogs
 import { EditHelpTextDialogComponent } from 'src/app/shared/components/dialogs/edit-help-text-dialog/edit-help-text-dialog.component';
 import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { HelpDialogComponentStore } from './help-dialog.component-store';
+import { DialogComponent } from '../dialogs/dialog/dialog.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { DialogActionsComponent } from '../dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../buttons/button/button.component';
 
 @Component({
     templateUrl: 'help-dialog.component.html',
     styleUrls: ['help-dialog.component.scss'],
     providers: [HelpDialogComponentStore],
-    standalone: false
+    imports: [DialogComponent, NgIf, DialogActionsComponent, ButtonComponent, AsyncPipe]
 })
 export class HelpDialogComponent implements OnInit {
   @Input() helpTextKey?: string;

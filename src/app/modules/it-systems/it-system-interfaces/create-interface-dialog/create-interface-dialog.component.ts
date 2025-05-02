@@ -1,17 +1,23 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime } from 'rxjs';
 import { BaseCreateEntityDialogComponent } from 'src/app/shared/components/entity-creation/base-create-entity-dialog-component';
 import { CreateEntityDialogComponentStore } from 'src/app/shared/components/entity-creation/create-entity-dialog.component-store';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { CreateEntityDialogActionButtonsComponent } from '../../../../shared/components/entity-creation/create-entity-dialog-action-buttons/create-entity-dialog-action-buttons.component';
 
 @Component({
     selector: 'app-create-interface-dialog',
     templateUrl: './create-interface-dialog.component.html',
     styleUrl: './create-interface-dialog.component.scss',
     providers: [CreateEntityDialogComponentStore],
-    standalone: false
+    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, CreateEntityDialogActionButtonsComponent, AsyncPipe]
 })
 export class CreateInterfaceDialogComponent extends BaseCreateEntityDialogComponent implements OnInit {
   override entityType = 'it-interface' as RegistrationEntityTypes;

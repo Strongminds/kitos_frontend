@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -20,12 +20,28 @@ import {
   selectUpdateConsequences,
 } from 'src/app/store/local-admin/fk-org/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { ScrollbarDialogComponent } from '../../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { NumericInputComponent } from '../../../../../shared/components/numeric-input/numeric-input.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { CheckboxComponent } from '../../../../../shared/components/checkbox/checkbox.component';
+import { DragAndDropTreeComponent } from '../../../../../shared/components/drag-and-drop-tree/drag-and-drop-tree.component';
+import { AccordionComponent } from '../../../../../shared/components/accordion/accordion.component';
+import { ContentSpaceBetweenComponent } from '../../../../../shared/components/content-space-between/content-space-between.component';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { ExportIconComponent } from '../../../../../shared/components/icons/export-icon.component';
+import { LocalGridComponent } from '../../../../../shared/components/local-grid/local-grid.component';
+import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 
 @Component({
     selector: 'app-fk-org-write-dialog',
     templateUrl: './fk-org-write-dialog.component.html',
     styleUrl: './fk-org-write-dialog.component.scss',
-    standalone: false
+    imports: [ScrollbarDialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, NgIf, CardComponent, CardHeaderComponent, NumericInputComponent, ParagraphComponent, CheckboxComponent, DragAndDropTreeComponent, AccordionComponent, ContentSpaceBetweenComponent, ButtonComponent, ExportIconComponent, LocalGridComponent, LoadingComponent, DialogActionsComponent, AsyncPipe]
 })
 export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() isEdit: boolean = false;

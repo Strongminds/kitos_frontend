@@ -11,13 +11,17 @@ import {
   selectITSystemUsageEnableCatalogArchiveDutyComment,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { ItSystemUsageDetailsArchivingComponentStore } from './it-system-usage-details-archiving.component-store';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { SegmentComponent } from '../../../../../shared/components/segment/segment.component';
+import { ItSystemUsageDetailsArchivingUsageComponent } from './it-system-usage-details-archiving-usage/it-system-usage-details-archiving-usage.component';
+import { ItSystemUsageDetailsArchivingCatalogComponent } from './it-system-usage-details-archiving-catalog/it-system-usage-details-archiving-catalog.component';
 
 @Component({
     selector: 'app-it-system-usage-details-archiving',
     templateUrl: './it-system-usage-details-archiving.component.html',
     styleUrls: ['./it-system-usage-details-archiving.component.scss'],
     providers: [ItSystemUsageDetailsArchivingComponentStore],
-    standalone: false
+    imports: [NgIf, SegmentComponent, ItSystemUsageDetailsArchivingUsageComponent, ItSystemUsageDetailsArchivingCatalogComponent, AsyncPipe]
 })
 export class ItSystemUsageDetailsArchivingComponent {
   public ItSystemUsageModuleSegmentOption = ItSystemUsageModuleSegmentOption;

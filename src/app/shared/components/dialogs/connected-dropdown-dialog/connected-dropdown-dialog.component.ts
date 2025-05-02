@@ -1,16 +1,23 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DialogComponent } from '../dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf } from '@angular/common';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { ConnectedDropdownComponent } from '../../dropdowns/connected-dropdown/connected-dropdown.component';
+import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
     selector: 'app-connected-dropdown-dialog',
     templateUrl: './connected-dropdown-dialog.component.html',
     styleUrl: './connected-dropdown-dialog.component.scss',
-    standalone: false
+    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, NgIf, ParagraphComponent, ConnectedDropdownComponent, DialogActionsComponent, ButtonComponent]
 })
 export class ConnectedDropdownDialogComponent<T> extends BaseComponent implements OnInit {
   @Input() public title!: string;

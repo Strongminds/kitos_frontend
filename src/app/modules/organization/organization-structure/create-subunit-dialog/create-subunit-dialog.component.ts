@@ -1,16 +1,23 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
 import { STRING_FIELD_MAX_LENGTH } from 'src/app/shared/constants/constants';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { NumericInputComponent } from '../../../../shared/components/numeric-input/numeric-input.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-create-subunit-dialog',
     templateUrl: './create-subunit-dialog.component.html',
     styleUrl: './create-subunit-dialog.component.scss',
-    standalone: false
+    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NumericInputComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
 })
 export class CreateSubunitDialogComponent {
   @Input() parentUnitUuid$!: Observable<string>;

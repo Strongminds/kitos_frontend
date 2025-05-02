@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { debounceTime, of } from 'rxjs';
@@ -25,13 +25,41 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent as MultiSelectDropdownComponent_1 } from '../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
+import { DividerComponent } from '../../../../shared/components/divider/divider.component';
+import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info/textbox-info.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 
 @Component({
-  selector: 'app-edit-user-dialog',
-  templateUrl: './edit-user-dialog.component.html',
-  styleUrl: './edit-user-dialog.component.scss',
-  providers: [CreateUserDialogComponentStore],
-  standalone: false,
+    selector: 'app-edit-user-dialog',
+    templateUrl: './edit-user-dialog.component.html',
+    styleUrl: './edit-user-dialog.component.scss',
+    providers: [CreateUserDialogComponentStore],
+    imports: [
+        DialogComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        StandardVerticalContentGridComponent,
+        TextBoxComponent,
+        NgIf,
+        ParagraphComponent,
+        DropdownComponent,
+        MultiSelectDropdownComponent_1,
+        CheckboxComponent,
+        DividerComponent,
+        TextBoxInfoComponent,
+        DialogActionsComponent,
+        ButtonComponent,
+        AsyncPipe,
+    ],
 })
 export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   @Input() public user!: ODataOrganizationUser;

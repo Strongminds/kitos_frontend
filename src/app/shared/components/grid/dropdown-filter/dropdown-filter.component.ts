@@ -5,6 +5,7 @@ import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-dat
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
 
 export interface FilterDropdownOption {
   name: string;
@@ -16,7 +17,7 @@ export interface FilterDropdownOption {
     selector: 'app-dropdown-filter',
     templateUrl: './dropdown-filter.component.html',
     styleUrl: './dropdown-filter.component.scss',
-    standalone: false
+    imports: [DropdownComponent]
 })
 export class DropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

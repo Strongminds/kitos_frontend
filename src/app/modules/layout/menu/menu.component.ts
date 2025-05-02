@@ -1,12 +1,24 @@
 import { Component, DoCheck, ElementRef, Input, ViewChild } from '@angular/core';
-import { MatMenuTrigger } from '@angular/material/menu';
+import { MatMenuTrigger, MatMenu } from '@angular/material/menu';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
+import { RouterLinkActive, RouterLink } from '@angular/router';
+import { NgIf } from '@angular/common';
+import { ChevronDownIconComponent } from '../../../shared/components/icons/chevron-down-icon.component';
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: 'menu.component.html',
-  styleUrls: ['menu.component.scss'],
-  standalone: false,
+    selector: 'app-menu',
+    templateUrl: 'menu.component.html',
+    styleUrls: ['menu.component.scss'],
+    imports: [
+        ButtonComponent,
+        RouterLinkActive,
+        MatMenuTrigger,
+        RouterLink,
+        NgIf,
+        ChevronDownIconComponent,
+        MatMenu,
+    ],
 })
 export class MenuComponent implements DoCheck {
   @Input() title?: string | null = '';

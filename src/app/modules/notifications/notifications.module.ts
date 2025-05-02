@@ -13,15 +13,12 @@ import { NotificationsPageComponent } from './notification-details/notifications
 import { NotifcationsRouterModule } from './notifications.routes';
 
 @NgModule({
-  declarations: [
-    NotificationDetailsComponent,
-    NotificationDetailsItSystemUsagesComponent,
-    NotificationDetailsItContractsComponent,
-    NotificationDetailsDataProcessingComponent,
-    NotificationsPageComponent,
-    NotificationsGridComponent,
-    AlertsGridComponent,
-  ],
-  imports: [CommonModule, ComponentsModule, RouterModule, SharedModule, NotifcationsRouterModule],
+    imports: [CommonModule, ComponentsModule, RouterModule, SharedModule, NotifcationsRouterModule, NotificationDetailsComponent,
+        NotificationDetailsItSystemUsagesComponent,
+        NotificationDetailsItContractsComponent,
+        NotificationDetailsDataProcessingComponent,
+        NotificationsPageComponent,
+        NotificationsGridComponent,
+        AlertsGridComponent],
 })
 export class NotifcationsModule {}

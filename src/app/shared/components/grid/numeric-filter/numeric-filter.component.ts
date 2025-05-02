@@ -6,12 +6,13 @@ import { Actions } from '@ngrx/effects';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { NumericInputComponent } from '../../numeric-input/numeric-input.component';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
+import { AfterValueChangedDirective } from '../../../directives/after-value-changed.directive';
 
 @Component({
     selector: 'app-numeric-filter',
     templateUrl: './numeric-filter.component.html',
     styleUrl: './numeric-filter.component.scss',
-    standalone: false
+    imports: [NumericInputComponent, AfterValueChangedDirective]
 })
 export class NumericFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @ViewChild(NumericInputComponent) public numericInput!: NumericInputComponent;

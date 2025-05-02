@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -17,12 +17,20 @@ import {
 } from 'src/app/store/user-store/selectors';
 import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
+import { MatToolbar } from '@angular/material/toolbar';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { SpacerComponent } from '../../../shared/components/spacer/spacer.component';
+import { MenuComponent } from '../menu/menu.component';
+import { MenuItemComponent } from '../menu-item/menu-item.component';
+import { TableIconComponent } from '../../../shared/components/icons/table-icon.component';
+import { NotificationsButtonComponent } from '../notifications-button/notifications-button.component';
+import { LogoutIconComponent } from '../../../shared/components/icons/logout-icon.component';
 
 @Component({
     selector: 'app-nav-bar',
     templateUrl: 'nav-bar.component.html',
     styleUrls: ['nav-bar.component.scss'],
-    standalone: false
+    imports: [MatToolbar, RouterLink, NgIf, SpacerComponent, MenuComponent, MenuItemComponent, TableIconComponent, NotificationsButtonComponent, LogoutIconComponent, AsyncPipe]
 })
 export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;

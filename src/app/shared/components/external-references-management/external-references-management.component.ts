@@ -17,13 +17,28 @@ import { ConfirmActionCategory, ConfirmActionService } from '../../services/conf
 import { CreateExternalReferenceDialogComponent } from './create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferencesComponentStore } from './external-references.component-store';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { LoadingComponent } from '../loading/loading.component';
+import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NativeTableComponent } from '../native-table/native-table.component';
+import { ExternalPageLinkComponent } from '../external-page-link/external-page-link.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { ContentSpaceBetweenComponent } from '../content-space-between/content-space-between.component';
+import { BooleanCircleComponent } from '../boolean-circle/boolean-circle.component';
+import { TableRowActionsComponent } from '../table-row-actions/table-row-actions.component';
+import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
+import { PencilIconComponent } from '../icons/pencil-icon.compnent';
+import { TrashcanIconComponent } from '../icons/trashcan-icon.component';
+import { EmptyStateComponent } from '../empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../collection-extension-button/collection-extension-button.component';
+import { AppDatePipe } from '../../pipes/app-date.pipe';
 
 @Component({
     selector: 'app-external-references-management[entityType][hasModifyPermission]',
     templateUrl: './external-references-management.component.html',
     styleUrls: ['./external-references-management.component.scss'],
     providers: [ExternalReferencesComponentStore],
-    standalone: false
+    imports: [NgIf, LoadingComponent, StandardVerticalContentGridComponent, NativeTableComponent, NgFor, ExternalPageLinkComponent, ParagraphComponent, ContentSpaceBetweenComponent, BooleanCircleComponent, TableRowActionsComponent, IconButtonComponent, PencilIconComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe, AppDatePipe]
 })
 export class ExternalReferencesManagementComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;

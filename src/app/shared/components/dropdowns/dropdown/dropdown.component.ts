@@ -3,12 +3,17 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectComponent, NgOptionTemplateDirective, NgFooterTemplateDirective } from '@ng-select/ng-select';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 
 @Component({
     selector: 'app-dropdown',
     templateUrl: 'dropdown.component.html',
     styleUrls: ['dropdown.component.scss'],
-    standalone: false
+    imports: [NgIf, FormsModule, ReactiveFormsModule, NgSelectComponent, NgOptionTemplateDirective, ParagraphComponent, NgFooterTemplateDirective, TextBoxInfoComponent, AsyncPipe]
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;

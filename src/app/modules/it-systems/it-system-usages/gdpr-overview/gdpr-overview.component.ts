@@ -12,12 +12,14 @@ import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.mod
 import { GridUIConfigService } from 'src/app/shared/services/ui-config-services/grid-ui-config.service';
 import { GdprReportActions } from 'src/app/store/it-system-usage/gdpr-report/actions';
 import { selectGdprReports } from 'src/app/store/it-system-usage/gdpr-report/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { LocalGridComponent } from '../../../../shared/components/local-grid/local-grid.component';
 
 @Component({
     selector: 'app-gdpr-overview',
     templateUrl: './gdpr-overview.component.html',
     styleUrl: './gdpr-overview.component.scss',
-    standalone: false
+    imports: [NgIf, LocalGridComponent, AsyncPipe]
 })
 export class GdprOverviewComponent {
   private readonly gridColumns: GridColumn[] = [

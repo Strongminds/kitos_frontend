@@ -1,12 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { SsoErrorCode } from 'src/app/shared/enums/sso-error-code';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-sso-error',
     templateUrl: './sso-error.component.html',
     styleUrl: './sso-error.component.scss',
-    standalone: false
+    imports: [StandardVerticalContentGridComponent, ParagraphComponent, NgIf]
 })
 export class SsoErrorComponent {
   @Input() public ssoErrorCode!: SsoErrorCode;

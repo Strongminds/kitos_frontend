@@ -30,12 +30,29 @@ import {
 import { concatLatestFrom } from '@ngrx/operators';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { EditOrganizationUnitDialogComponent } from './edit-organization-unit-dialog/edit-organization-unit-dialog.component';
+import { HelpButtonComponent } from '../../../shared/components/help-button/help-button.component';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { MenuButtonComponent } from '../../../shared/components/buttons/menu-button/menu-button.component';
+import { MenuButtonItemComponent } from '../../../shared/components/buttons/menu-button/menu-button-item/menu-button-item.component';
+import { PlusIconBlueComponent } from '../../../shared/components/icons/plus-icon-blue.component';
+import { ReorderIconComponent } from '../../../shared/components/icons/reorder-icon.component';
+import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
+import { DragAndDropTreeComponent } from '../../../shared/components/drag-and-drop-tree/drag-and-drop-tree.component';
+import { ParagraphComponent } from '../../../shared/components/paragraph/paragraph.component';
+import { KitosUnitColorIconComponent } from '../../../shared/components/icons/kitos-unit-color.component';
+import { FkOrgColorIconComponent } from '../../../shared/components/icons/fk-org-color.component';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
+import { DetailsHeaderComponent } from '../../../shared/components/details-header/details-header.component';
+import { CheckboxButtonComponent } from '../../../shared/components/buttons/checkbox-button/checkbox-button.component';
+import { OrganizationUnitRoleTableComponent } from './organization-unit-role-table/organization-unit-role-table.component';
 
 @Component({
     selector: 'app-organization-structure',
     templateUrl: './organization-structure.component.html',
     styleUrl: './organization-structure.component.scss',
-    standalone: false
+    imports: [HelpButtonComponent, CardComponent, NgIf, MenuButtonComponent, MenuButtonItemComponent, PlusIconBlueComponent, ReorderIconComponent, StandardVerticalContentGridComponent, ButtonComponent, DragAndDropTreeComponent, ParagraphComponent, KitosUnitColorIconComponent, FkOrgColorIconComponent, LoadingComponent, DetailsHeaderComponent, CheckboxButtonComponent, OrganizationUnitRoleTableComponent, AsyncPipe]
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());

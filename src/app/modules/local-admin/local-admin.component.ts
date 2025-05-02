@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, filter, map, Observable, of, startWith } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -13,6 +13,11 @@ import {
   selectShowItSystemModule,
 } from 'src/app/store/organization/selectors';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CheckboxButtonComponent } from '../../shared/components/buttons/checkbox-button/checkbox-button.component';
+import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
+import { HelpButtonComponent } from '../../shared/components/help-button/help-button.component';
+import { NavigationDrawerComponent } from '../../shared/components/navigation-drawer/navigation-drawer.component';
 
 interface ModuleTabInfo {
   text: string;
@@ -24,7 +29,7 @@ interface ModuleTabInfo {
     selector: 'app-local-admin',
     templateUrl: './local-admin.component.html',
     styleUrl: './local-admin.component.scss',
-    standalone: false
+    imports: [NgIf, CheckboxButtonComponent, ParagraphComponent, HelpButtonComponent, NavigationDrawerComponent, RouterOutlet, AsyncPipe]
 })
 export class LocalAdminComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;

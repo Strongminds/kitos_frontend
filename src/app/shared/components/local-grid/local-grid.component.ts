@@ -1,12 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
-import {
-  ExcelExportEvent,
-  GridComponent as KendoGridComponent,
-  PageChangeEvent,
-  RowReorderEvent,
-} from '@progress/kendo-angular-grid';
+import { ExcelExportEvent, GridComponent as KendoGridComponent, PageChangeEvent, RowReorderEvent, DataBindingDirective, RowReorderColumnComponent, RowDragHintTemplateDirective, ColumnComponent, HeaderTemplateDirective, FilterCellTemplateDirective, CellTemplateDirective, CustomMessagesComponent, LoadingTemplateDirective, NoRecordsTemplateDirective, ExcelComponent } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, SortDescriptor, process } from '@progress/kendo-data-query';
 import { get } from 'lodash';
 import { GridActions } from 'src/app/store/grid/actions';
@@ -23,12 +18,23 @@ import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultLocalGridState } from '../../models/grid-state.model';
 import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events.model';
 import { GridExportService } from '../../services/grid-export.service';
+import { NgClass, NgIf, NgFor } from '@angular/common';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { ArrowUpIconComponent } from '../icons/arrow-up-icon.component';
+import { ArrowDownIconComponent } from '../icons/arrow-down-icon.component';
+import { StringFilterComponent } from '../grid/string-filter/string-filter.component';
+import { DropdownFilterComponent } from '../grid/dropdown-filter/dropdown-filter.component';
+import { DateFilterComponent } from '../grid/date-filter/date-filter.component';
+import { GridCellComponent } from '../grid/grid-cell/grid-cell.component';
+import { PagerTemplateDirective } from '@progress/kendo-angular-pager';
+import { GridPaginatorComponent } from '../grid/grid-paginator/grid-paginator.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
     selector: 'app-local-grid',
     templateUrl: './local-grid.component.html',
     styleUrl: './local-grid.component.scss',
-    standalone: false
+    imports: [KendoGridComponent, DataBindingDirective, NgClass, NgIf, RowReorderColumnComponent, RowDragHintTemplateDirective, NgFor, ColumnComponent, HeaderTemplateDirective, ParagraphComponent, ArrowUpIconComponent, ArrowDownIconComponent, FilterCellTemplateDirective, StringFilterComponent, DropdownFilterComponent, DateFilterComponent, CellTemplateDirective, GridCellComponent, PagerTemplateDirective, GridPaginatorComponent, CustomMessagesComponent, LoadingTemplateDirective, LoadingComponent, NoRecordsTemplateDirective, ExcelComponent]
 })
 export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;

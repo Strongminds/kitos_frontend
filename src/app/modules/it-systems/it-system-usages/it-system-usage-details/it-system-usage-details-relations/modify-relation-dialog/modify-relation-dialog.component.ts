@@ -6,14 +6,14 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { SystemRelationModel } from '../relation-table/relation-table.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
-import { SystemRelationDialogFormModel } from '../system-relation-dialog/system-relation-dialog.component';
+import { SystemRelationDialogFormModel, SystemRelationDialogComponent } from '../system-relation-dialog/system-relation-dialog.component';
 
 @Component({
     selector: 'app-modify-relation-dialog[relationModel]',
     templateUrl: './modify-relation-dialog.component.html',
     styleUrls: ['./modify-relation-dialog.component.scss'],
     providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
-    standalone: false
+    imports: [SystemRelationDialogComponent]
 })
 export class ModifyRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public relationModel!: SystemRelationModel;

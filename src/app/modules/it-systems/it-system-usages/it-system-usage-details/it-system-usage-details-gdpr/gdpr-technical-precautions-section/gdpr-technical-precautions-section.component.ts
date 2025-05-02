@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
@@ -19,12 +19,19 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
     selector: 'app-gdpr-technical-precautions-section',
     templateUrl: './gdpr-technical-precautions-section.component.html',
     styleUrls: ['./gdpr-technical-precautions-section.component.scss'],
-    standalone: false
+    imports: [AccordionComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, ParagraphComponent, NgFor, CheckboxComponent, EditUrlSectionComponent, AsyncPipe]
 })
 export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import {
@@ -37,13 +37,25 @@ import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { MultiSelectDropdownComponent } from '../../dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
+import { NgIf, NgClass, AsyncPipe } from '@angular/common';
+import { TextBoxComponent } from '../../textbox/textbox.component';
+import { DatePickerComponent } from '../../datepicker/datepicker.component';
+import { RichTextEditorComponent } from '../../rich-text-editor/rich-text-editor.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
     selector: 'app-notifications-table-dialog',
     templateUrl: './notifications-table-dialog.component.html',
     styleUrl: './notifications-table-dialog.component.scss',
     providers: [NotificationsTableComponentStore],
-    standalone: false
+    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, MultiSelectDropdownComponent, TextBoxInfoComponent, ParagraphComponent, DropdownComponent, NgIf, TextBoxComponent, DatePickerComponent, NgClass, RichTextEditorComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
 })
 export class NotificationsTableDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;

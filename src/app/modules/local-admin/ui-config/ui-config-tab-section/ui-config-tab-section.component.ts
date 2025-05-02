@@ -7,12 +7,20 @@ import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectUIConfigLoading } from 'src/app/store/organization/ui-module-customization/selectors';
+import { AccordionComponent } from '../../../../shared/components/accordion/accordion.component';
+import { DividerComponent } from '../../../../shared/components/divider/divider.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { CheckboxButtonComponent } from '../../../../shared/components/buttons/checkbox-button/checkbox-button.component';
+import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.component';
+import { InfoIconComponent } from '../../../../shared/components/icons/info-icon.component';
 
 @Component({
     selector: 'app-ui-config-tab-section',
     templateUrl: './ui-config-tab-section.component.html',
     styleUrl: './ui-config-tab-section.component.scss',
-    standalone: false
+    imports: [AccordionComponent, DividerComponent, NgIf, ParagraphComponent, StandardVerticalContentGridComponent, NgFor, CheckboxButtonComponent, TooltipComponent, InfoIconComponent, AsyncPipe]
 })
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;

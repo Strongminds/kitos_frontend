@@ -13,22 +13,20 @@ import { NotificationsButtonComponent } from './notifications-button/notificatio
 import { DirectivesModule } from 'src/app/shared/directives/directives.module';
 
 @NgModule({
-  declarations: [
-    NavBarComponent,
-    MenuComponent,
-    MenuItemComponent,
-    ChooseOrganizationComponent,
-    NotificationsButtonComponent,
-  ],
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatToolbarModule,
-    MatBadgeModule,
-    MatMenuModule,
-    SharedModule,
-    DirectivesModule,
-  ],
-  exports: [NavBarComponent],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatToolbarModule,
+        MatBadgeModule,
+        MatMenuModule,
+        SharedModule,
+        DirectivesModule,
+        NavBarComponent,
+        MenuComponent,
+        MenuItemComponent,
+        ChooseOrganizationComponent,
+        NotificationsButtonComponent,
+    ],
+    exports: [NavBarComponent],
 })
 export class LayoutModule {}

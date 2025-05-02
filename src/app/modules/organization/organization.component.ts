@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, pairwise } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -10,7 +10,7 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
     templateUrl: 'organization.component.html',
     styleUrls: ['organization.component.scss'],
     selector: 'app-organization',
-    standalone: false
+    imports: [RouterOutlet]
 })
 export class OrganizationComponent extends BaseComponent implements OnInit {
   constructor(private store: Store, private router: Router) {

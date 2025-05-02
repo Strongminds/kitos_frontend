@@ -2,12 +2,15 @@ import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ParagraphFontSizeTypes } from '../../models/sizes/paragraph-font-sizes.model';
 import { HelpDialogComponent } from '../help-dialog/help-dialog.component';
+import { NgClass, NgIf } from '@angular/common';
+import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
+import { HelpIconComponent } from '../icons/help.component';
 
 @Component({
     selector: 'app-paragraph',
     templateUrl: './paragraph.component.html',
     styleUrls: ['./paragraph.component.scss'],
-    standalone: false
+    imports: [NgClass, NgIf, IconButtonComponent, HelpIconComponent]
 })
 export class ParagraphComponent {
   @Input() public paragraphSize: ParagraphFontSizeTypes = 'small';

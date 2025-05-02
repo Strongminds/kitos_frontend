@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
@@ -30,12 +30,18 @@ import {
 } from 'src/app/store/it-system/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { DetailsHeaderComponent } from '../../../../shared/components/details-header/details-header.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 
 @Component({
     templateUrl: './it-system-catalog-details.component.html',
     styleUrl: './it-system-catalog-details.component.scss',
     providers: [ITSystemCatalogDetailsComponentStore],
-    standalone: false
+    imports: [NgIf, BreadcrumbsComponent, DetailsHeaderComponent, ButtonComponent, NavigationDrawerComponent, RouterOutlet, LoadingComponent, AsyncPipe]
 })
 export class ItSystemCatalogDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

@@ -17,13 +17,27 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { AgreementElementCreateDialogComponent } from './agreement-element-create-dialog/agreement-element-create-dialog.component';
 import { ItContractSystemsComponentStore } from './it-contract-systems.component-store';
 import { selectItContractEnableAgreementElements, selectItContractEnableSystemUsages, selectItContractEnableRelations } from 'src/app/store/organization/ui-module-customization/selectors';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
+import { DetailsPageLinkComponent } from '../../../../shared/components/details-page-link/details-page-link.component';
+import { IconButtonComponent } from '../../../../shared/components/buttons/icon-button/icon-button.component';
+import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { ExternalPageLinkComponent } from '../../../../shared/components/external-page-link/external-page-link.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 
 @Component({
     selector: 'app-it-contract-systems',
     templateUrl: './it-contract-systems.component.html',
     styleUrl: './it-contract-systems.component.scss',
     providers: [ItContractSystemsComponentStore],
-    standalone: false
+    imports: [NgIf, CardComponent, CardHeaderComponent, StandardVerticalContentGridComponent, NativeTableComponent, NgFor, ContentSpaceBetweenComponent, DetailsPageLinkComponent, IconButtonComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, ParagraphComponent, ExternalPageLinkComponent, LoadingComponent, AsyncPipe]
 })
 export class ItContractSystemsComponent extends BaseComponent implements OnInit {
   public readonly systemAgreementElements$ = this.store

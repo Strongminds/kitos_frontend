@@ -14,18 +14,15 @@ import { PublicMessageDialogComponent } from './public-message/public-message-di
 import { SsoErrorComponent } from './login/sso-error/sso-error.component';
 
 @NgModule({
-  declarations: [
-    FrontpageComponent,
-    LoginComponent,
-    SsoButtonComponent,
-    PublicMessageComponent,
-    PublicMessageDialogComponent,
-    EditPublicMessageDialogComponent,
-    ResetPasswordTextLinkComponent,
-    SendPasswordResetRequestComponent,
-    ResetPasswordComponent,
-    SsoErrorComponent,
-  ],
-  imports: [ReactiveFormsModule, SharedModule, FrontpageRouterModule],
+    imports: [ReactiveFormsModule, SharedModule, FrontpageRouterModule, FrontpageComponent,
+        LoginComponent,
+        SsoButtonComponent,
+        PublicMessageComponent,
+        PublicMessageDialogComponent,
+        EditPublicMessageDialogComponent,
+        ResetPasswordTextLinkComponent,
+        SendPasswordResetRequestComponent,
+        ResetPasswordComponent,
+        SsoErrorComponent],
 })
 export class FrontpageModule {}

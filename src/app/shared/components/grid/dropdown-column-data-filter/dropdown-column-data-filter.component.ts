@@ -8,12 +8,13 @@ import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/reg
 import { ColumnFilterDataService, GridDataKey } from 'src/app/shared/services/column-filter-data.service';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { DropdownFilterComponent, FilterDropdownOption } from '../dropdown-filter/dropdown-filter.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-dropdown-column-data-filter',
     templateUrl: './dropdown-column-data-filter.component.html',
     styleUrl: './dropdown-column-data-filter.component.scss',
-    standalone: false
+    imports: [DropdownFilterComponent, AsyncPipe]
 })
 export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @ViewChild(DropdownFilterComponent) dropdownFilter!: DropdownFilterComponent;

@@ -2,12 +2,13 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output, View
 import { Actions, ofType } from '@ngrx/effects';
 import { filter } from 'rxjs';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { SlideToggleComponent } from '../../slide-toggle/slide-toggle.component';
 
 @Component({
     selector: 'app-usage-proxy-checkbox',
     templateUrl: './usage-proxy-checkbox.component.html',
     styleUrls: ['./usage-proxy-checkbox.component.scss'],
-    standalone: false
+    imports: [SlideToggleComponent]
 })
 export class UsageProxyCheckboxComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

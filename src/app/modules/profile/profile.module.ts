@@ -6,7 +6,6 @@ import { ProfileComponent } from './profile.component';
 import { ProfileRouterModule } from './profile.routes';
 
 @NgModule({
-  declarations: [ProfileComponent],
-  imports: [CommonModule, ComponentsModule, SharedModule, ProfileRouterModule],
+    imports: [CommonModule, ComponentsModule, SharedModule, ProfileRouterModule, ProfileComponent],
 })
 export class ProfileModule {}

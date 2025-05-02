@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -16,13 +16,27 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { selectUserUuid } from 'src/app/store/user-store/selectors';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent } from '../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { SlideToggleComponent } from '../../../../shared/components/slide-toggle/slide-toggle.component';
+import { DividerComponent } from '../../../../shared/components/divider/divider.component';
+import { VerticalContentGridSectionMarginLeftComponent } from '../../../../shared/components/vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 
 @Component({
     selector: 'app-create-user-dialog',
     templateUrl: './create-user-dialog.component.html',
     styleUrl: './create-user-dialog.component.scss',
     providers: [CreateUserDialogComponentStore],
-    standalone: false
+    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, TooltipComponent, DropdownComponent, MultiSelectDropdownComponent, SlideToggleComponent, DividerComponent, VerticalContentGridSectionMarginLeftComponent, CheckboxComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
 })
 export class CreateUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   public readonly noExistingUser$ = this.componentStore.noUserInOtherOrgs$;

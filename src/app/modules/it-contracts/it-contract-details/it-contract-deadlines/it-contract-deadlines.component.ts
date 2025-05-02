@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { isNumber } from 'lodash';
 import { combineLatestWith, map } from 'rxjs';
@@ -28,12 +28,20 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
+import { NumericInputComponent as NumericInputComponent_1 } from '../../../../shared/components/numeric-input/numeric-input.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
 
 @Component({
     selector: 'app-it-contract-deadlines',
     templateUrl: './it-contract-deadlines.component.html',
     styleUrl: './it-contract-deadlines.component.scss',
-    standalone: false
+    imports: [NgIf, CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, NumericInputComponent_1, CheckboxComponent, DropdownComponent, DatePickerComponent, AsyncPipe]
 })
 export class ItContractDeadlinesComponent extends BaseComponent implements OnInit {
   private readonly deadlineDurationYearsUpperLimit = 100;

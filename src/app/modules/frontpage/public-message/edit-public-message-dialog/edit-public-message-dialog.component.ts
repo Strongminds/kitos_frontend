@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -12,12 +12,22 @@ import { iconTypeOptions, PublicMessageIconType } from 'src/app/shared/models/pu
 import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 import { StatusType, statusTypeOptions } from 'src/app/shared/models/public-messages/status-type.model';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
+import { ScrollbarDialogComponent } from '../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { NgIf } from '@angular/common';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { RichTextEditorComponent } from '../../../../shared/components/rich-text-editor/rich-text-editor.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 
 @Component({
     selector: 'app-edit-public-message-dialog',
     templateUrl: './edit-public-message-dialog.component.html',
     styleUrl: './edit-public-message-dialog.component.scss',
-    standalone: false
+    imports: [ScrollbarDialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, DropdownComponent, TextAreaComponent, RichTextEditorComponent, DialogActionsComponent, ButtonComponent]
 })
 export class EditPublicMessageDialogComponent extends BaseComponent implements OnInit {
   @Input() publicMessage!: PublicMessage;

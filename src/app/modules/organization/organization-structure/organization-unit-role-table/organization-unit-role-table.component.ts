@@ -12,13 +12,18 @@ import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
 import { ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { RoleTableContainerComponent } from '../../../../shared/components/role-table/role-table-container/role-table-container.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { RoleRowComponent } from '../../../../shared/components/role-table/role-row/role-row.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 
 @Component({
     selector: 'app-org-unit-role-table',
     templateUrl: 'organization-unit-role-table.component.html',
     styleUrls: ['organization-unit-role-table.component.scss'],
     providers: [RoleTableComponentStore],
-    standalone: false
+    imports: [RoleTableContainerComponent, NgIf, NativeTableComponent, NgFor, RoleRowComponent, ParagraphComponent, AsyncPipe]
 })
 export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent implements OnInit {
   @Input() public unitName!: string;

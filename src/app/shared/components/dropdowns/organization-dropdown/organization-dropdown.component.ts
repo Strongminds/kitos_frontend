@@ -1,15 +1,20 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BehaviorSubject, combineLatestWith, map, Observable } from 'rxjs';
 import { BaseComponent } from '../../../base/base.component';
 import { OrganizationDropdownComponentStore } from './organization-dropdown.component-store';
+import { ConnectedDropdownComponent } from '../connected-dropdown/connected-dropdown.component';
 
 @Component({
-  selector: 'app-organization-dropdown',
-  templateUrl: './organization-dropdown.component.html',
-  styleUrl: './organization-dropdown.component.scss',
-  providers: [OrganizationDropdownComponentStore],
-  standalone: false,
+    selector: 'app-organization-dropdown',
+    templateUrl: './organization-dropdown.component.html',
+    styleUrl: './organization-dropdown.component.scss',
+    providers: [OrganizationDropdownComponentStore],
+    imports: [
+        ConnectedDropdownComponent,
+        FormsModule,
+        ReactiveFormsModule,
+    ],
 })
 export class OrganizationDropdownComponent extends BaseComponent implements OnInit {
   @Input() formGroup!: FormGroup;

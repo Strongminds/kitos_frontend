@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
@@ -22,12 +22,19 @@ import {
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
 
 @Component({
     selector: 'app-gdpr-risk-assessment-section',
     templateUrl: './gdpr-risk-assessment-section.component.html',
     styleUrls: ['./gdpr-risk-assessment-section.component.scss'],
-    standalone: false
+    imports: [AccordionComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, NgIf, DatePickerComponent, DropdownComponent, EditUrlSectionComponent, TextAreaComponent, AsyncPipe]
 })
 export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

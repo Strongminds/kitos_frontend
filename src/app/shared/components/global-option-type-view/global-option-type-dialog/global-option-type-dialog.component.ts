@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { APIGlobalRoleOptionCreateRequestDTO, APIGlobalRoleOptionUpdateRequestDTO } from 'src/app/api/v2';
@@ -9,12 +9,20 @@ import {
 } from 'src/app/shared/models/options/global-admin-option-type.model';
 import { isRoleOptionType } from 'src/app/shared/models/options/role-option-types.model';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../textbox/textbox.component';
+import { CheckboxComponent } from '../../checkbox/checkbox.component';
+import { NgIf } from '@angular/common';
+import { TextAreaComponent } from '../../textarea/textarea.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
     selector: 'app-global-option-type-dialog',
     templateUrl: './global-option-type-dialog.component.html',
     styleUrl: './global-option-type-dialog.component.scss',
-    standalone: false
+    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, CheckboxComponent, NgIf, TextAreaComponent, DialogActionsComponent, ButtonComponent]
 })
 export class GlobalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;

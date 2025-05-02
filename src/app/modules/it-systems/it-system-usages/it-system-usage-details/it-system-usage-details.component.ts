@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map, tap } from 'rxjs';
@@ -40,11 +40,16 @@ import {
   selectITSystemUsageEnableTabSystemRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 
 @Component({
     templateUrl: 'it-system-usage-details.component.html',
     styleUrls: ['it-system-usage-details.component.scss'],
-    standalone: false
+    imports: [NgIf, BreadcrumbsComponent, ButtonComponent, NavigationDrawerComponent, RouterOutlet, LoadingComponent, AsyncPipe]
 })
 export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

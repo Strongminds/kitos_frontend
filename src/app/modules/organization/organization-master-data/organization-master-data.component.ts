@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest, first } from 'rxjs';
 import {
@@ -22,13 +22,21 @@ import {
 } from 'src/app/store/organization/selectors';
 import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { OrganizationMasterDataComponentStore } from './organization-master-data.component-store';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { HelpButtonComponent } from '../../../shared/components/help-button/help-button.component';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../shared/components/card-header/card-header.component';
+import { FormGridComponent } from '../../../shared/components/form-grid/form-grid.component';
+import { NumericInputComponent } from '../../../shared/components/numeric-input/numeric-input.component';
+import { TextBoxComponent } from '../../../shared/components/textbox/textbox.component';
+import { ConnectedDropdownComponent } from '../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 
 @Component({
     selector: 'app-organization-master-data',
     templateUrl: './organization-master-data.component.html',
     styleUrl: './organization-master-data.component.scss',
     providers: [OrganizationMasterDataComponentStore],
-    standalone: false
+    imports: [NgIf, HelpButtonComponent, CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, NumericInputComponent, TextBoxComponent, ConnectedDropdownComponent, AsyncPipe]
 })
 export class OrganizationMasterDataComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegularOptionType } from 'src/app/shared/models/options/regular-option-types.model';
 import { OptionTypeDropdownComponentStore } from './option-type-dropdown-component-store';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -7,13 +7,15 @@ import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { getOptionTypeName } from 'src/app/shared/helpers/option-type.helper';
 import { Store } from '@ngrx/store';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { DropdownComponent } from '../dropdown/dropdown.component';
 
 @Component({
     selector: 'app-option-type-dropdown',
     templateUrl: './option-type-dropdown.component.html',
     styleUrl: './option-type-dropdown.component.scss',
     providers: [OptionTypeDropdownComponentStore],
-    standalone: false
+    imports: [NgIf, DropdownComponent, FormsModule, ReactiveFormsModule, AsyncPipe]
 })
 export class OptionTypeDropdownComponent extends BaseComponent implements OnInit {
   @Input() optionType!: RegularOptionType | RoleOptionTypes;

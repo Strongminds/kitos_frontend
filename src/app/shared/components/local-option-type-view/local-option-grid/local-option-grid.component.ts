@@ -11,12 +11,13 @@ import {
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 import { EditLocalOptionTypeDialogComponent } from '../edit-local-option-type-dialog/edit-local-option-type-dialog.component';
 import { OBLIGATORY_LOCAL_OPTION_HELP_TEXT } from 'src/app/shared/constants/constants';
+import { LocalGridComponent } from '../../local-grid/local-grid.component';
 
 @Component({
     selector: 'app-local-option-grid',
     templateUrl: './local-option-grid.component.html',
     styleUrl: './local-option-grid.component.scss',
-    standalone: false
+    imports: [LocalGridComponent]
 })
 export class LocalOptionGridComponent implements OnInit {
   @Input() public loading: boolean = false;

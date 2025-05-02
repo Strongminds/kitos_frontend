@@ -9,12 +9,13 @@ import {
 } from 'src/app/shared/models/options/global-admin-option-type.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GlobalOptionTypeActions } from 'src/app/store/global-admin/global-option-types/actions';
+import { LocalGridComponent } from '../../local-grid/local-grid.component';
 
 @Component({
     selector: 'app-global-option-type-grid',
     templateUrl: './global-option-type-grid.component.html',
     styleUrl: './global-option-type-grid.component.scss',
-    standalone: false
+    imports: [LocalGridComponent]
 })
 export class GlobalOptionTypeGridComponent implements OnChanges {
   @Input() loading: boolean = false;

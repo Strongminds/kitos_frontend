@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MatDialogContent } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
@@ -11,12 +11,20 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgFor, NgIf } from '@angular/common';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { CheckboxComponent } from '../../checkbox/checkbox.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
     selector: 'app-hide-show-dialog',
     templateUrl: './hide-show-dialog.component.html',
     styleUrl: './hide-show-dialog.component.scss',
-    standalone: false
+    imports: [DialogComponent, StandardVerticalContentGridComponent, CdkScrollable, MatDialogContent, NgFor, ParagraphComponent, NgIf, CheckboxComponent, DialogActionsComponent, ButtonComponent]
 })
 export class HideShowDialogComponent implements OnInit {
   @Input() columns!: GridColumn[];

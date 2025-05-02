@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { combineLatest, first, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -7,7 +7,19 @@ import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { EntitySelectionService } from 'src/app/shared/services/entity-selector-service';
-import { ExtendedThemePalette } from '../../buttons/button/button.component';
+import { ExtendedThemePalette, ButtonComponent } from '../../buttons/button/button.component';
+import { ScrollbarDialogComponent } from '../dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { NgClass, NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { UserDropdownComponent } from '../../dropdowns/user-dropdown/user-dropdown.component';
+import { ContractsDropdownComponent } from '../../dropdowns/contracts-dropdown/contracts-dropdown.component';
+import { BulkActionDialogSectionComponent } from './bulk-action-dialog-section/bulk-action-dialog-section.component';
+import { LoadingComponent } from '../../loading/loading.component';
+import { EmptyStateComponent } from '../../empty-states/empty-state.component';
+import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
+import { SnackbarActionsComponent } from '../../snackbar-actions/snackbar-actions.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { ContentSpaceBetweenComponent } from '../../content-space-between/content-space-between.component';
 
 export interface BulkActionOption {
   id: string | number;
@@ -37,7 +49,7 @@ export interface BulkActionResult {
     templateUrl: './bulk-action-dialog.component.html',
     styleUrl: './bulk-action-dialog.component.scss',
     providers: [EntitySelectionService],
-    standalone: false
+    imports: [ScrollbarDialogComponent, NgClass, StandardVerticalContentGridComponent, NgIf, UserDropdownComponent, FormsModule, ReactiveFormsModule, ContractsDropdownComponent, NgFor, BulkActionDialogSectionComponent, LoadingComponent, EmptyStateComponent, DialogActionsComponent, SnackbarActionsComponent, ParagraphComponent, ButtonComponent, ContentSpaceBetweenComponent, AsyncPipe]
 })
 export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   extends BaseComponent

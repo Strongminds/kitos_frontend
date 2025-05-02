@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
@@ -36,12 +36,26 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ThirdCountriesTableComponent } from './third-countries-table/third-countries-table.component';
+import { ProcessorsTableComponent } from './processors-table/processors-table.component';
+import { SubProcessorsTableComponent } from './sub-processors-table/sub-processors-table.component';
 
 @Component({
     selector: 'app-data-processing-frontpage',
     templateUrl: './data-processing-frontpage.component.html',
     styleUrl: './data-processing-frontpage.component.scss',
-    standalone: false
+    imports: [CardComponent, CardHeaderComponent, NgIf, StatusChipComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, DropdownComponent, TextAreaComponent, DatePickerComponent, OrgUnitSelectComponent, StandardVerticalContentGridComponent, ThirdCountriesTableComponent, ProcessorsTableComponent, SubProcessorsTableComponent, AsyncPipe]
 })
 export class DataProcessingFrontpageComponent extends BaseComponent implements OnInit {
   public readonly basisForTransferTypes$ = this.store.select(

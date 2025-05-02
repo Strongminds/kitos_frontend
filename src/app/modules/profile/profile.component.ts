@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
@@ -21,12 +21,21 @@ import {
   selectUserOrganizationRights,
 } from 'src/app/store/user-store/selectors';
 import { ProfileComponentStore } from './profile.component-store';
+import { CardComponent } from '../../shared/components/card/card.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { FormGridComponent } from '../../shared/components/form-grid/form-grid.component';
+import { OrgUnitSelectComponent } from '../../shared/components/org-unit-select/org-unit-select.component';
+import { TextBoxComponent } from '../../shared/components/textbox/textbox.component';
+import { TextBoxInfoComponent } from '../../shared/components/textbox-info/textbox-info.component';
+import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
+import { DropdownComponent } from '../../shared/components/dropdowns/dropdown/dropdown.component';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
 
 @Component({
     templateUrl: 'profile.component.html',
     styleUrls: ['profile.component.scss'],
     providers: [ProfileComponentStore],
-    standalone: false
+    imports: [CardComponent, NgIf, FormGridComponent, FormsModule, ReactiveFormsModule, OrgUnitSelectComponent, TextBoxComponent, TextBoxInfoComponent, ParagraphComponent, DropdownComponent, LoadingComponent, AsyncPipe]
 })
 export class ProfileComponent extends BaseComponent implements OnInit {
   public startPreferenceOptions = this.userService.getAvailableStartPreferenceOptions();

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map } from 'rxjs';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
@@ -12,12 +12,15 @@ import { BaseComponent } from '../../base/base.component';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants/constants';
 import { createNode, TreeNodeModel } from '../../models/tree-node.model';
 import { filterNullish } from '../../pipes/filter-nullish';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { TreeNodeDropdownComponent } from '../dropdowns/tree-node-dropdown/tree-node-dropdown.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
     selector: 'app-org-unit-select',
     templateUrl: './org-unit-select.component.html',
     styleUrls: ['./org-unit-select.component.scss'],
-    standalone: false
+    imports: [NgIf, TreeNodeDropdownComponent, FormsModule, ReactiveFormsModule, LoadingComponent, AsyncPipe]
 })
 export class OrgUnitSelectComponent extends BaseComponent implements OnInit {
   @Input() public disabledUnitsUuids?: string[] = [];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
@@ -37,12 +37,27 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { IconButtonComponent } from '../../../../shared/components/buttons/icon-button/icon-button.component';
+import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { OversightsTableComponent } from './oversights-table/oversights-table.component';
 
 @Component({
     selector: 'app-data-processing-oversight',
     templateUrl: './data-processing-oversight.component.html',
     styleUrl: './data-processing-oversight.component.scss',
-    standalone: false
+    imports: [NgIf, CardComponent, CardHeaderComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, TextAreaComponent, DatePickerComponent, NativeTableComponent, NgFor, ContentSpaceBetweenComponent, ParagraphComponent, IconButtonComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, OversightsTableComponent, AsyncPipe]
 })
 export class DataProcessingOversightComponent extends BaseComponent implements OnInit {
   public readonly oversightOptions$ = this.store.select(selectDataProcessingOversightOptions).pipe(filterNullish());

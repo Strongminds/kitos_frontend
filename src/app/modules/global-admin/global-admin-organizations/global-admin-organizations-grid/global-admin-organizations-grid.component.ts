@@ -22,12 +22,18 @@ import {
 import { CreateOrganizationDialogComponent } from '../organizations-dialogs/create-organization-dialog/create-organization-dialog.component';
 import { DeleteOrganizationDialogComponent } from '../organizations-dialogs/delete-organization-dialog/delete-organization-dialog.component';
 import { EditOrganizationDialogComponent } from '../organizations-dialogs/edit-organization-dialog/edit-organization-dialog.component';
+import { OverviewHeaderComponent } from '../../../../shared/components/overview-header/overview-header.component';
+import { GridOptionsButtonComponent } from '../../../../shared/components/grid-options-button/grid-options-button.component';
+import { ExportMenuButtonComponent } from '../../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { GridComponent } from '../../../../shared/components/grid/grid.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-global-admin-organizations-grid',
     templateUrl: './global-admin-organizations-grid.component.html',
     styleUrl: './global-admin-organizations-grid.component.scss',
-    standalone: false
+    imports: [OverviewHeaderComponent, GridOptionsButtonComponent, ExportMenuButtonComponent, ButtonComponent, GridComponent, AsyncPipe]
 })
 export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;

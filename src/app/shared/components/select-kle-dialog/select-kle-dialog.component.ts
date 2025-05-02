@@ -11,6 +11,13 @@ import { compareKle, matchKleChoice, matchMainGroup, matchSubGroup } from '../..
 import { Dictionary } from '../../models/primitives/dictionary.model';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { invertBooleanValue } from '../../pipes/invert-boolean-value';
+import { DialogComponent } from '../dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { DropdownComponent } from '../dropdowns/dropdown/dropdown.component';
+import { DividerComponent } from '../divider/divider.component';
+import { DialogActionsComponent } from '../dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
 
 interface KleChoiceViewModel extends APIKLEDetailsDTO {
   fullText: string;
@@ -21,7 +28,7 @@ interface KleChoiceViewModel extends APIKLEDetailsDTO {
     selector: 'app-select-kle-dialog',
     templateUrl: './select-kle-dialog.component.html',
     styleUrls: ['./select-kle-dialog.component.scss'],
-    standalone: false
+    imports: [DialogComponent, StandardVerticalContentGridComponent, DropdownComponent, DividerComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
 })
 export class SelectKleDialogComponent extends BaseComponent implements OnInit {
   public readonly isLoading = new BehaviorSubject<boolean>(false);

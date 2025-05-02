@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first, map } from 'rxjs';
 import { APIShallowOrganizationDTO } from 'src/app/api/v1';
@@ -38,13 +38,27 @@ import {
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catalog-details-frontpage.component-store';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
+import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
+import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
+import { ConnectedDropdownComponent } from '../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { ContentBoxComponent } from '../../../../../shared/components/contentbox/contentbox.component';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { ExternalReferenceComponent } from '../../../../../shared/components/external-reference/external-reference.component';
+import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
+import { TextBoxInfoComponent } from '../../../../../shared/components/textbox-info/textbox-info.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-overview/it-system-kle-overview.component';
 
 @Component({
     selector: 'app-it-system-catalog-details-frontpage',
     templateUrl: './it-system-catalog-details-frontpage.component.html',
     styleUrl: './it-system-catalog-details-frontpage.component.scss',
     providers: [ITSystemCatalogDetailsFrontpageComponentStore],
-    standalone: false
+    imports: [CardComponent, CardHeaderComponent, StatusChipComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, ConnectedDropdownComponent, DropdownComponent, ContentBoxComponent, NgFor, ExternalReferenceComponent, TextAreaComponent, TextBoxInfoComponent, ParagraphComponent, ItSystemKleOverviewComponent, AsyncPipe]
 })
 export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly itSystemIsActive$ = this.store.select(selectItSystemIsActive);

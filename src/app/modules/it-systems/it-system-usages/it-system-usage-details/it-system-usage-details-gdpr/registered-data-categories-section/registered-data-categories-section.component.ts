@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
@@ -9,12 +9,15 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdprRegisteredDataCategories } from 'src/app/store/it-system-usage/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
+import { NgFor, AsyncPipe } from '@angular/common';
+import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
 
 @Component({
     selector: 'app-registered-data-categories-section',
     templateUrl: './registered-data-categories-section.component.html',
     styleUrls: ['./registered-data-categories-section.component.scss'],
-    standalone: false
+    imports: [AccordionComponent, FormsModule, ReactiveFormsModule, NgFor, CheckboxComponent, AsyncPipe]
 })
 export class RegisteredDataCategoriesSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

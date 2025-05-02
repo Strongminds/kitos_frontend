@@ -1,15 +1,16 @@
 import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { combineLatestWith, map, Observable, of } from 'rxjs';
 import { APIItContractResponseDTO } from 'src/app/api/v2';
 import { ContractDropdownComponentStore } from './contracts-dropdown.component-store';
+import { ConnectedDropdownComponent } from '../connected-dropdown/connected-dropdown.component';
 
 @Component({
     selector: 'app-contracts-dropdown',
     templateUrl: './contracts-dropdown.component.html',
     styleUrl: './contracts-dropdown.component.scss',
     providers: [ContractDropdownComponentStore],
-    standalone: false
+    imports: [ConnectedDropdownComponent, FormsModule, ReactiveFormsModule]
 })
 export class ContractsDropdownComponent implements OnInit {
   @Input() formGroup!: FormGroup;

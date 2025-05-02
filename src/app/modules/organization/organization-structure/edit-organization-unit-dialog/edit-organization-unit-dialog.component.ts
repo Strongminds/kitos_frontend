@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
@@ -35,12 +35,29 @@ import {
   selectResponsibleSystemsRegistrations,
   selectUnitPermissions,
 } from 'src/app/store/organization/organization-unit/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
+import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info/textbox-info.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { NumericInputComponent } from '../../../../shared/components/numeric-input/numeric-input.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { RegistrationsRolesSectionComponent } from './registrations-roles-section/registrations-roles-section.component';
+import { RegistrationsPaymentsSectionComponent } from './registrations-payments-section/registrations-payments-section.component';
+import { RegistrationsPageDetailsSectionComponent } from './registrations-page-details-section/registrations-page-details-section.component';
+import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { SnackbarActionsComponent } from '../../../../shared/components/snackbar-actions/snackbar-actions.component';
+import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
 
 @Component({
     selector: 'app-edit-organization-unit-dialog',
     templateUrl: './edit-organization-unit-dialog.component.html',
     styleUrl: './edit-organization-unit-dialog.component.scss',
-    standalone: false
+    imports: [NgIf, DialogComponent, StandardVerticalContentGridComponent, ParagraphComponent, OrgUnitSelectComponent, FormsModule, ReactiveFormsModule, TextBoxInfoComponent, TextBoxComponent, NumericInputComponent, DialogActionsComponent, ButtonComponent, RegistrationsRolesSectionComponent, RegistrationsPaymentsSectionComponent, RegistrationsPageDetailsSectionComponent, EmptyStateComponent, LoadingComponent, SnackbarActionsComponent, TrashcanIconComponent, AsyncPipe]
 })
 export class EditOrganizationUnitDialogComponent extends BaseComponent implements OnInit {
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;

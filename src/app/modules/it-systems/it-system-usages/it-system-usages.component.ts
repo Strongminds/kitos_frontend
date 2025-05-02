@@ -50,11 +50,17 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     templateUrl: 'it-system-usages.component.html',
     styleUrls: ['it-system-usages.component.scss'],
-    standalone: false
+    imports: [OverviewHeaderComponent, GridOptionsButtonComponent, ExportMenuButtonComponent, HideShowButtonComponent, GridComponent, AsyncPipe]
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);

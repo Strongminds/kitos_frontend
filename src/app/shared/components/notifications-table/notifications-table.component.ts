@@ -28,13 +28,44 @@ import { NotificationService } from '../../services/notification.service';
 import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
 import { NotificationsTableSentDialogComponent } from './notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NativeTableComponent } from '../native-table/native-table.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { BooleanCircleComponent } from '../boolean-circle/boolean-circle.component';
+import { TableRowActionsComponent } from '../table-row-actions/table-row-actions.component';
+import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
+import { PencilIconComponent } from '../icons/pencil-icon.compnent';
+import { EyeIconComponent } from '../icons/eye-icon.component';
+import { XIconComponent } from '../icons/x-icon.component';
+import { TrashcanIconComponent } from '../icons/trashcan-icon.component';
+import { EmptyStateComponent } from '../empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../collection-extension-button/collection-extension-button.component';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
-  selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
-  templateUrl: './notifications-table.component.html',
-  styleUrls: ['./notifications-table.component.scss'],
-  providers: [NotificationsTableComponentStore],
-  standalone: false,
+    selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
+    templateUrl: './notifications-table.component.html',
+    styleUrls: ['./notifications-table.component.scss'],
+    providers: [NotificationsTableComponentStore],
+    imports: [
+        NgIf,
+        StandardVerticalContentGridComponent,
+        NativeTableComponent,
+        NgFor,
+        ParagraphComponent,
+        BooleanCircleComponent,
+        TableRowActionsComponent,
+        IconButtonComponent,
+        PencilIconComponent,
+        EyeIconComponent,
+        XIconComponent,
+        TrashcanIconComponent,
+        EmptyStateComponent,
+        CollectionExtensionButtonComponent,
+        LoadingComponent,
+        AsyncPipe,
+    ],
 })
 export class NotificationsTableComponent extends BaseComponent implements OnInit {
   @Input() entityUuid!: string;

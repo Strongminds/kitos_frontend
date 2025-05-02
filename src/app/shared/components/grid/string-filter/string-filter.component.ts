@@ -6,12 +6,14 @@ import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.comp
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
+import { TextBoxComponent as TextBoxComponent_1 } from '../../textbox/textbox.component';
+import { AfterValueChangedDirective } from '../../../directives/after-value-changed.directive';
 
 @Component({
     selector: 'app-string-filter',
     templateUrl: './string-filter.component.html',
     styleUrl: './string-filter.component.scss',
-    standalone: false
+    imports: [TextBoxComponent_1, AfterValueChangedDirective]
 })
 export class StringFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @ViewChild(TextBoxComponent) public textBox!: TextBoxComponent;

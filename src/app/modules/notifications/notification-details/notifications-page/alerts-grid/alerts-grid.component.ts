@@ -9,12 +9,14 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { AlertActions } from 'src/app/store/alerts/actions';
 import { selectAlertsByType } from 'src/app/store/alerts/selectors';
 import { Alert, RelatedEntityType } from 'src/app/store/alerts/state';
+import { LocalGridComponent } from '../../../../../shared/components/local-grid/local-grid.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-alerts-grid',
     templateUrl: './alerts-grid.component.html',
     styleUrl: './alerts-grid.component.scss',
-    standalone: false
+    imports: [LocalGridComponent, AsyncPipe]
 })
 export class AlertsGridComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;

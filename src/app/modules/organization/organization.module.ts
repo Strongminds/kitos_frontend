@@ -19,24 +19,20 @@ import { OrganizationComponent } from './organization.component';
 import { OrganizationRouterModule } from './organization.routes';
 
 @NgModule({
-  declarations: [
-    OrganizationComponent,
-    OrganizationStructureComponent,
-    OrganizationUsersComponent,
-    OrganizationMasterDataComponent,
-    EditOrganizationUnitDialogComponent,
-    RegistrationsRolesSectionComponent,
-    RegistrationsPaymentsSectionComponent,
-    RegistrationsPageDetailsSectionComponent,
-    UserInfoDialogComponent,
-    UserRoleTableComponent,
-    OrganizationUnitRoleTableComponent,
-    EditUserDialogComponent,
-    CreateUserDialogComponent,
-    ManageUserRoleTableComponent,
-    DeleteUserDialogComponent,
-  ],
-
-  imports: [OrganizationRouterModule, SharedModule, ComponentsModule],
+    imports: [OrganizationRouterModule, SharedModule, ComponentsModule, OrganizationComponent,
+        OrganizationStructureComponent,
+        OrganizationUsersComponent,
+        OrganizationMasterDataComponent,
+        EditOrganizationUnitDialogComponent,
+        RegistrationsRolesSectionComponent,
+        RegistrationsPaymentsSectionComponent,
+        RegistrationsPageDetailsSectionComponent,
+        UserInfoDialogComponent,
+        UserRoleTableComponent,
+        OrganizationUnitRoleTableComponent,
+        EditUserDialogComponent,
+        CreateUserDialogComponent,
+        ManageUserRoleTableComponent,
+        DeleteUserDialogComponent],
 })
 export class OrganizationModule {}

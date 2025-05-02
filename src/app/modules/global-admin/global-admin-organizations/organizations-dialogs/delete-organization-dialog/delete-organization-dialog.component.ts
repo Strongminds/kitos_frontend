@@ -9,15 +9,23 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
-import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
+import { RemovalConflict, RemovalConflictType, RemovalConflictTableComponent } from './removal-conflict-table/removal-conflict-table.component';
 import { ClipboardService } from 'src/app/shared/services/clipboard.service';
+import { ScrollbarDialogComponent } from '../../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { CheckboxComponent } from '../../../../../shared/components/checkbox/checkbox.component';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 
 @Component({
     selector: 'app-delete-organization-dialog',
     templateUrl: './delete-organization-dialog.component.html',
     styleUrl: './delete-organization-dialog.component.scss',
     providers: [DeleteOrganizationComponentStore],
-    standalone: false
+    imports: [ScrollbarDialogComponent, NgIf, LoadingComponent, StandardVerticalContentGridComponent, ParagraphComponent, NgFor, RemovalConflictTableComponent, DialogActionsComponent, CheckboxComponent, ButtonComponent, AsyncPipe]
 })
 export class DeleteOrganizationDialogComponent extends BaseComponent implements OnInit {
   @Input() public organization!: OrganizationOData;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { filter, pairwise } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -12,7 +12,7 @@ import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
     selector: 'app-it-contracts-root',
     templateUrl: './it-contracts-root.component.html',
     styleUrl: './it-contracts-root.component.scss',
-    standalone: false
+    imports: [RouterOutlet]
 })
 export class ItContractsRootComponent extends BaseComponent implements OnInit {
   constructor(private store: Store, private router: Router) {

@@ -13,11 +13,19 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser, selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { FrontpageComponentStore } from './frontpage.component-store';
 import { EditPublicMessageDialogComponent } from './public-message/edit-public-message-dialog/edit-public-message-dialog.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
+import { HelpIconComponent } from '../../shared/components/icons/help.component';
+import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
+import { LoginComponent } from './login/login.component';
+import { PublicMessageComponent } from './public-message/public-message.component';
+import { StandardVerticalContentGridComponent } from '../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ButtonComponent } from '../../shared/components/buttons/button/button.component';
 
 @Component({
     templateUrl: 'frontpage.component.html',
     styleUrls: ['frontpage.component.scss'],
-    standalone: false
+    imports: [NgIf, LoadingComponent, HelpIconComponent, ParagraphComponent, LoginComponent, NgFor, PublicMessageComponent, StandardVerticalContentGridComponent, ButtonComponent, AsyncPipe]
 })
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, filter, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
@@ -20,12 +20,40 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { SectionComponent } from '../../../../../shared/components/section/section.component';
+import { OrgUnitSelectComponent } from '../../../../../shared/components/org-unit-select/org-unit-select.component';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { NumericInputComponent } from '../../../../../shared/components/numeric-input/numeric-input.component';
+import { CheckboxButtonComponent } from '../../../../../shared/components/buttons/checkbox-button/checkbox-button.component';
+import { DragAndDropTreeComponent } from '../../../../../shared/components/drag-and-drop-tree/drag-and-drop-tree.component';
 
 @Component({
-  selector: 'app-it-system-usage-details-organization',
-  templateUrl: './it-system-usage-details-organization.component.html',
-  styleUrls: ['./it-system-usage-details-organization.component.scss'],
-  standalone: false,
+    selector: 'app-it-system-usage-details-organization',
+    templateUrl: './it-system-usage-details-organization.component.html',
+    styleUrls: ['./it-system-usage-details-organization.component.scss'],
+    imports: [
+        CardComponent,
+        CardHeaderComponent,
+        NgIf,
+        ParagraphComponent,
+        FormsModule,
+        ReactiveFormsModule,
+        DropdownComponent,
+        StandardVerticalContentGridComponent,
+        SectionComponent,
+        OrgUnitSelectComponent,
+        MatProgressSpinner,
+        NumericInputComponent,
+        CheckboxButtonComponent,
+        DragAndDropTreeComponent,
+        AsyncPipe,
+    ],
 })
 export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent implements OnInit {
   public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);

@@ -5,14 +5,14 @@ import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
-import { SystemRelationDialogFormModel } from '../system-relation-dialog/system-relation-dialog.component';
+import { SystemRelationDialogFormModel, SystemRelationDialogComponent } from '../system-relation-dialog/system-relation-dialog.component';
 
 @Component({
     selector: 'app-create-relation-dialog',
     templateUrl: './create-relation-dialog.component.html',
     styleUrls: ['./create-relation-dialog.component.scss'],
     providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
-    standalone: false
+    imports: [SystemRelationDialogComponent]
 })
 export class CreateRelationDialogComponent extends BaseComponent {
   public relationForm = new FormGroup<SystemRelationDialogFormModel>({

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateContractRequestDTO } from 'src/app/api/v2';
@@ -23,12 +23,19 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
+import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { PaymentTableComponent } from './payment-table/payment-table.component';
 
 @Component({
     selector: 'app-it-contract-economy',
     templateUrl: './it-contract-economy.component.html',
     styleUrl: './it-contract-economy.component.scss',
-    standalone: false
+    imports: [NgIf, CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, DatePickerComponent, DropdownComponent, PaymentTableComponent, AsyncPipe]
 })
 export class ItContractEconomyComponent extends BaseComponent implements OnInit {
   public readonly paymentFrequencyOptions$ = this.store.select(

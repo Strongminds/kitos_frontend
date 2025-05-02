@@ -1,14 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Observable, Subject, map, pairwise, startWith } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { DropdownComponent } from '../dropdown/dropdown.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     selector: 'app-connected-dropdown[text][valueField][filterChange][formGroup][formName]',
     templateUrl: './connected-dropdown.component.html',
     styleUrls: ['./connected-dropdown.component.scss'],
-    standalone: false
+    imports: [DropdownComponent, FormsModule, ReactiveFormsModule, AsyncPipe]
 })
 export class ConnectedDropdownComponent<T> extends BaseComponent implements OnInit {
   @Input() public text!: string;

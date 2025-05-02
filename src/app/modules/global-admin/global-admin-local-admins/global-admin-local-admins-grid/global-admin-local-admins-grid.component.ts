@@ -9,12 +9,17 @@ import { LocalAdminUserActions } from 'src/app/store/global-admin/local-admins/a
 import { selectAllLocalAdmins, selectLocalAdminsLoading } from 'src/app/store/global-admin/local-admins/selectors';
 import { GridActions } from 'src/app/store/grid/actions';
 import { CreateLocalAdminDialogComponent } from '../create-local-admin-dialog/create-local-admin-dialog.component';
+import { OverviewHeaderComponent } from '../../../../shared/components/overview-header/overview-header.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { ExportIconComponent } from '../../../../shared/components/icons/export-icon.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { LocalGridComponent } from '../../../../shared/components/local-grid/local-grid.component';
 
 @Component({
     selector: 'app-global-admin-local-admins-grid',
     templateUrl: './global-admin-local-admins-grid.component.html',
     styleUrl: './global-admin-local-admins-grid.component.scss',
-    standalone: false
+    imports: [OverviewHeaderComponent, ButtonComponent, ExportIconComponent, NgIf, LocalGridComponent, AsyncPipe]
 })
 export class GlobalAdminLocalAdminsGridComponent {
   public readonly localAdmins$ = this.store.select(selectAllLocalAdmins);

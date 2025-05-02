@@ -3,13 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { IdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { GridUsagesConsequencesDialogComponent } from '../grid-usages-consequences-dialog/grid-usages-consequences-dialog.component';
 import { GridUsagesDialogComponentStore } from '../grid-usages-dialog/grid-usages-dialog.component-store';
+import { ConnectedDropdownDialogComponent } from '../../../dialogs/connected-dropdown-dialog/connected-dropdown-dialog.component';
 
 @Component({
     selector: 'app-grid-usages-dropdown-dialog',
     templateUrl: './grid-usages-dropdown-dialog.component.html',
     styleUrl: './grid-usages-dropdown-dialog.component.scss',
     providers: [GridUsagesDialogComponentStore],
-    standalone: false
+    imports: [ConnectedDropdownDialogComponent]
 })
 export class GridUsagesDropdownDialogComponent {
   @Input() rowEntityIdentifier!: string;

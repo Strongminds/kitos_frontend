@@ -15,12 +15,24 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { NgSelectComponent, NgOptionTemplateDirective, NgMultiLabelTemplateDirective } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgFor } from '@angular/common';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
 
 @Component({
-  selector: 'app-multi-select-dropdown',
-  templateUrl: './multi-select-dropdown.component.html',
-  styleUrl: './multi-select-dropdown.component.scss',
-  standalone: false,
+    selector: 'app-multi-select-dropdown',
+    templateUrl: './multi-select-dropdown.component.html',
+    styleUrl: './multi-select-dropdown.component.scss',
+    imports: [
+        NgSelectComponent,
+        FormsModule,
+        NgOptionTemplateDirective,
+        NgIf,
+        ParagraphComponent,
+        NgMultiLabelTemplateDirective,
+        NgFor,
+    ],
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
   @Input() public text = '';

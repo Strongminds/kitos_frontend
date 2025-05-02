@@ -9,13 +9,21 @@ import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectITSystemHasModifyPermission, selectItSystemKleUuids } from 'src/app/store/it-system/selectors';
-import { KleCommandEventArgs, SelectedKle } from '../../../shared/kle-table/kle-table.component';
+import { KleCommandEventArgs, SelectedKle, KleTableComponent } from '../../../shared/kle-table/kle-table.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { TextBoxInfoComponent } from '../../../../../shared/components/textbox-info/textbox-info.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
     selector: 'app-it-system-catalog-kle',
     templateUrl: './it-system-catalog-kle.component.html',
     styleUrl: './it-system-catalog-kle.component.scss',
-    standalone: false
+    imports: [CardComponent, CardHeaderComponent, StandardVerticalContentGridComponent, NgIf, KleTableComponent, TextBoxInfoComponent, ParagraphComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe]
 })
 export class ItSystemCatalogKleComponent extends BaseComponent implements OnInit {
   private disabledKleUuids: Array<string> = [];

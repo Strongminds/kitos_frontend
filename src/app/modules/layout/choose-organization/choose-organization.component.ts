@@ -8,12 +8,15 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { ChooseOrganizationComponentStore } from './choose-organization.component-store';
 import { OrganizationActions } from 'src/app/store/organization/actions';
+import { DialogComponent } from '../../../shared/components/dialogs/dialog/dialog.component';
+import { DropdownComponent } from '../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
     templateUrl: 'choose-organization.component.html',
     styleUrls: ['choose-organization.component.scss'],
     providers: [ChooseOrganizationComponentStore],
-    standalone: false
+    imports: [DialogComponent, DropdownComponent, AsyncPipe]
 })
 export class ChooseOrganizationComponent implements OnInit {
   public closable = true;

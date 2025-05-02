@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
@@ -21,12 +21,19 @@ import {
   selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprPurpose,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { CardComponent } from '../../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
+import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
     selector: 'app-general-info-section',
     templateUrl: './general-info-section.component.html',
     styleUrls: ['./general-info-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
-    standalone: false
+    imports: [CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, NgIf, TextBoxComponent, DropdownComponent, EditUrlSectionComponent, AsyncPipe]
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
   @Input() disableLinkControl!: Observable<void>;

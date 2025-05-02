@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
@@ -8,13 +8,22 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { HelpTextActions } from 'src/app/store/global-admin/help-texts/actions';
 import { CreateHelpTextDialogComponentStore } from './create-help-text-dialog.component-store';
+import { DialogComponent } from '../dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../textbox/textbox.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { DividerComponent } from '../../divider/divider.component';
+import { RichTextEditorComponent } from '../../rich-text-editor/rich-text-editor.component';
+import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
     selector: 'app-create-help-text-dialog',
     templateUrl: './create-help-text-dialog.component.html',
     styleUrl: './create-help-text-dialog.component.scss',
     providers: [CreateHelpTextDialogComponentStore],
-    standalone: false
+    imports: [DialogComponent, StandardVerticalContentGridComponent, TextBoxComponent, FormsModule, ReactiveFormsModule, NgIf, ParagraphComponent, DividerComponent, RichTextEditorComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
 })
 export class CreateHelpTextDialogComponent extends BaseComponent implements OnInit {
   @Input() existingKey: string | undefined;
