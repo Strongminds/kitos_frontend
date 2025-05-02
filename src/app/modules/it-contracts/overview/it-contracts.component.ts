@@ -35,9 +35,9 @@ import {
 } from 'src/app/store/it-contract/selectors';
 
 @Component({
-    templateUrl: 'it-contracts.component.html',
-    styleUrls: ['it-contracts.component.scss'],
-    standalone: false
+  templateUrl: 'it-contracts.component.html',
+  styleUrls: ['it-contracts.component.scss'],
+  standalone: false,
 })
 export class ITContractsComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
@@ -446,9 +446,16 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const existingColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, defaultColumnsAndRoles);
-          const columns = existingColumns ?? defaultColumnsAndRoles;
-          this.store.dispatch(ITContractActions.updateGridColumns(columns));
+          const localStorageColumns = this.gridColumnStorageService.getColumns(
+            CONTRACT_COLUMNS_ID,
+            defaultColumnsAndRoles
+          );
+          const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
+
+          this.store.dispatch(ITContractActions.updateGridColumns(columnsToUse));
+          if (!localStorageColumns) {
+            this.store.dispatch(ITContractActions.resetToOrganizationITContractColumnConfigurationError());
+          }
         })
     );
 
@@ -468,9 +475,15 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
           ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError),
           concatLatestFrom(() => this.gridColumns$)
         )
-        .subscribe(([_, gridColumns]) => {
-          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
+        .subscribe(([_, gridColumnsFromState]) => {
+          const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
+          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
+            gridColumnsFromState,
+            columnsToShow
+          );
+          if (!gridColumnStateIsCorrect) {
+            this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
+          }
         })
     );
     this.store.dispatch(ITContractActions.getItContractOverviewRoles());

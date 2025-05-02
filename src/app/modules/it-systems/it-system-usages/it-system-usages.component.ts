@@ -658,11 +658,11 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         )
         .subscribe(([_, gridColumnsFromState]) => {
           const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
-          const existingColumnsAreCorrect = this.gridColumnStorageService.columnsAreEqual(
+          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
             gridColumnsFromState,
             columnsToShow
           );
-          if (!existingColumnsAreCorrect) {
+          if (!gridColumnStateIsCorrect) {
             this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
           }
         })
