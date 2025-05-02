@@ -65,11 +65,14 @@ export class EditRoleDialogComponent implements OnInit {
   public roleAssignmentExists$(): Observable<boolean> {
     return this.componentStore.roles$.pipe(
       map((roleAssignments) =>
-        roleAssignments.some(
-          (role) =>
-            role.assignment.user.uuid === this.formGroup.controls.user.value?.uuid &&
-            role.assignment.role.uuid === this.formGroup.controls.role.value?.uuid
-        )
+        roleAssignments.some((role) => {
+          var assignment = role.assignment;
+          var formControls = this.formGroup.controls;
+          return (
+            assignment.user.uuid === formControls.user.value?.uuid &&
+            assignment.role.uuid === formControls.role.value?.uuid
+          );
+        })
       )
     );
   }
