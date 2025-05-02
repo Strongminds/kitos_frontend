@@ -36,10 +36,10 @@ import {
 } from 'src/app/store/data-processing/selectors';
 
 @Component({
-    selector: 'app-data-processing-overview',
-    templateUrl: './data-processing-overview.component.html',
-    styleUrl: './data-processing-overview.component.scss',
-    standalone: false
+  selector: 'app-data-processing-overview',
+  templateUrl: './data-processing-overview.component.html',
+  styleUrl: './data-processing-overview.component.scss',
+  standalone: false,
 })
 export class DataProcessingOverviewComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
@@ -310,10 +310,10 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
             defaultColumnsAndRoles
           );
           const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
-          
+
           this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToUse));
-          if (!localStorageColumns){
-            this.store.dispatch(DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration();
+          if (!localStorageColumns) {
+            this.store.dispatch(DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration());
           }
         })
     );
@@ -336,10 +336,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         )
         .subscribe(([_, gridColumns]) => {
           const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
-            gridColumns,
-            columnsToShow
-          );
+          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(gridColumns, columnsToShow);
           if (!gridColumnStateIsCorrect) {
             this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
           }
