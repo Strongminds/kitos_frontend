@@ -454,7 +454,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
 
           this.store.dispatch(ITContractActions.updateGridColumns(columnsToUse));
           if (!localStorageColumns) {
-            this.store.dispatch(ITContractActions.resetToOrganizationITContractColumnConfigurationError());
+            this.store.dispatch(ITContractActions.resetToOrganizationITContractColumnConfiguration());
           }
         })
     );
