@@ -13,6 +13,7 @@ import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 
 @Component({
   selector: 'app-edit-role-dialog',
@@ -25,10 +26,10 @@ export class EditRoleDialogComponent implements OnInit {
   @Input() public initialValue!: RoleAssignment;
   @Input() public componentStore!: RoleTableComponentStore;
   @Input() public title!: string;
-  @Input() public entityName?: string;
+  @Input() public orgUnit?: IdentityNamePair;
 
   public readonly formGroup = new FormGroup({
-    entityName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    orgUnit: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     role: new FormControl<APIRegularOptionResponseDTO | undefined>(undefined, Validators.required),
     user: new FormControl<ShallowUser | undefined>(undefined, Validators.required),
   });
@@ -41,7 +42,7 @@ export class EditRoleDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup.patchValue({
-      entityName: this.entityName,
+      orgUnit: this.orgUnit?.name,
       role: { ...this.initialValue.assignment.role, description: '' },
       user: this.initialValue.assignment.user,
     });
