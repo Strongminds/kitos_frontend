@@ -25,8 +25,10 @@ export class EditRoleDialogComponent implements OnInit {
   @Input() public initialValue!: RoleAssignment;
   @Input() public componentStore!: RoleTableComponentStore;
   @Input() public title!: string;
+  @Input() public entityName?: string;
 
   public readonly formGroup = new FormGroup({
+    entityName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     role: new FormControl<APIRegularOptionResponseDTO | undefined>(undefined, Validators.required),
     user: new FormControl<ShallowUser | undefined>(undefined, Validators.required),
   });
@@ -39,6 +41,7 @@ export class EditRoleDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup.patchValue({
+      entityName: this.entityName,
       role: { ...this.initialValue.assignment.role, description: '' },
       user: this.initialValue.assignment.user,
     });
