@@ -97,6 +97,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     dialogRef.componentInstance.initialValue = role;
     dialogRef.componentInstance.componentStore = this.componentStore;
     dialogRef.componentInstance.title = $localize`Rediger ${this.entityName.toLocaleLowerCase()}`;
+    dialogRef.componentInstance.entityName = role.unitName;
   }
 
   protected getRoles() {
