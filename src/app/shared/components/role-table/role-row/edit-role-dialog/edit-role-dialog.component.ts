@@ -55,7 +55,7 @@ export class EditRoleDialogComponent implements OnInit {
     if (!user || !role) throw new Error('User or role is undefined');
 
     this.actions$.pipe(ofType(this.deleteSuccessAction()), first()).subscribe(() => {
-      this.roleOptionService.dispatchAddEntityRoleAction([user.uuid], role.uuid, this.roleType);
+      this.roleOptionService.dispatchAddEntityRoleAction([user.uuid], role.uuid, this.roleType, this.orgUnit?.uuid);
     });
 
     this.roleOptionService.dispatchRemoveEntityRoleAction(this.initialValue, this.roleType);
