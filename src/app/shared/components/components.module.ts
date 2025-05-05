@@ -189,6 +189,7 @@ import { SectionComponent } from './section/section.component';
 import { SlideToggleComponent } from './slide-toggle/slide-toggle.component';
 import { SnackbarActionsComponent } from './snackbar-actions/snackbar-actions.component';
 import { VerticalContentGridSectionMarginLeftComponent } from './vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { EditRoleDialogComponent } from './role-table/role-row/edit-role-dialog/edit-role-dialog.component';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
   return () => overlay.scrollStrategies.reposition();
@@ -351,6 +352,7 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
     BulkActionDialogComponent,
     BulkActionDialogSectionComponent,
     ContractsDropdownComponent,
+    EditRoleDialogComponent,
   ],
   imports: [
     CommonModule,

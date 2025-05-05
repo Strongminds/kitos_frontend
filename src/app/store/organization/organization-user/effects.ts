@@ -15,7 +15,6 @@ import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.se
 import { selectOrganizationUuid, selectUserUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
 import { selectPreviousGridState } from './selectors';
-import { debugPipe } from 'src/app/shared/helpers/observable-helpers';
 
 @Injectable()
 export class OrganizationUserEffects {
