@@ -1,4 +1,5 @@
 import { APIExtendedRoleAssignmentResponseDTO, APIOrganizationUnitRolesResponseDTO } from 'src/app/api/v2';
+import { IdentityNamePair } from '../identity-name-pair.model';
 
 export type RoleAssignmentsMap = {
   [key: string]: string;
@@ -61,6 +62,11 @@ export interface RoleAssignment {
   assignment: APIExtendedRoleAssignmentResponseDTO;
   unitName?: string;
   unitUuid?: string;
+}
+
+export function extractUnitFromRoleAssignment(assignment: RoleAssignment): IdentityNamePair | undefined {
+  if (!assignment.unitName || !assignment.unitUuid) return undefined;
+  return { name: assignment.unitName, uuid: assignment.unitUuid };
 }
 
 export function mapDTOsToRoleAssignment(

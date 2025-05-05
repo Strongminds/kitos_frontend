@@ -71,7 +71,11 @@ export const OrganizationUnitActions = createActionGroup({
     'Add expanded nodes': (uuids: string[]) => ({ uuids }),
     'Remove expanded node': (uuid: string) => ({ uuid }),
 
-    'Bulk add organization unit role': (userUuids: string[], roleUuid: string) => ({ userUuids, roleUuid }),
+    'Bulk add organization unit role': (userUuids: string[], roleUuid: string, orgUnitUuid: string) => ({
+      userUuids,
+      roleUuid,
+      orgUnitUuid,
+    }),
     'Bulk add organization unit role Success': emptyProps(),
     'Bulk add organization unit role Error': emptyProps(),
 

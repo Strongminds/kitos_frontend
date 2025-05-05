@@ -6,6 +6,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { first, map, Observable } from 'rxjs';
 import { APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
+import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { ShallowUser } from 'src/app/shared/models/userV2.model';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
@@ -40,8 +41,10 @@ export class EditRoleDialogComponent implements OnInit {
   @Input() public initialValue!: RoleAssignment;
   @Input() public componentStore!: RoleTableComponentStore;
   @Input() public title!: string;
+  @Input() public orgUnit?: IdentityNamePair;
 
   public readonly formGroup = new FormGroup({
+    orgUnit: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     role: new FormControl<APIRegularOptionResponseDTO | undefined>(undefined, Validators.required),
     user: new FormControl<ShallowUser | undefined>(undefined, Validators.required),
   });
@@ -54,6 +57,7 @@ export class EditRoleDialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup.patchValue({
+      orgUnit: this.orgUnit?.name,
       role: { ...this.initialValue.assignment.role, description: '' },
       user: this.initialValue.assignment.user,
     });
@@ -66,7 +70,7 @@ export class EditRoleDialogComponent implements OnInit {
     if (!user || !role) throw new Error('User or role is undefined');
 
     this.actions$.pipe(ofType(this.deleteSuccessAction()), first()).subscribe(() => {
-      this.roleOptionService.dispatchAddEntityRoleAction([user.uuid], role.uuid, this.roleType);
+      this.roleOptionService.dispatchAddEntityRoleAction([user.uuid], role.uuid, this.roleType, this.orgUnit?.uuid);
     });
 
     this.roleOptionService.dispatchRemoveEntityRoleAction(this.initialValue, this.roleType);
