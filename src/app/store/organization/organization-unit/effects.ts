@@ -172,12 +172,11 @@ export class OrganizationUnitEffects {
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.bulkAddOrganizationUnitRole),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      concatLatestFrom(() => this.store.select(selectCurrentUnitUuid).pipe(filterNullish())),
-      switchMap(([[{ userUuids, roleUuid }, organizationUuid], organizationUnitUuid]) =>
+      switchMap(([{ userUuids, roleUuid, orgUnitUuid }, organizationUuid]) =>
         this.apiUnitService
           .postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment({
             organizationUuid,
-            organizationUnitUuid,
+            organizationUnitUuid: orgUnitUuid,
             request: {
               roleUuid: roleUuid,
               userUuids: userUuids,

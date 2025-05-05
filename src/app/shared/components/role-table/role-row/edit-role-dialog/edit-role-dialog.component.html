@@ -1,6 +1,13 @@
 <app-dialog [title]="title" overflow="none">
   <form (ngSubmit)="onSave()" [formGroup]="formGroup">
     <app-standard-vertical-content-grid>
+      <app-textbox
+        *ngIf="orgUnit"
+        [formGroup]="formGroup"
+        formName="orgUnit"
+        text="Organisationsenhed"
+        i18n-text
+      ></app-textbox>
       <app-user-dropdown [formGroup]="formGroup" formName="user" data-cy="user-dropdown"></app-user-dropdown>
       <app-option-type-dropdown
         [optionType]="roleType"

@@ -166,7 +166,12 @@ export class RoleOptionTypeService implements OnDestroy {
     )(entityUuid).pipe(map((roles) => roles.map(mapDTOsToRoleAssignment)));
   }
 
-  public dispatchAddEntityRoleAction(userUuids: string[], roleUuid: string, entityType: RoleOptionTypes) {
+  public dispatchAddEntityRoleAction(
+    userUuids: string[],
+    roleUuid: string,
+    entityType: RoleOptionTypes,
+    unitUuid?: string
+  ) {
     switch (entityType) {
       case 'it-system-usage':
         this.store.dispatch(ITSystemUsageActions.bulkAddItSystemUsageRole(userUuids, roleUuid));
@@ -178,7 +183,7 @@ export class RoleOptionTypeService implements OnDestroy {
         this.store.dispatch(DataProcessingActions.bulkAddDataProcessingRole(userUuids, roleUuid));
         break;
       case 'organization-unit':
-        this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid));
+        this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, unitUuid!));
         break;
     }
   }
