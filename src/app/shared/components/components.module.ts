@@ -7,6 +7,7 @@ import { DIALOG_DEFAULT_WIDTH } from '../constants/constants';
 
 import { OnInvalidErrorStateMatcher } from '../helpers/on-invalid-error-state-matcher';
 
+import { DatePickerComponent } from '@progress/kendo-angular-dateinputs';
 import '@progress/kendo-angular-intl/locales/da/all';
 
 export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy {
@@ -14,6 +15,8 @@ export function scrollFactory(overlay: Overlay): () => RepositionScrollStrategy 
 }
 
 @NgModule({
+  imports: [DatePickerComponent],
+  exports: [DatePickerComponent],
   providers: [
     { provide: ErrorStateMatcher, useClass: OnInvalidErrorStateMatcher },
     {

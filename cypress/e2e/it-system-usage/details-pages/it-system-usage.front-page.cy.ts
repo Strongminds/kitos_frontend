@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('it-system-usage.frontpage', () => {
+describe('it-system-usage frontpage', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();

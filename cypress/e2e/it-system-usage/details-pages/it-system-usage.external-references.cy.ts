@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('it-system-usage', () => {
+describe('it-system-usage references', () => {
   const itSystemUsageBaseUrl = '/api/v2/it-system-usages/*';
   const refsBaseUrl = '/api/v2/internal/external-references/it-system-usages/*';
   beforeEach(() => {

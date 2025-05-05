@@ -12,7 +12,7 @@ const userSupervisionAccordion = 'user-supervision-accordion';
 const riskAssessmentAccordion = 'risk-assessment-accordion';
 const datepickerToggle = 'datepicker-toggle';
 
-describe('it-system-usage', () => {
+describe('it-system-usage gdpr', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
@@ -237,7 +237,7 @@ describe('it-system-usage', () => {
     cy.get('app-edit-url-dialog').within(() => {
       cy.verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
     });
-  })
+  });
 
   it('can edit retention period', () => {
     cy.getByDataCy('retention-period-accordion').click();

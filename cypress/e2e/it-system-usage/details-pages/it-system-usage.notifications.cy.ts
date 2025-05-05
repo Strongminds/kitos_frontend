@@ -1,4 +1,4 @@
-describe('it-system-usage', () => {
+describe('it-system-usage notifications', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
@@ -91,11 +91,9 @@ describe('it-system-usage', () => {
         cy.setTinyMceContent('rich-text-editor', 'testBody');
         cy.getIframe().click({ force: true });
 
-        cy.intercept(
-          'POST',
-          '/api/v2/internal/notifications/ItSystemUsage/*/immediate',
-          { fixture: './it-system-usage/notifications/it-system-usage-post-notification.json' }
-        ).as('postNewNotification');
+        cy.intercept('POST', '/api/v2/internal/notifications/ItSystemUsage/*/immediate', {
+          fixture: './it-system-usage/notifications/it-system-usage-post-notification.json',
+        }).as('postNewNotification');
         cy.getByDataCy('confirm-button').click();
 
         const expectedProperties = {

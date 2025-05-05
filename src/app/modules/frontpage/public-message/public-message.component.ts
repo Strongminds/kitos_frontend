@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
@@ -7,15 +8,14 @@ import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 import { IconType } from 'src/app/shared/models/icon-type';
 import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { ExternalPageLinkComponent } from '../../../shared/components/external-page-link/external-page-link.component';
+import { IconComponent } from '../../../shared/components/icon/icon.component';
+import { ParagraphComponent } from '../../../shared/components/paragraph/paragraph.component';
+import { StatusChipComponent } from '../../../shared/components/status-chip/status-chip.component';
 import { FrontpageComponentStore } from '../frontpage.component-store';
 import { PublicMessageDialogComponent } from './public-message-dialog/public-message-dialog.component';
-import { NgIf, NgClass, AsyncPipe } from '@angular/common';
-import { CardComponent } from '../../../shared/components/card/card.component';
-import { IconComponent } from '../../../shared/components/icon/icon.component';
-import { StatusChipComponent } from '../../../shared/components/status-chip/status-chip.component';
-import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
-import { ExternalPageLinkComponent } from '../../../shared/components/external-page-link/external-page-link.component';
-import { ParagraphComponent } from '../../../shared/components/paragraph/paragraph.component';
 
 export interface PublicMessageConfig {
   iconType: IconType;
@@ -23,20 +23,28 @@ export interface PublicMessageConfig {
 }
 
 @Component({
-    selector: 'app-public-message',
-    templateUrl: './public-message.component.html',
-    styleUrls: ['./public-message.component.scss'],
-    host: {
-        '[style.width]': "mode === 'compact' ? '352px' : '452px'",
-    },
-    imports: [NgIf, CardComponent, NgClass, IconComponent, StatusChipComponent, ButtonComponent, ExternalPageLinkComponent, ParagraphComponent, AsyncPipe]
+  selector: 'app-public-message',
+  templateUrl: './public-message.component.html',
+  styleUrls: ['./public-message.component.scss'],
+  host: {
+    '[style.width]': "mode === 'compact' ? '352px' : '452px'",
+  },
+  imports: [
+    CommonModule,
+    CardComponent,
+    IconComponent,
+    StatusChipComponent,
+    ButtonComponent,
+    ExternalPageLinkComponent,
+    ParagraphComponent,
+  ],
 })
 export class PublicMessageComponent implements OnInit {
   @Input() mode!: 'normal' | 'compact';
   @Input() publicMessageUuid!: string;
 
-  public publicMessage$!: Observable<PublicMessage>;
   private readonly publicMessages$ = this.componentStore.publicMessages$.pipe(filterNullish());
+  public publicMessage$!: Observable<PublicMessage>;
 
   public readonly statusDisplayType = BooleanValueDisplayType.NormalUnstable;
 

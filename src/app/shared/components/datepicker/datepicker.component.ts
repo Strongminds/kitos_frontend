@@ -1,11 +1,12 @@
 import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MAT_DATE_FORMATS, MatNativeDateModule } from '@angular/material/core';
+import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 import {
-  MatDatepicker,
   MatDatepickerInput,
   MatDatepickerInputEvent,
+  MatDatepickerModule,
   MatDatepickerToggle,
   MatDatepickerToggleIcon,
 } from '@angular/material/datepicker';
@@ -21,20 +22,24 @@ import { BaseFormComponent } from '../../base/base-form.component';
   styleUrls: ['datepicker.component.scss'],
   imports: [
     NgIf,
-    MatFormField,
     FormsModule,
     ReactiveFormsModule,
-    MatLabel,
+
+    MatFormField,
+    MatIcon,
     MatInput,
+    MatLabel,
+
     MatDatepickerInput,
     MatDatepickerToggle,
+
     MatSuffix,
-    MatIcon,
     MatDatepickerToggleIcon,
-    MatDatepicker,
-    MatNativeDateModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
   ],
   providers: [
+    provideMomentDateAdapter(),
     {
       provide: MAT_DATE_FORMATS,
       useValue: {

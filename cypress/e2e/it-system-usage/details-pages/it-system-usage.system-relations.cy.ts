@@ -11,7 +11,7 @@ interface RelationRow {
   expectedInvalidUrlReference?: string;
 }
 
-describe('it-system-usage', () => {
+describe('it-system-usage system-relations', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
