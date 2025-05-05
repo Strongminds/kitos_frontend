@@ -64,7 +64,7 @@ export interface RoleAssignment {
   unitUuid?: string;
 }
 
-export function extractUnit(assignment: RoleAssignment): IdentityNamePair | undefined {
+export function extractUnitFromRoleAssignment(assignment: RoleAssignment): IdentityNamePair | undefined {
   if (!assignment.unitName || !assignment.unitUuid) return undefined;
   return { name: assignment.unitName, uuid: assignment.unitUuid };
 }
