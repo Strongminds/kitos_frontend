@@ -24,7 +24,6 @@ describe('it-system-usage', () => {
       fixture: './it-system-usage/it-system-usage-registered-data-category-types.json',
     });
     cy.setup(true, 'it-systems/it-system-usages');
-
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('GDPR');
   });
@@ -237,9 +236,11 @@ describe('it-system-usage', () => {
     cy.get('app-edit-url-dialog').within(() => {
       cy.verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
     });
-  })
+  });
 
   it('can edit retention period', () => {
+    cy.getByDataCy('popup-message-dismiss-button').click();
+
     cy.getByDataCy('retention-period-accordion').click();
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
