@@ -75,7 +75,8 @@ export class EditRoleDialogComponent implements OnInit {
           var formControls = this.formGroup.controls;
           return (
             assignment.user.uuid === formControls.user.value?.uuid &&
-            assignment.role.uuid === formControls.role.value?.uuid
+            assignment.role.uuid === formControls.role.value?.uuid &&
+            role.unitUuid === this.orgUnit?.uuid
           );
         })
       )
