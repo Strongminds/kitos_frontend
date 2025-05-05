@@ -1,6 +1,5 @@
-import { assign } from 'lodash';
 import { APIExtendedRoleAssignmentResponseDTO, APIOrganizationUnitRolesResponseDTO } from 'src/app/api/v2';
-import { IdentityNamePair, mapIdentityNamePair } from '../identity-name-pair.model';
+import { IdentityNamePair } from '../identity-name-pair.model';
 
 export type RoleAssignmentsMap = {
   [key: string]: string;
