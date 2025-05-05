@@ -118,7 +118,7 @@ export const itSystemUsageFeature = createFeature({
     ),
 
     on(
-      ITSystemUsageActions.addItSystemUsageRoleSuccess,
+      ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage })
     ),
     on(

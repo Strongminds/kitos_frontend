@@ -1,14 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 
+import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subject, combineLatest, map } from 'rxjs';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapUserToOption } from 'src/app/shared/models/dropdown-option.model';
-import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
+import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { Dictionary } from 'src/app/shared/models/primitives/dictionary.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -18,21 +19,30 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
-import { RoleTableComponentStore } from '../role-table.component-store';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../dialogs/dialog/dialog.component';
-import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
 import { MultiSelectDropdownComponent } from '../../dropdowns/multi-select-dropdown/multi-select-dropdown.component';
-import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../buttons/button/button.component';
-import { AsyncPipe } from '@angular/common';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { RoleTableComponentStore } from '../role-table.component-store';
 
 @Component({
-    selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
-    templateUrl: './role-table.create-dialog.component.html',
-    styleUrls: ['./role-table.create-dialog.component.scss'],
-    providers: [RoleTableComponentStore],
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, MultiSelectDropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
+  templateUrl: './role-table.create-dialog.component.html',
+  styleUrls: ['./role-table.create-dialog.component.scss'],
+  providers: [RoleTableComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    MultiSelectDropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class RoleTableCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly roleForm = new FormGroup({
@@ -42,7 +52,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     ),
   });
 
-  @Input() public userRoles: Array<IRoleAssignment> = [];
+  @Input() public userRoles: Array<RoleAssignment> = [];
   @Input() public entityType!: RoleOptionTypes;
   @Input() public entityUuid!: string;
   @Input() public title!: string;
@@ -163,10 +173,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRoleSuccess,
-            ITContractActions.addItContractRoleSuccess,
-            DataProcessingActions.addDataProcessingRoleSuccess,
-            OrganizationUnitActions.addOrganizationUnitRoleSuccess
+            ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
+            ITContractActions.bulkAddItContractRoleSuccess,
+            DataProcessingActions.bulkAddDataProcessingRoleSuccess,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess
           )
         )
         .subscribe(() => {
@@ -178,10 +188,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRoleError,
-            ITContractActions.addItContractRoleError,
-            DataProcessingActions.addDataProcessingRoleError,
-            OrganizationUnitActions.addOrganizationUnitRoleError
+            ITSystemUsageActions.bulkAddItSystemUsageRoleError,
+            ITContractActions.bulkAddItContractRoleError,
+            DataProcessingActions.bulkAddDataProcessingRoleError,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleError
           )
         )
         .subscribe(() => {

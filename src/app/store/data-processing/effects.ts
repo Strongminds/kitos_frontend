@@ -372,7 +372,7 @@ export class DataProcessingEffects {
 
   addDataProcessingRole$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(DataProcessingActions.addDataProcessingRole),
+      ofType(DataProcessingActions.bulkAddDataProcessingRole),
       concatLatestFrom(() => [
         this.store.select(selectDataProcessingRightUuidPairs),
         this.store.select(selectDataProcessingUuid).pipe(filterNullish()),
@@ -385,8 +385,8 @@ export class DataProcessingEffects {
             request: { roles: existingRoles.concat(rolesToAdd) },
           })
           .pipe(
-            map((role) => DataProcessingActions.addDataProcessingRoleSuccess(role)),
-            catchError(() => of(DataProcessingActions.addDataProcessingRoleError()))
+            map((role) => DataProcessingActions.bulkAddDataProcessingRoleSuccess(role)),
+            catchError(() => of(DataProcessingActions.bulkAddDataProcessingRoleError()))
           );
       })
     );

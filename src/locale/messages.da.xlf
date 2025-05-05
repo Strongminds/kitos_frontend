@@ -4347,14 +4347,6 @@
         <source> Gem </source>
         <target state="new"> Gem </target>
       </trans-unit>
-      <trans-unit id="5513078980496116959" datatype="html">
-        <source> Slet </source>
-        <target state="new"> Slet </target>
-      </trans-unit>
-      <trans-unit id="7967107304088297046" datatype="html">
-        <source>Kolonneopsætning for organisation</source>
-        <target state="new">Kolonneopsætning for organisation</target>
-      </trans-unit>
       <trans-unit id="4059930962225165267" datatype="html">
         <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
         <target state="new">Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</target>
@@ -6969,10 +6961,6 @@
         <source> Denne handling kan ikke fortrydes. </source>
         <target state="new"> Denne handling kan ikke fortrydes. </target>
       </trans-unit>
-      <trans-unit id="7788193785121346142" datatype="html">
-        <source> Anuller </source>
-        <target state="new"> Anuller </target>
-      </trans-unit>
       <trans-unit id="6973173527205023878" datatype="html">
         <source> Overfør roller </source>
         <target state="new"> Overfør roller </target>
@@ -6980,6 +6968,18 @@
       <trans-unit id="866125510857454253" datatype="html">
         <source>Overfør roller</source>
         <target state="new">Overfør roller</target>
+      </trans-unit>
+      <trans-unit id="4577772021742281224" datatype="html">
+        <source>Brugeren har allerede denne rolle.</source>
+        <target state="new">Brugeren har allerede denne rolle.</target>
+      </trans-unit>
+      <trans-unit id="5299437974151521850" datatype="html">
+        <source>Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
+        <target state="new">Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></target>
+      </trans-unit>
+      <trans-unit id="7788193785121346142" datatype="html">
+        <source> Anuller </source>
+        <target state="new"> Anuller </target>
       </trans-unit>
     </body>
   </file>

@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -17,29 +18,28 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
-import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
-import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 
 @Component({
-    selector: 'app-delete-user-dialog',
-    templateUrl: './delete-user-dialog.component.html',
-    styleUrl: './delete-user-dialog.component.scss',
-    providers: [RoleSelectionService],
-    imports: [
-        NgIf,
-        DialogComponent,
-        StandardVerticalContentGridComponent,
-        ParagraphComponent,
-        DialogActionsComponent,
-        ButtonComponent,
-        LoadingComponent,
-        AsyncPipe,
-    ],
+  selector: 'app-delete-user-dialog',
+  templateUrl: './delete-user-dialog.component.html',
+  styleUrl: './delete-user-dialog.component.scss',
+  providers: [RoleSelectionService],
+  imports: [
+    NgIf,
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;

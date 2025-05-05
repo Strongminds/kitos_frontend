@@ -112,9 +112,9 @@ export const ITContractActions = createActionGroup({
     'Edit External Reference Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
     'Edit External Reference Error': () => emptyProps(),
 
-    'Add It Contract Role': (userUuids: string[], roleUuid: string) => ({ userUuids, roleUuid }),
-    'Add It Contract Role Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
-    'Add It Contract Role Error': emptyProps(),
+    'Bulk Add It Contract Role': (userUuids: string[], roleUuid: string) => ({ userUuids, roleUuid }),
+    'Bulk Add It Contract Role Success': (itContract: APIItContractResponseDTO) => ({ itContract }),
+    'Bulk Add It Contract Role Error': emptyProps(),
 
     'Remove It Contract Role': (userUuid: string, roleUuid: string, contractUuid: string) => ({
       userUuid,

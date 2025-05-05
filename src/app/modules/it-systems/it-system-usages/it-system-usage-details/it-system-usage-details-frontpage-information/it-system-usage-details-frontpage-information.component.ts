@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -24,8 +25,8 @@ import {
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoDontKnowOption } from 'src/app/shared/models/yes-no-dont-know.model';
 import {
-  mapToYesNoPartiallyEnum,
   YesNoPartiallyOption,
+  mapToYesNoPartiallyEnum,
   yesNoPartiallyOptions,
 } from 'src/app/shared/models/yes-no-partially.model';
 import { mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
@@ -56,19 +57,30 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
-import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
-import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { DatePickerComponent } from '../../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
+import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
+import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
 @Component({
-    selector: 'app-it-system-usage-details-frontpage-information',
-    templateUrl: 'it-system-usage-details-frontpage-information.component.html',
-    styleUrls: ['it-system-usage-details-frontpage-information.component.scss'],
-    imports: [CardComponent, CardHeaderComponent, NgIf, StatusChipComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, DropdownComponent, TextAreaComponent, DatePickerComponent, AsyncPipe]
+  selector: 'app-it-system-usage-details-frontpage-information',
+  templateUrl: 'it-system-usage-details-frontpage-information.component.html',
+  styleUrls: ['it-system-usage-details-frontpage-information.component.scss'],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    StatusChipComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    DropdownComponent,
+    TextAreaComponent,
+    DatePickerComponent,
+    AsyncPipe,
+  ],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
