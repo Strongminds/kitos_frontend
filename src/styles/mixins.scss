@@ -561,8 +561,14 @@
     }
 
     .not-sortable {
-      ::ng-deep span {
-        cursor: default !important;
+      ::ng-deep {
+        span {
+          cursor: default !important;
+        }
+
+        .k-column-resizer {
+          cursor: col-resize !important;
+        }
       }
     }
   }
