@@ -18,7 +18,7 @@
     "e2e": "ng e2e",
     "e2e:ci": "ng e2e --configuration ci",
     "i18n": "ng extract-i18n",
-    "swagger": "rimraf src/app/api/*/ && openapi-generator-cli generate",
+    "swagger": "rimraf src/app/api/v2 && rimraf src/app/api/v1 && openapi-generator-cli generate",
     "swagger:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh swagger'"
   },
   "private": true,

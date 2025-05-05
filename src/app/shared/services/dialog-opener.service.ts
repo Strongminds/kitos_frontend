@@ -1,18 +1,25 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { DeleteUserDialogComponent } from 'src/app/modules/organization/organization-users/delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
+import { BulkActionDialogComponent } from '../components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { IconConfirmationDialogComponent } from '../components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { GlobalOptionTypeDialogComponent } from '../components/global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
 import { MAX_DIALOG_HEIGHT } from '../constants/constants';
 import { GlobalAdminOptionType } from '../models/options/global-admin-option-type.model';
 import { ODataOrganizationUser } from '../models/organization/organization-user/organization-user.model';
 
+export const defaultDialogMaxSize = {
+  height: 'auto',
+  minWidth: '600px',
+  maxWidth: '800px',
+  maxHeight: '90vh%',
+};
+
 @Injectable({
   providedIn: 'root',
 })
-
 // This service is useful if you need to open the same or similar dialogs multiple places, which need setup/configuration.
 export class DialogOpenerService {
   constructor(private dialog: MatDialog) {}
@@ -31,12 +38,7 @@ export class DialogOpenerService {
     user$: Observable<ODataOrganizationUser>,
     nested: boolean
   ): MatDialogRef<DeleteUserDialogComponent> {
-    const dialogRef = this.dialog.open(DeleteUserDialogComponent, {
-      height: 'auto',
-      minWidth: '600px',
-      maxWidth: '800px',
-      maxHeight: '90vh%',
-    });
+    const dialogRef = this.dialog.open(DeleteUserDialogComponent, defaultDialogMaxSize);
     dialogRef.componentInstance.user$ = user$;
     dialogRef.componentInstance.nested = nested;
     return dialogRef;
@@ -79,5 +81,20 @@ export class DialogOpenerService {
     const componentInstance = dialogRef.componentInstance;
     componentInstance.optionType = optionType;
     return componentInstance;
+  }
+
+  public openBulkActionDialog() {
+    return this.dialog.open(BulkActionDialogComponent, { ...defaultDialogMaxSize, width: '50%' });
+  }
+
+  public openUserRoleSelectionDialog(user: ODataOrganizationUser) {
+    const dialogRef = this.openBulkActionDialog();
+
+    const instance = dialogRef.componentInstance;
+    instance.dropdownDisabledUuids$ = of([user.Uuid]);
+    instance.dropdownType = 'user';
+    instance.emptyStateText = $localize`Brugeren har ingen roller`;
+    instance.snackbarText = $localize`Vælg handling for valgte roller`;
+    return dialogRef;
   }
 }

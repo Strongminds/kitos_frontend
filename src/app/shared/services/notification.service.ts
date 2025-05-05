@@ -234,8 +234,8 @@ export class NotificationService implements OnDestroy {
       $localize`Registrering kunne ikke opdateres`
     );
 
-    this.subscribeAsDefault(OrganizationUnitActions.addOrganizationUnitRoleSuccess, $localize`Rollen blev tilføjet`);
-    this.subscribeAsError(OrganizationUnitActions.addOrganizationUnitRoleError, $localize`Rollen kunne ikke tilføjes`);
+    this.subscribeAsDefault(OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess, $localize`Rollen blev tilføjet`);
+    this.subscribeAsError(OrganizationUnitActions.bulkAddOrganizationUnitRoleError, $localize`Rollen kunne ikke tilføjes`);
 
     this.subscribeAsDefault(OrganizationUnitActions.deleteOrganizationUnitRoleSuccess, $localize`Rollen blev fjernet`);
     this.subscribeAsError(
@@ -524,12 +524,12 @@ export class NotificationService implements OnDestroy {
    */
   private subscribeToRoleNotifications() {
     this.subscribeMultipleDefault(
-      ofType(ITSystemUsageActions.addItSystemUsageRoleSuccess, ITContractActions.addItContractRoleSuccess),
+      ofType(ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess, ITContractActions.bulkAddItContractRoleSuccess),
       $localize`Tildelingen blev tilføjet`
     );
 
     this.subscribeMultipleError(
-      ofType(ITSystemUsageActions.addItSystemUsageRoleError, ITContractActions.addItContractRoleError),
+      ofType(ITSystemUsageActions.bulkAddItSystemUsageRoleError, ITContractActions.bulkAddItContractRoleError),
       $localize`Kunne ikke oprette tildelingen`
     );
 
