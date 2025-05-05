@@ -1,4 +1,6 @@
+import { assign } from 'lodash';
 import { APIExtendedRoleAssignmentResponseDTO, APIOrganizationUnitRolesResponseDTO } from 'src/app/api/v2';
+import { IdentityNamePair, mapIdentityNamePair } from '../identity-name-pair.model';
 
 export type RoleAssignmentsMap = {
   [key: string]: string;
@@ -61,6 +63,11 @@ export interface RoleAssignment {
   assignment: APIExtendedRoleAssignmentResponseDTO;
   unitName?: string;
   unitUuid?: string;
+}
+
+export function extractUnit(assignment: RoleAssignment): IdentityNamePair | undefined {
+  if (!assignment.unitName || !assignment.unitUuid) return undefined;
+  return { name: assignment.unitName, uuid: assignment.unitUuid };
 }
 
 export function mapDTOsToRoleAssignment(

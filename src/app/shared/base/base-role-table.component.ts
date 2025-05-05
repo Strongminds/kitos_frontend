@@ -12,7 +12,7 @@ import { selectHasValidCache, selectRoleOptionTypesDictionary } from 'src/app/st
 import { EditRoleDialogComponent } from '../components/role-table/role-row/edit-role-dialog/edit-role-dialog.component';
 import { RoleTableComponentStore } from '../components/role-table/role-table.component-store';
 import { RoleTableCreateDialogComponent } from '../components/role-table/role-table.create-dialog/role-table.create-dialog.component';
-import { RoleAssignment } from '../models/helpers/read-model-role-assignments';
+import { extractUnit, RoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { RoleOptionTypeTexts } from '../models/options/role-option-texts.model';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { filterNullish } from '../pipes/filter-nullish';
@@ -97,7 +97,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     dialogRef.componentInstance.initialValue = role;
     dialogRef.componentInstance.componentStore = this.componentStore;
     dialogRef.componentInstance.title = $localize`Rediger ${this.entityName.toLocaleLowerCase()}`;
-    dialogRef.componentInstance.orgUnit = { name: role.unitName!, uuid: role.unitUuid! };
+    dialogRef.componentInstance.orgUnit = extractUnit(role);
   }
 
   protected getRoles() {
