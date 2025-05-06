@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, Subject, combineLatest, first, map } from 'rxjs';
+import { BehaviorSubject, Subject, combineLatest, map } from 'rxjs';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapUserToOption } from 'src/app/shared/models/dropdown-option.model';
@@ -19,7 +19,6 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { RoleTableComponentStore } from '../role-table.component-store';
-import { selectCurrentUnitUuid } from 'src/app/store/organization/organization-unit/selectors';
 
 @Component({
   selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
