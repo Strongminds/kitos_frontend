@@ -1,4 +1,5 @@
 import { createSelector } from '@ngrx/store';
+import { hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { itContactAdapter, itContractFeature } from './reducer';
 
@@ -45,19 +46,35 @@ export const selectItContractIsValid = createSelector(selectItContractValidity, 
 
 export const selectItContractHasReadPermissions = createSelector(
   selectITContractState,
-  (state) => state.permissions?.read
+  (state) => state.permissions?.value?.read
 );
 export const selectItContractHasModifyPermissions = createSelector(
   selectITContractState,
-  (state) => state.permissions?.modify
+  (state) => state.permissions?.value?.modify
 );
 export const selectItContractHasDeletePermissions = createSelector(
   selectITContractState,
-  (state) => state.permissions?.delete
+  (state) => state.permissions?.value?.delete
 );
+export const selectHasValidItContractPermissionsCache = createSelector(
+  selectITContractState,
+  () => new Date(),
+  (state, now) => {
+    return hasValidTwoMinuteCache(state.permissions?.cacheTime, now);
+  }
+);
+
 export const selectItContractHasCollectionCreatePermissions = createSelector(
   selectITContractState,
-  (state) => state.collectionPermissions?.create
+  (state) => state.collectionPermissions?.value?.create
+);
+
+export const selectHasValidItContractCollectionPermissionsCache = createSelector(
+  selectITContractState,
+  () => new Date(),
+  (state, now) => {
+    return hasValidTwoMinuteCache(state.collectionPermissions?.cacheTime, now);
+  }
 );
 
 export const selectItContractPaymentModel = createSelector(selectContract, (contract) => contract?.paymentModel);

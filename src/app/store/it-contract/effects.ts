@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIContractPaymentsDataResponseDTO,
@@ -34,6 +34,8 @@ import { ITContractActions } from './actions';
 import {
   selectAppliedProcurementPlansCache,
   selectContractGridColumns,
+  selectHasValidItContractCollectionPermissionsCache,
+  selectHasValidItContractPermissionsCache,
   selectItContractDataProcessingRegistrations,
   selectItContractExternalReferences,
   selectItContractPayments,
@@ -343,7 +345,9 @@ export class ITContractEffects {
   getContractPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getITContractPermissions),
-      switchMap(({ contractUuid }) => {
+      concatLatestFrom(() => this.store.select(selectHasValidItContractPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
+      switchMap(([{ contractUuid }]) => {
         return this.apiItContractService.getSingleItContractV2GetItContractPermissions({ contractUuid }).pipe(
           map((permissions) => ITContractActions.getITContractPermissionsSuccess(permissions)),
           catchError(() => of(ITContractActions.getITContractPermissionsError()))
@@ -355,6 +359,8 @@ export class ITContractEffects {
   getCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getITContractCollectionPermissions),
+      concatLatestFrom(() => this.store.select(selectHasValidItContractCollectionPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) => {
         return this.apiItContractService

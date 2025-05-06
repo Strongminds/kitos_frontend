@@ -92,7 +92,7 @@ export const itContractFeature = createFeature({
     on(ITContractActions.getITContractPermissions, (state): ITContractState => ({ ...state, permissions: undefined })),
     on(
       ITContractActions.getITContractPermissionsSuccess,
-      (state, { permissions }): ITContractState => ({ ...state, permissions })
+      (state, { permissions }): ITContractState => ({ ...state, permissions: newCache(permissions) })
     ),
     on(
       ITContractActions.getITContractCollectionPermissions,
@@ -100,7 +100,10 @@ export const itContractFeature = createFeature({
     ),
     on(
       ITContractActions.getITContractCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): ITContractState => ({ ...state, collectionPermissions })
+      (state, { collectionPermissions }): ITContractState => ({
+        ...state,
+        collectionPermissions: newCache(collectionPermissions),
+      })
     ),
     on(
       ITContractActions.addExternalReferenceSuccess,
