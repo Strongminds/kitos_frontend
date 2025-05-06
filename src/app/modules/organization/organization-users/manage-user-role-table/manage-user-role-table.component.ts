@@ -10,12 +10,16 @@ import {
 } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
+import { AccordionComponent } from '../../../../shared/components/accordion/accordion.component';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
+import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-manage-user-role-table',
-    templateUrl: './manage-user-role-table.component.html',
-    styleUrl: './manage-user-role-table.component.scss',
-    standalone: false
+  selector: 'app-manage-user-role-table',
+  templateUrl: './manage-user-role-table.component.html',
+  styleUrl: './manage-user-role-table.component.scss',
+  imports: [AccordionComponent, NativeTableComponent, CheckboxComponent, NgFor],
 })
 export class ManageUserRoleTableComponent {
   @Input() user!: ODataOrganizationUser;

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,24 +12,40 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser, selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
+import { ButtonComponent } from '../../shared/components/buttons/button/button.component';
+import { HelpIconComponent } from '../../shared/components/icons/help.component';
+import { LoadingComponent } from '../../shared/components/loading/loading.component';
+import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { FrontpageComponentStore } from './frontpage.component-store';
+import { LoginComponent } from './login/login.component';
 import { EditPublicMessageDialogComponent } from './public-message/edit-public-message-dialog/edit-public-message-dialog.component';
+import { PublicMessageComponent } from './public-message/public-message.component';
 
 @Component({
-    templateUrl: 'frontpage.component.html',
-    styleUrls: ['frontpage.component.scss'],
-    standalone: false
+  templateUrl: 'frontpage.component.html',
+  styleUrls: ['frontpage.component.scss'],
+  imports: [
+    CommonModule,
+    LoadingComponent,
+    HelpIconComponent,
+    ParagraphComponent,
+    LoginComponent,
+    PublicMessageComponent,
+    StandardVerticalContentGridComponent,
+    ButtonComponent,
+  ],
 })
 export class FrontpageComponent extends BaseComponent implements OnInit {
   public readonly loading$ = this.frontpageComponentStore.loading$;
 
   public readonly standardPublicMessages$ = this.frontpageComponentStore.publicMessages$.pipe(
     filterNullish(),
-    map((messages) => messages.filter((message) => !message.isMain))
+    map((messages) => messages.filter((message) => !message.isMain)),
   );
   public readonly mainPublicMessage$ = this.frontpageComponentStore.publicMessages$.pipe(
     filterNullish(),
-    map((messages) => messages.find((message) => message.isMain))
+    map((messages) => messages.find((message) => message.isMain)),
   );
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
@@ -42,7 +59,7 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
     private actions$: Actions,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
     super();
   }
@@ -57,14 +74,14 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
         if (returnUrl && returnUrl !== '' && returnUrl !== AppPath.root) {
           this.router.navigate([returnUrl]);
         }
-      })
+      }),
     );
     this.frontpageComponentStore.getPublicMessages();
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(GlobalAdminPublicMessageActions.editPublicMessagesSuccess)).subscribe(() => {
         this.frontpageComponentStore.getPublicMessages();
-      })
+      }),
     );
   }
 

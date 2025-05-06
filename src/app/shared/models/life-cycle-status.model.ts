@@ -23,7 +23,7 @@ export const lifeCycleStatusOptions: LifeCycleStatus[] = [
 ];
 
 export const mapLifeCycleStatus = (
-  value?: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum
+  value?: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum,
 ): LifeCycleStatus | undefined => {
   return lifeCycleStatusOptions.find((option) => option.value === value);
 };

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AfterViewInit, Component, forwardRef, Input, ViewChild } from '@angular/core';
-import { FormControl, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { FormControl, NG_VALUE_ACCESSOR, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditorComponent } from '@tinymce/tinymce-angular';
 import { HALF_SECOND_IN_MILLISECONDS } from '../../constants/constants';
 import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.service';
@@ -16,7 +16,7 @@ import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.
       multi: true,
     },
   ],
-  standalone: false,
+  imports: [EditorComponent, FormsModule, ReactiveFormsModule],
 })
 export class RichTextEditorComponent implements AfterViewInit {
   @Input() formControl!: FormControl;

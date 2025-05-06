@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -36,13 +36,58 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 import { InterfaceDataWriteDialogComponent } from './interface-data-write-dialog/interface-data-write-dialog.component';
 import { ITSystemInterfacesDetailsFrontpageComponentStore } from './it-system-interfaces-details-frontpage.component-store';
 import { hasOpenDialogs } from 'src/app/shared/helpers/dialog.helpers';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
+import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
+import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
+import { ConnectedDropdownComponent } from '../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { LinkTextboxComponent } from '../../../../../shared/components/link-textbox/link-textbox.component';
+import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { ContentSpaceBetweenComponent } from '../../../../../shared/components/content-space-between/content-space-between.component';
+import { TableRowActionsComponent } from '../../../../../shared/components/table-row-actions/table-row-actions.component';
+import { IconButtonComponent } from '../../../../../shared/components/buttons/icon-button/icon-button.component';
+import { PencilIconComponent } from '../../../../../shared/components/icons/pencil-icon.compnent';
+import { TrashcanIconComponent } from '../../../../../shared/components/icons/trashcan-icon.component';
+import { EmptyStateComponent } from '../../../../../shared/components/empty-states/empty-state.component';
+import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
-    selector: 'app-it-system-interfaces-details-frontpage',
-    templateUrl: './it-system-interfaces-details-frontpage.component.html',
-    styleUrl: './it-system-interfaces-details-frontpage.component.scss',
-    providers: [ITSystemInterfacesDetailsFrontpageComponentStore],
-    standalone: false
+  selector: 'app-it-system-interfaces-details-frontpage',
+  templateUrl: './it-system-interfaces-details-frontpage.component.html',
+  styleUrl: './it-system-interfaces-details-frontpage.component.scss',
+  providers: [ITSystemInterfacesDetailsFrontpageComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StatusChipComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    ConnectedDropdownComponent,
+    DropdownComponent,
+    LinkTextboxComponent,
+    TextAreaComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    ContentSpaceBetweenComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly interfaceTypeOptions$ = this.store
@@ -54,7 +99,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   public readonly interfaceUrlReference$ = this.store.select(selectInterfaceUrlReference);
   public readonly isInterfaceActive$ = this.store.select(selectInterfaceDeactivated);
   public readonly urlReferenceAsSimpleLink$ = this.interfaceUrlReference$.pipe(
-    map((reference) => ({ name: '', url: reference } as SimpleLink))
+    map((reference) => ({ name: '', url: reference }) as SimpleLink),
   );
   public readonly anyInterfaceData$ = this.interfaceData$.pipe(matchNonEmptyArray());
   public readonly isLoadingSystems$ = this.componentStore.isLoading$;
@@ -82,7 +127,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     private readonly notificationService: NotificationService,
     private readonly componentStore: ITSystemInterfacesDetailsFrontpageComponentStore,
     private readonly actions$: Actions,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
   ) {
     super();
   }
@@ -127,10 +172,10 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
                 .pipe(filterNullish(), first())
                 .subscribe((itInterfaceUuid) => {
                   this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
-                })
+                }),
             );
           }
-        })
+        }),
     );
   }
 
@@ -149,7 +194,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
           if (result === true) {
             this.store.dispatch(ITInterfaceActions.removeITInterfaceData(dataUuid));
           }
-        })
+        }),
     );
   }
 
@@ -202,7 +247,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
           this.interfaceFormGroup.controls.uuid.disable();
           this.interfaceFormGroup.controls.createdBy.disable();
           this.interfaceFormGroup.controls.rightsHolder.disable();
-        })
+        }),
     );
   }
 
@@ -212,11 +257,11 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
         .pipe(
           ofType(ITInterfaceActions.updateITInterfaceSuccess),
           first(),
-          combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish()))
+          combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
         )
         .subscribe(([_, interfaceUuid]) => {
           this.store.dispatch(ITInterfaceActions.getITInterfacePermissions(interfaceUuid));
-        })
+        }),
     );
   }
 }

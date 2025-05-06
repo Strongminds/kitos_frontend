@@ -4,8 +4,8 @@ import { ValidatedValueChange } from '../models/validated-value-change.model';
 import { BaseComponent } from './base.component';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class BaseFormComponent<T> extends BaseComponent implements OnInit {
   @Input() public text = '';
@@ -65,7 +65,7 @@ export class BaseFormComponent<T> extends BaseComponent implements OnInit {
         if (this.formName && this.focused && this.value !== value && this.value !== undefined) {
           this.formGroup?.controls[this.formName]?.setValue(this.value);
         }
-      })
+      }),
     );
   }
 }

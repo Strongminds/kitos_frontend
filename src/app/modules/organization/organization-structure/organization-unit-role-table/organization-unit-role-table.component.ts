@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -12,13 +13,17 @@ import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
 import { ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { RoleRowComponent } from '../../../../shared/components/role-table/role-row/role-row.component';
+import { RoleTableContainerComponent } from '../../../../shared/components/role-table/role-table-container/role-table-container.component';
 
 @Component({
   selector: 'app-org-unit-role-table',
   templateUrl: 'organization-unit-role-table.component.html',
   styleUrls: ['organization-unit-role-table.component.scss'],
   providers: [RoleTableComponentStore],
-  standalone: false,
+  imports: [CommonModule, RoleTableContainerComponent, NativeTableComponent, RoleRowComponent, ParagraphComponent],
 })
 export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent implements OnInit {
   @Input() public unitName!: string;
@@ -34,7 +39,7 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
         return roles;
       }
     }),
-    map((roles) => roles.sort(this.compareByUnitNameThenRoleName))
+    map((roles) => roles.sort(this.compareByUnitNameThenRoleName)),
   );
 
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
@@ -45,7 +50,7 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
     override readonly roleOptionTypeService: RoleOptionTypeService,
     override readonly dialog: MatDialog,
     override readonly actions$: Actions,
-    override readonly confirmationService: ConfirmActionService
+    override readonly confirmationService: ConfirmActionService,
   ) {
     super(store, componentStore, actions$, roleOptionTypeService, confirmationService, dialog);
   }
@@ -63,12 +68,12 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
           ofType(
             OrganizationUnitActions.transferRegistrationsSuccess,
             OrganizationUnitActions.removeRegistrationsSuccess,
-            OrganizationUnitActions.patchOrganizationUnitSuccess
-          )
+            OrganizationUnitActions.patchOrganizationUnitSuccess,
+          ),
         )
         .subscribe(() => {
           this.getRoles();
-        })
+        }),
     );
   }
 
@@ -76,7 +81,7 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
     this.subscriptions.add(
       this.roles$.pipe(combineLatestWith(this.entityUuid$), first()).subscribe(([userRoles, entityUuid]) => {
         this.openAddNewDialog(userRoles, entityUuid);
-      })
+      }),
     );
   }
 

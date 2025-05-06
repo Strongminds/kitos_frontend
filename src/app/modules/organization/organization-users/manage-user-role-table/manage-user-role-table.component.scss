@@ -1,4 +1,4 @@
-@use 'theme';
+@use "theme";
 
 .container {
   border: solid theme.$color-primary-60 1px !important;
@@ -8,6 +8,6 @@
 }
 
 td {
-  color : theme.$color-neutral-dark;
+  color: theme.$color-neutral-dark;
   word-wrap: break-word;
 }

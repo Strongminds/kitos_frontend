@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -17,13 +18,28 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 
 @Component({
   selector: 'app-delete-user-dialog',
   templateUrl: './delete-user-dialog.component.html',
   styleUrl: './delete-user-dialog.component.scss',
   providers: [RoleSelectionService],
-  standalone: false,
+  imports: [
+    NgIf,
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;
@@ -38,7 +54,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     private confirmActionService: ConfirmActionService,
     private dialogRef: MatDialogRef<DeleteUserDialogComponent>,
     private openerService: DialogOpenerService,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -47,12 +63,12 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserError)).subscribe(() => {
         this.isLoading = false;
-      })
+      }),
     );
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserSuccess)).subscribe(() => {
         this.onClose();
-      })
+      }),
     );
   }
 
@@ -105,7 +121,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   private transferRoles(
     result: BulkActionResult,
     user: ODataOrganizationUser,
-    dialogRef: MatDialogRef<BulkActionDialogComponent<any>, any>
+    dialogRef: MatDialogRef<BulkActionDialogComponent<any>, any>,
   ): void {
     const request = getRoleActionRequest(result, user);
 
@@ -128,11 +144,11 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
         .pipe(
           filter(
             ([unitRights, systemRights, contractRights, dprRights]) =>
-              unitRights.length < 1 && systemRights.length < 1 && contractRights.length < 1 && dprRights.length < 1
+              unitRights.length < 1 && systemRights.length < 1 && contractRights.length < 1 && dprRights.length < 1,
           ),
-          first()
+          first(),
         )
-        .subscribe(() => dialogRef.close())
+        .subscribe(() => dialogRef.close()),
     );
   }
 }

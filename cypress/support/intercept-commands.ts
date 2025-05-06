@@ -62,7 +62,9 @@ Cypress.Commands.add('setupDataProcessingIntercepts', () => {
     fixture: './dpr/choice-types/data-responsible-types.json',
   });
 
-  cy.intercept('GET', 'api/v2/organizations/*/organization-units?pageSize=*', {fixture: './organizations/organization-units.json'});
+  cy.intercept('GET', 'api/v2/organizations/*/organization-units?pageSize=*', {
+    fixture: './organizations/organization-units.json',
+  });
 
   cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
   cy.intercept('api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });

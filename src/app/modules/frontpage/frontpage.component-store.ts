@@ -26,7 +26,7 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
     (state, loading: boolean): FrontpageComponentStoreState => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   private updatePublicMessages = this.updater(
@@ -34,7 +34,7 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
       ...state,
       loading: false,
       publicMessages,
-    })
+    }),
   );
 
   public getPublicMessages = this.effect<void>((trigger$) =>
@@ -47,10 +47,10 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
             (e) => {
               console.error(e);
             },
-            () => this.updateLoading(false)
-          )
-        )
-      )
-    )
+            () => this.updateLoading(false),
+          ),
+        ),
+      ),
+    ),
   );
 }

@@ -3065,9 +3065,6 @@
       <trans-unit id="6510461966645751823" datatype="html">
         <source> Gem </source>
       </trans-unit>
-      <trans-unit id="5513078980496116959" datatype="html">
-        <source> Slet </source>
-      </trans-unit>
       <trans-unit id="6475857440782400398" datatype="html">
         <source>Filtre og sortering gemt</source>
       </trans-unit>
@@ -3118,9 +3115,6 @@
       </trans-unit>
       <trans-unit id="7693246133592988372" datatype="html">
         <source> (ugyldigt link) </source>
-      </trans-unit>
-      <trans-unit id="7967107304088297046" datatype="html">
-        <source>Kolonneopsætning for organisation</source>
       </trans-unit>
       <trans-unit id="4059930962225165267" datatype="html">
         <source>Er du sikker på at du vil gemme den nuværende kolonneopsætning af felter som standard til din organisation?</source>
@@ -5310,6 +5304,9 @@
       </trans-unit>
       <trans-unit id="5299437974151521850" datatype="html">
         <source>Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
+      </trans-unit>
+      <trans-unit id="7788193785121346142" datatype="html">
+        <source> Anuller </source>
       </trans-unit>
     </body>
   </file>

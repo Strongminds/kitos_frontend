@@ -1,4 +1,4 @@
-describe('it-system-usage', () => {
+describe('it-system-usage archiving', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
@@ -22,7 +22,10 @@ describe('it-system-usage', () => {
 
     cy.getByDataCy('catalog-segment').click();
     cy.contains('B').get('input').should('be.disabled');
-    cy.getByDataCy('catalog-archive-duty-comment-textarea').get('textarea').should('be.disabled').should('have.value', 'Old comment');
+    cy.getByDataCy('catalog-archive-duty-comment-textarea')
+      .get('textarea')
+      .should('be.disabled')
+      .should('have.value', 'Old comment');
   });
 
   it('can follow catalog link from archiving catalog segment', () => {
@@ -33,9 +36,9 @@ describe('it-system-usage', () => {
 
     cy.getByDataCy('catalog-segment').click();
     cy.contains('Gå til IT Systemkataloget').click();
-    cy.contains('IT Systemkatalog')
-    cy.url().should('contain', 'it-system-catalog')
-  })
+    cy.contains('IT Systemkatalog');
+    cy.url().should('contain', 'it-system-catalog');
+  });
 
   it('fields are disabled if archiveDuty is not selected ', () => {
     cy.intercept('/api/v2/it-system-usages/*', {
@@ -58,7 +61,7 @@ describe('it-system-usage', () => {
     openArchiveTab();
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch'
+      'patch',
     );
 
     cy.dropdown('Arkiveringspligt', 'K', true);
@@ -126,7 +129,7 @@ describe('it-system-usage', () => {
       'DELETE',
       '**/journal-periods/**',
       {},
-      'Er du sikker på at du vil fjerne denne journalperiode?'
+      'Er du sikker på at du vil fjerne denne journalperiode?',
     );
   });
 });

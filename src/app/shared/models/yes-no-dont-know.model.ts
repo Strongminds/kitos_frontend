@@ -24,7 +24,7 @@ export const mapToYesNoDontKnowEnum = (
   value?:
     | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
     | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
-    | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum
+    | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum,
 ): YesNoDontKnowOption | undefined => {
   return yesNoDontKnowOptions.find((option) => option.value === value);
 };

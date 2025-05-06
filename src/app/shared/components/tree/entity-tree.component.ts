@@ -1,15 +1,44 @@
 import { NestedTreeControl } from '@angular/cdk/tree';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatTreeNestedDataSource } from '@angular/material/tree';
+import {
+  MatTreeNestedDataSource,
+  MatTree,
+  MatTreeNodeDef,
+  MatTreeNode,
+  MatNestedTreeNode,
+  MatTreeNodeToggle,
+  MatTreeNodeOutlet,
+} from '@angular/material/tree';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode } from '../../models/structure/entity-tree-node.model';
-import { BooleanValueDisplayType } from '../status-chip/status-chip.component';
+import { BooleanValueDisplayType, StatusChipComponent } from '../status-chip/status-chip.component';
+import { NgClass, NgIf } from '@angular/common';
+import { DetailsPageLinkComponent } from '../details-page-link/details-page-link.component';
+import { MatIconButton } from '@angular/material/button';
+import { ChevronDownIconComponent } from '../icons/chevron-down-icon.component';
+import { ChevronRightIconComponent } from '../icons/chevron-right-icon.component';
+import { CheckboxComponent } from '../checkbox/checkbox.component';
 
 @Component({
-    selector: 'app-entity-tree[nodes][itemType]',
-    templateUrl: './entity-tree.component.html',
-    styleUrls: ['./entity-tree.component.scss'],
-    standalone: false
+  selector: 'app-entity-tree[nodes][itemType]',
+  templateUrl: './entity-tree.component.html',
+  styleUrls: ['./entity-tree.component.scss'],
+  imports: [
+    MatTree,
+    MatTreeNodeDef,
+    MatTreeNode,
+    NgClass,
+    DetailsPageLinkComponent,
+    NgIf,
+    StatusChipComponent,
+    MatNestedTreeNode,
+    MatIconButton,
+    MatTreeNodeToggle,
+    ChevronDownIconComponent,
+    ChevronRightIconComponent,
+    MatTreeNodeOutlet,
+    CheckboxComponent,
+  ],
 })
 export class EntityTreeComponent<T> implements OnInit {
   public readonly treeControl = new NestedTreeControl<EntityTreeNode<T>>((node) => node.children);

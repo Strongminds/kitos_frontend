@@ -26,7 +26,7 @@ export class SystemIntegratorComponentStore extends ComponentStore<State> {
       ...state,
       systemIntegrators,
       loading: false,
-    })
+    }),
   );
 
   public readonly getSystemIntegrators = this.effect<void>((trigger$) =>
@@ -39,10 +39,10 @@ export class SystemIntegratorComponentStore extends ComponentStore<State> {
             (e) => {
               console.error(e);
             },
-            () => this.setLoading(false)
-          )
-        )
-      )
-    )
+            () => this.setLoading(false),
+          ),
+        ),
+      ),
+    ),
   );
 }

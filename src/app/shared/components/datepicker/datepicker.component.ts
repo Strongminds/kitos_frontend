@@ -1,5 +1,18 @@
+import { NgIf } from '@angular/common';
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
-import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatMomentDateModule, provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import {
+  MatDatepickerInput,
+  MatDatepickerInputEvent,
+  MatDatepickerModule,
+  MatDatepickerToggle,
+  MatDatepickerToggleIcon,
+} from '@angular/material/datepicker';
+import { MatIcon } from '@angular/material/icon';
+import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
 
@@ -7,7 +20,41 @@ import { BaseFormComponent } from '../../base/base-form.component';
   selector: 'app-datepicker',
   templateUrl: 'datepicker.component.html',
   styleUrls: ['datepicker.component.scss'],
-  standalone: false,
+  imports: [
+    NgIf,
+    FormsModule,
+    ReactiveFormsModule,
+
+    MatFormField,
+    MatIcon,
+    MatInput,
+    MatLabel,
+
+    MatDatepickerInput,
+    MatDatepickerToggle,
+
+    MatSuffix,
+    MatDatepickerToggleIcon,
+    MatDatepickerModule,
+    MatMomentDateModule,
+  ],
+  providers: [
+    provideMomentDateAdapter(),
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: ['DD-MM-yyyy', 'DDMMyyyy'],
+        },
+        display: {
+          dateInput: 'DD-MM-yyyy',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
+    },
+  ],
 })
 export class DatePickerComponent extends BaseFormComponent<Date | undefined> implements AfterViewInit, OnDestroy {
   @Input() public icon?: 'search';
