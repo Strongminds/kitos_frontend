@@ -69,12 +69,12 @@ export class BaseOverviewComponent extends BaseComponent {
     defaultColumnsAndRoles: GridColumn[],
     localStorageColumns: GridColumn[] | null,
     updateColumnsAction: (columns: GridColumn[]) => Action,
-    resetToOrgConfigAction: () => Action
+    resetToOrgConfigAction: (disablePopupNotification: boolean) => Action
   ) {
     const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
     this.store.dispatch(updateColumnsAction(columnsToUse));
     if (!localStorageColumns) {
-      this.store.dispatch(resetToOrgConfigAction());
+      this.store.dispatch(resetToOrgConfigAction(true));
     }
   }
 

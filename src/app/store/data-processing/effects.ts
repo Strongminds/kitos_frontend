@@ -614,7 +614,7 @@ export class DataProcessingEffects {
     return this.actions$.pipe(
       ofType(DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
+      switchMap(([{ disablePopupNotification }, organizationUuid]) =>
         this.apiV2organizationalGridInternalService
           .getSingleOrganizationGridInternalV2GetGridConfiguration({
             organizationUuid,
@@ -622,9 +622,18 @@ export class DataProcessingEffects {
           })
           .pipe(
             map((response) =>
-              DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess(response)
+              DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationSuccess(
+                response,
+                disablePopupNotification
+              )
             ),
-            catchError(() => of(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError()))
+            catchError(() =>
+              of(
+                DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError(
+                  disablePopupNotification
+                )
+              )
+            )
           )
       )
     );
