@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, filter, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APIItSystemResponseDTO,
   APIV2ItSystemService,
@@ -23,7 +23,13 @@ import { GridColumnStorageService } from 'src/app/shared/services/grid-column-st
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemActions } from './actions';
-import { selectItSystemExternalReferences, selectItSystemUuid, selectPreviousGridState } from './selectors';
+import {
+  selectHasValidItSystemCollectionPermissionsCache,
+  selectHasValidItSystemPermissionsCache,
+  selectItSystemExternalReferences,
+  selectItSystemUuid,
+  selectPreviousGridState,
+} from './selectors';
 
 @Injectable()
 export class ITSystemEffects {
@@ -163,7 +169,9 @@ export class ITSystemEffects {
   getItSystemPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystemPermissions),
-      switchMap(({ systemUuid }) =>
+      concatLatestFrom(() => this.store.select(selectHasValidItSystemPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
+      switchMap(([{ systemUuid }]) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystemPermissions({ systemUuid }).pipe(
           map((permissions) => ITSystemActions.getITSystemPermissionsSuccess(permissions)),
           catchError(() => of(ITSystemActions.getITSystemPermissionsError()))
@@ -175,6 +183,8 @@ export class ITSystemEffects {
   getItSystemCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystemCollectionPermissions),
+      concatLatestFrom(() => this.store.select(selectHasValidItSystemCollectionPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystemCollectionPermissions({ organizationUuid }).pipe(

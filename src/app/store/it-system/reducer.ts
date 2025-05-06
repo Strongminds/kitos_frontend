@@ -1,5 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { newCache } from 'src/app/shared/models/cache-item.model';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
@@ -61,7 +62,7 @@ export const itSystemFeature = createFeature({
     on(ITSystemActions.getITSystemPermissions, (state): ITSystemState => ({ ...state, permissions: undefined })),
     on(
       ITSystemActions.getITSystemPermissionsSuccess,
-      (state, { permissions }): ITSystemState => ({ ...state, permissions })
+      (state, { permissions }): ITSystemState => ({ ...state, permissions: newCache(permissions) })
     ),
     on(
       ITSystemActions.getITSystemCollectionPermissions,
@@ -69,7 +70,10 @@ export const itSystemFeature = createFeature({
     ),
     on(
       ITSystemActions.getITSystemCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): ITSystemState => ({ ...state, collectionPermissions })
+      (state, { collectionPermissions }): ITSystemState => ({
+        ...state,
+        collectionPermissions: newCache(collectionPermissions),
+      })
     ),
 
     on(ITSystemActions.addExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),

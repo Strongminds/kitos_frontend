@@ -1,4 +1,5 @@
 import { createSelector } from '@ngrx/store';
+import { hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { itSystemAdapter, itSystemFeature } from './reducer';
@@ -48,22 +49,36 @@ export const selectItSystemName = createSelector(selectItSystem, (state) => stat
 export const selectITSystemHasReadPermission = createSelector(selectITSystemState, (state) => state.permissions?.read);
 export const selectITSystemHasModifyPermission = createSelector(
   selectITSystemState,
-  (state) => state.permissions?.modify
+  (state) => state.permissions?.value?.modify
 );
 export const selectITSystemHasDeletePermission = createSelector(
   selectITSystemState,
-  (state) => state.permissions?.delete
+  (state) => state.permissions?.value?.delete
 );
 export const selectITSystemCanModifyVisibilityPermission = createSelector(
   selectITSystemState,
-  (state) => state.permissions?.modifyVisibility
+  (state) => state.permissions?.value?.modifyVisibility
+);
+export const selectHasValidItSystemPermissionsCache = createSelector(
+  selectITSystemState,
+  () => new Date(),
+  (state, now) => {
+    return hasValidTwoMinuteCache(state.permissions?.cacheTime, now);
+  }
 );
 export const selectITSystemHasCreateCollectionPermission = createSelector(
   selectITSystemState,
-  (state) => state.collectionPermissions?.create
+  (state) => state.collectionPermissions?.value?.create
 );
 export const selectItSystemDeletetionConflicts = createSelector(
   selectITSystemState,
-  (state) => state.permissions?.deletionConflicts
+  (state) => state.permissions?.value?.deletionConflicts
+);
+export const selectHasValidItSystemCollectionPermissionsCache = createSelector(
+  selectITSystemState,
+  () => new Date(),
+  (state, now) => {
+    return hasValidTwoMinuteCache(state.collectionPermissions?.cacheTime, now);
+  }
 );
 export const selectItSystemExternalReferences = createSelector(selectItSystem, (state) => state?.externalReferences);
