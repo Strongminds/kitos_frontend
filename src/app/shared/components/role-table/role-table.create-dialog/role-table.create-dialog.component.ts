@@ -144,6 +144,9 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
         existingUserUuids = [];
         this.roleUserUuidsDictionary[roleUuid] = existingUserUuids;
       }
+      if (role.unitUuid && role.unitUuid != this.entityUuid) {
+        return;
+      }
       existingUserUuids.push(role.assignment.user.uuid);
     });
   }
