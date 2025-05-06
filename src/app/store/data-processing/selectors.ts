@@ -92,7 +92,14 @@ export const selectHasValidDataProcessingPermissionsCache = createSelector(
 
 export const selectDataProcessingHasCreateCollectionPermissions = createSelector(
   selectDataProcessingState,
-  (state) => state.collectionPermissions?.create
+  (state) => state.collectionPermissions?.value?.create
+);
+export const selectHasValidDataProcessingCollectionPermissionsCache = createSelector(
+  selectDataProcessingState,
+  () => new Date(),
+  (state, now) => {
+    return hasValidTwoMinuteCache(state.collectionPermissions?.cacheTime, now);
+  }
 );
 
 export const selectDataProcessingOversightOptions = createSelector(

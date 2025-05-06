@@ -75,14 +75,17 @@ export const dataProcessingFeature = createFeature({
     ),
     on(
       DataProcessingActions.getDataProcessingPermissionsSuccess,
-      (state, { permissions }): DataProcessingState => ({ ...state, permissions: {
-        value: permissions,
-        cacheTime: new Date().getTime(),
-      } })
+      (state, { permissions }): DataProcessingState => ({
+        ...state,
+        permissions: newCache(permissions),
+      })
     ),
     on(
       DataProcessingActions.getDataProcessingCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): DataProcessingState => ({ ...state, collectionPermissions })
+      (state, { collectionPermissions }): DataProcessingState => ({
+        ...state,
+        collectionPermissions: newCache(collectionPermissions),
+      })
     ),
     on(
       DataProcessingActions.addExternalReferenceSuccess,

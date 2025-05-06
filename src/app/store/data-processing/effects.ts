@@ -33,6 +33,7 @@ import {
   selectDataProcessingGridColumns,
   selectDataProcessingRightUuidPairs,
   selectDataProcessingUuid,
+  selectHasValidDataProcessingCollectionPermissionsCache,
   selectHasValidDataProcessingPermissionsCache,
   selectOverviewRoles,
   selectOverviewRolesCache,
@@ -199,6 +200,8 @@ export class DataProcessingEffects {
   getDataProcessingCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessingCollectionPermissions),
+      concatLatestFrom(() => this.store.select(selectHasValidDataProcessingCollectionPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.dataProcessingService
