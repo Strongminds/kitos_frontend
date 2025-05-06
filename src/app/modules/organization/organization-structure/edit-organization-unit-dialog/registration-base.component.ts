@@ -18,8 +18,8 @@ import {
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class RegistrationBaseComponent<T> extends BaseComponent implements OnInit {
   @Input() public unitUuid!: string;
@@ -30,7 +30,10 @@ export class RegistrationBaseComponent<T> extends BaseComponent implements OnIni
   public title = '';
   public nameColumnTitle = '';
 
-  constructor(protected store: Store, private dialog: MatDialog) {
+  constructor(
+    protected store: Store,
+    private dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -82,7 +85,7 @@ export class RegistrationBaseComponent<T> extends BaseComponent implements OnIni
         if (result === true) {
           this.store.dispatch(OrganizationUnitActions.removeRegistrations(this.unitUuid, request));
         }
-      })
+      }),
     );
   }
 
@@ -94,39 +97,39 @@ export class RegistrationBaseComponent<T> extends BaseComponent implements OnIni
       case 'unitRights':
         this.store.dispatch(
           OrganizationUnitActions.changeOrganizationUnitRegistrationSelect(
-            copiedRegistration as RegistrationModel<APINamedEntityWithUserFullNameV2DTO>
-          )
+            copiedRegistration as RegistrationModel<APINamedEntityWithUserFullNameV2DTO>,
+          ),
         );
         break;
       case 'itContract':
         this.store.dispatch(
           OrganizationUnitActions.changeItContractRegistrationSelect(
-            copiedRegistration as RegistrationModel<APINamedEntityWithUserFullNameV2DTO>
-          )
+            copiedRegistration as RegistrationModel<APINamedEntityWithUserFullNameV2DTO>,
+          ),
         );
         break;
       case 'internalPayment':
         this.store.dispatch(
-          OrganizationUnitActions.changeInternalPaymentSelect(copiedRegistration as PaymentRegistrationModel)
+          OrganizationUnitActions.changeInternalPaymentSelect(copiedRegistration as PaymentRegistrationModel),
         );
         break;
       case 'externalPayment':
         this.store.dispatch(
-          OrganizationUnitActions.changeExternalPaymentSelect(copiedRegistration as PaymentRegistrationModel)
+          OrganizationUnitActions.changeExternalPaymentSelect(copiedRegistration as PaymentRegistrationModel),
         );
         break;
       case 'relevantSystem':
         this.store.dispatch(
           OrganizationUnitActions.changeRelevantSystemSelect(
-            copiedRegistration as RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>
-          )
+            copiedRegistration as RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>,
+          ),
         );
         break;
       case 'responsibleSystem':
         this.store.dispatch(
           OrganizationUnitActions.changeResponsibleSystemSelect(
-            copiedRegistration as RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>
-          )
+            copiedRegistration as RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>,
+          ),
         );
         break;
     }

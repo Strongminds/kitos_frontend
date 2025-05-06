@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
@@ -10,19 +10,20 @@ import {
   selectITSystemUsageHasModifyPermission,
   selectItSystemUsageGdpr,
 } from 'src/app/store/it-system-usage/selectors';
+import { GdprBaseDateUrlSectionComponent } from '../gdpr-base-date-url-section/gdpr-base-date-url-section.component';
 
 @Component({
-    selector: 'app-gdpr-dpia-conducted-section',
-    templateUrl: './gdpr-dpia-conducted-section.component.html',
-    styleUrls: ['./gdpr-dpia-conducted-section.component.scss'],
-    standalone: false
+  selector: 'app-gdpr-dpia-conducted-section',
+  templateUrl: './gdpr-dpia-conducted-section.component.html',
+  styleUrls: ['./gdpr-dpia-conducted-section.component.scss'],
+  imports: [GdprBaseDateUrlSectionComponent, FormsModule, ReactiveFormsModule],
 })
 export class GdprDpiaConductedSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isDpiaConductedFalse$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.dpiaConducted !== APIGDPRRegistrationsResponseDTO.DpiaConductedEnum.Yes)
+    map((gdpr) => gdpr.dpiaConducted !== APIGDPRRegistrationsResponseDTO.DpiaConductedEnum.Yes),
   );
   public readonly hasModifyPermissions$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
@@ -34,7 +35,7 @@ export class GdprDpiaConductedSectionComponent extends BaseAccordionComponent im
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       dateControl: new FormControl<Date | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   constructor(private readonly store: Store) {
@@ -56,7 +57,7 @@ export class GdprDpiaConductedSectionComponent extends BaseAccordionComponent im
         .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
         .subscribe(() => {
           this.disableLinkControl = true;
-        })
+        }),
     );
   }
 }

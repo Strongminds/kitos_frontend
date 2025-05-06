@@ -57,7 +57,7 @@ describe('public messages', () => {
     });
 
     cy.intercept('GET', '/api/v2/internal/public-messages', { fixture: './shared/edited-public-messages.json' }).as(
-      'getPublicMessages'
+      'getPublicMessages',
     );
 
     cy.getByDataCy('save-public-message-button').click();

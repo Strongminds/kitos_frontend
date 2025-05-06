@@ -1,6 +1,5 @@
 /// <reference types="cypress" />
 
-import { AppModule } from 'src/app/app.module';
 import { CheckboxComponent } from '../../shared/components/checkbox/checkbox.component';
 
 it('Checkbox has correct text and emits correct values', () => {
@@ -12,7 +11,6 @@ it('Checkbox has correct text and emits correct values', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       valueChange: { emit: onChangeSpy } as any,
     },
-    imports: [AppModule],
   });
   cy.getByDataCy('checkbox-input').click();
   cy.get('@onChange').should('have.been.calledWith', true);

@@ -55,7 +55,7 @@ export const mapRoleToDropdownOptions = (role: APIRoleOptionResponseDTO): RoleDr
 };
 
 export const mapRegularOptionToMultiSelectItem = (
-  option: APIRegularOptionResponseDTO
+  option: APIRegularOptionResponseDTO,
 ): MultiSelectDropdownItem<string> => {
   return {
     name: option.name,
@@ -66,7 +66,7 @@ export const mapRegularOptionToMultiSelectItem = (
 
 export const mapEmailOptionToMultiSelectItem = (
   option: APIEmailRecipientResponseDTO,
-  selected: boolean
+  selected: boolean,
 ): MultiSelectDropdownItem<string> => {
   return {
     name: option.email ?? '',
@@ -77,7 +77,7 @@ export const mapEmailOptionToMultiSelectItem = (
 
 export const mapRoleOptionToMultiSelectItem = (
   option: APIRoleRecipientResponseDTO,
-  selected: boolean
+  selected: boolean,
 ): MultiSelectDropdownItem<string> => {
   return {
     name: option.role?.name ?? '',

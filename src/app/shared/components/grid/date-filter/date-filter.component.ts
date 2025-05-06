@@ -5,6 +5,9 @@ import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 import { Actions } from '@ngrx/effects';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
+import { DatePickerComponent } from '../../datepicker/datepicker.component';
+import { DropDownListComponent, ValueTemplateDirective } from '@progress/kendo-angular-dropdowns';
+import { FilterIconComponent } from '../../icons/filter.component';
 
 interface DateFilterOption {
   text: string;
@@ -12,10 +15,10 @@ interface DateFilterOption {
 }
 
 @Component({
-    selector: 'app-date-filter',
-    templateUrl: 'date-filter.component.html',
-    styleUrls: ['date-filter.component.scss'],
-    standalone: false
+  selector: 'app-date-filter',
+  templateUrl: 'date-filter.component.html',
+  styleUrls: ['date-filter.component.scss'],
+  imports: [DatePickerComponent, DropDownListComponent, ValueTemplateDirective, FilterIconComponent],
 })
 export class DateFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
@@ -31,7 +34,10 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
 
   public chosenOption!: DateFilterOption;
 
-  constructor(filterService: FilterService, private actions$: Actions) {
+  constructor(
+    filterService: FilterService,
+    private actions$: Actions,
+  ) {
     super(filterService);
   }
 
@@ -47,7 +53,7 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
       this.chosenOption = savedChosenOption || this.options[0];
     };
     this.subscriptions.add(
-      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod),
     );
   }
 
@@ -59,7 +65,7 @@ export class DateFilterComponent extends AppBaseFilterCellComponent implements O
             field: this.column.field,
             operator: this.chosenOption.operator,
             value: value,
-          })
+          }),
     );
   }
 

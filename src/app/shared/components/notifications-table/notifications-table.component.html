@@ -102,10 +102,7 @@
                   <app-x-icon></app-x-icon>
                 </app-icon-button>
                 <!-- 20240527 - Removal should be determined by permissions and not logic like this -- permissions currently not passed in NotificationResponseDTO -->
-                <app-icon-button
-                  (buttonClick)="onRemove(notification)"
-                  *ngIf="canDelete(notification)"
-                >
+                <app-icon-button (buttonClick)="onRemove(notification)" *ngIf="canDelete(notification)">
                   <app-trashcan-icon></app-trashcan-icon>
                 </app-icon-button>
               </app-table-row-actions>

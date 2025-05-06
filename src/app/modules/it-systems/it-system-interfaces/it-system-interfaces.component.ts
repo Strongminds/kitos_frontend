@@ -18,12 +18,28 @@ import {
   selectInterfaceGridState,
   selectInterfaceHasCreateCollectionPermission,
 } from 'src/app/store/it-system-interfaces/selectors';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
 
 @Component({
-    selector: 'app-it-system-interfaces',
-    templateUrl: './it-system-interfaces.component.html',
-    styleUrl: './it-system-interfaces.component.scss',
-    standalone: false
+  selector: 'app-it-system-interfaces',
+  templateUrl: './it-system-interfaces.component.html',
+  styleUrl: './it-system-interfaces.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    NgIf,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    CreateEntityButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemInterfacesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectInterfaceGridLoading);
@@ -152,7 +168,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
   ) {
     super(store, 'it-interface');
   }
@@ -173,14 +189,16 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
         .pipe(ofType(ITInterfaceActions.createITInterfaceSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
 
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITInterfaceActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.resetGridConfiguration))
+        .subscribe(() => this.updateDefaultColumns()),
     );
   }
 

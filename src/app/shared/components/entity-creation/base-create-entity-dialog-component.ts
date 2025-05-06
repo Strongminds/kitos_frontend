@@ -13,8 +13,8 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { CreateEntityDialogComponentStore } from './create-entity-dialog.component-store';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class BaseCreateEntityDialogComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
@@ -28,7 +28,7 @@ export class BaseCreateEntityDialogComponent extends BaseComponent implements On
     protected actions$: Actions,
     protected router: Router,
     protected dialogRef: MatDialogRef<BaseCreateEntityDialogComponent>,
-    protected componentStore: CreateEntityDialogComponentStore
+    protected componentStore: CreateEntityDialogComponentStore,
   ) {
     super();
   }
@@ -41,15 +41,15 @@ export class BaseCreateEntityDialogComponent extends BaseComponent implements On
             ITContractActions.createItContractSuccess,
             ITSystemActions.createItSystemSuccess,
             ITInterfaceActions.createITInterfaceSuccess,
-            DataProcessingActions.createDataProcessingSuccess
-          )
+            DataProcessingActions.createDataProcessingSuccess,
+          ),
         )
         .subscribe(({ uuid, openAfterCreate }) => {
           if (openAfterCreate) {
             this.navigateToRoute(uuid);
           }
           this.onCancel();
-        })
+        }),
     );
   }
 

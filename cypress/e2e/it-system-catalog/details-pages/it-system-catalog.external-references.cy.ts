@@ -48,7 +48,7 @@ describe('it-system-catalog', () => {
       true,
       false,
       itSystemBaseUrl,
-      './it-system-catalog/external-references/it-system-with-extra-external-reference.json'
+      './it-system-catalog/external-references/it-system-with-extra-external-reference.json',
     );
   });
 
@@ -69,7 +69,7 @@ describe('it-system-catalog', () => {
       false,
       false,
       itSystemBaseUrl,
-      './it-system-catalog/external-references/it-system-with-extra-external-reference.json'
+      './it-system-catalog/external-references/it-system-with-extra-external-reference.json',
     );
   });
 
@@ -91,7 +91,7 @@ describe('it-system-catalog', () => {
       true,
       itSystemBaseUrl,
       './it-system-catalog/external-references/it-system-with-edited-external-reference.json',
-      'Valid url'
+      'Valid url',
     );
   });
   it('can modify external reference master reference', () => {
@@ -112,7 +112,7 @@ describe('it-system-catalog', () => {
       true,
       itSystemBaseUrl,
       './it-system-catalog/external-references/it-system-modified-master-reference.json',
-      'No url Master reference'
+      'No url Master reference',
     );
   });
 
@@ -136,7 +136,7 @@ describe('it-system-catalog', () => {
       'PATCH',
       '/api/v2/it-systems/*',
       { fixture: './it-system-catalog/external-references/it-system-external-references-removed-item.json' },
-      'Er du sikker på at du vil fjerne referencen?'
+      'Er du sikker på at du vil fjerne referencen?',
     );
     cy.contains('Referencen blev slettet');
 

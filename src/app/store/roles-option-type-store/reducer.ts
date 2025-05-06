@@ -61,7 +61,7 @@ export const roleOptionTypeFeature = createFeature({
         } else {
           return state;
         }
-      }
-    )
+      },
+    ),
   ),
 });

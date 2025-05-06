@@ -50,11 +50,24 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-    templateUrl: 'it-system-usages.component.html',
-    styleUrls: ['it-system-usages.component.scss'],
-    standalone: false
+  templateUrl: 'it-system-usages.component.html',
+  styleUrls: ['it-system-usages.component.scss'],
+  imports: [
+    OverviewHeaderComponent,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class ITSystemUsagesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectIsLoading);
@@ -619,7 +632,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
-    private uiConfigService: GridUIConfigService
+    private uiConfigService: GridUIConfigService,
   ) {
     super(store, 'it-system-usage');
   }
@@ -631,14 +644,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         .pipe(
           ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
           combineLatestWith(this.store.select(selectUsageGridRoleColumns)),
-          first()
+          first(),
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
           const existingColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, defaultColumnsAndRoles);
           const columns = existingColumns ?? defaultColumnsAndRoles;
           this.store.dispatch(ITSystemUsageActions.updateGridColumns(columns));
-        })
+        }),
     );
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
@@ -646,12 +659,12 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.actions$
         .pipe(
           ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
-          concatLatestFrom(() => this.gridColumns$)
+          concatLatestFrom(() => this.gridColumns$),
         )
         .subscribe(([_, gridColumns]) => {
           const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
           this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
-        })
+        }),
     );
 
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());

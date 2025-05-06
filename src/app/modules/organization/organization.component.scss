@@ -1,5 +1,5 @@
-@use 'mixins';
+@use "mixins";
 
 :host {
-  @include mixins.overview-flex-column-layout
+  @include mixins.overview-flex-column-layout;
 }

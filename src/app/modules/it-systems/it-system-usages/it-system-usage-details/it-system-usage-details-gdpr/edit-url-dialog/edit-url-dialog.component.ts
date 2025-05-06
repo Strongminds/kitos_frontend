@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { debounceTime, first } from 'rxjs';
@@ -8,12 +8,29 @@ import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants'
 import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
+import { NgIf } from '@angular/common';
+import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-edit-url-dialog',
-    templateUrl: './edit-url-dialog.component.html',
-    styleUrls: ['./edit-url-dialog.component.scss'],
-    standalone: false
+  selector: 'app-edit-url-dialog',
+  templateUrl: './edit-url-dialog.component.html',
+  styleUrls: ['./edit-url-dialog.component.scss'],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   @Input() simpleLink?: SimpleLink | undefined;
@@ -28,7 +45,10 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   public isBusy = false;
   public showValidationError = false;
 
-  constructor(private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>, private readonly actions$: Actions) {
+  constructor(
+    private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>,
+    private readonly actions$: Actions,
+  ) {
     super();
   }
 
@@ -55,19 +75,19 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchITSystemUsageSuccess), first())
-        .subscribe(() => this.dialogRef.close())
+        .subscribe(() => this.dialogRef.close()),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageActions.patchITSystemUsageError)).subscribe(() => {
         this.isBusy = false;
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.simpleLinkForm.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe(() => {
         this.showValidationError = isUrlEmptyOrValid(this.simpleLinkForm.value.url ?? undefined) === false;
-      })
+      }),
     );
   }
 
