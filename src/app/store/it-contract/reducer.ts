@@ -115,7 +115,7 @@ export const itContractFeature = createFeature({
       (state, { itContract }): ITContractState => ({ ...state, itContract })
     ),
     on(
-      ITContractActions.addItContractRoleSuccess,
+      ITContractActions.bulkAddItContractRoleSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
     ),
     on(

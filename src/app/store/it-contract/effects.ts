@@ -435,7 +435,7 @@ export class ITContractEffects {
 
   bulkAddItContractRoles$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITContractActions.addItContractRole),
+      ofType(ITContractActions.bulkAddItContractRole),
       concatLatestFrom(() => [
         this.store.select(selectItContractRightUuidPairs),
         this.store.select(selectItContractUuid).pipe(filterNullish()),
@@ -450,8 +450,8 @@ export class ITContractEffects {
             },
           })
           .pipe(
-            map((usage) => ITContractActions.addItContractRoleSuccess(usage)),
-            catchError(() => of(ITContractActions.addItContractRoleError()))
+            map((usage) => ITContractActions.bulkAddItContractRoleSuccess(usage)),
+            catchError(() => of(ITContractActions.bulkAddItContractRoleError()))
           );
       })
     );

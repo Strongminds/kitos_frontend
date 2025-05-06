@@ -6,7 +6,7 @@ import { BehaviorSubject, combineLatest, combineLatestWith, first, map } from 'r
 import { BaseRoleTableComponent } from 'src/app/shared/base/base-role-table.component';
 import { RoleTableComponentStore } from 'src/app/shared/components/role-table/role-table.component-store';
 import { compareByRoleName } from 'src/app/shared/helpers/role-helpers';
-import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
+import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { invertBooleanValue } from 'src/app/shared/pipes/invert-boolean-value';
 import { matchEmptyArray } from 'src/app/shared/pipes/match-empty-array';
 import { ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -14,11 +14,11 @@ import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 
 @Component({
-    selector: 'app-org-unit-role-table',
-    templateUrl: 'organization-unit-role-table.component.html',
-    styleUrls: ['organization-unit-role-table.component.scss'],
-    providers: [RoleTableComponentStore],
-    standalone: false
+  selector: 'app-org-unit-role-table',
+  templateUrl: 'organization-unit-role-table.component.html',
+  styleUrls: ['organization-unit-role-table.component.scss'],
+  providers: [RoleTableComponentStore],
+  standalone: false,
 })
 export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent implements OnInit {
   @Input() public unitName!: string;
@@ -80,7 +80,7 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
     );
   }
 
-  private compareByUnitNameThenRoleName(a: IRoleAssignment, b: IRoleAssignment): number {
+  private compareByUnitNameThenRoleName(a: RoleAssignment, b: RoleAssignment): number {
     if (!a.unitName || !b.unitName || a.unitName === b.unitName) {
       return compareByRoleName(a, b);
     }

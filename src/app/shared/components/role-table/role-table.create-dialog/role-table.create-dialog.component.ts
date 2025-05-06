@@ -8,7 +8,7 @@ import { BehaviorSubject, Subject, combineLatest, map } from 'rxjs';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { mapUserToOption } from 'src/app/shared/models/dropdown-option.model';
-import { IRoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
+import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from 'src/app/shared/models/options/role-option-types.model';
 import { Dictionary } from 'src/app/shared/models/primitives/dictionary.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -21,11 +21,11 @@ import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/sel
 import { RoleTableComponentStore } from '../role-table.component-store';
 
 @Component({
-    selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
-    templateUrl: './role-table.create-dialog.component.html',
-    styleUrls: ['./role-table.create-dialog.component.scss'],
-    providers: [RoleTableComponentStore],
-    standalone: false
+  selector: 'app-role-table.create-dialog[userRoles][entityType][entityUuid][title]',
+  templateUrl: './role-table.create-dialog.component.html',
+  styleUrls: ['./role-table.create-dialog.component.scss'],
+  providers: [RoleTableComponentStore],
+  standalone: false,
 })
 export class RoleTableCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly roleForm = new FormGroup({
@@ -35,7 +35,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     ),
   });
 
-  @Input() public userRoles: Array<IRoleAssignment> = [];
+  @Input() public userRoles: Array<RoleAssignment> = [];
   @Input() public entityType!: RoleOptionTypes;
   @Input() public entityUuid!: string;
   @Input() public title!: string;
@@ -156,10 +156,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRoleSuccess,
-            ITContractActions.addItContractRoleSuccess,
-            DataProcessingActions.addDataProcessingRoleSuccess,
-            OrganizationUnitActions.addOrganizationUnitRoleSuccess
+            ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
+            ITContractActions.bulkAddItContractRoleSuccess,
+            DataProcessingActions.bulkAddDataProcessingRoleSuccess,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess
           )
         )
         .subscribe(() => {
@@ -171,10 +171,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRoleError,
-            ITContractActions.addItContractRoleError,
-            DataProcessingActions.addDataProcessingRoleError,
-            OrganizationUnitActions.addOrganizationUnitRoleError
+            ITSystemUsageActions.bulkAddItSystemUsageRoleError,
+            ITContractActions.bulkAddItContractRoleError,
+            DataProcessingActions.bulkAddDataProcessingRoleError,
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleError
           )
         )
         .subscribe(() => {

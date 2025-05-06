@@ -4839,14 +4839,6 @@
         <source>Slet bruger</source>
         <target state="new">Slet bruger</target>
       </trans-unit>
-      <trans-unit id="3129699240351431056" datatype="html">
-        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles(user)&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles(user)&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></source>
-        <target state="new"> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? <x id="START_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;ng-container *ngIf=&quot;hasRoles(user)&quot;&gt;"/> Brugeren har disse roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/><x id="START_TAG_NG_CONTAINER_1" ctype="x-ng_container_1" equiv-text="&lt;ng-container *ngIf=&quot;!hasRoles(user)&quot;&gt;"/> Denne handling kan ikke fortrydes. <x id="CLOSE_TAG_NG_CONTAINER" ctype="x-ng_container" equiv-text="&lt;/ng-container&gt;"/></target>
-      </trans-unit>
-      <trans-unit id="1827402117610901290" datatype="html">
-        <source> Tildel valgte roller </source>
-        <target state="new"> Tildel valgte roller </target>
-      </trans-unit>
       <trans-unit id="5007829064962714817" datatype="html">
         <source>Sandt</source>
         <target state="new">Sandt</target>
@@ -4894,10 +4886,6 @@
       <trans-unit id="4621931238368826704" datatype="html">
         <source>Organisationer Overblik</source>
         <target state="new">Organisationer Overblik</target>
-      </trans-unit>
-      <trans-unit id="7224605356565787228" datatype="html">
-        <source>Er du sikker på, at du vil overføre rollerne?</source>
-        <target state="new">Er du sikker på, at du vil overføre rollerne?</target>
       </trans-unit>
       <trans-unit id="1669829107156320635" datatype="html">
         <source>Roller overført</source>
@@ -6713,10 +6701,6 @@
         <source>Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</source>
         <target state="new">Er du sikker på at du vil slette kontrakten, samt dens underordnede kontrakter?</target>
       </trans-unit>
-      <trans-unit id="8402696305361715603" datatype="html">
-        <source>Transfer</source>
-        <target state="new">Transfer</target>
-      </trans-unit>
       <trans-unit id="4451069668768368167" datatype="html">
         <source>Underordnet kontrakter</source>
         <target state="new">Underordnet kontrakter</target>
@@ -6972,6 +6956,34 @@
         <target state="new">Scroll right</target>
         <note priority="1" from="description">The title for the **Next Tool** button when the Toolbar is scrollable.</note>
         <note priority="1" from="meaning">kendo.toolbar.nextToolButton</note>
+      </trans-unit>
+      <trans-unit id="9190795738522963148" datatype="html">
+        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? </source>
+        <target state="new"> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? </target>
+      </trans-unit>
+      <trans-unit id="4447588157619270374" datatype="html">
+        <source> Brugeren har nogle roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. </source>
+        <target state="new"> Brugeren har nogle roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. </target>
+      </trans-unit>
+      <trans-unit id="8006200185320958273" datatype="html">
+        <source> Denne handling kan ikke fortrydes. </source>
+        <target state="new"> Denne handling kan ikke fortrydes. </target>
+      </trans-unit>
+      <trans-unit id="6973173527205023878" datatype="html">
+        <source> Overfør roller </source>
+        <target state="new"> Overfør roller </target>
+      </trans-unit>
+      <trans-unit id="866125510857454253" datatype="html">
+        <source>Overfør roller</source>
+        <target state="new">Overfør roller</target>
+      </trans-unit>
+      <trans-unit id="4577772021742281224" datatype="html">
+        <source>Brugeren har allerede denne rolle.</source>
+        <target state="new">Brugeren har allerede denne rolle.</target>
+      </trans-unit>
+      <trans-unit id="5299437974151521850" datatype="html">
+        <source>Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></source>
+        <target state="new">Rediger <x id="PH" equiv-text="this.entityName.toLocaleLowerCase()"/></target>
       </trans-unit>
     </body>
   </file>

@@ -272,7 +272,7 @@ export class ITSystemUsageEffects {
 
   bulkAddItSystemUsageRoles$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemUsageActions.addItSystemUsageRole),
+      ofType(ITSystemUsageActions.bulkAddItSystemUsageRole),
       concatLatestFrom(() => [
         this.store.select(selectItSystemUsageRightUuidPairs),
         this.store.select(selectItSystemUsageUuid).pipe(filterNullish()),
@@ -287,8 +287,8 @@ export class ITSystemUsageEffects {
             },
           })
           .pipe(
-            map((usage) => ITSystemUsageActions.addItSystemUsageRoleSuccess(usage)),
-            catchError(() => of(ITSystemUsageActions.addItSystemUsageRoleError()))
+            map((usage) => ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess(usage)),
+            catchError(() => of(ITSystemUsageActions.bulkAddItSystemUsageRoleError()))
           );
       })
     );

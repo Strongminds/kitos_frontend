@@ -99,7 +99,7 @@ export const dataProcessingFeature = createFeature({
       (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
     ),
     on(
-      DataProcessingActions.addDataProcessingRoleSuccess,
+      DataProcessingActions.bulkAddDataProcessingRoleSuccess,
       (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
     ),
     on(
