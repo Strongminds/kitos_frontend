@@ -26,6 +26,7 @@ import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { mapDTOsToRoleAssignment, RoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { filterNullish } from '../pipes/filter-nullish';
+import { selectCurrentUnitUuid } from 'src/app/store/organization/organization-unit/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -183,7 +184,18 @@ export class RoleOptionTypeService implements OnDestroy {
         this.store.dispatch(DataProcessingActions.bulkAddDataProcessingRole(userUuids, roleUuid));
         break;
       case 'organization-unit':
-        this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, unitUuid!));
+        if (!unitUuid) {
+          this.store
+            .select(selectCurrentUnitUuid)
+            .pipe(filterNullish(), first())
+            .subscribe((currentUnitUuid) =>
+              this.store.dispatch(
+                OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, currentUnitUuid)
+              )
+            );
+        } else {
+          this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, unitUuid));
+        }
         break;
     }
   }
