@@ -1,4 +1,5 @@
 import { createSelector } from '@ngrx/store';
+import { hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
 import { itInterfaceAdapter, itInterfaceFeature } from './reducer';
 
 const { selectITInterfaceState } = itInterfaceFeature;
@@ -25,21 +26,35 @@ export const selectInterfaceDeactivated = createSelector(selectInterface, (itInt
 
 export const selectInterfaceHasReadPermission = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.read
+  (state) => state.permissions?.value?.read
 );
 export const selectInterfaceHasModifyPermission = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.modify
+  (state) => state.permissions?.value?.modify
 );
 export const selectInterfaceHasDeletePermission = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.delete
+  (state) => state.permissions?.value?.delete
 );
 export const selectInterfaceDeletionConflicts = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.deletionConflicts
+  (state) => state.permissions?.value?.deletionConflicts
+);
+export const selectHasValidItInterfacePermissionsCache = createSelector(
+  selectITInterfaceState,
+  () => new Date(),
+  (state, now) => {
+    return hasValidTwoMinuteCache(state.permissions?.cacheTime, now);
+  }
 );
 export const selectInterfaceHasCreateCollectionPermission = createSelector(
   selectITInterfaceState,
-  (state) => state.collectionPermissions?.create
+  (state) => state.collectionPermissions?.value?.create
+);
+export const selectHasValidItInterfaceCollectionPermissionsCache = createSelector(
+  selectITInterfaceState,
+  () => new Date(),
+  (state, now) => {
+    return hasValidTwoMinuteCache(state.collectionPermissions?.cacheTime, now);
+  }
 );

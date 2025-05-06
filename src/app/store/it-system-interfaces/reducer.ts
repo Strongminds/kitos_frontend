@@ -1,6 +1,7 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { APIItInterfaceResponseDTO } from 'src/app/api/v2';
+import { newCache } from 'src/app/shared/models/cache-item.model';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { ITInterfaceActions } from './actions';
@@ -73,7 +74,7 @@ export const itInterfaceFeature = createFeature({
     ),
     on(
       ITInterfaceActions.getITInterfacePermissionsSuccess,
-      (state, { permissions }): ITInterfaceState => ({ ...state, permissions })
+      (state, { permissions }): ITInterfaceState => ({ ...state, permissions: newCache(permissions) })
     ),
     on(
       ITInterfaceActions.getITInterfaceCollectionPermissions,
@@ -81,7 +82,10 @@ export const itInterfaceFeature = createFeature({
     ),
     on(
       ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): ITInterfaceState => ({ ...state, collectionPermissions })
+      (state, { collectionPermissions }): ITInterfaceState => ({
+        ...state,
+        collectionPermissions: newCache(collectionPermissions),
+      })
     ),
     on(
       ITInterfaceActions.updateITInterfaceSuccess,

@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { INTERFACE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import {
@@ -18,7 +18,12 @@ import { GridColumnStorageService } from 'src/app/shared/services/grid-column-st
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITInterfaceActions } from './actions';
-import { selectInterfaceUuid, selectPreviousGridState } from './selectors';
+import {
+  selectHasValidItInterfaceCollectionPermissionsCache,
+  selectHasValidItInterfacePermissionsCache,
+  selectInterfaceUuid,
+  selectPreviousGridState,
+} from './selectors';
 
 @Injectable()
 export class ITInterfaceEffects {
@@ -101,7 +106,9 @@ export class ITInterfaceEffects {
   getItInterfacePermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfacePermissions),
-      switchMap(({ uuid }) =>
+      concatLatestFrom(() => this.store.select(selectHasValidItInterfacePermissionsCache)),
+      filter(([_, validCache]) => !validCache),
+      switchMap(([{ uuid }]) =>
         this.apiService.getSingleItInterfaceV2GetItInterfacePermissions({ interfaceUuid: uuid }).pipe(
           map((permissions) => ITInterfaceActions.getITInterfacePermissionsSuccess(permissions)),
           catchError(() => of(ITInterfaceActions.getITInterfacePermissionsError()))
@@ -113,6 +120,8 @@ export class ITInterfaceEffects {
   getItInterfaceCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfaceCollectionPermissions),
+      concatLatestFrom(() => this.store.select(selectHasValidItInterfaceCollectionPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiService.getSingleItInterfaceV2GetItInterfaceCollectionPermissions({ organizationUuid }).pipe(
