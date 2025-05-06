@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
-import { mergeMap } from 'rxjs';
+import { first, mergeMap } from 'rxjs';
 import { APIV2ItSystemUsageService } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -19,14 +19,16 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object>
 
   constructor(
     @Inject(APIV2ItSystemUsageService) private apiItSystemUsageService: APIV2ItSystemUsageService,
-    private store: Store
+    private store: Store,
   ) {
     super();
   }
 
   public getUsageDeletePermissionsForItSystem = this.effect(() =>
     this.store.select(selectItSystemUuid).pipe(
-      concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
+      filterNullish(),
+      first(),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([itSystemUuid, organizationUuid]) =>
         this.apiItSystemUsageService
           .getManyItSystemUsageV2GetItSystemUsages({ systemUuid: itSystemUuid, organizationUuid })
@@ -39,10 +41,10 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object>
                 const usageUuid = usage.uuid;
                 this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(usageUuid));
               },
-              (e) => console.error(e)
-            )
-          )
-      )
-    )
+              (e) => console.error(e),
+            ),
+          ),
+      ),
+    ),
   );
 }

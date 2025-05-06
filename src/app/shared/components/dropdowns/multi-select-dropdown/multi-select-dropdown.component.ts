@@ -15,12 +15,24 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { NgSelectComponent, NgOptionTemplateDirective, NgMultiLabelTemplateDirective } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
+import { NgIf, NgFor } from '@angular/common';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
 
 @Component({
   selector: 'app-multi-select-dropdown',
   templateUrl: './multi-select-dropdown.component.html',
   styleUrl: './multi-select-dropdown.component.scss',
-  standalone: false,
+  imports: [
+    NgSelectComponent,
+    FormsModule,
+    NgOptionTemplateDirective,
+    NgIf,
+    ParagraphComponent,
+    NgMultiLabelTemplateDirective,
+    NgFor,
+  ],
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
   @Input() public text = '';
@@ -69,7 +81,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     private el: ElementRef,
     private renderer: Renderer2,
     private notificationService: NotificationService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
   ) {
     super();
   }
@@ -84,16 +96,16 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         .pipe(
           filter((filter) => filter.length !== 1),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          map((filter) => filter || undefined)
+          map((filter) => filter || undefined),
         )
-        .subscribe((filter) => this.filterChange.emit(filter))
+        .subscribe((filter) => this.filterChange.emit(filter)),
     );
 
     if (this.resetSubject$) {
       this.subscriptions.add(
         this.resetSubject$.subscribe(() => {
           this.onClear();
-        })
+        }),
       );
     }
   }

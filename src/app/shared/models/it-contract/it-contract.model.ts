@@ -93,7 +93,7 @@ export const adaptITContract = (value: any): ITContract | undefined => {
       (dpa: { DataProcessingRegistrationUuid: string; DataProcessingRegistrationName: string }) => ({
         id: dpa.DataProcessingRegistrationUuid,
         value: dpa.DataProcessingRegistrationName,
-      })
+      }),
     ),
     ItSystemUsageUuids: value.ItSystemUsageUuids,
     ItSystemUsageUuidsAsCsv: value.ItSystemUsagesSystemUuidCsv,

@@ -70,7 +70,7 @@ export function extractUnitFromRoleAssignment(assignment: RoleAssignment): Ident
 }
 
 export function mapDTOsToRoleAssignment(
-  roleAssignment: APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO
+  roleAssignment: APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO,
 ): RoleAssignment {
   if (isAPIOrganizationUnitRolesResponseDTO(roleAssignment)) {
     return new OrganizationUnitRoleAssignment(roleAssignment);

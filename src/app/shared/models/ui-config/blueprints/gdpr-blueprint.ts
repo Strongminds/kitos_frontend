@@ -1,4 +1,4 @@
-import { UIModuleConfigKey } from "src/app/shared/enums/ui-module-config-key";
+import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 
 export const GdprUiBluePrint = {
   module: UIModuleConfigKey.Gdpr,

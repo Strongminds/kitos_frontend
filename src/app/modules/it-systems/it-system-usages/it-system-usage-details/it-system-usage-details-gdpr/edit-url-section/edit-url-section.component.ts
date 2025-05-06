@@ -6,12 +6,14 @@ import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.component';
 import { hasOpenDialogs } from 'src/app/shared/helpers/dialog.helpers';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { LinkTextboxComponent } from '../../../../../../shared/components/link-textbox/link-textbox.component';
 
 @Component({
-    selector: 'app-edit-url-section',
-    templateUrl: './edit-url-section.component.html',
-    styleUrls: ['./edit-url-section.component.scss'],
-    standalone: false
+  selector: 'app-edit-url-section',
+  templateUrl: './edit-url-section.component.html',
+  styleUrls: ['./edit-url-section.component.scss'],
+  imports: [NgIf, LinkTextboxComponent, AsyncPipe],
 })
 export class EditUrlSectionComponent extends BaseComponent {
   @Input() title!: string;

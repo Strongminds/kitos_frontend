@@ -4,8 +4,8 @@ import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescripto
 import { Subscription } from 'rxjs';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class AppBaseFilterCellComponent extends BaseFilterCellComponent implements OnDestroy {
   override filter!: CompositeFilterDescriptor;

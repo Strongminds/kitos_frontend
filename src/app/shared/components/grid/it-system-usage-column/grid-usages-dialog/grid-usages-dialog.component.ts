@@ -7,13 +7,30 @@ import { IdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { RegistrationEntityTypes } from '../../../../models/registrations/registration-entity-categories.model';
 import { GridUsagesDropdownDialogComponent } from '../grid-usages-dropdown-dialog/grid-usages-dropdown-dialog.component';
 import { GridUsagesDialogComponentStore } from './grid-usages-dialog.component-store';
+import { ScrollbarDialogComponent } from '../../../dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { NativeTableComponent } from '../../../native-table/native-table.component';
+import { NgFor, NgIf, AsyncPipe } from '@angular/common';
+import { ContentSpaceBetweenComponent } from '../../../content-space-between/content-space-between.component';
+import { ParagraphComponent } from '../../../paragraph/paragraph.component';
+import { IconButtonComponent } from '../../../buttons/icon-button/icon-button.component';
+import { ArrowRightIconComponent } from '../../../icons/arrow-right-icon.component';
 
 @Component({
-    selector: 'app-usages',
-    templateUrl: './grid-usages-dialog.component.html',
-    styleUrls: ['./grid-usages-dialog.component.scss'],
-    providers: [GridUsagesDialogComponentStore],
-    standalone: false
+  selector: 'app-usages',
+  templateUrl: './grid-usages-dialog.component.html',
+  styleUrls: ['./grid-usages-dialog.component.scss'],
+  providers: [GridUsagesDialogComponentStore],
+  imports: [
+    ScrollbarDialogComponent,
+    NativeTableComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    ParagraphComponent,
+    NgIf,
+    IconButtonComponent,
+    ArrowRightIconComponent,
+    AsyncPipe,
+  ],
 })
 export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
   @Input() type!: RegistrationEntityTypes | undefined;
@@ -27,7 +44,7 @@ export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly dialog: MatDialog,
     private readonly store: Store,
-    private readonly componentStore: GridUsagesDialogComponentStore
+    private readonly componentStore: GridUsagesDialogComponentStore,
   ) {
     super();
   }

@@ -13,7 +13,7 @@ describe('local-admin.fk-org', () => {
     });
     cy.intercept(
       'api/v2/internal/organizations/*/sts-organization-synchronization/connection/change-log?numberOfChangeLogs=*',
-      { fixture: './local-admin/fk-org/changelog.json' }
+      { fixture: './local-admin/fk-org/changelog.json' },
     );
 
     cy.setup(true);

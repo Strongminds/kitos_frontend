@@ -20,7 +20,10 @@ import { GridUIConfigService } from './ui-config-services/grid-ui-config.service
 
 @Injectable({ providedIn: 'root' })
 export class ColumnConfigService {
-  constructor(private store: Store, private gridUiConfigService: GridUIConfigService) {}
+  constructor(
+    private store: Store,
+    private gridUiConfigService: GridUIConfigService,
+  ) {}
 
   public dispatchSaveAction(entityType: RegistrationEntityTypes, columns: GridColumn[]) {
     const mappedColumns = this.mapColumnsToGridConfigurationRequest(columns);
@@ -106,7 +109,7 @@ export class ColumnConfigService {
           concatLatestFrom(() => this.getGridConfig(entityType)),
           map(([gridColumns, config]) => {
             return this.areColumnsDifferentFromConfig(gridColumns, config);
-          })
+          }),
         );
       }
       default:
@@ -116,12 +119,12 @@ export class ColumnConfigService {
 
   public getGridColumns(entityType: RegistrationEntityTypes): Observable<GridColumn[]> {
     return this.getRawGridColumns(entityType).pipe(
-      this.gridUiConfigService.filterGridColumnsByUIConfig(this.entityTypeToModuleConfigKey(entityType))
+      this.gridUiConfigService.filterGridColumnsByUIConfig(this.entityTypeToModuleConfigKey(entityType)),
     );
   }
 
   public getGridConfig(
-    entityType: RegistrationEntityTypes
+    entityType: RegistrationEntityTypes,
   ): Observable<APIOrganizationGridConfigurationResponseDTO | undefined> {
     switch (entityType) {
       case 'it-system-usage':
@@ -174,7 +177,7 @@ export class ColumnConfigService {
 
   private areColumnsDifferentFromConfig(
     columns: GridColumn[],
-    config: APIOrganizationGridConfigurationResponseDTO | undefined
+    config: APIOrganizationGridConfigurationResponseDTO | undefined,
   ): boolean {
     if (!config?.visibleColumns) return false;
 
@@ -183,11 +186,11 @@ export class ColumnConfigService {
     const disabledByUiPersistIds = new Set(columns.filter((column) => column.disabledByUIConfig).map(toPersistId));
 
     const configPersistIds = new Set(
-      config.visibleColumns.map(toPersistId).filter((x) => !disabledByUiPersistIds.has(x))
+      config.visibleColumns.map(toPersistId).filter((x) => !disabledByUiPersistIds.has(x)),
     );
 
     const visibleColumnPersistIds = new Set(
-      columns.filter((column) => !column.hidden && !column.disabledByUIConfig).map(toPersistId)
+      columns.filter((column) => !column.hidden && !column.disabledByUIConfig).map(toPersistId),
     );
 
     return !areSetsEqual(visibleColumnPersistIds, configPersistIds);

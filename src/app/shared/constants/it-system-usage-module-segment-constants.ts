@@ -7,5 +7,9 @@ export enum ItSystemUsageModuleSegmentOption {
 
 export const itSystemUsageModuleSegmentOptions: SegmentButtonOption<ItSystemUsageModuleSegmentOption>[] = [
   { text: $localize`Lokal data fra kommunen`, value: ItSystemUsageModuleSegmentOption.Usage },
-  { text: $localize`Data fra IT Systemkataloget`, value: ItSystemUsageModuleSegmentOption.Catalog, dataCy: 'catalog-segment' },
+  {
+    text: $localize`Data fra IT Systemkataloget`,
+    value: ItSystemUsageModuleSegmentOption.Catalog,
+    dataCy: 'catalog-segment',
+  },
 ];

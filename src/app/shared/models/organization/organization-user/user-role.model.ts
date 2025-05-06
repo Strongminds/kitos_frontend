@@ -45,13 +45,13 @@ export const mapUserRoleChoice = (value?: APIUserResponseDTO.RolesEnum): UserRol
 export function GetOptionsBasedOnRights(
   isGlobalAdmin: boolean,
   organziationRights: OrganizationRight[],
-  organizationUuid: string
+  organizationUuid: string,
 ): MultiSelectDropdownItem<APIUserResponseDTO.RolesEnum>[] {
   const hasRole = (role: number) => hasRoleInOrganization(organziationRights, organizationUuid, role);
   const isLocalAdmin = hasRole(LOCAL_ADMIN_ROLE);
   const isOrgAdmin = hasRole(ORGANIZATION_ADMIN_ROLE);
   return userRoleChoiceOptions.map((option) =>
-    mapUserRoleChoiceToMultiSelectOption(isGlobalAdmin, isLocalAdmin, isOrgAdmin, option)
+    mapUserRoleChoiceToMultiSelectOption(isGlobalAdmin, isLocalAdmin, isOrgAdmin, option),
   );
 }
 
@@ -59,7 +59,7 @@ function mapUserRoleChoiceToMultiSelectOption(
   isGlobalAdmin: boolean,
   isLocalAdmin: boolean,
   isOrgAdmin: boolean,
-  item: UserRoleChoice
+  item: UserRoleChoice,
 ): MultiSelectDropdownItem<APIUserResponseDTO.RolesEnum> {
   if (isGlobalAdmin || isLocalAdmin) return { ...item, disabled: false };
   if (item.value === APIUserResponseDTO.RolesEnum.OrganizationModuleAdmin && isOrgAdmin)

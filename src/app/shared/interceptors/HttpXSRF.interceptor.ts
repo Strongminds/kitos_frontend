@@ -13,7 +13,7 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
   constructor(
     private cookieService: CookieService,
     private store: Store,
-    private authorizeService: APIV1AuthorizeINTERNALService
+    private authorizeService: APIV1AuthorizeINTERNALService,
   ) {}
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -36,7 +36,7 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
           catchError((error) => {
             console.error('Token fetch failed', error);
             return of('');
-          })
+          }),
         );
       }),
       mergeMap((token) =>
@@ -51,13 +51,13 @@ export class HttpXSRFInterceptor implements HttpInterceptor {
                 catchError((err) => {
                   console.error('Retry after token refresh failed', err);
                   return throwError(() => error);
-                })
+                }),
               );
             }
             return throwError(() => error);
-          })
-        )
-      )
+          }),
+        ),
+      ),
     );
   }
 }

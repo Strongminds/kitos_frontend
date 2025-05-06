@@ -34,18 +34,18 @@
           columnConfig.width !== undefined
             ? columnConfig.width
             : columnConfig.style === 'date'
-            ? defaultDateColumnWidth
-            : defaultColumnWidth
+              ? defaultDateColumnWidth
+              : defaultColumnWidth
         "
         [sticky]="columnConfig.isSticky ?? false"
         [minResizableWidth]="
           columnConfig.minResizableWidth !== undefined
             ? columnConfig.minResizableWidth
             : columnConfig.filter === 'date'
-            ? defaultMinimumDateColumnWidth
-            : columnConfig.style === 'primary'
-            ? defaultPrimaryColumnMinimumWidth
-            : defaultMinimumColumnWidth
+              ? defaultMinimumDateColumnWidth
+              : columnConfig.style === 'primary'
+                ? defaultPrimaryColumnMinimumWidth
+                : defaultMinimumColumnWidth
         "
         [headerClass]="{ 'mygrid-header-cell': true, 'not-sortable': columnConfig.sortable === false }"
       >

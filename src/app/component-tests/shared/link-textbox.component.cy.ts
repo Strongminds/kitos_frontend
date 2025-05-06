@@ -2,7 +2,6 @@
 
 import { of } from 'rxjs';
 import { LinkTextboxComponent } from '../../shared/components/link-textbox/link-textbox.component';
-import { AppModule } from 'src/app/app.module';
 
 it('Emits open event clicking empty link textbox', () => {
   const onClickSpy = cy.spy().as('onClick');
@@ -13,7 +12,6 @@ it('Emits open event clicking empty link textbox', () => {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       iconClick: { emit: onClickSpy } as any,
     },
-    imports: [AppModule],
   });
 
   cy.contains('Title').click();

@@ -26,7 +26,7 @@ export class BaseOverviewComponent extends BaseComponent {
 
   constructor(
     protected store: Store,
-    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
+    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes,
   ) {
     super();
     this.store.dispatch(UserActions.getUserGridPermissions());
@@ -35,8 +35,12 @@ export class BaseOverviewComponent extends BaseComponent {
   protected updateUnclickableColumns(currentColumns: GridColumn[]) {
     this.unclickableColumnFields = [];
     currentColumns.forEach((column) => {
-      if (column.style && DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES.includes(column.style)) {
-        this.unclickableColumnFields.push(column.field);
+      if (column && column.style && DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES.includes(column.style)) {
+        if (column.field) {
+          this.unclickableColumnFields.push(column.field);
+        } else {
+          console.warn('Column is missing the "field" property:', column);
+        }
       }
     });
   }
@@ -60,7 +64,7 @@ export class BaseOverviewComponent extends BaseComponent {
       .pipe(first())
       .subscribe((gridState) => {
         this.store.dispatch(
-          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType)
+          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType),
         );
       });
   };

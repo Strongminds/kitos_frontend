@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
@@ -29,12 +29,25 @@ import {
   selectDprEnableReferences,
   selectDprEnableRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
+import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
+import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 @Component({
-    selector: 'app-data-processing-details',
-    templateUrl: './data-processing-details.component.html',
-    styleUrl: './data-processing-details.component.scss',
-    standalone: false
+  selector: 'app-data-processing-details',
+  templateUrl: './data-processing-details.component.html',
+  styleUrl: './data-processing-details.component.scss',
+  imports: [
+    NgIf,
+    BreadcrumbsComponent,
+    ButtonComponent,
+    NavigationDrawerComponent,
+    RouterOutlet,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -66,7 +79,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
         routerLink: `${dprUuid}`,
       },
     ]),
-    filterNullish()
+    filterNullish(),
   );
 
   public readonly navigationItems: NavigationDrawerItem[] = [
@@ -119,7 +132,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     private router: Router,
     private notificationService: NotificationService,
     private actions$: Actions,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
     super();
   }
@@ -132,7 +145,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.deleteDataProcessingSuccess)).subscribe(() => {
         this.router.navigate([`${AppPath.dataProcessing}`]);
-      })
+      }),
     );
   }
 
@@ -150,7 +163,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
           if (result === true) {
             this.store.dispatch(DataProcessingActions.deleteDataProcessing());
           }
-        })
+        }),
     );
   }
 
@@ -159,12 +172,12 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       this.route.params
         .pipe(
           map((params) => params['uuid']),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         )
         .subscribe((dprUuid) => {
           this.store.dispatch(DataProcessingActions.getDataProcessingPermissions(dprUuid));
           this.store.dispatch(DataProcessingActions.getDataProcessing(dprUuid));
-        })
+        }),
     );
   }
 
@@ -177,7 +190,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til denne Databehandling`);
           this.router.navigate([`${AppPath.dataProcessing}`]);
-        })
+        }),
     );
   }
 
@@ -186,7 +199,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       this.actions$.pipe(ofType(DataProcessingActions.getDataProcessingError)).subscribe(() => {
         this.notificationService.showError($localize`Databehandling findes ikke`);
         this.router.navigate([`${AppPath.dataProcessing}`]);
-      })
+      }),
     );
   }
 }

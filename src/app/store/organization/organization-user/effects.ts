@@ -24,7 +24,7 @@ export class OrganizationUserEffects {
     private httpClient: HttpClient,
     @Inject(APIV2UsersInternalINTERNALService) private apiService: APIV2UsersInternalINTERNALService,
     private gridColumnStorageService: GridColumnStorageService,
-    private gridDataCacheService: GridDataCacheService
+    private gridDataCacheService: GridDataCacheService,
   ) {}
 
   getOrganizationUsers$ = createEffect(() => {
@@ -49,7 +49,7 @@ export class OrganizationUserEffects {
               `OrganizationUnitRights($filter=Object/Organization/Uuid eq ${organizationUuid};$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),` +
               `ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem,Uuid;$expand=ItSystem($select=Name))),` +
               `ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),` +
-              `DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&${fixedOdataString}&$count=true`
+              `DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -60,16 +60,16 @@ export class OrganizationUserEffects {
               const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
               return OrganizationUserActions.getOrganizationUsersSuccess(returnData, total);
             }),
-            catchError(() => of(OrganizationUserActions.getOrganizationUsersError()))
+            catchError(() => of(OrganizationUserActions.getOrganizationUsersError())),
           );
-      })
+      }),
     );
   });
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.updateGridState),
-      map(({ gridState }) => OrganizationUserActions.getOrganizationUsers(gridState))
+      map(({ gridState }) => OrganizationUserActions.getOrganizationUsers(gridState)),
     );
   });
 
@@ -79,7 +79,7 @@ export class OrganizationUserEffects {
       map(({ gridColumns }) => {
         this.gridColumnStorageService.setColumns(ORGANIZATION_USER_COLUMNS_ID, gridColumns);
         return OrganizationUserActions.updateGridColumnsSuccess(gridColumns);
-      })
+      }),
     );
   });
 
@@ -90,9 +90,9 @@ export class OrganizationUserEffects {
       switchMap(([_, organizationUuid]) =>
         this.apiService.getSingleUsersInternalV2GetCollectionPermissions({ organizationUuid }).pipe(
           map((permissions) => OrganizationUserActions.getOrganizationUserPermissionsSuccess(permissions)),
-          catchError(() => of(OrganizationUserActions.getOrganizationUserPermissionsError()))
-        )
-      )
+          catchError(() => of(OrganizationUserActions.getOrganizationUserPermissionsError())),
+        ),
+      ),
     );
   });
 
@@ -103,9 +103,9 @@ export class OrganizationUserEffects {
       switchMap(([{ request }, organizationUuid]) =>
         this.apiService.postSingleUsersInternalV2CreateUser({ parameters: request, organizationUuid }).pipe(
           map((user) => OrganizationUserActions.createUserSuccess(user as APIOrganizationUserResponseDTO)),
-          catchError(() => of(OrganizationUserActions.createUserError()))
-        )
-      )
+          catchError(() => of(OrganizationUserActions.createUserError())),
+        ),
+      ),
     );
   });
 
@@ -121,9 +121,9 @@ export class OrganizationUserEffects {
           })
           .pipe(
             map(() => OrganizationUserActions.sendNotificationSuccess(userUuid)),
-            catchError(() => of(OrganizationUserActions.sendNotificationError()))
-          )
-      )
+            catchError(() => of(OrganizationUserActions.sendNotificationError())),
+          ),
+      ),
     );
   });
 
@@ -140,9 +140,9 @@ export class OrganizationUserEffects {
           })
           .pipe(
             map((user) => OrganizationUserActions.updateUserSuccess(user)),
-            catchError(() => of(OrganizationUserActions.updateUserError()))
-          )
-      )
+            catchError(() => of(OrganizationUserActions.updateUserError())),
+          ),
+      ),
     );
   });
 
@@ -158,9 +158,9 @@ export class OrganizationUserEffects {
           })
           .pipe(
             map(() => OrganizationUserActions.deleteUserSuccess(userUuid)),
-            catchError(() => of(OrganizationUserActions.deleteUserError()))
-          )
-      )
+            catchError(() => of(OrganizationUserActions.deleteUserError())),
+          ),
+      ),
     );
   });
 
@@ -178,9 +178,9 @@ export class OrganizationUserEffects {
           })
           .pipe(
             map(() => OrganizationUserActions.copyRolesSuccess()),
-            catchError(() => of(OrganizationUserActions.copyRolesError()))
-          )
-      )
+            catchError(() => of(OrganizationUserActions.copyRolesError())),
+          ),
+      ),
     );
   });
 
@@ -198,9 +198,9 @@ export class OrganizationUserEffects {
           })
           .pipe(
             map(() => OrganizationUserActions.transferRolesSuccess()),
-            catchError(() => of(OrganizationUserActions.transferRolesError()))
-          )
-      )
+            catchError(() => of(OrganizationUserActions.transferRolesError())),
+          ),
+      ),
     );
   });
 
@@ -223,9 +223,9 @@ export class OrganizationUserEffects {
               }
             }),
 
-            catchError(() => of(OrganizationUserActions.verifyUserEmailError()))
-          )
-      )
+            catchError(() => of(OrganizationUserActions.verifyUserEmailError())),
+          ),
+      ),
     );
   });
 
@@ -234,7 +234,7 @@ export class OrganizationUserEffects {
       ofType(OrganizationUserActions.updateUserSuccess),
       concatLatestFrom(() => this.store.select(selectUserUuid).pipe(filterNullish())),
       filter(([{ user: editedUser }, currentUserUuid]) => editedUser.uuid === currentUserUuid),
-      map(() => OrganizationUserActions.getOrganizationUserPermissions())
+      map(() => OrganizationUserActions.getOrganizationUserPermissions()),
     );
   });
 }

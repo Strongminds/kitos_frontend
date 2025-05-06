@@ -4,12 +4,28 @@ import { BaseComponent } from '../../base/base.component';
 import { validateUrl } from '../../helpers/link.helpers';
 import { isEmptyOrUndefined } from '../../helpers/string.helpers';
 import { SimpleLink } from '../../models/SimpleLink.model';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
+import { MatInput } from '@angular/material/input';
+import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
+import { PencilIconComponent } from '../icons/pencil-icon.compnent';
+import { ReadonlyLinkTextboxComponent } from './readonly-link-textbox/readonly-link-textbox.component';
 
 @Component({
-    selector: 'app-link-textbox',
-    templateUrl: './link-textbox.component.html',
-    styleUrls: ['./link-textbox.component.scss'],
-    standalone: false
+  selector: 'app-link-textbox',
+  templateUrl: './link-textbox.component.html',
+  styleUrls: ['./link-textbox.component.scss'],
+  imports: [
+    NgIf,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatSuffix,
+    IconButtonComponent,
+    PencilIconComponent,
+    ReadonlyLinkTextboxComponent,
+    AsyncPipe,
+  ],
 })
 export class LinkTextboxComponent extends BaseComponent {
   @Input() public title!: string;
@@ -47,7 +63,7 @@ export class LinkTextboxComponent extends BaseComponent {
           return title;
         }
         return `${title}: ${simpleLink?.url}`;
-      })
+      }),
     );
   }
 
@@ -57,7 +73,7 @@ export class LinkTextboxComponent extends BaseComponent {
         const url = simpleLink?.url;
         const name = simpleLink?.name;
         return !(isEmptyOrUndefined(url) && isEmptyOrUndefined(name));
-      })
+      }),
     );
   }
 
@@ -65,7 +81,7 @@ export class LinkTextboxComponent extends BaseComponent {
     return this.simpleLink$.pipe(
       map((simpleLink) => {
         return !simpleLink || !simpleLink.url;
-      })
+      }),
     );
   }
 

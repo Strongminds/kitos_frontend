@@ -43,7 +43,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
   const mappedUsages: IdentityNamePair[] = value.Usages.map(
     (usage: { Organization: { Name: string; Uuid: string } }) => {
       return { name: usage.Organization.Name, uuid: usage.Organization.Uuid };
-    }
+    },
   ).sort((a: IdentityNamePair, b: IdentityNamePair) => a.name.localeCompare(b.name));
   const reference = value.Reference;
 
@@ -52,7 +52,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     Uuid: value.Uuid,
     Name: entityWithUnavailableName(value.Name, !isDisabled),
     IsInUse: value.Usages.some(
-      (usage: { Organization: { Uuid: string } }) => usage.Organization.Uuid === currentOrganizationUuid
+      (usage: { Organization: { Uuid: string } }) => usage.Organization.Uuid === currentOrganizationUuid,
     ),
     PreviousName: value.PreviousName,
     Parent: { Name: entityWithUnavailableName(value.Parent?.Name, !value.Parent?.Disabled) },

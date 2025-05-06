@@ -1,15 +1,20 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { MatButton } from '@angular/material/button';
 import { ThemePalette } from '@angular/material/core';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 import { IconType } from 'src/app/shared/models/icon-type';
+import { CtrlClickDirective } from '../../../directives/ctrl-click.directive';
+import { IconComponent } from '../../icon/icon.component';
+import { TooltipComponent } from '../../tooltip/tooltip.component';
 
 export declare type ExtendedThemePalette = ThemePalette | 'secondary';
 
 @Component({
-    selector: 'app-button',
-    templateUrl: 'button.component.html',
-    styleUrls: ['button.component.scss'],
-    standalone: false
+  selector: 'app-button',
+  templateUrl: 'button.component.html',
+  styleUrls: ['button.component.scss'],
+  imports: [TooltipComponent, MatButton, CtrlClickDirective, CommonModule, IconComponent],
 })
 export class ButtonComponent {
   @Input() public buttonStyle: ButtonStyle = 'primary';
