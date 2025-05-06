@@ -309,12 +309,12 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
             DATA_PROCESSING_COLUMNS_ID,
             defaultColumnsAndRoles
           );
-          const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
-
-          this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToUse));
-          if (!localStorageColumns) {
-            this.store.dispatch(DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration());
-          }
+          this.updateLocalOrDefaultGridColumns(
+            defaultColumnsAndRoles,
+            localStorageColumns,
+            DataProcessingActions.updateGridColumns,
+            DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration
+          );
         })
     );
 

@@ -708,9 +708,9 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess),
       concatLatestFrom(() => [this.store.select(selectUsageGridColumns)]),
       map(([{ response }, columns]) => {
-        const configColumns = response?.visibleColumns;
-        if (!configColumns) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
-        const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
+        const columnConfigs = response?.visibleColumns;
+        if (!columnConfigs) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
+        const newColumns = getNewGridColumnsBasedOnConfig(columnConfigs, columns);
         return ITSystemUsageActions.updateGridColumns(newColumns);
       })
     );

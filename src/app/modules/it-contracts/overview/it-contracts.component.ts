@@ -450,12 +450,12 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
             CONTRACT_COLUMNS_ID,
             defaultColumnsAndRoles
           );
-          const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
-
-          this.store.dispatch(ITContractActions.updateGridColumns(columnsToUse));
-          if (!localStorageColumns) {
-            this.store.dispatch(ITContractActions.resetToOrganizationITContractColumnConfiguration());
-          }
+          this.updateLocalOrDefaultGridColumns(
+            defaultColumnsAndRoles,
+            localStorageColumns,
+            ITContractActions.updateGridColumns,
+            ITContractActions.resetToOrganizationITContractColumnConfiguration
+          );
         })
     );
 
