@@ -12,10 +12,25 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
 import { InfoIconComponent } from '../icons/info-icon.component';
 
 @Component({
-    selector: 'app-textbox',
-    templateUrl: 'textbox.component.html',
-    styleUrls: ['textbox.component.scss'],
-    imports: [NgIf, MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, MatProgressSpinner, MatSuffix, SearchIconComponent, MatPrefix, TrashcanIconComponent, XIconComponent, TooltipComponent, InfoIconComponent]
+  selector: 'app-textbox',
+  templateUrl: 'textbox.component.html',
+  styleUrls: ['textbox.component.scss'],
+  imports: [
+    NgIf,
+    MatFormField,
+    FormsModule,
+    ReactiveFormsModule,
+    MatLabel,
+    MatInput,
+    MatProgressSpinner,
+    MatSuffix,
+    SearchIconComponent,
+    MatPrefix,
+    TrashcanIconComponent,
+    XIconComponent,
+    TooltipComponent,
+    InfoIconComponent,
+  ],
 })
 export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public clearable = false;

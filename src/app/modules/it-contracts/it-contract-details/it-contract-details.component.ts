@@ -38,10 +38,18 @@ import { NavigationDrawerComponent } from '../../../shared/components/navigation
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 @Component({
-    selector: 'app-it-contract-details',
-    templateUrl: './it-contract-details.component.html',
-    styleUrl: './it-contract-details.component.scss',
-    imports: [NgIf, BreadcrumbsComponent, ButtonComponent, NavigationDrawerComponent, RouterOutlet, LoadingComponent, AsyncPipe]
+  selector: 'app-it-contract-details',
+  templateUrl: './it-contract-details.component.html',
+  styleUrl: './it-contract-details.component.scss',
+  imports: [
+    NgIf,
+    BreadcrumbsComponent,
+    ButtonComponent,
+    NavigationDrawerComponent,
+    RouterOutlet,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class ItContractDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -63,7 +71,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
         routerLink: `${contractUuid}`,
       },
     ]),
-    filterNullish()
+    filterNullish(),
   );
   public readonly itSystemsTabEnabled$ = this.store.select(selectItContractEnableItSystems);
   public readonly dataProcessingTabEnabled$ = this.store.select(selectItContractEnableDataProcessing);
@@ -139,7 +147,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     private router: Router,
     private notificationService: NotificationService,
     private actions$: Actions,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
     super();
   }
@@ -153,7 +161,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       this.actions$.pipe(ofType(ITContractActions.deleteITContractSuccess)).subscribe(() => {
         this.dialog.closeAll();
         this.router.navigate([`${AppPath.itContracts}`]);
-      })
+      }),
     );
   }
 
@@ -166,12 +174,12 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       this.route.params
         .pipe(
           map((params) => params['uuid']),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         )
         .subscribe((itContractUuid) => {
           this.store.dispatch(ITContractActions.getITContractPermissions(itContractUuid));
           this.store.dispatch(ITContractActions.getITContract(itContractUuid));
-        })
+        }),
     );
   }
 
@@ -184,7 +192,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til denne IT Kontrakt`);
           this.router.navigate([`${AppPath.itContracts}`]);
-        })
+        }),
     );
   }
 
@@ -193,7 +201,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       this.actions$.pipe(ofType(ITContractActions.getITContractError)).subscribe(() => {
         this.notificationService.showError($localize`IT Kontrakt findes ikke`);
         this.router.navigate([`${AppPath.itContracts}`]);
-      })
+      }),
     );
   }
 }

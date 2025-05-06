@@ -16,22 +16,22 @@ import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-acti
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-external-reference-dialog[externalReferenceProperties][title]',
-    templateUrl: './external-reference-dialog.component.html',
-    styleUrls: ['./external-reference-dialog.component.scss'],
-    imports: [
-        DialogComponent,
-        StandardVerticalContentGridComponent,
-        FormsModule,
-        ReactiveFormsModule,
-        TextBoxComponent,
-        DividerComponent,
-        NgIf,
-        ParagraphComponent,
-        CheckboxComponent,
-        DialogActionsComponent,
-        ButtonComponent,
-    ],
+  selector: 'app-external-reference-dialog[externalReferenceProperties][title]',
+  templateUrl: './external-reference-dialog.component.html',
+  styleUrls: ['./external-reference-dialog.component.scss'],
+  imports: [
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    DividerComponent,
+    NgIf,
+    ParagraphComponent,
+    CheckboxComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class ExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public externalReferenceProperties!: ExternalReferenceProperties;
@@ -66,7 +66,7 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
       url: new FormControl<string | undefined>(undefined),
       masterReference: new FormControl<boolean>(false),
     },
-    { updateOn: 'change' }
+    { updateOn: 'change' },
   );
 
   constructor() {
@@ -103,7 +103,7 @@ export class ExternalReferenceDialogComponent extends BaseComponent implements O
         .pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME))
         .subscribe((url) => {
           this.showUrlError = !isUrlEmptyOrValid(url ?? undefined);
-        })
+        }),
     );
   }
   createValidator(): ValidatorFn {

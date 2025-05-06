@@ -30,10 +30,17 @@ import { GridComponent } from '../../../../shared/components/grid/grid.component
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-global-admin-organizations-grid',
-    templateUrl: './global-admin-organizations-grid.component.html',
-    styleUrl: './global-admin-organizations-grid.component.scss',
-    imports: [OverviewHeaderComponent, GridOptionsButtonComponent, ExportMenuButtonComponent, ButtonComponent, GridComponent, AsyncPipe]
+  selector: 'app-global-admin-organizations-grid',
+  templateUrl: './global-admin-organizations-grid.component.html',
+  styleUrl: './global-admin-organizations-grid.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    ButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;
@@ -74,7 +81,11 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
 
   public readonly gridColumns$ = of(this.gridColumns);
 
-  constructor(store: Store, private dialog: MatDialog, private actions$: Actions) {
+  constructor(
+    store: Store,
+    private dialog: MatDialog,
+    private actions$: Actions,
+  ) {
     super(store, 'global-admin-organization');
   }
   ngOnInit() {
@@ -86,13 +97,13 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
           ofType(
             OrganizationActions.createOrganizationSuccess,
             OrganizationActions.patchOrganizationSuccess,
-            OrganizationActions.deleteOrganizationSuccess
+            OrganizationActions.deleteOrganizationSuccess,
           ),
-          combineLatestWith(this.gridState$)
+          combineLatestWith(this.gridState$),
         )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
   }
 

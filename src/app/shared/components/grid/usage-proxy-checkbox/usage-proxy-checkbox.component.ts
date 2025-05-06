@@ -5,10 +5,10 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { SlideToggleComponent } from '../../slide-toggle/slide-toggle.component';
 
 @Component({
-    selector: 'app-usage-proxy-checkbox',
-    templateUrl: './usage-proxy-checkbox.component.html',
-    styleUrls: ['./usage-proxy-checkbox.component.scss'],
-    imports: [SlideToggleComponent]
+  selector: 'app-usage-proxy-checkbox',
+  templateUrl: './usage-proxy-checkbox.component.html',
+  styleUrls: ['./usage-proxy-checkbox.component.scss'],
+  imports: [SlideToggleComponent],
 })
 export class UsageProxyCheckboxComponent implements OnInit {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -19,13 +19,16 @@ export class UsageProxyCheckboxComponent implements OnInit {
 
   @Output() attemptChange = new EventEmitter<boolean>();
 
-  constructor(private actions$: Actions, private cdRef: ChangeDetectorRef) {}
+  constructor(
+    private actions$: Actions,
+    private cdRef: ChangeDetectorRef,
+  ) {}
 
   ngOnInit() {
     this.actions$
       .pipe(
         ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
-        filter(({ itSystemUuid }) => itSystemUuid === this.entityUuid)
+        filter(({ itSystemUuid }) => itSystemUuid === this.entityUuid),
       )
       .subscribe(() => {
         this.checked = false;
@@ -36,7 +39,7 @@ export class UsageProxyCheckboxComponent implements OnInit {
     this.actions$
       .pipe(
         ofType(ITSystemUsageActions.createItSystemUsageSuccess),
-        filter(({ itSystemUuid }) => itSystemUuid === this.entityUuid)
+        filter(({ itSystemUuid }) => itSystemUuid === this.entityUuid),
       )
       .subscribe(() => {
         this.checked = true;

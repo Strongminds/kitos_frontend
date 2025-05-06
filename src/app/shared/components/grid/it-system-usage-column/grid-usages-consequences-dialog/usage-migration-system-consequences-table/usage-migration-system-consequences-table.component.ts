@@ -5,10 +5,10 @@ import { NgIf } from '@angular/common';
 import { NativeTableComponent } from '../../../../native-table/native-table.component';
 
 @Component({
-    selector: 'app-usage-migration-system-consequences-table[migration]',
-    templateUrl: './usage-migration-system-consequences-table.component.html',
-    styleUrl: './usage-migration-system-consequences-table.component.scss',
-    imports: [ParagraphComponent, NgIf, NativeTableComponent]
+  selector: 'app-usage-migration-system-consequences-table[migration]',
+  templateUrl: './usage-migration-system-consequences-table.component.html',
+  styleUrl: './usage-migration-system-consequences-table.component.scss',
+  imports: [ParagraphComponent, NgIf, NativeTableComponent],
 })
 export class UsageMigrationSystemConsequencesTableComponent {
   @Input() migration!: ItSystemUsageMigration;

@@ -19,10 +19,19 @@ import { ButtonComponent } from '../../../../../../shared/components/buttons/but
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-country-create-dialog',
-    templateUrl: './country-create-dialog.component.html',
-    styleUrl: './country-create-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-country-create-dialog',
+  templateUrl: './country-create-dialog.component.html',
+  styleUrl: './country-create-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CountryCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly thirdCountries$ = this.store.select(selectRegularOptionTypes('data-processing-country-types')).pipe(
@@ -31,9 +40,9 @@ export class CountryCreateDialogComponent extends BaseComponent implements OnIni
       if (!thirdCountriesOptions) return [];
 
       return thirdCountriesOptions.filter(
-        (option) => !existingCountries.some((country) => country.uuid === option.uuid)
+        (option) => !existingCountries.some((country) => country.uuid === option.uuid),
       );
-    })
+    }),
   );
 
   public readonly thirdCountriesFormGroup = new FormGroup({
@@ -43,7 +52,7 @@ export class CountryCreateDialogComponent extends BaseComponent implements OnIni
   constructor(
     private store: Store,
     private dialog: MatDialogRef<CountryCreateDialogComponent>,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -56,13 +65,13 @@ export class CountryCreateDialogComponent extends BaseComponent implements OnIni
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingSuccess)).subscribe(() => {
         this.onClose();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingError)).subscribe(() => {
         this.isBusy = false;
-      })
+      }),
     );
   }
 
@@ -79,8 +88,8 @@ export class CountryCreateDialogComponent extends BaseComponent implements OnIni
         this.store.dispatch(
           DataProcessingActions.addDataProcessingThirdCountry(
             this.thirdCountriesFormGroup.value.thirdCountry!,
-            countries
-          )
+            countries,
+          ),
         );
       });
   }

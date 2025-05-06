@@ -14,8 +14,8 @@ export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => M
     createSelector(
       selectUIModuleCustomizationState,
       () => new Date(),
-      (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
-    )
+      (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now),
+    ),
 );
 
 export const selectModuleConfig = (module: UIModuleConfigKey) =>
@@ -25,7 +25,7 @@ export const selectModuleConfig = (module: UIModuleConfigKey) =>
 
 export const selectUIConfigLoading = createSelector(
   selectUIModuleCustomizationState,
-  (state: UIModuleConfigState) => state.loading
+  (state: UIModuleConfigState) => state.loading,
 );
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
@@ -257,7 +257,7 @@ function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: str
 function fieldOrGroupIsEnabled(
   uiConfigViewModels: UIConfigNodeViewModel,
   tabFullKey: string,
-  fieldKey: string
+  fieldKey: string,
 ): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
   const tabViewModelChildren = tabViewModel?.children;
@@ -270,7 +270,7 @@ function fieldOrGroupIsEnabled(
 
 function getTabViewModelFromModule(
   uiConfigViewModels: UIConfigNodeViewModel,
-  tabFullKey: string
+  tabFullKey: string,
 ): UIConfigNodeViewModel | undefined {
   const moduleConfigChildren = uiConfigViewModels.children;
   if (!moduleConfigChildren) return undefined;

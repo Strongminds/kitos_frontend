@@ -10,10 +10,10 @@ import { TextBoxComponent as TextBoxComponent_1 } from '../../textbox/textbox.co
 import { AfterValueChangedDirective } from '../../../directives/after-value-changed.directive';
 
 @Component({
-    selector: 'app-string-filter',
-    templateUrl: './string-filter.component.html',
-    styleUrl: './string-filter.component.scss',
-    imports: [TextBoxComponent_1, AfterValueChangedDirective]
+  selector: 'app-string-filter',
+  templateUrl: './string-filter.component.html',
+  styleUrl: './string-filter.component.scss',
+  imports: [TextBoxComponent_1, AfterValueChangedDirective],
 })
 export class StringFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @ViewChild(TextBoxComponent) public textBox!: TextBoxComponent;
@@ -23,7 +23,10 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
   public value: string = '';
 
-  constructor(filterService: FilterService, private actions$: Actions) {
+  constructor(
+    filterService: FilterService,
+    private actions$: Actions,
+  ) {
     super(filterService);
   }
 
@@ -36,7 +39,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
 
     if (this.entityType) {
       this.subscriptions.add(
-        initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+        initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod),
       );
     }
   }
@@ -49,7 +52,7 @@ export class StringFilterComponent extends AppBaseFilterCellComponent implements
             field: this.column.field,
             operator: 'contains',
             value: value,
-          })
+          }),
     );
   }
 }

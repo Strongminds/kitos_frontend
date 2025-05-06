@@ -4,10 +4,10 @@ import { ButtonComponent } from '../../../shared/components/buttons/button/butto
 import { LockIconComponent } from '../../../shared/components/icons/lock-icon.component';
 
 @Component({
-    selector: 'app-sso-button',
-    templateUrl: './sso-button.component.html',
-    styleUrl: './sso-button.component.scss',
-    imports: [ButtonComponent, LockIconComponent]
+  selector: 'app-sso-button',
+  templateUrl: './sso-button.component.html',
+  styleUrl: './sso-button.component.scss',
+  imports: [ButtonComponent, LockIconComponent],
 })
 export class SsoButtonComponent {
   public readonly buttonText = $localize`Log ind med SSO`;

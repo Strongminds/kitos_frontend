@@ -9,10 +9,10 @@ import { RoleTableComponent } from '../../../../shared/components/role-table/rol
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-it-contract-roles',
-    templateUrl: './it-contract-roles.component.html',
-    styleUrl: './it-contract-roles.component.scss',
-    imports: [CardComponent, CardHeaderComponent, RoleTableComponent, AsyncPipe]
+  selector: 'app-it-contract-roles',
+  templateUrl: './it-contract-roles.component.html',
+  styleUrl: './it-contract-roles.component.scss',
+  imports: [CardComponent, CardHeaderComponent, RoleTableComponent, AsyncPipe],
 })
 export class ItContractRolesComponent extends BaseComponent {
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());

@@ -7,18 +7,10 @@ import { NgIf } from '@angular/common';
 import { ChevronDownIconComponent } from '../../../shared/components/icons/chevron-down-icon.component';
 
 @Component({
-    selector: 'app-menu',
-    templateUrl: 'menu.component.html',
-    styleUrls: ['menu.component.scss'],
-    imports: [
-        ButtonComponent,
-        RouterLinkActive,
-        MatMenuTrigger,
-        RouterLink,
-        NgIf,
-        ChevronDownIconComponent,
-        MatMenu,
-    ],
+  selector: 'app-menu',
+  templateUrl: 'menu.component.html',
+  styleUrls: ['menu.component.scss'],
+  imports: [ButtonComponent, RouterLinkActive, MatMenuTrigger, RouterLink, NgIf, ChevronDownIconComponent, MatMenu],
 })
 export class MenuComponent implements DoCheck {
   @Input() title?: string | null = '';

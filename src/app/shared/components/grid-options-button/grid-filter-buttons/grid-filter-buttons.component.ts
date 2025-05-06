@@ -7,10 +7,10 @@ import { DiskIconComponent } from '../../icons/disk-icon.component';
 import { TrashcanIconComponent } from '../../icons/trashcan-icon.component';
 
 @Component({
-    selector: 'app-grid-filter-buttons',
-    templateUrl: './grid-filter-buttons.component.html',
-    styleUrl: './grid-filter-buttons.component.scss',
-    imports: [MenuButtonItemComponent, FilterIconComponent, DiskIconComponent, TrashcanIconComponent]
+  selector: 'app-grid-filter-buttons',
+  templateUrl: './grid-filter-buttons.component.html',
+  styleUrl: './grid-filter-buttons.component.scss',
+  imports: [MenuButtonItemComponent, FilterIconComponent, DiskIconComponent, TrashcanIconComponent],
 })
 export class GridFilterButtonsComponent {
   @Input() entityType!: RegistrationEntityTypes;

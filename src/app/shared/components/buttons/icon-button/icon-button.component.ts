@@ -3,10 +3,10 @@ import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 import { ButtonComponent } from '../button/button.component';
 
 @Component({
-    selector: 'app-icon-button',
-    templateUrl: './icon-button.component.html',
-    styleUrls: ['./icon-button.component.scss'],
-    imports: [ButtonComponent]
+  selector: 'app-icon-button',
+  templateUrl: './icon-button.component.html',
+  styleUrls: ['./icon-button.component.scss'],
+  imports: [ButtonComponent],
 })
 export class IconButtonComponent {
   @Input() public disabled = false;

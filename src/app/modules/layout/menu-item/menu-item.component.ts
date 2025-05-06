@@ -4,10 +4,10 @@ import { CtrlClickDirective } from '../../../shared/directives/ctrl-click.direct
 import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-menu-item',
-    templateUrl: 'menu-item.component.html',
-    styleUrls: ['menu-item.component.scss'],
-    imports: [CtrlClickDirective, RouterLink]
+  selector: 'app-menu-item',
+  templateUrl: 'menu-item.component.html',
+  styleUrls: ['menu-item.component.scss'],
+  imports: [CtrlClickDirective, RouterLink],
 })
 export class MenuItemComponent {
   @Input() path?: AppPath;

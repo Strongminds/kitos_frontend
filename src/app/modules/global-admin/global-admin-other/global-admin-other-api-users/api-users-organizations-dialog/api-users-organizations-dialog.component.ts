@@ -5,10 +5,10 @@ import { NativeTableComponent } from '../../../../../shared/components/native-ta
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
 
 @Component({
-    selector: 'app-api-users-organizations-dialog',
-    templateUrl: './api-users-organizations-dialog.component.html',
-    styleUrl: './api-users-organizations-dialog.component.scss',
-    imports: [DialogComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent]
+  selector: 'app-api-users-organizations-dialog',
+  templateUrl: './api-users-organizations-dialog.component.html',
+  styleUrl: './api-users-organizations-dialog.component.scss',
+  imports: [DialogComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent],
 })
 export class ApiUsersOrganizationsDialogComponent {
   @Input() public organizationNames: string[] = [];

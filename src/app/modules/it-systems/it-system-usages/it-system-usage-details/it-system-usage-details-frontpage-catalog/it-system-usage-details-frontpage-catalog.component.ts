@@ -34,11 +34,30 @@ import { TextAreaComponent } from '../../../../../shared/components/textarea/tex
 import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-overview/it-system-kle-overview.component';
 
 @Component({
-    selector: 'app-it-system-usage-details-frontpage-catalog',
-    templateUrl: 'it-system-usage-details-frontpage-catalog.component.html',
-    styleUrls: ['it-system-usage-details-frontpage-catalog.component.scss'],
-    providers: [ITSystemUsageDetailsFrontpageCatalogComponentStore],
-    imports: [CardComponent, CardHeaderComponent, StatusChipComponent, NgIf, DetailsPageLinkComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, DropdownComponent, TextBoxInfoComponent, ParagraphComponent, ContentBoxComponent, NgFor, ExternalReferenceComponent, TextAreaComponent, ItSystemKleOverviewComponent, AsyncPipe]
+  selector: 'app-it-system-usage-details-frontpage-catalog',
+  templateUrl: 'it-system-usage-details-frontpage-catalog.component.html',
+  styleUrls: ['it-system-usage-details-frontpage-catalog.component.scss'],
+  providers: [ITSystemUsageDetailsFrontpageCatalogComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StatusChipComponent,
+    NgIf,
+    DetailsPageLinkComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    DropdownComponent,
+    TextBoxInfoComponent,
+    ParagraphComponent,
+    ContentBoxComponent,
+    NgFor,
+    ExternalReferenceComponent,
+    TextAreaComponent,
+    ItSystemKleOverviewComponent,
+    AsyncPipe,
+  ],
 })
 export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
@@ -72,7 +91,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
   constructor(
     private store: Store,
     private componentStore: ITSystemUsageDetailsFrontpageCatalogComponentStore,
-    private readonly entityStatusTextsService: EntityStatusTextsService
+    private readonly entityStatusTextsService: EntityStatusTextsService,
   ) {
     super();
   }
@@ -83,7 +102,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
       this.store
         .select(selectItSystemParentSystem)
         .pipe(filterNullish(), first())
-        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid))
+        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid)),
     );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_business-type'));
@@ -109,8 +128,8 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             description: itSystem.description,
             legalName: itSystem.legalName,
             legalDataProcessorName: itSystem.legalDataProcessorName,
-          })
-        )
+          }),
+        ),
     );
 
     // Update form with parent system details
@@ -123,7 +142,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
               : ''
           }`,
         });
-      })
+      }),
     );
   }
 }

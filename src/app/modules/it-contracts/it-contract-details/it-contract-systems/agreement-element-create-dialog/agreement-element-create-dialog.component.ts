@@ -18,10 +18,19 @@ import { ButtonComponent } from '../../../../../shared/components/buttons/button
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-agreement-element-create-dialog',
-    templateUrl: './agreement-element-create-dialog.component.html',
-    styleUrl: './agreement-element-create-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-agreement-element-create-dialog',
+  templateUrl: './agreement-element-create-dialog.component.html',
+  styleUrl: './agreement-element-create-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class AgreementElementCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly agreementElementTypes$ = this.store
@@ -31,15 +40,15 @@ export class AgreementElementCreateDialogComponent extends BaseComponent impleme
       combineLatestWith(
         this.store
           .select(selectItContractSystemAgreementElements)
-          .pipe(map((elements) => elements?.map((element) => element.uuid)))
+          .pipe(map((elements) => elements?.map((element) => element.uuid))),
       ),
       map(([agreementElementTypes, existingAgreementElementUuids]) => {
         if (!existingAgreementElementUuids || existingAgreementElementUuids.length == 0) return agreementElementTypes;
 
         return agreementElementTypes.filter(
-          (type: APIRegularOptionResponseDTO) => !existingAgreementElementUuids.includes(type.uuid)
+          (type: APIRegularOptionResponseDTO) => !existingAgreementElementUuids.includes(type.uuid),
         );
-      })
+      }),
     );
 
   public agreementElementForm = new FormGroup({
@@ -51,7 +60,7 @@ export class AgreementElementCreateDialogComponent extends BaseComponent impleme
   constructor(
     private readonly store: Store,
     private readonly dialogRef: MatDialogRef<AgreementElementCreateDialogComponent>,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }

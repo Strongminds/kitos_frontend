@@ -18,17 +18,30 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
 import { AppDatePipe } from '../../../../shared/pipes/app-date.pipe';
 
 @Component({
-    selector: 'app-global-admin-other-kle',
-    templateUrl: './global-admin-other-kle.component.html',
-    styleUrl: './global-admin-other-kle.component.scss',
-    imports: [CardComponent, CardHeaderComponent, NgIf, StandardVerticalContentGridComponent, ParagraphComponent, ButtonComponent, LoadingComponent, AsyncPipe, AppDatePipe]
+  selector: 'app-global-admin-other-kle',
+  templateUrl: './global-admin-other-kle.component.html',
+  styleUrl: './global-admin-other-kle.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    ButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+    AppDatePipe,
+  ],
 })
 export class GlobalAdminOtherKleComponent extends BaseComponent implements OnInit {
   public readonly kleStatus$ = this.store.select(selectAdminKleStatus);
   public readonly isLoading$ = this.store.select(selectAdminKleIsLoading);
   public readonly changesDownloaded$ = this.store.select(selectAdminKleChangesDownloaded);
 
-  constructor(private readonly store: Store, private readonly actions$: Actions) {
+  constructor(
+    private readonly store: Store,
+    private readonly actions$: Actions,
+  ) {
     super();
   }
 
@@ -38,7 +51,7 @@ export class GlobalAdminOtherKleComponent extends BaseComponent implements OnIni
     this.subscriptions.add(
       this.actions$.pipe(ofType(KLEActions.updateAdminKLESuccess)).subscribe(() => {
         this.dispatchGetKleStatus();
-      })
+      }),
     );
   }
 

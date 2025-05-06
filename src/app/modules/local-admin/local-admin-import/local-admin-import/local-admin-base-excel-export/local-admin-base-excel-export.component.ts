@@ -21,10 +21,21 @@ import { NgIf } from '@angular/common';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 
 @Component({
-    selector: 'app-local-admin-base-excel-export',
-    templateUrl: './local-admin-base-excel-export.component.html',
-    styleUrl: './local-admin-base-excel-export.component.scss',
-    imports: [CardComponent, CardHeaderComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, ParagraphComponent, ButtonComponent, FileInputComponent, NgIf, LoadingComponent]
+  selector: 'app-local-admin-base-excel-export',
+  templateUrl: './local-admin-base-excel-export.component.html',
+  styleUrl: './local-admin-base-excel-export.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    ButtonComponent,
+    FileInputComponent,
+    NgIf,
+    LoadingComponent,
+  ],
 })
 export class LocalAdminBaseExcelExportComponent extends BaseComponent {
   @Input() public type!: LocalAdminImportEntityType;
@@ -39,7 +50,7 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
     private fb: FormBuilder,
     private store: Store,
     //30/10/14 This is injected in the component because the files could not be passed to effects with actions in a regular store-based setup.
-    @Inject(APIExcelService) private excelService: APIExcelService
+    @Inject(APIExcelService) private excelService: APIExcelService,
   ) {
     super();
     this.excelForm = this.fb.group({
@@ -57,11 +68,11 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
               map((excelFile) => {
                 saveAs(excelFile.data, excelFile.fileName);
               }),
-              catchError(() => this.handleExcelImportError())
+              catchError(() => this.handleExcelImportError()),
             );
-          })
+          }),
         )
-        .subscribe()
+        .subscribe(),
     );
   }
 
@@ -95,19 +106,19 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
                 importOrgUnits: true,
                 body: formData,
               };
-              this.isImporting = true
+              this.isImporting = true;
               return this.excelService.postExcelWithFormData(requestParameters, this.type).pipe(
                 tapResponse(
                   () => this.store.dispatch(ExcelImportActions.excelImportSuccess()),
-                  () => this.handleExcelImportError()
+                  () => this.handleExcelImportError(),
                 ),
                 finalize(() => {
                   this.isImporting = false;
-                })
+                }),
               );
-            })
+            }),
           )
-          .subscribe()
+          .subscribe(),
       );
     }
   }
@@ -122,6 +133,6 @@ export class LocalAdminBaseExcelExportComponent extends BaseComponent {
         return $localize`IT kontrakter`;
       default:
         throw new Error('Invalid type');
-  }
+    }
   }
 }

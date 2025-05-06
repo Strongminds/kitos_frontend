@@ -20,17 +20,28 @@ import { EmptyStateComponent } from '../../../../../shared/components/empty-stat
 import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
-    selector: 'app-it-system-catalog-kle',
-    templateUrl: './it-system-catalog-kle.component.html',
-    styleUrl: './it-system-catalog-kle.component.scss',
-    imports: [CardComponent, CardHeaderComponent, StandardVerticalContentGridComponent, NgIf, KleTableComponent, TextBoxInfoComponent, ParagraphComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe]
+  selector: 'app-it-system-catalog-kle',
+  templateUrl: './it-system-catalog-kle.component.html',
+  styleUrl: './it-system-catalog-kle.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    KleTableComponent,
+    TextBoxInfoComponent,
+    ParagraphComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogKleComponent extends BaseComponent implements OnInit {
   private disabledKleUuids: Array<string> = [];
   public readonly hasModifyPermission$ = this.store.select(selectITSystemHasModifyPermission);
   private readonly localKleUuids$ = this.store.select(selectItSystemKleUuids).pipe(filterNullish());
   public readonly localKleUuidsWithActions$ = this.localKleUuids$.pipe(
-    map((uuids) => uuids.map<SelectedKle>((uuid) => ({ uuid: uuid, availableCommands: ['delete-assignment'] })))
+    map((uuids) => uuids.map<SelectedKle>((uuid) => ({ uuid: uuid, availableCommands: ['delete-assignment'] }))),
   );
   public readonly anyLocalKleUuids$ = this.store
     .select(selectItSystemKleUuids)
@@ -39,14 +50,14 @@ export class ItSystemCatalogKleComponent extends BaseComponent implements OnInit
   constructor(
     private readonly store: Store,
     private readonly dialog: MatDialog,
-    private readonly confirmActionService: ConfirmActionService
+    private readonly confirmActionService: ConfirmActionService,
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.localKleUuids$.subscribe((systemKleUuids) => (this.disabledKleUuids = [...systemKleUuids]))
+      this.localKleUuids$.subscribe((systemKleUuids) => (this.disabledKleUuids = [...systemKleUuids])),
     );
   }
 
@@ -65,11 +76,11 @@ export class ItSystemCatalogKleComponent extends BaseComponent implements OnInit
               ITSystemActions.patchITSystem(
                 { kleUuids: patchKles },
                 $localize`Opgaven blev tilknyttet`,
-                $localize`Opgaven kunne ikke oprettes`
-              )
+                $localize`Opgaven kunne ikke oprettes`,
+              ),
             );
           }
-        })
+        }),
     );
   }
 
@@ -85,7 +96,7 @@ export class ItSystemCatalogKleComponent extends BaseComponent implements OnInit
               .subscribe((kles) => {
                 const patchKles = kles.filter((kle: string) => kle !== args.kleUuid);
                 this.store.dispatch(ITSystemActions.patchITSystem({ kleUuids: patchKles }));
-              })
+              }),
           ),
         message: $localize`Er du sikker på, at du vil fjerne denne tilknytning?`,
       });

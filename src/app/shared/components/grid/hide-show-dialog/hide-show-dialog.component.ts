@@ -21,10 +21,21 @@ import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-acti
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-hide-show-dialog',
-    templateUrl: './hide-show-dialog.component.html',
-    styleUrl: './hide-show-dialog.component.scss',
-    imports: [DialogComponent, StandardVerticalContentGridComponent, CdkScrollable, MatDialogContent, NgFor, ParagraphComponent, NgIf, CheckboxComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-hide-show-dialog',
+  templateUrl: './hide-show-dialog.component.html',
+  styleUrl: './hide-show-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    CdkScrollable,
+    MatDialogContent,
+    NgFor,
+    ParagraphComponent,
+    NgIf,
+    CheckboxComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class HideShowDialogComponent implements OnInit {
   @Input() columns!: GridColumn[];
@@ -37,7 +48,7 @@ export class HideShowDialogComponent implements OnInit {
   constructor(
     private store: Store,
     private dialogRef: MatDialogRef<HideShowDialogComponent>,
-    private gridUIConfigService: GridUIConfigService
+    private gridUIConfigService: GridUIConfigService,
   ) {}
 
   ngOnInit() {

@@ -49,7 +49,7 @@ describe('it-system-usage references', () => {
       true,
       false,
       itSystemUsageBaseUrl,
-      './it-system-usage/external-references/it-system-usage.json'
+      './it-system-usage/external-references/it-system-usage.json',
     );
   });
 
@@ -70,7 +70,7 @@ describe('it-system-usage references', () => {
       false,
       false,
       itSystemUsageBaseUrl,
-      './it-system-usage/external-references/it-system-usage.json'
+      './it-system-usage/external-references/it-system-usage.json',
     );
   });
 
@@ -92,7 +92,7 @@ describe('it-system-usage references', () => {
       true,
       itSystemUsageBaseUrl,
       './it-system-usage/external-references/it-system-usage.json',
-      'Valid url'
+      'Valid url',
     );
   });
 
@@ -114,7 +114,7 @@ describe('it-system-usage references', () => {
       true,
       itSystemUsageBaseUrl,
       './it-system-usage/external-references/it-system-usage.json',
-      'No url Master reference'
+      'No url Master reference',
     );
   });
 
@@ -140,7 +140,7 @@ describe('it-system-usage references', () => {
       'PATCH',
       '/api/v2/it-system-usages/*',
       { fixture: './it-system-usage/external-references/it-system-usage.json' },
-      'Er du sikker på at du vil fjerne referencen?'
+      'Er du sikker på at du vil fjerne referencen?',
     );
     cy.contains('Referencen blev slettet');
 

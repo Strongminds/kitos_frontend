@@ -20,11 +20,25 @@ import { ExternalPageLinkComponent } from '../../../../shared/components/externa
 import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
 
 @Component({
-    selector: 'app-it-system-interfaces-table[systemUuid]',
-    templateUrl: './it-system-interfaces-table.component.html',
-    styleUrls: ['./it-system-interfaces-table.component.scss'],
-    providers: [ItSystemInterfacesTableComponentStore],
-    imports: [CardComponent, CardHeaderComponent, NgIf, LoadingComponent, NativeTableComponent, NgFor, DetailsPageLinkComponent, StatusChipComponent, ParagraphComponent, SelectedOptionTypeTextComponent, ExternalPageLinkComponent, EmptyStateComponent, AsyncPipe]
+  selector: 'app-it-system-interfaces-table[systemUuid]',
+  templateUrl: './it-system-interfaces-table.component.html',
+  styleUrls: ['./it-system-interfaces-table.component.scss'],
+  providers: [ItSystemInterfacesTableComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    LoadingComponent,
+    NativeTableComponent,
+    NgFor,
+    DetailsPageLinkComponent,
+    StatusChipComponent,
+    ParagraphComponent,
+    SelectedOptionTypeTextComponent,
+    ExternalPageLinkComponent,
+    EmptyStateComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemInterfacesTableComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.interfaceStore.itInterfacesIsLoading$;
@@ -37,7 +51,10 @@ export class ItSystemInterfacesTableComponent extends BaseComponent implements O
   @Input() public systemUuid = '';
   @Input() public helpTextKey!: string;
 
-  constructor(private store: Store, private interfaceStore: ItSystemInterfacesTableComponentStore) {
+  constructor(
+    private store: Store,
+    private interfaceStore: ItSystemInterfacesTableComponentStore,
+  ) {
     super();
   }
 

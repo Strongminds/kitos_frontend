@@ -13,10 +13,10 @@ import { DropdownComponent } from '../../../shared/components/dropdowns/dropdown
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    templateUrl: 'choose-organization.component.html',
-    styleUrls: ['choose-organization.component.scss'],
-    providers: [ChooseOrganizationComponentStore],
-    imports: [DialogComponent, DropdownComponent, AsyncPipe]
+  templateUrl: 'choose-organization.component.html',
+  styleUrls: ['choose-organization.component.scss'],
+  providers: [ChooseOrganizationComponentStore],
+  imports: [DialogComponent, DropdownComponent, AsyncPipe],
 })
 export class ChooseOrganizationComponent implements OnInit {
   public closable = true;
@@ -25,13 +25,13 @@ export class ChooseOrganizationComponent implements OnInit {
   public readonly isLoading$ = this.componentStore.loading$;
   public readonly showSearchHelpText$ = this.componentStore.organizations$.pipe(
     filterNullish(),
-    map((organizations) => organizations.length >= this.componentStore.PAGE_SIZE)
+    map((organizations) => organizations.length >= this.componentStore.PAGE_SIZE),
   );
 
   constructor(
     private dialog: MatDialogRef<ChooseOrganizationComponent>,
     private store: Store,
-    private componentStore: ChooseOrganizationComponentStore
+    private componentStore: ChooseOrganizationComponentStore,
   ) {
     this.closable = dialog.disableClose !== true;
   }

@@ -1,6 +1,1 @@
-export type PublicMessageType =
-  | 'about'
-  | 'contact-info'
-  | 'guides'
-  | 'status-messages'
-  | 'misc';
+export type PublicMessageType = 'about' | 'contact-info' | 'guides' | 'status-messages' | 'misc';

@@ -13,10 +13,10 @@ import {
 import { GdprBaseDateUrlSectionComponent } from '../gdpr-base-date-url-section/gdpr-base-date-url-section.component';
 
 @Component({
-    selector: 'app-gdpr-user-supervision-section',
-    templateUrl: './gdpr-user-supervision-section.component.html',
-    styleUrls: ['./gdpr-user-supervision-section.component.scss'],
-    imports: [GdprBaseDateUrlSectionComponent, FormsModule, ReactiveFormsModule]
+  selector: 'app-gdpr-user-supervision-section',
+  templateUrl: './gdpr-user-supervision-section.component.html',
+  styleUrls: ['./gdpr-user-supervision-section.component.scss'],
+  imports: [GdprBaseDateUrlSectionComponent, FormsModule, ReactiveFormsModule],
 })
 export class GdprUserSupervisionSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
@@ -24,7 +24,7 @@ export class GdprUserSupervisionSectionComponent extends BaseAccordionComponent 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly hasModifyPermissions$ = this.store.select(selectITSystemUsageHasModifyPermission);
   public readonly isUserSupervisionFalse$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.userSupervision !== APIGDPRRegistrationsResponseDTO.UserSupervisionEnum.Yes)
+    map((gdpr) => gdpr.userSupervision !== APIGDPRRegistrationsResponseDTO.UserSupervisionEnum.Yes),
   );
   public readonly selectUserDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.userSupervisionDocumentation));
   public disableLinkControl = true;
@@ -33,7 +33,7 @@ export class GdprUserSupervisionSectionComponent extends BaseAccordionComponent 
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       dateControl: new FormControl<Date | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   constructor(private readonly store: Store) {
@@ -55,7 +55,7 @@ export class GdprUserSupervisionSectionComponent extends BaseAccordionComponent 
         .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
         .subscribe(() => {
           this.disableLinkControl = true;
-        })
+        }),
     );
   }
 }

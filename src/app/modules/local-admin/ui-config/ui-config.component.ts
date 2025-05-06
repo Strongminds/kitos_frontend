@@ -11,10 +11,17 @@ import { UiConfigTabSectionComponent } from './ui-config-tab-section/ui-config-t
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 @Component({
-    selector: 'app-ui-config',
-    templateUrl: './ui-config.component.html',
-    styleUrl: './ui-config.component.scss',
-    imports: [StandardVerticalContentGridComponent, NgIf, NgFor, UiConfigTabSectionComponent, LoadingComponent, AsyncPipe]
+  selector: 'app-ui-config',
+  templateUrl: './ui-config.component.html',
+  styleUrl: './ui-config.component.scss',
+  imports: [
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NgFor,
+    UiConfigTabSectionComponent,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class UiConfigComponent implements OnInit {
   constructor(private store: Store) {}

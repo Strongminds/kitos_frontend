@@ -18,7 +18,7 @@ export const yesNoPartiallyOptions: YesNoPartiallyOption[] = [
 ];
 
 export function mapToYesNoPartiallyEnum(
-  value: APIGeneralDataResponseDTO.WebAccessibilityComplianceEnum | undefined
+  value: APIGeneralDataResponseDTO.WebAccessibilityComplianceEnum | undefined,
 ): YesNoPartiallyOption | undefined {
   return yesNoPartiallyOptions.find((option) => option.value === value);
 }

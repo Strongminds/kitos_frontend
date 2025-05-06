@@ -6,10 +6,10 @@ import { ParagraphComponent } from '../../../../shared/components/paragraph/para
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-sso-error',
-    templateUrl: './sso-error.component.html',
-    styleUrl: './sso-error.component.scss',
-    imports: [StandardVerticalContentGridComponent, ParagraphComponent, NgIf]
+  selector: 'app-sso-error',
+  templateUrl: './sso-error.component.html',
+  styleUrl: './sso-error.component.scss',
+  imports: [StandardVerticalContentGridComponent, ParagraphComponent, NgIf],
 })
 export class SsoErrorComponent {
   @Input() public ssoErrorCode!: SsoErrorCode;

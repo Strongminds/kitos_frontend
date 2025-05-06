@@ -23,7 +23,7 @@ export class BaseUserDialogComponent extends BaseComponent {
   constructor(
     public store: Store,
     public componentStore: CreateUserDialogComponentStore,
-    protected userService: UserService
+    protected userService: UserService,
   ) {
     super();
   }

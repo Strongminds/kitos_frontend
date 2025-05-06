@@ -44,28 +44,28 @@ import { CollectionExtensionButtonComponent } from '../collection-extension-butt
 import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
-    selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
-    templateUrl: './notifications-table.component.html',
-    styleUrls: ['./notifications-table.component.scss'],
-    providers: [NotificationsTableComponentStore],
-    imports: [
-        NgIf,
-        StandardVerticalContentGridComponent,
-        NativeTableComponent,
-        NgFor,
-        ParagraphComponent,
-        BooleanCircleComponent,
-        TableRowActionsComponent,
-        IconButtonComponent,
-        PencilIconComponent,
-        EyeIconComponent,
-        XIconComponent,
-        TrashcanIconComponent,
-        EmptyStateComponent,
-        CollectionExtensionButtonComponent,
-        LoadingComponent,
-        AsyncPipe,
-    ],
+  selector: 'app-notifications-table[entityUuid][ownerResourceType][hasModifyPermission]',
+  templateUrl: './notifications-table.component.html',
+  styleUrls: ['./notifications-table.component.scss'],
+  providers: [NotificationsTableComponentStore],
+  imports: [
+    NgIf,
+    StandardVerticalContentGridComponent,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    BooleanCircleComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    EyeIconComponent,
+    XIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class NotificationsTableComponent extends BaseComponent implements OnInit {
   @Input() entityUuid!: string;
@@ -88,7 +88,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     private readonly notificationViewSentDialog: MatDialog,
     private readonly store: Store,
     private readonly actions$: Actions,
-    private readonly appDatePipe: AppDatePipe
+    private readonly appDatePipe: AppDatePipe,
   ) {
     super();
   }
@@ -103,7 +103,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     this.subscriptions.add(
       this.actions$.pipe(ofType(UserNotificationActions.notificationCreated)).subscribe((_) => {
         this.getNotifications();
-      })
+      }),
     );
   }
 
@@ -116,7 +116,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     this.confirmationService.confirmAction({
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil deaktivere ${this.getSpecificNotificationWarning(
-        notification.name
+        notification.name,
       )}?`,
       onConfirm: () => {
         if (notification.uuid) {
@@ -171,7 +171,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         this.setupDialogDefaults(componentInstance, options);
         componentInstance.title = $localize`Redigér advis`;
         componentInstance.confirmText = $localize`Gem`;
-      })
+      }),
     );
   }
 
@@ -184,13 +184,13 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
         this.setupDialogDefaults(componentInstance, options);
         componentInstance.title = $localize`Tilføj advis`;
         componentInstance.confirmText = $localize`Tilføj`;
-      })
+      }),
     );
   }
 
   public getCommaSeparatedRecipients(
     emailRecipients: APIEmailRecipientResponseDTO[] | undefined,
-    roleRecipients: APIRoleRecipientResponseDTO[] | undefined
+    roleRecipients: APIRoleRecipientResponseDTO[] | undefined,
   ) {
     const emailRecipientEmails = emailRecipients?.map((recipient) => recipient.email);
     const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name);
@@ -216,7 +216,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     if (!option) return new Observable<APIRoleOptionResponseDTO[]>();
     return this.store.select(selectRoleOptionTypes(option)).pipe(
       filterNullish(),
-      map((options) => options.sort((a, b) => a.name.localeCompare(b.name)))
+      map((options) => options.sort((a, b) => a.name.localeCompare(b.name))),
     );
   }
 
@@ -249,7 +249,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
 
   private setupDialogDefaults(
     componentInstance: NotificationsTableDialogComponent,
-    options: APIRegularOptionResponseDTO[]
+    options: APIRegularOptionResponseDTO[],
   ) {
     componentInstance.ownerEntityUuid = this.entityUuid;
     componentInstance.ownerResourceType = this.ownerResourceType;

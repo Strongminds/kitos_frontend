@@ -7,7 +7,7 @@ describe('it-system-usage details', () => {
     cy.setup(
       true,
       'it-systems/it-system-usages',
-      './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json'
+      './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json',
     );
   });
 

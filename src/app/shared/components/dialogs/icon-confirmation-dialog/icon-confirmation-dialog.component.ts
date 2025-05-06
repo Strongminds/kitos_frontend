@@ -10,10 +10,19 @@ import { DialogActionsComponent } from '../dialog-actions/dialog-actions.compone
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-icon-confirmation-dialog',
-    templateUrl: './icon-confirmation-dialog.component.html',
-    styleUrl: './icon-confirmation-dialog.component.scss',
-    imports: [DialogComponent, StandardVerticalContentGridComponent, NgIf, TakeIntoUseIconComponent, NotInUseIconComponent, ParagraphComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-icon-confirmation-dialog',
+  templateUrl: './icon-confirmation-dialog.component.html',
+  styleUrl: './icon-confirmation-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    TakeIntoUseIconComponent,
+    NotInUseIconComponent,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class IconConfirmationDialogComponent extends ConfirmationDialogComponent {
   @Input() icon: 'not-in-use' | 'take-into-use' = 'not-in-use';

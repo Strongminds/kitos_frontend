@@ -7,13 +7,16 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
-    templateUrl: 'organization.component.html',
-    styleUrls: ['organization.component.scss'],
-    selector: 'app-organization',
-    imports: [RouterOutlet]
+  templateUrl: 'organization.component.html',
+  styleUrls: ['organization.component.scss'],
+  selector: 'app-organization',
+  imports: [RouterOutlet],
 })
 export class OrganizationComponent extends BaseComponent implements OnInit {
-  constructor(private store: Store, private router: Router) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     super();
   }
 
@@ -23,13 +26,13 @@ export class OrganizationComponent extends BaseComponent implements OnInit {
         .select(selectOrganizationUuid)
         .pipe(
           pairwise(),
-          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid)
+          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid),
         )
         .subscribe(() =>
           this.router
             .navigateByUrl(AppPath.root, { skipLocationChange: true })
-            .then(() => this.router.navigate([AppPath.organization]))
-        )
+            .then(() => this.router.navigate([AppPath.organization])),
+        ),
     );
   }
 }

@@ -15,24 +15,36 @@ import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-acti
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-edit-local-option-type-dialog',
-    templateUrl: './edit-local-option-type-dialog.component.html',
-    styleUrl: './edit-local-option-type-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, TextAreaComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-edit-local-option-type-dialog',
+  templateUrl: './edit-local-option-type-dialog.component.html',
+  styleUrl: './edit-local-option-type-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    TextAreaComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class EditLocalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: LocalAdminOptionTypeItem;
   @Input() optionType!: LocalAdminOptionType;
 
   public form = new FormGroup({
-    description: new FormControl<string | undefined>(undefined)
+    description: new FormControl<string | undefined>(undefined),
   });
 
-  constructor(private dialogRef: MatDialogRef<EditLocalOptionTypeDialogComponent>, private store: Store) {}
+  constructor(
+    private dialogRef: MatDialogRef<EditLocalOptionTypeDialogComponent>,
+    private store: Store,
+  ) {}
 
   public ngOnInit(): void {
     this.form.patchValue({
-      description: this.optionTypeItem.description
+      description: this.optionTypeItem.description,
     });
   }
 

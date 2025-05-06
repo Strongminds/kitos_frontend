@@ -36,7 +36,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     protected actions$: Actions,
     protected roleOptionTypeService: RoleOptionTypeService,
     protected confirmationService: ConfirmActionService,
-    protected dialog: MatDialog
+    protected dialog: MatDialog,
   ) {
     super();
   }
@@ -46,7 +46,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
   public readonly availableRolesLoading = this.availableRolesDictionary$.pipe(
     map((availableRoles) => {
       return availableRoles ? false : true;
-    })
+    }),
   );
 
   public readonly isLoading$ = combineLatest([
@@ -54,7 +54,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     this.store.select(selectHasValidCache(this.entityType)),
     this.availableRolesLoading,
   ]).pipe(
-    map(([isLoading, hasInvalidCache, availableRolesLoading]) => isLoading || hasInvalidCache || availableRolesLoading)
+    map(([isLoading, hasInvalidCache, availableRolesLoading]) => isLoading || hasInvalidCache || availableRolesLoading),
   );
 
   ngOnInit(): void {
@@ -69,17 +69,17 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
         .pipe(filterNullish())
         .subscribe((roles) => {
           this.availableRolesDictionary$.next(roles);
-        })
+        }),
     );
 
     //on role add/remove or uuid changes update the list
     this.subscriptions.add(
       merge(
         this.actions$.pipe(ofType(RoleAssignmentActions.addRoleSuccess, RoleAssignmentActions.removeRoleSuccess)),
-        this.entityUuid$
+        this.entityUuid$,
       ).subscribe(() => {
         this.getRoles();
-      })
+      }),
     );
   }
 
@@ -104,7 +104,7 @@ export abstract class BaseRoleTableComponent extends BaseComponent implements On
     this.subscriptions.add(
       this.entityUuid$.pipe(first()).subscribe((entityUuid) => {
         this.componentStore.getRolesByEntityUuid({ entityUuid, entityType: this.entityType });
-      })
+      }),
     );
   }
 

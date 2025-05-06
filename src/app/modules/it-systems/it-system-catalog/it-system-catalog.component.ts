@@ -43,9 +43,18 @@ import { CreateEntityButtonComponent } from '../../../shared/components/entity-c
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 
 @Component({
-    templateUrl: './it-system-catalog.component.html',
-    styleUrl: './it-system-catalog.component.scss',
-    imports: [OverviewHeaderComponent, NgIf, GridOptionsButtonComponent, ExportMenuButtonComponent, HideShowButtonComponent, CreateEntityButtonComponent, GridComponent, AsyncPipe]
+  templateUrl: './it-system-catalog.component.html',
+  styleUrl: './it-system-catalog.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    NgIf,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    CreateEntityButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSystemGridLoading);
@@ -241,7 +250,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     private route: ActivatedRoute,
     private actions$: Actions,
     private gridColumnStorageService: GridColumnStorageService,
-    private dialogOpenerService: DialogOpenerService
+    private dialogOpenerService: DialogOpenerService,
   ) {
     super(store, 'it-system');
   }
@@ -264,20 +273,20 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         .pipe(ofType(ITSystemActions.createItSystemSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
         location.reload();
-      })
+      }),
     );
 
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
+      this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns()),
     );
   }
 
@@ -299,9 +308,9 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
           ofType(ITSystemUsageActions.createItSystemUsageSuccess),
           first(),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$)
+          concatLatestFrom(() => this.gridState$),
         )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
     );
   }
 
@@ -312,7 +321,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         if (result && systemUuid !== undefined) {
           this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
         }
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -321,9 +330,9 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
           ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
           first(),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$)
+          concatLatestFrom(() => this.gridState$),
         )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
     );
   }
 

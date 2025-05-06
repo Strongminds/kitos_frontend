@@ -5,10 +5,10 @@ import { NavigationDrawerComponent } from '../../shared/components/navigation-dr
 import { RouterOutlet } from '@angular/router';
 
 @Component({
-    selector: 'app-global-admin',
-    templateUrl: './global-admin.component.html',
-    styleUrl: './global-admin.component.scss',
-    imports: [NavigationDrawerComponent, RouterOutlet]
+  selector: 'app-global-admin',
+  templateUrl: './global-admin.component.html',
+  styleUrl: './global-admin.component.scss',
+  imports: [NavigationDrawerComponent, RouterOutlet],
 })
 export class GlobalAdminComponent {
   public readonly globalAdminNavigationItems: NavigationDrawerItem[] = [

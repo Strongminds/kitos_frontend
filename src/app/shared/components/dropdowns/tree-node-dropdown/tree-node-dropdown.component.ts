@@ -9,10 +9,18 @@ import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { LoadingComponent } from '../../loading/loading.component';
 
 @Component({
-    selector: 'app-tree-node-dropdown',
-    templateUrl: './tree-node-dropdown.component.html',
-    styleUrls: ['./tree-node-dropdown.component.scss'],
-    imports: [NgIf, FormsModule, ReactiveFormsModule, NgSelectComponent, NgOptionTemplateDirective, ParagraphComponent, LoadingComponent]
+  selector: 'app-tree-node-dropdown',
+  templateUrl: './tree-node-dropdown.component.html',
+  styleUrls: ['./tree-node-dropdown.component.scss'],
+  imports: [
+    NgIf,
+    FormsModule,
+    ReactiveFormsModule,
+    NgSelectComponent,
+    NgOptionTemplateDirective,
+    ParagraphComponent,
+    LoadingComponent,
+  ],
 })
 export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel> implements OnInit {
   @Input() public appendTo: string = '';
@@ -86,7 +94,7 @@ export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeMod
   private processSubtree(
     currentItem: TreeNodeModel,
     ancestors: Array<string>,
-    childrenDictionary: Dictionary<TreeNodeModel[]>
+    childrenDictionary: Dictionary<TreeNodeModel[]>,
   ) {
     this.itemParentIdsDictionary[currentItem.id] = ancestors;
     this.sortedData.push(currentItem);

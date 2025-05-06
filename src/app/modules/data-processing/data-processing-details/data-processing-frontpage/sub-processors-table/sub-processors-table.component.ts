@@ -27,10 +27,25 @@ import { EmptyStateComponent } from '../../../../../shared/components/empty-stat
 import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
-    selector: 'app-sub-processors-table',
-    templateUrl: './sub-processors-table.component.html',
-    styleUrl: './sub-processors-table.component.scss',
-    imports: [StandardVerticalContentGridComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent, BooleanCircleComponent, ContentSpaceBetweenComponent, TableRowActionsComponent, IconButtonComponent, PencilIconComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe]
+  selector: 'app-sub-processors-table',
+  templateUrl: './sub-processors-table.component.html',
+  styleUrl: './sub-processors-table.component.scss',
+  imports: [
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    BooleanCircleComponent,
+    ContentSpaceBetweenComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class SubProcessorsTableComponent extends BaseComponent {
   public readonly subprocessors$ = this.store.select(selectDataProcessingSubProcessors).pipe(filterNullish());
@@ -38,7 +53,10 @@ export class SubProcessorsTableComponent extends BaseComponent {
 
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -55,7 +73,7 @@ export class SubProcessorsTableComponent extends BaseComponent {
           if (result === true) {
             this.store.dispatch(DataProcessingActions.deleteDataProcessingSubProcessor(uuid, subprocessors));
           }
-        })
+        }),
     );
   }
   onAddNewSubProcessor() {

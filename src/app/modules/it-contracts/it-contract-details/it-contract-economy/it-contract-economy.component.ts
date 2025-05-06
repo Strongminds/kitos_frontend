@@ -32,18 +32,29 @@ import { DropdownComponent } from '../../../../shared/components/dropdowns/dropd
 import { PaymentTableComponent } from './payment-table/payment-table.component';
 
 @Component({
-    selector: 'app-it-contract-economy',
-    templateUrl: './it-contract-economy.component.html',
-    styleUrl: './it-contract-economy.component.scss',
-    imports: [NgIf, CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, DatePickerComponent, DropdownComponent, PaymentTableComponent, AsyncPipe]
+  selector: 'app-it-contract-economy',
+  templateUrl: './it-contract-economy.component.html',
+  styleUrl: './it-contract-economy.component.scss',
+  imports: [
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DatePickerComponent,
+    DropdownComponent,
+    PaymentTableComponent,
+    AsyncPipe,
+  ],
 })
 export class ItContractEconomyComponent extends BaseComponent implements OnInit {
   public readonly paymentFrequencyOptions$ = this.store.select(
-    selectRegularOptionTypes('it-contract-payment-frequency-types')
+    selectRegularOptionTypes('it-contract-payment-frequency-types'),
   );
   public readonly paymentModelOptions$ = this.store.select(selectRegularOptionTypes('it-contract-payment-model-types'));
   public readonly priceRegulationOptions$ = this.store.select(
-    selectRegularOptionTypes('it-contract-price-regulation-types')
+    selectRegularOptionTypes('it-contract-price-regulation-types'),
   );
 
   public readonly externalPayments$ = this.store.select(selectItContractExternalPayments).pipe(filterNullish());
@@ -63,7 +74,10 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
   public readonly externalPaymentEnabled$ = this.store.select(selectItContractsEnableExternalPayment);
   public readonly internalPaymentEnabled$ = this.store.select(selectItContractsEnableInternalPayment);
 
-  constructor(private store: Store, private notificationService: NotificationService) {
+  constructor(
+    private store: Store,
+    private notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -87,7 +101,7 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
           if (hasModifyPermission) {
             this.economyFormGroup.enable();
           }
-        })
+        }),
     );
   }
 

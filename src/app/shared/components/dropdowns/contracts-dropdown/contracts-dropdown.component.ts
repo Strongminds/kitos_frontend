@@ -6,11 +6,11 @@ import { ContractDropdownComponentStore } from './contracts-dropdown.component-s
 import { ConnectedDropdownComponent } from '../connected-dropdown/connected-dropdown.component';
 
 @Component({
-    selector: 'app-contracts-dropdown',
-    templateUrl: './contracts-dropdown.component.html',
-    styleUrl: './contracts-dropdown.component.scss',
-    providers: [ContractDropdownComponentStore],
-    imports: [ConnectedDropdownComponent, FormsModule, ReactiveFormsModule]
+  selector: 'app-contracts-dropdown',
+  templateUrl: './contracts-dropdown.component.html',
+  styleUrl: './contracts-dropdown.component.scss',
+  providers: [ContractDropdownComponentStore],
+  imports: [ConnectedDropdownComponent, FormsModule, ReactiveFormsModule],
 })
 export class ContractsDropdownComponent implements OnInit {
   @Input() formGroup!: FormGroup;
@@ -33,7 +33,7 @@ export class ContractsDropdownComponent implements OnInit {
       map(([contracts, disabledUuids]) => {
         const disabledUuidsSet = new Set(disabledUuids);
         return contracts.filter((contract) => !disabledUuidsSet.has(contract.uuid));
-      })
+      }),
     );
   }
 

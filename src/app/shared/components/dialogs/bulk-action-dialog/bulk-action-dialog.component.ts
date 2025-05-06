@@ -99,7 +99,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
     public readonly selectionService: EntitySelectionService<BulkActionOption, RegistrationEntityTypes>,
     private readonly actions$: Actions,
     private readonly confirmationService: ConfirmActionService,
-    private readonly cdRef: ChangeDetectorRef
+    private readonly cdRef: ChangeDetectorRef,
   ) {
     super();
   }
@@ -113,7 +113,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
           this.selectionService.deselectAll();
           this.formGroup.reset();
           this.cdRef.detectChanges();
-        })
+        }),
       );
     }
     if (this.errorActionTypes) {
@@ -121,7 +121,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
         this.actions$.pipe(ofType(this.errorActionTypes)).subscribe(() => {
           this.isLoading = false;
           this.cdRef.detectChanges();
-        })
+        }),
       );
     }
     // Dynamically update the validator based on allowEmptyDropdownSelection
@@ -133,7 +133,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   public isAllSelected$(): Observable<boolean> {
     // Combine all section.options observables
     const optionsObservables = this.sections.map((section) =>
-      section.options$.pipe(map((options) => this.selectionService.isAllOfTypeSelected(section.entityType, options)))
+      section.options$.pipe(map((options) => this.selectionService.isAllOfTypeSelected(section.entityType, options))),
     );
 
     // Combine the results of all observables and check if all are true
@@ -153,7 +153,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
       this.subscriptions.add(
         section.options$.pipe(first()).subscribe((options) => {
           this.selectionService.selectAllOfType(section.entityType, options);
-        })
+        }),
       );
     });
   }
@@ -196,12 +196,12 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   public checkIfContainsData$(): Observable<boolean> {
     // Combine all section.options$ observables
     const optionsObservables = this.sections.map(
-      (section) => section.options$.pipe(map((options) => options.length > 0)) // Check if options array is not empty
+      (section) => section.options$.pipe(map((options) => options.length > 0)), // Check if options array is not empty
     );
 
     // Combine the results of all observables and check if any are true
     return combineLatest(optionsObservables).pipe(
-      map((results) => results.some((hasData) => hasData)) // Check if any section contains data
+      map((results) => results.some((hasData) => hasData)), // Check if any section contains data
     );
   }
 

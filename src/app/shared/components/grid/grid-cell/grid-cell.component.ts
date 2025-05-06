@@ -20,10 +20,29 @@ import { AuditCellComponent } from './cell-types/audit-cell/audit-cell.component
 import { ActionButtonsCellComponent } from './cell-types/action-buttons-cell/action-buttons-cell.component';
 
 @Component({
-    selector: 'app-grid-cell',
-    templateUrl: './grid-cell.component.html',
-    styleUrl: './grid-cell.component.scss',
-    imports: [NgIf, TextCellComponent, StatusCellComponent, ThousandSeperatorCellComponent, DefaultWrapCellComponent, PrimaryCellComponent, BooleanCellComponent, DateCellComponent, EnumCellComponent, LinkCellComponent, TitleLinkCellComponent, PageLinkCellComponent, CheckboxCellComponent, UsagesCellComponent, PageLinkArrayCellComponent, UuidToNameCellComponent, AuditCellComponent, ActionButtonsCellComponent]
+  selector: 'app-grid-cell',
+  templateUrl: './grid-cell.component.html',
+  styleUrl: './grid-cell.component.scss',
+  imports: [
+    NgIf,
+    TextCellComponent,
+    StatusCellComponent,
+    ThousandSeperatorCellComponent,
+    DefaultWrapCellComponent,
+    PrimaryCellComponent,
+    BooleanCellComponent,
+    DateCellComponent,
+    EnumCellComponent,
+    LinkCellComponent,
+    TitleLinkCellComponent,
+    PageLinkCellComponent,
+    CheckboxCellComponent,
+    UsagesCellComponent,
+    PageLinkArrayCellComponent,
+    UuidToNameCellComponent,
+    AuditCellComponent,
+    ActionButtonsCellComponent,
+  ],
 })
 export class GridCellComponent extends BaseCellComponent {
   @Output() public checkboxChange = new EventEmitter<boolean>();

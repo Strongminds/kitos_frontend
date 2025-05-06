@@ -8,10 +8,10 @@ import { ExportIconComponent } from '../../../../shared/components/icons/export-
 import { GdprOverviewComponent } from '../gdpr-overview/gdpr-overview.component';
 
 @Component({
-    selector: 'app-gdpr-overview-dialog',
-    templateUrl: './gdpr-overview-dialog.component.html',
-    styleUrl: './gdpr-overview-dialog.component.scss',
-    imports: [DialogComponent, OverviewHeaderComponent, ButtonComponent, ExportIconComponent, GdprOverviewComponent]
+  selector: 'app-gdpr-overview-dialog',
+  templateUrl: './gdpr-overview-dialog.component.html',
+  styleUrl: './gdpr-overview-dialog.component.scss',
+  imports: [DialogComponent, OverviewHeaderComponent, ButtonComponent, ExportIconComponent, GdprOverviewComponent],
 })
 export class GdprOverviewDialogComponent {
   constructor(private store: Store) {}

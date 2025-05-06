@@ -26,11 +26,25 @@ import { EmptyStateComponent } from '../../../../shared/components/empty-states/
 import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
-    selector: 'app-it-contract-dpr',
-    templateUrl: './it-contract-dpr.component.html',
-    styleUrl: './it-contract-dpr.component.scss',
-    providers: [ItContractDataProcessingRegistrationsComponentStore],
-    imports: [CardComponent, CardHeaderComponent, StandardVerticalContentGridComponent, NgIf, NativeTableComponent, NgFor, ContentSpaceBetweenComponent, DetailsPageLinkComponent, IconButtonComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe]
+  selector: 'app-it-contract-dpr',
+  templateUrl: './it-contract-dpr.component.html',
+  styleUrl: './it-contract-dpr.component.scss',
+  providers: [ItContractDataProcessingRegistrationsComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    DetailsPageLinkComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class ItContractDprComponent extends BaseComponent {
   public readonly dataProcessingRegistrations$ = this.store
@@ -42,7 +56,7 @@ export class ItContractDprComponent extends BaseComponent {
   constructor(
     private readonly store: Store,
     private readonly dialog: MatDialog,
-    private readonly componentStore: ItContractDataProcessingRegistrationsComponentStore
+    private readonly componentStore: ItContractDataProcessingRegistrationsComponentStore,
   ) {
     super();
   }
@@ -60,7 +74,7 @@ export class ItContractDprComponent extends BaseComponent {
           if (result === true) {
             this.store.dispatch(ITContractActions.removeITContractDataProcessingRegistration(uuid));
           }
-        })
+        }),
     );
   }
 

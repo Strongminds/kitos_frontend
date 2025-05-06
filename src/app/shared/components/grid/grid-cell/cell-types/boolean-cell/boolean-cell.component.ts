@@ -4,11 +4,9 @@ import { BooleanCircleComponent } from '../../../../boolean-circle/boolean-circl
 import { SearchPropertyPipe } from '../../../../../pipes/column-property.pipe';
 
 @Component({
-    selector: 'app-boolean-cell',
-    templateUrl: './boolean-cell.component.html',
-    styleUrl: './boolean-cell.component.scss',
-    imports: [BooleanCircleComponent, SearchPropertyPipe]
+  selector: 'app-boolean-cell',
+  templateUrl: './boolean-cell.component.html',
+  styleUrl: './boolean-cell.component.scss',
+  imports: [BooleanCircleComponent, SearchPropertyPipe],
 })
-export class BooleanCellComponent extends BaseCellComponent {
-
-}
+export class BooleanCellComponent extends BaseCellComponent {}

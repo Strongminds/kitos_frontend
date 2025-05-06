@@ -26,11 +26,21 @@ import { ButtonComponent } from '../../../../../../shared/components/buttons/but
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-create-sub-processor-dialog',
-    templateUrl: './create-sub-processor-dialog.component.html',
-    styleUrl: './create-sub-processor-dialog.component.scss',
-    providers: [CreateSubProcessorDialogComponentStore],
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, ConnectedDropdownComponent, DropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-create-sub-processor-dialog',
+  templateUrl: './create-sub-processor-dialog.component.html',
+  styleUrl: './create-sub-processor-dialog.component.scss',
+  providers: [CreateSubProcessorDialogComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    ConnectedDropdownComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateSubProcessorDialogComponent extends BaseComponent implements OnInit {
   @Input() public subprocessor: APIDataProcessorRegistrationSubDataProcessorResponseDTO | undefined;
@@ -38,7 +48,7 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly countryTypes$ = this.store.select(selectRegularOptionTypes('data-processing-country-types'));
   public readonly basisForTransferTypes$ = this.store.select(
-    selectRegularOptionTypes('data-processing-basis-for-transfer-types')
+    selectRegularOptionTypes('data-processing-basis-for-transfer-types'),
   );
 
   public readonly yesNoOptions = yesNoOptions;
@@ -57,7 +67,7 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
     private store: Store,
     private dialog: MatDialogRef<CountryCreateDialogComponent>,
     private actions$: Actions,
-    private componentStore: CreateSubProcessorDialogComponentStore
+    private componentStore: CreateSubProcessorDialogComponentStore,
   ) {
     super();
   }
@@ -89,13 +99,13 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingSuccess)).subscribe(() => {
         this.onClose();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingError)).subscribe(() => {
         this.isBusy = false;
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -103,19 +113,19 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
         if (status === 'VALID') {
           this.subprocessorsFormGroup.enable();
           this.checkTransferToInsecureCountry(
-            this.subprocessorsFormGroup.controls.transferToInsecureCountry.value?.value
+            this.subprocessorsFormGroup.controls.transferToInsecureCountry.value?.value,
           );
         } else {
           this.subprocessorsFormGroup.disable();
           this.subprocessorsFormGroup.controls.subprocessor.enable();
         }
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.subprocessorsFormGroup.controls.transferToInsecureCountry.valueChanges.subscribe((value) => {
         this.checkTransferToInsecureCountry(value?.value);
-      })
+      }),
     );
   }
 
@@ -154,7 +164,7 @@ export class CreateSubProcessorDialogComponent extends BaseComponent implements 
   }
 
   private checkTransferToInsecureCountry(
-    value: APIDataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum | undefined
+    value: APIDataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum | undefined,
   ) {
     if (value === 'Yes') {
       this.subprocessorsFormGroup.controls.insecureThirdCountrySubjectToDataProcessing.enable();

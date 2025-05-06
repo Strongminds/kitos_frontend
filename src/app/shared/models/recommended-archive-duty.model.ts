@@ -1,5 +1,10 @@
 import { APIRecommendedArchiveDutyResponseDTO } from 'src/app/api/v2';
-import { ARCHIVE_B_TYPE_TEXT, ARCHIVE_K_TYPE_TEXT, ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT, ARCHIVE_TEXT_NO_RECOMMENDATION } from '../constants/archive.constants';
+import {
+  ARCHIVE_B_TYPE_TEXT,
+  ARCHIVE_K_TYPE_TEXT,
+  ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
+  ARCHIVE_TEXT_NO_RECOMMENDATION,
+} from '../constants/archive.constants';
 
 export const mapRecommendedArchiveDutyToString = (value: APIRecommendedArchiveDutyResponseDTO): string | undefined => {
   switch (value.id) {
@@ -12,7 +17,7 @@ export const mapRecommendedArchiveDutyToString = (value: APIRecommendedArchiveDu
     case APIRecommendedArchiveDutyResponseDTO.IdEnum.K:
       return ARCHIVE_K_TYPE_TEXT;
     case APIRecommendedArchiveDutyResponseDTO.IdEnum.PreserveDataCanDiscardDocuments:
-      return ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT
+      return ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT;
     default:
       throw new Error(`Unknown archive duty recommendation: ${value.id}`);
   }

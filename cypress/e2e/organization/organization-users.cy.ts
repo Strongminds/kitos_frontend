@@ -6,7 +6,7 @@ describe('organization-users', () => {
 
     cy.intercept(
       '/odata/GetUsersByUuid(organizationUuid=**)?$expand=ObjectOwner,OrganizationRights($filter=Organization/Uuid%20eq%**),OrganizationUnitRights($filter=Object/Organization/Uuid%20eq%**;$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem,Uuid;$expand=ItSystem($select=Name))),ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&$skip=0&$top=*&$count=true',
-      { fixture: './organizations/users/organization-odata-users.json' }
+      { fixture: './organizations/users/organization-odata-users.json' },
     );
     cy.intercept('api/v2/internal/organization/*/users/permissions', {
       fixture: './organizations/users/permissions.json',
@@ -175,9 +175,7 @@ describe('organization-users', () => {
 
   it('Organization admins can only change the organization admin role on users', () => {
     cy.setup(false);
-    cy.intercept(
-      'odata/ItSystemUsageOverviewReadModels?*'
-    );
+    cy.intercept('odata/ItSystemUsageOverviewReadModels?*');
     cy.login('./shared/authorize-organization-admin.json');
     cy.visit('/organization/users');
 

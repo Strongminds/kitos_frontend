@@ -16,11 +16,22 @@ import { DialogActionsComponent } from '../../../../../../shared/components/dial
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-create-and-associate-contract-dialog',
-    templateUrl: './create-and-associate-contract-dialog.component.html',
-    styleUrl: './create-and-associate-contract-dialog.component.scss',
-    providers: [CreateEntityDialogComponentStore],
-    imports: [DialogComponent, StandardVerticalContentGridComponent, TextBoxComponent, FormsModule, ReactiveFormsModule, NgIf, ParagraphComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-create-and-associate-contract-dialog',
+  templateUrl: './create-and-associate-contract-dialog.component.html',
+  styleUrl: './create-and-associate-contract-dialog.component.scss',
+  providers: [CreateEntityDialogComponentStore],
+  imports: [
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    NgIf,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateAndAssociateContractDialogComponent extends BaseComponent implements OnInit {
   @Input() public usageToAssociateUuid!: string;
@@ -41,7 +52,7 @@ export class CreateAndAssociateContractDialogComponent extends BaseComponent imp
   constructor(
     private store: Store,
     private dialogRef: MatDialogRef<CreateAndAssociateContractDialogComponent>,
-    private readonly componentStore: CreateEntityDialogComponentStore
+    private readonly componentStore: CreateEntityDialogComponentStore,
   ) {
     super();
   }
@@ -56,7 +67,7 @@ export class CreateAndAssociateContractDialogComponent extends BaseComponent imp
             searchObject: { nameEquals: value },
             entityType: 'it-contract',
           });
-        })
+        }),
     );
     this.subscriptions.add(
       this.alreadyExists$.subscribe((alreadyExists) => {
@@ -65,7 +76,7 @@ export class CreateAndAssociateContractDialogComponent extends BaseComponent imp
         } else {
           this.formGroup.controls.contractName.setErrors(null);
         }
-      })
+      }),
     );
   }
 

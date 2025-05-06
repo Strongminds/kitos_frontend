@@ -55,7 +55,7 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
     @Inject(MatDialogRef<CreateHelpTextDialogComponent>) private dialogRef: MatDialogRef<CreateHelpTextDialogComponent>,
     private store: Store,
     private componentStore: CreateHelpTextDialogComponentStore,
-    private rootUrlResolver: AppRootUrlResolverService
+    private rootUrlResolver: AppRootUrlResolverService,
   ) {
     super();
     this.rootUrl = this.rootUrlResolver.resolveRootUrl();
@@ -67,7 +67,7 @@ export class CreateHelpTextDialogComponent extends BaseComponent implements OnIn
       keyControl.valueChanges.pipe(debounceTime(300)).subscribe((key) => {
         if (!key) return;
         this.componentStore.checkIfKeyExists(key);
-      })
+      }),
     );
 
     if (this.existingKey) {

@@ -8,10 +8,10 @@ import { ExternalReferencesManagementComponent } from '../../../../shared/compon
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-data-processing-references',
-    templateUrl: './data-processing-references.component.html',
-    styleUrl: './data-processing-references.component.scss',
-    imports: [CardComponent, CardHeaderComponent, ExternalReferencesManagementComponent, AsyncPipe]
+  selector: 'app-data-processing-references',
+  templateUrl: './data-processing-references.component.html',
+  styleUrl: './data-processing-references.component.scss',
+  imports: [CardComponent, CardHeaderComponent, ExternalReferencesManagementComponent, AsyncPipe],
 })
 export class DataProcessingReferencesComponent extends BaseComponent {
   public hasModifyPermission$ = this.store.select(selectDataProcessingHasModifyPermissions);

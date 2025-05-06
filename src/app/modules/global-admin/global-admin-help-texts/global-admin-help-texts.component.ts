@@ -16,10 +16,18 @@ import { LocalGridComponent } from '../../../shared/components/local-grid/local-
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 @Component({
-    selector: 'app-global-admin-help-texts',
-    templateUrl: './global-admin-help-texts.component.html',
-    styleUrl: './global-admin-help-texts.component.scss',
-    imports: [CardComponent, OverviewHeaderComponent, ButtonComponent, NgIf, LocalGridComponent, LoadingComponent, AsyncPipe]
+  selector: 'app-global-admin-help-texts',
+  templateUrl: './global-admin-help-texts.component.html',
+  styleUrl: './global-admin-help-texts.component.scss',
+  imports: [
+    CardComponent,
+    OverviewHeaderComponent,
+    ButtonComponent,
+    NgIf,
+    LocalGridComponent,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class GlobalAdminHelpTextsComponent implements OnInit {
   public readonly helpTexts$ = this.store.select(selectHelpTexts);
@@ -28,7 +36,7 @@ export class GlobalAdminHelpTextsComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly dialog: MatDialog,
-    private readonly confirmActionService: ConfirmActionService
+    private readonly confirmActionService: ConfirmActionService,
   ) {}
 
   ngOnInit(): void {

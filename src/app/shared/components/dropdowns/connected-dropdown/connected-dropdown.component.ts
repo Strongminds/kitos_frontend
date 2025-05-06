@@ -7,10 +7,10 @@ import { DropdownComponent } from '../dropdown/dropdown.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-connected-dropdown[text][valueField][filterChange][formGroup][formName]',
-    templateUrl: './connected-dropdown.component.html',
-    styleUrls: ['./connected-dropdown.component.scss'],
-    imports: [DropdownComponent, FormsModule, ReactiveFormsModule, AsyncPipe]
+  selector: 'app-connected-dropdown[text][valueField][filterChange][formGroup][formName]',
+  templateUrl: './connected-dropdown.component.html',
+  styleUrls: ['./connected-dropdown.component.scss'],
+  imports: [DropdownComponent, FormsModule, ReactiveFormsModule, AsyncPipe],
 })
 export class ConnectedDropdownComponent<T> extends BaseComponent implements OnInit {
   @Input() public text!: string;
@@ -32,7 +32,7 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
   private lastTwoSearchTerms$ = this.searchTermsSource$.pipe(
     startWith(undefined),
     pairwise(),
-    map(([previous, current]) => ({ previous: previous, current: current }))
+    map(([previous, current]) => ({ previous: previous, current: current })),
   );
 
   ngOnInit() {
@@ -42,7 +42,7 @@ export class ConnectedDropdownComponent<T> extends BaseComponent implements OnIn
         if (terms.previous != terms.current) {
           this.filterChange.emit(terms.current);
         }
-      })
+      }),
     );
   }
 

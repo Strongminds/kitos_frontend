@@ -27,10 +27,21 @@ import { NotificationsButtonComponent } from '../notifications-button/notificati
 import { LogoutIconComponent } from '../../../shared/components/icons/logout-icon.component';
 
 @Component({
-    selector: 'app-nav-bar',
-    templateUrl: 'nav-bar.component.html',
-    styleUrls: ['nav-bar.component.scss'],
-    imports: [MatToolbar, RouterLink, NgIf, SpacerComponent, MenuComponent, MenuItemComponent, TableIconComponent, NotificationsButtonComponent, LogoutIconComponent, AsyncPipe]
+  selector: 'app-nav-bar',
+  templateUrl: 'nav-bar.component.html',
+  styleUrls: ['nav-bar.component.scss'],
+  imports: [
+    MatToolbar,
+    RouterLink,
+    NgIf,
+    SpacerComponent,
+    MenuComponent,
+    MenuItemComponent,
+    TableIconComponent,
+    NotificationsButtonComponent,
+    LogoutIconComponent,
+    AsyncPipe,
+  ],
 })
 export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
@@ -43,7 +54,11 @@ export class NavBarComponent extends BaseComponent implements OnInit {
 
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
 
-  constructor(private store: Store, private dialog: MatDialog, private router: Router) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog,
+    private router: Router,
+  ) {
     super();
   }
 
@@ -56,9 +71,9 @@ export class NavBarComponent extends BaseComponent implements OnInit {
       combineLatest([this.user$, this.router.events])
         .pipe(
           filter(([user, event]) => user !== undefined && event instanceof NavigationEnd),
-          tap(() => this.store.dispatch(OrganizationActions.getUIRootConfig()))
+          tap(() => this.store.dispatch(OrganizationActions.getUIRootConfig())),
         )
-        .subscribe()
+        .subscribe(),
     );
   }
 

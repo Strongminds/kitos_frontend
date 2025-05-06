@@ -16,10 +16,20 @@ import { DialogActionsComponent } from '../../../../shared/components/dialogs/di
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-create-global-admin-dialog',
-    templateUrl: './create-global-admin-dialog.component.html',
-    styleUrl: './create-global-admin-dialog.component.scss',
-    imports: [DialogComponent, NgIf, LoadingComponent, UserDropdownComponent, FormsModule, ReactiveFormsModule, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-create-global-admin-dialog',
+  templateUrl: './create-global-admin-dialog.component.html',
+  styleUrl: './create-global-admin-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    NgIf,
+    LoadingComponent,
+    UserDropdownComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateGlobalAdminDialogComponent extends BaseComponent implements OnInit {
   public formGroup = new FormGroup({
@@ -29,7 +39,7 @@ export class CreateGlobalAdminDialogComponent extends BaseComponent implements O
   constructor(
     private dialogRef: MatDialogRef<CreateGlobalAdminDialogComponent>,
     private store: Store,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -41,7 +51,7 @@ export class CreateGlobalAdminDialogComponent extends BaseComponent implements O
 
   public ngOnInit(): void {
     this.subscriptions.add(
-      this.actions$.pipe(ofType(GlobalAdminActions.addGlobalAdminSuccess)).subscribe(() => this.close())
+      this.actions$.pipe(ofType(GlobalAdminActions.addGlobalAdminSuccess)).subscribe(() => this.close()),
     );
   }
 

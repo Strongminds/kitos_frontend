@@ -38,10 +38,19 @@ import { CreateEntityButtonComponent } from '../../../shared/components/entity-c
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 
 @Component({
-    selector: 'app-organization-users',
-    templateUrl: './organization-users.component.html',
-    styleUrl: './organization-users.component.scss',
-    imports: [OverviewHeaderComponent, NgIf, GridOptionsButtonComponent, ExportMenuButtonComponent, HideShowButtonComponent, CreateEntityButtonComponent, GridComponent, AsyncPipe]
+  selector: 'app-organization-users',
+  templateUrl: './organization-users.component.html',
+  styleUrl: './organization-users.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    NgIf,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    CreateEntityButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class OrganizationUsersComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectOrganizationUserGridLoading);
@@ -177,7 +186,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
     private dialog: MatDialog,
-    private dialogOpenerService: DialogOpenerService
+    private dialogOpenerService: DialogOpenerService,
   ) {
     super(store, 'organization-user');
   }
@@ -186,7 +195,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.store.dispatch(OrganizationUserActions.getOrganizationUserPermissions());
     const existingColumns = this.gridColumnStorageService.getColumns(
       ORGANIZATION_USER_COLUMNS_ID,
-      this.defaultGridColumns
+      this.defaultGridColumns,
     );
     if (existingColumns) {
       this.store.dispatch(OrganizationUserActions.updateGridColumns(existingColumns));
@@ -201,7 +210,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.resetGridConfiguration))
-        .subscribe(() => this.updateDefaultColumns())
+        .subscribe(() => this.updateDefaultColumns()),
     );
 
     this.subscriptions.add(
@@ -212,13 +221,13 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
             OrganizationUserActions.updateUserSuccess,
             OrganizationUserActions.deleteUserSuccess,
             OrganizationUserActions.copyRolesSuccess,
-            OrganizationUserActions.transferRolesSuccess
+            OrganizationUserActions.transferRolesSuccess,
           ),
-          combineLatestWith(this.gridState$)
+          combineLatestWith(this.gridState$),
         )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
   }
 

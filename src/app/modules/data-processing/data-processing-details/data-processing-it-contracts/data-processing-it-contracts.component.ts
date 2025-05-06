@@ -13,7 +13,10 @@ import {
   selectDataProcessingIsValid,
   selectDataProcessingMainContract,
 } from 'src/app/store/data-processing/selectors';
-import { selectDprEnableAssociatedContracts, selectDprEnableMainContract } from 'src/app/store/organization/ui-module-customization/selectors';
+import {
+  selectDprEnableAssociatedContracts,
+  selectDprEnableMainContract,
+} from 'src/app/store/organization/ui-module-customization/selectors';
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
@@ -26,10 +29,25 @@ import { DetailsPageLinkComponent } from '../../../../shared/components/details-
 import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
 
 @Component({
-    selector: 'app-data-processing-it-contracts',
-    templateUrl: './data-processing-it-contracts.component.html',
-    styleUrl: './data-processing-it-contracts.component.scss',
-    imports: [NgIf, CardComponent, CardHeaderComponent, FormsModule, ReactiveFormsModule, DropdownComponent, StatusChipComponent, ParagraphComponent, StandardVerticalContentGridComponent, NativeTableComponent, NgFor, DetailsPageLinkComponent, EmptyStateComponent, AsyncPipe]
+  selector: 'app-data-processing-it-contracts',
+  templateUrl: './data-processing-it-contracts.component.html',
+  styleUrl: './data-processing-it-contracts.component.scss',
+  imports: [
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    StatusChipComponent,
+    ParagraphComponent,
+    StandardVerticalContentGridComponent,
+    NativeTableComponent,
+    NgFor,
+    DetailsPageLinkComponent,
+    EmptyStateComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingItContractsComponent extends BaseComponent implements OnInit {
   public readonly mainContract$ = this.store.select(selectDataProcessingMainContract);
@@ -60,7 +78,7 @@ export class DataProcessingItContractsComponent extends BaseComponent implements
           if (hasModifyPermissions) {
             this.contractFormGroup.enable();
           }
-        })
+        }),
     );
   }
 

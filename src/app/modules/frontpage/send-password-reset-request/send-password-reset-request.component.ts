@@ -13,10 +13,20 @@ import { TextBoxComponent } from '../../../shared/components/textbox/textbox.com
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-send-password-reset-request',
-    templateUrl: './send-password-reset-request.component.html',
-    styleUrl: './send-password-reset-request.component.scss',
-    imports: [CardComponent, StandardVerticalContentGridComponent, ParagraphComponent, NgIf, LoadingComponent, TextBoxComponent, FormsModule, ReactiveFormsModule, ButtonComponent]
+  selector: 'app-send-password-reset-request',
+  templateUrl: './send-password-reset-request.component.html',
+  styleUrl: './send-password-reset-request.component.scss',
+  imports: [
+    CardComponent,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    NgIf,
+    LoadingComponent,
+    TextBoxComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    ButtonComponent,
+  ],
 })
 export class SendPasswordResetRequestComponent extends BaseComponent {
   public readonly formGroup = new FormGroup({
@@ -25,7 +35,10 @@ export class SendPasswordResetRequestComponent extends BaseComponent {
 
   public loading = false;
 
-  constructor(private store: Store, private actions$: Actions) {
+  constructor(
+    private store: Store,
+    private actions$: Actions,
+  ) {
     super();
     this.subscriptions.add(
       this.actions$
@@ -33,7 +46,7 @@ export class SendPasswordResetRequestComponent extends BaseComponent {
         .subscribe(() => {
           this.loading = false;
           this.formGroup.reset();
-        })
+        }),
     );
   }
 

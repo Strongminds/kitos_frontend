@@ -48,7 +48,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   public readonly roleForm = new FormGroup({
     role: new FormControl<APIRoleOptionResponseDTO | undefined>(
       { value: undefined, disabled: false },
-      Validators.required
+      Validators.required,
     ),
   });
 
@@ -62,10 +62,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   private readonly existingUserUuids$ = new BehaviorSubject<string[]>([]);
   private readonly mappedUsers$ = this.componentStore.users$.pipe(
     filterNullish(),
-    map((users) => users?.map((user) => mapUserToOption(user)))
+    map((users) => users?.map((user) => mapUserToOption(user))),
   );
   public readonly filteredUsers$ = combineLatest([this.mappedUsers$, this.existingUserUuids$]).pipe(
-    map(([users, existingUserUuids]) => users.filter((user) => !existingUserUuids.includes(user.value)))
+    map(([users, existingUserUuids]) => users.filter((user) => !existingUserUuids.includes(user.value))),
   );
 
   public readonly isLoading$ = this.componentStore.usersIsLoading$;
@@ -83,7 +83,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     private readonly componentStore: RoleTableComponentStore,
     private readonly dialog: MatDialogRef<RoleTableCreateDialogComponent>,
     private readonly roleOptionTypeService: RoleOptionTypeService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -155,7 +155,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
         .pipe(filterNullish())
         .subscribe((roles) => {
           this.availableRoles$.next(roles);
-        })
+        }),
     );
   }
 
@@ -164,7 +164,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       this.selectedRoleUuid$.subscribe((roleUuid) => {
         const userUuids = this.roleUserUuidsDictionary[roleUuid];
         this.existingUserUuids$.next(userUuids ?? []);
-      })
+      }),
     );
   }
 
@@ -176,12 +176,12 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
             ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
             ITContractActions.bulkAddItContractRoleSuccess,
             DataProcessingActions.bulkAddDataProcessingRoleSuccess,
-            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess
-          )
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess,
+          ),
         )
         .subscribe(() => {
           this.dialog.close();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -191,12 +191,12 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
             ITSystemUsageActions.bulkAddItSystemUsageRoleError,
             ITContractActions.bulkAddItContractRoleError,
             DataProcessingActions.bulkAddDataProcessingRoleError,
-            OrganizationUnitActions.bulkAddOrganizationUnitRoleError
-          )
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleError,
+          ),
         )
         .subscribe(() => {
           this.isBusy = false;
-        })
+        }),
     );
   }
 }

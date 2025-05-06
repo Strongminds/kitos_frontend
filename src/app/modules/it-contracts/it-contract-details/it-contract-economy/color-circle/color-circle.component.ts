@@ -7,10 +7,16 @@ import { OrangeCircleIconComponent } from '../../../../../shared/components/icon
 import { GreenCircleIconComponent } from '../../../../../shared/components/icons/green-circle-icon.component';
 
 @Component({
-    selector: 'app-color-circle[color]',
-    templateUrl: './color-circle.component.html',
-    styleUrl: './color-circle.component.scss',
-    imports: [NgIf, WhiteCircleIconComponent, RedCircleIconComponent, OrangeCircleIconComponent, GreenCircleIconComponent]
+  selector: 'app-color-circle[color]',
+  templateUrl: './color-circle.component.html',
+  styleUrl: './color-circle.component.scss',
+  imports: [
+    NgIf,
+    WhiteCircleIconComponent,
+    RedCircleIconComponent,
+    OrangeCircleIconComponent,
+    GreenCircleIconComponent,
+  ],
 })
 export class ColorCircleComponent {
   @Input() public color!: APIPaymentResponseDTO.AuditStatusEnum | undefined;

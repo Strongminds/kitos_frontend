@@ -7,10 +7,10 @@ import { ItSystemInterfacesTableComponent } from '../../../shared/it-system-inte
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 
 @Component({
-    selector: 'app-it-system-catalog-interfaces',
-    templateUrl: './it-system-catalog-interfaces.component.html',
-    styleUrl: './it-system-catalog-interfaces.component.scss',
-    imports: [NgIf, ItSystemInterfacesTableComponent, LoadingComponent, AsyncPipe]
+  selector: 'app-it-system-catalog-interfaces',
+  templateUrl: './it-system-catalog-interfaces.component.html',
+  styleUrl: './it-system-catalog-interfaces.component.scss',
+  imports: [NgIf, ItSystemInterfacesTableComponent, LoadingComponent, AsyncPipe],
 })
 export class ItSystemCatalogInterfacesComponent extends BaseComponent {
   public readonly systemUuid$ = this.store.select(selectItSystemUuid);

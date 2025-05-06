@@ -10,7 +10,7 @@ declare namespace Cypress {
       authenticate?: boolean,
       urlPath?: string,
       uiCustomizationFixturePath?: string,
-      interceptAlerts?: boolean
+      interceptAlerts?: boolean,
     ): void;
 
     /**
@@ -114,7 +114,7 @@ declare namespace Cypress {
       requestAlias: string,
       propertyPath: string,
       verifyMethod: (actual: any, expectedObject: any) => boolean,
-      expectedObject: any
+      expectedObject: any,
     ): Chainable<Subject>;
 
     /**
@@ -145,7 +145,7 @@ declare namespace Cypress {
       url: string,
       fixture?: object,
       message?: string,
-      title?: string
+      title?: string,
     ): Chainable<Subject>;
 
     /**
@@ -174,7 +174,7 @@ declare namespace Cypress {
       isEdit: boolean,
       requestUrl: string,
       responseBodyPath: string,
-      rowTitle?: string
+      rowTitle?: string,
     ): Chainable<Subject>;
 
     /**

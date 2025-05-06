@@ -58,11 +58,36 @@ import { EmptyStateComponent } from '../../../../../shared/components/empty-stat
 import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
-    selector: 'app-it-system-interfaces-details-frontpage',
-    templateUrl: './it-system-interfaces-details-frontpage.component.html',
-    styleUrl: './it-system-interfaces-details-frontpage.component.scss',
-    providers: [ITSystemInterfacesDetailsFrontpageComponentStore],
-    imports: [CardComponent, CardHeaderComponent, StatusChipComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, ConnectedDropdownComponent, DropdownComponent, LinkTextboxComponent, TextAreaComponent, StandardVerticalContentGridComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent, ContentSpaceBetweenComponent, TableRowActionsComponent, IconButtonComponent, PencilIconComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe]
+  selector: 'app-it-system-interfaces-details-frontpage',
+  templateUrl: './it-system-interfaces-details-frontpage.component.html',
+  styleUrl: './it-system-interfaces-details-frontpage.component.scss',
+  providers: [ITSystemInterfacesDetailsFrontpageComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StatusChipComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    ConnectedDropdownComponent,
+    DropdownComponent,
+    LinkTextboxComponent,
+    TextAreaComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    ContentSpaceBetweenComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly interfaceTypeOptions$ = this.store
@@ -74,7 +99,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
   public readonly interfaceUrlReference$ = this.store.select(selectInterfaceUrlReference);
   public readonly isInterfaceActive$ = this.store.select(selectInterfaceDeactivated);
   public readonly urlReferenceAsSimpleLink$ = this.interfaceUrlReference$.pipe(
-    map((reference) => ({ name: '', url: reference } as SimpleLink))
+    map((reference) => ({ name: '', url: reference }) as SimpleLink),
   );
   public readonly anyInterfaceData$ = this.interfaceData$.pipe(matchNonEmptyArray());
   public readonly isLoadingSystems$ = this.componentStore.isLoading$;
@@ -102,7 +127,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
     private readonly notificationService: NotificationService,
     private readonly componentStore: ITSystemInterfacesDetailsFrontpageComponentStore,
     private readonly actions$: Actions,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
   ) {
     super();
   }
@@ -147,10 +172,10 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
                 .pipe(filterNullish(), first())
                 .subscribe((itInterfaceUuid) => {
                   this.store.dispatch(ITInterfaceActions.getITInterface(itInterfaceUuid));
-                })
+                }),
             );
           }
-        })
+        }),
     );
   }
 
@@ -169,7 +194,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
           if (result === true) {
             this.store.dispatch(ITInterfaceActions.removeITInterfaceData(dataUuid));
           }
-        })
+        }),
     );
   }
 
@@ -222,7 +247,7 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
           this.interfaceFormGroup.controls.uuid.disable();
           this.interfaceFormGroup.controls.createdBy.disable();
           this.interfaceFormGroup.controls.rightsHolder.disable();
-        })
+        }),
     );
   }
 
@@ -232,11 +257,11 @@ export class ItSystemInterfacesDetailsFrontpageComponent extends BaseComponent i
         .pipe(
           ofType(ITInterfaceActions.updateITInterfaceSuccess),
           first(),
-          combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish()))
+          combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
         )
         .subscribe(([_, interfaceUuid]) => {
           this.store.dispatch(ITInterfaceActions.getITInterfacePermissions(interfaceUuid));
-        })
+        }),
     );
   }
 }

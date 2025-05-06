@@ -13,10 +13,19 @@ import { ButtonComponent } from '../../buttons/button/button.component';
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-dropdown-dialog',
-    templateUrl: './dropdown-dialog.component.html',
-    styleUrl: './dropdown-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-dropdown-dialog',
+  templateUrl: './dropdown-dialog.component.html',
+  styleUrl: './dropdown-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class DropdownDialogComponent<T> extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -36,7 +45,7 @@ export class DropdownDialogComponent<T> extends BaseComponent implements OnInit 
 
   constructor(
     private readonly actions$: Actions,
-    private readonly dialogRef: MatDialogRef<ConnectedDropdownDialogComponent<T>>
+    private readonly dialogRef: MatDialogRef<ConnectedDropdownDialogComponent<T>>,
   ) {
     super();
   }

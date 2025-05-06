@@ -18,10 +18,20 @@ import { ButtonComponent } from '../../../../../../shared/components/buttons/but
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-interface-data-write-dialog',
-    templateUrl: './interface-data-write-dialog.component.html',
-    styleUrl: './interface-data-write-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, DropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-interface-data-write-dialog',
+  templateUrl: './interface-data-write-dialog.component.html',
+  styleUrl: './interface-data-write-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class InterfaceDataWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public existingData: APIItInterfaceDataResponseDTO | undefined;
@@ -38,7 +48,7 @@ export class InterfaceDataWriteDialogComponent extends BaseComponent implements 
   constructor(
     private readonly dialogRef: MatDialogRef<InterfaceDataWriteDialogComponent>,
     private readonly store: Store,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -56,9 +66,9 @@ export class InterfaceDataWriteDialogComponent extends BaseComponent implements 
       this.actions$
         .pipe(
           ofType(ITInterfaceActions.addITInterfaceDataSuccess, ITInterfaceActions.updateITInterfaceDataSuccess),
-          first()
+          first(),
         )
-        .subscribe(() => this.dialogRef.close())
+        .subscribe(() => this.dialogRef.close()),
     );
 
     this.subscriptions.add(
@@ -66,7 +76,7 @@ export class InterfaceDataWriteDialogComponent extends BaseComponent implements 
         .pipe(ofType(ITInterfaceActions.addITInterfaceDataError, ITInterfaceActions.updateITInterfaceDataError))
         .subscribe(() => {
           this.isBusy = false;
-        })
+        }),
     );
   }
 

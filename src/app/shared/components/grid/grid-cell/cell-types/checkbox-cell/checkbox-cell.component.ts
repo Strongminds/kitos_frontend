@@ -7,10 +7,10 @@ import { UsageProxyCheckboxComponent } from '../../../usage-proxy-checkbox/usage
 import { SearchPropertyPipe } from '../../../../../pipes/column-property.pipe';
 
 @Component({
-    selector: 'app-checkbox-cell',
-    templateUrl: './checkbox-cell.component.html',
-    styleUrl: './checkbox-cell.component.scss',
-    imports: [NgIf, TooltipComponent, CheckboxComponent, UsageProxyCheckboxComponent, SearchPropertyPipe]
+  selector: 'app-checkbox-cell',
+  templateUrl: './checkbox-cell.component.html',
+  styleUrl: './checkbox-cell.component.scss',
+  imports: [NgIf, TooltipComponent, CheckboxComponent, UsageProxyCheckboxComponent, SearchPropertyPipe],
 })
 export class CheckboxCellComponent extends BaseCellComponent {
   @Output() public checkboxChange = new EventEmitter<boolean>();

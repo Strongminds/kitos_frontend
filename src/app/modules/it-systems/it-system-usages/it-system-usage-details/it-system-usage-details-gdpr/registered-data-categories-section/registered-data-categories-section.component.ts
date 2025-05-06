@@ -14,16 +14,16 @@ import { NgFor, AsyncPipe } from '@angular/common';
 import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
 
 @Component({
-    selector: 'app-registered-data-categories-section',
-    templateUrl: './registered-data-categories-section.component.html',
-    styleUrls: ['./registered-data-categories-section.component.scss'],
-    imports: [AccordionComponent, FormsModule, ReactiveFormsModule, NgFor, CheckboxComponent, AsyncPipe]
+  selector: 'app-registered-data-categories-section',
+  templateUrl: './registered-data-categories-section.component.html',
+  styleUrls: ['./registered-data-categories-section.component.scss'],
+  imports: [AccordionComponent, FormsModule, ReactiveFormsModule, NgFor, CheckboxComponent, AsyncPipe],
 })
 export class RegisteredDataCategoriesSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   public readonly registeredDataCategoriesOptions$ = this.store.select(
-    selectRegularOptionTypes('it_system_usage-gdpr-registered-data-category-type')
+    selectRegularOptionTypes('it_system_usage-gdpr-registered-data-category-type'),
   );
 
   public readonly registeredDataCategories$ = this.store
@@ -32,7 +32,10 @@ export class RegisteredDataCategoriesSectionComponent extends BaseAccordionCompo
 
   public readonly registeredDataCategoriesForm = new FormGroup({}, { updateOn: 'change' });
 
-  public constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+  public constructor(
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -72,7 +75,7 @@ export class RegisteredDataCategoriesSectionComponent extends BaseAccordionCompo
       this.store.dispatch(
         ITSystemUsageActions.patchITSystemUsage({
           gdpr: { registeredDataCategoryUuids: newRegisteredDataCategoryUuids },
-        })
+        }),
       );
     }
   }

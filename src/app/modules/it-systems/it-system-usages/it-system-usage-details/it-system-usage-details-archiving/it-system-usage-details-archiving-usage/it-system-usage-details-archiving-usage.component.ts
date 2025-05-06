@@ -73,11 +73,39 @@ import { CollectionExtensionButtonComponent } from '../../../../../../shared/com
 import { AppDatePipe } from '../../../../../../shared/pipes/app-date.pipe';
 
 @Component({
-    selector: 'app-it-system-usage-details-archiving-usage',
-    templateUrl: './it-system-usage-details-archiving-usage.component.html',
-    styleUrl: './it-system-usage-details-archiving-usage.component.scss',
-    providers: [ItSystemUsageDetailsArchivingComponentStore],
-    imports: [CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, DropdownComponent, TextBoxInfoComponent, NgIf, ParagraphComponent, ConnectedDropdownComponent, NumericInputComponent, ContentVerticalCenterComponent, CheckboxComponent, RadioButtonsComponent, TextAreaComponent, StandardVerticalContentGridComponent, NativeTableComponent, NgFor, ContentSpaceBetweenComponent, TableRowActionsComponent, IconButtonComponent, PencilIconComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe, AppDatePipe]
+  selector: 'app-it-system-usage-details-archiving-usage',
+  templateUrl: './it-system-usage-details-archiving-usage.component.html',
+  styleUrl: './it-system-usage-details-archiving-usage.component.scss',
+  providers: [ItSystemUsageDetailsArchivingComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    TextBoxInfoComponent,
+    NgIf,
+    ParagraphComponent,
+    ConnectedDropdownComponent,
+    NumericInputComponent,
+    ContentVerticalCenterComponent,
+    CheckboxComponent,
+    RadioButtonsComponent,
+    TextAreaComponent,
+    StandardVerticalContentGridComponent,
+    NativeTableComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+    AppDatePipe,
+  ],
 })
 export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent implements OnInit {
   private readonly journalFrequencyInputUpperLimit = 100;
@@ -93,17 +121,17 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
       notes: new FormControl<string | undefined>(undefined),
       frequencyInMonths: new FormControl<number | undefined>(
         undefined,
-        Validators.max(this.journalFrequencyInputUpperLimit)
+        Validators.max(this.journalFrequencyInputUpperLimit),
       ),
       documentBearing: new FormControl<boolean | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   public readonly archiving$ = this.store.select(selectItSystemUsageArchiving);
   public readonly journalPeriods$ = this.archiving$.pipe(
     filterNullish(),
-    map((archive) => archive.journalPeriods)
+    map((archive) => archive.journalPeriods),
   );
   public readonly anyJournalPeriods$ = this.journalPeriods$.pipe(matchEmptyArray(), invertBooleanValue());
   public readonly recommendedArchiveDutyComment$ = this.store.select(selectItSystemRecomendedArchiveDutyComment);
@@ -143,7 +171,7 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
   public readonly catalogArchiveDutyEnabled$ = this.store.select(selectITSystemUsageEnableCatalogArchiveDuty);
   public readonly catalogArchiveDutyCommentEnabled$ = this.store.select(
-    selectITSystemUsageEnableCatalogArchiveDutyComment
+    selectITSystemUsageEnableCatalogArchiveDutyComment,
   );
 
   constructor(
@@ -151,7 +179,7 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
     private readonly notificationService: NotificationService,
     private readonly componentStore: ItSystemUsageDetailsArchivingComponentStore,
     private readonly actions$: Actions,
-    private readonly dialog: MatDialog
+    private readonly dialog: MatDialog,
   ) {
     super();
   }
@@ -252,7 +280,7 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
     this.subscriptions.add(
       this.archiveForm.controls.archiveDuty.valueChanges.subscribe((value) => {
         this.changeFormState(value);
-      })
+      }),
     );
   }
 
@@ -262,7 +290,7 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
         .select(selectItSystemUsageArchiving)
         .pipe(
           filterNullish(),
-          concatLatestFrom(() => this.hasModifyPermission$)
+          concatLatestFrom(() => this.hasModifyPermission$),
         )
         .subscribe(([archive, hasModifyPermission]) => {
           this.archiveForm.patchValue({
@@ -284,7 +312,7 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
           } else {
             this.archiveForm.disable();
           }
-        })
+        }),
     );
   }
 
@@ -295,12 +323,12 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
           ofType(
             ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess,
             ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess,
-            ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess
-          )
+            ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess,
+          ),
         )
         .subscribe(({ itSystemUsageUuid }) => {
           this.store.dispatch(ITSystemUsageActions.getITSystemUsage(itSystemUsageUuid));
-        })
+        }),
     );
   }
 

@@ -24,10 +24,23 @@ import { DialogActionsComponent } from '../../../../../../shared/components/dial
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-payment-dialog',
-    templateUrl: './payment-dialog.component.html',
-    styleUrl: './payment-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, OrgUnitSelectComponent, NumericInputComponent, TextBoxComponent, AuditPickerComponent, DatePickerComponent, TextAreaComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-payment-dialog',
+  templateUrl: './payment-dialog.component.html',
+  styleUrl: './payment-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    OrgUnitSelectComponent,
+    NumericInputComponent,
+    TextBoxComponent,
+    AuditPickerComponent,
+    DatePickerComponent,
+    TextAreaComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class PaymentDialogComponent extends BaseComponent implements OnInit {
   @Input() public paymentType!: PaymentTypes;
@@ -52,7 +65,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly actions$: Actions,
-    private readonly dialogRef: MatDialogRef<PaymentDialogComponent>
+    private readonly dialogRef: MatDialogRef<PaymentDialogComponent>,
   ) {
     super();
   }
@@ -85,7 +98,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
         .pipe(ofType(ITContractActions.addItContractPaymentSuccess, ITContractActions.updateItContractPaymentSuccess))
         .subscribe((_) => {
           this.close();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -93,7 +106,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
         .pipe(ofType(ITContractActions.addItContractPaymentError, ITContractActions.updateItContractPaymentError))
         .subscribe(() => {
           this.isBusy = false;
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -104,7 +117,7 @@ export class PaymentDialogComponent extends BaseComponent implements OnInit {
           this.paymentForm.disable();
           this.paymentForm.controls.organizationUnit.enable();
         }
-      })
+      }),
     );
   }
 

@@ -66,11 +66,30 @@ import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-s
 import { RadioButtonsComponent } from '../../../../shared/components/radio-buttons/radio-buttons.component';
 
 @Component({
-    selector: 'app-it-contract-frontpage',
-    templateUrl: './it-contract-frontpage.component.html',
-    styleUrl: './it-contract-frontpage.component.scss',
-    providers: [ItContractFrontpageComponentStore],
-    imports: [CardComponent, CardHeaderComponent, NgIf, StatusChipComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, OptionTypeDropdownComponent, DropdownComponent, StandardVerticalContentGridComponent, CheckboxComponent, DatePickerComponent, TextAreaComponent, ConnectedDropdownComponent, OrgUnitSelectComponent, RadioButtonsComponent, AsyncPipe]
+  selector: 'app-it-contract-frontpage',
+  templateUrl: './it-contract-frontpage.component.html',
+  styleUrl: './it-contract-frontpage.component.scss',
+  providers: [ItContractFrontpageComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    StatusChipComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    OptionTypeDropdownComponent,
+    DropdownComponent,
+    StandardVerticalContentGridComponent,
+    CheckboxComponent,
+    DatePickerComponent,
+    TextAreaComponent,
+    ConnectedDropdownComponent,
+    OrgUnitSelectComponent,
+    RadioButtonsComponent,
+    AsyncPipe,
+  ],
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
   public readonly contractTemplates$ = this.store
@@ -110,7 +129,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         validationErrors.includes('InvalidParentContract') ? this.invalidParentContractText : undefined,
       ];
       return text + '\n' + toBulletPoints(errorMessages);
-    })
+    }),
   );
 
   private readonly notYetValidText = $localize`'Gyldig fra' er endnu ikke passeret`;
@@ -119,7 +138,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   private readonly invalidParentContractText = $localize`Den overordnede kontrakt er ikke gyldig`;
 
   public readonly users$ = this.componentStore.users$.pipe(
-    map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid })))
+    map((users) => users.map((user) => ({ name: user.firstName + ' ' + user.lastName, uuid: user.uuid }))),
   );
   public readonly usersIsLoading$ = this.componentStore.usersIsLoading$;
   public readonly organizations$ = this.componentStore.organizations$;
@@ -237,7 +256,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   constructor(
     private readonly store: Store,
     private readonly notificationService: NotificationService,
-    private readonly componentStore: ItContractFrontpageComponentStore
+    private readonly componentStore: ItContractFrontpageComponentStore,
   ) {
     super();
   }
@@ -251,7 +270,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         } else {
           parentContractControl.requireValidParent.disable();
         }
-      })
+      }),
     );
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_contract-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_contract-template-type'));
@@ -317,7 +336,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
           const quarter = i + 1;
           if (year === currentYear && quarter < currentQuarter) return;
           return { name: `Q${quarter} | ${year}` };
-        })
+        }),
       )
       .filter(Boolean);
     return quarters;
@@ -330,7 +349,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectItContractHasModifyPermissions)))
         .subscribe(([contract, hasModifyPermission]) => {
           this.updateFormGroups(contract, hasModifyPermission);
-        })
+        }),
     );
   }
 
@@ -356,8 +375,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       status: enforcedValid
         ? $localize`Gennemtvunget gyldig`
         : contract.general.validity.valid
-        ? $localize`Gyldig`
-        : $localize`Ikke gyldig`,
+          ? $localize`Gyldig`
+          : $localize`Ikke gyldig`,
       isValid: contract.general.validity.valid,
       validFrom: optionalNewDate(contract.general.validity.validFrom),
       validTo: optionalNewDate(contract.general.validity.validTo),

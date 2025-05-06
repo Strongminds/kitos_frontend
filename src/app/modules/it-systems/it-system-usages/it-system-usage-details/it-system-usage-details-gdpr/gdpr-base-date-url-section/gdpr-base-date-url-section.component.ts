@@ -15,10 +15,19 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-gdpr-base-date-url-section',
-    templateUrl: './gdpr-base-date-url-section.component.html',
-    styleUrls: ['./gdpr-base-date-url-section.component.scss'],
-    imports: [AccordionComponent, FormGridComponent, FormsModule, ReactiveFormsModule, DropdownComponent, DatePickerComponent, EditUrlSectionComponent, AsyncPipe]
+  selector: 'app-gdpr-base-date-url-section',
+  templateUrl: './gdpr-base-date-url-section.component.html',
+  styleUrls: ['./gdpr-base-date-url-section.component.scss'],
+  imports: [
+    AccordionComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    DatePickerComponent,
+    EditUrlSectionComponent,
+    AsyncPipe,
+  ],
 })
 export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent implements OnInit {
   @Input() public title!: string;

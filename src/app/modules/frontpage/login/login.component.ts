@@ -16,10 +16,23 @@ import { ButtonComponent } from '../../../shared/components/buttons/button/butto
 import { ResetPasswordTextLinkComponent } from '../reset-password-text-link/reset-password-text-link.component';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss'],
-    imports: [FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, SsoButtonComponent, NgIf, SsoErrorComponent, ParagraphComponent, TextBoxComponent, CheckboxComponent, ButtonComponent, ResetPasswordTextLinkComponent, AsyncPipe]
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss'],
+  imports: [
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    SsoButtonComponent,
+    NgIf,
+    SsoErrorComponent,
+    ParagraphComponent,
+    TextBoxComponent,
+    CheckboxComponent,
+    ButtonComponent,
+    ResetPasswordTextLinkComponent,
+    AsyncPipe,
+  ],
 })
 export class LoginComponent {
   public readonly loginForm = new FormGroup({

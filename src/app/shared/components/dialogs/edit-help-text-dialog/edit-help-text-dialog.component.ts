@@ -44,7 +44,7 @@ export class EditHelpTextDialogComponent implements OnInit {
   constructor(
     private readonly dialogRef: MatDialogRef<EditHelpTextDialogComponent>,
     private store: Store,
-    private rootUrlResolver: AppRootUrlResolverService
+    private rootUrlResolver: AppRootUrlResolverService,
   ) {
     this.rootUrl = this.rootUrlResolver.resolveRootUrl();
   }

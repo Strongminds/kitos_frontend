@@ -15,10 +15,19 @@ import { DialogActionsComponent } from '../../../../../shared/components/dialogs
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-fk-org-delete-dialog',
-    templateUrl: './fk-org-delete-dialog.component.html',
-    styleUrl: './fk-org-delete-dialog.component.scss',
-    imports: [DialogComponent, NgIf, StandardVerticalContentGridComponent, ParagraphComponent, LoadingComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-fk-org-delete-dialog',
+  templateUrl: './fk-org-delete-dialog.component.html',
+  styleUrl: './fk-org-delete-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    NgIf,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    LoadingComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class FkOrgDeleteDialogComponent extends BaseComponent implements OnInit {
   public readonly isDeleteLoading$ = this.store.select(selectIsDeleteLoading);
@@ -26,7 +35,7 @@ export class FkOrgDeleteDialogComponent extends BaseComponent implements OnInit 
   constructor(
     private readonly store: Store,
     private readonly actions$: Actions,
-    private readonly dialog: MatDialogRef<FkOrgDeleteDialogComponent>
+    private readonly dialog: MatDialogRef<FkOrgDeleteDialogComponent>,
   ) {
     super();
   }
@@ -36,7 +45,7 @@ export class FkOrgDeleteDialogComponent extends BaseComponent implements OnInit 
       this.actions$.pipe(ofType(FkOrgActions.deleteConnectionSuccess)).subscribe(() => {
         this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
         this.cancel();
-      })
+      }),
     );
   }
 

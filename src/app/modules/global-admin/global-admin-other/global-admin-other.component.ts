@@ -14,10 +14,18 @@ export enum GlobalAdminOtherSegmentOptionType {
 }
 
 @Component({
-    selector: 'app-global-admin-other',
-    templateUrl: './global-admin-other.component.html',
-    styleUrl: './global-admin-other.component.scss',
-    imports: [SegmentComponent, NgIf, GlobalAdminOtherUserShutdownComponent, GlobalAdminSystemIntegratorsComponent, GlobalAdminOtherApiUsersComponent, GlobalAdminOtherKleComponent, GlobalAdminOtherBrokenLinksComponent]
+  selector: 'app-global-admin-other',
+  templateUrl: './global-admin-other.component.html',
+  styleUrl: './global-admin-other.component.scss',
+  imports: [
+    SegmentComponent,
+    NgIf,
+    GlobalAdminOtherUserShutdownComponent,
+    GlobalAdminSystemIntegratorsComponent,
+    GlobalAdminOtherApiUsersComponent,
+    GlobalAdminOtherKleComponent,
+    GlobalAdminOtherBrokenLinksComponent,
+  ],
 })
 export class GlobalAdminOtherComponent {
   public readonly SegmentType = GlobalAdminOtherSegmentOptionType;

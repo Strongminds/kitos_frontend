@@ -26,11 +26,23 @@ import { DialogActionsComponent } from '../../../../../shared/components/dialogs
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-create-organization-dialog',
-    templateUrl: './create-organization-dialog.component.html',
-    styleUrl: './create-organization-dialog.component.scss',
-    providers: [OrganizationsDialogComponentStore],
-    imports: [DialogComponent, NgIf, LoadingComponent, StandardVerticalContentGridComponent, TextBoxComponent, FormsModule, ReactiveFormsModule, DropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-create-organization-dialog',
+  templateUrl: './create-organization-dialog.component.html',
+  styleUrl: './create-organization-dialog.component.scss',
+  providers: [OrganizationsDialogComponentStore],
+  imports: [
+    DialogComponent,
+    NgIf,
+    LoadingComponent,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   public readonly organizationTypeOptions = organizationTypeOptions;
@@ -47,7 +59,7 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
     private dialogRef: MatDialogRef<CreateOrganizationDialogComponent>,
     private store: Store,
     private actions$: Actions,
-    componentStore: OrganizationsDialogComponentStore
+    componentStore: OrganizationsDialogComponentStore,
   ) {
     super(componentStore);
   }

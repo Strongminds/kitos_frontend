@@ -11,7 +11,7 @@ describe('global-admin-local-admins', () => {
   it('Can add local admin', () => {
     cy.intercept('api/v2/internal/users/search', { fixture: './global-admin/users.json' }).as('users');
     cy.intercept('api/v2/organizations', { fixture: './organizations/organizations-multiple.json' }).as(
-      'organizations'
+      'organizations',
     );
 
     cy.contains('Opret lokal administrator').click();

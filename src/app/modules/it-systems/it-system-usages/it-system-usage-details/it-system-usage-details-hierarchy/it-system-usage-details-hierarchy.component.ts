@@ -7,10 +7,10 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { ItSystemHierarchyTableComponent } from '../../../shared/it-system-hierarchy-table/it-system-hierarchy-table.component';
 
 @Component({
-    selector: 'app-it-system-usage-details-hierarchy',
-    templateUrl: './it-system-usage-details-hierarchy.component.html',
-    styleUrls: ['./it-system-usage-details-hierarchy.component.scss'],
-    imports: [NgIf, ItSystemHierarchyTableComponent, AsyncPipe]
+  selector: 'app-it-system-usage-details-hierarchy',
+  templateUrl: './it-system-usage-details-hierarchy.component.html',
+  styleUrls: ['./it-system-usage-details-hierarchy.component.scss'],
+  imports: [NgIf, ItSystemHierarchyTableComponent, AsyncPipe],
 })
 export class ItSystemUsageDetailsHierarchyComponent extends BaseComponent {
   public readonly systemUuid$ = this.store.select(selectItSystemUsageContextSystemUuid).pipe(filterNullish());

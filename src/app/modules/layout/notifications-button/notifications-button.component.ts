@@ -15,10 +15,10 @@ import { NotificationIconComponent } from '../../../shared/components/icons/noti
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-notifications-button',
-    templateUrl: './notifications-button.component.html',
-    styleUrl: './notifications-button.component.scss',
-    imports: [ButtonComponent, RouterLinkActive, MatBadge, RouterLink, NotificationIconComponent, AsyncPipe]
+  selector: 'app-notifications-button',
+  templateUrl: './notifications-button.component.html',
+  styleUrl: './notifications-button.component.scss',
+  imports: [ButtonComponent, RouterLinkActive, MatBadge, RouterLink, NotificationIconComponent, AsyncPipe],
 })
 export class NotificationsButtonComponent {
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
@@ -27,7 +27,10 @@ export class NotificationsButtonComponent {
   private readonly itContractsEnabled$ = this.store.select(selectShowItContractModule);
   private readonly dataProcessingEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
-  constructor(private store: Store, private router: Router) {}
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {}
 
   public getFullRoute$(): Observable<string> {
     return this.getSubRoute$().pipe(map((route) => `notifications/${route}`));
@@ -69,7 +72,7 @@ export class NotificationsButtonComponent {
         if (itContractsEnabled) return AppPath.itContracts;
         if (dataProcessingEnabled) return AppPath.dataProcessing;
         return AppPath.root;
-      })
+      }),
     );
   }
 }

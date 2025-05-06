@@ -48,12 +48,15 @@ export class PublicMessageComponent implements OnInit {
 
   public readonly statusDisplayType = BooleanValueDisplayType.NormalUnstable;
 
-  constructor(private dialog: MatDialog, private readonly componentStore: FrontpageComponentStore) {}
+  constructor(
+    private dialog: MatDialog,
+    private readonly componentStore: FrontpageComponentStore,
+  ) {}
 
   ngOnInit(): void {
     // Initialize publicMessage$ by filtering publicMessages$ for the message with the matching UUID
     this.publicMessage$ = this.publicMessages$.pipe(
-      map((messages) => messages.find((message) => message.uuid === this.publicMessageUuid)!)
+      map((messages) => messages.find((message) => message.uuid === this.publicMessageUuid)!),
     );
   }
 

@@ -6,21 +6,17 @@ import { HALF_SECOND_IN_MILLISECONDS } from '../../constants/constants';
 import { AppRootUrlResolverService } from '../../services/app-root-url-resolver.service';
 
 @Component({
-    selector: 'app-rich-text-editor',
-    templateUrl: './rich-text-editor.component.html',
-    styleUrl: './rich-text-editor.component.scss',
-    providers: [
-        {
-            provide: NG_VALUE_ACCESSOR,
-            useExisting: forwardRef(() => RichTextEditorComponent),
-            multi: true,
-        },
-    ],
-    imports: [
-        EditorComponent,
-        FormsModule,
-        ReactiveFormsModule,
-    ],
+  selector: 'app-rich-text-editor',
+  templateUrl: './rich-text-editor.component.html',
+  styleUrl: './rich-text-editor.component.scss',
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => RichTextEditorComponent),
+      multi: true,
+    },
+  ],
+  imports: [EditorComponent, FormsModule, ReactiveFormsModule],
 })
 export class RichTextEditorComponent implements AfterViewInit {
   @Input() formControl!: FormControl;

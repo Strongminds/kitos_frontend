@@ -16,16 +16,20 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { LocalGridComponent } from '../../../../shared/components/local-grid/local-grid.component';
 
 @Component({
-    selector: 'app-global-admin-local-admins-grid',
-    templateUrl: './global-admin-local-admins-grid.component.html',
-    styleUrl: './global-admin-local-admins-grid.component.scss',
-    imports: [OverviewHeaderComponent, ButtonComponent, ExportIconComponent, NgIf, LocalGridComponent, AsyncPipe]
+  selector: 'app-global-admin-local-admins-grid',
+  templateUrl: './global-admin-local-admins-grid.component.html',
+  styleUrl: './global-admin-local-admins-grid.component.scss',
+  imports: [OverviewHeaderComponent, ButtonComponent, ExportIconComponent, NgIf, LocalGridComponent, AsyncPipe],
 })
 export class GlobalAdminLocalAdminsGridComponent {
   public readonly localAdmins$ = this.store.select(selectAllLocalAdmins);
   public readonly isLoading$ = this.store.select(selectLocalAdminsLoading);
 
-  constructor(private dialog: MatDialog, private store: Store, private confirmActionService: ConfirmActionService) {}
+  constructor(
+    private dialog: MatDialog,
+    private store: Store,
+    private confirmActionService: ConfirmActionService,
+  ) {}
 
   public readonly gridColumns: GridColumn[] = [
     {

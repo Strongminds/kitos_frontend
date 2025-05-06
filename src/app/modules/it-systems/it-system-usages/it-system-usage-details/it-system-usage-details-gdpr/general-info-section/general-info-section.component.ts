@@ -30,10 +30,21 @@ import { DropdownComponent } from '../../../../../../shared/components/dropdowns
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
-    selector: 'app-general-info-section',
-    templateUrl: './general-info-section.component.html',
-    styleUrls: ['./general-info-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
-    imports: [CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, NgIf, TextBoxComponent, DropdownComponent, EditUrlSectionComponent, AsyncPipe]
+  selector: 'app-general-info-section',
+  templateUrl: './general-info-section.component.html',
+  styleUrls: ['./general-info-section.component.scss', '../it-system-usage-details-gdpr.component.scss'],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    NgIf,
+    TextBoxComponent,
+    DropdownComponent,
+    EditUrlSectionComponent,
+    AsyncPipe,
+  ],
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
   @Input() disableLinkControl!: Observable<void>;
@@ -49,7 +60,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
       businessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       hostedAt: new FormControl<HostedAt | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
   public disableDirectoryDocumentationControl = false;
 
@@ -58,7 +69,10 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+  constructor(
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -70,7 +84,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
           businessCritical: mapToYesNoDontKnowEnum(gdpr.businessCritical),
           hostedAt: mapHostedAt(gdpr.hostedAt),
         });
-      })
+      }),
     );
 
     this.noPermissions.emit([this.generalInformationForm]);

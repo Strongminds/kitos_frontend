@@ -80,7 +80,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         routerLink: `${systemUuid}`,
       },
     ]),
-    filterNullish()
+    filterNullish(),
   );
 
   public readonly navigationItems: NavigationDrawerItem[] = [
@@ -114,7 +114,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     private actions$: Actions,
     private dialog: MatDialog,
     private dialogOpenerService: DialogOpenerService,
-    private componentStore: ITSystemCatalogDetailsComponentStore
+    private componentStore: ITSystemCatalogDetailsComponentStore,
   ) {
     super();
   }
@@ -147,7 +147,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
           if (result === true) {
             this.store.dispatch(ITSystemActions.patchITSystem({ deactivated: shouldBeDisabled }));
           }
-        })
+        }),
     );
   }
 
@@ -173,9 +173,9 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
                 return;
               }
               this.tryTakeOutOfUse(result, systemUuid);
-            })
+            }),
         );
-      })
+      }),
     );
   }
 
@@ -206,7 +206,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
           if (result === true) {
             this.store.dispatch(ITSystemActions.deleteITSystem());
           }
-        })
+        }),
     );
   }
 
@@ -226,7 +226,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
       }
 
       return text;
-    })
+    }),
   );
 
   private subscribeToUuidNavigation(): void {
@@ -234,13 +234,13 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
       this.route.params
         .pipe(
           map((params) => params['uuid']),
-          distinctUntilChanged() //Ensures we get changes if navigation occurs between systems
+          distinctUntilChanged(), //Ensures we get changes if navigation occurs between systems
         )
         .subscribe((itSystemUuid) => {
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
           this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
           this.store.dispatch(ITSystemUsageActions.getITSystemUsageCollectionPermissions());
-        })
+        }),
     );
   }
 
@@ -253,7 +253,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til dette IT System`);
           this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
-        })
+        }),
     );
   }
 
@@ -263,7 +263,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
       this.actions$.pipe(ofType(ITSystemActions.getITSystemError)).subscribe(() => {
         this.notificationService.showError($localize`IT System findes ikke`);
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
-      })
+      }),
     );
   }
 
@@ -273,19 +273,19 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .pipe(
           ofType(
             ITSystemUsageActions.createItSystemUsageSuccess,
-            ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess
-          )
+            ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess,
+          ),
         )
         .subscribe(({ itSystemUuid }) => {
           this.store.dispatch(ITSystemActions.getITSystem(itSystemUuid));
           this.store.dispatch(ITSystemActions.getITSystemPermissions(itSystemUuid));
-        })
+        }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.deleteITSystemSuccess)).subscribe(() => {
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemCatalog}`]);
-      })
+      }),
     );
   }
 
@@ -295,7 +295,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         .pipe(ofType(ITSystemUsageActions.createItSystemUsageSuccess))
         .subscribe(({ itSystemUuid: _, usageUuid }) => {
           this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}/${usageUuid}`]);
-        })
+        }),
     );
   }
 }

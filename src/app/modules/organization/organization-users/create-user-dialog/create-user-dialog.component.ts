@@ -1,5 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  AbstractControl,
+  FormControl,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -32,11 +40,29 @@ import { DialogActionsComponent } from '../../../../shared/components/dialogs/di
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-create-user-dialog',
-    templateUrl: './create-user-dialog.component.html',
-    styleUrl: './create-user-dialog.component.scss',
-    providers: [CreateUserDialogComponentStore],
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, TooltipComponent, DropdownComponent, MultiSelectDropdownComponent, SlideToggleComponent, DividerComponent, VerticalContentGridSectionMarginLeftComponent, CheckboxComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-create-user-dialog',
+  templateUrl: './create-user-dialog.component.html',
+  styleUrl: './create-user-dialog.component.scss',
+  providers: [CreateUserDialogComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    TooltipComponent,
+    DropdownComponent,
+    MultiSelectDropdownComponent,
+    SlideToggleComponent,
+    DividerComponent,
+    VerticalContentGridSectionMarginLeftComponent,
+    CheckboxComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   public readonly noExistingUser$ = this.componentStore.noUserInOtherOrgs$;
@@ -66,7 +92,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
   });
 
   public readonly userInOtherOrgHelptext$ = this.noExistingUser$.pipe(
-    map((noExistingUser) => (noExistingUser ? '' : this.userInOtherOrgHelptext))
+    map((noExistingUser) => (noExistingUser ? '' : this.userInOtherOrgHelptext)),
   );
   private readonly userInOtherOrgHelptext = $localize`Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.`;
   private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
@@ -76,7 +102,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
     private readonly dialog: MatDialogRef<CreateUserDialogComponent>,
     store: Store,
     componentStore: CreateUserDialogComponentStore,
-    userService: UserService
+    userService: UserService,
   ) {
     super(store, componentStore, userService);
   }
@@ -86,14 +112,14 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       this.actions$
         .pipe(
           ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess),
-          concatLatestFrom(() => this.store.select(selectUserUuid))
+          concatLatestFrom(() => this.store.select(selectUserUuid)),
         )
         .subscribe(([{ user }, userUuid]) => {
           if (user.uuid === userUuid) {
             this.store.dispatch(UserActions.authenticate());
           }
           this.onCancel();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -103,7 +129,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
           if (!value) return;
 
           this.componentStore.getUserWithEmail(value);
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -113,7 +139,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
         } else {
           this.getEmailControl()?.setErrors(null);
         }
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -125,7 +151,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
         } else {
           this.createForm.enable();
         }
-      })
+      }),
     );
 
     this.createForm.get('email')?.valueChanges.subscribe(() => {

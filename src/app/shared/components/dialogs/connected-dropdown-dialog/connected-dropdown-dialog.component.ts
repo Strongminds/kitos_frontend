@@ -14,10 +14,20 @@ import { DialogActionsComponent } from '../dialog-actions/dialog-actions.compone
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-connected-dropdown-dialog',
-    templateUrl: './connected-dropdown-dialog.component.html',
-    styleUrl: './connected-dropdown-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, NgIf, ParagraphComponent, ConnectedDropdownComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-connected-dropdown-dialog',
+  templateUrl: './connected-dropdown-dialog.component.html',
+  styleUrl: './connected-dropdown-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    ParagraphComponent,
+    ConnectedDropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class ConnectedDropdownDialogComponent<T> extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -27,7 +37,7 @@ export class ConnectedDropdownDialogComponent<T> extends BaseComponent implement
   @Input() public successActionType!: string;
   @Input() public errorActionType!: string;
   @Input() public nested: boolean = false;
-  @Input() public confirmButtonText = $localize`Tilføj`
+  @Input() public confirmButtonText = $localize`Tilføj`;
   @Input() public enableRepeatConfirmWithSameData = false;
   @Input() public description?: string;
   @Output() public save = new EventEmitter<APIIdentityNamePairResponseDTO>();
@@ -41,7 +51,7 @@ export class ConnectedDropdownDialogComponent<T> extends BaseComponent implement
 
   constructor(
     private readonly actions$: Actions,
-    private readonly dialogRef: MatDialogRef<ConnectedDropdownDialogComponent<T>>
+    private readonly dialogRef: MatDialogRef<ConnectedDropdownDialogComponent<T>>,
   ) {
     super();
   }

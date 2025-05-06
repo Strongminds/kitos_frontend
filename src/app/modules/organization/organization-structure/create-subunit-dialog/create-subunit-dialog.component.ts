@@ -14,10 +14,20 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-create-subunit-dialog',
-    templateUrl: './create-subunit-dialog.component.html',
-    styleUrl: './create-subunit-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NumericInputComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-create-subunit-dialog',
+  templateUrl: './create-subunit-dialog.component.html',
+  styleUrl: './create-subunit-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NumericInputComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateSubunitDialogComponent {
   @Input() parentUnitUuid$!: Observable<string>;
@@ -32,7 +42,10 @@ export class CreateSubunitDialogComponent {
     localId: new FormControl<string | undefined>(undefined, Validators.maxLength(STRING_FIELD_MAX_LENGTH)),
   });
 
-  constructor(private dialogRef: MatDialogRef<CreateSubunitDialogComponent>, private store: Store) {}
+  constructor(
+    private dialogRef: MatDialogRef<CreateSubunitDialogComponent>,
+    private store: Store,
+  ) {}
 
   public onCreate(): void {
     this.createSubunit();
@@ -55,7 +68,7 @@ export class CreateSubunitDialogComponent {
           name,
           ean: ean ?? undefined,
           localId: localId ?? undefined,
-        })
+        }),
       );
     });
   }

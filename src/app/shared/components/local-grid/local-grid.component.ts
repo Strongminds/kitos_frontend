@@ -105,7 +105,10 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   public readonly defaultMinimumDateColumnWidth = DEFAULT_DATE_COLUMN_MINIMUM_WIDTH;
   public readonly defaultPrimaryColumnMinimumWidth = DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH;
 
-  constructor(private actions$: Actions, private readonly gridExportService: GridExportService) {
+  constructor(
+    private actions$: Actions,
+    private readonly gridExportService: GridExportService,
+  ) {
     super();
     this.allData = this.allData.bind(this);
   }

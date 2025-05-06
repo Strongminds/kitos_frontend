@@ -19,10 +19,21 @@ import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-acti
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-global-option-type-dialog',
-    templateUrl: './global-option-type-dialog.component.html',
-    styleUrl: './global-option-type-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, CheckboxComponent, NgIf, TextAreaComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-global-option-type-dialog',
+  templateUrl: './global-option-type-dialog.component.html',
+  styleUrl: './global-option-type-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    CheckboxComponent,
+    NgIf,
+    TextAreaComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class GlobalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: GlobalAdminOptionTypeItem;
@@ -36,7 +47,10 @@ export class GlobalOptionTypeDialogComponent implements OnInit {
     writeAccess: new FormControl<boolean | undefined>(undefined),
   });
 
-  constructor(private dialogRef: MatDialogRef<GlobalOptionTypeDialogComponent>, private store: Store) {}
+  constructor(
+    private dialogRef: MatDialogRef<GlobalOptionTypeDialogComponent>,
+    private store: Store,
+  ) {}
 
   public ngOnInit(): void {
     if (this.isEditDialog()) {

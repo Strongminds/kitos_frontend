@@ -5,10 +5,10 @@ import { AccordionComponent } from '../../../../../../shared/components/accordio
 import { InnerConflictTableComponent } from './inner-conflict-table/inner-conflict-table.component';
 
 @Component({
-    selector: 'app-removal-conflict-table',
-    templateUrl: './removal-conflict-table.component.html',
-    styleUrl: './removal-conflict-table.component.scss',
-    imports: [NgIf, AccordionComponent, InnerConflictTableComponent, AsyncPipe]
+  selector: 'app-removal-conflict-table',
+  templateUrl: './removal-conflict-table.component.html',
+  styleUrl: './removal-conflict-table.component.scss',
+  imports: [NgIf, AccordionComponent, InnerConflictTableComponent, AsyncPipe],
 })
 export class RemovalConflictTableComponent {
   @Input() public removalConflicts$!: Observable<RemovalConflict[]>;

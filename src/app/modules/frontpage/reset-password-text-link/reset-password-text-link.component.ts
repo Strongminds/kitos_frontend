@@ -4,10 +4,10 @@ import { ParagraphComponent } from '../../../shared/components/paragraph/paragra
 import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-reset-password-text-link',
-    templateUrl: './reset-password-text-link.component.html',
-    styleUrl: './reset-password-text-link.component.scss',
-    imports: [ParagraphComponent, RouterLink]
+  selector: 'app-reset-password-text-link',
+  templateUrl: './reset-password-text-link.component.html',
+  styleUrl: './reset-password-text-link.component.scss',
+  imports: [ParagraphComponent, RouterLink],
 })
 export class ResetPasswordTextLinkComponent {
   public readonly routerLink = AppPath.passwordReset;

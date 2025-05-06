@@ -13,10 +13,10 @@ enum NotificationSegmentType {
 }
 
 @Component({
-    selector: 'app-notifications-page',
-    templateUrl: './notifications-page.component.html',
-    styleUrl: './notifications-page.component.scss',
-    imports: [SegmentComponent, CardComponent, NgIf, NotificationsGridComponent, AlertsGridComponent]
+  selector: 'app-notifications-page',
+  templateUrl: './notifications-page.component.html',
+  styleUrl: './notifications-page.component.scss',
+  imports: [SegmentComponent, CardComponent, NgIf, NotificationsGridComponent, AlertsGridComponent],
 })
 export class NotificationsPageComponent {
   @Input() entityType!: RegistrationEntityTypes;

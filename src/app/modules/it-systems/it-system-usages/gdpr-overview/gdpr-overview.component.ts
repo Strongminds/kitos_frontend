@@ -16,10 +16,10 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { LocalGridComponent } from '../../../../shared/components/local-grid/local-grid.component';
 
 @Component({
-    selector: 'app-gdpr-overview',
-    templateUrl: './gdpr-overview.component.html',
-    styleUrl: './gdpr-overview.component.scss',
-    imports: [NgIf, LocalGridComponent, AsyncPipe]
+  selector: 'app-gdpr-overview',
+  templateUrl: './gdpr-overview.component.html',
+  styleUrl: './gdpr-overview.component.scss',
+  imports: [NgIf, LocalGridComponent, AsyncPipe],
 })
 export class GdprOverviewComponent {
   private readonly gridColumns: GridColumn[] = [
@@ -197,12 +197,15 @@ export class GdprOverviewComponent {
   ];
 
   public readonly filteredGridColumns$ = of(this.gridColumns).pipe(
-    this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.Gdpr)
+    this.uiConfigService.filterGridColumnsByUIConfig(UIModuleConfigKey.Gdpr),
   );
 
   public readonly gdprReports$ = this.store.select(selectGdprReports);
 
-  constructor(private store: Store, private uiConfigService: GridUIConfigService) {
+  constructor(
+    private store: Store,
+    private uiConfigService: GridUIConfigService,
+  ) {
     this.store.dispatch(GdprReportActions.getGDPRReports());
   }
 

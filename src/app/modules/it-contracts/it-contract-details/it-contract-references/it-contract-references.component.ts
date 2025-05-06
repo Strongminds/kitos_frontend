@@ -8,10 +8,10 @@ import { ExternalReferencesManagementComponent } from '../../../../shared/compon
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-it-contract-references',
-    templateUrl: './it-contract-references.component.html',
-    styleUrl: './it-contract-references.component.scss',
-    imports: [CardComponent, CardHeaderComponent, ExternalReferencesManagementComponent, AsyncPipe]
+  selector: 'app-it-contract-references',
+  templateUrl: './it-contract-references.component.html',
+  styleUrl: './it-contract-references.component.scss',
+  imports: [CardComponent, CardHeaderComponent, ExternalReferencesManagementComponent, AsyncPipe],
 })
 export class ItContractReferencesComponent extends BaseComponent {
   public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);

@@ -7,9 +7,16 @@ import { OrangeCircleNumberIconComponent } from '../../../../icons/orange-circle
 import { GreenCircleNumberIconComponent } from '../../../../icons/green-circle-with-number-icon.component';
 
 @Component({
-    selector: 'app-audit-cell',
-    templateUrl: './audit-cell.component.html',
-    styleUrl: './audit-cell.component.scss',
-    imports: [NgIf, NgFor, WhiteCircleNumberIconComponent, RedCircleNumberIconComponent, OrangeCircleNumberIconComponent, GreenCircleNumberIconComponent]
+  selector: 'app-audit-cell',
+  templateUrl: './audit-cell.component.html',
+  styleUrl: './audit-cell.component.scss',
+  imports: [
+    NgIf,
+    NgFor,
+    WhiteCircleNumberIconComponent,
+    RedCircleNumberIconComponent,
+    OrangeCircleNumberIconComponent,
+    GreenCircleNumberIconComponent,
+  ],
 })
 export class AuditCellComponent extends BaseCellComponent {}

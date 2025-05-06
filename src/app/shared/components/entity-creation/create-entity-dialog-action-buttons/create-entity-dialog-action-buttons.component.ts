@@ -3,10 +3,10 @@ import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-acti
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-create-entity-dialog-action-buttons',
-    templateUrl: './create-entity-dialog-action-buttons.component.html',
-    styleUrl: './create-entity-dialog-action-buttons.component.scss',
-    imports: [DialogActionsComponent, ButtonComponent],
+  selector: 'app-create-entity-dialog-action-buttons',
+  templateUrl: './create-entity-dialog-action-buttons.component.html',
+  styleUrl: './create-entity-dialog-action-buttons.component.scss',
+  imports: [DialogActionsComponent, ButtonComponent],
 })
 export class CreateEntityDialogActionButtonsComponent {
   @Input() public alreadyExists!: boolean | null;

@@ -24,10 +24,23 @@ import { DialogActionsComponent } from '../../../../shared/components/dialogs/di
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-edit-public-message-dialog',
-    templateUrl: './edit-public-message-dialog.component.html',
-    styleUrl: './edit-public-message-dialog.component.scss',
-    imports: [ScrollbarDialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, DropdownComponent, TextAreaComponent, RichTextEditorComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-edit-public-message-dialog',
+  templateUrl: './edit-public-message-dialog.component.html',
+  styleUrl: './edit-public-message-dialog.component.scss',
+  imports: [
+    ScrollbarDialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    DropdownComponent,
+    TextAreaComponent,
+    RichTextEditorComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class EditPublicMessageDialogComponent extends BaseComponent implements OnInit {
   @Input() publicMessage!: PublicMessage;
@@ -59,7 +72,7 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
   constructor(
     private store: Store,
     private actions$: Actions,
-    private dialogRef: MatDialogRef<EditPublicMessageDialogComponent>
+    private dialogRef: MatDialogRef<EditPublicMessageDialogComponent>,
   ) {
     super();
   }
@@ -68,13 +81,13 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
     this.subscriptions.add(
       this.actions$.pipe(ofType(GlobalAdminPublicMessageActions.editPublicMessagesSuccess)).subscribe(() => {
         this.close();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.formGroup.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe((url) => {
         this.showUrlError = !isUrlEmptyOrValid(url ?? undefined);
-      })
+      }),
     );
 
     const maxLength = this.publicMessage.isMain ? this.maxMainDescriptionLength : this.maxDefaultDescriptionLength;

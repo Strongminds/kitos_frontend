@@ -89,7 +89,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     private openerService: DialogOpenerService,
     componentStore: CreateUserDialogComponentStore,
     store: Store,
-    userService: UserService
+    userService: UserService,
   ) {
     super(store, componentStore, userService);
   }
@@ -115,7 +115,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
           if (!value) return;
 
           this.componentStore.getUserWithEmail(value);
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -125,7 +125,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
         } else {
           this.getEmailControl()?.setErrors(null);
         }
-      })
+      }),
     );
     const initialValues = this.getUserRoleChoices();
     this.selectedRoles = initialValues.map((role) => role.value);
@@ -142,7 +142,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     this.subscriptions.add(
       this.store.select(OrganizationUserActions.updateUserSuccess).subscribe(() => {
         this.dialogRef.close();
-      })
+      }),
     );
     const request = this.createRequest();
     this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
@@ -244,7 +244,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
   private addNonSelectableRoles(
     roles: APIUpdateUserRequestDTO.RolesEnum[],
-    shouldRightsHolderAccessBeAdded: boolean
+    shouldRightsHolderAccessBeAdded: boolean,
   ): APIUpdateUserRequestDTO.RolesEnum[] {
     roles.push(APIUpdateUserRequestDTO.RolesEnum.User);
     if (shouldRightsHolderAccessBeAdded) {

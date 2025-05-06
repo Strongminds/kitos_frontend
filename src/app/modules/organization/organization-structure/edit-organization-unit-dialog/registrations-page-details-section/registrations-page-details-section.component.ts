@@ -15,10 +15,21 @@ import { IconButtonComponent } from '../../../../../shared/components/buttons/ic
 import { TrashcanIconComponent } from '../../../../../shared/components/icons/trashcan-icon.component';
 
 @Component({
-    selector: 'app-registrations-page-details-section',
-    templateUrl: './registrations-page-details-section.component.html',
-    styleUrl: './registrations-page-details-section.component.scss',
-    imports: [AccordionComponent, NativeTableComponent, CheckboxComponent, NgFor, ContentSpaceBetweenComponent, DetailsPageLinkComponent, NgIf, IconButtonComponent, TrashcanIconComponent, AsyncPipe]
+  selector: 'app-registrations-page-details-section',
+  templateUrl: './registrations-page-details-section.component.html',
+  styleUrl: './registrations-page-details-section.component.scss',
+  imports: [
+    AccordionComponent,
+    NativeTableComponent,
+    CheckboxComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    DetailsPageLinkComponent,
+    NgIf,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    AsyncPipe,
+  ],
 })
 export class RegistrationsPageDetailsSectionComponent extends RegistrationBaseComponent<APINamedEntityWithEnabledStatusDTO> {
   @Input() public registrations$!: Observable<Array<RegistrationModel<APINamedEntityV2DTO>>>;

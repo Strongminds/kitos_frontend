@@ -26,10 +26,22 @@ import { LocalGridComponent } from '../../../../../shared/components/local-grid/
 import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
 
 @Component({
-    selector: 'app-fk-org-changelog',
-    templateUrl: './fk-org-changelog.component.html',
-    styleUrl: './fk-org-changelog.component.scss',
-    imports: [AccordionComponent, StandardVerticalContentGridComponent, ParagraphComponent, DropdownComponent, NgIf, NativeTableComponent, ButtonComponent, ExportIconComponent, LocalGridComponent, AsyncPipe, AppDatePipe]
+  selector: 'app-fk-org-changelog',
+  templateUrl: './fk-org-changelog.component.html',
+  styleUrl: './fk-org-changelog.component.scss',
+  imports: [
+    AccordionComponent,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    DropdownComponent,
+    NgIf,
+    NativeTableComponent,
+    ButtonComponent,
+    ExportIconComponent,
+    LocalGridComponent,
+    AsyncPipe,
+    AppDatePipe,
+  ],
 })
 export class FkOrgChangelogComponent implements OnInit {
   public readonly isLoadingChangelogs$ = this.store.select(selectIsLoadingChangelogs);
@@ -39,7 +51,7 @@ export class FkOrgChangelogComponent implements OnInit {
   public readonly selectedChangelogDate$ = new BehaviorSubject<string | undefined>(undefined);
   public readonly selectedChangelog$ = this.selectedChangelogDate$.pipe(
     combineLatestWith(this.changelogDictionary$),
-    map(([date, changelogs]) => (date ? changelogs[date] : undefined))
+    map(([date, changelogs]) => (date ? changelogs[date] : undefined)),
   );
 
   constructor(private store: Store) {}

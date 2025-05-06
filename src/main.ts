@@ -21,7 +21,7 @@ bootstrapApplication(AppComponent, {
       ApiV1Module.forRoot(apiConfigV1Factory),
       ApiV2Module.forRoot(apiConfigV2Factory),
       GridModule,
-      ExcelModule
+      ExcelModule,
     ),
     provideHttpClient(withInterceptorsFromDi()),
     provideAnimations(),

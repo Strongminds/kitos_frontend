@@ -4,10 +4,10 @@ import { NativeTableComponent } from '../../../../../../../shared/components/nat
 import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-inner-conflict-table',
-    templateUrl: './inner-conflict-table.component.html',
-    styleUrl: './inner-conflict-table.component.scss',
-    imports: [NativeTableComponent, NgIf, NgFor]
+  selector: 'app-inner-conflict-table',
+  templateUrl: './inner-conflict-table.component.html',
+  styleUrl: './inner-conflict-table.component.scss',
+  imports: [NativeTableComponent, NgIf, NgFor],
 })
 export class InnerConflictTableComponent {
   @Input() public removalConflicts!: RemovalConflict[];

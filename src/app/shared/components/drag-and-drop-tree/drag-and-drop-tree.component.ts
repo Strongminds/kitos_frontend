@@ -17,10 +17,23 @@ interface DropInfo {
 }
 
 @Component({
-    selector: 'app-drag-and-drop-tree[nodes][itemType]',
-    templateUrl: './drag-and-drop-tree.component.html',
-    styleUrls: ['./drag-and-drop-tree.component.scss'],
-    imports: [NgClass, NgIf, ChevronDownIconComponent, ChevronRightIconComponent, CheckboxComponent, DetailsPageLinkComponent, DragIconComponent, CdkDragHandle, CdkDropList, NgFor, CdkDrag, NgTemplateOutlet]
+  selector: 'app-drag-and-drop-tree[nodes][itemType]',
+  templateUrl: './drag-and-drop-tree.component.html',
+  styleUrls: ['./drag-and-drop-tree.component.scss'],
+  imports: [
+    NgClass,
+    NgIf,
+    ChevronDownIconComponent,
+    ChevronRightIconComponent,
+    CheckboxComponent,
+    DetailsPageLinkComponent,
+    DragIconComponent,
+    CdkDragHandle,
+    CdkDropList,
+    NgFor,
+    CdkDrag,
+    NgTemplateOutlet,
+  ],
 })
 export class DragAndDropTreeComponent<T> implements OnInit {
   public toggleStatusText = 'status';
@@ -47,7 +60,10 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
   private readonly nodeStandardColor = 'standard';
 
-  constructor(@Inject(DOCUMENT) private document: Document, private router: Router) {}
+  constructor(
+    @Inject(DOCUMENT) private document: Document,
+    private router: Router,
+  ) {}
 
   ngOnInit(): void {
     this.prepareDragDrop(this.nodes);

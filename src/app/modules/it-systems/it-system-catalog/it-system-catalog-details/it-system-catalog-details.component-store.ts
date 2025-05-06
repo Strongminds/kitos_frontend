@@ -19,7 +19,7 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object>
 
   constructor(
     @Inject(APIV2ItSystemUsageService) private apiItSystemUsageService: APIV2ItSystemUsageService,
-    private store: Store
+    private store: Store,
   ) {
     super();
   }
@@ -41,10 +41,10 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object>
                 const usageUuid = usage.uuid;
                 this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(usageUuid));
               },
-              (e) => console.error(e)
-            )
-          )
-      )
-    )
+              (e) => console.error(e),
+            ),
+          ),
+      ),
+    ),
   );
 }

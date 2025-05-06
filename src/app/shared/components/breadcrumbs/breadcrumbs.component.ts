@@ -5,10 +5,10 @@ import { NgIf, NgFor } from '@angular/common';
 import { BreadcrumbComponent } from '../breadcrumb/breadcrumb.component';
 
 @Component({
-    selector: 'app-breadcrumbs',
-    templateUrl: 'breadcrumbs.component.html',
-    styleUrls: ['breadcrumbs.component.scss'],
-    imports: [NgIf, NgFor, BreadcrumbComponent]
+  selector: 'app-breadcrumbs',
+  templateUrl: 'breadcrumbs.component.html',
+  styleUrls: ['breadcrumbs.component.scss'],
+  imports: [NgIf, NgFor, BreadcrumbComponent],
 })
 export class BreadcrumbsComponent {
   public breadCrumbs?: { item: BreadCrumb; context: BreadCrumbContext }[];

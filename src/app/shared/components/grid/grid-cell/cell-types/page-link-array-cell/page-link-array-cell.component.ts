@@ -6,9 +6,9 @@ import { DetailsPageLinkWithTooltipComponent } from '../../../../details-page-li
 import { DetailsPageLinkComponent } from '../../../../details-page-link/details-page-link.component';
 
 @Component({
-    selector: 'app-page-link-array-cell',
-    templateUrl: './page-link-array-cell.component.html',
-    styleUrl: './page-link-array-cell.component.scss',
-    imports: [ParagraphComponent, NgIf, NgFor, DetailsPageLinkWithTooltipComponent, DetailsPageLinkComponent]
+  selector: 'app-page-link-array-cell',
+  templateUrl: './page-link-array-cell.component.html',
+  styleUrl: './page-link-array-cell.component.scss',
+  imports: [ParagraphComponent, NgIf, NgFor, DetailsPageLinkWithTooltipComponent, DetailsPageLinkComponent],
 })
 export class PageLinkArrayCellComponent extends BaseCellComponent {}

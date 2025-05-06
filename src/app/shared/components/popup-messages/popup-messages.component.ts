@@ -7,10 +7,10 @@ import { NgFor, AsyncPipe } from '@angular/common';
 import { PopupMessageComponent } from '../popup-message/popup-message.component';
 
 @Component({
-    selector: 'app-popup-messages',
-    templateUrl: './popup-messages.component.html',
-    styleUrls: ['./popup-messages.component.scss'],
-    imports: [NgFor, PopupMessageComponent, AsyncPipe]
+  selector: 'app-popup-messages',
+  templateUrl: './popup-messages.component.html',
+  styleUrls: ['./popup-messages.component.scss'],
+  imports: [NgFor, PopupMessageComponent, AsyncPipe],
 })
 export class PopupMessagesComponent extends BaseComponent {
   public readonly activePopupMessages$ = this.store.select(selectAllPopupMessages);

@@ -11,10 +11,10 @@ import { DropdownFilterComponent, FilterDropdownOption } from '../dropdown-filte
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-dropdown-column-data-filter',
-    templateUrl: './dropdown-column-data-filter.component.html',
-    styleUrl: './dropdown-column-data-filter.component.scss',
-    imports: [DropdownFilterComponent, AsyncPipe]
+  selector: 'app-dropdown-column-data-filter',
+  templateUrl: './dropdown-column-data-filter.component.html',
+  styleUrl: './dropdown-column-data-filter.component.scss',
+  imports: [DropdownFilterComponent, AsyncPipe],
 })
 export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @ViewChild(DropdownFilterComponent) dropdownFilter!: DropdownFilterComponent;
@@ -30,7 +30,7 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
   constructor(
     filterService: FilterService,
     private actions$: Actions,
-    private columnFilterDataService: ColumnFilterDataService
+    private columnFilterDataService: ColumnFilterDataService,
   ) {
     super(filterService);
   }
@@ -44,11 +44,11 @@ export class DropdownColumnDataFilterComponent extends AppBaseFilterCellComponen
           const newValue = filter?.value;
           const newOption = options.find((option) => option.value === newValue);
           this.dropdownFilter.chosenOption = newOption;
-        })
+        }),
       );
     };
     this.subscriptions.add(
-      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod),
     );
   }
 }

@@ -17,11 +17,19 @@ import { DialogActionsComponent } from '../../../../../../shared/components/dial
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-create-processor-dialog',
-    templateUrl: './create-processor-dialog.component.html',
-    styleUrl: './create-processor-dialog.component.scss',
-    providers: [CreateProcessorDialogComponentStore],
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, ConnectedDropdownComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-create-processor-dialog',
+  templateUrl: './create-processor-dialog.component.html',
+  styleUrl: './create-processor-dialog.component.scss',
+  providers: [CreateProcessorDialogComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    ConnectedDropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class CreateProcessorDialogComponent extends BaseComponent implements OnInit {
   public readonly organizations$ = this.componentStore.organizations$;
@@ -34,7 +42,7 @@ export class CreateProcessorDialogComponent extends BaseComponent implements OnI
     private store: Store,
     private dialog: MatDialogRef<CountryCreateDialogComponent>,
     private actions$: Actions,
-    private componentStore: CreateProcessorDialogComponentStore
+    private componentStore: CreateProcessorDialogComponentStore,
   ) {
     super();
   }
@@ -45,13 +53,13 @@ export class CreateProcessorDialogComponent extends BaseComponent implements OnI
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingSuccess)).subscribe(() => {
         this.onClose();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingError)).subscribe(() => {
         this.isBusy = false;
-      })
+      }),
     );
   }
 
@@ -66,7 +74,7 @@ export class CreateProcessorDialogComponent extends BaseComponent implements OnI
       .pipe(first())
       .subscribe((processors) => {
         this.store.dispatch(
-          DataProcessingActions.addDataProcessingProcessor(this.processorsFormGroup.value.processor!, processors)
+          DataProcessingActions.addDataProcessingProcessor(this.processorsFormGroup.value.processor!, processors),
         );
       });
   }

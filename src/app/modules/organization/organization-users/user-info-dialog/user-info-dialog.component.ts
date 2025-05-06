@@ -19,10 +19,22 @@ import { TrashcanIconComponent } from '../../../../shared/components/icons/trash
 import { AppDatePipe } from '../../../../shared/pipes/app-date.pipe';
 
 @Component({
-    selector: 'app-user-info-dialog',
-    templateUrl: './user-info-dialog.component.html',
-    styleUrl: './user-info-dialog.component.scss',
-    imports: [NgIf, ScrollbarDialogComponent, StandardVerticalContentGridComponent, UserRoleTableComponent, ContentSpaceBetweenComponent, ParagraphComponent, DialogActionsComponent, ButtonComponent, TrashcanIconComponent, AsyncPipe, AppDatePipe]
+  selector: 'app-user-info-dialog',
+  templateUrl: './user-info-dialog.component.html',
+  styleUrl: './user-info-dialog.component.scss',
+  imports: [
+    NgIf,
+    ScrollbarDialogComponent,
+    StandardVerticalContentGridComponent,
+    UserRoleTableComponent,
+    ContentSpaceBetweenComponent,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    TrashcanIconComponent,
+    AsyncPipe,
+    AppDatePipe,
+  ],
 })
 export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;
@@ -34,7 +46,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
     private store: Store,
     private dialogOpenerService: DialogOpenerService,
     private dialogRef: MatDialogRef<UserInfoDialogComponent>,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -42,7 +54,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.sendNotificationSuccess))
-        .subscribe(() => this.$sendingNotification.next(false))
+        .subscribe(() => this.$sendingNotification.next(false)),
     );
   }
 
@@ -50,7 +62,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserSuccess)).subscribe(() => {
         this.dialogRef.close();
-      })
+      }),
     );
 
     this.dialogOpenerService.openDeleteUserDialog(this.user$, true);

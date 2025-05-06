@@ -22,11 +22,25 @@ import { ButtonComponent } from '../../../buttons/button/button.component';
 import { LoadingComponent } from '../../../loading/loading.component';
 
 @Component({
-    selector: 'app-grid-usages-consequences-dialog',
-    templateUrl: './grid-usages-consequences-dialog.component.html',
-    styleUrl: './grid-usages-consequences-dialog.component.scss',
-    providers: [GridUsagesDialogComponentStore],
-    imports: [ScrollbarDialogComponent, ParagraphComponent, StandardVerticalContentGridComponent, NgIf, CardComponent, UsageMigrationSystemConsequencesTableComponent, UsageMigrationConsequencesTableComponent, UsageMigrationRelationConsequencesTableComponent, DialogActionsComponent, CheckboxComponent, ButtonComponent, LoadingComponent, AsyncPipe]
+  selector: 'app-grid-usages-consequences-dialog',
+  templateUrl: './grid-usages-consequences-dialog.component.html',
+  styleUrl: './grid-usages-consequences-dialog.component.scss',
+  providers: [GridUsagesDialogComponentStore],
+  imports: [
+    ScrollbarDialogComponent,
+    ParagraphComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    CardComponent,
+    UsageMigrationSystemConsequencesTableComponent,
+    UsageMigrationConsequencesTableComponent,
+    UsageMigrationRelationConsequencesTableComponent,
+    DialogActionsComponent,
+    CheckboxComponent,
+    ButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class GridUsagesConsequencesDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -49,7 +63,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
     private readonly notificationService: NotificationService,
     private readonly cdr: ChangeDetectorRef,
     private readonly clipboardService: ClipboardService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -64,13 +78,13 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
         this.dialog.closeAll();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationError)).subscribe(() => {
         this.componentStore.finishLoading();
-      })
+      }),
     );
   }
 
@@ -95,7 +109,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
       filterNullish(),
       map((migration) => {
         return migration.affectedContracts && migration.affectedContracts.length > 0;
-      })
+      }),
     );
   }
 
@@ -106,7 +120,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
         return (
           migration.affectedDataProcessingRegistrations && migration.affectedDataProcessingRegistrations.length > 0
         );
-      })
+      }),
     );
   }
 
@@ -115,7 +129,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
       filterNullish(),
       map((migration) => {
         return migration.affectedRelations && migration.affectedRelations.length > 0;
-      })
+      }),
     );
   }
 
@@ -124,7 +138,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
       map((hasConsequences) => {
         if (!hasConsequences) return false;
         return !this.hasAcceptedConsequences;
-      })
+      }),
     );
   }
 

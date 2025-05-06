@@ -140,7 +140,7 @@ describe('it-system-usage gdpr', () => {
     cy.input('data type 1').click({ force: true });
     verifyGdprPatchRequest(
       { sensitivePersonDataUuids: ['00000000-0000-0000-0000-000000000000'] },
-      'patchSensitivePersonalData'
+      'patchSensitivePersonalData',
     );
   });
 

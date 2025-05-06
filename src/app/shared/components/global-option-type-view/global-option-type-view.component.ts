@@ -15,11 +15,18 @@ import { ButtonComponent } from '../buttons/button/button.component';
 import { GlobalOptionTypeGridComponent } from './global-option-type-grid/global-option-type-grid.component';
 
 @Component({
-    selector: 'app-global-option-type-view',
-    templateUrl: './global-option-type-view.component.html',
-    styleUrl: './global-option-type-view.component.scss',
-    providers: [GlobalOptionTypeTableComponentStore],
-    imports: [NgIf, AccordionComponent, OverviewHeaderComponent, ButtonComponent, GlobalOptionTypeGridComponent, AsyncPipe]
+  selector: 'app-global-option-type-view',
+  templateUrl: './global-option-type-view.component.html',
+  styleUrl: './global-option-type-view.component.scss',
+  providers: [GlobalOptionTypeTableComponentStore],
+  imports: [
+    NgIf,
+    AccordionComponent,
+    OverviewHeaderComponent,
+    ButtonComponent,
+    GlobalOptionTypeGridComponent,
+    AsyncPipe,
+  ],
 })
 export class GlobalOptionTypeViewComponent extends BaseComponent implements OnInit {
   @Input() optionType!: GlobalAdminOptionType;
@@ -34,7 +41,7 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
   constructor(
     private componentStore: GlobalOptionTypeTableComponentStore,
     private actions$: Actions,
-    private dialogOpener: DialogOpenerService
+    private dialogOpener: DialogOpenerService,
   ) {
     super();
   }
@@ -52,11 +59,11 @@ export class GlobalOptionTypeViewComponent extends BaseComponent implements OnIn
       this.actions$
         .pipe(
           ofType(GlobalOptionTypeActions.updateOptionTypeSuccess, GlobalOptionTypeActions.createOptionTypeSuccess),
-          filter(({ optionType }) => optionType === this.optionType)
+          filter(({ optionType }) => optionType === this.optionType),
         )
         .subscribe(() => {
           this.componentStore.getOptionTypeItems();
-        })
+        }),
     );
   }
 

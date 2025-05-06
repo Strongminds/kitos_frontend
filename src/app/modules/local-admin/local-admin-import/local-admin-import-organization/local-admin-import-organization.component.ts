@@ -4,10 +4,10 @@ import { LocalAdminBaseExcelExportComponent } from '../local-admin-import/local-
 import { LocalAdminImportFkOrgComponent } from './local-admin-import-fk-org/local-admin-import-fk-org.component';
 
 @Component({
-    selector: 'app-local-admin-import-organization',
-    templateUrl: './local-admin-import-organization.component.html',
-    styleUrl: './local-admin-import-organization.component.scss',
-    imports: [LocalAdminBaseExcelExportComponent, LocalAdminImportFkOrgComponent]
+  selector: 'app-local-admin-import-organization',
+  templateUrl: './local-admin-import-organization.component.html',
+  styleUrl: './local-admin-import-organization.component.scss',
+  imports: [LocalAdminBaseExcelExportComponent, LocalAdminImportFkOrgComponent],
 })
 export class LocalAdminImportOrganizationComponent {
   @Input() public helpTextKey!: string;

@@ -11,10 +11,10 @@ import { NgIf } from '@angular/common';
 import { ExternalReferenceDialogComponent } from '../external-reference-dialog/external-reference-dialog.component';
 
 @Component({
-    selector: 'app-create-external-reference-dialog[initialModel][masterReferenceIsReadOnly][entityType]',
-    templateUrl: './create-external-reference-dialog.component.html',
-    styleUrls: ['./create-external-reference-dialog.component.scss'],
-    imports: [NgIf, ExternalReferenceDialogComponent]
+  selector: 'app-create-external-reference-dialog[initialModel][masterReferenceIsReadOnly][entityType]',
+  templateUrl: './create-external-reference-dialog.component.html',
+  styleUrls: ['./create-external-reference-dialog.component.scss'],
+  imports: [NgIf, ExternalReferenceDialogComponent],
 })
 export class CreateExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;
@@ -27,7 +27,7 @@ export class CreateExternalReferenceDialogComponent extends BaseComponent implem
       ExternalReferenceProperties | undefined
     >,
     private readonly actions$: Actions,
-    private readonly store: Store
+    private readonly store: Store,
   ) {
     super();
   }
@@ -35,12 +35,12 @@ export class CreateExternalReferenceDialogComponent extends BaseComponent implem
     this.subscriptions.add(
       this.actions$.pipe(ofType(ExternalReferencesManagmentActions.addSuccess), first()).subscribe(() => {
         this.dialogRef.close();
-      })
+      }),
     );
     this.subscriptions.add(
       this.actions$.pipe(ofType(ExternalReferencesManagmentActions.addError), first()).subscribe(() => {
         this.busy = false;
-      })
+      }),
     );
   }
 

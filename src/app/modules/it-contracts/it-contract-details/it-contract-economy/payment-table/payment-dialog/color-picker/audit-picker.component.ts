@@ -9,10 +9,10 @@ import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-sele
 import { ColorCircleComponent } from '../../../color-circle/color-circle.component';
 
 @Component({
-    selector: 'app-audit-picker',
-    templateUrl: './audit-picker.component.html',
-    styleUrl: './audit-picker.component.scss',
-    imports: [NgIf, FormsModule, ReactiveFormsModule, NgSelectComponent, NgOptionTemplateDirective, ColorCircleComponent]
+  selector: 'app-audit-picker',
+  templateUrl: './audit-picker.component.html',
+  styleUrl: './audit-picker.component.scss',
+  imports: [NgIf, FormsModule, ReactiveFormsModule, NgSelectComponent, NgOptionTemplateDirective, ColorCircleComponent],
 })
 export class AuditPickerComponent extends BaseDropdownComponent<AuditModel | null> implements OnInit, OnChanges {
   @Output() public openDropdown = new EventEmitter();
@@ -33,7 +33,7 @@ export class AuditPickerComponent extends BaseDropdownComponent<AuditModel | nul
 
     // Update value subject to be used in calculating obselete values
     this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value)),
     );
 
     // Push initial values to value and data form subjects

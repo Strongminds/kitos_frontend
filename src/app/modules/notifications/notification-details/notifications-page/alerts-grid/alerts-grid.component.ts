@@ -13,10 +13,10 @@ import { LocalGridComponent } from '../../../../../shared/components/local-grid/
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-alerts-grid',
-    templateUrl: './alerts-grid.component.html',
-    styleUrl: './alerts-grid.component.scss',
-    imports: [LocalGridComponent, AsyncPipe]
+  selector: 'app-alerts-grid',
+  templateUrl: './alerts-grid.component.html',
+  styleUrl: './alerts-grid.component.scss',
+  imports: [LocalGridComponent, AsyncPipe],
 })
 export class AlertsGridComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;
@@ -27,7 +27,10 @@ export class AlertsGridComponent implements OnInit {
 
   public gridColumns!: GridColumn[];
 
-  constructor(private store: Store, private confirmActionService: ConfirmActionService) {}
+  constructor(
+    private store: Store,
+    private confirmActionService: ConfirmActionService,
+  ) {}
 
   ngOnInit(): void {
     this.relatedEntityType = mapEntityTypeToRelatedEntityType(this.entityType);

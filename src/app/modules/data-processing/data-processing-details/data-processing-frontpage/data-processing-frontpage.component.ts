@@ -52,17 +52,35 @@ import { ProcessorsTableComponent } from './processors-table/processors-table.co
 import { SubProcessorsTableComponent } from './sub-processors-table/sub-processors-table.component';
 
 @Component({
-    selector: 'app-data-processing-frontpage',
-    templateUrl: './data-processing-frontpage.component.html',
-    styleUrl: './data-processing-frontpage.component.scss',
-    imports: [CardComponent, CardHeaderComponent, NgIf, StatusChipComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, DropdownComponent, TextAreaComponent, DatePickerComponent, OrgUnitSelectComponent, StandardVerticalContentGridComponent, ThirdCountriesTableComponent, ProcessorsTableComponent, SubProcessorsTableComponent, AsyncPipe]
+  selector: 'app-data-processing-frontpage',
+  templateUrl: './data-processing-frontpage.component.html',
+  styleUrl: './data-processing-frontpage.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    StatusChipComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    DropdownComponent,
+    TextAreaComponent,
+    DatePickerComponent,
+    OrgUnitSelectComponent,
+    StandardVerticalContentGridComponent,
+    ThirdCountriesTableComponent,
+    ProcessorsTableComponent,
+    SubProcessorsTableComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingFrontpageComponent extends BaseComponent implements OnInit {
   public readonly basisForTransferTypes$ = this.store.select(
-    selectRegularOptionTypes('data-processing-basis-for-transfer-types')
+    selectRegularOptionTypes('data-processing-basis-for-transfer-types'),
   );
   public readonly dataResponsibleTypes$ = this.store.select(
-    selectRegularOptionTypes('data-processing-data-responsible-types')
+    selectRegularOptionTypes('data-processing-data-responsible-types'),
   );
 
   public readonly yesNoIrrelevantOptions = yesNoIrrelevantOptions;
@@ -81,7 +99,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
       const reasonsForInactivity = [dpr?.general.valid ? undefined : $localize`Den markerede kontrakt er inaktiv`];
 
       return $localize`Følgende gør databehandlingen inaktiv: ` + '\n' + toBulletPoints(reasonsForInactivity);
-    })
+    }),
   );
   public readonly isValid$ = this.store.select(selectDataProcessingIsValid);
 
@@ -112,7 +130,10 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly subProcessorsEnabled$ = this.store.select(selectDprEnableSubProcessors);
   public readonly responsibleUnitEnabled$ = this.store.select(selectDprEnableResponsibleOrgUnit);
 
-  constructor(private store: Store, private notificationService: NotificationService) {
+  constructor(
+    private store: Store,
+    private notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -157,7 +178,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
           this.frontpageFormGroup.controls.status.disable();
           this.frontpageFormGroup.controls.lastChangedAt.disable();
           this.frontpageFormGroup.controls.lastChangedBy.disable();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -167,13 +188,13 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
         } else {
           this.frontpageFormGroup.controls.agreementConclusionDate.disable();
         }
-      })
+      }),
     );
   }
 
   public patchFrontPage(
     frontpage: APIUpdateDataProcessingRegistrationRequestDTO,
-    valueChange?: ValidatedValueChange<unknown>
+    valueChange?: ValidatedValueChange<unknown>,
   ) {
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);

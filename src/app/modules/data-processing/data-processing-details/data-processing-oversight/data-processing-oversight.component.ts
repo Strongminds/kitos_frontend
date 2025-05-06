@@ -54,10 +54,30 @@ import { CollectionExtensionButtonComponent } from '../../../../shared/component
 import { OversightsTableComponent } from './oversights-table/oversights-table.component';
 
 @Component({
-    selector: 'app-data-processing-oversight',
-    templateUrl: './data-processing-oversight.component.html',
-    styleUrl: './data-processing-oversight.component.scss',
-    imports: [NgIf, CardComponent, CardHeaderComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, TextAreaComponent, DatePickerComponent, NativeTableComponent, NgFor, ContentSpaceBetweenComponent, ParagraphComponent, IconButtonComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, OversightsTableComponent, AsyncPipe]
+  selector: 'app-data-processing-oversight',
+  templateUrl: './data-processing-oversight.component.html',
+  styleUrl: './data-processing-oversight.component.scss',
+  imports: [
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    TextAreaComponent,
+    DatePickerComponent,
+    NativeTableComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    ParagraphComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    OversightsTableComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingOversightComponent extends BaseComponent implements OnInit {
   public readonly oversightOptions$ = this.store.select(selectDataProcessingOversightOptions).pipe(filterNullish());
@@ -76,7 +96,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
         if (!existingOptionUuids || existingOptionUuids.length == 0) return options;
 
         return options.filter((option: APIIdentityNamePairResponseDTO) => !existingOptionUuids.includes(option.uuid));
-      })
+      }),
     );
 
   public readonly hasOversightsValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
@@ -92,7 +112,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
       completedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
       remarks: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   public readonly oversightIntervalEnabled$ = this.store.select(selectDprEnabledOversightInterval);
@@ -106,7 +126,11 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     this.oversightOptionsEnabled$,
   ]);
 
-  constructor(private store: Store, private notificationService: NotificationService, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private notificationService: NotificationService,
+    private dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -127,7 +151,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
           if (hasModifyPermissions) {
             this.generalInformationForm.enable();
           }
-        })
+        }),
     );
   }
 
@@ -141,7 +165,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
 
   public patchOversight(
     value: APIDataProcessingRegistrationOversightWriteRequestDTO,
-    valueChange?: ValidatedValueChange<unknown>
+    valueChange?: ValidatedValueChange<unknown>,
   ): void {
     this.patch({ oversight: value }, valueChange);
   }
@@ -153,7 +177,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     dialogInstance.dropdownText = $localize`Vælg tilsynsmulighed`;
     dialogInstance.valueField = 'uuid';
     dialogInstance.data$ = this.oversightOptionTypes$.pipe(
-      map((options) => options?.map((option) => ({ uuid: option.uuid, name: option.name })))
+      map((options) => options?.map((option) => ({ uuid: option.uuid, name: option.name }))),
     );
     dialogInstance.successActionType = DataProcessingActions.patchDataProcessingSuccess.type;
     dialogInstance.errorActionType = DataProcessingActions.patchDataProcessingError.type;
@@ -176,10 +200,10 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
         .subscribe(([result, oversightOptions]) => {
           if (result === true) {
             this.store.dispatch(
-              DataProcessingActions.removeDataProcessingOversightOption(oversightUuid, oversightOptions)
+              DataProcessingActions.removeDataProcessingOversightOption(oversightUuid, oversightOptions),
             );
           }
-        })
+        }),
     );
   }
 }

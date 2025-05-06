@@ -31,14 +31,14 @@ export class RoleTableComponentStore extends ComponentStore<State> {
 
   public readonly selectUserResultIsLimited$ = this.users$.pipe(
     filterNullish(),
-    map((users) => users.length >= this.PAGE_SIZE)
+    map((users) => users.length >= this.PAGE_SIZE),
   );
 
   constructor(
     private readonly store: Store,
     @Inject(APIV2OrganizationService)
     private readonly apiOrganizationService: APIV2OrganizationService,
-    private readonly roleOptionTypeService: RoleOptionTypeService
+    private readonly roleOptionTypeService: RoleOptionTypeService,
   ) {
     super({ rolesLoading: false, usersLoading: false });
   }
@@ -47,28 +47,28 @@ export class RoleTableComponentStore extends ComponentStore<State> {
     (state, roles: Array<RoleAssignment>): State => ({
       ...state,
       roles,
-    })
+    }),
   );
 
   private updateRolesIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       rolesLoading: loading,
-    })
+    }),
   );
 
   private updateUsers = this.updater(
     (state, users: Array<APIOrganizationUserResponseDTO>): State => ({
       ...state,
       users,
-    })
+    }),
   );
 
   private updateUsersIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       usersLoading: loading,
-    })
+    }),
   );
 
   public getRolesByEntityUuid = this.effect(
@@ -81,11 +81,11 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             tapResponse(
               (roles) => this.updateRoles(roles),
               (e) => console.error(e),
-              () => this.updateRolesIsLoading(false)
-            )
+              () => this.updateRolesIsLoading(false),
+            ),
           );
-        })
-      )
+        }),
+      ),
   );
 
   public getUsers = this.effect((search$: Observable<string | undefined>) =>
@@ -104,10 +104,10 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             tapResponse(
               (users) => this.updateUsers(users),
               (error) => console.error(error),
-              () => this.updateUsersIsLoading(false)
-            )
-          )
-      )
-    )
+              () => this.updateUsersIsLoading(false),
+            ),
+          ),
+      ),
+    ),
   );
 }

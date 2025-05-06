@@ -7,10 +7,10 @@ import { ParagraphComponent } from '../../../paragraph/paragraph.component';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-usage-link',
-    templateUrl: './grid-usage-link.component.html',
-    styleUrl: './grid-usage-link.component.scss',
-    imports: [ParagraphComponent, NgIf],
+  selector: 'app-usage-link',
+  templateUrl: './grid-usage-link.component.html',
+  styleUrl: './grid-usage-link.component.scss',
+  imports: [ParagraphComponent, NgIf],
 })
 export class UsageLinkComponent {
   constructor(private dialog: MatDialog) {}

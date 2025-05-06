@@ -8,7 +8,7 @@ import { catchError, map, of, switchMap } from 'rxjs';
 export class SystemIntegratorEffects {
   constructor(
     private readonly globalUserService: APIV2GlobalUserInternalINTERNALService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {}
 
   updateSystemIntegrator$ = createEffect(() => {
@@ -22,9 +22,9 @@ export class SystemIntegratorEffects {
           })
           .pipe(
             map(() => GlobalAdminSystemIntegratorActions.editSystemIntegratorSuccess()),
-            catchError(() => of(GlobalAdminSystemIntegratorActions.editSystemIntegratorError()))
-          )
-      )
+            catchError(() => of(GlobalAdminSystemIntegratorActions.editSystemIntegratorError())),
+          ),
+      ),
     );
   });
 }

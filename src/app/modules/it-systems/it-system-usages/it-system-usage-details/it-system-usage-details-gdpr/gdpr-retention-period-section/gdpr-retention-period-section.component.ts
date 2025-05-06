@@ -21,17 +21,26 @@ import { NumericInputComponent } from '../../../../../../shared/components/numer
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-gdpr-retention-period-section',
-    templateUrl: './gdpr-retention-period-section.component.html',
-    styleUrls: ['./gdpr-retention-period-section.component.scss'],
-    imports: [AccordionComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, DatePickerComponent, NumericInputComponent, AsyncPipe]
+  selector: 'app-gdpr-retention-period-section',
+  templateUrl: './gdpr-retention-period-section.component.html',
+  styleUrls: ['./gdpr-retention-period-section.component.scss'],
+  imports: [
+    AccordionComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    DatePickerComponent,
+    NumericInputComponent,
+    AsyncPipe,
+  ],
 })
 export class GdprRetentionPeriodSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRetentionPeriodFalse$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.retentionPeriodDefined !== APIGDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum.Yes)
+    map((gdpr) => gdpr.retentionPeriodDefined !== APIGDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum.Yes),
   );
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
@@ -42,7 +51,7 @@ export class GdprRetentionPeriodSectionComponent extends BaseAccordionComponent 
       dateControl: new FormControl<Date | undefined>(undefined),
       frequencyControl: new FormControl<number | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   constructor(private readonly store: Store) {

@@ -43,10 +43,30 @@ import { DropdownComponent } from '../../../../../shared/components/dropdowns/dr
 import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
 
 @Component({
-    templateUrl: 'it-system-usage-details-contracts.component.html',
-    styleUrls: ['it-system-usage-details-contracts.component.scss'],
-    providers: [ItSystemUsageDetailsContractsComponentStore],
-    imports: [NgIf, CardComponent, CardHeaderComponent, LoadingComponent, StandardVerticalContentGridComponent, NativeTableComponent, NgFor, DetailsPageLinkComponent, StatusChipComponent, ParagraphComponent, SelectedOptionTypeTextComponent, BooleanCircleComponent, EmptyStateComponent, CollectionExtensionButtonComponent, FormsModule, ReactiveFormsModule, DropdownComponent, AsyncPipe, AppDatePipe]
+  templateUrl: 'it-system-usage-details-contracts.component.html',
+  styleUrls: ['it-system-usage-details-contracts.component.scss'],
+  providers: [ItSystemUsageDetailsContractsComponentStore],
+  imports: [
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    LoadingComponent,
+    StandardVerticalContentGridComponent,
+    NativeTableComponent,
+    NgFor,
+    DetailsPageLinkComponent,
+    StatusChipComponent,
+    ParagraphComponent,
+    SelectedOptionTypeTextComponent,
+    BooleanCircleComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    AsyncPipe,
+    AppDatePipe,
+  ],
 })
 export class ITSystemUsageDetailsContractsComponent extends BaseComponent implements OnInit {
   public readonly mainContract$ = this.store.select(selectItSystemUsageMainContract);
@@ -65,7 +85,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
 
   public readonly associatedContractsEnabled$ = this.store.select(selectITSystemUsageEnableAssociatedContracts);
   public readonly contractToDetermineIsActiveEnabled$ = this.store.select(
-    selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive
+    selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   );
 
   public readonly contractCreationPermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
@@ -75,7 +95,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     private readonly contractsStore: ItSystemUsageDetailsContractsComponentStore,
     private readonly notificationService: NotificationService,
     private readonly dialog: MatDialog,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -99,8 +119,8 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .subscribe(([mainContract, availableContracts]) =>
           this.contractSelectionForm.patchValue({
             mainContract: availableContracts.filter((contract) => contract.uuid === mainContract?.uuid).pop(),
-          })
-        )
+          }),
+        ),
     );
 
     // Initiate load of associated contracts when system usage changes
@@ -108,13 +128,13 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
       this.store
         .select(selectItSystemUsageUuid)
         .pipe(filterNullish())
-        .subscribe((itSystemUsageUuid) => this.contractsStore.getAssociatedContracts(itSystemUsageUuid))
+        .subscribe((itSystemUsageUuid) => this.contractsStore.getAssociatedContracts(itSystemUsageUuid)),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.createAndAssociateContractSuccess)).subscribe(({ usageUuid }) => {
         this.contractsStore.getAssociatedContracts(usageUuid);
-      })
+      }),
     );
 
     // Disable forms if user does not have rights to modify
@@ -124,7 +144,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
         .subscribe(() => {
           this.contractSelectionForm.disable();
-        })
+        }),
     );
   }
 
@@ -136,7 +156,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .subscribe((itSystemUsageUuid) => {
           const dialogRef = this.dialog.open(CreateAndAssociateContractDialogComponent);
           dialogRef.componentInstance.usageToAssociateUuid = itSystemUsageUuid;
-        })
+        }),
     );
   }
 }

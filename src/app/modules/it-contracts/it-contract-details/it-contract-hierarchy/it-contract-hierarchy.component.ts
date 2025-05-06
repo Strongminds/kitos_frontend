@@ -16,11 +16,11 @@ import { EntityTreeComponent } from '../../../../shared/components/tree/entity-t
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 
 @Component({
-    selector: 'app-it-contract-hierarchy',
-    templateUrl: './it-contract-hierarchy.component.html',
-    styleUrl: './it-contract-hierarchy.component.scss',
-    providers: [ItContractHierarchyComponentStore],
-    imports: [CardComponent, CardHeaderComponent, NgIf, EntityTreeComponent, LoadingComponent, AsyncPipe]
+  selector: 'app-it-contract-hierarchy',
+  templateUrl: './it-contract-hierarchy.component.html',
+  styleUrl: './it-contract-hierarchy.component.scss',
+  providers: [ItContractHierarchyComponentStore],
+  imports: [CardComponent, CardHeaderComponent, NgIf, EntityTreeComponent, LoadingComponent, AsyncPipe],
 })
 export class ItContractHierarchyComponent extends BaseComponent implements OnInit {
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());
@@ -31,7 +31,7 @@ export class ItContractHierarchyComponent extends BaseComponent implements OnIni
   constructor(
     private readonly store: Store,
     private readonly componentStore: ItContractHierarchyComponentStore,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -41,7 +41,7 @@ export class ItContractHierarchyComponent extends BaseComponent implements OnIni
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.transferContractsSuccess)).subscribe(() => {
         this.componentStore.getHierarchy(this.contractUuid$);
-      })
+      }),
     );
   }
 }

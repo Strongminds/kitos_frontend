@@ -7,10 +7,10 @@ import { DialogActionsComponent } from '../dialog-actions/dialog-actions.compone
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-info-dialog',
-    templateUrl: './info-dialog.component.html',
-    styleUrl: './info-dialog.component.scss',
-    imports: [DialogComponent, ParagraphComponent, NgIf, NgFor, DialogActionsComponent, ButtonComponent]
+  selector: 'app-info-dialog',
+  templateUrl: './info-dialog.component.html',
+  styleUrl: './info-dialog.component.scss',
+  imports: [DialogComponent, ParagraphComponent, NgIf, NgFor, DialogActionsComponent, ButtonComponent],
 })
 export class InfoDialogComponent {
   @Input() public title = $localize`Information`;

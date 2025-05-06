@@ -19,11 +19,18 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { LocalGridComponent } from '../../../../shared/components/local-grid/local-grid.component';
 
 @Component({
-    selector: 'app-global-admin-system-integrators',
-    templateUrl: './global-admin-system-integrators.component.html',
-    styleUrl: './global-admin-system-integrators.component.scss',
-    providers: [SystemIntegratorComponentStore],
-    imports: [CardComponent, CardHeaderComponent, CollectionExtensionButtonComponent, NgIf, LocalGridComponent, AsyncPipe]
+  selector: 'app-global-admin-system-integrators',
+  templateUrl: './global-admin-system-integrators.component.html',
+  styleUrl: './global-admin-system-integrators.component.scss',
+  providers: [SystemIntegratorComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    CollectionExtensionButtonComponent,
+    NgIf,
+    LocalGridComponent,
+    AsyncPipe,
+  ],
 })
 export class GlobalAdminSystemIntegratorsComponent extends BaseComponent implements OnInit {
   public readonly systemIntegrators$ = this.componentStore.systemIntegrators$;
@@ -48,7 +55,7 @@ export class GlobalAdminSystemIntegratorsComponent extends BaseComponent impleme
     private readonly dialog: MatDialog,
     private readonly componentStore: SystemIntegratorComponentStore,
     private readonly confirmActionService: ConfirmActionService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -57,7 +64,7 @@ export class GlobalAdminSystemIntegratorsComponent extends BaseComponent impleme
     this.subscriptions.add(
       this.actions$.pipe(ofType(GlobalAdminSystemIntegratorActions.editSystemIntegratorSuccess)).subscribe(() => {
         this.componentStore.getSystemIntegrators();
-      })
+      }),
     );
 
     this.componentStore.getSystemIntegrators();

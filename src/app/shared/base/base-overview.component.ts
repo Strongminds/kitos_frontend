@@ -26,7 +26,7 @@ export class BaseOverviewComponent extends BaseComponent {
 
   constructor(
     protected store: Store,
-    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
+    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes,
   ) {
     super();
     this.store.dispatch(UserActions.getUserGridPermissions());
@@ -64,7 +64,7 @@ export class BaseOverviewComponent extends BaseComponent {
       .pipe(first())
       .subscribe((gridState) => {
         this.store.dispatch(
-          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType)
+          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType),
         );
       });
   };

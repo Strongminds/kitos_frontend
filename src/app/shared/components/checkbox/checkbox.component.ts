@@ -7,10 +7,10 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
 import { MatCheckbox } from '@angular/material/checkbox';
 
 @Component({
-    selector: 'app-checkbox',
-    templateUrl: 'checkbox.component.html',
-    styleUrls: ['checkbox.component.scss'],
-    imports: [NgIf, FormsModule, ReactiveFormsModule, TooltipComponent, MatCheckbox]
+  selector: 'app-checkbox',
+  templateUrl: 'checkbox.component.html',
+  styleUrls: ['checkbox.component.scss'],
+  imports: [NgIf, FormsModule, ReactiveFormsModule, TooltipComponent, MatCheckbox],
 })
 export class CheckboxComponent extends BaseFormComponent<boolean> {
   @Input() labelPosition: 'before' | 'after' = 'before';

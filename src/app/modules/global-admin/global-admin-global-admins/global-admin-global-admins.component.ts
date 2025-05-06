@@ -7,10 +7,10 @@ import { ButtonComponent } from '../../../shared/components/buttons/button/butto
 import { GlobalAdminsTableComponent } from './global-admins-table/global-admins-table.component';
 
 @Component({
-    selector: 'app-global-admin-global-admins',
-    templateUrl: './global-admin-global-admins.component.html',
-    styleUrl: './global-admin-global-admins.component.scss',
-    imports: [CardComponent, OverviewHeaderComponent, ButtonComponent, GlobalAdminsTableComponent]
+  selector: 'app-global-admin-global-admins',
+  templateUrl: './global-admin-global-admins.component.html',
+  styleUrl: './global-admin-global-admins.component.scss',
+  imports: [CardComponent, OverviewHeaderComponent, ButtonComponent, GlobalAdminsTableComponent],
 })
 export class GlobalAdminGlobalAdminsComponent {
   constructor(private dialog: MatDialog) {}

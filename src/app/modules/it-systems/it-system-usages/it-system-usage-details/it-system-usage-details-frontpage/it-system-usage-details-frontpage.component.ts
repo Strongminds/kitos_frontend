@@ -9,9 +9,14 @@ import { ITSystemUsageDetailsFrontpageInformationComponent } from '../it-system-
 import { ITSystemUsageDetailsFrontpageCatalogComponent } from '../it-system-usage-details-frontpage-catalog/it-system-usage-details-frontpage-catalog.component';
 
 @Component({
-    templateUrl: 'it-system-usage-details-frontpage.component.html',
-    styleUrls: ['it-system-usage-details-frontpage.component.scss'],
-    imports: [SegmentComponent, NgIf, ITSystemUsageDetailsFrontpageInformationComponent, ITSystemUsageDetailsFrontpageCatalogComponent]
+  templateUrl: 'it-system-usage-details-frontpage.component.html',
+  styleUrls: ['it-system-usage-details-frontpage.component.scss'],
+  imports: [
+    SegmentComponent,
+    NgIf,
+    ITSystemUsageDetailsFrontpageInformationComponent,
+    ITSystemUsageDetailsFrontpageCatalogComponent,
+  ],
 })
 export class ITSystemUsageDetailsFrontpageComponent {
   public ItSystemUsageModuleSegmentOption = ItSystemUsageModuleSegmentOption;

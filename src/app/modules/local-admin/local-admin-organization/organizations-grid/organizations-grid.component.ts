@@ -19,10 +19,10 @@ import { GridComponent } from '../../../../shared/components/grid/grid.component
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-organizations-grid',
-    templateUrl: './organizations-grid.component.html',
-    styleUrl: './organizations-grid.component.scss',
-    imports: [OverviewHeaderComponent, GridOptionsButtonComponent, ExportMenuButtonComponent, GridComponent, AsyncPipe]
+  selector: 'app-organizations-grid',
+  templateUrl: './organizations-grid.component.html',
+  styleUrl: './organizations-grid.component.scss',
+  imports: [OverviewHeaderComponent, GridOptionsButtonComponent, ExportMenuButtonComponent, GridComponent, AsyncPipe],
 })
 export class OrganizationsGridComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;

@@ -16,10 +16,10 @@ import { CheckboxComponent } from '../../../../shared/components/checkbox/checkb
 import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-manage-user-role-table',
-    templateUrl: './manage-user-role-table.component.html',
-    styleUrl: './manage-user-role-table.component.scss',
-    imports: [AccordionComponent, NativeTableComponent, CheckboxComponent, NgFor]
+  selector: 'app-manage-user-role-table',
+  templateUrl: './manage-user-role-table.component.html',
+  styleUrl: './manage-user-role-table.component.scss',
+  imports: [AccordionComponent, NativeTableComponent, CheckboxComponent, NgFor],
 })
 export class ManageUserRoleTableComponent {
   @Input() user!: ODataOrganizationUser;

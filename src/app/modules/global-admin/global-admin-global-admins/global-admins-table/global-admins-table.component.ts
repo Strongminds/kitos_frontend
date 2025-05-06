@@ -14,13 +14,27 @@ import { IconButtonComponent } from '../../../../shared/components/buttons/icon-
 import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
 
 @Component({
-    selector: 'app-global-admins-table',
-    templateUrl: './global-admins-table.component.html',
-    styleUrl: './global-admins-table.component.scss',
-    imports: [NgIf, LoadingComponent, NativeTableComponent, NgFor, ContentSpaceBetweenComponent, ParagraphComponent, TableRowActionsComponent, IconButtonComponent, TrashcanIconComponent, AsyncPipe]
+  selector: 'app-global-admins-table',
+  templateUrl: './global-admins-table.component.html',
+  styleUrl: './global-admins-table.component.scss',
+  imports: [
+    NgIf,
+    LoadingComponent,
+    NativeTableComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    ParagraphComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    AsyncPipe,
+  ],
 })
 export class GlobalAdminsTableComponent implements OnInit {
-  constructor(private confirmActionService: ConfirmActionService, private store: Store) {}
+  constructor(
+    private confirmActionService: ConfirmActionService,
+    private store: Store,
+  ) {}
 
   public ngOnInit(): void {
     this.store.dispatch(GlobalAdminActions.getGlobalAdmins());

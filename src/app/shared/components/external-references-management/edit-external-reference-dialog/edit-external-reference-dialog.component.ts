@@ -12,10 +12,10 @@ import { NgIf } from '@angular/common';
 import { ExternalReferenceDialogComponent } from '../external-reference-dialog/external-reference-dialog.component';
 
 @Component({
-    selector: 'app-edit-external-reference-dialog[initialModel][referenceUuid][entityType][masterReferenceIsReadOnly]',
-    templateUrl: './edit-external-reference-dialog.component.html',
-    styleUrls: ['./edit-external-reference-dialog.component.scss'],
-    imports: [NgIf, ExternalReferenceDialogComponent]
+  selector: 'app-edit-external-reference-dialog[initialModel][referenceUuid][entityType][masterReferenceIsReadOnly]',
+  templateUrl: './edit-external-reference-dialog.component.html',
+  styleUrls: ['./edit-external-reference-dialog.component.scss'],
+  imports: [NgIf, ExternalReferenceDialogComponent],
 })
 export class EditExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public referenceUuid!: string;
@@ -28,7 +28,7 @@ export class EditExternalReferenceDialogComponent extends BaseComponent implemen
       ExternalReferenceProperties | undefined
     >,
     private readonly actions$: Actions,
-    private readonly store: Store
+    private readonly store: Store,
   ) {
     super();
   }
@@ -36,19 +36,19 @@ export class EditExternalReferenceDialogComponent extends BaseComponent implemen
     this.subscriptions.add(
       this.actions$.pipe(ofType(ExternalReferencesManagmentActions.editSuccess), first()).subscribe(() => {
         this.dialogRef.close();
-      })
+      }),
     );
     this.subscriptions.add(
       this.actions$.pipe(ofType(ExternalReferencesManagmentActions.editError), first()).subscribe(() => {
         this.busy = false;
-      })
+      }),
     );
   }
 
   public edit(editedExternalReference: ExternalReferenceProperties) {
     this.busy = true;
     this.store.dispatch(
-      ExternalReferencesManagmentActions.edit(this.entityType, this.referenceUuid, editedExternalReference)
+      ExternalReferencesManagmentActions.edit(this.entityType, this.referenceUuid, editedExternalReference),
     );
   }
   public cancel() {

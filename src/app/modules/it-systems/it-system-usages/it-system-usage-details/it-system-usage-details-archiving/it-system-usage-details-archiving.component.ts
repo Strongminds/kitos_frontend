@@ -34,14 +34,14 @@ export class ItSystemUsageDetailsArchivingComponent {
   public itSystemUsageModuleSegmentOptions = itSystemUsageModuleSegmentOptions;
   public readonly catalogArchiveDutyEnabled$ = this.store.select(selectITSystemUsageEnableCatalogArchiveDuty);
   public readonly catalogArchiveDutyCommentEnabled$ = this.store.select(
-    selectITSystemUsageEnableCatalogArchiveDutyComment
+    selectITSystemUsageEnableCatalogArchiveDutyComment,
   );
 
   constructor(private readonly store: Store) {}
 
   public disableCatalogArchivingSegment() {
     return combineOR([this.catalogArchiveDutyEnabled$, this.catalogArchiveDutyCommentEnabled$]).pipe(
-      invertBooleanValue()
+      invertBooleanValue(),
     );
   }
 }

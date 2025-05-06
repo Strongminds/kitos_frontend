@@ -6,10 +6,10 @@ import { IconButtonComponent } from '../../buttons/icon-button/icon-button.compo
 import { PencilIconComponent } from '../../icons/pencil-icon.compnent';
 
 @Component({
-    selector: 'app-readonly-link-textbox',
-    templateUrl: './readonly-link-textbox.component.html',
-    styleUrl: './readonly-link-textbox.component.scss',
-    imports: [MatFormField, MatLabel, MatInput, NgIf, IconButtonComponent, MatSuffix, PencilIconComponent]
+  selector: 'app-readonly-link-textbox',
+  templateUrl: './readonly-link-textbox.component.html',
+  styleUrl: './readonly-link-textbox.component.scss',
+  imports: [MatFormField, MatLabel, MatInput, NgIf, IconButtonComponent, MatSuffix, PencilIconComponent],
 })
 export class ReadonlyLinkTextboxComponent {
   @Input() public title!: string;

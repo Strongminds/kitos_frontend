@@ -5,11 +5,9 @@ import { ExternalPageLinkComponent } from '../../../../external-page-link/extern
 import { SearchPropertyPipe } from '../../../../../pipes/column-property.pipe';
 
 @Component({
-    selector: 'app-title-link-cell',
-    templateUrl: './title-link-cell.component.html',
-    styleUrl: './title-link-cell.component.scss',
-    imports: [ParagraphComponent, ExternalPageLinkComponent, SearchPropertyPipe]
+  selector: 'app-title-link-cell',
+  templateUrl: './title-link-cell.component.html',
+  styleUrl: './title-link-cell.component.scss',
+  imports: [ParagraphComponent, ExternalPageLinkComponent, SearchPropertyPipe],
 })
-export class TitleLinkCellComponent extends BaseCellComponent {
-
-}
+export class TitleLinkCellComponent extends BaseCellComponent {}

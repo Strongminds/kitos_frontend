@@ -34,10 +34,26 @@ export interface SystemRelationModel {
 }
 
 @Component({
-    selector: 'app-relation-table[relations][emptyText]',
-    templateUrl: './relation-table.component.html',
-    styleUrls: ['./relation-table.component.scss'],
-    imports: [StandardVerticalContentGridComponent, NgIf, NativeTableComponent, NgFor, DetailsPageLinkComponent, ParagraphComponent, ExternalPageLinkComponent, ContentSpaceBetweenComponent, SelectedOptionTypeTextComponent, TableRowActionsComponent, IconButtonComponent, PencilIconComponent, TrashcanIconComponent, EmptyStateComponent, AsyncPipe]
+  selector: 'app-relation-table[relations][emptyText]',
+  templateUrl: './relation-table.component.html',
+  styleUrls: ['./relation-table.component.scss'],
+  imports: [
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    DetailsPageLinkComponent,
+    ParagraphComponent,
+    ExternalPageLinkComponent,
+    ContentSpaceBetweenComponent,
+    SelectedOptionTypeTextComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    AsyncPipe,
+  ],
 })
 export class RelationTableComponent extends BaseComponent {
   @Input() public relations!: Array<SystemRelationModel>;
@@ -49,7 +65,10 @@ export class RelationTableComponent extends BaseComponent {
     .select(selectRegularOptionTypesDictionary('it-system_usage-relation-frequency-type'))
     .pipe(filterNullish());
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialog,
+  ) {
     super();
   }
 

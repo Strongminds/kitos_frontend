@@ -14,11 +14,24 @@ import { NativeTableComponent } from '../../../../shared/components/native-table
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 
 @Component({
-    selector: 'app-global-admin-other-user-shutdown',
-    templateUrl: './global-admin-other-user-shutdown.component.html',
-    styleUrl: './global-admin-other-user-shutdown.component.scss',
-    providers: [GlobalAdminOtherUserShutdownComponentStore],
-    imports: [CardComponent, CardHeaderComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, ConnectedDropdownComponent, ButtonComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent, AsyncPipe]
+  selector: 'app-global-admin-other-user-shutdown',
+  templateUrl: './global-admin-other-user-shutdown.component.html',
+  styleUrl: './global-admin-other-user-shutdown.component.scss',
+  providers: [GlobalAdminOtherUserShutdownComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    ConnectedDropdownComponent,
+    ButtonComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    AsyncPipe,
+  ],
 })
 export class GlobalAdminOtherUserShutdownComponent extends BaseComponent {
   public readonly isLoading$ = this.componentStore.isLoading$;
@@ -31,7 +44,7 @@ export class GlobalAdminOtherUserShutdownComponent extends BaseComponent {
 
   constructor(
     private readonly componentStore: GlobalAdminOtherUserShutdownComponentStore,
-    private readonly confirmationService: ConfirmActionService
+    private readonly confirmationService: ConfirmActionService,
   ) {
     super();
   }

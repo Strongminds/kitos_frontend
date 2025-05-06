@@ -13,10 +13,20 @@ import { IconButtonComponent } from '../../../../../shared/components/buttons/ic
 import { TrashcanIconComponent } from '../../../../../shared/components/icons/trashcan-icon.component';
 
 @Component({
-    selector: 'app-registrations-roles-section',
-    templateUrl: './registrations-roles-section.component.html',
-    styleUrl: './registrations-roles-section.component.scss',
-    imports: [AccordionComponent, NativeTableComponent, CheckboxComponent, NgFor, ParagraphComponent, ContentSpaceBetweenComponent, IconButtonComponent, TrashcanIconComponent, AsyncPipe]
+  selector: 'app-registrations-roles-section',
+  templateUrl: './registrations-roles-section.component.html',
+  styleUrl: './registrations-roles-section.component.scss',
+  imports: [
+    AccordionComponent,
+    NativeTableComponent,
+    CheckboxComponent,
+    NgFor,
+    ParagraphComponent,
+    ContentSpaceBetweenComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    AsyncPipe,
+  ],
 })
 export class RegistrationsRolesSectionComponent extends RegistrationBaseComponent<APINamedEntityWithUserFullNameV2DTO> {
   @Input() public roleRegistrations$!: Observable<Array<RegistrationModel<APINamedEntityWithUserFullNameV2DTO>>>;

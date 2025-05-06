@@ -23,10 +23,22 @@ import { EmptyStateComponent } from '../../../../../shared/components/empty-stat
 import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
-    selector: 'app-processors-table',
-    templateUrl: './processors-table.component.html',
-    styleUrl: './processors-table.component.scss',
-    imports: [StandardVerticalContentGridComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent, ContentSpaceBetweenComponent, IconButtonComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe]
+  selector: 'app-processors-table',
+  templateUrl: './processors-table.component.html',
+  styleUrl: './processors-table.component.scss',
+  imports: [
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    ContentSpaceBetweenComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class ProcessorsTableComponent extends BaseComponent {
   public readonly processors$ = this.store.select(selectDataProcessingProcessors).pipe(filterNullish());
@@ -34,7 +46,10 @@ export class ProcessorsTableComponent extends BaseComponent {
 
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -51,7 +66,7 @@ export class ProcessorsTableComponent extends BaseComponent {
           if (result === true) {
             this.store.dispatch(DataProcessingActions.deleteDataProcessingProcessor(uuid, processors));
           }
-        })
+        }),
     );
   }
   onAddNewProcessor() {

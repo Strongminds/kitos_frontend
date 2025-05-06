@@ -6,10 +6,10 @@ import { ContentWithTooltipComponent } from '../content-with-tooltip/content-wit
 import { ParagraphComponent } from '../paragraph/paragraph.component';
 
 @Component({
-    selector: 'app-external-page-link',
-    templateUrl: './external-page-link.component.html',
-    styleUrls: ['./external-page-link.component.scss'],
-    imports: [NgIf, ContentWithTooltipComponent, ParagraphComponent]
+  selector: 'app-external-page-link',
+  templateUrl: './external-page-link.component.html',
+  styleUrls: ['./external-page-link.component.scss'],
+  imports: [NgIf, ContentWithTooltipComponent, ParagraphComponent],
 })
 export class ExternalPageLinkComponent implements OnInit {
   @Input() public url: string | undefined = '';

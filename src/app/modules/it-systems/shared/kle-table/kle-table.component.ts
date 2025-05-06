@@ -38,10 +38,22 @@ export interface SelectedKleDetails extends APIKLEDetailsDTO {
 }
 
 @Component({
-    selector: 'app-kle-table[selectedKles]',
-    templateUrl: './kle-table.component.html',
-    styleUrls: ['./kle-table.component.scss'],
-    imports: [NgIf, LoadingComponent, NativeTableComponent, NgFor, ParagraphComponent, ContentSpaceBetweenComponent, TableRowActionsComponent, IconButtonComponent, TrashcanIconComponent, PlusIconComponent, AsyncPipe]
+  selector: 'app-kle-table[selectedKles]',
+  templateUrl: './kle-table.component.html',
+  styleUrls: ['./kle-table.component.scss'],
+  imports: [
+    NgIf,
+    LoadingComponent,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    ContentSpaceBetweenComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    PlusIconComponent,
+    AsyncPipe,
+  ],
 })
 export class KleTableComponent extends BaseComponent implements OnInit {
   @Input() public hasModifyPermission = false;
@@ -78,7 +90,7 @@ export class KleTableComponent extends BaseComponent implements OnInit {
         })
         .sort(compareKle);
     }),
-    filterNullish()
+    filterNullish(),
   );
 
   constructor(private readonly store: Store) {

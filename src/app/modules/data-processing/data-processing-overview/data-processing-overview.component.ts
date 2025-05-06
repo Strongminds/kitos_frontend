@@ -43,10 +43,19 @@ import { CreateEntityButtonComponent } from '../../../shared/components/entity-c
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 
 @Component({
-    selector: 'app-data-processing-overview',
-    templateUrl: './data-processing-overview.component.html',
-    styleUrl: './data-processing-overview.component.scss',
-    imports: [OverviewHeaderComponent, NgIf, GridOptionsButtonComponent, ExportMenuButtonComponent, HideShowButtonComponent, CreateEntityButtonComponent, GridComponent, AsyncPipe]
+  selector: 'app-data-processing-overview',
+  templateUrl: './data-processing-overview.component.html',
+  styleUrl: './data-processing-overview.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    NgIf,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    CreateEntityButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingOverviewComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
@@ -54,7 +63,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
   public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns);
   public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(
-    UIModuleConfigKey.DataProcessingRegistrations
+    UIModuleConfigKey.DataProcessingRegistrations,
   );
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
@@ -295,7 +304,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     private route: ActivatedRoute,
     private actions$: Actions,
     private uiConfigService: GridUIConfigService,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
   ) {
     super(store, 'data-processing-registration');
   }
@@ -308,17 +317,17 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         .pipe(
           ofType(DataProcessingActions.getDataProcessingOverviewRolesSuccess),
           combineLatestWith(this.store.select(selectDataProcessingRoleColumns)),
-          first()
+          first(),
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
           const existingColumns = this.gridColumnStorageService.getColumns(
             DATA_PROCESSING_COLUMNS_ID,
-            defaultColumnsAndRoles
+            defaultColumnsAndRoles,
           );
           const columns = existingColumns ?? defaultColumnsAndRoles;
           this.store.dispatch(DataProcessingActions.updateGridColumns(columns));
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -326,7 +335,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         .pipe(ofType(DataProcessingActions.createDataProcessingSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
@@ -335,12 +344,12 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       this.actions$
         .pipe(
           ofType(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError),
-          concatLatestFrom(() => this.gridColumns$)
+          concatLatestFrom(() => this.gridColumns$),
         )
         .subscribe(([_, gridColumns]) => {
           const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
           this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
-        })
+        }),
     );
     this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
     this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());

@@ -12,10 +12,10 @@ import { RoleTableComponent } from '../../../../../shared/components/role-table/
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-it-system-usage-details-roles',
-    templateUrl: './it-system-usage-details-roles.component.html',
-    styleUrls: ['./it-system-usage-details-roles.component.scss'],
-    imports: [CardComponent, CardHeaderComponent, RoleTableComponent, AsyncPipe]
+  selector: 'app-it-system-usage-details-roles',
+  templateUrl: './it-system-usage-details-roles.component.html',
+  styleUrls: ['./it-system-usage-details-roles.component.scss'],
+  imports: [CardComponent, CardHeaderComponent, RoleTableComponent, AsyncPipe],
 })
 export class ItSystemUsageDetailsRolesComponent extends BaseComponent {
   public readonly systemUuid$ = this.store.select(selectItSystemUsageUuid).pipe(filterNullish());

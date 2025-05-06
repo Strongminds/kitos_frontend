@@ -32,11 +32,23 @@ import { TextBoxComponent } from '../../../shared/components/textbox/textbox.com
 import { ConnectedDropdownComponent } from '../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 
 @Component({
-    selector: 'app-organization-master-data',
-    templateUrl: './organization-master-data.component.html',
-    styleUrl: './organization-master-data.component.scss',
-    providers: [OrganizationMasterDataComponentStore],
-    imports: [NgIf, HelpButtonComponent, CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, NumericInputComponent, TextBoxComponent, ConnectedDropdownComponent, AsyncPipe]
+  selector: 'app-organization-master-data',
+  templateUrl: './organization-master-data.component.html',
+  styleUrl: './organization-master-data.component.scss',
+  providers: [OrganizationMasterDataComponentStore],
+  imports: [
+    NgIf,
+    HelpButtonComponent,
+    CardComponent,
+    CardHeaderComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    NumericInputComponent,
+    TextBoxComponent,
+    ConnectedDropdownComponent,
+    AsyncPipe,
+  ],
 })
 export class OrganizationMasterDataComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
@@ -78,7 +90,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   constructor(
     private readonly store: Store,
     private readonly notificationService: NotificationService,
-    private readonly componentStore: OrganizationMasterDataComponentStore
+    private readonly componentStore: OrganizationMasterDataComponentStore,
   ) {
     super();
   }
@@ -96,7 +108,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     this.subscriptions.add(
       this.hasOrganizationCvrModifyPermission$.pipe(filterNullish()).subscribe((hasOrganizationCvrModifyPermission) => {
         if (!hasOrganizationCvrModifyPermission) this.masterDataForm.controls.cvrControl.disable();
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -107,7 +119,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           this.contactPersonForm.disable();
           this.dataProtectionAdvisorForm.disable();
         }
-      })
+      }),
     );
   }
 
@@ -120,7 +132,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           emailControl: organizationMasterData?.email,
           addressControl: organizationMasterData?.address,
         });
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -133,7 +145,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           cvrControl: dataResponsible.cvr,
           addressControl: dataResponsible.address,
         });
-      })
+      }),
     );
 
     this.setupContactPersonFields();
@@ -152,7 +164,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           });
 
           const dataResponsibleFromOrganizationUsers = organizationUserIdentityNamePairs.find(
-            (user) => user.name === dataResponsible.email
+            (user) => user.name === dataResponsible.email,
           );
 
           if (dataResponsibleFromOrganizationUsers) {
@@ -162,8 +174,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
               emailControlDropdown: dataResponsibleFromOrganizationUsers,
             });
           } else this.dataResponsibleForm.controls.emailControl.patchValue(dataResponsible.email);
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -179,7 +191,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           });
 
           const contactPersonFromOrganizationUsers = organizationUserIdentityNamePairs.find(
-            (user) => user.name === contactPerson.email
+            (user) => user.name === contactPerson.email,
           );
 
           if (contactPersonFromOrganizationUsers) {
@@ -189,8 +201,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
               emailControlDropdown: contactPersonFromOrganizationUsers,
             });
           } else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
-        }
-      )
+        },
+      ),
     );
   }
 
@@ -205,7 +217,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           cvrControl: dataProtectionAdvisor.cvr,
           addressControl: dataProtectionAdvisor.address,
         });
-      })
+      }),
     );
   }
 
@@ -221,14 +233,14 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     this.patchMasterDataRolesDataResponsible(false, cvr);
   }
 
-  private getValidCvrUpdate(newCvr: string | undefined, formControl: FormControl): string | undefined{
+  private getValidCvrUpdate(newCvr: string | undefined, formControl: FormControl): string | undefined {
     if (newCvr !== undefined) return newCvr;
     return formControl.value ?? undefined;
   }
 
   public patchMasterDataRolesDataResponsible(
     useEmailFromDropdown: boolean = false,
-    cvrEvent: string | undefined = undefined
+    cvrEvent: string | undefined = undefined,
   ) {
     if (this.dataResponsibleForm.valid) {
       this.subscriptions.add(
@@ -248,9 +260,9 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           dataResponsibleDto.phone = controls.phoneControl.value ?? undefined;
 
           this.store.dispatch(
-            OrganizationActions.patchMasterDataRoles({ request: { dataResponsible: dataResponsibleDto } })
+            OrganizationActions.patchMasterDataRoles({ request: { dataResponsible: dataResponsibleDto } }),
           );
-        })
+        }),
       );
     }
   }
@@ -268,7 +280,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       this.store.dispatch(
         OrganizationActions.patchMasterDataRoles({
           request: { contactPerson },
-        })
+        }),
       );
     }
   }
@@ -297,9 +309,9 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           this.store.dispatch(
             OrganizationActions.patchMasterDataRoles({
               request: { dataProtectionAdvisor: dataProtectionAdvisorDto },
-            })
+            }),
           );
-        })
+        }),
       );
     }
   }
@@ -349,7 +361,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           if (organizationUuid) {
             this.patchMasterDataRolesDataResponsible(true);
           }
-        })
+        }),
     );
   }
 
@@ -375,7 +387,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           if (organizationUuid) {
             this.patchMasterDataRolesContactPerson(true);
           }
-        })
+        }),
     );
   }
 

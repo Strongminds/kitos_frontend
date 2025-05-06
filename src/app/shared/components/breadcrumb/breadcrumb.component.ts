@@ -6,10 +6,10 @@ import { NgClass, NgIf } from '@angular/common';
 import { ChevronRightIconComponent } from '../icons/chevron-right-icon.component';
 
 @Component({
-    selector: 'app-breadcrumb[breadCrumb][context]',
-    templateUrl: './breadcrumb.component.html',
-    styleUrls: ['./breadcrumb.component.scss'],
-    imports: [NgClass, NgIf, ChevronRightIconComponent]
+  selector: 'app-breadcrumb[breadCrumb][context]',
+  templateUrl: './breadcrumb.component.html',
+  styleUrls: ['./breadcrumb.component.scss'],
+  imports: [NgClass, NgIf, ChevronRightIconComponent],
 })
 export class BreadcrumbComponent {
   @Input() public breadCrumb!: BreadCrumb;

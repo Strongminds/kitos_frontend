@@ -4,10 +4,10 @@ import { ButtonComponent } from '../buttons/button/button.component';
 import { PlusIconComponent } from '../icons/plus-icon.component';
 
 @Component({
-    selector: 'app-collection-extension-button[text]',
-    templateUrl: './collection-extension-button.component.html',
-    styleUrls: ['./collection-extension-button.component.scss'],
-    imports: [ButtonComponent, PlusIconComponent]
+  selector: 'app-collection-extension-button[text]',
+  templateUrl: './collection-extension-button.component.html',
+  styleUrls: ['./collection-extension-button.component.scss'],
+  imports: [ButtonComponent, PlusIconComponent],
 })
 export class CollectionExtensionButtonComponent {
   @Input() public text!: string;

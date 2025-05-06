@@ -30,17 +30,34 @@ import { IconButtonComponent } from '../../../../../shared/components/buttons/ic
 import { TrashcanIconComponent } from '../../../../../shared/components/icons/trashcan-icon.component';
 
 @Component({
-    selector: 'app-user-role-table',
-    templateUrl: './user-role-table.component.html',
-    styleUrl: './user-role-table.component.scss',
-    imports: [AccordionComponent, AccordionHeaderComponent, ContentSpaceBetweenComponent, ParagraphComponent, NumberCircleComponent, NgIf, NativeTableComponent, NgFor, BooleanCircleComponent, TableRowActionsComponent, IconButtonComponent, TrashcanIconComponent, AsyncPipe]
+  selector: 'app-user-role-table',
+  templateUrl: './user-role-table.component.html',
+  styleUrl: './user-role-table.component.scss',
+  imports: [
+    AccordionComponent,
+    AccordionHeaderComponent,
+    ContentSpaceBetweenComponent,
+    ParagraphComponent,
+    NumberCircleComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    BooleanCircleComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    AsyncPipe,
+  ],
 })
 export class UserRoleTableComponent {
   @Input() user!: ODataOrganizationUser;
   @Input() entityType!: RegistrationEntityTypes;
   @Input() hasModifyPermission$!: Observable<boolean | undefined>;
 
-  constructor(private store: Store, private confirmService: ConfirmActionService) {}
+  constructor(
+    private store: Store,
+    private confirmService: ConfirmActionService,
+  ) {}
 
   public getUserRights(): Right[] {
     return getRights(this.user, this.entityType);

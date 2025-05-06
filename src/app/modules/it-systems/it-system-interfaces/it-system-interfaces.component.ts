@@ -27,10 +27,19 @@ import { CreateEntityButtonComponent } from '../../../shared/components/entity-c
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 
 @Component({
-    selector: 'app-it-system-interfaces',
-    templateUrl: './it-system-interfaces.component.html',
-    styleUrl: './it-system-interfaces.component.scss',
-    imports: [OverviewHeaderComponent, NgIf, GridOptionsButtonComponent, ExportMenuButtonComponent, HideShowButtonComponent, CreateEntityButtonComponent, GridComponent, AsyncPipe]
+  selector: 'app-it-system-interfaces',
+  templateUrl: './it-system-interfaces.component.html',
+  styleUrl: './it-system-interfaces.component.scss',
+  imports: [
+    OverviewHeaderComponent,
+    NgIf,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    CreateEntityButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemInterfacesComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectInterfaceGridLoading);
@@ -159,7 +168,7 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
     private router: Router,
     private route: ActivatedRoute,
     private actions$: Actions,
-    private gridColumnStorageService: GridColumnStorageService
+    private gridColumnStorageService: GridColumnStorageService,
   ) {
     super(store, 'it-interface');
   }
@@ -180,14 +189,16 @@ export class ItSystemInterfacesComponent extends BaseOverviewComponent implement
         .pipe(ofType(ITInterfaceActions.createITInterfaceSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
 
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITInterfaceActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
+      this.actions$
+        .pipe(ofType(ITInterfaceActions.resetGridConfiguration))
+        .subscribe(() => this.updateDefaultColumns()),
     );
   }
 

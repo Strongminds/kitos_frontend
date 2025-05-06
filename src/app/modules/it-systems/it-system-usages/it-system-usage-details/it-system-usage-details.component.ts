@@ -47,9 +47,17 @@ import { NavigationDrawerComponent } from '../../../../shared/components/navigat
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 
 @Component({
-    templateUrl: 'it-system-usage-details.component.html',
-    styleUrls: ['it-system-usage-details.component.scss'],
-    imports: [NgIf, BreadcrumbsComponent, ButtonComponent, NavigationDrawerComponent, RouterOutlet, LoadingComponent, AsyncPipe]
+  templateUrl: 'it-system-usage-details.component.html',
+  styleUrls: ['it-system-usage-details.component.scss'],
+  imports: [
+    NgIf,
+    BreadcrumbsComponent,
+    ButtonComponent,
+    NavigationDrawerComponent,
+    RouterOutlet,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -91,7 +99,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
         routerLink: `${systemUsageUuid}`,
       },
     ]),
-    filterNullish()
+    filterNullish(),
   );
 
   public readonly navigationItems: NavigationDrawerItem[] = [
@@ -180,7 +188,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     private store: Store,
     private actions$: Actions,
     private notificationService: NotificationService,
-    private dialogOpenerService: DialogOpenerService
+    private dialogOpenerService: DialogOpenerService,
   ) {
     super();
   }
@@ -190,12 +198,12 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       this.route.params
         .pipe(
           map((params) => params['uuid']),
-          distinctUntilChanged() //Ensures we get changes if navigation occurs between usages
+          distinctUntilChanged(), //Ensures we get changes if navigation occurs between usages
         )
         .subscribe((itSystemUsageUuid) => {
           this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(itSystemUsageUuid));
           this.store.dispatch(ITSystemUsageActions.getITSystemUsage(itSystemUsageUuid));
-        })
+        }),
     );
 
     // Navigate to IT System Usages if user does not have read persmission to ressource
@@ -206,7 +214,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til dette IT System`);
           this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
-        })
+        }),
     );
 
     // Navigate to IT System Usages if ressource does not exist
@@ -214,7 +222,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       this.actions$.pipe(ofType(ITSystemUsageActions.getITSystemUsageError)).subscribe(() => {
         this.notificationService.showError($localize`IT System findes ikke`);
         this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
-      })
+      }),
     );
 
     // Load the catalog system as it is used across several different pages
@@ -222,7 +230,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       this.store
         .select(selectItSystemUsageSystemContextUuid)
         .pipe(filterNullish(), distinctUntilChanged())
-        .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getITSystem(systemContextUuid)))
+        .subscribe((systemContextUuid) => this.store.dispatch(ITSystemActions.getITSystem(systemContextUuid))),
     );
   }
 
@@ -235,28 +243,33 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
 
   public showRemoveDialog() {
     this.subscriptions.add(
-      this.organizationName$.pipe(
-        first(),
-        tap((organizationName) => {
-          const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+      this.organizationName$
+        .pipe(
+          first(),
+          tap((organizationName) => {
+            const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
 
-          this.subscriptions.add(
-            this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess), first()).subscribe(() => {
-              confirmationDialogRef.close();
-              this.notificationService.showDefault($localize`Systemanvendelsen blev slettet`);
-              this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
-            })
-          );
+            this.subscriptions.add(
+              this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess), first()).subscribe(() => {
+                confirmationDialogRef.close();
+                this.notificationService.showDefault($localize`Systemanvendelsen blev slettet`);
+                this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+              }),
+            );
 
-          this.subscriptions.add(
-            confirmationDialogRef.afterClosed().pipe(first()).subscribe((result) => {
-              if (result) {
-                this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
-              }
-            })
-          );
-        })
-    ).subscribe()
+            this.subscriptions.add(
+              confirmationDialogRef
+                .afterClosed()
+                .pipe(first())
+                .subscribe((result) => {
+                  if (result) {
+                    this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
+                  }
+                }),
+            );
+          }),
+        )
+        .subscribe(),
     );
   }
 }

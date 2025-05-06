@@ -11,11 +11,19 @@ import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { EmptyStateComponent } from '../../empty-states/empty-state.component';
 
 @Component({
-    selector: 'app-notifications-table-sent-dialog',
-    templateUrl: './notifications-table-sent-dialog.component.html',
-    styleUrl: './notifications-table-sent-dialog.component.scss',
-    providers: [NotificationsTableComponentStore],
-    imports: [ScrollbarDialogComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent, EmptyStateComponent, AsyncPipe]
+  selector: 'app-notifications-table-sent-dialog',
+  templateUrl: './notifications-table-sent-dialog.component.html',
+  styleUrl: './notifications-table-sent-dialog.component.scss',
+  providers: [NotificationsTableComponentStore],
+  imports: [
+    ScrollbarDialogComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    EmptyStateComponent,
+    AsyncPipe,
+  ],
 })
 export class NotificationsTableSentDialogComponent implements OnInit {
   @Input() public title!: string;
@@ -28,24 +36,27 @@ export class NotificationsTableSentDialogComponent implements OnInit {
 
   constructor(
     private componentStore: NotificationsTableComponentStore,
-    @Inject(MAT_DIALOG_DATA) public data: APINotificationResponseDTO
+    @Inject(MAT_DIALOG_DATA) public data: APINotificationResponseDTO,
   ) {
     this.notification = data;
   }
 
   public formatDate(date: string | undefined) {
     if (date) {
-      return new Date(date).toLocaleString()
+      return new Date(date).toLocaleString();
     }
-    return $localize`Ugyldig dato fundet.`
+    return $localize`Ugyldig dato fundet.`;
   }
 
   private setupSentTable() {
-    if (this.notification?.uuid) this.componentStore.getCurrentNotificationSent({
-      ownerResourceType: mapNotificationEntityTypes(this.notification.ownerResourceType) ?? this.throwExpression('Invalid ownerResourceType'),
-      ownerResourceUuid: this.ownerEntityUuid,
-      notificationUuid: this.notification.uuid
-    })
+    if (this.notification?.uuid)
+      this.componentStore.getCurrentNotificationSent({
+        ownerResourceType:
+          mapNotificationEntityTypes(this.notification.ownerResourceType) ??
+          this.throwExpression('Invalid ownerResourceType'),
+        ownerResourceUuid: this.ownerEntityUuid,
+        notificationUuid: this.notification.uuid,
+      });
   }
 
   private throwExpression(errorMessage: string): never {

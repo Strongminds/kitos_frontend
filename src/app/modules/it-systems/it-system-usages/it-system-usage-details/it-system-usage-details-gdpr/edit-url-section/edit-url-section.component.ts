@@ -10,10 +10,10 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { LinkTextboxComponent } from '../../../../../../shared/components/link-textbox/link-textbox.component';
 
 @Component({
-    selector: 'app-edit-url-section',
-    templateUrl: './edit-url-section.component.html',
-    styleUrls: ['./edit-url-section.component.scss'],
-    imports: [NgIf, LinkTextboxComponent, AsyncPipe]
+  selector: 'app-edit-url-section',
+  templateUrl: './edit-url-section.component.html',
+  styleUrls: ['./edit-url-section.component.scss'],
+  imports: [NgIf, LinkTextboxComponent, AsyncPipe],
 })
 export class EditUrlSectionComponent extends BaseComponent {
   @Input() title!: string;

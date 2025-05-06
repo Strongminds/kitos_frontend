@@ -16,11 +16,21 @@ import { IconButtonComponent } from '../../../buttons/icon-button/icon-button.co
 import { ArrowRightIconComponent } from '../../../icons/arrow-right-icon.component';
 
 @Component({
-    selector: 'app-usages',
-    templateUrl: './grid-usages-dialog.component.html',
-    styleUrls: ['./grid-usages-dialog.component.scss'],
-    providers: [GridUsagesDialogComponentStore],
-    imports: [ScrollbarDialogComponent, NativeTableComponent, NgFor, ContentSpaceBetweenComponent, ParagraphComponent, NgIf, IconButtonComponent, ArrowRightIconComponent, AsyncPipe]
+  selector: 'app-usages',
+  templateUrl: './grid-usages-dialog.component.html',
+  styleUrls: ['./grid-usages-dialog.component.scss'],
+  providers: [GridUsagesDialogComponentStore],
+  imports: [
+    ScrollbarDialogComponent,
+    NativeTableComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    ParagraphComponent,
+    NgIf,
+    IconButtonComponent,
+    ArrowRightIconComponent,
+    AsyncPipe,
+  ],
 })
 export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
   @Input() type!: RegistrationEntityTypes | undefined;
@@ -34,7 +44,7 @@ export class GridUsagesDialogComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly dialog: MatDialog,
     private readonly store: Store,
-    private readonly componentStore: GridUsagesDialogComponentStore
+    private readonly componentStore: GridUsagesDialogComponentStore,
   ) {
     super();
   }

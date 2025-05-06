@@ -36,10 +36,18 @@ import { NavigationDrawerComponent } from '../../../shared/components/navigation
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
 @Component({
-    selector: 'app-data-processing-details',
-    templateUrl: './data-processing-details.component.html',
-    styleUrl: './data-processing-details.component.scss',
-    imports: [NgIf, BreadcrumbsComponent, ButtonComponent, NavigationDrawerComponent, RouterOutlet, LoadingComponent, AsyncPipe]
+  selector: 'app-data-processing-details',
+  templateUrl: './data-processing-details.component.html',
+  styleUrl: './data-processing-details.component.scss',
+  imports: [
+    NgIf,
+    BreadcrumbsComponent,
+    ButtonComponent,
+    NavigationDrawerComponent,
+    RouterOutlet,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -71,7 +79,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
         routerLink: `${dprUuid}`,
       },
     ]),
-    filterNullish()
+    filterNullish(),
   );
 
   public readonly navigationItems: NavigationDrawerItem[] = [
@@ -124,7 +132,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     private router: Router,
     private notificationService: NotificationService,
     private actions$: Actions,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {
     super();
   }
@@ -137,7 +145,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.deleteDataProcessingSuccess)).subscribe(() => {
         this.router.navigate([`${AppPath.dataProcessing}`]);
-      })
+      }),
     );
   }
 
@@ -155,7 +163,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
           if (result === true) {
             this.store.dispatch(DataProcessingActions.deleteDataProcessing());
           }
-        })
+        }),
     );
   }
 
@@ -164,12 +172,12 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       this.route.params
         .pipe(
           map((params) => params['uuid']),
-          distinctUntilChanged()
+          distinctUntilChanged(),
         )
         .subscribe((dprUuid) => {
           this.store.dispatch(DataProcessingActions.getDataProcessingPermissions(dprUuid));
           this.store.dispatch(DataProcessingActions.getDataProcessing(dprUuid));
-        })
+        }),
     );
   }
 
@@ -182,7 +190,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til denne Databehandling`);
           this.router.navigate([`${AppPath.dataProcessing}`]);
-        })
+        }),
     );
   }
 
@@ -191,7 +199,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       this.actions$.pipe(ofType(DataProcessingActions.getDataProcessingError)).subscribe(() => {
         this.notificationService.showError($localize`Databehandling findes ikke`);
         this.router.navigate([`${AppPath.dataProcessing}`]);
-      })
+      }),
     );
   }
 }

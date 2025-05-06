@@ -5,11 +5,9 @@ import { UsageLinkComponent } from '../../../it-system-usage-column/grid-usage-l
 import { SearchPropertyPipe } from '../../../../../pipes/column-property.pipe';
 
 @Component({
-    selector: 'app-usages-cell',
-    templateUrl: './usages-cell.component.html',
-    styleUrl: './usages-cell.component.scss',
-    imports: [NgIf, UsageLinkComponent, SearchPropertyPipe]
+  selector: 'app-usages-cell',
+  templateUrl: './usages-cell.component.html',
+  styleUrl: './usages-cell.component.scss',
+  imports: [NgIf, UsageLinkComponent, SearchPropertyPipe],
 })
-export class UsagesCellComponent extends BaseCellComponent {
-
-}
+export class UsagesCellComponent extends BaseCellComponent {}

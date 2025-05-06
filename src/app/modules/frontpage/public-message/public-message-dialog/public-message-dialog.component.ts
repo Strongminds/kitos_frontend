@@ -12,17 +12,20 @@ import { DialogActionsComponent } from '../../../../shared/components/dialogs/di
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-public-message-dialog',
-    templateUrl: './public-message-dialog.component.html',
-    styleUrl: './public-message-dialog.component.scss',
-    imports: [NgIf, DialogComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-public-message-dialog',
+  templateUrl: './public-message-dialog.component.html',
+  styleUrl: './public-message-dialog.component.scss',
+  imports: [NgIf, DialogComponent, DialogActionsComponent, ButtonComponent, AsyncPipe],
 })
 export class PublicMessageDialogComponent {
   @Input() publicMessage$!: Observable<PublicMessage>;
 
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {}
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialog,
+  ) {}
 
   public openEditDialog(publicMessage: PublicMessage): void {
     const dialogRef = this.dialog.open(EditPublicMessageDialogComponent);

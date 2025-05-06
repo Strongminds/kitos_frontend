@@ -28,7 +28,7 @@ export class HelpDialogComponent implements OnInit {
     private dialogRef: MatDialogRef<HelpDialogComponent>,
     private store: Store,
     private componentStore: HelpDialogComponentStore,
-    private dialog: MatDialog
+    private dialog: MatDialog,
   ) {}
 
   ngOnInit() {

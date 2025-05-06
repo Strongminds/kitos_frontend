@@ -17,10 +17,21 @@ import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.
 import { InfoIconComponent } from '../../../../shared/components/icons/info-icon.component';
 
 @Component({
-    selector: 'app-ui-config-tab-section',
-    templateUrl: './ui-config-tab-section.component.html',
-    styleUrl: './ui-config-tab-section.component.scss',
-    imports: [AccordionComponent, DividerComponent, NgIf, ParagraphComponent, StandardVerticalContentGridComponent, NgFor, CheckboxButtonComponent, TooltipComponent, InfoIconComponent, AsyncPipe]
+  selector: 'app-ui-config-tab-section',
+  templateUrl: './ui-config-tab-section.component.html',
+  styleUrl: './ui-config-tab-section.component.scss',
+  imports: [
+    AccordionComponent,
+    DividerComponent,
+    NgIf,
+    ParagraphComponent,
+    StandardVerticalContentGridComponent,
+    NgFor,
+    CheckboxButtonComponent,
+    TooltipComponent,
+    InfoIconComponent,
+    AsyncPipe,
+  ],
 })
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;
@@ -38,15 +49,15 @@ export class UiConfigTabSectionComponent {
   public onCheckboxChanged($event: UINodeCustomization) {
     const dto: APICustomizedUINodeDTO = { enabled: $event.enabled, key: $event.fullKey };
     this.store.dispatch(
-      UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto })
+      UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto }),
     );
   }
 
   public checkboxDisabled(): Observable<boolean> {
     return this.moduleEnabled$.pipe(
       map((moduleEnabled) => {
-        return this.tabViewModel.isObligatory === true ||  moduleEnabled === false;
-      })
+        return this.tabViewModel.isObligatory === true || moduleEnabled === false;
+      }),
     );
   }
 }

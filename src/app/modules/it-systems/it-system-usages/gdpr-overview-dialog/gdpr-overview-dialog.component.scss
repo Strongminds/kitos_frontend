@@ -1,6 +1,6 @@
-@use 'theme';
+@use "theme";
 
-::ng-deep app-dialog .content{
+::ng-deep app-dialog .content {
   padding-top: theme.$padding-medium !important;
 }
 

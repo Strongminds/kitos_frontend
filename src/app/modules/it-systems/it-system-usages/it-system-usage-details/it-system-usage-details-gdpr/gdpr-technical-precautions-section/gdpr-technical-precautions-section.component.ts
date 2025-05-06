@@ -28,10 +28,21 @@ import { CheckboxComponent } from '../../../../../../shared/components/checkbox/
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
-    selector: 'app-gdpr-technical-precautions-section',
-    templateUrl: './gdpr-technical-precautions-section.component.html',
-    styleUrls: ['./gdpr-technical-precautions-section.component.scss'],
-    imports: [AccordionComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DropdownComponent, ParagraphComponent, NgFor, CheckboxComponent, EditUrlSectionComponent, AsyncPipe]
+  selector: 'app-gdpr-technical-precautions-section',
+  templateUrl: './gdpr-technical-precautions-section.component.html',
+  styleUrls: ['./gdpr-technical-precautions-section.component.scss'],
+  imports: [
+    AccordionComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    ParagraphComponent,
+    NgFor,
+    CheckboxComponent,
+    EditUrlSectionComponent,
+    AsyncPipe,
+  ],
 })
 export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
@@ -40,11 +51,12 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionCompo
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isTechnicalPrecautionsFalse$ = this.currentGdpr$.pipe(
     map(
-      (gdpr) => gdpr.technicalPrecautionsInPlace !== APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsInPlaceEnum.Yes
-    )
+      (gdpr) =>
+        gdpr.technicalPrecautionsInPlace !== APIGDPRRegistrationsResponseDTO.TechnicalPrecautionsInPlaceEnum.Yes,
+    ),
   );
   public readonly selectTechnicalDocumentation$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.technicalPrecautionsDocumentation)
+    map((gdpr) => gdpr.technicalPrecautionsDocumentation),
   );
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
@@ -55,12 +67,15 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionCompo
     {
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   public readonly technicalPrecautionsForm = new FormGroup({}, { updateOn: 'change' });
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+  constructor(
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -74,7 +89,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionCompo
       });
       const currentTechnicalPrecautions: (TechnicalPrecautions | undefined)[] = [];
       gdpr.technicalPrecautionsApplied.forEach((precaution) =>
-        currentTechnicalPrecautions.push(mapTechnicalPecautions(precaution))
+        currentTechnicalPrecautions.push(mapTechnicalPecautions(precaution)),
       );
       this.technicalPrecautionsForm.patchValue({
         Encryption: currentTechnicalPrecautions.includes(technicalPrecautionsOptions[0]),
@@ -112,7 +127,7 @@ export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionCompo
       this.store.dispatch(
         ITSystemUsageActions.patchITSystemUsage({
           gdpr: { technicalPrecautionsApplied: newTechnicalPrecautionsApplied },
-        })
+        }),
       );
     }
   }

@@ -15,11 +15,25 @@ import { IconButtonComponent } from '../../../../shared/components/buttons/icon-
 import { EyeIconComponent } from '../../../../shared/components/icons/eye-icon.component';
 
 @Component({
-    selector: 'app-global-admin-other-api-users',
-    templateUrl: './global-admin-other-api-users.component.html',
-    styleUrl: './global-admin-other-api-users.component.scss',
-    providers: [GlobalAdminOtherApiUsersComponentStore],
-    imports: [CardComponent, CardHeaderComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent, CheckPositiveGreenIconComponent, CheckNegativeGrayIconComponent, EmptyStateComponent, LoadingComponent, IconButtonComponent, EyeIconComponent, AsyncPipe]
+  selector: 'app-global-admin-other-api-users',
+  templateUrl: './global-admin-other-api-users.component.html',
+  styleUrl: './global-admin-other-api-users.component.scss',
+  providers: [GlobalAdminOtherApiUsersComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    CheckPositiveGreenIconComponent,
+    CheckNegativeGrayIconComponent,
+    EmptyStateComponent,
+    LoadingComponent,
+    IconButtonComponent,
+    EyeIconComponent,
+    AsyncPipe,
+  ],
 })
 export class GlobalAdminOtherApiUsersComponent implements OnInit {
   public usersWithRightsholderAccess$ = this.componentStore.usersWithRightsholderAccess$;
@@ -28,7 +42,10 @@ export class GlobalAdminOtherApiUsersComponent implements OnInit {
   public usersWithCrossAccess$ = this.componentStore.usersWithCrossOrganizationalAccess$;
   public isLoadingUsersWithCrossAccess$ = this.componentStore.isLoadingUsersWithCrossAccess$;
 
-  constructor(private componentStore: GlobalAdminOtherApiUsersComponentStore, private dialog: MatDialog) {}
+  constructor(
+    private componentStore: GlobalAdminOtherApiUsersComponentStore,
+    private dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.componentStore.getUsersWithRightsholderAccess();

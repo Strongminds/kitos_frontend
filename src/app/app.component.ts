@@ -21,10 +21,10 @@ import { RouterOutlet } from '@angular/router';
 import { PopupMessagesComponent } from './shared/components/popup-messages/popup-messages.component';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    imports: [NgIf, NavBarComponent, LoadingComponent, RouterOutlet, PopupMessagesComponent, AsyncPipe]
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+  imports: [NgIf, NavBarComponent, LoadingComponent, RouterOutlet, PopupMessagesComponent, AsyncPipe],
 })
 export class AppComponent extends BaseComponent implements OnInit {
   public isAuthenticating$ = this.store.select(selectIsAuthenticating);
@@ -38,7 +38,7 @@ export class AppComponent extends BaseComponent implements OnInit {
     private organizationService: OrganizationService,
     private materialIconsService: MaterialIconsConfigService,
     private externalReferencesService: ExternalReferencesStoreAdapterService,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -74,7 +74,7 @@ export class AppComponent extends BaseComponent implements OnInit {
         }
 
         this.store.dispatch(UserActions.updateHasMultipleOrganizations(organizations.length > 1));
-      })
+      }),
     );
   }
 

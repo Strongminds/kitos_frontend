@@ -13,11 +13,21 @@ import { ParagraphComponent } from '../../../../shared/components/paragraph/para
 import { CreateEntityDialogActionButtonsComponent } from '../../../../shared/components/entity-creation/create-entity-dialog-action-buttons/create-entity-dialog-action-buttons.component';
 
 @Component({
-    selector: 'app-create-interface-dialog',
-    templateUrl: './create-interface-dialog.component.html',
-    styleUrl: './create-interface-dialog.component.scss',
-    providers: [CreateEntityDialogComponentStore],
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, CreateEntityDialogActionButtonsComponent, AsyncPipe]
+  selector: 'app-create-interface-dialog',
+  templateUrl: './create-interface-dialog.component.html',
+  styleUrl: './create-interface-dialog.component.scss',
+  providers: [CreateEntityDialogComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    CreateEntityDialogActionButtonsComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateInterfaceDialogComponent extends BaseCreateEntityDialogComponent implements OnInit {
   override entityType = 'it-interface' as RegistrationEntityTypes;
@@ -41,7 +51,7 @@ export class CreateInterfaceDialogComponent extends BaseCreateEntityDialogCompon
           searchObject: { nameEquals: value, extraSearchParameter: interfaceIdControl?.value ?? '' },
           entityType: this.entityType,
         });
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -53,7 +63,7 @@ export class CreateInterfaceDialogComponent extends BaseCreateEntityDialogCompon
           searchObject: { nameEquals: nameValue, extraSearchParameter: value ?? '' },
           entityType: this.entityType,
         });
-      })
+      }),
     );
   }
 

@@ -7,7 +7,7 @@ export const selectAll = createSelector(selectOrganizationUserState, organizatio
 export const selectTotal = createSelector(selectOrganizationUserState, (state) => state.total);
 export const selectOrganizationUserGridLoading = createSelector(
   selectOrganizationUserState,
-  (state) => state.isLoadingUsersQuery
+  (state) => state.isLoadingUsersQuery,
 );
 export const selectOrganizationUserGridState = createSelector(selectOrganizationUserState, (state) => state.gridState);
 export const selectPreviousGridState = createSelector(selectOrganizationUserState, (state) => state.previousGridState);
@@ -17,7 +17,7 @@ export const selectOrganizationUserGridData = createSelector(selectAll, selectTo
 }));
 export const selectOrganizationUserGridColumns = createSelector(
   selectOrganizationUserState,
-  (state) => state.gridColumns
+  (state) => state.gridColumns,
 );
 
 export const selectOrganizationUserByIndex = (index: number) =>
@@ -28,17 +28,17 @@ export const selectOrganizationUserByUuid = (uuid: string) =>
 
 export const selectOrganizationUserCreatePermissions = createSelector(
   selectOrganizationUserState,
-  (state) => state.permissions?.create
+  (state) => state.permissions?.create,
 );
 export const selectOrganizationUserModifyPermissions = createSelector(
   selectOrganizationUserState,
-  (state) => state.permissions?.modify
+  (state) => state.permissions?.modify,
 );
 export const selectOrganizationUserDeletePermissions = createSelector(
   selectOrganizationUserState,
-  (state) => state.permissions?.delete
+  (state) => state.permissions?.delete,
 );
 export const selectOrganizationUserIsCreateLoading = createSelector(
   selectOrganizationUserState,
-  (state) => state.createLoading
+  (state) => state.createLoading,
 );

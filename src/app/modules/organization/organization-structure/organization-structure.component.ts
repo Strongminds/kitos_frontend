@@ -49,10 +49,29 @@ import { CheckboxButtonComponent } from '../../../shared/components/buttons/chec
 import { OrganizationUnitRoleTableComponent } from './organization-unit-role-table/organization-unit-role-table.component';
 
 @Component({
-    selector: 'app-organization-structure',
-    templateUrl: './organization-structure.component.html',
-    styleUrl: './organization-structure.component.scss',
-    imports: [HelpButtonComponent, CardComponent, NgIf, MenuButtonComponent, MenuButtonItemComponent, PlusIconBlueComponent, ReorderIconComponent, StandardVerticalContentGridComponent, ButtonComponent, DragAndDropTreeComponent, ParagraphComponent, KitosUnitColorIconComponent, FkOrgColorIconComponent, LoadingComponent, DetailsHeaderComponent, CheckboxButtonComponent, OrganizationUnitRoleTableComponent, AsyncPipe]
+  selector: 'app-organization-structure',
+  templateUrl: './organization-structure.component.html',
+  styleUrl: './organization-structure.component.scss',
+  imports: [
+    HelpButtonComponent,
+    CardComponent,
+    NgIf,
+    MenuButtonComponent,
+    MenuButtonItemComponent,
+    PlusIconBlueComponent,
+    ReorderIconComponent,
+    StandardVerticalContentGridComponent,
+    ButtonComponent,
+    DragAndDropTreeComponent,
+    ParagraphComponent,
+    KitosUnitColorIconComponent,
+    FkOrgColorIconComponent,
+    LoadingComponent,
+    DetailsHeaderComponent,
+    CheckboxButtonComponent,
+    OrganizationUnitRoleTableComponent,
+    AsyncPipe,
+  ],
 })
 export class OrganizationStructureComponent extends BaseComponent implements OnInit {
   public readonly organizationUuid$ = this.store.select(selectOrganizationUuid).pipe(filterNullish());
@@ -60,14 +79,14 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
 
   public readonly unitPermissions$ = this.store.select(selectUnitPermissions);
   public readonly modificationPermission$ = this.unitPermissions$.pipe(
-    map((permissions) => permissions?.canBeModified ?? false)
+    map((permissions) => permissions?.canBeModified ?? false),
   );
 
   public readonly currentUnitUuid$ = this.store.select(selectCurrentUnitUuid);
 
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.store.select(selectExpandedNodeUuids)),
-    map(([units, expandedNodeUuids]) => mapUnitsToTree(units, expandedNodeUuids))
+    map(([units, expandedNodeUuids]) => mapUnitsToTree(units, expandedNodeUuids)),
   );
 
   public readonly disabledUnitsUuids$ = this.unitTree$.pipe(
@@ -79,7 +98,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map((node) => {
       if (!node) throw new Error('Node not found');
       return getUuidsOfEntityTreeNodeAndhildren(node);
-    })
+    }),
   );
 
   public readonly currentOrganizationUnit$ = this.organizationUnits$.pipe(
@@ -87,7 +106,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     map(([organizationUnits, currentUuid]) => {
       const unit = organizationUnits.find((unit) => unit.uuid === currentUuid);
       return unit ?? { uuid: '', name: '' };
-    })
+    }),
   );
 
   public readonly currentUnitName$ = this.currentOrganizationUnit$.pipe(map((unit) => unit.name));
@@ -95,12 +114,12 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   private readonly rootUnitUuid$ = this.unitTree$.pipe(
     map((units) => units.filter((unit) => unit.isRoot)),
     filter((rootUnits) => rootUnits.length > 0),
-    map((rootUnits) => rootUnits[0].uuid)
+    map((rootUnits) => rootUnits[0].uuid),
   );
 
   public readonly isRootUnitSelected$ = this.currentUnitUuid$.pipe(
     combineLatestWith(this.rootUnitUuid$),
-    map(([uuid, rootUuid]) => uuid === rootUuid)
+    map(([uuid, rootUuid]) => uuid === rootUuid),
   );
 
   private dragDisabledSubject: BehaviorSubject<boolean> = new BehaviorSubject(true);
@@ -109,7 +128,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
   public includeSubnits$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   public readonly hasFkOrg$ = this.organizationUnits$.pipe(
-    map((organizationUnits) => organizationUnits.some((unit) => unit.origin === 'STSOrganisation'))
+    map((organizationUnits) => organizationUnits.some((unit) => unit.origin === 'STSOrganisation')),
   );
 
   constructor(
@@ -117,7 +136,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     private route: ActivatedRoute,
     private actions$: Actions,
     private matDialog: MatDialog,
-    private router: Router
+    private router: Router,
   ) {
     super();
   }
@@ -128,7 +147,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
     this.subscriptions.add(
       this.rootUnitUuid$
         .pipe(first())
-        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNodes([uuid])))
+        .subscribe((uuid) => this.store.dispatch(OrganizationUnitActions.addExpandedNodes([uuid]))),
     );
 
     this.subscriptions.add(
@@ -138,18 +157,18 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
         } else {
           this.store.dispatch(OrganizationUnitActions.getPermissions(rootUnitUuid));
         }
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.route.params
         .pipe(
           map((params) => params['uuid']),
-          switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$))
+          switchMap((uuid) => (uuid ? [uuid] : this.rootUnitUuid$)),
         )
         .subscribe((uuid) => {
           this.store.dispatch(OrganizationUnitActions.updateCurrentUnitUuid(uuid));
-        })
+        }),
     );
   }
 
@@ -164,17 +183,17 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
           ofType(OrganizationUnitActions.patchOrganizationUnitSuccess),
           first(),
           combineLatestWith(this.organizationUnits$),
-          first()
+          first(),
         )
         .subscribe(([{ unit }, units]) => {
           this.store.dispatch(OrganizationUnitActions.updateHierarchy(unit, units));
-        })
+        }),
     );
 
     this.store.dispatch(
       OrganizationUnitActions.patchOrganizationUnit(event.movedNodeUuid, {
         parentUuid: event.targetParentNodeUuid,
-      })
+      }),
     );
   }
 
@@ -230,7 +249,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
           concatLatestFrom(() => [
             this.store.select(selectUserDefaultUnitUuid),
             this.organizationUnits$.pipe(filterNullish()),
-          ])
+          ]),
         )
         .subscribe(([_, uuid, units]) => {
           if (uuid) {
@@ -238,7 +257,7 @@ export class OrganizationStructureComponent extends BaseComponent implements OnI
             this.store.dispatch(OrganizationUnitActions.addExpandedNodes(this.findParentUuids(units, uuid)));
             return;
           }
-        })
+        }),
     );
   }
 }

@@ -7,10 +7,10 @@ import { HideShowDialogComponent } from '../hide-show-dialog/hide-show-dialog.co
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-hide-show-button[columns][entityType]',
-    templateUrl: './hide-show-button.component.html',
-    styleUrl: './hide-show-button.component.scss',
-    imports: [ButtonComponent]
+  selector: 'app-hide-show-button[columns][entityType]',
+  templateUrl: './hide-show-button.component.html',
+  styleUrl: './hide-show-button.component.scss',
+  imports: [ButtonComponent],
 })
 export class HideShowButtonComponent {
   @Input() columns!: GridColumn[] | null;

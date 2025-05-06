@@ -27,7 +27,10 @@
     margin-left: -8px;
     opacity: 0;
     max-width: 0;
-    transition: opacity 0.3s ease, max-width 0.3s ease, margin-left 0.3s ease;
+    transition:
+      opacity 0.3s ease,
+      max-width 0.3s ease,
+      margin-left 0.3s ease;
   }
 
   .label.visible {

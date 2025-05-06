@@ -18,10 +18,22 @@ import { DialogActionsComponent } from '../../../../shared/components/dialogs/di
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-create-local-admin-dialog',
-    templateUrl: './create-local-admin-dialog.component.html',
-    styleUrl: './create-local-admin-dialog.component.scss',
-    imports: [DialogComponent, NgIf, LoadingComponent, StandardVerticalContentGridComponent, UserDropdownComponent, FormsModule, ReactiveFormsModule, OrganizationDropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-create-local-admin-dialog',
+  templateUrl: './create-local-admin-dialog.component.html',
+  styleUrl: './create-local-admin-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    NgIf,
+    LoadingComponent,
+    StandardVerticalContentGridComponent,
+    UserDropdownComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    OrganizationDropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateLocalAdminDialogComponent extends BaseComponent implements OnInit {
   public readonly localAdminOrganizations$ = this.store.select(selectAllLocalAdmins).pipe(
@@ -35,7 +47,7 @@ export class CreateLocalAdminDialogComponent extends BaseComponent implements On
         acc[userUuid].push(orgUuid);
         return acc;
       }, {});
-    })
+    }),
   );
   public readonly loading$ = this.store.select(selectLocalAdminsLoading);
 
@@ -45,14 +57,14 @@ export class CreateLocalAdminDialogComponent extends BaseComponent implements On
     user: new FormControl<APIUserReferenceResponseDTO | undefined>(undefined, Validators.required),
     organization: new FormControl<APIOrganizationResponseDTO | undefined>(
       { value: undefined, disabled: true },
-      Validators.required
+      Validators.required,
     ),
   });
 
   constructor(
     private dialogRef: MatDialogRef<CreateLocalAdminDialogComponent>,
     private store: Store,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -61,7 +73,7 @@ export class CreateLocalAdminDialogComponent extends BaseComponent implements On
     this.subscriptions.add(
       this.actions$.pipe(ofType(LocalAdminUserActions.addLocalAdminSuccess)).subscribe(() => {
         this.close();
-      })
+      }),
     );
   }
 

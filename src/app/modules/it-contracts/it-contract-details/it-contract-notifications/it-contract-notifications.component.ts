@@ -9,10 +9,10 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { NotificationsTableComponent } from '../../../../shared/components/notifications-table/notifications-table.component';
 
 @Component({
-    selector: 'app-it-contract-notifications',
-    templateUrl: './it-contract-notifications.component.html',
-    styleUrl: './it-contract-notifications.component.scss',
-    imports: [CardComponent, CardHeaderComponent, NgIf, NotificationsTableComponent, AsyncPipe]
+  selector: 'app-it-contract-notifications',
+  templateUrl: './it-contract-notifications.component.html',
+  styleUrl: './it-contract-notifications.component.scss',
+  imports: [CardComponent, CardHeaderComponent, NgIf, NotificationsTableComponent, AsyncPipe],
 })
 export class ItContractNotificationsComponent extends BaseComponent {
   public readonly contractUuid$ = this.store.select(selectItContractUuid).pipe(filterNullish());

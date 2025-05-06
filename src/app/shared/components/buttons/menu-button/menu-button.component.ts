@@ -7,10 +7,10 @@ import { NgIf } from '@angular/common';
 import { IconComponent } from '../../icon/icon.component';
 
 @Component({
-    selector: 'app-menu-button',
-    templateUrl: './menu-button.component.html',
-    styleUrls: ['./menu-button.component.scss'],
-    imports: [ButtonComponent, MatMenuTrigger, NgIf, IconComponent, MatMenu]
+  selector: 'app-menu-button',
+  templateUrl: './menu-button.component.html',
+  styleUrls: ['./menu-button.component.scss'],
+  imports: [ButtonComponent, MatMenuTrigger, NgIf, IconComponent, MatMenu],
 })
 export class MenuButtonComponent {
   @ViewChild(MatMenuTrigger) menuTrigger!: MatMenuTrigger;

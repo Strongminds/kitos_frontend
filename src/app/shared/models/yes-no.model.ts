@@ -17,7 +17,7 @@ export const yesNoOptions: YesNoOption[] = [
 ];
 
 export const mapToYesNoEnum = (
-  value?: APIDataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum
+  value?: APIDataProcessingRegistrationGeneralDataResponseDTO.TransferToInsecureThirdCountriesEnum,
 ): YesNoOption | undefined => {
   return yesNoOptions.find((option) => option.value === value);
 };

@@ -14,10 +14,21 @@ import { DialogActionsComponent } from '../dialog-actions/dialog-actions.compone
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-link-write-dialog',
-    templateUrl: './link-write-dialog.component.html',
-    styleUrl: './link-write-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-link-write-dialog',
+  templateUrl: './link-write-dialog.component.html',
+  styleUrl: './link-write-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public url$!: Observable<string | undefined>;
@@ -39,13 +50,13 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
         this.urlForm.patchValue({
           url: url,
         });
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.urlForm.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe(() => {
         this.showValidationError = isUrlEmptyOrValid(this.urlForm.value.url ?? undefined) === false;
-      })
+      }),
     );
   }
 
@@ -61,7 +72,7 @@ export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
       map((existingUrl) => {
         const formUrl = this.urlForm.value.url;
         return existingUrl === formUrl;
-      })
+      }),
     );
   }
 

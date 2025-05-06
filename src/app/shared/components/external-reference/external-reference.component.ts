@@ -4,10 +4,10 @@ import { validateExternalReferenceUrl } from '../../helpers/link.helpers';
 import { NgIf } from '@angular/common';
 
 @Component({
-    selector: 'app-external-reference',
-    templateUrl: 'external-reference.component.html',
-    styleUrls: ['external-reference.component.scss'],
-    imports: [NgIf]
+  selector: 'app-external-reference',
+  templateUrl: 'external-reference.component.html',
+  styleUrls: ['external-reference.component.scss'],
+  imports: [NgIf],
 })
 export class ExternalReferenceComponent implements OnInit {
   @Input() public reference?: APIExternalReferenceDataResponseDTO;

@@ -43,10 +43,25 @@ type UsageGDPRSection =
   | 'retention-period';
 
 @Component({
-    selector: 'app-it-system-usage-details-gdpr',
-    templateUrl: './it-system-usage-details-gdpr.component.html',
-    styleUrls: ['./it-system-usage-details-gdpr.component.scss'],
-    imports: [NgIf, GeneralInfoSectionComponent, CardComponent, CardHeaderComponent, ButtonComponent, StandardVerticalContentGridComponent, DataSensitivitySectionComponent, RegisteredDataCategoriesSectionComponent, GdprTechnicalPrecautionsSectionComponent, GdprUserSupervisionSectionComponent, GdprRiskAssessmentSectionComponent, GdprDpiaConductedSectionComponent, GdprRetentionPeriodSectionComponent, AsyncPipe]
+  selector: 'app-it-system-usage-details-gdpr',
+  templateUrl: './it-system-usage-details-gdpr.component.html',
+  styleUrls: ['./it-system-usage-details-gdpr.component.scss'],
+  imports: [
+    NgIf,
+    GeneralInfoSectionComponent,
+    CardComponent,
+    CardHeaderComponent,
+    ButtonComponent,
+    StandardVerticalContentGridComponent,
+    DataSensitivitySectionComponent,
+    RegisteredDataCategoriesSectionComponent,
+    GdprTechnicalPrecautionsSectionComponent,
+    GdprUserSupervisionSectionComponent,
+    GdprRiskAssessmentSectionComponent,
+    GdprDpiaConductedSectionComponent,
+    GdprRetentionPeriodSectionComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   @Output() disableLinkControls = new EventEmitter<void>();
@@ -105,7 +120,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   ]);
 
   public readonly expandAllButtonText$ = this.allExpanded$.pipe(
-    map((allExpanded) => (allExpanded ? $localize`Luk alle` : $localize`Åben alle`))
+    map((allExpanded) => (allExpanded ? $localize`Luk alle` : $localize`Åben alle`)),
   );
 
   public disableFormsIfNoPermissions(controls: AbstractControl[]) {
@@ -116,7 +131,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
         .subscribe(() => {
           controls.forEach((control: AbstractControl) => control.disable());
           this.disableLinkControls.emit();
-        })
+        }),
     );
   }
 
@@ -157,7 +172,7 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
         this.riskAssessmentExpanded$.next(targetValue);
         this.dpiaConductedExpanded$.next(targetValue);
         this.retentionPeriodExpanded$.next(targetValue);
-      })
+      }),
     );
   }
 }

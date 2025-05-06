@@ -4,10 +4,10 @@ import { TextBoxInfoComponent } from '../textbox-info/textbox-info.component';
 import { ParagraphComponent } from '../paragraph/paragraph.component';
 
 @Component({
-    selector: 'app-content-with-info',
-    templateUrl: './content-with-info.component.html',
-    styleUrl: './content-with-info.component.scss',
-    imports: [TextBoxInfoComponent, ParagraphComponent]
+  selector: 'app-content-with-info',
+  templateUrl: './content-with-info.component.html',
+  styleUrl: './content-with-info.component.scss',
+  imports: [TextBoxInfoComponent, ParagraphComponent],
 })
 export class ContentWithInfoComponent {
   @Input() public text!: string;

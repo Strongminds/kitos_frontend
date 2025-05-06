@@ -15,11 +15,22 @@ import { StatusChipComponent } from '../../../../../shared/components/status-chi
 import { EmptyStateComponent } from '../../../../../shared/components/empty-states/empty-state.component';
 
 @Component({
-    selector: 'app-it-system-usage-details-data-processing',
-    templateUrl: './it-system-usage-details-data-processing.component.html',
-    styleUrls: ['./it-system-usage-details-data-processing.component.scss'],
-    providers: [ItSystemUsageDetailsDataProcessingComponentStore],
-    imports: [CardComponent, CardHeaderComponent, NgIf, LoadingComponent, NativeTableComponent, NgFor, DetailsPageLinkComponent, StatusChipComponent, EmptyStateComponent, AsyncPipe]
+  selector: 'app-it-system-usage-details-data-processing',
+  templateUrl: './it-system-usage-details-data-processing.component.html',
+  styleUrls: ['./it-system-usage-details-data-processing.component.scss'],
+  providers: [ItSystemUsageDetailsDataProcessingComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    LoadingComponent,
+    NativeTableComponent,
+    NgFor,
+    DetailsPageLinkComponent,
+    StatusChipComponent,
+    EmptyStateComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemUsageDetailsDataProcessingComponent extends BaseComponent implements OnInit {
   public readonly isLoading$ = this.dataProcessingComponentStore.associatedDataProcessingRegistrationsIsLoading$;
@@ -30,7 +41,7 @@ export class ItSystemUsageDetailsDataProcessingComponent extends BaseComponent i
 
   constructor(
     private readonly store: Store,
-    private readonly dataProcessingComponentStore: ItSystemUsageDetailsDataProcessingComponentStore
+    private readonly dataProcessingComponentStore: ItSystemUsageDetailsDataProcessingComponentStore,
   ) {
     super();
   }
@@ -41,8 +52,8 @@ export class ItSystemUsageDetailsDataProcessingComponent extends BaseComponent i
         .select(selectItSystemUsageUuid)
         .pipe(filterNullish())
         .subscribe((itSystemUsageUuid) =>
-          this.dataProcessingComponentStore.getAssociatedDataProcessingRegistrations(itSystemUsageUuid)
-        )
+          this.dataProcessingComponentStore.getAssociatedDataProcessingRegistrations(itSystemUsageUuid),
+        ),
     );
   }
 }

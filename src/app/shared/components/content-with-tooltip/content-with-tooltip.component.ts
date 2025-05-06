@@ -7,10 +7,10 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
 import { InfoIconComponent } from '../icons/info-icon.component';
 
 @Component({
-    selector: 'app-content-with-tooltip',
-    templateUrl: './content-with-tooltip.component.html',
-    styleUrls: ['./content-with-tooltip.component.scss'],
-    imports: [ContentSpaceBetweenComponent, NgIf, ParagraphComponent, TooltipComponent, InfoIconComponent]
+  selector: 'app-content-with-tooltip',
+  templateUrl: './content-with-tooltip.component.html',
+  styleUrls: ['./content-with-tooltip.component.scss'],
+  imports: [ContentSpaceBetweenComponent, NgIf, ParagraphComponent, TooltipComponent, InfoIconComponent],
 })
 export class ContentWithTooltipComponent {
   @Input() public description?: string;

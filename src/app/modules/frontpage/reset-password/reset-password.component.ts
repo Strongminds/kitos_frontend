@@ -17,11 +17,23 @@ import { ParagraphComponent } from '../../../shared/components/paragraph/paragra
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-reset-password',
-    templateUrl: './reset-password.component.html',
-    styleUrl: './reset-password.component.scss',
-    providers: [ResetPasswordComponentStore],
-    imports: [NgIf, LoadingComponent, CardComponent, StandardVerticalContentGridComponent, TextBoxComponent, FormsModule, ReactiveFormsModule, ParagraphComponent, ButtonComponent, RouterLink, AsyncPipe]
+  selector: 'app-reset-password',
+  templateUrl: './reset-password.component.html',
+  styleUrl: './reset-password.component.scss',
+  providers: [ResetPasswordComponentStore],
+  imports: [
+    NgIf,
+    LoadingComponent,
+    CardComponent,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    ParagraphComponent,
+    ButtonComponent,
+    RouterLink,
+    AsyncPipe,
+  ],
 })
 export class ResetPasswordComponent extends BaseComponent implements OnInit {
   public readonly requestId$: Observable<string> = this.route.params.pipe(map((params) => params['id']));
@@ -41,7 +53,7 @@ export class ResetPasswordComponent extends BaseComponent implements OnInit {
     private componentStore: ResetPasswordComponentStore,
     private store: Store,
     private actions$: Actions,
-    private router: Router
+    private router: Router,
   ) {
     super();
   }
@@ -56,7 +68,7 @@ export class ResetPasswordComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$.pipe(ofType(UserActions.resetPasswordSuccess, UserActions.resetPasswordError)).subscribe(() => {
         this.componentStore.setLoading(false);
-      })
+      }),
     );
 
     this.formGroup.valueChanges.subscribe((value) => {

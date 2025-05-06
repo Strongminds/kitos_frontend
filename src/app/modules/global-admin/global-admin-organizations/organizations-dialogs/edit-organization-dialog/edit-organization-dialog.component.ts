@@ -28,11 +28,23 @@ import { DialogActionsComponent } from '../../../../../shared/components/dialogs
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-edit-organization-unit-dialog',
-    templateUrl: './edit-organization-dialog.component.html',
-    styleUrl: './edit-organization-dialog.component.scss',
-    providers: [OrganizationsDialogComponentStore],
-    imports: [DialogComponent, NgIf, LoadingComponent, StandardVerticalContentGridComponent, TextBoxComponent, FormsModule, ReactiveFormsModule, DropdownComponent, DialogActionsComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-edit-organization-unit-dialog',
+  templateUrl: './edit-organization-dialog.component.html',
+  styleUrl: './edit-organization-dialog.component.scss',
+  providers: [OrganizationsDialogComponentStore],
+  imports: [
+    DialogComponent,
+    NgIf,
+    LoadingComponent,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   @Input() organization!: OrganizationOData;
@@ -50,7 +62,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     private dialogRef: MatDialogRef<EditOrganizationDialogComponent>,
     private store: Store,
     private actions$: Actions,
-    componentStore: OrganizationsDialogComponentStore
+    componentStore: OrganizationsDialogComponentStore,
   ) {
     super(componentStore);
   }
@@ -121,7 +133,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
   private foreignCountryCodeHasChange(): boolean {
     const initialValue = this.getInitialForeignCountryCodeValue(this.organization.ForeignCountryCode);
     const currentvalue = this.formGroup.value.foreignCountryCode;
-    return !((initialValue === undefined && currentvalue === undefined) || (initialValue?.uuid === currentvalue?.uuid));
+    return !((initialValue === undefined && currentvalue === undefined) || initialValue?.uuid === currentvalue?.uuid);
   }
 
   private hasChange<T>(formValue: T | null | undefined, orginialValue: T | undefined): boolean {

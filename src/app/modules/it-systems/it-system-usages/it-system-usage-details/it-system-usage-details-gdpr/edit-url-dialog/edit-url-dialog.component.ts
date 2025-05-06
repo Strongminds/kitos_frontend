@@ -17,10 +17,20 @@ import { DialogActionsComponent } from '../../../../../../shared/components/dial
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-edit-url-dialog',
-    templateUrl: './edit-url-dialog.component.html',
-    styleUrls: ['./edit-url-dialog.component.scss'],
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-edit-url-dialog',
+  templateUrl: './edit-url-dialog.component.html',
+  styleUrls: ['./edit-url-dialog.component.scss'],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   @Input() simpleLink?: SimpleLink | undefined;
@@ -35,7 +45,10 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   public isBusy = false;
   public showValidationError = false;
 
-  constructor(private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>, private readonly actions$: Actions) {
+  constructor(
+    private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>,
+    private readonly actions$: Actions,
+  ) {
     super();
   }
 
@@ -62,19 +75,19 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchITSystemUsageSuccess), first())
-        .subscribe(() => this.dialogRef.close())
+        .subscribe(() => this.dialogRef.close()),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageActions.patchITSystemUsageError)).subscribe(() => {
         this.isBusy = false;
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.simpleLinkForm.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe(() => {
         this.showValidationError = isUrlEmptyOrValid(this.simpleLinkForm.value.url ?? undefined) === false;
-      })
+      }),
     );
   }
 

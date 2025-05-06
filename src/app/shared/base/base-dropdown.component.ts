@@ -5,8 +5,8 @@ import { DEFAULT_INPUT_DEBOUNCE_TIME } from '../constants/constants';
 import { BaseFormComponent } from './base-form.component';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implements OnInit, OnChanges {
   @Input() public data?: T[] | null;
@@ -44,9 +44,9 @@ export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implem
         .pipe(
           filter((filter) => filter.length !== 1),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          map((filter) => filter || undefined)
+          map((filter) => filter || undefined),
         )
-        .subscribe((filter) => this.filterChange.emit(filter))
+        .subscribe((filter) => this.filterChange.emit(filter)),
     );
 
     if (!this.formName) return;
@@ -57,10 +57,10 @@ export class BaseDropdownComponent<T> extends BaseFormComponent<T | null> implem
         .pipe(
           filter(() => this.showDescription),
           map(([value, data]) =>
-            data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField])
-          )
+            data?.find((data: any) => !!value && data[this.valueField] === (value as any)[this.valueField]),
+          ),
         )
-        .subscribe((value: any) => (this.description = value?.description))
+        .subscribe((value: any) => (this.description = value?.description)),
     );
   }
 

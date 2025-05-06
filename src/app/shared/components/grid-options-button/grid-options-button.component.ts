@@ -17,10 +17,21 @@ import { MenuButtonItemComponent } from '../buttons/menu-button/menu-button-item
 import { HelpIconComponent } from '../icons/help.component';
 
 @Component({
-    selector: 'app-grid-options-button',
-    templateUrl: './grid-options-button.component.html',
-    styleUrl: './grid-options-button.component.scss',
-    imports: [MenuButtonComponent, ParagraphComponent, GridFilterButtonsComponent, NgIf, DividerComponent, GridColumnConfigButtonsComponent, ResetToOrgColumnsConfigButtonComponent, MenuButtonItemComponent, HelpIconComponent, AsyncPipe]
+  selector: 'app-grid-options-button',
+  templateUrl: './grid-options-button.component.html',
+  styleUrl: './grid-options-button.component.scss',
+  imports: [
+    MenuButtonComponent,
+    ParagraphComponent,
+    GridFilterButtonsComponent,
+    NgIf,
+    DividerComponent,
+    GridColumnConfigButtonsComponent,
+    ResetToOrgColumnsConfigButtonComponent,
+    MenuButtonItemComponent,
+    HelpIconComponent,
+    AsyncPipe,
+  ],
 })
 export class GridOptionsButtonComponent {
   @Input() entityType!: RegistrationEntityTypes;
@@ -30,7 +41,11 @@ export class GridOptionsButtonComponent {
 
   public readonly hasConfigGridPermission$ = this.store.select(selectGridConfigModificationPermission);
 
-  constructor(private dialog: MatDialog, private store: Store, private columnConfigService: ColumnConfigService) {}
+  constructor(
+    private dialog: MatDialog,
+    private store: Store,
+    private columnConfigService: ColumnConfigService,
+  ) {}
 
   public hasChanges$(): Observable<boolean> {
     return this.columnConfigService.hasChanges(this.entityType);

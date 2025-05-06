@@ -11,10 +11,10 @@ import { LocalGridComponent } from '../../../../../shared/components/local-grid/
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-notifications-grid',
-    templateUrl: './notifications-grid.component.html',
-    styleUrl: './notifications-grid.component.scss',
-    imports: [LocalGridComponent, AsyncPipe]
+  selector: 'app-notifications-grid',
+  templateUrl: './notifications-grid.component.html',
+  styleUrl: './notifications-grid.component.scss',
+  imports: [LocalGridComponent, AsyncPipe],
 })
 export class NotificationsGridComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;

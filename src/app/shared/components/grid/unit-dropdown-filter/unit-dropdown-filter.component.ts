@@ -12,10 +12,10 @@ import { first } from 'rxjs';
 import { OrgUnitSelectComponent } from '../../org-unit-select/org-unit-select.component';
 
 @Component({
-    selector: 'app-unit-dropdown-filter',
-    templateUrl: './unit-dropdown-filter.component.html',
-    styleUrl: './unit-dropdown-filter.component.scss',
-    imports: [OrgUnitSelectComponent]
+  selector: 'app-unit-dropdown-filter',
+  templateUrl: './unit-dropdown-filter.component.html',
+  styleUrl: './unit-dropdown-filter.component.scss',
+  imports: [OrgUnitSelectComponent],
 })
 export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
@@ -26,7 +26,11 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
 
   public readonly units$ = this.store.select(selectPagedOrganizationUnits);
 
-  constructor(filterService: FilterService, private actions$: Actions, private store: Store) {
+  constructor(
+    filterService: FilterService,
+    private actions$: Actions,
+    private store: Store,
+  ) {
     super(filterService);
   }
 
@@ -34,7 +38,12 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
     this.updateMethod(this.getColumnFilter() ?? undefined);
 
     this.subscriptions.add(
-      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, this.updateMethod.bind(this))
+      initializeApplyFilterSubscription(
+        this.actions$,
+        this.entityType,
+        this.column.field,
+        this.updateMethod.bind(this),
+      ),
     );
   }
 
@@ -43,7 +52,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
       this.units$.pipe(first()).subscribe((units) => {
         const matchingUnit = units?.find((unit) => unit.uuid === filter?.value);
         this.chosenOption = matchingUnit ? createNode(matchingUnit) : undefined;
-      })
+      }),
     );
   }
 
@@ -56,7 +65,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
             field: this.column.field,
             operator: 'eq',
             value: option.id,
-          })
+          }),
     );
   }
 }

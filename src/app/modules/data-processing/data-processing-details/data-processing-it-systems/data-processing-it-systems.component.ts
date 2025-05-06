@@ -25,10 +25,24 @@ import { EmptyStateComponent } from '../../../../shared/components/empty-states/
 import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
 
 @Component({
-    selector: 'app-data-processing-it-systems',
-    templateUrl: './data-processing-it-systems.component.html',
-    styleUrl: './data-processing-it-systems.component.scss',
-    imports: [CardComponent, CardHeaderComponent, StandardVerticalContentGridComponent, NgIf, NativeTableComponent, NgFor, ContentSpaceBetweenComponent, DetailsPageLinkComponent, IconButtonComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe]
+  selector: 'app-data-processing-it-systems',
+  templateUrl: './data-processing-it-systems.component.html',
+  styleUrl: './data-processing-it-systems.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ContentSpaceBetweenComponent,
+    DetailsPageLinkComponent,
+    IconButtonComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class DataProcessingItSystemsComponent extends BaseComponent {
   public readonly systemUsages$ = this.store.select(selectDataProcessingSystems).pipe(filterNullish());
@@ -36,7 +50,10 @@ export class DataProcessingItSystemsComponent extends BaseComponent {
 
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -54,11 +71,11 @@ export class DataProcessingItSystemsComponent extends BaseComponent {
             this.store.dispatch(
               DataProcessingActions.deleteDataProcessingSystemUsage(
                 uuid,
-                systemUsages.map((usage) => usage.uuid)
-              )
+                systemUsages.map((usage) => usage.uuid),
+              ),
             );
           }
-        })
+        }),
     );
   }
 

@@ -38,10 +38,22 @@ import { DropdownComponent } from '../../../../shared/components/dropdowns/dropd
 import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
 
 @Component({
-    selector: 'app-it-contract-deadlines',
-    templateUrl: './it-contract-deadlines.component.html',
-    styleUrl: './it-contract-deadlines.component.scss',
-    imports: [NgIf, CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, NumericInputComponent_1, CheckboxComponent, DropdownComponent, DatePickerComponent, AsyncPipe]
+  selector: 'app-it-contract-deadlines',
+  templateUrl: './it-contract-deadlines.component.html',
+  styleUrl: './it-contract-deadlines.component.scss',
+  imports: [
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    NumericInputComponent_1,
+    CheckboxComponent,
+    DropdownComponent,
+    DatePickerComponent,
+    AsyncPipe,
+  ],
 })
 export class ItContractDeadlinesComponent extends BaseComponent implements OnInit {
   private readonly deadlineDurationYearsUpperLimit = 100;
@@ -51,14 +63,14 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
     .select(selectRegularOptionTypes('it-contract-termination-period-types'))
     .pipe(
       filterNullish(),
-      map((types) => types.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true })))
+      map((types) => types.sort((a, b) => a.name.localeCompare(b.name, undefined, { numeric: true }))),
     );
   public readonly yearSegmentChoices = yearSegmentChoiceOptions;
 
   public deadlinesFormGroup = new FormGroup({
     durationYears: new FormControl<number | undefined>(
       { value: undefined, disabled: true },
-      Validators.max(this.deadlineDurationYearsUpperLimit)
+      Validators.max(this.deadlineDurationYearsUpperLimit),
     ),
     durationMonths: new FormControl<number | undefined>({ value: undefined, disabled: true }),
     isContinous: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
@@ -83,7 +95,10 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
   @ViewChild('durationMonthsInput') durationYearsInput!: NumericInputComponent;
   @ViewChild('durationMonthsInput') durationMonthsInput!: NumericInputComponent;
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+  constructor(
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -132,7 +147,7 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
 
   public patchDurationYears(
     value: APIContractAgreementPeriodDataWriteRequestDTO,
-    valueChange?: ValidatedValueChange<unknown>
+    valueChange?: ValidatedValueChange<unknown>,
   ): void {
     if (this.deadlinesFormGroup.controls.durationYears.valid) this.patchDeadlines(value, valueChange);
     else if (valueChange) this.notificationService.showInvalidFormField(valueChange.text);
@@ -140,14 +155,14 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
 
   public patchDeadlines(
     value: APIContractAgreementPeriodDataWriteRequestDTO,
-    valueChange?: ValidatedValueChange<unknown>
+    valueChange?: ValidatedValueChange<unknown>,
   ): void {
     this.patch({ agreementPeriod: value }, valueChange);
   }
 
   public patchTermination(
     value: APIContractTerminationDataWriteRequestDTO,
-    valueChange?: ValidatedValueChange<unknown>
+    valueChange?: ValidatedValueChange<unknown>,
   ): void {
     this.patch({ termination: value }, valueChange);
   }

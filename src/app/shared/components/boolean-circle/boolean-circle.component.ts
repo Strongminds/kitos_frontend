@@ -5,13 +5,12 @@ import { CheckPositiveGreenIconComponent } from '../icons/check-positive-green.c
 import { CheckNegativeGrayIconComponent } from '../icons/check-negative-gray.component';
 
 @Component({
-    selector: 'app-boolean-circle',
-    templateUrl: './boolean-circle.component.html',
-    styleUrl: './boolean-circle.component.scss',
-    imports: [TooltipComponent, NgIf, CheckPositiveGreenIconComponent, CheckNegativeGrayIconComponent]
+  selector: 'app-boolean-circle',
+  templateUrl: './boolean-circle.component.html',
+  styleUrl: './boolean-circle.component.scss',
+  imports: [TooltipComponent, NgIf, CheckPositiveGreenIconComponent, CheckNegativeGrayIconComponent],
 })
 export class BooleanCircleComponent {
-
   @Input() value!: boolean;
   @Input() positiveTooltipText: string = '';
   @Input() negativeTooltipText: string = '';

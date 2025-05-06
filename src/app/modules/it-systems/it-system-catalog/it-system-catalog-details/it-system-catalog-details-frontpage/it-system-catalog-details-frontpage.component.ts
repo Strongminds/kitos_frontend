@@ -54,11 +54,29 @@ import { ParagraphComponent } from '../../../../../shared/components/paragraph/p
 import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-overview/it-system-kle-overview.component';
 
 @Component({
-    selector: 'app-it-system-catalog-details-frontpage',
-    templateUrl: './it-system-catalog-details-frontpage.component.html',
-    styleUrl: './it-system-catalog-details-frontpage.component.scss',
-    providers: [ITSystemCatalogDetailsFrontpageComponentStore],
-    imports: [CardComponent, CardHeaderComponent, StatusChipComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, ConnectedDropdownComponent, DropdownComponent, ContentBoxComponent, NgFor, ExternalReferenceComponent, TextAreaComponent, TextBoxInfoComponent, ParagraphComponent, ItSystemKleOverviewComponent, AsyncPipe]
+  selector: 'app-it-system-catalog-details-frontpage',
+  templateUrl: './it-system-catalog-details-frontpage.component.html',
+  styleUrl: './it-system-catalog-details-frontpage.component.scss',
+  providers: [ITSystemCatalogDetailsFrontpageComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StatusChipComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    ConnectedDropdownComponent,
+    DropdownComponent,
+    ContentBoxComponent,
+    NgFor,
+    ExternalReferenceComponent,
+    TextAreaComponent,
+    TextBoxInfoComponent,
+    ParagraphComponent,
+    ItSystemKleOverviewComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly itSystemIsActive$ = this.store.select(selectItSystemIsActive);
@@ -74,7 +92,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
 
   public readonly externalReferences$ = this.store.select(selectItSystemExternalReferences).pipe(
     filterNullish(),
-    map((references) => [...references].sort((a, b) => a.title.localeCompare(b.title)))
+    map((references) => [...references].sort((a, b) => a.title.localeCompare(b.title))),
   );
 
   public readonly archiveDutyRecommendationOptions = archiveDutyRecommendationChoiceOptions;
@@ -108,7 +126,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     private store: Store,
     private componentStore: ITSystemCatalogDetailsFrontpageComponentStore,
     private entityStatusTextsService: EntityStatusTextsService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     super();
   }
@@ -140,19 +158,19 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public onDropdownCleared() {
     this.patchFrontPage(
       { recommendedArchiveDuty: { id: APIRecommendedArchiveDutyResponseDTO.IdEnum.Undecided, comment: '' } },
-      undefined
+      undefined,
     );
   }
 
   public patchArchiveDutyId(
     value: APIRecommendedArchiveDutyResponseDTO.IdEnum,
-    valueChange?: ValidatedValueChange<unknown>
+    valueChange?: ValidatedValueChange<unknown>,
   ) {
     const archiveDutyRecommendationComment =
       this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.value ?? undefined;
     this.patchFrontPage(
       { recommendedArchiveDuty: { id: value, comment: archiveDutyRecommendationComment } },
-      valueChange
+      valueChange,
     );
   }
 
@@ -169,7 +187,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
       this.store
         .select(selectItSystemParentSystem)
         .pipe(filterNullish(), first())
-        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid))
+        .subscribe((parentSystem) => this.componentStore.getParentSystem(parentSystem.uuid)),
     );
   }
 
@@ -181,8 +199,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           filterNullish(),
           combineLatestWith(
             this.store.select(selectITSystemHasModifyPermission),
-            this.store.select(selectITSystemCanModifyVisibilityPermission)
-          )
+            this.store.select(selectITSystemCanModifyVisibilityPermission),
+          ),
         )
         .subscribe(([itSystem, hasModifyPermission, canModifyVisibility]) => {
           this.itSystemFrontpageFormGroup.patchValue({
@@ -199,7 +217,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             urlReference: itSystem.externalReferences,
             description: itSystem.description,
             legalName: itSystem.legalName,
-            legalDataProcessorName:  itSystem.legalDataProcessorName,
+            legalDataProcessorName: itSystem.legalDataProcessorName,
           });
 
           if (hasModifyPermission) {
@@ -225,7 +243,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           this.itSystemFrontpageFormGroup.controls.externalUuid.disable();
           this.itSystemFrontpageFormGroup.controls.legalName.disable();
           this.itSystemFrontpageFormGroup.controls.legalDataProcessorName.disable();
-        })
+        }),
     );
   }
 
@@ -242,7 +260,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             }`,
           },
         });
-      })
+      }),
     );
   }
 }

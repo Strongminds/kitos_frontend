@@ -21,18 +21,18 @@ import { NgIf, NgFor } from '@angular/common';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 
 @Component({
-    selector: 'app-multi-select-dropdown',
-    templateUrl: './multi-select-dropdown.component.html',
-    styleUrl: './multi-select-dropdown.component.scss',
-    imports: [
-        NgSelectComponent,
-        FormsModule,
-        NgOptionTemplateDirective,
-        NgIf,
-        ParagraphComponent,
-        NgMultiLabelTemplateDirective,
-        NgFor,
-    ],
+  selector: 'app-multi-select-dropdown',
+  templateUrl: './multi-select-dropdown.component.html',
+  styleUrl: './multi-select-dropdown.component.scss',
+  imports: [
+    NgSelectComponent,
+    FormsModule,
+    NgOptionTemplateDirective,
+    NgIf,
+    ParagraphComponent,
+    NgMultiLabelTemplateDirective,
+    NgFor,
+  ],
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
   @Input() public text = '';
@@ -81,7 +81,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     private el: ElementRef,
     private renderer: Renderer2,
     private notificationService: NotificationService,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
   ) {
     super();
   }
@@ -96,16 +96,16 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         .pipe(
           filter((filter) => filter.length !== 1),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          map((filter) => filter || undefined)
+          map((filter) => filter || undefined),
         )
-        .subscribe((filter) => this.filterChange.emit(filter))
+        .subscribe((filter) => this.filterChange.emit(filter)),
     );
 
     if (this.resetSubject$) {
       this.subscriptions.add(
         this.resetSubject$.subscribe(() => {
           this.onClear();
-        })
+        }),
       );
     }
   }

@@ -34,26 +34,26 @@ import { CheckboxButtonComponent } from '../../../../../shared/components/button
 import { DragAndDropTreeComponent } from '../../../../../shared/components/drag-and-drop-tree/drag-and-drop-tree.component';
 
 @Component({
-    selector: 'app-it-system-usage-details-organization',
-    templateUrl: './it-system-usage-details-organization.component.html',
-    styleUrls: ['./it-system-usage-details-organization.component.scss'],
-    imports: [
-        CardComponent,
-        CardHeaderComponent,
-        NgIf,
-        ParagraphComponent,
-        FormsModule,
-        ReactiveFormsModule,
-        DropdownComponent,
-        StandardVerticalContentGridComponent,
-        SectionComponent,
-        OrgUnitSelectComponent,
-        MatProgressSpinner,
-        NumericInputComponent,
-        CheckboxButtonComponent,
-        DragAndDropTreeComponent,
-        AsyncPipe,
-    ],
+  selector: 'app-it-system-usage-details-organization',
+  templateUrl: './it-system-usage-details-organization.component.html',
+  styleUrls: ['./it-system-usage-details-organization.component.scss'],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    ParagraphComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    StandardVerticalContentGridComponent,
+    SectionComponent,
+    OrgUnitSelectComponent,
+    MatProgressSpinner,
+    NumericInputComponent,
+    CheckboxButtonComponent,
+    DragAndDropTreeComponent,
+    AsyncPipe,
+  ],
 })
 export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent implements OnInit {
   public readonly responsibleUnit$ = this.store.select(selectItSystemUsageResponsibleUnit);
@@ -64,7 +64,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     filterNullish(),
     map((units) => {
       return units.map((x) => x.uuid);
-    })
+    }),
   );
   private expandedUnitUuids: string[] | undefined = undefined;
 
@@ -74,13 +74,13 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.usedUnitUuids$),
-    map(([units, selectedUuids]) => mapUnitsWithSelectedUnitsToTree(units, selectedUuids, this.expandedUnitUuids))
+    map(([units, selectedUuids]) => mapUnitsWithSelectedUnitsToTree(units, selectedUuids, this.expandedUnitUuids)),
   );
 
   public readonly rootUnitUuid$ = this.unitTree$.pipe(
     map((units) => units.filter((unit) => unit.isRoot)),
     filter((rootUnits) => rootUnits.length > 0),
-    map((rootUnits) => rootUnits[0].uuid)
+    map((rootUnits) => rootUnits[0].uuid),
   );
 
   public readonly numberOfLevels$ = new BehaviorSubject<number | undefined>(undefined);
@@ -105,8 +105,8 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
       this.responsibleUnit$.pipe(combineLatestWith(this.usedByUnits$)).subscribe(([responsibleUnit, usedByUnits]) =>
         this.responsibleUnitForm.patchValue({
           responsibleUnit: usedByUnits.filter((unit) => unit.uuid === responsibleUnit?.uuid).pop(),
-        })
-      )
+        }),
+      ),
     );
 
     // Disable forms if user does not have rights to modify
@@ -114,18 +114,18 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
       this.hasModifyPermission$.pipe(filter((hasModifyPermission) => hasModifyPermission === false)).subscribe(() => {
         this.responsibleUnitForm.disable();
         this.relevantUnitsForm.disable();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.unitTree$
         .pipe(
           filter((unitTree) => unitTree.length > 0),
-          first()
+          first(),
         )
         .subscribe((unitTree) => {
           this.expandedUnitUuids = this.searchUnitTreeForExpandedUnits(unitTree);
-        })
+        }),
     );
   }
 
@@ -150,7 +150,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
         organizationUsage: {
           responsibleOrganizationUnitUuid: uuid,
         },
-      })
+      }),
     );
   }
 

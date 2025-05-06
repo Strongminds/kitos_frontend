@@ -9,10 +9,10 @@ export interface SegmentButtonOption<T> {
 }
 
 @Component({
-    selector: 'app-segment',
-    templateUrl: 'segment.component.html',
-    styleUrls: ['segment.component.scss'],
-    imports: [MatButtonToggleGroup, NgFor, MatButtonToggle]
+  selector: 'app-segment',
+  templateUrl: 'segment.component.html',
+  styleUrls: ['segment.component.scss'],
+  imports: [MatButtonToggleGroup, NgFor, MatButtonToggle],
 })
 export class SegmentComponent<T> {
   @Input() public buttons: SegmentButtonOption<T>[] = [];

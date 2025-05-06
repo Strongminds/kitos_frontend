@@ -31,10 +31,21 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
 import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
 
 @Component({
-    selector: 'app-gdpr-risk-assessment-section',
-    templateUrl: './gdpr-risk-assessment-section.component.html',
-    styleUrls: ['./gdpr-risk-assessment-section.component.scss'],
-    imports: [AccordionComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, NgIf, DatePickerComponent, DropdownComponent, EditUrlSectionComponent, TextAreaComponent, AsyncPipe]
+  selector: 'app-gdpr-risk-assessment-section',
+  templateUrl: './gdpr-risk-assessment-section.component.html',
+  styleUrls: ['./gdpr-risk-assessment-section.component.scss'],
+  imports: [
+    AccordionComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    DatePickerComponent,
+    DropdownComponent,
+    EditUrlSectionComponent,
+    TextAreaComponent,
+    AsyncPipe,
+  ],
 })
 export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
@@ -42,16 +53,16 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRiskAssessmentFalse$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.riskAssessmentConducted !== APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum.Yes)
+    map((gdpr) => gdpr.riskAssessmentConducted !== APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum.Yes),
   );
   public readonly selectRiskDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.riskAssessmentDocumentation));
   public disableDirectoryDocumentationControl = false;
 
   public readonly enablePlannedRiskAssessmentDateField$ = this.store.select(
-    selectITSystemUsageEnableGdprPlannedRiskAssessmentDate
+    selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   );
   public readonly conductedRiskAssessmentEnabled$ = this.store.select(
-    selectITSystemUsageEnableGdprConductedRiskAssessment
+    selectITSystemUsageEnableGdprConductedRiskAssessment,
   );
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
@@ -64,7 +75,7 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
       assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>(undefined),
       notesControl: new FormControl<string | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   constructor(private readonly store: Store) {

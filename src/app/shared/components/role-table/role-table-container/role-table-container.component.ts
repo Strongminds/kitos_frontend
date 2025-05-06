@@ -7,13 +7,19 @@ import { CollectionExtensionButtonComponent } from '../../collection-extension-b
 import { LoadingComponent } from '../../loading/loading.component';
 
 @Component({
-    selector: 'app-role-table-container',
-    templateUrl: './role-table-container.component.html',
-    styleUrl: './role-table-container.component.scss',
-    imports: [NgIf, StandardVerticalContentGridComponent, EmptyStateComponent, CollectionExtensionButtonComponent, LoadingComponent, AsyncPipe]
+  selector: 'app-role-table-container',
+  templateUrl: './role-table-container.component.html',
+  styleUrl: './role-table-container.component.scss',
+  imports: [
+    NgIf,
+    StandardVerticalContentGridComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class RoleTableContainerComponent {
-
   @Input() isLoading$!: Observable<boolean>;
   @Input() anyRoles$!: Observable<boolean>;
   @Input() hasModifyPermission!: boolean;

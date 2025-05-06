@@ -30,10 +30,22 @@ import { LoadingComponent } from '../../../../../shared/components/loading/loadi
 import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
 
 @Component({
-    selector: 'app-local-admin-import-fk-org',
-    templateUrl: './local-admin-import-fk-org.component.html',
-    styleUrl: './local-admin-import-fk-org.component.scss',
-    imports: [CardComponent, CardHeaderComponent, NgIf, StandardVerticalContentGridComponent, ParagraphComponent, NativeTableComponent, FkOrgChangelogComponent, ButtonComponent, LoadingComponent, AsyncPipe, AppDatePipe]
+  selector: 'app-local-admin-import-fk-org',
+  templateUrl: './local-admin-import-fk-org.component.html',
+  styleUrl: './local-admin-import-fk-org.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    NativeTableComponent,
+    FkOrgChangelogComponent,
+    ButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+    AppDatePipe,
+  ],
 })
 export class LocalAdminImportFkOrgComponent extends BaseComponent implements OnInit {
   public readonly synchronizationStatus$ = this.store.select(selectSynchronizationStatus);
@@ -51,7 +63,7 @@ export class LocalAdminImportFkOrgComponent extends BaseComponent implements OnI
     private store: Store,
     private actions$: Actions,
     private matDialog: MatDialog,
-    private confirmActionService: ConfirmActionService
+    private confirmActionService: ConfirmActionService,
   ) {
     super();
   }
@@ -66,10 +78,10 @@ export class LocalAdminImportFkOrgComponent extends BaseComponent implements OnI
             FkOrgActions.createConnectionSuccess,
             FkOrgActions.updateConnectionSuccess,
             FkOrgActions.deleteAutomaticUpdateSubscriptionSuccess,
-            FkOrgActions.deleteConnectionSuccess
-          )
+            FkOrgActions.deleteConnectionSuccess,
+          ),
         )
-        .subscribe(() => this.dispatchGetSynchronizationStatus())
+        .subscribe(() => this.dispatchGetSynchronizationStatus()),
     );
   }
 

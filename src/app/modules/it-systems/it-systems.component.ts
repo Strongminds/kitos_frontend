@@ -9,13 +9,16 @@ import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-cust
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
 @Component({
-    templateUrl: 'it-systems.component.html',
-    styleUrls: ['it-systems.component.scss'],
-    selector: 'app-systems',
-    imports: [RouterOutlet]
+  templateUrl: 'it-systems.component.html',
+  styleUrls: ['it-systems.component.scss'],
+  selector: 'app-systems',
+  imports: [RouterOutlet],
 })
 export class ITSystemsComponent extends BaseComponent implements OnInit {
-  constructor(private store: Store, private router: Router) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     super();
   }
 
@@ -26,19 +29,19 @@ export class ITSystemsComponent extends BaseComponent implements OnInit {
         .select(selectOrganizationUuid)
         .pipe(
           pairwise(),
-          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid)
+          filter(([prevUuid, nextUuid]) => prevUuid !== nextUuid),
         )
         .subscribe(() =>
           this.router
             .navigateByUrl(AppPath.root, { skipLocationChange: true })
-            .then(() => this.router.navigate([AppPath.itSystems]))
-        )
+            .then(() => this.router.navigate([AppPath.itSystems])),
+        ),
     );
 
     this.store.dispatch(
       UIModuleConfigActions.getUIModuleConfig({
         module: UIModuleConfigKey.ItSystemUsage,
-      })
+      }),
     );
   }
 }

@@ -54,10 +54,31 @@ import { SnackbarActionsComponent } from '../../../../shared/components/snackbar
 import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
 
 @Component({
-    selector: 'app-edit-organization-unit-dialog',
-    templateUrl: './edit-organization-unit-dialog.component.html',
-    styleUrl: './edit-organization-unit-dialog.component.scss',
-    imports: [NgIf, DialogComponent, StandardVerticalContentGridComponent, ParagraphComponent, OrgUnitSelectComponent, FormsModule, ReactiveFormsModule, TextBoxInfoComponent, TextBoxComponent, NumericInputComponent, DialogActionsComponent, ButtonComponent, RegistrationsRolesSectionComponent, RegistrationsPaymentsSectionComponent, RegistrationsPageDetailsSectionComponent, EmptyStateComponent, LoadingComponent, SnackbarActionsComponent, TrashcanIconComponent, AsyncPipe]
+  selector: 'app-edit-organization-unit-dialog',
+  templateUrl: './edit-organization-unit-dialog.component.html',
+  styleUrl: './edit-organization-unit-dialog.component.scss',
+  imports: [
+    NgIf,
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    OrgUnitSelectComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxInfoComponent,
+    TextBoxComponent,
+    NumericInputComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    RegistrationsRolesSectionComponent,
+    RegistrationsPaymentsSectionComponent,
+    RegistrationsPageDetailsSectionComponent,
+    EmptyStateComponent,
+    LoadingComponent,
+    SnackbarActionsComponent,
+    TrashcanIconComponent,
+    AsyncPipe,
+  ],
 })
 export class EditOrganizationUnitDialogComponent extends BaseComponent implements OnInit {
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;
@@ -78,41 +99,41 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
   public readonly relevantSystemsRegistrations$ = this.store.select(selectRelevantSystemsRegistrations);
 
   public readonly hasOrganizationUnitRights$ = this.organizationUnitRegistrations$.pipe(
-    map((registrations) => this.hasRegistrations(registrations))
+    map((registrations) => this.hasRegistrations(registrations)),
   );
   public readonly hasItContractRegistrations$ = this.itContractRegistrations$.pipe(
-    map((registrations) => this.hasRegistrations(registrations))
+    map((registrations) => this.hasRegistrations(registrations)),
   );
   public readonly hasInternalPayments$ = this.internalPaymentsRegistrations$.pipe(
-    map((registrations) => this.hasRegistrations(registrations))
+    map((registrations) => this.hasRegistrations(registrations)),
   );
   public readonly hasExternalPayments$ = this.externalPaymentsRegistrations$.pipe(
-    map((registrations) => this.hasRegistrations(registrations))
+    map((registrations) => this.hasRegistrations(registrations)),
   );
   public readonly hasResponsibleSystems$ = this.responsibleSystemsRegistrations$.pipe(
-    map((registrations) => this.hasRegistrations(registrations))
+    map((registrations) => this.hasRegistrations(registrations)),
   );
   public readonly hasRelevantSystems$ = this.relevantSystemsRegistrations$.pipe(
-    map((registrations) => this.hasRegistrations(registrations))
+    map((registrations) => this.hasRegistrations(registrations)),
   );
 
   public readonly allOrganizationUnitRightsSelected$ = this.organizationUnitRegistrations$.pipe(
-    map((registrations) => this.areAllRegistrationsSelected(registrations))
+    map((registrations) => this.areAllRegistrationsSelected(registrations)),
   );
   public readonly allItContractRegistrationsSelected$ = this.itContractRegistrations$.pipe(
-    map((registrations) => this.areAllRegistrationsSelected(registrations))
+    map((registrations) => this.areAllRegistrationsSelected(registrations)),
   );
   public readonly allInternalPaymentsSelected$ = this.internalPaymentsRegistrations$.pipe(
-    map((registrations) => this.areAllRegistrationsSelected(registrations))
+    map((registrations) => this.areAllRegistrationsSelected(registrations)),
   );
   public readonly allExternalPaymentsSelected$ = this.externalPaymentsRegistrations$.pipe(
-    map((registrations) => this.areAllRegistrationsSelected(registrations))
+    map((registrations) => this.areAllRegistrationsSelected(registrations)),
   );
   public readonly allResponsibleSystemsSelected$ = this.responsibleSystemsRegistrations$.pipe(
-    map((registrations) => this.areAllRegistrationsSelected(registrations))
+    map((registrations) => this.areAllRegistrationsSelected(registrations)),
   );
   public readonly allRelevantSystemsSelected$ = this.relevantSystemsRegistrations$.pipe(
-    map((registrations) => this.areAllRegistrationsSelected(registrations))
+    map((registrations) => this.areAllRegistrationsSelected(registrations)),
   );
 
   public readonly anyRegistrations$ = combineOR([
@@ -143,14 +164,14 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
   ]);
 
   public readonly isAnyRegistrationSelected$ = this.combinedRegistrations$.pipe(
-    map((allRegistrations) => allRegistrations.some(this.hasRegistrationsSelected))
+    map((allRegistrations) => allRegistrations.some(this.hasRegistrationsSelected)),
   );
 
   public readonly noRegistrationsSelected$ = this.isAnyRegistrationSelected$.pipe(invertBooleanValue());
 
   public readonly selectedRegistrationsCount$ = this.combinedRegistrations$.pipe(
     mapArray((registrations) => registrations.filter((registration) => registration.isSelected).length),
-    map((registrationsCounts) => registrationsCounts.reduce((acc, count) => acc + count, 0))
+    map((registrationsCounts) => registrationsCounts.reduce((acc, count) => acc + count, 0)),
   );
 
   public baseInfoForm = new FormGroup({
@@ -172,7 +193,7 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
     private readonly store: Store,
     private confirmActionService: ConfirmActionService,
     private router: Router,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -191,13 +212,13 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
           eanControl: unit.ean,
           idControl: unit.unitId,
         });
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.isRootUnit().subscribe((isRootUnit) => {
         if (isRootUnit) this.baseInfoForm.controls.parentUnitControl.disable();
-      })
+      }),
     );
   }
 
@@ -207,7 +228,7 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
         this.unit$.pipe(first()).subscribe((unit) => {
           const updatedUnit = this.updateDtoWithOrWithoutParentUnit(unit);
           this.store.dispatch(OrganizationUnitActions.patchOrganizationUnit(unit.uuid, updatedUnit));
-        })
+        }),
       );
     }
     this.dialog.close();
@@ -218,7 +239,7 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
       combineLatestWith(this.rootUnitUuid$),
       map(([unit, rootUnitUuid]) => {
         return unit.uuid === rootUnitUuid;
-      })
+      }),
     );
   }
 
@@ -226,7 +247,7 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
     return this.isRootUnit().pipe(
       map((isRootUnit) => {
         return isRootUnit ? $localize`Ingen overordnet enhed` : $localize`Overordnet enhed`;
-      })
+      }),
     );
   }
 
@@ -238,7 +259,7 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
         return isRootUnit
           ? $localize`Du kan ikke ændre overordnet organisationsenhed for ${unitName}`
           : $localize`Der kan kun vælges blandt de organisationsenheder, som er indenfor samme organisation, og som ikke er en underenhed til ${unitName}.`;
-      })
+      }),
     );
   }
 
@@ -299,8 +320,8 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
             } else {
               this.store.dispatch(OrganizationUnitActions.removeRegistrations(unitUuid, request));
             }
-          }
-        )
+          },
+        ),
     );
   }
 
@@ -332,7 +353,7 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
           controls.eanControl.value == unit.ean &&
           controls.idControl.value == unit.unitId
         );
-      })
+      }),
     );
   }
 
@@ -345,9 +366,9 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
       .pipe(
         ofType(OrganizationUnitActions.deleteOrganizationUnitSuccess),
         combineLatestWith(
-          this.rootUnitUuid$.pipe(map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`))
+          this.rootUnitUuid$.pipe(map((uuid) => `${AppPath.organization}/${AppPath.structure}/${uuid}`)),
         ),
-        first()
+        first(),
       )
       .subscribe(([_, rootUnitUrl]) => {
         this.dialog.close();
@@ -373,20 +394,20 @@ export class EditOrganizationUnitDialogComponent extends BaseComponent implement
   }
 
   private hasRegistrationsSelected<T>(
-    registration: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>
+    registration: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>,
   ): boolean {
     return registration.some((registration) => registration.isSelected);
   }
 
   private areAllRegistrationsSelected<T>(
-    registration: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>
+    registration: Array<RegistrationModel<T>> | Array<PaymentRegistrationModel>,
   ): boolean {
     return registration.every((registration) => registration.isSelected);
   }
 
   private getPaymentsRequest(
     internalPayments: PaymentRegistrationModel[],
-    externalPayments: PaymentRegistrationModel[]
+    externalPayments: PaymentRegistrationModel[],
   ) {
     const selectedInternalPayments = internalPayments.filter((payment) => payment.isSelected);
     const selectedExternalPayments = externalPayments.filter((payment) => payment.isSelected);

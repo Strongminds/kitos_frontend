@@ -33,7 +33,7 @@ export class RoleTableComponent extends BaseRoleTableComponent implements OnInit
     override readonly roleOptionTypeService: RoleOptionTypeService,
     override readonly dialog: MatDialog,
     override readonly actions$: Actions,
-    override readonly confirmationService: ConfirmActionService
+    override readonly confirmationService: ConfirmActionService,
   ) {
     super(store, componentStore, actions$, roleOptionTypeService, confirmationService, dialog);
   }
@@ -42,7 +42,7 @@ export class RoleTableComponent extends BaseRoleTableComponent implements OnInit
     this.subscriptions.add(
       this.roles$.pipe(combineLatestWith(this.entityUuid$), first()).subscribe(([userRoles, entityUuid]) => {
         this.openAddNewDialog(userRoles, entityUuid);
-      })
+      }),
     );
   }
 }

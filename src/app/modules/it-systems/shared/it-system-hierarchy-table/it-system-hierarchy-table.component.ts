@@ -10,11 +10,11 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
 import { EntityTreeComponent } from '../../../../shared/components/tree/entity-tree.component';
 
 @Component({
-    selector: 'app-it-system-hierarchy-table[systemUuid]',
-    templateUrl: './it-system-hierarchy-table.component.html',
-    styleUrls: ['./it-system-hierarchy-table.component.scss'],
-    providers: [ItSystemHierarchyTableComponentStore],
-    imports: [CardComponent, CardHeaderComponent, NgIf, LoadingComponent, EntityTreeComponent, AsyncPipe]
+  selector: 'app-it-system-hierarchy-table[systemUuid]',
+  templateUrl: './it-system-hierarchy-table.component.html',
+  styleUrls: ['./it-system-hierarchy-table.component.scss'],
+  providers: [ItSystemHierarchyTableComponentStore],
+  imports: [CardComponent, CardHeaderComponent, NgIf, LoadingComponent, EntityTreeComponent, AsyncPipe],
 })
 export class ItSystemHierarchyTableComponent implements OnInit {
   public readonly isLoading$ = this.componentStore.isLoading$;

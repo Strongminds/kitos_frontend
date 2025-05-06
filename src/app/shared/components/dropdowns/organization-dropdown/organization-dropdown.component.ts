@@ -6,15 +6,11 @@ import { OrganizationDropdownComponentStore } from './organization-dropdown.comp
 import { ConnectedDropdownComponent } from '../connected-dropdown/connected-dropdown.component';
 
 @Component({
-    selector: 'app-organization-dropdown',
-    templateUrl: './organization-dropdown.component.html',
-    styleUrl: './organization-dropdown.component.scss',
-    providers: [OrganizationDropdownComponentStore],
-    imports: [
-        ConnectedDropdownComponent,
-        FormsModule,
-        ReactiveFormsModule,
-    ],
+  selector: 'app-organization-dropdown',
+  templateUrl: './organization-dropdown.component.html',
+  styleUrl: './organization-dropdown.component.scss',
+  providers: [OrganizationDropdownComponentStore],
+  imports: [ConnectedDropdownComponent, FormsModule, ReactiveFormsModule],
 })
 export class OrganizationDropdownComponent extends BaseComponent implements OnInit {
   @Input() formGroup!: FormGroup;
@@ -34,8 +30,8 @@ export class OrganizationDropdownComponent extends BaseComponent implements OnIn
       organizations.map((org) => ({
         ...org,
         disabled: disabledOrganizationUuids.includes(org.uuid),
-      }))
-    )
+      })),
+    ),
   );
 
   ngOnInit(): void {
@@ -43,7 +39,7 @@ export class OrganizationDropdownComponent extends BaseComponent implements OnIn
       this.subscriptions.add(
         this.disabledOrganizationUuids$.subscribe((uuids) => {
           this.disabledOrganizationUuidsSubject$.next(uuids);
-        })
+        }),
       );
     }
   }

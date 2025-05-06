@@ -16,11 +16,19 @@ import { DialogActionsComponent } from '../../../../../shared/components/dialogs
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-create-dpr-system-usage',
-    templateUrl: './create-dpr-system-usage.component.html',
-    styleUrl: './create-dpr-system-usage.component.scss',
-    providers: [CreateDprSystemUsageDialogComponentStore],
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, ConnectedDropdownComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-create-dpr-system-usage',
+  templateUrl: './create-dpr-system-usage.component.html',
+  styleUrl: './create-dpr-system-usage.component.scss',
+  providers: [CreateDprSystemUsageDialogComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    ConnectedDropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class CreateDprSystemUsageComponent extends BaseComponent implements OnInit {
   public readonly systemUsages$ = this.componentStore.systemUsages$;
@@ -33,7 +41,7 @@ export class CreateDprSystemUsageComponent extends BaseComponent implements OnIn
     private store: Store,
     private componentStore: CreateDprSystemUsageDialogComponentStore,
     private actions$: Actions,
-    private dialog: MatDialogRef<CreateDprSystemUsageComponent>
+    private dialog: MatDialogRef<CreateDprSystemUsageComponent>,
   ) {
     super();
   }
@@ -44,13 +52,13 @@ export class CreateDprSystemUsageComponent extends BaseComponent implements OnIn
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingSuccess)).subscribe(() => {
         this.dialog.close();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingError)).subscribe(() => {
         this.isBusy = false;
-      })
+      }),
     );
   }
 
@@ -72,8 +80,8 @@ export class CreateDprSystemUsageComponent extends BaseComponent implements OnIn
         this.store.dispatch(
           DataProcessingActions.addDataProcessingSystemUsage(
             systemUsageUuid,
-            systemUsages?.map((usage) => usage.uuid)
-          )
+            systemUsages?.map((usage) => usage.uuid),
+          ),
         );
       });
   }

@@ -15,10 +15,10 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
 
 @Component({
-    selector: 'app-choice-type-dropdown-filter',
-    templateUrl: './choice-type-dropdown-filter.component.html',
-    styleUrl: './choice-type-dropdown-filter.component.scss',
-    imports: [NgIf, DropdownComponent, AsyncPipe]
+  selector: 'app-choice-type-dropdown-filter',
+  templateUrl: './choice-type-dropdown-filter.component.html',
+  styleUrl: './choice-type-dropdown-filter.component.scss',
+  imports: [NgIf, DropdownComponent, AsyncPipe],
 })
 export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
@@ -32,7 +32,11 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
 
   public chosenOption?: FilterDropdownOption;
 
-  constructor(filterService: FilterService, private store: Store, private actions$: Actions) {
+  constructor(
+    filterService: FilterService,
+    private store: Store,
+    private actions$: Actions,
+  ) {
     super(filterService);
   }
 
@@ -40,13 +44,13 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
     this.store.dispatch(RegularOptionTypeActions.getOptions(this.choiceTypeName));
     this.options$ = this.store.select(selectRegularOptionTypes(this.choiceTypeName)).pipe(
       map((options) => options?.map((option) => ({ name: option.name, value: option.uuid })) ?? []),
-      map((options) => this.applySorting(options, this.sortOptions))
+      map((options) => this.applySorting(options, this.sortOptions)),
     );
 
     this.subscriptions.add(
       this.options$.pipe(first()).subscribe((options) => {
         this.chosenOption = options.find((option) => option.value === this.getColumnFilter()?.value);
-      })
+      }),
     );
 
     const updateMethod: (filter: FilterDescriptor | undefined) => void = (filter) => {
@@ -57,11 +61,11 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
             ? options.find((option) => option.name === newValue)
             : options.find((option) => option.value === newValue);
           this.chosenOption = matchingOption;
-        })
+        }),
       );
     };
     this.subscriptions.add(
-      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod)
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, updateMethod),
     );
   }
 
@@ -100,7 +104,7 @@ export class ChoiceTypeDropdownFilterComponent extends AppBaseFilterCellComponen
             field: this.column.field,
             operator: 'eq',
             value: filterValue,
-          })
+          }),
     );
   }
 }

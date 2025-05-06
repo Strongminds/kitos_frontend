@@ -39,7 +39,7 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
         return roles;
       }
     }),
-    map((roles) => roles.sort(this.compareByUnitNameThenRoleName))
+    map((roles) => roles.sort(this.compareByUnitNameThenRoleName)),
   );
 
   public readonly anyRoles$ = this.roles$.pipe(matchEmptyArray(), invertBooleanValue());
@@ -50,7 +50,7 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
     override readonly roleOptionTypeService: RoleOptionTypeService,
     override readonly dialog: MatDialog,
     override readonly actions$: Actions,
-    override readonly confirmationService: ConfirmActionService
+    override readonly confirmationService: ConfirmActionService,
   ) {
     super(store, componentStore, actions$, roleOptionTypeService, confirmationService, dialog);
   }
@@ -68,12 +68,12 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
           ofType(
             OrganizationUnitActions.transferRegistrationsSuccess,
             OrganizationUnitActions.removeRegistrationsSuccess,
-            OrganizationUnitActions.patchOrganizationUnitSuccess
-          )
+            OrganizationUnitActions.patchOrganizationUnitSuccess,
+          ),
         )
         .subscribe(() => {
           this.getRoles();
-        })
+        }),
     );
   }
 
@@ -81,7 +81,7 @@ export class OrganizationUnitRoleTableComponent extends BaseRoleTableComponent i
     this.subscriptions.add(
       this.roles$.pipe(combineLatestWith(this.entityUuid$), first()).subscribe(([userRoles, entityUuid]) => {
         this.openAddNewDialog(userRoles, entityUuid);
-      })
+      }),
     );
   }
 

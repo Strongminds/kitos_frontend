@@ -10,11 +10,21 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
 import { AppDatePipe } from '../../../../shared/pipes/app-date.pipe';
 
 @Component({
-    selector: 'app-global-admin-other-broken-links',
-    templateUrl: './global-admin-other-broken-links.component.html',
-    styleUrl: './global-admin-other-broken-links.component.scss',
-    providers: [GlobalAdminOtherBrokenLinksComponentStore],
-    imports: [CardComponent, CardHeaderComponent, NgIf, StandardVerticalContentGridComponent, ParagraphComponent, ButtonComponent, LoadingComponent, AsyncPipe, AppDatePipe]
+  selector: 'app-global-admin-other-broken-links',
+  templateUrl: './global-admin-other-broken-links.component.html',
+  styleUrl: './global-admin-other-broken-links.component.scss',
+  providers: [GlobalAdminOtherBrokenLinksComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    ButtonComponent,
+    LoadingComponent,
+    AsyncPipe,
+    AppDatePipe,
+  ],
 })
 export class GlobalAdminOtherBrokenLinksComponent implements OnInit {
   public readonly isLoading$ = this.componentStore.isLoading$;

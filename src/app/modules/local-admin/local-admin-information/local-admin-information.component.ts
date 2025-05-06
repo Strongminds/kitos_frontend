@@ -24,10 +24,21 @@ import { TextBoxComponent } from '../../../shared/components/textbox/textbox.com
 import { NumericInputComponent } from '../../../shared/components/numeric-input/numeric-input.component';
 
 @Component({
-    selector: 'app-local-admin-information',
-    templateUrl: './local-admin-information.component.html',
-    styleUrl: './local-admin-information.component.scss',
-    imports: [StandardVerticalContentGridComponent, NgIf, CardComponent, CardHeaderComponent, FormGridComponent, FormsModule, ReactiveFormsModule, TextBoxComponent, NumericInputComponent, AsyncPipe]
+  selector: 'app-local-admin-information',
+  templateUrl: './local-admin-information.component.html',
+  styleUrl: './local-admin-information.component.scss',
+  imports: [
+    StandardVerticalContentGridComponent,
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    NumericInputComponent,
+    AsyncPipe,
+  ],
 })
 export class LocalAdminInformationComponent extends BaseComponent implements OnInit {
   public readonly organizationName$ = this.store.select(selectOrganizationName);
@@ -59,14 +70,14 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
             cvrControl: this.GetCvrAsNumber(cvr),
             typeControl: mapOrganizationType(type),
           });
-        }
-      )
+        },
+      ),
     );
 
     this.subscriptions.add(
       this.hasModifyCvrPermission$.pipe(filterNullish()).subscribe((hasModifyCvrPermission) => {
         if (!hasModifyCvrPermission) this.form.controls.cvrControl.disable();
-      })
+      }),
     );
   }
 

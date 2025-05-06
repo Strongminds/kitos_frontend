@@ -9,10 +9,10 @@ import { ExternalReferencesManagementComponent } from '../../../../../shared/com
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-it-system-catalog-references',
-    templateUrl: './it-system-catalog-references.component.html',
-    styleUrl: './it-system-catalog-references.component.scss',
-    imports: [CardComponent, CardHeaderComponent, ExternalReferencesManagementComponent, AsyncPipe]
+  selector: 'app-it-system-catalog-references',
+  templateUrl: './it-system-catalog-references.component.html',
+  styleUrl: './it-system-catalog-references.component.scss',
+  imports: [CardComponent, CardHeaderComponent, ExternalReferencesManagementComponent, AsyncPipe],
 })
 export class ItSystemCatalogReferencesComponent extends BaseComponent {
   public readonly hasModifyPermission$ = this.store.select(selectITSystemHasModifyPermission).pipe(filterNullish());

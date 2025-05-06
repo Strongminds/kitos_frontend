@@ -8,10 +8,10 @@ import { CheckboxComponent } from '../../../checkbox/checkbox.component';
 import { NgFor } from '@angular/common';
 
 @Component({
-    selector: 'app-bulk-action-dialog-section',
-    templateUrl: './bulk-action-dialog-section.component.html',
-    styleUrl: './bulk-action-dialog-section.component.scss',
-    imports: [AccordionComponent, NativeTableComponent, CheckboxComponent, NgFor]
+  selector: 'app-bulk-action-dialog-section',
+  templateUrl: './bulk-action-dialog-section.component.html',
+  styleUrl: './bulk-action-dialog-section.component.scss',
+  imports: [AccordionComponent, NativeTableComponent, CheckboxComponent, NgFor],
 })
 export class BulkActionDialogSectionComponent implements OnInit {
   @Input() public options!: BulkActionOption[];

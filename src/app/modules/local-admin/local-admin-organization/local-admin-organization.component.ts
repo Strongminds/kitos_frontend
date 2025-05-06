@@ -13,10 +13,17 @@ enum LocalAdminOrganizationSegmentOption {
 }
 
 @Component({
-    selector: 'app-local-admin-organization',
-    templateUrl: './local-admin-organization.component.html',
-    styleUrl: './local-admin-organization.component.scss',
-    imports: [SegmentComponent, CardComponent, NgIf, OrganizationsGridComponent, OverviewHeaderComponent, LocalOptionTypeViewComponent]
+  selector: 'app-local-admin-organization',
+  templateUrl: './local-admin-organization.component.html',
+  styleUrl: './local-admin-organization.component.scss',
+  imports: [
+    SegmentComponent,
+    CardComponent,
+    NgIf,
+    OrganizationsGridComponent,
+    OverviewHeaderComponent,
+    LocalOptionTypeViewComponent,
+  ],
 })
 export class LocalAdminOrganizationComponent {
   public readonly LocalAdminOrganizationSegmentOption = LocalAdminOrganizationSegmentOption;
@@ -27,5 +34,4 @@ export class LocalAdminOrganizationComponent {
     { text: $localize`Organisationer`, value: LocalAdminOrganizationSegmentOption.Organizations },
     { text: $localize`Roller`, value: LocalAdminOrganizationSegmentOption.Roles },
   ];
-
 }

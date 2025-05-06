@@ -14,11 +14,21 @@ import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { CreateEntityDialogActionButtonsComponent } from '../create-entity-dialog-action-buttons/create-entity-dialog-action-buttons.component';
 
 @Component({
-    selector: 'app-create-entity-with-name-dialog',
-    templateUrl: './create-entity-with-name-dialog.component.html',
-    styleUrl: './create-entity-with-name-dialog.component.scss',
-    providers: [CreateEntityDialogComponentStore],
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, TextBoxComponent, NgIf, ParagraphComponent, CreateEntityDialogActionButtonsComponent, AsyncPipe]
+  selector: 'app-create-entity-with-name-dialog',
+  templateUrl: './create-entity-with-name-dialog.component.html',
+  styleUrl: './create-entity-with-name-dialog.component.scss',
+  providers: [CreateEntityDialogComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    CreateEntityDialogActionButtonsComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogComponent implements OnInit {
   public createForm = new FormGroup({
@@ -37,7 +47,7 @@ export class CreateEntityWithNameDialogComponent extends BaseCreateEntityDialogC
         if (!value) return;
 
         this.componentStore.checkNameAvailability({ searchObject: { nameEquals: value }, entityType: this.entityType });
-      })
+      }),
     );
   }
 

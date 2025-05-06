@@ -11,10 +11,17 @@ import { DialogActionsComponent } from '../../../../../shared/components/dialogs
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-add-system-integrator-dialog',
-    templateUrl: './add-system-integrator-dialog.component.html',
-    styleUrl: './add-system-integrator-dialog.component.scss',
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, UserDropdownComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-add-system-integrator-dialog',
+  templateUrl: './add-system-integrator-dialog.component.html',
+  styleUrl: './add-system-integrator-dialog.component.scss',
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    UserDropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class AddSystemIntegratorDialogComponent {
   @Input() systemIntegratorUuids$!: Observable<string[]>;
@@ -25,7 +32,7 @@ export class AddSystemIntegratorDialogComponent {
 
   constructor(
     private readonly dialogRef: MatDialogRef<AddSystemIntegratorDialogComponent>,
-    private readonly store: Store
+    private readonly store: Store,
   ) {}
 
   public addSystemIntegrator(): void {

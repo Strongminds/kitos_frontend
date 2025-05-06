@@ -11,10 +11,18 @@ export interface RadioButtonOption<TOptionIdType> {
 }
 
 @Component({
-    selector: 'app-radio-buttons[options]',
-    templateUrl: './radio-buttons.component.html',
-    styleUrls: ['./radio-buttons.component.scss'],
-    imports: [NgIf, StandardVerticalContentGridComponent, FormsModule, ReactiveFormsModule, MatRadioGroup, NgFor, MatRadioButton]
+  selector: 'app-radio-buttons[options]',
+  templateUrl: './radio-buttons.component.html',
+  styleUrls: ['./radio-buttons.component.scss'],
+  imports: [
+    NgIf,
+    StandardVerticalContentGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    MatRadioGroup,
+    NgFor,
+    MatRadioButton,
+  ],
 })
 export class RadioButtonsComponent<TOptionIdType> extends BaseFormComponent<TOptionIdType> {
   @Input() public options!: Array<RadioButtonOption<TOptionIdType>>;

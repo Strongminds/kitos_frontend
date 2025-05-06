@@ -10,17 +10,20 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { LockIconComponent } from '../../icons/lock-icon.component';
 
 @Component({
-    selector: 'app-export-menu-button',
-    templateUrl: './export-menu-button.component.html',
-    styleUrl: './export-menu-button.component.scss',
-    imports: [MenuButtonComponent, MenuButtonItemComponent, ExportIconComponent, NgIf, LockIconComponent, AsyncPipe]
+  selector: 'app-export-menu-button',
+  templateUrl: './export-menu-button.component.html',
+  styleUrl: './export-menu-button.component.scss',
+  imports: [MenuButtonComponent, MenuButtonItemComponent, ExportIconComponent, NgIf, LockIconComponent, AsyncPipe],
 })
 export class ExportMenuButtonComponent {
   @Input() exportMethod!: (exportAllColumns: boolean) => void;
   @Input() showColumnsOnlyOption = true;
   @Input() enabledGdprExport = false;
 
-  constructor(private dialog: MatDialog, private store: Store) {}
+  constructor(
+    private dialog: MatDialog,
+    private store: Store,
+  ) {}
 
   public readonly gdprEnabled$ = this.store.select(selectITSystemUsageEnableGdpr);
 

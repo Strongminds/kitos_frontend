@@ -130,7 +130,7 @@ describe('it-system-usage roles', () => {
     }).as('deleteRoleRequest');
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'updateRoleRequest'
+      'updateRoleRequest',
     );
 
     cy.getByDataCy('save-button').click();

@@ -26,10 +26,28 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
 import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
 
 @Component({
-    selector: 'app-payment-table[title][helpTextKey][paymentType]',
-    templateUrl: './payment-table.component.html',
-    styleUrl: './payment-table.component.scss',
-    imports: [CardComponent, CardHeaderComponent, StandardVerticalContentGridComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent, ContentSpaceBetweenComponent, ColorCircleComponent, IconButtonComponent, PencilIconComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe, DecimalPipe, AppDatePipe]
+  selector: 'app-payment-table[title][helpTextKey][paymentType]',
+  templateUrl: './payment-table.component.html',
+  styleUrl: './payment-table.component.scss',
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    ContentSpaceBetweenComponent,
+    ColorCircleComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+    DecimalPipe,
+    AppDatePipe,
+  ],
 })
 export class PaymentTableComponent extends BaseComponent {
   @Input() public title!: string;
@@ -41,7 +59,10 @@ export class PaymentTableComponent extends BaseComponent {
   public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
   public readonly nullPlaceholder = NULL_PLACEHOLDER;
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -72,7 +93,7 @@ export class PaymentTableComponent extends BaseComponent {
           if (result === true) {
             this.store.dispatch(ITContractActions.removeItContractPayment(payment.id!, this.paymentType));
           }
-        })
+        }),
     );
   }
 

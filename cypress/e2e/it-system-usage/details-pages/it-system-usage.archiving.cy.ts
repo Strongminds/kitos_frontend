@@ -61,7 +61,7 @@ describe('it-system-usage archiving', () => {
     openArchiveTab();
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch'
+      'patch',
     );
 
     cy.dropdown('Arkiveringspligt', 'K', true);
@@ -129,7 +129,7 @@ describe('it-system-usage archiving', () => {
       'DELETE',
       '**/journal-periods/**',
       {},
-      'Er du sikker på at du vil fjerne denne journalperiode?'
+      'Er du sikker på at du vil fjerne denne journalperiode?',
     );
   });
 });

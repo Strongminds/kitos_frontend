@@ -11,10 +11,10 @@ import { MenuButtonItemComponent } from '../buttons/menu-button/menu-button-item
 import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-local-admin-column-config-button',
-    templateUrl: './local-admin-column-config-button.component.html',
-    styleUrl: './local-admin-column-config-button.component.scss',
-    imports: [MenuButtonComponent, MenuButtonItemComponent, AsyncPipe]
+  selector: 'app-local-admin-column-config-button',
+  templateUrl: './local-admin-column-config-button.component.html',
+  styleUrl: './local-admin-column-config-button.component.scss',
+  imports: [MenuButtonComponent, MenuButtonItemComponent, AsyncPipe],
 })
 export class LocalAdminColumnConfigButtonComponent {
   @Input() columns$!: Observable<GridColumn[]>;
@@ -24,7 +24,7 @@ export class LocalAdminColumnConfigButtonComponent {
   constructor(
     private confirmActionService: ConfirmActionService,
     private actions$: Actions,
-    private columnConfigService: ColumnConfigService
+    private columnConfigService: ColumnConfigService,
   ) {}
 
   public onSave(): void {

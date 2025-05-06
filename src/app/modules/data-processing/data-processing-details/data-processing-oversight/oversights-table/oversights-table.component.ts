@@ -26,17 +26,34 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
 import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
 
 @Component({
-    selector: 'app-oversights-table',
-    templateUrl: './oversights-table.component.html',
-    styleUrl: './oversights-table.component.scss',
-    imports: [StandardVerticalContentGridComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent, TableRowActionsComponent, IconButtonComponent, PencilIconComponent, TrashcanIconComponent, EmptyStateComponent, CollectionExtensionButtonComponent, AsyncPipe, AppDatePipe]
+  selector: 'app-oversights-table',
+  templateUrl: './oversights-table.component.html',
+  styleUrl: './oversights-table.component.scss',
+  imports: [
+    StandardVerticalContentGridComponent,
+    NgIf,
+    NativeTableComponent,
+    NgFor,
+    ParagraphComponent,
+    TableRowActionsComponent,
+    IconButtonComponent,
+    PencilIconComponent,
+    TrashcanIconComponent,
+    EmptyStateComponent,
+    CollectionExtensionButtonComponent,
+    AsyncPipe,
+    AppDatePipe,
+  ],
 })
 export class OversightsTableComponent extends BaseComponent {
   public readonly oversightDates$ = this.store.select(selectDataProcessingOversightDates).pipe(filterNullish());
   public readonly anyOversightDates$ = this.oversightDates$.pipe(matchNonEmptyArray());
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
-  constructor(private store: Store, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -64,10 +81,10 @@ export class OversightsTableComponent extends BaseComponent {
         .subscribe(([result, oversightDates]) => {
           if (result === true) {
             this.store.dispatch(
-              DataProcessingActions.removeDataProcessingOversightDate(oversightDateUuid, oversightDates)
+              DataProcessingActions.removeDataProcessingOversightDate(oversightDateUuid, oversightDates),
             );
           }
-        })
+        }),
     );
   }
 }

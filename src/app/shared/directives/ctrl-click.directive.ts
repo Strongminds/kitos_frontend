@@ -5,7 +5,11 @@ import { Router, RouterLink, UrlTree } from '@angular/router';
 export class CtrlClickDirective implements OnInit, OnDestroy {
   private captureClickListener!: (event: MouseEvent) => void;
 
-  constructor(private router: Router, @Optional() private routerLink: RouterLink, private el: ElementRef) {}
+  constructor(
+    private router: Router,
+    @Optional() private routerLink: RouterLink,
+    private el: ElementRef,
+  ) {}
 
   ngOnInit(): void {
     this.captureClickListener = this.onCaptureClick.bind(this);

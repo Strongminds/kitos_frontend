@@ -6,7 +6,10 @@ import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { APIJournalPeriodResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { dateGreaterThanOrEqualControlValidator, dateLessThanOrEqualControlValidator } from 'src/app/shared/helpers/form.helpers';
+import {
+  dateGreaterThanOrEqualControlValidator,
+  dateLessThanOrEqualControlValidator,
+} from 'src/app/shared/helpers/form.helpers';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
@@ -20,10 +23,23 @@ import { DialogActionsComponent } from '../../../../../../shared/components/dial
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-it-system-usage-details-journal-period-write-dialog',
-    templateUrl: './it-system-usage-details-journal-period-write-dialog.component.html',
-    styleUrls: ['./it-system-usage-details-journal-period-write-dialog.component.scss'],
-    imports: [DialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, DatePickerComponent, NgIf, TextBoxInfoComponent, ParagraphComponent, TextBoxComponent, CheckboxComponent, DialogActionsComponent, ButtonComponent]
+  selector: 'app-it-system-usage-details-journal-period-write-dialog',
+  templateUrl: './it-system-usage-details-journal-period-write-dialog.component.html',
+  styleUrls: ['./it-system-usage-details-journal-period-write-dialog.component.scss'],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DatePickerComponent,
+    NgIf,
+    TextBoxInfoComponent,
+    ParagraphComponent,
+    TextBoxComponent,
+    CheckboxComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+  ],
 })
 export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public journalPeriod?: APIJournalPeriodResponseDTO | undefined;
@@ -38,7 +54,7 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
   constructor(
     private readonly store: Store,
     private readonly dialog: MatDialogRef<ItSystemUsageDetailsJournalPeriodWriteDialogComponent>,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -48,12 +64,14 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
   public isBusy = false;
 
   ngOnInit(): void {
-      this.journalPeriodForm.controls.startDate.addValidators(
-        dateLessThanOrEqualControlValidator(this.journalPeriodForm.controls.endDate));
-      this.journalPeriodForm.controls.endDate.addValidators(
-        dateGreaterThanOrEqualControlValidator(this.journalPeriodForm.controls.startDate));
+    this.journalPeriodForm.controls.startDate.addValidators(
+      dateLessThanOrEqualControlValidator(this.journalPeriodForm.controls.endDate),
+    );
+    this.journalPeriodForm.controls.endDate.addValidators(
+      dateGreaterThanOrEqualControlValidator(this.journalPeriodForm.controls.startDate),
+    );
 
-      if (this.journalPeriod?.uuid) {
+    if (this.journalPeriod?.uuid) {
       this.isEdit = true;
       this.saveText = $localize`Gem`;
       this.journalPeriodForm.patchValue({
@@ -70,11 +88,11 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
         .pipe(
           ofType(
             ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess,
-            ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess
+            ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess,
           ),
-          first()
+          first(),
         )
-        .subscribe(() => this.dialog.close())
+        .subscribe(() => this.dialog.close()),
     );
 
     //on error set isBusy to false
@@ -83,12 +101,12 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
         .pipe(
           ofType(
             ITSystemUsageActions.addItSystemUsageJournalPeriodError,
-            ITSystemUsageActions.patchItSystemUsageJournalPeriodError
-          )
+            ITSystemUsageActions.patchItSystemUsageJournalPeriodError,
+          ),
         )
         .subscribe(() => {
           this.isBusy = false;
-        })
+        }),
     );
   }
 
@@ -125,7 +143,10 @@ export class ItSystemUsageDetailsJournalPeriodWriteDialogComponent extends BaseC
   }
 
   public selectedDatesAreIncompatible(): boolean {
-    return this.dateControlHasInvalidValue(this.journalPeriodForm.controls.startDate) || this.dateControlHasInvalidValue(this.journalPeriodForm.controls.endDate);
+    return (
+      this.dateControlHasInvalidValue(this.journalPeriodForm.controls.startDate) ||
+      this.dateControlHasInvalidValue(this.journalPeriodForm.controls.endDate)
+    );
   }
 
   private dateControlHasInvalidValue(control: FormControl<Date | null | undefined>): boolean {

@@ -10,7 +10,7 @@ describe('global-admin-organizations', () => {
     });
     cy.intercept(
       '/odata/Organizations?$skip=0&$top=*&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true',
-      { fixture: './global-admin/organizations.json' }
+      { fixture: './global-admin/organizations.json' },
     );
     cy.setup(true, 'global-admin/organizations');
   });
@@ -67,7 +67,7 @@ describe('global-admin-organizations', () => {
     cy.getByDataCy('grid-delete-button').first().click();
 
     cy.intercept('DELETE', 'api/v2/internal/organizations/*/delete*', { statusCode: 204, body: {} }).as(
-      'deleteOrganization'
+      'deleteOrganization',
     );
 
     cy.getByDataCy('delete-org-dialog-button').click();
@@ -99,7 +99,7 @@ describe('global-admin-organizations', () => {
     cy.getByDataCy('grid-delete-button').first().click();
 
     cy.intercept('DELETE', 'api/v2/internal/organizations/*/delete*', { statusCode: 204, body: {} }).as(
-      'deleteOrganization'
+      'deleteOrganization',
     );
 
     cy.getByDataCy('consequence-checkbox').click();

@@ -5,10 +5,10 @@ import { XIconComponent } from '../../icons/x-icon.component';
 import { CheckIconComponent } from '../../icons/check-icon.component';
 
 @Component({
-    selector: 'app-toggle-button',
-    templateUrl: './toggle-button.component.html',
-    styleUrl: './toggle-button.component.scss',
-    imports: [IconButtonComponent, NgIf, XIconComponent, CheckIconComponent]
+  selector: 'app-toggle-button',
+  templateUrl: './toggle-button.component.html',
+  styleUrl: './toggle-button.component.scss',
+  imports: [IconButtonComponent, NgIf, XIconComponent, CheckIconComponent],
 })
 export class ToggleButtonComponent {
   @Input() value!: boolean;

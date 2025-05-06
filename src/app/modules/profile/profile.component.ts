@@ -32,10 +32,23 @@ import { DropdownComponent } from '../../shared/components/dropdowns/dropdown/dr
 import { LoadingComponent } from '../../shared/components/loading/loading.component';
 
 @Component({
-    templateUrl: 'profile.component.html',
-    styleUrls: ['profile.component.scss'],
-    providers: [ProfileComponentStore],
-    imports: [CardComponent, NgIf, FormGridComponent, FormsModule, ReactiveFormsModule, OrgUnitSelectComponent, TextBoxComponent, TextBoxInfoComponent, ParagraphComponent, DropdownComponent, LoadingComponent, AsyncPipe]
+  templateUrl: 'profile.component.html',
+  styleUrls: ['profile.component.scss'],
+  providers: [ProfileComponentStore],
+  imports: [
+    CardComponent,
+    NgIf,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    OrgUnitSelectComponent,
+    TextBoxComponent,
+    TextBoxInfoComponent,
+    ParagraphComponent,
+    DropdownComponent,
+    LoadingComponent,
+    AsyncPipe,
+  ],
 })
 export class ProfileComponent extends BaseComponent implements OnInit {
   public startPreferenceOptions = this.userService.getAvailableStartPreferenceOptions();
@@ -46,7 +59,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     map(([organizationRights, organizationUuid]) => {
       if (!organizationRights) return false;
       return organizationRights.some((right) => right.organizationUuid === organizationUuid);
-    })
+    }),
   );
   public readonly userDefaultUnit$ = this.store.select(selectUserDefaultUnit);
 
@@ -70,7 +83,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     private store: Store,
     private componentStore: ProfileComponentStore,
     private actions$: Actions,
-    private userService: UserService
+    private userService: UserService,
   ) {
     super();
   }
@@ -108,7 +121,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
           this.editForm.patchValue({
             defaultOrganizationUnit: defaultUnitToPatch,
           });
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -116,7 +129,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
         this.currentEmail = email;
         this.alreadyExists$.next(false);
         this.onChange({ email });
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -127,7 +140,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
         }
 
         this.changeEmailValidityState(true);
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -137,7 +150,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
           if (organizationUnit.uuid === currentUnitUuid) return;
 
           this.currentDefaultUnitUuid$.next(organizationUnit.uuid);
-        })
+        }),
     );
   }
 

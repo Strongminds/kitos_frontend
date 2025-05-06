@@ -11,12 +11,11 @@ enum GlobalAdminOrganizationSegmentOptionType {
   RoleOptionTypes = 'RoleOptionTypes',
 }
 
-
 @Component({
-    selector: 'app-global-admin-organization',
-    templateUrl: './global-admin-organization.component.html',
-    styleUrl: './global-admin-organization.component.scss',
-    imports: [SegmentComponent, CardComponent, NgIf, StandardVerticalContentGridComponent, GlobalOptionTypeViewComponent]
+  selector: 'app-global-admin-organization',
+  templateUrl: './global-admin-organization.component.html',
+  styleUrl: './global-admin-organization.component.scss',
+  imports: [SegmentComponent, CardComponent, NgIf, StandardVerticalContentGridComponent, GlobalOptionTypeViewComponent],
 })
 export class GlobalAdminOrganizationComponent {
   public readonly GlobalAdminOrganizationSegmentOptionType = GlobalAdminOrganizationSegmentOptionType;
@@ -26,5 +25,4 @@ export class GlobalAdminOrganizationComponent {
   ];
 
   public selectedSegment = GlobalAdminOrganizationSegmentOptionType.CountryCodes;
-
 }

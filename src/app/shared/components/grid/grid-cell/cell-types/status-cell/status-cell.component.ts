@@ -4,11 +4,9 @@ import { StatusChipComponent } from '../../../../status-chip/status-chip.compone
 import { SearchPropertyPipe } from '../../../../../pipes/column-property.pipe';
 
 @Component({
-    selector: 'app-status-cell',
-    templateUrl: './status-cell.component.html',
-    styleUrl: './status-cell.component.scss',
-    imports: [StatusChipComponent, SearchPropertyPipe]
+  selector: 'app-status-cell',
+  templateUrl: './status-cell.component.html',
+  styleUrl: './status-cell.component.scss',
+  imports: [StatusChipComponent, SearchPropertyPipe],
 })
-export class StatusCellComponent extends BaseCellComponent {
-
-}
+export class StatusCellComponent extends BaseCellComponent {}

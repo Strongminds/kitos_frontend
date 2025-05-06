@@ -38,10 +38,30 @@ import { LoadingComponent } from '../../../../../shared/components/loading/loadi
 import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 
 @Component({
-    selector: 'app-fk-org-write-dialog',
-    templateUrl: './fk-org-write-dialog.component.html',
-    styleUrl: './fk-org-write-dialog.component.scss',
-    imports: [ScrollbarDialogComponent, FormsModule, ReactiveFormsModule, StandardVerticalContentGridComponent, NgIf, CardComponent, CardHeaderComponent, NumericInputComponent, ParagraphComponent, CheckboxComponent, DragAndDropTreeComponent, AccordionComponent, ContentSpaceBetweenComponent, ButtonComponent, ExportIconComponent, LocalGridComponent, LoadingComponent, DialogActionsComponent, AsyncPipe]
+  selector: 'app-fk-org-write-dialog',
+  templateUrl: './fk-org-write-dialog.component.html',
+  styleUrl: './fk-org-write-dialog.component.scss',
+  imports: [
+    ScrollbarDialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    NgIf,
+    CardComponent,
+    CardHeaderComponent,
+    NumericInputComponent,
+    ParagraphComponent,
+    CheckboxComponent,
+    DragAndDropTreeComponent,
+    AccordionComponent,
+    ContentSpaceBetweenComponent,
+    ButtonComponent,
+    ExportIconComponent,
+    LocalGridComponent,
+    LoadingComponent,
+    DialogActionsComponent,
+    AsyncPipe,
+  ],
 })
 export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() isEdit: boolean = false;
@@ -54,7 +74,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
 
   public readonly updateConsequences$ = this.store.select(selectUpdateConsequences);
   public readonly updateConsequencesLength$ = this.updateConsequences$.pipe(
-    map((consequences) => (consequences ? consequences.length : 0))
+    map((consequences) => (consequences ? consequences.length : 0)),
   );
 
   public readonly synchronizationStatus$ = this.store.select(selectSynchronizationStatus);
@@ -71,7 +91,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
         return $localize`Alle niveauer i organisationen synkroniseres fra FK Organisation. Angiv antal niveauer for at begrænse hierarkiet.`;
 
       return $localize`KITOS synkroniserer ${level} niveauer fra organisationshierarkiet i FK Organisation. Slet indtastningen for at synkronisere det fulde organisationshierarki.`;
-    })
+    }),
   );
 
   public readonly gridColumns = fkOrgChangelogGridColumns;
@@ -79,7 +99,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly actions$: Actions,
-    private readonly dialog: MatDialogRef<FkOrgWriteDialogComponent>
+    private readonly dialog: MatDialogRef<FkOrgWriteDialogComponent>,
   ) {
     super();
   }
@@ -100,7 +120,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
         this.synchronizationStatus$.pipe(first()).subscribe((status) => {
           this.fkOrgFormGroup.controls.levels.setValue(status?.synchronizationDepth);
           this.fkOrgFormGroup.controls.subscribeToUpdates.setValue(status?.subscribesToUpdates ?? false);
-        })
+        }),
       );
     }
 
@@ -110,7 +130,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
         .subscribe(() => {
           this.store.dispatch(OrganizationUnitActions.getOrganizationUnits());
           this.cancel();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -120,7 +140,7 @@ export class FkOrgWriteDialogComponent extends BaseComponent implements OnInit {
         } else {
           this.fkOrgFormGroup.controls.levels.disable();
         }
-      })
+      }),
     );
   }
 

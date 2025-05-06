@@ -12,10 +12,10 @@ import { DiskIconComponent } from '../../icons/disk-icon.component';
 import { TrashcanIconComponent } from '../../icons/trashcan-icon.component';
 
 @Component({
-    selector: 'app-grid-column-config-buttons',
-    templateUrl: './grid-column-config-buttons.component.html',
-    styleUrl: './grid-column-config-buttons.component.scss',
-    imports: [NgIf, MenuButtonItemComponent, DiskIconComponent, TrashcanIconComponent, AsyncPipe]
+  selector: 'app-grid-column-config-buttons',
+  templateUrl: './grid-column-config-buttons.component.html',
+  styleUrl: './grid-column-config-buttons.component.scss',
+  imports: [NgIf, MenuButtonItemComponent, DiskIconComponent, TrashcanIconComponent, AsyncPipe],
 })
 export class GridColumnConfigButtonsComponent implements OnInit {
   @Input() entityType!: RegistrationEntityTypes;
@@ -24,7 +24,7 @@ export class GridColumnConfigButtonsComponent implements OnInit {
     private confirmActionService: ConfirmActionService,
     private columnConfigService: ColumnConfigService,
     private actions$: Actions,
-    private store: Store
+    private store: Store,
   ) {}
 
   public readonly hasGridConfigPermission$ = this.store.select(selectGridConfigModificationPermission);

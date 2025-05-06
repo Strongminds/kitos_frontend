@@ -52,7 +52,7 @@ export class EditRoleDialogComponent implements OnInit {
   constructor(
     private readonly dialogRef: MatDialogRef<EditRoleDialogComponent>,
     private readonly roleOptionService: RoleOptionTypeService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {}
 
   ngOnInit(): void {
@@ -86,14 +86,14 @@ export class EditRoleDialogComponent implements OnInit {
     return this.componentStore.roles$.pipe(
       map((roleAssignments) =>
         roleAssignments.some((role) => {
-          var assignment = role.assignment;
-          var formControls = this.formGroup.controls;
+          const assignment = role.assignment;
+          const formControls = this.formGroup.controls;
           return (
             assignment.user.uuid === formControls.user.value?.uuid &&
             assignment.role.uuid === formControls.role.value?.uuid
           );
-        })
-      )
+        }),
+      ),
     );
   }
 

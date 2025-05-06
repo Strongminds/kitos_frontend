@@ -5,11 +5,9 @@ import { StandardVerticalContentGridComponent } from '../../../../shared/compone
 import { LocalOptionTypeViewComponent } from '../../../../shared/components/local-option-type-view/local-option-type-view.component';
 
 @Component({
-    selector: 'app-local-admin-it-system-usage-option-types',
-    templateUrl: './local-admin-it-system-usage-option-types.component.html',
-    styleUrl: './local-admin-it-system-usage-option-types.component.scss',
-    imports: [CardComponent, CardHeaderComponent, StandardVerticalContentGridComponent, LocalOptionTypeViewComponent]
+  selector: 'app-local-admin-it-system-usage-option-types',
+  templateUrl: './local-admin-it-system-usage-option-types.component.html',
+  styleUrl: './local-admin-it-system-usage-option-types.component.scss',
+  imports: [CardComponent, CardHeaderComponent, StandardVerticalContentGridComponent, LocalOptionTypeViewComponent],
 })
-export class LocalAdminItSystemUsageOptionTypesComponent {
-
-}
+export class LocalAdminItSystemUsageOptionTypesComponent {}

@@ -13,11 +13,11 @@ import { AccordionComponent } from '../accordion/accordion.component';
 import { LocalOptionGridComponent } from './local-option-grid/local-option-grid.component';
 
 @Component({
-    selector: 'app-local-option-type-view',
-    templateUrl: './local-option-type-view.component.html',
-    styleUrl: './local-option-type-view.component.scss',
-    providers: [LocalOptionTypeTableComponentStore],
-    imports: [NgIf, AccordionComponent, LocalOptionGridComponent, AsyncPipe]
+  selector: 'app-local-option-type-view',
+  templateUrl: './local-option-type-view.component.html',
+  styleUrl: './local-option-type-view.component.scss',
+  providers: [LocalOptionTypeTableComponentStore],
+  imports: [NgIf, AccordionComponent, LocalOptionGridComponent, AsyncPipe],
 })
 export class LocalOptionTypeViewComponent extends BaseComponent implements OnInit {
   @Input() optionType!: LocalAdminOptionType;
@@ -34,7 +34,7 @@ export class LocalOptionTypeViewComponent extends BaseComponent implements OnIni
   constructor(
     private componentStore: LocalOptionTypeTableComponentStore,
     private dialog: MatDialog,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -52,11 +52,11 @@ export class LocalOptionTypeViewComponent extends BaseComponent implements OnIni
       this.actions$
         .pipe(
           ofType(LocalOptionTypeActions.updateOptionTypeSuccess),
-          filter(({ optionType }) => optionType === this.optionType)
+          filter(({ optionType }) => optionType === this.optionType),
         )
         .subscribe(() => {
           this.componentStore.getOptionTypeItems();
-        })
+        }),
     );
   }
 

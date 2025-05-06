@@ -54,7 +54,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     private confirmActionService: ConfirmActionService,
     private dialogRef: MatDialogRef<DeleteUserDialogComponent>,
     private openerService: DialogOpenerService,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -63,12 +63,12 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserError)).subscribe(() => {
         this.isLoading = false;
-      })
+      }),
     );
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserSuccess)).subscribe(() => {
         this.onClose();
-      })
+      }),
     );
   }
 
@@ -121,7 +121,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   private transferRoles(
     result: BulkActionResult,
     user: ODataOrganizationUser,
-    dialogRef: MatDialogRef<BulkActionDialogComponent<any>, any>
+    dialogRef: MatDialogRef<BulkActionDialogComponent<any>, any>,
   ): void {
     const request = getRoleActionRequest(result, user);
 
@@ -144,11 +144,11 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
         .pipe(
           filter(
             ([unitRights, systemRights, contractRights, dprRights]) =>
-              unitRights.length < 1 && systemRights.length < 1 && contractRights.length < 1 && dprRights.length < 1
+              unitRights.length < 1 && systemRights.length < 1 && contractRights.length < 1 && dprRights.length < 1,
           ),
-          first()
+          first(),
         )
-        .subscribe(() => dialogRef.close())
+        .subscribe(() => dialogRef.close()),
     );
   }
 }

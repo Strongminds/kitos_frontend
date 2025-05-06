@@ -9,7 +9,11 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { DeleteOrganizationComponentStore } from './delete-organization.component-store';
-import { RemovalConflict, RemovalConflictType, RemovalConflictTableComponent } from './removal-conflict-table/removal-conflict-table.component';
+import {
+  RemovalConflict,
+  RemovalConflictType,
+  RemovalConflictTableComponent,
+} from './removal-conflict-table/removal-conflict-table.component';
 import { ClipboardService } from 'src/app/shared/services/clipboard.service';
 import { ScrollbarDialogComponent } from '../../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { NgIf, NgFor, AsyncPipe } from '@angular/common';
@@ -21,11 +25,23 @@ import { CheckboxComponent } from '../../../../../shared/components/checkbox/che
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-delete-organization-dialog',
-    templateUrl: './delete-organization-dialog.component.html',
-    styleUrl: './delete-organization-dialog.component.scss',
-    providers: [DeleteOrganizationComponentStore],
-    imports: [ScrollbarDialogComponent, NgIf, LoadingComponent, StandardVerticalContentGridComponent, ParagraphComponent, NgFor, RemovalConflictTableComponent, DialogActionsComponent, CheckboxComponent, ButtonComponent, AsyncPipe]
+  selector: 'app-delete-organization-dialog',
+  templateUrl: './delete-organization-dialog.component.html',
+  styleUrl: './delete-organization-dialog.component.scss',
+  providers: [DeleteOrganizationComponentStore],
+  imports: [
+    ScrollbarDialogComponent,
+    NgIf,
+    LoadingComponent,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    NgFor,
+    RemovalConflictTableComponent,
+    DialogActionsComponent,
+    CheckboxComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class DeleteOrganizationDialogComponent extends BaseComponent implements OnInit {
   @Input() public organization!: OrganizationOData;
@@ -61,7 +77,7 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
     private store: Store,
     private cdr: ChangeDetectorRef,
     private notificationService: NotificationService,
-    private clipboardService: ClipboardService
+    private clipboardService: ClipboardService,
   ) {
     super();
   }
@@ -73,13 +89,13 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
       this.actions$.pipe(ofType(OrganizationActions.deleteOrganizationSuccess)).subscribe(() => {
         this.deletingOrganization$.next(false);
         this.onCancel();
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationActions.deleteOrganizationError)).subscribe(() => {
         this.deletingOrganization$.next(false);
-      })
+      }),
     );
   }
 
@@ -122,7 +138,7 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
     return this.hasAnyRemovalConflict().pipe(
       map((hasConflicts) => {
         return hasConflicts === false || this.hasAcceptedConsequences;
-      })
+      }),
     );
   }
 

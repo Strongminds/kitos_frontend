@@ -65,7 +65,7 @@ describe('it-system-usage notifications', () => {
       cy.intercept(
         'PATCH',
         '/api/v2/internal/notifications/ItSystemUsage/85cc6bd8-da66-4d4e-8e56-4dbc16e5c109/scheduled/deactivate/310ea75c-1111-4bcd-1111-a19543b0dcc5',
-        { fixture: './it-system-usage/notifications/notifications-deactivate.json' }
+        { fixture: './it-system-usage/notifications/notifications-deactivate.json' },
       ).as('patch');
       cy.getByDataCy('confirm-button').click();
       cy.verifyRequestUsingDeepEq('patch', 'response.body.uuid', '310ea75c-1111-4bcd-1111-a19543b0dcc5');
