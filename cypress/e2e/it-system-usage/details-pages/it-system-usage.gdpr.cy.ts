@@ -239,8 +239,6 @@ describe('it-system-usage', () => {
   });
 
   it('can edit retention period', () => {
-    cy.getByDataCy('popup-message-dismiss-button').click();
-
     cy.getByDataCy('retention-period-accordion').click();
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
