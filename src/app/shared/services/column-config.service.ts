@@ -13,10 +13,10 @@ import { selectContractGridColumns, selectItContractGridConfig } from 'src/app/s
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
 import { UIModuleConfigKey } from '../enums/ui-module-config-key';
+import { areSetsEqual } from '../helpers/set-helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { GridUIConfigService } from './ui-config-services/grid-ui-config.service';
-import { areSetsEqual } from '../helpers/set-helpers';
 
 @Injectable({ providedIn: 'root' })
 export class ColumnConfigService {
@@ -39,14 +39,20 @@ export class ColumnConfigService {
     }
   }
 
-  public dispatchResetAction(entityType: RegistrationEntityTypes) {
+  public dispatchResetAction(entityType: RegistrationEntityTypes, disablePopupNotification = false) {
     switch (entityType) {
       case 'it-system-usage':
-        return this.store.dispatch(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration());
+        return this.store.dispatch(
+          ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration(disablePopupNotification)
+        );
       case 'it-contract':
-        return this.store.dispatch(ITContractActions.resetToOrganizationITContractColumnConfiguration());
+        return this.store.dispatch(
+          ITContractActions.resetToOrganizationITContractColumnConfiguration(disablePopupNotification)
+        );
       case 'data-processing-registration':
-        return this.store.dispatch(DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration());
+        return this.store.dispatch(
+          DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration(disablePopupNotification)
+        );
       default:
         throw new Error(`No reset action defined for entity type: ${entityType}`);
     }

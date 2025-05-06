@@ -43,7 +43,7 @@ export class GridColumnConfigButtonsComponent implements OnInit {
             this.actions$
               .pipe(ofType(this.columnConfigService.getSaveSuccessConfigAction(this.entityType)), first())
               .subscribe(() => {
-                this.columnConfigService.dispatchResetAction(this.entityType);
+                this.columnConfigService.dispatchResetAction(this.entityType, true);
               });
           });
       },
