@@ -23,9 +23,14 @@ export interface DataProcessingState extends EntityState<DataProcessingRegistrat
   loading: boolean | undefined;
   dataProcessing: APIDataProcessingRegistrationResponseDTO | undefined;
 
-  permissions: APIDataProcessingRegistrationPermissionsResponseDTO | undefined;
+  permissions: PermissionsCache | undefined;
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
   isRemoving: boolean;
 
   lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
+}
+
+export interface PermissionsCache {
+  value: APIDataProcessingRegistrationPermissionsResponseDTO | undefined;
+  cacheTime: number | undefined;
 }

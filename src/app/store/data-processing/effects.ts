@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, filter, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationGeneralDataWriteRequestDTO,
@@ -33,6 +33,7 @@ import {
   selectDataProcessingGridColumns,
   selectDataProcessingRightUuidPairs,
   selectDataProcessingUuid,
+  selectHasValidDataProcessingPermissionsCache,
   selectOverviewRoles,
   selectOverviewRolesCache,
   selectPreviousGridState,
@@ -180,10 +181,12 @@ export class DataProcessingEffects {
   getDataProcessingPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessingPermissions),
-      switchMap(({ dataProcessingUuid }) =>
+      concatLatestFrom(() => this.store.select(selectHasValidDataProcessingPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
+      switchMap(([action]) =>
         this.dataProcessingService
           .getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions({
-            dprUuid: dataProcessingUuid,
+            dprUuid: action.dataProcessingUuid,
           })
           .pipe(
             map((permissions) => DataProcessingActions.getDataProcessingPermissionsSuccess(permissions)),

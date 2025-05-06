@@ -75,7 +75,10 @@ export const dataProcessingFeature = createFeature({
     ),
     on(
       DataProcessingActions.getDataProcessingPermissionsSuccess,
-      (state, { permissions }): DataProcessingState => ({ ...state, permissions })
+      (state, { permissions }): DataProcessingState => ({ ...state, permissions: {
+        value: permissions,
+        cacheTime: new Date().getTime(),
+      } })
     ),
     on(
       DataProcessingActions.getDataProcessingCollectionPermissionsSuccess,
