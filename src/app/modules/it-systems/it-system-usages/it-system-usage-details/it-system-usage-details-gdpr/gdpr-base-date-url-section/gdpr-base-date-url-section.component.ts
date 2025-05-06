@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, combineLatest, filter } from 'rxjs';
 import { APIGDPRWriteRequestDTO, APISimpleLinkDTO } from 'src/app/api/v2';
@@ -7,12 +7,27 @@ import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.compo
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoDontKnowOption, yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
+import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
-    selector: 'app-gdpr-base-date-url-section',
-    templateUrl: './gdpr-base-date-url-section.component.html',
-    styleUrls: ['./gdpr-base-date-url-section.component.scss'],
-    standalone: false
+  selector: 'app-gdpr-base-date-url-section',
+  templateUrl: './gdpr-base-date-url-section.component.html',
+  styleUrls: ['./gdpr-base-date-url-section.component.scss'],
+  imports: [
+    AccordionComponent,
+    FormGridComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    DropdownComponent,
+    DatePickerComponent,
+    EditUrlSectionComponent,
+    AsyncPipe,
+  ],
 })
 export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent implements OnInit {
   @Input() public title!: string;

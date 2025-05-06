@@ -11,7 +11,7 @@ export class GridFilterService {
   constructor(
     private store: Store,
     private localStorage: StatePersistingService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {}
 
   public deleteFilterFromLocalStorage(entityType: RegistrationEntityTypes) {

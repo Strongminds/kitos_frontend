@@ -31,7 +31,7 @@ export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationCh
 ];
 
 export const mapArchiveDutyRecommendationChoice = (
-  value?: APIRecommendedArchiveDutyResponseDTO.IdEnum
+  value?: APIRecommendedArchiveDutyResponseDTO.IdEnum,
 ): ArchiveDutyRecommendationChoice | undefined => {
   return archiveDutyRecommendationChoiceOptions.find((option) => option.value === value);
 };

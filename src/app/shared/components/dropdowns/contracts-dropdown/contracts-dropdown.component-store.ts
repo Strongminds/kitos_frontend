@@ -18,7 +18,7 @@ export class ContractDropdownComponentStore extends ComponentStore<State> {
 
   constructor(
     @Inject(APIV2ItContractService) private readonly itContractService: APIV2ItContractService,
-    private readonly store: Store
+    private readonly store: Store,
   ) {
     super({ contracts: [], loading: false });
   }
@@ -27,14 +27,14 @@ export class ContractDropdownComponentStore extends ComponentStore<State> {
     (state, contracts: APIItContractResponseDTO[]): State => ({
       ...state,
       contracts,
-    })
+    }),
   );
 
   private setLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   public searchContracts = this.effect((search$: Observable<string | undefined>) =>
@@ -46,10 +46,10 @@ export class ContractDropdownComponentStore extends ComponentStore<State> {
           tapResponse(
             (contracts) => this.setContracts(contracts),
             (error) => console.error(error),
-            () => this.setLoading(false)
-          )
+            () => this.setLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 }

@@ -6,20 +6,20 @@
       <div>
         <app-standard-vertical-content-grid>
           <div>
-             <app-paragraph [bold]="true" i18n paragraphSize="medium"> Trin 1 - Hent og udfyld ark</app-paragraph>
-        <app-button
-          type="submit"
-          buttonStyle="secondary"
-          class="inline-block-button"
-          (buttonClick)="getEntityExcel()"
-          i18n
-          class="button-full-width"
-          >Excelark til import af {{ getEntityName() }}</app-button
-        >
+            <app-paragraph [bold]="true" i18n paragraphSize="medium"> Trin 1 - Hent og udfyld ark</app-paragraph>
+            <app-button
+              type="submit"
+              buttonStyle="secondary"
+              class="inline-block-button"
+              (buttonClick)="getEntityExcel()"
+              i18n
+              class="button-full-width"
+              >Excelark til import af {{ getEntityName() }}</app-button
+            >
           </div>
           <div>
             <app-paragraph [bold]="true" i18n paragraphSize="medium"> Trin 2 - Upload udfyldt ark</app-paragraph>
-        <app-file-input (fileImported)="fileImported($event)"></app-file-input>
+            <app-file-input (fileImported)="fileImported($event)"></app-file-input>
           </div>
           <div>
             <app-button type="submit" [disabled]="!excelForm.valid" class="inline-block-button" i18n>Upload</app-button>

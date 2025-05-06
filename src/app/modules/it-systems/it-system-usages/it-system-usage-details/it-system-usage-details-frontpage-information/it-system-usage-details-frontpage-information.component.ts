@@ -1,5 +1,6 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
 import { APIGeneralDataUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
@@ -24,8 +25,8 @@ import {
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoDontKnowOption } from 'src/app/shared/models/yes-no-dont-know.model';
 import {
-  mapToYesNoPartiallyEnum,
   YesNoPartiallyOption,
+  mapToYesNoPartiallyEnum,
   yesNoPartiallyOptions,
 } from 'src/app/shared/models/yes-no-partially.model';
 import { mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
@@ -56,11 +57,30 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
+import { DatePickerComponent } from '../../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
+import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
+import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
 @Component({
-    selector: 'app-it-system-usage-details-frontpage-information',
-    templateUrl: 'it-system-usage-details-frontpage-information.component.html',
-    styleUrls: ['it-system-usage-details-frontpage-information.component.scss'],
-    standalone: false
+  selector: 'app-it-system-usage-details-frontpage-information',
+  templateUrl: 'it-system-usage-details-frontpage-information.component.html',
+  styleUrls: ['it-system-usage-details-frontpage-information.component.scss'],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    NgIf,
+    StatusChipComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    TextBoxComponent,
+    DropdownComponent,
+    TextAreaComponent,
+    DatePickerComponent,
+    AsyncPipe,
+  ],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
@@ -73,7 +93,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   public readonly aiTechnologyOptions = yesNoOptions;
@@ -111,7 +131,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       validTo: new FormControl<Date | undefined>(undefined),
       valid: new FormControl({ value: '', disabled: true }),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   public readonly webAccessibilityForm = new FormGroup({
@@ -139,20 +159,23 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       ];
 
       return $localize`Følgende gør systemet 'ikke aktivt': ` + '\n' + toBulletPoints(reasonsForInactivity);
-    })
+    }),
   );
 
-  constructor(private store: Store, private notificationService: NotificationService) {
+  constructor(
+    private store: Store,
+    private notificationService: NotificationService,
+  ) {
     super();
   }
 
   ngOnInit() {
     // Add custom date validators
     this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
-      this.itSystemApplicationForm.controls.validTo
+      this.itSystemApplicationForm.controls.validTo,
     );
     this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
-      this.itSystemApplicationForm.controls.validFrom
+      this.itSystemApplicationForm.controls.validFrom,
     );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
@@ -165,7 +188,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           this.itSystemInformationForm.disable();
           this.itSystemApplicationForm.disable();
           this.webAccessibilityForm.disable();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -178,7 +201,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           this.webAccessibilityForm.controls.lastWebAccessibilityCheck.disable();
           this.webAccessibilityForm.controls.webAccessibilityNotes.disable();
         }
-      })
+      }),
     );
     // Set initial state of information form
     this.subscriptions.add(
@@ -201,7 +224,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck),
             webAccessibilityNotes: general.webAccessibilityNotes,
           });
-        })
+        }),
     );
 
     // Set initial state of application form
@@ -220,8 +243,8 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             valid: itSystemUsage.general.validity.valid
               ? $localize`Systemet er aktivt`
               : $localize`Systemet er ikke aktivt`,
-          })
-        )
+          }),
+        ),
     );
   }
 

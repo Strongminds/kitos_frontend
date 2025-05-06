@@ -36,7 +36,7 @@ export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
             [kleFeature.name]: kleInitialState,
             [userFeature.name]: userInitialState,
           },
-          action
+          action,
         );
       case resetOrganizationStateAction.type:
         return reducer(
@@ -44,7 +44,7 @@ export function resetReducer(reducer: ActionReducer<any>): ActionReducer<any> {
             ...state,
             ...initialStateDependingOnOrganization,
           },
-          action
+          action,
         );
     }
 

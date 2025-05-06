@@ -6,14 +6,14 @@
     [ngClass]="{
       'child-node': node.isRoot !== true,
       'root-node': node.isRoot === true,
-      'leaf-node': node.children.length === 0
+      'leaf-node': node.children.length === 0,
     }"
   >
     <div
       [class]="'node-wrapper node-' + node.color"
       [ngClass]="{
         'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
-        'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
+        'current-node-green': node.uuid === currentNodeUuid && node.color === 'green',
       }"
     >
       <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemPath]="node.uuid">
@@ -35,7 +35,7 @@
     [ngClass]="{
       'child-node': node.isRoot !== true,
       'root-node': node.isRoot === true,
-      'leaf-node': node.children.length === 0
+      'leaf-node': node.children.length === 0,
     }"
   >
     <div class="mat-tree-node">
@@ -47,7 +47,7 @@
         [class]="'node-wrapper node-' + node.color"
         [ngClass]="{
           'current-node-blue': node.uuid === currentNodeUuid && node.color === 'blue',
-          'current-node-green': node.uuid === currentNodeUuid && node.color === 'green'
+          'current-node-green': node.uuid === currentNodeUuid && node.color === 'green',
         }"
       >
         <app-details-page-link [itemType]="itemType" linkFontSize="small" [itemPath]="node.uuid">

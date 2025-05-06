@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { debounceTime, of } from 'rxjs';
@@ -8,6 +8,7 @@ import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-numb
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
+import { AsyncPipe, NgIf } from '@angular/common';
 import {
   BulkActionButton,
   BulkActionResult,
@@ -24,6 +25,17 @@ import {
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { DividerComponent } from '../../../../shared/components/divider/divider.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent as MultiSelectDropdownComponent_1 } from '../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info/textbox-info.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 
 @Component({
@@ -31,7 +43,23 @@ import { BaseUserDialogComponent } from '../base-user-dialog.component';
   templateUrl: './edit-user-dialog.component.html',
   styleUrl: './edit-user-dialog.component.scss',
   providers: [CreateUserDialogComponentStore],
-  standalone: false,
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    NgIf,
+    ParagraphComponent,
+    DropdownComponent,
+    MultiSelectDropdownComponent_1,
+    CheckboxComponent,
+    DividerComponent,
+    TextBoxInfoComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   @Input() public user!: ODataOrganizationUser;
@@ -61,7 +89,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     private openerService: DialogOpenerService,
     componentStore: CreateUserDialogComponentStore,
     store: Store,
-    userService: UserService
+    userService: UserService,
   ) {
     super(store, componentStore, userService);
   }
@@ -87,7 +115,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
           if (!value) return;
 
           this.componentStore.getUserWithEmail(value);
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -97,7 +125,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
         } else {
           this.getEmailControl()?.setErrors(null);
         }
-      })
+      }),
     );
     const initialValues = this.getUserRoleChoices();
     this.selectedRoles = initialValues.map((role) => role.value);
@@ -114,7 +142,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     this.subscriptions.add(
       this.store.select(OrganizationUserActions.updateUserSuccess).subscribe(() => {
         this.dialogRef.close();
-      })
+      }),
     );
     const request = this.createRequest();
     this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
@@ -216,7 +244,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
   private addNonSelectableRoles(
     roles: APIUpdateUserRequestDTO.RolesEnum[],
-    shouldRightsHolderAccessBeAdded: boolean
+    shouldRightsHolderAccessBeAdded: boolean,
   ): APIUpdateUserRequestDTO.RolesEnum[] {
     roles.push(APIUpdateUserRequestDTO.RolesEnum.User);
     if (shouldRightsHolderAccessBeAdded) {

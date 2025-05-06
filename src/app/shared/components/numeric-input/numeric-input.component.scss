@@ -16,8 +16,6 @@ mat-form-field {
   @include mixins.mat-input-adjustment;
 }
 
-
 mat-form-field {
-  @include mixins.input-background-white
+  @include mixins.input-background-white;
 }
-

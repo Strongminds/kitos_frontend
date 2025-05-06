@@ -24,7 +24,7 @@ describe('it-system-usage', () => {
     cy.setup(
       true,
       'it-systems/it-system-usages',
-      './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json'
+      './shared/it-system-usage-ui-customization-no-gdpr-and-lifecycle.json',
     );
     cy.get('h3').should('have.text', 'IT Systemer i Fælles Kommune');
 

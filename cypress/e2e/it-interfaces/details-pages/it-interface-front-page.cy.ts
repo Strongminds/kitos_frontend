@@ -134,7 +134,7 @@ describe('it-system-interfaces', () => {
   });
 });
 
-function setupRegularInterfaceDetails(){
+function setupRegularInterfaceDetails() {
   cy.intercept('/api/v2/it-interfaces/*', {
     fixture: './it-interfaces/it-interface.json',
   });

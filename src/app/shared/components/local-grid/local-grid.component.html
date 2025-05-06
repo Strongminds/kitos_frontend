@@ -18,7 +18,7 @@
   [ngClass]="{
     'grid-outline': withOutline,
     'fit-size-to-content': fitSizeToContent,
-    'expand-height-to-content': !fitSizeToContent
+    'expand-height-to-content': !fitSizeToContent,
   }"
 >
   <kendo-grid-rowreorder-column *ngIf="reorderable" [width]="40">
@@ -39,10 +39,10 @@
         column.minResizableWidth !== undefined
           ? column.minResizableWidth
           : column.filter === 'date'
-          ? defaultMinimumDateColumnWidth
-          : column.style === 'primary'
-          ? defaultPrimaryColumnMinimumWidth
-          : defaultMinimumColumnWidth
+            ? defaultMinimumDateColumnWidth
+            : column.style === 'primary'
+              ? defaultPrimaryColumnMinimumWidth
+              : defaultMinimumColumnWidth
       "
       headerClass="mygrid-header-cell"
     >

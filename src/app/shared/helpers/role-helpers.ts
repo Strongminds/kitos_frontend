@@ -14,7 +14,7 @@ export function compareByRoleName(a: RoleAssignment, b: RoleAssignment): number 
 export function hasRoleInOrganization(
   organizationRights: OrganizationRight[] | undefined,
   organizationUuid: string | undefined,
-  roleEnumValue: number
+  roleEnumValue: number,
 ): boolean {
   if (!organizationUuid || !organizationRights) {
     return false;

@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import {
@@ -37,13 +37,42 @@ import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { MultiSelectDropdownComponent } from '../../dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
+import { NgIf, NgClass, AsyncPipe } from '@angular/common';
+import { TextBoxComponent } from '../../textbox/textbox.component';
+import { DatePickerComponent } from '../../datepicker/datepicker.component';
+import { RichTextEditorComponent } from '../../rich-text-editor/rich-text-editor.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-    selector: 'app-notifications-table-dialog',
-    templateUrl: './notifications-table-dialog.component.html',
-    styleUrl: './notifications-table-dialog.component.scss',
-    providers: [NotificationsTableComponentStore],
-    standalone: false
+  selector: 'app-notifications-table-dialog',
+  templateUrl: './notifications-table-dialog.component.html',
+  styleUrl: './notifications-table-dialog.component.scss',
+  providers: [NotificationsTableComponentStore],
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    MultiSelectDropdownComponent,
+    TextBoxInfoComponent,
+    ParagraphComponent,
+    DropdownComponent,
+    NgIf,
+    TextBoxComponent,
+    DatePickerComponent,
+    NgClass,
+    RichTextEditorComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class NotificationsTableDialogComponent extends BaseComponent implements OnInit {
   @Input() public title!: string;
@@ -96,7 +125,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
     private readonly notificationService: NotificationService,
     private readonly dialogRef: MatDialogRef<NotificationsTableDialogComponent>,
     private readonly componentStore: NotificationsTableComponentStore,
-    private readonly store: Store
+    private readonly store: Store,
   ) {
     super();
     this.rootUrl = this.appRootUrlResolverService.resolveRootUrl();
@@ -104,10 +133,10 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   ngOnInit(): void {
     this.receiverOptions = this.rolesOptions.map((option: APIRegularOptionResponseDTO) =>
-      mapRegularOptionToMultiSelectItem(option)
+      mapRegularOptionToMultiSelectItem(option),
     );
     this.ccOptions = this.rolesOptions.map((option: APIRegularOptionResponseDTO) =>
-      mapRegularOptionToMultiSelectItem(option)
+      mapRegularOptionToMultiSelectItem(option),
     );
 
     this.setupNotificationControls();
@@ -226,7 +255,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   private onCreate(
     basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO,
-    scheduledNotificationDto?: APIScheduledNotificationWriteRequestDTO
+    scheduledNotificationDto?: APIScheduledNotificationWriteRequestDTO,
   ) {
     if (scheduledNotificationDto) {
       this.saveScheduledNotification(scheduledNotificationDto);
@@ -237,7 +266,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
 
   private getScheduledNotificationDTO(
     basePropertiesDto: APIBaseNotificationPropertiesWriteRequestDTO,
-    notificationForm: FormGroup
+    notificationForm: FormGroup,
   ): APIScheduledNotificationWriteRequestDTO | undefined {
     const notificationControls = notificationForm.controls;
     const name = notificationControls['nameControl'].value;
@@ -341,13 +370,13 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       notificationControls.fromDateControl.valueChanges.subscribe(() => {
         this.toggleShowDateOver28Tooltip();
         this.notificationForm.controls.toDateControl.updateValueAndValidity();
-      })
+      }),
     );
     this.subscriptions.add(
-      notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip())
+      notificationControls.repetitionControl.valueChanges.subscribe(() => this.toggleShowDateOver28Tooltip()),
     );
     notificationControls.toDateControl.validator = dateGreaterThanOrEqualControlValidator(
-      this.notificationForm.controls.fromDateControl
+      this.notificationForm.controls.fromDateControl,
     );
 
     if (this.notification) {
@@ -360,21 +389,22 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       notificationControls.bodyControl.setValue(this.notification.body);
       notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notification.notificationType));
       notificationControls.repetitionControl.setValue(
-        mapNotificationRepetitionFrequency(this.notification.repetitionFrequency)
+        mapNotificationRepetitionFrequency(this.notification.repetitionFrequency),
       );
 
       const emailRecipientsSet = new Set(
         this.notification.receivers?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ??
-          []
+          [],
       );
       const roleRecipientsSet = new Set(
-        this.notification.receivers?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? []
+        this.notification.receivers?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ??
+          [],
       );
       const emailCcsSet = new Set(
-        this.notification.cCs?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ?? []
+        this.notification.cCs?.emailRecipients?.map((option) => mapEmailOptionToMultiSelectItem(option, true)) ?? [],
       );
       const roleCcsSet = new Set(
-        this.notification.cCs?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? []
+        this.notification.cCs?.roleRecipients?.map((option) => mapRoleOptionToMultiSelectItem(option, true)) ?? [],
       );
 
       this.receiverOptions = Array.from(new Set([...this.receiverOptions, ...emailRecipientsSet]));

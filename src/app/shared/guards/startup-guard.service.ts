@@ -9,7 +9,10 @@ import { extractRoute } from '../helpers/guard-url.helper';
 
 @Injectable({ providedIn: 'root' })
 export class StartupGuardService {
-  constructor(private store: Store, private urlSerializer: UrlSerializer) {}
+  constructor(
+    private store: Store,
+    private urlSerializer: UrlSerializer,
+  ) {}
 
   canActivate(state: RouterStateSnapshot): Observable<boolean | UrlTree> {
     // Extract the route from the URL
