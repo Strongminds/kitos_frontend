@@ -639,12 +639,18 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
             USAGE_COLUMNS_ID,
             defaultColumnsAndRoles
           );
-          this.updateLocalOrDefaultGridColumns(
-            defaultColumnsAndRoles,
-            localStorageColumns,
-            ITSystemUsageActions.updateGridColumns,
-            ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration
-          );
+          const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
+
+          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToUse));
+          if (!localStorageColumns) {
+            this.store.dispatch(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration(true));
+          }
+          // this.updateLocalOrDefaultGridColumns(
+          //   defaultColumnsAndRoles,
+          //   localStorageColumns,
+          //   ITSystemUsageActions.updateGridColumns,
+          //   ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration
+          // );
         })
     );
 

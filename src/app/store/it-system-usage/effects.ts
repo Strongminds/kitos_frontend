@@ -34,7 +34,6 @@ import {
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
   selectItSystemUsageResponsibleUnit,
-  selectItSystemUsageRights,
   selectItSystemUsageRightUuidPairs,
   selectItSystemUsageUsingOrganizationUnits,
   selectItSystemUsageUuid,
@@ -687,7 +686,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
+      switchMap(([{ disablePopupNotification }, organizationUuid]) =>
         this.apiV2organizationalGridInternalService
           .getSingleOrganizationGridInternalV2GetGridConfiguration({
             organizationUuid,
@@ -695,9 +694,16 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map((response) =>
-              ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(response)
+              ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(
+                response,
+                disablePopupNotification
+              )
             ),
-            catchError(() => of(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError()))
+            catchError(() =>
+              of(
+                ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError(disablePopupNotification)
+              )
+            )
           )
       )
     );
