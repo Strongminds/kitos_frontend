@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { Action, Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first } from 'rxjs';
 import { selectDataProcessingGridState } from 'src/app/store/data-processing/selectors';
@@ -68,6 +68,19 @@ export class BaseOverviewComponent extends BaseComponent {
         );
       });
   };
+
+  protected updateLocalOrDefaultGridColumns(
+    defaultColumnsAndRoles: GridColumn[],
+    localStorageColumns: GridColumn[] | null,
+    updateColumnsAction: (columns: GridColumn[]) => Action,
+    resetToOrgConfigAction: (disablePopupNotification: boolean) => Action
+  ) {
+    const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
+    this.store.dispatch(updateColumnsAction(columnsToUse));
+    if (!localStorageColumns) {
+      this.store.dispatch(resetToOrgConfigAction(true));
+    }
+  }
 
   private getStateSelector() {
     switch (this.entityType) {

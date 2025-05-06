@@ -462,10 +462,17 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const existingColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, defaultColumnsAndRoles);
-          const columns = existingColumns ?? defaultColumnsAndRoles;
-          this.store.dispatch(ITContractActions.updateGridColumns(columns));
-        }),
+          const localStorageColumns = this.gridColumnStorageService.getColumns(
+            CONTRACT_COLUMNS_ID,
+            defaultColumnsAndRoles
+          );
+          this.updateLocalOrDefaultGridColumns(
+            defaultColumnsAndRoles,
+            localStorageColumns,
+            ITContractActions.updateGridColumns,
+            ITContractActions.resetToOrganizationITContractColumnConfiguration
+          );
+        })
     );
 
     this.subscriptions.add(
@@ -484,10 +491,16 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
           ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError),
           concatLatestFrom(() => this.gridColumns$),
         )
-        .subscribe(([_, gridColumns]) => {
-          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
-        }),
+        .subscribe(([_, gridColumnsFromState]) => {
+          const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
+          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
+            gridColumnsFromState,
+            columnsToShow
+          );
+          if (!gridColumnStateIsCorrect) {
+            this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
+          }
+        })
     );
     this.store.dispatch(ITContractActions.getItContractOverviewRoles());
   }

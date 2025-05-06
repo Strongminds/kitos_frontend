@@ -615,17 +615,17 @@ export class ITContractEffects {
     return this.actions$.pipe(
       ofType(ITContractActions.resetToOrganizationITContractColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
+      switchMap(([{ disablePopupNotification }, organizationUuid]) =>
         this.apiV2organizationalGridInternalService
           .getSingleOrganizationGridInternalV2GetGridConfiguration({
             organizationUuid,
             overviewType: 'ItContract',
           })
           .pipe(
-            map((response) => ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess(response)),
-            catchError(() => of(ITContractActions.resetToOrganizationITContractColumnConfigurationError())),
-          ),
-      ),
+            map((response) => ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess(response, disablePopupNotification)),
+            catchError(() => of(ITContractActions.resetToOrganizationITContractColumnConfigurationError(disablePopupNotification)))
+          )
+      )
     );
   });
 
