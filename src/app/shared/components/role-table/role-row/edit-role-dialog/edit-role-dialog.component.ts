@@ -52,7 +52,7 @@ export class EditRoleDialogComponent implements OnInit {
   constructor(
     private readonly dialogRef: MatDialogRef<EditRoleDialogComponent>,
     private readonly roleOptionService: RoleOptionTypeService,
-    private readonly actions$: Actions,
+    private readonly actions$: Actions
   ) {}
 
   ngOnInit(): void {
@@ -93,8 +93,8 @@ export class EditRoleDialogComponent implements OnInit {
             assignment.role.uuid === formControls.role.value?.uuid &&
             role.unitUuid === this.orgUnit?.uuid
           );
-        }),
-      ),
+        })
+      )
     );
   }
 
