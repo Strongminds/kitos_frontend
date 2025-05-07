@@ -19,7 +19,7 @@ import { UserActions } from '../user-store/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationActions } from './actions';
 import { selectPreviousGridState } from './organization-user/selectors';
-import { selectHasValidUIRootConfigCache } from './selectors';
+import { selectHasValidOrganizationPermissionsCache, selectHasValidUIRootConfigCache } from './selectors';
 
 @Injectable()
 export class OrganizationEffects {
@@ -161,6 +161,8 @@ export class OrganizationEffects {
   getOrganizationPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationActions.getOrganizationPermissions),
+      concatLatestFrom(() => this.store.select(selectHasValidOrganizationPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([, organizationUuid]) =>
         this.organizationInternalService.getSingleOrganizationsInternalV2GetPermissions({ organizationUuid }).pipe(

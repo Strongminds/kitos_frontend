@@ -1,4 +1,5 @@
 import { EntityState } from '@ngrx/entity';
+import { Cached } from 'src/app/shared/models/cache-item.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { OrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
@@ -17,7 +18,7 @@ export interface OrganizationState extends EntityState<OrganizationOData> {
 
   organizationMasterData: OrganizationMasterData | null;
   organizationMasterDataRoles: OrganizationMasterDataRoles | null;
-  permissions: OrganizationPermissions | null | undefined;
+  permissions: Cached<OrganizationPermissions> | null | undefined;
 
   uiRootConfig: UIRootConfig | null;
   uiRootConfigCacheTime: number | undefined;
