@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
+import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { dataProcessingAdapter, dataProcessingFeature } from './reducer';
 
@@ -82,25 +82,15 @@ export const selectDataProcessingHasDeletePermissions = createSelector(
   selectDataProcessingState,
   (state) => state.permissions?.value?.delete
 );
-export const selectHasValidDataProcessingPermissionsCache = createSelector(
-  selectDataProcessingState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.permissions?.cacheTime, now);
-  }
-);
+export const selectHasValidDataProcessingPermissionsCache =
+  createHasValidPermissionsCacheSelector(selectDataProcessingState);
 
 export const selectDataProcessingHasCreateCollectionPermissions = createSelector(
   selectDataProcessingState,
   (state) => state.collectionPermissions?.value?.create
 );
-export const selectHasValidDataProcessingCollectionPermissionsCache = createSelector(
-  selectDataProcessingState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.collectionPermissions?.cacheTime, now);
-  }
-);
+export const selectHasValidDataProcessingCollectionPermissionsCache =
+  createHasValidPermissionsCacheSelector(selectDataProcessingState);
 
 export const selectDataProcessingOversightOptions = createSelector(
   selectDataProcessing,
