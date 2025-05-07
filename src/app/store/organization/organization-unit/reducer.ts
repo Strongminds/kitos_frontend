@@ -9,6 +9,7 @@ import {
   APIOrganizationUnitResponseDTO,
 } from 'src/app/api/v2';
 import { copyObject } from 'src/app/shared/helpers/object.helpers';
+import { newCache } from 'src/app/shared/models/cache-item.model';
 import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization/organization-unit/organization-unit-registration-type';
 import {
   PaymentRegistrationModel,
@@ -227,12 +228,12 @@ export const organizationUnitFeature = createFeature({
       OrganizationUnitActions.getPermissionsSuccess,
       (state, { permissions }): OrganizationUnitState => ({
         ...state,
-        permissions,
+        permissions: newCache(permissions),
       })
     ),
     on(
       OrganizationUnitActions.getCollectionPermissionsSuccess,
-      (state, { permissions }): OrganizationUnitState => ({ ...state, collectionPermissions: permissions })
+      (state, { permissions }): OrganizationUnitState => ({ ...state, collectionPermissions: newCache(permissions) })
     ),
 
     on(

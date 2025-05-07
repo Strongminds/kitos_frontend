@@ -17,7 +17,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUnitActions } from './actions';
 import {
-  selectCurrentUnitUuid,
+  selectHasValidOrganizationUnitPermissionsCache,
   selectOrganizationUnitHasValidCache,
   selectOrganizationUnits,
   selectPagedOrganizationUnitHasValidCache,
@@ -273,8 +273,10 @@ export class OrganizationUnitEffects {
   getPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.getPermissions),
+      concatLatestFrom(() => this.store.select(selectHasValidOrganizationUnitPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-      switchMap(([{ unitUuid }, organizationUuid]) =>
+      switchMap(([[{ unitUuid }], organizationUuid]) =>
         this.apiUnitService
           .getSingleOrganizationUnitsInternalV2GetPermissions({
             organizationUuid,
