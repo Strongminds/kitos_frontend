@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
+import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { itSystemAdapter, itSystemFeature } from './reducer';
@@ -62,13 +62,7 @@ export const selectITSystemCanModifyVisibilityPermission = createSelector(
   selectITSystemState,
   (state) => state.permissions?.value?.modifyVisibility
 );
-export const selectHasValidItSystemPermissionsCache = createSelector(
-  selectITSystemState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.permissions?.cacheTime, now);
-  }
-);
+export const selectHasValidItSystemPermissionsCache = createHasValidPermissionsCacheSelector(selectITSystemState);
 export const selectITSystemHasCreateCollectionPermission = createSelector(
   selectITSystemState,
   (state) => state.collectionPermissions?.value?.create
@@ -77,11 +71,6 @@ export const selectItSystemDeletetionConflicts = createSelector(
   selectITSystemState,
   (state) => state.permissions?.value?.deletionConflicts
 );
-export const selectHasValidItSystemCollectionPermissionsCache = createSelector(
-  selectITSystemState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.collectionPermissions?.cacheTime, now);
-  }
-);
+export const selectHasValidItSystemCollectionPermissionsCache =
+  createHasValidPermissionsCacheSelector(selectITSystemState);
 export const selectItSystemExternalReferences = createSelector(selectItSystem, (state) => state?.externalReferences);
