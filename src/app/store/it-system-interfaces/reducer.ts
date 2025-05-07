@@ -69,16 +69,8 @@ export const itInterfaceFeature = createFeature({
       (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface, loading: false })
     ),
     on(
-      ITInterfaceActions.getITInterfacePermissions,
-      (state): ITInterfaceState => ({ ...state, permissions: undefined })
-    ),
-    on(
       ITInterfaceActions.getITInterfacePermissionsSuccess,
       (state, { permissions }): ITInterfaceState => ({ ...state, permissions: newCache(permissions) })
-    ),
-    on(
-      ITInterfaceActions.getITInterfaceCollectionPermissions,
-      (state): ITInterfaceState => ({ ...state, collectionPermissions: undefined })
     ),
     on(
       ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess,
