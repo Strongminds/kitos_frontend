@@ -1,6 +1,6 @@
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import {
@@ -37,17 +37,11 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { UserNotificationActions } from 'src/app/store/user-notifications/actions';
-import { ButtonComponent } from '../../buttons/button/button.component';
-import { DatePickerComponent } from '../../datepicker/datepicker.component';
 import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../dialogs/dialog/dialog.component';
-import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
-import { MultiSelectDropdownComponent } from '../../dropdowns/multi-select-dropdown/multi-select-dropdown.component';
-import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { RichTextEditorComponent } from '../../rich-text-editor/rich-text-editor.component';
+import { sharedFormComponents } from '../../shared-components';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
-import { TextBoxComponent } from '../../textbox/textbox.component';
 import { NotificationsTableComponentStore } from '../notifications-table.component-store';
 
 @Component({
@@ -56,22 +50,12 @@ import { NotificationsTableComponentStore } from '../notifications-table.compone
   styleUrl: './notifications-table-dialog.component.scss',
   providers: [NotificationsTableComponentStore],
   imports: [
+    CommonModule,
     DialogComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    StandardVerticalContentGridComponent,
-    MultiSelectDropdownComponent,
-    TextBoxInfoComponent,
-    ParagraphComponent,
-    DropdownComponent,
-    NgIf,
-    TextBoxComponent,
-    DatePickerComponent,
-    NgClass,
-    RichTextEditorComponent,
     DialogActionsComponent,
-    ButtonComponent,
-    AsyncPipe,
+    StandardVerticalContentGridComponent,
+    sharedFormComponents,
+    RichTextEditorComponent,
   ],
 })
 export class NotificationsTableDialogComponent extends BaseComponent implements OnInit {
