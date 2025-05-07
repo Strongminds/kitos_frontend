@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import {
   APIOrganizationGridPermissionsResponseDTO,
@@ -23,7 +23,12 @@ import { resetOrganizationStateAction, resetStateAction } from '../meta/actions'
 import { selectPagedOrganizationUnits } from '../organization/organization-unit/selectors';
 import { selectUIRootConfig } from '../organization/selectors';
 import { UserActions } from './actions';
-import { selectOrganizationUuid, selectUser, selectUserUuid } from './selectors';
+import {
+  selectHasValidUserGridPermissionsCache,
+  selectOrganizationUuid,
+  selectUser,
+  selectUserUuid,
+} from './selectors';
 
 @Injectable()
 export class UserEffects {
@@ -143,6 +148,8 @@ export class UserEffects {
   getUserGridPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.getUserGridPermissions),
+      concatLatestFrom(() => this.store.select(selectHasValidUserGridPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
         this.organizationGridService

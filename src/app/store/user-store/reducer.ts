@@ -1,4 +1,5 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { newCache } from 'src/app/shared/models/cache-item.model';
 import { UserActions } from './actions';
 import { UserState } from './state';
 
@@ -62,7 +63,7 @@ export const userFeature = createFeature({
 
     on(
       UserActions.getUserGridPermissionsSuccess,
-      (state, { response }): UserState => ({ ...state, gridPermissions: response })
+      (state, { response }): UserState => ({ ...state, gridPermissions: newCache(response) })
     ),
     on(UserActions.patchOrganizationSuccess, (state, organization): UserState => ({ ...state, organization })),
 

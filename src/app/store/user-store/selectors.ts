@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { LOCAL_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
+import { hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
 import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
 import { GetOptionsBasedOnRights } from 'src/app/shared/models/organization/organization-user/user-role.model';
 import { userFeature } from './reducer';
@@ -49,7 +50,14 @@ export const selectGridPermissions = createSelector(selectUserState, (state) => 
 
 export const selectGridConfigModificationPermission = createSelector(
   selectGridPermissions,
-  (permissions) => permissions?.hasConfigModificationPermissions
+  (permissions) => permissions?.value?.hasConfigModificationPermissions
+);
+export const selectHasValidUserGridPermissionsCache = createSelector(
+  selectUserState,
+  () => new Date(),
+  (state, now) => {
+    return hasValidTwoMinuteCache(state.gridPermissions?.cacheTime, now);
+  }
 );
 
 export const selectAvailableRoleDropdownValues = createSelector(
