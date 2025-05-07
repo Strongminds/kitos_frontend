@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
+import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { organizationUserAdapter, organizationUserFeature } from './reducer';
 
 const { selectOrganizationUserState } = organizationUserFeature;
@@ -39,13 +39,8 @@ export const selectOrganizationUserDeletePermissions = createSelector(
   selectOrganizationUserState,
   (state) => state.permissions?.value?.delete
 );
-export const selectHasValidOrganizationUserPermissionsCache = createSelector(
-  selectOrganizationUserState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.permissions?.cacheTime, now);
-  }
-);
+export const selectHasValidOrganizationUserPermissionsCache =
+  createHasValidPermissionsCacheSelector(selectOrganizationUserState);
 export const selectOrganizationUserIsCreateLoading = createSelector(
   selectOrganizationUserState,
   (state) => state.createLoading
