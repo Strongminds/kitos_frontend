@@ -1,7 +1,8 @@
 import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { memoize } from 'lodash';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
-import { hasValidCache, hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { organizationAdapter, organizationFeature } from './reducer';
 import { OrganizationState } from './state';
 
@@ -24,13 +25,8 @@ export const selectOrganizationHasModifyCvrPermission = createSelector(
   selectOrganizationState,
   (state) => state.permissions?.value?.modifyCvr
 );
-export const selectHasValidOrganizationPermissionsCache = createSelector(
-  selectOrganizationState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.permissions?.cacheTime, now);
-  }
-);
+export const selectHasValidOrganizationPermissionsCache =
+  createHasValidPermissionsCacheSelector(selectOrganizationState);
 
 const masterDataRolesEmptyState = {
   organizationUuid: '',
