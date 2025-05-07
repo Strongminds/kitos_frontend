@@ -321,13 +321,17 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const existingColumns = this.gridColumnStorageService.getColumns(
+          const localStorageColumns = this.gridColumnStorageService.getColumns(
             DATA_PROCESSING_COLUMNS_ID,
             defaultColumnsAndRoles,
           );
-          const columns = existingColumns ?? defaultColumnsAndRoles;
-          this.store.dispatch(DataProcessingActions.updateGridColumns(columns));
-        }),
+          this.updateLocalOrDefaultGridColumns(
+            defaultColumnsAndRoles,
+            localStorageColumns,
+            DataProcessingActions.updateGridColumns,
+            DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration
+          );
+        })
     );
 
     this.subscriptions.add(
@@ -348,8 +352,11 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         )
         .subscribe(([_, gridColumns]) => {
           const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
-        }),
+          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(gridColumns, columnsToShow);
+          if (!gridColumnStateIsCorrect) {
+            this.store.dispatch(DataProcessingActions.updateGridColumns(columnsToShow));
+          }
+        })
     );
     this.store.dispatch(DataProcessingActions.getDataProcessingCollectionPermissions());
     this.store.dispatch(DataProcessingActions.getDataProcessingOverviewRoles());

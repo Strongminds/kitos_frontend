@@ -184,11 +184,18 @@ export const DataProcessingActions = createActionGroup({
     'Delete Organizational Data Processing Column Configuration Success': () => emptyProps(),
     'Delete Organizational Data Processing Column Configuration Error': () => emptyProps(),
 
-    'Reset To Organization Data Processing Column Configuration': () => emptyProps(),
+    'Reset To Organization Data Processing Column Configuration': (disablePopupNotification: boolean = false) => ({
+      disablePopupNotification,
+    }),
     'Reset To Organization Data Processing Column Configuration Success': (
       response: APIOrganizationGridConfigurationResponseDTO,
-    ) => ({ response }),
-    'Reset To Organization Data Processing Column Configuration Error': () => emptyProps(),
+      disablePopupNotification: boolean = false
+    ) => ({ response, disablePopupNotification }),
+    'Reset To Organization Data Processing Column Configuration Error': (
+      disablePopupNotification: boolean = false
+    ) => ({
+      disablePopupNotification,
+    }),
 
     'Initialize Data Processing Last Seen Grid Configuration': () => emptyProps(),
     'Initialize Data Processing Last Seen Grid Configuration Success': (

@@ -180,11 +180,18 @@ export const ITSystemUsageActions = createActionGroup({
     'Delete Organizational IT System Usage Column Configuration Success': () => emptyProps(),
     'Delete Organizational IT System Usage Column Configuration Error': () => emptyProps(),
 
-    'Reset To Organization IT System Usage Column Configuration': () => emptyProps(),
+    'Reset To Organization IT System Usage Column Configuration': (disablePopupNotification: boolean = false) => ({
+      disablePopupNotification,
+    }),
     'Reset To Organization IT System Usage Column Configuration Success': (
       response: APIOrganizationGridConfigurationResponseDTO,
-    ) => ({ response }),
-    'Reset To Organization IT System Usage Column Configuration Error': () => emptyProps(),
+      disablePopupNotification: boolean = false
+    ) => ({ response, disablePopupNotification }),
+    'Reset To Organization IT System Usage Column Configuration Error': (
+      disablePopupNotification: boolean = false
+    ) => ({
+      disablePopupNotification,
+    }),
 
     'Initialize IT System Usage Last Seen Grid Configuration': () => emptyProps(),
     'Initialize IT System Usage Last Seen Grid Configuration Success': (

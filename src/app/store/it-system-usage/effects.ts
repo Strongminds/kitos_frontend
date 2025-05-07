@@ -686,7 +686,7 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
+      switchMap(([{ disablePopupNotification }, organizationUuid]) =>
         this.apiV2organizationalGridInternalService
           .getSingleOrganizationGridInternalV2GetGridConfiguration({
             organizationUuid,
@@ -694,11 +694,18 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map((response) =>
-              ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(response),
+              ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(
+                response,
+                disablePopupNotification
+              )
             ),
-            catchError(() => of(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError())),
-          ),
-      ),
+            catchError(() =>
+              of(
+                ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError(disablePopupNotification)
+              )
+            )
+          )
+      )
     );
   });
 
@@ -707,9 +714,9 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess),
       concatLatestFrom(() => [this.store.select(selectUsageGridColumns)]),
       map(([{ response }, columns]) => {
-        const configColumns = response?.visibleColumns;
-        if (!configColumns) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
-        const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
+        const columnConfigs = response?.visibleColumns;
+        if (!columnConfigs) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
+        const newColumns = getNewGridColumnsBasedOnConfig(columnConfigs, columns);
         return ITSystemUsageActions.updateGridColumns(newColumns);
       }),
     );
