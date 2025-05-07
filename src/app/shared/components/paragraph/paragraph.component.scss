@@ -68,6 +68,10 @@
   white-space: normal;
 }
 
+.break-word:hover {
+  word-break: break-all;
+}
+
 .wrap-on-overflow {
   overflow: hidden;
   text-overflow: clip;
