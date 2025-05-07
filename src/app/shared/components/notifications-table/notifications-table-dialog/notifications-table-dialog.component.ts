@@ -51,10 +51,10 @@ import { NotificationsTableComponentStore } from '../notifications-table.compone
   providers: [NotificationsTableComponentStore],
   imports: [
     CommonModule,
+    sharedFormComponents,
     DialogComponent,
     DialogActionsComponent,
     StandardVerticalContentGridComponent,
-    sharedFormComponents,
     RichTextEditorComponent,
   ],
 })
