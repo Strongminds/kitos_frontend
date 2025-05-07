@@ -105,7 +105,7 @@ export const itSystemUsageFeature = createFeature({
     ),
     on(
       ITSystemUsageActions.getITSystemUsagePermissionsSuccess,
-      (state, { permissions }): ITSystemUsageState => ({ ...state, permissions })
+      (state, { permissions }): ITSystemUsageState => ({ ...state, permissions: newCache(permissions) })
     ),
 
     on(
@@ -114,7 +114,7 @@ export const itSystemUsageFeature = createFeature({
     ),
     on(
       ITSystemUsageActions.getITSystemUsageCollectionPermissionsSuccess,
-      (state, { permissions }): ITSystemUsageState => ({ ...state, collectionPermissions: permissions })
+      (state, { permissions }): ITSystemUsageState => ({ ...state, collectionPermissions: newCache(permissions) })
     ),
 
     on(

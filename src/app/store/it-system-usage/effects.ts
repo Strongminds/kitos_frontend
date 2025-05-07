@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, filter, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
@@ -30,6 +30,7 @@ import { selectOrganizationUnits } from '../organization/organization-unit/selec
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageActions } from './actions';
 import {
+  selectHasValidItSystemUsagePermissionsCache,
   selectItSystemUsageExternalReferences,
   selectItSystemUsageLocallyAddedKleUuids,
   selectItSystemUsageLocallyRemovedKleUuids,
@@ -246,7 +247,9 @@ export class ITSystemUsageEffects {
   getItSystemUsagePermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.getITSystemUsagePermissions),
-      switchMap(({ systemUsageUuid }) =>
+      concatLatestFrom(() => this.store.select(selectHasValidItSystemUsagePermissionsCache)),
+      filter(([_, validCache]) => !validCache),
+      switchMap(([{ systemUsageUuid }]) =>
         this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid }).pipe(
           map((permissions) => ITSystemUsageActions.getITSystemUsagePermissionsSuccess(permissions)),
           catchError(() => of(ITSystemUsageActions.getITSystemUsagePermissionsError()))
