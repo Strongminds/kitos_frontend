@@ -1,7 +1,7 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { filter, pipe, Subscription } from 'rxjs';
 import { AlertActions } from 'src/app/store/alerts/actions';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GlobalAdminActions } from 'src/app/store/global-admin/actions';
@@ -728,7 +728,9 @@ export class NotificationService implements OnDestroy {
   //actionTypes should be" ofType(actionType1, actionType2, actionType3, ...)"
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private subscribeToMultiple(actionTypes: any, msg: string, type: PopupMessageType) {
-    this.subscriptions.add(this.actions$.pipe(actionTypes).subscribe(() => this.show(msg, type)));
+    this.subscriptions.add(this.actions$.pipe(actionTypes,
+      filter((action: any) => !action.disablePopupNotification)
+    ).subscribe(() => this.show(msg, type)));
   }
 
   public show(text: string, type: PopupMessageType) {

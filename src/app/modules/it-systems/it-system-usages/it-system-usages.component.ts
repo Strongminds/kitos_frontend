@@ -648,11 +648,20 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const existingColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, defaultColumnsAndRoles);
-          const columns = existingColumns ?? defaultColumnsAndRoles;
-          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columns));
-        }),
+          const localStorageColumns = this.gridColumnStorageService.getColumns(
+            USAGE_COLUMNS_ID,
+            defaultColumnsAndRoles
+          );
+
+          this.updateLocalOrDefaultGridColumns(
+            defaultColumnsAndRoles,
+            localStorageColumns,
+            ITSystemUsageActions.updateGridColumns,
+            ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration
+          );
+        })
     );
+
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
 
     this.subscriptions.add(
@@ -661,10 +670,16 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
           ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
           concatLatestFrom(() => this.gridColumns$),
         )
-        .subscribe(([_, gridColumns]) => {
-          const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
-          this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
-        }),
+        .subscribe(([_, gridColumnsFromState]) => {
+          const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
+          const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
+            gridColumnsFromState,
+            columnsToShow
+          );
+          if (!gridColumnStateIsCorrect) {
+            this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
+          }
+        })
     );
 
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());

@@ -165,11 +165,16 @@ export const ITContractActions = createActionGroup({
     'Delete Organizational IT Contract Column Configuration Success': () => emptyProps(),
     'Delete Organizational IT Contract Column Configuration Error': () => emptyProps(),
 
-    'Reset To Organization IT Contract Column Configuration': () => emptyProps(),
+    'Reset To Organization IT Contract Column Configuration': (disablePopupNotification: boolean = false) => ({
+      disablePopupNotification,
+    }),
     'Reset To Organization IT Contract Column Configuration Success': (
       response: APIOrganizationGridConfigurationResponseDTO,
-    ) => ({ response }),
-    'Reset To Organization IT Contract Column Configuration Error': () => emptyProps(),
+      disablePopupNotification: boolean = false
+    ) => ({ response, disablePopupNotification }),
+    'Reset To Organization IT Contract Column Configuration Error': (disablePopupNotification: boolean = false) => ({
+      disablePopupNotification,
+    }),
 
     'Initialize IT Contract Last Seen Grid Configuration': () => emptyProps(),
     'Initialize IT Contract Last Seen Grid Configuration Success': (
