@@ -26,7 +26,7 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
   constructor(
     @Inject(APIV2ItContractInternalINTERNALService)
     private apiItContractInternalService: APIV2ItContractInternalINTERNALService,
-    private store: Store
+    private store: Store,
   ) {
     super({ loading: false });
   }
@@ -35,21 +35,21 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
     (state, hierarchy: Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>): State => ({
       ...state,
       hierarchy,
-    })
+    }),
   );
 
   private updateSubHierarchy = this.updater(
     (state, subHierarchy: Array<APIRegistrationHierarchyNodeWithActivationStatusResponseDTO>): State => ({
       ...state,
       subHierarchy,
-    })
+    }),
   );
 
   private updateIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   public getHierarchy = this.effect((itContractUuid$: Observable<string>) =>
@@ -60,11 +60,11 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
           tapResponse(
             (hierarchy) => this.updateHierarchy(hierarchy),
             (e) => console.error(e),
-            () => this.updateIsLoading(false)
-          )
+            () => this.updateIsLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 
   public getSubHierarchy = this.effect((itContractUuid$: Observable<string>) =>
@@ -77,11 +77,11 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
             tapResponse(
               (hierarchy) => this.updateSubHierarchy(hierarchy),
               (e) => console.error(e),
-              () => this.updateIsLoading(false)
-            )
+              () => this.updateIsLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 
   public sendTransferRequest = this.effect(
@@ -103,10 +103,10 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
                   console.error(e);
                   this.store.dispatch(ITContractActions.transferContractsError());
                 },
-                () => this.updateIsLoading(false)
-              )
-            )
-        )
-      )
+                () => this.updateIsLoading(false),
+              ),
+            ),
+        ),
+      ),
   );
 }

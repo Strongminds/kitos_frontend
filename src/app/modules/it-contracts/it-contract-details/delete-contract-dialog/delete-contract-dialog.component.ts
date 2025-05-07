@@ -18,13 +18,27 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { ItContractHierarchyComponentStore } from '../it-contract-hierarchy/it-contract-hierarchy.component-store';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 
 @Component({
   selector: 'app-delete-contract-dialog',
   templateUrl: './delete-contract-dialog.component.html',
   styleUrl: './delete-contract-dialog.component.scss',
   providers: [ItContractHierarchyComponentStore],
-  standalone: false,
+  imports: [
+    NgIf,
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class DeleteContractDialogComponent extends BaseComponent implements OnInit {
   public readonly subHierarchy$ = this.componentStore.subHierarchy$;
@@ -38,7 +52,7 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     private readonly dialog: MatDialog,
     private readonly openerService: DialogOpenerService,
     private readonly actions$: Actions,
-    private readonly confirmationService: ConfirmActionService
+    private readonly confirmationService: ConfirmActionService,
   ) {
     super();
   }
@@ -49,7 +63,7 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.deleteITContractError)).subscribe(() => {
         this.isLoading = false;
-      })
+      }),
     );
   }
 
@@ -60,9 +74,9 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
       this.subHierarchy$
         .pipe(
           filter((hierarchy) => hierarchy.length <= 1),
-          first()
+          first(),
         )
-        .subscribe(() => dialogRef.close())
+        .subscribe(() => dialogRef.close()),
     );
   }
 
@@ -75,8 +89,8 @@ export class DeleteContractDialogComponent extends BaseComponent implements OnIn
             id: node.node.uuid,
             name: node.node.name,
             secondaryName: node.parent?.name,
-          }))
-      )
+          })),
+      ),
     );
   }
 

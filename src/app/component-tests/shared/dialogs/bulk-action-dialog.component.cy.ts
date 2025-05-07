@@ -1,11 +1,13 @@
 import { MatDialogRef } from '@angular/material/dialog';
-import { of } from 'rxjs';
-import { AppModule } from 'src/app/app.module';
-import { ComponentsModule } from 'src/app/shared/components/components.module';
+import { Actions } from '@ngrx/effects';
+import { of, Subject } from 'rxjs';
 import {
   BulkActionDialogComponent,
   BulkActionOption,
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { EntitySelectionService } from 'src/app/shared/services/entity-selector-service';
+import { ITContractActions } from 'src/app/store/it-contract/actions';
 
 describe('BulkActionDialog', () => {
   const exampleContract1: BulkActionOption = {
@@ -55,6 +57,7 @@ function validateEachOption(shouldBeSelected: boolean) {
 }
 
 function mountComponent(exampleContract1: BulkActionOption, exampleContract2: BulkActionOption) {
+  const actions$ = new Subject();
   cy.mount(BulkActionDialogComponent, {
     componentProperties: {
       sections: [
@@ -70,8 +73,13 @@ function mountComponent(exampleContract1: BulkActionOption, exampleContract2: Bu
       dropdownDisabledUuids$: of([]),
       dropdownType: 'it-contract',
       allowEmptyDropdownSelection: true,
+      successActionTypes: [ITContractActions.bulkAddItContractRoleSuccess],
+      errorActionTypes: [ITContractActions.bulkAddItContractRoleError],
     },
-    providers: [{ provide: MatDialogRef, useValue: { close: cy.spy().as('close') } }],
-    imports: [ComponentsModule, AppModule],
+    providers: [
+      { provide: MatDialogRef, useValue: { close: cy.spy().as('close') } },
+      EntitySelectionService<BulkActionOption, RegistrationEntityTypes>,
+      { provide: Actions, useValue: actions$ },
+    ],
   });
 }

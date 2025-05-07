@@ -31,7 +31,7 @@ export const OrganizationUnitActions = createActionGroup({
       pageSize?: number,
       currentPage?: number,
       units?: APIOrganizationUnitResponseDTO[],
-      ignoreCache?: boolean
+      ignoreCache?: boolean,
     ) => ({
       units,
       currentPage,
@@ -109,12 +109,12 @@ export const OrganizationUnitActions = createActionGroup({
       request,
     }),
     'Transfer registrations Success': (
-      transferedRegistrations: APITransferOrganizationUnitRegistrationV2RequestDTO
+      transferedRegistrations: APITransferOrganizationUnitRegistrationV2RequestDTO,
     ) => ({ transferedRegistrations }),
     'Transfer registrations Error': emptyProps(),
 
     'Change organization unit registration select': (
-      registration: RegistrationModel<APINamedEntityWithUserFullNameV2DTO>
+      registration: RegistrationModel<APINamedEntityWithUserFullNameV2DTO>,
     ) => ({ registration }),
     'Change it contract registration select': (registration: RegistrationModel<APINamedEntityV2DTO>) => ({
       registration,

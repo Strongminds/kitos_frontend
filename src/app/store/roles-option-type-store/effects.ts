@@ -12,7 +12,11 @@ import { selectHasValidCache } from './selectors';
 
 @Injectable()
 export class RoleOptionTypeEffects {
-  constructor(private actions$: Actions, private store: Store, private roleService: RoleOptionTypeService) {}
+  constructor(
+    private actions$: Actions,
+    private store: Store,
+    private roleService: RoleOptionTypeService,
+  ) {}
 
   getOptions$ = createEffect(() => {
     return this.actions$.pipe(
@@ -29,9 +33,9 @@ export class RoleOptionTypeEffects {
       switchMap((params) =>
         this.roleService.getAvailableOptions(params.organizationUuid, params.optionType).pipe(
           map((response) => RoleOptionTypeActions.getOptionsSuccess(params.optionType, response)),
-          catchError(() => of(RoleOptionTypeActions.getOptionsError(params.optionType)))
-        )
-      )
+          catchError(() => of(RoleOptionTypeActions.getOptionsError(params.optionType))),
+        ),
+      ),
     );
   });
 }

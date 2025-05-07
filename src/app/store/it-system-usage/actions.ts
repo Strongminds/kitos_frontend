@@ -46,7 +46,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Patch IT System Usage': (
       itSystemUsage: APIUpdateItSystemUsageRequestDTO,
       customSuccessText?: string,
-      customErrorText?: string
+      customErrorText?: string,
     ) => ({
       itSystemUsage,
       customSuccessText,
@@ -80,7 +80,7 @@ export const ITSystemUsageActions = createActionGroup({
 
     'Get IT System Usage Collection Permissions': emptyProps(),
     'Get IT System Usage Collection Permissions Success ': (
-      permissions?: APIResourceCollectionPermissionsResponseDTO
+      permissions?: APIResourceCollectionPermissionsResponseDTO,
     ) => ({ permissions }),
     'Get IT System Usage Collection Permissions Error': emptyProps(),
 
@@ -97,7 +97,7 @@ export const ITSystemUsageActions = createActionGroup({
       itSystemUsage: APIItSystemUsageResponseDTO,
       userUuid: string,
       roleUuid: string,
-      itSystemUsageUuid: string
+      itSystemUsageUuid: string,
     ) => ({ itSystemUsage, userUuid, roleUuid, itSystemUsageUuid }),
     'Remove It System Usage Role Error': emptyProps(),
     'Add Local KLE': (kleUuid: string) => ({
@@ -115,7 +115,7 @@ export const ITSystemUsageActions = createActionGroup({
     'Add It System Usage Relation': (request: APISystemRelationWriteRequestDTO) => ({ request }),
     'Add It System Usage Relation Success': (
       itSystemUsageUuid: string,
-      relation: APIOutgoingSystemRelationResponseDTO
+      relation: APIOutgoingSystemRelationResponseDTO,
     ) => ({ itSystemUsageUuid, relation }),
     'Add It System Usage Relation Error': emptyProps(),
     'Patch It System Usage Relation': (relationUuid: string, request: APISystemRelationWriteRequestDTO) => ({
@@ -124,7 +124,7 @@ export const ITSystemUsageActions = createActionGroup({
     }),
     'Patch It System Usage Relation Success': (
       itSystemUsageUuid: string,
-      relation: APIOutgoingSystemRelationResponseDTO
+      relation: APIOutgoingSystemRelationResponseDTO,
     ) => ({ itSystemUsageUuid, relation }),
     'Patch It System Usage Relation Error': emptyProps(),
     'Remove It System Usage Relation': (relationUuid: string) => ({ relationUuid }),
@@ -180,15 +180,22 @@ export const ITSystemUsageActions = createActionGroup({
     'Delete Organizational IT System Usage Column Configuration Success': () => emptyProps(),
     'Delete Organizational IT System Usage Column Configuration Error': () => emptyProps(),
 
-    'Reset To Organization IT System Usage Column Configuration': () => emptyProps(),
+    'Reset To Organization IT System Usage Column Configuration': (disablePopupNotification: boolean = false) => ({
+      disablePopupNotification,
+    }),
     'Reset To Organization IT System Usage Column Configuration Success': (
-      response: APIOrganizationGridConfigurationResponseDTO
-    ) => ({ response }),
-    'Reset To Organization IT System Usage Column Configuration Error': () => emptyProps(),
+      response: APIOrganizationGridConfigurationResponseDTO,
+      disablePopupNotification: boolean = false
+    ) => ({ response, disablePopupNotification }),
+    'Reset To Organization IT System Usage Column Configuration Error': (
+      disablePopupNotification: boolean = false
+    ) => ({
+      disablePopupNotification,
+    }),
 
     'Initialize IT System Usage Last Seen Grid Configuration': () => emptyProps(),
     'Initialize IT System Usage Last Seen Grid Configuration Success': (
-      response: APIOrganizationGridConfigurationResponseDTO
+      response: APIOrganizationGridConfigurationResponseDTO,
     ) => ({ response }),
     'Initialize IT System Usage Last Seen Grid Configuration Error': () => emptyProps(),
   },

@@ -26,6 +26,7 @@ import { RoleAssignmentActions } from 'src/app/store/role-assignment/actions';
 import { mapDTOsToRoleAssignment, RoleAssignment } from '../models/helpers/read-model-role-assignments';
 import { RoleOptionTypes } from '../models/options/role-option-types.model';
 import { filterNullish } from '../pipes/filter-nullish';
+import { selectCurrentUnitUuid } from 'src/app/store/organization/organization-unit/selectors';
 
 @Injectable({
   providedIn: 'root',
@@ -51,7 +52,7 @@ export class RoleOptionTypeService implements OnDestroy {
     @Inject(APIV2OrganizationUnitsInternalINTERNALService)
     private readonly organizationUnitInternalService: APIV2OrganizationUnitsInternalINTERNALService,
     @Inject(APIV2OrganizationUnitRoleTypeService)
-    private readonly organizationUnitRolesService: APIV2OrganizationUnitRoleTypeService
+    private readonly organizationUnitRolesService: APIV2OrganizationUnitRoleTypeService,
   ) {}
 
   ngOnDestroy() {
@@ -66,10 +67,10 @@ export class RoleOptionTypeService implements OnDestroy {
             ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
             ITContractActions.bulkAddItContractRoleSuccess,
             DataProcessingActions.bulkAddDataProcessingRoleSuccess,
-            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess
-          )
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess,
+          ),
         )
-        .subscribe(() => this.dispatchAddSuccess())
+        .subscribe(() => this.dispatchAddSuccess()),
     );
     this.subscriptions.add(
       this.actions$
@@ -78,10 +79,10 @@ export class RoleOptionTypeService implements OnDestroy {
             ITSystemUsageActions.removeItSystemUsageRoleSuccess,
             ITContractActions.removeItContractRoleSuccess,
             DataProcessingActions.removeDataProcessingRoleSuccess,
-            OrganizationUnitActions.deleteOrganizationUnitRoleSuccess
-          )
+            OrganizationUnitActions.deleteOrganizationUnitRoleSuccess,
+          ),
         )
-        .subscribe(() => this.dispatchRemoveSuccess())
+        .subscribe(() => this.dispatchRemoveSuccess()),
     );
   }
 
@@ -94,7 +95,7 @@ export class RoleOptionTypeService implements OnDestroy {
   }
 
   private resolveGetRoleOptionsEndpoints(
-    optionType: RoleOptionTypes
+    optionType: RoleOptionTypes,
   ): (organizationUuid: string) => Observable<Array<APIRoleOptionResponseDTO>> {
     switch (optionType) {
       case 'it-system-usage':
@@ -114,9 +115,9 @@ export class RoleOptionTypeService implements OnDestroy {
 
   private resolveGetEntityRolesEndpoints(
     entityType: RoleOptionTypes,
-    organizationUuid: string
+    organizationUuid: string,
   ): (
-    entityUuid: string
+    entityUuid: string,
   ) => Observable<Array<APIExtendedRoleAssignmentResponseDTO | APIOrganizationUnitRolesResponseDTO>> {
     switch (entityType) {
       case 'it-system-usage':
@@ -150,7 +151,7 @@ export class RoleOptionTypeService implements OnDestroy {
    */
   public getAvailableOptions(
     organizationUuid: string,
-    optionType: RoleOptionTypes
+    optionType: RoleOptionTypes,
   ): Observable<Array<APIRoleOptionResponseDTO>> {
     return this.resolveGetRoleOptionsEndpoints(optionType)(organizationUuid);
   }
@@ -158,11 +159,11 @@ export class RoleOptionTypeService implements OnDestroy {
   public getEntityRoles(
     entityUuid: string,
     entityType: RoleOptionTypes,
-    organizationUuid: string
+    organizationUuid: string,
   ): Observable<Array<RoleAssignment>> {
     return this.resolveGetEntityRolesEndpoints(
       entityType,
-      organizationUuid
+      organizationUuid,
     )(entityUuid).pipe(map((roles) => roles.map(mapDTOsToRoleAssignment)));
   }
 
@@ -170,7 +171,7 @@ export class RoleOptionTypeService implements OnDestroy {
     userUuids: string[],
     roleUuid: string,
     entityType: RoleOptionTypes,
-    unitUuid?: string
+    unitUuid?: string,
   ) {
     switch (entityType) {
       case 'it-system-usage':
@@ -183,7 +184,18 @@ export class RoleOptionTypeService implements OnDestroy {
         this.store.dispatch(DataProcessingActions.bulkAddDataProcessingRole(userUuids, roleUuid));
         break;
       case 'organization-unit':
-        this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, unitUuid!));
+        if (!unitUuid) {
+          this.store
+            .select(selectCurrentUnitUuid)
+            .pipe(filterNullish(), first())
+            .subscribe((currentUnitUuid) =>
+              this.store.dispatch(
+                OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, currentUnitUuid)
+              )
+            );
+        } else {
+          this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, unitUuid));
+        }
         break;
     }
   }

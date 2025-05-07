@@ -3,12 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { IdentityNamePair } from '../../../../models/identity-name-pair.model';
 import { RegistrationEntityTypes } from '../../../../models/registrations/registration-entity-categories.model';
 import { GridUsagesDialogComponent } from '../grid-usages-dialog/grid-usages-dialog.component';
+import { ParagraphComponent } from '../../../paragraph/paragraph.component';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-usage-link',
-  standalone: false,
   templateUrl: './grid-usage-link.component.html',
   styleUrl: './grid-usage-link.component.scss',
+  imports: [ParagraphComponent, NgIf],
 })
 export class UsageLinkComponent {
   constructor(private dialog: MatDialog) {}

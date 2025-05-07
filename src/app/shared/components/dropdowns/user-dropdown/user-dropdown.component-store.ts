@@ -27,7 +27,7 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
   constructor(
     private readonly globalUserService: APIV2GlobalUserInternalINTERNALService,
     private readonly organizationApiService: APIV2OrganizationService,
-    private readonly store: Store
+    private readonly store: Store,
   ) {
     super({ users: [], searchGlobal: false, loading: false });
   }
@@ -36,21 +36,21 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
     (state, users: ShallowUser[]): State => ({
       ...state,
       users,
-    })
+    }),
   );
 
   private setLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   public setGlobalSearch = this.updater(
     (state, searchGlobal: boolean): State => ({
       ...state,
       searchGlobal,
-    })
+    }),
   );
 
   public searchUsers = this.effect((search$: Observable<string | undefined>) =>
@@ -62,11 +62,11 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
           tapResponse(
             (users) => this.setUsers(users),
             (error) => console.error(error),
-            () => this.setLoading(false)
-          )
+            () => this.setLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 
   private searchUsersInternal(search: string | undefined): Observable<APIUserReferenceResponseDTO[]> {
@@ -74,7 +74,7 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
       first(),
       switchMap((searchGlobal) => {
         return searchGlobal ? this.searchGlobally(search) : this.searchInCurrentOrgnization(search);
-      })
+      }),
     );
   }
 
@@ -93,7 +93,7 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
           organizationUuid,
           nameOrEmailQuery: search,
         });
-      })
+      }),
     );
   }
 }

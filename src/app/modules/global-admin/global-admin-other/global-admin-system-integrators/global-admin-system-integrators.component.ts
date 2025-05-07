@@ -12,13 +12,25 @@ import { Actions, ofType } from '@ngrx/effects';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { toUuid } from 'src/app/shared/models/has-uuid';
 import { mapArray } from 'src/app/shared/helpers/observable-helpers';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { LocalGridComponent } from '../../../../shared/components/local-grid/local-grid.component';
 
 @Component({
-    selector: 'app-global-admin-system-integrators',
-    templateUrl: './global-admin-system-integrators.component.html',
-    styleUrl: './global-admin-system-integrators.component.scss',
-    providers: [SystemIntegratorComponentStore],
-    standalone: false
+  selector: 'app-global-admin-system-integrators',
+  templateUrl: './global-admin-system-integrators.component.html',
+  styleUrl: './global-admin-system-integrators.component.scss',
+  providers: [SystemIntegratorComponentStore],
+  imports: [
+    CardComponent,
+    CardHeaderComponent,
+    CollectionExtensionButtonComponent,
+    NgIf,
+    LocalGridComponent,
+    AsyncPipe,
+  ],
 })
 export class GlobalAdminSystemIntegratorsComponent extends BaseComponent implements OnInit {
   public readonly systemIntegrators$ = this.componentStore.systemIntegrators$;
@@ -43,7 +55,7 @@ export class GlobalAdminSystemIntegratorsComponent extends BaseComponent impleme
     private readonly dialog: MatDialog,
     private readonly componentStore: SystemIntegratorComponentStore,
     private readonly confirmActionService: ConfirmActionService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -52,7 +64,7 @@ export class GlobalAdminSystemIntegratorsComponent extends BaseComponent impleme
     this.subscriptions.add(
       this.actions$.pipe(ofType(GlobalAdminSystemIntegratorActions.editSystemIntegratorSuccess)).subscribe(() => {
         this.componentStore.getSystemIntegrators();
-      })
+      }),
     );
 
     this.componentStore.getSystemIntegrators();

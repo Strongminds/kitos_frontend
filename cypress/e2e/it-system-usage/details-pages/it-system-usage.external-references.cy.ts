@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe('it-system-usage', () => {
+describe('it-system-usage references', () => {
   const itSystemUsageBaseUrl = '/api/v2/it-system-usages/*';
   const refsBaseUrl = '/api/v2/internal/external-references/it-system-usages/*';
   beforeEach(() => {
@@ -49,7 +49,7 @@ describe('it-system-usage', () => {
       true,
       false,
       itSystemUsageBaseUrl,
-      './it-system-usage/external-references/it-system-usage.json'
+      './it-system-usage/external-references/it-system-usage.json',
     );
   });
 
@@ -70,7 +70,7 @@ describe('it-system-usage', () => {
       false,
       false,
       itSystemUsageBaseUrl,
-      './it-system-usage/external-references/it-system-usage.json'
+      './it-system-usage/external-references/it-system-usage.json',
     );
   });
 
@@ -92,7 +92,7 @@ describe('it-system-usage', () => {
       true,
       itSystemUsageBaseUrl,
       './it-system-usage/external-references/it-system-usage.json',
-      'Valid url'
+      'Valid url',
     );
   });
 
@@ -114,7 +114,7 @@ describe('it-system-usage', () => {
       true,
       itSystemUsageBaseUrl,
       './it-system-usage/external-references/it-system-usage.json',
-      'No url Master reference'
+      'No url Master reference',
     );
   });
 
@@ -140,7 +140,7 @@ describe('it-system-usage', () => {
       'PATCH',
       '/api/v2/it-system-usages/*',
       { fixture: './it-system-usage/external-references/it-system-usage.json' },
-      'Er du sikker på at du vil fjerne referencen?'
+      'Er du sikker på at du vil fjerne referencen?',
     );
     cy.contains('Referencen blev slettet');
 

@@ -1,17 +1,28 @@
+import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { ExcelExportData } from '@progress/kendo-angular-excel-export';
+import { ExcelExportData, KENDO_EXCELEXPORT } from '@progress/kendo-angular-excel-export';
 import {
   CellClickEvent,
+  CellTemplateDirective,
+  ColumnComponent,
   ColumnReorderEvent,
   ColumnResizeArgs,
+  CustomMessagesComponent,
+  ExcelComponent,
   ExcelExportEvent,
+  FilterCellTemplateDirective,
+  HeaderTemplateDirective,
   GridComponent as KendoGridComponent,
+  LoadingTemplateDirective,
+  NoRecordsTemplateDirective,
   PageChangeEvent,
+  ToolbarTemplateDirective,
 } from '@progress/kendo-angular-grid';
+import { PagerTemplateDirective } from '@progress/kendo-angular-pager';
 import {
   CompositeFilterDescriptor,
   FilterDescriptor,
@@ -50,14 +61,60 @@ import { RegistrationEntityTypes } from '../../models/registrations/registration
 import { UIConfigGridApplication } from '../../models/ui-config/ui-config-grid-application';
 import { filterNullish } from '../../pipes/filter-nullish';
 import { GridExportService } from '../../services/grid-export.service';
-import { StatePersistingService } from '../../services/state-persisting.service';
+import { LocalStorageService } from '../../services/state-persisting.service';
 import { GridUIConfigService } from '../../services/ui-config-services/grid-ui-config.service';
+import { ArrowDownIconComponent } from '../icons/arrow-down-icon.component';
+import { ArrowUpIconComponent } from '../icons/arrow-up-icon.component';
+import { HelpIconComponent } from '../icons/help.component';
+import { LoadingComponent } from '../loading/loading.component';
+import { ParagraphComponent } from '../paragraph/paragraph.component';
+import { TooltipComponent } from '../tooltip/tooltip.component';
+import { ChoiceTypeDropdownFilterComponent } from './choice-type-dropdown-filter/choice-type-dropdown-filter.component';
+import { DateFilterComponent } from './date-filter/date-filter.component';
+import { DropdownColumnDataFilterComponent } from './dropdown-column-data-filter/dropdown-column-data-filter.component';
+import { DropdownFilterComponent } from './dropdown-filter/dropdown-filter.component';
+import { GridCellComponent } from './grid-cell/grid-cell.component';
+import { GridPaginatorComponent } from './grid-paginator/grid-paginator.component';
+import { NumericFilterComponent } from './numeric-filter/numeric-filter.component';
+import { StringFilterComponent } from './string-filter/string-filter.component';
+import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdown-filter.component';
 
 @Component({
   selector: 'app-grid',
   templateUrl: 'grid.component.html',
   styleUrls: ['grid.component.scss'],
-  standalone: false,
+  imports: [
+    CommonModule,
+    KendoGridComponent,
+    NgFor,
+    ColumnComponent,
+    HeaderTemplateDirective,
+    ParagraphComponent,
+    TooltipComponent,
+    HelpIconComponent,
+    ArrowUpIconComponent,
+    ArrowDownIconComponent,
+    FilterCellTemplateDirective,
+    StringFilterComponent,
+    NumericFilterComponent,
+    DateFilterComponent,
+    DropdownFilterComponent,
+    UnitDropdownFilterComponent,
+    ChoiceTypeDropdownFilterComponent,
+    DropdownColumnDataFilterComponent,
+    CellTemplateDirective,
+    GridCellComponent,
+    PagerTemplateDirective,
+    GridPaginatorComponent,
+    CustomMessagesComponent,
+    LoadingTemplateDirective,
+    LoadingComponent,
+    NoRecordsTemplateDirective,
+    ExcelComponent,
+    ToolbarTemplateDirective,
+    AsyncPipe,
+    KENDO_EXCELEXPORT,
+  ],
 })
 export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
@@ -102,9 +159,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   constructor(
     private actions$: Actions,
     private store: Store,
-    private localStorage: StatePersistingService,
+    private localStorage: LocalStorageService,
     private gridUIConfigService: GridUIConfigService,
-    private readonly gridExportService: GridExportService
+    private readonly gridExportService: GridExportService,
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -116,7 +173,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         if (state) {
           this.stateChange.emit(state);
         }
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -124,13 +181,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         if (ready) {
           this.excelExport();
         }
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.data$.subscribe((data) => {
         this.data = data;
-      })
+      }),
     );
 
     this.initializeFilterSubscriptions();
@@ -141,7 +198,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       this.subscriptions.add(
         this.actions$.pipe(ofType(resetGridAction)).subscribe(() => {
           this.store.dispatch(getApplyFilterAction(this.entityType)({ filter: undefined, sort: undefined }));
-        })
+        }),
       );
     }
 
@@ -150,10 +207,10 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.columns$.pipe(first()).subscribe((columns) => {
         //This check prevents stale state from being used to sort the grid
-        const columnToBeSorted = columns?.find((column) => column.field === sort[0].field);
+        const columnToBeSorted = columns?.find((column) => column?.field === sort[0]?.field);
         if (!columnToBeSorted || columnToBeSorted.sortable === false) return;
         this.onSortChange(sort);
-      })
+      }),
     );
   }
 
@@ -194,7 +251,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       const changedColumnEvent = event[0];
       const columnIndex = columnsCopy.findIndex(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (column) => column.field === (changedColumnEvent.column as any).field
+        (column) => column.field === (changedColumnEvent.column as any).field,
       );
       if (columnIndex === -1) return;
 
@@ -264,7 +321,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       .pipe(
         filterNullish(),
         concatLatestFrom(() => this.getFilteredExportColumns$()),
-        first()
+        first(),
       )
       .subscribe(([data, exportColumns]) => {
         const processedData = process(data.data, { skip: 0, take: data.data.length });
@@ -289,9 +346,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         return columnsToExport.filter(
           (column) =>
             !this.isExcelOnlyColumn(column) ||
-            roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
+            roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, '')),
         );
-      })
+      }),
     );
   }
 
@@ -329,7 +386,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.actions$.pipe(ofType(getSaveFilterAction(this.entityType))).subscribe(({ localStoreKey }) => {
         this.saveFilter(localStoreKey);
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -340,12 +397,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
           sort: state.sort,
         };
         this.onStateChange(newState);
-      })
+      }),
     );
   }
 
   private mapCompositeFilterStringDatesToDateObjects(
-    filter: CompositeFilterDescriptor | undefined
+    filter: CompositeFilterDescriptor | undefined,
   ): CompositeFilterDescriptor | undefined {
     if (!filter) return undefined;
     return {

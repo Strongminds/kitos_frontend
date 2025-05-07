@@ -3,8 +3,8 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class BaseCellComponent extends BaseComponent {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -20,7 +20,7 @@ export class BaseCellComponent extends BaseComponent {
     return this.getPropertyFromObject(this.dataItem, propertyName);
   }
 
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   getPropertyFromObject(object: any, propertyName: string): any {
     return object[propertyName];
   }

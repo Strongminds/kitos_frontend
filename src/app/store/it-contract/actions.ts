@@ -47,7 +47,7 @@ export const ITContractActions = createActionGroup({
     'Patch IT Contract': (
       itContract: APIUpdateContractRequestDTO,
       customSuccessText?: string,
-      customErrorText?: string
+      customErrorText?: string,
     ) => ({ itContract, customSuccessText, customErrorText }),
     'Patch IT Contract Success': (itContract: APIItContractResponseDTO, customSuccessText?: string) => ({
       itContract,
@@ -95,7 +95,7 @@ export const ITContractActions = createActionGroup({
 
     'Get IT Contract Collection Permissions': () => emptyProps(),
     'Get IT Contract Collection Permissions Success': (
-      collectionPermissions?: APIResourceCollectionPermissionsResponseDTO
+      collectionPermissions?: APIResourceCollectionPermissionsResponseDTO,
     ) => ({ collectionPermissions }),
     'Get IT Contract Collection Permissions Error': emptyProps(),
 
@@ -125,7 +125,7 @@ export const ITContractActions = createActionGroup({
       itContract: APIItContractResponseDTO,
       userUuid: string,
       roleUuid: string,
-      contractUuid: string
+      contractUuid: string,
     ) => ({ itContract, userUuid, roleUuid, contractUuid }),
     'Remove It Contract Role Error': emptyProps(),
 
@@ -165,15 +165,20 @@ export const ITContractActions = createActionGroup({
     'Delete Organizational IT Contract Column Configuration Success': () => emptyProps(),
     'Delete Organizational IT Contract Column Configuration Error': () => emptyProps(),
 
-    'Reset To Organization IT Contract Column Configuration': () => emptyProps(),
+    'Reset To Organization IT Contract Column Configuration': (disablePopupNotification: boolean = false) => ({
+      disablePopupNotification,
+    }),
     'Reset To Organization IT Contract Column Configuration Success': (
-      response: APIOrganizationGridConfigurationResponseDTO
-    ) => ({ response }),
-    'Reset To Organization IT Contract Column Configuration Error': () => emptyProps(),
+      response: APIOrganizationGridConfigurationResponseDTO,
+      disablePopupNotification: boolean = false
+    ) => ({ response, disablePopupNotification }),
+    'Reset To Organization IT Contract Column Configuration Error': (disablePopupNotification: boolean = false) => ({
+      disablePopupNotification,
+    }),
 
     'Initialize IT Contract Last Seen Grid Configuration': () => emptyProps(),
     'Initialize IT Contract Last Seen Grid Configuration Success': (
-      response: APIOrganizationGridConfigurationResponseDTO
+      response: APIOrganizationGridConfigurationResponseDTO,
     ) => ({ response }),
     'Initialize IT Contract Last Seen Grid Configuration Error': () => emptyProps(),
 

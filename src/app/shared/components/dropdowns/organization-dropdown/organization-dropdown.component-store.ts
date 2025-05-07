@@ -22,14 +22,14 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
     (state, users: APIOrganizationResponseDTO[]): State => ({
       ...state,
       organizations: users,
-    })
+    }),
   );
 
   private setLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   public searchOrganizations = this.effect((search$: Observable<string | undefined>) =>
@@ -44,10 +44,10 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
             tapResponse(
               (filteredUsers) => this.setOrganizations(filteredUsers),
               (error) => console.error(error),
-              () => this.setLoading(false)
-            )
+              () => this.setLoading(false),
+            ),
           );
-      })
-    )
+      }),
+    ),
   );
 }

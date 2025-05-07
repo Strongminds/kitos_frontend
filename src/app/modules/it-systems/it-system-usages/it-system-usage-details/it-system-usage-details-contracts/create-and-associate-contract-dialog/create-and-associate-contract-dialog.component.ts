@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { combineLatest, debounceTime, map, startWith } from 'rxjs';
@@ -7,13 +7,31 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { CreateEntityDialogComponentStore } from 'src/app/shared/components/entity-creation/create-entity-dialog.component-store';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
+import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
+import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 
 @Component({
-    selector: 'app-create-and-associate-contract-dialog',
-    templateUrl: './create-and-associate-contract-dialog.component.html',
-    styleUrl: './create-and-associate-contract-dialog.component.scss',
-    providers: [CreateEntityDialogComponentStore],
-    standalone: false
+  selector: 'app-create-and-associate-contract-dialog',
+  templateUrl: './create-and-associate-contract-dialog.component.html',
+  styleUrl: './create-and-associate-contract-dialog.component.scss',
+  providers: [CreateEntityDialogComponentStore],
+  imports: [
+    DialogComponent,
+    StandardVerticalContentGridComponent,
+    TextBoxComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    NgIf,
+    ParagraphComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class CreateAndAssociateContractDialogComponent extends BaseComponent implements OnInit {
   @Input() public usageToAssociateUuid!: string;
@@ -34,7 +52,7 @@ export class CreateAndAssociateContractDialogComponent extends BaseComponent imp
   constructor(
     private store: Store,
     private dialogRef: MatDialogRef<CreateAndAssociateContractDialogComponent>,
-    private readonly componentStore: CreateEntityDialogComponentStore
+    private readonly componentStore: CreateEntityDialogComponentStore,
   ) {
     super();
   }
@@ -49,7 +67,7 @@ export class CreateAndAssociateContractDialogComponent extends BaseComponent imp
             searchObject: { nameEquals: value },
             entityType: 'it-contract',
           });
-        })
+        }),
     );
     this.subscriptions.add(
       this.alreadyExists$.subscribe((alreadyExists) => {
@@ -58,7 +76,7 @@ export class CreateAndAssociateContractDialogComponent extends BaseComponent imp
         } else {
           this.formGroup.controls.contractName.setErrors(null);
         }
-      })
+      }),
     );
   }
 

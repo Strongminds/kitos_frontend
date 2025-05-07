@@ -7,8 +7,8 @@ import { selectAvailableRoleDropdownValues, selectUserIsGlobalAdmin } from 'src/
 import { CreateUserDialogComponentStore } from './create-user-dialog/create-user-dialog.component-store';
 
 @Component({
-    template: '',
-    standalone: false
+  template: '',
+  standalone: false,
 })
 export class BaseUserDialogComponent extends BaseComponent {
   public startPreferenceOptions = this.userService.getAvailableStartPreferenceOptions();
@@ -23,7 +23,7 @@ export class BaseUserDialogComponent extends BaseComponent {
   constructor(
     public store: Store,
     public componentStore: CreateUserDialogComponentStore,
-    protected userService: UserService
+    protected userService: UserService,
   ) {
     super();
   }

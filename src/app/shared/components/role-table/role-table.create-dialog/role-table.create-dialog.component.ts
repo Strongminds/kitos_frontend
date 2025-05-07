@@ -1,8 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 
+import { AsyncPipe } from '@angular/common';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Subject, combineLatest, map } from 'rxjs';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
@@ -18,6 +19,12 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent } from '../../dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { RoleTableComponentStore } from '../role-table.component-store';
 
 @Component({
@@ -25,13 +32,23 @@ import { RoleTableComponentStore } from '../role-table.component-store';
   templateUrl: './role-table.create-dialog.component.html',
   styleUrls: ['./role-table.create-dialog.component.scss'],
   providers: [RoleTableComponentStore],
-  standalone: false,
+  imports: [
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    DropdownComponent,
+    MultiSelectDropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+  ],
 })
 export class RoleTableCreateDialogComponent extends BaseComponent implements OnInit {
   public readonly roleForm = new FormGroup({
     role: new FormControl<APIRoleOptionResponseDTO | undefined>(
       { value: undefined, disabled: false },
-      Validators.required
+      Validators.required,
     ),
   });
 
@@ -45,10 +62,10 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
   private readonly existingUserUuids$ = new BehaviorSubject<string[]>([]);
   private readonly mappedUsers$ = this.componentStore.users$.pipe(
     filterNullish(),
-    map((users) => users?.map((user) => mapUserToOption(user)))
+    map((users) => users?.map((user) => mapUserToOption(user))),
   );
   public readonly filteredUsers$ = combineLatest([this.mappedUsers$, this.existingUserUuids$]).pipe(
-    map(([users, existingUserUuids]) => users.filter((user) => !existingUserUuids.includes(user.value)))
+    map(([users, existingUserUuids]) => users.filter((user) => !existingUserUuids.includes(user.value))),
   );
 
   public readonly isLoading$ = this.componentStore.usersIsLoading$;
@@ -66,7 +83,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
     private readonly componentStore: RoleTableComponentStore,
     private readonly dialog: MatDialogRef<RoleTableCreateDialogComponent>,
     private readonly roleOptionTypeService: RoleOptionTypeService,
-    private readonly actions$: Actions
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -127,6 +144,9 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
         existingUserUuids = [];
         this.roleUserUuidsDictionary[roleUuid] = existingUserUuids;
       }
+      if (role.unitUuid && role.unitUuid != this.entityUuid) {
+        return;
+      }
       existingUserUuids.push(role.assignment.user.uuid);
     });
   }
@@ -138,7 +158,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
         .pipe(filterNullish())
         .subscribe((roles) => {
           this.availableRoles$.next(roles);
-        })
+        }),
     );
   }
 
@@ -147,7 +167,7 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
       this.selectedRoleUuid$.subscribe((roleUuid) => {
         const userUuids = this.roleUserUuidsDictionary[roleUuid];
         this.existingUserUuids$.next(userUuids ?? []);
-      })
+      }),
     );
   }
 
@@ -159,12 +179,12 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
             ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess,
             ITContractActions.bulkAddItContractRoleSuccess,
             DataProcessingActions.bulkAddDataProcessingRoleSuccess,
-            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess
-          )
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess,
+          ),
         )
         .subscribe(() => {
           this.dialog.close();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -174,12 +194,12 @@ export class RoleTableCreateDialogComponent extends BaseComponent implements OnI
             ITSystemUsageActions.bulkAddItSystemUsageRoleError,
             ITContractActions.bulkAddItContractRoleError,
             DataProcessingActions.bulkAddDataProcessingRoleError,
-            OrganizationUnitActions.bulkAddOrganizationUnitRoleError
-          )
+            OrganizationUnitActions.bulkAddOrganizationUnitRoleError,
+          ),
         )
         .subscribe(() => {
           this.isBusy = false;
-        })
+        }),
     );
   }
 }

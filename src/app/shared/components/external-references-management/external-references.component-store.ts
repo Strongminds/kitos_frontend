@@ -28,7 +28,7 @@ export class ExternalReferencesComponentStore extends ComponentStore<State> {
     (state, externalReferences: APIExternalReferenceWithLastChangedResponseDTO[]): State => ({
       ...state,
       externalReferences,
-    })
+    }),
   );
 
   public getExternalReferences = (entityType: RegistrationEntityTypes) =>
@@ -38,15 +38,15 @@ export class ExternalReferencesComponentStore extends ComponentStore<State> {
           this.getExternalReferencesMethod(entityType)(entityUuid).pipe(
             tapResponse(
               (externalReferences) => this.setExternalReferences(externalReferences),
-              (e) => console.error(e)
-            )
-          )
-        )
+              (e) => console.error(e),
+            ),
+          ),
+        ),
       );
     });
 
   public getExternalReferencesMethod(
-    entityType: RegistrationEntityTypes
+    entityType: RegistrationEntityTypes,
   ): (entityUuid: string) => Observable<APIExternalReferenceWithLastChangedResponseDTO[]> {
     switch (entityType) {
       case 'it-system':

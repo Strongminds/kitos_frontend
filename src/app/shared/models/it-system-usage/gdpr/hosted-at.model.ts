@@ -24,4 +24,3 @@ export const hostedAtOptionsGrid: HostedAt[] = [
 export const mapGridHostedAt = (value?: APIGDPRRegistrationsResponseDTO.HostedAtEnum): HostedAt | undefined => {
   return hostedAtOptionsGrid.find((option) => option.value === value);
 };
-  
