@@ -1,5 +1,6 @@
 import { createEntityAdapter, Update } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { newCache } from 'src/app/shared/models/cache-item.model';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { DataProcessingActions } from '../../data-processing/actions';
@@ -64,7 +65,7 @@ export const organizationUserFeature = createFeature({
       OrganizationUserActions.getOrganizationUserPermissionsSuccess,
       (state, { permissions }): OrganizationUserState => ({
         ...state,
-        permissions,
+        permissions: newCache(permissions),
       })
     ),
     on(OrganizationUserActions.createUser, (state): OrganizationUserState => ({ ...state, createLoading: true })),
@@ -120,7 +121,7 @@ export const organizationUserFeature = createFeature({
     on(OrganizationUserActions.getUserPermissionsSuccess, (state, { permissions }): OrganizationUserState => {
       return {
         ...state,
-        permissions,
+        permissions: newCache(permissions),
       };
     }),
 

@@ -14,7 +14,7 @@ import { GridColumnStorageService } from 'src/app/shared/services/grid-column-st
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid, selectUserUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
-import { selectPreviousGridState } from './selectors';
+import { selectHasValidOrganizationUserPermissionsCache, selectPreviousGridState } from './selectors';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -86,6 +86,8 @@ export class OrganizationUserEffects {
   getUserPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUserPermissions),
+      concatLatestFrom(() => this.store.select(selectHasValidOrganizationUserPermissionsCache)),
+      filter(([_, validCache]) => !validCache),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiService.getSingleUsersInternalV2GetCollectionPermissions({ organizationUuid }).pipe(
