@@ -1,5 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { hasValidCache, hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
+import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { organizationUnitAdapter, organizationUnitFeature } from './reducer';
 
 const { selectOrganizationUnitState, selectCacheTime } = organizationUnitFeature;
@@ -59,23 +60,13 @@ export const selectRelevantSystemsRegistrations = createSelector(
 );
 
 export const selectUnitPermissions = createSelector(selectOrganizationUnitState, (state) => state.permissions?.value);
-export const selectHasValidOrganizationUnitPermissionsCache = createSelector(
-  selectOrganizationUnitState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.permissions?.cacheTime, now);
-  }
-);
+export const selectHasValidOrganizationUnitPermissionsCache =
+  createHasValidPermissionsCacheSelector(selectOrganizationUnitState);
 export const selectCollectionPermissions = createSelector(
   selectOrganizationUnitState,
   (state) => state.collectionPermissions?.value
 );
-export const selectHasValidOrganizationUnitCollectionPermissionsCache = createSelector(
-  selectOrganizationUnitState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.collectionPermissions?.cacheTime, now);
-  }
-);
+export const selectHasValidOrganizationUnitCollectionPermissionsCache =
+  createHasValidPermissionsCacheSelector(selectOrganizationUnitState);
 
 export const selectCurrentUnitUuid = createSelector(selectOrganizationUnitState, (state) => state.currentUnitUuid);
