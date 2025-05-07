@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
-import { hasValidTwoMinuteCache } from 'src/app/shared/helpers/date.helpers';
+import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
@@ -65,24 +65,14 @@ export const selectITSystemUsageHasDeletePermission = createSelector(
   selectITSystemUsageState,
   (state) => state.permissions?.value?.delete
 );
-export const selectHasValidItSystemUsagePermissionsCache = createSelector(
-  selectITSystemUsageState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.permissions?.cacheTime, now);
-  }
-);
+export const selectHasValidItSystemUsagePermissionsCache =
+  createHasValidPermissionsCacheSelector(selectITSystemUsageState);
 export const selectITSystemUsageHasCreateCollectionPermission = createSelector(
   selectITSystemUsageState,
   (state) => state.collectionPermissions?.value?.create
 );
-export const selectHasValidItSystemUsageCollectionPermissionsCache = createSelector(
-  selectITSystemUsageState,
-  () => new Date(),
-  (state, now) => {
-    return hasValidTwoMinuteCache(state.collectionPermissions?.cacheTime, now);
-  }
-);
+export const selectHasValidItSystemUsageCollectionPermissionsCache =
+  createHasValidPermissionsCacheSelector(selectITSystemUsageState);
 export const selectITSystemUsageIsRemoving = createSelector(selectITSystemUsageState, (state) => state.isRemoving);
 export const selectItSystemUsageContextSystemUuid = createSelector(
   selectItSystemUsage,

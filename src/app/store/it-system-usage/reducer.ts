@@ -98,19 +98,9 @@ export const itSystemUsageFeature = createFeature({
       (state, { itSystemUsage }): ITSystemUsageState => ({ ...state, itSystemUsage, isPatching: false })
     ),
     on(ITSystemUsageActions.patchITSystemUsageError, (state): ITSystemUsageState => ({ ...state, isPatching: false })),
-
-    on(
-      ITSystemUsageActions.getITSystemUsagePermissions,
-      (state): ITSystemUsageState => ({ ...state, permissions: undefined })
-    ),
     on(
       ITSystemUsageActions.getITSystemUsagePermissionsSuccess,
       (state, { permissions }): ITSystemUsageState => ({ ...state, permissions: newCache(permissions) })
-    ),
-
-    on(
-      ITSystemUsageActions.getITSystemUsageCollectionPermissions,
-      (state): ITSystemUsageState => ({ ...state, collectionPermissions: undefined })
     ),
     on(
       ITSystemUsageActions.getITSystemUsageCollectionPermissionsSuccess,
