@@ -59,14 +59,9 @@ export const itSystemFeature = createFeature({
     on(ITSystemActions.deleteITSystemError, (state): ITSystemState => ({ ...state, isRemoving: false })),
     on(ITSystemActions.patchITSystemSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
 
-    on(ITSystemActions.getITSystemPermissions, (state): ITSystemState => ({ ...state, permissions: undefined })),
     on(
       ITSystemActions.getITSystemPermissionsSuccess,
       (state, { permissions }): ITSystemState => ({ ...state, permissions: newCache(permissions) })
-    ),
-    on(
-      ITSystemActions.getITSystemCollectionPermissions,
-      (state): ITSystemState => ({ ...state, collectionPermissions: undefined })
     ),
     on(
       ITSystemActions.getITSystemCollectionPermissionsSuccess,

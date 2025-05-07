@@ -89,14 +89,9 @@ export const itContractFeature = createFeature({
       ITContractActions.removeITContractDataProcessingRegistrationSuccess,
       (state, { itContract }): ITContractState => ({ ...state, itContract })
     ),
-    on(ITContractActions.getITContractPermissions, (state): ITContractState => ({ ...state, permissions: undefined })),
     on(
       ITContractActions.getITContractPermissionsSuccess,
       (state, { permissions }): ITContractState => ({ ...state, permissions: newCache(permissions) })
-    ),
-    on(
-      ITContractActions.getITContractCollectionPermissions,
-      (state): ITContractState => ({ ...state, collectionPermissions: undefined })
     ),
     on(
       ITContractActions.getITContractCollectionPermissionsSuccess,
