@@ -15,10 +15,6 @@ export class AppRootUrlResolverService {
     const basePath = trim(this.pathLocationStrategy.getBaseHref(), '/');
     const origin = window.location.origin;
     const root = basePath === '' ? origin : `${origin}/${basePath}`;
-
-    console.log('basePath:', basePath);
-    console.log('origin:', origin);
-    console.log('Resolved root URL:', root);
     return root;
   }
 }
