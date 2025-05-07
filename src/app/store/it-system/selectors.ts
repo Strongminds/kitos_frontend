@@ -46,7 +46,10 @@ export const selectItSystemRecomendedArchiveDutyComment = createSelector(
 export const selectItSystemUuid = createSelector(selectItSystem, (state) => state?.uuid);
 export const selectItSystemName = createSelector(selectItSystem, (state) => state?.name);
 
-export const selectITSystemHasReadPermission = createSelector(selectITSystemState, (state) => state.permissions?.read);
+export const selectITSystemHasReadPermission = createSelector(
+  selectITSystemState,
+  (state) => state.permissions?.value?.read
+);
 export const selectITSystemHasModifyPermission = createSelector(
   selectITSystemState,
   (state) => state.permissions?.value?.modify
