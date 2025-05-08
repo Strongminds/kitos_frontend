@@ -1360,8 +1360,8 @@
         <target state="new">Tilføj advis</target>
       </trans-unit>
       <trans-unit id="7226881883300543573" datatype="html">
-        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</source>
-        <target state="new">Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</target>
+        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name, )"/>?</source>
+        <target state="new">Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name, )"/>?</target>
       </trans-unit>
       <trans-unit id="1987610800064579199" datatype="html">
         <source>Fejl: kan ikke deaktivere en advis uden uuid.</source>
@@ -4104,12 +4104,12 @@
         <target state="new">Systemer der anvender systemet</target>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </target>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </target>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
@@ -5180,8 +5180,8 @@
         <target state="new">Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</target>
       </trans-unit>
       <trans-unit id="6021905614502626006" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</target>
       </trans-unit>
       <trans-unit id="4691966835263640588" datatype="html">
         <source>FK Organisation - Konsekvenser ved opdatering</source>
@@ -5606,10 +5606,6 @@
       <trans-unit id="1966027923886127029" datatype="html">
         <source>KLE kunne ikke opdateres</source>
         <target state="new">KLE kunne ikke opdateres</target>
-      </trans-unit>
-      <trans-unit id="3879129476245182465" datatype="html">
-        <source> Hjælpetekster </source>
-        <target state="new"> Hjælpetekster </target>
       </trans-unit>
       <trans-unit id="2311412587966355874" datatype="html">
         <source>Nøgle</source>
@@ -6056,12 +6052,12 @@
         <target state="new">IT-Systemet driftes</target>
       </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
-        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
-        <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </target>
+        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </source>
+        <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </target>
       </trans-unit>
       <trans-unit id="844753732077135788" datatype="html">
-        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </source>
-        <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </target>
+        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </source>
+        <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </target>
       </trans-unit>
       <trans-unit id="7413119087194289434" datatype="html">
         <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </source>
@@ -6076,8 +6072,8 @@
         <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </target>
       </trans-unit>
       <trans-unit id="7970981235010102529" datatype="html">
-        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </source>
-        <target state="new"><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </target>
+        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </source>
+        <target state="new"><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </target>
       </trans-unit>
       <trans-unit id="1162347843657363489" datatype="html">
         <source>Er du sikker på, at du vil slette systemet?</source>
@@ -6428,10 +6424,6 @@
       <trans-unit id="3609485978604004141" datatype="html">
         <source>kontrakt</source>
         <target state="new">kontrakt</target>
-      </trans-unit>
-      <trans-unit id="48406484342345837" datatype="html">
-        <source>&lt;a href=&quot;<x id="PH" equiv-text="this.getEntityLink()"/>&quot;&gt;Gå til <x id="PH_1" equiv-text="this.getEntityName()"/>&lt;/a&gt;</source>
-        <target state="new">&lt;a href=&quot;<x id="PH" equiv-text="this.getEntityLink()"/>&quot;&gt;Gå til <x id="PH_1" equiv-text="this.getEntityName()"/>&lt;/a&gt;</target>
       </trans-unit>
       <trans-unit id="8979685620310883836" datatype="html">
         <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
@@ -6980,6 +6972,10 @@
       <trans-unit id="7788193785121346142" datatype="html">
         <source> Anuller </source>
         <target state="new"> Anuller </target>
+      </trans-unit>
+      <trans-unit id="1611684173879100499" datatype="html">
+        <source>Gå til</source>
+        <target state="new">Gå til</target>
       </trans-unit>
     </body>
   </file>
