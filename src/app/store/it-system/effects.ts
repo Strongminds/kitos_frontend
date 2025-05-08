@@ -11,6 +11,7 @@ import {
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import {
   castContainsFieldToString,
   replaceQueryByMultiplePropertyContains,
@@ -23,7 +24,13 @@ import { GridColumnStorageService } from 'src/app/shared/services/grid-column-st
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemActions } from './actions';
-import { selectItSystemExternalReferences, selectItSystemUuid, selectPreviousGridState } from './selectors';
+import {
+  selectHasValidItSystemCollectionPermissionsCache,
+  selectHasValidItSystemPermissionsCache,
+  selectItSystemExternalReferences,
+  selectItSystemUuid,
+  selectPreviousGridState,
+} from './selectors';
 
 @Injectable()
 export class ITSystemEffects {
@@ -163,6 +170,7 @@ export class ITSystemEffects {
   getItSystemPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystemPermissions),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidItSystemPermissionsCache)),
       switchMap(({ systemUuid }) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystemPermissions({ systemUuid }).pipe(
           map((permissions) => ITSystemActions.getITSystemPermissionsSuccess(permissions)),
@@ -175,6 +183,7 @@ export class ITSystemEffects {
   getItSystemCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystemCollectionPermissions),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidItSystemCollectionPermissionsCache)),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystemCollectionPermissions({ organizationUuid }).pipe(

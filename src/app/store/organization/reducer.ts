@@ -1,5 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { newCache } from 'src/app/shared/models/cache-item.model';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { OrganizationOData } from 'src/app/shared/models/organization/organization-odata.model';
 import { OrganizationActions } from './actions';
@@ -28,15 +29,15 @@ export const organizationFeature = createFeature({
     on(OrganizationActions.getMasterData, (state): OrganizationState => state),
     on(
       OrganizationActions.getMasterDataSuccess,
-      (state, organizationMasterData): OrganizationState => ({ ...state, organizationMasterData }),
+      (state, organizationMasterData): OrganizationState => ({ ...state, organizationMasterData })
     ),
     on(
       OrganizationActions.getMasterDataError,
-      (state): OrganizationState => ({ ...state, organizationMasterData: null }),
+      (state): OrganizationState => ({ ...state, organizationMasterData: null })
     ),
     on(
       OrganizationActions.patchMasterDataSuccess,
-      (state, organizationMasterData): OrganizationState => ({ ...state, organizationMasterData }),
+      (state, organizationMasterData): OrganizationState => ({ ...state, organizationMasterData })
     ),
     on(OrganizationActions.patchMasterDataError, (state): OrganizationState => ({ ...state })),
     on(
@@ -44,24 +45,24 @@ export const organizationFeature = createFeature({
       (state, organizationMasterDataRoles): OrganizationState => ({
         ...state,
         organizationMasterDataRoles,
-      }),
+      })
     ),
     on(
       OrganizationActions.getMasterDataRolesError,
-      (state): OrganizationState => ({ ...state, organizationMasterDataRoles: null }),
+      (state): OrganizationState => ({ ...state, organizationMasterDataRoles: null })
     ),
     on(
       OrganizationActions.patchMasterDataRolesSuccess,
-      (state, organizationMasterDataRoles): OrganizationState => ({ ...state, organizationMasterDataRoles }),
+      (state, organizationMasterDataRoles): OrganizationState => ({ ...state, organizationMasterDataRoles })
     ),
     on(OrganizationActions.patchMasterDataRolesError, (state): OrganizationState => ({ ...state })),
     on(
       OrganizationActions.getOrganizationPermissionsSuccess,
-      (state, permissions): OrganizationState => ({ ...state, permissions }),
+      (state, permissions): OrganizationState => ({ ...state, permissions: newCache(permissions) })
     ),
     on(
       OrganizationActions.getOrganizationPermissionsError,
-      (state): OrganizationState => ({ ...state, permissions: null }),
+      (state): OrganizationState => ({ ...state, permissions: null })
     ),
     on(OrganizationActions.getOrganizations, (state): OrganizationState => ({ ...state, isLoadingUsersQuery: true })),
     on(
@@ -70,11 +71,11 @@ export const organizationFeature = createFeature({
         ...organizationAdapter.setAll(organizations, state),
         total,
         isLoadingUsersQuery: false,
-      }),
+      })
     ),
     on(
       OrganizationActions.getOrganizationsError,
-      (state): OrganizationState => ({ ...state, isLoadingUsersQuery: false }),
+      (state): OrganizationState => ({ ...state, isLoadingUsersQuery: false })
     ),
     on(
       OrganizationActions.updateGridState,
@@ -83,7 +84,7 @@ export const organizationFeature = createFeature({
         isLoadingUsersQuery: true,
         gridState,
         previousGridState: state.gridState,
-      }),
+      })
     ),
     on(OrganizationActions.getUIRootConfigSuccess, (state, { uiRootConfig }): OrganizationState => {
       const newCacheTime = new Date().getTime();
@@ -91,7 +92,7 @@ export const organizationFeature = createFeature({
     }),
     on(
       OrganizationActions.patchUIRootConfigSuccess,
-      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig, uiRootConfigCacheTime: undefined }),
-    ),
+      (state, { uiRootConfig }): OrganizationState => ({ ...state, uiRootConfig, uiRootConfigCacheTime: undefined })
+    )
   ),
 });
