@@ -6,9 +6,9 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { PRODUCTION_ROOT_URL } from 'src/app/shared/constants/constants';
+import { PRODUCTION_ENVIRONMENT } from 'src/app/shared/constants/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
+import { EnvironmentService } from 'src/app/shared/services/environment.service';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
@@ -55,16 +55,14 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly isUserCurrentyLocalAdmin$ = this.store.select(selectUserIsCurrentlyLocalAdmin);
 
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
-  public rootUrl: string;
 
   constructor(
     private store: Store,
     private dialog: MatDialog,
     private router: Router,
-    private rootUrlResolver: AppRootUrlResolverService
+    private environmentService: EnvironmentService
   ) {
     super();
-    this.rootUrl = this.rootUrlResolver.resolveRootUrl();
   }
 
   ngOnInit(): void {
@@ -72,7 +70,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   public useTestEnvironmentNavBarBackground() {
-    return this.rootUrl !== PRODUCTION_ROOT_URL;
+    return this.environmentService.current.env !== PRODUCTION_ENVIRONMENT;
   }
 
   private setupGetUIRootConfigOnNavigation() {
