@@ -6,7 +6,7 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { DEV_ENVIRONMENT_NAME, STAGING_ENVIRONMENT_NAME } from 'src/app/shared/constants/constants';
+import { PRODUCTION_ROOT_URL } from 'src/app/shared/constants/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { AppRootUrlResolverService } from 'src/app/shared/services/app-root-url-resolver.service';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
@@ -72,7 +72,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
   }
 
   public useTestEnvironmentNavBarBackground() {
-    return this.rootUrl.includes(STAGING_ENVIRONMENT_NAME) || this.rootUrl.includes(DEV_ENVIRONMENT_NAME);
+    return this.rootUrl !== PRODUCTION_ROOT_URL;
   }
 
   private setupGetUIRootConfigOnNavigation() {

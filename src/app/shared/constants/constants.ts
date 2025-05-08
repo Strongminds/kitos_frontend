@@ -67,5 +67,4 @@ export const OBLIGATORY_LOCAL_OPTION_HELP_TEXT = $localize`Dette udfald er oblig
 
 export const SSO_LOGIN_HANDLER_PATH = '/LoginHandler.ashx';
 
-export const STAGING_ENVIRONMENT_NAME = 'staging';
-export const DEV_ENVIRONMENT_NAME = 'dev';
+export const PRODUCTION_ROOT_URL = 'https://kitos.dk/ui';
