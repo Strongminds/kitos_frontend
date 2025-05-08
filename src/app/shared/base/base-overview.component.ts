@@ -26,7 +26,7 @@ export class BaseOverviewComponent extends BaseComponent {
 
   constructor(
     protected store: Store,
-    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes,
+    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
   ) {
     super();
     this.store.dispatch(UserActions.getUserGridPermissions());
@@ -48,6 +48,15 @@ export class BaseOverviewComponent extends BaseComponent {
   protected rowIdSelect(event: CellClickEvent, router: Router, route: ActivatedRoute) {
     if (this.cellIsClickableStyleOrEmpty(event)) {
       const rowId = event.dataItem?.id;
+      if (event.originalEvent.ctrlKey || event.originalEvent.button === 1) {
+        const urlTree = router.createUrlTree([rowId], { relativeTo: route });
+        const fullUrl = router.serializeUrl(urlTree);
+
+        window.open(fullUrl, '_blank');
+        event.originalEvent.preventDefault();
+        event.originalEvent.stopImmediatePropagation();
+        return;
+      }
       router.navigate([rowId], { relativeTo: route });
     }
   }
@@ -64,7 +73,7 @@ export class BaseOverviewComponent extends BaseComponent {
       .pipe(first())
       .subscribe((gridState) => {
         this.store.dispatch(
-          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType),
+          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType)
         );
       });
   };
