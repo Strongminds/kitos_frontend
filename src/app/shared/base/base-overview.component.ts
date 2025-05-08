@@ -52,9 +52,9 @@ export class BaseOverviewComponent extends BaseComponent {
         const urlTree = router.createUrlTree([rowId], { relativeTo: route });
         const fullUrl = router.serializeUrl(urlTree);
 
-        window.open(fullUrl, '_blank');
         event.originalEvent.preventDefault();
         event.originalEvent.stopImmediatePropagation();
+        window.open(fullUrl, '_blank', 'noopener,noreferrer');
         return;
       }
       router.navigate([rowId], { relativeTo: route });
