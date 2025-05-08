@@ -23,8 +23,8 @@ export interface DataProcessingState extends EntityState<DataProcessingRegistrat
   loading: boolean | undefined;
   dataProcessing: APIDataProcessingRegistrationResponseDTO | undefined;
 
-  permissions: APIDataProcessingRegistrationPermissionsResponseDTO | undefined;
-  collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
+  permissions: Cached<APIDataProcessingRegistrationPermissionsResponseDTO> | undefined;
+  collectionPermissions: Cached<APIResourceCollectionPermissionsResponseDTO> | undefined;
   isRemoving: boolean;
 
   lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;

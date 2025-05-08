@@ -4,6 +4,7 @@ import {
   APIItInterfaceResponseDTO,
   APIResourceCollectionPermissionsResponseDTO,
 } from 'src/app/api/v2';
+import { Cached } from 'src/app/shared/models/cache-item.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
@@ -22,6 +23,6 @@ export interface ITInterfaceState extends EntityState<ITInterface> {
   isRemoving: boolean;
   isLoadingInterfaceDataRows: boolean;
 
-  permissions: APIItInterfacePermissionsResponseDTO | undefined;
-  collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
+  permissions: Cached<APIItInterfacePermissionsResponseDTO> | undefined;
+  collectionPermissions: Cached<APIResourceCollectionPermissionsResponseDTO> | undefined;
 }
