@@ -34,10 +34,6 @@ export const OrganizationUserActions = createActionGroup({
     }),
     'Get Organization User Permissions Error': emptyProps(),
 
-    'Get user permissions': emptyProps(),
-    'Get user permissions success': (permissions: APIUserCollectionPermissionsResponseDTO) => ({ permissions }),
-    'Get user permissions error': emptyProps(),
-    
     'Create User': (request: APICreateUserRequestDTO) => ({ request }),
     'Create User Success': (user: APIOrganizationUserResponseDTO) => ({ user }),
     'Create User Error': emptyProps(),
@@ -45,7 +41,6 @@ export const OrganizationUserActions = createActionGroup({
     'Send Notification': (userUuid: string) => ({ userUuid }),
     'Send Notification Success': (userUuid: string) => ({ userUuid }),
     'Send Notification Error': emptyProps(),
-
 
     'Update User': (userUuid: string, request: APIUpdateUserRequestDTO) => ({ userUuid, request }),
     'Update User Success': (user: APIUserResponseDTO) => ({ user }),

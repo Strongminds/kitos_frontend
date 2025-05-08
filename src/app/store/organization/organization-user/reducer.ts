@@ -118,13 +118,6 @@ export const organizationUserFeature = createFeature({
       }
     ),
 
-    on(OrganizationUserActions.getUserPermissionsSuccess, (state, { permissions }): OrganizationUserState => {
-      return {
-        ...state,
-        permissions: newCache(permissions),
-      };
-    }),
-
     on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {
       const todaysDate = new Date();
       const changes: Update<ODataOrganizationUser> = {
