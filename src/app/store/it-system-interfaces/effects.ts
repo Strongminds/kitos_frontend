@@ -4,9 +4,10 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
 import { APIV2ItInterfaceService } from 'src/app/api/v2';
 import { INTERFACE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import {
   castContainsFieldToString,
   replaceQueryByMultiplePropertyContains,
@@ -106,9 +107,8 @@ export class ITInterfaceEffects {
   getItInterfacePermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfacePermissions),
-      concatLatestFrom(() => this.store.select(selectHasValidItInterfacePermissionsCache)),
-      filter(([_, validCache]) => !validCache),
-      switchMap(([{ uuid }]) =>
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidItInterfacePermissionsCache)),
+      switchMap(({ uuid }) =>
         this.apiService.getSingleItInterfaceV2GetItInterfacePermissions({ interfaceUuid: uuid }).pipe(
           map((permissions) => ITInterfaceActions.getITInterfacePermissionsSuccess(permissions)),
           catchError(() => of(ITInterfaceActions.getITInterfacePermissionsError()))
@@ -120,8 +120,7 @@ export class ITInterfaceEffects {
   getItInterfaceCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITInterfaceActions.getITInterfaceCollectionPermissions),
-      concatLatestFrom(() => this.store.select(selectHasValidItInterfaceCollectionPermissionsCache)),
-      filter(([_, validCache]) => !validCache),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidItInterfaceCollectionPermissionsCache)),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiService.getSingleItInterfaceV2GetItInterfaceCollectionPermissions({ organizationUuid }).pipe(

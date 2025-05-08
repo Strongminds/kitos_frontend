@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, filter, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationGeneralDataWriteRequestDTO,
@@ -19,6 +19,7 @@ import {
 } from 'src/app/api/v2';
 import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -182,9 +183,8 @@ export class DataProcessingEffects {
   getDataProcessingPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessingPermissions),
-      concatLatestFrom(() => this.store.select(selectHasValidDataProcessingPermissionsCache)),
-      filter(([_, validCache]) => !validCache),
-      switchMap(([action]) =>
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidDataProcessingPermissionsCache)),
+      switchMap((action) =>
         this.dataProcessingService
           .getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions({
             dprUuid: action.dataProcessingUuid,
@@ -200,8 +200,9 @@ export class DataProcessingEffects {
   getDataProcessingCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessingCollectionPermissions),
-      concatLatestFrom(() => this.store.select(selectHasValidDataProcessingCollectionPermissionsCache)),
-      filter(([_, validCache]) => !validCache),
+      filterByReversedBooleanObservable(() =>
+        this.store.select(selectHasValidDataProcessingCollectionPermissionsCache)
+      ),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.dataProcessingService

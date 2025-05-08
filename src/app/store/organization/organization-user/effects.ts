@@ -7,6 +7,7 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -86,8 +87,7 @@ export class OrganizationUserEffects {
   getUserPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUserPermissions),
-      concatLatestFrom(() => this.store.select(selectHasValidOrganizationUserPermissionsCache)),
-      filter(([_, validCache]) => !validCache),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidOrganizationUserPermissionsCache)),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiService.getSingleUsersInternalV2GetCollectionPermissions({ organizationUuid }).pipe(

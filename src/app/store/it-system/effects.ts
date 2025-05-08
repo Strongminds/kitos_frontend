@@ -4,13 +4,14 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, filter, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import {
   APIItSystemResponseDTO,
   APIV2ItSystemService,
   APIV2ItSystemUsageMigrationINTERNALService,
 } from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import {
   castContainsFieldToString,
   replaceQueryByMultiplePropertyContains,
@@ -169,9 +170,8 @@ export class ITSystemEffects {
   getItSystemPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystemPermissions),
-      concatLatestFrom(() => this.store.select(selectHasValidItSystemPermissionsCache)),
-      filter(([_, validCache]) => !validCache),
-      switchMap(([{ systemUuid }]) =>
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidItSystemPermissionsCache)),
+      switchMap(({ systemUuid }) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystemPermissions({ systemUuid }).pipe(
           map((permissions) => ITSystemActions.getITSystemPermissionsSuccess(permissions)),
           catchError(() => of(ITSystemActions.getITSystemPermissionsError()))
@@ -183,8 +183,7 @@ export class ITSystemEffects {
   getItSystemCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemActions.getITSystemCollectionPermissions),
-      concatLatestFrom(() => this.store.select(selectHasValidItSystemCollectionPermissionsCache)),
-      filter(([_, validCache]) => !validCache),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidItSystemCollectionPermissionsCache)),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystemCollectionPermissions({ organizationUuid }).pipe(

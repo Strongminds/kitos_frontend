@@ -4,7 +4,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
-import { catchError, combineLatestWith, filter, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
 import { APIUserDTOApiReturnDTO, APIV1AuthorizeINTERNALService } from 'src/app/api/v1';
 import {
   APIOrganizationGridPermissionsResponseDTO,
@@ -15,6 +15,7 @@ import {
 import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { adaptUser } from 'src/app/shared/models/user.model';
@@ -148,8 +149,7 @@ export class UserEffects {
   getUserGridPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.getUserGridPermissions),
-      concatLatestFrom(() => this.store.select(selectHasValidUserGridPermissionsCache)),
-      filter(([_, validCache]) => !validCache),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidUserGridPermissionsCache)),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
         this.organizationGridService
