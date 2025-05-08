@@ -7,6 +7,7 @@ import {
   APIUnitAccessRightsResponseDTO,
   APIUnitAccessRightsWithUnitDataResponseDTO,
 } from 'src/app/api/v2';
+import { Cached } from 'src/app/shared/models/cache-item.model';
 import {
   PaymentRegistrationModel,
   RegistrationModel,
@@ -23,8 +24,8 @@ export interface OrganizationUnitState extends EntityState<APIOrganizationUnitRe
   registrations: APIOrganizationRegistrationUnitResponseDTO | undefined;
   isLoadingRegistrations: boolean;
 
-  permissions: APIUnitAccessRightsResponseDTO | undefined;
-  collectionPermissions: APIUnitAccessRightsWithUnitDataResponseDTO | undefined;
+  permissions: Cached<APIUnitAccessRightsResponseDTO> | undefined;
+  collectionPermissions: Cached<APIUnitAccessRightsWithUnitDataResponseDTO> | undefined;
 
   organizationUnitRights: Array<RegistrationModel<APINamedEntityWithUserFullNameV2DTO>>;
   itContractRegistrations: Array<RegistrationModel<APINamedEntityV2DTO>>;

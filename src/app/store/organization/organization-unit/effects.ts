@@ -13,11 +13,13 @@ import {
   APIV2OrganizationUnitsInternalINTERNALService,
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE, MAX_INTEGER } from 'src/app/shared/constants/constants';
+import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUnitActions } from './actions';
 import {
-  selectCurrentUnitUuid,
+  selectHasValidOrganizationUnitCollectionPermissionsCache,
+  selectHasValidOrganizationUnitPermissionsCache,
   selectOrganizationUnitHasValidCache,
   selectOrganizationUnits,
   selectPagedOrganizationUnitHasValidCache,
@@ -273,6 +275,7 @@ export class OrganizationUnitEffects {
   getPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.getPermissions),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidOrganizationUnitPermissionsCache)),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ unitUuid }, organizationUuid]) =>
         this.apiUnitService
@@ -291,6 +294,9 @@ export class OrganizationUnitEffects {
   getCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUnitActions.getCollectionPermissions),
+      filterByReversedBooleanObservable(() =>
+        this.store.select(selectHasValidOrganizationUnitCollectionPermissionsCache)
+      ),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiUnitService

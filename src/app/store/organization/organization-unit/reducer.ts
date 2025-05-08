@@ -9,6 +9,7 @@ import {
   APIOrganizationUnitResponseDTO,
 } from 'src/app/api/v2';
 import { copyObject } from 'src/app/shared/helpers/object.helpers';
+import { newCache } from 'src/app/shared/models/cache-item.model';
 import { OrganizationUnitRegistrationTypes } from 'src/app/shared/models/organization/organization-unit/organization-unit-registration-type';
 import {
   PaymentRegistrationModel,
@@ -53,7 +54,7 @@ export const organizationUnitFeature = createFeature({
       (state, { units }): OrganizationUnitState => ({
         ...organizationUnitAdapter.setAll(units, state),
         cacheTime: new Date().getTime(),
-      }),
+      })
     ),
     on(
       OrganizationUnitActions.getOrganizationUnitsPagedSuccess,
@@ -61,7 +62,7 @@ export const organizationUnitFeature = createFeature({
         ...state,
         pagedUnits: units,
         pagedUnitsCacheTime: new Date().getTime(),
-      }),
+      })
     ),
     on(OrganizationUnitActions.patchOrganizationUnitSuccess, (state, { unit }) => {
       return organizationUnitAdapter.updateOne(
@@ -69,7 +70,7 @@ export const organizationUnitFeature = createFeature({
           id: unit.uuid,
           changes: unit,
         },
-        { ...state, pagedUnitsCacheTime: undefined },
+        { ...state, pagedUnitsCacheTime: undefined }
       );
     }),
     on(OrganizationUnitActions.getOrganizationUnitsError, (state): OrganizationUnitState => ({ ...state })),
@@ -92,7 +93,7 @@ export const organizationUnitFeature = createFeature({
       (state, { uuid }): OrganizationUnitState => ({
         ...state,
         expandedNodeUuids: state.expandedNodeUuids.filter((u) => u !== uuid),
-      }),
+      })
     ),
 
     on(OrganizationUnitActions.deleteOrganizationUnitSuccess, (state, { uuid }): OrganizationUnitState => {
@@ -112,12 +113,12 @@ export const organizationUnitFeature = createFeature({
       (state, { unit }): OrganizationUnitState => ({
         ...organizationUnitAdapter.addOne(unit, state),
         pagedUnitsCacheTime: undefined,
-      }),
+      })
     ),
 
     on(
       OrganizationUnitActions.getRegistrations,
-      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: true }),
+      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: true })
     ),
     on(OrganizationUnitActions.getRegistrationsSuccess, (state, { registrations }): OrganizationUnitState => {
       const mappedRegistrations = mapRegistraitons(registrations);
@@ -126,13 +127,13 @@ export const organizationUnitFeature = createFeature({
     }),
     on(
       OrganizationUnitActions.getRegistrationsError,
-      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: false }),
+      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: false })
     ),
 
     on(
       OrganizationUnitActions.transferRegistrations,
       OrganizationUnitActions.removeRegistrations,
-      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: true }),
+      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: true })
     ),
     on(OrganizationUnitActions.removeRegistrationsSuccess, (state, { removedRegistrations }): OrganizationUnitState => {
       return filterChangedRegistrations({ ...state }, removedRegistrations);
@@ -141,12 +142,12 @@ export const organizationUnitFeature = createFeature({
       OrganizationUnitActions.transferRegistrationsSuccess,
       (state, { transferedRegistrations }): OrganizationUnitState => {
         return filterChangedRegistrations({ ...state }, transferedRegistrations);
-      },
+      }
     ),
     on(
       OrganizationUnitActions.transferRegistrationsError,
       OrganizationUnitActions.removeRegistrationsError,
-      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: false }),
+      (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: false })
     ),
 
     on(
@@ -155,17 +156,17 @@ export const organizationUnitFeature = createFeature({
         const organizationUnitRights = [...state.organizationUnitRights];
 
         const mappedOrganizationUnitRights = organizationUnitRights?.map((reg) =>
-          reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg,
+          reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg
         );
 
         return { ...state, organizationUnitRights: mappedOrganizationUnitRights };
-      },
+      }
     ),
     on(OrganizationUnitActions.changeItContractRegistrationSelect, (state, { registration }): OrganizationUnitState => {
       const itContractRegistrations = [...state.itContractRegistrations];
 
       const mappedItContractRegistrations = itContractRegistrations?.map((reg) =>
-        reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg,
+        reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg
       );
 
       return { ...state, itContractRegistrations: mappedItContractRegistrations };
@@ -176,7 +177,7 @@ export const organizationUnitFeature = createFeature({
       const mappedInternalPayments = internalPayments?.map((reg) =>
         reg.itContractId === registration.itContractId && reg.registration.id === registration.registration.id
           ? { ...reg, ...registration }
-          : reg,
+          : reg
       );
 
       return { ...state, internalPayments: mappedInternalPayments };
@@ -187,7 +188,7 @@ export const organizationUnitFeature = createFeature({
       const mappedExternalPayments = externalPayments?.map((reg) =>
         reg.itContractId === registration.itContractId && reg.registration.id === registration.registration.id
           ? { ...reg, ...registration }
-          : reg,
+          : reg
       );
 
       return { ...state, externalPayments: mappedExternalPayments };
@@ -196,7 +197,7 @@ export const organizationUnitFeature = createFeature({
       const responsibleSystems = [...state.responsibleSystems];
 
       const mappedResponsibleSystems = responsibleSystems?.map((reg) =>
-        reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg,
+        reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg
       );
 
       return { ...state, responsibleSystems: mappedResponsibleSystems };
@@ -205,7 +206,7 @@ export const organizationUnitFeature = createFeature({
       const relevantSystems = [...state.relevantSystems];
 
       const mappedRelevantSystems = relevantSystems?.map((reg) =>
-        reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg,
+        reg.registration.id === registration.registration.id ? { ...reg, ...registration } : reg
       );
 
       return { ...state, relevantSystems: mappedRelevantSystems };
@@ -227,12 +228,12 @@ export const organizationUnitFeature = createFeature({
       OrganizationUnitActions.getPermissionsSuccess,
       (state, { permissions }): OrganizationUnitState => ({
         ...state,
-        permissions,
-      }),
+        permissions: newCache(permissions),
+      })
     ),
     on(
       OrganizationUnitActions.getCollectionPermissionsSuccess,
-      (state, { permissions }): OrganizationUnitState => ({ ...state, collectionPermissions: permissions }),
+      (state, { permissions }): OrganizationUnitState => ({ ...state, collectionPermissions: newCache(permissions) })
     ),
 
     on(
@@ -240,21 +241,21 @@ export const organizationUnitFeature = createFeature({
       (state, { uuid }): OrganizationUnitState => ({
         ...state,
         currentUnitUuid: uuid,
-      }),
-    ),
+      })
+    )
   ),
 });
 
 function filterChangedRegistrations(
   state: OrganizationUnitState,
-  changedRegistrations: APIChangeOrganizationUnitRegistrationV2RequestDTO,
+  changedRegistrations: APIChangeOrganizationUnitRegistrationV2RequestDTO
 ): OrganizationUnitState {
   const itContractRegistrations = copyObject(state.itContractRegistrations)?.filter(
-    (x) => !changedRegistrations.itContractRegistrations?.some((removedId) => removedId === x.registration.id),
+    (x) => !changedRegistrations.itContractRegistrations?.some((removedId) => removedId === x.registration.id)
   );
 
   const organizationUnitRights = copyObject(state.organizationUnitRights)?.filter(
-    (x) => !changedRegistrations.organizationUnitRights?.some((removedId) => removedId === x.registration.id),
+    (x) => !changedRegistrations.organizationUnitRights?.some((removedId) => removedId === x.registration.id)
   );
 
   let internalPayments: Array<PaymentRegistrationModel> = copyObject(state.internalPayments);
@@ -264,10 +265,10 @@ function filterChangedRegistrations(
     externalPayments = filterPayments(externalPayments, removedPayment.itContractId, removedPayment.externalPayments);
   });
   const relevantSystems = copyObject(state.relevantSystems)?.filter(
-    (x) => !changedRegistrations.relevantSystems?.some((removedId) => removedId === x.registration.id),
+    (x) => !changedRegistrations.relevantSystems?.some((removedId) => removedId === x.registration.id)
   );
   const responsibleSystems = copyObject(state.responsibleSystems)?.filter(
-    (x) => !changedRegistrations.responsibleSystems?.some((removedId) => removedId === x.registration.id),
+    (x) => !changedRegistrations.responsibleSystems?.some((removedId) => removedId === x.registration.id)
   );
 
   return {
@@ -285,10 +286,10 @@ function filterChangedRegistrations(
 function filterPayments(
   payments: Array<PaymentRegistrationModel>,
   itContractId: number | undefined,
-  removedPayment: Array<number> | undefined,
+  removedPayment: Array<number> | undefined
 ): Array<PaymentRegistrationModel> {
   return payments?.filter(
-    (x) => x.itContractId === itContractId && !removedPayment?.some((removed) => removed === x.registration.id),
+    (x) => x.itContractId === itContractId && !removedPayment?.some((removed) => removed === x.registration.id)
   );
 }
 
@@ -344,7 +345,7 @@ function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponse
 function updateCollectionByType(
   state: OrganizationUnitState,
   value: boolean,
-  registrationType: OrganizationUnitRegistrationTypes,
+  registrationType: OrganizationUnitRegistrationTypes
 ) {
   switch (registrationType) {
     case 'unitRights':
@@ -382,7 +383,7 @@ function updateCollectionByType(
 
 function updateOrganizationUnitRights(
   registrations: Array<RegistrationModel<APINamedEntityWithUserFullNameV2DTO>>,
-  value: boolean,
+  value: boolean
 ): Array<RegistrationModel<APINamedEntityWithUserFullNameV2DTO>> {
   registrations.forEach((reg) => {
     reg.isSelected = value;
@@ -392,7 +393,7 @@ function updateOrganizationUnitRights(
 }
 function updateItContractRegistrations(
   registrations: Array<RegistrationModel<APINamedEntityV2DTO>>,
-  value: boolean,
+  value: boolean
 ): Array<RegistrationModel<APINamedEntityV2DTO>> {
   registrations.forEach((reg) => {
     reg.isSelected = value;
@@ -402,7 +403,7 @@ function updateItContractRegistrations(
 }
 function updateInternalPayments(
   payments: Array<PaymentRegistrationModel>,
-  value: boolean,
+  value: boolean
 ): Array<PaymentRegistrationModel> {
   payments.forEach((payment) => {
     payment.isSelected = value;
@@ -412,7 +413,7 @@ function updateInternalPayments(
 }
 function updateExternalPayments(
   payments: Array<PaymentRegistrationModel>,
-  value: boolean,
+  value: boolean
 ): Array<PaymentRegistrationModel> {
   payments.forEach((payment) => {
     payment.isSelected = value;
@@ -422,7 +423,7 @@ function updateExternalPayments(
 }
 function updateResponsibleSystems(
   registrations: Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>>,
-  value: boolean,
+  value: boolean
 ): Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>> {
   registrations.forEach((reg) => {
     reg.isSelected = value;
@@ -432,7 +433,7 @@ function updateResponsibleSystems(
 }
 function updateRelevantSystems(
   registrations: Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>>,
-  value: boolean,
+  value: boolean
 ): Array<RegistrationModel<APINamedEntityWithEnabledStatusV2DTO>> {
   registrations.forEach((reg) => {
     reg.isSelected = value;

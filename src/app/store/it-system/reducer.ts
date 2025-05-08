@@ -1,5 +1,6 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { newCache } from 'src/app/shared/models/cache-item.model';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
@@ -32,7 +33,7 @@ export const itSystemFeature = createFeature({
     on(ITSystemActions.getITSystem, (state): ITSystemState => ({ ...state, itSystem: undefined, loading: true })),
     on(
       ITSystemActions.getITSystemSuccess,
-      (state, { itSystem }): ITSystemState => ({ ...state, itSystem, loading: false }),
+      (state, { itSystem }): ITSystemState => ({ ...state, itSystem, loading: false })
     ),
     on(ITSystemActions.getITSystems, (state): ITSystemState => ({ ...state, isLoadingSystemsQuery: true })),
     on(
@@ -41,7 +42,7 @@ export const itSystemFeature = createFeature({
         ...itSystemAdapter.setAll(itSystems, state),
         total,
         isLoadingSystemsQuery: false,
-      }),
+      })
     ),
     on(
       ITSystemActions.updateGridState,
@@ -50,7 +51,7 @@ export const itSystemFeature = createFeature({
         isLoadingSystemsQuery: true,
         gridState,
         previousGridState: state.gridState,
-      }),
+      })
     ),
     on(ITSystemActions.getITSystemsError, (state): ITSystemState => ({ ...state, isLoadingSystemsQuery: false })),
     on(ITSystemActions.deleteITSystem, (state): ITSystemState => ({ ...state, isRemoving: true })),
@@ -58,25 +59,23 @@ export const itSystemFeature = createFeature({
     on(ITSystemActions.deleteITSystemError, (state): ITSystemState => ({ ...state, isRemoving: false })),
     on(ITSystemActions.patchITSystemSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
 
-    on(ITSystemActions.getITSystemPermissions, (state): ITSystemState => ({ ...state, permissions: undefined })),
     on(
       ITSystemActions.getITSystemPermissionsSuccess,
-      (state, { permissions }): ITSystemState => ({ ...state, permissions }),
-    ),
-    on(
-      ITSystemActions.getITSystemCollectionPermissions,
-      (state): ITSystemState => ({ ...state, collectionPermissions: undefined }),
+      (state, { permissions }): ITSystemState => ({ ...state, permissions: newCache(permissions) })
     ),
     on(
       ITSystemActions.getITSystemCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): ITSystemState => ({ ...state, collectionPermissions }),
+      (state, { collectionPermissions }): ITSystemState => ({
+        ...state,
+        collectionPermissions: newCache(collectionPermissions),
+      })
     ),
 
     on(ITSystemActions.addExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
     on(ITSystemActions.editExternalReferenceSuccess, (state, { itSystem }): ITSystemState => ({ ...state, itSystem })),
     on(
       ITSystemActions.removeExternalReferenceSuccess,
-      (state, { itSystem }): ITSystemState => ({ ...state, itSystem }),
+      (state, { itSystem }): ITSystemState => ({ ...state, itSystem })
     ),
 
     on(ITSystemActions.updateGridColumnsSuccess, (state, { gridColumns }): ITSystemState => {
@@ -103,7 +102,7 @@ export const itSystemFeature = createFeature({
         }
         const newSystem = { ...itSystem, IsInUse: false };
         return { ...state, entities: { ...state.entities, [itSystemUuid]: newSystem } };
-      },
-    ),
+      }
+    )
   ),
 });
