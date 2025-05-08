@@ -1,6 +1,9 @@
 import { createSelector } from '@ngrx/store';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
-import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
+import {
+  createHasValidCollectionPermissionsCacheSelector,
+  createHasValidPermissionsCacheSelector,
+} from 'src/app/shared/helpers/permissions.helpers';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
@@ -72,7 +75,7 @@ export const selectITSystemUsageHasCreateCollectionPermission = createSelector(
   (state) => state.collectionPermissions?.value?.create
 );
 export const selectHasValidItSystemUsageCollectionPermissionsCache =
-  createHasValidPermissionsCacheSelector(selectITSystemUsageState);
+  createHasValidCollectionPermissionsCacheSelector(selectITSystemUsageState);
 export const selectITSystemUsageIsRemoving = createSelector(selectITSystemUsageState, (state) => state.isRemoving);
 export const selectItSystemUsageContextSystemUuid = createSelector(
   selectItSystemUsage,
