@@ -7,6 +7,7 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { mergeMap } from 'rxjs/internal/operators/mergeMap';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
+import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
 import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
@@ -19,7 +20,7 @@ import { UserActions } from '../user-store/actions';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { OrganizationActions } from './actions';
 import { selectPreviousGridState } from './organization-user/selectors';
-import { selectHasValidUIRootConfigCache } from './selectors';
+import { selectHasValidOrganizationPermissionsCache, selectHasValidUIRootConfigCache } from './selectors';
 
 @Injectable()
 export class OrganizationEffects {
@@ -161,6 +162,7 @@ export class OrganizationEffects {
   getOrganizationPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationActions.getOrganizationPermissions),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidOrganizationPermissionsCache)),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([, organizationUuid]) =>
         this.organizationInternalService.getSingleOrganizationsInternalV2GetPermissions({ organizationUuid }).pipe(

@@ -1,6 +1,7 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { APIItInterfaceResponseDTO } from 'src/app/api/v2';
+import { newCache } from 'src/app/shared/models/cache-item.model';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ITInterface } from 'src/app/shared/models/it-interface/it-interface.model';
 import { ITInterfaceActions } from './actions';
@@ -37,11 +38,11 @@ export const itInterfaceFeature = createFeature({
         ...itInterfaceAdapter.setAll(itInterfaces, state),
         total,
         isLoadingInterfacesQuery: false,
-      }),
+      })
     ),
     on(
       ITInterfaceActions.getITInterfacesError,
-      (state): ITInterfaceState => ({ ...state, isLoadingInterfacesQuery: false }),
+      (state): ITInterfaceState => ({ ...state, isLoadingInterfacesQuery: false })
     ),
     on(ITInterfaceActions.updateGridColumnsSuccess, (state, { gridColumns }): ITInterfaceState => {
       return {
@@ -56,40 +57,35 @@ export const itInterfaceFeature = createFeature({
         isLoadingInterfacesQuery: true,
         gridState,
         previousGridState: state.gridState,
-      }),
+      })
     ),
 
     on(
       ITInterfaceActions.getITInterface,
-      (state): ITInterfaceState => ({ ...state, itInterface: undefined, loading: true }),
+      (state): ITInterfaceState => ({ ...state, itInterface: undefined, loading: true })
     ),
     on(
       ITInterfaceActions.getITInterfaceSuccess,
-      (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface, loading: false }),
-    ),
-    on(
-      ITInterfaceActions.getITInterfacePermissions,
-      (state): ITInterfaceState => ({ ...state, permissions: undefined }),
+      (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface, loading: false })
     ),
     on(
       ITInterfaceActions.getITInterfacePermissionsSuccess,
-      (state, { permissions }): ITInterfaceState => ({ ...state, permissions }),
-    ),
-    on(
-      ITInterfaceActions.getITInterfaceCollectionPermissions,
-      (state): ITInterfaceState => ({ ...state, collectionPermissions: undefined }),
+      (state, { permissions }): ITInterfaceState => ({ ...state, permissions: newCache(permissions) })
     ),
     on(
       ITInterfaceActions.getITInterfaceCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): ITInterfaceState => ({ ...state, collectionPermissions }),
+      (state, { collectionPermissions }): ITInterfaceState => ({
+        ...state,
+        collectionPermissions: newCache(collectionPermissions),
+      })
     ),
     on(
       ITInterfaceActions.updateITInterfaceSuccess,
-      (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface }),
+      (state, { itInterface }): ITInterfaceState => ({ ...state, itInterface })
     ),
     on(
       ITInterfaceActions.removeITInterfaceData,
-      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: true }),
+      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: true })
     ),
     on(ITInterfaceActions.removeITInterfaceDataSuccess, (state, { dataUuid }): ITInterfaceState => {
       const data = state.itInterface?.data?.filter((item) => item.uuid !== dataUuid) || [];
@@ -101,7 +97,7 @@ export const itInterfaceFeature = createFeature({
     }),
     on(
       ITInterfaceActions.removeITInterfaceDataError,
-      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: false }),
+      (state): ITInterfaceState => ({ ...state, isLoadingInterfaceDataRows: false })
     ),
     on(ITInterfaceActions.updateITInterfaceDataSuccess, (state, { itInterfaceData }): ITInterfaceState => {
       const data =
@@ -111,6 +107,6 @@ export const itInterfaceFeature = createFeature({
     on(ITInterfaceActions.addITInterfaceDataSuccess, (state, { itInterfaceData }): ITInterfaceState => {
       const data = [...(state.itInterface?.data || []), itInterfaceData];
       return { ...state, itInterface: { ...state.itInterface, data } as APIItInterfaceResponseDTO };
-    }),
+    })
   ),
 });
