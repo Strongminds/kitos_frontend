@@ -31,7 +31,7 @@ export const archiveDutyChoiceOptions: ArchiveDutyChoice[] = [
 ];
 
 export const mapArchiveDutyChoice = (
-  value?: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum
+  value?: APIArchivingRegistrationsResponseDTO.ArchiveDutyEnum,
 ): ArchiveDutyChoice | undefined => {
   return archiveDutyChoiceOptions.find((option) => option.value === value);
 };

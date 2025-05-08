@@ -13,14 +13,17 @@ import { selectContractGridColumns, selectItContractGridConfig } from 'src/app/s
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageLastSeenGridConfig, selectUsageGridColumns } from 'src/app/store/it-system-usage/selectors';
 import { UIModuleConfigKey } from '../enums/ui-module-config-key';
+import { areSetsEqual } from '../helpers/set-helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { GridUIConfigService } from './ui-config-services/grid-ui-config.service';
-import { areSetsEqual } from '../helpers/set-helpers';
 
 @Injectable({ providedIn: 'root' })
 export class ColumnConfigService {
-  constructor(private store: Store, private gridUiConfigService: GridUIConfigService) {}
+  constructor(
+    private store: Store,
+    private gridUiConfigService: GridUIConfigService,
+  ) {}
 
   public dispatchSaveAction(entityType: RegistrationEntityTypes, columns: GridColumn[]) {
     const mappedColumns = this.mapColumnsToGridConfigurationRequest(columns);
@@ -39,14 +42,20 @@ export class ColumnConfigService {
     }
   }
 
-  public dispatchResetAction(entityType: RegistrationEntityTypes) {
+  public dispatchResetAction(entityType: RegistrationEntityTypes, disablePopupNotification = false) {
     switch (entityType) {
       case 'it-system-usage':
-        return this.store.dispatch(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration());
+        return this.store.dispatch(
+          ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration(disablePopupNotification)
+        );
       case 'it-contract':
-        return this.store.dispatch(ITContractActions.resetToOrganizationITContractColumnConfiguration());
+        return this.store.dispatch(
+          ITContractActions.resetToOrganizationITContractColumnConfiguration(disablePopupNotification)
+        );
       case 'data-processing-registration':
-        return this.store.dispatch(DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration());
+        return this.store.dispatch(
+          DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration(disablePopupNotification)
+        );
       default:
         throw new Error(`No reset action defined for entity type: ${entityType}`);
     }
@@ -100,7 +109,7 @@ export class ColumnConfigService {
           concatLatestFrom(() => this.getGridConfig(entityType)),
           map(([gridColumns, config]) => {
             return this.areColumnsDifferentFromConfig(gridColumns, config);
-          })
+          }),
         );
       }
       default:
@@ -110,12 +119,12 @@ export class ColumnConfigService {
 
   public getGridColumns(entityType: RegistrationEntityTypes): Observable<GridColumn[]> {
     return this.getRawGridColumns(entityType).pipe(
-      this.gridUiConfigService.filterGridColumnsByUIConfig(this.entityTypeToModuleConfigKey(entityType))
+      this.gridUiConfigService.filterGridColumnsByUIConfig(this.entityTypeToModuleConfigKey(entityType)),
     );
   }
 
   public getGridConfig(
-    entityType: RegistrationEntityTypes
+    entityType: RegistrationEntityTypes,
   ): Observable<APIOrganizationGridConfigurationResponseDTO | undefined> {
     switch (entityType) {
       case 'it-system-usage':
@@ -168,7 +177,7 @@ export class ColumnConfigService {
 
   private areColumnsDifferentFromConfig(
     columns: GridColumn[],
-    config: APIOrganizationGridConfigurationResponseDTO | undefined
+    config: APIOrganizationGridConfigurationResponseDTO | undefined,
   ): boolean {
     if (!config?.visibleColumns) return false;
 
@@ -177,11 +186,11 @@ export class ColumnConfigService {
     const disabledByUiPersistIds = new Set(columns.filter((column) => column.disabledByUIConfig).map(toPersistId));
 
     const configPersistIds = new Set(
-      config.visibleColumns.map(toPersistId).filter((x) => !disabledByUiPersistIds.has(x))
+      config.visibleColumns.map(toPersistId).filter((x) => !disabledByUiPersistIds.has(x)),
     );
 
     const visibleColumnPersistIds = new Set(
-      columns.filter((column) => !column.hidden && !column.disabledByUIConfig).map(toPersistId)
+      columns.filter((column) => !column.hidden && !column.disabledByUIConfig).map(toPersistId),
     );
 
     return !areSetsEqual(visibleColumnPersistIds, configPersistIds);

@@ -12,7 +12,7 @@ const userSupervisionAccordion = 'user-supervision-accordion';
 const riskAssessmentAccordion = 'risk-assessment-accordion';
 const datepickerToggle = 'datepicker-toggle';
 
-describe('it-system-usage', () => {
+describe('it-system-usage gdpr', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupItSystemUsageIntercepts();
@@ -24,7 +24,6 @@ describe('it-system-usage', () => {
       fixture: './it-system-usage/it-system-usage-registered-data-category-types.json',
     });
     cy.setup(true, 'it-systems/it-system-usages');
-
     cy.contains('System 3').click();
     cy.navigateToDetailsSubPage('GDPR');
   });
@@ -140,7 +139,7 @@ describe('it-system-usage', () => {
     cy.input('data type 1').click({ force: true });
     verifyGdprPatchRequest(
       { sensitivePersonDataUuids: ['00000000-0000-0000-0000-000000000000'] },
-      'patchSensitivePersonalData'
+      'patchSensitivePersonalData',
     );
   });
 
@@ -237,7 +236,7 @@ describe('it-system-usage', () => {
     cy.get('app-edit-url-dialog').within(() => {
       cy.verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
     });
-  })
+  });
 
   it('can edit retention period', () => {
     cy.getByDataCy('retention-period-accordion').click();

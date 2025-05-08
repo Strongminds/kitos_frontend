@@ -1,14 +1,15 @@
 import { Directive, ElementRef, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Router, RouterLink, UrlTree } from '@angular/router';
 
-@Directive({
-    selector: '[appCtrlClick]',
-    standalone: false
-})
+@Directive({ selector: '[appCtrlClick]' })
 export class CtrlClickDirective implements OnInit, OnDestroy {
   private captureClickListener!: (event: MouseEvent) => void;
 
-  constructor(private router: Router, @Optional() private routerLink: RouterLink, private el: ElementRef) {}
+  constructor(
+    private router: Router,
+    @Optional() private routerLink: RouterLink,
+    private el: ElementRef,
+  ) {}
 
   ngOnInit(): void {
     this.captureClickListener = this.onCaptureClick.bind(this);

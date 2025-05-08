@@ -45,7 +45,7 @@ export function filterByValidCache<T>(cached$: Observable<Cached<T>>) {
   return (source$: Observable<unknown>) =>
     source$.pipe(
       concatLatestFrom(() => cached$),
-      filter(([, cache]) => !hasValidCache(cache?.cacheTime))
+      filter(([, cache]) => !hasValidCache(cache?.cacheTime)),
     );
 }
 

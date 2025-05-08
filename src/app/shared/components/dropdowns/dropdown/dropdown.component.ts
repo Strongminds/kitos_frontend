@@ -3,12 +3,27 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { combineLatest } from 'rxjs';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
+import { NgIf, AsyncPipe } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgSelectComponent, NgOptionTemplateDirective, NgFooterTemplateDirective } from '@ng-select/ng-select';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 
 @Component({
-    selector: 'app-dropdown',
-    templateUrl: 'dropdown.component.html',
-    styleUrls: ['dropdown.component.scss'],
-    standalone: false
+  selector: 'app-dropdown',
+  templateUrl: 'dropdown.component.html',
+  styleUrls: ['dropdown.component.scss'],
+  imports: [
+    NgIf,
+    FormsModule,
+    ReactiveFormsModule,
+    NgSelectComponent,
+    NgOptionTemplateDirective,
+    ParagraphComponent,
+    NgFooterTemplateDirective,
+    TextBoxInfoComponent,
+    AsyncPipe,
+  ],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
@@ -29,15 +44,15 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     // Add obselete value when both value and data are present if data does not contain current form value
     this.subscriptions.add(
       combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) =>
-        this.addObsoleteToValueIfMissingInData(value)
-      )
+        this.addObsoleteToValueIfMissingInData(value),
+      ),
     );
 
     if (!this.formName) return;
 
     // Update value subject to be used in calculating obselete values
     this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value)),
     );
 
     // Push initial values to value and data form subjects
@@ -75,7 +90,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   private doesDataContainValue(value?: any): boolean {
     if (!this.data || value === undefined || value === null) return false;
     return !this.data.some(
-      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
+      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField],
     );
   }
 }

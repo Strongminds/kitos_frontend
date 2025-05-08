@@ -17,7 +17,7 @@ export class UIConfigService {
     const blueprint = this.getUIBlueprintWithFullKeys(module);
     const moduleConfigViewModel: UIConfigNodeViewModel | undefined = this.buildUIConfigNodeViewModels(
       blueprint,
-      uiModuleCustomizations
+      uiModuleCustomizations,
     );
     return { module, moduleConfigViewModel, cacheTime: undefined };
   }
@@ -34,7 +34,7 @@ export class UIConfigService {
   private buildBasicNodeViewModel(
     node: UINodeBlueprint,
     uiNodeCustomizations: UINodeCustomization[],
-    nodeFullKey: string
+    nodeFullKey: string,
   ): UIConfigNodeViewModel {
     const nodeViewModel: UIConfigNodeViewModel = {
       text: node.text,
@@ -54,7 +54,7 @@ export class UIConfigService {
 
   private buildUIConfigNodeViewModels(
     node: UINodeBlueprint,
-    uiNodeCustomizations: UINodeCustomization[]
+    uiNodeCustomizations: UINodeCustomization[],
   ): UIConfigNodeViewModel | undefined {
     if (!node.fullKey) return undefined;
 

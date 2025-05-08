@@ -62,7 +62,7 @@ describe('it-contracts.external-references', () => {
       true,
       itContractBaseUrl,
       './it-contracts/it-contract-with-external-references.json',
-      'Valid url'
+      'Valid url',
     );
   });
 });

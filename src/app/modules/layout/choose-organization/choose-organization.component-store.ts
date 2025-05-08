@@ -25,14 +25,14 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
     (state, organizations: APIOrganizationResponseDTO[]): State => ({
       ...state,
       organizations,
-    })
+    }),
   );
 
   private updateLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   public getOrganizations = this.effect((organizationName$: Observable<string | undefined>) =>
@@ -50,10 +50,10 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
             tapResponse(
               (organizations) => this.updateOrganizations(organizations),
               (e) => console.error(e),
-              () => this.updateLoading(false)
-            )
-          )
-      )
-    )
+              () => this.updateLoading(false),
+            ),
+          ),
+      ),
+    ),
   );
 }

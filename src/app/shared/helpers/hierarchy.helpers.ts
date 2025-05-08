@@ -50,7 +50,7 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expanded
 export const mapUnitsWithSelectedUnitsToTree = (
   units: APIOrganizationUnitResponseDTO[],
   selectedUnitUuids?: string[],
-  expandedNodeUuids?: string[]
+  expandedNodeUuids?: string[],
 ) => {
   const mappedHierarchy = units.map<HierachyNodeWithParentUuid>((unit) => ({
     uuid: unit.uuid,
@@ -68,7 +68,7 @@ export const mapUnitsWithSelectedUnitsToTree = (
 
 export const mapFkOrgSnapshotUnits = (
   units: APIStsOrganizationOrgUnitDTO[],
-  parentUnit?: APIStsOrganizationOrgUnitDTO
+  parentUnit?: APIStsOrganizationOrgUnitDTO,
 ): EntityTreeNode<APIStsOrganizationOrgUnitDTO>[] => {
   return units.map<EntityTreeNode<APIStsOrganizationOrgUnitDTO>>((unit) => ({
     uuid: unit.uuid ?? '',
@@ -115,7 +115,7 @@ export function mapTreeToIdentityNamePairs(nodes: EntityTreeNode<never>[]): Iden
 
 export function removeNodeAndChildren(
   nodes: HierachyNodeWithParentUuid[],
-  rootToRemoveUuid: string
+  rootToRemoveUuid: string,
 ): HierachyNodeWithParentUuid[] {
   return nodes
     .map((node) => removeNodeAndChildrenHelper(node, rootToRemoveUuid))
@@ -124,7 +124,7 @@ export function removeNodeAndChildren(
 
 function removeNodeAndChildrenHelper(
   node: EntityTreeNode<never>,
-  rootToRemoveUuid: string
+  rootToRemoveUuid: string,
 ): EntityTreeNode<never> | undefined {
   if (node.uuid === rootToRemoveUuid) {
     return undefined;
@@ -163,7 +163,7 @@ export function findNodeByUuid(node: EntityTreeNode<never>, uuid: string): Entit
 }
 
 function mapHierarchyNode(
-  node: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO
+  node: APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
 ): HierachyNodeWithParentUuid {
   return {
     uuid: node.node.uuid,

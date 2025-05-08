@@ -1,11 +1,14 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
+import { LoadingComponent } from '../../loading/loading.component';
+import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 
 @Component({
-    selector: 'app-dialog',
-    templateUrl: 'dialog.component.html',
-    styleUrls: ['dialog.component.scss'],
-    standalone: false
+  selector: 'app-dialog',
+  templateUrl: 'dialog.component.html',
+  styleUrls: ['dialog.component.scss'],
+  imports: [CommonModule, DialogHeaderComponent, LoadingComponent],
 })
 export class DialogComponent {
   @Input() public title?: string;

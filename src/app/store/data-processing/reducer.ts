@@ -34,15 +34,15 @@ export const dataProcessingFeature = createFeature({
     dataProcessingInitialState,
     on(
       DataProcessingActions.getDataProcessing,
-      (state): DataProcessingState => ({ ...state, dataProcessing: undefined, loading: true })
+      (state): DataProcessingState => ({ ...state, dataProcessing: undefined, loading: true }),
     ),
     on(
       DataProcessingActions.getDataProcessingSuccess,
-      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing, loading: false })
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing, loading: false }),
     ),
     on(
       DataProcessingActions.getDataProcessings,
-      (state): DataProcessingState => ({ ...state, isLoadingDataProcessingsQuery: true })
+      (state): DataProcessingState => ({ ...state, isLoadingDataProcessingsQuery: true }),
     ),
     on(
       DataProcessingActions.getDataProcessingsSuccess,
@@ -50,11 +50,11 @@ export const dataProcessingFeature = createFeature({
         ...dataProcessingAdapter.setAll(dataProcessings, state),
         total,
         isLoadingDataProcessingsQuery: false,
-      })
+      }),
     ),
     on(
       DataProcessingActions.getDataProcessingsError,
-      (state): DataProcessingState => ({ ...state, isLoadingDataProcessingsQuery: false })
+      (state): DataProcessingState => ({ ...state, isLoadingDataProcessingsQuery: false }),
     ),
     on(
       DataProcessingActions.updateGridState,
@@ -62,16 +62,16 @@ export const dataProcessingFeature = createFeature({
         ...state,
         gridState,
         previousGridState: state.gridState,
-      })
+      }),
     ),
     on(DataProcessingActions.deleteDataProcessing, (state): DataProcessingState => ({ ...state, isRemoving: true })),
     on(
       DataProcessingActions.deleteDataProcessingSuccess,
-      (state): DataProcessingState => ({ ...state, isRemoving: false })
+      (state): DataProcessingState => ({ ...state, isRemoving: false }),
     ),
     on(
       DataProcessingActions.deleteDataProcessingError,
-      (state): DataProcessingState => ({ ...state, isRemoving: false })
+      (state): DataProcessingState => ({ ...state, isRemoving: false }),
     ),
     on(
       DataProcessingActions.getDataProcessingPermissionsSuccess,
@@ -89,32 +89,32 @@ export const dataProcessingFeature = createFeature({
     ),
     on(
       DataProcessingActions.addExternalReferenceSuccess,
-      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing }),
     ),
     on(
       DataProcessingActions.editExternalReferenceSuccess,
-      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing }),
     ),
     on(
       DataProcessingActions.removeExternalReferenceSuccess,
-      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing }),
     ),
 
     on(
       DataProcessingActions.patchDataProcessingSuccess,
-      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing }),
     ),
     on(
       DataProcessingActions.bulkAddDataProcessingRoleSuccess,
-      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing }),
     ),
     on(
       DataProcessingActions.removeDataProcessingRoleSuccess,
-      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing })
+      (state, { dataProcessing }): DataProcessingState => ({ ...state, dataProcessing }),
     ),
     on(
       DataProcessingActions.updateGridColumnsSuccess,
-      (state, { gridColumns }): DataProcessingState => ({ ...state, gridColumns })
+      (state, { gridColumns }): DataProcessingState => ({ ...state, gridColumns }),
     ),
     on(DataProcessingActions.updateGridColumnsSuccess, (state, { gridColumns }): DataProcessingState => {
       return {
@@ -126,7 +126,7 @@ export const dataProcessingFeature = createFeature({
     on(DataProcessingActions.getDataProcessingOverviewRolesSuccess, (state, { roles }): DataProcessingState => {
       const roleColumns =
         roles?.flatMap((role) =>
-          roleDtoToRoleGridColumns(role, DATA_PROCESSING_ROLES_SECTION_NAME, 'data-processing-registration')
+          roleDtoToRoleGridColumns(role, DATA_PROCESSING_ROLES_SECTION_NAME, 'data-processing-registration'),
         ) ?? [];
       return { ...state, gridRoleColumns: roleColumns, overviewRoles: newCache(roles) };
     }),
@@ -138,7 +138,7 @@ export const dataProcessingFeature = createFeature({
           ...state,
           lastSeenGridConfig: response,
         };
-      }
+      },
     ),
 
     on(
@@ -148,7 +148,7 @@ export const dataProcessingFeature = createFeature({
           ...state,
           lastSeenGridConfig: undefined,
         };
-      }
+      },
     ),
 
     on(
@@ -158,7 +158,7 @@ export const dataProcessingFeature = createFeature({
           ...state,
           lastSeenGridConfig: response,
         };
-      }
+      },
     ),
 
     on(
@@ -173,7 +173,7 @@ export const dataProcessingFeature = createFeature({
           ...state,
           overviewRoles: resetCache(),
         };
-      }
-    )
+      },
+    ),
   ),
 });

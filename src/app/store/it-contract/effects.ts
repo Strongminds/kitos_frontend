@@ -64,7 +64,7 @@ export class ITContractEffects {
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
     private gridColumnStorageService: GridColumnStorageService,
-    private gridDataCacheService: GridDataCacheService
+    private gridDataCacheService: GridDataCacheService,
   ) {}
 
   getItContract$ = createEffect(() => {
@@ -73,9 +73,9 @@ export class ITContractEffects {
       switchMap(({ contractUuid }) =>
         this.apiItContractService.getSingleItContractV2GetItContract({ contractUuid }).pipe(
           map((itContract) => ITContractActions.getITContractSuccess(itContract)),
-          catchError(() => of(ITContractActions.getITContractError()))
-        )
-      )
+          catchError(() => of(ITContractActions.getITContractError())),
+        ),
+      ),
     );
   });
 
@@ -100,9 +100,9 @@ export class ITContractEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),
-            DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),
-            ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
+            `/odata/ItContractOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments($select=RoleId,UserId,UserFullName,Email),` +
+              `DataProcessingAgreements($select=DataProcessingRegistrationId,DataProcessingRegistrationName,DataProcessingRegistrationUuid),` +
+              `ItSystemUsages($select=ItSystemUsageUuid,ItSystemUsageName,ItSystemIsDisabled)&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -113,16 +113,16 @@ export class ITContractEffects {
               const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
               return ITContractActions.getITContractsSuccess(returnData, total);
             }),
-            catchError(() => of(ITContractActions.getITContractsError()))
+            catchError(() => of(ITContractActions.getITContractsError())),
           );
-      })
+      }),
     );
   });
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.updateGridState),
-      map(({ gridState }) => contractsGridStateToAction(gridState))
+      map(({ gridState }) => contractsGridStateToAction(gridState)),
     );
   });
 
@@ -132,7 +132,7 @@ export class ITContractEffects {
       map(({ gridColumns }) => {
         this.gridColumnStorageService.setColumns(CONTRACT_COLUMNS_ID, gridColumns);
         return ITContractActions.updateGridColumnsSuccess(gridColumns);
-      })
+      }),
     );
   });
 
@@ -150,9 +150,9 @@ export class ITContractEffects {
         return this.apiRoleService.getSingleGridLocalItContractRolesV2GetByOrganizationUuid({ organizationUuid }).pipe(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           map((contractRoles: any) => ITContractActions.getItContractOverviewRolesSuccess(contractRoles)),
-          catchError(() => of(ITContractActions.getItContractOverviewRolesError()))
+          catchError(() => of(ITContractActions.getItContractOverviewRolesError())),
         );
-      })
+      }),
     );
   });
 
@@ -167,9 +167,9 @@ export class ITContractEffects {
           .deleteSingleItContractInternalV2DeleteItContractWithChildren({ contractUuid })
           .pipe(
             map(() => ITContractActions.deleteITContractSuccess()),
-            catchError(() => of(ITContractActions.deleteITContractError()))
+            catchError(() => of(ITContractActions.deleteITContractError())),
           );
-      })
+      }),
     );
   });
 
@@ -183,9 +183,9 @@ export class ITContractEffects {
           .patchSingleItContractV2PatchItContract({ contractUuid, request: itContract })
           .pipe(
             map((response) => ITContractActions.patchITContractSuccess(response)),
-            catchError(() => of(ITContractActions.patchITContractError()))
+            catchError(() => of(ITContractActions.patchITContractError())),
           );
-      })
+      }),
     );
   });
 
@@ -208,9 +208,9 @@ export class ITContractEffects {
           })
           .pipe(
             map((response) => ITContractActions.addITContractSystemAgreementElementSuccess(response)),
-            catchError(() => of(ITContractActions.addITContractSystemAgreementElementError()))
+            catchError(() => of(ITContractActions.addITContractSystemAgreementElementError())),
           );
-      })
+      }),
     );
   });
 
@@ -234,9 +234,9 @@ export class ITContractEffects {
           })
           .pipe(
             map((response) => ITContractActions.removeITContractSystemAgreementElementSuccess(response)),
-            catchError(() => of(ITContractActions.removeITContractSystemAgreementElementError()))
+            catchError(() => of(ITContractActions.removeITContractSystemAgreementElementError())),
           );
-      })
+      }),
     );
   });
 
@@ -259,9 +259,9 @@ export class ITContractEffects {
           })
           .pipe(
             map((response) => ITContractActions.addITContractSystemUsageSuccess(response)),
-            catchError(() => of(ITContractActions.addITContractSystemUsageError()))
+            catchError(() => of(ITContractActions.addITContractSystemUsageError())),
           );
-      })
+      }),
     );
   });
 
@@ -282,9 +282,9 @@ export class ITContractEffects {
           .patchSingleItContractV2PatchItContract({ contractUuid, request: { systemUsageUuids: uuids } })
           .pipe(
             map((response) => ITContractActions.removeITContractSystemUsageSuccess(response)),
-            catchError(() => of(ITContractActions.removeITContractSystemUsageError()))
+            catchError(() => of(ITContractActions.removeITContractSystemUsageError())),
           );
-      })
+      }),
     );
   });
 
@@ -309,9 +309,9 @@ export class ITContractEffects {
           })
           .pipe(
             map((response) => ITContractActions.addITContractDataProcessingRegistrationSuccess(response)),
-            catchError(() => of(ITContractActions.addITContractDataProcessingRegistrationError()))
+            catchError(() => of(ITContractActions.addITContractDataProcessingRegistrationError())),
           );
-      })
+      }),
     );
   });
 
@@ -336,9 +336,9 @@ export class ITContractEffects {
           })
           .pipe(
             map((response) => ITContractActions.removeITContractDataProcessingRegistrationSuccess(response)),
-            catchError(() => of(ITContractActions.removeITContractDataProcessingRegistrationError()))
+            catchError(() => of(ITContractActions.removeITContractDataProcessingRegistrationError())),
           );
-      })
+      }),
     );
   });
 
@@ -349,9 +349,9 @@ export class ITContractEffects {
       switchMap(({ contractUuid }) => {
         return this.apiItContractService.getSingleItContractV2GetItContractPermissions({ contractUuid }).pipe(
           map((permissions) => ITContractActions.getITContractPermissionsSuccess(permissions)),
-          catchError(() => of(ITContractActions.getITContractPermissionsError()))
+          catchError(() => of(ITContractActions.getITContractPermissionsError())),
         );
-      })
+      }),
     );
   });
 
@@ -365,11 +365,11 @@ export class ITContractEffects {
           .getSingleItContractV2GetItContractCollectionPermissions({ organizationUuid })
           .pipe(
             map((collectionPermissions) =>
-              ITContractActions.getITContractCollectionPermissionsSuccess(collectionPermissions)
+              ITContractActions.getITContractCollectionPermissionsSuccess(collectionPermissions),
             ),
-            catchError(() => of(ITContractActions.getITContractCollectionPermissionsError()))
+            catchError(() => of(ITContractActions.getITContractCollectionPermissionsError())),
           );
-      })
+      }),
     );
   });
 
@@ -386,13 +386,13 @@ export class ITContractEffects {
             newExternalReference.externalReference,
             externalReferences,
             contractUuid,
-            'it-contract'
+            'it-contract',
           )
           .pipe(
             map((response) => ITContractActions.addExternalReferenceSuccess(response)),
-            catchError(() => of(ITContractActions.addExternalReferenceError()))
+            catchError(() => of(ITContractActions.addExternalReferenceError())),
           );
-      })
+      }),
     );
   });
 
@@ -408,9 +408,9 @@ export class ITContractEffects {
           .editExternalReference<APIItContractResponseDTO>(editData, externalReferences, contractUuid, 'it-contract')
           .pipe(
             map((response) => ITContractActions.editExternalReferenceSuccess(response)),
-            catchError(() => of(ITContractActions.editExternalReferenceError()))
+            catchError(() => of(ITContractActions.editExternalReferenceError())),
           );
-      })
+      }),
     );
   });
 
@@ -427,13 +427,13 @@ export class ITContractEffects {
             referenceUuid.referenceUuid,
             externalReferences,
             contractUuid,
-            'it-contract'
+            'it-contract',
           )
           .pipe(
             map((response) => ITContractActions.removeExternalReferenceSuccess(response)),
-            catchError(() => of(ITContractActions.removeExternalReferenceError()))
+            catchError(() => of(ITContractActions.removeExternalReferenceError())),
           );
-      })
+      }),
     );
   });
 
@@ -445,7 +445,7 @@ export class ITContractEffects {
         this.store.select(selectItContractUuid).pipe(filterNullish()),
       ]),
       switchMap(([{ userUuids, roleUuid }, existingRoles, contractUuid]) => {
-        var rolesToAdd = userUuids.map((userUuid) => ({ userUuid, roleUuid }));
+        const rolesToAdd = userUuids.map((userUuid) => ({ userUuid, roleUuid }));
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
@@ -455,9 +455,9 @@ export class ITContractEffects {
           })
           .pipe(
             map((usage) => ITContractActions.bulkAddItContractRoleSuccess(usage)),
-            catchError(() => of(ITContractActions.bulkAddItContractRoleError()))
+            catchError(() => of(ITContractActions.bulkAddItContractRoleError())),
           );
-      })
+      }),
     );
   });
 
@@ -472,9 +472,9 @@ export class ITContractEffects {
           })
           .pipe(
             map((usage) => ITContractActions.removeItContractRoleSuccess(usage, userUuid, roleUuid, contractUuid)),
-            catchError(() => of(ITContractActions.removeItContractRoleError()))
-          )
-      )
+            catchError(() => of(ITContractActions.removeItContractRoleError())),
+          ),
+      ),
     );
   });
 
@@ -485,9 +485,9 @@ export class ITContractEffects {
       switchMap(([{ name, openAfterCreate }, organizationUuid]) =>
         this.apiItContractService.postSingleItContractV2PostItContract({ request: { name, organizationUuid } }).pipe(
           map(({ uuid }) => ITContractActions.createItContractSuccess(uuid, openAfterCreate)),
-          catchError(() => of(ITContractActions.createItContractError()))
-        )
-      )
+          catchError(() => of(ITContractActions.createItContractError())),
+        ),
+      ),
     );
   });
 
@@ -502,9 +502,9 @@ export class ITContractEffects {
           })
           .pipe(
             map(() => ITContractActions.createAndAssociateContractSuccess(usageUuid)),
-            catchError(() => of(ITContractActions.createAndAssociateContractError()))
-          )
-      )
+            catchError(() => of(ITContractActions.createAndAssociateContractError())),
+          ),
+      ),
     );
   });
 
@@ -529,9 +529,9 @@ export class ITContractEffects {
           })
           .pipe(
             map((response) => ITContractActions.addItContractPaymentSuccess(response)),
-            catchError(() => of(ITContractActions.addItContractPaymentError()))
+            catchError(() => of(ITContractActions.addItContractPaymentError())),
           );
-      })
+      }),
     );
   });
 
@@ -552,9 +552,9 @@ export class ITContractEffects {
 
         return this.apiItContractService.patchSingleItContractV2PatchItContract({ contractUuid, request }).pipe(
           map((response) => ITContractActions.updateItContractPaymentSuccess(response)),
-          catchError(() => of(ITContractActions.updateItContractPaymentError()))
+          catchError(() => of(ITContractActions.updateItContractPaymentError())),
         );
-      })
+      }),
     );
   });
 
@@ -570,9 +570,9 @@ export class ITContractEffects {
 
         return this.apiItContractService.patchSingleItContractV2PatchItContract({ contractUuid, request }).pipe(
           map((response) => ITContractActions.removeItContractPaymentSuccess(response)),
-          catchError(() => of(ITContractActions.removeItContractPaymentError()))
+          catchError(() => of(ITContractActions.removeItContractPaymentError())),
         );
-      })
+      }),
     );
   });
 
@@ -591,9 +591,9 @@ export class ITContractEffects {
           })
           .pipe(
             map(() => ITContractActions.saveOrganizationalITContractColumnConfigurationSuccess()),
-            catchError(() => of(ITContractActions.saveOrganizationalITContractColumnConfigurationError()))
-          )
-      )
+            catchError(() => of(ITContractActions.saveOrganizationalITContractColumnConfigurationError())),
+          ),
+      ),
     );
   });
 
@@ -609,9 +609,9 @@ export class ITContractEffects {
           })
           .pipe(
             map(() => ITContractActions.deleteOrganizationalITContractColumnConfigurationSuccess()),
-            catchError(() => of(ITContractActions.deleteOrganizationalITContractColumnConfigurationError()))
-          )
-      )
+            catchError(() => of(ITContractActions.deleteOrganizationalITContractColumnConfigurationError())),
+          ),
+      ),
     );
   });
 
@@ -619,15 +619,15 @@ export class ITContractEffects {
     return this.actions$.pipe(
       ofType(ITContractActions.resetToOrganizationITContractColumnConfiguration),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
+      switchMap(([{ disablePopupNotification }, organizationUuid]) =>
         this.apiV2organizationalGridInternalService
           .getSingleOrganizationGridInternalV2GetGridConfiguration({
             organizationUuid,
             overviewType: 'ItContract',
           })
           .pipe(
-            map((response) => ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess(response)),
-            catchError(() => of(ITContractActions.resetToOrganizationITContractColumnConfigurationError()))
+            map((response) => ITContractActions.resetToOrganizationITContractColumnConfigurationSuccess(response, disablePopupNotification)),
+            catchError(() => of(ITContractActions.resetToOrganizationITContractColumnConfigurationError(disablePopupNotification)))
           )
       )
     );
@@ -642,7 +642,7 @@ export class ITContractEffects {
         if (!configColumns) return ITContractActions.resetToOrganizationITContractColumnConfigurationError();
         const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
         return ITContractActions.updateGridColumns(newColumns);
-      })
+      }),
     );
   });
 
@@ -658,9 +658,9 @@ export class ITContractEffects {
           })
           .pipe(
             map((response) => ITContractActions.initializeITContractLastSeenGridConfigurationSuccess(response)),
-            catchError(() => of(ITContractActions.initializeITContractLastSeenGridConfigurationError()))
-          )
-      )
+            catchError(() => of(ITContractActions.initializeITContractLastSeenGridConfigurationError())),
+          ),
+      ),
     );
   });
 
@@ -674,9 +674,9 @@ export class ITContractEffects {
           .getManyItContractInternalV2GetAppliedProcurementPlans({ organizationUuid })
           .pipe(
             map((response) => ITContractActions.getAppliedProcurementPlansSuccess(response)),
-            catchError(() => of(ITContractActions.getAppliedProcurementPlansError()))
+            catchError(() => of(ITContractActions.getAppliedProcurementPlansError())),
           );
-      })
+      }),
     );
   });
 }
@@ -691,7 +691,7 @@ function getPaymentRequest(payments: APIContractPaymentsDataResponseDTO | undefi
 function getPaymentChangeRequest(
   payments: APIContractPaymentsDataResponseDTO | undefined,
   paymentType: PaymentTypes,
-  paymentId: number
+  paymentId: number,
 ) {
   let internalPaymets = payments?.internal ?? [];
   let externalPaymets = payments?.external ?? [];
@@ -727,13 +727,13 @@ function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | unde
     .replace(/contains\(ItSystemUsages,(.*?)\)/, 'ItSystemUsages/any(c: contains(c/ItSystemUsageName,$1))')
     .replace(
       /contains\(DataProcessingAgreements,(.*?)\)/,
-      'DataProcessingAgreements/any(c: contains(c/DataProcessingRegistrationName,$1))'
+      'DataProcessingAgreements/any(c: contains(c/DataProcessingRegistrationName,$1))',
     )
     .replace('ItSystemUsageUuidsAsCsv', 'ItSystemUsagesSystemUuidCsv');
   roles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
-      `RoleAssignments/any(d: $1d/UserFullName$2 and d/RoleId eq ${role.id})`
+      `RoleAssignments/any(d: $1d/UserFullName$2 and d/RoleId eq ${role.id})`,
     );
   });
 
@@ -742,7 +742,7 @@ function applyQueryFixes(odataString: string, roles: APIBusinessRoleDTO[] | unde
     convertedString,
     'ObjectOwner.Name',
     'ObjectOwner',
-    lastChangedByUserSearchedProperties
+    lastChangedByUserSearchedProperties,
   );
 
   return convertedString;
@@ -767,7 +767,7 @@ const replaceProcurementFilter = (filterUrl: string) => {
     if (emptyOptionMatch?.length === 2) {
       filterUrl = decodedFilterUrl.replace(
         emptyOptionPattern,
-        `(${procurementPlanYearProperties.year} eq null and ${procurementPlanYearProperties.quarter} eq null)`
+        `(${procurementPlanYearProperties.year} eq null and ${procurementPlanYearProperties.quarter} eq null)`,
       );
     }
   } else {
@@ -776,7 +776,7 @@ const replaceProcurementFilter = (filterUrl: string) => {
 
     filterUrl = decodedFilterUrl.replace(
       pattern,
-      `(${procurementPlanYearProperties.year} eq ${year} and ${procurementPlanYearProperties.quarter} eq ${quarter})`
+      `(${procurementPlanYearProperties.year} eq ${year} and ${procurementPlanYearProperties.quarter} eq ${quarter})`,
     );
   }
 

@@ -164,33 +164,33 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
       (registration: { DataProcessingRegistrationUuid: string; DataProcessingRegistrationName: string }) => ({
         id: registration.DataProcessingRegistrationUuid,
         value: registration.DataProcessingRegistrationName,
-      })
+      }),
     ),
     DataProcessingRegistrationsConcluded: getDataProcessingRegistrationsConcluded(value),
     OutgoingRelatedItSystemUsages: value.OutgoingRelatedItSystemUsages?.map(
       (relatedItSystem: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
         id: relatedItSystem.ItSystemUsageUuid,
         value: relatedItSystem.ItSystemUsageName,
-      })
+      }),
     ),
     RelevantOrganizationUnitNamesAsCsv: value.RelevantOrganizationUnitNamesAsCsv,
     DependsOnInterfaces: value.DependsOnInterfaces?.map(
       (interfaceItem: { InterfaceUuid: string; InterfaceName: string }) => ({
         id: interfaceItem.InterfaceUuid,
         value: interfaceItem.InterfaceName,
-      })
+      }),
     ),
     IncomingRelatedItSystemUsages: value.IncomingRelatedItSystemUsages?.map(
       (relatedItSystem: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
         id: relatedItSystem.ItSystemUsageUuid,
         value: relatedItSystem.ItSystemUsageName,
-      })
+      }),
     ),
     AssociatedContracts: value.AssociatedContracts?.map(
       (contract: { ItContractUuid: string; ItContractName: string }) => ({
         id: contract.ItContractUuid,
         value: contract.ItContractName,
-      })
+      }),
     ),
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,
@@ -213,7 +213,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
 
 function getDataProcessingRegistrationsConcluded(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  value: any
+  value: any,
 ): { id: string; value: string }[] {
   return value.DataProcessingRegistrations?.map(
     (registration: {
@@ -224,6 +224,6 @@ function getDataProcessingRegistrationsConcluded(
       id: registration.DataProcessingRegistrationUuid,
       value: mapCapitalizedStringToYesNoIrrelevantEnum(registration.IsAgreementConcluded)?.name,
       name: registration.DataProcessingRegistrationName,
-    })
+    }),
   ).filter((r: { value: string }) => r.value !== undefined);
 }

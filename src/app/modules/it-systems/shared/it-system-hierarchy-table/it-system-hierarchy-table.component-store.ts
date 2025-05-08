@@ -20,7 +20,7 @@ export class ItSystemHierarchyTableComponentStore extends ComponentStore<State> 
 
   constructor(
     private store: Store,
-    @Inject(APIV2ItSystemInternalINTERNALService) private apiItSystemService: APIV2ItSystemInternalINTERNALService
+    @Inject(APIV2ItSystemInternalINTERNALService) private apiItSystemService: APIV2ItSystemInternalINTERNALService,
   ) {
     super({ loading: false });
   }
@@ -29,14 +29,14 @@ export class ItSystemHierarchyTableComponentStore extends ComponentStore<State> 
     (state, hierarchy: Array<APIItSystemHierarchyNodeResponseDTO>): State => ({
       ...state,
       hierarchy,
-    })
+    }),
   );
 
   private updateIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   public getHierarchy = this.effect((itSystemUuid$: Observable<string>) =>
@@ -48,10 +48,10 @@ export class ItSystemHierarchyTableComponentStore extends ComponentStore<State> 
           tapResponse(
             (hierarchy) => this.updateHierarchy(hierarchy),
             (e) => console.error(e),
-            () => this.updateIsLoading(false)
-          )
+            () => this.updateIsLoading(false),
+          ),
         );
-      })
-    )
+      }),
+    ),
   );
 }

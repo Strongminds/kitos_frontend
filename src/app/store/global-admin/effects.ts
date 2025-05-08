@@ -11,7 +11,7 @@ export class GlobalAdminEffects {
   constructor(
     private actions$: Actions,
     @Inject(APIV2GlobalUserInternalINTERNALService)
-    private globalUserService: APIV2GlobalUserInternalINTERNALService
+    private globalUserService: APIV2GlobalUserInternalINTERNALService,
   ) {}
 
   getGlobalAdmins$ = createEffect(() => {
@@ -21,9 +21,9 @@ export class GlobalAdminEffects {
         return this.globalUserService.getManyGlobalUserInternalV2GetGlobalAdmins().pipe(
           mapArray(toShallowUser),
           map((admins) => GlobalAdminActions.getGlobalAdminsSuccess(admins)),
-          catchError(() => of(GlobalAdminActions.getGlobalAdminsError()))
+          catchError(() => of(GlobalAdminActions.getGlobalAdminsError())),
         );
-      })
+      }),
     );
   });
 
@@ -34,9 +34,9 @@ export class GlobalAdminEffects {
         return this.globalUserService.postSingleGlobalUserInternalV2AddGlobalAdmin({ userUuid }).pipe(
           map(toShallowUser),
           map((user) => GlobalAdminActions.addGlobalAdminSuccess(user)),
-          catchError(() => of(GlobalAdminActions.addGlobalAdminError()))
+          catchError(() => of(GlobalAdminActions.addGlobalAdminError())),
         );
-      })
+      }),
     );
   });
 
@@ -46,9 +46,9 @@ export class GlobalAdminEffects {
       switchMap(({ userUuid }) => {
         return this.globalUserService.deleteSingleGlobalUserInternalV2RemoveGlobalAdmin({ userUuid }).pipe(
           map(() => GlobalAdminActions.removeGlobalAdminSuccess(userUuid)),
-          catchError(() => of(GlobalAdminActions.removeGlobalAdminError()))
+          catchError(() => of(GlobalAdminActions.removeGlobalAdminError())),
         );
-      })
+      }),
     );
   });
 }
