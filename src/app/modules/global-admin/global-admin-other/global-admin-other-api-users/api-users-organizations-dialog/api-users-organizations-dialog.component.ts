@@ -1,6 +1,6 @@
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { DialogComponent } from '../../../../../shared/components/dialogs/dialog/dialog.component';
-import { NgIf, NgFor } from '@angular/common';
+import { ScrollbarDialogComponent } from 'src/app/shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { NativeTableComponent } from '../../../../../shared/components/native-table/native-table.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
 
@@ -8,7 +8,7 @@ import { ParagraphComponent } from '../../../../../shared/components/paragraph/p
   selector: 'app-api-users-organizations-dialog',
   templateUrl: './api-users-organizations-dialog.component.html',
   styleUrl: './api-users-organizations-dialog.component.scss',
-  imports: [DialogComponent, NgIf, NativeTableComponent, NgFor, ParagraphComponent],
+  imports: [NgIf, NativeTableComponent, NgFor, ParagraphComponent, ScrollbarDialogComponent],
 })
 export class ApiUsersOrganizationsDialogComponent {
   @Input() public organizationNames: string[] = [];
