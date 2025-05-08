@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
+import { createHasValidCollectionPermissionsCacheSelector, createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { itSystemAdapter, itSystemFeature } from './reducer';
@@ -72,5 +72,5 @@ export const selectItSystemDeletetionConflicts = createSelector(
   (state) => state.permissions?.value?.deletionConflicts
 );
 export const selectHasValidItSystemCollectionPermissionsCache =
-  createHasValidPermissionsCacheSelector(selectITSystemState);
+  createHasValidCollectionPermissionsCacheSelector(selectITSystemState);
 export const selectItSystemExternalReferences = createSelector(selectItSystem, (state) => state?.externalReferences);

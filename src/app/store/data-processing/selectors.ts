@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
+import { createHasValidCollectionPermissionsCacheSelector, createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { dataProcessingAdapter, dataProcessingFeature } from './reducer';
 
@@ -90,7 +90,7 @@ export const selectDataProcessingHasCreateCollectionPermissions = createSelector
   (state) => state.collectionPermissions?.value?.create
 );
 export const selectHasValidDataProcessingCollectionPermissionsCache =
-  createHasValidPermissionsCacheSelector(selectDataProcessingState);
+  createHasValidCollectionPermissionsCacheSelector(selectDataProcessingState);
 
 export const selectDataProcessingOversightOptions = createSelector(
   selectDataProcessing,

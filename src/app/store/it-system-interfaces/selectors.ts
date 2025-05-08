@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
+import { createHasValidCollectionPermissionsCacheSelector, createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { itInterfaceAdapter, itInterfaceFeature } from './reducer';
 
 const { selectITInterfaceState } = itInterfaceFeature;
@@ -46,4 +46,4 @@ export const selectInterfaceHasCreateCollectionPermission = createSelector(
   (state) => state.collectionPermissions?.value?.create
 );
 export const selectHasValidItInterfaceCollectionPermissionsCache =
-  createHasValidPermissionsCacheSelector(selectITInterfaceState);
+  createHasValidCollectionPermissionsCacheSelector(selectITInterfaceState);

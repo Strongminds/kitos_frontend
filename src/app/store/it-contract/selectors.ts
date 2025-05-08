@@ -1,5 +1,5 @@
 import { createSelector } from '@ngrx/store';
-import { createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
+import { createHasValidCollectionPermissionsCacheSelector, createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { itContactAdapter, itContractFeature } from './reducer';
 
@@ -64,7 +64,7 @@ export const selectItContractHasCollectionCreatePermissions = createSelector(
 );
 
 export const selectHasValidItContractCollectionPermissionsCache =
-  createHasValidPermissionsCacheSelector(selectITContractState);
+  createHasValidCollectionPermissionsCacheSelector(selectITContractState);
 
 export const selectItContractPaymentModel = createSelector(selectContract, (contract) => contract?.paymentModel);
 export const selectItContractInternalPayments = createSelector(
