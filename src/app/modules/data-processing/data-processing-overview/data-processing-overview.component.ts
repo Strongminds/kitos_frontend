@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -34,13 +35,12 @@ import {
   selectDataProcessingHasCreateCollectionPermissions,
   selectDataProcessingRoleColumns,
 } from 'src/app/store/data-processing/selectors';
-import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
-import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 
 @Component({
   selector: 'app-data-processing-overview',
@@ -63,7 +63,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
   public readonly gridState$ = this.store.select(selectDataProcessingGridState);
   public readonly gridColumns$ = this.store.select(selectDataProcessingGridColumns);
   public readonly uiConfigApplications$ = this.uiConfigService.getUIConfigApplications(
-    UIModuleConfigKey.DataProcessingRegistrations,
+    UIModuleConfigKey.DataProcessingRegistrations
   );
 
   public readonly hasCreatePermission$ = this.store.select(selectDataProcessingHasCreateCollectionPermissions);
@@ -94,6 +94,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       section: DATA_PROCESSING_SECTION_NAME,
       filter: 'boolean',
       entityType: 'data-processing-registration',
+      extraData: this.activeOptions,
       style: 'chip',
       width: 340,
       hidden: true,
@@ -304,7 +305,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     private route: ActivatedRoute,
     private actions$: Actions,
     private uiConfigService: GridUIConfigService,
-    private gridColumnStorageService: GridColumnStorageService,
+    private gridColumnStorageService: GridColumnStorageService
   ) {
     super(store, 'data-processing-registration');
   }
@@ -317,13 +318,13 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         .pipe(
           ofType(DataProcessingActions.getDataProcessingOverviewRolesSuccess),
           combineLatestWith(this.store.select(selectDataProcessingRoleColumns)),
-          first(),
+          first()
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
           const localStorageColumns = this.gridColumnStorageService.getColumns(
             DATA_PROCESSING_COLUMNS_ID,
-            defaultColumnsAndRoles,
+            defaultColumnsAndRoles
           );
           this.updateLocalOrDefaultGridColumns(
             defaultColumnsAndRoles,
@@ -339,7 +340,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         .pipe(ofType(DataProcessingActions.createDataProcessingSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        }),
+        })
     );
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
@@ -348,7 +349,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       this.actions$
         .pipe(
           ofType(DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError),
-          concatLatestFrom(() => this.gridColumns$),
+          concatLatestFrom(() => this.gridColumns$)
         )
         .subscribe(([_, gridColumns]) => {
           const columnsToShow = getColumnsToShow(gridColumns, this.defaultGridColumns);
