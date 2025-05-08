@@ -19,7 +19,7 @@ import {
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { contractsGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
-import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
+import { filterByReversedBooleanObservable, filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
 import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
@@ -34,6 +34,8 @@ import { ITContractActions } from './actions';
 import {
   selectAppliedProcurementPlansCache,
   selectContractGridColumns,
+  selectHasValidItContractCollectionPermissionsCache,
+  selectHasValidItContractPermissionsCache,
   selectItContractDataProcessingRegistrations,
   selectItContractExternalReferences,
   selectItContractPayments,
@@ -343,6 +345,7 @@ export class ITContractEffects {
   getContractPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getITContractPermissions),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidItContractPermissionsCache)),
       switchMap(({ contractUuid }) => {
         return this.apiItContractService.getSingleItContractV2GetItContractPermissions({ contractUuid }).pipe(
           map((permissions) => ITContractActions.getITContractPermissionsSuccess(permissions)),
@@ -355,6 +358,7 @@ export class ITContractEffects {
   getCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractActions.getITContractCollectionPermissions),
+      filterByReversedBooleanObservable(() => this.store.select(selectHasValidItContractCollectionPermissionsCache)),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) => {
         return this.apiItContractService
