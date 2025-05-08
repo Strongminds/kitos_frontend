@@ -13,6 +13,7 @@ import { selectOrganizationUserGridState } from 'src/app/store/organization/orga
 import { selectOrganizationGridState } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants/constants';
+import { verifyClickAndOpenNewTab } from '../helpers/ctrl-click.helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
@@ -48,15 +49,11 @@ export class BaseOverviewComponent extends BaseComponent {
   protected rowIdSelect(event: CellClickEvent, router: Router, route: ActivatedRoute) {
     if (this.cellIsClickableStyleOrEmpty(event)) {
       const rowId = event.dataItem?.id;
-      if (event.originalEvent.ctrlKey || event.originalEvent.button === 1) {
-        const urlTree = router.createUrlTree([rowId], { relativeTo: route });
-        const fullUrl = router.serializeUrl(urlTree);
+      const urlTree = router.createUrlTree([rowId], { relativeTo: route });
+      const fullUrl = router.serializeUrl(urlTree);
 
-        event.originalEvent.preventDefault();
-        event.originalEvent.stopImmediatePropagation();
-        window.open(fullUrl, '_blank', 'noopener,noreferrer');
-        return;
-      }
+      const newTabResult = verifyClickAndOpenNewTab(event.originalEvent, fullUrl);
+      if (newTabResult) return;
       router.navigate([rowId], { relativeTo: route });
     }
   }

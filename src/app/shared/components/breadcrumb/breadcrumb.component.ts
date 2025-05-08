@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { verifyClickAndOpenNewTab } from '../../helpers/ctrl-click.helpers';
 import { BreadCrumbContext } from '../../models/breadcrumbs/breadcrumb-context.model';
 import { BreadCrumb } from '../../models/breadcrumbs/breadcrumb.model';
 import { ChevronRightIconComponent } from '../icons/chevron-right-icon.component';
@@ -21,11 +22,9 @@ export class BreadcrumbComponent {
     const commands = this.context.routerCommands;
     if (!commands) return;
 
-    if (event.ctrlKey || event.button === 1) {
-      const url = this.router.serializeUrl(this.router.createUrlTree(commands));
-      window.open(url, '_blank');
-      return;
-    }
+    const url = this.router.serializeUrl(this.router.createUrlTree(commands));
+    const newTabResult = verifyClickAndOpenNewTab(event, url);
+    if (newTabResult) return;
 
     this.router.navigate(commands);
   }
