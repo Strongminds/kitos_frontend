@@ -133,16 +133,20 @@ export class BaseOverviewComponent extends BaseComponent {
   }
 
   private getTargetUrl(rowId: any, router: Router, route: ActivatedRoute): string {
-    const uiPrefix = '/ui';
-    let urlTree = router.createUrlTree([rowId], { relativeTo: route });
+    const urlTree = router.createUrlTree([rowId], { relativeTo: route });
     let fullUrl = router.serializeUrl(urlTree);
+
+    return this.adjustUrlForUiPrefix(fullUrl);
+  }
+
+  private adjustUrlForUiPrefix(fullUrl: string): string {
+    const uiPrefix = '/ui';
 
     const newUrl = new URL(fullUrl, window.location.origin);
     const hostContainsUiPrefix = window.location.pathname.includes(uiPrefix);
     if (!newUrl.pathname.startsWith(uiPrefix) && hostContainsUiPrefix) {
-      fullUrl = `${uiPrefix}${newUrl.pathname}${newUrl.search}${newUrl.hash}`;
+      return `${uiPrefix}${newUrl.pathname}${newUrl.search}${newUrl.hash}`;
     }
-
     return fullUrl;
   }
 }
