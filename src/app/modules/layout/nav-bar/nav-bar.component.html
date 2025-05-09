@@ -1,4 +1,4 @@
-<mat-toolbar [ngClass]="{ 'test-environment-nav-bar-background': useTestEnvironmentNavBarBackground() }">
+<mat-toolbar>
   <a [routerLink]="AppPath.root">
     <img src="assets/img/os2kitos.svg" height="33" width="116" />
   </a>
@@ -86,3 +86,4 @@
     </span>
   </ng-container>
 </mat-toolbar>
+<app-test-environment-ribbon *appHideInProd></app-test-environment-ribbon>

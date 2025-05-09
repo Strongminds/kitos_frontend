@@ -1,4 +1,4 @@
-import { AsyncPipe, NgClass, NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -6,9 +6,8 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { PRODUCTION_ENVIRONMENT } from 'src/app/shared/constants/constants';
+import { HideInProdDirective } from 'src/app/shared/directives/hide-in-prod.directive';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { EnvironmentService } from 'src/app/shared/services/environment.service';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectUIRootConfig } from 'src/app/store/organization/selectors';
@@ -27,6 +26,7 @@ import { ChooseOrganizationComponent } from '../choose-organization/choose-organ
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NotificationsButtonComponent } from '../notifications-button/notifications-button.component';
+import { TestEnvironmentRibbonComponent } from '../test-environment-ribbon/test-environment-ribbon.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -43,7 +43,8 @@ import { NotificationsButtonComponent } from '../notifications-button/notificati
     NotificationsButtonComponent,
     LogoutIconComponent,
     AsyncPipe,
-    NgClass
+    HideInProdDirective,
+    TestEnvironmentRibbonComponent,
   ],
 })
 export class NavBarComponent extends BaseComponent implements OnInit {
@@ -57,21 +58,12 @@ export class NavBarComponent extends BaseComponent implements OnInit {
 
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
 
-  constructor(
-    private store: Store,
-    private dialog: MatDialog,
-    private router: Router,
-    private environmentService: EnvironmentService
-  ) {
+  constructor(private store: Store, private dialog: MatDialog, private router: Router) {
     super();
   }
 
   ngOnInit(): void {
     this.setupGetUIRootConfigOnNavigation();
-  }
-
-  public useTestEnvironmentNavBarBackground() {
-    return this.environmentService.current.env !== PRODUCTION_ENVIRONMENT;
   }
 
   private setupGetUIRootConfigOnNavigation() {
