@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
@@ -86,7 +86,6 @@ import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdow
   imports: [
     CommonModule,
     KendoGridComponent,
-    NgFor,
     ColumnComponent,
     HeaderTemplateDirective,
     ParagraphComponent,
@@ -112,7 +111,6 @@ import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdow
     NoRecordsTemplateDirective,
     ExcelComponent,
     ToolbarTemplateDirective,
-    AsyncPipe,
     KENDO_EXCELEXPORT,
   ],
 })
@@ -161,7 +159,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     private store: Store,
     private localStorage: LocalStorageService,
     private gridUIConfigService: GridUIConfigService,
-    private readonly gridExportService: GridExportService,
+    private readonly gridExportService: GridExportService
   ) {
     super();
     this.allData = this.allData.bind(this);
@@ -173,7 +171,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         if (state) {
           this.stateChange.emit(state);
         }
-      }),
+      })
     );
 
     this.subscriptions.add(
@@ -181,13 +179,13 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         if (ready) {
           this.excelExport();
         }
-      }),
+      })
     );
 
     this.subscriptions.add(
       this.data$.subscribe((data) => {
         this.data = data;
-      }),
+      })
     );
 
     this.initializeFilterSubscriptions();
@@ -198,7 +196,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       this.subscriptions.add(
         this.actions$.pipe(ofType(resetGridAction)).subscribe(() => {
           this.store.dispatch(getApplyFilterAction(this.entityType)({ filter: undefined, sort: undefined }));
-        }),
+        })
       );
     }
 
@@ -210,7 +208,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         const columnToBeSorted = columns?.find((column) => column?.field === sort[0]?.field);
         if (!columnToBeSorted || columnToBeSorted.sortable === false) return;
         this.onSortChange(sort);
-      }),
+      })
     );
   }
 
@@ -251,7 +249,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       const changedColumnEvent = event[0];
       const columnIndex = columnsCopy.findIndex(
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        (column) => column.field === (changedColumnEvent.column as any).field,
+        (column) => column.field === (changedColumnEvent.column as any).field
       );
       if (columnIndex === -1) return;
 
@@ -321,7 +319,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       .pipe(
         filterNullish(),
         concatLatestFrom(() => this.getFilteredExportColumns$()),
-        first(),
+        first()
       )
       .subscribe(([data, exportColumns]) => {
         const processedData = process(data.data, { skip: 0, take: data.data.length });
@@ -346,9 +344,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         return columnsToExport.filter(
           (column) =>
             !this.isExcelOnlyColumn(column) ||
-            roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, '')),
+            roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
         );
-      }),
+      })
     );
   }
 
@@ -386,7 +384,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.actions$.pipe(ofType(getSaveFilterAction(this.entityType))).subscribe(({ localStoreKey }) => {
         this.saveFilter(localStoreKey);
-      }),
+      })
     );
 
     this.subscriptions.add(
@@ -397,12 +395,12 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
           sort: state.sort,
         };
         this.onStateChange(newState);
-      }),
+      })
     );
   }
 
   private mapCompositeFilterStringDatesToDateObjects(
-    filter: CompositeFilterDescriptor | undefined,
+    filter: CompositeFilterDescriptor | undefined
   ): CompositeFilterDescriptor | undefined {
     if (!filter) return undefined;
     return {
