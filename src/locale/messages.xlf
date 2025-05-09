@@ -2979,10 +2979,10 @@
         <source>Eksporter</source>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </source>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </source>
       </trans-unit>
       <trans-unit id="7150593562313015326" datatype="html">
         <source>
@@ -3179,7 +3179,7 @@
         <source>Tilføj advis</source>
       </trans-unit>
       <trans-unit id="7226881883300543573" datatype="html">
-        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name )"/>?</source>
+        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name, )"/>?</source>
       </trans-unit>
       <trans-unit id="1987610800064579199" datatype="html">
         <source>Fejl: kan ikke deaktivere en advis uden uuid.</source>
@@ -3989,7 +3989,7 @@
         <source>Afvis ændringer </source>
       </trans-unit>
       <trans-unit id="6021905614502626006" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</source>
       </trans-unit>
       <trans-unit id="6162528529889600567" datatype="html">
         <source>Ingen ændringer registreret </source>
@@ -4275,9 +4275,6 @@
       </trans-unit>
       <trans-unit id="2311412587966355874" datatype="html">
         <source>Nøgle</source>
-      </trans-unit>
-      <trans-unit id="3879129476245182465" datatype="html">
-        <source> Hjælpetekster </source>
       </trans-unit>
       <trans-unit id="2075864540086018716" datatype="html">
         <source>Opret hjælpetekst</source>
@@ -4598,7 +4595,7 @@
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter</source>
       </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
-        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
+        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </source>
       </trans-unit>
       <trans-unit id="8145441157302108078" datatype="html">
         <source>System UUID</source>
@@ -4622,10 +4619,10 @@
         <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </source>
       </trans-unit>
       <trans-unit id="844753732077135788" datatype="html">
-        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem &lt;"/> Gem </source>
+        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </source>
       </trans-unit>
       <trans-unit id="7970981235010102529" datatype="html">
-        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </source>
+        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </source>
       </trans-unit>
       <trans-unit id="1162347843657363489" datatype="html">
         <source>Er du sikker på, at du vil slette systemet?</source>
@@ -4887,9 +4884,6 @@
       </trans-unit>
       <trans-unit id="6000192550087006178" datatype="html">
         <source>databehandling</source>
-      </trans-unit>
-      <trans-unit id="48406484342345837" datatype="html">
-        <source>&lt;a href=&quot;<x id="PH" equiv-text="this.getEntityLink()"/>&quot;&gt;Gå til <x id="PH_1" equiv-text="this.getEntityName()"/>&lt;/a&gt;</source>
       </trans-unit>
       <trans-unit id="8979685620310883836" datatype="html">
         <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
@@ -5307,6 +5301,9 @@
       </trans-unit>
       <trans-unit id="7788193785121346142" datatype="html">
         <source> Anuller </source>
+      </trans-unit>
+      <trans-unit id="1611684173879100499" datatype="html">
+        <source>Gå til</source>
       </trans-unit>
     </body>
   </file>
