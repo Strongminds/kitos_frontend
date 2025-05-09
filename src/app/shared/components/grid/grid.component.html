@@ -22,15 +22,6 @@
   style="width: 100%"
   *ngIf="columns$ | async as columns"
 >
-  <!-- [minResizableWidth]="
-          columnConfig.minResizableWidth !== undefined
-            ? columnConfig.minResizableWidth
-            : columnConfig.filter === 'date'
-              ? defaultMinimumDateColumnWidth
-              : columnConfig.style === 'primary'
-                ? defaultPrimaryColumnMinimumWidth
-                : defaultMinimumColumnWidth
-        " -->
   <ng-container *ngFor="let columnConfig of columns">
     <ng-container *ngIf="uiConfigApplications$ === null || (uiConfigApplications$ | async) as uiConfigApplications">
       <kendo-grid-column
@@ -47,6 +38,15 @@
             : defaultColumnWidth
         "
         [sticky]="columnConfig.isSticky ?? false"
+        [minResizableWidth]="
+          columnConfig.minResizableWidth !== undefined
+            ? columnConfig.minResizableWidth
+            : columnConfig.filter === 'date'
+            ? defaultMinimumDateColumnWidth
+            : columnConfig.style === 'primary'
+            ? defaultPrimaryColumnMinimumWidth
+            : defaultMinimumColumnWidth
+        "
         [headerClass]="{ 'mygrid-header-cell': true, 'not-sortable': columnConfig.sortable === false }"
       >
         <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">

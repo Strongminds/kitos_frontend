@@ -1,4 +1,4 @@
-import { AsyncPipe, CommonModule, NgFor } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Actions, ofType } from '@ngrx/effects';
@@ -86,7 +86,6 @@ import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdow
   imports: [
     CommonModule,
     KendoGridComponent,
-    NgFor,
     ColumnComponent,
     HeaderTemplateDirective,
     ParagraphComponent,
@@ -112,7 +111,6 @@ import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdow
     NoRecordsTemplateDirective,
     ExcelComponent,
     ToolbarTemplateDirective,
-    AsyncPipe,
     KENDO_EXCELEXPORT,
   ],
 })
