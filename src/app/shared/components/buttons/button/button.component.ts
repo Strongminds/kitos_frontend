@@ -24,6 +24,7 @@ export class ButtonComponent {
   @Input() public loading: boolean | null = false;
   @Input() public type: 'button' | 'submit' = 'button';
   @Input() public tooltip?: string | null;
+  @Input() public tooltipMatchContentWidth: boolean = false;
   @Input() public alignStart = false;
   @Input() public backgroundWhite = false;
   @Input() public iconType?: IconType;
