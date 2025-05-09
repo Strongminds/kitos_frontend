@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { ActivatedRoute, Router, UrlTree } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first } from 'rxjs';
@@ -50,21 +50,12 @@ export class BaseOverviewComponent extends BaseComponent {
     if (this.cellIsClickableStyleOrEmpty(event)) {
       const rowId = event.dataItem?.id;
 
-      const uiPrefix = '/ui';
-      let urlTree: UrlTree;
-      if (window.location.pathname.includes(uiPrefix)) {
-        urlTree = router.createUrlTree([uiPrefix, rowId], { relativeTo: route });
-      } else {
-        urlTree = router.createUrlTree([rowId], { relativeTo: route });
-      }
-      const fullUrl = router.serializeUrl(urlTree);
-
+      const fullUrl = this.getTargetUrl(rowId, router, route);
       const newTabResult = verifyClickAndOpenNewTab(event.originalEvent, fullUrl);
       if (newTabResult) return;
       router.navigate([rowId], { relativeTo: route });
     }
   }
-
   protected cellIsClickableStyle(event: CellClickEvent) {
     const column = event.column;
     const columnFieldName = column.field;
@@ -139,5 +130,19 @@ export class BaseOverviewComponent extends BaseComponent {
     }
 
     return value;
+  }
+
+  private getTargetUrl(rowId: any, router: Router, route: ActivatedRoute): string {
+    const uiPrefix = '/ui';
+    let urlTree = router.createUrlTree([rowId], { relativeTo: route });
+    let fullUrl = router.serializeUrl(urlTree);
+
+    const newUrl = new URL(fullUrl, window.location.origin);
+    const hostContainsUiPrefix = window.location.pathname.includes(uiPrefix);
+    if (!newUrl.pathname.startsWith(uiPrefix) && hostContainsUiPrefix) {
+      fullUrl = `${uiPrefix}${newUrl.pathname}${newUrl.search}${newUrl.hash}`;
+    }
+
+    return fullUrl;
   }
 }
