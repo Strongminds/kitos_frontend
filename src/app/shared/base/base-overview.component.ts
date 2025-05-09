@@ -13,6 +13,7 @@ import { selectOrganizationUserGridState } from 'src/app/store/organization/orga
 import { selectOrganizationGridState } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants/constants';
+import { verifyClickAndOpenNewTab } from '../helpers/navigation/ctrl-click.helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
@@ -26,7 +27,7 @@ export class BaseOverviewComponent extends BaseComponent {
 
   constructor(
     protected store: Store,
-    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes,
+    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
   ) {
     super();
     this.store.dispatch(UserActions.getUserGridPermissions());
@@ -48,6 +49,11 @@ export class BaseOverviewComponent extends BaseComponent {
   protected rowIdSelect(event: CellClickEvent, router: Router, route: ActivatedRoute) {
     if (this.cellIsClickableStyleOrEmpty(event)) {
       const rowId = event.dataItem?.id;
+      const urlTree = router.createUrlTree([rowId], { relativeTo: route });
+      const fullUrl = router.serializeUrl(urlTree);
+
+      const newTabResult = verifyClickAndOpenNewTab(event.originalEvent, fullUrl);
+      if (newTabResult) return;
       router.navigate([rowId], { relativeTo: route });
     }
   }
@@ -64,7 +70,7 @@ export class BaseOverviewComponent extends BaseComponent {
       .pipe(first())
       .subscribe((gridState) => {
         this.store.dispatch(
-          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType),
+          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType)
         );
       });
   };

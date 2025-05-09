@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { openUrlInNewTab } from 'src/app/shared/helpers/navigation/navigation.helpers';
 import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/public-messages/actions';
@@ -41,11 +42,11 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
 
   public readonly standardPublicMessages$ = this.frontpageComponentStore.publicMessages$.pipe(
     filterNullish(),
-    map((messages) => messages.filter((message) => !message.isMain)),
+    map((messages) => messages.filter((message) => !message.isMain))
   );
   public readonly mainPublicMessage$ = this.frontpageComponentStore.publicMessages$.pipe(
     filterNullish(),
-    map((messages) => messages.find((message) => message.isMain)),
+    map((messages) => messages.find((message) => message.isMain))
   );
   public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
@@ -59,7 +60,7 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
     private actions$: Actions,
     private router: Router,
     private route: ActivatedRoute,
-    private dialog: MatDialog,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -74,19 +75,19 @@ export class FrontpageComponent extends BaseComponent implements OnInit {
         if (returnUrl && returnUrl !== '' && returnUrl !== AppPath.root) {
           this.router.navigate([returnUrl]);
         }
-      }),
+      })
     );
     this.frontpageComponentStore.getPublicMessages();
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(GlobalAdminPublicMessageActions.editPublicMessagesSuccess)).subscribe(() => {
         this.frontpageComponentStore.getPublicMessages();
-      }),
+      })
     );
   }
 
   public goToMarketingPage(url: string): void {
-    window.open(url, '_blank');
+    openUrlInNewTab(url);
   }
 
   public openEditDialog(publicMessage: PublicMessage): void {
