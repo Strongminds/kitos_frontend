@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe, NgClass, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -43,6 +43,7 @@ import { NotificationsButtonComponent } from '../notifications-button/notificati
     NotificationsButtonComponent,
     LogoutIconComponent,
     AsyncPipe,
+    NgClass
   ],
 })
 export class NavBarComponent extends BaseComponent implements OnInit {
