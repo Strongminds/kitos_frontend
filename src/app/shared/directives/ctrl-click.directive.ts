@@ -1,6 +1,6 @@
 import { Directive, ElementRef, OnDestroy, OnInit, Optional } from '@angular/core';
 import { Router, RouterLink, UrlTree } from '@angular/router';
-import { verifyClickAndOpenNewTab } from '../helpers/ctrl-click.helpers';
+import { verifyClickAndOpenNewTab } from '../helpers/navigation/ctrl-click.helpers';
 
 @Directive({ selector: '[appCtrlClick]' })
 export class CtrlClickDirective implements OnInit, OnDestroy {
@@ -8,15 +8,18 @@ export class CtrlClickDirective implements OnInit, OnDestroy {
 
   constructor(private router: Router, @Optional() private routerLink: RouterLink, private el: ElementRef) {}
 
+  private readonly clickEventName = 'click';
+  private readonly auxClickEventName = 'auxclick';
+
   ngOnInit(): void {
     this.captureClickListener = this.onCaptureClick.bind(this);
-    this.el.nativeElement.addEventListener('click', this.captureClickListener, true);
-    this.el.nativeElement.addEventListener('auxclick', this.captureClickListener, true);
+    this.el.nativeElement.addEventListener(this.clickEventName, this.captureClickListener, true);
+    this.el.nativeElement.addEventListener(this.auxClickEventName, this.captureClickListener, true);
   }
 
   ngOnDestroy(): void {
-    this.el.nativeElement.removeEventListener('click', this.captureClickListener, true);
-    this.el.nativeElement.removeEventListener('auxclick', this.captureClickListener, true);
+    this.el.nativeElement.removeEventListener(this.clickEventName, this.captureClickListener, true);
+    this.el.nativeElement.removeEventListener(this.auxClickEventName, this.captureClickListener, true);
   }
 
   private onCaptureClick(event: MouseEvent): void {

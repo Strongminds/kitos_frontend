@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { verifyClickAndOpenNewTab } from '../../helpers/ctrl-click.helpers';
+import { verifyClickAndOpenNewTab } from '../../helpers/navigation/ctrl-click.helpers';
 import { BreadCrumbContext } from '../../models/breadcrumbs/breadcrumb-context.model';
 import { BreadCrumb } from '../../models/breadcrumbs/breadcrumb.model';
 import { ChevronRightIconComponent } from '../icons/chevron-right-icon.component';

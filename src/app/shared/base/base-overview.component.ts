@@ -13,7 +13,7 @@ import { selectOrganizationUserGridState } from 'src/app/store/organization/orga
 import { selectOrganizationGridState } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants/constants';
-import { verifyClickAndOpenNewTab } from '../helpers/ctrl-click.helpers';
+import { verifyClickAndOpenNewTab } from '../helpers/navigation/ctrl-click.helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
