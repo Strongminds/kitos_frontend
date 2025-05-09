@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlTree } from '@angular/router';
 import { Action, Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first } from 'rxjs';
@@ -49,7 +49,14 @@ export class BaseOverviewComponent extends BaseComponent {
   protected rowIdSelect(event: CellClickEvent, router: Router, route: ActivatedRoute) {
     if (this.cellIsClickableStyleOrEmpty(event)) {
       const rowId = event.dataItem?.id;
-      const urlTree = router.createUrlTree([rowId], { relativeTo: route });
+
+      const uiPrefix = '/ui';
+      let urlTree: UrlTree;
+      if (window.location.pathname.includes(uiPrefix)) {
+        urlTree = router.createUrlTree([uiPrefix, rowId], { relativeTo: route });
+      } else {
+        urlTree = router.createUrlTree([rowId], { relativeTo: route });
+      }
       const fullUrl = router.serializeUrl(urlTree);
 
       const newTabResult = verifyClickAndOpenNewTab(event.originalEvent, fullUrl);
