@@ -6,7 +6,6 @@ import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-dat
 import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { DatePickerComponent } from '../../datepicker/datepicker.component';
-import { IconDatepickerComponent } from '../../icon-datepicker/icon-datepicker.component';
 import { FilterIconComponent } from '../../icons/filter.component';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
@@ -19,13 +18,7 @@ interface DateFilterOption {
   selector: 'app-date-filter',
   templateUrl: 'date-filter.component.html',
   styleUrls: ['date-filter.component.scss'],
-  imports: [
-    DatePickerComponent,
-    DropDownListComponent,
-    ValueTemplateDirective,
-    FilterIconComponent,
-    IconDatepickerComponent,
-  ],
+  imports: [DatePickerComponent, DropDownListComponent, ValueTemplateDirective, FilterIconComponent],
 })
 export class DateFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
