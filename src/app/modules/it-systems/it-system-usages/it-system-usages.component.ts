@@ -686,6 +686,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   }
 
   public stateChange(gridState: GridState) {
+    console.log('stateChange', gridState);
     this.store.dispatch(ITSystemUsageActions.updateGridState(gridState));
   }
   override rowIdSelect(event: CellClickEvent) {
