@@ -92,7 +92,6 @@ export function usageGridStateToAction(gridState: GridState): any {
     gridState,
     UsageFields.ResponsibleOrganizationUnitName
   );
-  console.log('usageGridStateToAction', newGridState, filter);
   return ITSystemUsageActions.getITSystemUsages(newGridState, filter?.value as string | undefined);
 }
 

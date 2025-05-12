@@ -76,21 +76,18 @@ export class ITSystemUsageEffects {
       switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        console.log('Get cached');
         const cachedRange = this.gridDataCacheService.get(gridState, responsibleUnitUuid);
         if (cachedRange.data !== undefined) {
-          console.log('Cache hit');
           return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedRange.data, cachedRange.total));
         }
-
-        console.log('Cache ignored');
 
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
         const fixedOdataString = applyQueryFixes(cacheableOdataString, systemRoles);
 
-        const query = `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`;
-        console.log('Query', query);
-
+        const query =
+          `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}` +
+          `&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,` +
+          `OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`;
         return this.httpClient.get<OData>(query).pipe(
           map((data) => {
             const dataItems = compact(data.value.map(adaptITSystemUsage));
