@@ -67,16 +67,16 @@ export function initializeApplyFilterSubscription(
   actions$: Actions,
   entityType: RegistrationEntityTypes,
   columnField: string,
-  updateFilter: (filter: FilterDescriptor | undefined) => void,
+  updateFilter: (filter: FilterDescriptor | undefined) => void
 ): Subscription {
   return actions$
     .pipe(
       ofType(getApplyFilterAction(entityType)),
-      map(({ state }) => state.filter),
+      map(({ state }) => state.filter)
     )
     .subscribe((compFilter) => {
       const matchingFilter = compFilter?.filters.find(
-        (filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField,
+        (filter) => !isCompositeFilterDescriptor(filter) && filter.field === columnField
       ) as FilterDescriptor | undefined;
       updateFilter(matchingFilter);
     });
@@ -90,8 +90,9 @@ export function initializeApplyFilterSubscription(
 export function usageGridStateToAction(gridState: GridState): any {
   const { gridState: newGridState, filter } = extractAndRemoveFilter(
     gridState,
-    UsageFields.ResponsibleOrganizationUnitName,
+    UsageFields.ResponsibleOrganizationUnitName
   );
+  console.log('usageGridStateToAction', newGridState, filter);
   return ITSystemUsageActions.getITSystemUsages(newGridState, filter?.value as string | undefined);
 }
 
@@ -103,7 +104,7 @@ export function contractsGridStateToAction(gridState: GridState): any {
 
 function extractAndRemoveFilter(
   gridState: GridState,
-  targetFilterName: string,
+  targetFilterName: string
 ): { gridState: GridState; filter: FilterDescriptor | undefined } {
   if (!gridState.filter) {
     return { gridState, filter: undefined };
