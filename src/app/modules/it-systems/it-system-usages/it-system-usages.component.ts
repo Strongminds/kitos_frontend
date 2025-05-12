@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -50,12 +51,11 @@ import {
   selectITSystemUsageEnableLifeCycleStatus,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
-import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
-import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
-import { AsyncPipe } from '@angular/common';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -632,7 +632,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
-    private uiConfigService: GridUIConfigService,
+    private uiConfigService: GridUIConfigService
   ) {
     super(store, 'it-system-usage');
   }
@@ -644,7 +644,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         .pipe(
           ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
           combineLatestWith(this.store.select(selectUsageGridRoleColumns)),
-          first(),
+          first()
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
@@ -668,7 +668,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.actions$
         .pipe(
           ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
-          concatLatestFrom(() => this.gridColumns$),
+          concatLatestFrom(() => this.gridColumns$)
         )
         .subscribe(([_, gridColumnsFromState]) => {
           const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
