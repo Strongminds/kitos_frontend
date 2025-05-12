@@ -49,17 +49,14 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public didChange(option?: any): void {
-    if (option === undefined || option === null) {
-      this.applyFilter(this.removeFilter(this.column.field));
-      return;
-    }
-
     this.applyFilter(
-      this.updateFilter({
-        field: this.column.field,
-        operator: 'eq',
-        value: option.id,
-      })
+      option === undefined || option === null
+        ? this.removeFilter(this.column.field)
+        : this.updateFilter({
+            field: this.column.field,
+            operator: 'eq',
+            value: option.id,
+          })
     );
   }
 }
