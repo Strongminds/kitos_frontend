@@ -77,7 +77,7 @@ export class ITSystemUsageEffects {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
         console.log('Get cached');
-        const cachedRange = this.gridDataCacheService.get(gridState);
+        const cachedRange = this.gridDataCacheService.get(gridState, responsibleUnitUuid);
         if (cachedRange.data !== undefined) {
           console.log('Cache hit');
           return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedRange.data, cachedRange.total));
@@ -95,7 +95,7 @@ export class ITSystemUsageEffects {
           map((data) => {
             const dataItems = compact(data.value.map(adaptITSystemUsage));
             const total = data['@odata.count'];
-            this.gridDataCacheService.set(gridState, dataItems, total);
+            this.gridDataCacheService.set(gridState, dataItems, total, responsibleUnitUuid);
 
             const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
             return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
