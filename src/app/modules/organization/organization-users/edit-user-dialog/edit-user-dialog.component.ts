@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { debounceTime, of } from 'rxjs';
 import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
-import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
@@ -14,7 +14,9 @@ import {
   BulkActionResult,
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { MultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex-constants';
 import { getUserRoleSelectionDialogSections } from 'src/app/shared/helpers/bulk-action.helpers';
+import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 import { getRoleActionRequest } from 'src/app/shared/helpers/user-role.helpers';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
@@ -37,8 +39,6 @@ import { StandardVerticalContentGridComponent } from '../../../../shared/compone
 import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info/textbox-info.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
-import { ONLY_DIGITS_AND_WHITESPACE_REGEX, SPACE_CHARACTER_REGEX } from 'src/app/shared/constants/regex-constants';
-import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -69,7 +69,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   @ViewChild(MultiSelectDropdownComponent)
   public multiSelectDropdown!: MultiSelectDropdownComponent<APIUserResponseDTO.RolesEnum>;
   public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
-  
+
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
     lastName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -78,7 +78,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       Validators.email,
       requiredIfDirtyValidator(),
     ]),
-    phoneNumber: new FormControl<string | undefined>(undefined, phoneNumberLengthValidator()),
+    phoneNumber: new FormControl<string | undefined>(undefined, notDirtyAndEmptyStringValidator()),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
@@ -92,7 +92,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     private openerService: DialogOpenerService,
     componentStore: CreateUserDialogComponentStore,
     store: Store,
-    userService: UserService,
+    userService: UserService
   ) {
     super(store, componentStore, userService);
   }
@@ -118,7 +118,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
           if (!value) return;
 
           this.componentStore.getUserWithEmail(value);
-        }),
+        })
     );
 
     this.subscriptions.add(
@@ -128,7 +128,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
         } else {
           this.getEmailControl()?.setErrors(null);
         }
-      }),
+      })
     );
     const initialValues = this.getUserRoleChoices();
     this.selectedRoles = initialValues.map((role) => role.value);
@@ -145,7 +145,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     this.subscriptions.add(
       this.store.select(OrganizationUserActions.updateUserSuccess).subscribe(() => {
         this.dialogRef.close();
-      }),
+      })
     );
     const request = this.createRequest();
     this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
@@ -247,7 +247,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
   private addNonSelectableRoles(
     roles: APIUpdateUserRequestDTO.RolesEnum[],
-    shouldRightsHolderAccessBeAdded: boolean,
+    shouldRightsHolderAccessBeAdded: boolean
   ): APIUpdateUserRequestDTO.RolesEnum[] {
     roles.push(APIUpdateUserRequestDTO.RolesEnum.User);
     if (shouldRightsHolderAccessBeAdded) {
@@ -273,7 +273,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     return roles;
   }
 
-  private getPhoneNumberString(phoneNumberFromControl: string | undefined | null){
+  private getPhoneNumberString(phoneNumberFromControl: string | undefined | null) {
     return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : '';
   }
 

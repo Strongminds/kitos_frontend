@@ -19,7 +19,7 @@ import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex
 import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { UserService } from 'src/app/shared/services/user.service';
-import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/phone-number-length.validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
@@ -85,7 +85,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       Validators.email,
       this.emailMatchValidator.bind(this),
     ]),
-    phoneNumber: new FormControl<number | undefined>(undefined, [phoneNumberLengthValidator()]),
+    phoneNumber: new FormControl<number | undefined>(undefined, [notDirtyAndEmptyStringValidator()]),
     startPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     roles: new FormControl<APIUserResponseDTO.RolesEnum[] | undefined>(undefined),
     sendNotificationOnCreation: new FormControl<boolean>(false),
