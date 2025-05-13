@@ -18,7 +18,8 @@
         text="Telefonnummer"
         [formGroup]="masterDataForm"
         formName="phoneControl"
-        (valueChange)="patchMasterData({ phone: $event })"
+        [pattern]="phoneNumberRegex"
+        (valueChange)="patchMasterDataPhoneNumber($event?.toString())"
         data-cy="master-data-phone-input"
       ></app-textbox>
       <app-textbox

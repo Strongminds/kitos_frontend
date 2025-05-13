@@ -1,5 +1,6 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatest, first } from 'rxjs';
 import {
@@ -9,6 +10,8 @@ import {
   APIOrganizationMasterDataRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex-constants';
+import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -21,15 +24,14 @@ import {
   selectOrganizationMasterDataRoles,
 } from 'src/app/store/organization/selectors';
 import { selectOrganizationName, selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { OrganizationMasterDataComponentStore } from './organization-master-data.component-store';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { HelpButtonComponent } from '../../../shared/components/help-button/help-button.component';
-import { CardComponent } from '../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../shared/components/card/card.component';
+import { ConnectedDropdownComponent } from '../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 import { FormGridComponent } from '../../../shared/components/form-grid/form-grid.component';
+import { HelpButtonComponent } from '../../../shared/components/help-button/help-button.component';
 import { NumericInputComponent } from '../../../shared/components/numeric-input/numeric-input.component';
 import { TextBoxComponent } from '../../../shared/components/textbox/textbox.component';
-import { ConnectedDropdownComponent } from '../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { OrganizationMasterDataComponentStore } from './organization-master-data.component-store';
 
 @Component({
   selector: 'app-organization-master-data',
@@ -61,6 +63,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   public readonly organizationUsers$ = this.componentStore.organizationUsers$;
   public readonly organizationUsersLoading$ = this.componentStore.organizationUsersLoading$;
   public readonly organizationUserIdentityNamePairs$ = this.componentStore.organizationUserIdentityNamePairs$;
+  public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
 
   public readonly masterDataForm = new FormGroup({
     ...this.commonOrganizationControls(),
@@ -90,7 +93,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   constructor(
     private readonly store: Store,
     private readonly notificationService: NotificationService,
-    private readonly componentStore: OrganizationMasterDataComponentStore,
+    private readonly componentStore: OrganizationMasterDataComponentStore
   ) {
     super();
   }
@@ -108,7 +111,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     this.subscriptions.add(
       this.hasOrganizationCvrModifyPermission$.pipe(filterNullish()).subscribe((hasOrganizationCvrModifyPermission) => {
         if (!hasOrganizationCvrModifyPermission) this.masterDataForm.controls.cvrControl.disable();
-      }),
+      })
     );
 
     this.subscriptions.add(
@@ -119,7 +122,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           this.contactPersonForm.disable();
           this.dataProtectionAdvisorForm.disable();
         }
-      }),
+      })
     );
   }
 
@@ -132,7 +135,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           emailControl: organizationMasterData?.email,
           addressControl: organizationMasterData?.address,
         });
-      }),
+      })
     );
 
     this.subscriptions.add(
@@ -145,7 +148,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           cvrControl: dataResponsible.cvr,
           addressControl: dataResponsible.address,
         });
-      }),
+      })
     );
 
     this.setupContactPersonFields();
@@ -164,7 +167,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           });
 
           const dataResponsibleFromOrganizationUsers = organizationUserIdentityNamePairs.find(
-            (user) => user.name === dataResponsible.email,
+            (user) => user.name === dataResponsible.email
           );
 
           if (dataResponsibleFromOrganizationUsers) {
@@ -174,8 +177,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
               emailControlDropdown: dataResponsibleFromOrganizationUsers,
             });
           } else this.dataResponsibleForm.controls.emailControl.patchValue(dataResponsible.email);
-        },
-      ),
+        }
+      )
     );
   }
 
@@ -191,7 +194,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           });
 
           const contactPersonFromOrganizationUsers = organizationUserIdentityNamePairs.find(
-            (user) => user.name === contactPerson.email,
+            (user) => user.name === contactPerson.email
           );
 
           if (contactPersonFromOrganizationUsers) {
@@ -201,8 +204,8 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
               emailControlDropdown: contactPersonFromOrganizationUsers,
             });
           } else this.contactPersonForm.controls.emailControl.patchValue(contactPerson.email);
-        },
-      ),
+        }
+      )
     );
   }
 
@@ -217,7 +220,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           cvrControl: dataProtectionAdvisor.cvr,
           addressControl: dataProtectionAdvisor.address,
         });
-      }),
+      })
     );
   }
 
@@ -227,6 +230,12 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     } else {
       this.store.dispatch(OrganizationActions.patchMasterData({ request: masterData }));
     }
+  }
+
+  public patchMasterDataPhoneNumber(phoneNumberFromControl: string | undefined) {
+    if (!phoneNumberFromControl || this.masterDataForm.controls.phoneControl.invalid) return;
+    const phoneNumber = removeWhitespace(phoneNumberFromControl);
+    this.patchMasterData({ phone: phoneNumber });
   }
 
   public patchDataResponsibleCvr(cvr: string | undefined) {
@@ -240,7 +249,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
 
   public patchMasterDataRolesDataResponsible(
     useEmailFromDropdown: boolean = false,
-    cvrEvent: string | undefined = undefined,
+    cvrEvent: string | undefined = undefined
   ) {
     if (this.dataResponsibleForm.valid) {
       this.subscriptions.add(
@@ -260,9 +269,9 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           dataResponsibleDto.phone = controls.phoneControl.value ?? undefined;
 
           this.store.dispatch(
-            OrganizationActions.patchMasterDataRoles({ request: { dataResponsible: dataResponsibleDto } }),
+            OrganizationActions.patchMasterDataRoles({ request: { dataResponsible: dataResponsibleDto } })
           );
-        }),
+        })
       );
     }
   }
@@ -280,7 +289,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       this.store.dispatch(
         OrganizationActions.patchMasterDataRoles({
           request: { contactPerson },
-        }),
+        })
       );
     }
   }
@@ -309,9 +318,9 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           this.store.dispatch(
             OrganizationActions.patchMasterDataRoles({
               request: { dataProtectionAdvisor: dataProtectionAdvisorDto },
-            }),
+            })
           );
-        }),
+        })
       );
     }
   }
@@ -361,7 +370,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           if (organizationUuid) {
             this.patchMasterDataRolesDataResponsible(true);
           }
-        }),
+        })
     );
   }
 
@@ -387,7 +396,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           if (organizationUuid) {
             this.patchMasterDataRolesContactPerson(true);
           }
-        }),
+        })
     );
   }
 
