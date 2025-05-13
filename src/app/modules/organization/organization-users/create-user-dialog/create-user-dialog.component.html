@@ -39,7 +39,6 @@
       <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
         <app-textbox
           text="Telefonnummer"
-          type="tel"
           [pattern]="phoneNumberRegex"
           i18n-text
           [formGroup]="createForm"
