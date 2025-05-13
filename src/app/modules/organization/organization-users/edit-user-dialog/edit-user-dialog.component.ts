@@ -38,6 +38,7 @@ import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
 import { ONLY_DIGITS_AND_WHITESPACE_REGEX, SPACE_CHARACTER_REGEX } from 'src/app/shared/constants/regex-constants';
+import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -273,7 +274,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   private getPhoneNumberString(phoneNumberFromControl: string | undefined | null){
-    return phoneNumberFromControl ? String(phoneNumberFromControl).replace(SPACE_CHARACTER_REGEX, "") : '';
+    return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : '';
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {
