@@ -352,7 +352,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
           return result.sort((a, b) => (a.order_id ?? 0) - (b.order_id ?? 0));
         }
 
-        return result;
+        return this.moveEmailColumnsToRespectiveRoleColumns(result, roleColumnsInExport);
       })
     );
   }
@@ -473,5 +473,27 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       default:
         return undefined;
     }
+  }
+
+  // Reorder role.email columns to appear after their respective role columns
+  private moveEmailColumnsToRespectiveRoleColumns(columns: GridColumn[], roleColumns: GridColumn[]): GridColumn[] {
+    const roleEmailColumns = columns.filter((column) => column.field.includes(this.EmailColumnField));
+    const reorderedColumns: GridColumn[] = [];
+
+    columns.forEach((column) => {
+      if (column.field.includes(this.EmailColumnField)) return; // Skip email columns
+
+      reorderedColumns.push(column);
+
+      // If the column is a role column, find its corresponding email column, then add it to the columns
+      if (roleColumns.includes(column)) {
+        const matchingEmailColumn = roleEmailColumns.find((emailColumn) => emailColumn.field.startsWith(column.field));
+        if (matchingEmailColumn) {
+          reorderedColumns.push(matchingEmailColumn);
+        }
+      }
+    });
+
+    return reorderedColumns;
   }
 }
