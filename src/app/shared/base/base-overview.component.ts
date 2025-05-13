@@ -86,6 +86,13 @@ export class BaseOverviewComponent extends BaseComponent {
     }
   }
 
+  protected mapColumnOrder(defaultColumnsAndRoles: GridColumn[]) {
+    return defaultColumnsAndRoles.map((column, index) => ({
+      ...column,
+      order_id: index + 0,
+    }));
+  }
+
   private getStateSelector() {
     switch (this.entityType) {
       case 'it-system-usage':
