@@ -1,23 +1,23 @@
+import { NgIf } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { BaseCellComponent } from './base-cell.component';
-import { NgIf } from '@angular/common';
-import { TextCellComponent } from './cell-types/text-cell/text-cell.component';
-import { StatusCellComponent } from './cell-types/status-cell/status-cell.component';
-import { ThousandSeperatorCellComponent } from './cell-types/thousand-seperator-cell/thousand-seperator-cell.component';
-import { DefaultWrapCellComponent } from './cell-types/default-wrap-cell/default-wrap-cell.component';
-import { PrimaryCellComponent } from './cell-types/primary-cell/primary-cell.component';
+import { ActionButtonsCellComponent } from './cell-types/action-buttons-cell/action-buttons-cell.component';
+import { AuditCellComponent } from './cell-types/audit-cell/audit-cell.component';
 import { BooleanCellComponent } from './cell-types/boolean-cell/boolean-cell.component';
+import { CheckboxCellComponent } from './cell-types/checkbox-cell/checkbox-cell.component';
 import { DateCellComponent } from './cell-types/date-cell/date-cell.component';
+import { DefaultWrapCellComponent } from './cell-types/default-wrap-cell/default-wrap-cell.component';
 import { EnumCellComponent } from './cell-types/enum-cell/enum-cell.component';
 import { LinkCellComponent } from './cell-types/link-cell/link-cell.component';
-import { TitleLinkCellComponent } from './cell-types/title-link-cell/title-link-cell.component';
-import { PageLinkCellComponent } from './cell-types/page-link-cell/page-link-cell.component';
-import { CheckboxCellComponent } from './cell-types/checkbox-cell/checkbox-cell.component';
-import { UsagesCellComponent } from './cell-types/usages-cell/usages-cell.component';
 import { PageLinkArrayCellComponent } from './cell-types/page-link-array-cell/page-link-array-cell.component';
+import { PageLinkCellComponent } from './cell-types/page-link-cell/page-link-cell.component';
+import { PrimaryCellComponent } from './cell-types/primary-cell/primary-cell.component';
+import { StatusCellComponent } from './cell-types/status-cell/status-cell.component';
+import { TextCellComponent } from './cell-types/text-cell/text-cell.component';
+import { ThousandSeperatorCellComponent } from './cell-types/thousand-seperator-cell/thousand-seperator-cell.component';
+import { TitleLinkCellComponent } from './cell-types/title-link-cell/title-link-cell.component';
+import { UsagesCellComponent } from './cell-types/usages-cell/usages-cell.component';
 import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-name-cell.component';
-import { AuditCellComponent } from './cell-types/audit-cell/audit-cell.component';
-import { ActionButtonsCellComponent } from './cell-types/action-buttons-cell/action-buttons-cell.component';
 
 @Component({
   selector: 'app-grid-cell',

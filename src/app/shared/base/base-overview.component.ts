@@ -13,6 +13,7 @@ import { selectOrganizationUserGridState } from 'src/app/store/organization/orga
 import { selectOrganizationGridState } from 'src/app/store/organization/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { DEFAULT_UNCLICKABLE_GRID_COLUMN_STYLES } from '../constants/constants';
+import { verifyClickAndOpenNewTab } from '../helpers/navigation/ctrl-click.helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 import { BaseComponent } from './base.component';
@@ -26,7 +27,7 @@ export class BaseOverviewComponent extends BaseComponent {
 
   constructor(
     protected store: Store,
-    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes,
+    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
   ) {
     super();
     this.store.dispatch(UserActions.getUserGridPermissions());
@@ -48,10 +49,13 @@ export class BaseOverviewComponent extends BaseComponent {
   protected rowIdSelect(event: CellClickEvent, router: Router, route: ActivatedRoute) {
     if (this.cellIsClickableStyleOrEmpty(event)) {
       const rowId = event.dataItem?.id;
+
+      const fullUrl = this.getTargetUrl(rowId, router, route);
+      const newTabResult = verifyClickAndOpenNewTab(event.originalEvent, fullUrl);
+      if (newTabResult) return;
       router.navigate([rowId], { relativeTo: route });
     }
   }
-
   protected cellIsClickableStyle(event: CellClickEvent) {
     const column = event.column;
     const columnFieldName = column.field;
@@ -64,7 +68,7 @@ export class BaseOverviewComponent extends BaseComponent {
       .pipe(first())
       .subscribe((gridState) => {
         this.store.dispatch(
-          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType),
+          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType)
         );
       });
   };
@@ -126,5 +130,23 @@ export class BaseOverviewComponent extends BaseComponent {
     }
 
     return value;
+  }
+
+  private getTargetUrl(rowId: any, router: Router, route: ActivatedRoute): string {
+    const urlTree = router.createUrlTree([rowId], { relativeTo: route });
+    let fullUrl = router.serializeUrl(urlTree);
+
+    return this.adjustUrlForUiPrefix(fullUrl);
+  }
+
+  private adjustUrlForUiPrefix(fullUrl: string): string {
+    const uiPrefix = '/ui';
+
+    const newUrl = new URL(fullUrl, window.location.origin);
+    const hostContainsUiPrefix = window.location.pathname.includes(uiPrefix);
+    if (!newUrl.pathname.startsWith(uiPrefix) && hostContainsUiPrefix) {
+      return `${uiPrefix}${newUrl.pathname}${newUrl.search}${newUrl.hash}`;
+    }
+    return fullUrl;
   }
 }

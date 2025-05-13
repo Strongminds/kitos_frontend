@@ -1,5 +1,7 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { MatToolbar } from '@angular/material/toolbar';
 import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
@@ -15,16 +17,14 @@ import {
   selectUser,
   selectUserIsCurrentlyLocalAdmin,
 } from 'src/app/store/user-store/selectors';
+import { LogoutIconComponent } from '../../../shared/components/icons/logout-icon.component';
+import { TableIconComponent } from '../../../shared/components/icons/table-icon.component';
+import { SpacerComponent } from '../../../shared/components/spacer/spacer.component';
 import { AppPath } from '../../../shared/enums/app-path';
 import { ChooseOrganizationComponent } from '../choose-organization/choose-organization.component';
-import { MatToolbar } from '@angular/material/toolbar';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { SpacerComponent } from '../../../shared/components/spacer/spacer.component';
-import { MenuComponent } from '../menu/menu.component';
 import { MenuItemComponent } from '../menu-item/menu-item.component';
-import { TableIconComponent } from '../../../shared/components/icons/table-icon.component';
+import { MenuComponent } from '../menu/menu.component';
 import { NotificationsButtonComponent } from '../notifications-button/notifications-button.component';
-import { LogoutIconComponent } from '../../../shared/components/icons/logout-icon.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -54,11 +54,7 @@ export class NavBarComponent extends BaseComponent implements OnInit {
 
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
 
-  constructor(
-    private store: Store,
-    private dialog: MatDialog,
-    private router: Router,
-  ) {
+  constructor(private store: Store, private dialog: MatDialog, private router: Router) {
     super();
   }
 
@@ -71,9 +67,9 @@ export class NavBarComponent extends BaseComponent implements OnInit {
       combineLatest([this.user$, this.router.events])
         .pipe(
           filter(([user, event]) => user !== undefined && event instanceof NavigationEnd),
-          tap(() => this.store.dispatch(OrganizationActions.getUIRootConfig())),
+          tap(() => this.store.dispatch(OrganizationActions.getUIRootConfig()))
         )
-        .subscribe(),
+        .subscribe()
     );
   }
 
