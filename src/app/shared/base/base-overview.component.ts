@@ -89,7 +89,7 @@ export class BaseOverviewComponent extends BaseComponent {
   protected mapColumnOrder(defaultColumnsAndRoles: GridColumn[]) {
     return defaultColumnsAndRoles.map((column, index) => ({
       ...column,
-      order_id: index + 0,
+      order_id: index,
     }));
   }
 

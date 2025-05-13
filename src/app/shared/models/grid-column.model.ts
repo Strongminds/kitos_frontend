@@ -63,5 +63,5 @@ export interface GridColumn {
   itemTooltipField?: string;
 
   // snake case to differentiate from the standard field properties
-  order_id?: number; //Automatically set
+  order_id?: number; //Automatically set, used to always sort columns in the same order
 }
