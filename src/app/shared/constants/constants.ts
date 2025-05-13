@@ -66,3 +66,5 @@ export const NON_EDITABLE_LOCAL_OPTION_TYPE_CATEGORY_HELP_TEXT = $localize`Dette
 export const OBLIGATORY_LOCAL_OPTION_HELP_TEXT = $localize`Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet`;
 
 export const SSO_LOGIN_HANDLER_PATH = '/LoginHandler.ashx';
+
+export const PRODUCTION_ENVIRONMENT = 'production';

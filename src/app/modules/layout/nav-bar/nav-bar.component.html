@@ -86,4 +86,4 @@
     </span>
   </ng-container>
 </mat-toolbar>
-<app-test-environment-ribbon *appHideInProd></app-test-environment-ribbon>
+<app-test-environment-ribbon *ngIf="useTestEnvironmentNavBarBackground()"></app-test-environment-ribbon>

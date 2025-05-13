@@ -6,7 +6,6 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { HideInProdDirective } from 'src/app/shared/directives/hide-in-prod.directive';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
@@ -27,6 +26,8 @@ import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NotificationsButtonComponent } from '../notifications-button/notifications-button.component';
 import { TestEnvironmentRibbonComponent } from '../test-environment-ribbon/test-environment-ribbon.component';
+import { EnvironmentService } from 'src/app/shared/services/environment.service';
+import { PRODUCTION_ENVIRONMENT } from 'src/app/shared/constants/constants';
 
 @Component({
   selector: 'app-nav-bar',
@@ -43,7 +44,6 @@ import { TestEnvironmentRibbonComponent } from '../test-environment-ribbon/test-
     NotificationsButtonComponent,
     LogoutIconComponent,
     AsyncPipe,
-    HideInProdDirective,
     TestEnvironmentRibbonComponent,
   ],
 })
@@ -58,12 +58,16 @@ export class NavBarComponent extends BaseComponent implements OnInit {
 
   public readonly alertsCount$ = this.store.select(selectAllAlertCount);
 
-  constructor(private store: Store, private dialog: MatDialog, private router: Router) {
+  constructor(private store: Store, private dialog: MatDialog, private router: Router, private environmentService: EnvironmentService) {
     super();
   }
 
   ngOnInit(): void {
     this.setupGetUIRootConfigOnNavigation();
+  }
+
+  public useTestEnvironmentNavBarBackground() {
+    return this.environmentService.current.env !== PRODUCTION_ENVIRONMENT;
   }
 
   private setupGetUIRootConfigOnNavigation() {
