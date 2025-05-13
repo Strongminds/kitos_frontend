@@ -233,9 +233,10 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   }
 
   public patchMasterDataPhoneNumber(phoneNumberFromControl: string | undefined) {
-    if (!phoneNumberFromControl || this.masterDataForm.controls.phoneControl.invalid) return;
-    const phoneNumber = removeWhitespace(phoneNumberFromControl);
-    this.patchMasterData({ phone: phoneNumber });
+    const phoneNumber = this.getPhoneNumberWithoutWhitespace(this.masterDataForm.controls.phoneControl);
+    if (phoneNumber){
+      this.patchMasterData({ phone: phoneNumber });
+    }
   }
 
   public patchDataResponsibleCvr(cvr: string | undefined) {
@@ -245,6 +246,12 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
   private getValidCvrUpdate(newCvr: string | undefined, formControl: FormControl): string | undefined {
     if (newCvr !== undefined) return newCvr;
     return formControl.value ?? undefined;
+  }
+
+  private getPhoneNumberWithoutWhitespace(phoneControl: FormControl): string | undefined {
+    const phoneNumberFromControl = phoneControl.value;
+    if (phoneControl.invalid || !phoneNumberFromControl) return undefined;
+    return removeWhitespace(phoneNumberFromControl);
   }
 
   public patchMasterDataRolesDataResponsible(
@@ -266,7 +273,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           dataResponsibleDto.cvr = newCvr;
           dataResponsibleDto.email = email ?? undefined;
           dataResponsibleDto.name = controls.nameControl.value ?? undefined;
-          dataResponsibleDto.phone = controls.phoneControl.value ?? undefined;
+          dataResponsibleDto.phone = this.getPhoneNumberWithoutWhitespace(controls.phoneControl);
 
           this.store.dispatch(
             OrganizationActions.patchMasterDataRoles({ request: { dataResponsible: dataResponsibleDto } })
@@ -284,7 +291,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
       contactPerson.lastName = controls.lastNameControl.value ?? undefined;
       contactPerson.email = email ?? undefined;
       contactPerson.name = controls.nameControl.value ?? undefined;
-      contactPerson.phoneNumber = controls.phoneControl.value ?? undefined;
+      contactPerson.phoneNumber = this.getPhoneNumberWithoutWhitespace(controls.phoneControl);
 
       this.store.dispatch(
         OrganizationActions.patchMasterDataRoles({
@@ -313,7 +320,7 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
           dataProtectionAdvisorDto.cvr = newCvr;
           dataProtectionAdvisorDto.email = controls.emailControl.value ?? undefined;
           dataProtectionAdvisorDto.name = controls.nameControl.value ?? undefined;
-          dataProtectionAdvisorDto.phone = controls.phoneControl.value ?? undefined;
+          dataProtectionAdvisorDto.phone = this.getPhoneNumberWithoutWhitespace(controls.phoneControl);
 
           this.store.dispatch(
             OrganizationActions.patchMasterDataRoles({
