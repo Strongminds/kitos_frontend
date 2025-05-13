@@ -37,6 +37,7 @@ import { StandardVerticalContentGridComponent } from '../../../../shared/compone
 import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info/textbox-info.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
+import { ONLY_DIGITS_AND_WHITESPACE_REGEX, SPACE_CHARACTER_REGEX } from 'src/app/shared/constants/regex-constants';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -66,7 +67,8 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   @Input() public isNested!: boolean;
   @ViewChild(MultiSelectDropdownComponent)
   public multiSelectDropdown!: MultiSelectDropdownComponent<APIUserResponseDTO.RolesEnum>;
-
+  public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
+  
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
     lastName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -271,7 +273,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   private getPhoneNumberString(phoneNumberFromControl: string | undefined | null){
-    return phoneNumberFromControl ? String(phoneNumberFromControl).replace(/\s/g, "") : '';
+    return phoneNumberFromControl ? String(phoneNumberFromControl).replace(SPACE_CHARACTER_REGEX, "") : '';
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {

@@ -38,6 +38,7 @@ import { VerticalContentGridSectionMarginLeftComponent } from '../../../../share
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
 import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { ONLY_DIGITS_AND_WHITESPACE_REGEX, SPACE_CHARACTER_REGEX } from 'src/app/shared/constants/regex-constants';
 
 @Component({
   selector: 'app-create-user-dialog',
@@ -67,6 +68,7 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
 export class CreateUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   public readonly noExistingUser$ = this.componentStore.noUserInOtherOrgs$;
   public readonly existingUserUuid$ = this.componentStore.existingUserUuid$;
+  public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
 
   public readonly isLoadingCombined$ = combineLatest([
     this.isLoadingAlreadyExists$,
@@ -207,7 +209,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
     }
 
     const phoneNumberFromControl = this.createForm.controls.phoneNumber.value;
-    const phoneNumber = phoneNumberFromControl ? String(phoneNumberFromControl).replace(/\s/g, "") : '';
+    const phoneNumber = phoneNumberFromControl ? String(phoneNumberFromControl).replace(SPACE_CHARACTER_REGEX, "") : '';
     const startPreference = this.createForm.controls.startPreference.value;
     const sendNotificationOnCreation = this.createForm.controls.sendNotificationOnCreation.value;
     const apiUser = this.createForm.controls.apiUser.value;

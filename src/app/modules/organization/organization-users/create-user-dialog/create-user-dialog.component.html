@@ -40,7 +40,7 @@
         <app-textbox
           text="Telefonnummer"
           type="tel"
-          pattern="^\+?[\s0-9]*$"
+          [pattern]="phoneNumberRegex"
           i18n-text
           [formGroup]="createForm"
           formName="phoneNumber"
