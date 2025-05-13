@@ -61,4 +61,7 @@ export interface GridColumn {
   linkArraySeparator?: ', ' | ' - ';
   helpText?: string;
   itemTooltipField?: string;
+
+  // snake case to differentiate from the standard field properties
+  order_id?: number; //Automatically set
 }

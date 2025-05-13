@@ -116,13 +116,8 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.updateGridColumns),
       map(({ gridColumns }) => {
-        const updatedGridColumns = gridColumns.map((column, index) => ({
-          ...column,
-          order: index + 1, // Assign order starting from 1
-        }));
-
-        this.gridColumnStorageService.setColumns(USAGE_COLUMNS_ID, updatedGridColumns);
-        return ITSystemUsageActions.updateGridColumnsSuccess(updatedGridColumns);
+        this.gridColumnStorageService.setColumns(USAGE_COLUMNS_ID, gridColumns);
+        return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
       })
     );
   });
