@@ -1,15 +1,15 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Actions } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
-import { createNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
-import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
-import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
-import { Actions } from '@ngrx/effects';
-import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
-import { Store } from '@ngrx/store';
-import { selectPagedOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
 import { first } from 'rxjs';
+import { initializeApplyFilterSubscription } from 'src/app/shared/helpers/grid-filter.helpers';
+import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { createNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
+import { selectPagedOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
 import { OrgUnitSelectComponent } from '../../org-unit-select/org-unit-select.component';
+import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
 @Component({
   selector: 'app-unit-dropdown-filter',
@@ -26,11 +26,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
 
   public readonly units$ = this.store.select(selectPagedOrganizationUnits);
 
-  constructor(
-    filterService: FilterService,
-    private actions$: Actions,
-    private store: Store,
-  ) {
+  constructor(filterService: FilterService, private actions$: Actions, private store: Store) {
     super(filterService);
   }
 
@@ -38,12 +34,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
     this.updateMethod(this.getColumnFilter() ?? undefined);
 
     this.subscriptions.add(
-      initializeApplyFilterSubscription(
-        this.actions$,
-        this.entityType,
-        this.column.field,
-        this.updateMethod.bind(this),
-      ),
+      initializeApplyFilterSubscription(this.actions$, this.entityType, this.column.field, this.updateMethod.bind(this))
     );
   }
 
@@ -52,7 +43,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
       this.units$.pipe(first()).subscribe((units) => {
         const matchingUnit = units?.find((unit) => unit.uuid === filter?.value);
         this.chosenOption = matchingUnit ? createNode(matchingUnit) : undefined;
-      }),
+      })
     );
   }
 
@@ -65,7 +56,7 @@ export class UnitDropdownFilterComponent extends AppBaseFilterCellComponent impl
             field: this.column.field,
             operator: 'eq',
             value: option.id,
-          }),
+          })
     );
   }
 }
