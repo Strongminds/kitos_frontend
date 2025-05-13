@@ -211,7 +211,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       email: this.requestValue(user.Email, formValue.email),
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
-      phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
+      phoneNumber: this.requestValue(user.PhoneNumber, this.getPhoneNumberString(formValue.phoneNumber)),
       defaultUserStartPreference:
         this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ??
         APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
@@ -268,6 +268,10 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       roles.push(APIUserResponseDTO.RolesEnum.ContractModuleAdmin);
     }
     return roles;
+  }
+
+  private getPhoneNumberString(phoneNumberFromControl: string | undefined | null){
+    return phoneNumberFromControl ? String(phoneNumberFromControl).replace(/\s/g, "") : '';
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {

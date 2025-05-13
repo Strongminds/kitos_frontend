@@ -206,7 +206,8 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       return;
     }
 
-    const phoneNumber = this.createForm.controls.phoneNumber.value;
+    const phoneNumberFromControl = this.createForm.controls.phoneNumber.value;
+    const phoneNumber = phoneNumberFromControl ? String(phoneNumberFromControl).replace(/\s/g, "") : '';
     const startPreference = this.createForm.controls.startPreference.value;
     const sendNotificationOnCreation = this.createForm.controls.sendNotificationOnCreation.value;
     const apiUser = this.createForm.controls.apiUser.value;
@@ -216,7 +217,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       firstName,
       lastName,
       email,
-      phoneNumber: phoneNumber ? String(phoneNumber) : '',
+      phoneNumber: phoneNumber,
       defaultUserStartPreference: startPreference?.value ?? undefined,
       sendMail: sendNotificationOnCreation ?? false,
       hasApiAccess: apiUser ?? false,

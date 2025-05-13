@@ -37,7 +37,7 @@
         text="Telefonnummer"
         i18n-text
         type="tel"
-        pattern="^\+?[0-9]*$"
+        pattern="^\+?[\s0-9]*$"
         [formGroup]="createForm"
         formName="phoneNumber"
         [value]="createForm.value.phoneNumber ?? ''"
