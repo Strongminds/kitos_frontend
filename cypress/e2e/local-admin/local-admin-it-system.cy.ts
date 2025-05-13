@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 const regularOptionTypesSegment = 'Lokal tilpasning af udfaldsrum';
 
 describe('local-admin it system usage', () => {
@@ -62,7 +60,7 @@ describe('local-admin it system usage', () => {
     cy.wait('@put').then((interception) => {
       const nodes = interception.request.body.nodes;
       const gdprNode = nodes.find(
-        (node: { key: string; enabled: boolean }) => node.key === 'ItSystemUsages.gdpr.plannedRiskAssessmentDate',
+        (node: { key: string; enabled: boolean }) => node.key === 'ItSystemUsages.gdpr.plannedRiskAssessmentDate'
       );
       expect(gdprNode.enabled).to.equal(false);
     });

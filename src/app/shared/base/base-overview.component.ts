@@ -49,15 +49,13 @@ export class BaseOverviewComponent extends BaseComponent {
   protected rowIdSelect(event: CellClickEvent, router: Router, route: ActivatedRoute) {
     if (this.cellIsClickableStyleOrEmpty(event)) {
       const rowId = event.dataItem?.id;
-      const urlTree = router.createUrlTree([rowId], { relativeTo: route });
-      const fullUrl = router.serializeUrl(urlTree);
 
+      const fullUrl = this.getTargetUrl(rowId, router, route);
       const newTabResult = verifyClickAndOpenNewTab(event.originalEvent, fullUrl);
       if (newTabResult) return;
       router.navigate([rowId], { relativeTo: route });
     }
   }
-
   protected cellIsClickableStyle(event: CellClickEvent) {
     const column = event.column;
     const columnFieldName = column.field;
@@ -132,5 +130,23 @@ export class BaseOverviewComponent extends BaseComponent {
     }
 
     return value;
+  }
+
+  private getTargetUrl(rowId: any, router: Router, route: ActivatedRoute): string {
+    const urlTree = router.createUrlTree([rowId], { relativeTo: route });
+    let fullUrl = router.serializeUrl(urlTree);
+
+    return this.adjustUrlForUiPrefix(fullUrl);
+  }
+
+  private adjustUrlForUiPrefix(fullUrl: string): string {
+    const uiPrefix = '/ui';
+
+    const newUrl = new URL(fullUrl, window.location.origin);
+    const hostContainsUiPrefix = window.location.pathname.includes(uiPrefix);
+    if (!newUrl.pathname.startsWith(uiPrefix) && hostContainsUiPrefix) {
+      return `${uiPrefix}${newUrl.pathname}${newUrl.search}${newUrl.hash}`;
+    }
+    return fullUrl;
   }
 }
