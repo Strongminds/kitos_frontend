@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { debounceTime, of } from 'rxjs';
 import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
-import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/not-dirty-and-empty-string-validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
