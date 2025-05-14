@@ -76,7 +76,7 @@ export class ITSystemUsageEffects {
       switchMap(([{ gridState, responsibleUnitUuid }, organizationUuid, systemRoles, previousGridState]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
-        const cachedRange = this.gridDataCacheService.get(gridState);
+        const cachedRange = this.gridDataCacheService.get(gridState, responsibleUnitUuid);
         if (cachedRange.data !== undefined) {
           return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedRange.data, cachedRange.total));
         }
@@ -84,21 +84,21 @@ export class ITSystemUsageEffects {
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
         const fixedOdataString = applyQueryFixes(cacheableOdataString, systemRoles);
 
-        return this.httpClient
-          .get<OData>(
-            `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`
-          )
-          .pipe(
-            map((data) => {
-              const dataItems = compact(data.value.map(adaptITSystemUsage));
-              const total = data['@odata.count'];
-              this.gridDataCacheService.set(gridState, dataItems, total);
+        const query =
+          `/odata/ItSystemUsageOverviewReadModels?organizationUuid=${organizationUuid}` +
+          `&$expand=RoleAssignments,DataProcessingRegistrations,DependsOnInterfaces,IncomingRelatedItSystemUsages,` +
+          `OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`;
+        return this.httpClient.get<OData>(query).pipe(
+          map((data) => {
+            const dataItems = compact(data.value.map(adaptITSystemUsage));
+            const total = data['@odata.count'];
+            this.gridDataCacheService.set(gridState, dataItems, total, responsibleUnitUuid);
 
-              const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
-              return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
-            }),
-            catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
-          );
+            const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+            return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
+          }),
+          catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
+        );
       })
     );
   });
