@@ -6,6 +6,7 @@ import { NavigationEnd, Router, RouterLink } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, filter, tap } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { HideInProdDirective } from 'src/app/shared/directives/hide-in-prod.directive';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectAllAlertCount } from 'src/app/store/alerts/selectors';
 import { OrganizationActions } from 'src/app/store/organization/actions';
@@ -25,6 +26,7 @@ import { ChooseOrganizationComponent } from '../choose-organization/choose-organ
 import { MenuItemComponent } from '../menu-item/menu-item.component';
 import { MenuComponent } from '../menu/menu.component';
 import { NotificationsButtonComponent } from '../notifications-button/notifications-button.component';
+import { TestEnvironmentRibbonComponent } from '../test-environment-ribbon/test-environment-ribbon.component';
 
 @Component({
   selector: 'app-nav-bar',
@@ -41,6 +43,8 @@ import { NotificationsButtonComponent } from '../notifications-button/notificati
     NotificationsButtonComponent,
     LogoutIconComponent,
     AsyncPipe,
+    HideInProdDirective,
+    TestEnvironmentRibbonComponent,
   ],
 })
 export class NavBarComponent extends BaseComponent implements OnInit {
