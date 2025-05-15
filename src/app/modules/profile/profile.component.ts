@@ -13,7 +13,7 @@ import {
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { UserService } from 'src/app/shared/services/user.service';
-import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/not-dirty-and-empty-string-validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import {
@@ -72,7 +72,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
     lastName: new FormControl<string | undefined>(undefined, Validators.required),
     email: new FormControl<string | undefined>(undefined, [Validators.required, Validators.email]),
-    phoneNumber: new FormControl<string | undefined>(undefined, phoneNumberLengthValidator()),
+    phoneNumber: new FormControl<string | undefined>(undefined, notDirtyAndEmptyStringValidator()),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     defaultOrganizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
   });

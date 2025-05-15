@@ -39,8 +39,7 @@
       <app-tooltip [text]="(userInOtherOrgHelptext$ | async) ?? ''" [tooltipDelay]="500">
         <app-textbox
           text="Telefonnummer"
-          type="tel"
-          pattern="^\+?[0-9]*$"
+          [pattern]="phoneNumberRegex"
           i18n-text
           [formGroup]="createForm"
           formName="phoneNumber"
