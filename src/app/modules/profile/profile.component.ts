@@ -1,5 +1,6 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
@@ -20,16 +21,15 @@ import {
   selectUserDefaultUnit,
   selectUserOrganizationRights,
 } from 'src/app/store/user-store/selectors';
-import { ProfileComponentStore } from './profile.component-store';
 import { CardComponent } from '../../shared/components/card/card.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { FormGridComponent } from '../../shared/components/form-grid/form-grid.component';
-import { OrgUnitSelectComponent } from '../../shared/components/org-unit-select/org-unit-select.component';
-import { TextBoxComponent } from '../../shared/components/textbox/textbox.component';
-import { TextBoxInfoComponent } from '../../shared/components/textbox-info/textbox-info.component';
-import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
 import { DropdownComponent } from '../../shared/components/dropdowns/dropdown/dropdown.component';
+import { FormGridComponent } from '../../shared/components/form-grid/form-grid.component';
 import { LoadingComponent } from '../../shared/components/loading/loading.component';
+import { OrgUnitSelectComponent } from '../../shared/components/org-unit-select/org-unit-select.component';
+import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
+import { TextBoxInfoComponent } from '../../shared/components/textbox-info/textbox-info.component';
+import { TextBoxComponent } from '../../shared/components/textbox/textbox.component';
+import { ProfileComponentStore } from './profile.component-store';
 
 @Component({
   templateUrl: 'profile.component.html',
@@ -59,7 +59,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     map(([organizationRights, organizationUuid]) => {
       if (!organizationRights) return false;
       return organizationRights.some((right) => right.organizationUuid === organizationUuid);
-    }),
+    })
   );
   public readonly userDefaultUnit$ = this.store.select(selectUserDefaultUnit);
 
@@ -83,7 +83,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     private store: Store,
     private componentStore: ProfileComponentStore,
     private actions$: Actions,
-    private userService: UserService,
+    private userService: UserService
   ) {
     super();
   }
@@ -121,7 +121,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
           this.editForm.patchValue({
             defaultOrganizationUnit: defaultUnitToPatch,
           });
-        }),
+        })
     );
 
     this.subscriptions.add(
@@ -129,7 +129,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
         this.currentEmail = email;
         this.alreadyExists$.next(false);
         this.onChange({ email });
-      }),
+      })
     );
 
     this.subscriptions.add(
@@ -140,7 +140,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
         }
 
         this.changeEmailValidityState(true);
-      }),
+      })
     );
 
     this.subscriptions.add(
@@ -150,14 +150,21 @@ export class ProfileComponent extends BaseComponent implements OnInit {
           if (organizationUnit.uuid === currentUnitUuid) return;
 
           this.currentDefaultUnitUuid$.next(organizationUnit.uuid);
-        }),
+        })
     );
   }
 
   public onChange(request: APIUpdateUserRequestDTO): void {
-    if (!request.defaultOrganizationUnitUuid) return;
-
-    this.store.dispatch(UserActions.setUserDefaultUnit(request.defaultOrganizationUnitUuid));
+    if (request.defaultOrganizationUnitUuid) {
+       this.store.dispatch(UserActions.setUserDefaultUnit(request.defaultOrganizationUnitUuid));
+       return;
+    }
+    this.user$.subscribe((user) => {
+      const userUuid = user?.uuid;
+      if (userUuid){
+        this.store.dispatch(OrganizationUserActions.updateUser(userUuid, request));
+      }
+    });
   }
 
   public emailChange(email: string): void {
