@@ -155,6 +155,14 @@ export class ProfileComponent extends BaseComponent implements OnInit {
           this.currentDefaultUnitUuid$.next(organizationUnit.uuid);
         })
     );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUserActions.updateUserSuccess)).subscribe(({ user }) => {
+        this.editForm.patchValue({
+          phoneNumber: user.phoneNumber,
+        });
+      })
+    );
   }
 
   public onChange(request: APIUpdateUserRequestDTO): void {
