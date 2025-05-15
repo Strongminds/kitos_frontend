@@ -1,12 +1,13 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormControl,
   FormGroup,
-  ValidationErrors,
-  Validators,
   FormsModule,
   ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
 } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -14,30 +15,31 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatest, debounceTime, first, map } from 'rxjs';
 import { APICreateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
+import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex-constants';
+import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { UserService } from 'src/app/shared/services/user.service';
-import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/not-dirty-and-empty-string-validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectOrganizationUserIsCreateLoading } from 'src/app/store/organization/organization-user/selectors';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { selectUserUuid } from 'src/app/store/user-store/selectors';
-import { BaseUserDialogComponent } from '../base-user-dialog.component';
-import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
-import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
-import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
-import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.component';
-import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { MultiSelectDropdownComponent } from '../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
-import { SlideToggleComponent } from '../../../../shared/components/slide-toggle/slide-toggle.component';
-import { DividerComponent } from '../../../../shared/components/divider/divider.component';
-import { VerticalContentGridSectionMarginLeftComponent } from '../../../../shared/components/vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
 import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
+import { DividerComponent } from '../../../../shared/components/divider/divider.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent } from '../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { SlideToggleComponent } from '../../../../shared/components/slide-toggle/slide-toggle.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.component';
+import { VerticalContentGridSectionMarginLeftComponent } from '../../../../shared/components/vertical-content-grid-section-margin-left/vertical-content-grid-section-margin-left.component';
+import { BaseUserDialogComponent } from '../base-user-dialog.component';
+import { CreateUserDialogComponentStore } from './create-user-dialog.component-store';
 
 @Component({
   selector: 'app-create-user-dialog',
@@ -67,6 +69,7 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
 export class CreateUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   public readonly noExistingUser$ = this.componentStore.noUserInOtherOrgs$;
   public readonly existingUserUuid$ = this.componentStore.existingUserUuid$;
+  public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
 
   public readonly isLoadingCombined$ = combineLatest([
     this.isLoadingAlreadyExists$,
@@ -82,7 +85,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       Validators.email,
       this.emailMatchValidator.bind(this),
     ]),
-    phoneNumber: new FormControl<number | undefined>(undefined, [phoneNumberLengthValidator()]),
+    phoneNumber: new FormControl<number | undefined>(undefined, [notDirtyAndEmptyStringValidator()]),
     startPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     roles: new FormControl<APIUserResponseDTO.RolesEnum[] | undefined>(undefined),
     sendNotificationOnCreation: new FormControl<boolean>(false),
@@ -92,7 +95,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
   });
 
   public readonly userInOtherOrgHelptext$ = this.noExistingUser$.pipe(
-    map((noExistingUser) => (noExistingUser ? '' : this.userInOtherOrgHelptext)),
+    map((noExistingUser) => (noExistingUser ? '' : this.userInOtherOrgHelptext))
   );
   private readonly userInOtherOrgHelptext = $localize`Denne bruger findes allerede i en anden organisation. Du kan kun redigere brugerens roller.`;
   private selectedRoles: APIUserResponseDTO.RolesEnum[] = [];
@@ -102,7 +105,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
     private readonly dialog: MatDialogRef<CreateUserDialogComponent>,
     store: Store,
     componentStore: CreateUserDialogComponentStore,
-    userService: UserService,
+    userService: UserService
   ) {
     super(store, componentStore, userService);
   }
@@ -112,14 +115,14 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       this.actions$
         .pipe(
           ofType(OrganizationUserActions.createUserSuccess, OrganizationUserActions.updateUserSuccess),
-          concatLatestFrom(() => this.store.select(selectUserUuid)),
+          concatLatestFrom(() => this.store.select(selectUserUuid))
         )
         .subscribe(([{ user }, userUuid]) => {
           if (user.uuid === userUuid) {
             this.store.dispatch(UserActions.authenticate());
           }
           this.onCancel();
-        }),
+        })
     );
 
     this.subscriptions.add(
@@ -129,7 +132,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
           if (!value) return;
 
           this.componentStore.getUserWithEmail(value);
-        }),
+        })
     );
 
     this.subscriptions.add(
@@ -139,7 +142,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
         } else {
           this.getEmailControl()?.setErrors(null);
         }
-      }),
+      })
     );
 
     this.subscriptions.add(
@@ -151,7 +154,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
         } else {
           this.createForm.enable();
         }
-      }),
+      })
     );
 
     this.createForm.get('email')?.valueChanges.subscribe(() => {
@@ -206,7 +209,8 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       return;
     }
 
-    const phoneNumber = this.createForm.controls.phoneNumber.value;
+    const phoneNumberFromControl = this.createForm.controls.phoneNumber.value;
+    const phoneNumber = phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : '';
     const startPreference = this.createForm.controls.startPreference.value;
     const sendNotificationOnCreation = this.createForm.controls.sendNotificationOnCreation.value;
     const apiUser = this.createForm.controls.apiUser.value;
@@ -216,7 +220,7 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
       firstName,
       lastName,
       email,
-      phoneNumber: phoneNumber ? String(phoneNumber) : '',
+      phoneNumber: phoneNumber,
       defaultUserStartPreference: startPreference?.value ?? undefined,
       sendMail: sendNotificationOnCreation ?? false,
       hasApiAccess: apiUser ?? false,

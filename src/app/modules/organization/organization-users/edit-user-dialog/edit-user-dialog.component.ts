@@ -4,7 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { debounceTime, of } from 'rxjs';
 import { APIUpdateUserRequestDTO, APIUserResponseDTO } from 'src/app/api/v2';
-import { phoneNumberLengthValidator } from 'src/app/shared/validators/phone-number-length.validator';
+import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/not-dirty-and-empty-string-validator';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
@@ -14,7 +14,9 @@ import {
   BulkActionResult,
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { MultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
+import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex-constants';
 import { getUserRoleSelectionDialogSections } from 'src/app/shared/helpers/bulk-action.helpers';
+import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 import { getRoleActionRequest } from 'src/app/shared/helpers/user-role.helpers';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
@@ -66,6 +68,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   @Input() public isNested!: boolean;
   @ViewChild(MultiSelectDropdownComponent)
   public multiSelectDropdown!: MultiSelectDropdownComponent<APIUserResponseDTO.RolesEnum>;
+  public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
 
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -75,7 +78,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       Validators.email,
       requiredIfDirtyValidator(),
     ]),
-    phoneNumber: new FormControl<string | undefined>(undefined, phoneNumberLengthValidator()),
+    phoneNumber: new FormControl<string | undefined>(undefined, notDirtyAndEmptyStringValidator()),
     defaultStartPreference: new FormControl<StartPreferenceChoice | undefined>(undefined),
     hasApiAccess: new FormControl<boolean | undefined>(undefined),
     hasRightsHolderAccess: new FormControl<boolean | undefined>(undefined),
@@ -89,7 +92,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     private openerService: DialogOpenerService,
     componentStore: CreateUserDialogComponentStore,
     store: Store,
-    userService: UserService,
+    userService: UserService
   ) {
     super(store, componentStore, userService);
   }
@@ -115,7 +118,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
           if (!value) return;
 
           this.componentStore.getUserWithEmail(value);
-        }),
+        })
     );
 
     this.subscriptions.add(
@@ -125,7 +128,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
         } else {
           this.getEmailControl()?.setErrors(null);
         }
-      }),
+      })
     );
     const initialValues = this.getUserRoleChoices();
     this.selectedRoles = initialValues.map((role) => role.value);
@@ -142,7 +145,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     this.subscriptions.add(
       this.store.select(OrganizationUserActions.updateUserSuccess).subscribe(() => {
         this.dialogRef.close();
-      }),
+      })
     );
     const request = this.createRequest();
     this.store.dispatch(OrganizationUserActions.updateUser(this.user.Uuid, request));
@@ -211,7 +214,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       email: this.requestValue(user.Email, formValue.email),
       firstName: this.requestValue(user.FirstName, formValue.firstName),
       lastName: this.requestValue(user.LastName, formValue.lastName),
-      phoneNumber: this.requestValue(user.PhoneNumber, formValue.phoneNumber),
+      phoneNumber: this.requestValue(user.PhoneNumber, this.getPhoneNumberString(formValue.phoneNumber)),
       defaultUserStartPreference:
         this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ??
         APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
@@ -244,7 +247,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
   private addNonSelectableRoles(
     roles: APIUpdateUserRequestDTO.RolesEnum[],
-    shouldRightsHolderAccessBeAdded: boolean,
+    shouldRightsHolderAccessBeAdded: boolean
   ): APIUpdateUserRequestDTO.RolesEnum[] {
     roles.push(APIUpdateUserRequestDTO.RolesEnum.User);
     if (shouldRightsHolderAccessBeAdded) {
@@ -268,6 +271,10 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       roles.push(APIUserResponseDTO.RolesEnum.ContractModuleAdmin);
     }
     return roles;
+  }
+
+  private getPhoneNumberString(phoneNumberFromControl: string | undefined | null) {
+    return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : '';
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {
