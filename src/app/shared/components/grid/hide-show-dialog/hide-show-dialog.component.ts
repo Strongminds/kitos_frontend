@@ -1,5 +1,7 @@
+import { CdkScrollable } from '@angular/cdk/scrolling';
+import { NgFor, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { MatDialogRef, MatDialogContent } from '@angular/material/dialog';
+import { MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
@@ -11,14 +13,12 @@ import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { DialogComponent } from '../../dialogs/dialog/dialog.component';
-import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { CdkScrollable } from '@angular/cdk/scrolling';
-import { NgFor, NgIf } from '@angular/common';
-import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { ButtonComponent } from '../../buttons/button/button.component';
 import { CheckboxComponent } from '../../checkbox/checkbox.component';
 import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../buttons/button/button.component';
+import { DialogComponent } from '../../dialogs/dialog/dialog.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 
 @Component({
   selector: 'app-hide-show-dialog',
@@ -48,14 +48,15 @@ export class HideShowDialogComponent implements OnInit {
   constructor(
     private store: Store,
     private dialogRef: MatDialogRef<HideShowDialogComponent>,
-    private gridUIConfigService: GridUIConfigService,
+    private gridUIConfigService: GridUIConfigService
   ) {}
 
   ngOnInit() {
     this.columnsCopy = this.columns
       .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
       .filter((column) => this.isColumnEnabled(column, this.uiConfigApplications))
-      .map((column) => ({ ...column }));
+      .map((column) => ({ ...column }))
+      .sort((a, b) => (a.order_id ?? 0) - (b.order_id ?? 0));
     this.uniqueSections = Array.from(new Set(this.columnsCopy.map((column) => column.section!)));
   }
 

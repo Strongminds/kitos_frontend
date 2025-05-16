@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { hasValidTwoMinuteCache } from './date.helpers';
 

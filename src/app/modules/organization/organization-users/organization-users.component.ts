@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -15,6 +16,7 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
   selectOrganizationUserByIndex,
@@ -27,15 +29,13 @@ import {
   selectOrganizationUserGridState,
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization/organization-user/selectors';
-import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
-import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
-import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.component';
 
 @Component({
   selector: 'app-organization-users',
@@ -186,7 +186,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
     private dialog: MatDialog,
-    private dialogOpenerService: DialogOpenerService,
+    private dialogOpenerService: DialogOpenerService
   ) {
     super(store, 'organization-user');
   }
@@ -195,7 +195,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.store.dispatch(OrganizationUserActions.getOrganizationUserPermissions());
     const existingColumns = this.gridColumnStorageService.getColumns(
       ORGANIZATION_USER_COLUMNS_ID,
-      this.defaultGridColumns,
+      this.defaultGridColumns
     );
     if (existingColumns) {
       this.store.dispatch(OrganizationUserActions.updateGridColumns(existingColumns));
@@ -210,7 +210,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.resetGridConfiguration))
-        .subscribe(() => this.updateDefaultColumns()),
+        .subscribe(() => this.updateDefaultColumns())
     );
 
     this.subscriptions.add(
@@ -221,13 +221,13 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
             OrganizationUserActions.updateUserSuccess,
             OrganizationUserActions.deleteUserSuccess,
             OrganizationUserActions.copyRolesSuccess,
-            OrganizationUserActions.transferRolesSuccess,
+            OrganizationUserActions.transferRolesSuccess
           ),
-          combineLatestWith(this.gridState$),
+          combineLatestWith(this.gridState$)
         )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        }),
+        })
     );
   }
 
@@ -251,7 +251,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   private updateDefaultColumns(): void {
-    this.store.dispatch(OrganizationUserActions.updateGridColumns(this.defaultGridColumns));
+    const columns = this.mapColumnOrder(this.defaultGridColumns);
+    this.store.dispatch(OrganizationUserActions.updateGridColumns(columns));
   }
 
   private openUserInfoDialog(index: number) {

@@ -322,12 +322,14 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
+          const updatedGridColumns = this.mapColumnOrder(defaultColumnsAndRoles);
+
           const localStorageColumns = this.gridColumnStorageService.getColumns(
             DATA_PROCESSING_COLUMNS_ID,
-            defaultColumnsAndRoles
+            updatedGridColumns
           );
           this.updateLocalOrDefaultGridColumns(
-            defaultColumnsAndRoles,
+            updatedGridColumns,
             localStorageColumns,
             DataProcessingActions.updateGridColumns,
             DataProcessingActions.resetToOrganizationDataProcessingColumnConfiguration

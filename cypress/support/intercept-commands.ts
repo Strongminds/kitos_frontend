@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 Cypress.Commands.add('setupContractIntercepts', () => {
   cy.intercept('/odata/ItContractOverviewReadModels*', { fixture: './it-contracts/it-contracts.json' });
   cy.intercept('/api/v2/it-contracts/permissions*', { fixture: 'shared/create-permissions.json' });

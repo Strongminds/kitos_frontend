@@ -86,6 +86,13 @@ export class BaseOverviewComponent extends BaseComponent {
     }
   }
 
+  protected mapColumnOrder(defaultColumnsAndRoles: GridColumn[]) {
+    return defaultColumnsAndRoles.map((column, index) => ({
+      ...column,
+      order_id: index,
+    }));
+  }
+
   private getStateSelector() {
     switch (this.entityType) {
       case 'it-system-usage':
@@ -132,9 +139,10 @@ export class BaseOverviewComponent extends BaseComponent {
     return value;
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private getTargetUrl(rowId: any, router: Router, route: ActivatedRoute): string {
     const urlTree = router.createUrlTree([rowId], { relativeTo: route });
-    let fullUrl = router.serializeUrl(urlTree);
+    const fullUrl = router.serializeUrl(urlTree);
 
     return this.adjustUrlForUiPrefix(fullUrl);
   }
