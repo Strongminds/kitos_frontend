@@ -81,7 +81,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     private el: ElementRef,
     private renderer: Renderer2,
     private notificationService: NotificationService,
-    private cdRef: ChangeDetectorRef,
+    private cdRef: ChangeDetectorRef
   ) {
     super();
   }
@@ -96,16 +96,16 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         .pipe(
           filter((filter) => filter.length !== 1),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          map((filter) => filter || undefined),
+          map((filter) => filter || undefined)
         )
-        .subscribe((filter) => this.filterChange.emit(filter)),
+        .subscribe((filter) => this.filterChange.emit(filter))
     );
 
     if (this.resetSubject$) {
       this.subscriptions.add(
         this.resetSubject$.subscribe(() => {
           this.onClear();
-        }),
+        })
       );
     }
   }
@@ -158,12 +158,10 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
   public onBlur() {
     this.blurEvent.emit();
-    this.selectedEvent.emit(this.selectedValues);
   }
 
-  public onSelected(item: MultiSelectDropdownItem<T>) {
-    this.updateSelectedValues(item.value);
-    this.emitSelectedEvent(this.selectedValues);
+  public onSelected(selectedItems: Array<MultiSelectDropdownItem<T>>) {
+    this.emitSelectedEvent(selectedItems.map((item) => item.value));
   }
 
   public clear() {
@@ -195,15 +193,6 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     }
     this.selectedValuesModel = this.selectedValuesModel.filter((d) => d !== item);
     this.selectedValues = this.selectedValues.filter((v) => v !== item.value);
-  }
-
-  private updateSelectedValues(value: T) {
-    const index = this.selectedValues.indexOf(value);
-    if (index !== -1) {
-      this.selectedValues.splice(index, 1);
-    } else {
-      this.selectedValues.push(value);
-    }
   }
 
   private emitSelectedEvent(selectedValues: T[]) {
