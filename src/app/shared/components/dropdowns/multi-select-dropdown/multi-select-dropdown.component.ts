@@ -186,13 +186,15 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     return newTag;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   public removeTag(item: MultiSelectDropdownItem<T>) {
-    if (this.data) {
-      this.data = this.data.filter((d) => d !== item);
-    }
+    this.data = this.data?.filter((d) => d !== item) ?? [];
+
     this.selectedValuesModel = this.selectedValuesModel.filter((d) => d !== item);
-    this.selectedValues = this.selectedValues.filter((v) => v !== item.value);
+
+    this.selectedValues = this.selectedValuesModel.map((d) => d.value);
+
+    this.valueChange.emit(this.selectedValues);
+    this.selectedEvent.emit(this.selectedValues);
   }
 
   private emitSelectedEvent(selectedValues: T[]) {
