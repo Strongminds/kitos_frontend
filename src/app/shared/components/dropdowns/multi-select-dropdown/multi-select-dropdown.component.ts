@@ -57,8 +57,6 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public isTagFn: (item: any) => boolean = () => false;
 
-  @Output() public valueChange = new EventEmitter<T[] | undefined>();
-
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
   @Output() public cleared = new EventEmitter();
@@ -165,7 +163,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public clear() {
-    this.valueChange.emit(undefined);
+    this.selectedEvent.emit(undefined);
   }
 
   public onCreateNew = (tag: string) => {
@@ -193,7 +191,6 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
     this.selectedValues = this.selectedValuesModel.map((d) => d.value);
 
-    this.valueChange.emit(this.selectedValues);
     this.selectedEvent.emit(this.selectedValues);
   }
 
