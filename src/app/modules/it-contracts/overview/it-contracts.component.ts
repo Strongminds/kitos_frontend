@@ -462,11 +462,11 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const updatedGridColumns = this.mapColumnOrder(defaultColumnsAndRoles);
+          const orderedGridColumns = this.mapColumnOrder(defaultColumnsAndRoles);
 
-          const localStorageColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, updatedGridColumns);
+          const localStorageColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, orderedGridColumns);
           this.updateLocalOrDefaultGridColumns(
-            updatedGridColumns,
+            orderedGridColumns,
             localStorageColumns,
             ITContractActions.updateGridColumns,
             ITContractActions.resetToOrganizationITContractColumnConfiguration

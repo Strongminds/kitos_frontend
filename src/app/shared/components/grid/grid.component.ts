@@ -475,7 +475,6 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     }
   }
 
-  // Reorder role.email columns to appear after their respective role columns
   private moveEmailColumnsToRespectiveRoleColumns(columns: GridColumn[], roleColumns: GridColumn[]): GridColumn[] {
     const roleEmailColumns = columns.filter((column) => column.field.includes(this.EmailColumnField));
     const reorderedColumns: GridColumn[] = [];

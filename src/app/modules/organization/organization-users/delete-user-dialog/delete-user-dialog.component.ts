@@ -13,7 +13,10 @@ import {
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { getUserRoleSelectionDialogSections } from 'src/app/shared/helpers/bulk-action.helpers';
 import { getRoleActionRequest, userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
-import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import {
+  ODataOrganizationUser,
+  Right,
+} from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
@@ -143,13 +146,21 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       combineLatest([organizationUnitRights$, itSystemRights$, itContractRights$, dprRights$])
         .pipe(
-          filter(
-            ([unitRights, systemRights, contractRights, dprRights]) =>
-              unitRights.length < 1 && systemRights.length < 1 && contractRights.length < 1 && dprRights.length < 1
+          filter(([unitRights, systemRights, contractRights, dprRights]) =>
+            this.areAnyRightsLeft(unitRights, systemRights, contractRights, dprRights)
           ),
           first()
         )
         .subscribe(() => dialogRef.close())
     );
+  }
+
+  private areAnyRightsLeft(
+    unitRights: Right[],
+    systemRights: Right[],
+    contractRights: Right[],
+    dprRights: Right[]
+  ): boolean {
+    return unitRights.length < 1 && systemRights.length < 1 && contractRights.length < 1 && dprRights.length < 1;
   }
 }
