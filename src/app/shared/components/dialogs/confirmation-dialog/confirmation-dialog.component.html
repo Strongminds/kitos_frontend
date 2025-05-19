@@ -1,13 +1,11 @@
 <app-dialog [title]="title" data-cy="confirm-dialog">
-  <form (submit)="OkResult()">
-    <div class="confirmation-container">
-      <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
-    </div>
-    <app-dialog-actions>
-      <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()">{{ declineText }}</app-button>
-      <app-button [color]="confirmColor" size="large" type="submit" data-cy="confirm-button">{{
-        confirmText
-      }}</app-button>
-    </app-dialog-actions>
-  </form>
+  <div class="confirmation-container">
+    <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
+  </div>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()">{{ declineText }}</app-button>
+    <app-button [color]="confirmColor" size="large" (buttonClick)="OkResult()" data-cy="confirm-button">{{
+      confirmText
+    }}</app-button>
+  </app-dialog-actions>
 </app-dialog>
