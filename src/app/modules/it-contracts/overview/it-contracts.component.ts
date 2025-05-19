@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -33,13 +34,12 @@ import {
   selectContractGridState,
   selectItContractHasCollectionCreatePermissions,
 } from 'src/app/store/it-contract/selectors';
-import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
-import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 
 @Component({
   templateUrl: 'it-contracts.component.html',
@@ -69,7 +69,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     private route: ActivatedRoute,
     private actions$: Actions,
     private gridColumnStorageService: GridColumnStorageService,
-    private configService: GridUIConfigService,
+    private configService: GridUIConfigService
   ) {
     super(store, 'it-contract');
   }
@@ -458,16 +458,15 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
         .pipe(
           ofType(ITContractActions.getItContractOverviewRolesSuccess),
           combineLatestWith(this.store.select(selectContractGridRoleColumns)),
-          first(),
+          first()
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const localStorageColumns = this.gridColumnStorageService.getColumns(
-            CONTRACT_COLUMNS_ID,
-            defaultColumnsAndRoles
-          );
+          const orderedGridColumns = this.mapColumnOrder(defaultColumnsAndRoles);
+
+          const localStorageColumns = this.gridColumnStorageService.getColumns(CONTRACT_COLUMNS_ID, orderedGridColumns);
           this.updateLocalOrDefaultGridColumns(
-            defaultColumnsAndRoles,
+            orderedGridColumns,
             localStorageColumns,
             ITContractActions.updateGridColumns,
             ITContractActions.resetToOrganizationITContractColumnConfiguration
@@ -480,7 +479,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
         .pipe(ofType(ITContractActions.createItContractSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        }),
+        })
     );
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
@@ -489,7 +488,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       this.actions$
         .pipe(
           ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError),
-          concatLatestFrom(() => this.gridColumns$),
+          concatLatestFrom(() => this.gridColumns$)
         )
         .subscribe(([_, gridColumnsFromState]) => {
           const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);

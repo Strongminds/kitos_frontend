@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -34,13 +35,12 @@ import {
   selectSystemGridLoading,
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
-import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
-import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 
 @Component({
   templateUrl: './it-system-catalog.component.html',
@@ -250,7 +250,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     private route: ActivatedRoute,
     private actions$: Actions,
     private gridColumnStorageService: GridColumnStorageService,
-    private dialogOpenerService: DialogOpenerService,
+    private dialogOpenerService: DialogOpenerService
   ) {
     super(store, 'it-system');
   }
@@ -263,7 +263,8 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     if (existingColumns) {
       this.store.dispatch(ITSystemActions.updateGridColumns(existingColumns));
     } else {
-      this.store.dispatch(ITSystemActions.updateGridColumns(this.defaultGridColumns));
+      const columns = this.mapColumnOrder(this.defaultGridColumns);
+      this.store.dispatch(ITSystemActions.updateGridColumns(columns));
     }
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
@@ -273,20 +274,20 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         .pipe(ofType(ITSystemActions.createItSystemSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        }),
+        })
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
         location.reload();
-      }),
+      })
     );
 
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns()),
+      this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
     );
   }
 
@@ -308,9 +309,9 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
           ofType(ITSystemUsageActions.createItSystemUsageSuccess),
           first(),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$),
+          concatLatestFrom(() => this.gridState$)
         )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
+        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
     );
   }
 
@@ -321,7 +322,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         if (result && systemUuid !== undefined) {
           this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
         }
-      }),
+      })
     );
 
     this.subscriptions.add(
@@ -330,9 +331,9 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
           ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
           first(),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$),
+          concatLatestFrom(() => this.gridState$)
         )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
+        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
     );
   }
 
