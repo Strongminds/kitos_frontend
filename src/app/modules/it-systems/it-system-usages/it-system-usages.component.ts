@@ -648,13 +648,12 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
-          const localStorageColumns = this.gridColumnStorageService.getColumns(
-            USAGE_COLUMNS_ID,
-            defaultColumnsAndRoles
-          );
+          const orderedGridColumns = this.mapColumnOrder(defaultColumnsAndRoles);
+
+          const localStorageColumns = this.gridColumnStorageService.getColumns(USAGE_COLUMNS_ID, orderedGridColumns);
 
           this.updateLocalOrDefaultGridColumns(
-            defaultColumnsAndRoles,
+            orderedGridColumns,
             localStorageColumns,
             ITSystemUsageActions.updateGridColumns,
             ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration

@@ -1,16 +1,16 @@
+import { NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { LocalAdminImportEntityType } from 'src/app/shared/enums/local-admin-import-entity-type';
 import { SegmentComponent } from '../../../shared/components/segment/segment.component';
-import { NgIf } from '@angular/common';
 import { LocalAdminImportOrganizationComponent } from './local-admin-import-organization/local-admin-import-organization.component';
-import { LocalAdminBaseExcelExportComponent } from './local-admin-import/local-admin-base-excel-export/local-admin-base-excel-export.component';
+import { LocalAdminBaseExcelImportComponent } from './local-admin-import/local-admin-base-excel-import/local-admin-base-excel-import.component';
 
 @Component({
   selector: 'app-local-admin-import',
   templateUrl: './local-admin-import.component.html',
   styleUrl: './local-admin-import.component.scss',
-  imports: [SegmentComponent, NgIf, LocalAdminImportOrganizationComponent, LocalAdminBaseExcelExportComponent],
+  imports: [SegmentComponent, NgIf, LocalAdminImportOrganizationComponent, LocalAdminBaseExcelImportComponent],
 })
 export class LocalAdminImportComponent {
   public readonly contractsType = LocalAdminImportEntityType.contracts;
