@@ -54,11 +54,11 @@
     <app-textbox
       text="Telefonnummer"
       i18n-text
-      pattern="^\+?[0-9]*$"
+      [pattern]="phoneNumberRegex"
       [formGroup]="editForm"
       formName="phoneNumber"
       data-cy="phoneNumber"
-      (valueChange)="onChange({ phoneNumber: $event })"
+      (validatedValueChange)="phoneNumberChange($event)"
     >
     </app-textbox>
     <app-dropdown
