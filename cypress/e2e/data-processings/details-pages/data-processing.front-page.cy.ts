@@ -1,10 +1,10 @@
 /// <reference types="Cypress" />
-const runTest = (testTitle: string, testFn: () => void) => {
-  cy.log(`**** Setting up test: ${testTitle}****`);
-  setupTest();
-  cy.log(`**** Running test: ${testTitle}****`);
-  testFn();
-};
+
+import { runTest } from "cypress/support/test-utils";
+
+const runTestWithSetup = (testTitle: string, testFn: () => void) => {
+  runTest(testTitle, () => setupTest(), testFn);
+}
 
 const setupTest = () => {
   cy.requireIntercept();
@@ -17,7 +17,7 @@ const setupTest = () => {
 
 describe('data-processing-front-page', () => {
   it.only('Tests', () => {
-    runTest('Agreement conclusion date is enabled when agreement is concluded', () => {
+    runTestWithSetup('Agreement conclusion date is enabled when agreement is concluded', () => {
       cy.setup(true, 'data-processing');
       cy.contains('Dpa 1').click();
 
@@ -26,7 +26,7 @@ describe('data-processing-front-page', () => {
       cy.getByDataCy('dpr-agreement-concluded-date').find('input').should('not.be.disabled');
     });
 
-    runTest('Can show responsible unit on startup', () => {
+    runTestWithSetup('Can show responsible unit on startup', () => {
       cy.setup(true, 'data-processing');
       const responsibleUnit = { name: 'En enhed', uuid: '0c2c1b3b-0b1b-4b3b-8b3b-0b1b3b0b1b3b' };
       cy.intercept('api/v2/organizations/*/organization-units?pageSize=*', { body: [responsibleUnit] });
@@ -36,14 +36,14 @@ describe('data-processing-front-page', () => {
       cy.contains('En enhed').should('exist');
     });
 
-    runTest('Can not see responsible unit dropdown, if disabled by UI customization', () => {
+    runTestWithSetup('Can not see responsible unit dropdown, if disabled by UI customization', () => {
       cy.setup(true, 'data-processing', './shared/ui-customization/dpr-responsible-unit-disabled.json');
       cy.contains('Dpa 1').click().wait(500);
 
       cy.getByDataCy('responsible-unit-select').should('not.exist');
     });
 
-    runTest('Can patch and clear responsible unit', () => {
+    runTestWithSetup('Can patch and clear responsible unit', () => {
       cy.setup(true, 'data-processing');
       const responsibleUnitToSelect = {
         parentOrganizationUnit: null,
