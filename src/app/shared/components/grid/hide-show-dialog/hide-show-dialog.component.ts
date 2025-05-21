@@ -60,10 +60,6 @@ export class HideShowDialogComponent implements OnInit {
     this.uniqueSections = Array.from(new Set(this.columnsCopy.map((column) => column.section!)));
   }
 
-  public isAllSelectedOfSection(section: string): boolean {
-    return this.columnsCopy.filter((column) => column.section === section).every((column) => !column.hidden);
-  }
-
   public changeVisibility(column: GridColumn) {
     column.hidden = !column.hidden;
   }
@@ -100,6 +96,9 @@ export class HideShowDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  public isAllSelectedOfSection(section: string): boolean {
+    return this.columnsCopy.filter((column) => column.section === section).every((column) => !column.hidden);
+  }
   public toggleSection(value: boolean | undefined, section: string) {
     const columnsInSection = this.columnsCopy.filter((column) => column.section === section && !column.required);
     columnsInSection.forEach((column) => (column.hidden = !value));
