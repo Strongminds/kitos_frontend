@@ -13,28 +13,28 @@ export function getUserRoleSelectionDialogSections(
 ): BulkActionSection[] {
   return [
     {
-      options$: userRightsOptions$(user$, unitRoles$, (user) => user.OrganizationUnitRights),
+      options$: getAvailableRoles$(user$, unitRoles$, (user) => user.OrganizationUnitRights),
       entityType: 'organization-unit',
       title: $localize`Organisationsenhedroller`,
       primaryColumnTitle: $localize`Organisationsenhed`,
       secondaryColumnTitle: $localize`Rolle`,
     },
     {
-      options$: userRightsOptions$(user$, contractRoles$, (user) => user.ItContractRights),
+      options$: getAvailableRoles$(user$, contractRoles$, (user) => user.ItContractRights),
       entityType: 'it-contract',
       title: $localize`Kontraktroller`,
       primaryColumnTitle: $localize`Kontrakt`,
       secondaryColumnTitle: $localize`Rolle`,
     },
     {
-      options$: userRightsOptions$(user$, systemRoles$, (user) => user.ItSystemRights),
+      options$: getAvailableRoles$(user$, systemRoles$, (user) => user.ItSystemRights),
       entityType: 'it-system',
       title: $localize`Systemroller`,
       primaryColumnTitle: $localize`System`,
       secondaryColumnTitle: $localize`Rolle`,
     },
     {
-      options$: userRightsOptions$(user$, dprRoles$, (user) => user.DataProcessingRegistrationRights),
+      options$: getAvailableRoles$(user$, dprRoles$, (user) => user.DataProcessingRegistrationRights),
       entityType: 'data-processing-registration',
       title: $localize`Databehandlingsroller`,
       primaryColumnTitle: $localize`Databehandling`,
@@ -52,7 +52,7 @@ export function filterNotAvailableUserRights(
   return userRights.filter((ur) => allowedRoleUuids.has(ur.role.uuid));
 }
 
-function userRightsOptions$(
+function getAvailableRoles$(
   user$: Observable<ODataOrganizationUser>,
   roles$: Observable<Array<APIRoleOptionResponseDTO> | null>,
   getRights: (user: ODataOrganizationUser) => Right[]

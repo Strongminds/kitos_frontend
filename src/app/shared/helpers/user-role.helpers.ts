@@ -51,15 +51,6 @@ export function getTypeTitleNameByType(entityType: RegistrationEntityTypes): str
   }
 }
 
-export function userHasAnyRights(user: ODataOrganizationUser): boolean {
-  return (
-    user.OrganizationUnitRights.length > 0 ||
-    user.ItSystemRights.length > 0 ||
-    user.ItContractRights.length > 0 ||
-    user.DataProcessingRegistrationRights.length > 0
-  );
-}
-
 export function userHasAnyAvailableRights(
   user: ODataOrganizationUser,
   availableUnitRoles: APIRoleOptionResponseDTO[] | null | undefined,

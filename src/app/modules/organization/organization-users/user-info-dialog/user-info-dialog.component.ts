@@ -8,8 +8,8 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
+import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
@@ -54,16 +54,14 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
     private store: Store,
     private dialogOpenerService: DialogOpenerService,
     private dialogRef: MatDialogRef<UserInfoDialogComponent>,
-    private actions$: Actions
+    private actions$: Actions,
+    private roleService: RoleOptionTypeService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.store.dispatch(RoleOptionTypeActions.getOptions('data-processing'));
-    this.store.dispatch(RoleOptionTypeActions.getOptions('it-contract'));
-    this.store.dispatch(RoleOptionTypeActions.getOptions('it-system-usage'));
-    this.store.dispatch(RoleOptionTypeActions.getOptions('organization-unit'));
+    this.roleService.dispatchAllGetAvailableOptions();
 
     this.subscriptions.add(
       this.actions$

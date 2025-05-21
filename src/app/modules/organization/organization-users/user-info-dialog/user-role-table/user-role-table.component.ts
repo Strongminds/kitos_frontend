@@ -64,13 +64,7 @@ export class UserRoleTableComponent implements OnInit {
         const availableRoleUuids = new Set(roles.map((r) => r.uuid));
         return this.getUserRights().map((right) => {
           if (!availableRoleUuids.has(right.role.uuid)) {
-            return {
-              ...right,
-              role: {
-                ...right.role,
-                name: `${right.role.name} (${$localize`udløbet`})`,
-              },
-            };
+            return this.mapRightToExpiredRight(right);
           }
           return right;
         });
@@ -118,5 +112,15 @@ export class UserRoleTableComponent implements OnInit {
       default:
         throw new Error(`This component does not support entity type: ${this.entityType}`);
     }
+  }
+
+  private mapRightToExpiredRight(right: Right): Right {
+    return {
+      ...right,
+      role: {
+        ...right.role,
+        name: `${right.role.name} (${$localize`udløbet`})`,
+      },
+    };
   }
 }

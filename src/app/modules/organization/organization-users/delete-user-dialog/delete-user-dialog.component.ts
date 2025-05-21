@@ -12,20 +12,16 @@ import {
   BulkActionResult,
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { getUserRoleSelectionDialogSections } from 'src/app/shared/helpers/bulk-action.helpers';
-import {
-  getRoleActionRequest,
-  userHasAnyAvailableRights,
-  userHasAnyRights,
-} from 'src/app/shared/helpers/user-role.helpers';
+import { getRoleActionRequest, userHasAnyAvailableRights } from 'src/app/shared/helpers/user-role.helpers';
 import {
   ODataOrganizationUser,
   Right,
 } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
+import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
@@ -70,16 +66,14 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     private confirmActionService: ConfirmActionService,
     private dialogRef: MatDialogRef<DeleteUserDialogComponent>,
     private openerService: DialogOpenerService,
-    private actions$: Actions
+    private actions$: Actions,
+    private roleService: RoleOptionTypeService
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.store.dispatch(RoleOptionTypeActions.getOptions('data-processing'));
-    this.store.dispatch(RoleOptionTypeActions.getOptions('it-contract'));
-    this.store.dispatch(RoleOptionTypeActions.getOptions('it-system-usage'));
-    this.store.dispatch(RoleOptionTypeActions.getOptions('organization-unit'));
+    this.roleService.dispatchAllGetAvailableOptions();
 
     // Combine all role observables and user to determine if the user has any assignable rights
     this.hasRoles$ = combineLatest([
@@ -104,10 +98,6 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
         this.onClose();
       })
     );
-  }
-
-  public hasRoles(user: ODataOrganizationUser): boolean {
-    return userHasAnyRights(user);
   }
 
   public onDeleteUser(user: ODataOrganizationUser): void {
