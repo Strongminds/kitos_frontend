@@ -25,9 +25,9 @@ import {
   UserRoleChoice,
 } from 'src/app/shared/models/organization/organization-user/user-role.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
+import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
@@ -97,6 +97,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   constructor(
     private dialogRef: MatDialogRef<EditUserDialogComponent>,
     private openerService: DialogOpenerService,
+    private roleService: RoleOptionTypeService,
     componentStore: CreateUserDialogComponentStore,
     store: Store,
     userService: UserService
@@ -105,10 +106,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   public ngOnInit(): void {
-    this.store.dispatch(RoleOptionTypeActions.getOptions('data-processing'));
-    this.store.dispatch(RoleOptionTypeActions.getOptions('it-contract'));
-    this.store.dispatch(RoleOptionTypeActions.getOptions('it-system-usage'));
-    this.store.dispatch(RoleOptionTypeActions.getOptions('organization-unit'));
+    this.roleService.dispatchAllGetAvailableOptions();
 
     this.createForm.patchValue({
       firstName: this.user.FirstName,
