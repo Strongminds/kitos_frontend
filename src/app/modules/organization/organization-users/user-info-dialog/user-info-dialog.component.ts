@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -5,18 +6,20 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { ScrollbarDialogComponent } from '../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
-import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { UserRoleTableComponent } from './user-role-table/user-role-table.component';
-import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
-import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
-import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
+import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
+import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
+import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ScrollbarDialogComponent } from '../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { AppDatePipe } from '../../../../shared/pipes/app-date.pipe';
+import { UserRoleTableComponent } from './user-role-table/user-role-table.component';
 
 @Component({
   selector: 'app-user-info-dialog',
@@ -42,19 +45,30 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
 
   public $sendingNotification = new BehaviorSubject(false);
 
+  public readonly unitRoles$ = this.store.select(selectRoleOptionTypes('organization-unit')).pipe(filterNullish());
+  public readonly contractRoles$ = this.store.select(selectRoleOptionTypes('it-contract')).pipe(filterNullish());
+  public readonly usageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage')).pipe(filterNullish());
+  public readonly dprRoles$ = this.store.select(selectRoleOptionTypes('data-processing')).pipe(filterNullish());
+
   constructor(
     private store: Store,
     private dialogOpenerService: DialogOpenerService,
     private dialogRef: MatDialogRef<UserInfoDialogComponent>,
-    private actions$: Actions,
+    private actions$: Actions
   ) {
     super();
   }
+
   ngOnInit(): void {
+    this.store.dispatch(RoleOptionTypeActions.getOptions('data-processing'));
+    this.store.dispatch(RoleOptionTypeActions.getOptions('it-contract'));
+    this.store.dispatch(RoleOptionTypeActions.getOptions('it-system-usage'));
+    this.store.dispatch(RoleOptionTypeActions.getOptions('organization-unit'));
+
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.sendNotificationSuccess))
-        .subscribe(() => this.$sendingNotification.next(false)),
+        .subscribe(() => this.$sendingNotification.next(false))
     );
   }
 
@@ -62,7 +76,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserSuccess)).subscribe(() => {
         this.dialogRef.close();
-      }),
+      })
     );
 
     this.dialogOpenerService.openDeleteUserDialog(this.user$, true);

@@ -1,4 +1,4 @@
-import { APIMutateRightRequestDTO, APIMutateUserRightsRequestDTO } from 'src/app/api/v2';
+import { APIMutateRightRequestDTO, APIMutateUserRightsRequestDTO, APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import {
   BulkActionOption,
   BulkActionResult,
@@ -60,6 +60,27 @@ export function userHasAnyRights(user: ODataOrganizationUser): boolean {
   );
 }
 
+export function userHasAnyAvailableRights(
+  user: ODataOrganizationUser,
+  availableUnitRoles: APIRoleOptionResponseDTO[] | null | undefined,
+  availableSystemRoles: APIRoleOptionResponseDTO[] | null | undefined,
+  availableContractRoles: APIRoleOptionResponseDTO[] | null | undefined,
+  availableDprRoles: APIRoleOptionResponseDTO[] | null | undefined
+): boolean {
+  const hasMatchingRight = (rights: Right[] | undefined, roles: APIRoleOptionResponseDTO[] | null | undefined) => {
+    if (!rights || !roles) return false;
+    const allowedRoleUuids = new Set(roles.map((r) => r.uuid));
+    return rights.some((r) => allowedRoleUuids.has(r.role.uuid));
+  };
+
+  return (
+    hasMatchingRight(user.OrganizationUnitRights, availableUnitRoles) ||
+    hasMatchingRight(user.ItSystemRights, availableSystemRoles) ||
+    hasMatchingRight(user.ItContractRights, availableContractRoles) ||
+    hasMatchingRight(user.DataProcessingRegistrationRights, availableDprRoles)
+  );
+}
+
 export function roleToCopyRoleRequestDTO(user: ODataOrganizationUser, role: Right): APIMutateRightRequestDTO {
   return { userUuid: user.Uuid, roleId: role.role.id, entityUuid: role.entity.uuid };
 }
@@ -74,7 +95,7 @@ export function mapUserRightsToBulkOptions(rights: Right[]): BulkActionOption[] 
 
 export function getRoleActionRequest(
   result: BulkActionResult,
-  user: ODataOrganizationUser,
+  user: ODataOrganizationUser
 ): APIMutateUserRightsRequestDTO {
   return {
     unitRights: mapBulkActionResultsToMutateRightRequestDTOs(result, 'organization-unit', user),
@@ -87,13 +108,13 @@ export function getRoleActionRequest(
 function mapBulkActionResultsToMutateRightRequestDTOs(
   result: BulkActionResult,
   type: RegistrationEntityTypes,
-  user: ODataOrganizationUser,
+  user: ODataOrganizationUser
 ): APIMutateRightRequestDTO[] {
   if (!result.selectedEntityId) {
     throw new Error('Selected entity ID is undefined');
   }
   return result.selectedOptions[type].map((option) =>
-    mapToToMutateRightRequestDTO(user.Uuid, option.id as number, result.selectedEntityId!),
+    mapToToMutateRightRequestDTO(user.Uuid, option.id as number, result.selectedEntityId!)
   );
 }
 function mapToToMutateRightRequestDTO(userUuid: string, roleId: number, entityUuid: string): APIMutateRightRequestDTO {

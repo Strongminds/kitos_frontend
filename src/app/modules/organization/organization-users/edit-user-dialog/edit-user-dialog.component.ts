@@ -27,6 +27,8 @@ import {
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
+import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
 import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -70,6 +72,11 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   public multiSelectDropdown!: MultiSelectDropdownComponent<APIUserResponseDTO.RolesEnum>;
   public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
 
+  private readonly availableUnitRoles$ = this.store.select(selectRoleOptionTypes('organization-unit'));
+  private readonly availableContractRoles$ = this.store.select(selectRoleOptionTypes('it-contract'));
+  private readonly availableUsageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage'));
+  private readonly availableDprRoles$ = this.store.select(selectRoleOptionTypes('data-processing'));
+
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
     lastName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -98,6 +105,11 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   public ngOnInit(): void {
+    this.store.dispatch(RoleOptionTypeActions.getOptions('data-processing'));
+    this.store.dispatch(RoleOptionTypeActions.getOptions('it-contract'));
+    this.store.dispatch(RoleOptionTypeActions.getOptions('it-system-usage'));
+    this.store.dispatch(RoleOptionTypeActions.getOptions('organization-unit'));
+
     this.createForm.patchValue({
       firstName: this.user.FirstName,
       lastName: this.user.LastName,
@@ -181,7 +193,13 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
     instance.dropdownTitle = $localize`Kopier roller til`;
     instance.successActionTypes = OrganizationUserActions.copyRolesSuccess;
     instance.errorActionTypes = OrganizationUserActions.copyRolesError;
-    instance.sections = getUserRoleSelectionDialogSections(of(this.user));
+    instance.sections = getUserRoleSelectionDialogSections(
+      of(this.user),
+      this.availableUnitRoles$,
+      this.availableContractRoles$,
+      this.availableUsageRoles$,
+      this.availableDprRoles$
+    );
   }
 
   private copyRoles(result: BulkActionResult): void {

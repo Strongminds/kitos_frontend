@@ -12,7 +12,11 @@ import {
   BulkActionResult,
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { getUserRoleSelectionDialogSections } from 'src/app/shared/helpers/bulk-action.helpers';
-import { getRoleActionRequest, userHasAnyRights } from 'src/app/shared/helpers/user-role.helpers';
+import {
+  getRoleActionRequest,
+  userHasAnyAvailableRights,
+  userHasAnyRights,
+} from 'src/app/shared/helpers/user-role.helpers';
 import {
   ODataOrganizationUser,
   Right,
@@ -21,6 +25,8 @@ import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/serv
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { RoleSelectionService } from 'src/app/shared/services/role-selector-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { RoleOptionTypeActions } from 'src/app/store/roles-option-type-store/actions';
+import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -50,6 +56,12 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   @Input() nested: boolean = false;
 
   public readonly organizationName$: Observable<string | undefined> = this.store.select(selectOrganizationName);
+  private readonly availableUnitRoles$ = this.store.select(selectRoleOptionTypes('organization-unit'));
+  private readonly availableContractRoles$ = this.store.select(selectRoleOptionTypes('it-contract'));
+  private readonly availableUsageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage'));
+  private readonly availableDprRoles$ = this.store.select(selectRoleOptionTypes('data-processing'));
+
+  public hasRoles$!: Observable<boolean>;
 
   public isLoading: boolean = false;
 
@@ -64,6 +76,24 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.store.dispatch(RoleOptionTypeActions.getOptions('data-processing'));
+    this.store.dispatch(RoleOptionTypeActions.getOptions('it-contract'));
+    this.store.dispatch(RoleOptionTypeActions.getOptions('it-system-usage'));
+    this.store.dispatch(RoleOptionTypeActions.getOptions('organization-unit'));
+
+    // Combine all role observables and user to determine if the user has any assignable rights
+    this.hasRoles$ = combineLatest([
+      this.user$,
+      this.availableUnitRoles$,
+      this.availableUsageRoles$,
+      this.availableContractRoles$,
+      this.availableDprRoles$,
+    ]).pipe(
+      map(([user, unitRoles, usageRoles, contractRoles, dprRoles]) =>
+        userHasAnyAvailableRights(user, unitRoles, usageRoles, contractRoles, dprRoles)
+      )
+    );
+
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserError)).subscribe(() => {
         this.isLoading = false;
@@ -119,7 +149,13 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     instance.successActionTypes = OrganizationUserActions.transferRolesSuccess;
     instance.errorActionTypes = OrganizationUserActions.transferRolesError;
     instance.actionButtons = dialogActions;
-    instance.sections = getUserRoleSelectionDialogSections(this.user$);
+    instance.sections = getUserRoleSelectionDialogSections(
+      this.user$,
+      this.availableUnitRoles$,
+      this.availableContractRoles$,
+      this.availableUsageRoles$,
+      this.availableDprRoles$
+    );
   }
 
   private transferRoles(

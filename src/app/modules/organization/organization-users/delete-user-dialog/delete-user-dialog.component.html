@@ -7,18 +7,18 @@
         >?
       </app-paragraph>
       <app-paragraph [displayFlex]="false">
-        <ng-container *ngIf="hasRoles(user)" i18n>
+        <ng-container *ngIf="hasRoles$ | async" i18n>
           Brugeren har nogle roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at
           tildele rollerne.
         </ng-container>
 
-        <ng-container *ngIf="!hasRoles(user)" i18n> Denne handling kan ikke fortrydes. </ng-container>
+        <ng-container *ngIf="!(hasRoles$ | async)" i18n> Denne handling kan ikke fortrydes. </ng-container>
       </app-paragraph>
     </app-standard-vertical-content-grid>
     <app-dialog-actions *ngIf="!isLoading">
       <app-button buttonStyle="secondary" (buttonClick)="onClose()" data-cy="cancel-button" i18n> Anuller </app-button>
       <app-button
-        *ngIf="hasRoles(user)"
+        *ngIf="hasRoles$ | async"
         buttonStyle="secondary"
         color="warn"
         data-cy="transfer-roles-button"

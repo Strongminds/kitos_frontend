@@ -5,24 +5,28 @@
         [user]="user"
         entityType="organization-unit"
         [hasModifyPermission$]="hasModificationPermission$"
+        [availableRoles$]="unitRoles$"
       ></app-user-role-table>
 
       <app-user-role-table
         [user]="user"
         entityType="it-system"
         [hasModifyPermission$]="hasModificationPermission$"
+        [availableRoles$]="usageRoles$"
       ></app-user-role-table>
 
       <app-user-role-table
         [user]="user"
         entityType="it-contract"
         [hasModifyPermission$]="hasModificationPermission$"
+        [availableRoles$]="contractRoles$"
       ></app-user-role-table>
 
       <app-user-role-table
         [user]="user"
         entityType="data-processing-registration"
         [hasModifyPermission$]="hasModificationPermission$"
+        [availableRoles$]="dprRoles$"
       ></app-user-role-table>
 
       <app-content-space-between *ngIf="user.LastAdvisSent">
