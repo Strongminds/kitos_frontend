@@ -252,7 +252,7 @@ export class ITSystemUsageEffects {
           catchError(() => of(ITSystemUsageActions.getITSystemUsagePermissionsError()))
         )
       )
-    );
+      );
   });
 
   getItSystemUsageCollectionPermissions$ = createEffect(() => {

@@ -100,7 +100,7 @@ describe('it-system-usage roles', () => {
     cy.get('app-dialog').contains('Tilføj').click();
   });
 
-  it.only('Can edit system role', () => {
+  it('Can edit system role', () => {
     cy.contains('System 3').click();
 
     const exisitingRole = {
