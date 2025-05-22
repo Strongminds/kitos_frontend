@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { runTest } from 'cypress/support/test-utils';
+import { TestRunner } from 'cypress/support/test-runner';
 
 function setupTest() {
   cy.requireIntercept();
@@ -21,13 +21,11 @@ function setupTest() {
   cy.setup(true, 'global-admin/it-systems');
 }
 
-function runTestWithSetup(testTitle: string, testFn: () => void) {
-  runTest(testTitle, setupTest, testFn);
-}
-
 describe('global-admin-organizations', () => {
   it.only('Tests', () => {
-    runTestWithSetup('Can toggle business type enabled', () => {
+    const testRunner = new TestRunner(setupTest);
+
+    testRunner.runTestWithSetup('Can toggle business type enabled', () => {
       cy.intercept('PATCH', '/api/v2/internal/it-systems/global-option-types/business-types/*', {
         statusCode: 200,
         body: {},
@@ -41,7 +39,7 @@ describe('global-admin-organizations', () => {
       });
     });
 
-    runTestWithSetup('Can edit business type in dialog', () => {
+    testRunner.runTestWithSetup('Can edit business type in dialog', () => {
       cy.intercept('PATCH', '/api/v2/internal/it-systems/global-option-types/business-types/*', {
         statusCode: 200,
         body: {},
@@ -59,7 +57,7 @@ describe('global-admin-organizations', () => {
       });
     });
 
-    runTestWithSetup('Can create business type in dialog', () => {
+    testRunner.runTestWithSetup('Can create business type in dialog', () => {
       cy.intercept('POST', 'api/v2/internal/it-systems/global-option-types/business-types', {
         statusCode: 200,
         body: {},

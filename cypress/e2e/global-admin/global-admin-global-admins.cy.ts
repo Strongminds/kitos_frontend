@@ -1,6 +1,6 @@
 /// <reference types="Cypress" />
 
-import { runTest } from 'cypress/support/test-utils';
+import { TestRunner } from 'cypress/support/test-runner';
 
 function setupTest() {
   cy.requireIntercept();
@@ -9,13 +9,11 @@ function setupTest() {
   cy.setup(true, 'global-admin/global-admins');
 }
 
-function runTestWithSetup(testTitle: string, testFn: () => void) {
-  runTest(testTitle, setupTest, testFn);
-}
-
 describe('global-admin-global-admins', () => {
   it.only('Tests', () => {
-    runTestWithSetup('Can add global admin', () => {
+    const testRunner = new TestRunner(setupTest);
+
+    testRunner.runTestWithSetup('Can add global admin', () => {
       cy.intercept('api/v2/internal/users/search', { fixture: './global-admin/users.json' }).as('search');
 
       cy.getByDataCy('add-global-admin-button').click();
@@ -35,7 +33,7 @@ describe('global-admin-global-admins', () => {
       cy.get('app-popup-message').should('exist');
     });
 
-    runTestWithSetup('Can remove global admin', () => {
+    testRunner.runTestWithSetup('Can remove global admin', () => {
       cy.getByDataCy('remove-global-admin-button').first().click();
 
       cy.intercept('DELETE', 'api/v2/internal/users/global-admins/*', { statusCode: 204 }).as('removeGlobalAdmin');
