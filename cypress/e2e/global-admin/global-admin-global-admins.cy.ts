@@ -1,45 +1,53 @@
 /// <reference types="Cypress" />
 
+import { runTest } from 'cypress/support/test-utils';
+
+function setupTest() {
+  cy.requireIntercept();
+
+  cy.intercept('api/v2/internal/users/global-admins', { fixture: './global-admin/global-admins.json' });
+  cy.setup(true, 'global-admin/global-admins');
+}
+
+function runTestWithSetup(testTitle: string, testFn: () => void) {
+  runTest(testTitle, setupTest, testFn);
+}
+
 describe('global-admin-global-admins', () => {
-  beforeEach(() => {
-    cy.requireIntercept();
+  it.only('Tests', () => {
+    runTestWithSetup('Can add global admin', () => {
+      cy.intercept('api/v2/internal/users/search', { fixture: './global-admin/users.json' }).as('search');
 
-    cy.intercept('api/v2/internal/users/global-admins', { fixture: './global-admin/global-admins.json' });
-    cy.setup(true, 'global-admin/global-admins');
-  });
+      cy.getByDataCy('add-global-admin-button').click();
+      cy.dropdownByCy('add-global-admin-dropdown', 'Api User', true);
 
-  it('Can add global admin', () => {
-    cy.intercept('api/v2/internal/users/search', { fixture: './global-admin/users.json' }).as('search');
+      cy.intercept('POST', 'api/v2/internal/users/global-admins/*', {
+        body: { name: 'Jens Jensen', email: 'test@email.dk' },
+      }).as('addGlobalAdmin');
 
-    cy.getByDataCy('add-global-admin-button').click();
-    cy.dropdownByCy('add-global-admin-dropdown', 'Api User', true);
+      cy.getByDataCy('add-global-admin-dialog-button').click();
 
-    cy.intercept('POST', 'api/v2/internal/users/global-admins/*', {
-      body: { name: 'Jens Jensen', email: 'test@email.dk' },
-    }).as('addGlobalAdmin');
+      cy.wait('@addGlobalAdmin');
 
-    cy.getByDataCy('add-global-admin-dialog-button').click();
+      cy.contains('Jens Jensen').should('exist');
+      cy.contains('test@email.dk').should('exist');
 
-    cy.wait('@addGlobalAdmin');
+      cy.get('app-popup-message').should('exist');
+    });
 
-    cy.contains('Jens Jensen').should('exist');
-    cy.contains('test@email.dk').should('exist');
+    runTestWithSetup('Can remove global admin', () => {
+      cy.getByDataCy('remove-global-admin-button').first().click();
 
-    cy.get('app-popup-message').should('exist');
-  });
+      cy.intercept('DELETE', 'api/v2/internal/users/global-admins/*', { statusCode: 204 }).as('removeGlobalAdmin');
 
-  it('Can remove global admin', () => {
-    cy.getByDataCy('remove-global-admin-button').first().click();
+      cy.getByDataCy('confirm-button').click();
 
-    cy.intercept('DELETE', 'api/v2/internal/users/global-admins/*', { statusCode: 204 }).as('removeGlobalAdmin');
+      cy.wait('@removeGlobalAdmin');
 
-    cy.getByDataCy('confirm-button').click();
+      cy.contains('Automatisk oprettet testbruger (Api GlobalAdmin)').should('not.exist');
+      cy.contains('local-api-global-admin-user@kitos.dk').should('not.exist');
 
-    cy.wait('@removeGlobalAdmin');
-
-    cy.contains('Automatisk oprettet testbruger (Api GlobalAdmin)').should('not.exist');
-    cy.contains('local-api-global-admin-user@kitos.dk').should('not.exist');
-
-    cy.get('app-popup-message').should('exist');
+      cy.get('app-popup-message').should('exist');
+    });
   });
 });
