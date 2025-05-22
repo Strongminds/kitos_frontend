@@ -1,13 +1,13 @@
-<app-accordion [isExpanded]="getUserRights().length > 0" [disabled]="getUserRights().length === 0">
-  <app-accordion-header>
-    <app-content-space-between class="accordion-header">
-      <app-paragraph [bold]="true" paragraphSize="large"> {{ getTitle() }} </app-paragraph>
-      <app-number-circle [number]="getUserRights().length"></app-number-circle>
-    </app-content-space-between>
-  </app-accordion-header>
-  <ng-container *ngIf="userRightsWithExpired$ | async as userRights">
+<ng-container *ngIf="userRightsWithExpired$ | async as userRights">
+  <app-accordion [isExpanded]="userRights.length > 0" [disabled]="userRights.length === 0">
+    <app-accordion-header>
+      <app-content-space-between class="accordion-header">
+        <app-paragraph [bold]="true" paragraphSize="large"> {{ getTitle() }} </app-paragraph>
+        <app-number-circle [number]="userRights.length"></app-number-circle>
+      </app-content-space-between>
+    </app-accordion-header>
     <ng-container *ngIf="userRights.length > 0">
-      <app-native-table tableLayout="fixed">
+      <app-native-table tableLayout="fixed" *ngIf="isLoading === false">
         <thead>
           <tr>
             <th>{{ getRoleTypeName() }}</th>
@@ -34,6 +34,8 @@
             </td>
           </tr>
         </tbody>
-      </app-native-table> </ng-container
-  ></ng-container>
-</app-accordion>
+      </app-native-table>
+      <app-loading *ngIf="isLoading"></app-loading>
+    </ng-container>
+  </app-accordion>
+</ng-container>
