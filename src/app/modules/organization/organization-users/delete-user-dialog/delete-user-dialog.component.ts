@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, filter, first, map, Observable, shareReplay } from 'rxjs';
+import { combineLatest, filter, first, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   BulkActionButton,
@@ -87,7 +87,8 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
         userHasAnyAvailableRights(user, unitRoles, usageRoles, contractRoles, dprRoles)
       )
     );
-    this.user$ = this.user$.pipe(shareReplay(1));
+
+    this.subscriptions.add(this.user$.subscribe());
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserError)).subscribe(() => {
