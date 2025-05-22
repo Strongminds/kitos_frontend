@@ -1,4 +1,4 @@
-<ng-container *ngIf="currentUser$ | async as user">
+<ng-container *ngIf="user$ | async as user">
   <app-dialog title="Slet bruger" helpText="org_user_delete_modal" i18n-title [nested]="nested">
     <app-standard-vertical-content-grid *ngIf="!isLoading">
       <app-paragraph [displayFlex]="false" i18n>
