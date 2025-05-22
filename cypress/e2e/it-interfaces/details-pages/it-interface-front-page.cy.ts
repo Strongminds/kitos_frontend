@@ -1,8 +1,9 @@
 /// <reference types="Cypress" />
 
-describe('it-system-interfaces', () => {
-  beforeEach(() => {
-    cy.requireIntercept();
+import { TestRunner } from "cypress/support/test-runner";
+
+function setupTest() {
+  cy.requireIntercept();
     cy.intercept('/odata/ItInterfaces*', { fixture: './it-interfaces/odata/it-interfaces.json' });
     cy.intercept('/api/v2/it-interfaces/*/permissions', { fixture: './it-interfaces/it-interfaces-permissions.json' });
     cy.intercept('/api/v2/it-interfaces/permissions*', { fixture: 'shared/create-permissions.json' });
@@ -17,10 +18,15 @@ describe('it-system-interfaces', () => {
     cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
     cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
     cy.setup(true, 'it-systems/it-interfaces');
-  });
+}
 
-  it('interface information area fields contain correct data, and can be edited', () => {
-    setupRegularInterfaceDetails();
+describe('it-system-interfaces', () => {
+
+  it('Tests', () => {
+    const testRunner = new TestRunner(setupTest);
+
+    testRunner.runTestWithSetup('interface information area fields contain correct data, and can be edited', () => {
+      setupRegularInterfaceDetails();
     cy.intercept('PATCH', '/api/v2/it-interfaces/*', { fixture: './it-interfaces/it-interface.json' }).as('patch');
 
     const nameSelector = 'interface-name';
@@ -83,10 +89,10 @@ describe('it-system-interfaces', () => {
     cy.textareaByCy(notesSelector).clear().type(newNote);
     cy.textareaByCy(descriptionSelector).click();
     verifyInterfaceFrontPagePatchRequest({ note: newNote });
-  });
+    });
 
-  it('can add interface data', () => {
-    setupRegularInterfaceDetails();
+    testRunner.runTestWithSetup('can add interface data', () => {
+      setupRegularInterfaceDetails();
 
     cy.getByDataCy('add-data-button').click();
     cy.get('app-dialog').within(() => {
@@ -95,10 +101,10 @@ describe('it-system-interfaces', () => {
       cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
       cy.getByDataCy('write-data-save-button').click();
     });
-  });
+    });
 
-  it('can edit interface data', () => {
-    setupRegularInterfaceDetails();
+    testRunner.runTestWithSetup('can edit interface data', () => {
+      setupRegularInterfaceDetails();
 
     cy.getByDataCy('edit-data-button').click();
     cy.get('app-dialog').within(() => {
@@ -107,31 +113,33 @@ describe('it-system-interfaces', () => {
       cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
       cy.getByDataCy('write-data-save-button').click();
     });
-  });
+    });
 
-  it('deactivate button should be visible', () => {
-    setupRegularInterfaceDetails();
+    testRunner.runTestWithSetup('deactivate button should be visible', () => {
+      setupRegularInterfaceDetails();
 
     cy.getByDataCy('deactivate-interface-button').should('exist');
     cy.getByDataCy('activate-interface-button').should('not.exist');
-  });
 
-  it('activate button should be visible', () => {
-    cy.intercept('/api/v2/it-interfaces/*', {
+    });
+
+    testRunner.runTestWithSetup('activate button should be visible', () => {
+      cy.intercept('/api/v2/it-interfaces/*', {
       fixture: './it-interfaces/it-interface-deactivated.json',
     });
     goToInterfaceDetails();
 
     cy.getByDataCy('activate-interface-button').should('exist');
     cy.getByDataCy('deactivate-interface-button').should('not.exist');
-  });
+    });
 
-  it('cannot save link with unchanged url', () => {
-    setupRegularInterfaceDetails();
+    testRunner.runTestWithSetup('cannot save link with unchanged url', () => {
+      setupRegularInterfaceDetails();
     cy.getByDataCy('interface-link').getByDataCy('edit-link-button').click();
 
     cy.verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
-  });
+    });
+  })
 });
 
 function setupRegularInterfaceDetails() {
