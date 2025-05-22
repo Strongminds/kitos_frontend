@@ -58,6 +58,8 @@ function getAvailableRoles$(
   getRights: (user: ODataOrganizationUser) => Right[]
 ): Observable<ReturnType<typeof mapUserRightsToBulkOptions>> {
   return combineLatest([user$, roles$]).pipe(
-    map(([user, roles]) => mapUserRightsToBulkOptions(filterNotAvailableUserRights(getRights(user), roles)))
+    map(([user, roles]) => {
+      return mapUserRightsToBulkOptions(filterNotAvailableUserRights(getRights(user), roles));
+    })
   );
 }
