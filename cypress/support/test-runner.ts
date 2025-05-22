@@ -9,9 +9,9 @@ export class TestRunner {
   }
 
   public runTest = (testTitle: string, setupFn: () => void, testFn: () => void) => {
-    cy.log(`**** Setting up test: ${testTitle}****`);
+    cy.log(`**** SETTING UP TEST: ${testTitle}****`);
     setupFn();
-    cy.log(`**** Running test: ${testTitle}****`);
+    cy.log(`**** RUNNING TEST: ${testTitle}****`);
     testFn();
   };
 }
