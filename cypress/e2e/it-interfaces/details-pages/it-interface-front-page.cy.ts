@@ -1,145 +1,143 @@
 /// <reference types="Cypress" />
 
-import { TestRunner } from "cypress/support/test-runner";
+import { TestRunner } from 'cypress/support/test-runner';
 
 function setupTest() {
   cy.requireIntercept();
-    cy.intercept('/odata/ItInterfaces*', { fixture: './it-interfaces/odata/it-interfaces.json' });
-    cy.intercept('/api/v2/it-interfaces/*/permissions', { fixture: './it-interfaces/it-interfaces-permissions.json' });
-    cy.intercept('/api/v2/it-interfaces/permissions*', { fixture: 'shared/create-permissions.json' });
-    cy.intercept('/api/v2/it-interfaces**', { fixture: './it-interfaces/it-interface.json' });
-    cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-interfaces/it-interfaces-types.json' });
-    cy.intercept('/api/v2/it-interface-interface-data-types*', {
-      fixture: './it-interfaces/it-interfaces-data-types.json',
-    });
-    cy.intercept('/api/v2/internal/it-systems/search?includeDeactivated=false', {
-      fixture: './it-system-catalog/it-systems-internal-search.json',
-    });
-    cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
-    cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
-    cy.setup(true, 'it-systems/it-interfaces');
+  cy.intercept('/odata/ItInterfaces*', { fixture: './it-interfaces/odata/it-interfaces.json' });
+  cy.intercept('/api/v2/it-interfaces/*/permissions', { fixture: './it-interfaces/it-interfaces-permissions.json' });
+  cy.intercept('/api/v2/it-interfaces/permissions*', { fixture: 'shared/create-permissions.json' });
+  cy.intercept('/api/v2/it-interfaces**', { fixture: './it-interfaces/it-interface.json' });
+  cy.intercept('/api/v2/it-interface-interface-types*', { fixture: './it-interfaces/it-interfaces-types.json' });
+  cy.intercept('/api/v2/it-interface-interface-data-types*', {
+    fixture: './it-interfaces/it-interfaces-data-types.json',
+  });
+  cy.intercept('/api/v2/internal/it-systems/search?includeDeactivated=false', {
+    fixture: './it-system-catalog/it-systems-internal-search.json',
+  });
+  cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+  cy.intercept('/api/v2/internal/organizations/*/grid/*/*', { statusCode: 404, body: {} });
+  cy.setup(true, 'it-systems/it-interfaces');
 }
 
 describe('it-system-interfaces', () => {
-
   it('Tests', () => {
     const testRunner = new TestRunner(setupTest);
 
     testRunner.runTestWithSetup('interface information area fields contain correct data, and can be edited', () => {
       setupRegularInterfaceDetails();
-    cy.intercept('PATCH', '/api/v2/it-interfaces/*', { fixture: './it-interfaces/it-interface.json' }).as('patch');
+      cy.intercept('PATCH', '/api/v2/it-interfaces/*', { fixture: './it-interfaces/it-interface.json' }).as('patch');
 
-    const nameSelector = 'interface-name';
-    const newName = 'New name';
-    cy.inputByCy(nameSelector).should('have.value', 'test');
-    cy.inputByCy(nameSelector).clear().type(newName);
-    submitInterfaceInput();
-    verifyInterfaceFrontPagePatchRequest({ name: newName });
+      const nameSelector = 'interface-name';
+      const newName = 'New name';
+      cy.inputByCy(nameSelector).should('have.value', 'test');
+      cy.inputByCy(nameSelector).clear().type(newName);
+      submitInterfaceInput();
+      verifyInterfaceFrontPagePatchRequest({ name: newName });
 
-    const interfaceIdSelector = 'interface-id';
-    const newInterfaceId = 'NewId';
-    cy.inputByCy(interfaceIdSelector).should('have.value', 'testId');
-    cy.inputByCy(interfaceIdSelector).clear().type(newInterfaceId);
-    submitInterfaceInput();
-    verifyInterfaceFrontPagePatchRequest({ interfaceId: newInterfaceId });
+      const interfaceIdSelector = 'interface-id';
+      const newInterfaceId = 'NewId';
+      cy.inputByCy(interfaceIdSelector).should('have.value', 'testId');
+      cy.inputByCy(interfaceIdSelector).clear().type(newInterfaceId);
+      submitInterfaceInput();
+      verifyInterfaceFrontPagePatchRequest({ interfaceId: newInterfaceId });
 
-    const versionSelector = 'interface-version';
-    const newVersion = 'V2';
-    cy.inputByCy(versionSelector).should('have.value', 'testVersion');
-    cy.inputByCy(versionSelector).clear().type(newVersion);
-    submitInterfaceInput();
-    verifyInterfaceFrontPagePatchRequest({ version: newVersion });
+      const versionSelector = 'interface-version';
+      const newVersion = 'V2';
+      cy.inputByCy(versionSelector).should('have.value', 'testVersion');
+      cy.inputByCy(versionSelector).clear().type(newVersion);
+      submitInterfaceInput();
+      verifyInterfaceFrontPagePatchRequest({ version: newVersion });
 
-    const systemSelector = 'interface-system';
-    cy.dropdownByCy(systemSelector, 'System 2', true);
-    verifyInterfaceFrontPagePatchRequest({ exposedBySystemUuid: '33260834-333a-4820-8e1f-d1b05edf6dd0' });
+      const systemSelector = 'interface-system';
+      cy.dropdownByCy(systemSelector, 'System 2', true);
+      verifyInterfaceFrontPagePatchRequest({ exposedBySystemUuid: '33260834-333a-4820-8e1f-d1b05edf6dd0' });
 
-    cy.wait(1000);
+      cy.wait(1000);
 
-    const scopeSelector = 'interface-visibility';
-    cy.dropdownByCy(scopeSelector, 'Offentlig', true);
-    verifyInterfaceFrontPagePatchRequest({ scope: 'Global' });
+      const scopeSelector = 'interface-visibility';
+      cy.dropdownByCy(scopeSelector, 'Offentlig', true);
+      verifyInterfaceFrontPagePatchRequest({ scope: 'Global' });
 
-    const typeSelector = 'interface-type';
-    cy.dropdownByCy(typeSelector, 'InterfaceType2', true);
-    verifyInterfaceFrontPagePatchRequest({ itInterfaceTypeUuid: '11fb8cbb-0eb2-482c-b8f7-029017a22b33' });
+      const typeSelector = 'interface-type';
+      cy.dropdownByCy(typeSelector, 'InterfaceType2', true);
+      verifyInterfaceFrontPagePatchRequest({ itInterfaceTypeUuid: '11fb8cbb-0eb2-482c-b8f7-029017a22b33' });
 
-    cy.inputByCy('interface-uuid').should('have.value', '06f0000e-4fb9-4ea2-bb57-03430ee2a632');
-    cy.inputByCy('interface-create-by').should('have.value', 'Automatisk oprettet testbruger (LocalAdmin)');
-    cy.inputByCy('interface-rights-holder').should('have.value', 'Fælles Kommune');
+      cy.inputByCy('interface-uuid').should('have.value', '06f0000e-4fb9-4ea2-bb57-03430ee2a632');
+      cy.inputByCy('interface-create-by').should('have.value', 'Automatisk oprettet testbruger (LocalAdmin)');
+      cy.inputByCy('interface-rights-holder').should('have.value', 'Fælles Kommune');
 
-    cy.inputByCy('interface-link').getByDataCy('edit-link-button').click();
+      cy.inputByCy('interface-link').getByDataCy('edit-link-button').click();
 
-    cy.get('app-dialog').within(() => {
-      cy.inputByCy('url-textbox').clear().type('newurl');
-      cy.getByDataCy('edit-url-save-button').click();
-    });
-    verifyInterfaceFrontPagePatchRequest({ urlReference: 'newurl' });
+      cy.get('app-dialog').within(() => {
+        cy.inputByCy('url-textbox').clear().type('newurl');
+        cy.getByDataCy('edit-url-save-button').click();
+      });
+      verifyInterfaceFrontPagePatchRequest({ urlReference: 'newurl' });
 
-    const descriptionSelector = 'interface-description';
-    const newDescription = 'New description';
-    cy.textareaByCy(descriptionSelector).should('have.value', 'test description');
-    cy.textareaByCy(descriptionSelector).clear().type(newDescription);
-    submitInterfaceInput();
-    verifyInterfaceFrontPagePatchRequest({ description: newDescription });
+      const descriptionSelector = 'interface-description';
+      const newDescription = 'New description';
+      cy.textareaByCy(descriptionSelector).should('have.value', 'test description');
+      cy.textareaByCy(descriptionSelector).clear().type(newDescription);
+      submitInterfaceInput();
+      verifyInterfaceFrontPagePatchRequest({ description: newDescription });
 
-    const notesSelector = 'interface-notes';
-    const newNote = 'New note';
-    cy.textareaByCy(notesSelector).should('have.value', 'test note');
-    cy.textareaByCy(notesSelector).clear().type(newNote);
-    cy.textareaByCy(descriptionSelector).click();
-    verifyInterfaceFrontPagePatchRequest({ note: newNote });
+      const notesSelector = 'interface-notes';
+      const newNote = 'New note';
+      cy.textareaByCy(notesSelector).should('have.value', 'test note');
+      cy.textareaByCy(notesSelector).clear().type(newNote);
+      cy.textareaByCy(descriptionSelector).click();
+      verifyInterfaceFrontPagePatchRequest({ note: newNote });
     });
 
     testRunner.runTestWithSetup('can add interface data', () => {
       setupRegularInterfaceDetails();
 
-    cy.getByDataCy('add-data-button').click();
-    cy.get('app-dialog').within(() => {
-      cy.intercept('/api/v2/it-interfaces/**', {});
-      cy.inputByCy('data-textbox').type('Data description');
-      cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
-      cy.getByDataCy('write-data-save-button').click();
-    });
+      cy.getByDataCy('add-data-button').click();
+      cy.get('app-dialog').within(() => {
+        cy.intercept('/api/v2/it-interfaces/**', {});
+        cy.inputByCy('data-textbox').type('Data description');
+        cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
+        cy.getByDataCy('write-data-save-button').click();
+      });
     });
 
     testRunner.runTestWithSetup('can edit interface data', () => {
       setupRegularInterfaceDetails();
 
-    cy.getByDataCy('edit-data-button').click();
-    cy.get('app-dialog').within(() => {
-      cy.intercept('/api/v2/it-interfaces/**', {});
-      cy.inputByCy('data-textbox').should('have.value', 'test').clear().type('Data description');
-      cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
-      cy.getByDataCy('write-data-save-button').click();
-    });
+      cy.getByDataCy('edit-data-button').click();
+      cy.get('app-dialog').within(() => {
+        cy.intercept('/api/v2/it-interfaces/**', {});
+        cy.inputByCy('data-textbox').should('have.value', 'test').clear().type('Data description');
+        cy.dropdownByCy('data-type-dropdown', 'Dokument', true);
+        cy.getByDataCy('write-data-save-button').click();
+      });
     });
 
     testRunner.runTestWithSetup('deactivate button should be visible', () => {
       setupRegularInterfaceDetails();
 
-    cy.getByDataCy('deactivate-interface-button').should('exist');
-    cy.getByDataCy('activate-interface-button').should('not.exist');
-
+      cy.getByDataCy('deactivate-interface-button').should('exist');
+      cy.getByDataCy('activate-interface-button').should('not.exist');
     });
 
     testRunner.runTestWithSetup('activate button should be visible', () => {
       cy.intercept('/api/v2/it-interfaces/*', {
-      fixture: './it-interfaces/it-interface-deactivated.json',
-    });
-    goToInterfaceDetails();
+        fixture: './it-interfaces/it-interface-deactivated.json',
+      });
+      goToInterfaceDetails();
 
-    cy.getByDataCy('activate-interface-button').should('exist');
-    cy.getByDataCy('deactivate-interface-button').should('not.exist');
+      cy.getByDataCy('activate-interface-button').should('exist');
+      cy.getByDataCy('deactivate-interface-button').should('not.exist');
     });
 
     testRunner.runTestWithSetup('cannot save link with unchanged url', () => {
       setupRegularInterfaceDetails();
-    cy.getByDataCy('interface-link').getByDataCy('edit-link-button').click();
+      cy.getByDataCy('interface-link').getByDataCy('edit-link-button').click();
 
-    cy.verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
+      cy.verifyDialogConfirmButtonDisabledByReactiveForm('edit-url-save-button');
     });
-  })
+  });
 });
 
 function setupRegularInterfaceDetails() {
