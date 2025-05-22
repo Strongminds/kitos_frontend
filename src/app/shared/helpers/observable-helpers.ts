@@ -49,15 +49,6 @@ export function filterByValidCache<T>(cached$: Observable<Cached<T>>) {
     );
 }
 
-export function filterByReversedBooleanObservable<T>(selector: () => Observable<boolean>) {
-  return (source: Observable<T>) =>
-    source.pipe(
-      concatLatestFrom(() => selector()),
-      filter(([_, observableValue]) => !observableValue),
-      map(([action]) => action)
-    );
-}
-
 export function mapArray<T, U>(fn: (item: T) => U): OperatorFunction<T[], U[]> {
   return map((arr: T[]) => arr.map(fn));
 }

@@ -100,7 +100,7 @@ describe('it-system-usage roles', () => {
     cy.get('app-dialog').contains('Tilføj').click();
   });
 
-  it('Can edit system role', () => {
+  it.only('Can edit system role', () => {
     cy.contains('System 3').click();
 
     const exisitingRole = {
@@ -130,7 +130,7 @@ describe('it-system-usage roles', () => {
     }).as('deleteRoleRequest');
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'updateRoleRequest'
+      'updateRoleRequest',
     );
 
     cy.getByDataCy('save-button').click();

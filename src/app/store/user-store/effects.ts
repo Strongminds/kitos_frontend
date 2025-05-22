@@ -15,7 +15,6 @@ import {
 import { APIV2OrganizationGridInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationGridInternalINTERNAL.service';
 import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2/api/v2OrganizationsInternalINTERNAL.service';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import { StartPreferenceChoice } from 'src/app/shared/models/organization/organization-user/start-preference.model';
 import { UIRootConfig } from 'src/app/shared/models/ui-config/ui-root-config.model';
 import { adaptUser } from 'src/app/shared/models/user.model';
@@ -24,12 +23,7 @@ import { resetOrganizationStateAction, resetStateAction } from '../meta/actions'
 import { selectPagedOrganizationUnits } from '../organization/organization-unit/selectors';
 import { selectUIRootConfig } from '../organization/selectors';
 import { UserActions } from './actions';
-import {
-  selectHasValidUserGridPermissionsCache,
-  selectOrganizationUuid,
-  selectUser,
-  selectUserUuid,
-} from './selectors';
+import { selectOrganizationUuid, selectUser, selectUserUuid } from './selectors';
 
 @Injectable()
 export class UserEffects {
@@ -149,7 +143,6 @@ export class UserEffects {
   getUserGridPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.getUserGridPermissions),
-      filterByReversedBooleanObservable(() => this.store.select(selectHasValidUserGridPermissionsCache)),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
         this.organizationGridService

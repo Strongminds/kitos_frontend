@@ -1,6 +1,5 @@
 import { createEntityAdapter, Update } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { newCache } from 'src/app/shared/models/cache-item.model';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ODataOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { DataProcessingActions } from '../../data-processing/actions';
@@ -32,7 +31,7 @@ export const organizationUserFeature = createFeature({
     organizationUserInitialState,
     on(
       OrganizationUserActions.getOrganizationUsers,
-      (state): OrganizationUserState => ({ ...state, isLoadingUsersQuery: true })
+      (state): OrganizationUserState => ({ ...state, isLoadingUsersQuery: true }),
     ),
     on(
       OrganizationUserActions.getOrganizationUsersSuccess,
@@ -40,11 +39,11 @@ export const organizationUserFeature = createFeature({
         ...organizationUserAdapter.setAll(users, state),
         total,
         isLoadingUsersQuery: false,
-      })
+      }),
     ),
     on(
       OrganizationUserActions.getOrganizationUsersError,
-      (state): OrganizationUserState => ({ ...state, isLoadingUsersQuery: false })
+      (state): OrganizationUserState => ({ ...state, isLoadingUsersQuery: false }),
     ),
     on(OrganizationUserActions.updateGridColumnsSuccess, (state, { gridColumns }): OrganizationUserState => {
       return {
@@ -59,19 +58,19 @@ export const organizationUserFeature = createFeature({
         isLoadingUsersQuery: true,
         gridState,
         previousGridState: state.gridState,
-      })
+      }),
     ),
     on(
       OrganizationUserActions.getOrganizationUserPermissionsSuccess,
       (state, { permissions }): OrganizationUserState => ({
         ...state,
-        permissions: newCache(permissions),
-      })
+        permissions,
+      }),
     ),
     on(OrganizationUserActions.createUser, (state): OrganizationUserState => ({ ...state, createLoading: true })),
     on(
       OrganizationUserActions.createUserSuccess,
-      (state): OrganizationUserState => ({ ...state, createLoading: false })
+      (state): OrganizationUserState => ({ ...state, createLoading: false }),
     ),
     on(OrganizationUserActions.createUserError, (state): OrganizationUserState => ({ ...state, createLoading: false })),
     on(
@@ -81,7 +80,7 @@ export const organizationUserFeature = createFeature({
           OrganizationUnitRights: filterRightFromRights(previousState.OrganizationUnitRights, roleUuid, unitUuid),
         });
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
-      }
+      },
     ),
 
     on(
@@ -91,7 +90,7 @@ export const organizationUserFeature = createFeature({
           ItSystemRights: filterRightFromRights(previousState.ItSystemRights, roleUuid, itSystemUsageUuid),
         });
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
-      }
+      },
     ),
 
     on(
@@ -101,7 +100,7 @@ export const organizationUserFeature = createFeature({
           ItContractRights: filterRightFromRights(previousState.ItContractRights, roleUuid, contractUuid),
         });
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
-      }
+      },
     ),
 
     on(
@@ -111,12 +110,19 @@ export const organizationUserFeature = createFeature({
           DataProcessingRegistrationRights: filterRightFromRights(
             previousState.DataProcessingRegistrationRights,
             roleUuid,
-            dataProcessingUuid
+            dataProcessingUuid,
           ),
         });
         return updateStateOfUserRights(state, userUuid, partialUpdateFunction);
-      }
+      },
     ),
+
+    on(OrganizationUserActions.getUserPermissionsSuccess, (state, { permissions }): OrganizationUserState => {
+      return {
+        ...state,
+        permissions,
+      };
+    }),
 
     on(OrganizationUserActions.sendNotificationSuccess, (state, { userUuid }): OrganizationUserState => {
       const todaysDate = new Date();
@@ -125,6 +131,6 @@ export const organizationUserFeature = createFeature({
         changes: { LastAdvisSent: todaysDate.toISOString() },
       };
       return organizationUserAdapter.updateOne(changes, state);
-    })
+    }),
   ),
 });
