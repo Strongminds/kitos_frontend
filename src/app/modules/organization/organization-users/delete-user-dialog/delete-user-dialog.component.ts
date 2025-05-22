@@ -88,11 +88,11 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
       )
     );
 
-    this.subscriptions.add(
+    /* this.subscriptions.add(
       this.user$.subscribe((user) => {
         console.log('User:', user);
       })
-    );
+    ); */
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserError)).subscribe(() => {

@@ -226,7 +226,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
           combineLatestWith(this.gridState$)
         )
         .subscribe(([_, gridState]) => {
-          console.log('Update grid state:', gridState);
           this.stateChange(gridState);
         })
     );
