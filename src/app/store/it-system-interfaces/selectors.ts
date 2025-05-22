@@ -1,5 +1,4 @@
 import { createSelector } from '@ngrx/store';
-import { createHasValidCollectionPermissionsCacheSelector, createHasValidPermissionsCacheSelector } from 'src/app/shared/helpers/permissions.helpers';
 import { itInterfaceAdapter, itInterfaceFeature } from './reducer';
 
 const { selectITInterfaceState } = itInterfaceFeature;
@@ -8,7 +7,7 @@ export const selectAll = createSelector(selectITInterfaceState, itInterfaceAdapt
 export const selectTotal = createSelector(selectITInterfaceState, (state) => state.total);
 export const selectInterfaceGridLoading = createSelector(
   selectITInterfaceState,
-  (state) => state.isLoadingInterfacesQuery
+  (state) => state.isLoadingInterfacesQuery,
 );
 export const selectInterfaceGridState = createSelector(selectITInterfaceState, (state) => state.gridState);
 export const selectInterfaceGridData = createSelector(selectAll, selectTotal, (data, total) => ({ data, total }));
@@ -26,24 +25,21 @@ export const selectInterfaceDeactivated = createSelector(selectInterface, (itInt
 
 export const selectInterfaceHasReadPermission = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.value?.read
+  (state) => state.permissions?.read,
 );
 export const selectInterfaceHasModifyPermission = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.value?.modify
+  (state) => state.permissions?.modify,
 );
 export const selectInterfaceHasDeletePermission = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.value?.delete
+  (state) => state.permissions?.delete,
 );
 export const selectInterfaceDeletionConflicts = createSelector(
   selectITInterfaceState,
-  (state) => state.permissions?.value?.deletionConflicts
+  (state) => state.permissions?.deletionConflicts,
 );
-export const selectHasValidItInterfacePermissionsCache = createHasValidPermissionsCacheSelector(selectITInterfaceState);
 export const selectInterfaceHasCreateCollectionPermission = createSelector(
   selectITInterfaceState,
-  (state) => state.collectionPermissions?.value?.create
+  (state) => state.collectionPermissions?.create,
 );
-export const selectHasValidItInterfaceCollectionPermissionsCache =
-  createHasValidCollectionPermissionsCacheSelector(selectITInterfaceState);
