@@ -12,7 +12,7 @@ const setupTest = () => {
 };
 
 describe('data-processing-front-page', () => {
-  it.only('Tests', () => {
+  it('Tests', () => {
     const testRunner = new TestRunner(setupTest);
 
     testRunner.runTestWithSetup('Agreement conclusion date is enabled when agreement is concluded', () => {

@@ -22,7 +22,7 @@ function setupTest() {
 }
 
 describe('global-admin-organizations', () => {
-  it.only('Tests', () => {
+  it('Tests', () => {
     const testRunner = new TestRunner(setupTest);
 
     testRunner.runTestWithSetup('Can toggle business type enabled', () => {

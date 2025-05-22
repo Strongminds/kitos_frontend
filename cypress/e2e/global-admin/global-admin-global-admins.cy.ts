@@ -10,7 +10,7 @@ function setupTest() {
 }
 
 describe('global-admin-global-admins', () => {
-  it.only('Tests', () => {
+  it('Tests', () => {
     const testRunner = new TestRunner(setupTest);
 
     testRunner.runTestWithSetup('Can add global admin', () => {

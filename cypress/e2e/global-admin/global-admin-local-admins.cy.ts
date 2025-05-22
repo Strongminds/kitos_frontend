@@ -11,7 +11,7 @@ function setupTest() {
 describe('global-admin-local-admins', () => {
   const testRunner = new TestRunner(setupTest);
 
-  it.only('Tests', () => {
+  it('Tests', () => {
     testRunner.runTestWithSetup('Can add local admin', () => {
       cy.intercept('api/v2/internal/users/search', { fixture: './global-admin/users.json' }).as('users');
       cy.intercept('api/v2/organizations', { fixture: './organizations/organizations-multiple.json' }).as(
