@@ -4,7 +4,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, filter, first, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, first, map, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   BulkActionButton,
@@ -17,6 +17,7 @@ import {
   ODataOrganizationUser,
   Right,
 } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
@@ -58,6 +59,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   private readonly availableDprRoles$ = this.store.select(selectRoleOptionTypes('data-processing'));
 
   public hasRoles$!: Observable<boolean>;
+  public currentUser$ = new BehaviorSubject<ODataOrganizationUser | null>(null);
 
   public isLoading: boolean = false;
 
@@ -88,7 +90,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
       )
     );
 
-    this.subscriptions.add(this.user$.subscribe());
+    this.subscriptions.add(this.user$.subscribe((user) => this.currentUser$.next(user)));
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserError)).subscribe(() => {
@@ -142,7 +144,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     instance.errorActionTypes = OrganizationUserActions.transferRolesError;
     instance.actionButtons = dialogActions;
     instance.sections = getUserRoleSelectionDialogSections(
-      this.user$,
+      this.currentUser$.pipe(filterNullish()),
       this.availableUnitRoles$,
       this.availableContractRoles$,
       this.availableUsageRoles$,
