@@ -96,6 +96,14 @@ export class HideShowDialogComponent implements OnInit {
     this.dialogRef.close();
   }
 
+  public isAllSelectedOfSection(section: string): boolean {
+    return this.columnsCopy.filter((column) => column.section === section).every((column) => !column.hidden);
+  }
+  public toggleSection(value: boolean | undefined, section: string) {
+    const columnsInSection = this.columnsCopy.filter((column) => column.section === section && !column.required);
+    columnsInSection.forEach((column) => (column.hidden = !value));
+  }
+
   private mergeColumnChanges(): GridColumn[] {
     return this.columns.map((originalColumn) => {
       const updatedColumn = this.columnsCopy.find((c) => c.field === originalColumn.field);
