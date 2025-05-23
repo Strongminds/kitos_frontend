@@ -62,7 +62,7 @@ export const roleOptionTypeFeature = createFeature({
     on(RoleOptionTypeActions.getOptionsError, (state, { optionType }): RoleOptionTypeState => {
       const nextState = getNextState(state);
 
-      const updatedState = updateIsLoading(nextState, optionType, true);
+      const updatedState = updateIsLoading(nextState, optionType, false);
 
       return updatedState;
     }),
