@@ -57,17 +57,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   private readonly availableUsageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage'));
   private readonly availableDprRoles$ = this.store.select(selectRoleOptionTypes('data-processing'));
 
-  public hasRoles$ = combineLatest([
-    this.user$,
-    this.availableUnitRoles$,
-    this.availableUsageRoles$,
-    this.availableContractRoles$,
-    this.availableDprRoles$,
-  ]).pipe(
-    map(([user, unitRoles, usageRoles, contractRoles, dprRoles]) =>
-      userHasAnyAvailableRights(user, unitRoles, usageRoles, contractRoles, dprRoles)
-    )
-  );
+  public hasRoles$!: Observable<boolean>;
 
   public isLoading: boolean = false;
 
@@ -83,6 +73,18 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.hasRoles$ = combineLatest([
+      this.user$,
+      this.availableUnitRoles$,
+      this.availableUsageRoles$,
+      this.availableContractRoles$,
+      this.availableDprRoles$,
+    ]).pipe(
+      map(([user, unitRoles, usageRoles, contractRoles, dprRoles]) =>
+        userHasAnyAvailableRights(user, unitRoles, usageRoles, contractRoles, dprRoles)
+      )
+    );
+
     this.roleService.dispatchAllGetAvailableOptions();
 
     // Probably can be fixed with a better solution
