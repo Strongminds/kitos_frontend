@@ -19,7 +19,6 @@ import {
 } from 'src/app/api/v2';
 import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
-import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -34,8 +33,6 @@ import {
   selectDataProcessingGridColumns,
   selectDataProcessingRightUuidPairs,
   selectDataProcessingUuid,
-  selectHasValidDataProcessingCollectionPermissionsCache,
-  selectHasValidDataProcessingPermissionsCache,
   selectOverviewRoles,
   selectOverviewRolesCache,
   selectPreviousGridState,
@@ -183,11 +180,10 @@ export class DataProcessingEffects {
   getDataProcessingPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessingPermissions),
-      filterByReversedBooleanObservable(() => this.store.select(selectHasValidDataProcessingPermissionsCache)),
-      switchMap((action) =>
+      switchMap(({ dataProcessingUuid }) =>
         this.dataProcessingService
           .getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions({
-            dprUuid: action.dataProcessingUuid,
+            dprUuid: dataProcessingUuid,
           })
           .pipe(
             map((permissions) => DataProcessingActions.getDataProcessingPermissionsSuccess(permissions)),
@@ -200,9 +196,6 @@ export class DataProcessingEffects {
   getDataProcessingCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.getDataProcessingCollectionPermissions),
-      filterByReversedBooleanObservable(() =>
-        this.store.select(selectHasValidDataProcessingCollectionPermissionsCache)
-      ),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.dataProcessingService

@@ -42,6 +42,10 @@ export const OrganizationUserActions = createActionGroup({
     'Send Notification Success': (userUuid: string) => ({ userUuid }),
     'Send Notification Error': emptyProps(),
 
+    'Get user permissions': emptyProps(),
+    'Get user permissions success': (permissions: APIUserCollectionPermissionsResponseDTO) => ({ permissions }),
+    'Get user permissions error': emptyProps(),
+
     'Update User': (userUuid: string, request: APIUpdateUserRequestDTO) => ({ userUuid, request }),
     'Update User Success': (user: APIUserResponseDTO) => ({ user }),
     'Update User Error': emptyProps(),
