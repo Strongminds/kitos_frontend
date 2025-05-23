@@ -1,27 +1,33 @@
 /// <reference types="cypress" />
 
+import { TestRunner } from 'cypress/support/test-runner';
+
+function setupTest() {
+  cy.requireIntercept();
+    cy.setupContractIntercepts();
+    cy.setup(true, 'it-contracts');
+}
+
 describe('it-contracts.external-references', () => {
   const itContractBaseUrl = '/api/v2/it-contracts/*';
   const refsUrl = '/api/v2/internal/external-references/it-contracts/*';
-  beforeEach(() => {
-    cy.requireIntercept();
-    cy.setupContractIntercepts();
-    cy.setup(true, 'it-contracts');
-  });
 
-  it('can show external references', () => {
-    cy.intercept(refsUrl, {
-      fixture: './external-references/normal-external-references.json',
+  it('Tests', () => {
+    const testRunner = new TestRunner(setupTest);
+
+    testRunner.runTestWithSetup('can show external references', () => {
+      cy.intercept(refsUrl, {
+        fixture: './external-references/normal-external-references.json',
+      });
+      cy.contains('Contract 1').click();
+
+      cy.navigateToDetailsSubPage('Referencer');
+
+      cy.testCanShowExternalReferences();
     });
-    cy.contains('Contract 1').click();
 
-    cy.navigateToDetailsSubPage('Referencer');
-
-    cy.testCanShowExternalReferences();
-  });
-
-  it('can show no external references', () => {
-    cy.intercept(refsUrl, {
+    testRunner.runTestWithSetup('can show no external references', () => {
+       cy.intercept(refsUrl, {
       fixture: './external-references/no-external-references.json',
     });
     cy.contains('Contract').click();
@@ -29,10 +35,10 @@ describe('it-contracts.external-references', () => {
 
     cy.contains('Der er endnu ikke tilføjet referencer');
     cy.contains('Opret reference');
-  });
+    });
 
-  it('can add external reference with required master reference, when no reference is present', () => {
-    cy.intercept(refsUrl, {
+    testRunner.runTestWithSetup('can add external reference with required master reference, when no reference is present', () => {
+       cy.intercept(refsUrl, {
       fixture: './external-references/no-external-references.json',
     });
     cy.contains('Contract 1').click();
@@ -43,10 +49,10 @@ describe('it-contracts.external-references', () => {
     });
 
     cy.externalReferencesSaveAndValidate(true, false, false, itContractBaseUrl, './it-contracts/it-contract.json');
-  });
+    });
 
-  it('can modify external reference, and assign new Master reference', () => {
-    cy.intercept(refsUrl, {
+    testRunner.runTestWithSetup('can modify external reference, and assign new Master reference', () => {
+      cy.intercept(refsUrl, {
       fixture: './external-references/normal-external-references.json',
     });
     cy.contains('Contract 1').click();
@@ -64,5 +70,7 @@ describe('it-contracts.external-references', () => {
       './it-contracts/it-contract-with-external-references.json',
       'Valid url',
     );
+    });
   });
+
 });
