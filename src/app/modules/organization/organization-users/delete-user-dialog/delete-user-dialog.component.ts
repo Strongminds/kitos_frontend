@@ -85,6 +85,10 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.roleService.dispatchAllGetAvailableOptions();
 
+    // Probably can be fixed with a better solution
+    // Subscription is needed to keep the user$ observable alive
+    // Otherwise the transfer dialog is flaky
+    // https://os2web.atlassian.net/browse/KITOSUDV-5956
     this.subscriptions.add(this.user$.subscribe());
 
     this.subscriptions.add(
