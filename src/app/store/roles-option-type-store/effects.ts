@@ -22,12 +22,9 @@ export class RoleOptionTypeEffects {
         this.store.select(selectHasValidCache(optionType)),
       ]),
       mergeMap(([{ optionType }, organizationUuid, validCache]) => {
-        if (!organizationUuid) return of(); // skip if no org
         if (validCache) {
-          // Dispatch a "cache hit" or similar action if you want
           return of(RoleOptionTypeActions.updateLoadingOnValidCache(optionType));
         }
-        // Otherwise, fetch from API
         return this.roleService.getAvailableOptions(organizationUuid, optionType).pipe(
           map((response) => RoleOptionTypeActions.getOptionsSuccess(optionType, response)),
           catchError(() => of(RoleOptionTypeActions.getOptionsError(optionType)))
