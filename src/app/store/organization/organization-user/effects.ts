@@ -7,7 +7,6 @@ import { compact } from 'lodash';
 import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { APIOrganizationUserResponseDTO, APIV2UsersInternalINTERNALService } from 'src/app/api/v2';
 import { ORGANIZATION_USER_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
-import { filterByReversedBooleanObservable } from 'src/app/shared/helpers/observable-helpers';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationUser } from 'src/app/shared/models/organization/organization-user/organization-user.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -15,7 +14,7 @@ import { GridColumnStorageService } from 'src/app/shared/services/grid-column-st
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid, selectUserUuid } from '../../user-store/selectors';
 import { OrganizationUserActions } from './actions';
-import { selectHasValidOrganizationUserPermissionsCache, selectPreviousGridState } from './selectors';
+import { selectPreviousGridState } from './selectors';
 
 @Injectable()
 export class OrganizationUserEffects {
@@ -87,7 +86,6 @@ export class OrganizationUserEffects {
   getUserPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUserPermissions),
-      filterByReversedBooleanObservable(() => this.store.select(selectHasValidOrganizationUserPermissionsCache)),
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.apiService.getSingleUsersInternalV2GetCollectionPermissions({ organizationUuid }).pipe(
