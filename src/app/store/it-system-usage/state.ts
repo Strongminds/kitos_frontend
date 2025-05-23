@@ -23,8 +23,8 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
 
   itSystemUsage: APIItSystemUsageResponseDTO | undefined;
   itSystemUsageLoading: boolean;
-  permissions: Cached<APIResourcePermissionsResponseDTO> | undefined;
-  collectionPermissions: Cached<APIResourceCollectionPermissionsResponseDTO> | undefined;
+  permissions: APIResourcePermissionsResponseDTO | undefined;
+  collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
 
   isRemoving: boolean;
   lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
