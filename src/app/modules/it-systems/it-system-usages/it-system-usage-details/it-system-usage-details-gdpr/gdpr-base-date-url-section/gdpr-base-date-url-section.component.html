@@ -25,7 +25,6 @@
       [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
       data-cy="base-date-url-section-selector"
       (submitMethod)="patchSimpleLink($event)"
-      (clearClick)="patchSimpleLink(null)"
       [isDisabled]="disableLinkControl"
     >
     </app-edit-url-section>
