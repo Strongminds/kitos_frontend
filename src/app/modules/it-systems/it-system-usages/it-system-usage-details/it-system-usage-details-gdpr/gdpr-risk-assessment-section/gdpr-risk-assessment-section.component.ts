@@ -120,8 +120,7 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
   }
 
   public clearLink() {
-    this.patchGdpr({
-      riskAssessmentDocumentation: null,
-    } as any);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.patchGdpr({ riskAssessmentDocumentation: null } as any);
   }
 }
