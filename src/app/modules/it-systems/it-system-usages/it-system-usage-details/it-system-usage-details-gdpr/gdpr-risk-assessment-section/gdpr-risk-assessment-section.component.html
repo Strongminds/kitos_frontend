@@ -53,6 +53,7 @@
           [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
           data-cy="risk-documentation-link"
           (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
+          (clearClick)="clearLink()"
           [isDisabled]="disableDirectoryDocumentationControl"
         ></app-edit-url-section>
         <app-textarea

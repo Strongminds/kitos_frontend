@@ -1,3 +1,4 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -23,12 +24,11 @@ import {
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
-import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { NgIf, AsyncPipe } from '@angular/common';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-gdpr-risk-assessment-section',
@@ -53,16 +53,16 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRiskAssessmentFalse$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.riskAssessmentConducted !== APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum.Yes),
+    map((gdpr) => gdpr.riskAssessmentConducted !== APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum.Yes)
   );
   public readonly selectRiskDocumentation$ = this.currentGdpr$.pipe(map((gdpr) => gdpr.riskAssessmentDocumentation));
   public disableDirectoryDocumentationControl = false;
 
   public readonly enablePlannedRiskAssessmentDateField$ = this.store.select(
-    selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
+    selectITSystemUsageEnableGdprPlannedRiskAssessmentDate
   );
   public readonly conductedRiskAssessmentEnabled$ = this.store.select(
-    selectITSystemUsageEnableGdprConductedRiskAssessment,
+    selectITSystemUsageEnableGdprConductedRiskAssessment
   );
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
@@ -75,7 +75,7 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
       assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>(undefined),
       notesControl: new FormControl<string | undefined>(undefined),
     },
-    { updateOn: 'blur' },
+    { updateOn: 'blur' }
   );
 
   constructor(private readonly store: Store) {
@@ -117,5 +117,11 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
     if (valueChange && !valueChange.valid) return;
 
     this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
+  }
+
+  public clearLink() {
+    this.patchGdpr({
+      riskAssessmentDocumentation: null,
+    } as any);
   }
 }
