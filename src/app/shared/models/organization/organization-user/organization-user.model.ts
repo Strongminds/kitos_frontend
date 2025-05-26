@@ -59,10 +59,10 @@ export const adaptOrganizationUser = (value: any): ODataOrganizationUser | undef
     IsContractModuleAdmin: checkIfUserHasRole(contractModuleAdminRole, value.OrganizationRights),
     IsSystemModuleAdmin: checkIfUserHasRole(systemModuleAdminRole, value.OrganizationRights),
     Roles: roles,
-    OrganizationUnitRights: value.OrganizationUnitRights.map(adaptEntityRights),
-    ItSystemRights: value.ItSystemRights.map(adaptItSystemRights),
-    ItContractRights: value.ItContractRights.map(adaptEntityRights),
-    DataProcessingRegistrationRights: value.DataProcessingRegistrationRights.map(adaptEntityRights),
+    OrganizationUnitRights: [], // value.OrganizationUnitRights?.map(adaptEntityRights) ?? [],
+    ItSystemRights: value.ItSystemRights?.map(adaptItSystemRights) ?? [],
+    ItContractRights: value.ItContractRights?.map(adaptEntityRights) ?? [],
+    DataProcessingRegistrationRights: value.DataProcessingRegistrationRights?.map(adaptEntityRights) ?? [],
   };
 
   return adaptedUser;

@@ -19,7 +19,6 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
-  selectOrganizationUserByIndex,
   selectOrganizationUserByUuid,
   selectOrganizationUserCreatePermissions,
   selectOrganizationUserDeletePermissions,
@@ -246,7 +245,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
 
   override rowIdSelect(event: CellClickEvent) {
     if (this.cellIsClickableStyle(event)) {
-      this.openUserInfoDialog(event.rowIndex);
+      this.openUserInfoDialog(event.dataItem.Uuid);
     }
   }
 
@@ -255,8 +254,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.store.dispatch(OrganizationUserActions.updateGridColumns(columns));
   }
 
-  private openUserInfoDialog(index: number) {
-    const user$ = this.store.select(selectOrganizationUserByIndex(index));
+  private openUserInfoDialog(uuid: string): void {
+    const user$ = this.store.select(selectOrganizationUserByUuid(uuid)).pipe(filterNullish());
     const dialogRef = this.dialog.open(UserInfoDialogComponent, { minWidth: '800px', width: '25%' });
     dialogRef.componentInstance.user$ = user$;
     dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
