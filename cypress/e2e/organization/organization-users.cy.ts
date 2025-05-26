@@ -14,6 +14,18 @@ function setupTest() {
   });
   cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
 
+  cy.intercept('/api/v2/data-processing-registration-role-types*', {
+    fixture: './dpr/data-processing-registration-role-types.json',
+  });
+  cy.intercept('/api/v2/it-contract-role-types*', {
+    fixture: './it-contracts/notifications/it-contract-role-types.json',
+  });
+  cy.intercept('/api/v2/it-system-usage-role-types*', {
+    fixture: './it-system-usage/notifications/it-system-usage-role-types.json',
+  });
+  cy.intercept('api/v2/organization-unit-role-types*', {
+    fixture: './organizations/organization-unit-roles.json',
+  });
   cy.setup(true, 'organization/users');
 }
 
