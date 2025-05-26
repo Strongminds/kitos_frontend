@@ -94,10 +94,10 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
 
     this.subscriptions.add(
       this.user$.subscribe((user) => {
-        this.unitRolesSubject$.next(user?.OrganizationUnitRights ?? []);
-        this.contractRolesSubject$.next(user?.ItContractRights ?? []);
-        this.usageRolesSubject$.next(user?.ItSystemRights ?? []);
-        this.dprRolesSubject$.next(user?.DataProcessingRegistrationRights ?? []);
+        this.unitRolesSubject$.next(user.OrganizationUnitRights ?? []);
+        this.contractRolesSubject$.next(user.ItContractRights ?? []);
+        this.usageRolesSubject$.next(user.ItSystemRights ?? []);
+        this.dprRolesSubject$.next(user.DataProcessingRegistrationRights ?? []);
       })
     );
   }
