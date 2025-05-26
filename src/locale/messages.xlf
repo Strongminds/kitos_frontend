@@ -5305,11 +5305,11 @@
       <trans-unit id="1611684173879100499" datatype="html">
         <source>Gå til</source>
       </trans-unit>
-      <trans-unit id="3380743119334575817" datatype="html">
-        <source>udløbet</source>
-      </trans-unit>
       <trans-unit id="7724449879287826549" datatype="html">
         <source>Indeholder AI-teknologi?</source>
+      </trans-unit>
+      <trans-unit id="1502212713118381557" datatype="html">
+        <source>Ingen</source>
       </trans-unit>
     </body>
   </file>

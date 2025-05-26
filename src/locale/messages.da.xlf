@@ -6981,9 +6981,9 @@
         <source>Indeholder AI-teknologi?</source>
         <target state="new">Indeholder AI-teknologi?</target>
       </trans-unit>
-      <trans-unit id="3380743119334575817" datatype="html">
-        <source>udløbet</source>
-        <target state="new">udløbet</target>
+      <trans-unit id="1502212713118381557" datatype="html">
+        <source>Ingen</source>
+        <target state="new">Ingen</target>
       </trans-unit>
     </body>
   </file>
