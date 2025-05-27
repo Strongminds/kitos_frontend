@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 describe('global-admin-help-texts', () => {
   beforeEach(() => {
     cy.requireIntercept();

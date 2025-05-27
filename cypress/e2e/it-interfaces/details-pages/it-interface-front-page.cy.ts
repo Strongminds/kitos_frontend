@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 import { TestRunner } from 'cypress/support/test-runner';
 
 function setupTest() {
@@ -103,6 +101,7 @@ describe('it-system-interfaces', () => {
     });
 
     testRunner.runTestWithSetup('can edit interface data', () => {
+      cy.visit('it-systems/it-interfaces');
       setupRegularInterfaceDetails();
 
       cy.getByDataCy('edit-data-button').click();
