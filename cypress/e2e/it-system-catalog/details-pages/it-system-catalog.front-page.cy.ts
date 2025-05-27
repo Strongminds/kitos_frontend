@@ -1,107 +1,111 @@
 /// <reference types="cypress" />
 
+import { TestRunner } from 'cypress/support/test-runner';
+
+function setupTest() {
+  cy.requireIntercept();
+  cy.setupItSystemCatalogIntercepts();
+
+  cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
+  cy.setup(true, 'it-systems/it-system-catalog');
+}
 describe('it-system-catalog', () => {
-  beforeEach(() => {
-    cy.requireIntercept();
-    cy.setupItSystemCatalogIntercepts();
+  const testRunner = new TestRunner(setupTest);
+  it('it-system-catalog frontpage', () => {
+    testRunner.runTestWithSetup('fields contain correct data, and can be edited', () => {
+      goToDetails();
+      cy.intercept('PATCH', '/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' }).as('patch');
 
-    cy.intercept('/api/v2/it-system-usages/*/permissions', { fixture: './shared/permissions.json' });
-    cy.setup(true, 'it-systems/it-system-catalog');
-  });
+      cy.getByDataCy('remove-usage-it-system-button').should('exist');
 
-  it('fields contain correct data, and can be edited', () => {
-    goToDetails();
-    cy.intercept('PATCH', '/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system.json' }).as('patch');
+      const systemNameSelector = 'it-system-name';
+      const newName = 'New name';
+      cy.inputByCy(systemNameSelector).should('have.value', 'System 1');
+      cy.inputByCy(systemNameSelector).clear().type(newName);
+      submitInput();
+      verifyFrontPagePatchRequest({ name: newName });
 
-    cy.getByDataCy('remove-usage-it-system-button').should('exist');
+      const parentSystemSelector = 'it-system-parent-system';
+      cy.dropdownByCy(parentSystemSelector, 'System 2', true);
+      verifyFrontPagePatchRequest({ parentUuid: 'ede11fff-cf8d-4fb4-8b89-d8822cce64b0' });
 
-    const systemNameSelector = 'it-system-name';
-    const newName = 'New name';
-    cy.inputByCy(systemNameSelector).should('have.value', 'System 1');
-    cy.inputByCy(systemNameSelector).clear().type(newName);
-    submitInput();
-    verifyFrontPagePatchRequest({ name: newName });
+      const formerNameSelector = 'it-system-former-name';
+      const newFormerName = 'Former name';
+      cy.inputByCy(formerNameSelector).should('have.value', 'Old name');
+      cy.inputByCy(formerNameSelector).clear().type(newFormerName);
+      submitInput();
+      verifyFrontPagePatchRequest({ previousName: newFormerName });
 
-    const parentSystemSelector = 'it-system-parent-system';
-    cy.dropdownByCy(parentSystemSelector, 'System 2', true);
-    verifyFrontPagePatchRequest({ parentUuid: 'ede11fff-cf8d-4fb4-8b89-d8822cce64b0' });
+      const rightsHolderSelector = 'it-system-rights-holder';
+      cy.dropdownByCy(rightsHolderSelector, 'Fælles Kommune', true);
+      verifyFrontPagePatchRequest({ rightsHolderUuid: '3dc52c64-3706-40f4-bf58-45035bb376da' });
 
-    const formerNameSelector = 'it-system-former-name';
-    const newFormerName = 'Former name';
-    cy.inputByCy(formerNameSelector).should('have.value', 'Old name');
-    cy.inputByCy(formerNameSelector).clear().type(newFormerName);
-    submitInput();
-    verifyFrontPagePatchRequest({ previousName: newFormerName });
+      const businessTypeSelector = 'it-system-business-type';
+      cy.dropdownByCy(businessTypeSelector, 'GIS (STORM)', true);
+      verifyFrontPagePatchRequest({ businessTypeUuid: '8ec94f16-df25-43bb-aff0-825b4aa7d175' });
 
-    const rightsHolderSelector = 'it-system-rights-holder';
-    cy.dropdownByCy(rightsHolderSelector, 'Fælles Kommune', true);
-    verifyFrontPagePatchRequest({ rightsHolderUuid: '3dc52c64-3706-40f4-bf58-45035bb376da' });
+      const visibilitySelector = 'it-system-visibility';
+      cy.dropdownByCy(visibilitySelector, 'Offentlig', true);
+      verifyFrontPagePatchRequest({ scope: 'Global' });
 
-    const businessTypeSelector = 'it-system-business-type';
-    cy.dropdownByCy(businessTypeSelector, 'GIS (STORM)', true);
-    verifyFrontPagePatchRequest({ businessTypeUuid: '8ec94f16-df25-43bb-aff0-825b4aa7d175' });
+      cy.inputByCy('it-system-uuid').should('have.value', '681385c4-4f4f-4de4-bafe-faa245f1b0e1');
+      const referencesSelector = 'it-system-references';
+      cy.getByDataCy(referencesSelector).contains('Invalid url');
+      cy.getByDataCy(referencesSelector).contains('(www.google.com)');
+      cy.getByDataCy(referencesSelector).contains('Valid url');
+      cy.getByDataCy(referencesSelector).contains('No url Master reference');
 
-    const visibilitySelector = 'it-system-visibility';
-    cy.dropdownByCy(visibilitySelector, 'Offentlig', true);
-    verifyFrontPagePatchRequest({ scope: 'Global' });
+      const descriptionSelector = 'it-system-description';
+      const newDescription = 'New description';
+      cy.textareaByCy(descriptionSelector).should('have.value', 'Old description');
+      cy.textareaByCy(descriptionSelector).clear().type(newDescription);
+      cy.getByDataCy(formerNameSelector).click();
+      verifyFrontPagePatchRequest({ description: newDescription });
 
-    cy.inputByCy('it-system-uuid').should('have.value', '681385c4-4f4f-4de4-bafe-faa245f1b0e1');
-    const referencesSelector = 'it-system-references';
-    cy.getByDataCy(referencesSelector).contains('Invalid url');
-    cy.getByDataCy(referencesSelector).contains('(www.google.com)');
-    cy.getByDataCy(referencesSelector).contains('Valid url');
-    cy.getByDataCy(referencesSelector).contains('No url Master reference');
+      const archivingSelector = 'it-system-recommended-archive-duty';
+      const oldComment = 'Old comment';
+      const newValue = 'K';
+      cy.dropdownByCy(archivingSelector, newValue, true);
+      verifyFrontPagePatchRequest({ recommendedArchiveDuty: { id: newValue, comment: oldComment } });
 
-    const descriptionSelector = 'it-system-description';
-    const newDescription = 'New description';
-    cy.textareaByCy(descriptionSelector).should('have.value', 'Old description');
-    cy.textareaByCy(descriptionSelector).clear().type(newDescription);
-    cy.getByDataCy(formerNameSelector).click();
-    verifyFrontPagePatchRequest({ description: newDescription });
+      const archivingCommentSelector = 'it-system-recommended-archive-duty-comment';
+      const newComment = 'New comment';
+      cy.textareaByCy(archivingCommentSelector).should('have.value', 'Old comment').should('not.be.disabled');
+      cy.textareaByCy(archivingCommentSelector).clear().type(newComment);
+      submitInput();
+      verifyFrontPagePatchRequest({ recommendedArchiveDuty: { id: 'B', comment: newComment } });
 
-    const archivingSelector = 'it-system-recommended-archive-duty';
-    const oldComment = 'Old comment';
-    const newValue = 'K';
-    cy.dropdownByCy(archivingSelector, newValue, true);
-    verifyFrontPagePatchRequest({ recommendedArchiveDuty: { id: newValue, comment: oldComment } });
+      const kleSelector = 'it-system-kle';
+      cy.getByDataCy(kleSelector).contains('TestKLEKey');
+      cy.getByDataCy(kleSelector).contains('Test task ref');
+    });
 
-    const archivingCommentSelector = 'it-system-recommended-archive-duty-comment';
-    const newComment = 'New comment';
-    cy.textareaByCy(archivingCommentSelector).should('have.value', 'Old comment').should('not.be.disabled');
-    cy.textareaByCy(archivingCommentSelector).clear().type(newComment);
-    submitInput();
-    verifyFrontPagePatchRequest({ recommendedArchiveDuty: { id: 'B', comment: newComment } });
+    testRunner.runTestWithSetup('is add usage button and disable button visible', () => {
+      cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system-active-not-in-usage.json' });
 
-    const kleSelector = 'it-system-kle';
-    cy.getByDataCy(kleSelector).contains('TestKLEKey');
-    cy.getByDataCy(kleSelector).contains('Test task ref');
-  });
+      goToDetails();
 
-  it('is add usage button and disable button visible', () => {
-    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system-active-not-in-usage.json' });
+      cy.getByDataCy('add-usage-it-system-button').should('exist');
+      cy.getByDataCy('disable-it-system-button').should('exist');
+    });
 
-    goToDetails();
+    testRunner.runTestWithSetup('is enable button and delete button visible', () => {
+      cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system-inactive-not-in-usage.json' });
 
-    cy.getByDataCy('add-usage-it-system-button').should('exist');
-    cy.getByDataCy('disable-it-system-button').should('exist');
-  });
+      goToDetails();
 
-  it('is enable button and delete button visible', () => {
-    cy.intercept('/api/v2/it-systems/*', { fixture: './it-system-catalog/it-system-inactive-not-in-usage.json' });
+      cy.getByDataCy('delete-it-system-button').should('exist');
+      cy.getByDataCy('enable-it-system-button').should('exist');
+    });
 
-    goToDetails();
+    testRunner.runTestWithSetup('Can see, but not edit, DBS name and DBS data processor name', () => {
+      goToDetails();
+      cy.getByDataCy('legal-name').find('input').should('be.disabled');
+      cy.getByDataCy('legal-data-processor-name').find('input').should('be.disabled');
 
-    cy.getByDataCy('delete-it-system-button').should('exist');
-    cy.getByDataCy('enable-it-system-button').should('exist');
-  });
-
-  it('Can see, but not edit, DBS name and DBS data processor name', () => {
-    goToDetails();
-    cy.getByDataCy('legal-name').find('input').should('be.disabled');
-    cy.getByDataCy('legal-data-processor-name').find('input').should('be.disabled');
-
-    cy.getByDataCy('legal-name').find('input').should('have.value', 'Et DBS navn');
-    cy.getByDataCy('legal-data-processor-name').find('input').should('have.value', 'Et DBS databehandler navn');
+      cy.getByDataCy('legal-name').find('input').should('have.value', 'Et DBS navn');
+      cy.getByDataCy('legal-data-processor-name').find('input').should('have.value', 'Et DBS databehandler navn');
+    });
   });
 });
 

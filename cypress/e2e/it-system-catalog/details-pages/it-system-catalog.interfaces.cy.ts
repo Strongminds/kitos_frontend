@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 import { TestRunner } from 'cypress/support/test-runner';
 
 function setupTest() {
@@ -11,7 +9,7 @@ function setupTest() {
 }
 
 describe('it-system-catalog', () => {
-  it('Tests', () => {
+  it('it-system-catalog interfaces', () => {
     const testRunner = new TestRunner(setupTest);
 
     testRunner.runTestWithSetup('can show interfaces when no associated interfaces', () => {

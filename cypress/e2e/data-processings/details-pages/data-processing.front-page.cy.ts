@@ -39,6 +39,16 @@ describe('data-processing-front-page', () => {
       cy.getByDataCy('responsible-unit-select').should('not.exist');
     });
 
+    testRunner.runTestWithSetup('Main contract can be selected', () => {
+      cy.setup(true, 'data-processing');
+      cy.contains('Dpa 1').click();
+      cy.navigateToDetailsSubPage('IT Kontrakter');
+
+      cy.contains('DefaultTestItContract');
+
+      cy.dropdownByCy('dpr-main-contract', 'DefaultTestItContract', true);
+    });
+
     // testRunner.runTestWithSetup('Can patch and clear responsible unit', () => {
     //   cy.setup(true, 'data-processing');
     //   const responsibleUnitToSelect = {
