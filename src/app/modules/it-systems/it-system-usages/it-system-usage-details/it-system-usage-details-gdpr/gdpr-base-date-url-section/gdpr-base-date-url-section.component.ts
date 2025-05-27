@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -8,11 +9,10 @@ import { ValidatedValueChange } from 'src/app/shared/models/validated-value-chan
 import { YesNoDontKnowOption, yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
-import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
-import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-gdpr-base-date-url-section',
@@ -93,7 +93,10 @@ export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent impl
     this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
   }
 
-  public patchSimpleLink(simpleLink: { url: string; name: string }, valueChange?: ValidatedValueChange<unknown>) {
+  public patchSimpleLink(
+    simpleLink: { url: string; name: string } | null,
+    valueChange?: ValidatedValueChange<unknown>
+  ) {
     this.patchGdpr({ [this.linkPropertyName]: simpleLink }, valueChange);
   }
 }
