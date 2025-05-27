@@ -32,13 +32,11 @@ export class OrganizationUserEffects {
       ofType(OrganizationUserActions.getOrganizationUsers),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid), this.store.select(selectPreviousGridState)]),
       switchMap(([{ gridState, forceUpdate }, organizationUuid, previousGridState]) => {
-        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
+        this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState, forceUpdate);
 
         const cachedRange = this.gridDataCacheService.get(gridState);
-        if (forceUpdate) {
-          this.gridDataCacheService.reset();
-        }
-        if (!forceUpdate && cachedRange.data !== undefined) {
+
+        if (cachedRange.data !== undefined) {
           return of(OrganizationUserActions.getOrganizationUsersSuccess(cachedRange.data, cachedRange.total));
         }
 
