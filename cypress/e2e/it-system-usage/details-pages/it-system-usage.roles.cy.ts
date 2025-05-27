@@ -11,7 +11,7 @@ function setupTest() {
 describe('it-system-usage roles', () => {
   const testRunner = new TestRunner(setupTest);
 
-  it('Tests', () => {
+  it('it-system-usage roles', () => {
     testRunner.runTestWithSetup('can show System roles', () => {
       cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
 
