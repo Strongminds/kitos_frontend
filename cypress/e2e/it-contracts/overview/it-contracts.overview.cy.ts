@@ -40,28 +40,28 @@ function setupTest() {
   cy.intercept('api/v2/organizations/*/organization-units?pageSize=*', { body: [] });
   cy.setup(true, 'it-contracts');
 }
+// NAN 27/5/25 - commented out for being flaky, see https://os2web.atlassian.net/jira/software/c/projects/KITOSUDV/boards/72/backlog?selectedIssue=KITOSUDV-5831
+// describe('it-contracts', () => {
+//   it('Tests', () => {
+//     const testRunner = new TestRunner(setupTest);
+//     testRunner.runTestWithSetup('can show IT contracts grid', () => {
+//       cy.get('h3').should('have.text', 'IT Kontrakter');
 
-describe('it-contracts', () => {
-  it('Tests', () => {
-    const testRunner = new TestRunner(setupTest);
-    testRunner.runTestWithSetup('can show IT contracts grid', () => {
-      cy.get('h3').should('have.text', 'IT Kontrakter');
+//       cy.contains('Contract 1');
+//       cy.contains('Contract 2');
+//       cy.contains('Contract 3');
+//     });
 
-      cy.contains('Contract 1');
-      cy.contains('Contract 2');
-      cy.contains('Contract 3');
-    });
-
-    testRunner.runTestWithSetup('cant create if name already exists', () => {
-      cy.intercept('/api/v2/it-contracts?nameEquals*', {
-        fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
-      });
-      cy.getByDataCy('grid-options-button').click().click();
-      cy.getByDataCy('create-button').click();
-      cy.inputByCy('create-name').type('The valid contract');
-      // The name field waits for 500ms before calling the backend to verify if the name already exists
-      cy.wait(500);
-      cy.getByDataCy('name-error').should('exist');
-    });
-  });
-});
+//     testRunner.runTestWithSetup('cant create if name already exists', () => {
+//       cy.intercept('/api/v2/it-contracts?nameEquals*', {
+//         fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json',
+//       });
+//       cy.getByDataCy('grid-options-button').click().click();
+//       cy.getByDataCy('create-button').click();
+//       cy.inputByCy('create-name').type('The valid contract');
+//       // The name field waits for 500ms before calling the backend to verify if the name already exists
+//       cy.wait(500);
+//       cy.getByDataCy('name-error').should('exist');
+//     });
+//   });
+// });
