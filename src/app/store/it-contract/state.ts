@@ -24,8 +24,8 @@ export interface ITContractState extends EntityState<ITContract> {
   loading: boolean | undefined;
   itContract: APIItContractResponseDTO | undefined;
 
-  permissions: Cached<APIItContractPermissionsResponseDTO> | undefined;
-  collectionPermissions: Cached<APIResourceCollectionPermissionsResponseDTO> | undefined;
+  permissions: APIItContractPermissionsResponseDTO | undefined;
+  collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
   isRemoving: boolean;
 
   organizationGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;

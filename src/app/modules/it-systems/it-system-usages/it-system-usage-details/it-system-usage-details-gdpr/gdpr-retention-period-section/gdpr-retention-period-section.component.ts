@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -14,11 +15,10 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
-import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { NumericInputComponent } from '../../../../../../shared/components/numeric-input/numeric-input.component';
-import { AsyncPipe } from '@angular/common';
+import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 
 @Component({
   selector: 'app-gdpr-retention-period-section',
@@ -40,7 +40,7 @@ export class GdprRetentionPeriodSectionComponent extends BaseAccordionComponent 
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRetentionPeriodFalse$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.retentionPeriodDefined !== APIGDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum.Yes),
+    map((gdpr) => gdpr.retentionPeriodDefined !== APIGDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum.Yes)
   );
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;
@@ -51,7 +51,7 @@ export class GdprRetentionPeriodSectionComponent extends BaseAccordionComponent 
       dateControl: new FormControl<Date | undefined>(undefined),
       frequencyControl: new FormControl<number | undefined>(undefined),
     },
-    { updateOn: 'blur' },
+    { updateOn: 'blur' }
   );
 
   constructor(private readonly store: Store) {

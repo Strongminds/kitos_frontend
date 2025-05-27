@@ -3,9 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateUserRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ONLY_DIGITS_AND_WHITESPACE_REGEX } from 'src/app/shared/constants/regex-constants';
+import { removeWhitespace } from 'src/app/shared/helpers/string.helpers';
 import {
   mapStartPreferenceChoice,
   StartPreferenceChoice,
@@ -62,6 +64,7 @@ export class ProfileComponent extends BaseComponent implements OnInit {
     })
   );
   public readonly userDefaultUnit$ = this.store.select(selectUserDefaultUnit);
+  public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
 
   public readonly alreadyExists$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private readonly currentDefaultUnitUuid$: BehaviorSubject<string | undefined> = new BehaviorSubject<
@@ -152,12 +155,29 @@ export class ProfileComponent extends BaseComponent implements OnInit {
           this.currentDefaultUnitUuid$.next(organizationUnit.uuid);
         })
     );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(OrganizationUserActions.updateUserSuccess)).subscribe(({ user }) => {
+        this.editForm.patchValue({
+          phoneNumber: user.phoneNumber,
+        });
+      })
+    );
   }
 
   public onChange(request: APIUpdateUserRequestDTO): void {
-    if (!request.defaultOrganizationUnitUuid) return;
-
-    this.store.dispatch(UserActions.setUserDefaultUnit(request.defaultOrganizationUnitUuid));
+    if (request.defaultOrganizationUnitUuid) {
+      this.store.dispatch(UserActions.setUserDefaultUnit(request.defaultOrganizationUnitUuid));
+      return;
+    }
+    this.subscriptions.add(
+      this.user$.pipe(first()).subscribe((user) => {
+        const userUuid = user?.uuid;
+        if (userUuid) {
+          this.store.dispatch(OrganizationUserActions.updateUser(userUuid, request));
+        }
+      })
+    );
   }
 
   public emailChange(email: string): void {
@@ -173,6 +193,13 @@ export class ProfileComponent extends BaseComponent implements OnInit {
   public lastNameChange(lastName: ValidatedValueChange<string | undefined>): void {
     if (lastName.valid && lastName.value) {
       this.onChange({ lastName: lastName.value });
+    }
+  }
+
+  public phoneNumberChange(phoneNumber: ValidatedValueChange<string | undefined>): void {
+    if (phoneNumber.valid && phoneNumber.value) {
+      const phoneNumberToSend = removeWhitespace(phoneNumber.value);
+      this.onChange({ phoneNumber: phoneNumberToSend });
     }
   }
 

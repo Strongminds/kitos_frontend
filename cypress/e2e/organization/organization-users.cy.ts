@@ -14,12 +14,26 @@ function setupTest() {
   });
   cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
 
+  cy.intercept('/api/v2/data-processing-registration-role-types*', {
+    fixture: './dpr/data-processing-registration-role-types.json',
+  });
+  cy.intercept('/api/v2/it-contract-role-types*', {
+    fixture: './it-contracts/notifications/it-contract-role-types.json',
+  });
+  cy.intercept('/api/v2/it-system-usage-role-types*', {
+    fixture: './it-system-usage/notifications/it-system-usage-role-types.json',
+  });
+  cy.intercept('api/v2/organization-unit-role-types*', {
+    fixture: './organizations/organization-unit-roles.json',
+  });
+  cy.intercept('api/v2/internal/organization/**/users/find-any-by-email**', { body: null });
+
   cy.setup(true, 'organization/users');
 }
 
 describe('organization-users', () => {
   const testRunner = new TestRunner(setupTest);
-  it('Tests', () => {
+  it('organization-users', () => {
     testRunner.runTestWithSetup('Can send advis', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
@@ -94,8 +108,6 @@ describe('organization-users', () => {
     });
 
     testRunner.runTestWithSetup('Can create user', () => {
-      cy.intercept('api/v2/internal/organization/*/users/find-any-by-email?email=*', { body: null });
-
       cy.getByDataCy('grid-options-button').click().click();
       cy.getByDataCy('create-button').click();
 
@@ -117,8 +129,6 @@ describe('organization-users', () => {
     });
 
     testRunner.runTestWithSetup('Cannot create user if emails differ', () => {
-      cy.intercept('api/v2/internal/organization/*/users/find-any-by-email?email=*', { body: null });
-
       cy.getByDataCy('grid-options-button').click().click();
       cy.getByDataCy('create-button').click({ scrollBehavior: 'center' });
 
@@ -129,8 +139,6 @@ describe('organization-users', () => {
     });
 
     testRunner.runTestWithSetup('Can edit user', () => {
-      cy.intercept('api/v2/internal/organization/*/users/find-any-by-email?email=*', { body: null });
-
       cy.contains('local-regular-user@kitos.dk').click();
       cy.contains('Rediger').click().wait(500);
 
@@ -160,7 +168,6 @@ describe('organization-users', () => {
       cy.get('app-popup-message').should('exist');
     });
     testRunner.runTestWithSetup('Can delete user', () => {
-      cy.intercept('api/v2/internal/organization/*/users/find-any-by-email?email=*', { body: null });
       cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
         fixture: './shared/ui-root-config.json',
       });

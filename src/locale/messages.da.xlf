@@ -6977,6 +6977,14 @@
         <source>Gå til</source>
         <target state="new">Gå til</target>
       </trans-unit>
+      <trans-unit id="7724449879287826549" datatype="html">
+        <source>Indeholder AI-teknologi?</source>
+        <target state="new">Indeholder AI-teknologi?</target>
+      </trans-unit>
+      <trans-unit id="1502212713118381557" datatype="html">
+        <source>Ingen</source>
+        <target state="new">Ingen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
