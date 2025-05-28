@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, HostListener, Input } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { LoadingComponent } from '../../loading/loading.component';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
@@ -23,8 +23,18 @@ export class DialogComponent {
   @Input() public helpText?: string;
   @Input() public nested = false;
 
-  constructor(protected dialog: MatDialogRef<DialogComponent>) {}
+  constructor(protected dialog: MatDialogRef<DialogComponent>) {
+    // Prevent closing the dialog by clicking outside
+    dialog.disableClose = true;
+  }
 
+  // Close the dialog when the escape key is pressed
+  @HostListener('document:keydown.escape', ['$event'])
+  onEsc(_: KeyboardEvent) {
+    if (this.closable) {
+      this.dialog.close();
+    }
+  }
   public close() {
     this.dialog.close();
   }
