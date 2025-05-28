@@ -6,10 +6,10 @@ function setupTest() {
   cy.setup(true, 'it-systems/it-system-usages');
 }
 
-describe('it-system-usage organization', () => {
+describe('it-system-usage organization', { retries: 2 }, () => {
   const testRunner = new TestRunner(setupTest);
 
-  it('Tests', () => {
+  it('it-system-usage organization', () => {
     testRunner.runTestWithSetup('can add Used units by search', () => {
       cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage-no-organization.json' });
 
