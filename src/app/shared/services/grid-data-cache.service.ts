@@ -69,8 +69,8 @@ export class GridDataCacheService {
     this.tryResetOnGridStateChange(currState, prevState);
   }
 
-  public tryResetOnGridStateChange(currState: GridState, prevState: GridState) {
-    if (this.shouldResetOnGridStateChange(currState, prevState)) {
+  public tryResetOnGridStateChange(currState: GridState, prevState: GridState, forceReset = false) {
+    if (forceReset || this.shouldResetOnGridStateChange(currState, prevState)) {
       this.reset();
     }
   }

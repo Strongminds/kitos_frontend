@@ -225,13 +225,13 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
           combineLatestWith(this.gridState$)
         )
         .subscribe(([_, gridState]) => {
-          this.stateChange(gridState);
+          this.stateChange(gridState, true);
         })
     );
   }
 
-  public stateChange(gridState: GridState) {
-    this.store.dispatch(OrganizationUserActions.updateGridState(gridState));
+  public stateChange(gridState: GridState, forceUpdate = false): void {
+    this.store.dispatch(OrganizationUserActions.updateGridState(gridState, forceUpdate));
   }
 
   public onEditUser(user: ODataOrganizationUser): void {
