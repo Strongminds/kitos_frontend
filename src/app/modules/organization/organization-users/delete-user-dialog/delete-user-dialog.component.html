@@ -12,7 +12,7 @@
           tildele rollerne.
         </ng-container>
 
-        <ng-container *ngIf="!(hasRoles$ | async)" i18n> Denne handling kan ikke fortrydes. </ng-container>
+        <ng-container *ngIf="(hasRoles$ | async) === false" i18n> Denne handling kan ikke fortrydes. </ng-container>
       </app-paragraph>
     </app-standard-vertical-content-grid>
     <app-dialog-actions *ngIf="!isLoading">
