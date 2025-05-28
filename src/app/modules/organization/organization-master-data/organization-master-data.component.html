@@ -19,7 +19,7 @@
         [formGroup]="masterDataForm"
         formName="phoneControl"
         [pattern]="phoneNumberRegex"
-        (valueChange)="patchMasterDataPhoneNumber($event?.toString())"
+        (valueChange)="patchMasterDataPhoneNumber()"
         data-cy="master-data-phone-input"
       ></app-textbox>
       <app-textbox
