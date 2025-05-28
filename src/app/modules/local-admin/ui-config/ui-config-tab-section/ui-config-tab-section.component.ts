@@ -1,5 +1,4 @@
 import { Store } from '@ngrx/store';
-import { APICustomizedUINodeDTO } from 'src/app/api/v1';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { Component, Input } from '@angular/core';
 import { map, Observable } from 'rxjs';
@@ -15,6 +14,7 @@ import { StandardVerticalContentGridComponent } from '../../../../shared/compone
 import { CheckboxButtonComponent } from '../../../../shared/components/buttons/checkbox-button/checkbox-button.component';
 import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.component';
 import { InfoIconComponent } from '../../../../shared/components/icons/info-icon.component';
+import { APICustomizedUINodeResponseDTO } from 'src/app/api/v2';
 
 @Component({
   selector: 'app-ui-config-tab-section',
@@ -47,7 +47,7 @@ export class UiConfigTabSectionComponent {
   }
 
   public onCheckboxChanged($event: UINodeCustomization) {
-    const dto: APICustomizedUINodeDTO = { enabled: $event.enabled, key: $event.fullKey };
+    const dto: APICustomizedUINodeResponseDTO = { enabled: $event.enabled, key: $event.fullKey };
     this.store.dispatch(
       UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto }),
     );
