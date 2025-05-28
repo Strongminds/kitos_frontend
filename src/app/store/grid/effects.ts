@@ -15,25 +15,21 @@ import { GridActions } from './actions';
 
 @Injectable()
 export class GridExportEffects {
-  constructor(
-    private actions$: Actions,
-    private router: Router,
-    private gridDataCacheService: GridDataCacheService,
-  ) {}
+  constructor(private actions$: Actions, private router: Router, private gridDataCacheService: GridDataCacheService) {}
 
   invalidateGridDataCache$ = createEffect(
     () => {
       return merge(
         interval(TWO_MINUTES_IN_MILLISECONDS),
-        this.router.events.pipe(filter((event) => event instanceof NavigationEnd)),
+        this.router.events.pipe(filter((event) => event instanceof NavigationEnd))
       ).pipe(
         tap(() => {
           this.gridDataCacheService.reset();
           return GridActions.invalidateGridDataCacheSuccess();
-        }),
+        })
       );
     },
-    { dispatch: false },
+    { dispatch: false }
   );
 
   updateGridStateOnExport$ = createEffect(() => {
@@ -55,16 +51,16 @@ export class GridExportEffects {
               case 'it-interface':
                 return of(ITInterfaceActions.getITInterfaces(gridState));
               case 'organization-user':
-                return of(OrganizationUserActions.getOrganizationUsers(gridState));
+                return of(OrganizationUserActions.getOrganizationUsers(gridState, false));
               case 'local-admin-organization':
               case 'global-admin-organization':
                 return of(OrganizationActions.getOrganizations(gridState));
               default:
                 throw 'Grid Effects Excel export not implemented for entity type: ' + action.entityType;
             }
-          }),
+          })
         );
-      }),
+      })
     );
   });
 }
