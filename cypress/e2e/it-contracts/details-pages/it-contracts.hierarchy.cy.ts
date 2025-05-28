@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 import { TestRunner } from 'cypress/support/test-runner';
 
 function setupTest() {
@@ -9,7 +7,7 @@ function setupTest() {
 }
 
 describe('it-contracts.hierarchy', () => {
-  it('Tests', () => {
+  it('it-contracts.hierarchy', () => {
     const testRunner = new TestRunner(setupTest);
 
     testRunner.runTestWithSetup('shows simple hierarchy', () => {
@@ -23,7 +21,7 @@ describe('it-contracts.hierarchy', () => {
       });
     });
 
-    it('shows complex hierarchy', () => {
+    testRunner.runTestWithSetup('shows complex hierarchy', () => {
       cy.intercept('/api/v2/internal/it-contracts/*/hierarchy', { fixture: './it-contracts/hierarchy-complex.json' });
 
       goToHierarchy();
