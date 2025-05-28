@@ -31,6 +31,39 @@ function setupTest() {
   cy.setup(true, 'global-admin/other');
 }
 
+import { TestRunner } from 'cypress/support/test-runner';
+
+function setupTest() {
+  cy.requireIntercept();
+  cy.intercept('/api/v2/internal/organizations/*/permissions', {
+    fixture: './organizations/organization-permissions-local-admin.json',
+  });
+  cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+  cy.intercept('/odata/Organizations?$skip=0&$top=100&$count=true', { fixture: './global-admin/organizations.json' });
+
+  cy.intercept('api/v2/internal/kle/status', { fixture: './global-admin/kle-status-not-up-to-date.json' });
+
+  cy.intercept('api/v2/internal/users/search', { fixture: './shared/users.json' });
+  cy.intercept('api/v2/internal/users/*/organizations', { fixture: './organizations/organizations.json' });
+
+  cy.intercept('api/v2/internal/organizations/*/ui-root-config', { body: {} });
+
+  cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+  cy.intercept('api/v2/internal/broken-external-references-report/status', {
+    fixture: './global-admin/broken-links-report',
+  });
+  cy.intercept('api/v2/internal/users/with-rightsholder-access', {
+    fixture: './global-admin/rightsholders.json',
+  });
+  cy.intercept('api/v2/internal/users/with-cross-organization-permissions', {
+    fixture: './global-admin/cross-org-users.json',
+  });
+
+  cy.intercept('/odata/Organizations?$skip=0&$top=100&$count=true', { fixture: './global-admin/organizations.json' });
+  cy.intercept('api/v2/internal/users/system-integrators', { body: [] });
+  cy.setup(true, 'global-admin/other');
+}
+
 describe('global-admin other', () => {
   it('Tests', () => {
     const testRunner = new TestRunner(setupTest);

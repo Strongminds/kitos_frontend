@@ -19,6 +19,27 @@ function setupTest() {
   cy.setup(true, 'global-admin/it-systems');
 }
 
+import { TestRunner } from 'cypress/support/test-runner';
+
+function setupTest() {
+  cy.requireIntercept();
+
+  cy.intercept('api/v2/internal/it-systems/global-option-types/business-types', {
+    fixture: './global-admin/it-system/business-types.json',
+  });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/archive-types', { body: [] });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/archive-location-types', { body: [] });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/archive-test-location-types', { body: [] });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/data-types', { body: [] });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/frequency-types', { body: [] });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/interface-types', { body: [] });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/sensitive-personal-data-types', { body: [] });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/it-system-categories', { body: [] });
+  cy.intercept('api/v2/internal/it-systems/global-option-types/register-types', { body: [] });
+
+  cy.setup(true, 'global-admin/it-systems');
+}
+
 describe('global-admin-organizations', () => {
   it('Tests', () => {
     const testRunner = new TestRunner(setupTest);

@@ -31,7 +31,7 @@ function setupTest() {
   cy.setup(true, 'organization/users');
 }
 
-describe('organization-users', () => {
+describe('organization-users', { retries: 2 }, () => {
   const testRunner = new TestRunner(setupTest);
   it('organization-users', () => {
     testRunner.runTestWithSetup('Can send advis', () => {

@@ -20,6 +20,28 @@ function setupTest() {
   cy.setup(true, 'it-contracts');
 }
 
+import { TestRunner } from 'cypress/support/test-runner';
+
+function setupTest() {
+  cy.requireIntercept();
+  cy.intercept('/api/v2/it-contracts/*', { fixture: './it-contracts/it-contract.json' });
+  cy.intercept('/api/v2/organizations/*/users', { fixture: './organizations/organization-users.json' });
+  cy.intercept('/api/v2/organizations?orderByProperty*', { fixture: './organizations/organizations-multiple.json' });
+  cy.intercept('/api/v2/organizations/*/organization-units*', {
+    fixture: './organizations/organization-units-hierarchy.json',
+  });
+
+  cy.setupContractIntercepts();
+  cy.intercept('/api/v2/it-contracts/*/permissions', { fixture: './it-contracts/it-contract-permissions.json' });
+  cy.intercept('/api/v2/it-contract-agreement-element-types?organizationUuid=*', {
+    fixture: './it-contracts/choice-types/agreement-elements.json',
+  });
+  cy.intercept('/api/v2/internal/it-system-usages/relations/*', {
+    fixture: './it-contracts/it-contract-system-relations.json',
+  });
+  cy.setup(true, 'it-contracts');
+}
+
 describe('it-contracts.systems', () => {
   it('Tests', () => {
     const testRunner = new TestRunner(setupTest);

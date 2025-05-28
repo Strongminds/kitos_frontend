@@ -25,6 +25,9 @@ describe('it-system-interfaces', () => {
     testRunner.runTestWithSetup('interface information area fields contain correct data, and can be edited', () => {
       setupRegularInterfaceDetails();
       cy.intercept('PATCH', '/api/v2/it-interfaces/*', { fixture: './it-interfaces/it-interface.json' }).as('patch');
+    testRunner.runTestWithSetup('interface information area fields contain correct data, and can be edited', () => {
+      setupRegularInterfaceDetails();
+      cy.intercept('PATCH', '/api/v2/it-interfaces/*', { fixture: './it-interfaces/it-interface.json' }).as('patch');
 
       const nameSelector = 'interface-name';
       const newName = 'New name';
