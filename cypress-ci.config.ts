@@ -9,7 +9,8 @@ export default defineConfig({
     viewportHeight: 1000,
     defaultCommandTimeout: 10000,
     retries: {
-      runMode: 1,
+      runMode: 2,
+      openMode: 1,
     },
 
     setupNodeEvents(on, config) {

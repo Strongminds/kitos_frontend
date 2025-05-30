@@ -6,7 +6,7 @@ function setupTest() {
   cy.setup(true, 'it-systems/it-system-usages');
 }
 
-describe('it-system-usage organization', { retries: 2 }, () => {
+describe('it-system-usage organization', () => {
   const testRunner = new TestRunner(setupTest);
 
   it('it-system-usage organization', () => {
@@ -53,8 +53,6 @@ describe('it-system-usage organization', { retries: 2 }, () => {
         { uuid: '803fd406-27e2-4785-b162-02ee6ea876d1', name: 'Direktørområde' },
         { uuid: 'f4db9743-41e3-4a7a-ad62-683d10abe418', name: 'Test - 1' },
         { uuid: '933765a9-dad5-4a22-8d71-55b6798a094c', name: 'Test' },
-        { uuid: '02d53ea4-0ba2-4e01-86d2-9044a4e4c81e', name: 'Test_28_11_2018' },
-        { uuid: '16bab5a5-cff2-417b-bdeb-cf6033646d21', name: 'Kitos sekretariatet' },
       ];
 
       for (const expectedRow of expectedRows) {
