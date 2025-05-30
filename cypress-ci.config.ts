@@ -8,6 +8,7 @@ export default defineConfig({
     viewportWidth: 1440,
     viewportHeight: 1000,
     defaultCommandTimeout: 10000,
+    pageLoadTimeout: 60000,
     retries: {
       runMode: 2,
       openMode: 1,
