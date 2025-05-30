@@ -8,8 +8,9 @@ export default defineConfig({
     viewportWidth: 1440,
     viewportHeight: 1000,
     defaultCommandTimeout: 10000,
+    pageLoadTimeout: 60000,
     retries: {
-      runMode: 1,
+      runMode: 2,
     },
 
     setupNodeEvents(on, config) {

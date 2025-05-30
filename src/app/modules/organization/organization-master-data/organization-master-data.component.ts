@@ -232,9 +232,9 @@ export class OrganizationMasterDataComponent extends BaseComponent implements On
     }
   }
 
-  public patchMasterDataPhoneNumber(phoneNumberFromControl: string | undefined) {
+  public patchMasterDataPhoneNumber() {
     const phoneNumber = this.getPhoneNumberWithoutWhitespace(this.masterDataForm.controls.phoneControl);
-    if (phoneNumber){
+    if (phoneNumber) {
       this.patchMasterData({ phone: phoneNumber });
     }
   }

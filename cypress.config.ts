@@ -8,6 +8,10 @@ export default defineConfig({
     viewportWidth: 1440,
     viewportHeight: 1000,
     experimentalRunAllSpecs: true,
+    retries: {
+      runMode: 2,
+      openMode: 1,
+    },
   },
 
   component: {

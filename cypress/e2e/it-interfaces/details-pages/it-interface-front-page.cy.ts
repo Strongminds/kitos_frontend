@@ -18,7 +18,7 @@ function setupTest() {
   cy.setup(true, 'it-systems/it-interfaces');
 }
 
-describe('it-system-interfaces', { retries: 2 }, () => {
+describe('it-system-interfaces', () => {
   it('Tests', () => {
     const testRunner = new TestRunner(setupTest);
 

@@ -17,7 +17,6 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationUnitActions } from './actions';
 import {
-  selectCurrentUnitUuid,
   selectOrganizationUnitHasValidCache,
   selectOrganizationUnits,
   selectPagedOrganizationUnitHasValidCache,
@@ -32,7 +31,7 @@ export class OrganizationUnitEffects {
     @Inject(APIV2OrganizationUnitsInternalINTERNALService)
     private apiUnitService: APIV2OrganizationUnitsInternalINTERNALService,
     @Inject(APIV2OrganizationUnitRegistrationInternalINTERNALService)
-    private apiRegistrationsService: APIV2OrganizationUnitRegistrationInternalINTERNALService,
+    private apiRegistrationsService: APIV2OrganizationUnitRegistrationInternalINTERNALService
   ) {}
 
   getOrganizationUnits$ = createEffect(() => {
@@ -55,9 +54,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map((units) => OrganizationUnitActions.getOrganizationUnitsSuccess(units)),
-            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError())),
+            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsError()))
           );
-      }),
+      })
     );
   });
 
@@ -92,9 +91,9 @@ export class OrganizationUnitEffects {
               const nextPage = (currentPage ?? 0) + 1;
               return OrganizationUnitActions.getOrganizationUnitsPaged(maxPageSize, nextPage, allUnits);
             }),
-            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsPagedError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.getOrganizationUnitsPagedError()))
+          )
+      )
     );
   });
 
@@ -110,9 +109,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map(() => OrganizationUnitActions.deleteOrganizationUnitSuccess(uuid)),
-            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitError()))
+          )
+      )
     );
   });
 
@@ -141,10 +140,10 @@ export class OrganizationUnitEffects {
             .pipe(
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               map((unit: any) => OrganizationUnitActions.createOrganizationSubunitSuccess(unit)),
-              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError())),
+              catchError(() => of(OrganizationUnitActions.createOrganizationSubunitError()))
             );
-        },
-      ),
+        }
+      )
     );
   });
 
@@ -162,9 +161,9 @@ export class OrganizationUnitEffects {
           .pipe(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             map((unit: any) => OrganizationUnitActions.patchOrganizationUnitSuccess(unit)),
-            catchError(() => of(OrganizationUnitActions.patchOrganizationUnitError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.patchOrganizationUnitError()))
+          )
+      )
     );
   });
 
@@ -184,9 +183,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map(() => OrganizationUnitActions.bulkAddOrganizationUnitRoleSuccess()),
-            catchError(() => of(OrganizationUnitActions.bulkAddOrganizationUnitRoleError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.bulkAddOrganizationUnitRoleError()))
+          )
+      )
     );
   });
 
@@ -206,9 +205,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map(() => OrganizationUnitActions.deleteOrganizationUnitRoleSuccess(userUuid, roleUuid, unitUuid)),
-            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitRoleError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.deleteOrganizationUnitRoleError()))
+          )
+      )
     );
   });
 
@@ -224,11 +223,11 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map((registrations: APIOrganizationRegistrationUnitResponseDTO) =>
-              OrganizationUnitActions.getRegistrationsSuccess(registrations),
+              OrganizationUnitActions.getRegistrationsSuccess(registrations)
             ),
-            catchError(() => of(OrganizationUnitActions.getRegistrationsError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.getRegistrationsError()))
+          )
+      )
     );
   });
 
@@ -245,9 +244,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map(() => OrganizationUnitActions.removeRegistrationsSuccess(request)),
-            catchError(() => of(OrganizationUnitActions.removeRegistrationsError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.removeRegistrationsError()))
+          )
+      )
     );
   });
 
@@ -264,9 +263,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map(() => OrganizationUnitActions.transferRegistrationsSuccess(request)),
-            catchError(() => of(OrganizationUnitActions.transferRegistrationsError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.transferRegistrationsError()))
+          )
+      )
     );
   });
 
@@ -282,9 +281,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map((permissions) => OrganizationUnitActions.getPermissionsSuccess(permissions)),
-            catchError(() => of(OrganizationUnitActions.getPermissionsError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.getPermissionsError()))
+          )
+      )
     );
   });
 
@@ -299,9 +298,9 @@ export class OrganizationUnitEffects {
           })
           .pipe(
             map((permissions) => OrganizationUnitActions.getCollectionPermissionsSuccess(permissions)),
-            catchError(() => of(OrganizationUnitActions.getCollectionPermissionsError())),
-          ),
-      ),
+            catchError(() => of(OrganizationUnitActions.getCollectionPermissionsError()))
+          )
+      )
     );
   });
 }
