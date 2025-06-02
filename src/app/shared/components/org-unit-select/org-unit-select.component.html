@@ -30,4 +30,4 @@
     </app-tree-node-dropdown>
   </ng-container>
 </ng-container>
-<app-loading *ngIf="(isLoaded$ | async) === false"> </app-loading>
+<app-loading *ngIf="(isLoaded$ | async) === false" [type]="useMaterialSpinner ? 'material' : 'kitos'"> </app-loading>
