@@ -36,10 +36,11 @@
             formName="relevantUnit"
             [showDescription]="true"
             data-cy="org-unit-select"
+            [useMaterialSpinner]="true"
             (valueChange)="patchRelevantUnits()"
           ></app-org-unit-select>
 
-          <mat-spinner *ngIf="isPatching$ | async" [diameter]="50" class="centered-spinner"></mat-spinner>
+          <app-loading *ngIf="isPatching$ | async" type="material"></app-loading>
         </div>
         <app-numeric-input
           text="Antal niveauer"

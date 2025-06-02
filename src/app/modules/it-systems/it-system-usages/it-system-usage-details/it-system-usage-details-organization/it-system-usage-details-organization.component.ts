@@ -1,9 +1,11 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, filter, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
 import { MAX_INTEGER } from 'src/app/shared/constants/constants';
 import { mapUnitsWithSelectedUnitsToTree } from 'src/app/shared/helpers/hierarchy.helpers';
 import { EntityTreeNode } from 'src/app/shared/models/structure/entity-tree-node.model';
@@ -20,18 +22,16 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { selectOrganizationUnits } from 'src/app/store/organization/organization-unit/selectors';
-import { CardComponent } from '../../../../../shared/components/card/card.component';
-import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
-import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
-import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { SectionComponent } from '../../../../../shared/components/section/section.component';
-import { OrgUnitSelectComponent } from '../../../../../shared/components/org-unit-select/org-unit-select.component';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { NumericInputComponent } from '../../../../../shared/components/numeric-input/numeric-input.component';
 import { CheckboxButtonComponent } from '../../../../../shared/components/buttons/checkbox-button/checkbox-button.component';
+import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { DragAndDropTreeComponent } from '../../../../../shared/components/drag-and-drop-tree/drag-and-drop-tree.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { NumericInputComponent } from '../../../../../shared/components/numeric-input/numeric-input.component';
+import { OrgUnitSelectComponent } from '../../../../../shared/components/org-unit-select/org-unit-select.component';
+import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
+import { SectionComponent } from '../../../../../shared/components/section/section.component';
+import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 
 @Component({
   selector: 'app-it-system-usage-details-organization',
@@ -48,7 +48,7 @@ import { DragAndDropTreeComponent } from '../../../../../shared/components/drag-
     StandardVerticalContentGridComponent,
     SectionComponent,
     OrgUnitSelectComponent,
-    MatProgressSpinner,
+    LoadingComponent,
     NumericInputComponent,
     CheckboxButtonComponent,
     DragAndDropTreeComponent,
@@ -64,7 +64,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
     filterNullish(),
     map((units) => {
       return units.map((x) => x.uuid);
-    }),
+    })
   );
   private expandedUnitUuids: string[] | undefined = undefined;
 
@@ -74,13 +74,13 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
   public readonly organizationUnits$ = this.store.select(selectOrganizationUnits);
   public readonly unitTree$ = this.organizationUnits$.pipe(
     combineLatestWith(this.usedUnitUuids$),
-    map(([units, selectedUuids]) => mapUnitsWithSelectedUnitsToTree(units, selectedUuids, this.expandedUnitUuids)),
+    map(([units, selectedUuids]) => mapUnitsWithSelectedUnitsToTree(units, selectedUuids, this.expandedUnitUuids))
   );
 
   public readonly rootUnitUuid$ = this.unitTree$.pipe(
     map((units) => units.filter((unit) => unit.isRoot)),
     filter((rootUnits) => rootUnits.length > 0),
-    map((rootUnits) => rootUnits[0].uuid),
+    map((rootUnits) => rootUnits[0].uuid)
   );
 
   public readonly numberOfLevels$ = new BehaviorSubject<number | undefined>(undefined);
@@ -105,8 +105,8 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
       this.responsibleUnit$.pipe(combineLatestWith(this.usedByUnits$)).subscribe(([responsibleUnit, usedByUnits]) =>
         this.responsibleUnitForm.patchValue({
           responsibleUnit: usedByUnits.filter((unit) => unit.uuid === responsibleUnit?.uuid).pop(),
-        }),
-      ),
+        })
+      )
     );
 
     // Disable forms if user does not have rights to modify
@@ -114,18 +114,18 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
       this.hasModifyPermission$.pipe(filter((hasModifyPermission) => hasModifyPermission === false)).subscribe(() => {
         this.responsibleUnitForm.disable();
         this.relevantUnitsForm.disable();
-      }),
+      })
     );
 
     this.subscriptions.add(
       this.unitTree$
         .pipe(
           filter((unitTree) => unitTree.length > 0),
-          first(),
+          first()
         )
         .subscribe((unitTree) => {
           this.expandedUnitUuids = this.searchUnitTreeForExpandedUnits(unitTree);
-        }),
+        })
     );
   }
 
@@ -150,7 +150,7 @@ export class ItSystemUsageDetailsOrganizationComponent extends BaseComponent imp
         organizationUsage: {
           responsibleOrganizationUnitUuid: uuid,
         },
-      }),
+      })
     );
   }
 
