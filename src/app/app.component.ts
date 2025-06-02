@@ -18,12 +18,13 @@ import { NgIf, AsyncPipe } from '@angular/common';
 import { NavBarComponent } from './modules/layout/nav-bar/nav-bar.component';
 import { RouterOutlet } from '@angular/router';
 import { PopupMessagesComponent } from './shared/components/popup-messages/popup-messages.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  imports: [NgIf, NavBarComponent, RouterOutlet, PopupMessagesComponent, AsyncPipe],
+  imports: [NgIf, NavBarComponent, LoadingComponent, RouterOutlet, PopupMessagesComponent, AsyncPipe],
 })
 export class AppComponent extends BaseComponent implements OnInit {
   public isAuthenticating$ = this.store.select(selectIsAuthenticating);
