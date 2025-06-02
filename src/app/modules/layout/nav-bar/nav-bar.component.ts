@@ -81,10 +81,6 @@ export class NavBarComponent extends BaseComponent implements OnInit {
     this.dialog.open(ChooseOrganizationComponent);
   }
 
-  public goToOldKitos() {
-    window.location.href = '/old';
-  }
-
   public logout() {
     this.store.dispatch(UserActions.logout());
   }

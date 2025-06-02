@@ -5927,10 +5927,6 @@
         <source>Primær organisationsenhed</source>
         <target state="new">Primær organisationsenhed</target>
       </trans-unit>
-      <trans-unit id="7132384966792473603" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gammel brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></source>
-        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Gammel brugerflade<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/></target>
-      </trans-unit>
       <trans-unit id="8383847967683586849" datatype="html">
         <source>Glemt password?</source>
         <target state="new">Glemt password?</target>
