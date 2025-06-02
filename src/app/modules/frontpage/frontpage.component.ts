@@ -15,7 +15,6 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { selectIsAuthenticating, selectUser, selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { ButtonComponent } from '../../shared/components/buttons/button/button.component';
 import { HelpIconComponent } from '../../shared/components/icons/help.component';
-import { LoadingComponent } from '../../shared/components/loading/loading.component';
 import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { FrontpageComponentStore } from './frontpage.component-store';
@@ -28,7 +27,6 @@ import { PublicMessageComponent } from './public-message/public-message.componen
   styleUrls: ['frontpage.component.scss'],
   imports: [
     CommonModule,
-    LoadingComponent,
     HelpIconComponent,
     ParagraphComponent,
     LoginComponent,

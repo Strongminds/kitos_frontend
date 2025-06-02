@@ -1,12 +1,5 @@
 @use "theme";
 
-app-loading {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
 // Custom styling of material dialog
 ::ng-deep {
   .mdc-dialog__surface {
@@ -46,4 +39,11 @@ app-loading {
     border-radius: 8px !important;
     border-width: 1px !important;
   }
+}
+
+.frontpage-spinner {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
