@@ -82,10 +82,3 @@ app-login {
   gap: theme.$padding-small;
   @include mixins.center-items-container;
 }
-
-.frontpage-spinner {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
