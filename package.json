@@ -16,7 +16,7 @@
     "watch": "ng build --watch",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "e2e:ci": "ng e2e --configuration ci",
+    "e2e:ci": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng e2e --configuration ci",
     "i18n": "ng extract-i18n",
     "swagger": "rimraf src/app/api/v2 && rimraf src/app/api/v1 && openapi-generator-cli generate",
     "swagger:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh swagger'"
