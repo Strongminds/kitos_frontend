@@ -12,5 +12,5 @@ yarn lint
 if ( -not $? ) { throw "Failed linting" }
 
 Write-Host "Running E2E tests in CI configuration"
-yarn cy:parallel
+yarn e2e-parallel:ci
 if ( -not $? ) { throw "Failed running e2e tests" }
