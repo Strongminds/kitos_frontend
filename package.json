@@ -11,8 +11,8 @@
   "scripts": {
     "cy:run": "cypress run",
     "e2e-parallel": "concurrently -k -s first -n \"APP,TESTS\" -c \"blue,green\" \"yarn start\" \"wait-on http://127.0.0.1:4200 && cypress-parallel -s cy:run -t 4 -d 'cypress/e2e'",
-    "e2e-parallel:ci": "concurrently -k -s first -n \"APP,TESTS\" -c \"blue,green\" \"yarn start\" \"wait-on http://127.0.0.1:4200 && cypress-parallel -s cy:run -t 4 -d 'cypress/e2e' -a configuration=ci\"",
-    "ng": "ng",
+"e2e-parallel:ci": "concurrently -k -s first -n \"APP,TESTS\" -c \"blue,green\" \"node --max-old-space-size=5048 ./node_modules/@angular/cli/bin/ng serve\" \"wait-on http://127.0.0.1:4200 && cypress-parallel -s cy:run -t 4 -d 'cypress/e2e' -a configuration=ci\""
+,    "ng": "ng",
     "start": "ng serve --host=127.0.0.1",
     "start:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh start'",
     "build": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng build",
