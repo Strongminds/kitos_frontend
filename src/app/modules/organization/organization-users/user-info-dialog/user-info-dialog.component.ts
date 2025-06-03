@@ -86,6 +86,9 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.roleService.dispatchAllGetAvailableOptions();
 
+    // Subscribe to user$ to ensure the subscription is kept alive
+    this.subscriptions.add(this.user$.subscribe());
+
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.sendNotificationSuccess))
