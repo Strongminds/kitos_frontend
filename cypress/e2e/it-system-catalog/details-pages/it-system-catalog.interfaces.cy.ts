@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 import { TestRunner } from 'cypress/support/test-runner';
 
 function setupTest() {
