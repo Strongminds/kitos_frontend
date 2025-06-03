@@ -43,6 +43,7 @@ testem.log
 /cypress/screenshots
 /cypress/videos
 /cypress/downloads
+/runner-results
 
 # System files
 .DS_Store
