@@ -9,7 +9,10 @@
   "author": "STRONGMINDS ApS",
   "license": "MPL-2.0",
   "scripts": {
-    "ng": "ng",
+    "cy:run": "cypress run",
+    "e2e-parallel": "concurrently -k -s first -n \"APP,TESTS\" -c \"blue,green\" \"yarn start\" \"wait-on http://127.0.0.1:4200 && cypress-parallel -s cy:run -t 4 -d 'cypress/e2e'",
+"e2e-parallel:ci": "concurrently -k -s first -n \"APP,TESTS\" -c \"blue,green\" \"node --max-old-space-size=5048 ./node_modules/@angular/cli/bin/ng serve\" \"wait-on http://127.0.0.1:4200 && cypress-parallel -s cy:run -t 4 -d 'cypress/e2e' -a configuration=ci\""
+,    "ng": "ng",
     "start": "ng serve --host=127.0.0.1",
     "start:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh start'",
     "build": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng build",
@@ -71,6 +74,7 @@
     "@progress/kendo-svg-icons": "^4.1.0",
     "@progress/kendo-theme-default": "^10.5.0",
     "@tinymce/tinymce-angular": "^8.0.1",
+    "concurrently": "^9.1.2",
     "imask": "^7.6.1",
     "lodash": "^4.17.21",
     "moment": "^2.29.4",
@@ -102,9 +106,12 @@
     "@typescript-eslint/parser": "^8.31.0",
     "babel-plugin-istanbul": "^7.0.0",
     "cypress": "^14.3.2",
+    "cypress-multi-reporters": "^2.0.5",
+    "cypress-parallel": "^0.15.0",
     "eslint": "^9.25.1",
     "ng-extract-i18n-merge": "^2.14.3",
     "rimraf": "^6.0.1",
-    "typescript": "~5.8.3"
+    "typescript": "~5.8.3",
+    "wait-on": "^8.0.3"
   }
 }
