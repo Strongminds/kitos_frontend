@@ -9,6 +9,8 @@
   "author": "STRONGMINDS ApS",
   "license": "MPL-2.0",
   "scripts": {
+    "cy:run": "cypress run",
+    "cy:parallel": "cypress-parallel -s cy:run -t 2 -d 'cypress/e2e'",
     "ng": "ng",
     "start": "ng serve --host=127.0.0.1",
     "start:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh start'",
@@ -102,6 +104,8 @@
     "@typescript-eslint/parser": "^8.31.0",
     "babel-plugin-istanbul": "^7.0.0",
     "cypress": "^14.3.2",
+    "cypress-multi-reporters": "^2.0.5",
+    "cypress-parallel": "^0.15.0",
     "eslint": "^9.25.1",
     "ng-extract-i18n-merge": "^2.14.3",
     "rimraf": "^6.0.1",

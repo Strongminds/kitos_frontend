@@ -13,6 +13,7 @@ export default defineConfig({
       openMode: 1,
     },
   },
+  reporter: 'cypress-multi-reporters',
 
   component: {
     devServer: {
