@@ -10,7 +10,7 @@
   "license": "MPL-2.0",
   "scripts": {
     "cy:run": "cypress run",
-    "cy:parallel": "cypress-parallel -s cy:run -t 4 -d 'cypress/e2e'",
+    "cy:parallel": "cypress-parallel -s cy:run -t 4 -d 'cypress/e2e' -a configuration=ci",
     "ng": "ng",
     "start": "ng serve --host=127.0.0.1",
     "start:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh start'",
