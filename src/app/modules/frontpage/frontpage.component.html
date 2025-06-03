@@ -1,5 +1,4 @@
-<div *ngIf="(isAuthenticated$ | async) !== true" class="container">
-  <app-loading *ngIf="loading$ | async"></app-loading>
+<div *ngIf="(isAuthenticated$ | async) !== true && (loading$ | async) !== true" class="container">
   <div class="left">
     <ng-container *ngIf="mainPublicMessage$ | async as mainPublicMessage">
       <div *ngIf="mainPublicMessage.link" (click)="goToMarketingPage(mainPublicMessage.link)" class="top-left-corner">

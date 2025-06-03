@@ -16,9 +16,9 @@ import { UserActions } from './store/user-store/actions';
 import { selectIsAuthenticating, selectUser } from './store/user-store/selectors';
 import { NgIf, AsyncPipe } from '@angular/common';
 import { NavBarComponent } from './modules/layout/nav-bar/nav-bar.component';
-import { LoadingComponent } from './shared/components/loading/loading.component';
 import { RouterOutlet } from '@angular/router';
 import { PopupMessagesComponent } from './shared/components/popup-messages/popup-messages.component';
+import { LoadingComponent } from './shared/components/loading/loading.component';
 
 @Component({
   selector: 'app-root',
@@ -38,7 +38,7 @@ export class AppComponent extends BaseComponent implements OnInit {
     private organizationService: OrganizationService,
     private materialIconsService: MaterialIconsConfigService,
     private externalReferencesService: ExternalReferencesStoreAdapterService,
-    private actions$: Actions,
+    private actions$: Actions
   ) {
     super();
   }
@@ -74,7 +74,7 @@ export class AppComponent extends BaseComponent implements OnInit {
         }
 
         this.store.dispatch(UserActions.updateHasMultipleOrganizations(organizations.length > 1));
-      }),
+      })
     );
   }
 
