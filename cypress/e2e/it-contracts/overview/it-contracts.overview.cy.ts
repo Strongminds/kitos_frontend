@@ -1,7 +1,3 @@
-/// <reference types="Cypress" />
-
-import { TestRunner } from 'cypress/support/test-runner';
-
 function setupTest() {
   cy.requireIntercept();
   cy.intercept('/odata/ItContractOverviewReadModels*', { fixture: './it-contracts/it-contracts.json' });

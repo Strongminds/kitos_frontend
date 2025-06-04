@@ -1,5 +1,3 @@
-/// <reference types="Cypress" />
-
 describe('it-system-catalog', () => {
   beforeEach(() => {
     cy.requireIntercept();

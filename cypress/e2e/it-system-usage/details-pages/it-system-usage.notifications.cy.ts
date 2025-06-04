@@ -20,7 +20,7 @@ function setupTest() {
 describe('it-system-usage notifications', () => {
   const testRunner = new TestRunner(setupTest);
 
-  it('Tests', () => {
+  it('it-system-usage notifications', () => {
     testRunner.runTestWithSetup('Notifications are displayed in a table', () => {
       cy.getByDataCy('notification-card-title').should('have.text', 'Advis');
 
