@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, input, Input, Output } from '@angular/core';
 import { Dictionary } from '@ngrx/entity';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
@@ -12,6 +12,7 @@ import { TrashcanIconComponent } from '../../icons/trashcan-icon.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { SelectedOptionTypeTextComponent } from '../../selected-option-type-text/selected-option-type-text.component';
 import { TableRowActionsComponent } from '../../table-row-actions/table-row-actions.component';
+import { Observable } from 'rxjs';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -35,6 +36,7 @@ export class RoleRowComponent {
   @Input() role!: RoleAssignment;
   @Input() rolesDictionary!: Dictionary<APIRoleOptionResponseDTO | undefined>;
   @Input() hasModifyPermission!: boolean;
+  @Input() rolesDictionaryObservable$!: Observable<Dictionary<APIRoleOptionResponseDTO> | undefined>;
 
   @Output() removeRole = new EventEmitter<RoleAssignment>();
   @Output() editRole = new EventEmitter<RoleAssignment>();

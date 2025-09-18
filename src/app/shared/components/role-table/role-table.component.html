@@ -22,6 +22,7 @@
             [role]="role"
             [hasModifyPermission]="hasModifyPermission"
             [rolesDictionary]="rolesDictionary"
+            [rolesDictionaryObservable$]="availableRolesDictionary$"
             (removeRole)="onRemove($event)"
             (editRole)="onEdit($event)"
           ></tr>

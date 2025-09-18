@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BaseComponent } from '../../base/base.component';
 import { Dictionary } from '../../models/primitives/dictionary.model';
 
 export interface BaseSelectedOptionTypeTextModel {
@@ -11,16 +13,34 @@ export interface BaseSelectedOptionTypeTextModel {
   templateUrl: './selected-option-type-text.component.html',
   styleUrls: ['./selected-option-type-text.component.scss'],
 })
-export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTextModel> implements OnInit {
+export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTextModel> extends BaseComponent implements OnInit {
   public selectedOptionText = '';
   @Input() public selectedOption?: T;
   @Input() public availableOptions!: Dictionary<T>;
+  @Input() public rolesDictionaryObservable$!: Observable<Dictionary<T> | undefined>;
 
   ngOnInit(): void {
+    this.subscriptions.add(
+      this.rolesDictionaryObservable$.subscribe((rolesDict) => {
+        if (rolesDict){
+          this.availableOptions = rolesDict;
+        if (this.selectedOption) {
+          this.selectedOptionText = this.getOptionName(this.selectedOption.uuid, this.selectedOption.name);
+        }
+        }
+      })
+    );
+
     if (this.selectedOption) {
-      const availableOption = this.availableOptions[this.selectedOption.uuid];
-      const obsoletedText = $localize`udgået`;
-      this.selectedOptionText = availableOption?.name ?? `${this.selectedOption.name} (${obsoletedText})`;
+      this.selectedOptionText = this.getOptionName(this.selectedOption.uuid, this.selectedOption.name);
     }
+  }
+
+  private getOptionName(optionUuid: string, optionName: string): string {
+    const availableOption = this.availableOptions[optionUuid];
+    // console.log("selected option: " + JSON.stringify(this.selectedOption));
+    // console.log("options: " + JSON.stringify(this.availableOptions));
+    const obsoletedText = $localize`udgået`;
+    return availableOption?.name ?? `${optionName} (${obsoletedText})`;
   }
 }
