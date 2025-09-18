@@ -17,6 +17,7 @@ import {
 import { removeUnitAndUpdateChildren } from '../../helpers/organization-unit-helper';
 import { OrganizationUnitActions } from './actions';
 import { OrganizationUnitState } from './state';
+import { entityWithUnavailableName } from 'src/app/shared/helpers/string.helpers';
 
 export const organizationUnitAdapter = createEntityAdapter<APIOrganizationUnitResponseDTO>({
   selectId: (organizationUnit) => organizationUnit.uuid,
@@ -441,5 +442,5 @@ function updateRelevantSystems(
   return registrations;
 }
 function getDisabledName(registration: APINamedEntityWithEnabledStatusV2DTO) {
-  return registration.disabled ? `${registration.name} ` + $localize`(Ikke tilgængeligt)` : registration.name;
+  return entityWithUnavailableName(registration.name ?? '', !registration.disabled);
 }
