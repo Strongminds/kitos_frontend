@@ -1,8 +1,5 @@
-import { APIUserResponseDTO } from 'src/app/api/v2';
+import { APIUserCollectionEditPermissionsResponseDTO, APIUserResponseDTO } from 'src/app/api/v2';
 import { MultiSelectDropdownItem } from '../../dropdown-option.model';
-import { OrganizationRight } from '../../organization-right.model';
-import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
-import { LOCAL_ADMIN_ROLE, ORGANIZATION_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
 
 export interface UserRoleChoice {
   name: string;
@@ -43,26 +40,23 @@ export const mapUserRoleChoice = (value?: APIUserResponseDTO.RolesEnum): UserRol
 };
 
 export function GetOptionsBasedOnRights(
-  isGlobalAdmin: boolean,
-  organziationRights: OrganizationRight[],
-  organizationUuid: string,
+  modifyPermissions: APIUserCollectionEditPermissionsResponseDTO | undefined
 ): MultiSelectDropdownItem<APIUserResponseDTO.RolesEnum>[] {
-  const hasRole = (role: number) => hasRoleInOrganization(organziationRights, organizationUuid, role);
-  const isLocalAdmin = hasRole(LOCAL_ADMIN_ROLE);
-  const isOrgAdmin = hasRole(ORGANIZATION_ADMIN_ROLE);
-  return userRoleChoiceOptions.map((option) =>
-    mapUserRoleChoiceToMultiSelectOption(isGlobalAdmin, isLocalAdmin, isOrgAdmin, option),
-  );
+  return userRoleChoiceOptions.map((option) => mapUserRoleChoiceToMultiSelectOption(modifyPermissions, option));
 }
 
 function mapUserRoleChoiceToMultiSelectOption(
-  isGlobalAdmin: boolean,
-  isLocalAdmin: boolean,
-  isOrgAdmin: boolean,
-  item: UserRoleChoice,
+  modifyPermissions: APIUserCollectionEditPermissionsResponseDTO | undefined,
+  item: UserRoleChoice
 ): MultiSelectDropdownItem<APIUserResponseDTO.RolesEnum> {
-  if (isGlobalAdmin || isLocalAdmin) return { ...item, disabled: false };
-  if (item.value === APIUserResponseDTO.RolesEnum.OrganizationModuleAdmin && isOrgAdmin)
+  if (!modifyPermissions) return { ...item, disabled: true };
+
+  if (modifyPermissions.modifyContractRole && item.value === APIUserResponseDTO.RolesEnum.ContractModuleAdmin)
     return { ...item, disabled: false };
+  if (modifyPermissions.modifyOrganizationRole && item.value === APIUserResponseDTO.RolesEnum.OrganizationModuleAdmin)
+    return { ...item, disabled: false };
+  if (modifyPermissions.modifySystemRole && item.value === APIUserResponseDTO.RolesEnum.SystemModuleAdmin)
+    return { ...item, disabled: false };
+
   return { ...item, disabled: true };
 }
