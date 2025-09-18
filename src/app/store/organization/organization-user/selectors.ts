@@ -35,6 +35,10 @@ export const selectOrganizationUserCanModifyAnyPermissions = createSelector(
   selectOrganizationUserState,
   (state) => state.permissions?.modify?.canModifyAny
 );
+export const selectOrganizationUserCanModifyFieldsPermissions = createSelector(
+  selectOrganizationUserState,
+  (state) => state.permissions?.modify?.modifyProperties
+);
 export const selectOrganizationUserDeletePermissions = createSelector(
   selectOrganizationUserState,
   (state) => state.permissions?.delete

@@ -54,9 +54,12 @@ export const selectGridConfigModificationPermission = createSelector(
 );
 
 export const selectAvailableRoleDropdownValues = createSelector(
+  selectUserIsGlobalAdmin,
+  selectUserOrganizationRights,
   selectOrganizationUserModifyPermissions,
-  (modifyPermissions) => {
-    return GetOptionsBasedOnRights(modifyPermissions);
+  selectOrganizationUuid,
+  (isGlobalAdmin, organizationRights, modifyPermissions, organizationUuid) => {
+    return GetOptionsBasedOnRights(isGlobalAdmin, organizationRights ?? [], modifyPermissions, organizationUuid ?? '');
   }
 );
 
