@@ -12,5 +12,5 @@ import { NativeTableComponent } from '../../../../native-table/native-table.comp
 })
 export class UsageMigrationSystemConsequencesTableComponent {
   @Input() migration!: ItSystemUsageMigration;
-  @Input() isCopingToClipboard: boolean = false;
+  @Input() isCopyingToClipboard: boolean = false;
 }

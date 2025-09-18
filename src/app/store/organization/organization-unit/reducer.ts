@@ -121,7 +121,7 @@ export const organizationUnitFeature = createFeature({
       (state): OrganizationUnitState => ({ ...state, isLoadingRegistrations: true }),
     ),
     on(OrganizationUnitActions.getRegistrationsSuccess, (state, { registrations }): OrganizationUnitState => {
-      const mappedRegistrations = mapRegistraitons(registrations);
+      const mappedRegistrations = mapRegistrations(registrations);
 
       return { ...state, registrations, isLoadingRegistrations: false, ...mappedRegistrations };
     }),
@@ -294,7 +294,7 @@ function filterPayments(
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function mapRegistraitons(registrations: APIOrganizationRegistrationUnitResponseDTO): any {
+function mapRegistrations(registrations: APIOrganizationRegistrationUnitResponseDTO): any {
   const internalPayments: PaymentRegistrationModel[] = [];
   const externalPayments: PaymentRegistrationModel[] = [];
 

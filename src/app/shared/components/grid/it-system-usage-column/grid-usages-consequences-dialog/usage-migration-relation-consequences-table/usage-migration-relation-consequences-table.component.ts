@@ -13,7 +13,7 @@ import { entityWithUnavailableName } from 'src/app/shared/helpers/string.helpers
 })
 export class UsageMigrationRelationConsequencesTableComponent {
   @Input() migration!: ItSystemUsageMigration;
-  @Input() isCopingToClipboard: boolean = false;
+  @Input() isCopyingToClipboard: boolean = false;
 
   public formatSystemName(name: string | undefined, deactivated: boolean | undefined) {
     if (!name) return '';
