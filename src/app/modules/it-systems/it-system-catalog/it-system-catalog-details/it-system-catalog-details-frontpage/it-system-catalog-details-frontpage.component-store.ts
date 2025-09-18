@@ -93,7 +93,7 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
                 this.updateItSystems(
                   itSystems.map((system) => ({
                     ...system,
-                    name: entityWithUnavailableName(system.name, !system.deactivated),
+                    name: entityWithUnavailableName(system.name, system.deactivated),
                   })),
                 ),
               (e) => console.error(e),

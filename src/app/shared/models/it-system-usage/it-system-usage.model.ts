@@ -127,7 +127,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ExternalSystemUuid: value.ExternalSystemUuid,
     ParentItSystemName: value.ParentItSystemName,
     ParentItSystemUuid: value.ParentItSystemUuid,
-    SystemName: entityWithUnavailableName(value.SystemName, !value.ItSystemDisabled),
+    SystemName: entityWithUnavailableName(value.SystemName, value.ItSystemDisabled),
     Version: value.Version,
     LocalCallName: value.LocalCallName,
     ResponsibleOrganizationUnitName: value.ResponsibleOrganizationUnitName,

@@ -442,5 +442,5 @@ function updateRelevantSystems(
   return registrations;
 }
 function getDisabledName(registration: APINamedEntityWithEnabledStatusV2DTO) {
-  return entityWithUnavailableName(registration.name ?? '', !registration.disabled);
+  return entityWithUnavailableName(registration.name ?? '', registration.disabled ?? false);
 }
