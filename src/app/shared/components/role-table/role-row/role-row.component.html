@@ -1,12 +1,13 @@
 <ng-content></ng-content>
 
-<td>
+<ng-container *ngIf="availableRoles$ | async as rolesDictionary">
+
+  <td>
   <app-paragraph paragraphSize="small">
     <app-content-with-tooltip [description]="rolesDictionary[role.assignment.role.uuid]?.description">
       <app-selected-option-type-text
-        [availableOptions]="rolesDictionary"
         [selectedOption]="role.assignment.role"
-        [rolesDictionaryObservable$]="rolesDictionaryObservable$"
+        [availableRoles$]="availableRoles$"
         class="text-padding"
       >
       </app-selected-option-type-text>
@@ -37,3 +38,5 @@
     </app-table-row-actions>
   </app-content-space-between>
 </td>
+</ng-container>
+

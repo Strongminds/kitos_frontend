@@ -9,7 +9,7 @@ export interface BaseSelectedOptionTypeTextModel {
 }
 
 @Component({
-  selector: 'app-selected-option-type-text[availableOptions]',
+  selector: 'app-selected-option-type-text', 
   templateUrl: './selected-option-type-text.component.html',
   styleUrls: ['./selected-option-type-text.component.scss'],
 })
@@ -17,11 +17,11 @@ export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTex
   public selectedOptionText = '';
   @Input() public selectedOption?: T;
   @Input() public availableOptions!: Dictionary<T>;
-  @Input() public rolesDictionaryObservable$!: Observable<Dictionary<T> | undefined>;
+  @Input() public availableRoles$!: Observable<Dictionary<T> | undefined>;
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.rolesDictionaryObservable$.subscribe((rolesDict) => {
+      this.availableRoles$.subscribe((rolesDict) => {
         if (rolesDict){
           this.availableOptions = rolesDict;
         if (this.selectedOption) {
@@ -38,8 +38,6 @@ export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTex
 
   private getOptionName(optionUuid: string, optionName: string): string {
     const availableOption = this.availableOptions[optionUuid];
-    // console.log("selected option: " + JSON.stringify(this.selectedOption));
-    // console.log("options: " + JSON.stringify(this.availableOptions));
     const obsoletedText = $localize`udgået`;
     return availableOption?.name ?? `${optionName} (${obsoletedText})`;
   }
