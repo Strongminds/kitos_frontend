@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { BaseComponent } from '../../base/base.component';
 import { Dictionary } from '../../models/primitives/dictionary.model';
 
 export interface BaseSelectedOptionTypeTextModel {
@@ -7,20 +9,29 @@ export interface BaseSelectedOptionTypeTextModel {
 }
 
 @Component({
-  selector: 'app-selected-option-type-text[availableOptions]',
+  selector: 'app-selected-option-type-text',
   templateUrl: './selected-option-type-text.component.html',
   styleUrls: ['./selected-option-type-text.component.scss'],
 })
-export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTextModel> implements OnInit {
+
+export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTextModel> extends BaseComponent implements OnInit {
   public selectedOptionText = '';
   @Input() public selectedOption?: T;
-  @Input() public availableOptions!: Dictionary<T>;
+  @Input() public availableOptions$!: Observable<Dictionary<T> | undefined>;
 
   ngOnInit(): void {
-    if (this.selectedOption) {
-      const availableOption = this.availableOptions[this.selectedOption.uuid];
-      const obsoletedText = $localize`udgået`;
-      this.selectedOptionText = availableOption?.name ?? `${this.selectedOption.name} (${obsoletedText})`;
-    }
+    this.subscriptions.add(
+      this.availableOptions$.subscribe((optionsDict) => {
+        if (optionsDict && this.selectedOption) {
+          this.selectedOptionText = this.getOptionName(this.selectedOption, optionsDict);
+        }
+      })
+    );
+  }
+
+  private getOptionName(option: T, availableOptions: Dictionary<T> | undefined): string {
+    const availableOption = availableOptions?.[option.uuid];
+    const obsoletedText = $localize`udgået`;
+    return availableOption?.name ?? `${option.name} (${obsoletedText})`;
   }
 }

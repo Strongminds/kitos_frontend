@@ -52,7 +52,6 @@ export interface SystemRelationModel {
     PencilIconComponent,
     TrashcanIconComponent,
     EmptyStateComponent,
-    AsyncPipe,
   ],
 })
 export class RelationTableComponent extends BaseComponent {
