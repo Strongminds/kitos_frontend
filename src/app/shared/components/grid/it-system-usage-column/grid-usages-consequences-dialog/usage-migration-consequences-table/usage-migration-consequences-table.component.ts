@@ -13,5 +13,5 @@ import { NativeTableComponent } from '../../../../native-table/native-table.comp
 export class UsageMigrationConsequencesTableComponent {
   @Input() title!: string;
   @Input() consequences!: IdentityNamePair[];
-  @Input() isCopingToClipboard: boolean = false;
+  @Input() isCopyingToClipboard: boolean = false;
 }

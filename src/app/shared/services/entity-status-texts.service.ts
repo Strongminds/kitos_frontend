@@ -20,7 +20,7 @@ export class EntityStatusTextsService {
     },
     'it-system-usage': {
       trueString: $localize`Aktivt`,
-      falseString: this.INACTIVE_TEXT,
+      falseString: $localize`Ikke aktivt`,
     },
     'it-interface': {
       trueString: this.ACTIVE_TEXT,

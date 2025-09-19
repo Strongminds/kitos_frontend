@@ -50,12 +50,12 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
   return {
     id: value.Uuid,
     Uuid: value.Uuid,
-    Name: entityWithUnavailableName(value.Name, !isDisabled),
+    Name: entityWithUnavailableName(value.Name, isDisabled),
     IsInUse: value.Usages.some(
       (usage: { Organization: { Uuid: string } }) => usage.Organization.Uuid === currentOrganizationUuid,
     ),
     PreviousName: value.PreviousName,
-    Parent: { Name: entityWithUnavailableName(value.Parent?.Name, !value.Parent?.Disabled) },
+    Parent: { Name: entityWithUnavailableName(value.Parent?.Name, value.Parent?.Disabled) },
     ExternalUuid: value.ExternalUuid,
     Description: value.Description,
     AccessModifier: mapAccessModifierEnumToAccessModifierChoice(value.AccessModifier),

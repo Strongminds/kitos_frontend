@@ -11,6 +11,7 @@ import {
   APIV2ItSystemService,
   APIV2OrganizationService,
 } from 'src/app/api/v2';
+import { entityWithUnavailableName } from 'src/app/shared/helpers/string.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUuid } from 'src/app/store/it-system/selectors';
 
@@ -92,7 +93,7 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
                 this.updateItSystems(
                   itSystems.map((system) => ({
                     ...system,
-                    name: system.deactivated ? `${system.name} (Ikke tilgængeligt)` : system.name,
+                    name: entityWithUnavailableName(system.name, system.deactivated),
                   })),
                 ),
               (e) => console.error(e),
