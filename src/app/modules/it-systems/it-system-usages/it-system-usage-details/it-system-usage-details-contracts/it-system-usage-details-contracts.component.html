@@ -27,9 +27,8 @@
             <td>
               <app-paragraph paragraphSize="small" [cropOnOverflow]="true"
                 ><app-selected-option-type-text
-                  *ngIf="availableContractTypesDictionary$ | async as availableContractTypes"
                   [selectedOption]="contract.general.contractType"
-                  [availableOptions]="availableContractTypes"
+                  [availableRoles$]="availableContractTypesDictionary$"
                 ></app-selected-option-type-text
               ></app-paragraph>
             </td>

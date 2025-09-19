@@ -14,11 +14,9 @@ export interface BaseSelectedOptionTypeTextModel {
   styleUrls: ['./selected-option-type-text.component.scss'],
 })
 
-
 export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTextModel> extends BaseComponent implements OnInit {
   public selectedOptionText = '';
   @Input() public selectedOption?: T;
-  @Input() public availableOptions!: Dictionary<T>;
   @Input() public availableRoles$!: Observable<Dictionary<T> | undefined>;
 
   ngOnInit(): void {

@@ -24,9 +24,8 @@
             <td>
               <app-paragraph paragraphSize="small" [cropOnOverflow]="true">
                 <app-selected-option-type-text
-                  *ngIf="availableInterfaceTypesDictionary$ | async as interfaceTypesDictionary"
                   [selectedOption]="itInterface.itInterfaceType"
-                  [availableOptions]="interfaceTypesDictionary"
+                  [availableRoles$]="availableInterfaceTypesDictionary$"
                 >
                 </app-selected-option-type-text>
               </app-paragraph>
