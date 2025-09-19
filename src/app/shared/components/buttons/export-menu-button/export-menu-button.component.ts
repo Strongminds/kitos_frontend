@@ -1,13 +1,13 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { GdprOverviewDialogComponent } from 'src/app/modules/it-systems/it-system-usages/gdpr-overview-dialog/gdpr-overview-dialog.component';
 import { selectITSystemUsageEnableGdpr } from 'src/app/store/organization/ui-module-customization/selectors';
-import { MenuButtonComponent } from '../menu-button/menu-button.component';
-import { MenuButtonItemComponent } from '../menu-button/menu-button-item/menu-button-item.component';
 import { ExportIconComponent } from '../../icons/export-icon.component';
-import { NgIf, AsyncPipe } from '@angular/common';
 import { LockIconComponent } from '../../icons/lock-icon.component';
+import { MenuButtonItemComponent } from '../menu-button/menu-button-item/menu-button-item.component';
+import { MenuButtonComponent } from '../menu-button/menu-button.component';
 
 @Component({
   selector: 'app-export-menu-button',
@@ -20,10 +20,7 @@ export class ExportMenuButtonComponent {
   @Input() showColumnsOnlyOption = true;
   @Input() enabledGdprExport = false;
 
-  constructor(
-    private dialog: MatDialog,
-    private store: Store,
-  ) {}
+  constructor(private dialog: MatDialog, private store: Store) {}
 
   public readonly gdprEnabled$ = this.store.select(selectITSystemUsageEnableGdpr);
 
@@ -34,6 +31,6 @@ export class ExportMenuButtonComponent {
   }
 
   public openGdprOverview(): void {
-    this.dialog.open(GdprOverviewDialogComponent, { width: '90%', height: 'auto' });
+    this.dialog.open(GdprOverviewDialogComponent, { width: '90%', height: '95%' });
   }
 }
