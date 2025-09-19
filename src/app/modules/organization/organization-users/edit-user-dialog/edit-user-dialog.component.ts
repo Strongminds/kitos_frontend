@@ -148,7 +148,15 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       this.hasModifyFieldsPermission$.subscribe((canModify) => {
         if (canModify) return;
 
-        this.createForm.disable();
+        //disable each control individually to avoid disabling the form itself
+        this.createForm.controls.firstName.disable();
+        this.createForm.controls.lastName.disable();
+        this.createForm.controls.email.disable();
+        this.createForm.controls.phoneNumber.disable();
+        this.createForm.controls.defaultStartPreference.disable();
+        this.createForm.controls.hasApiAccess.disable();
+        this.createForm.controls.hasRightsHolderAccess.disable();
+        this.createForm.controls.hasStakeholderAccess.disable();
       })
     );
 
@@ -174,7 +182,16 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   public isFormValid(): boolean {
-    return this.createForm.valid && this.hasAnythingChanged();
+    return this.isFormValidIgnoringDisabled() && this.hasAnythingChanged();
+  }
+
+  public isFormValidIgnoringDisabled(): boolean {
+    const enabledControlsValid = Object.keys(this.createForm.controls).every((key) => {
+      const control = this.createForm.get(key);
+      return control?.disabled || control?.valid;
+    });
+
+    return enabledControlsValid;
   }
 
   public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
