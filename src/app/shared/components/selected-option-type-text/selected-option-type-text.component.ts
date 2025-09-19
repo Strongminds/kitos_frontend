@@ -9,10 +9,12 @@ export interface BaseSelectedOptionTypeTextModel {
 }
 
 @Component({
-  selector: 'app-selected-option-type-text', 
+  selector: 'app-selected-option-type-text',
   templateUrl: './selected-option-type-text.component.html',
   styleUrls: ['./selected-option-type-text.component.scss'],
 })
+
+
 export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTextModel> extends BaseComponent implements OnInit {
   public selectedOptionText = '';
   @Input() public selectedOption?: T;
@@ -21,24 +23,17 @@ export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTex
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.availableRoles$.subscribe((rolesDict) => {
-        if (rolesDict){
-          this.availableOptions = rolesDict;
-        if (this.selectedOption) {
-          this.selectedOptionText = this.getOptionName(this.selectedOption.uuid, this.selectedOption.name);
-        }
+      this.availableRoles$.subscribe((optionsDict) => {
+        if (optionsDict && this.selectedOption) {
+          this.selectedOptionText = this.getOptionName(this.selectedOption, optionsDict);
         }
       })
     );
-
-    if (this.selectedOption) {
-      this.selectedOptionText = this.getOptionName(this.selectedOption.uuid, this.selectedOption.name);
-    }
   }
 
-  private getOptionName(optionUuid: string, optionName: string): string {
-    const availableOption = this.availableOptions[optionUuid];
+  private getOptionName(option: T, availableOptions: Dictionary<T> | undefined): string {
+    const availableOption = availableOptions?.[option.uuid];
     const obsoletedText = $localize`udgået`;
-    return availableOption?.name ?? `${optionName} (${obsoletedText})`;
+    return availableOption?.name ?? `${option.name} (${obsoletedText})`;
   }
 }
