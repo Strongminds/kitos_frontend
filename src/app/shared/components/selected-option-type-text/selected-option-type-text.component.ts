@@ -17,11 +17,11 @@ export interface BaseSelectedOptionTypeTextModel {
 export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTextModel> extends BaseComponent implements OnInit {
   public selectedOptionText = '';
   @Input() public selectedOption?: T;
-  @Input() public availableRoles$!: Observable<Dictionary<T> | undefined>;
+  @Input() public availableOptions$!: Observable<Dictionary<T> | undefined>;
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.availableRoles$.subscribe((optionsDict) => {
+      this.availableOptions$.subscribe((optionsDict) => {
         if (optionsDict && this.selectedOption) {
           this.selectedOptionText = this.getOptionName(this.selectedOption, optionsDict);
         }
