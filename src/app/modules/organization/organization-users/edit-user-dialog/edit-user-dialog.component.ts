@@ -28,6 +28,7 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { selectOrganizationUserCanModifyFieldsPermissions } from 'src/app/store/organization/organization-user/selectors';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
@@ -76,6 +77,8 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   private readonly availableContractRoles$ = this.store.select(selectRoleOptionTypes('it-contract'));
   private readonly availableUsageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage'));
   private readonly availableDprRoles$ = this.store.select(selectRoleOptionTypes('data-processing'));
+
+  private readonly hasModifyFieldsPermission$ = this.store.select(selectOrganizationUserCanModifyFieldsPermissions);
 
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -140,6 +143,15 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
         }
       })
     );
+
+    this.subscriptions.add(
+      this.hasModifyFieldsPermission$.subscribe((canModify) => {
+        if (canModify) return;
+
+        this.createForm.disable();
+      })
+    );
+
     const initialValues = this.getUserRoleChoices();
     this.selectedRoles = initialValues.map((role) => role.value);
   }

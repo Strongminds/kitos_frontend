@@ -9,8 +9,8 @@ function setupTest() {
     '/odata/GetUsersByUuid(organizationUuid=**)?$expand=ObjectOwner,OrganizationRights($filter=Organization/Uuid%20eq%**),OrganizationUnitRights($filter=Object/Organization/Uuid%20eq%**;$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem,Uuid;$expand=ItSystem($select=Name))),ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&$skip=0&$top=*&$count=true',
     { fixture: './organizations/users/organization-odata-users.json' }
   );
-  cy.intercept('api/v2/internal/organization/*/users/permissions', {
-    fixture: './organizations/users/permissions.json',
+  cy.intercept('api/v2/internal/organization/*/users/*/permissions', {
+    fixture: './organizations/users/org-users-permissions.json',
   });
   cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
 
@@ -183,7 +183,7 @@ describe('organization-users', () => {
       cy.wait('@deleteUser');
     });
 
-    testRunner.runTestWithSetup('Organization admins can only change the organization admin role on users', () => {
+    testRunner.runTestWithSetup('Non local admins can only change their roles on users', () => {
       cy.setup(false);
       cy.intercept('odata/ItSystemUsageOverviewReadModels?*');
       cy.login('./shared/authorize-organization-admin.json');
@@ -193,8 +193,8 @@ describe('organization-users', () => {
       cy.getByDataCy('roles-dropdown').click();
 
       cy.getByDataCy('local-admin-option').find('input').should('be.disabled');
-      cy.getByDataCy('system-admin-option').find('input').should('be.disabled');
-      cy.getByDataCy('contract-admin-option').find('input').should('be.disabled');
+      cy.getByDataCy('system-admin-option').find('input').should('be.enabled');
+      cy.getByDataCy('contract-admin-option').find('input').should('be.enabled');
       cy.getByDataCy('organization-admin-option').find('input').should('be.enabled');
     });
   });

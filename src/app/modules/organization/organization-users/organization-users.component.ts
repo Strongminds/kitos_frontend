@@ -20,6 +20,7 @@ import { GridColumnStorageService } from 'src/app/shared/services/grid-column-st
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import {
   selectOrganizationUserByUuid,
+  selectOrganizationUserCanModifyAnyPermissions,
   selectOrganizationUserCreatePermissions,
   selectOrganizationUserDeletePermissions,
   selectOrganizationUserGridColumns,
@@ -58,7 +59,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly gridColumns$ = this.store.select(selectOrganizationUserGridColumns);
   public readonly hasCreatePermission$ = this.store.select(selectOrganizationUserCreatePermissions);
 
-  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserModifyPermissions);
+  public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserCanModifyAnyPermissions);
+  public readonly modificationPermissions$ = this.store.select(selectOrganizationUserModifyPermissions);
   public readonly hasDeletePermission$ = this.store.select(selectOrganizationUserDeletePermissions);
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
@@ -258,6 +260,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     const user$ = this.store.select(selectOrganizationUserByUuid(uuid)).pipe(filterNullish());
     const dialogRef = this.dialog.open(UserInfoDialogComponent, { minWidth: '800px', width: '25%' });
     dialogRef.componentInstance.user$ = user$;
-    dialogRef.componentInstance.hasModificationPermission$ = this.hasModificationPermission$;
+    dialogRef.componentInstance.hasModificationPermission$ = this.modificationPermissions$;
   }
 }

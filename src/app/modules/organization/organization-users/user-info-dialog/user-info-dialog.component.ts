@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { APIUserCollectionEditPermissionsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
   ODataOrganizationUser,
@@ -46,7 +47,7 @@ import { UserRoleTableComponent } from './user-role-table/user-role-table.compon
 })
 export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;
-  @Input() hasModificationPermission$!: Observable<boolean | undefined>;
+  @Input() hasModificationPermission$!: Observable<APIUserCollectionEditPermissionsResponseDTO | undefined>;
 
   public $sendingNotification = new BehaviorSubject(false);
 
@@ -72,6 +73,10 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   public readonly contractRolesSubject$ = new BehaviorSubject<Right[]>([]);
   public readonly usageRolesSubject$ = new BehaviorSubject<Right[]>([]);
   public readonly dprRolesSubject$ = new BehaviorSubject<Right[]>([]);
+
+  public readonly hasContractRolesModifyPermission$ = new BehaviorSubject<boolean>(false);
+  public readonly hasSystemAndDprRolesModifyPermission$ = new BehaviorSubject<boolean>(false);
+  public readonly hasOrganizationRolesModifyPermission$ = new BehaviorSubject<boolean>(false);
 
   constructor(
     private store: Store,
@@ -101,6 +106,14 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
         this.contractRolesSubject$.next(user.ItContractRights ?? []);
         this.usageRolesSubject$.next(user.ItSystemRights ?? []);
         this.dprRolesSubject$.next(user.DataProcessingRegistrationRights ?? []);
+      })
+    );
+
+    this.subscriptions.add(
+      this.hasModificationPermission$.subscribe((perm) => {
+        this.hasContractRolesModifyPermission$.next(perm?.modifyContractRole ?? false);
+        this.hasSystemAndDprRolesModifyPermission$.next(perm?.modifySystemRole ?? false);
+        this.hasOrganizationRolesModifyPermission$.next(perm?.modifyOrganizationRole ?? false);
       })
     );
   }

@@ -214,6 +214,7 @@ export * from './updateItSystemUsageRequestDTO';
 export * from './updateOrganizationUnitRequestDTO';
 export * from './updateScheduledNotificationWriteRequestDTO';
 export * from './updateUserRequestDTO';
+export * from './userCollectionEditPermissionsResponseDTO';
 export * from './userCollectionPermissionsResponseDTO';
 export * from './userIsPartOfCurrentOrgResponseDTO';
 export * from './userReferenceResponseDTO';

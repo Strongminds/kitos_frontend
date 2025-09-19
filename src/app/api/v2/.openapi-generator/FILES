@@ -344,6 +344,7 @@ model/updateItSystemUsageRequestDTO.ts
 model/updateOrganizationUnitRequestDTO.ts
 model/updateScheduledNotificationWriteRequestDTO.ts
 model/updateUserRequestDTO.ts
+model/userCollectionEditPermissionsResponseDTO.ts
 model/userCollectionPermissionsResponseDTO.ts
 model/userIsPartOfCurrentOrgResponseDTO.ts
 model/userReferenceResponseDTO.ts
