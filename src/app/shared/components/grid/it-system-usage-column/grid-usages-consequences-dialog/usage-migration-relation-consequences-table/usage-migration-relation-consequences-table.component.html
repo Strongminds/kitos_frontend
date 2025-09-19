@@ -1,5 +1,5 @@
 <app-paragraph i18n [bold]="true" paragraphSize="medium">Følgende systemrelationer berøres:</app-paragraph>
-<app-native-table *ngIf="!isCopingToClipboard">
+<app-native-table *ngIf="!isCopyingToClipboard">
   <thead>
     <th i18n>Anvendersystem</th>
     <th i18n>Udstillersystem</th>
@@ -54,7 +54,7 @@
     </tr>
   </tbody>
 </app-native-table>
-<ng-container *ngIf="isCopingToClipboard">
+<ng-container *ngIf="isCopyingToClipboard">
   <app-native-table>
     <thead>
       <th i18n>Anvendersystem</th>
