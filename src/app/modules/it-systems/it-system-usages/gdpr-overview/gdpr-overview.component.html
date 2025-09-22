@@ -1,4 +1,4 @@
-<ng-container *ngIf="gdprReports$ | async as gdprReports">
+<ng-container *ngIf="filteredGdprReports$ | async as gdprReports">
   <ng-container *ngIf="filteredGridColumns$ | async as gridColumns">
     <app-local-grid
       [columns]="gridColumns"
