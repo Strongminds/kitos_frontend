@@ -1,6 +1,7 @@
-import { NgIf } from '@angular/common';
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Dictionary } from '@ngrx/entity';
+import { Observable } from 'rxjs';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { RoleAssignment } from 'src/app/shared/models/helpers/read-model-role-assignments';
 import { BooleanCircleComponent } from '../../boolean-circle/boolean-circle.component';
@@ -29,12 +30,13 @@ import { TableRowActionsComponent } from '../../table-row-actions/table-row-acti
     IconButtonComponent,
     TrashcanIconComponent,
     PencilIconComponent,
+    AsyncPipe,
   ],
 })
 export class RoleRowComponent {
   @Input() role!: RoleAssignment;
-  @Input() rolesDictionary!: Dictionary<APIRoleOptionResponseDTO | undefined>;
   @Input() hasModifyPermission!: boolean;
+  @Input() availableRoles$!: Observable<Dictionary<APIRoleOptionResponseDTO> | undefined>;
 
   @Output() removeRole = new EventEmitter<RoleAssignment>();
   @Output() editRole = new EventEmitter<RoleAssignment>();
