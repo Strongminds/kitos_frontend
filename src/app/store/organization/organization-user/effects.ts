@@ -87,12 +87,9 @@ export class OrganizationUserEffects {
   getUserPermissions$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationUserActions.getOrganizationUserPermissions),
-      combineLatestWith(
-        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
-        this.store.select(selectUserUuid).pipe(filterNullish())
-      ),
-      switchMap(([_, organizationUuid, userUuid]) =>
-        this.apiService.getSingleUsersInternalV2GetCollectionPermissions({ organizationUuid, userUuid }).pipe(
+      combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiService.getSingleUsersInternalV2GetCollectionPermissions({ organizationUuid }).pipe(
           map((permissions) => OrganizationUserActions.getOrganizationUserPermissionsSuccess(permissions)),
           catchError(() => of(OrganizationUserActions.getOrganizationUserPermissionsError()))
         )
