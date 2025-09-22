@@ -17,5 +17,6 @@ export interface APIUserCollectionEditPermissionsResponseDTO {
     modifyContractRole?: boolean;
     modifySystemRole?: boolean;
     modifyOrganizationRole?: boolean;
+    modifyLocalAdminRole?: boolean;
 }
 

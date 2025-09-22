@@ -45,7 +45,6 @@ export interface DeleteSingleUsersInternalV2DeleteUserInOrganizationRequestParam
 
 export interface GetSingleUsersInternalV2GetCollectionPermissionsRequestParams {
     organizationUuid: string;
-    userUuid: string;
 }
 
 export interface GetSingleUsersInternalV2GetUserByUuidRequestParams {
@@ -238,10 +237,6 @@ export class APIV2UsersInternalINTERNALService {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleUsersInternalV2GetCollectionPermissions.');
         }
-        const userUuid = requestParameters.userUuid;
-        if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling getSingleUsersInternalV2GetCollectionPermissions.');
-        }
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -274,7 +269,7 @@ export class APIV2UsersInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/users/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
+        let localVarPath = `/api/v2/internal/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/users/permissions`;
         return this.httpClient.request<APIUserCollectionPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
