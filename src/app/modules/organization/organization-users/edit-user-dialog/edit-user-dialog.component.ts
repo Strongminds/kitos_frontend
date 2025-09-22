@@ -261,8 +261,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, this.getPhoneNumberString(formValue.phoneNumber)),
       defaultUserStartPreference:
-        this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ??
-        APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
+        this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ?? undefined,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),
@@ -319,7 +318,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   private getPhoneNumberString(phoneNumberFromControl: string | undefined | null) {
-    return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : '';
+    return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : undefined;
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {
