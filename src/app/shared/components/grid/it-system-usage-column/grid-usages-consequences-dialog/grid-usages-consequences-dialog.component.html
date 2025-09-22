@@ -16,7 +16,7 @@
         <app-card>
           <app-usage-migration-system-consequences-table
             [migration]="migration"
-            [isCopingToClipboard]="isCopingToClipboard"
+            [isCopyingToClipboard]="isCopyingToClipboard"
           ></app-usage-migration-system-consequences-table>
         </app-card>
 
@@ -26,7 +26,7 @@
             title="Følgende registreringer i modulet 'Kontrakter' berøres:"
             i18n-title
             [consequences]="migration.affectedContracts ?? []"
-            [isCopingToClipboard]="isCopingToClipboard"
+            [isCopyingToClipboard]="isCopyingToClipboard"
           >
           </app-usage-migration-consequences-table>
         </app-card>
@@ -35,7 +35,7 @@
         <app-card *ngIf="hasRelationsConsequences() | async">
           <app-usage-migration-relation-consequences-table
             [migration]="migration"
-            [isCopingToClipboard]="isCopingToClipboard"
+            [isCopyingToClipboard]="isCopyingToClipboard"
           ></app-usage-migration-relation-consequences-table>
         </app-card>
 
@@ -45,7 +45,7 @@
             title="Følgende registreringer i modulet 'Databehandling' berøres:"
             i18n-title
             [consequences]="migration.affectedDataProcessingRegistrations ?? []"
-            [isCopingToClipboard]="isCopingToClipboard"
+            [isCopyingToClipboard]="isCopyingToClipboard"
           >
           </app-usage-migration-consequences-table>
         </app-card>

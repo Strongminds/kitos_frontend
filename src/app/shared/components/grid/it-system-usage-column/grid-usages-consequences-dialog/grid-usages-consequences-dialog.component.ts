@@ -54,7 +54,7 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   public hasAcceptedConsequences: boolean = false;
   public readonly consequencesContentId = 'consequences-content';
 
-  public isCopingToClipboard = false;
+  public isCopyingToClipboard = false;
 
   constructor(
     private readonly dialogRef: MatDialogRef<GridUsagesConsequencesDialogComponent>,
@@ -143,10 +143,10 @@ export class GridUsagesConsequencesDialogComponent extends BaseComponent impleme
   }
 
   public copyConsequencesToClipboard() {
-    this.isCopingToClipboard = true;
+    this.isCopyingToClipboard = true;
     this.cdr.detectChanges();
     this.clipboardService.copyContentToClipBoardById(this.consequencesContentId);
     this.notificationService.showDefault($localize`Konsekvenserne er kopieret til udklipsholderen`);
-    this.isCopingToClipboard = false;
+    this.isCopyingToClipboard = false;
   }
 }

@@ -4,8 +4,8 @@ export function isEmptyOrUndefined(s: string | undefined) {
   return !s || s.length === 0;
 }
 
-export function entityWithUnavailableName(name: string, available: boolean): string {
-  return available ? name : $localize`${name} (Ikke tilgængeligt)`;
+export function entityWithUnavailableName(name: string, unavailable: boolean): string {
+  return unavailable ? $localize`${name} (Ikke tilgængeligt)` : name;
 }
 
 export function toBulletPoints(s: Array<string | undefined>): string {
