@@ -6,14 +6,21 @@ import { OverviewHeaderComponent } from '../../../../shared/components/overview-
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { ExportIconComponent } from '../../../../shared/components/icons/export-icon.component';
 import { GdprOverviewComponent } from '../gdpr-overview/gdpr-overview.component';
+import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
+import { selectGridState } from 'src/app/store/it-system-usage/selectors';
+import { map } from 'rxjs';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-gdpr-overview-dialog',
   templateUrl: './gdpr-overview-dialog.component.html',
   styleUrl: './gdpr-overview-dialog.component.scss',
-  imports: [DialogComponent, OverviewHeaderComponent, ButtonComponent, ExportIconComponent, GdprOverviewComponent],
+  imports: [DialogComponent, OverviewHeaderComponent, ButtonComponent, ExportIconComponent, GdprOverviewComponent, ParagraphComponent, AsyncPipe, NgIf],
 })
 export class GdprOverviewDialogComponent {
+  public anySystemUsageFilters$ = this.store.select(selectGridState).pipe(
+    map((gridState) => !!gridState.filter));
+
   constructor(private store: Store) {}
 
   public exportToExcel() {
