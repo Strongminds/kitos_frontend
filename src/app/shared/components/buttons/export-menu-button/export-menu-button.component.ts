@@ -8,6 +8,7 @@ import { ExportIconComponent } from '../../icons/export-icon.component';
 import { LockIconComponent } from '../../icons/lock-icon.component';
 import { MenuButtonItemComponent } from '../menu-button/menu-button-item/menu-button-item.component';
 import { MenuButtonComponent } from '../menu-button/menu-button.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-export-menu-button',
@@ -19,8 +20,11 @@ export class ExportMenuButtonComponent {
   @Input() exportMethod!: (exportAllColumns: boolean) => void;
   @Input() showColumnsOnlyOption = true;
   @Input() enabledGdprExport = false;
+  @Input() anyOverviewFiltersApplied$!: Observable<boolean>;
+  @Input() entityText!: string;
 
-  constructor(private dialog: MatDialog, private store: Store) {}
+  constructor(private dialog: MatDialog, private store: Store) {
+  }
 
   public readonly gdprEnabled$ = this.store.select(selectITSystemUsageEnableGdpr);
 
@@ -31,6 +35,8 @@ export class ExportMenuButtonComponent {
   }
 
   public openGdprOverview(): void {
-    this.dialog.open(GdprOverviewDialogComponent, { width: '90%', height: '95%' });
+    const dialogRef = this.dialog.open(GdprOverviewDialogComponent, { width: '90%', height: '95%' });
+    dialogRef.componentInstance.anyOverviewFiltersApplied$ = this.anyOverviewFiltersApplied$;
+    dialogRef.componentInstance.entityText = this.entityText;
   }
 }

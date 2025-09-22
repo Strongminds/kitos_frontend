@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { GridActions } from 'src/app/store/grid/actions';
 import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
@@ -7,8 +7,7 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
 import { ExportIconComponent } from '../../../../shared/components/icons/export-icon.component';
 import { GdprOverviewComponent } from '../gdpr-overview/gdpr-overview.component';
 import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
-import { selectGridState } from 'src/app/store/it-system-usage/selectors';
-import { map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
@@ -18,10 +17,11 @@ import { AsyncPipe, NgIf } from '@angular/common';
   imports: [DialogComponent, OverviewHeaderComponent, ButtonComponent, ExportIconComponent, GdprOverviewComponent, ParagraphComponent, AsyncPipe, NgIf],
 })
 export class GdprOverviewDialogComponent {
-  public anySystemUsageFilters$ = this.store.select(selectGridState).pipe(
-    map((gridState) => !!gridState.filter));
+  @Input() anyOverviewFiltersApplied$!: Observable<boolean>;
+  @Input() entityText!: string;
 
-  constructor(private store: Store) {}
+  constructor(private store: Store) {
+  }
 
   public exportToExcel() {
     this.store.dispatch(GridActions.exportLocalData());

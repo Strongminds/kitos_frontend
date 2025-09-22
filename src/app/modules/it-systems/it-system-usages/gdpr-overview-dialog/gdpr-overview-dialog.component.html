@@ -1,6 +1,6 @@
 <app-dialog backgroundColor="grey" title="GDPR Rapporter" i18n-title>
   <app-overview-header>
-    <app-paragraph i18n *ngIf="anySystemUsageFilters$ | async">Aktive filtre i "IT Systemer"-overblikket er på forhånd anvendt i GDPR-overblikket. <br> 
+    <app-paragraph i18n *ngIf="anyOverviewFiltersApplied$ | async">Aktive filtre i "{{ entityText }}"-overblikket er på forhånd anvendt i GDPR-overblikket. <br> 
           Der kan filtreres yderligere i GDPR-overblikket herunder.</app-paragraph>
     <app-button buttonStyle="secondary" (buttonClick)="exportToExcel()" class="push-right" i18n> <app-export-icon /> Eksporter</app-button>
           </app-overview-header>
