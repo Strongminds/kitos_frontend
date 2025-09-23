@@ -61,7 +61,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
-    ismsSupplier: new FormControl<boolean>(false),
+    isSupplier: new FormControl<boolean | undefined>(undefined),
   });
 
   constructor(
@@ -81,6 +81,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       cvr: this.organization.Cvr,
       foreignCountryCode: this.getInitialForeignCountryCodeValue(this.organization.ForeignCountryCode),
       organizationType: getOrganizationType(this.organization.OrganizationType) ?? defaultOrganizationType,
+      isSupplier: this.organization.IsSupplier,
     });
 
     this.actions$
@@ -120,6 +121,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
       foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
       updateForeignCountryCode: this.foreignCountryCodeHasChange(),
+     // isSupplier: formValue.isSupplier,
     };
   }
 

@@ -6,6 +6,7 @@ export interface OrganizationOData {
   OrganizationType: string;
   OrganizationTypeEnum: OrganizationTypeEnum;
   ForeignCountryCode: { Name: string; Uuid: string; Description: string };
+  IsSupplier?: boolean;
 }
 
 export interface OrganizationType {
@@ -51,6 +52,7 @@ export const adaptOrganization = (value: any): OrganizationOData | undefined => 
     OrganizationType: adaptOrganizationType(value.TypeId).name,
     OrganizationTypeEnum: value.TypeId,
     ForeignCountryCode: value.ForeignCountryCode,
+    IsSupplier: value.IsSupplier,
   };
   return adapted;
 };
