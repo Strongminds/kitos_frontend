@@ -1,4 +1,13 @@
 <app-card>
+  <app-overview-header>
+    <h3 i18n>ISMS Leverandører</h3>
+    <app-button
+    i18n
+    iconType="white-plus"
+    (buttonClick)="openAddSupplierDialog()"
+    ><span>Tilføj</span>
+    </app-button>
+  </app-overview-header>
   <app-local-grid
   [data]="suppliers"
   [columns]="gridColumns"
