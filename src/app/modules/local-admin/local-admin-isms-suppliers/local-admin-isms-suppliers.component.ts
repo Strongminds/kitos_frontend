@@ -27,8 +27,8 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
   }
 
   public gridColumns = [
-    { title: 'Virksomhed', field: 'Name', hidden: false },
-    { title: 'CVR', field: 'Cvr', hidden: false },
+    { title: 'Virksomhed', field: 'name', hidden: false },
+    { title: 'CVR', field: 'cvr', hidden: false },
     createGridActionColumn(['delete']),
   ];
 
