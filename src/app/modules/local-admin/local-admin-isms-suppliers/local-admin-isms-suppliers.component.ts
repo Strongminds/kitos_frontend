@@ -26,14 +26,6 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
     this.store.dispatch(OrganizationActions.getOrganizationPermissions());
   }
 
-  public suppliers = [
-    { Name: 'Supplier A', Cvr: '12345678', Uuid: '1' },
-    { Name: 'Supplier B', Cvr: '87654321', Uuid: '2' },
-    { Name: 'Supplier C', Cvr: '11223344', Uuid: '3' },
-  ];
-
-  public suppliers$ = of(this.suppliers);
-
   public gridColumns = [
     { title: 'Virksomhed', field: 'Name', hidden: false },
     { title: 'CVR', field: 'Cvr', hidden: false },
@@ -42,18 +34,26 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
 
   public canModifyOrganization$ = this.store.select(selectOrganizationHasModifyPermission);
 
-  public openAddSupplierDialog(){
+  public suppliers = [
+    { Name: 'Supplier A', Cvr: '12345678', Uuid: '1' },
+    { Name: 'Supplier B', Cvr: '87654321', Uuid: '2' },
+    { Name: 'Supplier C', Cvr: '11223344', Uuid: '3' },
+  ];
+  public suppliers$ = of(this.suppliers);
+
+  public openAddSupplierDialog() {
     const dialogRef = this.dialog.open(DropdownDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.title = $localize`Tilføj leverandør`;
     dialogInstance.data$ = this.suppliers$;
     dialogInstance.valueField = 'Uuid';
+    dialogInstance.textField = 'Name';
     dialogInstance.save.subscribe(($event: any) => {
       this.saveSupplier($event);
-    })
+    });
   }
 
-  public saveSupplier($event: any){
+  public saveSupplier($event: any) {
     //todo this.store.dispatch(OrganizationActions.addSupplier({ Uuid: $event.Uuid }))
     console.log('Added supplier with Uuid: ' + $event.Uuid);
     this.dialog.closeAll();

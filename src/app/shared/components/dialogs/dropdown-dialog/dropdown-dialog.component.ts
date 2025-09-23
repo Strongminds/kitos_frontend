@@ -32,6 +32,7 @@ export class DropdownDialogComponent<T> extends BaseComponent implements OnInit 
   @Input() public dropdownText!: string;
   @Input() public data$!: Observable<T[]>;
   @Input() public valueField = 'value';
+  @Input() public textField = 'name';
   @Input() public successActionType!: string;
   @Input() public errorActionType!: string;
   @Output() public save = new EventEmitter<T>();
