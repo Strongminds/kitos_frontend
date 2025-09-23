@@ -2,7 +2,7 @@
   <app-local-grid
   [data]="suppliers"
   [columns]="gridColumns"
-  [deletePermission]="true"
+  [deletePermission]="canModifyOrganization$ | async"
   (deleteEvent)="removeSupplier($event)"
   >
   </app-local-grid>
