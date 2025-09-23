@@ -1,4 +1,4 @@
-import { NgFor } from '@angular/common';
+import { AsyncPipe, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
@@ -8,7 +8,7 @@ import { selectOrganizationHasModifyPermission } from 'src/app/store/organizatio
 
 @Component({
   selector: 'app-local-admin-isms-suppliers',
-  imports: [CardComponent, LocalGridComponent, NgFor],
+  imports: [CardComponent, LocalGridComponent, NgFor, AsyncPipe],
   templateUrl: './local-admin-isms-suppliers.component.html',
   styleUrl: './local-admin-isms-suppliers.component.scss'
 })
