@@ -4,6 +4,7 @@ export interface OrganizationOData {
   Name: string;
   Cvr: string | undefined;
   OrganizationType: string;
+  OrganizationTypeEnum: OrganizationTypeEnum;
   ForeignCountryCode: { Name: string; Uuid: string; Description: string };
 }
 
@@ -48,6 +49,7 @@ export const adaptOrganization = (value: any): OrganizationOData | undefined => 
     Name: value.Name,
     Cvr: value.Cvr ?? '',
     OrganizationType: adaptOrganizationType(value.TypeId).name,
+    OrganizationTypeEnum: value.TypeId,
     ForeignCountryCode: value.ForeignCountryCode,
   };
   return adapted;

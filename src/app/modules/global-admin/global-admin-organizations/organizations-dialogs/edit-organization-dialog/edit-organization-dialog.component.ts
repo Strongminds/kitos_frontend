@@ -12,6 +12,7 @@ import {
   getOrganizationType,
   OrganizationOData,
   OrganizationType,
+  OrganizationTypeEnum,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
@@ -26,6 +27,8 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { CheckboxButtonComponent } from 'src/app/shared/components/buttons/checkbox-button/checkbox-button.component';
+import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
@@ -44,6 +47,8 @@ import { ButtonComponent } from '../../../../../shared/components/buttons/button
     DialogActionsComponent,
     ButtonComponent,
     AsyncPipe,
+    CheckboxButtonComponent,
+    ParagraphComponent,
   ],
 })
 export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
@@ -56,6 +61,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
+    ismsSupplier: new FormControl<boolean>(false),
   });
 
   constructor(
@@ -82,6 +88,10 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       .subscribe(() => {
         this.isLoading$.next(false);
       });
+  }
+
+  public showISMSSupplierField(){
+    return this.organization.OrganizationTypeEnum === OrganizationTypeEnum.Company;
   }
 
   public onEditOrganization(): void {
