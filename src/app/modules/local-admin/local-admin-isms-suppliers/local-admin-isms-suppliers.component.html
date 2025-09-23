@@ -1,0 +1,9 @@
+<app-card>
+  <app-local-grid
+  [data]="suppliers"
+  [columns]="gridColumns"
+  [deletePermission]="true"
+  (deleteEvent)="removeSupplier($event)"
+  >
+  </app-local-grid>
+</app-card>
