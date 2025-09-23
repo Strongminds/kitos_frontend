@@ -11,6 +11,7 @@
   <app-local-grid
   [data]="suppliers"
   [columns]="gridColumns"
+  [resizable]="false"
   [deletePermission]="canModifyOrganization$ | async"
   (deleteEvent)="removeSupplier($event)"
   >
