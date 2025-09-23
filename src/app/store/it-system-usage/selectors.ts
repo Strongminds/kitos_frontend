@@ -14,8 +14,10 @@ export const selectTotal = createSelector(selectITSystemUsageState, (state) => s
 export const selectIsLoading = createSelector(selectITSystemUsageState, (state) => state.isLoadingSystemUsagesQuery);
 export const selectGridState = createSelector(selectITSystemUsageState, (state) => state.gridState);
 export const selectPreviousGridState = createSelector(selectITSystemUsageState, (state) => state.previousGridState);
+export const selectAnyFilters = createSelector(selectGridState, (gridState) => !!gridState.filter);
 
 export const selectGridData = createSelector(selectAll, selectTotal, (data, total): GridData => ({ data, total }));
+export const selectGridDataItSystemUuids = createSelector(selectAll, (data) => (data.map(x => x.ItSystemUuid)));
 export const selectUsageGridColumns = createSelector(selectITSystemUsageState, (state) => state.gridColumns);
 export const selectUsageGridRoleColumns = createSelector(selectITSystemUsageState, (state) => state.gridRoleColumns);
 

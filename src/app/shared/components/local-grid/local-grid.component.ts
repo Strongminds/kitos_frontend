@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
-import { ExcelExportData, KENDO_EXCELEXPORT } from '@progress/kendo-angular-excel-export';
+import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
   CellTemplateDirective,
   ColumnComponent,
@@ -9,6 +9,7 @@ import {
   DataBindingDirective,
   ExcelComponent,
   ExcelExportEvent,
+  ExcelModule,
   FilterCellTemplateDirective,
   HeaderTemplateDirective,
   GridComponent as KendoGridComponent,
@@ -74,7 +75,7 @@ import { ParagraphComponent } from '../paragraph/paragraph.component';
     LoadingComponent,
     NoRecordsTemplateDirective,
     ExcelComponent,
-    KENDO_EXCELEXPORT,
+    ExcelModule,
   ],
 })
 export class LocalGridComponent<T> extends BaseComponent implements OnInit {
