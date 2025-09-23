@@ -6,6 +6,7 @@ import { APIV1AuthorizeINTERNALService } from './api/v1AuthorizeINTERNAL.service
 import { APIV1DataProcessingRegistrationINTERNALService } from './api/v1DataProcessingRegistrationINTERNAL.service';
 import { APIV1DprLocalRoleOptionTypesInternalV2INTERNALService } from './api/v1DprLocalRoleOptionTypesInternalV2INTERNAL.service';
 import { APIV1ExcelINTERNALService } from './api/v1ExcelINTERNAL.service';
+import { APIV1HealthCheckINTERNALService } from './api/v1HealthCheckINTERNAL.service';
 import { APIV1ItContractLocalRoleOptionTypesInternalV2INTERNALService } from './api/v1ItContractLocalRoleOptionTypesInternalV2INTERNAL.service';
 import { APIV1ItSystemLocalRoleOptionTypesInternalV2INTERNALService } from './api/v1ItSystemLocalRoleOptionTypesInternalV2INTERNAL.service';
 import { APIV1ItSystemUsageOptionsINTERNALService } from './api/v1ItSystemUsageOptionsINTERNAL.service';

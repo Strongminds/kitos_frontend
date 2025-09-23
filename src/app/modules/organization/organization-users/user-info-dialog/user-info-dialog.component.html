@@ -5,7 +5,7 @@
         [user]="user"
         [roles$]="unitRolesSubject$"
         entityType="organization-unit"
-        [hasModifyPermission$]="hasModificationPermission$"
+        [hasModifyPermission$]="hasOrganizationRolesModifyPermission$"
         [availableRoles$]="unitRoles$"
       ></app-user-role-table>
 
@@ -13,7 +13,7 @@
         [user]="user"
         [roles$]="usageRolesSubject$"
         entityType="it-system"
-        [hasModifyPermission$]="hasModificationPermission$"
+        [hasModifyPermission$]="hasSystemAndDprRolesModifyPermission$"
         [availableRoles$]="usageRoles$"
       ></app-user-role-table>
 
@@ -21,7 +21,7 @@
         [user]="user"
         [roles$]="contractRolesSubject$"
         entityType="it-contract"
-        [hasModifyPermission$]="hasModificationPermission$"
+        [hasModifyPermission$]="hasContractRolesModifyPermission$"
         [availableRoles$]="contractRoles$"
       ></app-user-role-table>
 
@@ -29,7 +29,7 @@
         [user]="user"
         [roles$]="dprRolesSubject$"
         entityType="data-processing-registration"
-        [hasModifyPermission$]="hasModificationPermission$"
+        [hasModifyPermission$]="hasSystemAndDprRolesModifyPermission$"
         [availableRoles$]="dprRoles$"
       ></app-user-role-table>
 
