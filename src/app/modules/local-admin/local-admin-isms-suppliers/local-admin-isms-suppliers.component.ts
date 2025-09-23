@@ -35,9 +35,9 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
   public canModifyOrganization$ = this.store.select(selectOrganizationHasModifyPermission);
 
   public suppliers = [
-    { Name: 'Supplier A', Cvr: '12345678', Uuid: '1' },
-    { Name: 'Supplier B', Cvr: '87654321', Uuid: '2' },
-    { Name: 'Supplier C', Cvr: '11223344', Uuid: '3' },
+    { name: 'Supplier A', cvr: '12345678', uuid: '1' },
+    { name: 'Supplier B', cvr: '87654321', uuid: '2' },
+    { name: 'Supplier C', cvr: '11223344', uuid: '3' },
   ];
   public suppliers$ = of(this.suppliers);
 
@@ -46,8 +46,8 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.title = $localize`Tilføj leverandør`;
     dialogInstance.data$ = this.suppliers$;
-    dialogInstance.valueField = 'Uuid';
-    dialogInstance.textField = 'Name';
+    dialogInstance.valueField = 'uuid';
+    dialogInstance.textField = 'name';
     dialogInstance.save.subscribe(($event: any) => {
       this.saveSupplier($event);
     });
