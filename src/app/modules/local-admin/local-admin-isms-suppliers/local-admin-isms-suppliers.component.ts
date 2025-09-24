@@ -8,6 +8,7 @@ import { ButtonComponent } from 'src/app/shared/components/buttons/button/button
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { DropdownDialogComponent } from 'src/app/shared/components/dialogs/dropdown-dialog/dropdown-dialog.component';
+import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
 import { LocalGridComponent } from 'src/app/shared/components/local-grid/local-grid.component';
 import { OverviewHeaderComponent } from 'src/app/shared/components/overview-header/overview-header.component';
 import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
@@ -17,12 +18,13 @@ import { OrganizationSuppliersActions } from 'src/app/store/organization/organiz
 import {
   selectAvailableOrganizationSuppliers,
   selectOrganizationSuppliers,
+  selectOrganizationSuppliersLoading,
 } from 'src/app/store/organization/organization-suppliers/selectors';
 import { selectOrganizationHasModifyPermission } from 'src/app/store/organization/selectors';
 
 @Component({
   selector: 'app-local-admin-isms-suppliers',
-  imports: [CardComponent, LocalGridComponent, AsyncPipe, OverviewHeaderComponent, ButtonComponent, NgIf],
+  imports: [CardComponent, LocalGridComponent, AsyncPipe, OverviewHeaderComponent, ButtonComponent, NgIf, LoadingComponent],
   templateUrl: './local-admin-isms-suppliers.component.html',
   styleUrl: './local-admin-isms-suppliers.component.scss',
 })
@@ -44,7 +46,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
   ];
 
   public canModifyOrganization$ = this.store.select(selectOrganizationHasModifyPermission);
-
+  public suppliersLoading$ = this.store.select(selectOrganizationSuppliersLoading);
   public suppliers$ = this.store.select(selectOrganizationSuppliers);
   public availableSuppliers$ = this.store.select(selectAvailableOrganizationSuppliers);
 

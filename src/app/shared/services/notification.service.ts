@@ -140,6 +140,8 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(LocalOptionTypeActions.updateOptionTypeError, $localize`Typen kunne ikke opdateres`);
     this.subscribeAsDefault(OrganizationSuppliersActions.addOrganizationSupplierSuccess, $localize`Leverandøren blev tilføjet`);
     this.subscribeAsError(OrganizationSuppliersActions.addOrganizationSupplierError, $localize`Kunne ikke tilføje leverandøren`);
+    this.subscribeAsDefault(OrganizationSuppliersActions.removeOrganizationSupplierSuccess, $localize`Leverandøren blev fjernet`);
+    this.subscribeAsError(OrganizationSuppliersActions.removeOrganizationSupplierError, $localize`Kunne ikke fjerne leverandøren`);
     this.subscribeAsError(OrganizationSuppliersActions.getOrganizationSuppliersError, $localize`Kunne ikke hente leverandører`);
     this.subscribeAsError(OrganizationSuppliersActions.getAvailableOrganizationSuppliersError, $localize`Kunne ikke hente tilgængelige leverandører`);
   }
