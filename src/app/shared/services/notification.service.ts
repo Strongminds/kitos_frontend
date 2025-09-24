@@ -27,6 +27,7 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
+import { OrganizationSuppliersActions } from 'src/app/store/organization/organization-suppliers/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -137,6 +138,10 @@ export class NotificationService implements OnDestroy {
   private subscribeToLocalAdminNotifications() {
     this.subscribeAsDefault(LocalOptionTypeActions.updateOptionTypeSuccess, $localize`Typen blev opdateret`);
     this.subscribeAsError(LocalOptionTypeActions.updateOptionTypeError, $localize`Typen kunne ikke opdateres`);
+    this.subscribeAsDefault(OrganizationSuppliersActions.addOrganizationSupplierSuccess, $localize`Leverandøren blev tilføjet`);
+    this.subscribeAsError(OrganizationSuppliersActions.addOrganizationSupplierError, $localize`Kunne ikke tilføje leverandøren`);
+    this.subscribeAsError(OrganizationSuppliersActions.getOrganizationSuppliersError, $localize`Kunne ikke hente leverandører`);
+    this.subscribeAsError(OrganizationSuppliersActions.getAvailableOrganizationSuppliersError, $localize`Kunne ikke hente tilgængelige leverandører`);
   }
 
   private subscribeToGlobalAdminNotifications() {
