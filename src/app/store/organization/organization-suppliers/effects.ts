@@ -1,71 +1,61 @@
-import { Inject, Injectable } from "@angular/core";
-import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { APIV2OrganizationSupplierInternalINTERNALService } from "src/app/api/v2";
-import { OrganizationSuppliersActions } from "./actions";
-import { concatLatestFrom } from "@ngrx/operators";
-import { Store } from "@ngrx/store";
-import { selectOrganizationUuid } from "../../user-store/selectors";
-import { filterNullish } from "src/app/shared/pipes/filter-nullish";
-import { catchError, map, of, switchMap } from "rxjs";
-import { adaptShallowOrganization, ShallowOrganization } from "src/app/shared/models/organization/shallow-organization.model";
+import { Inject, Injectable } from '@angular/core';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
+import { Store } from '@ngrx/store';
+import { catchError, map, of, switchMap } from 'rxjs';
+import { APIV2OrganizationSupplierInternalINTERNALService } from 'src/app/api/v2';
+import {
+  adaptShallowOrganization,
+  ShallowOrganization,
+} from 'src/app/shared/models/organization/shallow-organization.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { selectOrganizationUuid } from '../../user-store/selectors';
+import { OrganizationSuppliersActions } from './actions';
 
 @Injectable()
 export class OrganizationSuppliersEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2OrganizationSupplierInternalINTERNALService) private organizationSuppliersService: APIV2OrganizationSupplierInternalINTERNALService,
-  ){}
+    @Inject(APIV2OrganizationSupplierInternalINTERNALService)
+    private organizationSuppliersService: APIV2OrganizationSupplierInternalINTERNALService
+  ) {}
 
   getSuppliers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationSuppliersActions.getOrganizationSuppliers),
-      concatLatestFrom(() => [
-        this.store.select(selectOrganizationUuid).pipe(filterNullish())
-      ]),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
-        this.organizationSuppliersService
-          .getManyOrganizationSupplierInternalV2GetSuppliers({ organizationUuid })
-          .pipe(
-            map(suppliers =>
-              OrganizationSuppliersActions.getOrganizationSuppliersSuccess(
-                this.adaptShallowOrganizations(suppliers)
-              )
-            ),
-            catchError(() =>
-              of(OrganizationSuppliersActions.getOrganizationSuppliersError())
-            )
-          )
+        this.organizationSuppliersService.getManyOrganizationSupplierInternalV2GetSuppliers({ organizationUuid }).pipe(
+          map((suppliers) =>
+            OrganizationSuppliersActions.getOrganizationSuppliersSuccess(this.adaptShallowOrganizations(suppliers))
+          ),
+          catchError(() => of(OrganizationSuppliersActions.getOrganizationSuppliersError()))
+        )
       )
     );
   });
 
-    getAvailableSuppliers$ = createEffect(() => {
+  getAvailableSuppliers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationSuppliersActions.getAvailableOrganizationSuppliers),
-      concatLatestFrom(() => [
-        this.store.select(selectOrganizationUuid).pipe(filterNullish())
-      ]),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
         this.organizationSuppliersService
           .getManyOrganizationSupplierInternalV2GetAvailableSuppliers({ organizationUuid })
           .pipe(
-            map(availableSuppliers =>
+            map((availableSuppliers) =>
               OrganizationSuppliersActions.getAvailableOrganizationSuppliersSuccess(
                 this.adaptShallowOrganizations(availableSuppliers)
               )
             ),
-            catchError(() =>
-              of(OrganizationSuppliersActions.getAvailableOrganizationSuppliersError())
-            )
+            catchError(() => of(OrganizationSuppliersActions.getAvailableOrganizationSuppliersError()))
           )
       )
     );
   });
 
   private adaptShallowOrganizations(source: any[]): ShallowOrganization[] {
-    return source
-      .map(s => adaptShallowOrganization(s))
-      .filter(x => x !== undefined);
+    return source.map((s) => adaptShallowOrganization(s)).filter((x) => x !== undefined);
   }
 }
