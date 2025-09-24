@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { first, of } from 'rxjs';
+import { first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
@@ -47,8 +47,8 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
     { name: 'Supplier B', cvr: '87654321', uuid: '2' },
     { name: 'Supplier C', cvr: '11223344', uuid: '3' },
   ];
-  public suppliers$ = of(this.suppliers);
-  public s$ = this.store.select(selectOrganizationSuppliers);
+  
+  public suppliers$ = this.store.select(selectOrganizationSuppliers);
   public availableSuppliers$ = this.store.select(selectAvailableOrganizationSuppliers);
 
   public openAddSupplierDialog() {
@@ -64,9 +64,8 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
     });
   }
 
-  public saveSupplier($event: any) {
-    //todo this.store.dispatch(OrganizationActions.addSupplier({ Uuid: $event.Uuid }))
-    console.log('Added supplier with Uuid: ' + $event.Uuid);
+  public saveSupplier($event: ShallowOrganization) {
+    this.store.dispatch(OrganizationSuppliersActions.addOrganizationSupplier($event.uuid));
     this.dialog.closeAll();
   }
 
