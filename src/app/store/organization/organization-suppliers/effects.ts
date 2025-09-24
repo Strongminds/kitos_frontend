@@ -23,7 +23,11 @@ export class OrganizationSuppliersEffects {
 
   getSuppliers$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationSuppliersActions.getOrganizationSuppliers),
+      ofType(
+        OrganizationSuppliersActions.getOrganizationSuppliers,
+        OrganizationSuppliersActions.addOrganizationSupplierSuccess,
+        OrganizationSuppliersActions.removeOrganizationSupplierSuccess
+      ),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
         this.organizationSuppliersService.getManyOrganizationSupplierInternalV2GetSuppliers({ organizationUuid }).pipe(
@@ -38,7 +42,11 @@ export class OrganizationSuppliersEffects {
 
   getAvailableSuppliers$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(OrganizationSuppliersActions.getAvailableOrganizationSuppliers),
+      ofType(
+        OrganizationSuppliersActions.getAvailableOrganizationSuppliers,
+        OrganizationSuppliersActions.addOrganizationSupplierSuccess,
+        OrganizationSuppliersActions.removeOrganizationSupplierSuccess
+      ),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) =>
         this.organizationSuppliersService
