@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TooltipComponent } from '../../tooltip/tooltip.component';
 import { ButtonComponent } from '../button/button.component';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { CheckboxComponent } from '../../checkbox/checkbox.component';
 import { FormGroup } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { FormGroup } from '@angular/forms';
   selector: 'app-checkbox-button',
   templateUrl: './checkbox-button.component.html',
   styleUrl: './checkbox-button.component.scss',
-  imports: [TooltipComponent, ButtonComponent, NgClass, CheckboxComponent, NgIf],
+  imports: [TooltipComponent, ButtonComponent, NgClass, CheckboxComponent, NgIf, NgTemplateOutlet],
 })
 export class CheckboxButtonComponent {
   @Input() value: boolean = false;
