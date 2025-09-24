@@ -1,5 +1,6 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
@@ -17,10 +18,10 @@ import {
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
-import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../../../../shared/components/dialogs/dialog/dialog.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
@@ -29,6 +30,8 @@ import { DialogActionsComponent } from '../../../../../shared/components/dialogs
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 import { CheckboxButtonComponent } from 'src/app/shared/components/buttons/checkbox-button/checkbox-button.component';
 import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
+import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
+import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
@@ -68,7 +71,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     private dialogRef: MatDialogRef<EditOrganizationDialogComponent>,
     private store: Store,
     private actions$: Actions,
-    componentStore: OrganizationsDialogComponentStore,
+    componentStore: OrganizationsDialogComponentStore
   ) {
     super(componentStore);
   }

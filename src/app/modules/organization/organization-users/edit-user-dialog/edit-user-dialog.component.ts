@@ -28,6 +28,7 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
+import { selectOrganizationUserCanModifyFieldsPermissions } from 'src/app/store/organization/organization-user/selectors';
 import { selectRoleOptionTypes } from 'src/app/store/roles-option-type-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
@@ -76,6 +77,8 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   private readonly availableContractRoles$ = this.store.select(selectRoleOptionTypes('it-contract'));
   private readonly availableUsageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage'));
   private readonly availableDprRoles$ = this.store.select(selectRoleOptionTypes('data-processing'));
+
+  private readonly hasModifyFieldsPermission$ = this.store.select(selectOrganizationUserCanModifyFieldsPermissions);
 
   public createForm = new FormGroup({
     firstName: new FormControl<string | undefined>(undefined, Validators.required),
@@ -140,6 +143,23 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
         }
       })
     );
+
+    this.subscriptions.add(
+      this.hasModifyFieldsPermission$.subscribe((canModify) => {
+        if (canModify) return;
+
+        //disable each control individually to avoid disabling the form itself
+        this.createForm.controls.firstName.disable();
+        this.createForm.controls.lastName.disable();
+        this.createForm.controls.email.disable();
+        this.createForm.controls.phoneNumber.disable();
+        this.createForm.controls.defaultStartPreference.disable();
+        this.createForm.controls.hasApiAccess.disable();
+        this.createForm.controls.hasRightsHolderAccess.disable();
+        this.createForm.controls.hasStakeholderAccess.disable();
+      })
+    );
+
     const initialValues = this.getUserRoleChoices();
     this.selectedRoles = initialValues.map((role) => role.value);
   }
@@ -162,7 +182,16 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   public isFormValid(): boolean {
-    return this.createForm.valid && this.hasAnythingChanged();
+    return this.isFormValidIgnoringDisabled() && this.hasAnythingChanged();
+  }
+
+  public isFormValidIgnoringDisabled(): boolean {
+    const enabledControlsValid = Object.keys(this.createForm.controls).every((key) => {
+      const control = this.createForm.get(key);
+      return control?.disabled || control?.valid;
+    });
+
+    return enabledControlsValid;
   }
 
   public rolesChanged(roles: APIUserResponseDTO.RolesEnum[]): void {
@@ -232,8 +261,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
       lastName: this.requestValue(user.LastName, formValue.lastName),
       phoneNumber: this.requestValue(user.PhoneNumber, this.getPhoneNumberString(formValue.phoneNumber)),
       defaultUserStartPreference:
-        this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ??
-        APIUserResponseDTO.DefaultUserStartPreferenceEnum.StartSite,
+        this.requestValue(user.DefaultStartPreference, formValue.defaultStartPreference)?.value ?? undefined,
       hasApiAccess: this.requestValue(user.HasApiAccess, formValue.hasApiAccess),
       hasStakeHolderAccess: this.requestValue(user.HasStakeHolderAccess, formValue.hasStakeholderAccess),
       roles: this.getRoleRequest(),
@@ -290,7 +318,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   }
 
   private getPhoneNumberString(phoneNumberFromControl: string | undefined | null) {
-    return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : '';
+    return phoneNumberFromControl ? removeWhitespace(String(phoneNumberFromControl)) : undefined;
   }
 
   private requestValue<T>(valueBefore: T, formValue: T | undefined | null) {
