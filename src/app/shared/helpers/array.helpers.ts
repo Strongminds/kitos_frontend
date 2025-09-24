@@ -1,3 +1,3 @@
-export function FilterUndefined(a: any[]){
-  return a.filter(item => item !== undefined);
+export function filterUndefined(a: any[]) {
+  return a.filter((item) => item !== undefined);
 }

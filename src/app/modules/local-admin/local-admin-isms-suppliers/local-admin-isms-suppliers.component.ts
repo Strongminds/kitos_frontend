@@ -39,8 +39,8 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
   }
 
   public gridColumns = [
-    { title: 'Virksomhed', field: 'name', hidden: false },
-    { title: 'CVR', field: 'cvr', hidden: false },
+    { title: $localize`Virksomhed`, field: 'name', hidden: false },
+    { title: $localize`CVR`, field: 'cvr', hidden: false },
     createGridActionColumn(['delete']),
   ];
 
@@ -73,14 +73,15 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
     dialogInstance.bodyText = $localize`Er du sikker på, at du vil fjerne leverandøren "${$event.name}"?`;
     dialogInstance.confirmColor = 'warn';
 
-    this.subscriptions.add();
-    dialogRef
-      .afterClosed()
-      .pipe(first())
-      .subscribe((remove) => {
-        if (remove) {
-          this.store.dispatch(OrganizationSuppliersActions.removeOrganizationSupplier($event.uuid));
-        }
-      });
+    this.subscriptions.add(
+      dialogRef
+        .afterClosed()
+        .pipe(first())
+        .subscribe((remove) => {
+          if (remove) {
+            this.store.dispatch(OrganizationSuppliersActions.removeOrganizationSupplier($event.uuid));
+          }
+        })
+    );
   }
 }

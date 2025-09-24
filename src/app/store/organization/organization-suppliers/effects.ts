@@ -4,6 +4,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationSupplierInternalINTERNALService } from 'src/app/api/v2';
+import { filterUndefined } from 'src/app/shared/helpers/array.helpers';
 import {
   adaptShallowOrganization,
   ShallowOrganization,
@@ -11,7 +12,6 @@ import {
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationSuppliersActions } from './actions';
-import { FilterUndefined } from 'src/app/shared/helpers/array.helpers';
 
 @Injectable()
 export class OrganizationSuppliersEffects {
@@ -95,6 +95,6 @@ export class OrganizationSuppliersEffects {
   });
 
   private adaptShallowOrganizations(source: any[]): ShallowOrganization[] {
-    return FilterUndefined(source.map((s) => adaptShallowOrganization(s)));
+    return filterUndefined(source.map((s) => adaptShallowOrganization(s)));
   }
 }
