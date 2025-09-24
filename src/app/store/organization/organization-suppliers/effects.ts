@@ -58,7 +58,7 @@ export class OrganizationSuppliersEffects {
   addSupplier$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationSuppliersActions.addOrganizationSupplier),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ supplierUuid }, organizationUuid]) =>
         this.organizationSuppliersService
           .postSingleOrganizationSupplierInternalV2AddSupplier({ organizationUuid, supplierUuid })
@@ -73,7 +73,7 @@ export class OrganizationSuppliersEffects {
   removeSupplier$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationSuppliersActions.removeOrganizationSupplier),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ supplierUuid }, organizationUuid]) =>
         this.organizationSuppliersService
           .deleteSingleOrganizationSupplierInternalV2DeleteSupplier({ organizationUuid, supplierUuid })
