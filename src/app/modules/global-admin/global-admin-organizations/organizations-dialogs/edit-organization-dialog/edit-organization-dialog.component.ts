@@ -18,10 +18,7 @@ import {
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
-import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../../../../shared/components/dialogs/dialog/dialog.component';
-import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
