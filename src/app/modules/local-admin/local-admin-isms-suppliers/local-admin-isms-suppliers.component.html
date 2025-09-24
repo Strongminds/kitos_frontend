@@ -8,12 +8,14 @@
     ><span>Tilføj</span>
     </app-button>
   </app-overview-header>
-  <app-local-grid
-  [data]="suppliers"
-  [columns]="gridColumns"
-  [resizable]="false"
-  [deletePermission]="canModifyOrganization$ | async"
-  (deleteEvent)="removeSupplier($event)"
-  >
-  </app-local-grid>
+  <ng-container *ngIf="(suppliers$ | async) as suppliers">
+    <app-local-grid 
+    [data]="suppliers"
+    [columns]="gridColumns"
+    [resizable]="false"
+    [deletePermission]="canModifyOrganization$ | async"
+    (deleteEvent)="removeSupplier($event)"
+    ></app-local-grid>
+  </ng-container>
+
 </app-card>

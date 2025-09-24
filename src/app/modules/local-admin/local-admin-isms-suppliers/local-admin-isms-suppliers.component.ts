@@ -1,5 +1,5 @@
-import { AsyncPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe, NgIf } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
@@ -22,13 +22,16 @@ import { selectOrganizationHasModifyPermission } from 'src/app/store/organizatio
 
 @Component({
   selector: 'app-local-admin-isms-suppliers',
-  imports: [CardComponent, LocalGridComponent, AsyncPipe, OverviewHeaderComponent, ButtonComponent],
+  imports: [CardComponent, LocalGridComponent, AsyncPipe, OverviewHeaderComponent, ButtonComponent, NgIf],
   templateUrl: './local-admin-isms-suppliers.component.html',
   styleUrl: './local-admin-isms-suppliers.component.scss',
 })
-export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
+export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements OnInit {
   constructor(private store: Store, private dialog: MatDialog) {
     super();
+  }
+
+  ngOnInit(): void {
     this.store.dispatch(OrganizationSuppliersActions.getOrganizationSuppliers());
     this.store.dispatch(OrganizationSuppliersActions.getAvailableOrganizationSuppliers());
     this.store.dispatch(OrganizationActions.getOrganizationPermissions());
@@ -42,12 +45,6 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
 
   public canModifyOrganization$ = this.store.select(selectOrganizationHasModifyPermission);
 
-  public suppliers: ShallowOrganization[] = [
-    { name: 'Supplier A', cvr: '12345678', uuid: '1' },
-    { name: 'Supplier B', cvr: '87654321', uuid: '2' },
-    { name: 'Supplier C', cvr: '11223344', uuid: '3' },
-  ];
-  
   public suppliers$ = this.store.select(selectOrganizationSuppliers);
   public availableSuppliers$ = this.store.select(selectAvailableOrganizationSuppliers);
 
