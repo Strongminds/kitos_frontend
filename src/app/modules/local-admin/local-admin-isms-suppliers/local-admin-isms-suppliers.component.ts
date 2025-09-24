@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -13,17 +13,24 @@ import { OverviewHeaderComponent } from 'src/app/shared/components/overview-head
 import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { ShallowOrganization } from 'src/app/shared/models/organization/shallow-organization.model';
 import { OrganizationActions } from 'src/app/store/organization/actions';
+import { OrganizationSuppliersActions } from 'src/app/store/organization/organization-suppliers/actions';
+import {
+  selectAvailableOrganizationSuppliers,
+  selectOrganizationSuppliers,
+} from 'src/app/store/organization/organization-suppliers/selectors';
 import { selectOrganizationHasModifyPermission } from 'src/app/store/organization/selectors';
 
 @Component({
   selector: 'app-local-admin-isms-suppliers',
-  imports: [CardComponent, LocalGridComponent, NgFor, AsyncPipe, OverviewHeaderComponent, ButtonComponent],
+  imports: [CardComponent, LocalGridComponent, AsyncPipe, OverviewHeaderComponent, ButtonComponent],
   templateUrl: './local-admin-isms-suppliers.component.html',
   styleUrl: './local-admin-isms-suppliers.component.scss',
 })
 export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
   constructor(private store: Store, private dialog: MatDialog) {
     super();
+    this.store.dispatch(OrganizationSuppliersActions.getOrganizationSuppliers());
+    this.store.dispatch(OrganizationSuppliersActions.getAvailableOrganizationSuppliers());
     this.store.dispatch(OrganizationActions.getOrganizationPermissions());
   }
 
@@ -41,12 +48,14 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
     { name: 'Supplier C', cvr: '11223344', uuid: '3' },
   ];
   public suppliers$ = of(this.suppliers);
+  public s$ = this.store.select(selectOrganizationSuppliers);
+  public availableSuppliers$ = this.store.select(selectAvailableOrganizationSuppliers);
 
   public openAddSupplierDialog() {
     const dialogRef = this.dialog.open(DropdownDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.title = $localize`Tilføj leverandør`;
-    dialogInstance.data$ = this.suppliers$;
+    dialogInstance.data$ = this.availableSuppliers$;
     dialogInstance.valueField = 'uuid';
     dialogInstance.textField = 'name';
     dialogInstance.save.subscribe(($event: any) => {
