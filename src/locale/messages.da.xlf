@@ -6011,9 +6011,9 @@
         <source>GDPR Rapporter</source>
         <target state="new">GDPR Rapporter</target>
       </trans-unit>
-      <trans-unit id="584908652240507318" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-overvi"/> Eksporter</source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-overvi"/> Eksporter</target>
+      <trans-unit id="2708612909413062362" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-overview"/> Eksporter </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-overview"/> Eksporter </target>
       </trans-unit>
       <trans-unit id="8145441157302108078" datatype="html">
         <source>System UUID</source>
@@ -6977,9 +6977,61 @@
         <source>Ingen</source>
         <target state="new">Ingen</target>
       </trans-unit>
-      <trans-unit id="3916026141067956225" datatype="html">
-        <source>Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder.</source>
-        <target state="new">Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder.</target>
+      <trans-unit id="2316298762496597742" datatype="html">
+        <source> ISMS leverandør </source>
+        <target state="new"> ISMS leverandør </target>
+      </trans-unit>
+      <trans-unit id="3816576365360329559" datatype="html">
+        <source><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="p-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="Akti"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </source>
+        <target state="new"><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="p-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="Akti"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </target>
+      </trans-unit>
+      <trans-unit id="720072715763564568" datatype="html">
+        <source>ISMS Leverandører</source>
+        <target state="new">ISMS Leverandører</target>
+      </trans-unit>
+      <trans-unit id="9113741111737099906" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="an&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="new"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="an&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="984734426874401647" datatype="html">
+        <source>Tilføj leverandør</source>
+        <target state="new">Tilføj leverandør</target>
+      </trans-unit>
+      <trans-unit id="2633970024634511367" datatype="html">
+        <source>Vælg leverandør</source>
+        <target state="new">Vælg leverandør</target>
+      </trans-unit>
+      <trans-unit id="1170017200172199580" datatype="html">
+        <source>Er du sikker på, at du vil fjerne leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</source>
+        <target state="new">Er du sikker på, at du vil fjerne leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</target>
+      </trans-unit>
+      <trans-unit id="4294821706131293879" datatype="html">
+        <source>ISMS leverandører</source>
+        <target state="new">ISMS leverandører</target>
+      </trans-unit>
+      <trans-unit id="4464146657169863345" datatype="html">
+        <source>Leverandøren blev tilføjet</source>
+        <target state="new">Leverandøren blev tilføjet</target>
+      </trans-unit>
+      <trans-unit id="916050459760752352" datatype="html">
+        <source>Kunne ikke tilføje leverandøren</source>
+        <target state="new">Kunne ikke tilføje leverandøren</target>
+      </trans-unit>
+      <trans-unit id="1210921045907077835" datatype="html">
+        <source>Leverandøren blev fjernet</source>
+        <target state="new">Leverandøren blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="1524892600166783253" datatype="html">
+        <source>Kunne ikke fjerne leverandøren</source>
+        <target state="new">Kunne ikke fjerne leverandøren</target>
+      </trans-unit>
+      <trans-unit id="7255822127722901712" datatype="html">
+        <source>Kunne ikke hente leverandører</source>
+        <target state="new">Kunne ikke hente leverandører</target>
+      </trans-unit>
+      <trans-unit id="2106335680691871020" datatype="html">
+        <source>Kunne ikke hente tilgængelige leverandører</source>
+        <target state="new">Kunne ikke hente tilgængelige leverandører</target>
       </trans-unit>
     </body>
   </file>
