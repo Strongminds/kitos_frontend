@@ -11,6 +11,7 @@ import {
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationSuppliersActions } from './actions';
+import { FilterUndefined } from 'src/app/shared/helpers/array.helpers';
 
 @Injectable()
 export class OrganizationSuppliersEffects {
@@ -94,6 +95,6 @@ export class OrganizationSuppliersEffects {
   });
 
   private adaptShallowOrganizations(source: any[]): ShallowOrganization[] {
-    return source.map((s) => adaptShallowOrganization(s)).filter((x) => x !== undefined);
+    return FilterUndefined(source.map((s) => adaptShallowOrganization(s)));
   }
 }
