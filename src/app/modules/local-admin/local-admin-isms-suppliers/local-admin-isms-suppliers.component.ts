@@ -58,6 +58,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
     dialogInstance.data$ = this.availableSuppliers$;
     dialogInstance.valueField = 'uuid';
     dialogInstance.textField = 'name';
+    dialogInstance.dropdownText = $localize`Vælg leverandør`;
     dialogInstance.save.subscribe(($event: any) => {
       this.saveSupplier($event);
     });
