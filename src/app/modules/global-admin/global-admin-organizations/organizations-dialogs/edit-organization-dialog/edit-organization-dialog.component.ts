@@ -97,7 +97,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
 
   public onEditOrganization(): void {
     this.actions$.pipe(ofType(OrganizationActions.patchOrganizationSuccess), first()).subscribe(() => {
-      this.onCancel();
+      this.closeDialog();
     });
 
     const request = this.getRequest();
@@ -105,7 +105,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     this.store.dispatch(OrganizationActions.patchOrganization(request, this.organization.Uuid));
   }
 
-  public onCancel(): void {
+  public closeDialog(): void {
     this.dialogRef.close();
   }
 
@@ -121,7 +121,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
       foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
       updateForeignCountryCode: this.foreignCountryCodeHasChange(),
-     // isSupplier: formValue.isSupplier,
+      isSupplier: formValue.isSupplier ?? undefined,
     };
   }
 
@@ -138,7 +138,8 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       this.hasChange(formValue.name, org.Name) ||
       this.hasChange(formValue.cvr, org.Cvr) ||
       this.foreignCountryCodeHasChange() ||
-      this.hasChange(formValue.organizationType?.name, org.OrganizationType)
+      this.hasChange(formValue.organizationType?.name, org.OrganizationType) ||
+      this.hasChange(formValue.isSupplier, org.IsSupplier)
     );
   }
 
