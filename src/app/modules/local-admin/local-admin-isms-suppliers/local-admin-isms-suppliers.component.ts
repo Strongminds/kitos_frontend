@@ -11,6 +11,7 @@ import { DropdownDialogComponent } from 'src/app/shared/components/dialogs/dropd
 import { LocalGridComponent } from 'src/app/shared/components/local-grid/local-grid.component';
 import { OverviewHeaderComponent } from 'src/app/shared/components/overview-header/overview-header.component';
 import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
+import { ShallowOrganization } from 'src/app/shared/models/organization/shallow-organization.model';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { selectOrganizationHasModifyPermission } from 'src/app/store/organization/selectors';
 
@@ -34,7 +35,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
 
   public canModifyOrganization$ = this.store.select(selectOrganizationHasModifyPermission);
 
-  public suppliers = [
+  public suppliers: ShallowOrganization[] = [
     { name: 'Supplier A', cvr: '12345678', uuid: '1' },
     { name: 'Supplier B', cvr: '87654321', uuid: '2' },
     { name: 'Supplier C', cvr: '11223344', uuid: '3' },
