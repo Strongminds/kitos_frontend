@@ -9,10 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIUserCollectionEditPermissionsResponseDTO } from './userCollectionEditPermissionsResponseDTO';
 
 
 export interface APIUserCollectionPermissionsResponseDTO { 
-    modify?: boolean;
+    modify?: APIUserCollectionEditPermissionsResponseDTO;
     delete?: boolean;
     /**
      * True when API client is allowed to CREATE the resource

@@ -7,6 +7,7 @@ api/v1AuthorizeINTERNAL.service.ts
 api/v1DataProcessingRegistrationINTERNAL.service.ts
 api/v1DprLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1ExcelINTERNAL.service.ts
+api/v1HealthCheckINTERNAL.service.ts
 api/v1ItContractLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1ItSystemLocalRoleOptionTypesInternalV2INTERNAL.service.ts
 api/v1ItSystemUsageOptionsINTERNAL.service.ts
