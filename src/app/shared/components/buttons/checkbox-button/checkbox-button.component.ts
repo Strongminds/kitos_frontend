@@ -1,9 +1,9 @@
+import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { FormGroup } from '@angular/forms';
+import { CheckboxComponent } from '../../checkbox/checkbox.component';
 import { TooltipComponent } from '../../tooltip/tooltip.component';
 import { ButtonComponent } from '../button/button.component';
-import { NgClass, NgIf, NgTemplateOutlet } from '@angular/common';
-import { CheckboxComponent } from '../../checkbox/checkbox.component';
-import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-checkbox-button',
@@ -23,6 +23,12 @@ export class CheckboxButtonComponent {
   @Output() valueChange = new EventEmitter<boolean>();
 
   public onButtonClick(): void {
+    if (this.formGroup && this.formName) {
+      const control = this.formGroup.get(this.formName);
+      if (control) {
+        control.setValue(!control.value);
+      }
+    }
     this.value = !this.value;
     this.emitValue();
   }

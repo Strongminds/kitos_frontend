@@ -8,7 +8,6 @@ import { ButtonComponent } from 'src/app/shared/components/buttons/button/button
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { DropdownDialogComponent } from 'src/app/shared/components/dialogs/dropdown-dialog/dropdown-dialog.component';
-import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
 import { LocalGridComponent } from 'src/app/shared/components/local-grid/local-grid.component';
 import { OverviewHeaderComponent } from 'src/app/shared/components/overview-header/overview-header.component';
 import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
@@ -24,7 +23,7 @@ import { selectOrganizationHasModifyPermission } from 'src/app/store/organizatio
 
 @Component({
   selector: 'app-local-admin-isms-suppliers',
-  imports: [CardComponent, LocalGridComponent, AsyncPipe, OverviewHeaderComponent, ButtonComponent, NgIf, LoadingComponent],
+  imports: [CardComponent, LocalGridComponent, AsyncPipe, OverviewHeaderComponent, ButtonComponent, NgIf],
   templateUrl: './local-admin-isms-suppliers.component.html',
   styleUrl: './local-admin-isms-suppliers.component.scss',
 })
