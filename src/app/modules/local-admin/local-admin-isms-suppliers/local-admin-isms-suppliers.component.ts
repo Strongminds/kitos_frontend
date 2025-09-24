@@ -69,10 +69,10 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
     this.dialog.closeAll();
   }
 
-  public removeSupplier($event: any) {
+  public removeSupplier($event: ShallowOrganization) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
-    dialogInstance.bodyText = $localize`Er du sikker på, at du vil fjerne leverandøren "${$event.Name}"?`;
+    dialogInstance.bodyText = $localize`Er du sikker på, at du vil fjerne leverandøren "${$event.name}"?`;
     dialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add();
@@ -81,8 +81,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent {
       .pipe(first())
       .subscribe((remove) => {
         if (remove) {
-          //todo this.store.dispatch(OrganizationActions.removeSupplier({ Uuid: $event.Uuid }))
-          console.log('Removed supplier with Uuid: ' + $event.Uuid);
+          this.store.dispatch(OrganizationSuppliersActions.removeOrganizationSupplier($event.uuid));
         }
       });
   }
