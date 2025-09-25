@@ -13,6 +13,7 @@
 
 export interface APIOrganizationResponseDTO { 
     readonly organizationType: APIOrganizationResponseDTO.OrganizationTypeEnum;
+    readonly isSupplier?: boolean;
     /**
      * Organizational CVR identifier, if any
      */

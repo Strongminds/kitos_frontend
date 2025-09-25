@@ -30,7 +30,6 @@
       [data]="hostedAtOptions"
       (valueChange)="patchGdpr({ hostedAt: $event })"
     ></app-dropdown>
-
     <app-edit-url-section
       *ngIf="documentationEnabled$ | async"
       title="Link til fortegnelse"
@@ -41,5 +40,10 @@
       (clearClick)="resetSimpleLink()"
       [isDisabled]="disableDirectoryDocumentationControl"
     ></app-edit-url-section>
+    <app-dropdown>
+      text="Kritikalitet"
+      i18n-text
+      
+    </app-dropdown>
   </app-form-grid>
 </app-card>
