@@ -34,7 +34,6 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationSuppliersActions.getOrganizationSuppliers());
-    this.store.dispatch(OrganizationSuppliersActions.getAvailableOrganizationSuppliers());
     this.store.dispatch(OrganizationActions.getOrganizationPermissions());
   }
 
@@ -57,6 +56,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
     dialogInstance.valueField = 'uuid';
     dialogInstance.textField = 'name';
     dialogInstance.dropdownText = $localize`Vælg leverandør`;
+    dialogInstance.onOpen = () => this.onOpenAddDialog();
     dialogInstance.save.subscribe(($event: any) => {
       this.saveSupplier($event);
     });
@@ -65,6 +65,10 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
   public saveSupplier($event: ShallowOrganization) {
     this.store.dispatch(OrganizationSuppliersActions.addOrganizationSupplier($event.uuid));
     this.dialog.closeAll();
+  }
+
+  public onOpenAddDialog() {
+    this.store.dispatch(OrganizationSuppliersActions.getAvailableOrganizationSuppliers());
   }
 
   public removeSupplier($event: ShallowOrganization) {
