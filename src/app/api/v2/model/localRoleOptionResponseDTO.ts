@@ -13,6 +13,8 @@
 
 export interface APILocalRoleOptionResponseDTO { 
     writeAccess?: boolean;
+    isExternallyUsed?: boolean;
+    externallyUsedDescription?: string;
     isActive?: boolean;
     isObligatory?: boolean;
     isLocallyAvailable?: boolean;
