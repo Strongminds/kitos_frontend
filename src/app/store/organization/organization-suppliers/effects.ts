@@ -12,6 +12,12 @@ import {
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationSuppliersActions } from './actions';
+import {
+  selectAvailableOrganizationSuppliers,
+  selectAvailableOrganizationSuppliersHasValidCache,
+  selectOrganizationSuppliers,
+  selectOrganizationSuppliersHasValidCache,
+} from './selectors';
 
 @Injectable()
 export class OrganizationSuppliersEffects {
@@ -29,15 +35,22 @@ export class OrganizationSuppliersEffects {
         OrganizationSuppliersActions.addOrganizationSupplierSuccess,
         OrganizationSuppliersActions.removeOrganizationSupplierSuccess
       ),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
-        this.organizationSuppliersService.getManyOrganizationSupplierInternalV2GetSuppliers({ organizationUuid }).pipe(
-          map((suppliers) =>
-            OrganizationSuppliersActions.getOrganizationSuppliersSuccess(this.adaptShallowOrganizations(suppliers))
-          ),
-          catchError(() => of(OrganizationSuppliersActions.getOrganizationSuppliersError()))
-        )
-      )
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectOrganizationSuppliersHasValidCache),
+        this.store.select(selectOrganizationSuppliers),
+      ]),
+      switchMap(([_, organizationUuid, validCache, cachedSuppliers]) => {
+        if (validCache) return of(OrganizationSuppliersActions.getOrganizationSuppliersSuccess(cachedSuppliers));
+        return this.organizationSuppliersService
+          .getManyOrganizationSupplierInternalV2GetSuppliers({ organizationUuid })
+          .pipe(
+            map((suppliers) =>
+              OrganizationSuppliersActions.getOrganizationSuppliersSuccess(this.adaptShallowOrganizations(suppliers))
+            ),
+            catchError(() => of(OrganizationSuppliersActions.getOrganizationSuppliersError()))
+          );
+      })
     );
   });
 
@@ -48,9 +61,15 @@ export class OrganizationSuppliersEffects {
         OrganizationSuppliersActions.addOrganizationSupplierSuccess,
         OrganizationSuppliersActions.removeOrganizationSupplierSuccess
       ),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([_, organizationUuid]) =>
-        this.organizationSuppliersService
+      concatLatestFrom(() => [
+        this.store.select(selectOrganizationUuid).pipe(filterNullish()),
+        this.store.select(selectAvailableOrganizationSuppliersHasValidCache),
+        this.store.select(selectAvailableOrganizationSuppliers),
+      ]),
+      switchMap(([_, organizationUuid, validCache, cachedAvailableSuppliers]) => {
+        if (validCache)
+          return of(OrganizationSuppliersActions.getAvailableOrganizationSuppliersSuccess(cachedAvailableSuppliers));
+        return this.organizationSuppliersService
           .getManyOrganizationSupplierInternalV2GetAvailableSuppliers({ organizationUuid })
           .pipe(
             map((availableSuppliers) =>
@@ -59,8 +78,8 @@ export class OrganizationSuppliersEffects {
               )
             ),
             catchError(() => of(OrganizationSuppliersActions.getAvailableOrganizationSuppliersError()))
-          )
-      )
+          );
+      })
     );
   });
 
