@@ -10,6 +10,7 @@ import {
   ShallowOrganization,
 } from 'src/app/shared/models/organization/shallow-organization.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { filterUndefinedInArray } from 'src/app/shared/pipes/filter-undefined-in-array';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { OrganizationSuppliersActions } from './actions';
 import {
@@ -45,8 +46,10 @@ export class OrganizationSuppliersEffects {
         return this.organizationSuppliersService
           .getManyOrganizationSupplierInternalV2GetSuppliers({ organizationUuid })
           .pipe(
+            map((data) => this.adaptShallowOrganizations(data)),
+            filterUndefinedInArray(),
             map((suppliers) =>
-              OrganizationSuppliersActions.getOrganizationSuppliersSuccess(this.adaptShallowOrganizations(suppliers))
+              OrganizationSuppliersActions.getOrganizationSuppliersSuccess(filterUndefined(suppliers))
             ),
             catchError(() => of(OrganizationSuppliersActions.getOrganizationSuppliersError()))
           );
@@ -72,10 +75,10 @@ export class OrganizationSuppliersEffects {
         return this.organizationSuppliersService
           .getManyOrganizationSupplierInternalV2GetAvailableSuppliers({ organizationUuid })
           .pipe(
+            map((data) => this.adaptShallowOrganizations(data)),
+            filterUndefinedInArray(),
             map((availableSuppliers) =>
-              OrganizationSuppliersActions.getAvailableOrganizationSuppliersSuccess(
-                this.adaptShallowOrganizations(availableSuppliers)
-              )
+              OrganizationSuppliersActions.getAvailableOrganizationSuppliersSuccess(availableSuppliers)
             ),
             catchError(() => of(OrganizationSuppliersActions.getAvailableOrganizationSuppliersError()))
           );
@@ -113,7 +116,7 @@ export class OrganizationSuppliersEffects {
     );
   });
 
-  private adaptShallowOrganizations(source: any[]): ShallowOrganization[] {
-    return filterUndefined(source.map((s) => adaptShallowOrganization(s)));
+  private adaptShallowOrganizations(source: any[]): (ShallowOrganization | undefined)[] {
+    return source.map((s) => adaptShallowOrganization(s));
   }
 }
