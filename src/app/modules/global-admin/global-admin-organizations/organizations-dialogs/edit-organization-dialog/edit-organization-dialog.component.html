@@ -29,15 +29,14 @@
         [data]="countryCodes$ | async"
         data-cy="foreign-country-code"
       ></app-dropdown>
-      <app-checkbox-button
+         <app-checkbox
         *ngIf="showISMSSupplierField()"
         [formGroup]="formGroup"
         formName="isSupplier"
-      >
-      <app-paragraph i18n>
-        ISMS leverandør
-      </app-paragraph>
-      </app-checkbox-button>
+        labelPosition="after"
+        text="ISMS leverandør"
+        i18n-text
+      ></app-checkbox>
     </app-standard-vertical-content-grid>
 
     <app-dialog-actions>

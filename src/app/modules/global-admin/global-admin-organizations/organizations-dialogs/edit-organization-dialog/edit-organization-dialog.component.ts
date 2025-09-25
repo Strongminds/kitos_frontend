@@ -25,10 +25,9 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
-import { CheckboxButtonComponent } from 'src/app/shared/components/buttons/checkbox-button/checkbox-button.component';
-import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
 import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
 import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
+import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
@@ -47,8 +46,7 @@ import { OrganizationsDialogComponentStore } from '../organizations-dialog.compo
     DialogActionsComponent,
     ButtonComponent,
     AsyncPipe,
-    CheckboxButtonComponent,
-    ParagraphComponent,
+    CheckboxComponent,
   ],
 })
 export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
