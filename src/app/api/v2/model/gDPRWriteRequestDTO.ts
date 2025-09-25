@@ -48,6 +48,7 @@ export interface APIGDPRWriteRequestDTO {
     retentionPeriodDefined?: APIGDPRWriteRequestDTO.RetentionPeriodDefinedEnum;
     nextDataRetentionEvaluationDate?: string;
     dataRetentionEvaluationFrequencyInMonths?: number;
+    gdprCriticality?: APIGDPRWriteRequestDTO.GdprCriticalityEnum;
 }
 export namespace APIGDPRWriteRequestDTO {
     export type BusinessCriticalEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
@@ -125,6 +126,14 @@ export namespace APIGDPRWriteRequestDTO {
         Yes: 'Yes' as RetentionPeriodDefinedEnum,
         DontKnow: 'DontKnow' as RetentionPeriodDefinedEnum,
         Undecided: 'Undecided' as RetentionPeriodDefinedEnum
+    };
+    export type GdprCriticalityEnum = 'NotCritical' | 'Low' | 'Medium' | 'High' | 'VeryHigh';
+    export const GdprCriticalityEnum = {
+        NotCritical: 'NotCritical' as GdprCriticalityEnum,
+        Low: 'Low' as GdprCriticalityEnum,
+        Medium: 'Medium' as GdprCriticalityEnum,
+        High: 'High' as GdprCriticalityEnum,
+        VeryHigh: 'VeryHigh' as GdprCriticalityEnum
     };
 }
 
