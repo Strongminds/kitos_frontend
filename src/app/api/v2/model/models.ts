@@ -123,6 +123,7 @@ export * from './localOptionCreateRequestDTO';
 export * from './localRegularOptionResponseDTO';
 export * from './localRegularOptionUpdateRequestDTO';
 export * from './localRoleOptionResponseDTO';
+export * from './localRoleOptionUpdateRequestDTO';
 export * from './multipleConflictsResponseDTO';
 export * from './multipleContractsRequestDto';
 export * from './mutateRightRequestDTO';
