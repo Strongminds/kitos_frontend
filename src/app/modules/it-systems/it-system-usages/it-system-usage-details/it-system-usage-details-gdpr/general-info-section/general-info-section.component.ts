@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { GdprCriticality, gdprCriticalityOptions, mapGdprCriticality } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
@@ -59,6 +60,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
       purpose: new FormControl(''),
       businessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       hostedAt: new FormControl<HostedAt | undefined>(undefined),
+      gdprCriticality: new FormControl<GdprCriticality | undefined>(undefined),
     },
     { updateOn: 'blur' }
   );
@@ -68,6 +70,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly businessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableGdprBusinessCritical);
   public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
+  public readonly gdprCriticalityOptions = gdprCriticalityOptions;
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();
@@ -80,6 +83,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
           purpose: gdpr.purpose,
           businessCritical: mapToYesNoDontKnowEnum(gdpr.businessCritical),
           hostedAt: mapHostedAt(gdpr.hostedAt),
+          gdprCriticality: mapGdprCriticality(gdpr.gdprCriticality),
         });
       })
     );

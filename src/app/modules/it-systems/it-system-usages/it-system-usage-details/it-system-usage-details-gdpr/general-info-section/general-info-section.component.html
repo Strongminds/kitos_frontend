@@ -40,10 +40,13 @@
       (clearClick)="resetSimpleLink()"
       [isDisabled]="disableDirectoryDocumentationControl"
     ></app-edit-url-section>
-    <app-dropdown>
+    <app-dropdown
       text="Kritikalitet"
       i18n-text
-      
-    </app-dropdown>
+      [data]="gdprCriticalityOptions"
+      [formGroup]="generalInformationForm"
+      formName="gdprCriticality"
+      (valueChange)="patchGdpr({ gdprCriticality: $event })"
+    ></app-dropdown>
   </app-form-grid>
 </app-card>
