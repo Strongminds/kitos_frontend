@@ -41,6 +41,7 @@
       [isDisabled]="disableDirectoryDocumentationControl"
     ></app-edit-url-section>
     <app-dropdown
+      *ngIf="gdprCriticalityEnabled$ | async"
       text="Kritikalitet"
       i18n-text
       [data]="gdprCriticalityOptions"

@@ -19,6 +19,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableGdprBusinessCritical,
+  selectITSystemUsageEnableGdprCriticality,
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprHostedAt,
   selectITSystemUsageEnableGdprPurpose,
@@ -70,6 +71,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly businessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableGdprBusinessCritical);
   public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
+  public readonly gdprCriticalityEnabled$ = this.store.select(selectITSystemUsageEnableGdprCriticality);
   public readonly gdprCriticalityOptions = gdprCriticalityOptions;
 
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
