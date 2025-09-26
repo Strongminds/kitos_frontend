@@ -90,7 +90,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
   }
 
   public showISMSSupplierField(){
-    return this.organization.OrganizationTypeEnum === OrganizationTypeEnum.Company;
+    return this.organization.OrganizationTypeEnum === OrganizationTypeEnum.Company || this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
   }
 
   public onEditOrganization(): void {
