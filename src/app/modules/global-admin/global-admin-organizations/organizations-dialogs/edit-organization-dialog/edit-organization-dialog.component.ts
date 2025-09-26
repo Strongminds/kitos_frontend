@@ -6,6 +6,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
+import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import { adaptShallowOptionTypeFromOData, ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import {
@@ -18,16 +19,15 @@ import {
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../../../../shared/components/dialogs/dialog/dialog.component';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
-import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
 import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
 import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
-import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 
 @Component({
   selector: 'app-edit-organization-unit-dialog',
@@ -73,6 +73,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
 
   override ngOnInit(): void {
     super.ngOnInit();
+    this.formGroup.controls['organizationType'].valueChanges.subscribe(() => this.toggleIsSupplierField());
 
     this.formGroup.patchValue({
       name: this.organization.Name,
@@ -89,7 +90,19 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       });
   }
 
-  public enableISMSSupplierField(){
+  public toggleIsSupplierField() {
+    const controls = this.formGroup.controls;
+    const supplierStateControl = controls['isSupplier'];
+    if (controls['organizationType'].value?.value === OrganizationTypeEnum.Company) {
+      supplierStateControl.setValue(this.organization.IsSupplier);
+      supplierStateControl.enable();
+    } else {
+      supplierStateControl.setValue(undefined);
+      supplierStateControl.disable();
+    }
+  }
+
+  public enableISMSSupplierField() {
     return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
   }
 
