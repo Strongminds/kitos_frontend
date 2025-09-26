@@ -53,3 +53,4 @@ export const CatalogArchiveDutyComment = 'CatalogArchiveDutyComment';
 export const WebAccessibilityCompliance = 'WebAccessibilityCompliance';
 export const LastWebAccessibilityCheck = 'LastWebAccessibilityCheck';
 export const WebAccessibilityNotes = 'WebAccessibilityNotes';
+export const GdprCriticality = 'GdprCriticality';

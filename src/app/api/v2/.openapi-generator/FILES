@@ -112,6 +112,7 @@ api/v2NotificationINTERNAL.service.ts
 api/v2Organization.service.ts
 api/v2OrganizationGlobalCountryCodesInternalINTERNAL.service.ts
 api/v2OrganizationGridInternalINTERNAL.service.ts
+api/v2OrganizationSupplierInternalINTERNAL.service.ts
 api/v2OrganizationUnitGlobalRoleOptionTypesInternalINTERNAL.service.ts
 api/v2OrganizationUnitLocalRoleOptionTypesInternalINTERNAL.service.ts
 api/v2OrganizationUnitRegistrationInternalINTERNAL.service.ts

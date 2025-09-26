@@ -113,6 +113,10 @@ export const ItSystemUsageUiBluePrint = {
         retentionPeriod: {
           text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
         },
+        gdprCriticality: {
+          text: $localize`Kritikalitet`,
+          disableByDefault: true,
+        },
       },
     },
     systemRoles: {

@@ -4585,8 +4585,8 @@
       <trans-unit id="5742019875153950367" datatype="html">
         <source>CPR-nr</source>
       </trans-unit>
-      <trans-unit id="584908652240507318" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-overvi"/> Eksporter</source>
+      <trans-unit id="2708612909413062362" datatype="html">
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-overview"/> Eksporter </source>
       </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
         <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
@@ -5305,8 +5305,23 @@
       <trans-unit id="1502212713118381557" datatype="html">
         <source>Ingen</source>
       </trans-unit>
-      <trans-unit id="3916026141067956225" datatype="html">
-        <source>Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder.</source>
+      <trans-unit id="3816576365360329559" datatype="html">
+        <source><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="p-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="Akti"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </source>
+      </trans-unit>
+      <trans-unit id="5070899896766404217" datatype="html">
+        <source>Ikke kritisk</source>
+      </trans-unit>
+      <trans-unit id="5533383424441473672" datatype="html">
+        <source>Høj</source>
+      </trans-unit>
+      <trans-unit id="5982496808088686844" datatype="html">
+        <source>Medium</source>
+      </trans-unit>
+      <trans-unit id="6572607453095683769" datatype="html">
+        <source>Meget høj</source>
+      </trans-unit>
+      <trans-unit id="6905265339095064583" datatype="html">
+        <source>Lav</source>
       </trans-unit>
     </body>
   </file>

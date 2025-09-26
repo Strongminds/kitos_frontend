@@ -93,6 +93,7 @@ export interface APIItSystemUsageOverviewReadModel {
     generalPurpose?: string;
     hostedAt?: APIItSystemUsageOverviewReadModel.HostedAtEnum;
     userCount?: APIItSystemUsageOverviewReadModel.UserCountEnum;
+    gdprCriticality?: APIItSystemUsageOverviewReadModel.GdprCriticalityEnum;
     dependsOnInterfacesNamesAsCsv?: string;
     dependsOnInterfaces?: Array<APIItSystemUsageOverviewInterfaceReadModel>;
     incomingRelatedItSystemUsagesNamesAsCsv?: string;
@@ -148,6 +149,14 @@ export namespace APIItSystemUsageOverviewReadModel {
         Fiftytohundred: 'FIFTYTOHUNDRED' as UserCountEnum,
         Hundredplus: 'HUNDREDPLUS' as UserCountEnum,
         Undecided: 'UNDECIDED' as UserCountEnum
+    };
+    export type GdprCriticalityEnum = 'NotCritical' | 'Low' | 'Medium' | 'High' | 'VeryHigh';
+    export const GdprCriticalityEnum = {
+        NotCritical: 'NotCritical' as GdprCriticalityEnum,
+        Low: 'Low' as GdprCriticalityEnum,
+        Medium: 'Medium' as GdprCriticalityEnum,
+        High: 'High' as GdprCriticalityEnum,
+        VeryHigh: 'VeryHigh' as GdprCriticalityEnum
     };
     export type DpiaConductedEnum = 'NO' | 'YES' | 'DONTKNOW' | 'UNDECIDED';
     export const DpiaConductedEnum = {
