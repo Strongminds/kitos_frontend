@@ -15,6 +15,7 @@ import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partial
 import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
+import { GdprCriticality, mapGdprCriticality } from './gdpr/gdpr-criticality.model';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -85,6 +86,7 @@ export interface ITSystemUsage {
   WebAccessibilityCompliance: YesNoPartiallyOption | undefined;
   LastWebAccessibilityCheck: Date | undefined;
   WebAccessibilityNotes: string | undefined;
+  GdprCriticality: GdprCriticality | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -207,6 +209,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     WebAccessibilityCompliance: mapToYesNoPartiallyEnum(value.WebAccessibilityCompliance),
     LastWebAccessibilityCheck: value.LastWebAccessibilityCheck,
     WebAccessibilityNotes: value.WebAccessibilityNotes,
+    GdprCriticality: mapGdprCriticality(value.GdprCriticality),
   };
   return adaptedSystem;
 };
