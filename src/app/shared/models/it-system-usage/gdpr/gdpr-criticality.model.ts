@@ -13,18 +13,8 @@ export const gdprCriticalityOptions: GdprCriticality[] = [
   { name: $localize`Meget høj`, value: APIGDPRRegistrationsResponseDTO.GdprCriticalityEnum.VeryHigh },
 ];
 
-export const mapGdprCriticality = (value?: APIGDPRRegistrationsResponseDTO.GdprCriticalityEnum): GdprCriticality | undefined => {
+export const mapGdprCriticality = (
+  value?: APIGDPRRegistrationsResponseDTO.GdprCriticalityEnum
+): GdprCriticality | undefined => {
   return gdprCriticalityOptions.find((option) => option.value === value);
 };
-
-// export const hostedAtOptionsGrid: GdprCriticality[] = [
-//   { name: $localize`Ikke kritisk`, value: 'NotCritical' },
-//   { name: $localize`Lav`, value: 'Low' },
-//   { name: $localize`Medium`, value: 'Medium' },
-//   { name: $localize`Høj`, value: 'High' },
-//   { name: $localize`Meget høj`, value: 'VeryHigh' },
-// ];
-
-// export const mapGridHostedAt = (value?: APIGDPRRegistrationsResponseDTO.HostedAtEnum): GdprCriticality | undefined => {
-//   return hostedAtOptionsGrid.find((option) => option.value === value);
-// };
