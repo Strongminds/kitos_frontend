@@ -4,7 +4,6 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { APIV2OrganizationSupplierInternalINTERNALService } from 'src/app/api/v2';
-import { filterUndefined } from 'src/app/shared/helpers/array.helpers';
 import {
   adaptShallowOrganization,
   ShallowOrganization,
@@ -48,9 +47,7 @@ export class OrganizationSuppliersEffects {
           .pipe(
             map((data) => this.adaptShallowOrganizations(data)),
             filterUndefinedInArray(),
-            map((suppliers) =>
-              OrganizationSuppliersActions.getOrganizationSuppliersSuccess(filterUndefined(suppliers))
-            ),
+            map((suppliers) => OrganizationSuppliersActions.getOrganizationSuppliersSuccess(suppliers)),
             catchError(() => of(OrganizationSuppliersActions.getOrganizationSuppliersError()))
           );
       })
