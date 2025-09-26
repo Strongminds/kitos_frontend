@@ -1,11 +1,14 @@
+import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationCreateRequestDTO } from 'src/app/api/v2';
+import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
+import { ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import {
   defaultOrganizationType,
   OrganizationType,
@@ -14,18 +17,15 @@ import {
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
 import { OrganizationActions } from 'src/app/store/organization/actions';
-import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
-import { ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
-import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
+import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../../../../shared/components/dialogs/dialog/dialog.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
-import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
-import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
+import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
+import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
 
 @Component({
   selector: 'app-create-organization-dialog',
@@ -63,13 +63,15 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
     private dialogRef: MatDialogRef<CreateOrganizationDialogComponent>,
     private store: Store,
     private actions$: Actions,
-    componentStore: OrganizationsDialogComponentStore,
+    componentStore: OrganizationsDialogComponentStore
   ) {
     super(componentStore);
   }
 
   override ngOnInit(): void {
     super.ngOnInit();
+    this.toggleIsSupplierField();
+    this.formGroup.controls['organizationType'].valueChanges.subscribe(() => this.toggleIsSupplierField());
     this.componentStore.getCountryCodes();
 
     this.actions$
@@ -79,8 +81,19 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
       });
   }
 
-  public enableISMSSupplierField(){
+  public enableISMSSupplierField() {
     return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
+  }
+
+  public toggleIsSupplierField() {
+    const controls = this.formGroup.controls;
+    const supplierStateControl = controls['isSupplier'];
+    if (this.enableISMSSupplierField()) {
+      supplierStateControl.enable();
+    } else {
+      supplierStateControl.setValue(undefined);
+      supplierStateControl.disable();
+    }
   }
 
   public onCreateOrganization(): void {

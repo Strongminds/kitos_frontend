@@ -93,7 +93,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
   public toggleIsSupplierField() {
     const controls = this.formGroup.controls;
     const supplierStateControl = controls['isSupplier'];
-    if (controls['organizationType'].value?.value === OrganizationTypeEnum.Company) {
+    if (this.enableISMSSupplierField()) {
       supplierStateControl.setValue(this.organization.IsSupplier);
       supplierStateControl.enable();
     } else {
