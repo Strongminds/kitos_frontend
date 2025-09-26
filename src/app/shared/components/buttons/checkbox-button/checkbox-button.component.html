@@ -1,5 +1,12 @@
-<app-tooltip [text]="tooltip ?? ''">
-  <app-button
+<ng-template #content>
+  <ng-content></ng-content>
+</ng-template>
+
+<ng-container>
+  <app-tooltip [text]="tooltip ?? ''">
+
+   <app-button
+    *ngIf="formGroup === undefined"
     class="button-alignment button-auto-width"
     (buttonClick)="onButtonClick()"
     buttonStyle="secondary"
@@ -11,7 +18,41 @@
     <app-checkbox [value]="value" [disabled]="disabled" data-cy="button-checkbox"> </app-checkbox>
 
     <div class="align-content">
-      <ng-content></ng-content>
+      <ng-container *ngTemplateOutlet="content"></ng-container>
     </div>
   </app-button>
-</app-tooltip>
+  </app-tooltip>
+
+</ng-container>
+ 
+<ng-container>
+    <app-tooltip [text]="tooltip ?? ''">
+
+   <app-button
+    *ngIf="formGroup !== undefined"
+    class="button-alignment button-auto-width"
+    (buttonClick)="onButtonClick()"
+    buttonStyle="secondary"
+    [disabled]="disabled"
+    [alignStart]="true"
+    [ngClass]="{ 'disabled-border-color': !value, 'size-large': isLarge }"
+    [backgroundWhite]="backgroundWhite"
+  >
+    <app-checkbox 
+      [value]="value" 
+      [disabled]="disabled" 
+      [formGroup]="formGroup" 
+      [formName]="formName ?? null" 
+      (valueChange)="onButtonClick()" 
+      data-cy="button-checkbox"
+      >
+     </app-checkbox>
+
+    <div class="align-content">
+      <ng-container *ngTemplateOutlet="content"></ng-container>
+    </div>
+  </app-button>
+    </app-tooltip>
+
+</ng-container>
+ 

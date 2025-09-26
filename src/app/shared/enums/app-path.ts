@@ -40,6 +40,7 @@ export enum AppPath {
   helpTexts = 'help-texts',
   localAdminSystemUsages = 'system',
   other = 'other',
+  ismsSuppliers = 'isms-suppliers',
 
   roles = 'roles',
 

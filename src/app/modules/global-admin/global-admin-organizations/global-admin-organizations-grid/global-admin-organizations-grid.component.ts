@@ -61,6 +61,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       title: $localize`CVR`,
       section: this.sectionName,
       hidden: false,
+      width: 200,
     },
     {
       field: 'OrganizationType',
@@ -75,6 +76,14 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       title: $localize`Udenlandsk virksomhed`,
       section: this.sectionName,
       hidden: false,
+    },
+    {
+      field: 'IsSupplier',
+      title: $localize`ISMS leverandør`,
+      section: this.sectionName,
+      hidden: false,
+      style: 'boolean',
+      width: 150,
     },
     createGridActionColumn(['edit', 'delete']),
   ];

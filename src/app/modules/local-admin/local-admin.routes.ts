@@ -8,6 +8,7 @@ import { LocalAdminOrganizationComponent } from './local-admin-organization/loca
 import { LocalAdminItContractComponent } from './local-admin-it-contract/local-admin-it-contract.component';
 import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.component';
 import { LocalAdminComponent } from './local-admin.component';
+import { LocalAdminIsmsSuppliersComponent } from './local-admin-isms-suppliers/local-admin-isms-suppliers.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
         component: LocalAdminItContractComponent,
       },
       { path: AppPath.import, component: LocalAdminImportComponent },
+      {
+        path: AppPath.ismsSuppliers,
+        component: LocalAdminIsmsSuppliersComponent
+      }
     ],
   },
 ];
