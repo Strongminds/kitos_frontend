@@ -9,6 +9,7 @@ import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.he
 import {
   defaultOrganizationType,
   OrganizationType,
+  OrganizationTypeEnum,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
@@ -24,6 +25,7 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { DialogActionsComponent } from '../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../../../../shared/components/buttons/button/button.component';
+import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 
 @Component({
   selector: 'app-create-organization-dialog',
@@ -42,6 +44,7 @@ import { ButtonComponent } from '../../../../../shared/components/buttons/button
     DialogActionsComponent,
     ButtonComponent,
     AsyncPipe,
+    CheckboxComponent,
   ],
 })
 export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
@@ -51,6 +54,7 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
     cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
+    isSupplier: new FormControl<boolean | undefined>(undefined),
   });
 
   public isLoading$ = new BehaviorSubject<boolean>(false);
@@ -75,6 +79,10 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
       });
   }
 
+  public enableISMSSupplierField(){
+    return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
+  }
+
   public onCreateOrganization(): void {
     this.actions$.pipe(ofType(OrganizationActions.createOrganizationSuccess), first()).subscribe(() => {
       this.onCancel();
@@ -92,11 +100,13 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
   private getRequest(): APIOrganizationCreateRequestDTO {
     const formValue = this.formGroup.value;
     const type = formValue.organizationType ? formValue.organizationType : defaultOrganizationType;
+    const isSupplierValue = formValue.isSupplier ?? undefined;
     return {
       name: formValue.name ?? '',
       cvr: formValue.cvr ?? undefined,
       type: mapOrgTypeToDtoType(type.value),
       foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
+      isSupplier: this.enableISMSSupplierField() ? isSupplierValue : undefined,
     };
   }
 }

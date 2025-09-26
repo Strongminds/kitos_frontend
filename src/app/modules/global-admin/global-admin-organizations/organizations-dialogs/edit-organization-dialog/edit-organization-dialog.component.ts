@@ -89,8 +89,8 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       });
   }
 
-  public showISMSSupplierField(){
-    return this.organization.OrganizationTypeEnum === OrganizationTypeEnum.Company || this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
+  public enableISMSSupplierField(){
+    return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
   }
 
   public onEditOrganization(): void {
@@ -113,13 +113,14 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
 
   private getRequest(): APIOrganizationUpdateRequestDTO {
     const formValue = this.formGroup.value;
+    const isSupplierValue = formValue.isSupplier ?? undefined;
     return {
       name: formValue.name ?? undefined,
       cvr: formValue.cvr ?? undefined,
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
       foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
       updateForeignCountryCode: this.foreignCountryCodeHasChange(),
-      isSupplier: formValue.isSupplier ?? undefined,
+      isSupplier: this.enableISMSSupplierField() ? isSupplierValue : undefined,
     };
   }
 
