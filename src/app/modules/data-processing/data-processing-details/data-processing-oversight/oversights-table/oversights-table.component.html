@@ -3,6 +3,7 @@
     <thead>
       <th i18n>Dato for tilsyn</th>
       <th i18n width="75%">Bemærkninger</th>
+      <th i18n>Tilsynsrapport</th>
       <th></th>
     </thead>
     <tbody>
@@ -12,6 +13,11 @@
         </td>
         <td>
           <app-paragraph [cropOnOverflow]="true">{{ oversightDate.remark }}</app-paragraph>
+        </td>
+        <td>
+          <app-external-page-link 
+          [url]="oversightDate.oversightReportLink.url" 
+          [title]="oversightDate.oversightReportLink.name"></app-external-page-link>
         </td>
         <td>
           <app-table-row-actions *ngIf="(hasModifyPermissions$ | async) === true">

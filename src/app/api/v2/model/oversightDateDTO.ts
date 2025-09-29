@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
 export interface APIOversightDateDTO { 
@@ -21,5 +22,6 @@ export interface APIOversightDateDTO {
      * Optional remark related to the oversight
      */
     remark?: string;
+    oversightReportLink?: APISimpleLinkDTO;
 }
 

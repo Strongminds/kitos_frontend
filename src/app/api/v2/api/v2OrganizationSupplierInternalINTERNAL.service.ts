@@ -19,39 +19,36 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIChangeOrganizationUnitRegistrationV2RequestDTO } from '../model/aPIChangeOrganizationUnitRegistrationV2RequestDTO';
-// @ts-ignore
-import { APIOrganizationRegistrationUnitResponseDTO } from '../model/aPIOrganizationRegistrationUnitResponseDTO';
-// @ts-ignore
-import { APITransferOrganizationUnitRegistrationV2RequestDTO } from '../model/aPITransferOrganizationUnitRegistrationV2RequestDTO';
+import { APIShallowOrganizationResponseDTO } from '../model/aPIShallowOrganizationResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams {
+export interface DeleteSingleOrganizationSupplierInternalV2DeleteSupplierRequestParams {
     organizationUuid: string;
-    unitUuid: string;
-    requestDto: APIChangeOrganizationUnitRegistrationV2RequestDTO;
+    supplierUuid: string;
 }
 
-export interface GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams {
+export interface GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams {
     organizationUuid: string;
-    unitUuid: string;
 }
 
-export interface PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams {
+export interface GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams {
     organizationUuid: string;
-    unitUuid: string;
-    requestDto: APITransferOrganizationUnitRegistrationV2RequestDTO;
+}
+
+export interface PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams {
+    organizationUuid: string;
+    supplierUuid: string;
 }
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
+export class APIV2OrganizationSupplierInternalINTERNALService {
 
     protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
@@ -117,21 +114,17 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations(requestParameters: DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleOrganizationSupplierInternalV2DeleteSupplier(requestParameters: DeleteSingleOrganizationSupplierInternalV2DeleteSupplierRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleOrganizationSupplierInternalV2DeleteSupplier(requestParameters: DeleteSingleOrganizationSupplierInternalV2DeleteSupplierRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleOrganizationSupplierInternalV2DeleteSupplier(requestParameters: DeleteSingleOrganizationSupplierInternalV2DeleteSupplierRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleOrganizationSupplierInternalV2DeleteSupplier(requestParameters: DeleteSingleOrganizationSupplierInternalV2DeleteSupplierRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationSupplierInternalV2DeleteSupplier.');
         }
-        const unitUuid = requestParameters.unitUuid;
-        if (unitUuid === null || unitUuid === undefined) {
-            throw new Error('Required parameter unitUuid was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations.');
-        }
-        const requestDto = requestParameters.requestDto;
-        if (requestDto === null || requestDto === undefined) {
-            throw new Error('Required parameter requestDto was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations.');
+        const supplierUuid = requestParameters.supplierUuid;
+        if (supplierUuid === null || supplierUuid === undefined) {
+            throw new Error('Required parameter supplierUuid was null or undefined when calling deleteSingleOrganizationSupplierInternalV2DeleteSupplier.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -153,14 +146,6 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
-        }
-
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -172,11 +157,10 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "unitUuid", value: unitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/registrations`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/suppliers/${this.configuration.encodeParam({name: "supplierUuid", value: supplierUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: requestDto,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -191,17 +175,13 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOrganizationRegistrationUnitResponseDTO>;
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOrganizationRegistrationUnitResponseDTO>>;
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOrganizationRegistrationUnitResponseDTO>>;
-    public getSingleOrganizationUnitRegistrationInternalV2GetRegistrations(requestParameters: GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
+    public getManyOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
+    public getManyOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
+    public getManyOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationUnitRegistrationInternalV2GetRegistrations.');
-        }
-        const unitUuid = requestParameters.unitUuid;
-        if (unitUuid === null || unitUuid === undefined) {
-            throw new Error('Required parameter unitUuid was null or undefined when calling getSingleOrganizationUnitRegistrationInternalV2GetRegistrations.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationSupplierInternalV2GetAvailableSuppliers.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -235,8 +215,8 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "unitUuid", value: unitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/registrations`;
-        return this.httpClient.request<APIOrganizationRegistrationUnitResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/suppliers/available`;
+        return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -253,21 +233,13 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations(requestParameters: PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
+    public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
+    public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
+    public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations.');
-        }
-        const unitUuid = requestParameters.unitUuid;
-        if (unitUuid === null || unitUuid === undefined) {
-            throw new Error('Required parameter unitUuid was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations.');
-        }
-        const requestDto = requestParameters.requestDto;
-        if (requestDto === null || requestDto === undefined) {
-            throw new Error('Required parameter requestDto was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationSupplierInternalV2GetSuppliers.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -276,6 +248,7 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
         if (localVarHttpHeaderAcceptSelected === undefined) {
             // to determine the Accept header
             const httpHeaderAccepts: string[] = [
+                'application/json'
             ];
             localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
         }
@@ -289,14 +262,67 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
         }
 
 
-        // to determine the Content-Type header
-        const consumes: string[] = [
-            'application/json'
-        ];
-        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
-        if (httpContentTypeSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
         }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/suppliers`;
+        return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIShallowOrganizationResponseDTO>;
+    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIShallowOrganizationResponseDTO>>;
+    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIShallowOrganizationResponseDTO>>;
+    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationSupplierInternalV2AddSupplier.');
+        }
+        const supplierUuid = requestParameters.supplierUuid;
+        if (supplierUuid === null || supplierUuid === undefined) {
+            throw new Error('Required parameter supplierUuid was null or undefined when calling postSingleOrganizationSupplierInternalV2AddSupplier.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
 
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
@@ -309,11 +335,10 @@ export class APIV2OrganizationUnitRegistrationInternalINTERNALService {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization-units/${this.configuration.encodeParam({name: "unitUuid", value: unitUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/registrations`;
-        return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/suppliers/${this.configuration.encodeParam({name: "supplierUuid", value: supplierUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        return this.httpClient.request<APIShallowOrganizationResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: requestDto,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
