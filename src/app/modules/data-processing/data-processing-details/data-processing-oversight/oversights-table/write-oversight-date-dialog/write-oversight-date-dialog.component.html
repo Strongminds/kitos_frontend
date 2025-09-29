@@ -15,6 +15,11 @@
         data-cy="notes-control"
         i18n-text
       ></app-textarea>
+      <app-edit-url-section
+      title="Link til tilsynsrapport"
+      [simpleLink$]="test$"
+      i18n-title
+    ></app-edit-url-section>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
         <app-button
