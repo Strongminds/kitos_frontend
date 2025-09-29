@@ -1,13 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { distinctUntilChanged, first, of } from 'rxjs';
 import { APIOversightDateDTO } from 'src/app/api/v2';
+import { EditUrlDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
 import { EditUrlSectionComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-section/edit-url-section.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
+import { findDialogInstanceOf } from 'src/app/shared/helpers/dialog.helpers';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { selectDataProcessingOversightDates } from 'src/app/store/data-processing/selectors';
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
@@ -47,10 +50,12 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     url: this.oversightDateFormGroup?.controls.reportLinkUrl?.value ?? undefined,
     name: this.oversightDateFormGroup?.controls.reportLinkName?.value ?? undefined,
   });
+  //TODO make above a behaviorsubject and update on changes
 
   constructor(
     private store: Store,
     private dialogRef: MatDialogRef<WriteOversightDateDialogComponent>,
+    private dialog: MatDialog,
     private actions$: Actions
   ) {
     super();
@@ -102,6 +107,15 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
       reportLinkUrl: undefined,
       reportLinkName: undefined,
     });
+  }
+
+  public onReportLinkChange(link: SimpleLink | null) {
+    this.oversightDateFormGroup.patchValue({
+      reportLinkUrl: link?.url,
+      reportLinkName: link?.name,
+    });
+    const editUrlDialogInstance = findDialogInstanceOf(this.dialog, EditUrlDialogComponent);
+    editUrlDialogInstance?.close();
   }
 
   public onSave() {
