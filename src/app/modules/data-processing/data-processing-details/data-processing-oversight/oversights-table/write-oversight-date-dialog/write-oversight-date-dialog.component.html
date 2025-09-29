@@ -17,7 +17,7 @@
       ></app-textarea>
       <app-edit-url-section
       title="Link til tilsynsrapport"
-      [simpleLink$]="test$"
+      [simpleLink$]="currentReportLink$"
       i18n-title
       (clearClick)="onClearReportLink()"
       (submitMethod)="onReportLinkChange($event)"

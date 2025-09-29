@@ -46,7 +46,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     reportLinkName: new FormControl<string | undefined>(undefined),
   });
 
-  public test$ = new BehaviorSubject<SimpleLink | undefined>(undefined);
+  public currentReportLink$ = new BehaviorSubject<SimpleLink | undefined>(undefined);
 
   constructor(
     private store: Store,
@@ -65,7 +65,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     if (this.oversightDate?.uuid) {
       this.isEdit = true;
       this.title = 'Rediger tilsyn';
-      this.test$.next({
+      this.currentReportLink$.next({
         url: this.oversightDate?.oversightReportLink?.url ?? undefined,
         name: this.oversightDate?.oversightReportLink?.name ?? undefined,
       });
@@ -114,7 +114,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
       reportLinkUrl: link?.url,
       reportLinkName: link?.name,
     });
-    this.test$.next(link ?? undefined);
+    this.currentReportLink$.next(link ?? undefined);
     const editUrlDialogInstance = findDialogInstanceOf(this.dialog, EditUrlDialogComponent);
     editUrlDialogInstance?.close();
   }
@@ -129,6 +129,10 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     const request: APIOversightDateDTO = {
       completedAt: this.oversightDateFormGroup.value.date!.toISOString(),
       remark: this.oversightDateFormGroup.value.notes ?? '',
+      oversightReportLink: {
+        url: this.oversightDateFormGroup.value.reportLinkUrl ?? undefined,
+        name: this.oversightDateFormGroup.value.reportLinkName ?? undefined,
+      },
     };
 
     this.store
