@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { distinctUntilChanged, first, of } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged, first } from 'rxjs';
 import { APIOversightDateDTO } from 'src/app/api/v2';
 import { EditUrlDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
 import { EditUrlSectionComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-section/edit-url-section.component';
@@ -46,11 +46,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     reportLinkName: new FormControl<string | undefined>(undefined),
   });
 
-  public test$ = of({
-    url: this.oversightDateFormGroup?.controls.reportLinkUrl?.value ?? undefined,
-    name: this.oversightDateFormGroup?.controls.reportLinkName?.value ?? undefined,
-  });
-  //TODO make above a behaviorsubject and update on changes
+  public test$ = new BehaviorSubject<SimpleLink | undefined>(undefined);
 
   constructor(
     private store: Store,
@@ -69,6 +65,10 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     if (this.oversightDate?.uuid) {
       this.isEdit = true;
       this.title = 'Rediger tilsyn';
+      this.test$.next({
+        url: this.oversightDate?.oversightReportLink?.url ?? undefined,
+        name: this.oversightDate?.oversightReportLink?.name ?? undefined,
+      });
 
       this.oversightDateFormGroup.patchValue({
         date: optionalNewDate(this.oversightDate.completedAt),
@@ -114,6 +114,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
       reportLinkUrl: link?.url,
       reportLinkName: link?.name,
     });
+    this.test$.next(link ?? undefined);
     const editUrlDialogInstance = findDialogInstanceOf(this.dialog, EditUrlDialogComponent);
     editUrlDialogInstance?.close();
   }
