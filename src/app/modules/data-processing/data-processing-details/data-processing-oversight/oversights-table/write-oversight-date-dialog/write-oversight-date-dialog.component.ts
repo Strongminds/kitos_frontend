@@ -36,16 +36,16 @@ import { TextAreaComponent } from '../../../../../../shared/components/textarea/
 export class WriteOversightDateDialogComponent extends BaseComponent implements OnInit {
   @Input() public oversightDate: APIOversightDateDTO | undefined;
 
-  public test$ = of({
-    url: 'https://www.kitos.dk',
-    name: 'someTitle',
-  });
-
   public oversightDateFormGroup = new FormGroup({
     date: new FormControl<Date | undefined>(undefined, Validators.required),
     notes: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     reportLinkUrl: new FormControl<string | undefined>(undefined),
     reportLinkName: new FormControl<string | undefined>(undefined),
+  });
+
+  public test$ = of({
+    url: this.oversightDateFormGroup?.controls.reportLinkUrl?.value ?? undefined,
+    name: this.oversightDateFormGroup?.controls.reportLinkName?.value ?? undefined,
   });
 
   constructor(
@@ -95,6 +95,13 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
         }
       })
     );
+  }
+
+  public onClearReportLink() {
+    this.oversightDateFormGroup.patchValue({
+      reportLinkUrl: undefined,
+      reportLinkName: undefined,
+    });
   }
 
   public onSave() {
