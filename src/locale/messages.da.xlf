@@ -7001,37 +7001,37 @@
         <source>Vælg leverandør</source>
         <target state="new">Vælg leverandør</target>
       </trans-unit>
-      <trans-unit id="1170017200172199580" datatype="html">
-        <source>Er du sikker på, at du vil fjerne leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</source>
-        <target state="new">Er du sikker på, at du vil fjerne leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</target>
+      <trans-unit id="478406584518441805" datatype="html">
+        <source>Er du sikker på, at du vil fjerne ISMS leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</source>
+        <target state="new">Er du sikker på, at du vil fjerne ISMS leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</target>
       </trans-unit>
       <trans-unit id="4294821706131293879" datatype="html">
         <source>ISMS leverandører</source>
         <target state="new">ISMS leverandører</target>
       </trans-unit>
-      <trans-unit id="4464146657169863345" datatype="html">
-        <source>Leverandøren blev tilføjet</source>
-        <target state="new">Leverandøren blev tilføjet</target>
+      <trans-unit id="2046361179748044913" datatype="html">
+        <source>ISMS leverandøren blev tilføjet</source>
+        <target state="new">ISMS leverandøren blev tilføjet</target>
       </trans-unit>
-      <trans-unit id="916050459760752352" datatype="html">
-        <source>Kunne ikke tilføje leverandøren</source>
-        <target state="new">Kunne ikke tilføje leverandøren</target>
+      <trans-unit id="9052722120771694867" datatype="html">
+        <source>Kunne ikke tilføje ISMS leverandøren</source>
+        <target state="new">Kunne ikke tilføje ISMS leverandøren</target>
       </trans-unit>
-      <trans-unit id="1210921045907077835" datatype="html">
-        <source>Leverandøren blev fjernet</source>
-        <target state="new">Leverandøren blev fjernet</target>
+      <trans-unit id="6390628077096716329" datatype="html">
+        <source>Kunne ikke fjerne ISMS leverandøren</source>
+        <target state="new">Kunne ikke fjerne ISMS leverandøren</target>
       </trans-unit>
-      <trans-unit id="1524892600166783253" datatype="html">
-        <source>Kunne ikke fjerne leverandøren</source>
-        <target state="new">Kunne ikke fjerne leverandøren</target>
+      <trans-unit id="977445061536403655" datatype="html">
+        <source>Kunne ikke hente ISMS leverandører</source>
+        <target state="new">Kunne ikke hente ISMS leverandører</target>
       </trans-unit>
-      <trans-unit id="7255822127722901712" datatype="html">
-        <source>Kunne ikke hente leverandører</source>
-        <target state="new">Kunne ikke hente leverandører</target>
+      <trans-unit id="2812384018586692723" datatype="html">
+        <source>Kunne ikke hente tilgængelige ISMS leverandører</source>
+        <target state="new">Kunne ikke hente tilgængelige ISMS leverandører</target>
       </trans-unit>
-      <trans-unit id="2106335680691871020" datatype="html">
-        <source>Kunne ikke hente tilgængelige leverandører</source>
-        <target state="new">Kunne ikke hente tilgængelige leverandører</target>
+      <trans-unit id="7702962993043588389" datatype="html">
+        <source>ISMS leverandøren blev fjernet</source>
+        <target state="new">ISMS leverandøren blev fjernet</target>
       </trans-unit>
     </body>
   </file>
