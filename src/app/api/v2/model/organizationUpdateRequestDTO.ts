@@ -17,6 +17,7 @@ export interface APIOrganizationUpdateRequestDTO {
     type?: APIOrganizationUpdateRequestDTO.TypeEnum;
     cvr?: string;
     foreignCountryCodeUuid?: string;
+    isSupplier?: boolean;
 }
 export namespace APIOrganizationUpdateRequestDTO {
     export type TypeEnum = 'Municipality' | 'CommunityOfInterest' | 'Company' | 'OtherPublicAuthority';
