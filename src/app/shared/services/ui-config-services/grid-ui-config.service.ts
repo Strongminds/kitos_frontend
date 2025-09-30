@@ -430,6 +430,8 @@ export class GridUIConfigService {
             DprFields.IsOversightCompleted,
             DprFields.LatestOversightDate,
             DprFields.LatestOversightRemark,
+            DprFields.LatestOversightReportLink,
+            DprFields.LatestOversightReportLinkName,
           ]),
         ),
 
