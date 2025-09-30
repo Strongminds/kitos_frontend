@@ -532,14 +532,7 @@ export class DataProcessingEffects {
         return of(
           DataProcessingActions.patchDataProcessing({
             oversight: {
-              oversightDates: listWithoutSupervision.map((oversightDate) => ({
-                completedAt: oversightDate.completedAt,
-                remark: oversightDate.remark,
-                oversightReportLink: {
-                  url: oversightDate.oversightReportLink?.url ?? undefined,
-                  name: oversightDate.oversightReportLink?.name ?? undefined,
-                },
-              })),
+              oversightDates: listWithoutSupervision,
               isOversightCompleted:
                 listWithoutSupervision.length === 0
                   ? APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.No
@@ -563,14 +556,7 @@ export class DataProcessingEffects {
         return of(
           DataProcessingActions.patchDataProcessing({
             oversight: {
-              oversightDates: listWithoutSupervision.map((oversightDate) => ({
-                completedAt: oversightDate.completedAt,
-                remark: oversightDate.remark,
-                oversightReportLink: {
-                  url: oversightDate.oversightReportLink?.url ?? undefined,
-                  name: oversightDate.oversightReportLink?.name ?? undefined,
-                },
-              })),
+              oversightDates: listWithoutSupervision,
               isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
             },
           })
