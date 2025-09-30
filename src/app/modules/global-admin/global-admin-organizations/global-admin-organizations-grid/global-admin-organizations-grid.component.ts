@@ -44,6 +44,7 @@ import { AsyncPipe } from '@angular/common';
 })
 export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent implements OnInit {
   private readonly sectionName: string = ORGANIZATION_SECTION_NAME;
+  public readonly disabledSupplierFieldTooltip = $localize`Kun organisationer af typen "Virksomhed" kan være ISMS leverandører.`;
 
   public readonly globalAdminEntityType: RegistrationEntityTypes = 'global-admin-organization';
   public readonly isLoading$ = this.store.select(selectOrganizationGridLoading);
@@ -122,7 +123,9 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
 
   public onEditOrganization(organization: OrganizationOData) {
     const dialogRef = this.dialog.open(EditOrganizationDialogComponent);
-    dialogRef.componentInstance.organization = organization;
+    var componentInstance = dialogRef.componentInstance;
+    componentInstance.organization = organization;
+    componentInstance.tooltipText = this.disabledSupplierFieldTooltip;
   }
 
   public onDeleteOrganization(organization: OrganizationOData) {
@@ -136,6 +139,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
   }
 
   public onCreateOrganization() {
-    this.dialog.open(CreateOrganizationDialogComponent);
+    const dialogRef = this.dialog.open(CreateOrganizationDialogComponent);
+    dialogRef.componentInstance.tooltipText = this.disabledSupplierFieldTooltip;
   }
 }

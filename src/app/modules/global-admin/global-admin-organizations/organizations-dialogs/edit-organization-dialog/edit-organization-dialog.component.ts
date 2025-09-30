@@ -7,6 +7,8 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
 import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
+import { InfoIconComponent } from 'src/app/shared/components/icons/info-icon.component';
+import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import { adaptShallowOptionTypeFromOData, ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import {
@@ -47,10 +49,13 @@ import { OrganizationsDialogComponentStore } from '../organizations-dialog.compo
     ButtonComponent,
     AsyncPipe,
     CheckboxComponent,
+    TooltipComponent,
+    InfoIconComponent,
   ],
 })
 export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   @Input() organization!: OrganizationOData;
+  @Input() tooltipText: string = '';
 
   public isLoading$ = new BehaviorSubject<boolean>(false);
   public readonly organizationTypeOptions = organizationTypeOptions;

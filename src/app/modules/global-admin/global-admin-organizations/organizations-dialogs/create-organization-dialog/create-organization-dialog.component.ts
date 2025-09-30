@@ -1,5 +1,5 @@
 import { AsyncPipe, NgIf } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationCreateRequestDTO } from 'src/app/api/v2';
 import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
+import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import { ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import {
@@ -26,6 +27,7 @@ import { StandardVerticalContentGridComponent } from '../../../../../shared/comp
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
 import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
 import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
+import { InfoIconComponent } from 'src/app/shared/components/icons/info-icon.component';
 
 @Component({
   selector: 'app-create-organization-dialog',
@@ -45,9 +47,13 @@ import { OrganizationsDialogComponentStore } from '../organizations-dialog.compo
     ButtonComponent,
     AsyncPipe,
     CheckboxComponent,
+    TooltipComponent,
+    InfoIconComponent,
   ],
 })
 export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
+  @Input() tooltipText: string = '';
+
   public readonly organizationTypeOptions = organizationTypeOptions;
   public formGroup = new FormGroup({
     name: new FormControl<string | undefined>(undefined, Validators.required),
