@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeRequestParams {
+export interface PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuidRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2ItContractGlobalItContractTemplateTypesInternalINTERNALService
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType(requestParameters: PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType(requestParameters: PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType(requestParameters: PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType(requestParameters: PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateTypeByOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

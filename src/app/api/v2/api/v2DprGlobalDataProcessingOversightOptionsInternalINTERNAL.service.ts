@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams {
+export interface PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuidRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -162,17 +162,17 @@ export class APIV2DprGlobalDataProcessingOversightOptionsInternalINTERNALService
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuid(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuid(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuid(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuid(requestParameters: PatchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuid.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOptionByOptionuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
