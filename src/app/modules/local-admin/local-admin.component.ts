@@ -88,6 +88,11 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       iconType: 'bulk-create',
       route: AppPath.import,
     },
+    {
+      label: $localize`ISMS leverandører`,
+      iconType: 'multiple-users',
+      route: AppPath.ismsSuppliers,
+    }
   ];
 
   public helpText = '';
