@@ -535,6 +535,10 @@ export class DataProcessingEffects {
               oversightDates: listWithoutSupervision.map((oversightDate) => ({
                 completedAt: oversightDate.completedAt,
                 remark: oversightDate.remark,
+                oversightReportLink: {
+                  url: oversightDate.oversightReportLink?.url ?? undefined,
+                  name: oversightDate.oversightReportLink?.name ?? undefined,
+                },
               })),
               isOversightCompleted:
                 listWithoutSupervision.length === 0
