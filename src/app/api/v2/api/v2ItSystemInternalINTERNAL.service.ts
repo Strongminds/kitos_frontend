@@ -28,7 +28,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuidRequestParams {
+export interface GetManyItSystemInternalV2GetHierarchyRequestParams {
     systemUuid: string;
     organizationUuid: string;
 }
@@ -132,17 +132,17 @@ export class APIV2ItSystemInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuid(requestParameters: GetManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemHierarchyNodeResponseDTO>>;
-    public getManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuid(requestParameters: GetManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemHierarchyNodeResponseDTO>>>;
-    public getManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuid(requestParameters: GetManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemHierarchyNodeResponseDTO>>>;
-    public getManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuid(requestParameters: GetManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyItSystemInternalV2GetHierarchy(requestParameters: GetManyItSystemInternalV2GetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemHierarchyNodeResponseDTO>>;
+    public getManyItSystemInternalV2GetHierarchy(requestParameters: GetManyItSystemInternalV2GetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemHierarchyNodeResponseDTO>>>;
+    public getManyItSystemInternalV2GetHierarchy(requestParameters: GetManyItSystemInternalV2GetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemHierarchyNodeResponseDTO>>>;
+    public getManyItSystemInternalV2GetHierarchy(requestParameters: GetManyItSystemInternalV2GetHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUuid = requestParameters.systemUuid;
         if (systemUuid === null || systemUuid === undefined) {
-            throw new Error('Required parameter systemUuid was null or undefined when calling getManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuid.');
+            throw new Error('Required parameter systemUuid was null or undefined when calling getManyItSystemInternalV2GetHierarchy.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemInternalV2GetHierarchyBySystemuuidAndOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemInternalV2GetHierarchy.');
         }
 
         let localVarHeaders = this.defaultHeaders;
