@@ -56,7 +56,6 @@ export class EditLocalOptionTypeDialogComponent extends BaseComponent implements
     });
 
     if (this.isRoleOptionType()) {
-      console.log('isRoleOptionType');
       this.form.patchValue({
         isExternallyUsed: this.optionTypeItem.isExternallyUsed ?? false,
         externallyUsedDescription: this.optionTypeItem.externallyUsedDescription,
