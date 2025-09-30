@@ -6,6 +6,9 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
+import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
+import { InfoIconComponent } from 'src/app/shared/components/icons/info-icon.component';
+import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import { adaptShallowOptionTypeFromOData, ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import {
@@ -13,6 +16,7 @@ import {
   getOrganizationType,
   OrganizationOData,
   OrganizationType,
+  OrganizationTypeEnum,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
@@ -44,10 +48,14 @@ import { OrganizationsDialogComponentStore } from '../organizations-dialog.compo
     DialogActionsComponent,
     ButtonComponent,
     AsyncPipe,
+    CheckboxComponent,
+    TooltipComponent,
+    InfoIconComponent,
   ],
 })
 export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   @Input() organization!: OrganizationOData;
+  @Input() tooltipText: string = '';
 
   public isLoading$ = new BehaviorSubject<boolean>(false);
   public readonly organizationTypeOptions = organizationTypeOptions;
@@ -56,6 +64,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
+    isSupplier: new FormControl<boolean | undefined>(undefined),
   });
 
   constructor(
@@ -69,12 +78,14 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
 
   override ngOnInit(): void {
     super.ngOnInit();
+    this.formGroup.controls['organizationType'].valueChanges.subscribe(() => this.toggleIsSupplierField());
 
     this.formGroup.patchValue({
       name: this.organization.Name,
       cvr: this.organization.Cvr,
       foreignCountryCode: this.getInitialForeignCountryCodeValue(this.organization.ForeignCountryCode),
       organizationType: getOrganizationType(this.organization.OrganizationType) ?? defaultOrganizationType,
+      isSupplier: this.organization.IsSupplier,
     });
 
     this.actions$
@@ -84,9 +95,25 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       });
   }
 
+  public toggleIsSupplierField() {
+    const controls = this.formGroup.controls;
+    const supplierStateControl = controls['isSupplier'];
+    if (this.enableISMSSupplierField()) {
+      supplierStateControl.setValue(this.organization.IsSupplier);
+      supplierStateControl.enable();
+    } else {
+      supplierStateControl.setValue(undefined);
+      supplierStateControl.disable();
+    }
+  }
+
+  public enableISMSSupplierField() {
+    return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
+  }
+
   public onEditOrganization(): void {
     this.actions$.pipe(ofType(OrganizationActions.patchOrganizationSuccess), first()).subscribe(() => {
-      this.onCancel();
+      this.closeDialog();
     });
 
     const request = this.getRequest();
@@ -94,7 +121,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     this.store.dispatch(OrganizationActions.patchOrganization(request, this.organization.Uuid));
   }
 
-  public onCancel(): void {
+  public closeDialog(): void {
     this.dialogRef.close();
   }
 
@@ -104,12 +131,14 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
 
   private getRequest(): APIOrganizationUpdateRequestDTO {
     const formValue = this.formGroup.value;
+    const isSupplierValue = formValue.isSupplier ?? undefined;
     return {
       name: formValue.name ?? undefined,
       cvr: formValue.cvr ?? undefined,
       type: formValue.organizationType ? mapOrgTypeToDtoType(formValue.organizationType.value) : undefined,
       foreignCountryCodeUuid: formValue.foreignCountryCode?.uuid ?? undefined,
       updateForeignCountryCode: this.foreignCountryCodeHasChange(),
+      isSupplier: this.enableISMSSupplierField() ? isSupplierValue : undefined,
     };
   }
 
@@ -126,7 +155,8 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
       this.hasChange(formValue.name, org.Name) ||
       this.hasChange(formValue.cvr, org.Cvr) ||
       this.foreignCountryCodeHasChange() ||
-      this.hasChange(formValue.organizationType?.name, org.OrganizationType)
+      this.hasChange(formValue.organizationType?.name, org.OrganizationType) ||
+      this.hasChange(formValue.isSupplier, org.IsSupplier)
     );
   }
 

@@ -32,8 +32,10 @@ export class DropdownDialogComponent<T> extends BaseComponent implements OnInit 
   @Input() public dropdownText!: string;
   @Input() public data$!: Observable<T[]>;
   @Input() public valueField = 'value';
+  @Input() public textField = 'name';
   @Input() public successActionType!: string;
   @Input() public errorActionType!: string;
+  @Input() public onOpen?: () => void | undefined = undefined;
   @Output() public save = new EventEmitter<T>();
   @Output() public filterChange = new EventEmitter<string>();
 
@@ -51,6 +53,8 @@ export class DropdownDialogComponent<T> extends BaseComponent implements OnInit 
   }
 
   ngOnInit(): void {
+    if (this.onOpen) this.onOpen();
+
     this.actions$.pipe(ofType(this.successActionType)).subscribe(() => {
       this.dialogRef.close();
     });

@@ -29,10 +29,23 @@
         [data]="countryCodes$ | async"
         data-cy="foreign-country-code"
       ></app-dropdown>
+      <div class="isms-supplier-input-container">
+        <app-checkbox
+        [formGroup]="formGroup"
+        formName="isSupplier"
+        labelPosition="after"
+        text="ISMS leverandør"
+        i18n-text
+      ></app-checkbox>
+      <app-tooltip *ngIf="enableISMSSupplierField() === false" [text]="tooltipText" class="tooltip-margin">
+          <app-info-icon></app-info-icon>
+        </app-tooltip>
+      </div>
+
     </app-standard-vertical-content-grid>
 
     <app-dialog-actions>
-      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+      <app-button buttonStyle="secondary" (buttonClick)="closeDialog()" i18n>Annuller</app-button>
       <app-button (buttonClick)="onEditOrganization()" [disabled]="!canSubmit()" i18n data-cy="edit-org-dialog-button"
         >Gem</app-button
       >
