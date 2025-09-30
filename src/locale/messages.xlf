@@ -5305,23 +5305,47 @@
       <trans-unit id="1502212713118381557" datatype="html">
         <source>Ingen</source>
       </trans-unit>
+      <trans-unit id="478406584518441805" datatype="html">
+        <source>Er du sikker på, at du vil fjerne ISMS leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</source>
+      </trans-unit>
+      <trans-unit id="6390628077096716329" datatype="html">
+        <source>Kunne ikke fjerne ISMS leverandøren</source>
+      </trans-unit>
+      <trans-unit id="2812384018586692723" datatype="html">
+        <source>Kunne ikke hente tilgængelige ISMS leverandører</source>
+      </trans-unit>
+      <trans-unit id="2921955405937404227" datatype="html">
+        <source>ISMS leverandør</source>
+      </trans-unit>
+      <trans-unit id="2633970024634511367" datatype="html">
+        <source>Vælg leverandør</source>
+      </trans-unit>
       <trans-unit id="3816576365360329559" datatype="html">
         <source><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="p-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="Akti"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </source>
       </trans-unit>
-      <trans-unit id="5070899896766404217" datatype="html">
-        <source>Ikke kritisk</source>
+      <trans-unit id="4294821706131293879" datatype="html">
+        <source>ISMS leverandører</source>
       </trans-unit>
-      <trans-unit id="5533383424441473672" datatype="html">
-        <source>Høj</source>
+      <trans-unit id="2046361179748044913" datatype="html">
+        <source>ISMS leverandøren blev tilføjet</source>
       </trans-unit>
-      <trans-unit id="5982496808088686844" datatype="html">
-        <source>Medium</source>
+      <trans-unit id="720072715763564568" datatype="html">
+        <source>ISMS Leverandører</source>
       </trans-unit>
-      <trans-unit id="6572607453095683769" datatype="html">
-        <source>Meget høj</source>
+      <trans-unit id="977445061536403655" datatype="html">
+        <source>Kunne ikke hente ISMS leverandører</source>
       </trans-unit>
-      <trans-unit id="6905265339095064583" datatype="html">
-        <source>Lav</source>
+      <trans-unit id="9113741111737099906" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="an&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="9052722120771694867" datatype="html">
+        <source>Kunne ikke tilføje ISMS leverandøren</source>
+      </trans-unit>
+      <trans-unit id="984734426874401647" datatype="html">
+        <source>Tilføj leverandør</source>
+      </trans-unit>
+      <trans-unit id="7702962993043588389" datatype="html">
+        <source>ISMS leverandøren blev fjernet</source>
       </trans-unit>
     </body>
   </file>

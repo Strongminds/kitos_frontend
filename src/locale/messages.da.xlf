@@ -6977,29 +6977,61 @@
         <source>Ingen</source>
         <target state="new">Ingen</target>
       </trans-unit>
+      <trans-unit id="2921955405937404227" datatype="html">
+        <source>ISMS leverandør</source>
+        <target state="new">ISMS leverandør</target>
+      </trans-unit>
       <trans-unit id="3816576365360329559" datatype="html">
         <source><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="p-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="Akti"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </source>
         <target state="new"><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="p-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="Akti"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </target>
       </trans-unit>
-      <trans-unit id="5070899896766404217" datatype="html">
-        <source>Ikke kritisk</source>
-        <target state="new">Ikke kritisk</target>
+      <trans-unit id="720072715763564568" datatype="html">
+        <source>ISMS Leverandører</source>
+        <target state="new">ISMS Leverandører</target>
       </trans-unit>
-      <trans-unit id="6905265339095064583" datatype="html">
-        <source>Lav</source>
-        <target state="new">Lav</target>
+      <trans-unit id="9113741111737099906" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="an&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="new"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="an&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
       </trans-unit>
-      <trans-unit id="5982496808088686844" datatype="html">
-        <source>Medium</source>
-        <target state="new">Medium</target>
+      <trans-unit id="984734426874401647" datatype="html">
+        <source>Tilføj leverandør</source>
+        <target state="new">Tilføj leverandør</target>
       </trans-unit>
-      <trans-unit id="5533383424441473672" datatype="html">
-        <source>Høj</source>
-        <target state="new">Høj</target>
+      <trans-unit id="2633970024634511367" datatype="html">
+        <source>Vælg leverandør</source>
+        <target state="new">Vælg leverandør</target>
       </trans-unit>
-      <trans-unit id="6572607453095683769" datatype="html">
-        <source>Meget høj</source>
-        <target state="new">Meget høj</target>
+      <trans-unit id="478406584518441805" datatype="html">
+        <source>Er du sikker på, at du vil fjerne ISMS leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</source>
+        <target state="new">Er du sikker på, at du vil fjerne ISMS leverandøren &quot;<x id="PH" equiv-text="$event.name"/>&quot;?</target>
+      </trans-unit>
+      <trans-unit id="4294821706131293879" datatype="html">
+        <source>ISMS leverandører</source>
+        <target state="new">ISMS leverandører</target>
+      </trans-unit>
+      <trans-unit id="2046361179748044913" datatype="html">
+        <source>ISMS leverandøren blev tilføjet</source>
+        <target state="new">ISMS leverandøren blev tilføjet</target>
+      </trans-unit>
+      <trans-unit id="9052722120771694867" datatype="html">
+        <source>Kunne ikke tilføje ISMS leverandøren</source>
+        <target state="new">Kunne ikke tilføje ISMS leverandøren</target>
+      </trans-unit>
+      <trans-unit id="6390628077096716329" datatype="html">
+        <source>Kunne ikke fjerne ISMS leverandøren</source>
+        <target state="new">Kunne ikke fjerne ISMS leverandøren</target>
+      </trans-unit>
+      <trans-unit id="977445061536403655" datatype="html">
+        <source>Kunne ikke hente ISMS leverandører</source>
+        <target state="new">Kunne ikke hente ISMS leverandører</target>
+      </trans-unit>
+      <trans-unit id="2812384018586692723" datatype="html">
+        <source>Kunne ikke hente tilgængelige ISMS leverandører</source>
+        <target state="new">Kunne ikke hente tilgængelige ISMS leverandører</target>
+      </trans-unit>
+      <trans-unit id="7702962993043588389" datatype="html">
+        <source>ISMS leverandøren blev fjernet</source>
+        <target state="new">ISMS leverandøren blev fjernet</target>
       </trans-unit>
     </body>
   </file>
