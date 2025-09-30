@@ -5347,6 +5347,24 @@
       <trans-unit id="7702962993043588389" datatype="html">
         <source>ISMS leverandøren blev fjernet</source>
       </trans-unit>
+      <trans-unit id="3629666201490878672" datatype="html">
+        <source>Kun organisationer af typen &quot;Virksomhed&quot; kan være ISMS leverandører.</source>
+      </trans-unit>
+      <trans-unit id="5070899896766404217" datatype="html">
+        <source>Ikke kritisk</source>
+      </trans-unit>
+      <trans-unit id="5533383424441473672" datatype="html">
+        <source>Høj</source>
+      </trans-unit>
+      <trans-unit id="5982496808088686844" datatype="html">
+        <source>Medium</source>
+      </trans-unit>
+      <trans-unit id="6572607453095683769" datatype="html">
+        <source>Meget høj</source>
+      </trans-unit>
+      <trans-unit id="6905265339095064583" datatype="html">
+        <source>Lav</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
