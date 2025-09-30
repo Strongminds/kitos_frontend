@@ -7,12 +7,12 @@ import {
   LocalAdminOptionTypeItem,
 } from 'src/app/shared/models/options/local-admin-option-type.model';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
+import { ButtonComponent } from '../../buttons/button/button.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from '../../dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { TextBoxComponent } from '../../textbox/textbox.component';
 import { TextAreaComponent } from '../../textarea/textarea.component';
-import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
-import { ButtonComponent } from '../../buttons/button/button.component';
+import { TextBoxComponent } from '../../textbox/textbox.component';
 
 @Component({
   selector: 'app-edit-local-option-type-dialog',
@@ -32,15 +32,13 @@ import { ButtonComponent } from '../../buttons/button/button.component';
 export class EditLocalOptionTypeDialogComponent implements OnInit {
   @Input() optionTypeItem!: LocalAdminOptionTypeItem;
   @Input() optionType!: LocalAdminOptionType;
+  @Input() showExternalUse: boolean = false;
 
   public form = new FormGroup({
     description: new FormControl<string | undefined>(undefined),
   });
 
-  constructor(
-    private dialogRef: MatDialogRef<EditLocalOptionTypeDialogComponent>,
-    private store: Store,
-  ) {}
+  constructor(private dialogRef: MatDialogRef<EditLocalOptionTypeDialogComponent>, private store: Store) {}
 
   public ngOnInit(): void {
     this.form.patchValue({

@@ -60,6 +60,18 @@ export class LocalOptionGridComponent implements OnInit {
       title: $localize`Beskrivelse`,
       hidden: false,
     },
+    {
+      field: 'isExternallyUsed',
+      title: $localize`Bruges eksternt`,
+      hidden: false,
+      style: 'boolean',
+      noFilter: true,
+    },
+    {
+      field: 'externallyUsedDescription',
+      title: $localize`Bruges eksternt beskrivelse`,
+      hidden: false,
+    },
     createGridActionColumn(['edit']),
   ];
 
@@ -74,6 +86,10 @@ export class LocalOptionGridComponent implements OnInit {
           return { ...column, hidden: !this.showWriteAccess };
         case 'description':
           return { ...column, hidden: !this.showDescription };
+        case 'isExternallyUsed':
+          return { ...column, hidden: !this.showExternalUse };
+        case 'externallyUsedDescription':
+          return { ...column, hidden: !this.showExternalUse };
         case 'Actions':
           return { ...column, hidden: !this.showEditButton };
         default:
