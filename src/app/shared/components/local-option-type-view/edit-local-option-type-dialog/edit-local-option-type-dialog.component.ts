@@ -86,6 +86,10 @@ export class EditLocalOptionTypeDialogComponent extends BaseComponent implements
 
     const optionUuid = this.optionTypeItem.uuid;
 
+    if (!this.hasFormChanged()) {
+      return;
+    }
+
     if (this.isRoleOptionType()) {
       const newIsExternallyUsed = this.form.value.isExternallyUsed ?? false;
       const newExternallyUsedDescription = this.form.value.externallyUsedDescription ?? undefined;
@@ -96,15 +100,11 @@ export class EditLocalOptionTypeDialogComponent extends BaseComponent implements
         externallyUsedDescription: newExternallyUsedDescription,
       };
 
-      if (this.hasFormChanged()) {
-        this.store.dispatch(LocalOptionTypeActions.updateRoleOptionType(this.optionType, optionUuid, request));
-      }
+      this.store.dispatch(LocalOptionTypeActions.updateRoleOptionType(this.optionType, optionUuid, request));
     } else {
       const request = { description: newDescription };
 
-      if (this.hasFormChanged()) {
-        this.store.dispatch(LocalOptionTypeActions.uppdateOptionType(this.optionType, optionUuid, request));
-      }
+      this.store.dispatch(LocalOptionTypeActions.uppdateOptionType(this.optionType, optionUuid, request));
     }
 
     this.dialogRef.close();
