@@ -13,6 +13,7 @@ import {
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
+  APIOversightDateDTO,
   APIV2DataProcessingRegistrationInternalINTERNALService,
   APIV2DataProcessingRegistrationService,
   APIV2OrganizationGridInternalINTERNALService,
@@ -526,15 +527,13 @@ export class DataProcessingEffects {
       ofType(DataProcessingActions.removeDataProcessingOversightDate),
       switchMap(({ oversightDateUuid, existingOversightDates }) => {
         const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        const listWithoutSupervision = oversightDates.filter(
-          (oversightDate) => oversightDate.uuid !== oversightDateUuid
-        );
+        const withoutRemovalTarget = removeOversightDateByUuid(oversightDateUuid, oversightDates);
         return of(
           DataProcessingActions.patchDataProcessing({
             oversight: {
-              oversightDates: listWithoutSupervision,
+              oversightDates: withoutRemovalTarget,
               isOversightCompleted:
-                listWithoutSupervision.length === 0
+                withoutRemovalTarget.length === 0
                   ? APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.No
                   : APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
             },
@@ -549,14 +548,11 @@ export class DataProcessingEffects {
       ofType(DataProcessingActions.patchDataProcessingOversightDate),
       switchMap(({ oversightDate, existingOversightDates }) => {
         const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        const listWithoutSupervision = oversightDates.filter(
-          (oversightDateToFilter) => oversightDateToFilter.uuid !== oversightDate.uuid
-        );
-        listWithoutSupervision.push(oversightDate);
+        const withReplacedPatchTarget = replaceOldOversightDateWithNewOne(oversightDate, oversightDates);
         return of(
           DataProcessingActions.patchDataProcessing({
             oversight: {
-              oversightDates: listWithoutSupervision,
+              oversightDates: withReplacedPatchTarget,
               isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
             },
           })
@@ -663,6 +659,19 @@ export class DataProcessingEffects {
       )
     );
   });
+}
+
+function removeOversightDateByUuid(targetUuid: string, oversightDates: APIOversightDateDTO[]) {
+  return oversightDates.filter((oversightDate) => oversightDate.uuid !== targetUuid);
+}
+
+function replaceOldOversightDateWithNewOne(target: APIOversightDateDTO, oversightDates: APIOversightDateDTO[]) {
+  if (!target.uuid) {
+    throw new Error('Target oversight date must have a uuid to be replaced in the list.');
+  }
+  const filtered = removeOversightDateByUuid(target.uuid, oversightDates);
+  filtered.push(target);
+  return filtered;
 }
 
 function mapSubDataProcessors(
