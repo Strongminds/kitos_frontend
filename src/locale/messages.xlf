@@ -5353,14 +5353,11 @@
       <trans-unit id="2498408823952619962" datatype="html">
         <source>Bruges eksternt</source>
       </trans-unit>
-      <trans-unit id="277842849016715073" datatype="html">
-        <source>Beskrivelse til ekstern brug</source>
+      <trans-unit id="6799509974925979977" datatype="html">
+        <source>Beskrivelse af ekstern brug</source>
       </trans-unit>
       <trans-unit id="3629666201490878672" datatype="html">
         <source>Kun organisationer af typen &quot;Virksomhed&quot; kan være ISMS leverandører.</source>
-      </trans-unit>
-      <trans-unit id="5948367748717622115" datatype="html">
-        <source>Bruges eksternt beskrivelse</source>
       </trans-unit>
     </body>
   </file>

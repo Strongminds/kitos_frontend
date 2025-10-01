@@ -7041,17 +7041,13 @@
         <source>Ekstern brug</source>
         <target state="new">Ekstern brug</target>
       </trans-unit>
-      <trans-unit id="277842849016715073" datatype="html">
-        <source>Beskrivelse til ekstern brug</source>
-        <target state="new">Beskrivelse til ekstern brug</target>
+      <trans-unit id="6799509974925979977" datatype="html">
+        <source>Beskrivelse af ekstern brug</source>
+        <target state="new">Beskrivelse af ekstern brug</target>
       </trans-unit>
       <trans-unit id="2498408823952619962" datatype="html">
         <source>Bruges eksternt</source>
         <target state="new">Bruges eksternt</target>
-      </trans-unit>
-      <trans-unit id="5948367748717622115" datatype="html">
-        <source>Bruges eksternt beskrivelse</source>
-        <target state="new">Bruges eksternt beskrivelse</target>
       </trans-unit>
     </body>
   </file>
