@@ -1,6 +1,13 @@
 <app-dialog [title]="title" overflow="none">
   <form [formGroup]="oversightDateFormGroup" (submit)="onSave()">
     <app-standard-vertical-content-grid>
+    <app-edit-url-section
+      title="Link til tilsynsrapport"
+      [simpleLink$]="currentReportLink$"
+      i18n-title
+      (clearClick)="onClearReportLink()"
+      (submitMethod)="onReportLinkChange($event)"
+    ></app-edit-url-section>
       <app-datepicker
         text="Dato"
         [formGroup]="oversightDateFormGroup"
@@ -15,13 +22,6 @@
         data-cy="notes-control"
         i18n-text
       ></app-textarea>
-      <app-edit-url-section
-      title="Link til tilsynsrapport"
-      [simpleLink$]="currentReportLink$"
-      i18n-title
-      (clearClick)="onClearReportLink()"
-      (submitMethod)="onReportLinkChange($event)"
-    ></app-edit-url-section>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
         <app-button
