@@ -4,6 +4,7 @@ import {
   APILocalRegularOptionResponseDTO,
   APILocalRegularOptionUpdateRequestDTO,
   APILocalRoleOptionResponseDTO,
+  APILocalRoleOptionUpdateRequestDTO,
   APIV2DprLocalBasisForTransferTypesInternalINTERNALService,
   APIV2DprLocalCountryOptionTypesInternalINTERNALService,
   APIV2DprLocalDataResponsibleTypesInternalINTERNALService,
@@ -107,7 +108,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
     @Inject(APIV2ItContractLocalRoleOptionTypesInternalINTERNALService)
     private itContractRoleService: APIV2ItContractLocalRoleOptionTypesInternalINTERNALService,
     @Inject(APIV2DprLocalRoleOptionTypesInternalINTERNALService)
-    private dprRoleService: APIV2DprLocalRoleOptionTypesInternalINTERNALService,
+    private dprRoleService: APIV2DprLocalRoleOptionTypesInternalINTERNALService
   ) {}
 
   public ngOnDestroy(): void {
@@ -116,7 +117,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
 
   public getLocalOptions(
     organizationUuid: string,
-    optionType: LocalAdminOptionType,
+    optionType: LocalAdminOptionType
   ): Observable<Array<APILocalRegularOptionResponseDTO>> {
     return this.resolveGetLocalOptionsEndpoint(optionType)(organizationUuid);
   }
@@ -125,16 +126,25 @@ export class LocalAdminOptionTypeService implements OnDestroy {
     optionType: LocalAdminOptionType,
     organizationUuid: string,
     optionUuid: string,
-    request: APILocalRegularOptionUpdateRequestDTO,
+    request: APILocalRegularOptionUpdateRequestDTO
   ) {
     return this.resolvePatchLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid, request);
+  }
+
+  public patchLocalRoleOption(
+    optionType: LocalAdminOptionType,
+    organizationUuid: string,
+    optionUuid: string,
+    request: APILocalRoleOptionUpdateRequestDTO
+  ) {
+    return this.resolvePatchLocalRoleOptionsEndpoint(optionType)(organizationUuid, optionUuid, request);
   }
 
   public patchIsActive(
     optionType: LocalAdminOptionType,
     organizationUuid: string,
     optionUuid: string,
-    isActive: boolean,
+    isActive: boolean
   ) {
     if (isActive) {
       return this.resolveCreateLocalOptionsEndpoint(optionType)(organizationUuid, optionUuid);
@@ -144,7 +154,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
   }
 
   private resolveGetLocalOptionsEndpoint(
-    optionType: LocalAdminOptionType,
+    optionType: LocalAdminOptionType
   ): (organizationUuid: string) => Observable<Array<APILocalRoleOptionResponseDTO>> {
     switch (optionType) {
       //It system regular option types
@@ -168,7 +178,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.archiveTestLocationService.getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(
             {
               organizationUuid,
-            },
+            }
           );
       case 'it-interface_data-type':
         return (organizationUuid) =>
@@ -190,14 +200,14 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.sensitivePersonalDataTypeService.getManyItSystemLocalSensitivePersonalDataTypesInternalV2GetLocalSensitivePersonalDataTypes(
             {
               organizationUuid,
-            },
+            }
           );
       case 'it-system_usage-data-classification-type':
         return (organizationUuid) =>
           this.itSystemCategoryService.getManyItSystemLocalItSystemCategoriesTypesInternalV2GetLocalItSystemCategoryTypes(
             {
               organizationUuid,
-            },
+            }
           );
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid) =>
@@ -253,7 +263,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.agreementElementTypeService.getManyItContractLocalAgreementElementTypesInternalV2GetLocalAgreementElementTypes(
             {
               organizationUuid,
-            },
+            }
           );
       case 'it-contract-extend-types':
         return (organizationUuid) =>
@@ -265,28 +275,28 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.paymentFrequencyTypeService.getManyItContractLocalPaymentFrequencyTypesInternalV2GetLocalPaymentFrequencyTypes(
             {
               organizationUuid,
-            },
+            }
           );
       case 'it-contract-price-regulation-types':
         return (organizationUuid) =>
           this.priceRegulationTypeService.getManyItContractLocalPriceRegulationTypesInternalV2GetLocalPriceRegulationTypes(
             {
               organizationUuid,
-            },
+            }
           );
       case 'it-contract_procurement-strategy-type':
         return (organizationUuid) =>
           this.procurementStrategyTypeService.getManyItContractLocalProcurementStrategyTypesInternalV2GetLocalProcurementStrategyTypes(
             {
               organizationUuid,
-            },
+            }
           );
       case 'it-contract-termination-period-types':
         return (organizationUuid) =>
           this.terminationDeadlineTypeService.getManyItContractLocalTerminationDeadlineTypesInternalV2GetLocalTerminationDeadlineTypes(
             {
               organizationUuid,
-            },
+            }
           );
       case 'it-contract_criticality-type':
         return (organizationUuid) =>
@@ -299,7 +309,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.organiztionUnitRoleService.getManyOrganizationUnitLocalRoleOptionTypesInternalV2GetLocalOrganizationUnitRoles(
             {
               organizationUuid,
-            },
+            }
           );
       case 'it-system-usage':
         return (organizationUuid) =>
@@ -352,7 +362,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'it-interface_data-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -382,7 +392,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'it-system_usage-data-classification-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -391,7 +401,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -409,7 +419,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'data-processing-oversight-option-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -469,7 +479,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'it-contract-extend-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -485,7 +495,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'it-contract-price-regulation-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -494,7 +504,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'it-contract_procurement-strategy-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -503,7 +513,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'it-contract-termination-period-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -512,7 +522,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'it-contract_criticality-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -530,7 +540,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
               organizationUuid,
               optionUuid,
               dto: request,
-            },
+            }
           );
       case 'it-system-usage':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
@@ -560,8 +570,48 @@ export class LocalAdminOptionTypeService implements OnDestroy {
     }
   }
 
+  private resolvePatchLocalRoleOptionsEndpoint(optionType: LocalAdminOptionType) {
+    switch (optionType) {
+      //Role option types
+      case 'organization-unit':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
+          this.organiztionUnitRoleService.patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(
+            {
+              organizationUuid,
+              optionUuid,
+              dto: request,
+            }
+          );
+      case 'it-system-usage':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
+          this.itSystemRoleService.patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+
+      case 'data-processing':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
+          this.dprRoleService.patchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRole({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+
+      case 'it-contract':
+        return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
+          this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
+            organizationUuid,
+            optionUuid,
+            dto: request,
+          });
+      default:
+        throw new Error(`Patch role operation is not supported for ${optionType}`);
+    }
+  }
+
   private resolveCreateLocalOptionsEndpoint(
-    optionType: LocalAdminOptionType,
+    optionType: LocalAdminOptionType
   ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRoleOptionResponseDTO> {
     switch (optionType) {
       //It system regular option types
@@ -589,7 +639,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it-interface_data-type':
         return (organizationUuid, optionUuid) =>
@@ -615,7 +665,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it-system_usage-data-classification-type':
         return (organizationUuid, optionUuid) =>
@@ -623,7 +673,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid, optionUuid) =>
@@ -639,7 +689,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'data-processing-oversight-option-types':
         return (organizationUuid, optionUuid) =>
@@ -679,7 +729,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it-contract-payment-model-types':
         return (organizationUuid, optionUuid) =>
@@ -693,7 +743,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it-contract-extend-types':
         return (organizationUuid, optionUuid) =>
@@ -707,7 +757,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it-contract-price-regulation-types':
         return (organizationUuid, optionUuid) =>
@@ -715,7 +765,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it-contract_procurement-strategy-type':
         return (organizationUuid, optionUuid) =>
@@ -723,7 +773,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it-contract-termination-period-types':
         return (organizationUuid, optionUuid) =>
@@ -731,7 +781,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it-contract_criticality-type':
         return (organizationUuid, optionUuid) =>
@@ -747,7 +797,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               dto: { optionUuid },
-            },
+            }
           );
       case 'it-system-usage':
         return (organizationUuid, optionUuid) =>
@@ -775,7 +825,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
   }
 
   private resolveDeleteLocalOptionsEndpoint(
-    optionType: LocalAdminOptionType,
+    optionType: LocalAdminOptionType
   ): (organizationUuid: string, optionUuid: string) => Observable<APILocalRoleOptionResponseDTO> {
     switch (optionType) {
       //It system regular option types
@@ -803,7 +853,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-interface_data-type':
         return (organizationUuid, optionUuid) =>
@@ -829,7 +879,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-system_usage-data-classification-type':
         return (organizationUuid, optionUuid) =>
@@ -837,7 +887,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid, optionUuid) =>
@@ -853,7 +903,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'data-processing-oversight-option-types':
         return (organizationUuid, optionUuid) =>
@@ -893,7 +943,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-contract-payment-model-types':
         return (organizationUuid, optionUuid) =>
@@ -901,7 +951,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-contract-agreement-element-types':
         return (organizationUuid, optionUuid) =>
@@ -909,7 +959,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-contract-extend-types':
         return (organizationUuid, optionUuid) =>
@@ -917,7 +967,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-contract-payment-frequency-types':
         return (organizationUuid, optionUuid) =>
@@ -925,7 +975,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-contract-price-regulation-types':
         return (organizationUuid, optionUuid) =>
@@ -933,7 +983,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-contract_procurement-strategy-type':
         return (organizationUuid, optionUuid) =>
@@ -941,7 +991,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-contract-termination-period-types':
         return (organizationUuid, optionUuid) =>
@@ -949,7 +999,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-contract_criticality-type':
         return (organizationUuid, optionUuid) =>
@@ -965,7 +1015,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-            },
+            }
           );
       case 'it-system-usage':
         return (organizationUuid, optionUuid) =>

@@ -253,6 +253,7 @@ model/localOptionCreateRequestDTO.ts
 model/localRegularOptionResponseDTO.ts
 model/localRegularOptionUpdateRequestDTO.ts
 model/localRoleOptionResponseDTO.ts
+model/localRoleOptionUpdateRequestDTO.ts
 model/models.ts
 model/multipleConflictsResponseDTO.ts
 model/multipleContractsRequestDto.ts
