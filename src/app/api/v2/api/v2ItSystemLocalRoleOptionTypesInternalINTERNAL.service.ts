@@ -21,9 +21,9 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
-import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
-// @ts-ignore
 import { APILocalRoleOptionResponseDTO } from '../model/aPILocalRoleOptionResponseDTO';
+// @ts-ignore
+import { APILocalRoleOptionUpdateRequestDTO } from '../model/aPILocalRoleOptionUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -47,7 +47,7 @@ export interface GetSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystem
 export interface PatchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRoleRequestParams {
     organizationUuid: string;
     optionUuid: string;
-    dto: APILocalRegularOptionUpdateRequestDTO;
+    dto: APILocalRoleOptionUpdateRequestDTO;
 }
 
 export interface PostSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRoleRequestParams {

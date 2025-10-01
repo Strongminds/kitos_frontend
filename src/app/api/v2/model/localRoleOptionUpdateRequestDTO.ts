@@ -11,24 +11,9 @@
  */
 
 
-export interface APILocalRoleOptionResponseDTO { 
-    writeAccess?: boolean;
+export interface APILocalRoleOptionUpdateRequestDTO { 
     isExternallyUsed?: boolean;
     externallyUsedDescription?: string;
-    isActive?: boolean;
-    isObligatory?: boolean;
-    isLocallyAvailable?: boolean;
-    /**
-     * Extended description of the choice
-     */
-    description: string;
-    /**
-     * UUID which is unique within collection of entities of the same type
-     */
-    uuid: string;
-    /**
-     * Human readable name of the entity
-     */
-    name: string;
+    description?: string;
 }
 
