@@ -57,6 +57,7 @@ import { GridOptionsButtonComponent } from '../../../shared/components/grid-opti
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { gdprCriticalityOptions } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -622,6 +623,16 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: true,
       persistId: 'webAccessibilityNotes',
     },
+    {
+      field: GridFields.GdprCriticality,
+      title: $localize`Kritikalitet`,
+      section: GDPR_SECTION_NAME,
+      hidden: false,
+      persistId: 'gdprCriticality',
+      extraFilter: 'enum',
+      style: 'enum',
+      extraData: gdprCriticalityOptions
+    }
   ];
 
   public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
