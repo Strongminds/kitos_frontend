@@ -20,6 +20,8 @@ export interface APIRoleOptionExtendedResponseDTO {
      * Determines if this role grants write access to the entity through which it has been created
      */
     writeAccess?: boolean;
+    isExternallyAvailable?: boolean;
+    externallyAvailableDescription?: string;
     /**
      * Extended description of the choice
      */
