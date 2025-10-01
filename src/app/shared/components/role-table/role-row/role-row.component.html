@@ -21,8 +21,12 @@
   </td>
   <td>
     <app-paragraph>
-      <app-boolean-circle [value]="rolesDictionary[role.assignment.role.uuid]?.writeAccess || false">
-      </app-boolean-circle>
+      <app-content-with-tooltip
+        [description]="rolesDictionary[role.assignment.role.uuid]?.externallyAvailableDescription"
+      >
+        <app-boolean-circle [value]="rolesDictionary[role.assignment.role.uuid]?.isExternallyAvailable || false">
+        </app-boolean-circle>
+      </app-content-with-tooltip>
     </app-paragraph>
   </td>
   <td>
