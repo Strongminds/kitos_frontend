@@ -2383,8 +2383,8 @@
       <trans-unit id="8213938014016362242" datatype="html">
         <source>Straffedomme og lovovertrædelser</source>
       </trans-unit>
-      <trans-unit id="728102537150960460" datatype="html">
-        <source>Redigér link</source>
+      <trans-unit id="1474930348127983861" datatype="html">
+        <source>Rediger link</source>
       </trans-unit>
       <trans-unit id="2375260419993138758" datatype="html">
         <source>URL</source>
@@ -5373,6 +5373,15 @@
       </trans-unit>
       <trans-unit id="6905265339095064583" datatype="html">
         <source>Lav</source>
+      </trans-unit>
+      <trans-unit id="2368085507469871" datatype="html">
+        <source>Seneste tilsynsrapport</source>
+      </trans-unit>
+      <trans-unit id="503532903699772235" datatype="html">
+        <source>Tilsynsrapport</source>
+      </trans-unit>
+      <trans-unit id="8508960723210934727" datatype="html">
+        <source>Link til tilsynsrapport</source>
       </trans-unit>
     </body>
   </file>
