@@ -5362,6 +5362,9 @@
       <trans-unit id="5948367748717622115" datatype="html">
         <source>Bruges eksternt beskrivelse</source>
       </trans-unit>
+      <trans-unit id="3318988066489296525" datatype="html">
+        <source>Denne rolle anvendes af en ekstern leverandør</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

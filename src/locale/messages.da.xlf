@@ -7053,6 +7053,10 @@
         <source>Bruges eksternt beskrivelse</source>
         <target state="new">Bruges eksternt beskrivelse</target>
       </trans-unit>
+      <trans-unit id="3318988066489296525" datatype="html">
+        <source>Denne rolle anvendes af en ekstern leverandør</source>
+        <target state="new">Denne rolle anvendes af en ekstern leverandør</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
