@@ -861,9 +861,9 @@
         <source>Straffedomme og lovovertrædelser</source>
         <target state="new">Straffedomme og lovovertrædelser</target>
       </trans-unit>
-      <trans-unit id="728102537150960460" datatype="html">
-        <source>Redigér link</source>
-        <target state="new">Redigér link</target>
+      <trans-unit id="1474930348127983861" datatype="html">
+        <source>Rediger link</source>
+        <target state="new">Rediger link</target>
       </trans-unit>
       <trans-unit id="2375260419993138758" datatype="html">
         <source>URL</source>
@@ -7068,6 +7068,18 @@
       <trans-unit id="6572607453095683769" datatype="html">
         <source>Meget høj</source>
         <target state="new">Meget høj</target>
+      </trans-unit>
+      <trans-unit id="503532903699772235" datatype="html">
+        <source>Tilsynsrapport</source>
+        <target state="new">Tilsynsrapport</target>
+      </trans-unit>
+      <trans-unit id="8508960723210934727" datatype="html">
+        <source>Link til tilsynsrapport</source>
+        <target state="new">Link til tilsynsrapport</target>
+      </trans-unit>
+      <trans-unit id="2368085507469871" datatype="html">
+        <source>Seneste tilsynsrapport</source>
+        <target state="new">Seneste tilsynsrapport</target>
       </trans-unit>
     </body>
   </file>

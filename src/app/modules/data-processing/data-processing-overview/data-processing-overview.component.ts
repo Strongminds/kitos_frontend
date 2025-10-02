@@ -110,6 +110,15 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       persistId: 'dpReferenceId',
     },
     {
+      field: GridFields.LatestOversightReportLinkName,
+      title: $localize`Seneste tilsynsrapport`,
+      style: 'title-link',
+      idField: 'LatestOversightReportLink',
+      section: SUPERVISION_SECTION_NAME,
+      hidden: false,
+      persistId: 'latestOversightReport',
+    },
+    {
       field: GridFields.SystemNamesAsCsv,
       title: $localize`IT Systemer`,
       section: CATALOG_SECTION_NAME,
