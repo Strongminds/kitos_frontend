@@ -1,10 +1,10 @@
 <app-standard-vertical-content-grid data-cy="subprocessors-table">
   <app-native-table *ngIf="anyOversightDates$ | async" tableLayout="fixed">
     <thead>
-      <th i18n>Dato for tilsyn</th>
-      <th i18n width="66%">Bemærkninger</th>
-      <th i18n>Tilsynsrapport</th>
-      <th></th>
+      <th i18n width="10%">Dato for tilsyn</th>
+      <th i18n width="50%">Bemærkninger</th>
+      <th i18n width="30%">Tilsynsrapport</th>
+      <th width="10%"></th>
     </thead>
     <tbody>
       <tr *ngFor="let oversightDate of oversightDates$ | async">
