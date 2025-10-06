@@ -56,4 +56,8 @@ export class RoleRowComponent {
   public showExternallyUsedTooltip(rolesDictionary: Dictionary<APIRoleOptionResponseDTO>): boolean {
     return rolesDictionary[this.role.assignment.role.uuid]?.isExternallyAvailable || false;
   }
+
+  public getExternallyUsedDescription(possibleDescription: string | undefined): string {
+    return possibleDescription ? possibleDescription : this.defaultExternallyUsedTooltip;
+  }
 }

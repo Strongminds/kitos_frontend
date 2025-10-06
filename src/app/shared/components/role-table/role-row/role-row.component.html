@@ -24,7 +24,7 @@
       <app-tooltip
         [text]="
           showExternallyUsedTooltip(rolesDictionary)
-            ? rolesDictionary[role.assignment.role.uuid]?.externallyAvailableDescription ?? defaultExternallyUsedTooltip
+            ? getExternallyUsedDescription(rolesDictionary[role.assignment.role.uuid]?.externallyAvailableDescription)
             : ''
         "
       >
