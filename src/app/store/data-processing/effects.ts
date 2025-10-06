@@ -13,6 +13,7 @@ import {
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
+  APIOversightDateDTO,
   APIV2DataProcessingRegistrationInternalINTERNALService,
   APIV2DataProcessingRegistrationService,
   APIV2OrganizationGridInternalINTERNALService,
@@ -54,7 +55,7 @@ export class DataProcessingEffects {
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
     private gridColumnStorageService: GridColumnStorageService,
-    private gridDataCacheService: GridDataCacheService,
+    private gridDataCacheService: GridDataCacheService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -65,9 +66,9 @@ export class DataProcessingEffects {
           .getSingleDataProcessingRegistrationV2GetDataProcessingRegistration({ uuid: dataProcessingUuid })
           .pipe(
             map((dataProcessing) => DataProcessingActions.getDataProcessingSuccess(dataProcessing)),
-            catchError(() => of(DataProcessingActions.getDataProcessingError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.getDataProcessingError()))
+          )
+      )
     );
   });
 
@@ -92,7 +93,7 @@ export class DataProcessingEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments&${fixedOdataString}&$count=true`,
+            `/odata/DataProcessingRegistrationReadModels?organizationUuid=${organizationUuid}&$expand=RoleAssignments&${fixedOdataString}&$count=true`
           )
           .pipe(
             map((data) => {
@@ -103,9 +104,9 @@ export class DataProcessingEffects {
               const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
               return DataProcessingActions.getDataProcessingsSuccess(returnData, total);
             }),
-            catchError(() => of(DataProcessingActions.getDataProcessingsError())),
+            catchError(() => of(DataProcessingActions.getDataProcessingsError()))
           );
-      }),
+      })
     );
   });
 
@@ -124,16 +125,16 @@ export class DataProcessingEffects {
           .getSingleDataProcessingRegistrationGetDataProcessingRegistrationOptionsByUuid({ organizationUuid })
           .pipe(
             map((result) => DataProcessingActions.getDataProcessingOverviewRolesSuccess(result.response.roles)),
-            catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError())),
+            catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
           );
-      }),
+      })
     );
   });
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.updateGridState),
-      switchMap(({ gridState }) => of(DataProcessingActions.getDataProcessings(gridState))),
+      switchMap(({ gridState }) => of(DataProcessingActions.getDataProcessings(gridState)))
     );
   });
 
@@ -143,7 +144,7 @@ export class DataProcessingEffects {
       map(({ gridColumns }) => {
         this.gridColumnStorageService.setColumns(DATA_PROCESSING_COLUMNS_ID, gridColumns);
         return DataProcessingActions.updateGridColumnsSuccess(gridColumns);
-      }),
+      })
     );
   });
 
@@ -156,9 +157,9 @@ export class DataProcessingEffects {
           .deleteSingleDataProcessingRegistrationV2DeleteDataProcessingRegistration({ uuid })
           .pipe(
             map(() => DataProcessingActions.deleteDataProcessingSuccess()),
-            catchError(() => of(DataProcessingActions.deleteDataProcessingError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.deleteDataProcessingError()))
+          )
+      )
     );
   });
 
@@ -171,9 +172,9 @@ export class DataProcessingEffects {
           .postSingleDataProcessingRegistrationV2PostDataProcessingRegistration({ request: { name, organizationUuid } })
           .pipe(
             map(({ uuid }) => DataProcessingActions.createDataProcessingSuccess(uuid, openAfterCreate)),
-            catchError(() => of(DataProcessingActions.createDataProcessingError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.createDataProcessingError()))
+          )
+      )
     );
   });
 
@@ -187,9 +188,9 @@ export class DataProcessingEffects {
           })
           .pipe(
             map((permissions) => DataProcessingActions.getDataProcessingPermissionsSuccess(permissions)),
-            catchError(() => of(DataProcessingActions.getDataProcessingPermissionsError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.getDataProcessingPermissionsError()))
+          )
+      )
     );
   });
 
@@ -202,11 +203,11 @@ export class DataProcessingEffects {
           .getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationCollectionPermissions({ organizationUuid })
           .pipe(
             map((collectionPermissions) =>
-              DataProcessingActions.getDataProcessingCollectionPermissionsSuccess(collectionPermissions),
+              DataProcessingActions.getDataProcessingCollectionPermissionsSuccess(collectionPermissions)
             ),
-            catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.getDataProcessingCollectionPermissionsError()))
+          )
+      )
     );
   });
 
@@ -219,9 +220,9 @@ export class DataProcessingEffects {
           .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({ uuid, request: dataProcessing })
           .pipe(
             map((data) => DataProcessingActions.patchDataProcessingSuccess(data)),
-            catchError(() => of(DataProcessingActions.patchDataProcessingError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.patchDataProcessingError()))
+          )
+      )
     );
   });
 
@@ -237,9 +238,9 @@ export class DataProcessingEffects {
         return of(
           DataProcessingActions.patchDataProcessing({
             general: { transferToInsecureThirdCountries, insecureCountriesSubjectToDataTransferUuids: countryUuids },
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -261,9 +262,9 @@ export class DataProcessingEffects {
               transferToInsecureThirdCountries,
               insecureCountriesSubjectToDataTransferUuids: listWithoutCountry,
             },
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -275,7 +276,7 @@ export class DataProcessingEffects {
         processors.push(processor);
         const processorUuids = processors.map((processor) => processor.uuid);
         return of(DataProcessingActions.patchDataProcessing({ general: { dataProcessorUuids: processorUuids } }));
-      }),
+      })
     );
   });
 
@@ -288,7 +289,7 @@ export class DataProcessingEffects {
           .filter((processor) => processor.uuid !== processorUuid)
           .map((processor) => processor.uuid);
         return of(DataProcessingActions.patchDataProcessing({ general: { dataProcessorUuids: listWithoutProcessor } }));
-      }),
+      })
     );
   });
 
@@ -304,9 +305,9 @@ export class DataProcessingEffects {
         return of(
           DataProcessingActions.patchDataProcessing({
             general: { hasSubDataProcessors, subDataProcessors: mappedSubProcessors },
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -316,7 +317,7 @@ export class DataProcessingEffects {
       switchMap(({ subProcessorUuid, existingSubProcessors }) => {
         const subProcessors = existingSubProcessors ? [...existingSubProcessors] : [];
         const listWithoutSubProcessor = subProcessors.filter(
-          (subprocessor) => subprocessor.dataProcessorOrganization.uuid !== subProcessorUuid,
+          (subprocessor) => subprocessor.dataProcessorOrganization.uuid !== subProcessorUuid
         );
         const mappedSubProcessors = mapSubDataProcessors(listWithoutSubProcessor);
         const hasSubDataProcessors =
@@ -326,9 +327,9 @@ export class DataProcessingEffects {
         return of(
           DataProcessingActions.patchDataProcessing({
             general: { hasSubDataProcessors, subDataProcessors: mappedSubProcessors },
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -339,12 +340,12 @@ export class DataProcessingEffects {
         const subProcessors = existingSubProcessors ? [...existingSubProcessors] : [];
         const listWithoutSubProcessor = subProcessors.filter(
           (subprocessorToFilter) =>
-            subprocessorToFilter.dataProcessorOrganization.uuid !== subprocessor.dataProcessorOrganizationUuid,
+            subprocessorToFilter.dataProcessorOrganization.uuid !== subprocessor.dataProcessorOrganizationUuid
         );
         const mappedSubProcessors = mapSubDataProcessors(listWithoutSubProcessor);
         mappedSubProcessors.push(subprocessor);
         return of(DataProcessingActions.patchDataProcessing({ general: { subDataProcessors: mappedSubProcessors } }));
-      }),
+      })
     );
   });
 
@@ -355,7 +356,7 @@ export class DataProcessingEffects {
         const systemUsageUuids = existingSystemUsageUuids ? [...existingSystemUsageUuids] : [];
         systemUsageUuids.push(systemUsageUuid);
         return of(DataProcessingActions.patchDataProcessing({ systemUsageUuids: systemUsageUuids }));
-      }),
+      })
     );
   });
 
@@ -366,7 +367,7 @@ export class DataProcessingEffects {
         const systemUsageUuids = existingSystemUsageUuids ? [...existingSystemUsageUuids] : [];
         const listWithoutSystemUsage = systemUsageUuids.filter((usage) => usage !== systemUsageUuid);
         return of(DataProcessingActions.patchDataProcessing({ systemUsageUuids: listWithoutSystemUsage }));
-      }),
+      })
     );
   });
 
@@ -386,9 +387,9 @@ export class DataProcessingEffects {
           })
           .pipe(
             map((role) => DataProcessingActions.bulkAddDataProcessingRoleSuccess(role)),
-            catchError(() => of(DataProcessingActions.bulkAddDataProcessingRoleError())),
+            catchError(() => of(DataProcessingActions.bulkAddDataProcessingRoleError()))
           );
-      }),
+      })
     );
   });
 
@@ -403,11 +404,11 @@ export class DataProcessingEffects {
           })
           .pipe(
             map((usage) =>
-              DataProcessingActions.removeDataProcessingRoleSuccess(usage, userUuid, roleUuid, dataProcessingUuid),
+              DataProcessingActions.removeDataProcessingRoleSuccess(usage, userUuid, roleUuid, dataProcessingUuid)
             ),
-            catchError(() => of(DataProcessingActions.removeDataProcessingRoleError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.removeDataProcessingRoleError()))
+          )
+      )
     );
   });
 
@@ -424,13 +425,13 @@ export class DataProcessingEffects {
             newExternalReference.externalReference,
             externalReferences,
             dprUuid,
-            'data-processing-registration',
+            'data-processing-registration'
           )
           .pipe(
             map((response) => DataProcessingActions.addExternalReferenceSuccess(response)),
-            catchError(() => of(DataProcessingActions.addExternalReferenceError())),
+            catchError(() => of(DataProcessingActions.addExternalReferenceError()))
           );
-      }),
+      })
     );
   });
 
@@ -447,13 +448,13 @@ export class DataProcessingEffects {
             editData,
             externalReferences,
             dprUuid,
-            'data-processing-registration',
+            'data-processing-registration'
           )
           .pipe(
             map((response) => DataProcessingActions.editExternalReferenceSuccess(response)),
-            catchError(() => of(DataProcessingActions.editExternalReferenceError())),
+            catchError(() => of(DataProcessingActions.editExternalReferenceError()))
           );
-      }),
+      })
     );
   });
 
@@ -470,13 +471,13 @@ export class DataProcessingEffects {
             referenceUuid.referenceUuid,
             externalReferences,
             dprUuid,
-            'data-processing-registration',
+            'data-processing-registration'
           )
           .pipe(
             map((response) => DataProcessingActions.removeExternalReferenceSuccess(response)),
-            catchError(() => of(DataProcessingActions.removeExternalReferenceError())),
+            catchError(() => of(DataProcessingActions.removeExternalReferenceError()))
           );
-      }),
+      })
     );
   });
 
@@ -488,7 +489,7 @@ export class DataProcessingEffects {
         oversights.push(oversight);
         const request = { oversight: { oversightOptionUuids: oversights.map((option) => option.uuid) } };
         return of(DataProcessingActions.patchDataProcessing(request));
-      }),
+      })
     );
   });
 
@@ -500,7 +501,7 @@ export class DataProcessingEffects {
         const listWithoutOversight = oversights.filter((oversight) => oversight.uuid !== oversightUuid);
         const request = { oversight: { oversightOptionUuids: listWithoutOversight.map((option) => option.uuid) } };
         return of(DataProcessingActions.patchDataProcessing(request));
-      }),
+      })
     );
   });
 
@@ -517,7 +518,7 @@ export class DataProcessingEffects {
           },
         };
         return of(DataProcessingActions.patchDataProcessing(request));
-      }),
+      })
     );
   });
 
@@ -526,24 +527,19 @@ export class DataProcessingEffects {
       ofType(DataProcessingActions.removeDataProcessingOversightDate),
       switchMap(({ oversightDateUuid, existingOversightDates }) => {
         const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        const listWithoutSupervision = oversightDates.filter(
-          (oversightDate) => oversightDate.uuid !== oversightDateUuid,
-        );
+        const withoutRemovalTarget = removeOversightDateByUuid(oversightDateUuid, oversightDates);
         return of(
           DataProcessingActions.patchDataProcessing({
             oversight: {
-              oversightDates: listWithoutSupervision.map((oversightDate) => ({
-                completedAt: oversightDate.completedAt,
-                remark: oversightDate.remark,
-              })),
+              oversightDates: withoutRemovalTarget,
               isOversightCompleted:
-                listWithoutSupervision.length === 0
+                withoutRemovalTarget.length === 0
                   ? APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.No
                   : APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
             },
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -552,22 +548,16 @@ export class DataProcessingEffects {
       ofType(DataProcessingActions.patchDataProcessingOversightDate),
       switchMap(({ oversightDate, existingOversightDates }) => {
         const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        const listWithoutSupervision = oversightDates.filter(
-          (oversightDateToFilter) => oversightDateToFilter.uuid !== oversightDate.uuid,
-        );
-        listWithoutSupervision.push(oversightDate);
+        const withReplacedPatchTarget = replaceOldOversightDateWithNewOne(oversightDate, oversightDates);
         return of(
           DataProcessingActions.patchDataProcessing({
             oversight: {
-              oversightDates: listWithoutSupervision.map((oversightDate) => ({
-                completedAt: oversightDate.completedAt,
-                remark: oversightDate.remark,
-              })),
+              oversightDates: withReplacedPatchTarget,
               isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
             },
-          }),
+          })
         );
-      }),
+      })
     );
   });
 
@@ -586,9 +576,9 @@ export class DataProcessingEffects {
           })
           .pipe(
             map(() => DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationSuccess()),
-            catchError(() => of(DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.saveOrganizationalDataProcessingColumnConfigurationError()))
+          )
+      )
     );
   });
 
@@ -604,9 +594,9 @@ export class DataProcessingEffects {
           })
           .pipe(
             map(() => DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationSuccess()),
-            catchError(() => of(DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.deleteOrganizationalDataProcessingColumnConfigurationError()))
+          )
+      )
     );
   });
 
@@ -648,7 +638,7 @@ export class DataProcessingEffects {
         if (!configColumns) return DataProcessingActions.resetToOrganizationDataProcessingColumnConfigurationError();
         const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
         return DataProcessingActions.updateGridColumns(newColumns);
-      }),
+      })
     );
   });
 
@@ -664,15 +654,28 @@ export class DataProcessingEffects {
           })
           .pipe(
             map((response) => DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationSuccess(response)),
-            catchError(() => of(DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationError())),
-          ),
-      ),
+            catchError(() => of(DataProcessingActions.initializeDataProcessingLastSeenGridConfigurationError()))
+          )
+      )
     );
   });
 }
 
+function removeOversightDateByUuid(targetUuid: string, oversightDates: APIOversightDateDTO[]) {
+  return oversightDates.filter((oversightDate) => oversightDate.uuid !== targetUuid);
+}
+
+function replaceOldOversightDateWithNewOne(target: APIOversightDateDTO, oversightDates: APIOversightDateDTO[]) {
+  if (!target.uuid) {
+    throw new Error('Target oversight date must have a uuid to be replaced in the list.');
+  }
+  const filtered = removeOversightDateByUuid(target.uuid, oversightDates);
+  filtered.push(target);
+  return filtered;
+}
+
 function mapSubDataProcessors(
-  subProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[],
+  subProcessors: APIDataProcessorRegistrationSubDataProcessorResponseDTO[]
 ): APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO[] {
   return subProcessors.map(
     (subprocessor) =>
@@ -681,7 +684,7 @@ function mapSubDataProcessors(
         basisForTransferUuid: subprocessor.basisForTransfer?.uuid,
         transferToInsecureThirdCountry: subprocessor.transferToInsecureThirdCountry,
         insecureThirdCountrySubjectToDataProcessingUuid: subprocessor.insecureThirdCountrySubjectToDataProcessing?.uuid,
-      }) as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
+      } as APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO)
   );
 }
 
@@ -692,7 +695,7 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     fixedOdataString = fixedOdataString
       .replace(
         new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
-        `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`,
+        `RoleAssignments/any(c: $1c/UserFullName$2 and c/RoleId eq ${role.id})`
       )
       .replace(/BasisForTransferUuid eq '([\w-]+)'/, 'BasisForTransferUuid eq $1')
       .replace(/DataResponsibleUuid eq '([\w-]+)'/, 'DataResponsibleUuid eq $1')
@@ -702,15 +705,15 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
   fixedOdataString = fixedOdataString
     .replace(
       /TransferToInsecureThirdCountries eq 'Undecided'/,
-      "(TransferToInsecureThirdCountries eq 'Undecided' or TransferToInsecureThirdCountries eq null)",
+      "(TransferToInsecureThirdCountries eq 'Undecided' or TransferToInsecureThirdCountries eq null)"
     )
     .replace(
       /IsAgreementConcluded eq 'UNDECIDED'/,
-      "(IsAgreementConcluded eq 'UNDECIDED' or IsAgreementConcluded eq null)",
+      "(IsAgreementConcluded eq 'UNDECIDED' or IsAgreementConcluded eq null)"
     )
     .replace(
       /IsOversightCompleted eq 'Undecided'/,
-      "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)",
+      "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)"
     )
     .replace(/ResponsibleOrgUnitName eq '([\w-]+)'/, 'ResponsibleOrgUnitUuid eq $1');
 

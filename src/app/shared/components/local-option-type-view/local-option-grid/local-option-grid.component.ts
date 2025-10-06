@@ -69,7 +69,7 @@ export class LocalOptionGridComponent implements OnInit {
     },
     {
       field: 'externallyUsedDescription',
-      title: $localize`Bruges eksternt beskrivelse`,
+      title: $localize`Beskrivelse af ekstern brug`,
       hidden: false,
     },
     createGridActionColumn(['edit']),

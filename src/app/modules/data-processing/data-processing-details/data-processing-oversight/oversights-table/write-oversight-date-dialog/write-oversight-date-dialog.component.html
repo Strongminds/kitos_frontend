@@ -1,6 +1,13 @@
 <app-dialog [title]="title" overflow="none">
   <form [formGroup]="oversightDateFormGroup" (submit)="onSave()">
     <app-standard-vertical-content-grid>
+    <app-edit-url-section
+      title="Link til tilsynsrapport"
+      [simpleLink$]="currentReportLink$"
+      i18n-title
+      (clearClick)="onClearReportLink()"
+      (submitMethod)="onReportLinkChange($event)"
+    ></app-edit-url-section>
       <app-datepicker
         text="Dato"
         [formGroup]="oversightDateFormGroup"

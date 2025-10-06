@@ -15,6 +15,7 @@ export class ExternalPageLinkComponent implements OnInit {
   @Input() public url: string | undefined = '';
   @Input() public linkFontSize: LinkFontSizes = 'medium';
   @Input() public title?: string;
+  @Input() public placeholderName: string = $localize`Læs mere`;
   public readonly invalidLinkPrefix = $localize`Ugyldigt link: `;
 
   public isValidLink = false;
@@ -24,7 +25,7 @@ export class ExternalPageLinkComponent implements OnInit {
 
     if (!this.title) {
       if (this.isValidLink) {
-        this.title = $localize`Læs mere`;
+        this.title = this.placeholderName;
       }
     }
   }

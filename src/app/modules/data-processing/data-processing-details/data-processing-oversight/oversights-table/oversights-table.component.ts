@@ -24,6 +24,7 @@ import { TrashcanIconComponent } from '../../../../../shared/components/icons/tr
 import { EmptyStateComponent } from '../../../../../shared/components/empty-states/empty-state.component';
 import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
+import { ExternalPageLinkComponent } from 'src/app/shared/components/external-page-link/external-page-link.component';
 
 @Component({
   selector: 'app-oversights-table',
@@ -43,6 +44,7 @@ import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
     CollectionExtensionButtonComponent,
     AsyncPipe,
     AppDatePipe,
+    ExternalPageLinkComponent,
   ],
 })
 export class OversightsTableComponent extends BaseComponent {

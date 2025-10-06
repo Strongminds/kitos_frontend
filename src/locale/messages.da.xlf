@@ -861,9 +861,9 @@
         <source>Straffedomme og lovovertrædelser</source>
         <target state="new">Straffedomme og lovovertrædelser</target>
       </trans-unit>
-      <trans-unit id="728102537150960460" datatype="html">
-        <source>Redigér link</source>
-        <target state="new">Redigér link</target>
+      <trans-unit id="1474930348127983861" datatype="html">
+        <source>Rediger link</source>
+        <target state="new">Rediger link</target>
       </trans-unit>
       <trans-unit id="2375260419993138758" datatype="html">
         <source>URL</source>
@@ -7041,17 +7041,45 @@
         <source>Ekstern brug</source>
         <target state="new">Ekstern brug</target>
       </trans-unit>
-      <trans-unit id="277842849016715073" datatype="html">
-        <source>Beskrivelse til ekstern brug</source>
-        <target state="new">Beskrivelse til ekstern brug</target>
+      <trans-unit id="6799509974925979977" datatype="html">
+        <source>Beskrivelse af ekstern brug</source>
+        <target state="new">Beskrivelse af ekstern brug</target>
       </trans-unit>
       <trans-unit id="2498408823952619962" datatype="html">
         <source>Bruges eksternt</source>
         <target state="new">Bruges eksternt</target>
       </trans-unit>
-      <trans-unit id="5948367748717622115" datatype="html">
-        <source>Bruges eksternt beskrivelse</source>
-        <target state="new">Bruges eksternt beskrivelse</target>
+      <trans-unit id="5070899896766404217" datatype="html">
+        <source>Ikke kritisk</source>
+        <target state="new">Ikke kritisk</target>
+      </trans-unit>
+      <trans-unit id="6905265339095064583" datatype="html">
+        <source>Lav</source>
+        <target state="new">Lav</target>
+      </trans-unit>
+      <trans-unit id="5982496808088686844" datatype="html">
+        <source>Medium</source>
+        <target state="new">Medium</target>
+      </trans-unit>
+      <trans-unit id="5533383424441473672" datatype="html">
+        <source>Høj</source>
+        <target state="new">Høj</target>
+      </trans-unit>
+      <trans-unit id="6572607453095683769" datatype="html">
+        <source>Meget høj</source>
+        <target state="new">Meget høj</target>
+      </trans-unit>
+      <trans-unit id="503532903699772235" datatype="html">
+        <source>Tilsynsrapport</source>
+        <target state="new">Tilsynsrapport</target>
+      </trans-unit>
+      <trans-unit id="8508960723210934727" datatype="html">
+        <source>Link til tilsynsrapport</source>
+        <target state="new">Link til tilsynsrapport</target>
+      </trans-unit>
+      <trans-unit id="2368085507469871" datatype="html">
+        <source>Seneste tilsynsrapport</source>
+        <target state="new">Seneste tilsynsrapport</target>
       </trans-unit>
       <trans-unit id="3318988066489296525" datatype="html">
         <source>Denne rolle anvendes af en ekstern leverandør</source>

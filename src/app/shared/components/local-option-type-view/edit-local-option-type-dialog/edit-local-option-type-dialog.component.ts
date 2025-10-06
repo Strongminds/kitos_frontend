@@ -56,27 +56,7 @@ export class EditLocalOptionTypeDialogComponent extends BaseComponent implements
     });
 
     if (this.isRoleOptionType()) {
-      this.form.patchValue({
-        isExternallyUsed: this.optionTypeItem.isExternallyUsed ?? false,
-        externallyUsedDescription: this.optionTypeItem.externallyUsedDescription,
-      });
-
-      this.subscriptions.add(
-        this.form.controls.isExternallyUsed.valueChanges.subscribe((isExternallyUsed) => {
-          if (isExternallyUsed) {
-            this.form.controls.externallyUsedDescription.enable();
-          } else {
-            this.form.controls.externallyUsedDescription.disable();
-            this.form.controls.externallyUsedDescription.setValue(undefined);
-          }
-        })
-      );
-
-      // Set initial state
-      const initialExternallyUsed = this.form.value.isExternallyUsed;
-      if (!initialExternallyUsed) {
-        this.form.controls.externallyUsedDescription.disable();
-      }
+      this.setupRoleFields();
     }
   }
 
@@ -119,6 +99,31 @@ export class EditLocalOptionTypeDialogComponent extends BaseComponent implements
 
   public disableSaveButton(): boolean {
     return !this.form.valid || !this.hasFormChanged();
+  }
+
+  private setupRoleFields() {
+    this.form.patchValue({
+      isExternallyUsed: this.optionTypeItem.isExternallyUsed ?? false,
+      externallyUsedDescription: this.optionTypeItem.externallyUsedDescription,
+    });
+    const controls = this.form.controls;
+
+    this.subscriptions.add(
+      controls.isExternallyUsed.valueChanges.subscribe((isExternallyUsed) => {
+        if (isExternallyUsed) {
+          controls.externallyUsedDescription.enable();
+        } else {
+          controls.externallyUsedDescription.disable();
+          controls.externallyUsedDescription.setValue(undefined);
+        }
+      })
+    );
+
+    // Set initial state
+    const initialExternallyUsed = controls.isExternallyUsed.value;
+    if (!initialExternallyUsed) {
+      controls.externallyUsedDescription.disable();
+    }
   }
 
   private hasFormChanged(): boolean {

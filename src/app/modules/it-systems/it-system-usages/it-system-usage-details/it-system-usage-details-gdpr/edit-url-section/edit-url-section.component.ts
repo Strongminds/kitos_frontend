@@ -3,7 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { hasOpenDialogs } from 'src/app/shared/helpers/dialog.helpers';
+import { hasOpenDialogOf } from 'src/app/shared/helpers/dialog.helpers';
 import { validateUrl } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { LinkTextboxComponent } from '../../../../../../shared/components/link-textbox/link-textbox.component';
@@ -28,7 +28,7 @@ export class EditUrlSectionComponent extends BaseComponent {
   }
 
   public openDirectoryUrlDialog(simpleLink?: SimpleLink | undefined) {
-    if (hasOpenDialogs(this.dialog)) return;
+    if (hasOpenDialogOf(this.dialog, EditUrlDialogComponent)) return;
 
     const dialog = this.dialog.open(EditUrlDialogComponent);
     const dialogInstance = dialog.componentInstance;
