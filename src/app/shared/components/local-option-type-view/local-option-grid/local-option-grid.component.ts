@@ -54,6 +54,7 @@ export class LocalOptionGridComponent implements OnInit {
       hidden: false,
       style: 'boolean',
       noFilter: true,
+      width: 120,
     },
     {
       field: 'description',
@@ -66,6 +67,7 @@ export class LocalOptionGridComponent implements OnInit {
       hidden: false,
       style: 'boolean',
       noFilter: true,
+      width: 120,
     },
     {
       field: 'externallyUsedDescription',
