@@ -27,7 +27,6 @@ import { StandardVerticalContentGridComponent } from '../../../../../shared/comp
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
 import { GlobalAdminOrganizationsDialogBaseComponent } from '../global-admin-organizations-dialog-base.component';
 import { OrganizationsDialogComponentStore } from '../organizations-dialog.component-store';
-import { InfoIconComponent } from 'src/app/shared/components/icons/info-icon.component';
 
 @Component({
   selector: 'app-create-organization-dialog',
@@ -48,7 +47,6 @@ import { InfoIconComponent } from 'src/app/shared/components/icons/info-icon.com
     AsyncPipe,
     CheckboxComponent,
     TooltipComponent,
-    InfoIconComponent,
   ],
 })
 export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
