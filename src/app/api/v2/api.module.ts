@@ -9,6 +9,7 @@ import { APIV2DataProcessingRegistrationBasisForTransferTypeService } from './ap
 import { APIV2DataProcessingRegistrationCountryTypeService } from './api/v2DataProcessingRegistrationCountryType.service';
 import { APIV2DataProcessingRegistrationDataResponsibleTypeService } from './api/v2DataProcessingRegistrationDataResponsibleType.service';
 import { APIV2DataProcessingRegistrationInternalINTERNALService } from './api/v2DataProcessingRegistrationInternalINTERNAL.service';
+import { APIV2DataProcessingRegistrationOversightDatesService } from './api/v2DataProcessingRegistrationOversightDates.service';
 import { APIV2DataProcessingRegistrationOversightTypeService } from './api/v2DataProcessingRegistrationOversightType.service';
 import { APIV2DataProcessingRegistrationRoleTypeService } from './api/v2DataProcessingRegistrationRoleType.service';
 import { APIV2DeltaFeedService } from './api/v2DeltaFeed.service';
