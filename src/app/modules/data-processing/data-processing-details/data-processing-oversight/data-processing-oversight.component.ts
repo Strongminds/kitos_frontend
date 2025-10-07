@@ -2,6 +2,7 @@ import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
 import {
@@ -126,7 +127,12 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     this.oversightOptionsEnabled$,
   ]);
 
-  constructor(private store: Store, private notificationService: NotificationService, private dialog: MatDialog) {
+  constructor(
+    private store: Store,
+    private notificationService: NotificationService,
+    private dialog: MatDialog,
+    private actions$: Actions
+  ) {
     super();
   }
 
@@ -196,10 +202,10 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
         .subscribe(([result, oversightOptions]) => {
           if (result === true) {
             this.store.dispatch(
-              DataProcessingActions.removeDataProcessingOversightOption(oversightUuid, oversightOptions),
+              DataProcessingActions.removeDataProcessingOversightOption(oversightUuid, oversightOptions)
             );
           }
-        }),
+        })
     );
   }
 }
