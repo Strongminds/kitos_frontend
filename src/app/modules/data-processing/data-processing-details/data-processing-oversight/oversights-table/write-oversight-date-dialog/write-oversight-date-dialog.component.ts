@@ -154,8 +154,11 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
       this.store.dispatch(
         DataProcessingActions.addDataProcessingOversightDate({
           ...request,
+          // The type cast to string is safe here because request.completedAt is assigned from
+          // this.oversightDateFormGroup.value.date!.toISOString(), which always returns a string.
+          // The cast is needed to satisfy the type requirement of the action creator.
           completedAt: request.completedAt as string,
-        }) //cast as string to satisfy type requirement
+        })
       );
     }
   }
