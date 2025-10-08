@@ -196,10 +196,10 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
         .subscribe(([result, oversightOptions]) => {
           if (result === true) {
             this.store.dispatch(
-              DataProcessingActions.removeDataProcessingOversightOption(oversightUuid, oversightOptions),
+              DataProcessingActions.removeDataProcessingOversightOption(oversightUuid, oversightOptions)
             );
           }
-        }),
+        })
     );
   }
 }

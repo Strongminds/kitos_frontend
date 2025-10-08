@@ -5,16 +5,16 @@ import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationGeneralDataWriteRequestDTO,
-  APIDataProcessingRegistrationOversightWriteRequestDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
   APIOversightDateDTO,
   APIV2DataProcessingRegistrationInternalINTERNALService,
+  APIV2DataProcessingRegistrationOversightDatesService,
   APIV2DataProcessingRegistrationService,
   APIV2OrganizationGridInternalINTERNALService,
 } from 'src/app/api/v2';
@@ -55,7 +55,9 @@ export class DataProcessingEffects {
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
     private gridColumnStorageService: GridColumnStorageService,
-    private gridDataCacheService: GridDataCacheService
+    private gridDataCacheService: GridDataCacheService,
+    @Inject(APIV2DataProcessingRegistrationOversightDatesService)
+    private oversightDateService: APIV2DataProcessingRegistrationOversightDatesService
   ) {}
 
   getDataProcessing$ = createEffect(() => {
@@ -508,16 +510,17 @@ export class DataProcessingEffects {
   addDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.addDataProcessingOversightDate),
-      switchMap(({ oversightDate, existingOversightDates }) => {
-        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        oversightDates.push(oversightDate);
-        const request = {
-          oversight: {
-            oversightDates: oversightDates,
-            isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
-          },
-        };
-        return of(DataProcessingActions.patchDataProcessing(request));
+      combineLatestWith(this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      switchMap(([{ oversightDate }, dprUuid]) => {
+        return this.oversightDateService
+          .postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate({
+            uuid: dprUuid,
+            request: oversightDate,
+          })
+          .pipe(
+            map((response) => DataProcessingActions.addDataProcessingOversightDateSuccess(response)),
+            catchError(() => of(DataProcessingActions.addDataProcessingOversightDateError()))
+          );
       })
     );
   });
@@ -525,20 +528,17 @@ export class DataProcessingEffects {
   removeDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.removeDataProcessingOversightDate),
-      switchMap(({ oversightDateUuid, existingOversightDates }) => {
-        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        const withoutRemovalTarget = removeOversightDateByUuid(oversightDateUuid, oversightDates);
-        return of(
-          DataProcessingActions.patchDataProcessing({
-            oversight: {
-              oversightDates: withoutRemovalTarget,
-              isOversightCompleted:
-                withoutRemovalTarget.length === 0
-                  ? APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.No
-                  : APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
-            },
+      combineLatestWith(this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      switchMap(([{ oversightDateUuid }, dprUuid]) => {
+        return this.oversightDateService
+          .deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDate({
+            uuid: dprUuid,
+            oversightDateUuid,
           })
-        );
+          .pipe(
+            map((response) => DataProcessingActions.removeDataProcessingOversightDateSuccess(oversightDateUuid)),
+            catchError(() => of(DataProcessingActions.removeDataProcessingOversightDateError()))
+          );
       })
     );
   });
@@ -546,17 +546,18 @@ export class DataProcessingEffects {
   patchDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.patchDataProcessingOversightDate),
-      switchMap(({ oversightDate, existingOversightDates }) => {
-        const oversightDates = existingOversightDates ? [...existingOversightDates] : [];
-        const withReplacedPatchTarget = replaceOldOversightDateWithNewOne(oversightDate, oversightDates);
-        return of(
-          DataProcessingActions.patchDataProcessing({
-            oversight: {
-              oversightDates: withReplacedPatchTarget,
-              isOversightCompleted: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum.Yes,
-            },
+      combineLatestWith(this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      switchMap(([{ oversightDate, oversightDateUuid }, dprUuid]) => {
+        return this.oversightDateService
+          .patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate({
+            uuid: dprUuid,
+            oversightDateUuid,
+            request: oversightDate,
           })
-        );
+          .pipe(
+            map((response) => DataProcessingActions.patchDataProcessingOversightDateSuccess(response)),
+            catchError(() => of(DataProcessingActions.patchDataProcessingOversightDateError()))
+          );
       })
     );
   });
