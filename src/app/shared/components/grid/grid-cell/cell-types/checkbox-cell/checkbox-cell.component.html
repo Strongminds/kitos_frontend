@@ -10,8 +10,8 @@
   <ng-container *ngIf="column.idField">
     <app-usage-proxy-checkbox
       *ngIf="column.entityType === 'it-system'"
-      [checked]="dataItem | searchProperty: column.field"
-      [disabled]="column.permissionsField ? getProperty(column.permissionsField) !== true || !createPermission : false"
+      [checked]="dataItem | searchProperty : column.field"
+      [disabled]="getUsageDisabledState()"
       [entityUuid]="getProperty(column.idField)"
       (attemptChange)="onCheckboxChange($event)"
     ></app-usage-proxy-checkbox>
