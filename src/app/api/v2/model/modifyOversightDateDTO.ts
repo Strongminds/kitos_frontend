@@ -12,8 +12,7 @@
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
-export interface APIOversightDateDTO { 
-    uuid?: string;
+export interface APIModifyOversightDateDTO { 
     /**
      * Date of oversight completion
      */

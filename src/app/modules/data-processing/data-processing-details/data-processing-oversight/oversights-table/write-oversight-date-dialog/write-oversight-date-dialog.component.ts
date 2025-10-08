@@ -3,7 +3,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, distinctUntilChanged, first } from 'rxjs';
+import { BehaviorSubject, distinctUntilChanged } from 'rxjs';
 import { APIOversightDateDTO } from 'src/app/api/v2';
 import { EditUrlDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
 import { EditUrlSectionComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-section/edit-url-section.component';
@@ -12,7 +12,6 @@ import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { findDialogInstanceOf } from 'src/app/shared/helpers/dialog.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
-import { selectDataProcessingOversightDates } from 'src/app/store/data-processing/selectors';
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
 import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -80,15 +79,29 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     }
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingSuccess)).subscribe(() => {
-        this.onCancel();
-      })
+      this.actions$
+        .pipe(
+          ofType(
+            DataProcessingActions.patchDataProcessingOversightDateSuccess,
+            DataProcessingActions.addDataProcessingOversightDateSuccess
+          )
+        )
+        .subscribe(() => {
+          this.onCancel();
+        })
     );
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(DataProcessingActions.patchDataProcessingError)).subscribe(() => {
-        this.isBusy = false;
-      })
+      this.actions$
+        .pipe(
+          ofType(
+            DataProcessingActions.patchDataProcessingOversightDateError,
+            DataProcessingActions.addDataProcessingOversightDateError
+          )
+        )
+        .subscribe(() => {
+          this.isBusy = false;
+        })
     );
 
     this.subscriptions.add(
@@ -135,21 +148,19 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
       },
     };
 
-    this.store
-      .select(selectDataProcessingOversightDates)
-      .pipe(first())
-      .subscribe((oversightDates) => {
-        if (this.isEdit) {
-          this.store.dispatch(
-            DataProcessingActions.patchDataProcessingOversightDate(
-              { ...request, uuid: this.oversightDate?.uuid },
-              oversightDates
-            )
-          );
-        } else {
-          this.store.dispatch(DataProcessingActions.addDataProcessingOversightDate(request, oversightDates));
-        }
-      });
+    if (this.isEdit && this.oversightDate?.uuid) {
+      this.store.dispatch(DataProcessingActions.patchDataProcessingOversightDate(this.oversightDate?.uuid, request));
+    } else {
+      this.store.dispatch(
+        DataProcessingActions.addDataProcessingOversightDate({
+          ...request,
+          // The type cast to string is safe here because request.completedAt is assigned from
+          // this.oversightDateFormGroup.value.date!.toISOString(), which always returns a string.
+          // The cast is needed to satisfy the type requirement of the action creator.
+          completedAt: request.completedAt as string,
+        })
+      );
+    }
   }
 
   public onCancel() {
