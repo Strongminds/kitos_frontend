@@ -6313,9 +6313,9 @@
         <source>50-100</source>
         <target state="new">50-100</target>
       </trans-unit>
-      <trans-unit id="1915808090055857753" datatype="html">
-        <source>&gt;100</source>
-        <target state="new">&gt;100</target>
+      <trans-unit id="6548617905005677059" datatype="html">
+        <source>&gt;500</source>
+        <target state="new">&gt;500</target>
       </trans-unit>
       <trans-unit id="4766365470163586672" datatype="html">
         <source>Den markerede kontrakt er inaktiv</source>
@@ -7084,6 +7084,10 @@
       <trans-unit id="3318988066489296525" datatype="html">
         <source>Denne rolle anvendes af en ekstern leverandør</source>
         <target state="new">Denne rolle anvendes af en ekstern leverandør</target>
+      </trans-unit>
+      <trans-unit id="414753972225312220" datatype="html">
+        <source>100-500</source>
+        <target state="new">100-500</target>
       </trans-unit>
     </body>
   </file>

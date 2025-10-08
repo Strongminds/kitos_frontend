@@ -4792,8 +4792,8 @@
       <trans-unit id="3143168575358371654" datatype="html">
         <source>Omstrukturer</source>
       </trans-unit>
-      <trans-unit id="1915808090055857753" datatype="html">
-        <source>&gt;100</source>
+      <trans-unit id="6548617905005677059" datatype="html">
+        <source>&gt;500</source>
       </trans-unit>
       <trans-unit id="2828536783863894665" datatype="html">
         <source>50-100</source>
@@ -5385,6 +5385,9 @@
       </trans-unit>
       <trans-unit id="3318988066489296525" datatype="html">
         <source>Denne rolle anvendes af en ekstern leverandør</source>
+      </trans-unit>
+      <trans-unit id="414753972225312220" datatype="html">
+        <source>100-500</source>
       </trans-unit>
     </body>
   </file>
