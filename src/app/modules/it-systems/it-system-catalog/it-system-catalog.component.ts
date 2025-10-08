@@ -82,6 +82,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       style: 'checkbox',
       entityType: 'it-system',
       permissionsField: 'CanChangeUsageStatus',
+      extraPermissionsField: 'IsInUse',
       sortable: false,
     },
     {
