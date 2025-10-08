@@ -25,12 +25,15 @@ export class CheckboxCellComponent extends BaseCellComponent {
   }
 
   public getUsageDisabledState(): boolean {
-    const permissionsField = this.column.permissionsField
-      ? this.getProperty(this.column.permissionsField) !== true || !this.createPermission
-      : false;
+    if (this.createPermission === false) return true;
+
+    const permissionsField = this.column.permissionsField ? this.getProperty(this.column.permissionsField) : false;
     const extraPermissionsField = this.column.extraPermissionsField
-      ? this.getProperty(this.column.extraPermissionsField) !== true
+      ? this.getProperty(this.column.extraPermissionsField)
       : false;
-    return permissionsField && extraPermissionsField;
+
+    if (!permissionsField) return extraPermissionsField !== true;
+
+    return false;
   }
 }
