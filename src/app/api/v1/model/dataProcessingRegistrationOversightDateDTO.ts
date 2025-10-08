@@ -15,5 +15,7 @@ export interface APIDataProcessingRegistrationOversightDateDTO {
     id?: number;
     oversightDate?: string;
     oversightRemark?: string;
+    oversightReportLink?: string;
+    oversightReportLinkName?: string;
 }
 
