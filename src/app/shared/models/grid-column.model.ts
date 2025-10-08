@@ -22,6 +22,7 @@ export interface GridColumn {
   extraData?: any; //Data for dropdown filters
   idField?: string; //Uuid field if needed to display data (e.g. for references to other entities)
   permissionsField?: string; //Field containing permissions for the column
+  extraPermissionsField?: string; //Field containing extra data required for permissions for the column
   dataField?: string; //Field containing data for the column (in case the 'field' property is necessary only for filtering)
   entityType?: RegistrationEntityTypes;
   style?:
