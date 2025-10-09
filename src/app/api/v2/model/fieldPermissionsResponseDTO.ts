@@ -9,22 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIModuleFieldPermissionsResponseDTO } from './moduleFieldPermissionsResponseDTO';
 
 
-export interface APIDataProcessingRegistrationPermissionsResponseDTO { 
-    fieldPermissions?: APIModuleFieldPermissionsResponseDTO;
-    /**
-     * True when API client is allowed to READ the resource
-     */
-    read?: boolean;
-    /**
-     * True when API client is allowed to MODIFY the resource
-     */
-    modify?: boolean;
-    /**
-     * True when the API client is allowed to DELETE the
-     */
-    delete?: boolean;
+export interface APIFieldPermissionsResponseDTO { 
+    key?: string;
+    enabled?: boolean;
 }
 
