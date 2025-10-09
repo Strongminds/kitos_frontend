@@ -11,7 +11,7 @@
     "dataClassification": { "uuid": "040c3098-45c7-4e25-9d10-1232918bfaa4", "name": "Almindelige oplysninger" },
     "notes": "En beskrivelse...",
     "systemVersion": null,
-    "numberOfExpectedUsers": { "lowerBound": 100, "upperBound": null },
+    "numberOfExpectedUsers": { "lowerBound": 100, "upperBound": 500 },
     "validity": {
       "valid": true,
       "validAccordingToValidityPeriod": true,
