@@ -30,4 +30,5 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
   lastSeenGridConfig: APIOrganizationGridConfigurationResponseDTO | undefined;
 
   isPatching: boolean;
+  isCreating: boolean;
 }
