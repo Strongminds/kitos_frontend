@@ -19,7 +19,6 @@ import {
   OversightInterval,
   oversightIntervalOptions,
 } from 'src/app/shared/models/data-processing/oversight-interval.model';
-import { getDataProcessingFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -126,8 +125,6 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     this.nextOversightEnabled$,
     this.oversightOptionsEnabled$,
   ]);
-
-  public readonly dataProcessingFields = getDataProcessingFields();
 
   constructor(private store: Store, private notificationService: NotificationService, private dialog: MatDialog) {
     super();

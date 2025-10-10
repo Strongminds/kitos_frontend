@@ -1,5 +1,7 @@
 import { createSelector } from '@ngrx/store';
+import { memoize } from 'lodash';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
+import { FieldPermissionsService } from 'src/app/shared/services/field-permissions.service';
 import { dataProcessingAdapter, dataProcessingFeature } from './reducer';
 
 const { selectDataProcessingState } = dataProcessingFeature;
@@ -82,10 +84,14 @@ export const selectDataProcessingHasDeletePermissions = createSelector(
   selectDataProcessingState,
   (state) => state.permissions?.delete
 );
-export const selectDataProcessingFieldPermissions = createSelector(
-  selectDataProcessingState,
-  (state) => state.permissions?.fieldPermissions
+export const selectDataProcessingFieldPermissions = memoize((field: string) =>
+  createSelector(selectDataProcessingState, (state) =>
+    state.permissions?.fieldPermissions?.fields
+      ? FieldPermissionsService.hasPermission(state.permissions.fieldPermissions.fields, field)
+      : true
+  )
 );
+
 export const selectDataProcessingHasCreateCollectionPermissions = createSelector(
   selectDataProcessingState,
   (state) => state.collectionPermissions?.create

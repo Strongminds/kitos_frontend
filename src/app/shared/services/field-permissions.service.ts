@@ -1,23 +1,11 @@
+import { APIFieldPermissionsResponseDTO } from 'src/app/api/v2';
+
 type NestedMap = Record<string, any>;
 
 export class FieldPermissionsService {
-  static hasPermission(fieldPermissions: { [key: string]: boolean } | undefined, field: string): boolean {
-    return fieldPermissions ? !!fieldPermissions[field] : false;
-  }
-
-  static getFieldsMap(obj: NestedMap, prefix?: string): NestedMap {
-    const result: NestedMap = {};
-
-    for (const key of Object.keys(obj)) {
-      const fullPath = prefix ? `${prefix}.${key}` : key;
-
-      if (typeof obj[key] === 'object' && Object.keys(obj[key]).length > 0) {
-        result[key] = this.getFieldsMap(obj[key], fullPath);
-      } else {
-        result[key] = fullPath;
-      }
-    }
-
-    return result;
+  static hasPermission(fieldPermissions: APIFieldPermissionsResponseDTO[] | undefined, field: string): boolean {
+    if (!fieldPermissions) return false;
+    const permission = fieldPermissions.find((p) => p.key?.toLocaleLowerCase() === field.toLocaleLowerCase());
+    return permission?.enabled ?? false;
   }
 }
