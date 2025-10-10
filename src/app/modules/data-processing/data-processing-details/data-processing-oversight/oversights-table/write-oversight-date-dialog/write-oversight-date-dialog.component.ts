@@ -10,8 +10,10 @@ import { EditUrlSectionComponent } from 'src/app/modules/it-systems/it-system-us
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { findDialogInstanceOf } from 'src/app/shared/helpers/dialog.helpers';
+import { dataProcessingFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
+import { selectDataProcessingFieldPermissions } from 'src/app/store/data-processing/selectors';
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
 import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -46,6 +48,19 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
   });
 
   public currentReportLink$ = new BehaviorSubject<SimpleLink | undefined>(undefined);
+
+  public readonly oversightDateFieldPermission$ = this.store.select(
+    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightDate)
+  );
+  public readonly oversightRemarkFieldPermission$ = this.store.select(
+    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightRemark)
+  );
+  public readonly oversightLinkNameFieldPermission$ = this.store.select(
+    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightReportLink.name)
+  );
+  public readonly oversightLinkUrlFieldPermission$ = this.store.select(
+    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightReportLink.url)
+  );
 
   constructor(
     private store: Store,
@@ -113,6 +128,42 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
         }
       })
     );
+
+    // Setup field permissions
+    this.setupFieldPermissions();
+  }
+
+  private setupFieldPermissions(): void {
+    const fieldPermissions = [
+      {
+        permission$: this.oversightDateFieldPermission$,
+        control: this.oversightDateFormGroup.controls.date,
+      },
+      {
+        permission$: this.oversightRemarkFieldPermission$,
+        control: this.oversightDateFormGroup.controls.notes,
+      },
+      {
+        permission$: this.oversightLinkUrlFieldPermission$,
+        control: this.oversightDateFormGroup.controls.reportLinkUrl,
+      },
+      {
+        permission$: this.oversightLinkNameFieldPermission$,
+        control: this.oversightDateFormGroup.controls.reportLinkName,
+      },
+    ];
+
+    fieldPermissions.forEach(({ permission$, control }) => {
+      this.subscriptions.add(
+        permission$.subscribe((hasPermission) => {
+          if (!hasPermission) {
+            control.disable();
+          } else {
+            control.enable();
+          }
+        })
+      );
+    });
   }
 
   public onClearReportLink() {
@@ -140,8 +191,8 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     this.isBusy = true;
 
     const request: APIOversightDateDTO = {
-      completedAt: this.oversightDateFormGroup.value.date!.toISOString(),
-      remark: this.oversightDateFormGroup.value.notes ?? '',
+      completedAt: this.oversightDateFormGroup.value.date?.toISOString() ?? undefined,
+      remark: this.oversightDateFormGroup.value.notes ?? undefined,
       oversightReportLink: {
         url: this.oversightDateFormGroup.value.reportLinkUrl ?? undefined,
         name: this.oversightDateFormGroup.value.reportLinkName ?? undefined,
