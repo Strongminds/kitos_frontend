@@ -119,11 +119,14 @@ export namespace APIItSystemUsageOverviewReadModel {
         No: 'No' as ContainsAITechnologyEnum,
         Undecided: 'Undecided' as ContainsAITechnologyEnum
     };
-    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'Unknown' | 'PreserveDataCanDiscardDocuments';
+    export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'BK' | 'KD' | 'KB' | 'Unknown' | 'PreserveDataCanDiscardDocuments';
     export const ArchiveDutyEnum = {
         Undecided: 'Undecided' as ArchiveDutyEnum,
         B: 'B' as ArchiveDutyEnum,
         K: 'K' as ArchiveDutyEnum,
+        Bk: 'BK' as ArchiveDutyEnum,
+        Kd: 'KD' as ArchiveDutyEnum,
+        Kb: 'KB' as ArchiveDutyEnum,
         Unknown: 'Unknown' as ArchiveDutyEnum,
         PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as ArchiveDutyEnum
     };
@@ -142,12 +145,13 @@ export namespace APIItSystemUsageOverviewReadModel {
         External: 'EXTERNAL' as HostedAtEnum,
         Hybrid: 'HYBRID' as HostedAtEnum
     };
-    export type UserCountEnum = 'BELOWTEN' | 'TENTOFIFTY' | 'FIFTYTOHUNDRED' | 'HUNDREDPLUS' | 'UNDECIDED';
+    export type UserCountEnum = 'BELOWTEN' | 'TENTOFORTYNINE' | 'FIFTYTONINETYNINE' | 'HUNDREDTOFOURHUNDREDNINETYNINE' | 'FIVEHUNDREDPLUS' | 'UNDECIDED';
     export const UserCountEnum = {
         Belowten: 'BELOWTEN' as UserCountEnum,
-        Tentofifty: 'TENTOFIFTY' as UserCountEnum,
-        Fiftytohundred: 'FIFTYTOHUNDRED' as UserCountEnum,
-        Hundredplus: 'HUNDREDPLUS' as UserCountEnum,
+        Tentofortynine: 'TENTOFORTYNINE' as UserCountEnum,
+        Fiftytoninetynine: 'FIFTYTONINETYNINE' as UserCountEnum,
+        Hundredtofourhundredninetynine: 'HUNDREDTOFOURHUNDREDNINETYNINE' as UserCountEnum,
+        Fivehundredplus: 'FIVEHUNDREDPLUS' as UserCountEnum,
         Undecided: 'UNDECIDED' as UserCountEnum
     };
     export type GdprCriticalityEnum = 'NotCritical' | 'Low' | 'Medium' | 'High' | 'VeryHigh';
