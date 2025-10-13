@@ -21,7 +21,7 @@ describe('it-system-usage frontpage', () => {
 
     cy.contains('Systeminformation');
     cy.input('Systemnavn').should('have.value', 'kaldenavn');
-    cy.dropdown('Antal brugere').should('have.text', '100-500');
+    cy.dropdown('Antal brugere').should('have.text', '100-499');
     cy.dropdown('Klassifikation af data').should('have.text', 'Almindelige oplysninger');
     cy.contains('Informationer, hvor offentliggørelse er naturlig eller ikke ');
 

@@ -4795,12 +4795,6 @@
       <trans-unit id="6548617905005677059" datatype="html">
         <source>&gt;500</source>
       </trans-unit>
-      <trans-unit id="2828536783863894665" datatype="html">
-        <source>50-100</source>
-      </trans-unit>
-      <trans-unit id="4394847010841516727" datatype="html">
-        <source>10-50</source>
-      </trans-unit>
       <trans-unit id="5001288584084190416" datatype="html">
         <source>&lt;10</source>
       </trans-unit>
@@ -5383,9 +5377,6 @@
       <trans-unit id="3318988066489296525" datatype="html">
         <source>Denne rolle anvendes af en ekstern leverandør</source>
       </trans-unit>
-      <trans-unit id="414753972225312220" datatype="html">
-        <source>100-500</source>
-      </trans-unit>
       <trans-unit id="4135820424863127072" datatype="html">
         <source>Data bevares, men en delmængde af dokumenter kan kasseres (B+D)</source>
       </trans-unit>
@@ -5397,6 +5388,15 @@
       </trans-unit>
       <trans-unit id="7919209008088997713" datatype="html">
         <source>Data bevares, men dokumenter kan kasseres (B+K)</source>
+      </trans-unit>
+      <trans-unit id="3661396981300905072" datatype="html">
+        <source>10-49</source>
+      </trans-unit>
+      <trans-unit id="3896989358847554248" datatype="html">
+        <source>50-99</source>
+      </trans-unit>
+      <trans-unit id="5436511887028802929" datatype="html">
+        <source>100-499</source>
       </trans-unit>
     </body>
   </file>
