@@ -6417,10 +6417,6 @@
         <source>kontrakt</source>
         <target state="new">kontrakt</target>
       </trans-unit>
-      <trans-unit id="8979685620310883836" datatype="html">
-        <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
-        <target state="new">Data bevares men udvalgte eller alle dokumenter kan kasseres</target>
-      </trans-unit>
       <trans-unit id="8902690316511427918" datatype="html">
         <source>Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</source>
         <target state="new">Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</target>
@@ -7088,6 +7084,22 @@
       <trans-unit id="414753972225312220" datatype="html">
         <source>100-500</source>
         <target state="new">100-500</target>
+      </trans-unit>
+      <trans-unit id="7919209008088997713" datatype="html">
+        <source>Data bevares, men dokumenter kan kasseres (B+K)</source>
+        <target state="new">Data bevares, men dokumenter kan kasseres (B+K)</target>
+      </trans-unit>
+      <trans-unit id="4892140758127492524" datatype="html">
+        <source>Data kasseres, og en delmængde af dokumenter kan kasseres (K+D)</source>
+        <target state="new">Data kasseres, og en delmængde af dokumenter kan kasseres (K+D)</target>
+      </trans-unit>
+      <trans-unit id="7371699005452820313" datatype="html">
+        <source>Data kasseres, men dokumenter skal bevares (K+B)</source>
+        <target state="new">Data kasseres, men dokumenter skal bevares (K+B)</target>
+      </trans-unit>
+      <trans-unit id="4135820424863127072" datatype="html">
+        <source>Data bevares, men en delmængde af dokumenter kan kasseres (B+D)</source>
+        <target state="new">Data bevares, men en delmængde af dokumenter kan kasseres (B+D)</target>
       </trans-unit>
     </body>
   </file>
