@@ -176,11 +176,14 @@ export namespace APIItSystemUsageOverviewReadModel {
         Dontknow: 'DONTKNOW' as IsBusinessCriticalEnum,
         Undecided: 'UNDECIDED' as IsBusinessCriticalEnum
     };
-    export type CatalogArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments';
+    export type CatalogArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'BK' | 'KD' | 'KB' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments';
     export const CatalogArchiveDutyEnum = {
         Undecided: 'Undecided' as CatalogArchiveDutyEnum,
         B: 'B' as CatalogArchiveDutyEnum,
         K: 'K' as CatalogArchiveDutyEnum,
+        Bk: 'BK' as CatalogArchiveDutyEnum,
+        Kd: 'KD' as CatalogArchiveDutyEnum,
+        Kb: 'KB' as CatalogArchiveDutyEnum,
         NoRecommendation: 'NoRecommendation' as CatalogArchiveDutyEnum,
         PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as CatalogArchiveDutyEnum
     };
