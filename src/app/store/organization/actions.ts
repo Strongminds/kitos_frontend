@@ -75,5 +75,9 @@ export const OrganizationActions = createActionGroup({
     'Delete Organization': (organizationUuid: string) => ({ organizationUuid }),
     'Delete Organization Success': emptyProps(),
     'Delete Organization Error': emptyProps(),
+
+    'Change Organization Disabled Status': (organizationUuid: string) => ({ organizationUuid }),
+    'Change Organization Disabled Status Success': emptyProps(),
+    'Change Organization Disabled Status Error': emptyProps(),
   },
 });

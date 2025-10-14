@@ -56,7 +56,7 @@ export const adaptOrganization = (value: any): OrganizationOData | undefined => 
     ForeignCountryCode: value.ForeignCountryCode,
     IsSupplier: value.IsSupplier,
     Disabled: value.Disabled,
-    Actions: value.Disabled,
+    Actions: !value.Disabled,
   };
   return adapted;
 };

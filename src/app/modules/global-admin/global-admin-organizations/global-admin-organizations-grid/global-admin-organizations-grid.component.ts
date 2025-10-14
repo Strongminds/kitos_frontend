@@ -5,14 +5,17 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import {
   OrganizationOData,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
   selectOrganizationGridData,
@@ -115,14 +118,23 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       sortable: false,
       isSticky: true,
       noFilter: true,
-      extraData: [{ type: 'edit' }, { type: 'toggle' }, { type: 'delete' }],
+      extraData: [
+        { type: 'edit' },
+        { type: 'toggle', visibilityColumn: 'Actions' },
+        { type: 'delete', visibilityColumn: 'Disabled' },
+      ],
       width: 150,
     },
   ];
 
   public readonly gridColumns$ = of(this.gridColumns);
 
-  constructor(store: Store, private dialog: MatDialog, private actions$: Actions) {
+  constructor(
+    store: Store,
+    private dialog: MatDialog,
+    private actions$: Actions,
+    private readonly confirmationService: ConfirmActionService
+  ) {
     super(store, 'global-admin-organization');
   }
   ngOnInit() {
@@ -163,6 +175,20 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       height: 'auto',
     });
     dialogRef.componentInstance.organization = organization;
+  }
+
+  public onDisableOrganization(changeRequest: BooleanChange<OrganizationOData>) {
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const instance = dialogRef.componentInstance;
+    instance.title = changeRequest.value ? $localize`Aktiver organisation` : $localize`Deaktiver organisation`;
+    this.confirmationService.confirmAction({
+      title: changeRequest.value ? $localize`Aktiver organisation` : $localize`Deaktiver organisation`,
+      category: ConfirmActionCategory.Warning,
+      message: $localize`Er du sikker på at du vil fjerne referencen?`,
+      onConfirm: () => {
+        this.store.dispatch(ExternalReferencesManagmentActions.delete(this.entityType, referenceUuid));
+      },
+    });
   }
 
   public onCreateOrganization() {
