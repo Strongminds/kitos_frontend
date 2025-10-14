@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
 import { APIBusinessRoleDTO, APIV1DataProcessingRegistrationINTERNALService } from 'src/app/api/v1';
 import {
   APIDataProcessingRegistrationGeneralDataWriteRequestDTO,
@@ -510,7 +510,7 @@ export class DataProcessingEffects {
   addDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.addDataProcessingOversightDate),
-      combineLatestWith(this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
       switchMap(([{ oversightDate }, dprUuid]) => {
         return this.oversightDateService
           .postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate({
@@ -528,7 +528,7 @@ export class DataProcessingEffects {
   removeDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.removeDataProcessingOversightDate),
-      combineLatestWith(this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
       switchMap(([{ oversightDateUuid }, dprUuid]) => {
         return this.oversightDateService
           .deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDate({
@@ -546,7 +546,7 @@ export class DataProcessingEffects {
   patchDataProcessingOversightDate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(DataProcessingActions.patchDataProcessingOversightDate),
-      combineLatestWith(this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
+      concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
       switchMap(([{ oversightDate, oversightDateUuid }, dprUuid]) => {
         return this.oversightDateService
           .patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate({
