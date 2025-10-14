@@ -6,7 +6,6 @@ import { Store } from '@ngrx/store';
 import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
-import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import {
@@ -50,6 +49,16 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
   public readonly isLoading$ = this.store.select(selectOrganizationGridLoading);
   public readonly gridData$ = this.store.select(selectOrganizationGridData);
   public readonly gridState$ = this.store.select(selectOrganizationGridState);
+  private readonly yesNoOptions = [
+    {
+      name: $localize`Ja`,
+      value: true,
+    },
+    {
+      name: $localize`Nej`,
+      value: false,
+    },
+  ];
   public readonly gridColumns: GridColumn[] = [
     {
       field: 'Name',
@@ -85,19 +94,30 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       hidden: false,
       style: 'boolean',
       filter: 'boolean',
-      extraData: [
-        {
-          name: $localize`Ja`,
-          value: true,
-        },
-        {
-          name: $localize`Nej`,
-          value: false,
-        },
-      ],
+      extraData: this.yesNoOptions,
       width: 150,
     },
-    createGridActionColumn(['edit', 'delete']),
+    {
+      field: 'Disabled',
+      title: $localize`Deaktiveret`,
+      section: this.sectionName,
+      hidden: false,
+      style: 'boolean',
+      filter: 'boolean',
+      extraData: this.yesNoOptions,
+      width: 150,
+    },
+    {
+      field: 'Actions',
+      title: ' ',
+      hidden: false,
+      style: 'action-buttons',
+      sortable: false,
+      isSticky: true,
+      noFilter: true,
+      extraData: [{ type: 'edit' }, { type: 'toggle' }, { type: 'delete' }],
+      width: 150,
+    },
   ];
 
   public readonly gridColumns$ = of(this.gridColumns);

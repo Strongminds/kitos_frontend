@@ -8,14 +8,18 @@
       <app-pencil-icon></app-pencil-icon>
     </app-icon-button>
     <app-icon-button
-      *ngIf="button.type === 'delete' && deletePermission"
+      *ngIf="
+        button.type === 'delete' && deletePermission && button.visibilityColumn
+          ? getProperty(button.visibilityColumn)
+          : true
+      "
       (click)="onDeleteClick()"
       data-cy="grid-delete-button"
     >
       <app-trashcan-icon></app-trashcan-icon>
     </app-icon-button>
     <app-toggle-button
-      *ngIf="button.type === 'toggle'"
+      *ngIf="button.type === 'toggle' && button.visibilityColumn ? getProperty(button.visibilityColumn) : true"
       (valueChange)="onToggleChange($event)"
       [value]="getProperty(column.field)"
     >
