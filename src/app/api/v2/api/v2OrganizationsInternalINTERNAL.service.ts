@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIOrganizationCreateRequestDTO } from '../model/aPIOrganizationCreateRequestDTO';
 // @ts-ignore
+import { APIOrganizationDisabledStatusRequestDTO } from '../model/aPIOrganizationDisabledStatusRequestDTO';
+// @ts-ignore
 import { APIOrganizationMasterDataRequestDTO } from '../model/aPIOrganizationMasterDataRequestDTO';
 // @ts-ignore
 import { APIOrganizationMasterDataResponseDTO } from '../model/aPIOrganizationMasterDataResponseDTO';
@@ -80,6 +82,11 @@ export interface GetSingleOrganizationsInternalV2GetUIModuleCustomizationRequest
 
 export interface GetSingleOrganizationsInternalV2GetUIRootConfigRequestParams {
     organizationUuid: string;
+}
+
+export interface PatchSingleOrganizationsInternalV2ChangeDisabledStatusRequestParams {
+    organizationUuid: string;
+    request: APIOrganizationDisabledStatusRequestDTO;
 }
 
 export interface PatchSingleOrganizationsInternalV2PatchOrganizationRequestParams {
@@ -589,6 +596,79 @@ export class APIV2OrganizationsInternalINTERNALService {
         return this.httpClient.request<APIUIRootConfigResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public patchSingleOrganizationsInternalV2ChangeDisabledStatus(requestParameters: PatchSingleOrganizationsInternalV2ChangeDisabledStatusRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public patchSingleOrganizationsInternalV2ChangeDisabledStatus(requestParameters: PatchSingleOrganizationsInternalV2ChangeDisabledStatusRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public patchSingleOrganizationsInternalV2ChangeDisabledStatus(requestParameters: PatchSingleOrganizationsInternalV2ChangeDisabledStatusRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public patchSingleOrganizationsInternalV2ChangeDisabledStatus(requestParameters: PatchSingleOrganizationsInternalV2ChangeDisabledStatusRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const organizationUuid = requestParameters.organizationUuid;
+        if (organizationUuid === null || organizationUuid === undefined) {
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationsInternalV2ChangeDisabledStatus.');
+        }
+        const request = requestParameters.request;
+        if (request === null || request === undefined) {
+            throw new Error('Required parameter request was null or undefined when calling patchSingleOrganizationsInternalV2ChangeDisabledStatus.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/merge-patch+json',
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/disabled-status`;
+        return this.httpClient.request<object>('patch', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: request,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

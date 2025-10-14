@@ -256,9 +256,9 @@ export class OrganizationEffects {
   changeOrganizationDisabledStatus$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(OrganizationActions.changeOrganizationDisabledStatus),
-      switchMap(({ organizationUuid }) =>
+      switchMap(({ organizationUuid, disabled }) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2PatchOrganizationMasterData({ organizationUuid })
+          .patchSingleOrganizationsInternalV2ChangeDisabledStatus({ organizationUuid, request: { disabled } })
           .pipe(
             map(() => OrganizationActions.changeOrganizationDisabledStatusSuccess()),
             catchError(() => of(OrganizationActions.changeOrganizationDisabledStatusError()))
