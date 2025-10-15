@@ -80,7 +80,7 @@ export const OrganizationActions = createActionGroup({
       organizationUuid,
       disabled,
     }),
-    'Change Organization Disabled Status Success': emptyProps(),
-    'Change Organization Disabled Status Error': emptyProps(),
+    'Change Organization Disabled Status Success': (disabled: boolean) => ({ disabled }),
+    'Change Organization Disabled Status Error': (disabled: boolean) => ({ disabled }),
   },
 });

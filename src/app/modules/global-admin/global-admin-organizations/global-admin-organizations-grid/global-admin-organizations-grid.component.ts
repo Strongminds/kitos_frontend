@@ -5,7 +5,6 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -118,11 +117,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       sortable: false,
       isSticky: true,
       noFilter: true,
-      extraData: [
-        { type: 'edit' },
-        { type: 'toggle', visibilityColumn: 'Actions' },
-        { type: 'delete', visibilityColumn: 'Disabled' },
-      ],
+      extraData: [{ type: 'edit' }, { type: 'toggle' }, { type: 'delete', visibilityColumn: 'Disabled' }],
       width: 150,
     },
   ];
@@ -146,7 +141,8 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
           ofType(
             OrganizationActions.createOrganizationSuccess,
             OrganizationActions.patchOrganizationSuccess,
-            OrganizationActions.deleteOrganizationSuccess
+            OrganizationActions.deleteOrganizationSuccess,
+            OrganizationActions.changeOrganizationDisabledStatusSuccess
           ),
           combineLatestWith(this.gridState$)
         )
@@ -178,15 +174,15 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
   }
 
   public onDisableOrganization(changeRequest: BooleanChange<OrganizationOData>) {
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent);
-    const instance = dialogRef.componentInstance;
-    instance.title = changeRequest.value ? $localize`Aktiver organisation` : $localize`Deaktiver organisation`;
+    const messageActionText = changeRequest.value ? $localize`aktivering` : $localize`deaktivering`;
     this.confirmationService.confirmAction({
       title: changeRequest.value ? $localize`Aktiver organisation` : $localize`Deaktiver organisation`,
       category: ConfirmActionCategory.Warning,
-      message: $localize`Er du sikker på at du vil fjerne referencen?`,
+      message: $localize`Er du sikker på, at du vil ${messageActionText} organisationen "${changeRequest.item.Name}"?`,
       onConfirm: () => {
-        this.store.dispatch(ExternalReferencesManagmentActions.delete(this.entityType, referenceUuid));
+        //Reverse the value, for display reasons the toggle needs to be reversed to display the correct icon
+        const updateValue = !changeRequest.value;
+        this.store.dispatch(OrganizationActions.changeOrganizationDisabledStatus(changeRequest.item.Uuid, updateValue));
       },
     });
   }

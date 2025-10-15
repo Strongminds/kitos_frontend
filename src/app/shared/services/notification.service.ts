@@ -20,6 +20,7 @@ import { ExcelImportActions } from 'src/app/store/local-admin/excel-import/actio
 import { FkOrgActions } from 'src/app/store/local-admin/fk-org/actions';
 import { LocalOptionTypeActions } from 'src/app/store/local-admin/local-option-types/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
+import { OrganizationSuppliersActions } from 'src/app/store/organization/organization-suppliers/actions';
 import { OrganizationUnitActions } from 'src/app/store/organization/organization-unit/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
@@ -27,7 +28,6 @@ import { PopupMessageActions } from 'src/app/store/popup-messages/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
 import { PopupMessageType } from '../enums/popup-message-type';
 import { createPopupMessage } from '../models/popup-messages/popup-message.model';
-import { OrganizationSuppliersActions } from 'src/app/store/organization/organization-suppliers/actions';
 
 @Injectable({ providedIn: 'root' })
 export class NotificationService implements OnDestroy {
@@ -138,12 +138,30 @@ export class NotificationService implements OnDestroy {
   private subscribeToLocalAdminNotifications() {
     this.subscribeAsDefault(LocalOptionTypeActions.updateOptionTypeSuccess, $localize`Typen blev opdateret`);
     this.subscribeAsError(LocalOptionTypeActions.updateOptionTypeError, $localize`Typen kunne ikke opdateres`);
-    this.subscribeAsDefault(OrganizationSuppliersActions.addOrganizationSupplierSuccess, $localize`ISMS leverandøren blev tilføjet`);
-    this.subscribeAsError(OrganizationSuppliersActions.addOrganizationSupplierError, $localize`Kunne ikke tilføje ISMS leverandøren`);
-    this.subscribeAsDefault(OrganizationSuppliersActions.removeOrganizationSupplierSuccess, $localize`ISMS leverandøren blev fjernet`);
-    this.subscribeAsError(OrganizationSuppliersActions.removeOrganizationSupplierError, $localize`Kunne ikke fjerne ISMS leverandøren`);
-    this.subscribeAsError(OrganizationSuppliersActions.getOrganizationSuppliersError, $localize`Kunne ikke hente ISMS leverandører`);
-    this.subscribeAsError(OrganizationSuppliersActions.getAvailableOrganizationSuppliersError, $localize`Kunne ikke hente tilgængelige ISMS leverandører`);
+    this.subscribeAsDefault(
+      OrganizationSuppliersActions.addOrganizationSupplierSuccess,
+      $localize`ISMS leverandøren blev tilføjet`
+    );
+    this.subscribeAsError(
+      OrganizationSuppliersActions.addOrganizationSupplierError,
+      $localize`Kunne ikke tilføje ISMS leverandøren`
+    );
+    this.subscribeAsDefault(
+      OrganizationSuppliersActions.removeOrganizationSupplierSuccess,
+      $localize`ISMS leverandøren blev fjernet`
+    );
+    this.subscribeAsError(
+      OrganizationSuppliersActions.removeOrganizationSupplierError,
+      $localize`Kunne ikke fjerne ISMS leverandøren`
+    );
+    this.subscribeAsError(
+      OrganizationSuppliersActions.getOrganizationSuppliersError,
+      $localize`Kunne ikke hente ISMS leverandører`
+    );
+    this.subscribeAsError(
+      OrganizationSuppliersActions.getAvailableOrganizationSuppliersError,
+      $localize`Kunne ikke hente tilgængelige ISMS leverandører`
+    );
   }
 
   private subscribeToGlobalAdminNotifications() {
@@ -313,6 +331,25 @@ export class NotificationService implements OnDestroy {
 
     this.subscribeAsDefault(OrganizationUserActions.transferRolesSuccess, $localize`Roller overført`);
     this.subscribeAsError(OrganizationUserActions.transferRolesError, $localize`Kunne ikke overføre roller`);
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationActions.changeOrganizationDisabledStatusSuccess))
+        .subscribe(({ disabled }) => {
+          this.showDefault(
+            $localize`${disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`}`
+          );
+        })
+    );
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(OrganizationActions.changeOrganizationDisabledStatusSuccess))
+        .subscribe(({ disabled }) => {
+          this.showDefault(
+            $localize`${disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`}`
+          );
+        })
+    );
   }
 
   private subscribeToItSystemEvents() {

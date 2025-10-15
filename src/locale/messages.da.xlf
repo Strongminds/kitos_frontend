@@ -7089,6 +7089,30 @@
         <source>100-500</source>
         <target state="new">100-500</target>
       </trans-unit>
+      <trans-unit id="30353932920713445" datatype="html">
+        <source>Deaktiveret</source>
+        <target state="new">Deaktiveret</target>
+      </trans-unit>
+      <trans-unit id="2831761139539547459" datatype="html">
+        <source>aktivering</source>
+        <target state="new">aktivering</target>
+      </trans-unit>
+      <trans-unit id="4082906467280790561" datatype="html">
+        <source>deaktivering</source>
+        <target state="new">deaktivering</target>
+      </trans-unit>
+      <trans-unit id="5276951449236966341" datatype="html">
+        <source>Aktiver organisation</source>
+        <target state="new">Aktiver organisation</target>
+      </trans-unit>
+      <trans-unit id="2658591105955377911" datatype="html">
+        <source>Deaktiver organisation</source>
+        <target state="new">Deaktiver organisation</target>
+      </trans-unit>
+      <trans-unit id="8904850498581421228" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</source>
+        <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

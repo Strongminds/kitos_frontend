@@ -260,8 +260,8 @@ export class OrganizationEffects {
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2ChangeDisabledStatus({ organizationUuid, request: { disabled } })
           .pipe(
-            map(() => OrganizationActions.changeOrganizationDisabledStatusSuccess()),
-            catchError(() => of(OrganizationActions.changeOrganizationDisabledStatusError()))
+            map(() => OrganizationActions.changeOrganizationDisabledStatusSuccess(disabled)),
+            catchError(() => of(OrganizationActions.changeOrganizationDisabledStatusError(disabled)))
           )
       )
     );
