@@ -21,7 +21,7 @@ describe('it-system-usage frontpage', () => {
 
     cy.contains('Systeminformation');
     cy.input('Systemnavn').should('have.value', 'kaldenavn');
-    cy.dropdown('Antal brugere').should('have.text', '100-500');
+    cy.dropdown('Antal brugere').should('have.text', '100-499');
     cy.dropdown('Klassifikation af data').should('have.text', 'Almindelige oplysninger');
     cy.contains('Informationer, hvor offentliggørelse er naturlig eller ikke ');
 
@@ -139,10 +139,10 @@ describe('it-system-usage frontpage', () => {
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
       'patch2'
     );
-    cy.dropdown('Antal brugere', '50-100');
+    cy.dropdown('Antal brugere', '50-99');
     cy.wait('@patch2')
       .its('request.body')
-      .should('deep.eq', { general: { numberOfExpectedUsers: { lowerBound: 50, upperBound: 100 } } });
+      .should('deep.eq', { general: { numberOfExpectedUsers: { lowerBound: 50, upperBound: 99 } } });
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
       'patch3'

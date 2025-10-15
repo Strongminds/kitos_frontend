@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Inject, Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
@@ -15,10 +15,10 @@ interface State {
 export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<State> implements OnDestroy {
   public readonly supplierOrganizations$ = this.select((state) => state.organizations).pipe(filterNullish());
   public readonly supplierOrganizationsIsLoading$ = this.select((state) => state.organizationsIsLoading).pipe(
-    filterNullish(),
+    filterNullish()
   );
 
-  constructor(private organizationsService: APIV2OrganizationService) {
+  constructor(@Inject(APIV2OrganizationService) private organizationsService: APIV2OrganizationService) {
     super({ organizationsIsLoading: false });
   }
 
@@ -26,14 +26,14 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
     (state, organizations: Array<APIOrganizationResponseDTO[]>): State => ({
       ...state,
       organizations: organizations,
-    }),
+    })
   );
 
   private updateOrganizationsIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       organizationsIsLoading: loading,
-    }),
+    })
   );
 
   public getOrganizations = this.effect((search$: Observable<string | undefined>) =>
@@ -46,10 +46,10 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
             tapResponse(
               (organizations) => this.updateOrganizations(organizations),
               (e) => console.error(e),
-              () => this.updateOrganizationsIsLoading(false),
-            ),
+              () => this.updateOrganizationsIsLoading(false)
+            )
           );
-      }),
-    ),
+      })
+    )
   );
 }
