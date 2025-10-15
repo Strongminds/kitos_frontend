@@ -41,7 +41,7 @@ export class UserEffects {
     @Inject(APIV2PasswordResetInternalINTERNALService)
     private resetPasswordService: APIV2PasswordResetInternalINTERNALService,
     @Inject(APIV2UsersInternalINTERNALService)
-    private userInternalService: APIV2UsersInternalINTERNALService,
+    private userInternalService: APIV2UsersInternalINTERNALService
   ) {}
 
   login$ = createEffect(() => {
@@ -61,9 +61,9 @@ export class UserEffects {
           .pipe(
             tap(() => this.cookieService.removeAll()),
             map((userDTO: APIUserDTOApiReturnDTO) => UserActions.loginSuccess(adaptUser(userDTO.response))),
-            catchError(() => of(UserActions.loginError())),
-          ),
-      ),
+            catchError(() => of(UserActions.loginError()))
+          )
+      )
     );
   });
 
@@ -74,9 +74,9 @@ export class UserEffects {
         this.authorizeService.postSingleAuthorizePostLogout().pipe(
           tap(() => this.cookieService.removeAll()),
           map(() => UserActions.logoutSuccess()),
-          catchError(() => of(UserActions.logoutError())),
-        ),
-      ),
+          catchError(() => of(UserActions.logoutError()))
+        )
+      )
     );
   });
 
@@ -88,9 +88,9 @@ export class UserEffects {
       mergeMap(({ returnUrl }) =>
         this.authorizeService.getSingleAuthorizeGetLogin().pipe(
           map((userDTO) => UserActions.authenticateSuccess(adaptUser(userDTO.response))),
-          catchError(() => of(UserActions.authenticateError(returnUrl))),
-        ),
-      ),
+          catchError(() => of(UserActions.authenticateError(returnUrl)))
+        )
+      )
     );
   });
 
@@ -98,14 +98,14 @@ export class UserEffects {
     return this.actions$.pipe(
       ofType(UserActions.logoutSuccess),
       tap(() => this.router.navigate([AppPath.root])),
-      map(() => resetStateAction()),
+      map(() => resetStateAction())
     );
   });
 
   resetOnOrganizationUpdate$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(UserActions.resetOnOrganizationUpdate),
-      map(() => resetOrganizationStateAction()),
+      map(() => resetOrganizationStateAction())
     );
   });
 
@@ -114,17 +114,17 @@ export class UserEffects {
       return this.actions$.pipe(
         ofType(UserActions.resetOnOrganizationUpdate),
         switchMap(() =>
-          this.store.select(selectUIRootConfig).pipe(filterNullish(), withLatestFrom(this.store.select(selectUser))),
+          this.store.select(selectUIRootConfig).pipe(filterNullish(), withLatestFrom(this.store.select(selectUser)))
         ),
         tap(([uiRootConfig, user]) => {
           const userDefaultStartPage = user?.defaultStartPage;
           if (this.shouldGoToUserDefaultStartPage(userDefaultStartPage, uiRootConfig)) {
             this.navigateToUserDefaultStartPage(userDefaultStartPage!);
           }
-        }),
+        })
       );
     },
-    { dispatch: false },
+    { dispatch: false }
   );
 
   goToRootOnAuthenticateFailed$ = createEffect(
@@ -134,10 +134,10 @@ export class UserEffects {
         tap(({ returnUrl }) => {
           const extras = returnUrl ? { queryParams: { returnUrl } } : {};
           return this.router.navigate([AppPath.root], extras);
-        }),
+        })
       );
     },
-    { dispatch: false },
+    { dispatch: false }
   );
 
   getUserGridPermissions$ = createEffect(() => {
@@ -149,11 +149,11 @@ export class UserEffects {
           .getSingleOrganizationGridInternalV2GetOrganizationGridPermissions({ organizationUuid })
           .pipe(
             map((response: APIOrganizationGridPermissionsResponseDTO) =>
-              UserActions.getUserGridPermissionsSuccess(response),
+              UserActions.getUserGridPermissionsSuccess(response)
             ),
-            catchError(() => of(UserActions.getUserGridPermissionsError())),
-          ),
-      ),
+            catchError(() => of(UserActions.getUserGridPermissionsError()))
+          )
+      )
     );
   });
 
@@ -166,9 +166,9 @@ export class UserEffects {
           .patchSingleOrganizationsInternalV2PatchOrganization({ organizationUuid, requestDto: request })
           .pipe(
             map((organizationResponseDto) => UserActions.patchOrganizationSuccess(organizationResponseDto)),
-            catchError(() => of(UserActions.patchOrganizationError())),
-          ),
-      ),
+            catchError(() => of(UserActions.patchOrganizationError()))
+          )
+      )
     );
   });
 
@@ -178,9 +178,9 @@ export class UserEffects {
       switchMap(({ email }) =>
         this.resetPasswordService.postSinglePasswordResetInternalV2RequestPasswordReset({ request: { email } }).pipe(
           map(() => UserActions.resetPasswordRequestSuccess(email)),
-          catchError(() => of(UserActions.resetPasswordRequestError())),
-        ),
-      ),
+          catchError(() => of(UserActions.resetPasswordRequestError()))
+        )
+      )
     );
   });
 
@@ -195,9 +195,9 @@ export class UserEffects {
           })
           .pipe(
             map(() => UserActions.resetPasswordSuccess()),
-            catchError(() => of(UserActions.resetPasswordError())),
-          ),
-      ),
+            catchError(() => of(UserActions.resetPasswordError()))
+          )
+      )
     );
   });
 
@@ -210,9 +210,9 @@ export class UserEffects {
           map((unit) => {
             return UserActions.getUserDefaultUnitSuccess(unit);
           }),
-          catchError(() => of(UserActions.getUserDefaultUnitError())),
-        ),
-      ),
+          catchError(() => of(UserActions.getUserDefaultUnitError()))
+        )
+      )
     );
   });
 
@@ -239,15 +239,15 @@ export class UserEffects {
               }
               return UserActions.setUserDefaultUnitSuccess(defaultUnit);
             }),
-            catchError(() => of(UserActions.setUserDefaultUnitError())),
-          ),
-      ),
+            catchError(() => of(UserActions.setUserDefaultUnitError()))
+          )
+      )
     );
   });
 
   private shouldGoToUserDefaultStartPage(
     userDefaultStartPage: StartPreferenceChoice | undefined,
-    uiRootConfig: UIRootConfig,
+    uiRootConfig: UIRootConfig
   ): boolean {
     return (
       this.isOnStartPage() &&
@@ -262,7 +262,7 @@ export class UserEffects {
 
   private userDefaultStartPageDisabledInOrganization(
     userDefaultStartPage: StartPreferenceChoice,
-    uiRootConfig: UIRootConfig,
+    uiRootConfig: UIRootConfig
   ): boolean {
     const startPageValue = userDefaultStartPage.value;
     switch (startPageValue) {
