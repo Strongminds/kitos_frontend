@@ -14,6 +14,7 @@ import {
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
+import { yesNoBooleanOptions } from 'src/app/shared/models/yes-no-boolean-options.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import {
@@ -51,16 +52,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
   public readonly isLoading$ = this.store.select(selectOrganizationGridLoading);
   public readonly gridData$ = this.store.select(selectOrganizationGridData);
   public readonly gridState$ = this.store.select(selectOrganizationGridState);
-  private readonly yesNoOptions = [
-    {
-      name: $localize`Ja`,
-      value: true,
-    },
-    {
-      name: $localize`Nej`,
-      value: false,
-    },
-  ];
+  private readonly yesNoOptions = yesNoBooleanOptions;
   public readonly gridColumns: GridColumn[] = [
     {
       field: 'Name',
@@ -174,13 +166,13 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
   }
 
   public onDisableOrganization(changeRequest: BooleanChange<OrganizationOData>) {
-    const messageActionText = changeRequest.value ? $localize`aktivering` : $localize`deaktivering`;
+    const messageActionText = changeRequest.value ? $localize`aktivere` : $localize`deaktivere`;
     this.confirmationService.confirmAction({
       title: changeRequest.value ? $localize`Aktiver organisation` : $localize`Deaktiver organisation`,
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på, at du vil ${messageActionText} organisationen "${changeRequest.item.Name}"?`,
       onConfirm: () => {
-        //Reverse the value, for display reasons the toggle needs to be reversed to display the correct icon
+        //16.10.2025: Reverse the value, for display reasons the toggle needs to be reversed to display the correct icon
         const updateValue = !changeRequest.value;
         this.store.dispatch(OrganizationActions.changeOrganizationDisabledStatus(changeRequest.item.Uuid, updateValue));
       },

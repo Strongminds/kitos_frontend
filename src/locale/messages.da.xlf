@@ -7105,14 +7105,6 @@
         <source>Deaktiveret</source>
         <target state="new">Deaktiveret</target>
       </trans-unit>
-      <trans-unit id="2831761139539547459" datatype="html">
-        <source>aktivering</source>
-        <target state="new">aktivering</target>
-      </trans-unit>
-      <trans-unit id="4082906467280790561" datatype="html">
-        <source>deaktivering</source>
-        <target state="new">deaktivering</target>
-      </trans-unit>
       <trans-unit id="5276951449236966341" datatype="html">
         <source>Aktiver organisation</source>
         <target state="new">Aktiver organisation</target>
@@ -7140,6 +7132,14 @@
       <trans-unit id="6696794945051147035" datatype="html">
         <source>Organisationen er aktiveret</source>
         <target state="new">Organisationen er aktiveret</target>
+      </trans-unit>
+      <trans-unit id="6995545189473293396" datatype="html">
+        <source>aktivere</source>
+        <target state="new">aktivere</target>
+      </trans-unit>
+      <trans-unit id="9100551003701703988" datatype="html">
+        <source>deaktivere</source>
+        <target state="new">deaktivere</target>
       </trans-unit>
     </body>
   </file>
