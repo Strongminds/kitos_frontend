@@ -342,10 +342,10 @@ export class NotificationService implements OnDestroy {
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.changeOrganizationDisabledStatusSuccess))
+        .pipe(ofType(OrganizationActions.changeOrganizationDisabledStatusError))
         .subscribe(({ disabled }) => {
           const message = disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`;
-          this.showDefault(message);
+          this.showError(message);
         })
     );
   }
