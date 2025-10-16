@@ -336,18 +336,16 @@ export class NotificationService implements OnDestroy {
       this.actions$
         .pipe(ofType(OrganizationActions.changeOrganizationDisabledStatusSuccess))
         .subscribe(({ disabled }) => {
-          this.showDefault(
-            $localize`${disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`}`
-          );
+          const message = disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`;
+          this.showDefault(message);
         })
     );
     this.subscriptions.add(
       this.actions$
-        .pipe(ofType(OrganizationActions.changeOrganizationDisabledStatusSuccess))
+        .pipe(ofType(OrganizationActions.changeOrganizationDisabledStatusError))
         .subscribe(({ disabled }) => {
-          this.showDefault(
-            $localize`${disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`}`
-          );
+          const message = disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`;
+          this.showError(message);
         })
     );
   }
