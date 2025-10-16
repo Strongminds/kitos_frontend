@@ -148,6 +148,7 @@
             (checkboxChange)="onCheckboxChange($event, dataItem)"
             (modifyEvent)="onModifyClick(dataItem)"
             (deleteEvent)="onDeleteClick(dataItem)"
+            (toggleEvent)="onToggleClick($event, dataItem)"
             [createPermission]="createPermission ?? false"
             [modifyPermission]="modifyPermission ?? false"
             [deletePermission]="deletePermission ?? false"

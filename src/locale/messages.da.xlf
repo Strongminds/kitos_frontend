@@ -7101,6 +7101,46 @@
         <source>100-499</source>
         <target state="new">100-499</target>
       </trans-unit>
+      <trans-unit id="30353932920713445" datatype="html">
+        <source>Deaktiveret</source>
+        <target state="new">Deaktiveret</target>
+      </trans-unit>
+      <trans-unit id="5276951449236966341" datatype="html">
+        <source>Aktiver organisation</source>
+        <target state="new">Aktiver organisation</target>
+      </trans-unit>
+      <trans-unit id="2658591105955377911" datatype="html">
+        <source>Deaktiver organisation</source>
+        <target state="new">Deaktiver organisation</target>
+      </trans-unit>
+      <trans-unit id="8904850498581421228" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</source>
+        <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</target>
+      </trans-unit>
+      <trans-unit id="1737753151350322492" datatype="html">
+        <source>
+          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
+        </source>
+        <target state="new">
+          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="5689718324419972780" datatype="html">
+        <source>Organisationen er deaktiveret</source>
+        <target state="new">Organisationen er deaktiveret</target>
+      </trans-unit>
+      <trans-unit id="6696794945051147035" datatype="html">
+        <source>Organisationen er aktiveret</source>
+        <target state="new">Organisationen er aktiveret</target>
+      </trans-unit>
+      <trans-unit id="6995545189473293396" datatype="html">
+        <source>aktivere</source>
+        <target state="new">aktivere</target>
+      </trans-unit>
+      <trans-unit id="9100551003701703988" datatype="html">
+        <source>deaktivere</source>
+        <target state="new">deaktivere</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

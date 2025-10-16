@@ -5398,6 +5398,35 @@
       <trans-unit id="5436511887028802929" datatype="html">
         <source>100-499</source>
       </trans-unit>
+      <trans-unit id="2658591105955377911" datatype="html">
+        <source>Deaktiver organisation</source>
+      </trans-unit>
+      <trans-unit id="30353932920713445" datatype="html">
+        <source>Deaktiveret</source>
+      </trans-unit>
+      <trans-unit id="5276951449236966341" datatype="html">
+        <source>Aktiver organisation</source>
+      </trans-unit>
+      <trans-unit id="8904850498581421228" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</source>
+      </trans-unit>
+      <trans-unit id="1737753151350322492" datatype="html">
+        <source>
+          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="5689718324419972780" datatype="html">
+        <source>Organisationen er deaktiveret</source>
+      </trans-unit>
+      <trans-unit id="6696794945051147035" datatype="html">
+        <source>Organisationen er aktiveret</source>
+      </trans-unit>
+      <trans-unit id="6995545189473293396" datatype="html">
+        <source>aktivere</source>
+      </trans-unit>
+      <trans-unit id="9100551003701703988" datatype="html">
+        <source>deaktivere</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
