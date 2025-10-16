@@ -201,6 +201,7 @@ model/extendedRoleAssignmentResponseDTO.ts
 model/externalReferenceDataResponseDTO.ts
 model/externalReferenceDataWriteRequestDTO.ts
 model/externalReferenceWithLastChangedResponseDTO.ts
+model/fieldPermissionsResponseDTO.ts
 model/gDPRRegistrationsResponseDTO.ts
 model/gDPRWriteRequestDTO.ts
 model/gdprReportResponseDTO.ts
@@ -258,6 +259,7 @@ model/localRoleOptionResponseDTO.ts
 model/localRoleOptionUpdateRequestDTO.ts
 model/models.ts
 model/modifyOversightDateDTO.ts
+model/moduleFieldPermissionsResponseDTO.ts
 model/multipleConflictsResponseDTO.ts
 model/multipleContractsRequestDto.ts
 model/mutateRightRequestDTO.ts
