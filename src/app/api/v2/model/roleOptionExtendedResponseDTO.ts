@@ -21,6 +21,14 @@ export interface APIRoleOptionExtendedResponseDTO {
      */
     writeAccess?: boolean;
     /**
+     * Determines if this role is used by any existing entities
+     */
+    isExternallyAvailable?: boolean;
+    /**
+     * Description about this roles usage externally
+     */
+    externallyAvailableDescription?: string;
+    /**
      * Extended description of the choice
      */
     description: string;

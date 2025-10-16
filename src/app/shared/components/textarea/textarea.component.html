@@ -2,13 +2,14 @@
   <mat-form-field *ngIf="formGroup" [formGroup]="formGroup">
     <mat-label>{{ text }}</mat-label>
     <textarea
+      #autosizeTextarea
       matInput
       cdkTextareaAutosize
       [cdkAutosizeMinRows]="autosizeMinRows"
       [cdkAutosizeMaxRows]="autosizeMaxRows"
       type="text"
       [formControlName]="formName"
-      (input)="formInputValueChange($event)"
+      (input)="formInputValueChange($event); scrollWithTextOnInput()"
       (focus)="focus(true)"
       (blur)="focus(false)"
       [ngClass]="{ disabled: disabled }"
@@ -18,6 +19,7 @@
   <mat-form-field *ngIf="!formGroup">
     <mat-label>{{ text }}</mat-label>
     <textarea
+      #autosizeTextarea
       matInput
       cdkTextareaAutosize
       [cdkAutosizeMinRows]="autosizeMinRows"
@@ -27,6 +29,7 @@
       [(ngModel)]="value"
       (ngModelChange)="valueChange.emit($event)"
       [ngClass]="{ disabled: disabled }"
+      (input)="scrollWithTextOnInput()"
     ></textarea>
   </mat-form-field>
 </ng-container>

@@ -9,30 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
-export interface APIRecommendedArchiveDutyResponseDTO { 
+export interface APICreateOversightDateDTO { 
     /**
-     * Comment attached to the recommendation
+     * Date of oversight completion
      */
-    comment?: string;
+    completedAt: string;
     /**
-     * Archive duty recommendation identifier
+     * Optional remark related to the oversight
      */
-    id: APIRecommendedArchiveDutyResponseDTO.IdEnum;
+    remark?: string;
+    oversightReportLink?: APISimpleLinkDTO;
 }
-export namespace APIRecommendedArchiveDutyResponseDTO {
-    export type IdEnum = 'Undecided' | 'B' | 'K' | 'BK' | 'KD' | 'KB' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments';
-    export const IdEnum = {
-        Undecided: 'Undecided' as IdEnum,
-        B: 'B' as IdEnum,
-        K: 'K' as IdEnum,
-        Bk: 'BK' as IdEnum,
-        Kd: 'KD' as IdEnum,
-        Kb: 'KB' as IdEnum,
-        NoRecommendation: 'NoRecommendation' as IdEnum,
-        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as IdEnum
-    };
-}
-
 

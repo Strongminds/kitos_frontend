@@ -421,7 +421,13 @@ export class GridUIConfigService {
       this.store
         .select(selectDprEnableOversights)
         .pipe(
-          shouldEnable([DprFields.IsOversightCompleted, DprFields.LatestOversightDate, DprFields.LatestOversightRemark])
+          shouldEnable([
+            DprFields.IsOversightCompleted,
+            DprFields.LatestOversightDate,
+            DprFields.LatestOversightRemark,
+            DprFields.LatestOversightReportLink,
+            DprFields.LatestOversightReportLinkName,
+          ]),
         ),
 
       // Roles

@@ -17,7 +17,7 @@ export interface APIOversightDateDTO {
     /**
      * Date of oversight completion
      */
-    completedAt: string;
+    completedAt?: string;
     /**
      * Optional remark related to the oversight
      */

@@ -11,28 +11,7 @@
  */
 
 
-export interface APIRecommendedArchiveDutyResponseDTO { 
-    /**
-     * Comment attached to the recommendation
-     */
-    comment?: string;
-    /**
-     * Archive duty recommendation identifier
-     */
-    id: APIRecommendedArchiveDutyResponseDTO.IdEnum;
+export interface APIOrganizationDisabledStatusRequestDTO { 
+    disabled?: boolean;
 }
-export namespace APIRecommendedArchiveDutyResponseDTO {
-    export type IdEnum = 'Undecided' | 'B' | 'K' | 'BK' | 'KD' | 'KB' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments';
-    export const IdEnum = {
-        Undecided: 'Undecided' as IdEnum,
-        B: 'B' as IdEnum,
-        K: 'K' as IdEnum,
-        Bk: 'BK' as IdEnum,
-        Kd: 'KD' as IdEnum,
-        Kb: 'KB' as IdEnum,
-        NoRecommendation: 'NoRecommendation' as IdEnum,
-        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as IdEnum
-    };
-}
-
 

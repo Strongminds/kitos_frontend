@@ -38,6 +38,8 @@ export interface DataProcessingRegistration {
   OversightScheduledInspectionDate: string;
   LatestOversightDate: string;
   LatestOversightRemark: string;
+  LatestOversightReportLink?: string;
+  LatestOversightReportLinkName?: string;
   LastChangedByName: string;
   ContractNamesAsCsv: string;
   Roles: RoleAssignmentsMap;
@@ -76,6 +78,8 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     OversightScheduledInspectionDate: value.OversightScheduledInspectionDate,
     LatestOversightDate: value.LatestOversightDate,
     LatestOversightRemark: value.LatestOversightRemark,
+    LatestOversightReportLink: value.LatestOversightReportLink,
+    LatestOversightReportLinkName: value.LatestOversightReportLinkName,
     LastChangedByName: value.LastChangedByName,
     ContractNamesAsCsv: value.ContractNamesAsCsv,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),

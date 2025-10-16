@@ -13,6 +13,7 @@ import { TrashcanIconComponent } from '../../icons/trashcan-icon.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { SelectedOptionTypeTextComponent } from '../../selected-option-type-text/selected-option-type-text.component';
 import { TableRowActionsComponent } from '../../table-row-actions/table-row-actions.component';
+import { TooltipComponent } from '../../tooltip/tooltip.component';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -31,6 +32,7 @@ import { TableRowActionsComponent } from '../../table-row-actions/table-row-acti
     TrashcanIconComponent,
     PencilIconComponent,
     AsyncPipe,
+    TooltipComponent,
   ],
 })
 export class RoleRowComponent {
@@ -41,11 +43,21 @@ export class RoleRowComponent {
   @Output() removeRole = new EventEmitter<RoleAssignment>();
   @Output() editRole = new EventEmitter<RoleAssignment>();
 
+  public defaultExternallyUsedTooltip = $localize`Denne rolle anvendes af en ekstern leverandør`;
+
   public onRemoveClick(): void {
     this.removeRole.emit(this.role);
   }
 
   public onEditClick(): void {
     this.editRole.emit(this.role);
+  }
+
+  public showExternallyUsedTooltip(rolesDictionary: Dictionary<APIRoleOptionResponseDTO>): boolean {
+    return rolesDictionary[this.role.assignment.role.uuid]?.isExternallyAvailable || false;
+  }
+
+  public getExternallyUsedDescription(possibleDescription: string | undefined): string {
+    return possibleDescription ? possibleDescription : this.defaultExternallyUsedTooltip;
   }
 }

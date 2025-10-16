@@ -861,9 +861,9 @@
         <source>Straffedomme og lovovertrædelser</source>
         <target state="new">Straffedomme og lovovertrædelser</target>
       </trans-unit>
-      <trans-unit id="728102537150960460" datatype="html">
-        <source>Redigér link</source>
-        <target state="new">Redigér link</target>
+      <trans-unit id="1474930348127983861" datatype="html">
+        <source>Rediger link</source>
+        <target state="new">Rediger link</target>
       </trans-unit>
       <trans-unit id="2375260419993138758" datatype="html">
         <source>URL</source>
@@ -4100,12 +4100,12 @@
         <target state="new">Systemer der anvender systemet</target>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </target>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </target>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
@@ -5176,8 +5176,8 @@
         <target state="new">Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</target>
       </trans-unit>
       <trans-unit id="6021905614502626006" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</target>
       </trans-unit>
       <trans-unit id="4691966835263640588" datatype="html">
         <source>FK Organisation - Konsekvenser ved opdatering</source>
@@ -6044,8 +6044,8 @@
         <target state="new">IT-Systemet driftes</target>
       </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
-        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
-        <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </target>
+        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </source>
+        <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </target>
       </trans-unit>
       <trans-unit id="844753732077135788" datatype="html">
         <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </source>
@@ -6064,8 +6064,8 @@
         <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </target>
       </trans-unit>
       <trans-unit id="7970981235010102529" datatype="html">
-        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </source>
-        <target state="new"><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </target>
+        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </source>
+        <target state="new"><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </target>
       </trans-unit>
       <trans-unit id="1162347843657363489" datatype="html">
         <source>Er du sikker på, at du vil slette systemet?</source>
@@ -6305,17 +6305,9 @@
         <source>&lt;10</source>
         <target state="new">&lt;10</target>
       </trans-unit>
-      <trans-unit id="4394847010841516727" datatype="html">
-        <source>10-50</source>
-        <target state="new">10-50</target>
-      </trans-unit>
-      <trans-unit id="2828536783863894665" datatype="html">
-        <source>50-100</source>
-        <target state="new">50-100</target>
-      </trans-unit>
-      <trans-unit id="1915808090055857753" datatype="html">
-        <source>&gt;100</source>
-        <target state="new">&gt;100</target>
+      <trans-unit id="6548617905005677059" datatype="html">
+        <source>&gt;500</source>
+        <target state="new">&gt;500</target>
       </trans-unit>
       <trans-unit id="4766365470163586672" datatype="html">
         <source>Den markerede kontrakt er inaktiv</source>
@@ -6416,10 +6408,6 @@
       <trans-unit id="3609485978604004141" datatype="html">
         <source>kontrakt</source>
         <target state="new">kontrakt</target>
-      </trans-unit>
-      <trans-unit id="8979685620310883836" datatype="html">
-        <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
-        <target state="new">Data bevares men udvalgte eller alle dokumenter kan kasseres</target>
       </trans-unit>
       <trans-unit id="8902690316511427918" datatype="html">
         <source>Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</source>
@@ -7068,6 +7056,90 @@
       <trans-unit id="6572607453095683769" datatype="html">
         <source>Meget høj</source>
         <target state="new">Meget høj</target>
+      </trans-unit>
+      <trans-unit id="503532903699772235" datatype="html">
+        <source>Tilsynsrapport</source>
+        <target state="new">Tilsynsrapport</target>
+      </trans-unit>
+      <trans-unit id="8508960723210934727" datatype="html">
+        <source>Link til tilsynsrapport</source>
+        <target state="new">Link til tilsynsrapport</target>
+      </trans-unit>
+      <trans-unit id="2368085507469871" datatype="html">
+        <source>Seneste tilsynsrapport</source>
+        <target state="new">Seneste tilsynsrapport</target>
+      </trans-unit>
+      <trans-unit id="3318988066489296525" datatype="html">
+        <source>Denne rolle anvendes af en ekstern leverandør</source>
+        <target state="new">Denne rolle anvendes af en ekstern leverandør</target>
+      </trans-unit>
+      <trans-unit id="7919209008088997713" datatype="html">
+        <source>Data bevares, men dokumenter kan kasseres (B+K)</source>
+        <target state="new">Data bevares, men dokumenter kan kasseres (B+K)</target>
+      </trans-unit>
+      <trans-unit id="4892140758127492524" datatype="html">
+        <source>Data kasseres, og en delmængde af dokumenter kan kasseres (K+D)</source>
+        <target state="new">Data kasseres, og en delmængde af dokumenter kan kasseres (K+D)</target>
+      </trans-unit>
+      <trans-unit id="7371699005452820313" datatype="html">
+        <source>Data kasseres, men dokumenter skal bevares (K+B)</source>
+        <target state="new">Data kasseres, men dokumenter skal bevares (K+B)</target>
+      </trans-unit>
+      <trans-unit id="4135820424863127072" datatype="html">
+        <source>Data bevares, men en delmængde af dokumenter kan kasseres (B+D)</source>
+        <target state="new">Data bevares, men en delmængde af dokumenter kan kasseres (B+D)</target>
+      </trans-unit>
+      <trans-unit id="3661396981300905072" datatype="html">
+        <source>10-49</source>
+        <target state="new">10-49</target>
+      </trans-unit>
+      <trans-unit id="3896989358847554248" datatype="html">
+        <source>50-99</source>
+        <target state="new">50-99</target>
+      </trans-unit>
+      <trans-unit id="5436511887028802929" datatype="html">
+        <source>100-499</source>
+        <target state="new">100-499</target>
+      </trans-unit>
+      <trans-unit id="30353932920713445" datatype="html">
+        <source>Deaktiveret</source>
+        <target state="new">Deaktiveret</target>
+      </trans-unit>
+      <trans-unit id="5276951449236966341" datatype="html">
+        <source>Aktiver organisation</source>
+        <target state="new">Aktiver organisation</target>
+      </trans-unit>
+      <trans-unit id="2658591105955377911" datatype="html">
+        <source>Deaktiver organisation</source>
+        <target state="new">Deaktiver organisation</target>
+      </trans-unit>
+      <trans-unit id="8904850498581421228" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</source>
+        <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</target>
+      </trans-unit>
+      <trans-unit id="1737753151350322492" datatype="html">
+        <source>
+          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
+        </source>
+        <target state="new">
+          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="5689718324419972780" datatype="html">
+        <source>Organisationen er deaktiveret</source>
+        <target state="new">Organisationen er deaktiveret</target>
+      </trans-unit>
+      <trans-unit id="6696794945051147035" datatype="html">
+        <source>Organisationen er aktiveret</source>
+        <target state="new">Organisationen er aktiveret</target>
+      </trans-unit>
+      <trans-unit id="6995545189473293396" datatype="html">
+        <source>aktivere</source>
+        <target state="new">aktivere</target>
+      </trans-unit>
+      <trans-unit id="9100551003701703988" datatype="html">
+        <source>deaktivere</source>
+        <target state="new">deaktivere</target>
       </trans-unit>
     </body>
   </file>

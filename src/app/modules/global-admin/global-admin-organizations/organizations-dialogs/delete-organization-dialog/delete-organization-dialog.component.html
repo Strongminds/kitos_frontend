@@ -57,7 +57,7 @@
     >
     </app-checkbox>
   </app-dialog-actions>
-  <app-dialog-actions *ngIf="(deletingOrganization$ | async) === false">
+  <app-dialog-actions>
     <app-button *ngIf="(hasAnyRemovalConflict() | async) === true" (buttonClick)="copyConflictsToClipboard()" i18n>
       Kopier til klipholder</app-button
     >

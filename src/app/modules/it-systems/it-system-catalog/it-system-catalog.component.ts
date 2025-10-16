@@ -5,7 +5,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, debounceTime, first } from 'rxjs';
+import { combineLatestWith, debounceTime, filter, first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
@@ -26,7 +26,10 @@ import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectITSystemUsageHasCreateCollectionPermission } from 'src/app/store/it-system-usage/selectors';
+import {
+  selectITSystemUsageHasCreateCollectionPermission,
+  selectItSystemUsageIsCreating,
+} from 'src/app/store/it-system-usage/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import {
   selectITSystemHasCreateCollectionPermission,
@@ -64,6 +67,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
   public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
   public readonly hasCreateUsagePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
+  public readonly isCreatingUsage$ = this.store.select(selectItSystemUsageIsCreating);
 
   private readonly systemSectionName = CATALOG_SECTION_NAME;
   public readonly defaultGridColumns: GridColumn[] = [
@@ -78,6 +82,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       style: 'checkbox',
       entityType: 'it-system',
       permissionsField: 'CanChangeUsageStatus',
+      extraPermissionsField: 'IsInUse',
       sortable: false,
     },
     {
@@ -302,16 +307,15 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   }
 
   private handleTakeSystemIntoUse(systemUuid: string) {
-    this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
     this.subscriptions.add(
-      this.actions$
+      this.isCreatingUsage$
         .pipe(
-          ofType(ITSystemUsageActions.createItSystemUsageSuccess),
           first(),
-          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$)
+          filter((isCreating) => !isCreating)
         )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+        .subscribe(() => {
+          this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
+        })
     );
   }
 

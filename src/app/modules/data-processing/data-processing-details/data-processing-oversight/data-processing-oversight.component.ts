@@ -1,3 +1,4 @@
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -37,20 +38,19 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
-import { CardComponent } from '../../../../shared/components/card/card.component';
-import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
-import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
-import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
-import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
-import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { IconButtonComponent } from '../../../../shared/components/buttons/icon-button/icon-button.component';
-import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
-import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CollectionExtensionButtonComponent } from '../../../../shared/components/collection-extension-button/collection-extension-button.component';
+import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
+import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
+import { TrashcanIconComponent } from '../../../../shared/components/icons/trashcan-icon.component';
+import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
+import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
 import { OversightsTableComponent } from './oversights-table/oversights-table.component';
 
 @Component({
@@ -96,7 +96,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
         if (!existingOptionUuids || existingOptionUuids.length == 0) return options;
 
         return options.filter((option: APIIdentityNamePairResponseDTO) => !existingOptionUuids.includes(option.uuid));
-      }),
+      })
     );
 
   public readonly hasOversightsValue$ = new BehaviorSubject<YesNoEnum | undefined>(undefined);
@@ -112,7 +112,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
       completedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
       remarks: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     },
-    { updateOn: 'blur' },
+    { updateOn: 'blur' }
   );
 
   public readonly oversightIntervalEnabled$ = this.store.select(selectDprEnabledOversightInterval);
@@ -126,11 +126,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     this.oversightOptionsEnabled$,
   ]);
 
-  constructor(
-    private store: Store,
-    private notificationService: NotificationService,
-    private dialog: MatDialog,
-  ) {
+  constructor(private store: Store, private notificationService: NotificationService, private dialog: MatDialog) {
     super();
   }
 
@@ -151,7 +147,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
           if (hasModifyPermissions) {
             this.generalInformationForm.enable();
           }
-        }),
+        })
     );
   }
 
@@ -165,7 +161,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
 
   public patchOversight(
     value: APIDataProcessingRegistrationOversightWriteRequestDTO,
-    valueChange?: ValidatedValueChange<unknown>,
+    valueChange?: ValidatedValueChange<unknown>
   ): void {
     this.patch({ oversight: value }, valueChange);
   }
@@ -177,7 +173,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
     dialogInstance.dropdownText = $localize`Vælg tilsynsmulighed`;
     dialogInstance.valueField = 'uuid';
     dialogInstance.data$ = this.oversightOptionTypes$.pipe(
-      map((options) => options?.map((option) => ({ uuid: option.uuid, name: option.name }))),
+      map((options) => options?.map((option) => ({ uuid: option.uuid, name: option.name })))
     );
     dialogInstance.successActionType = DataProcessingActions.patchDataProcessingSuccess.type;
     dialogInstance.errorActionType = DataProcessingActions.patchDataProcessingError.type;
@@ -200,10 +196,10 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
         .subscribe(([result, oversightOptions]) => {
           if (result === true) {
             this.store.dispatch(
-              DataProcessingActions.removeDataProcessingOversightOption(oversightUuid, oversightOptions),
+              DataProcessingActions.removeDataProcessingOversightOption(oversightUuid, oversightOptions)
             );
           }
-        }),
+        })
     );
   }
 }
