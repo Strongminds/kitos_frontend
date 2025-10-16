@@ -54,7 +54,7 @@ export class OversightsTableComponent extends BaseComponent {
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
   public readonly oversightDatesCollectionFieldPermission$ = this.store.select(
-    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.collection)
+    selectDataProcessingFieldPermissions(dataProcessingFields.IsOversightCompleted)
   );
 
   constructor(private store: Store, private dialog: MatDialog) {

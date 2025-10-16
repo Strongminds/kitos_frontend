@@ -1,11 +1,11 @@
 export const dataProcessingFields = {
+  IsOversightCompleted: 'DataProcessingRegistration.IsOversightCompleted',
   oversightDates: {
-    collection: 'oversightDates',
-    oversightDate: 'oversightDates.oversightDate',
-    oversightRemark: 'oversightDates.oversightRemark',
+    oversightDate: 'DataProcessingRegistrationOversightDate.OversightDate',
+    oversightRemark: 'DataProcessingRegistrationOversightDate.OversightRemark',
     oversightReportLink: {
-      name: 'oversightDates.oversightReportLink.name',
-      url: 'oversightDates.oversightReportLink.url',
+      name: 'DataProcessingRegistrationOversightDate.OversightReportLinkName',
+      url: 'DataProcessingRegistrationOversightDate.OversightReportLink',
     },
   },
 };
