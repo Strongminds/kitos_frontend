@@ -12,7 +12,7 @@
 import { APIModuleFieldPermissionsResponseDTO } from './moduleFieldPermissionsResponseDTO';
 
 
-export interface APIDataProcessingRegistrationPermissionsResponseDTO { 
+export interface APICombinedPermissionsResponseDTO { 
     fieldPermissions?: APIModuleFieldPermissionsResponseDTO;
     /**
      * True when API client is allowed to READ the resource

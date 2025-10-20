@@ -142,6 +142,7 @@ model/changePaymentRegistrationV2RequestDTO.ts
 model/claimResponseDTO.ts
 model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
+model/combinedPermissionsResponseDTO.ts
 model/commandPermissionResponseDTO.ts
 model/connectToStsOrganizationRequestDTO.ts
 model/connectionUpdateConsequencesResponseDTO.ts
@@ -183,7 +184,6 @@ model/dataProcessingRegistrationGeneralDataResponseDTO.ts
 model/dataProcessingRegistrationGeneralDataWriteRequestDTO.ts
 model/dataProcessingRegistrationOversightResponseDTO.ts
 model/dataProcessingRegistrationOversightWriteRequestDTO.ts
-model/dataProcessingRegistrationPermissionsResponseDTO.ts
 model/dataProcessingRegistrationResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorWriteRequestDTO.ts
