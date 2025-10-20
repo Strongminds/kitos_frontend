@@ -19,8 +19,7 @@
         [data$]="interfaces$"
         [isLoading$]="interfacesLoading$"
         (filterChange)="interfaceFilterChange($event)"
-        [formGroup]="relationForm"
-        formName="interface"
+        (valueChange)="interfaceValueChange($event)"
         i18n-text
       >
       </app-connected-multi-select-dropdown>

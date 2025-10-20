@@ -23,22 +23,20 @@ import { map, Observable, pairwise, startWith, Subject } from 'rxjs';
   templateUrl: './connected-multi-select-dropdown.component.html',
   styleUrl: './connected-multi-select-dropdown.component.scss',
 })
-export class ConnectedMultiSelectDropdownComponent<T extends MultiSelectDropdownItem<U>, U> extends BaseComponent {
+export class ConnectedMultiSelectDropdownComponent<T> extends BaseComponent {
 
 @Input() public text!: string;
   @Input() public textField: string = 'name';
   @Input() public itemDescriptionField: string = 'description';
   @Input() public valueField!: string;
-  @Input() public data$?: Observable<T[]>;
+  @Input() public data$?: Observable<MultiSelectDropdownItem<T>[]>;
   @Input() public isLoading$?: Observable<boolean>;
   @Input() public showSearchHelpText$?: Observable<boolean>;
-  @Input() public formGroup!: FormGroup<any>;
-  @Input() public formName!: string;
   @Input() public includeItemDescription = false;
   @Input() public addTag = false;
   @Input() public addTagText = $localize`Vælg`;
   @Output() public filterChange = new EventEmitter<string>();
-  @Output() public valueChange = new EventEmitter<string>();
+  @Output() public valueChange = new EventEmitter<T[]>();
 
   private searchTermsSource$ = new Subject<string | undefined>();
   private lastTwoSearchTerms$ = this.searchTermsSource$.pipe(
@@ -63,8 +61,9 @@ export class ConnectedMultiSelectDropdownComponent<T extends MultiSelectDropdown
     return true;
   }
 
-  public onValueChange(selectedUuid?: string) {
-    this.valueChange.emit(selectedUuid);
+  public onValueChange(value?: any) {
+    console.log('ConnectedMultiSelectDropdownComponent - onValueChange:');
+    this.valueChange.emit(value);
   }
 
   public onFilterChange(searchTerm?: string) {

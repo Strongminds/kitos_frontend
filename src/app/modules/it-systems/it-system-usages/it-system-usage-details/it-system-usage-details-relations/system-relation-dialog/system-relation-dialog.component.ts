@@ -156,6 +156,18 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
     this.searchInterfaceTerm$.next(search);
   }
 
+  public interfaceValueChange(inter: any) {
+    console.log('Selected interface: ', JSON.stringify(inter));
+    // this.relationForm.controls.interface.setValue(
+    //   interfaceUuid
+    //     ? {
+    //         uuid: interfaceUuid,
+    //         name: '',
+    //       }
+    //     : null
+    // );
+  }
+
   public usageChange(usageUuid?: string) {
     this.componentStore.updateCurrentSystemUuid(usageUuid);
   }

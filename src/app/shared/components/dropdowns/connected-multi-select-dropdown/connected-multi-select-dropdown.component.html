@@ -5,14 +5,12 @@
   [data]="data$ | async"
   [loading]="isLoading$ | async"
   (filterChange)="onFilterChange($event)"
-  (valueChange)="onValueChange($event.toString())"
+  (selectedEvent)="onValueChange($event)"
   (focusEvent)="onFocus()"
   (openDropdown)="onOpen()"
   i18n-text
   [searchFn]="externalSearch"
-
   [showDescription]="includeItemDescription"
-
   [addTagText]="addTagText"
 >
 </app-multi-select-dropdown>
