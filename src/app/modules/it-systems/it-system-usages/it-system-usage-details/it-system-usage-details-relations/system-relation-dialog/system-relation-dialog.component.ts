@@ -3,8 +3,8 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angul
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Subject, combineLatest, first, map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
+import { BehaviorSubject, Subject, combineLatest, first, map } from 'rxjs';
+import { APIIdentityNamePairResponseDTO, APIItInterfaceResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -21,6 +21,8 @@ import { DropdownComponent } from '../../../../../../shared/components/dropdowns
 import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
 import { AsyncPipe } from '@angular/common';
+import { ConnectedMultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/connected-multi-select-dropdown/connected-multi-select-dropdown.component';
+import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 
 export interface SystemRelationDialogFormModel {
   systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
@@ -47,6 +49,7 @@ export interface SystemRelationDialogFormModel {
     DialogActionsComponent,
     ButtonComponent,
     AsyncPipe,
+    ConnectedMultiSelectDropdownComponent
   ],
 })
 export class SystemRelationDialogComponent extends BaseComponent implements OnInit {
@@ -59,8 +62,19 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
   public readonly contracts$ = this.componentStore.contracts$;
   public readonly contractsLoading$ = this.componentStore.contractsLoading$;
-  public readonly interfaces$ = this.componentStore.interfaces$;
-
+ // public readonly interfaces$ = this.componentStore.interfaces$;
+  public readonly interfaces$ = new BehaviorSubject<MultiSelectDropdownItem<APIItInterfaceResponseDTO>[]>([{
+      name: 'Interface 1',
+      value: {"lastModified":"2025-10-20T11:23:01.2191851Z","lastModifiedBy":{"uuid":"e96179ff-1a8d-41bb-99e6-3ed629f73c0a","name":"Automatisk oprettet testbruger (GlobalAdmin)"},"scope":"Local","itInterfaceType":undefined,"data":[],"organizationContext":{"cvr":undefined,"uuid":"f4d12639-e071-45d9-9fa0-8c0c438bb431","name":"Fælles Kommune"},"rightsHolder":{"name":'n',"uuid":'2123'},"uuid":"15dd470e-4b66-4eae-89b5-35cee5c80f1c","exposedBySystem":{"uuid":"80c03701-8b79-411c-bbbe-0992949ac7a3","name":"44"},"name":"444snitflade","interfaceId":"","version":undefined,"description":'desc',"notes":undefined,"urlReference":undefined,"deactivated":false,"created":"2025-10-20T11:22:51.3909301Z","createdBy":{"uuid":"e96179ff-1a8d-41bb-99e6-3ed629f73c0a","name":"Automatisk oprettet testbruger (GlobalAdmin)"}},
+      disabled: false,
+      selected: false
+    },
+  {
+      name: 'Interface 2',
+      value: {"lastModified":"2025-10-20T11:23:01.2191851Z","lastModifiedBy":{"uuid":"e96179ff-1a8d-41bb-99e6-3ed629f73c0a","name":"Automatisk oprettet testbruger (GlobalAdmin)"},"scope":"Local","itInterfaceType":undefined,"data":[],"organizationContext":{"cvr":undefined,"uuid":"f4d12639-e071-45d9-9fa0-8c0c438bb431","name":"Fælles Kommune"},"rightsHolder":{"name":'n',"uuid":'2123'},"uuid":"15dd470e-4b66-4eae-89b5-35cee5c80f1c","exposedBySystem":{"uuid":"80c03701-8b79-411c-bbbe-0992949ac7a3","name":"44"},"name":"444snitflade","interfaceId":"","version":undefined,"description":'desc',"notes":undefined,"urlReference":undefined,"deactivated":false,"created":"2025-10-20T11:22:51.3909301Z","createdBy":{"uuid":"e96179ff-1a8d-41bb-99e6-3ed629f73c0a","name":"Automatisk oprettet testbruger (GlobalAdmin)"}},
+      disabled: false,
+      selected: false
+    }]);
   public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
 
   public readonly usageSearchResultIsLimited$ = this.componentStore.usageSearchResultIsLimited$;
