@@ -138,6 +138,7 @@ export * from './namedEntityWithUserFullNameV2DTO';
 export * from './notificationResourcePermissionsDTO';
 export * from './notificationResponseDTO';
 export * from './organizationCreateRequestDTO';
+export * from './organizationDisabledStatusRequestDTO';
 export * from './organizationGridConfigurationRequestDTO';
 export * from './organizationGridConfigurationResponseDTO';
 export * from './organizationGridPermissionsResponseDTO';

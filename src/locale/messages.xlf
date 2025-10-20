@@ -4792,14 +4792,8 @@
       <trans-unit id="3143168575358371654" datatype="html">
         <source>Omstrukturer</source>
       </trans-unit>
-      <trans-unit id="1915808090055857753" datatype="html">
-        <source>&gt;100</source>
-      </trans-unit>
-      <trans-unit id="2828536783863894665" datatype="html">
-        <source>50-100</source>
-      </trans-unit>
-      <trans-unit id="4394847010841516727" datatype="html">
-        <source>10-50</source>
+      <trans-unit id="6548617905005677059" datatype="html">
+        <source>&gt;500</source>
       </trans-unit>
       <trans-unit id="5001288584084190416" datatype="html">
         <source>&lt;10</source>
@@ -4878,9 +4872,6 @@
       </trans-unit>
       <trans-unit id="6000192550087006178" datatype="html">
         <source>databehandling</source>
-      </trans-unit>
-      <trans-unit id="8979685620310883836" datatype="html">
-        <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
       </trans-unit>
       <trans-unit id="2479737654708088517" datatype="html">
         <source>Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</source>
@@ -5385,6 +5376,56 @@
       </trans-unit>
       <trans-unit id="3318988066489296525" datatype="html">
         <source>Denne rolle anvendes af en ekstern leverandør</source>
+      </trans-unit>
+      <trans-unit id="4135820424863127072" datatype="html">
+        <source>Data bevares, men en delmængde af dokumenter kan kasseres (B+D)</source>
+      </trans-unit>
+      <trans-unit id="4892140758127492524" datatype="html">
+        <source>Data kasseres, og en delmængde af dokumenter kan kasseres (K+D)</source>
+      </trans-unit>
+      <trans-unit id="7371699005452820313" datatype="html">
+        <source>Data kasseres, men dokumenter skal bevares (K+B)</source>
+      </trans-unit>
+      <trans-unit id="7919209008088997713" datatype="html">
+        <source>Data bevares, men dokumenter kan kasseres (B+K)</source>
+      </trans-unit>
+      <trans-unit id="3661396981300905072" datatype="html">
+        <source>10-49</source>
+      </trans-unit>
+      <trans-unit id="3896989358847554248" datatype="html">
+        <source>50-99</source>
+      </trans-unit>
+      <trans-unit id="5436511887028802929" datatype="html">
+        <source>100-499</source>
+      </trans-unit>
+      <trans-unit id="2658591105955377911" datatype="html">
+        <source>Deaktiver organisation</source>
+      </trans-unit>
+      <trans-unit id="30353932920713445" datatype="html">
+        <source>Deaktiveret</source>
+      </trans-unit>
+      <trans-unit id="5276951449236966341" datatype="html">
+        <source>Aktiver organisation</source>
+      </trans-unit>
+      <trans-unit id="8904850498581421228" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</source>
+      </trans-unit>
+      <trans-unit id="1737753151350322492" datatype="html">
+        <source>
+          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
+        </source>
+      </trans-unit>
+      <trans-unit id="5689718324419972780" datatype="html">
+        <source>Organisationen er deaktiveret</source>
+      </trans-unit>
+      <trans-unit id="6696794945051147035" datatype="html">
+        <source>Organisationen er aktiveret</source>
+      </trans-unit>
+      <trans-unit id="6995545189473293396" datatype="html">
+        <source>aktivere</source>
+      </trans-unit>
+      <trans-unit id="9100551003701703988" datatype="html">
+        <source>deaktivere</source>
       </trans-unit>
     </body>
   </file>

@@ -6305,17 +6305,9 @@
         <source>&lt;10</source>
         <target state="new">&lt;10</target>
       </trans-unit>
-      <trans-unit id="4394847010841516727" datatype="html">
-        <source>10-50</source>
-        <target state="new">10-50</target>
-      </trans-unit>
-      <trans-unit id="2828536783863894665" datatype="html">
-        <source>50-100</source>
-        <target state="new">50-100</target>
-      </trans-unit>
-      <trans-unit id="1915808090055857753" datatype="html">
-        <source>&gt;100</source>
-        <target state="new">&gt;100</target>
+      <trans-unit id="6548617905005677059" datatype="html">
+        <source>&gt;500</source>
+        <target state="new">&gt;500</target>
       </trans-unit>
       <trans-unit id="4766365470163586672" datatype="html">
         <source>Den markerede kontrakt er inaktiv</source>
@@ -6416,10 +6408,6 @@
       <trans-unit id="3609485978604004141" datatype="html">
         <source>kontrakt</source>
         <target state="new">kontrakt</target>
-      </trans-unit>
-      <trans-unit id="8979685620310883836" datatype="html">
-        <source>Data bevares men udvalgte eller alle dokumenter kan kasseres</source>
-        <target state="new">Data bevares men udvalgte eller alle dokumenter kan kasseres</target>
       </trans-unit>
       <trans-unit id="8902690316511427918" datatype="html">
         <source>Dette filtrerer dine systemer efter om det er tilgængeligt eller et udgået system, som ikke længere kan tages i anvendelse og bør udfases.</source>
@@ -7084,6 +7072,74 @@
       <trans-unit id="3318988066489296525" datatype="html">
         <source>Denne rolle anvendes af en ekstern leverandør</source>
         <target state="new">Denne rolle anvendes af en ekstern leverandør</target>
+      </trans-unit>
+      <trans-unit id="7919209008088997713" datatype="html">
+        <source>Data bevares, men dokumenter kan kasseres (B+K)</source>
+        <target state="new">Data bevares, men dokumenter kan kasseres (B+K)</target>
+      </trans-unit>
+      <trans-unit id="4892140758127492524" datatype="html">
+        <source>Data kasseres, og en delmængde af dokumenter kan kasseres (K+D)</source>
+        <target state="new">Data kasseres, og en delmængde af dokumenter kan kasseres (K+D)</target>
+      </trans-unit>
+      <trans-unit id="7371699005452820313" datatype="html">
+        <source>Data kasseres, men dokumenter skal bevares (K+B)</source>
+        <target state="new">Data kasseres, men dokumenter skal bevares (K+B)</target>
+      </trans-unit>
+      <trans-unit id="4135820424863127072" datatype="html">
+        <source>Data bevares, men en delmængde af dokumenter kan kasseres (B+D)</source>
+        <target state="new">Data bevares, men en delmængde af dokumenter kan kasseres (B+D)</target>
+      </trans-unit>
+      <trans-unit id="3661396981300905072" datatype="html">
+        <source>10-49</source>
+        <target state="new">10-49</target>
+      </trans-unit>
+      <trans-unit id="3896989358847554248" datatype="html">
+        <source>50-99</source>
+        <target state="new">50-99</target>
+      </trans-unit>
+      <trans-unit id="5436511887028802929" datatype="html">
+        <source>100-499</source>
+        <target state="new">100-499</target>
+      </trans-unit>
+      <trans-unit id="30353932920713445" datatype="html">
+        <source>Deaktiveret</source>
+        <target state="new">Deaktiveret</target>
+      </trans-unit>
+      <trans-unit id="5276951449236966341" datatype="html">
+        <source>Aktiver organisation</source>
+        <target state="new">Aktiver organisation</target>
+      </trans-unit>
+      <trans-unit id="2658591105955377911" datatype="html">
+        <source>Deaktiver organisation</source>
+        <target state="new">Deaktiver organisation</target>
+      </trans-unit>
+      <trans-unit id="8904850498581421228" datatype="html">
+        <source>Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</source>
+        <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</target>
+      </trans-unit>
+      <trans-unit id="1737753151350322492" datatype="html">
+        <source>
+          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
+        </source>
+        <target state="new">
+          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
+        </target>
+      </trans-unit>
+      <trans-unit id="5689718324419972780" datatype="html">
+        <source>Organisationen er deaktiveret</source>
+        <target state="new">Organisationen er deaktiveret</target>
+      </trans-unit>
+      <trans-unit id="6696794945051147035" datatype="html">
+        <source>Organisationen er aktiveret</source>
+        <target state="new">Organisationen er aktiveret</target>
+      </trans-unit>
+      <trans-unit id="6995545189473293396" datatype="html">
+        <source>aktivere</source>
+        <target state="new">aktivere</target>
+      </trans-unit>
+      <trans-unit id="9100551003701703988" datatype="html">
+        <source>deaktivere</source>
+        <target state="new">deaktivere</target>
       </trans-unit>
     </body>
   </file>

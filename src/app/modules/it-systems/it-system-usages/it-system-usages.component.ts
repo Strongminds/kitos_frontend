@@ -26,10 +26,12 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
+import { gdprCriticalityOptions } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
+import { yesNoBooleanOptions } from 'src/app/shared/models/yes-no-boolean-options.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { yesNoPartiallyOptions } from 'src/app/shared/models/yes-no-partially.model';
@@ -57,7 +59,6 @@ import { GridOptionsButtonComponent } from '../../../shared/components/grid-opti
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
-import { gdprCriticalityOptions } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -374,16 +375,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Er dokumentbærende`,
       section: ARCHIVE_SECTION_NAME,
       filter: 'boolean',
-      extraData: [
-        {
-          name: $localize`Ja`,
-          value: true,
-        },
-        {
-          name: $localize`Nej`,
-          value: false,
-        },
-      ],
+      extraData: yesNoBooleanOptions,
       entityType: 'it-system-usage',
       style: 'chip',
       hidden: false,
@@ -631,8 +623,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'gdprCriticality',
       extraFilter: 'enum',
       style: 'enum',
-      extraData: gdprCriticalityOptions
-    }
+      extraData: gdprCriticalityOptions,
+    },
   ];
 
   public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);

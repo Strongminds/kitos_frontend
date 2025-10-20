@@ -133,6 +133,7 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   @Output() rowIdSelect = new EventEmitter<CellClickEvent>();
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
+  @Output() toggleEvent = new EventEmitter<BooleanChange<T>>();
   @Output() checkboxChange = new EventEmitter<BooleanChange<T>>();
 
   private data: GridData | null = null;
@@ -270,6 +271,10 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
 
   public onDeleteClick(item: T) {
     this.deleteEvent.emit(item);
+  }
+
+  public onToggleClick(value: boolean, item: T) {
+    this.toggleEvent.emit({ value, item });
   }
 
   public onColumnReorder(event: ColumnReorderEvent, columns: GridColumn[]) {

@@ -270,6 +270,7 @@ model/namedEntityWithUserFullNameV2DTO.ts
 model/notificationResourcePermissionsDTO.ts
 model/notificationResponseDTO.ts
 model/organizationCreateRequestDTO.ts
+model/organizationDisabledStatusRequestDTO.ts
 model/organizationGridConfigurationRequestDTO.ts
 model/organizationGridConfigurationResponseDTO.ts
 model/organizationGridPermissionsResponseDTO.ts
