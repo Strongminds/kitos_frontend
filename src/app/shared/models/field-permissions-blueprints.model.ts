@@ -9,3 +9,7 @@ export const dataProcessingFields = {
     },
   },
 };
+
+export const itSystemUsageFields = {
+  containsAITechnology: 'ITSystemUsage.ContainsAITechnology',
+};

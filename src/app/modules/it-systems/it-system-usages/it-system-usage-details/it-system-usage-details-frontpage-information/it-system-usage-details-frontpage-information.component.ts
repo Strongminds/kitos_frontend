@@ -12,6 +12,7 @@ import {
 } from 'src/app/shared/helpers/form.helpers';
 import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
+import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
@@ -35,6 +36,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasModifyPermission,
+  selectITSystemusageFieldPermissions,
   selectItSystemUsage,
   selectItSystemUsageGeneral,
   selectItSystemUsageValid,
@@ -93,7 +95,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
-    { updateOn: 'blur' },
+    { updateOn: 'blur' }
   );
 
   public readonly aiTechnologyOptions = yesNoOptions;
@@ -111,6 +113,10 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
   public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
+
+  public readonly containsAITechnologyModifyEnabled$ = this.store.select(
+    selectITSystemusageFieldPermissions(itSystemUsageFields.containsAITechnology)
+  );
 
   public readonly showSystemUsageCard$ = combineOR([
     this.takenIntoUsageByEnabled$,
@@ -131,7 +137,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       validTo: new FormControl<Date | undefined>(undefined),
       valid: new FormControl({ value: '', disabled: true }),
     },
-    { updateOn: 'blur' },
+    { updateOn: 'blur' }
   );
 
   public readonly webAccessibilityForm = new FormGroup({
@@ -159,23 +165,20 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       ];
 
       return $localize`Følgende gør systemet 'ikke aktivt': ` + '\n' + toBulletPoints(reasonsForInactivity);
-    }),
+    })
   );
 
-  constructor(
-    private store: Store,
-    private notificationService: NotificationService,
-  ) {
+  constructor(private store: Store, private notificationService: NotificationService) {
     super();
   }
 
   ngOnInit() {
     // Add custom date validators
     this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
-      this.itSystemApplicationForm.controls.validTo,
+      this.itSystemApplicationForm.controls.validTo
     );
     this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
-      this.itSystemApplicationForm.controls.validFrom,
+      this.itSystemApplicationForm.controls.validFrom
     );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
@@ -188,7 +191,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           this.itSystemInformationForm.disable();
           this.itSystemApplicationForm.disable();
           this.webAccessibilityForm.disable();
-        }),
+        })
     );
 
     this.subscriptions.add(
@@ -201,8 +204,20 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           this.webAccessibilityForm.controls.lastWebAccessibilityCheck.disable();
           this.webAccessibilityForm.controls.webAccessibilityNotes.disable();
         }
-      }),
+      })
     );
+
+    // Disable AI technology field when containsAITechnologyModifyEnabled is true
+    this.subscriptions.add(
+      this.containsAITechnologyModifyEnabled$.subscribe((isModifyEnabled) => {
+        if (isModifyEnabled) {
+          this.itSystemInformationForm.controls.aiTechnology.enable();
+        } else {
+          this.itSystemInformationForm.controls.aiTechnology.disable();
+        }
+      })
+    );
+
     // Set initial state of information form
     this.subscriptions.add(
       this.store
@@ -224,7 +239,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck),
             webAccessibilityNotes: general.webAccessibilityNotes,
           });
-        }),
+        })
     );
 
     // Set initial state of application form
@@ -243,8 +258,8 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             valid: itSystemUsage.general.validity.valid
               ? $localize`Systemet er aktivt`
               : $localize`Systemet er ikke aktivt`,
-          }),
-        ),
+          })
+        )
     );
   }
 
