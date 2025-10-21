@@ -23,6 +23,7 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
 import { SystemRelationDialogComponent } from '../system-relation-dialog/system-relation-dialog.component';
+import { Observable } from 'tinymce';
 
 export interface SystemRelationCreateDialogFormModel {
   systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
@@ -78,8 +79,10 @@ export class CreateRelationDialogComponent extends BaseComponent {
   public readonly interfacesAsMultiSelectDropdownItems$ = this.componentStore.interfacesAsMultiSelectDropdownItems$;
 
   public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
+  public readonly interfacesDropdownResetSubject$ = new Subject<void>();
 
   public readonly usageSearchResultIsLimited$ = this.componentStore.usageSearchResultIsLimited$;
+  public clearInterfaceInputFlag$ = new Subject<boolean>();
 
   public readonly availableReferenceFrequencyTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_usage-relation-frequency-type'))
@@ -112,7 +115,6 @@ export class CreateRelationDialogComponent extends BaseComponent {
       combineLatest([this.selectedSystemUuid$, this.searchInterfaceTerm$])
         .pipe(map(([systemUuid, searchTerm]) => ({ systemUuid, searchTerm })))
         .subscribe(({ systemUuid, searchTerm }) => {
-          console.log(`Searching interfaces for system ${systemUuid} with term "${searchTerm}"`);
           this.componentStore.getItInterfaces({ systemUuid: systemUuid, search: searchTerm });
         })
     );
@@ -120,7 +122,8 @@ export class CreateRelationDialogComponent extends BaseComponent {
     //when usage is selected enable the form, otherwise turn it off (other than the usage dropdown)
     this.subscriptions.add(
       this.changedSystemUsageUuid$.subscribe((usageUuid) => {
-        this.relationForm.controls.interfaces.reset();
+        this.interfacesDropdownResetSubject$.next();
+        this.relationForm.controls.interfaces.reset(); //TODO remove if really not working with reactive forms
         if (usageUuid) {
           this.relationForm.enable();
         } else {
@@ -171,7 +174,6 @@ export class CreateRelationDialogComponent extends BaseComponent {
   }
 
   public interfaceValueChange(newInterfaces: APIIdentityNamePairResponseDTO[]) {
-    console.log('Selected interface: ', JSON.stringify(newInterfaces));
     this.relationForm.controls.interfaces.setValue(newInterfaces);
   }
 
