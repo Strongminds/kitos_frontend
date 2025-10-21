@@ -51,10 +51,6 @@ export function getDetailsPageLink(
           itemPathIncludesSubmodule
         );
       case 'it-system-usage':
-        console.log('Link ibasdunias sdaa ');
-        console.log(itemUuid);
-        console.log(subpagePath);
-        console.log(itemPathIncludesSubmodule);
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
           itemUuid,
