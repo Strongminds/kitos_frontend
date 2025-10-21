@@ -1,9 +1,9 @@
-import { Component } from '@angular/core';
-import { BaseCellComponent } from '../../base-cell.component';
-import { ParagraphComponent } from '../../../../paragraph/paragraph.component';
 import { NgIf } from '@angular/common';
-import { DetailsPageLinkComponent } from '../../../../details-page-link/details-page-link.component';
+import { Component } from '@angular/core';
 import { SearchPropertyPipe } from '../../../../../pipes/column-property.pipe';
+import { DetailsPageLinkComponent } from '../../../../details-page-link/details-page-link.component';
+import { ParagraphComponent } from '../../../../paragraph/paragraph.component';
+import { BaseCellComponent } from '../../base-cell.component';
 
 @Component({
   selector: 'app-page-link-cell',
