@@ -1,10 +1,12 @@
 import { createSelector } from '@ngrx/store';
+import { memoize } from 'lodash';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { mapToRoleAssignmentsRequests } from 'src/app/shared/helpers/role-helpers';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 import { mapIdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { mapDataSensitivityLevel } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { mapSpecificPersonalData } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
+import { FieldPermissionsService } from 'src/app/shared/services/field-permissions.service';
 import { itSystemUsageAdapter, itSystemUsageFeature } from './reducer';
 
 const { selectITSystemUsageState } = itSystemUsageFeature;
@@ -65,6 +67,13 @@ export const selectITSystemUsageHasModifyPermission = createSelector(
 export const selectITSystemUsageHasDeletePermission = createSelector(
   selectITSystemUsageState,
   (state) => state.permissions?.delete
+);
+export const selectITSystemUsageFieldPermissions = memoize((field: string) =>
+  createSelector(selectITSystemUsageState, (state) =>
+    state.permissions?.fieldPermissions?.fields
+      ? FieldPermissionsService.hasPermission(state.permissions.fieldPermissions.fields, field)
+      : false
+  )
 );
 export const selectITSystemUsageHasCreateCollectionPermission = createSelector(
   selectITSystemUsageState,
