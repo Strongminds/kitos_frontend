@@ -80,22 +80,13 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
   }
 
   ngOnInit(): void {
+    this.setupChangeSubscriptions();
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
-
-    //on selected system usage change or interface search change, load the interfaces
-    this.subscriptions.add(
-      combineLatest([this.selectedSystemUuid$, this.searchInterfaceTerm$])
-        .pipe(map(([systemUuid, searchTerm]) => ({ systemUuid, searchTerm })))
-        .subscribe(({ systemUuid, searchTerm }) => {
-          this.componentStore.getItInterfaces({ systemUuid: systemUuid, search: searchTerm });
-        })
-    );
 
     //when usage is selected enable the form, otherwise turn it off (other than the usage dropdown)
     this.subscriptions.add(
       this.changedSystemUsageUuid$.subscribe((usageUuid) => {
         this.interfacesDropdownResetSubject$.next();
-        this.relationForm.controls.interfaces.reset(); //TODO remove if really not working with reactive forms
         if (usageUuid) {
           this.relationForm.enable();
         } else {
@@ -116,20 +107,6 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
           first()
         )
         .subscribe(() => this.dialog.close())
-    );
-
-    //on error set isBusy to false
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.addItSystemUsageRelationsError,
-            ITSystemUsageActions.patchItSystemUsageRelationError
-          )
-        )
-        .subscribe(() => {
-          this.isBusy = false;
-        })
     );
   }
 
