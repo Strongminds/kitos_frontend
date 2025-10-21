@@ -77,19 +77,6 @@ export class ModifyRelationDialogComponent extends SystemRelationDialogComponent
         })
     );
 
-    //when usage is selected enable the form, otherwise turn it off (other than the usage dropdown)
-    this.subscriptions.add(
-      this.changedSystemUsageUuid$.subscribe((usageUuid) => {
-        this.relationForm.controls.interface.reset();
-        if (usageUuid) {
-          this.relationForm.enable();
-        } else {
-          this.relationForm.disable();
-          this.relationForm.controls['systemUsage'].enable();
-        }
-      })
-    );
-
     //on success close the dialog
     this.subscriptions.add(
       this.actions$
@@ -143,6 +130,19 @@ export class ModifyRelationDialogComponent extends SystemRelationDialogComponent
 
     //update the current usage uuid
     this.componentStore.updateCurrentSystemUuid(this.relationModel.systemUsage.uuid);
+
+    //when usage is selected enable the form, otherwise turn it off (other than the usage dropdown)
+    this.subscriptions.add(
+      this.changedSystemUsageUuid$.subscribe((usageUuid) => {
+        this.relationForm.controls.interface.reset();
+        if (usageUuid) {
+          this.relationForm.enable();
+        } else {
+          this.relationForm.disable();
+          this.relationForm.controls['systemUsage'].enable();
+        }
+      })
+    );
   }
 
   public save() {

@@ -33,7 +33,7 @@ export interface SystemRelationDialogFormModel {
 }
 
 @Component({
-  selector: 'app-system-relation-dialog[title][saveText][relationForm]',
+  selector: 'app-system-relation-dialog[title][saveText]',
   templateUrl: './system-relation-dialog.component.html',
   styleUrls: ['./system-relation-dialog.component.scss'],
   imports: [
