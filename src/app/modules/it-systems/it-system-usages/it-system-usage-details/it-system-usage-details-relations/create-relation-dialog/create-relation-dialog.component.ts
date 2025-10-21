@@ -4,7 +4,7 @@ import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, first, map, Subject } from 'rxjs';
+import { first, Subject } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -17,7 +17,6 @@ import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.c
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
-import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
 import { SystemRelationDialogComponent } from '../system-relation-dialog/system-relation-dialog.component';
 
@@ -73,7 +72,7 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
   constructor(
     protected override readonly store: Store,
     protected override readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
-    protected override readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
+    protected override readonly dialog: MatDialogRef<CreateRelationDialogComponent>,
     protected override readonly actions$: Actions
   ) {
     super(store, componentStore, dialog, actions$);

@@ -1,12 +1,11 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, first, map, Subject } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { combineLatest, first, map } from 'rxjs';
+import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
@@ -15,10 +14,8 @@ import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
-import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { SystemRelationModel } from '../relation-table/relation-table.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
 import { SystemRelationDialogComponent } from '../system-relation-dialog/system-relation-dialog.component';
@@ -52,49 +49,23 @@ export interface SystemRelationModifyDialogFormModel {
     ConnectedDropdownComponent,
   ],
 })
-export class ModifyRelationDialogComponent extends BaseComponent implements OnInit {
+export class ModifyRelationDialogComponent extends SystemRelationDialogComponent implements OnInit {
   @Input() public relationModel!: SystemRelationModel;
 
   public relationForm!: FormGroup<SystemRelationModifyDialogFormModel>;
-
-  @Input() public title!: string;
-  @Input() public saveText!: string;
-  @Output() public saveRequested = new EventEmitter<APISystemRelationWriteRequestDTO>();
-
-  public readonly systemUsages$ = this.componentStore.systemUsages$;
-  public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
-  public readonly contracts$ = this.componentStore.contracts$;
-  public readonly contractsLoading$ = this.componentStore.contractsLoading$;
   public readonly interfaces$ = this.componentStore.interfaces$;
 
-  public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
-
-  public readonly usageSearchResultIsLimited$ = this.componentStore.usageSearchResultIsLimited$;
-
-  public readonly availableReferenceFrequencyTypes$ = this.store
-    .select(selectRegularOptionTypes('it-system_usage-relation-frequency-type'))
-    .pipe(filterNullish());
-
-  //current system Uuid (system, not system usage)
-  private readonly selectedSystemUuid$ = this.componentStore.systemUuid$;
-
-  //selected usage uuids
-  private readonly changedSystemUsageUuid$ = this.componentStore.changedSystemUsageUuid$;
-  //interface search terms
-  private readonly searchInterfaceTerm$ = new Subject<string | undefined>();
-
-  public isBusy = false;
-
   constructor(
-    protected readonly store: Store,
-    protected readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
-    private readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
-    private readonly actions$: Actions
+    protected override readonly store: Store,
+    protected override readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
+    protected override readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
+    protected override readonly actions$: Actions
   ) {
-    super();
+    super(store, componentStore, dialog, actions$);
   }
 
   ngOnInit(): void {
+    this.setupChangeSubscriptions();
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
 
     //on selected system usage change or interface search change, load the interfaces
@@ -174,23 +145,6 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
     this.componentStore.updateCurrentSystemUuid(this.relationModel.systemUsage.uuid);
   }
 
-  public usageFilterChange(search?: string) {
-    this.componentStore.getItSystemUsages(search);
-  }
-
-  public contractFilterChange(search?: string) {
-    this.componentStore.getItContracts(search);
-  }
-
-  public interfaceFilterChange(search?: string) {
-    this.searchInterfaceTerm$.next(search);
-  }
-
-
-  public usageChange(usageUuid?: string) {
-    this.componentStore.updateCurrentSystemUuid(usageUuid);
-  }
-
   public save() {
     if (!this.relationForm.valid) return;
 
@@ -199,6 +153,7 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
 
     this.isBusy = true;
     var formValue = this.relationForm.value;
+
     const request = {
       toSystemUsageUuid: usage.uuid,
       relationInterfaceUuid: formValue.interface?.uuid,
@@ -209,9 +164,5 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
     };
 
     this.store.dispatch(ITSystemUsageActions.patchItSystemUsageRelation(this.relationModel.uuid, request));
-  }
-
-  public close() {
-    this.dialog.close();
   }
 }

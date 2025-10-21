@@ -59,7 +59,6 @@ export class SystemRelationDialogComponent extends BaseComponent {
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
   public readonly contracts$ = this.componentStore.contracts$;
   public readonly contractsLoading$ = this.componentStore.contractsLoading$;
-  public readonly interfaces$ = this.componentStore.interfacesAsMultiSelectDropdownItems$;
 
   public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
 
@@ -82,7 +81,7 @@ export class SystemRelationDialogComponent extends BaseComponent {
   constructor(
     protected readonly store: Store,
     protected readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
-    protected readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
+    protected readonly dialog: MatDialogRef<SystemRelationDialogComponent>,
     protected readonly actions$: Actions
   ) {
     super();
@@ -98,19 +97,6 @@ export class SystemRelationDialogComponent extends BaseComponent {
         .subscribe(({ systemUuid, searchTerm }) => {
           this.componentStore.getItInterfaces({ systemUuid: systemUuid, search: searchTerm });
         })
-    );
-
-    //on success close the dialog
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(
-            ITSystemUsageActions.addItSystemUsageRelationSuccess,
-            ITSystemUsageActions.patchItSystemUsageRelationSuccess
-          ),
-          first()
-        )
-        .subscribe(() => this.dialog.close())
     );
 
     //on error set isBusy to false
