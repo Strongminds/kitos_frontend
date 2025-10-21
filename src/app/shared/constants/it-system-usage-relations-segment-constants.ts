@@ -6,9 +6,9 @@ export enum ItSystemUsageRelationSegmentOption {
 }
 
 export const itSystemUsageRelationSegmentOptions: SegmentButtonOption<ItSystemUsageRelationSegmentOption>[] = [
-  { text: $localize`Outgoing relations`, value: ItSystemUsageRelationSegmentOption.Outgoing },
+  { text: $localize`Udgående relationer`, value: ItSystemUsageRelationSegmentOption.Outgoing },
   {
-    text: $localize`Incoming relations`,
+    text: $localize`Indkommende relationer`,
     value: ItSystemUsageRelationSegmentOption.Incoming,
   },
 ];

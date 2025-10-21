@@ -1033,10 +1033,6 @@
         <source>Rediger relation</source>
         <target state="new">Rediger relation</target>
       </trans-unit>
-      <trans-unit id="5352164979175740771" datatype="html">
-        <source>It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></source>
-        <target state="new">It system <x id="INTERPOLATION" equiv-text="{{ isOutgoing ? &quot;(udstiller)&quot; : &quot;(anvender)&quot; }}"/></target>
-      </trans-unit>
       <trans-unit id="8852940730552945902" datatype="html">
         <source>Er du sikker på at du vil fjerne denne relation</source>
         <target state="new">Er du sikker på at du vil fjerne denne relation</target>
@@ -7117,14 +7113,6 @@
         <source>Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</source>
         <target state="new">Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</target>
       </trans-unit>
-      <trans-unit id="1737753151350322492" datatype="html">
-        <source>
-          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
-        </source>
-        <target state="new">
-          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
-        </target>
-      </trans-unit>
       <trans-unit id="5689718324419972780" datatype="html">
         <source>Organisationen er deaktiveret</source>
         <target state="new">Organisationen er deaktiveret</target>
@@ -7140,6 +7128,22 @@
       <trans-unit id="9100551003701703988" datatype="html">
         <source>deaktivere</source>
         <target state="new">deaktivere</target>
+      </trans-unit>
+      <trans-unit id="3325502359579773020" datatype="html">
+        <source>It system (udstiller)</source>
+        <target state="new">It system (udstiller)</target>
+      </trans-unit>
+      <trans-unit id="4904014059185874531" datatype="html">
+        <source>It system (anvender)</source>
+        <target state="new">It system (anvender)</target>
+      </trans-unit>
+      <trans-unit id="9169283032104147432" datatype="html">
+        <source>Udgående relationer</source>
+        <target state="new">Udgående relationer</target>
+      </trans-unit>
+      <trans-unit id="2906905998458410320" datatype="html">
+        <source>Indkommende relationer</source>
+        <target state="new">Indkommende relationer</target>
       </trans-unit>
     </body>
   </file>
