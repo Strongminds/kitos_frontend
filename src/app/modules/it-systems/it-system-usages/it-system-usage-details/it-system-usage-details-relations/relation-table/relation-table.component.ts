@@ -10,6 +10,7 @@ import { createGridActionColumn } from 'src/app/shared/models/grid-action-column
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypesDictionary } from 'src/app/store/regular-option-type-store/selectors';
 import { EmptyStateComponent } from '../../../../../../shared/components/empty-states/empty-state.component';
 import { LocalGridComponent } from '../../../../../../shared/components/local-grid/local-grid.component';
@@ -40,6 +41,7 @@ export class RelationTableComponent extends BaseComponent implements OnInit {
   @Input() public hasModifyPermissions = false;
 
   public isLoading = true;
+  public processedRelations: Array<SystemRelationModel> = [];
   public columns: GridColumn[] = [
     {
       field: 'systemUsage.name',
@@ -95,7 +97,7 @@ export class RelationTableComponent extends BaseComponent implements OnInit {
     createGridActionColumn(['edit', 'delete']),
   ];
 
-  public readonly availableReferenceFrequencyTypes$ = this.store
+  private readonly availableReferenceFrequencyTypes$ = this.store
     .select(selectRegularOptionTypesDictionary('it-system_usage-relation-frequency-type'))
     .pipe(filterNullish());
 
@@ -104,12 +106,42 @@ export class RelationTableComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.setupColumns();
     this.isLoading = false;
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
+
+    this.subscriptions.add(
+      this.availableReferenceFrequencyTypes$.subscribe(() => {
+        this.processExpiredFrequencyTypes();
+      })
+    );
   }
 
-  private setupColumns(): void {
-    const systemTitle = this.isOutgoing ? $localize`It system (udstiller)` : $localize`It system (anvender)`;
+  private processExpiredFrequencyTypes(): void {
+    this.subscriptions.add(
+      this.availableReferenceFrequencyTypes$.subscribe((availableReferenceFrequencyTypes) => {
+        if (availableReferenceFrequencyTypes && this.relations) {
+          this.processedRelations = this.relations.map((relation) => {
+            if (relation.relationFrequency) {
+              const availableTypes = Object.values(availableReferenceFrequencyTypes);
+              const isAvailable = availableTypes.some((type) => type?.uuid === relation.relationFrequency?.uuid);
+
+              if (!isAvailable && relation.relationFrequency.name) {
+                return {
+                  ...relation,
+                  relationFrequency: {
+                    ...relation.relationFrequency,
+                    name: $localize`${relation.relationFrequency.name} (udgået)`,
+                  },
+                };
+              }
+            }
+            return relation;
+          });
+        } else {
+          this.processedRelations = this.relations || [];
+        }
+      })
+    );
   }
 
   public onModify(relation: SystemRelationModel) {

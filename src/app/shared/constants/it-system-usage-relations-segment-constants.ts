@@ -10,5 +10,6 @@ export const itSystemUsageRelationSegmentOptions: SegmentButtonOption<ItSystemUs
   {
     text: $localize`Indkommende relationer`,
     value: ItSystemUsageRelationSegmentOption.Incoming,
+    dataCy: 'incoming-relations-segment-button',
   },
 ];

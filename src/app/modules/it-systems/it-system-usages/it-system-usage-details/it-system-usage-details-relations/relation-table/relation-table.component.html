@@ -1,7 +1,7 @@
 <app-standard-vertical-content-grid>
   <app-local-grid
-    *ngIf="relations.length > 0; else emptyStateTemplate"
-    [data]="relations"
+    *ngIf="processedRelations.length > 0; else emptyStateTemplate"
+    [data]="processedRelations"
     [columns]="columns"
     [loading]="isLoading"
     [modifyPermission]="modifyPermissions$ | async"
