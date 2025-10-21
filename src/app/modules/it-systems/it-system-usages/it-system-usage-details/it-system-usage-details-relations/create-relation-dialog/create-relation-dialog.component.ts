@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
@@ -15,6 +15,16 @@ import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
+import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
+import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ConnectedDropdownComponent } from 'src/app/shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
+import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
+import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
+import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
+import { AsyncPipe } from '@angular/common';
+import { ConnectedMultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/connected-multi-select-dropdown/connected-multi-select-dropdown.component';
 
 export interface SystemRelationCreateDialogFormModel {
   systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
@@ -30,7 +40,18 @@ export interface SystemRelationCreateDialogFormModel {
   templateUrl: './create-relation-dialog.component.html',
   styleUrls: ['./create-relation-dialog.component.scss'],
   providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
-  imports: [SystemRelationDialogComponent],
+  imports: [SystemRelationDialogComponent, DialogComponent,
+      FormsModule,
+      ReactiveFormsModule,
+      StandardVerticalContentGridComponent,
+      ConnectedDropdownComponent,
+      TextAreaComponent,
+      TextBoxComponent,
+      DropdownComponent,
+      DialogActionsComponent,
+      ButtonComponent,
+      AsyncPipe,
+      ConnectedMultiSelectDropdownComponent,],
 })
 export class CreateRelationDialogComponent extends BaseComponent {
   public relationForm = new FormGroup<SystemRelationCreateDialogFormModel>({

@@ -1,21 +1,27 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Store } from '@ngrx/store';
-import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { SystemRelationModel } from '../relation-table/relation-table.component';
-import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
-import {
-  SystemRelationDialogComponent,
-} from '../system-relation-dialog/system-relation-dialog.component';
-import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { combineLatest, first, map, Subject } from 'rxjs';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
+import { Store } from '@ngrx/store';
+import { combineLatest, first, map, Subject } from 'rxjs';
+import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
+import { ConnectedDropdownComponent } from 'src/app/shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
+import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
+import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
-import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
+import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { SystemRelationModel } from '../relation-table/relation-table.component';
+import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
+import { SystemRelationDialogComponent } from '../system-relation-dialog/system-relation-dialog.component';
 
 export interface SystemRelationModifyDialogFormModel {
   systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
@@ -31,14 +37,27 @@ export interface SystemRelationModifyDialogFormModel {
   templateUrl: './modify-relation-dialog.component.html',
   styleUrls: ['./modify-relation-dialog.component.scss'],
   providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
-  imports: [SystemRelationDialogComponent],
+  imports: [
+    SystemRelationDialogComponent,
+    DialogComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    StandardVerticalContentGridComponent,
+    TextAreaComponent,
+    TextBoxComponent,
+    DropdownComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    AsyncPipe,
+    ConnectedDropdownComponent,
+  ],
 })
 export class ModifyRelationDialogComponent extends BaseComponent implements OnInit {
   @Input() public relationModel!: SystemRelationModel;
 
-  public relationForm!: FormGroup<SystemRelationDialogFormModel>;
+  public relationForm!: FormGroup<SystemRelationModifyDialogFormModel>;
 
-    @Input() public title!: string;
+  @Input() public title!: string;
   @Input() public saveText!: string;
   @Output() public saveRequested = new EventEmitter<APISystemRelationWriteRequestDTO>();
 
@@ -134,7 +153,7 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
           value: this.relationModel.systemUsage,
           disabled: false,
         },
-        Validators.required,
+        Validators.required
       ),
       description: new FormControl<string | undefined>({ value: this.relationModel.description, disabled: false }),
       reference: new FormControl<string | undefined>({ value: this.relationModel.urlReference, disabled: false }),
@@ -168,18 +187,6 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
     this.searchInterfaceTerm$.next(search);
   }
 
-  public interfaceValueChange(newInterface: IdentityNamePair) {
-    console.log('Selected interface: ', JSON.stringify(newInterface));
-    this.relationForm.controls.interface.setValue(newInterface);
-    // this.relationForm.controls.interface.setValue(
-    //   interfaceUuid
-    //     ? {
-    //         uuid: interfaceUuid,
-    //         name: '',
-    //       }
-    //     : null
-    // );
-  }
 
   public usageChange(usageUuid?: string) {
     this.componentStore.updateCurrentSystemUuid(usageUuid);
