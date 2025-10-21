@@ -1,10 +1,12 @@
 import { AsyncPipe, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
+import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
   RiskAssessmentResultOptions,
   mapRiskAssessmentEnum,
@@ -18,7 +20,7 @@ import {
 } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
@@ -78,23 +80,31 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
     { updateOn: 'blur' }
   );
 
+  private readonly riskAssessmentModifyEnabled$ = this.store.select(
+    selectITSystemUsageFieldPermissions(itSystemUsageFields.gdpr.riskAssessment)
+  );
+
   constructor(private readonly store: Store) {
     super();
   }
   ngOnInit(): void {
-    this.isRiskAssessmentFalse$.subscribe((isYesNoDontKnowFalse) => {
-      if (isYesNoDontKnowFalse) {
-        this.riskAssessmentFormGroup.controls.conductedDateControl.disable();
-        this.riskAssessmentFormGroup.controls.assessmentResultControl.disable();
-        this.riskAssessmentFormGroup.controls.notesControl.disable();
-        this.disableDirectoryDocumentationControl = true;
-      } else {
-        this.riskAssessmentFormGroup.controls.conductedDateControl.enable();
-        this.riskAssessmentFormGroup.controls.assessmentResultControl.enable();
-        this.riskAssessmentFormGroup.controls.notesControl.enable();
-        this.disableDirectoryDocumentationControl = false;
-      }
-    });
+    this.isRiskAssessmentFalse$
+      .pipe(concatLatestFrom(() => this.riskAssessmentModifyEnabled$))
+      .subscribe(([isYesNoDontKnowFalse, isRiskAssessmentModifyEnabled]) => {
+        if (isYesNoDontKnowFalse) {
+          this.riskAssessmentFormGroup.controls.conductedDateControl.disable();
+          this.riskAssessmentFormGroup.controls.assessmentResultControl.disable();
+          this.riskAssessmentFormGroup.controls.notesControl.disable();
+          this.disableDirectoryDocumentationControl = true;
+        } else {
+          this.riskAssessmentFormGroup.controls.conductedDateControl.enable();
+          if (isRiskAssessmentModifyEnabled) {
+            this.riskAssessmentFormGroup.controls.assessmentResultControl.enable();
+          }
+          this.riskAssessmentFormGroup.controls.notesControl.enable();
+          this.disableDirectoryDocumentationControl = false;
+        }
+      });
 
     this.currentGdpr$.subscribe((gdpr) => {
       this.riskAssessmentFormGroup.patchValue({
@@ -109,6 +119,15 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
     this.noPermissions.emit([this.riskAssessmentFormGroup]);
     this.disableLinkControl.subscribe(() => {
       this.disableDirectoryDocumentationControl = true;
+    });
+
+    this.riskAssessmentModifyEnabled$.subscribe((enabled) => {
+      const control = this.riskAssessmentFormGroup.controls.assessmentResultControl;
+      if (enabled) {
+        control.enable();
+      } else {
+        control.disable();
+      }
     });
   }
 
