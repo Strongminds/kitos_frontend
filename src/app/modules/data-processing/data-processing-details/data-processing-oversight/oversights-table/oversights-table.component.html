@@ -15,11 +15,11 @@
           <app-paragraph [cropOnOverflow]="true">{{ oversightDate.remark }}</app-paragraph>
         </td>
         <td>
-          <app-external-page-link 
-          [url]="oversightDate.oversightReportLink?.url"
-          [title]="oversightDate.oversightReportLink?.name"
-          placeholderName="Link til tilsynsrapport"
-          i18n-placeholderName
+          <app-external-page-link
+            [url]="oversightDate.oversightReportLink?.url"
+            [title]="oversightDate.oversightReportLink?.name"
+            placeholderName="Link til tilsynsrapport"
+            i18n-placeholderName
           ></app-external-page-link>
         </td>
         <td>
@@ -28,6 +28,7 @@
               ><app-pencil-icon></app-pencil-icon
             ></app-icon-button>
             <app-icon-button
+              *ngIf="oversightDatesCollectionFieldPermission$ | async"
               data-cy="delete-oversight-date-button"
               (buttonClick)="deleteOversightDate(oversightDate.uuid)"
               ><app-trashcan-icon></app-trashcan-icon
@@ -43,11 +44,13 @@
     context="emptyTable"
     i18n-text
   ></app-empty-state>
-  <app-collection-extension-button
-    text="Opret tilsyn"
-    data-cy="add-oversight-date-button"
-    i18n-text
-    (clicked)="addOversightDate()"
-    *ngIf="(hasModifyPermissions$ | async) === true"
-  ></app-collection-extension-button>
+  <ng-container *ngIf="(hasModifyPermissions$ | async) === true">
+    <app-collection-extension-button
+      text="Opret tilsyn"
+      data-cy="add-oversight-date-button"
+      i18n-text
+      (clicked)="addOversightDate()"
+      *ngIf="oversightDatesCollectionFieldPermission$ | async"
+    ></app-collection-extension-button>
+  </ng-container>
 </app-standard-vertical-content-grid>

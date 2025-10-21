@@ -142,6 +142,7 @@ model/changePaymentRegistrationV2RequestDTO.ts
 model/claimResponseDTO.ts
 model/columnConfigurationRequestDTO.ts
 model/columnConfigurationResponseDTO.ts
+model/combinedPermissionsResponseDTO.ts
 model/commandPermissionResponseDTO.ts
 model/connectToStsOrganizationRequestDTO.ts
 model/connectionUpdateConsequencesResponseDTO.ts
@@ -183,7 +184,6 @@ model/dataProcessingRegistrationGeneralDataResponseDTO.ts
 model/dataProcessingRegistrationGeneralDataWriteRequestDTO.ts
 model/dataProcessingRegistrationOversightResponseDTO.ts
 model/dataProcessingRegistrationOversightWriteRequestDTO.ts
-model/dataProcessingRegistrationPermissionsResponseDTO.ts
 model/dataProcessingRegistrationResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorWriteRequestDTO.ts
@@ -201,6 +201,7 @@ model/extendedRoleAssignmentResponseDTO.ts
 model/externalReferenceDataResponseDTO.ts
 model/externalReferenceDataWriteRequestDTO.ts
 model/externalReferenceWithLastChangedResponseDTO.ts
+model/fieldPermissionsResponseDTO.ts
 model/gDPRRegistrationsResponseDTO.ts
 model/gDPRWriteRequestDTO.ts
 model/gdprReportResponseDTO.ts
@@ -258,6 +259,7 @@ model/localRoleOptionResponseDTO.ts
 model/localRoleOptionUpdateRequestDTO.ts
 model/models.ts
 model/modifyOversightDateDTO.ts
+model/moduleFieldPermissionsResponseDTO.ts
 model/multipleConflictsResponseDTO.ts
 model/multipleContractsRequestDto.ts
 model/mutateRightRequestDTO.ts
