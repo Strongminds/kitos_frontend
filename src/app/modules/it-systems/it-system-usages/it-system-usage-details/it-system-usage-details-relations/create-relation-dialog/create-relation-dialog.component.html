@@ -16,7 +16,7 @@
       <app-connected-multi-select-dropdown
         text="Søg efter snitflader"
         valueField="uuid"
-        [data$]="interfaces$"
+        [data$]="interfacesAsMultiSelectDropdownItems$"
         [isLoading$]="interfacesLoading$"
         (filterChange)="interfaceFilterChange($event)"
         (valueChange)="interfaceValueChange($event)"

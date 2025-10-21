@@ -61,7 +61,7 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
   public readonly contracts$ = this.componentStore.contracts$;
   public readonly contractsLoading$ = this.componentStore.contractsLoading$;
-  public readonly interfaces$ = this.componentStore.interfaces$;
+  public readonly interfaces$ = this.componentStore.interfacesAsMultiSelectDropdownItems$;
 
   public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
 

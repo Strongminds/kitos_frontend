@@ -102,7 +102,6 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
       combineLatest([this.selectedSystemUuid$, this.searchInterfaceTerm$])
         .pipe(map(([systemUuid, searchTerm]) => ({ systemUuid, searchTerm })))
         .subscribe(({ systemUuid, searchTerm }) => {
-          console.log(`Searching interfaces for system ${systemUuid} with term "${searchTerm}"`);
           this.componentStore.getItInterfaces({ systemUuid: systemUuid, search: searchTerm });
         })
     );
@@ -199,14 +198,14 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
     if (!usage) return;
 
     this.isBusy = true;
-
+    var formValue = this.relationForm.value;
     const request = {
       toSystemUsageUuid: usage.uuid,
-      relationInterfaceUuid: this.relationForm.value.interface?.uuid,
-      associatedContractUuid: this.relationForm.value.contract?.uuid,
-      relationFrequencyUuid: this.relationForm.value.frequency?.uuid,
-      description: this.relationForm.value.description ?? undefined,
-      urlReference: this.relationForm.value.reference ?? undefined,
+      relationInterfaceUuid: formValue.interface?.uuid,
+      associatedContractUuid: formValue.contract?.uuid,
+      relationFrequencyUuid: formValue.frequency?.uuid,
+      description: formValue.description ?? undefined,
+      urlReference: formValue.reference ?? undefined,
     };
 
     this.store.dispatch(ITSystemUsageActions.patchItSystemUsageRelation(this.relationModel.uuid, request));

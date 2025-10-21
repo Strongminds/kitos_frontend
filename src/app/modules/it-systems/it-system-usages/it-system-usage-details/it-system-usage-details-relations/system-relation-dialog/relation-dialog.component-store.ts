@@ -47,9 +47,10 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   public readonly contracts$ = this.select((state) => state.contracts).pipe(filterNullish());
   public readonly contractsLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
 
-  public readonly interfaces$: Observable<MultiSelectDropdownItem<APIItInterfaceResponseDTO>[]> = this.select((state) => state.interfaces).pipe(filterNullish(), map((interfaces) =>
-    interfaces.map(x => ({ name: x.name, value: x, disabled: false, selected: false }))
-  ));
+  public readonly interfaces$ = this.select((state) => state.interfaces).pipe(filterNullish());
+
+  public readonly interfacesAsMultiSelectDropdownItems$: Observable<MultiSelectDropdownItem<APIItInterfaceResponseDTO>[]> = this.interfaces$.pipe(map((interfaces) =>
+    interfaces.map(x => ({ name: x.name, value: x, disabled: false, selected: false }))));
 
   private readonly interfacesLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
   private readonly systemUuidLoading$ = this.select((state) => state.systemUuidLoading).pipe(filterNullish());

@@ -75,7 +75,7 @@ export class CreateRelationDialogComponent extends BaseComponent {
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
   public readonly contracts$ = this.componentStore.contracts$;
   public readonly contractsLoading$ = this.componentStore.contractsLoading$;
-  public readonly interfaces$ = this.componentStore.interfaces$;
+  public readonly interfacesAsMultiSelectDropdownItems$ = this.componentStore.interfacesAsMultiSelectDropdownItems$;
 
   public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
 
@@ -194,19 +194,19 @@ export class CreateRelationDialogComponent extends BaseComponent {
             {
               toSystemUsageUuid: usage.uuid,
               relationInterfaceUuid: undefined,
-              associatedContractUuid: this.relationForm.value.contract?.uuid,
-              relationFrequencyUuid: this.relationForm.value.frequency?.uuid,
-              description: this.relationForm.value.description ?? undefined,
-              urlReference: this.relationForm.value.reference ?? undefined,
+              associatedContractUuid: formValue.contract?.uuid,
+              relationFrequencyUuid: formValue.frequency?.uuid,
+              description: formValue.description ?? undefined,
+              urlReference: formValue.reference ?? undefined,
             },
           ]
         : formValue.interfaces.map((x) => ({
             toSystemUsageUuid: usage.uuid,
             relationInterfaceUuid: x.uuid,
-            associatedContractUuid: this.relationForm.value.contract?.uuid,
-            relationFrequencyUuid: this.relationForm.value.frequency?.uuid,
-            description: this.relationForm.value.description ?? undefined,
-            urlReference: this.relationForm.value.reference ?? undefined,
+            associatedContractUuid: formValue.contract?.uuid,
+            relationFrequencyUuid: formValue.frequency?.uuid,
+            description: formValue.description ?? undefined,
+            urlReference: formValue.reference ?? undefined,
           }));
     this.store.dispatch(ITSystemUsageActions.addItSystemUsageRelations(requests));
   }
