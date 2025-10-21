@@ -52,6 +52,13 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
     const dialogRef = this.dialog.open(DropdownDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.title = $localize`Tilføj leverandør`;
+    dialogInstance.description = $localize`Valg af leverandør vil deaktivere følgende felter:`;
+    dialogInstance.bulletPoints = [
+      $localize`Databehandling - Tilsyn - Gennemførte og kommende tilsyn`,
+      $localize`IT Systemer - Systemforside - Indeholder AI-teknologi?`,
+      $localize`IT Systemer - GDPR - Kritikalitet`,
+      $localize`IT Systemer - GDPR - Hvad viste den seneste risikovurdering?`,
+    ];
     dialogInstance.data$ = this.availableSuppliers$;
     dialogInstance.valueField = 'uuid';
     dialogInstance.textField = 'name';

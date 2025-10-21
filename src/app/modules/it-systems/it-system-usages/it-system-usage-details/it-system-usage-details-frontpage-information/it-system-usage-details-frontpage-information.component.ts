@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
 import { APIGeneralDataUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
+import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import {
   dateGreaterThanOrEqualControlValidator,
@@ -82,6 +84,7 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
     TextAreaComponent,
     DatePickerComponent,
     AsyncPipe,
+    TooltipComponent,
   ],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
@@ -97,6 +100,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     },
     { updateOn: 'blur' }
   );
+
+  public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
+  public readonly modifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
   public readonly aiTechnologyOptions = yesNoOptions;
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
@@ -184,14 +190,11 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
     // Disable forms if user does not have rights to modify
     this.subscriptions.add(
-      this.store
-        .select(selectITSystemUsageHasModifyPermission)
-        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
-        .subscribe(() => {
-          this.itSystemInformationForm.disable();
-          this.itSystemApplicationForm.disable();
-          this.webAccessibilityForm.disable();
-        })
+      this.modifyPermission$.pipe(filter((hasModifyPermission) => hasModifyPermission === false)).subscribe(() => {
+        this.itSystemInformationForm.disable();
+        this.itSystemApplicationForm.disable();
+        this.webAccessibilityForm.disable();
+      })
     );
 
     this.subscriptions.add(
