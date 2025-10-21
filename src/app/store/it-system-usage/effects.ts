@@ -447,6 +447,24 @@ export class ITSystemUsageEffects {
     );
   });
 
+   addItSystemUsageRelations$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.addItSystemUsageRelations),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
+      mergeMap(([{ request }, usageUuid]) =>
+        this.apiV2ItSystemUsageInternalService
+          .postManyItSystemUsageInternalV2PostSystemUsageRelations({
+            systemUsageUuid: usageUuid,
+            dtos: request,
+          })
+          .pipe(
+            map((relations) => ITSystemUsageActions.addItSystemUsageRelationsSuccess(usageUuid, relations)),
+            catchError(() => of(ITSystemUsageActions.addItSystemUsageRelationsError()))
+          )
+      )
+    );
+  });
+
   patchItSystemUsageRelation$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.patchItSystemUsageRelation),
