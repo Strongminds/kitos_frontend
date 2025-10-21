@@ -35,8 +35,8 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
+  selectITSystemUsageFieldPermissions,
   selectITSystemUsageHasModifyPermission,
-  selectITSystemusageFieldPermissions,
   selectItSystemUsage,
   selectItSystemUsageGeneral,
   selectItSystemUsageValid,
@@ -115,7 +115,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
 
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
-    selectITSystemusageFieldPermissions(itSystemUsageFields.containsAITechnology)
+    selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology)
   );
 
   public readonly showSystemUsageCard$ = combineOR([

@@ -68,7 +68,7 @@ export const selectITSystemUsageHasDeletePermission = createSelector(
   selectITSystemUsageState,
   (state) => state.permissions?.delete
 );
-export const selectITSystemusageFieldPermissions = memoize((field: string) =>
+export const selectITSystemUsageFieldPermissions = memoize((field: string) =>
   createSelector(selectITSystemUsageState, (state) =>
     state.permissions?.fieldPermissions?.fields
       ? FieldPermissionsService.hasPermission(state.permissions.fieldPermissions.fields, field)
