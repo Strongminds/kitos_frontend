@@ -1,12 +1,11 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, first, map, Subject } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
@@ -16,14 +15,11 @@ import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
-import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
 import { SystemRelationDialogComponent } from '../system-relation-dialog/system-relation-dialog.component';
-import { Observable } from 'tinymce';
 
 export interface SystemRelationCreateDialogFormModel {
   systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
@@ -55,7 +51,7 @@ export interface SystemRelationCreateDialogFormModel {
     ConnectedMultiSelectDropdownComponent,
   ],
 })
-export class CreateRelationDialogComponent extends BaseComponent {
+export class CreateRelationDialogComponent extends SystemRelationDialogComponent {
   public relationForm = new FormGroup<SystemRelationCreateDialogFormModel>({
     systemUsage: new FormControl<APIIdentityNamePairResponseDTO | undefined>(
       { value: undefined, disabled: false },
@@ -68,43 +64,19 @@ export class CreateRelationDialogComponent extends BaseComponent {
     frequency: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
-  @Input() public title!: string;
-  @Input() public saveText!: string;
-  @Output() public saveRequested = new EventEmitter<APISystemRelationWriteRequestDTO>();
-
-  public readonly systemUsages$ = this.componentStore.systemUsages$;
-  public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
-  public readonly contracts$ = this.componentStore.contracts$;
-  public readonly contractsLoading$ = this.componentStore.contractsLoading$;
   public readonly interfacesAsMultiSelectDropdownItems$ = this.componentStore.interfacesAsMultiSelectDropdownItems$;
 
-  public readonly interfacesLoading$ = this.componentStore.isInterfacesOrSystemUuidLoading$;
   public readonly interfacesDropdownResetSubject$ = new Subject<void>();
 
-  public readonly usageSearchResultIsLimited$ = this.componentStore.usageSearchResultIsLimited$;
   public clearInterfaceInputFlag$ = new Subject<boolean>();
 
-  public readonly availableReferenceFrequencyTypes$ = this.store
-    .select(selectRegularOptionTypes('it-system_usage-relation-frequency-type'))
-    .pipe(filterNullish());
-
-  //current system Uuid (system, not system usage)
-  private readonly selectedSystemUuid$ = this.componentStore.systemUuid$;
-
-  //selected usage uuids
-  private readonly changedSystemUsageUuid$ = this.componentStore.changedSystemUsageUuid$;
-  //interface search terms
-  private readonly searchInterfaceTerm$ = new Subject<string | undefined>();
-
-  public isBusy = false;
-
   constructor(
-    protected readonly store: Store,
-    protected readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
-    private readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
-    private readonly actions$: Actions
+    protected override readonly store: Store,
+    protected override readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
+    protected override readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
+    protected override readonly actions$: Actions
   ) {
-    super();
+    super(store, componentStore, dialog, actions$);
   }
 
   ngOnInit(): void {
@@ -161,24 +133,8 @@ export class CreateRelationDialogComponent extends BaseComponent {
     );
   }
 
-  public usageFilterChange(search?: string) {
-    this.componentStore.getItSystemUsages(search);
-  }
-
-  public contractFilterChange(search?: string) {
-    this.componentStore.getItContracts(search);
-  }
-
-  public interfaceFilterChange(search?: string) {
-    this.searchInterfaceTerm$.next(search);
-  }
-
   public interfaceValueChange(newInterfaces: APIIdentityNamePairResponseDTO[]) {
     this.relationForm.controls.interfaces.setValue(newInterfaces);
-  }
-
-  public usageChange(usageUuid?: string) {
-    this.componentStore.updateCurrentSystemUuid(usageUuid);
   }
 
   public save() {
@@ -211,9 +167,5 @@ export class CreateRelationDialogComponent extends BaseComponent {
             urlReference: formValue.reference ?? undefined,
           }));
     this.store.dispatch(ITSystemUsageActions.addItSystemUsageRelations(requests));
-  }
-
-  public close() {
-    this.dialog.close();
   }
 }

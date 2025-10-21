@@ -1,11 +1,11 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component, Input } from '@angular/core';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { Subject, combineLatest, first, map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConnectedMultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/connected-multi-select-dropdown/connected-multi-select-dropdown.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -51,11 +51,9 @@ export interface SystemRelationDialogFormModel {
     ConnectedMultiSelectDropdownComponent,
   ],
 })
-export class SystemRelationDialogComponent extends BaseComponent implements OnInit {
+export class SystemRelationDialogComponent extends BaseComponent {
   @Input() public title!: string;
   @Input() public saveText!: string;
-  @Input() public relationForm!: FormGroup<SystemRelationDialogFormModel>;
-  @Output() public saveRequested = new EventEmitter<APISystemRelationWriteRequestDTO>();
 
   public readonly systemUsages$ = this.componentStore.systemUsages$;
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;
@@ -72,25 +70,25 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
     .pipe(filterNullish());
 
   //current system Uuid (system, not system usage)
-  private readonly selectedSystemUuid$ = this.componentStore.systemUuid$;
+  protected readonly selectedSystemUuid$ = this.componentStore.systemUuid$;
 
   //selected usage uuids
-  private readonly changedSystemUsageUuid$ = this.componentStore.changedSystemUsageUuid$;
+  protected readonly changedSystemUsageUuid$ = this.componentStore.changedSystemUsageUuid$;
   //interface search terms
-  private readonly searchInterfaceTerm$ = new Subject<string | undefined>();
+  protected readonly searchInterfaceTerm$ = new Subject<string | undefined>();
 
   public isBusy = false;
 
   constructor(
     protected readonly store: Store,
     protected readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
-    private readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
-    private readonly actions$: Actions
+    protected readonly dialog: MatDialogRef<ModifyRelationDialogComponent>,
+    protected readonly actions$: Actions
   ) {
     super();
   }
 
-  ngOnInit(): void {
+  protected setupChangeSubscriptions() {
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
 
     //on selected system usage change or interface search change, load the interfaces
@@ -98,22 +96,8 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
       combineLatest([this.selectedSystemUuid$, this.searchInterfaceTerm$])
         .pipe(map(([systemUuid, searchTerm]) => ({ systemUuid, searchTerm })))
         .subscribe(({ systemUuid, searchTerm }) => {
-          console.log(`Searching interfaces for system ${systemUuid} with term "${searchTerm}"`);
           this.componentStore.getItInterfaces({ systemUuid: systemUuid, search: searchTerm });
         })
-    );
-
-    //when usage is selected enable the form, otherwise turn it off (other than the usage dropdown)
-    this.subscriptions.add(
-      this.changedSystemUsageUuid$.subscribe((usageUuid) => {
-        this.relationForm.controls.interface.reset();
-        if (usageUuid) {
-          this.relationForm.enable();
-        } else {
-          this.relationForm.disable();
-          this.relationForm.controls['systemUsage'].enable();
-        }
-      })
     );
 
     //on success close the dialog
@@ -156,40 +140,8 @@ export class SystemRelationDialogComponent extends BaseComponent implements OnIn
     this.searchInterfaceTerm$.next(search);
   }
 
-  public interfaceValueChange(inter: any) {
-    console.log('Selected interface: ', JSON.stringify(inter));
-    // this.relationForm.controls.interface.setValue(
-    //   interfaceUuid
-    //     ? {
-    //         uuid: interfaceUuid,
-    //         name: '',
-    //       }
-    //     : null
-    // );
-  }
-
   public usageChange(usageUuid?: string) {
     this.componentStore.updateCurrentSystemUuid(usageUuid);
-  }
-
-  public save() {
-    if (!this.relationForm.valid) return;
-
-    const usage = this.relationForm.value.systemUsage;
-    if (!usage) return;
-
-    this.isBusy = true;
-
-    const request = {
-      toSystemUsageUuid: usage.uuid,
-      relationInterfaceUuid: this.relationForm.value.interface?.uuid,
-      associatedContractUuid: this.relationForm.value.contract?.uuid,
-      relationFrequencyUuid: this.relationForm.value.frequency?.uuid,
-      description: this.relationForm.value.description ?? undefined,
-      urlReference: this.relationForm.value.reference ?? undefined,
-    };
-
-    this.saveRequested.emit(request);
   }
 
   public close() {
