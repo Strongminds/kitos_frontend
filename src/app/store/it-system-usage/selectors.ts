@@ -72,7 +72,7 @@ export const selectITSystemusageFieldPermissions = memoize((field: string) =>
   createSelector(selectITSystemUsageState, (state) =>
     state.permissions?.fieldPermissions?.fields
       ? FieldPermissionsService.hasPermission(state.permissions.fieldPermissions.fields, field)
-      : true
+      : false
   )
 );
 export const selectITSystemUsageHasCreateCollectionPermission = createSelector(

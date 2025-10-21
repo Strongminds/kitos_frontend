@@ -88,7 +88,7 @@ export const selectDataProcessingFieldPermissions = memoize((field: string) =>
   createSelector(selectDataProcessingState, (state) =>
     state.permissions?.fieldPermissions?.fields
       ? FieldPermissionsService.hasPermission(state.permissions.fieldPermissions.fields, field)
-      : true
+      : false
   )
 );
 

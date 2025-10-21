@@ -207,13 +207,13 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       })
     );
 
-    // Disable AI technology field when containsAITechnologyModifyEnabled is true
     this.subscriptions.add(
       this.containsAITechnologyModifyEnabled$.subscribe((isModifyEnabled) => {
+        const control = this.itSystemInformationForm.controls.aiTechnology;
         if (isModifyEnabled) {
-          this.itSystemInformationForm.controls.aiTechnology.enable();
+          control.enable();
         } else {
-          this.itSystemInformationForm.controls.aiTechnology.disable();
+          control.disable();
         }
       })
     );

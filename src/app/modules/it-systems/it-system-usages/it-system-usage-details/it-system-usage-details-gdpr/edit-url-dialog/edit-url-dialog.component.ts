@@ -92,24 +92,24 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     if (this.namePermission$) {
       this.subscriptions.add(
         this.namePermission$.subscribe((hasPermission) => {
-          if (!hasPermission) {
-            this.simpleLinkForm.controls.name.disable();
-          } else {
-            this.simpleLinkForm.controls.name.enable();
-          }
+          this.toggleControl(hasPermission, this.simpleLinkForm.controls.name);
         })
       );
     }
     if (this.linkPermission$) {
       this.subscriptions.add(
         this.linkPermission$.subscribe((hasPermission) => {
-          if (!hasPermission) {
-            this.simpleLinkForm.controls.url.disable();
-          } else {
-            this.simpleLinkForm.controls.url.enable();
-          }
+          this.toggleControl(hasPermission, this.simpleLinkForm.controls.url);
         })
       );
+    }
+  }
+
+  private toggleControl(hasPermission: boolean, control: FormControl<string | undefined | null>) {
+    if (!hasPermission) {
+      control.disable();
+    } else {
+      control.enable();
     }
   }
 

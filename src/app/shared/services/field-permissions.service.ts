@@ -1,7 +1,5 @@
 import { APIFieldPermissionsResponseDTO } from 'src/app/api/v2';
 
-type NestedMap = Record<string, any>;
-
 export class FieldPermissionsService {
   static hasPermission(fieldPermissions: APIFieldPermissionsResponseDTO[] | undefined, field: string): boolean {
     if (!fieldPermissions) return false;

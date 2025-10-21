@@ -12,4 +12,8 @@ export const dataProcessingFields = {
 
 export const itSystemUsageFields = {
   containsAITechnology: 'ITSystemUsage.ContainsAITechnology',
+  gdpr: {
+    criticality: 'ItSystemUsage.GdprCriticality',
+    riskAssessment: 'ItSystemUsage.preriskAssessment',
+  },
 };
