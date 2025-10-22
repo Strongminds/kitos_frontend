@@ -52,7 +52,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
     const dialogRef = this.dialog.open(DropdownDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.title = $localize`Tilføj leverandør`;
-    dialogInstance.description = $localize`Valg af leverandør vil deaktivere følgende felter:`;
+    dialogInstance.description = $localize`Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:`;
     dialogInstance.bulletPoints = [
       $localize`Databehandling - Tilsyn - Gennemførte og kommende tilsyn`,
       $localize`IT Systemer - Systemforside - Indeholder AI-teknologi?`,

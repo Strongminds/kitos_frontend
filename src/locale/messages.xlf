@@ -5437,8 +5437,8 @@
       <trans-unit id="7857124855661066958" datatype="html">
         <source>IT Systemer - Systemforside - Indeholder AI-teknologi?</source>
       </trans-unit>
-      <trans-unit id="9205764894228218189" datatype="html">
-        <source>Valg af leverandør vil deaktivere følgende felter:</source>
+      <trans-unit id="4789455191486047781" datatype="html">
+        <source>Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</source>
       </trans-unit>
     </body>
   </file>

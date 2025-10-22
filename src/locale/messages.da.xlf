@@ -7133,10 +7133,6 @@
         <source>deaktivere</source>
         <target state="new">deaktivere</target>
       </trans-unit>
-      <trans-unit id="9205764894228218189" datatype="html">
-        <source>Valg af leverandør vil deaktivere følgende felter:</source>
-        <target state="new">Valg af leverandør vil deaktivere følgende felter:</target>
-      </trans-unit>
       <trans-unit id="5075260696326393711" datatype="html">
         <source>Databehandling - Tilsyn - Gennemførte og kommende tilsyn</source>
         <target state="new">Databehandling - Tilsyn - Gennemførte og kommende tilsyn</target>
@@ -7156,6 +7152,10 @@
       <trans-unit id="7067322126066426845" datatype="html">
         <source>Dette felt styres af en leverandør og kan ikke ændres her.</source>
         <target state="new">Dette felt styres af en leverandør og kan ikke ændres her.</target>
+      </trans-unit>
+      <trans-unit id="4789455191486047781" datatype="html">
+        <source>Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</source>
+        <target state="new">Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</target>
       </trans-unit>
     </body>
   </file>
