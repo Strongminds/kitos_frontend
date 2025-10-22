@@ -102,7 +102,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   );
 
   public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
-  public readonly modifyPermission$ = this.store.select(selectITSystemUsageHasModifyPermission);
 
   public readonly aiTechnologyOptions = yesNoOptions;
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
@@ -190,11 +189,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
     // Disable forms if user does not have rights to modify
     this.subscriptions.add(
-      this.modifyPermission$.pipe(filter((hasModifyPermission) => hasModifyPermission === false)).subscribe(() => {
-        this.itSystemInformationForm.disable();
-        this.itSystemApplicationForm.disable();
-        this.webAccessibilityForm.disable();
-      })
+      this.store
+        .select(selectITSystemUsageHasModifyPermission)
+        .pipe(filter((hasModifyPermission) => hasModifyPermission === false))
+        .subscribe(() => {
+          this.itSystemInformationForm.disable();
+          this.itSystemApplicationForm.disable();
+          this.webAccessibilityForm.disable();
+        })
     );
 
     this.subscriptions.add(
