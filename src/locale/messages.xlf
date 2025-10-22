@@ -5410,11 +5410,6 @@
       <trans-unit id="8904850498581421228" datatype="html">
         <source>Er du sikker på, at du vil <x id="PH" equiv-text="messageActionText"/> organisationen &quot;<x id="PH_1" equiv-text="changeRequest.item.Name"/>&quot;?</source>
       </trans-unit>
-      <trans-unit id="1737753151350322492" datatype="html">
-        <source>
-          <x id="PH" equiv-text="disabled ? $localize`Organisationen er deaktiveret` : $localize`Organisationen er aktiveret`"/>
-        </source>
-      </trans-unit>
       <trans-unit id="5689718324419972780" datatype="html">
         <source>Organisationen er deaktiveret</source>
       </trans-unit>
@@ -5426,6 +5421,9 @@
       </trans-unit>
       <trans-unit id="9100551003701703988" datatype="html">
         <source>deaktivere</source>
+      </trans-unit>
+      <trans-unit id="452439135447839660" datatype="html">
+        <source>IT System: Anvendes af1</source>
       </trans-unit>
     </body>
   </file>

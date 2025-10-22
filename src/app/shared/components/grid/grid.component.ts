@@ -32,6 +32,7 @@ import {
 } from '@progress/kendo-data-query';
 import { cloneDeep, get } from 'lodash';
 import { BehaviorSubject, combineLatest, debounceTime, first, map, Observable, of } from 'rxjs';
+import * as CatalogFields from 'src/app/shared/constants/it-system-catalog-grid-column-constants';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { GridActions } from 'src/app/store/grid/actions';
 import { selectExportAllColumns, selectReadyToExport } from 'src/app/store/grid/selectors';
@@ -347,10 +348,24 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
         const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === this.RolesExtraDataLabel);
         const roleColumnFieldsToExport = new Set(roleColumnsInExport.map((column) => column.field));
 
+        // Check if Usages field is included in export
+        const catalogUsagesFieldToExport = new Set(
+          columnsToExport.filter((column) => column.field === CatalogFields.USAGES).map((column) => column.field)
+        );
+
         const result = columnsToExport.filter(
           (column) =>
-            !this.isExcelOnlyColumn(column) ||
-            roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
+            // Exclude role email columns if their corresponding role column is not included
+            !(
+              this.isRoleExcelOnlyColumn(column) &&
+              !roleColumnFieldsToExport.has(column.field.replaceAll(this.EmailColumnField, ''))
+            ) &&
+            // Exclude UsageNames excel-only column if Usages column is not included
+            !(
+              this.isExcelOnlyColumn(column) &&
+              column.field === CatalogFields.USAGE_NAMES &&
+              !catalogUsagesFieldToExport.has(CatalogFields.USAGES)
+            )
         );
 
         if (exportAllColumns) {
@@ -373,7 +388,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   private isExcelOnlyColumn(column: GridColumn): boolean {
-    return column.style === 'excel-only';
+    return column.style === 'excel-only' || this.isRoleExcelOnlyColumn(column);
+  }
+
+  private isRoleExcelOnlyColumn(column: GridColumn): boolean {
+    return column.style === 'role-excel-only';
   }
 
   public getExportName(): string {
