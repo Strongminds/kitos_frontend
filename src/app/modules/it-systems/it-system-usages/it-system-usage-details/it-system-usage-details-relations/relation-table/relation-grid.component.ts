@@ -6,6 +6,7 @@ import { first, Observable } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { addExpiredTextToOption } from 'src/app/shared/helpers/option-type.helper';
 import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -28,12 +29,12 @@ export interface SystemRelationModel {
 }
 
 @Component({
-  selector: 'app-relation-table[relations][emptyText]',
-  templateUrl: './relation-table.component.html',
-  styleUrls: ['./relation-table.component.scss'],
+  selector: 'app-relation-grid[relations][emptyText]',
+  templateUrl: './relation-grid.component.html',
+  styleUrls: ['./relation-grid.component.scss'],
   imports: [StandardVerticalContentGridComponent, CommonModule, LocalGridComponent, EmptyStateComponent],
 })
-export class RelationTableComponent extends BaseComponent implements OnInit {
+export class RelationGridComponent extends BaseComponent implements OnInit {
   @Input() public relations!: Array<SystemRelationModel>;
   @Input() public isOutgoing = false;
   @Input() public emptyText!: string;
@@ -130,7 +131,7 @@ export class RelationTableComponent extends BaseComponent implements OnInit {
                   ...relation,
                   relationFrequency: {
                     ...relation.relationFrequency,
-                    name: $localize`${relation.relationFrequency.name} (udgået)`,
+                    name: addExpiredTextToOption(relation.relationFrequency.name),
                   },
                 };
               }

@@ -3011,9 +3011,6 @@
       <trans-unit id="3840577398324056570" datatype="html">
         <source>Brug søgning for at få flere resultater</source>
       </trans-unit>
-      <trans-unit id="8626006242633938295" datatype="html">
-        <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
-      </trans-unit>
       <trans-unit id="7055470758930166695" datatype="html">
         <source>Opret IT Kontrakt</source>
       </trans-unit>
@@ -5419,17 +5416,14 @@
       <trans-unit id="9100551003701703988" datatype="html">
         <source>deaktivere</source>
       </trans-unit>
-      <trans-unit id="3325502359579773020" datatype="html">
-        <source>It system (udstiller)</source>
-      </trans-unit>
-      <trans-unit id="4904014059185874531" datatype="html">
-        <source>It system (anvender)</source>
-      </trans-unit>
       <trans-unit id="2906905998458410320" datatype="html">
         <source>Indkommende relationer</source>
       </trans-unit>
       <trans-unit id="9169283032104147432" datatype="html">
         <source>Udgående relationer</source>
+      </trans-unit>
+      <trans-unit id="3311482938689417877" datatype="html">
+        <source><x id="PH" equiv-text="name"/> (<x id="PH_1" equiv-text="obsoletedText"/>)</source>
       </trans-unit>
     </body>
   </file>

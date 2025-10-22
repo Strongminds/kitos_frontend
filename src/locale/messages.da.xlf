@@ -1219,10 +1219,6 @@
         <source>Brug søgning for at få flere resultater</source>
         <target state="new">Brug søgning for at få flere resultater</target>
       </trans-unit>
-      <trans-unit id="8626006242633938295" datatype="html">
-        <source><x id="PH" equiv-text="value[this.textField]"/> (udgået)</source>
-        <target state="new"><x id="PH" equiv-text="value[this.textField]"/> (udgået)</target>
-      </trans-unit>
       <trans-unit id="5801492213243962888" datatype="html">
         <source>Ugyldigt link: </source>
         <target state="new">Ugyldigt link: </target>
@@ -7129,14 +7125,6 @@
         <source>deaktivere</source>
         <target state="new">deaktivere</target>
       </trans-unit>
-      <trans-unit id="3325502359579773020" datatype="html">
-        <source>It system (udstiller)</source>
-        <target state="new">It system (udstiller)</target>
-      </trans-unit>
-      <trans-unit id="4904014059185874531" datatype="html">
-        <source>It system (anvender)</source>
-        <target state="new">It system (anvender)</target>
-      </trans-unit>
       <trans-unit id="9169283032104147432" datatype="html">
         <source>Udgående relationer</source>
         <target state="new">Udgående relationer</target>
@@ -7144,6 +7132,10 @@
       <trans-unit id="2906905998458410320" datatype="html">
         <source>Indkommende relationer</source>
         <target state="new">Indkommende relationer</target>
+      </trans-unit>
+      <trans-unit id="3311482938689417877" datatype="html">
+        <source><x id="PH" equiv-text="name"/> (<x id="PH_1" equiv-text="obsoletedText"/>)</source>
+        <target state="new"><x id="PH" equiv-text="name"/> (<x id="PH_1" equiv-text="obsoletedText"/>)</target>
       </trans-unit>
     </body>
   </file>

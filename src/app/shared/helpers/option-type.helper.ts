@@ -65,3 +65,8 @@ export function getOptionTypeName(optionType: RegularOptionType | RoleOptionType
       throw new Error(`Option type name not implemented for e${optionType}`);
   }
 }
+
+export function addExpiredTextToOption(name: string): string {
+  const obsoletedText = $localize`udgået`;
+  return $localize`${name} (${obsoletedText})`;
+}

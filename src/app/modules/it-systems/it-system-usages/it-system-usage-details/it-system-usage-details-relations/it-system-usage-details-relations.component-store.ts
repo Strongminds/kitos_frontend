@@ -11,7 +11,7 @@ import {
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { SystemRelationModel } from './relation-table/relation-table.component';
+import { SystemRelationModel } from './relation-table/relation-grid.component';
 
 interface State {
   loading: boolean;
@@ -32,14 +32,14 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
     (state, incomingRelations: Array<SystemRelationModel>): State => ({
       ...state,
       incomingRelations,
-    }),
+    })
   );
 
   private updateIncomingRelationsIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    }),
+    })
   );
   public getIncomingRelations = this.effect((systemUsageUuid$: Observable<string>) =>
     systemUsageUuid$.pipe(
@@ -50,20 +50,20 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
             (relations) =>
               this.updateIncomingRelations(
                 relations.map((relation) =>
-                  this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage),
-                ),
+                  this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage)
+                )
               ),
             (e) => console.error(e),
-            () => this.updateIncomingRelationsIsLoading(false),
-          ),
+            () => this.updateIncomingRelationsIsLoading(false)
+          )
         );
-      }),
-    ),
+      })
+    )
   );
 
   public mapRelationResponseDTOToSystemRelationModel(
     relation: APIOutgoingSystemRelationResponseDTO | APIIncomingSystemRelationResponseDTO,
-    relationSystemUsage: APIIdentityNamePairResponseDTO,
+    relationSystemUsage: APIIdentityNamePairResponseDTO
   ): SystemRelationModel {
     return {
       uuid: relation.uuid,

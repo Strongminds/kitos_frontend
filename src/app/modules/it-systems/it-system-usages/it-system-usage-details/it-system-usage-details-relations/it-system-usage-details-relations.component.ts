@@ -31,7 +31,7 @@ import { LoadingComponent } from '../../../../../shared/components/loading/loadi
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { CreateRelationDialogComponent } from './create-relation-dialog/create-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsComponentStore } from './it-system-usage-details-relations.component-store';
-import { RelationTableComponent } from './relation-table/relation-table.component';
+import { RelationGridComponent } from './relation-table/relation-grid.component';
 
 @Component({
   selector: 'app-it-system-usage-details-relations',
@@ -43,7 +43,7 @@ import { RelationTableComponent } from './relation-table/relation-table.componen
     CardComponent,
     CardHeaderComponent,
     StandardVerticalContentGridComponent,
-    RelationTableComponent,
+    RelationGridComponent,
     CollectionExtensionButtonComponent,
     LoadingComponent,
     AsyncPipe,

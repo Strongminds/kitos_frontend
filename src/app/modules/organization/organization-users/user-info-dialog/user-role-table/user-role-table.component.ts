@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { Actions, ofType } from '@ngrx/effects';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { addExpiredTextToOption } from 'src/app/shared/helpers/option-type.helper';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -139,7 +140,7 @@ export class UserRoleTableComponent extends BaseComponent implements OnInit {
       ...right,
       role: {
         ...right.role,
-        name: `${right.role.name} (${$localize`udgået`})`,
+        name: addExpiredTextToOption(right.role.name),
       },
     };
   }
