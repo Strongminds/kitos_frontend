@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
+import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
   GdprCriticality,
@@ -51,11 +53,14 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     DropdownComponent,
     EditUrlSectionComponent,
     AsyncPipe,
+    TooltipComponent,
   ],
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
   @Input() disableLinkControl!: Observable<void>;
   @Output() noPermissions = new EventEmitter<AbstractControl[]>();
+
+  public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
 
   public readonly businessCriticalOptions = yesNoDontKnowOptions;
   public readonly hostedAtOptions = hostedAtOptions;
@@ -79,7 +84,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly gdprCriticalityEnabled$ = this.store.select(selectITSystemUsageEnableGdprCriticality);
   public readonly gdprCriticalityOptions = gdprCriticalityOptions;
 
-  private readonly gdprCriticalityModifyEnabled$ = this.store.select(
+  public readonly gdprCriticalityModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.gdpr.criticality)
   );
 

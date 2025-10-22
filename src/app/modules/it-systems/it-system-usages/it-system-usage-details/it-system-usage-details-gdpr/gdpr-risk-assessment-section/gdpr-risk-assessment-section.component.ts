@@ -79,7 +79,10 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
       plannedDateControl: new FormControl<Date | undefined>(undefined),
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       conductedDateControl: new FormControl<Date | undefined>(undefined),
-      assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>(undefined),
+      assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>({
+        value: undefined,
+        disabled: true,
+      }),
       notesControl: new FormControl<string | undefined>(undefined),
     },
     { updateOn: 'blur' }
@@ -125,18 +128,6 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
     this.disableLinkControl.subscribe(() => {
       this.disableDirectoryDocumentationControl = true;
     });
-
-    this.riskAssessmentModifyEnabled$
-      .pipe(concatLatestFrom(() => this.isRiskAssessmentFalse$))
-      .subscribe(([enabled, isRiskAssessmentFalse]) => {
-        if (isRiskAssessmentFalse) return;
-        const control = this.riskAssessmentFormGroup.controls.assessmentResultControl;
-        if (enabled) {
-          control.enable();
-        } else {
-          control.disable();
-        }
-      });
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
