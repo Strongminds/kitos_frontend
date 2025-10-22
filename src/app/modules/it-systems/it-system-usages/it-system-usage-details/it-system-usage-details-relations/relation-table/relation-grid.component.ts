@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
-import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { addExpiredTextToOption } from 'src/app/shared/helpers/option-type.helper';
@@ -121,23 +122,7 @@ export class RelationGridComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.availableReferenceFrequencyTypes$.subscribe((availableReferenceFrequencyTypes) => {
         if (availableReferenceFrequencyTypes && this.relations) {
-          this.processedRelations = this.relations.map((relation) => {
-            if (relation.relationFrequency) {
-              const availableTypes = Object.values(availableReferenceFrequencyTypes);
-              const isAvailable = availableTypes.some((type) => type?.uuid === relation.relationFrequency?.uuid);
-
-              if (!isAvailable && relation.relationFrequency.name) {
-                return {
-                  ...relation,
-                  relationFrequency: {
-                    ...relation.relationFrequency,
-                    name: addExpiredTextToOption(relation.relationFrequency.name),
-                  },
-                };
-              }
-            }
-            return relation;
-          });
+          this.processedRelations = this.mapRelationNames(availableReferenceFrequencyTypes);
         } else {
           this.processedRelations = this.relations || [];
         }
@@ -165,5 +150,25 @@ export class RelationGridComponent extends BaseComponent implements OnInit {
           this.store.dispatch(ITSystemUsageActions.removeItSystemUsageRelation(relation.uuid));
         }
       });
+  }
+
+  private mapRelationNames(availableReferenceFrequencyTypes: Dictionary<APIRegularOptionResponseDTO>) {
+    return this.relations.map((relation) => {
+      if (relation.relationFrequency) {
+        const availableTypes = Object.values(availableReferenceFrequencyTypes);
+        const isAvailable = availableTypes.some((type) => type?.uuid === relation.relationFrequency?.uuid);
+
+        if (!isAvailable && relation.relationFrequency.name) {
+          return {
+            ...relation,
+            relationFrequency: {
+              ...relation.relationFrequency,
+              name: addExpiredTextToOption(relation.relationFrequency.name),
+            },
+          };
+        }
+      }
+      return relation;
+    });
   }
 }
