@@ -7133,9 +7133,9 @@
         <source>deaktivere</source>
         <target state="new">deaktivere</target>
       </trans-unit>
-      <trans-unit id="452439135447839660" datatype="html">
-        <source>IT System: Anvendes af1</source>
-        <target state="new">IT System: Anvendes af1</target>
+      <trans-unit id="398378182976183657" datatype="html">
+        <source>IT System: Anvendes af organisationer</source>
+        <target state="new">IT System: Anvendes af organisationer</target>
       </trans-unit>
     </body>
   </file>
