@@ -2973,10 +2973,10 @@
         <source>Eksporter</source>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter alle kolonner </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </source>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="app-menu-button-i"/>Eksporter viste kolonner </source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </source>
       </trans-unit>
       <trans-unit id="7150593562313015326" datatype="html">
         <source>
@@ -3965,7 +3965,7 @@
         <source>Afvis ændringer </source>
       </trans-unit>
       <trans-unit id="6021905614502626006" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="-button (buttonCl"/>Eksporter</source>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</source>
       </trans-unit>
       <trans-unit id="6162528529889600567" datatype="html">
         <source>Ingen ændringer registreret </source>
@@ -4568,7 +4568,7 @@
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-overview"/> Eksporter </source>
       </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
-        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="-menu-button-item"/> Åben GDPR overblik </source>
+        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </source>
       </trans-unit>
       <trans-unit id="8145441157302108078" datatype="html">
         <source>System UUID</source>
@@ -4595,7 +4595,7 @@
         <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </source>
       </trans-unit>
       <trans-unit id="7970981235010102529" datatype="html">
-        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp"/> Hjælp </source>
+        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </source>
       </trans-unit>
       <trans-unit id="1162347843657363489" datatype="html">
         <source>Er du sikker på, at du vil slette systemet?</source>
@@ -5404,14 +5404,29 @@
       <trans-unit id="398378182976183657" datatype="html">
         <source>IT System: Anvendes af organisationer</source>
       </trans-unit>
+      <trans-unit id="2441857005381821884" datatype="html">
+        <source>IT Systemer - GDPR - Kritikalitet</source>
+      </trans-unit>
       <trans-unit id="2906905998458410320" datatype="html">
         <source>Indkommende relationer</source>
       </trans-unit>
       <trans-unit id="3311482938689417877" datatype="html">
         <source><x id="PH" equiv-text="name"/> (<x id="PH_1" equiv-text="obsoletedText"/>)</source>
       </trans-unit>
-      <trans-unit id="4022855371466303751" datatype="html">
-        <source>Søg efter snitflader</source>
+      <trans-unit id="4789455191486047781" datatype="html">
+        <source>Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</source>
+      </trans-unit>
+      <trans-unit id="5075260696326393711" datatype="html">
+        <source>Databehandling - Tilsyn - Gennemførte og kommende tilsyn</source>
+      </trans-unit>
+      <trans-unit id="6192599242508017517" datatype="html">
+        <source>IT Systemer - GDPR - Hvad viste den seneste risikovurdering?</source>
+      </trans-unit>
+      <trans-unit id="7067322126066426845" datatype="html">
+        <source>Dette felt styres af en leverandør og kan ikke ændres her.</source>
+      </trans-unit>
+      <trans-unit id="7857124855661066958" datatype="html">
+        <source>IT Systemer - Systemforside - Indeholder AI-teknologi?</source>
       </trans-unit>
       <trans-unit id="9169283032104147432" datatype="html">
         <source>Udgående relationer</source>
@@ -5427,6 +5442,9 @@
       </trans-unit>
       <trans-unit id="3196716206056858540" datatype="html">
         <source>Kunne ikke tilføje relationerne.</source>
+      </trans-unit>
+      <trans-unit id="4022855371466303751" datatype="html">
+        <source>Søg efter snitflader</source>
       </trans-unit>
       <trans-unit id="7513456618160130381" datatype="html">
         <source>Kunne ikke tilføje journalperioden</source>

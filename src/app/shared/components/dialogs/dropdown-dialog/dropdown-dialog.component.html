@@ -1,6 +1,15 @@
 <app-dialog [title]="title" overflow="none">
   <form [formGroup]="dropdownFormGroup" (submit)="onSave()">
     <app-standard-vertical-content-grid>
+      <div *ngIf="description || bulletPoints?.length">
+        <app-paragraph *ngIf="description">{{ description }}</app-paragraph>
+        <ul *ngIf="bulletPoints?.length" class="bullet-list">
+          <li *ngFor="let point of bulletPoints">
+            <app-paragraph>{{ point }}</app-paragraph>
+          </li>
+        </ul>
+      </div>
+
       <app-dropdown
         [text]="dropdownText"
         [data]="data$ | async"
