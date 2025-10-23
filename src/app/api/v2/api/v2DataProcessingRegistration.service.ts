@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APICreateDataProcessingRegistrationRequestDTO } from '../model/aPICreateDataProcessingRegistrationRequestDTO';
+import { APICombinedPermissionsResponseDTO } from '../model/aPICombinedPermissionsResponseDTO';
 // @ts-ignore
-import { APIDataProcessingRegistrationPermissionsResponseDTO } from '../model/aPIDataProcessingRegistrationPermissionsResponseDTO';
+import { APICreateDataProcessingRegistrationRequestDTO } from '../model/aPICreateDataProcessingRegistrationRequestDTO';
 // @ts-ignore
 import { APIDataProcessingRegistrationResponseDTO } from '../model/aPIDataProcessingRegistrationResponseDTO';
 // @ts-ignore
@@ -101,7 +101,7 @@ export interface PutSingleDataProcessingRegistrationV2PutDataProcessingRegistrat
 })
 export class APIV2DataProcessingRegistrationService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -468,9 +468,9 @@ export class APIV2DataProcessingRegistrationService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationPermissionsResponseDTO>;
-    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationPermissionsResponseDTO>>;
-    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationPermissionsResponseDTO>>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APICombinedPermissionsResponseDTO>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APICombinedPermissionsResponseDTO>>;
+    public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APICombinedPermissionsResponseDTO>>;
     public getSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissions(requestParameters: GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrationPermissionsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
@@ -509,7 +509,7 @@ export class APIV2DataProcessingRegistrationService {
         }
 
         let localVarPath = `/api/v2/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
-        return this.httpClient.request<APIDataProcessingRegistrationPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<APICombinedPermissionsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

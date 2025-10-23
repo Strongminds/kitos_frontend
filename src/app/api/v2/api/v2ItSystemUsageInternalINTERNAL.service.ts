@@ -25,6 +25,8 @@ import { APIGeneralSystemRelationResponseDTO } from '../model/aPIGeneralSystemRe
 // @ts-ignore
 import { APIItSystemUsageSearchResultResponseDTO } from '../model/aPIItSystemUsageSearchResultResponseDTO';
 // @ts-ignore
+import { APIOutgoingSystemRelationResponseDTO } from '../model/aPIOutgoingSystemRelationResponseDTO';
+// @ts-ignore
 import { APISystemRelationWriteRequestDTO } from '../model/aPISystemRelationWriteRequestDTO';
 
 // @ts-ignore
@@ -78,7 +80,7 @@ export interface PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestP
 })
 export class APIV2ItSystemUsageInternalINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -433,9 +435,9 @@ export class APIV2ItSystemUsageInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
-    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
+    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOutgoingSystemRelationResponseDTO>>;
+    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOutgoingSystemRelationResponseDTO>>>;
+    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOutgoingSystemRelationResponseDTO>>>;
     public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
@@ -487,7 +489,7 @@ export class APIV2ItSystemUsageInternalINTERNALService {
         }
 
         let localVarPath = `/api/v2/internal/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/system-relations`;
-        return this.httpClient.request<Array<APIExtendedRoleAssignmentResponseDTO>>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIOutgoingSystemRelationResponseDTO>>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: dtos,
