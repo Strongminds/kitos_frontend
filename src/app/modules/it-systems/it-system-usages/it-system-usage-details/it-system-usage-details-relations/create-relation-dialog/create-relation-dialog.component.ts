@@ -121,16 +121,12 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
 
     this.isBusy = true;
 
-    const requests = this.getRequests(usage);
-    this.store.dispatch(ITSystemUsageActions.addItSystemUsageRelations(requests));
-  }
-
-  private getRequests(usage: APIIdentityNamePairResponseDTO){
     const formValue = this.formGroup.value;
     const interfacesValue = formValue.interfaces;
 
-    return interfacesValue && interfacesValue.length > 0
-        ?  interfacesValue.map((x) => ({
+    const requests =
+      interfacesValue && interfacesValue.length > 0
+        ? interfacesValue.map((x) => ({
             toSystemUsageUuid: usage.uuid,
             relationInterfaceUuid: x.uuid,
             associatedContractUuid: formValue.contract?.uuid,
@@ -148,5 +144,6 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
               urlReference: formValue.reference ?? undefined,
             },
           ];
+    this.store.dispatch(ITSystemUsageActions.addItSystemUsageRelations(requests));
   }
 }
