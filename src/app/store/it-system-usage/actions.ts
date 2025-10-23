@@ -118,6 +118,12 @@ export const ITSystemUsageActions = createActionGroup({
       relation: APIOutgoingSystemRelationResponseDTO,
     ) => ({ itSystemUsageUuid, relation }),
     'Add It System Usage Relation Error': emptyProps(),
+    'Add It System Usage Relations': (request: APISystemRelationWriteRequestDTO[]) => ({ request }),
+    'Add It System Usage Relations Success': (
+      itSystemUsageUuid: string,
+      relations: APIOutgoingSystemRelationResponseDTO[],
+    ) => ({ itSystemUsageUuid, relations }),
+    'Add It System Usage Relations Error': emptyProps(),
     'Patch It System Usage Relation': (relationUuid: string, request: APISystemRelationWriteRequestDTO) => ({
       relationUuid,
       request,

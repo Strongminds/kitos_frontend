@@ -24,6 +24,10 @@ import { APIExtendedRoleAssignmentResponseDTO } from '../model/aPIExtendedRoleAs
 import { APIGeneralSystemRelationResponseDTO } from '../model/aPIGeneralSystemRelationResponseDTO';
 // @ts-ignore
 import { APIItSystemUsageSearchResultResponseDTO } from '../model/aPIItSystemUsageSearchResultResponseDTO';
+// @ts-ignore
+import { APIOutgoingSystemRelationResponseDTO } from '../model/aPIOutgoingSystemRelationResponseDTO';
+// @ts-ignore
+import { APISystemRelationWriteRequestDTO } from '../model/aPISystemRelationWriteRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -63,6 +67,11 @@ export interface GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams {
 
 export interface GetManyItSystemUsageInternalV2GetRelationsRequestParams {
     contractUuid: string;
+}
+
+export interface PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams {
+    systemUsageUuid: string;
+    dtos: Array<APISystemRelationWriteRequestDTO>;
 }
 
 
@@ -412,6 +421,78 @@ export class APIV2ItSystemUsageInternalINTERNALService {
         return this.httpClient.request<Array<APIGeneralSystemRelationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOutgoingSystemRelationResponseDTO>>;
+    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOutgoingSystemRelationResponseDTO>>>;
+    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOutgoingSystemRelationResponseDTO>>>;
+    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const systemUsageUuid = requestParameters.systemUsageUuid;
+        if (systemUsageUuid === null || systemUsageUuid === undefined) {
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling postManyItSystemUsageInternalV2PostSystemUsageRelations.');
+        }
+        const dtos = requestParameters.dtos;
+        if (dtos === null || dtos === undefined) {
+            throw new Error('Required parameter dtos was null or undefined when calling postManyItSystemUsageInternalV2PostSystemUsageRelations.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/system-relations`;
+        return this.httpClient.request<Array<APIOutgoingSystemRelationResponseDTO>>('post', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                body: dtos,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

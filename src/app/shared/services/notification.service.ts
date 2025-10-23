@@ -365,13 +365,19 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsDefault(ITSystemUsageActions.addItSystemUsageRelationSuccess, $localize`Relation tilføjet`);
     this.subscribeAsError(
       ITSystemUsageActions.addItSystemUsageRelationError,
-      $localize`Der opstod en fejl! Kunne ikke tilføje relationen.`
+      $localize`Kunne ikke tilføje relationen.`
+    );
+
+    this.subscribeAsDefault(ITSystemUsageActions.addItSystemUsageRelationsSuccess, $localize`Relationer tilføjet`);
+    this.subscribeAsError(
+      ITSystemUsageActions.addItSystemUsageRelationsError,
+      $localize`Kunne ikke tilføje relationerne.`
     );
 
     this.subscribeAsDefault(ITSystemUsageActions.patchItSystemUsageRelationSuccess, $localize`Relation ændret`);
     this.subscribeAsError(
       ITSystemUsageActions.patchItSystemUsageRelationError,
-      $localize`Der opstod en fejl! Kunne ikke redigere relationen`
+      $localize`Kunne ikke redigere relationen`
     );
 
     this.subscribeAsDefault(ITSystemUsageActions.removeItSystemUsageRelationSuccess, $localize`Relationen er slettet`);
@@ -386,7 +392,7 @@ export class NotificationService implements OnDestroy {
     );
     this.subscribeAsError(
       ITSystemUsageActions.addItSystemUsageJournalPeriodError,
-      $localize`Der opstod en fejl! Kunne ikke tilføje journalperioden`
+      $localize`Kunne ikke tilføje journalperioden`
     );
 
     this.subscribeAsDefault(
@@ -395,7 +401,7 @@ export class NotificationService implements OnDestroy {
     );
     this.subscribeAsError(
       ITSystemUsageActions.patchItSystemUsageJournalPeriodError,
-      $localize`Der opstod en fejl! Kunne ikke redigere journalperioden`
+      $localize`Kunne ikke redigere journalperioden`
     );
 
     this.subscribeAsDefault(

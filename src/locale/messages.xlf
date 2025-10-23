@@ -2506,9 +2506,6 @@
       <trans-unit id="8511883554879827504" datatype="html">
         <source>Ingen relationer fra andre systemer til &apos;<x id="INTERPOLATION" equiv-text="{{ usageName$ | async }}"/>&apos; fundet</source>
       </trans-unit>
-      <trans-unit id="6869155657186290653" datatype="html">
-        <source>Rediger relation</source>
-      </trans-unit>
       <trans-unit id="8852940730552945902" datatype="html">
         <source>Er du sikker på at du vil fjerne denne relation</source>
       </trans-unit>
@@ -3388,14 +3385,8 @@
       <trans-unit id="2375273103955977651" datatype="html">
         <source>Relation tilføjet</source>
       </trans-unit>
-      <trans-unit id="694960812343311468" datatype="html">
-        <source>Der opstod en fejl! Kunne ikke tilføje relationen.</source>
-      </trans-unit>
       <trans-unit id="193515391977947" datatype="html">
         <source>Relation ændret</source>
-      </trans-unit>
-      <trans-unit id="5705669591058580639" datatype="html">
-        <source>Der opstod en fejl! Kunne ikke redigere relationen</source>
       </trans-unit>
       <trans-unit id="239434414002255340" datatype="html">
         <source>Relationen er slettet</source>
@@ -3406,14 +3397,8 @@
       <trans-unit id="3286632924106331173" datatype="html">
         <source>Journalperioden blev tilføjet</source>
       </trans-unit>
-      <trans-unit id="6198338613324326591" datatype="html">
-        <source>Der opstod en fejl! Kunne ikke tilføje journalperioden</source>
-      </trans-unit>
       <trans-unit id="8482380142625713775" datatype="html">
         <source>Journalperioden ændret</source>
-      </trans-unit>
-      <trans-unit id="2657865806231764755" datatype="html">
-        <source>Der opstod en fejl! Kunne ikke redigere journalperioden</source>
       </trans-unit>
       <trans-unit id="4348804905173946679" datatype="html">
         <source>Journalperioden er slettet</source>
@@ -5445,6 +5430,27 @@
       </trans-unit>
       <trans-unit id="9169283032104147432" datatype="html">
         <source>Udgående relationer</source>
+      </trans-unit>
+      <trans-unit id="1273579594143473846" datatype="html">
+        <source>Kunne ikke redigere relationen</source>
+      </trans-unit>
+      <trans-unit id="2694222923035281837" datatype="html">
+        <source>Kunne ikke redigere journalperioden</source>
+      </trans-unit>
+      <trans-unit id="3151273022757153429" datatype="html">
+        <source>Relationer tilføjet</source>
+      </trans-unit>
+      <trans-unit id="3196716206056858540" datatype="html">
+        <source>Kunne ikke tilføje relationerne.</source>
+      </trans-unit>
+      <trans-unit id="4022855371466303751" datatype="html">
+        <source>Søg efter snitflader</source>
+      </trans-unit>
+      <trans-unit id="7513456618160130381" datatype="html">
+        <source>Kunne ikke tilføje journalperioden</source>
+      </trans-unit>
+      <trans-unit id="7532897811893781478" datatype="html">
+        <source>Kunne ikke tilføje relationen.</source>
       </trans-unit>
     </body>
   </file>
