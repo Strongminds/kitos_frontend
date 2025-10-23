@@ -27,7 +27,6 @@ export interface SystemRelationDialogFormModel {
   description: FormControl<string | null | undefined>;
   reference: FormControl<string | null | undefined>;
   contract: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
-  interface: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
   frequency: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
 }
 

@@ -1,32 +1,19 @@
-import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, first, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
-import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
-import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
 import { ConnectedDropdownComponent } from 'src/app/shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
-import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
-import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
-import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { SystemRelationModel } from '../relation-table/relation-table.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
-import { SystemRelationDialogComponent } from '../system-relation-dialog/system-relation-dialog.component';
+import { SystemRelationDialogComponent, SystemRelationDialogFormModel } from '../system-relation-dialog/system-relation-dialog.component';
 
-export interface SystemRelationModifyDialogFormModel {
-  systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
-  description: FormControl<string | null | undefined>;
-  reference: FormControl<string | null | undefined>;
-  contract: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
+interface SystemRelationModifyDialogFormModel extends SystemRelationDialogFormModel {
   interface: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
-  frequency: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
 }
 
 @Component({
@@ -34,20 +21,7 @@ export interface SystemRelationModifyDialogFormModel {
   templateUrl: './modify-relation-dialog.component.html',
   styleUrls: ['./modify-relation-dialog.component.scss'],
   providers: [ItSystemUsageDetailsRelationsDialogComponentStore],
-  imports: [
-    SystemRelationDialogComponent,
-    DialogComponent,
-    FormsModule,
-    ReactiveFormsModule,
-    StandardVerticalContentGridComponent,
-    TextAreaComponent,
-    TextBoxComponent,
-    DropdownComponent,
-    DialogActionsComponent,
-    ButtonComponent,
-    AsyncPipe,
-    ConnectedDropdownComponent,
-  ],
+  imports: [SystemRelationDialogComponent, ConnectedDropdownComponent],
 })
 export class ModifyRelationDialogComponent extends SystemRelationDialogComponent implements OnInit {
   @Input() public override relationModel!: SystemRelationModel;
