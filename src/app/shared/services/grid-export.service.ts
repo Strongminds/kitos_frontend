@@ -43,7 +43,7 @@ export class GridExportService {
           case 'uuid-to-name':
             transformedItem[field] = transformedItem[`${column.dataField}`];
             break;
-          case 'excel-only': {
+          case 'role-excel-only': {
             if (transformedItem.RoleEmails) {
               const roleEmailKeys: string[] = Object.keys(transformedItem.RoleEmails);
               roleEmailKeys.forEach((key) => {
@@ -65,7 +65,13 @@ export class GridExportService {
           case 'usages':
             {
               const usages = transformedItem[column.field as string];
+              // Set the count for the main field
               transformedItem[field] = usages.length;
+
+              // Create a separate field for the names
+              const namesField = `${field}Names`;
+              const usageNames = usages.map((usage: any) => usage.name).join(', ');
+              transformedItem[namesField] = usageNames;
             }
             break;
           case 'title-link':

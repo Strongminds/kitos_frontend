@@ -31,6 +31,7 @@ export interface ITSystem {
   BelongsTo: { Name: string };
   BusinessType: { Name: string };
   Usages: IdentityNamePair[];
+  UsageNames: string;
   LegalName?: string;
   LegalDataProcessorName?: string;
 }
@@ -76,6 +77,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     BelongsTo: { Name: value.BelongsTo?.Name },
     BusinessType: value.BusinessType,
     Usages: mappedUsages,
+    UsageNames: mappedUsages.map((usage) => usage.name).join(', '),
     LegalName: value.LegalName,
     LegalDataProcessorName: value.LegalDataProcessorName,
   };

@@ -53,7 +53,10 @@ export class HideShowDialogComponent implements OnInit {
 
   ngOnInit() {
     this.columnsCopy = this.columns
-      .filter((column) => column.style !== 'excel-only' && column.style !== 'action-buttons')
+      .filter(
+        (column) =>
+          column.style !== 'excel-only' && column.style !== 'role-excel-only' && column.style !== 'action-buttons'
+      )
       .filter((column) => this.isColumnEnabled(column, this.uiConfigApplications))
       .map((column) => ({ ...column }))
       .sort((a, b) => (a.order_id ?? 0) - (b.order_id ?? 0));

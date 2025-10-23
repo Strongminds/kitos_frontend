@@ -182,6 +182,14 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       sortable: false,
     },
     {
+      field: CatalogFields.USAGE_NAMES,
+      dataField: 'Name',
+      title: $localize`IT System: Anvendes af organisationer`,
+      section: this.systemSectionName,
+      style: 'excel-only',
+      hidden: true,
+    },
+    {
       field: CatalogFields.ORGANIZATION_NAME,
       title: $localize`Oprettet af: Organisation`,
       section: this.systemSectionName,
