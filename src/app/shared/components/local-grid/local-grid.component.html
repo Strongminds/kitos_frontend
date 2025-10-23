@@ -78,6 +78,15 @@
               columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum')
             "
           ></app-dropdown-filter>
+          <app-choice-type-dropdown-filter
+            *ngIf="columnFilter.filter === 'text' && column.extraFilter === 'choice-type' && entityType"
+            [column]="columnFilter"
+            [filter]="filter"
+            [choiceTypeName]="column.extraData"
+            [sortOptions]="column.sortFilter"
+            [entityType]="entityType"
+            class="overflow-hidden-container"
+          ></app-choice-type-dropdown-filter>
           <app-date-filter
             [column]="columnFilter"
             [filter]="filter"

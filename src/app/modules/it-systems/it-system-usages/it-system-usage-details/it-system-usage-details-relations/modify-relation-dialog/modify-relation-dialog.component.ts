@@ -4,11 +4,11 @@ import { Store } from '@ngrx/store';
 import { APIIdentityNamePairResponseDTO, APISystemRelationWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { SystemRelationModel } from '../relation-table/relation-table.component';
+import { SystemRelationModel } from '../relation-table/relation-grid.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
 import {
-  SystemRelationDialogFormModel,
   SystemRelationDialogComponent,
+  SystemRelationDialogFormModel,
 } from '../system-relation-dialog/system-relation-dialog.component';
 
 @Component({
@@ -25,7 +25,7 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
 
   constructor(
     private readonly store: Store,
-    private readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore,
+    private readonly componentStore: ItSystemUsageDetailsRelationsDialogComponentStore
   ) {
     super();
   }
@@ -37,7 +37,7 @@ export class ModifyRelationDialogComponent extends BaseComponent implements OnIn
           value: this.relationModel.systemUsage,
           disabled: false,
         },
-        Validators.required,
+        Validators.required
       ),
       description: new FormControl<string | undefined>({ value: this.relationModel.description, disabled: false }),
       reference: new FormControl<string | undefined>({ value: this.relationModel.urlReference, disabled: false }),
