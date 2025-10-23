@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, map, Observable } from 'rxjs';
+import { BehaviorSubject, combineLatest, first, map, Observable } from 'rxjs';
 import { APIUserCollectionEditPermissionsResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
@@ -15,6 +15,7 @@ import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.servi
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { selectRoleOptionTypes, selectRoleOptionTypesLoading } from 'src/app/store/roles-option-type-store/selectors';
+import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { ContentSpaceBetweenComponent } from '../../../../shared/components/content-space-between/content-space-between.component';
 import { DialogActionsComponent } from '../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -78,6 +79,8 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   public readonly hasSystemAndDprRolesModifyPermission$ = new BehaviorSubject<boolean>(false);
   public readonly hasOrganizationRolesModifyPermission$ = new BehaviorSubject<boolean>(false);
 
+  private readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
+
   constructor(
     private store: Store,
     private dialogOpenerService: DialogOpenerService,
@@ -129,7 +132,11 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   }
 
   public onEditUser(user: ODataOrganizationUser): void {
-    this.dialogOpenerService.openEditUserDialog(user, true);
+    this.subscriptions.add(
+      this.isGlobalAdmin$.pipe(first()).subscribe((isGlobalAdmin) => {
+        this.dialogOpenerService.openEditUserDialog(user, true, isGlobalAdmin);
+      })
+    );
   }
 
   public onSendAdvis(user: ODataOrganizationUser): void {
