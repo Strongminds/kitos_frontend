@@ -21,103 +21,82 @@
     'fit-size-to-content': fitSizeToContent,
     'expand-height-to-content': !fitSizeToContent,
   }"
-  >
+>
   @if (reorderable) {
-    <kendo-grid-rowreorder-column [width]="40">
-      <ng-template kendoGridRowDragHintTemplate let-dataItem>
-        <span>{{ dataItem.name }}</span>
-      </ng-template>
-    </kendo-grid-rowreorder-column>
-  }
-  @for (column of columns; track column) {
-    @if (!column.hidden) {
-      <kendo-grid-column
-        [field]="column.field"
-        [title]="column.title"
-        [sortable]="column.sortable ?? true"
-        [sticky]="column.isSticky ?? false"
-        [filter]="column.filter ?? 'text'"
-        [width]="column.width ?? defaultColumnWidth"
-      [minResizableWidth]="
-        column.minResizableWidth !== undefined
-          ? column.minResizableWidth
-          : column.filter === 'date'
-          ? defaultMinimumDateColumnWidth
-          : column.style === 'primary'
-          ? defaultPrimaryColumnMinimumWidth
-          : defaultMinimumColumnWidth
-      "
-        headerClass="mygrid-header-cell"
-        >
-        <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
-          <app-paragraph [bold]="true" color="primary-dark">{{ column.title }}</app-paragraph>
-          @if (state?.sort; as sortItem) {
-            @if (sortItem[0].field === column.field) {
-              @if (sortItem[0].dir === 'asc') {
-                <app-paragraph [bold]="true" color="primary-dark" class="sort-icon">
-                  <app-arrow-up-icon></app-arrow-up-icon>
-                </app-paragraph>
-              }
-              @if (sortItem[0].dir === 'desc') {
-                <app-paragraph [bold]="true" color="primary-dark" class="sort-icon">
-                  <app-arrow-down-icon></app-arrow-down-icon>
-                </app-paragraph>
-              }
-            }
-          }
-        </ng-template>
-        <ng-template kendoGridFilterCellTemplate let-filter let-columnFilter="column">
-          @if (!column.noFilter) {
-            @if (columnFilter.filter === 'text' && !column.extraFilter) {
-              <app-string-filter
-                [column]="columnFilter"
-                [filter]="filter"
-              ></app-string-filter>
-            }
-            @if (
-              columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum')
-              ) {
-              <app-dropdown-filter
-                [column]="columnFilter"
-                [filter]="filter"
-                [options]="column.extraData"
-                [searchByNames]="true"
-              ></app-dropdown-filter>
-            }
-            @if (columnFilter.filter === 'text' && column.extraFilter === 'choice-type' && entityType) {
-              <app-choice-type-dropdown-filter
-                [column]="columnFilter"
-                [filter]="filter"
-                [choiceTypeName]="column.extraData"
-                [sortOptions]="column.sortFilter"
-                [entityType]="entityType"
-                class="overflow-hidden-container"
-              ></app-choice-type-dropdown-filter>
-            }
-            @if (columnFilter.filter === 'date') {
-              <app-date-filter
-                [column]="columnFilter"
-                [filter]="filter"
-              ></app-date-filter>
-            }
-          }
-        </ng-template>
-        <ng-template kendoGridCellTemplate let-dataItem>
-          <app-grid-cell
-            [column]="column"
-            [dataItem]="dataItem"
-            (modifyEvent)="onModifyClick(dataItem)"
-            (deleteEvent)="onDeleteClick(dataItem)"
-            (toggleEvent)="onToggleChange($event, dataItem)"
-            (checkboxChange)="onCheckboxChange($event, dataItem)"
-            [createPermission]="createPermission ?? false"
-            [modifyPermission]="modifyPermission ?? false"
-            [deletePermission]="deletePermission ?? false"
-          ></app-grid-cell>
-        </ng-template>
-      </kendo-grid-column>
-    }
-  }
+  <kendo-grid-rowreorder-column [width]="40">
+    <ng-template kendoGridRowDragHintTemplate let-dataItem>
+      <span>{{ dataItem.name }}</span>
+    </ng-template>
+  </kendo-grid-rowreorder-column>
+  } @for (column of columns; track column) { @if (!column.hidden) {
+  <kendo-grid-column
+    [field]="column.field"
+    [title]="column.title"
+    [sortable]="column.sortable ?? true"
+    [sticky]="column.isSticky ?? false"
+    [filter]="column.filter ?? 'text'"
+    [width]="column.width ?? defaultColumnWidth"
+    [minResizableWidth]="
+      column.minResizableWidth !== undefined
+        ? column.minResizableWidth
+        : column.filter === 'date'
+        ? defaultMinimumDateColumnWidth
+        : column.style === 'primary'
+        ? defaultPrimaryColumnMinimumWidth
+        : defaultMinimumColumnWidth
+    "
+    headerClass="mygrid-header-cell"
+  >
+    <ng-template kendoGridHeaderTemplate let-column let-columnIndex="columnIndex">
+      <app-paragraph [bold]="true" color="primary-dark">{{ column.title }}</app-paragraph>
+      @if (state.sort; as sortItem) { @if (sortItem[0].field === column.field) { @if (sortItem[0].dir === 'asc') {
+      <app-paragraph [bold]="true" color="primary-dark" class="sort-icon">
+        <app-arrow-up-icon></app-arrow-up-icon>
+      </app-paragraph>
+      } @if (sortItem[0].dir === 'desc') {
+      <app-paragraph [bold]="true" color="primary-dark" class="sort-icon">
+        <app-arrow-down-icon></app-arrow-down-icon>
+      </app-paragraph>
+      } } }
+    </ng-template>
+    <ng-template kendoGridFilterCellTemplate let-filter let-columnFilter="column">
+      @if (!column.noFilter) { @if (columnFilter.filter === 'text' && !column.extraFilter) {
+      <app-string-filter [column]="columnFilter" [filter]="filter"></app-string-filter>
+      } @if ( columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && column.extraFilter === 'enum') ) {
+      <app-dropdown-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [options]="column.extraData"
+        [searchByNames]="true"
+      ></app-dropdown-filter>
+      } @if (columnFilter.filter === 'text' && column.extraFilter === 'choice-type' && entityType) {
+      <app-choice-type-dropdown-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [choiceTypeName]="column.extraData"
+        [sortOptions]="column.sortFilter"
+        [entityType]="entityType"
+        class="overflow-hidden-container"
+      ></app-choice-type-dropdown-filter>
+      } @if (columnFilter.filter === 'date') {
+      <app-date-filter [column]="columnFilter" [filter]="filter"></app-date-filter>
+      } }
+    </ng-template>
+    <ng-template kendoGridCellTemplate let-dataItem>
+      <app-grid-cell
+        [column]="column"
+        [dataItem]="dataItem"
+        (modifyEvent)="onModifyClick(dataItem)"
+        (deleteEvent)="onDeleteClick(dataItem)"
+        (toggleEvent)="onToggleChange($event, dataItem)"
+        (checkboxChange)="onCheckboxChange($event, dataItem)"
+        [createPermission]="createPermission ?? false"
+        [modifyPermission]="modifyPermission ?? false"
+        [deletePermission]="deletePermission ?? false"
+      ></app-grid-cell>
+    </ng-template>
+  </kendo-grid-column>
+  } }
 
   <ng-template kendoPagerTemplate>
     <app-grid-paginator
@@ -146,12 +125,10 @@
   </ng-template>
 
   <kendo-grid-excel [fileName]="getExportName()" [fetchData]="allData" [filterable]="true">
-    @for (column of getColumnsForExport(); track column) {
-      @if (column.style === 'role-excel-only') {
-        <kendo-excelexport-column [title]="column.title" [field]="column.title"></kendo-excelexport-column>
-      } @else {
-        <kendo-excelexport-column [title]="column.title" [field]="column.field"></kendo-excelexport-column>
-      }
-    }
+    @for (column of getColumnsForExport(); track column) { @if (column.style === 'role-excel-only') {
+    <kendo-excelexport-column [title]="column.title" [field]="column.title"></kendo-excelexport-column>
+    } @else {
+    <kendo-excelexport-column [title]="column.title" [field]="column.field"></kendo-excelexport-column>
+    } }
   </kendo-grid-excel>
 </kendo-grid>
