@@ -27,7 +27,7 @@ export function getDetailsPageLink(
   itemUuid?: string,
   itemType?: RegistrationEntityTypes,
   subpagePath?: string,
-  itemPathIncludesSubmodule?: boolean,
+  itemPathIncludesSubmodule?: boolean
 ): string | undefined {
   const isValid = itemUuid != undefined && itemType != undefined;
   if (isValid) {
@@ -41,32 +41,29 @@ export function getDetailsPageLink(
           `${AppPath.itSystems}/${AppPath.itInterfaces}`,
           itemUuid,
           subpagePath,
-          itemPathIncludesSubmodule,
+          itemPathIncludesSubmodule
         );
       case 'it-system':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itSystemCatalog}`,
           itemUuid,
           subpagePath,
-          itemPathIncludesSubmodule,
+          itemPathIncludesSubmodule
         );
-        break;
       case 'it-system-usage':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
           itemUuid,
           subpagePath,
-          itemPathIncludesSubmodule,
+          itemPathIncludesSubmodule
         );
-        break;
       case 'organization':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.organization}/${AppPath.structure}`,
           itemUuid,
           subpagePath,
-          itemPathIncludesSubmodule,
+          itemPathIncludesSubmodule
         );
-        break;
       default:
         console.error('Unmapped link itemType', itemType);
         return undefined;
@@ -89,7 +86,7 @@ function getDetailsPagePathWithSubmodule(
   resourceUrlSegment: string,
   itemUuid: string,
   subpagePath?: string,
-  itemPathIncludesSubmodule?: boolean,
+  itemPathIncludesSubmodule?: boolean
 ) {
   if (itemPathIncludesSubmodule) {
     const segmentWithoutSubmodule = resourceUrlSegment.split('/')[0];
