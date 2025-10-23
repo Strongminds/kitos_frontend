@@ -44,6 +44,8 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public data?: MultiSelectDropdownItem<T>[] | null;
   @Input() public initialSelectedValues?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
+    @Input() public searchFn?: (search: string, item: T) => boolean;
+
 
   @Input() public includeAddTag = false;
   @Input() public tagValidation: 'email' | 'none' = 'none';
