@@ -49,6 +49,7 @@ export interface SystemRelationDialogFormModel {
   ],
 })
 export class SystemRelationDialogComponent extends BaseComponent {
+  @Input() public saveText!: string;
   @Input() public title!: string;
   @Input() formGroup!: FormGroup;
   @Input() saveFunction!: () => void;
