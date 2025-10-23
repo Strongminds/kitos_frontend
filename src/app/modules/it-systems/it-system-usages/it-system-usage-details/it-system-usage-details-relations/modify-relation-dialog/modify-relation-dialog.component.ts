@@ -8,9 +8,9 @@ import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { ConnectedDropdownComponent } from 'src/app/shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
-import { SystemRelationModel } from '../relation-table/relation-table.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from '../system-relation-dialog/relation-dialog.component-store';
 import { SystemRelationDialogComponent, SystemRelationDialogFormModel } from '../system-relation-dialog/system-relation-dialog.component';
+import { SystemRelationModel } from '../relation-table/relation-grid.component';
 
 interface SystemRelationModifyDialogFormModel extends SystemRelationDialogFormModel {
   interface: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;

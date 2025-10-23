@@ -20,7 +20,7 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from './relation-dialog.component-store';
-import { SystemRelationModel } from '../relation-table/relation-table.component';
+import { SystemRelationModel } from '../relation-table/relation-grid.component';
 
 export interface SystemRelationDialogFormModel {
   systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
