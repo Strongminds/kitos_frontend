@@ -129,15 +129,15 @@ describe('it-system-usage system-relations', () => {
     cy.get('app-system-relation-dialog').within(() => {
       cy.dropdown('Søg efter system', 'System 1', true);
       cy.dropdown('Søg efter snitflade', 'Interface 1 - ACTIVE', true);
-      cy.contains('Beskrivelse').type('test');
       cy.contains('Reference').type('test');
+      cy.contains('Beskrivelse').type('test');
       cy.dropdown('Søg efter kontrakt', 'The valid contract', true);
       cy.dropdown('Vælg frekvens', 'Ugentligt', true);
 
       cy.intercept('POST', '**system-relations', {});
       cy.contains('Tilføj').click();
     });
-    cy.contains('Relation tilføjet');
+    cy.contains('Relationer tilføjet');
   });
 
   it('can modify Relation', () => {

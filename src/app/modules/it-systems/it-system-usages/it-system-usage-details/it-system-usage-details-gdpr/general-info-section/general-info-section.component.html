@@ -40,14 +40,16 @@
       (clearClick)="resetSimpleLink()"
       [isDisabled]="disableDirectoryDocumentationControl"
     ></app-edit-url-section>
-    <app-dropdown
-      *ngIf="gdprCriticalityEnabled$ | async"
-      text="Kritikalitet"
-      i18n-text
-      [data]="gdprCriticalityOptions"
-      [formGroup]="generalInformationForm"
-      formName="gdprCriticality"
-      (valueChange)="patchGdpr({ gdprCriticality: $event })"
-    ></app-dropdown>
+    <app-tooltip [text]="(gdprCriticalityModifyEnabled$ | async) === false ? supplierMessage : ''">
+      <app-dropdown
+        *ngIf="gdprCriticalityEnabled$ | async"
+        text="Kritikalitet"
+        i18n-text
+        [data]="gdprCriticalityOptions"
+        [formGroup]="generalInformationForm"
+        formName="gdprCriticality"
+        (valueChange)="patchGdpr({ gdprCriticality: $event })"
+      ></app-dropdown>
+    </app-tooltip>
   </app-form-grid>
 </app-card>
