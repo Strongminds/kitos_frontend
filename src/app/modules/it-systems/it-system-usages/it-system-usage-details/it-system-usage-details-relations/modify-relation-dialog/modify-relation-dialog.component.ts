@@ -50,9 +50,9 @@ export interface SystemRelationModifyDialogFormModel {
   ],
 })
 export class ModifyRelationDialogComponent extends SystemRelationDialogComponent implements OnInit {
-  @Input() public relationModel!: SystemRelationModel;
+  @Input() public override relationModel!: SystemRelationModel;
 
-  public relationForm!: FormGroup<SystemRelationModifyDialogFormModel>;
+  public override formGroup!: FormGroup<SystemRelationModifyDialogFormModel>;
   public readonly interfaces$ = this.componentStore.interfaces$;
 
   constructor(
@@ -104,7 +104,7 @@ export class ModifyRelationDialogComponent extends SystemRelationDialogComponent
         })
     );
 
-    this.relationForm = new FormGroup<SystemRelationModifyDialogFormModel>({
+    this.formGroup = new FormGroup<SystemRelationModifyDialogFormModel>({
       systemUsage: new FormControl<APIIdentityNamePairResponseDTO | undefined>(
         {
           value: this.relationModel.systemUsage,
@@ -134,25 +134,25 @@ export class ModifyRelationDialogComponent extends SystemRelationDialogComponent
     //when usage is selected enable the form, otherwise turn it off (other than the usage dropdown)
     this.subscriptions.add(
       this.changedSystemUsageUuid$.subscribe((usageUuid) => {
-        this.relationForm.controls.interface.reset();
+        this.formGroup.controls.interface.reset();
         if (usageUuid) {
-          this.relationForm.enable();
+          this.formGroup.enable();
         } else {
-          this.relationForm.disable();
-          this.relationForm.controls['systemUsage'].enable();
+          this.formGroup.disable();
+          this.formGroup.controls['systemUsage'].enable();
         }
       })
     );
   }
 
   public save() {
-    if (!this.relationForm.valid) return;
+    if (!this.formGroup.valid) return;
 
-    const usage = this.relationForm.value.systemUsage;
+    const usage = this.formGroup.value.systemUsage;
     if (!usage) return;
 
     this.isBusy = true;
-    var formValue = this.relationForm.value;
+    var formValue = this.formGroup.value;
 
     const request = {
       toSystemUsageUuid: usage.uuid,

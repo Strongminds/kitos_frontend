@@ -1,27 +1,26 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { Subject, combineLatest, first, map } from 'rxjs';
+import { Subject, combineLatest, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ConnectedMultiSelectDropdownComponent } from 'src/app/shared/components/dropdowns/connected-multi-select-dropdown/connected-multi-select-dropdown.component';
+import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
+import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
+import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
+import { ConnectedDropdownComponent } from 'src/app/shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
+import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
+import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
-import { DialogActionsComponent } from '../../../../../../shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { DialogComponent } from '../../../../../../shared/components/dialogs/dialog/dialog.component';
-import { ConnectedDropdownComponent } from '../../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
-import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { TextAreaComponent } from '../../../../../../shared/components/textarea/textarea.component';
-import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
-import { ModifyRelationDialogComponent } from '../modify-relation-dialog/modify-relation-dialog.component';
 import { ItSystemUsageDetailsRelationsDialogComponentStore } from './relation-dialog.component-store';
+import { SystemRelationModel } from '../relation-table/relation-table.component';
 
 export interface SystemRelationDialogFormModel {
   systemUsage: FormControl<APIIdentityNamePairResponseDTO | null | undefined>;
@@ -33,7 +32,7 @@ export interface SystemRelationDialogFormModel {
 }
 
 @Component({
-  selector: 'app-system-relation-dialog[title][saveText]',
+  selector: 'app-system-relation-dialog[title][formGroup][saveFunction]',
   templateUrl: './system-relation-dialog.component.html',
   styleUrls: ['./system-relation-dialog.component.scss'],
   imports: [
@@ -48,12 +47,13 @@ export interface SystemRelationDialogFormModel {
     DialogActionsComponent,
     ButtonComponent,
     AsyncPipe,
-    ConnectedMultiSelectDropdownComponent,
   ],
 })
 export class SystemRelationDialogComponent extends BaseComponent {
   @Input() public title!: string;
-  @Input() public saveText!: string;
+  @Input() formGroup!: FormGroup;
+  @Input() saveFunction!: () => void;
+  @Input() relationModel?: SystemRelationModel;
 
   public readonly systemUsages$ = this.componentStore.systemUsages$;
   public readonly systemUsagesLoading$ = this.componentStore.isSystemUsagesLoading$;

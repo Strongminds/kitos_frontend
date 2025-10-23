@@ -1,19 +1,9 @@
-<app-dialog title="Opret relation" overflow="none">
-  <form [formGroup]="relationForm" (submit)="save()">
-    <app-standard-vertical-content-grid>
-      <app-connected-dropdown
-        text="Søg efter system"
-        valueField="uuid"
-        [data$]="systemUsages$"
-        [isLoading$]="systemUsagesLoading$"
-        [showSearchHelpText$]="usageSearchResultIsLimited$"
-        (filterChange)="usageFilterChange($event)"
-        (valueChange)="usageChange($event)"
-        [formGroup]="relationForm"
-        formName="systemUsage"
-        i18n-text
-      ></app-connected-dropdown>
-      <app-connected-multi-select-dropdown
+<app-system-relation-dialog
+  [formGroup]="formGroup"
+  [saveFunction]="save"
+  title="Opret relation"
+  >
+  <app-connected-multi-select-dropdown
         text="Søg efter snitflader"
         valueField="uuid"
         [data$]="interfacesAsMultiSelectDropdownItems$"
@@ -24,38 +14,5 @@
         i18n-text
       >
       </app-connected-multi-select-dropdown>
-      <app-textarea
-        text="Beskrivelse"
-        i18n-text
-        [autosizeMaxRows]="8"
-        [formGroup]="relationForm"
-        formName="description"
-      ></app-textarea>
-      <app-textbox text="Reference" i18n-text [formGroup]="relationForm" formName="reference"></app-textbox>
-      <app-connected-dropdown
-        text="Søg efter kontrakt"
-        valueField="uuid"
-        [data$]="contracts$"
-        [isLoading$]="contractsLoading$"
-        (filterChange)="contractFilterChange($event)"
-        [formGroup]="relationForm"
-        formName="contract"
-        i18n-text
-      >
-      </app-connected-dropdown>
-      <app-dropdown
-        text="Vælg frekvens"
-        valueField="uuid"
-        [data]="availableReferenceFrequencyTypes$ | async"
-        [formGroup]="relationForm"
-        formName="frequency"
-        i18n-text
-      >
-      </app-dropdown>
-      <app-dialog-actions>
-        <app-button buttonStyle="secondary" (buttonClick)="close()" i18n>Annuller</app-button>
-        <app-button type="submit" [disabled]="relationForm.valid === false || isBusy">Gem</app-button>
-      </app-dialog-actions>
-    </app-standard-vertical-content-grid>
-  </form>
-</app-dialog>
+</app-system-relation-dialog>
+

@@ -51,7 +51,7 @@ export interface SystemRelationCreateDialogFormModel {
   ],
 })
 export class CreateRelationDialogComponent extends SystemRelationDialogComponent {
-  public relationForm = new FormGroup<SystemRelationCreateDialogFormModel>({
+  public override formGroup = new FormGroup<SystemRelationCreateDialogFormModel>({
     systemUsage: new FormControl<APIIdentityNamePairResponseDTO | undefined>(
       { value: undefined, disabled: false },
       Validators.required
@@ -87,10 +87,10 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
       this.changedSystemUsageUuid$.subscribe((usageUuid) => {
         this.interfacesDropdownResetSubject$.next();
         if (usageUuid) {
-          this.relationForm.enable();
+          this.formGroup.enable();
         } else {
-          this.relationForm.disable();
-          this.relationForm.controls['systemUsage'].enable();
+          this.formGroup.disable();
+          this.formGroup.controls['systemUsage'].enable();
         }
       })
     );
@@ -110,18 +110,18 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
   }
 
   public interfaceValueChange(newInterfaces: APIIdentityNamePairResponseDTO[]) {
-    this.relationForm.controls.interfaces.setValue(newInterfaces);
+    this.formGroup.controls.interfaces.setValue(newInterfaces);
   }
 
   public save() {
-    if (!this.relationForm.valid) return;
+    if (!this.formGroup.valid) return;
 
-    const usage = this.relationForm.value.systemUsage;
+    const usage = this.formGroup.value.systemUsage;
     if (!usage) return;
 
     this.isBusy = true;
 
-    const formValue = this.relationForm.value;
+    const formValue = this.formGroup.value;
     const requests =
       formValue.interfaces === undefined || formValue.interfaces === null || formValue.interfaces.length === 0
         ? [
