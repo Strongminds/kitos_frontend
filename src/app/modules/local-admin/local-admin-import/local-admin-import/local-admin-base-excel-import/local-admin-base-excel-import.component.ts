@@ -107,10 +107,10 @@ export class LocalAdminBaseExcelImportComponent extends BaseComponent {
               };
               this.isImporting = true;
               return this.excelService.postExcelWithFormData(requestParameters, this.type).pipe(
-                tapResponse(
-                  () => this.store.dispatch(ExcelImportActions.excelImportSuccess()),
-                  () => this.handleExcelImportError()
-                ),
+                tapResponse({
+    next: () => this.store.dispatch(ExcelImportActions.excelImportSuccess()),
+    error: () => this.handleExcelImportError()
+}),
                 finalize(() => {
                   this.isImporting = false;
                 })

@@ -67,13 +67,13 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
       tap(() => this.setLoadingUsersWithRightsholderAccess(true)),
       mergeMap(() => {
         return this.userService.getManyGlobalUserInternalV2GetUsersWithRightsholderAccess().pipe(
-          tapResponse(
-            (users) => {
-              this.setUsersWithRightsholderAccess(users);
-            },
-            (e) => console.error(e),
-            () => this.setLoadingUsersWithRightsholderAccess(false),
-          ),
+          tapResponse({
+    next: (users) => {
+        this.setUsersWithRightsholderAccess(users);
+    },
+    error: (e) => console.error(e),
+    complete: () => this.setLoadingUsersWithRightsholderAccess(false)
+}),
         );
       }),
     ),
@@ -84,11 +84,11 @@ export class GlobalAdminOtherApiUsersComponentStore extends ComponentStore<State
       tap(() => this.setLoadingUsersWithCrossAccess(true)),
       mergeMap(() => {
         return this.userService.getManyGlobalUserInternalV2GetUsersWithCrossAccess().pipe(
-          tapResponse(
-            (users) => this.setUsersWithCrossAccess(users),
-            (e) => console.error(e),
-            () => this.setLoadingUsersWithCrossAccess(false),
-          ),
+          tapResponse({
+    next: (users) => this.setUsersWithCrossAccess(users),
+    error: (e) => console.error(e),
+    complete: () => this.setLoadingUsersWithCrossAccess(false)
+}),
         );
       }),
     ),

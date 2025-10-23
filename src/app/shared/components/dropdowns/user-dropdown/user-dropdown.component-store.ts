@@ -59,11 +59,11 @@ export class UserDropdownComponentStore extends ComponentStore<State> {
       mergeMap((search) => {
         return this.searchUsersInternal(search).pipe(
           map((users) => users.map(toShallowUser)),
-          tapResponse(
-            (users) => this.setUsers(users),
-            (error) => console.error(error),
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+    next: (users) => this.setUsers(users),
+    error: (error) => console.error(error),
+    complete: () => this.setLoading(false)
+}),
         );
       }),
     ),

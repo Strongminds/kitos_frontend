@@ -40,11 +40,11 @@ export class GlobalAdminOtherBrokenLinksComponentStore extends ComponentStore<St
       tap(() => this.setLoading(true)),
       mergeMap(() => {
         return this.statusService.getSingleBrokenExternalReferencesReportInternalV2GetStatus().pipe(
-          tapResponse(
-            (status) => this.setStatus(status as APIBrokenExternalReferencesReportStatusResponseDTO),
-            (e) => console.error(e),
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+    next: (status) => this.setStatus(status as APIBrokenExternalReferencesReportStatusResponseDTO),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
         );
       }),
     ),
@@ -61,20 +61,20 @@ export class GlobalAdminOtherBrokenLinksComponentStore extends ComponentStore<St
             context: undefined,
           })
           .pipe(
-            tapResponse(
-              (response) => {
-                const contentDisposition = response.headers.get('Content-Disposition');
-                const fileName = contentDisposition
-                  ? this.getFileNameFromContentDisposition(contentDisposition)
-                  : 'report.csv';
-                saveAs(response.body, fileName);
-              },
-              (e) => {
-                console.error(e);
-                this.notificationService.showError($localize`Kunne ikke hente rapporten`);
-              },
-              () => this.setLoading(false),
-            ),
+            tapResponse({
+    next: (response) => {
+        const contentDisposition = response.headers.get('Content-Disposition');
+        const fileName = contentDisposition
+            ? this.getFileNameFromContentDisposition(contentDisposition)
+            : 'report.csv';
+        saveAs(response.body, fileName);
+    },
+    error: (e) => {
+        console.error(e);
+        this.notificationService.showError($localize `Kunne ikke hente rapporten`);
+    },
+    complete: () => this.setLoading(false)
+}),
           );
       }),
     ),

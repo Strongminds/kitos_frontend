@@ -74,11 +74,11 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
         return this.systemUsageService
           .getManyItSystemUsageInternalV2GetRelations({ contractUuid: itContractUuid })
           .pipe(
-            tapResponse(
-              (relations) => this.updateSystemRelations(relations),
-              (e) => console.error(e),
-              () => this.updateSystemRelationsIsLoading(false),
-            ),
+            tapResponse({
+    next: (relations) => this.updateSystemRelations(relations),
+    error: (e) => console.error(e),
+    complete: () => this.updateSystemRelationsIsLoading(false)
+}),
           );
       }),
     ),
@@ -95,12 +95,11 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
             systemNameContent: search,
           })
           .pipe(
-            tapResponse(
-              (usages) =>
-                this.updateSystemUsages(usages.map((usage) => ({ uuid: usage.uuid, name: usage.systemContext.name }))),
-              (e) => console.error(e),
-              () => this.updateSystemUsagesIsLoading(false),
-            ),
+            tapResponse({
+    next: (usages) => this.updateSystemUsages(usages.map((usage) => ({ uuid: usage.uuid, name: usage.systemContext.name }))),
+    error: (e) => console.error(e),
+    complete: () => this.updateSystemUsagesIsLoading(false)
+}),
           );
       }),
     ),

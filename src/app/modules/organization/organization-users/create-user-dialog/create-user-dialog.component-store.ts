@@ -55,11 +55,11 @@ export class CreateUserDialogComponentStore extends ComponentStore<State> {
             email: email,
           })
           .pipe(
-            tapResponse(
-              (user) => this.setUser(email !== this.orginalEmail ? user : undefined),
-              (e) => console.error(e),
-              () => this.setLoading(false),
-            ),
+            tapResponse({
+    next: (user) => this.setUser(email !== this.orginalEmail ? user : undefined),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
           );
       }),
     ),

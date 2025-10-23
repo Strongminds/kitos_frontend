@@ -140,11 +140,11 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
       tap(() => this.updateSystemUuidIsLoading(true)),
       mergeMap((usageUuid) => {
         return this.apiUsageService.getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid: usageUuid }).pipe(
-          tapResponse(
-            (usage) => this.updateSystemUuid(usage.systemContext.uuid),
-            (error) => console.error(error),
-            () => this.updateSystemUuidIsLoading(false),
-          ),
+          tapResponse({
+    next: (usage) => this.updateSystemUuid(usage.systemContext.uuid),
+    error: (error) => console.error(error),
+    complete: () => this.updateSystemUuidIsLoading(false)
+}),
         );
       }),
     ),
@@ -165,20 +165,18 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
             orderByProperty: 'Name',
           })
           .pipe(
-            tapResponse(
-              (usages) => {
-                return this.updateSystemUsages(
-                  usages
-                    .filter((usage) => usage.uuid != currentUsageUuid)
-                    .map((usage) => ({
-                      name: usage.systemContext.name,
-                      uuid: usage.uuid,
-                    })),
-                );
-              },
-              (error) => console.error(error),
-              () => this.updateSystemUsagesIsLoading(false),
-            ),
+            tapResponse({
+    next: (usages) => {
+        return this.updateSystemUsages(usages
+            .filter((usage) => usage.uuid != currentUsageUuid)
+            .map((usage) => ({
+            name: usage.systemContext.name,
+            uuid: usage.uuid,
+        })));
+    },
+    error: (error) => console.error(error),
+    complete: () => this.updateSystemUsagesIsLoading(false)
+}),
           );
       }),
     ),
@@ -196,11 +194,11 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
             includeDeactivated: true,
           })
           .pipe(
-            tapResponse(
-              (interfaces) => this.updateInterfaces(interfaces),
-              (error) => console.error(error),
-              () => this.updateInterfacesIsLoading(false),
-            ),
+            tapResponse({
+    next: (interfaces) => this.updateInterfaces(interfaces),
+    error: (error) => console.error(error),
+    complete: () => this.updateInterfacesIsLoading(false)
+}),
           );
       }),
     ),
@@ -219,11 +217,11 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
             pageSize: this.PAGE_SIZE,
           })
           .pipe(
-            tapResponse(
-              (contracts) => this.updateContracts(contracts),
-              (error) => console.error(error),
-              () => this.updateContractsIsLoading(false),
-            ),
+            tapResponse({
+    next: (contracts) => this.updateContracts(contracts),
+    error: (error) => console.error(error),
+    complete: () => this.updateContractsIsLoading(false)
+}),
           );
       }),
     ),

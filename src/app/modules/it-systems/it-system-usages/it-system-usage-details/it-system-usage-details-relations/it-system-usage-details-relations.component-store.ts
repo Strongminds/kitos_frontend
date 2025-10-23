@@ -46,16 +46,11 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
       mergeMap((systemUsageUuid) => {
         this.updateIncomingRelationsIsLoading(true);
         return this.apiUsageService.getManyItSystemUsageV2GetIncomingSystemRelations({ systemUsageUuid }).pipe(
-          tapResponse(
-            (relations) =>
-              this.updateIncomingRelations(
-                relations.map((relation) =>
-                  this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage)
-                )
-              ),
-            (e) => console.error(e),
-            () => this.updateIncomingRelationsIsLoading(false)
-          )
+          tapResponse({
+    next: (relations) => this.updateIncomingRelations(relations.map((relation) => this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage))),
+    error: (e) => console.error(e),
+    complete: () => this.updateIncomingRelationsIsLoading(false)
+})
         );
       })
     )
