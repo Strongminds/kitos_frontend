@@ -14,6 +14,7 @@ import {
   APIV2ItSystemUsageService,
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants/constants';
+import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageUuid } from 'src/app/store/it-system-usage/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -47,6 +48,9 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
   public readonly contractsLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
 
   public readonly interfaces$ = this.select((state) => state.interfaces).pipe(filterNullish());
+
+  public readonly interfacesAsMultiSelectDropdownItems$: Observable<MultiSelectDropdownItem<APIItInterfaceResponseDTO>[]> = this.interfaces$.pipe(map((interfaces) =>
+    interfaces.map(x => ({ name: x.name, value: x, disabled: false, selected: false }))));
 
   private readonly interfacesLoading$ = this.select((state) => state.contractsLoading).pipe(filterNullish());
   private readonly systemUuidLoading$ = this.select((state) => state.systemUuidLoading).pipe(filterNullish());

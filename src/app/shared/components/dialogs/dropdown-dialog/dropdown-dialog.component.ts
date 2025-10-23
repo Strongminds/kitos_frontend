@@ -1,16 +1,17 @@
+import { AsyncPipe, NgFor, NgIf } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ConnectedDropdownDialogComponent } from '../connected-dropdown-dialog/connected-dropdown-dialog.component';
-import { DialogComponent } from '../dialog/dialog.component';
-import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
-import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../buttons/button/button.component';
-import { AsyncPipe } from '@angular/common';
+import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
+import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { ConnectedDropdownDialogComponent } from '../connected-dropdown-dialog/connected-dropdown-dialog.component';
+import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
+import { DialogComponent } from '../dialog/dialog.component';
 
 @Component({
   selector: 'app-dropdown-dialog',
@@ -25,10 +26,15 @@ import { AsyncPipe } from '@angular/common';
     DialogActionsComponent,
     ButtonComponent,
     AsyncPipe,
+    NgIf,
+    NgFor,
+    ParagraphComponent,
   ],
 })
 export class DropdownDialogComponent<T> extends BaseComponent implements OnInit {
   @Input() public title!: string;
+  @Input() public description?: string;
+  @Input() public bulletPoints?: string[];
   @Input() public dropdownText!: string;
   @Input() public data$!: Observable<T[]>;
   @Input() public valueField = 'value';
@@ -47,7 +53,7 @@ export class DropdownDialogComponent<T> extends BaseComponent implements OnInit 
 
   constructor(
     private readonly actions$: Actions,
-    private readonly dialogRef: MatDialogRef<ConnectedDropdownDialogComponent<T>>,
+    private readonly dialogRef: MatDialogRef<ConnectedDropdownDialogComponent<T>>
   ) {
     super();
   }

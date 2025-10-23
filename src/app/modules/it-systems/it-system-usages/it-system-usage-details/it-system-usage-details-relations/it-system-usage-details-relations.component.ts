@@ -99,7 +99,7 @@ export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implem
       this.actions$
         .pipe(
           ofType(
-            ITSystemUsageActions.addItSystemUsageRelationSuccess,
+            ITSystemUsageActions.addItSystemUsageRelationsSuccess,
             ITSystemUsageActions.patchItSystemUsageRelationSuccess,
             ITSystemUsageActions.removeItSystemUsageRelationSuccess
           )

@@ -1,8 +1,19 @@
 <app-system-relation-dialog
+  [formGroup]="formGroup"
+  [saveFunction]="save"
   title="Opret relation"
   saveText="Tilføj"
-  (saveRequested)="onSave($event)"
-  [relationForm]="relationForm"
-  i18n-title
-  i18n-saveText
-></app-system-relation-dialog>
+  >
+  <app-connected-multi-select-dropdown
+        text="Søg efter snitflader"
+        valueField="uuid"
+        [data$]="interfacesAsMultiSelectDropdownItems$"
+        [isLoading$]="interfacesLoading$"
+        [resetSubject$]="interfacesDropdownResetSubject$"
+        (filterChange)="interfaceFilterChange($event)"
+        (valueChange)="interfaceValueChange($event)"
+        i18n-text
+      >
+      </app-connected-multi-select-dropdown>
+</app-system-relation-dialog>
+

@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRRegistrationsResponseDTO, APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
+import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
+import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
   RiskAssessmentResultOptions,
@@ -47,11 +49,14 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     EditUrlSectionComponent,
     TextAreaComponent,
     AsyncPipe,
+    TooltipComponent,
   ],
 })
 export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
   @Input() disableLinkControl!: Observable<void>;
+
+  public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
 
   private readonly currentGdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly isRiskAssessmentFalse$ = this.currentGdpr$.pipe(
@@ -74,13 +79,16 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
       plannedDateControl: new FormControl<Date | undefined>(undefined),
       yesNoDontKnowControl: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       conductedDateControl: new FormControl<Date | undefined>(undefined),
-      assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>(undefined),
+      assessmentResultControl: new FormControl<RiskAssessmentResultOptions | undefined>({
+        value: undefined,
+        disabled: true,
+      }),
       notesControl: new FormControl<string | undefined>(undefined),
     },
     { updateOn: 'blur' }
   );
 
-  private readonly riskAssessmentModifyEnabled$ = this.store.select(
+  public readonly riskAssessmentModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.gdpr.riskAssessment)
   );
 
@@ -119,15 +127,6 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
     this.noPermissions.emit([this.riskAssessmentFormGroup]);
     this.disableLinkControl.subscribe(() => {
       this.disableDirectoryDocumentationControl = true;
-    });
-
-    this.riskAssessmentModifyEnabled$.subscribe((enabled) => {
-      const control = this.riskAssessmentFormGroup.controls.assessmentResultControl;
-      if (enabled) {
-        control.enable();
-      } else {
-        control.disable();
-      }
     });
   }
 
