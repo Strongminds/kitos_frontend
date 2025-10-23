@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { NgIf } from '@angular/common';
+
 import { Component, Inject, Input } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { tapResponse } from '@ngrx/operators';
@@ -33,9 +33,8 @@ import { StandardVerticalContentGridComponent } from '../../../../../shared/comp
     ParagraphComponent,
     ButtonComponent,
     FileInputComponent,
-    NgIf,
-    LoadingComponent,
-  ],
+    LoadingComponent
+],
 })
 export class LocalAdminBaseExcelImportComponent extends BaseComponent {
   @Input() public type!: LocalAdminImportEntityType;

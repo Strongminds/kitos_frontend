@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -31,9 +31,8 @@ import { TextBoxComponent } from '../../textbox/textbox.component';
     CheckboxComponent,
     TextAreaComponent,
     DialogActionsComponent,
-    ButtonComponent,
-    CommonModule,
-  ],
+    ButtonComponent
+],
 })
 export class EditLocalOptionTypeDialogComponent extends BaseComponent implements OnInit {
   @Input() optionTypeItem!: LocalAdminOptionTypeItem;

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -42,15 +42,14 @@ import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-detail
   styleUrl: './it-system-catalog-details.component.scss',
   providers: [ITSystemCatalogDetailsComponentStore],
   imports: [
-    NgIf,
     BreadcrumbsComponent,
     DetailsHeaderComponent,
     ButtonComponent,
     NavigationDrawerComponent,
     RouterOutlet,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemCatalogDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

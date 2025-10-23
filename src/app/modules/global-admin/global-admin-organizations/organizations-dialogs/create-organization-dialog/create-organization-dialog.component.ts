@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -35,7 +35,6 @@ import { OrganizationsDialogComponentStore } from '../organizations-dialog.compo
   providers: [OrganizationsDialogComponentStore],
   imports: [
     DialogComponent,
-    NgIf,
     LoadingComponent,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
@@ -46,8 +45,8 @@ import { OrganizationsDialogComponentStore } from '../organizations-dialog.compo
     ButtonComponent,
     AsyncPipe,
     CheckboxComponent,
-    TooltipComponent,
-  ],
+    TooltipComponent
+],
 })
 export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   @Input() tooltipText: string = '';

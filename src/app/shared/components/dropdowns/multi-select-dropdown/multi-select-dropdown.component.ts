@@ -17,7 +17,7 @@ import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.m
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { NgSelectComponent, NgOptionTemplateDirective, NgMultiLabelTemplateDirective } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor } from '@angular/common';
+
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 
 @Component({
@@ -28,11 +28,9 @@ import { ParagraphComponent } from '../../paragraph/paragraph.component';
     NgSelectComponent,
     FormsModule,
     NgOptionTemplateDirective,
-    NgIf,
     ParagraphComponent,
-    NgMultiLabelTemplateDirective,
-    NgFor,
-  ],
+    NgMultiLabelTemplateDirective
+],
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
   @Input() public text = '';

@@ -51,7 +51,7 @@ import { ItContractFrontpageComponentStore } from './it-contract-frontpage.compo
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
 import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
@@ -73,7 +73,6 @@ import { RadioButtonsComponent } from '../../../../shared/components/radio-butto
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     StatusChipComponent,
     FormGridComponent,
     FormsModule,
@@ -88,8 +87,8 @@ import { RadioButtonsComponent } from '../../../../shared/components/radio-butto
     ConnectedDropdownComponent,
     OrgUnitSelectComponent,
     RadioButtonsComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
   public readonly contractTemplates$ = this.store

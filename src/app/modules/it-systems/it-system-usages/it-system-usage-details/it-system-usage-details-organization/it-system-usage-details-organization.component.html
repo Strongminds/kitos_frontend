@@ -1,84 +1,92 @@
 <app-card>
   <app-card-header title="Ansvarlig organisationsenhed" helpTextKey="it-system.usage.org" i18n-title></app-card-header>
 
-  <app-paragraph *ngIf="(anyUsedByUnits$ | async) === false" paragraphSize="medium" i18n
-    >Systemet udstiller ingen ansvarlig organisationsenhed</app-paragraph
-  >
-  <form *ngIf="anyUsedByUnits$ | async" [formGroup]="responsibleUnitForm">
-    <app-dropdown
-      text="Vælg ansvarlig organisationsenhed"
-      i18n-text
-      valueField="uuid"
-      formName="responsibleUnit"
-      [formGroup]="responsibleUnitForm"
-      [data]="usedByUnits$ | async"
-      (valueChange)="patchResponsibleUnit($event)"
-    >
-    </app-dropdown>
-  </form>
-</app-card>
-<app-card>
-  <app-card-header
-    title="Relevante organisationsenheder"
-    helpTextKey="it-system.usage.organization-used-by"
-    i18n-title
-  ></app-card-header>
-  <app-standard-vertical-content-grid>
-    <app-section title="Filtrér i organisationsheder">
-      <form [formGroup]="relevantUnitsForm">
-        <div class="org-unit-select-container">
-          <app-org-unit-select
-            *ngIf="(isPatching$ | async) !== true"
-            text="Søg efter enhed"
-            i18n-text
-            [disabledUnitsUuids]="(usedUnitUuids$ | async) ?? []"
-            [formGroup]="relevantUnitsForm"
-            formName="relevantUnit"
-            [showDescription]="true"
-            data-cy="org-unit-select"
-            [useMaterialSpinner]="true"
-            (valueChange)="patchRelevantUnits()"
-          ></app-org-unit-select>
-
-          <app-loading *ngIf="isPatching$ | async" type="material"></app-loading>
-        </div>
-        <app-numeric-input
-          text="Antal niveauer"
+  @if ((anyUsedByUnits$ | async) === false) {
+    <app-paragraph paragraphSize="medium" i18n
+      >Systemet udstiller ingen ansvarlig organisationsenhed</app-paragraph
+      >
+    }
+    @if (anyUsedByUnits$ | async) {
+      <form [formGroup]="responsibleUnitForm">
+        <app-dropdown
+          text="Vælg ansvarlig organisationsenhed"
           i18n-text
-          [minLength]="1"
-          data-cy="levels-input"
-          (valueChange)="levelChange($event)"
-        ></app-numeric-input>
-        <div class="checkbox-container">
-          <app-checkbox-button
-            [(value)]="includeParents"
-            data-cy="toggle-module-button"
-            [backgroundWhite]="true"
-            i18n
-            i18n-tooltip
-            [isLarge]="true"
-            [disabled]="(hasModifyPermission$ | async) !== true"
-            tooltip="Når denne er valgt, medtages enhedens overordnede i hierarkiet"
+          valueField="uuid"
+          formName="responsibleUnit"
+          [formGroup]="responsibleUnitForm"
+          [data]="usedByUnits$ | async"
+          (valueChange)="patchResponsibleUnit($event)"
           >
+        </app-dropdown>
+      </form>
+    }
+  </app-card>
+  <app-card>
+    <app-card-header
+      title="Relevante organisationsenheder"
+      helpTextKey="it-system.usage.organization-used-by"
+      i18n-title
+    ></app-card-header>
+    <app-standard-vertical-content-grid>
+      <app-section title="Filtrér i organisationsheder">
+        <form [formGroup]="relevantUnitsForm">
+          <div class="org-unit-select-container">
+            @if ((isPatching$ | async) !== true) {
+              <app-org-unit-select
+                text="Søg efter enhed"
+                i18n-text
+                [disabledUnitsUuids]="(usedUnitUuids$ | async) ?? []"
+                [formGroup]="relevantUnitsForm"
+                formName="relevantUnit"
+                [showDescription]="true"
+                data-cy="org-unit-select"
+                [useMaterialSpinner]="true"
+                (valueChange)="patchRelevantUnits()"
+              ></app-org-unit-select>
+            }
+
+            @if (isPatching$ | async) {
+              <app-loading type="material"></app-loading>
+            }
+          </div>
+          <app-numeric-input
+            text="Antal niveauer"
+            i18n-text
+            [minLength]="1"
+            data-cy="levels-input"
+            (valueChange)="levelChange($event)"
+          ></app-numeric-input>
+          <div class="checkbox-container">
+            <app-checkbox-button
+              [(value)]="includeParents"
+              data-cy="toggle-module-button"
+              [backgroundWhite]="true"
+              i18n
+              i18n-tooltip
+              [isLarge]="true"
+              [disabled]="(hasModifyPermission$ | async) !== true"
+              tooltip="Når denne er valgt, medtages enhedens overordnede i hierarkiet"
+              >
             Medtag overordnede enheder
           </app-checkbox-button>
-        </div>
-      </form>
-    </app-section>
+          </div>
+        </form>
+      </app-section>
 
-    <app-drag-and-drop-tree
-      *ngIf="unitTree$ | async as unitTree"
-      itemType="organization"
-      [currentNodeUuid]="(rootUnitUuid$ | async) ?? ''"
-      [nodes]="unitTree ?? []"
-      [disableDrag]="true"
-      [disableRedirect]="true"
-      [checkboxNodes]="true"
-      [disableCheck]="(hasModifyPermission$ | async) !== true"
-      (nodeChecked)="onUnitChange($event)"
-      (nodeExpandClick)="nodeExpandClick($event)"
-      [displayDefaultNodeColorOnly]="true"
-      [maxLevel]="(numberOfLevels$ | async) ?? undefined"
-    ></app-drag-and-drop-tree>
-  </app-standard-vertical-content-grid>
-</app-card>
+      @if (unitTree$ | async; as unitTree) {
+        <app-drag-and-drop-tree
+          itemType="organization"
+          [currentNodeUuid]="(rootUnitUuid$ | async) ?? ''"
+          [nodes]="unitTree ?? []"
+          [disableDrag]="true"
+          [disableRedirect]="true"
+          [checkboxNodes]="true"
+          [disableCheck]="(hasModifyPermission$ | async) !== true"
+          (nodeChecked)="onUnitChange($event)"
+          (nodeExpandClick)="nodeExpandClick($event)"
+          [displayDefaultNodeColorOnly]="true"
+          [maxLevel]="(numberOfLevels$ | async) ?? undefined"
+        ></app-drag-and-drop-tree>
+      }
+    </app-standard-vertical-content-grid>
+  </app-card>

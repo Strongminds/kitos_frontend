@@ -1,5 +1,5 @@
-import { DOCUMENT, NgClass, NgIf, NgFor, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { NgClass, NgTemplateOutlet } from '@angular/common';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, DOCUMENT } from '@angular/core';
 import { Router } from '@angular/router';
 import { getDetailsPageLink } from '../../helpers/link.helpers';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
@@ -22,7 +22,6 @@ interface DropInfo {
   styleUrls: ['./drag-and-drop-tree.component.scss'],
   imports: [
     NgClass,
-    NgIf,
     ChevronDownIconComponent,
     ChevronRightIconComponent,
     CheckboxComponent,
@@ -30,10 +29,9 @@ interface DropInfo {
     DragIconComponent,
     CdkDragHandle,
     CdkDropList,
-    NgFor,
     CdkDrag,
-    NgTemplateOutlet,
-  ],
+    NgTemplateOutlet
+],
 })
 export class DragAndDropTreeComponent<T> implements OnInit {
   public toggleStatusText = 'status';

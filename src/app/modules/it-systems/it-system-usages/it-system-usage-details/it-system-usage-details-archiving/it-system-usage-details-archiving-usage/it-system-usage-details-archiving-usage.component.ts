@@ -53,7 +53,7 @@ import { CardHeaderComponent } from '../../../../../../shared/components/card-he
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { TextBoxInfoComponent } from '../../../../../../shared/components/textbox-info/textbox-info.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
 import { ConnectedDropdownComponent } from '../../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 import { NumericInputComponent } from '../../../../../../shared/components/numeric-input/numeric-input.component';
@@ -85,7 +85,6 @@ import { AppDatePipe } from '../../../../../../shared/pipes/app-date.pipe';
     ReactiveFormsModule,
     DropdownComponent,
     TextBoxInfoComponent,
-    NgIf,
     ParagraphComponent,
     ConnectedDropdownComponent,
     NumericInputComponent,
@@ -95,7 +94,6 @@ import { AppDatePipe } from '../../../../../../shared/pipes/app-date.pipe';
     TextAreaComponent,
     StandardVerticalContentGridComponent,
     NativeTableComponent,
-    NgFor,
     ContentSpaceBetweenComponent,
     TableRowActionsComponent,
     IconButtonComponent,
@@ -104,8 +102,8 @@ import { AppDatePipe } from '../../../../../../shared/pipes/app-date.pipe';
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
     AsyncPipe,
-    AppDatePipe,
-  ],
+    AppDatePipe
+],
 })
 export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent implements OnInit {
   private readonly journalFrequencyInputUpperLimit = 100;

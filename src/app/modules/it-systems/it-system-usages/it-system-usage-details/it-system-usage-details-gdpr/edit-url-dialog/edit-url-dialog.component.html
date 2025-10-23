@@ -17,18 +17,20 @@
           formName="url"
           data-cy="link-url-textbox"
         ></app-textbox>
-        <app-paragraph paragraphSize="small" color="error" *ngIf="showValidationError" i18n
-          >Webadressen er ugyldig. Sørg for, at den begynder med "https://"
+        @if (showValidationError) {
+          <app-paragraph paragraphSize="small" color="error" i18n
+            >Webadressen er ugyldig. Sørg for, at den begynder med "https://"
         </app-paragraph>
+        }
       </div>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" data-cy="edit-url-cancel-button" i18n
           >Annuller</app-button
-        >
-        <app-button type="submit" [disabled]="disableSave() === true" data-cy="edit-url-save-button" i18n
-          >Gem</app-button
-        >
-      </app-dialog-actions>
-    </app-standard-vertical-content-grid>
-  </form>
-</app-dialog>
+          >
+          <app-button type="submit" [disabled]="disableSave() === true" data-cy="edit-url-save-button" i18n
+            >Gem</app-button
+            >
+          </app-dialog-actions>
+        </app-standard-vertical-content-grid>
+      </form>
+    </app-dialog>

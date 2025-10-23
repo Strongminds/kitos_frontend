@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, EventEmitter, Output } from '@angular/core';
 import { BaseCellComponent } from './base-cell.component';
 import { ActionButtonsCellComponent } from './cell-types/action-buttons-cell/action-buttons-cell.component';
@@ -24,7 +24,6 @@ import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-
   templateUrl: './grid-cell.component.html',
   styleUrl: './grid-cell.component.scss',
   imports: [
-    NgIf,
     TextCellComponent,
     StatusCellComponent,
     ThousandSeperatorCellComponent,
@@ -41,8 +40,8 @@ import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-
     PageLinkArrayCellComponent,
     UuidToNameCellComponent,
     AuditCellComponent,
-    ActionButtonsCellComponent,
-  ],
+    ActionButtonsCellComponent
+],
 })
 export class GridCellComponent extends BaseCellComponent {
   @Output() public checkboxChange = new EventEmitter<boolean>();

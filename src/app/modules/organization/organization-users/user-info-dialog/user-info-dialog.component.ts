@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -32,7 +32,6 @@ import { UserRoleTableComponent } from './user-role-table/user-role-table.compon
   templateUrl: './user-info-dialog.component.html',
   styleUrl: './user-info-dialog.component.scss',
   imports: [
-    NgIf,
     ScrollbarDialogComponent,
     StandardVerticalContentGridComponent,
     UserRoleTableComponent,
@@ -43,8 +42,8 @@ import { UserRoleTableComponent } from './user-role-table/user-role-table.compon
     TrashcanIconComponent,
     AsyncPipe,
     AppDatePipe,
-    LoadingComponent,
-  ],
+    LoadingComponent
+],
 })
 export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;

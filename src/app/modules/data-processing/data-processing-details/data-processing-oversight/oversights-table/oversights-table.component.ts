@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -33,9 +33,7 @@ import { WriteOversightDateDialogComponent } from './write-oversight-date-dialog
   styleUrl: './oversights-table.component.scss',
   imports: [
     StandardVerticalContentGridComponent,
-    NgIf,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
     TableRowActionsComponent,
     IconButtonComponent,
@@ -45,8 +43,8 @@ import { WriteOversightDateDialogComponent } from './write-oversight-date-dialog
     CollectionExtensionButtonComponent,
     AsyncPipe,
     AppDatePipe,
-    ExternalPageLinkComponent,
-  ],
+    ExternalPageLinkComponent
+],
 })
 export class OversightsTableComponent extends BaseComponent {
   public readonly oversightDates$ = this.store.select(selectDataProcessingOversightDates).pipe(filterNullish());

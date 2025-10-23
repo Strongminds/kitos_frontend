@@ -1,35 +1,38 @@
-<ng-container *ngIf="initialized">
-  <mat-form-field *ngIf="formGroup" [formGroup]="formGroup">
-    <mat-label>{{ text }}</mat-label>
-    <textarea
-      #autosizeTextarea
-      matInput
-      cdkTextareaAutosize
-      [cdkAutosizeMinRows]="autosizeMinRows"
-      [cdkAutosizeMaxRows]="autosizeMaxRows"
-      type="text"
-      [formControlName]="formName"
-      (input)="formInputValueChange($event); scrollWithTextOnInput()"
-      (focus)="focus(true)"
-      (blur)="focus(false)"
-      [ngClass]="{ disabled: disabled }"
-    ></textarea>
-  </mat-form-field>
-
-  <mat-form-field *ngIf="!formGroup">
-    <mat-label>{{ text }}</mat-label>
-    <textarea
-      #autosizeTextarea
-      matInput
-      cdkTextareaAutosize
-      [cdkAutosizeMinRows]="autosizeMinRows"
-      [cdkAutosizeMaxRows]="autosizeMaxRows"
-      type="text"
-      [disabled]="disabled"
-      [(ngModel)]="value"
-      (ngModelChange)="valueChange.emit($event)"
-      [ngClass]="{ disabled: disabled }"
-      (input)="scrollWithTextOnInput()"
-    ></textarea>
-  </mat-form-field>
-</ng-container>
+@if (initialized) {
+  @if (formGroup) {
+    <mat-form-field [formGroup]="formGroup">
+      <mat-label>{{ text }}</mat-label>
+      <textarea
+        #autosizeTextarea
+        matInput
+        cdkTextareaAutosize
+        [cdkAutosizeMinRows]="autosizeMinRows"
+        [cdkAutosizeMaxRows]="autosizeMaxRows"
+        type="text"
+        [formControlName]="formName"
+        (input)="formInputValueChange($event); scrollWithTextOnInput()"
+        (focus)="focus(true)"
+        (blur)="focus(false)"
+        [ngClass]="{ disabled: disabled }"
+      ></textarea>
+    </mat-form-field>
+  }
+  @if (!formGroup) {
+    <mat-form-field>
+      <mat-label>{{ text }}</mat-label>
+      <textarea
+        #autosizeTextarea
+        matInput
+        cdkTextareaAutosize
+        [cdkAutosizeMinRows]="autosizeMinRows"
+        [cdkAutosizeMaxRows]="autosizeMaxRows"
+        type="text"
+        [disabled]="disabled"
+        [(ngModel)]="value"
+        (ngModelChange)="valueChange.emit($event)"
+        [ngClass]="{ disabled: disabled }"
+        (input)="scrollWithTextOnInput()"
+      ></textarea>
+    </mat-form-field>
+  }
+}

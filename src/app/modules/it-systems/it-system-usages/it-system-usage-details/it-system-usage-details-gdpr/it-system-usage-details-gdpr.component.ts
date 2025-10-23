@@ -19,7 +19,7 @@ import {
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { GeneralInfoSectionComponent } from './general-info-section/general-info-section.component';
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
@@ -47,7 +47,6 @@ type UsageGDPRSection =
   templateUrl: './it-system-usage-details-gdpr.component.html',
   styleUrls: ['./it-system-usage-details-gdpr.component.scss'],
   imports: [
-    NgIf,
     GeneralInfoSectionComponent,
     CardComponent,
     CardHeaderComponent,
@@ -60,8 +59,8 @@ type UsageGDPRSection =
     GdprRiskAssessmentSectionComponent,
     GdprDpiaConductedSectionComponent,
     GdprRetentionPeriodSectionComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
   @Output() disableLinkControls = new EventEmitter<void>();

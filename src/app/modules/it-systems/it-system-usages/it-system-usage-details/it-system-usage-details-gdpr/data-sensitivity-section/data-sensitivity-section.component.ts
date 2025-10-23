@@ -20,7 +20,7 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
 import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
 import { ContentWithInfoComponent } from '../../../../../../shared/components/content-with-info/content-with-info.component';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-data-sensitivity-section',
@@ -32,9 +32,8 @@ import { NgFor, AsyncPipe } from '@angular/common';
     ReactiveFormsModule,
     CheckboxComponent,
     ContentWithInfoComponent,
-    NgFor,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DataSensitivitySectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

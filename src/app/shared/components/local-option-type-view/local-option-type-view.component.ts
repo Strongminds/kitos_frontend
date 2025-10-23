@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -17,7 +17,7 @@ import { LocalOptionTypeTableComponentStore } from './local-option-type-table.co
   templateUrl: './local-option-type-view.component.html',
   styleUrl: './local-option-type-view.component.scss',
   providers: [LocalOptionTypeTableComponentStore],
-  imports: [NgIf, AccordionComponent, LocalOptionGridComponent, AsyncPipe],
+  imports: [AccordionComponent, LocalOptionGridComponent, AsyncPipe],
 })
 export class LocalOptionTypeViewComponent extends BaseComponent implements OnInit {
   @Input() optionType!: LocalAdminOptionType;

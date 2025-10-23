@@ -11,7 +11,7 @@ import { EditHelpTextDialogComponent } from '../../../shared/components/dialogs/
 import { CardComponent } from '../../../shared/components/card/card.component';
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LocalGridComponent } from '../../../shared/components/local-grid/local-grid.component';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 
@@ -23,11 +23,10 @@ import { LoadingComponent } from '../../../shared/components/loading/loading.com
     CardComponent,
     OverviewHeaderComponent,
     ButtonComponent,
-    NgIf,
     LocalGridComponent,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GlobalAdminHelpTextsComponent implements OnInit {
   public readonly helpTexts$ = this.store.select(selectHelpTexts);

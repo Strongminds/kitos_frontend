@@ -16,7 +16,7 @@ import {
 } from './removal-conflict-table/removal-conflict-table.component';
 import { ClipboardService } from 'src/app/shared/services/clipboard.service';
 import { ScrollbarDialogComponent } from '../../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../../../../../shared/components/loading/loading.component';
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
@@ -31,17 +31,15 @@ import { ButtonComponent } from '../../../../../shared/components/buttons/button
   providers: [DeleteOrganizationComponentStore],
   imports: [
     ScrollbarDialogComponent,
-    NgIf,
     LoadingComponent,
     StandardVerticalContentGridComponent,
     ParagraphComponent,
-    NgFor,
     RemovalConflictTableComponent,
     DialogActionsComponent,
     CheckboxComponent,
     ButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DeleteOrganizationDialogComponent extends BaseComponent implements OnInit {
   @Input() public organization!: OrganizationOData;

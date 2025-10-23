@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -43,14 +43,13 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     FormsModule,
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
-    NgIf,
     DatePickerComponent,
     DropdownComponent,
     EditUrlSectionComponent,
     TextAreaComponent,
     AsyncPipe,
-    TooltipComponent,
-  ],
+    TooltipComponent
+],
 })
 export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
