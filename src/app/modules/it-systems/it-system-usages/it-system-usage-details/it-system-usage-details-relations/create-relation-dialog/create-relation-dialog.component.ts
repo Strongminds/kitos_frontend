@@ -121,10 +121,24 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
 
     this.isBusy = true;
 
+    const requests = this.getRequests(usage);
+    this.store.dispatch(ITSystemUsageActions.addItSystemUsageRelations(requests));
+  }
+
+  private getRequests(usage: APIIdentityNamePairResponseDTO){
     const formValue = this.formGroup.value;
-    const requests =
-      formValue.interfaces === undefined || formValue.interfaces === null || formValue.interfaces.length === 0
-        ? [
+    const interfacesValue = formValue.interfaces;
+
+    return interfacesValue && interfacesValue.length > 0
+        ?  interfacesValue.map((x) => ({
+            toSystemUsageUuid: usage.uuid,
+            relationInterfaceUuid: x.uuid,
+            associatedContractUuid: formValue.contract?.uuid,
+            relationFrequencyUuid: formValue.frequency?.uuid,
+            description: formValue.description ?? undefined,
+            urlReference: formValue.reference ?? undefined,
+          }))
+        : [
             {
               toSystemUsageUuid: usage.uuid,
               relationInterfaceUuid: undefined,
@@ -133,15 +147,6 @@ export class CreateRelationDialogComponent extends SystemRelationDialogComponent
               description: formValue.description ?? undefined,
               urlReference: formValue.reference ?? undefined,
             },
-          ]
-        : formValue.interfaces.map((x) => ({
-            toSystemUsageUuid: usage.uuid,
-            relationInterfaceUuid: x.uuid,
-            associatedContractUuid: formValue.contract?.uuid,
-            relationFrequencyUuid: formValue.frequency?.uuid,
-            description: formValue.description ?? undefined,
-            urlReference: formValue.reference ?? undefined,
-          }));
-    this.store.dispatch(ITSystemUsageActions.addItSystemUsageRelations(requests));
+          ];
   }
 }
