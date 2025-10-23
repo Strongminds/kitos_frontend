@@ -173,7 +173,7 @@
     "@angular-devkit/core" "20.3.7"
     rxjs "7.8.2"
 
-"@angular-devkit/architect@^0.1301.0 || ^0.1401.0 || ^0.1501.0 || ^0.1601.0 || ^0.1700.0 || ^0.1800.0 || ^0.1900.0 || ^0.2000.0":
+"@angular-devkit/architect@^0.2000.0":
   version "0.2000.6"
   resolved "https://registry.yarnpkg.com/@angular-devkit/architect/-/architect-0.2000.6.tgz#847bb109d6a7d67bb75a9d3b750d188b5f186698"
   integrity sha512-LvXYe7hqEgkBKzDy4VKTgCg2E2nAl8vC986n1+snzt2zMjo2l8wFl6BWal3AtaKGhPlp8/57Y53MdG2TIgUJNA==
@@ -276,7 +276,7 @@
     rxjs "7.8.2"
     source-map "0.7.4"
 
-"@angular-devkit/core@20.3.7", "@angular-devkit/core@>= 20.0.0 < 21.0.0", "@angular-devkit/core@^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0":
+"@angular-devkit/core@20.3.7", "@angular-devkit/core@>= 20.0.0 < 21.0.0", "@angular-devkit/core@^20.0.0":
   version "20.3.7"
   resolved "https://registry.yarnpkg.com/@angular-devkit/core/-/core-20.3.7.tgz#36789db14ec43de542b22af0af897ad48c783dfd"
   integrity sha512-psmcjwYcXve4sLrcdnARc15/Wfd3RpydbtLo9+mViNzk5HQ6L2eEztKl/2QVYMgzZVIa1GfhjwUllVCyLAv3sg==
@@ -288,7 +288,7 @@
     rxjs "7.8.2"
     source-map "0.7.6"
 
-"@angular-devkit/schematics@20.3.7", "@angular-devkit/schematics@>= 20.0.0 < 21.0.0", "@angular-devkit/schematics@^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0":
+"@angular-devkit/schematics@20.3.7", "@angular-devkit/schematics@>= 20.0.0 < 21.0.0", "@angular-devkit/schematics@^20.0.0":
   version "20.3.7"
   resolved "https://registry.yarnpkg.com/@angular-devkit/schematics/-/schematics-20.3.7.tgz#9ffab1f0aa49603dd37f9e5665118d1ac5f5a5d3"
   integrity sha512-DUxcQBPKO69p56ZgIdVfxWyLiSjdcUoD6BH9/nWHp0QiqRAR6GcXP4SFax76JPl2WsiCp4hHZ233Hf69AP1xew==
@@ -3522,7 +3522,7 @@
   resolved "https://registry.yarnpkg.com/@rollup/rollup-win32-x64-msvc/-/rollup-win32-x64-msvc-4.52.5.tgz#1657f56326bbe0ac80eedc9f9c18fc1ddd24e107"
   integrity sha512-TAcgQh2sSkykPRWLrdyy2AiceMckNf5loITqXxFI5VuQjS5tSuw3WlwdN8qv8vzjLAUTvYaH/mVjSFpbkFbpTg==
 
-"@schematics/angular@20.3.7", "@schematics/angular@^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0":
+"@schematics/angular@20.3.7", "@schematics/angular@^20.0.0":
   version "20.3.7"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-20.3.7.tgz#acf7ad95d5b6aa5c29819933fa0ac665d267e23b"
   integrity sha512-jR2LPJVGK6yzPTNXkGJZYtdeLGkNdqJhVow2E+ILt3pk/LZuT/iSdr9V4nArU9yysifGuJFTyZapVOYkEYaykg==
@@ -7927,15 +7927,15 @@ netmask@^2.0.2:
   resolved "https://registry.yarnpkg.com/netmask/-/netmask-2.0.2.tgz#8b01a07644065d536383835823bc52004ebac5e7"
   integrity sha512-dBpDMdxv9Irdq66304OLfEmQ9tbNRFnFTuZiLo+bD+r332bBmMJ8GBLXklIXXgxd3+v9+KUnZaUR5PJMa75Gsg==
 
-ng-extract-i18n-merge@^2.14.3:
-  version "2.15.1"
-  resolved "https://registry.yarnpkg.com/ng-extract-i18n-merge/-/ng-extract-i18n-merge-2.15.1.tgz#ccfc466011e943d3b1bb985b56546126fe73db8c"
-  integrity sha512-vNr+sVySO13imQ1Y7Jwe3JtGKP4Hck4Gzb7i4HxOq9fDLDORDIoazLTiwmZVoW4ZAyqK7kkDavjS0XD+VSMZUA==
+ng-extract-i18n-merge@^3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/ng-extract-i18n-merge/-/ng-extract-i18n-merge-3.1.0.tgz#dda6b05a2f0ce202d816a9eb5824e95393ac338b"
+  integrity sha512-4rJRcpTcP54xf5cjoz3S1By0T04X2RoyQcMDxr4wLdRx3fVxkeP8jeuLzmj9F4G5n0yMQb+6jhUiFERxpkfs1w==
   dependencies:
-    "@angular-devkit/architect" "^0.1301.0 || ^0.1401.0 || ^0.1501.0 || ^0.1601.0 || ^0.1700.0 || ^0.1800.0 || ^0.1900.0 || ^0.2000.0"
-    "@angular-devkit/core" "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0"
-    "@angular-devkit/schematics" "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0"
-    "@schematics/angular" "^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0"
+    "@angular-devkit/architect" "^0.2000.0"
+    "@angular-devkit/core" "^20.0.0"
+    "@angular-devkit/schematics" "^20.0.0"
+    "@schematics/angular" "^20.0.0"
     xmldoc "^1.1.3"
 
 ngrx-store-localstorage@19.0.1:
