@@ -5,7 +5,12 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { GdprCriticality, gdprCriticalityOptions, mapGdprCriticality } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
+import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
+import {
+  GdprCriticality,
+  gdprCriticalityOptions,
+  mapGdprCriticality,
+} from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
@@ -16,7 +21,7 @@ import {
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableGdprBusinessCritical,
   selectITSystemUsageEnableGdprCriticality,
@@ -74,6 +79,10 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly gdprCriticalityEnabled$ = this.store.select(selectITSystemUsageEnableGdprCriticality);
   public readonly gdprCriticalityOptions = gdprCriticalityOptions;
 
+  private readonly gdprCriticalityModifyEnabled$ = this.store.select(
+    selectITSystemUsageFieldPermissions(itSystemUsageFields.gdpr.criticality)
+  );
+
   constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
     super();
   }
@@ -94,6 +103,17 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     this.disableLinkControl.subscribe(() => {
       this.disableDirectoryDocumentationControl = true;
     });
+
+    this.subscriptions.add(
+      this.gdprCriticalityModifyEnabled$.subscribe((enabled) => {
+        const control = this.generalInformationForm.controls.gdprCriticality;
+        if (enabled) {
+          control.enable();
+        } else {
+          control.disable();
+        }
+      })
+    );
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

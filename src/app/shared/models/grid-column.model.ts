@@ -43,6 +43,7 @@ export interface GridColumn {
     | 'page-link-array'
     | 'uuid-to-name'
     | 'excel-only'
+    | 'role-excel-only'
     | 'action-buttons'
     | 'integer-with-thousands-separator'
     | 'contract-audit'; //Style of the column

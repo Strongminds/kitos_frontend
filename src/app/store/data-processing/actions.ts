@@ -2,8 +2,8 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIColumnConfigurationRequestDTO,
+  APICombinedPermissionsResponseDTO,
   APICreateOversightDateDTO,
-  APIDataProcessingRegistrationPermissionsResponseDTO,
   APIDataProcessingRegistrationResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorResponseDTO,
   APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO,
@@ -54,7 +54,7 @@ export const DataProcessingActions = createActionGroup({
     'Create Data Processing Error': emptyProps(),
 
     'Get Data Processing Permissions': (dataProcessingUuid: string) => ({ dataProcessingUuid }),
-    'Get Data Processing Permissions Success': (permissions: APIDataProcessingRegistrationPermissionsResponseDTO) => ({
+    'Get Data Processing Permissions Success': (permissions: APICombinedPermissionsResponseDTO) => ({
       permissions,
     }),
     'Get Data Processing Permissions Error': emptyProps(),

@@ -1,0 +1,18 @@
+<app-standard-vertical-content-grid>
+  <app-local-grid
+    *ngIf="processedRelations.length > 0; else emptyStateTemplate"
+    [data]="processedRelations"
+    [columns]="columns"
+    [loading]="isLoading"
+    [modifyPermission]="modifyPermissions$ | async"
+    [deletePermission]="modifyPermissions$ | async"
+    (modifyEvent)="onModify($event)"
+    (deleteEvent)="onDelete($event)"
+    entityType="it-system-usage"
+  >
+  </app-local-grid>
+
+  <ng-template #emptyStateTemplate>
+    <app-empty-state [context]="isOutgoing ? 'emptyTable' : 'searchResult'" [text]="emptyText"> </app-empty-state>
+  </ng-template>
+</app-standard-vertical-content-grid>
