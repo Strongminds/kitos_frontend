@@ -1,10 +1,10 @@
 <app-card>
   <app-card-header title="Ansvarlig organisationsenhed" helpTextKey="it-system.usage.org" i18n-title></app-card-header>
 
-  <app-paragraph *ngIf="(anyUsedByUnits$ | async) === false" paragraphSize="medium" i18n
-    >Systemet udstiller ingen ansvarlig organisationsenhed</app-paragraph
-  >
-  <form *ngIf="anyUsedByUnits$ | async" [formGroup]="responsibleUnitForm">
+  @if((anyUsedByUnits$ | async) === false){
+  <app-paragraph paragraphSize="medium" i18n>Systemet udstiller ingen ansvarlig organisationsenhed</app-paragraph>
+  } @if(anyUsedByUnits$ | async){
+  <form [formGroup]="responsibleUnitForm">
     <app-dropdown
       text="Vælg ansvarlig organisationsenhed"
       i18n-text
@@ -16,6 +16,7 @@
     >
     </app-dropdown>
   </form>
+  }
 </app-card>
 <app-card>
   <app-card-header
