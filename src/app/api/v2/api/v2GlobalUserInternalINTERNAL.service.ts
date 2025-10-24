@@ -34,15 +34,15 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleGlobalUserInternalV2DeleteUserRequestParams {
+export interface DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams {
     userUuid: string;
 }
 
-export interface DeleteSingleGlobalUserInternalV2RemoveGlobalAdminRequestParams {
+export interface DeleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuidRequestParams {
     userUuid: string;
 }
 
-export interface DeleteSingleGlobalUserInternalV2RemoveLocalAdminRequestParams {
+export interface DeleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuidRequestParams {
     organizationUuid: string;
     userUuid: string;
 }
@@ -61,16 +61,16 @@ export interface GetManyGlobalUserInternalV2GetUsersRequestParams {
     pageSize?: number;
 }
 
-export interface PatchSingleGlobalUserInternalV2UpdateSystemIntegratorRequestParams {
+export interface PatchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuidRequestParams {
     userUuid: string;
     requestedValue: boolean;
 }
 
-export interface PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams {
+export interface PostSingleGlobalUserInternalV2AddGlobalAdminByUseruuidRequestParams {
     userUuid: string;
 }
 
-export interface PostSingleGlobalUserInternalV2AddLocalAdminRequestParams {
+export interface PostSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuidRequestParams {
     organizationUuid: string;
     userUuid: string;
 }
@@ -81,7 +81,7 @@ export interface PostSingleGlobalUserInternalV2AddLocalAdminRequestParams {
 })
 export class APIV2GlobalUserInternalINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -145,13 +145,13 @@ export class APIV2GlobalUserInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteSingleGlobalUserInternalV2DeleteUser(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleGlobalUserInternalV2DeleteUserByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2DeleteUserByUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2DeleteUser.');
+            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2DeleteUserByUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -202,13 +202,13 @@ export class APIV2GlobalUserInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleGlobalUserInternalV2RemoveGlobalAdmin(requestParameters: DeleteSingleGlobalUserInternalV2RemoveGlobalAdminRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public deleteSingleGlobalUserInternalV2RemoveGlobalAdmin(requestParameters: DeleteSingleGlobalUserInternalV2RemoveGlobalAdminRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public deleteSingleGlobalUserInternalV2RemoveGlobalAdmin(requestParameters: DeleteSingleGlobalUserInternalV2RemoveGlobalAdminRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public deleteSingleGlobalUserInternalV2RemoveGlobalAdmin(requestParameters: DeleteSingleGlobalUserInternalV2RemoveGlobalAdminRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2RemoveGlobalAdmin.');
+            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2RemoveGlobalAdminByUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -260,17 +260,17 @@ export class APIV2GlobalUserInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleGlobalUserInternalV2RemoveLocalAdmin(requestParameters: DeleteSingleGlobalUserInternalV2RemoveLocalAdminRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public deleteSingleGlobalUserInternalV2RemoveLocalAdmin(requestParameters: DeleteSingleGlobalUserInternalV2RemoveLocalAdminRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public deleteSingleGlobalUserInternalV2RemoveLocalAdmin(requestParameters: DeleteSingleGlobalUserInternalV2RemoveLocalAdminRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public deleteSingleGlobalUserInternalV2RemoveLocalAdmin(requestParameters: DeleteSingleGlobalUserInternalV2RemoveLocalAdminRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuid(requestParameters: DeleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleGlobalUserInternalV2RemoveLocalAdmin.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuid.');
         }
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2RemoveLocalAdmin.');
+            throw new Error('Required parameter userUuid was null or undefined when calling deleteSingleGlobalUserInternalV2RemoveLocalAdminByOrganizationuuidAndUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -727,17 +727,17 @@ export class APIV2GlobalUserInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleGlobalUserInternalV2UpdateSystemIntegrator(requestParameters: PatchSingleGlobalUserInternalV2UpdateSystemIntegratorRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public patchSingleGlobalUserInternalV2UpdateSystemIntegrator(requestParameters: PatchSingleGlobalUserInternalV2UpdateSystemIntegratorRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public patchSingleGlobalUserInternalV2UpdateSystemIntegrator(requestParameters: PatchSingleGlobalUserInternalV2UpdateSystemIntegratorRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public patchSingleGlobalUserInternalV2UpdateSystemIntegrator(requestParameters: PatchSingleGlobalUserInternalV2UpdateSystemIntegratorRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuid(requestParameters: PatchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public patchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuid(requestParameters: PatchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public patchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuid(requestParameters: PatchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public patchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuid(requestParameters: PatchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling patchSingleGlobalUserInternalV2UpdateSystemIntegrator.');
+            throw new Error('Required parameter userUuid was null or undefined when calling patchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuid.');
         }
         const requestedValue = requestParameters.requestedValue;
         if (requestedValue === null || requestedValue === undefined) {
-            throw new Error('Required parameter requestedValue was null or undefined when calling patchSingleGlobalUserInternalV2UpdateSystemIntegrator.');
+            throw new Error('Required parameter requestedValue was null or undefined when calling patchSingleGlobalUserInternalV2UpdateSystemIntegratorByUseruuid.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
@@ -796,13 +796,13 @@ export class APIV2GlobalUserInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserReferenceResponseDTO>;
-    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserReferenceResponseDTO>>;
-    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserReferenceResponseDTO>>;
-    public postSingleGlobalUserInternalV2AddGlobalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleGlobalUserInternalV2AddGlobalAdminByUseruuid(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminByUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserReferenceResponseDTO>;
+    public postSingleGlobalUserInternalV2AddGlobalAdminByUseruuid(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminByUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserReferenceResponseDTO>>;
+    public postSingleGlobalUserInternalV2AddGlobalAdminByUseruuid(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminByUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserReferenceResponseDTO>>;
+    public postSingleGlobalUserInternalV2AddGlobalAdminByUseruuid(requestParameters: PostSingleGlobalUserInternalV2AddGlobalAdminByUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling postSingleGlobalUserInternalV2AddGlobalAdmin.');
+            throw new Error('Required parameter userUuid was null or undefined when calling postSingleGlobalUserInternalV2AddGlobalAdminByUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -854,17 +854,17 @@ export class APIV2GlobalUserInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserReferenceWithOrganizationResponseDTO>;
-    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserReferenceWithOrganizationResponseDTO>>;
-    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserReferenceWithOrganizationResponseDTO>>;
-    public postSingleGlobalUserInternalV2AddLocalAdmin(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuid(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIUserReferenceWithOrganizationResponseDTO>;
+    public postSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuid(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIUserReferenceWithOrganizationResponseDTO>>;
+    public postSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuid(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIUserReferenceWithOrganizationResponseDTO>>;
+    public postSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuid(requestParameters: PostSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleGlobalUserInternalV2AddLocalAdmin.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuid.');
         }
         const userUuid = requestParameters.userUuid;
         if (userUuid === null || userUuid === undefined) {
-            throw new Error('Required parameter userUuid was null or undefined when calling postSingleGlobalUserInternalV2AddLocalAdmin.');
+            throw new Error('Required parameter userUuid was null or undefined when calling postSingleGlobalUserInternalV2AddLocalAdminByOrganizationuuidAndUseruuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;

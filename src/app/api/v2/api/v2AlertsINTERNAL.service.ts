@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleAlertsV2DeleteAlertRequestParams {
+export interface DeleteSingleAlertsV2DeleteAlertByAlertuuidRequestParams {
     alertUuid: string;
 }
 
@@ -42,7 +42,7 @@ export interface GetManyAlertsV2GetByOrganizationAndUserRequestParams {
 })
 export class APIV2AlertsINTERNALService {
 
-    protected basePath = 'https://localhost:44300';
+    protected basePath = 'https://kitos-dev.strongminds.dk';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -106,13 +106,13 @@ export class APIV2AlertsINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleAlertsV2DeleteAlert(requestParameters: DeleteSingleAlertsV2DeleteAlertRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public deleteSingleAlertsV2DeleteAlert(requestParameters: DeleteSingleAlertsV2DeleteAlertRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public deleteSingleAlertsV2DeleteAlert(requestParameters: DeleteSingleAlertsV2DeleteAlertRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public deleteSingleAlertsV2DeleteAlert(requestParameters: DeleteSingleAlertsV2DeleteAlertRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleAlertsV2DeleteAlertByAlertuuid(requestParameters: DeleteSingleAlertsV2DeleteAlertByAlertuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleAlertsV2DeleteAlertByAlertuuid(requestParameters: DeleteSingleAlertsV2DeleteAlertByAlertuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleAlertsV2DeleteAlertByAlertuuid(requestParameters: DeleteSingleAlertsV2DeleteAlertByAlertuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleAlertsV2DeleteAlertByAlertuuid(requestParameters: DeleteSingleAlertsV2DeleteAlertByAlertuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const alertUuid = requestParameters.alertUuid;
         if (alertUuid === null || alertUuid === undefined) {
-            throw new Error('Required parameter alertUuid was null or undefined when calling deleteSingleAlertsV2DeleteAlert.');
+            throw new Error('Required parameter alertUuid was null or undefined when calling deleteSingleAlertsV2DeleteAlertByAlertuuid.');
         }
 
         let localVarHeaders = this.defaultHeaders;
