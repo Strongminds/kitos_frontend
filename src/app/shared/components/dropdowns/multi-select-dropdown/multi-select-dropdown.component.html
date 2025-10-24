@@ -59,6 +59,6 @@
   </ng-template>
 </ng-select>
 
-<app-textbox-info *ngIf="descriptions && showDescriptionLabel">
-  <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ descriptions.join(', ') }}</app-paragraph>
+<app-textbox-info *ngIf="displayDescriptionLabel()">
+  <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ descriptions?.join(', ') }}</app-paragraph>
 </app-textbox-info>

@@ -83,7 +83,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
 
   protected readonly formValueSubject$ = new Subject<MultiSelectDropdownItem<T>[]>();
 
-  public descriptions?: string[];
+  public descriptions: string[] = [];
 
   constructor(
     private el: ElementRef,
@@ -123,9 +123,10 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
       this.formValueSubject$
         .pipe(filter(() => this.showDescription))
         .subscribe((formValue: MultiSelectDropdownItem<T>[]) => {
-          this.descriptions = formValue.map((x: any) =>
-            x ? x.value[this.itemDescriptionField] ?? undefined : undefined
-          );
+          this.descriptions = formValue
+          .map((x: any) => x?.value?.[this.itemDescriptionField])
+            .filter(Boolean);
+          console.log(JSON.stringify(this.descriptions));
         })
     );
   }
@@ -143,6 +144,10 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
       this.setValues(this.initialSelectedValues);
       this.cdRef.detectChanges();
     }
+  }
+
+  public displayDescriptionLabel(){
+    return this.descriptions.length > 0 && this.showDescriptionLabel;
   }
 
   public setValues(values: MultiSelectDropdownItem<T>[]) {
