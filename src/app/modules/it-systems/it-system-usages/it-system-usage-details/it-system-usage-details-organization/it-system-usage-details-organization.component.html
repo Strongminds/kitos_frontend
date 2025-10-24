@@ -28,8 +28,8 @@
     <app-section title="Filtrér i organisationsenheder">
       <form [formGroup]="relevantUnitsForm">
         <div class="org-unit-select-container">
+          @if((isPatching$ | async) !== true){
           <app-org-unit-select
-            *ngIf="(isPatching$ | async) !== true"
             text="Søg efter enhed"
             i18n-text
             [disabledUnitsUuids]="(usedUnitUuids$ | async) ?? []"
@@ -40,8 +40,7 @@
             [useMaterialSpinner]="true"
             (valueChange)="patchRelevantUnits()"
           ></app-org-unit-select>
-
-          @if (isPatching$ | async) {
+          } @if (isPatching$ | async) {
           <app-loading type="material"></app-loading>
           }
         </div>
