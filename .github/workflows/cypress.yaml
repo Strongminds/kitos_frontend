@@ -1,4 +1,8 @@
 name: Cypress Tests
+
+env:
+  NODE_VERSION: "22.12.0"
+
 on:
   pull_request:
     types:
@@ -24,7 +28,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22.12.0"
+          node-version: ${{ env.NODE_VERSION }}
           cache: "yarn"
 
       - name: Cypress run
@@ -52,7 +56,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "22.12.0"
+          node-version: ${{ env.NODE_VERSION }}
           cache: "yarn"
 
       - name: Cypress Component Tests
