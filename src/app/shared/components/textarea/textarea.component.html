@@ -9,7 +9,7 @@
       [cdkAutosizeMaxRows]="autosizeMaxRows"
       type="text"
       [formControlName]="formName"
-      (input)="formInputValueChange($event); scrollWithTextOnInput()"
+      (input)="formInputValueChange($event);"
       (focus)="focus(true)"
       (blur)="focus(false)"
       [ngClass]="{ disabled: disabled }"
@@ -29,7 +29,6 @@
       [(ngModel)]="value"
       (ngModelChange)="valueChange.emit($event)"
       [ngClass]="{ disabled: disabled }"
-      (input)="scrollWithTextOnInput()"
     ></textarea>
   </mat-form-field>
 </ng-container>
