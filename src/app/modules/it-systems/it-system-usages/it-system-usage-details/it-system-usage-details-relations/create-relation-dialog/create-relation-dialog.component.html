@@ -12,6 +12,10 @@
         [resetSubject$]="interfacesDropdownResetSubject$"
         (filterChange)="interfaceFilterChange($event)"
         (valueChange)="interfaceValueChange($event)"
+        [includeItemDescription]="true"
+        itemDescriptionField="interfaceId"
+        descriptionLabelTitle="Snitflade ID:"
+        i18n-descriptionLabelTitle
         i18n-text
       >
       </app-connected-multi-select-dropdown>

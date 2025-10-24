@@ -10,7 +10,7 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { debounceTime, filter, map, Subject } from 'rxjs';
+import { combineLatest, debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
@@ -19,6 +19,7 @@ import { NgSelectComponent, NgOptionTemplateDirective, NgMultiLabelTemplateDirec
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor } from '@angular/common';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 
 @Component({
   selector: 'app-multi-select-dropdown',
@@ -32,6 +33,7 @@ import { ParagraphComponent } from '../../paragraph/paragraph.component';
     ParagraphComponent,
     NgMultiLabelTemplateDirective,
     NgFor,
+    TextBoxInfoComponent,
   ],
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
@@ -44,8 +46,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public data?: MultiSelectDropdownItem<T>[] | null;
   @Input() public initialSelectedValues?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
-    @Input() public searchFn?: (search: string, item: T) => boolean;
-
+  @Input() public searchFn?: (search: string, item: T) => boolean;
 
   @Input() public includeAddTag = false;
   @Input() public tagValidation: 'email' | 'none' = 'none';
@@ -53,6 +54,9 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public isRequired = false;
   @Input() public showDescription = false;
   @Input() public useExternalSearch = false;
+  @Input() public itemDescriptionField = 'description';
+  @Input() public showDescriptionLabel: boolean = true;
+  @Input() public descriptionLabelTitle?: string;
 
   @Input() public resetSubject$?: Subject<void>;
 
@@ -76,6 +80,8 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   public readonly clearAllText = $localize`Ryd`;
   public readonly loadingText = $localize`Henter data`;
   public readonly notFoundText = $localize`Ingen data fundet`;
+
+  public description?: string;
 
   constructor(
     private el: ElementRef,
@@ -108,6 +114,18 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         })
       );
     }
+
+    // Extract possible description from data value if enabled
+    // this.subscriptions.add(
+    //   combineLatest([this.formValueSubject$, this.formDataSubject$])
+    //     .pipe(
+    //       filter(() => this.showDescription),
+    //       map(([value, data]) =>
+    //         data?.find((d: any) => !!value && d[this.valueField] === (value as any)[this.valueField]),
+    //       ),
+    //     )
+    //     .subscribe((value: any) => (this.description = value ? value[this.itemDescriptionField] : undefined)),
+    // );
   }
 
   ngAfterViewInit() {

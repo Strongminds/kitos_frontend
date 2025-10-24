@@ -36,13 +36,13 @@
         [ngModelOptions]="{ standalone: true }"
         [disabled]="item.disabled"
       />
-      <p class="select-option-text-margin" *ngIf="!showDescription || !item.description">
+      <p class="select-option-text-margin" *ngIf="!showDescription || !item.value[itemDescriptionField]">
         {{ item.name }}
       </p>
-      <div *ngIf="item.description && showDescription" class="item-with-description">
+      <div *ngIf="item.value[itemDescriptionField] && showDescription" class="item-with-description">
         {{ item.name }}
-        <app-paragraph *ngIf="item.description && showDescription" paragraphSize="small">{{
-          item.description
+        <app-paragraph *ngIf="item.value[itemDescriptionField] && showDescription" paragraphSize="small">{{
+          item.value[itemDescriptionField]
         }}</app-paragraph>
       </div>
       <div *ngIf="isTagFn(item)" class="ng-clear-wrapper remove-tag-button" (click)="removeTag(item)">
@@ -58,3 +58,7 @@
     </div>
   </ng-template>
 </ng-select>
+
+<app-textbox-info *ngIf="description && showDescriptionLabel">
+  <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ description }}</app-paragraph>
+</app-textbox-info>
