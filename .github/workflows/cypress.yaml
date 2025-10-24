@@ -21,6 +21,12 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.12.0"
+          cache: "yarn"
+
       - name: Cypress run
         uses: cypress-io/github-action@v6
         with:
@@ -42,6 +48,12 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22.12.0"
+          cache: "yarn"
 
       - name: Cypress Component Tests
         uses: cypress-io/github-action@v6
