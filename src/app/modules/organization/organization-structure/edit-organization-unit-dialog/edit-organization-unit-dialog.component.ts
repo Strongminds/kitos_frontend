@@ -35,7 +35,7 @@ import {
   selectResponsibleSystemsRegistrations,
   selectUnitPermissions,
 } from 'src/app/store/organization/organization-unit/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { DialogComponent } from '../../../../shared/components/dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
@@ -58,7 +58,6 @@ import { TrashcanIconComponent } from '../../../../shared/components/icons/trash
   templateUrl: './edit-organization-unit-dialog.component.html',
   styleUrl: './edit-organization-unit-dialog.component.scss',
   imports: [
-    NgIf,
     DialogComponent,
     StandardVerticalContentGridComponent,
     ParagraphComponent,
@@ -77,8 +76,8 @@ import { TrashcanIconComponent } from '../../../../shared/components/icons/trash
     LoadingComponent,
     SnackbarActionsComponent,
     TrashcanIconComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class EditOrganizationUnitDialogComponent extends BaseComponent implements OnInit {
   @Input() public unit$!: Observable<APIOrganizationUnitResponseDTO>;

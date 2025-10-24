@@ -51,11 +51,11 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
             nameOrEmailQuery: search,
           })
           .pipe(
-            tapResponse(
-              (users) => this.setUsers(users),
-              (e) => console.error(e),
-              () => this.setLoading(false),
-            ),
+            tapResponse({
+    next: (users) => this.setUsers(users),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
           );
       }),
     ),
@@ -65,12 +65,12 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
     userUuid$.pipe(
       mergeMap((userUuid) => {
         return this.userService.getManyGlobalUserInternalV2GetOrganizationsByUserUuid({ userUuid }).pipe(
-          tapResponse(
-            (userOrganizations) => {
-              this.setUserOrganizations(userOrganizations);
-            },
-            (e) => console.error(e),
-          ),
+          tapResponse({
+    next: (userOrganizations) => {
+        this.setUserOrganizations(userOrganizations);
+    },
+    error: (e) => console.error(e)
+}),
         );
       }),
     ),
@@ -80,15 +80,15 @@ export class GlobalAdminOtherUserShutdownComponentStore extends ComponentStore<S
     userUuid$.pipe(
       mergeMap((userUuid) => {
         return this.userService.deleteSingleGlobalUserInternalV2DeleteUser({ userUuid }).pipe(
-          tapResponse(
-            () => {
-              this.notificationService.showDefault($localize`Brugeren blev slettet`);
-            },
-            (e) => {
-              console.error(e);
-              this.notificationService.showError($localize`Kunne ikke slette brugeren`);
-            },
-          ),
+          tapResponse({
+    next: () => {
+        this.notificationService.showDefault($localize `Brugeren blev slettet`);
+    },
+    error: (e) => {
+        console.error(e);
+        this.notificationService.showError($localize `Kunne ikke slette brugeren`);
+    }
+}),
         );
       }),
     ),

@@ -114,15 +114,15 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
       switchMap(() => {
         this.updateLoading(true);
         return this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2GetPermissions().pipe(
-          tapResponse(
-            (permissionsDto) => {
-              this.updateMigrationPermissions(adaptItSystemUsageMigrationPermissions(permissionsDto));
-            },
-            (error) => {
-              console.error(error);
-            },
-            () => this.updateLoading(false),
-          ),
+          tapResponse({
+    next: (permissionsDto) => {
+        this.updateMigrationPermissions(adaptItSystemUsageMigrationPermissions(permissionsDto));
+    },
+    error: (error) => {
+        console.error(error);
+    },
+    complete: () => this.updateLoading(false)
+}),
         );
       }),
     ),
@@ -139,17 +139,18 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
               usageUuid,
             });
           }),
-          tapResponse(
-            //finally block is not working in this context for some reason
-            (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
-              this.updateMigration(adaptItSystemUsageMigration(migrationDto));
-              this.updateLoading(false);
-            },
-            (error) => {
-              console.error(error);
-              this.updateLoading(false);
-            },
-          ),
+          tapResponse({
+    next: 
+    //finally block is not working in this context for some reason
+    (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
+        this.updateMigration(adaptItSystemUsageMigration(migrationDto));
+        this.updateLoading(false);
+    },
+    error: (error) => {
+        console.error(error);
+        this.updateLoading(false);
+    }
+}),
         ),
       ),
     ),
@@ -210,14 +211,11 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
               numberOfItSystems: this.numberOfItSystemsPerQuery,
             })
             .pipe(
-              tapResponse(
-                (dtos) =>
-                  this.updateUnusedItSystemsInOrganization(
-                    dtos.map(mapIdentityNamePair).filter((x) => x !== undefined),
-                  ),
-                (error) => console.error(error),
-                () => this.updateLoading(false),
-              ),
+              tapResponse({
+    next: (dtos) => this.updateUnusedItSystemsInOrganization(dtos.map(mapIdentityNamePair).filter((x) => x !== undefined)),
+    error: (error) => console.error(error),
+    complete: () => this.updateLoading(false)
+}),
             );
         }),
       ),

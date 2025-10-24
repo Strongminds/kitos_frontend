@@ -1,5 +1,5 @@
 import { CdkTextareaAutosize } from '@angular/cdk/text-field';
-import { NgClass, NgIf } from '@angular/common';
+import { NgClass } from '@angular/common';
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
@@ -10,7 +10,7 @@ import { BaseFormComponent } from '../../base/base-form.component';
   selector: 'app-textarea',
   templateUrl: 'textarea.component.html',
   styleUrls: ['textarea.component.scss'],
-  imports: [NgIf, MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, CdkTextareaAutosize, NgClass],
+  imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, CdkTextareaAutosize, NgClass],
 })
 export class TextAreaComponent extends BaseFormComponent<string> implements AfterViewInit {
   @Input() public autosizeMinRows = 4;

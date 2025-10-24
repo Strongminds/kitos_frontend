@@ -45,11 +45,11 @@ export class ItSystemHierarchyTableComponentStore extends ComponentStore<State> 
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([systemUuid, organizationUuid]) => {
         return this.apiItSystemService.getManyItSystemInternalV2GetHierarchy({ organizationUuid, systemUuid }).pipe(
-          tapResponse(
-            (hierarchy) => this.updateHierarchy(hierarchy),
-            (e) => console.error(e),
-            () => this.updateIsLoading(false),
-          ),
+          tapResponse({
+    next: (hierarchy) => this.updateHierarchy(hierarchy),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoading(false)
+}),
         );
       }),
     ),

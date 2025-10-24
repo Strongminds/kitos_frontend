@@ -7,7 +7,7 @@ import { UserActions } from 'src/app/store/user-store/actions';
 import { selectSsoErrorCode } from 'src/app/store/user-store/selectors';
 import { StandardVerticalContentGridComponent } from '../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { SsoButtonComponent } from '../sso-button/sso-button.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { SsoErrorComponent } from './sso-error/sso-error.component';
 import { ParagraphComponent } from '../../../shared/components/paragraph/paragraph.component';
 import { TextBoxComponent } from '../../../shared/components/textbox/textbox.component';
@@ -24,15 +24,14 @@ import { ResetPasswordTextLinkComponent } from '../reset-password-text-link/rese
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     SsoButtonComponent,
-    NgIf,
     SsoErrorComponent,
     ParagraphComponent,
     TextBoxComponent,
     CheckboxComponent,
     ButtonComponent,
     ResetPasswordTextLinkComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class LoginComponent {
   public readonly loginForm = new FormGroup({

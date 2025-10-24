@@ -47,11 +47,11 @@ export class CreateDprSystemUsageDialogComponentStore extends ComponentStore<Sta
         return this.dprApiService
           .getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages({ dprUuid, nameQuery: search })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateSystemUsages(organizations),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+            tapResponse({
+    next: (organizations) => this.updateSystemUsages(organizations),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoading(false)
+}),
           );
       }),
     ),

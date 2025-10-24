@@ -47,11 +47,11 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
             orderByProperty: 'Name',
           })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateOrganizations(organizations),
-              (e) => console.error(e),
-              () => this.updateLoading(false),
-            ),
+            tapResponse({
+    next: (organizations) => this.updateOrganizations(organizations),
+    error: (e) => console.error(e),
+    complete: () => this.updateLoading(false)
+}),
           ),
       ),
     ),

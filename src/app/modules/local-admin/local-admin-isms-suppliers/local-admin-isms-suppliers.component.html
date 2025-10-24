@@ -2,20 +2,20 @@
   <app-overview-header>
     <h3 i18n>ISMS Leverandører</h3>
     <app-button
-    i18n
-    iconType="white-plus"
-    (buttonClick)="openAddSupplierDialog()"
-    ><span>Tilføj</span>
+      i18n
+      iconType="white-plus"
+      (buttonClick)="openAddSupplierDialog()"
+      ><span>Tilføj</span>
     </app-button>
   </app-overview-header>
-  <ng-container *ngIf="(suppliers$ | async) as suppliers">
-    <app-local-grid 
-    [data]="suppliers"
-    [columns]="gridColumns"
-    [resizable]="false"
-    [deletePermission]="canModifyOrganization$ | async"
-    (deleteEvent)="removeSupplier($event)"
-    [loading]="(suppliersLoading$ | async)"
+  @if ((suppliers$ | async); as suppliers) {
+    <app-local-grid
+      [data]="suppliers"
+      [columns]="gridColumns"
+      [resizable]="false"
+      [deletePermission]="canModifyOrganization$ | async"
+      (deleteEvent)="removeSupplier($event)"
+      [loading]="(suppliersLoading$ | async)"
     ></app-local-grid>
-  </ng-container>
+  }
 </app-card>

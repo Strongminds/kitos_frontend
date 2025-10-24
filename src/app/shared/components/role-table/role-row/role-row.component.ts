@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Dictionary } from '@ngrx/entity';
 import { Observable } from 'rxjs';
@@ -26,14 +26,13 @@ import { TooltipComponent } from '../../tooltip/tooltip.component';
     SelectedOptionTypeTextComponent,
     BooleanCircleComponent,
     ContentSpaceBetweenComponent,
-    NgIf,
     TableRowActionsComponent,
     IconButtonComponent,
     TrashcanIconComponent,
     PencilIconComponent,
     AsyncPipe,
-    TooltipComponent,
-  ],
+    TooltipComponent
+],
 })
 export class RoleRowComponent {
   @Input() role!: RoleAssignment;

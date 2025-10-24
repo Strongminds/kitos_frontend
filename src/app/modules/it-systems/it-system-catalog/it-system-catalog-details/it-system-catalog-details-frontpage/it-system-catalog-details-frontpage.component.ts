@@ -46,7 +46,7 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
 import { ConnectedDropdownComponent } from '../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { ContentBoxComponent } from '../../../../../shared/components/contentbox/contentbox.component';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ExternalReferenceComponent } from '../../../../../shared/components/external-reference/external-reference.component';
 import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
 import { TextBoxInfoComponent } from '../../../../../shared/components/textbox-info/textbox-info.component';
@@ -69,14 +69,13 @@ import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-over
     ConnectedDropdownComponent,
     DropdownComponent,
     ContentBoxComponent,
-    NgFor,
     ExternalReferenceComponent,
     TextAreaComponent,
     TextBoxInfoComponent,
     ParagraphComponent,
     ItSystemKleOverviewComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly itSystemIsActive$ = this.store.select(selectItSystemIsActive);

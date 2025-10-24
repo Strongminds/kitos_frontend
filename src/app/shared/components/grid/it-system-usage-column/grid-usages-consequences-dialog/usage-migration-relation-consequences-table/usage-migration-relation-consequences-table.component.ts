@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { entityWithUnavailableName } from 'src/app/shared/helpers/string.helpers';
 import { ItSystemUsageMigration } from 'src/app/shared/models/it-system-usage/migrations/it-system-usage-migration.model';
@@ -9,7 +9,7 @@ import { ParagraphComponent } from '../../../../paragraph/paragraph.component';
   selector: 'app-usage-migration-relation-consequences-table[migration]',
   templateUrl: './usage-migration-relation-consequences-table.component.html',
   styleUrl: './usage-migration-relation-consequences-table.component.scss',
-  imports: [ParagraphComponent, NgIf, NativeTableComponent, NgFor],
+  imports: [ParagraphComponent, NativeTableComponent],
 })
 export class UsageMigrationRelationConsequencesTableComponent {
   @Input() migration!: ItSystemUsageMigration;

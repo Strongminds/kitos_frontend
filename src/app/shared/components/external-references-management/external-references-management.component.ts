@@ -17,7 +17,7 @@ import { ConfirmActionCategory, ConfirmActionService } from '../../services/conf
 import { CreateExternalReferenceDialogComponent } from './create-external-reference-dialog/create-external-reference-dialog.component';
 import { EditExternalReferenceDialogComponent } from './edit-external-reference-dialog/edit-external-reference-dialog.component';
 import { ExternalReferencesComponentStore } from './external-references.component-store';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { LoadingComponent } from '../loading/loading.component';
 import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { NativeTableComponent } from '../native-table/native-table.component';
@@ -39,11 +39,9 @@ import { AppDatePipe } from '../../pipes/app-date.pipe';
   styleUrls: ['./external-references-management.component.scss'],
   providers: [ExternalReferencesComponentStore],
   imports: [
-    NgIf,
     LoadingComponent,
     StandardVerticalContentGridComponent,
     NativeTableComponent,
-    NgFor,
     ExternalPageLinkComponent,
     ParagraphComponent,
     ContentSpaceBetweenComponent,
@@ -55,8 +53,8 @@ import { AppDatePipe } from '../../pipes/app-date.pipe';
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
     AsyncPipe,
-    AppDatePipe,
-  ],
+    AppDatePipe
+],
 })
 export class ExternalReferencesManagementComponent extends BaseComponent implements OnInit {
   @Input() public entityType!: RegistrationEntityTypes;

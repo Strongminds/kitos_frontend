@@ -49,12 +49,11 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
             orderByProperty: 'Name',
           })
           .pipe(
-            tapResponse(
-              (dataProcessingRegistrations) =>
-                this.updateAssociatedDataProcessingRegistrations(dataProcessingRegistrations),
-              (e) => console.error(e),
-              () => this.updateAssociatedDataProcessingRegistrationsIsLoading(false),
-            ),
+            tapResponse({
+    next: (dataProcessingRegistrations) => this.updateAssociatedDataProcessingRegistrations(dataProcessingRegistrations),
+    error: (e) => console.error(e),
+    complete: () => this.updateAssociatedDataProcessingRegistrationsIsLoading(false)
+}),
           );
       }),
     ),

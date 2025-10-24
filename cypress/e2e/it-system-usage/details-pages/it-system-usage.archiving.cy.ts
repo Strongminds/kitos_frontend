@@ -14,6 +14,10 @@ describe('it-system-usage archiving', () => {
     cy.intercept('/api/v2/it-system-usage-archive-test-location-types*', {
       fixture: './it-system-usage/archiving/it-system-usage-archive-test-location-types.json',
     });
+    cy.intercept('/api/v2/internal/it-systems/search?includeDeactivated*', {
+      fixture: './it-system-catalog/it-system.json',
+    });
+    cy.intercept('/api/v2/kle-options', { fixture: './shared/kles.json' });
   });
 
   it('can view but not edit information from catalog', () => {

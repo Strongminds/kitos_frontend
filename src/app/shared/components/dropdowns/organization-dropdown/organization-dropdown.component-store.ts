@@ -41,11 +41,11 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
             nameOrCvrContent: search,
           })
           .pipe(
-            tapResponse(
-              (filteredUsers) => this.setOrganizations(filteredUsers),
-              (error) => console.error(error),
-              () => this.setLoading(false),
-            ),
+            tapResponse({
+    next: (filteredUsers) => this.setOrganizations(filteredUsers),
+    error: (error) => console.error(error),
+    complete: () => this.setLoading(false)
+}),
           );
       }),
     ),

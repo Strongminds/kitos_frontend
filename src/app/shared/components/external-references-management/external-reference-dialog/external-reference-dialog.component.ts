@@ -9,7 +9,7 @@ import { DialogComponent } from '../../dialogs/dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../textbox/textbox.component';
 import { DividerComponent } from '../../divider/divider.component';
-import { NgIf } from '@angular/common';
+
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { CheckboxComponent } from '../../checkbox/checkbox.component';
 import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
@@ -26,12 +26,11 @@ import { ButtonComponent } from '../../buttons/button/button.component';
     ReactiveFormsModule,
     TextBoxComponent,
     DividerComponent,
-    NgIf,
     ParagraphComponent,
     CheckboxComponent,
     DialogActionsComponent,
-    ButtonComponent,
-  ],
+    ButtonComponent
+],
 })
 export class ExternalReferenceDialogComponent extends BaseComponent implements OnInit {
   @Input() public externalReferenceProperties!: ExternalReferenceProperties;

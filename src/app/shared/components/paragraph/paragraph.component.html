@@ -13,9 +13,11 @@
     'neutral-color': color === 'grey',
     'display-flex': displayFlex,
   }"
->
+  >
   <ng-content></ng-content>
-  <app-icon-button *ngIf="helpTextKey" (buttonClick)="openHelpTextDialog()">
-    <app-help-icon></app-help-icon>
-  </app-icon-button>
+  @if (helpTextKey) {
+    <app-icon-button (buttonClick)="openHelpTextDialog()">
+      <app-help-icon></app-help-icon>
+    </app-icon-button>
+  }
 </p>

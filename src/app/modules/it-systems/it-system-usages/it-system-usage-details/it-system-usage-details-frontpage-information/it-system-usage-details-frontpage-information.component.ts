@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -75,7 +75,6 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     StatusChipComponent,
     FormsModule,
     ReactiveFormsModule,
@@ -84,8 +83,8 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
     TextAreaComponent,
     DatePickerComponent,
     AsyncPipe,
-    TooltipComponent,
-  ],
+    TooltipComponent
+],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(

@@ -17,10 +17,7 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
   public readonly organizations$ = this.select((state) => state.organizations).pipe(filterNullish());
   public readonly isLoading$ = this.select((state) => state.loading);
 
-  constructor(
-    private store: Store,
-    private dprApiService: APIV2DataProcessingRegistrationInternalINTERNALService,
-  ) {
+  constructor(private store: Store, private dprApiService: APIV2DataProcessingRegistrationInternalINTERNALService) {
     super({ loading: false });
   }
 
@@ -28,14 +25,14 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
     (state, organizations: Array<APIOrganizationResponseDTO>): State => ({
       ...state,
       organizations,
-    }),
+    })
   );
 
   private updateIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    }),
+    })
   );
 
   public getOrganizations = this.effect((search$: Observable<string | undefined>) =>
@@ -47,13 +44,13 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
         return this.dprApiService
           .getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors({ dprUuid, nameQuery: search })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateOrganizations(organizations),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+            tapResponse({
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateIsLoading(false),
+            })
           );
-      }),
-    ),
+      })
+    )
   );
 }

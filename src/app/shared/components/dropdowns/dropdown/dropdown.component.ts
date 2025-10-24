@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgFooterTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
@@ -15,7 +15,6 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
   templateUrl: 'dropdown.component.html',
   styleUrls: ['dropdown.component.scss'],
   imports: [
-    NgIf,
     FormsModule,
     ReactiveFormsModule,
     NgSelectComponent,
@@ -23,8 +22,8 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
     ParagraphComponent,
     NgFooterTemplateDirective,
     TextBoxInfoComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;

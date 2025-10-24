@@ -1,5 +1,5 @@
 import { CdkScrollable } from '@angular/cdk/scrolling';
-import { NgFor, NgIf } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -29,13 +29,11 @@ import { StandardVerticalContentGridComponent } from '../../standard-vertical-co
     StandardVerticalContentGridComponent,
     CdkScrollable,
     MatDialogContent,
-    NgFor,
     ParagraphComponent,
-    NgIf,
     CheckboxComponent,
     DialogActionsComponent,
-    ButtonComponent,
-  ],
+    ButtonComponent
+],
 })
 export class HideShowDialogComponent implements OnInit {
   @Input() columns!: GridColumn[];

@@ -43,11 +43,11 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
         return this.organizationsService
           .getManyOrganizationV2GetOrganizations({ nameOrCvrContent: search, orderByProperty: 'Name' })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateOrganizations(organizations),
-              (e) => console.error(e),
-              () => this.updateOrganizationsIsLoading(false)
-            )
+            tapResponse({
+    next: (organizations) => this.updateOrganizations(organizations),
+    error: (e) => console.error(e),
+    complete: () => this.updateOrganizationsIsLoading(false)
+})
           );
       })
     )

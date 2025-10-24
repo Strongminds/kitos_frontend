@@ -57,11 +57,11 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
       mergeMap((uuid) => {
         this.updateIsLoading(true);
         return this.apiItContractInternalService.getManyItContractInternalV2GetHierarchy({ contractUuid: uuid }).pipe(
-          tapResponse(
-            (hierarchy) => this.updateHierarchy(hierarchy),
-            (e) => console.error(e),
-            () => this.updateIsLoading(false),
-          ),
+          tapResponse({
+    next: (hierarchy) => this.updateHierarchy(hierarchy),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoading(false)
+}),
         );
       }),
     ),
@@ -74,11 +74,11 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
         return this.apiItContractInternalService
           .getManyItContractInternalV2GetSubHierarchy({ contractUuid: uuid })
           .pipe(
-            tapResponse(
-              (hierarchy) => this.updateSubHierarchy(hierarchy),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+            tapResponse({
+    next: (hierarchy) => this.updateSubHierarchy(hierarchy),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoading(false)
+}),
           );
       }),
     ),
@@ -94,17 +94,17 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
               request: { contractUuids: request.uuids, parentUuid: request.parentUuid },
             })
             .pipe(
-              tapResponse(
-                () => {
-                  this.store.dispatch(ITContractActions.transferContractsSuccess());
-                  return this.getSubHierarchy(request.currentParentUuid);
-                },
-                (e) => {
-                  console.error(e);
-                  this.store.dispatch(ITContractActions.transferContractsError());
-                },
-                () => this.updateIsLoading(false),
-              ),
+              tapResponse({
+    next: () => {
+        this.store.dispatch(ITContractActions.transferContractsSuccess());
+        return this.getSubHierarchy(request.currentParentUuid);
+    },
+    error: (e) => {
+        console.error(e);
+        this.store.dispatch(ITContractActions.transferContractsError());
+    },
+    complete: () => this.updateIsLoading(false)
+}),
             ),
         ),
       ),

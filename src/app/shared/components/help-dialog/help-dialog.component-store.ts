@@ -36,16 +36,17 @@ export class HelpDialogComponentStore extends ComponentStore<State> {
             key,
           })
           .pipe(
-            tapResponse(
-              (response) => {
-                try {
-                  this.updateHelpText({ helpText: adaptHelpText(response), isEditable: true });
-                } catch (e) {
-                  this.handleError(e);
-                }
-              },
-              (e) => this.handleError(e),
-            ),
+            tapResponse({
+    next: (response) => {
+        try {
+            this.updateHelpText({ helpText: adaptHelpText(response), isEditable: true });
+        }
+        catch (e) {
+            this.handleError(e);
+        }
+    },
+    error: (e) => this.handleError(e)
+}),
           ),
       ),
     ),

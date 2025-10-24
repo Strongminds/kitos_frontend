@@ -2,7 +2,7 @@ import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { ONLY_DIGITS_REGEX } from '../../constants/regex-constants';
-import { NgIf } from '@angular/common';
+
 import { MatFormField, MatLabel } from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
@@ -11,7 +11,7 @@ import { MatInput } from '@angular/material/input';
   selector: 'app-numeric-input',
   templateUrl: './numeric-input.component.html',
   styleUrls: ['./numeric-input.component.scss'],
-  imports: [NgIf, MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput],
+  imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput],
 })
 export class NumericInputComponent extends BaseFormComponent<number | undefined> implements AfterViewInit, OnDestroy {
   @Input() public size: 'medium' | 'large' = 'large';

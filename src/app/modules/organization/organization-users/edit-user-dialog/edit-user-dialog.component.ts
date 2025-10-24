@@ -8,7 +8,7 @@ import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/not-d
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   BulkActionButton,
   BulkActionResult,
@@ -54,7 +54,6 @@ import { BaseUserDialogComponent } from '../base-user-dialog.component';
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
-    NgIf,
     ParagraphComponent,
     DropdownComponent,
     MultiSelectDropdownComponent_1,
@@ -63,8 +62,8 @@ import { BaseUserDialogComponent } from '../base-user-dialog.component';
     TextBoxInfoComponent,
     DialogActionsComponent,
     ButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class EditUserDialogComponent extends BaseUserDialogComponent implements OnInit {
   @Input() public user!: ODataOrganizationUser;

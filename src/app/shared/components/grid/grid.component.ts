@@ -22,7 +22,6 @@ import {
   PageChangeEvent,
   ToolbarTemplateDirective,
 } from '@progress/kendo-angular-grid';
-import { PagerTemplateDirective } from '@progress/kendo-angular-pager';
 import {
   CompositeFilterDescriptor,
   FilterDescriptor,
@@ -75,7 +74,6 @@ import { DateFilterComponent } from './date-filter/date-filter.component';
 import { DropdownColumnDataFilterComponent } from './dropdown-column-data-filter/dropdown-column-data-filter.component';
 import { DropdownFilterComponent } from './dropdown-filter/dropdown-filter.component';
 import { GridCellComponent } from './grid-cell/grid-cell.component';
-import { GridPaginatorComponent } from './grid-paginator/grid-paginator.component';
 import { NumericFilterComponent } from './numeric-filter/numeric-filter.component';
 import { StringFilterComponent } from './string-filter/string-filter.component';
 import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdown-filter.component';
@@ -104,8 +102,6 @@ import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdow
     DropdownColumnDataFilterComponent,
     CellTemplateDirective,
     GridCellComponent,
-    PagerTemplateDirective,
-    GridPaginatorComponent,
     CustomMessagesComponent,
     LoadingTemplateDirective,
     LoadingComponent,

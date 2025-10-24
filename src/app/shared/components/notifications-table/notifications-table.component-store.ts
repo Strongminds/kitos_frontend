@@ -58,11 +58,11 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               notificationUuid: params.notificationUuid,
             })
             .pipe(
-              tapResponse(
-                (currentNotificationSent) => this.updateCurrentNotificationSent(currentNotificationSent),
-                (e) => console.error(e),
-                () => this.updateIsLoading(false),
-              ),
+              tapResponse({
+    next: (currentNotificationSent) => this.updateCurrentNotificationSent(currentNotificationSent),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoading(false)
+}),
             );
         }),
       ),
@@ -204,11 +204,11 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               organizationUuid: organizationUuid,
             })
             .pipe(
-              tapResponse(
-                (notifications) => this.updateNotifications(notifications),
-                (e) => console.error(e),
-                () => this.updateIsLoading(false),
-              ),
+              tapResponse({
+    next: (notifications) => this.updateNotifications(notifications),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoading(false)
+}),
             );
         }),
       ),

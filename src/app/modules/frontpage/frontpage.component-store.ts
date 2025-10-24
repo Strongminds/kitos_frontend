@@ -42,13 +42,13 @@ export class FrontpageComponentStore extends ComponentStore<FrontpageComponentSt
       tap(() => this.updateLoading(true)),
       switchMap(() =>
         this.apiTextService.getManyPublicMessagesV2Get().pipe(
-          tapResponse(
-            (response: APIPublicMessageResponseDTO[]) => this.updatePublicMessages(response.map(adaptPublicMessage)),
-            (e) => {
-              console.error(e);
-            },
-            () => this.updateLoading(false),
-          ),
+          tapResponse({
+    next: (response: APIPublicMessageResponseDTO[]) => this.updatePublicMessages(response.map(adaptPublicMessage)),
+    error: (e) => {
+        console.error(e);
+    },
+    complete: () => this.updateLoading(false)
+}),
         ),
       ),
     ),

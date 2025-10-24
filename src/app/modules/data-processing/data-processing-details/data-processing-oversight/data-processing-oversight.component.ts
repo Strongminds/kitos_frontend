@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -58,7 +58,6 @@ import { OversightsTableComponent } from './oversights-table/oversights-table.co
   templateUrl: './data-processing-oversight.component.html',
   styleUrl: './data-processing-oversight.component.scss',
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     FormsModule,
@@ -68,7 +67,6 @@ import { OversightsTableComponent } from './oversights-table/oversights-table.co
     TextAreaComponent,
     DatePickerComponent,
     NativeTableComponent,
-    NgFor,
     ContentSpaceBetweenComponent,
     ParagraphComponent,
     IconButtonComponent,
@@ -76,8 +74,8 @@ import { OversightsTableComponent } from './oversights-table/oversights-table.co
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
     OversightsTableComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DataProcessingOversightComponent extends BaseComponent implements OnInit {
   public readonly oversightOptions$ = this.store.select(selectDataProcessingOversightOptions).pipe(filterNullish());

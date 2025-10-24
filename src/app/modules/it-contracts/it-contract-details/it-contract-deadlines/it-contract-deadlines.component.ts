@@ -28,7 +28,7 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
 import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
@@ -42,7 +42,6 @@ import { DatePickerComponent } from '../../../../shared/components/datepicker/da
   templateUrl: './it-contract-deadlines.component.html',
   styleUrl: './it-contract-deadlines.component.scss',
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     FormGridComponent,
@@ -52,8 +51,8 @@ import { DatePickerComponent } from '../../../../shared/components/datepicker/da
     CheckboxComponent,
     DropdownComponent,
     DatePickerComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItContractDeadlinesComponent extends BaseComponent implements OnInit {
   private readonly deadlineDurationYearsUpperLimit = 100;

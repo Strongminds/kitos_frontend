@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -14,7 +14,7 @@ import { Observable } from 'rxjs';
   selector: 'app-export-menu-button',
   templateUrl: './export-menu-button.component.html',
   styleUrl: './export-menu-button.component.scss',
-  imports: [MenuButtonComponent, MenuButtonItemComponent, ExportIconComponent, NgIf, LockIconComponent, AsyncPipe],
+  imports: [MenuButtonComponent, MenuButtonItemComponent, ExportIconComponent, LockIconComponent, AsyncPipe],
 })
 export class ExportMenuButtonComponent {
   @Input() exportMethod!: (exportAllColumns: boolean) => void;

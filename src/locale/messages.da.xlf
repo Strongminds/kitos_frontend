@@ -410,8 +410,8 @@
         <target state="new">Indtast bemærkning fra Rigsarkivet</target>
       </trans-unit>
       <trans-unit id="640819770358624515" datatype="html">
-        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="ivesText }}"/><x id="CLOSE_LINK" ctype="x-a"/></source>
-        <target state="new"> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="ivesText }}"/><x id="CLOSE_LINK" ctype="x-a"/></target>
+        <source> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="{{ nationalArchivesText }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></source>
+        <target state="new"> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="{{ nationalArchivesText }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/></target>
       </trans-unit>
       <trans-unit id="6897556565483927491" datatype="html">
         <source>Tilknyttede opgaver</source>
@@ -1051,10 +1051,10 @@
       </trans-unit>
       <trans-unit id="187187500641108332" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ proceedText }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="proceedText }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ proceedText }}"/>
         </target>
       </trans-unit>
       <trans-unit id="5796886515252568996" datatype="html">
@@ -1138,16 +1138,16 @@
         <target state="new">Du er medlem er flere organisationer. Vælg, hvilken en du vil arbejde i.</target>
       </trans-unit>
       <trans-unit id="8596039564721896625" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemer&lt;"/>IT Systemer</target>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Systemer</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Systemer</target>
       </trans-unit>
       <trans-unit id="5230526060135650479" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="IT Systemkat"/>IT Systemkatalog</target>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Systemkatalog</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Systemkatalog</target>
       </trans-unit>
       <trans-unit id="4321563070163880980" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Snitfladekat"/>Snitfladekatalog</target>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Snitfladekatalog</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Snitfladekatalog</target>
       </trans-unit>
       <trans-unit id="2990914739557170877" datatype="html">
         <source>Min profil</source>
@@ -1158,8 +1158,8 @@
         <target state="new">Skift organisation</target>
       </trans-unit>
       <trans-unit id="2143029134840359932" datatype="html">
-        <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></source>
-        <target state="new">Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/span&gt;"/></target>
+        <source>Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/app-logout-icon&gt;"/></source>
+        <target state="new">Log ud<x id="START_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;app-logout-icon&gt;"/><x id="CLOSE_TAG_APP_LOGOUT_ICON" ctype="x-app_logout_icon" equiv-text="&lt;/app-logout-icon&gt;"/></target>
       </trans-unit>
       <trans-unit id="467058242778701030" datatype="html">
         <source>Ryd</source>
@@ -1313,10 +1313,10 @@
       </trans-unit>
       <trans-unit id="8323422358213440128" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="levelsText$ | async }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ levelsText$ | async }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="levelsText$ | async }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ levelsText$ | async }}"/>
         </target>
       </trans-unit>
       <trans-unit id="7174046917866635501" datatype="html">
@@ -2221,10 +2221,10 @@
       </trans-unit>
       <trans-unit id="7493428362965307555" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; &gt; &lt;/ng-container&gt; &lt;bu"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{buttonText} splitbutton&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; &gt; &lt;/ng-container&gt; &lt;bu"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{buttonText} splitbutton&apos; }}"/>
         </target>
         <note priority="1" from="description">The text for the SplitButton aria-label</note>
         <note priority="1" from="meaning">kendo.splitbutton.splitButtonLabel</note>
@@ -2709,17 +2709,17 @@
         <note priority="1" from="description">The label of the popup element that contains the list of options when its role is &apos;region&apos;</note>
         <note priority="1" from="meaning">kendo.multiselect.popupLabel</note>
       </trans-unit>
-      <trans-unit id="273152189640011378" datatype="html">
+      <trans-unit id="351447953051185244" datatype="html">
         <source>Apply</source>
         <target state="new">Apply</target>
-        <note priority="1" from="description">The text of the Apply button in the action sheet</note>
-        <note priority="1" from="meaning">kendo.multiselect.applyButton</note>
+        <note priority="1" from="description">The text of the AI Assistant Apply button</note>
+        <note priority="1" from="meaning">kendo.grid.aiAssistantApplyButtonText</note>
       </trans-unit>
-      <trans-unit id="7894747957256768354" datatype="html">
+      <trans-unit id="5286458182109863142" datatype="html">
         <source>Cancel</source>
         <target state="new">Cancel</target>
-        <note priority="1" from="description">The text of the Cancel button in the action sheet</note>
-        <note priority="1" from="meaning">kendo.multiselect.cancelButton</note>
+        <note priority="1" from="description">The text for the Grid Cancel toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.cancelToolbarToolText</note>
       </trans-unit>
       <trans-unit id="3227251500690942605" datatype="html">
         <source>NO DATA FOUND</source>
@@ -2805,17 +2805,11 @@
         <note priority="1" from="description">The label of the popup element that contains the list of options when its role is &apos;region&apos;</note>
         <note priority="1" from="meaning">kendo.multiselecttree.popupLabel</note>
       </trans-unit>
-      <trans-unit id="7641781095181517106" datatype="html">
-        <source>Apply</source>
-        <target state="new">Apply</target>
-        <note priority="1" from="description">The text of the Apply button in the action sheet</note>
-        <note priority="1" from="meaning">kendo.multiselecttree.applyButton</note>
-      </trans-unit>
-      <trans-unit id="8001634775526161935" datatype="html">
+      <trans-unit id="1628868291685658590" datatype="html">
         <source>Cancel</source>
         <target state="new">Cancel</target>
-        <note priority="1" from="description">The text of the Cancel button in the action sheet</note>
-        <note priority="1" from="meaning">kendo.multiselecttree.cancelButton</note>
+        <note priority="1" from="description">The text for the Cancel button</note>
+        <note priority="1" from="meaning">kendo.upload.cancel</note>
       </trans-unit>
       <trans-unit id="1430663748859427158" datatype="html">
         <source>Drag a column header and drop it here to group by that column</source>
@@ -2831,10 +2825,10 @@
       </trans-unit>
       <trans-unit id="8009801217904632250" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&apos; }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Page navigation, page {currentPage} of {totalPages}&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&apos; }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Page navigation, page {currentPage} of {totalPages}&apos; }}"/>
         </target>
         <note priority="1" from="description">The label for the Grid pager</note>
         <note priority="1" from="meaning">kendo.grid.pagerLabel</note>
@@ -2901,60 +2895,60 @@
       </trans-unit>
       <trans-unit id="8107424894769231672" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterMenuTitle=&quot;kendo.grid.f"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Filter&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterMenuTitle=&quot;kendo.grid.f"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Filter&apos; }}"/>
         </target>
         <note priority="1" from="description">The label of the filter row and menu inputs</note>
         <note priority="1" from="meaning">kendo.grid.filterInputLabel</note>
       </trans-unit>
       <trans-unit id="1810468421302428464" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterMenuOpe"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Filter Menu&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterMenuOpe"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Filter Menu&apos; }}"/>
         </target>
         <note priority="1" from="description">The title of the filter menu icon</note>
         <note priority="1" from="meaning">kendo.grid.filterMenuTitle</note>
       </trans-unit>
       <trans-unit id="4517333145483748843" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterCellOperatorLabel=&quot;ke"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Filter Operators&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterCellOperatorLabel=&quot;ke"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Filter Operators&apos; }}"/>
         </target>
         <note priority="1" from="description">The label of the filter menu operators dropdown</note>
         <note priority="1" from="meaning">kendo.grid.filterMenuOperatorsDropDownLabel</note>
       </trans-unit>
       <trans-unit id="5753750512386575516" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-booleanFilterCellLabe"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Filter cell operators for {columnName}&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-booleanFilterCellLabe"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Filter cell operators for {columnName}&apos; }}"/>
         </target>
         <note priority="1" from="description">The label of the filter cell operators dropdown</note>
         <note priority="1" from="meaning">kendo.grid.filterCellOperatorLabel</note>
       </trans-unit>
       <trans-unit id="625851073635819622" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterMenuLogicDropD"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Boolean filter cell for {columnName}&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterMenuLogicDropD"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Boolean filter cell for {columnName}&apos; }}"/>
         </target>
         <note priority="1" from="description">The label of the boolean filter cell dropdown</note>
         <note priority="1" from="meaning">kendo.grid.booleanFilterCellLabel</note>
       </trans-unit>
       <trans-unit id="937712246666554577" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterEqOperator=&quot;kendo.grid.filter"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Filter Logic&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-filterEqOperator=&quot;kendo.grid.filter"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Filter Logic&apos; }}"/>
         </target>
         <note priority="1" from="description">The label of the filter menu logic dropdown</note>
         <note priority="1" from="meaning">kendo.grid.filterMenuLogicDropDownLabel</note>
@@ -3123,10 +3117,10 @@
       </trans-unit>
       <trans-unit id="1629221826958146590" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-columns="/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Column Menu&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-columns="/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{columnName} Column Menu&apos; }}"/>
         </target>
         <note priority="1" from="description">The title of the column menu icon</note>
         <note priority="1" from="meaning">kendo.grid.columnMenu</note>
@@ -3230,13 +3224,13 @@
       <trans-unit id="6952757249912226136" datatype="html">
         <source>Expand Details</source>
         <target state="new">Expand Details</target>
-        <note priority="1" from="description">The title of the expand icon of detail rows.</note>
+        <note priority="1" from="description">The title of the expand icon of detail rows. Applies also to the expand button text in stacked mode.</note>
         <note priority="1" from="meaning">kendo.grid.detailExpand</note>
       </trans-unit>
       <trans-unit id="6065477639036399169" datatype="html">
         <source>Collapse Details</source>
         <target state="new">Collapse Details</target>
-        <note priority="1" from="description">The title of the collapse icon of detail rows.</note>
+        <note priority="1" from="description">The title of the collapse icon of detail rows. Applies also to the collapse button text in stacked mode.</note>
         <note priority="1" from="meaning">kendo.grid.detailCollapse</note>
       </trans-unit>
       <trans-unit id="1656723147090613075" datatype="html">
@@ -4072,12 +4066,12 @@
         <target state="new">Systemer der anvender systemet</target>
       </trans-unit>
       <trans-unit id="6309617208533698803" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-menu-button-ite"/>Eksporter alle kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter alle kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter alle kolonner </target>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="pp-menu-button-it"/>Eksporter viste kolonner </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter viste kolonner </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter viste kolonner </target>
       </trans-unit>
       <trans-unit id="948657358778361709" datatype="html">
         <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon/&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-menu-button-"/>Eksporter viste kolonner </source>
@@ -4184,28 +4178,28 @@
         <target state="new">IT-System (Beskrivelse)</target>
       </trans-unit>
       <trans-unit id="5510228635515896374" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Organisation"/>Organisation</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Organisation"/>Organisation</target>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Organisation</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Organisation</target>
       </trans-unit>
       <trans-unit id="800014879078475227" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Brugere&lt;/app"/>Brugere</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Brugere&lt;/app"/>Brugere</target>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Brugere</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Brugere</target>
       </trans-unit>
       <trans-unit id="108387984164408541" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Stamdata&lt;/ap"/>Stamdata</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="p-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="Stamdata&lt;/ap"/>Stamdata</target>
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Stamdata</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Stamdata</target>
       </trans-unit>
       <trans-unit id="8605390030539679842" datatype="html">
         <source>Slet enhed</source>
         <target state="new">Slet enhed</target>
       </trans-unit>
       <trans-unit id="6424209025137180437" datatype="html">
-        <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="p-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="Opret ny en"/> Opret ny enhed</source>
-        <target state="new"><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="p-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="Opret ny en"/> Opret ny enhed</target>
+        <source><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;app-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;/app-plus-icon-blue&gt;"/> Opret ny enhed</source>
+        <target state="new"><x id="START_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;app-plus-icon-blue&gt;"/><x id="CLOSE_TAG_APP_PLUS_ICON_BLUE" ctype="x-app_plus_icon_blue" equiv-text="&lt;/app-plus-icon-blue&gt;"/> Opret ny enhed</target>
       </trans-unit>
       <trans-unit id="7936314073802514656" datatype="html">
-        <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</source>
-        <target state="new"><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="p-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="Omstrukture"/> Omstrukturer</target>
+        <source><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="&lt;app-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="&lt;/app-reorder-icon&gt;"/> Omstrukturer</source>
+        <target state="new"><x id="START_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="&lt;app-reorder-icon&gt;"/><x id="CLOSE_TAG_APP_REORDER_ICON" ctype="x-app_reorder_icon" equiv-text="&lt;/app-reorder-icon&gt;"/> Omstrukturer</target>
       </trans-unit>
       <trans-unit id="2387852956002747683" datatype="html">
         <source>Der skete en fejl under sletning af enheden</source>
@@ -4248,12 +4242,12 @@
         <target state="new">Organisationslag</target>
       </trans-unit>
       <trans-unit id="1284113808164544433" datatype="html">
-        <source><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="p-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="Enheder opr"/> Enheder oprettet i Kitos</source>
-        <target state="new"><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="p-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="Enheder opr"/> Enheder oprettet i Kitos</target>
+        <source><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="&lt;app-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="&lt;/app-kitos-unit-color-icon&gt;"/> Enheder oprettet i Kitos</source>
+        <target state="new"><x id="START_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="&lt;app-kitos-unit-color-icon&gt;"/><x id="CLOSE_TAG_APP_KITOS_UNIT_COLOR_ICON" ctype="x-app_kitos_unit_color_icon" equiv-text="&lt;/app-kitos-unit-color-icon&gt;"/> Enheder oprettet i Kitos</target>
       </trans-unit>
       <trans-unit id="1059246033392151913" datatype="html">
-        <source><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</source>
-        <target state="new"><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="p-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="Enheder syn"/> Enheder synkroniseret fra FK Organisation</target>
+        <source><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="&lt;app-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="&lt;/app-fk-org-color-icon&gt;"/> Enheder synkroniseret fra FK Organisation</source>
+        <target state="new"><x id="START_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="&lt;app-fk-org-color-icon&gt;"/><x id="CLOSE_TAG_APP_FK_ORG_COLOR_ICON" ctype="x-app_fk_org_color_icon" equiv-text="&lt;/app-fk-org-color-icon&gt;"/> Enheder synkroniseret fra FK Organisation</target>
       </trans-unit>
       <trans-unit id="1074222601101160567" datatype="html">
         <source>Organisationslag blev opdateret</source>
@@ -4380,8 +4374,8 @@
         <target state="new">Overfør</target>
       </trans-unit>
       <trans-unit id="7556694929562495921" datatype="html">
-        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet enhed&lt;"/> Slet enhed</source>
-        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet enhed&lt;"/> Slet enhed</target>
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet enhed</source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet enhed</target>
       </trans-unit>
       <trans-unit id="2372596861861123396" datatype="html">
         <source>Fravælg alle</source>
@@ -4560,8 +4554,8 @@
         <target state="new"> Login oplysninger sidst sendt: </target>
       </trans-unit>
       <trans-unit id="5685427366449665132" datatype="html">
-        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet bruger"/> Slet bruger </source>
-        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet bruger"/> Slet bruger </target>
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet bruger </target>
       </trans-unit>
       <trans-unit id="2619139320280854472" datatype="html">
         <source> Rediger </source>
@@ -5148,8 +5142,8 @@
         <target state="new">Viser konsekvenser <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>(<x id="INTERPOLATION" equiv-text="{{ updateConsequencesLength$ | async }}"/>)<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> af opdateringen for organisationshierarkiet i KITOS</target>
       </trans-unit>
       <trans-unit id="6021905614502626006" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="button (buttonCli"/>Eksporter</target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter</source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/>Eksporter</target>
       </trans-unit>
       <trans-unit id="4691966835263640588" datatype="html">
         <source>FK Organisation - Konsekvenser ved opdatering</source>
@@ -5240,12 +5234,12 @@
         <target state="new"> For at lette den administrative byrde har du derfor følgende muligheder: </target>
       </trans-unit>
       <trans-unit id="7974948161058774051" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
-        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </target>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Slet ubrugte organisationseneheder:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed slettes alle organisationseneheder (fra FK Organisation), hvortil der ikke er knyttet en registrering. De resterende konverteres til KITOS enheder. </target>
       </trans-unit>
       <trans-unit id="1677749166597841894" datatype="html">
-        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
-        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="rong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </target>
+        <source><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </source>
+        <target state="new"><x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/>Bevar organisationshierarkiet:<x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> Vælges denne mulighed konverteres alle organisationsenheder fra FK Organisation til KITOS enheder. </target>
       </trans-unit>
       <trans-unit id="2874747510585928254" datatype="html">
         <source>Slet ubrugte organisationseneheder</source>
@@ -5984,8 +5978,8 @@
         <target state="new">GDPR Rapporter</target>
       </trans-unit>
       <trans-unit id="2708612909413062362" datatype="html">
-        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-overview"/> Eksporter </source>
-        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="p-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;/app-overview"/> Eksporter </target>
+        <source><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter </source>
+        <target state="new"><x id="START_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/><x id="CLOSE_TAG_APP_EXPORT_ICON" ctype="x-app_export_icon" equiv-text="&lt;app-export-icon /&gt;"/> Eksporter </target>
       </trans-unit>
       <trans-unit id="8145441157302108078" datatype="html">
         <source>System UUID</source>
@@ -6016,16 +6010,16 @@
         <target state="new">IT-Systemet driftes</target>
       </trans-unit>
       <trans-unit id="793272841717310926" datatype="html">
-        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </source>
-        <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="p-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="menu-button-item&gt;"/> Åben GDPR overblik </target>
+        <source><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </source>
+        <target state="new"><x id="START_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/><x id="CLOSE_TAG_APP_LOCK_ICON" ctype="x-app_lock_icon" equiv-text="&lt;app-lock-icon /&gt;"/> Åben GDPR overblik </target>
       </trans-unit>
       <trans-unit id="844753732077135788" datatype="html">
-        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </source>
-        <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="p-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="Gem"/> Gem </target>
+        <source><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="&lt;app-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="&lt;/app-disk-icon&gt;"/> Gem </source>
+        <target state="new"><x id="START_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="&lt;app-disk-icon&gt;"/><x id="CLOSE_TAG_APP_DISK_ICON" ctype="x-app_disk_icon" equiv-text="&lt;/app-disk-icon&gt;"/> Gem </target>
       </trans-unit>
       <trans-unit id="7413119087194289434" datatype="html">
-        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </source>
-        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="p-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="Slet"/> Slet </target>
+        <source><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </source>
+        <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </target>
       </trans-unit>
       <trans-unit id="5606291731600881005" datatype="html">
         <source><x id="START_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;app-filter-icon&gt;"/><x id="CLOSE_TAG_APP_FILTER_ICON" ctype="x-app_filter_icon" equiv-text="&lt;/app-filter-icon&gt;"/> Anvend </source>
@@ -6036,8 +6030,8 @@
         <target state="new"><x id="START_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;app-trashcan-icon&gt;"/><x id="CLOSE_TAG_APP_TRASHCAN_ICON" ctype="x-app_trashcan_icon" equiv-text="&lt;/app-trashcan-icon&gt;"/> Slet </target>
       </trans-unit>
       <trans-unit id="7970981235010102529" datatype="html">
-        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </source>
-        <target state="new"><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="p-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="Hjælp &lt;"/> Hjælp </target>
+        <source><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="&lt;app-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="&lt;/app-help-icon&gt;"/> Hjælp </source>
+        <target state="new"><x id="START_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="&lt;app-help-icon&gt;"/><x id="CLOSE_TAG_APP_HELP_ICON" ctype="x-app_help_icon" equiv-text="&lt;/app-help-icon&gt;"/> Hjælp </target>
       </trans-unit>
       <trans-unit id="1162347843657363489" datatype="html">
         <source>Er du sikker på, at du vil slette systemet?</source>
@@ -6117,12 +6111,12 @@
       </trans-unit>
       <trans-unit id="8861382415598843076" datatype="html">
         <source>
-          <x id="START_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="p-arrow-right-icon&gt;"/>
-          <x id="CLOSE_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&gt;"/>
+          <x id="START_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&lt;app-arrow-right-icon&gt;"/>
+          <x id="CLOSE_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&lt;/app-arrow-right-icon &gt;"/>
         </source>
         <target state="new">
-          <x id="START_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="p-arrow-right-icon&gt;"/>
-          <x id="CLOSE_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&gt;"/>
+          <x id="START_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&lt;app-arrow-right-icon&gt;"/>
+          <x id="CLOSE_TAG_APP_ARROW_RIGHT_ICON" ctype="x-app_arrow_right_icon" equiv-text="&lt;/app-arrow-right-icon &gt;"/>
         </target>
       </trans-unit>
       <trans-unit id="1830101552093999120" datatype="html">
@@ -6302,8 +6296,8 @@
         <target state="new">Gå til systemanvendelse</target>
       </trans-unit>
       <trans-unit id="3415736924888217227" datatype="html">
-        <source><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</source>
-        <target state="new"><x id="INTERPOLATION" equiv-text="totalDataAmount() }}"/> resultater</target>
+        <source><x id="INTERPOLATION" equiv-text="{{ totalDataAmount() }}"/> resultater</source>
+        <target state="new"><x id="INTERPOLATION" equiv-text="{{ totalDataAmount() }}"/> resultater</target>
       </trans-unit>
       <trans-unit id="7610119555318059028" datatype="html">
         <source>DPIA gennemført</source>
@@ -6727,10 +6721,10 @@
       </trans-unit>
       <trans-unit id="2281955701430052538" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-removeConfirmationDialogTitle="/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;The {fieldName} field has {errorName} validation error&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; i18n-removeConfirmationDialogTitle="/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;The {fieldName} field has {errorName} validation error&apos; }}"/>
         </target>
         <note priority="1" from="description">The default text of a form validation error when using external editing.</note>
         <note priority="1" from="meaning">kendo.grid.formValidationErrorText</note>
@@ -6762,7 +6756,7 @@
       <trans-unit id="639527922029546265" datatype="html">
         <source>Edit</source>
         <target state="new">Edit</target>
-        <note priority="1" from="description">The title of the built-in external editing form container</note>
+        <note priority="1" from="description">The title of the built-in external editing form container when editing an item</note>
         <note priority="1" from="meaning">kendo.grid.externalEditingTitle</note>
       </trans-unit>
       <trans-unit id="6806557244499949355" datatype="html">
@@ -6777,11 +6771,11 @@
         <note priority="1" from="description">The text of the external editing form Cancel button</note>
         <note priority="1" from="meaning">kendo.grid.externalEditingCancelText</note>
       </trans-unit>
-      <trans-unit id="1493345812229818724" datatype="html">
+      <trans-unit id="3185339174622616854" datatype="html">
         <source>Close</source>
         <target state="new">Close</target>
-        <note priority="1" from="description">The title for the Close button.</note>
-        <note priority="1" from="meaning">kendo.colorpicker.closeButton</note>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.datepicker.adaptiveCloseButtonTitle</note>
       </trans-unit>
       <trans-unit id="1461683135245713706" datatype="html">
         <source>Choose Color</source>
@@ -6791,20 +6785,20 @@
       </trans-unit>
       <trans-unit id="2574527919448072107" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; &gt;&lt;/ng-cont"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Input {currentInput} of {totalInputs}, current value {value}&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; &gt;&lt;/ng-cont"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Input {currentInput} of {totalInputs}, current value {value}&apos; }}"/>
         </target>
         <note priority="1" from="description">The value of the aria-label attribute of the input fields.</note>
         <note priority="1" from="meaning">kendo.otpinput.ariaLabel</note>
       </trans-unit>
       <trans-unit id="2124176984717923206" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="&quot; i18"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Page navigation, page {currentPage} of {totalPages}&apos; }}"/>
         </source>
         <target state="new">
-          <x id="INTERPOLATION" equiv-text="&quot; i18"/>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Page navigation, page {currentPage} of {totalPages}&apos; }}"/>
         </target>
         <note priority="1" from="description">The value of the aria-label attribute of the Pager</note>
         <note priority="1" from="meaning">kendo.pager.ariaLabel</note>
@@ -6894,8 +6888,8 @@
         <note priority="1" from="meaning">kendo.toolbar.nextToolButton</note>
       </trans-unit>
       <trans-unit id="9190795738522963148" datatype="html">
-        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? </source>
-        <target state="new"> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="}}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="| async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="?"/>? </target>
+        <source> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ getUserName(user) }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ organizationName$ | async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/>? </source>
+        <target state="new"> Er du sikker på at du vil fjerne <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ getUserName(user) }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ organizationName$ | async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong &gt;"/>? </target>
       </trans-unit>
       <trans-unit id="4447588157619270374" datatype="html">
         <source> Brugeren har nogle roller, som kan tildeles en anden. Det er valgfrit om du vil slette brugeren uden at tildele rollerne. </source>
@@ -6942,16 +6936,16 @@
         <target state="new">ISMS leverandør</target>
       </trans-unit>
       <trans-unit id="3816576365360329559" datatype="html">
-        <source><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="p-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="Akti"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </source>
-        <target state="new"><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="p-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="Akti"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </target>
+        <source><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="&lt;app-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="&lt;/app-info-icon&gt;"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </source>
+        <target state="new"><x id="START_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="&lt;app-info-icon&gt;"/><x id="CLOSE_TAG_APP_INFO_ICON" ctype="x-app_info_icon" equiv-text="&lt;/app-info-icon&gt;"/> Aktive filtre i &quot;<x id="INTERPOLATION" equiv-text="{{ entityText }}"/>&quot;-overblikket er på forhånd anvendt i GDPR-overblikket. <x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/> Der kan filtreres yderligere i GDPR-overblikket herunder. </target>
       </trans-unit>
       <trans-unit id="720072715763564568" datatype="html">
         <source>ISMS Leverandører</source>
         <target state="new">ISMS Leverandører</target>
       </trans-unit>
       <trans-unit id="9113741111737099906" datatype="html">
-        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="an&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
-        <target state="new"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="an&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="new"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Tilføj<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
       </trans-unit>
       <trans-unit id="984734426874401647" datatype="html">
         <source>Tilføj leverandør</source>
@@ -7172,6 +7166,648 @@
       <trans-unit id="2694222923035281837" datatype="html">
         <source>Kunne ikke redigere journalperioden</source>
         <target state="new">Kunne ikke redigere journalperioden</target>
+      </trans-unit>
+      <trans-unit id="5590695852945551148" datatype="html">
+        <source>Toggle options</source>
+        <target state="new">Toggle options</target>
+        <note priority="1" from="description">The text for the SplitButton toggle button aria-label</note>
+        <note priority="1" from="meaning">kendo.splitbutton.toggleButtonLabel</note>
+      </trans-unit>
+      <trans-unit id="6330595822816184135" datatype="html">
+        <source>Ask AI</source>
+        <target state="new">Ask AI</target>
+        <note priority="1" from="description">The Toolbar button text for the Prompt view.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.promptView</note>
+      </trans-unit>
+      <trans-unit id="2257532995513113453" datatype="html">
+        <source>Output</source>
+        <target state="new">Output</target>
+        <note priority="1" from="description">The Toolbar button text for the Output view.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.outputView</note>
+      </trans-unit>
+      <trans-unit id="4630494147891806186" datatype="html">
+        <source>Generate</source>
+        <target state="new">Generate</target>
+        <note priority="1" from="description">The text for the Generate button in the Prompt view.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.generateOutput</note>
+      </trans-unit>
+      <trans-unit id="3716302687351752898" datatype="html">
+        <source>Ask or generate content with AI</source>
+        <target state="new">Ask or generate content with AI</target>
+        <note priority="1" from="description">The placeholder text for the Prompt View text area.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.promptPlaceholder</note>
+      </trans-unit>
+      <trans-unit id="1819746369827528285" datatype="html">
+        <source>Copy</source>
+        <target state="new">Copy</target>
+        <note priority="1" from="description">The Copy button text in each Output view card.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.copyOutput</note>
+      </trans-unit>
+      <trans-unit id="5769611614515503582" datatype="html">
+        <source>Retry</source>
+        <target state="new">Retry</target>
+        <note priority="1" from="description">The Retry button text in each Output view card.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.retryGeneration</note>
+      </trans-unit>
+      <trans-unit id="4631583161796906325" datatype="html">
+        <source>Generated with AI</source>
+        <target state="new">Generated with AI</target>
+        <note priority="1" from="description">The title of each Output view card.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.outputTitle</note>
+      </trans-unit>
+      <trans-unit id="1968350419886660108" datatype="html">
+        <source>Generated with AI</source>
+        <target state="new">Generated with AI</target>
+        <note priority="1" from="description">The title of each Output view retry card.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.outputRetryTitle</note>
+      </trans-unit>
+      <trans-unit id="4771558533142068310" datatype="html">
+        <source>Prompt suggestions</source>
+        <target state="new">Prompt suggestions</target>
+        <note priority="1" from="description">The title of the Prompt suggestions button.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.promptSuggestions</note>
+      </trans-unit>
+      <trans-unit id="1488634025934736132" datatype="html">
+        <source>Voice input</source>
+        <target state="new">Voice input</target>
+        <note priority="1" from="description">The aria-label for the Speech to Text button.</note>
+        <note priority="1" from="meaning">kendo.aiprompt.speechToTextButton</note>
+      </trans-unit>
+      <trans-unit id="4536983508045755893" datatype="html">
+        <source>You removed this message.</source>
+        <target state="new">You removed this message.</target>
+        <note priority="1" from="description">The text that is displayed when the sender deletes a message</note>
+        <note priority="1" from="meaning">kendo.chat.deletedMessageSenderText</note>
+      </trans-unit>
+      <trans-unit id="126640703941476130" datatype="html">
+        <source>This message was removed by its sender.</source>
+        <target state="new">This message was removed by its sender.</target>
+        <note priority="1" from="description">The text that is displayed when the receiver deletes a message</note>
+        <note priority="1" from="meaning">kendo.chat.deletedMessageReceiverText</note>
+      </trans-unit>
+      <trans-unit id="7460803912395701353" datatype="html">
+        <source>Type a message...</source>
+        <target state="new">Type a message...</target>
+        <note priority="1" from="description">The placholder text of the message text input</note>
+        <note priority="1" from="meaning">kendo.chat.messagePlaceholder</note>
+      </trans-unit>
+      <trans-unit id="4984081606393486044" datatype="html">
+        <source>Send...</source>
+        <target state="new">Send...</target>
+        <note priority="1" from="description">The text for the Send button</note>
+        <note priority="1" from="meaning">kendo.chat.send</note>
+      </trans-unit>
+      <trans-unit id="4051317763684489028" datatype="html">
+        <source>Message list</source>
+        <target state="new">Message list</target>
+        <note priority="1" from="description">The label text for the Message list</note>
+        <note priority="1" from="meaning">kendo.chat.messageListLabel</note>
+      </trans-unit>
+      <trans-unit id="5124012996394923464" datatype="html">
+        <source>Message</source>
+        <target state="new">Message</target>
+        <note priority="1" from="description">The label text for the Message input box</note>
+        <note priority="1" from="meaning">kendo.chat.messageBoxInputLabel</note>
+      </trans-unit>
+      <trans-unit id="1703683678689577695" datatype="html">
+        <source>Previous item</source>
+        <target state="new">Previous item</target>
+        <note priority="1" from="description">The text for the left arrow of the message attachments</note>
+        <note priority="1" from="meaning">kendo.chat.messageAttachmentLeftArrow</note>
+      </trans-unit>
+      <trans-unit id="1423319292771186884" datatype="html">
+        <source>Next item</source>
+        <target state="new">Next item</target>
+        <note priority="1" from="description">The text for the right arrow of the message attachments</note>
+        <note priority="1" from="meaning">kendo.chat.messageAttachmentRightArrow</note>
+      </trans-unit>
+      <trans-unit id="7612806143223508894" datatype="html">
+        <source>Speech to Text</source>
+        <target state="new">Speech to Text</target>
+        <note priority="1" from="description">Sets the Speech to Text button title.</note>
+        <note priority="1" from="meaning">kendo.chat.speechToTextButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="8827294244418520880" datatype="html">
+        <source>Select files</source>
+        <target state="new">Select files</target>
+        <note priority="1" from="description">Sets the File Select button title.</note>
+        <note priority="1" from="meaning">kendo.chat.fileSelectButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="406556908892844416" datatype="html">
+        <source>Remove reply</source>
+        <target state="new">Remove reply</target>
+        <note priority="1" from="description">Sets the title of the icon which removes the reply reference in the Message Box.</note>
+        <note priority="1" from="meaning">kendo.chat.removeReplyTitle</note>
+      </trans-unit>
+      <trans-unit id="7215857334862552908" datatype="html">
+        <source>Remove file</source>
+        <target state="new">Remove file</target>
+        <note priority="1" from="description">Sets the title of the icon which removes a selected file in the Message Box.</note>
+        <note priority="1" from="meaning">kendo.chat.removeFileTitle</note>
+      </trans-unit>
+      <trans-unit id="9068610059251555896" datatype="html">
+        <source>Expand message</source>
+        <target state="new">Expand message</target>
+        <note priority="1" from="description">Sets the title of the icon which demonstrates that the message can be expanded.</note>
+        <note priority="1" from="meaning">kendo.chat.expandTitle</note>
+      </trans-unit>
+      <trans-unit id="6807214201451463072" datatype="html">
+        <source>Collapse message</source>
+        <target state="new">Collapse message</target>
+        <note priority="1" from="description">Sets the title of the icon which demonstrates that the message can be collapsed.</note>
+        <note priority="1" from="meaning">kendo.chat.collapseTitle</note>
+      </trans-unit>
+      <trans-unit id="7195888667720363784" datatype="html">
+        <source>File actions</source>
+        <target state="new">File actions</target>
+        <note priority="1" from="description">Sets the title of the DropDownButton which opens the File actions.</note>
+        <note priority="1" from="meaning">kendo.chat.fileActionsTitle</note>
+      </trans-unit>
+      <trans-unit id="3661612882064430484" datatype="html">
+        <source>Download all</source>
+        <target state="new">Download all</target>
+        <note priority="1" from="description">Sets the text that is displayed in the download section of the message.</note>
+        <note priority="1" from="meaning">kendo.chat.downloadAllFilesText</note>
+      </trans-unit>
+      <trans-unit id="1010880366767571621" datatype="html">
+        <source>Command Menu</source>
+        <target state="new">Command Menu</target>
+        <note priority="1" from="description">Sets the Commands button title.</note>
+        <note priority="1" from="meaning">kendo.inlineaiprompt.commandsButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="9085427559188682621" datatype="html">
+        <source>Generate</source>
+        <target state="new">Generate</target>
+        <note priority="1" from="description">Sets the Generate button title.</note>
+        <note priority="1" from="meaning">kendo.inlineaiprompt.generateButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="2590843554749918306" datatype="html">
+        <source>Speech to Text</source>
+        <target state="new">Speech to Text</target>
+        <note priority="1" from="description">Sets the Speech to Text button title.</note>
+        <note priority="1" from="meaning">kendo.inlineaiprompt.speechToTextButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="8234356941603710748" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.timepicker.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="209867771258579364" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.datetimepicker.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="1629861989129780875" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.daterangepopup.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="2751256307687336804" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.autocomplete.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="4142554698931256787" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.combobox.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="556240542262904675" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.dropdownlist.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="2754211517825870456" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode.</note>
+        <note priority="1" from="meaning">kendo.multiselect.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="2841843596196548164" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Use &amp;quot;{customValue}&amp;quot;&apos; }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ &apos;Use &amp;quot;{customValue}&amp;quot;&apos; }}"/>
+        </target>
+        <note priority="1" from="description">The text displayed when the user types a custom value that is not in the list of options.</note>
+        <note priority="1" from="meaning">kendo.multiselect.useCustomValueText</note>
+      </trans-unit>
+      <trans-unit id="7258725961071007999" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.multicolumncombobox.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="185759744796272232" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.dropdowntree.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="8141790304731848087" datatype="html">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+        <note priority="1" from="description">The text for the input&apos;s placeholder when filtering is enabled</note>
+        <note priority="1" from="meaning">kendo.dropdowntree.filterInputPlaceholder</note>
+      </trans-unit>
+      <trans-unit id="188351733542080722" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.multiselecttree.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="4679061155177474576" datatype="html">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+        <note priority="1" from="description">The text for the input&apos;s placeholder when filtering is enabled</note>
+        <note priority="1" from="meaning">kendo.multiselecttree.filterInputPlaceholder</note>
+      </trans-unit>
+      <trans-unit id="3889540174598935182" datatype="html">
+        <source>Clear sorting</source>
+        <target state="new">Clear sorting</target>
+        <note priority="1" from="description">The text of the clear sort button located in the Sort Toolbar Tool and adaptive Sort Toolbar Tool</note>
+        <note priority="1" from="meaning">kendo.grid.sortClearButton</note>
+      </trans-unit>
+      <trans-unit id="9168588510925970759" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.grid.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="3032947388907831165" datatype="html">
+        <source>Back</source>
+        <target state="new">Back</target>
+        <note priority="1" from="description">The title of the Back button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode</note>
+        <note priority="1" from="meaning">kendo.grid.adaptiveBackButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="2772170955056157142" datatype="html">
+        <source>Clear all filters</source>
+        <target state="new">Clear all filters</target>
+        <note priority="1" from="description">The text of the clear all filters button located in the Filter Toolbar Tool and adaptive Filter Toolbar Tool</note>
+        <note priority="1" from="meaning">kendo.grid.filterClearAllButton</note>
+      </trans-unit>
+      <trans-unit id="4359654206355355642" datatype="html">
+        <source>Clear grouping</source>
+        <target state="new">Clear grouping</target>
+        <note priority="1" from="description">The text of the clear grouping button in the Group Toolbar Tool and adaptive Group Toolbar Tool</note>
+        <note priority="1" from="meaning">kendo.grid.groupClearButton</note>
+      </trans-unit>
+      <trans-unit id="8916690492108367519" datatype="html">
+        <source>Done</source>
+        <target state="new">Done</target>
+        <note priority="1" from="description">The text of the done sort button</note>
+        <note priority="1" from="meaning">kendo.grid.sortDoneButton</note>
+      </trans-unit>
+      <trans-unit id="4061944289676905117" datatype="html">
+        <source>Done</source>
+        <target state="new">Done</target>
+        <note priority="1" from="description">The text of the done group button in the adaptive Group Toolbar Tool</note>
+        <note priority="1" from="meaning">kendo.grid.groupDoneButton</note>
+      </trans-unit>
+      <trans-unit id="7314450869565084512" datatype="html">
+        <source>Filter</source>
+        <target state="new">Filter</target>
+        <note priority="1" from="description">The button text of the Filter toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.filterToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="184113861713836081" datatype="html">
+        <source>Selected fields are visible</source>
+        <target state="new">Selected fields are visible</target>
+        <note priority="1" from="description">The subtitle for the adaptive Grid Column Chooser and Column Chooser toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.columnsSubtitle</note>
+      </trans-unit>
+      <trans-unit id="162659422292570285" datatype="html">
+        <source>Filter by</source>
+        <target state="new">Filter by</target>
+        <note priority="1" from="description">The title that is displayed in the adaptive Filter Toolbar Tool and Filter Menu</note>
+        <note priority="1" from="meaning">kendo.grid.adaptiveFilterTitle</note>
+      </trans-unit>
+      <trans-unit id="2786911556833668935" datatype="html">
+        <source>Operators</source>
+        <target state="new">Operators</target>
+        <note priority="1" from="description">The title that is displayed in the Operators Action Sheet</note>
+        <note priority="1" from="meaning">kendo.grid.adaptiveFilterOperatorsTitle</note>
+      </trans-unit>
+      <trans-unit id="6214318901704087018" datatype="html">
+        <source>Sort by</source>
+        <target state="new">Sort by</target>
+        <note priority="1" from="description">The title that is displayed in the adaptive Sort Toolbar Tool</note>
+        <note priority="1" from="meaning">kendo.grid.adaptiveSortTitle</note>
+      </trans-unit>
+      <trans-unit id="2485670895063629970" datatype="html">
+        <source>Group by</source>
+        <target state="new">Group by</target>
+        <note priority="1" from="description">The title that is displayed in the adaptive Group Toolbar Tool.</note>
+        <note priority="1" from="meaning">kendo.grid.adaptiveGroupTitle</note>
+      </trans-unit>
+      <trans-unit id="8865756401306822247" datatype="html">
+        <source>Sort</source>
+        <target state="new">Sort</target>
+        <note priority="1" from="description">The button text of the Sort toolbar tool.</note>
+        <note priority="1" from="meaning">kendo.grid.sortToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="3045911115535127013" datatype="html">
+        <source>Edit</source>
+        <target state="new">Edit</target>
+        <note priority="1" from="description">The text for the Grid Edit toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.editToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="462120763635264955" datatype="html">
+        <source>Save</source>
+        <target state="new">Save</target>
+        <note priority="1" from="description">The text for the Grid Save toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.saveToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="1241408156530348802" datatype="html">
+        <source>Add</source>
+        <target state="new">Add</target>
+        <note priority="1" from="description">The text for the Grid Add toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.addToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="7423240346006333200" datatype="html">
+        <source>Delete</source>
+        <target state="new">Delete</target>
+        <note priority="1" from="description">The text for the Grid Remove toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.removeToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="7602015188657836350" datatype="html">
+        <source>Excel Export</source>
+        <target state="new">Excel Export</target>
+        <note priority="1" from="description">The text for the Grid Excel export toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.excelExportToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="6782951373961596291" datatype="html">
+        <source>PDF Export</source>
+        <target state="new">PDF Export</target>
+        <note priority="1" from="description">The text for the Grid PDF export toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.pdfExportToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="5621399889246683831" datatype="html">
+        <source>Group</source>
+        <target state="new">Group</target>
+        <note priority="1" from="description">The button text of the Group toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.groupToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="1116475747212994554" datatype="html">
+        <source>Add</source>
+        <target state="new">Add</target>
+        <note priority="1" from="description">The title of the built-in external editing form container when adding a new item</note>
+        <note priority="1" from="meaning">kendo.grid.externalEditingAddTitle</note>
+      </trans-unit>
+      <trans-unit id="8095124913691244419" datatype="html">
+        <source>AI Assistant</source>
+        <target state="new">AI Assistant</target>
+        <note priority="1" from="description">The text of the AI Assistant toolbar tool</note>
+        <note priority="1" from="meaning">kendo.grid.aiAssistantToolbarToolText</note>
+      </trans-unit>
+      <trans-unit id="3094662765227682723" datatype="html">
+        <source>AI Assistant</source>
+        <target state="new">AI Assistant</target>
+        <note priority="1" from="description">The text of the AI Assistant Window title</note>
+        <note priority="1" from="meaning">kendo.grid.aiAssistantWindowTitle</note>
+      </trans-unit>
+      <trans-unit id="4796892634271996257" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the AI Assistant Window close button</note>
+        <note priority="1" from="meaning">kendo.grid.aiAssistantWindowCloseTitle</note>
+      </trans-unit>
+      <trans-unit id="2445040415202808789" datatype="html">
+        <source>Maximize</source>
+        <target state="new">Maximize</target>
+        <note priority="1" from="description">The title of the AI Assistant Window maximize button</note>
+        <note priority="1" from="meaning">kendo.grid.aiAssistantWindowMaximizeTitle</note>
+      </trans-unit>
+      <trans-unit id="112973744535430991" datatype="html">
+        <source>Minimize</source>
+        <target state="new">Minimize</target>
+        <note priority="1" from="description">The title of the AI Assistant Window minimize button</note>
+        <note priority="1" from="meaning">kendo.grid.aiAssistantWindowMinimizeTitle</note>
+      </trans-unit>
+      <trans-unit id="2778700388564556938" datatype="html">
+        <source>Restore</source>
+        <target state="new">Restore</target>
+        <note priority="1" from="description">The title of the AI Assistant Window restore button</note>
+        <note priority="1" from="meaning">kendo.grid.aiAssistantWindowRestoreTitle</note>
+      </trans-unit>
+      <trans-unit id="2046809137378276064" datatype="html">
+        <source>Generated with AI</source>
+        <target state="new">Generated with AI</target>
+        <note priority="1" from="description">The title of the AI Assistant Prompt Output Card</note>
+        <note priority="1" from="meaning">kendo.grid.aiAssistantOutputCardTitle</note>
+      </trans-unit>
+      <trans-unit id="8111711080320161076" datatype="html">
+        <source>Operation is successful. Data is:</source>
+        <target state="new">Operation is successful. Data is:</target>
+        <note priority="1" from="description">The success message dispayed in the AI Assistant Prompt Output Card&apos;s body</note>
+        <note priority="1" from="meaning">kendo.grid.aiAssistantOutputCardBodyContent</note>
+      </trans-unit>
+      <trans-unit id="7032497455048586206" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{selectedColumnsCount} Selected items&apos; }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{selectedColumnsCount} Selected items&apos; }}"/>
+        </target>
+        <note priority="1" from="description">The text displayed in the Column Chooser for the number of selected columns</note>
+        <note priority="1" from="meaning">kendo.grid.columnChooserSelectedColumnsCount</note>
+      </trans-unit>
+      <trans-unit id="433604984805179226" datatype="html">
+        <source>Search...</source>
+        <target state="new">Search...</target>
+        <note priority="1" from="description">The placeholder text for the multi-checkbox filter search input</note>
+        <note priority="1" from="meaning">kendo.grid.multiCheckboxFilterSearchPlaceholder</note>
+      </trans-unit>
+      <trans-unit id="3651788616608467740" datatype="html">
+        <source>Select all</source>
+        <target state="new">Select all</target>
+        <note priority="1" from="description">The label for the multi-checkbox filter select all option</note>
+        <note priority="1" from="meaning">kendo.grid.multiCheckboxFilterSelectAllLabel</note>
+      </trans-unit>
+      <trans-unit id="8277002641581419655" datatype="html">
+        <source>
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{selectedItemsCount} selected items&apos; }}"/>
+        </source>
+        <target state="new">
+          <x id="INTERPOLATION" equiv-text="{{ &apos;{selectedItemsCount} selected items&apos; }}"/>
+        </target>
+        <note priority="1" from="description">The text for the multi-checkbox filter selected items count</note>
+        <note priority="1" from="meaning">kendo.grid.multiCheckboxFilterSelectedItemsCount</note>
+      </trans-unit>
+      <trans-unit id="8217146340038112583" datatype="html">
+        <source>Close</source>
+        <target state="new">Close</target>
+        <note priority="1" from="description">The title of the Close button of the ActionSheet that is rendered instead of the Popup when using small screen devices in adaptive mode.</note>
+        <note priority="1" from="meaning">kendo.colorpicker.adaptiveCloseButtonTitle</note>
+      </trans-unit>
+      <trans-unit id="4188738831406625715" datatype="html">
+        <source>Select color</source>
+        <target state="new">Select color</target>
+        <note priority="1" from="description">The text set as aria-label on the toggle button.</note>
+        <note priority="1" from="meaning">kendo.colorpicker.toggleButtonLabel</note>
+      </trans-unit>
+      <trans-unit id="3149650400352762187" datatype="html">
+        <source>Clear</source>
+        <target state="new">Clear</target>
+        <note priority="1" from="description">The text for the Clear button</note>
+        <note priority="1" from="meaning">kendo.upload.clearSelectedFiles</note>
+      </trans-unit>
+      <trans-unit id="6841325639465061593" datatype="html">
+        <source>Drop files here to upload</source>
+        <target state="new">Drop files here to upload</target>
+        <note priority="1" from="description">The drop zone hint</note>
+        <note priority="1" from="meaning">kendo.upload.dropFilesHere</note>
+      </trans-unit>
+      <trans-unit id="1052757211842837603" datatype="html">
+        <source>files</source>
+        <target state="new">files</target>
+        <note priority="1" from="description">The status message for a batch of files</note>
+        <note priority="1" from="meaning">kendo.upload.filesBatchStatus</note>
+      </trans-unit>
+      <trans-unit id="5934737755327152932" datatype="html">
+        <source>files failed to upload.</source>
+        <target state="new">files failed to upload.</target>
+        <note priority="1" from="description">The status message for a batch of files after failed upload</note>
+        <note priority="1" from="meaning">kendo.upload.filesBatchStatusFailed</note>
+      </trans-unit>
+      <trans-unit id="4678582374156884660" datatype="html">
+        <source>files successfully uploaded.</source>
+        <target state="new">files successfully uploaded.</target>
+        <note priority="1" from="description">The status message for a batch of files after successful upload</note>
+        <note priority="1" from="meaning">kendo.upload.filesBatchStatusUploaded</note>
+      </trans-unit>
+      <trans-unit id="372927175642445287" datatype="html">
+        <source>File failed to upload.</source>
+        <target state="new">File failed to upload.</target>
+        <note priority="1" from="description">The file status message after failed upload</note>
+        <note priority="1" from="meaning">kendo.upload.fileStatusFailed</note>
+      </trans-unit>
+      <trans-unit id="6873833183057253097" datatype="html">
+        <source>File successfully uploaded.</source>
+        <target state="new">File successfully uploaded.</target>
+        <note priority="1" from="description">The file status message after successful upload</note>
+        <note priority="1" from="meaning">kendo.upload.fileStatusUploaded</note>
+      </trans-unit>
+      <trans-unit id="3443987862990095035" datatype="html">
+        <source>Paused</source>
+        <target state="new">Paused</target>
+        <note priority="1" from="description">The header status message when the file upload is paused</note>
+        <note priority="1" from="meaning">kendo.upload.headerStatusPaused</note>
+      </trans-unit>
+      <trans-unit id="9210921126598204924" datatype="html">
+        <source>Done</source>
+        <target state="new">Done</target>
+        <note priority="1" from="description">The header status message after file upload completion</note>
+        <note priority="1" from="meaning">kendo.upload.headerStatusUploaded</note>
+      </trans-unit>
+      <trans-unit id="6336385612571616916" datatype="html">
+        <source>Uploading...</source>
+        <target state="new">Uploading...</target>
+        <note priority="1" from="description">The header status message during file upload</note>
+        <note priority="1" from="meaning">kendo.upload.headerStatusUploading</note>
+      </trans-unit>
+      <trans-unit id="2924979995055776233" datatype="html">
+        <source>File type not allowed.</source>
+        <target state="new">File type not allowed.</target>
+        <note priority="1" from="description">The text for the invalid allowed extensions restriction message</note>
+        <note priority="1" from="meaning">kendo.upload.invalidFileExtension</note>
+      </trans-unit>
+      <trans-unit id="6669611501469754964" datatype="html">
+        <source>File size too large.</source>
+        <target state="new">File size too large.</target>
+        <note priority="1" from="description">The text for the invalid max file size restriction message</note>
+        <note priority="1" from="meaning">kendo.upload.invalidMaxFileSize</note>
+      </trans-unit>
+      <trans-unit id="4319370666600195324" datatype="html">
+        <source>File size too small.</source>
+        <target state="new">File size too small.</target>
+        <note priority="1" from="description">The text for the invalid min file size restriction message</note>
+        <note priority="1" from="meaning">kendo.upload.invalidMinFileSize</note>
+      </trans-unit>
+      <trans-unit id="2303075305806756763" datatype="html">
+        <source>Pause</source>
+        <target state="new">Pause</target>
+        <note priority="1" from="description">The text for the Pause button</note>
+        <note priority="1" from="meaning">kendo.upload.pause</note>
+      </trans-unit>
+      <trans-unit id="8941644637700654622" datatype="html">
+        <source>Remove</source>
+        <target state="new">Remove</target>
+        <note priority="1" from="description">The text for the Remove button</note>
+        <note priority="1" from="meaning">kendo.upload.remove</note>
+      </trans-unit>
+      <trans-unit id="4056147860620862675" datatype="html">
+        <source>Resume</source>
+        <target state="new">Resume</target>
+        <note priority="1" from="description">The text for the Resume button</note>
+        <note priority="1" from="meaning">kendo.upload.resume</note>
+      </trans-unit>
+      <trans-unit id="8567960350691997515" datatype="html">
+        <source>Retry</source>
+        <target state="new">Retry</target>
+        <note priority="1" from="description">The text for the Retry button</note>
+        <note priority="1" from="meaning">kendo.upload.retry</note>
+      </trans-unit>
+      <trans-unit id="2943392613806104166" datatype="html">
+        <source>Select files...</source>
+        <target state="new">Select files...</target>
+        <note priority="1" from="description">The text for the Select button</note>
+        <note priority="1" from="meaning">kendo.upload.select</note>
+      </trans-unit>
+      <trans-unit id="4936937427147701307" datatype="html">
+        <source>Upload</source>
+        <target state="new">Upload</target>
+        <note priority="1" from="description">The text for the Upload files button</note>
+        <note priority="1" from="meaning">kendo.upload.uploadSelectedFiles</note>
+      </trans-unit>
+      <trans-unit id="4908353240416682626" datatype="html">
+        <source>Drag and drop files here to upload</source>
+        <target state="new">Drag and drop files here to upload</target>
+        <note priority="1" from="description">Sets the external drop-zone hint</note>
+        <note priority="1" from="meaning">kendo.uploaddropzone.externalDropFilesHere</note>
+      </trans-unit>
+      <trans-unit id="660278350824582724" datatype="html">
+        <source>Drop files here to select</source>
+        <target state="new">Drop files here to select</target>
+        <note priority="1" from="description">The drop zone hint</note>
+        <note priority="1" from="meaning">kendo.fileselect.dropFilesHere</note>
+      </trans-unit>
+      <trans-unit id="4664331691591215211" datatype="html">
+        <source>File type not allowed.</source>
+        <target state="new">File type not allowed.</target>
+        <note priority="1" from="description">The text for the invalid allowed extensions restriction message</note>
+        <note priority="1" from="meaning">kendo.fileselect.invalidFileExtension</note>
+      </trans-unit>
+      <trans-unit id="7793317101233274017" datatype="html">
+        <source>File size too large.</source>
+        <target state="new">File size too large.</target>
+        <note priority="1" from="description">The text for the invalid max file size restriction message</note>
+        <note priority="1" from="meaning">kendo.fileselect.invalidMaxFileSize</note>
+      </trans-unit>
+      <trans-unit id="6852116465202092102" datatype="html">
+        <source>File size too small.</source>
+        <target state="new">File size too small.</target>
+        <note priority="1" from="description">The text for the invalid min file size restriction message</note>
+        <note priority="1" from="meaning">kendo.fileselect.invalidMinFileSize</note>
+      </trans-unit>
+      <trans-unit id="8968399983135301359" datatype="html">
+        <source>Remove</source>
+        <target state="new">Remove</target>
+        <note priority="1" from="description">The text for the Remove button</note>
+        <note priority="1" from="meaning">kendo.fileselect.remove</note>
+      </trans-unit>
+      <trans-unit id="3297892120691863975" datatype="html">
+        <source>Select files...</source>
+        <target state="new">Select files...</target>
+        <note priority="1" from="description">The text for the Select button</note>
+        <note priority="1" from="meaning">kendo.fileselect.select</note>
       </trans-unit>
     </body>
   </file>

@@ -91,11 +91,11 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
             nameOrEmailQuery: search,
           })
           .pipe(
-            tapResponse(
-              (users) => this.updateUsers(users),
-              (e) => console.error(e),
-              () => this.updateUsersIsLoading(false),
-            ),
+            tapResponse({
+    next: (users) => this.updateUsers(users),
+    error: (e) => console.error(e),
+    complete: () => this.updateUsersIsLoading(false)
+}),
           );
       }),
     ),
@@ -111,11 +111,11 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
             orderByProperty: 'Name',
           })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateOrganizations(organizations),
-              (e) => console.error(e),
-              () => this.updateOrganizationsIsLoading(false),
-            ),
+            tapResponse({
+    next: (organizations) => this.updateOrganizations(organizations),
+    error: (e) => console.error(e),
+    complete: () => this.updateOrganizationsIsLoading(false)
+}),
           );
       }),
     ),
@@ -132,14 +132,14 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
         return this.apiItContractService
           .getManyItContractV2GetItContracts({ organizationUuid, nameContent: search })
           .pipe(
-            tapResponse(
-              (contracts) => {
-                const validContractsTree = removeNodeAndChildren(mapContractsToTree(contracts), contractUuid);
-                this.updateValidParentContracts(mapTreeToIdentityNamePairs(validContractsTree));
-              },
-              (e) => console.error(e),
-              () => this.updateContractsLoading(false),
-            ),
+            tapResponse({
+    next: (contracts) => {
+        const validContractsTree = removeNodeAndChildren(mapContractsToTree(contracts), contractUuid);
+        this.updateValidParentContracts(mapTreeToIdentityNamePairs(validContractsTree));
+    },
+    error: (e) => console.error(e),
+    complete: () => this.updateContractsLoading(false)
+}),
           );
       }),
     ),

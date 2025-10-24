@@ -15,7 +15,7 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
 import { ScrollbarDialogComponent } from '../../../../shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
-import { NgIf } from '@angular/common';
+
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
@@ -33,14 +33,13 @@ import { ButtonComponent } from '../../../../shared/components/buttons/button/bu
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
-    NgIf,
     ParagraphComponent,
     DropdownComponent,
     TextAreaComponent,
     RichTextEditorComponent,
     DialogActionsComponent,
-    ButtonComponent,
-  ],
+    ButtonComponent
+],
 })
 export class EditPublicMessageDialogComponent extends BaseComponent implements OnInit {
   @Input() publicMessage!: PublicMessage;

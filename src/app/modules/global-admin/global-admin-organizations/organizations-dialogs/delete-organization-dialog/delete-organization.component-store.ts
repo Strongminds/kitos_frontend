@@ -86,11 +86,11 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
       mergeMap((organizationUuid) =>
         this.apiService.getSingleOrganizationsInternalV2GetConflicts({ organizationUuid }).pipe(
           map((conflictsDto) => mapConflictsDtoToOrganizationRemovalConflicts(conflictsDto)),
-          tapResponse(
-            (conflicts) => this.updateConsequences(conflicts),
-            (e) => console.error(e),
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+    next: (conflicts) => this.updateConsequences(conflicts),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
         ),
       ),
     ),

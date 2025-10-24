@@ -1,10 +1,10 @@
-<ng-container *ngIf="optionTypeItems$ | async as optionTypeItems">
+@if (optionTypeItems$ | async; as optionTypeItems) {
   <app-accordion
     [title]="title"
     [disabled]="disableAccordion"
     [isExpanded]="expandedByDefault"
     [tooltipText]="showEditButton ? undefined : onlyEditableByGlobalAdminText"
-  >
+    >
     <app-local-option-grid
       [loading]="(isLoading$ | async) !== false"
       [optionType]="optionType"
@@ -17,4 +17,4 @@
       [showExternalUse]="showExternalUse"
     ></app-local-option-grid>
   </app-accordion>
-</ng-container>
+}

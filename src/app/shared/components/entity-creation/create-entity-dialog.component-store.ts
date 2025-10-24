@@ -51,21 +51,21 @@ export class CreateEntityDialogComponentStore extends ComponentStore<State> {
         switch (entityType) {
           case 'it-contract':
             return this.contractService.getManyItContractV2GetItContracts({ nameEquals: searchObject.nameEquals }).pipe(
-              tapResponse(
-                (contracts) => this.setAlreadyExists(contracts.length),
-                (e) => console.error(e),
-                () => this.setLoading(false),
-              ),
+              tapResponse({
+    next: (contracts) => this.setAlreadyExists(contracts.length),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
             );
           case 'it-system':
             return this.systemService
               .getManyItSystemInternalV2GetItSystems({ nameEquals: searchObject.nameEquals })
               .pipe(
-                tapResponse(
-                  (systems) => this.setAlreadyExists(systems.length),
-                  (e) => console.error(e),
-                  () => this.setLoading(false),
-                ),
+                tapResponse({
+    next: (systems) => this.setAlreadyExists(systems.length),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
               );
           case 'it-interface': {
             const request: { nameEquals?: string; interfaceId?: string } = { nameEquals: searchObject.nameEquals };
@@ -73,11 +73,11 @@ export class CreateEntityDialogComponentStore extends ComponentStore<State> {
               request.interfaceId = searchObject.extraSearchParameter;
             }
             return this.interfaceService.getManyItInterfaceV2GetItInterfaces(request).pipe(
-              tapResponse(
-                (interfaces) => this.setAlreadyExists(interfaces.length),
-                (e) => console.error(e),
-                () => this.setLoading(false),
-              ),
+              tapResponse({
+    next: (interfaces) => this.setAlreadyExists(interfaces.length),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
             );
           }
           case 'data-processing-registration':
@@ -86,11 +86,11 @@ export class CreateEntityDialogComponentStore extends ComponentStore<State> {
                 nameEquals: searchObject.nameEquals,
               })
               .pipe(
-                tapResponse(
-                  (registrations) => this.setAlreadyExists(registrations.length),
-                  (e) => console.error(e),
-                  () => this.setLoading(false),
-                ),
+                tapResponse({
+    next: (registrations) => this.setAlreadyExists(registrations.length),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
               );
           default:
             throw `Entity of type: ${entityType} is not implemented`;

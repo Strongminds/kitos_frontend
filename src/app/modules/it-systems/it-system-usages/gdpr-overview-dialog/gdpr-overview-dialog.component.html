@@ -1,10 +1,12 @@
 <app-dialog backgroundColor="grey" title="GDPR Rapporter" i18n-title>
   <app-overview-header>
-    <app-paragraph i18n *ngIf="anyOverviewFiltersApplied$ | async" paragraphSize="x-small">
+    @if (anyOverviewFiltersApplied$ | async) {
+      <app-paragraph i18n paragraphSize="x-small">
       <app-info-icon></app-info-icon>
       Aktive filtre i "{{ entityText }}"-overblikket er på forhånd anvendt i GDPR-overblikket. <br>
       Der kan filtreres yderligere i GDPR-overblikket herunder.
     </app-paragraph>
+    }
     <app-button buttonStyle="secondary" (buttonClick)="exportToExcel()" class="push-right" i18n>
       <app-export-icon /> Eksporter
     </app-button>

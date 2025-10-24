@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -39,7 +39,6 @@ import { RelationGridComponent } from './relation-table/relation-grid.component'
   styleUrls: ['./it-system-usage-details-relations.component.scss'],
   providers: [ItSystemUsageDetailsRelationsComponentStore],
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     StandardVerticalContentGridComponent,
@@ -47,8 +46,8 @@ import { RelationGridComponent } from './relation-table/relation-grid.component'
     CollectionExtensionButtonComponent,
     LoadingComponent,
     AsyncPipe,
-    SegmentComponent,
-  ],
+    SegmentComponent
+],
 })
 export class ItSystemUsageDetailsRelationsComponent extends BaseComponent implements OnInit {
   public selected = ItSystemUsageRelationSegmentOption.Outgoing;

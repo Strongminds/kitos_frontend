@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -46,14 +46,13 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
   styleUrls: ['it-contracts.component.scss'],
   imports: [
     OverviewHeaderComponent,
-    NgIf,
     GridOptionsButtonComponent,
     ExportMenuButtonComponent,
     HideShowButtonComponent,
     CreateEntityButtonComponent,
     GridComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ITContractsComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectContractGridLoading);

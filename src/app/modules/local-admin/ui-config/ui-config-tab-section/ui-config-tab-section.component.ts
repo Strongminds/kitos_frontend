@@ -8,7 +8,7 @@ import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-cust
 import { selectUIConfigLoading } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AccordionComponent } from '../../../../shared/components/accordion/accordion.component';
 import { DividerComponent } from '../../../../shared/components/divider/divider.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { CheckboxButtonComponent } from '../../../../shared/components/buttons/checkbox-button/checkbox-button.component';
@@ -23,15 +23,13 @@ import { APICustomizedUINodeResponseDTO } from 'src/app/api/v2';
   imports: [
     AccordionComponent,
     DividerComponent,
-    NgIf,
     ParagraphComponent,
     StandardVerticalContentGridComponent,
-    NgFor,
     CheckboxButtonComponent,
     TooltipComponent,
     InfoIconComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class UiConfigTabSectionComponent {
   @Input() tabViewModel!: UIConfigNodeViewModel;

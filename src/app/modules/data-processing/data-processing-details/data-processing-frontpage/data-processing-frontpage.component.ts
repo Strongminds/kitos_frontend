@@ -38,7 +38,7 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
 import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
@@ -58,7 +58,6 @@ import { SubProcessorsTableComponent } from './sub-processors-table/sub-processo
   imports: [
     CardComponent,
     CardHeaderComponent,
-    NgIf,
     StatusChipComponent,
     FormGridComponent,
     FormsModule,
@@ -72,8 +71,8 @@ import { SubProcessorsTableComponent } from './sub-processors-table/sub-processo
     ThirdCountriesTableComponent,
     ProcessorsTableComponent,
     SubProcessorsTableComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DataProcessingFrontpageComponent extends BaseComponent implements OnInit {
   public readonly basisForTransferTypes$ = this.store.select(

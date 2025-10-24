@@ -36,10 +36,10 @@ export class ExternalReferencesComponentStore extends ComponentStore<State> {
       return entityUuid$.pipe(
         switchMap((entityUuid) =>
           this.getExternalReferencesMethod(entityType)(entityUuid).pipe(
-            tapResponse(
-              (externalReferences) => this.setExternalReferences(externalReferences),
-              (e) => console.error(e),
-            ),
+            tapResponse({
+    next: (externalReferences) => this.setExternalReferences(externalReferences),
+    error: (e) => console.error(e)
+}),
           ),
         ),
       );

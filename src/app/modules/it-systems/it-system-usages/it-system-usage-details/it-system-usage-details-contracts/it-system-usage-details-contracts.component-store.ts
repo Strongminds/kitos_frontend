@@ -55,11 +55,11 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
         return this.contractsService
           .getManyItContractV2GetItContracts({ systemUsageUuid: systemUsageUuid, orderByProperty: 'Name' })
           .pipe(
-            tapResponse(
-              (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
-              (e) => console.error(e),
-              () => this.updateAssociatedContractsIsLoading(false),
-            ),
+            tapResponse({
+    next: (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
+    error: (e) => console.error(e),
+    complete: () => this.updateAssociatedContractsIsLoading(false)
+}),
           );
       }),
     ),

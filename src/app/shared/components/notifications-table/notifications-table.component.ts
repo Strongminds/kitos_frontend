@@ -28,7 +28,7 @@ import { NotificationService } from '../../services/notification.service';
 import { NotificationsTableDialogComponent } from './notifications-table-dialog/notifications-table-dialog.component';
 import { NotificationsTableSentDialogComponent } from './notifications-table-sent-dialog/notifications-table-sent-dialog.component';
 import { NotificationsTableComponentStore } from './notifications-table.component-store';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { StandardVerticalContentGridComponent } from '../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { NativeTableComponent } from '../native-table/native-table.component';
 import { ParagraphComponent } from '../paragraph/paragraph.component';
@@ -49,10 +49,8 @@ import { LoadingComponent } from '../loading/loading.component';
   styleUrls: ['./notifications-table.component.scss'],
   providers: [NotificationsTableComponentStore],
   imports: [
-    NgIf,
     StandardVerticalContentGridComponent,
     NativeTableComponent,
-    NgFor,
     ParagraphComponent,
     BooleanCircleComponent,
     TableRowActionsComponent,
@@ -64,8 +62,8 @@ import { LoadingComponent } from '../loading/loading.component';
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class NotificationsTableComponent extends BaseComponent implements OnInit {
   @Input() entityUuid!: string;

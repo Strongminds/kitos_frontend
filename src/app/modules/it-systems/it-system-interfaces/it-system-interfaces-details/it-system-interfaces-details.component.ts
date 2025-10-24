@@ -24,7 +24,7 @@ import {
   selectInterfaceUuid,
   selectIsInterfaceLoading,
 } from 'src/app/store/it-system-interfaces/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { DetailsHeaderComponent } from '../../../../shared/components/details-header/details-header.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
@@ -36,15 +36,14 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
   templateUrl: './it-system-interfaces-details.component.html',
   styleUrl: './it-system-interfaces-details.component.scss',
   imports: [
-    NgIf,
     BreadcrumbsComponent,
     DetailsHeaderComponent,
     ButtonComponent,
     NavigationDrawerComponent,
     RouterOutlet,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItSystemInterfacesDetailsComponent extends BaseComponent implements OnInit {
   private readonly interfacesRootPath = `${AppPath.itSystems}/${AppPath.itInterfaces}`;

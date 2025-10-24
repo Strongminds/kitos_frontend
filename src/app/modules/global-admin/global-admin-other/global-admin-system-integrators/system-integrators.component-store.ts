@@ -34,13 +34,13 @@ export class SystemIntegratorComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       switchMap(() =>
         this.userApiService.getManyGlobalUserInternalV2GetSystemIntegrators().pipe(
-          tapResponse(
-            (response: APIUserReferenceResponseDTO[]) => this.setSystemIntegrators(response.map(toShallowUser)),
-            (e) => {
-              console.error(e);
-            },
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+    next: (response: APIUserReferenceResponseDTO[]) => this.setSystemIntegrators(response.map(toShallowUser)),
+    error: (e) => {
+        console.error(e);
+    },
+    complete: () => this.setLoading(false)
+}),
         ),
       ),
     ),

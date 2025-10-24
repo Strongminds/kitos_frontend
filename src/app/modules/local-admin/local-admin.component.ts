@@ -13,7 +13,7 @@ import {
   selectShowItSystemModule,
 } from 'src/app/store/organization/selectors';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CheckboxButtonComponent } from '../../shared/components/buttons/checkbox-button/checkbox-button.component';
 import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
 import { HelpButtonComponent } from '../../shared/components/help-button/help-button.component';
@@ -30,14 +30,13 @@ interface ModuleTabInfo {
   templateUrl: './local-admin.component.html',
   styleUrl: './local-admin.component.scss',
   imports: [
-    NgIf,
     CheckboxButtonComponent,
     ParagraphComponent,
     HelpButtonComponent,
     NavigationDrawerComponent,
     RouterOutlet,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class LocalAdminComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { combineLatest, map, of } from 'rxjs';
@@ -20,7 +20,7 @@ import { LocalGridComponent } from '../../../../shared/components/local-grid/loc
   selector: 'app-gdpr-overview',
   templateUrl: './gdpr-overview.component.html',
   styleUrl: './gdpr-overview.component.scss',
-  imports: [NgIf, LocalGridComponent, AsyncPipe],
+  imports: [LocalGridComponent, AsyncPipe],
 })
 export class GdprOverviewComponent {
   public readonly systemUsageItSystemUuids$ = this.store.select(selectGridDataItSystemUuids);

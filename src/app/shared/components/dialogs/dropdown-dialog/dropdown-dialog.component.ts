@@ -1,4 +1,4 @@
-import { AsyncPipe, NgFor, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -26,10 +26,8 @@ import { DialogComponent } from '../dialog/dialog.component';
     DialogActionsComponent,
     ButtonComponent,
     AsyncPipe,
-    NgIf,
-    NgFor,
-    ParagraphComponent,
-  ],
+    ParagraphComponent
+],
 })
 export class DropdownDialogComponent<T> extends BaseComponent implements OnInit {
   @Input() public title!: string;

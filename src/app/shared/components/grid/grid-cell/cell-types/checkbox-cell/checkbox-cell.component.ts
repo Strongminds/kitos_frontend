@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, EventEmitter, Output } from '@angular/core';
 import { SearchPropertyPipe } from '../../../../../pipes/column-property.pipe';
 import { CheckboxComponent } from '../../../../checkbox/checkbox.component';
@@ -10,7 +10,7 @@ import { BaseCellComponent } from '../../base-cell.component';
   selector: 'app-checkbox-cell',
   templateUrl: './checkbox-cell.component.html',
   styleUrl: './checkbox-cell.component.scss',
-  imports: [NgIf, TooltipComponent, CheckboxComponent, UsageProxyCheckboxComponent, SearchPropertyPipe],
+  imports: [TooltipComponent, CheckboxComponent, UsageProxyCheckboxComponent, SearchPropertyPipe],
 })
 export class CheckboxCellComponent extends BaseCellComponent {
   @Output() public checkboxChange = new EventEmitter<boolean>();

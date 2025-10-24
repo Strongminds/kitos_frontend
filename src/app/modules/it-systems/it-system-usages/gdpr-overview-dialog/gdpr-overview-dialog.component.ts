@@ -8,14 +8,14 @@ import { ExportIconComponent } from '../../../../shared/components/icons/export-
 import { GdprOverviewComponent } from '../gdpr-overview/gdpr-overview.component';
 import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
 import { Observable } from 'rxjs';
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { InfoIconComponent } from 'src/app/shared/components/icons/info-icon.component';
 
 @Component({
   selector: 'app-gdpr-overview-dialog',
   templateUrl: './gdpr-overview-dialog.component.html',
   styleUrl: './gdpr-overview-dialog.component.scss',
-  imports: [DialogComponent, OverviewHeaderComponent, ButtonComponent, ExportIconComponent, GdprOverviewComponent, ParagraphComponent, AsyncPipe, NgIf, InfoIconComponent],
+  imports: [DialogComponent, OverviewHeaderComponent, ButtonComponent, ExportIconComponent, GdprOverviewComponent, ParagraphComponent, AsyncPipe, InfoIconComponent],
 })
 export class GdprOverviewDialogComponent {
   @Input() anyOverviewFiltersApplied$!: Observable<boolean>;

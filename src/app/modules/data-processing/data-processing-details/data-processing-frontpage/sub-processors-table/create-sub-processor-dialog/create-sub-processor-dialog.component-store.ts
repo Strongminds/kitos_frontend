@@ -47,11 +47,11 @@ export class CreateSubProcessorDialogComponentStore extends ComponentStore<State
         return this.dprApiService
           .getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors({ dprUuid, nameQuery: search })
           .pipe(
-            tapResponse(
-              (organizations) => this.updateOrganizations(organizations),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+            tapResponse({
+    next: (organizations) => this.updateOrganizations(organizations),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoading(false)
+}),
           );
       }),
     ),

@@ -23,7 +23,7 @@ import { AccordionComponent } from '../../../../../../shared/components/accordio
 import { StandardVerticalContentGridComponent } from '../../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { DropdownComponent } from '../../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { ParagraphComponent } from '../../../../../../shared/components/paragraph/paragraph.component';
-import { NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
@@ -38,11 +38,10 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     StandardVerticalContentGridComponent,
     DropdownComponent,
     ParagraphComponent,
-    NgFor,
     CheckboxComponent,
     EditUrlSectionComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class GdprTechnicalPrecautionsSectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();

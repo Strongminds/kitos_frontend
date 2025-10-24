@@ -54,11 +54,11 @@ export class ItContractDataProcessingRegistrationsComponentStore extends Compone
             nameQuery: search,
           })
           .pipe(
-            tapResponse(
-              (dprs) => this.updateDataProcessingRegistrations(dprs),
-              (e) => console.error(e),
-              () => this.updateDataProcessingRegistrationsIsLoading(false),
-            ),
+            tapResponse({
+    next: (dprs) => this.updateDataProcessingRegistrations(dprs),
+    error: (e) => console.error(e),
+    complete: () => this.updateDataProcessingRegistrationsIsLoading(false)
+}),
           );
       }),
     ),

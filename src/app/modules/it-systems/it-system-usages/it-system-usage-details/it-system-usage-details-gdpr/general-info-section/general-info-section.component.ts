@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -48,13 +48,12 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     FormGridComponent,
     FormsModule,
     ReactiveFormsModule,
-    NgIf,
     TextBoxComponent,
     DropdownComponent,
     EditUrlSectionComponent,
     AsyncPipe,
-    TooltipComponent,
-  ],
+    TooltipComponent
+],
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
   @Input() disableLinkControl!: Observable<void>;
