@@ -1,8 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Observable, Subject, map, pairwise, startWith } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Observable, } from 'rxjs';
 import { DropdownComponent } from '../dropdown/dropdown.component';
 import { AsyncPipe } from '@angular/common';
 import { ConnectedDropdownBaseComponent } from '../connected-dropdown-base/connected-dropdown-base.component';
@@ -15,6 +14,8 @@ import { ConnectedDropdownBaseComponent } from '../connected-dropdown-base/conne
 })
 export class ConnectedDropdownComponent<T> extends ConnectedDropdownBaseComponent implements OnInit {
   @Input() public data$?: Observable<T[]>;
+  @Input() public showDescriptionLabel: boolean = true;
+  @Input() public descriptionLabelTitle?: string;
   @Output() public valueChange = new EventEmitter<string>();
 
   public onValueChange(selectedUuid?: string) {
