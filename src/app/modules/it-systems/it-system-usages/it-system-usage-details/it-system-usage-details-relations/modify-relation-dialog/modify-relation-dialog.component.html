@@ -13,6 +13,10 @@
         (filterChange)="interfaceFilterChange($event)"
         [formGroup]="formGroup"
         formName="interface"
+        [includeItemDescription]="true"
+        itemDescriptionField="interfaceId"
+        descriptionLabelTitle="Snitflade ID:"
+        i18n-descriptionLabelTitle
         i18n-text
       >
       </app-connected-dropdown>

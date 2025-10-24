@@ -1,8 +1,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { map, Observable, pairwise, startWith, Subject } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { Observable, Subject } from 'rxjs';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { MultiSelectDropdownComponent } from '../multi-select-dropdown/multi-select-dropdown.component';
 import { ConnectedDropdownBaseComponent } from '../connected-dropdown-base/connected-dropdown-base.component';
