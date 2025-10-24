@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuidRequestParams {
+export interface PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -45,7 +45,7 @@ export interface PostSingleItContractGlobalPaymentFrequencyTypesInternalV2Create
 })
 export class APIV2ItContractGlobalPaymentFrequencyTypesInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -162,17 +162,17 @@ export class APIV2ItContractGlobalPaymentFrequencyTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(requestParameters: PatchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyTypeByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

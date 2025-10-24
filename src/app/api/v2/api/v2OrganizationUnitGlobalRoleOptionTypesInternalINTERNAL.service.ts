@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuidRequestParams {
+export interface PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams {
     optionUuid: string;
     dto: APIGlobalRoleOptionUpdateRequestDTO;
 }
@@ -45,7 +45,7 @@ export interface PostSingleOrganizationUnitGlobalRoleOptionTypesInternalV2Create
 })
 export class APIV2OrganizationUnitGlobalRoleOptionTypesInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -162,17 +162,17 @@ export class APIV2OrganizationUnitGlobalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuid(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
-    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuid(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuid(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuid(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
+    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
+    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
+    public patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(requestParameters: PatchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRoleByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole.');
         }
 
         let localVarHeaders = this.defaultHeaders;

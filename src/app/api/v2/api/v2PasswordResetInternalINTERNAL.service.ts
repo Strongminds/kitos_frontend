@@ -30,11 +30,11 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSinglePasswordResetInternalV2GetPasswordResetByRequestidRequestParams {
+export interface GetSinglePasswordResetInternalV2GetPasswordResetRequestParams {
     requestId: string;
 }
 
-export interface PostSinglePasswordResetInternalV2PostPasswordResetByRequestidRequestParams {
+export interface PostSinglePasswordResetInternalV2PostPasswordResetRequestParams {
     requestId: string;
     request: APIResetPasswordRequestDTO;
 }
@@ -49,7 +49,7 @@ export interface PostSinglePasswordResetInternalV2RequestPasswordResetRequestPar
 })
 export class APIV2PasswordResetInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -113,13 +113,13 @@ export class APIV2PasswordResetInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSinglePasswordResetInternalV2GetPasswordResetByRequestid(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetByRequestidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIPasswordResetResponseDTO>;
-    public getSinglePasswordResetInternalV2GetPasswordResetByRequestid(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetByRequestidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIPasswordResetResponseDTO>>;
-    public getSinglePasswordResetInternalV2GetPasswordResetByRequestid(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetByRequestidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIPasswordResetResponseDTO>>;
-    public getSinglePasswordResetInternalV2GetPasswordResetByRequestid(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetByRequestidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIPasswordResetResponseDTO>;
+    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIPasswordResetResponseDTO>>;
+    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIPasswordResetResponseDTO>>;
+    public getSinglePasswordResetInternalV2GetPasswordReset(requestParameters: GetSinglePasswordResetInternalV2GetPasswordResetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const requestId = requestParameters.requestId;
         if (requestId === null || requestId === undefined) {
-            throw new Error('Required parameter requestId was null or undefined when calling getSinglePasswordResetInternalV2GetPasswordResetByRequestid.');
+            throw new Error('Required parameter requestId was null or undefined when calling getSinglePasswordResetInternalV2GetPasswordReset.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -171,17 +171,17 @@ export class APIV2PasswordResetInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSinglePasswordResetInternalV2PostPasswordResetByRequestid(requestParameters: PostSinglePasswordResetInternalV2PostPasswordResetByRequestidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public postSinglePasswordResetInternalV2PostPasswordResetByRequestid(requestParameters: PostSinglePasswordResetInternalV2PostPasswordResetByRequestidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public postSinglePasswordResetInternalV2PostPasswordResetByRequestid(requestParameters: PostSinglePasswordResetInternalV2PostPasswordResetByRequestidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public postSinglePasswordResetInternalV2PostPasswordResetByRequestid(requestParameters: PostSinglePasswordResetInternalV2PostPasswordResetByRequestidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSinglePasswordResetInternalV2PostPasswordReset(requestParameters: PostSinglePasswordResetInternalV2PostPasswordResetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public postSinglePasswordResetInternalV2PostPasswordReset(requestParameters: PostSinglePasswordResetInternalV2PostPasswordResetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public postSinglePasswordResetInternalV2PostPasswordReset(requestParameters: PostSinglePasswordResetInternalV2PostPasswordResetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public postSinglePasswordResetInternalV2PostPasswordReset(requestParameters: PostSinglePasswordResetInternalV2PostPasswordResetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const requestId = requestParameters.requestId;
         if (requestId === null || requestId === undefined) {
-            throw new Error('Required parameter requestId was null or undefined when calling postSinglePasswordResetInternalV2PostPasswordResetByRequestid.');
+            throw new Error('Required parameter requestId was null or undefined when calling postSinglePasswordResetInternalV2PostPasswordReset.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling postSinglePasswordResetInternalV2PostPasswordResetByRequestid.');
+            throw new Error('Required parameter request was null or undefined when calling postSinglePasswordResetInternalV2PostPasswordReset.');
         }
 
         let localVarHeaders = this.defaultHeaders;

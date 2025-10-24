@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuidRequestParams {
+export interface PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams {
     optionUuid: string;
     dto: APIGlobalRoleOptionUpdateRequestDTO;
 }
@@ -45,7 +45,7 @@ export interface PostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleReques
 })
 export class APIV2DprGlobalRoleOptionTypesInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -162,17 +162,17 @@ export class APIV2DprGlobalRoleOptionTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuid(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
-    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuid(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuid(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
-    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuid(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRoleOptionResponseDTO>;
+    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRoleOptionResponseDTO>>;
+    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRoleOptionResponseDTO>>;
+    public patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole(requestParameters: PatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole.');
         }
 
         let localVarHeaders = this.defaultHeaders;

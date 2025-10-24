@@ -30,14 +30,14 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams {
+export interface DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateRequestParams {
     /** UUID of the data processing registration */
     uuid: string;
     /** UUID of the oversight date */
     oversightDateUuid: string;
 }
 
-export interface PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams {
+export interface PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams {
     /** UUID of the data processing registration */
     uuid: string;
     /** UUID of the oversight date */
@@ -45,7 +45,7 @@ export interface PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataP
     request: APIModifyOversightDateDTO;
 }
 
-export interface PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuidRequestParams {
+export interface PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams {
     /** UUID of the data processing registration */
     uuid: string;
     request: APICreateOversightDateDTO;
@@ -57,7 +57,7 @@ export interface PostSingleDataProcessingRegistrationOversightDatesV2PostDataPro
 })
 export class APIV2DataProcessingRegistrationOversightDatesService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -122,17 +122,17 @@ export class APIV2DataProcessingRegistrationOversightDatesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid(requestParameters: DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
-    public deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid(requestParameters: DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid(requestParameters: DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid(requestParameters: DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDate(requestParameters: DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<object>;
+    public deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDate(requestParameters: DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDate(requestParameters: DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDate(requestParameters: DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDate.');
         }
         const oversightDateUuid = requestParameters.oversightDateUuid;
         if (oversightDateUuid === null || oversightDateUuid === undefined) {
-            throw new Error('Required parameter oversightDateUuid was null or undefined when calling deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid.');
+            throw new Error('Required parameter oversightDateUuid was null or undefined when calling deleteSingleDataProcessingRegistrationOversightDatesV2DeleteDataProcessingRegistrationOversightDate.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -185,21 +185,21 @@ export class APIV2DataProcessingRegistrationOversightDatesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOversightDateDTO>;
-    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOversightDateDTO>>;
-    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOversightDateDTO>>;
-    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOversightDateDTO>;
+    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOversightDateDTO>>;
+    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOversightDateDTO>>;
+    public patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate(requestParameters: PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate.');
         }
         const oversightDateUuid = requestParameters.oversightDateUuid;
         if (oversightDateUuid === null || oversightDateUuid === undefined) {
-            throw new Error('Required parameter oversightDateUuid was null or undefined when calling patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid.');
+            throw new Error('Required parameter oversightDateUuid was null or undefined when calling patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateByUuidAndOversightdateuuid.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -263,17 +263,17 @@ export class APIV2DataProcessingRegistrationOversightDatesService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuid(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOversightDateDTO>;
-    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuid(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOversightDateDTO>>;
-    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuid(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOversightDateDTO>>;
-    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuid(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIOversightDateDTO>;
+    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIOversightDateDTO>>;
+    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIOversightDateDTO>>;
+    public postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate(requestParameters: PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const uuid = requestParameters.uuid;
         if (uuid === null || uuid === undefined) {
-            throw new Error('Required parameter uuid was null or undefined when calling postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuid.');
+            throw new Error('Required parameter uuid was null or undefined when calling postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateByUuid.');
+            throw new Error('Required parameter request was null or undefined when calling postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate.');
         }
 
         let localVarHeaders = this.defaultHeaders;

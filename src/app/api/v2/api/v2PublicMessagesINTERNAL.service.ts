@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSinglePublicMessagesV2PatchByMessageuuidRequestParams {
+export interface PatchSinglePublicMessagesV2PatchRequestParams {
     messageUuid: string;
     body: APIPublicMessageRequestDTO;
 }
@@ -45,7 +45,7 @@ export interface PostSinglePublicMessagesV2PostRequestParams {
 })
 export class APIV2PublicMessagesINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -218,17 +218,17 @@ export class APIV2PublicMessagesINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSinglePublicMessagesV2PatchByMessageuuid(requestParameters: PatchSinglePublicMessagesV2PatchByMessageuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIPublicMessageResponseDTO>;
-    public patchSinglePublicMessagesV2PatchByMessageuuid(requestParameters: PatchSinglePublicMessagesV2PatchByMessageuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIPublicMessageResponseDTO>>;
-    public patchSinglePublicMessagesV2PatchByMessageuuid(requestParameters: PatchSinglePublicMessagesV2PatchByMessageuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIPublicMessageResponseDTO>>;
-    public patchSinglePublicMessagesV2PatchByMessageuuid(requestParameters: PatchSinglePublicMessagesV2PatchByMessageuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSinglePublicMessagesV2Patch(requestParameters: PatchSinglePublicMessagesV2PatchRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIPublicMessageResponseDTO>;
+    public patchSinglePublicMessagesV2Patch(requestParameters: PatchSinglePublicMessagesV2PatchRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIPublicMessageResponseDTO>>;
+    public patchSinglePublicMessagesV2Patch(requestParameters: PatchSinglePublicMessagesV2PatchRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIPublicMessageResponseDTO>>;
+    public patchSinglePublicMessagesV2Patch(requestParameters: PatchSinglePublicMessagesV2PatchRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const messageUuid = requestParameters.messageUuid;
         if (messageUuid === null || messageUuid === undefined) {
-            throw new Error('Required parameter messageUuid was null or undefined when calling patchSinglePublicMessagesV2PatchByMessageuuid.');
+            throw new Error('Required parameter messageUuid was null or undefined when calling patchSinglePublicMessagesV2Patch.');
         }
         const body = requestParameters.body;
         if (body === null || body === undefined) {
-            throw new Error('Required parameter body was null or undefined when calling patchSinglePublicMessagesV2PatchByMessageuuid.');
+            throw new Error('Required parameter body was null or undefined when calling patchSinglePublicMessagesV2Patch.');
         }
 
         let localVarHeaders = this.defaultHeaders;

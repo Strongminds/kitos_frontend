@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetManyGdprExportReportInternalV2GetGdprReportByOrganizationuuidRequestParams {
+export interface GetManyGdprExportReportInternalV2GetGdprReportRequestParams {
     organizationUuid: string;
 }
 
@@ -36,7 +36,7 @@ export interface GetManyGdprExportReportInternalV2GetGdprReportByOrganizationuui
 })
 export class APIV2GdprExportReportInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -100,13 +100,13 @@ export class APIV2GdprExportReportInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyGdprExportReportInternalV2GetGdprReportByOrganizationuuid(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportByOrganizationuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGdprReportResponseDTO>>;
-    public getManyGdprExportReportInternalV2GetGdprReportByOrganizationuuid(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportByOrganizationuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGdprReportResponseDTO>>>;
-    public getManyGdprExportReportInternalV2GetGdprReportByOrganizationuuid(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportByOrganizationuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGdprReportResponseDTO>>>;
-    public getManyGdprExportReportInternalV2GetGdprReportByOrganizationuuid(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportByOrganizationuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getManyGdprExportReportInternalV2GetGdprReport(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGdprReportResponseDTO>>;
+    public getManyGdprExportReportInternalV2GetGdprReport(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGdprReportResponseDTO>>>;
+    public getManyGdprExportReportInternalV2GetGdprReport(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGdprReportResponseDTO>>>;
+    public getManyGdprExportReportInternalV2GetGdprReport(requestParameters: GetManyGdprExportReportInternalV2GetGdprReportRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyGdprExportReportInternalV2GetGdprReportByOrganizationuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyGdprExportReportInternalV2GetGdprReport.');
         }
 
         let localVarHeaders = this.defaultHeaders;

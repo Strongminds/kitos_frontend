@@ -37,7 +37,7 @@ export interface GetManyItSystemUsageRegisteredDataCategoryTypeV2GetRequestParam
     pageSize?: number;
 }
 
-export interface GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuidRequestParams {
+export interface GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1RequestParams {
     /** register type identifier */
     registeredDataCatagoryTypeUuid: string;
     /** organization context for the type availability */
@@ -50,7 +50,7 @@ export interface GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegist
 })
 export class APIV2ItSystemUsageRegisteredDataCategoryTypeService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -191,17 +191,17 @@ export class APIV2ItSystemUsageRegisteredDataCategoryTypeService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuid(requestParameters: GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
-    public getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuid(requestParameters: GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuid(requestParameters: GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
-    public getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuid(requestParameters: GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1(requestParameters: GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIRegularOptionExtendedResponseDTO>;
+    public getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1(requestParameters: GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1(requestParameters: GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIRegularOptionExtendedResponseDTO>>;
+    public getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1(requestParameters: GetSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const registeredDataCatagoryTypeUuid = requestParameters.registeredDataCatagoryTypeUuid;
         if (registeredDataCatagoryTypeUuid === null || registeredDataCatagoryTypeUuid === undefined) {
-            throw new Error('Required parameter registeredDataCatagoryTypeUuid was null or undefined when calling getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuid.');
+            throw new Error('Required parameter registeredDataCatagoryTypeUuid was null or undefined when calling getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1ByRegistereddatacatagorytypeuuid.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemUsageRegisteredDataCategoryTypeV2GetV1.');
         }
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});

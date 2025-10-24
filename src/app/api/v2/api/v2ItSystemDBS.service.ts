@@ -26,7 +26,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuidRequestParams {
+export interface PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams {
     systemUuid: string;
     request: APILegalPropertiesUpdateRequestDTO;
 }
@@ -37,7 +37,7 @@ export interface PatchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuidRequestPa
 })
 export class APIV2ItSystemDBSService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -101,17 +101,17 @@ export class APIV2ItSystemDBSService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuid(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
-    public patchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuid(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
-    public patchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuid(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
-    public patchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuid(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemDBSV2PatchDbsProperties(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<object>;
+    public patchSingleItSystemDBSV2PatchDbsProperties(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<object>>;
+    public patchSingleItSystemDBSV2PatchDbsProperties(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<object>>;
+    public patchSingleItSystemDBSV2PatchDbsProperties(requestParameters: PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUuid = requestParameters.systemUuid;
         if (systemUuid === null || systemUuid === undefined) {
-            throw new Error('Required parameter systemUuid was null or undefined when calling patchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuid.');
+            throw new Error('Required parameter systemUuid was null or undefined when calling patchSingleItSystemDBSV2PatchDbsProperties.');
         }
         const request = requestParameters.request;
         if (request === null || request === undefined) {
-            throw new Error('Required parameter request was null or undefined when calling patchSingleItSystemDBSV2PatchDbsPropertiesBySystemuuid.');
+            throw new Error('Required parameter request was null or undefined when calling patchSingleItSystemDBSV2PatchDbsProperties.');
         }
 
         let localVarHeaders = this.defaultHeaders;

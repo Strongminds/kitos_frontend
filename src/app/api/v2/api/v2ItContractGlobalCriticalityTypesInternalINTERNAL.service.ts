@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuidRequestParams {
+export interface PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -45,7 +45,7 @@ export interface PostSingleItContractGlobalCriticalityTypesInternalV2CreateGloba
 })
 export class APIV2ItContractGlobalCriticalityTypesInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -162,17 +162,17 @@ export class APIV2ItContractGlobalCriticalityTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType(requestParameters: PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType(requestParameters: PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType(requestParameters: PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType(requestParameters: PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

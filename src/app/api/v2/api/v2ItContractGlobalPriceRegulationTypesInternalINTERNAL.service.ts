@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuidRequestParams {
+export interface PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -45,7 +45,7 @@ export interface PostSingleItContractGlobalPriceRegulationTypesInternalV2CreateG
 })
 export class APIV2ItContractGlobalPriceRegulationTypesInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -162,17 +162,17 @@ export class APIV2ItContractGlobalPriceRegulationTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType(requestParameters: PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType(requestParameters: PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType(requestParameters: PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType(requestParameters: PatchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationTypeByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType.');
         }
 
         let localVarHeaders = this.defaultHeaders;

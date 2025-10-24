@@ -30,15 +30,15 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteSingleHelpTextsInternalV2DeleteByKeyRequestParams {
+export interface DeleteSingleHelpTextsInternalV2DeleteRequestParams {
     key: string;
 }
 
-export interface GetSingleHelpTextsInternalV2GetSingleByKeyRequestParams {
+export interface GetSingleHelpTextsInternalV2GetSingleRequestParams {
     key: string;
 }
 
-export interface PatchSingleHelpTextsInternalV2PatchByKeyRequestParams {
+export interface PatchSingleHelpTextsInternalV2PatchRequestParams {
     key: string;
     dto: APIHelpTextUpdateRequestDTO;
 }
@@ -53,7 +53,7 @@ export interface PostSingleHelpTextsInternalV2PostRequestParams {
 })
 export class APIV2HelpTextsInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -117,13 +117,13 @@ export class APIV2HelpTextsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteSingleHelpTextsInternalV2DeleteByKey(requestParameters: DeleteSingleHelpTextsInternalV2DeleteByKeyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIHelpTextResponseDTO>;
-    public deleteSingleHelpTextsInternalV2DeleteByKey(requestParameters: DeleteSingleHelpTextsInternalV2DeleteByKeyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIHelpTextResponseDTO>>;
-    public deleteSingleHelpTextsInternalV2DeleteByKey(requestParameters: DeleteSingleHelpTextsInternalV2DeleteByKeyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIHelpTextResponseDTO>>;
-    public deleteSingleHelpTextsInternalV2DeleteByKey(requestParameters: DeleteSingleHelpTextsInternalV2DeleteByKeyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
+    public deleteSingleHelpTextsInternalV2Delete(requestParameters: DeleteSingleHelpTextsInternalV2DeleteRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<APIHelpTextResponseDTO>;
+    public deleteSingleHelpTextsInternalV2Delete(requestParameters: DeleteSingleHelpTextsInternalV2DeleteRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpResponse<APIHelpTextResponseDTO>>;
+    public deleteSingleHelpTextsInternalV2Delete(requestParameters: DeleteSingleHelpTextsInternalV2DeleteRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<HttpEvent<APIHelpTextResponseDTO>>;
+    public deleteSingleHelpTextsInternalV2Delete(requestParameters: DeleteSingleHelpTextsInternalV2DeleteRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: '*/*', context?: HttpContext}): Observable<any> {
         const key = requestParameters.key;
         if (key === null || key === undefined) {
-            throw new Error('Required parameter key was null or undefined when calling deleteSingleHelpTextsInternalV2DeleteByKey.');
+            throw new Error('Required parameter key was null or undefined when calling deleteSingleHelpTextsInternalV2Delete.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -228,13 +228,13 @@ export class APIV2HelpTextsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleHelpTextsInternalV2GetSingleByKey(requestParameters: GetSingleHelpTextsInternalV2GetSingleByKeyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIHelpTextResponseDTO>;
-    public getSingleHelpTextsInternalV2GetSingleByKey(requestParameters: GetSingleHelpTextsInternalV2GetSingleByKeyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIHelpTextResponseDTO>>;
-    public getSingleHelpTextsInternalV2GetSingleByKey(requestParameters: GetSingleHelpTextsInternalV2GetSingleByKeyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIHelpTextResponseDTO>>;
-    public getSingleHelpTextsInternalV2GetSingleByKey(requestParameters: GetSingleHelpTextsInternalV2GetSingleByKeyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIHelpTextResponseDTO>;
+    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIHelpTextResponseDTO>>;
+    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIHelpTextResponseDTO>>;
+    public getSingleHelpTextsInternalV2GetSingle(requestParameters: GetSingleHelpTextsInternalV2GetSingleRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const key = requestParameters.key;
         if (key === null || key === undefined) {
-            throw new Error('Required parameter key was null or undefined when calling getSingleHelpTextsInternalV2GetSingleByKey.');
+            throw new Error('Required parameter key was null or undefined when calling getSingleHelpTextsInternalV2GetSingle.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -286,17 +286,17 @@ export class APIV2HelpTextsInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleHelpTextsInternalV2PatchByKey(requestParameters: PatchSingleHelpTextsInternalV2PatchByKeyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIHelpTextResponseDTO>;
-    public patchSingleHelpTextsInternalV2PatchByKey(requestParameters: PatchSingleHelpTextsInternalV2PatchByKeyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIHelpTextResponseDTO>>;
-    public patchSingleHelpTextsInternalV2PatchByKey(requestParameters: PatchSingleHelpTextsInternalV2PatchByKeyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIHelpTextResponseDTO>>;
-    public patchSingleHelpTextsInternalV2PatchByKey(requestParameters: PatchSingleHelpTextsInternalV2PatchByKeyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIHelpTextResponseDTO>;
+    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIHelpTextResponseDTO>>;
+    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIHelpTextResponseDTO>>;
+    public patchSingleHelpTextsInternalV2Patch(requestParameters: PatchSingleHelpTextsInternalV2PatchRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const key = requestParameters.key;
         if (key === null || key === undefined) {
-            throw new Error('Required parameter key was null or undefined when calling patchSingleHelpTextsInternalV2PatchByKey.');
+            throw new Error('Required parameter key was null or undefined when calling patchSingleHelpTextsInternalV2Patch.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleHelpTextsInternalV2PatchByKey.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleHelpTextsInternalV2Patch.');
         }
 
         let localVarHeaders = this.defaultHeaders;

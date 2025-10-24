@@ -30,7 +30,7 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuidRequestParams {
+export interface PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeRequestParams {
     optionUuid: string;
     dto: APIGlobalRegularOptionUpdateRequestDTO;
 }
@@ -45,7 +45,7 @@ export interface PostSingleItContractGlobalPaymentModelTypesInternalV2CreateGlob
 })
 export class APIV2ItContractGlobalPaymentModelTypesInternalINTERNALService {
 
-    protected basePath = 'https://kitos-dev.strongminds.dk';
+    protected basePath = 'https://localhost:44300';
     public defaultHeaders = new HttpHeaders();
     public configuration = new Configuration();
     public encoder: HttpParameterCodec;
@@ -162,17 +162,17 @@ export class APIV2ItContractGlobalPaymentModelTypesInternalINTERNALService {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuidRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuidRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuidRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuid(requestParameters: PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuidRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType(requestParameters: PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
+    public patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType(requestParameters: PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType(requestParameters: PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType(requestParameters: PatchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuid.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType.');
         }
         const dto = requestParameters.dto;
         if (dto === null || dto === undefined) {
-            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelTypeByOptionuuid.');
+            throw new Error('Required parameter dto was null or undefined when calling patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
