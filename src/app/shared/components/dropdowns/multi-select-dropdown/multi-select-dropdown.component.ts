@@ -1,3 +1,4 @@
+import { NgFor, NgIf } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -10,14 +11,13 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { combineLatest, debounceTime, filter, map, Subject } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { NgMultiLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import { debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { NgSelectComponent, NgOptionTemplateDirective, NgMultiLabelTemplateDirective } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
-import { NgIf, NgFor } from '@angular/common';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 
@@ -81,7 +81,9 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   public readonly loadingText = $localize`Henter data`;
   public readonly notFoundText = $localize`Ingen data fundet`;
 
-  public description?: string;
+  protected readonly formValueSubject$ = new Subject<MultiSelectDropdownItem<T>[]>();
+
+  public descriptions?: string[];
 
   constructor(
     private el: ElementRef,
@@ -96,6 +98,8 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   public selectedValuesModel: MultiSelectDropdownItem<T>[] = [];
 
   ngOnInit() {
+    this.formValueSubject$.next(this.initialSelectedValues ?? []);
+
     // Debounce update of dropdown filter with more then 1 character
     this.subscriptions.add(
       this.filter$
@@ -115,17 +119,15 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
       );
     }
 
-    // Extract possible description from data value if enabled
-    // this.subscriptions.add(
-    //   combineLatest([this.formValueSubject$, this.formDataSubject$])
-    //     .pipe(
-    //       filter(() => this.showDescription),
-    //       map(([value, data]) =>
-    //         data?.find((d: any) => !!value && d[this.valueField] === (value as any)[this.valueField]),
-    //       ),
-    //     )
-    //     .subscribe((value: any) => (this.description = value ? value[this.itemDescriptionField] : undefined)),
-    // );
+    this.subscriptions.add(
+      this.formValueSubject$
+        .pipe(filter(() => this.showDescription))
+        .subscribe((formValue: MultiSelectDropdownItem<T>[]) => {
+          this.descriptions = formValue.map((x: any) =>
+            x ? x.value[this.itemDescriptionField] ?? undefined : undefined
+          );
+        })
+    );
   }
 
   ngAfterViewInit() {
@@ -179,6 +181,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public onSelected(selectedItems: Array<MultiSelectDropdownItem<T>>) {
+    this.formValueSubject$.next(selectedItems);
     this.emitSelectedEvent(selectedItems.map((item) => item.value));
   }
 
