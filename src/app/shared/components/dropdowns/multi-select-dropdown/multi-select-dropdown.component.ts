@@ -126,7 +126,6 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
           this.descriptions = formValue
           .map((x: any) => x?.value?.[this.itemDescriptionField])
             .filter(Boolean);
-          console.log(JSON.stringify(this.descriptions));
         })
     );
   }
