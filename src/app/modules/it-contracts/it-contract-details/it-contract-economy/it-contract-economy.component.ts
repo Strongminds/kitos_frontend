@@ -23,7 +23,7 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
 import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
@@ -36,7 +36,6 @@ import { PaymentTableComponent } from './payment-table/payment-table.component';
   templateUrl: './it-contract-economy.component.html',
   styleUrl: './it-contract-economy.component.scss',
   imports: [
-    NgIf,
     CardComponent,
     CardHeaderComponent,
     FormGridComponent,
@@ -45,8 +44,8 @@ import { PaymentTableComponent } from './payment-table/payment-table.component';
     DatePickerComponent,
     DropdownComponent,
     PaymentTableComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ItContractEconomyComponent extends BaseComponent implements OnInit {
   public readonly paymentFrequencyOptions$ = this.store.select(

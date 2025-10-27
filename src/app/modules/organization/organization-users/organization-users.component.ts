@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
@@ -29,6 +29,7 @@ import {
   selectOrganizationUserGridState,
   selectOrganizationUserModifyPermissions,
 } from 'src/app/store/organization/organization-user/selectors';
+import { selectUserIsGlobalAdmin } from 'src/app/store/user-store/selectors';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
 import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
@@ -43,14 +44,13 @@ import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.com
   styleUrl: './organization-users.component.scss',
   imports: [
     OverviewHeaderComponent,
-    NgIf,
     GridOptionsButtonComponent,
     ExportMenuButtonComponent,
     HideShowButtonComponent,
     CreateEntityButtonComponent,
     GridComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class OrganizationUsersComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectOrganizationUserGridLoading);
@@ -62,6 +62,8 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   public readonly hasModificationPermission$ = this.store.select(selectOrganizationUserCanModifyAnyPermissions);
   public readonly modificationPermissions$ = this.store.select(selectOrganizationUserModifyPermissions);
   public readonly hasDeletePermission$ = this.store.select(selectOrganizationUserDeletePermissions);
+
+  public readonly isGlobalAdmin$ = this.store.select(selectUserIsGlobalAdmin);
 
   private readonly organizationUserSectionName = ORGANIZATION_USER_SECTION_NAME;
 
@@ -237,7 +239,11 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
   }
 
   public onEditUser(user: ODataOrganizationUser): void {
-    this.dialogOpenerService.openEditUserDialog(user, false);
+    this.subscriptions.add(
+      this.isGlobalAdmin$.pipe(first()).subscribe((isGlobalAdmin) => {
+        this.dialogOpenerService.openEditUserDialog(user, false, isGlobalAdmin);
+      })
+    );
   }
 
   public onDeleteUser(user: ODataOrganizationUser): void {

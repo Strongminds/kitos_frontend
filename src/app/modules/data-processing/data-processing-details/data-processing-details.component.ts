@@ -29,7 +29,7 @@ import {
   selectDprEnableReferences,
   selectDprEnableRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
 import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
@@ -40,14 +40,13 @@ import { LoadingComponent } from '../../../shared/components/loading/loading.com
   templateUrl: './data-processing-details.component.html',
   styleUrl: './data-processing-details.component.scss',
   imports: [
-    NgIf,
     BreadcrumbsComponent,
     ButtonComponent,
     NavigationDrawerComponent,
     RouterOutlet,
     LoadingComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class DataProcessingDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

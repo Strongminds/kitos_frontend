@@ -46,7 +46,7 @@ Cypress.Commands.add(
     } else {
       cy.wait('@authorize');
     }
-  },
+  }
 );
 
 Cypress.Commands.add('verifyDialogConfirmButtonDisabledByReactiveForm', (dataCySelector: string) => {
@@ -164,10 +164,6 @@ Cypress.Commands.add('verifyExternalReferenceHrefValue', (name: string, url: str
   return cy.contains(name).should('have.attr', 'href').and('include', url);
 });
 
-Cypress.Commands.add('verifyTooltipText', (text: string) => {
-  return cy.get('app-tooltip').should('have.attr', 'ng-reflect-text').and('include', text);
-});
-
 Cypress.Commands.add('clearInputText', (inputText: string) => {
   return cy.contains(inputText).parent().type('{selectAll}{backspace}');
 });
@@ -178,7 +174,7 @@ Cypress.Commands.add(
     requestAlias: string,
     propertyPath: string,
     verifyMethod: (actual: any, expectedObject: any) => boolean,
-    expectedObject: any,
+    expectedObject: any
   ) => {
     return cy
       .wait(`@${requestAlias}`)
@@ -186,7 +182,7 @@ Cypress.Commands.add(
       .then((actual) => {
         expect(verifyMethod(actual, expectedObject)).to.be.true;
       });
-  },
+  }
 );
 
 Cypress.Commands.add('verifyRequestUsingDeepEq', (requestAlias: string, propertyPath: string, expectedObject: any) => {
@@ -226,7 +222,7 @@ Cypress.Commands.add(
       })
       .get('app-popup-message')
       .should('exist');
-  },
+  }
 );
 
 Cypress.Commands.add('getByDataCy', (dataCy: string) => {
@@ -268,11 +264,6 @@ Cypress.Commands.add('testCanShowExternalReferences', () => {
       .get(expectedRow.masterReference ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon')
       .should('exist');
 
-    if (expectedRow.expectedInvalidUrl) {
-      row()
-        .first()
-        .within(() => cy.verifyTooltipText('Ugyldigt link: ' + expectedRow.expectedInvalidUrl));
-    }
     if (expectedRow.expectedValidUrl) {
       row().verifyExternalReferenceHrefValue(expectedRow.title, expectedRow.expectedValidUrl);
     }
@@ -289,7 +280,7 @@ Cypress.Commands.add(
     isEdit: boolean,
     requestUrl: string,
     responseBodyPath: string,
-    rowTitle?: string,
+    rowTitle?: string
   ) => {
     cy.interceptPatch(requestUrl, responseBodyPath, 'patchRequest');
 
@@ -338,7 +329,7 @@ Cypress.Commands.add(
         documentId: 'Document id',
         url: 'url',
         masterReference: true,
-      },
+      }
     );
 
     cy.getRowForElementContent(newReference.title)
@@ -346,11 +337,10 @@ Cypress.Commands.add(
       .within(() => {
         cy.contains(newReference.documentId);
         cy.get(newReference.masterReference ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon').should(
-          'exist',
+          'exist'
         );
-        cy.verifyTooltipText('Ugyldigt link: ' + newReference.url);
       });
-  },
+  }
 );
 
 Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
@@ -360,10 +350,10 @@ Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
     cy.get('@editorTextarea').then((element) => {
       const editorId = element.attr('id');
       const editorInstance = (win as any).tinymce.EditorManager.get().filter(
-        (editor: { id: string | undefined }) => editor.id === editorId,
+        (editor: { id: string | undefined }) => editor.id === editorId
       )[0];
       editorInstance.setContent(content);
-    }),
+    })
   );
   cy.getByDataCy(dataCySelector).click({ force: true });
 });

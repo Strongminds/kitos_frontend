@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
@@ -17,7 +17,6 @@ import { ReadonlyLinkTextboxComponent } from './readonly-link-textbox/readonly-l
   templateUrl: './link-textbox.component.html',
   styleUrls: ['./link-textbox.component.scss'],
   imports: [
-    NgIf,
     MatFormField,
     MatLabel,
     MatInput,
@@ -25,8 +24,8 @@ import { ReadonlyLinkTextboxComponent } from './readonly-link-textbox/readonly-l
     IconButtonComponent,
     PencilIconComponent,
     ReadonlyLinkTextboxComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class LinkTextboxComponent extends BaseComponent {
   @Input() public title!: string;

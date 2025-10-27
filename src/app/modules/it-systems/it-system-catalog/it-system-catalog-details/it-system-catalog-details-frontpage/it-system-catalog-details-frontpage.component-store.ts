@@ -66,10 +66,10 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
     systemUuid$.pipe(
       mergeMap((uuid) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid }).pipe(
-          tapResponse(
-            (parentSystem: APIItSystemResponseDTO) => this.updateParentSystem(parentSystem),
-            (e) => console.error(e),
-          ),
+          tapResponse({
+    next: (parentSystem: APIItSystemResponseDTO) => this.updateParentSystem(parentSystem),
+    error: (e) => console.error(e)
+}),
         ),
       ),
     ),
@@ -88,17 +88,14 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
             excludeChildrenOfUuid: systemUuid,
           })
           .pipe(
-            tapResponse(
-              (itSystems: APIItSystemResponseDTO[]) =>
-                this.updateItSystems(
-                  itSystems.map((system) => ({
-                    ...system,
-                    name: entityWithUnavailableName(system.name, system.deactivated),
-                  })),
-                ),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+            tapResponse({
+    next: (itSystems: APIItSystemResponseDTO[]) => this.updateItSystems(itSystems.map((system) => ({
+        ...system,
+        name: entityWithUnavailableName(system.name, system.deactivated),
+    }))),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoading(false)
+}),
           );
       }),
     ),
@@ -109,11 +106,11 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
       mergeMap((searchTerm) => {
         this.updateIsLoadingOrganizations(true);
         return this.apiOrganizationService.getManyOrganizationV2GetOrganizations({ nameOrCvrContent: searchTerm }).pipe(
-          tapResponse(
-            (organizations) => this.updateOrganizations(organizations),
-            (e) => console.error(e),
-            () => this.updateIsLoadingOrganizations(false),
-          ),
+          tapResponse({
+    next: (organizations) => this.updateOrganizations(organizations),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoadingOrganizations(false)
+}),
         );
       }),
     ),

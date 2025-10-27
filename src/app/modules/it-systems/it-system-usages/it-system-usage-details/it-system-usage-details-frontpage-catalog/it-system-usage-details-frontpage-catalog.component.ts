@@ -21,7 +21,7 @@ import { ITSystemUsageDetailsFrontpageCatalogComponentStore } from './it-system-
 import { CardComponent } from '../../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../../shared/components/card-header/card-header.component';
 import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
-import { NgIf, NgFor, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { DetailsPageLinkComponent } from '../../../../../shared/components/details-page-link/details-page-link.component';
 import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
@@ -42,7 +42,6 @@ import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-over
     CardComponent,
     CardHeaderComponent,
     StatusChipComponent,
-    NgIf,
     DetailsPageLinkComponent,
     FormGridComponent,
     FormsModule,
@@ -52,12 +51,11 @@ import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-over
     TextBoxInfoComponent,
     ParagraphComponent,
     ContentBoxComponent,
-    NgFor,
     ExternalReferenceComponent,
     TextAreaComponent,
     ItSystemKleOverviewComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;

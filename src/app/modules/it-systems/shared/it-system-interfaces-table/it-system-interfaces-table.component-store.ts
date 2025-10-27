@@ -54,11 +54,11 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
             availableInOrganizationUuid: organizationUuid,
           })
           .pipe(
-            tapResponse(
-              (itInterfaces) => this.updateInterfaces(itInterfaces),
-              (e) => console.error(e),
-              () => this.updateItInterfacesIsLoading(false),
-            ),
+            tapResponse({
+    next: (itInterfaces) => this.updateInterfaces(itInterfaces),
+    error: (e) => console.error(e),
+    complete: () => this.updateItInterfacesIsLoading(false)
+}),
           );
       }),
     ),

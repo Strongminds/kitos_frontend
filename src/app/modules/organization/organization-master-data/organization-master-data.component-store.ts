@@ -49,15 +49,15 @@ export class OrganizationMasterDataComponentStore extends ComponentStore<State> 
         const request: GetManyOrganizationV2GetOrganizationUsersRequestParams = { organizationUuid };
         if (search) request.emailQuery = search;
         return this.organizationService.getManyOrganizationV2GetOrganizationUsers(request).pipe(
-          tapResponse(
-            (responseDtos) => {
-              const organizationUsers = responseDtos
-                .map((userDto) => adaptOrganizationUserV2(userDto))
-                .filter((u) => u !== undefined);
-              this.setOrganizationUsers(organizationUsers);
-            },
-            (e) => console.error(e),
-          ),
+          tapResponse({
+    next: (responseDtos) => {
+        const organizationUsers = responseDtos
+            .map((userDto) => adaptOrganizationUserV2(userDto))
+            .filter((u) => u !== undefined);
+        this.setOrganizationUsers(organizationUsers);
+    },
+    error: (e) => console.error(e)
+}),
           finalize(() => this.setLoading(false)),
         );
       }),

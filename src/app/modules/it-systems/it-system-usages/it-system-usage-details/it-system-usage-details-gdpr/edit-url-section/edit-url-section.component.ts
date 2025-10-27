@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Observable, map } from 'rxjs';
@@ -13,7 +13,7 @@ import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.compo
   selector: 'app-edit-url-section',
   templateUrl: './edit-url-section.component.html',
   styleUrls: ['./edit-url-section.component.scss'],
-  imports: [NgIf, LinkTextboxComponent, AsyncPipe],
+  imports: [LinkTextboxComponent, AsyncPipe],
 })
 export class EditUrlSectionComponent extends BaseComponent {
   @Input() title!: string;

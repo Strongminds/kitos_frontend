@@ -25,10 +25,10 @@ export class ResetPasswordComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       mergeMap((requestId) => {
         return this.resetPasswordService.getSinglePasswordResetInternalV2GetPasswordReset({ requestId }).pipe(
-          tapResponse(
-            (response: APIPasswordResetResponseDTO) => this.setEmail(response.email),
-            (_) => this.setEmail(undefined),
-          ),
+          tapResponse({
+    next: (response: APIPasswordResetResponseDTO) => this.setEmail(response.email),
+    error: (_) => this.setEmail(undefined)
+}),
           finalize(() => this.setLoading(false)),
         );
       }),

@@ -10,7 +10,7 @@
         [value]="form.value.description ?? ''"
         data-cy="description-text-area"
       ></app-textarea>
-      <ng-container *ngIf="isRoleOptionType()">
+      @if (isRoleOptionType()) {
         <app-checkbox
           text="Ekstern brug"
           i18n-text
@@ -29,7 +29,7 @@
           class="text-area-margin-bottom"
           data-cy="externally-used-description-text-area"
         ></app-textarea>
-      </ng-container>
+      }
     </app-standard-vertical-content-grid>
   </form>
   <app-dialog-actions>

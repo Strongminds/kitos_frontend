@@ -1,6 +1,6 @@
 <ng-content></ng-content>
 
-<ng-container *ngIf="availableRoles$ | async as rolesDictionary">
+@if (availableRoles$ | async; as rolesDictionary) {
   <td>
     <app-paragraph paragraphSize="small">
       <app-content-with-tooltip [description]="rolesDictionary[role.assignment.role.uuid]?.description">
@@ -8,7 +8,7 @@
           [selectedOption]="role.assignment.role"
           [availableOptions$]="availableRoles$"
           class="text-padding"
-        >
+          >
         </app-selected-option-type-text>
       </app-content-with-tooltip>
     </app-paragraph>
@@ -27,7 +27,7 @@
             ? getExternallyUsedDescription(rolesDictionary[role.assignment.role.uuid]?.externallyAvailableDescription)
             : ''
         "
-      >
+        >
         <app-boolean-circle [value]="rolesDictionary[role.assignment.role.uuid]?.isExternallyAvailable || false">
         </app-boolean-circle>
       </app-tooltip>
@@ -41,14 +41,16 @@
       <app-paragraph>
         {{ role.assignment.user.email }}
       </app-paragraph>
-      <app-table-row-actions *ngIf="hasModifyPermission">
-        <app-icon-button (buttonClick)="onEditClick()" data-cy="edit-role-button">
-          <app-pencil-icon></app-pencil-icon>
-        </app-icon-button>
-        <app-icon-button (buttonClick)="onRemoveClick()">
-          <app-trashcan-icon></app-trashcan-icon>
-        </app-icon-button>
-      </app-table-row-actions>
+      @if (hasModifyPermission) {
+        <app-table-row-actions>
+          <app-icon-button (buttonClick)="onEditClick()" data-cy="edit-role-button">
+            <app-pencil-icon></app-pencil-icon>
+          </app-icon-button>
+          <app-icon-button (buttonClick)="onRemoveClick()">
+            <app-trashcan-icon></app-trashcan-icon>
+          </app-icon-button>
+        </app-table-row-actions>
+      }
     </app-content-space-between>
   </td>
-</ng-container>
+}

@@ -78,11 +78,11 @@ export class RoleTableComponentStore extends ComponentStore<State> {
         mergeMap(([params, orgUuid]) => {
           this.updateRolesIsLoading(true);
           return this.roleOptionTypeService.getEntityRoles(params.entityUuid, params.entityType, orgUuid).pipe(
-            tapResponse(
-              (roles) => this.updateRoles(roles),
-              (e) => console.error(e),
-              () => this.updateRolesIsLoading(false),
-            ),
+            tapResponse({
+    next: (roles) => this.updateRoles(roles),
+    error: (e) => console.error(e),
+    complete: () => this.updateRolesIsLoading(false)
+}),
           );
         }),
       ),
@@ -101,11 +101,11 @@ export class RoleTableComponentStore extends ComponentStore<State> {
             orderByProperty: 'Name',
           })
           .pipe(
-            tapResponse(
-              (users) => this.updateUsers(users),
-              (error) => console.error(error),
-              () => this.updateUsersIsLoading(false),
-            ),
+            tapResponse({
+    next: (users) => this.updateUsers(users),
+    error: (error) => console.error(error),
+    complete: () => this.updateUsersIsLoading(false)
+}),
           ),
       ),
     ),

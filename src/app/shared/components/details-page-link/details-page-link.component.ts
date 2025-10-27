@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component, Input, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { getDetailsPageLink } from '../../helpers/link.helpers';
@@ -9,7 +9,7 @@ import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
   selector: 'app-details-page-link',
   templateUrl: './details-page-link.component.html',
   styleUrls: ['./details-page-link.component.scss'],
-  imports: [NgIf, RouterLink],
+  imports: [RouterLink],
 })
 export class DetailsPageLinkComponent implements OnInit {
   public detailsPageRouterPath: string | null = null;

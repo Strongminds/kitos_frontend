@@ -41,8 +41,8 @@
 }
 
 @mixin mat-input-adjustment {
-  --mdc-typography-subtitle1-font-size: var(--font-size);
-  --mdc-typography-body1-font-size: var(--font-size);
+  --mat-typography-subtitle1-font-size: var(--font-size);
+  --mat-typography-body1-font-size: var(--font-size);
 
   // Thicker border on focus
   &.mat-focused {

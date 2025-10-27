@@ -24,9 +24,13 @@ export const defaultDialogMaxSize = {
 export class DialogOpenerService {
   constructor(private dialog: MatDialog) {}
 
-  public openEditUserDialog(user: ODataOrganizationUser, nested: boolean): MatDialogRef<EditUserDialogComponent> {
+  public openEditUserDialog(
+    user: ODataOrganizationUser,
+    nested: boolean,
+    isGlobalAdmin: boolean
+  ): MatDialogRef<EditUserDialogComponent> {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
-      height: '95%',
+      height: isGlobalAdmin ? '95%' : 'auto',
       maxHeight: MAX_DIALOG_HEIGHT,
     });
     dialogRef.componentInstance.user = user;
@@ -36,7 +40,7 @@ export class DialogOpenerService {
 
   public openDeleteUserDialog(
     user$: Observable<ODataOrganizationUser>,
-    nested: boolean,
+    nested: boolean
   ): MatDialogRef<DeleteUserDialogComponent> {
     const dialogRef = this.dialog.open(DeleteUserDialogComponent, defaultDialogMaxSize);
     dialogRef.componentInstance.user$ = user$;
@@ -45,7 +49,7 @@ export class DialogOpenerService {
   }
 
   public openTakeSystemOutOfUseDialog(
-    organizatioName: string | undefined = undefined,
+    organizatioName: string | undefined = undefined
   ): MatDialogRef<IconConfirmationDialogComponent> {
     const dialogRef = this.dialog.open(IconConfirmationDialogComponent);
     const confirmationDialogInstance = dialogRef.componentInstance as IconConfirmationDialogComponent;

@@ -1,4 +1,4 @@
-import { AsyncPipe, NgIf } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatToolbar } from '@angular/material/toolbar';
@@ -35,7 +35,6 @@ import { TestEnvironmentRibbonComponent } from '../test-environment-ribbon/test-
   imports: [
     MatToolbar,
     RouterLink,
-    NgIf,
     SpacerComponent,
     MenuComponent,
     MenuItemComponent,
@@ -44,8 +43,8 @@ import { TestEnvironmentRibbonComponent } from '../test-environment-ribbon/test-
     LogoutIconComponent,
     AsyncPipe,
     HideInProdDirective,
-    TestEnvironmentRibbonComponent,
-  ],
+    TestEnvironmentRibbonComponent
+],
 })
 export class NavBarComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;

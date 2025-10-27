@@ -8,7 +8,7 @@ import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { DialogComponent } from '../dialog/dialog.component';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextBoxComponent } from '../../textbox/textbox.component';
-import { NgIf, AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { DialogActionsComponent } from '../dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../buttons/button/button.component';
@@ -23,12 +23,11 @@ import { ButtonComponent } from '../../buttons/button/button.component';
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
     TextBoxComponent,
-    NgIf,
     ParagraphComponent,
     DialogActionsComponent,
     ButtonComponent,
-    AsyncPipe,
-  ],
+    AsyncPipe
+],
 })
 export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
   @Input() public url$!: Observable<string | undefined>;

@@ -37,11 +37,11 @@ export class ITSystemInterfacesDetailsFrontpageComponentStore extends ComponentS
             includeDeactivated: false,
           })
           .pipe(
-            tapResponse(
-              (itSystems: APIItSystemResponseDTO[]) => this.updateItSystems(itSystems),
-              (e) => console.error(e),
-              () => this.updateIsLoading(false),
-            ),
+            tapResponse({
+    next: (itSystems: APIItSystemResponseDTO[]) => this.updateItSystems(itSystems),
+    error: (e) => console.error(e),
+    complete: () => this.updateIsLoading(false)
+}),
           );
       }),
     ),

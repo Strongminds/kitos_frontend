@@ -1,4 +1,3 @@
-import { NgFor, NgIf } from '@angular/common';
 import {
   AfterViewInit,
   ChangeDetectorRef,
@@ -18,6 +17,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 
@@ -29,10 +29,8 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
     NgSelectComponent,
     FormsModule,
     NgOptionTemplateDirective,
-    NgIf,
     ParagraphComponent,
     NgMultiLabelTemplateDirective,
-    NgFor,
     TextBoxInfoComponent,
   ],
 })
@@ -123,9 +121,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
       this.formValueSubject$
         .pipe(filter(() => this.showDescription))
         .subscribe((formValue: MultiSelectDropdownItem<T>[]) => {
-          this.descriptions = formValue
-          .map((x: any) => x?.value?.[this.itemDescriptionField])
-            .filter(Boolean);
+          this.descriptions = formValue.map((x: any) => x?.value?.[this.itemDescriptionField]).filter(Boolean);
         })
     );
   }
@@ -145,7 +141,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
     }
   }
 
-  public displayDescriptionLabel(){
+  public displayDescriptionLabel() {
     return this.descriptions.length > 0 && this.showDescriptionLabel;
   }
 

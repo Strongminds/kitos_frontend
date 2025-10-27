@@ -28,10 +28,10 @@ export class ITSystemUsageDetailsFrontpageCatalogComponentStore extends Componen
     systemUuid$.pipe(
       mergeMap((uuid) =>
         this.apiItSystemService.getSingleItSystemV2GetItSystem({ uuid }).pipe(
-          tapResponse(
-            (parentSystem: APIItSystemResponseDTO) => this.updateParentSystem(parentSystem),
-            (e) => console.error(e),
-          ),
+          tapResponse({
+    next: (parentSystem: APIItSystemResponseDTO) => this.updateParentSystem(parentSystem),
+    error: (e) => console.error(e)
+}),
         ),
       ),
     ),

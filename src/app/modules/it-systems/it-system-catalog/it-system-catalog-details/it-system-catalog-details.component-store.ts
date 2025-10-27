@@ -33,16 +33,16 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object>
         this.apiItSystemUsageService
           .getManyItSystemUsageV2GetItSystemUsages({ systemUuid: itSystemUuid, organizationUuid })
           .pipe(
-            tapResponse(
-              (usages) => {
-                const usage = usages[0];
-                if (!usage) return;
-
-                const usageUuid = usage.uuid;
-                this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(usageUuid));
-              },
-              (e) => console.error(e),
-            ),
+            tapResponse({
+    next: (usages) => {
+        const usage = usages[0];
+        if (!usage)
+            return;
+        const usageUuid = usage.uuid;
+        this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(usageUuid));
+    },
+    error: (e) => console.error(e)
+}),
           ),
       ),
     ),

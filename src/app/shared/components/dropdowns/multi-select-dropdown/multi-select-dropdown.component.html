@@ -36,29 +36,35 @@
         [ngModelOptions]="{ standalone: true }"
         [disabled]="item.disabled"
       />
-      <p class="select-option-text-margin" *ngIf="!showDescription || !item.value[itemDescriptionField]">
+      @if (!showDescription || !item.value[itemDescriptionField]) {
+      <p class="select-option-text-margin">
         {{ item.name }}
       </p>
-      <div *ngIf="item.value[itemDescriptionField] && showDescription" class="item-with-description">
+      } @if (item.value[itemDescriptionField] && showDescription) {
+      <div class="item-with-description">
         {{ item.name }}
-        <app-paragraph *ngIf="item.value[itemDescriptionField] && showDescription" paragraphSize="small">{{
-          item.value[itemDescriptionField]
-        }}</app-paragraph>
+        @if (item.value[itemDescriptionField] && showDescription) {
+        <app-paragraph paragraphSize="small">{{ item.value[itemDescriptionField] }}</app-paragraph>
+        }
       </div>
-      <div *ngIf="isTagFn(item)" class="ng-clear-wrapper remove-tag-button" (click)="removeTag(item)">
+      } @if (isTagFn(item)) {
+      <div class="ng-clear-wrapper remove-tag-button" (click)="removeTag(item)">
         <span class="ng-clear">x</span>
       </div>
+      }
     </div>
   </ng-template>
   <ng-template ng-multi-label-tmp let-items="items">
     <div class="value-textbox-margin ng-value">
-      <ng-container *ngFor="let item of items; let isLast = last">
-        <span class="ng-value-label">{{ item.name }}<ng-container *ngIf="!isLast">,&nbsp;</ng-container></span>
-      </ng-container>
+      @for (item of items; track item; let isLast = $last) {
+      <span class="ng-value-label">{{ item.name }}@if (!isLast) { ,&nbsp; }</span>
+      }
     </div>
   </ng-template>
 </ng-select>
 
-<app-textbox-info *ngIf="displayDescriptionLabel()">
-  <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ descriptions?.join(', ') }}</app-paragraph>
+@if(displayDescriptionLabel()){
+<app-textbox-info>
+  <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ descriptions.join(", ") }}</app-paragraph>
 </app-textbox-info>
+}

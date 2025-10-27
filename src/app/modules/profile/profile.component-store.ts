@@ -34,11 +34,11 @@ export class ProfileComponentStore extends ComponentStore<State> {
       combineLatestWith(this.store.select(selectUserOrganizationUuid).pipe(filterNullish())),
       mergeMap(([userUuid, organizationUuid]) => {
         return this.userService.getSingleUsersInternalV2GetUserByUuid({ organizationUuid, userUuid }).pipe(
-          tapResponse(
-            (user) => this.setUser(user as APIUserResponseDTO),
-            (e) => console.error(e),
-            () => this.setLoading(false),
-          ),
+          tapResponse({
+    next: (user) => this.setUser(user as APIUserResponseDTO),
+    error: (e) => console.error(e),
+    complete: () => this.setLoading(false)
+}),
         );
       }),
     ),

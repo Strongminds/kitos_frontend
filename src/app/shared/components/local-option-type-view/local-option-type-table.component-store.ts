@@ -67,16 +67,16 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
       switchMap(() =>
         this.getOptionItemsObservable().pipe(
           map((items) => items.map(this.mapDtoToOptionType)),
-          tapResponse(
-            (mappedItems) => {
-              this.updateItems(mappedItems);
-              this.updateIsLoading(false);
-            },
-            (error) => {
-              console.error(error);
-              this.updateIsLoading(false);
-            }
-          )
+          tapResponse({
+    next: (mappedItems) => {
+        this.updateItems(mappedItems);
+        this.updateIsLoading(false);
+    },
+    error: (error) => {
+        console.error(error);
+        this.updateIsLoading(false);
+    }
+})
         )
       )
     )

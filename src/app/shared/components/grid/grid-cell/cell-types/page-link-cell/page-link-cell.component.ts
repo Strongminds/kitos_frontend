@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { SearchPropertyPipe } from '../../../../../pipes/column-property.pipe';
 import { DetailsPageLinkComponent } from '../../../../details-page-link/details-page-link.component';
@@ -9,6 +9,6 @@ import { BaseCellComponent } from '../../base-cell.component';
   selector: 'app-page-link-cell',
   templateUrl: './page-link-cell.component.html',
   styleUrl: './page-link-cell.component.scss',
-  imports: [ParagraphComponent, NgIf, DetailsPageLinkComponent, SearchPropertyPipe],
+  imports: [ParagraphComponent, DetailsPageLinkComponent, SearchPropertyPipe],
 })
 export class PageLinkCellComponent extends BaseCellComponent {}
