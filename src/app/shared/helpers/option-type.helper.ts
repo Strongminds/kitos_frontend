@@ -67,6 +67,6 @@ export function getOptionTypeName(optionType: RegularOptionType | RoleOptionType
 }
 
 export function addExpiredTextToOption(name: string): string {
-  const obsoletedText = $localize`udgået`;
-  return $localize`${name} (${obsoletedText})`;
+  const obsoletedText = $localize`(udgået)`;
+  return $localize`${name} ${obsoletedText}`;
 }

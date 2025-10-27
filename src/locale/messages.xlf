@@ -3218,9 +3218,6 @@
       <trans-unit id="1687149700896252848" datatype="html">
         <source>Tilknyt</source>
       </trans-unit>
-      <trans-unit id="4956039560751909611" datatype="html">
-        <source>udgået</source>
-      </trans-unit>
       <trans-unit id="9037906396709186682" datatype="html">
         <source>Vis tilgængelighed</source>
       </trans-unit>
@@ -5405,9 +5402,6 @@
       <trans-unit id="2906905998458410320" datatype="html">
         <source>Indkommende relationer</source>
       </trans-unit>
-      <trans-unit id="3311482938689417877" datatype="html">
-        <source><x id="PH" equiv-text="name"/> (<x id="PH_1" equiv-text="obsoletedText"/>)</source>
-      </trans-unit>
       <trans-unit id="4789455191486047781" datatype="html">
         <source>Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</source>
       </trans-unit>
@@ -5983,6 +5977,9 @@
         <source>Done</source>
         <note priority="1" from="description">The header status message after file upload completion</note>
         <note priority="1" from="meaning">kendo.upload.headerStatusUploaded</note>
+      </trans-unit>
+      <trans-unit id="5572513411086054970" datatype="html">
+        <source>(udgået)</source>
       </trans-unit>
     </body>
   </file>
