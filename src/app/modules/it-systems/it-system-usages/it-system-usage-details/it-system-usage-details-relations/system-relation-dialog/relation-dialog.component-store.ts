@@ -188,7 +188,7 @@ export class ItSystemUsageDetailsRelationsDialogComponentStore extends Component
       mergeMap((params) => {
         return this.apiInterfaceService
           .getManyItInterfaceV2GetItInterfaces({
-            nameContains: params.search,
+            nameOrItInterfaceIdContains: params.search,
             exposedBySystemUuid: params.systemUuid,
             orderByProperty: 'Name',
             includeDeactivated: true,

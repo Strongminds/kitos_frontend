@@ -10,15 +10,16 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NgMultiLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
-import { NgSelectComponent, NgOptionTemplateDirective, NgMultiLabelTemplateDirective } from '@ng-select/ng-select';
-import { FormsModule } from '@angular/forms';
 
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
+import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 
 @Component({
   selector: 'app-multi-select-dropdown',
@@ -29,8 +30,9 @@ import { ParagraphComponent } from '../../paragraph/paragraph.component';
     FormsModule,
     NgOptionTemplateDirective,
     ParagraphComponent,
-    NgMultiLabelTemplateDirective
-],
+    NgMultiLabelTemplateDirective,
+    TextBoxInfoComponent,
+  ],
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
   @Input() public text = '';
@@ -42,8 +44,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public data?: MultiSelectDropdownItem<T>[] | null;
   @Input() public initialSelectedValues?: MultiSelectDropdownItem<T>[] | null;
   @Input() public loading: boolean | null = false;
-    @Input() public searchFn?: (search: string, item: T) => boolean;
-
+  @Input() public searchFn?: (search: string, item: T) => boolean;
 
   @Input() public includeAddTag = false;
   @Input() public tagValidation: 'email' | 'none' = 'none';
@@ -51,6 +52,9 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public isRequired = false;
   @Input() public showDescription = false;
   @Input() public useExternalSearch = false;
+  @Input() public itemDescriptionField = 'description';
+  @Input() public showDescriptionLabel: boolean = true;
+  @Input() public descriptionLabelTitle?: string;
 
   @Input() public resetSubject$?: Subject<void>;
 
@@ -75,6 +79,10 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   public readonly loadingText = $localize`Henter data`;
   public readonly notFoundText = $localize`Ingen data fundet`;
 
+  protected readonly formValueSubject$ = new Subject<MultiSelectDropdownItem<T>[]>();
+
+  public descriptions: string[] = [];
+
   constructor(
     private el: ElementRef,
     private renderer: Renderer2,
@@ -88,6 +96,8 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   public selectedValuesModel: MultiSelectDropdownItem<T>[] = [];
 
   ngOnInit() {
+    this.formValueSubject$.next(this.initialSelectedValues ?? []);
+
     // Debounce update of dropdown filter with more then 1 character
     this.subscriptions.add(
       this.filter$
@@ -106,6 +116,14 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
         })
       );
     }
+
+    this.subscriptions.add(
+      this.formValueSubject$
+        .pipe(filter(() => this.showDescription))
+        .subscribe((formValue: MultiSelectDropdownItem<T>[]) => {
+          this.descriptions = formValue.map((x: any) => x?.value?.[this.itemDescriptionField]).filter(Boolean);
+        })
+    );
   }
 
   ngAfterViewInit() {
@@ -121,6 +139,10 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
       this.setValues(this.initialSelectedValues);
       this.cdRef.detectChanges();
     }
+  }
+
+  public displayDescriptionLabel() {
+    return this.descriptions.length > 0 && this.showDescriptionLabel;
   }
 
   public setValues(values: MultiSelectDropdownItem<T>[]) {
@@ -159,6 +181,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   }
 
   public onSelected(selectedItems: Array<MultiSelectDropdownItem<T>>) {
+    this.formValueSubject$.next(selectedItems);
     this.emitSelectedEvent(selectedItems.map((item) => item.value));
   }
 

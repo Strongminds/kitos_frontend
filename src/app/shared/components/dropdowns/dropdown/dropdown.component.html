@@ -1,97 +1,87 @@
 @if (formGroup) {
-  <div [formGroup]="formGroup">
-    <ng-select
-      class="{{ size }}"
-      [formControlName]="formName"
-      [placeholder]="text"
-      [fixedPlaceholder]="true"
-      [items]="data ?? []"
-      [bindLabel]="textField"
-      [loading]="loading || false"
-      [clearAllText]="clearAllText"
-      [loadingText]="loadingText"
-      [notFoundText]="notFoundText"
-      [searchFn]="searchFn"
-      [addTag]="addTag"
-      [addTagText]="addTagText"
-      [appendTo]="appendTo"
-      [clearable]="clearable"
-      (search)="filter$.next($event.term)"
-      (change)="formSelectionChange($event)"
-      (clear)="onClear()"
-      (focus)="onFocus()"
-      (open)="onOpen()"
-      (blur)="onBlur()"
-      >
-      <ng-template ng-option-tmp let-item="item">
-        @if (!showDescription || !item[itemDescriptionField]) {
-          {{ item[textField] }}
-        }
-        @if (item[itemDescriptionField] && showDescription) {
-          <div class="description">
-            {{ item[textField] }}
-            @if (item[itemDescriptionField] && showDescription) {
-              <app-paragraph paragraphSize="small">{{
-                item[itemDescriptionField]
-              }}</app-paragraph>
-            }
-          </div>
-        }
-      </ng-template>
-      @if (showSearchHelpText && !!!(filter$ | async)) {
-        <ng-template ng-footer-tmp>
-          <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
-        </ng-template>
-      }
-    </ng-select>
-  </div>
-}
-
-@if (!formGroup) {
+<div [formGroup]="formGroup">
   <ng-select
     class="{{ size }}"
+    [formControlName]="formName"
     [placeholder]="text"
     [fixedPlaceholder]="true"
     [items]="data ?? []"
     [bindLabel]="textField"
     [loading]="loading || false"
-    [readonly]="disabled"
     [clearAllText]="clearAllText"
     [loadingText]="loadingText"
     [notFoundText]="notFoundText"
-    [(ngModel)]="value"
+    [searchFn]="searchFn"
+    [addTag]="addTag"
+    [addTagText]="addTagText"
     [appendTo]="appendTo"
     [clearable]="clearable"
     (search)="filter$.next($event.term)"
-    (change)="valueChange.emit($event)"
-    [searchFn]="searchFn"
+    (change)="formSelectionChange($event)"
     (clear)="onClear()"
-    >
+    (focus)="onFocus()"
+    (open)="onOpen()"
+    (blur)="onBlur()"
+  >
     <ng-template ng-option-tmp let-item="item">
       @if (!showDescription || !item[itemDescriptionField]) {
+      {{ item[textField] }}
+      } @if (item[itemDescriptionField] && showDescription) {
+      <div class="description">
         {{ item[textField] }}
-      }
-      @if (item[itemDescriptionField] && showDescription) {
-        <div class="description">
-          {{ item[textField] }}
-          @if (item[itemDescriptionField] && showDescription) {
-            <app-paragraph paragraphSize="small">{{
-              item[itemDescriptionField]
-            }}</app-paragraph>
-          }
-        </div>
+        @if (item[itemDescriptionField] && showDescription) {
+        <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
+        }
+      </div>
       }
     </ng-template>
     @if (showSearchHelpText && !!!(filter$ | async)) {
-      <ng-template ng-footer-tmp>
-        <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
-      </ng-template>
+    <ng-template ng-footer-tmp>
+      <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
+    </ng-template>
     }
   </ng-select>
-}
-
-@if (description && showDescriptionLabel) {
-  <app-textbox-info>
-    <app-paragraph paragraphSize="x-small">{{ description }}</app-paragraph>
-  </app-textbox-info>
+</div>
+} @if (!formGroup) {
+<ng-select
+  class="{{ size }}"
+  [placeholder]="text"
+  [fixedPlaceholder]="true"
+  [items]="data ?? []"
+  [bindLabel]="textField"
+  [loading]="loading || false"
+  [readonly]="disabled"
+  [clearAllText]="clearAllText"
+  [loadingText]="loadingText"
+  [notFoundText]="notFoundText"
+  [(ngModel)]="value"
+  [appendTo]="appendTo"
+  [clearable]="clearable"
+  (search)="filter$.next($event.term)"
+  (change)="valueChange.emit($event)"
+  [searchFn]="searchFn"
+  (clear)="onClear()"
+>
+  <ng-template ng-option-tmp let-item="item">
+    @if (!showDescription || !item[itemDescriptionField]) {
+    {{ item[textField] }}
+    } @if (item[itemDescriptionField] && showDescription) {
+    <div class="description">
+      {{ item[textField] }}
+      @if (item[itemDescriptionField] && showDescription) {
+      <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
+      }
+    </div>
+    }
+  </ng-template>
+  @if (showSearchHelpText && !!!(filter$ | async)) {
+  <ng-template ng-footer-tmp>
+    <app-paragraph paragraphSize="x-small" i18n>Brug søgning for at få flere resultater</app-paragraph>
+  </ng-template>
+  }
+</ng-select>
+} @if (description && showDescriptionLabel) {
+<app-textbox-info>
+  <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ description }}</app-paragraph>
+</app-textbox-info>
 }
