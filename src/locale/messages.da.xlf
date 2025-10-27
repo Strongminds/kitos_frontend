@@ -7813,6 +7813,10 @@
         <source>(udgået)</source>
         <target state="new">(udgået)</target>
       </trans-unit>
+      <trans-unit id="7029500743315832858" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;archive-duty-link&quot;&gt;"/> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="{{ nationalArchivesText }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="new"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;archive-duty-link&quot;&gt;"/> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="{{ nationalArchivesText }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
