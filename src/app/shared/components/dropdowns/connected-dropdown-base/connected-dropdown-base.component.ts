@@ -18,6 +18,8 @@ export class ConnectedDropdownBaseComponent extends BaseComponent {
   @Input() public includeItemDescription = false;
   @Input() public addTag = false;
   @Input() public addTagText = $localize`Vælg`;
+  @Input() public showDescriptionLabel: boolean = true;
+  @Input() public descriptionLabelTitle?: string;
 
   @Output() public filterChange = new EventEmitter<string>();
 
@@ -25,7 +27,7 @@ export class ConnectedDropdownBaseComponent extends BaseComponent {
   protected lastTwoSearchTerms$ = this.searchTermsSource$.pipe(
     startWith(undefined),
     pairwise(),
-    map(([previous, current]) => ({ previous: previous, current: current })),
+    map(([previous, current]) => ({ previous: previous, current: current }))
   );
 
   ngOnInit() {
@@ -35,7 +37,7 @@ export class ConnectedDropdownBaseComponent extends BaseComponent {
         if (terms.previous != terms.current) {
           this.filterChange.emit(terms.current);
         }
-      }),
+      })
     );
   }
 
