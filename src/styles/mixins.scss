@@ -518,6 +518,10 @@
       border-right: 0;
     }
 
+    .k-grid .k-master-row .k-grid-content-sticky {
+      border-color: transparent;
+    }
+
     .k-grid .k-table .k-grid-content-sticky {
       border-left: 1px solid theme.$color-neutral-20;
       border-right: 0;

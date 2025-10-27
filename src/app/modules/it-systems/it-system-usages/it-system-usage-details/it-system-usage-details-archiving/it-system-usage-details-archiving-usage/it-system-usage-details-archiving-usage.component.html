@@ -12,20 +12,25 @@
         (valueChange)="patchArchiving({ archiveDuty: $event })"
       ></app-dropdown>
       <app-textbox-info>
+        <div class="archive-duty-comments-container">
         @if (recommendedArchiveDutyComment$ | async; as commentObject) {
-          <app-paragraph paragraphSize="x-small">{{
-            commentObject.comment
-          }}</app-paragraph>
-        }
-        <app-paragraph paragraphSize="x-small" i18n>
-          Læs mere hos
-          <a
-            target="_blank"
-            href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
-            >{{ nationalArchivesText }}</a
-          >
-        </app-paragraph>
-        </app-textbox-info>
+            <app-paragraph paragraphSize="x-small">{{
+              commentObject.comment
+            }}</app-paragraph>
+          }
+          <app-paragraph paragraphSize="x-small" i18n>
+            <span class="archive-duty-link">
+              Læs mere hos
+            <a
+              target="_blank"
+              href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
+              >{{ nationalArchivesText }}</a
+            >
+            </span>         
+          </app-paragraph>
+        </div>
+
+      </app-textbox-info>
       </div>
       @if (archiveTypeEnabled$ | async) {
         <app-dropdown
