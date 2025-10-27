@@ -12,17 +12,22 @@
         (valueChange)="patchArchiving({ archiveDuty: $event })"
       ></app-dropdown>
       <app-textbox-info>
-        <app-paragraph paragraphSize="x-small" *ngIf="recommendedArchiveDutyComment$ | async as commentObject">{{
+        <div class="archive-duty-comments-container">
+          <app-paragraph paragraphSize="x-small" *ngIf="recommendedArchiveDutyComment$ | async as commentObject">{{
           commentObject.comment
         }}</app-paragraph>
         <app-paragraph paragraphSize="x-small" i18n>
+          <span class="archive-duty-link">
           Læs mere hos
           <a
             target="_blank"
             href="https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/"
             >{{ nationalArchivesText }}</a
           >
+          </span>
         </app-paragraph>
+        </div>
+        
       </app-textbox-info>
     </div>
     <app-dropdown
