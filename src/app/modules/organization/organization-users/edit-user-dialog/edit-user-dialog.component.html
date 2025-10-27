@@ -64,6 +64,7 @@
           [initialSelectedValues]="getUserRoleChoices()"
           (selectedEvent)="rolesChanged($event)"
           (cleared)="rolesCleared()"
+          [clearable]="(canClearRoleDropdown$ | async) ?? false"
           data-cy="roles-dropdown"
         ></app-multi-select-dropdown>
 
