@@ -75,7 +75,7 @@
       }
       @if (responsibleUnitEnabled$ | async) {
         <app-org-unit-select
-          text="Ansvarlig enhed"
+          text="Ansvarlig organisationsenhed"
           i18n-text
           [formGroup]="frontpageFormGroup"
           (valueChange)="patchFrontPage({ general: { responsibleOrganizationUnitUuid: $event } })"
