@@ -1,10 +1,11 @@
-
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { debounceTime, first, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
@@ -28,13 +29,17 @@ import { TextBoxComponent } from '../../../../../../shared/components/textbox/te
     TextBoxComponent,
     ParagraphComponent,
     DialogActionsComponent,
-    ButtonComponent
-],
+    ButtonComponent,
+    TooltipComponent,
+    CommonModule,
+  ],
 })
 export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   @Input() simpleLink?: SimpleLink | undefined;
   @Input() namePermission$?: Observable<boolean>;
+  @Input() nameDisabledMessage?: string;
   @Input() linkPermission$?: Observable<boolean>;
+  @Input() linkDisabledMessage?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Output() submitMethod!: EventEmitter<any>;
 
