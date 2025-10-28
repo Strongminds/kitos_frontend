@@ -175,11 +175,11 @@
 
 @if (showResponsibleCard$ | async) {
   <app-card>
-    <app-card-header title="Ansvarlig enhed" i18n-title helpTextKey="it-contract.edit.responsible"></app-card-header>
+    <app-card-header title="Ansvarlig organisationsenhed" i18n-title helpTextKey="it-contract.edit.responsible"></app-card-header>
     <app-form-grid [formGroup]="responsibleFormGroup">
       @if (contractResponsibleUnitEnabled$ | async) {
         <app-org-unit-select
-          text="Ansvarlig enhed"
+          text="Ansvarlig organisationsenhed"
           i18n-text
           data-cy="contract-responsible"
           [formGroup]="responsibleFormGroup"
