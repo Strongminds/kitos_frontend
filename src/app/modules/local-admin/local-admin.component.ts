@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
@@ -13,11 +14,10 @@ import {
   selectShowItSystemModule,
 } from 'src/app/store/organization/selectors';
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
-import { AsyncPipe } from '@angular/common';
 import { CheckboxButtonComponent } from '../../shared/components/buttons/checkbox-button/checkbox-button.component';
-import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
 import { HelpButtonComponent } from '../../shared/components/help-button/help-button.component';
 import { NavigationDrawerComponent } from '../../shared/components/navigation-drawer/navigation-drawer.component';
+import { ParagraphComponent } from '../../shared/components/paragraph/paragraph.component';
 
 interface ModuleTabInfo {
   text: string;
@@ -35,8 +35,8 @@ interface ModuleTabInfo {
     HelpButtonComponent,
     NavigationDrawerComponent,
     RouterOutlet,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class LocalAdminComponent extends BaseComponent implements OnInit {
   public readonly AppPath = AppPath;
@@ -48,10 +48,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
   public currentTabPathSegment$: Observable<string> = of('');
   public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
-  constructor(
-    private store: Store,
-    private router: Router,
-  ) {
+  constructor(private store: Store, private router: Router) {
     super();
   }
 
@@ -91,7 +88,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       label: $localize`ISMS leverandører`,
       iconType: 'multiple-users',
       route: AppPath.ismsSuppliers,
-    }
+    },
   ];
 
   public helpText = '';
@@ -119,7 +116,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       this.currentTabModuleKey$.subscribe((moduleKey) => {
         const moduleTabInfo = this.getModuleTabInfo(moduleKey);
         this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { [moduleTabInfo.dtoFieldName]: $event } }));
-      }),
+      })
     );
   }
 
@@ -137,7 +134,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
     this.store.dispatch(
-      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations }),
+      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
     );
   }
 
@@ -146,13 +143,13 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       filter((event) => event instanceof NavigationEnd),
       map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
       startWith(this.extractLastUrlSegment(this.router.url)),
-      distinctUntilChanged(),
+      distinctUntilChanged()
     );
     this.subscriptions.add(
       this.currentTabPathSegment$.subscribe((segment) => {
         this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
         this.helpText = this.getCurrentTabHelpText(segment);
-      }),
+      })
     );
   }
 
@@ -170,8 +167,10 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
         return 'data-processing';
       case AppPath.import:
         return 'import.organization';
+      case AppPath.ismsSuppliers:
+        return 'isms-suppliers';
       default:
-        return '';
+        throw new Error('Unknown help text for url segment: ' + urlSegment);
     }
   }
   private getModuleTabInfo(moduleKey: UIModuleConfigKey | undefined): ModuleTabInfo {

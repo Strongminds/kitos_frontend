@@ -42,6 +42,7 @@ import { StandardVerticalContentGridComponent } from '../../../../shared/compone
 import { TextBoxInfoComponent } from '../../../../shared/components/textbox-info/textbox-info.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { BaseUserDialogComponent } from '../base-user-dialog.component';
+import { selectCanClearRoleDropdown } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-edit-user-dialog',
@@ -71,6 +72,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   @ViewChild(MultiSelectDropdownComponent)
   public multiSelectDropdown!: MultiSelectDropdownComponent<APIUserResponseDTO.RolesEnum>;
   public readonly phoneNumberRegex = ONLY_DIGITS_AND_WHITESPACE_REGEX;
+  public readonly canClearRoleDropdown$ = this.store.select(selectCanClearRoleDropdown);
 
   private readonly availableUnitRoles$ = this.store.select(selectRoleOptionTypes('organization-unit'));
   private readonly availableContractRoles$ = this.store.select(selectRoleOptionTypes('it-contract'));
