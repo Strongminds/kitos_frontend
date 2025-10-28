@@ -2316,9 +2316,9 @@
     tslib "2.8.1"
 
 "@ng-select/ng-select@^20.4.3":
-  version "20.4.3"
-  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-20.4.3.tgz#5c191c53b8f296ed881d378cb941ea898585e88b"
-  integrity sha512-qT+dBcC7iKmItmhCJOTnDhz5FticyFqPJF+8JO5pGuv70FiM70vA93Z67ErlGyQ6rFpYzzcjOhcDod4LFsjblg==
+  version "20.4.4"
+  resolved "https://registry.yarnpkg.com/@ng-select/ng-select/-/ng-select-20.4.4.tgz#3a36b91ab4694cb80461ba1df8adad5d604a7c1c"
+  integrity sha512-9dSUXCFM+oDYXzkhH3ipMT5PyEq6iltP31uF/9wk1eR5YoM4801n2Ovmejw88ae9vCYH83FqYhYUbZCjZk62Ng==
   dependencies:
     tslib "^2.8.1"
 
@@ -2964,26 +2964,26 @@
   resolved "https://registry.yarnpkg.com/@progress/kendo-svg-icons/-/kendo-svg-icons-4.5.0.tgz#3578bdcc557e8b74cbb1f2aaaf314b97b4553c07"
   integrity sha512-KO7KZNrm1Fi8jR4HLvaPmwzzsvswAZUlm6jQ0jHz9ck/iuREo8YWIUaVQxnzcmtCT3nRyrYMofLa13eR4PEhQg==
 
-"@progress/kendo-theme-core@12.1.0":
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-theme-core/-/kendo-theme-core-12.1.0.tgz#71e101d19d76f7138c574a802b05e27f903b3d6f"
-  integrity sha512-31Ibhb11hxJVXY457q8elrxeGFDO4g3ANKwB2XTzNksufwY/ky7DRVGQkUs6nBmVcI2us8B997l7l12kEhMhzg==
+"@progress/kendo-theme-core@12.2.0":
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-theme-core/-/kendo-theme-core-12.2.0.tgz#28910ca2e189aab1f338f923f5d024dd8bd2b779"
+  integrity sha512-gBPajYlLzDNXuNzfhwsZb7gez0juKzq7uaNVSwccEO/rv8EushRQzu4uYeiBK9HJtsnecTAfZzmj/J/9+MbsZA==
 
 "@progress/kendo-theme-default@^12.1.0":
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-theme-default/-/kendo-theme-default-12.1.0.tgz#91d5f1b9c224ab556a42615efda6d2a9c9847fc6"
-  integrity sha512-KaUi+cC9IpxKE9Nd8iunDUioxoHMj5pl69LRiOnr2nc+5kxvaCC3pEY/tcEU4o4amPa9QEFaQdzAFg5jeUaT+Q==
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-theme-default/-/kendo-theme-default-12.2.0.tgz#ae610e811bcfac2b46d0039ef1d951b679eb32a0"
+  integrity sha512-fTv0y1yDjkfcUBR+yVizc1mG8/+B4u7pAgvBnJndGAjv3tgnyuHrSpzdcDOlKUz50Eu3VwP8nK3EiyCXdOWUrw==
   dependencies:
     "@progress/kendo-svg-icons" "^4.5.0"
-    "@progress/kendo-theme-core" "12.1.0"
-    "@progress/kendo-theme-utils" "12.1.0"
+    "@progress/kendo-theme-core" "12.2.0"
+    "@progress/kendo-theme-utils" "12.2.0"
 
-"@progress/kendo-theme-utils@12.1.0":
-  version "12.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-theme-utils/-/kendo-theme-utils-12.1.0.tgz#eea729fe1799c60f8eb8c79cced499ec36a89706"
-  integrity sha512-3tZY/x6Ly/lcfiVNEw36hyhR6FnF9IM3MWUOAPa40+zNHYIDLvCcuNTN5yBovUoCTlrVg9FszxNstmun3qAObw==
+"@progress/kendo-theme-utils@12.2.0":
+  version "12.2.0"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-theme-utils/-/kendo-theme-utils-12.2.0.tgz#91c67112b4580def9cd670546d704b97509e2a07"
+  integrity sha512-FYw0g6GrvpKafkzPCKHOsXRDFBcLkxIPBZ5MgydBlOyN/X2JtBmzBz0qvZ/usG25EhNUdy9s6ou1xfDpaezbGQ==
   dependencies:
-    "@progress/kendo-theme-core" "12.1.0"
+    "@progress/kendo-theme-core" "12.2.0"
 
 "@progress/kendo-webspeech-common@1.0.1":
   version "1.0.1"
@@ -3434,23 +3434,23 @@
     "@types/send" "*"
 
 "@types/express@*":
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/@types/express/-/express-5.0.4.tgz#975e7fc1097066a83b992fd2bb8a4819622e8bae"
-  integrity sha512-g64dbryHk7loCIrsa0R3shBnEu5p6LPJ09bu9NG58+jz+cRUjFrc3Bz0kNQ7j9bXeCsrRDvNET1G54P/GJkAyA==
+  version "5.0.5"
+  resolved "https://registry.yarnpkg.com/@types/express/-/express-5.0.5.tgz#3ba069177caa34ab96585ca23b3984d752300cdc"
+  integrity sha512-LuIQOcb6UmnF7C1PCFmEU1u2hmiHL43fgFQX67sN3H4Z+0Yk0Neo++mFsBjhOAuLzvlQeqAAkeDOZrJs9rzumQ==
   dependencies:
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "^5.0.0"
-    "@types/serve-static" "*"
+    "@types/serve-static" "^1"
 
 "@types/express@^4.17.21":
-  version "4.17.24"
-  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.24.tgz#7d4be463143e9f2f146ef805a619076ce4aaec26"
-  integrity sha512-Mbrt4SRlXSTWryOnHAh2d4UQ/E7n9lZyGSi6KgX+4hkuL9soYbLOVXVhnk/ODp12YsGc95f4pOvqywJ6kngUwg==
+  version "4.17.25"
+  resolved "https://registry.yarnpkg.com/@types/express/-/express-4.17.25.tgz#070c8c73a6fee6936d65c195dbbfb7da5026649b"
+  integrity sha512-dVd04UKsfpINUnK0yBoYHDF3xu7xVH4BuDotC/xGuycx4CgbP48X/KF/586bcObxT0HENHXEU8Nqtu6NR+eKhw==
   dependencies:
     "@types/body-parser" "*"
     "@types/express-serve-static-core" "^4.17.33"
     "@types/qs" "*"
-    "@types/serve-static" "*"
+    "@types/serve-static" "^1"
 
 "@types/file-saver@^2.0.7":
   version "2.0.7"
@@ -3540,7 +3540,7 @@
   dependencies:
     "@types/express" "*"
 
-"@types/serve-static@*", "@types/serve-static@^1.15.5":
+"@types/serve-static@^1", "@types/serve-static@^1.15.5":
   version "1.15.10"
   resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.15.10.tgz#768169145a778f8f5dfcb6360aead414a3994fee"
   integrity sha512-tRs1dB+g8Itk72rlSI2ZrW6vZg0YrLI81iQSTkMmOqnqCaNr/8Ek4VwWcN5vZgCYWbg/JJSGBlUaYGAOP73qBw==
@@ -5146,9 +5146,9 @@ ee-first@1.1.1:
   integrity sha512-WMwm9LhRUo+WUaRN+vRuETqG89IgZphVSNkdFgeb6sS/E4OrDIN7t48CAewSHXc6C8lefD8KKfr5vY61brQlow==
 
 electron-to-chromium@^1.5.238:
-  version "1.5.240"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.240.tgz#bfd946570a723aa3754370065d02e23e30824774"
-  integrity sha512-OBwbZjWgrCOH+g6uJsA2/7Twpas2OlepS9uvByJjR2datRDuKGYeD+nP8lBBks2qnB7bGJNHDUx7c/YLaT3QMQ==
+  version "1.5.241"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.5.241.tgz#350a2cdcde43829d36af245a27167243e917c6ed"
+  integrity sha512-ILMvKX/ZV5WIJzzdtuHg8xquk2y0BOGlFOxBVwTpbiXqWIH0hamG45ddU4R3PQ0gYu+xgo0vdHXHli9sHIGb4w==
 
 emoji-regex@^10.3.0:
   version "10.6.0"
@@ -6866,9 +6866,9 @@ kind-of@^6.0.2:
   integrity sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==
 
 launch-editor@^2.6.1:
-  version "2.11.1"
-  resolved "https://registry.yarnpkg.com/launch-editor/-/launch-editor-2.11.1.tgz#61a0b7314a42fd84a6cbb564573d9e9ffcf3d72b"
-  integrity sha512-SEET7oNfgSaB6Ym0jufAdCeo3meJVeCaaDyzRygy0xsp2BFKCprcfHljTq4QkzTLUxEKkFK6OK4811YM2oSrRg==
+  version "2.12.0"
+  resolved "https://registry.yarnpkg.com/launch-editor/-/launch-editor-2.12.0.tgz#cc740f4e0263a6b62ead2485f9896e545321f817"
+  integrity sha512-giOHXoOtifjdHqUamwKq6c49GzBdLjvxrd2D+Q4V6uOHopJv7p9VJxikDsQ/CBXZbEITgUqSVHXLTG3VhPP1Dg==
   dependencies:
     picocolors "^1.1.1"
     shell-quote "^1.8.3"
@@ -9305,7 +9305,7 @@ tinyglobby@^0.2.12, tinyglobby@^0.2.14, tinyglobby@^0.2.15:
     fdir "^6.5.0"
     picomatch "^4.0.3"
 
-tinymce@^7.8.0:
+tinymce@7.9.1:
   version "7.9.1"
   resolved "https://registry.yarnpkg.com/tinymce/-/tinymce-7.9.1.tgz#1b18bad9cb7a3b4b12e3e5a7f29fc7daad0713d7"
   integrity sha512-zaOHwmiP1EqTeLRXAvVriDb00JYnfEjWGPdKEuac7MiZJ5aiDMZ4Unc98Gmajn+PBljOmO1GKV6G0KwWn3+k8A==
