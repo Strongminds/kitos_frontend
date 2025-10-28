@@ -55,6 +55,7 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
   @Input() public itemDescriptionField = 'description';
   @Input() public showDescriptionLabel: boolean = true;
   @Input() public descriptionLabelTitle?: string;
+  @Input() public clearable = true;
 
   @Input() public resetSubject$?: Subject<void>;
 

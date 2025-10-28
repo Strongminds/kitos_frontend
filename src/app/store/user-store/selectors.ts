@@ -63,4 +63,14 @@ export const selectAvailableRoleDropdownValues = createSelector(
   }
 );
 
+export const selectCanClearRoleDropdown = createSelector(
+  selectUserIsGlobalAdmin,
+  selectUserOrganizationRights,
+  selectOrganizationUuid,
+  (isGlobalAdmin, organizationRights, organizationUuid) => {
+    const isLocalAdmin = hasRoleInOrganization(organizationRights, organizationUuid, LOCAL_ADMIN_ROLE);
+    return isGlobalAdmin || isLocalAdmin;
+  }
+);
+
 export const selectSsoErrorCode = createSelector(selectUserState, (state) => state.ssoErrorCode);
