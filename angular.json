@@ -133,14 +133,15 @@
                 }
               ],
               "buildOptimizer": true,
-              "vendorChunk": true
+              "vendorChunk": true,
+              "outputHashing": "all"
             },
             "dev": {
               "sourceMap": false,
               "namedChunks": true,
               "vendorChunk": true,
               "extractLicenses": false,
-              "outputHashing": "none",
+              "outputHashing": "all",
               "optimization": false,
               "buildOptimizer": false,
               "budgets": [],
@@ -152,7 +153,7 @@
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.dev.ts"
                 }
-              ]
+              ],
             },
             "ci": {
               "buildOptimizer": false,
@@ -161,7 +162,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "outputHashing": "none",
+              "outputHashing": "all",
               "budgets": [],
               "fileReplacements": [
                 {
@@ -180,7 +181,7 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "outputHashing": "none",
+              "outputHashing": "all",
               "budgets": []
             },
             "da": {
