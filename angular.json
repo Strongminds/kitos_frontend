@@ -134,14 +134,12 @@
               ],
               "buildOptimizer": true,
               "vendorChunk": true,
-              "outputHashing": "all"
             },
             "dev": {
               "sourceMap": false,
               "namedChunks": true,
               "vendorChunk": true,
               "extractLicenses": false,
-              "outputHashing": "all",
               "optimization": false,
               "buildOptimizer": false,
               "budgets": [],
@@ -162,7 +160,6 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "outputHashing": "all",
               "budgets": [],
               "fileReplacements": [
                 {
@@ -181,7 +178,6 @@
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true,
-              "outputHashing": "all",
               "budgets": []
             },
             "da": {
