@@ -5411,9 +5411,6 @@
       <trans-unit id="6192599242508017517" datatype="html">
         <source>IT Systemer - GDPR - Hvad viste den seneste risikovurdering?</source>
       </trans-unit>
-      <trans-unit id="7067322126066426845" datatype="html">
-        <source>Dette felt styres af en leverandør og kan ikke ændres her.</source>
-      </trans-unit>
       <trans-unit id="7857124855661066958" datatype="html">
         <source>IT Systemer - Systemforside - Indeholder AI-teknologi?</source>
       </trans-unit>
@@ -5983,6 +5980,12 @@
       </trans-unit>
       <trans-unit id="7029500743315832858" datatype="html">
         <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span class=&quot;archive-duty-link&quot;&gt;"/> Læs mere hos <x id="START_LINK" ctype="x-a" equiv-text="&lt;a target=&quot;_blank&quot; href=&quot;https://www.sa.dk/da/offentlig-forvaltning/kommuner-og-regioner/bevaring-kassation-it-systemer/&quot; &gt;"/><x id="INTERPOLATION" equiv-text="{{ nationalArchivesText }}"/><x id="CLOSE_LINK" ctype="x-a" equiv-text="&lt;/a &gt;"/><x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="1419758105713365334" datatype="html">
+        <source>Denne handling styres af en leverandør og kan ikke udføres her – Lokal admin indstilling.</source>
+      </trans-unit>
+      <trans-unit id="1642240908531913708" datatype="html">
+        <source>Dette felt styres af en leverandør og kan ikke ændres her – Lokal admin indstilling.</source>
       </trans-unit>
     </body>
   </file>

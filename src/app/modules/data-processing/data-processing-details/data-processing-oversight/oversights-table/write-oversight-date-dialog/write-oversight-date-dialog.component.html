@@ -6,24 +6,30 @@
         [simpleLink$]="currentReportLink$"
         i18n-title
         [namePermission$]="oversightLinkNameFieldPermission$"
+        [nameDisabledMessage]="supplierText"
         [linkPermission$]="oversightLinkUrlFieldPermission$"
+        [linkDisabledMessage]="supplierText"
         (clearClick)="onClearReportLink()"
         (submitMethod)="onReportLinkChange($event)"
       ></app-edit-url-section>
-      <app-datepicker
-        text="Dato"
-        [formGroup]="oversightDateFormGroup"
-        formName="date"
-        data-cy="datepicker-control"
-        i18n-text
-      ></app-datepicker>
-      <app-textarea
-        text="Bemærkning"
-        [formGroup]="oversightDateFormGroup"
-        formName="notes"
-        data-cy="notes-control"
-        i18n-text
-      ></app-textarea>
+      <app-tooltip [text]="(oversightDateFieldPermission$ | async) !== true ? supplierText : ''">
+        <app-datepicker
+          text="Dato"
+          [formGroup]="oversightDateFormGroup"
+          formName="date"
+          data-cy="datepicker-control"
+          i18n-text
+        ></app-datepicker>
+      </app-tooltip>
+      <app-tooltip [text]="(oversightRemarkFieldPermission$ | async) !== true ? supplierText : ''">
+        <app-textarea
+          text="Bemærkning"
+          [formGroup]="oversightDateFormGroup"
+          formName="notes"
+          data-cy="notes-control"
+          i18n-text
+        ></app-textarea>
+      </app-tooltip>
       <app-dialog-actions>
         <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
         <app-button

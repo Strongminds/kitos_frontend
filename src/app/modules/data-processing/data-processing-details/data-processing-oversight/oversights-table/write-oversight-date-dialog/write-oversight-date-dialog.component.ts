@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -8,6 +9,8 @@ import { APIOversightDateDTO } from 'src/app/api/v2';
 import { EditUrlDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
 import { EditUrlSectionComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-section/edit-url-section.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
+import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
+import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { findDialogInstanceOf } from 'src/app/shared/helpers/dialog.helpers';
 import { dataProcessingFields } from 'src/app/shared/models/field-permissions-blueprints.model';
@@ -26,6 +29,7 @@ import { TextAreaComponent } from '../../../../../../shared/components/textarea/
   templateUrl: './write-oversight-date-dialog.component.html',
   styleUrl: './write-oversight-date-dialog.component.scss',
   imports: [
+    CommonModule,
     DialogComponent,
     FormsModule,
     ReactiveFormsModule,
@@ -35,10 +39,13 @@ import { TextAreaComponent } from '../../../../../../shared/components/textarea/
     DialogActionsComponent,
     ButtonComponent,
     EditUrlSectionComponent,
+    TooltipComponent,
   ],
 })
 export class WriteOversightDateDialogComponent extends BaseComponent implements OnInit {
   @Input() public oversightDate: APIOversightDateDTO | undefined;
+
+  public readonly supplierText = SUPPLIER_DISABLED_MESSAGE;
 
   public oversightDateFormGroup = new FormGroup({
     date: new FormControl<Date | undefined>(undefined, Validators.required),
