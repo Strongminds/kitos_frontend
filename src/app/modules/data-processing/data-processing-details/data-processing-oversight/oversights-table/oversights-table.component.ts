@@ -7,7 +7,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { ExternalPageLinkComponent } from 'src/app/shared/components/external-page-link/external-page-link.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
-import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
+import { SUPPLIER_ACTION_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { dataProcessingFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
@@ -54,7 +54,7 @@ export class OversightsTableComponent extends BaseComponent {
   public readonly anyOversightDates$ = this.oversightDates$.pipe(matchNonEmptyArray());
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
-  public readonly supplierText = SUPPLIER_DISABLED_MESSAGE;
+  public readonly supplierText = SUPPLIER_ACTION_DISABLED_MESSAGE;
 
   public readonly oversightDatesCollectionFieldPermission$ = this.store.select(
     selectDataProcessingFieldPermissions(dataProcessingFields.IsOversightCompleted)

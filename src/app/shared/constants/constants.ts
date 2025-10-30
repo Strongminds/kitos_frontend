@@ -68,3 +68,4 @@ export const OBLIGATORY_LOCAL_OPTION_HELP_TEXT = $localize`Dette udfald er oblig
 export const SSO_LOGIN_HANDLER_PATH = '/LoginHandler.ashx';
 
 export const SUPPLIER_DISABLED_MESSAGE = $localize`Dette felt styres af en leverandør og kan ikke ændres her – Lokal admin indstilling.`;
+export const SUPPLIER_ACTION_DISABLED_MESSAGE = $localize`Denne handling styres af en leverandør og kan ikke udføres her – Lokal admin indstilling.`;
