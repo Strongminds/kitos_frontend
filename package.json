@@ -19,7 +19,8 @@
     "e2e:ci": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng e2e --configuration ci",
     "i18n": "ng extract-i18n",
     "swagger": "rimraf src/app/api/v2 && rimraf src/app/api/v1 && openapi-generator-cli generate",
-    "swagger:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh swagger'"
+    "swagger:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh swagger'",
+    "reset-api-urls": "find src/app/api -type f -exec sed -i 's/localhost:44300/kitos-dev.strongminds.dk/g' {} +"
   },
   "private": true,
   "dependencies": {
