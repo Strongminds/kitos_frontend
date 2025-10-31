@@ -441,6 +441,10 @@
     @include center-items-container;
   }
 
+  .k-grid {
+  --kendo-color-border-alt: transparent !important;
+  }
+
   :host ::ng-deep {
     td {
       overflow: visible !important;
