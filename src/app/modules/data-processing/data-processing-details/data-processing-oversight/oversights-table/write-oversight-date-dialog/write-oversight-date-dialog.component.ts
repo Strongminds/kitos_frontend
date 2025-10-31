@@ -199,7 +199,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
 
     const request: APIOversightDateDTO = {
       completedAt: this.oversightDateFormGroup.value.date?.toISOString() ?? undefined,
-      remark: this.oversightDateFormGroup.value.notes ?? undefined,
+      remark: this.oversightDateFormGroup.value.notes ?? '',
       oversightReportLink: {
         url: this.oversightDateFormGroup.value.reportLinkUrl ?? undefined,
         name: this.oversightDateFormGroup.value.reportLinkName ?? undefined,
