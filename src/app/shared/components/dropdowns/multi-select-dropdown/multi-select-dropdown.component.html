@@ -10,13 +10,11 @@
   [clearable]="clearable"
   [loadingText]="loadingText"
   [notFoundText]="notFoundText"
-  [searchFn]="useExternalSearch ? externalSearch : null"
+  [searchFn]="useExternalSearch ? externalSearch : searchFn ?? null"
   (search)="filter$.next($event.term)"
   (clear)="onClear()"
   (focus)="onFocus()"
   (open)="onOpen()"
-  (blur)="onBlur()"
-  [items]="data ?? []"
   [multiple]="true"
   [required]="isRequired"
   [disabled]="disabled"
@@ -25,7 +23,6 @@
   (ngModelChange)="onSelected($event)"
   [addTagText]="addTagText"
   [addTag]="includeAddTag ? onCreateNew : false"
-  [searchFn]="searchFn"
   data-cy="multi-select-dropdown"
 >
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
@@ -37,16 +34,14 @@
         [ngModelOptions]="{ standalone: true }"
         [disabled]="item.disabled"
       />
-      @if (!showDescription || !item.value[itemDescriptionField]) {
+      @if (!showDescription || !item[itemDescriptionField]) {
       <p class="select-option-text-margin">
         {{ item.name }}
       </p>
-      } @if (item.value[itemDescriptionField] && showDescription) {
+      } @if (item[itemDescriptionField] && showDescription) {
       <div class="item-with-description">
         {{ item.name }}
-        @if (item.value[itemDescriptionField] && showDescription) {
-        <app-paragraph paragraphSize="small">{{ item.value[itemDescriptionField] }}</app-paragraph>
-        }
+        <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
       </div>
       } @if (isTagFn(item)) {
       <div class="ng-clear-wrapper remove-tag-button" (click)="removeTag(item)">
