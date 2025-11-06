@@ -38,7 +38,6 @@ export interface MultiSelectDropdownItem<T> {
 }
 
 export const mapUserToOption = (user: APIOrganizationUserResponseDTO): MultiSelectDropdownItem<string> => {
-  console.log('Mapping user to option:', user);
   return {
     value: user.uuid,
     name: user.name,
