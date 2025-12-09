@@ -2626,27 +2626,27 @@
   dependencies:
     "@progress/pako-esm" "^1.0.1"
 
-"@progress/kendo-angular-buttons@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-buttons/-/kendo-angular-buttons-20.1.0.tgz#a735771dce66a78c923e64d9a54301e8a4bb7ef7"
-  integrity sha512-ZIyxqiPpBGAZb1KgmytlPBgJ/Ain9A6NSQY5Mnw7267K7x834p6KvhSDmrSBFtpyjvj2am1tdGxN7Y1Cx/iuwQ==
+"@progress/kendo-angular-buttons@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-buttons/-/kendo-angular-buttons-20.1.1.tgz#9ce0e213f27762ef732f70e1e1884213bf5ee108"
+  integrity sha512-DvcRJ5YkytuKKML1/xcTpTq4S7mwyNDp2jyCa6X/dQi6mRHFaoDcsjDxCz5ducNFp2uYy2irsMbZ/gAGVHyfoA==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-common" "^1.0.1"
     "@progress/kendo-webspeech-common" "1.0.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-common@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-common/-/kendo-angular-common-20.1.0.tgz#1c657194be7375a9a796abca1935df9f49874bc3"
-  integrity sha512-cpk84F+3r0pyfArC7kv7rVE4iVKMTPS5ymmzb9RsszKCqGeFvZl5Qhu/QWGJn7C+AXy9z7R++ygqXqLtYu1NSA==
+"@progress/kendo-angular-common@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-common/-/kendo-angular-common-20.1.1.tgz#70cfb7428b0d49f181f2e4705007405695ec4356"
+  integrity sha512-p0ZVVMfn9H6ArAgmXGTg1k/1qtf3C78GvNFmnwScXMLfvaUiHZUTmtJ/3NiNfTOU/f2VJBQpetZSz6mTPh5f/Q==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-common" "^1.0.1"
     "@progress/kendo-draggable" "^3.0.2"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-conversational-ui@^20.1.0":
+"@progress/kendo-angular-conversational-ui@20.1.1":
   version "20.1.1"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-conversational-ui/-/kendo-angular-conversational-ui-20.1.1.tgz#ce24c84fc44bf48e405ab68e535c2ee4ac6f2c78"
   integrity sha512-77aRFheKssDh97sISfRnpLjfeXvZD9oySTvWkwo/PxvrOUYkvOz3wD/JY00i7pd14EauwhmjO4AK0ZWX98iTFA==
@@ -2654,49 +2654,49 @@
     "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-dateinputs@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dateinputs/-/kendo-angular-dateinputs-20.1.0.tgz#a3e1d080bb976b8a5c4303a4c115a44230a58df9"
-  integrity sha512-elTQhZEf+tuuXbL0PeAZfgDFZr6Qlr9l/L15FGfL4WLzVkfcpi0uPE2xzt1N+QEfGWd0UAwvLytg0iTrSOo6rw==
+"@progress/kendo-angular-dateinputs@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dateinputs/-/kendo-angular-dateinputs-20.1.1.tgz#017db3a384f4e1bb0bc5d411aca6d293e7529f2d"
+  integrity sha512-hsUjCxZn+pHhkE/2QNagu/Z8gu02B5m1KfKzXiGElRX8noV809+e5PbleMCTO2yGHu6IXSH+1TzBxVTsY4m2Zg==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-common" "^1.0.1"
     "@progress/kendo-date-math" "^1.1.0"
     "@progress/kendo-dateinputs-common" "^0.4.7"
     node-html-parser "^7.0.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-dialog@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dialog/-/kendo-angular-dialog-20.1.0.tgz#265fd1389b555585b332aa5a4f1d8b873a443881"
-  integrity sha512-faNIsl2CLa70F9AGqBpoTERyKoSwb2EsxLjl6EI4b4H9gdMGMarzTUJxkLgdN6/qevc2wyoPoiqkFcUnXbNHPQ==
+"@progress/kendo-angular-dialog@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dialog/-/kendo-angular-dialog-20.1.1.tgz#25fc19f42e89590aa126048883b5a00cfd2c5b58"
+  integrity sha512-enP2MPHKgFjyk1SnECrNiUjbMPgUH/7KRy4TH4gUQ72mJUBhWmqW49oxdwVaImvqU600Ta1HhfrpIfhBhFnSXQ==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-popup-common" "1.9.5"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-dropdowns@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dropdowns/-/kendo-angular-dropdowns-20.1.0.tgz#443e4512f1cf4aec1e37bef21170acc8235ac91d"
-  integrity sha512-X/pMDgyLoOrBBLiiK2agKDjBT9imqHPt+ShsYATzGq94LUG9dzZ1EWtStKXBTtJ3qp6MLotmC7umA+YQosZnVQ==
+"@progress/kendo-angular-dropdowns@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-dropdowns/-/kendo-angular-dropdowns-20.1.1.tgz#72daa68907afc1ce537ff1ef765fe356bfc2d64a"
+  integrity sha512-cwka3paFN1QrKIkHMS81FDkkKRP7V2FYXxRYyk808hNvUzukBDAjM/3KYe7/lo1OXkbijhSXrVPBDS6J8CKqBA==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-common" "^1.0.1"
     node-html-parser "^7.0.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-excel-export@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-excel-export/-/kendo-angular-excel-export-20.1.0.tgz#ec7c5494aea74c1ff924a41536b7e10aa5c798b4"
-  integrity sha512-TE2GHi30gmohE5eP5OKLNxY0ZrI6hVoBNYFEI9600V1Xg2klPKtUxGeA/Ix6nIFbUd5YcIqDVz+9t+IhbkNvvw==
+"@progress/kendo-angular-excel-export@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-excel-export/-/kendo-angular-excel-export-20.1.1.tgz#9cda0b6ba590a41eba6f1730f994f822e952955c"
+  integrity sha512-tNJ/3fdKZZI8GlUIqls5VdVWuIeSKcAMj0zjeoCKOXiQhK7knJmXJ2HWdRDiBk+AH0L2G/Hb5BJLx7o2mS2Okw==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-file-saver" "^1.0.0"
     "@progress/kendo-intl" "^3.0.0"
     "@progress/kendo-ooxml" "^1.9.0"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-grid@^20.1.0":
+"@progress/kendo-angular-grid@20.1.1":
   version "20.1.1"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-grid/-/kendo-angular-grid-20.1.1.tgz#b9ff380d2883e2e3a11a94dc17722c5dca46f149"
   integrity sha512-QGsDxYH4wStCaHH9SzIej7aiLN6jn7OAWMvb2AWcS+F2NOlh8KzfjGB5xUVcMHMzUHG16yhMh+eSsilnSH/dLw==
@@ -2706,15 +2706,15 @@
     "@progress/kendo-file-saver" "^1.0.0"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-icons@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-icons/-/kendo-angular-icons-20.1.0.tgz#7a61951e1bf9e5cf34d6f7e940265c6aef5e7c19"
-  integrity sha512-MDGnhY8Pr7ThlAoVl7MNgNOezLjaKhe3X3gGQj1nx1VpYu+ll6gWsXQ/m5QGksVzxGKus6i3CK0Nq4NFWVc7eg==
+"@progress/kendo-angular-icons@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-icons/-/kendo-angular-icons-20.1.1.tgz#03b170760090f2a6ebaa0fb37ffb55b3faff5df3"
+  integrity sha512-NKVzaH+rXTHsYQ384RD6k34CvxBA+PT8thGfWW3p+u27aRWafpWdDbd/xN08Y68d0YJGW6WZ5a+9EMrcHNtPwA==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-indicators@^20.1.0":
+"@progress/kendo-angular-indicators@20.1.1":
   version "20.1.1"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-indicators/-/kendo-angular-indicators-20.1.1.tgz#8bbf8dd18501307357879c05df891a68e269da0b"
   integrity sha512-SlHknkyPFmJ0gpUCzyYVnoVfNEq0M0qCElaSuAmVGHy3BnAFuvSXxjR6icuQoj9trUmIbYmi+W95IvXdfDWMfQ==
@@ -2722,53 +2722,53 @@
     "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-inputs@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-inputs/-/kendo-angular-inputs-20.1.0.tgz#9221054a4104e80e320cc9fdf96c08d3f7310518"
-  integrity sha512-CvKY/HHzS3mFN5U7Ac/cfuIZmecVHYVUrygRCmWAmcxDcyXeBE2XIl8jLLFcan8/BgJaf3DHIcYRWyZKO3HFUw==
+"@progress/kendo-angular-inputs@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-inputs/-/kendo-angular-inputs-20.1.1.tgz#e3af91a7df362de0aebbdf4dec7f35bd92daf526"
+  integrity sha512-9NYEY59WP6E04E+z9G7ldQNvlnPZV9C6Laqim/Yp6uVSj50INEDYaZeJ7nu68siIFps+o3tIv2/sQLhqhDf2MA==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-common" "^1.0.1"
     "@progress/kendo-draggable" "^3.0.0"
     "@progress/kendo-inputs-common" "^3.1.0"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-intl@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-intl/-/kendo-angular-intl-20.1.0.tgz#20664f5cca3eb33b408fa37b824809c444f2a71a"
-  integrity sha512-wfFwe78o3/OABua0zwR8Lj8tsTDEIKKqek135DyiStnnvJlcS2POGL7pgFbVInTB8Nr34tvyWf2+RrVVG2HRkA==
+"@progress/kendo-angular-intl@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-intl/-/kendo-angular-intl-20.1.1.tgz#924b5a998eeee7c754e00c92616a553beb282656"
+  integrity sha512-Ale6Hoy4H70c/y5jk8gm+c91Y/rpeEUH7FTtI35ri40fNqU/9pdrUzSAfQ7Zp732+2R/siMfh89+gaLuK3Svxg==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-intl" "^3.1.0"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-l10n@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-l10n/-/kendo-angular-l10n-20.1.0.tgz#fdfff9bdcd9d9c45619676f8163021b20a89a3e6"
-  integrity sha512-5kR42rWmlKghOmOqFHYKeesny7Osfx0r1wKSlOwTg26hlL8xdfXcfJZjFfj9F1eyu2SHm+vsj/RZXGPgNk/wng==
+"@progress/kendo-angular-l10n@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-l10n/-/kendo-angular-l10n-20.1.1.tgz#1e4068e51e34613037a191c40fdadf367b36ace9"
+  integrity sha512-+jpFdo3iEIt20V5feFF4X1IYUEojXBlpmkYxa3Iv38yhXReu3imtbVYhotA1u4j0ycnmcbbIEqwr1s2Jx61m9A==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-label@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-label/-/kendo-angular-label-20.1.0.tgz#7979cf7c5ac2066ce5b3b2cacfecb12df5e1753f"
-  integrity sha512-x18g0KoHhGZAQg2gXUfYFG2rLBG6nFVGbW2o7hYs2qBhuv2vt2qaFFmHs57rC68KtM9xP/lMfAz86uyW1ovyXw==
+"@progress/kendo-angular-label@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-label/-/kendo-angular-label-20.1.1.tgz#c38f59465198fc4114d5b887af8c3a80352ac8b6"
+  integrity sha512-V3IioDxLPbHElVOOPhvAbQ6HaROdsT/SNMLwIVMAdjgc3ee343ybb2Nb2OJKrZZOfOo4i1Wyt6CcowXtNp9gQA==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-layout@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-layout/-/kendo-angular-layout-20.1.0.tgz#a6cd01a3ad79795f2cfdbc2f97ba31bf532494e7"
-  integrity sha512-6GT8ohxvhzgksB4X9VdLHon89EgStmQZ7+JUT/Ik6tKp/NwDrsqjBVqoI71GBA5umeSmWCnyclWn5HSWF1ylwg==
+"@progress/kendo-angular-layout@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-layout/-/kendo-angular-layout-20.1.1.tgz#1197a1090db245928dcd628c71536dcaead1c8e9"
+  integrity sha512-NkX37xjkC/epSFw8lV2l9W0TWVvPp4o1LWQEFL8ytBL2lHEkXLKUsy5wcfirJCfv0ImkyeizIvreGqjAHmO+2A==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-draggable" "^3.0.2"
     node-html-parser "^7.0.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-menu@^20.1.0":
+"@progress/kendo-angular-menu@20.1.1":
   version "20.1.1"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-menu/-/kendo-angular-menu-20.1.1.tgz#042780c0404be8f029510f535112d7295d95e789"
   integrity sha512-QIXJu6zc/NWGWmGgCJCX60L0ZZvWWxnad3wM0ETdTho//XHXNWKsuHa9Oxcaqf6i48kMVNe6BUKU23TvVyTSeA==
@@ -2776,15 +2776,15 @@
     "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-navigation@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-navigation/-/kendo-angular-navigation-20.1.0.tgz#35886519b46f539e35a4c8e8d80e170b2d4ed053"
-  integrity sha512-dCjgLe23m/HKQ/YWqt1kvTeemUzBEhRVeu3NbXNt0mL+za8XWjpqYH9Umubbnvmd/aimG4bvKNM7BeM9Z5x3qw==
+"@progress/kendo-angular-navigation@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-navigation/-/kendo-angular-navigation-20.1.1.tgz#69dc65a1ccec89db966b0eb46c0e7acb8cdd9988"
+  integrity sha512-2sKKLCHVOPFTEdyquY53SL1xg8IIk0zm8DYvdblurcc3bUKuVZbr0n127eLpm59/oJt83eHm3ce2p1jzemb3Kg==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-pager@^20.1.0":
+"@progress/kendo-angular-pager@20.1.1":
   version "20.1.1"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-pager/-/kendo-angular-pager-20.1.1.tgz#b16bdac378f3e17ff6a11490d8e7f818c3065ef6"
   integrity sha512-+WE8uP9M1RjJu6IuUeD54Gb5VozbHcjQ2ue1wxaS+JVeVuWgNw7FKKyoPQd/nhMoPFeDp21vtwco9CWkt3c6HQ==
@@ -2792,40 +2792,31 @@
     "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-pdf-export@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-pdf-export/-/kendo-angular-pdf-export-20.1.0.tgz#2e5b07dc83bdbaf8bee37179d33aec65d6783998"
-  integrity sha512-7ZmS7iMidxkFe0xJmpG1DAaXRByWYNZWS6GRzLssQQahlEBjLJvHAcCtdblYVuvuVWAgYGIASfdhp7NOpjdSKw==
+"@progress/kendo-angular-pdf-export@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-pdf-export/-/kendo-angular-pdf-export-20.1.1.tgz#9973d5b12da51da649c0ded1f9e77d0f6d762c97"
+  integrity sha512-L+Mc7/BML2wyu2fNYwjvs1kIN7fIcms9K6UUiizcylWB/X0IX3I/2qCtOEOQG64AHssQ4lQmYAYW1DoYwZmPQQ==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-file-saver" "^1.0.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-popup@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-popup/-/kendo-angular-popup-20.1.0.tgz#c41c4f25237a5b75eb5774322c70f7ca73bd55e3"
-  integrity sha512-xshMm+zg+SVx9b2Pnii3Pq7Uc4voFr0LmcbsiTYqYYk0knBi+jmAz/maMrYtRKOngvvouZZMO3Q7pftQbHhEhA==
+"@progress/kendo-angular-popup@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-popup/-/kendo-angular-popup-20.1.1.tgz#bff3e977ecf258b7f2b59684683fa41b255d930e"
+  integrity sha512-FPzl3gjX63ZQ94ofCs5+QpS+brPc5/YCz14f9XdfvlzK/RPVcGGc3Yb+EsacGHQlczlpcOBZAIWOdPOKEcdJdQ==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-popup-common" "1.9.5"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-progressbar@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-progressbar/-/kendo-angular-progressbar-20.1.0.tgz#62c3cf798a92dc857b0b6e6bb26ab117664daf2d"
-  integrity sha512-dOroMOZQYGYK141/ySgVgt1f/77eFg06i/BzqoAzVulC4s0qNx/NdjIcyG/dlKPGHMUwt3qJYLldLToXbFUjRQ==
+"@progress/kendo-angular-progressbar@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-progressbar/-/kendo-angular-progressbar-20.1.1.tgz#eff9997ce5c2857174073f42f32183766ac9d2f3"
+  integrity sha512-X0dpy73WRR4LtvWayRcStfcXh1iSG5BM6gravUXpJ9+PNS2h2FDM9VB/Z89rNUNlmPzTfyQl91oqlotIVarrnA==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
-
-"@progress/kendo-angular-schematics@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-schematics/-/kendo-angular-schematics-20.1.0.tgz#48bf4a04eccc83d46d6f4be277d06e157721f909"
-  integrity sha512-/Hw55Mbq2B49l3/1pqDVJfB+aG2L90Mf2oWqy6U11e78ui+znUzrCMWtL5+wui2ecNfxQmOHcJlRmAxoGc1UtQ==
-  dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
-    "@types/semver" "^7.5.0"
-    semver "^7.5.3"
 
 "@progress/kendo-angular-schematics@20.1.1":
   version "20.1.1"
@@ -2836,7 +2827,7 @@
     "@types/semver" "^7.5.0"
     semver "^7.5.3"
 
-"@progress/kendo-angular-toolbar@^20.1.0":
+"@progress/kendo-angular-toolbar@20.1.1":
   version "20.1.1"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-toolbar/-/kendo-angular-toolbar-20.1.1.tgz#4b901582db713824a67c07fd532ae48be93b8ec3"
   integrity sha512-yrVymQz0uv2HcSPgl2/3ZVEtrQkMnWVqVkNvCzEnhOrDhriKwj5J7g9Y6PMrrLkmv9cJJwjRfjn9pH0TeyOJ2w==
@@ -2845,17 +2836,17 @@
     node-html-parser "^7.0.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-treeview@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-treeview/-/kendo-angular-treeview-20.1.0.tgz#7fa51cb714e48a1a7e7027a3d13059f0ee5ee6da"
-  integrity sha512-Po/JKyWW08UQ1s7chcQxV4vufmum0k9xwBDkI2Jb9Rvm6wb/o8ymWaegKOZQGqMFczHPG9+7jXW8cncdMJ6BVA==
+"@progress/kendo-angular-treeview@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-treeview/-/kendo-angular-treeview-20.1.1.tgz#ad3ad5b1728e9d80a070f620f57baaf05231cf48"
+  integrity sha512-uupdsDcwg3hDvzKRWoEaQnQwHpDVyf1kCXWEoprpw/K7yXfTjux0+lfMziWNVQZYwXxLwRfP7PEqelyQKoOdyQ==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-common" "^1.0.1"
     "@progress/kendo-draggable" "^3.0.2"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-upload@^20.1.0":
+"@progress/kendo-angular-upload@20.1.1":
   version "20.1.1"
   resolved "https://registry.yarnpkg.com/@progress/kendo-angular-upload/-/kendo-angular-upload-20.1.1.tgz#8b18c22b45608140f41176c28aa4233494329847"
   integrity sha512-+gg+iOMT93rAwPRLWerPfToGx7+Er/gWKKFJevxSfo+vx07jb4WtTncVIc7x9sv+cWtlhdebg1Bq6UVAUngalg==
@@ -2863,12 +2854,12 @@
     "@progress/kendo-angular-schematics" "20.1.1"
     tslib "^2.3.1"
 
-"@progress/kendo-angular-utils@20.1.0":
-  version "20.1.0"
-  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-utils/-/kendo-angular-utils-20.1.0.tgz#dbae7c4037f1827db179a23c97977feb9e704426"
-  integrity sha512-VI8YB0VPt+tgoADCYVqyv2TO422dllPtZlC+UvgajQyumxsqDucr3srpjja22/YDyUZPv2Lhlr42ESnxKPIsiw==
+"@progress/kendo-angular-utils@20.1.1":
+  version "20.1.1"
+  resolved "https://registry.yarnpkg.com/@progress/kendo-angular-utils/-/kendo-angular-utils-20.1.1.tgz#460e9e4f4b57bb57eb83ae3c116d4ab28390e208"
+  integrity sha512-U369lOk2Gu7qd8tmOjZvMWvvCoa3CXFytuj7oI7ADg4Dgnk5fI8/BPCFS9lRHDmtuEOGyaKDfl3mUfrcvW4l4g==
   dependencies:
-    "@progress/kendo-angular-schematics" "20.1.0"
+    "@progress/kendo-angular-schematics" "20.1.1"
     "@progress/kendo-draggable-common" "^0.2.3"
     tslib "^2.3.1"
 
