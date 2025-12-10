@@ -4847,9 +4847,6 @@
       <trans-unit id="2479737654708088517" datatype="html">
         <source>Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</source>
       </trans-unit>
-      <trans-unit id="5207851183117045385" datatype="html">
-        <source>Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</source>
-      </trans-unit>
       <trans-unit id="2306616791979379771" datatype="html">
         <source>Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</source>
       </trans-unit>
@@ -5986,6 +5983,9 @@
       </trans-unit>
       <trans-unit id="1642240908531913708" datatype="html">
         <source>Dette felt styres af en leverandør og kan ikke ændres her – Lokal admin indstilling.</source>
+      </trans-unit>
+      <trans-unit id="559341306136007517" datatype="html">
+        <source>Filtrer på visning af aktive/ikke aktive systemer, efter om slutdatoen for systemanvendelse er udløbet.</source>
       </trans-unit>
     </body>
   </file>

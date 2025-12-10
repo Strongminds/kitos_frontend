@@ -118,7 +118,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'chip',
       hidden: false,
       persistId: 'isActive',
-      helpText: $localize`Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.`,
+      helpText: $localize`Filtrer på visning af aktive/ikke aktive systemer, efter om slutdatoen for systemanvendelse er udløbet.`,
     },
     {
       field: GridFields.ActiveAccordingToLifeCycle,
