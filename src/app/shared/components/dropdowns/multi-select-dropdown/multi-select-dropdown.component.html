@@ -28,22 +28,23 @@
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
     <div class="select-option-row" [attr.data-cy]="item.dataCy">
       <input
-        id="item-{{ item.name }}"
+        id="item-{{ item[textField] }}"
         type="checkbox"
         [(ngModel)]="item$.selected"
         [ngModelOptions]="{ standalone: true }"
         [disabled]="item.disabled"
       />
-      @if (!showDescription || !item[itemDescriptionField]) {
+      @if (!showDescription || !(item[itemDescriptionField] || item.value?.[itemDescriptionField])) {
       <p class="select-option-text-margin">
-        {{ item.name }}
+        {{ item[textField] }}
       </p>
-      } @if (item[itemDescriptionField] && showDescription) {
+      } @else {
       <div class="item-with-description">
-        {{ item.name }}
-        <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
+        {{ item[textField] }}
+        <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] || item.value?.[itemDescriptionField] }}</app-paragraph>
       </div>
-      } @if (isTagFn(item)) {
+      }
+      @if (isTagFn(item)) {
       <div class="ng-clear-wrapper remove-tag-button" (click)="removeTag(item)">
         <span class="ng-clear">x</span>
       </div>
@@ -53,7 +54,7 @@
   <ng-template ng-multi-label-tmp let-items="items">
     <div class="value-textbox-margin ng-value">
       @for (item of items; track item; let isLast = $last) {
-      <span class="ng-value-label">{{ item.name }}@if (!isLast) { ,&nbsp; }</span>
+      <span class="ng-value-label">{{ item[textField] }}@if (!isLast) { ,&nbsp; }</span>
       }
     </div>
   </ng-template>

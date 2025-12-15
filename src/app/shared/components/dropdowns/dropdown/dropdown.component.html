@@ -26,12 +26,10 @@
     <ng-template ng-option-tmp let-item="item">
       @if (!showDescription || !item[itemDescriptionField]) {
       {{ item[textField] }}
-      } @if (item[itemDescriptionField] && showDescription) {
+      } @else {
       <div class="description">
         {{ item[textField] }}
-        @if (item[itemDescriptionField] && showDescription) {
         <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
-        }
       </div>
       }
     </ng-template>
@@ -65,12 +63,10 @@
   <ng-template ng-option-tmp let-item="item">
     @if (!showDescription || !item[itemDescriptionField]) {
     {{ item[textField] }}
-    } @if (item[itemDescriptionField] && showDescription) {
+    } @else {
     <div class="description">
       {{ item[textField] }}
-      @if (item[itemDescriptionField] && showDescription) {
       <app-paragraph paragraphSize="small">{{ item[itemDescriptionField] }}</app-paragraph>
-      }
     </div>
     }
   </ng-template>
