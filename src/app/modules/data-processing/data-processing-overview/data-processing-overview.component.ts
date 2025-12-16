@@ -54,7 +54,7 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
     CreateEntityButtonComponent,
     GridComponent,
     AsyncPipe
-],
+  ],
 })
 export class DataProcessingOverviewComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectDataProcessingGridLoading);
@@ -234,6 +234,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       style: 'date',
       hidden: true,
       persistId: 'agreementConcludedAt',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.OversightInterval,
@@ -272,6 +273,7 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       filter: 'date',
       style: 'date',
       persistId: 'scheduledInspectionDate',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.LatestOversightDate,

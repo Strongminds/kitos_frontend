@@ -349,6 +349,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 350,
       hidden: false,
       persistId: 'systemUsageExpirationDate',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.LifeCycleStatus,
@@ -511,6 +512,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 350,
       hidden: false,
       persistId: 'PlannedRiskAssessmentDate',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.Note,
