@@ -77,6 +77,21 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
     },
   ];
 
+  private readonly mainContractStatusData = [
+    {
+      name: $localize`Ingen kontrakt`,
+      value: 'NoContract',
+    },
+    {
+      name: $localize`Aktivt`,
+      value: 'Active',
+    },
+    {
+      name: $localize`Inaktivt`,
+      value: 'Inactive',
+    },
+  ];
+
   public readonly defaultGridColumns: GridColumn[] = [
     {
       field: GridFields.Name,
@@ -91,10 +106,11 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       field: GridFields.ActiveAccordingToMainContract,
       title: $localize`Status (Markeret kontrakt)`,
       section: DATA_PROCESSING_SECTION_NAME,
-      filter: 'boolean',
+      filter: 'text',
+      extraFilter: 'enum',
       entityType: 'data-processing-registration',
-      extraData: this.activeOptions,
-      style: 'chip',
+      extraData: this.mainContractStatusData,
+      style: 'contract-status-chip',
       width: 340,
       hidden: true,
       persistId: 'mainContract',

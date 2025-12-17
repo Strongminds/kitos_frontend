@@ -5,6 +5,7 @@ import { ActionButtonsCellComponent } from './cell-types/action-buttons-cell/act
 import { AuditCellComponent } from './cell-types/audit-cell/audit-cell.component';
 import { BooleanCellComponent } from './cell-types/boolean-cell/boolean-cell.component';
 import { CheckboxCellComponent } from './cell-types/checkbox-cell/checkbox-cell.component';
+import { ContractStatusChipCellComponent } from './cell-types/contract-status-chip-cell/contract-status-chip-cell.component';
 import { DateCellComponent } from './cell-types/date-cell/date-cell.component';
 import { DefaultWrapCellComponent } from './cell-types/default-wrap-cell/default-wrap-cell.component';
 import { EnumCellComponent } from './cell-types/enum-cell/enum-cell.component';
@@ -40,8 +41,9 @@ import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-
     PageLinkArrayCellComponent,
     UuidToNameCellComponent,
     AuditCellComponent,
-    ActionButtonsCellComponent
-],
+    ActionButtonsCellComponent,
+    ContractStatusChipCellComponent
+  ],
 })
 export class GridCellComponent extends BaseCellComponent {
   @Output() public checkboxChange = new EventEmitter<boolean>();

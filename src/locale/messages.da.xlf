@@ -7155,10 +7155,6 @@
         <source>Snitflade ID&apos;er:</source>
         <target state="new">Snitflade ID&apos;er:</target>
       </trans-unit>
-      <trans-unit id="5041204670674740051" datatype="html">
-        <source>Snitflade ID:</source>
-        <target state="new">Snitflade ID:</target>
-      </trans-unit>
       <trans-unit id="5590695852945551148" datatype="html">
         <source>Toggle options</source>
         <target state="new">Toggle options</target>
@@ -7820,6 +7816,14 @@
       <trans-unit id="559341306136007517" datatype="html">
         <source>Filtrer på visning af aktive/ikke aktive systemer, efter om slutdatoen for systemanvendelse er udløbet.</source>
         <target state="new">Filtrer på visning af aktive/ikke aktive systemer, efter om slutdatoen for systemanvendelse er udløbet.</target>
+      </trans-unit>
+      <trans-unit id="5253916585354635099" datatype="html">
+        <source>Ingen kontrakt</source>
+        <target state="new">Ingen kontrakt</target>
+      </trans-unit>
+      <trans-unit id="1075043096071936822" datatype="html">
+        <source>Inaktivt</source>
+        <target state="new">Inaktivt</target>
       </trans-unit>
     </body>
   </file>

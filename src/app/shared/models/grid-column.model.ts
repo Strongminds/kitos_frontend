@@ -46,7 +46,8 @@ export interface GridColumn {
   | 'role-excel-only'
   | 'action-buttons'
   | 'integer-with-thousands-separator'
-  | 'contract-audit'; //Style of the column
+  | 'contract-audit'
+  | 'contract-status-chip'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden

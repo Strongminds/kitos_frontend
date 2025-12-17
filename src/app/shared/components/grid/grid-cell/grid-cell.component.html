@@ -92,6 +92,13 @@
   <app-audit-cell [column]="column" [dataItem]="dataItem"></app-audit-cell>
 }
 
+@if (column.style === 'contract-status-chip') {
+  <app-contract-status-chip-cell
+    [column]="column"
+    [dataItem]="dataItem"
+  ></app-contract-status-chip-cell>
+}
+
 @if (column.style === 'action-buttons' && (modifyPermission || deletePermission)) {
   <app-action-buttons-cell
     [column]="column"

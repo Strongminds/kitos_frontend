@@ -95,6 +95,21 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       value: false,
     },
   ];
+
+  private readonly mainContractStatusData = [
+    {
+      name: $localize`Ingen kontrakt`,
+      value: 'NoContract',
+    },
+    {
+      name: $localize`Aktivt`,
+      value: 'Active',
+    },
+    {
+      name: $localize`Inaktivt`,
+      value: 'Inactive',
+    },
+  ];
   public readonly defaultGridColumns: GridColumn[] = [
     {
       field: GridFields.SystemActive,
@@ -136,10 +151,11 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       field: GridFields.MainContractIsActive,
       title: $localize`Status (Markeret kontrakt)`,
       section: this.systemSectionName,
-      filter: 'boolean',
-      extraData: this.activeInactiveData,
+      filter: 'text',
+      extraFilter: 'enum',
+      extraData: this.mainContractStatusData,
       entityType: 'it-system-usage',
-      style: 'chip',
+      style: 'contract-status-chip',
       width: 340,
       hidden: false,
       persistId: 'contract',
