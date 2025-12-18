@@ -7,6 +7,7 @@
   >
   <app-connected-dropdown
         text="Søg efter snitflade"
+        textField="name"
         valueField="uuid"
         [data$]="interfaces$"
         [isLoading$]="interfacesLoading$"
@@ -16,7 +17,6 @@
         [includeItemDescription]="true"
         itemDescriptionField="interfaceId"
         descriptionLabelTitle="Snitflade ID:"
-        i18n-descriptionLabelTitle
         i18n-text
       >
       </app-connected-dropdown>

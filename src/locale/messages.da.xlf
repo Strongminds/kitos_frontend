@@ -6379,10 +6379,6 @@
         <source>Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</source>
         <target state="new">Filtrerer systemerne efter om de er aktive/ikke aktive, uanset årsag.</target>
       </trans-unit>
-      <trans-unit id="5207851183117045385" datatype="html">
-        <source>Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</source>
-        <target state="new">Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.</target>
-      </trans-unit>
       <trans-unit id="2306616791979379771" datatype="html">
         <source>Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</source>
         <target state="new">Filtrerer på visning efter systemets livscyklus markeret på system forsiden.</target>
@@ -7159,10 +7155,6 @@
         <source>Snitflade ID&apos;er:</source>
         <target state="new">Snitflade ID&apos;er:</target>
       </trans-unit>
-      <trans-unit id="5041204670674740051" datatype="html">
-        <source>Snitflade ID:</source>
-        <target state="new">Snitflade ID:</target>
-      </trans-unit>
       <trans-unit id="5590695852945551148" datatype="html">
         <source>Toggle options</source>
         <target state="new">Toggle options</target>
@@ -7820,6 +7812,18 @@
       <trans-unit id="1419758105713365334" datatype="html">
         <source>Denne handling styres af en leverandør og kan ikke udføres her – Lokal admin indstilling.</source>
         <target state="new">Denne handling styres af en leverandør og kan ikke udføres her – Lokal admin indstilling.</target>
+      </trans-unit>
+      <trans-unit id="559341306136007517" datatype="html">
+        <source>Filtrer på visning af aktive/ikke aktive systemer, efter om slutdatoen for systemanvendelse er udløbet.</source>
+        <target state="new">Filtrer på visning af aktive/ikke aktive systemer, efter om slutdatoen for systemanvendelse er udløbet.</target>
+      </trans-unit>
+      <trans-unit id="5253916585354635099" datatype="html">
+        <source>Ingen kontrakt</source>
+        <target state="new">Ingen kontrakt</target>
+      </trans-unit>
+      <trans-unit id="1075043096071936822" datatype="html">
+        <source>Inaktivt</source>
+        <target state="new">Inaktivt</target>
       </trans-unit>
     </body>
   </file>

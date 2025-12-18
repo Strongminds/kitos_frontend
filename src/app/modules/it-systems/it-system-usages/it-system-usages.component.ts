@@ -95,6 +95,21 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       value: false,
     },
   ];
+
+  private readonly mainContractStatusData = [
+    {
+      name: $localize`Ingen kontrakt`,
+      value: 'NoContract',
+    },
+    {
+      name: $localize`Aktivt`,
+      value: 'Active',
+    },
+    {
+      name: $localize`Inaktivt`,
+      value: 'Inactive',
+    },
+  ];
   public readonly defaultGridColumns: GridColumn[] = [
     {
       field: GridFields.SystemActive,
@@ -118,7 +133,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'chip',
       hidden: false,
       persistId: 'isActive',
-      helpText: $localize`Filtrerer på visning af aktive/ikke aktive systemer, efter om datoen på den tilknyttede kontrakt fra kontrakt modulet er udløbet.`,
+      helpText: $localize`Filtrer på visning af aktive/ikke aktive systemer, efter om slutdatoen for systemanvendelse er udløbet.`,
     },
     {
       field: GridFields.ActiveAccordingToLifeCycle,
@@ -136,10 +151,11 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       field: GridFields.MainContractIsActive,
       title: $localize`Status (Markeret kontrakt)`,
       section: this.systemSectionName,
-      filter: 'boolean',
-      extraData: this.activeInactiveData,
+      filter: 'text',
+      extraFilter: 'enum',
+      extraData: this.mainContractStatusData,
       entityType: 'it-system-usage',
-      style: 'chip',
+      style: 'contract-status-chip',
       width: 340,
       hidden: false,
       persistId: 'contract',
@@ -349,6 +365,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 350,
       hidden: false,
       persistId: 'systemUsageExpirationDate',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.LifeCycleStatus,
@@ -511,6 +528,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 350,
       hidden: false,
       persistId: 'PlannedRiskAssessmentDate',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.Note,

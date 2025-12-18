@@ -52,7 +52,7 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
     CreateEntityButtonComponent,
     GridComponent,
     AsyncPipe
-],
+  ],
 })
 export class ITContractsComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectContractGridLoading);
@@ -141,6 +141,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       width: 350,
       hidden: false,
       persistId: 'expirationDate',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.CriticalityUuid,
@@ -416,6 +417,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       width: 350,
       hidden: false,
       persistId: 'irrevocableTo',
+      defaultDateFilterOperator: 'lte',
     },
     {
       field: GridFields.TerminatedAt,

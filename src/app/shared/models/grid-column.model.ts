@@ -26,27 +26,28 @@ export interface GridColumn {
   dataField?: string; //Field containing data for the column (in case the 'field' property is necessary only for filtering)
   entityType?: RegistrationEntityTypes;
   style?:
-    | 'default'
-    | 'default-wrap' //Text field where overflow results in wrap instead of ellipsis
-    | 'primary'
-    | 'chip'
-    | 'reverse-chip'
-    | 'boolean'
-    | 'enum'
-    | 'link'
-    | 'page-link'
-    | 'page-link-array-with-submodules'
-    | 'title-link'
-    | 'checkbox'
-    | 'date'
-    | 'usages'
-    | 'page-link-array'
-    | 'uuid-to-name'
-    | 'excel-only'
-    | 'role-excel-only'
-    | 'action-buttons'
-    | 'integer-with-thousands-separator'
-    | 'contract-audit'; //Style of the column
+  | 'default'
+  | 'default-wrap' //Text field where overflow results in wrap instead of ellipsis
+  | 'primary'
+  | 'chip'
+  | 'reverse-chip'
+  | 'boolean'
+  | 'enum'
+  | 'link'
+  | 'page-link'
+  | 'page-link-array-with-submodules'
+  | 'title-link'
+  | 'checkbox'
+  | 'date'
+  | 'usages'
+  | 'page-link-array'
+  | 'uuid-to-name'
+  | 'excel-only'
+  | 'role-excel-only'
+  | 'action-buttons'
+  | 'integer-with-thousands-separator'
+  | 'contract-audit'
+  | 'contract-status-chip'; //Style of the column
   width?: number;
   minResizableWidth?: number;
   //Can column be hidden
@@ -63,6 +64,7 @@ export interface GridColumn {
   linkArraySeparator?: ', ' | ' - ';
   helpText?: string;
   itemTooltipField?: string;
+  defaultDateFilterOperator?: 'gte' | 'lte'; // Default date filter operator: 'gte' for "Fra og med", 'lte' for "Til og med"
 
   // snake case to differentiate from the standard field properties
   order_id?: number; //Automatically set, used to always sort columns in the same order
