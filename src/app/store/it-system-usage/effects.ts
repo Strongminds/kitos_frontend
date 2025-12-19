@@ -60,7 +60,7 @@ export class ITSystemUsageEffects {
     @Inject(APIV2OrganizationGridInternalINTERNALService)
     private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
     private gridDataCacheService: GridDataCacheService
-  ) {}
+  ) { }
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
@@ -185,7 +185,7 @@ export class ITSystemUsageEffects {
           organizationUsage: {
             usingOrganizationUnitUuids: unitUuids,
             responsibleOrganizationUnitUuid:
-              responsibleUnit?.uuid && unitUuids.includes(responsibleUnit?.uuid) ? null : undefined,
+              responsibleUnit?.uuid && unitUuids.includes(responsibleUnit?.uuid) ? undefined : null,
           },
         } as APIUpdateItSystemUsageRequestDTO;
 
@@ -447,7 +447,7 @@ export class ITSystemUsageEffects {
     );
   });
 
-   addItSystemUsageRelations$ = createEffect(() => {
+  addItSystemUsageRelations$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.addItSystemUsageRelations),
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
