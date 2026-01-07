@@ -17,6 +17,7 @@ export interface GridColumn {
   extraFilter?: 'enum' | 'organization-unit' | 'choice-type' | 'dropdown-from-column-data' | 'choice-type-by-name'; //Filters other than the base kendo filters
   noFilter?: boolean; //If true hides the filter for the column
   sortable?: boolean; //If true allows sorting for the column
+  sortField?: string; //Field to use for sorting (if different from display field)
   sortFilter?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   extraData?: any; //Data for dropdown filters

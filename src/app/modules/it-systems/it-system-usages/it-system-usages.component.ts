@@ -102,11 +102,11 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       value: 'NoContract',
     },
     {
-      name: $localize`Aktivt`,
+      name: $localize`Aktiv`,
       value: 'Active',
     },
     {
-      name: $localize`Inaktivt`,
+      name: $localize`Ikke aktiv`,
       value: 'Inactive',
     },
   ];
@@ -159,6 +159,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       width: 340,
       hidden: false,
       persistId: 'contract',
+      sortField: GridFields.MainContractIsActiveSortOrder,
       helpText: $localize`Filtrerer på visning af systemer med en aktiv/ikke aktiv kontrakt tilknyttet fra kontrakt modulet.`,
     },
     {

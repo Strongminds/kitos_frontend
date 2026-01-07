@@ -2,6 +2,7 @@ export const SystemActive = 'SystemActive';
 export const ActiveAccordingToValidityPeriod = 'ActiveAccordingToValidityPeriod';
 export const ActiveAccordingToLifeCycle = 'ActiveAccordingToLifeCycle';
 export const MainContractIsActive = 'MainContractIsActive';
+export const MainContractIsActiveSortOrder = 'MainContractIsActiveSortOrder';
 export const LocalSystemId = 'LocalSystemId';
 export const ItSystemUuid = 'ItSystemUuid';
 export const SystemDescription = 'SystemDescription';

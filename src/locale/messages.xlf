@@ -5984,9 +5984,6 @@
       <trans-unit id="559341306136007517" datatype="html">
         <source>Filtrer på visning af aktive/ikke aktive systemer, efter om slutdatoen for systemanvendelse er udløbet.</source>
       </trans-unit>
-      <trans-unit id="1075043096071936822" datatype="html">
-        <source>Inaktivt</source>
-      </trans-unit>
       <trans-unit id="5253916585354635099" datatype="html">
         <source>Ingen kontrakt</source>
       </trans-unit>

@@ -167,6 +167,8 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.stateChangeSubject.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe((state) => {
         if (state) {
+          // Emit the state with original field names
+          // Remapping happens in the store effects/reducers, not here
           this.stateChange.emit(state);
         }
       })
@@ -203,9 +205,19 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
     this.subscriptions.add(
       this.columns$.pipe(first()).subscribe((columns) => {
         //This check prevents stale state from being used to sort the grid
-        const columnToBeSorted = columns?.find((column) => column?.field === sort[0]?.field);
+        // Check if the stored sort is using a sortField, and convert back to display field
+        const sortFieldToUse = sort[0]?.field;
+        const columnWithSortField = columns?.find((column) => column?.sortField === sortFieldToUse);
+        const columnToBeSorted = columnWithSortField ?? columns?.find((column) => column?.field === sortFieldToUse);
+
         if (!columnToBeSorted || columnToBeSorted.sortable === false) return;
-        this.onSortChange(sort);
+
+        // If stored sort uses sortField, convert back to display field for Kendo Grid
+        const uiSort = columnWithSortField
+          ? [{ ...sort[0], field: columnWithSortField.field }]
+          : sort;
+
+        this.onSortChange(uiSort);
       })
     );
   }
@@ -228,7 +240,11 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
   }
 
   public onSortChange(sort: SortDescriptor[] | undefined) {
+    // Keep the original field names for Kendo Grid's UI tracking
+    // Remapping to sortField happens in remapSortFieldsForBackend before sending to backend
     this.onStateChange({ ...this.state, sort });
+
+    // For local storage, save with the original field name (not remapped)
     this.setLocalStorageSort(sort);
   }
 
@@ -336,9 +352,9 @@ export class GridComponent<T> extends BaseComponent implements OnInit, OnChanges
       map(([columns, exportAllColumns, uiConfigApplications]) => {
         const columnsToExport = columns
           ? columns
-              .filter(includedColumnInExport)
-              .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
-              .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
+            .filter(includedColumnInExport)
+            .filter((column) => exportAllColumns || !column.hidden || this.isExcelOnlyColumn(column))
+            .filter((column) => this.isColumnEnabled(uiConfigApplications, column))
           : [];
 
         const roleColumnsInExport = columnsToExport.filter((column) => column.extraData === this.RolesExtraDataLabel);

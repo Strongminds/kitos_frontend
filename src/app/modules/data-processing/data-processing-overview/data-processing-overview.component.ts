@@ -83,11 +83,11 @@ export class DataProcessingOverviewComponent extends BaseOverviewComponent imple
       value: 'NoContract',
     },
     {
-      name: $localize`Aktivt`,
+      name: $localize`Aktiv`,
       value: 'Active',
     },
     {
-      name: $localize`Inaktivt`,
+      name: $localize`Ikke aktiv`,
       value: 'Inactive',
     },
   ];
