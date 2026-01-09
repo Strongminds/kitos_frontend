@@ -7821,10 +7821,6 @@
         <source>Ingen kontrakt</source>
         <target state="new">Ingen kontrakt</target>
       </trans-unit>
-      <trans-unit id="1075043096071936822" datatype="html">
-        <source>Inaktivt</source>
-        <target state="new">Inaktivt</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

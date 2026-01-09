@@ -14,8 +14,8 @@ import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.
 import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
 import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
-import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 import { GdprCriticality, mapGdprCriticality } from './gdpr/gdpr-criticality.model';
+import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -24,6 +24,7 @@ export interface ITSystemUsage {
   ActiveAccordingToValidityPeriod: boolean;
   ActiveAccordingToLifeCycle: boolean;
   MainContractIsActive: boolean;
+  MainContractIsActiveSortOrder: number;
   LocalSystemId: string;
   ItSystemUuid: string;
   SystemDescription: string;
@@ -123,6 +124,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ActiveAccordingToValidityPeriod: value.ActiveAccordingToValidityPeriod,
     ActiveAccordingToLifeCycle: value.ActiveAccordingToLifeCycle,
     MainContractIsActive: value.MainContractIsActive,
+    MainContractIsActiveSortOrder: mapContractStatusToSortOrder(value.MainContractIsActive),
     LocalSystemId: value.LocalSystemId,
     ItSystemUuid: value.ItSystemUuid,
     SystemDescription: value.SystemDescription,
@@ -213,6 +215,21 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
   };
   return adaptedSystem;
 };
+
+function mapContractStatusToSortOrder(status: string): number {
+  // Map to numbers for consistent sort order: Inactive (0) < Active (1) < NoContract (2)
+  // This ensures contract-based systems (active/inactive) appear before systems without contracts
+  switch (status) {
+    case 'Inactive':
+      return 0; // Inactive contracts first
+    case 'Active':
+      return 1; // Active contracts second
+    case 'NoContract':
+      return 2; // No contract last
+    default:
+      return 2; // Default to last
+  }
+}
 
 function getDataProcessingRegistrationsConcluded(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

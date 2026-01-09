@@ -18,8 +18,9 @@ import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { findUnitParentUuids } from 'src/app/shared/helpers/hierarchy.helpers';
 import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
+import { GridState } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
-import { adaptITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
+import { adaptITSystemUsage, ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ExternalReferencesApiService } from 'src/app/shared/services/external-references-api-service.service';
@@ -78,7 +79,11 @@ export class ITSystemUsageEffects {
           return of(ITSystemUsageActions.getITSystemUsagesSuccess(cachedRange.data, cachedRange.total));
         }
 
-        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState, { utcDates: true });
+        // Remap sort fields before building OData query
+        const remappedGridState = this.remapSortFieldsForOData(gridState);
+        const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(remappedGridState, {
+          utcDates: true,
+        });
         const fixedOdataString = applyQueryFixes(cacheableOdataString, systemRoles);
 
         const query =
@@ -87,11 +92,14 @@ export class ITSystemUsageEffects {
           `OutgoingRelatedItSystemUsages,AssociatedContracts&responsibleOrganizationUnitUuid=${responsibleUnitUuid}&${fixedOdataString}&$count=true`;
         return this.httpClient.get<OData>(query).pipe(
           map((data) => {
-            const dataItems = compact(data.value.map(adaptITSystemUsage));
+            const dataItems = compact(data.value.map(adaptITSystemUsage)) as ITSystemUsage[];
             const total = data['@odata.count'];
-            this.gridDataCacheService.set(gridState, dataItems, total, responsibleUnitUuid);
 
-            const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
+            // Apply client-side sorting if needed for computed fields
+            const sortedItems = this.applySortForComputedFields(dataItems, gridState);
+            this.gridDataCacheService.set(gridState, sortedItems, total, responsibleUnitUuid);
+
+            const returnData = this.gridDataCacheService.gridStateSliceFromArray(sortedItems, gridState);
             return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
           }),
           catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
@@ -757,6 +765,39 @@ export class ITSystemUsageEffects {
       )
     );
   });
+
+  private remapSortFieldsForOData(gridState: GridState): GridState {
+    if (!gridState.sort || gridState.sort.length === 0) return gridState;
+
+    // Filter out sorts on computed fields that don't exist in the backend
+    const backendSort = gridState.sort.filter((sortDesc) => {
+      // Remove MainContractIsActive from backend sort - we'll sort client-side instead
+      return sortDesc.field !== 'MainContractIsActive';
+    });
+
+    return {
+      ...gridState,
+      sort: backendSort,
+    };
+  }
+
+  private applySortForComputedFields(data: ITSystemUsage[], gridState: GridState): ITSystemUsage[] {
+    if (!gridState.sort || gridState.sort.length === 0) return data;
+
+    const sortDesc = gridState.sort[0]; // Only handle first sort for now
+
+    if (sortDesc.field === 'MainContractIsActive') {
+      // Client-side sort by the computed MainContractIsActiveSortOrder field
+      const sorted = [...data].sort((a, b) => {
+        const aValue = a.MainContractIsActiveSortOrder;
+        const bValue = b.MainContractIsActiveSortOrder;
+        return sortDesc.dir === 'asc' ? aValue - bValue : bValue - aValue;
+      });
+      return sorted;
+    }
+
+    return data;
+  }
 }
 
 function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] | undefined) {
