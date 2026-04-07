@@ -3,9 +3,3 @@
     dataItem | searchProperty: column.dataField
   }}</app-paragraph>
 }
-
-@if (column.field !== undefined && column.dataField === undefined) {
-  <app-paragraph [cropOnOverflow]="true">{{
-    dataItem | searchProperty: column.field
-  }}</app-paragraph>
-}
