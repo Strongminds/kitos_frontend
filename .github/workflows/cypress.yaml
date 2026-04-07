@@ -41,7 +41,6 @@ jobs:
           parallel: true
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}
 
   cypress-component:
     if: github.event.pull_request == null || github.event.pull_request.draft == false
@@ -65,4 +64,3 @@ jobs:
           command: yarn cypress run --component
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          GITHUB_TOKEN: ${{ secrets.TOKEN_TO_GITHUB }}
