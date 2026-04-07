@@ -55,8 +55,8 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
     HideShowButtonComponent,
     CreateEntityButtonComponent,
     GridComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSystemGridLoading);
@@ -146,8 +146,12 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     },
     {
       field: CatalogFields.BUSINESS_TYPE_NAME,
+      dataField: CatalogFields.BUSINESS_TYPE_NAME,
       title: $localize`Forretningstype`,
       section: this.systemSectionName,
+      extraData: 'it-system_business-type',
+      extraFilter: 'choice-type',
+      style: 'uuid-to-name',
       hidden: false,
     },
     { field: 'BelongsTo.Name', title: $localize`Rettighedshaver`, section: this.systemSectionName, hidden: false },
@@ -258,16 +262,17 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
   constructor(
     store: Store,
-    private router: Router,
-    private route: ActivatedRoute,
-    private actions$: Actions,
-    private gridColumnStorageService: GridColumnStorageService,
-    private dialogOpenerService: DialogOpenerService
+    private readonly router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly actions$: Actions,
+    private readonly gridColumnStorageService: GridColumnStorageService,
+    private readonly dialogOpenerService: DialogOpenerService,
   ) {
     super(store, 'it-system');
   }
 
   ngOnInit(): void {
+    this.gridData$.subscribe((data) => console.log('Grid data updated:', data));
     this.store.dispatch(ITSystemActions.getITSystemCollectionPermissions());
     this.store.dispatch(ITSystemUsageActions.getITSystemUsageCollectionPermissions());
 
@@ -286,20 +291,20 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         .pipe(ofType(ITSystemActions.createItSystemSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemActions.executeUsageMigrationSuccess)).subscribe(() => {
         location.reload();
-      })
+      }),
     );
 
     this.updateUnclickableColumns(this.defaultGridColumns);
     this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns())
+      this.actions$.pipe(ofType(ITSystemActions.resetGridConfiguration)).subscribe(() => this.updateDefaultColumns()),
     );
   }
 
@@ -318,11 +323,11 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       this.isCreatingUsage$
         .pipe(
           first(),
-          filter((isCreating) => !isCreating)
+          filter((isCreating) => !isCreating),
         )
         .subscribe(() => {
           this.store.dispatch(ITSystemUsageActions.createItSystemUsage(systemUuid));
-        })
+        }),
     );
   }
 
@@ -333,7 +338,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
         if (result && systemUuid !== undefined) {
           this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
         }
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -342,9 +347,9 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
           ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
           first(),
           debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$)
+          concatLatestFrom(() => this.gridState$),
         )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState))
+        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
     );
   }
 
