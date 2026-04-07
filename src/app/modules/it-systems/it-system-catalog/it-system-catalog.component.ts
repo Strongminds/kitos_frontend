@@ -146,7 +146,6 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     },
     {
       field: CatalogFields.BUSINESS_TYPE_NAME,
-      dataField: CatalogFields.BUSINESS_TYPE_NAME,
       title: $localize`Forretningstype`,
       section: this.systemSectionName,
       extraData: 'it-system_business-type',
