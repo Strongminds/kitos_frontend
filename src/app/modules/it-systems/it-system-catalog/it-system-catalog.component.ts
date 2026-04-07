@@ -150,7 +150,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       title: $localize`Forretningstype`,
       section: this.systemSectionName,
       extraData: 'it-system_business-type',
-      extraFilter: 'choice-type',
+      extraFilter: 'choice-type-by-name',
       style: 'uuid-to-name',
       hidden: false,
     },
