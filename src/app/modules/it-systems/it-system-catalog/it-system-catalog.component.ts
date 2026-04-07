@@ -271,7 +271,6 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   }
 
   ngOnInit(): void {
-    this.gridData$.subscribe((data) => console.log('Grid data updated:', data));
     this.store.dispatch(ITSystemActions.getITSystemCollectionPermissions());
     this.store.dispatch(ITSystemUsageActions.getITSystemUsageCollectionPermissions());
 
