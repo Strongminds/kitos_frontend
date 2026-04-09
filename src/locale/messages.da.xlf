@@ -7821,6 +7821,14 @@
         <source>Ingen kontrakt</source>
         <target state="new">Ingen kontrakt</target>
       </trans-unit>
+      <trans-unit id="3585391336506222699" datatype="html">
+        <source>Organisationsenheder med eksterne betalinger</source>
+        <target state="new">Organisationsenheder med eksterne betalinger</target>
+      </trans-unit>
+      <trans-unit id="3132700394017624577" datatype="html">
+        <source>Organisationsenheder med interne betalinger</source>
+        <target state="new">Organisationsenheder med interne betalinger</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
