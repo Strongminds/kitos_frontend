@@ -17,11 +17,11 @@
         (click)="onDeleteClick()"
         data-cy="grid-delete-button"
         >
-        @if (deleteIcon == 'trashcan') {
-          <app-trashcan-icon></app-trashcan-icon>
-        }
         @if (deleteIcon == 'checkmark') {
           <app-check-icon></app-check-icon>
+        }
+        @else {
+          <app-trashcan-icon></app-trashcan-icon>
         }
       </app-icon-button>
     }
