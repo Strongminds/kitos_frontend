@@ -4724,12 +4724,6 @@
       <trans-unit id="6546355986883757646" datatype="html">
         <source>Ikke angivet</source>
       </trans-unit>
-      <trans-unit id="250985142269881011" datatype="html">
-        <source>Er du sikker på, at du vil slette advarslen?</source>
-      </trans-unit>
-      <trans-unit id="3349798521063634552" datatype="html">
-        <source>Slet advarsel</source>
-      </trans-unit>
       <trans-unit id="4279066211673456731" datatype="html">
         <source>Besked</source>
       </trans-unit>
@@ -5986,6 +5980,12 @@
       </trans-unit>
       <trans-unit id="3325074221190642573" datatype="html">
         <source>Ikke sendte advis</source>
+      </trans-unit>
+      <trans-unit id="3252031869609769068" datatype="html">
+        <source>Fjern notifikation</source>
+      </trans-unit>
+      <trans-unit id="3923280420480477937" datatype="html">
+        <source>Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.</source>
       </trans-unit>
     </body>
   </file>
