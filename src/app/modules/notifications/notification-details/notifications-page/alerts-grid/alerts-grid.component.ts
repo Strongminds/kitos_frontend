@@ -43,8 +43,7 @@ export class AlertsGridComponent implements OnInit {
   public deleteAlert(alert: Alert): void {
     this.confirmActionService.confirmAction({
       title: $localize`Fjern notifikation`,
-      message: $localize`Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis?
-      BEMÆRK: dette sletter ikke den pågældende advis.`,
+      message: $localize`Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.`,
       category: ConfirmActionCategory.Warning,
       onConfirm: () => this.store.dispatch(AlertActions.deleteAlert(this.relatedEntityType, alert.uuid)),
     });
