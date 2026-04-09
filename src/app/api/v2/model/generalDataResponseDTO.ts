@@ -35,6 +35,9 @@ export interface APIGeneralDataResponseDTO {
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity: APIItSystemUsageValidityResponseDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
+    /**
+     *  (Supplier Field)
+     */
     containsAITechnology?: APIGeneralDataResponseDTO.ContainsAITechnologyEnum;
     /**
      * Defines if the system is web accessibility compliant
