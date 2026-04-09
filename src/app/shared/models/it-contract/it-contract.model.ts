@@ -31,6 +31,8 @@ export interface ITContract {
   ItSystemUsages: { id: string; value: string }[];
   ItSystemUsageUuids: { value: string }[];
   ItSystemUsageUuidsAsCsv: string;
+  ExternalPaymentOrganizationUnitsCsv: string;
+  InternalPaymentOrganizationUnitsCsv: string;
   SourceEntityUuid: string;
   NumberOfAssociatedSystemRelations: number;
   ActiveReferenceTitle: string;
@@ -97,6 +99,8 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     ),
     ItSystemUsageUuids: value.ItSystemUsageUuids,
     ItSystemUsageUuidsAsCsv: value.ItSystemUsagesSystemUuidCsv,
+    ExternalPaymentOrganizationUnitsCsv: value.ExternalPaymentOrganizationUnitsCsv,
+    InternalPaymentOrganizationUnitsCsv: value.InternalPaymentOrganizationUnitsCsv,
     ItSystemUsages: value.ItSystemUsages.map((usage: { ItSystemUsageUuid: string; ItSystemUsageName: string }) => ({
       id: usage.ItSystemUsageUuid,
       value: usage.ItSystemUsageName,
