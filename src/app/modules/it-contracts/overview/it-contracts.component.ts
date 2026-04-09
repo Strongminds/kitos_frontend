@@ -276,7 +276,6 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     },
     {
       field: GridFields.ExternalPaymentOrganizationUnitsCsv,
-      // dataField: 'ExternalPaymentOrganizationUnitsCsv',
       title: $localize`Organisationsenheder med eksterne betalinger`,
       section: ECONOMY_SECTION_NAME,
       width: 350,
@@ -284,7 +283,6 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     },
     {
       field: GridFields.InternalPaymentOrganizationUnitsCsv,
-      // dataField: 'InternalPaymentOrganizationUnitsCsv',
       title: $localize`Organisationsenheder med interne betalinger`,
       section: ECONOMY_SECTION_NAME,
       width: 350,
