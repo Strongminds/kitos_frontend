@@ -4775,9 +4775,6 @@
       <trans-unit id="4766365470163586672" datatype="html">
         <source>Den markerede kontrakt er inaktiv</source>
       </trans-unit>
-      <trans-unit id="6454412951656065343" datatype="html">
-        <source>Ulæste advarsler</source>
-      </trans-unit>
       <trans-unit id="7018355465405167274" datatype="html">
         <source>Kommende advis</source>
       </trans-unit>
@@ -5986,6 +5983,9 @@
       </trans-unit>
       <trans-unit id="5253916585354635099" datatype="html">
         <source>Ingen kontrakt</source>
+      </trans-unit>
+      <trans-unit id="3325074221190642573" datatype="html">
+        <source>Ikke sendte advis</source>
       </trans-unit>
     </body>
   </file>

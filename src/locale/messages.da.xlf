@@ -6283,10 +6283,6 @@
         <source>Kommende advis</source>
         <target state="new">Kommende advis</target>
       </trans-unit>
-      <trans-unit id="6454412951656065343" datatype="html">
-        <source>Ulæste advarsler</source>
-        <target state="new">Ulæste advarsler</target>
-      </trans-unit>
       <trans-unit id="7473666767554000615" datatype="html">
         <source>Gå til systemanvendelse</source>
         <target state="new">Gå til systemanvendelse</target>
@@ -7820,6 +7816,10 @@
       <trans-unit id="5253916585354635099" datatype="html">
         <source>Ingen kontrakt</source>
         <target state="new">Ingen kontrakt</target>
+      </trans-unit>
+      <trans-unit id="3325074221190642573" datatype="html">
+        <source>Ikke sendte advis</source>
+        <target state="new">Ikke sendte advis</target>
       </trans-unit>
     </body>
   </file>
