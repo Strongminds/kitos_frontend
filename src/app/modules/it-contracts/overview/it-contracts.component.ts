@@ -51,7 +51,7 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
     HideShowButtonComponent,
     CreateEntityButtonComponent,
     GridComponent,
-    AsyncPipe
+    AsyncPipe,
   ],
 })
 export class ITContractsComponent extends BaseOverviewComponent implements OnInit {
@@ -68,7 +68,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     private route: ActivatedRoute,
     private actions$: Actions,
     private gridColumnStorageService: GridColumnStorageService,
-    private configService: GridUIConfigService
+    private configService: GridUIConfigService,
   ) {
     super(store, 'it-contract');
   }
@@ -275,6 +275,20 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'itSystemUuid',
     },
     {
+      field: GridFields.ExternalPaymentOrganizationUnitsCsv,
+      title: $localize`Organisationsenheder med eksterne betalinger`,
+      section: ECONOMY_SECTION_NAME,
+      width: 350,
+      hidden: true,
+    },
+    {
+      field: GridFields.InternalPaymentOrganizationUnitsCsv,
+      title: $localize`Organisationsenheder med interne betalinger`,
+      section: ECONOMY_SECTION_NAME,
+      width: 350,
+      hidden: true,
+    },
+    {
       field: GridFields.NumberOfAssociatedSystemRelations,
       title: $localize`Antal relationer`,
       section: CATALOG_SECTION_NAME,
@@ -459,7 +473,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
         .pipe(
           ofType(ITContractActions.getItContractOverviewRolesSuccess),
           combineLatestWith(this.store.select(selectContractGridRoleColumns)),
-          first()
+          first(),
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
@@ -470,9 +484,9 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
             orderedGridColumns,
             localStorageColumns,
             ITContractActions.updateGridColumns,
-            ITContractActions.resetToOrganizationITContractColumnConfiguration
+            ITContractActions.resetToOrganizationITContractColumnConfiguration,
           );
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -480,7 +494,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
         .pipe(ofType(ITContractActions.createItContractSuccess), combineLatestWith(this.gridState$))
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
@@ -489,18 +503,18 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       this.actions$
         .pipe(
           ofType(ITContractActions.resetToOrganizationITContractColumnConfigurationError),
-          concatLatestFrom(() => this.gridColumns$)
+          concatLatestFrom(() => this.gridColumns$),
         )
         .subscribe(([_, gridColumnsFromState]) => {
           const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
           const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
             gridColumnsFromState,
-            columnsToShow
+            columnsToShow,
           );
           if (!gridColumnStateIsCorrect) {
             this.store.dispatch(ITContractActions.updateGridColumns(columnsToShow));
           }
-        })
+        }),
     );
     this.store.dispatch(ITContractActions.getItContractOverviewRoles());
   }
