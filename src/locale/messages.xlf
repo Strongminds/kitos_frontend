@@ -5984,8 +5984,14 @@
       <trans-unit id="3252031869609769068" datatype="html">
         <source>Fjern notifikation</source>
       </trans-unit>
-      <trans-unit id="3923280420480477937" datatype="html">
+      <trans-unit id="4634221220301116102" datatype="html">
         <source>Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.</source>
+      </trans-unit>
+      <trans-unit id="3132700394017624577" datatype="html">
+        <source>Organisationsenheder med interne betalinger</source>
+      </trans-unit>
+      <trans-unit id="3585391336506222699" datatype="html">
+        <source>Organisationsenheder med eksterne betalinger</source>
       </trans-unit>
     </body>
   </file>
