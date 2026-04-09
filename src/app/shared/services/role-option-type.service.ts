@@ -123,7 +123,7 @@ export class RoleOptionTypeService implements OnDestroy {
     switch (entityType) {
       case 'it-system-usage':
         return (entityUuid: string) =>
-          this.internalUsageService.getManyItSystemUsageInternalV2GetRoleAssignments({
+          this.internalUsageService.getManyItSystemUsageInternalV2GetAddRoleAssignments({
             systemUsageUuid: entityUuid,
           });
       case 'it-contract':
