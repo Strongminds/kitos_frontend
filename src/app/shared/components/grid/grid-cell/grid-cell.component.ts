@@ -46,7 +46,6 @@ import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-
 })
 export class GridCellComponent extends BaseCellComponent {
   @Input() public deleteIcon: 'trashcan' | 'checkmark' = 'trashcan';
-
   @Output() public checkboxChange = new EventEmitter<boolean>();
   @Output() public toggleEvent = new EventEmitter<boolean>();
   @Output() public modifyEvent = new EventEmitter<void>();
