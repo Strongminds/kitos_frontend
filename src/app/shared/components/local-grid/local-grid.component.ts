@@ -96,6 +96,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
   @Input() resizable: boolean = true;
   @Input() entityType?: RegistrationEntityTypes;
+  @Input() public deleteIcon: 'trashcan' | 'checkmark' = 'trashcan';
 
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
@@ -111,7 +112,10 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   public readonly defaultMinimumDateColumnWidth = DEFAULT_DATE_COLUMN_MINIMUM_WIDTH;
   public readonly defaultPrimaryColumnMinimumWidth = DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH;
 
-  constructor(private actions$: Actions, private readonly gridExportService: GridExportService) {
+  constructor(
+    private actions$: Actions,
+    private readonly gridExportService: GridExportService,
+  ) {
     super();
     this.allData = this.allData.bind(this);
   }

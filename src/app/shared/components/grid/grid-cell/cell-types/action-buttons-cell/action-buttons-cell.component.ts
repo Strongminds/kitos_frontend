@@ -1,18 +1,20 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BaseCellComponent } from '../../base-cell.component';
 
 import { IconButtonComponent } from '../../../../buttons/icon-button/icon-button.component';
 import { PencilIconComponent } from '../../../../icons/pencil-icon.compnent';
 import { TrashcanIconComponent } from '../../../../icons/trashcan-icon.component';
+import { CheckIconComponent } from '../../../../icons/check-icon.component';
 import { ToggleButtonComponent } from '../../../../local-grid/toggle-button/toggle-button.component';
 
 @Component({
   selector: 'app-action-buttons-cell',
   templateUrl: './action-buttons-cell.component.html',
   styleUrl: './action-buttons-cell.component.scss',
-  imports: [IconButtonComponent, PencilIconComponent, TrashcanIconComponent, ToggleButtonComponent],
+  imports: [IconButtonComponent, PencilIconComponent, TrashcanIconComponent, CheckIconComponent, ToggleButtonComponent],
 })
 export class ActionButtonsCellComponent extends BaseCellComponent {
+  @Input() public deleteIcon: 'trashcan' | 'checkmark' = 'trashcan';
   @Output() public modifyEvent = new EventEmitter<void>();
   @Output() public deleteEvent = new EventEmitter<void>();
   @Output() public toggleEvent = new EventEmitter<boolean>();

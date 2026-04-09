@@ -1,5 +1,4 @@
-
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BaseCellComponent } from './base-cell.component';
 import { ActionButtonsCellComponent } from './cell-types/action-buttons-cell/action-buttons-cell.component';
 import { AuditCellComponent } from './cell-types/audit-cell/audit-cell.component';
@@ -42,10 +41,12 @@ import { UuidToNameCellComponent } from './cell-types/uuid-to-name-cell/uuid-to-
     UuidToNameCellComponent,
     AuditCellComponent,
     ActionButtonsCellComponent,
-    ContractStatusChipCellComponent
+    ContractStatusChipCellComponent,
   ],
 })
 export class GridCellComponent extends BaseCellComponent {
+  @Input() public deleteIcon: 'trashcan' | 'checkmark' = 'trashcan';
+
   @Output() public checkboxChange = new EventEmitter<boolean>();
   @Output() public toggleEvent = new EventEmitter<boolean>();
   @Output() public modifyEvent = new EventEmitter<void>();
