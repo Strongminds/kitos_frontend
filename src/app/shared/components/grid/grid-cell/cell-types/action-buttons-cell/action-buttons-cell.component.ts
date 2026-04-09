@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { BaseCellComponent } from '../../base-cell.component';
-
+import { ActionButtonsCellDeleteIcon } from 'src/app/shared/models/icons/action-buttons-cell-delete-icons';
 import { IconButtonComponent } from '../../../../buttons/icon-button/icon-button.component';
+import { CheckIconComponent } from '../../../../icons/check-icon.component';
 import { PencilIconComponent } from '../../../../icons/pencil-icon.compnent';
 import { TrashcanIconComponent } from '../../../../icons/trashcan-icon.component';
-import { CheckIconComponent } from '../../../../icons/check-icon.component';
 import { ToggleButtonComponent } from '../../../../local-grid/toggle-button/toggle-button.component';
+import { BaseCellComponent } from '../../base-cell.component';
 
 @Component({
   selector: 'app-action-buttons-cell',
@@ -14,7 +14,7 @@ import { ToggleButtonComponent } from '../../../../local-grid/toggle-button/togg
   imports: [IconButtonComponent, PencilIconComponent, TrashcanIconComponent, CheckIconComponent, ToggleButtonComponent],
 })
 export class ActionButtonsCellComponent extends BaseCellComponent {
-  @Input() public deleteIcon: 'trashcan' | 'checkmark' = 'trashcan';
+  @Input() public deleteIcon: ActionButtonsCellDeleteIcon = 'trashcan';
   @Output() public modifyEvent = new EventEmitter<void>();
   @Output() public deleteEvent = new EventEmitter<void>();
   @Output() public toggleEvent = new EventEmitter<boolean>();
