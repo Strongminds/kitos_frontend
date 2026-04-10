@@ -19,6 +19,6 @@ _Describe what was changed in this branch, and WHY it was changed._
 - [ ] **Self-review**
       _Before requesting a review do a yet another self-review_
 - [ ] **Add a description**
-      _Under "Description" above, explain what was changed in this branch, and WHY it was changed_ 
+      _Under "Description" above, explain what was changed in this branch, and WHY it was changed_
 - [ ] **Request review**
       _Tag whomever you wish to review your code_
