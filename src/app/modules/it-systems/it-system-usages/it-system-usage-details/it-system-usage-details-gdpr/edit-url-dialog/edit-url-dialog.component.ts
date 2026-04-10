@@ -35,7 +35,7 @@ import { TextBoxComponent } from '../../../../../../shared/components/textbox/te
     CommonModule,
   ],
 })
-export class EditUrlDialogComponent extends BaseComponent implements OnInit {
+export class EditSimpleLinkDialogComponent extends BaseComponent implements OnInit {
   @Input() simpleLink?: SimpleLink | undefined;
   @Input() namePermission$?: Observable<boolean>;
   @Input() nameDisabledMessage?: string;
@@ -55,7 +55,7 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   public validationErrorMessage = URL_VALIDATION_ERROR_MESSAGE;
 
   constructor(
-    private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>,
+    private readonly dialogRef: MatDialogRef<EditSimpleLinkDialogComponent>,
     private readonly actions$: Actions,
   ) {
     super();

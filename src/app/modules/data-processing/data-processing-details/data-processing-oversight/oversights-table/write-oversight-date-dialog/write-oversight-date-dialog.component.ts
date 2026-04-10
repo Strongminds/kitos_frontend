@@ -6,7 +6,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, distinctUntilChanged } from 'rxjs';
 import { APIOversightDateDTO } from 'src/app/api/v2';
-import { EditUrlDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
+import { EditSimpleLinkDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-dialog/edit-url-dialog.component';
 import { EditUrlSectionComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-details-gdpr/edit-url-section/edit-url-section.component';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
@@ -57,23 +57,23 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
   public currentReportLink$ = new BehaviorSubject<SimpleLink | undefined>(undefined);
 
   public readonly oversightDateFieldPermission$ = this.store.select(
-    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightDate)
+    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightDate),
   );
   public readonly oversightRemarkFieldPermission$ = this.store.select(
-    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightRemark)
+    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightRemark),
   );
   public readonly oversightLinkNameFieldPermission$ = this.store.select(
-    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightReportLink.name)
+    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightReportLink.name),
   );
   public readonly oversightLinkUrlFieldPermission$ = this.store.select(
-    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightReportLink.url)
+    selectDataProcessingFieldPermissions(dataProcessingFields.oversightDates.oversightReportLink.url),
   );
 
   constructor(
     private store: Store,
     private dialogRef: MatDialogRef<WriteOversightDateDialogComponent>,
     private dialog: MatDialog,
-    private actions$: Actions
+    private actions$: Actions,
   ) {
     super();
   }
@@ -105,12 +105,12 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
         .pipe(
           ofType(
             DataProcessingActions.patchDataProcessingOversightDateSuccess,
-            DataProcessingActions.addDataProcessingOversightDateSuccess
-          )
+            DataProcessingActions.addDataProcessingOversightDateSuccess,
+          ),
         )
         .subscribe(() => {
           this.onCancel();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -118,12 +118,12 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
         .pipe(
           ofType(
             DataProcessingActions.patchDataProcessingOversightDateError,
-            DataProcessingActions.addDataProcessingOversightDateError
-          )
+            DataProcessingActions.addDataProcessingOversightDateError,
+          ),
         )
         .subscribe(() => {
           this.isBusy = false;
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -133,7 +133,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
         } else {
           this.oversightDateFormGroup.controls.notes.disable();
         }
-      })
+      }),
     );
 
     // Setup field permissions
@@ -168,7 +168,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
           } else {
             control.enable();
           }
-        })
+        }),
       );
     });
   }
@@ -186,7 +186,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
       reportLinkName: link?.name,
     });
     this.currentReportLink$.next(link ?? undefined);
-    const editUrlDialogInstance = findDialogInstanceOf(this.dialog, EditUrlDialogComponent);
+    const editUrlDialogInstance = findDialogInstanceOf(this.dialog, EditSimpleLinkDialogComponent);
     editUrlDialogInstance?.close();
   }
 
@@ -216,7 +216,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
           // this.oversightDateFormGroup.value.date!.toISOString(), which always returns a string.
           // The cast is needed to satisfy the type requirement of the action creator.
           completedAt: request.completedAt as string,
-        })
+        }),
       );
     }
   }
