@@ -5978,15 +5978,6 @@
       <trans-unit id="5253916585354635099" datatype="html">
         <source>Ingen kontrakt</source>
       </trans-unit>
-      <trans-unit id="3325074221190642573" datatype="html">
-        <source>Ikke sendte advis</source>
-      </trans-unit>
-      <trans-unit id="3252031869609769068" datatype="html">
-        <source>Fjern notifikation</source>
-      </trans-unit>
-      <trans-unit id="4634221220301116102" datatype="html">
-        <source>Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.</source>
-      </trans-unit>
       <trans-unit id="3132700394017624577" datatype="html">
         <source>Organisationsenheder med interne betalinger</source>
       </trans-unit>

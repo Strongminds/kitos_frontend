@@ -28,8 +28,14 @@ export interface APIGDPRRegistrationsResponseDTO {
     userSupervision?: APIGDPRRegistrationsResponseDTO.UserSupervisionEnum;
     userSupervisionDate?: string;
     userSupervisionDocumentation?: APISimpleLinkDTO;
+    /**
+     * (Shared Supplier Field)
+     */
     riskAssessmentConducted?: APIGDPRRegistrationsResponseDTO.RiskAssessmentConductedEnum;
     riskAssessmentConductedDate?: string;
+    /**
+     *  (Supplier Field)
+     */
     riskAssessmentResult?: APIGDPRRegistrationsResponseDTO.RiskAssessmentResultEnum;
     riskAssessmentDocumentation?: APISimpleLinkDTO;
     riskAssessmentNotes?: string;
@@ -40,6 +46,9 @@ export interface APIGDPRRegistrationsResponseDTO {
     retentionPeriodDefined?: APIGDPRRegistrationsResponseDTO.RetentionPeriodDefinedEnum;
     nextDataRetentionEvaluationDate?: string;
     dataRetentionEvaluationFrequencyInMonths?: number;
+    /**
+     *  (Supplier Field)
+     */
     gdprCriticality?: APIGDPRRegistrationsResponseDTO.GdprCriticalityEnum;
 }
 export namespace APIGDPRRegistrationsResponseDTO {

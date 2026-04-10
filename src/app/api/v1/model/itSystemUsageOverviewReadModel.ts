@@ -74,7 +74,7 @@ export interface APIItSystemUsageOverviewReadModel {
     mainContractId?: number;
     mainContractSupplierId?: number;
     mainContractSupplierName?: string;
-    mainContractIsActive?: boolean;
+    mainContractIsActive?: APIItSystemUsageOverviewReadModel.MainContractIsActiveEnum;
     sensitiveDataLevelsAsCsv?: string;
     riskAssessmentDate?: string;
     plannedRiskAssessmentDate?: string;
@@ -118,6 +118,12 @@ export namespace APIItSystemUsageOverviewReadModel {
         Yes: 'Yes' as ContainsAITechnologyEnum,
         No: 'No' as ContainsAITechnologyEnum,
         Undecided: 'Undecided' as ContainsAITechnologyEnum
+    };
+    export type MainContractIsActiveEnum = 'NoContract' | 'Active' | 'Inactive';
+    export const MainContractIsActiveEnum = {
+        NoContract: 'NoContract' as MainContractIsActiveEnum,
+        Active: 'Active' as MainContractIsActiveEnum,
+        Inactive: 'Inactive' as MainContractIsActiveEnum
     };
     export type ArchiveDutyEnum = 'Undecided' | 'B' | 'K' | 'BK' | 'KD' | 'KB' | 'Unknown' | 'PreserveDataCanDiscardDocuments';
     export const ArchiveDutyEnum = {
