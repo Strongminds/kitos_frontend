@@ -4724,12 +4724,6 @@
       <trans-unit id="6546355986883757646" datatype="html">
         <source>Ikke angivet</source>
       </trans-unit>
-      <trans-unit id="250985142269881011" datatype="html">
-        <source>Er du sikker på, at du vil slette advarslen?</source>
-      </trans-unit>
-      <trans-unit id="3349798521063634552" datatype="html">
-        <source>Slet advarsel</source>
-      </trans-unit>
       <trans-unit id="4279066211673456731" datatype="html">
         <source>Besked</source>
       </trans-unit>
@@ -4774,9 +4768,6 @@
       </trans-unit>
       <trans-unit id="4766365470163586672" datatype="html">
         <source>Den markerede kontrakt er inaktiv</source>
-      </trans-unit>
-      <trans-unit id="6454412951656065343" datatype="html">
-        <source>Ulæste advarsler</source>
       </trans-unit>
       <trans-unit id="7018355465405167274" datatype="html">
         <source>Kommende advis</source>
@@ -5990,8 +5981,14 @@
       <trans-unit id="3585391336506222699" datatype="html">
         <source>Organisationsenheder med eksterne betalinger</source>
       </trans-unit>
-      <trans-unit id="8930394023973882411" datatype="html">
-        <source>Webadressen er ugyldig. Sørg for, at den begynder med én af disse: &quot;http://&quot;, &quot;https://&quot;, &quot;kmdedhvis:&quot;, &quot;kmdsageraabn:&quot;, eller &quot;sbsyslauncher:&quot;</source>
+      <trans-unit id="3252031869609769068" datatype="html">
+        <source>Fjern notifikation</source>
+      </trans-unit>
+      <trans-unit id="3325074221190642573" datatype="html">
+        <source>Ikke sendte advis</source>
+      </trans-unit>
+      <trans-unit id="4634221220301116102" datatype="html">
+        <source>Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.</source>
       </trans-unit>
     </body>
   </file>

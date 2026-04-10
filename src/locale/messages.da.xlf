@@ -6211,14 +6211,6 @@
         <source>Ikke angivet</source>
         <target state="new">Ikke angivet</target>
       </trans-unit>
-      <trans-unit id="3349798521063634552" datatype="html">
-        <source>Slet advarsel</source>
-        <target state="new">Slet advarsel</target>
-      </trans-unit>
-      <trans-unit id="250985142269881011" datatype="html">
-        <source>Er du sikker på, at du vil slette advarslen?</source>
-        <target state="new">Er du sikker på, at du vil slette advarslen?</target>
-      </trans-unit>
       <trans-unit id="4279066211673456731" datatype="html">
         <source>Besked</source>
         <target state="new">Besked</target>
@@ -6282,10 +6274,6 @@
       <trans-unit id="7018355465405167274" datatype="html">
         <source>Kommende advis</source>
         <target state="new">Kommende advis</target>
-      </trans-unit>
-      <trans-unit id="6454412951656065343" datatype="html">
-        <source>Ulæste advarsler</source>
-        <target state="new">Ulæste advarsler</target>
       </trans-unit>
       <trans-unit id="7473666767554000615" datatype="html">
         <source>Gå til systemanvendelse</source>
@@ -7825,9 +7813,17 @@
         <source>Organisationsenheder med interne betalinger</source>
         <target state="new">Organisationsenheder med interne betalinger</target>
       </trans-unit>
-      <trans-unit id="8930394023973882411" datatype="html">
-        <source>Webadressen er ugyldig. Sørg for, at den begynder med én af disse: &quot;http://&quot;, &quot;https://&quot;, &quot;kmdedhvis:&quot;, &quot;kmdsageraabn:&quot;, eller &quot;sbsyslauncher:&quot;</source>
-        <target state="new">Webadressen er ugyldig. Sørg for, at den begynder med én af disse: &quot;http://&quot;, &quot;https://&quot;, &quot;kmdedhvis:&quot;, &quot;kmdsageraabn:&quot;, eller &quot;sbsyslauncher:&quot;</target>
+      <trans-unit id="3252031869609769068" datatype="html">
+        <source>Fjern notifikation</source>
+        <target state="new">Fjern notifikation</target>
+      </trans-unit>
+      <trans-unit id="4634221220301116102" datatype="html">
+        <source>Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.</source>
+        <target state="new">Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.</target>
+      </trans-unit>
+      <trans-unit id="3325074221190642573" datatype="html">
+        <source>Ikke sendte advis</source>
+        <target state="new">Ikke sendte advis</target>
       </trans-unit>
     </body>
   </file>
