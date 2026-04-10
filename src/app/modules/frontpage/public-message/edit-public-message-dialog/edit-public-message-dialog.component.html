@@ -6,7 +6,7 @@
         <app-textbox text="URL" [formGroup]="formGroup" formName="url" i18n-text data-cy="url"></app-textbox>
         @if (showUrlError) {
           <app-paragraph paragraphSize="small" color="error" i18n
-            >Webadressen er ugyldig. Sørg for, at den begynder med "https://"</app-paragraph
+            >{{ urlValidationError }}</app-paragraph
             >
           }
         </div>
