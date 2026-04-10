@@ -54,6 +54,8 @@ export interface APIItContractOverviewReadModel {
     dataProcessingAgreementsCsv?: string;
     itSystemUsages?: Array<APIItContractOverviewReadModelItSystemUsage>;
     itSystemUsagesCsv?: string;
+    externalPaymentOrganizationUnitsCsv?: string;
+    internalPaymentOrganizationUnitsCsv?: string;
     itSystemUsagesSystemUuidCsv?: string;
     numberOfAssociatedSystemRelations?: number;
     systemRelations?: Array<APIItContractOverviewReadModelSystemRelation>;
