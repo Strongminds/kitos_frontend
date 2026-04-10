@@ -7,6 +7,7 @@ import { debounceTime, first, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
+import { URL_VALIDATION_ERROR_MESSAGE } from 'src/app/shared/constants/error-message-constants';
 import { isExternalReferenceUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -51,7 +52,7 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   public isBusy = false;
   public showValidationError = false;
 
-  public validationErrorMessage = $localize`Webadressen er ugyldig. Sørg for, at den begynder med én af disse: "http://", "https://", "kmdedhvis:", "kmdsageraabn:", eller "sbsyslauncher:"`;
+  public validationErrorMessage = URL_VALIDATION_ERROR_MESSAGE;
 
   constructor(
     private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>,
