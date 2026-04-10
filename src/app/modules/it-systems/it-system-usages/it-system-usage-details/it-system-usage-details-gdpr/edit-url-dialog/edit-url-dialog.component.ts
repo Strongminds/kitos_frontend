@@ -51,6 +51,8 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   public isBusy = false;
   public showValidationError = false;
 
+  public validationErrorMessage = $localize`Webadressen er ugyldig. Sørg for, at den begynder med én af disse: "http://", "https://", "kmdedhvis:", "kmdsageraabn:", eller "sbsyslauncher:"`;
+
   constructor(
     private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>,
     private readonly actions$: Actions,
