@@ -2922,7 +2922,7 @@
       </trans-unit>
       <trans-unit id="7708270344948043036" datatype="html">
         <source>
-          <x id="INTERPOLATION" equiv-text="{{ validationErrorMessage }}"/>
+          <x id="INTERPOLATION" equiv-text="{{ user.LastAdvisSent | appDate }}"/>
         </source>
       </trans-unit>
       <trans-unit id="5685427366449665132" datatype="html">
@@ -5989,6 +5989,9 @@
       </trans-unit>
       <trans-unit id="3585391336506222699" datatype="html">
         <source>Organisationsenheder med eksterne betalinger</source>
+      </trans-unit>
+      <trans-unit id="8930394023973882411" datatype="html">
+        <source>Webadressen er ugyldig. Sørg for, at den begynder med én af disse: &quot;http://&quot;, &quot;https://&quot;, &quot;kmdedhvis:&quot;, &quot;kmdsageraabn:&quot;, eller &quot;sbsyslauncher:&quot;</source>
       </trans-unit>
     </body>
   </file>
