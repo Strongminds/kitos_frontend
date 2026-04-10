@@ -25,9 +25,13 @@ export interface APIItSystemUsageValidityResponseDTO {
      */
     validAccordingToLifeCycle?: boolean;
     /**
-     * Determines if the entity is considered valid based on the validity of the related contract
+     * Determines if the entity is considered valid based on the validity of the related contract.  Note: This will be true if there is no contract (NoContract state) or if the contract is active.  Consider using MainContractState for more detailed information.
      */
     validAccordingToMainContract?: boolean;
+    /**
+     * Detailed state of the main contract: NoContract (no contract associated), Active, or Inactive
+     */
+    mainContractState?: APIItSystemUsageValidityResponseDTO.MainContractStateEnum;
     /**
      * Life cycle status of the entity
      */
@@ -42,6 +46,12 @@ export interface APIItSystemUsageValidityResponseDTO {
     validTo?: string;
 }
 export namespace APIItSystemUsageValidityResponseDTO {
+    export type MainContractStateEnum = 'NoContract' | 'Active' | 'Inactive';
+    export const MainContractStateEnum = {
+        NoContract: 'NoContract' as MainContractStateEnum,
+        Active: 'Active' as MainContractStateEnum,
+        Inactive: 'Inactive' as MainContractStateEnum
+    };
     export type LifeCycleStatusEnum = 'Undecided' | 'NotInUse' | 'PhasingIn' | 'Operational' | 'PhasingOut';
     export const LifeCycleStatusEnum = {
         Undecided: 'Undecided' as LifeCycleStatusEnum,

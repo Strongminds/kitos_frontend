@@ -38,6 +38,9 @@ export interface APIGDPRWriteRequestDTO {
     userSupervisionDocumentation?: APISimpleLinkDTO;
     riskAssessmentConducted?: APIGDPRWriteRequestDTO.RiskAssessmentConductedEnum;
     riskAssessmentConductedDate?: string;
+    /**
+     *  (Supplier Field)
+     */
     riskAssessmentResult?: APIGDPRWriteRequestDTO.RiskAssessmentResultEnum;
     plannedRiskAssessmentDate?: string;
     riskAssessmentDocumentation?: APISimpleLinkDTO;
@@ -48,6 +51,9 @@ export interface APIGDPRWriteRequestDTO {
     retentionPeriodDefined?: APIGDPRWriteRequestDTO.RetentionPeriodDefinedEnum;
     nextDataRetentionEvaluationDate?: string;
     dataRetentionEvaluationFrequencyInMonths?: number;
+    /**
+     *  (Supplier Field)
+     */
     gdprCriticality?: APIGDPRWriteRequestDTO.GdprCriticalityEnum;
 }
 export namespace APIGDPRWriteRequestDTO {
