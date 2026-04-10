@@ -1,6 +1,8 @@
 import { AppPath } from '../enums/app-path';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
+const validDocumentSharingProtocols = ['kmdsageraabn', 'kmdedhvis', 'sbsyslauncher'];
+
 export function validateHttpUrl(url?: string): boolean {
   if (!url) return false;
 
@@ -22,7 +24,7 @@ export function validateExternalReferenceUrl(externalRef?: string): boolean {
   if (validateHttpUrl(externalRef)) {
     return true;
   } else {
-    const regexp = /^(kmdsageraabn|kmdedhvis|sbsyslauncher):.*/;
+    const regexp = new RegExp(`^(${validDocumentSharingProtocols.join('|')}):.*`);
     return regexp.test(externalRef.toLowerCase());
   }
 }
