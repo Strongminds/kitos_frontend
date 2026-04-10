@@ -1,11 +1,11 @@
 import { Component, Input } from '@angular/core';
 import { SegmentButtonOption } from 'src/app/shared/components/segment/segment.component';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
-import { SegmentComponent } from '../../../../shared/components/segment/segment.component';
 import { CardComponent } from '../../../../shared/components/card/card.component';
+import { SegmentComponent } from '../../../../shared/components/segment/segment.component';
 
-import { NotificationsGridComponent } from './notifications-grid/notifications-grid.component';
 import { AlertsGridComponent } from './alerts-grid/alerts-grid.component';
+import { NotificationsGridComponent } from './notifications-grid/notifications-grid.component';
 
 enum NotificationSegmentType {
   Advis = 'advis',
@@ -31,7 +31,7 @@ export class NotificationsPageComponent {
     },
     {
       value: NotificationSegmentType.Alerts,
-      text: $localize`Ulæste advarsler`,
+      text: $localize`Ikke sendte advis`,
       dataCy: 'alerts-segment',
     },
   ];
