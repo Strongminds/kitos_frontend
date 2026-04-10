@@ -5987,6 +5987,12 @@
       <trans-unit id="5253916585354635099" datatype="html">
         <source>Ingen kontrakt</source>
       </trans-unit>
+      <trans-unit id="3132700394017624577" datatype="html">
+        <source>Organisationsenheder med interne betalinger</source>
+      </trans-unit>
+      <trans-unit id="3585391336506222699" datatype="html">
+        <source>Organisationsenheder med eksterne betalinger</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

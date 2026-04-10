@@ -30,7 +30,7 @@ export interface APIDataProcessingRegistrationOversightWriteRequestDTO {
      */
     oversightIntervalRemark?: string;
     /**
-     * Determines if an oversight activity has been completed
+     * Determines if an oversight activity has been completed (Supplier Field)
      */
     isOversightCompleted?: APIDataProcessingRegistrationOversightWriteRequestDTO.IsOversightCompletedEnum;
     /**
