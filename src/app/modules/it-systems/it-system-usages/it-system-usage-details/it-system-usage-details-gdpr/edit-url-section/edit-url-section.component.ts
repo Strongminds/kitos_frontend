@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Observable, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { hasOpenDialogOf } from 'src/app/shared/helpers/dialog.helpers';
-import { validateUrl } from 'src/app/shared/helpers/link.helpers';
+import { validateHttpUrl } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { LinkTextboxComponent } from '../../../../../../shared/components/link-textbox/link-textbox.component';
 import { EditUrlDialogComponent } from '../edit-url-dialog/edit-url-dialog.component';
@@ -50,6 +50,6 @@ export class EditUrlSectionComponent extends BaseComponent {
   }
 
   validateSimpleLinkUrl(url: string | undefined) {
-    return validateUrl(url);
+    return validateHttpUrl(url);
   }
 }
