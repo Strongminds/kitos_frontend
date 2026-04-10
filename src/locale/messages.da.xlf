@@ -7817,6 +7817,18 @@
         <source>Organisationsenheder med interne betalinger</source>
         <target state="new">Organisationsenheder med interne betalinger</target>
       </trans-unit>
+      <trans-unit id="3252031869609769068" datatype="html">
+        <source>Fjern notifikation</source>
+        <target state="new">Fjern notifikation</target>
+      </trans-unit>
+      <trans-unit id="4634221220301116102" datatype="html">
+        <source>Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.</source>
+        <target state="new">Er du sikker på, at du vil fjerne notifikationen om manglende afsendelse af advis? BEMÆRK: dette sletter ikke den pågældende advis.</target>
+      </trans-unit>
+      <trans-unit id="3325074221190642573" datatype="html">
+        <source>Ikke sendte advis</source>
+        <target state="new">Ikke sendte advis</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
