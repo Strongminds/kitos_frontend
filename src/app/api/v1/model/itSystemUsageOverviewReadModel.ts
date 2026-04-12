@@ -111,6 +111,7 @@ export interface APIItSystemUsageOverviewReadModel {
     webAccessibilityCompliance?: APIItSystemUsageOverviewReadModel.WebAccessibilityComplianceEnum;
     lastWebAccessibilityCheck?: string;
     webAccessibilityNotes?: string;
+    isSociallyCritical?: boolean;
 }
 export namespace APIItSystemUsageOverviewReadModel {
     export type ContainsAITechnologyEnum = 'Yes' | 'No' | 'Undecided';

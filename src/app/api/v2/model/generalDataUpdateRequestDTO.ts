@@ -56,6 +56,10 @@ export interface APIGeneralDataUpdateRequestDTO {
      * Notes related to the web accessibility of the system
      */
     webAccessibilityNotes?: string;
+    /**
+     * Whether the system is considered socially critical.
+     */
+    isSociallyCritical?: boolean;
 }
 export namespace APIGeneralDataUpdateRequestDTO {
     export type ContainsAITechnologyEnum = 'No' | 'Yes' | 'Undecided';

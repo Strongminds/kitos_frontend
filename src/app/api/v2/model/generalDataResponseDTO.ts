@@ -32,6 +32,10 @@ export interface APIGeneralDataResponseDTO {
      * Locally registered system version
      */
     systemVersion?: string;
+    /**
+     * Whether this system is considered socially critical.
+     */
+    isSociallyCritical?: boolean;
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity: APIItSystemUsageValidityResponseDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
