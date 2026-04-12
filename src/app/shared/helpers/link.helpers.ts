@@ -1,7 +1,9 @@
 import { AppPath } from '../enums/app-path';
 import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
-export function validateUrl(url?: string): boolean {
+const validDocumentSharingProtocols = ['kmdsageraabn', 'kmdedhvis', 'sbsyslauncher'];
+
+export function validateHttpUrl(url?: string): boolean {
   if (!url) return false;
 
   const regexp = /(^https?):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-/])$)?/;
@@ -9,16 +11,20 @@ export function validateUrl(url?: string): boolean {
 }
 
 export function isUrlEmptyOrValid(url?: string): boolean {
-  return !url || validateUrl(url);
+  return !url || validateHttpUrl(url);
+}
+
+export function isExternalReferenceUrlEmptyOrValid(url?: string): boolean {
+  return !url || validateExternalReferenceUrl(url);
 }
 
 export function validateExternalReferenceUrl(externalRef?: string): boolean {
   if (!externalRef) return false;
 
-  if (validateUrl(externalRef)) {
+  if (validateHttpUrl(externalRef)) {
     return true;
   } else {
-    const regexp = /^(kmdsageraabn|kmdedhvis|sbsyslauncher):.*/;
+    const regexp = new RegExp(`^(${validDocumentSharingProtocols.join('|')}):.*`);
     return regexp.test(externalRef.toLowerCase());
   }
 }
@@ -27,7 +33,7 @@ export function getDetailsPageLink(
   itemUuid?: string,
   itemType?: RegistrationEntityTypes,
   subpagePath?: string,
-  itemPathIncludesSubmodule?: boolean
+  itemPathIncludesSubmodule?: boolean,
 ): string | undefined {
   const isValid = itemUuid != undefined && itemType != undefined;
   if (isValid) {
@@ -41,28 +47,28 @@ export function getDetailsPageLink(
           `${AppPath.itSystems}/${AppPath.itInterfaces}`,
           itemUuid,
           subpagePath,
-          itemPathIncludesSubmodule
+          itemPathIncludesSubmodule,
         );
       case 'it-system':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itSystemCatalog}`,
           itemUuid,
           subpagePath,
-          itemPathIncludesSubmodule
+          itemPathIncludesSubmodule,
         );
       case 'it-system-usage':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
           itemUuid,
           subpagePath,
-          itemPathIncludesSubmodule
+          itemPathIncludesSubmodule,
         );
       case 'organization':
         return getDetailsPagePathWithSubmodule(
           `${AppPath.organization}/${AppPath.structure}`,
           itemUuid,
           subpagePath,
-          itemPathIncludesSubmodule
+          itemPathIncludesSubmodule,
         );
       default:
         console.error('Unmapped link itemType', itemType);
@@ -86,7 +92,7 @@ function getDetailsPagePathWithSubmodule(
   resourceUrlSegment: string,
   itemUuid: string,
   subpagePath?: string,
-  itemPathIncludesSubmodule?: boolean
+  itemPathIncludesSubmodule?: boolean,
 ) {
   if (itemPathIncludesSubmodule) {
     const segmentWithoutSubmodule = resourceUrlSegment.split('/')[0];

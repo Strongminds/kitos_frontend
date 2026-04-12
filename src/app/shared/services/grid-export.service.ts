@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NO_TEXT, YES_TEXT } from '../constants/constants';
-import { validateUrl } from '../helpers/link.helpers';
+import { validateHttpUrl } from '../helpers/link.helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { OverviewAuditModel } from '../models/it-contract/audit-model';
 import { AppDatePipe } from '../pipes/app-date.pipe';
@@ -77,7 +77,7 @@ export class GridExportService {
           case 'title-link':
             {
               const url = transformedItem[column.idField ?? ''];
-              const exportValue = validateUrl(url) ? url : transformedItem[field];
+              const exportValue = validateHttpUrl(url) ? url : transformedItem[field];
               transformedItem[field] = exportValue;
             }
             break;

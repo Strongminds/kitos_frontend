@@ -7,7 +7,8 @@ import { debounceTime, first, Observable } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
-import { isUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
+import { URL_VALIDATION_ERROR_MESSAGE } from 'src/app/shared/constants/error-message-constants';
+import { isExternalReferenceUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ButtonComponent } from '../../../../../../shared/components/buttons/button/button.component';
@@ -34,7 +35,7 @@ import { TextBoxComponent } from '../../../../../../shared/components/textbox/te
     CommonModule,
   ],
 })
-export class EditUrlDialogComponent extends BaseComponent implements OnInit {
+export class EditSimpleLinkDialogComponent extends BaseComponent implements OnInit {
   @Input() simpleLink?: SimpleLink | undefined;
   @Input() namePermission$?: Observable<boolean>;
   @Input() nameDisabledMessage?: string;
@@ -51,7 +52,12 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
   public isBusy = false;
   public showValidationError = false;
 
-  constructor(private readonly dialogRef: MatDialogRef<EditUrlDialogComponent>, private readonly actions$: Actions) {
+  public validationErrorMessage = URL_VALIDATION_ERROR_MESSAGE;
+
+  constructor(
+    private readonly dialogRef: MatDialogRef<EditSimpleLinkDialogComponent>,
+    private readonly actions$: Actions,
+  ) {
     super();
   }
 
@@ -78,33 +84,34 @@ export class EditUrlDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(ITSystemUsageActions.patchITSystemUsageSuccess), first())
-        .subscribe(() => this.dialogRef.close())
+        .subscribe(() => this.dialogRef.close()),
     );
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageActions.patchITSystemUsageError)).subscribe(() => {
         this.isBusy = false;
-      })
+      }),
     );
 
     this.subscriptions.add(
       this.simpleLinkForm.controls.url.valueChanges.pipe(debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME)).subscribe(() => {
-        this.showValidationError = isUrlEmptyOrValid(this.simpleLinkForm.controls.url.value ?? undefined) === false;
-      })
+        this.showValidationError =
+          isExternalReferenceUrlEmptyOrValid(this.simpleLinkForm.controls.url.value ?? undefined) === false;
+      }),
     );
 
     if (this.namePermission$) {
       this.subscriptions.add(
         this.namePermission$.subscribe((hasPermission) => {
           this.toggleControl(hasPermission, this.simpleLinkForm.controls.name);
-        })
+        }),
       );
     }
     if (this.linkPermission$) {
       this.subscriptions.add(
         this.linkPermission$.subscribe((hasPermission) => {
           this.toggleControl(hasPermission, this.simpleLinkForm.controls.url);
-        })
+        }),
       );
     }
   }

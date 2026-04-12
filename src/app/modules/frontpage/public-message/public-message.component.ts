@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
 import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
-import { validateUrl } from 'src/app/shared/helpers/link.helpers';
+import { validateHttpUrl } from 'src/app/shared/helpers/link.helpers';
 import { IconType } from 'src/app/shared/models/icon-type';
 import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -67,7 +67,7 @@ export class PublicMessageComponent implements OnInit {
 
   public hasValidUrl(publicMessage: PublicMessage): boolean {
     const url = publicMessage.link;
-    return !!url && validateUrl(url);
+    return !!url && validateHttpUrl(url);
   }
 
   public activeStatus(publicMessage: PublicMessage): boolean | undefined {
