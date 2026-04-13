@@ -12,6 +12,8 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn start:local` runs the development server with a local backend, by changing the values in `src/proxy.conf.json`. This requires a local backend running on `https://localhost:44300`. After terminating, the proxy settings return to the default.
 
+`yarn start:dev` runs the development server and ensures a dev backend is used, by changing the values in `src/proxy.conf.json`. After terminating, the proxy settings return to the default.
+
 `yarn build` to build the project. The built web app will be placed in the `dist/` directory. `yarn build` defaults to build for development. `yarn build --configuration dev` builds for the dev environment. `yarn build --configuration production` builds for the production environment.
 
 `yarn e2e` to serve the Angular app and afterwards start Cypress E2E testing.
