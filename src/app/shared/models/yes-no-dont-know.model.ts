@@ -3,7 +3,7 @@ import { APIGDPRRegistrationsResponseDTO, APIGeneralDataResponseDTO } from 'src/
 export interface YesNoDontKnowOption {
   name: string;
   value:
-    | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
+    | APIGeneralDataResponseDTO.BusinessCriticalEnum
     | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
     | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum
     | APIGeneralDataResponseDTO.IsSociallyCriticalEnum
@@ -24,7 +24,7 @@ export const yesNoDontKnowOptions: YesNoDontKnowOption[] = [
 ];
 export const mapToYesNoDontKnowEnum = (
   value?:
-    | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
+    | APIGeneralDataResponseDTO.BusinessCriticalEnum
     | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
     | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum
     | APIGeneralDataResponseDTO.IsSociallyCriticalEnum,
