@@ -252,6 +252,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
+            businessCritical: mapToYesNoDontKnowEnum(general.businessCritical),
           });
 
           this.webAccessibilityForm.patchValue({
