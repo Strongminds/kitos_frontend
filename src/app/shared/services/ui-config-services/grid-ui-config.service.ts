@@ -83,6 +83,7 @@ import {
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
+  selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -111,7 +112,7 @@ export class GridUIConfigService {
   constructor(private store: Store) {}
 
   public filterGridColumnsByUIConfig(
-    moduleKey: UIModuleConfigKey
+    moduleKey: UIModuleConfigKey,
   ): (source: Observable<GridColumn[]>) => Observable<GridColumn[]> {
     return (source) =>
       source.pipe(
@@ -119,15 +120,15 @@ export class GridUIConfigService {
         map(([gridColumns, uiConfig]) => {
           return this.applyAllUIConfigToGridColumns(uiConfig, gridColumns);
         }),
-        filterGridColumnsByUIConfig()
+        filterGridColumnsByUIConfig(),
       );
   }
 
   public isColumnEnabled(column: GridColumn, applications: UIConfigGridApplication[]) {
     let enabled = true;
 
-    for (const app of applications) {
-      const result = this.verifyColumn(app, column);
+    for (const application of applications) {
+      const result = this.verifyColumn(application, column);
       if (result !== null) {
         if (result === false) {
           enabled = false;
@@ -229,7 +230,7 @@ export class GridUIConfigService {
             ContractFields.AccumulatedOtherCost,
             ContractFields.LatestAuditDate,
             ContractFields.AuditStatus,
-          ])
+          ]),
         ),
 
       this.store
@@ -239,7 +240,7 @@ export class GridUIConfigService {
             ContractFields.OperationRemunerationBegunDate,
             ContractFields.PaymentModelUuid,
             ContractFields.PaymentFrequencyUuid,
-          ])
+          ]),
         ),
 
       //Contract Roles
@@ -271,7 +272,11 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableFrontPageUsagePeriod)
         .pipe(
-          shouldEnable([UsageFields.ExpirationDate, UsageFields.Concluded, UsageFields.ActiveAccordingToValidityPeriod])
+          shouldEnable([
+            UsageFields.ExpirationDate,
+            UsageFields.Concluded,
+            UsageFields.ActiveAccordingToValidityPeriod,
+          ]),
         ),
       this.store.select(selectITSystemUsageEnableStatus).pipe(shouldEnable([])),
       this.store.select(selectITSystemUsageEnableAmountOfUsers).pipe(shouldEnable([UsageFields.UserCount])),
@@ -289,8 +294,11 @@ export class GridUIConfigService {
             UsageFields.WebAccessibilityCompliance,
             UsageFields.LastWebAccessibilityCheck,
             UsageFields.WebAccessibilityNotes,
-          ])
+          ]),
         ),
+      this.store
+        .select(selectITSystemUsageEnableIsSociallyCritical)
+        .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
 
       //Contracts
       combineAND([
@@ -311,7 +319,7 @@ export class GridUIConfigService {
         shouldEnable([
           UsageFields.DataProcessingRegistrationsConcludedAsCsv,
           UsageFields.DataProcessingRegistrationNamesAsCsv,
-        ])
+        ]),
       ),
 
       //GDPR
@@ -339,14 +347,17 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableTabOrganization)
         .pipe(
-          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv])
+          shouldEnable([UsageFields.ResponsibleOrganizationUnitName, UsageFields.RelevantOrganizationUnitNamesAsCsv]),
         ),
 
       //Relations
       this.store
         .select(selectITSystemUsageEnableOutgoingRelations)
         .pipe(
-          shouldEnable([UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv, UsageFields.DependsOnInterfacesNamesAsCsv])
+          shouldEnable([
+            UsageFields.OutgoingRelatedItSystemUsagesNamesAsCsv,
+            UsageFields.DependsOnInterfacesNamesAsCsv,
+          ]),
         ),
       this.store
         .select(selectITSystemUsageEnableIncomingRelations)
@@ -402,7 +413,7 @@ export class GridUIConfigService {
       this.store.select(selectDprEnableResponsibleOrgUnit).pipe(shouldEnable([DprFields.ResponsibleOrgUnitName])),
       // IT Systems
       combineAND([this.store.select(selectShowItSystemModule), this.store.select(selectDprEnableItSystems)]).pipe(
-        shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv])
+        shouldEnable([DprFields.SystemNamesAsCsv, DprFields.SystemUuidsAsCsv]),
       ),
 
       // Contracts
@@ -456,7 +467,7 @@ export class GridUIConfigService {
             GdprFields.SENSITIVE_DATA,
             GdprFields.LEGAL_DATA,
             GdprFields.SENSITIVE_DATA_TYPES,
-          ])
+          ]),
         ),
 
       this.store
@@ -471,7 +482,7 @@ export class GridUIConfigService {
             GdprFields.RISK_ASSESSMENT_DATE,
             GdprFields.PRE_RISK_ASSESSMENT_NAME,
             GdprFields.RISK_ASSESMENT_NOTES,
-          ])
+          ]),
         ),
 
       this.store
@@ -512,7 +523,7 @@ export class GridUIConfigService {
   private applyAllUIConfigToGridColumns(applications: UIConfigGridApplication[], columns: GridColumn[]) {
     let updatedColumns: GridColumn[] = [...columns];
     applications.forEach(
-      (application) => (updatedColumns = this.applyUIConfigToGridColumns(application, updatedColumns))
+      (application) => (updatedColumns = this.applyUIConfigToGridColumns(application, updatedColumns)),
     );
     return updatedColumns;
   }
@@ -522,7 +533,7 @@ export class GridUIConfigService {
       if (
         application.columnNamesToConfigure.has(column.field) ||
         Array.from(application.columnNameSubstringsToConfigure || []).some((substring) =>
-          column.field.includes(substring)
+          column.field.includes(substring),
         )
       ) {
         return {
@@ -541,7 +552,7 @@ export class GridUIConfigService {
     if (
       application.columnNamesToConfigure.has(column.field) ||
       Array.from(application.columnNameSubstringsToConfigure || []).some((substring) =>
-        column.field.includes(substring)
+        column.field.includes(substring),
       )
     ) {
       return application.shouldEnable;
@@ -552,7 +563,7 @@ export class GridUIConfigService {
 
 function shouldEnable(
   columnNamesToConfigure: string[],
-  columnNameSubstringsToConfigure: string[] = []
+  columnNameSubstringsToConfigure: string[] = [],
 ): (source: Observable<boolean>) => Observable<UIConfigGridApplication> {
   return (source: Observable<boolean>) =>
     source.pipe(
@@ -560,6 +571,6 @@ function shouldEnable(
         shouldEnable,
         columnNamesToConfigure: new Set(columnNamesToConfigure),
         columnNameSubstringsToConfigure: new Set(columnNameSubstringsToConfigure),
-      }))
+      })),
     );
 }
