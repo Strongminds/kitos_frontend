@@ -75,14 +75,16 @@
         ></app-tooltip>
       }
 
-    <app-dropdown
-      text="Samfundskritisk IT-system"
-      i18n-text
-      [formGroup]="itSystemInformationForm"
-      formName="isSociallyCritical"
-      (valueChange)="patchGeneral({ isSociallyCritical: $event })"
-      [data]="isSociallyCriticalOptions"
-    ></app-dropdown>
+      @if (isSociallyCriticalEnabled$ | async) {
+         <app-dropdown
+          text="Samfundskritisk IT-system"
+          i18n-text
+          [formGroup]="itSystemInformationForm"
+          formName="isSociallyCritical"
+          (valueChange)="patchGeneral({ isSociallyCritical: $event })"
+          [data]="isSociallyCriticalOptions"
+        ></app-dropdown>
+      }
 
       @if (descriptionEnabled$ | async) {
         <app-textarea

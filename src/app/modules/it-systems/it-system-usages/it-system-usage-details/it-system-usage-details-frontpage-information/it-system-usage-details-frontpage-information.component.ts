@@ -53,6 +53,7 @@ import {
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
@@ -123,6 +124,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
   public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
+  public readonly isSociallyCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsSociallyCritical);
 
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
