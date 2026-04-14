@@ -60,6 +60,10 @@ export interface APIGeneralDataUpdateRequestDTO {
      * Whether the system is considered socially critical.
      */
     isSociallyCritical?: APIGeneralDataUpdateRequestDTO.IsSociallyCriticalEnum;
+    /**
+     * Whether the system is considered business critical.
+     */
+    businessCritical?: APIGeneralDataUpdateRequestDTO.BusinessCriticalEnum;
 }
 export namespace APIGeneralDataUpdateRequestDTO {
     export type ContainsAITechnologyEnum = 'No' | 'Yes' | 'Undecided';
@@ -80,6 +84,13 @@ export namespace APIGeneralDataUpdateRequestDTO {
         Yes: 'Yes' as IsSociallyCriticalEnum,
         DontKnow: 'DontKnow' as IsSociallyCriticalEnum,
         Undecided: 'Undecided' as IsSociallyCriticalEnum
+    };
+    export type BusinessCriticalEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
+    export const BusinessCriticalEnum = {
+        No: 'No' as BusinessCriticalEnum,
+        Yes: 'Yes' as BusinessCriticalEnum,
+        DontKnow: 'DontKnow' as BusinessCriticalEnum,
+        Undecided: 'Undecided' as BusinessCriticalEnum
     };
 }
 

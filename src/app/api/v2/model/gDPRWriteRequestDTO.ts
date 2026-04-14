@@ -14,7 +14,6 @@ import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 export interface APIGDPRWriteRequestDTO { 
     purpose?: string;
-    businessCritical?: APIGDPRWriteRequestDTO.BusinessCriticalEnum;
     hostedAt?: APIGDPRWriteRequestDTO.HostedAtEnum;
     directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels?: Array<APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum>;
@@ -57,13 +56,6 @@ export interface APIGDPRWriteRequestDTO {
     gdprCriticality?: APIGDPRWriteRequestDTO.GdprCriticalityEnum;
 }
 export namespace APIGDPRWriteRequestDTO {
-    export type BusinessCriticalEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
-    export const BusinessCriticalEnum = {
-        No: 'No' as BusinessCriticalEnum,
-        Yes: 'Yes' as BusinessCriticalEnum,
-        DontKnow: 'DontKnow' as BusinessCriticalEnum,
-        Undecided: 'Undecided' as BusinessCriticalEnum
-    };
     export type HostedAtEnum = 'Undecided' | 'OnPremise' | 'External' | 'Hybrid';
     export const HostedAtEnum = {
         Undecided: 'Undecided' as HostedAtEnum,
