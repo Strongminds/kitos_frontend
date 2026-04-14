@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
 import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
-import { validateHttpUrl } from 'src/app/shared/helpers/link.helpers';
+import { validateExternalReferenceUrl } from 'src/app/shared/helpers/link.helpers';
 import { IconType } from 'src/app/shared/models/icon-type';
 import { PublicMessage } from 'src/app/shared/models/public-messages/public-message.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -49,12 +49,11 @@ export class PublicMessageComponent implements OnInit {
   public readonly statusDisplayType = BooleanValueDisplayType.NormalUnstable;
 
   constructor(
-    private dialog: MatDialog,
+    private readonly dialog: MatDialog,
     private readonly componentStore: FrontpageComponentStore,
   ) {}
 
   ngOnInit(): void {
-    // Initialize publicMessage$ by filtering publicMessages$ for the message with the matching UUID
     this.publicMessage$ = this.publicMessages$.pipe(
       map((messages) => messages.find((message) => message.uuid === this.publicMessageUuid)!),
     );
@@ -67,7 +66,7 @@ export class PublicMessageComponent implements OnInit {
 
   public hasValidUrl(publicMessage: PublicMessage): boolean {
     const url = publicMessage.link;
-    return !!url && validateHttpUrl(url);
+    return !!url && validateExternalReferenceUrl(url);
   }
 
   public activeStatus(publicMessage: PublicMessage): boolean | undefined {
