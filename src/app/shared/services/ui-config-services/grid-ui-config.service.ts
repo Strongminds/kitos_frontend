@@ -121,7 +121,7 @@ export class GridUIConfigService {
         map(([gridColumns, uiConfig]) => {
           return this.applyAllUIConfigToGridColumns(uiConfig, gridColumns);
         }),
-        filterGridColumnsByUIConfig(),,
+        filterGridColumnsByUIConfig(),
       );
   }
 
