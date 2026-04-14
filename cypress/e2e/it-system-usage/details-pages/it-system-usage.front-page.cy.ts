@@ -15,6 +15,24 @@ describe('it-system-usage frontpage', () => {
     getKleRow(kleNumber).contains(name);
   }
 
+  it('can edit business critical status', () => {
+    cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
+    cy.contains('System 3').click();
+
+    cy.dropdown('Forretningskritisk IT-System', 'Nej', true);
+    const randomPatchName = Math.random().toString(36).substring(7);
+
+    cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
+      randomPatchName,
+    );
+
+    cy.wait('@' + randomPatchName)
+      .its('request.body')
+      .should('deep.eq', {
+        general: { isBusinessCritical: 'NO' },
+      });
+  });
+
   it('can show IT system usage details', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.contains('System 3').click();
@@ -36,6 +54,8 @@ describe('it-system-usage frontpage', () => {
     cy.getByDataCy('web-accessibility-compliance').within(() => cy.contains('Ja'));
     cy.inputByCy('last-web-accessibility-check').should('have.value', '27-02-2025');
     cy.textareaByCy('web-accessibility-notes').should('have.value', 'en note om tilgængelighed');
+
+    cy.dropdown('Forretningskritisk IT-System').should('have.text', 'Ja');
 
     cy.contains('Data fra IT Systemkataloget').click();
 
@@ -125,7 +145,7 @@ describe('it-system-usage frontpage', () => {
     cy.contains('System 3').click();
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch1'
+      'patch1',
     );
 
     cy.input('Systemnavn (lokalt)').clear().type('TEST');
@@ -137,7 +157,7 @@ describe('it-system-usage frontpage', () => {
     cy.contains('Feltet blev opdateret');
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch2'
+      'patch2',
     );
     cy.dropdown('Antal brugere', '50-99');
     cy.wait('@patch2')
@@ -145,7 +165,7 @@ describe('it-system-usage frontpage', () => {
       .should('deep.eq', { general: { numberOfExpectedUsers: { lowerBound: 50, upperBound: 99 } } });
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch3'
+      'patch3',
     );
     cy.dropdown('Livscyklus', 'Ikke i drift');
     cy.wait('@patch3')
@@ -153,7 +173,7 @@ describe('it-system-usage frontpage', () => {
       .should('deep.eq', { general: { validity: { lifeCycleStatus: 'NotInUse' } } });
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      'patch4'
+      'patch4',
     );
     cy.input('Ibrugtagningsdato').clear().type('31052022');
     cy.input('Systemnavn ID').click({ force: true });
@@ -164,13 +184,13 @@ describe('it-system-usage frontpage', () => {
     cy.contains('Feltet blev opdateret');
 
     expectGeneralPropertyUpdate({ webAccessibilityCompliance: 'No' }, () =>
-      cy.dropdownByCy('web-accessibility-compliance', 'Nej', true)
+      cy.dropdownByCy('web-accessibility-compliance', 'Nej', true),
     );
     expectGeneralPropertyUpdate({ lastWebAccessibilityCheck: 'Thu Mar 27 2025' }, () =>
-      cy.inputByCy('last-web-accessibility-check').clear().type('27032025').blur()
+      cy.inputByCy('last-web-accessibility-check').clear().type('27032025').blur(),
     );
     expectGeneralPropertyUpdate({ webAccessibilityNotes: 'ny note' }, () =>
-      cy.textareaByCy('web-accessibility-notes').clear().type('ny note').blur()
+      cy.textareaByCy('web-accessibility-notes').clear().type('ny note').blur(),
     );
   });
 
@@ -207,7 +227,7 @@ describe('it-system-usage frontpage', () => {
 function expectGeneralPropertyUpdate(generalBody: object, initiator: () => void) {
   const randomPatchName = Math.random().toString(36).substring(7);
   cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-    randomPatchName
+    randomPatchName,
   );
 
   initiator();

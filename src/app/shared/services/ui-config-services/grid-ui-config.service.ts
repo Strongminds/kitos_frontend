@@ -61,6 +61,7 @@ import {
   selectItContractsEnableTermination,
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableAssociatedContracts,
+  selectITSystemUsageEnableBusinessCritical,
   selectITSystemUsageEnableCatalogArchiveDuty,
   selectITSystemUsageEnableCatalogArchiveDutyComment,
   selectITSystemUsageEnableContainsAITechnology,
@@ -70,7 +71,6 @@ import {
   selectITSystemUsageEnableDocumentBearing,
   selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
-  selectITSystemUsageEnableGdprBusinessCritical,
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprCriticality,
   selectITSystemUsageEnableGdprDataTypes,
@@ -345,7 +345,7 @@ export class GridUIConfigService {
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
       this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([UsageFields.DpiaConducted])),
       this.store
-        .select(selectITSystemUsageEnableGdprBusinessCritical)
+        .select(selectITSystemUsageEnableBusinessCritical)
         .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
       this.store.select(selectITSystemUsageEnableGdprCriticality).pipe(shouldEnable([UsageFields.GdprCriticality])),
 
@@ -477,7 +477,7 @@ export class GridUIConfigService {
         ),
 
       this.store
-        .select(selectITSystemUsageEnableGdprBusinessCritical)
+        .select(selectITSystemUsageEnableBusinessCritical)
         .pipe(shouldEnable([GdprFields.BUSINESS_CRITICAL_NAME])),
 
       this.store

@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
-import { APIGeneralDataUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import { APIGeneralDataUpdateRequestDTO, APIGDPRWriteRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
@@ -45,10 +45,12 @@ import {
   selectITSystemUsageHasModifyPermission,
   selectItSystemUsage,
   selectItSystemUsageGeneral,
+  selectItSystemUsageGdpr,
   selectItSystemUsageValid,
 } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableAmountOfUsers,
+  selectITSystemUsageEnableBusinessCritical,
   selectITSystemUsageEnableContainsAITechnology,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
@@ -102,6 +104,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      businessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -110,6 +113,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
   public readonly aiTechnologyOptions = yesNoOptions;
   public readonly isSociallyCriticalOptions = yesNoDontKnowOptions;
+  public readonly businessCriticalOptions = yesNoDontKnowOptions;
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
   public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
@@ -125,6 +129,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
   public readonly isSociallyCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsSociallyCritical);
+  public readonly businessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableBusinessCritical);
 
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
@@ -258,6 +263,18 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         }),
     );
 
+    // Set initial state of businessCritical from GDPR state
+    this.subscriptions.add(
+      this.store
+        .select(selectItSystemUsageGdpr)
+        .pipe(filterNullish())
+        .subscribe((gdpr) => {
+          this.itSystemInformationForm.patchValue({
+            businessCritical: mapToYesNoDontKnowEnum(gdpr.businessCritical),
+          });
+        }),
+    );
+
     // Set initial state of application form
     this.subscriptions.add(
       this.store
@@ -284,6 +301,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
       this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
+    }
+  }
+
+  public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ gdpr }));
     }
   }
 }
