@@ -46,6 +46,7 @@ import {
   selectItContractsEnabledlastModifedDate,
   selectItContractsEnableExternalPayment,
   selectItContractsEnableExternalSigner,
+  selectItContractsEnableInternalPayment,
   selectItContractsEnableInternalSigner,
   selectItContractsEnableIsActive,
   selectItContractsEnableNotes,
@@ -120,7 +121,7 @@ export class GridUIConfigService {
         map(([gridColumns, uiConfig]) => {
           return this.applyAllUIConfigToGridColumns(uiConfig, gridColumns);
         }),
-        filterGridColumnsByUIConfig(),
+        filterGridColumnsByUIConfig(),,
       );
   }
 
@@ -230,8 +231,13 @@ export class GridUIConfigService {
             ContractFields.AccumulatedOtherCost,
             ContractFields.LatestAuditDate,
             ContractFields.AuditStatus,
+            ContractFields.ExternalPaymentOrganizationUnitsCsv,
           ]),
         ),
+
+      this.store
+        .select(selectItContractsEnableInternalPayment)
+        .pipe(shouldEnable([ContractFields.InternalPaymentOrganizationUnitsCsv])),
 
       this.store
         .select(selectItContractsEnablePaymentModel)
