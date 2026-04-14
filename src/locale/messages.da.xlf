@@ -7829,6 +7829,10 @@
         <source>Samfundskritisk IT-system</source>
         <target state="new">Samfundskritisk IT-system</target>
       </trans-unit>
+      <trans-unit id="631828793728533672" datatype="html">
+        <source>Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?</source>
+        <target state="new">Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
