@@ -292,7 +292,6 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableContainsAITechnology)
         .pipe(shouldEnable([UsageFields.ContainsAITechnology])),
-
       this.store
         .select(selectITSystemUsageEnableWebAccessibility)
         .pipe(
@@ -305,6 +304,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableIsSociallyCritical)
         .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
+      this.store
+        .select(selectITSystemUsageEnableBusinessCritical)
+        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
 
       //Contracts
       combineAND([
@@ -344,9 +346,6 @@ export class GridUIConfigService {
         .select(selectITSystemUsageEnableGdprDocumentation)
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
       this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([UsageFields.DpiaConducted])),
-      this.store
-        .select(selectITSystemUsageEnableBusinessCritical)
-        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
       this.store.select(selectITSystemUsageEnableGdprCriticality).pipe(shouldEnable([UsageFields.GdprCriticality])),
 
       //Organization
