@@ -61,13 +61,6 @@
       ></app-dropdown>
     }
 
-    <app-textbox
-      text="Samfundskritisk"
-      i18n-text
-      [formGroup]="itSystemApplicationForm"
-      formName="isSociallyCritical"
-    ></app-textbox>
-
     @if (containsAITechnologyEnabled$ | async) {
       <app-tooltip [text]="(containsAITechnologyModifyEnabled$ | async) === false ? supplierMessage : ''">
         <app-dropdown
@@ -81,6 +74,16 @@
           </app-dropdown
         ></app-tooltip>
       }
+
+    <app-dropdown
+      text="Samfundskritisk"
+      i18n-text
+      [formGroup]="itSystemApplicationForm"
+      formName="isSociallyCritical"
+      (valueChange)="patchGeneral({ isSociallyCritical: $event })"
+      [data]="isSociallyCriticalOptions"
+    ></app-dropdown>
+
       @if (descriptionEnabled$ | async) {
         <app-textarea
           class="full-width"

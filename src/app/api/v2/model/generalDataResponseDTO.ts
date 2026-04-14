@@ -32,10 +32,6 @@ export interface APIGeneralDataResponseDTO {
      * Locally registered system version
      */
     systemVersion?: string;
-    /**
-     * Whether this system is considered socially critical.
-     */
-    isSociallyCritical?: boolean;
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity: APIItSystemUsageValidityResponseDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
@@ -55,6 +51,10 @@ export interface APIGeneralDataResponseDTO {
      * Notes related to the web accessibility of the system
      */
     webAccessibilityNotes?: string;
+    /**
+     * Whether this system is considered socially critical.
+     */
+    isSociallyCritical?: APIGeneralDataResponseDTO.IsSociallyCriticalEnum;
 }
 export namespace APIGeneralDataResponseDTO {
     export type ContainsAITechnologyEnum = 'No' | 'Yes' | 'Undecided';
@@ -68,6 +68,13 @@ export namespace APIGeneralDataResponseDTO {
         No: 'No' as WebAccessibilityComplianceEnum,
         Yes: 'Yes' as WebAccessibilityComplianceEnum,
         Partially: 'Partially' as WebAccessibilityComplianceEnum
+    };
+    export type IsSociallyCriticalEnum = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
+    export const IsSociallyCriticalEnum = {
+        No: 'No' as IsSociallyCriticalEnum,
+        Yes: 'Yes' as IsSociallyCriticalEnum,
+        DontKnow: 'DontKnow' as IsSociallyCriticalEnum,
+        Undecided: 'Undecided' as IsSociallyCriticalEnum
     };
 }
 
