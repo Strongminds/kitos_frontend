@@ -95,6 +95,7 @@
           [formGroup]="itSystemInformationForm"
           formName="businessCritical"
           [data]="businessCriticalOptions"
+          (valueChange)="patchGeneral({ businessCritical: $event })"
         ></app-dropdown>
       }
 
