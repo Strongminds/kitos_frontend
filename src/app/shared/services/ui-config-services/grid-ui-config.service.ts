@@ -304,9 +304,7 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableIsSociallyCritical)
         .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
-      this.store
-        .select(selectITSystemUsageEnableBusinessCritical)
-        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
+      this.store.select(selectITSystemUsageEnableBusinessCritical).pipe(shouldEnable([UsageFields.IsBusinessCritical])),
 
       //Contracts
       combineAND([
@@ -474,10 +472,6 @@ export class GridUIConfigService {
             GdprFields.SENSITIVE_DATA_TYPES,
           ]),
         ),
-
-      this.store
-        .select(selectITSystemUsageEnableBusinessCritical)
-        .pipe(shouldEnable([GdprFields.BUSINESS_CRITICAL_NAME])),
 
       this.store
         .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
