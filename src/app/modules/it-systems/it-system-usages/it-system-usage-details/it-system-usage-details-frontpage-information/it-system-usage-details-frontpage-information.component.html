@@ -96,6 +96,8 @@
           formName="businessCritical"
           [data]="businessCriticalOptions"
           (valueChange)="patchGeneral({ businessCritical: $event })"
+          toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
+          i18n-toolTipText
         ></app-dropdown>
       }
 
