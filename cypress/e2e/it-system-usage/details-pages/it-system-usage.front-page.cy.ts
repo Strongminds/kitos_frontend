@@ -29,7 +29,7 @@ describe('it-system-usage frontpage', () => {
     cy.wait('@' + randomPatchName)
       .its('request.body')
       .should('deep.eq', {
-        general: { isBusinessCritical: 'NO' },
+        general: { businessCritical: 'No' },
       });
   });
 
