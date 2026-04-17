@@ -41,7 +41,7 @@ export interface APIGeneralDataUpdateRequestDTO {
     numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
     validity?: APIItSystemUsageValidityWriteRequestDTO;
     /**
-     * Whether the system usage is known to include any kind of AI technology
+     * Whether the system usage is known to include any kind of AI technology (Supplier Field)
      */
     containsAITechnology?: APIGeneralDataUpdateRequestDTO.ContainsAITechnologyEnum;
     /**

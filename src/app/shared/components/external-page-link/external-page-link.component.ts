@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { validateExternalReferenceUrl, validateUrl } from '../../helpers/link.helpers';
+import { validateExternalReferenceUrl, validateHttpUrl } from '../../helpers/link.helpers';
 import { LinkFontSizes } from '../../models/sizes/link-font-sizes.model';
 
 import { ContentWithTooltipComponent } from '../content-with-tooltip/content-with-tooltip.component';
@@ -21,7 +21,7 @@ export class ExternalPageLinkComponent implements OnInit {
   public isValidLink = false;
 
   ngOnInit() {
-    this.isValidLink = validateUrl(this.url) || validateExternalReferenceUrl(this.url);
+    this.isValidLink = validateHttpUrl(this.url) || validateExternalReferenceUrl(this.url);
 
     if (!this.title) {
       if (this.isValidLink) {

@@ -22,8 +22,8 @@
           ></app-textbox>
         </app-tooltip>
         @if (showValidationError) {
-        <app-paragraph paragraphSize="small" color="error" i18n
-          >Webadressen er ugyldig. Sørg for, at den begynder med "https://"
+        <app-paragraph paragraphSize="small" color="error"
+          > {{ validationErrorMessage }}
         </app-paragraph>
         }
       </div>

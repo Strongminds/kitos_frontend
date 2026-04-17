@@ -36,6 +36,7 @@ import { includedColumnInExport } from '../../helpers/grid-export.helper';
 import { GridColumn } from '../../models/grid-column.model';
 import { GridState, defaultLocalGridState } from '../../models/grid-state.model';
 import { BooleanChange, RowReorderingEvent } from '../../models/grid/grid-events.model';
+import { ActionButtonsCellDeleteIcon } from '../../models/icons/action-buttons-cell-delete-icons';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { GridExportService } from '../../services/grid-export.service';
 import { ChoiceTypeDropdownFilterComponent } from '../grid/choice-type-dropdown-filter/choice-type-dropdown-filter.component';
@@ -96,6 +97,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @Input() scrollable: 'scrollable' | 'virtual' | 'none' = 'scrollable';
   @Input() resizable: boolean = true;
   @Input() entityType?: RegistrationEntityTypes;
+  @Input() public deleteIcon: ActionButtonsCellDeleteIcon = 'trashcan';
 
   @Output() deleteEvent = new EventEmitter<T>();
   @Output() modifyEvent = new EventEmitter<T>();
@@ -111,7 +113,10 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   public readonly defaultMinimumDateColumnWidth = DEFAULT_DATE_COLUMN_MINIMUM_WIDTH;
   public readonly defaultPrimaryColumnMinimumWidth = DEFAULT_PRIMARY_COLUMN_MINIMUM_WIDTH;
 
-  constructor(private actions$: Actions, private readonly gridExportService: GridExportService) {
+  constructor(
+    private actions$: Actions,
+    private readonly gridExportService: GridExportService,
+  ) {
     super();
     this.allData = this.allData.bind(this);
   }

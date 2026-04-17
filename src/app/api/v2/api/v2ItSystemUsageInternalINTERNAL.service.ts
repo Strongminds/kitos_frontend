@@ -39,10 +39,6 @@ export interface DeleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganiz
     systemUuid: string;
 }
 
-export interface GetManyItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams {
-    systemUsageUuid: string;
-}
-
 export interface GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams {
     /** Required organization filter */
     organizationUuid: string;
@@ -67,6 +63,10 @@ export interface GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams {
 
 export interface GetManyItSystemUsageInternalV2GetRelationsRequestParams {
     contractUuid: string;
+}
+
+export interface GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams {
+    systemUsageUuid: string;
 }
 
 export interface PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams {
@@ -191,65 +191,6 @@ export class APIV2ItSystemUsageInternalINTERNALService {
 
         let localVarPath = `/api/v2/internal/it-system-usages/system/${this.configuration.encodeParam({name: "systemUuid", value: systemUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<object>('delete', `${this.configuration.basePath}${localVarPath}`,
-            {
-                context: localVarHttpContext,
-                responseType: <any>responseType_,
-                withCredentials: this.configuration.withCredentials,
-                headers: localVarHeaders,
-                observe: observe,
-                reportProgress: reportProgress
-            }
-        );
-    }
-
-    /**
-     * Get roles assigned to the system usage
-     * @param requestParameters
-     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
-     * @param reportProgress flag to report request and response progress.
-     */
-    public getManyItSystemUsageInternalV2GetAddRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
-    public getManyItSystemUsageInternalV2GetAddRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyItSystemUsageInternalV2GetAddRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyItSystemUsageInternalV2GetAddRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetAddRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const systemUsageUuid = requestParameters.systemUsageUuid;
-        if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getManyItSystemUsageInternalV2GetAddRoleAssignments.');
-        }
-
-        let localVarHeaders = this.defaultHeaders;
-
-        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
-        if (localVarHttpHeaderAcceptSelected === undefined) {
-            // to determine the Accept header
-            const httpHeaderAccepts: string[] = [
-                'application/json'
-            ];
-            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
-        }
-        if (localVarHttpHeaderAcceptSelected !== undefined) {
-            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
-        }
-
-        let localVarHttpContext: HttpContext | undefined = options && options.context;
-        if (localVarHttpContext === undefined) {
-            localVarHttpContext = new HttpContext();
-        }
-
-
-        let responseType_: 'text' | 'json' | 'blob' = 'json';
-        if (localVarHttpHeaderAcceptSelected) {
-            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
-                responseType_ = 'text';
-            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
-                responseType_ = 'json';
-            } else {
-                responseType_ = 'blob';
-            }
-        }
-
-        let localVarPath = `/api/v2/internal/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
-        return this.httpClient.request<Array<APIExtendedRoleAssignmentResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -419,6 +360,65 @@ export class APIV2ItSystemUsageInternalINTERNALService {
 
         let localVarPath = `/api/v2/internal/it-system-usages/relations/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<Array<APIGeneralSystemRelationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+            {
+                context: localVarHttpContext,
+                responseType: <any>responseType_,
+                withCredentials: this.configuration.withCredentials,
+                headers: localVarHeaders,
+                observe: observe,
+                reportProgress: reportProgress
+            }
+        );
+    }
+
+    /**
+     * Get roles assigned to the system usage
+     * @param requestParameters
+     * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
+     * @param reportProgress flag to report request and response progress.
+     */
+    public getManyItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
+    public getManyItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
+    public getManyItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
+    public getManyItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+        const systemUsageUuid = requestParameters.systemUsageUuid;
+        if (systemUsageUuid === null || systemUsageUuid === undefined) {
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getManyItSystemUsageInternalV2GetRoleAssignments.');
+        }
+
+        let localVarHeaders = this.defaultHeaders;
+
+        let localVarHttpHeaderAcceptSelected: string | undefined = options && options.httpHeaderAccept;
+        if (localVarHttpHeaderAcceptSelected === undefined) {
+            // to determine the Accept header
+            const httpHeaderAccepts: string[] = [
+                'application/json'
+            ];
+            localVarHttpHeaderAcceptSelected = this.configuration.selectHeaderAccept(httpHeaderAccepts);
+        }
+        if (localVarHttpHeaderAcceptSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Accept', localVarHttpHeaderAcceptSelected);
+        }
+
+        let localVarHttpContext: HttpContext | undefined = options && options.context;
+        if (localVarHttpContext === undefined) {
+            localVarHttpContext = new HttpContext();
+        }
+
+
+        let responseType_: 'text' | 'json' | 'blob' = 'json';
+        if (localVarHttpHeaderAcceptSelected) {
+            if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
+                responseType_ = 'text';
+            } else if (this.configuration.isJsonMime(localVarHttpHeaderAcceptSelected)) {
+                responseType_ = 'json';
+            } else {
+                responseType_ = 'blob';
+            }
+        }
+
+        let localVarPath = `/api/v2/internal/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
+        return this.httpClient.request<Array<APIExtendedRoleAssignmentResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

@@ -4,7 +4,7 @@ import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
 import { map, Observable } from 'rxjs';
 import { BaseComponent } from '../../base/base.component';
-import { validateUrl } from '../../helpers/link.helpers';
+import { validateExternalReferenceUrl } from '../../helpers/link.helpers';
 import { openUrlInNewTab } from '../../helpers/navigation/navigation.helpers';
 import { isEmptyOrUndefined } from '../../helpers/string.helpers';
 import { SimpleLink } from '../../models/SimpleLink.model';
@@ -24,8 +24,8 @@ import { ReadonlyLinkTextboxComponent } from './readonly-link-textbox/readonly-l
     IconButtonComponent,
     PencilIconComponent,
     ReadonlyLinkTextboxComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class LinkTextboxComponent extends BaseComponent {
   @Input() public title!: string;
@@ -63,7 +63,7 @@ export class LinkTextboxComponent extends BaseComponent {
           return title;
         }
         return `${title}: ${simpleLink?.url}`;
-      })
+      }),
     );
   }
 
@@ -73,7 +73,7 @@ export class LinkTextboxComponent extends BaseComponent {
         const url = simpleLink?.url;
         const name = simpleLink?.name;
         return !(isEmptyOrUndefined(url) && isEmptyOrUndefined(name));
-      })
+      }),
     );
   }
 
@@ -81,12 +81,12 @@ export class LinkTextboxComponent extends BaseComponent {
     return this.simpleLink$.pipe(
       map((simpleLink) => {
         return !simpleLink || !simpleLink.url;
-      })
+      }),
     );
   }
 
   public validateSimpleLinkUrl(url: string | undefined) {
-    return isEmptyOrUndefined(url) || validateUrl(url);
+    return isEmptyOrUndefined(url) || validateExternalReferenceUrl(url);
   }
 
   public isUrlEmpty(url: string | undefined) {
