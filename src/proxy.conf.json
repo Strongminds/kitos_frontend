@@ -13,25 +13,5 @@
     "target": "https://kitos-dev.strongminds.dk/",
     "secure": false,
     "changeOrigin": true
-  },
-  "/Login.ashx": {
-    "target": "https://kitos-dev.strongminds.dk/",
-    "secure": false,
-    "changeOrigin": true
-  },
-  "/Logout.ashx": {
-    "target": "https://kitos-dev.strongminds.dk/",
-    "secure": false,
-    "changeOrigin": true
-  },
-  "/Metadata.ashx": {
-    "target": "https://kitos-dev.strongminds.dk/",
-    "secure": false,
-    "changeOrigin": true
-  },
-  "/SSO": {
-    "target": "https://kitos-dev.strongminds.dk/",
-    "secure": false,
-    "changeOrigin": true
   }
 }
