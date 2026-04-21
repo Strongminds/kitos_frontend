@@ -30,14 +30,12 @@ import { Configuration }                                     from '../configurat
 
 export interface DeleteSingleOrganizationGridInternalV2DeleteGridConfigurationRequestParams {
     organizationUuid: string;
-    overviewType2: string;
-    overviewType?: APIOverviewType;
+    overviewType: APIOverviewType;
 }
 
 export interface GetSingleOrganizationGridInternalV2GetGridConfigurationRequestParams {
     organizationUuid: string;
-    overviewType2: string;
-    overviewType?: APIOverviewType;
+    overviewType: APIOverviewType;
 }
 
 export interface GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams {
@@ -46,8 +44,7 @@ export interface GetSingleOrganizationGridInternalV2GetOrganizationGridPermissio
 
 export interface PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams {
     organizationUuid: string;
-    overviewType2: string;
-    overviewType?: APIOverviewType;
+    overviewType: APIOverviewType;
     aPIOrganizationGridConfigurationRequestDTO?: APIOrganizationGridConfigurationRequestDTO;
 }
 
@@ -129,16 +126,9 @@ export class OrganizationGridInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationGridInternalV2DeleteGridConfiguration.');
         }
-        const overviewType2 = requestParameters.overviewType2;
-        if (overviewType2 === null || overviewType2 === undefined) {
-            throw new Error('Required parameter overviewType2 was null or undefined when calling deleteSingleOrganizationGridInternalV2DeleteGridConfiguration.');
-        }
         const overviewType = requestParameters.overviewType;
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (overviewType !== undefined && overviewType !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>overviewType, 'overviewType');
+        if (overviewType === null || overviewType === undefined) {
+            throw new Error('Required parameter overviewType was null or undefined when calling deleteSingleOrganizationGridInternalV2DeleteGridConfiguration.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -171,11 +161,10 @@ export class OrganizationGridInternalV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType2", value: overviewType, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/delete`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewType", dataFormat: undefined})}/delete`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -198,16 +187,9 @@ export class OrganizationGridInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationGridInternalV2GetGridConfiguration.');
         }
-        const overviewType2 = requestParameters.overviewType2;
-        if (overviewType2 === null || overviewType2 === undefined) {
-            throw new Error('Required parameter overviewType2 was null or undefined when calling getSingleOrganizationGridInternalV2GetGridConfiguration.');
-        }
         const overviewType = requestParameters.overviewType;
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (overviewType !== undefined && overviewType !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>overviewType, 'overviewType');
+        if (overviewType === null || overviewType === undefined) {
+            throw new Error('Required parameter overviewType was null or undefined when calling getSingleOrganizationGridInternalV2GetGridConfiguration.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -241,11 +223,10 @@ export class OrganizationGridInternalV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType2", value: overviewType, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/get`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewType", dataFormat: undefined})}/get`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -326,18 +307,11 @@ export class OrganizationGridInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationGridInternalV2SaveGridConfiguration.');
         }
-        const overviewType2 = requestParameters.overviewType2;
-        if (overviewType2 === null || overviewType2 === undefined) {
-            throw new Error('Required parameter overviewType2 was null or undefined when calling postSingleOrganizationGridInternalV2SaveGridConfiguration.');
-        }
         const overviewType = requestParameters.overviewType;
-        const aPIOrganizationGridConfigurationRequestDTO = requestParameters.aPIOrganizationGridConfigurationRequestDTO;
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (overviewType !== undefined && overviewType !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>overviewType, 'overviewType');
+        if (overviewType === null || overviewType === undefined) {
+            throw new Error('Required parameter overviewType was null or undefined when calling postSingleOrganizationGridInternalV2SaveGridConfiguration.');
         }
+        const aPIOrganizationGridConfigurationRequestDTO = requestParameters.aPIOrganizationGridConfigurationRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -379,12 +353,11 @@ export class OrganizationGridInternalV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType2", value: overviewType, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: undefined})}/save`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewType", dataFormat: undefined})}/save`;
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIOrganizationGridConfigurationRequestDTO,
-                params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
