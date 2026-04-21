@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { map, Observable } from 'rxjs';
-import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
+import { APIPublicMessageStatusChoice } from 'src/app/api/v2';
 import { BooleanValueDisplayType } from 'src/app/shared/components/status-chip/status-chip.component';
 import { validateExternalReferenceUrl } from 'src/app/shared/helpers/link.helpers';
 import { IconType } from 'src/app/shared/models/icon-type';
@@ -71,9 +71,9 @@ export class PublicMessageComponent implements OnInit {
 
   public activeStatus(publicMessage: PublicMessage): boolean | undefined {
     switch (publicMessage.status?.value) {
-      case APIPublicMessageRequestDTO.StatusEnum.Active:
+      case APIPublicMessageStatusChoice.NUMBER_1:
         return true;
-      case APIPublicMessageRequestDTO.StatusEnum.Inactive:
+      case APIPublicMessageStatusChoice.NUMBER_2:
         return false;
       default:
         return undefined;
