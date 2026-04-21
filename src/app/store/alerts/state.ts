@@ -16,9 +16,22 @@ export interface Alert {
   uuid: string;
   entityUuid: string;
   name: string;
-  alertType: APIAlertType;
+  alertType?: AlertType;
   message?: string;
   created?: string;
+}
+
+export enum AlertType {
+  Advis = 'Advis',
+}
+
+function mapAlertType(alertType: APIAlertType): AlertType {
+  switch (alertType) {
+    case APIAlertType.NUMBER_0:
+      return AlertType.Advis;
+    default:
+      throw new Error(`Unknown alert type: ${alertType}`);
+  }
 }
 
 export function adaptAlert(alert: APIAlertResponseDTO): Alert {
@@ -26,7 +39,7 @@ export function adaptAlert(alert: APIAlertResponseDTO): Alert {
     uuid: alert.uuid,
     entityUuid: alert.entityUuid,
     name: alert.name ?? $localize`Ikke angivet`,
-    alertType: alert.alertType ?? 'Advis', //The only alert type atm (11/12/2024) //TODO adapt alert type instead of just using the api version
+    alertType: alert.alertType ? mapAlertType(alert.alertType) : undefined,
     message: alert.message ?? undefined,
     created: alert.created ?? undefined,
   };
