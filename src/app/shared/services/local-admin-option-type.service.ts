@@ -493,7 +493,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-              aPILocalRegularOptionUpdateRequestDTO: request,
+              aPILocalRoleOptionUpdateRequestDTO: request,
             },
           );
       case 'it-contract-price-regulation-types':
@@ -533,12 +533,12 @@ export class LocalAdminOptionTypeService implements OnDestroy {
 
       //Role option types
       case 'organization-unit':
-        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+        return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
           this.organiztionUnitRoleService.patchSingleOrganizationUnitLocalRoleOptionTypesInternalV2PatchLocalOrganizationUnitRole(
             {
               organizationUuid,
               optionUuid,
-              aPILocalRegularOptionUpdateRequestDTO: request,
+              aPILocalRoleOptionUpdateRequestDTO: request,
             },
           );
       case 'it-system-usage':
@@ -546,23 +546,23 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.itSystemRoleService.patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
+            aPILocalRoleOptionUpdateRequestDTO: request,
           });
 
       case 'data-processing':
-        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+        return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
           this.dprRoleService.patchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRole({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
+            aPILocalRoleOptionUpdateRequestDTO: request,
           });
 
       case 'it-contract':
-        return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
+        return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
           this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
+            aPILocalRoleOptionUpdateRequestDTO: request,
           });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
@@ -578,7 +578,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-              aPILocalRegularOptionUpdateRequestDTO: request,
+              aPILocalRoleOptionUpdateRequestDTO: request,
             },
           );
       case 'it-system-usage':
@@ -586,7 +586,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.itSystemRoleService.patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
+            aPILocalRoleOptionUpdateRequestDTO: request,
           });
 
       case 'data-processing':
@@ -594,7 +594,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.dprRoleService.patchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRole({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
+            aPILocalRoleOptionUpdateRequestDTO: request,
           });
 
       case 'it-contract':
@@ -602,7 +602,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
+            aPILocalRoleOptionUpdateRequestDTO: request,
           });
       default:
         throw new Error(`Patch role operation is not supported for ${optionType}`);
