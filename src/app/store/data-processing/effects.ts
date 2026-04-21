@@ -170,7 +170,9 @@ export class DataProcessingEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ name, openAfterCreate }, organizationUuid]) =>
         this.dataProcessingService
-          .postSingleDataProcessingRegistrationV2PostDataProcessingRegistration({ request: { name, organizationUuid } })
+          .postSingleDataProcessingRegistrationV2PostDataProcessingRegistration({
+            aPICreateDataProcessingRegistrationRequestDTO: { name, organizationUuid },
+          })
           .pipe(
             map(({ uuid }) => DataProcessingActions.createDataProcessingSuccess(uuid, openAfterCreate)),
             catchError(() => of(DataProcessingActions.createDataProcessingError())),
@@ -218,7 +220,10 @@ export class DataProcessingEffects {
       concatLatestFrom(() => this.store.select(selectDataProcessingUuid).pipe(filterNullish())),
       switchMap(([{ dataProcessing }, uuid]) =>
         this.dataProcessingService
-          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({ uuid, request: dataProcessing })
+          .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
+            uuid,
+            aPIUpdateDataProcessingRegistrationRequestDTO: dataProcessing,
+          })
           .pipe(
             map((data) => DataProcessingActions.patchDataProcessingSuccess(data)),
             catchError(() => of(DataProcessingActions.patchDataProcessingError())),

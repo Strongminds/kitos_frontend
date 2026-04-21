@@ -1,5 +1,5 @@
 import { EntityState } from '@ngrx/entity';
-import { APIAlertResponseDTO } from 'src/app/api/v2';
+import { APIAlertResponseDTO, APIAlertType } from 'src/app/api/v2';
 
 export interface AlertsState {
   alerts: { [key in RelatedEntityType]: EntityState<Alert> };
@@ -16,7 +16,7 @@ export interface Alert {
   uuid: string;
   entityUuid: string;
   name: string;
-  alertType: APIAlertResponseDTO.AlertTypeEnum;
+  alertType: APIAlertType;
   message?: string;
   created?: string;
 }
@@ -26,8 +26,8 @@ export function adaptAlert(alert: APIAlertResponseDTO): Alert {
     uuid: alert.uuid,
     entityUuid: alert.entityUuid,
     name: alert.name ?? $localize`Ikke angivet`,
-    alertType: alert.alertType ?? 'Advis', //The only alert type atm (11/12/2024)
-    message: alert.message,
-    created: alert.created,
+    alertType: alert.alertType ?? 'Advis', //The only alert type atm (11/12/2024) //TODO adapt alert type instead of just using the api version
+    message: alert.message ?? undefined,
+    created: alert.created ?? undefined,
   };
 }
