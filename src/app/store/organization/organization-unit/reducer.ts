@@ -261,8 +261,8 @@ function filterChangedRegistrations(
   let internalPayments: Array<PaymentRegistrationModel> = copyObject(state.internalPayments);
   let externalPayments: Array<PaymentRegistrationModel> = copyObject(state.externalPayments);
   changedRegistrations.paymentRegistrationDetails?.forEach((removedPayment) => {
-    internalPayments = filterPayments(internalPayments, removedPayment.itContractId, removedPayment.internalPayments);
-    externalPayments = filterPayments(externalPayments, removedPayment.itContractId, removedPayment.externalPayments);
+    internalPayments = filterPayments(internalPayments, removedPayment.itContractId, removedPayment.internalPayments ?? undefined);
+    externalPayments = filterPayments(externalPayments, removedPayment.itContractId, removedPayment.externalPayments ?? undefined);
   });
   const relevantSystems = copyObject(state.relevantSystems)?.filter(
     (x) => !changedRegistrations.relevantSystems?.some((removedId) => removedId === x.registration.id),
