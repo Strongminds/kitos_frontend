@@ -20,6 +20,8 @@ import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
 import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
+// @ts-ignore
+import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -43,7 +45,7 @@ export interface GetSingleItContractLocalPaymentFrequencyTypesInternalV2GetLocal
 export interface PatchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
-    description?: string;
+    aPILocalRegularOptionUpdateRequestDTO?: APILocalRegularOptionUpdateRequestDTO;
 }
 
 export interface PostSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyTypeRequestParams {
@@ -314,13 +316,7 @@ export class ItContractLocalPaymentFrequencyTypesInternalV2Service {
         if (optionUuid === null || optionUuid === undefined) {
             throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType.');
         }
-        const description = requestParameters.description;
-
-        let localVarQueryParameters = new HttpParams({encoder: this.encoder});
-        if (description !== undefined && description !== null) {
-          localVarQueryParameters = this.addToHttpParams(localVarQueryParameters,
-            <any>description, 'Description');
-        }
+        const aPILocalRegularOptionUpdateRequestDTO = requestParameters.aPILocalRegularOptionUpdateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -342,6 +338,16 @@ export class ItContractLocalPaymentFrequencyTypesInternalV2Service {
         }
 
 
+        // to determine the Content-Type header
+        const consumes: string[] = [
+            'application/merge-patch+json',
+            'application/json'
+        ];
+        const httpContentTypeSelected: string | undefined = this.configuration.selectHeaderContentType(consumes);
+        if (httpContentTypeSelected !== undefined) {
+            localVarHeaders = localVarHeaders.set('Content-Type', httpContentTypeSelected);
+        }
+
         let responseType_: 'text' | 'json' | 'blob' = 'json';
         if (localVarHttpHeaderAcceptSelected) {
             if (localVarHttpHeaderAcceptSelected.startsWith('text')) {
@@ -357,7 +363,7 @@ export class ItContractLocalPaymentFrequencyTypesInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                params: localVarQueryParameters,
+                body: aPILocalRegularOptionUpdateRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

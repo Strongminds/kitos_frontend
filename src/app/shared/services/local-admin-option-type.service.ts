@@ -493,7 +493,7 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             {
               organizationUuid,
               optionUuid,
-              aPILocalRoleOptionUpdateRequestDTO: request,
+              aPILocalRegularOptionUpdateRequestDTO: request,
             },
           );
       case 'it-contract-price-regulation-types':
