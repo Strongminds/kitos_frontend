@@ -202,7 +202,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            request: { general: { agreementElementUuids: uuids } },
+            aPIUpdateContractRequestDTO: { general: { agreementElementUuids: uuids } },
           })
           .pipe(
             map((response) => ITContractActions.addITContractSystemAgreementElementSuccess(response)),
@@ -228,7 +228,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            request: { general: { agreementElementUuids: uuids } },
+            aPIUpdateContractRequestDTO: { general: { agreementElementUuids: uuids } },
           })
           .pipe(
             map((response) => ITContractActions.removeITContractSystemAgreementElementSuccess(response)),
@@ -253,7 +253,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            request: { systemUsageUuids: uuids },
+            aPIUpdateContractRequestDTO: { systemUsageUuids: uuids },
           })
           .pipe(
             map((response) => ITContractActions.addITContractSystemUsageSuccess(response)),
@@ -448,7 +448,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            request: {
+            aPIUpdateContractRequestDTO: {
               roles: existingRoles.concat(rolesToAdd),
             },
           })
