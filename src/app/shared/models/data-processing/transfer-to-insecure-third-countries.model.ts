@@ -1,4 +1,5 @@
 import { APIDataProcessingRegistrationDTO } from 'src/app/api/v1';
+import { YesNoDontKnowEnum } from '../yes-no-dont-know.model';
 
 export interface TransferToInsecureThirdCountries {
   name: string;
@@ -8,7 +9,7 @@ export interface TransferToInsecureThirdCountries {
 export const transferToInsecureThirdCountriesOptions: TransferToInsecureThirdCountries[] = [
   {
     name: $localize`Ja`,
-    value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum.Yes,
+    value: YesNoDontKnowEnum.,
   },
   {
     name: $localize`Nej`,

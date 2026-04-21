@@ -5,13 +5,13 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact, uniq } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
-import { APIBusinessRoleDTO, APIV1ItSystemUsageOptionsINTERNALService } from 'src/app/api/v1';
+import { APIBusinessRoleDTO, ItSystemUsageOptionsService } from 'src/app/api/v1';
 import {
   APIItSystemUsageResponseDTO,
   APIUpdateItSystemUsageRequestDTO,
-  APIV2ItSystemUsageInternalINTERNALService,
-  APIV2ItSystemUsageService,
-  APIV2OrganizationGridInternalINTERNALService,
+  ItSystemUsageInternalV2Service,
+  ItSystemUsageV2Service,
+  OrganizationGridInternalV2Service,
 } from 'src/app/api/v2';
 import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
@@ -50,16 +50,16 @@ export class ITSystemUsageEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    @Inject(APIV2ItSystemUsageService)
-    private apiV2ItSystemUsageService: APIV2ItSystemUsageService,
-    @Inject(APIV2ItSystemUsageInternalINTERNALService)
-    private apiV2ItSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
+    @Inject(ItSystemUsageV2Service)
+    private apiV2ItSystemUsageService: ItSystemUsageV2Service,
+    @Inject(ItSystemUsageInternalV2Service)
+    private apiV2ItSystemUsageInternalService: ItSystemUsageInternalV2Service,
     private externalReferencesApiService: ExternalReferencesApiService,
     private gridColumnStorageService: GridColumnStorageService,
-    @Inject(APIV1ItSystemUsageOptionsINTERNALService)
-    private apiItSystemUsageOptionsService: APIV1ItSystemUsageOptionsINTERNALService,
-    @Inject(APIV2OrganizationGridInternalINTERNALService)
-    private apiV2organizationalGridInternalService: APIV2OrganizationGridInternalINTERNALService,
+    @Inject(ItSystemUsageOptionsService)
+    private apiItSystemUsageOptionsService: ItSystemUsageOptionsService,
+    @Inject(OrganizationGridInternalV2Service)
+    private apiV2organizationalGridInternalService: OrganizationGridInternalV2Service,
     private gridDataCacheService: GridDataCacheService
   ) { }
 
@@ -239,7 +239,7 @@ export class ITSystemUsageEffects {
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid,
-            request: itSystemUsage,
+            aPIUpdateItSystemUsageRequestDTO: itSystemUsage,
           })
           .pipe(
             map((itSystemUsage) => {
@@ -290,7 +290,7 @@ export class ITSystemUsageEffects {
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid,
-            request: {
+            aPIUpdateItSystemUsageRequestDTO: {
               roles: existingRoles.concat(rolesToAdd),
             },
           })
@@ -309,7 +309,7 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchRemoveRoleAssignment({
             systemUsageUuid: itSystemUsageUuid,
-            request: { userUuid: userUuid, roleUuid: roleUuid },
+            aPIRoleAssignmentRequestDTO: { userUuid: userUuid, roleUuid: roleUuid },
           })
           .pipe(
             map((usage) =>
@@ -445,7 +445,7 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2PostSystemUsageRelation({
             systemUsageUuid: usageUuid,
-            request,
+            aPISystemRelationWriteRequestDTO: request,
           })
           .pipe(
             map((relation) => ITSystemUsageActions.addItSystemUsageRelationSuccess(usageUuid, relation)),
@@ -461,9 +461,9 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUsageUuid).pipe(filterNullish())),
       mergeMap(([{ request }, usageUuid]) =>
         this.apiV2ItSystemUsageInternalService
-          .postManyItSystemUsageInternalV2PostSystemUsageRelations({
+          .postSingleItSystemUsageInternalV2PostSystemUsageRelations({
             systemUsageUuid: usageUuid,
-            dtos: request,
+            aPISystemRelationWriteRequestDTO: request,
           })
           .pipe(
             map((relations) => ITSystemUsageActions.addItSystemUsageRelationsSuccess(usageUuid, relations)),
@@ -482,7 +482,7 @@ export class ITSystemUsageEffects {
           .putSingleItSystemUsageV2PutSystemUsageRelation({
             systemUsageUuid: usageUuid,
             systemRelationUuid: relationUuid,
-            request: request,
+            aPISystemRelationWriteRequestDTO: request,
           })
           .pipe(
             map((relation) => ITSystemUsageActions.patchItSystemUsageRelationSuccess(usageUuid, relation)),
@@ -605,7 +605,7 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2PostJournalPeriod({
             systemUsageUuid: usageUuid,
-            request: journalPeriod,
+            aPIJournalPeriodDTO: journalPeriod,
           })
           .pipe(
             map((_) => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
@@ -624,7 +624,7 @@ export class ITSystemUsageEffects {
           .putSingleItSystemUsageV2PutJournalPeriod({
             systemUsageUuid: usageUuid,
             journalPeriodUuid: journalPeriodUuid,
-            request: journalPeriod,
+            aPIJournalPeriodDTO: journalPeriod,
           })
           .pipe(
             map((_) => ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess(usageUuid)),
@@ -640,7 +640,7 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ itSystemUuid }, organizationUuid]) =>
         this.apiV2ItSystemUsageService
-          .postSingleItSystemUsageV2PostItSystemUsage({ request: { systemUuid: itSystemUuid, organizationUuid } })
+          .postSingleItSystemUsageV2PostItSystemUsage({ aPICreateItSystemUsageRequestDTO: { systemUuid: itSystemUuid, organizationUuid } })
           .pipe(
             map((usage: APIItSystemUsageResponseDTO) =>
               ITSystemUsageActions.createItSystemUsageSuccess(itSystemUuid, usage.uuid)
@@ -678,7 +678,7 @@ export class ITSystemUsageEffects {
           .postSingleOrganizationGridInternalV2SaveGridConfiguration({
             organizationUuid,
             overviewType: 'ItSystemUsage',
-            config: {
+            aPIOrganizationGridConfigurationRequestDTO: {
               visibleColumns: columnConfig,
             },
           })

@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, map, of, switchMap } from 'rxjs';
-import { APIV2ItInterfaceService } from 'src/app/api/v2';
+import { ItInterfaceV2Service } from 'src/app/api/v2';
 import { INTERFACE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import {
   castContainsFieldToString,
@@ -26,7 +26,7 @@ export class ITInterfaceEffects {
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private apiService: APIV2ItInterfaceService,
+    private apiService: ItInterfaceV2Service,
     private gridColumnStorageService: GridColumnStorageService,
     private gridDataCacheService: GridDataCacheService,
   ) {}
@@ -147,7 +147,7 @@ export class ITInterfaceEffects {
       concatLatestFrom(() => this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ itInterface }, interfaceUuid]) => {
         if (!itInterface) return of(ITInterfaceActions.updateITInterfaceError());
-        return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, request: itInterface }).pipe(
+        return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, aPIUpdateItInterfaceRequestDTO: itInterface }).pipe(
           map((itInterface) => ITInterfaceActions.updateITInterfaceSuccess(itInterface)),
           catchError((err: HttpErrorResponse) => {
             if (err.status === 409) {
@@ -189,7 +189,7 @@ export class ITInterfaceEffects {
       ofType(ITInterfaceActions.addITInterfaceData),
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ data }, interfaceUuid]) =>
-        this.apiService.postSingleItInterfaceV2PostDataDescription({ request: data, uuid: interfaceUuid }).pipe(
+        this.apiService.postSingleItInterfaceV2PostDataDescription({ aPIItInterfaceDataRequestDTO: data, uuid: interfaceUuid }).pipe(
           map((response) => ITInterfaceActions.addITInterfaceDataSuccess(response)),
           catchError(() => of(ITInterfaceActions.addITInterfaceDataError())),
         ),
@@ -206,7 +206,7 @@ export class ITInterfaceEffects {
           .putSingleItInterfaceV2PutDataDescription({
             uuid: interfaceUuid,
             dataDescriptionUuid: dataUuid,
-            request: data,
+            aPIItInterfaceDataRequestDTO: data,
           })
           .pipe(
             map((response) => ITInterfaceActions.updateITInterfaceDataSuccess(response)),
@@ -223,7 +223,7 @@ export class ITInterfaceEffects {
       switchMap(([{ name, interfaceId, openAfterCreate }, organizationUuid]) =>
         this.apiService
           .postSingleItInterfaceV2Post({
-            request: { name, interfaceId, organizationUuid },
+            aPICreateItInterfaceRequestDTO: { name, interfaceId, organizationUuid },
           })
           .pipe(
             map(({ uuid }) => ITInterfaceActions.createITInterfaceSuccess(uuid, openAfterCreate)),
