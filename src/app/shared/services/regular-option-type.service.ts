@@ -2,32 +2,32 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import {
   APIRegularOptionResponseDTO,
-  APIV2DataProcessingRegistrationBasisForTransferTypeService,
-  APIV2DataProcessingRegistrationCountryTypeService,
-  APIV2DataProcessingRegistrationDataResponsibleTypeService,
-  APIV2DataProcessingRegistrationOversightTypeService,
-  APIV2ItContractAgreementElementTypeService,
-  APIV2ItContractAgreementExtensionOptionTypeService,
-  APIV2ItContractContractTemplateTypeService,
-  APIV2ItContractContractTypeService,
-  APIV2ItContractCriticalityTypeService,
-  APIV2ItContractNoticePeriodMonthTypeService,
-  APIV2ItContractPaymentFrequencyTypeService,
-  APIV2ItContractPaymentModelTypeService,
-  APIV2ItContractPriceRegulationTypeService,
-  APIV2ItContractProcurementStrategyService,
-  APIV2ItContractPurchaseTypeService,
-  APIV2ItInterfaceInterfaceDataTypeService,
-  APIV2ItInterfaceInterfaceTypeService,
-  APIV2ItSystemBusinessTypeService,
-  APIV2ItSystemUsageArchiveLocationTypeService,
-  APIV2ItSystemUsageArchiveTestLocationTypeService,
-  APIV2ItSystemUsageArchiveTypeService,
-  APIV2ItSystemUsageDataClassificationTypeService,
-  APIV2ItSystemUsageRegisteredDataCategoryTypeService,
-  APIV2ItSystemUsageRelationFrequencyTypeService,
-  APIV2ItSystemUsageRoleTypeService,
-  APIV2ItSystemUsageSensitivePersonalDataTypeService,
+  DataProcessingRegistrationBasisForTransferTypeV2Service,
+  DataProcessingRegistrationCountryTypeV2Service,
+  DataProcessingRegistrationDataResponsibleTypeV2Service,
+  DataProcessingRegistrationOversightTypeV2Service,
+  ItContractAgreementElementTypeV2Service,
+  ItContractAgreementExtensionOptionTypeV2Service,
+  ItContractContractTemplateTypeV2Service,
+  ItContractContractTypeV2Service,
+  ItContractCriticalityTypeV2Service,
+  ItContractNoticePeriodMonthTypeV2Service,
+  ItContractPaymentFrequencyTypeV2Service,
+  ItContractPaymentModelTypeV2Service,
+  ItContractPriceRegulationTypeV2Service,
+  ItContractProcurementStrategyV2Service,
+  ItContractPurchaseTypeV2Service,
+  ItInterfaceInterfaceDataTypeV2Service,
+  ItInterfaceInterfaceTypeV2Service,
+  ItSystemBusinessTypeV2Service,
+  ItSystemUsageArchiveLocationTypeV2Service,
+  ItSystemUsageArchiveTestLocationTypeV2Service,
+  ItSystemUsageArchiveTypeV2Service,
+  ItSystemUsageDataClassificationTypeV2Service,
+  ItSystemUsageRegisteredDataCategoryTypeV2Service,
+  ItSystemUsageRelationFrequencyTypeV2Service,
+  ItSystemUsageRoleTypeV2Service,
+  ItSystemUsageSensitivePersonalDataTypeV2Service,
 } from 'src/app/api/v2';
 import { RegularOptionType } from '../models/options/regular-option-types.model';
 
@@ -36,58 +36,58 @@ import { RegularOptionType } from '../models/options/regular-option-types.model'
 })
 export class RegularOptionTypeService {
   constructor(
-    @Inject(APIV2ItSystemBusinessTypeService)
-    private readonly businessTypesService: APIV2ItSystemBusinessTypeService,
-    @Inject(APIV2ItContractContractTypeService)
-    private readonly contractTypesService: APIV2ItContractContractTypeService,
-    @Inject(APIV2ItInterfaceInterfaceTypeService)
-    private readonly interfaceTypesService: APIV2ItInterfaceInterfaceTypeService,
-    @Inject(APIV2ItSystemUsageDataClassificationTypeService)
-    private readonly dataClassificationTypesService: APIV2ItSystemUsageDataClassificationTypeService,
-    @Inject(APIV2ItSystemUsageRelationFrequencyTypeService)
-    private readonly relationFrequencyTypesService: APIV2ItSystemUsageRelationFrequencyTypeService,
-    @Inject(APIV2ItSystemUsageSensitivePersonalDataTypeService)
-    private readonly sensitivePersonalDataTypesService: APIV2ItSystemUsageSensitivePersonalDataTypeService,
-    @Inject(APIV2ItSystemUsageArchiveTypeService)
-    private readonly itSystemUsageArchiveTypesService: APIV2ItSystemUsageArchiveTypeService,
-    @Inject(APIV2ItSystemUsageArchiveLocationTypeService)
-    private readonly itSystemUsageArchiveLocationTypesService: APIV2ItSystemUsageArchiveLocationTypeService,
-    @Inject(APIV2ItSystemUsageArchiveTestLocationTypeService)
-    private readonly itSystemUsageArchiveLocationTestTypesService: APIV2ItSystemUsageArchiveTestLocationTypeService,
-    @Inject(APIV2ItSystemUsageRegisteredDataCategoryTypeService)
-    private readonly itSystemUsageRegisteredDataCategoryTypeService: APIV2ItSystemUsageRegisteredDataCategoryTypeService,
-    @Inject(APIV2ItSystemUsageRoleTypeService)
-    private readonly itSystemUsageRoleTypeService: APIV2ItSystemUsageRoleTypeService,
-    @Inject(APIV2ItInterfaceInterfaceDataTypeService)
-    private readonly itInterfaceDataTypesService: APIV2ItInterfaceInterfaceDataTypeService,
-    @Inject(APIV2ItContractContractTemplateTypeService)
-    private readonly contractTemplateService: APIV2ItContractContractTemplateTypeService,
-    @Inject(APIV2ItContractCriticalityTypeService)
-    private readonly contractCriticalityService: APIV2ItContractCriticalityTypeService,
-    @Inject(APIV2ItContractProcurementStrategyService)
-    private readonly contractProcurementStrategyService: APIV2ItContractProcurementStrategyService,
-    @Inject(APIV2ItContractPurchaseTypeService)
-    private readonly contractPurchaseFormService: APIV2ItContractPurchaseTypeService,
-    @Inject(APIV2ItContractAgreementElementTypeService)
-    private readonly contractAgreementElementsService: APIV2ItContractAgreementElementTypeService,
-    @Inject(APIV2ItContractAgreementExtensionOptionTypeService)
-    private readonly contractExtendTypesService: APIV2ItContractAgreementExtensionOptionTypeService,
-    @Inject(APIV2ItContractNoticePeriodMonthTypeService)
-    private readonly contractTerminationPeriodTypesService: APIV2ItContractNoticePeriodMonthTypeService,
-    @Inject(APIV2ItContractPaymentFrequencyTypeService)
-    private readonly contractPaymentFrequencyTypesService: APIV2ItContractPaymentFrequencyTypeService,
-    @Inject(APIV2ItContractPaymentModelTypeService)
-    private readonly contractPaymentModelTypesService: APIV2ItContractPaymentModelTypeService,
-    @Inject(APIV2ItContractPriceRegulationTypeService)
-    private readonly contractPriceRegulationTypesService: APIV2ItContractPriceRegulationTypeService,
-    @Inject(APIV2DataProcessingRegistrationDataResponsibleTypeService)
-    private readonly dataProcessingDataResponsibleTypesService: APIV2DataProcessingRegistrationDataResponsibleTypeService,
-    @Inject(APIV2DataProcessingRegistrationBasisForTransferTypeService)
-    private readonly dataProcessingBasisForTransferTypesService: APIV2DataProcessingRegistrationBasisForTransferTypeService,
-    @Inject(APIV2DataProcessingRegistrationCountryTypeService)
-    private readonly dataProcessingCountryTypesService: APIV2DataProcessingRegistrationCountryTypeService,
-    @Inject(APIV2DataProcessingRegistrationOversightTypeService)
-    private readonly dataProcessingOversightOptionsService: APIV2DataProcessingRegistrationOversightTypeService,
+    @Inject(ItSystemBusinessTypeV2Service)
+    private readonly businessTypesService: ItSystemBusinessTypeV2Service,
+    @Inject(ItContractContractTypeV2Service)
+    private readonly contractTypesService: ItContractContractTypeV2Service,
+    @Inject(ItInterfaceInterfaceTypeV2Service)
+    private readonly interfaceTypesService: ItInterfaceInterfaceTypeV2Service,
+    @Inject(ItSystemUsageDataClassificationTypeV2Service)
+    private readonly dataClassificationTypesService: ItSystemUsageDataClassificationTypeV2Service,
+    @Inject(ItSystemUsageRelationFrequencyTypeV2Service)
+    private readonly relationFrequencyTypesService: ItSystemUsageRelationFrequencyTypeV2Service,
+    @Inject(ItSystemUsageSensitivePersonalDataTypeV2Service)
+    private readonly sensitivePersonalDataTypesService: ItSystemUsageSensitivePersonalDataTypeV2Service,
+    @Inject(ItSystemUsageArchiveTypeV2Service)
+    private readonly itSystemUsageArchiveTypesService: ItSystemUsageArchiveTypeV2Service,
+    @Inject(ItSystemUsageArchiveLocationTypeV2Service)
+    private readonly itSystemUsageArchiveLocationTypesService: ItSystemUsageArchiveLocationTypeV2Service,
+    @Inject(ItSystemUsageArchiveTestLocationTypeV2Service)
+    private readonly itSystemUsageArchiveLocationTestTypesService: ItSystemUsageArchiveTestLocationTypeV2Service,
+    @Inject(ItSystemUsageRegisteredDataCategoryTypeV2Service)
+    private readonly itSystemUsageRegisteredDataCategoryTypeService: ItSystemUsageRegisteredDataCategoryTypeV2Service,
+    @Inject(ItSystemUsageRoleTypeV2Service)
+    private readonly itSystemUsageRoleTypeService: ItSystemUsageRoleTypeV2Service,
+    @Inject(ItInterfaceInterfaceDataTypeV2Service)
+    private readonly itInterfaceDataTypesService: ItInterfaceInterfaceDataTypeV2Service,
+    @Inject(ItContractContractTemplateTypeV2Service)
+    private readonly contractTemplateService: ItContractContractTemplateTypeV2Service,
+    @Inject(ItContractCriticalityTypeV2Service)
+    private readonly contractCriticalityService: ItContractCriticalityTypeV2Service,
+    @Inject(ItContractProcurementStrategyV2Service)
+    private readonly contractProcurementStrategyService: ItContractProcurementStrategyV2Service,
+    @Inject(ItContractPurchaseTypeV2Service)
+    private readonly contractPurchaseFormService: ItContractPurchaseTypeV2Service,
+    @Inject(ItContractAgreementElementTypeV2Service)
+    private readonly contractAgreementElementsService: ItContractAgreementElementTypeV2Service,
+    @Inject(ItContractAgreementExtensionOptionTypeV2Service)
+    private readonly contractExtendTypesService: ItContractAgreementExtensionOptionTypeV2Service,
+    @Inject(ItContractNoticePeriodMonthTypeV2Service)
+    private readonly contractTerminationPeriodTypesService: ItContractNoticePeriodMonthTypeV2Service,
+    @Inject(ItContractPaymentFrequencyTypeV2Service)
+    private readonly contractPaymentFrequencyTypesService: ItContractPaymentFrequencyTypeV2Service,
+    @Inject(ItContractPaymentModelTypeV2Service)
+    private readonly contractPaymentModelTypesService: ItContractPaymentModelTypeV2Service,
+    @Inject(ItContractPriceRegulationTypeV2Service)
+    private readonly contractPriceRegulationTypesService: ItContractPriceRegulationTypeV2Service,
+    @Inject(DataProcessingRegistrationDataResponsibleTypeV2Service)
+    private readonly dataProcessingDataResponsibleTypesService: DataProcessingRegistrationDataResponsibleTypeV2Service,
+    @Inject(DataProcessingRegistrationBasisForTransferTypeV2Service)
+    private readonly dataProcessingBasisForTransferTypesService: DataProcessingRegistrationBasisForTransferTypeV2Service,
+    @Inject(DataProcessingRegistrationCountryTypeV2Service)
+    private readonly dataProcessingCountryTypesService: DataProcessingRegistrationCountryTypeV2Service,
+    @Inject(DataProcessingRegistrationOversightTypeV2Service)
+    private readonly dataProcessingOversightOptionsService: DataProcessingRegistrationOversightTypeV2Service,
   ) {}
 
   private resolveLocalOptionsEndpoint(
@@ -96,120 +96,120 @@ export class RegularOptionTypeService {
     switch (optionType) {
       case 'it-system_business-type':
         return (organizationUuid) =>
-          this.businessTypesService.getManyItSystemBusinessTypeV2GetBusinessTypes({
+          this.businessTypesService.getSingleItSystemBusinessTypeV2GetBusinessTypes({
             organizationUuid: organizationUuid,
           });
       case 'it-contract_contract-type':
         return (organizationUuid) =>
-          this.contractTypesService.getManyItContractContractTypeV2Get({ organizationUuid: organizationUuid });
+          this.contractTypesService.getSingleItContractContractTypeV2Get({ organizationUuid: organizationUuid });
       case 'it-interface_interface-type':
         return (organizationUuid) =>
-          this.interfaceTypesService.getManyItInterfaceInterfaceTypeV2Get({ organizationUuid: organizationUuid });
+          this.interfaceTypesService.getSingleItInterfaceInterfaceTypeV2Get({ organizationUuid: organizationUuid });
       case 'it-system_usage-data-classification-type':
         return (organizationUuid) =>
-          this.dataClassificationTypesService.getManyItSystemUsageDataClassificationTypeV2Get({
+          this.dataClassificationTypesService.getSingleItSystemUsageDataClassificationTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system_usage-relation-frequency-type':
         return (organizationUuid) =>
-          this.relationFrequencyTypesService.getManyItSystemUsageRelationFrequencyTypeV2Get({ organizationUuid });
+          this.relationFrequencyTypesService.getSingleItSystemUsageRelationFrequencyTypeV2Get({ organizationUuid });
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid) =>
-          this.sensitivePersonalDataTypesService.getManyItSystemUsageSensitivePersonalDataTypeV2Get({
+          this.sensitivePersonalDataTypesService.getSingleItSystemUsageSensitivePersonalDataTypeV2Get({
             organizationUuid,
           });
       case 'it-system_usage-archive-type':
         return (organizationUuid) =>
-          this.itSystemUsageArchiveTypesService.getManyItSystemUsageArchiveTypeV2Get({
+          this.itSystemUsageArchiveTypesService.getSingleItSystemUsageArchiveTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system_usage-archive-location-type':
         return (organizationUuid) =>
-          this.itSystemUsageArchiveLocationTypesService.getManyItSystemUsageArchiveLocationTypeV2Get({
+          this.itSystemUsageArchiveLocationTypesService.getSingleItSystemUsageArchiveLocationTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system_usage-archive-location-test-type':
         return (organizationUuid) =>
-          this.itSystemUsageArchiveLocationTestTypesService.getManyItSystemUsageArchiveTestLocationTypeV2Get({
+          this.itSystemUsageArchiveLocationTestTypesService.getSingleItSystemUsageArchiveTestLocationTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (organizationUuid) =>
-          this.itSystemUsageRegisteredDataCategoryTypeService.getManyItSystemUsageRegisteredDataCategoryTypeV2Get({
+          this.itSystemUsageRegisteredDataCategoryTypeService.getSingleItSystemUsageRegisteredDataCategoryTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-system-usage-roles':
         return (organizationUuid) =>
-          this.itSystemUsageRoleTypeService.getManyItSystemUsageRoleTypeV2Get({
+          this.itSystemUsageRoleTypeService.getSingleItSystemUsageRoleTypeV2Get({
             organizationUuid: organizationUuid,
           });
       case 'it-interface_data-type':
         return (organizationUuid) =>
-          this.itInterfaceDataTypesService.getManyItInterfaceInterfaceDataTypeV2Get({
+          this.itInterfaceDataTypesService.getSingleItInterfaceInterfaceDataTypeV2Get({
             organizationUuid,
           });
       case 'it-contract_contract-template-type':
         return (organizationUuid) =>
-          this.contractTemplateService.getManyItContractContractTemplateTypeV2Get({
+          this.contractTemplateService.getSingleItContractContractTemplateTypeV2Get({
             organizationUuid,
           });
       case 'it-contract_criticality-type':
         return (organizationUuid) =>
-          this.contractCriticalityService.getManyItContractCriticalityTypeV2Get({
+          this.contractCriticalityService.getSingleItContractCriticalityTypeV2Get({
             organizationUuid,
           });
       case 'it-contract_procurement-strategy-type':
         return (organizationUuid) =>
-          this.contractProcurementStrategyService.getManyItContractProcurementStrategyV2Get({
+          this.contractProcurementStrategyService.getSingleItContractProcurementStrategyV2Get({
             organizationUuid,
           });
       case 'it-contract_purchase-form-type':
         return (organizationUuid) =>
-          this.contractPurchaseFormService.getManyItContractPurchaseTypeV2Get({
+          this.contractPurchaseFormService.getSingleItContractPurchaseTypeV2Get({
             organizationUuid,
           });
       case 'it-contract-agreement-element-types':
         return (organizationUuid) =>
-          this.contractAgreementElementsService.getManyItContractAgreementElementTypeV2Get({
+          this.contractAgreementElementsService.getSingleItContractAgreementElementTypeV2Get({
             organizationUuid,
           });
       case 'it-contract-extend-types':
         return (organizationUuid) =>
-          this.contractExtendTypesService.getManyItContractAgreementExtensionOptionTypeV2Get({
+          this.contractExtendTypesService.getSingleItContractAgreementExtensionOptionTypeV2Get({
             organizationUuid,
           });
       case 'it-contract-termination-period-types':
         return (organizationUuid) =>
-          this.contractTerminationPeriodTypesService.getManyItContractNoticePeriodMonthTypeV2Get({
+          this.contractTerminationPeriodTypesService.getSingleItContractNoticePeriodMonthTypeV2Get({
             organizationUuid,
           });
       case 'it-contract-payment-frequency-types':
         return (organizationUuid) =>
-          this.contractPaymentFrequencyTypesService.getManyItContractPaymentFrequencyTypeV2Get({ organizationUuid });
+          this.contractPaymentFrequencyTypesService.getSingleItContractPaymentFrequencyTypeV2Get({ organizationUuid });
       case 'it-contract-payment-model-types':
         return (organizationUuid) =>
-          this.contractPaymentModelTypesService.getManyItContractPaymentModelTypeV2Get({ organizationUuid });
+          this.contractPaymentModelTypesService.getSingleItContractPaymentModelTypeV2Get({ organizationUuid });
       case 'it-contract-price-regulation-types':
         return (organizationUuid) =>
-          this.contractPriceRegulationTypesService.getManyItContractPriceRegulationTypeV2Get({ organizationUuid });
+          this.contractPriceRegulationTypesService.getSingleItContractPriceRegulationTypeV2Get({ organizationUuid });
       case 'data-processing-basis-for-transfer-types':
         return (organizationUuid) =>
-          this.dataProcessingBasisForTransferTypesService.getManyDataProcessingRegistrationBasisForTransferTypeV2Get({
+          this.dataProcessingBasisForTransferTypesService.getSingleDataProcessingRegistrationBasisForTransferTypeV2Get({
             organizationUuid,
           });
       case 'data-processing-data-responsible-types':
         return (organizationUuid) =>
-          this.dataProcessingDataResponsibleTypesService.getManyDataProcessingRegistrationDataResponsibleTypeV2Get({
+          this.dataProcessingDataResponsibleTypesService.getSingleDataProcessingRegistrationDataResponsibleTypeV2Get({
             organizationUuid,
           });
       case 'data-processing-country-types':
         return (organizationUuid) =>
-          this.dataProcessingCountryTypesService.getManyDataProcessingRegistrationCountryTypeV2Get({
+          this.dataProcessingCountryTypesService.getSingleDataProcessingRegistrationCountryTypeV2Get({
             organizationUuid,
           });
       case 'data-processing-oversight-option-types':
         return (organizationUuid) =>
-          this.dataProcessingOversightOptionsService.getManyDataProcessingRegistrationOversightTypeV2Get({
+          this.dataProcessingOversightOptionsService.getSingleDataProcessingRegistrationOversightTypeV2Get({
             organizationUuid,
           });
     }
