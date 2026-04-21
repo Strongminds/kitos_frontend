@@ -1,7 +1,8 @@
 import { createEntityAdapter } from '@ngrx/entity';
-import { NotificationState, UserNotification } from './state';
 import { createFeature, createReducer, on } from '@ngrx/store';
+import { APIOwnerResourceType } from 'src/app/api/v2';
 import { UserNotificationActions } from './actions';
+import { NotificationState, UserNotification } from './state';
 
 export const systemNotificationsAdapter = createEntityAdapter<UserNotification>({
   selectId: (notification) => notification.uuid,
@@ -27,19 +28,19 @@ export const notificationFeature = createFeature({
     on(UserNotificationActions.getNotificationsSuccess, (state, { ownerResourceType, notifications }) => {
       let newState = { ...state };
       switch (ownerResourceType) {
-        case 'ItSystemUsage':
+        case APIOwnerResourceType.NUMBER_1:
           newState = {
             ...newState,
             usageNotifications: systemNotificationsAdapter.setAll(notifications, newState.usageNotifications),
           };
           break;
-        case 'ItContract':
+        case APIOwnerResourceType.NUMBER_0:
           newState = {
             ...newState,
             contractNotifications: contractNotificationsAdapter.setAll(notifications, newState.contractNotifications),
           };
           break;
-        case 'DataProcessingRegistration':
+        case APIOwnerResourceType.NUMBER_2:
           newState = {
             ...newState,
             dataProcessingNotifications: dprNotificationsAdapter.setAll(

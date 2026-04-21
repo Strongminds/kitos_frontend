@@ -1,4 +1,4 @@
-import { APINotificationResponseDTO } from 'src/app/api/v2/model/notificationResponseDTO';
+import { APIOwnerResourceType } from 'src/app/api/v2';
 
 export type NotificationEntityType = 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
 
@@ -9,14 +9,14 @@ export const NotificationEntityTypeEnum = {
 };
 
 export const mapNotificationEntityTypes = (
-  entityType: APINotificationResponseDTO.OwnerResourceTypeEnum | undefined,
+  entityType: APIOwnerResourceType | undefined,
 ): NotificationEntityType | undefined => {
   switch (entityType) {
-    case APINotificationResponseDTO.OwnerResourceTypeEnum.ItContract:
+    case APIOwnerResourceType.NUMBER_0:
       return NotificationEntityTypeEnum.ItContract;
-    case APINotificationResponseDTO.OwnerResourceTypeEnum.ItSystemUsage:
+    case APIOwnerResourceType.NUMBER_1:
       return NotificationEntityTypeEnum.ItSystemUsage;
-    case APINotificationResponseDTO.OwnerResourceTypeEnum.DataProcessingRegistration:
+    case APIOwnerResourceType.NUMBER_2:
       return NotificationEntityTypeEnum.DataProcessingRegistration;
   }
   return undefined;

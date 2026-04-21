@@ -1,17 +1,15 @@
-import { APINotificationResponseDTO } from 'src/app/api/v2';
-import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
+import { APIOwnerResourceType } from 'src/app/api/v2';
 import { RelatedEntityType } from 'src/app/store/alerts/state';
+import { RegistrationEntityTypes } from '../models/registrations/registration-entity-categories.model';
 
-export function mapEntityTypeToOwnerResourceType(
-  entityType: RegistrationEntityTypes,
-): APINotificationResponseDTO.OwnerResourceTypeEnum {
+export function mapEntityTypeToOwnerResourceType(entityType: RegistrationEntityTypes): APIOwnerResourceType {
   switch (entityType) {
     case 'it-system-usage':
-      return APINotificationResponseDTO.OwnerResourceTypeEnum.ItSystemUsage;
+      return APIOwnerResourceType.NUMBER_1;
     case 'it-contract':
-      return APINotificationResponseDTO.OwnerResourceTypeEnum.ItContract;
+      return APIOwnerResourceType.NUMBER_0;
     case 'data-processing-registration':
-      return APINotificationResponseDTO.OwnerResourceTypeEnum.DataProcessingRegistration;
+      return APIOwnerResourceType.NUMBER_2;
     default:
       throw new Error(`Owner resource type for entity type: ${entityType} does not exist`);
   }
