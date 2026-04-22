@@ -1,4 +1,3 @@
-import { APIDataProcessingRegistrationGeneralDataResponseDTO } from 'src/app/api/v2';
 import { AppPath } from '../../enums/app-path';
 import { entityWithUnavailableName } from '../../helpers/string.helpers';
 import {
@@ -238,7 +237,7 @@ function getDataProcessingRegistrationsConcluded(
   return value.DataProcessingRegistrations?.map(
     (registration: {
       DataProcessingRegistrationUuid: string;
-      IsAgreementConcluded: APIDataProcessingRegistrationGeneralDataResponseDTO.IsAgreementConcludedEnum;
+      IsAgreementConcluded: string;
       DataProcessingRegistrationName: string;
     }) => ({
       id: registration.DataProcessingRegistrationUuid,

@@ -7,7 +7,7 @@ import {
   APIIdentityNamePairResponseDTO,
   APIIncomingSystemRelationResponseDTO,
   APIOutgoingSystemRelationResponseDTO,
-  APIV2ItSystemUsageService,
+  ItSystemUsageV2Service,
 } from 'src/app/api/v2';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from 'src/app/shared/constants/constants';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -24,7 +24,7 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
   public readonly incomingRelations$ = this.select((state) => state.incomingRelations).pipe(filterNullish());
   public readonly isIncomingRelationsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
 
-  constructor(private readonly apiUsageService: APIV2ItSystemUsageService) {
+  constructor(private readonly apiUsageService: ItSystemUsageV2Service) {
     super({ loading: false });
   }
 
@@ -32,42 +32,47 @@ export class ItSystemUsageDetailsRelationsComponentStore extends ComponentStore<
     (state, incomingRelations: Array<SystemRelationModel>): State => ({
       ...state,
       incomingRelations,
-    })
+    }),
   );
 
   private updateIncomingRelationsIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
   public getIncomingRelations = this.effect((systemUsageUuid$: Observable<string>) =>
     systemUsageUuid$.pipe(
       mergeMap((systemUsageUuid) => {
         this.updateIncomingRelationsIsLoading(true);
-        return this.apiUsageService.getManyItSystemUsageV2GetIncomingSystemRelations({ systemUsageUuid }).pipe(
+        return this.apiUsageService.getSingleItSystemUsageV2GetIncomingSystemRelations({ systemUsageUuid }).pipe(
           tapResponse({
-    next: (relations) => this.updateIncomingRelations(relations.map((relation) => this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage))),
-    error: (e) => console.error(e),
-    complete: () => this.updateIncomingRelationsIsLoading(false)
-})
+            next: (relations) =>
+              this.updateIncomingRelations(
+                relations.map((relation: any) =>
+                  this.mapRelationResponseDTOToSystemRelationModel(relation, relation.fromSystemUsage),
+                ),
+              ),
+            error: (e) => console.error(e),
+            complete: () => this.updateIncomingRelationsIsLoading(false),
+          }),
         );
-      })
-    )
+      }),
+    ),
   );
 
   public mapRelationResponseDTOToSystemRelationModel(
     relation: APIOutgoingSystemRelationResponseDTO | APIIncomingSystemRelationResponseDTO,
-    relationSystemUsage: APIIdentityNamePairResponseDTO
+    relationSystemUsage: APIIdentityNamePairResponseDTO,
   ): SystemRelationModel {
     return {
       uuid: relation.uuid,
       systemUsage: relationSystemUsage,
-      relationInterface: relation.relationInterface,
-      associatedContract: relation.associatedContract,
-      relationFrequency: relation.relationFrequency,
-      description: relation.description,
-      urlReference: relation.urlReference,
+      relationInterface: relation.relationInterface ?? undefined,
+      associatedContract: relation.associatedContract ?? undefined,
+      relationFrequency: relation.relationFrequency ?? undefined,
+      description: relation.description ?? undefined,
+      urlReference: relation.urlReference ?? undefined,
     };
   }
 }

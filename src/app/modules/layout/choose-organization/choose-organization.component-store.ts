@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap, tap } from 'rxjs';
-import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 
 interface State {
   organizations?: APIOrganizationResponseDTO[];
@@ -17,7 +17,7 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
   public readonly organizations$ = this.select((state) => state.organizations);
   public readonly loading$ = this.select((state) => state.loading);
 
-  constructor(@Inject(APIV2OrganizationService) private apiOrganizationService: APIV2OrganizationService) {
+  constructor(@Inject(OrganizationV2Service) private apiOrganizationService: OrganizationV2Service) {
     super({ loading: false });
   }
 
@@ -40,7 +40,7 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
       tap(() => this.updateLoading(true)),
       mergeMap((organizationName) =>
         this.apiOrganizationService
-          .getManyOrganizationV2GetOrganizations({
+          .getSingleOrganizationV2GetOrganizations({
             onlyWhereUserHasMembership: true,
             pageSize: this.PAGE_SIZE,
             nameContent: organizationName,
@@ -48,10 +48,10 @@ export class ChooseOrganizationComponentStore extends ComponentStore<State> {
           })
           .pipe(
             tapResponse({
-    next: (organizations) => this.updateOrganizations(organizations),
-    error: (e) => console.error(e),
-    complete: () => this.updateLoading(false)
-}),
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateLoading(false),
+            }),
           ),
       ),
     ),

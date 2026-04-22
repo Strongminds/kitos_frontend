@@ -28,7 +28,7 @@
                 <td>
                   <app-paragraph paragraphSize="small" [cropOnOverflow]="true">
                     <app-selected-option-type-text
-                      [selectedOption]="itInterface.itInterfaceType"
+                      [selectedOption]="itInterface.itInterfaceType ?? undefined"
                       [availableOptions$]="availableInterfaceTypesDictionary$"
                       >
                     </app-selected-option-type-text>

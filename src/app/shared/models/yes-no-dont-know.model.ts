@@ -17,7 +17,7 @@ export const yesNoDontKnowOptions: YesNoDontKnowOption[] = [
   { name: $localize`Nej`, value: YesNoDontKnowEnum.No },
   { name: $localize`Ved ikke`, value: YesNoDontKnowEnum.DontKnow },
 ];
-export const mapToYesNoDontKnowEnum = (value?: APIYesNoDontKnowChoice): YesNoDontKnowOption | undefined => {
+export const mapToYesNoDontKnowEnum = (value?: APIYesNoDontKnowChoice | null): YesNoDontKnowOption | undefined => {
   return yesNoDontKnowOptions.find((option) => option.value === value);
 };
 

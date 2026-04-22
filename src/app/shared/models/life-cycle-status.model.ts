@@ -22,8 +22,6 @@ export const lifeCycleStatusOptions: LifeCycleStatus[] = [
   },
 ];
 
-export const mapLifeCycleStatus = (
-  value?: APILifeCycleStatusChoice,
-): LifeCycleStatus | undefined => {
+export const mapLifeCycleStatus = (value?: APILifeCycleStatusChoice): LifeCycleStatus | undefined => {
   return lifeCycleStatusOptions.find((option) => option.value === value);
 };
