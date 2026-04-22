@@ -1,8 +1,9 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter } from 'rxjs';
-import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
+import { APIDataSensitivityLevelChoice, APIGDPRPersonalDataChoice } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { specificPersonalDataOptions } from 'src/app/shared/models/it-system-usage/gdpr/specific-personal-data.model';
@@ -20,7 +21,6 @@ import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-stor
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
 import { CheckboxComponent } from '../../../../../../shared/components/checkbox/checkbox.component';
 import { ContentWithInfoComponent } from '../../../../../../shared/components/content-with-info/content-with-info.component';
-import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-data-sensitivity-section',
@@ -32,8 +32,8 @@ import { AsyncPipe } from '@angular/common';
     ReactiveFormsModule,
     CheckboxComponent,
     ContentWithInfoComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class DataSensitivitySectionComponent extends BaseAccordionComponent implements OnInit {
   @Output() public noPermissions = new EventEmitter<AbstractControl[]>();
@@ -171,7 +171,7 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
 
   public patchDataSensitivityLevels() {
     const dataSensitivityLevelEnums = dataSensitivityLevelOptions.map((option) => option.value);
-    this.patchCheckboxFormData<APIGDPRWriteRequestDTO.DataSensitivityLevelsEnum>(
+    this.patchCheckboxFormData<APIDataSensitivityLevelChoice>(
       this.dataSensitivityLevelForm,
       this.dataSensitivityLevelsDtoField,
       dataSensitivityLevelEnums,
@@ -181,7 +181,7 @@ export class DataSensitivitySectionComponent extends BaseAccordionComponent impl
 
   public patchSpecificPersonalData() {
     const specificPersonalDataEnums = specificPersonalDataOptions.map((option) => option.value);
-    this.patchCheckboxFormData<APIGDPRWriteRequestDTO.SpecificPersonalDataEnum>(
+    this.patchCheckboxFormData<APIGDPRPersonalDataChoice>(
       this.specificPersonalDataForm,
       this.specificPersonalDataDtoField,
       specificPersonalDataEnums,

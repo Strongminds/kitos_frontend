@@ -9,7 +9,7 @@ import {
   APINotificationResponseDTO,
   APIScheduledNotificationWriteRequestDTO,
   APISentNotificationResponseDTO,
-  APIV2NotificationINTERNALService,
+  NotificationV2Service,
 } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
@@ -34,7 +34,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
   constructor(
     private readonly store: Store,
     @Inject(APIV2NotificationINTERNALService)
-    private readonly apiNotificationsService: APIV2NotificationINTERNALService,
+    private readonly apiNotificationsService: NotificationV2Service,
   ) {
     super({ notifications: [], isLoading: false, currentNotificationSent: undefined, isSaving: false });
   }
@@ -52,17 +52,17 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
       params$.pipe(
         mergeMap((params) => {
           return this.apiNotificationsService
-            .getManyNotificationV2GetSentNotification({
+            .getSingleNotificationV2GetSentNotification({
               ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
               notificationUuid: params.notificationUuid,
             })
             .pipe(
               tapResponse({
-    next: (currentNotificationSent) => this.updateCurrentNotificationSent(currentNotificationSent),
-    error: (e) => console.error(e),
-    complete: () => this.updateIsLoading(false)
-}),
+                next: (currentNotificationSent) => this.updateCurrentNotificationSent(currentNotificationSent),
+                error: (e) => console.error(e),
+                complete: () => this.updateIsLoading(false),
+              }),
             );
         }),
       ),
@@ -84,7 +84,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
             .postSingleNotificationV2CreateImmediateNotification({
               ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
-              request: params.requestBody,
+              aPIPostSingleNotificationV2CreateImmediateNotificationRequest: params.requestBody,
             })
             .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
@@ -108,7 +108,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
             .postSingleNotificationV2CreateScheduledNotification({
               ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
-              request: params.requestBody,
+              aPIPostSingleNotificationV2CreateScheduledNotificationRequest: params.requestBody,
             })
             .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
@@ -134,7 +134,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
               notificationUuid: params.notificationUuid,
-              request: params.requestBody,
+              aPIPutSingleNotificationV2UpdateScheduledNotificationRequest: params.requestBody,
             })
             .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
@@ -198,17 +198,17 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
         mergeMap(([{ ownerResourceType, entityUuid }, organizationUuid]) => {
           this.updateIsLoading(true);
           return this.apiNotificationsService
-            .getManyNotificationV2GetNotifications({
+            .getSingleNotificationV2GetNotifications({
               ownerResourceType: ownerResourceType,
               ownerResourceUuid: entityUuid,
               organizationUuid: organizationUuid,
             })
             .pipe(
               tapResponse({
-    next: (notifications) => this.updateNotifications(notifications),
-    error: (e) => console.error(e),
-    complete: () => this.updateIsLoading(false)
-}),
+                next: (notifications) => this.updateNotifications(notifications),
+                error: (e) => console.error(e),
+                complete: () => this.updateIsLoading(false),
+              }),
             );
         }),
       ),

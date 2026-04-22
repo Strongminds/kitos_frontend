@@ -137,7 +137,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
         .pipe(combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dataProcessing, hasModifyPermissions]) => {
           this.generalInformationForm.patchValue({
-            interval: mapToOversightInterval(dataProcessing?.oversight?.oversightInterval),
+            interval: mapToOversightInterval(dataProcessing?.oversight?.oversightInterval ?? undefined),
             intervalRemarks: dataProcessing?.oversight?.oversightIntervalRemark,
             completedAt: optionalNewDate(dataProcessing?.oversight?.oversightScheduledInspectionDate),
             remarks: dataProcessing?.oversight?.oversightOptionsRemark,

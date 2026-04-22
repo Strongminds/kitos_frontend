@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { combineLatest, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
-import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
+import { OrganizationsInternalV2Service } from 'src/app/api/v2';
 import { mapConflictsDtoToOrganizationRemovalConflicts } from 'src/app/shared/helpers/removal-conflicts.helper';
 import { OrganizationRemovalConflicts } from 'src/app/shared/models/global-admin/organization-removal-conflicts.model';
 import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
@@ -14,7 +14,7 @@ interface State {
 
 @Injectable()
 export class DeleteOrganizationComponentStore extends ComponentStore<State> {
-  constructor(private apiService: APIV2OrganizationsInternalINTERNALService) {
+  constructor(private apiService: OrganizationsInternalV2Service) {
     super({ removalConflicts: undefined, isLoading: false });
   }
 
@@ -87,10 +87,10 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
         this.apiService.getSingleOrganizationsInternalV2GetConflicts({ organizationUuid }).pipe(
           map((conflictsDto) => mapConflictsDtoToOrganizationRemovalConflicts(conflictsDto)),
           tapResponse({
-    next: (conflicts) => this.updateConsequences(conflicts),
-    error: (e) => console.error(e),
-    complete: () => this.setLoading(false)
-}),
+            next: (conflicts) => this.updateConsequences(conflicts),
+            error: (e) => console.error(e),
+            complete: () => this.setLoading(false),
+          }),
         ),
       ),
     ),

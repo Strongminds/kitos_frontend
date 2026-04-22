@@ -121,8 +121,8 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
         this.terminationsFormGroup.patchValue({
           terminatedAt: optionalNewDate(contract.termination?.terminatedAt ?? undefined),
           noticePeriodMonths: contract.termination?.terms?.noticePeriodMonths,
-          noticePeriodExtendsCurrent: mapYearSegmentChoice(contract.termination?.terms?.noticePeriodExtendsCurrent),
-          noticeByEndOf: mapYearSegmentChoice(contract.termination?.terms?.noticeByEndOf),
+          noticePeriodExtendsCurrent: mapYearSegmentChoice(contract.termination?.terms?.noticePeriodExtendsCurrent ?? undefined),
+          noticeByEndOf: mapYearSegmentChoice(contract.termination?.terms?.noticeByEndOf ?? undefined),
         });
         if (hasModifyPermission) {
           this.deadlinesFormGroup.enable();

@@ -18,8 +18,8 @@
         </td>
         <td>
           <app-external-page-link
-            [url]="oversightDate.oversightReportLink?.url"
-            [title]="oversightDate.oversightReportLink?.name"
+            [url]="oversightDate.oversightReportLink?.url ?? undefined"
+            [title]="oversightDate.oversightReportLink?.name ?? undefined"
             placeholderName="Link til tilsynsrapport"
             i18n-placeholderName
           ></app-external-page-link>

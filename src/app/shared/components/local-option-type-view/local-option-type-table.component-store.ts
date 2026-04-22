@@ -21,7 +21,10 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
   public readonly optionType$ = this.select((state) => state.type);
   public readonly isLoading$ = this.select((state) => state.isLoading);
 
-  constructor(private readonly store: Store, private localOptionTypeService: LocalAdminOptionTypeService) {
+  constructor(
+    private readonly store: Store,
+    private localOptionTypeService: LocalAdminOptionTypeService,
+  ) {
     super();
   }
 
@@ -29,21 +32,21 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
     (state: State, optionTypeItems: LocalAdminOptionTypeItem[]): State => ({
       ...state,
       optionTypeItems: optionTypeItems,
-    })
+    }),
   );
 
   private updateIsLoading = this.updater(
     (state: State, loading: boolean): State => ({
       ...state,
       isLoading: loading,
-    })
+    }),
   );
 
   private getOptionItemsObservable(): Observable<APILocalRoleOptionResponseDTO[]> {
     return this.store.select(selectOrganizationUuid).pipe(
       filterNullish(),
       concatLatestFrom(() => this.optionType$),
-      switchMap(([organizationUuid, type]) => this.localOptionTypeService.getLocalOptions(organizationUuid, type))
+      switchMap(([organizationUuid, type]) => this.localOptionTypeService.getLocalOptions(organizationUuid, type)),
     );
   }
 
@@ -56,7 +59,7 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
       uuid: dto.uuid,
       obligatory: dto.isObligatory ?? false,
       isExternallyUsed: dto.isExternallyUsed,
-      externallyUsedDescription: dto.externallyUsedDescription,
+      externallyUsedDescription: dto.externallyUsedDescription ?? undefined,
     };
     return item;
   }
@@ -68,17 +71,17 @@ export class LocalOptionTypeTableComponentStore extends ComponentStore<State> {
         this.getOptionItemsObservable().pipe(
           map((items) => items.map(this.mapDtoToOptionType)),
           tapResponse({
-    next: (mappedItems) => {
-        this.updateItems(mappedItems);
-        this.updateIsLoading(false);
-    },
-    error: (error) => {
-        console.error(error);
-        this.updateIsLoading(false);
-    }
-})
-        )
-      )
-    )
+            next: (mappedItems) => {
+              this.updateItems(mappedItems);
+              this.updateIsLoading(false);
+            },
+            error: (error) => {
+              console.error(error);
+              this.updateIsLoading(false);
+            },
+          }),
+        ),
+      ),
+    ),
   );
 }

@@ -1,28 +1,27 @@
-import { APIDataProcessingRegistrationDTO } from 'src/app/api/v1';
-import { YesNoDontKnowEnum } from '../yes-no-dont-know.model';
+import { APIYesNoUndecidedChoice } from 'src/app/api/v2';
 
 export interface TransferToInsecureThirdCountries {
   name: string;
-  value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum;
+  value: APIYesNoUndecidedChoice;
 }
 
 export const transferToInsecureThirdCountriesOptions: TransferToInsecureThirdCountries[] = [
   {
     name: $localize`Ja`,
-    value: YesNoDontKnowEnum.,
+    value: APIYesNoUndecidedChoice.Yes,
   },
   {
     name: $localize`Nej`,
-    value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum.No,
+    value: APIYesNoUndecidedChoice.No,
   },
   {
     name: '',
-    value: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum.Undecided,
+    value: APIYesNoUndecidedChoice.Undecided,
   },
 ];
 
 export const mapTransferToInsecureThirdCountries = (
-  source?: APIDataProcessingRegistrationDTO.TransferToInsecureThirdCountriesEnum,
+  source?: APIYesNoUndecidedChoice,
 ): TransferToInsecureThirdCountries | undefined => {
   return transferToInsecureThirdCountriesOptions.find((option) => option.value === source);
 };
