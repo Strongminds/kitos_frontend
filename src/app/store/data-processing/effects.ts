@@ -171,7 +171,7 @@ export class DataProcessingEffects {
       switchMap(([{ name, openAfterCreate }, organizationUuid]) =>
         this.dataProcessingService
           .postSingleDataProcessingRegistrationV2PostDataProcessingRegistration({
-            aPICreateDataProcessingRegistrationRequestDTO: { name, organizationUuid },
+            aPIPostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequest: { name, organizationUuid },
           })
           .pipe(
             map(({ uuid }) => DataProcessingActions.createDataProcessingSuccess(uuid, openAfterCreate)),
@@ -222,7 +222,7 @@ export class DataProcessingEffects {
         this.dataProcessingService
           .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
             uuid,
-            aPIUpdateDataProcessingRegistrationRequestDTO: dataProcessing,
+            aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest: dataProcessing,
           })
           .pipe(
             map((data) => DataProcessingActions.patchDataProcessingSuccess(data)),
@@ -383,7 +383,9 @@ export class DataProcessingEffects {
         return this.dataProcessingService
           .patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration({
             uuid: dprUuid,
-            aPIUpdateDataProcessingRegistrationRequestDTO: { roles: existingRoles.concat(rolesToAdd) },
+            aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest: {
+              roles: existingRoles.concat(rolesToAdd),
+            },
           })
           .pipe(
             map((role) => DataProcessingActions.bulkAddDataProcessingRoleSuccess(role)),
@@ -400,7 +402,10 @@ export class DataProcessingEffects {
         this.apiInternalDataProcessingRegistrationService
           .patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment({
             dprUuid: dataProcessingUuid,
-            aPIRoleAssignmentRequestDTO: { userUuid: userUuid, roleUuid: roleUuid },
+            aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest: {
+              userUuid: userUuid,
+              roleUuid: roleUuid,
+            },
           })
           .pipe(
             map((usage) =>
@@ -513,7 +518,8 @@ export class DataProcessingEffects {
         return this.oversightDateService
           .postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate({
             uuid: dprUuid,
-            aPICreateOversightDateDTO: oversightDate,
+            aPIPostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequest:
+              oversightDate,
           })
           .pipe(
             map((response) => DataProcessingActions.addDataProcessingOversightDateSuccess(response)),
@@ -569,7 +575,7 @@ export class DataProcessingEffects {
           .postSingleOrganizationGridInternalV2SaveGridConfiguration({
             organizationUuid,
             overviewType: 'DataProcessingRegistration',
-            aPIOrganizationGridConfigurationRequestDTO: {
+            aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest: {
               visibleColumns: columnConfig,
             },
           })
