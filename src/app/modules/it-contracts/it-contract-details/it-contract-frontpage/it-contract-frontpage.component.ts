@@ -1,18 +1,20 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { combineLatestWith, map } from 'rxjs';
 import {
-  APIContractProcurementDataResponseDTO,
   APIIdentityNamePairResponseDTO,
   APIItContractResponseDTO,
   APIShallowOrganizationResponseDTO,
   APIUpdateContractRequestDTO,
+  APIYesNoUndecidedChoice,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { combineOR } from 'src/app/shared/helpers/observable-helpers';
+import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -47,23 +49,21 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
-import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
-import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { AsyncPipe } from '@angular/common';
-import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
-import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
-import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
-import { OptionTypeDropdownComponent } from '../../../../shared/components/dropdowns/option-type-dropdown/option-type-dropdown.component';
-import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
 import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
-import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
 import { ConnectedDropdownComponent } from '../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { OptionTypeDropdownComponent } from '../../../../shared/components/dropdowns/option-type-dropdown/option-type-dropdown.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
 import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
 import { RadioButtonsComponent } from '../../../../shared/components/radio-buttons/radio-buttons.component';
+import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
+import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
 
 @Component({
   selector: 'app-it-contract-frontpage',
@@ -87,8 +87,8 @@ import { RadioButtonsComponent } from '../../../../shared/components/radio-butto
     ConnectedDropdownComponent,
     OrgUnitSelectComponent,
     RadioButtonsComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
   public readonly contractTemplates$ = this.store
@@ -191,7 +191,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       disabled: true,
     }),
     procurementPlan: new FormControl<{ name: string } | undefined>({ value: undefined, disabled: true }),
-    procurementInitiated: new FormControl<APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum | undefined>({
+    procurementInitiated: new FormControl<APIYesNoUndecidedChoice | undefined>({
       value: undefined,
       disabled: true,
     }),
@@ -205,11 +205,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   public readonly yearsWithQuarters = this.getYearsWithQuarters();
 
-  public readonly activeOptions: Array<
-    RadioButtonOption<APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum>
-  > = [
-    { id: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum.Yes, label: 'Ja' },
-    { id: APIContractProcurementDataResponseDTO.ProcurementInitiatedEnum.No, label: 'Nej' },
+  public readonly activeOptions: Array<RadioButtonOption<APIYesNoUndecidedChoice>> = [
+    { id: APIYesNoUndecidedChoice.Yes, label: 'Ja' },
+    { id: APIYesNoUndecidedChoice.No, label: 'Nej' },
   ];
 
   public readonly contractIdEnabled$ = this.store.select(selectItContractEnableContractId);
@@ -377,8 +375,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
           ? $localize`Gyldig`
           : $localize`Ikke gyldig`,
       isValid: contract.general.validity.valid,
-      validFrom: optionalNewDate(contract.general.validity.validFrom),
-      validTo: optionalNewDate(contract.general.validity.validTo),
+      validFrom: optionalNewDate(contract.general.validity.validFrom ?? undefined),
+      validTo: optionalNewDate(contract.general.validity.validTo ?? undefined),
       enforcedValid: enforcedValid,
       notes: contract.general.notes,
       contractType: contract.general.contractType,
@@ -396,7 +394,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.responsibleFormGroup.patchValue({
       responsibleEntityOrganizationUnit: contract.responsible.organizationUnit,
       responsibleEntitySignedBy: contract.responsible.signedBy,
-      responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt),
+      responsibleEntitySignedAt: optionalNewDate(contract.responsible.signedAt ?? undefined),
       responsibleEntitySigned: contract.responsible.signed,
     });
   }
@@ -405,7 +403,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.supplierFormGroup.patchValue({
       supplierOrganization: contract.supplier.organization,
       supplierSignedBy: contract.supplier.signedBy,
-      supplierSignedAt: optionalNewDate(contract.supplier.signedAt),
+      supplierSignedAt: optionalNewDate(contract.supplier.signedAt ?? undefined),
       supplierSigned: contract.supplier.signed,
     });
   }

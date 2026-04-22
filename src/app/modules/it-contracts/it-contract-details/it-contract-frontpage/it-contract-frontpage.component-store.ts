@@ -7,8 +7,8 @@ import { Observable, combineLatestWith, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIOrganizationResponseDTO,
   APIOrganizationUserResponseDTO,
-  APIV2ItContractService,
-  APIV2OrganizationService,
+  ItContractV2Service,
+  OrganizationV2Service,
 } from 'src/app/api/v2';
 import {
   mapContractsToTree,
@@ -40,8 +40,8 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   public readonly validParentContracts$ = this.select((state) => state.validParentContracts).pipe(filterNullish());
 
   constructor(
-    @Inject(APIV2OrganizationService) private readonly organizationApiService: APIV2OrganizationService,
-    @Inject(APIV2ItContractService) private readonly apiItContractService: APIV2ItContractService,
+    @Inject(OrganizationV2Service) private readonly organizationApiService: OrganizationV2Service,
+    @Inject(ItContractV2Service) private readonly apiItContractService: ItContractV2Service,
     private readonly store: Store,
   ) {
     super({ usersIsLoading: false, organizationsIsLoading: false, contractsLoading: false });
@@ -86,16 +86,16 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
       mergeMap(([search, organizationUuid]) => {
         this.updateUsersIsLoading(true);
         return this.organizationApiService
-          .getManyOrganizationV2GetOrganizationUsers({
+          .getSingleOrganizationV2GetOrganizationUsers({
             organizationUuid,
             nameOrEmailQuery: search,
           })
           .pipe(
             tapResponse({
-    next: (users) => this.updateUsers(users),
-    error: (e) => console.error(e),
-    complete: () => this.updateUsersIsLoading(false)
-}),
+              next: (users) => this.updateUsers(users),
+              error: (e) => console.error(e),
+              complete: () => this.updateUsersIsLoading(false),
+            }),
           );
       }),
     ),
@@ -106,16 +106,16 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
       switchMap((search) => {
         this.updateOrganizationsIsLoading(true);
         return this.organizationApiService
-          .getManyOrganizationV2GetOrganizations({
+          .getSingleOrganizationV2GetOrganizations({
             nameOrCvrContent: search,
             orderByProperty: 'Name',
           })
           .pipe(
             tapResponse({
-    next: (organizations) => this.updateOrganizations(organizations),
-    error: (e) => console.error(e),
-    complete: () => this.updateOrganizationsIsLoading(false)
-}),
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateOrganizationsIsLoading(false),
+            }),
           );
       }),
     ),
@@ -130,16 +130,16 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
       ),
       mergeMap(([search, organizationUuid, contractUuid]) => {
         return this.apiItContractService
-          .getManyItContractV2GetItContracts({ organizationUuid, nameContent: search })
+          .getSingleItContractV2GetItContracts({ organizationUuid, nameContent: search })
           .pipe(
             tapResponse({
-    next: (contracts) => {
-        const validContractsTree = removeNodeAndChildren(mapContractsToTree(contracts), contractUuid);
-        this.updateValidParentContracts(mapTreeToIdentityNamePairs(validContractsTree));
-    },
-    error: (e) => console.error(e),
-    complete: () => this.updateContractsLoading(false)
-}),
+              next: (contracts) => {
+                const validContractsTree = removeNodeAndChildren(mapContractsToTree(contracts), contractUuid);
+                this.updateValidParentContracts(mapTreeToIdentityNamePairs(validContractsTree));
+              },
+              error: (e) => console.error(e),
+              complete: () => this.updateContractsLoading(false),
+            }),
           );
       }),
     ),
