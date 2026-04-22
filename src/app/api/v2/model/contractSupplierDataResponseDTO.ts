@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIArchivingRegistrationsResponseDTOSupplier } from './archivingRegistrationsResponseDTOSupplier';
 
 
 export interface APIContractSupplierDataResponseDTO { 
-    organization?: APIShallowOrganizationResponseDTO;
+    organization?: APIArchivingRegistrationsResponseDTOSupplier | null;
     signed: boolean;
     signedBy?: string | null;
     signedAt?: string | null;

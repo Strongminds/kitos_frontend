@@ -11,12 +11,12 @@
  */
 
 
-export type APITechnicalPrecautionChoice = 0 | 1 | 2 | 3;
+export type APITechnicalPrecautionChoice = 'Encryption' | 'Pseudonymization' | 'AccessControl' | 'Logging';
 
 export const APITechnicalPrecautionChoice = {
-    NUMBER_0: 0 as APITechnicalPrecautionChoice,
-    NUMBER_1: 1 as APITechnicalPrecautionChoice,
-    NUMBER_2: 2 as APITechnicalPrecautionChoice,
-    NUMBER_3: 3 as APITechnicalPrecautionChoice
+    Encryption: 'Encryption' as APITechnicalPrecautionChoice,
+    Pseudonymization: 'Pseudonymization' as APITechnicalPrecautionChoice,
+    AccessControl: 'AccessControl' as APITechnicalPrecautionChoice,
+    Logging: 'Logging' as APITechnicalPrecautionChoice
 };
 

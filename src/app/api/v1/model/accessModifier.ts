@@ -11,10 +11,10 @@
  */
 
 
-export type APIAccessModifier = 0 | 1;
+export type APIAccessModifier = 'Local' | 'Public';
 
 export const APIAccessModifier = {
-    NUMBER_0: 0 as APIAccessModifier,
-    NUMBER_1: 1 as APIAccessModifier
+    Local: 'Local' as APIAccessModifier,
+    Public: 'Public' as APIAccessModifier
 };
 

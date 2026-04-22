@@ -9,33 +9,33 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIContractPaymentModelDataWriteRequestDTO } from './contractPaymentModelDataWriteRequestDTO';
-import { APIContractAgreementPeriodDataWriteRequestDTO } from './contractAgreementPeriodDataWriteRequestDTO';
 import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
-import { APIContractGeneralDataWriteRequestDTO } from './contractGeneralDataWriteRequestDTO';
-import { APIContractResponsibleDataWriteRequestDTO } from './contractResponsibleDataWriteRequestDTO';
-import { APIContractSupplierDataWriteRequestDTO } from './contractSupplierDataWriteRequestDTO';
-import { APIContractProcurementDataWriteRequestDTO } from './contractProcurementDataWriteRequestDTO';
-import { APIContractPaymentsDataWriteRequestDTO } from './contractPaymentsDataWriteRequestDTO';
-import { APIContractTerminationDataWriteRequestDTO } from './contractTerminationDataWriteRequestDTO';
+import { APIContractWriteRequestDTOSupplier } from './contractWriteRequestDTOSupplier';
+import { APIContractWriteRequestDTOPayments } from './contractWriteRequestDTOPayments';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
+import { APIContractWriteRequestDTOPaymentModel } from './contractWriteRequestDTOPaymentModel';
+import { APIContractWriteRequestDTOTermination } from './contractWriteRequestDTOTermination';
+import { APIContractWriteRequestDTOAgreementPeriod } from './contractWriteRequestDTOAgreementPeriod';
+import { APIContractWriteRequestDTOGeneral } from './contractWriteRequestDTOGeneral';
+import { APIContractWriteRequestDTOProcurement } from './contractWriteRequestDTOProcurement';
+import { APIContractWriteRequestDTOResponsible } from './contractWriteRequestDTOResponsible';
 
 
 export interface APICreateNewContractRequestDTO { 
-    parentContractUuid?: string | null;
-    general?: APIContractGeneralDataWriteRequestDTO;
-    procurement?: APIContractProcurementDataWriteRequestDTO;
-    supplier?: APIContractSupplierDataWriteRequestDTO;
-    responsible?: APIContractResponsibleDataWriteRequestDTO;
-    systemUsageUuids?: Array<string> | null;
-    dataProcessingRegistrationUuids?: Array<string> | null;
-    paymentModel?: APIContractPaymentModelDataWriteRequestDTO;
-    agreementPeriod?: APIContractAgreementPeriodDataWriteRequestDTO;
-    termination?: APIContractTerminationDataWriteRequestDTO;
-    payments?: APIContractPaymentsDataWriteRequestDTO;
-    roles?: Array<APIRoleAssignmentRequestDTO> | null;
     organizationUuid: string;
     name: string;
     externalReferences?: Array<APIExternalReferenceDataWriteRequestDTO> | null;
+    parentContractUuid?: string | null;
+    general?: APIContractWriteRequestDTOGeneral | null;
+    procurement?: APIContractWriteRequestDTOProcurement | null;
+    supplier?: APIContractWriteRequestDTOSupplier | null;
+    responsible?: APIContractWriteRequestDTOResponsible | null;
+    systemUsageUuids?: Array<string> | null;
+    dataProcessingRegistrationUuids?: Array<string> | null;
+    paymentModel?: APIContractWriteRequestDTOPaymentModel | null;
+    agreementPeriod?: APIContractWriteRequestDTOAgreementPeriod | null;
+    termination?: APIContractWriteRequestDTOTermination | null;
+    payments?: APIContractWriteRequestDTOPayments | null;
+    roles?: Array<APIRoleAssignmentRequestDTO> | null;
 }
 

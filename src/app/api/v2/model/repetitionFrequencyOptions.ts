@@ -11,15 +11,15 @@
  */
 
 
-export type APIRepetitionFrequencyOptions = 0 | 1 | 2 | 3 | 4 | 5 | 6;
+export type APIRepetitionFrequencyOptions = 'Hour' | 'Day' | 'Week' | 'Month' | 'Quarter' | 'HalfYear' | 'Year';
 
 export const APIRepetitionFrequencyOptions = {
-    NUMBER_0: 0 as APIRepetitionFrequencyOptions,
-    NUMBER_1: 1 as APIRepetitionFrequencyOptions,
-    NUMBER_2: 2 as APIRepetitionFrequencyOptions,
-    NUMBER_3: 3 as APIRepetitionFrequencyOptions,
-    NUMBER_4: 4 as APIRepetitionFrequencyOptions,
-    NUMBER_5: 5 as APIRepetitionFrequencyOptions,
-    NUMBER_6: 6 as APIRepetitionFrequencyOptions
+    Hour: 'Hour' as APIRepetitionFrequencyOptions,
+    Day: 'Day' as APIRepetitionFrequencyOptions,
+    Week: 'Week' as APIRepetitionFrequencyOptions,
+    Month: 'Month' as APIRepetitionFrequencyOptions,
+    Quarter: 'Quarter' as APIRepetitionFrequencyOptions,
+    HalfYear: 'HalfYear' as APIRepetitionFrequencyOptions,
+    Year: 'Year' as APIRepetitionFrequencyOptions
 };
 

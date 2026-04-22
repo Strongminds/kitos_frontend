@@ -11,14 +11,14 @@
  */
 
 
-export type APIDefaultUserStartPreferenceChoice = 0 | 1 | 2 | 3 | 4 | 5;
+export type APIDefaultUserStartPreferenceChoice = 'StartSite' | 'Organization' | 'ItSystemUsage' | 'ItSystemCatalog' | 'ItContract' | 'DataProcessing';
 
 export const APIDefaultUserStartPreferenceChoice = {
-    NUMBER_0: 0 as APIDefaultUserStartPreferenceChoice,
-    NUMBER_1: 1 as APIDefaultUserStartPreferenceChoice,
-    NUMBER_2: 2 as APIDefaultUserStartPreferenceChoice,
-    NUMBER_3: 3 as APIDefaultUserStartPreferenceChoice,
-    NUMBER_4: 4 as APIDefaultUserStartPreferenceChoice,
-    NUMBER_5: 5 as APIDefaultUserStartPreferenceChoice
+    StartSite: 'StartSite' as APIDefaultUserStartPreferenceChoice,
+    Organization: 'Organization' as APIDefaultUserStartPreferenceChoice,
+    ItSystemUsage: 'ItSystemUsage' as APIDefaultUserStartPreferenceChoice,
+    ItSystemCatalog: 'ItSystemCatalog' as APIDefaultUserStartPreferenceChoice,
+    ItContract: 'ItContract' as APIDefaultUserStartPreferenceChoice,
+    DataProcessing: 'DataProcessing' as APIDefaultUserStartPreferenceChoice
 };
 

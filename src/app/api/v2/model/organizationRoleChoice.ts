@@ -11,15 +11,15 @@
  */
 
 
-export type APIOrganizationRoleChoice = 0 | 1 | 2 | 4 | 5 | 7 | 8;
+export type APIOrganizationRoleChoice = 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'GlobalAdmin' | 'RightsHolderAccess';
 
 export const APIOrganizationRoleChoice = {
-    NUMBER_0: 0 as APIOrganizationRoleChoice,
-    NUMBER_1: 1 as APIOrganizationRoleChoice,
-    NUMBER_2: 2 as APIOrganizationRoleChoice,
-    NUMBER_4: 4 as APIOrganizationRoleChoice,
-    NUMBER_5: 5 as APIOrganizationRoleChoice,
-    NUMBER_7: 7 as APIOrganizationRoleChoice,
-    NUMBER_8: 8 as APIOrganizationRoleChoice
+    User: 'User' as APIOrganizationRoleChoice,
+    LocalAdmin: 'LocalAdmin' as APIOrganizationRoleChoice,
+    OrganizationModuleAdmin: 'OrganizationModuleAdmin' as APIOrganizationRoleChoice,
+    SystemModuleAdmin: 'SystemModuleAdmin' as APIOrganizationRoleChoice,
+    ContractModuleAdmin: 'ContractModuleAdmin' as APIOrganizationRoleChoice,
+    GlobalAdmin: 'GlobalAdmin' as APIOrganizationRoleChoice,
+    RightsHolderAccess: 'RightsHolderAccess' as APIOrganizationRoleChoice
 };
 

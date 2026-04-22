@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIUnitAccessRightsResponseDTO } from './unitAccessRightsResponseDTO';
-import { APIOrganizationUnitResponseDTO } from './organizationUnitResponseDTO';
+import { APIPaymentResponseDTOOrganizationUnit } from './paymentResponseDTOOrganizationUnit';
+import { APIUnitAccessRightsWithUnitDataResponseDTOUnitAccessRights } from './unitAccessRightsWithUnitDataResponseDTOUnitAccessRights';
 
 
 export interface APIUnitAccessRightsWithUnitDataResponseDTO { 
-    organizationUnit?: APIOrganizationUnitResponseDTO;
-    unitAccessRights?: APIUnitAccessRightsResponseDTO;
+    organizationUnit?: APIPaymentResponseDTOOrganizationUnit | null;
+    unitAccessRights?: APIUnitAccessRightsWithUnitDataResponseDTOUnitAccessRights | null;
 }
 

@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIOrganizationGridConfigurationRequestDTO } from '../model/aPIOrganizationGridConfigurationRequestDTO';
-// @ts-ignore
 import { APIOverviewType } from '../model/aPIOverviewType';
+// @ts-ignore
+import { APIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest } from '../model/aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -45,7 +45,7 @@ export interface GetSingleOrganizationGridInternalV2GetOrganizationGridPermissio
 export interface PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams {
     organizationUuid: string;
     overviewType: APIOverviewType;
-    aPIOrganizationGridConfigurationRequestDTO?: APIOrganizationGridConfigurationRequestDTO;
+    aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest?: APIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest;
 }
 
 
@@ -311,7 +311,7 @@ export class OrganizationGridInternalV2Service {
         if (overviewType === null || overviewType === undefined) {
             throw new Error('Required parameter overviewType was null or undefined when calling postSingleOrganizationGridInternalV2SaveGridConfiguration.');
         }
-        const aPIOrganizationGridConfigurationRequestDTO = requestParameters.aPIOrganizationGridConfigurationRequestDTO;
+        const aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest = requestParameters.aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -357,7 +357,7 @@ export class OrganizationGridInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIOrganizationGridConfigurationRequestDTO,
+                body: aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

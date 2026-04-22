@@ -14,14 +14,14 @@ import { APIDefaultUserStartPreferenceChoice } from './defaultUserStartPreferenc
 
 
 export interface APICreateUserRequestDTO { 
+    email: string;
+    firstName: string;
+    lastName: string;
     phoneNumber?: string | null;
     defaultUserStartPreference?: APIDefaultUserStartPreferenceChoice;
     hasApiAccess?: boolean;
     hasStakeHolderAccess?: boolean;
     roles?: Array<APIOrganizationRoleChoice> | null;
     sendMail?: boolean;
-    email: string;
-    firstName: string;
-    lastName: string;
 }
 

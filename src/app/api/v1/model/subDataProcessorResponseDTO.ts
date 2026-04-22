@@ -10,15 +10,15 @@
  * Do not edit the class manually.
  */
 import { APIYesNoUndecidedOption } from './yesNoUndecidedOption';
-import { APINamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
+import { APIDataProcessingRegistrationDTOBasisForTransfer } from './dataProcessingRegistrationDTOBasisForTransfer';
 
 
 export interface APISubDataProcessorResponseDTO { 
+    basisForTransfer?: APIDataProcessingRegistrationDTOBasisForTransfer | null;
+    transferToInsecureThirdCountries?: APIYesNoUndecidedOption | null;
+    insecureCountry?: APIDataProcessingRegistrationDTOBasisForTransfer | null;
+    cvrNumber?: string | null;
     id?: number;
     name?: string | null;
-    cvrNumber?: string | null;
-    basisForTransfer?: APINamedEntityWithExpirationStatusDTO;
-    transferToInsecureThirdCountries?: APIYesNoUndecidedOption;
-    insecureCountry?: APINamedEntityWithExpirationStatusDTO;
 }
 

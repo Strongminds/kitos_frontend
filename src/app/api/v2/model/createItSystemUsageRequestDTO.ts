@@ -9,24 +9,24 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APICreateItSystemUsageRequestDTOOrganizationUsage } from './createItSystemUsageRequestDTOOrganizationUsage';
 import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
-import { APILocalKLEDeviationsRequestDTO } from './localKLEDeviationsRequestDTO';
-import { APIOrganizationUsageWriteRequestDTO } from './organizationUsageWriteRequestDTO';
-import { APIGeneralDataWriteRequestDTO } from './generalDataWriteRequestDTO';
+import { APICreateItSystemUsageRequestDTOLocalKleDeviations } from './createItSystemUsageRequestDTOLocalKleDeviations';
+import { APICreateItSystemUsageRequestDTOGdpr } from './createItSystemUsageRequestDTOGdpr';
+import { APICreateItSystemUsageRequestDTOArchiving } from './createItSystemUsageRequestDTOArchiving';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { APIGDPRWriteRequestDTO } from './gDPRWriteRequestDTO';
-import { APIArchivingCreationRequestDTO } from './archivingCreationRequestDTO';
+import { APICreateItSystemUsageRequestDTOGeneral } from './createItSystemUsageRequestDTOGeneral';
 
 
 export interface APICreateItSystemUsageRequestDTO { 
-    roles?: Array<APIRoleAssignmentRequestDTO> | null;
-    organizationUsage?: APIOrganizationUsageWriteRequestDTO;
-    localKleDeviations?: APILocalKLEDeviationsRequestDTO;
-    gdpr?: APIGDPRWriteRequestDTO;
     systemUuid: string;
     organizationUuid: string;
-    general?: APIGeneralDataWriteRequestDTO;
+    general?: APICreateItSystemUsageRequestDTOGeneral | null;
     externalReferences?: Array<APIExternalReferenceDataWriteRequestDTO> | null;
-    archiving?: APIArchivingCreationRequestDTO;
+    archiving?: APICreateItSystemUsageRequestDTOArchiving | null;
+    roles?: Array<APIRoleAssignmentRequestDTO> | null;
+    organizationUsage?: APICreateItSystemUsageRequestDTOOrganizationUsage | null;
+    localKleDeviations?: APICreateItSystemUsageRequestDTOLocalKleDeviations | null;
+    gdpr?: APICreateItSystemUsageRequestDTOGdpr | null;
 }
 

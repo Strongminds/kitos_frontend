@@ -12,11 +12,11 @@
 
 
 export interface APIRoleOptionResponseDTO { 
-    uuid: string;
-    name: string;
-    description: string;
     writeAccess?: boolean;
     isExternallyAvailable?: boolean;
     externallyAvailableDescription?: string | null;
+    description: string;
+    uuid: string;
+    name: string;
 }
 

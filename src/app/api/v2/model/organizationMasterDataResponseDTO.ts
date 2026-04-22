@@ -12,11 +12,11 @@
 
 
 export interface APIOrganizationMasterDataResponseDTO { 
-    uuid: string;
-    name: string;
     cvr?: string | null;
     phone?: string | null;
     email?: string | null;
     address?: string | null;
+    uuid: string;
+    name: string;
 }
 

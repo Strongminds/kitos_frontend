@@ -12,8 +12,8 @@
 
 
 export interface APIItSystemUsageSystemContextResponseDTO { 
+    deactivated: boolean;
     uuid: string;
     name: string;
-    deactivated: boolean;
 }
 

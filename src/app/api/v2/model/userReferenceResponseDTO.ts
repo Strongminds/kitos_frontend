@@ -12,8 +12,8 @@
 
 
 export interface APIUserReferenceResponseDTO { 
+    email: string;
     uuid: string;
     name: string;
-    email: string;
 }
 

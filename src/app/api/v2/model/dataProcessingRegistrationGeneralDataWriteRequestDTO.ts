@@ -17,14 +17,14 @@ import { APIYesNoIrrelevantChoice } from './yesNoIrrelevantChoice';
 export interface APIDataProcessingRegistrationGeneralDataWriteRequestDTO { 
     dataResponsibleUuid?: string | null;
     dataResponsibleRemark?: string | null;
-    isAgreementConcluded?: APIYesNoIrrelevantChoice;
+    isAgreementConcluded?: APIYesNoIrrelevantChoice | null;
     isAgreementConcludedRemark?: string | null;
     agreementConcludedAt?: string | null;
     basisForTransferUuid?: string | null;
-    transferToInsecureThirdCountries?: APIYesNoUndecidedChoice;
+    transferToInsecureThirdCountries?: APIYesNoUndecidedChoice | null;
     insecureCountriesSubjectToDataTransferUuids?: Array<string> | null;
     dataProcessorUuids?: Array<string> | null;
-    hasSubDataProcessors?: APIYesNoUndecidedChoice;
+    hasSubDataProcessors?: APIYesNoUndecidedChoice | null;
     subDataProcessors?: Array<APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO> | null;
     mainContractUuid?: string | null;
     responsibleOrganizationUnitUuid?: string | null;

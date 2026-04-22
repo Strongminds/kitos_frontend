@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPublicMessageRequestDTO } from '../model/aPIPublicMessageRequestDTO';
+import { APIPostSinglePublicMessagesV2PostRequest } from '../model/aPIPostSinglePublicMessagesV2PostRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -28,11 +28,11 @@ import { Configuration }                                     from '../configurat
 
 export interface PatchSinglePublicMessagesV2PatchRequestParams {
     messageUuid: string;
-    aPIPublicMessageRequestDTO?: APIPublicMessageRequestDTO;
+    aPIPostSinglePublicMessagesV2PostRequest?: APIPostSinglePublicMessagesV2PostRequest;
 }
 
 export interface PostSinglePublicMessagesV2PostRequestParams {
-    aPIPublicMessageRequestDTO?: APIPublicMessageRequestDTO;
+    aPIPostSinglePublicMessagesV2PostRequest?: APIPostSinglePublicMessagesV2PostRequest;
 }
 
 
@@ -219,7 +219,7 @@ export class PublicMessagesV2Service {
         if (messageUuid === null || messageUuid === undefined) {
             throw new Error('Required parameter messageUuid was null or undefined when calling patchSinglePublicMessagesV2Patch.');
         }
-        const aPIPublicMessageRequestDTO = requestParameters.aPIPublicMessageRequestDTO;
+        const aPIPostSinglePublicMessagesV2PostRequest = requestParameters.aPIPostSinglePublicMessagesV2PostRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -266,7 +266,7 @@ export class PublicMessagesV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPublicMessageRequestDTO,
+                body: aPIPostSinglePublicMessagesV2PostRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -285,7 +285,7 @@ export class PublicMessagesV2Service {
     public postSinglePublicMessagesV2Post(requestParameters: PostSinglePublicMessagesV2PostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSinglePublicMessagesV2Post(requestParameters: PostSinglePublicMessagesV2PostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSinglePublicMessagesV2Post(requestParameters: PostSinglePublicMessagesV2PostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIPublicMessageRequestDTO = requestParameters.aPIPublicMessageRequestDTO;
+        const aPIPostSinglePublicMessagesV2PostRequest = requestParameters.aPIPostSinglePublicMessagesV2PostRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -331,7 +331,7 @@ export class PublicMessagesV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPublicMessageRequestDTO,
+                body: aPIPostSinglePublicMessagesV2PostRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

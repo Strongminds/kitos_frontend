@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIHelpTextCreateRequestDTO } from '../model/aPIHelpTextCreateRequestDTO';
+import { APIPatchSingleHelpTextsInternalV2PatchRequest } from '../model/aPIPatchSingleHelpTextsInternalV2PatchRequest';
 // @ts-ignore
-import { APIHelpTextUpdateRequestDTO } from '../model/aPIHelpTextUpdateRequestDTO';
+import { APIPostSingleHelpTextsInternalV2PostRequest } from '../model/aPIPostSingleHelpTextsInternalV2PostRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -38,11 +38,11 @@ export interface GetSingleHelpTextsInternalV2GetSingleRequestParams {
 
 export interface PatchSingleHelpTextsInternalV2PatchRequestParams {
     key: string;
-    aPIHelpTextUpdateRequestDTO?: APIHelpTextUpdateRequestDTO;
+    aPIPatchSingleHelpTextsInternalV2PatchRequest?: APIPatchSingleHelpTextsInternalV2PatchRequest;
 }
 
 export interface PostSingleHelpTextsInternalV2PostRequestParams {
-    aPIHelpTextCreateRequestDTO?: APIHelpTextCreateRequestDTO;
+    aPIPostSingleHelpTextsInternalV2PostRequest?: APIPostSingleHelpTextsInternalV2PostRequest;
 }
 
 
@@ -291,7 +291,7 @@ export class HelpTextsInternalV2Service {
         if (key === null || key === undefined) {
             throw new Error('Required parameter key was null or undefined when calling patchSingleHelpTextsInternalV2Patch.');
         }
-        const aPIHelpTextUpdateRequestDTO = requestParameters.aPIHelpTextUpdateRequestDTO;
+        const aPIPatchSingleHelpTextsInternalV2PatchRequest = requestParameters.aPIPatchSingleHelpTextsInternalV2PatchRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -338,7 +338,7 @@ export class HelpTextsInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIHelpTextUpdateRequestDTO,
+                body: aPIPatchSingleHelpTextsInternalV2PatchRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -357,7 +357,7 @@ export class HelpTextsInternalV2Service {
     public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleHelpTextsInternalV2Post(requestParameters: PostSingleHelpTextsInternalV2PostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIHelpTextCreateRequestDTO = requestParameters.aPIHelpTextCreateRequestDTO;
+        const aPIPostSingleHelpTextsInternalV2PostRequest = requestParameters.aPIPostSingleHelpTextsInternalV2PostRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -403,7 +403,7 @@ export class HelpTextsInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIHelpTextCreateRequestDTO,
+                body: aPIPostSingleHelpTextsInternalV2PostRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

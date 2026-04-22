@@ -19,13 +19,13 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIImmediateNotificationWriteRequestDTO } from '../model/aPIImmediateNotificationWriteRequestDTO';
-// @ts-ignore
 import { APIOwnerResourceType } from '../model/aPIOwnerResourceType';
 // @ts-ignore
-import { APIScheduledNotificationWriteRequestDTO } from '../model/aPIScheduledNotificationWriteRequestDTO';
+import { APIPostSingleNotificationV2CreateImmediateNotificationRequest } from '../model/aPIPostSingleNotificationV2CreateImmediateNotificationRequest';
 // @ts-ignore
-import { APIUpdateScheduledNotificationWriteRequestDTO } from '../model/aPIUpdateScheduledNotificationWriteRequestDTO';
+import { APIPostSingleNotificationV2CreateScheduledNotificationRequest } from '../model/aPIPostSingleNotificationV2CreateScheduledNotificationRequest';
+// @ts-ignore
+import { APIPutSingleNotificationV2UpdateScheduledNotificationRequest } from '../model/aPIPutSingleNotificationV2UpdateScheduledNotificationRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -74,20 +74,20 @@ export interface PatchSingleNotificationV2DeactivateScheduledNotificationRequest
 export interface PostSingleNotificationV2CreateImmediateNotificationRequestParams {
     ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
-    aPIImmediateNotificationWriteRequestDTO?: APIImmediateNotificationWriteRequestDTO;
+    aPIPostSingleNotificationV2CreateImmediateNotificationRequest?: APIPostSingleNotificationV2CreateImmediateNotificationRequest;
 }
 
 export interface PostSingleNotificationV2CreateScheduledNotificationRequestParams {
     ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
-    aPIScheduledNotificationWriteRequestDTO?: APIScheduledNotificationWriteRequestDTO;
+    aPIPostSingleNotificationV2CreateScheduledNotificationRequest?: APIPostSingleNotificationV2CreateScheduledNotificationRequest;
 }
 
 export interface PutSingleNotificationV2UpdateScheduledNotificationRequestParams {
     ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
     notificationUuid: string;
-    aPIUpdateScheduledNotificationWriteRequestDTO?: APIUpdateScheduledNotificationWriteRequestDTO;
+    aPIPutSingleNotificationV2UpdateScheduledNotificationRequest?: APIPutSingleNotificationV2UpdateScheduledNotificationRequest;
 }
 
 
@@ -590,7 +590,7 @@ export class NotificationV2Service {
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
             throw new Error('Required parameter ownerResourceUuid was null or undefined when calling postSingleNotificationV2CreateImmediateNotification.');
         }
-        const aPIImmediateNotificationWriteRequestDTO = requestParameters.aPIImmediateNotificationWriteRequestDTO;
+        const aPIPostSingleNotificationV2CreateImmediateNotificationRequest = requestParameters.aPIPostSingleNotificationV2CreateImmediateNotificationRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -636,7 +636,7 @@ export class NotificationV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIImmediateNotificationWriteRequestDTO,
+                body: aPIPostSingleNotificationV2CreateImmediateNotificationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -663,7 +663,7 @@ export class NotificationV2Service {
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
             throw new Error('Required parameter ownerResourceUuid was null or undefined when calling postSingleNotificationV2CreateScheduledNotification.');
         }
-        const aPIScheduledNotificationWriteRequestDTO = requestParameters.aPIScheduledNotificationWriteRequestDTO;
+        const aPIPostSingleNotificationV2CreateScheduledNotificationRequest = requestParameters.aPIPostSingleNotificationV2CreateScheduledNotificationRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -709,7 +709,7 @@ export class NotificationV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIScheduledNotificationWriteRequestDTO,
+                body: aPIPostSingleNotificationV2CreateScheduledNotificationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -740,7 +740,7 @@ export class NotificationV2Service {
         if (notificationUuid === null || notificationUuid === undefined) {
             throw new Error('Required parameter notificationUuid was null or undefined when calling putSingleNotificationV2UpdateScheduledNotification.');
         }
-        const aPIUpdateScheduledNotificationWriteRequestDTO = requestParameters.aPIUpdateScheduledNotificationWriteRequestDTO;
+        const aPIPutSingleNotificationV2UpdateScheduledNotificationRequest = requestParameters.aPIPutSingleNotificationV2UpdateScheduledNotificationRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -786,7 +786,7 @@ export class NotificationV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIUpdateScheduledNotificationWriteRequestDTO,
+                body: aPIPutSingleNotificationV2UpdateScheduledNotificationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

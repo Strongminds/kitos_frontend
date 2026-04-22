@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIContractTerminationTermsRequestDTO } from './contractTerminationTermsRequestDTO';
+import { APIContractTerminationDataWriteRequestDTOTerms } from './contractTerminationDataWriteRequestDTOTerms';
 
 
 export interface APIContractTerminationDataWriteRequestDTO { 
     terminatedAt?: string | null;
-    terms?: APIContractTerminationTermsRequestDTO;
+    terms?: APIContractTerminationDataWriteRequestDTOTerms | null;
 }
 

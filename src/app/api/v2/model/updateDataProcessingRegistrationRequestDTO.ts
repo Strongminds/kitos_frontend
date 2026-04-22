@@ -9,18 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APICreateDataProcessingRegistrationRequestDTOGeneral } from './createDataProcessingRegistrationRequestDTOGeneral';
+import { APICreateDataProcessingRegistrationRequestDTOOversight } from './createDataProcessingRegistrationRequestDTOOversight';
 import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
-import { APIDataProcessingRegistrationGeneralDataWriteRequestDTO } from './dataProcessingRegistrationGeneralDataWriteRequestDTO';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { APIDataProcessingRegistrationOversightWriteRequestDTO } from './dataProcessingRegistrationOversightWriteRequestDTO';
 
 
 export interface APIUpdateDataProcessingRegistrationRequestDTO { 
-    general?: APIDataProcessingRegistrationGeneralDataWriteRequestDTO;
-    systemUsageUuids?: Array<string> | null;
-    oversight?: APIDataProcessingRegistrationOversightWriteRequestDTO;
-    roles?: Array<APIRoleAssignmentRequestDTO> | null;
     name?: string | null;
     externalReferences?: Array<APIUpdateExternalReferenceDataWriteRequestDTO> | null;
+    general?: APICreateDataProcessingRegistrationRequestDTOGeneral | null;
+    systemUsageUuids?: Array<string> | null;
+    oversight?: APICreateDataProcessingRegistrationRequestDTOOversight | null;
+    roles?: Array<APIRoleAssignmentRequestDTO> | null;
 }
 

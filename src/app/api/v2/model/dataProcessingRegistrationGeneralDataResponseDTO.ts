@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { APIDataProcessorRegistrationSubDataProcessorResponseDTO } from './dataProcessorRegistrationSubDataProcessorResponseDTO';
+import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
 import { APIYesNoIrrelevantChoice } from './yesNoIrrelevantChoice';
@@ -17,20 +18,20 @@ import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponse
 
 
 export interface APIDataProcessingRegistrationGeneralDataResponseDTO { 
-    dataResponsible?: APIIdentityNamePairResponseDTO;
+    dataResponsible?: APIArchivingRegistrationsResponseDTOType | null;
     dataResponsibleRemark?: string | null;
-    isAgreementConcluded?: APIYesNoIrrelevantChoice;
+    isAgreementConcluded?: APIYesNoIrrelevantChoice | null;
     isAgreementConcludedRemark?: string | null;
     agreementConcludedAt?: string | null;
-    basisForTransfer?: APIIdentityNamePairResponseDTO;
-    transferToInsecureThirdCountries?: APIYesNoUndecidedChoice;
+    basisForTransfer?: APIArchivingRegistrationsResponseDTOType | null;
+    transferToInsecureThirdCountries?: APIYesNoUndecidedChoice | null;
     insecureCountriesSubjectToDataTransfer: Array<APIIdentityNamePairResponseDTO>;
     dataProcessors: Array<APIShallowOrganizationResponseDTO>;
-    hasSubDataProcessors?: APIYesNoUndecidedChoice;
+    hasSubDataProcessors?: APIYesNoUndecidedChoice | null;
     subDataProcessors: Array<APIDataProcessorRegistrationSubDataProcessorResponseDTO>;
     valid: boolean;
-    mainContract?: APIIdentityNamePairResponseDTO;
+    mainContract?: APIArchivingRegistrationsResponseDTOType | null;
     associatedContracts?: Array<APIIdentityNamePairResponseDTO> | null;
-    responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;
+    responsibleOrganizationUnit?: APIArchivingRegistrationsResponseDTOType | null;
 }
 

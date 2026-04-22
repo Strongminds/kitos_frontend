@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APISubDataProcessorDetailsDTO } from './subDataProcessorDetailsDTO';
+import { APIUpdateSubDataProcessorRequestDTODetails } from './updateSubDataProcessorRequestDTODetails';
 
 
 export interface APIUpdateSubDataProcessorRequestDTO { 
     organizationId: number;
-    details: APISubDataProcessorDetailsDTO;
+    details: APIUpdateSubDataProcessorRequestDTODetails;
 }
 

@@ -11,13 +11,13 @@
  */
 
 
-export type APIGdprCriticalityChoice = 0 | 1 | 2 | 3 | 4;
+export type APIGdprCriticalityChoice = 'NotCritical' | 'Low' | 'Medium' | 'High' | 'VeryHigh';
 
 export const APIGdprCriticalityChoice = {
-    NUMBER_0: 0 as APIGdprCriticalityChoice,
-    NUMBER_1: 1 as APIGdprCriticalityChoice,
-    NUMBER_2: 2 as APIGdprCriticalityChoice,
-    NUMBER_3: 3 as APIGdprCriticalityChoice,
-    NUMBER_4: 4 as APIGdprCriticalityChoice
+    NotCritical: 'NotCritical' as APIGdprCriticalityChoice,
+    Low: 'Low' as APIGdprCriticalityChoice,
+    Medium: 'Medium' as APIGdprCriticalityChoice,
+    High: 'High' as APIGdprCriticalityChoice,
+    VeryHigh: 'VeryHigh' as APIGdprCriticalityChoice
 };
 

@@ -9,24 +9,27 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIGeneralDataResponseDTONumberOfExpectedUsers } from './generalDataResponseDTONumberOfExpectedUsers';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
+import { APIGeneralDataUpdateRequestDTOValidity } from './generalDataUpdateRequestDTOValidity';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
-import { APIItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidityWriteRequestDTO';
 
 
 export interface APIGeneralDataUpdateRequestDTO { 
+    mainContractUuid?: string | null;
     localSystemId?: string | null;
     localCallName?: string | null;
     dataClassificationUuid?: string | null;
     notes?: string | null;
     systemVersion?: string | null;
-    numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
-    validity?: APIItSystemUsageValidityWriteRequestDTO;
-    containsAITechnology?: APIYesNoUndecidedChoice;
-    webAccessibilityCompliance?: APIYesNoPartiallyChoice;
+    numberOfExpectedUsers?: APIGeneralDataResponseDTONumberOfExpectedUsers | null;
+    validity?: APIGeneralDataUpdateRequestDTOValidity | null;
+    /**
+     *  (Supplier Field)
+     */
+    containsAITechnology?: APIYesNoUndecidedChoice | null;
+    webAccessibilityCompliance?: APIYesNoPartiallyChoice | null;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
-    mainContractUuid?: string | null;
 }
 

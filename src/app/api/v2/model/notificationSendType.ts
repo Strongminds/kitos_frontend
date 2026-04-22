@@ -11,10 +11,10 @@
  */
 
 
-export type APINotificationSendType = 0 | 1;
+export type APINotificationSendType = 'Immediate' | 'Repeat';
 
 export const APINotificationSendType = {
-    NUMBER_0: 0 as APINotificationSendType,
-    NUMBER_1: 1 as APINotificationSendType
+    Immediate: 'Immediate' as APINotificationSendType,
+    Repeat: 'Repeat' as APINotificationSendType
 };
 

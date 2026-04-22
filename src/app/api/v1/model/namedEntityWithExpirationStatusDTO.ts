@@ -12,8 +12,8 @@
 
 
 export interface APINamedEntityWithExpirationStatusDTO { 
+    expired?: boolean;
     id?: number;
     name?: string | null;
-    expired?: boolean;
 }
 

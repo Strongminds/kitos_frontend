@@ -10,7 +10,7 @@
  * Do not edit the class manually.
  */
 import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
-import { APIRecommendedArchiveDutyRequestDTO } from './recommendedArchiveDutyRequestDTO';
+import { APICreateItSystemRequestDTORecommendedArchiveDuty } from './createItSystemRequestDTORecommendedArchiveDuty';
 import { APIRegistrationScopeChoice } from './registrationScopeChoice';
 
 
@@ -24,8 +24,8 @@ export interface APICreateItSystemRequestDTO {
     businessTypeUuid?: string | null;
     kleUuids?: Array<string> | null;
     rightsHolderUuid?: string | null;
-    scope?: APIRegistrationScopeChoice;
-    recommendedArchiveDuty?: APIRecommendedArchiveDutyRequestDTO;
+    scope?: APIRegistrationScopeChoice | null;
+    recommendedArchiveDuty?: APICreateItSystemRequestDTORecommendedArchiveDuty | null;
     deactivated?: boolean;
 }
 

@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIChangeOrganizationUnitRegistrationV2RequestDTO } from '../model/aPIChangeOrganizationUnitRegistrationV2RequestDTO';
+import { APIDeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequest } from '../model/aPIDeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequest';
 // @ts-ignore
-import { APITransferOrganizationUnitRegistrationV2RequestDTO } from '../model/aPITransferOrganizationUnitRegistrationV2RequestDTO';
+import { APIPutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequest } from '../model/aPIPutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -31,7 +31,7 @@ import { Configuration }                                     from '../configurat
 export interface DeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequestParams {
     organizationUuid: string;
     unitUuid: string;
-    aPIChangeOrganizationUnitRegistrationV2RequestDTO?: APIChangeOrganizationUnitRegistrationV2RequestDTO;
+    aPIDeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequest?: APIDeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequest;
 }
 
 export interface GetSingleOrganizationUnitRegistrationInternalV2GetRegistrationsRequestParams {
@@ -42,7 +42,7 @@ export interface GetSingleOrganizationUnitRegistrationInternalV2GetRegistrations
 export interface PutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequestParams {
     organizationUuid: string;
     unitUuid: string;
-    aPITransferOrganizationUnitRegistrationV2RequestDTO?: APITransferOrganizationUnitRegistrationV2RequestDTO;
+    aPIPutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequest?: APIPutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequest;
 }
 
 
@@ -127,7 +127,7 @@ export class OrganizationUnitRegistrationInternalV2Service {
         if (unitUuid === null || unitUuid === undefined) {
             throw new Error('Required parameter unitUuid was null or undefined when calling deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations.');
         }
-        const aPIChangeOrganizationUnitRegistrationV2RequestDTO = requestParameters.aPIChangeOrganizationUnitRegistrationV2RequestDTO;
+        const aPIDeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequest = requestParameters.aPIDeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -172,7 +172,7 @@ export class OrganizationUnitRegistrationInternalV2Service {
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIChangeOrganizationUnitRegistrationV2RequestDTO,
+                body: aPIDeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -261,7 +261,7 @@ export class OrganizationUnitRegistrationInternalV2Service {
         if (unitUuid === null || unitUuid === undefined) {
             throw new Error('Required parameter unitUuid was null or undefined when calling putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations.');
         }
-        const aPITransferOrganizationUnitRegistrationV2RequestDTO = requestParameters.aPITransferOrganizationUnitRegistrationV2RequestDTO;
+        const aPIPutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequest = requestParameters.aPIPutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -307,7 +307,7 @@ export class OrganizationUnitRegistrationInternalV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPITransferOrganizationUnitRegistrationV2RequestDTO,
+                body: aPIPutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -11,11 +11,11 @@
  */
 
 
-export type APISystemDeleteConflict = 0 | 1 | 2;
+export type APISystemDeleteConflict = 'InUse' | 'HasChildren' | 'HasInterfaceExhibits';
 
 export const APISystemDeleteConflict = {
-    NUMBER_0: 0 as APISystemDeleteConflict,
-    NUMBER_1: 1 as APISystemDeleteConflict,
-    NUMBER_2: 2 as APISystemDeleteConflict
+    InUse: 'InUse' as APISystemDeleteConflict,
+    HasChildren: 'HasChildren' as APISystemDeleteConflict,
+    HasInterfaceExhibits: 'HasInterfaceExhibits' as APISystemDeleteConflict
 };
 

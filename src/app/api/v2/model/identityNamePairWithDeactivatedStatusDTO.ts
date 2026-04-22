@@ -12,8 +12,8 @@
 
 
 export interface APIIdentityNamePairWithDeactivatedStatusDTO { 
+    deactivated: boolean;
     uuid: string;
     name: string;
-    deactivated: boolean;
 }
 

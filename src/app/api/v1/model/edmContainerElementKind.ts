@@ -11,13 +11,13 @@
  */
 
 
-export type APIEdmContainerElementKind = 0 | 1 | 2 | 3 | 4;
+export type APIEdmContainerElementKind = 'None' | 'EntitySet' | 'ActionImport' | 'FunctionImport' | 'Singleton';
 
 export const APIEdmContainerElementKind = {
-    NUMBER_0: 0 as APIEdmContainerElementKind,
-    NUMBER_1: 1 as APIEdmContainerElementKind,
-    NUMBER_2: 2 as APIEdmContainerElementKind,
-    NUMBER_3: 3 as APIEdmContainerElementKind,
-    NUMBER_4: 4 as APIEdmContainerElementKind
+    None: 'None' as APIEdmContainerElementKind,
+    EntitySet: 'EntitySet' as APIEdmContainerElementKind,
+    ActionImport: 'ActionImport' as APIEdmContainerElementKind,
+    FunctionImport: 'FunctionImport' as APIEdmContainerElementKind,
+    Singleton: 'Singleton' as APIEdmContainerElementKind
 };
 

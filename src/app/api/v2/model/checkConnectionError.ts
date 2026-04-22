@@ -11,14 +11,14 @@
  */
 
 
-export type APICheckConnectionError = 0 | 1 | 2 | 3 | 4 | 5;
+export type APICheckConnectionError = 'InvalidCvrOnOrganization' | 'MissingServiceAgreement' | 'ExistingServiceAgreementIssue' | 'Unknown' | 'UserContextDoesNotExistOnSystem' | 'FailedToLookupOrganizationCompany';
 
 export const APICheckConnectionError = {
-    NUMBER_0: 0 as APICheckConnectionError,
-    NUMBER_1: 1 as APICheckConnectionError,
-    NUMBER_2: 2 as APICheckConnectionError,
-    NUMBER_3: 3 as APICheckConnectionError,
-    NUMBER_4: 4 as APICheckConnectionError,
-    NUMBER_5: 5 as APICheckConnectionError
+    InvalidCvrOnOrganization: 'InvalidCvrOnOrganization' as APICheckConnectionError,
+    MissingServiceAgreement: 'MissingServiceAgreement' as APICheckConnectionError,
+    ExistingServiceAgreementIssue: 'ExistingServiceAgreementIssue' as APICheckConnectionError,
+    Unknown: 'Unknown' as APICheckConnectionError,
+    UserContextDoesNotExistOnSystem: 'UserContextDoesNotExistOnSystem' as APICheckConnectionError,
+    FailedToLookupOrganizationCompany: 'FailedToLookupOrganizationCompany' as APICheckConnectionError
 };
 

@@ -21,9 +21,9 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
-import { APICreateDataProcessingRegistrationRequestDTO } from '../model/aPICreateDataProcessingRegistrationRequestDTO';
+import { APIPostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequest } from '../model/aPIPostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequest';
 // @ts-ignore
-import { APIUpdateDataProcessingRegistrationRequestDTO } from '../model/aPIUpdateDataProcessingRegistrationRequestDTO';
+import { APIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest } from '../model/aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -63,16 +63,16 @@ export interface GetSingleDataProcessingRegistrationV2GetDataProcessingRegistrat
 
 export interface PatchSingleDataProcessingRegistrationV2PatchDataProcessingRegistrationRequestParams {
     uuid: string;
-    aPIUpdateDataProcessingRegistrationRequestDTO?: APIUpdateDataProcessingRegistrationRequestDTO;
+    aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest?: APIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest;
 }
 
 export interface PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams {
-    aPICreateDataProcessingRegistrationRequestDTO?: APICreateDataProcessingRegistrationRequestDTO;
+    aPIPostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequest?: APIPostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequest;
 }
 
 export interface PutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequestParams {
     uuid: string;
-    aPIUpdateDataProcessingRegistrationRequestDTO?: APIUpdateDataProcessingRegistrationRequestDTO;
+    aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest?: APIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest;
 }
 
 
@@ -508,7 +508,7 @@ export class DataProcessingRegistrationV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration.');
         }
-        const aPIUpdateDataProcessingRegistrationRequestDTO = requestParameters.aPIUpdateDataProcessingRegistrationRequestDTO;
+        const aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest = requestParameters.aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -555,7 +555,7 @@ export class DataProcessingRegistrationV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIUpdateDataProcessingRegistrationRequestDTO,
+                body: aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -574,7 +574,7 @@ export class DataProcessingRegistrationV2Service {
     public postSingleDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleDataProcessingRegistrationV2PostDataProcessingRegistration(requestParameters: PostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPICreateDataProcessingRegistrationRequestDTO = requestParameters.aPICreateDataProcessingRegistrationRequestDTO;
+        const aPIPostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequest = requestParameters.aPIPostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -620,7 +620,7 @@ export class DataProcessingRegistrationV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPICreateDataProcessingRegistrationRequestDTO,
+                body: aPIPostSingleDataProcessingRegistrationV2PostDataProcessingRegistrationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -643,7 +643,7 @@ export class DataProcessingRegistrationV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling putSingleDataProcessingRegistrationV2PutDataProcessingRegistration.');
         }
-        const aPIUpdateDataProcessingRegistrationRequestDTO = requestParameters.aPIUpdateDataProcessingRegistrationRequestDTO;
+        const aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest = requestParameters.aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -689,7 +689,7 @@ export class DataProcessingRegistrationV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIUpdateDataProcessingRegistrationRequestDTO,
+                body: aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

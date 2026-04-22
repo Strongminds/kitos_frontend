@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
+import { APIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest } from '../model/aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest';
 // @ts-ignore
-import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
+import { APIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest } from '../model/aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -30,11 +30,11 @@ import { Configuration }                                     from '../configurat
 
 export interface PatchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityTypeRequestParams {
     optionUuid: string;
-    aPIGlobalRegularOptionUpdateRequestDTO?: APIGlobalRegularOptionUpdateRequestDTO;
+    aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest?: APIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest;
 }
 
 export interface PostSingleItContractGlobalCriticalityTypesInternalV2CreateGlobalCriticalityTypeRequestParams {
-    aPIGlobalRegularOptionCreateRequestDTO?: APIGlobalRegularOptionCreateRequestDTO;
+    aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest?: APIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest;
 }
 
 
@@ -168,7 +168,7 @@ export class ItContractGlobalCriticalityTypesInternalV2Service {
         if (optionUuid === null || optionUuid === undefined) {
             throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType.');
         }
-        const aPIGlobalRegularOptionUpdateRequestDTO = requestParameters.aPIGlobalRegularOptionUpdateRequestDTO;
+        const aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest = requestParameters.aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -215,7 +215,7 @@ export class ItContractGlobalCriticalityTypesInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIGlobalRegularOptionUpdateRequestDTO,
+                body: aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -234,7 +234,7 @@ export class ItContractGlobalCriticalityTypesInternalV2Service {
     public postSingleItContractGlobalCriticalityTypesInternalV2CreateGlobalCriticalityType(requestParameters: PostSingleItContractGlobalCriticalityTypesInternalV2CreateGlobalCriticalityTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleItContractGlobalCriticalityTypesInternalV2CreateGlobalCriticalityType(requestParameters: PostSingleItContractGlobalCriticalityTypesInternalV2CreateGlobalCriticalityTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItContractGlobalCriticalityTypesInternalV2CreateGlobalCriticalityType(requestParameters: PostSingleItContractGlobalCriticalityTypesInternalV2CreateGlobalCriticalityTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
+        const aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest = requestParameters.aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -280,7 +280,7 @@ export class ItContractGlobalCriticalityTypesInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIGlobalRegularOptionCreateRequestDTO,
+                body: aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

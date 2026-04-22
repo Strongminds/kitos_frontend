@@ -11,12 +11,12 @@
  */
 
 
-export type APIOrganizationType = 1 | 2 | 3 | 4;
+export type APIOrganizationType = 'Municipality' | 'CommunityOfInterest' | 'Company' | 'OtherPublicAuthority';
 
 export const APIOrganizationType = {
-    NUMBER_1: 1 as APIOrganizationType,
-    NUMBER_2: 2 as APIOrganizationType,
-    NUMBER_3: 3 as APIOrganizationType,
-    NUMBER_4: 4 as APIOrganizationType
+    Municipality: 'Municipality' as APIOrganizationType,
+    CommunityOfInterest: 'CommunityOfInterest' as APIOrganizationType,
+    Company: 'Company' as APIOrganizationType,
+    OtherPublicAuthority: 'OtherPublicAuthority' as APIOrganizationType
 };
 

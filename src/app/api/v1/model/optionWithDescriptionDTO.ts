@@ -12,8 +12,8 @@
 
 
 export interface APIOptionWithDescriptionDTO { 
+    description?: string | null;
     id?: number;
     name?: string | null;
-    description?: string | null;
 }
 

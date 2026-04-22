@@ -11,34 +11,34 @@
  */
 
 
-export type APIEdmExpressionKind = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25;
+export type APIEdmExpressionKind = 'None' | 'BinaryConstant' | 'BooleanConstant' | 'DateTimeOffsetConstant' | 'DecimalConstant' | 'FloatingConstant' | 'GuidConstant' | 'IntegerConstant' | 'StringConstant' | 'DurationConstant' | 'Null' | 'Record' | 'Collection' | 'Path' | 'If' | 'Cast' | 'IsOf' | 'FunctionApplication' | 'LabeledExpressionReference' | 'Labeled' | 'PropertyPath' | 'NavigationPropertyPath' | 'DateConstant' | 'TimeOfDayConstant' | 'EnumMember' | 'AnnotationPath';
 
 export const APIEdmExpressionKind = {
-    NUMBER_0: 0 as APIEdmExpressionKind,
-    NUMBER_1: 1 as APIEdmExpressionKind,
-    NUMBER_2: 2 as APIEdmExpressionKind,
-    NUMBER_3: 3 as APIEdmExpressionKind,
-    NUMBER_4: 4 as APIEdmExpressionKind,
-    NUMBER_5: 5 as APIEdmExpressionKind,
-    NUMBER_6: 6 as APIEdmExpressionKind,
-    NUMBER_7: 7 as APIEdmExpressionKind,
-    NUMBER_8: 8 as APIEdmExpressionKind,
-    NUMBER_9: 9 as APIEdmExpressionKind,
-    NUMBER_10: 10 as APIEdmExpressionKind,
-    NUMBER_11: 11 as APIEdmExpressionKind,
-    NUMBER_12: 12 as APIEdmExpressionKind,
-    NUMBER_13: 13 as APIEdmExpressionKind,
-    NUMBER_14: 14 as APIEdmExpressionKind,
-    NUMBER_15: 15 as APIEdmExpressionKind,
-    NUMBER_16: 16 as APIEdmExpressionKind,
-    NUMBER_17: 17 as APIEdmExpressionKind,
-    NUMBER_18: 18 as APIEdmExpressionKind,
-    NUMBER_19: 19 as APIEdmExpressionKind,
-    NUMBER_20: 20 as APIEdmExpressionKind,
-    NUMBER_21: 21 as APIEdmExpressionKind,
-    NUMBER_22: 22 as APIEdmExpressionKind,
-    NUMBER_23: 23 as APIEdmExpressionKind,
-    NUMBER_24: 24 as APIEdmExpressionKind,
-    NUMBER_25: 25 as APIEdmExpressionKind
+    None: 'None' as APIEdmExpressionKind,
+    BinaryConstant: 'BinaryConstant' as APIEdmExpressionKind,
+    BooleanConstant: 'BooleanConstant' as APIEdmExpressionKind,
+    DateTimeOffsetConstant: 'DateTimeOffsetConstant' as APIEdmExpressionKind,
+    DecimalConstant: 'DecimalConstant' as APIEdmExpressionKind,
+    FloatingConstant: 'FloatingConstant' as APIEdmExpressionKind,
+    GuidConstant: 'GuidConstant' as APIEdmExpressionKind,
+    IntegerConstant: 'IntegerConstant' as APIEdmExpressionKind,
+    StringConstant: 'StringConstant' as APIEdmExpressionKind,
+    DurationConstant: 'DurationConstant' as APIEdmExpressionKind,
+    Null: 'Null' as APIEdmExpressionKind,
+    Record: 'Record' as APIEdmExpressionKind,
+    Collection: 'Collection' as APIEdmExpressionKind,
+    Path: 'Path' as APIEdmExpressionKind,
+    If: 'If' as APIEdmExpressionKind,
+    Cast: 'Cast' as APIEdmExpressionKind,
+    IsOf: 'IsOf' as APIEdmExpressionKind,
+    FunctionApplication: 'FunctionApplication' as APIEdmExpressionKind,
+    LabeledExpressionReference: 'LabeledExpressionReference' as APIEdmExpressionKind,
+    Labeled: 'Labeled' as APIEdmExpressionKind,
+    PropertyPath: 'PropertyPath' as APIEdmExpressionKind,
+    NavigationPropertyPath: 'NavigationPropertyPath' as APIEdmExpressionKind,
+    DateConstant: 'DateConstant' as APIEdmExpressionKind,
+    TimeOfDayConstant: 'TimeOfDayConstant' as APIEdmExpressionKind,
+    EnumMember: 'EnumMember' as APIEdmExpressionKind,
+    AnnotationPath: 'AnnotationPath' as APIEdmExpressionKind
 };
 

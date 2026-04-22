@@ -14,6 +14,6 @@ import { APIRecommendedArchiveDutyChoice } from './recommendedArchiveDutyChoice'
 
 export interface APIRecommendedArchiveDutyRequestDTO { 
     comment?: string | null;
-    id?: APIRecommendedArchiveDutyChoice;
+    id?: APIRecommendedArchiveDutyChoice | null;
 }
 

@@ -11,11 +11,11 @@
  */
 
 
-export type APIOwnerResourceType = 0 | 1 | 2;
+export type APIOwnerResourceType = 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
 
 export const APIOwnerResourceType = {
-    NUMBER_0: 0 as APIOwnerResourceType,
-    NUMBER_1: 1 as APIOwnerResourceType,
-    NUMBER_2: 2 as APIOwnerResourceType
+    ItContract: 'ItContract' as APIOwnerResourceType,
+    ItSystemUsage: 'ItSystemUsage' as APIOwnerResourceType,
+    DataProcessingRegistration: 'DataProcessingRegistration' as APIOwnerResourceType
 };
 

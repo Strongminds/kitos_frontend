@@ -12,40 +12,46 @@
 import { APIGdprCriticalityChoice } from './gdprCriticalityChoice';
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APITechnicalPrecautionChoice } from './technicalPrecautionChoice';
+import { APICreateOversightDateDTOOversightReportLink } from './createOversightDateDTOOversightReportLink';
 import { APIDataSensitivityLevelChoice } from './dataSensitivityLevelChoice';
 import { APIHostingChoice } from './hostingChoice';
-import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIGDPRPersonalDataChoice } from './gDPRPersonalDataChoice';
 import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
 export interface APIGDPRWriteRequestDTO { 
     purpose?: string | null;
-    businessCritical?: APIYesNoDontKnowChoice;
-    hostedAt?: APIHostingChoice;
-    directoryDocumentation?: APISimpleLinkDTO;
+    businessCritical?: APIYesNoDontKnowChoice | null;
+    hostedAt?: APIHostingChoice | null;
+    directoryDocumentation?: APICreateOversightDateDTOOversightReportLink | null;
     dataSensitivityLevels?: Array<APIDataSensitivityLevelChoice> | null;
     sensitivePersonDataUuids?: Array<string> | null;
     specificPersonalData?: Array<APIGDPRPersonalDataChoice> | null;
     registeredDataCategoryUuids?: Array<string> | null;
-    technicalPrecautionsInPlace?: APIYesNoDontKnowChoice;
+    technicalPrecautionsInPlace?: APIYesNoDontKnowChoice | null;
     technicalPrecautionsApplied?: Array<APITechnicalPrecautionChoice> | null;
-    technicalPrecautionsDocumentation?: APISimpleLinkDTO;
-    userSupervision?: APIYesNoDontKnowChoice;
+    technicalPrecautionsDocumentation?: APICreateOversightDateDTOOversightReportLink | null;
+    userSupervision?: APIYesNoDontKnowChoice | null;
     userSupervisionDate?: string | null;
-    userSupervisionDocumentation?: APISimpleLinkDTO;
-    riskAssessmentConducted?: APIYesNoDontKnowChoice;
+    userSupervisionDocumentation?: APICreateOversightDateDTOOversightReportLink | null;
+    riskAssessmentConducted?: APIYesNoDontKnowChoice | null;
     riskAssessmentConductedDate?: string | null;
-    riskAssessmentResult?: APIRiskLevelChoice;
+    /**
+     *  (Supplier Field)
+     */
+    riskAssessmentResult?: APIRiskLevelChoice | null;
     plannedRiskAssessmentDate?: string | null;
-    riskAssessmentDocumentation?: APISimpleLinkDTO;
+    riskAssessmentDocumentation?: APICreateOversightDateDTOOversightReportLink | null;
     riskAssessmentNotes?: string | null;
-    dpiaConducted?: APIYesNoDontKnowChoice;
+    dpiaConducted?: APIYesNoDontKnowChoice | null;
     dpiaDate?: string | null;
-    dpiaDocumentation?: APISimpleLinkDTO;
-    retentionPeriodDefined?: APIYesNoDontKnowChoice;
+    dpiaDocumentation?: APICreateOversightDateDTOOversightReportLink | null;
+    retentionPeriodDefined?: APIYesNoDontKnowChoice | null;
     nextDataRetentionEvaluationDate?: string | null;
     dataRetentionEvaluationFrequencyInMonths?: number | null;
-    gdprCriticality?: APIGdprCriticalityChoice;
+    /**
+     *  (Supplier Field)
+     */
+    gdprCriticality?: APIGdprCriticalityChoice | null;
 }
 

@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIEdmEntityContainer } from './iEdmEntityContainer';
 import { APIEdmContainerElementKind } from './edmContainerElementKind';
+import { APIIEdmEntityContainerElementContainer } from './iEdmEntityContainerElementContainer';
 
 
 export interface APIIEdmEntityContainerElement { 
+    readonly containerElementKind?: APIEdmContainerElementKind;
+    container?: APIIEdmEntityContainerElementContainer | null;
     readonly name?: string | null;
-    containerElementKind?: APIEdmContainerElementKind;
-    container?: APIIEdmEntityContainer;
 }
 

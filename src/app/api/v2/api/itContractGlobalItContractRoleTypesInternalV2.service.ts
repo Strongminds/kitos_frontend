@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIGlobalRoleOptionCreateRequestDTO } from '../model/aPIGlobalRoleOptionCreateRequestDTO';
+import { APIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest } from '../model/aPIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest';
 // @ts-ignore
-import { APIGlobalRoleOptionUpdateRequestDTO } from '../model/aPIGlobalRoleOptionUpdateRequestDTO';
+import { APIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest } from '../model/aPIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -30,11 +30,11 @@ import { Configuration }                                     from '../configurat
 
 export interface PatchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleTypeRequestParams {
     optionUuid: string;
-    aPIGlobalRoleOptionUpdateRequestDTO?: APIGlobalRoleOptionUpdateRequestDTO;
+    aPIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest?: APIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest;
 }
 
 export interface PostSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleTypeRequestParams {
-    aPIGlobalRoleOptionCreateRequestDTO?: APIGlobalRoleOptionCreateRequestDTO;
+    aPIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest?: APIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest;
 }
 
 
@@ -168,7 +168,7 @@ export class ItContractGlobalItContractRoleTypesInternalV2Service {
         if (optionUuid === null || optionUuid === undefined) {
             throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleType.');
         }
-        const aPIGlobalRoleOptionUpdateRequestDTO = requestParameters.aPIGlobalRoleOptionUpdateRequestDTO;
+        const aPIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest = requestParameters.aPIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -215,7 +215,7 @@ export class ItContractGlobalItContractRoleTypesInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIGlobalRoleOptionUpdateRequestDTO,
+                body: aPIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -234,7 +234,7 @@ export class ItContractGlobalItContractRoleTypesInternalV2Service {
     public postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(requestParameters: PostSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(requestParameters: PostSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(requestParameters: PostSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIGlobalRoleOptionCreateRequestDTO = requestParameters.aPIGlobalRoleOptionCreateRequestDTO;
+        const aPIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest = requestParameters.aPIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -280,7 +280,7 @@ export class ItContractGlobalItContractRoleTypesInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIGlobalRoleOptionCreateRequestDTO,
+                body: aPIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

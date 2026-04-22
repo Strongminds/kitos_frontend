@@ -19,11 +19,11 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APICreateUserRequestDTO } from '../model/aPICreateUserRequestDTO';
+import { APIPatchSingleUsersInternalV2PatchUserRequest } from '../model/aPIPatchSingleUsersInternalV2PatchUserRequest';
 // @ts-ignore
-import { APIMutateUserRightsRequestDTO } from '../model/aPIMutateUserRightsRequestDTO';
+import { APIPostSingleUsersInternalV2CopyRolesRequest } from '../model/aPIPostSingleUsersInternalV2CopyRolesRequest';
 // @ts-ignore
-import { APIUpdateUserRequestDTO } from '../model/aPIUpdateUserRequestDTO';
+import { APIPostSingleUsersInternalV2CreateUserRequest } from '../model/aPIPostSingleUsersInternalV2CreateUserRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -63,19 +63,19 @@ export interface PatchSingleUsersInternalV2PatchDefaultOrgUnitRequestParams {
 export interface PatchSingleUsersInternalV2PatchUserRequestParams {
     organizationUuid: string;
     userUuid: string;
-    aPIUpdateUserRequestDTO?: APIUpdateUserRequestDTO;
+    aPIPatchSingleUsersInternalV2PatchUserRequest?: APIPatchSingleUsersInternalV2PatchUserRequest;
 }
 
 export interface PostSingleUsersInternalV2CopyRolesRequestParams {
     organizationUuid: string;
     fromUserUuid: string;
     toUserUuid: string;
-    aPIMutateUserRightsRequestDTO?: APIMutateUserRightsRequestDTO;
+    aPIPostSingleUsersInternalV2CopyRolesRequest?: APIPostSingleUsersInternalV2CopyRolesRequest;
 }
 
 export interface PostSingleUsersInternalV2CreateUserRequestParams {
     organizationUuid: string;
-    aPICreateUserRequestDTO?: APICreateUserRequestDTO;
+    aPIPostSingleUsersInternalV2CreateUserRequest?: APIPostSingleUsersInternalV2CreateUserRequest;
 }
 
 export interface PostSingleUsersInternalV2SendNotificationRequestParams {
@@ -87,7 +87,7 @@ export interface PostSingleUsersInternalV2TransferRolesRequestParams {
     organizationUuid: string;
     fromUserUuid: string;
     toUserUuid: string;
-    aPIMutateUserRightsRequestDTO?: APIMutateUserRightsRequestDTO;
+    aPIPostSingleUsersInternalV2CopyRolesRequest?: APIPostSingleUsersInternalV2CopyRolesRequest;
 }
 
 
@@ -547,7 +547,7 @@ export class UsersInternalV2Service {
         if (userUuid === null || userUuid === undefined) {
             throw new Error('Required parameter userUuid was null or undefined when calling patchSingleUsersInternalV2PatchUser.');
         }
-        const aPIUpdateUserRequestDTO = requestParameters.aPIUpdateUserRequestDTO;
+        const aPIPatchSingleUsersInternalV2PatchUserRequest = requestParameters.aPIPatchSingleUsersInternalV2PatchUserRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -594,7 +594,7 @@ export class UsersInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIUpdateUserRequestDTO,
+                body: aPIPatchSingleUsersInternalV2PatchUserRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -625,7 +625,7 @@ export class UsersInternalV2Service {
         if (toUserUuid === null || toUserUuid === undefined) {
             throw new Error('Required parameter toUserUuid was null or undefined when calling postSingleUsersInternalV2CopyRoles.');
         }
-        const aPIMutateUserRightsRequestDTO = requestParameters.aPIMutateUserRightsRequestDTO;
+        const aPIPostSingleUsersInternalV2CopyRolesRequest = requestParameters.aPIPostSingleUsersInternalV2CopyRolesRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -671,7 +671,7 @@ export class UsersInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIMutateUserRightsRequestDTO,
+                body: aPIPostSingleUsersInternalV2CopyRolesRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -694,7 +694,7 @@ export class UsersInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleUsersInternalV2CreateUser.');
         }
-        const aPICreateUserRequestDTO = requestParameters.aPICreateUserRequestDTO;
+        const aPIPostSingleUsersInternalV2CreateUserRequest = requestParameters.aPIPostSingleUsersInternalV2CreateUserRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -740,7 +740,7 @@ export class UsersInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPICreateUserRequestDTO,
+                body: aPIPostSingleUsersInternalV2CreateUserRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -833,7 +833,7 @@ export class UsersInternalV2Service {
         if (toUserUuid === null || toUserUuid === undefined) {
             throw new Error('Required parameter toUserUuid was null or undefined when calling postSingleUsersInternalV2TransferRoles.');
         }
-        const aPIMutateUserRightsRequestDTO = requestParameters.aPIMutateUserRightsRequestDTO;
+        const aPIPostSingleUsersInternalV2CopyRolesRequest = requestParameters.aPIPostSingleUsersInternalV2CopyRolesRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -879,7 +879,7 @@ export class UsersInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIMutateUserRightsRequestDTO,
+                body: aPIPostSingleUsersInternalV2CopyRolesRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

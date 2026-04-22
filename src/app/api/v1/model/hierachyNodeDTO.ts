@@ -12,8 +12,8 @@
 
 
 export interface APIHierachyNodeDTO { 
+    parentId?: number | null;
     id?: number;
     name?: string | null;
-    parentId?: number | null;
 }
 

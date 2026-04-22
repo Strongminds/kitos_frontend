@@ -9,12 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
 
 
 export interface APIRightsHolderItInterfaceResponseDTO { 
     uuid: string;
-    exposedBySystem?: APIIdentityNamePairResponseDTO;
+    exposedBySystem?: APIArchivingRegistrationsResponseDTOType | null;
     name: string;
     interfaceId?: string | null;
     version?: string | null;
@@ -23,6 +24,6 @@ export interface APIRightsHolderItInterfaceResponseDTO {
     urlReference?: string | null;
     deactivated: boolean;
     created: string;
-    createdBy: APIIdentityNamePairResponseDTO;
+    createdBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
 }
 

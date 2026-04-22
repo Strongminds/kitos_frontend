@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIEdmTerm } from './iEdmTerm';
-import { APIIEdmExpression } from './iEdmExpression';
+import { APIIEdmVocabularyAnnotationValue } from './iEdmVocabularyAnnotationValue';
+import { APIIEdmVocabularyAnnotationTerm } from './iEdmVocabularyAnnotationTerm';
 
 
 export interface APIIEdmVocabularyAnnotation { 
     readonly qualifier?: string | null;
-    term?: APIIEdmTerm;
-    target?: object;
-    value?: APIIEdmExpression;
+    term?: APIIEdmVocabularyAnnotationTerm | null;
+    readonly target?: object | null;
+    value?: APIIEdmVocabularyAnnotationValue | null;
     readonly usesDefault?: boolean;
 }
 

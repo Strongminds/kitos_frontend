@@ -12,11 +12,11 @@
 
 
 export interface APIDataProcessingBusinessRoleDTO { 
-    id?: number;
-    name?: string | null;
-    expired?: boolean;
+    uuid?: string;
     hasWriteAccess?: boolean;
     note?: string | null;
-    uuid?: string;
+    expired?: boolean;
+    id?: number;
+    name?: string | null;
 }
 

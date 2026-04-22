@@ -12,10 +12,10 @@
 
 
 export interface APIJournalPeriodResponseDTO { 
+    uuid: string;
     archiveId: string;
     startDate: string;
     endDate: string;
     approved: boolean;
-    uuid: string;
 }
 

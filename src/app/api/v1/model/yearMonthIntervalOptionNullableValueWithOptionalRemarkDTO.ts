@@ -13,7 +13,7 @@ import { APIYearMonthIntervalOption } from './yearMonthIntervalOption';
 
 
 export interface APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO { 
-    value?: APIYearMonthIntervalOption;
+    value?: APIYearMonthIntervalOption | null;
     remark?: string | null;
 }
 

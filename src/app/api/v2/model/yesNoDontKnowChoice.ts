@@ -11,12 +11,12 @@
  */
 
 
-export type APIYesNoDontKnowChoice = 0 | 1 | 2 | 3;
+export type APIYesNoDontKnowChoice = 'No' | 'Yes' | 'DontKnow' | 'Undecided';
 
 export const APIYesNoDontKnowChoice = {
-    NUMBER_0: 0 as APIYesNoDontKnowChoice,
-    NUMBER_1: 1 as APIYesNoDontKnowChoice,
-    NUMBER_2: 2 as APIYesNoDontKnowChoice,
-    NUMBER_3: 3 as APIYesNoDontKnowChoice
+    No: 'No' as APIYesNoDontKnowChoice,
+    Yes: 'Yes' as APIYesNoDontKnowChoice,
+    DontKnow: 'DontKnow' as APIYesNoDontKnowChoice,
+    Undecided: 'Undecided' as APIYesNoDontKnowChoice
 };
 

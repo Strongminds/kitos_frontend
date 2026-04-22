@@ -11,12 +11,12 @@
  */
 
 
-export type APIItContractValidationErrorChoice = 0 | 1 | 2 | 3;
+export type APIItContractValidationErrorChoice = 'StartDateNotPassed' | 'EndDatePassed' | 'TerminationPeriodExceeded' | 'InvalidParentContract';
 
 export const APIItContractValidationErrorChoice = {
-    NUMBER_0: 0 as APIItContractValidationErrorChoice,
-    NUMBER_1: 1 as APIItContractValidationErrorChoice,
-    NUMBER_2: 2 as APIItContractValidationErrorChoice,
-    NUMBER_3: 3 as APIItContractValidationErrorChoice
+    StartDateNotPassed: 'StartDateNotPassed' as APIItContractValidationErrorChoice,
+    EndDatePassed: 'EndDatePassed' as APIItContractValidationErrorChoice,
+    TerminationPeriodExceeded: 'TerminationPeriodExceeded' as APIItContractValidationErrorChoice,
+    InvalidParentContract: 'InvalidParentContract' as APIItContractValidationErrorChoice
 };
 

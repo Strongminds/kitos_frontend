@@ -12,8 +12,8 @@
 
 
 export interface APIItSystemSearchResponseDTO { 
+    deactivated: boolean;
     uuid: string;
     name: string;
-    deactivated: boolean;
 }
 

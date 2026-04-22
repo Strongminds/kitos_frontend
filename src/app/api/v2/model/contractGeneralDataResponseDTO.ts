@@ -9,17 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { APIContractValidityResponseDTO } from './contractValidityResponseDTO';
+import { APIContractGeneralDataResponseDTOValidity } from './contractGeneralDataResponseDTOValidity';
 
 
 export interface APIContractGeneralDataResponseDTO { 
     contractId?: string | null;
-    contractType?: APIIdentityNamePairResponseDTO;
-    contractTemplate?: APIIdentityNamePairResponseDTO;
+    contractType?: APIArchivingRegistrationsResponseDTOType | null;
+    contractTemplate?: APIArchivingRegistrationsResponseDTOType | null;
     agreementElements: Array<APIIdentityNamePairResponseDTO>;
     notes?: string | null;
-    validity: APIContractValidityResponseDTO;
-    criticality?: APIIdentityNamePairResponseDTO;
+    validity: APIContractGeneralDataResponseDTOValidity;
+    criticality?: APIArchivingRegistrationsResponseDTOType | null;
 }
 

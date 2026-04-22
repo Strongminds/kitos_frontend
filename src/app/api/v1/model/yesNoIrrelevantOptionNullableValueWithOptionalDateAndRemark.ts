@@ -13,7 +13,7 @@ import { APIYesNoIrrelevantOption } from './yesNoIrrelevantOption';
 
 
 export interface APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark { 
-    value?: APIYesNoIrrelevantOption;
+    value?: APIYesNoIrrelevantOption | null;
     optionalDateValue?: string | null;
     remark?: string | null;
 }

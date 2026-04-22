@@ -11,11 +11,11 @@
  */
 
 
-export type APISystemDeletionConflict = 0 | 1 | 2;
+export type APISystemDeletionConflict = 'HasItSystemUsages' | 'HasChildSystems' | 'HasInterfaceExposures';
 
 export const APISystemDeletionConflict = {
-    NUMBER_0: 0 as APISystemDeletionConflict,
-    NUMBER_1: 1 as APISystemDeletionConflict,
-    NUMBER_2: 2 as APISystemDeletionConflict
+    HasItSystemUsages: 'HasItSystemUsages' as APISystemDeletionConflict,
+    HasChildSystems: 'HasChildSystems' as APISystemDeletionConflict,
+    HasInterfaceExposures: 'HasInterfaceExposures' as APISystemDeletionConflict
 };
 

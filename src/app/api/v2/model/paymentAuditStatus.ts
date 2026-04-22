@@ -11,12 +11,12 @@
  */
 
 
-export type APIPaymentAuditStatus = 0 | 1 | 2 | 3;
+export type APIPaymentAuditStatus = 'White' | 'Red' | 'Yellow' | 'Green';
 
 export const APIPaymentAuditStatus = {
-    NUMBER_0: 0 as APIPaymentAuditStatus,
-    NUMBER_1: 1 as APIPaymentAuditStatus,
-    NUMBER_2: 2 as APIPaymentAuditStatus,
-    NUMBER_3: 3 as APIPaymentAuditStatus
+    White: 'White' as APIPaymentAuditStatus,
+    Red: 'Red' as APIPaymentAuditStatus,
+    Yellow: 'Yellow' as APIPaymentAuditStatus,
+    Green: 'Green' as APIPaymentAuditStatus
 };
 

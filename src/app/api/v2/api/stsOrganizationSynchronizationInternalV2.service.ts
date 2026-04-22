@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIConnectToStsOrganizationRequestDTO } from '../model/aPIConnectToStsOrganizationRequestDTO';
+import { APIDeleteSingleStsOrganizationSynchronizationInternalV2DisconnectRequest } from '../model/aPIDeleteSingleStsOrganizationSynchronizationInternalV2DisconnectRequest';
 // @ts-ignore
-import { APIDisconnectFromStsOrganizationRequestDTO } from '../model/aPIDisconnectFromStsOrganizationRequestDTO';
+import { APIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest } from '../model/aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -34,7 +34,7 @@ export interface DeleteSingleStsOrganizationSynchronizationInternalV2DeleteSubsc
 
 export interface DeleteSingleStsOrganizationSynchronizationInternalV2DisconnectRequestParams {
     organizationUuid: string;
-    aPIDisconnectFromStsOrganizationRequestDTO?: APIDisconnectFromStsOrganizationRequestDTO;
+    aPIDeleteSingleStsOrganizationSynchronizationInternalV2DisconnectRequest?: APIDeleteSingleStsOrganizationSynchronizationInternalV2DisconnectRequest;
 }
 
 export interface GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams {
@@ -58,12 +58,12 @@ export interface GetSingleStsOrganizationSynchronizationInternalV2GetUpdateConse
 
 export interface PostSingleStsOrganizationSynchronizationInternalV2CreateConnectionRequestParams {
     organizationUuid: string;
-    aPIConnectToStsOrganizationRequestDTO?: APIConnectToStsOrganizationRequestDTO;
+    aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest?: APIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest;
 }
 
 export interface PutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequestParams {
     organizationUuid: string;
-    aPIConnectToStsOrganizationRequestDTO?: APIConnectToStsOrganizationRequestDTO;
+    aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest?: APIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest;
 }
 
 
@@ -201,7 +201,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleStsOrganizationSynchronizationInternalV2Disconnect.');
         }
-        const aPIDisconnectFromStsOrganizationRequestDTO = requestParameters.aPIDisconnectFromStsOrganizationRequestDTO;
+        const aPIDeleteSingleStsOrganizationSynchronizationInternalV2DisconnectRequest = requestParameters.aPIDeleteSingleStsOrganizationSynchronizationInternalV2DisconnectRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -246,7 +246,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIDisconnectFromStsOrganizationRequestDTO,
+                body: aPIDeleteSingleStsOrganizationSynchronizationInternalV2DisconnectRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -525,7 +525,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleStsOrganizationSynchronizationInternalV2CreateConnection.');
         }
-        const aPIConnectToStsOrganizationRequestDTO = requestParameters.aPIConnectToStsOrganizationRequestDTO;
+        const aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest = requestParameters.aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -571,7 +571,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIConnectToStsOrganizationRequestDTO,
+                body: aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -594,7 +594,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling putSingleStsOrganizationSynchronizationInternalV2UpdateConnection.');
         }
-        const aPIConnectToStsOrganizationRequestDTO = requestParameters.aPIConnectToStsOrganizationRequestDTO;
+        const aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest = requestParameters.aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -640,7 +640,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIConnectToStsOrganizationRequestDTO,
+                body: aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

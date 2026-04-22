@@ -11,11 +11,11 @@
  */
 
 
-export type APICommonOrderByProperty = 0 | 1 | 2;
+export type APICommonOrderByProperty = 'CreationOrder' | 'Name' | 'LastChanged';
 
 export const APICommonOrderByProperty = {
-    NUMBER_0: 0 as APICommonOrderByProperty,
-    NUMBER_1: 1 as APICommonOrderByProperty,
-    NUMBER_2: 2 as APICommonOrderByProperty
+    CreationOrder: 'CreationOrder' as APICommonOrderByProperty,
+    Name: 'Name' as APICommonOrderByProperty,
+    LastChanged: 'LastChanged' as APICommonOrderByProperty
 };
 

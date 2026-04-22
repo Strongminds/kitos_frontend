@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
 import { APIYearSegmentChoice } from './yearSegmentChoice';
 
 
 export interface APIContractTerminationTermsResponseDTO { 
-    noticePeriodMonths?: APIIdentityNamePairResponseDTO;
-    noticePeriodExtendsCurrent?: APIYearSegmentChoice;
-    noticeByEndOf?: APIYearSegmentChoice;
+    noticePeriodMonths?: APIArchivingRegistrationsResponseDTOType | null;
+    noticePeriodExtendsCurrent?: APIYearSegmentChoice | null;
+    noticeByEndOf?: APIYearSegmentChoice | null;
 }
 

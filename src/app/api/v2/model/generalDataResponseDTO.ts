@@ -9,24 +9,27 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIGeneralDataResponseDTONumberOfExpectedUsers } from './generalDataResponseDTONumberOfExpectedUsers';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
-import { APIItSystemUsageValidityResponseDTO } from './itSystemUsageValidityResponseDTO';
+import { APIGeneralDataResponseDTOValidity } from './generalDataResponseDTOValidity';
 
 
 export interface APIGeneralDataResponseDTO { 
     localSystemId?: string | null;
     localCallName?: string | null;
-    dataClassification?: APIIdentityNamePairResponseDTO;
+    dataClassification?: APIArchivingRegistrationsResponseDTOType | null;
     notes?: string | null;
     systemVersion?: string | null;
-    numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
-    validity: APIItSystemUsageValidityResponseDTO;
-    mainContract?: APIIdentityNamePairResponseDTO;
-    containsAITechnology?: APIYesNoUndecidedChoice;
-    webAccessibilityCompliance?: APIYesNoPartiallyChoice;
+    numberOfExpectedUsers?: APIGeneralDataResponseDTONumberOfExpectedUsers | null;
+    validity: APIGeneralDataResponseDTOValidity;
+    mainContract?: APIArchivingRegistrationsResponseDTOType | null;
+    /**
+     *  (Supplier Field)
+     */
+    containsAITechnology?: APIYesNoUndecidedChoice | null;
+    webAccessibilityCompliance?: APIYesNoPartiallyChoice | null;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
 }

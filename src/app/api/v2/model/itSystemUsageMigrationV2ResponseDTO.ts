@@ -11,13 +11,13 @@
  */
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIItSystemUsageRelationMigrationV2ResponseDTO } from './itSystemUsageRelationMigrationV2ResponseDTO';
-import { APIIdentityNamePairWithDeactivatedStatusDTO } from './identityNamePairWithDeactivatedStatusDTO';
+import { APIItSystemUsageMigrationV2ResponseDTOTargetUsage } from './itSystemUsageMigrationV2ResponseDTOTargetUsage';
 
 
 export interface APIItSystemUsageMigrationV2ResponseDTO { 
-    targetUsage?: APIIdentityNamePairWithDeactivatedStatusDTO;
-    fromSystem?: APIIdentityNamePairWithDeactivatedStatusDTO;
-    toSystem?: APIIdentityNamePairWithDeactivatedStatusDTO;
+    targetUsage?: APIItSystemUsageMigrationV2ResponseDTOTargetUsage | null;
+    fromSystem?: APIItSystemUsageMigrationV2ResponseDTOTargetUsage | null;
+    toSystem?: APIItSystemUsageMigrationV2ResponseDTOTargetUsage | null;
     affectedContracts?: Array<APIIdentityNamePairResponseDTO> | null;
     affectedRelations?: Array<APIItSystemUsageRelationMigrationV2ResponseDTO> | null;
     affectedDataProcessingRegistrations?: Array<APIIdentityNamePairResponseDTO> | null;

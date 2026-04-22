@@ -11,13 +11,13 @@
  */
 
 
-export type APIOversightIntervalChoice = 0 | 1 | 2 | 3 | 4;
+export type APIOversightIntervalChoice = 'BiYearly' | 'Yearly' | 'EveryOtherYear' | 'Other' | 'Undecided';
 
 export const APIOversightIntervalChoice = {
-    NUMBER_0: 0 as APIOversightIntervalChoice,
-    NUMBER_1: 1 as APIOversightIntervalChoice,
-    NUMBER_2: 2 as APIOversightIntervalChoice,
-    NUMBER_3: 3 as APIOversightIntervalChoice,
-    NUMBER_4: 4 as APIOversightIntervalChoice
+    BiYearly: 'BiYearly' as APIOversightIntervalChoice,
+    Yearly: 'Yearly' as APIOversightIntervalChoice,
+    EveryOtherYear: 'EveryOtherYear' as APIOversightIntervalChoice,
+    Other: 'Other' as APIOversightIntervalChoice,
+    Undecided: 'Undecided' as APIOversightIntervalChoice
 };
 

@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIModuleFieldPermissionsResponseDTO } from './moduleFieldPermissionsResponseDTO';
+import { APICombinedPermissionsResponseDTOFieldPermissions } from './combinedPermissionsResponseDTOFieldPermissions';
 
 
 export interface APICombinedPermissionsResponseDTO { 
+    fieldPermissions?: APICombinedPermissionsResponseDTOFieldPermissions | null;
     read?: boolean;
     modify?: boolean;
     delete?: boolean;
-    fieldPermissions?: APIModuleFieldPermissionsResponseDTO;
 }
 

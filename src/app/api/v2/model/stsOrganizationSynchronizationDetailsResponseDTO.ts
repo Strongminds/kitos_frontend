@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIStsOrganizationAccessStatusResponseDTO } from './stsOrganizationAccessStatusResponseDTO';
+import { APIStsOrganizationSynchronizationDetailsResponseDTOAccessStatus } from './stsOrganizationSynchronizationDetailsResponseDTOAccessStatus';
 
 
 export interface APIStsOrganizationSynchronizationDetailsResponseDTO { 
-    accessStatus?: APIStsOrganizationAccessStatusResponseDTO;
+    accessStatus?: APIStsOrganizationSynchronizationDetailsResponseDTOAccessStatus | null;
     connected?: boolean;
     subscribesToUpdates?: boolean;
     dateOfLatestCheckBySubscription?: string | null;

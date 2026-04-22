@@ -12,8 +12,8 @@
 
 
 export interface APILoginDTO { 
+    rememberMe?: boolean;
     email: string;
     password: string;
-    rememberMe?: boolean;
 }
 

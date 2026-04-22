@@ -11,10 +11,10 @@
  */
 
 
-export type APIRegistrationScopeChoice = 0 | 1;
+export type APIRegistrationScopeChoice = 'Local' | 'Global';
 
 export const APIRegistrationScopeChoice = {
-    NUMBER_0: 0 as APIRegistrationScopeChoice,
-    NUMBER_1: 1 as APIRegistrationScopeChoice
+    Local: 'Local' as APIRegistrationScopeChoice,
+    Global: 'Global' as APIRegistrationScopeChoice
 };
 

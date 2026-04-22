@@ -11,9 +11,9 @@
  */
 
 
-export type APIDataProcessingRegistrationValidationError = 0;
+export type APIDataProcessingRegistrationValidationError = 'MainContractNotActive';
 
 export const APIDataProcessingRegistrationValidationError = {
-    NUMBER_0: 0 as APIDataProcessingRegistrationValidationError
+    MainContractNotActive: 'MainContractNotActive' as APIDataProcessingRegistrationValidationError
 };
 

@@ -11,11 +11,11 @@
  */
 
 
-export type APIOverviewType = 0 | 1 | 2;
+export type APIOverviewType = 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
 
 export const APIOverviewType = {
-    NUMBER_0: 0 as APIOverviewType,
-    NUMBER_1: 1 as APIOverviewType,
-    NUMBER_2: 2 as APIOverviewType
+    ItSystemUsage: 'ItSystemUsage' as APIOverviewType,
+    ItContract: 'ItContract' as APIOverviewType,
+    DataProcessingRegistration: 'DataProcessingRegistration' as APIOverviewType
 };
 

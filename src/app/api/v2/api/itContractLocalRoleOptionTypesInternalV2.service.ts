@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
+import { APIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest } from '../model/aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest';
 // @ts-ignore
-import { APILocalRoleOptionUpdateRequestDTO } from '../model/aPILocalRoleOptionUpdateRequestDTO';
+import { APIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest } from '../model/aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -45,12 +45,12 @@ export interface GetSingleItContractLocalRoleOptionTypesInternalV2GetLocalItCont
 export interface PatchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRoleRequestParams {
     organizationUuid: string;
     optionUuid: string;
-    aPILocalRoleOptionUpdateRequestDTO?: APILocalRoleOptionUpdateRequestDTO;
+    aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest?: APIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest;
 }
 
 export interface PostSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRoleRequestParams {
     organizationUuid: string;
-    aPILocalOptionCreateRequestDTO?: APILocalOptionCreateRequestDTO;
+    aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest?: APIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest;
 }
 
 
@@ -316,7 +316,7 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
         if (optionUuid === null || optionUuid === undefined) {
             throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole.');
         }
-        const aPILocalRoleOptionUpdateRequestDTO = requestParameters.aPILocalRoleOptionUpdateRequestDTO;
+        const aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest = requestParameters.aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -363,7 +363,7 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPILocalRoleOptionUpdateRequestDTO,
+                body: aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -386,7 +386,7 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole.');
         }
-        const aPILocalOptionCreateRequestDTO = requestParameters.aPILocalOptionCreateRequestDTO;
+        const aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest = requestParameters.aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -432,7 +432,7 @@ export class ItContractLocalRoleOptionTypesInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPILocalOptionCreateRequestDTO,
+                body: aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

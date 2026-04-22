@@ -12,11 +12,11 @@
 
 
 export interface APIGlobalRegularOptionResponseDTO { 
-    uuid: string;
-    name: string;
-    description: string;
     isEnabled?: boolean;
     isObligatory?: boolean;
     priority?: number;
+    description: string;
+    uuid: string;
+    name: string;
 }
 

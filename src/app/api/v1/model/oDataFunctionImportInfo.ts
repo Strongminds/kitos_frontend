@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIODataTypeAnnotation } from './oDataTypeAnnotation';
+import { APIODataEntitySetInfoTypeAnnotation } from './oDataEntitySetInfoTypeAnnotation';
 
 
 export interface APIODataFunctionImportInfo { 
-    typeAnnotation?: APIODataTypeAnnotation;
     url?: string | null;
     name?: string | null;
     title?: string | null;
+    typeAnnotation?: APIODataEntitySetInfoTypeAnnotation | null;
 }
 

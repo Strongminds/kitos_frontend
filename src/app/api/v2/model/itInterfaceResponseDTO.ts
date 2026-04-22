@@ -9,15 +9,23 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
 import { APIRegistrationScopeChoice } from './registrationScopeChoice';
 import { APIItInterfaceDataResponseDTO } from './itInterfaceDataResponseDTO';
-import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
+import { APIDataProcessingRegistrationResponseDTOOrganizationContext } from './dataProcessingRegistrationResponseDTOOrganizationContext';
 
 
 export interface APIItInterfaceResponseDTO { 
+    lastModified: string;
+    lastModifiedBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
+    scope: APIRegistrationScopeChoice;
+    itInterfaceType?: APIArchivingRegistrationsResponseDTOType | null;
+    data: Array<APIItInterfaceDataResponseDTO>;
+    organizationContext: APIDataProcessingRegistrationResponseDTOOrganizationContext;
+    rightsHolder: APIDataProcessingRegistrationResponseDTOOrganizationContext;
     uuid: string;
-    exposedBySystem?: APIIdentityNamePairResponseDTO;
+    exposedBySystem?: APIArchivingRegistrationsResponseDTOType | null;
     name: string;
     interfaceId?: string | null;
     version?: string | null;
@@ -26,13 +34,6 @@ export interface APIItInterfaceResponseDTO {
     urlReference?: string | null;
     deactivated: boolean;
     created: string;
-    createdBy: APIIdentityNamePairResponseDTO;
-    lastModified: string;
-    lastModifiedBy: APIIdentityNamePairResponseDTO;
-    scope: APIRegistrationScopeChoice;
-    itInterfaceType?: APIIdentityNamePairResponseDTO;
-    data: Array<APIItInterfaceDataResponseDTO>;
-    organizationContext: APIShallowOrganizationResponseDTO;
-    rightsHolder: APIShallowOrganizationResponseDTO;
+    createdBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
 }
 

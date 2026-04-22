@@ -11,16 +11,16 @@
  */
 
 
-export type APIRecommendedArchiveDutyChoice = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export type APIRecommendedArchiveDutyChoice = 'Undecided' | 'B' | 'K' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments' | 'BK' | 'KD' | 'KB';
 
 export const APIRecommendedArchiveDutyChoice = {
-    NUMBER_0: 0 as APIRecommendedArchiveDutyChoice,
-    NUMBER_1: 1 as APIRecommendedArchiveDutyChoice,
-    NUMBER_2: 2 as APIRecommendedArchiveDutyChoice,
-    NUMBER_3: 3 as APIRecommendedArchiveDutyChoice,
-    NUMBER_4: 4 as APIRecommendedArchiveDutyChoice,
-    NUMBER_5: 5 as APIRecommendedArchiveDutyChoice,
-    NUMBER_6: 6 as APIRecommendedArchiveDutyChoice,
-    NUMBER_7: 7 as APIRecommendedArchiveDutyChoice
+    Undecided: 'Undecided' as APIRecommendedArchiveDutyChoice,
+    B: 'B' as APIRecommendedArchiveDutyChoice,
+    K: 'K' as APIRecommendedArchiveDutyChoice,
+    NoRecommendation: 'NoRecommendation' as APIRecommendedArchiveDutyChoice,
+    PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as APIRecommendedArchiveDutyChoice,
+    Bk: 'BK' as APIRecommendedArchiveDutyChoice,
+    Kd: 'KD' as APIRecommendedArchiveDutyChoice,
+    Kb: 'KB' as APIRecommendedArchiveDutyChoice
 };
 

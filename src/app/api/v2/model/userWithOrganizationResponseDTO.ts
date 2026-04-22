@@ -12,10 +12,10 @@
 
 
 export interface APIUserWithOrganizationResponseDTO { 
+    orgName?: string | null;
+    apiAccess?: boolean;
+    email: string;
     uuid: string;
     name: string;
-    email: string;
-    apiAccess?: boolean;
-    orgName?: string | null;
 }
 

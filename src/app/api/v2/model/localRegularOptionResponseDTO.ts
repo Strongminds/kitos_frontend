@@ -12,11 +12,11 @@
 
 
 export interface APILocalRegularOptionResponseDTO { 
-    uuid: string;
-    name: string;
-    description: string;
     isActive?: boolean;
     isObligatory?: boolean;
     isLocallyAvailable?: boolean;
+    description: string;
+    uuid: string;
+    name: string;
 }
 

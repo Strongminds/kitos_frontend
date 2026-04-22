@@ -14,6 +14,7 @@ import { APIDefaultUserStartPreferenceChoice } from './defaultUserStartPreferenc
 
 
 export interface APIUpdateUserRequestDTO { 
+    defaultOrganizationUnitUuid?: string;
     email?: string | null;
     firstName?: string | null;
     lastName?: string | null;
@@ -23,6 +24,5 @@ export interface APIUpdateUserRequestDTO {
     hasStakeHolderAccess?: boolean;
     roles?: Array<APIOrganizationRoleChoice> | null;
     sendMail?: boolean;
-    defaultOrganizationUnitUuid?: string;
 }
 

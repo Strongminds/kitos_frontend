@@ -9,22 +9,22 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APILocalKLEDeviationsRequestDTO } from './localKLEDeviationsRequestDTO';
-import { APIArchivingUpdateRequestDTO } from './archivingUpdateRequestDTO';
-import { APIGeneralDataUpdateRequestDTO } from './generalDataUpdateRequestDTO';
-import { APIOrganizationUsageWriteRequestDTO } from './organizationUsageWriteRequestDTO';
+import { APICreateItSystemUsageRequestDTOOrganizationUsage } from './createItSystemUsageRequestDTOOrganizationUsage';
+import { APICreateItSystemUsageRequestDTOLocalKleDeviations } from './createItSystemUsageRequestDTOLocalKleDeviations';
+import { APICreateItSystemUsageRequestDTOGdpr } from './createItSystemUsageRequestDTOGdpr';
 import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { APIGDPRWriteRequestDTO } from './gDPRWriteRequestDTO';
+import { APIUpdateItSystemUsageRequestDTOArchiving } from './updateItSystemUsageRequestDTOArchiving';
+import { APIUpdateItSystemUsageRequestDTOGeneral } from './updateItSystemUsageRequestDTOGeneral';
 
 
 export interface APIUpdateItSystemUsageRequestDTO { 
-    roles?: Array<APIRoleAssignmentRequestDTO> | null;
-    organizationUsage?: APIOrganizationUsageWriteRequestDTO;
-    localKleDeviations?: APILocalKLEDeviationsRequestDTO;
-    gdpr?: APIGDPRWriteRequestDTO;
-    general?: APIGeneralDataUpdateRequestDTO;
+    general?: APIUpdateItSystemUsageRequestDTOGeneral | null;
     externalReferences?: Array<APIUpdateExternalReferenceDataWriteRequestDTO> | null;
-    archiving?: APIArchivingUpdateRequestDTO;
+    archiving?: APIUpdateItSystemUsageRequestDTOArchiving | null;
+    roles?: Array<APIRoleAssignmentRequestDTO> | null;
+    organizationUsage?: APICreateItSystemUsageRequestDTOOrganizationUsage | null;
+    localKleDeviations?: APICreateItSystemUsageRequestDTOLocalKleDeviations | null;
+    gdpr?: APICreateItSystemUsageRequestDTOGdpr | null;
 }
 

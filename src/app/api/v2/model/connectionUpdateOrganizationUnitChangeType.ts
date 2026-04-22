@@ -11,14 +11,14 @@
  */
 
 
-export type APIConnectionUpdateOrganizationUnitChangeType = 0 | 1 | 2 | 3 | 4 | 5;
+export type APIConnectionUpdateOrganizationUnitChangeType = 'Added' | 'Renamed' | 'Moved' | 'Deleted' | 'Converted' | 'RootChanged';
 
 export const APIConnectionUpdateOrganizationUnitChangeType = {
-    NUMBER_0: 0 as APIConnectionUpdateOrganizationUnitChangeType,
-    NUMBER_1: 1 as APIConnectionUpdateOrganizationUnitChangeType,
-    NUMBER_2: 2 as APIConnectionUpdateOrganizationUnitChangeType,
-    NUMBER_3: 3 as APIConnectionUpdateOrganizationUnitChangeType,
-    NUMBER_4: 4 as APIConnectionUpdateOrganizationUnitChangeType,
-    NUMBER_5: 5 as APIConnectionUpdateOrganizationUnitChangeType
+    Added: 'Added' as APIConnectionUpdateOrganizationUnitChangeType,
+    Renamed: 'Renamed' as APIConnectionUpdateOrganizationUnitChangeType,
+    Moved: 'Moved' as APIConnectionUpdateOrganizationUnitChangeType,
+    Deleted: 'Deleted' as APIConnectionUpdateOrganizationUnitChangeType,
+    Converted: 'Converted' as APIConnectionUpdateOrganizationUnitChangeType,
+    RootChanged: 'RootChanged' as APIConnectionUpdateOrganizationUnitChangeType
 };
 

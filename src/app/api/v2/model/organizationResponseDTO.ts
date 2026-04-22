@@ -13,11 +13,11 @@ import { APIOrganizationType } from './organizationType';
 
 
 export interface APIOrganizationResponseDTO { 
-    uuid: string;
-    name: string;
-    cvr?: string | null;
     organizationType: APIOrganizationType;
     isSupplier?: boolean;
     disabled?: boolean;
+    cvr?: string | null;
+    uuid: string;
+    name: string;
 }
 

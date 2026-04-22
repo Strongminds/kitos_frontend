@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIPaymentResponseDTOOrganizationUnit } from './paymentResponseDTOOrganizationUnit';
 import { APIPaymentAuditStatus } from './paymentAuditStatus';
-import { APIOrganizationUnitResponseDTO } from './organizationUnitResponseDTO';
 
 
 export interface APIPaymentResponseDTO { 
     id?: number;
-    organizationUnit?: APIOrganizationUnitResponseDTO;
+    organizationUnit?: APIPaymentResponseDTOOrganizationUnit | null;
     acquisition?: number;
     operation?: number;
     other?: number;

@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
+import { APIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest } from '../model/aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest';
 // @ts-ignore
-import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
+import { APIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest } from '../model/aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -30,11 +30,11 @@ import { Configuration }                                     from '../configurat
 
 export interface PatchSingleItContractGlobalProcurementStrategyTypesInternalV2PatchGlobalProcurementStrategyTypeRequestParams {
     optionUuid: string;
-    aPIGlobalRegularOptionUpdateRequestDTO?: APIGlobalRegularOptionUpdateRequestDTO;
+    aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest?: APIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest;
 }
 
 export interface PostSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyTypeRequestParams {
-    aPIGlobalRegularOptionCreateRequestDTO?: APIGlobalRegularOptionCreateRequestDTO;
+    aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest?: APIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest;
 }
 
 
@@ -168,7 +168,7 @@ export class ItContractGlobalProcurementStrategyTypesInternalV2Service {
         if (optionUuid === null || optionUuid === undefined) {
             throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractGlobalProcurementStrategyTypesInternalV2PatchGlobalProcurementStrategyType.');
         }
-        const aPIGlobalRegularOptionUpdateRequestDTO = requestParameters.aPIGlobalRegularOptionUpdateRequestDTO;
+        const aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest = requestParameters.aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -215,7 +215,7 @@ export class ItContractGlobalProcurementStrategyTypesInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIGlobalRegularOptionUpdateRequestDTO,
+                body: aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -234,7 +234,7 @@ export class ItContractGlobalProcurementStrategyTypesInternalV2Service {
     public postSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyType(requestParameters: PostSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyType(requestParameters: PostSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyType(requestParameters: PostSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
+        const aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest = requestParameters.aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -280,7 +280,7 @@ export class ItContractGlobalProcurementStrategyTypesInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIGlobalRegularOptionCreateRequestDTO,
+                body: aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

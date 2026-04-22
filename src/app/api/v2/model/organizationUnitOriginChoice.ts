@@ -11,10 +11,10 @@
  */
 
 
-export type APIOrganizationUnitOriginChoice = 0 | 1;
+export type APIOrganizationUnitOriginChoice = 'Kitos' | 'STSOrganisation';
 
 export const APIOrganizationUnitOriginChoice = {
-    NUMBER_0: 0 as APIOrganizationUnitOriginChoice,
-    NUMBER_1: 1 as APIOrganizationUnitOriginChoice
+    Kitos: 'Kitos' as APIOrganizationUnitOriginChoice,
+    StsOrganisation: 'STSOrganisation' as APIOrganizationUnitOriginChoice
 };
 

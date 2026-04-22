@@ -14,7 +14,7 @@ import { APIYesNoUndecidedOption } from './yesNoUndecidedOption';
 
 export interface APISubDataProcessorDetailsDTO { 
     basisForTransferOptionId?: number | null;
-    transferToInsecureThirdCountries?: APIYesNoUndecidedOption;
+    transferToInsecureThirdCountries?: APIYesNoUndecidedOption | null;
     insecureCountryOptionId?: number | null;
 }
 

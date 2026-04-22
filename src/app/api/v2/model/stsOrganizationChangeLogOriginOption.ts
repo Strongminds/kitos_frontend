@@ -11,10 +11,10 @@
  */
 
 
-export type APIStsOrganizationChangeLogOriginOption = 0 | 1;
+export type APIStsOrganizationChangeLogOriginOption = 'Background' | 'User';
 
 export const APIStsOrganizationChangeLogOriginOption = {
-    NUMBER_0: 0 as APIStsOrganizationChangeLogOriginOption,
-    NUMBER_1: 1 as APIStsOrganizationChangeLogOriginOption
+    Background: 'Background' as APIStsOrganizationChangeLogOriginOption,
+    User: 'User' as APIStsOrganizationChangeLogOriginOption
 };
 

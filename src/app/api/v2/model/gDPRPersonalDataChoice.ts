@@ -11,11 +11,11 @@
  */
 
 
-export type APIGDPRPersonalDataChoice = 0 | 1 | 2;
+export type APIGDPRPersonalDataChoice = 'CprNumber' | 'SocialProblems' | 'OtherPrivateMatters';
 
 export const APIGDPRPersonalDataChoice = {
-    NUMBER_0: 0 as APIGDPRPersonalDataChoice,
-    NUMBER_1: 1 as APIGDPRPersonalDataChoice,
-    NUMBER_2: 2 as APIGDPRPersonalDataChoice
+    CprNumber: 'CprNumber' as APIGDPRPersonalDataChoice,
+    SocialProblems: 'SocialProblems' as APIGDPRPersonalDataChoice,
+    OtherPrivateMatters: 'OtherPrivateMatters' as APIGDPRPersonalDataChoice
 };
 

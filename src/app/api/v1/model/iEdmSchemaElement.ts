@@ -13,8 +13,8 @@ import { APIEdmSchemaElementKind } from './edmSchemaElementKind';
 
 
 export interface APIIEdmSchemaElement { 
-    readonly name?: string | null;
-    schemaElementKind?: APIEdmSchemaElementKind;
+    readonly schemaElementKind?: APIEdmSchemaElementKind;
     readonly namespace?: string | null;
+    readonly name?: string | null;
 }
 

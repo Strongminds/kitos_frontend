@@ -11,12 +11,12 @@
  */
 
 
-export type APIYesNoIrrelevantChoice = 0 | 1 | 2 | 3;
+export type APIYesNoIrrelevantChoice = 'No' | 'Yes' | 'Irrelevant' | 'Undecided';
 
 export const APIYesNoIrrelevantChoice = {
-    NUMBER_0: 0 as APIYesNoIrrelevantChoice,
-    NUMBER_1: 1 as APIYesNoIrrelevantChoice,
-    NUMBER_2: 2 as APIYesNoIrrelevantChoice,
-    NUMBER_3: 3 as APIYesNoIrrelevantChoice
+    No: 'No' as APIYesNoIrrelevantChoice,
+    Yes: 'Yes' as APIYesNoIrrelevantChoice,
+    Irrelevant: 'Irrelevant' as APIYesNoIrrelevantChoice,
+    Undecided: 'Undecided' as APIYesNoIrrelevantChoice
 };
 

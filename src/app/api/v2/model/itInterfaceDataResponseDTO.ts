@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
 
 
 export interface APIItInterfaceDataResponseDTO { 
     description?: string | null;
-    dataType?: APIIdentityNamePairResponseDTO;
+    dataType?: APIArchivingRegistrationsResponseDTOType | null;
     uuid?: string;
 }
 

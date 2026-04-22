@@ -14,6 +14,6 @@ import { APICheckConnectionError } from './checkConnectionError';
 
 export interface APIStsOrganizationAccessStatusResponseDTO { 
     accessGranted?: boolean;
-    error?: APICheckConnectionError;
+    error?: APICheckConnectionError | null;
 }
 

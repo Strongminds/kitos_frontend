@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
 
 
 export interface APIUserReferenceWithOrganizationResponseDTO { 
+    organization: APIDataProcessingRegistrationResponseDTOCreatedBy;
+    email: string;
     uuid: string;
     name: string;
-    email: string;
-    organization: APIIdentityNamePairResponseDTO;
 }
 

@@ -9,35 +9,39 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIRegistrationScopeChoice } from './registrationScopeChoice';
-import { APIRecommendedArchiveDutyResponseDTO } from './recommendedArchiveDutyResponseDTO';
+import { APIArchivingRegistrationsResponseDTOSupplier } from './archivingRegistrationsResponseDTOSupplier';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
+import { APIDataProcessingRegistrationResponseDTOOrganizationContext } from './dataProcessingRegistrationResponseDTOOrganizationContext';
+import { APIItSystemResponseDTORecommendedArchiveDuty } from './itSystemResponseDTORecommendedArchiveDuty';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 export interface APIItSystemResponseDTO { 
+    usingOrganizations: Array<APIShallowOrganizationResponseDTO>;
+    lastModified: string;
+    lastModifiedBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
+    scope: APIRegistrationScopeChoice;
+    organizationContext: APIDataProcessingRegistrationResponseDTOOrganizationContext;
+    legalName?: string | null;
+    legalDataProcessorName?: string | null;
     uuid: string;
     externalUuid?: string | null;
-    parentSystem?: APIIdentityNamePairResponseDTO;
+    parentSystem?: APIArchivingRegistrationsResponseDTOType | null;
     name: string;
     formerName?: string | null;
     description?: string | null;
     externalReferences: Array<APIExternalReferenceDataResponseDTO>;
     kle: Array<APIIdentityNamePairResponseDTO>;
     deactivated: boolean;
-    businessType?: APIIdentityNamePairResponseDTO;
-    rightsHolder?: APIShallowOrganizationResponseDTO;
+    businessType?: APIArchivingRegistrationsResponseDTOType | null;
+    rightsHolder?: APIArchivingRegistrationsResponseDTOSupplier | null;
     created: string;
-    createdBy: APIIdentityNamePairResponseDTO;
-    recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
+    createdBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
+    recommendedArchiveDuty: APIItSystemResponseDTORecommendedArchiveDuty;
     mainContractSuppliers: Array<APIShallowOrganizationResponseDTO>;
-    usingOrganizations: Array<APIShallowOrganizationResponseDTO>;
-    lastModified: string;
-    lastModifiedBy: APIIdentityNamePairResponseDTO;
-    scope: APIRegistrationScopeChoice;
-    organizationContext: APIShallowOrganizationResponseDTO;
-    legalName?: string | null;
-    legalDataProcessorName?: string | null;
 }
 

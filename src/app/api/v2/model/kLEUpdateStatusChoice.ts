@@ -11,10 +11,10 @@
  */
 
 
-export type APIKLEUpdateStatusChoice = 0 | 1;
+export type APIKLEUpdateStatusChoice = 'Failed' | 'Ok';
 
 export const APIKLEUpdateStatusChoice = {
-    NUMBER_0: 0 as APIKLEUpdateStatusChoice,
-    NUMBER_1: 1 as APIKLEUpdateStatusChoice
+    Failed: 'Failed' as APIKLEUpdateStatusChoice,
+    Ok: 'Ok' as APIKLEUpdateStatusChoice
 };
 

@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
 import { APIOrganizationRoleChoice } from './organizationRoleChoice';
 import { APIDefaultUserStartPreferenceChoice } from './defaultUserStartPreferenceChoice';
 
@@ -24,7 +24,7 @@ export interface APIUserResponseDTO {
     hasApiAccess?: boolean | null;
     hasStakeHolderAccess?: boolean;
     roles?: Array<APIOrganizationRoleChoice> | null;
-    defaultOrganizationUnit?: APIIdentityNamePairResponseDTO;
+    defaultOrganizationUnit?: APIArchivingRegistrationsResponseDTOType | null;
     lastSentAdvis?: string | null;
 }
 

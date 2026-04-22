@@ -12,12 +12,12 @@
 
 
 export interface APIGlobalRoleOptionResponseDTO { 
-    uuid: string;
-    name: string;
-    description: string;
+    writeAccess?: boolean;
     isEnabled?: boolean;
     isObligatory?: boolean;
     priority?: number;
-    writeAccess?: boolean;
+    description: string;
+    uuid: string;
+    name: string;
 }
 

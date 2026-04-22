@@ -11,11 +11,11 @@
  */
 
 
-export type APIMainContractStateChoice = 0 | 1 | 2;
+export type APIMainContractStateChoice = 'NoContract' | 'Active' | 'Inactive';
 
 export const APIMainContractStateChoice = {
-    NUMBER_0: 0 as APIMainContractStateChoice,
-    NUMBER_1: 1 as APIMainContractStateChoice,
-    NUMBER_2: 2 as APIMainContractStateChoice
+    NoContract: 'NoContract' as APIMainContractStateChoice,
+    Active: 'Active' as APIMainContractStateChoice,
+    Inactive: 'Inactive' as APIMainContractStateChoice
 };
 

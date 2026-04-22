@@ -11,10 +11,10 @@
  */
 
 
-export type APIPublicMessageStatusChoice = 1 | 2;
+export type APIPublicMessageStatusChoice = 'Active' | 'Inactive';
 
 export const APIPublicMessageStatusChoice = {
-    NUMBER_1: 1 as APIPublicMessageStatusChoice,
-    NUMBER_2: 2 as APIPublicMessageStatusChoice
+    Active: 'Active' as APIPublicMessageStatusChoice,
+    Inactive: 'Inactive' as APIPublicMessageStatusChoice
 };
 

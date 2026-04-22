@@ -13,11 +13,11 @@ import { APIChangePaymentRegistrationV2RequestDTO } from './changePaymentRegistr
 
 
 export interface APITransferOrganizationUnitRegistrationV2RequestDTO { 
+    targetUnitUuid?: string;
     organizationUnitRights?: Array<number> | null;
     itContractRegistrations?: Array<number> | null;
     paymentRegistrationDetails?: Array<APIChangePaymentRegistrationV2RequestDTO> | null;
     responsibleSystems?: Array<number> | null;
     relevantSystems?: Array<number> | null;
-    targetUnitUuid?: string;
 }
 

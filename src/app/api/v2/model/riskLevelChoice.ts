@@ -11,12 +11,12 @@
  */
 
 
-export type APIRiskLevelChoice = 0 | 1 | 2 | 3;
+export type APIRiskLevelChoice = 'Low' | 'Medium' | 'High' | 'Undecided';
 
 export const APIRiskLevelChoice = {
-    NUMBER_0: 0 as APIRiskLevelChoice,
-    NUMBER_1: 1 as APIRiskLevelChoice,
-    NUMBER_2: 2 as APIRiskLevelChoice,
-    NUMBER_3: 3 as APIRiskLevelChoice
+    Low: 'Low' as APIRiskLevelChoice,
+    Medium: 'Medium' as APIRiskLevelChoice,
+    High: 'High' as APIRiskLevelChoice,
+    Undecided: 'Undecided' as APIRiskLevelChoice
 };
 

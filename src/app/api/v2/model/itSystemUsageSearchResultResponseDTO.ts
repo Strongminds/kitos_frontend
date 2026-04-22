@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIItSystemUsageSystemContextResponseDTO } from './itSystemUsageSystemContextResponseDTO';
+import { APIItSystemUsageSearchResultResponseDTOSystemContext } from './itSystemUsageSearchResultResponseDTOSystemContext';
 
 
 export interface APIItSystemUsageSearchResultResponseDTO { 
     uuid: string;
     valid: boolean;
-    systemContext: APIItSystemUsageSystemContextResponseDTO;
+    systemContext: APIItSystemUsageSearchResultResponseDTOSystemContext;
 }
 

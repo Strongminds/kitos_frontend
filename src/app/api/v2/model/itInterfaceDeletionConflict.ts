@@ -11,9 +11,9 @@
  */
 
 
-export type APIItInterfaceDeletionConflict = 0;
+export type APIItInterfaceDeletionConflict = 'ExposedByItSystem';
 
 export const APIItInterfaceDeletionConflict = {
-    NUMBER_0: 0 as APIItInterfaceDeletionConflict
+    ExposedByItSystem: 'ExposedByItSystem' as APIItInterfaceDeletionConflict
 };
 

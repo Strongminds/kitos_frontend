@@ -11,18 +11,18 @@
  */
 
 
-export type APIEdmTypeKind = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
+export type APIEdmTypeKind = 'None' | 'Primitive' | 'Entity' | 'Complex' | 'Collection' | 'EntityReference' | 'Enum' | 'TypeDefinition' | 'Untyped' | 'Path';
 
 export const APIEdmTypeKind = {
-    NUMBER_0: 0 as APIEdmTypeKind,
-    NUMBER_1: 1 as APIEdmTypeKind,
-    NUMBER_2: 2 as APIEdmTypeKind,
-    NUMBER_3: 3 as APIEdmTypeKind,
-    NUMBER_4: 4 as APIEdmTypeKind,
-    NUMBER_5: 5 as APIEdmTypeKind,
-    NUMBER_6: 6 as APIEdmTypeKind,
-    NUMBER_7: 7 as APIEdmTypeKind,
-    NUMBER_8: 8 as APIEdmTypeKind,
-    NUMBER_9: 9 as APIEdmTypeKind
+    None: 'None' as APIEdmTypeKind,
+    Primitive: 'Primitive' as APIEdmTypeKind,
+    Entity: 'Entity' as APIEdmTypeKind,
+    Complex: 'Complex' as APIEdmTypeKind,
+    Collection: 'Collection' as APIEdmTypeKind,
+    EntityReference: 'EntityReference' as APIEdmTypeKind,
+    Enum: 'Enum' as APIEdmTypeKind,
+    TypeDefinition: 'TypeDefinition' as APIEdmTypeKind,
+    Untyped: 'Untyped' as APIEdmTypeKind,
+    Path: 'Path' as APIEdmTypeKind
 };
 

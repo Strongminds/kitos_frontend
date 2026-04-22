@@ -21,17 +21,17 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
-import { APICreateItSystemRequestDTO } from '../model/aPICreateItSystemRequestDTO';
+import { APIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest } from '../model/aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest';
 // @ts-ignore
-import { APIDeactivationReasonRequestDTO } from '../model/aPIDeactivationReasonRequestDTO';
+import { APIPatchSingleItSystemV2PatchItSystemAsRightsHolderRequest } from '../model/aPIPatchSingleItSystemV2PatchItSystemAsRightsHolderRequest';
 // @ts-ignore
-import { APIExternalReferenceDataWriteRequestDTO } from '../model/aPIExternalReferenceDataWriteRequestDTO';
+import { APIPatchSingleItSystemV2PatchItSystemRequest } from '../model/aPIPatchSingleItSystemV2PatchItSystemRequest';
 // @ts-ignore
-import { APIRightsHolderFullItSystemRequestDTO } from '../model/aPIRightsHolderFullItSystemRequestDTO';
+import { APIPostSingleItContractV2PostExternalReferenceRequest } from '../model/aPIPostSingleItContractV2PostExternalReferenceRequest';
 // @ts-ignore
-import { APIRightsHolderUpdateSystemPropertiesRequestDTO } from '../model/aPIRightsHolderUpdateSystemPropertiesRequestDTO';
+import { APIPostSingleItSystemV2PostItSystemAsRightsHolderRequest } from '../model/aPIPostSingleItSystemV2PostItSystemAsRightsHolderRequest';
 // @ts-ignore
-import { APIUpdateItSystemRequestDTO } from '../model/aPIUpdateItSystemRequestDTO';
+import { APIPostSingleItSystemV2PostItSystemRequest } from '../model/aPIPostSingleItSystemV2PostItSystemRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -40,7 +40,7 @@ import { Configuration }                                     from '../configurat
 
 export interface DeleteSingleItSystemV2DeactivateSystemAsRightsHolderRequestParams {
     uuid: string;
-    aPIDeactivationReasonRequestDTO?: APIDeactivationReasonRequestDTO;
+    aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest?: APIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest;
 }
 
 export interface DeleteSingleItSystemV2DeleteExternalReferenceRequestParams {
@@ -97,36 +97,36 @@ export interface GetSingleItSystemV2GetItSystemsByRightsHoldersAccessRequestPara
 
 export interface PatchSingleItSystemV2PatchItSystemRequestParams {
     uuid: string;
-    aPIUpdateItSystemRequestDTO?: APIUpdateItSystemRequestDTO;
+    aPIPatchSingleItSystemV2PatchItSystemRequest?: APIPatchSingleItSystemV2PatchItSystemRequest;
 }
 
 export interface PatchSingleItSystemV2PatchItSystemAsRightsHolderRequestParams {
     uuid: string;
-    aPIRightsHolderUpdateSystemPropertiesRequestDTO?: APIRightsHolderUpdateSystemPropertiesRequestDTO;
+    aPIPatchSingleItSystemV2PatchItSystemAsRightsHolderRequest?: APIPatchSingleItSystemV2PatchItSystemAsRightsHolderRequest;
 }
 
 export interface PostSingleItSystemV2PostExternalReferenceRequestParams {
     systemUuid: string;
-    aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
+    aPIPostSingleItContractV2PostExternalReferenceRequest?: APIPostSingleItContractV2PostExternalReferenceRequest;
 }
 
 export interface PostSingleItSystemV2PostItSystemRequestParams {
-    aPICreateItSystemRequestDTO?: APICreateItSystemRequestDTO;
+    aPIPostSingleItSystemV2PostItSystemRequest?: APIPostSingleItSystemV2PostItSystemRequest;
 }
 
 export interface PostSingleItSystemV2PostItSystemAsRightsHolderRequestParams {
-    aPIRightsHolderFullItSystemRequestDTO?: APIRightsHolderFullItSystemRequestDTO;
+    aPIPostSingleItSystemV2PostItSystemAsRightsHolderRequest?: APIPostSingleItSystemV2PostItSystemAsRightsHolderRequest;
 }
 
 export interface PutSingleItSystemV2PutExternalReferenceRequestParams {
     systemUuid: string;
     externalReferenceUuid: string;
-    aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
+    aPIPostSingleItContractV2PostExternalReferenceRequest?: APIPostSingleItContractV2PostExternalReferenceRequest;
 }
 
 export interface PutSingleItSystemV2PutItSystemAsRightsHolderRequestParams {
     uuid: string;
-    aPIRightsHolderFullItSystemRequestDTO?: APIRightsHolderFullItSystemRequestDTO;
+    aPIPostSingleItSystemV2PostItSystemAsRightsHolderRequest?: APIPostSingleItSystemV2PostItSystemAsRightsHolderRequest;
 }
 
 
@@ -207,7 +207,7 @@ export class ItSystemV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling deleteSingleItSystemV2DeactivateSystemAsRightsHolder.');
         }
-        const aPIDeactivationReasonRequestDTO = requestParameters.aPIDeactivationReasonRequestDTO;
+        const aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest = requestParameters.aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -252,7 +252,7 @@ export class ItSystemV2Service {
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIDeactivationReasonRequestDTO,
+                body: aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -889,7 +889,7 @@ export class ItSystemV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling patchSingleItSystemV2PatchItSystem.');
         }
-        const aPIUpdateItSystemRequestDTO = requestParameters.aPIUpdateItSystemRequestDTO;
+        const aPIPatchSingleItSystemV2PatchItSystemRequest = requestParameters.aPIPatchSingleItSystemV2PatchItSystemRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -936,7 +936,7 @@ export class ItSystemV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIUpdateItSystemRequestDTO,
+                body: aPIPatchSingleItSystemV2PatchItSystemRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -959,7 +959,7 @@ export class ItSystemV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling patchSingleItSystemV2PatchItSystemAsRightsHolder.');
         }
-        const aPIRightsHolderUpdateSystemPropertiesRequestDTO = requestParameters.aPIRightsHolderUpdateSystemPropertiesRequestDTO;
+        const aPIPatchSingleItSystemV2PatchItSystemAsRightsHolderRequest = requestParameters.aPIPatchSingleItSystemV2PatchItSystemAsRightsHolderRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1006,7 +1006,7 @@ export class ItSystemV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIRightsHolderUpdateSystemPropertiesRequestDTO,
+                body: aPIPatchSingleItSystemV2PatchItSystemAsRightsHolderRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1029,7 +1029,7 @@ export class ItSystemV2Service {
         if (systemUuid === null || systemUuid === undefined) {
             throw new Error('Required parameter systemUuid was null or undefined when calling postSingleItSystemV2PostExternalReference.');
         }
-        const aPIExternalReferenceDataWriteRequestDTO = requestParameters.aPIExternalReferenceDataWriteRequestDTO;
+        const aPIPostSingleItContractV2PostExternalReferenceRequest = requestParameters.aPIPostSingleItContractV2PostExternalReferenceRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1075,7 +1075,7 @@ export class ItSystemV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIExternalReferenceDataWriteRequestDTO,
+                body: aPIPostSingleItContractV2PostExternalReferenceRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1094,7 +1094,7 @@ export class ItSystemV2Service {
     public postSingleItSystemV2PostItSystem(requestParameters: PostSingleItSystemV2PostItSystemRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleItSystemV2PostItSystem(requestParameters: PostSingleItSystemV2PostItSystemRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItSystemV2PostItSystem(requestParameters: PostSingleItSystemV2PostItSystemRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPICreateItSystemRequestDTO = requestParameters.aPICreateItSystemRequestDTO;
+        const aPIPostSingleItSystemV2PostItSystemRequest = requestParameters.aPIPostSingleItSystemV2PostItSystemRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1140,7 +1140,7 @@ export class ItSystemV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPICreateItSystemRequestDTO,
+                body: aPIPostSingleItSystemV2PostItSystemRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1159,7 +1159,7 @@ export class ItSystemV2Service {
     public postSingleItSystemV2PostItSystemAsRightsHolder(requestParameters: PostSingleItSystemV2PostItSystemAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleItSystemV2PostItSystemAsRightsHolder(requestParameters: PostSingleItSystemV2PostItSystemAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItSystemV2PostItSystemAsRightsHolder(requestParameters: PostSingleItSystemV2PostItSystemAsRightsHolderRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIRightsHolderFullItSystemRequestDTO = requestParameters.aPIRightsHolderFullItSystemRequestDTO;
+        const aPIPostSingleItSystemV2PostItSystemAsRightsHolderRequest = requestParameters.aPIPostSingleItSystemV2PostItSystemAsRightsHolderRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1205,7 +1205,7 @@ export class ItSystemV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIRightsHolderFullItSystemRequestDTO,
+                body: aPIPostSingleItSystemV2PostItSystemAsRightsHolderRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1232,7 +1232,7 @@ export class ItSystemV2Service {
         if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
             throw new Error('Required parameter externalReferenceUuid was null or undefined when calling putSingleItSystemV2PutExternalReference.');
         }
-        const aPIExternalReferenceDataWriteRequestDTO = requestParameters.aPIExternalReferenceDataWriteRequestDTO;
+        const aPIPostSingleItContractV2PostExternalReferenceRequest = requestParameters.aPIPostSingleItContractV2PostExternalReferenceRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1278,7 +1278,7 @@ export class ItSystemV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIExternalReferenceDataWriteRequestDTO,
+                body: aPIPostSingleItContractV2PostExternalReferenceRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1301,7 +1301,7 @@ export class ItSystemV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling putSingleItSystemV2PutItSystemAsRightsHolder.');
         }
-        const aPIRightsHolderFullItSystemRequestDTO = requestParameters.aPIRightsHolderFullItSystemRequestDTO;
+        const aPIPostSingleItSystemV2PostItSystemAsRightsHolderRequest = requestParameters.aPIPostSingleItSystemV2PostItSystemAsRightsHolderRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1347,7 +1347,7 @@ export class ItSystemV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIRightsHolderFullItSystemRequestDTO,
+                body: aPIPostSingleItSystemV2PostItSystemAsRightsHolderRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

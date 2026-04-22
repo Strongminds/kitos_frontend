@@ -11,9 +11,9 @@
  */
 
 
-export type APIAlertType = 0;
+export type APIAlertType = 'Advis';
 
 export const APIAlertType = {
-    NUMBER_0: 0 as APIAlertType
+    Advis: 'Advis' as APIAlertType
 };
 

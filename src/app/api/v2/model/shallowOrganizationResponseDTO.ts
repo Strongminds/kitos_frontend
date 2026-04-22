@@ -12,8 +12,8 @@
 
 
 export interface APIShallowOrganizationResponseDTO { 
+    cvr?: string | null;
     uuid: string;
     name: string;
-    cvr?: string | null;
 }
 

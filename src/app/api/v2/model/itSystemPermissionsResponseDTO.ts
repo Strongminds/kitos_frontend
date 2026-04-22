@@ -13,10 +13,10 @@ import { APISystemDeletionConflict } from './systemDeletionConflict';
 
 
 export interface APIItSystemPermissionsResponseDTO { 
+    deletionConflicts?: Array<APISystemDeletionConflict> | null;
+    modifyVisibility?: boolean;
     read?: boolean;
     modify?: boolean;
     delete?: boolean;
-    deletionConflicts?: Array<APISystemDeletionConflict> | null;
-    modifyVisibility?: boolean;
 }
 

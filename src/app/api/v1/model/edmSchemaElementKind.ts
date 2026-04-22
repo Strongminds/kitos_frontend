@@ -11,14 +11,14 @@
  */
 
 
-export type APIEdmSchemaElementKind = 0 | 1 | 2 | 3 | 4 | 5;
+export type APIEdmSchemaElementKind = 'None' | 'TypeDefinition' | 'Term' | 'Action' | 'EntityContainer' | 'Function';
 
 export const APIEdmSchemaElementKind = {
-    NUMBER_0: 0 as APIEdmSchemaElementKind,
-    NUMBER_1: 1 as APIEdmSchemaElementKind,
-    NUMBER_2: 2 as APIEdmSchemaElementKind,
-    NUMBER_3: 3 as APIEdmSchemaElementKind,
-    NUMBER_4: 4 as APIEdmSchemaElementKind,
-    NUMBER_5: 5 as APIEdmSchemaElementKind
+    None: 'None' as APIEdmSchemaElementKind,
+    TypeDefinition: 'TypeDefinition' as APIEdmSchemaElementKind,
+    Term: 'Term' as APIEdmSchemaElementKind,
+    Action: 'Action' as APIEdmSchemaElementKind,
+    EntityContainer: 'EntityContainer' as APIEdmSchemaElementKind,
+    Function: 'Function' as APIEdmSchemaElementKind
 };
 

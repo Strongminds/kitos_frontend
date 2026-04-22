@@ -21,17 +21,17 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
-import { APICreateItSystemUsageRequestDTO } from '../model/aPICreateItSystemUsageRequestDTO';
+import { APIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest } from '../model/aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest';
 // @ts-ignore
-import { APIExternalReferenceDataWriteRequestDTO } from '../model/aPIExternalReferenceDataWriteRequestDTO';
+import { APIPostSingleItContractV2PostExternalReferenceRequest } from '../model/aPIPostSingleItContractV2PostExternalReferenceRequest';
 // @ts-ignore
-import { APIJournalPeriodDTO } from '../model/aPIJournalPeriodDTO';
+import { APIPostSingleItSystemUsageV2PostItSystemUsageRequest } from '../model/aPIPostSingleItSystemUsageV2PostItSystemUsageRequest';
 // @ts-ignore
-import { APIRoleAssignmentRequestDTO } from '../model/aPIRoleAssignmentRequestDTO';
+import { APIPostSingleItSystemUsageV2PostJournalPeriodRequest } from '../model/aPIPostSingleItSystemUsageV2PostJournalPeriodRequest';
 // @ts-ignore
-import { APISystemRelationWriteRequestDTO } from '../model/aPISystemRelationWriteRequestDTO';
+import { APIPostSingleItSystemUsageV2PostSystemUsageRelationRequest } from '../model/aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest';
 // @ts-ignore
-import { APIUpdateItSystemUsageRequestDTO } from '../model/aPIUpdateItSystemUsageRequestDTO';
+import { APIPutSingleItSystemUsageV2PutSystemUsageRequest } from '../model/aPIPutSingleItSystemUsageV2PutSystemUsageRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -98,59 +98,59 @@ export interface GetSingleItSystemUsageV2GetSystemUsageRelationRequestParams {
 
 export interface PatchSingleItSystemUsageV2PatchAddRoleAssignmentRequestParams {
     systemUsageUuid: string;
-    aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
+    aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest?: APIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
 }
 
 export interface PatchSingleItSystemUsageV2PatchRemoveRoleAssignmentRequestParams {
     systemUsageUuid: string;
-    aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
+    aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest?: APIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
 }
 
 export interface PatchSingleItSystemUsageV2PatchSystemUsageRequestParams {
     systemUsageUuid: string;
-    aPIUpdateItSystemUsageRequestDTO?: APIUpdateItSystemUsageRequestDTO;
+    aPIPutSingleItSystemUsageV2PutSystemUsageRequest?: APIPutSingleItSystemUsageV2PutSystemUsageRequest;
 }
 
 export interface PostSingleItSystemUsageV2PostExternalReferenceRequestParams {
     systemUsageUuid: string;
-    aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
+    aPIPostSingleItContractV2PostExternalReferenceRequest?: APIPostSingleItContractV2PostExternalReferenceRequest;
 }
 
 export interface PostSingleItSystemUsageV2PostItSystemUsageRequestParams {
-    aPICreateItSystemUsageRequestDTO?: APICreateItSystemUsageRequestDTO;
+    aPIPostSingleItSystemUsageV2PostItSystemUsageRequest?: APIPostSingleItSystemUsageV2PostItSystemUsageRequest;
 }
 
 export interface PostSingleItSystemUsageV2PostJournalPeriodRequestParams {
     systemUsageUuid: string;
-    aPIJournalPeriodDTO: APIJournalPeriodDTO;
+    aPIPostSingleItSystemUsageV2PostJournalPeriodRequest: APIPostSingleItSystemUsageV2PostJournalPeriodRequest;
 }
 
 export interface PostSingleItSystemUsageV2PostSystemUsageRelationRequestParams {
     systemUsageUuid: string;
-    aPISystemRelationWriteRequestDTO: APISystemRelationWriteRequestDTO;
+    aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest: APIPostSingleItSystemUsageV2PostSystemUsageRelationRequest;
 }
 
 export interface PutSingleItSystemUsageV2PutExternalReferenceRequestParams {
     systemUsageUuid: string;
     externalReferenceUuid: string;
-    aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
+    aPIPostSingleItContractV2PostExternalReferenceRequest?: APIPostSingleItContractV2PostExternalReferenceRequest;
 }
 
 export interface PutSingleItSystemUsageV2PutJournalPeriodRequestParams {
     systemUsageUuid: string;
     journalPeriodUuid: string;
-    aPIJournalPeriodDTO?: APIJournalPeriodDTO;
+    aPIPostSingleItSystemUsageV2PostJournalPeriodRequest?: APIPostSingleItSystemUsageV2PostJournalPeriodRequest;
 }
 
 export interface PutSingleItSystemUsageV2PutSystemUsageRequestParams {
     systemUsageUuid: string;
-    aPIUpdateItSystemUsageRequestDTO?: APIUpdateItSystemUsageRequestDTO;
+    aPIPutSingleItSystemUsageV2PutSystemUsageRequest?: APIPutSingleItSystemUsageV2PutSystemUsageRequest;
 }
 
 export interface PutSingleItSystemUsageV2PutSystemUsageRelationRequestParams {
     systemUsageUuid: string;
     systemRelationUuid: string;
-    aPISystemRelationWriteRequestDTO?: APISystemRelationWriteRequestDTO;
+    aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest?: APIPostSingleItSystemUsageV2PostSystemUsageRelationRequest;
 }
 
 
@@ -941,7 +941,7 @@ export class ItSystemUsageV2Service {
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
             throw new Error('Required parameter systemUsageUuid was null or undefined when calling patchSingleItSystemUsageV2PatchAddRoleAssignment.');
         }
-        const aPIRoleAssignmentRequestDTO = requestParameters.aPIRoleAssignmentRequestDTO;
+        const aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest = requestParameters.aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -988,7 +988,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIRoleAssignmentRequestDTO,
+                body: aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1011,7 +1011,7 @@ export class ItSystemUsageV2Service {
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
             throw new Error('Required parameter systemUsageUuid was null or undefined when calling patchSingleItSystemUsageV2PatchRemoveRoleAssignment.');
         }
-        const aPIRoleAssignmentRequestDTO = requestParameters.aPIRoleAssignmentRequestDTO;
+        const aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest = requestParameters.aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1058,7 +1058,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIRoleAssignmentRequestDTO,
+                body: aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1081,7 +1081,7 @@ export class ItSystemUsageV2Service {
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
             throw new Error('Required parameter systemUsageUuid was null or undefined when calling patchSingleItSystemUsageV2PatchSystemUsage.');
         }
-        const aPIUpdateItSystemUsageRequestDTO = requestParameters.aPIUpdateItSystemUsageRequestDTO;
+        const aPIPutSingleItSystemUsageV2PutSystemUsageRequest = requestParameters.aPIPutSingleItSystemUsageV2PutSystemUsageRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1128,7 +1128,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIUpdateItSystemUsageRequestDTO,
+                body: aPIPutSingleItSystemUsageV2PutSystemUsageRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1151,7 +1151,7 @@ export class ItSystemUsageV2Service {
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
             throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageV2PostExternalReference.');
         }
-        const aPIExternalReferenceDataWriteRequestDTO = requestParameters.aPIExternalReferenceDataWriteRequestDTO;
+        const aPIPostSingleItContractV2PostExternalReferenceRequest = requestParameters.aPIPostSingleItContractV2PostExternalReferenceRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1197,7 +1197,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIExternalReferenceDataWriteRequestDTO,
+                body: aPIPostSingleItContractV2PostExternalReferenceRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1216,7 +1216,7 @@ export class ItSystemUsageV2Service {
     public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItSystemUsageV2PostItSystemUsage(requestParameters: PostSingleItSystemUsageV2PostItSystemUsageRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPICreateItSystemUsageRequestDTO = requestParameters.aPICreateItSystemUsageRequestDTO;
+        const aPIPostSingleItSystemUsageV2PostItSystemUsageRequest = requestParameters.aPIPostSingleItSystemUsageV2PostItSystemUsageRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1262,7 +1262,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPICreateItSystemUsageRequestDTO,
+                body: aPIPostSingleItSystemUsageV2PostItSystemUsageRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1285,9 +1285,9 @@ export class ItSystemUsageV2Service {
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
             throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageV2PostJournalPeriod.');
         }
-        const aPIJournalPeriodDTO = requestParameters.aPIJournalPeriodDTO;
-        if (aPIJournalPeriodDTO === null || aPIJournalPeriodDTO === undefined) {
-            throw new Error('Required parameter aPIJournalPeriodDTO was null or undefined when calling postSingleItSystemUsageV2PostJournalPeriod.');
+        const aPIPostSingleItSystemUsageV2PostJournalPeriodRequest = requestParameters.aPIPostSingleItSystemUsageV2PostJournalPeriodRequest;
+        if (aPIPostSingleItSystemUsageV2PostJournalPeriodRequest === null || aPIPostSingleItSystemUsageV2PostJournalPeriodRequest === undefined) {
+            throw new Error('Required parameter aPIPostSingleItSystemUsageV2PostJournalPeriodRequest was null or undefined when calling postSingleItSystemUsageV2PostJournalPeriod.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1334,7 +1334,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIJournalPeriodDTO,
+                body: aPIPostSingleItSystemUsageV2PostJournalPeriodRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1357,9 +1357,9 @@ export class ItSystemUsageV2Service {
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
             throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageV2PostSystemUsageRelation.');
         }
-        const aPISystemRelationWriteRequestDTO = requestParameters.aPISystemRelationWriteRequestDTO;
-        if (aPISystemRelationWriteRequestDTO === null || aPISystemRelationWriteRequestDTO === undefined) {
-            throw new Error('Required parameter aPISystemRelationWriteRequestDTO was null or undefined when calling postSingleItSystemUsageV2PostSystemUsageRelation.');
+        const aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest = requestParameters.aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest;
+        if (aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest === null || aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest === undefined) {
+            throw new Error('Required parameter aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest was null or undefined when calling postSingleItSystemUsageV2PostSystemUsageRelation.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -1406,7 +1406,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPISystemRelationWriteRequestDTO,
+                body: aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1433,7 +1433,7 @@ export class ItSystemUsageV2Service {
         if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
             throw new Error('Required parameter externalReferenceUuid was null or undefined when calling putSingleItSystemUsageV2PutExternalReference.');
         }
-        const aPIExternalReferenceDataWriteRequestDTO = requestParameters.aPIExternalReferenceDataWriteRequestDTO;
+        const aPIPostSingleItContractV2PostExternalReferenceRequest = requestParameters.aPIPostSingleItContractV2PostExternalReferenceRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1479,7 +1479,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIExternalReferenceDataWriteRequestDTO,
+                body: aPIPostSingleItContractV2PostExternalReferenceRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1506,7 +1506,7 @@ export class ItSystemUsageV2Service {
         if (journalPeriodUuid === null || journalPeriodUuid === undefined) {
             throw new Error('Required parameter journalPeriodUuid was null or undefined when calling putSingleItSystemUsageV2PutJournalPeriod.');
         }
-        const aPIJournalPeriodDTO = requestParameters.aPIJournalPeriodDTO;
+        const aPIPostSingleItSystemUsageV2PostJournalPeriodRequest = requestParameters.aPIPostSingleItSystemUsageV2PostJournalPeriodRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1552,7 +1552,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIJournalPeriodDTO,
+                body: aPIPostSingleItSystemUsageV2PostJournalPeriodRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1575,7 +1575,7 @@ export class ItSystemUsageV2Service {
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
             throw new Error('Required parameter systemUsageUuid was null or undefined when calling putSingleItSystemUsageV2PutSystemUsage.');
         }
-        const aPIUpdateItSystemUsageRequestDTO = requestParameters.aPIUpdateItSystemUsageRequestDTO;
+        const aPIPutSingleItSystemUsageV2PutSystemUsageRequest = requestParameters.aPIPutSingleItSystemUsageV2PutSystemUsageRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1621,7 +1621,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIUpdateItSystemUsageRequestDTO,
+                body: aPIPutSingleItSystemUsageV2PutSystemUsageRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1648,7 +1648,7 @@ export class ItSystemUsageV2Service {
         if (systemRelationUuid === null || systemRelationUuid === undefined) {
             throw new Error('Required parameter systemRelationUuid was null or undefined when calling putSingleItSystemUsageV2PutSystemUsageRelation.');
         }
-        const aPISystemRelationWriteRequestDTO = requestParameters.aPISystemRelationWriteRequestDTO;
+        const aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest = requestParameters.aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1694,7 +1694,7 @@ export class ItSystemUsageV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPISystemRelationWriteRequestDTO,
+                body: aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

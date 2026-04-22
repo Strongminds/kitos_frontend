@@ -10,13 +10,13 @@
  * Do not edit the class manually.
  */
 import { APIStsOrganizationChangeLogOriginOption } from './stsOrganizationChangeLogOriginOption';
-import { APIUserReferenceResponseDTO } from './userReferenceResponseDTO';
 import { APIConnectionUpdateOrganizationUnitConsequenceDTO } from './connectionUpdateOrganizationUnitConsequenceDTO';
+import { APIStsOrganizationChangeLogResponseDTOUser } from './stsOrganizationChangeLogResponseDTOUser';
 
 
 export interface APIStsOrganizationChangeLogResponseDTO { 
     origin?: APIStsOrganizationChangeLogOriginOption;
-    user?: APIUserReferenceResponseDTO;
+    user?: APIStsOrganizationChangeLogResponseDTOUser | null;
     logTime?: string;
     consequences?: Array<APIConnectionUpdateOrganizationUnitConsequenceDTO> | null;
 }

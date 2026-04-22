@@ -12,9 +12,9 @@
 
 
 export interface APINotificationResourcePermissionsDTO { 
+    deactivate?: boolean;
     read?: boolean;
     modify?: boolean;
     delete?: boolean;
-    deactivate?: boolean;
 }
 

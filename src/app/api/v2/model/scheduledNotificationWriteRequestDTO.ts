@@ -9,8 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIBaseNotificationPropertiesWriteRequestDTO } from './baseNotificationPropertiesWriteRequestDTO';
 import { APIRepetitionFrequencyOptions } from './repetitionFrequencyOptions';
+import { APIImmediateNotificationWriteRequestDTOBaseProperties } from './immediateNotificationWriteRequestDTOBaseProperties';
 
 
 export interface APIScheduledNotificationWriteRequestDTO { 
@@ -18,6 +18,6 @@ export interface APIScheduledNotificationWriteRequestDTO {
     toDate?: string | null;
     repetitionFrequency: APIRepetitionFrequencyOptions;
     fromDate: string;
-    baseProperties: APIBaseNotificationPropertiesWriteRequestDTO;
+    baseProperties: APIImmediateNotificationWriteRequestDTOBaseProperties;
 }
 

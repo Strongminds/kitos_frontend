@@ -17,9 +17,9 @@ export interface APIPublicMessageRequestDTO {
     title?: string | null;
     longDescription?: string | null;
     shortDescription?: string | null;
-    status?: APIPublicMessageStatusChoice;
+    status?: APIPublicMessageStatusChoice | null;
     link?: string | null;
-    iconType?: APIPublicMessageIconTypeChoice;
+    iconType?: APIPublicMessageIconTypeChoice | null;
     isMain?: boolean;
 }
 

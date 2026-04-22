@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APILegalPropertiesUpdateRequestDTO } from '../model/aPILegalPropertiesUpdateRequestDTO';
+import { APIPatchSingleItSystemDBSV2PatchDbsPropertiesRequest } from '../model/aPIPatchSingleItSystemDBSV2PatchDbsPropertiesRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -28,7 +28,7 @@ import { Configuration }                                     from '../configurat
 
 export interface PatchSingleItSystemDBSV2PatchDbsPropertiesRequestParams {
     systemUuid: string;
-    aPILegalPropertiesUpdateRequestDTO?: APILegalPropertiesUpdateRequestDTO;
+    aPIPatchSingleItSystemDBSV2PatchDbsPropertiesRequest?: APIPatchSingleItSystemDBSV2PatchDbsPropertiesRequest;
 }
 
 
@@ -109,7 +109,7 @@ export class ItSystemDBSV2Service {
         if (systemUuid === null || systemUuid === undefined) {
             throw new Error('Required parameter systemUuid was null or undefined when calling patchSingleItSystemDBSV2PatchDbsProperties.');
         }
-        const aPILegalPropertiesUpdateRequestDTO = requestParameters.aPILegalPropertiesUpdateRequestDTO;
+        const aPIPatchSingleItSystemDBSV2PatchDbsPropertiesRequest = requestParameters.aPIPatchSingleItSystemDBSV2PatchDbsPropertiesRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -156,7 +156,7 @@ export class ItSystemDBSV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPILegalPropertiesUpdateRequestDTO,
+                body: aPIPatchSingleItSystemDBSV2PatchDbsPropertiesRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

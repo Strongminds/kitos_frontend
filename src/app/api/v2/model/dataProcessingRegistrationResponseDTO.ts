@@ -10,23 +10,24 @@
  * Do not edit the class manually.
  */
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIDataProcessingRegistrationResponseDTOGeneral } from './dataProcessingRegistrationResponseDTOGeneral';
 import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
-import { APIDataProcessingRegistrationGeneralDataResponseDTO } from './dataProcessingRegistrationGeneralDataResponseDTO';
-import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
-import { APIDataProcessingRegistrationOversightResponseDTO } from './dataProcessingRegistrationOversightResponseDTO';
+import { APIDataProcessingRegistrationResponseDTOOversight } from './dataProcessingRegistrationResponseDTOOversight';
+import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
+import { APIDataProcessingRegistrationResponseDTOOrganizationContext } from './dataProcessingRegistrationResponseDTOOrganizationContext';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 export interface APIDataProcessingRegistrationResponseDTO { 
     name: string;
     uuid: string;
-    createdBy: APIIdentityNamePairResponseDTO;
+    createdBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
     lastModified: string;
-    lastModifiedBy: APIIdentityNamePairResponseDTO;
-    organizationContext: APIShallowOrganizationResponseDTO;
-    general: APIDataProcessingRegistrationGeneralDataResponseDTO;
+    lastModifiedBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
+    organizationContext: APIDataProcessingRegistrationResponseDTOOrganizationContext;
+    general: APIDataProcessingRegistrationResponseDTOGeneral;
     systemUsages: Array<APIIdentityNamePairResponseDTO>;
-    oversight: APIDataProcessingRegistrationOversightResponseDTO;
+    oversight: APIDataProcessingRegistrationResponseDTOOversight;
     roles: Array<APIRoleAssignmentResponseDTO>;
     externalReferences: Array<APIExternalReferenceDataResponseDTO>;
 }

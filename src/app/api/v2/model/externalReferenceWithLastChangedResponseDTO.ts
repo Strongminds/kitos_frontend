@@ -12,12 +12,12 @@
 
 
 export interface APIExternalReferenceWithLastChangedResponseDTO { 
+    lastChangedByUsername?: string | null;
+    lastChangedDate?: string;
+    uuid?: string;
     title: string;
     documentId?: string | null;
     url?: string | null;
     masterReference: boolean;
-    uuid?: string;
-    lastChangedByUsername?: string | null;
-    lastChangedDate?: string;
 }
 

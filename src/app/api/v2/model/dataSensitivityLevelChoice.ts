@@ -11,12 +11,12 @@
  */
 
 
-export type APIDataSensitivityLevelChoice = 0 | 1 | 2 | 3;
+export type APIDataSensitivityLevelChoice = 'None' | 'PersonData' | 'SensitiveData' | 'LegalData';
 
 export const APIDataSensitivityLevelChoice = {
-    NUMBER_0: 0 as APIDataSensitivityLevelChoice,
-    NUMBER_1: 1 as APIDataSensitivityLevelChoice,
-    NUMBER_2: 2 as APIDataSensitivityLevelChoice,
-    NUMBER_3: 3 as APIDataSensitivityLevelChoice
+    None: 'None' as APIDataSensitivityLevelChoice,
+    PersonData: 'PersonData' as APIDataSensitivityLevelChoice,
+    SensitiveData: 'SensitiveData' as APIDataSensitivityLevelChoice,
+    LegalData: 'LegalData' as APIDataSensitivityLevelChoice
 };
 

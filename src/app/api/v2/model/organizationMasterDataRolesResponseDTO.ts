@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIDataResponsibleResponseDTO } from './dataResponsibleResponseDTO';
-import { APIContactPersonResponseDTO } from './contactPersonResponseDTO';
-import { APIDataProtectionAdvisorResponseDTO } from './dataProtectionAdvisorResponseDTO';
+import { APIOrganizationMasterDataRolesResponseDTODataProtectionAdvisor } from './organizationMasterDataRolesResponseDTODataProtectionAdvisor';
+import { APIOrganizationMasterDataRolesResponseDTODataResponsible } from './organizationMasterDataRolesResponseDTODataResponsible';
+import { APIOrganizationMasterDataRolesResponseDTOContactPerson } from './organizationMasterDataRolesResponseDTOContactPerson';
 
 
 export interface APIOrganizationMasterDataRolesResponseDTO { 
     organizationUuid?: string;
-    contactPerson?: APIContactPersonResponseDTO;
-    dataResponsible?: APIDataResponsibleResponseDTO;
-    dataProtectionAdvisor?: APIDataProtectionAdvisorResponseDTO;
+    contactPerson?: APIOrganizationMasterDataRolesResponseDTOContactPerson | null;
+    dataResponsible?: APIOrganizationMasterDataRolesResponseDTODataResponsible | null;
+    dataProtectionAdvisor?: APIOrganizationMasterDataRolesResponseDTODataProtectionAdvisor | null;
 }
 

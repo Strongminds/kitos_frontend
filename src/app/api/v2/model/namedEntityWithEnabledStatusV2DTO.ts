@@ -12,9 +12,9 @@
 
 
 export interface APINamedEntityWithEnabledStatusV2DTO { 
+    disabled?: boolean;
     id?: number;
     uuid?: string | null;
     name?: string | null;
-    disabled?: boolean;
 }
 

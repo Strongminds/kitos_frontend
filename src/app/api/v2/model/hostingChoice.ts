@@ -11,12 +11,12 @@
  */
 
 
-export type APIHostingChoice = 0 | 1 | 2 | 3;
+export type APIHostingChoice = 'Undecided' | 'OnPremise' | 'External' | 'Hybrid';
 
 export const APIHostingChoice = {
-    NUMBER_0: 0 as APIHostingChoice,
-    NUMBER_1: 1 as APIHostingChoice,
-    NUMBER_2: 2 as APIHostingChoice,
-    NUMBER_3: 3 as APIHostingChoice
+    Undecided: 'Undecided' as APIHostingChoice,
+    OnPremise: 'OnPremise' as APIHostingChoice,
+    External: 'External' as APIHostingChoice,
+    Hybrid: 'Hybrid' as APIHostingChoice
 };
 

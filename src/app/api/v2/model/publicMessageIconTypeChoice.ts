@@ -11,14 +11,14 @@
  */
 
 
-export type APIPublicMessageIconTypeChoice = 0 | 1 | 2 | 3 | 4 | 5;
+export type APIPublicMessageIconTypeChoice = 'Document' | 'Clipboard' | 'Settings' | 'Calendar' | 'MultipleUsers' | 'Mail';
 
 export const APIPublicMessageIconTypeChoice = {
-    NUMBER_0: 0 as APIPublicMessageIconTypeChoice,
-    NUMBER_1: 1 as APIPublicMessageIconTypeChoice,
-    NUMBER_2: 2 as APIPublicMessageIconTypeChoice,
-    NUMBER_3: 3 as APIPublicMessageIconTypeChoice,
-    NUMBER_4: 4 as APIPublicMessageIconTypeChoice,
-    NUMBER_5: 5 as APIPublicMessageIconTypeChoice
+    Document: 'Document' as APIPublicMessageIconTypeChoice,
+    Clipboard: 'Clipboard' as APIPublicMessageIconTypeChoice,
+    Settings: 'Settings' as APIPublicMessageIconTypeChoice,
+    Calendar: 'Calendar' as APIPublicMessageIconTypeChoice,
+    MultipleUsers: 'MultipleUsers' as APIPublicMessageIconTypeChoice,
+    Mail: 'Mail' as APIPublicMessageIconTypeChoice
 };
 

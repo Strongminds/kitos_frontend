@@ -13,11 +13,11 @@ import { APIOrganizationType } from './organizationType';
 
 
 export interface APIOrganizationUpdateRequestDTO { 
+    updateForeignCountryCode?: boolean;
     name?: string | null;
     type?: APIOrganizationType;
     cvr?: string | null;
     foreignCountryCodeUuid?: string | null;
     isSupplier?: boolean;
-    updateForeignCountryCode?: boolean;
 }
 

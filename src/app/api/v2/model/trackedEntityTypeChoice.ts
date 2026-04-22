@@ -11,14 +11,14 @@
  */
 
 
-export type APITrackedEntityTypeChoice = 0 | 1 | 2 | 3 | 4 | 6;
+export type APITrackedEntityTypeChoice = 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit';
 
 export const APITrackedEntityTypeChoice = {
-    NUMBER_0: 0 as APITrackedEntityTypeChoice,
-    NUMBER_1: 1 as APITrackedEntityTypeChoice,
-    NUMBER_2: 2 as APITrackedEntityTypeChoice,
-    NUMBER_3: 3 as APITrackedEntityTypeChoice,
-    NUMBER_4: 4 as APITrackedEntityTypeChoice,
-    NUMBER_6: 6 as APITrackedEntityTypeChoice
+    ItSystem: 'ItSystem' as APITrackedEntityTypeChoice,
+    ItSystemUsage: 'ItSystemUsage' as APITrackedEntityTypeChoice,
+    ItInterface: 'ItInterface' as APITrackedEntityTypeChoice,
+    ItContract: 'ItContract' as APITrackedEntityTypeChoice,
+    DataProcessingRegistration: 'DataProcessingRegistration' as APITrackedEntityTypeChoice,
+    OrganizationUnit: 'OrganizationUnit' as APITrackedEntityTypeChoice
 };
 
