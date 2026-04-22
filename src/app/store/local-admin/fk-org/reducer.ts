@@ -43,7 +43,7 @@ export const fkOrgFeature = createFeature({
     ),
     on(FkOrgActions.getSynchronizationStatusSuccess, (state, { synchronizationStatus }): FkOrgState => {
       let accessError = undefined;
-      if (synchronizationStatus.accessStatus?.error !== undefined) {
+      if (synchronizationStatus.accessStatus?.error != null) {
         accessError = handleAccessError(synchronizationStatus.accessStatus.error);
       }
 
@@ -171,6 +171,7 @@ function handleAccessError(error: APICheckConnectionError) {
 function mapChangelogModel(changelog: APIStsOrganizationChangeLogResponseDTO): FkOrgChangeLogModel {
   return {
     ...changelog,
+    user: changelog.user ?? undefined,
     consequences: changelog.consequences?.map((unit) => adaptFkOrganizationUnit(unit)) ?? [],
   };
 }

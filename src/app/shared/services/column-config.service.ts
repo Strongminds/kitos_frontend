@@ -181,12 +181,12 @@ export class ColumnConfigService {
   ): boolean {
     if (!config?.visibleColumns) return false;
 
-    const toPersistId = (obj: { persistId?: string }) => obj.persistId;
+    const toPersistId = (obj: { persistId?: string | null }) => obj.persistId ?? undefined;
 
     const disabledByUiPersistIds = new Set(columns.filter((column) => column.disabledByUIConfig).map(toPersistId));
 
     const configPersistIds = new Set(
-      config.visibleColumns.map(toPersistId ?? undefined).filter((x) => !disabledByUiPersistIds.has(x)),
+      config.visibleColumns.map(toPersistId).filter((x) => !disabledByUiPersistIds.has(x)),
     );
 
     const visibleColumnPersistIds = new Set(
