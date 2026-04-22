@@ -338,22 +338,22 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.businessTypeService.patchSingleItSystemLocalBusinessTypesInternalV2PatchLocalBusinessType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-system_usage-archive-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.archiveTypeService.patchSingleItSystemLocalArchiveTypesInternalV2PatchLocalArchiveType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-system_usage-archive-location-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.archiveLocationService.patchSingleItSystemLocalArchiveLocationTypesInternalV2PatchArchiveLocationType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-system_usage-archive-location-test-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.archiveTestLocationService.patchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(
@@ -368,22 +368,22 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.dataTypeService.patchSingleItSystemLocalDataTypesInternalV2PatchLocalDataType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-system_usage-relation-frequency-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.frequencyTypeService.patchSingleItSystemLocalFrequencyTypesInternalV2PatchLocalRelationFrequencyType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-interface_interface-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.interfaceTypeService.patchSingleItSystemLocalInterfaceTypesInternalV2PatchLocalInterfaceType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.sensitivePersonalDataTypeService.patchSingleItSystemLocalSensitivePersonalDataTypesInternalV2PatchLocalSensitivePersonalDataType(
@@ -407,8 +407,8 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.registerTypeService.patchSingleItSystemLocalRegisterTypesInternalV2PatchLocalRegisterType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
 
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
@@ -425,22 +425,22 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.oversightOptionService.patchSingleDprLocalOversightOptionTypesInternalV2PatchLocalOversightOptionType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'data-processing-data-responsible-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.dataResponsibleService.patchSingleDprLocalDataResponsibleTypesInternalV2PatchLocalDataResponsibleType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'data-processing-country-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.countryService.patchSingleDprLocalCountryOptionTypesInternalV2PatchLocalCountryOptionType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
 
       //It contract regular option types
       case 'it-contract_contract-type':
@@ -448,29 +448,29 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.contractTypeService.patchSingleItContractLocalContractTypesInternalV2PatchLocalContractType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-contract_contract-template-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.templateTypeService.patchSingleItContractLocalTemplateTypesInternalV2PatchLocalTemplateType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-contract_purchase-form-type':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.purchaseFormTypeService.patchSingleItContractLocalPurchaseFormTypesInternalV2PatchLocalPurchaseFormType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-contract-payment-model-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.paymentModelTypeService.patchSingleItContractLocalPaymentModelTypesInternalV2PatchLocalPaymentModelType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-contract-agreement-element-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.agreementElementTypeService.patchSingleItContractLocalAgreementElementTypesInternalV2PatchLocalAgreementElementType(
@@ -485,8 +485,8 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.optionExtendTypeService.patchSingleItContractLocalOptionExtendTypesInternalV2PatchLocalOptionExtendType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
       case 'it-contract-payment-frequency-types':
         return (organizationUuid: string, optionUuid: string, request: APILocalRegularOptionUpdateRequestDTO) =>
           this.paymentFrequencyTypeService.patchSingleItContractLocalPaymentFrequencyTypesInternalV2PatchLocalPaymentFrequencyType(
@@ -528,8 +528,8 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.criticalityTypeService.patchSingleItContractLocalCriticalityTypesInternalV2PatchLocalCriticalityType({
             organizationUuid,
             optionUuid,
-            aPILocalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest: request,
+    });
 
       //Role option types
       case 'organization-unit':
@@ -546,24 +546,24 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.itSystemRoleService.patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole({
             organizationUuid,
             optionUuid,
-            aPILocalRoleOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest: request,
+    });
 
       case 'data-processing':
         return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
           this.dprRoleService.patchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRole({
             organizationUuid,
             optionUuid,
-            aPILocalRoleOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest: request,
+    });
 
       case 'it-contract':
         return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
           this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
             organizationUuid,
             optionUuid,
-            aPILocalRoleOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest: request,
+    });
       default:
         throw new Error(`Patch operation is not supported for ${optionType}`);
     }
@@ -586,24 +586,24 @@ export class LocalAdminOptionTypeService implements OnDestroy {
           this.itSystemRoleService.patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole({
             organizationUuid,
             optionUuid,
-            aPILocalRoleOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest: request,
+    });
 
       case 'data-processing':
         return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
           this.dprRoleService.patchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRole({
             organizationUuid,
             optionUuid,
-            aPILocalRoleOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest: request,
+    });
 
       case 'it-contract':
         return (organizationUuid: string, optionUuid: string, request: APILocalRoleOptionUpdateRequestDTO) =>
           this.itContractRoleService.patchSingleItContractLocalRoleOptionTypesInternalV2PatchLocalItContractRole({
             organizationUuid,
             optionUuid,
-            aPILocalRoleOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest: request,
+    });
       default:
         throw new Error(`Patch role operation is not supported for ${optionType}`);
     }
@@ -618,20 +618,20 @@ export class LocalAdminOptionTypeService implements OnDestroy {
         return (organizationUuid, optionUuid) =>
           this.businessTypeService.postSingleItSystemLocalBusinessTypesInternalV2CreateLocalBusinessType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it-system_usage-archive-type':
         return (organizationUuid, optionUuid) =>
           this.archiveTypeService.postSingleItSystemLocalArchiveTypesInternalV2CreateLocalArchiveType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it-system_usage-archive-location-type':
         return (organizationUuid, optionUuid) =>
           this.archiveLocationService.postSingleItSystemLocalArchiveLocationTypesInternalV2CreateArchiveLocationType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it-system_usage-archive-location-test-type':
         return (organizationUuid, optionUuid) =>
           this.archiveTestLocationService.postSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(
@@ -644,20 +644,20 @@ export class LocalAdminOptionTypeService implements OnDestroy {
         return (organizationUuid, optionUuid) =>
           this.dataTypeService.postSingleItSystemLocalDataTypesInternalV2CreateLocalDataType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it-system_usage-relation-frequency-type':
         return (organizationUuid, optionUuid) =>
           this.frequencyTypeService.postSingleItSystemLocalFrequencyTypesInternalV2CreateLocalRelationFrequencyType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it-interface_interface-type':
         return (organizationUuid, optionUuid) =>
           this.interfaceTypeService.postSingleItSystemLocalInterfaceTypesInternalV2CreateLocalInterfaceType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (organizationUuid, optionUuid) =>
           this.sensitivePersonalDataTypeService.postSingleItSystemLocalSensitivePersonalDataTypesInternalV2CreateLocalSensitivePersonalDataType(
@@ -678,8 +678,8 @@ export class LocalAdminOptionTypeService implements OnDestroy {
         return (organizationUuid, optionUuid) =>
           this.registerTypeService.postSingleItSystemLocalRegisterTypesInternalV2CreateLocalRegisterType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
 
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
@@ -694,34 +694,34 @@ export class LocalAdminOptionTypeService implements OnDestroy {
         return (organizationUuid, optionUuid) =>
           this.oversightOptionService.postSingleDprLocalOversightOptionTypesInternalV2CreateLocalOversightOptionType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'data-processing-data-responsible-types':
         return (organizationUuid, optionUuid) =>
           this.dataResponsibleService.postSingleDprLocalDataResponsibleTypesInternalV2CreateLocalDataResponsibleType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'data-processing-country-types':
         return (organizationUuid, optionUuid) =>
           this.countryService.postSingleDprLocalCountryOptionTypesInternalV2CreateLocalCountryOptionType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
 
       //It contract regular option types
       case 'it-contract_contract-type':
         return (organizationUuid, optionUuid) =>
           this.contractTypeService.postSingleItContractLocalContractTypesInternalV2CreateLocalContractType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it-contract_contract-template-type':
         return (organizationUuid, optionUuid) =>
           this.templateTypeService.postSingleItContractLocalTemplateTypesInternalV2CreateLocalTemplateType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it-contract_purchase-form-type':
         return (organizationUuid, optionUuid) =>
           this.purchaseFormTypeService.postSingleItContractLocalPurchaseFormTypesInternalV2CreateLocalResultPurchaseFormType(
@@ -734,8 +734,8 @@ export class LocalAdminOptionTypeService implements OnDestroy {
         return (organizationUuid, optionUuid) =>
           this.paymentModelTypeService.postSingleItContractLocalPaymentModelTypesInternalV2CreateLocalPaymentModelType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it-contract-agreement-element-types':
         return (organizationUuid, optionUuid) =>
           this.agreementElementTypeService.postSingleItContractLocalAgreementElementTypesInternalV2CreateLocalAgreementElementType(
@@ -748,8 +748,8 @@ export class LocalAdminOptionTypeService implements OnDestroy {
         return (organizationUuid, optionUuid) =>
           this.optionExtendTypeService.postSingleItContractLocalOptionExtendTypesInternalV2CreateLocalOptionExtendType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       case 'it-contract-payment-frequency-types':
         return (organizationUuid, optionUuid) =>
           this.paymentFrequencyTypeService.postSingleItContractLocalPaymentFrequencyTypesInternalV2CreateLocalPaymentFrequencyType(
@@ -786,8 +786,8 @@ export class LocalAdminOptionTypeService implements OnDestroy {
         return (organizationUuid, optionUuid) =>
           this.criticalityTypeService.postSingleItContractLocalCriticalityTypesInternalV2CreateLocalCriticalityType({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
 
       //Role option types
       case 'organization-unit':
@@ -802,22 +802,22 @@ export class LocalAdminOptionTypeService implements OnDestroy {
         return (organizationUuid, optionUuid) =>
           this.itSystemRoleService.postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
 
       case 'data-processing':
         return (organizationUuid, optionUuid) =>
           this.dprRoleService.postSingleDprLocalRoleOptionTypesInternalV2CreateLocalDprRole({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
 
       case 'it-contract':
         return (organizationUuid, optionUuid) =>
           this.itContractRoleService.postSingleItContractLocalRoleOptionTypesInternalV2CreateLocalItContractRole({
             organizationUuid,
-            aPILocalOptionCreateRequestDTO: { optionUuid },
-          });
+            aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest: { optionUuid },
+    });
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }

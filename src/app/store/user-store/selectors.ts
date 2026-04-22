@@ -21,7 +21,7 @@ export const selectOrganizationUuid = createSelector(selectOrganization, (organi
 export const selectOrganizationCvr = createSelector(selectOrganization, (organization) => organization?.cvr);
 export const selectOrganizationType = createSelector(
   selectOrganization,
-  (organization) => organization?.organizationType
+  (organization) => organization?.organizationType,
 );
 
 export const selectUserIsGlobalAdmin = createSelector(selectUser, (user) => user?.isGlobalAdmin ?? false);
@@ -32,7 +32,7 @@ export const selectUserOrganizationRights = createSelector(selectUser, (user) =>
 export const selectUserIsCurrentlyLocalAdmin = createSelector(
   selectUserOrganizationRights,
   selectOrganizationUuid,
-  (userOrgRights, organizationUuid) => hasRoleInOrganization(userOrgRights, organizationUuid, LOCAL_ADMIN_ROLE)
+  (userOrgRights, organizationUuid) => hasRoleInOrganization(userOrgRights, organizationUuid, LOCAL_ADMIN_ROLE),
 );
 
 export const selectUserDefaultUnitUuid = createSelector(selectUserState, (state) => state.defaultUnit?.uuid);
@@ -43,14 +43,14 @@ export const selectHasCheckedUserAndOrganization = createSelector(
   selectHasTriedAuthenticating,
   selectHasMultipleOrganizations,
   (user, hasTriedAuthenticating, hasMultipleOrganizations) =>
-    (hasTriedAuthenticating && !user) || (hasTriedAuthenticating && hasMultipleOrganizations !== undefined)
+    (hasTriedAuthenticating && !user) || (hasTriedAuthenticating && hasMultipleOrganizations !== undefined),
 );
 
 export const selectGridPermissions = createSelector(selectUserState, (state) => state.gridPermissions);
 
 export const selectGridConfigModificationPermission = createSelector(
   selectGridPermissions,
-  (permissions) => permissions?.hasConfigModificationPermissions
+  (permissions) => permissions?.hasConfigModificationPermissions,
 );
 
 export const selectAvailableRoleDropdownValues = createSelector(
@@ -59,8 +59,13 @@ export const selectAvailableRoleDropdownValues = createSelector(
   selectOrganizationUserModifyPermissions,
   selectOrganizationUuid,
   (isGlobalAdmin, organizationRights, modifyPermissions, organizationUuid) => {
-    return GetOptionsBasedOnRights(isGlobalAdmin, organizationRights ?? [], modifyPermissions, organizationUuid ?? '');
-  }
+    return GetOptionsBasedOnRights(
+      isGlobalAdmin,
+      organizationRights ?? [],
+      modifyPermissions ?? undefined,
+      organizationUuid ?? '',
+    );
+  },
 );
 
 export const selectCanClearRoleDropdown = createSelector(
@@ -70,7 +75,7 @@ export const selectCanClearRoleDropdown = createSelector(
   (isGlobalAdmin, organizationRights, organizationUuid) => {
     const isLocalAdmin = hasRoleInOrganization(organizationRights, organizationUuid, LOCAL_ADMIN_ROLE);
     return isGlobalAdmin || isLocalAdmin;
-  }
+  },
 );
 
 export const selectSsoErrorCode = createSelector(selectUserState, (state) => state.ssoErrorCode);

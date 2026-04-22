@@ -248,52 +248,52 @@ export class GlobalAdminOptionTypeService {
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.businessTypeService.patchSingleItSystemGlobalBusinessTypesInternalV2PatchGlobalBusinessType({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: dto,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
+    });
       case 'it-system_usage-archive-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.archiveTypeService.patchSingleItSystemGlobalArchiveTypesInternalV2PatchGlobalArchiveType({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: dto,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
+    });
       case 'it-system_usage-archive-location-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.archiveLocationService.patchSingleItSystemGlobalArchiveLocationsInternalV2PatchGlobalArchiveLocation({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: dto,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
+    });
       case 'it-system_usage-archive-location-test-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.archiveTestLocationService.patchSingleItSystemGlobalArchiveTestLocationsInternalV2PatchGlobalArchiveTestLocation(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: dto,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
             },
           );
       case 'it-interface_data-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.dataTypeService.patchSingleItSystemGlobalDataTypesInternalV2PatchGlobalDataType({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: dto,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
+    });
       case 'it-system_usage-relation-frequency-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.frequencyTypeService.patchSingleItSystemGlobalFrequencyTypesInternalV2PatchGlobalFrequencyType({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: dto,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
+    });
       case 'it-interface_interface-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.interfaceTypeService.patchSingleItSystemGlobalInterfaceTypesInternalV2PatchGlobalInterfaceType({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: dto,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
+    });
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.sensitivePersonalDataTypeService.patchSingleItSystemGlobalSensitivePersonalDataTypesInternalV2PatchGlobalSensitivePersonalData(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: dto,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
             },
           );
       case 'it-system_usage-data-classification-type':
@@ -301,30 +301,30 @@ export class GlobalAdminOptionTypeService {
           this.itSystemCategoryService.patchSingleItSystemGlobalItSystemCategoriesInternalV2PatchGlobalItSystemCategories(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: dto,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
             },
           );
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.registerTypeService.patchSingleItSystemGlobalRegisterTypesInternalV2PatchGlobalRegisterType({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: dto,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: dto,
+    });
 
       //IT contract regular types
       case 'it-contract_contract-type':
         return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
           this.contractTypeService.patchSingleItContractGlobalItContractTypesInternalV2PatchGlobalItContractType({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
 
       case 'it-contract_contract-template-type':
         return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
           this.templateTypeService.patchSingleItContractGlobalItContractTemplateTypesInternalV2PatchGlobalItContractTemplateType(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -333,7 +333,7 @@ export class GlobalAdminOptionTypeService {
           this.purchaseFormTypeService.patchSingleItContractGlobalPurchaseFormTypesInternalV2PatchGlobalPurchaseFormType(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -342,7 +342,7 @@ export class GlobalAdminOptionTypeService {
           this.paymentModelTypeService.patchSingleItContractGlobalPaymentModelTypesInternalV2PatchGlobalPaymentModelType(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -351,7 +351,7 @@ export class GlobalAdminOptionTypeService {
           this.agreementElementTypeService.patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -360,7 +360,7 @@ export class GlobalAdminOptionTypeService {
           this.optionExtendTypeService.patchSingleItContractGlobalOptionExtendTypesInternalV2PatchGlobalOptionExtendType(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -369,7 +369,7 @@ export class GlobalAdminOptionTypeService {
           this.paymentFrequencyTypeService.patchSingleItContractGlobalPaymentFrequencyTypesInternalV2PatchGlobalPaymentFreqencyType(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -378,7 +378,7 @@ export class GlobalAdminOptionTypeService {
           this.priceRegulationTypeService.patchSingleItContractGlobalPriceRegulationTypesInternalV2PatchGlobalPriceRegulationType(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -387,7 +387,7 @@ export class GlobalAdminOptionTypeService {
           this.procurementStrategyTypeService.patchSingleItContractGlobalProcurementStrategyTypesInternalV2PatchGlobalProcurementStrategyType(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -396,7 +396,7 @@ export class GlobalAdminOptionTypeService {
           this.terminationDeadlineTypeService.patchSingleItContractGlobalTerminationDeadlineTypesInternalV2PatchGlobalTerminationDeadlineType(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -404,8 +404,8 @@ export class GlobalAdminOptionTypeService {
         return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
           this.criticalityTypeService.patchSingleItContractGlobalCriticalityTypesInternalV2PatchGlobalCriticalityType({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
 
       // Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
@@ -413,7 +413,7 @@ export class GlobalAdminOptionTypeService {
           this.basisForTransferService.patchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOption(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -422,7 +422,7 @@ export class GlobalAdminOptionTypeService {
           this.oversightOptionService.patchSingleDprGlobalDataProcessingOversightOptionsInternalV2PatchGlobalDataProcessingOversightOption(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -431,7 +431,7 @@ export class GlobalAdminOptionTypeService {
           this.dataResponsibleService.patchSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2PatchGlobalDataProcessingDataResponsibleOption(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -440,7 +440,7 @@ export class GlobalAdminOptionTypeService {
           this.countryService.patchSingleDprGlobalDataProcessingCountryOptionsInternalV2PatchGlobalDataProcessingCountryOption(
             {
               optionUuid,
-              aPIGlobalRegularOptionUpdateRequestDTO: request,
+              aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -449,36 +449,36 @@ export class GlobalAdminOptionTypeService {
         return (optionUuid: string, request: APIGlobalRegularOptionUpdateRequestDTO) =>
           this.countryCodeService.patchSingleOrganizationGlobalCountryCodesInternalV2PatchCountryCode({
             optionUuid,
-            aPIGlobalRegularOptionUpdateRequestDTO: request,
-          });
+            aPIPatchSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2PatchGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
 
       //Role types
       case 'it-system-usage':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.itSystemRoleService.patchSingleItSystemGlobalRoleOptionTypesInternalV2PatchGlobalBItSystemRole({
             optionUuid,
-            aPIGlobalRoleOptionUpdateRequestDTO: dto,
-          });
+            aPIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest: dto,
+    });
       case 'it-contract':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.itContractRoleService.patchSingleItContractGlobalItContractRoleTypesInternalV2PatchGlobalItContractRoleType(
             {
               optionUuid,
-              aPIGlobalRoleOptionUpdateRequestDTO: dto,
+              aPIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest: dto,
             },
           );
       case 'data-processing':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.dprRoleService.patchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRole({
             optionUuid,
-            aPIGlobalRoleOptionUpdateRequestDTO: dto,
-          });
+            aPIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest: dto,
+    });
       case 'organization-unit':
         return (optionUuid: string, dto: APIGlobalRoleOptionUpdateRequestDTO) =>
           this.orgUnitRoleService.patchSingleOrganizationUnitGlobalRoleOptionTypesInternalV2PatchGlobalOrganizationUnitRole(
             {
               optionUuid,
-              aPIGlobalRoleOptionUpdateRequestDTO: dto,
+              aPIPatchSingleDprGlobalRoleOptionTypesInternalV2PatchDprRoleRequest: dto,
             },
           );
       default:
@@ -492,72 +492,72 @@ export class GlobalAdminOptionTypeService {
       case 'it-system_business-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.businessTypeService.postSingleItSystemGlobalBusinessTypesInternalV2CreateBusinessType({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
       case 'it-system_usage-archive-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.archiveTypeService.postSingleItSystemGlobalArchiveTypesInternalV2CreateGlobalArchiveType({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
       case 'it-system_usage-archive-location-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.archiveLocationService.postSingleItSystemGlobalArchiveLocationsInternalV2CreateArchiveLocation({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
       case 'it-system_usage-archive-location-test-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.archiveTestLocationService.postSingleItSystemGlobalArchiveTestLocationsInternalV2CreateGlobalArchiveTestLocation(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
       case 'it-interface_data-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.dataTypeService.postSingleItSystemGlobalDataTypesInternalV2CreateGlobalDataType({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
       case 'it-system_usage-relation-frequency-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.frequencyTypeService.postSingleItSystemGlobalFrequencyTypesInternalV2CreateGlobalFrequencyType({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
       case 'it-interface_interface-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.interfaceTypeService.postSingleItSystemGlobalInterfaceTypesInternalV2CreateGlobalInterfaceType({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
       case 'it_system_usage-gdpr-sensitive-data-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.sensitivePersonalDataTypeService.postSingleItSystemGlobalSensitivePersonalDataTypesInternalV2CreateGlobalSensitivePersonalData(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
       case 'it-system_usage-data-classification-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.itSystemCategoryService.postSingleItSystemGlobalItSystemCategoriesInternalV2CreateGlobalItSystemCategories(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
       case 'it_system_usage-gdpr-registered-data-category-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.registerTypeService.postSingleItSystemGlobalRegisterTypesInternalV2CreateGlobalRegisterType({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
 
       //IT contract regular types
       case 'it-contract_contract-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.contractTypeService.postSingleItContractGlobalItContractTypesInternalV2CreateGlobalItContractType({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
 
       case 'it-contract_contract-template-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.templateTypeService.postSingleItContractGlobalItContractTemplateTypesInternalV2CreateGlobalItContractTemplateType(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -565,7 +565,7 @@ export class GlobalAdminOptionTypeService {
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.purchaseFormTypeService.postSingleItContractGlobalPurchaseFormTypesInternalV2CreateGlobalPurchaseFormType(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -573,7 +573,7 @@ export class GlobalAdminOptionTypeService {
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.paymentModelTypeService.postSingleItContractGlobalPaymentModelTypesInternalV2CreateGlobalPaymentModelType(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -581,7 +581,7 @@ export class GlobalAdminOptionTypeService {
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.agreementElementTypeService.postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -589,7 +589,7 @@ export class GlobalAdminOptionTypeService {
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.optionExtendTypeService.postSingleItContractGlobalOptionExtendTypesInternalV2CreateGlobalOptionExtendType(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -597,7 +597,7 @@ export class GlobalAdminOptionTypeService {
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.paymentFrequencyTypeService.postSingleItContractGlobalPaymentFrequencyTypesInternalV2CreateGlobalPaymentFreqencyType(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -605,7 +605,7 @@ export class GlobalAdminOptionTypeService {
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.priceRegulationTypeService.postSingleItContractGlobalPriceRegulationTypesInternalV2CreateGlobalPriceRegulationType(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -613,7 +613,7 @@ export class GlobalAdminOptionTypeService {
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.procurementStrategyTypeService.postSingleItContractGlobalProcurementStrategyTypesInternalV2CreateGlobalProcurementStrategyType(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
@@ -621,22 +621,22 @@ export class GlobalAdminOptionTypeService {
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.terminationDeadlineTypeService.postSingleItContractGlobalTerminationDeadlineTypesInternalV2CreateGlobalTerminationDeadlineType(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: request,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
             },
           );
 
       case 'it-contract_criticality-type':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.criticalityTypeService.postSingleItContractGlobalCriticalityTypesInternalV2CreateGlobalCriticalityType({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
 
       // Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.basisForTransferService.postSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOption(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: dto,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: dto,
             },
           );
 
@@ -644,7 +644,7 @@ export class GlobalAdminOptionTypeService {
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.oversightOptionService.postSingleDprGlobalDataProcessingOversightOptionsInternalV2CreateGlobalDataProcessingOversightOption(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: dto,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: dto,
             },
           );
 
@@ -652,7 +652,7 @@ export class GlobalAdminOptionTypeService {
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.dataResponsibleService.postSingleDprGlobalDataProcessingDataResponsibleOptionsInternalV2CreateGlobalDataProcessingDataResponsibleOption(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: dto,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: dto,
             },
           );
 
@@ -660,7 +660,7 @@ export class GlobalAdminOptionTypeService {
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.countryService.postSingleDprGlobalDataProcessingCountryOptionsInternalV2CreateGlobalDataProcessingCountryOption(
             {
-              aPIGlobalRegularOptionCreateRequestDTO: dto,
+              aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: dto,
             },
           );
 
@@ -668,32 +668,32 @@ export class GlobalAdminOptionTypeService {
       case 'organization_country-code':
         return (request: APIGlobalRoleOptionCreateRequestDTO) =>
           this.countryCodeService.postSingleOrganizationGlobalCountryCodesInternalV2CreateCountryCode({
-            aPIGlobalRegularOptionCreateRequestDTO: request,
-          });
+            aPIPostSingleDprGlobalDataProcessingBasisForTransferOptionsInternalV2CreateGlobalDataProcessingBasisForTransferOptionRequest: request,
+    });
 
       //Role types
       case 'it-system-usage':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.itSystemRoleService.postSingleItSystemGlobalRoleOptionTypesInternalV2CreateItSystemRole({
-            aPIGlobalRoleOptionCreateRequestDTO: dto,
-          });
+            aPIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest: dto,
+    });
       case 'it-contract':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.itContractRoleService.postSingleItContractGlobalItContractRoleTypesInternalV2CreateGlobalItContractRoleType(
             {
-              aPIGlobalRoleOptionCreateRequestDTO: dto,
+              aPIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest: dto,
             },
           );
       case 'data-processing':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.dprRoleService.postSingleDprGlobalRoleOptionTypesInternalV2CreateDprRole({
-            aPIGlobalRoleOptionCreateRequestDTO: dto,
-          });
+            aPIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest: dto,
+    });
       case 'organization-unit':
         return (dto: APIGlobalRoleOptionCreateRequestDTO) =>
           this.orgUnitRoleService.postSingleOrganizationUnitGlobalRoleOptionTypesInternalV2CreateOrganizationUnitRole({
-            aPIGlobalRoleOptionCreateRequestDTO: dto,
-          });
+            aPIPostSingleDprGlobalRoleOptionTypesInternalV2CreateDprRoleRequest: dto,
+    });
       default:
         throw new Error(`Create operation is not supported for ${optionType}`);
     }
