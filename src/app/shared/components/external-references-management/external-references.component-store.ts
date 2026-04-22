@@ -1,12 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
-import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
-import {
-  APIExternalReferenceWithLastChangedResponseDTO,
-  APIV2ExternalReferencesInternalINTERNALService,
-} from 'src/app/api/v2';
-import { Observable, switchMap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
+import { Observable, switchMap } from 'rxjs';
+import { APIExternalReferenceWithLastChangedResponseDTO, ExternalReferencesInternalV2Service } from 'src/app/api/v2';
+import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 
 interface State {
   externalReferences: APIExternalReferenceWithLastChangedResponseDTO[];
@@ -18,7 +15,7 @@ interface State {
  */
 @Injectable()
 export class ExternalReferencesComponentStore extends ComponentStore<State> {
-  constructor(private readonly externalReferenceService: APIV2ExternalReferencesInternalINTERNALService) {
+  constructor(private readonly externalReferenceService: ExternalReferencesInternalV2Service) {
     super({ externalReferences: [] });
   }
 
@@ -37,9 +34,9 @@ export class ExternalReferencesComponentStore extends ComponentStore<State> {
         switchMap((entityUuid) =>
           this.getExternalReferencesMethod(entityType)(entityUuid).pipe(
             tapResponse({
-    next: (externalReferences) => this.setExternalReferences(externalReferences),
-    error: (e) => console.error(e)
-}),
+              next: (externalReferences) => this.setExternalReferences(externalReferences),
+              error: (e) => console.error(e),
+            }),
           ),
         ),
       );
@@ -51,22 +48,22 @@ export class ExternalReferencesComponentStore extends ComponentStore<State> {
     switch (entityType) {
       case 'it-system':
         return (systemUuid) =>
-          this.externalReferenceService.getManyExternalReferencesInternalV2GetItSystemReferences({
+          this.externalReferenceService.getSingleExternalReferencesInternalV2GetItSystemReferences({
             systemUuid,
           });
       case 'it-system-usage':
         return (systemUsageUuid) =>
-          this.externalReferenceService.getManyExternalReferencesInternalV2GetItSystemUsageReferences({
+          this.externalReferenceService.getSingleExternalReferencesInternalV2GetItSystemUsageReferences({
             systemUsageUuid,
           });
       case 'it-contract':
         return (contractUuid) =>
-          this.externalReferenceService.getManyExternalReferencesInternalV2GetItContractReferences({
+          this.externalReferenceService.getSingleExternalReferencesInternalV2GetItContractReferences({
             contractUuid,
           });
       case 'data-processing-registration':
         return (dprUuid) =>
-          this.externalReferenceService.getManyExternalReferencesInternalV2GetDataProcessingReferences({
+          this.externalReferenceService.getSingleExternalReferencesInternalV2GetDataProcessingReferences({
             dprUuid,
           });
       default:
