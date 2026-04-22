@@ -239,7 +239,7 @@ export class ITSystemUsageEffects {
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid,
-            aPIUpdateItSystemUsageRequestDTO: itSystemUsage,
+            aPIPutSingleItSystemUsageV2PutSystemUsageRequest: itSystemUsage,
           })
           .pipe(
             map((itSystemUsage) => {
@@ -290,7 +290,7 @@ export class ITSystemUsageEffects {
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid,
-            aPIUpdateItSystemUsageRequestDTO: {
+            aPIPutSingleItSystemUsageV2PutSystemUsageRequest: {
               roles: existingRoles.concat(rolesToAdd),
             },
           })

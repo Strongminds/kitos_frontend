@@ -22,8 +22,8 @@ export function adaptUserNotification(notification: APINotificationResponseDTO):
     ...notification,
     uuid: notification.uuid ?? '',
     name: notification.name ?? $localize`Ikke angivet`,
-    receiversCsv: adaptRecipentsToCsv(notification.receivers),
-    cCsCsv: adaptRecipentsToCsv(notification.cCs),
+    receiversCsv: adaptRecipentsToCsv(notification.receivers ?? undefined),
+    cCsCsv: adaptRecipentsToCsv(notification.cCs ?? undefined),
   };
 }
 
