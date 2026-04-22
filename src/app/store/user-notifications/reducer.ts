@@ -28,19 +28,19 @@ export const notificationFeature = createFeature({
     on(UserNotificationActions.getNotificationsSuccess, (state, { ownerResourceType, notifications }) => {
       let newState = { ...state };
       switch (ownerResourceType) {
-        case APIOwnerResourceType.NUMBER_1:
+        case APIOwnerResourceType.ItSystemUsage:
           newState = {
             ...newState,
             usageNotifications: systemNotificationsAdapter.setAll(notifications, newState.usageNotifications),
           };
           break;
-        case APIOwnerResourceType.NUMBER_0:
+        case APIOwnerResourceType.ItContract:
           newState = {
             ...newState,
             contractNotifications: contractNotificationsAdapter.setAll(notifications, newState.contractNotifications),
           };
           break;
-        case APIOwnerResourceType.NUMBER_2:
+        case APIOwnerResourceType.DataProcessingRegistration:
           newState = {
             ...newState,
             dataProcessingNotifications: dprNotificationsAdapter.setAll(

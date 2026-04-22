@@ -8,15 +8,15 @@ import {
 
 export const mapRecommendedArchiveDutyToString = (value: APIRecommendedArchiveDutyResponseDTO): string | undefined => {
   switch (value.id) {
-    case APIRecommendedArchiveDutyChoice.NUMBER_0:
+    case APIRecommendedArchiveDutyChoice.Undecided:
       return undefined;
-    case APIRecommendedArchiveDutyChoice.NUMBER_3:
+    case APIRecommendedArchiveDutyChoice.NoRecommendation:
       return ARCHIVE_TEXT_NO_RECOMMENDATION;
-    case APIRecommendedArchiveDutyChoice.NUMBER_1:
+    case APIRecommendedArchiveDutyChoice.B:
       return ARCHIVE_B_TYPE_TEXT;
-    case APIRecommendedArchiveDutyChoice.NUMBER_2:
+    case APIRecommendedArchiveDutyChoice.K:
       return ARCHIVE_K_TYPE_TEXT;
-    case APIRecommendedArchiveDutyChoice.NUMBER_4:
+    case APIRecommendedArchiveDutyChoice.PreserveDataCanDiscardDocuments:
       return ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT;
     default:
       throw new Error(`Unknown archive duty recommendation: ${value.id}`);
@@ -24,6 +24,6 @@ export const mapRecommendedArchiveDutyToString = (value: APIRecommendedArchiveDu
 };
 
 export const mapRecommendedArchiveDutyComment = (value: APIRecommendedArchiveDutyResponseDTO): string => {
-  if (value.id === APIRecommendedArchiveDutyChoice.NUMBER_0) return '';
+  if (value.id === APIRecommendedArchiveDutyChoice.Undecided) return '';
   return value.comment || '';
 };

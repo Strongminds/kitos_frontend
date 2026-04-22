@@ -12,11 +12,11 @@ export const mapNotificationEntityTypes = (
   entityType: APIOwnerResourceType | undefined,
 ): NotificationEntityType | undefined => {
   switch (entityType) {
-    case APIOwnerResourceType.NUMBER_0:
+    case APIOwnerResourceType.ItContract:
       return NotificationEntityTypeEnum.ItContract;
-    case APIOwnerResourceType.NUMBER_1:
+    case APIOwnerResourceType.ItSystemUsage:
       return NotificationEntityTypeEnum.ItSystemUsage;
-    case APIOwnerResourceType.NUMBER_2:
+    case APIOwnerResourceType.DataProcessingRegistration:
       return NotificationEntityTypeEnum.DataProcessingRegistration;
   }
   return undefined;

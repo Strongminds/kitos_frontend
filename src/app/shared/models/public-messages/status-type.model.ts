@@ -8,11 +8,11 @@ export interface StatusType {
 export const statusTypeOptions: StatusType[] = [
   {
     name: $localize`Normal drift`,
-    value: APIPublicMessageStatusChoice.NUMBER_1,
+    value: APIPublicMessageStatusChoice.Active,
   },
   {
     name: $localize`Ustabil drift`,
-    value: APIPublicMessageStatusChoice.NUMBER_2,
+    value: APIPublicMessageStatusChoice.Inactive,
   },
 ];
 

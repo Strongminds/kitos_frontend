@@ -5,11 +5,11 @@ import { RegistrationEntityTypes } from '../models/registrations/registration-en
 export function mapEntityTypeToOwnerResourceType(entityType: RegistrationEntityTypes): APIOwnerResourceType {
   switch (entityType) {
     case 'it-system-usage':
-      return APIOwnerResourceType.NUMBER_1;
+      return APIOwnerResourceType.ItSystemUsage;
     case 'it-contract':
-      return APIOwnerResourceType.NUMBER_0;
+      return APIOwnerResourceType.ItContract;
     case 'data-processing-registration':
-      return APIOwnerResourceType.NUMBER_2;
+      return APIOwnerResourceType.DataProcessingRegistration;
     default:
       throw new Error(`Owner resource type for entity type: ${entityType} does not exist`);
   }

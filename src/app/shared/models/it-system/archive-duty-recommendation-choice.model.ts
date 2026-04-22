@@ -17,31 +17,31 @@ export interface ArchiveDutyRecommendationChoice {
 export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationChoice[] = [
   {
     name: ARCHIVE_B_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyChoice.NUMBER_1,
+    value: APIRecommendedArchiveDutyChoice.B,
   },
   {
     name: ARCHIVE_BK_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyChoice.NUMBER_5,
+    value: APIRecommendedArchiveDutyChoice.Bk,
   },
   {
     name: ARCHIVE_K_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyChoice.NUMBER_2,
+    value: APIRecommendedArchiveDutyChoice.K,
   },
   {
     name: ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
-    value: APIRecommendedArchiveDutyChoice.NUMBER_4,
+    value: APIRecommendedArchiveDutyChoice.PreserveDataCanDiscardDocuments,
   },
   {
     name: ARCHIVE_KD_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyChoice.NUMBER_6,
+    value: APIRecommendedArchiveDutyChoice.Kd,
   },
   {
     name: ARCHIVE_KB_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyChoice.NUMBER_7,
+    value: APIRecommendedArchiveDutyChoice.Kb,
   },
   {
     name: ARCHIVE_TEXT_NO_RECOMMENDATION,
-    value: APIRecommendedArchiveDutyChoice.NUMBER_3,
+    value: APIRecommendedArchiveDutyChoice.NoRecommendation,
   },
 ];
 

@@ -27,7 +27,7 @@ export enum AlertType {
 
 function mapAlertType(alertType: APIAlertType): AlertType {
   switch (alertType) {
-    case APIAlertType.NUMBER_0:
+    case APIAlertType.Advis:
       return AlertType.Advis;
     default:
       throw new Error(`Unknown alert type: ${alertType}`);

@@ -38,11 +38,11 @@ export const selectHasValidCacheForResourceType = (resourceType: APIOwnerResourc
 export function selectNotificationsByType(type: APIOwnerResourceType) {
   return createSelector(selectUserNotificationsState, (state: NotificationState) => {
     switch (type) {
-      case APIOwnerResourceType.NUMBER_1:
+      case APIOwnerResourceType.ItSystemUsage:
         return selectAllUsageNotifications(state);
-      case APIOwnerResourceType.NUMBER_0:
+      case APIOwnerResourceType.ItContract:
         return selectAllContractNotifications(state);
-      case APIOwnerResourceType.NUMBER_2:
+      case APIOwnerResourceType.DataProcessingRegistration:
         return selectAllDprNotifications(state);
       default:
         throw new Error(`Unknown notification type: ${type}`);

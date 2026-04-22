@@ -20,15 +20,15 @@ export class UserService {
         const excludedValues: APIDefaultUserStartPreferenceChoice[] = [];
         if (!uiRootConfig.showItSystemModule) {
           excludedValues.push(
-            APIDefaultUserStartPreferenceChoice.NUMBER_3,
-            APIDefaultUserStartPreferenceChoice.NUMBER_2,
+            APIDefaultUserStartPreferenceChoice.ItSystemCatalog,
+            APIDefaultUserStartPreferenceChoice.ItSystemUsage,
           );
         }
         if (!uiRootConfig.showDataProcessing) {
-          excludedValues.push(APIDefaultUserStartPreferenceChoice.NUMBER_5);
+          excludedValues.push(APIDefaultUserStartPreferenceChoice.DataProcessing);
         }
         if (!uiRootConfig.showItContractModule) {
-          excludedValues.push(APIDefaultUserStartPreferenceChoice.NUMBER_4);
+          excludedValues.push(APIDefaultUserStartPreferenceChoice.ItContract);
         }
 
         return startPreferenceChoiceOptions.filter((o) => !excludedValues.includes(o.value));

@@ -4,7 +4,7 @@ import { FkOrgChangeLogModel } from 'src/app/shared/models/local-admin/fk-org-ch
 export function getResponsibleEntityTextBasedOnOrigin(
   changelog: APIStsOrganizationChangeLogResponseDTO | FkOrgChangeLogModel,
 ): string {
-  return changelog.origin === APIStsOrganizationChangeLogOriginOption.NUMBER_1
+  return changelog.origin === APIStsOrganizationChangeLogOriginOption.User
     ? $localize`Fk Organisation`
     : `${changelog.user?.name} (${changelog.user?.email})`;
 }

@@ -8,27 +8,27 @@ export interface StartPreferenceChoice {
 export const startPreferenceChoiceOptions: StartPreferenceChoice[] = [
   {
     name: $localize`Start side`,
-    value: APIDefaultUserStartPreferenceChoice.NUMBER_0,
+    value: APIDefaultUserStartPreferenceChoice.StartSite,
   },
   {
     name: $localize`Organisation`,
-    value: APIDefaultUserStartPreferenceChoice.NUMBER_1,
+    value: APIDefaultUserStartPreferenceChoice.Organization,
   },
   {
     name: $localize`IT Systemer`,
-    value: APIDefaultUserStartPreferenceChoice.NUMBER_2,
+    value: APIDefaultUserStartPreferenceChoice.ItSystemUsage,
   },
   {
     name: $localize`IT Systemkatalog`,
-    value: APIDefaultUserStartPreferenceChoice.NUMBER_3,
+    value: APIDefaultUserStartPreferenceChoice.ItSystemCatalog,
   },
   {
     name: $localize`IT Kontrakter`,
-    value: APIDefaultUserStartPreferenceChoice.NUMBER_4,
+    value: APIDefaultUserStartPreferenceChoice.ItContract,
   },
   {
     name: $localize`Databehandling`,
-    value: APIDefaultUserStartPreferenceChoice.NUMBER_5,
+    value: APIDefaultUserStartPreferenceChoice.DataProcessing,
   },
 ];
 

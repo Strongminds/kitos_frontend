@@ -11,32 +11,32 @@ export const iconTypeOptions: PublicMessageIconType[] = [
   {
     name: $localize`Dokument`,
     icon: 'document',
-    value: APIPublicMessageIconTypeChoice.NUMBER_0,
+    value: APIPublicMessageIconTypeChoice.Document,
   },
   {
     name: $localize`Udklipsholder`,
     icon: 'clipboard',
-    value: APIPublicMessageIconTypeChoice.NUMBER_1,
+    value: APIPublicMessageIconTypeChoice.Clipboard,
   },
   {
     name: $localize`Indstillinger`,
     icon: 'settings',
-    value: APIPublicMessageIconTypeChoice.NUMBER_2,
+    value: APIPublicMessageIconTypeChoice.Settings,
   },
   {
     name: $localize`Kalendar`,
     icon: 'calendar',
-    value: APIPublicMessageIconTypeChoice.NUMBER_3,
+    value: APIPublicMessageIconTypeChoice.Calendar,
   },
   {
     name: $localize`Brugere`,
     icon: 'multiple-users',
-    value: APIPublicMessageIconTypeChoice.NUMBER_4,
+    value: APIPublicMessageIconTypeChoice.MultipleUsers,
   },
   {
     name: $localize`Mail`,
     icon: 'mail',
-    value: APIPublicMessageIconTypeChoice.NUMBER_5,
+    value: APIPublicMessageIconTypeChoice.Mail,
   },
 ];
 

@@ -71,9 +71,9 @@ export class PublicMessageComponent implements OnInit {
 
   public activeStatus(publicMessage: PublicMessage): boolean | undefined {
     switch (publicMessage.status?.value) {
-      case APIPublicMessageStatusChoice.NUMBER_1:
+      case APIPublicMessageStatusChoice.Active:
         return true;
-      case APIPublicMessageStatusChoice.NUMBER_2:
+      case APIPublicMessageStatusChoice.Inactive:
         return false;
       default:
         return undefined;

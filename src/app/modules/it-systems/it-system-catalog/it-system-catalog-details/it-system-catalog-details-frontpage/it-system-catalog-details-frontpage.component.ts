@@ -156,7 +156,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
 
   public onDropdownCleared() {
     this.patchFrontPage(
-      { recommendedArchiveDuty: { id: APIRecommendedArchiveDutyChoice.NUMBER_0, comment: '' } },
+      { recommendedArchiveDuty: { id: APIRecommendedArchiveDutyChoice.Undecided, comment: '' } },
       undefined,
     );
   }
@@ -219,7 +219,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           if (hasModifyPermission) {
             this.itSystemFrontpageFormGroup.enable();
 
-            if (itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyChoice.NUMBER_0) {
+            if (itSystem.recommendedArchiveDuty.id === APIRecommendedArchiveDutyChoice.Undecided) {
               this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.disable();
             } else {
               this.itSystemFrontpageFormGroup.controls.recommendedArchiveDutyComment.enable();

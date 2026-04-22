@@ -271,12 +271,12 @@ export class UserEffects {
   ): boolean {
     const startPageValue = userDefaultStartPage.value;
     switch (startPageValue) {
-      case APIDefaultUserStartPreferenceChoice.NUMBER_3:
-      case APIDefaultUserStartPreferenceChoice.NUMBER_2:
+      case APIDefaultUserStartPreferenceChoice.ItSystemCatalog:
+      case APIDefaultUserStartPreferenceChoice.ItSystemUsage:
         return !uiRootConfig.showItSystemModule;
-      case APIDefaultUserStartPreferenceChoice.NUMBER_4:
+      case APIDefaultUserStartPreferenceChoice.ItContract:
         return !uiRootConfig.showItContractModule;
-      case APIDefaultUserStartPreferenceChoice.NUMBER_5:
+      case APIDefaultUserStartPreferenceChoice.DataProcessing:
         return !uiRootConfig.showDataProcessing;
       default:
         return false;
@@ -291,17 +291,17 @@ export class UserEffects {
   private getUserDefaultStartPagePath(userDefaultStartPage: StartPreferenceChoice): string {
     const startPageValue = userDefaultStartPage.value;
     switch (startPageValue) {
-      case APIDefaultUserStartPreferenceChoice.NUMBER_0:
+      case APIDefaultUserStartPreferenceChoice.StartSite:
         return AppPath.root;
-      case APIDefaultUserStartPreferenceChoice.NUMBER_1:
+      case APIDefaultUserStartPreferenceChoice.Organization:
         return `${AppPath.organization}/${AppPath.structure}`;
-      case APIDefaultUserStartPreferenceChoice.NUMBER_3:
+      case APIDefaultUserStartPreferenceChoice.ItSystemCatalog:
         return `${AppPath.itSystems}/${AppPath.itSystemCatalog}`;
-      case APIDefaultUserStartPreferenceChoice.NUMBER_2:
+      case APIDefaultUserStartPreferenceChoice.ItSystemUsage:
         return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
-      case APIDefaultUserStartPreferenceChoice.NUMBER_4:
+      case APIDefaultUserStartPreferenceChoice.ItContract:
         return AppPath.itContracts;
-      case APIDefaultUserStartPreferenceChoice.NUMBER_5:
+      case APIDefaultUserStartPreferenceChoice.DataProcessing:
         return AppPath.dataProcessing;
       default:
         throw new Error(`Unknown start page: ${startPageValue}`);

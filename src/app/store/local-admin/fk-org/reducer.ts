@@ -53,7 +53,7 @@ export const fkOrgFeature = createFeature({
       FkOrgActions.getSynchronizationStatusError,
       (state): FkOrgState => ({
         ...state,
-        accessError: handleAccessError(APICheckConnectionError.NUMBER_3),
+        accessError: handleAccessError(APICheckConnectionError.Unknown),
       }),
     ),
 
@@ -154,15 +154,15 @@ export const fkOrgFeature = createFeature({
 
 function handleAccessError(error: APICheckConnectionError) {
   switch (error) {
-    case APICheckConnectionError.NUMBER_2:
+    case APICheckConnectionError.ExistingServiceAgreementIssue:
       return $localize`Der er problemer med den eksisterende serviceaftale, der giver KITOS adgang til data fra din kommune i FK Organisatoin. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.`;
-    case APICheckConnectionError.NUMBER_0:
+    case APICheckConnectionError.InvalidCvrOnOrganization:
       return $localize`Der enten mangler eller er registreret et ugyldigt CVR nummer på din kommune i KITOS.`;
-    case APICheckConnectionError.NUMBER_4: // intended fallthrough
-    case APICheckConnectionError.NUMBER_1:
+    case APICheckConnectionError.UserContextDoesNotExistOnSystem: // intended fallthrough
+    case APICheckConnectionError.MissingServiceAgreement:
       return $localize`Din organisation mangler en gyldig serviceaftale der giver KITOS adgang til data fra din kommune i FK Organisation. Kontakt venligst den KITOS ansvarlige i din kommune for hjælp.`;
-    case APICheckConnectionError.NUMBER_5: // intended fallthrough
-    case APICheckConnectionError.NUMBER_3: // intended fallthrough
+    case APICheckConnectionError.FailedToLookupOrganizationCompany: // intended fallthrough
+    case APICheckConnectionError.Unknown: // intended fallthrough
     default:
       return $localize`Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.`;
   }

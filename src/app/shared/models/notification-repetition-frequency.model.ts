@@ -6,13 +6,13 @@ export interface NotificationRepetitionFrequency {
 }
 
 export const notificationRepetitionFrequencyOptions: NotificationRepetitionFrequency[] = [
-  { name: $localize`Time`, value: APIRepetitionFrequencyOptions.NUMBER_0 },
-  { name: $localize`Dag`, value: APIRepetitionFrequencyOptions.NUMBER_1 },
-  { name: $localize`Uge`, value: APIRepetitionFrequencyOptions.NUMBER_2 },
-  { name: $localize`Måned`, value: APIRepetitionFrequencyOptions.NUMBER_3 },
-  { name: $localize`Kvartal`, value: APIRepetitionFrequencyOptions.NUMBER_4 },
-  { name: $localize`Halvårlig`, value: APIRepetitionFrequencyOptions.NUMBER_5 },
-  { name: $localize`År`, value: APIRepetitionFrequencyOptions.NUMBER_6 },
+  { name: $localize`Time`, value: APIRepetitionFrequencyOptions.Hour },
+  { name: $localize`Dag`, value: APIRepetitionFrequencyOptions.Day },
+  { name: $localize`Uge`, value: APIRepetitionFrequencyOptions.Week },
+  { name: $localize`Måned`, value: APIRepetitionFrequencyOptions.Month },
+  { name: $localize`Kvartal`, value: APIRepetitionFrequencyOptions.Quarter },
+  { name: $localize`Halvårlig`, value: APIRepetitionFrequencyOptions.HalfYear },
+  { name: $localize`År`, value: APIRepetitionFrequencyOptions.Year },
 ];
 
 export const mapNotificationRepetitionFrequency = (
