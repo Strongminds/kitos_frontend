@@ -107,8 +107,8 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
         this.generalInformationForm.patchValue({
           purpose: gdpr.purpose,
           businessCritical: mapToYesNoDontKnowEnum(gdpr.businessCritical),
-          hostedAt: mapHostedAt(gdpr.hostedAt),
-          gdprCriticality: mapGdprCriticality(gdpr.gdprCriticality),
+          hostedAt: mapHostedAt(gdpr.hostedAt ?? undefined),
+          gdprCriticality: mapGdprCriticality(gdpr.gdprCriticality ?? undefined),
         });
       }),
     );

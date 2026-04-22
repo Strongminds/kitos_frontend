@@ -69,7 +69,7 @@
                     </td>
                     <td>
                       <app-paragraph [cropOnOverflow]="true">
-                        {{ getCommaSeparatedRecipients(notification.cCs?.emailRecipients, notification.cCs?.roleRecipients) }}
+                        {{ getCommaSeparatedRecipients(notification.cCs?.emailRecipients ?? undefined, notification.cCs?.roleRecipients ?? undefined) }}
                       </app-paragraph>
                       @if (
                         notification.cCs?.emailRecipients?.length === 0 && notification.cCs?.roleRecipients?.length === 0

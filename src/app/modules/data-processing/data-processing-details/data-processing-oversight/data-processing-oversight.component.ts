@@ -139,7 +139,7 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
           this.generalInformationForm.patchValue({
             interval: mapToOversightInterval(dataProcessing?.oversight?.oversightInterval ?? undefined),
             intervalRemarks: dataProcessing?.oversight?.oversightIntervalRemark,
-            completedAt: optionalNewDate(dataProcessing?.oversight?.oversightScheduledInspectionDate),
+            completedAt: optionalNewDate(dataProcessing?.oversight?.oversightScheduledInspectionDate ?? undefined),
             remarks: dataProcessing?.oversight?.oversightOptionsRemark,
           });
           if (hasModifyPermissions) {
