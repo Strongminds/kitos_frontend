@@ -33,7 +33,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
 
   constructor(
     private readonly store: Store,
-    @Inject(APIV2NotificationINTERNALService)
+    @Inject(NotificationV2Service)
     private readonly apiNotificationsService: NotificationV2Service,
   ) {
     super({ notifications: [], isLoading: false, currentNotificationSent: undefined, isSaving: false });

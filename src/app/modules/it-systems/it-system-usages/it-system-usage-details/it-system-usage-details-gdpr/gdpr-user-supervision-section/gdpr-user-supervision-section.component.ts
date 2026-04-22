@@ -4,6 +4,7 @@ import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
 import { APIYesNoDontKnowChoice } from 'src/app/api/v2';
 import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.component';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { YesNoDontKnowOption, mapToYesNoDontKnowEnum } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import {
@@ -27,7 +28,11 @@ export class GdprUserSupervisionSectionComponent extends BaseAccordionComponent 
     map((gdpr) => gdpr.userSupervision !== APIYesNoDontKnowChoice.Yes),
   );
   public readonly selectUserDocumentation$ = this.currentGdpr$.pipe(
-    map((gdpr) => gdpr.userSupervisionDocumentation ?? undefined),
+    map((gdpr) =>
+      gdpr.userSupervisionDocumentation
+        ? ({ url: gdpr.userSupervisionDocumentation.url, name: gdpr.userSupervisionDocumentation.name } as SimpleLink)
+        : undefined,
+    ),
   );
   public disableLinkControl = true;
   public readonly formGroup = new FormGroup(
