@@ -1,29 +1,29 @@
-import { APIItSystemUsageValidityResponseDTO } from 'src/app/api/v2';
+import { APILifeCycleStatusChoice } from 'src/app/api/v2';
 
 export interface LifeCycleStatus {
   name: string;
-  value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum;
+  value: APILifeCycleStatusChoice;
 }
 
 export const lifeCycleStatusOptions: LifeCycleStatus[] = [
   {
     name: $localize`Under indfasning`,
-    value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.PhasingIn,
+    value: APILifeCycleStatusChoice.PhasingIn,
   },
-  { name: $localize`I drift`, value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.Operational },
+  { name: $localize`I drift`, value: APILifeCycleStatusChoice.Operational },
   {
     name: $localize`Under udfasning`,
-    value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.PhasingOut,
+    value: APILifeCycleStatusChoice.PhasingOut,
   },
-  { name: $localize`Ikke i drift`, value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.NotInUse },
+  { name: $localize`Ikke i drift`, value: APILifeCycleStatusChoice.NotInUse },
   {
     name: '',
-    value: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum.Undecided,
+    value: APILifeCycleStatusChoice.Undecided,
   },
 ];
 
 export const mapLifeCycleStatus = (
-  value?: APIItSystemUsageValidityResponseDTO.LifeCycleStatusEnum,
+  value?: APILifeCycleStatusChoice,
 ): LifeCycleStatus | undefined => {
   return lifeCycleStatusOptions.find((option) => option.value === value);
 };

@@ -1,4 +1,4 @@
-import { APIUserCollectionEditPermissionsResponseDTO, APIUserResponseDTO } from 'src/app/api/v2';
+import { APIOrganizationRoleChoice, APIUserCollectionEditPermissionsResponseDTO } from 'src/app/api/v2';
 import { LOCAL_ADMIN_ROLE } from 'src/app/shared/constants/role.constants';
 import { hasRoleInOrganization } from 'src/app/shared/helpers/role-helpers';
 import { MultiSelectDropdownItem } from '../../dropdown-option.model';
@@ -6,7 +6,7 @@ import { OrganizationRight } from '../../organization-right.model';
 
 export interface UserRoleChoice {
   name: string;
-  value: APIUserResponseDTO.RolesEnum;
+  value: APIOrganizationRoleChoice;
   selected: boolean;
   dataCy?: string;
 }
@@ -14,31 +14,31 @@ export interface UserRoleChoice {
 export const userRoleChoiceOptions: UserRoleChoice[] = [
   {
     name: $localize`Lokal admin`,
-    value: APIUserResponseDTO.RolesEnum.LocalAdmin,
+    value: APIOrganizationRoleChoice.LocalAdmin,
     selected: false,
     dataCy: 'local-admin-option',
   },
   {
     name: $localize`Organisations admin`,
-    value: APIUserResponseDTO.RolesEnum.OrganizationModuleAdmin,
+    value: APIOrganizationRoleChoice.OrganizationModuleAdmin,
     selected: false,
     dataCy: 'organization-admin-option',
   },
   {
     name: $localize`System admin`,
-    value: APIUserResponseDTO.RolesEnum.SystemModuleAdmin,
+    value: APIOrganizationRoleChoice.SystemModuleAdmin,
     selected: false,
     dataCy: 'system-admin-option',
   },
   {
     name: $localize`Kontrakt admin`,
-    value: APIUserResponseDTO.RolesEnum.ContractModuleAdmin,
+    value: APIOrganizationRoleChoice.ContractModuleAdmin,
     selected: false,
     dataCy: 'contract-admin-option',
   },
 ];
 
-export const mapUserRoleChoice = (value?: APIUserResponseDTO.RolesEnum): UserRoleChoice | undefined => {
+export const mapUserRoleChoice = (value?: APIOrganizationRoleChoice): UserRoleChoice | undefined => {
   return userRoleChoiceOptions.find((option) => option.value === value);
 };
 
@@ -46,12 +46,12 @@ export function GetOptionsBasedOnRights(
   isGlobalAdmin: boolean,
   organziationRights: OrganizationRight[],
   modifyPermissions: APIUserCollectionEditPermissionsResponseDTO | undefined,
-  organizationUuid: string
-): MultiSelectDropdownItem<APIUserResponseDTO.RolesEnum>[] {
+  organizationUuid: string,
+): MultiSelectDropdownItem<APIOrganizationRoleChoice>[] {
   const hasRole = (role: number) => hasRoleInOrganization(organziationRights, organizationUuid, role);
   const isLocalAdmin = hasRole(LOCAL_ADMIN_ROLE);
   return userRoleChoiceOptions.map((option) =>
-    mapUserRoleChoiceToMultiSelectOption(isGlobalAdmin, isLocalAdmin, modifyPermissions, option)
+    mapUserRoleChoiceToMultiSelectOption(isGlobalAdmin, isLocalAdmin, modifyPermissions, option),
   );
 }
 
@@ -59,16 +59,16 @@ function mapUserRoleChoiceToMultiSelectOption(
   isGlobalAdmin: boolean,
   isLocalAdmin: boolean,
   modifyPermissions: APIUserCollectionEditPermissionsResponseDTO | undefined,
-  item: UserRoleChoice
-): MultiSelectDropdownItem<APIUserResponseDTO.RolesEnum> {
+  item: UserRoleChoice,
+): MultiSelectDropdownItem<APIOrganizationRoleChoice> {
   if (!modifyPermissions) return { ...item, disabled: true };
 
   if (isGlobalAdmin || isLocalAdmin) return { ...item, disabled: false };
-  if (modifyPermissions.modifyContractRole && item.value === APIUserResponseDTO.RolesEnum.ContractModuleAdmin)
+  if (modifyPermissions.modifyContractRole && item.value === APIOrganizationRoleChoice.ContractModuleAdmin)
     return { ...item, disabled: false };
-  if (modifyPermissions.modifyOrganizationRole && item.value === APIUserResponseDTO.RolesEnum.OrganizationModuleAdmin)
+  if (modifyPermissions.modifyOrganizationRole && item.value === APIOrganizationRoleChoice.OrganizationModuleAdmin)
     return { ...item, disabled: false };
-  if (modifyPermissions.modifySystemRole && item.value === APIUserResponseDTO.RolesEnum.SystemModuleAdmin)
+  if (modifyPermissions.modifySystemRole && item.value === APIOrganizationRoleChoice.SystemModuleAdmin)
     return { ...item, disabled: false };
 
   return { ...item, disabled: true };
