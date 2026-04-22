@@ -60,8 +60,8 @@ export class ITSystemUsageEffects {
     private apiItSystemUsageOptionsService: ItSystemUsageOptionsService,
     @Inject(OrganizationGridInternalV2Service)
     private apiV2organizationalGridInternalService: OrganizationGridInternalV2Service,
-    private gridDataCacheService: GridDataCacheService
-  ) { }
+    private gridDataCacheService: GridDataCacheService,
+  ) {}
 
   getItSystemUsages$ = createEffect(() => {
     return this.actions$.pipe(
@@ -102,9 +102,9 @@ export class ITSystemUsageEffects {
             const returnData = this.gridDataCacheService.gridStateSliceFromArray(sortedItems, gridState);
             return ITSystemUsageActions.getITSystemUsagesSuccess(returnData, total);
           }),
-          catchError(() => of(ITSystemUsageActions.getITSystemUsagesError()))
+          catchError(() => of(ITSystemUsageActions.getITSystemUsagesError())),
         );
-      })
+      }),
     );
   });
 
@@ -113,7 +113,7 @@ export class ITSystemUsageEffects {
       ofType(ITSystemUsageActions.updateGridState),
       map(({ gridState }) => {
         return usageGridStateToAction(gridState);
-      })
+      }),
     );
   });
 
@@ -123,7 +123,7 @@ export class ITSystemUsageEffects {
       map(({ gridColumns }) => {
         this.gridColumnStorageService.setColumns(USAGE_COLUMNS_ID, gridColumns);
         return ITSystemUsageActions.updateGridColumnsSuccess(gridColumns);
-      })
+      }),
     );
   });
 
@@ -140,9 +140,9 @@ export class ITSystemUsageEffects {
         }
         return this.apiItSystemUsageOptionsService.getSingleItSystemUsageOptionsGetByUuid({ organizationUuid }).pipe(
           map((options) => ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess(options.response.systemRoles)),
-          catchError(() => of(ITSystemUsageActions.getItSystemUsageOverviewRolesError()))
+          catchError(() => of(ITSystemUsageActions.getItSystemUsageOverviewRolesError())),
         );
-      })
+      }),
     );
   });
 
@@ -152,9 +152,9 @@ export class ITSystemUsageEffects {
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsage({ systemUsageUuid }).pipe(
           map((itSystemUsage) => ITSystemUsageActions.getITSystemUsageSuccess(itSystemUsage)),
-          catchError(() => of(ITSystemUsageActions.getITSystemUsageError()))
-        )
-      )
+          catchError(() => of(ITSystemUsageActions.getITSystemUsageError())),
+        ),
+      ),
     );
   });
 
@@ -167,9 +167,9 @@ export class ITSystemUsageEffects {
 
         return this.apiV2ItSystemUsageService.deleteSingleItSystemUsageV2DeleteItSystemUsage({ systemUsageUuid }).pipe(
           map(() => ITSystemUsageActions.removeITSystemUsageSuccess()),
-          catchError(() => of(ITSystemUsageActions.removeITSystemUsageError()))
+          catchError(() => of(ITSystemUsageActions.removeITSystemUsageError())),
         );
-      })
+      }),
     );
   });
 
@@ -198,7 +198,7 @@ export class ITSystemUsageEffects {
         } as APIUpdateItSystemUsageRequestDTO;
 
         return of(ITSystemUsageActions.patchITSystemUsage(requestBody, $localize`Relevant organisationsenhed fjernet`));
-      })
+      }),
     );
   });
 
@@ -222,10 +222,10 @@ export class ITSystemUsageEffects {
         return of(
           ITSystemUsageActions.patchITSystemUsage(
             { organizationUsage: { usingOrganizationUnitUuids: unitUuids } },
-            $localize`Relevant organisationsenhed tilføjet`
-          )
+            $localize`Relevant organisationsenhed tilføjet`,
+          ),
         );
-      })
+      }),
     );
   });
 
@@ -245,9 +245,9 @@ export class ITSystemUsageEffects {
             map((itSystemUsage) => {
               return ITSystemUsageActions.patchITSystemUsageSuccess(itSystemUsage, customSuccessText);
             }),
-            catchError(() => of(ITSystemUsageActions.patchITSystemUsageError(customErrorText)))
+            catchError(() => of(ITSystemUsageActions.patchITSystemUsageError(customErrorText))),
           );
-      })
+      }),
     );
   });
 
@@ -257,9 +257,9 @@ export class ITSystemUsageEffects {
       switchMap(({ systemUsageUuid }) =>
         this.apiV2ItSystemUsageService.getSingleItSystemUsageV2GetItSystemUsagePermissions({ systemUsageUuid }).pipe(
           map((permissions) => ITSystemUsageActions.getITSystemUsagePermissionsSuccess(permissions)),
-          catchError(() => of(ITSystemUsageActions.getITSystemUsagePermissionsError()))
-        )
-      )
+          catchError(() => of(ITSystemUsageActions.getITSystemUsagePermissionsError())),
+        ),
+      ),
     );
   });
 
@@ -272,9 +272,9 @@ export class ITSystemUsageEffects {
           .getSingleItSystemUsageV2GetItSystemUsageCollectionPermissions({ organizationUuid })
           .pipe(
             map((permissions) => ITSystemUsageActions.getITSystemUsageCollectionPermissionsSuccess(permissions)),
-            catchError(() => of(ITSystemUsageActions.getITSystemUsageCollectionPermissionsError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.getITSystemUsageCollectionPermissionsError())),
+          ),
+      ),
     );
   });
 
@@ -296,9 +296,9 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map((usage) => ITSystemUsageActions.bulkAddItSystemUsageRoleSuccess(usage)),
-            catchError(() => of(ITSystemUsageActions.bulkAddItSystemUsageRoleError()))
+            catchError(() => of(ITSystemUsageActions.bulkAddItSystemUsageRoleError())),
           );
-      })
+      }),
     );
   });
 
@@ -309,15 +309,18 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchRemoveRoleAssignment({
             systemUsageUuid: itSystemUsageUuid,
-            aPIRoleAssignmentRequestDTO: { userUuid: userUuid, roleUuid: roleUuid },
+            aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest: {
+              userUuid: userUuid,
+              roleUuid: roleUuid,
+            },
           })
           .pipe(
             map((usage) =>
-              ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid)
+              ITSystemUsageActions.removeItSystemUsageRoleSuccess(usage, userUuid, roleUuid, itSystemUsageUuid),
             ),
-            catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.removeItSystemUsageRoleError())),
+          ),
+      ),
     );
   });
 
@@ -341,12 +344,12 @@ export class ITSystemUsageEffects {
                 },
               },
               $localize`Opgaven blev tilknyttet`,
-              $localize`Opgaven kunne ikke tilknyttets`
-            )
+              $localize`Opgaven kunne ikke tilknyttets`,
+            ),
           );
         }
         return of();
-      })
+      }),
     );
   });
 
@@ -370,12 +373,12 @@ export class ITSystemUsageEffects {
                 },
               },
               $localize`Den lokalt tilknyttede opgave blev fjernet`,
-              $localize`Den lokalt tilknyttede opgave kunne ikke fjernes`
-            )
+              $localize`Den lokalt tilknyttede opgave kunne ikke fjernes`,
+            ),
           );
         }
         return of();
-      })
+      }),
     );
   });
 
@@ -399,12 +402,12 @@ export class ITSystemUsageEffects {
                 },
               },
               $localize`Den nedarvede opgave blev fjernet`,
-              $localize`Den nedarvede opgave kunne ikke fjernes`
-            )
+              $localize`Den nedarvede opgave kunne ikke fjernes`,
+            ),
           );
         }
         return of();
-      })
+      }),
     );
   });
 
@@ -428,12 +431,12 @@ export class ITSystemUsageEffects {
                 },
               },
               $localize`Den nedarvede opgave blev gendannet`,
-              $localize`Den nedarvede opgave kunne ikke gendannes`
-            )
+              $localize`Den nedarvede opgave kunne ikke gendannes`,
+            ),
           );
         }
         return of();
-      })
+      }),
     );
   });
 
@@ -445,13 +448,13 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2PostSystemUsageRelation({
             systemUsageUuid: usageUuid,
-            aPISystemRelationWriteRequestDTO: request,
+            aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest: request,
           })
           .pipe(
             map((relation) => ITSystemUsageActions.addItSystemUsageRelationSuccess(usageUuid, relation)),
-            catchError(() => of(ITSystemUsageActions.addItSystemUsageRelationError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.addItSystemUsageRelationError())),
+          ),
+      ),
     );
   });
 
@@ -467,9 +470,9 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map((relations) => ITSystemUsageActions.addItSystemUsageRelationsSuccess(usageUuid, relations)),
-            catchError(() => of(ITSystemUsageActions.addItSystemUsageRelationsError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.addItSystemUsageRelationsError())),
+          ),
+      ),
     );
   });
 
@@ -482,13 +485,13 @@ export class ITSystemUsageEffects {
           .putSingleItSystemUsageV2PutSystemUsageRelation({
             systemUsageUuid: usageUuid,
             systemRelationUuid: relationUuid,
-            aPISystemRelationWriteRequestDTO: request,
+            aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest: request,
           })
           .pipe(
             map((relation) => ITSystemUsageActions.patchItSystemUsageRelationSuccess(usageUuid, relation)),
-            catchError(() => of(ITSystemUsageActions.patchItSystemUsageRelationError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageRelationError())),
+          ),
+      ),
     );
   });
 
@@ -504,9 +507,9 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map(() => ITSystemUsageActions.removeItSystemUsageRelationSuccess(usageUuid)),
-            catchError(() => of(ITSystemUsageActions.removeItSystemUsageRelationError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.removeItSystemUsageRelationError())),
+          ),
+      ),
     );
   });
 
@@ -523,13 +526,13 @@ export class ITSystemUsageEffects {
             newExternalReference.externalReference,
             externalReferences,
             systemUsageUuid,
-            'it-system-usage'
+            'it-system-usage',
           )
           .pipe(
             map((response) => ITSystemUsageActions.addExternalReferenceSuccess(response)),
-            catchError(() => of(ITSystemUsageActions.addExternalReferenceError()))
+            catchError(() => of(ITSystemUsageActions.addExternalReferenceError())),
           );
-      })
+      }),
     );
   });
 
@@ -546,13 +549,13 @@ export class ITSystemUsageEffects {
             editData,
             externalReferences,
             systemUsageUuid,
-            'it-system-usage'
+            'it-system-usage',
           )
           .pipe(
             map((response) => ITSystemUsageActions.editExternalReferenceSuccess(response)),
-            catchError(() => of(ITSystemUsageActions.editExternalReferenceError()))
+            catchError(() => of(ITSystemUsageActions.editExternalReferenceError())),
           );
-      })
+      }),
     );
   });
 
@@ -569,13 +572,13 @@ export class ITSystemUsageEffects {
             referenceUuid.referenceUuid,
             externalReferences,
             systemUsageUuid,
-            'it-system-usage'
+            'it-system-usage',
           )
           .pipe(
             map((response) => ITSystemUsageActions.removeExternalReferenceSuccess(response)),
-            catchError(() => of(ITSystemUsageActions.removeExternalReferenceError()))
+            catchError(() => of(ITSystemUsageActions.removeExternalReferenceError())),
           );
-      })
+      }),
     );
   });
 
@@ -591,9 +594,9 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map(() => ITSystemUsageActions.removeItSystemUsageJournalPeriodSuccess(usageUuid)),
-            catchError(() => of(ITSystemUsageActions.removeItSystemUsageJournalPeriodError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.removeItSystemUsageJournalPeriodError())),
+          ),
+      ),
     );
   });
 
@@ -605,13 +608,13 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2PostJournalPeriod({
             systemUsageUuid: usageUuid,
-            aPIJournalPeriodDTO: journalPeriod,
+            aPIPostSingleItSystemUsageV2PostJournalPeriodRequest: journalPeriod,
           })
           .pipe(
             map((_) => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
-            catchError(() => of(ITSystemUsageActions.addItSystemUsageJournalPeriodError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.addItSystemUsageJournalPeriodError())),
+          ),
+      ),
     );
   });
 
@@ -624,13 +627,13 @@ export class ITSystemUsageEffects {
           .putSingleItSystemUsageV2PutJournalPeriod({
             systemUsageUuid: usageUuid,
             journalPeriodUuid: journalPeriodUuid,
-            aPIJournalPeriodDTO: journalPeriod,
+            aPIPostSingleItSystemUsageV2PostJournalPeriodRequest: journalPeriod,
           })
           .pipe(
             map((_) => ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess(usageUuid)),
-            catchError(() => of(ITSystemUsageActions.patchItSystemUsageJournalPeriodError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.patchItSystemUsageJournalPeriodError())),
+          ),
+      ),
     );
   });
 
@@ -640,14 +643,16 @@ export class ITSystemUsageEffects {
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ itSystemUuid }, organizationUuid]) =>
         this.apiV2ItSystemUsageService
-          .postSingleItSystemUsageV2PostItSystemUsage({ aPICreateItSystemUsageRequestDTO: { systemUuid: itSystemUuid, organizationUuid } })
+          .postSingleItSystemUsageV2PostItSystemUsage({
+            aPIPostSingleItSystemUsageV2PostItSystemUsageRequest: { systemUuid: itSystemUuid, organizationUuid },
+          })
           .pipe(
             map((usage: APIItSystemUsageResponseDTO) =>
-              ITSystemUsageActions.createItSystemUsageSuccess(itSystemUuid, usage.uuid)
+              ITSystemUsageActions.createItSystemUsageSuccess(itSystemUuid, usage.uuid),
             ),
-            catchError(() => of(ITSystemUsageActions.createItSystemUsageError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.createItSystemUsageError())),
+          ),
+      ),
     );
   });
 
@@ -663,9 +668,9 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map(() => ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess(itSystemUuid)),
-            catchError(() => of(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationError())),
+          ),
+      ),
     );
   });
 
@@ -678,15 +683,15 @@ export class ITSystemUsageEffects {
           .postSingleOrganizationGridInternalV2SaveGridConfiguration({
             organizationUuid,
             overviewType: 'ItSystemUsage',
-            aPIOrganizationGridConfigurationRequestDTO: {
+            aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest: {
               visibleColumns: columnConfig,
             },
           })
           .pipe(
             map(() => ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationSuccess()),
-            catchError(() => of(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.saveOrganizationalITSystemUsageColumnConfigurationError())),
+          ),
+      ),
     );
   });
 
@@ -702,9 +707,9 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map(() => ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationSuccess()),
-            catchError(() => of(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.deleteOrganizationalITSystemUsageColumnConfigurationError())),
+          ),
+      ),
     );
   });
 
@@ -722,16 +727,16 @@ export class ITSystemUsageEffects {
             map((response) =>
               ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationSuccess(
                 response,
-                disablePopupNotification
-              )
+                disablePopupNotification,
+              ),
             ),
             catchError(() =>
               of(
-                ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError(disablePopupNotification)
-              )
-            )
-          )
-      )
+                ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError(disablePopupNotification),
+              ),
+            ),
+          ),
+      ),
     );
   });
 
@@ -744,7 +749,7 @@ export class ITSystemUsageEffects {
         if (!columnConfigs) return ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError();
         const newColumns = getNewGridColumnsBasedOnConfig(columnConfigs, columns);
         return ITSystemUsageActions.updateGridColumns(newColumns);
-      })
+      }),
     );
   });
 
@@ -760,9 +765,9 @@ export class ITSystemUsageEffects {
           })
           .pipe(
             map((response) => ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationSuccess(response)),
-            catchError(() => of(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationError()))
-          )
-      )
+            catchError(() => of(ITSystemUsageActions.initializeITSystemUsageLastSeenGridConfigurationError())),
+          ),
+      ),
     );
   });
 
@@ -808,28 +813,28 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       new RegExp(`SensitiveDataLevelsAsCsv eq ('\\w+')`, 'i'),
       (_, p1) =>
         `SensitiveDataLevels/any(c: c/SensitivityDataLevel eq '${convertDataSensitivityLevelStringToNumberMap(
-          p1.replace(/'/g, '')
-        )}')`
+          p1.replace(/'/g, ''),
+        )}')`,
     )
     .replace(
       /(\w+\()DataProcessingRegistrationNamesAsCsv(.*\))/,
-      'DataProcessingRegistrations/any(d: $1d/DataProcessingRegistrationName$2)'
+      'DataProcessingRegistrations/any(d: $1d/DataProcessingRegistrationName$2)',
     )
     .replace(/(\w+\()DependsOnInterfacesNamesAsCsv(.*\))/, 'DependsOnInterfaces/any(e: $1e/InterfaceName$2)')
     .replace(
       /(\w+\()IncomingRelatedItSystemUsagesNamesAsCsv(.*\))/,
-      'IncomingRelatedItSystemUsages/any(f: $1f/ItSystemUsageName$2)'
+      'IncomingRelatedItSystemUsages/any(f: $1f/ItSystemUsageName$2)',
     )
     .replace(
       /RelevantOrganizationUnitNamesAsCsv eq '([\w-]+)'/,
-      'RelevantOrganizationUnits/any(g: g/OrganizationUnitUuid eq $1)'
+      'RelevantOrganizationUnits/any(g: g/OrganizationUnitUuid eq $1)',
     )
     .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(h: $1h/ItContractName$2)')
     .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')
     .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1')
     .replace(
       new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('[^']+')`, 'i'),
-      'contains(DataProcessingRegistrationsConcludedAsCsv, $1)'
+      'contains(DataProcessingRegistrationsConcludedAsCsv, $1)',
     );
 
   convertedString = castContainsFieldToString(convertedString, 'ExternalSystemUuid');
@@ -837,13 +842,13 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
   systemRoles?.forEach((role) => {
     convertedString = convertedString.replace(
       new RegExp(`(\\w+\\()Roles[./]Role${role.id}(,.*?\\))`, 'i'),
-      `RoleAssignments/any(i: $1i/UserFullName$2 and i/RoleId eq ${role.id})`
+      `RoleAssignments/any(i: $1i/UserFullName$2 and i/RoleId eq ${role.id})`,
     );
   });
 
   convertedString = convertedString.replace(
     /LifeCycleStatus eq 'Undecided'/,
-    "(LifeCycleStatus eq 'Undecided' or LifeCycleStatus eq null)"
+    "(LifeCycleStatus eq 'Undecided' or LifeCycleStatus eq null)",
   );
 
   return convertedString;

@@ -39,7 +39,7 @@ export class GlobalAdminHelpTextsEffects {
       ofType(HelpTextActions.createHelpText),
       switchMap(({ request }) => {
         return this.helpTextsInternalService
-          .postSingleHelpTextsInternalV2Post({ aPIHelpTextCreateRequestDTO: request })
+          .postSingleHelpTextsInternalV2Post({ aPIPostSingleHelpTextsInternalV2PostRequest: request })
           .pipe(
             map((helpTextDto) => HelpTextActions.createHelpTextSuccess(adaptHelpText(helpTextDto))),
             catchError(() => of(HelpTextActions.createHelpTextError())),
@@ -53,7 +53,7 @@ export class GlobalAdminHelpTextsEffects {
       ofType(HelpTextActions.updateHelpText),
       switchMap(({ key, request }) => {
         return this.helpTextsInternalService
-          .patchSingleHelpTextsInternalV2Patch({ key, aPIHelpTextUpdateRequestDTO: request })
+          .patchSingleHelpTextsInternalV2Patch({ key, aPIPatchSingleHelpTextsInternalV2PatchRequest: request })
           .pipe(
             map((helpTextDto) => HelpTextActions.updateHelpTextSuccess(adaptHelpText(helpTextDto))),
             catchError(() => of(HelpTextActions.updateHelpTextError())),

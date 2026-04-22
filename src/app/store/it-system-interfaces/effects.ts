@@ -147,21 +147,23 @@ export class ITInterfaceEffects {
       concatLatestFrom(() => this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ itInterface }, interfaceUuid]) => {
         if (!itInterface) return of(ITInterfaceActions.updateITInterfaceError());
-        return this.apiService.patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, aPIUpdateItInterfaceRequestDTO: itInterface }).pipe(
-          map((itInterface) => ITInterfaceActions.updateITInterfaceSuccess(itInterface)),
-          catchError((err: HttpErrorResponse) => {
-            if (err.status === 409) {
-              //Name conflict
-              return of(
-                ITInterfaceActions.updateITInterfaceError(
-                  $localize`Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!`,
-                ),
-              );
-            } else {
-              return of(ITInterfaceActions.updateITInterfaceError()); //Uses default error message
-            }
-          }),
-        );
+        return this.apiService
+          .patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, aPIPatchSingleItInterfaceV2PatchRequest: itInterface })
+          .pipe(
+            map((itInterface) => ITInterfaceActions.updateITInterfaceSuccess(itInterface)),
+            catchError((err: HttpErrorResponse) => {
+              if (err.status === 409) {
+                //Name conflict
+                return of(
+                  ITInterfaceActions.updateITInterfaceError(
+                    $localize`Fejl! Feltet kunne ikke ændres da værdien allerede findes i KITOS!`,
+                  ),
+                );
+              } else {
+                return of(ITInterfaceActions.updateITInterfaceError()); //Uses default error message
+              }
+            }),
+          );
       }),
     );
   });
@@ -189,10 +191,15 @@ export class ITInterfaceEffects {
       ofType(ITInterfaceActions.addITInterfaceData),
       combineLatestWith(this.store.select(selectInterfaceUuid).pipe(filterNullish())),
       switchMap(([{ data }, interfaceUuid]) =>
-        this.apiService.postSingleItInterfaceV2PostDataDescription({ aPIItInterfaceDataRequestDTO: data, uuid: interfaceUuid }).pipe(
-          map((response) => ITInterfaceActions.addITInterfaceDataSuccess(response)),
-          catchError(() => of(ITInterfaceActions.addITInterfaceDataError())),
-        ),
+        this.apiService
+          .postSingleItInterfaceV2PostDataDescription({
+            aPIPostSingleItInterfaceV2PostDataDescriptionRequest: data,
+            uuid: interfaceUuid,
+          })
+          .pipe(
+            map((response) => ITInterfaceActions.addITInterfaceDataSuccess(response)),
+            catchError(() => of(ITInterfaceActions.addITInterfaceDataError())),
+          ),
       ),
     );
   });
@@ -206,7 +213,7 @@ export class ITInterfaceEffects {
           .putSingleItInterfaceV2PutDataDescription({
             uuid: interfaceUuid,
             dataDescriptionUuid: dataUuid,
-            aPIItInterfaceDataRequestDTO: data,
+            aPIPostSingleItInterfaceV2PostDataDescriptionRequest: data,
           })
           .pipe(
             map((response) => ITInterfaceActions.updateITInterfaceDataSuccess(response)),
@@ -223,7 +230,7 @@ export class ITInterfaceEffects {
       switchMap(([{ name, interfaceId, openAfterCreate }, organizationUuid]) =>
         this.apiService
           .postSingleItInterfaceV2Post({
-            aPICreateItInterfaceRequestDTO: { name, interfaceId, organizationUuid },
+            aPIPostSingleItInterfaceV2PostRequest: { name, interfaceId, organizationUuid },
           })
           .pipe(
             map(({ uuid }) => ITInterfaceActions.createITInterfaceSuccess(uuid, openAfterCreate)),

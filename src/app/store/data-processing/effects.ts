@@ -556,7 +556,8 @@ export class DataProcessingEffects {
           .patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate({
             uuid: dprUuid,
             oversightDateUuid,
-            aPIModifyOversightDateDTO: oversightDate,
+            aPIPatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequest:
+              oversightDate,
           })
           .pipe(
             map((response) => DataProcessingActions.patchDataProcessingOversightDateSuccess(response)),

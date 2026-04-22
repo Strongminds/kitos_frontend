@@ -139,7 +139,7 @@ export class ITSystemEffects {
       switchMap(([{ itSystem, customSuccessText, customErrorText }, systemUuid]) => {
         if (!systemUuid) return of(ITSystemActions.patchITSystemError());
         return this.apiItSystemService
-          .patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, aPIUpdateItSystemRequestDTO: itSystem })
+          .patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, aPIPatchSingleItSystemV2PatchItSystemRequest: itSystem })
           .pipe(
             map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
             catchError((err: HttpErrorResponse) => {
@@ -253,7 +253,7 @@ export class ITSystemEffects {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ name, openAfterCreate }, organizationUuid]) => {
         return this.apiItSystemService
-          .postSingleItSystemV2PostItSystem({ aPICreateItSystemRequestDTO: { name, organizationUuid } })
+          .postSingleItSystemV2PostItSystem({ aPIPostSingleItSystemV2PostItSystemRequest: { name, organizationUuid } })
           .pipe(
             map(({ uuid }) => ITSystemActions.createItSystemSuccess(uuid, openAfterCreate)),
             catchError(() => of(ITSystemActions.createItSystemError())),

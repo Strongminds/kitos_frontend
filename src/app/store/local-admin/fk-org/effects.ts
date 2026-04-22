@@ -52,7 +52,7 @@ export class FkOrgEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.apiService
-          .postSingleStsOrganizationSynchronizationInternalV2CreateConnection({ organizationUuid, aPIConnectToStsOrganizationRequestDTO: request })
+          .postSingleStsOrganizationSynchronizationInternalV2CreateConnection({ organizationUuid, aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest: request })
           .pipe(
             map(() => FkOrgActions.createConnectionSuccess()),
             catchError(() => of(FkOrgActions.createConnectionError())),
@@ -85,7 +85,7 @@ export class FkOrgEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.apiService
-          .putSingleStsOrganizationSynchronizationInternalV2UpdateConnection({ organizationUuid, aPIConnectToStsOrganizationRequestDTO: request })
+          .putSingleStsOrganizationSynchronizationInternalV2UpdateConnection({ organizationUuid, aPIPutSingleStsOrganizationSynchronizationInternalV2UpdateConnectionRequest: request })
           .pipe(
             map(() => FkOrgActions.updateConnectionSuccess()),
             catchError(() => of(FkOrgActions.updateConnectionError())),
@@ -117,7 +117,7 @@ export class FkOrgEffects {
         this.apiService
           .deleteSingleStsOrganizationSynchronizationInternalV2Disconnect({
             organizationUuid,
-            aPIDisconnectFromStsOrganizationRequestDTO: { purgeUnusedExternalUnits },
+            aPIDeleteSingleStsOrganizationSynchronizationInternalV2DisconnectRequest: { purgeUnusedExternalUnits },
           })
           .pipe(
             map(() => FkOrgActions.deleteConnectionSuccess()),
