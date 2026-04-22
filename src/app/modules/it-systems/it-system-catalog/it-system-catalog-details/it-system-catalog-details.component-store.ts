@@ -4,7 +4,7 @@ import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { first, mergeMap } from 'rxjs';
-import { APIV2ItSystemUsageService } from 'src/app/api/v2';
+import { ItSystemUsageV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageHasDeletePermission } from 'src/app/store/it-system-usage/selectors';
@@ -18,7 +18,7 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object>
     .pipe(filterNullish());
 
   constructor(
-    @Inject(APIV2ItSystemUsageService) private apiItSystemUsageService: APIV2ItSystemUsageService,
+    @Inject(ItSystemUsageV2Service) private apiItSystemUsageService: ItSystemUsageV2Service,
     private store: Store,
   ) {
     super();
@@ -31,7 +31,7 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object>
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([itSystemUuid, organizationUuid]) =>
         this.apiItSystemUsageService
-          .getManyItSystemUsageV2GetItSystemUsages({ systemUuid: itSystemUuid, organizationUuid })
+          .getSingleItSystemUsageV2GetItSystemUsages({ systemUuid: itSystemUuid, organizationUuid })
           .pipe(
             tapResponse({
     next: (usages) => {
