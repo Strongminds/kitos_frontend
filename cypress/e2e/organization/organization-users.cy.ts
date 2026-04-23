@@ -5,10 +5,7 @@ import { TestRunner } from 'cypress/support/test-runner';
 function setupTest() {
   cy.requireIntercept();
 
-  cy.intercept(
-    '/odata/GetUsersByUuid(organizationUuid=**)?$expand=ObjectOwner,OrganizationRights($filter=Organization/Uuid%20eq%**),OrganizationUnitRights($filter=Object/Organization/Uuid%20eq%**;$expand=Object($select=Name,Uuid),Role($select=Name,Uuid,HasWriteAccess)),ItSystemRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=ItSystem,Uuid;$expand=ItSystem($select=Name))),ItContractRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),DataProcessingRegistrationRights($expand=Role($select=Name,Uuid,HasWriteAccess),Object($select=Name,Uuid)),&$skip=0&$top=*&$count=true',
-    { fixture: './organizations/users/organization-odata-users.json' }
-  );
+  cy.intercept(/\/odata\/GetUsersByUuid\(/, { fixture: './organizations/users/organization-odata-users.json' });
   cy.intercept('api/v2/internal/organization/*/users/permissions', {
     fixture: './organizations/users/org-users-permissions.json',
   });
