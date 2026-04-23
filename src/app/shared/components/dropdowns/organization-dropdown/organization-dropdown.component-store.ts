@@ -20,9 +20,9 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
   }
 
   private setOrganizations = this.updater(
-    (state, users: APIOrganizationResponseDTO[]): State => ({
+    (state, organizations: APIOrganizationResponseDTO[]): State => ({
       ...state,
-      organizations: users,
+      organizations: organizations,
     }),
   );
 
@@ -43,7 +43,7 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
           })
           .pipe(
             tapResponse({
-              next: (filteredUsers) => this.setOrganizations(filteredUsers),
+              next: (filteredOrganizations) => this.setOrganizations(filteredOrganizations),
               error: (error) => console.error(error),
               complete: () => this.setLoading(false),
             }),
