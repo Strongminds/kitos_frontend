@@ -2,7 +2,7 @@ import { APIOrganizationRightDTO } from 'src/app/api/v1';
 
 export interface OrganizationRight {
   organizationUuid?: string;
-  role: number;
+  role: string;
 }
 
 export function adaptV1OrganizationRights(rights: Array<APIOrganizationRightDTO>): OrganizationRight[] {
