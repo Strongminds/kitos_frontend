@@ -46,7 +46,7 @@ describe('login', () => {
     cy.contains('Log ind');
   });
 
-  it.only('can authenticate with loading spinner', () => {
+  it('can authenticate with loading spinner', () => {
     cy.contains('Email');
     cy.contains('Password');
 
