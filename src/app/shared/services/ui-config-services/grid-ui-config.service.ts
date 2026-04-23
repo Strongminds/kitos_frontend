@@ -85,7 +85,6 @@ import {
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
   selectITSystemUsageEnableIsSociallyCritical,
-  selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,

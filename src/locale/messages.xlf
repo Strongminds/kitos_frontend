@@ -5993,6 +5993,12 @@
       <trans-unit id="631828793728533672" datatype="html">
         <source>Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?</source>
       </trans-unit>
+      <trans-unit id="1402668839094284142" datatype="html">
+        <source>Forretningskritisk IT-system</source>
+      </trans-unit>
+      <trans-unit id="481320365420058756" datatype="html">
+        <source>Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

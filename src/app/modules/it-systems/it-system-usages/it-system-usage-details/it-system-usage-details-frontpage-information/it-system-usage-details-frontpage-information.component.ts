@@ -91,8 +91,6 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
     AsyncPipe,
     TooltipComponent,
   ],
-    TooltipComponent,
-  ],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
@@ -237,7 +235,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           control.disable();
         }
       }),
-      }),
     );
 
     // Set initial state of information form
@@ -264,7 +261,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             webAccessibilityNotes: general.webAccessibilityNotes,
           });
         }),
-        }),
     );
 
     // Set initial state of application form
@@ -283,8 +279,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             valid: itSystemUsage.general.validity.valid
               ? $localize`Systemet er aktivt`
               : $localize`Systemet er ikke aktivt`,
-          }),
-        ),
           }),
         ),
     );

@@ -7829,6 +7829,14 @@
         <source>Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?</source>
         <target state="new">Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?</target>
       </trans-unit>
+      <trans-unit id="481320365420058756" datatype="html">
+        <source>Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde</source>
+        <target state="new">Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde</target>
+      </trans-unit>
+      <trans-unit id="1402668839094284142" datatype="html">
+        <source>Forretningskritisk IT-system</source>
+        <target state="new">Forretningskritisk IT-system</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
