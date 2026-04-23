@@ -32,11 +32,6 @@ import {
   yesNoDontKnowOptions,
 } from 'src/app/shared/models/yes-no-dont-know.model';
 import {
-  YesNoDontKnowOption,
-  mapToYesNoDontKnowEnum,
-  yesNoDontKnowOptions,
-} from 'src/app/shared/models/yes-no-dont-know.model';
-import {
   YesNoPartiallyOption,
   mapToYesNoPartiallyEnum,
   yesNoPartiallyOptions,
