@@ -32,6 +32,11 @@ import {
   yesNoDontKnowOptions,
 } from 'src/app/shared/models/yes-no-dont-know.model';
 import {
+  YesNoDontKnowOption,
+  mapToYesNoDontKnowEnum,
+  yesNoDontKnowOptions,
+} from 'src/app/shared/models/yes-no-dont-know.model';
+import {
   YesNoPartiallyOption,
   mapToYesNoPartiallyEnum,
   yesNoPartiallyOptions,
@@ -89,6 +94,8 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
     TextAreaComponent,
     DatePickerComponent,
     AsyncPipe,
+    TooltipComponent,
+  ],
     TooltipComponent,
   ],
 })
@@ -235,6 +242,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           control.disable();
         }
       }),
+      }),
     );
 
     // Set initial state of information form
@@ -261,6 +269,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             webAccessibilityNotes: general.webAccessibilityNotes,
           });
         }),
+        }),
     );
 
     // Set initial state of application form
@@ -279,6 +288,8 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             valid: itSystemUsage.general.validity.valid
               ? $localize`Systemet er aktivt`
               : $localize`Systemet er ikke aktivt`,
+          }),
+        ),
           }),
         ),
     );
