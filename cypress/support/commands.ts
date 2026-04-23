@@ -16,6 +16,9 @@ Cypress.Commands.add(
 
     cy.intercept('/api/v2/internal/public-messages', { fixture: './shared/public-messages.json' });
     cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations.json' }).as('organizations');
+    cy.intercept('/api/v2/organizations/*/organization-units*', {
+      fixture: './organizations/organization-units-hierarchy.json',
+    });
 
     cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
       fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json',

@@ -60,7 +60,7 @@ Cypress.Commands.add('setupDataProcessingIntercepts', () => {
     fixture: './dpr/choice-types/data-responsible-types.json',
   });
 
-  cy.intercept('GET', 'api/v2/organizations/*/organization-units?pageSize=*', {
+  cy.intercept('GET', 'api/v2/organizations/*/organization-units?PageSize=*', {
     fixture: './organizations/organization-units.json',
   });
 
@@ -89,7 +89,7 @@ Cypress.Commands.add('setupItSystemUsageIntercepts', () => {
   cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {
     fixture: './it-system-usage/options.json',
   });
-  cy.intercept('/api/v2/organizations/*/organization-units?pageSize=*', {
+  cy.intercept('/api/v2/organizations/*/organization-units?PageSize=*', {
     fixture: './organizations/organization-units-hierarchy.json',
   });
   cy.intercept('/api/v2/business-types*', { fixture: './shared/business-types.json' });
