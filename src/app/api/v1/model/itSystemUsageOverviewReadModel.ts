@@ -111,6 +111,7 @@ export interface APIItSystemUsageOverviewReadModel {
     webAccessibilityCompliance?: APIItSystemUsageOverviewReadModel.WebAccessibilityComplianceEnum;
     lastWebAccessibilityCheck?: string;
     webAccessibilityNotes?: string;
+    isSociallyCritical?: APIItSystemUsageOverviewReadModel.IsSociallyCriticalEnum;
 }
 export namespace APIItSystemUsageOverviewReadModel {
     export type ContainsAITechnologyEnum = 'Yes' | 'No' | 'Undecided';
@@ -198,6 +199,13 @@ export namespace APIItSystemUsageOverviewReadModel {
         No: 'No' as WebAccessibilityComplianceEnum,
         Yes: 'Yes' as WebAccessibilityComplianceEnum,
         Partially: 'Partially' as WebAccessibilityComplianceEnum
+    };
+    export type IsSociallyCriticalEnum = 'NO' | 'YES' | 'DONTKNOW' | 'UNDECIDED';
+    export const IsSociallyCriticalEnum = {
+        No: 'NO' as IsSociallyCriticalEnum,
+        Yes: 'YES' as IsSociallyCriticalEnum,
+        Dontknow: 'DONTKNOW' as IsSociallyCriticalEnum,
+        Undecided: 'UNDECIDED' as IsSociallyCriticalEnum
     };
 }
 

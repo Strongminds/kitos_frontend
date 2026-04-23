@@ -1,10 +1,12 @@
-import { APIGDPRRegistrationsResponseDTO } from 'src/app/api/v2';
+import { APIGDPRRegistrationsResponseDTO, APIGeneralDataResponseDTO } from 'src/app/api/v2';
 
 export interface YesNoDontKnowOption {
   name: string;
   value:
     | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
     | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
+    | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum
+    | APIGeneralDataResponseDTO.IsSociallyCriticalEnum
     | string;
 }
 
@@ -24,7 +26,8 @@ export const mapToYesNoDontKnowEnum = (
   value?:
     | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
     | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
-    | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum,
+    | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum
+    | APIGeneralDataResponseDTO.IsSociallyCriticalEnum,
 ): YesNoDontKnowOption | undefined => {
   return yesNoDontKnowOptions.find((option) => option.value === value);
 };

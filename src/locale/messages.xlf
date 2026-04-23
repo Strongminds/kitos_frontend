@@ -5990,6 +5990,12 @@
       <trans-unit id="8930394023973882411" datatype="html">
         <source>Webadressen er ugyldig. Sørg for, at den begynder med én af disse: &quot;http://&quot;, &quot;https://&quot;, &quot;kmdedhvis:&quot;, &quot;kmdsageraabn:&quot;, eller &quot;sbsyslauncher:&quot;</source>
       </trans-unit>
+      <trans-unit id="942139237334216946" datatype="html">
+        <source>Samfundskritisk IT-system</source>
+      </trans-unit>
+      <trans-unit id="631828793728533672" datatype="html">
+        <source>Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
