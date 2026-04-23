@@ -5,7 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CookieService } from 'ngx-cookie';
 import { catchError, combineLatestWith, map, mergeMap, of, switchMap, tap, withLatestFrom } from 'rxjs';
-import { APILoginDTO, AuthorizeService } from 'src/app/api/v1';
+import { AuthorizeService } from 'src/app/api/v1';
 import {
   APIDefaultUserStartPreferenceChoice,
   APIOrganizationGridPermissionsResponseDTO,
@@ -60,7 +60,7 @@ export class UserEffects {
           })
           .pipe(
             tap(() => this.cookieService.removeAll()),
-            map((userDTO: APILoginDTO) => UserActions.loginSuccess(adaptUser(userDTO))),
+            map((userDTO) => UserActions.loginSuccess(adaptUser(userDTO.response))),
             catchError(() => of(UserActions.loginError())),
           ),
       ),
