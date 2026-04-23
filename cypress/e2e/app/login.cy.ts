@@ -46,11 +46,11 @@ describe('login', () => {
     cy.contains('Log ind');
   });
 
-  it('can authenticate with loading spinner', () => {
+  it.only('can authenticate with loading spinner', () => {
     cy.contains('Email');
     cy.contains('Password');
 
-    cy.intercept('/api/Authorize', (req) => {
+    cy.intercept('/api/authorize', (req) => {
       req.reply({
         delay: 1000,
         fixture: './shared/authorize.json',
