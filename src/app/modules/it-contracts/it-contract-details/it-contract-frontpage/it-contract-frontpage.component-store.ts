@@ -17,6 +17,7 @@ import {
 } from 'src/app/shared/helpers/hierarchy.helpers';
 import { IdentityNamePair } from 'src/app/shared/models/identity-name-pair.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { OrganizationService } from 'src/app/shared/services/organization.service';
 import { selectItContractUuid } from 'src/app/store/it-contract/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
@@ -42,6 +43,7 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
   constructor(
     @Inject(OrganizationV2Service) private readonly organizationApiService: OrganizationV2Service,
     @Inject(ItContractV2Service) private readonly apiItContractService: ItContractV2Service,
+    @Inject(OrganizationService) private readonly organizationService: OrganizationService,
     private readonly store: Store,
   ) {
     super({ usersIsLoading: false, organizationsIsLoading: false, contractsLoading: false });
@@ -105,8 +107,8 @@ export class ItContractFrontpageComponentStore extends ComponentStore<State> imp
     search$.pipe(
       switchMap((search) => {
         this.updateOrganizationsIsLoading(true);
-        return this.organizationApiService
-          .getSingleOrganizationV2GetOrganizations({
+        return this.organizationService
+          .getV2Organizations({
             nameOrCvrContent: search,
             orderByProperty: 'Name',
           })
