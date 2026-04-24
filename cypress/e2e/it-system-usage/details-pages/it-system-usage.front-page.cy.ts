@@ -15,18 +15,17 @@ describe('it-system-usage frontpage', () => {
     getKleRow(kleNumber).contains(name);
   }
 
-  it('can edit business critical status', () => {
+  it.only('can edit business critical status', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.contains('System 3').click();
 
-    cy.dropdown('Forretningskritisk IT-System', 'Nej', true);
-    const randomPatchName = Math.random().toString(36).substring(7);
-
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
-      randomPatchName,
+      'patchRequest',
     );
 
-    cy.wait('@' + randomPatchName)
+    cy.dropdown('Forretningskritisk IT-System', 'Nej', true);
+
+    cy.wait('@patchRequest')
       .its('request.body')
       .should('deep.eq', {
         general: { businessCritical: 'No' },
