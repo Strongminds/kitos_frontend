@@ -30,14 +30,14 @@ export function mapEntityTypeToRelatedEntityType(entityType: RegistrationEntityT
 
 export function mapRelatedEntityTypeToDTO(
   entityType: RelatedEntityType,
-): 'itContract' | 'itSystemUsage' | 'dataProcessingRegistration' {
+): 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration' {
   switch (entityType) {
     case RelatedEntityType.ItSystemUsage:
-      return 'itSystemUsage';
+      return 'ItSystemUsage';
     case RelatedEntityType.ItContract:
-      return 'itContract';
+      return 'ItContract';
     case RelatedEntityType.DataProcessingRegistration:
-      return 'dataProcessingRegistration';
+      return 'DataProcessingRegistration';
     default:
       throw new Error(`Related entity type for entity type: ${entityType} does not exist`);
   }
