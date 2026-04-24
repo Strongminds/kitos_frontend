@@ -60,6 +60,7 @@
         (valueChange)="patchGeneral({ dataClassificationUuid: $event })"
       ></app-dropdown>
     }
+
     @if (containsAITechnologyEnabled$ | async) {
       <app-tooltip [text]="(containsAITechnologyModifyEnabled$ | async) === false ? supplierMessage : ''">
         <app-dropdown
@@ -73,6 +74,20 @@
           </app-dropdown
         ></app-tooltip>
       }
+
+      @if (isSociallyCriticalEnabled$ | async) {
+         <app-dropdown
+          text="Samfundskritisk IT-system"
+          i18n-text
+          [formGroup]="itSystemInformationForm"
+          formName="isSociallyCritical"
+          (valueChange)="patchGeneral({ isSociallyCritical: $event })"
+          [data]="isSociallyCriticalOptions"
+          toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
+          i18n-toolTipText
+        ></app-dropdown>
+      }
+
       @if (descriptionEnabled$ | async) {
         <app-textarea
           class="full-width"

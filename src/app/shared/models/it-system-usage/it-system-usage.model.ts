@@ -87,6 +87,7 @@ export interface ITSystemUsage {
   LastWebAccessibilityCheck: Date | undefined;
   WebAccessibilityNotes: string | undefined;
   GdprCriticality: GdprCriticality | undefined;
+  IsSociallyCritical: YesNoDontKnowOption | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -211,6 +212,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     LastWebAccessibilityCheck: value.LastWebAccessibilityCheck,
     WebAccessibilityNotes: value.WebAccessibilityNotes,
     GdprCriticality: mapGdprCriticality(value.GdprCriticality),
+    IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
   };
   return adaptedSystem;
 };

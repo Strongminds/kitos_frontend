@@ -84,6 +84,7 @@ import {
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
+  selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -127,8 +128,8 @@ export class GridUIConfigService {
   public isColumnEnabled(column: GridColumn, applications: UIConfigGridApplication[]) {
     let enabled = true;
 
-    for (const app of applications) {
-      const result = this.verifyColumn(app, column);
+    for (const application of applications) {
+      const result = this.verifyColumn(application, column);
       if (result !== null) {
         if (result === false) {
           enabled = false;
@@ -301,6 +302,9 @@ export class GridUIConfigService {
             UsageFields.WebAccessibilityNotes,
           ]),
         ),
+      this.store
+        .select(selectITSystemUsageEnableIsSociallyCritical)
+        .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
 
       //Contracts
       combineAND([
