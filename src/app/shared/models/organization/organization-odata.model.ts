@@ -1,4 +1,4 @@
-import { adaptOrganizationNameString } from '../../helpers/organization.helpers';
+import { addOptionalExpiredText } from '../../helpers/option-type.helper';
 
 export interface OrganizationOData {
   id: string;
@@ -51,7 +51,7 @@ export const adaptOrganization = (value: any): OrganizationOData | undefined => 
   const adapted: OrganizationOData = {
     id: value.Uuid,
     Uuid: value.Uuid,
-    Name: adaptOrganizationNameString(value.Name, value.Disabled),
+    Name: addOptionalExpiredText(value.Name, value.Disabled),
     Cvr: value.Cvr ?? '',
     OrganizationType: adaptOrganizationType(value.TypeId).name,
     OrganizationTypeEnum: value.TypeId,

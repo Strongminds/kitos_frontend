@@ -68,7 +68,7 @@ export class ITSystemEffects {
         return this.httpClient
           .get<OData>(
             `/odata/ItSystems?$expand=BusinessType($select=Name),` +
-              `BelongsTo($select=Name),` +
+              `BelongsTo($select=Name,Disabled),` +
               `TaskRefs($select=Description,TaskKey),` +
               `Parent($select=Name,Disabled),` +
               `Organization($select=Id,Name),` +
@@ -139,7 +139,10 @@ export class ITSystemEffects {
       switchMap(([{ itSystem, customSuccessText, customErrorText }, systemUuid]) => {
         if (!systemUuid) return of(ITSystemActions.patchITSystemError());
         return this.apiItSystemService
-          .patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, aPIPatchSingleItSystemV2PatchItSystemRequest: itSystem })
+          .patchSingleItSystemV2PatchItSystem({
+            uuid: systemUuid,
+            aPIPatchSingleItSystemV2PatchItSystemRequest: itSystem,
+          })
           .pipe(
             map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
             catchError((err: HttpErrorResponse) => {

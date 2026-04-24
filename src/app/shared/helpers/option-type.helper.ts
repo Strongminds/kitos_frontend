@@ -70,3 +70,10 @@ export function addExpiredTextToOption(name: string): string {
   const obsoletedText = $localize`(udgået)`;
   return `${name} ${obsoletedText}`;
 }
+
+export function addOptionalExpiredText(name: string, isObsolete: boolean | undefined): string {
+  if (isObsolete) {
+    return addExpiredTextToOption(name);
+  }
+  return name;
+}
