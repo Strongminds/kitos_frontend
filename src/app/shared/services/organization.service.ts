@@ -3,6 +3,7 @@ import { Store } from '@ngrx/store';
 import { map, mergeMap, Observable, of, withLatestFrom } from 'rxjs';
 import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 import { selectOrganization, selectUserUuid } from 'src/app/store/user-store/selectors';
+import { adaptOrganizationNameString } from '../helpers/organization.helpers';
 import { filterNullish } from '../pipes/filter-nullish';
 
 @Injectable({ providedIn: 'root' })
@@ -54,7 +55,7 @@ export class OrganizationService {
 
     return {
       ...organization,
-      name: organization.disabled ? `${organization.name} ` + $localize`(udgået)` : organization.name,
+      name: adaptOrganizationNameString(organization.name, organization.disabled),
     };
   }
 }

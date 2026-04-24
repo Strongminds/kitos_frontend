@@ -109,7 +109,11 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
       sortable: false,
       isSticky: true,
       noFilter: true,
-      extraData: [{ type: 'edit' }, { type: 'toggle' }, { type: 'delete', visibilityColumn: 'Disabled' }],
+      extraData: [
+        { type: 'edit', visibilityColumn: 'Actions' },
+        { type: 'toggle' },
+        { type: 'delete', visibilityColumn: 'Disabled' },
+      ],
       width: 150,
     },
   ];
@@ -120,7 +124,7 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
     store: Store,
     private dialog: MatDialog,
     private actions$: Actions,
-    private readonly confirmationService: ConfirmActionService
+    private readonly confirmationService: ConfirmActionService,
   ) {
     super(store, 'global-admin-organization');
   }
@@ -134,13 +138,13 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
             OrganizationActions.createOrganizationSuccess,
             OrganizationActions.patchOrganizationSuccess,
             OrganizationActions.deleteOrganizationSuccess,
-            OrganizationActions.changeOrganizationDisabledStatusSuccess
+            OrganizationActions.changeOrganizationDisabledStatusSuccess,
           ),
-          combineLatestWith(this.gridState$)
+          combineLatestWith(this.gridState$),
         )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState);
-        })
+        }),
     );
   }
 
