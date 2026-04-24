@@ -3,7 +3,7 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgFooterTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import { NgFooterTemplateDirective, NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { combineLatest } from 'rxjs';
 import { addExpiredTextToOption } from 'src/app/shared/helpers/option-type.helper';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
@@ -19,6 +19,7 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
     ReactiveFormsModule,
     NgSelectComponent,
     NgOptionTemplateDirective,
+    NgLabelTemplateDirective,
     ParagraphComponent,
     NgFooterTemplateDirective,
     TextBoxInfoComponent,
@@ -43,10 +44,12 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     super.ngOnInit();
 
     // Add obselete value when both value and data are present if data does not contain current form value
+    // Also sync disabled state from data into the form value so the label template can reflect it
     this.subscriptions.add(
-      combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) =>
-        this.addObsoleteToValueIfMissingInData(value)
-      )
+      combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) => {
+        this.syncValueDisabledState(value);
+        this.addObsoleteToValueIfMissingInData(value);
+      })
     );
 
     if (!this.formName) return;
@@ -76,6 +79,24 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
 
   public onBlur() {
     this.blurEvent.emit();
+  }
+
+  public getItemLabel(item: any): string {
+    const label = item?.[this.textField] ?? '';
+    return item?.disabled ? addExpiredTextToOption(label) : label;
+  }
+
+  private syncValueDisabledState(value?: any) {
+    if (!this.data || !this.formName || !value) return;
+    const matchedItem = (this.data as any[]).find((d: any) => d[this.valueField] === value[this.valueField]);
+    if (!matchedItem) return;
+
+    const shouldBeDisabled = matchedItem.disabled === true;
+    const isCurrentlyDisabled = value.disabled === true;
+    if (shouldBeDisabled !== isCurrentlyDisabled) {
+      const updatedValue: T = { ...value, disabled: shouldBeDisabled || undefined };
+      this.formGroup?.controls[this.formName].setValue(updatedValue, { emitEvent: false });
+    }
   }
 
   private addObsoleteToValueIfMissingInData(value?: any) {

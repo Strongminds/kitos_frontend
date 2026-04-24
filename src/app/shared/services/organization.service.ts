@@ -1,9 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { map, mergeMap, Observable, of, withLatestFrom } from 'rxjs';
+import { map, mergeMap, of, withLatestFrom } from 'rxjs';
 import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 import { selectOrganization, selectUserUuid } from 'src/app/store/user-store/selectors';
-import { adaptOrganizationNameString } from '../helpers/organization.helpers';
 import { filterNullish } from '../pipes/filter-nullish';
 
 @Injectable({ providedIn: 'root' })
@@ -32,30 +31,4 @@ export class OrganizationService {
     private store: Store,
     @Inject(OrganizationV2Service) private apiOrganizationService: OrganizationV2Service,
   ) {}
-
-  /**
-   * Wraps OrganizationV2Service.getSingleOrganizationV2GetOrganizations
-   * Returns API response with adapted organization names (disabled orgs get "(udgået)" suffix)
-   */
-  getV2Organizations(params?: any): Observable<APIOrganizationResponseDTO[]> {
-    return this.apiOrganizationService
-      .getSingleOrganizationV2GetOrganizations(params)
-      .pipe(
-        map((organizations: APIOrganizationResponseDTO[]) =>
-          organizations.map((org: APIOrganizationResponseDTO) => this.adaptOrganizationName(org)),
-        ),
-      );
-  }
-
-  /**
-   * Adapts organization by appending "(udgået)" to name if disabled
-   */
-  adaptOrganizationName(organization: APIOrganizationResponseDTO): APIOrganizationResponseDTO {
-    if (!organization) return organization;
-
-    return {
-      ...organization,
-      name: adaptOrganizationNameString(organization.name, organization.disabled),
-    };
-  }
 }

@@ -13,7 +13,6 @@ import {
 } from 'src/app/api/v2';
 import { entityWithUnavailableName } from 'src/app/shared/helpers/string.helpers';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { OrganizationService } from 'src/app/shared/services/organization.service';
 import { selectItSystemUuid } from 'src/app/store/it-system/selectors';
 
 interface State {
@@ -35,7 +34,6 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
   constructor(
     @Inject(ItSystemV2Service) private apiItSystemService: ItSystemV2Service,
     @Inject(OrganizationV2Service) private apiOrganizationService: OrganizationV2Service,
-    @Inject(OrganizationService) private organizationService: OrganizationService,
     @Inject(ItSystemInternalV2Service)
     private apiItSystemInternalService: ItSystemInternalV2Service,
     private store: Store,
@@ -110,13 +108,15 @@ export class ITSystemCatalogDetailsFrontpageComponentStore extends ComponentStor
     searchTerm$.pipe(
       mergeMap((searchTerm) => {
         this.updateIsLoadingOrganizations(true);
-        return this.organizationService.getV2Organizations({ nameOrCvrContent: searchTerm }).pipe(
-          tapResponse({
-            next: (organizations) => this.updateOrganizations(organizations),
-            error: (e) => console.error(e),
-            complete: () => this.updateIsLoadingOrganizations(false),
-          }),
-        );
+        return this.apiOrganizationService
+          .getSingleOrganizationV2GetOrganizations({ nameOrCvrContent: searchTerm })
+          .pipe(
+            tapResponse({
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateIsLoadingOrganizations(false),
+            }),
+          );
       }),
     ),
   );

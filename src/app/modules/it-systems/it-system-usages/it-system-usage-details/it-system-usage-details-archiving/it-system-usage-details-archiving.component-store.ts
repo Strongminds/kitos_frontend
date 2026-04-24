@@ -3,9 +3,8 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap } from 'rxjs';
-import { APIOrganizationResponseDTO } from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { OrganizationService } from 'src/app/shared/services/organization.service';
 
 interface State {
   organizationsIsLoading: boolean;
@@ -19,7 +18,7 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
     filterNullish(),
   );
 
-  constructor(@Inject(OrganizationService) private organizationService: OrganizationService) {
+  constructor(@Inject(OrganizationV2Service) private organizationService: OrganizationV2Service) {
     super({ organizationsIsLoading: false });
   }
 
@@ -41,13 +40,15 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
     search$.pipe(
       mergeMap((search) => {
         this.updateOrganizationsIsLoading(true);
-        return this.organizationService.getV2Organizations({ nameOrCvrContent: search, orderByProperty: 'Name' }).pipe(
-          tapResponse({
-            next: (organizations) => this.updateOrganizations(organizations),
-            error: (e) => console.error(e),
-            complete: () => this.updateOrganizationsIsLoading(false),
-          }),
-        );
+        return this.organizationService
+          .getSingleOrganizationV2GetOrganizations({ nameOrCvrContent: search, orderByProperty: 'Name' })
+          .pipe(
+            tapResponse({
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateOrganizationsIsLoading(false),
+            }),
+          );
       }),
     ),
   );
