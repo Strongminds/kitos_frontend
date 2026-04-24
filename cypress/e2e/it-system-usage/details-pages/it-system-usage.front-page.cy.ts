@@ -15,7 +15,7 @@ describe('it-system-usage frontpage', () => {
     getKleRow(kleNumber).contains(name);
   }
 
-  it.only('can edit business critical status', () => {
+  it('can edit business critical status', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.contains('System 3').click();
 
