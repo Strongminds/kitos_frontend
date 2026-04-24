@@ -17,8 +17,16 @@ export interface APIPaymentResponseDTOOrganizationUnit {
     parentOrganizationUnit?: APIArchivingRegistrationsResponseDTOType | null;
     ean?: number | null;
     unitId?: string | null;
-    origin?: APIOrganizationUnitOriginChoice;
+    origin?: APIPaymentResponseDTOOrganizationUnit.OriginEnum;
     uuid: string;
     name: string;
 }
+export namespace APIPaymentResponseDTOOrganizationUnit {
+    export type OriginEnum = 'Kitos' | 'STSOrganisation';
+    export const OriginEnum = {
+        Kitos: 'Kitos' as OriginEnum,
+        StsOrganisation: 'STSOrganisation' as OriginEnum
+    };
+}
+
 

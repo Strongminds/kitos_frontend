@@ -14,7 +14,7 @@ import { APIOrganizationAndDefaultUnitDTOOrganization } from './organizationAndD
 
 
 export interface APIOrganizationAndDefaultUnitDTO { 
-    organization?: APIOrganizationAndDefaultUnitDTOOrganization | null;
+    organization: APIOrganizationAndDefaultUnitDTOOrganization | null;
     defaultOrgUnit?: APIOrganizationAndDefaultUnitDTODefaultOrgUnit | null;
 }
 

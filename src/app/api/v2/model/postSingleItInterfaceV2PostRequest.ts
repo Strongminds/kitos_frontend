@@ -17,7 +17,7 @@ export interface APIPostSingleItInterfaceV2PostRequest {
     organizationUuid: string;
     exposedBySystemUuid?: string | null;
     deactivated?: boolean;
-    scope?: APIRegistrationScopeChoice;
+    scope?: APIPostSingleItInterfaceV2PostRequest.ScopeEnum;
     itInterfaceTypeUuid?: string | null;
     data?: Array<APIItInterfaceDataRequestDTO> | null;
     note?: string | null;
@@ -27,4 +27,12 @@ export interface APIPostSingleItInterfaceV2PostRequest {
     description?: string | null;
     urlReference?: string | null;
 }
+export namespace APIPostSingleItInterfaceV2PostRequest {
+    export type ScopeEnum = 'Local' | 'Global';
+    export const ScopeEnum = {
+        Local: 'Local' as ScopeEnum,
+        Global: 'Global' as ScopeEnum
+    };
+}
+
 

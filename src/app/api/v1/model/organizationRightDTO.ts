@@ -17,7 +17,7 @@ export interface APIOrganizationRightDTO {
     organizationId?: number;
     organizationUuid?: string;
     organizationName?: string | null;
-    role?: APIOrganizationRole;
+    role?: APIOrganizationRightDTO.RoleEnum;
     userId?: number;
     user?: APIOrganizationDTOContactPerson | null;
     userName?: string | null;
@@ -29,4 +29,17 @@ export interface APIOrganizationRightDTO {
     readonly objectOwnerFullName?: string | null;
     defaultOrgUnitName?: string | null;
 }
+export namespace APIOrganizationRightDTO {
+    export type RoleEnum = 'User' | 'LocalAdmin' | 'OrganizationModuleAdmin' | 'SystemModuleAdmin' | 'ContractModuleAdmin' | 'GlobalAdmin' | 'RightsHolderAccess';
+    export const RoleEnum = {
+        User: 'User' as RoleEnum,
+        LocalAdmin: 'LocalAdmin' as RoleEnum,
+        OrganizationModuleAdmin: 'OrganizationModuleAdmin' as RoleEnum,
+        SystemModuleAdmin: 'SystemModuleAdmin' as RoleEnum,
+        ContractModuleAdmin: 'ContractModuleAdmin' as RoleEnum,
+        GlobalAdmin: 'GlobalAdmin' as RoleEnum,
+        RightsHolderAccess: 'RightsHolderAccess' as RoleEnum
+    };
+}
+
 

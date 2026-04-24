@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIGeneralDataResponseDTONumberOfExpectedUsers } from './generalDataResponseDTONumberOfExpectedUsers';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
 import { APIGeneralDataUpdateRequestDTOValidity } from './generalDataUpdateRequestDTOValidity';
@@ -31,5 +32,6 @@ export interface APIUpdateItSystemUsageRequestDTOGeneral {
     webAccessibilityCompliance?: APIYesNoPartiallyChoice | null;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
+    isSociallyCritical?: APIYesNoDontKnowChoice | null;
 }
 

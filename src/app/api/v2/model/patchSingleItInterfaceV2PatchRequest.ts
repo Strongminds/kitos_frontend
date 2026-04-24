@@ -16,7 +16,7 @@ import { APIItInterfaceDataRequestDTO } from './itInterfaceDataRequestDTO';
 export interface APIPatchSingleItInterfaceV2PatchRequest { 
     exposedBySystemUuid?: string | null;
     deactivated?: boolean;
-    scope?: APIRegistrationScopeChoice;
+    scope?: APIPatchSingleItInterfaceV2PatchRequest.ScopeEnum;
     itInterfaceTypeUuid?: string | null;
     data?: Array<APIItInterfaceDataRequestDTO> | null;
     note?: string | null;
@@ -26,4 +26,12 @@ export interface APIPatchSingleItInterfaceV2PatchRequest {
     description?: string | null;
     urlReference?: string | null;
 }
+export namespace APIPatchSingleItInterfaceV2PatchRequest {
+    export type ScopeEnum = 'Local' | 'Global';
+    export const ScopeEnum = {
+        Local: 'Local' as ScopeEnum,
+        Global: 'Global' as ScopeEnum
+    };
+}
+
 

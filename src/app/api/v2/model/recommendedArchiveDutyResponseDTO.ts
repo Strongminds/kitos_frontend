@@ -14,6 +14,20 @@ import { APIRecommendedArchiveDutyChoice } from './recommendedArchiveDutyChoice'
 
 export interface APIRecommendedArchiveDutyResponseDTO { 
     comment?: string | null;
-    id: APIRecommendedArchiveDutyChoice;
+    id: APIRecommendedArchiveDutyResponseDTO.IdEnum;
 }
+export namespace APIRecommendedArchiveDutyResponseDTO {
+    export type IdEnum = 'Undecided' | 'B' | 'K' | 'NoRecommendation' | 'PreserveDataCanDiscardDocuments' | 'BK' | 'KD' | 'KB';
+    export const IdEnum = {
+        Undecided: 'Undecided' as IdEnum,
+        B: 'B' as IdEnum,
+        K: 'K' as IdEnum,
+        NoRecommendation: 'NoRecommendation' as IdEnum,
+        PreserveDataCanDiscardDocuments: 'PreserveDataCanDiscardDocuments' as IdEnum,
+        Bk: 'BK' as IdEnum,
+        Kd: 'KD' as IdEnum,
+        Kb: 'KB' as IdEnum
+    };
+}
+
 

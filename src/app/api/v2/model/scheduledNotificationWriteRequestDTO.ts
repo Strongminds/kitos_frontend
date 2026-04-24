@@ -16,8 +16,21 @@ import { APIImmediateNotificationWriteRequestDTOBaseProperties } from './immedia
 export interface APIScheduledNotificationWriteRequestDTO { 
     name?: string | null;
     toDate?: string | null;
-    repetitionFrequency: APIRepetitionFrequencyOptions;
+    repetitionFrequency: APIScheduledNotificationWriteRequestDTO.RepetitionFrequencyEnum;
     fromDate: string;
     baseProperties: APIImmediateNotificationWriteRequestDTOBaseProperties;
 }
+export namespace APIScheduledNotificationWriteRequestDTO {
+    export type RepetitionFrequencyEnum = 'Hour' | 'Day' | 'Week' | 'Month' | 'Quarter' | 'HalfYear' | 'Year';
+    export const RepetitionFrequencyEnum = {
+        Hour: 'Hour' as RepetitionFrequencyEnum,
+        Day: 'Day' as RepetitionFrequencyEnum,
+        Week: 'Week' as RepetitionFrequencyEnum,
+        Month: 'Month' as RepetitionFrequencyEnum,
+        Quarter: 'Quarter' as RepetitionFrequencyEnum,
+        HalfYear: 'HalfYear' as RepetitionFrequencyEnum,
+        Year: 'Year' as RepetitionFrequencyEnum
+    };
+}
+
 

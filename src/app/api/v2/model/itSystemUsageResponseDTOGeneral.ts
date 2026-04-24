@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIGeneralDataResponseDTONumberOfExpectedUsers } from './generalDataResponseDTONumberOfExpectedUsers';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
@@ -32,5 +33,6 @@ export interface APIItSystemUsageResponseDTOGeneral {
     webAccessibilityCompliance?: APIYesNoPartiallyChoice | null;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
+    isSociallyCritical?: APIYesNoDontKnowChoice | null;
 }
 

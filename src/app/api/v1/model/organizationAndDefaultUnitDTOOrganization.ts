@@ -22,7 +22,7 @@ export interface APIOrganizationAndDefaultUnitDTOOrganization {
     cvr?: string | null;
     foreignCvr?: string | null;
     typeId?: number;
-    accessModifier?: APIAccessModifier;
+    accessModifier?: APIOrganizationAndDefaultUnitDTOOrganization.AccessModifierEnum;
     config?: APIOrganizationDTOConfig | null;
     root?: APIOrganizationAndDefaultUnitDTODefaultOrgUnit | null;
     lastChanged?: string;
@@ -33,4 +33,12 @@ export interface APIOrganizationAndDefaultUnitDTOOrganization {
     id?: number;
     name?: string | null;
 }
+export namespace APIOrganizationAndDefaultUnitDTOOrganization {
+    export type AccessModifierEnum = 'Local' | 'Public';
+    export const AccessModifierEnum = {
+        Local: 'Local' as AccessModifierEnum,
+        Public: 'Public' as AccessModifierEnum
+    };
+}
+
 

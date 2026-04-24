@@ -14,9 +14,17 @@ import { APIOrganizationUnitOriginChoice } from './organizationUnitOriginChoice'
 
 export interface APIBaseOrganizationUnitRequestDTO { 
     name?: string | null;
-    origin?: APIOrganizationUnitOriginChoice;
+    origin?: APIBaseOrganizationUnitRequestDTO.OriginEnum;
     parentUuid?: string;
     ean?: number | null;
     localId?: string | null;
 }
+export namespace APIBaseOrganizationUnitRequestDTO {
+    export type OriginEnum = 'Kitos' | 'STSOrganisation';
+    export const OriginEnum = {
+        Kitos: 'Kitos' as OriginEnum,
+        StsOrganisation: 'STSOrganisation' as OriginEnum
+    };
+}
+
 

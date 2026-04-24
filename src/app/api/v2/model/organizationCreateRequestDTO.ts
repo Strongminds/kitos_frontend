@@ -14,9 +14,19 @@ import { APIOrganizationType } from './organizationType';
 
 export interface APIOrganizationCreateRequestDTO { 
     name: string;
-    type: APIOrganizationType;
+    type: APIOrganizationCreateRequestDTO.TypeEnum;
     cvr?: string | null;
     foreignCountryCodeUuid?: string | null;
     isSupplier?: boolean;
 }
+export namespace APIOrganizationCreateRequestDTO {
+    export type TypeEnum = 'Municipality' | 'CommunityOfInterest' | 'Company' | 'OtherPublicAuthority';
+    export const TypeEnum = {
+        Municipality: 'Municipality' as TypeEnum,
+        CommunityOfInterest: 'CommunityOfInterest' as TypeEnum,
+        Company: 'Company' as TypeEnum,
+        OtherPublicAuthority: 'OtherPublicAuthority' as TypeEnum
+    };
+}
+
 

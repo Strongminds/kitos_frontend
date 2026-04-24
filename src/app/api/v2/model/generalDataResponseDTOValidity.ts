@@ -18,9 +18,18 @@ export interface APIGeneralDataResponseDTOValidity {
     validAccordingToValidityPeriod?: boolean;
     validAccordingToLifeCycle?: boolean;
     validAccordingToMainContract?: boolean;
-    mainContractState?: APIMainContractStateChoice;
+    mainContractState?: APIGeneralDataResponseDTOValidity.MainContractStateEnum;
     lifeCycleStatus?: APILifeCycleStatusChoice | null;
     validFrom?: string | null;
     validTo?: string | null;
 }
+export namespace APIGeneralDataResponseDTOValidity {
+    export type MainContractStateEnum = 'NoContract' | 'Active' | 'Inactive';
+    export const MainContractStateEnum = {
+        NoContract: 'NoContract' as MainContractStateEnum,
+        Active: 'Active' as MainContractStateEnum,
+        Inactive: 'Inactive' as MainContractStateEnum
+    };
+}
+
 

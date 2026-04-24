@@ -16,8 +16,15 @@ export interface APIAlertResponseDTO {
     uuid: string;
     entityUuid: string;
     name?: string | null;
-    alertType?: APIAlertType;
+    alertType?: APIAlertResponseDTO.AlertTypeEnum;
     message?: string | null;
     created?: string | null;
 }
+export namespace APIAlertResponseDTO {
+    export type AlertTypeEnum = 'Advis';
+    export const AlertTypeEnum = {
+        Advis: 'Advis' as AlertTypeEnum
+    };
+}
+
 

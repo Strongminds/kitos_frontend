@@ -15,7 +15,19 @@ import { APIConnectionUpdateOrganizationUnitChangeType } from './connectionUpdat
 export interface APIConnectionUpdateOrganizationUnitConsequenceDTO { 
     uuid?: string;
     name?: string | null;
-    category?: APIConnectionUpdateOrganizationUnitChangeType;
+    category?: APIConnectionUpdateOrganizationUnitConsequenceDTO.CategoryEnum;
     description?: string | null;
 }
+export namespace APIConnectionUpdateOrganizationUnitConsequenceDTO {
+    export type CategoryEnum = 'Added' | 'Renamed' | 'Moved' | 'Deleted' | 'Converted' | 'RootChanged';
+    export const CategoryEnum = {
+        Added: 'Added' as CategoryEnum,
+        Renamed: 'Renamed' as CategoryEnum,
+        Moved: 'Moved' as CategoryEnum,
+        Deleted: 'Deleted' as CategoryEnum,
+        Converted: 'Converted' as CategoryEnum,
+        RootChanged: 'RootChanged' as CategoryEnum
+    };
+}
+
 

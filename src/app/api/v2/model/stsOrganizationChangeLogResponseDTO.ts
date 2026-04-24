@@ -15,9 +15,17 @@ import { APIStsOrganizationChangeLogResponseDTOUser } from './stsOrganizationCha
 
 
 export interface APIStsOrganizationChangeLogResponseDTO { 
-    origin?: APIStsOrganizationChangeLogOriginOption;
+    origin?: APIStsOrganizationChangeLogResponseDTO.OriginEnum;
     user?: APIStsOrganizationChangeLogResponseDTOUser | null;
     logTime?: string;
     consequences?: Array<APIConnectionUpdateOrganizationUnitConsequenceDTO> | null;
 }
+export namespace APIStsOrganizationChangeLogResponseDTO {
+    export type OriginEnum = 'Background' | 'User';
+    export const OriginEnum = {
+        Background: 'Background' as OriginEnum,
+        User: 'User' as OriginEnum
+    };
+}
+
 

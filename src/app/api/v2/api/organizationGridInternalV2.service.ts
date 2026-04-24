@@ -30,12 +30,12 @@ import { Configuration }                                     from '../configurat
 
 export interface DeleteSingleOrganizationGridInternalV2DeleteGridConfigurationRequestParams {
     organizationUuid: string;
-    overviewType: APIOverviewType;
+    overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
 }
 
 export interface GetSingleOrganizationGridInternalV2GetGridConfigurationRequestParams {
     organizationUuid: string;
-    overviewType: APIOverviewType;
+    overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
 }
 
 export interface GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams {
@@ -44,7 +44,7 @@ export interface GetSingleOrganizationGridInternalV2GetOrganizationGridPermissio
 
 export interface PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams {
     organizationUuid: string;
-    overviewType: APIOverviewType;
+    overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
     aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest?: APIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest;
 }
 
@@ -161,7 +161,7 @@ export class OrganizationGridInternalV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewType", dataFormat: undefined})}/delete`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration'", dataFormat: undefined})}/delete`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -223,7 +223,7 @@ export class OrganizationGridInternalV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewType", dataFormat: undefined})}/get`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration'", dataFormat: undefined})}/get`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -353,7 +353,7 @@ export class OrganizationGridInternalV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewType", dataFormat: undefined})}/save`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration'", dataFormat: undefined})}/save`;
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

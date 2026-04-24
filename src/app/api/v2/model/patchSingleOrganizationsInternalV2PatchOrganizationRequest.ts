@@ -15,9 +15,19 @@ import { APIOrganizationType } from './organizationType';
 export interface APIPatchSingleOrganizationsInternalV2PatchOrganizationRequest { 
     updateForeignCountryCode?: boolean;
     name?: string | null;
-    type?: APIOrganizationType;
+    type?: APIPatchSingleOrganizationsInternalV2PatchOrganizationRequest.TypeEnum;
     cvr?: string | null;
     foreignCountryCodeUuid?: string | null;
     isSupplier?: boolean;
 }
+export namespace APIPatchSingleOrganizationsInternalV2PatchOrganizationRequest {
+    export type TypeEnum = 'Municipality' | 'CommunityOfInterest' | 'Company' | 'OtherPublicAuthority';
+    export const TypeEnum = {
+        Municipality: 'Municipality' as TypeEnum,
+        CommunityOfInterest: 'CommunityOfInterest' as TypeEnum,
+        Company: 'Company' as TypeEnum,
+        OtherPublicAuthority: 'OtherPublicAuthority' as TypeEnum
+    };
+}
+
 

@@ -13,6 +13,14 @@ import { APIKLEUpdateStatusChoice } from './kLEUpdateStatusChoice';
 
 
 export interface APIKLEUpdateResponseDTO { 
-    status?: APIKLEUpdateStatusChoice;
+    status?: APIKLEUpdateResponseDTO.StatusEnum;
 }
+export namespace APIKLEUpdateResponseDTO {
+    export type StatusEnum = 'Failed' | 'Ok';
+    export const StatusEnum = {
+        Failed: 'Failed' as StatusEnum,
+        Ok: 'Ok' as StatusEnum
+    };
+}
+
 

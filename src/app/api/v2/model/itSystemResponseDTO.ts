@@ -24,7 +24,7 @@ export interface APIItSystemResponseDTO {
     usingOrganizations: Array<APIShallowOrganizationResponseDTO>;
     lastModified: string;
     lastModifiedBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
-    scope: APIRegistrationScopeChoice;
+    scope: APIItSystemResponseDTO.ScopeEnum;
     organizationContext: APIDataProcessingRegistrationResponseDTOOrganizationContext;
     legalName?: string | null;
     legalDataProcessorName?: string | null;
@@ -44,4 +44,12 @@ export interface APIItSystemResponseDTO {
     recommendedArchiveDuty: APIItSystemResponseDTORecommendedArchiveDuty;
     mainContractSuppliers: Array<APIShallowOrganizationResponseDTO>;
 }
+export namespace APIItSystemResponseDTO {
+    export type ScopeEnum = 'Local' | 'Global';
+    export const ScopeEnum = {
+        Local: 'Local' as ScopeEnum,
+        Global: 'Global' as ScopeEnum
+    };
+}
+
 

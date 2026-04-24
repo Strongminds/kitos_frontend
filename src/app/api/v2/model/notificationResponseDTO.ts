@@ -25,11 +25,25 @@ export interface APINotificationResponseDTO {
     toDate?: string | null;
     subject?: string | null;
     body?: string | null;
-    ownerResourceType?: APIOwnerResourceType;
-    notificationType?: APINotificationSendType;
+    ownerResourceType?: APINotificationResponseDTO.OwnerResourceTypeEnum;
+    notificationType?: APINotificationResponseDTO.NotificationTypeEnum;
     ownerResource?: APIArchivingRegistrationsResponseDTOType | null;
     repetitionFrequency?: APIRepetitionFrequencyOptions | null;
     receivers?: APINotificationResponseDTOReceivers | null;
     cCs?: APINotificationResponseDTOReceivers | null;
 }
+export namespace APINotificationResponseDTO {
+    export type OwnerResourceTypeEnum = 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    export const OwnerResourceTypeEnum = {
+        ItContract: 'ItContract' as OwnerResourceTypeEnum,
+        ItSystemUsage: 'ItSystemUsage' as OwnerResourceTypeEnum,
+        DataProcessingRegistration: 'DataProcessingRegistration' as OwnerResourceTypeEnum
+    };
+    export type NotificationTypeEnum = 'Immediate' | 'Repeat';
+    export const NotificationTypeEnum = {
+        Immediate: 'Immediate' as NotificationTypeEnum,
+        Repeat: 'Repeat' as NotificationTypeEnum
+    };
+}
+
 

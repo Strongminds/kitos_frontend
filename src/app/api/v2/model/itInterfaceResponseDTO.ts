@@ -19,7 +19,7 @@ import { APIDataProcessingRegistrationResponseDTOOrganizationContext } from './d
 export interface APIItInterfaceResponseDTO { 
     lastModified: string;
     lastModifiedBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
-    scope: APIRegistrationScopeChoice;
+    scope: APIItInterfaceResponseDTO.ScopeEnum;
     itInterfaceType?: APIArchivingRegistrationsResponseDTOType | null;
     data: Array<APIItInterfaceDataResponseDTO>;
     organizationContext: APIDataProcessingRegistrationResponseDTOOrganizationContext;
@@ -36,4 +36,12 @@ export interface APIItInterfaceResponseDTO {
     created: string;
     createdBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
 }
+export namespace APIItInterfaceResponseDTO {
+    export type ScopeEnum = 'Local' | 'Global';
+    export const ScopeEnum = {
+        Local: 'Local' as ScopeEnum,
+        Global: 'Global' as ScopeEnum
+    };
+}
+
 

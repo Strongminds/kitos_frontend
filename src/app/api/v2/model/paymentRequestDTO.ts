@@ -18,8 +18,18 @@ export interface APIPaymentRequestDTO {
     operation?: number;
     other?: number;
     accountingEntry?: string | null;
-    auditStatus?: APIPaymentAuditStatus;
+    auditStatus?: APIPaymentRequestDTO.AuditStatusEnum;
     auditDate?: string | null;
     note?: string | null;
 }
+export namespace APIPaymentRequestDTO {
+    export type AuditStatusEnum = 'White' | 'Red' | 'Yellow' | 'Green';
+    export const AuditStatusEnum = {
+        White: 'White' as AuditStatusEnum,
+        Red: 'Red' as AuditStatusEnum,
+        Yellow: 'Yellow' as AuditStatusEnum,
+        Green: 'Green' as AuditStatusEnum
+    };
+}
+
 
