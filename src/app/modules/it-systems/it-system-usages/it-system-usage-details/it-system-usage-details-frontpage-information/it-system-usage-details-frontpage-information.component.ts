@@ -26,7 +26,11 @@ import {
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-import { YesNoDontKnowOption } from 'src/app/shared/models/yes-no-dont-know.model';
+import {
+  YesNoDontKnowOption,
+  mapToYesNoDontKnowEnum,
+  yesNoDontKnowOptions,
+} from 'src/app/shared/models/yes-no-dont-know.model';
 import {
   YesNoPartiallyOption,
   mapToYesNoPartiallyEnum,
@@ -49,6 +53,7 @@ import {
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
@@ -96,6 +101,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -103,6 +109,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
 
   public readonly aiTechnologyOptions = yesNoOptions;
+  public readonly isSociallyCriticalOptions = yesNoDontKnowOptions;
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
   public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
@@ -117,6 +124,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
   public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
+  public readonly isSociallyCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsSociallyCritical);
 
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
@@ -239,6 +247,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology ?? undefined),
+            isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical ?? undefined),
           });
 
           this.webAccessibilityForm.patchValue({

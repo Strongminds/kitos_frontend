@@ -1,8 +1,13 @@
-import { APIYesNoDontKnowChoice } from 'src/app/api/v2';
+import { APIGeneralDataResponseDTO } from 'src/app/api/v2';
 
 export interface YesNoDontKnowOption {
   name: string;
-  value: APIYesNoDontKnowChoice;
+  value:
+    | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
+    | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
+    | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum
+    | APIGeneralDataResponseDTO.IsSociallyCriticalEnum
+    | string;
 }
 
 export enum YesNoDontKnowEnum {
@@ -17,7 +22,13 @@ export const yesNoDontKnowOptions: YesNoDontKnowOption[] = [
   { name: $localize`Nej`, value: YesNoDontKnowEnum.No },
   { name: $localize`Ved ikke`, value: YesNoDontKnowEnum.DontKnow },
 ];
-export const mapToYesNoDontKnowEnum = (value?: APIYesNoDontKnowChoice | null): YesNoDontKnowOption | undefined => {
+export const mapToYesNoDontKnowEnum = (
+  value?:
+    | APIGDPRRegistrationsResponseDTO.BusinessCriticalEnum
+    | APIGDPRRegistrationsResponseDTO.UserSupervisionEnum
+    | APIGDPRRegistrationsResponseDTO.DpiaConductedEnum
+    | APIGeneralDataResponseDTO.IsSociallyCriticalEnum,
+): YesNoDontKnowOption | undefined => {
   return yesNoDontKnowOptions.find((option) => option.value === value);
 };
 

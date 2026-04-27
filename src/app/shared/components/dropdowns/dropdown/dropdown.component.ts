@@ -40,6 +40,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   @Input() public descriptionLabelTitle?: string;
   @Input() public addTag = false;
   @Input() public addTagText = $localize`Vælg`;
+  @Input() public toolTipText?: string;
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
   @Output() public cleared = new EventEmitter();
