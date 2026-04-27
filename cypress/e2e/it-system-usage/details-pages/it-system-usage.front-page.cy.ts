@@ -28,7 +28,7 @@ describe('it-system-usage frontpage', () => {
     cy.wait('@patchRequest')
       .its('request.body')
       .should('deep.eq', {
-        general: { businessCritical: 'No' },
+        general: { isBusinessCritical: 'No' },
       });
   });
 

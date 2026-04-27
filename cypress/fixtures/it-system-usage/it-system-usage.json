@@ -25,7 +25,7 @@
     "webAccessibilityCompliance": "Yes",
     "lastWebAccessibilityCheck": "2025-02-27T00:00:00Z",
     "webAccessibilityNotes": "en note om tilgængelighed",
-    "businessCritical": "Yes"
+    "isBusinessCritical": "Yes"
   },
   "roles": [
     {
