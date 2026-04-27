@@ -1348,16 +1348,16 @@
         <target state="new">Tilføj advis</target>
       </trans-unit>
       <trans-unit id="7226881883300543573" datatype="html">
-        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name, )"/>?</source>
-        <target state="new">Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name, )"/>?</target>
+        <source>Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name ?? undefined, )"/>?</source>
+        <target state="new">Er du sikker på at du vil deaktivere <x id="PH" equiv-text="this.getSpecificNotificationWarning( notification.name ?? undefined, )"/>?</target>
       </trans-unit>
       <trans-unit id="1987610800064579199" datatype="html">
         <source>Fejl: kan ikke deaktivere en advis uden uuid.</source>
         <target state="new">Fejl: kan ikke deaktivere en advis uden uuid.</target>
       </trans-unit>
       <trans-unit id="7736341935303772723" datatype="html">
-        <source>Er du sikker på at du vil fjerne <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</source>
-        <target state="new">Er du sikker på at du vil fjerne <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name)"/>?</target>
+        <source>Er du sikker på at du vil fjerne <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name ?? undefined)"/>?</source>
+        <target state="new">Er du sikker på at du vil fjerne <x id="PH" equiv-text="this.getSpecificNotificationWarning(notification.name ?? undefined)"/>?</target>
       </trans-unit>
       <trans-unit id="9183155116345274319" datatype="html">
         <source>Fejl: kan ikke slette en advis uden uuid.</source>
@@ -7829,7 +7829,6 @@
         <source>Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?</source>
         <target state="new">Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?</target>
       </trans-unit>
-<<<<<<< HEAD
       <trans-unit id="481320365420058756" datatype="html">
         <source>Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde</source>
         <target state="new">Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde</target>
@@ -7838,8 +7837,6 @@
         <source>Forretningskritisk IT-system</source>
         <target state="new">Forretningskritisk IT-system</target>
       </trans-unit>
-=======
->>>>>>> e53e1574f24c2287015bee57cbd4843e43d43ade
     </body>
   </file>
 </xliff>
