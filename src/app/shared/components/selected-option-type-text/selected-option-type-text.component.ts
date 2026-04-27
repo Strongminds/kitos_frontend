@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseComponent } from '../../base/base.component';
-import { addExpiredTextToOption } from '../../helpers/option-type.helper';
+import { addExpiredText } from '../../helpers/option-type.helper';
 import { Dictionary } from '../../models/primitives/dictionary.model';
 
 export interface BaseSelectedOptionTypeTextModel {
@@ -28,12 +28,12 @@ export class SelectedOptionTypeTextComponent<T extends BaseSelectedOptionTypeTex
         if (optionsDict && this.selectedOption) {
           this.selectedOptionText = this.getOptionName(this.selectedOption, optionsDict);
         }
-      })
+      }),
     );
   }
 
   private getOptionName(option: T, availableOptions: Dictionary<T> | undefined): string {
     const availableOption = availableOptions?.[option.uuid];
-    return availableOption?.name ?? addExpiredTextToOption(option.name);
+    return availableOption?.name ?? addExpiredText(option.name);
   }
 }

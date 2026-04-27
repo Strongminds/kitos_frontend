@@ -66,14 +66,14 @@ export function getOptionTypeName(optionType: RegularOptionType | RoleOptionType
   }
 }
 
-export function addExpiredTextToOption(name: string): string {
+export function addExpiredText(name: string): string {
   const obsoletedText = $localize`(udgået)`;
   return `${name} ${obsoletedText}`;
 }
 
 export function addOptionalExpiredText(name: string, isObsolete: boolean | undefined): string {
   if (isObsolete) {
-    return addExpiredTextToOption(name);
+    return addExpiredText(name);
   }
   return name;
 }

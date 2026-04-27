@@ -3,9 +3,14 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgFooterTemplateDirective, NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import {
+  NgFooterTemplateDirective,
+  NgLabelTemplateDirective,
+  NgOptionTemplateDirective,
+  NgSelectComponent,
+} from '@ng-select/ng-select';
 import { combineLatest } from 'rxjs';
-import { addExpiredTextToOption } from 'src/app/shared/helpers/option-type.helper';
+import { addExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
@@ -23,8 +28,8 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
     ParagraphComponent,
     NgFooterTemplateDirective,
     TextBoxInfoComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
@@ -49,14 +54,14 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
       combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) => {
         this.syncValueDisabledState(value);
         this.addObsoleteToValueIfMissingInData(value);
-      })
+      }),
     );
 
     if (!this.formName) return;
 
     // Update value subject to be used in calculating obselete values
     this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value)),
     );
 
     // Push initial values to value and data form subjects
@@ -83,7 +88,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
 
   public getItemLabel(item: any): string {
     const label = item?.[this.textField] ?? '';
-    return item?.disabled ? addExpiredTextToOption(label) : label;
+    return item?.disabled ? addExpiredText(label) : label;
   }
 
   private syncValueDisabledState(value?: any) {
@@ -103,7 +108,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     if (this.considerCurrentValueObsoleteIfNotPresentInData) {
       if (this.data && this.formName && this.doesDataContainValue(value)) {
         // Set generated obselete value on the form control
-        const obseleteDataOption: T = { ...value, [this.textField]: addExpiredTextToOption(value[this.textField]) };
+        const obseleteDataOption: T = { ...value, [this.textField]: addExpiredText(value[this.textField]) };
         this.formGroup?.controls[this.formName].setValue(obseleteDataOption, { emitEvent: false });
       }
     }
@@ -112,7 +117,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   private doesDataContainValue(value?: any): boolean {
     if (!this.data || value === undefined || value === null) return false;
     return !this.data.some(
-      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
+      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField],
     );
   }
 }

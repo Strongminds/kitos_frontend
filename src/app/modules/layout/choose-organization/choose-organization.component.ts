@@ -4,6 +4,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { first, map } from 'rxjs';
 import { APIOrganizationResponseDTO } from 'src/app/api/v2';
+import { addExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { UserActions } from 'src/app/store/user-store/actions';
@@ -22,7 +23,12 @@ export class ChooseOrganizationComponent implements OnInit {
   public closable = true;
 
   public readonly organizations$ = this.componentStore.organizations$.pipe(
-    map((organizations) => organizations?.map(({ disabled: _, ...org }) => org)),
+    map((organizations) =>
+      organizations?.map(({ disabled, ...org }) => ({
+        ...org,
+        name: disabled ? addExpiredText(org.name) : org.name,
+      })),
+    ),
   );
   public readonly isLoading$ = this.componentStore.loading$;
   public readonly showSearchHelpText$ = this.componentStore.organizations$.pipe(
