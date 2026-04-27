@@ -12,10 +12,10 @@
 
 
 export interface APIUpdateExternalReferenceDataWriteRequestDTO { 
-    uuid?: string | null;
     title: string;
     documentId?: string | null;
     url?: string | null;
     masterReference: boolean;
+    uuid?: string | null;
 }
 

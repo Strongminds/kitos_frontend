@@ -11,8 +11,11 @@
  */
 
 
-export interface APICreateOversightDateDTOOversightReportLink { 
-    name?: string | null;
-    url?: string | null;
-}
+export type APIOverviewTypeOptions = 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
+
+export const APIOverviewTypeOptions = {
+    ItSystemUsage: 'ItSystemUsage' as APIOverviewTypeOptions,
+    ItContract: 'ItContract' as APIOverviewTypeOptions,
+    DataProcessingRegistration: 'DataProcessingRegistration' as APIOverviewTypeOptions
+};
 

@@ -12,13 +12,13 @@
 
 
 export interface APIRightsHolderCreateItInterfaceRequestDTO { 
-    rightsHolderUuid: string;
-    uuid?: string | null;
     exposedBySystemUuid: string;
     name: string;
     interfaceId?: string | null;
     version?: string | null;
     description: string;
     urlReference: string;
+    rightsHolderUuid: string;
+    uuid?: string | null;
 }
 

@@ -14,7 +14,7 @@ import { APIYearSegmentChoice } from './yearSegmentChoice';
 
 export interface APIContractTerminationTermsRequestDTO { 
     noticePeriodMonthsUuid?: string | null;
-    noticePeriodExtendsCurrent?: APIYearSegmentChoice | null;
-    noticeByEndOf?: APIYearSegmentChoice | null;
+    noticePeriodExtendsCurrent?: APIYearSegmentChoice;
+    noticeByEndOf?: APIYearSegmentChoice;
 }
 

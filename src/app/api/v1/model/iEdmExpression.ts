@@ -13,6 +13,6 @@ import { APIEdmExpressionKind } from './edmExpressionKind';
 
 
 export interface APIIEdmExpression { 
-    readonly expressionKind?: APIEdmExpressionKind;
+    expressionKind?: APIEdmExpressionKind;
 }
 

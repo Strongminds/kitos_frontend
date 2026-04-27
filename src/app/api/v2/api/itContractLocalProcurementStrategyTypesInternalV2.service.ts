@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest } from '../model/aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest';
+import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
-import { APIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest } from '../model/aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest';
+import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -45,12 +45,12 @@ export interface GetSingleItContractLocalProcurementStrategyTypesInternalV2GetLo
 export interface PatchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
-    aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest?: APIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest;
+    aPILocalRegularOptionUpdateRequestDTO?: APILocalRegularOptionUpdateRequestDTO;
 }
 
 export interface PostSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyTypeRequestParams {
     organizationUuid: string;
-    aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest?: APIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest;
+    aPILocalOptionCreateRequestDTO?: APILocalOptionCreateRequestDTO;
 }
 
 
@@ -316,7 +316,7 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
         if (optionUuid === null || optionUuid === undefined) {
             throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItContractLocalProcurementStrategyTypesInternalV2PatchLocalProcurementStrategyType.');
         }
-        const aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest = requestParameters.aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest;
+        const aPILocalRegularOptionUpdateRequestDTO = requestParameters.aPILocalRegularOptionUpdateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -363,7 +363,7 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleDprLocalBasisForTransferTypesInternalV2PatchLocalBasisForTransferTypeRequest,
+                body: aPILocalRegularOptionUpdateRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -386,7 +386,7 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItContractLocalProcurementStrategyTypesInternalV2CreateLocalProcurementStrategyType.');
         }
-        const aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest = requestParameters.aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest;
+        const aPILocalOptionCreateRequestDTO = requestParameters.aPILocalOptionCreateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -432,7 +432,7 @@ export class ItContractLocalProcurementStrategyTypesInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest,
+                body: aPILocalOptionCreateRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -9,8 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
-import { APINotificationResponseDTOReceivers } from './notificationResponseDTOReceivers';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIRecipientResponseDTO } from './recipientResponseDTO';
 import { APIRepetitionFrequencyOptions } from './repetitionFrequencyOptions';
 import { APINotificationSendType } from './notificationSendType';
 import { APIOwnerResourceType } from './ownerResourceType';
@@ -27,9 +27,9 @@ export interface APINotificationResponseDTO {
     body?: string | null;
     ownerResourceType?: APIOwnerResourceType;
     notificationType?: APINotificationSendType;
-    ownerResource?: APIArchivingRegistrationsResponseDTOType | null;
-    repetitionFrequency?: APIRepetitionFrequencyOptions | null;
-    receivers?: APINotificationResponseDTOReceivers | null;
-    cCs?: APINotificationResponseDTOReceivers | null;
+    ownerResource?: APIIdentityNamePairResponseDTO;
+    repetitionFrequency?: APIRepetitionFrequencyOptions;
+    receivers?: APIRecipientResponseDTO;
+    cCs?: APIRecipientResponseDTO;
 }
 

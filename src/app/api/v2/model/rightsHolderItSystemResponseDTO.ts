@@ -9,30 +9,27 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { APIArchivingRegistrationsResponseDTOSupplier } from './archivingRegistrationsResponseDTOSupplier';
+import { APIRecommendedArchiveDutyResponseDTO } from './recommendedArchiveDutyResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
-import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
-import { APIItSystemResponseDTORecommendedArchiveDuty } from './itSystemResponseDTORecommendedArchiveDuty';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 export interface APIRightsHolderItSystemResponseDTO { 
     uuid: string;
     externalUuid?: string | null;
-    parentSystem?: APIArchivingRegistrationsResponseDTOType | null;
+    parentSystem?: APIIdentityNamePairResponseDTO;
     name: string;
     formerName?: string | null;
     description?: string | null;
     externalReferences: Array<APIExternalReferenceDataResponseDTO>;
     kle: Array<APIIdentityNamePairResponseDTO>;
     deactivated: boolean;
-    businessType?: APIArchivingRegistrationsResponseDTOType | null;
-    rightsHolder?: APIArchivingRegistrationsResponseDTOSupplier | null;
+    businessType?: APIIdentityNamePairResponseDTO;
+    rightsHolder?: APIShallowOrganizationResponseDTO;
     created: string;
-    createdBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
-    recommendedArchiveDuty: APIItSystemResponseDTORecommendedArchiveDuty;
+    createdBy: APIIdentityNamePairResponseDTO;
+    recommendedArchiveDuty: APIRecommendedArchiveDutyResponseDTO;
     mainContractSuppliers: Array<APIShallowOrganizationResponseDTO>;
 }
 

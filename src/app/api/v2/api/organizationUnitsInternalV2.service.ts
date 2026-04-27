@@ -19,15 +19,15 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIDeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequest } from '../model/aPIDeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequest';
+import { APIBulkRoleAssignmentRequestDTO } from '../model/aPIBulkRoleAssignmentRequestDTO';
 // @ts-ignore
-import { APIPatchSingleOrganizationUnitsInternalV2PatchUnitRequest } from '../model/aPIPatchSingleOrganizationUnitsInternalV2PatchUnitRequest';
+import { APICreateOrganizationUnitRequestDTO } from '../model/aPICreateOrganizationUnitRequestDTO';
 // @ts-ignore
-import { APIPostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequest } from '../model/aPIPostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequest';
+import { APICreateOrganizationUnitRoleAssignmentRequestDTO } from '../model/aPICreateOrganizationUnitRoleAssignmentRequestDTO';
 // @ts-ignore
-import { APIPostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequest } from '../model/aPIPostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequest';
+import { APIDeleteOrganizationUnitRoleAssignmentRequestDTO } from '../model/aPIDeleteOrganizationUnitRoleAssignmentRequestDTO';
 // @ts-ignore
-import { APIPostSingleOrganizationUnitsInternalV2CreateUnitRequest } from '../model/aPIPostSingleOrganizationUnitsInternalV2CreateUnitRequest';
+import { APIUpdateOrganizationUnitRequestDTO } from '../model/aPIUpdateOrganizationUnitRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -37,7 +37,7 @@ import { Configuration }                                     from '../configurat
 export interface DeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequestParams {
     organizationUnitUuid: string;
     organizationUuid: string;
-    aPIDeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequest?: APIDeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequest;
+    aPIDeleteOrganizationUnitRoleAssignmentRequestDTO?: APIDeleteOrganizationUnitRoleAssignmentRequestDTO;
 }
 
 export interface DeleteSingleOrganizationUnitsInternalV2DeleteUnitRequestParams {
@@ -62,24 +62,24 @@ export interface GetSingleOrganizationUnitsInternalV2GetRoleAssignmentsRequestPa
 export interface PatchSingleOrganizationUnitsInternalV2PatchUnitRequestParams {
     organizationUuid: string;
     organizationUnitUuid: string;
-    aPIPatchSingleOrganizationUnitsInternalV2PatchUnitRequest?: APIPatchSingleOrganizationUnitsInternalV2PatchUnitRequest;
+    aPIUpdateOrganizationUnitRequestDTO?: APIUpdateOrganizationUnitRequestDTO;
 }
 
 export interface PostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequestParams {
     organizationUnitUuid: string;
     organizationUuid: string;
-    aPIPostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequest?: APIPostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequest;
+    aPIBulkRoleAssignmentRequestDTO?: APIBulkRoleAssignmentRequestDTO;
 }
 
 export interface PostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequestParams {
     organizationUnitUuid: string;
     organizationUuid: string;
-    aPIPostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequest?: APIPostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequest;
+    aPICreateOrganizationUnitRoleAssignmentRequestDTO?: APICreateOrganizationUnitRoleAssignmentRequestDTO;
 }
 
 export interface PostSingleOrganizationUnitsInternalV2CreateUnitRequestParams {
     organizationUuid: string;
-    aPIPostSingleOrganizationUnitsInternalV2CreateUnitRequest?: APIPostSingleOrganizationUnitsInternalV2CreateUnitRequest;
+    aPICreateOrganizationUnitRequestDTO?: APICreateOrganizationUnitRequestDTO;
 }
 
 
@@ -164,7 +164,7 @@ export class OrganizationUnitsInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment.');
         }
-        const aPIDeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequest = requestParameters.aPIDeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequest;
+        const aPIDeleteOrganizationUnitRoleAssignmentRequestDTO = requestParameters.aPIDeleteOrganizationUnitRoleAssignmentRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -209,7 +209,7 @@ export class OrganizationUnitsInternalV2Service {
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIDeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequest,
+                body: aPIDeleteOrganizationUnitRoleAssignmentRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -479,7 +479,7 @@ export class OrganizationUnitsInternalV2Service {
         if (organizationUnitUuid === null || organizationUnitUuid === undefined) {
             throw new Error('Required parameter organizationUnitUuid was null or undefined when calling patchSingleOrganizationUnitsInternalV2PatchUnit.');
         }
-        const aPIPatchSingleOrganizationUnitsInternalV2PatchUnitRequest = requestParameters.aPIPatchSingleOrganizationUnitsInternalV2PatchUnitRequest;
+        const aPIUpdateOrganizationUnitRequestDTO = requestParameters.aPIUpdateOrganizationUnitRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -526,7 +526,7 @@ export class OrganizationUnitsInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleOrganizationUnitsInternalV2PatchUnitRequest,
+                body: aPIUpdateOrganizationUnitRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -553,7 +553,7 @@ export class OrganizationUnitsInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment.');
         }
-        const aPIPostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequest = requestParameters.aPIPostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequest;
+        const aPIBulkRoleAssignmentRequestDTO = requestParameters.aPIBulkRoleAssignmentRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -599,7 +599,7 @@ export class OrganizationUnitsInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequest,
+                body: aPIBulkRoleAssignmentRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -626,7 +626,7 @@ export class OrganizationUnitsInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateRoleAssignment.');
         }
-        const aPIPostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequest = requestParameters.aPIPostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequest;
+        const aPICreateOrganizationUnitRoleAssignmentRequestDTO = requestParameters.aPICreateOrganizationUnitRoleAssignmentRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -672,7 +672,7 @@ export class OrganizationUnitsInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleOrganizationUnitsInternalV2CreateRoleAssignmentRequest,
+                body: aPICreateOrganizationUnitRoleAssignmentRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -695,7 +695,7 @@ export class OrganizationUnitsInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleOrganizationUnitsInternalV2CreateUnit.');
         }
-        const aPIPostSingleOrganizationUnitsInternalV2CreateUnitRequest = requestParameters.aPIPostSingleOrganizationUnitsInternalV2CreateUnitRequest;
+        const aPICreateOrganizationUnitRequestDTO = requestParameters.aPICreateOrganizationUnitRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -741,7 +741,7 @@ export class OrganizationUnitsInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleOrganizationUnitsInternalV2CreateUnitRequest,
+                body: aPICreateOrganizationUnitRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

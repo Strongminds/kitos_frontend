@@ -9,9 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIEdmEntityContainer } from './iEdmEntityContainer';
 import { APIIEdmVocabularyAnnotation } from './iEdmVocabularyAnnotation';
 import { APIIEdmSchemaElement } from './iEdmSchemaElement';
-import { APIIEdmEntityContainerElementContainer } from './iEdmEntityContainerElementContainer';
 
 
 export interface APIIEdmModel { 
@@ -19,7 +19,7 @@ export interface APIIEdmModel {
     readonly vocabularyAnnotations?: Array<APIIEdmVocabularyAnnotation> | null;
     readonly referencedModels?: Array<APIIEdmModel> | null;
     readonly declaredNamespaces?: Array<string> | null;
-    readonly directValueAnnotationsManager?: object | null;
-    entityContainer?: APIIEdmEntityContainerElementContainer | null;
+    directValueAnnotationsManager?: object;
+    entityContainer?: APIIEdmEntityContainer;
 }
 

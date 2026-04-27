@@ -12,6 +12,6 @@
 
 
 export interface APIODataTypeAnnotation { 
-    typeName?: string | null;
+    readonly typeName?: string | null;
 }
 

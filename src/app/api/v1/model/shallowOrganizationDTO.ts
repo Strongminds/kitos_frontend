@@ -12,8 +12,8 @@
 
 
 export interface APIShallowOrganizationDTO { 
-    cvrNumber?: string | null;
     id?: number;
     name?: string | null;
+    cvrNumber?: string | null;
 }
 

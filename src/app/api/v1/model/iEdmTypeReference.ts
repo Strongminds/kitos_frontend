@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIEdmTypeReferenceDefinition } from './iEdmTypeReferenceDefinition';
+import { APIIEdmType } from './iEdmType';
 
 
 export interface APIIEdmTypeReference { 
     readonly isNullable?: boolean;
-    definition?: APIIEdmTypeReferenceDefinition | null;
+    definition?: APIIEdmType;
 }
 

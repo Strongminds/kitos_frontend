@@ -14,9 +14,9 @@ import { APIEdmSchemaElementKind } from './edmSchemaElementKind';
 
 
 export interface APIIEdmEntityContainer { 
-    readonly elements?: Array<APIIEdmEntityContainerElement> | null;
-    readonly schemaElementKind?: APIEdmSchemaElementKind;
-    readonly namespace?: string | null;
     readonly name?: string | null;
+    schemaElementKind?: APIEdmSchemaElementKind;
+    readonly namespace?: string | null;
+    readonly elements?: Array<APIIEdmEntityContainerElement> | null;
 }
 

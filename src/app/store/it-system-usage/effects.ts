@@ -239,7 +239,7 @@ export class ITSystemUsageEffects {
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid,
-            aPIPutSingleItSystemUsageV2PutSystemUsageRequest: itSystemUsage,
+            aPIUpdateItSystemUsageRequestDTO: itSystemUsage,
           })
           .pipe(
             map((itSystemUsage) => {
@@ -290,7 +290,7 @@ export class ITSystemUsageEffects {
         return this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid,
-            aPIPutSingleItSystemUsageV2PutSystemUsageRequest: {
+            aPIUpdateItSystemUsageRequestDTO: {
               roles: existingRoles.concat(rolesToAdd),
             },
           })
@@ -309,7 +309,7 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .patchSingleItSystemUsageV2PatchRemoveRoleAssignment({
             systemUsageUuid: itSystemUsageUuid,
-            aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest: {
+            aPIRoleAssignmentRequestDTO: {
               userUuid: userUuid,
               roleUuid: roleUuid,
             },
@@ -448,7 +448,7 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2PostSystemUsageRelation({
             systemUsageUuid: usageUuid,
-            aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest: request,
+            aPISystemRelationWriteRequestDTO: request,
           })
           .pipe(
             map((relation) => ITSystemUsageActions.addItSystemUsageRelationSuccess(usageUuid, relation)),
@@ -485,7 +485,7 @@ export class ITSystemUsageEffects {
           .putSingleItSystemUsageV2PutSystemUsageRelation({
             systemUsageUuid: usageUuid,
             systemRelationUuid: relationUuid,
-            aPIPostSingleItSystemUsageV2PostSystemUsageRelationRequest: request,
+            aPISystemRelationWriteRequestDTO: request,
           })
           .pipe(
             map((relation) => ITSystemUsageActions.patchItSystemUsageRelationSuccess(usageUuid, relation)),
@@ -608,7 +608,7 @@ export class ITSystemUsageEffects {
         this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2PostJournalPeriod({
             systemUsageUuid: usageUuid,
-            aPIPostSingleItSystemUsageV2PostJournalPeriodRequest: journalPeriod,
+            aPIJournalPeriodDTO: journalPeriod,
           })
           .pipe(
             map((_) => ITSystemUsageActions.addItSystemUsageJournalPeriodSuccess(usageUuid)),
@@ -627,7 +627,7 @@ export class ITSystemUsageEffects {
           .putSingleItSystemUsageV2PutJournalPeriod({
             systemUsageUuid: usageUuid,
             journalPeriodUuid: journalPeriodUuid,
-            aPIPostSingleItSystemUsageV2PostJournalPeriodRequest: journalPeriod,
+            aPIJournalPeriodDTO: journalPeriod,
           })
           .pipe(
             map((_) => ITSystemUsageActions.patchItSystemUsageJournalPeriodSuccess(usageUuid)),
@@ -644,7 +644,7 @@ export class ITSystemUsageEffects {
       switchMap(([{ itSystemUuid }, organizationUuid]) =>
         this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2PostItSystemUsage({
-            aPIPostSingleItSystemUsageV2PostItSystemUsageRequest: { systemUuid: itSystemUuid, organizationUuid },
+            aPICreateItSystemUsageRequestDTO: { systemUuid: itSystemUuid, organizationUuid },
           })
           .pipe(
             map((usage: APIItSystemUsageResponseDTO) =>
@@ -683,7 +683,7 @@ export class ITSystemUsageEffects {
           .postSingleOrganizationGridInternalV2SaveGridConfiguration({
             organizationUuid,
             overviewType: 'ItSystemUsage',
-            aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest: {
+            aPIOrganizationGridConfigurationRequestDTO: {
               visibleColumns: columnConfig,
             },
           })

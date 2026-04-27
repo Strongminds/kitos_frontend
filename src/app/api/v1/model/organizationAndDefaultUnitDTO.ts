@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIOrganizationAndDefaultUnitDTODefaultOrgUnit } from './organizationAndDefaultUnitDTODefaultOrgUnit';
-import { APIOrganizationAndDefaultUnitDTOOrganization } from './organizationAndDefaultUnitDTOOrganization';
+import { APIOrgUnitSimpleDTO } from './orgUnitSimpleDTO';
+import { APIOrganizationDTO } from './organizationDTO';
 
 
 export interface APIOrganizationAndDefaultUnitDTO { 
-    organization?: APIOrganizationAndDefaultUnitDTOOrganization | null;
-    defaultOrgUnit?: APIOrganizationAndDefaultUnitDTODefaultOrgUnit | null;
+    organization: APIOrganizationDTO;
+    defaultOrgUnit?: APIOrgUnitSimpleDTO;
 }
 

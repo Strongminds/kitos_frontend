@@ -13,6 +13,6 @@ import { APIEdmTypeKind } from './edmTypeKind';
 
 
 export interface APIIEdmType { 
-    readonly typeKind?: APIEdmTypeKind;
+    typeKind?: APIEdmTypeKind;
 }
 

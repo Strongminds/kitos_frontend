@@ -13,13 +13,13 @@ import { APIOrganizationUserRole } from './organizationUserRole';
 
 
 export interface APIOrganizationUserResponseDTO { 
+    uuid: string;
+    name: string;
     firstName: string;
     lastName?: string | null;
     email: string;
     phoneNumber?: string | null;
     apiAccess: boolean;
     roles: Array<APIOrganizationUserRole>;
-    uuid: string;
-    name: string;
 }
 

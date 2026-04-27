@@ -9,16 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIOrganizationUnitOriginChoice } from './organizationUnitOriginChoice';
 
 
 export interface APIOrganizationUnitResponseDTO { 
-    parentOrganizationUnit?: APIArchivingRegistrationsResponseDTOType | null;
+    uuid: string;
+    name: string;
+    parentOrganizationUnit?: APIIdentityNamePairResponseDTO;
     ean?: number | null;
     unitId?: string | null;
     origin?: APIOrganizationUnitOriginChoice;
-    uuid: string;
-    name: string;
 }
 

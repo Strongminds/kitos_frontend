@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIExtendedRoleAssignmentResponseDTOUser } from './extendedRoleAssignmentResponseDTOUser';
-import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIUserReferenceResponseDTO } from './userReferenceResponseDTO';
 
 
 export interface APIExtendedRoleAssignmentResponseDTO { 
-    user: APIExtendedRoleAssignmentResponseDTOUser;
-    role: APIDataProcessingRegistrationResponseDTOCreatedBy;
+    user: APIUserReferenceResponseDTO;
+    role: APIIdentityNamePairResponseDTO;
 }
 

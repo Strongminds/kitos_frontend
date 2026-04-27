@@ -9,24 +9,24 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APICreateItSystemUsageRequestDTOOrganizationUsage } from './createItSystemUsageRequestDTOOrganizationUsage';
 import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
-import { APICreateItSystemUsageRequestDTOLocalKleDeviations } from './createItSystemUsageRequestDTOLocalKleDeviations';
-import { APICreateItSystemUsageRequestDTOGdpr } from './createItSystemUsageRequestDTOGdpr';
-import { APICreateItSystemUsageRequestDTOArchiving } from './createItSystemUsageRequestDTOArchiving';
+import { APILocalKLEDeviationsRequestDTO } from './localKLEDeviationsRequestDTO';
+import { APIOrganizationUsageWriteRequestDTO } from './organizationUsageWriteRequestDTO';
+import { APIGeneralDataWriteRequestDTO } from './generalDataWriteRequestDTO';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { APICreateItSystemUsageRequestDTOGeneral } from './createItSystemUsageRequestDTOGeneral';
+import { APIGDPRWriteRequestDTO } from './gDPRWriteRequestDTO';
+import { APIArchivingCreationRequestDTO } from './archivingCreationRequestDTO';
 
 
 export interface APICreateItSystemUsageRequestDTO { 
+    roles?: Array<APIRoleAssignmentRequestDTO> | null;
+    organizationUsage?: APIOrganizationUsageWriteRequestDTO;
+    localKleDeviations?: APILocalKLEDeviationsRequestDTO;
+    gdpr?: APIGDPRWriteRequestDTO;
     systemUuid: string;
     organizationUuid: string;
-    general?: APICreateItSystemUsageRequestDTOGeneral | null;
+    general?: APIGeneralDataWriteRequestDTO;
     externalReferences?: Array<APIExternalReferenceDataWriteRequestDTO> | null;
-    archiving?: APICreateItSystemUsageRequestDTOArchiving | null;
-    roles?: Array<APIRoleAssignmentRequestDTO> | null;
-    organizationUsage?: APICreateItSystemUsageRequestDTOOrganizationUsage | null;
-    localKleDeviations?: APICreateItSystemUsageRequestDTOLocalKleDeviations | null;
-    gdpr?: APICreateItSystemUsageRequestDTOGdpr | null;
+    archiving?: APIArchivingCreationRequestDTO;
 }
 

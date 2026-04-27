@@ -103,7 +103,7 @@ export class OrganizationEffects {
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2PatchOrganizationMasterData({
             organizationUuid,
-            aPIPatchSingleOrganizationsInternalV2PatchOrganizationMasterDataRequest: request,
+            aPIOrganizationMasterDataRequestDTO: request,
           })
           .pipe(
             map((organizationMasterDataDto) => {
@@ -146,7 +146,7 @@ export class OrganizationEffects {
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRoles({
             organizationUuid,
-            aPIPatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRolesRequest: request,
+            aPIOrganizationMasterDataRolesRequestDTO: request,
           })
           .pipe(
             map((organizationMasterDataRolesDto) => {
@@ -205,7 +205,7 @@ export class OrganizationEffects {
       switchMap(([{ dto }, organizationUuid]) =>
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2PatchUIRootConfig({
-            aPIPatchSingleOrganizationsInternalV2PatchUIRootConfigRequest: dto,
+            aPIUIRootConfigUpdateRequestDTO: dto,
             organizationUuid,
           })
           .pipe(
@@ -225,7 +225,7 @@ export class OrganizationEffects {
       switchMap(({ request, organizationUuid }) =>
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2PatchOrganization({
-            aPIPatchSingleOrganizationsInternalV2PatchOrganizationRequest: request,
+            aPIOrganizationUpdateRequestDTO: request,
             organizationUuid,
           })
           .pipe(
@@ -241,7 +241,7 @@ export class OrganizationEffects {
       ofType(OrganizationActions.createOrganization),
       switchMap(({ request }) =>
         this.organizationInternalService
-          .postSingleOrganizationsInternalV2CreateOrganization({ aPIPostSingleOrganizationsInternalV2CreateOrganizationRequest: request })
+          .postSingleOrganizationsInternalV2CreateOrganization({ aPIOrganizationCreateRequestDTO: request })
           .pipe(
             map(() => OrganizationActions.createOrganizationSuccess()),
             catchError(() => of(OrganizationActions.createOrganizationError())),
@@ -271,7 +271,7 @@ export class OrganizationEffects {
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2ChangeDisabledStatus({
             organizationUuid,
-            aPIPatchSingleOrganizationsInternalV2ChangeDisabledStatusRequest: { disabled },
+            aPIOrganizationDisabledStatusRequestDTO: { disabled },
           })
           .pipe(
             map(() => OrganizationActions.changeOrganizationDisabledStatusSuccess(disabled)),

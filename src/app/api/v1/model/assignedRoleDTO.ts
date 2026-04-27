@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIAssignedRoleDTOUser } from './assignedRoleDTOUser';
-import { APIAssignedRoleDTORole } from './assignedRoleDTORole';
+import { APIBusinessRoleDTO } from './businessRoleDTO';
+import { APIUserWithEmailDTO } from './userWithEmailDTO';
 
 
 export interface APIAssignedRoleDTO { 
-    user?: APIAssignedRoleDTOUser | null;
-    role?: APIAssignedRoleDTORole | null;
+    user?: APIUserWithEmailDTO;
+    role?: APIBusinessRoleDTO;
 }
 

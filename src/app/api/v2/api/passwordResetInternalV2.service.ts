@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPostSinglePasswordResetInternalV2PostPasswordResetRequest } from '../model/aPIPostSinglePasswordResetInternalV2PostPasswordResetRequest';
+import { APIRequestPasswordResetRequestDTO } from '../model/aPIRequestPasswordResetRequestDTO';
 // @ts-ignore
-import { APIPostSinglePasswordResetInternalV2RequestPasswordResetRequest } from '../model/aPIPostSinglePasswordResetInternalV2RequestPasswordResetRequest';
+import { APIResetPasswordRequestDTO } from '../model/aPIResetPasswordRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -34,11 +34,11 @@ export interface GetSinglePasswordResetInternalV2GetPasswordResetRequestParams {
 
 export interface PostSinglePasswordResetInternalV2PostPasswordResetRequestParams {
     requestId: string;
-    aPIPostSinglePasswordResetInternalV2PostPasswordResetRequest?: APIPostSinglePasswordResetInternalV2PostPasswordResetRequest;
+    aPIResetPasswordRequestDTO?: APIResetPasswordRequestDTO;
 }
 
 export interface PostSinglePasswordResetInternalV2RequestPasswordResetRequestParams {
-    aPIPostSinglePasswordResetInternalV2RequestPasswordResetRequest?: APIPostSinglePasswordResetInternalV2RequestPasswordResetRequest;
+    aPIRequestPasswordResetRequestDTO?: APIRequestPasswordResetRequestDTO;
 }
 
 
@@ -177,7 +177,7 @@ export class PasswordResetInternalV2Service {
         if (requestId === null || requestId === undefined) {
             throw new Error('Required parameter requestId was null or undefined when calling postSinglePasswordResetInternalV2PostPasswordReset.');
         }
-        const aPIPostSinglePasswordResetInternalV2PostPasswordResetRequest = requestParameters.aPIPostSinglePasswordResetInternalV2PostPasswordResetRequest;
+        const aPIResetPasswordRequestDTO = requestParameters.aPIResetPasswordRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -223,7 +223,7 @@ export class PasswordResetInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSinglePasswordResetInternalV2PostPasswordResetRequest,
+                body: aPIResetPasswordRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -242,7 +242,7 @@ export class PasswordResetInternalV2Service {
     public postSinglePasswordResetInternalV2RequestPasswordReset(requestParameters: PostSinglePasswordResetInternalV2RequestPasswordResetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSinglePasswordResetInternalV2RequestPasswordReset(requestParameters: PostSinglePasswordResetInternalV2RequestPasswordResetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSinglePasswordResetInternalV2RequestPasswordReset(requestParameters: PostSinglePasswordResetInternalV2RequestPasswordResetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIPostSinglePasswordResetInternalV2RequestPasswordResetRequest = requestParameters.aPIPostSinglePasswordResetInternalV2RequestPasswordResetRequest;
+        const aPIRequestPasswordResetRequestDTO = requestParameters.aPIRequestPasswordResetRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -288,7 +288,7 @@ export class PasswordResetInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSinglePasswordResetInternalV2RequestPasswordResetRequest,
+                body: aPIRequestPasswordResetRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

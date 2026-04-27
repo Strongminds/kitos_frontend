@@ -9,18 +9,18 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIArchiveDutyChoice } from './archiveDutyChoice';
 import { APIJournalPeriodResponseDTO } from './journalPeriodResponseDTO';
-import { APIArchivingRegistrationsResponseDTOSupplier } from './archivingRegistrationsResponseDTOSupplier';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
 export interface APIArchivingRegistrationsResponseDTO { 
-    archiveDuty?: APIArchiveDutyChoice | null;
-    type?: APIArchivingRegistrationsResponseDTOType | null;
-    location?: APIArchivingRegistrationsResponseDTOType | null;
-    testLocation?: APIArchivingRegistrationsResponseDTOType | null;
-    supplier?: APIArchivingRegistrationsResponseDTOSupplier | null;
+    archiveDuty?: APIArchiveDutyChoice;
+    type?: APIIdentityNamePairResponseDTO;
+    location?: APIIdentityNamePairResponseDTO;
+    testLocation?: APIIdentityNamePairResponseDTO;
+    supplier?: APIShallowOrganizationResponseDTO;
     active?: boolean | null;
     notes?: string | null;
     frequencyInMonths?: number | null;

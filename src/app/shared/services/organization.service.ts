@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, mergeMap, of, withLatestFrom } from 'rxjs';
 import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
@@ -29,6 +29,6 @@ export class OrganizationService {
 
   constructor(
     private store: Store,
-    @Inject(OrganizationV2Service) private apiOrganizationService: OrganizationV2Service,
+    private apiOrganizationService: OrganizationV2Service,
   ) {}
 }

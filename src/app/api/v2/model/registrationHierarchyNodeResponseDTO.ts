@@ -9,12 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
-import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIRegistrationHierarchyNodeResponseDTO { 
-    node: APIDataProcessingRegistrationResponseDTOCreatedBy;
-    parent?: APIArchivingRegistrationsResponseDTOType | null;
+    node: APIIdentityNamePairResponseDTO;
+    parent?: APIIdentityNamePairResponseDTO;
 }
 

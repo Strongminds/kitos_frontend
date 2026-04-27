@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { mergeMap, Observable, tap } from 'rxjs';
@@ -14,7 +14,7 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
   public readonly organizations$ = this.select((state) => state.organizations);
   public readonly loading$ = this.select((state) => state.loading);
 
-  constructor(@Inject(OrganizationV2Service) private organizationService: OrganizationV2Service) {
+  constructor(private organizationService: OrganizationV2Service) {
     super({ organizations: [], loading: false });
   }
 
@@ -42,7 +42,7 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
           })
           .pipe(
             tapResponse({
-              next: (filteredOrganizations) => this.setOrganizations(filteredOrganizations),
+              next: (filteredUsers) => this.setOrganizations(filteredUsers),
               error: (error) => console.error(error),
               complete: () => this.setLoading(false),
             }),

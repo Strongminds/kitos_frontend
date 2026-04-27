@@ -9,40 +9,38 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
-import { APIItContractResponseDTOAgreementPeriod } from './itContractResponseDTOAgreementPeriod';
-import { APIItContractResponseDTOSupplier } from './itContractResponseDTOSupplier';
-import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
-import { APIItContractResponseDTOProcurement } from './itContractResponseDTOProcurement';
-import { APIItContractResponseDTOResponsible } from './itContractResponseDTOResponsible';
-import { APIItContractResponseDTOPaymentModel } from './itContractResponseDTOPaymentModel';
-import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
-import { APIDataProcessingRegistrationResponseDTOOrganizationContext } from './dataProcessingRegistrationResponseDTOOrganizationContext';
-import { APIItContractResponseDTOTermination } from './itContractResponseDTOTermination';
+import { APIContractSupplierDataResponseDTO } from './contractSupplierDataResponseDTO';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
-import { APIItContractResponseDTOPayments } from './itContractResponseDTOPayments';
-import { APIItContractResponseDTOGeneral } from './itContractResponseDTOGeneral';
+import { APIContractPaymentsDataResponseDTO } from './contractPaymentsDataResponseDTO';
+import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
+import { APIContractAgreementPeriodDataResponseDTO } from './contractAgreementPeriodDataResponseDTO';
+import { APIContractGeneralDataResponseDTO } from './contractGeneralDataResponseDTO';
+import { APIContractResponsibleDataResponseDTO } from './contractResponsibleDataResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIContractPaymentModelDataResponseDTO } from './contractPaymentModelDataResponseDTO';
+import { APIContractProcurementDataResponseDTO } from './contractProcurementDataResponseDTO';
+import { APIContractTerminationDataResponseDTO } from './contractTerminationDataResponseDTO';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 export interface APIItContractResponseDTO { 
     uuid: string;
     name: string;
-    organizationContext: APIDataProcessingRegistrationResponseDTOOrganizationContext;
+    organizationContext: APIShallowOrganizationResponseDTO;
     lastModified: string;
-    lastModifiedBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
-    createdBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
-    parentContract?: APIArchivingRegistrationsResponseDTOType | null;
-    general: APIItContractResponseDTOGeneral;
-    procurement: APIItContractResponseDTOProcurement;
-    supplier: APIItContractResponseDTOSupplier;
-    responsible: APIItContractResponseDTOResponsible;
+    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    createdBy: APIIdentityNamePairResponseDTO;
+    parentContract?: APIIdentityNamePairResponseDTO;
+    general: APIContractGeneralDataResponseDTO;
+    procurement: APIContractProcurementDataResponseDTO;
+    supplier: APIContractSupplierDataResponseDTO;
+    responsible: APIContractResponsibleDataResponseDTO;
     systemUsages: Array<APIIdentityNamePairResponseDTO>;
     dataProcessingRegistrations: Array<APIIdentityNamePairResponseDTO>;
-    paymentModel: APIItContractResponseDTOPaymentModel;
-    agreementPeriod: APIItContractResponseDTOAgreementPeriod;
-    termination: APIItContractResponseDTOTermination;
-    payments: APIItContractResponseDTOPayments;
+    paymentModel: APIContractPaymentModelDataResponseDTO;
+    agreementPeriod: APIContractAgreementPeriodDataResponseDTO;
+    termination: APIContractTerminationDataResponseDTO;
+    payments: APIContractPaymentsDataResponseDTO;
     roles: Array<APIRoleAssignmentResponseDTO>;
     externalReferences: Array<APIExternalReferenceDataResponseDTO>;
 }

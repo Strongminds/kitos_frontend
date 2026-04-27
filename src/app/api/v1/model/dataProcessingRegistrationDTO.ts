@@ -11,37 +11,38 @@
  */
 import { APISubDataProcessorResponseDTO } from './subDataProcessorResponseDTO';
 import { APINamedEntityDTO } from './namedEntityDTO';
-import { APIDataProcessingRegistrationDTOOversightCompleted } from './dataProcessingRegistrationDTOOversightCompleted';
 import { APINamedEntityWithEnabledStatusDTO } from './namedEntityWithEnabledStatusDTO';
-import { APIDataProcessingRegistrationDTOOversightOptions } from './dataProcessingRegistrationDTOOversightOptions';
+import { APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark } from './yesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark';
+import { APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO } from './optionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO';
 import { APIShallowOrganizationDTO } from './shallowOrganizationDTO';
 import { APINamedEntityWithExpirationStatusDTO } from './namedEntityWithExpirationStatusDTO';
-import { APIDataProcessingRegistrationDTOOversightInterval } from './dataProcessingRegistrationDTOOversightInterval';
-import { APIDataProcessingRegistrationDTOAgreementConcluded } from './dataProcessingRegistrationDTOAgreementConcluded';
+import { APINamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO } from './namedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO';
+import { APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO } from './yearMonthIntervalOptionNullableValueWithOptionalRemarkDTO';
 import { APIReferenceDTO } from './referenceDTO';
 import { APIAssignedRoleDTO } from './assignedRoleDTO';
 import { APIYesNoUndecidedOption } from './yesNoUndecidedOption';
-import { APIDataProcessingRegistrationDTOBasisForTransfer } from './dataProcessingRegistrationDTOBasisForTransfer';
 import { APIDataProcessingRegistrationOversightDateDTO } from './dataProcessingRegistrationOversightDateDTO';
-import { APIDataProcessingRegistrationDTODataResponsible } from './dataProcessingRegistrationDTODataResponsible';
+import { APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO } from './yesNoUndecidedOptionNullableValueWithOptionalRemarkDTO';
 
 
 export interface APIDataProcessingRegistrationDTO { 
+    id?: number;
+    name?: string | null;
     uuid?: string;
     assignedRoles?: Array<APIAssignedRoleDTO> | null;
     references?: Array<APIReferenceDTO> | null;
     itSystems?: Array<APINamedEntityWithEnabledStatusDTO> | null;
-    oversightInterval?: APIDataProcessingRegistrationDTOOversightInterval | null;
-    hasSubDataProcessors?: APIYesNoUndecidedOption | null;
+    oversightInterval?: APIYearMonthIntervalOptionNullableValueWithOptionalRemarkDTO;
+    hasSubDataProcessors?: APIYesNoUndecidedOption;
     dataProcessors?: Array<APIShallowOrganizationDTO> | null;
     subDataProcessors?: Array<APISubDataProcessorResponseDTO> | null;
-    agreementConcluded?: APIDataProcessingRegistrationDTOAgreementConcluded | null;
-    transferToInsecureThirdCountries?: APIYesNoUndecidedOption | null;
+    agreementConcluded?: APIYesNoIrrelevantOptionNullableValueWithOptionalDateAndRemark;
+    transferToInsecureThirdCountries?: APIYesNoUndecidedOption;
     insecureThirdCountries?: Array<APINamedEntityWithExpirationStatusDTO> | null;
-    basisForTransfer?: APIDataProcessingRegistrationDTOBasisForTransfer | null;
-    dataResponsible?: APIDataProcessingRegistrationDTODataResponsible | null;
-    oversightOptions?: APIDataProcessingRegistrationDTOOversightOptions | null;
-    oversightCompleted?: APIDataProcessingRegistrationDTOOversightCompleted | null;
+    basisForTransfer?: APINamedEntityWithExpirationStatusDTO;
+    dataResponsible?: APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO;
+    oversightOptions?: APINamedEntityWithExpirationStatusDTOArrayValueWithOptionalRemarkDTO;
+    oversightCompleted?: APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO;
     oversightDates?: Array<APIDataProcessingRegistrationOversightDateDTO> | null;
     associatedContracts?: Array<APINamedEntityDTO> | null;
     oversightScheduledInspectionDate?: string | null;
@@ -49,7 +50,5 @@ export interface APIDataProcessingRegistrationDTO {
     lastChangedAt?: string;
     isActiveAccordingToMainContract?: boolean;
     mainContractId?: number | null;
-    id?: number;
-    name?: string | null;
 }
 

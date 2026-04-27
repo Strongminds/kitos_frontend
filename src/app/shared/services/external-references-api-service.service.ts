@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import {
   APIExternalReferenceDataResponseDTO,
@@ -16,9 +16,10 @@ import { RegistrationEntityTypes } from '../models/registrations/registration-en
 })
 export class ExternalReferencesApiService {
   constructor(
-    private readonly apiItSystemUsageService: ItSystemUsageV2Service,
-    private readonly apiItSystemService: ItSystemV2Service,
-    private readonly apiItContractService: ItContractV2Service,
+    @Inject(ItSystemUsageV2Service) private readonly apiItSystemUsageService: ItSystemUsageV2Service,
+    @Inject(ItSystemV2Service) private readonly apiItSystemService: ItSystemV2Service,
+    @Inject(ItContractV2Service) private readonly apiItContractService: ItContractV2Service,
+    @Inject(DataProcessingRegistrationV2Service)
     private readonly apiDataProcessingRegistrationService: DataProcessingRegistrationV2Service,
   ) {}
 
@@ -35,23 +36,23 @@ export class ExternalReferencesApiService {
         case 'it-system-usage':
           return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid: entityUuid,
-            aPIPutSingleItSystemUsageV2PutSystemUsageRequest: { externalReferences: nextState },
+            aPIUpdateItSystemUsageRequestDTO: { externalReferences: nextState },
           });
         case 'it-system':
           return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
             uuid: entityUuid,
-            aPIPatchSingleItSystemV2PatchItSystemRequest: { externalReferences: nextState },
+            aPIUpdateItSystemRequestDTO: { externalReferences: nextState },
           });
         case 'it-contract':
           return this.apiItContractService.patchSingleItContractV2PatchItContract({
             contractUuid: entityUuid,
-            aPIPutSingleItContractV2PutItContractRequest: { externalReferences: nextState },
+            aPIUpdateContractRequestDTO: { externalReferences: nextState },
           });
         case 'data-processing-registration':
           return this.apiDataProcessingRegistrationService.patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(
             {
               uuid: entityUuid,
-              aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest: { externalReferences: nextState },
+              aPIUpdateDataProcessingRegistrationRequestDTO: { externalReferences: nextState },
             },
           );
         default:
@@ -75,21 +76,21 @@ export class ExternalReferencesApiService {
         case 'it-system-usage':
           return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid: entityUuid,
-            aPIPutSingleItSystemUsageV2PutSystemUsageRequest: { externalReferences: nextState },
+            aPIUpdateItSystemUsageRequestDTO: { externalReferences: nextState },
           });
         case 'it-system':
           return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
             uuid: entityUuid,
-            aPIPatchSingleItSystemV2PatchItSystemRequest: { externalReferences: nextState },
+            aPIUpdateItSystemRequestDTO: { externalReferences: nextState },
           });
         case 'it-contract':
           return this.apiItContractService.patchSingleItContractV2PatchItContract({
             contractUuid: entityUuid,
-            aPIPutSingleItContractV2PutItContractRequest: { externalReferences: nextState },
+            aPIUpdateContractRequestDTO: { externalReferences: nextState },
           });
         case 'data-processing-registration':
           return this.apiDataProcessingRegistrationService.patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(
-            { uuid: entityUuid, aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest: { externalReferences: nextState } },
+            { uuid: entityUuid, aPIUpdateDataProcessingRegistrationRequestDTO: { externalReferences: nextState } },
           );
         default:
           console.error(`Missing support for entity type:${entityType}`);
@@ -112,21 +113,21 @@ export class ExternalReferencesApiService {
         case 'it-system-usage':
           return this.apiItSystemUsageService.patchSingleItSystemUsageV2PatchSystemUsage({
             systemUsageUuid: entityUuid,
-            aPIPutSingleItSystemUsageV2PutSystemUsageRequest: { externalReferences: nextState },
+            aPIUpdateItSystemUsageRequestDTO: { externalReferences: nextState },
           });
         case 'it-system':
           return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({
             uuid: entityUuid,
-            aPIPatchSingleItSystemV2PatchItSystemRequest: { externalReferences: nextState },
+            aPIUpdateItSystemRequestDTO: { externalReferences: nextState },
           });
         case 'it-contract':
           return this.apiItContractService.patchSingleItContractV2PatchItContract({
             contractUuid: entityUuid,
-            aPIPutSingleItContractV2PutItContractRequest: { externalReferences: nextState },
+            aPIUpdateContractRequestDTO: { externalReferences: nextState },
           });
         case 'data-processing-registration':
           return this.apiDataProcessingRegistrationService.patchSingleDataProcessingRegistrationV2PatchDataProcessingRegistration(
-            { uuid: entityUuid, aPIPutSingleDataProcessingRegistrationV2PutDataProcessingRegistrationRequest: { externalReferences: nextState } },
+            { uuid: entityUuid, aPIUpdateDataProcessingRegistrationRequestDTO: { externalReferences: nextState } },
           );
         default:
           console.error(`Missing support for entity type:${entityType}`);

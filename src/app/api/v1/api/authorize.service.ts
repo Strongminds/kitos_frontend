@@ -19,9 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPostSingleAuthorizePostLoginRequest } from '../model/aPIPostSingleAuthorizePostLoginRequest';
-// @ts-ignore
-import { APIPostSingleAuthorizePostResetpasswordRequest } from '../model/aPIPostSingleAuthorizePostResetpasswordRequest';
+import { APILoginDTO } from '../model/aPILoginDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -42,12 +40,12 @@ export interface GetSingleAuthorizeGetUserOrganizationsRequestParams {
 }
 
 export interface PostSingleAuthorizePostLoginRequestParams {
-    aPIPostSingleAuthorizePostLoginRequest?: APIPostSingleAuthorizePostLoginRequest;
+    aPILoginDTO?: APILoginDTO;
 }
 
 export interface PostSingleAuthorizePostResetpasswordRequestParams {
     resetPassword?: boolean;
-    aPIPostSingleAuthorizePostResetpasswordRequest?: APIPostSingleAuthorizePostResetpasswordRequest;
+    body?: object;
 }
 
 
@@ -408,7 +406,7 @@ export class AuthorizeService {
     public postSingleAuthorizePostLogin(requestParameters: PostSingleAuthorizePostLoginRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleAuthorizePostLogin(requestParameters: PostSingleAuthorizePostLoginRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleAuthorizePostLogin(requestParameters: PostSingleAuthorizePostLoginRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        const aPIPostSingleAuthorizePostLoginRequest = requestParameters.aPIPostSingleAuthorizePostLoginRequest;
+        const aPILoginDTO = requestParameters.aPILoginDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -493,7 +491,7 @@ export class AuthorizeService {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleAuthorizePostLoginRequest,
+                body: aPILoginDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -565,7 +563,7 @@ export class AuthorizeService {
     public postSingleAuthorizePostResetpassword(requestParameters: PostSingleAuthorizePostResetpasswordRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleAuthorizePostResetpassword(requestParameters: PostSingleAuthorizePostResetpasswordRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const resetPassword = requestParameters.resetPassword;
-        const aPIPostSingleAuthorizePostResetpasswordRequest = requestParameters.aPIPostSingleAuthorizePostResetpasswordRequest;
+        const body = requestParameters.body;
 
         let localVarQueryParameters = new HttpParams({encoder: this.encoder});
         if (resetPassword !== undefined && resetPassword !== null) {
@@ -656,7 +654,7 @@ export class AuthorizeService {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleAuthorizePostResetpasswordRequest,
+                body: body,
                 params: localVarQueryParameters,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,

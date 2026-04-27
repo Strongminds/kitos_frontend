@@ -9,14 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIContractAgreementPeriodDataResponseDTO { 
     durationYears?: number | null;
     durationMonths?: number | null;
     isContinuous?: boolean | null;
-    extensionOptions?: APIArchivingRegistrationsResponseDTOType | null;
+    extensionOptions?: APIIdentityNamePairResponseDTO;
     extensionOptionsUsed: number;
     irrevocableUntil?: string | null;
 }

@@ -18,12 +18,9 @@ import { APIOversightDateDTO } from './oversightDateDTO';
 export interface APIDataProcessingRegistrationOversightResponseDTO { 
     oversightOptions: Array<APIIdentityNamePairResponseDTO>;
     oversightOptionsRemark?: string | null;
-    oversightInterval?: APIOversightIntervalChoice | null;
+    oversightInterval?: APIOversightIntervalChoice;
     oversightIntervalRemark?: string | null;
-    /**
-     *  (Supplier Field)
-     */
-    isOversightCompleted?: APIYesNoUndecidedChoice | null;
+    isOversightCompleted?: APIYesNoUndecidedChoice;
     oversightCompletedRemark?: string | null;
     oversightScheduledInspectionDate?: string | null;
     oversightDates: Array<APIOversightDateDTO>;

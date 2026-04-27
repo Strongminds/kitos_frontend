@@ -9,13 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIConfigDTO } from './configDTO';
 import { APIAccessModifier } from './accessModifier';
-import { APIOrganizationDTOConfig } from './organizationDTOConfig';
-import { APIOrganizationAndDefaultUnitDTODefaultOrgUnit } from './organizationAndDefaultUnitDTODefaultOrgUnit';
-import { APIOrganizationDTOContactPerson } from './organizationDTOContactPerson';
+import { APIOrgUnitSimpleDTO } from './orgUnitSimpleDTO';
+import { APIUserDTO } from './userDTO';
 
 
 export interface APIOrganizationDTO { 
+    id?: number;
+    name?: string | null;
     phone?: string | null;
     adress?: string | null;
     email?: string | null;
@@ -23,14 +25,12 @@ export interface APIOrganizationDTO {
     foreignCvr?: string | null;
     typeId?: number;
     accessModifier?: APIAccessModifier;
-    config?: APIOrganizationDTOConfig | null;
-    root?: APIOrganizationAndDefaultUnitDTODefaultOrgUnit | null;
+    config?: APIConfigDTO;
+    root?: APIOrgUnitSimpleDTO;
     lastChanged?: string;
     lastChangedByUserId?: number;
     uuid?: string;
     contactPersonId?: number | null;
-    contactPerson?: APIOrganizationDTOContactPerson | null;
-    id?: number;
-    name?: string | null;
+    contactPerson?: APIUserDTO;
 }
 

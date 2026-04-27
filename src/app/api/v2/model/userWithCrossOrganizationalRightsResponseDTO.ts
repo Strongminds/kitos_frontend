@@ -12,11 +12,11 @@
 
 
 export interface APIUserWithCrossOrganizationalRightsResponseDTO { 
-    stakeholderAccess?: boolean;
-    organizationsWhereActive?: Array<string> | null;
-    apiAccess?: boolean;
-    email: string;
     uuid: string;
     name: string;
+    email: string;
+    apiAccess?: boolean;
+    stakeholderAccess?: boolean;
+    organizationsWhereActive?: Array<string> | null;
 }
 

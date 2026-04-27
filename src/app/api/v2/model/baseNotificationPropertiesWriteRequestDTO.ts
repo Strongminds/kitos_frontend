@@ -9,14 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIBaseNotificationPropertiesWriteRequestDTOCcs } from './baseNotificationPropertiesWriteRequestDTOCcs';
-import { APIBaseNotificationPropertiesWriteRequestDTOReceivers } from './baseNotificationPropertiesWriteRequestDTOReceivers';
+import { APIRecipientWriteRequestDTO } from './recipientWriteRequestDTO';
 
 
 export interface APIBaseNotificationPropertiesWriteRequestDTO { 
     subject: string;
     body?: string | null;
-    ccs?: APIBaseNotificationPropertiesWriteRequestDTOCcs | null;
-    receivers: APIBaseNotificationPropertiesWriteRequestDTOReceivers;
+    ccs?: APIRecipientWriteRequestDTO;
+    receivers: APIRecipientWriteRequestDTO;
 }
 

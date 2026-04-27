@@ -9,32 +9,32 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIItSystemUsageResponseDTOOrganizationUsage } from './itSystemUsageResponseDTOOrganizationUsage';
-import { APIItSystemUsageResponseDTOLocalKLEDeviations } from './itSystemUsageResponseDTOLocalKLEDeviations';
-import { APIItSystemUsageResponseDTOArchiving } from './itSystemUsageResponseDTOArchiving';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIOrganizationUsageResponseDTO } from './organizationUsageResponseDTO';
 import { APIRoleAssignmentResponseDTO } from './roleAssignmentResponseDTO';
+import { APIGDPRRegistrationsResponseDTO } from './gDPRRegistrationsResponseDTO';
+import { APILocalKLEDeviationsResponseDTO } from './localKLEDeviationsResponseDTO';
 import { APIOutgoingSystemRelationResponseDTO } from './outgoingSystemRelationResponseDTO';
-import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
-import { APIDataProcessingRegistrationResponseDTOOrganizationContext } from './dataProcessingRegistrationResponseDTOOrganizationContext';
-import { APIItSystemUsageResponseDTOGeneral } from './itSystemUsageResponseDTOGeneral';
-import { APIItSystemUsageResponseDTOGdpr } from './itSystemUsageResponseDTOGdpr';
+import { APIArchivingRegistrationsResponseDTO } from './archivingRegistrationsResponseDTO';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIGeneralDataResponseDTO } from './generalDataResponseDTO';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
 
 
 export interface APIItSystemUsageResponseDTO { 
     uuid: string;
-    createdBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
+    createdBy: APIIdentityNamePairResponseDTO;
     lastModified: string;
-    lastModifiedBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
-    systemContext: APIDataProcessingRegistrationResponseDTOCreatedBy;
-    organizationContext: APIDataProcessingRegistrationResponseDTOOrganizationContext;
-    general: APIItSystemUsageResponseDTOGeneral;
+    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    systemContext: APIIdentityNamePairResponseDTO;
+    organizationContext: APIShallowOrganizationResponseDTO;
+    general: APIGeneralDataResponseDTO;
     roles: Array<APIRoleAssignmentResponseDTO>;
-    organizationUsage: APIItSystemUsageResponseDTOOrganizationUsage;
-    localKLEDeviations: APIItSystemUsageResponseDTOLocalKLEDeviations;
+    organizationUsage: APIOrganizationUsageResponseDTO;
+    localKLEDeviations: APILocalKLEDeviationsResponseDTO;
     externalReferences: Array<APIExternalReferenceDataResponseDTO>;
-    archiving: APIItSystemUsageResponseDTOArchiving;
-    gdpr: APIItSystemUsageResponseDTOGdpr;
+    archiving: APIArchivingRegistrationsResponseDTO;
+    gdpr: APIGDPRRegistrationsResponseDTO;
     outgoingSystemRelations: Array<APIOutgoingSystemRelationResponseDTO>;
 }
 

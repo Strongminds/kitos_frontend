@@ -10,15 +10,15 @@
  * Do not edit the class manually.
  */
 import { APIEdmSchemaElementKind } from './edmSchemaElementKind';
-import { APIIEdmTermType } from './iEdmTermType';
+import { APIIEdmTypeReference } from './iEdmTypeReference';
 
 
 export interface APIIEdmTerm { 
-    type?: APIIEdmTermType | null;
+    readonly name?: string | null;
+    schemaElementKind?: APIEdmSchemaElementKind;
+    readonly namespace?: string | null;
+    type?: APIIEdmTypeReference;
     readonly appliesTo?: string | null;
     readonly defaultValue?: string | null;
-    readonly schemaElementKind?: APIEdmSchemaElementKind;
-    readonly namespace?: string | null;
-    readonly name?: string | null;
 }
 

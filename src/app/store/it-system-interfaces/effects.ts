@@ -148,7 +148,7 @@ export class ITInterfaceEffects {
       switchMap(([{ itInterface }, interfaceUuid]) => {
         if (!itInterface) return of(ITInterfaceActions.updateITInterfaceError());
         return this.apiService
-          .patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, aPIPatchSingleItInterfaceV2PatchRequest: itInterface })
+          .patchSingleItInterfaceV2Patch({ uuid: interfaceUuid, aPIUpdateItInterfaceRequestDTO: itInterface })
           .pipe(
             map((itInterface) => ITInterfaceActions.updateITInterfaceSuccess(itInterface)),
             catchError((err: HttpErrorResponse) => {
@@ -193,7 +193,7 @@ export class ITInterfaceEffects {
       switchMap(([{ data }, interfaceUuid]) =>
         this.apiService
           .postSingleItInterfaceV2PostDataDescription({
-            aPIPostSingleItInterfaceV2PostDataDescriptionRequest: data,
+            aPIItInterfaceDataRequestDTO: data,
             uuid: interfaceUuid,
           })
           .pipe(
@@ -213,7 +213,7 @@ export class ITInterfaceEffects {
           .putSingleItInterfaceV2PutDataDescription({
             uuid: interfaceUuid,
             dataDescriptionUuid: dataUuid,
-            aPIPostSingleItInterfaceV2PostDataDescriptionRequest: data,
+            aPIItInterfaceDataRequestDTO: data,
           })
           .pipe(
             map((response) => ITInterfaceActions.updateITInterfaceDataSuccess(response)),
@@ -230,7 +230,7 @@ export class ITInterfaceEffects {
       switchMap(([{ name, interfaceId, openAfterCreate }, organizationUuid]) =>
         this.apiService
           .postSingleItInterfaceV2Post({
-            aPIPostSingleItInterfaceV2PostRequest: { name, interfaceId, organizationUuid },
+            aPICreateItInterfaceRequestDTO: { name, interfaceId, organizationUuid },
           })
           .pipe(
             map(({ uuid }) => ITInterfaceActions.createITInterfaceSuccess(uuid, openAfterCreate)),

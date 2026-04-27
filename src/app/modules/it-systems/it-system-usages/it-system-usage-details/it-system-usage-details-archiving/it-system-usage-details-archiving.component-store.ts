@@ -18,7 +18,7 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
     filterNullish(),
   );
 
-  constructor(@Inject(OrganizationV2Service) private organizationService: OrganizationV2Service) {
+  constructor(@Inject(OrganizationV2Service) private organizationsService: OrganizationV2Service) {
     super({ organizationsIsLoading: false });
   }
 
@@ -40,7 +40,7 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
     search$.pipe(
       mergeMap((search) => {
         this.updateOrganizationsIsLoading(true);
-        return this.organizationService
+        return this.organizationsService
           .getSingleOrganizationV2GetOrganizations({ nameOrCvrContent: search, orderByProperty: 'Name' })
           .pipe(
             tapResponse({

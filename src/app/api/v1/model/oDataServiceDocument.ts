@@ -10,15 +10,15 @@
  * Do not edit the class manually.
  */
 import { APIODataSingletonInfo } from './oDataSingletonInfo';
+import { APIODataTypeAnnotation } from './oDataTypeAnnotation';
 import { APIODataEntitySetInfo } from './oDataEntitySetInfo';
-import { APIODataEntitySetInfoTypeAnnotation } from './oDataEntitySetInfoTypeAnnotation';
 import { APIODataFunctionImportInfo } from './oDataFunctionImportInfo';
 
 
 export interface APIODataServiceDocument { 
+    typeAnnotation?: APIODataTypeAnnotation;
     entitySets?: Array<APIODataEntitySetInfo> | null;
     singletons?: Array<APIODataSingletonInfo> | null;
     functionImports?: Array<APIODataFunctionImportInfo> | null;
-    typeAnnotation?: APIODataEntitySetInfoTypeAnnotation | null;
 }
 

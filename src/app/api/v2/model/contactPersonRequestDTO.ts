@@ -12,9 +12,9 @@
 
 
 export interface APIContactPersonRequestDTO { 
-    lastName?: string | null;
-    phoneNumber?: string | null;
     name?: string | null;
     email?: string | null;
+    lastName?: string | null;
+    phoneNumber?: string | null;
 }
 

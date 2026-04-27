@@ -104,7 +104,7 @@ export class OrganizationUserEffects {
       switchMap(([{ request }, organizationUuid]) =>
         this.apiService
           .postSingleUsersInternalV2CreateUser({
-            aPIPostSingleUsersInternalV2CreateUserRequest: request,
+            aPICreateUserRequestDTO: request,
             organizationUuid,
           })
           .pipe(
@@ -142,7 +142,7 @@ export class OrganizationUserEffects {
           .patchSingleUsersInternalV2PatchUser({
             userUuid: userUuid,
             organizationUuid,
-            aPIPatchSingleUsersInternalV2PatchUserRequest: request,
+            aPIUpdateUserRequestDTO: request,
           })
           .pipe(
             map((user) => OrganizationUserActions.updateUserSuccess(user)),
@@ -180,7 +180,7 @@ export class OrganizationUserEffects {
             fromUserUuid,
             toUserUuid,
             organizationUuid,
-            aPIPostSingleUsersInternalV2CopyRolesRequest: request,
+            aPIMutateUserRightsRequestDTO: request,
           })
           .pipe(
             map(() => OrganizationUserActions.copyRolesSuccess()),
@@ -200,7 +200,7 @@ export class OrganizationUserEffects {
             fromUserUuid,
             toUserUuid,
             organizationUuid,
-            aPIPostSingleUsersInternalV2CopyRolesRequest: request,
+            aPIMutateUserRightsRequestDTO: request,
           })
           .pipe(
             map(() => OrganizationUserActions.transferRolesSuccess()),

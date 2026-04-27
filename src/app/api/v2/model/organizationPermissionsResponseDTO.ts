@@ -12,9 +12,9 @@
 
 
 export interface APIOrganizationPermissionsResponseDTO { 
-    modifyCvr?: boolean;
     read?: boolean;
     modify?: boolean;
     delete?: boolean;
+    modifyCvr?: boolean;
 }
 

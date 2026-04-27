@@ -15,7 +15,7 @@ import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
 export interface APIDataProcessorRegistrationSubDataProcessorWriteRequestDTO { 
     dataProcessorOrganizationUuid: string;
     basisForTransferUuid?: string | null;
-    transferToInsecureThirdCountry?: APIYesNoUndecidedChoice | null;
+    transferToInsecureThirdCountry?: APIYesNoUndecidedChoice;
     insecureThirdCountrySubjectToDataProcessingUuid?: string | null;
 }
 

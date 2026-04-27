@@ -19,7 +19,7 @@ export interface APIItSystemUsageValidityResponseDTO {
     validAccordingToLifeCycle?: boolean;
     validAccordingToMainContract?: boolean;
     mainContractState?: APIMainContractStateChoice;
-    lifeCycleStatus?: APILifeCycleStatusChoice | null;
+    lifeCycleStatus?: APILifeCycleStatusChoice;
     validFrom?: string | null;
     validTo?: string | null;
 }

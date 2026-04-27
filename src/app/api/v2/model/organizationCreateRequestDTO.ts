@@ -13,10 +13,10 @@ import { APIOrganizationType } from './organizationType';
 
 
 export interface APIOrganizationCreateRequestDTO { 
-    name: string;
-    type: APIOrganizationType;
     cvr?: string | null;
     foreignCountryCodeUuid?: string | null;
     isSupplier?: boolean;
+    name: string;
+    type: APIOrganizationType;
 }
 

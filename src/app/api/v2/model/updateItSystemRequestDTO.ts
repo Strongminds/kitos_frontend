@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APICreateItSystemRequestDTORecommendedArchiveDuty } from './createItSystemRequestDTORecommendedArchiveDuty';
+import { APIRecommendedArchiveDutyRequestDTO } from './recommendedArchiveDutyRequestDTO';
 import { APIRegistrationScopeChoice } from './registrationScopeChoice';
 import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
 
@@ -24,7 +24,7 @@ export interface APIUpdateItSystemRequestDTO {
     businessTypeUuid?: string | null;
     kleUuids?: Array<string> | null;
     rightsHolderUuid?: string | null;
-    scope?: APIRegistrationScopeChoice | null;
-    recommendedArchiveDuty?: APICreateItSystemRequestDTORecommendedArchiveDuty | null;
+    scope?: APIRegistrationScopeChoice;
+    recommendedArchiveDuty?: APIRecommendedArchiveDutyRequestDTO;
 }
 

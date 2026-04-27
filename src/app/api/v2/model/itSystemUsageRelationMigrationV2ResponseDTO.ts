@@ -9,16 +9,16 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
-import { APIItSystemUsageMigrationV2ResponseDTOTargetUsage } from './itSystemUsageMigrationV2ResponseDTOTargetUsage';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIIdentityNamePairWithDeactivatedStatusDTO } from './identityNamePairWithDeactivatedStatusDTO';
 
 
 export interface APIItSystemUsageRelationMigrationV2ResponseDTO { 
-    toSystem?: APIItSystemUsageMigrationV2ResponseDTOTargetUsage | null;
-    fromSystem?: APIItSystemUsageMigrationV2ResponseDTOTargetUsage | null;
+    toSystem?: APIIdentityNamePairWithDeactivatedStatusDTO;
+    fromSystem?: APIIdentityNamePairWithDeactivatedStatusDTO;
     description?: string | null;
-    _interface?: APIArchivingRegistrationsResponseDTOType | null;
-    frequencyType?: APIArchivingRegistrationsResponseDTOType | null;
-    contract?: APIArchivingRegistrationsResponseDTOType | null;
+    _interface?: APIIdentityNamePairResponseDTO;
+    frequencyType?: APIIdentityNamePairResponseDTO;
+    contract?: APIIdentityNamePairResponseDTO;
 }
 

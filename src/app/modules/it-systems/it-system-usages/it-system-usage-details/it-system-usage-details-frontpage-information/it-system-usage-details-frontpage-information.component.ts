@@ -247,7 +247,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology ?? undefined),
-            isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical ?? undefined),
+            isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
           });
 
           this.webAccessibilityForm.patchValue({

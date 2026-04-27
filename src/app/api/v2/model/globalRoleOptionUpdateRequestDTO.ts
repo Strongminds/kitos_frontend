@@ -12,11 +12,11 @@
 
 
 export interface APIGlobalRoleOptionUpdateRequestDTO { 
-    writeAccess?: boolean;
     isEnabled?: boolean;
     name?: string | null;
     isObligatory?: boolean;
     description?: string | null;
     priority?: number;
+    writeAccess?: boolean;
 }
 

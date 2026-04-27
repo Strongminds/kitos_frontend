@@ -12,10 +12,10 @@
 
 
 export interface APIJournalPeriodUpdateRequestDTO { 
-    uuid?: string | null;
     archiveId: string;
     startDate: string;
     endDate: string;
     approved: boolean;
+    uuid?: string | null;
 }
 

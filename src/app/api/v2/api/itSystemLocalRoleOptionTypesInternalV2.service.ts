@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest } from '../model/aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest';
+import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
-import { APIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest } from '../model/aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest';
+import { APILocalRoleOptionUpdateRequestDTO } from '../model/aPILocalRoleOptionUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -45,12 +45,12 @@ export interface GetSingleItSystemLocalRoleOptionTypesInternalV2GetLocalItSystem
 export interface PatchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRoleRequestParams {
     organizationUuid: string;
     optionUuid: string;
-    aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest?: APIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest;
+    aPILocalRoleOptionUpdateRequestDTO?: APILocalRoleOptionUpdateRequestDTO;
 }
 
 export interface PostSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRoleRequestParams {
     organizationUuid: string;
-    aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest?: APIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest;
+    aPILocalOptionCreateRequestDTO?: APILocalOptionCreateRequestDTO;
 }
 
 
@@ -316,7 +316,7 @@ export class ItSystemLocalRoleOptionTypesInternalV2Service {
         if (optionUuid === null || optionUuid === undefined) {
             throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalRoleOptionTypesInternalV2PatchLocalItSystemRole.');
         }
-        const aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest = requestParameters.aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest;
+        const aPILocalRoleOptionUpdateRequestDTO = requestParameters.aPILocalRoleOptionUpdateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -363,7 +363,7 @@ export class ItSystemLocalRoleOptionTypesInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleDprLocalRoleOptionTypesInternalV2PatchLocalDprRoleRequest,
+                body: aPILocalRoleOptionUpdateRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -386,7 +386,7 @@ export class ItSystemLocalRoleOptionTypesInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalRoleOptionTypesInternalV2CreateLocalItSystemRole.');
         }
-        const aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest = requestParameters.aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest;
+        const aPILocalOptionCreateRequestDTO = requestParameters.aPILocalOptionCreateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -432,7 +432,7 @@ export class ItSystemLocalRoleOptionTypesInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleDprLocalBasisForTransferTypesInternalV2CreateLocalBasisForTransferTypeRequest,
+                body: aPILocalOptionCreateRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPostSingleTokenV2IntrospectRequest } from '../model/aPIPostSingleTokenV2IntrospectRequest';
+import { APITokenIntrospectionRequest } from '../model/aPITokenIntrospectionRequest';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -27,7 +27,7 @@ import { Configuration }                                     from '../configurat
 
 
 export interface PostSingleTokenV2IntrospectRequestParams {
-    aPIPostSingleTokenV2IntrospectRequest?: APIPostSingleTokenV2IntrospectRequest;
+    aPITokenIntrospectionRequest?: APITokenIntrospectionRequest;
 }
 
 
@@ -104,7 +104,7 @@ export class TokenV2Service {
     public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleTokenV2Introspect(requestParameters: PostSingleTokenV2IntrospectRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIPostSingleTokenV2IntrospectRequest = requestParameters.aPIPostSingleTokenV2IntrospectRequest;
+        const aPITokenIntrospectionRequest = requestParameters.aPITokenIntrospectionRequest;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -150,7 +150,7 @@ export class TokenV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleTokenV2IntrospectRequest,
+                body: aPITokenIntrospectionRequest,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

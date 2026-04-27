@@ -12,9 +12,9 @@
 
 
 export interface APIUserWithApiAccessResponseDTO { 
-    apiAccess?: boolean;
-    email: string;
     uuid: string;
     name: string;
+    email: string;
+    apiAccess?: boolean;
 }
 

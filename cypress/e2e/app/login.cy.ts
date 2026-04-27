@@ -50,7 +50,7 @@ describe('login', () => {
     cy.contains('Email');
     cy.contains('Password');
 
-    cy.intercept('/api/Authorize', (req) => {
+    cy.intercept('/api/authorize', (req) => {
       req.reply({
         delay: 1000,
         fixture: './shared/authorize.json',

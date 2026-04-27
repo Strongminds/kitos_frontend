@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIContractGeneralDataWriteRequestDTOValidity } from './contractGeneralDataWriteRequestDTOValidity';
+import { APIContractValidityWriteRequestDTO } from './contractValidityWriteRequestDTO';
 
 
 export interface APIContractGeneralDataWriteRequestDTO { 
@@ -18,7 +18,7 @@ export interface APIContractGeneralDataWriteRequestDTO {
     contractTemplateUuid?: string | null;
     agreementElementUuids?: Array<string> | null;
     notes?: string | null;
-    validity?: APIContractGeneralDataWriteRequestDTOValidity | null;
+    validity?: APIContractValidityWriteRequestDTO;
     criticalityUuid?: string | null;
 }
 
