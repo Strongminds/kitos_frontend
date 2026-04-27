@@ -4,7 +4,7 @@ import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
-import { APIOrganizationUserResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { APIOrganizationUserResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BOUNDED_PAGINATION_QUERY_MAX_SIZE } from '../../constants/constants';
 import { RoleAssignment } from '../../models/helpers/read-model-role-assignments';
@@ -36,8 +36,8 @@ export class RoleTableComponentStore extends ComponentStore<State> {
 
   constructor(
     private readonly store: Store,
-    @Inject(APIV2OrganizationService)
-    private readonly apiOrganizationService: APIV2OrganizationService,
+    @Inject(OrganizationV2Service)
+    private readonly apiOrganizationService: OrganizationV2Service,
     private readonly roleOptionTypeService: RoleOptionTypeService,
   ) {
     super({ rolesLoading: false, usersLoading: false });
@@ -79,10 +79,10 @@ export class RoleTableComponentStore extends ComponentStore<State> {
           this.updateRolesIsLoading(true);
           return this.roleOptionTypeService.getEntityRoles(params.entityUuid, params.entityType, orgUuid).pipe(
             tapResponse({
-    next: (roles) => this.updateRoles(roles),
-    error: (e) => console.error(e),
-    complete: () => this.updateRolesIsLoading(false)
-}),
+              next: (roles) => this.updateRoles(roles),
+              error: (e) => console.error(e),
+              complete: () => this.updateRolesIsLoading(false),
+            }),
           );
         }),
       ),
@@ -94,7 +94,7 @@ export class RoleTableComponentStore extends ComponentStore<State> {
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([search, organziationUuid]) =>
         this.apiOrganizationService
-          .getManyOrganizationV2GetOrganizationUsers({
+          .getSingleOrganizationV2GetOrganizationUsers({
             organizationUuid: organziationUuid,
             nameOrEmailQuery: search,
             pageSize: this.PAGE_SIZE,
@@ -102,10 +102,10 @@ export class RoleTableComponentStore extends ComponentStore<State> {
           })
           .pipe(
             tapResponse({
-    next: (users) => this.updateUsers(users),
-    error: (error) => console.error(error),
-    complete: () => this.updateUsersIsLoading(false)
-}),
+              next: (users) => this.updateUsers(users),
+              error: (error) => console.error(error),
+              complete: () => this.updateUsersIsLoading(false),
+            }),
           ),
       ),
     ),

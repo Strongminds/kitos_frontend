@@ -37,6 +37,7 @@ import { DropdownComponent } from '../../../../../../shared/components/dropdowns
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 
 @Component({
   selector: 'app-general-info-section',
@@ -52,8 +53,8 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     DropdownComponent,
     EditUrlSectionComponent,
     AsyncPipe,
-    TooltipComponent
-],
+    TooltipComponent,
+  ],
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
   @Input() disableLinkControl!: Observable<void>;
@@ -64,7 +65,13 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly businessCriticalOptions = yesNoDontKnowOptions;
   public readonly hostedAtOptions = hostedAtOptions;
   public readonly gdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
-  public readonly selectDirectoryDocumentation$ = this.gdpr$.pipe(map((gdpr) => gdpr.directoryDocumentation));
+  public readonly selectDirectoryDocumentation$ = this.gdpr$.pipe(
+    map((gdpr) =>
+      gdpr.directoryDocumentation
+        ? ({ url: gdpr.directoryDocumentation.url, name: gdpr.directoryDocumentation.name } as SimpleLink)
+        : undefined,
+    ),
+  );
   public readonly generalInformationForm = new FormGroup(
     {
       purpose: new FormControl(''),
@@ -72,7 +79,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
       hostedAt: new FormControl<HostedAt | undefined>(undefined),
       gdprCriticality: new FormControl<GdprCriticality | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
   public disableDirectoryDocumentationControl = false;
 
@@ -84,10 +91,13 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly gdprCriticalityOptions = gdprCriticalityOptions;
 
   public readonly gdprCriticalityModifyEnabled$ = this.store.select(
-    selectITSystemUsageFieldPermissions(itSystemUsageFields.gdpr.criticality)
+    selectITSystemUsageFieldPermissions(itSystemUsageFields.gdpr.criticality),
   );
 
-  constructor(private readonly store: Store, private readonly notificationService: NotificationService) {
+  constructor(
+    private readonly store: Store,
+    private readonly notificationService: NotificationService,
+  ) {
     super();
   }
 
@@ -97,10 +107,10 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
         this.generalInformationForm.patchValue({
           purpose: gdpr.purpose,
           businessCritical: mapToYesNoDontKnowEnum(gdpr.businessCritical),
-          hostedAt: mapHostedAt(gdpr.hostedAt),
-          gdprCriticality: mapGdprCriticality(gdpr.gdprCriticality),
+          hostedAt: mapHostedAt(gdpr.hostedAt ?? undefined),
+          gdprCriticality: mapGdprCriticality(gdpr.gdprCriticality ?? undefined),
         });
-      })
+      }),
     );
 
     this.noPermissions.emit([this.generalInformationForm]);
@@ -116,7 +126,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
         } else {
           control.disable();
         }
-      })
+      }),
     );
   }
 

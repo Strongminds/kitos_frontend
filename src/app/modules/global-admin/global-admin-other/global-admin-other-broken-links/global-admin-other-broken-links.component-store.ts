@@ -5,7 +5,7 @@ import { saveAs } from '@progress/kendo-file-saver';
 import { mergeMap, tap } from 'rxjs';
 import {
   APIBrokenExternalReferencesReportStatusResponseDTO,
-  APIV2BrokenExternalReferencesReportInternalINTERNALService,
+  BrokenExternalReferencesReportInternalV2Service,
 } from 'src/app/api/v2';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
@@ -20,8 +20,8 @@ export class GlobalAdminOtherBrokenLinksComponentStore extends ComponentStore<St
   public readonly status$ = this.select((state) => state.status);
 
   constructor(
-    @Inject(APIV2BrokenExternalReferencesReportInternalINTERNALService)
-    private statusService: APIV2BrokenExternalReferencesReportInternalINTERNALService,
+    @Inject(BrokenExternalReferencesReportInternalV2Service)
+    private statusService: BrokenExternalReferencesReportInternalV2Service,
     private notificationService: NotificationService,
   ) {
     super({ isLoading: false });
@@ -41,10 +41,10 @@ export class GlobalAdminOtherBrokenLinksComponentStore extends ComponentStore<St
       mergeMap(() => {
         return this.statusService.getSingleBrokenExternalReferencesReportInternalV2GetStatus().pipe(
           tapResponse({
-    next: (status) => this.setStatus(status as APIBrokenExternalReferencesReportStatusResponseDTO),
-    error: (e) => console.error(e),
-    complete: () => this.setLoading(false)
-}),
+            next: (status) => this.setStatus(status as APIBrokenExternalReferencesReportStatusResponseDTO),
+            error: (e) => console.error(e),
+            complete: () => this.setLoading(false),
+          }),
         );
       }),
     ),
@@ -62,19 +62,19 @@ export class GlobalAdminOtherBrokenLinksComponentStore extends ComponentStore<St
           })
           .pipe(
             tapResponse({
-    next: (response) => {
-        const contentDisposition = response.headers.get('Content-Disposition');
-        const fileName = contentDisposition
-            ? this.getFileNameFromContentDisposition(contentDisposition)
-            : 'report.csv';
-        saveAs(response.body, fileName);
-    },
-    error: (e) => {
-        console.error(e);
-        this.notificationService.showError($localize `Kunne ikke hente rapporten`);
-    },
-    complete: () => this.setLoading(false)
-}),
+              next: (response) => {
+                const contentDisposition = response.headers.get('Content-Disposition');
+                const fileName = contentDisposition
+                  ? this.getFileNameFromContentDisposition(contentDisposition)
+                  : 'report.csv';
+                saveAs(response.body, fileName);
+              },
+              error: (e) => {
+                console.error(e);
+                this.notificationService.showError($localize`Kunne ikke hente rapporten`);
+              },
+              complete: () => this.setLoading(false),
+            }),
           );
       }),
     ),

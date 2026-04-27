@@ -1,5 +1,6 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
@@ -9,9 +10,9 @@ import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import { createIdentityPairNode, TreeNodeModel } from 'src/app/shared/models/tree-node.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
+  mapToYesNoIrrelevantEnum,
   YesNoIrrelevantEnum,
   YesNoIrrelevantOptions,
-  mapToYesNoIrrelevantEnum,
   yesNoIrrelevantOptions,
 } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { YesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
@@ -36,20 +37,19 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
-import { AsyncPipe } from '@angular/common';
-import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
-import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
-import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
-import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { CardComponent } from '../../../../shared/components/card/card.component';
 import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
 import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { ThirdCountriesTableComponent } from './third-countries-table/third-countries-table.component';
+import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
+import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
+import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { ProcessorsTableComponent } from './processors-table/processors-table.component';
 import { SubProcessorsTableComponent } from './sub-processors-table/sub-processors-table.component';
+import { ThirdCountriesTableComponent } from './third-countries-table/third-countries-table.component';
 
 @Component({
   selector: 'app-data-processing-frontpage',
@@ -71,8 +71,8 @@ import { SubProcessorsTableComponent } from './sub-processors-table/sub-processo
     ThirdCountriesTableComponent,
     ProcessorsTableComponent,
     SubProcessorsTableComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class DataProcessingFrontpageComponent extends BaseComponent implements OnInit {
   public readonly basisForTransferTypes$ = this.store.select(
@@ -144,7 +144,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
       this.dataProcessing$
         .pipe(filterNullish(), combineLatestWith(this.store.select(selectDataProcessingHasModifyPermissions)))
         .subscribe(([dpr, hasModifyPermission]) => {
-          const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded);
+          const agreementConcludedValue = mapToYesNoIrrelevantEnum(dpr.general.isAgreementConcluded ?? undefined);
           const responsibleOrgUnit = dpr.general.responsibleOrganizationUnit;
           this.frontpageFormGroup.patchValue({
             name: dpr.name,
@@ -154,7 +154,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             dataResponsible: dpr.general.dataResponsible,
             dataResponsibleRemarks: dpr.general.dataResponsibleRemark,
             agreementConcluded: agreementConcludedValue,
-            agreementConclusionDate: optionalNewDate(dpr.general.agreementConcludedAt),
+            agreementConclusionDate: optionalNewDate(dpr.general.agreementConcludedAt ?? undefined),
             agreementRemarks: dpr.general.isAgreementConcludedRemark,
             responsibleOrgUnit: responsibleOrgUnit
               ? createIdentityPairNode(responsibleOrgUnit.name, responsibleOrgUnit.uuid)

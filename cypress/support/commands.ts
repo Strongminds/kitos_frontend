@@ -9,13 +9,16 @@ Cypress.Commands.add(
     cy.intercept('/api/v2/**/permissions?organizationUuid*', { fixture: 'shared/create-permissions.json' });
 
     if (authenticate) {
-      cy.intercept('/api/Authorize', { fixture: './shared/authorize.json' }).as('authorize');
+      cy.intercept('/api/authorize', { fixture: './shared/authorize.json' }).as('authorize');
     } else {
-      cy.intercept('/api/Authorize', { statusCode: 401, fixture: './shared/authorize-401.json' }).as('authorize');
+      cy.intercept('/api/authorize', { statusCode: 401, fixture: './shared/authorize-401.json' }).as('authorize');
     }
 
     cy.intercept('/api/v2/internal/public-messages', { fixture: './shared/public-messages.json' });
     cy.intercept('/api/v2/organizations*', { fixture: './organizations/organizations.json' }).as('organizations');
+    cy.intercept('/api/v2/organizations/*/organization-units*', {
+      fixture: './organizations/organization-units-hierarchy.json',
+    });
 
     cy.intercept('api/v2/internal/organizations/*/ui-customization/ItSystemUsages', {
       fixture: uiCustomizationFixturePath ?? './shared/it-system-usage-ui-customization.json',
@@ -46,7 +49,7 @@ Cypress.Commands.add(
     } else {
       cy.wait('@authorize');
     }
-  }
+  },
 );
 
 Cypress.Commands.add('verifyDialogConfirmButtonDisabledByReactiveForm', (dataCySelector: string) => {
@@ -56,7 +59,7 @@ Cypress.Commands.add('verifyDialogConfirmButtonDisabledByReactiveForm', (dataCyS
 
 Cypress.Commands.add('login', (authorizeFixturePath = './shared/authorize.json') => {
   cy.intercept('/api/authorize/antiforgery', '"ABC"');
-  cy.intercept('/api/Authorize', { fixture: authorizeFixturePath }).as('authorize');
+  cy.intercept('/api/authorize', { fixture: authorizeFixturePath }).as('authorize');
 
   cy.contains('Email').parent().find('input').type('test@test.com');
   cy.contains('Password').parent().find('input').type('123456');
@@ -174,7 +177,7 @@ Cypress.Commands.add(
     requestAlias: string,
     propertyPath: string,
     verifyMethod: (actual: any, expectedObject: any) => boolean,
-    expectedObject: any
+    expectedObject: any,
   ) => {
     return cy
       .wait(`@${requestAlias}`)
@@ -182,7 +185,7 @@ Cypress.Commands.add(
       .then((actual) => {
         expect(verifyMethod(actual, expectedObject)).to.be.true;
       });
-  }
+  },
 );
 
 Cypress.Commands.add('verifyRequestUsingDeepEq', (requestAlias: string, propertyPath: string, expectedObject: any) => {
@@ -222,7 +225,7 @@ Cypress.Commands.add(
       })
       .get('app-popup-message')
       .should('exist');
-  }
+  },
 );
 
 Cypress.Commands.add('getByDataCy', (dataCy: string) => {
@@ -280,7 +283,7 @@ Cypress.Commands.add(
     isEdit: boolean,
     requestUrl: string,
     responseBodyPath: string,
-    rowTitle?: string
+    rowTitle?: string,
   ) => {
     cy.interceptPatch(requestUrl, responseBodyPath, 'patchRequest');
 
@@ -329,7 +332,7 @@ Cypress.Commands.add(
         documentId: 'Document id',
         url: 'url',
         masterReference: true,
-      }
+      },
     );
 
     cy.getRowForElementContent(newReference.title)
@@ -337,10 +340,10 @@ Cypress.Commands.add(
       .within(() => {
         cy.contains(newReference.documentId);
         cy.get(newReference.masterReference ? 'app-check-positive-green-icon' : 'app-check-negative-gray-icon').should(
-          'exist'
+          'exist',
         );
       });
-  }
+  },
 );
 
 Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
@@ -350,10 +353,10 @@ Cypress.Commands.add('setTinyMceContent', (dataCySelector, content) => {
     cy.get('@editorTextarea').then((element) => {
       const editorId = element.attr('id');
       const editorInstance = (win as any).tinymce.EditorManager.get().filter(
-        (editor: { id: string | undefined }) => editor.id === editorId
+        (editor: { id: string | undefined }) => editor.id === editorId,
       )[0];
       editorInstance.setContent(content);
-    })
+    }),
   );
   cy.getByDataCy(dataCySelector).click({ force: true });
 });

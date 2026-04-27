@@ -1,8 +1,8 @@
-import { APIDataProcessingRegistrationReadModel } from 'src/app/api/v1';
+import { APIOversightIntervalChoice } from 'src/app/api/v2';
 
 export interface YearMonthInterval {
   name: string;
-  value: APIDataProcessingRegistrationReadModel.OversightIntervalEnum;
+  value: APIOversightIntervalChoice | string;
 }
 
 export enum YearMonthIntervalEnum {
@@ -20,8 +20,6 @@ export const yearMonthIntervalOptions: YearMonthInterval[] = [
   { name: $localize`Andet`, value: YearMonthIntervalEnum.Other },
 ];
 
-export const mapToYearMonthInterval = (
-  value?: APIDataProcessingRegistrationReadModel.OversightIntervalEnum,
-): YearMonthInterval | undefined => {
+export const mapToYearMonthInterval = (value?: APIOversightIntervalChoice): YearMonthInterval | undefined => {
   return yearMonthIntervalOptions.find((option) => option.value === value);
 };

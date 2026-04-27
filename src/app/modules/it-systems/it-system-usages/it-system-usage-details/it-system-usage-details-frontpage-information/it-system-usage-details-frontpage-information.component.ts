@@ -243,16 +243,16 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,
-            numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers),
+            numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers ?? undefined),
             dataClassification: general.dataClassification,
             notes: general.notes,
-            aiTechnology: mapToYesNoEnum(general.containsAITechnology),
+            aiTechnology: mapToYesNoEnum(general.containsAITechnology ?? undefined),
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
           });
 
           this.webAccessibilityForm.patchValue({
-            webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance),
-            lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck),
+            webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance ?? undefined),
+            lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck ?? undefined),
             webAccessibilityNotes: general.webAccessibilityNotes,
           });
         }),
@@ -268,9 +268,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             createdBy: itSystemUsage.createdBy.name,
             lastModifiedBy: itSystemUsage.lastModifiedBy.name,
             lastModified: new Date(itSystemUsage.lastModified),
-            lifeCycleStatus: mapLifeCycleStatus(itSystemUsage.general.validity.lifeCycleStatus),
-            validFrom: optionalNewDate(itSystemUsage.general.validity.validFrom),
-            validTo: optionalNewDate(itSystemUsage.general.validity.validTo),
+            lifeCycleStatus: mapLifeCycleStatus(itSystemUsage.general.validity.lifeCycleStatus ?? undefined),
+            validFrom: optionalNewDate(itSystemUsage.general.validity.validFrom ?? undefined),
+            validTo: optionalNewDate(itSystemUsage.general.validity.validTo ?? undefined),
             valid: itSystemUsage.general.validity.valid
               ? $localize`Systemet er aktivt`
               : $localize`Systemet er ikke aktivt`,

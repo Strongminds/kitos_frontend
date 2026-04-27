@@ -31,7 +31,7 @@
               [disabled]="!permissions.canBeRenamed"
             ></app-textbox>
             <app-numeric-input
-              [value]="unit.ean"
+              [value]="unit.ean ?? undefined"
               text="EAN nummer"
               i18n-text
               [formGroup]="baseInfoForm"
@@ -40,7 +40,7 @@
               [disabled]="!permissions.canEanBeModified"
             ></app-numeric-input>
             <app-textbox
-              [value]="unit.unitId"
+              [value]="unit.unitId ?? undefined"
               text="Enhedens ID"
               i18n-text
               [formGroup]="baseInfoForm"

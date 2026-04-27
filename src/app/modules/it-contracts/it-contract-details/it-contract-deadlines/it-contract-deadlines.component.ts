@@ -1,5 +1,6 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { isNumber } from 'lodash';
 import { combineLatestWith, map } from 'rxjs';
@@ -28,14 +29,13 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
-import { AsyncPipe } from '@angular/common';
-import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
+import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
+import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
+import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
 import { NumericInputComponent as NumericInputComponent_1 } from '../../../../shared/components/numeric-input/numeric-input.component';
-import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
-import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
-import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
 
 @Component({
   selector: 'app-it-contract-deadlines',
@@ -51,8 +51,8 @@ import { DatePickerComponent } from '../../../../shared/components/datepicker/da
     CheckboxComponent,
     DropdownComponent,
     DatePickerComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ItContractDeadlinesComponent extends BaseComponent implements OnInit {
   private readonly deadlineDurationYearsUpperLimit = 100;
@@ -116,13 +116,13 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
           isContinous: isContinous,
           extensionOptions: contract.agreementPeriod?.extensionOptions,
           extensionOptionUsed: contract.agreementPeriod?.extensionOptionsUsed,
-          irrevocableUntil: optionalNewDate(contract.agreementPeriod?.irrevocableUntil),
+          irrevocableUntil: optionalNewDate(contract.agreementPeriod?.irrevocableUntil ?? undefined),
         });
         this.terminationsFormGroup.patchValue({
-          terminatedAt: optionalNewDate(contract.termination?.terminatedAt),
+          terminatedAt: optionalNewDate(contract.termination?.terminatedAt ?? undefined),
           noticePeriodMonths: contract.termination?.terms?.noticePeriodMonths,
-          noticePeriodExtendsCurrent: mapYearSegmentChoice(contract.termination?.terms?.noticePeriodExtendsCurrent),
-          noticeByEndOf: mapYearSegmentChoice(contract.termination?.terms?.noticeByEndOf),
+          noticePeriodExtendsCurrent: mapYearSegmentChoice(contract.termination?.terms?.noticePeriodExtendsCurrent ?? undefined),
+          noticeByEndOf: mapYearSegmentChoice(contract.termination?.terms?.noticeByEndOf ?? undefined),
         });
         if (hasModifyPermission) {
           this.deadlinesFormGroup.enable();
