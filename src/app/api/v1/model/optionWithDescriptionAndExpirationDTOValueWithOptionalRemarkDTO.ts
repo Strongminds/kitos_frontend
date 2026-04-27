@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTOValue } from './optionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTOValue';
+import { APIOptionWithDescriptionAndExpirationDTO } from './optionWithDescriptionAndExpirationDTO';
 
 
 export interface APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTO { 
-    value?: APIOptionWithDescriptionAndExpirationDTOValueWithOptionalRemarkDTOValue | null;
+    value?: APIOptionWithDescriptionAndExpirationDTO;
     remark?: string | null;
 }
 

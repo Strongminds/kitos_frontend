@@ -9,7 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIOrganizationRoleChoice } from './organizationRoleChoice';
 import { APIDefaultUserStartPreferenceChoice } from './defaultUserStartPreferenceChoice';
 
@@ -20,23 +20,11 @@ export interface APIUserResponseDTO {
     firstName?: string | null;
     lastName?: string | null;
     phoneNumber?: string | null;
-    defaultUserStartPreference?: APIUserResponseDTO.DefaultUserStartPreferenceEnum;
+    defaultUserStartPreference?: APIDefaultUserStartPreferenceChoice;
     hasApiAccess?: boolean | null;
     hasStakeHolderAccess?: boolean;
     roles?: Array<APIOrganizationRoleChoice> | null;
-    defaultOrganizationUnit?: APIArchivingRegistrationsResponseDTOType | null;
+    defaultOrganizationUnit?: APIIdentityNamePairResponseDTO;
     lastSentAdvis?: string | null;
 }
-export namespace APIUserResponseDTO {
-    export type DefaultUserStartPreferenceEnum = 'StartSite' | 'Organization' | 'ItSystemUsage' | 'ItSystemCatalog' | 'ItContract' | 'DataProcessing';
-    export const DefaultUserStartPreferenceEnum = {
-        StartSite: 'StartSite' as DefaultUserStartPreferenceEnum,
-        Organization: 'Organization' as DefaultUserStartPreferenceEnum,
-        ItSystemUsage: 'ItSystemUsage' as DefaultUserStartPreferenceEnum,
-        ItSystemCatalog: 'ItSystemCatalog' as DefaultUserStartPreferenceEnum,
-        ItContract: 'ItContract' as DefaultUserStartPreferenceEnum,
-        DataProcessing: 'DataProcessing' as DefaultUserStartPreferenceEnum
-    };
-}
-
 

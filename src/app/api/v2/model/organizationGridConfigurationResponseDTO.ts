@@ -15,16 +15,7 @@ import { APIOverviewType } from './overviewType';
 
 export interface APIOrganizationGridConfigurationResponseDTO { 
     organizationUuid?: string;
-    overviewType?: APIOrganizationGridConfigurationResponseDTO.OverviewTypeEnum;
+    overviewType?: APIOverviewType;
     visibleColumns?: Array<APIColumnConfigurationResponseDTO> | null;
 }
-export namespace APIOrganizationGridConfigurationResponseDTO {
-    export type OverviewTypeEnum = 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
-    export const OverviewTypeEnum = {
-        ItSystemUsage: 'ItSystemUsage' as OverviewTypeEnum,
-        ItContract: 'ItContract' as OverviewTypeEnum,
-        DataProcessingRegistration: 'DataProcessingRegistration' as OverviewTypeEnum
-    };
-}
-
 

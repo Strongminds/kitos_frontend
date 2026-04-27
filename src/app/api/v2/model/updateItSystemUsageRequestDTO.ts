@@ -9,22 +9,22 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APICreateItSystemUsageRequestDTOOrganizationUsage } from './createItSystemUsageRequestDTOOrganizationUsage';
-import { APICreateItSystemUsageRequestDTOLocalKleDeviations } from './createItSystemUsageRequestDTOLocalKleDeviations';
-import { APICreateItSystemUsageRequestDTOGdpr } from './createItSystemUsageRequestDTOGdpr';
+import { APILocalKLEDeviationsRequestDTO } from './localKLEDeviationsRequestDTO';
+import { APIArchivingUpdateRequestDTO } from './archivingUpdateRequestDTO';
+import { APIGeneralDataUpdateRequestDTO } from './generalDataUpdateRequestDTO';
+import { APIOrganizationUsageWriteRequestDTO } from './organizationUsageWriteRequestDTO';
 import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
-import { APIUpdateItSystemUsageRequestDTOArchiving } from './updateItSystemUsageRequestDTOArchiving';
-import { APIUpdateItSystemUsageRequestDTOGeneral } from './updateItSystemUsageRequestDTOGeneral';
+import { APIGDPRWriteRequestDTO } from './gDPRWriteRequestDTO';
 
 
 export interface APIUpdateItSystemUsageRequestDTO { 
-    general?: APIUpdateItSystemUsageRequestDTOGeneral | null;
-    externalReferences?: Array<APIUpdateExternalReferenceDataWriteRequestDTO> | null;
-    archiving?: APIUpdateItSystemUsageRequestDTOArchiving | null;
     roles?: Array<APIRoleAssignmentRequestDTO> | null;
-    organizationUsage?: APICreateItSystemUsageRequestDTOOrganizationUsage | null;
-    localKleDeviations?: APICreateItSystemUsageRequestDTOLocalKleDeviations | null;
-    gdpr?: APICreateItSystemUsageRequestDTOGdpr | null;
+    organizationUsage?: APIOrganizationUsageWriteRequestDTO;
+    localKleDeviations?: APILocalKLEDeviationsRequestDTO;
+    gdpr?: APIGDPRWriteRequestDTO;
+    general?: APIGeneralDataUpdateRequestDTO;
+    externalReferences?: Array<APIUpdateExternalReferenceDataWriteRequestDTO> | null;
+    archiving?: APIArchivingUpdateRequestDTO;
 }
 

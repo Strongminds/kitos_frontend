@@ -33,7 +33,7 @@ export interface DeleteSingleAlertsV2DeleteAlertRequestParams {
 export interface GetSingleAlertsV2GetByOrganizationAndUserRequestParams {
     organizationUuid: string;
     userUuid: string;
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
 }
 
 
@@ -211,7 +211,7 @@ export class AlertsV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/alerts/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/user/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}`;
+        let localVarPath = `/api/v2/internal/alerts/organization/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/user/${this.configuration.encodeParam({name: "userUuid", value: userUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,

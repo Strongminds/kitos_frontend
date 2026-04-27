@@ -84,7 +84,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
             .postSingleNotificationV2CreateImmediateNotification({
               ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
-              aPIPostSingleNotificationV2CreateImmediateNotificationRequest: params.requestBody,
+              aPIImmediateNotificationWriteRequestDTO: params.requestBody,
             })
             .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
@@ -108,7 +108,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
             .postSingleNotificationV2CreateScheduledNotification({
               ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
-              aPIPostSingleNotificationV2CreateScheduledNotificationRequest: params.requestBody,
+              aPIScheduledNotificationWriteRequestDTO: params.requestBody,
             })
             .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));
@@ -134,7 +134,7 @@ export class NotificationsTableComponentStore extends ComponentStore<State> {
               ownerResourceType: params.ownerResourceType,
               ownerResourceUuid: params.ownerResourceUuid,
               notificationUuid: params.notificationUuid,
-              aPIPutSingleNotificationV2UpdateScheduledNotificationRequest: params.requestBody,
+              aPIUpdateScheduledNotificationWriteRequestDTO: params.requestBody,
             })
             .pipe(tap(() => this.setIsSaving(false)))
             .pipe(tap(() => params.onComplete()));

@@ -83,7 +83,7 @@ export class UIModuleCustomizationEffects {
                 .putSingleOrganizationsInternalV2PutUIModuleCustomization({
                   organizationUuid,
                   moduleName,
-                  aPIPutSingleOrganizationsInternalV2PutUIModuleCustomizationRequest: requestDto,
+                  aPIUIModuleCustomizationRequestDTO: requestDto,
                 })
                 .pipe(
                   map((uiModuleCustomizationDto) =>

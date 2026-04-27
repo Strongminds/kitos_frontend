@@ -18,18 +18,9 @@ export interface APIItSystemUsageValidityResponseDTO {
     validAccordingToValidityPeriod?: boolean;
     validAccordingToLifeCycle?: boolean;
     validAccordingToMainContract?: boolean;
-    mainContractState?: APIItSystemUsageValidityResponseDTO.MainContractStateEnum;
-    lifeCycleStatus?: APILifeCycleStatusChoice | null;
+    mainContractState?: APIMainContractStateChoice;
+    lifeCycleStatus?: APILifeCycleStatusChoice;
     validFrom?: string | null;
     validTo?: string | null;
 }
-export namespace APIItSystemUsageValidityResponseDTO {
-    export type MainContractStateEnum = 'NoContract' | 'Active' | 'Inactive';
-    export const MainContractStateEnum = {
-        NoContract: 'NoContract' as MainContractStateEnum,
-        Active: 'Active' as MainContractStateEnum,
-        Inactive: 'Inactive' as MainContractStateEnum
-    };
-}
-
 

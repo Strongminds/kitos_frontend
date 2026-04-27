@@ -14,27 +14,15 @@ import { APIDefaultUserStartPreferenceChoice } from './defaultUserStartPreferenc
 
 
 export interface APIUpdateUserRequestDTO { 
-    defaultOrganizationUnitUuid?: string;
     email?: string | null;
     firstName?: string | null;
     lastName?: string | null;
     phoneNumber?: string | null;
-    defaultUserStartPreference?: APIUpdateUserRequestDTO.DefaultUserStartPreferenceEnum;
+    defaultUserStartPreference?: APIDefaultUserStartPreferenceChoice;
     hasApiAccess?: boolean;
     hasStakeHolderAccess?: boolean;
     roles?: Array<APIOrganizationRoleChoice> | null;
     sendMail?: boolean;
+    defaultOrganizationUnitUuid?: string;
 }
-export namespace APIUpdateUserRequestDTO {
-    export type DefaultUserStartPreferenceEnum = 'StartSite' | 'Organization' | 'ItSystemUsage' | 'ItSystemCatalog' | 'ItContract' | 'DataProcessing';
-    export const DefaultUserStartPreferenceEnum = {
-        StartSite: 'StartSite' as DefaultUserStartPreferenceEnum,
-        Organization: 'Organization' as DefaultUserStartPreferenceEnum,
-        ItSystemUsage: 'ItSystemUsage' as DefaultUserStartPreferenceEnum,
-        ItSystemCatalog: 'ItSystemCatalog' as DefaultUserStartPreferenceEnum,
-        ItContract: 'ItContract' as DefaultUserStartPreferenceEnum,
-        DataProcessing: 'DataProcessing' as DefaultUserStartPreferenceEnum
-    };
-}
-
 

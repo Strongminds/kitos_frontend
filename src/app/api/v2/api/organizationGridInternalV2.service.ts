@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIOverviewType } from '../model/aPIOverviewType';
+import { APIOrganizationGridConfigurationRequestDTO } from '../model/aPIOrganizationGridConfigurationRequestDTO';
 // @ts-ignore
-import { APIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest } from '../model/aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest';
+import { APIOverviewTypeOptions } from '../model/aPIOverviewTypeOptions';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -30,12 +30,12 @@ import { Configuration }                                     from '../configurat
 
 export interface DeleteSingleOrganizationGridInternalV2DeleteGridConfigurationRequestParams {
     organizationUuid: string;
-    overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
+    overviewType: APIOverviewTypeOptions;
 }
 
 export interface GetSingleOrganizationGridInternalV2GetGridConfigurationRequestParams {
     organizationUuid: string;
-    overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
+    overviewType: APIOverviewTypeOptions;
 }
 
 export interface GetSingleOrganizationGridInternalV2GetOrganizationGridPermissionsRequestParams {
@@ -44,8 +44,8 @@ export interface GetSingleOrganizationGridInternalV2GetOrganizationGridPermissio
 
 export interface PostSingleOrganizationGridInternalV2SaveGridConfigurationRequestParams {
     organizationUuid: string;
-    overviewType: 'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration';
-    aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest?: APIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest;
+    overviewType: APIOverviewTypeOptions;
+    aPIOrganizationGridConfigurationRequestDTO?: APIOrganizationGridConfigurationRequestDTO;
 }
 
 
@@ -161,7 +161,7 @@ export class OrganizationGridInternalV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration'", dataFormat: undefined})}/delete`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewTypeOptions", dataFormat: undefined})}/delete`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -223,7 +223,7 @@ export class OrganizationGridInternalV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration'", dataFormat: undefined})}/get`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewTypeOptions", dataFormat: undefined})}/get`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -311,7 +311,7 @@ export class OrganizationGridInternalV2Service {
         if (overviewType === null || overviewType === undefined) {
             throw new Error('Required parameter overviewType was null or undefined when calling postSingleOrganizationGridInternalV2SaveGridConfiguration.');
         }
-        const aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest = requestParameters.aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest;
+        const aPIOrganizationGridConfigurationRequestDTO = requestParameters.aPIOrganizationGridConfigurationRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -353,11 +353,11 @@ export class OrganizationGridInternalV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "'ItSystemUsage' | 'ItContract' | 'DataProcessingRegistration'", dataFormat: undefined})}/save`;
+        let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/grid/${this.configuration.encodeParam({name: "overviewType", value: overviewType, in: "path", style: "simple", explode: false, dataType: "APIOverviewTypeOptions", dataFormat: undefined})}/save`;
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest,
+                body: aPIOrganizationGridConfigurationRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

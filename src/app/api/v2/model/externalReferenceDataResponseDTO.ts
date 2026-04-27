@@ -12,10 +12,10 @@
 
 
 export interface APIExternalReferenceDataResponseDTO { 
-    uuid?: string;
     title: string;
     documentId?: string | null;
     url?: string | null;
     masterReference: boolean;
+    uuid?: string;
 }
 

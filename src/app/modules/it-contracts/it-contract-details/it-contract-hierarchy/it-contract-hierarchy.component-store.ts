@@ -91,7 +91,7 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
         switchMap((request) =>
           this.apiItContractInternalService
             .patchSingleItContractInternalV2TransferItContractRange({
-              aPIPatchSingleItContractInternalV2TransferItContractRangeRequest: {
+              aPIMultipleContractsRequestDto: {
                 contractUuids: request.uuids,
                 parentUuid: request.parentUuid,
               },

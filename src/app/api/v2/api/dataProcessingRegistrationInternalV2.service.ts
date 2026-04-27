@@ -21,7 +21,7 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
-import { APIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest } from '../model/aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest';
+import { APIRoleAssignmentRequestDTO } from '../model/aPIRoleAssignmentRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -60,12 +60,12 @@ export interface GetSingleDataProcessingRegistrationInternalV2GetItSystemsReques
 
 export interface PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequestParams {
     dprUuid: string;
-    aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest?: APIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
+    aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
 }
 
 export interface PatchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignmentRequestParams {
     dprUuid: string;
-    aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest?: APIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
+    aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
 }
 
 
@@ -499,7 +499,7 @@ export class DataProcessingRegistrationInternalV2Service {
         if (dprUuid === null || dprUuid === undefined) {
             throw new Error('Required parameter dprUuid was null or undefined when calling patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment.');
         }
-        const aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest = requestParameters.aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
+        const aPIRoleAssignmentRequestDTO = requestParameters.aPIRoleAssignmentRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -546,7 +546,7 @@ export class DataProcessingRegistrationInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest,
+                body: aPIRoleAssignmentRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -569,7 +569,7 @@ export class DataProcessingRegistrationInternalV2Service {
         if (dprUuid === null || dprUuid === undefined) {
             throw new Error('Required parameter dprUuid was null or undefined when calling patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment.');
         }
-        const aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest = requestParameters.aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
+        const aPIRoleAssignmentRequestDTO = requestParameters.aPIRoleAssignmentRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -616,7 +616,7 @@ export class DataProcessingRegistrationInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest,
+                body: aPIRoleAssignmentRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

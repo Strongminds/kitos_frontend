@@ -13,9 +13,9 @@ import { APIItInterfaceDeletionConflict } from './itInterfaceDeletionConflict';
 
 
 export interface APIItInterfacePermissionsResponseDTO { 
-    deletionConflicts?: Array<APIItInterfaceDeletionConflict> | null;
     read?: boolean;
     modify?: boolean;
     delete?: boolean;
+    deletionConflicts?: Array<APIItInterfaceDeletionConflict> | null;
 }
 

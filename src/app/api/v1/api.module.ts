@@ -2,6 +2,16 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { Configuration } from './configuration';
 import { HttpClient } from '@angular/common/http';
 
+import { AuthorizeService } from './api/authorize.service';
+import { DataProcessingRegistrationService } from './api/dataProcessingRegistration.service';
+import { DataProcessingRegistrationReadModelsService } from './api/dataProcessingRegistrationReadModels.service';
+import { ExcelService } from './api/excel.service';
+import { HealthCheckService } from './api/healthCheck.service';
+import { ItContractOverviewReadModelsService } from './api/itContractOverviewReadModels.service';
+import { ItSystemUsageOptionsService } from './api/itSystemUsageOptions.service';
+import { ItSystemUsageOverviewReadModelsService } from './api/itSystemUsageOverviewReadModels.service';
+import { MetadataService } from './api/metadata.service';
+import { SSOService } from './api/sSO.service';
 import { TokenAuthenticationService } from './api/tokenAuthentication.service';
 
 @NgModule({

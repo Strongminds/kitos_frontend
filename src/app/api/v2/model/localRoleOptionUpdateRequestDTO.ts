@@ -12,8 +12,8 @@
 
 
 export interface APILocalRoleOptionUpdateRequestDTO { 
+    description?: string | null;
     isExternallyUsed?: boolean;
     externallyUsedDescription?: string | null;
-    description?: string | null;
 }
 

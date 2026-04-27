@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APINamedEntityV2DTO } from './namedEntityV2DTO';
 
 
 export interface APIPaymentRegistrationResponseDTO { 
-    itContract?: APIArchivingRegistrationsResponseDTOType | null;
+    itContract?: APIIdentityNamePairResponseDTO;
     itContractId?: number;
     internalPayments?: Array<APINamedEntityV2DTO> | null;
     externalPayments?: Array<APINamedEntityV2DTO> | null;

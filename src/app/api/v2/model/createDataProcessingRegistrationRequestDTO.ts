@@ -10,18 +10,18 @@
  * Do not edit the class manually.
  */
 import { APIExternalReferenceDataWriteRequestDTO } from './externalReferenceDataWriteRequestDTO';
-import { APICreateDataProcessingRegistrationRequestDTOGeneral } from './createDataProcessingRegistrationRequestDTOGeneral';
-import { APICreateDataProcessingRegistrationRequestDTOOversight } from './createDataProcessingRegistrationRequestDTOOversight';
+import { APIDataProcessingRegistrationGeneralDataWriteRequestDTO } from './dataProcessingRegistrationGeneralDataWriteRequestDTO';
 import { APIRoleAssignmentRequestDTO } from './roleAssignmentRequestDTO';
+import { APIDataProcessingRegistrationOversightWriteRequestDTO } from './dataProcessingRegistrationOversightWriteRequestDTO';
 
 
 export interface APICreateDataProcessingRegistrationRequestDTO { 
+    general?: APIDataProcessingRegistrationGeneralDataWriteRequestDTO;
+    systemUsageUuids?: Array<string> | null;
+    oversight?: APIDataProcessingRegistrationOversightWriteRequestDTO;
+    roles?: Array<APIRoleAssignmentRequestDTO> | null;
     organizationUuid: string;
     name: string | null;
     externalReferences?: Array<APIExternalReferenceDataWriteRequestDTO> | null;
-    general?: APICreateDataProcessingRegistrationRequestDTOGeneral | null;
-    systemUsageUuids?: Array<string> | null;
-    oversight?: APICreateDataProcessingRegistrationRequestDTOOversight | null;
-    roles?: Array<APIRoleAssignmentRequestDTO> | null;
 }
 

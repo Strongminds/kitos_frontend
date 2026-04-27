@@ -13,7 +13,7 @@ import { APIYesNoUndecidedOption } from './yesNoUndecidedOption';
 
 
 export interface APIYesNoUndecidedOptionNullableValueWithOptionalRemarkDTO { 
-    value?: APIYesNoUndecidedOption | null;
+    value?: APIYesNoUndecidedOption;
     remark?: string | null;
 }
 

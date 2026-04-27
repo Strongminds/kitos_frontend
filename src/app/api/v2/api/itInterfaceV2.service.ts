@@ -21,19 +21,19 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
-import { APIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest } from '../model/aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest';
+import { APICreateItInterfaceRequestDTO } from '../model/aPICreateItInterfaceRequestDTO';
 // @ts-ignore
-import { APIPatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequest } from '../model/aPIPatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequest';
+import { APIDeactivationReasonRequestDTO } from '../model/aPIDeactivationReasonRequestDTO';
 // @ts-ignore
-import { APIPatchSingleItInterfaceV2PatchRequest } from '../model/aPIPatchSingleItInterfaceV2PatchRequest';
+import { APIItInterfaceDataRequestDTO } from '../model/aPIItInterfaceDataRequestDTO';
 // @ts-ignore
-import { APIPostSingleItInterfaceV2PostDataDescriptionRequest } from '../model/aPIPostSingleItInterfaceV2PostDataDescriptionRequest';
+import { APIRightsHolderCreateItInterfaceRequestDTO } from '../model/aPIRightsHolderCreateItInterfaceRequestDTO';
 // @ts-ignore
-import { APIPostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequest } from '../model/aPIPostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequest';
+import { APIRightsHolderPartialUpdateItInterfaceRequestDTO } from '../model/aPIRightsHolderPartialUpdateItInterfaceRequestDTO';
 // @ts-ignore
-import { APIPostSingleItInterfaceV2PostRequest } from '../model/aPIPostSingleItInterfaceV2PostRequest';
+import { APIRightsHolderWritableItInterfacePropertiesDTO } from '../model/aPIRightsHolderWritableItInterfacePropertiesDTO';
 // @ts-ignore
-import { APIPutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequest } from '../model/aPIPutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequest';
+import { APIUpdateItInterfaceRequestDTO } from '../model/aPIUpdateItInterfaceRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -42,7 +42,7 @@ import { Configuration }                                     from '../configurat
 
 export interface DeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequestParams {
     uuid: string;
-    aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest?: APIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest;
+    aPIDeactivationReasonRequestDTO?: APIDeactivationReasonRequestDTO;
 }
 
 export interface DeleteSingleItInterfaceV2DeleteRequestParams {
@@ -96,36 +96,36 @@ export interface GetSingleItInterfaceV2GetItInterfacesAsRightsHolderRequestParam
 
 export interface PatchSingleItInterfaceV2PatchRequestParams {
     uuid: string;
-    aPIPatchSingleItInterfaceV2PatchRequest?: APIPatchSingleItInterfaceV2PatchRequest;
+    aPIUpdateItInterfaceRequestDTO?: APIUpdateItInterfaceRequestDTO;
 }
 
 export interface PatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequestParams {
     uuid: string;
-    aPIPatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequest?: APIPatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequest;
+    aPIRightsHolderPartialUpdateItInterfaceRequestDTO?: APIRightsHolderPartialUpdateItInterfaceRequestDTO;
 }
 
 export interface PostSingleItInterfaceV2PostRequestParams {
-    aPIPostSingleItInterfaceV2PostRequest?: APIPostSingleItInterfaceV2PostRequest;
+    aPICreateItInterfaceRequestDTO?: APICreateItInterfaceRequestDTO;
 }
 
 export interface PostSingleItInterfaceV2PostDataDescriptionRequestParams {
     uuid: string;
-    aPIPostSingleItInterfaceV2PostDataDescriptionRequest?: APIPostSingleItInterfaceV2PostDataDescriptionRequest;
+    aPIItInterfaceDataRequestDTO?: APIItInterfaceDataRequestDTO;
 }
 
 export interface PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams {
-    aPIPostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequest?: APIPostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequest;
+    aPIRightsHolderCreateItInterfaceRequestDTO?: APIRightsHolderCreateItInterfaceRequestDTO;
 }
 
 export interface PutSingleItInterfaceV2PutDataDescriptionRequestParams {
     uuid: string;
     dataDescriptionUuid: string;
-    aPIPostSingleItInterfaceV2PostDataDescriptionRequest?: APIPostSingleItInterfaceV2PostDataDescriptionRequest;
+    aPIItInterfaceDataRequestDTO?: APIItInterfaceDataRequestDTO;
 }
 
 export interface PutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequestParams {
     uuid: string;
-    aPIPutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequest?: APIPutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequest;
+    aPIRightsHolderWritableItInterfacePropertiesDTO?: APIRightsHolderWritableItInterfacePropertiesDTO;
 }
 
 
@@ -206,7 +206,7 @@ export class ItInterfaceV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling deleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolder.');
         }
-        const aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest = requestParameters.aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest;
+        const aPIDeactivationReasonRequestDTO = requestParameters.aPIDeactivationReasonRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -251,7 +251,7 @@ export class ItInterfaceV2Service {
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIDeleteSingleItInterfaceV2DeactivateItInterfaceAsRightsHolderRequest,
+                body: aPIDeactivationReasonRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -835,7 +835,7 @@ export class ItInterfaceV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling patchSingleItInterfaceV2Patch.');
         }
-        const aPIPatchSingleItInterfaceV2PatchRequest = requestParameters.aPIPatchSingleItInterfaceV2PatchRequest;
+        const aPIUpdateItInterfaceRequestDTO = requestParameters.aPIUpdateItInterfaceRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -882,7 +882,7 @@ export class ItInterfaceV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleItInterfaceV2PatchRequest,
+                body: aPIUpdateItInterfaceRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -905,7 +905,7 @@ export class ItInterfaceV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling patchSingleItInterfaceV2PatchItInterfaceAsRightsHolder.');
         }
-        const aPIPatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequest = requestParameters.aPIPatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequest;
+        const aPIRightsHolderPartialUpdateItInterfaceRequestDTO = requestParameters.aPIRightsHolderPartialUpdateItInterfaceRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -952,7 +952,7 @@ export class ItInterfaceV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleItInterfaceV2PatchItInterfaceAsRightsHolderRequest,
+                body: aPIRightsHolderPartialUpdateItInterfaceRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -971,7 +971,7 @@ export class ItInterfaceV2Service {
     public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItInterfaceV2Post(requestParameters: PostSingleItInterfaceV2PostRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIPostSingleItInterfaceV2PostRequest = requestParameters.aPIPostSingleItInterfaceV2PostRequest;
+        const aPICreateItInterfaceRequestDTO = requestParameters.aPICreateItInterfaceRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1017,7 +1017,7 @@ export class ItInterfaceV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleItInterfaceV2PostRequest,
+                body: aPICreateItInterfaceRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1040,7 +1040,7 @@ export class ItInterfaceV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling postSingleItInterfaceV2PostDataDescription.');
         }
-        const aPIPostSingleItInterfaceV2PostDataDescriptionRequest = requestParameters.aPIPostSingleItInterfaceV2PostDataDescriptionRequest;
+        const aPIItInterfaceDataRequestDTO = requestParameters.aPIItInterfaceDataRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1086,7 +1086,7 @@ export class ItInterfaceV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleItInterfaceV2PostDataDescriptionRequest,
+                body: aPIItInterfaceDataRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1105,7 +1105,7 @@ export class ItInterfaceV2Service {
     public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItInterfaceV2PostItInterfaceAsRightsHolder(requestParameters: PostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIPostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequest = requestParameters.aPIPostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequest;
+        const aPIRightsHolderCreateItInterfaceRequestDTO = requestParameters.aPIRightsHolderCreateItInterfaceRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1151,7 +1151,7 @@ export class ItInterfaceV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleItInterfaceV2PostItInterfaceAsRightsHolderRequest,
+                body: aPIRightsHolderCreateItInterfaceRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1178,7 +1178,7 @@ export class ItInterfaceV2Service {
         if (dataDescriptionUuid === null || dataDescriptionUuid === undefined) {
             throw new Error('Required parameter dataDescriptionUuid was null or undefined when calling putSingleItInterfaceV2PutDataDescription.');
         }
-        const aPIPostSingleItInterfaceV2PostDataDescriptionRequest = requestParameters.aPIPostSingleItInterfaceV2PostDataDescriptionRequest;
+        const aPIItInterfaceDataRequestDTO = requestParameters.aPIItInterfaceDataRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1224,7 +1224,7 @@ export class ItInterfaceV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleItInterfaceV2PostDataDescriptionRequest,
+                body: aPIItInterfaceDataRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1247,7 +1247,7 @@ export class ItInterfaceV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling putSingleItInterfaceV2PutItInterfaceAsRightsHolder.');
         }
-        const aPIPutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequest = requestParameters.aPIPutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequest;
+        const aPIRightsHolderWritableItInterfacePropertiesDTO = requestParameters.aPIRightsHolderWritableItInterfacePropertiesDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1293,7 +1293,7 @@ export class ItInterfaceV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPutSingleItInterfaceV2PutItInterfaceAsRightsHolderRequest,
+                body: aPIRightsHolderWritableItInterfacePropertiesDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

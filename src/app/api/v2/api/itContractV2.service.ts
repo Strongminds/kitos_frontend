@@ -21,11 +21,11 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
-import { APIPostSingleItContractV2PostExternalReferenceRequest } from '../model/aPIPostSingleItContractV2PostExternalReferenceRequest';
+import { APICreateNewContractRequestDTO } from '../model/aPICreateNewContractRequestDTO';
 // @ts-ignore
-import { APIPostSingleItContractV2PostItContractRequest } from '../model/aPIPostSingleItContractV2PostItContractRequest';
+import { APIExternalReferenceDataWriteRequestDTO } from '../model/aPIExternalReferenceDataWriteRequestDTO';
 // @ts-ignore
-import { APIPutSingleItContractV2PutItContractRequest } from '../model/aPIPutSingleItContractV2PutItContractRequest';
+import { APIUpdateContractRequestDTO } from '../model/aPIUpdateContractRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -70,27 +70,27 @@ export interface GetSingleItContractV2GetItContractsRequestParams {
 
 export interface PatchSingleItContractV2PatchItContractRequestParams {
     contractUuid: string;
-    aPIPutSingleItContractV2PutItContractRequest?: APIPutSingleItContractV2PutItContractRequest;
+    aPIUpdateContractRequestDTO?: APIUpdateContractRequestDTO;
 }
 
 export interface PostSingleItContractV2PostExternalReferenceRequestParams {
     contractUuid: string;
-    aPIPostSingleItContractV2PostExternalReferenceRequest?: APIPostSingleItContractV2PostExternalReferenceRequest;
+    aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
 export interface PostSingleItContractV2PostItContractRequestParams {
-    aPIPostSingleItContractV2PostItContractRequest?: APIPostSingleItContractV2PostItContractRequest;
+    aPICreateNewContractRequestDTO?: APICreateNewContractRequestDTO;
 }
 
 export interface PutSingleItContractV2PutExternalReferenceRequestParams {
     contractUuid: string;
     externalReferenceUuid: string;
-    aPIPostSingleItContractV2PostExternalReferenceRequest?: APIPostSingleItContractV2PostExternalReferenceRequest;
+    aPIExternalReferenceDataWriteRequestDTO?: APIExternalReferenceDataWriteRequestDTO;
 }
 
 export interface PutSingleItContractV2PutItContractRequestParams {
     contractUuid: string;
-    aPIPutSingleItContractV2PutItContractRequest?: APIPutSingleItContractV2PutItContractRequest;
+    aPIUpdateContractRequestDTO?: APIUpdateContractRequestDTO;
 }
 
 
@@ -587,7 +587,7 @@ export class ItContractV2Service {
         if (contractUuid === null || contractUuid === undefined) {
             throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractV2PatchItContract.');
         }
-        const aPIPutSingleItContractV2PutItContractRequest = requestParameters.aPIPutSingleItContractV2PutItContractRequest;
+        const aPIUpdateContractRequestDTO = requestParameters.aPIUpdateContractRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -634,7 +634,7 @@ export class ItContractV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPutSingleItContractV2PutItContractRequest,
+                body: aPIUpdateContractRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -657,7 +657,7 @@ export class ItContractV2Service {
         if (contractUuid === null || contractUuid === undefined) {
             throw new Error('Required parameter contractUuid was null or undefined when calling postSingleItContractV2PostExternalReference.');
         }
-        const aPIPostSingleItContractV2PostExternalReferenceRequest = requestParameters.aPIPostSingleItContractV2PostExternalReferenceRequest;
+        const aPIExternalReferenceDataWriteRequestDTO = requestParameters.aPIExternalReferenceDataWriteRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -703,7 +703,7 @@ export class ItContractV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleItContractV2PostExternalReferenceRequest,
+                body: aPIExternalReferenceDataWriteRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -722,7 +722,7 @@ export class ItContractV2Service {
     public postSingleItContractV2PostItContract(requestParameters: PostSingleItContractV2PostItContractRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleItContractV2PostItContract(requestParameters: PostSingleItContractV2PostItContractRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItContractV2PostItContract(requestParameters: PostSingleItContractV2PostItContractRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIPostSingleItContractV2PostItContractRequest = requestParameters.aPIPostSingleItContractV2PostItContractRequest;
+        const aPICreateNewContractRequestDTO = requestParameters.aPICreateNewContractRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -768,7 +768,7 @@ export class ItContractV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleItContractV2PostItContractRequest,
+                body: aPICreateNewContractRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -795,7 +795,7 @@ export class ItContractV2Service {
         if (externalReferenceUuid === null || externalReferenceUuid === undefined) {
             throw new Error('Required parameter externalReferenceUuid was null or undefined when calling putSingleItContractV2PutExternalReference.');
         }
-        const aPIPostSingleItContractV2PostExternalReferenceRequest = requestParameters.aPIPostSingleItContractV2PostExternalReferenceRequest;
+        const aPIExternalReferenceDataWriteRequestDTO = requestParameters.aPIExternalReferenceDataWriteRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -841,7 +841,7 @@ export class ItContractV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleItContractV2PostExternalReferenceRequest,
+                body: aPIExternalReferenceDataWriteRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -864,7 +864,7 @@ export class ItContractV2Service {
         if (contractUuid === null || contractUuid === undefined) {
             throw new Error('Required parameter contractUuid was null or undefined when calling putSingleItContractV2PutItContract.');
         }
-        const aPIPutSingleItContractV2PutItContractRequest = requestParameters.aPIPutSingleItContractV2PutItContractRequest;
+        const aPIUpdateContractRequestDTO = requestParameters.aPIUpdateContractRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -910,7 +910,7 @@ export class ItContractV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPutSingleItContractV2PutItContractRequest,
+                body: aPIUpdateContractRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

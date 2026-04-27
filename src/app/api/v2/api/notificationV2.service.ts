@@ -19,13 +19,13 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
+import { APIImmediateNotificationWriteRequestDTO } from '../model/aPIImmediateNotificationWriteRequestDTO';
+// @ts-ignore
 import { APIOwnerResourceType } from '../model/aPIOwnerResourceType';
 // @ts-ignore
-import { APIPostSingleNotificationV2CreateImmediateNotificationRequest } from '../model/aPIPostSingleNotificationV2CreateImmediateNotificationRequest';
+import { APIScheduledNotificationWriteRequestDTO } from '../model/aPIScheduledNotificationWriteRequestDTO';
 // @ts-ignore
-import { APIPostSingleNotificationV2CreateScheduledNotificationRequest } from '../model/aPIPostSingleNotificationV2CreateScheduledNotificationRequest';
-// @ts-ignore
-import { APIPutSingleNotificationV2UpdateScheduledNotificationRequest } from '../model/aPIPutSingleNotificationV2UpdateScheduledNotificationRequest';
+import { APIUpdateScheduledNotificationWriteRequestDTO } from '../model/aPIUpdateScheduledNotificationWriteRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -33,19 +33,19 @@ import { Configuration }                                     from '../configurat
 
 
 export interface DeleteSingleNotificationV2DeleteNotificationRequestParams {
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
     notificationUuid: string;
 }
 
 export interface GetSingleNotificationV2GetNotificationByUuidRequestParams {
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
     notificationUuid: string;
 }
 
 export interface GetSingleNotificationV2GetNotificationsRequestParams {
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
     organizationUuid: string;
     ownerResourceUuid?: string;
     onlyActive?: boolean;
@@ -54,40 +54,40 @@ export interface GetSingleNotificationV2GetNotificationsRequestParams {
 }
 
 export interface GetSingleNotificationV2GetPermissionsRequestParams {
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
     notificationUuid: string;
 }
 
 export interface GetSingleNotificationV2GetSentNotificationRequestParams {
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
     notificationUuid: string;
 }
 
 export interface PatchSingleNotificationV2DeactivateScheduledNotificationRequestParams {
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
     notificationUuid: string;
 }
 
 export interface PostSingleNotificationV2CreateImmediateNotificationRequestParams {
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
-    aPIPostSingleNotificationV2CreateImmediateNotificationRequest?: APIPostSingleNotificationV2CreateImmediateNotificationRequest;
+    aPIImmediateNotificationWriteRequestDTO?: APIImmediateNotificationWriteRequestDTO;
 }
 
 export interface PostSingleNotificationV2CreateScheduledNotificationRequestParams {
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
-    aPIPostSingleNotificationV2CreateScheduledNotificationRequest?: APIPostSingleNotificationV2CreateScheduledNotificationRequest;
+    aPIScheduledNotificationWriteRequestDTO?: APIScheduledNotificationWriteRequestDTO;
 }
 
 export interface PutSingleNotificationV2UpdateScheduledNotificationRequestParams {
-    ownerResourceType: 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
+    ownerResourceType: APIOwnerResourceType;
     ownerResourceUuid: string;
     notificationUuid: string;
-    aPIPutSingleNotificationV2UpdateScheduledNotificationRequest?: APIPutSingleNotificationV2UpdateScheduledNotificationRequest;
+    aPIUpdateScheduledNotificationWriteRequestDTO?: APIUpdateScheduledNotificationWriteRequestDTO;
 }
 
 
@@ -207,7 +207,7 @@ export class NotificationV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<any>('delete', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -273,7 +273,7 @@ export class NotificationV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -361,7 +361,7 @@ export class NotificationV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}`;
+        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -428,7 +428,7 @@ export class NotificationV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
+        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/permissions`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -494,7 +494,7 @@ export class NotificationV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sent/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sent/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -560,7 +560,7 @@ export class NotificationV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/scheduled/deactivate/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/scheduled/deactivate/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
@@ -590,7 +590,7 @@ export class NotificationV2Service {
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
             throw new Error('Required parameter ownerResourceUuid was null or undefined when calling postSingleNotificationV2CreateImmediateNotification.');
         }
-        const aPIPostSingleNotificationV2CreateImmediateNotificationRequest = requestParameters.aPIPostSingleNotificationV2CreateImmediateNotificationRequest;
+        const aPIImmediateNotificationWriteRequestDTO = requestParameters.aPIImmediateNotificationWriteRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -632,11 +632,11 @@ export class NotificationV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/immediate`;
+        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/immediate`;
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleNotificationV2CreateImmediateNotificationRequest,
+                body: aPIImmediateNotificationWriteRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -663,7 +663,7 @@ export class NotificationV2Service {
         if (ownerResourceUuid === null || ownerResourceUuid === undefined) {
             throw new Error('Required parameter ownerResourceUuid was null or undefined when calling postSingleNotificationV2CreateScheduledNotification.');
         }
-        const aPIPostSingleNotificationV2CreateScheduledNotificationRequest = requestParameters.aPIPostSingleNotificationV2CreateScheduledNotificationRequest;
+        const aPIScheduledNotificationWriteRequestDTO = requestParameters.aPIScheduledNotificationWriteRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -705,11 +705,11 @@ export class NotificationV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/scheduled`;
+        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/scheduled`;
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleNotificationV2CreateScheduledNotificationRequest,
+                body: aPIScheduledNotificationWriteRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -740,7 +740,7 @@ export class NotificationV2Service {
         if (notificationUuid === null || notificationUuid === undefined) {
             throw new Error('Required parameter notificationUuid was null or undefined when calling putSingleNotificationV2UpdateScheduledNotification.');
         }
-        const aPIPutSingleNotificationV2UpdateScheduledNotificationRequest = requestParameters.aPIPutSingleNotificationV2UpdateScheduledNotificationRequest;
+        const aPIUpdateScheduledNotificationWriteRequestDTO = requestParameters.aPIUpdateScheduledNotificationWriteRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -782,11 +782,11 @@ export class NotificationV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration'", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/scheduled/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/internal/notifications/${this.configuration.encodeParam({name: "ownerResourceType", value: ownerResourceType, in: "path", style: "simple", explode: false, dataType: "APIOwnerResourceType", dataFormat: undefined})}/${this.configuration.encodeParam({name: "ownerResourceUuid", value: ownerResourceUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/scheduled/${this.configuration.encodeParam({name: "notificationUuid", value: notificationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPutSingleNotificationV2UpdateScheduledNotificationRequest,
+                body: aPIUpdateScheduledNotificationWriteRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

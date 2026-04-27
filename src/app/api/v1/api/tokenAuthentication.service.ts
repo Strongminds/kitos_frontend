@@ -19,7 +19,7 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPostSingleTokenAuthenticationGetTokenRequest } from '../model/aPIPostSingleTokenAuthenticationGetTokenRequest';
+import { APIUserCredentialsDTO } from '../model/aPIUserCredentialsDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -27,7 +27,7 @@ import { Configuration }                                     from '../configurat
 
 
 export interface PostSingleTokenAuthenticationGetTokenRequestParams {
-    aPIPostSingleTokenAuthenticationGetTokenRequest?: APIPostSingleTokenAuthenticationGetTokenRequest;
+    aPIUserCredentialsDTO?: APIUserCredentialsDTO;
 }
 
 
@@ -104,7 +104,7 @@ export class TokenAuthenticationService {
     public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleTokenAuthenticationGetToken(requestParameters: PostSingleTokenAuthenticationGetTokenRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
-        const aPIPostSingleTokenAuthenticationGetTokenRequest = requestParameters.aPIPostSingleTokenAuthenticationGetTokenRequest;
+        const aPIUserCredentialsDTO = requestParameters.aPIUserCredentialsDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -189,7 +189,7 @@ export class TokenAuthenticationService {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleTokenAuthenticationGetTokenRequest,
+                body: aPIUserCredentialsDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

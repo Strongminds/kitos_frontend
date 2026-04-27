@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIProcurementPlanDTO } from './procurementPlanDTO';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIContractProcurementDataResponseDTOProcurementPlan } from './contractProcurementDataResponseDTOProcurementPlan';
 
 
 export interface APIContractProcurementDataResponseDTO { 
-    purchaseType?: APIArchivingRegistrationsResponseDTOType | null;
-    procurementStrategy?: APIArchivingRegistrationsResponseDTOType | null;
-    procurementPlan?: APIContractProcurementDataResponseDTOProcurementPlan | null;
-    procurementInitiated?: APIYesNoUndecidedChoice | null;
+    purchaseType?: APIIdentityNamePairResponseDTO;
+    procurementStrategy?: APIIdentityNamePairResponseDTO;
+    procurementPlan?: APIProcurementPlanDTO;
+    procurementInitiated?: APIYesNoUndecidedChoice;
 }
 

@@ -16,7 +16,7 @@ import { APIItInterfaceDataRequestDTO } from './itInterfaceDataRequestDTO';
 export interface APIUpdateItInterfaceRequestDTO { 
     exposedBySystemUuid?: string | null;
     deactivated?: boolean;
-    scope?: APIUpdateItInterfaceRequestDTO.ScopeEnum;
+    scope?: APIRegistrationScopeChoice;
     itInterfaceTypeUuid?: string | null;
     data?: Array<APIItInterfaceDataRequestDTO> | null;
     note?: string | null;
@@ -26,12 +26,4 @@ export interface APIUpdateItInterfaceRequestDTO {
     description?: string | null;
     urlReference?: string | null;
 }
-export namespace APIUpdateItInterfaceRequestDTO {
-    export type ScopeEnum = 'Local' | 'Global';
-    export const ScopeEnum = {
-        Local: 'Local' as ScopeEnum,
-        Global: 'Global' as ScopeEnum
-    };
-}
-
 

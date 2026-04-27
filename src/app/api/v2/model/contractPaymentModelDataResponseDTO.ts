@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIContractPaymentModelDataResponseDTO { 
     operationsRemunerationStartedAt?: string | null;
-    paymentFrequency?: APIArchivingRegistrationsResponseDTOType | null;
-    paymentModel?: APIArchivingRegistrationsResponseDTOType | null;
-    priceRegulation?: APIArchivingRegistrationsResponseDTOType | null;
+    paymentFrequency?: APIIdentityNamePairResponseDTO;
+    paymentModel?: APIIdentityNamePairResponseDTO;
+    priceRegulation?: APIIdentityNamePairResponseDTO;
 }
 

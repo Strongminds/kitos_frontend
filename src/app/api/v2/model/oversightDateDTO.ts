@@ -9,11 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APICreateOversightDateDTOOversightReportLink } from './createOversightDateDTOOversightReportLink';
+import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
 export interface APIOversightDateDTO { 
-    uuid?: string;
     /**
      *  (Supplier Field)
      */
@@ -22,6 +21,7 @@ export interface APIOversightDateDTO {
      *  (Supplier Field)
      */
     remark?: string | null;
-    oversightReportLink?: APICreateOversightDateDTOOversightReportLink | null;
+    oversightReportLink?: APISimpleLinkDTO;
+    uuid?: string;
 }
 

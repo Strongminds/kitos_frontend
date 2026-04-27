@@ -19,19 +19,19 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPatchSingleOrganizationsInternalV2ChangeDisabledStatusRequest } from '../model/aPIPatchSingleOrganizationsInternalV2ChangeDisabledStatusRequest';
+import { APIOrganizationCreateRequestDTO } from '../model/aPIOrganizationCreateRequestDTO';
 // @ts-ignore
-import { APIPatchSingleOrganizationsInternalV2PatchOrganizationMasterDataRequest } from '../model/aPIPatchSingleOrganizationsInternalV2PatchOrganizationMasterDataRequest';
+import { APIOrganizationDisabledStatusRequestDTO } from '../model/aPIOrganizationDisabledStatusRequestDTO';
 // @ts-ignore
-import { APIPatchSingleOrganizationsInternalV2PatchOrganizationRequest } from '../model/aPIPatchSingleOrganizationsInternalV2PatchOrganizationRequest';
+import { APIOrganizationMasterDataRequestDTO } from '../model/aPIOrganizationMasterDataRequestDTO';
 // @ts-ignore
-import { APIPatchSingleOrganizationsInternalV2PatchUIRootConfigRequest } from '../model/aPIPatchSingleOrganizationsInternalV2PatchUIRootConfigRequest';
+import { APIOrganizationMasterDataRolesRequestDTO } from '../model/aPIOrganizationMasterDataRolesRequestDTO';
 // @ts-ignore
-import { APIPatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRolesRequest } from '../model/aPIPatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRolesRequest';
+import { APIOrganizationUpdateRequestDTO } from '../model/aPIOrganizationUpdateRequestDTO';
 // @ts-ignore
-import { APIPostSingleOrganizationsInternalV2CreateOrganizationRequest } from '../model/aPIPostSingleOrganizationsInternalV2CreateOrganizationRequest';
+import { APIUIModuleCustomizationRequestDTO } from '../model/aPIUIModuleCustomizationRequestDTO';
 // @ts-ignore
-import { APIPutSingleOrganizationsInternalV2PutUIModuleCustomizationRequest } from '../model/aPIPutSingleOrganizationsInternalV2PutUIModuleCustomizationRequest';
+import { APIUIRootConfigUpdateRequestDTO } from '../model/aPIUIRootConfigUpdateRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -70,37 +70,37 @@ export interface GetSingleOrganizationsInternalV2GetUIRootConfigRequestParams {
 
 export interface PatchSingleOrganizationsInternalV2ChangeDisabledStatusRequestParams {
     organizationUuid: string;
-    aPIPatchSingleOrganizationsInternalV2ChangeDisabledStatusRequest?: APIPatchSingleOrganizationsInternalV2ChangeDisabledStatusRequest;
+    aPIOrganizationDisabledStatusRequestDTO?: APIOrganizationDisabledStatusRequestDTO;
 }
 
 export interface PatchSingleOrganizationsInternalV2PatchOrganizationRequestParams {
     organizationUuid: string;
-    aPIPatchSingleOrganizationsInternalV2PatchOrganizationRequest?: APIPatchSingleOrganizationsInternalV2PatchOrganizationRequest;
+    aPIOrganizationUpdateRequestDTO?: APIOrganizationUpdateRequestDTO;
 }
 
 export interface PatchSingleOrganizationsInternalV2PatchOrganizationMasterDataRequestParams {
     organizationUuid: string;
-    aPIPatchSingleOrganizationsInternalV2PatchOrganizationMasterDataRequest?: APIPatchSingleOrganizationsInternalV2PatchOrganizationMasterDataRequest;
+    aPIOrganizationMasterDataRequestDTO?: APIOrganizationMasterDataRequestDTO;
 }
 
 export interface PatchSingleOrganizationsInternalV2PatchUIRootConfigRequestParams {
     organizationUuid: string;
-    aPIPatchSingleOrganizationsInternalV2PatchUIRootConfigRequest?: APIPatchSingleOrganizationsInternalV2PatchUIRootConfigRequest;
+    aPIUIRootConfigUpdateRequestDTO?: APIUIRootConfigUpdateRequestDTO;
 }
 
 export interface PatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRolesRequestParams {
     organizationUuid: string;
-    aPIPatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRolesRequest?: APIPatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRolesRequest;
+    aPIOrganizationMasterDataRolesRequestDTO?: APIOrganizationMasterDataRolesRequestDTO;
 }
 
 export interface PostSingleOrganizationsInternalV2CreateOrganizationRequestParams {
-    aPIPostSingleOrganizationsInternalV2CreateOrganizationRequest?: APIPostSingleOrganizationsInternalV2CreateOrganizationRequest;
+    aPIOrganizationCreateRequestDTO?: APIOrganizationCreateRequestDTO;
 }
 
 export interface PutSingleOrganizationsInternalV2PutUIModuleCustomizationRequestParams {
     organizationUuid: string;
     moduleName: string;
-    aPIPutSingleOrganizationsInternalV2PutUIModuleCustomizationRequest?: APIPutSingleOrganizationsInternalV2PutUIModuleCustomizationRequest;
+    aPIUIModuleCustomizationRequestDTO?: APIUIModuleCustomizationRequestDTO;
 }
 
 
@@ -598,7 +598,7 @@ export class OrganizationsInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationsInternalV2ChangeDisabledStatus.');
         }
-        const aPIPatchSingleOrganizationsInternalV2ChangeDisabledStatusRequest = requestParameters.aPIPatchSingleOrganizationsInternalV2ChangeDisabledStatusRequest;
+        const aPIOrganizationDisabledStatusRequestDTO = requestParameters.aPIOrganizationDisabledStatusRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -645,7 +645,7 @@ export class OrganizationsInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleOrganizationsInternalV2ChangeDisabledStatusRequest,
+                body: aPIOrganizationDisabledStatusRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -668,7 +668,7 @@ export class OrganizationsInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationsInternalV2PatchOrganization.');
         }
-        const aPIPatchSingleOrganizationsInternalV2PatchOrganizationRequest = requestParameters.aPIPatchSingleOrganizationsInternalV2PatchOrganizationRequest;
+        const aPIOrganizationUpdateRequestDTO = requestParameters.aPIOrganizationUpdateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -715,7 +715,7 @@ export class OrganizationsInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleOrganizationsInternalV2PatchOrganizationRequest,
+                body: aPIOrganizationUpdateRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -738,7 +738,7 @@ export class OrganizationsInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationsInternalV2PatchOrganizationMasterData.');
         }
-        const aPIPatchSingleOrganizationsInternalV2PatchOrganizationMasterDataRequest = requestParameters.aPIPatchSingleOrganizationsInternalV2PatchOrganizationMasterDataRequest;
+        const aPIOrganizationMasterDataRequestDTO = requestParameters.aPIOrganizationMasterDataRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -785,7 +785,7 @@ export class OrganizationsInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleOrganizationsInternalV2PatchOrganizationMasterDataRequest,
+                body: aPIOrganizationMasterDataRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -808,7 +808,7 @@ export class OrganizationsInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationsInternalV2PatchUIRootConfig.');
         }
-        const aPIPatchSingleOrganizationsInternalV2PatchUIRootConfigRequest = requestParameters.aPIPatchSingleOrganizationsInternalV2PatchUIRootConfigRequest;
+        const aPIUIRootConfigUpdateRequestDTO = requestParameters.aPIUIRootConfigUpdateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -855,7 +855,7 @@ export class OrganizationsInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleOrganizationsInternalV2PatchUIRootConfigRequest,
+                body: aPIUIRootConfigUpdateRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -878,7 +878,7 @@ export class OrganizationsInternalV2Service {
         if (organizationUuid === null || organizationUuid === undefined) {
             throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRoles.');
         }
-        const aPIPatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRolesRequest = requestParameters.aPIPatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRolesRequest;
+        const aPIOrganizationMasterDataRolesRequestDTO = requestParameters.aPIOrganizationMasterDataRolesRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -925,7 +925,7 @@ export class OrganizationsInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRolesRequest,
+                body: aPIOrganizationMasterDataRolesRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -944,7 +944,7 @@ export class OrganizationsInternalV2Service {
     public postSingleOrganizationsInternalV2CreateOrganization(requestParameters: PostSingleOrganizationsInternalV2CreateOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public postSingleOrganizationsInternalV2CreateOrganization(requestParameters: PostSingleOrganizationsInternalV2CreateOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleOrganizationsInternalV2CreateOrganization(requestParameters: PostSingleOrganizationsInternalV2CreateOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIPostSingleOrganizationsInternalV2CreateOrganizationRequest = requestParameters.aPIPostSingleOrganizationsInternalV2CreateOrganizationRequest;
+        const aPIOrganizationCreateRequestDTO = requestParameters.aPIOrganizationCreateRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -990,7 +990,7 @@ export class OrganizationsInternalV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleOrganizationsInternalV2CreateOrganizationRequest,
+                body: aPIOrganizationCreateRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -1017,7 +1017,7 @@ export class OrganizationsInternalV2Service {
         if (moduleName === null || moduleName === undefined) {
             throw new Error('Required parameter moduleName was null or undefined when calling putSingleOrganizationsInternalV2PutUIModuleCustomization.');
         }
-        const aPIPutSingleOrganizationsInternalV2PutUIModuleCustomizationRequest = requestParameters.aPIPutSingleOrganizationsInternalV2PutUIModuleCustomizationRequest;
+        const aPIUIModuleCustomizationRequestDTO = requestParameters.aPIUIModuleCustomizationRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -1063,7 +1063,7 @@ export class OrganizationsInternalV2Service {
         return this.httpClient.request<any>('put', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPutSingleOrganizationsInternalV2PutUIModuleCustomizationRequest,
+                body: aPIUIModuleCustomizationRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

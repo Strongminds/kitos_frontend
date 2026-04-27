@@ -13,21 +13,11 @@ import { APIOrganizationType } from './organizationType';
 
 
 export interface APIOrganizationResponseDTO { 
-    organizationType: APIOrganizationResponseDTO.OrganizationTypeEnum;
-    isSupplier?: boolean;
-    disabled?: boolean;
-    cvr?: string | null;
     uuid: string;
     name: string;
+    cvr?: string | null;
+    organizationType: APIOrganizationType;
+    isSupplier?: boolean;
+    disabled?: boolean;
 }
-export namespace APIOrganizationResponseDTO {
-    export type OrganizationTypeEnum = 'Municipality' | 'CommunityOfInterest' | 'Company' | 'OtherPublicAuthority';
-    export const OrganizationTypeEnum = {
-        Municipality: 'Municipality' as OrganizationTypeEnum,
-        CommunityOfInterest: 'CommunityOfInterest' as OrganizationTypeEnum,
-        Company: 'Company' as OrganizationTypeEnum,
-        OtherPublicAuthority: 'OtherPublicAuthority' as OrganizationTypeEnum
-    };
-}
-
 

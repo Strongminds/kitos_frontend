@@ -10,28 +10,25 @@
  * Do not edit the class manually.
  */
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
-import { APIGeneralDataResponseDTONumberOfExpectedUsers } from './generalDataResponseDTONumberOfExpectedUsers';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIGeneralDataUpdateRequestDTOValidity } from './generalDataUpdateRequestDTOValidity';
+import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
+import { APIItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidityWriteRequestDTO';
 
 
 export interface APIGeneralDataUpdateRequestDTO { 
-    mainContractUuid?: string | null;
     localSystemId?: string | null;
     localCallName?: string | null;
     dataClassificationUuid?: string | null;
     notes?: string | null;
     systemVersion?: string | null;
-    numberOfExpectedUsers?: APIGeneralDataResponseDTONumberOfExpectedUsers | null;
-    validity?: APIGeneralDataUpdateRequestDTOValidity | null;
-    /**
-     *  (Supplier Field)
-     */
-    containsAITechnology?: APIYesNoUndecidedChoice | null;
-    webAccessibilityCompliance?: APIYesNoPartiallyChoice | null;
+    numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
+    validity?: APIItSystemUsageValidityWriteRequestDTO;
+    containsAITechnology?: APIYesNoUndecidedChoice;
+    webAccessibilityCompliance?: APIYesNoPartiallyChoice;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
-    isSociallyCritical?: APIYesNoDontKnowChoice | null;
+    isSociallyCritical?: APIYesNoDontKnowChoice;
+    mainContractUuid?: string | null;
 }
 

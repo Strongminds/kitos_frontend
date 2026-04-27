@@ -9,15 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIDataProcessingRegistrationResponseDTOOrganizationContext } from './dataProcessingRegistrationResponseDTOOrganizationContext';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
 export interface APIDataProcessorRegistrationSubDataProcessorResponseDTO { 
-    dataProcessorOrganization: APIDataProcessingRegistrationResponseDTOOrganizationContext;
-    basisForTransfer?: APIArchivingRegistrationsResponseDTOType | null;
-    transferToInsecureThirdCountry?: APIYesNoUndecidedChoice | null;
-    insecureThirdCountrySubjectToDataProcessing?: APIArchivingRegistrationsResponseDTOType | null;
+    dataProcessorOrganization: APIShallowOrganizationResponseDTO;
+    basisForTransfer?: APIIdentityNamePairResponseDTO;
+    transferToInsecureThirdCountry?: APIYesNoUndecidedChoice;
+    insecureThirdCountrySubjectToDataProcessing?: APIIdentityNamePairResponseDTO;
 }
 

@@ -9,29 +9,19 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIPaymentResponseDTOOrganizationUnit } from './paymentResponseDTOOrganizationUnit';
 import { APIPaymentAuditStatus } from './paymentAuditStatus';
+import { APIOrganizationUnitResponseDTO } from './organizationUnitResponseDTO';
 
 
 export interface APIPaymentResponseDTO { 
     id?: number;
-    organizationUnit?: APIPaymentResponseDTOOrganizationUnit | null;
+    organizationUnit?: APIOrganizationUnitResponseDTO;
     acquisition?: number;
     operation?: number;
     other?: number;
     accountingEntry?: string | null;
-    auditStatus?: APIPaymentResponseDTO.AuditStatusEnum;
+    auditStatus?: APIPaymentAuditStatus;
     auditDate?: string | null;
     note?: string | null;
 }
-export namespace APIPaymentResponseDTO {
-    export type AuditStatusEnum = 'White' | 'Red' | 'Yellow' | 'Green';
-    export const AuditStatusEnum = {
-        White: 'White' as AuditStatusEnum,
-        Red: 'Red' as AuditStatusEnum,
-        Yellow: 'Yellow' as AuditStatusEnum,
-        Green: 'Green' as AuditStatusEnum
-    };
-}
-
 

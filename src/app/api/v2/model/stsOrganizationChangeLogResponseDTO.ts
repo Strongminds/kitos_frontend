@@ -10,22 +10,14 @@
  * Do not edit the class manually.
  */
 import { APIStsOrganizationChangeLogOriginOption } from './stsOrganizationChangeLogOriginOption';
+import { APIUserReferenceResponseDTO } from './userReferenceResponseDTO';
 import { APIConnectionUpdateOrganizationUnitConsequenceDTO } from './connectionUpdateOrganizationUnitConsequenceDTO';
-import { APIStsOrganizationChangeLogResponseDTOUser } from './stsOrganizationChangeLogResponseDTOUser';
 
 
 export interface APIStsOrganizationChangeLogResponseDTO { 
-    origin?: APIStsOrganizationChangeLogResponseDTO.OriginEnum;
-    user?: APIStsOrganizationChangeLogResponseDTOUser | null;
+    origin?: APIStsOrganizationChangeLogOriginOption;
+    user?: APIUserReferenceResponseDTO;
     logTime?: string;
     consequences?: Array<APIConnectionUpdateOrganizationUnitConsequenceDTO> | null;
 }
-export namespace APIStsOrganizationChangeLogResponseDTO {
-    export type OriginEnum = 'Background' | 'User';
-    export const OriginEnum = {
-        Background: 'Background' as OriginEnum,
-        User: 'User' as OriginEnum
-    };
-}
-
 

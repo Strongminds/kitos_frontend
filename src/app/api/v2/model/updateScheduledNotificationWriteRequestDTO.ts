@@ -9,12 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIImmediateNotificationWriteRequestDTOBaseProperties } from './immediateNotificationWriteRequestDTOBaseProperties';
+import { APIBaseNotificationPropertiesWriteRequestDTO } from './baseNotificationPropertiesWriteRequestDTO';
 
 
 export interface APIUpdateScheduledNotificationWriteRequestDTO { 
     name?: string | null;
     toDate?: string | null;
-    baseProperties: APIImmediateNotificationWriteRequestDTOBaseProperties;
+    baseProperties: APIBaseNotificationPropertiesWriteRequestDTO;
 }
 

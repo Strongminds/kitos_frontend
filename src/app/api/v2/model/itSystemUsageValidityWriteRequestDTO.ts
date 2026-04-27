@@ -13,7 +13,7 @@ import { APILifeCycleStatusChoice } from './lifeCycleStatusChoice';
 
 
 export interface APIItSystemUsageValidityWriteRequestDTO { 
-    lifeCycleStatus?: APILifeCycleStatusChoice | null;
+    lifeCycleStatus?: APILifeCycleStatusChoice;
     validFrom?: string | null;
     validTo?: string | null;
 }

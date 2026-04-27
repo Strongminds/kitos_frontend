@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIRoleRecipientResponseDTO { 
-    role?: APIArchivingRegistrationsResponseDTOType | null;
+    role?: APIIdentityNamePairResponseDTO;
 }
 

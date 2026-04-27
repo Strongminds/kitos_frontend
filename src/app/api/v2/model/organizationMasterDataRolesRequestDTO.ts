@@ -9,14 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIOrganizationMasterDataRolesRequestDTODataProtectionAdvisor } from './organizationMasterDataRolesRequestDTODataProtectionAdvisor';
-import { APIOrganizationMasterDataRolesRequestDTOContactPerson } from './organizationMasterDataRolesRequestDTOContactPerson';
-import { APIOrganizationMasterDataRolesRequestDTODataResponsible } from './organizationMasterDataRolesRequestDTODataResponsible';
+import { APIDataResponsibleRequestDTO } from './dataResponsibleRequestDTO';
+import { APIContactPersonRequestDTO } from './contactPersonRequestDTO';
+import { APIDataProtectionAdvisorRequestDTO } from './dataProtectionAdvisorRequestDTO';
 
 
 export interface APIOrganizationMasterDataRolesRequestDTO { 
-    contactPerson?: APIOrganizationMasterDataRolesRequestDTOContactPerson | null;
-    dataResponsible?: APIOrganizationMasterDataRolesRequestDTODataResponsible | null;
-    dataProtectionAdvisor?: APIOrganizationMasterDataRolesRequestDTODataProtectionAdvisor | null;
+    contactPerson?: APIContactPersonRequestDTO;
+    dataResponsible?: APIDataResponsibleRequestDTO;
+    dataProtectionAdvisor?: APIDataProtectionAdvisorRequestDTO;
 }
 

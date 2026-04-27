@@ -15,18 +15,6 @@ import { APITrackedEntityTypeChoice } from './trackedEntityTypeChoice';
 export interface APITrackingEventResponseDTO { 
     occurredAtUtc: string;
     entityUuid: string;
-    entityType: APITrackingEventResponseDTO.EntityTypeEnum;
+    entityType: APITrackedEntityTypeChoice;
 }
-export namespace APITrackingEventResponseDTO {
-    export type EntityTypeEnum = 'ItSystem' | 'ItSystemUsage' | 'ItInterface' | 'ItContract' | 'DataProcessingRegistration' | 'OrganizationUnit';
-    export const EntityTypeEnum = {
-        ItSystem: 'ItSystem' as EntityTypeEnum,
-        ItSystemUsage: 'ItSystemUsage' as EntityTypeEnum,
-        ItInterface: 'ItInterface' as EntityTypeEnum,
-        ItContract: 'ItContract' as EntityTypeEnum,
-        DataProcessingRegistration: 'DataProcessingRegistration' as EntityTypeEnum,
-        OrganizationUnit: 'OrganizationUnit' as EntityTypeEnum
-    };
-}
-
 

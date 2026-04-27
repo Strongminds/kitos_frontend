@@ -13,6 +13,6 @@ import { APIColumnConfigurationRequestDTO } from './columnConfigurationRequestDT
 
 
 export interface APIOrganizationGridConfigurationRequestDTO { 
-    visibleColumns?: Array<APIColumnConfigurationRequestDTO> | null;
+    visibleColumns: Array<APIColumnConfigurationRequestDTO> | null;
 }
 

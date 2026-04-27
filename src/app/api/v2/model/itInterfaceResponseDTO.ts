@@ -9,23 +9,15 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIRegistrationScopeChoice } from './registrationScopeChoice';
 import { APIItInterfaceDataResponseDTO } from './itInterfaceDataResponseDTO';
-import { APIDataProcessingRegistrationResponseDTOCreatedBy } from './dataProcessingRegistrationResponseDTOCreatedBy';
-import { APIDataProcessingRegistrationResponseDTOOrganizationContext } from './dataProcessingRegistrationResponseDTOOrganizationContext';
+import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
 export interface APIItInterfaceResponseDTO { 
-    lastModified: string;
-    lastModifiedBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
-    scope: APIItInterfaceResponseDTO.ScopeEnum;
-    itInterfaceType?: APIArchivingRegistrationsResponseDTOType | null;
-    data: Array<APIItInterfaceDataResponseDTO>;
-    organizationContext: APIDataProcessingRegistrationResponseDTOOrganizationContext;
-    rightsHolder: APIDataProcessingRegistrationResponseDTOOrganizationContext;
     uuid: string;
-    exposedBySystem?: APIArchivingRegistrationsResponseDTOType | null;
+    exposedBySystem?: APIIdentityNamePairResponseDTO;
     name: string;
     interfaceId?: string | null;
     version?: string | null;
@@ -34,14 +26,13 @@ export interface APIItInterfaceResponseDTO {
     urlReference?: string | null;
     deactivated: boolean;
     created: string;
-    createdBy: APIDataProcessingRegistrationResponseDTOCreatedBy;
+    createdBy: APIIdentityNamePairResponseDTO;
+    lastModified: string;
+    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    scope: APIRegistrationScopeChoice;
+    itInterfaceType?: APIIdentityNamePairResponseDTO;
+    data: Array<APIItInterfaceDataResponseDTO>;
+    organizationContext: APIShallowOrganizationResponseDTO;
+    rightsHolder: APIShallowOrganizationResponseDTO;
 }
-export namespace APIItInterfaceResponseDTO {
-    export type ScopeEnum = 'Local' | 'Global';
-    export const ScopeEnum = {
-        Local: 'Local' as ScopeEnum,
-        Global: 'Global' as ScopeEnum
-    };
-}
-
 

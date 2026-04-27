@@ -9,10 +9,10 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIUserDefaultUnitResponseDTO { 
-    defaultOrgUnit?: APIArchivingRegistrationsResponseDTOType | null;
+    defaultOrgUnit?: APIIdentityNamePairResponseDTO;
 }
 

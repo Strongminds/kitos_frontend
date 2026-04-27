@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest } from '../model/aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest';
+import { APIMultipleContractsRequestDto } from '../model/aPIMultipleContractsRequestDto';
 // @ts-ignore
-import { APIPatchSingleItContractInternalV2TransferItContractRangeRequest } from '../model/aPIPatchSingleItContractInternalV2TransferItContractRangeRequest';
+import { APIRoleAssignmentRequestDTO } from '../model/aPIRoleAssignmentRequestDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -56,16 +56,16 @@ export interface GetSingleItContractInternalV2GetSubHierarchyRequestParams {
 
 export interface PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams {
     contractUuid: string;
-    aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest?: APIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
+    aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
 }
 
 export interface PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams {
     contractUuid: string;
-    aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest?: APIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
+    aPIRoleAssignmentRequestDTO?: APIRoleAssignmentRequestDTO;
 }
 
 export interface PatchSingleItContractInternalV2TransferItContractRangeRequestParams {
-    aPIPatchSingleItContractInternalV2TransferItContractRangeRequest?: APIPatchSingleItContractInternalV2TransferItContractRangeRequest;
+    aPIMultipleContractsRequestDto?: APIMultipleContractsRequestDto;
 }
 
 
@@ -506,7 +506,7 @@ export class ItContractInternalV2Service {
         if (contractUuid === null || contractUuid === undefined) {
             throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractInternalV2PatchAddRoleAssignment.');
         }
-        const aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest = requestParameters.aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
+        const aPIRoleAssignmentRequestDTO = requestParameters.aPIRoleAssignmentRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -553,7 +553,7 @@ export class ItContractInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest,
+                body: aPIRoleAssignmentRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -576,7 +576,7 @@ export class ItContractInternalV2Service {
         if (contractUuid === null || contractUuid === undefined) {
             throw new Error('Required parameter contractUuid was null or undefined when calling patchSingleItContractInternalV2PatchRemoveRoleAssignment.');
         }
-        const aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest = requestParameters.aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest;
+        const aPIRoleAssignmentRequestDTO = requestParameters.aPIRoleAssignmentRequestDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -623,7 +623,7 @@ export class ItContractInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest,
+                body: aPIRoleAssignmentRequestDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -642,7 +642,7 @@ export class ItContractInternalV2Service {
     public patchSingleItContractInternalV2TransferItContractRange(requestParameters: PatchSingleItContractInternalV2TransferItContractRangeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
     public patchSingleItContractInternalV2TransferItContractRange(requestParameters: PatchSingleItContractInternalV2TransferItContractRangeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public patchSingleItContractInternalV2TransferItContractRange(requestParameters: PatchSingleItContractInternalV2TransferItContractRangeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
-        const aPIPatchSingleItContractInternalV2TransferItContractRangeRequest = requestParameters.aPIPatchSingleItContractInternalV2TransferItContractRangeRequest;
+        const aPIMultipleContractsRequestDto = requestParameters.aPIMultipleContractsRequestDto;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -689,7 +689,7 @@ export class ItContractInternalV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleItContractInternalV2TransferItContractRangeRequest,
+                body: aPIMultipleContractsRequestDto,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

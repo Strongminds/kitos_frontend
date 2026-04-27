@@ -9,30 +9,27 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
-import { APIGeneralDataResponseDTONumberOfExpectedUsers } from './generalDataResponseDTONumberOfExpectedUsers';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
+import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
-import { APIGeneralDataResponseDTOValidity } from './generalDataResponseDTOValidity';
+import { APIItSystemUsageValidityResponseDTO } from './itSystemUsageValidityResponseDTO';
 
 
 export interface APIGeneralDataResponseDTO { 
     localSystemId?: string | null;
     localCallName?: string | null;
-    dataClassification?: APIArchivingRegistrationsResponseDTOType | null;
+    dataClassification?: APIIdentityNamePairResponseDTO;
     notes?: string | null;
     systemVersion?: string | null;
-    numberOfExpectedUsers?: APIGeneralDataResponseDTONumberOfExpectedUsers | null;
-    validity: APIGeneralDataResponseDTOValidity;
-    mainContract?: APIArchivingRegistrationsResponseDTOType | null;
-    /**
-     *  (Supplier Field)
-     */
-    containsAITechnology?: APIYesNoUndecidedChoice | null;
-    webAccessibilityCompliance?: APIYesNoPartiallyChoice | null;
+    numberOfExpectedUsers?: APIExpectedUsersIntervalDTO;
+    validity: APIItSystemUsageValidityResponseDTO;
+    mainContract?: APIIdentityNamePairResponseDTO;
+    containsAITechnology?: APIYesNoUndecidedChoice;
+    webAccessibilityCompliance?: APIYesNoPartiallyChoice;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
-    isSociallyCritical?: APIYesNoDontKnowChoice | null;
+    isSociallyCritical?: APIYesNoDontKnowChoice;
 }
 

@@ -9,14 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIProcurementPlanDTO } from './procurementPlanDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIContractProcurementDataResponseDTOProcurementPlan } from './contractProcurementDataResponseDTOProcurementPlan';
 
 
 export interface APIContractProcurementDataWriteRequestDTO { 
     purchaseTypeUuid?: string | null;
     procurementStrategyUuid?: string | null;
-    procurementPlan?: APIContractProcurementDataResponseDTOProcurementPlan | null;
-    procurementInitiated?: APIYesNoUndecidedChoice | null;
+    procurementPlan?: APIProcurementPlanDTO;
+    procurementInitiated?: APIYesNoUndecidedChoice;
 }
 

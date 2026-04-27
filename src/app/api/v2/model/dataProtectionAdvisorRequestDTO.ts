@@ -12,10 +12,10 @@
 
 
 export interface APIDataProtectionAdvisorRequestDTO { 
+    name?: string | null;
+    email?: string | null;
     cvr?: string | null;
     phone?: string | null;
     address?: string | null;
-    name?: string | null;
-    email?: string | null;
 }
 

@@ -12,11 +12,11 @@
 
 
 export interface APIDataResponsibleResponseDTO { 
-    cvr?: string | null;
-    phone?: string | null;
-    address?: string | null;
     name?: string | null;
     email?: string | null;
     id?: number;
+    cvr?: string | null;
+    phone?: string | null;
+    address?: string | null;
 }
 

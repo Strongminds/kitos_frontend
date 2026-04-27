@@ -9,11 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIOrganizationUnitRolesResponseDTORoleAssignment } from './organizationUnitRolesResponseDTORoleAssignment';
+import { APIExtendedRoleAssignmentResponseDTO } from './extendedRoleAssignmentResponseDTO';
 
 
 export interface APIOrganizationUnitRolesResponseDTO { 
-    roleAssignment?: APIOrganizationUnitRolesResponseDTORoleAssignment | null;
+    roleAssignment?: APIExtendedRoleAssignmentResponseDTO;
     organizationUnitUuid?: string;
     organizationUnitName?: string | null;
 }

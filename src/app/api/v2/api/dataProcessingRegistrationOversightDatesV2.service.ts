@@ -19,9 +19,9 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIPatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequest } from '../model/aPIPatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequest';
+import { APICreateOversightDateDTO } from '../model/aPICreateOversightDateDTO';
 // @ts-ignore
-import { APIPostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequest } from '../model/aPIPostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequest';
+import { APIModifyOversightDateDTO } from '../model/aPIModifyOversightDateDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -36,12 +36,12 @@ export interface DeleteSingleDataProcessingRegistrationOversightDatesV2DeleteDat
 export interface PatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequestParams {
     uuid: string;
     oversightDateUuid: string;
-    aPIPatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequest?: APIPatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequest;
+    aPIModifyOversightDateDTO?: APIModifyOversightDateDTO;
 }
 
 export interface PostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequestParams {
     uuid: string;
-    aPIPostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequest?: APIPostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequest;
+    aPICreateOversightDateDTO?: APICreateOversightDateDTO;
 }
 
 
@@ -187,7 +187,7 @@ export class DataProcessingRegistrationOversightDatesV2Service {
         if (oversightDateUuid === null || oversightDateUuid === undefined) {
             throw new Error('Required parameter oversightDateUuid was null or undefined when calling patchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDate.');
         }
-        const aPIPatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequest = requestParameters.aPIPatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequest;
+        const aPIModifyOversightDateDTO = requestParameters.aPIModifyOversightDateDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -234,7 +234,7 @@ export class DataProcessingRegistrationOversightDatesV2Service {
         return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPatchSingleDataProcessingRegistrationOversightDatesV2PatchDataProcessingRegistrationOversightDateRequest,
+                body: aPIModifyOversightDateDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,
@@ -257,7 +257,7 @@ export class DataProcessingRegistrationOversightDatesV2Service {
         if (uuid === null || uuid === undefined) {
             throw new Error('Required parameter uuid was null or undefined when calling postSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDate.');
         }
-        const aPIPostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequest = requestParameters.aPIPostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequest;
+        const aPICreateOversightDateDTO = requestParameters.aPICreateOversightDateDTO;
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -303,7 +303,7 @@ export class DataProcessingRegistrationOversightDatesV2Service {
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
-                body: aPIPostSingleDataProcessingRegistrationOversightDatesV2PostDataProcessingRegistrationOversightDateRequest,
+                body: aPICreateOversightDateDTO,
                 responseType: <any>responseType_,
                 withCredentials: this.configuration.withCredentials,
                 headers: localVarHeaders,

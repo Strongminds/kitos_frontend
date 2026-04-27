@@ -9,13 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
 export interface APIKLEDetailsDTO { 
     uuid: string;
     kleNumber: string;
     description: string;
-    parentKle?: APIArchivingRegistrationsResponseDTOType | null;
+    parentKle?: APIIdentityNamePairResponseDTO;
 }
 

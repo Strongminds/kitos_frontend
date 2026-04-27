@@ -52,7 +52,7 @@ export class UserEffects {
       mergeMap(({ login: { email, password, remember } }) =>
         this.authorizeService
           .postSingleAuthorizePostLogin({
-            aPIPostSingleAuthorizePostLoginRequest: {
+            aPILoginDTO: {
               email,
               password,
               rememberMe: remember,
@@ -165,7 +165,7 @@ export class UserEffects {
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2PatchOrganization({
             organizationUuid,
-            aPIPatchSingleOrganizationsInternalV2PatchOrganizationRequest: request,
+            aPIOrganizationUpdateRequestDTO: request,
           })
           .pipe(
             map((organizationResponseDto) => UserActions.patchOrganizationSuccess(organizationResponseDto)),
@@ -181,7 +181,7 @@ export class UserEffects {
       switchMap(({ email }) =>
         this.resetPasswordService
           .postSinglePasswordResetInternalV2RequestPasswordReset({
-            aPIPostSinglePasswordResetInternalV2RequestPasswordResetRequest: { email },
+            aPIRequestPasswordResetRequestDTO: { email },
           })
           .pipe(
             map(() => UserActions.resetPasswordRequestSuccess(email)),
@@ -198,7 +198,7 @@ export class UserEffects {
         this.resetPasswordService
           .postSinglePasswordResetInternalV2PostPasswordReset({
             requestId,
-            aPIPostSinglePasswordResetInternalV2PostPasswordResetRequest: { password },
+            aPIResetPasswordRequestDTO: { password },
           })
           .pipe(
             map(() => UserActions.resetPasswordSuccess()),

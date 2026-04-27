@@ -14,8 +14,7 @@ import { APIJournalPeriodDTO } from './journalPeriodDTO';
 
 
 export interface APIArchivingCreationRequestDTO { 
-    journalPeriods?: Array<APIJournalPeriodDTO> | null;
-    archiveDuty?: APIArchiveDutyChoice | null;
+    archiveDuty?: APIArchiveDutyChoice;
     typeUuid?: string | null;
     locationUuid?: string | null;
     testLocationUuid?: string | null;
@@ -24,5 +23,6 @@ export interface APIArchivingCreationRequestDTO {
     notes?: string | null;
     frequencyInMonths?: number | null;
     documentBearing?: boolean | null;
+    journalPeriods?: Array<APIJournalPeriodDTO> | null;
 }
 

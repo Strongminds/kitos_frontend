@@ -129,7 +129,7 @@ export class OrganizationUnitEffects {
           return this.apiUnitService
             .postSingleOrganizationUnitsInternalV2CreateUnit({
               organizationUuid,
-              aPIPostSingleOrganizationUnitsInternalV2CreateUnitRequest: {
+              aPICreateOrganizationUnitRequestDTO: {
                 name,
                 parentUuid,
                 origin: 'Kitos',
@@ -156,7 +156,7 @@ export class OrganizationUnitEffects {
           .patchSingleOrganizationUnitsInternalV2PatchUnit({
             organizationUuid,
             organizationUnitUuid: unitUuid,
-            aPIPatchSingleOrganizationUnitsInternalV2PatchUnitRequest: request,
+            aPIUpdateOrganizationUnitRequestDTO: request,
           })
           .pipe(
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -176,7 +176,7 @@ export class OrganizationUnitEffects {
           .postSingleOrganizationUnitsInternalV2CreateBulkRoleAssignment({
             organizationUuid,
             organizationUnitUuid: orgUnitUuid,
-            aPIPostSingleOrganizationUnitsInternalV2CreateBulkRoleAssignmentRequest: {
+            aPIBulkRoleAssignmentRequestDTO: {
               roleUuid: roleUuid,
               userUuids: userUuids,
             },
@@ -198,7 +198,7 @@ export class OrganizationUnitEffects {
           .deleteSingleOrganizationUnitsInternalV2DeleteRoleAssignment({
             organizationUuid,
             organizationUnitUuid: unitUuid,
-            aPIDeleteSingleOrganizationUnitsInternalV2DeleteRoleAssignmentRequest: {
+            aPIDeleteOrganizationUnitRoleAssignmentRequestDTO: {
               roleUuid,
               userUuid,
             },
@@ -240,7 +240,7 @@ export class OrganizationUnitEffects {
           .deleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrations({
             organizationUuid,
             unitUuid,
-            aPIDeleteSingleOrganizationUnitRegistrationInternalV2RemoveRegistrationsRequest: request,
+            aPIChangeOrganizationUnitRegistrationV2RequestDTO: request,
           })
           .pipe(
             map(() => OrganizationUnitActions.removeRegistrationsSuccess(request)),
@@ -259,7 +259,7 @@ export class OrganizationUnitEffects {
           .putSingleOrganizationUnitRegistrationInternalV2TransferRegistrations({
             organizationUuid,
             unitUuid,
-            aPIPutSingleOrganizationUnitRegistrationInternalV2TransferRegistrationsRequest: request,
+            aPITransferOrganizationUnitRegistrationV2RequestDTO: request,
           })
           .pipe(
             map(() => OrganizationUnitActions.transferRegistrationsSuccess(request)),

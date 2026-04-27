@@ -180,7 +180,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: itContract,
+            aPIUpdateContractRequestDTO: itContract,
           })
           .pipe(
             map((response) => ITContractActions.patchITContractSuccess(response)),
@@ -205,7 +205,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: { general: { agreementElementUuids: uuids } },
+            aPIUpdateContractRequestDTO: { general: { agreementElementUuids: uuids } },
           })
           .pipe(
             map((response) => ITContractActions.addITContractSystemAgreementElementSuccess(response)),
@@ -231,7 +231,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: { general: { agreementElementUuids: uuids } },
+            aPIUpdateContractRequestDTO: { general: { agreementElementUuids: uuids } },
           })
           .pipe(
             map((response) => ITContractActions.removeITContractSystemAgreementElementSuccess(response)),
@@ -256,7 +256,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: { systemUsageUuids: uuids },
+            aPIUpdateContractRequestDTO: { systemUsageUuids: uuids },
           })
           .pipe(
             map((response) => ITContractActions.addITContractSystemUsageSuccess(response)),
@@ -282,7 +282,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: { systemUsageUuids: uuids },
+            aPIUpdateContractRequestDTO: { systemUsageUuids: uuids },
           })
           .pipe(
             map((response) => ITContractActions.removeITContractSystemUsageSuccess(response)),
@@ -309,7 +309,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: { dataProcessingRegistrationUuids: uuids },
+            aPIUpdateContractRequestDTO: { dataProcessingRegistrationUuids: uuids },
           })
           .pipe(
             map((response) => ITContractActions.addITContractDataProcessingRegistrationSuccess(response)),
@@ -336,7 +336,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: { dataProcessingRegistrationUuids: uuids },
+            aPIUpdateContractRequestDTO: { dataProcessingRegistrationUuids: uuids },
           })
           .pipe(
             map((response) => ITContractActions.removeITContractDataProcessingRegistrationSuccess(response)),
@@ -451,7 +451,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: {
+            aPIUpdateContractRequestDTO: {
               roles: existingRoles.concat(rolesToAdd),
             },
           })
@@ -470,7 +470,7 @@ export class ITContractEffects {
         this.apiInternalItContractService
           .patchSingleItContractInternalV2PatchRemoveRoleAssignment({
             contractUuid: contractUuid,
-            aPIPatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequest: {
+            aPIRoleAssignmentRequestDTO: {
               userUuid: userUuid,
               roleUuid: roleUuid,
             },
@@ -490,7 +490,7 @@ export class ITContractEffects {
       switchMap(([{ name, openAfterCreate }, organizationUuid]) =>
         this.apiItContractService
           .postSingleItContractV2PostItContract({
-            aPIPostSingleItContractV2PostItContractRequest: { name, organizationUuid },
+            aPICreateNewContractRequestDTO: { name, organizationUuid },
           })
           .pipe(
             map(({ uuid }) => ITContractActions.createItContractSuccess(uuid, openAfterCreate)),
@@ -507,7 +507,7 @@ export class ITContractEffects {
       switchMap(([{ contractName, usageUuid }, organizationUuid]) =>
         this.apiItContractService
           .postSingleItContractV2PostItContract({
-            aPIPostSingleItContractV2PostItContractRequest: {
+            aPICreateNewContractRequestDTO: {
               name: contractName,
               organizationUuid,
               systemUsageUuids: [usageUuid],
@@ -538,7 +538,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid: contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: request,
+            aPIUpdateContractRequestDTO: request,
           })
           .pipe(
             map((response) => ITContractActions.addItContractPaymentSuccess(response)),
@@ -566,7 +566,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: request,
+            aPIUpdateContractRequestDTO: request,
           })
           .pipe(
             map((response) => ITContractActions.updateItContractPaymentSuccess(response)),
@@ -589,7 +589,7 @@ export class ITContractEffects {
         return this.apiItContractService
           .patchSingleItContractV2PatchItContract({
             contractUuid,
-            aPIPutSingleItContractV2PutItContractRequest: request,
+            aPIUpdateContractRequestDTO: request,
           })
           .pipe(
             map((response) => ITContractActions.removeItContractPaymentSuccess(response)),
@@ -608,7 +608,7 @@ export class ITContractEffects {
           .postSingleOrganizationGridInternalV2SaveGridConfiguration({
             organizationUuid,
             overviewType: 'ItContract',
-            aPIPostSingleOrganizationGridInternalV2SaveGridConfigurationRequest: {
+            aPIOrganizationGridConfigurationRequestDTO: {
               visibleColumns: columnConfig,
             },
           })

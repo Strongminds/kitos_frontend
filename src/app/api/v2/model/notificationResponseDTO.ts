@@ -9,8 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchivingRegistrationsResponseDTOType } from './archivingRegistrationsResponseDTOType';
-import { APINotificationResponseDTOReceivers } from './notificationResponseDTOReceivers';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIRecipientResponseDTO } from './recipientResponseDTO';
 import { APIRepetitionFrequencyOptions } from './repetitionFrequencyOptions';
 import { APINotificationSendType } from './notificationSendType';
 import { APIOwnerResourceType } from './ownerResourceType';
@@ -25,25 +25,11 @@ export interface APINotificationResponseDTO {
     toDate?: string | null;
     subject?: string | null;
     body?: string | null;
-    ownerResourceType?: APINotificationResponseDTO.OwnerResourceTypeEnum;
-    notificationType?: APINotificationResponseDTO.NotificationTypeEnum;
-    ownerResource?: APIArchivingRegistrationsResponseDTOType | null;
-    repetitionFrequency?: APIRepetitionFrequencyOptions | null;
-    receivers?: APINotificationResponseDTOReceivers | null;
-    cCs?: APINotificationResponseDTOReceivers | null;
+    ownerResourceType?: APIOwnerResourceType;
+    notificationType?: APINotificationSendType;
+    ownerResource?: APIIdentityNamePairResponseDTO;
+    repetitionFrequency?: APIRepetitionFrequencyOptions;
+    receivers?: APIRecipientResponseDTO;
+    cCs?: APIRecipientResponseDTO;
 }
-export namespace APINotificationResponseDTO {
-    export type OwnerResourceTypeEnum = 'ItContract' | 'ItSystemUsage' | 'DataProcessingRegistration';
-    export const OwnerResourceTypeEnum = {
-        ItContract: 'ItContract' as OwnerResourceTypeEnum,
-        ItSystemUsage: 'ItSystemUsage' as OwnerResourceTypeEnum,
-        DataProcessingRegistration: 'DataProcessingRegistration' as OwnerResourceTypeEnum
-    };
-    export type NotificationTypeEnum = 'Immediate' | 'Repeat';
-    export const NotificationTypeEnum = {
-        Immediate: 'Immediate' as NotificationTypeEnum,
-        Repeat: 'Repeat' as NotificationTypeEnum
-    };
-}
-
 
