@@ -31,7 +31,7 @@ import { DialogComponent } from '../dialog/dialog.component';
   ],
 })
 export class LinkWriteDialogComponent extends BaseComponent implements OnInit {
-  @Input() public url$!: Observable<string | undefined>;
+  @Input() public url$!: Observable<string | undefined | null>;
   @Output() submitMethod = new EventEmitter();
 
   public readonly urlForm = new FormGroup({

@@ -114,7 +114,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     this.confirmationService.confirmAction({
       category: ConfirmActionCategory.Warning,
       message: $localize`Er du sikker på at du vil deaktivere ${this.getSpecificNotificationWarning(
-        notification.name,
+        notification.name ?? undefined,
       )}?`,
       onConfirm: () => {
         if (notification.uuid) {
@@ -134,7 +134,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
   public onRemove(notification: APINotificationResponseDTO) {
     this.confirmationService.confirmAction({
       category: ConfirmActionCategory.Warning,
-      message: $localize`Er du sikker på at du vil fjerne ${this.getSpecificNotificationWarning(notification.name)}?`,
+      message: $localize`Er du sikker på at du vil fjerne ${this.getSpecificNotificationWarning(notification.name ?? undefined)}?`,
       onConfirm: () => {
         if (notification.uuid) {
           this.componentStore.deleteNotification({

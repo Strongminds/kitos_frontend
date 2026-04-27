@@ -4,7 +4,7 @@ import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 
 import { Observable, mergeMap } from 'rxjs';
-import { APIItInterfaceResponseDTO, APIV2ItInterfaceService } from 'src/app/api/v2';
+import { APIItInterfaceResponseDTO, ItInterfaceV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
@@ -21,7 +21,7 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
 
   constructor(
     private store: Store,
-    private apiInterfaceService: APIV2ItInterfaceService,
+    private apiInterfaceService: ItInterfaceV2Service,
   ) {
     super({ loading: false });
   }
@@ -46,7 +46,7 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
       mergeMap(([exposedBySystemUuid, organizationUuid]) => {
         this.updateItInterfacesIsLoading(true);
         return this.apiInterfaceService
-          .getManyItInterfaceV2GetItInterfaces({
+          .getSingleItInterfaceV2GetItInterfaces({
             exposedBySystemUuid: exposedBySystemUuid,
             usedInOrganizationUuid: organizationUuid,
             includeDeactivated: true,
@@ -55,10 +55,10 @@ export class ItSystemInterfacesTableComponentStore extends ComponentStore<State>
           })
           .pipe(
             tapResponse({
-    next: (itInterfaces) => this.updateInterfaces(itInterfaces),
-    error: (e) => console.error(e),
-    complete: () => this.updateItInterfacesIsLoading(false)
-}),
+              next: (itInterfaces: APIItInterfaceResponseDTO[]) => this.updateInterfaces(itInterfaces),
+              error: (e) => console.error(e),
+              complete: () => this.updateItInterfacesIsLoading(false),
+            }),
           );
       }),
     ),

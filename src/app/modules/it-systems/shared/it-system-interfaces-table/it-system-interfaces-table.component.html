@@ -28,7 +28,7 @@
                 <td>
                   <app-paragraph paragraphSize="small" [cropOnOverflow]="true">
                     <app-selected-option-type-text
-                      [selectedOption]="itInterface.itInterfaceType"
+                      [selectedOption]="itInterface.itInterfaceType ?? undefined"
                       [availableOptions$]="availableInterfaceTypesDictionary$"
                       >
                     </app-selected-option-type-text>
@@ -38,7 +38,7 @@
                   <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{ itInterface.description }}</app-paragraph>
                 </td>
                 <td>
-                  <app-external-page-link [url]="itInterface.urlReference" linkFontSize="small"></app-external-page-link>
+                  <app-external-page-link [url]="itInterface.urlReference ?? undefined" linkFontSize="small"></app-external-page-link>
                 </td>
               </tr>
             }

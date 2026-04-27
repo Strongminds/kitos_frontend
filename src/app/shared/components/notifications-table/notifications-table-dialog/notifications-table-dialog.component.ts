@@ -374,7 +374,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       notificationControls.bodyControl.setValue(this.notification.body);
       notificationControls.notificationTypeControl.setValue(mapNotificationType(this.notification.notificationType));
       notificationControls.repetitionControl.setValue(
-        mapNotificationRepetitionFrequency(this.notification.repetitionFrequency)
+        mapNotificationRepetitionFrequency(this.notification.repetitionFrequency ?? undefined)
       );
 
       const emailRecipientsSet = new Set(

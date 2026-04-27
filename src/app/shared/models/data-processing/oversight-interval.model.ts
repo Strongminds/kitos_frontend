@@ -1,8 +1,8 @@
-import { APIDataProcessingRegistrationOversightResponseDTO } from 'src/app/api/v2';
+import { APIOversightIntervalChoice } from 'src/app/api/v2';
 
 export interface OversightInterval {
   name: string;
-  value: APIDataProcessingRegistrationOversightResponseDTO.OversightIntervalEnum;
+  value: APIOversightIntervalChoice;
 }
 
 export enum OversightIntervalEnum {
@@ -20,8 +20,6 @@ export const oversightIntervalOptions: OversightInterval[] = [
   { name: $localize`Andet`, value: OversightIntervalEnum.Other },
 ];
 
-export const mapToOversightInterval = (
-  value?: APIDataProcessingRegistrationOversightResponseDTO.OversightIntervalEnum,
-): OversightInterval | undefined => {
+export const mapToOversightInterval = (value?: APIOversightIntervalChoice): OversightInterval | undefined => {
   return oversightIntervalOptions.find((option) => option.value === value);
 };

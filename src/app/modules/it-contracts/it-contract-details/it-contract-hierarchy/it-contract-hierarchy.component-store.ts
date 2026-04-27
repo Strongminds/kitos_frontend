@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { Observable, mergeMap, switchMap, tap } from 'rxjs';
 import {
   APIRegistrationHierarchyNodeWithActivationStatusResponseDTO,
-  APIV2ItContractInternalINTERNALService,
+  ItContractInternalV2Service,
 } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
@@ -24,8 +24,8 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
   public readonly isLoading$ = this.select((state) => state.loading);
 
   constructor(
-    @Inject(APIV2ItContractInternalINTERNALService)
-    private apiItContractInternalService: APIV2ItContractInternalINTERNALService,
+    @Inject(ItContractInternalV2Service)
+    private apiItContractInternalService: ItContractInternalV2Service,
     private store: Store,
   ) {
     super({ loading: false });
@@ -56,12 +56,12 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
     itContractUuid$.pipe(
       mergeMap((uuid) => {
         this.updateIsLoading(true);
-        return this.apiItContractInternalService.getManyItContractInternalV2GetHierarchy({ contractUuid: uuid }).pipe(
+        return this.apiItContractInternalService.getSingleItContractInternalV2GetHierarchy({ contractUuid: uuid }).pipe(
           tapResponse({
-    next: (hierarchy) => this.updateHierarchy(hierarchy),
-    error: (e) => console.error(e),
-    complete: () => this.updateIsLoading(false)
-}),
+            next: (hierarchy: any) => this.updateHierarchy(hierarchy),
+            error: (e) => console.error(e),
+            complete: () => this.updateIsLoading(false),
+          }),
         );
       }),
     ),
@@ -72,13 +72,13 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
       mergeMap((uuid) => {
         this.updateIsLoading(true);
         return this.apiItContractInternalService
-          .getManyItContractInternalV2GetSubHierarchy({ contractUuid: uuid })
+          .getSingleItContractInternalV2GetSubHierarchy({ contractUuid: uuid })
           .pipe(
             tapResponse({
-    next: (hierarchy) => this.updateSubHierarchy(hierarchy),
-    error: (e) => console.error(e),
-    complete: () => this.updateIsLoading(false)
-}),
+              next: (hierarchy) => this.updateSubHierarchy(hierarchy),
+              error: (e) => console.error(e),
+              complete: () => this.updateIsLoading(false),
+            }),
           );
       }),
     ),
@@ -91,20 +91,23 @@ export class ItContractHierarchyComponentStore extends ComponentStore<State> {
         switchMap((request) =>
           this.apiItContractInternalService
             .patchSingleItContractInternalV2TransferItContractRange({
-              request: { contractUuids: request.uuids, parentUuid: request.parentUuid },
+              aPIMultipleContractsRequestDto: {
+                contractUuids: request.uuids,
+                parentUuid: request.parentUuid,
+              },
             })
             .pipe(
               tapResponse({
-    next: () => {
-        this.store.dispatch(ITContractActions.transferContractsSuccess());
-        return this.getSubHierarchy(request.currentParentUuid);
-    },
-    error: (e) => {
-        console.error(e);
-        this.store.dispatch(ITContractActions.transferContractsError());
-    },
-    complete: () => this.updateIsLoading(false)
-}),
+                next: () => {
+                  this.store.dispatch(ITContractActions.transferContractsSuccess());
+                  return this.getSubHierarchy(request.currentParentUuid);
+                },
+                error: (e) => {
+                  console.error(e);
+                  this.store.dispatch(ITContractActions.transferContractsError());
+                },
+                complete: () => this.updateIsLoading(false),
+              }),
             ),
         ),
       ),

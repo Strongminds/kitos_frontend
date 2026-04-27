@@ -5,11 +5,7 @@ import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, mergeMap, of, switchMap } from 'rxjs';
-import {
-  APIItSystemResponseDTO,
-  APIV2ItSystemService,
-  APIV2ItSystemUsageMigrationINTERNALService,
-} from 'src/app/api/v2';
+import { APIItSystemResponseDTO, ItSystemUsageMigrationV2Service, ItSystemV2Service } from 'src/app/api/v2';
 import { CATALOG_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import {
   castContainsFieldToString,
@@ -30,12 +26,12 @@ export class ITSystemEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2ItSystemService) private apiItSystemService: APIV2ItSystemService,
+    @Inject(ItSystemV2Service) private apiItSystemService: ItSystemV2Service,
     private httpClient: HttpClient,
     private externalReferenceApiService: ExternalReferencesApiService,
     private gridColumnStorageService: GridColumnStorageService,
-    @Inject(APIV2ItSystemUsageMigrationINTERNALService)
-    private readonly itSystemUsageMigrationService: APIV2ItSystemUsageMigrationINTERNALService,
+    @Inject(ItSystemUsageMigrationV2Service)
+    private readonly itSystemUsageMigrationService: ItSystemUsageMigrationV2Service,
     private gridDataCacheService: GridDataCacheService,
   ) {}
 
@@ -142,20 +138,22 @@ export class ITSystemEffects {
       concatLatestFrom(() => this.store.select(selectItSystemUuid)),
       switchMap(([{ itSystem, customSuccessText, customErrorText }, systemUuid]) => {
         if (!systemUuid) return of(ITSystemActions.patchITSystemError());
-        return this.apiItSystemService.patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, request: itSystem }).pipe(
-          map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
-          catchError((err: HttpErrorResponse) => {
-            if (err.status === 409) {
-              return of(
-                ITSystemActions.patchITSystemError(
-                  $localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`,
-                ),
-              );
-            } else {
-              return of(ITSystemActions.patchITSystemError(customErrorText));
-            }
-          }),
-        );
+        return this.apiItSystemService
+          .patchSingleItSystemV2PatchItSystem({ uuid: systemUuid, aPIUpdateItSystemRequestDTO: itSystem })
+          .pipe(
+            map((itSystem) => ITSystemActions.patchITSystemSuccess(itSystem, customSuccessText)),
+            catchError((err: HttpErrorResponse) => {
+              if (err.status === 409) {
+                return of(
+                  ITSystemActions.patchITSystemError(
+                    $localize`Fejl! Feltet kunne ikke ændres da værdien den allerede findes i KITOS!`,
+                  ),
+                );
+              } else {
+                return of(ITSystemActions.patchITSystemError(customErrorText));
+              }
+            }),
+          );
       }),
     );
   });
@@ -254,10 +252,12 @@ export class ITSystemEffects {
       ofType(ITSystemActions.createItSystem),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid)),
       switchMap(([{ name, openAfterCreate }, organizationUuid]) => {
-        return this.apiItSystemService.postSingleItSystemV2PostItSystem({ request: { name, organizationUuid } }).pipe(
-          map(({ uuid }) => ITSystemActions.createItSystemSuccess(uuid, openAfterCreate)),
-          catchError(() => of(ITSystemActions.createItSystemError())),
-        );
+        return this.apiItSystemService
+          .postSingleItSystemV2PostItSystem({ aPICreateItSystemRequestDTO: { name, organizationUuid } })
+          .pipe(
+            map(({ uuid }) => ITSystemActions.createItSystemSuccess(uuid, openAfterCreate)),
+            catchError(() => of(ITSystemActions.createItSystemError())),
+          );
       }),
     );
   });

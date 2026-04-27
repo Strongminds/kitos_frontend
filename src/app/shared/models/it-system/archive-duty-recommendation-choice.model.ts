@@ -1,4 +1,4 @@
-import { APIRecommendedArchiveDutyResponseDTO } from 'src/app/api/v2';
+import { APIRecommendedArchiveDutyChoice } from 'src/app/api/v2';
 import {
   ARCHIVE_B_TYPE_TEXT,
   ARCHIVE_BK_TYPE_TEXT,
@@ -11,42 +11,42 @@ import {
 
 export interface ArchiveDutyRecommendationChoice {
   name: string;
-  value: APIRecommendedArchiveDutyResponseDTO.IdEnum;
+  value: APIRecommendedArchiveDutyChoice;
 }
 
 export const archiveDutyRecommendationChoiceOptions: ArchiveDutyRecommendationChoice[] = [
   {
     name: ARCHIVE_B_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.B,
+    value: APIRecommendedArchiveDutyChoice.B,
   },
   {
     name: ARCHIVE_BK_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.Bk,
+    value: APIRecommendedArchiveDutyChoice.Bk,
   },
   {
     name: ARCHIVE_K_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.K,
+    value: APIRecommendedArchiveDutyChoice.K,
   },
   {
     name: ARCHIVE_PRESERVE_DATA_CAN_DISCARD_DOCUMENTS_TEXT,
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.PreserveDataCanDiscardDocuments,
+    value: APIRecommendedArchiveDutyChoice.PreserveDataCanDiscardDocuments,
   },
   {
     name: ARCHIVE_KD_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.Kd,
+    value: APIRecommendedArchiveDutyChoice.Kd,
   },
   {
     name: ARCHIVE_KB_TYPE_TEXT,
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.Kb,
+    value: APIRecommendedArchiveDutyChoice.Kb,
   },
   {
     name: ARCHIVE_TEXT_NO_RECOMMENDATION,
-    value: APIRecommendedArchiveDutyResponseDTO.IdEnum.NoRecommendation,
+    value: APIRecommendedArchiveDutyChoice.NoRecommendation,
   },
 ];
 
 export const mapArchiveDutyRecommendationChoice = (
-  value?: APIRecommendedArchiveDutyResponseDTO.IdEnum
+  value?: APIRecommendedArchiveDutyChoice,
 ): ArchiveDutyRecommendationChoice | undefined => {
   return archiveDutyRecommendationChoiceOptions.find((option) => option.value === value);
 };
