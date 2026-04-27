@@ -56,7 +56,7 @@ export const ItSystemUsageUiBluePrint = {
         webAccessibility: {
           text: $localize`Webtilgængelighed (WCAG)`,
         },
-        isSociallyCritical: {
+        sociallyCritical: {
           text: $localize`Samfundskritisk IT-system`,
         },
         businessCritical: {

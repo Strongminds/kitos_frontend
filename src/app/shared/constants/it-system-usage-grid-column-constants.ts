@@ -55,4 +55,4 @@ export const WebAccessibilityCompliance = 'WebAccessibilityCompliance';
 export const LastWebAccessibilityCheck = 'LastWebAccessibilityCheck';
 export const WebAccessibilityNotes = 'WebAccessibilityNotes';
 export const GdprCriticality = 'GdprCriticality';
-export const IsSociallyCritical = 'IsSociallyCritical';
+export const SociallyCritical = 'SociallyCritical';

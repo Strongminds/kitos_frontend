@@ -125,8 +125,7 @@ export const selectITSystemUsageEnableStatus = createItSystemUsageFrontPageField
 export const selectITSystemUsageEnableContainsAITechnology =
   createItSystemUsageFrontPageFieldSelector('containsAITechnology');
 export const selectITSystemUsageEnableWebAccessibility = createItSystemUsageFrontPageFieldSelector('webAccessibility');
-export const selectITSystemUsageEnableIsSociallyCritical =
-  createItSystemUsageFrontPageFieldSelector('isSociallyCritical');
+export const selectITSystemUsageEnableSociallyCritical = createItSystemUsageFrontPageFieldSelector('sociallyCritical');
 export const selectITSystemUsageEnableBusinessCritical = createItSystemUsageFrontPageFieldSelector('businessCritical');
 
 //IT System Usage > Contracts

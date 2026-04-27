@@ -75,14 +75,14 @@
       ></app-tooltip>
     }
 
-    @if (isSociallyCriticalEnabled$ | async) {
+    @if (sociallyCriticalEnabled$ | async) {
       <app-dropdown
         text="Samfundskritisk IT-system"
         i18n-text
         [formGroup]="itSystemInformationForm"
-        formName="isSociallyCritical"
-        (valueChange)="patchGeneral({ isSociallyCritical: $event })"
-        [data]="isSociallyCriticalOptions"
+        formName="sociallyCritical"
+        (valueChange)="patchGeneral({ sociallyCritical: $event })"
+        [data]="sociallyCriticalOptions"
         toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
         i18n-toolTipText
       ></app-dropdown>

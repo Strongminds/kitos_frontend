@@ -84,7 +84,6 @@ import {
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
-  selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -92,6 +91,7 @@ import {
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableOutgoingRelations,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
+  selectITSystemUsageEnableSociallyCritical,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabOrganization,
@@ -301,9 +301,7 @@ export class GridUIConfigService {
             UsageFields.WebAccessibilityNotes,
           ]),
         ),
-      this.store
-        .select(selectITSystemUsageEnableIsSociallyCritical)
-        .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
+      this.store.select(selectITSystemUsageEnableSociallyCritical).pipe(shouldEnable([UsageFields.SociallyCritical])),
       this.store.select(selectITSystemUsageEnableBusinessCritical).pipe(shouldEnable([UsageFields.IsBusinessCritical])),
 
       //Contracts

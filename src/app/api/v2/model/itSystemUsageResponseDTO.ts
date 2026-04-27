@@ -23,9 +23,9 @@ import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResp
 
 export interface APIItSystemUsageResponseDTO { 
     uuid: string;
-    createdBy: APIIdentityNamePairResponseDTO;
+    createdBy?: APIIdentityNamePairResponseDTO;
     lastModified: string;
-    lastModifiedBy: APIIdentityNamePairResponseDTO;
+    lastModifiedBy?: APIIdentityNamePairResponseDTO;
     systemContext: APIIdentityNamePairResponseDTO;
     organizationContext: APIShallowOrganizationResponseDTO;
     general: APIGeneralDataResponseDTO;
