@@ -61,7 +61,6 @@ import {
   selectItContractsEnableTermination,
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableAssociatedContracts,
-  selectITSystemUsageEnableBusinessCritical,
   selectITSystemUsageEnableCatalogArchiveDuty,
   selectITSystemUsageEnableCatalogArchiveDutyComment,
   selectITSystemUsageEnableContainsAITechnology,
@@ -84,6 +83,8 @@ import {
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
+  selectITSystemUsageEnableIsBusinessCritical,
+  selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -91,7 +92,6 @@ import {
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableOutgoingRelations,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
-  selectITSystemUsageEnableSociallyCritical,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabOrganization,
@@ -301,8 +301,12 @@ export class GridUIConfigService {
             UsageFields.WebAccessibilityNotes,
           ]),
         ),
-      this.store.select(selectITSystemUsageEnableSociallyCritical).pipe(shouldEnable([UsageFields.SociallyCritical])),
-      this.store.select(selectITSystemUsageEnableBusinessCritical).pipe(shouldEnable([UsageFields.IsBusinessCritical])),
+      this.store
+        .select(selectITSystemUsageEnableIsSociallyCritical)
+        .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
+      this.store
+        .select(selectITSystemUsageEnableIsBusinessCritical)
+        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
 
       //Contracts
       combineAND([

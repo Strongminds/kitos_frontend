@@ -645,7 +645,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraData: gdprCriticalityOptions,
     },
     {
-      field: GridFields.SociallyCritical,
+      field: GridFields.IsSociallyCritical,
       title: $localize`Samfundskritisk IT-system`,
       section: USAGE_SECTION_NAME,
       hidden: true,

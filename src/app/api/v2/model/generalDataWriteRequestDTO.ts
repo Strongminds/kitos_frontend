@@ -28,7 +28,7 @@ export interface APIGeneralDataWriteRequestDTO {
     webAccessibilityCompliance?: APIYesNoPartiallyChoice;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
-    sociallyCritical?: APIYesNoDontKnowChoice;
-    businessCritical?: APIYesNoDontKnowChoice;
+    isSociallyCritical?: APIYesNoDontKnowChoice;
+    isBusinessCritical?: APIYesNoDontKnowChoice;
 }
 

@@ -28,8 +28,8 @@ export interface APIGeneralDataUpdateRequestDTO {
     webAccessibilityCompliance?: APIYesNoPartiallyChoice;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
-    sociallyCritical?: APIYesNoDontKnowChoice;
-    businessCritical?: APIYesNoDontKnowChoice;
+    isSociallyCritical?: APIYesNoDontKnowChoice;
+    isBusinessCritical?: APIYesNoDontKnowChoice;
     mainContractUuid?: string | null;
 }
 
