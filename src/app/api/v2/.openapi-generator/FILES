@@ -188,7 +188,6 @@ model/createOrganizationUnitRequestDTO.ts
 model/createOrganizationUnitRoleAssignmentRequestDTO.ts
 model/createOversightDateDTO.ts
 model/createUserRequestDTO.ts
-model/criticalityInfoResponseDTO.ts
 model/criticalityInfoWriteRequestDTO.ts
 model/customizedUINodeRequestDTO.ts
 model/customizedUINodeResponseDTO.ts
