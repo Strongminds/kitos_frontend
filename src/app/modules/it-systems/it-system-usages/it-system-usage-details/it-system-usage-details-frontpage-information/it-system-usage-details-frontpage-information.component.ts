@@ -264,11 +264,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
           });
 
-          console.log('Patching criticality info with', general.criticalityInfo);
-
           this.itSystemCriticalityForm.patchValue({
-            isSociallyCritical: mapToYesNoDontKnowEnum(general.criticalityInfo.isSociallyCritical),
-            isBusinessCritical: mapToYesNoDontKnowEnum(general.criticalityInfo.businessCritical),
+            isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
+            isBusinessCritical: mapToYesNoDontKnowEnum(general.businessCritical),
           });
 
           this.setFormCriticalityLastChangedIfNotUndefined(general);
@@ -303,9 +301,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   private setFormCriticalityLastChangedIfNotUndefined(general: APIGeneralDataResponseDTO) {
-    if (general.criticalityInfo.lastChanged) {
+    if (general.criticalityFieldsLastChanged) {
       this.itSystemCriticalityForm.controls.criticalityLastChanged.setValue(
-        new Date(general.criticalityInfo.lastChanged),
+        new Date(general.criticalityFieldsLastChanged),
       );
     }
   }
@@ -317,5 +315,4 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
     }
   }
-
 }
