@@ -57,7 +57,6 @@ export * from './createOrganizationUnitRequestDTO';
 export * from './createOrganizationUnitRoleAssignmentRequestDTO';
 export * from './createOversightDateDTO';
 export * from './createUserRequestDTO';
-export * from './criticalityInfoWriteRequestDTO';
 export * from './customizedUINodeRequestDTO';
 export * from './customizedUINodeResponseDTO';
 export * from './dataProcessingRegistrationGeneralDataResponseDTO';
