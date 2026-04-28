@@ -96,7 +96,7 @@
           i18n-text
           [formGroup]="itSystemCriticalityForm"
           formName="isSociallyCritical"
-          (valueChange)="patchGeneral({ criticalityInfo: { isSociallyCritical: $event } })"
+          (valueChange)="patchGeneral({ isSociallyCritical: $event } )"
           [data]="isSociallyCriticalOptions"
           toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
           i18n-toolTipText
@@ -110,7 +110,7 @@
         [formGroup]="itSystemCriticalityForm"
         formName="isBusinessCritical"
         [data]="isBusinessCriticalOptions"
-        (valueChange)="patchGeneral({ criticalityInfo: { businessCritical: $event } })"
+        (valueChange)="patchGeneral({ businessCritical: $event })"
         toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
         i18n-toolTipText
       ></app-dropdown>
