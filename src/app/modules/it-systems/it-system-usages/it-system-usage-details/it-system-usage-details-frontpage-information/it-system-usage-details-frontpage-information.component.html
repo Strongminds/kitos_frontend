@@ -74,19 +74,34 @@
         </app-dropdown
       ></app-tooltip>
     }
-
-    @if (isSociallyCriticalEnabled$ | async) {
-      <app-dropdown
-        text="Samfundskritisk IT-system"
+    @if (descriptionEnabled$ | async) {
+      <app-textarea
+        class="full-width"
+        text="Note"
         i18n-text
         [formGroup]="itSystemInformationForm"
-        formName="isSociallyCritical"
-        (valueChange)="patchGeneral({ isSociallyCritical: $event })"
-        [data]="isSociallyCriticalOptions"
-        toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
-        i18n-toolTipText
-      ></app-dropdown>
+        formName="notes"
+        (valueChange)="patchGeneral({ notes: $event })"
+      ></app-textarea>
     }
+  </form>
+</app-card>
+
+<app-card data-cy="system-criticality-section">
+  <app-card-header title="Systemkritikalitet" helpTextKey="it-system.criticality" i18n-title></app-card-header>
+  <form [formGroup]="itSystemCriticalityForm">
+    @if (isSociallyCriticalEnabled$ | async) {
+        <app-dropdown
+          text="Samfundskritisk IT-system"
+          i18n-text
+          [formGroup]="itSystemInformationForm"
+          formName="isSociallyCritical"
+          (valueChange)="patchGeneral({ isSociallyCritical: $event })"
+          [data]="isSociallyCriticalOptions"
+          toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
+          i18n-toolTipText
+        ></app-dropdown>
+      }
 
     @if (isBusinessCriticalEnabled$ | async) {
       <app-dropdown
@@ -100,18 +115,7 @@
         i18n-toolTipText
       ></app-dropdown>
     }
-
-    @if (descriptionEnabled$ | async) {
-      <app-textarea
-        class="full-width"
-        text="Note"
-        i18n-text
-        [formGroup]="itSystemInformationForm"
-        formName="notes"
-        (valueChange)="patchGeneral({ notes: $event })"
-      ></app-textarea>
-    }
-  </form>
+    </form>
 </app-card>
 
 @if (showSystemUsageCard$ | async) {

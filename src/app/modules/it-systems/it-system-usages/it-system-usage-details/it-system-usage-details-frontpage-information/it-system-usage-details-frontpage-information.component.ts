@@ -102,6 +102,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+    },
+    { updateOn: 'blur' },
+  );
+
+  public readonly itSystemCriticalityForm = new FormGroup(
+    {
       isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       isBusinessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
@@ -251,6 +257,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
+          });
+
+          this.itSystemCriticalityForm.patchValue({
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
             isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
           });
