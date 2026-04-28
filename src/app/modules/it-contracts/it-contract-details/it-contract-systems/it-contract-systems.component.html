@@ -102,7 +102,7 @@
                           <app-paragraph paragraphSize="small" [cropOnOverflow]="true">{{ relation.description }}</app-paragraph>
                         </td>
                         <td>
-                          <app-external-page-link [url]="relation.urlReference"></app-external-page-link>
+                          <app-external-page-link [url]="relation.urlReference ?? undefined"></app-external-page-link>
                         </td>
                         <td>
                           <app-paragraph paragraphSize="small">{{ relation.relationFrequency?.name }}</app-paragraph>

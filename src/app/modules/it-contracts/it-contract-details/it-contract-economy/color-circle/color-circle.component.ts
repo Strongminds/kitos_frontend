@@ -1,10 +1,10 @@
 import { Component, Input } from '@angular/core';
-import { APIPaymentResponseDTO } from 'src/app/api/v2';
+import { APIPaymentAuditStatus } from 'src/app/api/v2';
 
-import { WhiteCircleIconComponent } from '../../../../../shared/components/icons/white-circle-icon.component';
-import { RedCircleIconComponent } from '../../../../../shared/components/icons/red-circle-icon.component';
-import { OrangeCircleIconComponent } from '../../../../../shared/components/icons/orange-circle-icon.component';
 import { GreenCircleIconComponent } from '../../../../../shared/components/icons/green-circle-icon.component';
+import { OrangeCircleIconComponent } from '../../../../../shared/components/icons/orange-circle-icon.component';
+import { RedCircleIconComponent } from '../../../../../shared/components/icons/red-circle-icon.component';
+import { WhiteCircleIconComponent } from '../../../../../shared/components/icons/white-circle-icon.component';
 
 @Component({
   selector: 'app-color-circle[color]',
@@ -18,5 +18,5 @@ import { GreenCircleIconComponent } from '../../../../../shared/components/icons
 ],
 })
 export class ColorCircleComponent {
-  @Input() public color!: APIPaymentResponseDTO.AuditStatusEnum | undefined;
+  @Input() public color!: APIPaymentAuditStatus | undefined;
 }

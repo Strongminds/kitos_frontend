@@ -81,3 +81,8 @@
   <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ description }}</app-paragraph>
 </app-textbox-info>
 }
+@if (toolTipText) {
+<app-textbox-info>
+  <app-paragraph paragraphSize="x-small">{{ toolTipText }}</app-paragraph>
+</app-textbox-info>
+}

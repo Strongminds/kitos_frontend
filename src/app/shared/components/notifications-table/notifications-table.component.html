@@ -50,8 +50,8 @@
                     <app-paragraph [cropOnOverflow]="true" [breakWordOnOverflow]="true">
                       {{
                       getCommaSeparatedRecipients(
-                      notification.receivers?.emailRecipients,
-                      notification.receivers?.roleRecipients
+                      notification.receivers?.emailRecipients ?? undefined,
+                      notification.receivers?.roleRecipients ?? undefined
                       )
                       }}
                     </app-paragraph>
@@ -69,7 +69,7 @@
                     </td>
                     <td>
                       <app-paragraph [cropOnOverflow]="true">
-                        {{ getCommaSeparatedRecipients(notification.cCs?.emailRecipients, notification.cCs?.roleRecipients) }}
+                        {{ getCommaSeparatedRecipients(notification.cCs?.emailRecipients ?? undefined, notification.cCs?.roleRecipients ?? undefined) }}
                       </app-paragraph>
                       @if (
                         notification.cCs?.emailRecipients?.length === 0 && notification.cCs?.roleRecipients?.length === 0

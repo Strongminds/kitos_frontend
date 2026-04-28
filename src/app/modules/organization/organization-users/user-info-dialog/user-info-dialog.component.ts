@@ -42,12 +42,12 @@ import { UserRoleTableComponent } from './user-role-table/user-role-table.compon
     TrashcanIconComponent,
     AsyncPipe,
     AppDatePipe,
-    LoadingComponent
-],
+    LoadingComponent,
+  ],
 })
 export class UserInfoDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;
-  @Input() hasModificationPermission$!: Observable<APIUserCollectionEditPermissionsResponseDTO | undefined>;
+  @Input() hasModificationPermission$!: Observable<APIUserCollectionEditPermissionsResponseDTO | undefined | null>;
 
   public $sendingNotification = new BehaviorSubject(false);
 
@@ -85,7 +85,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
     private dialogOpenerService: DialogOpenerService,
     private dialogRef: MatDialogRef<UserInfoDialogComponent>,
     private actions$: Actions,
-    private roleService: RoleOptionTypeService
+    private roleService: RoleOptionTypeService,
   ) {
     super();
   }
@@ -99,7 +99,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.sendNotificationSuccess))
-        .subscribe(() => this.$sendingNotification.next(false))
+        .subscribe(() => this.$sendingNotification.next(false)),
     );
 
     this.subscriptions.add(
@@ -108,7 +108,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
         this.contractRolesSubject$.next(user.ItContractRights ?? []);
         this.usageRolesSubject$.next(user.ItSystemRights ?? []);
         this.dprRolesSubject$.next(user.DataProcessingRegistrationRights ?? []);
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -116,7 +116,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
         this.hasContractRolesModifyPermission$.next(perm?.modifyContractRole ?? false);
         this.hasSystemAndDprRolesModifyPermission$.next(perm?.modifySystemRole ?? false);
         this.hasOrganizationRolesModifyPermission$.next(perm?.modifyOrganizationRole ?? false);
-      })
+      }),
     );
   }
 
@@ -124,7 +124,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.actions$.pipe(ofType(OrganizationUserActions.deleteUserSuccess)).subscribe(() => {
         this.dialogRef.close();
-      })
+      }),
     );
 
     this.dialogOpenerService.openDeleteUserDialog(this.user$, true);
@@ -134,7 +134,7 @@ export class UserInfoDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.isGlobalAdmin$.pipe(first()).subscribe((isGlobalAdmin) => {
         this.dialogOpenerService.openEditUserDialog(user, true, isGlobalAdmin);
-      })
+      }),
     );
   }
 

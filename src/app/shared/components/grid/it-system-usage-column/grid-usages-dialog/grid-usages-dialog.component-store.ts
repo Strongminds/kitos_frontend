@@ -6,8 +6,8 @@ import { combineLatestWith, map, mergeMap, Observable, of, switchMap, tap, withL
 import {
   APIItSystemUsageMigrationV2ResponseDTO,
   APIItSystemUsageSearchResultResponseDTO,
-  APIV2ItSystemUsageInternalINTERNALService,
-  APIV2ItSystemUsageMigrationINTERNALService,
+  ItSystemUsageInternalV2Service,
+  ItSystemUsageMigrationV2Service,
 } from 'src/app/api/v2';
 import {
   adaptItSystemUsageMigrationPermissions,
@@ -52,10 +52,10 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
   private readonly executeMigrationCommandId = 'system-usage-migration_execute';
 
   constructor(
-    @Inject(APIV2ItSystemUsageMigrationINTERNALService)
-    private readonly itSystemUsageMigrationService: APIV2ItSystemUsageMigrationINTERNALService,
-    @Inject(APIV2ItSystemUsageInternalINTERNALService)
-    private readonly itSystemUsageInternalService: APIV2ItSystemUsageInternalINTERNALService,
+    @Inject(ItSystemUsageMigrationV2Service)
+    private readonly itSystemUsageMigrationService: ItSystemUsageMigrationV2Service,
+    @Inject(ItSystemUsageInternalV2Service)
+    private readonly itSystemUsageInternalService: ItSystemUsageInternalV2Service,
     private notificationService: NotificationService,
     private store: Store,
   ) {
@@ -115,14 +115,14 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
         this.updateLoading(true);
         return this.itSystemUsageMigrationService.getSingleItSystemUsageMigrationV2GetPermissions().pipe(
           tapResponse({
-    next: (permissionsDto) => {
-        this.updateMigrationPermissions(adaptItSystemUsageMigrationPermissions(permissionsDto));
-    },
-    error: (error) => {
-        console.error(error);
-    },
-    complete: () => this.updateLoading(false)
-}),
+            next: (permissionsDto) => {
+              this.updateMigrationPermissions(adaptItSystemUsageMigrationPermissions(permissionsDto));
+            },
+            error: (error) => {
+              console.error(error);
+            },
+            complete: () => this.updateLoading(false),
+          }),
         );
       }),
     ),
@@ -140,17 +140,17 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
             });
           }),
           tapResponse({
-    next: 
-    //finally block is not working in this context for some reason
-    (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
-        this.updateMigration(adaptItSystemUsageMigration(migrationDto));
-        this.updateLoading(false);
-    },
-    error: (error) => {
-        console.error(error);
-        this.updateLoading(false);
-    }
-}),
+            next:
+              //finally block is not working in this context for some reason
+              (migrationDto: APIItSystemUsageMigrationV2ResponseDTO) => {
+                this.updateMigration(adaptItSystemUsageMigration(migrationDto));
+                this.updateLoading(false);
+              },
+            error: (error) => {
+              console.error(error);
+              this.updateLoading(false);
+            },
+          }),
         ),
       ),
     ),
@@ -174,7 +174,7 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
 
   private getUsageUuid(usingOrganizationUuid: string, sourceItSystemUuid: string): Observable<string> {
     return this.itSystemUsageInternalService
-      .getManyItSystemUsageInternalV2GetItSystemUsages({
+      .getSingleItSystemUsageInternalV2GetItSystemUsages({
         organizationUuid: usingOrganizationUuid,
         systemUuid: sourceItSystemUuid,
       })
@@ -205,17 +205,20 @@ export class GridUsagesDialogComponentStore extends ComponentStore<State> {
         mergeMap(([organizationUuid, nameContent]) => {
           this.updateLoading(true);
           return this.itSystemUsageMigrationService
-            .getManyItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization({
+            .getSingleItSystemUsageMigrationV2GetUnusedItSystemsBySearchAndOrganization({
               organizationUuid,
               nameContent,
               numberOfItSystems: this.numberOfItSystemsPerQuery,
             })
             .pipe(
               tapResponse({
-    next: (dtos) => this.updateUnusedItSystemsInOrganization(dtos.map(mapIdentityNamePair).filter((x) => x !== undefined)),
-    error: (error) => console.error(error),
-    complete: () => this.updateLoading(false)
-}),
+                next: (dtos) =>
+                  this.updateUnusedItSystemsInOrganization(
+                    dtos.map(mapIdentityNamePair).filter((x: IdentityNamePair | undefined) => x !== undefined),
+                  ),
+                error: (error) => console.error(error),
+                complete: () => this.updateLoading(false),
+              }),
             );
         }),
       ),

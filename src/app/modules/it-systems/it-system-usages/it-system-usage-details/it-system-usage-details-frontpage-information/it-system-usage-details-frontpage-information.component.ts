@@ -26,7 +26,11 @@ import {
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-import { YesNoDontKnowOption } from 'src/app/shared/models/yes-no-dont-know.model';
+import {
+  YesNoDontKnowOption,
+  mapToYesNoDontKnowEnum,
+  yesNoDontKnowOptions,
+} from 'src/app/shared/models/yes-no-dont-know.model';
 import {
   YesNoPartiallyOption,
   mapToYesNoPartiallyEnum,
@@ -49,6 +53,8 @@ import {
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableIsBusinessCritical,
+  selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
@@ -83,8 +89,8 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
     TextAreaComponent,
     DatePickerComponent,
     AsyncPipe,
-    TooltipComponent
-],
+    TooltipComponent,
+  ],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
@@ -96,13 +102,17 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      isBusinessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
 
   public readonly aiTechnologyOptions = yesNoOptions;
+  public readonly isSociallyCriticalOptions = yesNoDontKnowOptions;
+  public readonly isBusinessCriticalOptions = yesNoDontKnowOptions;
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
   public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
@@ -117,9 +127,11 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly statusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
   public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
+  public readonly isSociallyCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsSociallyCritical);
+  public readonly isBusinessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsBusinessCritical);
 
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
-    selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology)
+    selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
   );
 
   public readonly showSystemUsageCard$ = combineOR([
@@ -141,7 +153,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       validTo: new FormControl<Date | undefined>(undefined),
       valid: new FormControl({ value: '', disabled: true }),
     },
-    { updateOn: 'blur' }
+    { updateOn: 'blur' },
   );
 
   public readonly webAccessibilityForm = new FormGroup({
@@ -169,20 +181,23 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       ];
 
       return $localize`Følgende gør systemet 'ikke aktivt': ` + '\n' + toBulletPoints(reasonsForInactivity);
-    })
+    }),
   );
 
-  constructor(private store: Store, private notificationService: NotificationService) {
+  constructor(
+    private store: Store,
+    private notificationService: NotificationService,
+  ) {
     super();
   }
 
   ngOnInit() {
     // Add custom date validators
     this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
-      this.itSystemApplicationForm.controls.validTo
+      this.itSystemApplicationForm.controls.validTo,
     );
     this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
-      this.itSystemApplicationForm.controls.validFrom
+      this.itSystemApplicationForm.controls.validFrom,
     );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
@@ -195,7 +210,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           this.itSystemInformationForm.disable();
           this.itSystemApplicationForm.disable();
           this.webAccessibilityForm.disable();
-        })
+        }),
     );
 
     this.subscriptions.add(
@@ -208,7 +223,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           this.webAccessibilityForm.controls.lastWebAccessibilityCheck.disable();
           this.webAccessibilityForm.controls.webAccessibilityNotes.disable();
         }
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -219,7 +234,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         } else {
           control.disable();
         }
-      })
+      }),
     );
 
     // Set initial state of information form
@@ -232,18 +247,20 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,
-            numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers),
+            numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers ?? undefined),
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
+            isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
+            isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
           });
 
           this.webAccessibilityForm.patchValue({
-            webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance),
-            lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck),
+            webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance ?? undefined),
+            lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck ?? undefined),
             webAccessibilityNotes: general.webAccessibilityNotes,
           });
-        })
+        }),
     );
 
     // Set initial state of application form
@@ -253,17 +270,17 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .pipe(filterNullish())
         .subscribe((itSystemUsage) =>
           this.itSystemApplicationForm.patchValue({
-            createdBy: itSystemUsage.createdBy.name,
-            lastModifiedBy: itSystemUsage.lastModifiedBy.name,
+            createdBy: itSystemUsage.createdBy?.name,
+            lastModifiedBy: itSystemUsage.lastModifiedBy?.name,
             lastModified: new Date(itSystemUsage.lastModified),
-            lifeCycleStatus: mapLifeCycleStatus(itSystemUsage.general.validity.lifeCycleStatus),
-            validFrom: optionalNewDate(itSystemUsage.general.validity.validFrom),
-            validTo: optionalNewDate(itSystemUsage.general.validity.validTo),
+            lifeCycleStatus: mapLifeCycleStatus(itSystemUsage.general.validity.lifeCycleStatus ?? undefined),
+            validFrom: optionalNewDate(itSystemUsage.general.validity.validFrom ?? undefined),
+            validTo: optionalNewDate(itSystemUsage.general.validity.validTo ?? undefined),
             valid: itSystemUsage.general.validity.valid
               ? $localize`Systemet er aktivt`
               : $localize`Systemet er ikke aktivt`,
-          })
-        )
+          }),
+        ),
     );
   }
 

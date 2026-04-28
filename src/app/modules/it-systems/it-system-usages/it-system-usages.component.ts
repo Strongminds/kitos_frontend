@@ -571,8 +571,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.IsBusinessCritical,
-      title: $localize`Forretningskritisk`,
-      section: GDPR_SECTION_NAME,
+      title: $localize`Forretningskritisk IT-system`,
+      section: USAGE_SECTION_NAME,
       style: 'enum',
       extraFilter: 'enum',
       extraData: yesNoDontKnowOptions,
@@ -644,6 +644,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'enum',
       extraData: gdprCriticalityOptions,
     },
+    {
+      field: GridFields.IsSociallyCritical,
+      title: $localize`Samfundskritisk IT-system`,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
+      extraFilter: 'enum',
+      style: 'enum',
+      extraData: yesNoDontKnowOptions,
+    },
   ];
 
   public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableLifeCycleStatus);
@@ -656,7 +665,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
-    private uiConfigService: GridUIConfigService
+    private uiConfigService: GridUIConfigService,
   ) {
     super(store, 'it-system-usage');
   }
@@ -668,7 +677,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
         .pipe(
           ofType(ITSystemUsageActions.getItSystemUsageOverviewRolesSuccess),
           combineLatestWith(this.store.select(selectUsageGridRoleColumns)),
-          first()
+          first(),
         )
         .subscribe(([_, roleColumns]) => {
           const defaultColumnsAndRoles = this.defaultGridColumns.concat(roleColumns);
@@ -680,9 +689,9 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
             orderedGridColumns,
             localStorageColumns,
             ITSystemUsageActions.updateGridColumns,
-            ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration
+            ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfiguration,
           );
-        })
+        }),
     );
 
     this.subscriptions.add(this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState)));
@@ -691,18 +700,18 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       this.actions$
         .pipe(
           ofType(ITSystemUsageActions.resetToOrganizationITSystemUsageColumnConfigurationError),
-          concatLatestFrom(() => this.gridColumns$)
+          concatLatestFrom(() => this.gridColumns$),
         )
         .subscribe(([_, gridColumnsFromState]) => {
           const columnsToShow = getColumnsToShow(gridColumnsFromState, this.defaultGridColumns);
           const gridColumnStateIsCorrect = this.gridColumnStorageService.columnsAreEqual(
             gridColumnsFromState,
-            columnsToShow
+            columnsToShow,
           );
           if (!gridColumnStateIsCorrect) {
             this.store.dispatch(ITSystemUsageActions.updateGridColumns(columnsToShow));
           }
-        })
+        }),
     );
 
     this.store.dispatch(ITSystemUsageActions.getItSystemUsageOverviewRoles());

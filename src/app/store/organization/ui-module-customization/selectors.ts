@@ -14,8 +14,8 @@ export const selectHasValidUIModuleConfigCache: (module: UIModuleConfigKey) => M
     createSelector(
       selectUIModuleCustomizationState,
       () => new Date(),
-      (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now)
-    )
+      (state, now) => hasValidCache(state.uiModuleConfigs.find((config) => config.module === module)?.cacheTime, now),
+    ),
 );
 
 export const selectModuleConfig = (module: UIModuleConfigKey) =>
@@ -25,7 +25,7 @@ export const selectModuleConfig = (module: UIModuleConfigKey) =>
 
 export const selectUIConfigLoading = createSelector(
   selectUIModuleCustomizationState,
-  (state: UIModuleConfigState) => state.loading
+  (state: UIModuleConfigState) => state.loading,
 );
 
 // eslint-disable-next-line @ngrx/prefix-selectors-with-select
@@ -125,6 +125,10 @@ export const selectITSystemUsageEnableStatus = createItSystemUsageFrontPageField
 export const selectITSystemUsageEnableContainsAITechnology =
   createItSystemUsageFrontPageFieldSelector('containsAITechnology');
 export const selectITSystemUsageEnableWebAccessibility = createItSystemUsageFrontPageFieldSelector('webAccessibility');
+export const selectITSystemUsageEnableIsSociallyCritical =
+  createItSystemUsageFrontPageFieldSelector('isSociallyCritical');
+export const selectITSystemUsageEnableIsBusinessCritical =
+  createItSystemUsageFrontPageFieldSelector('isBusinessCritical');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
@@ -139,7 +143,6 @@ const createItSystemUsageGdprFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'gdpr', fieldKey);
 
 export const selectITSystemUsageEnableGdprPurpose = createItSystemUsageGdprFieldSelector('purpose');
-export const selectITSystemUsageEnableGdprBusinessCritical = createItSystemUsageGdprFieldSelector('businessCritical');
 export const selectITSystemUsageEnableGdprHostedAt = createItSystemUsageGdprFieldSelector('hostedAt');
 export const selectITSystemUsageEnableGdprDocumentation = createItSystemUsageGdprFieldSelector('documentation');
 export const selectITSystemUsageEnableGdprDataTypes = createItSystemUsageGdprFieldSelector('dataTypes');
@@ -258,7 +261,7 @@ function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: str
 function fieldOrGroupIsEnabled(
   uiConfigViewModels: UIConfigNodeViewModel,
   tabFullKey: string,
-  fieldKey: string
+  fieldKey: string,
 ): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
   const tabViewModelChildren = tabViewModel?.children;
@@ -271,7 +274,7 @@ function fieldOrGroupIsEnabled(
 
 function getTabViewModelFromModule(
   uiConfigViewModels: UIConfigNodeViewModel,
-  tabFullKey: string
+  tabFullKey: string,
 ): UIConfigNodeViewModel | undefined {
   const moduleConfigChildren = uiConfigViewModels.children;
   if (!moduleConfigChildren) return undefined;

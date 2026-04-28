@@ -60,6 +60,7 @@
         (valueChange)="patchGeneral({ dataClassificationUuid: $event })"
       ></app-dropdown>
     }
+
     @if (containsAITechnologyEnabled$ | async) {
       <app-tooltip [text]="(containsAITechnologyModifyEnabled$ | async) === false ? supplierMessage : ''">
         <app-dropdown
@@ -69,127 +70,154 @@
           formName="aiTechnology"
           (valueChange)="patchGeneral({ containsAITechnology: $event })"
           [data]="aiTechnologyOptions"
-          >
-          </app-dropdown
-        ></app-tooltip>
-      }
-      @if (descriptionEnabled$ | async) {
-        <app-textarea
-          class="full-width"
-          text="Note"
+        >
+        </app-dropdown
+      ></app-tooltip>
+    }
+
+    @if (isSociallyCriticalEnabled$ | async) {
+      <app-dropdown
+        text="Samfundskritisk IT-system"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="isSociallyCritical"
+        (valueChange)="patchGeneral({ isSociallyCritical: $event })"
+        [data]="isSociallyCriticalOptions"
+        toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
+        i18n-toolTipText
+      ></app-dropdown>
+    }
+
+    @if (isBusinessCriticalEnabled$ | async) {
+      <app-dropdown
+        text="Forretningskritisk IT-System"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="isBusinessCritical"
+        [data]="isBusinessCriticalOptions"
+        (valueChange)="patchGeneral({ isBusinessCritical: $event })"
+        toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
+        i18n-toolTipText
+      ></app-dropdown>
+    }
+
+    @if (descriptionEnabled$ | async) {
+      <app-textarea
+        class="full-width"
+        text="Note"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="notes"
+        (valueChange)="patchGeneral({ notes: $event })"
+      ></app-textarea>
+    }
+  </form>
+</app-card>
+
+@if (showSystemUsageCard$ | async) {
+  <app-card data-cy="system-usage-section">
+    <app-card-header title="Systemanvendelse" helpTextKey="it-system.usage.application" i18n-title></app-card-header>
+    <form [formGroup]="itSystemApplicationForm">
+      @if (takenIntoUsageByEnabled$ | async) {
+        <app-textbox
+          text="Taget i anvendelse af"
           i18n-text
-          [formGroup]="itSystemInformationForm"
-          formName="notes"
-          (valueChange)="patchGeneral({ notes: $event })"
-        ></app-textarea>
+          [formGroup]="itSystemApplicationForm"
+          formName="createdBy"
+        ></app-textbox>
+      }
+      @if (lastEditedByEnabled$ | async) {
+        <app-textbox
+          text="Sidst redigeret (bruger)"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="lastModifiedBy"
+        ></app-textbox>
+      }
+      @if (lastEditedAtEnabled$ | async) {
+        <app-datepicker
+          text="Sidst redigeret (dato)"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="lastModified"
+        ></app-datepicker>
+      }
+      @if (lifeCycleStatusEnabled$ | async) {
+        <app-dropdown
+          text="Livscyklus"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="lifeCycleStatus"
+          [data]="lifeCycleStatusOptions"
+          (valueChange)="patchGeneral({ validity: { lifeCycleStatus: $event } })"
+        ></app-dropdown>
+      }
+      @if (usagePeriodEnabled$ | async) {
+        <app-datepicker
+          text="Ibrugtagningsdato"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="validFrom"
+          (validatedValueChange)="patchGeneral({ validity: { validFrom: $event.value?.toDateString() } }, $event)"
+        ></app-datepicker>
+      }
+      @if (usagePeriodEnabled$ | async) {
+        <app-datepicker
+          text="Slutdato for anvendelse"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="validTo"
+          (validatedValueChange)="patchGeneral({ validity: { validTo: $event.value?.toDateString() } }, $event)"
+        ></app-datepicker>
+      }
+      @if (statusEnabled$ | async) {
+        <app-textbox
+          text="Status"
+          i18n-text
+          [formGroup]="itSystemApplicationForm"
+          formName="valid"
+          [info]="invalidReason$ | async"
+        ></app-textbox>
       }
     </form>
   </app-card>
+}
 
-  @if (showSystemUsageCard$ | async) {
-    <app-card data-cy="system-usage-section">
-      <app-card-header title="Systemanvendelse" helpTextKey="it-system.usage.application" i18n-title></app-card-header>
-      <form [formGroup]="itSystemApplicationForm">
-        @if (takenIntoUsageByEnabled$ | async) {
-          <app-textbox
-            text="Taget i anvendelse af"
-            i18n-text
-            [formGroup]="itSystemApplicationForm"
-            formName="createdBy"
-          ></app-textbox>
-        }
-        @if (lastEditedByEnabled$ | async) {
-          <app-textbox
-            text="Sidst redigeret (bruger)"
-            i18n-text
-            [formGroup]="itSystemApplicationForm"
-            formName="lastModifiedBy"
-          ></app-textbox>
-        }
-        @if (lastEditedAtEnabled$ | async) {
-          <app-datepicker
-            text="Sidst redigeret (dato)"
-            i18n-text
-            [formGroup]="itSystemApplicationForm"
-            formName="lastModified"
-          ></app-datepicker>
-        }
-        @if (lifeCycleStatusEnabled$ | async) {
-          <app-dropdown
-            text="Livscyklus"
-            i18n-text
-            [formGroup]="itSystemApplicationForm"
-            formName="lifeCycleStatus"
-            [data]="lifeCycleStatusOptions"
-            (valueChange)="patchGeneral({ validity: { lifeCycleStatus: $event } })"
-          ></app-dropdown>
-        }
-        @if (usagePeriodEnabled$ | async) {
-          <app-datepicker
-            text="Ibrugtagningsdato"
-            i18n-text
-            [formGroup]="itSystemApplicationForm"
-            formName="validFrom"
-            (validatedValueChange)="patchGeneral({ validity: { validFrom: $event.value?.toDateString() } }, $event)"
-          ></app-datepicker>
-        }
-        @if (usagePeriodEnabled$ | async) {
-          <app-datepicker
-            text="Slutdato for anvendelse"
-            i18n-text
-            [formGroup]="itSystemApplicationForm"
-            formName="validTo"
-            (validatedValueChange)="patchGeneral({ validity: { validTo: $event.value?.toDateString() } }, $event)"
-          ></app-datepicker>
-        }
-        @if (statusEnabled$ | async) {
-          <app-textbox
-            text="Status"
-            i18n-text
-            [formGroup]="itSystemApplicationForm"
-            formName="valid"
-            [info]="invalidReason$ | async"
-          ></app-textbox>
-        }
-      </form>
-    </app-card>
-  }
-
-  @if (webAccessiblityEnabled$ | async) {
-    <app-card>
-      <app-card-header
-        title="Webtilgængelighed (WCAG)"
-        helpTextKey="it-system.usage.accessibility"
-        i18n-title
-      ></app-card-header>
-      <form [formGroup]="webAccessibilityForm">
-        <app-dropdown
-          [formGroup]="webAccessibilityForm"
-          formName="webAccessibilityCompliance"
-          [data]="yesNoPartiallyOptions"
-          text="Webtilgængelighed"
-          (valueChange)="patchGeneral({ webAccessibilityCompliance: $event })"
-          i18n-text
-          data-cy="web-accessibility-compliance"
-        ></app-dropdown>
-        <app-datepicker
-          [formGroup]="webAccessibilityForm"
-          formName="lastWebAccessibilityCheck"
-          (validatedValueChange)="patchGeneral({ lastWebAccessibilityCheck: $event.value?.toDateString() }, $event)"
-          text="Hvornår leverandøren har udført gennemsynet"
-          class="two-thirds-column-width"
-          i18n-text
-          data-cy="last-web-accessibility-check"
-        ></app-datepicker>
-        <app-textarea
-          [formGroup]="webAccessibilityForm"
-          formName="webAccessibilityNotes"
-          (valueChange)="patchGeneral({ webAccessibilityNotes: $event })"
-          class="full-width"
-          text="Noter"
-          i18n-text
-          data-cy="web-accessibility-notes"
-        ></app-textarea>
-      </form>
-    </app-card>
-  }
+@if (webAccessiblityEnabled$ | async) {
+  <app-card>
+    <app-card-header
+      title="Webtilgængelighed (WCAG)"
+      helpTextKey="it-system.usage.accessibility"
+      i18n-title
+    ></app-card-header>
+    <form [formGroup]="webAccessibilityForm">
+      <app-dropdown
+        [formGroup]="webAccessibilityForm"
+        formName="webAccessibilityCompliance"
+        [data]="yesNoPartiallyOptions"
+        text="Webtilgængelighed"
+        (valueChange)="patchGeneral({ webAccessibilityCompliance: $event })"
+        i18n-text
+        data-cy="web-accessibility-compliance"
+      ></app-dropdown>
+      <app-datepicker
+        [formGroup]="webAccessibilityForm"
+        formName="lastWebAccessibilityCheck"
+        (validatedValueChange)="patchGeneral({ lastWebAccessibilityCheck: $event.value?.toDateString() }, $event)"
+        text="Hvornår leverandøren har udført gennemsynet"
+        class="two-thirds-column-width"
+        i18n-text
+        data-cy="last-web-accessibility-check"
+      ></app-datepicker>
+      <app-textarea
+        [formGroup]="webAccessibilityForm"
+        formName="webAccessibilityNotes"
+        (valueChange)="patchGeneral({ webAccessibilityNotes: $event })"
+        class="full-width"
+        text="Noter"
+        i18n-text
+        data-cy="web-accessibility-notes"
+      ></app-textarea>
+    </form>
+  </app-card>
+}

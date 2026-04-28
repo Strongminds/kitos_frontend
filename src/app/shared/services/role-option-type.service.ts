@@ -6,14 +6,14 @@ import {
   APIExtendedRoleAssignmentResponseDTO,
   APIOrganizationUnitRolesResponseDTO,
   APIRoleOptionResponseDTO,
-  APIV2DataProcessingRegistrationInternalINTERNALService,
-  APIV2DataProcessingRegistrationRoleTypeService,
-  APIV2ItContractInternalINTERNALService,
-  APIV2ItContractRoleTypeService,
-  APIV2ItSystemUsageInternalINTERNALService,
-  APIV2ItSystemUsageRoleTypeService,
-  APIV2OrganizationUnitRoleTypeService,
-  APIV2OrganizationUnitsInternalINTERNALService,
+  DataProcessingRegistrationInternalV2Service,
+  DataProcessingRegistrationRoleTypeV2Service,
+  ItContractInternalV2Service,
+  ItContractRoleTypeV2Service,
+  ItSystemUsageInternalV2Service,
+  ItSystemUsageRoleTypeV2Service,
+  OrganizationUnitRoleTypeV2Service,
+  OrganizationUnitsInternalV2Service,
 } from 'src/app/api/v2';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
@@ -37,23 +37,23 @@ export class RoleOptionTypeService implements OnDestroy {
 
   constructor(
     private readonly store: Store,
-    @Inject(APIV2ItSystemUsageRoleTypeService)
-    private readonly systemUsageRoleService: APIV2ItSystemUsageRoleTypeService,
-    @Inject(APIV2ItSystemUsageInternalINTERNALService)
-    private readonly internalUsageService: APIV2ItSystemUsageInternalINTERNALService,
+    @Inject(ItSystemUsageRoleTypeV2Service)
+    private readonly systemUsageRoleService: ItSystemUsageRoleTypeV2Service,
+    @Inject(ItSystemUsageInternalV2Service)
+    private readonly internalUsageService: ItSystemUsageInternalV2Service,
     private readonly actions$: Actions,
-    @Inject(APIV2ItContractRoleTypeService)
-    private readonly contractRolesService: APIV2ItContractRoleTypeService,
-    @Inject(APIV2ItContractInternalINTERNALService)
-    private readonly contractInternalService: APIV2ItContractInternalINTERNALService,
-    @Inject(APIV2DataProcessingRegistrationRoleTypeService)
-    private readonly dataprocessingRolesService: APIV2DataProcessingRegistrationRoleTypeService,
-    @Inject(APIV2DataProcessingRegistrationInternalINTERNALService)
-    private readonly dataprocessingInternalService: APIV2DataProcessingRegistrationInternalINTERNALService,
-    @Inject(APIV2OrganizationUnitsInternalINTERNALService)
-    private readonly organizationUnitInternalService: APIV2OrganizationUnitsInternalINTERNALService,
-    @Inject(APIV2OrganizationUnitRoleTypeService)
-    private readonly organizationUnitRolesService: APIV2OrganizationUnitRoleTypeService,
+    @Inject(ItContractRoleTypeV2Service)
+    private readonly contractRolesService: ItContractRoleTypeV2Service,
+    @Inject(ItContractInternalV2Service)
+    private readonly contractInternalService: ItContractInternalV2Service,
+    @Inject(DataProcessingRegistrationRoleTypeV2Service)
+    private readonly dataprocessingRolesService: DataProcessingRegistrationRoleTypeV2Service,
+    @Inject(DataProcessingRegistrationInternalV2Service)
+    private readonly dataprocessingInternalService: DataProcessingRegistrationInternalV2Service,
+    @Inject(OrganizationUnitsInternalV2Service)
+    private readonly organizationUnitInternalService: OrganizationUnitsInternalV2Service,
+    @Inject(OrganizationUnitRoleTypeV2Service)
+    private readonly organizationUnitRolesService: OrganizationUnitRoleTypeV2Service,
   ) {}
 
   ngOnDestroy() {
@@ -101,16 +101,16 @@ export class RoleOptionTypeService implements OnDestroy {
     switch (optionType) {
       case 'it-system-usage':
         return (organizationUuid: string) =>
-          this.systemUsageRoleService.getManyItSystemUsageRoleTypeV2Get({ organizationUuid });
+          this.systemUsageRoleService.getSingleItSystemUsageRoleTypeV2Get({ organizationUuid });
       case 'it-contract':
         return (organizationUuid: string) =>
-          this.contractRolesService.getManyItContractRoleTypeV2Get({ organizationUuid });
+          this.contractRolesService.getSingleItContractRoleTypeV2Get({ organizationUuid });
       case 'data-processing':
         return (organizationUuid: string) =>
-          this.dataprocessingRolesService.getManyDataProcessingRegistrationRoleTypeV2Get({ organizationUuid });
+          this.dataprocessingRolesService.getSingleDataProcessingRegistrationRoleTypeV2Get({ organizationUuid });
       case 'organization-unit':
         return (organizationUuid: string) =>
-          this.organizationUnitRolesService.getManyOrganizationUnitRoleTypeV2Get({ organizationUuid });
+          this.organizationUnitRolesService.getSingleOrganizationUnitRoleTypeV2Get({ organizationUuid });
     }
   }
 
@@ -123,22 +123,22 @@ export class RoleOptionTypeService implements OnDestroy {
     switch (entityType) {
       case 'it-system-usage':
         return (entityUuid: string) =>
-          this.internalUsageService.getManyItSystemUsageInternalV2GetRoleAssignments({
+          this.internalUsageService.getSingleItSystemUsageInternalV2GetRoleAssignments({
             systemUsageUuid: entityUuid,
           });
       case 'it-contract':
         return (entityUuid: string) =>
-          this.contractInternalService.getManyItContractInternalV2GetAddRoleAssignments({
+          this.contractInternalService.getSingleItContractInternalV2GetAddRoleAssignments({
             contractUuid: entityUuid,
           });
       case 'data-processing':
         return (entityUuid: string) =>
-          this.dataprocessingInternalService.getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments({
+          this.dataprocessingInternalService.getSingleDataProcessingRegistrationInternalV2GetAddRoleAssignments({
             dprUuid: entityUuid,
           });
       case 'organization-unit':
         return (entityUuid: string) =>
-          this.organizationUnitInternalService.getManyOrganizationUnitsInternalV2GetRoleAssignments({
+          this.organizationUnitInternalService.getSingleOrganizationUnitsInternalV2GetRoleAssignments({
             organizationUuid,
             organizationUnitUuid: entityUuid,
           });
@@ -192,7 +192,9 @@ export class RoleOptionTypeService implements OnDestroy {
         this.store.dispatch(DataProcessingActions.bulkAddDataProcessingRole(userUuids, roleUuid));
         break;
       case 'organization-unit':
-        if (!unitUuid) {
+        if (unitUuid) {
+          this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, unitUuid));
+        } else {
           this.store
             .select(selectCurrentUnitUuid)
             .pipe(filterNullish(), first())
@@ -201,8 +203,6 @@ export class RoleOptionTypeService implements OnDestroy {
                 OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, currentUnitUuid),
               ),
             );
-        } else {
-          this.store.dispatch(OrganizationUnitActions.bulkAddOrganizationUnitRole(userUuids, roleUuid, unitUuid));
         }
         break;
     }
@@ -237,7 +237,7 @@ export class RoleOptionTypeService implements OnDestroy {
           });
         break;
       case 'organization-unit':
-        if (!role.unitUuid) throw Error('Unit uuid is required for deleting organization unit role');
+        if (!role.unitUuid) throw new Error('Unit uuid is required for deleting organization unit role');
         this.store.dispatch(OrganizationUnitActions.deleteOrganizationUnitRole(userUuid, roleUuid, role.unitUuid));
         break;
     }

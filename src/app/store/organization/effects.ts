@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, combineLatestWith, filter, map, of, switchMap } from 'rxjs';
 import { mergeMap } from 'rxjs/internal/operators/mergeMap';
-import { APIV2OrganizationsInternalINTERNALService } from 'src/app/api/v2';
+import { OrganizationsInternalV2Service } from 'src/app/api/v2';
 import { OData } from 'src/app/shared/models/odata.model';
 import { adaptOrganizationMasterDataRoles } from 'src/app/shared/models/organization/organization-master-data/organization-master-data-roles.model';
 import { adaptOrganizationMasterData } from 'src/app/shared/models/organization/organization-master-data/organization-master-data.model';
@@ -24,12 +24,12 @@ import { selectHasValidUIRootConfigCache } from './selectors';
 @Injectable()
 export class OrganizationEffects {
   constructor(
-    @Inject(APIV2OrganizationsInternalINTERNALService)
-    private organizationInternalService: APIV2OrganizationsInternalINTERNALService,
+    @Inject(OrganizationsInternalV2Service)
+    private organizationInternalService: OrganizationsInternalV2Service,
     private actions$: Actions,
     private store: Store,
     private httpClient: HttpClient,
-    private gridDataCacheService: GridDataCacheService
+    private gridDataCacheService: GridDataCacheService,
   ) {}
 
   getOrganizations$ = createEffect(() => {
@@ -49,7 +49,7 @@ export class OrganizationEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/Organizations?${fixedOdataString}&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true`
+            `/odata/Organizations?${fixedOdataString}&$expand=ForeignCountryCode($select=Uuid,Name,Description)&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -61,9 +61,9 @@ export class OrganizationEffects {
 
               return OrganizationActions.getOrganizationsSuccess(returnData, total);
             }),
-            catchError(() => of(OrganizationActions.getOrganizationsError()))
+            catchError(() => of(OrganizationActions.getOrganizationsError())),
           );
-      })
+      }),
     );
   });
 
@@ -72,7 +72,7 @@ export class OrganizationEffects {
       ofType(OrganizationActions.updateGridState),
       map(({ gridState }) => {
         return OrganizationActions.getOrganizations(gridState);
-      })
+      }),
     );
   });
 
@@ -89,9 +89,9 @@ export class OrganizationEffects {
               if (organizationMasterData) return OrganizationActions.getMasterDataSuccess(organizationMasterData);
               else return OrganizationActions.getMasterDataError();
             }),
-            catchError(() => of(OrganizationActions.getMasterDataError()))
-          )
-      )
+            catchError(() => of(OrganizationActions.getMasterDataError())),
+          ),
+      ),
     );
   });
 
@@ -101,7 +101,10 @@ export class OrganizationEffects {
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([{ request }, organizationUuid]) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2PatchOrganizationMasterData({ organizationUuid, requestDto: request })
+          .patchSingleOrganizationsInternalV2PatchOrganizationMasterData({
+            organizationUuid,
+            aPIOrganizationMasterDataRequestDTO: request,
+          })
           .pipe(
             map((organizationMasterDataDto) => {
               const organizationMasterData = adaptOrganizationMasterData(organizationMasterDataDto);
@@ -109,9 +112,9 @@ export class OrganizationEffects {
                 ? OrganizationActions.patchMasterDataSuccess(organizationMasterData)
                 : OrganizationActions.patchMasterDataError();
             }),
-            catchError(() => of(OrganizationActions.patchMasterDataError()))
-          )
-      )
+            catchError(() => of(OrganizationActions.patchMasterDataError())),
+          ),
+      ),
     );
   });
 
@@ -129,9 +132,9 @@ export class OrganizationEffects {
                 ? OrganizationActions.getMasterDataRolesSuccess(organizationMasterDataRoles)
                 : OrganizationActions.getMasterDataRolesError();
             }),
-            catchError(() => of(OrganizationActions.getMasterDataRolesError()))
-          )
-      )
+            catchError(() => of(OrganizationActions.getMasterDataRolesError())),
+          ),
+      ),
     );
   });
 
@@ -143,7 +146,7 @@ export class OrganizationEffects {
         this.organizationInternalService
           .patchSingleOrganizationsInternalV2UpsertOrganizationMasterDataRoles({
             organizationUuid,
-            requestDto: request,
+            aPIOrganizationMasterDataRolesRequestDTO: request,
           })
           .pipe(
             map((organizationMasterDataRolesDto) => {
@@ -152,9 +155,9 @@ export class OrganizationEffects {
                 ? OrganizationActions.patchMasterDataRolesSuccess(organizationMasterDataRoles)
                 : OrganizationActions.patchMasterDataRolesError();
             }),
-            catchError(() => of(OrganizationActions.patchMasterDataRolesError()))
-          )
-      )
+            catchError(() => of(OrganizationActions.patchMasterDataRolesError())),
+          ),
+      ),
     );
   });
 
@@ -169,9 +172,9 @@ export class OrganizationEffects {
             if (permissions) return OrganizationActions.getOrganizationPermissionsSuccess(permissions);
             else return OrganizationActions.getOrganizationPermissionsError();
           }),
-          catchError(() => of(OrganizationActions.getOrganizationPermissionsError()))
-        )
-      )
+          catchError(() => of(OrganizationActions.getOrganizationPermissionsError())),
+        ),
+      ),
     );
   });
 
@@ -189,9 +192,9 @@ export class OrganizationEffects {
             const uiRootConfig = mapUIRootConfig(responseDto);
             return OrganizationActions.getUIRootConfigSuccess({ uiRootConfig });
           }),
-          catchError(() => of(OrganizationActions.getUIRootConfigError()))
-        )
-      )
+          catchError(() => of(OrganizationActions.getUIRootConfigError())),
+        ),
+      ),
     );
   });
 
@@ -201,15 +204,18 @@ export class OrganizationEffects {
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([{ dto }, organizationUuid]) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2PatchUIRootConfig({ dto, organizationUuid })
+          .patchSingleOrganizationsInternalV2PatchUIRootConfig({
+            aPIUIRootConfigUpdateRequestDTO: dto,
+            organizationUuid,
+          })
           .pipe(
             map((responseDto) => {
               const uiRootConfig = mapUIRootConfig(responseDto);
               return OrganizationActions.patchUIRootConfigSuccess({ uiRootConfig });
             }),
-            catchError(() => of(OrganizationActions.patchUIRootConfigError()))
-          )
-      )
+            catchError(() => of(OrganizationActions.patchUIRootConfigError())),
+          ),
+      ),
     );
   });
 
@@ -218,12 +224,15 @@ export class OrganizationEffects {
       ofType(OrganizationActions.patchOrganization),
       switchMap(({ request, organizationUuid }) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2PatchOrganization({ requestDto: request, organizationUuid })
+          .patchSingleOrganizationsInternalV2PatchOrganization({
+            aPIOrganizationUpdateRequestDTO: request,
+            organizationUuid,
+          })
           .pipe(
             map(() => OrganizationActions.patchOrganizationSuccess()),
-            catchError(() => of(OrganizationActions.patchOrganizationError()))
-          )
-      )
+            catchError(() => of(OrganizationActions.patchOrganizationError())),
+          ),
+      ),
     );
   });
 
@@ -231,11 +240,13 @@ export class OrganizationEffects {
     return this.actions$.pipe(
       ofType(OrganizationActions.createOrganization),
       switchMap(({ request }) =>
-        this.organizationInternalService.postSingleOrganizationsInternalV2CreateOrganization({ request }).pipe(
-          map(() => OrganizationActions.createOrganizationSuccess()),
-          catchError(() => of(OrganizationActions.createOrganizationError()))
-        )
-      )
+        this.organizationInternalService
+          .postSingleOrganizationsInternalV2CreateOrganization({ aPIOrganizationCreateRequestDTO: request })
+          .pipe(
+            map(() => OrganizationActions.createOrganizationSuccess()),
+            catchError(() => of(OrganizationActions.createOrganizationError())),
+          ),
+      ),
     );
   });
 
@@ -247,9 +258,9 @@ export class OrganizationEffects {
           .deleteSingleOrganizationsInternalV2DeleteOrganization({ organizationUuid, enforceDeletion: true })
           .pipe(
             map(() => OrganizationActions.deleteOrganizationSuccess()),
-            catchError(() => of(OrganizationActions.deleteOrganizationError()))
-          )
-      )
+            catchError(() => of(OrganizationActions.deleteOrganizationError())),
+          ),
+      ),
     );
   });
 
@@ -258,12 +269,15 @@ export class OrganizationEffects {
       ofType(OrganizationActions.changeOrganizationDisabledStatus),
       switchMap(({ organizationUuid, disabled }) =>
         this.organizationInternalService
-          .patchSingleOrganizationsInternalV2ChangeDisabledStatus({ organizationUuid, request: { disabled } })
+          .patchSingleOrganizationsInternalV2ChangeDisabledStatus({
+            organizationUuid,
+            aPIOrganizationDisabledStatusRequestDTO: { disabled },
+          })
           .pipe(
             map(() => OrganizationActions.changeOrganizationDisabledStatusSuccess(disabled)),
-            catchError(() => of(OrganizationActions.changeOrganizationDisabledStatusError(disabled)))
-          )
-      )
+            catchError(() => of(OrganizationActions.changeOrganizationDisabledStatusError(disabled))),
+          ),
+      ),
     );
   });
 }

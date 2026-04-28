@@ -22,8 +22,8 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
     ParagraphComponent,
     NgFooterTemplateDirective,
     TextBoxInfoComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
@@ -34,6 +34,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   @Input() public descriptionLabelTitle?: string;
   @Input() public addTag = false;
   @Input() public addTagText = $localize`Vælg`;
+  @Input() public toolTipText?: string;
   @Output() public focusEvent = new EventEmitter();
   @Output() public openDropdown = new EventEmitter();
   @Output() public cleared = new EventEmitter();
@@ -45,15 +46,15 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     // Add obselete value when both value and data are present if data does not contain current form value
     this.subscriptions.add(
       combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) =>
-        this.addObsoleteToValueIfMissingInData(value)
-      )
+        this.addObsoleteToValueIfMissingInData(value),
+      ),
     );
 
     if (!this.formName) return;
 
     // Update value subject to be used in calculating obselete values
     this.subscriptions.add(
-      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value))
+      this.formGroup?.controls[this.formName]?.valueChanges.subscribe((value) => this.formValueSubject$.next(value)),
     );
 
     // Push initial values to value and data form subjects
@@ -91,7 +92,7 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
   private doesDataContainValue(value?: any): boolean {
     if (!this.data || value === undefined || value === null) return false;
     return !this.data.some(
-      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField]
+      (option: any) => option[this.valueField] !== undefined && option[this.valueField] === value[this.valueField],
     );
   }
 }

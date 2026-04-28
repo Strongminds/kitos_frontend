@@ -66,7 +66,7 @@ export class LocalAdminInformationComponent extends BaseComponent implements OnI
         ([name, cvr, type]) => {
           this.form.patchValue({
             nameControl: name,
-            cvrControl: this.GetCvrAsNumber(cvr),
+            cvrControl: this.GetCvrAsNumber(cvr ?? undefined),
             typeControl: mapOrganizationType(type),
           });
         },

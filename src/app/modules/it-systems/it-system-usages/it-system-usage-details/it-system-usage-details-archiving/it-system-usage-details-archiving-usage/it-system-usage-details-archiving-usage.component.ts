@@ -292,7 +292,7 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
         )
         .subscribe(([archive, hasModifyPermission]) => {
           this.archiveForm.patchValue({
-            archiveDuty: mapArchiveDutyChoice(archive.archiveDuty),
+            archiveDuty: mapArchiveDutyChoice(archive.archiveDuty ?? undefined),
             type: archive.type,
             location: archive.location,
             supplier: archive.supplier,

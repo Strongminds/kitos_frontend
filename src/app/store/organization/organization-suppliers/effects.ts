@@ -3,7 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { APIV2OrganizationSupplierInternalINTERNALService } from 'src/app/api/v2';
+import { OrganizationSupplierInternalV2Service } from 'src/app/api/v2';
 import {
   adaptShallowOrganization,
   ShallowOrganization,
@@ -24,8 +24,8 @@ export class OrganizationSuppliersEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(APIV2OrganizationSupplierInternalINTERNALService)
-    private organizationSuppliersService: APIV2OrganizationSupplierInternalINTERNALService
+    @Inject(OrganizationSupplierInternalV2Service)
+    private organizationSuppliersService: OrganizationSupplierInternalV2Service,
   ) {}
 
   getSuppliers$ = createEffect(() => {
@@ -33,7 +33,7 @@ export class OrganizationSuppliersEffects {
       ofType(
         OrganizationSuppliersActions.getOrganizationSuppliers,
         OrganizationSuppliersActions.addOrganizationSupplierSuccess,
-        OrganizationSuppliersActions.removeOrganizationSupplierSuccess
+        OrganizationSuppliersActions.removeOrganizationSupplierSuccess,
       ),
       concatLatestFrom(() => [
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
@@ -43,14 +43,14 @@ export class OrganizationSuppliersEffects {
       switchMap(([_, organizationUuid, validCache, cachedSuppliers]) => {
         if (validCache) return of(OrganizationSuppliersActions.getOrganizationSuppliersSuccess(cachedSuppliers));
         return this.organizationSuppliersService
-          .getManyOrganizationSupplierInternalV2GetSuppliers({ organizationUuid })
+          .getSingleOrganizationSupplierInternalV2GetSuppliers({ organizationUuid })
           .pipe(
             map((data) => this.adaptShallowOrganizations(data)),
             filterUndefinedInArray(),
             map((suppliers) => OrganizationSuppliersActions.getOrganizationSuppliersSuccess(suppliers)),
-            catchError(() => of(OrganizationSuppliersActions.getOrganizationSuppliersError()))
+            catchError(() => of(OrganizationSuppliersActions.getOrganizationSuppliersError())),
           );
-      })
+      }),
     );
   });
 
@@ -59,7 +59,7 @@ export class OrganizationSuppliersEffects {
       ofType(
         OrganizationSuppliersActions.getAvailableOrganizationSuppliers,
         OrganizationSuppliersActions.addOrganizationSupplierSuccess,
-        OrganizationSuppliersActions.removeOrganizationSupplierSuccess
+        OrganizationSuppliersActions.removeOrganizationSupplierSuccess,
       ),
       concatLatestFrom(() => [
         this.store.select(selectOrganizationUuid).pipe(filterNullish()),
@@ -70,16 +70,16 @@ export class OrganizationSuppliersEffects {
         if (validCache)
           return of(OrganizationSuppliersActions.getAvailableOrganizationSuppliersSuccess(cachedAvailableSuppliers));
         return this.organizationSuppliersService
-          .getManyOrganizationSupplierInternalV2GetAvailableSuppliers({ organizationUuid })
+          .getSingleOrganizationSupplierInternalV2GetAvailableSuppliers({ organizationUuid })
           .pipe(
             map((data) => this.adaptShallowOrganizations(data)),
             filterUndefinedInArray(),
             map((availableSuppliers) =>
-              OrganizationSuppliersActions.getAvailableOrganizationSuppliersSuccess(availableSuppliers)
+              OrganizationSuppliersActions.getAvailableOrganizationSuppliersSuccess(availableSuppliers),
             ),
-            catchError(() => of(OrganizationSuppliersActions.getAvailableOrganizationSuppliersError()))
+            catchError(() => of(OrganizationSuppliersActions.getAvailableOrganizationSuppliersError())),
           );
-      })
+      }),
     );
   });
 
@@ -92,9 +92,9 @@ export class OrganizationSuppliersEffects {
           .postSingleOrganizationSupplierInternalV2AddSupplier({ organizationUuid, supplierUuid })
           .pipe(
             map(() => OrganizationSuppliersActions.addOrganizationSupplierSuccess()),
-            catchError(() => of(OrganizationSuppliersActions.addOrganizationSupplierError()))
-          )
-      )
+            catchError(() => of(OrganizationSuppliersActions.addOrganizationSupplierError())),
+          ),
+      ),
     );
   });
 
@@ -107,9 +107,9 @@ export class OrganizationSuppliersEffects {
           .deleteSingleOrganizationSupplierInternalV2DeleteSupplier({ organizationUuid, supplierUuid })
           .pipe(
             map(() => OrganizationSuppliersActions.removeOrganizationSupplierSuccess()),
-            catchError(() => of(OrganizationSuppliersActions.removeOrganizationSupplierError()))
-          )
-      )
+            catchError(() => of(OrganizationSuppliersActions.removeOrganizationSupplierError())),
+          ),
+      ),
     );
   });
 

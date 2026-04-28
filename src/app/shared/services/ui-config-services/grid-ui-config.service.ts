@@ -70,7 +70,6 @@ import {
   selectITSystemUsageEnableDocumentBearing,
   selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
-  selectITSystemUsageEnableGdprBusinessCritical,
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprCriticality,
   selectITSystemUsageEnableGdprDataTypes,
@@ -84,6 +83,8 @@ import {
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
+  selectITSystemUsageEnableIsBusinessCritical,
+  selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -127,8 +128,8 @@ export class GridUIConfigService {
   public isColumnEnabled(column: GridColumn, applications: UIConfigGridApplication[]) {
     let enabled = true;
 
-    for (const app of applications) {
-      const result = this.verifyColumn(app, column);
+    for (const application of applications) {
+      const result = this.verifyColumn(application, column);
       if (result !== null) {
         if (result === false) {
           enabled = false;
@@ -291,7 +292,6 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableContainsAITechnology)
         .pipe(shouldEnable([UsageFields.ContainsAITechnology])),
-
       this.store
         .select(selectITSystemUsageEnableWebAccessibility)
         .pipe(
@@ -301,6 +301,12 @@ export class GridUIConfigService {
             UsageFields.WebAccessibilityNotes,
           ]),
         ),
+      this.store
+        .select(selectITSystemUsageEnableIsSociallyCritical)
+        .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
+      this.store
+        .select(selectITSystemUsageEnableIsBusinessCritical)
+        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
 
       //Contracts
       combineAND([
@@ -340,9 +346,6 @@ export class GridUIConfigService {
         .select(selectITSystemUsageEnableGdprDocumentation)
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
       this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([UsageFields.DpiaConducted])),
-      this.store
-        .select(selectITSystemUsageEnableGdprBusinessCritical)
-        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
       this.store.select(selectITSystemUsageEnableGdprCriticality).pipe(shouldEnable([UsageFields.GdprCriticality])),
 
       //Organization
@@ -471,10 +474,6 @@ export class GridUIConfigService {
             GdprFields.SENSITIVE_DATA_TYPES,
           ]),
         ),
-
-      this.store
-        .select(selectITSystemUsageEnableGdprBusinessCritical)
-        .pipe(shouldEnable([GdprFields.BUSINESS_CRITICAL_NAME])),
 
       this.store
         .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
