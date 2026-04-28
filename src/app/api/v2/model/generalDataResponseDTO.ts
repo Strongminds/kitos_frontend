@@ -9,9 +9,9 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
+import { APICriticalityInfoResponseDTO } from './criticalityInfoResponseDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
 import { APIItSystemUsageValidityResponseDTO } from './itSystemUsageValidityResponseDTO';
@@ -30,7 +30,6 @@ export interface APIGeneralDataResponseDTO {
     webAccessibilityCompliance?: APIYesNoPartiallyChoice;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
-    isSociallyCritical?: APIYesNoDontKnowChoice;
-    isBusinessCritical?: APIYesNoDontKnowChoice;
+    criticalityInfo: APICriticalityInfoResponseDTO;
 }
 

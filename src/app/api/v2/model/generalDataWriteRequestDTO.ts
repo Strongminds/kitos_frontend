@@ -9,8 +9,8 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
+import { APICriticalityInfoWriteRequestDTO } from './criticalityInfoWriteRequestDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
 import { APIItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidityWriteRequestDTO';
@@ -28,7 +28,6 @@ export interface APIGeneralDataWriteRequestDTO {
     webAccessibilityCompliance?: APIYesNoPartiallyChoice;
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
-    isSociallyCritical?: APIYesNoDontKnowChoice;
-    isBusinessCritical?: APIYesNoDontKnowChoice;
+    criticalityInfo?: APICriticalityInfoWriteRequestDTO;
 }
 
