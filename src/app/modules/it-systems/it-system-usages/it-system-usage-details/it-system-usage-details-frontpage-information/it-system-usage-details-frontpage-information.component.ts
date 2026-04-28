@@ -210,6 +210,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
       this.itSystemApplicationForm.controls.validFrom,
     );
+    this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.disable();
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
     // Disable forms if user does not have rights to modify
