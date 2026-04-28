@@ -19,9 +19,9 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
   }
 
   private setOrganizations = this.updater(
-    (state, users: APIOrganizationResponseDTO[]): State => ({
+    (state, organizations: APIOrganizationResponseDTO[]): State => ({
       ...state,
-      organizations: users,
+      organizations: organizations,
     }),
   );
 

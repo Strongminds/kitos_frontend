@@ -1,35 +1,29 @@
 <div class="action-buttons-container">
   @for (button of column.extraData; track button) {
-    @if (button.type === 'edit' && modifyPermission) {
-      <app-icon-button
-        (click)="onModifyClick()"
-        data-cy="grid-edit-button"
-        >
+    @if (
+      button.type === "edit" &&
+      modifyPermission &&
+      (button.visibilityColumn ? getProperty(button.visibilityColumn) : true)
+    ) {
+      <app-icon-button (click)="onModifyClick()" data-cy="grid-edit-button">
         <app-pencil-icon></app-pencil-icon>
       </app-icon-button>
     }
     @if (
-      button.type === 'delete' &&
+      button.type === "delete" &&
       deletePermission &&
       (button.visibilityColumn ? getProperty(button.visibilityColumn) : true)
-      ) {
-      <app-icon-button
-        (click)="onDeleteClick()"
-        data-cy="grid-delete-button"
-        >
-        @if (deleteIcon === 'checkmark') {
+    ) {
+      <app-icon-button (click)="onDeleteClick()" data-cy="grid-delete-button">
+        @if (deleteIcon === "checkmark") {
           <app-check-icon></app-check-icon>
-        }
-        @else {
+        } @else {
           <app-trashcan-icon></app-trashcan-icon>
         }
       </app-icon-button>
     }
-    @if (button.type === 'toggle' && (button.visibilityColumn ? getProperty(button.visibilityColumn) : true)) {
-      <app-toggle-button
-        (valueChange)="onToggleChange($event)"
-        [value]="getProperty(column.field)"
-        >
+    @if (button.type === "toggle" && (button.visibilityColumn ? getProperty(button.visibilityColumn) : true)) {
+      <app-toggle-button (valueChange)="onToggleChange($event)" [value]="getProperty(column.field)">
       </app-toggle-button>
     }
   }

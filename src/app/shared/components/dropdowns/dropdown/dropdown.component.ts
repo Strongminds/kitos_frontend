@@ -3,9 +3,14 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgFooterTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import {
+  NgFooterTemplateDirective,
+  NgLabelTemplateDirective,
+  NgOptionTemplateDirective,
+  NgSelectComponent,
+} from '@ng-select/ng-select';
 import { combineLatest } from 'rxjs';
-import { addExpiredTextToOption } from 'src/app/shared/helpers/option-type.helper';
+import { addExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
@@ -19,6 +24,7 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
     ReactiveFormsModule,
     NgSelectComponent,
     NgOptionTemplateDirective,
+    NgLabelTemplateDirective,
     ParagraphComponent,
     NgFooterTemplateDirective,
     TextBoxInfoComponent,
@@ -44,10 +50,12 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     super.ngOnInit();
 
     // Add obselete value when both value and data are present if data does not contain current form value
+    // Also sync disabled state from data into the form value so the label template can reflect it
     this.subscriptions.add(
-      combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) =>
-        this.addObsoleteToValueIfMissingInData(value),
-      ),
+      combineLatest([this.formValueSubject$, this.formDataSubject$]).subscribe(([value]) => {
+        this.syncValueDisabledState(value);
+        this.addObsoleteToValueIfMissingInData(value);
+      }),
     );
 
     if (!this.formName) return;
@@ -79,11 +87,29 @@ export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implem
     this.blurEvent.emit();
   }
 
+  public getItemLabel(item: any): string {
+    const label = item?.[this.textField] ?? '';
+    return item?.disabled ? addExpiredText(label) : label;
+  }
+
+  private syncValueDisabledState(value?: any) {
+    if (!this.data || !this.formName || !value) return;
+    const matchedItem = (this.data as any[]).find((d: any) => d[this.valueField] === value[this.valueField]);
+    if (!matchedItem) return;
+
+    const shouldBeDisabled = matchedItem.disabled === true;
+    const isCurrentlyDisabled = value.disabled === true;
+    if (shouldBeDisabled !== isCurrentlyDisabled) {
+      const updatedValue: T = { ...value, disabled: shouldBeDisabled || undefined };
+      this.formGroup?.controls[this.formName].setValue(updatedValue, { emitEvent: false });
+    }
+  }
+
   private addObsoleteToValueIfMissingInData(value?: any) {
     if (this.considerCurrentValueObsoleteIfNotPresentInData) {
       if (this.data && this.formName && this.doesDataContainValue(value)) {
         // Set generated obselete value on the form control
-        const obseleteDataOption: T = { ...value, [this.textField]: addExpiredTextToOption(value[this.textField]) };
+        const obseleteDataOption: T = { ...value, [this.textField]: addExpiredText(value[this.textField]) };
         this.formGroup?.controls[this.formName].setValue(obseleteDataOption, { emitEvent: false });
       }
     }

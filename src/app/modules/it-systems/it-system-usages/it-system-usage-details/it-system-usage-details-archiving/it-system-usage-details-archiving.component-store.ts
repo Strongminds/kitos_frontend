@@ -8,7 +8,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 interface State {
   organizationsIsLoading: boolean;
-  organizations?: Array<APIOrganizationResponseDTO[]>;
+  organizations?: Array<APIOrganizationResponseDTO>;
 }
 
 @Injectable()
@@ -23,7 +23,7 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
   }
 
   private updateOrganizations = this.updater(
-    (state, organizations: Array<APIOrganizationResponseDTO[]>): State => ({
+    (state, organizations: Array<APIOrganizationResponseDTO>): State => ({
       ...state,
       organizations: organizations,
     }),
