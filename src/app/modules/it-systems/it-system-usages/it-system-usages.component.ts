@@ -571,8 +571,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.IsBusinessCritical,
-      title: $localize`Forretningskritisk`,
-      section: GDPR_SECTION_NAME,
+      title: $localize`Forretningskritisk IT-system`,
+      section: USAGE_SECTION_NAME,
       style: 'enum',
       extraFilter: 'enum',
       extraData: yesNoDontKnowOptions,

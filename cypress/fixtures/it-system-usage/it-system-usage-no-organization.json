@@ -21,7 +21,8 @@
       "validFrom": "2022-05-10T00:00:00Z",
       "validTo": "2022-11-12T00:00:00Z"
     },
-    "mainContract": null
+    "mainContract": null,
+    "isBusinessCritical": 1
   },
   "roles": [
     {
@@ -68,7 +69,6 @@
   },
   "gdpr": {
     "purpose": null,
-    "businessCritical": 1,
     "hostedAt": 1,
     "directoryDocumentation": { "name": null, "url": null },
     "dataSensitivityLevels": [0, 1, 3, 2],

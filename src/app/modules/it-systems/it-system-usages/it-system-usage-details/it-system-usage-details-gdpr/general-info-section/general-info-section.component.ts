@@ -14,18 +14,13 @@ import {
   mapGdprCriticality,
 } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
-import {
-  YesNoDontKnowOption,
-  mapToYesNoDontKnowEnum,
-  yesNoDontKnowOptions,
-} from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprBusinessCritical,
   selectITSystemUsageEnableGdprCriticality,
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprHostedAt,
@@ -37,7 +32,6 @@ import { DropdownComponent } from '../../../../../../shared/components/dropdowns
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
-import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 
 @Component({
   selector: 'app-general-info-section',
@@ -62,7 +56,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
 
   public readonly supplierMessage = SUPPLIER_DISABLED_MESSAGE;
 
-  public readonly businessCriticalOptions = yesNoDontKnowOptions;
   public readonly hostedAtOptions = hostedAtOptions;
   public readonly gdpr$ = this.store.select(selectItSystemUsageGdpr).pipe(filterNullish());
   public readonly selectDirectoryDocumentation$ = this.gdpr$.pipe(
@@ -75,7 +68,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly generalInformationForm = new FormGroup(
     {
       purpose: new FormControl(''),
-      businessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       hostedAt: new FormControl<HostedAt | undefined>(undefined),
       gdprCriticality: new FormControl<GdprCriticality | undefined>(undefined),
     },
@@ -84,7 +76,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public disableDirectoryDocumentationControl = false;
 
   public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
-  public readonly businessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableGdprBusinessCritical);
   public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
   public readonly gdprCriticalityEnabled$ = this.store.select(selectITSystemUsageEnableGdprCriticality);
@@ -106,7 +97,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
       this.gdpr$.subscribe((gdpr) => {
         this.generalInformationForm.patchValue({
           purpose: gdpr.purpose,
-          businessCritical: mapToYesNoDontKnowEnum(gdpr.businessCritical),
           hostedAt: mapHostedAt(gdpr.hostedAt ?? undefined),
           gdprCriticality: mapGdprCriticality(gdpr.gdprCriticality ?? undefined),
         });

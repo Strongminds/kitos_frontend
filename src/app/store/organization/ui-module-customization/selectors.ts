@@ -127,6 +127,8 @@ export const selectITSystemUsageEnableContainsAITechnology =
 export const selectITSystemUsageEnableWebAccessibility = createItSystemUsageFrontPageFieldSelector('webAccessibility');
 export const selectITSystemUsageEnableIsSociallyCritical =
   createItSystemUsageFrontPageFieldSelector('isSociallyCritical');
+export const selectITSystemUsageEnableIsBusinessCritical =
+  createItSystemUsageFrontPageFieldSelector('isBusinessCritical');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
@@ -141,7 +143,6 @@ const createItSystemUsageGdprFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'gdpr', fieldKey);
 
 export const selectITSystemUsageEnableGdprPurpose = createItSystemUsageGdprFieldSelector('purpose');
-export const selectITSystemUsageEnableGdprBusinessCritical = createItSystemUsageGdprFieldSelector('businessCritical');
 export const selectITSystemUsageEnableGdprHostedAt = createItSystemUsageGdprFieldSelector('hostedAt');
 export const selectITSystemUsageEnableGdprDocumentation = createItSystemUsageGdprFieldSelector('documentation');
 export const selectITSystemUsageEnableGdprDataTypes = createItSystemUsageGdprFieldSelector('dataTypes');
