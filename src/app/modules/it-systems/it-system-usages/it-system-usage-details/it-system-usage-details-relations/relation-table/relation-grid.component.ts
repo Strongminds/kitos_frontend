@@ -7,7 +7,7 @@ import { first, Observable } from 'rxjs';
 import { APIIdentityNamePairResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
-import { addExpiredTextToOption } from 'src/app/shared/helpers/option-type.helper';
+import { addExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -103,7 +103,10 @@ export class RelationGridComponent extends BaseComponent implements OnInit {
     .select(selectRegularOptionTypesDictionary('it-system_usage-relation-frequency-type'))
     .pipe(filterNullish());
 
-  constructor(private readonly store: Store, private readonly dialog: MatDialog) {
+  constructor(
+    private readonly store: Store,
+    private readonly dialog: MatDialog,
+  ) {
     super();
   }
 
@@ -114,7 +117,7 @@ export class RelationGridComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       this.availableReferenceFrequencyTypes$.subscribe(() => {
         this.processExpiredFrequencyTypes();
-      })
+      }),
     );
   }
 
@@ -126,7 +129,7 @@ export class RelationGridComponent extends BaseComponent implements OnInit {
         } else {
           this.processedRelations = this.relations || [];
         }
-      })
+      }),
     );
   }
 
@@ -163,7 +166,7 @@ export class RelationGridComponent extends BaseComponent implements OnInit {
             ...relation,
             relationFrequency: {
               ...relation.relationFrequency,
-              name: addExpiredTextToOption(relation.relationFrequency.name),
+              name: addExpiredText(relation.relationFrequency.name),
             },
           };
         }

@@ -68,7 +68,7 @@ export class ITSystemEffects {
         return this.httpClient
           .get<OData>(
             `/odata/ItSystems?$expand=BusinessType($select=Name),` +
-              `BelongsTo($select=Name),` +
+              `BelongsTo($select=Name,Disabled),` +
               `TaskRefs($select=Description,TaskKey),` +
               `Parent($select=Name,Disabled),` +
               `Organization($select=Id,Name),` +

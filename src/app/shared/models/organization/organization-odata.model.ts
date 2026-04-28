@@ -1,3 +1,5 @@
+import { addOptionalExpiredText } from '../../helpers/option-type.helper';
+
 export interface OrganizationOData {
   id: string;
   Uuid: string;
@@ -49,7 +51,7 @@ export const adaptOrganization = (value: any): OrganizationOData | undefined => 
   const adapted: OrganizationOData = {
     id: value.Uuid,
     Uuid: value.Uuid,
-    Name: value.Name,
+    Name: addOptionalExpiredText(value.Name, value.Disabled),
     Cvr: value.Cvr ?? '',
     OrganizationType: adaptOrganizationType(value.TypeId).name,
     OrganizationTypeEnum: value.TypeId,
