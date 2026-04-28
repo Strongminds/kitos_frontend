@@ -114,7 +114,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     {
       isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       isBusinessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
-      criticalityLastChanged: new FormControl<Date | undefined>(undefined),
+      criticalityFieldsLastChanged: new FormControl<Date | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -301,8 +301,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   private setFormCriticalityLastChangedIfNotUndefined(general: APIGeneralDataResponseDTO) {
+    console.log('setting with lastchanged ', general);
     if (general.criticalityFieldsLastChanged) {
-      this.itSystemCriticalityForm.controls.criticalityLastChanged.setValue(
+      this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.setValue(
         new Date(general.criticalityFieldsLastChanged),
       );
     }

@@ -115,12 +115,14 @@
         i18n-toolTipText
       ></app-dropdown>
 
-      <app-textbox
+      <app-datepicker
         [disabled]="true"
         i18n-text
         text="Kritikalitet sidst opdateret"
-        formName="criticalityLastChanged">
-      </app-textbox>
+        formName="criticalityFieldsLastChanged"
+        [formGroup]="itSystemCriticalityForm"
+        >
+      </app-datepicker>
     }
     </form>
 </app-card>
