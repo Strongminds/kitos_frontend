@@ -59,6 +59,9 @@ export const ItSystemUsageUiBluePrint = {
         isSociallyCritical: {
           text: $localize`Samfundskritisk IT-system`,
         },
+        isBusinessCritical: {
+          text: $localize`Forretningskritisk IT-System`,
+        },
       },
     },
     contracts: {
@@ -82,9 +85,6 @@ export const ItSystemUsageUiBluePrint = {
       children: {
         purpose: {
           text: $localize`Systemets overordnede formål`,
-        },
-        businessCritical: {
-          text: $localize`Forretningskritisk IT-System`,
         },
         hostedAt: {
           text: $localize`IT-Systemet driftes`,

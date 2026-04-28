@@ -31,5 +31,6 @@ export interface APIGeneralDataResponseDTO {
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
     isSociallyCritical?: APIYesNoDontKnowChoice;
+    isBusinessCritical?: APIYesNoDontKnowChoice;
 }
 

@@ -10,7 +10,6 @@ export interface GdprReport {
   personalData?: boolean;
   sensitiveData?: boolean;
   legalData?: boolean;
-  businessCritical?: YesNoDontKnowOption;
   dataProcessingAgreementConcluded?: boolean;
   linkToDirectory?: boolean;
   sensitiveDataTypes: string;
@@ -43,7 +42,6 @@ export function adaptGdprReport(dto: APIGdprReportResponseDTO): GdprReport {
     personalData: dto.personalData,
     sensitiveData: dto.sensitiveData,
     legalData: dto.legalData,
-    businessCritical: mapToYesNoDontKnowEnum(dto.businessCritical),
     dataProcessingAgreementConcluded: dto.dataProcessingAgreementConcluded,
     linkToDirectory: dto.linkToDirectory,
     sensitiveDataTypes: dto.sensitiveDataTypes?.join(', ') ?? '',

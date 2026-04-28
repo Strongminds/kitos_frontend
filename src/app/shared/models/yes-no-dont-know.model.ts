@@ -2,7 +2,7 @@ import { APIYesNoDontKnowChoice } from 'src/app/api/v2';
 
 export interface YesNoDontKnowOption {
   name: string;
-  value: APIYesNoDontKnowChoice;
+  value: APIYesNoDontKnowChoice | string;
 }
 
 export enum YesNoDontKnowEnum {
@@ -17,7 +17,7 @@ export const yesNoDontKnowOptions: YesNoDontKnowOption[] = [
   { name: $localize`Nej`, value: YesNoDontKnowEnum.No },
   { name: $localize`Ved ikke`, value: YesNoDontKnowEnum.DontKnow },
 ];
-export const mapToYesNoDontKnowEnum = (value?: APIYesNoDontKnowChoice | null): YesNoDontKnowOption | undefined => {
+export const mapToYesNoDontKnowEnum = (value?: APIYesNoDontKnowChoice): YesNoDontKnowOption | undefined => {
   return yesNoDontKnowOptions.find((option) => option.value === value);
 };
 

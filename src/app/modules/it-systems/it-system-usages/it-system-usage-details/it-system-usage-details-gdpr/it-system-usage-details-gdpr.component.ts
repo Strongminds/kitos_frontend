@@ -7,7 +7,6 @@ import { combineAND, combineOR } from 'src/app/shared/helpers/observable-helpers
 import { selectITSystemUsageHasModifyPermission } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnabledRegisteredCategories,
-  selectITSystemUsageEnableGdprBusinessCritical,
   selectITSystemUsageEnableGdprConductedRiskAssessment,
   selectITSystemUsageEnableGdprDataTypes,
   selectITSystemUsageEnableGdprDocumentation,
@@ -71,7 +70,6 @@ export class ItSystemUsageDetailsGdprComponent extends BaseComponent {
 
   public readonly showGeneralInfo$ = combineOR([
     this.store.select(selectITSystemUsageEnableGdprPurpose),
-    this.store.select(selectITSystemUsageEnableGdprBusinessCritical),
     this.store.select(selectITSystemUsageEnableGdprHostedAt),
     this.store.select(selectITSystemUsageEnableGdprDocumentation),
   ]);

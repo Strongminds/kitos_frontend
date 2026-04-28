@@ -21,7 +21,6 @@ export interface APIGdprReportResponseDTO {
     personalData?: boolean;
     sensitiveData?: boolean;
     legalData?: boolean;
-    businessCritical?: APIYesNoDontKnowChoice;
     dataProcessingAgreementConcluded?: boolean;
     linkToDirectory?: boolean;
     sensitiveDataTypes?: Array<string> | null;

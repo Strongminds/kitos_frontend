@@ -91,13 +91,6 @@ export class GdprOverviewComponent {
       hidden: false,
     },
     {
-      field: GdprFields.BUSINESS_CRITICAL_NAME,
-      title: $localize`Forretningskritisk IT-System`,
-      hidden: false,
-      extraData: yesNoDontKnowOptions,
-      extraFilter: 'enum',
-    },
-    {
       field: GdprFields.DATA_PROCESSING_AGREEMENT_CONCLUDED,
       title: $localize`Databehandleraftale`,
       hidden: false,

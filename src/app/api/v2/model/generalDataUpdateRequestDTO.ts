@@ -29,6 +29,7 @@ export interface APIGeneralDataUpdateRequestDTO {
     lastWebAccessibilityCheck?: string | null;
     webAccessibilityNotes?: string | null;
     isSociallyCritical?: APIYesNoDontKnowChoice;
+    isBusinessCritical?: APIYesNoDontKnowChoice;
     mainContractUuid?: string | null;
 }
 
