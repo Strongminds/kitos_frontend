@@ -49,11 +49,11 @@ import {
 } from 'src/app/store/it-system-usage/selectors';
 import {
   selectITSystemUsageEnableAmountOfUsers,
-  selectITSystemUsageEnableBusinessCritical,
   selectITSystemUsageEnableContainsAITechnology,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -103,7 +103,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       notes: new FormControl<string | undefined>(undefined),
       aiTechnology: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
-      businessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      isBusinessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -112,7 +112,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
   public readonly aiTechnologyOptions = yesNoOptions;
   public readonly isSociallyCriticalOptions = yesNoDontKnowOptions;
-  public readonly businessCriticalOptions = yesNoDontKnowOptions;
+  public readonly isBusinessCriticalOptions = yesNoDontKnowOptions;
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
   public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
@@ -128,7 +128,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly containsAITechnologyEnabled$ = this.store.select(selectITSystemUsageEnableContainsAITechnology);
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
   public readonly isSociallyCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsSociallyCritical);
-  public readonly businessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableBusinessCritical);
+  public readonly isBusinessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsBusinessCritical);
 
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
@@ -247,17 +247,17 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,
-            numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers),
+            numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers ?? undefined),
             dataClassification: general.dataClassification,
             notes: general.notes,
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
-            businessCritical: mapToYesNoDontKnowEnum(general.businessCritical),
+            isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
           });
 
           this.webAccessibilityForm.patchValue({
-            webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance),
-            lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck),
+            webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance ?? undefined),
+            lastWebAccessibilityCheck: optionalNewDate(general.lastWebAccessibilityCheck ?? undefined),
             webAccessibilityNotes: general.webAccessibilityNotes,
           });
         }),
@@ -270,12 +270,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .pipe(filterNullish())
         .subscribe((itSystemUsage) =>
           this.itSystemApplicationForm.patchValue({
-            createdBy: itSystemUsage.createdBy.name,
-            lastModifiedBy: itSystemUsage.lastModifiedBy.name,
+            createdBy: itSystemUsage.createdBy?.name,
+            lastModifiedBy: itSystemUsage.lastModifiedBy?.name,
             lastModified: new Date(itSystemUsage.lastModified),
-            lifeCycleStatus: mapLifeCycleStatus(itSystemUsage.general.validity.lifeCycleStatus),
-            validFrom: optionalNewDate(itSystemUsage.general.validity.validFrom),
-            validTo: optionalNewDate(itSystemUsage.general.validity.validTo),
+            lifeCycleStatus: mapLifeCycleStatus(itSystemUsage.general.validity.lifeCycleStatus ?? undefined),
+            validFrom: optionalNewDate(itSystemUsage.general.validity.validFrom ?? undefined),
+            validTo: optionalNewDate(itSystemUsage.general.validity.validTo ?? undefined),
             valid: itSystemUsage.general.validity.valid
               ? $localize`Systemet er aktivt`
               : $localize`Systemet er ikke aktivt`,

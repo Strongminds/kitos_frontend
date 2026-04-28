@@ -17,7 +17,7 @@ export class ExternalReferenceComponent implements OnInit {
   public invalidText = '';
 
   ngOnInit() {
-    this.isValidLink = validateExternalReferenceUrl(this.reference?.url);
+    this.isValidLink = validateExternalReferenceUrl(this.reference?.url ?? undefined);
     if (!this.isValidLink) {
       this.invalidText = this.reference?.title + (this.reference?.url ? `(${this.reference?.url})` : '');
     }

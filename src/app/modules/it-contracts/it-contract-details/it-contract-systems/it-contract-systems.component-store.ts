@@ -7,7 +7,7 @@ import { Observable, combineLatestWith, map, mergeMap, tap } from 'rxjs';
 import {
   APIGeneralSystemRelationResponseDTO,
   APIIdentityNamePairResponseDTO,
-  APIV2ItSystemUsageInternalINTERNALService,
+  ItSystemUsageInternalV2Service,
 } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItContractSystemUsages, selectItContractUuid } from 'src/app/store/it-contract/selectors';
@@ -38,7 +38,7 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
   public readonly systemUsagesIsLoading$ = this.select((state) => state.systemUsagesIsLoading);
 
   constructor(
-    private readonly systemUsageService: APIV2ItSystemUsageInternalINTERNALService,
+    private readonly systemUsageService: ItSystemUsageInternalV2Service,
     private readonly store: Store,
   ) {
     super({ systemRelationsIsLoading: false, systemUsagesIsLoading: false });
@@ -72,13 +72,13 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
       tap(() => this.updateSystemRelationsIsLoading(true)),
       mergeMap((itContractUuid) => {
         return this.systemUsageService
-          .getManyItSystemUsageInternalV2GetRelations({ contractUuid: itContractUuid })
+          .getSingleItSystemUsageInternalV2GetRelations({ contractUuid: itContractUuid })
           .pipe(
             tapResponse({
-    next: (relations) => this.updateSystemRelations(relations),
-    error: (e) => console.error(e),
-    complete: () => this.updateSystemRelationsIsLoading(false)
-}),
+              next: (relations) => this.updateSystemRelations(relations),
+              error: (e) => console.error(e),
+              complete: () => this.updateSystemRelationsIsLoading(false),
+            }),
           );
       }),
     ),
@@ -90,16 +90,19 @@ export class ItContractSystemsComponentStore extends ComponentStore<State> imple
       combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([search, organizationUuid]) => {
         return this.systemUsageService
-          .getManyItSystemUsageInternalV2GetItSystemUsages({
+          .getSingleItSystemUsageInternalV2GetItSystemUsages({
             organizationUuid,
             systemNameContent: search,
           })
           .pipe(
             tapResponse({
-    next: (usages) => this.updateSystemUsages(usages.map((usage) => ({ uuid: usage.uuid, name: usage.systemContext.name }))),
-    error: (e) => console.error(e),
-    complete: () => this.updateSystemUsagesIsLoading(false)
-}),
+              next: (usages) =>
+                this.updateSystemUsages(
+                  usages.map((usage: any) => ({ uuid: usage.uuid, name: usage.systemContext.name })),
+                ),
+              error: (e) => console.error(e),
+              complete: () => this.updateSystemUsagesIsLoading(false),
+            }),
           );
       }),
     ),

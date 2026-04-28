@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { mergeMap, Observable, tap } from 'rxjs';
-import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 
 interface State {
   organizations: APIOrganizationResponseDTO[];
@@ -14,7 +14,7 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
   public readonly organizations$ = this.select((state) => state.organizations);
   public readonly loading$ = this.select((state) => state.loading);
 
-  constructor(private organizationService: APIV2OrganizationService) {
+  constructor(private organizationService: OrganizationV2Service) {
     super({ organizations: [], loading: false });
   }
 
@@ -37,15 +37,15 @@ export class OrganizationDropdownComponentStore extends ComponentStore<State> {
       tap(() => this.setLoading(true)),
       mergeMap((search) => {
         return this.organizationService
-          .getManyOrganizationV2GetOrganizations({
+          .getSingleOrganizationV2GetOrganizations({
             nameOrCvrContent: search,
           })
           .pipe(
             tapResponse({
-    next: (filteredUsers) => this.setOrganizations(filteredUsers),
-    error: (error) => console.error(error),
-    complete: () => this.setLoading(false)
-}),
+              next: (filteredUsers) => this.setOrganizations(filteredUsers),
+              error: (error) => console.error(error),
+              complete: () => this.setLoading(false),
+            }),
           );
       }),
     ),

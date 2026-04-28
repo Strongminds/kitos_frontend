@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap } from 'rxjs';
-import { APIOrganizationResponseDTO, APIV2OrganizationService } from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, OrganizationV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 interface State {
@@ -15,10 +15,10 @@ interface State {
 export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<State> implements OnDestroy {
   public readonly supplierOrganizations$ = this.select((state) => state.organizations).pipe(filterNullish());
   public readonly supplierOrganizationsIsLoading$ = this.select((state) => state.organizationsIsLoading).pipe(
-    filterNullish()
+    filterNullish(),
   );
 
-  constructor(@Inject(APIV2OrganizationService) private organizationsService: APIV2OrganizationService) {
+  constructor(@Inject(OrganizationV2Service) private organizationsService: OrganizationV2Service) {
     super({ organizationsIsLoading: false });
   }
 
@@ -26,14 +26,14 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
     (state, organizations: Array<APIOrganizationResponseDTO[]>): State => ({
       ...state,
       organizations: organizations,
-    })
+    }),
   );
 
   private updateOrganizationsIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       organizationsIsLoading: loading,
-    })
+    }),
   );
 
   public getOrganizations = this.effect((search$: Observable<string | undefined>) =>
@@ -41,15 +41,15 @@ export class ItSystemUsageDetailsArchivingComponentStore extends ComponentStore<
       mergeMap((search) => {
         this.updateOrganizationsIsLoading(true);
         return this.organizationsService
-          .getManyOrganizationV2GetOrganizations({ nameOrCvrContent: search, orderByProperty: 'Name' })
+          .getSingleOrganizationV2GetOrganizations({ nameOrCvrContent: search, orderByProperty: 'Name' })
           .pipe(
             tapResponse({
-    next: (organizations) => this.updateOrganizations(organizations),
-    error: (e) => console.error(e),
-    complete: () => this.updateOrganizationsIsLoading(false)
-})
+              next: (organizations) => this.updateOrganizations(organizations),
+              error: (e) => console.error(e),
+              complete: () => this.updateOrganizationsIsLoading(false),
+            }),
           );
-      })
-    )
+      }),
+    ),
   );
 }

@@ -92,7 +92,7 @@
                     data-cy="show-organizations-button"
                     tooltipText="Organisationer"
                     i18n-tooltipText
-                    (click)="showOrganizations(user.organizationsWhereActive)"
+                    (click)="showOrganizations(user.organizationsWhereActive ?? undefined)"
                     ><app-eye-icon></app-eye-icon
                   ></app-icon-button>
                 </td>

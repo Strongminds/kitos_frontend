@@ -4,7 +4,7 @@ import { tapResponse } from '@ngrx/operators';
 
 import { Store } from '@ngrx/store';
 import { Observable, combineLatestWith, mergeMap, tap } from 'rxjs';
-import { APIOrganizationResponseDTO, APIV2DataProcessingRegistrationInternalINTERNALService } from 'src/app/api/v2';
+import { APIOrganizationResponseDTO, DataProcessingRegistrationInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectDataProcessingUuid } from 'src/app/store/data-processing/selectors';
 
@@ -17,7 +17,10 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
   public readonly organizations$ = this.select((state) => state.organizations).pipe(filterNullish());
   public readonly isLoading$ = this.select((state) => state.loading);
 
-  constructor(private store: Store, private dprApiService: APIV2DataProcessingRegistrationInternalINTERNALService) {
+  constructor(
+    private store: Store,
+    private dprApiService: DataProcessingRegistrationInternalV2Service,
+  ) {
     super({ loading: false });
   }
 
@@ -25,14 +28,14 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
     (state, organizations: Array<APIOrganizationResponseDTO>): State => ({
       ...state,
       organizations,
-    })
+    }),
   );
 
   private updateIsLoading = this.updater(
     (state, loading: boolean): State => ({
       ...state,
       loading,
-    })
+    }),
   );
 
   public getOrganizations = this.effect((search$: Observable<string | undefined>) =>
@@ -42,15 +45,15 @@ export class CreateProcessorDialogComponentStore extends ComponentStore<State> {
       mergeMap(([search, dprUuid]) => {
         this.updateIsLoading(true);
         return this.dprApiService
-          .getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors({ dprUuid, nameQuery: search })
+          .getSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessors({ dprUuid, nameQuery: search })
           .pipe(
             tapResponse({
               next: (organizations) => this.updateOrganizations(organizations),
               error: (e) => console.error(e),
               complete: () => this.updateIsLoading(false),
-            })
+            }),
           );
-      })
-    )
+      }),
+    ),
   );
 }

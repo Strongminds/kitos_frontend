@@ -4,7 +4,11 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { debounceTime } from 'rxjs';
-import { APIPublicMessageRequestDTO } from 'src/app/api/v2';
+import {
+  APIPublicMessageIconTypeChoice,
+  APIPublicMessageRequestDTO,
+  APIPublicMessageStatusChoice,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME } from 'src/app/shared/constants/constants';
 import { isExternalReferenceUrlEmptyOrValid } from 'src/app/shared/helpers/link.helpers';
@@ -126,14 +130,11 @@ export class EditPublicMessageDialogComponent extends BaseComponent implements O
     };
   }
 
-  private getStatusValue(): APIPublicMessageRequestDTO.StatusEnum | undefined {
-    const value = this.formGroup.value.status?.value ?? null;
-    //We need to allow null, to reset the value, but the generateed model does not allow it, so we have to cast (28/02/2025)
-    return value as APIPublicMessageRequestDTO.StatusEnum | undefined;
+  private getStatusValue(): APIPublicMessageStatusChoice | undefined {
+    return this.formGroup.value.status?.value ?? undefined;
   }
 
-  private getIconTypeValue(): APIPublicMessageRequestDTO.IconTypeEnum | undefined {
-    const value = this.formGroup.value.iconType?.value ?? null;
-    return value as APIPublicMessageRequestDTO.IconTypeEnum | undefined;
+  private getIconTypeValue(): APIPublicMessageIconTypeChoice | undefined {
+    return this.formGroup.value.iconType?.value ?? undefined;
   }
 }

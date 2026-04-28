@@ -3,7 +3,7 @@ import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, mergeMap } from 'rxjs';
-import { APIDataProcessingRegistrationResponseDTO, APIV2DataProcessingRegistrationService } from 'src/app/api/v2';
+import { APIDataProcessingRegistrationResponseDTO, DataProcessingRegistrationV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 
 interface State {
@@ -21,7 +21,7 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
     filterNullish(),
   );
 
-  constructor(private apiDataProcessingRegistrationService: APIV2DataProcessingRegistrationService) {
+  constructor(private apiDataProcessingRegistrationService: DataProcessingRegistrationV2Service) {
     super({});
   }
 
@@ -44,16 +44,17 @@ export class ItSystemUsageDetailsDataProcessingComponentStore extends ComponentS
       mergeMap((systemUsageUuid) => {
         this.updateAssociatedDataProcessingRegistrationsIsLoading(true);
         return this.apiDataProcessingRegistrationService
-          .getManyDataProcessingRegistrationV2GetDataProcessingRegistrations({
+          .getSingleDataProcessingRegistrationV2GetDataProcessingRegistrations({
             systemUsageUuid: systemUsageUuid,
             orderByProperty: 'Name',
           })
           .pipe(
             tapResponse({
-    next: (dataProcessingRegistrations) => this.updateAssociatedDataProcessingRegistrations(dataProcessingRegistrations),
-    error: (e) => console.error(e),
-    complete: () => this.updateAssociatedDataProcessingRegistrationsIsLoading(false)
-}),
+              next: (dataProcessingRegistrations) =>
+                this.updateAssociatedDataProcessingRegistrations(dataProcessingRegistrations),
+              error: (e) => console.error(e),
+              complete: () => this.updateAssociatedDataProcessingRegistrationsIsLoading(false),
+            }),
           );
       }),
     ),

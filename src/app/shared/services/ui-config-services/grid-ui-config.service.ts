@@ -304,7 +304,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableIsSociallyCritical)
         .pipe(shouldEnable([UsageFields.IsSociallyCritical])),
-      this.store.select(selectITSystemUsageEnableBusinessCritical).pipe(shouldEnable([UsageFields.IsBusinessCritical])),
+      this.store
+        .select(selectITSystemUsageEnableIsBusinessCritical)
+        .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
 
       //Contracts
       combineAND([

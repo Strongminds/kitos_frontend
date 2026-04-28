@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { APIV2NotificationINTERNALService } from 'src/app/api/v2';
+import { NotificationV2Service } from 'src/app/api/v2';
 import { UserNotificationActions } from './actions';
 import { catchError, filter, map, of, switchMap } from 'rxjs';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -15,7 +15,7 @@ export class UserNotificationsEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    private notificationService: APIV2NotificationINTERNALService,
+    private notificationService: NotificationV2Service,
   ) {}
 
   getNotifications$ = createEffect(() => {
@@ -28,7 +28,7 @@ export class UserNotificationsEffects {
       filter(([, , hasValidCache]) => !hasValidCache),
       switchMap(([{ ownerResourceType }, organizationUuid]) =>
         this.notificationService
-          .getManyNotificationV2GetNotifications({ ownerResourceType, organizationUuid, onlyActive: true })
+          .getSingleNotificationV2GetNotifications({ ownerResourceType, organizationUuid, onlyActive: true })
           .pipe(
             map((notifications) =>
               UserNotificationActions.getNotificationsSuccess(

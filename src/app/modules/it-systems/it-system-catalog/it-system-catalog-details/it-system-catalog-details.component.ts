@@ -36,6 +36,7 @@ import { DetailsHeaderComponent } from '../../../../shared/components/details-he
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
+import { APISystemDeletionConflict } from 'src/app/api/v2';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
@@ -214,13 +215,13 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
       if (!conflicts || conflicts.length === 0) return '';
 
       let text = '';
-      if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasChildSystems)) {
+      if (conflicts.includes(APISystemDeletionConflict.HasChildSystems)) {
         text += $localize`Systemet er registreret som "Overordnet System" for én eller flere IT Systemer. `;
       }
-      if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasInterfaceExposures)) {
+      if (conflicts.includes(APISystemDeletionConflict.HasInterfaceExposures)) {
         text += $localize`Systemet er registreret som "Udstillet af" på én eller flere snitfladebeskrivelser i Snitfladekataloget. `;
       }
-      if (conflicts.includes(APIItSystemPermissionsResponseDTO.DeletionConflictsEnum.HasItSystemUsages)) {
+      if (conflicts.includes(APISystemDeletionConflict.HasItSystemUsages)) {
         text += $localize`Systemet er i anvendelse i én eller flere kommuner.`;
       }
 

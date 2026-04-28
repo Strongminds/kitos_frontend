@@ -21,6 +21,7 @@
       "validFrom": "2022-05-10T00:00:00Z",
       "validTo": "2022-11-12T00:00:00Z"
     },
+    "isBusinessCritical": 1,
     "mainContract": { "uuid": "87f03ce9-a596-46cf-a5fa-c4fdb5c2564a" }
   },
   "roles": [
@@ -74,7 +75,6 @@
   },
   "gdpr": {
     "purpose": null,
-    "businessCritical": 1,
     "hostedAt": 1,
     "directoryDocumentation": { "name": null, "url": null },
     "dataSensitivityLevels": [0, 1, 3, 2],
