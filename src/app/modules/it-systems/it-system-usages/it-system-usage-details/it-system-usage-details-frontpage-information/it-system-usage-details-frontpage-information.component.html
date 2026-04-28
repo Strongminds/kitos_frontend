@@ -110,7 +110,7 @@
         [formGroup]="itSystemCriticalityForm"
         formName="isBusinessCritical"
         [data]="isBusinessCriticalOptions"
-        (valueChange)="patchGeneral({ businessCritical: $event })"
+        (valueChange)="patchGeneral({ isBusinessCritical: $event })"
         toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
         i18n-toolTipText
       ></app-dropdown>

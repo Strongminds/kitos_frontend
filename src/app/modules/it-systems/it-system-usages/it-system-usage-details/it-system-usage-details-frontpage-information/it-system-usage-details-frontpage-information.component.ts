@@ -266,7 +266,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
           this.itSystemCriticalityForm.patchValue({
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
-            isBusinessCritical: mapToYesNoDontKnowEnum(general.businessCritical),
+            isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
           });
 
           this.setFormCriticalityLastChangedIfNotUndefined(general);
