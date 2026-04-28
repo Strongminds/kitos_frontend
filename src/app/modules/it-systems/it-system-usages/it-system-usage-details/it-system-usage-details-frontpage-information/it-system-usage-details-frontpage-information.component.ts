@@ -3,7 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { filter, map } from 'rxjs';
-import { APIGeneralDataUpdateRequestDTO, APIIdentityNamePairResponseDTO } from 'src/app/api/v2';
+import {
+  APIGeneralDataResponseDTO,
+  APIGeneralDataUpdateRequestDTO,
+  APIIdentityNamePairResponseDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
@@ -110,6 +114,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     {
       isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       isBusinessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
+      criticalityLastChanged: new FormControl<Date | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -259,10 +264,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             aiTechnology: mapToYesNoEnum(general.containsAITechnology),
           });
 
+          console.log('Patching criticality info with', general.criticalityInfo);
+
           this.itSystemCriticalityForm.patchValue({
-            isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
-            isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
+            isSociallyCritical: mapToYesNoDontKnowEnum(general.criticalityInfo.isSociallyCritical),
+            isBusinessCritical: mapToYesNoDontKnowEnum(general.criticalityInfo.businessCritical),
           });
+
+          this.setFormCriticalityLastChangedIfNotUndefined(general);
 
           this.webAccessibilityForm.patchValue({
             webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance ?? undefined),
@@ -293,6 +302,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
   }
 
+  private setFormCriticalityLastChangedIfNotUndefined(general: APIGeneralDataResponseDTO) {
+    if (general.criticalityInfo.lastChanged) {
+      this.itSystemCriticalityForm.controls.criticalityLastChanged.setValue(
+        new Date(general.criticalityInfo.lastChanged),
+      );
+    }
+  }
+
   public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
@@ -300,4 +317,5 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
     }
   }
+
 }
