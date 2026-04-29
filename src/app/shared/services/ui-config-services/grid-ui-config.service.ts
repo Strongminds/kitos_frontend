@@ -61,10 +61,10 @@ import {
   selectItContractsEnableTermination,
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableAssociatedContracts,
-  selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableCatalogArchiveDuty,
   selectITSystemUsageEnableCatalogArchiveDutyComment,
   selectITSystemUsageEnableContainsAITechnology,
+  selectITSystemUsageEnableCriticalityFieldsLastChanged,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableDescription,
@@ -84,6 +84,7 @@ import {
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
+  selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
@@ -307,6 +308,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableIsBusinessCritical)
         .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
+      this.store
+        .select(selectITSystemUsageEnableCriticalityFieldsLastChanged)
+        .pipe(shouldEnable([UsageFields.CriticalityFieldsLastChanged])),
 
       //Contracts
       combineAND([

@@ -87,6 +87,7 @@
   </form>
 </app-card>
 
+@if (showSystemCriticalityCard$ | async) {
 <app-card data-cy="system-criticality-section">
   <app-card-header title="Systemkritikalitet" helpTextKey="it-system.criticality" i18n-title></app-card-header>
   <form [formGroup]="itSystemCriticalityForm">
@@ -115,16 +116,19 @@
         i18n-toolTipText
       ></app-dropdown>
 
-      <app-datepicker
+      @if (criticalityFieldsLastChangedEnabled$ | async){
+        <app-datepicker
         i18n-text
         text="Systemkritikalitet sidst opdateret"
         formName="criticalityFieldsLastChanged"
         [formGroup]="itSystemCriticalityForm"
         >
       </app-datepicker>
+      }
     }
     </form>
 </app-card>
+}
 
 @if (showSystemUsageCard$ | async) {
   <app-card data-cy="system-usage-section">

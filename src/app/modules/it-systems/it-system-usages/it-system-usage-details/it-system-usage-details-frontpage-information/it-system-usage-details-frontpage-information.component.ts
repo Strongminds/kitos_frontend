@@ -54,6 +54,7 @@ import {
 import {
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableContainsAITechnology,
+  selectITSystemUsageEnableCriticalityFieldsLastChanged,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
@@ -140,6 +141,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly webAccessiblityEnabled$ = this.store.select(selectITSystemUsageEnableWebAccessibility);
   public readonly isSociallyCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsSociallyCritical);
   public readonly isBusinessCriticalEnabled$ = this.store.select(selectITSystemUsageEnableIsBusinessCritical);
+  public readonly criticalityFieldsLastChangedEnabled$ = this.store.select(
+    selectITSystemUsageEnableCriticalityFieldsLastChanged,
+  );
 
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
@@ -152,6 +156,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.lifeCycleStatusEnabled$,
     this.usagePeriodEnabled$,
     this.statusEnabled$,
+  ]);
+
+  public readonly showSystemCriticalityCard$ = combineOR([
+    this.isSociallyCriticalEnabled$,
+    this.isBusinessCriticalEnabled$,
+    this.criticalityFieldsLastChangedEnabled$,
   ]);
 
   public readonly itSystemApplicationForm = new FormGroup(
