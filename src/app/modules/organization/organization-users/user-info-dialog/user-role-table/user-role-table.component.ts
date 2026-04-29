@@ -11,7 +11,7 @@ import { CommonModule } from '@angular/common';
 import { Actions, ofType } from '@ngrx/effects';
 import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { addExpiredTextToOption } from 'src/app/shared/helpers/option-type.helper';
+import { addExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -59,7 +59,11 @@ export class UserRoleTableComponent extends BaseComponent implements OnInit {
   public userRightsWithExpired$: Observable<Right[]> = new Observable<Right[]>();
   public isLoading = false;
 
-  constructor(private store: Store, private confirmService: ConfirmActionService, private actions$: Actions) {
+  constructor(
+    private store: Store,
+    private confirmService: ConfirmActionService,
+    private actions$: Actions,
+  ) {
     super();
   }
 
@@ -73,7 +77,7 @@ export class UserRoleTableComponent extends BaseComponent implements OnInit {
           }
           return right;
         });
-      })
+      }),
     );
 
     this.subscriptions.add(
@@ -87,12 +91,12 @@ export class UserRoleTableComponent extends BaseComponent implements OnInit {
             ITSystemUsageActions.removeItSystemUsageRoleSuccess,
             ITSystemUsageActions.removeItSystemUsageRoleError,
             DataProcessingActions.removeDataProcessingRoleSuccess,
-            DataProcessingActions.removeDataProcessingRoleError
-          )
+            DataProcessingActions.removeDataProcessingRoleError,
+          ),
         )
         .subscribe(() => {
           this.isLoading = false;
-        })
+        }),
     );
   }
 
@@ -140,7 +144,7 @@ export class UserRoleTableComponent extends BaseComponent implements OnInit {
       ...right,
       role: {
         ...right.role,
-        name: addExpiredTextToOption(right.role.name),
+        name: addExpiredText(right.role.name),
       },
     };
   }
