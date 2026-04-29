@@ -7841,9 +7841,9 @@
         <source>Systemkritikalitet</source>
         <target state="new">Systemkritikalitet</target>
       </trans-unit>
-      <trans-unit id="151714802950158960" datatype="html">
-        <source>Kritikalitet sidst opdateret</source>
-        <target state="new">Kritikalitet sidst opdateret</target>
+      <trans-unit id="2143535785980974186" datatype="html">
+        <source>Systemkritikalitet sidst opdateret</source>
+        <target state="new">Systemkritikalitet sidst opdateret</target>
       </trans-unit>
     </body>
   </file>
