@@ -56,6 +56,7 @@ import {
   selectITSystemUsageEnableAmountOfUsers,
   selectITSystemUsageEnableContainsAITechnology,
   selectITSystemUsageEnableCriticalityFieldsLastChanged,
+  selectITSystemUsageEnableCriticalityLevelDocumentation,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
@@ -150,7 +151,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly criticalityFieldsLastChangedEnabled$ = this.store.select(
     selectITSystemUsageEnableCriticalityFieldsLastChanged,
   );
-
+  public readonly criticalityLevelDocumentationEnabled$ = this.store.select(
+    selectITSystemUsageEnableCriticalityLevelDocumentation,
+  );
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
   );
