@@ -65,6 +65,7 @@ export const ItSystemUsageUiBluePrint = {
         },
         criticalityFieldsLastChanged: {
           text: $localize`Systemkritikalitet sidst opdateret`,
+          disableByDefault: true,
         },
         systemUsageCriticalityLevel: {
           text: $localize`Kritikalitet`,
