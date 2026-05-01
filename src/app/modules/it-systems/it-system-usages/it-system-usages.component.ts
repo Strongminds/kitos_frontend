@@ -638,7 +638,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       dataField: GridFields.SystemUsageCriticalityLevelName,
       title: $localize`Kritikalitet`,
       section: USAGE_SECTION_NAME,
-      hidden: false,
+      hidden: true,
       persistId: 'gdprCriticality',
       extraFilter: 'choice-type',
       extraData: 'it-system-usage_system-usage-criticality-level',
