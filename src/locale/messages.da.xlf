@@ -7837,6 +7837,14 @@
         <source>Forretningskritisk IT-system</source>
         <target state="new">Forretningskritisk IT-system</target>
       </trans-unit>
+      <trans-unit id="7109755738988441858" datatype="html">
+        <source>Systemkritikalitet</source>
+        <target state="new">Systemkritikalitet</target>
+      </trans-unit>
+      <trans-unit id="2143535785980974186" datatype="html">
+        <source>Systemkritikalitet sidst opdateret</source>
+        <target state="new">Systemkritikalitet sidst opdateret</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
