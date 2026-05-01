@@ -12,7 +12,6 @@
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
 import { APIItSystemUsageValidityResponseDTO } from './itSystemUsageValidityResponseDTO';
@@ -33,8 +32,5 @@ export interface APIGeneralDataResponseDTO {
     webAccessibilityNotes?: string | null;
     isSociallyCritical?: APIYesNoDontKnowChoice;
     isBusinessCritical?: APIYesNoDontKnowChoice;
-    criticalityFieldsLastChanged?: string | null;
-    systemUsageCriticalityLevel?: APIIdentityNamePairResponseDTO;
-    criticalityLevelDocumentation?: APISimpleLinkDTO;
 }
 
