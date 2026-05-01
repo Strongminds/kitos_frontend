@@ -29,6 +29,7 @@ import {
   mapNumberOfExpectedUsers,
   numberOfExpectedUsersOptions,
 } from 'src/app/shared/models/number-of-expected-users.model';
+import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import {
   YesNoDontKnowOption,
@@ -80,6 +81,8 @@ import { DropdownComponent } from '../../../../../shared/components/dropdowns/dr
 import { StatusChipComponent } from '../../../../../shared/components/status-chip/status-chip.component';
 import { TextAreaComponent } from '../../../../../shared/components/textarea/textarea.component';
 import { TextBoxComponent } from '../../../../../shared/components/textbox/textbox.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+
 @Component({
   selector: 'app-it-system-usage-details-frontpage-information',
   templateUrl: 'it-system-usage-details-frontpage-information.component.html',
@@ -96,6 +99,7 @@ import { TextBoxComponent } from '../../../../../shared/components/textbox/textb
     DatePickerComponent,
     AsyncPipe,
     TooltipComponent,
+    EditUrlSectionComponent,
   ],
 })
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
@@ -174,6 +178,19 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.criticalityFieldsLastChangedEnabled$,
     this.systemUsageCriticalityEnabled$,
   ]);
+
+  public disableCriticalityLevelDocumentationControl = false;
+
+  public selectCriticalityLevelDocumentation$ = this.store.select(selectItSystemUsageGeneral).pipe(
+    map((general) =>
+      general?.criticalityLevelDocumentation
+        ? ({
+            url: general.criticalityLevelDocumentation.url,
+            name: general.criticalityLevelDocumentation.name,
+          } as SimpleLink)
+        : undefined,
+    ),
+  );
 
   public readonly itSystemApplicationForm = new FormGroup(
     {
@@ -365,5 +382,17 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       console.log('Patching general with:', general);
       this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
     }
+  }
+
+  public patchCriticalityLevelDocumentation(
+    simpleLink: { url: string; name: string },
+    valueChange?: ValidatedValueChange<unknown>,
+  ) {
+    this.patchGeneral({ criticalityLevelDocumentation: simpleLink }, valueChange);
+  }
+
+  public resetCriticalityLevelDocumentation() {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    this.patchGeneral({ criticalityLevelDocumentation: null as any });
   }
 }

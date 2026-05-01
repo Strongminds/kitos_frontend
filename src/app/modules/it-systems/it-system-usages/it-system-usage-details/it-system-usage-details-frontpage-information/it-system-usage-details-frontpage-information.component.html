@@ -142,6 +142,15 @@
         >
       </app-datepicker>
       }
+
+      <app-edit-url-section
+        title="Reference for kritikalitetsvurdering"
+        [simpleLink$]="selectCriticalityLevelDocumentation$"
+        i18n-title
+        (submitMethod)="patchCriticalityLevelDocumentation($event)"
+        (clearClick)="resetCriticalityLevelDocumentation()"
+        [isDisabled]="disableCriticalityLevelDocumentationControl"
+      ></app-edit-url-section>
     }
     </form>
 </app-card>
