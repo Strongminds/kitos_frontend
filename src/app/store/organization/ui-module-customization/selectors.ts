@@ -159,7 +159,8 @@ export const selectITSystemUsageEnableGdprConductedRiskAssessment =
   createItSystemUsageGdprFieldSelector('conductedRiskAssessment');
 export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
 export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
-export const selectITSystemUsageEnableGdprCriticality = createItSystemUsageGdprFieldSelector('gdprCriticality');
+export const selectITSystemUsageEnableSystemUsageCriticalityLevel =
+  createItSystemUsageGdprFieldSelector('systemUsageCriticalityLevel');
 
 //IT System Usage > Relations
 const createItSystemUsageRelationsFieldSelector = (fieldKey: string) =>

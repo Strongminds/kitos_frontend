@@ -65,6 +65,10 @@ export const ItSystemUsageUiBluePrint = {
         criticalityFieldsLastChanged: {
           text: $localize`Systemkritikalitet sidst opdateret`,
         },
+        systemUsageCriticalityLevel: {
+          text: $localize`Kritikalitet`,
+          disableByDefault: true,
+        },
       },
     },
     contracts: {
@@ -118,10 +122,6 @@ export const ItSystemUsageUiBluePrint = {
         },
         retentionPeriod: {
           text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
-        },
-        gdprCriticality: {
-          text: $localize`Kritikalitet`,
-          disableByDefault: true,
         },
       },
     },

@@ -116,15 +116,15 @@
         i18n-toolTipText
       ></app-dropdown>
 
-      <app-tooltip [text]="(gdprCriticalityModifyEnabled$ | async) === false ? supplierMessage : ''">
-      @if (gdprCriticalityEnabled$ | async) {
+      <app-tooltip [text]="(systemUsageCriticalityModifyEnabled$ | async) === false ? supplierMessage : ''">
+      @if (systemUsageCriticalityEnabled$ | async) {
         <app-dropdown
           text="Kritikalitet"
           i18n-text
-          [data]="gdprCriticalityOptions"
+          [data]="systemUsageCriticalityLevelTypes$ | async"
           [formGroup]="itSystemCriticalityForm"
-          formName="gdprCriticality"
-          
+          formName="systemUsageCriticality"
+          (valueChange)="patchGeneral({ systemUsageCriticalityLevelUuid: $event })"
         ></app-dropdown>
       }
     </app-tooltip>
