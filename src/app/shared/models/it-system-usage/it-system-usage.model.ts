@@ -86,6 +86,7 @@ export interface ITSystemUsage {
   LastWebAccessibilityCheck: Date | undefined;
   WebAccessibilityNotes: string | undefined;
   SystemUsageCriticalityLevelUuid: string | undefined;
+  SystemUsageCriticalityLevelName: string | undefined;
   IsSociallyCritical: YesNoDontKnowOption | undefined;
   CriticalityFieldsLastChanged: Date | undefined;
 }
@@ -212,6 +213,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     LastWebAccessibilityCheck: value.LastWebAccessibilityCheck,
     WebAccessibilityNotes: value.WebAccessibilityNotes,
     SystemUsageCriticalityLevelUuid: value.SystemUsageCriticalityLevelUuid,
+    SystemUsageCriticalityLevelName: value.SystemUsageCriticalityLevelName,
     IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
     CriticalityFieldsLastChanged: value.CriticalityFieldsLastChanged,
   };
