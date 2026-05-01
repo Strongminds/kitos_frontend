@@ -5,26 +5,18 @@ import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
 import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
-import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
-import {
-  GdprCriticality,
-  gdprCriticalityOptions,
-  mapGdprCriticality,
-} from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprCriticality,
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprHostedAt,
-  selectITSystemUsageEnableGdprPurpose
+  selectITSystemUsageEnableGdprPurpose,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
 import { CardComponent } from '../../../../../../shared/components/card/card.component';
@@ -47,7 +39,6 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     DropdownComponent,
     EditUrlSectionComponent,
     AsyncPipe,
-    TooltipComponent,
   ],
 })
 export class GeneralInfoSectionComponent extends BaseComponent implements OnInit {
@@ -69,7 +60,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     {
       purpose: new FormControl(''),
       hostedAt: new FormControl<HostedAt | undefined>(undefined),
-      gdprCriticality: new FormControl<GdprCriticality | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -78,12 +68,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
   public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
-  public readonly gdprCriticalityEnabled$ = this.store.select(selectITSystemUsageEnableGdprCriticality);
-  public readonly gdprCriticalityOptions = gdprCriticalityOptions;
-
-  public readonly gdprCriticalityModifyEnabled$ = this.store.select(
-    selectITSystemUsageFieldPermissions(itSystemUsageFields.gdpr.criticality),
-  );
 
   constructor(
     private readonly store: Store,
@@ -98,7 +82,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
         this.generalInformationForm.patchValue({
           purpose: gdpr.purpose,
           hostedAt: mapHostedAt(gdpr.hostedAt ?? undefined),
-          gdprCriticality: mapGdprCriticality(gdpr.gdprCriticality ?? undefined),
         });
       }),
     );
@@ -107,17 +90,6 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     this.disableLinkControl.subscribe(() => {
       this.disableDirectoryDocumentationControl = true;
     });
-
-    this.subscriptions.add(
-      this.gdprCriticalityModifyEnabled$.subscribe((enabled) => {
-        const control = this.generalInformationForm.controls.gdprCriticality;
-        if (enabled) {
-          control.enable();
-        } else {
-          control.disable();
-        }
-      }),
-    );
   }
 
   public patchGdpr(gdpr: APIGDPRWriteRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

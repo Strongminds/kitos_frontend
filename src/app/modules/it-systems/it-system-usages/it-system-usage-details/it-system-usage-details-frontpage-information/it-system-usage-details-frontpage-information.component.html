@@ -116,6 +116,19 @@
         i18n-toolTipText
       ></app-dropdown>
 
+      <app-tooltip [text]="(gdprCriticalityModifyEnabled$ | async) === false ? supplierMessage : ''">
+      @if (gdprCriticalityEnabled$ | async) {
+        <app-dropdown
+          text="Kritikalitet"
+          i18n-text
+          [data]="gdprCriticalityOptions"
+          [formGroup]="itSystemCriticalityForm"
+          formName="gdprCriticality"
+          
+        ></app-dropdown>
+      }
+    </app-tooltip>
+
       @if (criticalityFieldsLastChangedEnabled$ | async){
         <app-datepicker
         i18n-text

@@ -20,6 +20,10 @@ import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
+  GdprCriticality,
+  gdprCriticalityOptions,
+} from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
+import {
   LifeCycleStatus,
   lifeCycleStatusOptions,
   mapLifeCycleStatus,
@@ -58,6 +62,7 @@ import {
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableGdprCriticality,
   selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableLastEditedAt,
@@ -116,6 +121,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       isBusinessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       criticalityFieldsLastChanged: new FormControl<Date | undefined>(undefined),
+      gdprCriticality: new FormControl<GdprCriticality | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
@@ -158,10 +164,18 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.statusEnabled$,
   ]);
 
+  public readonly gdprCriticalityEnabled$ = this.store.select(selectITSystemUsageEnableGdprCriticality);
+  public readonly gdprCriticalityOptions = gdprCriticalityOptions;
+
+  public readonly gdprCriticalityModifyEnabled$ = this.store.select(
+    selectITSystemUsageFieldPermissions(itSystemUsageFields.gdpr.criticality),
+  );
+
   public readonly showSystemCriticalityCard$ = combineOR([
     this.isSociallyCriticalEnabled$,
     this.isBusinessCriticalEnabled$,
     this.criticalityFieldsLastChangedEnabled$,
+    this.gdprCriticalityEnabled$,
   ]);
 
   public readonly itSystemApplicationForm = new FormGroup(
@@ -259,6 +273,17 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       }),
     );
 
+    this.subscriptions.add(
+      this.gdprCriticalityModifyEnabled$.subscribe((enabled) => {
+        const control = this.itSystemCriticalityForm.controls.gdprCriticality;
+        if (enabled) {
+          control.enable();
+        } else {
+          control.disable();
+        }
+      }),
+    );
+
     // Set initial state of information form
     this.subscriptions.add(
       this.store
@@ -278,6 +303,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           this.itSystemCriticalityForm.patchValue({
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
             isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
+            // gdprCriticality: mapGdprCriticality(gdpr.gdprCriticality ?? undefined),
           });
 
           this.setFormCriticalityFieldsLastChangedIfNotUndefined(general);
