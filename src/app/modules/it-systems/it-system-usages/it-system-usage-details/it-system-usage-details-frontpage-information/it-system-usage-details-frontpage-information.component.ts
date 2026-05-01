@@ -117,7 +117,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       isSociallyCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       isBusinessCritical: new FormControl<YesNoDontKnowOption | undefined>(undefined),
       criticalityFieldsLastChanged: new FormControl<Date | undefined>(undefined),
-      systemUsageCriticality: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
+      systemUsageCriticalityLevel: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
