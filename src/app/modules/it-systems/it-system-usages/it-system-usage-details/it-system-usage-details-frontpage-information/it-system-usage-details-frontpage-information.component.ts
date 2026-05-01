@@ -227,6 +227,17 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     super();
   }
 
+  ngOnInit() {
+    this.addDateValidators();
+    this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.disable();
+
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage_system-usage-criticality-level'));
+
+    this.disableFormsIfNoModifyPermission();
+    this.setupFormValueChangeSubscriptions();
+  }
+
   private disableFormsIfNoModifyPermission() {
     this.subscriptions.add(
       this.store
@@ -337,17 +348,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
   }
 
-  ngOnInit() {
-    this.addDateValidators();
-    this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.disable();
-
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage_system-usage-criticality-level'));
-
-    this.disableFormsIfNoModifyPermission();
-    this.setupFormValueChangeSubscriptions();
-  }
-
   private setFormCriticalityFieldsLastChangedIfNotUndefined(general: APIGeneralDataResponseDTO) {
     if (general.criticalityFieldsLastChanged) {
       this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.setValue(
@@ -357,9 +357,12 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
+    console.log(general);
     if (valueChange && !valueChange.valid) {
+      console.warn(`Invalid value for ${valueChange.text}:`, valueChange.value);
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
+      console.log('Patching general with:', general);
       this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
     }
   }

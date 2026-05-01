@@ -96,10 +96,13 @@
         <app-dropdown
           text="Kritikalitet"
           i18n-text
+          valueField="uuid"
           [data]="systemUsageCriticalityLevelTypes$ | async"
           [formGroup]="itSystemCriticalityForm"
           formName="systemUsageCriticalityLevel"
           (valueChange)="patchGeneral({ systemUsageCriticalityLevelUuid: $event })"
+          [showDescription]="true"
+
         ></app-dropdown>
       }
     </app-tooltip>
