@@ -924,6 +924,15 @@ export class LocalAdminOptionTypeService implements OnDestroy {
             optionUuid,
           });
 
+      case 'it-system-usage_system-usage-criticality-level':
+        return (organizationUuid, optionUuid) =>
+          this.criticalityLevelService.deleteSingleItSystemLocalSystemUsageCriticalityLevelTypesInternalV2DeleteSystemUsageCriticalityLevelType(
+            {
+              organizationUuid,
+              optionUuid,
+            },
+          );
+
       //Data processing regular option types
       case 'data-processing-basis-for-transfer-types':
         return (organizationUuid, optionUuid) =>
