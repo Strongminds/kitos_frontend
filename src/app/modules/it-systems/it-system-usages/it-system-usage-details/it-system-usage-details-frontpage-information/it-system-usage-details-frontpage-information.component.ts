@@ -227,18 +227,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     super();
   }
 
-  ngOnInit() {
-    // Add custom date validators
-    this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
-      this.itSystemApplicationForm.controls.validTo,
-    );
-    this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
-      this.itSystemApplicationForm.controls.validFrom,
-    );
-    this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.disable();
-
-    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
-    // Disable forms if user does not have rights to modify
+  private disableFormsIfNoModifyPermission() {
     this.subscriptions.add(
       this.store
         .select(selectITSystemUsageHasModifyPermission)
@@ -276,7 +265,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
     this.subscriptions.add(
       this.systemUsageCriticalityModifyEnabled$.subscribe((enabled) => {
-        const control = this.itSystemCriticalityForm.controls.systemUsageCriticality;
+        const control = this.itSystemCriticalityForm.controls.systemUsageCriticalityLevel;
         if (enabled) {
           control.enable();
         } else {
@@ -284,8 +273,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         }
       }),
     );
+  }
 
-    // Set initial state of information form
+  private setupFormValueChangeSubscriptions() {
     this.subscriptions.add(
       this.store
         .select(selectItSystemUsageGeneral)
@@ -304,7 +294,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           this.itSystemCriticalityForm.patchValue({
             isSociallyCritical: mapToYesNoDontKnowEnum(general.isSociallyCritical),
             isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
-            systemUsageCriticality: general.systemUsageCriticalityLevel,
+            systemUsageCriticalityLevel: general.systemUsageCriticalityLevel,
           });
 
           this.setFormCriticalityFieldsLastChangedIfNotUndefined(general);
@@ -336,6 +326,26 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
           }),
         ),
     );
+  }
+
+  private addDateValidators() {
+    this.itSystemApplicationForm.controls.validFrom.validator = dateLessThanControlValidator(
+      this.itSystemApplicationForm.controls.validTo,
+    );
+    this.itSystemApplicationForm.controls.validTo.validator = dateGreaterThanOrEqualControlValidator(
+      this.itSystemApplicationForm.controls.validFrom,
+    );
+  }
+
+  ngOnInit() {
+    this.addDateValidators();
+    this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.disable();
+
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage_system-usage-criticality-level'));
+
+    this.disableFormsIfNoModifyPermission();
+    this.setupFormValueChangeSubscriptions();
   }
 
   private setFormCriticalityFieldsLastChangedIfNotUndefined(general: APIGeneralDataResponseDTO) {
