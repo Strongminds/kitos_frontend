@@ -5300,21 +5300,6 @@
       <trans-unit id="3629666201490878672" datatype="html">
         <source>Kun organisationer af typen &quot;Virksomhed&quot; kan være ISMS leverandører.</source>
       </trans-unit>
-      <trans-unit id="5070899896766404217" datatype="html">
-        <source>Ikke kritisk</source>
-      </trans-unit>
-      <trans-unit id="5533383424441473672" datatype="html">
-        <source>Høj</source>
-      </trans-unit>
-      <trans-unit id="5982496808088686844" datatype="html">
-        <source>Medium</source>
-      </trans-unit>
-      <trans-unit id="6572607453095683769" datatype="html">
-        <source>Meget høj</source>
-      </trans-unit>
-      <trans-unit id="6905265339095064583" datatype="html">
-        <source>Lav</source>
-      </trans-unit>
       <trans-unit id="2368085507469871" datatype="html">
         <source>Seneste tilsynsrapport</source>
       </trans-unit>
@@ -6004,6 +5989,9 @@
       </trans-unit>
       <trans-unit id="2143535785980974186" datatype="html">
         <source>Systemkritikalitet sidst opdateret</source>
+      </trans-unit>
+      <trans-unit id="5186123670940091932" datatype="html">
+        <source>Bruges til kommunens egen vurdering af systemets betydning for driften</source>
       </trans-unit>
     </body>
   </file>
