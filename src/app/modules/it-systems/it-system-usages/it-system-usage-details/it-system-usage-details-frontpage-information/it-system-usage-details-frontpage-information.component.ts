@@ -377,12 +377,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
-    console.log(general);
     if (valueChange && !valueChange.valid) {
-      console.warn(`Invalid value for ${valueChange.text}:`, valueChange.value);
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      console.log('Patching general with:', general);
       this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
     }
   }
