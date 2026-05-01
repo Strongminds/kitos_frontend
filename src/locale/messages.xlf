@@ -5360,9 +5360,6 @@
       <trans-unit id="398378182976183657" datatype="html">
         <source>IT System: Anvendes af organisationer</source>
       </trans-unit>
-      <trans-unit id="2441857005381821884" datatype="html">
-        <source>IT Systemer - GDPR - Kritikalitet</source>
-      </trans-unit>
       <trans-unit id="2906905998458410320" datatype="html">
         <source>Indkommende relationer</source>
       </trans-unit>
@@ -5992,6 +5989,12 @@
       </trans-unit>
       <trans-unit id="5186123670940091932" datatype="html">
         <source>Bruges til kommunens egen vurdering af systemets betydning for driften</source>
+      </trans-unit>
+      <trans-unit id="5362915117064427453" datatype="html">
+        <source>Reference for kritikalitetsvurdering</source>
+      </trans-unit>
+      <trans-unit id="5717990299723971305" datatype="html">
+        <source>IT Systemer - Systemforside - Kritikalitet</source>
       </trans-unit>
     </body>
   </file>
