@@ -57,7 +57,6 @@ export function getDetailsPageLink(
           itemPathIncludesSubmodule,
         );
       case 'it-system-usage':
-        console.log('Getting details page link for it-system-usage');
         return getDetailsPagePathWithSubmodule(
           `${AppPath.itSystems}/${AppPath.itSystemUsages}`,
           itemUuid,
