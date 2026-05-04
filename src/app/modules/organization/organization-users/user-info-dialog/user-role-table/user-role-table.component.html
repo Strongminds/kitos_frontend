@@ -20,15 +20,26 @@
             @for (right of userRights; track right) {
               <tr>
                 <td>
-                  <app-details-page-link
-                    [itemType]="linkEntityType"
-                    [itemPath]="right.entity.uuid"
-                    subpagePath="roles"
-                    [itemPathIncludesSubmodule]="false"
-                    (click)="onRoleLink()"
-                  >
-                    {{ right.entity.name }}
-                  </app-details-page-link>
+                  @if (linkEntityType === 'organizationUnit') {
+                    <app-details-page-link
+                      [itemType]="linkEntityType"
+                      [itemPath]="right.entity.uuid"
+                      [itemPathIncludesSubmodule]="false"
+                      (click)="onRoleLink()"
+                    >
+                      {{ right.entity.name }}
+                    </app-details-page-link>
+                  } @else {
+                    <app-details-page-link
+                      [itemType]="linkEntityType"
+                      [itemPath]="right.entity.uuid"
+                      subpagePath="roles"
+                      [itemPathIncludesSubmodule]="false"
+                      (click)="onRoleLink()"
+                    >
+                      {{ right.entity.name }}
+                    </app-details-page-link>
+                  }
                 </td>
                 <td>{{ right.role.name }}</td>
                 <td>
