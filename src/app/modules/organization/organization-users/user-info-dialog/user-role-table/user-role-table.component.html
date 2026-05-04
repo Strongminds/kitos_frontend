@@ -20,7 +20,7 @@
             @for (right of userRights; track right) {
               <tr>
                 <td>
-                  @if (linkEntityType === 'organizationUnit') {
+                  @if (linkEntityType === "organization-unit") {
                     <app-details-page-link
                       [itemType]="linkEntityType"
                       [itemPath]="right.entity.uuid"
