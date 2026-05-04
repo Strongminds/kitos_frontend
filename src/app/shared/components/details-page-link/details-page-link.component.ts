@@ -21,7 +21,6 @@ export class DetailsPageLinkComponent implements OnInit {
   @Input() public itemPathIncludesSubmodule = false;
 
   public ngOnInit(): void {
-    console.log('itemType', this.itemType);
     const path = getDetailsPageLink(this.itemPath, this.itemType, this.subpagePath, this.itemPathIncludesSubmodule);
     if (path) {
       this.detailsPageRouterPath = path;
