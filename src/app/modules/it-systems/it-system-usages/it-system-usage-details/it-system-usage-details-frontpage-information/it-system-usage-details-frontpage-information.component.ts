@@ -280,7 +280,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             isBusinessCritical: mapToYesNoDontKnowEnum(general.isBusinessCritical),
           });
 
-          this.setFormCriticalityFieldsLastChangedIfNotUndefined(general);
+          this.setFormCriticalityFieldsLastChanged(general);
 
           this.webAccessibilityForm.patchValue({
             webAccessibilityCompliance: mapToYesNoPartiallyEnum(general.webAccessibilityCompliance ?? undefined),
@@ -311,7 +311,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     );
   }
 
-  private setFormCriticalityFieldsLastChangedIfNotUndefined(general: APIGeneralDataResponseDTO) {
+  private setFormCriticalityFieldsLastChanged(general: APIGeneralDataResponseDTO) {
     if (general.criticalityFieldsLastChanged) {
       this.itSystemCriticalityForm.controls.criticalityFieldsLastChanged.setValue(
         new Date(general.criticalityFieldsLastChanged),
