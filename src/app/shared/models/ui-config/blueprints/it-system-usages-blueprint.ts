@@ -76,142 +76,142 @@ export const ItSystemUsageUiBluePrint = {
           disableByDefault: true,
         },
       },
-      contracts: {
-        text: $localize`Kontrakter`,
-        helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
-        children: {
-          associatedContracts: {
-            text: $localize`Tilknyttede kontrakter`,
-          },
-          selectContractToDetermineIfItSystemIsActive: {
-            text: $localize`Hvilken kontrakt skal afgøre om IT systemet er aktivt`,
-          },
+    },
+    contracts: {
+      text: $localize`Kontrakter`,
+      helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      children: {
+        associatedContracts: {
+          text: $localize`Tilknyttede kontrakter`,
+        },
+        selectContractToDetermineIfItSystemIsActive: {
+          text: $localize`Hvilken kontrakt skal afgøre om IT systemet er aktivt`,
         },
       },
-      dataProcessing: {
-        text: $localize`Databehandling`,
-        helpText: $localize`Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra`,
-      },
-      gdpr: {
-        text: $localize`GDPR`,
-        children: {
-          purpose: {
-            text: $localize`Systemets overordnede formål`,
-          },
-          hostedAt: {
-            text: $localize`IT-Systemet driftes`,
-          },
-          documentation: {
-            text: $localize`Link til fortegnelse`,
-          },
-          dataTypes: {
-            text: $localize`Hvilke typer data indeholder systemet?`,
-          },
-          registeredCategories: {
-            text: $localize`Hvilke kategorier af registrerede indgår i databehandlingen?`,
-          },
-          technicalPrecautions: {
-            text: $localize`Implementeret passende tekniske foranstaltninger`,
-          },
-          userSupervision: {
-            text: $localize`Logning af brugerkontrol`,
-          },
-          plannedRiskAssessmentDate: {
-            text: $localize`Dato for planlagt risikovurdering`,
-          },
-          conductedRiskAssessment: {
-            text: $localize`Foretaget risikovurdering`,
-          },
-          dpiaConducted: {
-            text: $localize`Gennemført DPIA / Konsekvensanalyse`,
-          },
-          retentionPeriod: {
-            text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
-          },
+    },
+    dataProcessing: {
+      text: $localize`Databehandling`,
+      helpText: $localize`Det er kun muligt at fjerne dette faneblad ved at slå det relaterede modul fra`,
+    },
+    gdpr: {
+      text: $localize`GDPR`,
+      children: {
+        purpose: {
+          text: $localize`Systemets overordnede formål`,
+        },
+        hostedAt: {
+          text: $localize`IT-Systemet driftes`,
+        },
+        documentation: {
+          text: $localize`Link til fortegnelse`,
+        },
+        dataTypes: {
+          text: $localize`Hvilke typer data indeholder systemet?`,
+        },
+        registeredCategories: {
+          text: $localize`Hvilke kategorier af registrerede indgår i databehandlingen?`,
+        },
+        technicalPrecautions: {
+          text: $localize`Implementeret passende tekniske foranstaltninger`,
+        },
+        userSupervision: {
+          text: $localize`Logning af brugerkontrol`,
+        },
+        plannedRiskAssessmentDate: {
+          text: $localize`Dato for planlagt risikovurdering`,
+        },
+        conductedRiskAssessment: {
+          text: $localize`Foretaget risikovurdering`,
+        },
+        dpiaConducted: {
+          text: $localize`Gennemført DPIA / Konsekvensanalyse`,
+        },
+        retentionPeriod: {
+          text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
         },
       },
-      systemRoles: {
-        text: $localize`Systemroller`,
-      },
-      organization: {
-        text: $localize`Organisation`,
-      },
-      systemRelations: {
-        text: $localize`Relationer`,
-        children: {
-          outgoing: {
-            text: $localize`Relationer til andre systemer`,
-          },
-          incoming: {
-            text: $localize`Relationer fra andre systemer`,
-          },
+    },
+    systemRoles: {
+      text: $localize`Systemroller`,
+    },
+    organization: {
+      text: $localize`Organisation`,
+    },
+    systemRelations: {
+      text: $localize`Relationer`,
+      children: {
+        outgoing: {
+          text: $localize`Relationer til andre systemer`,
+        },
+        incoming: {
+          text: $localize`Relationer fra andre systemer`,
         },
       },
-      interfaces: {
-        text: $localize`Udstillede snitflader`,
-      },
-      archiving: {
-        text: $localize`Arkivering`,
-        children: {
-          archiveDuty: {
-            text: $localize`Arkiveringspligt`,
-            isObligatory: true,
-          },
-          archiveType: {
-            text: $localize`Arkivtype`,
-          },
-          archiveLocation: {
-            text: $localize`Arkiveringssted`,
-          },
-          archiveSupplier: {
-            text: $localize`Arkiveringsleverandør`,
-          },
-          archiveTestLocation: {
-            text: $localize`Arkiveringsteststed`,
-          },
-          archiveFrequency: {
-            text: $localize`Arkiveringsfrekvens`,
-          },
-          documentBearing: {
-            text: $localize`Dokumentbærende`,
-          },
-          active: {
-            text: $localize`Er der arkiveret fra systemet?`,
-          },
-          notes: {
-            text: $localize`Arkiveringsbemærkninger`,
-          },
-          journalPeriods: {
-            text: $localize`Journalperioder`,
-          },
-          catalogArchiveDuty: {
-            text: $localize`Rigsarkivets vejledning til arkivering`,
-          },
-          catalogArchiveDutyComment: {
-            text: $localize`Bemærkning fra Rigsarkivet`,
-          },
+    },
+    interfaces: {
+      text: $localize`Udstillede snitflader`,
+    },
+    archiving: {
+      text: $localize`Arkivering`,
+      children: {
+        archiveDuty: {
+          text: $localize`Arkiveringspligt`,
+          isObligatory: true,
+        },
+        archiveType: {
+          text: $localize`Arkivtype`,
+        },
+        archiveLocation: {
+          text: $localize`Arkiveringssted`,
+        },
+        archiveSupplier: {
+          text: $localize`Arkiveringsleverandør`,
+        },
+        archiveTestLocation: {
+          text: $localize`Arkiveringsteststed`,
+        },
+        archiveFrequency: {
+          text: $localize`Arkiveringsfrekvens`,
+        },
+        documentBearing: {
+          text: $localize`Dokumentbærende`,
+        },
+        active: {
+          text: $localize`Er der arkiveret fra systemet?`,
+        },
+        notes: {
+          text: $localize`Arkiveringsbemærkninger`,
+        },
+        journalPeriods: {
+          text: $localize`Journalperioder`,
+        },
+        catalogArchiveDuty: {
+          text: $localize`Rigsarkivets vejledning til arkivering`,
+        },
+        catalogArchiveDutyComment: {
+          text: $localize`Bemærkning fra Rigsarkivet`,
         },
       },
-      hierarchy: {
-        text: $localize`Hierarki`,
-      },
-      localKle: {
-        text: $localize`Lokale KLE`,
-        children: {
-          inheritedKle: {
-            text: $localize`Nedarvede opgaver (Data fra IT Systemkataloget)`,
-          },
-          localKle: {
-            text: $localize`Lokale tilknyttede opgaver`,
-          },
+    },
+    hierarchy: {
+      text: $localize`Hierarki`,
+    },
+    localKle: {
+      text: $localize`Lokale KLE`,
+      children: {
+        inheritedKle: {
+          text: $localize`Nedarvede opgaver (Data fra IT Systemkataloget)`,
+        },
+        localKle: {
+          text: $localize`Lokale tilknyttede opgaver`,
         },
       },
-      advice: {
-        text: $localize`Advis`,
-      },
-      localReferences: {
-        text: $localize`Lokale referencer`,
-      },
+    },
+    advice: {
+      text: $localize`Advis`,
+    },
+    localReferences: {
+      text: $localize`Lokale referencer`,
     },
   },
 };
