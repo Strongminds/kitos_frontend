@@ -2,24 +2,37 @@ import { Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { tapResponse } from '@ngrx/operators';
 import { combineLatest, map, mergeMap, Observable, of, switchMap, tap } from 'rxjs';
-import { OrganizationsInternalV2Service } from 'src/app/api/v2';
+import { OrganizationsInternalV2Service, OrganizationSupplierInternalV2Service } from 'src/app/api/v2';
 import { mapConflictsDtoToOrganizationRemovalConflicts } from 'src/app/shared/helpers/removal-conflicts.helper';
 import { OrganizationRemovalConflicts } from 'src/app/shared/models/global-admin/organization-removal-conflicts.model';
+import { ShallowOrganization } from 'src/app/shared/models/organization/shallow-organization.model';
 import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/removal-conflict-table.component';
 
 interface State {
   removalConflicts?: OrganizationRemovalConflicts;
+  usingOrganization?: ShallowOrganization[];
   isLoading: boolean;
 }
 
 @Injectable()
 export class DeleteOrganizationComponentStore extends ComponentStore<State> {
-  constructor(private apiService: OrganizationsInternalV2Service) {
+  constructor(
+    private apiOrganizationsService: OrganizationsInternalV2Service,
+    private apiOrganizationSuppliersService: OrganizationSupplierInternalV2Service,
+  ) {
     super({ removalConflicts: undefined, isLoading: false });
   }
 
   public readonly removalConflicts$ = this.select((state) => state.removalConflicts);
   public readonly isLoading$ = this.select((state) => state.isLoading);
+  public readonly usingOrganizations$ = this.select((state) => state.usingOrganization);
+
+  private updateUsingOrganizations = this.updater(
+    (state, usingOrganizations: ShallowOrganization[]): State => ({
+      ...state,
+      usingOrganization: usingOrganizations,
+    }),
+  );
 
   private updateConsequences = this.updater(
     (state, consequences: OrganizationRemovalConflicts): State => ({
@@ -84,7 +97,7 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
     organizationUuid$.pipe(
       tap(() => this.setLoading(true)),
       mergeMap((organizationUuid) =>
-        this.apiService.getSingleOrganizationsInternalV2GetConflicts({ organizationUuid }).pipe(
+        this.apiOrganizationsService.getSingleOrganizationsInternalV2GetConflicts({ organizationUuid }).pipe(
           map((conflictsDto) => mapConflictsDtoToOrganizationRemovalConflicts(conflictsDto)),
           tapResponse({
             next: (conflicts) => this.updateConsequences(conflicts),
@@ -92,6 +105,25 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
             complete: () => this.setLoading(false),
           }),
         ),
+      ),
+    ),
+  );
+
+  public getUsingOrganizations = this.effect((supplierUuid$: Observable<string>) =>
+    supplierUuid$.pipe(
+      tap(() => this.setLoading(true)),
+      mergeMap((supplierUuid: string) =>
+        this.apiOrganizationSuppliersService
+          .getSingleOrganizationSupplierInternalV2GetUsingOrganizations({
+            supplierUuid,
+          })
+          .pipe(
+            tapResponse({
+              next: (usingOrganizations) => this.updateUsingOrganizations(usingOrganizations),
+              error: (e) => console.error(e),
+              complete: () => this.setLoading(false),
+            }),
+          ),
       ),
     ),
   );
