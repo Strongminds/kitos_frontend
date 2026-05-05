@@ -99,6 +99,7 @@ import { ItSystemLocalSystemUsageCriticalityLevelTypesInternalV2Service } from '
 import { ItSystemUsageArchiveLocationTypeV2Service } from './api/itSystemUsageArchiveLocationTypeV2.service';
 import { ItSystemUsageArchiveTestLocationTypeV2Service } from './api/itSystemUsageArchiveTestLocationTypeV2.service';
 import { ItSystemUsageArchiveTypeV2Service } from './api/itSystemUsageArchiveTypeV2.service';
+import { ItSystemUsageCriticalityLevelTypeV2Service } from './api/itSystemUsageCriticalityLevelTypeV2.service';
 import { ItSystemUsageDataClassificationTypeV2Service } from './api/itSystemUsageDataClassificationTypeV2.service';
 import { ItSystemUsageInternalV2Service } from './api/itSystemUsageInternalV2.service';
 import { ItSystemUsageMigrationV2Service } from './api/itSystemUsageMigrationV2.service';
@@ -106,7 +107,6 @@ import { ItSystemUsageRegisteredDataCategoryTypeV2Service } from './api/itSystem
 import { ItSystemUsageRelationFrequencyTypeV2Service } from './api/itSystemUsageRelationFrequencyTypeV2.service';
 import { ItSystemUsageRoleTypeV2Service } from './api/itSystemUsageRoleTypeV2.service';
 import { ItSystemUsageSensitivePersonalDataTypeV2Service } from './api/itSystemUsageSensitivePersonalDataTypeV2.service';
-import { ItSystemUsageSystemUsageCriticalityLevelTypeV2Service } from './api/itSystemUsageSystemUsageCriticalityLevelTypeV2.service';
 import { ItSystemUsageV2Service } from './api/itSystemUsageV2.service';
 import { ItSystemV2Service } from './api/itSystemV2.service';
 import { KLEInternalV2Service } from './api/kLEInternalV2.service';

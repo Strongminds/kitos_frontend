@@ -24,13 +24,13 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetRequestParams {
+export interface GetSingleItSystemUsageCriticalityLevelTypeV2GetRequestParams {
     organizationUuid?: string;
     page?: number;
     pageSize?: number;
 }
 
-export interface GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1RequestParams {
+export interface GetSingleItSystemUsageCriticalityLevelTypeV2GetV1RequestParams {
     criticalityLevelTypeUuid: string;
     organizationUuid?: string;
 }
@@ -39,7 +39,7 @@ export interface GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1Req
 @Injectable({
   providedIn: 'root'
 })
-export class ItSystemUsageSystemUsageCriticalityLevelTypeV2Service {
+export class ItSystemUsageCriticalityLevelTypeV2Service {
 
     protected basePath = 'http://localhost';
     public defaultHeaders = new HttpHeaders();
@@ -105,10 +105,10 @@ export class ItSystemUsageSystemUsageCriticalityLevelTypeV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageSystemUsageCriticalityLevelTypeV2Get(requestParameters: GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageSystemUsageCriticalityLevelTypeV2Get(requestParameters: GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageSystemUsageCriticalityLevelTypeV2Get(requestParameters: GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageSystemUsageCriticalityLevelTypeV2Get(requestParameters: GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageCriticalityLevelTypeV2Get(requestParameters: GetSingleItSystemUsageCriticalityLevelTypeV2GetRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItSystemUsageCriticalityLevelTypeV2Get(requestParameters: GetSingleItSystemUsageCriticalityLevelTypeV2GetRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemUsageCriticalityLevelTypeV2Get(requestParameters: GetSingleItSystemUsageCriticalityLevelTypeV2GetRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageCriticalityLevelTypeV2Get(requestParameters: GetSingleItSystemUsageCriticalityLevelTypeV2GetRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         const page = requestParameters.page;
         const pageSize = requestParameters.pageSize;
@@ -177,13 +177,13 @@ export class ItSystemUsageSystemUsageCriticalityLevelTypeV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1(requestParameters: GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
-    public getSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1(requestParameters: GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
-    public getSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1(requestParameters: GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
-    public getSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1(requestParameters: GetSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageCriticalityLevelTypeV2GetV1(requestParameters: GetSingleItSystemUsageCriticalityLevelTypeV2GetV1RequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItSystemUsageCriticalityLevelTypeV2GetV1(requestParameters: GetSingleItSystemUsageCriticalityLevelTypeV2GetV1RequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemUsageCriticalityLevelTypeV2GetV1(requestParameters: GetSingleItSystemUsageCriticalityLevelTypeV2GetV1RequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageCriticalityLevelTypeV2GetV1(requestParameters: GetSingleItSystemUsageCriticalityLevelTypeV2GetV1RequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const criticalityLevelTypeUuid = requestParameters.criticalityLevelTypeUuid;
         if (criticalityLevelTypeUuid === null || criticalityLevelTypeUuid === undefined) {
-            throw new Error('Required parameter criticalityLevelTypeUuid was null or undefined when calling getSingleItSystemUsageSystemUsageCriticalityLevelTypeV2GetV1.');
+            throw new Error('Required parameter criticalityLevelTypeUuid was null or undefined when calling getSingleItSystemUsageCriticalityLevelTypeV2GetV1.');
         }
         const organizationUuid = requestParameters.organizationUuid;
 

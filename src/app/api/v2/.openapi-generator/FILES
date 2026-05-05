@@ -100,6 +100,7 @@ api/itSystemLocalSystemUsageCriticalityLevelTypesInternalV2.service.ts
 api/itSystemUsageArchiveLocationTypeV2.service.ts
 api/itSystemUsageArchiveTestLocationTypeV2.service.ts
 api/itSystemUsageArchiveTypeV2.service.ts
+api/itSystemUsageCriticalityLevelTypeV2.service.ts
 api/itSystemUsageDataClassificationTypeV2.service.ts
 api/itSystemUsageInternalV2.service.ts
 api/itSystemUsageMigrationV2.service.ts
@@ -107,7 +108,6 @@ api/itSystemUsageRegisteredDataCategoryTypeV2.service.ts
 api/itSystemUsageRelationFrequencyTypeV2.service.ts
 api/itSystemUsageRoleTypeV2.service.ts
 api/itSystemUsageSensitivePersonalDataTypeV2.service.ts
-api/itSystemUsageSystemUsageCriticalityLevelTypeV2.service.ts
 api/itSystemUsageV2.service.ts
 api/itSystemV2.service.ts
 api/kLEInternalV2.service.ts
