@@ -66,6 +66,9 @@ export class DeleteOrganizationDialogComponent extends BaseComponent implements 
 
   public readonly deletingOrganization$ = new BehaviorSubject<boolean>(false);
   public isSupplier = false;
+  public hasNoUsingOrganizations$ = this.usingOrganizations$.pipe(
+    map((usingOrganizations) => !this.isSupplier || usingOrganizations?.length === 0),
+  );
   public readonly conflictContentId = 'conflict-content';
 
   constructor(

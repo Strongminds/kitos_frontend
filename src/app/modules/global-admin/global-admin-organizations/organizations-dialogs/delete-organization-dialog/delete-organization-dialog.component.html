@@ -51,7 +51,7 @@
         }
       </app-standard-vertical-content-grid>
     }
-    @if ((hasAnyRemovalConflict() | async) === false) {
+    @if ((hasAnyRemovalConflict() | async) === false && (hasNoUsingOrganizations$ | async) === true) {
       <app-paragraph i18n> Organisationen kan slettes uden tværgående konsekvenser. </app-paragraph>
     }
   }
@@ -71,7 +71,9 @@
     @if (usingOrganizations$ | async; as usingOrganizations) {
       @if (usingOrganizations.length > 0){
         <app-paragraph i18n>
-          Organisationen er markeret som ISMS leverandør for følgende organisationer:
+          Organisationen er markeret som ISMS leverandør for følgende kommuner:
+        </app-paragraph>
+        <app-paragraph>
           <ul>
             @for (org of usingOrganizations; track org){
               <li>{{ org.name }}</li>
