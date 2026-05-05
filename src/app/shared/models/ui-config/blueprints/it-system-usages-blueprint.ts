@@ -61,7 +61,7 @@ export const ItSystemUsageUiBluePrint = {
           disableByDefault: true,
         },
         isBusinessCritical: {
-          text: $localize`Forretningskritisk IT-System`,
+          text: $localize`Forretningskritisk IT-system`,
         },
         criticalityFieldsLastChanged: {
           text: $localize`Systemkritikalitet sidst opdateret`,
