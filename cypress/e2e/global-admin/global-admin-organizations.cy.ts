@@ -4,7 +4,7 @@ import { TestRunner } from 'cypress/support/test-runner';
 
 function setupTest() {
   cy.requireIntercept();
-
+  cy.intercept('/api/v2/internal/it-systems/global-option-types/system-usage-criticality-level-types', {});
   cy.intercept('/api/v2/internal/it-systems/global-option-types/system-usage-criticality-level-types', {});
   cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
   cy.intercept('/api/v2/internal/organizations/global-option-types/country-codes', {
