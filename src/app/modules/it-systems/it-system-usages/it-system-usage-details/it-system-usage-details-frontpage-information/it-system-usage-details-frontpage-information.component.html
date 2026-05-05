@@ -102,6 +102,7 @@
         toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
         i18n-toolTipText
       ></app-dropdown>
+    }
 
       @if (criticalityFieldsLastChangedEnabled$ | async){
         <app-datepicker
@@ -153,7 +154,6 @@
         [isDisabled]="disableCriticalityLevelDocumentationControl"
       ></app-edit-url-section>
       }
-    }
     </form>
 </app-card>
 }
