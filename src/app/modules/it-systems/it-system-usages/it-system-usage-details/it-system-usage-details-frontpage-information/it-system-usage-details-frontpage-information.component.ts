@@ -180,6 +180,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.isBusinessCriticalEnabled$,
     this.criticalityFieldsLastChangedEnabled$,
     this.systemUsageCriticalityEnabled$,
+    this.criticalityLevelDocumentationEnabled$,
   ]);
 
   public disableCriticalityLevelDocumentationControl = false;
