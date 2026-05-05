@@ -393,7 +393,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   public resetCriticalityLevelDocumentation() {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.patchGeneral({ criticalityLevelDocumentation: null as any });
+    this.patchGeneral({ criticalityLevelDocumentation: undefined });
   }
 }
