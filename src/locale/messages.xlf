@@ -5981,20 +5981,14 @@
       <trans-unit id="481320365420058756" datatype="html">
         <source>Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde</source>
       </trans-unit>
-      <trans-unit id="7109755738988441858" datatype="html">
-        <source>Systemkritikalitet</source>
+      <trans-unit id="7468937510501419203" datatype="html">
+        <source>Skrive</source>
       </trans-unit>
       <trans-unit id="2143535785980974186" datatype="html">
         <source>Systemkritikalitet sidst opdateret</source>
       </trans-unit>
-      <trans-unit id="5186123670940091932" datatype="html">
-        <source>Bruges til kommunens egen vurdering af systemets betydning for driften</source>
-      </trans-unit>
-      <trans-unit id="5362915117064427453" datatype="html">
-        <source>Reference for kritikalitetsvurdering</source>
-      </trans-unit>
-      <trans-unit id="5717990299723971305" datatype="html">
-        <source>IT Systemer - Systemforside - Kritikalitet</source>
+      <trans-unit id="7109755738988441858" datatype="html">
+        <source>Systemkritikalitet</source>
       </trans-unit>
     </body>
   </file>
