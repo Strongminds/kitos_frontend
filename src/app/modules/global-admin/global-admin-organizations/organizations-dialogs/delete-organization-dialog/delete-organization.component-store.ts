@@ -10,7 +10,7 @@ import { RemovalConflict, RemovalConflictType } from './removal-conflict-table/r
 
 interface State {
   removalConflicts?: OrganizationRemovalConflicts;
-  usingOrganization?: ShallowOrganization[];
+  usingOrganizations?: ShallowOrganization[];
   isLoading: boolean;
 }
 
@@ -25,12 +25,12 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
 
   public readonly removalConflicts$ = this.select((state) => state.removalConflicts);
   public readonly isLoading$ = this.select((state) => state.isLoading);
-  public readonly usingOrganizations$ = this.select((state) => state.usingOrganization);
+  public readonly usingOrganizations$ = this.select((state) => state.usingOrganizations);
 
   private updateUsingOrganizations = this.updater(
     (state, usingOrganizations: ShallowOrganization[]): State => ({
       ...state,
-      usingOrganization: usingOrganizations,
+      usingOrganizations: usingOrganizations,
     }),
   );
 
@@ -102,7 +102,7 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
           tapResponse({
             next: (conflicts) => this.updateConsequences(conflicts),
             error: (e) => console.error(e),
-            complete: () => this.setLoading(false),
+            finalize: () => this.setLoading(false),
           }),
         ),
       ),
@@ -121,7 +121,7 @@ export class DeleteOrganizationComponentStore extends ComponentStore<State> {
             tapResponse({
               next: (usingOrganizations) => this.updateUsingOrganizations(usingOrganizations),
               error: (e) => console.error(e),
-              complete: () => this.setLoading(false),
+              finalize: () => this.setLoading(false),
             }),
           ),
       ),
