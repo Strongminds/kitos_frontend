@@ -22,9 +22,9 @@ export class UIConfigService {
     return { module, moduleConfigViewModel, cacheTime: undefined };
   }
 
-  public getAllKeysOfBlueprint(moduleKey: UIModuleConfigKey): string[] {
+  public getAllNodesOfBlueprint(moduleKey: UIModuleConfigKey): UINodeBlueprint[] {
     const blueprint = this.getUIBlueprintWithFullKeys(moduleKey);
-    return this.flattenUINodeBlueprintKeys(blueprint);
+    return this.flattenUINodeBlueprint(blueprint);
   }
 
   private findCustomizedUINode(customizationList: UINodeCustomization[], fullKey: string): UINodeCustomization | null {
@@ -123,19 +123,17 @@ export class UIConfigService {
     return (key.match(/\./g) || []).length;
   }
 
-  private flattenUINodeBlueprintKeys(root: UINodeBlueprint): string[] {
-    let result: string[] = [];
+  private flattenUINodeBlueprint(root: UINodeBlueprint): UINodeBlueprint[] {
+    let result: UINodeBlueprint[] = [];
 
-    // If the current node has a fullKey, add it to the list.
     if (root.fullKey !== undefined) {
-      result.push(root.fullKey);
+      result.push(root);
     }
 
-    // If there are children, recursively flatten them and merge into the result.
     if (root.children) {
       for (const key in root.children) {
         const child = root.children[key];
-        result = result.concat(this.flattenUINodeBlueprintKeys(child));
+        result = result.concat(this.flattenUINodeBlueprint(child));
       }
     }
 
