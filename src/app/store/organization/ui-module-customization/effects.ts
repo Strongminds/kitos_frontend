@@ -210,8 +210,8 @@ export class UIModuleCustomizationEffects {
   ): APICustomizedUINodeResponseDTO[] {
     const allNodes = this.uiConfigService.getAllNodesOfBlueprint(module);
     const existingKeys = new Set(response.map((node) => node.key));
-    const missingKeys = allNodes.filter((node) => node.fullKey !== undefined && !existingKeys.has(node.fullKey));
-    const nodesToAdd = missingKeys.map((node) => ({ key: node.fullKey!, enabled: !node.disableByDefault }));
+    const missingNodes = allNodes.filter((node) => node.fullKey !== undefined && !existingKeys.has(node.fullKey));
+    const nodesToAdd = missingNodes.map((node) => ({ key: node.fullKey!, enabled: !node.disableByDefault }));
     return [...response, ...nodesToAdd];
   }
 }
