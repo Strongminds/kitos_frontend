@@ -4,6 +4,7 @@ import { DataProcessingUiBluePrint } from '../../models/ui-config/blueprints/dat
 import { GdprUiBluePrint } from '../../models/ui-config/blueprints/gdpr-blueprint';
 import { ItContractsUiBluePrint } from '../../models/ui-config/blueprints/it-contracts-blueprint';
 import { ItSystemUsageUiBluePrint } from '../../models/ui-config/blueprints/it-system-usages-blueprint';
+import { SimpleUINodeBlueprint } from '../../models/ui-config/SimpleUINodeBlueprint';
 import { UIConfigNodeViewModel } from '../../models/ui-config/ui-config-node-view-model.model';
 import { UIModuleConfig } from '../../models/ui-config/ui-module-config.model';
 import { UINodeBlueprint } from '../../models/ui-config/ui-node-blueprint.model';
@@ -22,9 +23,12 @@ export class UIConfigService {
     return { module, moduleConfigViewModel, cacheTime: undefined };
   }
 
-  public getAllNodesOfBlueprint(moduleKey: UIModuleConfigKey): UINodeBlueprint[] {
+  public getAllNodesOfBlueprint(moduleKey: UIModuleConfigKey): SimpleUINodeBlueprint[] {
     const blueprint = this.getUIBlueprintWithFullKeys(moduleKey);
-    return this.flattenUINodeBlueprint(blueprint);
+    return this.flattenUINodeBlueprint(blueprint).map((node) => ({
+      fullKey: node.fullKey,
+      disableByDefault: node.disableByDefault,
+    }));
   }
 
   private findCustomizedUINode(customizationList: UINodeCustomization[], fullKey: string): UINodeCustomization | null {
