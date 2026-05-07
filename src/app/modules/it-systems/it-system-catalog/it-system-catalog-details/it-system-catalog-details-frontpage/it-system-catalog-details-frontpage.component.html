@@ -103,7 +103,7 @@
     <app-multi-select-dropdown
       text="Licens- og kodegrundlag"
       i18n-text
-      [data]="licensingAndCodeModelDropdownOptions"
+      [data]="licensingAndCodeModelDropdownOptions$ | async"
       formName="licensingAndCodeModels"
       [formGroup]="itSystemFrontpageFormGroup"
       [initialSelectedValues]="initialSelectedLicensingAndCodeModels"

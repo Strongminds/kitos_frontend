@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first, map } from 'rxjs';
+import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
 import { APIShallowOrganizationDTO } from 'src/app/api/v1';
 import {
   APIExternalReferenceDataResponseDTO,
@@ -97,12 +97,18 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly isLoadingOrganizations$ = this.componentStore.isLoadingOrganizations$;
   public readonly hasModifyVisibilityPermission$ = this.store.select(selectITSystemHasModifyPermission);
-  public readonly licensingAndCodeModelDropdownOptions: MultiSelectDropdownItem<LicensingAndCodeModel>[] =
-    licensingAndCodeModelOptions.map((option) => ({
-      name: option.name,
-      value: option,
-      selected: false,
-    }));
+  public readonly licensingAndCodeModelDropdownOptions$: BehaviorSubject<
+    MultiSelectDropdownItem<LicensingAndCodeModel>[]
+  > = new BehaviorSubject(
+    licensingAndCodeModelOptions.map(
+      (option) =>
+        ({
+          name: option.name,
+          value: option,
+          selected: false,
+        }) as MultiSelectDropdownItem<LicensingAndCodeModel>,
+    ),
+  );
 
   public readonly externalReferences$ = this.store.select(selectItSystemExternalReferences).pipe(
     filterNullish(),
@@ -249,6 +255,44 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             itSystem.licensingAndCodeModels ?? [],
           );
 
+          if (this.initialSelectedLicensingAndCodeModels.length === 0) {
+            this.licensingAndCodeModelDropdownOptions$.next(
+              licensingAndCodeModelOptions.map(
+                (option) =>
+                  ({
+                    name: option.name,
+                    value: option,
+                    selected: false,
+                  }) as MultiSelectDropdownItem<LicensingAndCodeModel>,
+              ),
+            );
+          } else if (
+            this.initialSelectedLicensingAndCodeModels.some(
+              (option) => option.value.value === APILicensingAndCodeModelChoice.Proprietary,
+            )
+          ) {
+            const newOptions = this.licensingAndCodeModelDropdownOptions$.value.map((option) => {
+              if (option.value.value !== APILicensingAndCodeModelChoice.Proprietary) {
+                return { ...option, disabled: true };
+              }
+              return { ...option, disabled: false };
+            });
+
+            this.licensingAndCodeModelDropdownOptions$.next(newOptions);
+          } else if (
+            this.initialSelectedLicensingAndCodeModels.some(
+              (item) => item.value.value !== APILicensingAndCodeModelChoice.Proprietary,
+            )
+          ) {
+            const newOptions = this.licensingAndCodeModelDropdownOptions$.value.map((option) => {
+              if (option.value.value === APILicensingAndCodeModelChoice.Proprietary) {
+                return { ...option, disabled: true };
+              }
+              return { ...option, disabled: false };
+            });
+
+            this.licensingAndCodeModelDropdownOptions$.next(newOptions);
+          }
           if (hasModifyPermission) {
             this.itSystemFrontpageFormGroup.enable();
 
