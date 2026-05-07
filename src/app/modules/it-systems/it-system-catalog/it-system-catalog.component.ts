@@ -257,6 +257,13 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: this.systemSectionName,
       hidden: true,
     },
+    {
+      field: CatalogFields.LICENSING_AND_CODE_MODELS,
+      title: $localize`Licens- og kodegrundlag`,
+      section: this.systemSectionName,
+      hidden: true,
+      style: 'enum-array',
+    },
   ];
 
   constructor(
