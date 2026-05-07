@@ -17,5 +17,14 @@ export const mapLicensingAndCodeModel = (
   return licensingAndCodeModelOptions.find((option) => option.value === source);
 };
 
-export const mapLicensingAndCodeModels = (sources: APILicensingAndCodeModelChoice[]): LicensingAndCodeModel[] =>
-  sources?.map((source) => mapLicensingAndCodeModel(source)).filter((option) => option !== undefined);
+export const mapLicensingAndCodeModels = (
+  sources?: APILicensingAndCodeModelChoice[] | null,
+): LicensingAndCodeModel[] => {
+  if (sources == null) {
+    return [];
+  }
+
+  return sources
+    .map((source) => mapLicensingAndCodeModel(source))
+    .filter((option): option is LicensingAndCodeModel => option !== undefined);
+};
