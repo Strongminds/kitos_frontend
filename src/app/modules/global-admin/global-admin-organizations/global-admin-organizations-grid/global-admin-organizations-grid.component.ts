@@ -3,9 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first, of } from 'rxjs';
+import { combineLatestWith, first, map, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { ORGANIZATION_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
+import { removeOptionalExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
@@ -50,7 +51,15 @@ export class GlobalAdminOrganizationsGridComponent extends BaseOverviewComponent
 
   public readonly globalAdminEntityType: RegistrationEntityTypes = 'global-admin-organization';
   public readonly isLoading$ = this.store.select(selectOrganizationGridLoading);
-  public readonly gridData$ = this.store.select(selectOrganizationGridData);
+  public readonly gridData$ = this.store.select(selectOrganizationGridData).pipe(
+    map((gridData) => ({
+      ...gridData,
+      data: gridData.data.map((organization) => ({
+        ...organization,
+        Name: removeOptionalExpiredText(organization.Name),
+      })),
+    })),
+  );
   public readonly gridState$ = this.store.select(selectOrganizationGridState);
   private readonly yesNoOptions = yesNoBooleanOptions;
   public readonly gridColumns: GridColumn[] = [
