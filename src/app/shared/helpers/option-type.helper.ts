@@ -77,8 +77,3 @@ export function addOptionalExpiredText(name: string, isObsolete: boolean | undef
   }
   return name;
 }
-
-export function removeOptionalExpiredText(name: string): string {
-  const obsoletedTextWithWhitespace = $localize` (udgået)`;
-  return name.endsWith(obsoletedTextWithWhitespace) ? name.slice(0, -obsoletedTextWithWhitespace.length) : name;
-}
