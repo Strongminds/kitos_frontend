@@ -7,12 +7,14 @@ import { APIShallowOrganizationDTO } from 'src/app/api/v1';
 import {
   APIExternalReferenceDataResponseDTO,
   APIIdentityNamePairResponseDTO,
+  APILicensingAndCodeModelChoice,
   APIRecommendedArchiveDutyChoice,
   APIRegularOptionResponseDTO,
   APIUpdateItSystemRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ARCHIVE_TEXT } from 'src/app/shared/constants/constants';
+import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import {
   ArchiveDutyRecommendationChoice,
   archiveDutyRecommendationChoiceOptions,
@@ -23,6 +25,11 @@ import {
   mapScopeEnumToScopeChoice,
   scopeOptions,
 } from 'src/app/shared/models/it-system/it-system-scope.model';
+import {
+  LicensingAndCodeModel,
+  licensingAndCodeModelOptions,
+  mapLicensingAndCodeModels,
+} from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { EntityStatusTextsService } from 'src/app/shared/services/entity-status-texts.service';
@@ -43,6 +50,7 @@ import { CardComponent } from '../../../../../shared/components/card/card.compon
 import { ContentBoxComponent } from '../../../../../shared/components/contentbox/contentbox.component';
 import { ConnectedDropdownComponent } from '../../../../../shared/components/dropdowns/connected-dropdown/connected-dropdown.component';
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
+import { MultiSelectDropdownComponent } from '../../../../../shared/components/dropdowns/multi-select-dropdown/multi-select-dropdown.component';
 import { ExternalReferenceComponent } from '../../../../../shared/components/external-reference/external-reference.component';
 import { FormGridComponent } from '../../../../../shared/components/form-grid/form-grid.component';
 import { ParagraphComponent } from '../../../../../shared/components/paragraph/paragraph.component';
@@ -75,6 +83,7 @@ import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catal
     ParagraphComponent,
     ItSystemKleOverviewComponent,
     AsyncPipe,
+    MultiSelectDropdownComponent,
   ],
 })
 export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent implements OnInit {
@@ -88,6 +97,12 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly isLoadingOrganizations$ = this.componentStore.isLoadingOrganizations$;
   public readonly hasModifyVisibilityPermission$ = this.store.select(selectITSystemHasModifyPermission);
+  public readonly licensingAndCodeModelDropdownOptions: MultiSelectDropdownItem<LicensingAndCodeModel>[] =
+    licensingAndCodeModelOptions.map((option) => ({
+      name: option.name,
+      value: option,
+      selected: false,
+    }));
 
   public readonly externalReferences$ = this.store.select(selectItSystemExternalReferences).pipe(
     filterNullish(),
@@ -95,6 +110,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   );
 
   public readonly archiveDutyRecommendationOptions = archiveDutyRecommendationChoiceOptions;
+  public initialSelectedLicensingAndCodeModels: MultiSelectDropdownItem<LicensingAndCodeModel>[] = [];
 
   public readonly itSystemFrontpageFormGroup = new FormGroup({
     name: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.required),
@@ -117,6 +133,10 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     legalName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     legalDataProcessorName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    licensingAndCodeModels: new FormControl<MultiSelectDropdownItem<LicensingAndCodeModel>[] | undefined>({
+      value: undefined,
+      disabled: false,
+    }),
   });
 
   public readonly nationalArchivesText = ARCHIVE_TEXT;
@@ -147,6 +167,14 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     } else {
       this.store.dispatch(ITSystemActions.patchITSystem(frontpage));
     }
+  }
+
+  public patchLicensingAndCodeModels(
+    value: LicensingAndCodeModel[] | undefined,
+    valueChange?: ValidatedValueChange<unknown>,
+  ) {
+    console.log(value?.map((v) => v.value));
+    this.patchFrontPage({ licensingAndCodeModels: value?.map((v) => v.value) }, valueChange);
   }
 
   public patchArchiveDutyComment(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
@@ -214,7 +242,12 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
             description: itSystem.description,
             legalName: itSystem.legalName,
             legalDataProcessorName: itSystem.legalDataProcessorName,
+            licensingAndCodeModels: this.mapLicensingAndCodeModelDropdownItems(itSystem.licensingAndCodeModels ?? []),
           });
+
+          this.initialSelectedLicensingAndCodeModels = this.mapLicensingAndCodeModelDropdownItems(
+            itSystem.licensingAndCodeModels ?? [],
+          );
 
           if (hasModifyPermission) {
             this.itSystemFrontpageFormGroup.enable();
@@ -241,6 +274,15 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
           this.itSystemFrontpageFormGroup.controls.legalDataProcessorName.disable();
         }),
     );
+  }
+
+  private mapLicensingAndCodeModelDropdownItems(apiModels: APILicensingAndCodeModelChoice[]) {
+    const frontendModels = mapLicensingAndCodeModels(apiModels);
+    return frontendModels.map((option) => ({
+      name: option.name,
+      value: option,
+      selected: false,
+    }));
   }
 
   private updateSystemParent() {
