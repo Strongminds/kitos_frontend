@@ -170,11 +170,11 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   }
 
   public patchLicensingAndCodeModels(
-    value: LicensingAndCodeModel[] | undefined,
+    frontendModels: LicensingAndCodeModel[],
     valueChange?: ValidatedValueChange<unknown>,
   ) {
-    console.log(value?.map((v) => v.value));
-    this.patchFrontPage({ licensingAndCodeModels: value?.map((v) => v.value) }, valueChange);
+    const apiEnums = frontendModels.map((model) => model.value);
+    this.patchFrontPage({ licensingAndCodeModels: apiEnums }, valueChange);
   }
 
   public patchArchiveDutyComment(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
