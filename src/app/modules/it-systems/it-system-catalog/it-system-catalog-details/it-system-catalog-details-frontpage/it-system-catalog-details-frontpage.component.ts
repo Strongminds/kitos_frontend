@@ -170,6 +170,9 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     frontendModels: LicensingAndCodeModel[],
     valueChange?: ValidatedValueChange<unknown>,
   ) {
+    this.setupLicensingAndCodeModelsControl(
+      this.itSystemFrontpageFormGroup.controls.licensingAndCodeModels.value ?? [],
+    );
     const apiEnums = frontendModels.map((model) => model.value);
     this.patchFrontPage({ licensingAndCodeModels: apiEnums }, valueChange);
   }
