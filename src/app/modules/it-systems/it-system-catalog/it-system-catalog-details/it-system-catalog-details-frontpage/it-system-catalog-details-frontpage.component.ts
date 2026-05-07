@@ -241,9 +241,9 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     if (this.noLicensingAndCodeModelSelected()) {
       newOptions = this.getDefaultLicensingAndCodeModelDropdownOptions();
     } else if (this.proprietaryLicensingAndCodeModelIsSelected()) {
-      newOptions = this.mapLicensingAndCodeModelOptionsWithProprietaryToggle(true);
+      newOptions = this.enableAppropriateLicensingAndCodeModels(true);
     } else if (this.anyNonProprietaryLicensingAndCodeModelIsSelected()) {
-      newOptions = this.mapLicensingAndCodeModelOptionsWithProprietaryToggle(false);
+      newOptions = this.enableAppropriateLicensingAndCodeModels(false);
     } else {
       newOptions = [...this.licensingAndCodeModelDropdownOptions$.value];
     }
@@ -251,7 +251,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     this.licensingAndCodeModelDropdownOptions$.next(newOptions);
   }
 
-  private mapLicensingAndCodeModelOptionsWithProprietaryToggle(
+  private enableAppropriateLicensingAndCodeModels(
     enableProprietary: boolean,
   ): MultiSelectDropdownItem<LicensingAndCodeModel>[] {
     return this.licensingAndCodeModelDropdownOptions$.value.map((option) => {
