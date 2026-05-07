@@ -106,6 +106,7 @@
       [data]="licensingAndCodeModelDropdownOptions$ | async"
       formName="licensingAndCodeModels"
       [formGroup]="itSystemFrontpageFormGroup"
+      [disabled]="hasModifyPermission$ | async"
       [initialSelectedValues]="initialSelectedLicensingAndCodeModels"
       (selectedEvent)="patchLicensingAndCodeModels( $event )"
       (cleared)="patchLicensingAndCodeModels([])"

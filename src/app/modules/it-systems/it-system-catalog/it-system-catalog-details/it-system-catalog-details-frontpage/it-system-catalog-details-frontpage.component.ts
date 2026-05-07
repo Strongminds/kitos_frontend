@@ -258,6 +258,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     });
   }
 
+  public hasModifyPermission$ = this.store.select(selectITSystemHasModifyPermission);
+
   private subscribeToItSystem() {
     this.subscriptions.add(
       this.store
