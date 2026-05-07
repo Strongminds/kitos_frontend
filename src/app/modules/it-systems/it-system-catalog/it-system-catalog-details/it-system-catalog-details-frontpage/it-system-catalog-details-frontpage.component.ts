@@ -132,7 +132,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
     legalDataProcessorName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     licensingAndCodeModels: new FormControl<MultiSelectDropdownItem<LicensingAndCodeModel>[] | undefined>({
       value: undefined,
-      disabled: false,
+      disabled: true,
     }),
   });
 
