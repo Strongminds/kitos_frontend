@@ -19,7 +19,6 @@ import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
 export interface APIGDPRWriteRequestDTO { 
-    purpose?: string | null;
     hostedAt?: APIHostingChoice;
     directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels?: Array<APIDataSensitivityLevelChoice> | null;
