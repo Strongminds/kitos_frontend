@@ -60,6 +60,7 @@ import {
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDescription,
   selectITSystemUsageEnableFrontPageUsagePeriod,
+  selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableLastEditedAt,
@@ -135,6 +136,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
   public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
+  public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGeneralPurpose);
   public readonly amountOfUsersEnabled$ = this.store.select(selectITSystemUsageEnableAmountOfUsers);
   public readonly dataClassificationEnabled$ = this.store.select(selectITSystemUsageEnableDataClassification);
   public readonly descriptionEnabled$ = this.store.select(selectITSystemUsageEnableDescription);

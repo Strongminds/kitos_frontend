@@ -6002,6 +6002,12 @@
       <trans-unit id="6778544494529637057" datatype="html">
         <source>Under afprøvning</source>
       </trans-unit>
+      <trans-unit id="4712618551632228533" datatype="html">
+        <source>Systemets overordnets formål</source>
+      </trans-unit>
+      <trans-unit id="5905435256195510767" datatype="html">
+        <source>Behandlingsformål</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
