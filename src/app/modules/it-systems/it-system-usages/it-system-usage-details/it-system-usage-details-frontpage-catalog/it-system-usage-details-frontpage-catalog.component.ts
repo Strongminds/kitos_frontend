@@ -113,10 +113,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
       this.store
         .select(selectItSystem)
         .pipe(filterNullish())
-        .subscribe((itSystem) => {
-          console.log(itSystem.licensingAndCodeModels);
-          console.log(toCsv(mapLicensingAndCodeModels(itSystem.licensingAndCodeModels)));
-
+        .subscribe((itSystem) =>
           this.itSystemInformationForm.patchValue({
             name: itSystem.name,
             parentSystem: itSystem.parentSystem?.name || '',
@@ -135,8 +132,8 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             licensingAndCodeModels: toCsv(
               mapLicensingAndCodeModels(itSystem.licensingAndCodeModels).map((option) => option.name),
             ),
-          });
-        }),
+          }),
+        ),
     );
 
     // Update form with parent system details
