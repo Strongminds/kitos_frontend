@@ -5993,20 +5993,11 @@
       <trans-unit id="5362915117064427453" datatype="html">
         <source>Reference for kritikalitetsvurdering</source>
       </trans-unit>
+      <trans-unit id="5623216180964356135" datatype="html">
+        <source> Organisationen er markeret som ISMS leverandør for følgende kommuner: </source>
+      </trans-unit>
       <trans-unit id="5717990299723971305" datatype="html">
         <source>IT Systemer - Systemforside - Kritikalitet</source>
-      </trans-unit>
-      <trans-unit id="6316396755039555698" datatype="html">
-        <source>Licens- og kodegrundlag</source>
-      </trans-unit>
-      <trans-unit id="6979270293215636528" datatype="html">
-        <source>Proprietær</source>
-      </trans-unit>
-      <trans-unit id="6984983607470794786" datatype="html">
-        <source>Open Source</source>
-      </trans-unit>
-      <trans-unit id="7627144534064102389" datatype="html">
-        <source>Freeware</source>
       </trans-unit>
     </body>
   </file>

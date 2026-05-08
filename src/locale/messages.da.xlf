@@ -7821,9 +7821,9 @@
         <source>Systemkritikalitet sidst opdateret</source>
         <target state="new">Systemkritikalitet sidst opdateret</target>
       </trans-unit>
-      <trans-unit id="6316396755039555698" datatype="html">
-        <source>Licens- og kodegrundlag</source>
-        <target state="new">Licens- og kodegrundlag</target>
+      <trans-unit id="5623216180964356135" datatype="html">
+        <source> Organisationen er markeret som ISMS leverandør for følgende kommuner: </source>
+        <target state="new"> Organisationen er markeret som ISMS leverandør for følgende kommuner: </target>
       </trans-unit>
       <trans-unit id="5186123670940091932" datatype="html">
         <source>Bruges til kommunens egen vurdering af systemets betydning for driften</source>
@@ -7836,18 +7836,6 @@
       <trans-unit id="5717990299723971305" datatype="html">
         <source>IT Systemer - Systemforside - Kritikalitet</source>
         <target state="new">IT Systemer - Systemforside - Kritikalitet</target>
-      </trans-unit>
-      <trans-unit id="6984983607470794786" datatype="html">
-        <source>Open Source</source>
-        <target state="new">Open Source</target>
-      </trans-unit>
-      <trans-unit id="7627144534064102389" datatype="html">
-        <source>Freeware</source>
-        <target state="new">Freeware</target>
-      </trans-unit>
-      <trans-unit id="6979270293215636528" datatype="html">
-        <source>Proprietær</source>
-        <target state="new">Proprietær</target>
       </trans-unit>
     </body>
   </file>
