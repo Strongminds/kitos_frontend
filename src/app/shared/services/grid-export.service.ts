@@ -35,6 +35,13 @@ export class GridExportService {
               transformedItem[field] = enumValue.name;
             }
             break;
+          case 'enum-array':
+            if (Array.isArray(transformedItem[field])) {
+              const enumArray = transformedItem[field];
+              const enumNamesCsv = enumArray.map((enumItem) => enumItem.name).join(', ');
+              transformedItem[field] = enumNamesCsv;
+            }
+            break;
           case 'boolean':
             {
               transformedItem[field] = transformedItem[field] ? YES_TEXT : NO_TEXT;
