@@ -1,4 +1,4 @@
-export function toCsv(array: any[]): string {
+export function toCommaSeparatedString(array: string[]): string {
   if (array.length === 0) return '';
   return array.join(', ');
 }

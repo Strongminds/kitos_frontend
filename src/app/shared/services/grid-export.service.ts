@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { NO_TEXT, YES_TEXT } from '../constants/constants';
+import { toCommaSeparatedString } from '../helpers/array.helpers';
 import { validateHttpUrl } from '../helpers/link.helpers';
 import { GridColumn } from '../models/grid-column.model';
 import { OverviewAuditModel } from '../models/it-contract/audit-model';
 import { AppDatePipe } from '../pipes/app-date.pipe';
-import { toCsv } from '../helpers/array.helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +39,7 @@ export class GridExportService {
           case 'enum-array':
             if (Array.isArray(transformedItem[field])) {
               const enumArray = transformedItem[field];
-              const enumNamesCsv = toCsv(enumArray.map((enumItem) => enumItem.name));
+              const enumNamesCsv = toCommaSeparatedString(enumArray.map((enumItem) => enumItem.name));
               transformedItem[field] = enumNamesCsv;
             }
             break;
@@ -66,7 +66,7 @@ export class GridExportService {
           case 'page-link-array':
             {
               const array = transformedItem[column.dataField as string];
-              const excelValue = toCsv(array.map((item: { value: string }) => item.value));
+              const excelValue = toCommaSeparatedString(array.map((item: { value: string }) => item.value));
               transformedItem[field] = excelValue;
             }
             break;
@@ -78,7 +78,7 @@ export class GridExportService {
 
               // Create a separate field for the names
               const namesField = `${field}Names`;
-              const usageNames = toCsv(usages.map((usage: any) => usage.name));
+              const usageNames = toCommaSeparatedString(usages.map((usage: any) => usage.name));
               transformedItem[namesField] = usageNames;
             }
             break;

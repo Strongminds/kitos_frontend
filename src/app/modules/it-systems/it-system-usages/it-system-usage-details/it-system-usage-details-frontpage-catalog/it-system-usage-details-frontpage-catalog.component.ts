@@ -6,7 +6,7 @@ import { first } from 'rxjs';
 import { APIExternalReferenceDataResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { toCsv } from 'src/app/shared/helpers/array.helpers';
+import { toCommaSeparatedString } from 'src/app/shared/helpers/array.helpers';
 import { mapScopeEnumToScopeChoice } from 'src/app/shared/models/it-system/it-system-scope.model';
 import { mapLicensingAndCodeModels } from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import { mapOptionCrossReferenceToOptionDTO } from 'src/app/shared/models/options/option-type.model';
@@ -129,7 +129,7 @@ export class ITSystemUsageDetailsFrontpageCatalogComponent extends BaseComponent
             description: itSystem.description,
             legalName: itSystem.legalName,
             legalDataProcessorName: itSystem.legalDataProcessorName,
-            licensingAndCodeModels: toCsv(
+            licensingAndCodeModels: toCommaSeparatedString(
               mapLicensingAndCodeModels(itSystem.licensingAndCodeModels).map((option) => option.name),
             ),
           }),
