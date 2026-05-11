@@ -1,15 +1,15 @@
+import { CdkDrag, CdkDragHandle, CdkDropList } from '@angular/cdk/drag-drop';
 import { NgClass, NgTemplateOutlet } from '@angular/common';
-import { Component, EventEmitter, Inject, Input, OnInit, Output, DOCUMENT } from '@angular/core';
+import { Component, DOCUMENT, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { getDetailsPageLink } from '../../helpers/link.helpers';
 import { RegistrationEntityTypes } from '../../models/registrations/registration-entity-categories.model';
 import { EntityTreeNode, EntityTreeNodeMoveResult } from '../../models/structure/entity-tree-node.model';
-import { ChevronDownIconComponent } from '../icons/chevron-down-icon.component';
-import { ChevronRightIconComponent } from '../icons/chevron-right-icon.component';
 import { CheckboxComponent } from '../checkbox/checkbox.component';
 import { DetailsPageLinkComponent } from '../details-page-link/details-page-link.component';
+import { ChevronDownIconComponent } from '../icons/chevron-down-icon.component';
+import { ChevronRightIconComponent } from '../icons/chevron-right-icon.component';
 import { DragIconComponent } from '../icons/drag-icon.component';
-import { CdkDragHandle, CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
 
 interface DropInfo {
   targetId: string;
@@ -30,8 +30,8 @@ interface DropInfo {
     CdkDragHandle,
     CdkDropList,
     CdkDrag,
-    NgTemplateOutlet
-],
+    NgTemplateOutlet,
+  ],
 })
 export class DragAndDropTreeComponent<T> implements OnInit {
   public toggleStatusText = 'status';
@@ -113,6 +113,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
     const draggedItemUuid = event.item.data;
     let targetListUuid = this.getParentNodeId(this.dropActionTodo.targetId, this.nodes, 'main');
+    console.log('targetListUuid', targetListUuid, 'dropActionTodo', this.dropActionTodo);
 
     if (targetListUuid === 'main') {
       if (this.dropActionTodo.action === 'before') return;
@@ -122,7 +123,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
     const draggedItem = this.nodeLookup[draggedItemUuid];
 
-    const newContainer = targetListUuid !== null ? this.nodeLookup[targetListUuid].children : this.nodes;
+    const newContainer = targetListUuid !== null ? this.nodeLookup[targetListUuid]?.children : this.nodes;
 
     switch (this.dropActionTodo.action) {
       case 'before':
