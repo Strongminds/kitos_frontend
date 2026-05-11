@@ -69,6 +69,7 @@ import {
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableSystemUsageCriticalityLevel,
   selectITSystemUsageEnableTakenIntoUsageBy,
+  selectITSystemUsageEnableTechnicalSystemType,
   selectITSystemUsageEnableVersion,
   selectITSystemUsageEnableWebAccessibility,
   selectITSystemUsageEnabledSystemId,
@@ -109,6 +110,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       localCallName: new FormControl(''),
       localSystemId: new FormControl(''),
       systemVersion: new FormControl(''),
+      technicalSystemType: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
@@ -135,6 +137,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly nameEnabled$ = this.store.select(selectITSystemUsageEnableName);
   public readonly systemIdEnabled$ = this.store.select(selectITSystemUsageEnabledSystemId);
   public readonly versionEnabled$ = this.store.select(selectITSystemUsageEnableVersion);
+  public readonly technicalSystemTypeEnabled$ = this.store.select(selectITSystemUsageEnableTechnicalSystemType);
   public readonly amountOfUsersEnabled$ = this.store.select(selectITSystemUsageEnableAmountOfUsers);
   public readonly dataClassificationEnabled$ = this.store.select(selectITSystemUsageEnableDataClassification);
   public readonly descriptionEnabled$ = this.store.select(selectITSystemUsageEnableDescription);
@@ -224,6 +227,10 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     .select(selectRegularOptionTypes('it-system-usage_system-usage-criticality-level'))
     .pipe(filterNullish());
 
+  public readonly technicalSystemTypes$ = this.store
+    .select(selectRegularOptionTypes('it-system-usage_technical-system-type'))
+    .pipe(filterNullish());
+
   public readonly dataClassificationTypes$ = this.store
     .select(selectRegularOptionTypes('it-system_usage-data-classification-type'))
     .pipe(filterNullish());
@@ -254,6 +261,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-data-classification-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage_system-usage-criticality-level'));
+    this.store.dispatch(RegularOptionTypeActions.getOptions('it-system-usage_technical-system-type'));
 
     this.disableFormsIfNoModifyPermission();
     this.setupFormValueChangeSubscriptions();
@@ -317,6 +325,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,
+            technicalSystemType: general.technicalSystemType,
             numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers ?? undefined),
             dataClassification: general.dataClassification,
             notes: general.notes,

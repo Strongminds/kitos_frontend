@@ -6002,6 +6002,9 @@
       <trans-unit id="6778544494529637057" datatype="html">
         <source>Under afprøvning</source>
       </trans-unit>
+      <trans-unit id="6123762912751952636" datatype="html">
+        <source>Teknisk systemtype</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
