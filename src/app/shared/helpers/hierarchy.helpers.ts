@@ -44,7 +44,6 @@ export const mapUnitsToTree = (units: APIOrganizationUnitResponseDTO[], expanded
     isExpanded: expandedNodeUuids !== undefined ? expandedNodeUuids.includes(unit.uuid) : true,
     isRearrangeDisabled: isRearrangeUnitDisabled(unit),
   }));
-  console.log(mappedHierarchy);
   return mapArrayToTree(mappedHierarchy);
 };
 
