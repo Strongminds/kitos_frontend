@@ -107,6 +107,7 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
+      purpose: new FormControl(''),
       localCallName: new FormControl(''),
       localSystemId: new FormControl(''),
       systemVersion: new FormControl(''),
@@ -316,6 +317,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .pipe(filterNullish())
         .subscribe((general) => {
           this.itSystemInformationForm.patchValue({
+            purpose: general.purpose,
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,
