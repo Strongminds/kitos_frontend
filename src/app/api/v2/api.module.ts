@@ -83,6 +83,7 @@ import { ItSystemGlobalRegisterTypesInternalV2Service } from './api/itSystemGlob
 import { ItSystemGlobalRoleOptionTypesInternalV2Service } from './api/itSystemGlobalRoleOptionTypesInternalV2.service';
 import { ItSystemGlobalSensitivePersonalDataTypesInternalV2Service } from './api/itSystemGlobalSensitivePersonalDataTypesInternalV2.service';
 import { ItSystemGlobalSystemUsageCriticalityLevelTypesInternalV2Service } from './api/itSystemGlobalSystemUsageCriticalityLevelTypesInternalV2.service';
+import { ItSystemGlobalTechnicalSystemTypesInternalV2Service } from './api/itSystemGlobalTechnicalSystemTypesInternalV2.service';
 import { ItSystemInternalV2Service } from './api/itSystemInternalV2.service';
 import { ItSystemLocalArchiveLocationTypesInternalV2Service } from './api/itSystemLocalArchiveLocationTypesInternalV2.service';
 import { ItSystemLocalArchiveTestLocationTypesInternalV2Service } from './api/itSystemLocalArchiveTestLocationTypesInternalV2.service';
