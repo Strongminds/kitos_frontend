@@ -113,7 +113,6 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
     const draggedItemUuid = event.item.data;
     let targetListUuid = this.getParentNodeId(this.dropActionTodo.targetId, this.nodes, 'main');
-    console.log('targetListUuid', targetListUuid, 'dropActionTodo', this.dropActionTodo);
 
     if (targetListUuid === 'main') {
       if (this.dropActionTodo.action === 'before') return;
@@ -123,7 +122,7 @@ export class DragAndDropTreeComponent<T> implements OnInit {
 
     const draggedItem = this.nodeLookup[draggedItemUuid];
 
-    const newContainer = targetListUuid !== null ? this.nodeLookup[targetListUuid]?.children : this.nodes;
+    const newContainer = this.getTargetContainer(targetListUuid);
 
     switch (this.dropActionTodo.action) {
       case 'before':
@@ -140,6 +139,10 @@ export class DragAndDropTreeComponent<T> implements OnInit {
     }
 
     this.clearDragInfo(true);
+  }
+
+  private getTargetContainer(targetListUuid: string | null): EntityTreeNode<T>[] {
+    return targetListUuid !== null ? this.nodeLookup[targetListUuid]?.children : this.nodes;
   }
 
   public expandClick(node: EntityTreeNode<T>) {
