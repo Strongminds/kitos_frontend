@@ -7841,10 +7841,6 @@
         <source>Under afprøvning</source>
         <target state="new">Under afprøvning</target>
       </trans-unit>
-      <trans-unit id="4712618551632228533" datatype="html">
-        <source>Systemets overordnets formål</source>
-        <target state="new">Systemets overordnets formål</target>
-      </trans-unit>
       <trans-unit id="5905435256195510767" datatype="html">
         <source>Behandlingsformål</source>
         <target state="new">Behandlingsformål</target>
