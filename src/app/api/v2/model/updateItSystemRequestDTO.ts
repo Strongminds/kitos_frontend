@@ -12,6 +12,7 @@
 import { APIRecommendedArchiveDutyRequestDTO } from './recommendedArchiveDutyRequestDTO';
 import { APIRegistrationScopeChoice } from './registrationScopeChoice';
 import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIUpdateItSystemRequestDTO { 
@@ -26,5 +27,6 @@ export interface APIUpdateItSystemRequestDTO {
     rightsHolderUuid?: string | null;
     scope?: APIRegistrationScopeChoice;
     recommendedArchiveDuty?: APIRecommendedArchiveDutyRequestDTO;
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

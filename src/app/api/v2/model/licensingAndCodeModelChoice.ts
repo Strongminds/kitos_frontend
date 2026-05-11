@@ -9,11 +9,13 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 
 
-export interface APIOrganizationUsageResponseDTO { 
-    usingOrganizationUnits: Array<APIIdentityNamePairResponseDTO> | null;
-    responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;
-}
+export type APILicensingAndCodeModelChoice = 'OpenSource' | 'Freeware' | 'Proprietary';
+
+export const APILicensingAndCodeModelChoice = {
+    OpenSource: 'OpenSource' as APILicensingAndCodeModelChoice,
+    Freeware: 'Freeware' as APILicensingAndCodeModelChoice,
+    Proprietary: 'Proprietary' as APILicensingAndCodeModelChoice
+};
 
