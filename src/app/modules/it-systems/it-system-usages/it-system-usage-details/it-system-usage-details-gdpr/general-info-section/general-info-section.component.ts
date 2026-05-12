@@ -7,6 +7,11 @@ import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { SUPPLIER_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
 import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import {
+  IsDataProcessingAgreementRequired,
+  isDataProcessingAgreementRequiredOptions,
+  mapIsDataProcessingAgreementRequired,
+} from 'src/app/shared/models/it-system-usage/gdpr/is-data-processing-agreement-required.model';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -60,10 +65,12 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
     {
       purpose: new FormControl(''),
       hostedAt: new FormControl<HostedAt | undefined>(undefined),
+      isDataProcessingAgreementRequired: new FormControl<IsDataProcessingAgreementRequired | undefined>(undefined),
     },
     { updateOn: 'blur' },
   );
   public disableDirectoryDocumentationControl = false;
+  public isDataProcessingAgreementRequiredOptions = isDataProcessingAgreementRequiredOptions;
 
   public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
   public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
@@ -82,6 +89,9 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
         this.generalInformationForm.patchValue({
           purpose: gdpr.processingPurpose,
           hostedAt: mapHostedAt(gdpr.hostedAt ?? undefined),
+          isDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(
+            gdpr.isDataProcessingAgreementRequired ?? undefined,
+          ),
         });
       }),
     );
