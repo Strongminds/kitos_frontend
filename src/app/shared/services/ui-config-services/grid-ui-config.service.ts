@@ -96,11 +96,11 @@ import {
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableSystemUsageCriticalityLevel,
-  selectITSystemUsageEnableTechnicalSystemType,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
+  selectITSystemUsageEnableTechnicalSystemType,
   selectITSystemUsageEnableVersion,
   selectITSystemUsageEnableWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
