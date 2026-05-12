@@ -59,3 +59,4 @@ export const SystemUsageCriticalityLevelUuid = 'SystemUsageCriticalityLevelUuid'
 export const SystemUsageCriticalityLevelName = 'SystemUsageCriticalityLevelName';
 export const IsSociallyCritical = 'IsSociallyCritical';
 export const CriticalityFieldsLastChanged = 'CriticalityFieldsLastChanged';
+export const IsDataProcessingAgreementRequired = 'IsDataProcessingAgreementRequired';
