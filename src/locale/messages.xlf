@@ -6017,6 +6017,12 @@
       <trans-unit id="5905435256195510767" datatype="html">
         <source>Behandlingsformål</source>
       </trans-unit>
+      <trans-unit id="6624218801716266997" datatype="html">
+        <source>Styret via lovgivning</source>
+      </trans-unit>
+      <trans-unit id="6959125562012930761" datatype="html">
+        <source>Kræver system databehandleraftale</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
