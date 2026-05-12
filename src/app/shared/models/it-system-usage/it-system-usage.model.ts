@@ -13,7 +13,6 @@ import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.
 import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
 import { mapToYesNoEnum, YesNoOption } from '../yes-no.model';
 import { ArchiveDutyChoice, mapArchiveDutyChoice } from './archive-duty-choice.model';
-import { GdprCriticality, mapGdprCriticality } from './gdpr/gdpr-criticality.model';
 import { HostedAt, mapGridHostedAt } from './gdpr/hosted-at.model';
 
 export interface ITSystemUsage {
@@ -62,6 +61,7 @@ export interface ITSystemUsage {
   LinkToDirectoryUrl: string;
   HostedAt: HostedAt | undefined;
   GeneralPurpose: string;
+  ProcessingPurpose: string;
   DataProcessingRegistrationsConcludedAsCsv: string;
   DataProcessingRegistrationNamesAsCsv: string;
   DataProcessingRegistrations: { id: string; value: string }[];
@@ -86,8 +86,12 @@ export interface ITSystemUsage {
   WebAccessibilityCompliance: YesNoPartiallyOption | undefined;
   LastWebAccessibilityCheck: Date | undefined;
   WebAccessibilityNotes: string | undefined;
-  GdprCriticality: GdprCriticality | undefined;
+  SystemUsageCriticalityLevelUuid: string | undefined;
+  SystemUsageCriticalityLevelName: string | undefined;
+  TechnicalSystemTypeUuid: string | undefined;
+  TechnicalSystemTypeName: string | undefined;
   IsSociallyCritical: YesNoDontKnowOption | undefined;
+  CriticalityFieldsLastChanged: Date | undefined;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -162,6 +166,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
     GeneralPurpose: value.GeneralPurpose,
+    ProcessingPurpose: value.ProcessingPurpose,
     DataProcessingRegistrationsConcludedAsCsv: value.DataProcessingRegistrationsConcludedAsCsv,
     DataProcessingRegistrationNamesAsCsv: value.DataProcessingRegistrationNamesAsCsv,
     DataProcessingRegistrations: value.DataProcessingRegistrations?.map(
@@ -211,8 +216,12 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     WebAccessibilityCompliance: mapToYesNoPartiallyEnum(value.WebAccessibilityCompliance),
     LastWebAccessibilityCheck: value.LastWebAccessibilityCheck,
     WebAccessibilityNotes: value.WebAccessibilityNotes,
-    GdprCriticality: mapGdprCriticality(value.GdprCriticality),
+    SystemUsageCriticalityLevelUuid: value.SystemUsageCriticalityLevelUuid,
+    SystemUsageCriticalityLevelName: value.SystemUsageCriticalityLevelName,
+    TechnicalSystemTypeUuid: value.TechnicalSystemTypeUuid,
+    TechnicalSystemTypeName: value.TechnicalSystemTypeName,
     IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
+    CriticalityFieldsLastChanged: value.CriticalityFieldsLastChanged,
   };
   return adaptedSystem;
 };

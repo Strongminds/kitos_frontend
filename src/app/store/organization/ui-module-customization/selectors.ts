@@ -112,6 +112,7 @@ const createItSystemUsageFrontPageFieldSelector = (fieldKey: string) =>
 export const selectITSystemUsageEnableName = createItSystemUsageFrontPageFieldSelector('name');
 export const selectITSystemUsageEnabledSystemId = createItSystemUsageFrontPageFieldSelector('systemId');
 export const selectITSystemUsageEnableVersion = createItSystemUsageFrontPageFieldSelector('version');
+export const selectITSystemUsageEnableGeneralPurpose = createItSystemUsageFrontPageFieldSelector('purpose');
 export const selectITSystemUsageEnableAmountOfUsers = createItSystemUsageFrontPageFieldSelector('amountOfUsers');
 export const selectITSystemUsageEnableDataClassification =
   createItSystemUsageFrontPageFieldSelector('dataClassification');
@@ -129,6 +130,15 @@ export const selectITSystemUsageEnableIsSociallyCritical =
   createItSystemUsageFrontPageFieldSelector('isSociallyCritical');
 export const selectITSystemUsageEnableIsBusinessCritical =
   createItSystemUsageFrontPageFieldSelector('isBusinessCritical');
+export const selectITSystemUsageEnableCriticalityFieldsLastChanged =
+  createItSystemUsageFrontPageFieldSelector('criticalityFieldsLastChanged');
+export const selectITSystemUsageEnableCriticalityLevelDocumentation = createItSystemUsageFrontPageFieldSelector(
+  'criticalityLevelDocumentation',
+);
+export const selectITSystemUsageEnableSystemUsageCriticalityLevel =
+  createItSystemUsageFrontPageFieldSelector('systemUsageCriticalityLevel');
+export const selectITSystemUsageEnableTechnicalSystemType =
+  createItSystemUsageFrontPageFieldSelector('technicalSystemType');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
@@ -142,7 +152,7 @@ export const selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActiv
 const createItSystemUsageGdprFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItSystemUsage, 'gdpr', fieldKey);
 
-export const selectITSystemUsageEnableGdprPurpose = createItSystemUsageGdprFieldSelector('purpose');
+export const selectITSystemUsageEnableGdprPurpose = createItSystemUsageGdprFieldSelector('processingPurpose');
 export const selectITSystemUsageEnableGdprHostedAt = createItSystemUsageGdprFieldSelector('hostedAt');
 export const selectITSystemUsageEnableGdprDocumentation = createItSystemUsageGdprFieldSelector('documentation');
 export const selectITSystemUsageEnableGdprDataTypes = createItSystemUsageGdprFieldSelector('dataTypes');
@@ -157,7 +167,6 @@ export const selectITSystemUsageEnableGdprConductedRiskAssessment =
   createItSystemUsageGdprFieldSelector('conductedRiskAssessment');
 export const selectITSystemUsageEnableGdprDpiaConducted = createItSystemUsageGdprFieldSelector('dpiaConducted');
 export const selectITSystemUsageEnableGdprRetentionPeriod = createItSystemUsageGdprFieldSelector('retentionPeriod');
-export const selectITSystemUsageEnableGdprCriticality = createItSystemUsageGdprFieldSelector('gdprCriticality');
 
 //IT System Usage > Relations
 const createItSystemUsageRelationsFieldSelector = (fieldKey: string) =>

@@ -26,7 +26,6 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
-import { gdprCriticalityOptions } from 'src/app/shared/models/it-system-usage/gdpr/gdpr-criticality.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
@@ -441,10 +440,18 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     {
       field: GridFields.GeneralPurpose,
       title: $localize`Systemets overordnede formål`,
-      section: GDPR_SECTION_NAME,
+      section: this.systemSectionName,
       width: 390,
       hidden: false,
       persistId: 'GeneralPurpose',
+    },
+    {
+      field: GridFields.ProcessingPurpose,
+      title: $localize`Behandlingsformål`,
+      section: GDPR_SECTION_NAME,
+      width: 390,
+      hidden: false,
+      persistId: 'ProcessingPurpose',
     },
     {
       field: GridFields.DataProcessingRegistrationsConcludedAsCsv,
@@ -635,14 +642,26 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'webAccessibilityNotes',
     },
     {
-      field: GridFields.GdprCriticality,
+      field: GridFields.SystemUsageCriticalityLevelUuid,
+      dataField: GridFields.SystemUsageCriticalityLevelName,
       title: $localize`Kritikalitet`,
-      section: GDPR_SECTION_NAME,
-      hidden: false,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
       persistId: 'gdprCriticality',
-      extraFilter: 'enum',
-      style: 'enum',
-      extraData: gdprCriticalityOptions,
+      extraFilter: 'choice-type',
+      extraData: 'it-system-usage_system-usage-criticality-level',
+      style: 'uuid-to-name',
+    },
+    {
+      field: GridFields.TechnicalSystemTypeUuid,
+      dataField: GridFields.TechnicalSystemTypeName,
+      title: $localize`Teknisk systemtype`,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
+      persistId: 'technicalSystemType',
+      extraFilter: 'choice-type',
+      extraData: 'it-system-usage_technical-system-type',
+      style: 'uuid-to-name',
     },
     {
       field: GridFields.IsSociallyCritical,
@@ -652,6 +671,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       style: 'enum',
       extraData: yesNoDontKnowOptions,
+    },
+    {
+      field: GridFields.CriticalityFieldsLastChanged,
+      title: $localize`Systemkritikalitet sidst opdateret`,
+      section: USAGE_SECTION_NAME,
+      hidden: true,
+      style: 'date',
+      filter: 'date',
+      width: 350,
     },
   ];
 

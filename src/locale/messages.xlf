@@ -2438,9 +2438,6 @@
       <trans-unit id="1367605704987726222" datatype="html">
         <source>Systemets overordnede formål</source>
       </trans-unit>
-      <trans-unit id="7810461789493260398" datatype="html">
-        <source>Forretningskritisk IT-System</source>
-      </trans-unit>
       <trans-unit id="2577876001692170237" datatype="html">
         <source>IT-systemet driftes</source>
       </trans-unit>
@@ -5300,21 +5297,6 @@
       <trans-unit id="3629666201490878672" datatype="html">
         <source>Kun organisationer af typen &quot;Virksomhed&quot; kan være ISMS leverandører.</source>
       </trans-unit>
-      <trans-unit id="5070899896766404217" datatype="html">
-        <source>Ikke kritisk</source>
-      </trans-unit>
-      <trans-unit id="5533383424441473672" datatype="html">
-        <source>Høj</source>
-      </trans-unit>
-      <trans-unit id="5982496808088686844" datatype="html">
-        <source>Medium</source>
-      </trans-unit>
-      <trans-unit id="6572607453095683769" datatype="html">
-        <source>Meget høj</source>
-      </trans-unit>
-      <trans-unit id="6905265339095064583" datatype="html">
-        <source>Lav</source>
-      </trans-unit>
       <trans-unit id="2368085507469871" datatype="html">
         <source>Seneste tilsynsrapport</source>
       </trans-unit>
@@ -5374,9 +5356,6 @@
       </trans-unit>
       <trans-unit id="398378182976183657" datatype="html">
         <source>IT System: Anvendes af organisationer</source>
-      </trans-unit>
-      <trans-unit id="2441857005381821884" datatype="html">
-        <source>IT Systemer - GDPR - Kritikalitet</source>
       </trans-unit>
       <trans-unit id="2906905998458410320" datatype="html">
         <source>Indkommende relationer</source>
@@ -5998,6 +5977,48 @@
       </trans-unit>
       <trans-unit id="481320365420058756" datatype="html">
         <source>Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde</source>
+      </trans-unit>
+      <trans-unit id="7468937510501419203" datatype="html">
+        <source>Skrive</source>
+      </trans-unit>
+      <trans-unit id="2143535785980974186" datatype="html">
+        <source>Systemkritikalitet sidst opdateret</source>
+      </trans-unit>
+      <trans-unit id="7109755738988441858" datatype="html">
+        <source>Systemkritikalitet</source>
+      </trans-unit>
+      <trans-unit id="5186123670940091932" datatype="html">
+        <source>Bruges til kommunens egen vurdering af systemets betydning for driften</source>
+      </trans-unit>
+      <trans-unit id="5362915117064427453" datatype="html">
+        <source>Reference for kritikalitetsvurdering</source>
+      </trans-unit>
+      <trans-unit id="5623216180964356135" datatype="html">
+        <source> Organisationen er markeret som ISMS leverandør for følgende kommuner: </source>
+      </trans-unit>
+      <trans-unit id="5717990299723971305" datatype="html">
+        <source>IT Systemer - Systemforside - Kritikalitet</source>
+      </trans-unit>
+      <trans-unit id="6778544494529637057" datatype="html">
+        <source>Under afprøvning</source>
+      </trans-unit>
+      <trans-unit id="6316396755039555698" datatype="html">
+        <source>Licens- og kodegrundlag</source>
+      </trans-unit>
+      <trans-unit id="6979270293215636528" datatype="html">
+        <source>Proprietær</source>
+      </trans-unit>
+      <trans-unit id="6984983607470794786" datatype="html">
+        <source>Open Source</source>
+      </trans-unit>
+      <trans-unit id="7627144534064102389" datatype="html">
+        <source>Freeware</source>
+      </trans-unit>
+      <trans-unit id="5905435256195510767" datatype="html">
+        <source>Behandlingsformål</source>
+      </trans-unit>
+      <trans-unit id="6123762912751952636" datatype="html">
+        <source>Teknisk systemtype</source>
       </trans-unit>
     </body>
   </file>

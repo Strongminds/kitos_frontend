@@ -23,7 +23,7 @@ describe('it-system-usage frontpage', () => {
       'patchRequest',
     );
 
-    cy.dropdown('Forretningskritisk IT-System', 'Nej', true);
+    cy.dropdown('Forretningskritisk IT-system', 'Nej', true);
 
     cy.wait('@patchRequest')
       .its('request.body')
@@ -41,6 +41,7 @@ describe('it-system-usage frontpage', () => {
     cy.dropdown('Antal brugere').should('have.text', '100-499');
     cy.dropdown('Klassifikation af data').should('have.text', 'Almindelige oplysninger');
     cy.contains('Informationer, hvor offentliggørelse er naturlig eller ikke ');
+    cy.dropdown('Teknisk systemtype').should('have.text', 'Fagsystem');
 
     cy.contains('Systemanvendelse');
     cy.input('Sidst redigeret (bruger)').should('have.value', 'Martin');
@@ -54,7 +55,7 @@ describe('it-system-usage frontpage', () => {
     cy.inputByCy('last-web-accessibility-check').should('have.value', '27-02-2025');
     cy.textareaByCy('web-accessibility-notes').should('have.value', 'en note om tilgængelighed');
 
-    cy.dropdown('Forretningskritisk IT-System').should('have.text', 'Ja');
+    cy.dropdown('Forretningskritisk IT-system').should('have.text', 'Ja');
 
     cy.contains('Data fra IT Systemkataloget').click();
 
@@ -162,6 +163,10 @@ describe('it-system-usage frontpage', () => {
     cy.wait('@patch2')
       .its('request.body')
       .should('deep.eq', { general: { numberOfExpectedUsers: { lowerBound: 50, upperBound: 99 } } });
+
+    expectGeneralPropertyUpdate({ technicalSystemTypeUuid: '1a2b3c4d-0001-0001-0001-000000000002' }, () =>
+      cy.dropdown('Teknisk systemtype', 'Infrastruktur', true),
+    );
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
       'patch3',

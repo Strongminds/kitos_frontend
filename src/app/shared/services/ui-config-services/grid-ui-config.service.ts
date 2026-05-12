@@ -64,6 +64,7 @@ import {
   selectITSystemUsageEnableCatalogArchiveDuty,
   selectITSystemUsageEnableCatalogArchiveDutyComment,
   selectITSystemUsageEnableContainsAITechnology,
+  selectITSystemUsageEnableCriticalityFieldsLastChanged,
   selectITSystemUsageEnableDataClassification,
   selectITSystemUsageEnableDataProcessing,
   selectITSystemUsageEnableDescription,
@@ -71,7 +72,6 @@ import {
   selectITSystemUsageEnabledSystemId,
   selectITSystemUsageEnableFrontPageUsagePeriod,
   selectITSystemUsageEnableGdprConductedRiskAssessment,
-  selectITSystemUsageEnableGdprCriticality,
   selectITSystemUsageEnableGdprDataTypes,
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprDpiaConducted,
@@ -81,6 +81,7 @@ import {
   selectITSystemUsageEnableGdprRetentionPeriod,
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
+  selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
   selectITSystemUsageEnableIsBusinessCritical,
@@ -93,6 +94,8 @@ import {
   selectITSystemUsageEnableOutgoingRelations,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
+  selectITSystemUsageEnableSystemUsageCriticalityLevel,
+  selectITSystemUsageEnableTechnicalSystemType,
   selectITSystemUsageEnableTabArchiving,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
@@ -307,6 +310,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableIsBusinessCritical)
         .pipe(shouldEnable([UsageFields.IsBusinessCritical])),
+      this.store
+        .select(selectITSystemUsageEnableCriticalityFieldsLastChanged)
+        .pipe(shouldEnable([UsageFields.CriticalityFieldsLastChanged])),
 
       //Contracts
       combineAND([
@@ -340,13 +346,19 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([UsageFields.PlannedRiskAssessmentDate])),
-      this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
+      this.store.select(selectITSystemUsageEnableGeneralPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
+      this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.ProcessingPurpose])),
       this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
       this.store
         .select(selectITSystemUsageEnableGdprDocumentation)
         .pipe(shouldEnable([UsageFields.LinkToDirectoryName])),
       this.store.select(selectITSystemUsageEnableGdprDpiaConducted).pipe(shouldEnable([UsageFields.DpiaConducted])),
-      this.store.select(selectITSystemUsageEnableGdprCriticality).pipe(shouldEnable([UsageFields.GdprCriticality])),
+      this.store
+        .select(selectITSystemUsageEnableSystemUsageCriticalityLevel)
+        .pipe(shouldEnable([UsageFields.SystemUsageCriticalityLevelUuid])),
+      this.store
+        .select(selectITSystemUsageEnableTechnicalSystemType)
+        .pipe(shouldEnable([UsageFields.TechnicalSystemTypeUuid])),
 
       //Organization
       this.store

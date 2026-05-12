@@ -19,8 +19,15 @@ export const ItSystemUsageUiBluePrint = {
         systemId: {
           text: $localize`System ID`,
         },
+        purpose: {
+          text: $localize`Systemets overordnede formål`,
+        },
         version: {
           text: $localize`Version`,
+        },
+        technicalSystemType: {
+          text: $localize`Teknisk systemtype`,
+          disableByDefault: true,
         },
         amountOfUsers: {
           text: $localize`Antal brugere`,
@@ -58,9 +65,22 @@ export const ItSystemUsageUiBluePrint = {
         },
         isSociallyCritical: {
           text: $localize`Samfundskritisk IT-system`,
+          disableByDefault: true,
         },
         isBusinessCritical: {
-          text: $localize`Forretningskritisk IT-System`,
+          text: $localize`Forretningskritisk IT-system`,
+        },
+        criticalityFieldsLastChanged: {
+          text: $localize`Systemkritikalitet sidst opdateret`,
+          disableByDefault: true,
+        },
+        systemUsageCriticalityLevel: {
+          text: $localize`Kritikalitet`,
+          disableByDefault: true,
+        },
+        criticalityLevelDocumentation: {
+          text: $localize`Reference for kritikalitetsvurdering`,
+          disableByDefault: true,
         },
       },
     },
@@ -83,8 +103,8 @@ export const ItSystemUsageUiBluePrint = {
     gdpr: {
       text: $localize`GDPR`,
       children: {
-        purpose: {
-          text: $localize`Systemets overordnede formål`,
+        processingPurpose: {
+          text: $localize`Behandlingsformål`,
         },
         hostedAt: {
           text: $localize`IT-Systemet driftes`,
@@ -115,10 +135,6 @@ export const ItSystemUsageUiBluePrint = {
         },
         retentionPeriod: {
           text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
-        },
-        gdprCriticality: {
-          text: $localize`Kritikalitet`,
-          disableByDefault: true,
         },
       },
     },
