@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIsDataProcessingAgreementRequiredChoice } from './isDataProcessingAgreementRequiredChoice';
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APITechnicalPrecautionChoice } from './technicalPrecautionChoice';
 import { APIDataSensitivityLevelChoice } from './dataSensitivityLevelChoice';
@@ -19,7 +20,7 @@ import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
 export interface APIGDPRWriteRequestDTO { 
-    purpose?: string | null;
+    processingPurpose?: string | null;
     hostedAt?: APIHostingChoice;
     directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels?: Array<APIDataSensitivityLevelChoice> | null;
@@ -44,5 +45,6 @@ export interface APIGDPRWriteRequestDTO {
     retentionPeriodDefined?: APIYesNoDontKnowChoice;
     nextDataRetentionEvaluationDate?: string | null;
     dataRetentionEvaluationFrequencyInMonths?: number | null;
+    isDataProcessingAgreementRequired?: APIIsDataProcessingAgreementRequiredChoice;
 }
 
