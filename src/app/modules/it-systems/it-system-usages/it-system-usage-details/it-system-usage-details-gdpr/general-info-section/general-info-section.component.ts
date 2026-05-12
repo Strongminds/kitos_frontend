@@ -21,6 +21,7 @@ import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors
 import {
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprHostedAt,
+  selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableGdprPurpose,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
@@ -75,6 +76,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
   public readonly hostedAtEnabled$ = this.store.select(selectITSystemUsageEnableGdprHostedAt);
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
+  public readonly isDataProcessingAgreementRequiredEnabled$ = this.store.select(selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired);
 
   constructor(
     private readonly store: Store,

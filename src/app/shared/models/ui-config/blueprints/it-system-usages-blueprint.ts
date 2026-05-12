@@ -132,6 +132,10 @@ export const ItSystemUsageUiBluePrint = {
         retentionPeriod: {
           text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
         },
+        isDataProcessingAgreementRequired: {
+          text: $localize`Kræver system databehandleraftale`,
+          disableByDefault: true,
+        },
       },
     },
     systemRoles: {

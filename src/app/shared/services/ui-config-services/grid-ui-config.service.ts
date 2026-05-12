@@ -76,6 +76,7 @@ import {
   selectITSystemUsageEnableGdprDocumentation,
   selectITSystemUsageEnableGdprDpiaConducted,
   selectITSystemUsageEnableGdprHostedAt,
+  selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableGdprRetentionPeriod,
@@ -355,6 +356,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableSystemUsageCriticalityLevel)
         .pipe(shouldEnable([UsageFields.SystemUsageCriticalityLevelUuid])),
+      this.store
+        .select(selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired)
+        .pipe(shouldEnable([UsageFields.IsDataProcessingAgreementRequired])),
 
       //Organization
       this.store

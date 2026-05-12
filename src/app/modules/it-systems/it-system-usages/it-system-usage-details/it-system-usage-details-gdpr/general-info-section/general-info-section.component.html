@@ -24,7 +24,7 @@
         [isDisabled]="disableDirectoryDocumentationControl"
       ></app-edit-url-section>
     }
-
+    @if (isDataProcessingAgreementRequiredEnabled$ | async) {
     <app-dropdown
       text="Kræver system databehandleraftale"
       i18n-text
@@ -33,8 +33,8 @@
       [data]="isDataProcessingAgreementRequiredOptions"
       (valueChange)="patchGdpr({ isDataProcessingAgreementRequired: $event })"
     >
-
     </app-dropdown>
+    }
     @if (hostedAtEnabled$ | async) {
       <app-dropdown
         text="IT-systemet driftes"
