@@ -84,7 +84,7 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     ExpirationDate: value.ExpirationDate,
     CriticalityName: value.CriticalityName,
     ResponsibleOrgUnitName: value.ResponsibleOrgUnitName,
-    SupplierName: addOptionalExpiredText(value.SupplierName, value.IsSupplierDisabled),
+    SupplierName: adaptSupplierName(value.SupplierName, value.SupplierCvr, value.IsSupplierDisabled),
     ContractSigner: value.ContractSigner,
     ContractTypeName: value.ContractTypeName,
     ContractTemplateName: value.ContractTemplateName,
@@ -129,4 +129,9 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
   };
+};
+
+const adaptSupplierName = (name: string, cvr: string | undefined, isDisabled: boolean) => {
+  const nameWithCvr = cvr ? `${name} (${cvr})` : name;
+  return addOptionalExpiredText(nameWithCvr, isDisabled);
 };
