@@ -87,7 +87,8 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
   };
 };
 
-const adaptBelongsToName = (name: string, cvr: string | undefined, isDisabled: boolean): string => {
+const adaptBelongsToName = (name: string | undefined, cvr: string | undefined, isDisabled: boolean): string => {
+  if (!name) return '';
   const nameWithCvr = cvr ? `${name} (${cvr})` : name;
   return addOptionalExpiredText(nameWithCvr, isDisabled);
 };

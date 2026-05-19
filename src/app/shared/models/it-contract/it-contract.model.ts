@@ -131,7 +131,8 @@ export const adaptITContract = (value: any): ITContract | undefined => {
   };
 };
 
-const adaptSupplierName = (name: string, cvr: string | undefined, isDisabled: boolean) => {
+const adaptSupplierName = (name: string | undefined, cvr: string | undefined, isDisabled: boolean) => {
+  if (!name) return '';
   const nameWithCvr = cvr ? `${name} (${cvr})` : name;
   return addOptionalExpiredText(nameWithCvr, isDisabled);
 };
