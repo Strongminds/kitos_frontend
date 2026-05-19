@@ -1,5 +1,5 @@
 import { AppPath } from '../../enums/app-path';
-import { entityWithUnavailableName } from '../../helpers/string.helpers';
+import { entityWithUnavailableName, organizationNameWithCvr } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -150,7 +150,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     LocalReferenceDocumentId: value.LocalReferenceDocumentId,
     SensitiveDataLevelsAsCsv: value.SensitiveDataLevelsAsCsv,
     MainContractSupplierName: value.MainContractSupplierName,
-    ItSystemRightsHolderName: adaptItSystemRightsHolderName(value),
+    ItSystemRightsHolderName: organizationNameWithCvr(value.ItSystemRightsHolderName, value.ItSystemRightsHolderCvr),
     ObjectOwnerName: value.ObjectOwnerName,
     LastChangedByName: value.LastChangedByName,
     LastChangedAt: value.LastChangedAt,
@@ -225,14 +225,6 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
   };
   return adaptedSystem;
 };
-
-function adaptItSystemRightsHolderName(value: any): string {
-  const rightsHolderName = value.ItSystemRightsHolderName;
-  if (!rightsHolderName) return '';
-
-  const rightsHolderCvr = value.ItSystemRightsHolderCvr;
-  return rightsHolderCvr ? `${rightsHolderName} (${rightsHolderCvr})` : rightsHolderName;
-}
 
 function mapContractStatusToSortOrder(status: string): number {
   // Map to numbers for consistent sort order: Inactive (0) < Active (1) < NoContract (2)

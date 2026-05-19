@@ -1,5 +1,5 @@
-import { addOptionalExpiredText } from '../../helpers/option-type.helper';
 import { formatProcurementPlan } from '../../helpers/procurement-plan.helpers';
+import { organizationNameWithCvrAndAvailability } from '../../helpers/string.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -84,7 +84,11 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     ExpirationDate: value.ExpirationDate,
     CriticalityName: value.CriticalityName,
     ResponsibleOrgUnitName: value.ResponsibleOrgUnitName,
-    SupplierName: adaptSupplierName(value.SupplierName, value.SupplierCvr, value.IsSupplierDisabled),
+    SupplierName: organizationNameWithCvrAndAvailability(
+      value.SupplierName,
+      value.SupplierCvr,
+      value.IsSupplierDisabled,
+    ),
     ContractSigner: value.ContractSigner,
     ContractTypeName: value.ContractTypeName,
     ContractTemplateName: value.ContractTemplateName,
@@ -129,10 +133,4 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
   };
-};
-
-const adaptSupplierName = (name: string | undefined, cvr: string | undefined, isDisabled: boolean) => {
-  if (!name) return '';
-  const nameWithCvr = cvr ? `${name} (${cvr})` : name;
-  return addOptionalExpiredText(nameWithCvr, isDisabled);
 };

@@ -1,5 +1,4 @@
-import { addOptionalExpiredText } from '../../helpers/option-type.helper';
-import { entityWithUnavailableName } from '../../helpers/string.helpers';
+import { entityWithUnavailableName, organizationNameWithCvrAndAvailability } from '../../helpers/string.helpers';
 import { AccessModifierChoice, mapAccessModifierEnumToAccessModifierChoice } from '../access-modifier.model';
 import { IdentityNamePair } from '../identity-name-pair.model';
 import {
@@ -77,7 +76,13 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     ArchiveDuty: mapArchiveDutyRecommendationChoice(value.ArchiveDuty),
     ArchiveDutyComment: value.ArchiveDutyComment,
     CanChangeUsageStatus: !isDisabled,
-    BelongsTo: { Name: adaptBelongsToName(value.BelongsTo?.Name, value.BelongsTo?.Cvr, value.BelongsTo?.Disabled) },
+    BelongsTo: {
+      Name: organizationNameWithCvrAndAvailability(
+        value.BelongsTo?.Name,
+        value.BelongsTo?.Cvr,
+        value.BelongsTo?.Disabled,
+      ),
+    },
     BusinessType: value.BusinessType,
     Usages: mappedUsages,
     UsageNames: mappedUsages.map((usage) => usage.name).join(', '),
@@ -85,10 +90,4 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     LegalDataProcessorName: value.LegalDataProcessorName,
     LicensingAndCodeModels: mapLicensingAndCodeModels(value.LicensingAndCodeModels),
   };
-};
-
-const adaptBelongsToName = (name: string | undefined, cvr: string | undefined, isDisabled: boolean): string => {
-  if (!name) return '';
-  const nameWithCvr = cvr ? `${name} (${cvr})` : name;
-  return addOptionalExpiredText(nameWithCvr, isDisabled);
 };
