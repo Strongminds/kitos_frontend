@@ -843,7 +843,7 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
 
   convertedString = convertedString.replace(
     /contains\(ItSystemRightsHolderName,([^)]+)\)/gi,
-    '(contains(ItSystemRightsHolderName,$1)  or contains(ItSystemRightsHolderCvr,$1))',
+    '(contains(ItSystemRightsHolderName,$1) or contains(ItSystemRightsHolderCvr,$1))',
   );
 
   systemRoles?.forEach((role) => {
