@@ -77,7 +77,7 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     ArchiveDuty: mapArchiveDutyRecommendationChoice(value.ArchiveDuty),
     ArchiveDutyComment: value.ArchiveDutyComment,
     CanChangeUsageStatus: !isDisabled,
-    BelongsTo: { Name: addOptionalExpiredText(value.BelongsTo?.Name, value.BelongsTo?.Disabled) },
+    BelongsTo: { Name: adaptBelongsToName(value.BelongsTo?.Name, value.BelongsTo?.Cvr, value.BelongsTo?.Disabled) },
     BusinessType: value.BusinessType,
     Usages: mappedUsages,
     UsageNames: mappedUsages.map((usage) => usage.name).join(', '),
@@ -85,4 +85,9 @@ export const adaptITSystem = (value: any, currentOrganizationUuid: string): ITSy
     LegalDataProcessorName: value.LegalDataProcessorName,
     LicensingAndCodeModels: mapLicensingAndCodeModels(value.LicensingAndCodeModels),
   };
+};
+
+const adaptBelongsToName = (name: string, cvr: string | undefined, isDisabled: boolean): string => {
+  const nameWithCvr = cvr ? `${name} (${cvr})` : name;
+  return addOptionalExpiredText(nameWithCvr, isDisabled);
 };
