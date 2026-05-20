@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { HttpClient, HttpContext, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Inject, Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
-import { ExcelService } from 'src/app/api/v1';
+import { LocalAdminExcelService } from 'src/app/api/v1';
 import { LocalAdminImportEntityType } from '../enums/local-admin-import-entity-type';
 
 export interface ExcelFile {
@@ -23,7 +23,7 @@ export class APIExcelService {
 
   constructor(
     private httpClient: HttpClient,
-    private apiService: ExcelService,
+    @Inject(LocalAdminExcelService) private apiService: LocalAdminExcelService,
   ) {
     this.basePath = this.apiService['configuration'].basePath ?? '';
     this.defaultHeaders = this.apiService['defaultHeaders'];

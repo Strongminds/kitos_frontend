@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -40,11 +41,12 @@ import {
   selectITSystemUsageEnableTabSystemRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { AsyncPipe } from '@angular/common';
 import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
-import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { ExportIconComponent } from '../../../../shared/components/icons/export-icon.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { ITSystemUsageDetailsComponentStore } from './it-system-usage-details.component-store';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -55,8 +57,10 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
     NavigationDrawerComponent,
     RouterOutlet,
     LoadingComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+    ExportIconComponent,
+  ],
+  providers: [ITSystemUsageDetailsComponentStore],
 })
 export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -188,6 +192,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     private actions$: Actions,
     private notificationService: NotificationService,
     private dialogOpenerService: DialogOpenerService,
+    private componentStore: ITSystemUsageDetailsComponentStore,
   ) {
     super();
   }
@@ -238,6 +243,14 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
 
     this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissionsSuccess());
     this.store.dispatch(ITSystemUsageActions.getITSystemUsageSuccess());
+  }
+
+  public exportToExcel() {
+    this.subscriptions.add(
+      this.itSystemUsageUuid$.pipe(first()).subscribe((systemUsageUuid) => {
+        this.componentStore.exportToExcel(systemUsageUuid);
+      }),
+    );
   }
 
   public showRemoveDialog() {
