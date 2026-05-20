@@ -7873,6 +7873,14 @@
         <source>Styret via lovgivning</source>
         <target state="new">Styret via lovgivning</target>
       </trans-unit>
+      <trans-unit id="697483343074377619" datatype="html">
+        <source>Link til risikovurdering</source>
+        <target state="new">Link til risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="2565200191881896388" datatype="html">
+        <source>Hvad viste den seneste risikovurdering</source>
+        <target state="new">Hvad viste den seneste risikovurdering</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

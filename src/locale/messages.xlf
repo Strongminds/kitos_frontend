@@ -6026,6 +6026,12 @@
       <trans-unit id="6959125562012930761" datatype="html">
         <source>Kræver system databehandleraftale</source>
       </trans-unit>
+      <trans-unit id="2565200191881896388" datatype="html">
+        <source>Hvad viste den seneste risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="697483343074377619" datatype="html">
+        <source>Link til risikovurdering</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
