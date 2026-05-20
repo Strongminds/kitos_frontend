@@ -511,6 +511,10 @@ export class GridUIConfigService {
         .pipe(shouldEnable([GdprFields.PLANNED_RISK_ASSESSMENT_DATE])),
 
       this.store
+        .select(selectITSystemUsageEnableGdprRiskAssessmentResult)
+        .pipe(shouldEnable([GdprFields.PRE_RISK_ASSESSMENT_NAME])),
+
+      this.store
         .select(selectITSystemUsageEnableGdprDpiaConducted)
         .pipe(shouldEnable([GdprFields.DPIA_NAME, GdprFields.DPIA_DATE])),
 
