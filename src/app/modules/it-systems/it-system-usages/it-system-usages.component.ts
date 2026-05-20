@@ -28,6 +28,7 @@ import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { isDataProcessingAgreementRequiredOptions } from 'src/app/shared/models/it-system-usage/gdpr/is-data-processing-agreement-required.model';
+import { riskAssessmentResultOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
@@ -517,6 +518,16 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       dataField: 'AssociatedContracts',
       hidden: true,
       persistId: 'itContracts',
+    },
+    {
+      field: GridFields.RiskAssessmentResult,
+      title: $localize`Hvad viste den seneste risikovurdering`,
+      section: GDPR_SECTION_NAME,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: riskAssessmentResultOptionsGrid,
+      hidden: true,
+      width: 350,
     },
     {
       field: GridFields.RiskAssessmentDate,

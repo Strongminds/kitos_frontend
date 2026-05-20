@@ -18,6 +18,7 @@ import {
   IsDataProcessingAgreementRequired,
   mapIsDataProcessingAgreementRequired,
 } from './gdpr/is-data-processing-agreement-required.model';
+import { mapGridRiskAssessmentEnum, RiskAssessmentResultGridOptions } from './gdpr/risk-assessment-result';
 
 export interface ITSystemUsage {
   //ngrx requires the id field to have lowercase 'id' name
@@ -79,6 +80,7 @@ export interface ITSystemUsage {
   Note: string;
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
+  RiskAssessmentResult: RiskAssessmentResultGridOptions | undefined;
   UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
@@ -209,6 +211,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     Note: value.Note,
     RiskAssessmentDate: value.RiskAssessmentDate,
     PlannedRiskAssessmentDate: value.PlannedRiskAssessmentDate,
+    RiskAssessmentResult: mapGridRiskAssessmentEnum(value.RiskAssessmentResult),
     UserCount: mapGridNumberOfExpectedUsers(value.UserCount),
     ItSystemCategoriesName: value.ItSystemCategoriesName,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
