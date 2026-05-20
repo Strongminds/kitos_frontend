@@ -1,4 +1,4 @@
-import { toCommaSeparatedString } from '../../helpers/array.helpers';
+import { fromCommaSeparatedString, toCommaSeparatedString } from '../../helpers/array.helpers';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -99,8 +99,8 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
 const formatOrganizationNamesAndCvrs = (names: string | undefined, cvrs: string | undefined): string => {
   if (!names) return '';
   if (!cvrs) return names;
-  const nameList = names.split(',').map((name) => name.trim());
-  const cvrList = cvrs.split(',').map((cvr) => cvr.trim());
+  const nameList = fromCommaSeparatedString(names);
+  const cvrList = fromCommaSeparatedString(cvrs);
   const namesWithOptionalCvrs = nameList.map((name, i) => (cvrList[i] ? `${name} (${cvrList[i]})` : name));
   return toCommaSeparatedString(namesWithOptionalCvrs);
 };
