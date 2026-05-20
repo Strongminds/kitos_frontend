@@ -527,7 +527,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       extraData: riskAssessmentResultOptionsGrid,
       hidden: true,
-      width: 350,
+      width: 330,
     },
     {
       field: GridFields.RiskAssessmentDate,

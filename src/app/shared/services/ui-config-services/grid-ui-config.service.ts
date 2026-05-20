@@ -80,6 +80,7 @@ import {
   selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableGdprPurpose,
   selectITSystemUsageEnableGdprRetentionPeriod,
+  selectITSystemUsageEnableGdprRiskAssessmentResult,
   selectITSystemUsageEnableGdprTechnicalPrecautions,
   selectITSystemUsageEnableGdprUserSupervision,
   selectITSystemUsageEnableGeneralPurpose,
@@ -347,6 +348,9 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([UsageFields.PlannedRiskAssessmentDate])),
+      this.store
+        .select(selectITSystemUsageEnableGdprRiskAssessmentResult)
+        .pipe(shouldEnable([UsageFields.RiskAssessmentResult])),
       this.store.select(selectITSystemUsageEnableGeneralPurpose).pipe(shouldEnable([UsageFields.GeneralPurpose])),
       this.store.select(selectITSystemUsageEnableGdprPurpose).pipe(shouldEnable([UsageFields.ProcessingPurpose])),
       this.store.select(selectITSystemUsageEnableGdprHostedAt).pipe(shouldEnable([UsageFields.HostedAt])),
