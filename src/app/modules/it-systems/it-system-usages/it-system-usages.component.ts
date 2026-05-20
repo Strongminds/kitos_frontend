@@ -412,7 +412,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.RiskSupervisionDocumentationName,
-      title: $localize`Risikovurdering`,
+      title: $localize`Link til risikovurdering`,
       idField: 'RiskSupervisionDocumentationUrl',
       section: GDPR_SECTION_NAME,
       style: 'title-link',
