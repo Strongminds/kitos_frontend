@@ -33,6 +33,7 @@ import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoBooleanOptions } from 'src/app/shared/models/yes-no-boolean-options.model';
+import { yesNoDontKnowIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-dont-know-irrelevant.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { yesNoPartiallyOptions } from 'src/app/shared/models/yes-no-partially.model';
@@ -549,6 +550,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       hidden: false,
       persistId: 'PlannedRiskAssessmentDate',
       defaultDateFilterOperator: 'lte',
+    },
+    {
+      field: GridFields.RiskAssessmentConducted,
+      title: $localize`Foretaget risikovurdering`,
+      section: GDPR_SECTION_NAME,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: yesNoDontKnowIrrelevantOptionsGrid,
+      hidden: true,
     },
     {
       field: GridFields.Note,

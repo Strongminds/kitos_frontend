@@ -344,7 +344,13 @@ export class GridUIConfigService {
         .pipe(shouldEnable([UsageFields.SensitiveDataLevelsAsCsv])),
       this.store
         .select(selectITSystemUsageEnableGdprConductedRiskAssessment)
-        .pipe(shouldEnable([UsageFields.RiskAssessmentDate, UsageFields.RiskSupervisionDocumentationName])),
+        .pipe(
+          shouldEnable([
+            UsageFields.RiskAssessmentDate,
+            UsageFields.RiskSupervisionDocumentationName,
+            UsageFields.RiskAssessmentConducted,
+          ]),
+        ),
       this.store
         .select(selectITSystemUsageEnableGdprPlannedRiskAssessmentDate)
         .pipe(shouldEnable([UsageFields.PlannedRiskAssessmentDate])),

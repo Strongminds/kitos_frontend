@@ -8,6 +8,11 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
+import {
+  mapFromCapitalizedStringToYesNoDontKnowIrrelevantEnum,
+  mapToYesNoDontKnowIrrelevantEnum,
+  YesNoDontKnowIrrelevantOption,
+} from '../yes-no-dont-know-irrelevant.model';
 import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
 import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
 import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
@@ -81,6 +86,7 @@ export interface ITSystemUsage {
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
   RiskAssessmentResult: RiskAssessmentResultGridOptions | undefined;
+  RiskAssessmentConducted: YesNoDontKnowIrrelevantOption | undefined;
   UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
@@ -169,6 +175,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ActiveArchivePeriodEndDate: value.ActiveArchivePeriodEndDate,
     RiskSupervisionDocumentationName: value.RiskSupervisionDocumentationName,
     RiskSupervisionDocumentationUrl: value.RiskSupervisionDocumentationUrl,
+    RiskAssessmentConducted: mapToYesNoDontKnowIrrelevantEnum(value.RiskAssessmentConducted),
     LinkToDirectoryName: value.LinkToDirectoryName,
     LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
