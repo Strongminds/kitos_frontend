@@ -41,29 +41,3 @@ export const mapToYesNoDontKnowIrrelevantEnum = (
 ): YesNoDontKnowIrrelevantOption | undefined => {
   return yesNoDontKnowIrrelevantOptions.find((option) => option.value === value);
 };
-
-export const mapFromCapitalizedStringToYesNoDontKnowIrrelevantEnum = (
-  value?: string,
-): YesNoDontKnowIrrelevantOption | undefined => {
-  const enumValue = fromCapitalizedString(value);
-  return yesNoDontKnowIrrelevantOptions.find((option) => option.value === enumValue);
-};
-
-function fromCapitalizedString(value?: string): YesNoDontKnowIrrelevantEnum {
-  switch (value) {
-    case 'YES':
-      return YesNoDontKnowIrrelevantEnum.Yes;
-    case 'NO':
-      return YesNoDontKnowIrrelevantEnum.No;
-    case 'DONTKNOW':
-      return YesNoDontKnowIrrelevantEnum.DontKnow;
-    case 'IRRELEVANT':
-      return YesNoDontKnowIrrelevantEnum.Irrelevant;
-    case null:
-    case undefined:
-    case 'UNDECIDED':
-      return YesNoDontKnowIrrelevantEnum.Undecided;
-    default:
-      throw new Error(`Unknown value for conversion into API yes/no/dont-know/irrelevant/undecided enum: ${value}`);
-  }
-}

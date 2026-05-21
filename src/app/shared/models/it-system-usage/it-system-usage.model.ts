@@ -9,7 +9,6 @@ import {
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
 import {
-  mapFromCapitalizedStringToYesNoDontKnowIrrelevantEnum,
   mapToYesNoDontKnowIrrelevantEnum,
   YesNoDontKnowIrrelevantOption,
 } from '../yes-no-dont-know-irrelevant.model';
