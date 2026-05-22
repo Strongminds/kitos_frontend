@@ -24,6 +24,7 @@ import { TrashcanIconComponent } from '../../../../shared/components/icons/trash
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { CreateDprSystemUsageComponent } from './create-dpr-system-usage/create-dpr-system-usage.component';
+import { selectITSystemUsageEnableStatus } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-data-processing-it-systems',
@@ -47,6 +48,7 @@ import { CreateDprSystemUsageComponent } from './create-dpr-system-usage/create-
 export class DataProcessingItSystemsComponent extends BaseComponent {
   public readonly systemUsages$ = this.store.select(selectDataProcessingSystems).pipe(filterNullish());
   public readonly anySystemUsages$ = this.systemUsages$.pipe(matchNonEmptyArray());
+  public readonly systemUsageStatusEnabled$ = this.store.select(selectITSystemUsageEnableStatus);
 
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
