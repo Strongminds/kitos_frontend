@@ -373,6 +373,7 @@ model/roleRecipientResponseDTO.ts
 model/roleRecipientWriteRequestDTO.ts
 model/scheduledNotificationWriteRequestDTO.ts
 model/sentNotificationResponseDTO.ts
+model/shallowItSystemUsageResponseDTO.ts
 model/shallowOrganizationResponseDTO.ts
 model/simpleConflictResponseDTO.ts
 model/simpleLinkDTO.ts
