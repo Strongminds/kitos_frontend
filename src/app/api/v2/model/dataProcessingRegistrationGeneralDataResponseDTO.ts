@@ -28,6 +28,7 @@ export interface APIDataProcessingRegistrationGeneralDataResponseDTO {
     dataProcessors: Array<APIShallowOrganizationResponseDTO>;
     hasSubDataProcessors?: APIYesNoUndecidedChoice;
     subDataProcessors: Array<APIDataProcessorRegistrationSubDataProcessorResponseDTO>;
+    enforceInvalidity?: boolean | null;
     valid: boolean;
     mainContract?: APIIdentityNamePairResponseDTO;
     associatedContracts?: Array<APIIdentityNamePairResponseDTO> | null;
