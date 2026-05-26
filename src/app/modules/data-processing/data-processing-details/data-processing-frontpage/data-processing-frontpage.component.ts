@@ -97,7 +97,12 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly dprInactiveMessage$ = this.dataProcessing$.pipe(
     map((dpr) => {
       if (dpr?.general.valid) return undefined;
-      const reasonsForInactivity = [dpr?.general.valid ? undefined : $localize`Den markerede kontrakt er inaktiv`];
+
+      const reasonsForInactivity = [
+        dpr?.general.enforceInvalidity
+          ? $localize`Der er gennemtvunget inaktivitet`
+          : $localize`Den markerede kontrakt er inaktiv`,
+      ];
 
       return $localize`Følgende gør databehandlingen inaktiv: ` + '\n' + toBulletPoints(reasonsForInactivity);
     }),
