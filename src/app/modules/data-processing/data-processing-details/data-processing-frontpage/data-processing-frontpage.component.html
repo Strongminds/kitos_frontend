@@ -112,6 +112,17 @@
           (valueChange)="patchFrontPage({ general: { isAgreementConcludedRemark: $event } })"
         ></app-textarea>
       }
+
+      @if (statusEnabled$ | async) {
+        <app-checkbox
+          text="Gennemtving deaktivering"
+          i18n-text
+          labelPosition="after"
+          [formGroup]="frontpageFormGroup"
+          formName="enforceInvalidity"
+          (valueChange)="patchFrontPage({ general: { enforceInvalidity: $event } })"
+        ></app-checkbox>
+      }
     </app-form-grid>
   </app-card>
 

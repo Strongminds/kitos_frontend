@@ -39,6 +39,7 @@ import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-stor
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
 import { CardComponent } from '../../../../shared/components/card/card.component';
+import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
 import { DatePickerComponent } from '../../../../shared/components/datepicker/datepicker.component';
 import { DropdownComponent } from '../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
@@ -63,6 +64,7 @@ import { ThirdCountriesTableComponent } from './third-countries-table/third-coun
     FormsModule,
     ReactiveFormsModule,
     TextBoxComponent,
+    CheckboxComponent,
     DropdownComponent,
     TextAreaComponent,
     DatePickerComponent,
@@ -113,6 +115,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     agreementConclusionDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     agreementRemarks: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     responsibleOrgUnit: new FormControl<TreeNodeModel | undefined>({ value: undefined, disabled: true }),
+    enforceInvalidity: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly transferBasisFormGroup = new FormGroup({
@@ -159,6 +162,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             responsibleOrgUnit: responsibleOrgUnit
               ? createIdentityPairNode(responsibleOrgUnit.name, responsibleOrgUnit.uuid)
               : undefined,
+            enforceInvalidity: dpr.general.enforceInvalidity,
           });
 
           this.transferBasisFormGroup.patchValue({
@@ -174,9 +178,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             this.transferBasisFormGroup.disable();
           }
 
-          this.frontpageFormGroup.controls.status.disable();
-          this.frontpageFormGroup.controls.lastChangedAt.disable();
-          this.frontpageFormGroup.controls.lastChangedBy.disable();
+          this.disableReadOnlyFormControls();
         }),
     );
 
@@ -189,6 +191,12 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
         }
       }),
     );
+  }
+
+  private disableReadOnlyFormControls() {
+    this.frontpageFormGroup.controls.status.disable();
+    this.frontpageFormGroup.controls.lastChangedAt.disable();
+    this.frontpageFormGroup.controls.lastChangedBy.disable();
   }
 
   public patchFrontPage(
