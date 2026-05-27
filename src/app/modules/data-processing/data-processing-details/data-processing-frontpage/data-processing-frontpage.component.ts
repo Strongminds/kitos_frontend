@@ -3,7 +3,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIUpdateDataProcessingRegistrationRequestDTO } from 'src/app/api/v2';
+import {
+  APIDataProcessingRegistrationValidationErrorChoice,
+  APIIdentityNamePairResponseDTO,
+  APIUpdateDataProcessingRegistrationRequestDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
@@ -96,13 +100,15 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly dataProcessing$ = this.store.select(selectDataProcessing);
   public readonly dprInactiveMessage$ = this.dataProcessing$.pipe(
     map((dpr) => {
-      if (dpr?.general.validity.valid) return undefined;
+      const validity = dpr?.general.validity;
+      if (validity?.valid) return undefined;
 
-      const reasonsForInactivity = [
-        dpr?.general.validity.enforceInvalidity
-          ? $localize`Der er gennemtvunget inaktivitet`
-          : $localize`Den markerede kontrakt er inaktiv`,
-      ];
+      const reasonsForInactivity = [];
+      if (validity?.enforceInvalidity) reasonsForInactivity.push($localize`Der er gennemtvunget inaktivitet`);
+      if (
+        validity?.validationErrors?.includes(APIDataProcessingRegistrationValidationErrorChoice.MainContractNotActive)
+      )
+        reasonsForInactivity.push($localize`Den markerede kontrakt er inaktiv`);
 
       return $localize`Følgende gør databehandlingen inaktiv: ` + '\n' + toBulletPoints(reasonsForInactivity);
     }),
