@@ -283,6 +283,20 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       persistId: 'klename',
     },
     {
+      field: GridFields.LocalKleIdsAsCsv,
+      title: $localize`Lokal KLE ID`,
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'localTaskKey',
+    },
+    {
+      field: GridFields.LocalKleNamesAsCsv,
+      title: $localize`Lokal KLE navn`,
+      section: this.systemSectionName,
+      hidden: true,
+      persistId: 'localKleName',
+    },
+    {
       field: GridFields.LocalReferenceTitle,
       idField: 'LocalReferenceUrl',
       title: $localize`Lokal Reference`,
