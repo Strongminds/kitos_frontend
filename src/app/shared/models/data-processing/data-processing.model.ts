@@ -24,6 +24,7 @@ export interface DataProcessingRegistration {
   MainReferenceUserAssignedId: string;
   SystemNamesAsCsv: string;
   SystemUuidsAsCsv: string;
+  SystemValiditiesAsCsv: string;
   DataProcessorNamesAsCsv: string;
   SubDataProcessorNamesAsCsv: string;
   TransferToInsecureThirdCountries: TransferToInsecureThirdCountries | undefined;
@@ -62,7 +63,7 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     MainReferenceTitle: value.MainReferenceTitle,
     MainReferenceUrl: value.MainReferenceUrl,
     MainReferenceUserAssignedId: value.MainReferenceUserAssignedId,
-    SystemNamesAsCsv: value.SystemNamesAsCsv,
+    SystemNamesAsCsv: formatSystemNamesAndValidities(value.SystemNamesAsCsv, value.SystemValiditiesAsCsv),
     SystemUuidsAsCsv: value.SystemUuidsAsCsv,
     DataProcessorNamesAsCsv: formatOrganizationNamesAndCvrs(
       value.DataProcessorNamesAsCsv,
@@ -95,6 +96,15 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     ResponsibleOrgUnitUuid: value.ResponsibleOrgUnitUuid,
   };
 };
+
+const formatSystemNamesAndValidities = (names: string | undefined, validities: string | undefined): string => {
+  if (!names) return '';
+  if (!validities) return names;
+  const nameList = fromCommaSeparatedString(names);
+  const validityList = fromCommaSeparatedString(validities);
+  const namesWithOptionalValidities = nameList.map((name, i) => (validityList[i] ? `${name} (${validityList[i]})` : name));
+  return toCommaSeparatedString(namesWithOptionalValidities);
+}
 
 const formatOrganizationNamesAndCvrs = (names: string | undefined, cvrs: string | undefined): string => {
   if (!names) return '';
