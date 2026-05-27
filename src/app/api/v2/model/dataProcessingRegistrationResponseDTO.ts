@@ -15,7 +15,6 @@ import { APIDataProcessingRegistrationGeneralDataResponseDTO } from './dataProce
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 import { APIDataProcessingRegistrationOversightResponseDTO } from './dataProcessingRegistrationOversightResponseDTO';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
-import { APIShallowItSystemUsageResponseDTO } from './shallowItSystemUsageResponseDTO';
 
 
 export interface APIDataProcessingRegistrationResponseDTO { 
@@ -26,7 +25,7 @@ export interface APIDataProcessingRegistrationResponseDTO {
     lastModifiedBy: APIIdentityNamePairResponseDTO;
     organizationContext: APIShallowOrganizationResponseDTO;
     general: APIDataProcessingRegistrationGeneralDataResponseDTO;
-    systemUsages: Array<APIShallowItSystemUsageResponseDTO>;
+    systemUsages: Array<APIIdentityNamePairResponseDTO>;
     oversight: APIDataProcessingRegistrationOversightResponseDTO;
     roles: Array<APIRoleAssignmentResponseDTO>;
     externalReferences: Array<APIExternalReferenceDataResponseDTO>;

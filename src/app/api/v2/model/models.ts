@@ -235,7 +235,6 @@ export * from './roleRecipientResponseDTO';
 export * from './roleRecipientWriteRequestDTO';
 export * from './scheduledNotificationWriteRequestDTO';
 export * from './sentNotificationResponseDTO';
-export * from './shallowItSystemUsageResponseDTO';
 export * from './shallowOrganizationResponseDTO';
 export * from './simpleConflictResponseDTO';
 export * from './simpleLinkDTO';
