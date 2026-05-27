@@ -96,10 +96,10 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly dataProcessing$ = this.store.select(selectDataProcessing);
   public readonly dprInactiveMessage$ = this.dataProcessing$.pipe(
     map((dpr) => {
-      if (dpr?.general.valid) return undefined;
+      if (dpr?.general.validity.valid) return undefined;
 
       const reasonsForInactivity = [
-        dpr?.general.enforceInvalidity
+        dpr?.general.validity.enforceInvalidity
           ? $localize`Der er gennemtvunget inaktivitet`
           : $localize`Den markerede kontrakt er inaktiv`,
       ];
@@ -156,7 +156,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
           const responsibleOrgUnit = dpr.general.responsibleOrganizationUnit;
           this.frontpageFormGroup.patchValue({
             name: dpr.name,
-            status: dpr.general.valid ? `Aktiv` : `Inaktiv`,
+            status: dpr.general.validity.valid ? `Aktiv` : `Inaktiv`,
             lastChangedBy: dpr.lastModifiedBy.name,
             lastChangedAt: optionalNewDate(dpr.lastModified),
             dataResponsible: dpr.general.dataResponsible,
@@ -167,7 +167,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
             responsibleOrgUnit: responsibleOrgUnit
               ? createIdentityPairNode(responsibleOrgUnit.name, responsibleOrgUnit.uuid)
               : undefined,
-            enforceInvalidity: dpr.general.enforceInvalidity,
+            enforceInvalidity: dpr.general.validity.enforceInvalidity,
           });
 
           this.transferBasisFormGroup.patchValue({
