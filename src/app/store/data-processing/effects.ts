@@ -718,6 +718,10 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       /contains\(SubDataProcessorNamesAsCsv,([^)]+)\)/gi,
       '(contains(SubDataProcessorNamesAsCsv,$1) or contains(SubDataProcessorCvrsAsCsv,$1))',
     )
+    .replace(
+      /contains\(SystemNamesAsCsv,([^)]+)\)/gi,
+      '(contains(SystemNamesAsCsv,$1) or contains(SystemValiditiesAsCsv,$1))',
+    )
     .replace(/ResponsibleOrgUnitName eq '([\w-]+)'/, 'ResponsibleOrgUnitUuid eq $1');
 
   return fixedOdataString;
