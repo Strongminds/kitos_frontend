@@ -98,7 +98,7 @@
     "@angular/build": "^20.3.24",
     "@angular/cli": "~20.3.24",
     "@angular/compiler-cli": "^20.3.21",
-    "@cypress/code-coverage": "^3.12.20",
+    "@cypress/code-coverage": "^4.0.3",
     "@cypress/schematic": "4.1.4",
     "@istanbuljs/nyc-config-typescript": "^1.0.2",
     "@openapitools/openapi-generator-cli": "^2.31.1",
