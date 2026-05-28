@@ -201,7 +201,9 @@ model/dataProcessingRegistrationGeneralDataWriteRequestDTO.ts
 model/dataProcessingRegistrationOversightResponseDTO.ts
 model/dataProcessingRegistrationOversightWriteRequestDTO.ts
 model/dataProcessingRegistrationResponseDTO.ts
+model/dataProcessingRegistrationValidationErrorChoice.ts
 model/dataProcessingRegistrationWriteRequestDTO.ts
+model/dataProcessingResgistrationValidityDTO.ts
 model/dataProcessorRegistrationSubDataProcessorResponseDTO.ts
 model/dataProcessorRegistrationSubDataProcessorWriteRequestDTO.ts
 model/dataProtectionAdvisorRequestDTO.ts
@@ -419,6 +421,7 @@ model/userWithCrossOrganizationalRightsResponseDTO.ts
 model/userWithOrganizationResponseDTO.ts
 model/yearSegmentChoice.ts
 model/yesNoDontKnowChoice.ts
+model/yesNoDontKnowIrrelevantChoice.ts
 model/yesNoIrrelevantChoice.ts
 model/yesNoPartiallyChoice.ts
 model/yesNoUndecidedChoice.ts
