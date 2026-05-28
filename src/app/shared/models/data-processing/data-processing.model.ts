@@ -24,7 +24,6 @@ export interface DataProcessingRegistration {
   MainReferenceUserAssignedId: string;
   SystemNamesAsCsv: string;
   SystemUuidsAsCsv: string;
-  SystemValiditiesAsCsv: string;
   DataProcessorNamesAsCsv: string;
   SubDataProcessorNamesAsCsv: string;
   TransferToInsecureThirdCountries: TransferToInsecureThirdCountries | undefined;
@@ -102,9 +101,11 @@ const formatSystemNamesAndValidities = (names: string | undefined, validities: s
   if (!validities) return names;
   const nameList = fromCommaSeparatedString(names);
   const validityList = fromCommaSeparatedString(validities);
-  const namesWithOptionalValidities = nameList.map((name, i) => (validityList[i] ? `${name} (${validityList[i]})` : name));
+  const namesWithOptionalValidities = nameList.map((name, i) =>
+    validityList[i] ? `${name} (${validityList[i]})` : name,
+  );
   return toCommaSeparatedString(namesWithOptionalValidities);
-}
+};
 
 const formatOrganizationNamesAndCvrs = (names: string | undefined, cvrs: string | undefined): string => {
   if (!names) return '';
