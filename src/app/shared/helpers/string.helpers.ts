@@ -1,4 +1,5 @@
 import { SPACE_CHARACTER_REGEX } from '../constants/regex-constants';
+import { fromCommaSeparatedString, toCommaSeparatedString } from './array.helpers';
 import { addOptionalExpiredText } from './option-type.helper';
 
 export function isEmptyOrUndefined(s: string | undefined) {
@@ -33,3 +34,19 @@ export function organizationNameWithCvrAndAvailability(
   const nameWithCvr = organizationNameWithCvr(name, cvr);
   return addOptionalExpiredText(nameWithCvr, isDisabled);
 }
+
+export const formatNamesAndAttributesFromCsv = (
+  namesAsCsv: string | undefined,
+  attributesAsCsv: string | undefined,
+): string => {
+  if (!namesAsCsv) return '';
+  if (!attributesAsCsv) return namesAsCsv;
+
+  const nameList = fromCommaSeparatedString(namesAsCsv);
+  const attributeList = fromCommaSeparatedString(attributesAsCsv);
+  const namesWithOptionalAttributes = nameList.map((name, i) =>
+    attributeList[i] ? `${name} (${attributeList[i]})` : name,
+  );
+
+  return toCommaSeparatedString(namesWithOptionalAttributes);
+};
