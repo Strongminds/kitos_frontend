@@ -19,6 +19,7 @@ import {
 } from 'src/app/api/v2';
 import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
+import { fromOneToTwoContains } from 'src/app/shared/helpers/odata.helpers';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -709,20 +710,13 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     .replace(
       /IsOversightCompleted eq 'Undecided'/,
       "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)",
-    )
-    .replace(
-      /contains\(DataProcessorNamesAsCsv,([^)]+)\)/gi,
-      '(contains(DataProcessorNamesAsCsv,$1) or contains(DataProcessorCvrsAsCsv,$1))',
-    )
-    .replace(
-      /contains\(SubDataProcessorNamesAsCsv,([^)]+)\)/gi,
-      '(contains(SubDataProcessorNamesAsCsv,$1) or contains(SubDataProcessorCvrsAsCsv,$1))',
-    )
-    .replace(
-      /contains\(SystemNamesAsCsv,([^)]+)\)/gi,
-      '(contains(SystemNamesAsCsv,$1) or contains(SystemValiditiesAsCsv,$1))',
-    )
-    .replace(/ResponsibleOrgUnitName eq '([\w-]+)'/, 'ResponsibleOrgUnitUuid eq $1');
+    );
+  fixedOdataString = fromOneToTwoContains(fixedOdataString, 'DataProcessorNamesAsCsv', 'DataProcessorCvrsAsCsv');
+  fixedOdataString = fromOneToTwoContains(fixedOdataString, 'SubDataProcessorNamesAsCsv', 'SubDataProcessorCvrsAsCsv');
+  fixedOdataString = fromOneToTwoContains(fixedOdataString, 'SystemNamesAsCsv', 'SystemValiditiesAsCsv').replace(
+    /ResponsibleOrgUnitName eq '([\w-]+)'/,
+    'ResponsibleOrgUnitUuid eq $1',
+  );
 
   return fixedOdataString;
 }
