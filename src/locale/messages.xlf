@@ -6041,6 +6041,12 @@
       <trans-unit id="697483343074377619" datatype="html">
         <source>Link til risikovurdering</source>
       </trans-unit>
+      <trans-unit id="4971147359373783437" datatype="html">
+        <source>Gennemtving deaktivering</source>
+      </trans-unit>
+      <trans-unit id="9001377840803074775" datatype="html">
+        <source>Der er gennemtvunget inaktivitet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
