@@ -7877,13 +7877,13 @@
         <source>Hvert tredje år</source>
         <target state="new">Hvert tredje år</target>
       </trans-unit>
-      <trans-unit id="220972720197890421" datatype="html">
-        <source>Lokal KLE ID</source>
-        <target state="new">Lokal KLE ID</target>
+      <trans-unit id="9023620029886781717" datatype="html">
+        <source>Lokale KLE ID</source>
+        <target state="new">Lokale KLE ID</target>
       </trans-unit>
-      <trans-unit id="5720943859623774215" datatype="html">
-        <source>Lokal KLE navn</source>
-        <target state="new">Lokal KLE navn</target>
+      <trans-unit id="2745585017282963528" datatype="html">
+        <source>Lokale KLE navn</source>
+        <target state="new">Lokale KLE navn</target>
       </trans-unit>
       <trans-unit id="697483343074377619" datatype="html">
         <source>Link til risikovurdering</source>
