@@ -38,15 +38,21 @@ export function organizationNameWithCvrAndAvailability(
 export const formatNamesAndAttributesFromCsv = (
   namesAsCsv: string | undefined,
   attributesAsCsv: string | undefined,
+  addParenthesesForAttributes = true,
 ): string => {
   if (!namesAsCsv) return '';
   if (!attributesAsCsv) return namesAsCsv;
 
   const nameList = fromCommaSeparatedString(namesAsCsv);
   const attributeList = fromCommaSeparatedString(attributesAsCsv);
-  const namesWithOptionalAttributes = nameList.map((name, i) =>
-    attributeList[i] ? `${name} (${attributeList[i]})` : name,
-  );
+  const namesWithOptionalAttributes = nameList.map((name, i) => {
+    const attr = attributeList[i];
+    if (attr) {
+      const formattedAttr = addParenthesesForAttributes ? `(${attr})` : `${attr}`;
+      return `${name} ${formattedAttr}`;
+    }
+    return name;
+  });
 
   return toCommaSeparatedString(namesWithOptionalAttributes);
 };

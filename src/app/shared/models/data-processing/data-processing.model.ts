@@ -62,7 +62,7 @@ export const adaptDataProcessingRegistration = (value: any): DataProcessingRegis
     MainReferenceTitle: value.MainReferenceTitle,
     MainReferenceUrl: value.MainReferenceUrl,
     MainReferenceUserAssignedId: value.MainReferenceUserAssignedId,
-    SystemNamesAsCsv: formatNamesAndAttributesFromCsv(value.SystemNamesAsCsv, value.SystemValiditiesAsCsv),
+    SystemNamesAsCsv: formatNamesAndAttributesFromCsv(value.SystemNamesAsCsv, value.SystemValiditiesAsCsv, false),
     SystemUuidsAsCsv: value.SystemUuidsAsCsv,
     DataProcessorNamesAsCsv: formatNamesAndAttributesFromCsv(
       value.DataProcessorNamesAsCsv,
