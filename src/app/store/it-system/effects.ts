@@ -11,6 +11,7 @@ import {
   castContainsFieldToString,
   replaceQueryByMultiplePropertyContains,
 } from 'src/app/shared/helpers/odata-query.helpers';
+import { fromOneToTwoContains } from 'src/app/shared/helpers/odata.helpers';
 import { adaptITSystem } from 'src/app/shared/models/it-system/it-system.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -292,10 +293,7 @@ function applyQueryFixes(odataString: string): string {
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'Uuid');
   fixedOdataString = castContainsFieldToString(fixedOdataString, 'ExternalUuid');
 
-  fixedOdataString = fixedOdataString.replace(
-    /contains\(BelongsTo\/Name,([^)]+)\)/gi,
-    '(contains(BelongsTo/Name,$1) or contains(BelongsTo/Cvr,$1))',
-  );
+  fixedOdataString = fromOneToTwoContains(fixedOdataString, 'BelongsTo/Name', 'BelongsTo/Cvr');
 
   const lastChangedByUserSearchedProperties = ['Name', 'LastName'];
   fixedOdataString = replaceQueryByMultiplePropertyContains(
