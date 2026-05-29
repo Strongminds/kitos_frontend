@@ -285,14 +285,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.LocalKleIdsAsCsv,
-      title: $localize`Lokal KLE ID`,
+      title: $localize`Lokale KLE ID`,
       section: KLE_SECTION_NAME,
       hidden: true,
       persistId: 'localTaskKey',
     },
     {
       field: GridFields.LocalKleNamesAsCsv,
-      title: $localize`Lokal KLE navn`,
+      title: $localize`Lokale KLE navn`,
       section: KLE_SECTION_NAME,
       hidden: true,
       persistId: 'localKleName',
