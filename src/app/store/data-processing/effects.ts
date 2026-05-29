@@ -19,7 +19,7 @@ import {
 } from 'src/app/api/v2';
 import { DATA_PROCESSING_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
-import { fromOneToTwoContains } from 'src/app/shared/helpers/odata.helpers';
+import { addSecondaryContainsField } from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptDataProcessingRegistration } from 'src/app/shared/models/data-processing/data-processing.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -711,9 +711,9 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       /IsOversightCompleted eq 'Undecided'/,
       "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)",
     );
-  fixedOdataString = fromOneToTwoContains(fixedOdataString, 'DataProcessorNamesAsCsv', 'DataProcessorCvrsAsCsv');
-  fixedOdataString = fromOneToTwoContains(fixedOdataString, 'SubDataProcessorNamesAsCsv', 'SubDataProcessorCvrsAsCsv');
-  fixedOdataString = fromOneToTwoContains(fixedOdataString, 'SystemNamesAsCsv', 'SystemValiditiesAsCsv').replace(
+  fixedOdataString = addSecondaryContainsField(fixedOdataString, 'DataProcessorNamesAsCsv', 'DataProcessorCvrsAsCsv');
+  fixedOdataString = addSecondaryContainsField(fixedOdataString, 'SubDataProcessorNamesAsCsv', 'SubDataProcessorCvrsAsCsv');
+  fixedOdataString = addSecondaryContainsField(fixedOdataString, 'SystemNamesAsCsv', 'SystemValiditiesAsCsv').replace(
     /ResponsibleOrgUnitName eq '([\w-]+)'/,
     'ResponsibleOrgUnitUuid eq $1',
   );
