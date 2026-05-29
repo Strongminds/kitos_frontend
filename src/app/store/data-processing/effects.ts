@@ -429,7 +429,7 @@ export class DataProcessingEffects {
         return this.externalReferencesApiService
           .addExternalReference<APIDataProcessingRegistrationResponseDTO>(
             newExternalReference.externalReference,
-            externalReferences,
+            externalReferences ?? [],
             dprUuid,
             'data-processing-registration',
           )
@@ -452,7 +452,7 @@ export class DataProcessingEffects {
         return this.externalReferencesApiService
           .editExternalReference<APIDataProcessingRegistrationResponseDTO>(
             editData,
-            externalReferences,
+            externalReferences ?? [],
             dprUuid,
             'data-processing-registration',
           )
@@ -475,7 +475,7 @@ export class DataProcessingEffects {
         return this.externalReferencesApiService
           .deleteExternalReference<APIDataProcessingRegistrationResponseDTO>(
             referenceUuid.referenceUuid,
-            externalReferences,
+            externalReferences ?? [],
             dprUuid,
             'data-processing-registration',
           )
@@ -712,7 +712,11 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
       "(IsOversightCompleted eq 'Undecided' or IsOversightCompleted eq null)",
     );
   fixedOdataString = addSecondaryContainsField(fixedOdataString, 'DataProcessorNamesAsCsv', 'DataProcessorCvrsAsCsv');
-  fixedOdataString = addSecondaryContainsField(fixedOdataString, 'SubDataProcessorNamesAsCsv', 'SubDataProcessorCvrsAsCsv');
+  fixedOdataString = addSecondaryContainsField(
+    fixedOdataString,
+    'SubDataProcessorNamesAsCsv',
+    'SubDataProcessorCvrsAsCsv',
+  );
   fixedOdataString = addSecondaryContainsField(fixedOdataString, 'SystemNamesAsCsv', 'SystemValiditiesAsCsv').replace(
     /ResponsibleOrgUnitName eq '([\w-]+)'/,
     'ResponsibleOrgUnitUuid eq $1',
