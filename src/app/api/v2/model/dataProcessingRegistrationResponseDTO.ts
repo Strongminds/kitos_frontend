@@ -19,16 +19,16 @@ import { APIShallowItSystemUsageResponseDTO } from './shallowItSystemUsageRespon
 
 
 export interface APIDataProcessingRegistrationResponseDTO { 
-    name: string;
+    name: string | null;
     uuid: string;
     createdBy: APIIdentityNamePairResponseDTO;
     lastModified: string;
     lastModifiedBy: APIIdentityNamePairResponseDTO;
     organizationContext: APIShallowOrganizationResponseDTO;
     general: APIDataProcessingRegistrationGeneralDataResponseDTO;
-    systemUsages: Array<APIShallowItSystemUsageResponseDTO>;
+    systemUsages: Array<APIShallowItSystemUsageResponseDTO> | null;
     oversight: APIDataProcessingRegistrationOversightResponseDTO;
-    roles: Array<APIRoleAssignmentResponseDTO>;
-    externalReferences: Array<APIExternalReferenceDataResponseDTO>;
+    roles: Array<APIRoleAssignmentResponseDTO> | null;
+    externalReferences: Array<APIExternalReferenceDataResponseDTO> | null;
 }
 

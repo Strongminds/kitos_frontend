@@ -65,6 +65,7 @@ export * from './dataProcessingRegistrationOversightResponseDTO';
 export * from './dataProcessingRegistrationOversightWriteRequestDTO';
 export * from './dataProcessingRegistrationResponseDTO';
 export * from './dataProcessingRegistrationValidationErrorChoice';
+export * from './dataProcessingRegistrationValidityDTO';
 export * from './dataProcessingRegistrationWriteRequestDTO';
 export * from './dataProcessingResgistrationValidityDTO';
 export * from './dataProcessorRegistrationSubDataProcessorResponseDTO';
