@@ -24,12 +24,14 @@
               </td>
               <td>
                 <app-content-space-between>
-                  @if (systemUsageStatusEnabled$ | async){
-                    <app-status-chip
-                      type="it-system-usage"
-                      [value]="systemUsage.valid"
-                  ></app-status-chip>
-                  }
+                  <div>
+                    @if (systemUsageStatusEnabled$ | async){
+                      <app-status-chip
+                        type="it-system-usage"
+                        [value]="systemUsage.valid"
+                      ></app-status-chip>
+                    }
+                  </div>
                   @if ((hasModifyPermissions$ | async) === true) {
                     <app-icon-button
                       (buttonClick)="onDeleteSystem(systemUsage.uuid)"
