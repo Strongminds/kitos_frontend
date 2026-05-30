@@ -10,7 +10,9 @@
       <app-native-table>
         <thead>
           <th i18n>Navn</th>
+        @if (systemUsageStatusEnabled$ | async){
           <th i18n>Status</th>
+        }
         </thead>
         <tbody>
           @for (systemUsage of systemUsages$ | async; track systemUsage) {
