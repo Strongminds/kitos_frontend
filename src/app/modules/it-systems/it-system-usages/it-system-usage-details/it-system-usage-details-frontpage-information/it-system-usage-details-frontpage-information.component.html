@@ -40,15 +40,15 @@
     }
 
     @if (technicalSystemTypeEnabled$ | async) {
-      <app-dropdown
+      <app-multi-select-dropdown
         text="Teknisk systemtype"
         i18n-text
-        valueField="uuid"
-        [formGroup]="itSystemInformationForm"
-        formName="technicalSystemType"
-        [data]="technicalSystemTypes$ | async"
-        (valueChange)="patchGeneral({ technicalSystemTypeUuid: $event })"
-      ></app-dropdown>
+        [data]="technicalSystemTypeDropdownOptions$ | async"
+        [initialSelectedValues]="initialSelectedTechnicalSystemTypes"
+        [disabled]="!(hasModifyPermission$ | async)"
+        (selectedEvent)="patchTechnicalSystemTypes($event)"
+        (cleared)="patchTechnicalSystemTypes([])"
+      ></app-multi-select-dropdown>
     }
     @if (purposeEnabled$ | async) {
       <app-textbox

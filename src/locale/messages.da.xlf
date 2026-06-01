@@ -7901,6 +7901,10 @@
         <source>Der er gennemtvunget inaktivitet</source>
         <target state="new">Der er gennemtvunget inaktivitet</target>
       </trans-unit>
+      <trans-unit id="8384286620027712249" datatype="html">
+        <source>Teknisk systemtyper</source>
+        <target state="new">Teknisk systemtyper</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

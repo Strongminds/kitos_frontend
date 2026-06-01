@@ -15,6 +15,6 @@ import { APIDataProcessingRegistrationValidationErrorChoice } from './dataProces
 export interface APIDataProcessingResgistrationValidityDTO { 
     valid: boolean;
     enforceInvalidity: boolean;
-    validationErrors?: Array<APIDataProcessingRegistrationValidationErrorChoice> | null;
+    validationErrors: Array<APIDataProcessingRegistrationValidationErrorChoice> | null;
 }
 
