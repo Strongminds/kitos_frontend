@@ -31,7 +31,7 @@ export interface APIDataProcessingRegistrationGeneralDataResponseDTO {
     subDataProcessors: Array<APIDataProcessorRegistrationSubDataProcessorResponseDTO> | null;
     validity: APIDataProcessingResgistrationValidityDTO;
     mainContract?: APIIdentityNamePairResponseDTO;
-    associatedContracts?: Array<APIIdentityNamePairResponseDTO> | null;
+    associatedContracts: Array<APIIdentityNamePairResponseDTO> | null;
     responsibleOrganizationUnit?: APIIdentityNamePairResponseDTO;
 }
 
