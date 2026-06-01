@@ -6047,6 +6047,9 @@
       <trans-unit id="9001377840803074775" datatype="html">
         <source>Der er gennemtvunget inaktivitet</source>
       </trans-unit>
+      <trans-unit id="8384286620027712249" datatype="html">
+        <source>Teknisk systemtyper</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
