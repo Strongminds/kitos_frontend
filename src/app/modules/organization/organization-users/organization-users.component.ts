@@ -103,6 +103,17 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       defaultDateFilterOperator: 'lte',
     },
     {
+      field: 'LastLogin',
+      title: $localize`Seneste login`,
+      section: this.organizationUserSectionName,
+      hidden: true,
+      width: 300,
+      style: 'date',
+      filter: 'date',
+      defaultDateFilterOperator: 'lte',
+    },
+
+    {
       field: 'Roles',
       title: $localize`Organisations roller`,
       section: this.organizationUserSectionName,

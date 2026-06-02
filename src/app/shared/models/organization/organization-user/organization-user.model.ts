@@ -24,6 +24,7 @@ export interface ODataOrganizationUser {
   ItContractRights: Right[];
   DataProcessingRegistrationRights: Right[];
   CreatedAt: string | undefined;
+  LastLogin: string | undefined;
 }
 
 export interface Right {
@@ -67,10 +68,8 @@ export const adaptOrganizationUser = (value: any): ODataOrganizationUser | undef
     ItContractRights: value.ItContractRights?.map(adaptEntityRights) ?? [],
     DataProcessingRegistrationRights: value.DataProcessingRegistrationRights?.map(adaptEntityRights) ?? [],
     CreatedAt: value.CreatedAt,
+    LastLogin: value.LastLogin,
   };
-
-  console.log('value createdat', value.CreatedAt);
-  console.log('adaptedUser createdat', adaptedUser.CreatedAt);
 
   return adaptedUser;
 };
