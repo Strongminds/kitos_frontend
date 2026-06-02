@@ -7901,6 +7901,10 @@
         <source>Der er gennemtvunget inaktivitet</source>
         <target state="new">Der er gennemtvunget inaktivitet</target>
       </trans-unit>
+      <trans-unit id="6132592257892903826" datatype="html">
+        <source> Prøv manuel login ved fejl </source>
+        <target state="new"> Prøv manuel login ved fejl </target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
