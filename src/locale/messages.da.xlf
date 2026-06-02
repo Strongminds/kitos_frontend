@@ -7877,6 +7877,14 @@
         <source>Hvert tredje år</source>
         <target state="new">Hvert tredje år</target>
       </trans-unit>
+      <trans-unit id="9023620029886781717" datatype="html">
+        <source>Lokale KLE ID</source>
+        <target state="new">Lokale KLE ID</target>
+      </trans-unit>
+      <trans-unit id="2745585017282963528" datatype="html">
+        <source>Lokale KLE navn</source>
+        <target state="new">Lokale KLE navn</target>
+      </trans-unit>
       <trans-unit id="697483343074377619" datatype="html">
         <source>Link til risikovurdering</source>
         <target state="new">Link til risikovurdering</target>
@@ -7885,13 +7893,13 @@
         <source>Hvad viste den seneste risikovurdering</source>
         <target state="new">Hvad viste den seneste risikovurdering</target>
       </trans-unit>
-      <trans-unit id="7890295061763731705" datatype="html">
-        <source>Oprettet</source>
-        <target state="new">Oprettet</target>
+      <trans-unit id="4971147359373783437" datatype="html">
+        <source>Gennemtving deaktivering</source>
+        <target state="new">Gennemtving deaktivering</target>
       </trans-unit>
-      <trans-unit id="1666740219531317475" datatype="html">
-        <source>Seneste login</source>
-        <target state="new">Seneste login</target>
+      <trans-unit id="9001377840803074775" datatype="html">
+        <source>Der er gennemtvunget inaktivitet</source>
+        <target state="new">Der er gennemtvunget inaktivitet</target>
       </trans-unit>
     </body>
   </file>
