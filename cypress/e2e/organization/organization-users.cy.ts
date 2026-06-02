@@ -6,10 +6,10 @@ function setupTest() {
   cy.requireIntercept();
 
   cy.intercept(/\/odata\/GetUsersByUuid\(/, { fixture: './organizations/users/organization-odata-users.json' });
-  cy.intercept('/api/v2/internal/organization/*/users/permissions', {
+  cy.intercept('api/v2/internal/organization/*/users/permissions', {
     fixture: './organizations/users/org-users-permissions.json',
   });
-  cy.intercept('/api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
+  cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
 
   cy.intercept('/api/v2/data-processing-registration-role-types*', {
     fixture: './dpr/data-processing-registration-role-types.json',
@@ -20,10 +20,10 @@ function setupTest() {
   cy.intercept('/api/v2/it-system-usage-role-types*', {
     fixture: './it-system-usage/notifications/it-system-usage-role-types.json',
   });
-  cy.intercept('/api/v2/organization-unit-role-types*', {
+  cy.intercept('api/v2/organization-unit-role-types*', {
     fixture: './organizations/organization-unit-roles.json',
   });
-  cy.intercept('/api/v2/internal/organization/**/users/find-any-by-email**', { body: null });
+  cy.intercept('api/v2/internal/organization/**/users/find-any-by-email**', { body: null });
 
   cy.setup(true, 'organization/users');
 }
@@ -34,7 +34,7 @@ describe('organization-users', () => {
     testRunner.runTestWithSetup('Can send advis', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-      cy.intercept('/api/v2/internal/organization/*/users/*/notifications/send', {
+      cy.intercept('api/v2/internal/organization/*/users/*/notifications/send', {
         statusCode: 200,
         body: {},
       }).as('sendNotification');
@@ -47,12 +47,12 @@ describe('organization-users', () => {
     testRunner.runTestWithSetup('Can delete organization unit role', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-      cy.intercept('DELETE', '/api/v2/internal/organizations/*/organization-units/*/roles/delete', {
-        fixture: './organizations/users/org-unit-role-table-delete.json',
-      }).as('deleteRole');
-
       cy.get('[data-cy="delete-role-button-Chef"]').click();
       cy.contains('Ja').click();
+
+      cy.intercept('DELETE', 'api/v2/internal/organizations/*/organization-units/*/roles/delete', {
+        fixture: './organizations/users/org-unit-role-table-delete.json',
+      }).as('deleteRole');
 
       cy.wait('@deleteRole');
 
@@ -62,12 +62,12 @@ describe('organization-users', () => {
     testRunner.runTestWithSetup('Can delete it system role', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-      cy.intercept('PATCH', '/api/v2/it-system-usages/*/roles/remove', {
-        fixture: './organizations/users/it-system-role-table-delete.json',
-      }).as('deleteRole');
-
       cy.get('[data-cy="delete-role-button-Changemanager"]').click();
       cy.contains('Ja').click();
+
+      cy.intercept('PATCH', 'api/v2/it-system-usages/*/roles/remove', {
+        fixture: './organizations/users/it-system-role-table-delete.json',
+      }).as('deleteRole');
 
       cy.wait('@deleteRole');
 
@@ -77,12 +77,12 @@ describe('organization-users', () => {
     testRunner.runTestWithSetup('Can delete it contract role', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-      cy.intercept('PATCH', '/api/v2/internal/it-contracts/*/roles/remove', {
-        fixture: './organizations/users/it-contract-role-table-delete.json',
-      }).as('deleteRole');
-
       cy.getByDataCy('delete-role-button-Budgetansvarlig').click();
       cy.contains('Ja').click();
+
+      cy.intercept('PATCH', 'api/v2/internal/it-contracts/*/roles/remove', {
+        fixture: './organizations/users/it-contract-role-table-delete.json',
+      }).as('deleteRole');
 
       cy.wait('@deleteRole');
 
@@ -92,12 +92,12 @@ describe('organization-users', () => {
     testRunner.runTestWithSetup('Can delete data processing role', () => {
       cy.contains('local-api-global-admin-user@kitos.dk').click();
 
-      cy.intercept('PATCH', '/api/v2/internal/data-processing-registrations/*/roles/remove', {
-        fixture: './organizations/users/dpr-role-table-delete.json',
-      }).as('deleteRole');
-
       cy.get('[data-cy="delete-role-button-Standard Læserolle"]').click();
       cy.contains('Ja').click();
+
+      cy.intercept('PATCH', 'api/v2/internal/data-processing-registrations/*/roles/remove', {
+        fixture: './organizations/users/dpr-role-table-delete.json',
+      }).as('deleteRole');
 
       cy.wait('@deleteRole');
 
@@ -119,7 +119,7 @@ describe('organization-users', () => {
       cy.getByDataCy('api-user').find('input').click();
       cy.getByDataCy('stake-holder-access').find('input').click();
 
-      cy.intercept('POST', '/api/v2/internal/organization/*/users/create', { body: {} });
+      cy.intercept('POST', 'api/v2/internal/organization/*/users/create', { body: {} });
       cy.getByDataCy('create-user-button').click();
 
       cy.get('app-popup-message').should('exist');
@@ -147,7 +147,7 @@ describe('organization-users', () => {
       cy.getByDataCy('stakeholder-access').find('input').click();
       cy.getByDataCy('api-access').find('input').click();
 
-      cy.intercept('PATCH', '/api/v2/internal/organization/*/users/*/patch', (req) => {
+      cy.intercept('PATCH', 'api/v2/internal/organization/*/users/*/patch', (req) => {
         expect(req.body).to.have.property('firstName', 'Jens');
         expect(req.body).to.have.property('lastName', 'Jensen');
         expect(req.body).to.have.property('email', 'jens@jensen.dk');
@@ -165,11 +165,11 @@ describe('organization-users', () => {
       cy.get('app-popup-message').should('exist');
     });
     testRunner.runTestWithSetup('Can delete user', () => {
-      cy.intercept('/api/v2/internal/organizations/*/ui-root-config', {
+      cy.intercept('api/v2/internal/organizations/*/ui-root-config', {
         fixture: './shared/ui-root-config.json',
       });
 
-      cy.intercept('DELETE', '/api/v2/internal/organization/*/users/*', { body: {} }).as('deleteUser');
+      cy.intercept('DELETE', 'api/v2/internal/organization/*/users/*', { body: {} }).as('deleteUser');
 
       cy.contains('local-regular-user@kitos.dk').click();
       cy.contains('Slet bruger').click({ scrollBehavior: 'center' });
@@ -182,7 +182,7 @@ describe('organization-users', () => {
 
     testRunner.runTestWithSetup('Non local admins can only change their roles on users', () => {
       cy.setup(false);
-      cy.intercept('/odata/ItSystemUsageOverviewReadModels?*');
+      cy.intercept('odata/ItSystemUsageOverviewReadModels?*');
       cy.login('./shared/authorize-organization-admin.json');
       cy.visit('/organization/users');
 
