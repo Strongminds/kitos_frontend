@@ -6029,6 +6029,18 @@
       <trans-unit id="2828316376928374361" datatype="html">
         <source>Hvert tredje år</source>
       </trans-unit>
+      <trans-unit id="1666740219531317475" datatype="html">
+        <source>Seneste login</source>
+      </trans-unit>
+      <trans-unit id="2565200191881896388" datatype="html">
+        <source>Hvad viste den seneste risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="697483343074377619" datatype="html">
+        <source>Link til risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="7890295061763731705" datatype="html">
+        <source>Oprettet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
