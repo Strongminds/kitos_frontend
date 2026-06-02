@@ -86,19 +86,20 @@ import {
   selectITSystemUsageEnableGeneralPurpose,
   selectITSystemUsageEnableIncomingRelations,
   selectITSystemUsageEnableInheritedKle,
-  selectITSystemUsageEnableLocalKle,
   selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
   selectITSystemUsageEnableLifeCycleStatus,
+  selectITSystemUsageEnableLocalKle,
   selectITSystemUsageEnableLocalReferences,
   selectITSystemUsageEnableOutgoingRelations,
   selectITSystemUsageEnableSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableSystemUsageCriticalityLevel,
   selectITSystemUsageEnableTabArchiving,
+  selectITSystemUsageEnableTabInterfaces,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
@@ -423,6 +424,11 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableLocalReferences)
         .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
+
+      //Interfaces
+      this.store
+        .select(selectITSystemUsageEnableTabInterfaces)
+        .pipe(shouldEnable([UsageFields.ItInterfaceIdsAsCsv, UsageFields.ItInterfaceVersionsAsCsv])),
     ];
 
     return combineLatest(configObservables);

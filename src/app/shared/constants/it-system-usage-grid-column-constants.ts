@@ -66,3 +66,5 @@ export const TechnicalSystemTypeName = 'TechnicalSystemTypeName';
 export const IsSociallyCritical = 'IsSociallyCritical';
 export const CriticalityFieldsLastChanged = 'CriticalityFieldsLastChanged';
 export const IsDataProcessingAgreementRequired = 'IsDataProcessingAgreementRequired';
+export const ItInterfaceIdsAsCsv = 'ItInterfaceIdsAsCsv';
+export const ItInterfaceVersionsAsCsv = 'ItInterfaceVersionsAsCsv';
