@@ -14,7 +14,8 @@ describe('it-system-usage contracts', () => {
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', []);
+      cy.intercept('GET', '/api/v2/it-contracts/permissions*', { body: { create: true } });
+      cy.intercept('/api/v2/it-contracts?*', []);
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -29,7 +30,8 @@ describe('it-system-usage contracts', () => {
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
+      cy.intercept('GET', '/api/v2/it-contracts/permissions*', { body: { create: true } });
+      cy.intercept('/api/v2/it-contracts?*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -84,6 +86,7 @@ describe('it-system-usage contracts', () => {
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
+      cy.intercept('GET', '/api/v2/it-contracts/permissions*', { body: { create: true } });
       cy.intercept('/api/v2/it-contracts?*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
 
       cy.navigateToDetailsSubPage('Kontrakter');
@@ -113,15 +116,16 @@ describe('it-system-usage contracts', () => {
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', []);
+      cy.intercept('GET', '/api/v2/it-contracts/permissions*', { body: { create: true } });
+      cy.intercept('/api/v2/it-contracts?*', []);
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
       cy.getByDataCy('open-create-and-associate-contract-dialog-button').click();
-      cy.getByDataCy('contract-name-input').type('New contract');
+      cy.getByDataCy('contract-name-input').type('New contract2');
 
       cy.intercept('POST', '/api/v2/it-contracts', (req) => {
-        expect(req.body).to.have.property('name', 'New contract');
+        expect(req.body).to.have.property('name', 'New contract2');
         expect(req.body.systemUsageUuids).to.be.an('array').that.has.lengthOf(1);
         expect(req.body.systemUsageUuids[0]).to.equal(usageUuid);
       });
@@ -142,7 +146,8 @@ describe('it-system-usage contracts', () => {
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
+      cy.intercept('GET', '/api/v2/it-contracts/permissions*', { body: { create: true } });
+      cy.intercept('/api/v2/it-contracts?*', { fixture: './it-contracts/it-contracts-by-it-system-usage-uuid.json' });
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -153,9 +158,8 @@ describe('it-system-usage contracts', () => {
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', []);
-
       cy.intercept('GET', '/api/v2/it-contracts/permissions*', { body: { create: false } });
+      cy.intercept('/api/v2/it-contracts?*', []);
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
@@ -166,7 +170,8 @@ describe('it-system-usage contracts', () => {
       cy.contains('System 3').click();
 
       cy.intercept('/api/v2/it-contract-contract-types*', { fixture: './shared/contract-types.json' });
-      cy.intercept('/api/v2/it-contracts*', []);
+      cy.intercept('GET', '/api/v2/it-contracts/permissions*', { body: { create: true } });
+      cy.intercept('/api/v2/it-contracts?*', []);
 
       cy.navigateToDetailsSubPage('Kontrakter');
 
