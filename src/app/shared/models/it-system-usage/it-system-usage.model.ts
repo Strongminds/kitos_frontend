@@ -8,10 +8,7 @@ import {
 } from '../helpers/read-model-role-assignments';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
-import {
-  mapToYesNoDontKnowIrrelevantEnum,
-  YesNoDontKnowIrrelevantOption,
-} from '../yes-no-dont-know-irrelevant.model';
+import { mapToYesNoDontKnowIrrelevantEnum, YesNoDontKnowIrrelevantOption } from '../yes-no-dont-know-irrelevant.model';
 import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
 import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
 import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
@@ -106,6 +103,8 @@ export interface ITSystemUsage {
   IsSociallyCritical: YesNoDontKnowOption | undefined;
   CriticalityFieldsLastChanged: Date | undefined;
   IsDataProcessingAgreementRequired: IsDataProcessingAgreementRequired | undefined;
+  ItInterfaceIdsAsCsv: string;
+  ItInterfaceVersionsAsCsv: string;
 }
 
 function getParentItSystemLinkPaths(value: {
@@ -241,6 +240,8 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
     CriticalityFieldsLastChanged: value.CriticalityFieldsLastChanged,
     IsDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(value.IsDataProcessingAgreementRequired),
+    ItInterfaceIdsAsCsv: value.ItInterfaceIdsAsCsv,
+    ItInterfaceVersionsAsCsv: value.ItInterfaceVersionsAsCsv,
   };
   return adaptedSystem;
 };
