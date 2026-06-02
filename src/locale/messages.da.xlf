@@ -7901,6 +7901,18 @@
         <source>Der er gennemtvunget inaktivitet</source>
         <target state="new">Der er gennemtvunget inaktivitet</target>
       </trans-unit>
+      <trans-unit id="6132592257892903826" datatype="html">
+        <source> Prøv manuel login ved fejl </source>
+        <target state="new"> Prøv manuel login ved fejl </target>
+      </trans-unit>
+      <trans-unit id="9154056184529721480" datatype="html">
+        <source>Snitflade ID&apos;er</source>
+        <target state="new">Snitflade ID&apos;er</target>
+      </trans-unit>
+      <trans-unit id="6140487118381407136" datatype="html">
+        <source>Snitflade versioner</source>
+        <target state="new">Snitflade versioner</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
