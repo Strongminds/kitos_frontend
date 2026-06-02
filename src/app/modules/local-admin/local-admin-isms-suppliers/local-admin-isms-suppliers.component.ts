@@ -13,6 +13,7 @@ import { LocalGridComponent } from 'src/app/shared/components/local-grid/local-g
 import { OverviewHeaderComponent } from 'src/app/shared/components/overview-header/overview-header.component';
 import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { ShallowOrganization } from 'src/app/shared/models/organization/shallow-organization.model';
+import { resetOrganizationStateAction } from 'src/app/store/meta/actions';
 import { OrganizationActions } from 'src/app/store/organization/actions';
 import { OrganizationSuppliersActions } from 'src/app/store/organization/organization-suppliers/actions';
 import {
@@ -21,7 +22,6 @@ import {
   selectOrganizationSuppliersLoading,
 } from 'src/app/store/organization/organization-suppliers/selectors';
 import { selectOrganizationHasModifyPermission } from 'src/app/store/organization/selectors';
-import { UserActions } from 'src/app/store/user-store/actions';
 
 @Component({
   selector: 'app-local-admin-isms-suppliers',
@@ -42,7 +42,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
     this.refreshData();
 
     this.subscriptions.add(
-      this.actions$.pipe(ofType(UserActions.resetOnOrganizationUpdate)).subscribe(() => {
+      this.actions$.pipe(ofType(resetOrganizationStateAction)).subscribe(() => {
         this.refreshData();
       }),
     );
