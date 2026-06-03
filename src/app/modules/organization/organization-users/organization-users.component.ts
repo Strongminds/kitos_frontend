@@ -265,7 +265,6 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       this.isGlobalAdmin$.pipe(first()).subscribe((isGlobalAdmin) => {
         this.dialogOpenerService.openEditUserDialog(user, false, isGlobalAdmin);
       }),
-      }),
     );
   }
 
