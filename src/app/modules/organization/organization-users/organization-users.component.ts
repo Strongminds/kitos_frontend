@@ -93,6 +93,27 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
       width: 350,
     },
     {
+      field: 'CreatedAt',
+      title: $localize`Oprettet`,
+      section: this.organizationUserSectionName,
+      hidden: true,
+      width: 300,
+      style: 'date',
+      filter: 'date',
+      defaultDateFilterOperator: 'lte',
+    },
+    {
+      field: 'LastLogin',
+      title: $localize`Seneste login`,
+      section: this.organizationUserSectionName,
+      hidden: true,
+      width: 300,
+      style: 'date',
+      filter: 'date',
+      defaultDateFilterOperator: 'lte',
+    },
+
+    {
       field: 'Roles',
       title: $localize`Organisations roller`,
       section: this.organizationUserSectionName,
