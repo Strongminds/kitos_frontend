@@ -49,8 +49,8 @@ import { UserInfoDialogComponent } from './user-info-dialog/user-info-dialog.com
     HideShowButtonComponent,
     CreateEntityButtonComponent,
     GridComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class OrganizationUsersComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectOrganizationUserGridLoading);
@@ -189,21 +189,22 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
     private dialog: MatDialog,
-    private dialogOpenerService: DialogOpenerService
+    private dialogOpenerService: DialogOpenerService,
   ) {
     super(store, 'organization-user');
   }
 
   ngOnInit(): void {
     this.store.dispatch(OrganizationUserActions.getOrganizationUserPermissions());
+    const orderedDefaultColumns = this.mapColumnOrder(this.defaultGridColumns);
     const existingColumns = this.gridColumnStorageService.getColumns(
       ORGANIZATION_USER_COLUMNS_ID,
-      this.defaultGridColumns
+      orderedDefaultColumns,
     );
     if (existingColumns) {
       this.store.dispatch(OrganizationUserActions.updateGridColumns(existingColumns));
     } else {
-      this.updateDefaultColumns();
+      this.store.dispatch(OrganizationUserActions.updateGridColumns(orderedDefaultColumns));
     }
 
     this.gridState$.pipe(first()).subscribe((gridState) => this.stateChange(gridState));
@@ -213,7 +214,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(OrganizationUserActions.resetGridConfiguration))
-        .subscribe(() => this.updateDefaultColumns())
+        .subscribe(() => this.updateDefaultColumns()),
     );
 
     this.subscriptions.add(
@@ -224,13 +225,13 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
             OrganizationUserActions.updateUserSuccess,
             OrganizationUserActions.deleteUserSuccess,
             OrganizationUserActions.copyRolesSuccess,
-            OrganizationUserActions.transferRolesSuccess
+            OrganizationUserActions.transferRolesSuccess,
           ),
-          combineLatestWith(this.gridState$)
+          combineLatestWith(this.gridState$),
         )
         .subscribe(([_, gridState]) => {
           this.stateChange(gridState, true);
-        })
+        }),
     );
   }
 
@@ -242,7 +243,7 @@ export class OrganizationUsersComponent extends BaseOverviewComponent implements
     this.subscriptions.add(
       this.isGlobalAdmin$.pipe(first()).subscribe((isGlobalAdmin) => {
         this.dialogOpenerService.openEditUserDialog(user, false, isGlobalAdmin);
-      })
+      }),
     );
   }
 

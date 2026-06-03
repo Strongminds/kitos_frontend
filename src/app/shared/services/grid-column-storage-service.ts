@@ -23,7 +23,7 @@ export class GridColumnStorageService {
   }
 
   private computeHash(columns: GridColumn[]): string {
-    const hashableColumns = columns.map(this.toHashableGridColumn).sort((a, b) => a.field.localeCompare(b.field));
+    const hashableColumns = columns.map(this.ignoreUserCustomizableColumnProperties).sort((a, b) => a.field.localeCompare(b.field));
     return this.hashMappedColumns(hashableColumns);
   }
 
@@ -47,7 +47,7 @@ export class GridColumnStorageService {
 
   // Marks the fields that are not relevant for hashing, to a constant, as to not effect the hash.
   // Needs to be extended if more fields are added to the GridColumn, which shouldn't be hashed
-  private toHashableGridColumn(column: GridColumn): GridColumn {
+  private ignoreUserCustomizableColumnProperties(column: GridColumn): GridColumn {
     return { ...column, width: undefined, hidden: false, disabledByUIConfig: undefined };
   }
 }
