@@ -41,7 +41,7 @@
 
     @if (technicalSystemTypeEnabled$ | async) {
       <app-multi-select-dropdown
-        text="Teknisk systemtype"
+        text="Tekniske systemtyper"
         i18n-text
         [data]="technicalSystemTypeDropdownOptions$ | async"
         [initialSelectedValues]="initialSelectedTechnicalSystemTypes"
