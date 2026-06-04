@@ -2531,9 +2531,6 @@
       <trans-unit id="3244446524809192034" datatype="html">
         <source>Klassifikation af data i systemet</source>
       </trans-unit>
-      <trans-unit id="6123762912751952636" datatype="html">
-        <source>Teknisk systemtype</source>
-      </trans-unit>
       <trans-unit id="5340208750899970512" datatype="html">
         <source>IT System roller</source>
       </trans-unit>
@@ -6059,8 +6056,8 @@
       <trans-unit id="8384286620027712249" datatype="html">
         <source>Teknisk systemtyper</source>
       </trans-unit>
-      <trans-unit id="6132592257892903826" datatype="html">
-        <source> Prøv manuel login ved fejl </source>
+      <trans-unit id="1186571126953128683" datatype="html">
+        <source>Tekniske systemtyper</source>
       </trans-unit>
     </body>
   </file>

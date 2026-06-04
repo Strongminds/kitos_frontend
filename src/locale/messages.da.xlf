@@ -7917,6 +7917,10 @@
         <source> Prøv manuel login ved fejl </source>
         <target state="new"> Prøv manuel login ved fejl </target>
       </trans-unit>
+      <trans-unit id="8384286620027712249" datatype="html">
+        <source>Teknisk systemtyper</source>
+        <target state="new">Teknisk systemtyper</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
