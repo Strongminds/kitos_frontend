@@ -42,7 +42,7 @@ export class LoginComponent {
 
   public readonly ssoErrorCode$ = this.store.select(selectSsoErrorCode);
 
-  constructor(private store: Store) { }
+  constructor(private store: Store) {}
 
   public login() {
     const login: Login = {
