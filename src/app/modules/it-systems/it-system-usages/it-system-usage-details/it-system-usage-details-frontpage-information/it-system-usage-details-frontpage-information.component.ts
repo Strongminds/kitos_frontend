@@ -19,6 +19,10 @@ import {
 } from 'src/app/shared/helpers/form.helpers';
 import { combineOR } from 'src/app/shared/helpers/observable-helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
+import {
+  MultiSelectDropdownItem,
+  mapRegularOptionToMultiSelectItem,
+} from 'src/app/shared/models/dropdown-option.model';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
 import {
   LifeCycleStatus,
@@ -43,7 +47,6 @@ import {
   yesNoPartiallyOptions,
 } from 'src/app/shared/models/yes-no-partially.model';
 import { mapToYesNoEnum, yesNoOptions } from 'src/app/shared/models/yes-no.model';
-import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -116,7 +119,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
       localCallName: new FormControl(''),
       localSystemId: new FormControl(''),
       systemVersion: new FormControl(''),
-      technicalSystemTypes: new FormControl<MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] | undefined>(undefined),
+      technicalSystemTypes: new FormControl<MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] | undefined>(
+        undefined,
+      ),
       numberOfExpectedUsers: new FormControl<NumberOfExpectedUsers | undefined>(undefined),
       dataClassification: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
       notes: new FormControl<string | undefined>(undefined),
@@ -278,11 +283,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .select(selectRegularOptionTypes('it-system-usage_technical-system-type'))
         .pipe(filterNullish())
         .subscribe((options) => {
-          const dropdownItems: MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] = options.map((option) => ({
-            name: option.name,
-            value: option,
-            selected: false,
-          }));
+          const dropdownItems: MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] = options.map((option) =>
+            mapRegularOptionToMultiSelectItem(option),
+          );
           this.technicalSystemTypeDropdownOptions$.next(dropdownItems);
         }),
     );
@@ -345,9 +348,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .select(selectItSystemUsageGeneral)
         .pipe(filterNullish())
         .subscribe((general) => {
-          const technicalSystemTypeItems = this.mapTechnicalSystemTypeDropdownItems(
-            general.technicalSystemTypes ?? [],
-          );
+          const technicalSystemTypeItems = this.mapTechnicalSystemTypeDropdownItems(general.technicalSystemTypes ?? []);
 
           this.itSystemInformationForm.patchValue({
             purpose: general.purpose,
@@ -441,9 +442,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
     this.patchGeneral({ technicalSystemTypeUuids: uuids });
   }
 
-  private setupTechnicalSystemTypesControl(
-    items: MultiSelectDropdownItem<APIRegularOptionResponseDTO>[],
-  ) {
+  private setupTechnicalSystemTypesControl(items: MultiSelectDropdownItem<APIRegularOptionResponseDTO>[]) {
     this.initialSelectedTechnicalSystemTypes = items;
   }
 
