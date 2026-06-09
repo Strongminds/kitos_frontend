@@ -98,8 +98,7 @@ export interface ITSystemUsage {
   WebAccessibilityNotes: string | undefined;
   SystemUsageCriticalityLevelUuid: string | undefined;
   SystemUsageCriticalityLevelName: string | undefined;
-  TechnicalSystemTypeUuid: string | undefined;
-  TechnicalSystemTypeName: string | undefined;
+  TechnicalSystemTypeNamesAsCsv: string | undefined;
   IsSociallyCritical: YesNoDontKnowOption | undefined;
   CriticalityFieldsLastChanged: Date | undefined;
   IsDataProcessingAgreementRequired: IsDataProcessingAgreementRequired | undefined;
@@ -235,8 +234,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     WebAccessibilityNotes: value.WebAccessibilityNotes,
     SystemUsageCriticalityLevelUuid: value.SystemUsageCriticalityLevelUuid,
     SystemUsageCriticalityLevelName: value.SystemUsageCriticalityLevelName,
-    TechnicalSystemTypeUuid: value.TechnicalSystemTypeUuid,
-    TechnicalSystemTypeName: value.TechnicalSystemTypeName,
+    TechnicalSystemTypeNamesAsCsv: value.TechnicalSystemTypeNamesAsCsv,
     IsSociallyCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsSociallyCritical),
     CriticalityFieldsLastChanged: value.CriticalityFieldsLastChanged,
     IsDataProcessingAgreementRequired: mapIsDataProcessingAgreementRequired(value.IsDataProcessingAgreementRequired),
