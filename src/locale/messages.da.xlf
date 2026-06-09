@@ -7929,6 +7929,10 @@
         <source> Brug manuel login, hvis din organisation ikke anvender SSO,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> eller hvis du har fået besked på at logge ind med email og password. </source>
         <target state="new"> Brug manuel login, hvis din organisation ikke anvender SSO,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> eller hvis du har fået besked på at logge ind med email og password. </target>
       </trans-unit>
+      <trans-unit id="8384286620027712249" datatype="html">
+        <source>Teknisk systemtyper</source>
+        <target state="new">Teknisk systemtyper</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
