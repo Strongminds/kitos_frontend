@@ -47,7 +47,6 @@
         [initialSelectedValues]="initialSelectedTechnicalSystemTypes"
         [disabled]="!(hasModifyPermission$ | async)"
         (selectedEvent)="patchTechnicalSystemTypes($event)"
-        (cleared)="patchTechnicalSystemTypes([])"
       ></app-multi-select-dropdown>
     }
     @if (purposeEnabled$ | async) {
