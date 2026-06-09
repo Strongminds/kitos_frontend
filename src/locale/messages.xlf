@@ -6047,9 +6047,6 @@
       <trans-unit id="6017792095370304684" datatype="html">
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
       </trans-unit>
-      <trans-unit id="3259866161044628872" datatype="html">
-        <source> Brug manuel login, hvis din organisation ikke anvender SSO, eller hvis du har fået besked på at logge ind med email og password. </source>
-      </trans-unit>
       <trans-unit id="3487984946687907387" datatype="html">
         <source>Kan du ikke logge ind med SSO?</source>
       </trans-unit>
@@ -6058,6 +6055,15 @@
       </trans-unit>
       <trans-unit id="7259401532876698278" datatype="html">
         <source>Forbliv logget ind</source>
+      </trans-unit>
+      <trans-unit id="1639312213164225055" datatype="html">
+        <source> Brug manuel login, hvis din organisation ikke anvender SSO,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> eller hvis du har fået besked på at logge ind med email og password. </source>
+      </trans-unit>
+      <trans-unit id="6140487118381407136" datatype="html">
+        <source>Snitflade versioner</source>
+      </trans-unit>
+      <trans-unit id="9154056184529721480" datatype="html">
+        <source>Snitflade ID&apos;er</source>
       </trans-unit>
     </body>
   </file>
