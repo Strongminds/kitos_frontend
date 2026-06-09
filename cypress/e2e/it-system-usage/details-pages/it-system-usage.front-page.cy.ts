@@ -164,8 +164,9 @@ describe('it-system-usage frontpage', () => {
       .its('request.body')
       .should('deep.eq', { general: { numberOfExpectedUsers: { lowerBound: 50, upperBound: 99 } } });
 
-    expectGeneralPropertyUpdate({ technicalSystemTypeUuid: '1a2b3c4d-0001-0001-0001-000000000002' }, () =>
-      cy.dropdown('Tekniske systemtyper', 'Infrastruktur', true),
+    expectGeneralPropertyUpdate(
+      { technicalSystemTypeUuids: ['1a2b3c4d-0001-0001-0001-000000000001', '1a2b3c4d-0001-0001-0001-000000000002'] },
+      () => cy.dropdown('Tekniske systemtyper', 'Infrastruktur', true),
     );
 
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' }).as(
