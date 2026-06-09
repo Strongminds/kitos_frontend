@@ -88,6 +88,8 @@ import {
   selectITSystemUsageEnableInheritedKle,
   selectITSystemUsageEnableIsBusinessCritical,
   selectITSystemUsageEnableIsSociallyCritical,
+  selectITSystemUsageEnableItInterfaceIds,
+  selectITSystemUsageEnableItInterfaceVersions,
   selectITSystemUsageEnableJournalPeriods,
   selectITSystemUsageEnableLastEditedAt,
   selectITSystemUsageEnableLastEditedBy,
@@ -99,7 +101,6 @@ import {
   selectITSystemUsageEnableStatus,
   selectITSystemUsageEnableSystemUsageCriticalityLevel,
   selectITSystemUsageEnableTabArchiving,
-  selectITSystemUsageEnableTabInterfaces,
   selectITSystemUsageEnableTabOrganization,
   selectITSystemUsageEnableTabSystemRoles,
   selectITSystemUsageEnableTakenIntoUsageBy,
@@ -426,9 +427,10 @@ export class GridUIConfigService {
         .pipe(shouldEnable([UsageFields.LocalReferenceTitle, UsageFields.LocalReferenceDocumentId])),
 
       //Interfaces
+      this.store.select(selectITSystemUsageEnableItInterfaceIds).pipe(shouldEnable([UsageFields.ItInterfaceIdsAsCsv])),
       this.store
-        .select(selectITSystemUsageEnableTabInterfaces)
-        .pipe(shouldEnable([UsageFields.ItInterfaceIdsAsCsv, UsageFields.ItInterfaceVersionsAsCsv])),
+        .select(selectITSystemUsageEnableItInterfaceVersions)
+        .pipe(shouldEnable([UsageFields.ItInterfaceVersionsAsCsv])),
     ];
 
     return combineLatest(configObservables);
