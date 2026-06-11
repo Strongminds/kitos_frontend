@@ -9,7 +9,8 @@ services:
       CHOKIDAR_USEPOLLING: "true"
       WATCHPACK_POLLING: "true"
       BACKEND_URL: ${BACKEND_URL:-https://kitos-dev.strongminds.dk/}
+    user: "${UID:-1000}:${GID:-1000}"
     volumes:
       - .:/app
       - /app/node_modules
-    command: sh ./docker/start-dev.sh ${BACKEND_URL:-https://kitos-dev.strongminds.dk/}
+    command: ["sh", "./docker/start-dev.sh", "${BACKEND_URL:-https://kitos-dev.strongminds.dk/}"]
