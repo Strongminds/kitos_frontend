@@ -18,23 +18,22 @@ Use Docker Compose for a containerized development server with hot reload:
 
 Then open `http://localhost:4200/`.
 
+To start the frontend against a specific environment run:
+
+Bash:
+`BACKEND_URL=http://host.docker.internal:5000/ docker compose up --build`
+
+Powershell:
+`$env:BACKEND_URL=http://host.docker.internal:5000/`
+`docker compose up --build`
+
 Stop the container with:
 
 `docker compose down`
 
-To target a specific backend, provide a URL param to the Docker start script (wired in Compose via `BACKEND_URL`) and the container will generate a runtime proxy config from it. The checked-in `src/proxy.conf.json` is unchanged.
-
-Examples:
-
-`BACKEND_URL=https://kitos-dev.strongminds.dk/ docker compose up --build`
-
-`BACKEND_URL=https://staging.kitos.dk/ docker compose up --build`
-
-`BACKEND_URL=https://kitos.dk/ docker compose up --build`
-
 If you run the docker start script directly, you can also pass the URL as an argument:
 
-`yarn start:docker -- https://staging.kitos.dk/`
+`yarn start:docker -- https://kitos-dev.strongminds/` runs the server with a local docker backend
 
 `yarn start:local` runs the development server with a local backend, by changing the values in `src/proxy.conf.json`. This requires a local backend running on `https://localhost:44300`. After terminating, the proxy settings return to the default.
 
