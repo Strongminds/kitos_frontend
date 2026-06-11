@@ -11,6 +11,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --host=127.0.0.1",
+    "start:docker": "sh ./docker/start-dev.sh",
     "start:local": "sh -c '$(git rev-parse --show-toplevel)/src/use-local-proxy.sh start'",
     "start:dev": "sh -c '$(git rev-parse --show-toplevel)/src/use-dev-proxy.sh start'",
     "build": "node --max_old_space_size=5048 ./node_modules/@angular/cli/bin/ng build",

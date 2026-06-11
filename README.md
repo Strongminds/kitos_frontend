@@ -10,6 +10,32 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn start` for a development server. Navigate to `http://localhost:4200/` or `http://127.0.0.1:4200/`. The app will automatically reload if you change any of the source files.
 
+### Running in Docker
+
+Use Docker Compose for a containerized development server with hot reload:
+
+`docker compose up --build`
+
+Then open `http://localhost:4200/`.
+
+Stop the container with:
+
+`docker compose down`
+
+To target a specific backend, provide a URL param to the Docker start script (wired in Compose via `BACKEND_URL`) and the container will generate a runtime proxy config from it. The checked-in `src/proxy.conf.json` is unchanged.
+
+Examples:
+
+`BACKEND_URL=https://kitos-dev.strongminds.dk/ docker compose up --build`
+
+`BACKEND_URL=https://staging.kitos.dk/ docker compose up --build`
+
+`BACKEND_URL=https://kitos.dk/ docker compose up --build`
+
+If you run the docker start script directly, you can also pass the URL as an argument:
+
+`yarn start:docker -- https://staging.kitos.dk/`
+
 `yarn start:local` runs the development server with a local backend, by changing the values in `src/proxy.conf.json`. This requires a local backend running on `https://localhost:44300`. After terminating, the proxy settings return to the default.
 
 `yarn start:dev` runs the development server and ensures a dev backend is used, by changing the values in `src/proxy.conf.json`. After terminating, the proxy settings return to the default.
