@@ -1,5 +1,6 @@
-FROM node:22-alpine
+FROM node:22.13.0-bookworm-slim
 
+RUN corepack enable
 WORKDIR /app
 
 COPY package.json yarn.lock ./
