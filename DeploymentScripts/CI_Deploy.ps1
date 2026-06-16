@@ -25,8 +25,8 @@ $password = $Env:MsDeployPassword
   -dest:dirPath="`"C:\inetpub\kitos-frontend`",computerName=`"$computerName`",userName=`"$username`",password=`"$password`",authtype=`"Basic`",includeAcls=`"False`""
 
 if ($LASTEXITCODE -ne 0) {
-    Write-Error "MSdeploy failed with exit code $LASTEXITCODE"
-    exit $LASTEXITCODE
+  Write-Error "MSdeploy failed with exit code $LASTEXITCODE"
+  exit $LASTEXITCODE
 }
 
 Write-Host "Frontend deployment completed. Ensuring IIS is running..."
@@ -35,14 +35,14 @@ $credential = New-Object System.Management.Automation.PSCredential($username, $s
 
 $remoteSession = $null
 try {
-    $remoteSession = New-PSSession -ComputerName $computerName -Credential $credential
-    Invoke-Command -Session $remoteSession -ScriptBlock {
-        Write-Host "Starting IIS..."
-        iisreset /start
-        if ($LASTEXITCODE -ne 0) { throw "iisreset failed with exit code $LASTEXITCODE" }
-        Write-Host "IIS started successfully."
-    }
+  $remoteSession = New-PSSession -ConnectionUri $computerName -Credential $credential
+  Invoke-Command -Session $remoteSession -ScriptBlock {
+    Write-Host "Starting IIS..."
+    iisreset /start
+    if ($LASTEXITCODE -ne 0) { throw "iisreset failed with exit code $LASTEXITCODE" }
+    Write-Host "IIS started successfully."
+  }
 }
 finally {
-    if ($remoteSession) { Remove-PSSession -Session $remoteSession }
+  if ($remoteSession) { Remove-PSSession -Session $remoteSession }
 }
