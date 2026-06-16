@@ -28,3 +28,13 @@ if ($LASTEXITCODE -ne 0) {
     Write-Error "MSdeploy failed with exit code $LASTEXITCODE"
     exit $LASTEXITCODE
 }
+
+Write-Host "Frontend deployment completed. Ensuring IIS is running..."
+$remoteSession = New-PSSession -ComputerName $computerName -Credential (New-Object System.Management.Automation.PSCredential($username, (ConvertTo-SecureString $password -AsPlainText -Force)))
+Invoke-Command -Session $remoteSession -ScriptBlock {
+    Write-Host "Starting IIS..."
+    iisreset /start
+    Start-Sleep -Seconds 3
+    Write-Host "IIS started successfully."
+}
+Remove-PSSession -Session $remoteSession
