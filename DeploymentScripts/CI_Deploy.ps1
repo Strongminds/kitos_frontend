@@ -30,11 +30,19 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host "Frontend deployment completed. Ensuring IIS is running..."
-$remoteSession = New-PSSession -ComputerName $computerName -Credential (New-Object System.Management.Automation.PSCredential($username, (ConvertTo-SecureString $password -AsPlainText -Force)))
-Invoke-Command -Session $remoteSession -ScriptBlock {
-    Write-Host "Starting IIS..."
-    iisreset /start
-    Start-Sleep -Seconds 3
-    Write-Host "IIS started successfully."
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+$credential = New-Object System.Management.Automation.PSCredential($username, $securePassword)
+
+$remoteSession = $null
+try {
+    $remoteSession = New-PSSession -ComputerName $computerName -Credential $credential
+    Invoke-Command -Session $remoteSession -ScriptBlock {
+        Write-Host "Starting IIS..."
+        iisreset /start
+        if ($LASTEXITCODE -ne 0) { throw "iisreset failed with exit code $LASTEXITCODE" }
+        Write-Host "IIS started successfully."
+    }
 }
-Remove-PSSession -Session $remoteSession
+finally {
+    if ($remoteSession) { Remove-PSSession -Session $remoteSession }
+}
