@@ -35,7 +35,8 @@ $credential = New-Object System.Management.Automation.PSCredential($username, $s
 
 $remoteSession = $null
 try {
-  $remoteSession = New-PSSession -ConnectionUri $computerName -Credential $credential
+  $sessionOption = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck
+  $remoteSession = New-PSSession -ConnectionUri $computerName -Credential $credential -SessionOption $sessionOption -UseSSL
   Invoke-Command -Session $remoteSession -ScriptBlock {
     Write-Host "Starting IIS..."
     iisreset /start
