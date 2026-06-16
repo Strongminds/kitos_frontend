@@ -30,6 +30,12 @@ export class GridExportService {
               transformedItem[field] = column.extraData[boolValue].name;
             }
             break;
+          case 'reverse-chip':
+            if (typeof transformedItem[field] === 'boolean') {
+              const boolValue = transformedItem[field] ? 1 : 0;
+              transformedItem[field] = column.extraData[boolValue].name;
+            }
+            break;
           case 'enum':
             if (typeof transformedItem[field] === 'object') {
               const enumValue = transformedItem[field];
