@@ -11,7 +11,6 @@
  */
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIHostingChoice } from './hostingChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
@@ -66,7 +65,6 @@ export interface APIGeneralDataUpdateRequestDTO {
      * The technical system type classifications of this system usage (multi-choice).  Constraint: If an update changes this field, all options identified must be currently available in the organization context
      */
     technicalSystemTypeUuids?: Array<string> | null;
-    hostedAt?: APIHostingChoice;
     /**
      * Defines the master contract for this system (many contracts can point to a system usage but only one can be the master contract)  Constraint: The contract provided MUST point to this system usage for it to be selected as \"main contract\".
      */

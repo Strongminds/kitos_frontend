@@ -11,7 +11,6 @@
  */
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIHostingChoice } from './hostingChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
@@ -66,6 +65,5 @@ export interface APIGeneralDataWriteRequestDTO {
      * The technical system type classifications of this system usage (multi-choice).  Constraint: If an update changes this field, all options identified must be currently available in the organization context
      */
     technicalSystemTypeUuids?: Array<string> | null;
-    hostedAt?: APIHostingChoice;
 }
 
