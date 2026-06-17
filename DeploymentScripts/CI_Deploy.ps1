@@ -39,7 +39,7 @@ try {
   $remoteSession = New-PSSession -ComputerName $computerName -Credential $credential -SessionOption $sessionOption -UseSSL
   Invoke-Command -Session $remoteSession -ScriptBlock {
     Write-Host "Starting IIS..."
-    iisreset /start
+    iisreset /restart
     if ($LASTEXITCODE -ne 0) { throw "iisreset failed with exit code $LASTEXITCODE" }
     Write-Host "IIS started successfully."
   }
