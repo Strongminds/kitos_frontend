@@ -32,16 +32,20 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "Frontend deployment completed. Ensuring IIS is running..."
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential($username, $securePassword)
-write-host "Connecting to $computerName with user $username to restart IIS..."
+
+# Extract just the hostname/IP from the MSDeploy endpoint URL (e.g., "https://10.212.74.12:8172/msdeploy.axd" → "10.212.74.12")
+$remoteHost = ([System.Uri]$computerName).Host
+write-host "Connecting to $remoteHost with user $username to restart IIS..."
+
 $remoteSession = $null
 try {
   $sessionOption = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck
-  $remoteSession = New-PSSession -ComputerName $computerName -Credential $credential -SessionOption $sessionOption -UseSSL
+  $remoteSession = New-PSSession -ComputerName $remoteHost -Credential $credential -SessionOption $sessionOption -UseSSL
   Invoke-Command -Session $remoteSession -ScriptBlock {
     Write-Host "Starting IIS..."
     iisreset /restart
     if ($LASTEXITCODE -ne 0) { throw "iisreset failed with exit code $LASTEXITCODE" }
-    Write-Host "IIS started successfully."
+    Write-Host "IIS restarted successfully."
   }
 }
 finally {
