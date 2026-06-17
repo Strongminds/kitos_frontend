@@ -12,6 +12,7 @@
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
+import { APIHostingChoice } from './hostingChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
@@ -64,6 +65,7 @@ export interface APIGeneralDataResponseDTO {
     /**
      * The technical system types of this system usage.
      */
-    technicalSystemTypes?: Array<APIIdentityNamePairResponseDTO> | null;
+    technicalSystemTypes: Array<APIIdentityNamePairResponseDTO> | null;
+    hostedAt?: APIHostingChoice;
 }
 
