@@ -13,7 +13,8 @@ export class GridExportService {
   constructor(private appDatePipe: AppDatePipe) {}
 
   //eslint-disable-next-line @typescript-eslint/no-explicit-any
-  private handleChipField(column: GridColumn, transformedItem: any, isReverse: boolean) {
+  private handleChipField(column: GridColumn, transformedItem: any) {
+    const isReverse = column.style === 'reverse-chip';
     const trueIndex = isReverse ? 1 : 0;
     const falseIndex = isReverse ? 0 : 1;
     return transformedItem[column.field] ? column.extraData[trueIndex].name : column.extraData[falseIndex].name;
@@ -32,12 +33,12 @@ export class GridExportService {
         switch (column.style) {
           case 'chip':
             if (typeof transformedItem[field] === 'boolean') {
-              transformedItem[field] = this.handleChipField(column, transformedItem, false);
+              transformedItem[field] = this.handleChipField(column, transformedItem);
             }
             break;
           case 'reverse-chip':
             if (typeof transformedItem[field] === 'boolean') {
-              transformedItem[field] = this.handleChipField(column, transformedItem, true);
+              transformedItem[field] = this.handleChipField(column, transformedItem);
             }
             break;
           case 'enum':
