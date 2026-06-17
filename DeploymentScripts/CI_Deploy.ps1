@@ -32,7 +32,7 @@ if ($LASTEXITCODE -ne 0) {
 Write-Host "Frontend deployment completed. Ensuring IIS is running..."
 $securePassword = ConvertTo-SecureString $password -AsPlainText -Force
 $credential = New-Object System.Management.Automation.PSCredential($username, $securePassword)
-
+write-host "Connecting to $computerName with user $username to restart IIS..."
 $remoteSession = $null
 try {
   $sessionOption = New-PSSessionOption -SkipCACheck -SkipCNCheck -SkipRevocationCheck
