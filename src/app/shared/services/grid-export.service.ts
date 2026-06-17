@@ -12,12 +12,11 @@ import { AppDatePipe } from '../pipes/app-date.pipe';
 export class GridExportService {
   constructor(private appDatePipe: AppDatePipe) {}
 
+  //eslint-disable-next-line @typescript-eslint/no-explicit-any
   private handleChipField(column: GridColumn, transformedItem: any, isReverse: boolean) {
     const trueIndex = isReverse ? 1 : 0;
     const falseIndex = isReverse ? 0 : 1;
-    return transformedItem[column.field]
-      ? column.extraData[trueIndex].name
-      : column.extraData[falseIndex].name;
+    return transformedItem[column.field] ? column.extraData[trueIndex].name : column.extraData[falseIndex].name;
   }
   /**
    * @param item An item representing a row in the grid
