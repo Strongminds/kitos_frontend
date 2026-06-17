@@ -17,7 +17,6 @@ import {
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { YesNoDontKnowIrrelevantOption, mapToYesNoDontKnowIrrelevantEnum, yesNoDontKnowIrrelevantOptions } from 'src/app/shared/models/yes-no-dont-know-irrelevant.model';
-import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
