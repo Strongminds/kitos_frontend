@@ -104,16 +104,6 @@
         </app-dropdown
       ></app-tooltip>
     }
-    @if (descriptionEnabled$ | async) {
-      <app-textarea
-        class="full-width"
-        text="Note"
-        i18n-text
-        [formGroup]="itSystemInformationForm"
-        formName="notes"
-        (valueChange)="patchGeneral({ notes: $event })"
-      ></app-textarea>
-    }
     @if (licensingAndCodeModelsEnabled$ | async) {
       <app-multi-select-dropdown
         text="Licens- og kodegrundlag"
@@ -123,6 +113,16 @@
         [disabled]="!(hasModifyPermission$ | async)"
         (selectedEvent)="patchLicensingAndCodeModels($event)"
       ></app-multi-select-dropdown>
+    }
+    @if (descriptionEnabled$ | async) {
+      <app-textarea
+        class="full-width"
+        text="Note"
+        i18n-text
+        [formGroup]="itSystemInformationForm"
+        formName="notes"
+        (valueChange)="patchGeneral({ notes: $event })"
+      ></app-textarea>
     }
   </form>
 </app-card>
