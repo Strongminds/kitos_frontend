@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, first, map } from 'rxjs';
+import { combineLatestWith, first, map } from 'rxjs';
 import { APIShallowOrganizationDTO } from 'src/app/api/v1';
 import {
   APIExternalReferenceDataResponseDTO,
@@ -13,7 +13,6 @@ import {
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ARCHIVE_TEXT } from 'src/app/shared/constants/constants';
-import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import {
   ArchiveDutyRecommendationChoice,
   archiveDutyRecommendationChoiceOptions,
@@ -77,7 +76,6 @@ import { ITSystemCatalogDetailsFrontpageComponentStore } from './it-system-catal
     ParagraphComponent,
     ItSystemKleOverviewComponent,
     AsyncPipe,
-    MultiSelectDropdownComponent,
   ],
 })
 export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent implements OnInit {
@@ -91,6 +89,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly organizations$ = this.componentStore.organizations$;
   public readonly isLoadingOrganizations$ = this.componentStore.isLoadingOrganizations$;
   public readonly hasModifyVisibilityPermission$ = this.store.select(selectITSystemHasModifyPermission);
+
   public readonly externalReferences$ = this.store.select(selectItSystemExternalReferences).pipe(
     filterNullish(),
     map((references) => [...references].sort((a, b) => a.title.localeCompare(b.title))),
