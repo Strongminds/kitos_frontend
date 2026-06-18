@@ -66,6 +66,7 @@
         [formGroup]="itSystemInformationForm"
         formName="hostedAt"
         [data]="hostedAtOptions"
+        (valueChange)="patchGeneral({ hostedAt: $event })"
       ></app-dropdown>
     }
     @if (amountOfUsersEnabled$ | async) {
