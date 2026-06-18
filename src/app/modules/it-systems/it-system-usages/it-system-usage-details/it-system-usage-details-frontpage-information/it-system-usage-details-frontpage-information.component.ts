@@ -25,7 +25,7 @@ import {
   mapRegularOptionToMultiSelectItem,
 } from 'src/app/shared/models/dropdown-option.model';
 import { itSystemUsageFields } from 'src/app/shared/models/field-permissions-blueprints.model';
-import { HostedAt, hostedAtOptions } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
+import { HostedAt, hostedAtOptions, mapHostedAt } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import {
   LicensingAndCodeModel,
   licensingAndCodeModelOptions,
