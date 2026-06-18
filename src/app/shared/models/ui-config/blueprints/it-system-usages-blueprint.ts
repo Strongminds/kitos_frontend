@@ -87,6 +87,7 @@ export const ItSystemUsageUiBluePrint = {
         },
         licensingAndCodeModels: {
           text: $localize`Licens- og kodegrundlag`,
+          disableByDefault: true,
         },
       },
     },
