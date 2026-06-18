@@ -16,6 +16,7 @@ import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
 import { APIItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidityWriteRequestDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIGeneralDataUpdateRequestDTO { 
@@ -71,5 +72,9 @@ export interface APIGeneralDataUpdateRequestDTO {
      * Defines the master contract for this system (many contracts can point to a system usage but only one can be the master contract)  Constraint: The contract provided MUST point to this system usage for it to be selected as \"main contract\".
      */
     mainContractUuid?: string | null;
+    /**
+     * The licensing and code models for this system usage.
+     */
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

@@ -17,6 +17,7 @@ import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
 import { APIItSystemUsageValidityResponseDTO } from './itSystemUsageValidityResponseDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIGeneralDataResponseDTO { 
@@ -67,5 +68,9 @@ export interface APIGeneralDataResponseDTO {
      */
     technicalSystemTypes: Array<APIIdentityNamePairResponseDTO> | null;
     hostedAt?: APIHostingChoice;
+    /**
+     * The licensing and code models for this system usage.
+     */
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 
