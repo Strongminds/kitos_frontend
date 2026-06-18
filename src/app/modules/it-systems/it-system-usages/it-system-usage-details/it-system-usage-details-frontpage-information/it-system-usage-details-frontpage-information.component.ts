@@ -382,7 +382,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
            dataClassification: general.dataClassification,
            notes: general.notes,
            aiTechnology: mapToYesNoEnum(general.containsAITechnology),
-           hostedAt: mapHostedAt(general.hostedAt ?? undefined),
+           //hostedAt: mapHostedAt(general.hostedAt ?? undefined),
            licensingAndCodeModels: licensingAndCodeModelItems,
           });
 
