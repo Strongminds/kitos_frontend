@@ -10,14 +10,12 @@ replace_proxy() {
 }
 
 cleanup_start() {
-  replace_proxy "localhost:5000" "kitos-dev\\.strongminds\\.dk" "src/proxy.conf.json"
+  replace_proxy "http://localhost:5000" "https://kitos-dev\\.strongminds\\.dk" "src/proxy.conf.json"
 }
 
 if [ "$1" = "start" ]; then
   trap cleanup_start EXIT
 
-  replace_proxy "localhost:44300" "kitos-dev\\.strongminds\\.dk" "src/proxy.conf.json"
-  replace_proxy "localhost:5000" "kitos-dev\\.strongminds\\.dk" "src/proxy.conf.json"
-  replace_proxy "kitos-dev\\.strongminds\\.dk" "localhost:5000" "src/proxy.conf.json"
+  replace_proxy "https://kitos-dev\\.strongminds\\.dk" "http://localhost:5000" "src/proxy.conf.json"
   yarn start
 fi
