@@ -11,6 +11,7 @@
  */
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
+import { APIHostingChoice } from './hostingChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
@@ -70,5 +71,6 @@ export interface APIGeneralDataWriteRequestDTO {
      * The licensing and code models used for this system usage. Existing models will be replaced by the input data.
      */
     licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
+    hostedAt?: APIHostingChoice;
 }
 
