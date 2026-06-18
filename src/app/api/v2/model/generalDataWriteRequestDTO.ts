@@ -11,11 +11,11 @@
  */
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
-import { APIHostingChoice } from './hostingChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIExpectedUsersIntervalDTO } from './expectedUsersIntervalDTO';
 import { APIYesNoPartiallyChoice } from './yesNoPartiallyChoice';
 import { APIItSystemUsageValidityWriteRequestDTO } from './itSystemUsageValidityWriteRequestDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIGeneralDataWriteRequestDTO { 
@@ -66,6 +66,9 @@ export interface APIGeneralDataWriteRequestDTO {
      * The technical system type classifications of this system usage (multi-choice).  Constraint: If an update changes this field, all options identified must be currently available in the organization context
      */
     technicalSystemTypeUuids?: Array<string> | null;
-    hostedAt?: APIHostingChoice;
+    /**
+     * The licensing and code models used for this system usage. Existing models will be replaced by the input data.
+     */
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

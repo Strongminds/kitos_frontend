@@ -11,6 +11,7 @@
  */
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIYesNoDontKnowIrrelevantChoice } from './yesNoDontKnowIrrelevantChoice';
+import { APIHostingChoice } from './hostingChoice';
 import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
@@ -23,7 +24,7 @@ export interface APIGdprReportResponseDTO {
     legalData?: boolean;
     dataProcessingAgreementConcluded?: boolean;
     linkToDirectory?: boolean;
-    sensitiveDataTypes: Array<string> | null;
+    sensitiveDataTypes?: Array<string> | null;
     riskAssessment?: APIYesNoDontKnowIrrelevantChoice;
     riskAssessmentDate?: string | null;
     plannedRiskAssessmentDate?: string | null;
@@ -34,12 +35,13 @@ export interface APIGdprReportResponseDTO {
     personalDataSocialOtherPrivateMatters?: boolean;
     dpia?: APIYesNoDontKnowChoice;
     dpiaDate?: string | null;
-    technicalSupervisionDocumentationUrlName: string | null;
+    hostedAt?: APIHostingChoice;
+    technicalSupervisionDocumentationUrlName?: string | null;
     technicalSupervisionDocumentationUrl?: string | null;
     userSupervision?: APIYesNoDontKnowChoice;
     userSupervisionDocumentationUrl?: string | null;
     userSupervisionDocumentationUrlName?: string | null;
     nextDataRetentionEvaluationDate?: string | null;
-    insecureCountriesSubjectToDataTransfer: Array<string> | null;
+    insecureCountriesSubjectToDataTransfer?: Array<string> | null;
 }
 

@@ -15,6 +15,7 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoDontKnowIrrelevantChoice } from './yesNoDontKnowIrrelevantChoice';
 import { APITechnicalPrecautionChoice } from './technicalPrecautionChoice';
 import { APIDataSensitivityLevelChoice } from './dataSensitivityLevelChoice';
+import { APIHostingChoice } from './hostingChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIGDPRPersonalDataChoice } from './gDPRPersonalDataChoice';
 import { APIRiskLevelChoice } from './riskLevelChoice';
@@ -22,6 +23,7 @@ import { APIRiskLevelChoice } from './riskLevelChoice';
 
 export interface APIGDPRRegistrationsResponseDTO { 
     processingPurpose?: string | null;
+    hostedAt?: APIHostingChoice;
     directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels: Array<APIDataSensitivityLevelChoice>;
     sensitivePersonData: Array<APIIdentityNamePairResponseDTO>;
