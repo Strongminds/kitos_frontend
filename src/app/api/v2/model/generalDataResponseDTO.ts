@@ -66,11 +66,11 @@ export interface APIGeneralDataResponseDTO {
     /**
      * The technical system types of this system usage.
      */
-    technicalSystemTypes?: Array<APIIdentityNamePairResponseDTO> | null;
-    /**
-     * The licensing and code models used for this system usage.
-     */
-    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
+    technicalSystemTypes: Array<APIIdentityNamePairResponseDTO> | null;
     hostedAt?: APIHostingChoice;
+    /**
+     * The licensing and code models used for this system.
+     */
+    licensingAndCodeModels: Array<APILicensingAndCodeModelChoice> | null;
 }
 

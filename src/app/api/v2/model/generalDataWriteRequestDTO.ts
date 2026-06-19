@@ -67,10 +67,10 @@ export interface APIGeneralDataWriteRequestDTO {
      * The technical system type classifications of this system usage (multi-choice).  Constraint: If an update changes this field, all options identified must be currently available in the organization context
      */
     technicalSystemTypeUuids?: Array<string> | null;
+    hostedAt?: APIHostingChoice;
     /**
      * The licensing and code models used for this system usage. Existing models will be replaced by the input data.
      */
     licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
-    hostedAt?: APIHostingChoice;
 }
 
