@@ -39,6 +39,10 @@ export interface APIItSystemArchiveResponseDTO {
      */
     legacyName?: string | null;
     /**
+     * Date system was taken into usage
+     */
+    takenIntoUsageDate?: string | null;
+    /**
      * Local call name from the snapshot at archive time
      */
     localName?: string | null;
