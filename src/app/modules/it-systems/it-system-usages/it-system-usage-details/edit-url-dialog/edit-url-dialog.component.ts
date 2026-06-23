@@ -42,6 +42,7 @@ export class EditSimpleLinkDialogComponent extends BaseComponent implements OnIn
   @Input() linkPermission$?: Observable<boolean>;
   @Input() linkDisabledMessage?: string;
   @Input() closeDialogOnSubmit = false;
+  @Input() disableSubmitIfNoUrl = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Output() submitMethod!: EventEmitter<any>;
 
@@ -63,7 +64,7 @@ export class EditSimpleLinkDialogComponent extends BaseComponent implements OnIn
   }
 
   public disableSave() {
-    return this.isBusy || this.hasNoChanges();
+    return this.isBusy || this.hasNoChanges() || (this.disableSubmitIfNoUrl && !this.simpleLinkForm.controls.url.value);
   }
 
   private urlIsInvalid() {

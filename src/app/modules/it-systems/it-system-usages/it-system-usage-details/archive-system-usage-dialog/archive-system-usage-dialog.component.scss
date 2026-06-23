@@ -33,6 +33,10 @@
   margin-bottom: 1rem;
 }
 
+::ng-deep .disabled-delete-icon path {
+  stroke: #999 !important;
+}
+
 .remove-ref-btn {
   padding: 0.5rem;
   border: none;

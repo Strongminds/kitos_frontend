@@ -32,14 +32,18 @@
             i18n-title
             (submitMethod)="onReferenceUpdated(index, $event)"
             [closeDialogOnSubmit]="true"
+            [disableSubmitIfNoUrl]="true"
           ></app-edit-url-section>
         </div>
-        @if (canRemoveReference()) {
+        @if (true) {
           <app-icon-button
             [tooltipText]="'Fjern reference'"
             i18n-tooltipText
             (buttonClick)="removeReference(index)"
-            ><app-trashcan-icon></app-trashcan-icon>
+            [disabled]="!canRemoveReference()"
+            ><app-trashcan-icon [ngClass]="{
+              'disabled-delete-icon': !canRemoveReference(),
+            }"></app-trashcan-icon>
           </app-icon-button>
         }
       </div>
@@ -50,7 +54,8 @@
       class="add-ref-button"
       (buttonClick)="addReference()"
       buttonStyle="secondary"
-    >Tilføj reference</app-button>
+      [disabled]="isAddReferenceDisabled()"
+    >Tilføj flere referencer</app-button>
   </div>
   </app-standard-vertical-content-grid>
 

@@ -100,6 +100,10 @@ export class ArchiveSystemUsageDialogComponent {
     return this.archiveReferences.length > 1;
   }
 
+  public isAddReferenceDisabled() {
+    return this.archiveReferences.controls.some((reference) => !reference.value.url);
+  }
+
   onConfirm(): void {
     if (!this.archiveFormGroup.valid) return;
     const controls = this.archiveFormGroup.controls;
