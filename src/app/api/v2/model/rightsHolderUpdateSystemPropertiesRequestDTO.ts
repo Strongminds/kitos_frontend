@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIRightsHolderUpdateSystemPropertiesRequestDTO { 
@@ -45,5 +46,9 @@ export interface APIRightsHolderUpdateSystemPropertiesRequestDTO {
      * UUID\'s for KLE numbers categorizing this IT-System
      */
     kleUuids?: Array<string> | null;
+    /**
+     * The licensing and code model used for this system. Existing models will be replaced by the input data.
+     */
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 
