@@ -52,7 +52,7 @@ export class ArchiveSystemUsageDialogComponent {
 
     const dto: APICreateItSystemUsageArchiveRequestDTO = {
       //usageDate: controls.usageDate.value?.toDateString() || '', TODO update backend model with this field from design document
-      archivingDate: controls.archivingDate?.value as unknown as string,
+      archivingDate: controls.archivingDate?.value?.toISOString() || '',
       referenceName: controls.referenceName.value || '',
       note: controls.note.value || '',
     };
