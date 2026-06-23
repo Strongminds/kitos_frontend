@@ -84,15 +84,13 @@ export class ArchiveSystemUsageDialogComponent {
     const reference = this.archiveReferences.at(index);
     return reference.valueChanges.pipe(
       startWith(reference.value),
-      map(({ name, url }) => {
-        const referenceUrl = url || '';
-        if (!referenceUrl) return undefined;
-
-        return {
-          name: name || '',
-          url: referenceUrl,
-        };
-      }),
+      map(
+        ({ name, url }) =>
+          ({
+            name: name || undefined,
+            url: url || undefined,
+          }) as SimpleLink,
+      ),
     );
   }
 
@@ -108,14 +106,12 @@ export class ArchiveSystemUsageDialogComponent {
     if (!this.archiveFormGroup.valid) return;
     const controls = this.archiveFormGroup.controls;
 
-    const validArchiveReferences = this.archiveReferences.controls
-      .map((referenceControl) => {
-        const innerControls = referenceControl.controls;
-        const name = innerControls.name.value || '';
-        const url = innerControls.url.value || '';
-        return { name, url };
-      })
-      .filter((reference) => !!reference.url);
+    const validArchiveReferences = this.archiveReferences.controls.map((referenceControl) => {
+      const innerControls = referenceControl.controls;
+      const name = innerControls.name.value || '';
+      const url = innerControls.url.value || '';
+      return { name, url };
+    });
 
     const dto: APICreateItSystemUsageArchiveRequestDTO = {
       archivingDate: controls.archivingDate?.value?.toISOString() || '',
