@@ -25,6 +25,7 @@ import { ItSystemUsageDetailsRelationsComponent } from './it-system-usages/it-sy
 import { ItSystemUsageDetailsRolesComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details-roles/it-system-usage-details-roles.component';
 import { ITSystemUsageDetailsComponent } from './it-system-usages/it-system-usage-details/it-system-usage-details.component';
 import { ITSystemUsagesComponent } from './it-system-usages/it-system-usages.component';
+import { ItSystemArchiveComponent } from './it-system-archive/it-system-archive.component';
 import { ITSystemsComponent } from './it-systems.component';
 
 const routes: Routes = [
@@ -108,6 +109,7 @@ const routes: Routes = [
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
+      { path: AppPath.itSystemArchive, component: ItSystemArchiveComponent },
       {
         path: AppPath.itInterfaces,
         component: ItSystemInterfacesComponent,

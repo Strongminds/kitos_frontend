@@ -7941,6 +7941,38 @@
         <source>Dele af data bevares + Delmængde kasseres (D+D)</source>
         <target state="new">Dele af data bevares + Delmængde kasseres (D+D)</target>
       </trans-unit>
+      <trans-unit id="6785779280003373613" datatype="html">
+        <source>IT System Archive</source>
+        <target state="new">IT System Archive</target>
+      </trans-unit>
+      <trans-unit id="7550982890201476053" datatype="html">
+        <source>Arkiveringsdato</source>
+        <target state="new">Arkiveringsdato</target>
+      </trans-unit>
+      <trans-unit id="9106425744426550513" datatype="html">
+        <source>Referencenavn</source>
+        <target state="new">Referencenavn</target>
+      </trans-unit>
+      <trans-unit id="505788991318317980" datatype="html">
+        <source>IT System UUID</source>
+        <target state="new">IT System UUID</target>
+      </trans-unit>
+      <trans-unit id="5494491683080337742" datatype="html">
+        <source>Systemnavn (Snapshot)</source>
+        <target state="new">Systemnavn (Snapshot)</target>
+      </trans-unit>
+      <trans-unit id="1016384359354357241" datatype="html">
+        <source>Lokalt systemnavn (Snapshot)</source>
+        <target state="new">Lokalt systemnavn (Snapshot)</target>
+      </trans-unit>
+      <trans-unit id="2888869448930359839" datatype="html">
+        <source>Lokalt system ID (Snapshot)</source>
+        <target state="new">Lokalt system ID (Snapshot)</target>
+      </trans-unit>
+      <trans-unit id="6129161525444246938" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT System Archive</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT System Archive</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

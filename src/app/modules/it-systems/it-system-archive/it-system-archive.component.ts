@@ -1,0 +1,190 @@
+import { AsyncPipe, CommonModule } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
+import { Store } from '@ngrx/store';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
+import { combineLatestWith, first } from 'rxjs';
+import { BaseComponent } from 'src/app/shared/base/base.component';
+import { ARCHIVE_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
+import { GridColumn } from 'src/app/shared/models/grid-column.model';
+import { GridState } from 'src/app/shared/models/grid-state.model';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
+import { ITSystemArchiveActions } from 'src/app/store/it-system-archive/actions';
+import { GridActions } from 'src/app/store/grid/actions';
+import {
+  selectArchiveGridData,
+  selectArchiveIsLoading,
+  selectArchiveGridState,
+  selectArchiveGridColumns,
+  selectArchiveHasDeletePermission,
+} from 'src/app/store/it-system-archive/selectors';
+import { AppPath } from 'src/app/shared/enums/app-path';
+import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
+import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
+import { GridComponent } from '../../../shared/components/grid/grid.component';
+import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
+import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+
+@Component({
+  templateUrl: './it-system-archive.component.html',
+  styleUrl: './it-system-archive.component.scss',
+  selector: 'app-it-system-archive',
+  standalone: true,
+  imports: [
+    CommonModule,
+    OverviewHeaderComponent,
+    GridOptionsButtonComponent,
+    ExportMenuButtonComponent,
+    HideShowButtonComponent,
+    GridComponent,
+    AsyncPipe,
+  ],
+})
+export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
+  public readonly isLoading$ = this.store.select(selectArchiveIsLoading);
+  public readonly gridData$ = this.store.select(selectArchiveGridData);
+  public readonly gridState$ = this.store.select(selectArchiveGridState);
+  public readonly gridColumns$ = this.store.select(selectArchiveGridColumns);
+  public readonly hasDeletePermission$ = this.store.select(selectArchiveHasDeletePermission);
+
+  private readonly systemSectionName = ARCHIVE_SECTION_NAME;
+
+  public readonly defaultGridColumns: GridColumn[] = [
+    {
+      field: 'uuid',
+      title: $localize`UUID`,
+      section: this.systemSectionName,
+      width: 220,
+      minResizableWidth: 220,
+      hidden: false,
+    },
+    {
+      field: 'archivingDate',
+      title: $localize`Arkiveringsdato`,
+      section: this.systemSectionName,
+      filter: 'date',
+      width: 140,
+      minResizableWidth: 140,
+      hidden: false,
+    },
+    {
+      field: 'referenceName',
+      title: $localize`Referencenavn`,
+      section: this.systemSectionName,
+      width: 180,
+      minResizableWidth: 180,
+      hidden: false,
+    },
+    {
+      field: 'itSystemUuid',
+      title: $localize`IT System UUID`,
+      section: this.systemSectionName,
+      width: 220,
+      minResizableWidth: 220,
+      hidden: false,
+    },
+    {
+      field: 'legacyName',
+      title: $localize`Systemnavn (Snapshot)`,
+      section: this.systemSectionName,
+      width: 220,
+      minResizableWidth: 220,
+      hidden: false,
+    },
+    {
+      field: 'localName',
+      title: $localize`Lokalt systemnavn (Snapshot)`,
+      section: this.systemSectionName,
+      width: 220,
+      minResizableWidth: 220,
+      hidden: true,
+    },
+    {
+      field: 'localId',
+      title: $localize`Lokalt system ID (Snapshot)`,
+      section: this.systemSectionName,
+      width: 160,
+      minResizableWidth: 160,
+      hidden: true,
+    },
+    {
+      field: 'note',
+      title: $localize`Note`,
+      section: this.systemSectionName,
+      width: 240,
+      minResizableWidth: 240,
+      hidden: true,
+    },
+  ];
+
+  constructor(
+    private store: Store,
+    private router: Router,
+    private route: ActivatedRoute,
+    private gridColumnStorageService: GridColumnStorageService,
+    private dialogOpenerService: DialogOpenerService,
+    private actions$: Actions,
+  ) {
+    super();
+  }
+
+  ngOnInit(): void {
+    // Initialize grid columns from localStorage
+    const columnId = ARCHIVE_SECTION_NAME;
+    const localStorageColumns = this.gridColumnStorageService.getColumns(columnId, this.defaultGridColumns) || this.defaultGridColumns;
+    this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(localStorageColumns));
+
+    // Dispatch initial load
+    this.subscriptions.add(
+      this.gridState$.pipe(first()).subscribe((state) => {
+        this.store.dispatch(ITSystemArchiveActions.getITSystemArchives(state));
+      }),
+    );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(
+          ofType(ITSystemArchiveActions.deleteITSystemArchiveSuccess),
+          concatLatestFrom(() => [this.gridState$]),
+          combineLatestWith(this.gridState$),
+        )
+        .subscribe(([[_, gridState], _gridState]) => {
+          this.store.dispatch(ITSystemArchiveActions.getITSystemArchives(gridState));
+        }),
+    );
+
+    this.store.dispatch(ITSystemArchiveActions.getITSystemArchiveCollectionPermissions());
+  }
+
+  public stateChange(newState: GridState): void {
+    this.store.dispatch(ITSystemArchiveActions.updateGridState(newState));
+  }
+
+  public onGridColumnsUpdated(gridColumns: GridColumn[]): void {
+    this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(gridColumns));
+  }
+
+  public rowIdSelect(event: CellClickEvent): void {
+    if (event.dataItem) {
+      const archiveUuid = event.dataItem.uuid;
+      this.router.navigate([AppPath.itSystemArchive, archiveUuid, AppPath.frontpage]);
+    }
+  }
+
+  public onDeleteEvent(archive: any): void {
+    if (archive?.uuid) {
+      this.store.dispatch(ITSystemArchiveActions.deleteITSystemArchive(archive.uuid));
+    }
+  }
+
+  public onExcelExport = (exportAllColumns: boolean) => {
+    this.gridState$.pipe(first()).subscribe((gridState) => {
+      this.store.dispatch(
+        GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, 'it-system-archive')
+      );
+    });
+  };
+}

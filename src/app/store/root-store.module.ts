@@ -9,6 +9,8 @@ import { dataProcessingFeature } from './data-processing/reducer';
 import { GlobalAdminOptionTypeEffects } from './global-admin/global-option-types/effects';
 import { GridExportEffects } from './grid/effects';
 import { exportFeature } from './grid/reducer';
+import { ITSystemArchiveEffects } from './it-system-archive/effects';
+import { itSystemArchiveFeature } from './it-system-archive/reducer';
 import { ITContractEffects } from './it-contract/effects';
 import { itContractFeature } from './it-contract/reducer';
 import { ITInterfaceEffects } from './it-system-interfaces/effects';
@@ -93,11 +95,13 @@ import { OrganizationSuppliersEffects } from './organization/organization-suppli
     StoreModule.forFeature(notificationFeature),
     StoreModule.forFeature(alertsFeature),
     StoreModule.forFeature(organizationSuppliersFeature),
+    StoreModule.forFeature(itSystemArchiveFeature),
     EffectsModule.forRoot([]),
     EffectsModule.forFeature([
       UserEffects,
       ITSystemUsageEffects,
       ITSystemEffects,
+      ITSystemArchiveEffects,
       ITContractEffects,
       KLEEffects,
       RegularOptionTypeEffects,
