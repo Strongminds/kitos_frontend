@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
-import { FormArray, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -36,7 +36,6 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     ButtonComponent,
     IconButtonComponent,
     TrashcanIconComponent,
-    CollectionExtensionButtonComponent,
     EditUrlSectionComponent,
   ],
   templateUrl: './archive-system-usage-dialog.component.html',
@@ -78,17 +77,16 @@ export class ArchiveSystemUsageDialogComponent {
     });
   }
 
-  public getReference$(index: number): Observable<SimpleLink | undefined> {
+  public getReferenceObservable$(index: number): Observable<SimpleLink | undefined> {
     const reference = this.archiveReferences.at(index);
     return reference.valueChanges.pipe(
       startWith(reference.value),
       map(({ name, url }) => {
-        const referenceName = name?.trim() || '';
-        const referenceUrl = url?.trim() || '';
-        if (!referenceName && !referenceUrl) return undefined;
+        const referenceUrl = url || '';
+        if (!referenceUrl) return undefined;
 
         return {
-          name: referenceName,
+          name: name || '',
           url: referenceUrl,
         };
       }),
@@ -102,17 +100,15 @@ export class ArchiveSystemUsageDialogComponent {
   onConfirm(): void {
     if (!this.archiveFormGroup.valid) return;
     const controls = this.archiveFormGroup.controls;
-    if (!this.archiveFormGroup.controls.archivingDate.value) return;
 
-    const archiveReferences = this.archiveReferences.controls
-      .map((referenceControl) => {
-        const name = referenceControl.controls.name.value?.trim() || '';
-        const url = referenceControl.controls.url.value?.trim() || '';
-        return { name, url };
-      })
-      .filter((reference) => reference.name !== '' || reference.url !== '');
+    const archiveReferences = this.archiveReferences.controls.map((referenceControl) => {
+      const innerControls = referenceControl.controls;
+      const name = innerControls.name.value || '';
+      const url = innerControls.url.value || '';
+      return { name, url };
+    });
 
-    const hasInvalidReference = archiveReferences.some((reference) => !reference.name || !reference.url);
+    const hasInvalidReference = archiveReferences.some((reference) => !reference.url);
     if (hasInvalidReference) return;
 
     const dto: APICreateItSystemUsageArchiveRequestDTO = {
