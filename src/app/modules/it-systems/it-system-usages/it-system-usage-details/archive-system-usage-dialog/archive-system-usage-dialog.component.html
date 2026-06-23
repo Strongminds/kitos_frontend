@@ -1,11 +1,5 @@
 <app-dialog title="Arkivér system" i18n-title overflow="none">
   <app-standard-vertical-content-grid>
-    <!-- <app-datepicker
-      [formGroup]="archiveFormGroup"
-      formName="usageDate"
-      text="Anvendelsesdato"
-    ></app-datepicker> -->
-
     <app-datepicker
       [formGroup]="archiveFormGroup"
       formName="archivingDate"
@@ -23,6 +17,37 @@
       formName="note"
     ></app-textarea>
   </app-standard-vertical-content-grid>
+
+  <section class="archive-references-section">
+    @for (referenceControl of archiveReferences.controls; track $index; let index = $index) {
+      <div class="reference-row">
+        <div class="reference-field">
+          <app-edit-url-section
+            [simpleLink$]="getReference$(index)"
+            [closeDialogOnSubmit]="true"
+            title="Reference/link til ESDH"
+            i18n-title
+            (submitMethod)="onReferenceUpdated(index, $event)"
+            [closeDialogOnSubmit]="true"
+          ></app-edit-url-section>
+        </div>
+        <app-icon-button
+          [disabled]="!canRemoveReference()"
+          [tooltipText]="'Fjern reference'"
+          i18n-tooltipText
+          (buttonClick)="removeReference(index)"
+        >
+          <app-trashcan-icon></app-trashcan-icon>
+        </app-icon-button>
+      </div>
+    }
+
+    <app-collection-extension-button
+      text="Tilføj reference"
+      i18n-text
+      (clicked)="addReference()"
+    ></app-collection-extension-button>
+  </section>
 
   <app-dialog-actions>
     <app-button (click)="onCancel()">Fortryd</app-button>

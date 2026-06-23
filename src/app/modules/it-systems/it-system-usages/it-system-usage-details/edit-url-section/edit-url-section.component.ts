@@ -23,6 +23,7 @@ export class EditUrlSectionComponent extends BaseComponent {
   @Input() nameDisabledMessage?: string;
   @Input() linkPermission$?: Observable<boolean>;
   @Input() linkDisabledMessage?: string;
+  @Input() closeDialogOnSubmit = false;
   @Output() submitMethod = new EventEmitter();
 
   public doesSimpleLinkExist$ = this.simpleLink$?.pipe(map((simpleLink) => simpleLink !== undefined));
@@ -42,6 +43,7 @@ export class EditUrlSectionComponent extends BaseComponent {
     dialogInstance.nameDisabledMessage = this.nameDisabledMessage;
     dialogInstance.linkPermission$ = this.linkPermission$;
     dialogInstance.linkDisabledMessage = this.linkDisabledMessage;
+    dialogInstance.closeDialogOnSubmit = this.closeDialogOnSubmit;
     dialogInstance.submitMethod = this.submitMethod;
   }
 

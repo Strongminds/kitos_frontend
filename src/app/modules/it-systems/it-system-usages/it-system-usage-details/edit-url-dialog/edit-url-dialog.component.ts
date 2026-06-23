@@ -41,6 +41,7 @@ export class EditSimpleLinkDialogComponent extends BaseComponent implements OnIn
   @Input() nameDisabledMessage?: string;
   @Input() linkPermission$?: Observable<boolean>;
   @Input() linkDisabledMessage?: string;
+  @Input() closeDialogOnSubmit = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Output() submitMethod!: EventEmitter<any>;
 
@@ -132,6 +133,10 @@ export class EditSimpleLinkDialogComponent extends BaseComponent implements OnIn
 
     this.isBusy = true;
     this.submitMethod.emit({ name: name ?? '', url: url });
+
+    if (this.closeDialogOnSubmit) {
+      this.dialogRef.close();
+    }
   }
 
   onCancel() {

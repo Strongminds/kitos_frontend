@@ -151,7 +151,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   }
 
   public handleArchiveClick() {
-    this.dialogOpenerService.openArchiveSystemUsageDialog();
+    this.dialogOpenerService.openArchiveSystemUsageDialog(''); //TODO use real uuid
   }
 
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
