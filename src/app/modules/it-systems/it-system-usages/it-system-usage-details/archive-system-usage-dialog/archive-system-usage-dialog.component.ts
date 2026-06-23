@@ -9,7 +9,7 @@ import { ButtonComponent } from 'src/app/shared/components/buttons/button/button
 import { IconButtonComponent } from 'src/app/shared/components/buttons/icon-button/icon-button.component';
 import { DatePickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
+import { ScrollbarDialogComponent } from 'src/app/shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { DividerComponent } from 'src/app/shared/components/divider/divider.component';
 import { TrashcanIconComponent } from 'src/app/shared/components/icons/trashcan-icon.component';
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
@@ -18,7 +18,6 @@ import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.comp
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
-import { ScrollbarDialogComponent } from "src/app/shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component";
 
 @Component({
   selector: 'app-archive-system-usage-dialog',
@@ -36,8 +35,8 @@ import { ScrollbarDialogComponent } from "src/app/shared/components/dialogs/dial
     TrashcanIconComponent,
     EditUrlSectionComponent,
     DividerComponent,
-    ScrollbarDialogComponent
-],
+    ScrollbarDialogComponent,
+  ],
   templateUrl: './archive-system-usage-dialog.component.html',
   styleUrl: './archive-system-usage-dialog.component.scss',
 })
@@ -46,6 +45,7 @@ export class ArchiveSystemUsageDialogComponent {
 
   public archiveFormGroup = new FormGroup({
     archivingDate: new FormControl<Date | undefined>(undefined, Validators.required),
+    takenIntoUsageDate: new FormControl<Date | undefined>(undefined, Validators.required),
     referenceName: new FormControl<string | undefined>(undefined),
     note: new FormControl<string | undefined>(undefined),
     archiveReferences: new FormArray([this.createReferenceFormGroup()]),
@@ -116,6 +116,7 @@ export class ArchiveSystemUsageDialogComponent {
 
     const dto: APICreateItSystemUsageArchiveRequestDTO = {
       archivingDate: controls.archivingDate?.value?.toISOString() || '',
+      takenIntoUsageDate: controls.takenIntoUsageDate?.value?.toISOString() || '',
       referenceName: controls.referenceName.value || '',
       note: controls.note.value || '',
       archiveReferences: validArchiveReferences,
