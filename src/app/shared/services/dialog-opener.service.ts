@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
+import { DeleteOrArchiveSystemUsageDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/delete-or-archive-system-usage-dialog/delete-or-archive-system-usage-dialog.component';
 import { DeleteUserDialogComponent } from 'src/app/modules/organization/organization-users/delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
 import { BulkActionDialogComponent } from '../components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
@@ -27,7 +28,7 @@ export class DialogOpenerService {
   public openEditUserDialog(
     user: ODataOrganizationUser,
     nested: boolean,
-    isGlobalAdmin: boolean
+    isGlobalAdmin: boolean,
   ): MatDialogRef<EditUserDialogComponent> {
     const dialogRef = this.dialog.open(EditUserDialogComponent, {
       height: isGlobalAdmin ? '95%' : 'auto',
@@ -40,7 +41,7 @@ export class DialogOpenerService {
 
   public openDeleteUserDialog(
     user$: Observable<ODataOrganizationUser>,
-    nested: boolean
+    nested: boolean,
   ): MatDialogRef<DeleteUserDialogComponent> {
     const dialogRef = this.dialog.open(DeleteUserDialogComponent, defaultDialogMaxSize);
     dialogRef.componentInstance.user$ = user$;
@@ -49,19 +50,14 @@ export class DialogOpenerService {
   }
 
   public openTakeSystemOutOfUseDialog(
-    organizatioName: string | undefined = undefined
-  ): MatDialogRef<IconConfirmationDialogComponent> {
-    const dialogRef = this.dialog.open(IconConfirmationDialogComponent);
-    const confirmationDialogInstance = dialogRef.componentInstance as IconConfirmationDialogComponent;
-    confirmationDialogInstance.confirmationType = 'Custom';
-    confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?`;
-    confirmationDialogInstance.bodyText = $localize`Dette sletter de lokale registreringer vedrørerende systemet i ${
-      organizatioName ?? 'kommunen'
-    }, men sletter ikke stamdata om systemet i IT System Kataloget.`;
-    confirmationDialogInstance.icon = 'not-in-use';
-    confirmationDialogInstance.confirmColor = 'warn';
-    confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
-    confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
+    organizatioName: string | undefined = undefined,
+  ): MatDialogRef<DeleteOrArchiveSystemUsageDialogComponent> {
+    const dialogRef = this.dialog.open(DeleteOrArchiveSystemUsageDialogComponent);
+    const confirmationDialogInstance = dialogRef.componentInstance as DeleteOrArchiveSystemUsageDialogComponent;
+    confirmationDialogInstance.bodyText = $localize`
+    Tryk "Bekræft" for at slette de lokale registreringer vedrørerende systemet i ${organizatioName ?? 'kommunen'}. <br><br>
+    Tryk "Arkivér" for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. <br><br>
+    Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.`;
 
     return dialogRef;
   }

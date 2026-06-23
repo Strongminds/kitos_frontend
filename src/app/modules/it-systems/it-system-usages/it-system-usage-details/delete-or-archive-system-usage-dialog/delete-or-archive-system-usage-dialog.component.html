@@ -1,0 +1,14 @@
+<app-dialog title="">
+  <app-standard-vertical-content-grid class="confirmation-container">
+    <div class="icon-center-flexbox">
+        <app-not-in-use-icon></app-not-in-use-icon>
+    </div>
+    <app-paragraph paragraphSize="x-large" [bold]="true">{{ title }}</app-paragraph>
+    <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
+  </app-standard-vertical-content-grid>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" size="large" i18n>Fortryd</app-button>
+    <app-button color="warn" size="large" i18n>Bekræft</app-button>
+    <app-button buttonStyle="secondary" size="large" i18n>Arkivér</app-button>
+  </app-dialog-actions>
+</app-dialog>
