@@ -4,26 +4,29 @@
       [formGroup]="archiveFormGroup"
       formName="archivingDate"
       text="Udfasningsdato"
+      i18n-text
     ></app-datepicker>
 
     <app-textbox
       [formGroup]="archiveFormGroup"
       formName="referenceName"
       text="Navngivning på ESDH sag"
+      i18n-text
     ></app-textbox>
 
     <app-textarea
       [formGroup]="archiveFormGroup"
       formName="note"
+      text="Kommentar"
+      i18n-text
     ></app-textarea>
-  </app-standard-vertical-content-grid>
 
-  <section class="archive-references-section">
+    <div class="archive-references-section">
     @for (referenceControl of archiveReferences.controls; track $index; let index = $index) {
       <div class="reference-row">
         <div class="reference-field">
           <app-edit-url-section
-            [simpleLink$]="getReference$(index)"
+            [simpleLink$]="getReferenceObservable$(index)"
             [closeDialogOnSubmit]="true"
             title="Reference/link til ESDH"
             i18n-title
@@ -42,15 +45,19 @@
       </div>
     }
 
-    <app-collection-extension-button
-      text="Tilføj reference"
-      i18n-text
-      (clicked)="addReference()"
-    ></app-collection-extension-button>
-  </section>
+    <app-button
+      i18n
+      class="add-ref-button"
+      (buttonClick)="addReference()"
+      buttonStyle="secondary"
+    >Tilføj reference</app-button>
+  </div>
+  </app-standard-vertical-content-grid>
+
+<app-divider class="divider"></app-divider>
 
   <app-dialog-actions>
-    <app-button (click)="onCancel()">Fortryd</app-button>
-    <app-button color="primary" (click)="onConfirm()">Bekræft</app-button>
+    <app-button buttonStyle="secondary" (click)="onCancel()">Fortryd</app-button>
+    <app-button color="warn" (click)="onConfirm()" [disabled]="formIsInvalid()">Bekræft</app-button>
   </app-dialog-actions>
 </app-dialog>

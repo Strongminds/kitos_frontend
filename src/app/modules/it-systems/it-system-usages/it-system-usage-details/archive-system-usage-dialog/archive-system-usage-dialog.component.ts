@@ -1,17 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, map, startWith } from 'rxjs';
 import { APICreateItSystemUsageArchiveRequestDTO } from 'src/app/api/v2';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { IconButtonComponent } from 'src/app/shared/components/buttons/icon-button/icon-button.component';
-import { CollectionExtensionButtonComponent } from 'src/app/shared/components/collection-extension-button/collection-extension-button.component';
 import { DatePickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
+import { DividerComponent } from 'src/app/shared/components/divider/divider.component';
 import { TrashcanIconComponent } from 'src/app/shared/components/icons/trashcan-icon.component';
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
@@ -26,7 +25,6 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatButtonModule,
     StandardVerticalContentGridComponent,
     DialogComponent,
     DialogActionsComponent,
@@ -37,6 +35,7 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     IconButtonComponent,
     TrashcanIconComponent,
     EditUrlSectionComponent,
+    DividerComponent,
   ],
   templateUrl: './archive-system-usage-dialog.component.html',
   styleUrl: './archive-system-usage-dialog.component.scss',
@@ -62,6 +61,10 @@ export class ArchiveSystemUsageDialogComponent {
 
   public addReference() {
     this.archiveReferences.push(this.createReferenceFormGroup());
+  }
+
+  public formIsInvalid() {
+    return this.archiveFormGroup.invalid;
   }
 
   public removeReference(index: number) {

@@ -13,15 +13,24 @@
   margin-bottom: 0.5rem;
 }
 
+.add-ref-button {
+  width: 33%;
+}
+
 .reference-row {
   display: flex;
   gap: 0.75rem;
-  align-items: flex-end;
+  align-items: center;
   width: 100%;
 }
 
 .reference-field {
   flex: 1;
+}
+
+.divider {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 .remove-ref-btn {
