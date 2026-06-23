@@ -1,4 +1,4 @@
-<app-dialog title="Arkivér system" i18n-title overflow="none">
+<app-scrollbar-dialog title="Arkivér system" i18n-title overflow="none">
   <app-standard-vertical-content-grid>
     <app-datepicker
       [formGroup]="archiveFormGroup"
@@ -65,4 +65,4 @@
     <app-button buttonStyle="secondary" (click)="onCancel()">Fortryd</app-button>
     <app-button color="warn" (click)="onConfirm()" [disabled]="formIsInvalid()">Bekræft</app-button>
   </app-dialog-actions>
-</app-dialog>
+</app-scrollbar-dialog>

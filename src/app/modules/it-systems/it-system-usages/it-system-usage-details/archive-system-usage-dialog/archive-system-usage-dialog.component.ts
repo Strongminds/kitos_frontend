@@ -18,6 +18,7 @@ import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.comp
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
+import { ScrollbarDialogComponent } from "src/app/shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component";
 
 @Component({
   selector: 'app-archive-system-usage-dialog',
@@ -26,7 +27,6 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     CommonModule,
     ReactiveFormsModule,
     StandardVerticalContentGridComponent,
-    DialogComponent,
     DialogActionsComponent,
     TextBoxComponent,
     DatePickerComponent,
@@ -36,7 +36,8 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     TrashcanIconComponent,
     EditUrlSectionComponent,
     DividerComponent,
-  ],
+    ScrollbarDialogComponent
+],
   templateUrl: './archive-system-usage-dialog.component.html',
   styleUrl: './archive-system-usage-dialog.component.scss',
 })
