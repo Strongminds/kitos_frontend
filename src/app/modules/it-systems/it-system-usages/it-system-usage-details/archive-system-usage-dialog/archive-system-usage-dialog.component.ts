@@ -115,8 +115,8 @@ export class ArchiveSystemUsageDialogComponent {
     });
 
     const dto: APICreateItSystemUsageArchiveRequestDTO = {
-      archivingDate: controls.archivingDate?.value?.toISOString() || '',
-      takenIntoUsageDate: controls.takenIntoUsageDate?.value?.toISOString() || '',
+      archivingDate: this.toISOStringOrEmptyString(controls.archivingDate?.value),
+      takenIntoUsageDate: this.toISOStringOrEmptyString(controls.takenIntoUsageDate?.value),
       referenceName: controls.referenceName.value || '',
       note: controls.note.value || '',
       archiveReferences: validArchiveReferences,
@@ -127,6 +127,10 @@ export class ArchiveSystemUsageDialogComponent {
   }
   onCancel(): void {
     this.dialogRef.close();
+  }
+
+  private toISOStringOrEmptyString(date: Date | undefined | null): string {
+    return date ? date.toISOString() : '';
   }
 
   private createReferenceFormGroup() {
