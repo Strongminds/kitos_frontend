@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIArchiveReferenceResponseDTO } from './archiveReferenceResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
@@ -29,6 +30,26 @@ export interface APIItSystemArchiveResponseDTO {
      * Notes about the archive
      */
     note: string | null;
+    /**
+     * Unique identifier of the IT system from the snapshot
+     */
+    itSystemUuid: string;
+    /**
+     * System name from the snapshot at archive time
+     */
+    legacyName?: string | null;
+    /**
+     * Local call name from the snapshot at archive time
+     */
+    localName?: string | null;
+    /**
+     * Local system id from the snapshot at archive time
+     */
+    localId?: string | null;
     organization?: APIShallowOrganizationResponseDTO;
+    /**
+     * References associated with the archive
+     */
+    archiveReferences?: Array<APIArchiveReferenceResponseDTO> | null;
 }
 

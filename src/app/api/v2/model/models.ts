@@ -2,6 +2,7 @@ export * from './alertResponseDTO';
 export * from './alertType';
 export * from './appliedProcurementPlanResponseDTO';
 export * from './archiveDutyChoice';
+export * from './archiveReferenceResponseDTO';
 export * from './archivingCreationRequestDTO';
 export * from './archivingRegistrationsResponseDTO';
 export * from './archivingUpdateRequestDTO';

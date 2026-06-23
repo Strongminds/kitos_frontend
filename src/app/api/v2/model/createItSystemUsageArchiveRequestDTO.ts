@@ -9,6 +9,7 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
 export interface APICreateItSystemUsageArchiveRequestDTO { 
@@ -24,5 +25,9 @@ export interface APICreateItSystemUsageArchiveRequestDTO {
      * Notes about the archive
      */
     note: string | null;
+    /**
+     * References associated with the archive
+     */
+    archiveReferences?: Array<APISimpleLinkDTO> | null;
 }
 
