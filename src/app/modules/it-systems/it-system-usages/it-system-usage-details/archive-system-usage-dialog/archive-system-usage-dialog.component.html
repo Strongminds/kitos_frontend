@@ -1,1 +1,31 @@
-<p>archive-system-usage-dialog works!</p>
+<app-dialog title="Arkivér system" i18n-title overflow="none">
+  <app-standard-vertical-content-grid>
+    <!-- <app-datepicker
+      [formGroup]="archiveFormGroup"
+      formName="usageDate"
+      text="Anvendelsesdato"
+    ></app-datepicker> -->
+
+    <app-datepicker
+      [formGroup]="archiveFormGroup"
+      formName="archivingDate"
+      text="Udfasningsdato"
+    ></app-datepicker>
+
+    <app-textbox
+      [formGroup]="archiveFormGroup"
+      formName="referenceName"
+      text="Navngivning på ESDH sag"
+    ></app-textbox>
+
+    <app-textarea
+      [formGroup]="archiveFormGroup"
+      formName="note"
+    ></app-textarea>
+  </app-standard-vertical-content-grid>
+
+  <app-dialog-actions>
+    <app-button (click)="onCancel()">Fortryd</app-button>
+    <app-button color="primary" (click)="onConfirm()">Bekræft</app-button>
+  </app-dialog-actions>
+</app-dialog>
