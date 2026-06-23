@@ -241,7 +241,6 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   public handleArchiveClick() {
-    console.log('handleArchiveClick called');
     this.dialogOpenerService.openArchiveSystemUsageDialog();
   }
 
@@ -273,6 +272,14 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
                     this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
                   }
                 }),
+            );
+
+            this.subscriptions.add(
+              this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
+                confirmationDialogRef.close();
+                this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+                this.notificationService.showDefault($localize`Systemanvendelsen blev arkiveret`);
+              }),
             );
           }),
         )
