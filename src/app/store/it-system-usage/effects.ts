@@ -176,14 +176,13 @@ export class ITSystemUsageEffects {
   archiveItSystemUsage$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.archiveItSystemUsage),
-      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
-      switchMap(([{ archiveRequestDto }, systemUsageUuid]) => {
-        console.log('archiving system usage with uuid ' + systemUsageUuid + ' and request dto: ', archiveRequestDto);
-        if (!systemUsageUuid) return of(ITSystemUsageActions.archiveItSystemUsageError());
+      switchMap(({ itSystemUsageUuid, archiveRequestDto }) => {
+        console.log('archiveItSystemUsage$ effect triggered with:', { itSystemUsageUuid, archiveRequestDto });
+        if (!itSystemUsageUuid) return of(ITSystemUsageActions.archiveItSystemUsageError());
 
         return this.apiV2ItSystemUsageService
           .postSingleItSystemUsageV2ArchiveItSystemUsage({
-            systemUsageUuid,
+            systemUsageUuid: itSystemUsageUuid,
             aPICreateItSystemUsageArchiveRequestDTO: archiveRequestDto,
           })
           .pipe(

@@ -74,9 +74,10 @@ export class DialogOpenerService {
     return dialogRef;
   }
 
-  public openArchiveSystemUsageDialog(): MatDialogRef<ArchiveSystemUsageDialogComponent> {
+  public openArchiveSystemUsageDialog(itSystemUsageUuid: string): MatDialogRef<ArchiveSystemUsageDialogComponent> {
     const dialogRef = this.dialog.open(ArchiveSystemUsageDialogComponent);
-
+    const componentInstance = dialogRef.componentInstance;
+    componentInstance.itSystemUsageUuid = itSystemUsageUuid;
     return dialogRef;
   }
 

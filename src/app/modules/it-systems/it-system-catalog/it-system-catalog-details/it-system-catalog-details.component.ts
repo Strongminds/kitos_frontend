@@ -150,6 +150,10 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     );
   }
 
+  public handleArchiveClick() {
+    this.dialogOpenerService.openArchiveSystemUsageDialog();
+  }
+
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
     this.subscriptions.add(
       this.organizationName$.pipe(first()).subscribe((organizationName) => {
@@ -157,8 +161,24 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         if (takingIntoUse) {
           confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
         } else {
-          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(
+            organizationName,
+            this.handleArchiveClick.bind(this),
+          );
         }
+
+        this.subscriptions.add(
+          this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
+            confirmationDialogRef.close();
+            this.notificationService.showDefault($localize`Systemanvendelsen blev arkiveret`);
+          }),
+        );
+
+        this.subscriptions.add(
+          this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageError), first()).subscribe(() => {
+            this.notificationService.showDefault($localize`Systemanvendelsen kunne ikke arkiveres`);
+          }),
+        );
 
         this.subscriptions.add(
           confirmationDialogRef

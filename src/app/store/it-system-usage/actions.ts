@@ -171,7 +171,10 @@ export const ITSystemUsageActions = createActionGroup({
     'Create It System Usage Success': (itSystemUuid: string, usageUuid: string) => ({ itSystemUuid, usageUuid }),
     'Create It System Usage Error': emptyProps(),
 
-    'Archive It System Usage': (archiveRequestDto?: APICreateItSystemUsageArchiveRequestDTO) => ({ archiveRequestDto }),
+    'Archive It System Usage': (
+      itSystemUsageUuid: string,
+      archiveRequestDto?: APICreateItSystemUsageArchiveRequestDTO,
+    ) => ({ itSystemUsageUuid, archiveRequestDto }),
     'Archive It System Usage Success': (archive: APIItSystemArchiveResponseDTO) => ({ archive }),
     'Archive It System Usage Error': emptyProps(),
 

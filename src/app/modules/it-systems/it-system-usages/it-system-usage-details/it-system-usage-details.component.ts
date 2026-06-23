@@ -241,7 +241,9 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   public handleArchiveClick() {
-    this.dialogOpenerService.openArchiveSystemUsageDialog();
+    this.itSystemUsageUuid$.pipe(filterNullish()).subscribe((itSystemUsageUuid) => {
+      this.dialogOpenerService.openArchiveSystemUsageDialog(itSystemUsageUuid);
+    });
   }
 
   public showRemoveDialog() {
@@ -279,6 +281,12 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
                 confirmationDialogRef.close();
                 this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
                 this.notificationService.showDefault($localize`Systemanvendelsen blev arkiveret`);
+              }),
+            );
+
+            this.subscriptions.add(
+              this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageError), first()).subscribe(() => {
+                this.notificationService.showDefault($localize`Systemanvendelsen kunne ikke arkiveres`);
               }),
             );
           }),

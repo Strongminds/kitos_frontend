@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogRef } from '@angular/material/dialog';
@@ -33,6 +33,8 @@ import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
   styleUrl: './archive-system-usage-dialog.component.scss',
 })
 export class ArchiveSystemUsageDialogComponent {
+  @Input() public itSystemUsageUuid!: string;
+
   public archiveFormGroup = new FormGroup({
     //usageDate: new FormControl<Date | undefined>(undefined, Validators.required),
     archivingDate: new FormControl<Date | undefined>(undefined),
@@ -57,7 +59,7 @@ export class ArchiveSystemUsageDialogComponent {
       note: controls.note.value || '',
     };
 
-    this.store.dispatch(ITSystemUsageActions.archiveItSystemUsage(dto));
+    this.store.dispatch(ITSystemUsageActions.archiveItSystemUsage({ itSystemUsageUuid: this.itSystemUsageUuid, dto }));
     this.dialogRef.close();
   }
 
