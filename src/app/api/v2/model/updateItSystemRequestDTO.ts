@@ -12,6 +12,7 @@
 import { APIRecommendedArchiveDutyRequestDTO } from './recommendedArchiveDutyRequestDTO';
 import { APIRegistrationScopeChoice } from './registrationScopeChoice';
 import { APIUpdateExternalReferenceDataWriteRequestDTO } from './updateExternalReferenceDataWriteRequestDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIUpdateItSystemRequestDTO { 
@@ -53,5 +54,9 @@ export interface APIUpdateItSystemRequestDTO {
     rightsHolderUuid?: string | null;
     scope?: APIRegistrationScopeChoice;
     recommendedArchiveDuty?: APIRecommendedArchiveDutyRequestDTO;
+    /**
+     * The licensing and code model used for this system. Existing models will be replaced by the input data.
+     */
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

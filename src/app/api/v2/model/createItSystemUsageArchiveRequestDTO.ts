@@ -9,7 +9,6 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchiveReferenceWriteRequestDTO } from './archiveReferenceWriteRequestDTO';
 
 
 export interface APICreateItSystemUsageArchiveRequestDTO { 
@@ -25,9 +24,5 @@ export interface APICreateItSystemUsageArchiveRequestDTO {
      * Notes about the archive
      */
     note: string | null;
-    /**
-     * References associated with the archive
-     */
-    archiveReferences?: Array<APIArchiveReferenceWriteRequestDTO> | null;
 }
 

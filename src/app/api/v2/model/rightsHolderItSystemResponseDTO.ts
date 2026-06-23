@@ -13,6 +13,7 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIRecommendedArchiveDutyResponseDTO } from './recommendedArchiveDutyResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 import { APIExternalReferenceDataResponseDTO } from './externalReferenceDataResponseDTO';
+import { APILicensingAndCodeModelChoice } from './licensingAndCodeModelChoice';
 
 
 export interface APIRightsHolderItSystemResponseDTO { 
@@ -61,5 +62,9 @@ export interface APIRightsHolderItSystemResponseDTO {
      * A list of unique suppliers associated with each usage’s main contract.
      */
     mainContractSuppliers: Array<APIShallowOrganizationResponseDTO>;
+    /**
+     * The licensing and code models used for this system.
+     */
+    licensingAndCodeModels?: Array<APILicensingAndCodeModelChoice> | null;
 }
 

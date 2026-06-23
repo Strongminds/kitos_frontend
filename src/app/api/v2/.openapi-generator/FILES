@@ -102,6 +102,7 @@ api/itSystemLocalTechnicalSystemTypesInternalV2.service.ts
 api/itSystemUsageArchiveLocationTypeV2.service.ts
 api/itSystemUsageArchiveTestLocationTypeV2.service.ts
 api/itSystemUsageArchiveTypeV2.service.ts
+api/itSystemUsageArchivesV2.service.ts
 api/itSystemUsageCriticalityLevelTypeV2.service.ts
 api/itSystemUsageDataClassificationTypeV2.service.ts
 api/itSystemUsageInternalV2.service.ts
@@ -139,8 +140,6 @@ model/alertResponseDTO.ts
 model/alertType.ts
 model/appliedProcurementPlanResponseDTO.ts
 model/archiveDutyChoice.ts
-model/archiveReferenceResponseDTO.ts
-model/archiveReferenceWriteRequestDTO.ts
 model/archivingCreationRequestDTO.ts
 model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
