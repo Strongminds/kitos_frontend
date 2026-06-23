@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -6,6 +7,7 @@ import { combineLatest, distinctUntilChanged, filter, first, map, tap } from 'rx
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { DeleteOrArchiveChoice } from 'src/app/shared/enums/delete-or-archive-choice';
 import { combineAND } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -40,11 +42,10 @@ import {
   selectITSystemUsageEnableTabSystemRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { AsyncPipe } from '@angular/common';
 import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
-import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
+import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -55,8 +56,8 @@ import { LoadingComponent } from '../../../../shared/components/loading/loading.
     NavigationDrawerComponent,
     RouterOutlet,
     LoadingComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ITSystemUsageDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -249,22 +250,25 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
             const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
 
             this.subscriptions.add(
+              confirmationDialogRef
+                .afterClosed()
+                .pipe(first())
+                .subscribe((result) => {
+                  if (result == DeleteOrArchiveChoice.Delete) {
+                    this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
+                  }
+                  if (result == DeleteOrArchiveChoice.Archive) {
+                    console.log('Archiving system usage');
+                  }
+                }),
+            );
+
+            this.subscriptions.add(
               this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess), first()).subscribe(() => {
                 confirmationDialogRef.close();
                 this.notificationService.showDefault($localize`Systemanvendelsen blev slettet`);
                 this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
               }),
-            );
-
-            this.subscriptions.add(
-              confirmationDialogRef
-                .afterClosed()
-                .pipe(first())
-                .subscribe((result) => {
-                  if (result) {
-                    this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
-                  }
-                }),
             );
           }),
         )

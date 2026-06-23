@@ -55,8 +55,8 @@ export class DialogOpenerService {
     const dialogRef = this.dialog.open(DeleteOrArchiveSystemUsageDialogComponent);
     const confirmationDialogInstance = dialogRef.componentInstance as DeleteOrArchiveSystemUsageDialogComponent;
     confirmationDialogInstance.bodyText = $localize`
-    Tryk "Bekræft" for at slette de lokale registreringer vedrørerende systemet i ${organizatioName ?? 'kommunen'}. <br><br>
-    Tryk "Arkivér" for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. <br><br>
+    Tryk "Bekræft" for at slette de lokale registreringer vedrørerende systemet i ${organizatioName ?? 'kommunen'}.
+    Tryk "Arkivér" for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen.
     Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.`;
 
     return dialogRef;

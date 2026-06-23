@@ -7,8 +7,8 @@
     <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
   </app-standard-vertical-content-grid>
   <app-dialog-actions>
-    <app-button buttonStyle="secondary" size="large" i18n>Fortryd</app-button>
-    <app-button color="warn" size="large" i18n>Bekræft</app-button>
-    <app-button buttonStyle="secondary" size="large" i18n>Arkivér</app-button>
+    <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="CancelResult()">Fortryd</app-button>
+    <app-button color="warn" size="large" i18n (buttonClick)="DeleteResult()">Bekræft</app-button>
+    <app-button buttonStyle="secondary" size="large" i18n (buttonClick)="ArchiveResult()">Arkivér</app-button>
   </app-dialog-actions>
 </app-dialog>

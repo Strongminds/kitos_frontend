@@ -173,6 +173,27 @@ export class ITSystemUsageEffects {
     );
   });
 
+  archiveItSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.archiveItSystemUsage),
+      concatLatestFrom(() => this.store.select(selectItSystemUsageUuid)),
+      switchMap(([{ archiveRequestDto }, systemUsageUuid]) => {
+        console.log('archiving system usage with uuid ' + systemUsageUuid + ' and request dto: ', archiveRequestDto);
+        if (!systemUsageUuid) return of(ITSystemUsageActions.archiveItSystemUsageError());
+
+        return this.apiV2ItSystemUsageService
+          .postSingleItSystemUsageV2ArchiveItSystemUsage({
+            systemUsageUuid,
+            aPICreateItSystemUsageArchiveRequestDTO: archiveRequestDto,
+          })
+          .pipe(
+            map((archiveResponse) => ITSystemUsageActions.archiveItSystemUsageSuccess(archiveResponse)),
+            catchError(() => of(ITSystemUsageActions.archiveItSystemUsageError())),
+          );
+      }),
+    );
+  });
+
   removeItSystemUsageUsingUnit$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.removeITSystemUsageUsingUnit),
