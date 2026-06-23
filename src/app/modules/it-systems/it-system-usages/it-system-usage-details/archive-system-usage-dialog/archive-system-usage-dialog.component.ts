@@ -46,7 +46,7 @@ export class ArchiveSystemUsageDialogComponent {
   @Input() public itSystemUsageUuid!: string;
 
   public archiveFormGroup = new FormGroup({
-    archivingDate: new FormControl<Date | undefined>(undefined),
+    archivingDate: new FormControl<Date | undefined>(undefined, Validators.required),
     referenceName: new FormControl<string | undefined>(undefined),
     note: new FormControl<string | undefined>(undefined),
     archiveReferences: new FormArray([this.createReferenceFormGroup()]),

@@ -31,14 +31,14 @@
             [closeDialogOnSubmit]="true"
           ></app-edit-url-section>
         </div>
-        <app-icon-button
-          [disabled]="!canRemoveReference()"
-          [tooltipText]="'Fjern reference'"
-          i18n-tooltipText
-          (buttonClick)="removeReference(index)"
-        >
-          <app-trashcan-icon></app-trashcan-icon>
-        </app-icon-button>
+        @if (canRemoveReference()) {
+          <app-icon-button
+            [tooltipText]="'Fjern reference'"
+            i18n-tooltipText
+            (buttonClick)="removeReference(index)"
+            ><app-trashcan-icon></app-trashcan-icon>
+          </app-icon-button>
+        }
       </div>
     }
 
