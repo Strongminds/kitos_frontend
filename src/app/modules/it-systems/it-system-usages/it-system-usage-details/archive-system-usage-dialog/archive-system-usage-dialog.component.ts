@@ -104,21 +104,20 @@ export class ArchiveSystemUsageDialogComponent {
     if (!this.archiveFormGroup.valid) return;
     const controls = this.archiveFormGroup.controls;
 
-    const archiveReferences = this.archiveReferences.controls.map((referenceControl) => {
-      const innerControls = referenceControl.controls;
-      const name = innerControls.name.value || '';
-      const url = innerControls.url.value || '';
-      return { name, url };
-    });
-
-    const hasInvalidReference = archiveReferences.some((reference) => !reference.url);
-    if (hasInvalidReference) return;
+    const validArchiveReferences = this.archiveReferences.controls
+      .map((referenceControl) => {
+        const innerControls = referenceControl.controls;
+        const name = innerControls.name.value || '';
+        const url = innerControls.url.value || '';
+        return { name, url };
+      })
+      .filter((reference) => !!reference.url);
 
     const dto: APICreateItSystemUsageArchiveRequestDTO = {
       archivingDate: controls.archivingDate?.value?.toISOString() || '',
       referenceName: controls.referenceName.value || '',
       note: controls.note.value || '',
-      archiveReferences,
+      archiveReferences: validArchiveReferences,
     };
 
     this.store.dispatch(ITSystemUsageActions.archiveItSystemUsage(this.itSystemUsageUuid, dto));
