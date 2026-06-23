@@ -7,7 +7,6 @@ import { combineLatest, distinctUntilChanged, filter, first, map, tap } from 'rx
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { DeleteOrArchiveChoice } from 'src/app/shared/enums/delete-or-archive-choice';
 import { combineAND } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -241,26 +240,20 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     this.store.dispatch(ITSystemUsageActions.getITSystemUsageSuccess());
   }
 
+  public handleArchiveClick() {
+    console.log('handleArchiveClick called');
+    this.dialogOpenerService.openArchiveSystemUsageDialog();
+  }
+
   public showRemoveDialog() {
     this.subscriptions.add(
       this.organizationName$
         .pipe(
           first(),
           tap((organizationName) => {
-            const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
-
-            this.subscriptions.add(
-              confirmationDialogRef
-                .afterClosed()
-                .pipe(first())
-                .subscribe((result) => {
-                  if (result == DeleteOrArchiveChoice.Delete) {
-                    this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
-                  }
-                  if (result == DeleteOrArchiveChoice.Archive) {
-                    console.log('Archiving system usage');
-                  }
-                }),
+            const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(
+              organizationName,
+              this.handleArchiveClick.bind(this),
             );
 
             this.subscriptions.add(
@@ -269,6 +262,17 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
                 this.notificationService.showDefault($localize`Systemanvendelsen blev slettet`);
                 this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
               }),
+            );
+
+            this.subscriptions.add(
+              confirmationDialogRef
+                .afterClosed()
+                .pipe(first())
+                .subscribe((result) => {
+                  if (result) {
+                    this.store.dispatch(ITSystemUsageActions.removeITSystemUsage());
+                  }
+                }),
             );
           }),
         )

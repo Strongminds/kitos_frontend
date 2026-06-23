@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { DeleteOrArchiveSystemUsageDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/delete-or-archive-system-usage-dialog/delete-or-archive-system-usage-dialog.component';
+import { ArchiveSystemUsageDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/archive-system-usage-dialog/archive-system-usage-dialog.component';
 import { DeleteUserDialogComponent } from 'src/app/modules/organization/organization-users/delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
 import { BulkActionDialogComponent } from '../components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
@@ -50,14 +50,32 @@ export class DialogOpenerService {
   }
 
   public openTakeSystemOutOfUseDialog(
-    organizatioName: string | undefined = undefined,
-  ): MatDialogRef<DeleteOrArchiveSystemUsageDialogComponent> {
-    const dialogRef = this.dialog.open(DeleteOrArchiveSystemUsageDialogComponent);
-    const confirmationDialogInstance = dialogRef.componentInstance as DeleteOrArchiveSystemUsageDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`
-    Tryk "Bekræft" for at slette de lokale registreringer vedrørerende systemet i ${organizatioName ?? 'kommunen'}.
-    Tryk "Arkivér" for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen.
+    organizationName: string | undefined = undefined,
+    archiveAction?: () => void,
+  ): MatDialogRef<IconConfirmationDialogComponent> {
+    const dialogRef = this.dialog.open(IconConfirmationDialogComponent);
+    const confirmationDialogInstance = dialogRef.componentInstance as IconConfirmationDialogComponent;
+    confirmationDialogInstance.confirmationType = 'Custom';
+    confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?`;
+    confirmationDialogInstance.bodyText = $localize`Tryk "Bekræft" for at slette de lokale registreringer vedrørerende systemet i ${
+      organizationName ?? 'kommunen'
+    }. Tryk "Arkivér" for at slette de lokale registreringer  og udfylde arkivinformation om systemanvendelsen.
     Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.`;
+    confirmationDialogInstance.icon = 'not-in-use';
+    confirmationDialogInstance.confirmColor = 'warn';
+    confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
+    confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
+    confirmationDialogInstance.canArchive = true;
+    confirmationDialogInstance.archiveText = $localize`Arkivér`;
+    if (archiveAction) {
+      confirmationDialogInstance.archiveButtonClick.subscribe(() => archiveAction());
+    }
+
+    return dialogRef;
+  }
+
+  public openArchiveSystemUsageDialog(): MatDialogRef<ArchiveSystemUsageDialogComponent> {
+    const dialogRef = this.dialog.open(ArchiveSystemUsageDialogComponent);
 
     return dialogRef;
   }

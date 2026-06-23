@@ -6,7 +6,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
-import { APIItSystemPermissionsResponseDTO } from 'src/app/api/v2/model/itSystemPermissionsResponseDTO';
+import { APISystemDeletionConflict } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
@@ -36,7 +36,6 @@ import { DetailsHeaderComponent } from '../../../../shared/components/details-he
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
-import { APISystemDeletionConflict } from 'src/app/api/v2';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
@@ -49,8 +48,8 @@ import { APISystemDeletionConflict } from 'src/app/api/v2';
     NavigationDrawerComponent,
     RouterOutlet,
     LoadingComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;

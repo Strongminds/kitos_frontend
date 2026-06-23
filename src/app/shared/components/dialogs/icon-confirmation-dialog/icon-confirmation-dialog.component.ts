@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { StandardVerticalContentGridComponent } from '../../standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { DialogComponent } from '../dialog/dialog.component';
@@ -26,5 +26,12 @@ import { DialogActionsComponent } from '../dialog-actions/dialog-actions.compone
 export class IconConfirmationDialogComponent extends ConfirmationDialogComponent {
   @Input() icon: 'not-in-use' | 'take-into-use' = 'not-in-use';
   @Input() canArchive: boolean = false;
-  @Input() archiveText: string = $localize`Arkivér`;
+  @Input() archiveText: string = '';
+  @Output() archiveButtonClick = new EventEmitter<void>();
+
+  public archiveResult() {
+    if (this.canArchive) {
+      this.archiveButtonClick.emit();
+    }
+  }
 }

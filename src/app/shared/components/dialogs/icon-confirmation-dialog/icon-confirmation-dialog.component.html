@@ -15,7 +15,7 @@
     <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()">{{ declineText }}</app-button>
     <app-button [color]="confirmColor" size="large" (buttonClick)="OkResult()">{{ confirmText }}</app-button>
     @if (canArchive) {
-      <app-button buttonStyle="secondary" size="large" >{{ archiveText }}</app-button>
+      <app-button buttonStyle="secondary" size="large" (buttonClick)="archiveResult()">{{ archiveText }}</app-button>
     }
   </app-dialog-actions>
 </app-dialog>
