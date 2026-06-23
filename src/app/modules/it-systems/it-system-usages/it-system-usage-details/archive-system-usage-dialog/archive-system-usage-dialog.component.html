@@ -2,6 +2,13 @@
   <app-standard-vertical-content-grid>
     <app-datepicker
       [formGroup]="archiveFormGroup"
+      formName="takenIntoUsageDate"
+      text="Ibrugtagningsdato"
+      i18n-text
+    ></app-datepicker>
+
+    <app-datepicker
+      [formGroup]="archiveFormGroup"
       formName="archivingDate"
       text="Udfasningsdato"
       i18n-text

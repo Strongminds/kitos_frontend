@@ -286,7 +286,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
 
             this.subscriptions.add(
               this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageError), first()).subscribe(() => {
-                this.notificationService.showDefault($localize`Systemanvendelsen kunne ikke arkiveres`);
+                this.notificationService.showError($localize`Systemanvendelsen kunne ikke arkiveres`);
               }),
             );
           }),
