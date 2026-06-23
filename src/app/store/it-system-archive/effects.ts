@@ -1,9 +1,11 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { catchError, map, switchMap, of } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { compact } from 'lodash';
+import { catchError, map, of, switchMap } from 'rxjs';
 import { ItSystemArchiveV2Service } from 'src/app/api/v2';
+import { adaptItSystemArchive } from 'src/app/shared/models/it-system/it-system-archive-odata.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { ITSystemArchiveActions } from './actions';
 
@@ -21,13 +23,12 @@ export class ITSystemArchiveEffects {
       ofType(ITSystemArchiveActions.getITSystemArchives),
       switchMap(({ gridState }) => {
         return this.http
-          .get<OData>(
-            `/odata/ItSystemArchives?$count=true`
-          )
+          .get<OData>(`/odata/ItSystemArchives?$expand=Snapshot($expand=ItSystem($select=Name,Uuid))&$count=true`)
           .pipe(
-            map((response) => 
-              ITSystemArchiveActions.getITSystemArchivesSuccess(response.value || [], response['@odata.count'] || 0)
-            ),
+            map((response) => {
+              const dataItems = compact((response.value as any[]).map(adaptItSystemArchive));
+              return ITSystemArchiveActions.getITSystemArchivesSuccess(dataItems, response['@odata.count'] || 0);
+            }),
             catchError(() => of(ITSystemArchiveActions.getITSystemArchivesSuccess([], 0))),
           );
       }),

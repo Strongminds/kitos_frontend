@@ -8,20 +8,20 @@ import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { combineLatestWith, first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ARCHIVE_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
+import { AppPath } from 'src/app/shared/enums/app-path';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
-import { ITSystemArchiveActions } from 'src/app/store/it-system-archive/actions';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridActions } from 'src/app/store/grid/actions';
+import { ITSystemArchiveActions } from 'src/app/store/it-system-archive/actions';
 import {
-  selectArchiveGridData,
-  selectArchiveIsLoading,
-  selectArchiveGridState,
   selectArchiveGridColumns,
+  selectArchiveGridData,
+  selectArchiveGridState,
   selectArchiveHasDeletePermission,
+  selectArchiveIsLoading,
 } from 'src/app/store/it-system-archive/selectors';
-import { AppPath } from 'src/app/shared/enums/app-path';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
 import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
@@ -54,7 +54,7 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
-      field: 'uuid',
+      field: 'Uuid',
       title: $localize`UUID`,
       section: this.systemSectionName,
       width: 220,
@@ -62,7 +62,7 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
       hidden: false,
     },
     {
-      field: 'archivingDate',
+      field: 'ArchivingDate',
       title: $localize`Arkiveringsdato`,
       section: this.systemSectionName,
       filter: 'date',
@@ -71,7 +71,7 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
       hidden: false,
     },
     {
-      field: 'referenceName',
+      field: 'ReferenceName',
       title: $localize`Referencenavn`,
       section: this.systemSectionName,
       width: 180,
@@ -79,7 +79,7 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
       hidden: false,
     },
     {
-      field: 'itSystemUuid',
+      field: 'SystemUuid',
       title: $localize`IT System UUID`,
       section: this.systemSectionName,
       width: 220,
@@ -87,31 +87,31 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
       hidden: false,
     },
     {
-      field: 'legacyName',
-      title: $localize`Systemnavn (Snapshot)`,
+      field: 'SystemName',
+      title: $localize`Systemnavn`,
       section: this.systemSectionName,
       width: 220,
       minResizableWidth: 220,
       hidden: false,
     },
     {
-      field: 'localName',
-      title: $localize`Lokalt systemnavn (Snapshot)`,
+      field: 'LocalName',
+      title: $localize`Lokalt systemnavn`,
       section: this.systemSectionName,
       width: 220,
       minResizableWidth: 220,
       hidden: true,
     },
     {
-      field: 'localId',
-      title: $localize`Lokalt system ID (Snapshot)`,
+      field: 'LocalId',
+      title: $localize`Lokalt system ID`,
       section: this.systemSectionName,
       width: 160,
       minResizableWidth: 160,
       hidden: true,
     },
     {
-      field: 'note',
+      field: 'Note',
       title: $localize`Note`,
       section: this.systemSectionName,
       width: 240,
@@ -134,7 +134,8 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     // Initialize grid columns from localStorage
     const columnId = ARCHIVE_SECTION_NAME;
-    const localStorageColumns = this.gridColumnStorageService.getColumns(columnId, this.defaultGridColumns) || this.defaultGridColumns;
+    const localStorageColumns =
+      this.gridColumnStorageService.getColumns(columnId, this.defaultGridColumns) || this.defaultGridColumns;
     this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(localStorageColumns));
 
     // Dispatch initial load
@@ -169,21 +170,21 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
 
   public rowIdSelect(event: CellClickEvent): void {
     if (event.dataItem) {
-      const archiveUuid = event.dataItem.uuid;
+      const archiveUuid = event.dataItem.Uuid;
       this.router.navigate([AppPath.itSystemArchive, archiveUuid, AppPath.frontpage]);
     }
   }
 
   public onDeleteEvent(archive: any): void {
-    if (archive?.uuid) {
-      this.store.dispatch(ITSystemArchiveActions.deleteITSystemArchive(archive.uuid));
+    if (archive?.Uuid) {
+      this.store.dispatch(ITSystemArchiveActions.deleteITSystemArchive(archive.Uuid));
     }
   }
 
   public onExcelExport = (exportAllColumns: boolean) => {
     this.gridState$.pipe(first()).subscribe((gridState) => {
       this.store.dispatch(
-        GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, 'it-system-archive')
+        GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, 'it-system-archive'),
       );
     });
   };

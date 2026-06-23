@@ -12,6 +12,7 @@ import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { ITSystemArchiveActions } from 'src/app/store/it-system-archive/actions';
 import { OrganizationUserActions } from 'src/app/store/organization/organization-user/actions';
 import { ButtonComponent } from '../../buttons/button/button.component';
 import { CheckboxComponent } from '../../checkbox/checkbox.component';
@@ -74,6 +75,9 @@ export class HideShowDialogComponent implements OnInit {
         break;
       case 'it-system':
         this.store.dispatch(ITSystemActions.updateGridColumns(updatedColumns));
+        break;
+      case 'it-system-archive':
+        this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(updatedColumns));
         break;
       case 'it-interface':
         this.store.dispatch(ITInterfaceActions.updateGridColumns(updatedColumns));

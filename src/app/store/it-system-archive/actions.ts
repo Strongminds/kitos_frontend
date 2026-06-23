@@ -1,14 +1,15 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIResourceCollectionPermissionsResponseDTO, APIItSystemArchiveResponseDTO } from 'src/app/api/v2';
+import { APIResourceCollectionPermissionsResponseDTO } from 'src/app/api/v2';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
+import { ItSystemArchiveOData } from 'src/app/shared/models/it-system/it-system-archive-odata.model';
 
 export const ITSystemArchiveActions = createActionGroup({
   source: 'ITSystemArchive',
   events: {
     'Get IT System Archives': (gridState: GridState) => ({ gridState }),
-    'Get IT System Archives Success': (archives: APIItSystemArchiveResponseDTO[], total: number) => ({
+    'Get IT System Archives Success': (archives: ItSystemArchiveOData[], total: number) => ({
       archives,
       total,
     }),

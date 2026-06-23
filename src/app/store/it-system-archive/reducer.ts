@@ -1,12 +1,12 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
-import { APIItSystemArchiveResponseDTO } from 'src/app/api/v2';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
+import { ItSystemArchiveOData } from 'src/app/shared/models/it-system/it-system-archive-odata.model';
 import { ITSystemArchiveActions } from './actions';
 import { ITSystemArchiveState } from './state';
 
-export const itSystemArchiveAdapter = createEntityAdapter<APIItSystemArchiveResponseDTO>({
-  selectId: (archive: APIItSystemArchiveResponseDTO) => archive.uuid,
+export const itSystemArchiveAdapter = createEntityAdapter<ItSystemArchiveOData>({
+  selectId: (archive: ItSystemArchiveOData): string => archive.id,
 });
 
 export const itSystemArchiveInitialState: ITSystemArchiveState = itSystemArchiveAdapter.getInitialState({
