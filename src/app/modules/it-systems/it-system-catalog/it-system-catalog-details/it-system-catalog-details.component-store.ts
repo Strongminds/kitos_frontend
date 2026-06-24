@@ -52,7 +52,6 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<State> 
               next: (usages) => {
                 const usage = usages[0];
                 if (!usage?.uuid) return;
-                console.log('Retrieved system usage in compstore:', usage);
                 this.setSystemUsageUuid(usage.uuid);
               },
               error: (e) => console.error(e),

@@ -260,7 +260,6 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
             this.subscriptions.add(
               this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess), first()).subscribe(() => {
                 confirmationDialogRef.close();
-                this.notificationService.showDefault($localize`Systemanvendelsen blev slettet`);
                 this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
               }),
             );
@@ -280,13 +279,11 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
               this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
                 confirmationDialogRef.close();
                 this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
-                this.notificationService.showDefault($localize`Systemanvendelsen blev arkiveret`);
               }),
             );
 
             this.subscriptions.add(
               this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageError), first()).subscribe(() => {
-                this.notificationService.showError($localize`Systemanvendelsen kunne ikke arkiveres`);
               }),
             );
           }),
