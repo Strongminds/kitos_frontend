@@ -23,6 +23,7 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -337,13 +338,14 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
   public handleArchiveClick() {
     this.subscriptions.add(
-      this.systemUsageUuid$.subscribe((usageUuid) => {
-        if (usageUuid) this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid);
+      this.systemUsageUuid$.pipe(filterNullish(), first()).subscribe((usageUuid) => {
+        this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid);
       }),
     );
   }
 
   private handleTakeSystemOutOfUse(systemUuid: string) {
+    this.componentStore.getSystemUsageUuidByItSystemAndOrganization(systemUuid);
     const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(
       undefined,
       this.handleArchiveClick.bind(this),

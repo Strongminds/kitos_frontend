@@ -125,7 +125,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     this.subscribeToStateChangeEvents();
 
     this.componentStore.getUsageDeletePermissionsForItSystem();
-    this.componentStore.getSystemUsageByItSystemAndOrganization();
+    this.componentStore.getSystemUsageUuidByItSystemAndOrganization(undefined);
   }
 
   public showRemoveDialog(): void {
