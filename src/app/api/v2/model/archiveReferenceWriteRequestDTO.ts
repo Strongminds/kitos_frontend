@@ -11,9 +11,14 @@
  */
 
 
-export interface APIArchiveReferenceResponseDTO { 
-    uuid?: string;
+export interface APIArchiveReferenceWriteRequestDTO { 
+    /**
+     * Label for the archive reference
+     */
     label: string | null;
+    /**
+     * URL for the archive reference
+     */
     url: string | null;
 }
 

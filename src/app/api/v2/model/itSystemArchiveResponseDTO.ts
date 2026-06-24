@@ -25,23 +25,19 @@ export interface APIItSystemArchiveResponseDTO {
     /**
      * A reference name for the archive
      */
-    referenceName: string | null;
+    referenceName?: string | null;
     /**
      * Notes about the archive
      */
     note: string | null;
     /**
-     * Unique identifier of the IT system from the snapshot
+     * Unique identifier of the archived system snapshot
      */
     itSystemUuid: string;
     /**
      * System name from the snapshot at archive time
      */
     legacyName?: string | null;
-    /**
-     * Date system was taken into usage
-     */
-    takenIntoUsageDate?: string | null;
     /**
      * Local call name from the snapshot at archive time
      */
