@@ -54,7 +54,7 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
     takenIntoUsageDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     archivingDate: new FormControl<Date | undefined>(undefined, Validators.required),
     referenceName: new FormControl<string | undefined>(undefined),
-    note: new FormControl<string | undefined>(undefined),
+    note: new FormControl<string | undefined>(undefined, Validators.required),
     archiveReferences: new FormArray([this.createReferenceFormGroup()]),
   });
 
@@ -68,11 +68,14 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
   }
 
   ngOnInit(): void {
-    this.store.select(selectItSystemUsage).pipe(first()).subscribe((usage) => {
-      if (!usage) {
-        this.store.dispatch(ITSystemUsageActions.getITSystemUsage(this.itSystemUsageUuid));
-      }
-    });
+    this.store
+      .select(selectItSystemUsage)
+      .pipe(first())
+      .subscribe((usage) => {
+        if (!usage) {
+          this.store.dispatch(ITSystemUsageActions.getITSystemUsage(this.itSystemUsageUuid));
+        }
+      });
     this.setupDateValidators();
     this.setTakenIntoUsageDate();
   }
