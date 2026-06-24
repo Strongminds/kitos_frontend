@@ -68,7 +68,10 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
   }
 
   ngOnInit(): void {
-    this.store.dispatch(ITSystemUsageActions.getITSystemUsage(this.itSystemUsageUuid));
+    // ponytail: data already loaded on parent details page; defer store dispatch to next tick to avoid ExpressionChangedAfterItHasBeenCheckedError
+    setTimeout(() => {
+      this.store.dispatch(ITSystemUsageActions.getITSystemUsage(this.itSystemUsageUuid));
+    }, 0);
     this.setupDateValidators();
     this.setTakenIntoUsageDate();
   }
