@@ -31,6 +31,10 @@ export class ITSystemCatalogDetailsComponentStore extends ITSystemCatalogCompone
           .pipe(
             tapResponse({
               next: (usages) => {
+                if (usages.length > 1)
+                  console.error(
+                    `More than one usage found for it system ${itSystemUuid} and organization ${organizationUuid}`,
+                  );
                 const usage = usages[0];
                 if (!usage) return;
                 const usageUuid = usage.uuid;
