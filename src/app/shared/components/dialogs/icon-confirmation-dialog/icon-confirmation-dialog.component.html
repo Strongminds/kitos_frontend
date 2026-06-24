@@ -9,7 +9,7 @@
       }
     </div>
     <app-paragraph paragraphSize="x-large" [bold]="true">{{ title }}</app-paragraph>
-    <app-paragraph paragraphSize="medium">{{ bodyText }}</app-paragraph>
+    <app-paragraph paragraphSize="medium" [leftAlignText]="true">{{ bodyText }}</app-paragraph>
   </app-standard-vertical-content-grid>
   <app-dialog-actions>
     <app-button buttonStyle="secondary" size="large" (buttonClick)="CancelResult()">{{ declineText }}</app-button>
