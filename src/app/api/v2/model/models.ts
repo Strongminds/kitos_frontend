@@ -3,7 +3,6 @@ export * from './alertType';
 export * from './appliedProcurementPlanResponseDTO';
 export * from './archiveDutyChoice';
 export * from './archiveReferenceResponseDTO';
-export * from './archiveReferenceWriteRequestDTO';
 export * from './archivingCreationRequestDTO';
 export * from './archivingRegistrationsResponseDTO';
 export * from './archivingUpdateRequestDTO';
