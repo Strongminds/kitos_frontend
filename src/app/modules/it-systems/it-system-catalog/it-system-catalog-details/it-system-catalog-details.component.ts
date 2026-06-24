@@ -154,9 +154,9 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
 
   public handleArchiveClick() {
     this.subscriptions.add(
-      this.systemUsageUuid$.subscribe((usageUuid) => {
-        if (usageUuid) this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid);
-      }),
+      this.systemUsageUuid$
+        .pipe(filterNullish())
+        .subscribe((usageUuid) => this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid)),
     );
   }
 

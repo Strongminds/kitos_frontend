@@ -177,7 +177,6 @@ export class ITSystemUsageEffects {
     return this.actions$.pipe(
       ofType(ITSystemUsageActions.archiveItSystemUsage),
       switchMap(({ itSystemUsageUuid, archiveRequestDto }) => {
-        console.log('archiveItSystemUsage$ effect triggered with:', { itSystemUsageUuid, archiveRequestDto });
         if (!itSystemUsageUuid) return of(ITSystemUsageActions.archiveItSystemUsageError());
 
         return this.apiV2ItSystemUsageService
