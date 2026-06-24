@@ -5,12 +5,12 @@ import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable, map, startWith } from 'rxjs';
 import { APICreateItSystemUsageArchiveRequestDTO } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { IconButtonComponent } from 'src/app/shared/components/buttons/icon-button/icon-button.component';
 import { DatePickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { ScrollbarDialogComponent } from 'src/app/shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
-import { DividerComponent } from 'src/app/shared/components/divider/divider.component';
 import { TrashcanIconComponent } from 'src/app/shared/components/icons/trashcan-icon.component';
 import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
@@ -21,7 +21,9 @@ import {
   dateLessThanOrEqualControlValidator,
 } from 'src/app/shared/helpers/form.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
+import { selectItSystemUsage } from 'src/app/store/it-system-usage/selectors';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
@@ -39,31 +41,44 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     IconButtonComponent,
     TrashcanIconComponent,
     EditUrlSectionComponent,
-    DividerComponent,
     ScrollbarDialogComponent,
     ParagraphComponent,
   ],
   templateUrl: './archive-system-usage-dialog.component.html',
   styleUrl: './archive-system-usage-dialog.component.scss',
 })
-export class ArchiveSystemUsageDialogComponent implements OnInit {
+export class ArchiveSystemUsageDialogComponent extends BaseComponent implements OnInit {
   @Input() public itSystemUsageUuid!: string;
 
   public archiveFormGroup = new FormGroup({
-    takenIntoUsageDate: new FormControl<Date | undefined>(undefined, Validators.required),
+    takenIntoUsageDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     archivingDate: new FormControl<Date | undefined>(undefined, Validators.required),
     referenceName: new FormControl<string | undefined>(undefined),
     note: new FormControl<string | undefined>(undefined),
     archiveReferences: new FormArray([this.createReferenceFormGroup()]),
   });
 
+  public itSystemUsage$ = this.store.select(selectItSystemUsage).pipe(filterNullish());
+
   constructor(
     private readonly store: Store,
     public dialogRef: MatDialogRef<ArchiveSystemUsageDialogComponent>,
-  ) {}
+  ) {
+    super();
+  }
 
   ngOnInit(): void {
+    this.store.dispatch(ITSystemUsageActions.getITSystemUsage(this.itSystemUsageUuid));
     this.setupDateValidators();
+
+    this.subscriptions.add(
+      this.itSystemUsage$.subscribe((itSystemUsage) => {
+        const takenIntoUsageDateControl = this.archiveFormGroup.controls.takenIntoUsageDate;
+        if (itSystemUsage.createdAt) {
+          takenIntoUsageDateControl.setValue(new Date(itSystemUsage.createdAt));
+        }
+      }),
+    );
   }
 
   private setupDateValidators() {
@@ -83,12 +98,13 @@ export class ArchiveSystemUsageDialogComponent implements OnInit {
   }
 
   public hasDateOrderValidationError() {
-    const takenIntoUsageDateError =
-      this.archiveFormGroup.controls.takenIntoUsageDate.value &&
-      this.archiveFormGroup.controls.takenIntoUsageDate.invalid;
-    const archivingDateError =
-      this.archiveFormGroup.controls.archivingDate.value && this.archiveFormGroup.controls.archivingDate.invalid;
-    return takenIntoUsageDateError || archivingDateError;
+    const takenIntoUsageControl = this.archiveFormGroup.controls.takenIntoUsageDate;
+    if (!takenIntoUsageControl.value) return false;
+
+    const archivingDateControl = this.archiveFormGroup.controls.archivingDate;
+    const archivingDateError = archivingDateControl.value && archivingDateControl.invalid;
+
+    return takenIntoUsageControl.invalid || archivingDateError;
   }
 
   public formIsInvalid() {
