@@ -14,9 +14,13 @@ import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 export interface APICreateItSystemUsageArchiveRequestDTO { 
     /**
-     * The date when the archive was created
+     * The date when the system usage was archived
      */
     archivingDate: string;
+    /**
+     * The date when the system was taken into usage
+     */
+    takenIntoUsageDate: string;
     /**
      * A reference name for the archive
      */

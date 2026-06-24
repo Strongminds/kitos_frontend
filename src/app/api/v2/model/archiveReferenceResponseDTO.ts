@@ -12,8 +12,14 @@
 
 
 export interface APIArchiveReferenceResponseDTO { 
+    /**
+     * Name displayed to the user in kitos
+     */
+    name?: string | null;
+    /**
+     * External link
+     */
+    url?: string | null;
     uuid?: string;
-    label: string | null;
-    url: string | null;
 }
 

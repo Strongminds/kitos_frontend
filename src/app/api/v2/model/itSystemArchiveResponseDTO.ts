@@ -31,13 +31,17 @@ export interface APIItSystemArchiveResponseDTO {
      */
     note: string | null;
     /**
-     * Unique identifier of the archived system snapshot
+     * Unique identifier of the IT system from the snapshot
      */
     itSystemUuid: string;
     /**
      * System name from the snapshot at archive time
      */
     legacyName?: string | null;
+    /**
+     * Date system was taken into usage
+     */
+    takenIntoUsageDate?: string | null;
     /**
      * Local call name from the snapshot at archive time
      */
