@@ -241,7 +241,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   }
 
   public handleArchiveClick() {
-    this.itSystemUsageUuid$.pipe(filterNullish()).subscribe((itSystemUsageUuid) => {
+    this.itSystemUsageUuid$.pipe(filterNullish(), first()).subscribe((itSystemUsageUuid) => {
       this.dialogOpenerService.openArchiveSystemUsageDialog(itSystemUsageUuid);
     });
   }
@@ -283,8 +283,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
             );
 
             this.subscriptions.add(
-              this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageError), first()).subscribe(() => {
-              }),
+              this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageError), first()).subscribe(() => {}),
             );
           }),
         )

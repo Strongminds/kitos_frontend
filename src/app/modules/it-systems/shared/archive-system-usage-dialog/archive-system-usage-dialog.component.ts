@@ -3,7 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Observable, map, startWith } from 'rxjs';
+import { Observable, first, map, startWith } from 'rxjs';
 import { APICreateItSystemUsageArchiveRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
@@ -58,7 +58,7 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
     archiveReferences: new FormArray([this.createReferenceFormGroup()]),
   });
 
-  public itSystemUsage$ = this.store.select(selectItSystemUsage).pipe(filterNullish());
+  public itSystemUsage$ = this.store.select(selectItSystemUsage).pipe(filterNullish(), first());
 
   constructor(
     private readonly store: Store,
@@ -70,7 +70,10 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
   ngOnInit(): void {
     this.store.dispatch(ITSystemUsageActions.getITSystemUsage(this.itSystemUsageUuid));
     this.setupDateValidators();
+    this.setTakenIntoUsageDate();
+  }
 
+  private setTakenIntoUsageDate() {
     this.subscriptions.add(
       this.itSystemUsage$.subscribe((itSystemUsage) => {
         const takenIntoUsageDateControl = this.archiveFormGroup.controls.takenIntoUsageDate;
