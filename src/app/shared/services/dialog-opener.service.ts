@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Observable, of } from 'rxjs';
-import { ArchiveSystemUsageDialogComponent } from 'src/app/modules/it-systems/it-system-usages/it-system-usage-details/archive-system-usage-dialog/archive-system-usage-dialog.component';
+import { ArchiveSystemUsageDialogComponent } from 'src/app/modules/it-systems/shared/archive-system-usage-dialog/archive-system-usage-dialog.component';
 import { DeleteUserDialogComponent } from 'src/app/modules/organization/organization-users/delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
 import { BulkActionDialogComponent } from '../components/dialogs/bulk-action-dialog/bulk-action-dialog.component';

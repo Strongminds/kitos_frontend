@@ -22,7 +22,7 @@ import {
 } from 'src/app/shared/helpers/form.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-url-section.component';
+import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-archive-system-usage-dialog',
