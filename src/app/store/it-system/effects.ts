@@ -293,6 +293,14 @@ export class ITSystemEffects {
       map(([_, gridState]) => ITSystemActions.getITSystems(gridState)),
     );
   });
+
+  archiveItSystemUsageRefreshSystem$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.archiveItSystemUsageSuccess),
+      concatLatestFrom(() => this.store.select(selectItSystemUuid).pipe(filterNullish())),
+      map(([_, systemUuid]) => ITSystemActions.getITSystem(systemUuid)),
+    );
+  });
 }
 
 function applyQueryFixes(odataString: string): string {
