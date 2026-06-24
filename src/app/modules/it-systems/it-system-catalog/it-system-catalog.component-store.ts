@@ -1,40 +1,53 @@
 import { Inject, Injectable } from '@angular/core';
+import { ComponentStore } from '@ngrx/component-store';
 import { concatLatestFrom, tapResponse } from '@ngrx/operators';
+
 import { Store } from '@ngrx/store';
 import { first, mergeMap } from 'rxjs';
 import { ItSystemUsageV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
-import { selectITSystemUsageHasDeletePermission } from 'src/app/store/it-system-usage/selectors';
 import { selectItSystemUuid } from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-import { ITSystemCatalogComponentStore } from '../it-system-catalog.component-store';
+
+interface State {
+  systemUsageUuid: string | undefined;
+}
 
 @Injectable()
-export class ITSystemCatalogDetailsComponentStore extends ITSystemCatalogComponentStore {
-  public readonly usageModifyPermission$ = this.store
-    .select(selectITSystemUsageHasDeletePermission)
-    .pipe(filterNullish());
+export class ITSystemCatalogComponentStore extends ComponentStore<State> {
+  public readonly systemUsageUuid$ = this.select((state) => state.systemUsageUuid);
 
-  constructor(@Inject(ItSystemUsageV2Service) apiItSystemUsageService: ItSystemUsageV2Service, store: Store) {
-    super(apiItSystemUsageService, store);
+  constructor(
+    @Inject(ItSystemUsageV2Service) protected apiItSystemUsageService: ItSystemUsageV2Service,
+    protected store: Store,
+  ) {
+    super({ systemUsageUuid: undefined });
   }
 
-  public getUsageDeletePermissionsForItSystem = this.effect(() =>
+  private setSystemUsageUuid = this.updater(
+    (state, systemUsageUuid: string | undefined): State => ({
+      ...state,
+      systemUsageUuid,
+    }),
+  );
+
+  public getSystemUsageByItSystemAndOrganization = this.effect(() =>
     this.store.select(selectItSystemUuid).pipe(
       filterNullish(),
       first(),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       mergeMap(([itSystemUuid, organizationUuid]) =>
         this.apiItSystemUsageService
-          .getSingleItSystemUsageV2GetItSystemUsages({ systemUuid: itSystemUuid, organizationUuid })
+          .getSingleItSystemUsageV2GetItSystemUsages({
+            systemUuid: itSystemUuid,
+            organizationUuid,
+          })
           .pipe(
             tapResponse({
               next: (usages) => {
                 const usage = usages[0];
-                if (!usage) return;
-                const usageUuid = usage.uuid;
-                this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(usageUuid));
+                if (!usage?.uuid) return;
+                this.setSystemUsageUuid(usage.uuid);
               },
               error: (e) => console.error(e),
             }),
