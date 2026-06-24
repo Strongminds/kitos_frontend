@@ -38,7 +38,7 @@
       i18n-text
     ></app-textarea>
 
-    <div class="archive-references-section">
+    <ng-container class="archive-references-section">
     @for (referenceControl of archiveReferences.controls; track $index; let index = $index) {
       <div class="reference-row">
         <div class="reference-field">
@@ -73,12 +73,10 @@
       buttonStyle="secondary"
       [disabled]="isAddReferenceDisabled()"
     >Tilføj flere referencer</app-button>
-  </div>
+  </ng-container>
   </app-standard-vertical-content-grid>
 
-<app-divider class="divider"></app-divider>
-
-  <app-dialog-actions>
+  <app-dialog-actions class="dialog-actions-margin">
     <app-button buttonStyle="secondary" (click)="onCancel()">Fortryd</app-button>
     <app-button color="warn" (click)="onConfirm()" [disabled]="formIsInvalid()">Bekræft</app-button>
   </app-dialog-actions>
