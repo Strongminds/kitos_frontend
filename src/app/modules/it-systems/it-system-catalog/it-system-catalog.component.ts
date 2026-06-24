@@ -359,6 +359,12 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     );
 
     this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
+        dialogRef.close();
+      }),
+    );
+
+    this.subscriptions.add(
       this.actions$
         .pipe(
           ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
