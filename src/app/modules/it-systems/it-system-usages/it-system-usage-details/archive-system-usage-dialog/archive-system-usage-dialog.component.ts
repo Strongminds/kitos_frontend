@@ -12,10 +12,14 @@ import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog
 import { ScrollbarDialogComponent } from 'src/app/shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
 import { DividerComponent } from 'src/app/shared/components/divider/divider.component';
 import { TrashcanIconComponent } from 'src/app/shared/components/icons/trashcan-icon.component';
+import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
-import { dateGreaterThanOrEqualControlValidator } from 'src/app/shared/helpers/form.helpers';
+import {
+  dateGreaterThanOrEqualControlValidator,
+  dateLessThanOrEqualControlValidator,
+} from 'src/app/shared/helpers/form.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
@@ -37,6 +41,7 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
     EditUrlSectionComponent,
     DividerComponent,
     ScrollbarDialogComponent,
+    ParagraphComponent,
   ],
   templateUrl: './archive-system-usage-dialog.component.html',
   styleUrl: './archive-system-usage-dialog.component.scss',
@@ -58,9 +63,15 @@ export class ArchiveSystemUsageDialogComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.setupDateValidators();
+  }
+
+  private setupDateValidators() {
     const controls = this.archiveFormGroup.controls;
     controls.archivingDate.addValidators(dateGreaterThanOrEqualControlValidator(controls.takenIntoUsageDate));
     controls.archivingDate.updateValueAndValidity();
+    controls.takenIntoUsageDate.addValidators(dateLessThanOrEqualControlValidator(controls.archivingDate));
+    controls.takenIntoUsageDate.updateValueAndValidity();
   }
 
   public get archiveReferences() {
@@ -69,6 +80,15 @@ export class ArchiveSystemUsageDialogComponent implements OnInit {
 
   public addReference() {
     this.archiveReferences.push(this.createReferenceFormGroup());
+  }
+
+  public hasDateOrderValidationError() {
+    const takenIntoUsageDateError =
+      this.archiveFormGroup.controls.takenIntoUsageDate.value &&
+      this.archiveFormGroup.controls.takenIntoUsageDate.invalid;
+    const archivingDateError =
+      this.archiveFormGroup.controls.archivingDate.value && this.archiveFormGroup.controls.archivingDate.invalid;
+    return takenIntoUsageDateError || archivingDateError;
   }
 
   public formIsInvalid() {

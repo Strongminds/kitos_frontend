@@ -7,12 +7,20 @@
       i18n-text
     ></app-datepicker>
 
-    <app-datepicker
+<ng-container>
+  <app-datepicker
       [formGroup]="archiveFormGroup"
       formName="archivingDate"
       text="Udfasningsdato"
       i18n-text
     ></app-datepicker>
+
+        @if (hasDateOrderValidationError()) {
+       <app-paragraph paragraphSize="small" color="error" i18n class="date-validation-error-margin"
+          > Udfasningsdato kan ikke være før ibrugtagningsdato
+        </app-paragraph>
+    }
+</ng-container>
 
 
 
