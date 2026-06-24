@@ -31,35 +31,35 @@ export class ITSystemCatalogComponentStore extends ComponentStore<State> {
     }),
   );
 
-  public getSystemUsageUuidByItSystemAndOrganization = this.effect(
-    (systemUuid$: Observable<string | undefined>) =>
-      systemUuid$.pipe(
-        mergeMap((systemUuid) =>
-          (systemUuid
-            ? of(systemUuid)
-            : this.store.select(selectItSystemUuid).pipe(filterNullish())
-          ).pipe(
-            first(),
-            concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
-            mergeMap(([itSystemUuid, organizationUuid]) =>
-              this.apiItSystemUsageService
-                .getSingleItSystemUsageV2GetItSystemUsages({
-                  systemUuid: itSystemUuid,
-                  organizationUuid,
-                })
-                .pipe(
-                  tapResponse({
-                    next: (usages) => {
-                      const usage = usages[0];
-                      if (!usage?.uuid) return;
-                      this.setSystemUsageUuid(usage.uuid);
-                    },
-                    error: (e) => console.error(e),
-                  }),
-                ),
-            ),
-          )
+  public getSystemUsageUuidByItSystemAndOrganization = this.effect((systemUuid$: Observable<string | undefined>) =>
+    systemUuid$.pipe(
+      mergeMap((systemUuid) =>
+        (systemUuid ? of(systemUuid) : this.store.select(selectItSystemUuid).pipe(filterNullish())).pipe(
+          first(),
+          concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+          mergeMap(([itSystemUuid, organizationUuid]) =>
+            this.apiItSystemUsageService
+              .getSingleItSystemUsageV2GetItSystemUsages({
+                systemUuid: itSystemUuid,
+                organizationUuid,
+              })
+              .pipe(
+                tapResponse({
+                  next: (usages) => {
+                    if (usages.length > 1)
+                      console.error(
+                        `More than one usage found for it system ${itSystemUuid} and organization ${organizationUuid}`,
+                      );
+                    const usage = usages[0];
+                    if (!usage?.uuid) return;
+                    this.setSystemUsageUuid(usage.uuid);
+                  },
+                  error: (e) => console.error(e),
+                }),
+              ),
+          ),
         ),
       ),
+    ),
   );
 }

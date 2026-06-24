@@ -174,19 +174,6 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         }
 
         this.subscriptions.add(
-          this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
-            confirmationDialogRef.close();
-            this.notificationService.showDefault($localize`Systemanvendelsen blev arkiveret`);
-          }),
-        );
-
-        this.subscriptions.add(
-          this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageError), first()).subscribe(() => {
-            this.notificationService.showDefault($localize`Systemanvendelsen kunne ikke arkiveres`);
-          }),
-        );
-
-        this.subscriptions.add(
           confirmationDialogRef
             .afterClosed()
             .pipe(concatLatestFrom(() => this.itSystemUuid$))
