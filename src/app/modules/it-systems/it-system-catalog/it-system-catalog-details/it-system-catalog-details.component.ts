@@ -6,7 +6,7 @@ import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
-import { APIItSystemPermissionsResponseDTO } from 'src/app/api/v2/model/itSystemPermissionsResponseDTO';
+import { APISystemDeletionConflict } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
@@ -36,7 +36,6 @@ import { DetailsHeaderComponent } from '../../../../shared/components/details-he
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
 import { ITSystemCatalogDetailsComponentStore } from './it-system-catalog-details.component-store';
-import { APISystemDeletionConflict } from 'src/app/api/v2';
 
 @Component({
   templateUrl: './it-system-catalog-details.component.html',
@@ -49,8 +48,8 @@ import { APISystemDeletionConflict } from 'src/app/api/v2';
     NavigationDrawerComponent,
     RouterOutlet,
     LoadingComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ItSystemCatalogDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -68,6 +67,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   public readonly hasUsageCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   public readonly hasUsageDeletePermission$ = this.componentStore.usageModifyPermission$;
+  public readonly systemUsageUuid$ = this.componentStore.systemUsageUuid$;
 
   public readonly breadCrumbs$ = combineLatest([this.itSystemName$, this.itSystemUuid$]).pipe(
     map(([itSystemName, systemUuid]): BreadCrumb[] => [
@@ -125,6 +125,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     this.subscribeToStateChangeEvents();
 
     this.componentStore.getUsageDeletePermissionsForItSystem();
+    this.componentStore.getSystemUsageByItSystemAndOrganization();
   }
 
   public showRemoveDialog(): void {
@@ -151,6 +152,14 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     );
   }
 
+  public handleArchiveClick() {
+    this.subscriptions.add(
+      this.systemUsageUuid$
+        .pipe(filterNullish())
+        .subscribe((usageUuid) => this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid)),
+    );
+  }
+
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
     this.subscriptions.add(
       this.organizationName$.pipe(first()).subscribe((organizationName) => {
@@ -158,8 +167,24 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         if (takingIntoUse) {
           confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
         } else {
-          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(organizationName);
+          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(
+            organizationName,
+            this.handleArchiveClick.bind(this),
+          );
         }
+
+        this.subscriptions.add(
+          this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
+            confirmationDialogRef.close();
+            this.notificationService.showDefault($localize`Systemanvendelsen blev arkiveret`);
+          }),
+        );
+
+        this.subscriptions.add(
+          this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageError), first()).subscribe(() => {
+            this.notificationService.showDefault($localize`Systemanvendelsen kunne ikke arkiveres`);
+          }),
+        );
 
         this.subscriptions.add(
           confirmationDialogRef
