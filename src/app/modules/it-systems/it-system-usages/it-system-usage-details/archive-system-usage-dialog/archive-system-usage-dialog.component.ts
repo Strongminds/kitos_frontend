@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -15,6 +15,7 @@ import { TrashcanIconComponent } from 'src/app/shared/components/icons/trashcan-
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
+import { dateGreaterThanOrEqualControlValidator } from 'src/app/shared/helpers/form.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.component';
@@ -40,12 +41,12 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
   templateUrl: './archive-system-usage-dialog.component.html',
   styleUrl: './archive-system-usage-dialog.component.scss',
 })
-export class ArchiveSystemUsageDialogComponent {
+export class ArchiveSystemUsageDialogComponent implements OnInit {
   @Input() public itSystemUsageUuid!: string;
 
   public archiveFormGroup = new FormGroup({
-    archivingDate: new FormControl<Date | undefined>(undefined, Validators.required),
     takenIntoUsageDate: new FormControl<Date | undefined>(undefined, Validators.required),
+    archivingDate: new FormControl<Date | undefined>(undefined, Validators.required),
     referenceName: new FormControl<string | undefined>(undefined),
     note: new FormControl<string | undefined>(undefined),
     archiveReferences: new FormArray([this.createReferenceFormGroup()]),
@@ -55,6 +56,12 @@ export class ArchiveSystemUsageDialogComponent {
     private readonly store: Store,
     public dialogRef: MatDialogRef<ArchiveSystemUsageDialogComponent>,
   ) {}
+
+  ngOnInit(): void {
+    const controls = this.archiveFormGroup.controls;
+    controls.archivingDate.addValidators(dateGreaterThanOrEqualControlValidator(controls.takenIntoUsageDate));
+    controls.archivingDate.updateValueAndValidity();
+  }
 
   public get archiveReferences() {
     return this.archiveFormGroup.controls.archiveReferences;
