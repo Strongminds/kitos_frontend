@@ -83,12 +83,14 @@ export class ArchiveSystemUsageDialogComponent implements OnInit {
   }
 
   public hasDateOrderValidationError() {
-    const takenIntoUsageDateError =
-      this.archiveFormGroup.controls.takenIntoUsageDate.value &&
-      this.archiveFormGroup.controls.takenIntoUsageDate.invalid;
-    const archivingDateError =
-      this.archiveFormGroup.controls.archivingDate.value && this.archiveFormGroup.controls.archivingDate.invalid;
-    return takenIntoUsageDateError || archivingDateError;
+    const takenIntoUsageDateControl = this.archiveFormGroup.controls.takenIntoUsageDate;
+
+    if (!takenIntoUsageDateControl.value) return false;
+
+    const archivingDateControl = this.archiveFormGroup.controls.archivingDate;
+    const archivingDateError = archivingDateControl.value && archivingDateControl.invalid;
+
+    return takenIntoUsageDateControl.invalid || archivingDateError;
   }
 
   public formIsInvalid() {
