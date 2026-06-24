@@ -20,7 +20,7 @@ export interface APICreateItSystemUsageArchiveRequestDTO {
     /**
      * The date when the system was taken into usage
      */
-    takenIntoUsageDate: string;
+    takenIntoUsageDate?: string | null;
     /**
      * A reference name for the archive
      */
