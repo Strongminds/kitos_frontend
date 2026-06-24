@@ -67,6 +67,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   public readonly hasUsageCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   public readonly hasUsageDeletePermission$ = this.componentStore.usageModifyPermission$;
+  public readonly systemUsageUuid$ = this.componentStore.systemUsageUuid$;
 
   public readonly breadCrumbs$ = combineLatest([this.itSystemName$, this.itSystemUuid$]).pipe(
     map(([itSystemName, systemUuid]): BreadCrumb[] => [
@@ -124,6 +125,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
     this.subscribeToStateChangeEvents();
 
     this.componentStore.getUsageDeletePermissionsForItSystem();
+    this.componentStore.getSystemUsageByItSystemAndOrganization();
   }
 
   public showRemoveDialog(): void {
@@ -151,7 +153,11 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
   }
 
   public handleArchiveClick() {
-    this.dialogOpenerService.openArchiveSystemUsageDialog(''); //TODO use real uuid
+    this.subscriptions.add(
+      this.systemUsageUuid$.subscribe((usageUuid) => {
+        if (usageUuid) this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid);
+      }),
+    );
   }
 
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {

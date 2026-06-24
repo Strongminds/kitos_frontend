@@ -11,18 +11,56 @@ import { selectITSystemUsageHasDeletePermission } from 'src/app/store/it-system-
 import { selectItSystemUuid } from 'src/app/store/it-system/selectors';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 
+interface State {
+  systemUsageUuid: string | undefined;
+}
+
 @Injectable()
-export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object> {
+export class ITSystemCatalogDetailsComponentStore extends ComponentStore<State> {
   public readonly usageModifyPermission$ = this.store
     .select(selectITSystemUsageHasDeletePermission)
     .pipe(filterNullish());
+  public readonly systemUsageUuid$ = this.select((state) => state.systemUsageUuid);
 
   constructor(
     @Inject(ItSystemUsageV2Service) private apiItSystemUsageService: ItSystemUsageV2Service,
     private store: Store,
   ) {
-    super();
+    super({ systemUsageUuid: undefined });
   }
+
+  private setSystemUsageUuid = this.updater(
+    (state, systemUsageUuid: string | undefined): State => ({
+      ...state,
+      systemUsageUuid,
+    }),
+  );
+
+  public getSystemUsageByItSystemAndOrganization = this.effect(() =>
+    this.store.select(selectItSystemUuid).pipe(
+      filterNullish(),
+      first(),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      mergeMap(([itSystemUuid, organizationUuid]) =>
+        this.apiItSystemUsageService
+          .getSingleItSystemUsageV2GetItSystemUsages({
+            systemUuid: itSystemUuid,
+            organizationUuid,
+          })
+          .pipe(
+            tapResponse({
+              next: (usages) => {
+                const usage = usages[0];
+                if (!usage?.uuid) return;
+                console.log('Retrieved system usage in compstore:', usage);
+                this.setSystemUsageUuid(usage.uuid);
+              },
+              error: (e) => console.error(e),
+            }),
+          ),
+      ),
+    ),
+  );
 
   public getUsageDeletePermissionsForItSystem = this.effect(() =>
     this.store.select(selectItSystemUuid).pipe(
@@ -34,15 +72,14 @@ export class ITSystemCatalogDetailsComponentStore extends ComponentStore<object>
           .getSingleItSystemUsageV2GetItSystemUsages({ systemUuid: itSystemUuid, organizationUuid })
           .pipe(
             tapResponse({
-    next: (usages) => {
-        const usage = usages[0];
-        if (!usage)
-            return;
-        const usageUuid = usage.uuid;
-        this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(usageUuid));
-    },
-    error: (e) => console.error(e)
-}),
+              next: (usages) => {
+                const usage = usages[0];
+                if (!usage) return;
+                const usageUuid = usage.uuid;
+                this.store.dispatch(ITSystemUsageActions.getITSystemUsagePermissions(usageUuid));
+              },
+              error: (e) => console.error(e),
+            }),
           ),
       ),
     ),
