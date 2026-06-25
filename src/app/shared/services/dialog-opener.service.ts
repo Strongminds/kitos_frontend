@@ -64,10 +64,10 @@ export class DialogOpenerService {
     confirmationDialogInstance.confirmColor = 'warn';
     confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
     confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
-    confirmationDialogInstance.hasExtraAction = true;
-    confirmationDialogInstance.extraActionText = $localize`Bevar historik`;
     if (extraAction) {
+      confirmationDialogInstance.hasExtraAction = true;
       confirmationDialogInstance.extraActionClick.subscribe(() => extraAction());
+      confirmationDialogInstance.extraActionText = $localize`Bevar historik`;
     }
 
     return dialogRef;
