@@ -5,12 +5,11 @@ import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first } from 'rxjs';
+import { first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import { ARCHIVE_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
+import { ARCHIVE_COLUMNS_ID, ARCHIVE_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridActions } from 'src/app/store/grid/actions';
 import { ITSystemArchiveActions } from 'src/app/store/it-system-archive/actions';
@@ -124,7 +123,6 @@ export class ItSystemArchiveComponent extends BaseOverviewComponent implements O
     private router: Router,
     private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
-    private dialogOpenerService: DialogOpenerService,
     private actions$: Actions,
   ) {
     super(store, 'it-system-archive');
@@ -132,10 +130,10 @@ export class ItSystemArchiveComponent extends BaseOverviewComponent implements O
 
   ngOnInit(): void {
     // Initialize grid columns from localStorage
-    const columnId = ARCHIVE_SECTION_NAME;
+    const columnId = ARCHIVE_COLUMNS_ID;
     const localStorageColumns =
       this.gridColumnStorageService.getColumns(columnId, this.defaultGridColumns) || this.defaultGridColumns;
-    this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(localStorageColumns));
+    this.store.dispatch(ITSystemArchiveActions.updateGridColumns(localStorageColumns));
 
     // Dispatch initial load
     this.subscriptions.add(
@@ -148,10 +146,9 @@ export class ItSystemArchiveComponent extends BaseOverviewComponent implements O
       this.actions$
         .pipe(
           ofType(ITSystemArchiveActions.deleteITSystemArchiveSuccess),
-          concatLatestFrom(() => [this.gridState$]),
-          combineLatestWith(this.gridState$),
+          concatLatestFrom(() => this.gridState$),
         )
-        .subscribe(([[_, gridState], _gridState]) => {
+        .subscribe(([_, gridState]) => {
           this.store.dispatch(ITSystemArchiveActions.getITSystemArchives(gridState));
         }),
     );

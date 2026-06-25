@@ -77,7 +77,7 @@ export class HideShowDialogComponent implements OnInit {
         this.store.dispatch(ITSystemActions.updateGridColumns(updatedColumns));
         break;
       case 'it-system-archive':
-        this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(updatedColumns));
+        this.store.dispatch(ITSystemArchiveActions.updateGridColumns(updatedColumns));
         break;
       case 'it-interface':
         this.store.dispatch(ITInterfaceActions.updateGridColumns(updatedColumns));
