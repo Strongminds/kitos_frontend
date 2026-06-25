@@ -2342,8 +2342,23 @@
       <trans-unit id="4182570784522399250" datatype="html">
         <source>Rediger</source>
       </trans-unit>
+      <trans-unit id="3487984946687907387" datatype="html">
+        <source>Kan du ikke logge ind med SSO?</source>
+      </trans-unit>
+      <trans-unit id="1639312213164225055" datatype="html">
+        <source> Brug manuel login, hvis din organisation ikke anvender SSO,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> eller hvis du har fået besked på at logge ind med email og password. </source>
+      </trans-unit>
+      <trans-unit id="6473069953333383452" datatype="html">
+        <source>Email adresse</source>
+      </trans-unit>
       <trans-unit id="1431416938026210429" datatype="html">
         <source>Password</source>
+      </trans-unit>
+      <trans-unit id="7259401532876698278" datatype="html">
+        <source>Forbliv logget ind</source>
+      </trans-unit>
+      <trans-unit id="3617720446026509047" datatype="html">
+        <source>Gemmer din session så du ikke logges ud automatisk.</source>
       </trans-unit>
       <trans-unit id="6388882061374799898" datatype="html">
         <source>Log ind</source>
@@ -2398,9 +2413,6 @@
       </trans-unit>
       <trans-unit id="3981956765706922150" datatype="html">
         <source>Nyt password</source>
-      </trans-unit>
-      <trans-unit id="6473069953333383452" datatype="html">
-        <source>Email adresse</source>
       </trans-unit>
       <trans-unit id="3158905381455173854" datatype="html">
         <source>Gentag nyt password</source>
@@ -2524,6 +2536,9 @@
       </trans-unit>
       <trans-unit id="3244446524809192034" datatype="html">
         <source>Klassifikation af data i systemet</source>
+      </trans-unit>
+      <trans-unit id="1186571126953128683" datatype="html">
+        <source>Tekniske systemtyper</source>
       </trans-unit>
       <trans-unit id="5340208750899970512" datatype="html">
         <source>IT System roller</source>
@@ -3179,9 +3194,6 @@
       <trans-unit id="148234676016705932" datatype="html">
         <source>DBS Databehandler</source>
       </trans-unit>
-      <trans-unit id="6316396755039555698" datatype="html">
-        <source>Licens- og kodegrundlag</source>
-      </trans-unit>
       <trans-unit id="8543025466037120214" datatype="html">
         <source>Arkivering</source>
       </trans-unit>
@@ -3464,9 +3476,6 @@
       <trans-unit id="1870392441094924700" datatype="html">
         <source>Dato for seneste DPIA / Konsekvensanalyse</source>
       </trans-unit>
-      <trans-unit id="9044497579857463520" datatype="html">
-        <source>IT-Systemet driftes</source>
-      </trans-unit>
       <trans-unit id="5098221578566106270" datatype="html">
         <source>Dokumentation til teknisk foranstaltning</source>
       </trans-unit>
@@ -3481,12 +3490,6 @@
       </trans-unit>
       <trans-unit id="2380273627031892685" datatype="html">
         <source>Lande som data overføres til</source>
-      </trans-unit>
-      <trans-unit id="1474930348127983861" datatype="html">
-        <source>Rediger link</source>
-      </trans-unit>
-      <trans-unit id="7981955698361882717" datatype="html">
-        <source>Fortegnelse</source>
       </trans-unit>
       <trans-unit id="4433067834910026209" datatype="html">
         <source>Gå til IT Systemkataloget</source>
@@ -3614,11 +3617,17 @@
       <trans-unit id="1367605704987726222" datatype="html">
         <source>Systemets overordnede formål</source>
       </trans-unit>
+      <trans-unit id="2577876001692170237" datatype="html">
+        <source>IT-systemet driftes</source>
+      </trans-unit>
       <trans-unit id="4689223503032272689" datatype="html">
         <source>Antal brugere</source>
       </trans-unit>
       <trans-unit id="7724449879287826549" datatype="html">
         <source>Indeholder AI-teknologi?</source>
+      </trans-unit>
+      <trans-unit id="6316396755039555698" datatype="html">
+        <source>Licens- og kodegrundlag</source>
       </trans-unit>
       <trans-unit id="7109755738988441858" datatype="html">
         <source>Systemkritikalitet</source>
@@ -3740,9 +3749,6 @@
       <trans-unit id="6959125562012930761" datatype="html">
         <source>Kræver system databehandleraftale</source>
       </trans-unit>
-      <trans-unit id="2577876001692170237" datatype="html">
-        <source>IT-systemet driftes</source>
-      </trans-unit>
       <trans-unit id="1840039816409586349" datatype="html">
         <source>Yderligere information</source>
       </trans-unit>
@@ -3854,9 +3860,6 @@
       <trans-unit id="234068930935606504" datatype="html">
         <source>Lokale KLE</source>
       </trans-unit>
-      <trans-unit id="6748140318042695939" datatype="html">
-        <source>Systemanvendelsen blev slettet</source>
-      </trans-unit>
       <trans-unit id="4855557478475074835" datatype="html">
         <source>IT Systemer i <x id="INTERPOLATION" equiv-text="{{ organizationName$ | async }}"/></source>
       </trans-unit>
@@ -3929,6 +3932,9 @@
       <trans-unit id="697483343074377619" datatype="html">
         <source>Link til risikovurdering</source>
       </trans-unit>
+      <trans-unit id="7981955698361882717" datatype="html">
+        <source>Fortegnelse</source>
+      </trans-unit>
       <trans-unit id="4747985364360008856" datatype="html">
         <source>IT systemet driftes</source>
       </trans-unit>
@@ -3940,6 +3946,12 @@
       </trans-unit>
       <trans-unit id="1465178914471912328" datatype="html">
         <source>Systemer der anvender systemet</source>
+      </trans-unit>
+      <trans-unit id="9154056184529721480" datatype="html">
+        <source>Snitflade ID&apos;er</source>
+      </trans-unit>
+      <trans-unit id="6140487118381407136" datatype="html">
+        <source>Snitflade versioner</source>
       </trans-unit>
       <trans-unit id="2565200191881896388" datatype="html">
         <source>Hvad viste den seneste risikovurdering</source>
@@ -3955,6 +3967,33 @@
       </trans-unit>
       <trans-unit id="5200200492652807397" datatype="html">
         <source>Noter om webtilgængelighed</source>
+      </trans-unit>
+      <trans-unit id="8384286620027712249" datatype="html">
+        <source>Teknisk systemtyper</source>
+      </trans-unit>
+      <trans-unit id="8392952927003064457" datatype="html">
+        <source>Arkivér system</source>
+      </trans-unit>
+      <trans-unit id="174474605473542575" datatype="html">
+        <source>Udfasningsdato</source>
+      </trans-unit>
+      <trans-unit id="9011845971830514604" datatype="html">
+        <source> Udfasningsdato kan ikke være før ibrugtagningsdato </source>
+      </trans-unit>
+      <trans-unit id="9158368026582482088" datatype="html">
+        <source>Navngivning på ESDH sag</source>
+      </trans-unit>
+      <trans-unit id="2137405200624328487" datatype="html">
+        <source>Kommentar</source>
+      </trans-unit>
+      <trans-unit id="1220374093016564303" datatype="html">
+        <source>Reference/link til ESDH</source>
+      </trans-unit>
+      <trans-unit id="8075189991660862448" datatype="html">
+        <source>Tilføj flere referencer</source>
+      </trans-unit>
+      <trans-unit id="1474930348127983861" datatype="html">
+        <source>Rediger link</source>
       </trans-unit>
       <trans-unit id="3299681426974159471" datatype="html">
         <source>Systemhierarki</source>
@@ -5078,6 +5117,12 @@
       <trans-unit id="7371699005452820313" datatype="html">
         <source>Data kasseres, men dokumenter skal bevares (K+B)</source>
       </trans-unit>
+      <trans-unit id="5222795483056055508" datatype="html">
+        <source>Dele af data bevares + Dokumenter kasseres (D+K)</source>
+      </trans-unit>
+      <trans-unit id="1129788292088432889" datatype="html">
+        <source>Dele af data bevares + Delmængde kasseres (D+D)</source>
+      </trans-unit>
       <trans-unit id="4135820424863127072" datatype="html">
         <source>Data bevares, men en delmængde af dokumenter kan kasseres (B+D)</source>
       </trans-unit>
@@ -5402,6 +5447,9 @@
       <trans-unit id="5449684192775013381" datatype="html">
         <source>Dækker felterne “Ibrugtagningsdato” og “Slutdato for anvendelse”</source>
       </trans-unit>
+      <trans-unit id="9044497579857463520" datatype="html">
+        <source>IT-Systemet driftes</source>
+      </trans-unit>
       <trans-unit id="8965344190722476861" datatype="html">
         <source>Hvilken kontrakt skal afgøre om IT systemet er aktivt</source>
       </trans-unit>
@@ -5435,8 +5483,14 @@
       <trans-unit id="4984996902763357561" datatype="html">
         <source>Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?</source>
       </trans-unit>
+      <trans-unit id="3923222763855936652" datatype="html">
+        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
+      </trans-unit>
       <trans-unit id="4651029877664223444" datatype="html">
         <source>Bekræft</source>
+      </trans-unit>
+      <trans-unit id="8881457969183282275" datatype="html">
+        <source>Bevar historik</source>
       </trans-unit>
       <trans-unit id="183269169882030011" datatype="html">
         <source>Tag system i anvendelse</source>
@@ -5768,6 +5822,15 @@
       <trans-unit id="2621199437126315795" datatype="html">
         <source>Oprettelse af anvendelse mislykkedes</source>
       </trans-unit>
+      <trans-unit id="6748140318042695939" datatype="html">
+        <source>Systemanvendelsen blev slettet</source>
+      </trans-unit>
+      <trans-unit id="4999037601378878230" datatype="html">
+        <source>Systemanvendelsen blev arkiveret</source>
+      </trans-unit>
+      <trans-unit id="5766947941131376694" datatype="html">
+        <source>Systemanvendelsen kunne ikke arkiveres</source>
+      </trans-unit>
       <trans-unit id="6663622015154753140" datatype="html">
         <source>Snitflade blev slettet</source>
       </trans-unit>
@@ -6040,69 +6103,6 @@
       </trans-unit>
       <trans-unit id="6017792095370304684" datatype="html">
         <source>Der skete en fejl ifm. tjek for forbindelsen til FK Organisation. Genindlæs venligst siden for at prøve igen.</source>
-      </trans-unit>
-      <trans-unit id="3487984946687907387" datatype="html">
-        <source>Kan du ikke logge ind med SSO?</source>
-      </trans-unit>
-      <trans-unit id="3617720446026509047" datatype="html">
-        <source>Gemmer din session så du ikke logges ud automatisk.</source>
-      </trans-unit>
-      <trans-unit id="7259401532876698278" datatype="html">
-        <source>Forbliv logget ind</source>
-      </trans-unit>
-      <trans-unit id="8384286620027712249" datatype="html">
-        <source>Teknisk systemtyper</source>
-      </trans-unit>
-      <trans-unit id="1186571126953128683" datatype="html">
-        <source>Tekniske systemtyper</source>
-      </trans-unit>
-      <trans-unit id="1639312213164225055" datatype="html">
-        <source> Brug manuel login, hvis din organisation ikke anvender SSO,<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br /&gt;"/> eller hvis du har fået besked på at logge ind med email og password. </source>
-      </trans-unit>
-      <trans-unit id="6140487118381407136" datatype="html">
-        <source>Snitflade versioner</source>
-      </trans-unit>
-      <trans-unit id="9154056184529721480" datatype="html">
-        <source>Snitflade ID&apos;er</source>
-      </trans-unit>
-      <trans-unit id="1129788292088432889" datatype="html">
-        <source>Dele af data bevares + Delmængde kasseres (D+D)</source>
-      </trans-unit>
-      <trans-unit id="5222795483056055508" datatype="html">
-        <source>Dele af data bevares + Dokumenter kasseres (D+K)</source>
-      </trans-unit>
-      <trans-unit id="1220374093016564303" datatype="html">
-        <source>Reference/link til ESDH</source>
-      </trans-unit>
-      <trans-unit id="174474605473542575" datatype="html">
-        <source>Udfasningsdato</source>
-      </trans-unit>
-      <trans-unit id="2137405200624328487" datatype="html">
-        <source>Kommentar</source>
-      </trans-unit>
-      <trans-unit id="3926330125892053137" datatype="html">
-        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
-      </trans-unit>
-      <trans-unit id="4999037601378878230" datatype="html">
-        <source>Systemanvendelsen blev arkiveret</source>
-      </trans-unit>
-      <trans-unit id="5766947941131376694" datatype="html">
-        <source>Systemanvendelsen kunne ikke arkiveres</source>
-      </trans-unit>
-      <trans-unit id="8075189991660862448" datatype="html">
-        <source>Tilføj flere referencer</source>
-      </trans-unit>
-      <trans-unit id="8392952927003064457" datatype="html">
-        <source>Arkivér system</source>
-      </trans-unit>
-      <trans-unit id="884579825669592245" datatype="html">
-        <source>Arkivér</source>
-      </trans-unit>
-      <trans-unit id="9011845971830514604" datatype="html">
-        <source> Udfasningsdato kan ikke være før ibrugtagningsdato </source>
-      </trans-unit>
-      <trans-unit id="9158368026582482088" datatype="html">
-        <source>Navngivning på ESDH sag</source>
       </trans-unit>
     </body>
   </file>
