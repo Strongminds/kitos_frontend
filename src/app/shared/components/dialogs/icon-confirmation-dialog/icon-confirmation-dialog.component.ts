@@ -25,13 +25,13 @@ import { DialogActionsComponent } from '../dialog-actions/dialog-actions.compone
 })
 export class IconConfirmationDialogComponent extends ConfirmationDialogComponent {
   @Input() icon: 'not-in-use' | 'take-into-use' = 'not-in-use';
-  @Input() canArchive: boolean = false;
-  @Input() archiveText: string = '';
-  @Output() archiveButtonClick = new EventEmitter<void>();
+  @Input() hasExtraAction: boolean = false;
+  @Input() extraActionText: string = '';
+  @Output() extraActionClick = new EventEmitter<void>();
 
-  public archiveResult() {
-    if (this.canArchive) {
-      this.archiveButtonClick.emit();
+  public extraActionResult() {
+    if (this.hasExtraAction) {
+      this.extraActionClick.emit();
     }
   }
 }

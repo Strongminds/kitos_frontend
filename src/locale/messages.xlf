@@ -6080,7 +6080,7 @@
       <trans-unit id="2137405200624328487" datatype="html">
         <source>Kommentar</source>
       </trans-unit>
-      <trans-unit id="3926330125892053137" datatype="html">
+      <trans-unit id="3923222763855936652" datatype="html">
         <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
       </trans-unit>
       <trans-unit id="4999037601378878230" datatype="html">
@@ -6095,14 +6095,14 @@
       <trans-unit id="8392952927003064457" datatype="html">
         <source>Arkivér system</source>
       </trans-unit>
-      <trans-unit id="884579825669592245" datatype="html">
-        <source>Arkivér</source>
-      </trans-unit>
       <trans-unit id="9011845971830514604" datatype="html">
         <source> Udfasningsdato kan ikke være før ibrugtagningsdato </source>
       </trans-unit>
       <trans-unit id="9158368026582482088" datatype="html">
         <source>Navngivning på ESDH sag</source>
+      </trans-unit>
+      <trans-unit id="8881457969183282275" datatype="html">
+        <source>Bevar historik</source>
       </trans-unit>
     </body>
   </file>
