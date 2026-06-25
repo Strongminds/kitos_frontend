@@ -95,4 +95,16 @@ export class ITSystemArchiveEffects {
       map(() => ITSystemArchiveActions.getITSystemArchiveCollectionPermissionsSuccess(undefined)),
     );
   });
+
+  getArchive$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemArchiveActions.getITSystemArchive),
+      switchMap(({ systemArchiveUuid }) =>
+        this.archiveService.getSingleItSystemArchiveV2Get({ archiveUuid: systemArchiveUuid }).pipe(
+          map((itSystemArchive) => ITSystemArchiveActions.getITSystemArchiveSuccess(itSystemArchive)),
+          catchError(() => of(ITSystemArchiveActions.getITSystemArchiveError())),
+        ),
+      ),
+    );
+  });
 }

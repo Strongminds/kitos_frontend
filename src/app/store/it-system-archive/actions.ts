@@ -1,5 +1,5 @@
 import { createActionGroup, emptyProps } from '@ngrx/store';
-import { APIResourceCollectionPermissionsResponseDTO } from 'src/app/api/v2';
+import { APIItSystemArchiveResponseDTO, APIResourceCollectionPermissionsResponseDTO } from 'src/app/api/v2';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { SavedFilterState } from 'src/app/shared/models/grid/saved-filter-state.model';
@@ -33,5 +33,9 @@ export const ITSystemArchiveActions = createActionGroup({
 
     'Save IT System Archive Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT System Archive Filter': (state: SavedFilterState) => ({ state }),
+
+    'Get IT System Archive': (systemArchiveUuid: string) => ({ systemArchiveUuid }),
+    'Get IT System Archive Success ': (itSystemArchive?: APIItSystemArchiveResponseDTO) => ({ itSystemArchive }),
+    'Get IT System Archive Error': emptyProps(),
   },
 });

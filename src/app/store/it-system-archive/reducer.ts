@@ -18,17 +18,22 @@ export const itSystemArchiveInitialState: ITSystemArchiveState = itSystemArchive
   isRemoving: false,
   error: undefined,
   collectionPermissions: undefined,
+  itSystemArchive: undefined,
+  itSystemArchiveLoading: false,
 });
 
 export const itSystemArchiveFeature = createFeature({
   name: 'ITSystemArchive',
   reducer: createReducer(
     itSystemArchiveInitialState,
-    on(ITSystemArchiveActions.getITSystemArchives, (state): ITSystemArchiveState => ({
-      ...state,
-      isLoading: true,
-      error: undefined,
-    })),
+    on(
+      ITSystemArchiveActions.getITSystemArchives,
+      (state): ITSystemArchiveState => ({
+        ...state,
+        isLoading: true,
+        error: undefined,
+      }),
+    ),
     on(
       ITSystemArchiveActions.getITSystemArchivesSuccess,
       (state, { archives, total }): ITSystemArchiveState => ({
@@ -61,23 +66,55 @@ export const itSystemArchiveFeature = createFeature({
         gridColumns,
       }),
     ),
-    on(ITSystemArchiveActions.deleteITSystemArchive, (state): ITSystemArchiveState => ({
-      ...state,
-      isRemoving: true,
-    })),
-    on(ITSystemArchiveActions.deleteITSystemArchiveSuccess, (state): ITSystemArchiveState => ({
-      ...state,
-      isRemoving: false,
-    })),
-    on(ITSystemArchiveActions.deleteITSystemArchiveError, (state): ITSystemArchiveState => ({
-      ...state,
-      isRemoving: false,
-    })),
+    on(
+      ITSystemArchiveActions.deleteITSystemArchive,
+      (state): ITSystemArchiveState => ({
+        ...state,
+        isRemoving: true,
+      }),
+    ),
+    on(
+      ITSystemArchiveActions.deleteITSystemArchiveSuccess,
+      (state): ITSystemArchiveState => ({
+        ...state,
+        isRemoving: false,
+      }),
+    ),
+    on(
+      ITSystemArchiveActions.deleteITSystemArchiveError,
+      (state): ITSystemArchiveState => ({
+        ...state,
+        isRemoving: false,
+      }),
+    ),
     on(
       ITSystemArchiveActions.getITSystemArchiveCollectionPermissionsSuccess,
       (state, { collectionPermissions }): ITSystemArchiveState => ({
         ...state,
         collectionPermissions,
+      }),
+    ),
+    on(
+      ITSystemArchiveActions.getITSystemArchive,
+      (state): ITSystemArchiveState => ({
+        ...state,
+        itSystemArchive: undefined,
+        itSystemArchiveLoading: true,
+      }),
+    ),
+    on(
+      ITSystemArchiveActions.getITSystemArchiveSuccess,
+      (state, { itSystemArchive }): ITSystemArchiveState => ({
+        ...state,
+        itSystemArchive,
+        itSystemArchiveLoading: false,
+      }),
+    ),
+    on(
+      ITSystemArchiveActions.getITSystemArchiveError,
+      (state): ITSystemArchiveState => ({
+        ...state,
+        itSystemArchiveLoading: false,
       }),
     ),
   ),
