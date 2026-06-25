@@ -25,7 +25,7 @@ export interface APIItSystemArchiveResponseDTO {
     /**
      * A reference name for the archive
      */
-    referenceName: string | null;
+    referenceName?: string | null;
     /**
      * Notes about the archive
      */
