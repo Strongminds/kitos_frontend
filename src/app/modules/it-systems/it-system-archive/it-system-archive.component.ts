@@ -169,10 +169,6 @@ export class ItSystemArchiveComponent extends BaseOverviewComponent implements O
 
   public override rowIdSelect(event: CellClickEvent): void {
     super.rowIdSelect(event, this.router, this.route);
-    // if (event.dataItem) {
-    //   const archiveUuid = event.dataItem.Uuid;
-    //   this.router.navigate([AppPath.itSystemArchive, archiveUuid, AppPath.frontpage]);
-    // }
   }
 
   public onDeleteEvent(archive: any): void {
