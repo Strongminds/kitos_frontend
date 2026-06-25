@@ -1,17 +1,13 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { CellClickEvent } from '@progress/kendo-angular-grid';
-import { combineLatestWith, first } from 'rxjs';
+import { first } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ARCHIVE_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
-import { AppPath } from 'src/app/shared/enums/app-path';
+import { ARCHIVE_COLUMNS_ID, ARCHIVE_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridActions } from 'src/app/store/grid/actions';
 import { ITSystemArchiveActions } from 'src/app/store/it-system-archive/actions';
@@ -122,10 +118,7 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
 
   constructor(
     private store: Store,
-    private router: Router,
-    private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
-    private dialogOpenerService: DialogOpenerService,
     private actions$: Actions,
   ) {
     super();
@@ -133,10 +126,10 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     // Initialize grid columns from localStorage
-    const columnId = ARCHIVE_SECTION_NAME;
+    const columnId = ARCHIVE_COLUMNS_ID;
     const localStorageColumns =
       this.gridColumnStorageService.getColumns(columnId, this.defaultGridColumns) || this.defaultGridColumns;
-    this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(localStorageColumns));
+    this.store.dispatch(ITSystemArchiveActions.updateGridColumns(localStorageColumns));
 
     // Dispatch initial load
     this.subscriptions.add(
@@ -149,10 +142,9 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
       this.actions$
         .pipe(
           ofType(ITSystemArchiveActions.deleteITSystemArchiveSuccess),
-          concatLatestFrom(() => [this.gridState$]),
-          combineLatestWith(this.gridState$),
+          concatLatestFrom(() => this.gridState$),
         )
-        .subscribe(([[_, gridState], _gridState]) => {
+        .subscribe(([_, gridState]) => {
           this.store.dispatch(ITSystemArchiveActions.getITSystemArchives(gridState));
         }),
     );
@@ -162,17 +154,6 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
 
   public stateChange(newState: GridState): void {
     this.store.dispatch(ITSystemArchiveActions.updateGridState(newState));
-  }
-
-  public onGridColumnsUpdated(gridColumns: GridColumn[]): void {
-    this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(gridColumns));
-  }
-
-  public rowIdSelect(event: CellClickEvent): void {
-    if (event.dataItem) {
-      const archiveUuid = event.dataItem.Uuid;
-      this.router.navigate([AppPath.itSystemArchive, archiveUuid, AppPath.frontpage]);
-    }
   }
 
   public onDeleteEvent(archive: any): void {
