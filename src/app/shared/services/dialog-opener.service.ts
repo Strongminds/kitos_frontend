@@ -51,7 +51,7 @@ export class DialogOpenerService {
 
   public openTakeSystemOutOfUseDialog(
     organizationName: string | undefined = undefined,
-    archiveAction?: () => void,
+    extraAction?: () => void,
   ): MatDialogRef<IconConfirmationDialogComponent> {
     const dialogRef = this.dialog.open(IconConfirmationDialogComponent);
     const confirmationDialogInstance = dialogRef.componentInstance as IconConfirmationDialogComponent;
@@ -64,10 +64,10 @@ export class DialogOpenerService {
     confirmationDialogInstance.confirmColor = 'warn';
     confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
     confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
-    confirmationDialogInstance.canArchive = true;
-    confirmationDialogInstance.archiveText = $localize`Bevar historik`;
-    if (archiveAction) {
-      confirmationDialogInstance.archiveButtonClick.subscribe(() => archiveAction());
+    confirmationDialogInstance.hasExtraAction = true;
+    confirmationDialogInstance.extraActionText = $localize`Bevar historik`;
+    if (extraAction) {
+      confirmationDialogInstance.extraActionClick.subscribe(() => extraAction());
     }
 
     return dialogRef;
