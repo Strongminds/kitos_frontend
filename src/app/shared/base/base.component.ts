@@ -1,14 +1,8 @@
-import { Component, OnDestroy } from '@angular/core';
-import { Subscription } from 'rxjs';
+import { Component } from '@angular/core';
+import { HasSubscriptions } from './hasSubscriptions';
 
 @Component({
   template: '',
   standalone: false,
 })
-export class BaseComponent implements OnDestroy {
-  public subscriptions = new Subscription();
-
-  ngOnDestroy() {
-    this.subscriptions.unsubscribe();
-  }
-}
+export class BaseComponent extends HasSubscriptions {}

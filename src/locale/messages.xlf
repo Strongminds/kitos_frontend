@@ -5435,9 +5435,6 @@
       <trans-unit id="4984996902763357561" datatype="html">
         <source>Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?</source>
       </trans-unit>
-      <trans-unit id="5088079663399937603" datatype="html">
-        <source>Dette sletter de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizatioName ?? &apos;kommunen&apos;"/>, men sletter ikke stamdata om systemet i IT System Kataloget.</source>
-      </trans-unit>
       <trans-unit id="4651029877664223444" datatype="html">
         <source>Bekræft</source>
       </trans-unit>
@@ -6073,6 +6070,39 @@
       </trans-unit>
       <trans-unit id="5222795483056055508" datatype="html">
         <source>Dele af data bevares + Dokumenter kasseres (D+K)</source>
+      </trans-unit>
+      <trans-unit id="1220374093016564303" datatype="html">
+        <source>Reference/link til ESDH</source>
+      </trans-unit>
+      <trans-unit id="174474605473542575" datatype="html">
+        <source>Udfasningsdato</source>
+      </trans-unit>
+      <trans-unit id="2137405200624328487" datatype="html">
+        <source>Kommentar</source>
+      </trans-unit>
+      <trans-unit id="3923222763855936652" datatype="html">
+        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
+      </trans-unit>
+      <trans-unit id="4999037601378878230" datatype="html">
+        <source>Systemanvendelsen blev arkiveret</source>
+      </trans-unit>
+      <trans-unit id="5766947941131376694" datatype="html">
+        <source>Systemanvendelsen kunne ikke arkiveres</source>
+      </trans-unit>
+      <trans-unit id="8075189991660862448" datatype="html">
+        <source>Tilføj flere referencer</source>
+      </trans-unit>
+      <trans-unit id="8392952927003064457" datatype="html">
+        <source>Arkivér system</source>
+      </trans-unit>
+      <trans-unit id="9011845971830514604" datatype="html">
+        <source> Udfasningsdato kan ikke være før ibrugtagningsdato </source>
+      </trans-unit>
+      <trans-unit id="9158368026582482088" datatype="html">
+        <source>Navngivning på ESDH sag</source>
+      </trans-unit>
+      <trans-unit id="8881457969183282275" datatype="html">
+        <source>Bevar historik</source>
       </trans-unit>
     </body>
   </file>

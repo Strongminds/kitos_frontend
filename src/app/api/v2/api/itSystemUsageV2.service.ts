@@ -21,6 +21,8 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
+import { APICreateItSystemUsageArchiveRequestDTO } from '../model/aPICreateItSystemUsageArchiveRequestDTO';
+// @ts-ignore
 import { APICreateItSystemUsageRequestDTO } from '../model/aPICreateItSystemUsageRequestDTO';
 // @ts-ignore
 import { APIExternalReferenceDataWriteRequestDTO } from '../model/aPIExternalReferenceDataWriteRequestDTO';
@@ -140,6 +142,13 @@ export interface PatchSingleItSystemUsageV2PatchSystemUsageRequestParams {
     systemUsageUuid: string;
     /**  */
     aPIUpdateItSystemUsageRequestDTO?: APIUpdateItSystemUsageRequestDTO;
+}
+
+export interface PostSingleItSystemUsageV2ArchiveItSystemUsageRequestParams {
+    /**  */
+    systemUsageUuid: string;
+    /**  */
+    aPICreateItSystemUsageArchiveRequestDTO?: APICreateItSystemUsageArchiveRequestDTO;
 }
 
 export interface PostSingleItSystemUsageV2PostExternalReferenceRequestParams {
