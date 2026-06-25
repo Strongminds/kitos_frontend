@@ -141,7 +141,6 @@ model/alertType.ts
 model/appliedProcurementPlanResponseDTO.ts
 model/archiveDutyChoice.ts
 model/archiveReferenceResponseDTO.ts
-model/archiveReferenceWriteRequestDTO.ts
 model/archivingCreationRequestDTO.ts
 model/archivingRegistrationsResponseDTO.ts
 model/archivingUpdateRequestDTO.ts
