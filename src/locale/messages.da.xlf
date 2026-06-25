@@ -7973,13 +7973,13 @@
         <source>Tilføj flere referencer</source>
         <target state="new">Tilføj flere referencer</target>
       </trans-unit>
-      <trans-unit id="3926330125892053137" datatype="html">
+      <trans-unit id="3923222763855936652" datatype="html">
         <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
         <target state="new">Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</target>
       </trans-unit>
-      <trans-unit id="884579825669592245" datatype="html">
-        <source>Arkivér</source>
-        <target state="new">Arkivér</target>
+      <trans-unit id="8881457969183282275" datatype="html">
+        <source>Bevar historik</source>
+        <target state="new">Bevar historik</target>
       </trans-unit>
     </body>
   </file>
