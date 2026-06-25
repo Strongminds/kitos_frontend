@@ -65,7 +65,7 @@ export class DialogOpenerService {
     confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
     confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
     confirmationDialogInstance.canArchive = true;
-    confirmationDialogInstance.archiveText = $localize`Arkivér`;
+    confirmationDialogInstance.archiveText = $localize`Bevar historik`;
     if (archiveAction) {
       confirmationDialogInstance.archiveButtonClick.subscribe(() => archiveAction());
     }
