@@ -1,1 +1,8 @@
-<p>it-system-archive-details works!</p>
+@if ((isLoading$ | async) === false) {
+  <app-breadcrumbs [items]="breadCrumbs$ | async"></app-breadcrumbs>
+
+  }
+
+  @if (isLoading$ | async) {
+    <app-loading></app-loading>
+  }
