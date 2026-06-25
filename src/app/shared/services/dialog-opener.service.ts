@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { ArchiveSystemUsageDialogComponent } from 'src/app/modules/it-systems/shared/archive-system-usage-dialog/archive-system-usage-dialog.component';
 import { DeleteUserDialogComponent } from 'src/app/modules/organization/organization-users/delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
+import { HasSubscriptions } from '../base/hasSubscriptions';
 import { BulkActionDialogComponent } from '../components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { IconConfirmationDialogComponent } from '../components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { GlobalOptionTypeDialogComponent } from '../components/global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
@@ -22,8 +23,10 @@ export const defaultDialogMaxSize = {
   providedIn: 'root',
 })
 // This service is useful if you need to open the same or similar dialogs multiple places, which need setup/configuration.
-export class DialogOpenerService {
-  constructor(private dialog: MatDialog) {}
+export class DialogOpenerService extends HasSubscriptions {
+  constructor(private dialog: MatDialog) {
+    super();
+  }
 
   public openEditUserDialog(
     user: ODataOrganizationUser,
@@ -66,7 +69,7 @@ export class DialogOpenerService {
     confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
     if (extraAction) {
       confirmationDialogInstance.hasExtraAction = true;
-      confirmationDialogInstance.extraActionClick.subscribe(() => extraAction());
+      this.subscriptions.add(confirmationDialogInstance.extraActionClick.subscribe(() => extraAction()));
       confirmationDialogInstance.extraActionText = $localize`Bevar historik`;
     }
 
