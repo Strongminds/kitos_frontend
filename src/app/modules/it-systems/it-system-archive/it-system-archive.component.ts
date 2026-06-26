@@ -1,10 +1,12 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
+import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first } from 'rxjs';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import { ARCHIVE_COLUMNS_ID, ARCHIVE_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -39,7 +41,7 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
     AsyncPipe,
   ],
 })
-export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
+export class ItSystemArchiveComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectArchiveIsLoading);
   public readonly gridData$ = this.store.select(selectArchiveGridData);
   public readonly gridState$ = this.store.select(selectArchiveGridState);
@@ -111,11 +113,13 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
   ];
 
   constructor(
-    private store: Store,
+    store: Store,
+    private router: Router,
+    private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
   ) {
-    super();
+    super(store, 'it-system-archive');
   }
 
   ngOnInit(): void {
@@ -150,13 +154,21 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
     this.store.dispatch(ITSystemArchiveActions.updateGridState(newState));
   }
 
+  public onGridColumnsUpdated(gridColumns: GridColumn[]): void {
+    this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(gridColumns));
+  }
+
+  public override rowIdSelect(event: CellClickEvent): void {
+    super.rowIdSelect(event, this.router, this.route);
+  }
+
   public onDeleteEvent(archive: any): void {
     if (archive?.Uuid) {
       this.store.dispatch(ITSystemArchiveActions.deleteITSystemArchive(archive.Uuid));
     }
   }
 
-  public onExcelExport = (exportAllColumns: boolean) => {
+  public override onExcelExport = (exportAllColumns: boolean) => {
     this.gridState$.pipe(first()).subscribe((gridState) => {
       this.store.dispatch(
         GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, 'it-system-archive'),
