@@ -1,1 +1,11 @@
-<p>it-system-archive-details-frontpage works!</p>
+<app-card>
+    <app-card-header title="Systemhistorik" i18n-title>
+  </app-card-header>
+
+  <form [formGroup]="archiveForm">
+    <app-datepicker [formGroup]="archiveForm" formName="takenIntoUsageDate" text="Ibrugtagningsdato" i18n-text></app-datepicker>
+        <app-datepicker [formGroup]="archiveForm" formName="archivingDate" text="Udfasningsdato" i18n-text></app-datepicker>
+    <app-textbox [formGroup]="archiveForm" formName="referenceName" text="Navngivning på ESDH sag" i18n-text></app-textbox>
+    <app-textarea [formGroup]="archiveForm" formName="note" text="Kommentar" i18n-text></app-textarea>
+  </form>
+</app-card>
