@@ -6,3 +6,17 @@
   flex-direction: column;
   width: 100%;
 }
+
+form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: theme.$padding-large;
+
+  .two-thirds-column-width {
+    @include mixins.two-thirds-column-width;
+  }
+
+  .full-width {
+    grid-column: span 3;
+  }
+}
