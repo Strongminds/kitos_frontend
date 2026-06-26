@@ -50,7 +50,6 @@
             [disableSubmitIfNoUrl]="true"
           ></app-edit-url-section>
         </div>
-        @if (true) {
           <app-icon-button
             [tooltipText]="'Fjern reference'"
             i18n-tooltipText
@@ -60,7 +59,6 @@
               'disabled-delete-icon': !canRemoveReference(),
             }"></app-trashcan-icon>
           </app-icon-button>
-        }
       </div>
     }
 
