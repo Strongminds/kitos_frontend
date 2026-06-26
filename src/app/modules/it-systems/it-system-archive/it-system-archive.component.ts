@@ -50,17 +50,10 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
-      field: 'Uuid',
-      title: $localize`UUID`,
-      section: this.systemSectionName,
-      width: 220,
-      minResizableWidth: 220,
-      hidden: false,
-    },
-    {
       field: 'ArchivingDate',
       title: $localize`Arkiveringsdato`,
       section: this.systemSectionName,
+      style: 'date',
       filter: 'date',
       width: 140,
       minResizableWidth: 140,
@@ -85,6 +78,7 @@ export class ItSystemArchiveComponent extends BaseComponent implements OnInit {
     {
       field: 'SystemName',
       title: $localize`Systemnavn`,
+      style: 'primary',
       section: this.systemSectionName,
       width: 220,
       minResizableWidth: 220,

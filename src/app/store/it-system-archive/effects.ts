@@ -11,6 +11,7 @@ import { adaptItSystemArchive } from 'src/app/shared/models/it-system/it-system-
 import { OData } from 'src/app/shared/models/odata.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
+import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemArchiveActions } from './actions';
 import { selectArchivePreviousGridState } from './selectors';
 
@@ -23,13 +24,13 @@ export class ITSystemArchiveEffects {
     private httpClient: HttpClient,
     private gridColumnStorageService: GridColumnStorageService,
     private gridDataCacheService: GridDataCacheService,
-  ) {}
+  ) { }
 
   getArchives$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemArchiveActions.getITSystemArchives),
-      concatLatestFrom(() => this.store.select(selectArchivePreviousGridState)),
-      switchMap(([{ gridState }, previousGridState]) => {
+      concatLatestFrom(() => [this.store.select(selectArchivePreviousGridState), this.store.select(selectOrganizationUuid)]),
+      switchMap(([{ gridState }, previousGridState, organizationUuid]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
         const cachedRange = this.gridDataCacheService.get(gridState);
@@ -40,7 +41,7 @@ export class ITSystemArchiveEffects {
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState);
         return this.httpClient
           .get<OData>(
-            `/odata/ItSystemArchives?$expand=Snapshot($expand=ItSystem($select=Name,Uuid))&${cacheableOdataString}&$count=true`,
+            `/odata/ItSystemArchives?organizationUuid=${organizationUuid}&$expand=Snapshot($expand=ItSystem($select=Name,Uuid))&${cacheableOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
