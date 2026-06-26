@@ -25,6 +25,7 @@ export class EditUrlSectionComponent extends BaseComponent {
   @Input() linkDisabledMessage?: string;
   @Input() closeDialogOnSubmit = false;
   @Input() disableSubmitIfNoUrl = false;
+  @Input() public canClickLinkIfInputDisabled = false;
 
   @Output() submitMethod = new EventEmitter();
 

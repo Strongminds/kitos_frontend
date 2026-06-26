@@ -50,8 +50,8 @@ export class ItSystemArchiveDetailsFrontpageComponent extends BaseComponent impl
     const dtoReferenceFormGroups = referenceDtos.map(
       (dto) =>
         new FormGroup({
-          name: new FormControl<string | undefined>({ value: dto.name ?? '', disabled: true }),
-          url: new FormControl<string | undefined>({ value: dto.url ?? '', disabled: true }),
+          name: new FormControl<string | undefined>(dto.name ?? ''),
+          url: new FormControl<string | undefined>(dto.url ?? ''),
         }),
     );
     this.archiveReferences.clear();
