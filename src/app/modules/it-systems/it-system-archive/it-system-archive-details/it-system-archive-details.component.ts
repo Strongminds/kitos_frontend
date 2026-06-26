@@ -1,11 +1,15 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { BreadcrumbsComponent } from 'src/app/shared/components/breadcrumbs/breadcrumbs.component';
 import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
+import {
+  NavigationDrawerComponent,
+  NavigationDrawerItem,
+} from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -20,7 +24,7 @@ import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-it-system-archive-details',
-  imports: [AsyncPipe, BreadcrumbsComponent, LoadingComponent],
+  imports: [AsyncPipe, BreadcrumbsComponent, LoadingComponent, NavigationDrawerComponent, RouterOutlet],
   templateUrl: './it-system-archive-details.component.html',
   styleUrl: './it-system-archive-details.component.scss',
 })
@@ -49,6 +53,14 @@ export class ItSystemArchiveDetailsComponent extends BaseComponent implements On
     ]),
     filterNullish(),
   );
+
+  public readonly navigationItems: NavigationDrawerItem[] = [
+    {
+      label: $localize`Arkivforside`,
+      iconType: 'document',
+      route: AppPath.frontpage,
+    },
+  ];
 
   constructor(
     private readonly store: Store,
