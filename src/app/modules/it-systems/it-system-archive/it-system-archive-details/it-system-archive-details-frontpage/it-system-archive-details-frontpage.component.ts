@@ -2,13 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { map, Observable, startWith } from 'rxjs';
-import { APIArchiveReferenceResponseDTO } from 'src/app/api/v2';
+import { APIArchiveReferenceResponseDTO, APIShallowOrganizationResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { CardHeaderComponent } from 'src/app/shared/components/card-header/card-header.component';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 import { DatePickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
 import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
+import { organizationNameWithCvr } from 'src/app/shared/helpers/string.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemArchive } from 'src/app/store/it-system-archive/selectors';
@@ -38,6 +39,10 @@ export class ItSystemArchiveDetailsFrontpageComponent extends BaseComponent impl
     referenceName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     note: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     archiveReferences: new FormArray([this.createReferenceFormGroup()]),
+    legacyName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    localName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    localId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    organization: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(private readonly store: Store) {
@@ -66,10 +71,19 @@ export class ItSystemArchiveDetailsFrontpageComponent extends BaseComponent impl
           archivingDate: systemArchive.archivingDate ? new Date(systemArchive.archivingDate) : undefined,
           referenceName: systemArchive.referenceName,
           note: systemArchive.note,
+          legacyName: systemArchive.legacyName,
+          localName: systemArchive.localName,
+          localId: systemArchive.localId,
+          organization: this.getOrganizationName(systemArchive.organization),
         });
         this.setupArchiveReferenceFormGroups(systemArchive.archiveReferences ?? []);
       }),
     );
+  }
+
+  private getOrganizationName(organization: APIShallowOrganizationResponseDTO | undefined) {
+    if (!organization) return '';
+    return organizationNameWithCvr(organization.name, organization.cvr);
   }
 
   public getReferenceObservable$(index: number): Observable<SimpleLink | undefined> {
