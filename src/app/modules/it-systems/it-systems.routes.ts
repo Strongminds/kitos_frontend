@@ -120,6 +120,7 @@ const routes: Routes = [
             path: AppPath.frontpage,
             component: ItSystemArchiveDetailsFrontpageComponent,
           },
+          { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
       {
