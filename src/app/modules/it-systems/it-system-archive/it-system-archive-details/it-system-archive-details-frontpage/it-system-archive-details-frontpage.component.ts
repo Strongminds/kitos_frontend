@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { map, Observable, startWith } from 'rxjs';
+import { combineLatest, map, Observable, startWith } from 'rxjs';
 import { APIArchiveReferenceResponseDTO, APIShallowOrganizationResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { CardHeaderComponent } from 'src/app/shared/components/card-header/card-header.component';
@@ -13,6 +13,8 @@ import { organizationNameWithCvr } from 'src/app/shared/helpers/string.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemArchive } from 'src/app/store/it-system-archive/selectors';
+import { ITSystemActions } from 'src/app/store/it-system/actions';
+import { selectItSystemName } from 'src/app/store/it-system/selectors';
 import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
@@ -32,6 +34,7 @@ import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-u
 })
 export class ItSystemArchiveDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly itSystemArchive$ = this.store.select(selectItSystemArchive).pipe(filterNullish());
+  public readonly currentItSystemName$ = this.store.select(selectItSystemName).pipe(filterNullish());
 
   public readonly archiveForm = new FormGroup({
     takenIntoUsageDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
@@ -43,6 +46,7 @@ export class ItSystemArchiveDetailsFrontpageComponent extends BaseComponent impl
     localName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     localId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     organization: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    currentSystemName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   constructor(private readonly store: Store) {
@@ -65,19 +69,34 @@ export class ItSystemArchiveDetailsFrontpageComponent extends BaseComponent impl
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.itSystemArchive$.subscribe((systemArchive) => {
-        this.archiveForm.patchValue({
-          takenIntoUsageDate: systemArchive.takenIntoUsageDate ? new Date(systemArchive.takenIntoUsageDate) : undefined,
-          archivingDate: systemArchive.archivingDate ? new Date(systemArchive.archivingDate) : undefined,
-          referenceName: systemArchive.referenceName,
-          note: systemArchive.note,
-          legacyName: systemArchive.legacyName,
-          localName: systemArchive.localName,
-          localId: systemArchive.localId,
-          organization: this.getOrganizationName(systemArchive.organization),
-        });
-        this.setupArchiveReferenceFormGroups(systemArchive.archiveReferences ?? []);
-      }),
+      this.itSystemArchive$
+        .pipe(
+          map((systemArchive) => {
+            this.store.dispatch(ITSystemActions.getITSystem(systemArchive.itSystemUuid));
+          }),
+        )
+        .subscribe(),
+    );
+
+    this.subscriptions.add(
+      combineLatest([this.itSystemArchive$, this.currentItSystemName$]).subscribe(
+        ([systemArchive, currentItSystemName]) => {
+          this.archiveForm.patchValue({
+            takenIntoUsageDate: systemArchive.takenIntoUsageDate
+              ? new Date(systemArchive.takenIntoUsageDate)
+              : undefined,
+            archivingDate: systemArchive.archivingDate ? new Date(systemArchive.archivingDate) : undefined,
+            referenceName: systemArchive.referenceName,
+            note: systemArchive.note,
+            legacyName: systemArchive.legacyName,
+            localName: systemArchive.localName,
+            localId: systemArchive.localId,
+            organization: this.getOrganizationName(systemArchive.organization),
+            currentSystemName: currentItSystemName,
+          });
+          this.setupArchiveReferenceFormGroups(systemArchive.archiveReferences ?? []);
+        },
+      ),
     );
   }
 
