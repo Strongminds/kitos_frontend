@@ -19,6 +19,7 @@
   [exportToExcelName]="'IT System Arkiv Overblik'"
   i18n-exportToExcelName
   entityType="it-system-archive"
+  (rowIdSelect)="rowIdSelect($event)"
   (stateChange)="stateChange($event)"
   (deleteEvent)="onDeleteEvent($event)"
 ></app-grid>
