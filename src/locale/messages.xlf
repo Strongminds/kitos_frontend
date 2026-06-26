@@ -6077,8 +6077,8 @@
       <trans-unit id="505788991318317980" datatype="html">
         <source>IT System UUID</source>
       </trans-unit>
-      <trans-unit id="8696736964814398008" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT System Arkiv</source>
+      <trans-unit id="5310239090588489405" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelses historik</source>
       </trans-unit>
       <trans-unit id="7550982890201476053" datatype="html">
         <source>Arkiveringsdato</source>
@@ -6092,8 +6092,8 @@
       <trans-unit id="3231887773453065724" datatype="html">
         <source>Lokalt system ID</source>
       </trans-unit>
-      <trans-unit id="8467651254661273651" datatype="html">
-        <source>IT System Arkiv</source>
+      <trans-unit id="752345348010102991" datatype="html">
+        <source>Anvendelses historik</source>
       </trans-unit>
     </body>
   </file>

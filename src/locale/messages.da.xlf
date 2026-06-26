@@ -7953,13 +7953,9 @@
         <source>IT System UUID</source>
         <target state="new">IT System UUID</target>
       </trans-unit>
-      <trans-unit id="8696736964814398008" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT System Arkiv</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT System Arkiv</target>
-      </trans-unit>
-      <trans-unit id="8467651254661273651" datatype="html">
-        <source>IT System Arkiv</source>
-        <target state="new">IT System Arkiv</target>
+      <trans-unit id="5310239090588489405" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelses historik</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelses historik</target>
       </trans-unit>
       <trans-unit id="2193029653870382707" datatype="html">
         <source>Lokalt systemnavn</source>
@@ -7968,6 +7964,10 @@
       <trans-unit id="3231887773453065724" datatype="html">
         <source>Lokalt system ID</source>
         <target state="new">Lokalt system ID</target>
+      </trans-unit>
+      <trans-unit id="752345348010102991" datatype="html">
+        <source>Anvendelses historik</source>
+        <target state="new">Anvendelses historik</target>
       </trans-unit>
     </body>
   </file>
