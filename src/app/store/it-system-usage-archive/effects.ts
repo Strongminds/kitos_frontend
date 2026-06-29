@@ -6,18 +6,18 @@ import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, of, switchMap } from 'rxjs';
 import { ItSystemUsageArchiveV2Service } from 'src/app/api/v2';
-import { ARCHIVE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
-import { adaptItSystemArchive } from 'src/app/shared/models/it-system/it-system-archive-odata.model';
+import { USAGE_ARCHIVE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
+import { adaptItSystemUsageArchive } from 'src/app/shared/models/it-system/it-system-usage-archive-odata.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
-import { ITSystemArchiveActions } from './actions';
-import { selectArchivePreviousGridState } from './selectors';
+import { ITSystemUsageArchiveActions } from './actions';
+import { selectUsageArchivePreviousGridState } from './selectors';
 
 @Injectable()
-export class ITSystemArchiveEffects {
+export class ITSystemUsageArchiveEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
@@ -29,9 +29,9 @@ export class ITSystemArchiveEffects {
 
   getArchives$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemArchiveActions.getITSystemArchives),
+      ofType(ITSystemUsageArchiveActions.getITSystemUsageArchives),
       concatLatestFrom(() => [
-        this.store.select(selectArchivePreviousGridState),
+        this.store.select(selectUsageArchivePreviousGridState),
         this.store.select(selectOrganizationUuid),
       ]),
       switchMap(([{ gridState }, previousGridState, organizationUuid]) => {
@@ -39,24 +39,24 @@ export class ITSystemArchiveEffects {
 
         const cachedRange = this.gridDataCacheService.get(gridState);
         if (cachedRange.data !== undefined) {
-          return of(ITSystemArchiveActions.getITSystemArchivesSuccess(cachedRange.data, cachedRange.total));
+          return of(ITSystemUsageArchiveActions.getITSystemUsageArchivesSuccess(cachedRange.data, cachedRange.total));
         }
 
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState);
         return this.httpClient
           .get<OData>(
-            `/odata/ItSystemArchives?organizationUuid=${organizationUuid}&$expand=Snapshot($expand=ItSystem($select=Name,Uuid))&${cacheableOdataString}&$count=true`,
+            `/odata/ItSystemUsageArchives?organizationUuid=${organizationUuid}&$expand=Snapshot($expand=ItSystem($select=Name,Uuid))&${cacheableOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
-              const dataItems = compact(data.value.map(adaptItSystemArchive));
+              const dataItems = compact(data.value.map(adaptItSystemUsageArchive));
               const total = data['@odata.count'];
               this.gridDataCacheService.set(gridState, dataItems, total);
 
               const returnData = this.gridDataCacheService.gridStateSliceFromArray(dataItems, gridState);
-              return ITSystemArchiveActions.getITSystemArchivesSuccess(returnData, total);
+              return ITSystemUsageArchiveActions.getITSystemUsageArchivesSuccess(returnData, total);
             }),
-            catchError(() => of(ITSystemArchiveActions.getITSystemArchivesError())),
+            catchError(() => of(ITSystemUsageArchiveActions.getITSystemUsageArchivesError())),
           );
       }),
     );
@@ -64,31 +64,31 @@ export class ITSystemArchiveEffects {
 
   updateGridState$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemArchiveActions.updateGridState),
-      map(({ gridState }) => ITSystemArchiveActions.getITSystemArchives(gridState)),
+      ofType(ITSystemUsageArchiveActions.updateGridState),
+      map(({ gridState }) => ITSystemUsageArchiveActions.getITSystemUsageArchives(gridState)),
     );
   });
 
   updateGridColumns$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemArchiveActions.updateGridColumns),
+      ofType(ITSystemUsageArchiveActions.updateGridColumns),
       map(({ gridColumns }) => {
-        this.gridColumnStorageService.setColumns(ARCHIVE_COLUMNS_ID, gridColumns);
-        return ITSystemArchiveActions.updateGridColumnsSuccess(gridColumns);
+        this.gridColumnStorageService.setColumns(USAGE_ARCHIVE_COLUMNS_ID, gridColumns);
+        return ITSystemUsageArchiveActions.updateGridColumnsSuccess(gridColumns);
       }),
     );
   });
 
   deleteArchive$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemArchiveActions.deleteITSystemArchive),
+      ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchive),
       switchMap(({ archiveUuid }) =>
         this.archiveService.deleteSingleItSystemUsageArchiveV2Delete({ archiveUuid }).pipe(
           map(() => {
             this.gridDataCacheService.reset();
-            return ITSystemArchiveActions.deleteITSystemArchiveSuccess();
+            return ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess();
           }),
-          catchError(() => of(ITSystemArchiveActions.deleteITSystemArchiveError())),
+          catchError(() => of(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveError())),
         ),
       ),
     );
@@ -96,14 +96,16 @@ export class ITSystemArchiveEffects {
 
   getCollectionPermissions$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(ITSystemArchiveActions.getITSystemArchiveCollectionPermissions),
+      ofType(ITSystemUsageArchiveActions.getITSystemUsageArchiveCollectionPermissions),
       concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
       switchMap(([_, organizationUuid]) =>
         this.archiveService
           .getSingleItSystemUsageArchiveV2GetItSystemUsageArchiveCollectionPermissions({ organizationUuid })
           .pipe(
-            map((permissions) => ITSystemArchiveActions.getITSystemArchiveCollectionPermissionsSuccess(permissions)),
-            catchError(() => of(ITSystemArchiveActions.getITSystemArchiveCollectionPermissionsError())),
+            map((permissions) =>
+              ITSystemUsageArchiveActions.getITSystemUsageArchiveCollectionPermissionsSuccess(permissions),
+            ),
+            catchError(() => of(ITSystemUsageArchiveActions.getITSystemUsageArchiveCollectionPermissionsError())),
           ),
       ),
     );

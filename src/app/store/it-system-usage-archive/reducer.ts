@@ -1,15 +1,15 @@
 import { createEntityAdapter } from '@ngrx/entity';
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
-import { ItSystemArchiveOData } from 'src/app/shared/models/it-system/it-system-archive-odata.model';
-import { ITSystemArchiveActions } from './actions';
-import { ITSystemArchiveState } from './state';
+import { ItSystemUsageArchiveOData } from 'src/app/shared/models/it-system/it-system-usage-archive-odata.model';
+import { ITSystemUsageArchiveActions } from './actions';
+import { ITSystemUsageArchiveState } from './state';
 
-export const itSystemArchiveAdapter = createEntityAdapter<ItSystemArchiveOData>({
-  selectId: (archive: ItSystemArchiveOData): string => archive.id,
+export const itSystemUsageArchiveAdapter = createEntityAdapter<ItSystemUsageArchiveOData>({
+  selectId: (archive: ItSystemUsageArchiveOData): string => archive.id,
 });
 
-export const itSystemArchiveInitialState: ITSystemArchiveState = itSystemArchiveAdapter.getInitialState({
+export const itSystemUsageArchiveInitialState: ITSystemUsageArchiveState = itSystemUsageArchiveAdapter.getInitialState({
   total: 0,
   isLoading: false,
   gridState: defaultODataGridState,
@@ -20,34 +20,34 @@ export const itSystemArchiveInitialState: ITSystemArchiveState = itSystemArchive
   collectionPermissions: undefined,
 });
 
-export const itSystemArchiveFeature = createFeature({
-  name: 'ITSystemArchive',
+export const itSystemUsageArchiveFeature = createFeature({
+  name: 'ITSystemUsageArchive',
   reducer: createReducer(
-    itSystemArchiveInitialState,
-    on(ITSystemArchiveActions.getITSystemArchives, (state): ITSystemArchiveState => ({
+    itSystemUsageArchiveInitialState,
+    on(ITSystemUsageArchiveActions.getITSystemUsageArchives, (state): ITSystemUsageArchiveState => ({
       ...state,
       isLoading: true,
       error: undefined,
     })),
     on(
-      ITSystemArchiveActions.getITSystemArchivesSuccess,
-      (state, { archives, total }): ITSystemArchiveState => ({
-        ...itSystemArchiveAdapter.setAll(archives, state),
+      ITSystemUsageArchiveActions.getITSystemUsageArchivesSuccess,
+      (state, { archives, total }): ITSystemUsageArchiveState => ({
+        ...itSystemUsageArchiveAdapter.setAll(archives, state),
         total,
         isLoading: false,
       }),
     ),
     on(
-      ITSystemArchiveActions.getITSystemArchivesError,
-      (state, { error }): ITSystemArchiveState => ({
+      ITSystemUsageArchiveActions.getITSystemUsageArchivesError,
+      (state, { error }): ITSystemUsageArchiveState => ({
         ...state,
         isLoading: false,
         error,
       }),
     ),
     on(
-      ITSystemArchiveActions.updateGridState,
-      (state, { gridState }): ITSystemArchiveState => ({
+      ITSystemUsageArchiveActions.updateGridState,
+      (state, { gridState }): ITSystemUsageArchiveState => ({
         ...state,
         isLoading: true,
         gridState,
@@ -55,27 +55,27 @@ export const itSystemArchiveFeature = createFeature({
       }),
     ),
     on(
-      ITSystemArchiveActions.updateGridColumnsSuccess,
-      (state, { gridColumns }): ITSystemArchiveState => ({
+      ITSystemUsageArchiveActions.updateGridColumnsSuccess,
+      (state, { gridColumns }): ITSystemUsageArchiveState => ({
         ...state,
         gridColumns,
       }),
     ),
-    on(ITSystemArchiveActions.deleteITSystemArchive, (state): ITSystemArchiveState => ({
+    on(ITSystemUsageArchiveActions.deleteITSystemUsageArchive, (state): ITSystemUsageArchiveState => ({
       ...state,
       isRemoving: true,
     })),
-    on(ITSystemArchiveActions.deleteITSystemArchiveSuccess, (state): ITSystemArchiveState => ({
+    on(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess, (state): ITSystemUsageArchiveState => ({
       ...state,
       isRemoving: false,
     })),
-    on(ITSystemArchiveActions.deleteITSystemArchiveError, (state): ITSystemArchiveState => ({
+    on(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveError, (state): ITSystemUsageArchiveState => ({
       ...state,
       isRemoving: false,
     })),
     on(
-      ITSystemArchiveActions.getITSystemArchiveCollectionPermissionsSuccess,
-      (state, { collectionPermissions }): ITSystemArchiveState => ({
+      ITSystemUsageArchiveActions.getITSystemUsageArchiveCollectionPermissionsSuccess,
+      (state, { collectionPermissions }): ITSystemUsageArchiveState => ({
         ...state,
         collectionPermissions,
       }),

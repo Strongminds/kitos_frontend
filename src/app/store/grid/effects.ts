@@ -9,7 +9,7 @@ import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.se
 import { DataProcessingActions } from '../data-processing/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
 import { ITSystemActions } from '../it-system/actions';
-import { ITSystemArchiveActions } from '../it-system-archive/actions';
+import { ITSystemUsageArchiveActions } from '../it-system-usage-archive/actions';
 import { OrganizationActions } from '../organization/actions';
 import { OrganizationUserActions } from '../organization/organization-user/actions';
 import { GridActions } from './actions';
@@ -51,8 +51,8 @@ export class GridExportEffects {
                 return of(DataProcessingActions.getDataProcessings(gridState));
               case 'it-interface':
                 return of(ITInterfaceActions.getITInterfaces(gridState));
-              case 'it-system-archive':
-                return of(ITSystemArchiveActions.getITSystemArchives(gridState));
+              case 'it-system-usage-archive':
+                return of(ITSystemUsageArchiveActions.getITSystemUsageArchives(gridState));
               case 'organization-user':
                 return of(OrganizationUserActions.getOrganizationUsers(gridState, false));
               case 'local-admin-organization':

@@ -1,4 +1,4 @@
-export interface ItSystemArchiveOData {
+export interface ItSystemUsageArchiveOData {
   id: string;
   Uuid: string;
   ArchivingDate: string;
@@ -12,7 +12,7 @@ export interface ItSystemArchiveOData {
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const adaptItSystemArchive = (value: any): ItSystemArchiveOData | undefined => {
+export const adaptItSystemUsageArchive = (value: any): ItSystemUsageArchiveOData | undefined => {
   if (!value.Uuid) return;
 
   return {

@@ -1,59 +1,68 @@
 import { createSelector } from '@ngrx/store';
-import { itSystemArchiveFeature, itSystemArchiveAdapter } from './reducer';
+import { itSystemUsageArchiveAdapter, itSystemUsageArchiveFeature } from './reducer';
 import { GridData } from 'src/app/shared/models/grid-data.model';
 
-const { selectITSystemArchiveState } = itSystemArchiveFeature;
+const { selectITSystemUsageArchiveState } = itSystemUsageArchiveFeature;
 
-export const selectAllArchives = createSelector(selectITSystemArchiveState, itSystemArchiveAdapter.getSelectors().selectAll);
+export const selectAllUsageArchives = createSelector(
+  selectITSystemUsageArchiveState,
+  itSystemUsageArchiveAdapter.getSelectors().selectAll,
+);
 
-export const selectArchiveTotal = createSelector(selectITSystemArchiveState, (state) => state.total);
+export const selectUsageArchiveTotal = createSelector(selectITSystemUsageArchiveState, (state) => state.total);
 
-export const selectArchiveGridData = createSelector(
-  selectAllArchives,
-  selectArchiveTotal,
+export const selectUsageArchiveGridData = createSelector(
+  selectAllUsageArchives,
+  selectUsageArchiveTotal,
   (data, total): GridData => ({ data, total }),
 );
 
-export const selectArchiveIds = createSelector(selectITSystemArchiveState, itSystemArchiveAdapter.getSelectors().selectIds);
+export const selectUsageArchiveIds = createSelector(
+  selectITSystemUsageArchiveState,
+  itSystemUsageArchiveAdapter.getSelectors().selectIds,
+);
 
-export const selectArchiveEntities = createSelector(selectITSystemArchiveState, itSystemArchiveAdapter.getSelectors().selectEntities);
+export const selectUsageArchiveEntities = createSelector(
+  selectITSystemUsageArchiveState,
+  itSystemUsageArchiveAdapter.getSelectors().selectEntities,
+);
 
-export const selectArchiveIsLoading = createSelector(
-  selectITSystemArchiveState,
+export const selectUsageArchiveIsLoading = createSelector(
+  selectITSystemUsageArchiveState,
   (state) => state.isLoading,
 );
 
-export const selectArchiveError = createSelector(
-  selectITSystemArchiveState,
+export const selectUsageArchiveError = createSelector(
+  selectITSystemUsageArchiveState,
   (state) => state.error,
 );
 
-export const selectArchiveGridState = createSelector(
-  selectITSystemArchiveState,
+export const selectUsageArchiveGridState = createSelector(
+  selectITSystemUsageArchiveState,
   (state) => state.gridState,
 );
 
-export const selectArchivePreviousGridState = createSelector(
-  selectITSystemArchiveState,
+export const selectUsageArchivePreviousGridState = createSelector(
+  selectITSystemUsageArchiveState,
   (state) => state.previousGridState,
 );
 
-export const selectArchiveGridColumns = createSelector(
-  selectITSystemArchiveState,
+export const selectUsageArchiveGridColumns = createSelector(
+  selectITSystemUsageArchiveState,
   (state) => state.gridColumns,
 );
 
-export const selectArchiveIsRemoving = createSelector(
-  selectITSystemArchiveState,
+export const selectUsageArchiveIsRemoving = createSelector(
+  selectITSystemUsageArchiveState,
   (state) => state.isRemoving,
 );
 
-export const selectArchiveCollectionPermissions = createSelector(
-  selectITSystemArchiveState,
+export const selectUsageArchiveCollectionPermissions = createSelector(
+  selectITSystemUsageArchiveState,
   (state) => state.collectionPermissions,
 );
 
-export const selectArchiveHasDeletePermission = createSelector(
-  selectITSystemArchiveState,
+export const selectUsageArchiveHasDeletePermission = createSelector(
+  selectITSystemUsageArchiveState,
   () => true, // Allow delete for now; can be connected to actual permissions later
 );

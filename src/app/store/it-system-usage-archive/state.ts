@@ -2,9 +2,9 @@ import { EntityState } from '@ngrx/entity';
 import { APIResourceCollectionPermissionsResponseDTO } from 'src/app/api/v2';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
-import { ItSystemArchiveOData } from 'src/app/shared/models/it-system/it-system-archive-odata.model';
+import { ItSystemUsageArchiveOData } from 'src/app/shared/models/it-system/it-system-usage-archive-odata.model';
 
-export interface ITSystemArchiveState extends EntityState<ItSystemArchiveOData> {
+export interface ITSystemUsageArchiveState extends EntityState<ItSystemUsageArchiveOData> {
   total: number;
   isLoading: boolean;
   gridState: GridState;

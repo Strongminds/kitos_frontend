@@ -7,19 +7,18 @@ import { Store } from '@ngrx/store';
 import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
-import { ARCHIVE_COLUMNS_ID, ARCHIVE_SECTION_NAME } from 'src/app/shared/constants/persistent-state-constants';
+import { ARCHIVE_SECTION_NAME, USAGE_ARCHIVE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridActions } from 'src/app/store/grid/actions';
-import { ITSystemArchiveActions } from 'src/app/store/it-system-archive/actions';
+import { ITSystemUsageArchiveActions } from 'src/app/store/it-system-usage-archive/actions';
 import {
-  selectArchiveGridColumns,
-  selectArchiveGridData,
-  selectArchiveGridState,
-  selectArchiveHasDeletePermission,
-  selectArchiveIsLoading,
-} from 'src/app/store/it-system-archive/selectors';
+  selectUsageArchiveGridColumns,
+  selectUsageArchiveGridData,
+  selectUsageArchiveGridState,
+  selectUsageArchiveIsLoading,
+} from 'src/app/store/it-system-usage-archive/selectors';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
 import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
@@ -27,9 +26,9 @@ import { HideShowButtonComponent } from '../../../shared/components/grid/hide-sh
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
 
 @Component({
-  templateUrl: './it-system-archive.component.html',
-  styleUrl: './it-system-archive.component.scss',
-  selector: 'app-it-system-archive',
+  templateUrl: './it-system-usage-archive.component.html',
+  styleUrl: './it-system-usage-archive.component.scss',
+  selector: 'app-it-system-usage-archive',
   standalone: true,
   imports: [
     CommonModule,
@@ -41,12 +40,11 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
     AsyncPipe,
   ],
 })
-export class ItSystemArchiveComponent extends BaseOverviewComponent implements OnInit {
-  public readonly isLoading$ = this.store.select(selectArchiveIsLoading);
-  public readonly gridData$ = this.store.select(selectArchiveGridData);
-  public readonly gridState$ = this.store.select(selectArchiveGridState);
-  public readonly gridColumns$ = this.store.select(selectArchiveGridColumns);
-  public readonly hasDeletePermission$ = this.store.select(selectArchiveHasDeletePermission);
+export class ItSystemUsageArchiveComponent extends BaseOverviewComponent implements OnInit {
+  public readonly isLoading$ = this.store.select(selectUsageArchiveIsLoading);
+  public readonly gridData$ = this.store.select(selectUsageArchiveGridData);
+  public readonly gridState$ = this.store.select(selectUsageArchiveGridState);
+  public readonly gridColumns$ = this.store.select(selectUsageArchiveGridColumns);
 
   private readonly systemSectionName = ARCHIVE_SECTION_NAME;
 
@@ -105,43 +103,43 @@ export class ItSystemArchiveComponent extends BaseOverviewComponent implements O
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
   ) {
-    super(store, 'it-system-archive');
+    super(store, 'it-system-usage-archive');
   }
 
   ngOnInit(): void {
     // Initialize grid columns from localStorage
-    const columnId = ARCHIVE_COLUMNS_ID;
+    const columnId = USAGE_ARCHIVE_COLUMNS_ID;
     const localStorageColumns =
       this.gridColumnStorageService.getColumns(columnId, this.defaultGridColumns) || this.defaultGridColumns;
-    this.store.dispatch(ITSystemArchiveActions.updateGridColumns(localStorageColumns));
+    this.store.dispatch(ITSystemUsageArchiveActions.updateGridColumns(localStorageColumns));
 
     // Dispatch initial load
     this.subscriptions.add(
       this.gridState$.pipe(first()).subscribe((state) => {
-        this.store.dispatch(ITSystemArchiveActions.getITSystemArchives(state));
+        this.store.dispatch(ITSystemUsageArchiveActions.getITSystemUsageArchives(state));
       }),
     );
 
     this.subscriptions.add(
       this.actions$
         .pipe(
-          ofType(ITSystemArchiveActions.deleteITSystemArchiveSuccess),
+          ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess),
           concatLatestFrom(() => this.gridState$),
         )
         .subscribe(([_, gridState]) => {
-          this.store.dispatch(ITSystemArchiveActions.getITSystemArchives(gridState));
+          this.store.dispatch(ITSystemUsageArchiveActions.getITSystemUsageArchives(gridState));
         }),
     );
 
-    this.store.dispatch(ITSystemArchiveActions.getITSystemArchiveCollectionPermissions());
+    this.store.dispatch(ITSystemUsageArchiveActions.getITSystemUsageArchiveCollectionPermissions());
   }
 
   public stateChange(newState: GridState): void {
-    this.store.dispatch(ITSystemArchiveActions.updateGridState(newState));
+    this.store.dispatch(ITSystemUsageArchiveActions.updateGridState(newState));
   }
 
   public onGridColumnsUpdated(gridColumns: GridColumn[]): void {
-    this.store.dispatch(ITSystemArchiveActions.updateGridColumnsSuccess(gridColumns));
+    this.store.dispatch(ITSystemUsageArchiveActions.updateGridColumnsSuccess(gridColumns));
   }
 
   public override rowIdSelect(event: CellClickEvent): void {
@@ -150,14 +148,14 @@ export class ItSystemArchiveComponent extends BaseOverviewComponent implements O
 
   public onDeleteEvent(archive: any): void {
     if (archive?.Uuid) {
-      this.store.dispatch(ITSystemArchiveActions.deleteITSystemArchive(archive.Uuid));
+      this.store.dispatch(ITSystemUsageArchiveActions.deleteITSystemUsageArchive(archive.Uuid));
     }
   }
 
   public override onExcelExport = (exportAllColumns: boolean) => {
     this.gridState$.pipe(first()).subscribe((gridState) => {
       this.store.dispatch(
-        GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, 'it-system-archive'),
+        GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, 'it-system-usage-archive'),
       );
     });
   };
