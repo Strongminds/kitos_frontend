@@ -4,6 +4,7 @@
 :host {
   display: flex;
   flex-direction: column;
+  gap: theme.$padding-large;
   width: 100%;
 }
 

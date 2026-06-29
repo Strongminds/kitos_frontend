@@ -1,12 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatest, map, Observable, startWith } from 'rxjs';
+import { combineLatest, map } from 'rxjs';
 import { APIArchiveReferenceResponseDTO, APIShallowOrganizationResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { CardHeaderComponent } from 'src/app/shared/components/card-header/card-header.component';
 import { CardComponent } from 'src/app/shared/components/card/card.component';
 import { DatePickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
+import { EmptyStateComponent } from 'src/app/shared/components/empty-states/empty-state.component';
+import { ExternalPageLinkComponent } from 'src/app/shared/components/external-page-link/external-page-link.component';
+import { NativeTableComponent } from 'src/app/shared/components/native-table/native-table.component';
 import { TextAreaComponent } from 'src/app/shared/components/textarea/textarea.component';
 import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.component';
 import { organizationNameWithCvr } from 'src/app/shared/helpers/string.helpers';
@@ -15,7 +18,6 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageArchive } from 'src/app/store/it-system-usage-archive/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectItSystemName } from 'src/app/store/it-system/selectors';
-import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
   selector: 'app-it-system-usage-archive-details-frontpage',
@@ -25,9 +27,11 @@ import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-u
     DatePickerComponent,
     TextBoxComponent,
     TextAreaComponent,
+    NativeTableComponent,
+    ExternalPageLinkComponent,
+    EmptyStateComponent,
     FormsModule,
     ReactiveFormsModule,
-    EditUrlSectionComponent,
   ],
   templateUrl: './it-system-usage-archive-details-frontpage.component.html',
   styleUrl: './it-system-usage-archive-details-frontpage.component.scss',
@@ -35,13 +39,13 @@ import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-u
 export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent implements OnInit {
   public readonly itSystemUsageArchive$ = this.store.select(selectItSystemUsageArchive).pipe(filterNullish());
   public readonly currentItSystemName$ = this.store.select(selectItSystemName).pipe(filterNullish());
+  public archiveReferenceItems: SimpleLink[] = [];
 
   public readonly archiveForm = new FormGroup({
     takenIntoUsageDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     archivingDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     referenceName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     note: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    archiveReferences: new FormArray([this.createReferenceFormGroup()]),
     legacyName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     localName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     localId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
@@ -53,18 +57,13 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
     super();
   }
 
-  private setupArchiveReferenceFormGroups(referenceDtos: APIArchiveReferenceResponseDTO[]) {
-    if (referenceDtos.length === 0) return;
-
-    const dtoReferenceFormGroups = referenceDtos.map(
-      (dto) =>
-        new FormGroup({
-          name: new FormControl<string | undefined>(dto.name ?? ''),
-          url: new FormControl<string | undefined>(dto.url ?? ''),
-        }),
-    );
-    this.archiveReferences.clear();
-    dtoReferenceFormGroups.forEach((formGroup) => this.archiveReferences.push(formGroup));
+  private setupArchiveReferenceItems(referenceDtos: APIArchiveReferenceResponseDTO[]) {
+    this.archiveReferenceItems = referenceDtos
+      .map((dto) => ({
+        name: dto.name ?? undefined,
+        url: dto.url ?? undefined,
+      }))
+      .filter((reference) => reference.name !== undefined || reference.url !== undefined);
   }
 
   ngOnInit(): void {
@@ -94,7 +93,7 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
             organization: this.getOrganizationName(usageArchive.organization),
             currentSystemName: currentItSystemName,
           });
-          this.setupArchiveReferenceFormGroups(usageArchive.archiveReferences ?? []);
+          this.setupArchiveReferenceItems(usageArchive.archiveReferences ?? []);
         },
       ),
     );
@@ -103,30 +102,5 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
   private getOrganizationName(organization: APIShallowOrganizationResponseDTO | undefined) {
     if (!organization) return '';
     return organizationNameWithCvr(organization.name, organization.cvr);
-  }
-
-  public getReferenceObservable$(index: number): Observable<SimpleLink | undefined> {
-    const reference = this.archiveReferences.at(index);
-    return reference.valueChanges.pipe(
-      startWith(reference.value),
-      map(
-        ({ name, url }) =>
-          ({
-            name: name || undefined,
-            url: url || undefined,
-          }) as SimpleLink,
-      ),
-    );
-  }
-
-  public get archiveReferences() {
-    return this.archiveForm.controls.archiveReferences;
-  }
-
-  private createReferenceFormGroup() {
-    return new FormGroup({
-      name: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-      url: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    });
   }
 }

@@ -17,6 +17,7 @@ export const itSystemUsageArchiveInitialState: ITSystemUsageArchiveState = itSys
   gridColumns: [],
   isRemoving: false,
   error: undefined,
+  permissions: undefined,
   collectionPermissions: undefined,
   itSystemUsageArchive: undefined,
   itSystemUsageArchiveLoading: false,
@@ -26,11 +27,14 @@ export const itSystemUsageArchiveFeature = createFeature({
   name: 'ITSystemUsageArchive',
   reducer: createReducer(
     itSystemUsageArchiveInitialState,
-    on(ITSystemUsageArchiveActions.getITSystemUsageArchives, (state): ITSystemUsageArchiveState => ({
-      ...state,
-      isLoading: true,
-      error: undefined,
-    })),
+    on(
+      ITSystemUsageArchiveActions.getITSystemUsageArchives,
+      (state): ITSystemUsageArchiveState => ({
+        ...state,
+        isLoading: true,
+        error: undefined,
+      }),
+    ),
     on(
       ITSystemUsageArchiveActions.getITSystemUsageArchivesSuccess,
       (state, { archives, total }): ITSystemUsageArchiveState => ({
@@ -63,18 +67,34 @@ export const itSystemUsageArchiveFeature = createFeature({
         gridColumns,
       }),
     ),
-    on(ITSystemUsageArchiveActions.deleteITSystemUsageArchive, (state): ITSystemUsageArchiveState => ({
-      ...state,
-      isRemoving: true,
-    })),
-    on(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess, (state): ITSystemUsageArchiveState => ({
-      ...state,
-      isRemoving: false,
-    })),
-    on(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveError, (state): ITSystemUsageArchiveState => ({
-      ...state,
-      isRemoving: false,
-    })),
+    on(
+      ITSystemUsageArchiveActions.deleteITSystemUsageArchive,
+      (state): ITSystemUsageArchiveState => ({
+        ...state,
+        isRemoving: true,
+      }),
+    ),
+    on(
+      ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess,
+      (state): ITSystemUsageArchiveState => ({
+        ...state,
+        isRemoving: false,
+      }),
+    ),
+    on(
+      ITSystemUsageArchiveActions.deleteITSystemUsageArchiveError,
+      (state): ITSystemUsageArchiveState => ({
+        ...state,
+        isRemoving: false,
+      }),
+    ),
+    on(
+      ITSystemUsageArchiveActions.getITSystemUsageArchivePermissionsSuccess,
+      (state, { permissions }): ITSystemUsageArchiveState => ({
+        ...state,
+        permissions,
+      }),
+    ),
     on(
       ITSystemUsageArchiveActions.getITSystemUsageArchiveCollectionPermissionsSuccess,
       (state, { collectionPermissions }): ITSystemUsageArchiveState => ({
@@ -82,10 +102,13 @@ export const itSystemUsageArchiveFeature = createFeature({
         collectionPermissions,
       }),
     ),
-    on(ITSystemUsageArchiveActions.getITSystemUsageArchive, (state): ITSystemUsageArchiveState => ({
-      ...state,
-      itSystemUsageArchiveLoading: true,
-    })),
+    on(
+      ITSystemUsageArchiveActions.getITSystemUsageArchive,
+      (state): ITSystemUsageArchiveState => ({
+        ...state,
+        itSystemUsageArchiveLoading: true,
+      }),
+    ),
     on(
       ITSystemUsageArchiveActions.getITSystemUsageArchiveSuccess,
       (state, { itSystemUsageArchive }): ITSystemUsageArchiveState => ({
@@ -94,9 +117,12 @@ export const itSystemUsageArchiveFeature = createFeature({
         itSystemUsageArchive,
       }),
     ),
-    on(ITSystemUsageArchiveActions.getITSystemUsageArchiveError, (state): ITSystemUsageArchiveState => ({
-      ...state,
-      itSystemUsageArchiveLoading: false,
-    })),
+    on(
+      ITSystemUsageArchiveActions.getITSystemUsageArchiveError,
+      (state): ITSystemUsageArchiveState => ({
+        ...state,
+        itSystemUsageArchiveLoading: false,
+      }),
+    ),
   ),
 });

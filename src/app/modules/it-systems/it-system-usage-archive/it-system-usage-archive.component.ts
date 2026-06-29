@@ -146,12 +146,6 @@ export class ItSystemUsageArchiveComponent extends BaseOverviewComponent impleme
     super.rowIdSelect(event, this.router, this.route);
   }
 
-  public onDeleteEvent(archive: any): void {
-    if (archive?.Uuid) {
-      this.store.dispatch(ITSystemUsageArchiveActions.deleteITSystemUsageArchive(archive.Uuid));
-    }
-  }
-
   public override onExcelExport = (exportAllColumns: boolean) => {
     this.gridState$.pipe(first()).subscribe((gridState) => {
       this.store.dispatch(

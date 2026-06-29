@@ -1,10 +1,14 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { BreadcrumbsComponent } from 'src/app/shared/components/breadcrumbs/breadcrumbs.component';
+import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { LoadingComponent } from 'src/app/shared/components/loading/loading.component';
 import {
   NavigationDrawerComponent,
@@ -19,12 +23,20 @@ import {
   selectItSystemUsageArchiveLegacyName,
   selectItSystemUsageArchiveLoading,
   selectItSystemUsageArchiveUuid,
+  selectUsageArchiveHasDeletePermission,
 } from 'src/app/store/it-system-usage-archive/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
   selector: 'app-it-system-usage-archive-details',
-  imports: [AsyncPipe, BreadcrumbsComponent, LoadingComponent, NavigationDrawerComponent, RouterOutlet],
+  imports: [
+    AsyncPipe,
+    BreadcrumbsComponent,
+    LoadingComponent,
+    NavigationDrawerComponent,
+    RouterOutlet,
+    ButtonComponent,
+  ],
   templateUrl: './it-system-usage-archive-details.component.html',
   styleUrl: './it-system-usage-archive-details.component.scss',
 })
@@ -37,6 +49,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
   public readonly usageArchiveUuid$ = this.store.select(selectItSystemUsageArchiveUuid).pipe(filterNullish());
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
+  public readonly hasDeletePermission$ = this.store.select(selectUsageArchiveHasDeletePermission);
 
   public readonly breadCrumbs$ = combineLatest([
     this.usageArchiveLegacyName$,
@@ -66,8 +79,10 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
 
   constructor(
     private readonly store: Store,
-    private route: ActivatedRoute,
-    private router: Router,
+    private readonly route: ActivatedRoute,
+    private readonly dialog: MatDialog,
+    private readonly actions$: Actions,
+    private readonly router: Router,
   ) {
     super();
   }
@@ -78,9 +93,34 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
           map((params) => params['uuid']),
           distinctUntilChanged(),
         )
-        .subscribe((usageArchiveUuid) =>
-          this.store.dispatch(ITSystemUsageArchiveActions.getITSystemUsageArchive(usageArchiveUuid)),
-        ),
+        .subscribe((usageArchiveUuid) => {
+          this.store.dispatch(ITSystemUsageArchiveActions.getITSystemUsageArchivePermissions(usageArchiveUuid));
+          this.store.dispatch(ITSystemUsageArchiveActions.getITSystemUsageArchive(usageArchiveUuid));
+        }),
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess)).subscribe(() => {
+        this.router.navigateByUrl(`/${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
+      }),
+    );
+  }
+
+  public showDeleteDialog(): void {
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
+    const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette systemets historie?`;
+    confirmationDialogInstance.confirmColor = 'warn';
+
+    this.subscriptions.add(
+      confirmationDialogRef
+        .afterClosed()
+        .pipe(first())
+        .subscribe((result) => {
+          if (result === true) {
+            this.store.dispatch(ITSystemUsageArchiveActions.deleteITSystemUsageArchive());
+          }
+        }),
     );
   }
 }

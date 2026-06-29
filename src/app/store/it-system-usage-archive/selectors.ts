@@ -1,6 +1,6 @@
 import { createSelector } from '@ngrx/store';
-import { itSystemUsageArchiveAdapter, itSystemUsageArchiveFeature } from './reducer';
 import { GridData } from 'src/app/shared/models/grid-data.model';
+import { itSystemUsageArchiveAdapter, itSystemUsageArchiveFeature } from './reducer';
 
 const { selectITSystemUsageArchiveState } = itSystemUsageArchiveFeature;
 
@@ -27,20 +27,11 @@ export const selectUsageArchiveEntities = createSelector(
   itSystemUsageArchiveAdapter.getSelectors().selectEntities,
 );
 
-export const selectUsageArchiveIsLoading = createSelector(
-  selectITSystemUsageArchiveState,
-  (state) => state.isLoading,
-);
+export const selectUsageArchiveIsLoading = createSelector(selectITSystemUsageArchiveState, (state) => state.isLoading);
 
-export const selectUsageArchiveError = createSelector(
-  selectITSystemUsageArchiveState,
-  (state) => state.error,
-);
+export const selectUsageArchiveError = createSelector(selectITSystemUsageArchiveState, (state) => state.error);
 
-export const selectUsageArchiveGridState = createSelector(
-  selectITSystemUsageArchiveState,
-  (state) => state.gridState,
-);
+export const selectUsageArchiveGridState = createSelector(selectITSystemUsageArchiveState, (state) => state.gridState);
 
 export const selectUsageArchivePreviousGridState = createSelector(
   selectITSystemUsageArchiveState,
@@ -64,7 +55,11 @@ export const selectUsageArchiveCollectionPermissions = createSelector(
 
 export const selectUsageArchiveHasDeletePermission = createSelector(
   selectITSystemUsageArchiveState,
-  () => true, // Allow delete for now; can be connected to actual permissions later
+  (state) => state.permissions?.delete,
+);
+export const selectUsageArchiveHasReadPermission = createSelector(
+  selectITSystemUsageArchiveState,
+  (state) => state.permissions?.read,
 );
 
 export const selectItSystemUsageArchive = createSelector(

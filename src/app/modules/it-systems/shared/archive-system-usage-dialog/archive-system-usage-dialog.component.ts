@@ -160,12 +160,14 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
     if (!this.archiveFormGroup.valid) return;
     const controls = this.archiveFormGroup.controls;
 
-    const validArchiveReferences = this.archiveReferences.controls.map((referenceControl) => {
-      const innerControls = referenceControl.controls;
-      const name = innerControls.name.value || '';
-      const url = innerControls.url.value || '';
-      return { name, url };
-    });
+    const validArchiveReferences = this.archiveReferences.controls
+      .map((referenceControl) => {
+        const reference = referenceControl.controls;
+        const name = reference.name.value || '';
+        const url = reference.url.value || '';
+        return { name, url };
+      })
+      .filter(({ name, url }) => Boolean(name.trim() || url.trim()));
 
     const dto: APICreateItSystemUsageArchiveRequestDTO = {
       archivingDate: this.toISOStringOrEmptyString(controls.archivingDate?.value),
