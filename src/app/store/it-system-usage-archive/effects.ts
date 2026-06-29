@@ -110,4 +110,18 @@ export class ITSystemUsageArchiveEffects {
       ),
     );
   });
+
+  getArchive$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageArchiveActions.getITSystemUsageArchive),
+      switchMap(({ itSystemUsageArchiveUuid }) =>
+        this.archiveService.getSingleItSystemUsageArchiveV2Get({ archiveUuid: itSystemUsageArchiveUuid }).pipe(
+          map((itSystemUsageArchive) =>
+            ITSystemUsageArchiveActions.getITSystemUsageArchiveSuccess(itSystemUsageArchive),
+          ),
+          catchError(() => of(ITSystemUsageArchiveActions.getITSystemUsageArchiveError())),
+        ),
+      ),
+    );
+  });
 }

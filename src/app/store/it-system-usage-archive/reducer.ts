@@ -18,6 +18,8 @@ export const itSystemUsageArchiveInitialState: ITSystemUsageArchiveState = itSys
   isRemoving: false,
   error: undefined,
   collectionPermissions: undefined,
+  itSystemUsageArchive: undefined,
+  itSystemUsageArchiveLoading: false,
 });
 
 export const itSystemUsageArchiveFeature = createFeature({
@@ -80,5 +82,21 @@ export const itSystemUsageArchiveFeature = createFeature({
         collectionPermissions,
       }),
     ),
+    on(ITSystemUsageArchiveActions.getITSystemUsageArchive, (state): ITSystemUsageArchiveState => ({
+      ...state,
+      itSystemUsageArchiveLoading: true,
+    })),
+    on(
+      ITSystemUsageArchiveActions.getITSystemUsageArchiveSuccess,
+      (state, { itSystemUsageArchive }): ITSystemUsageArchiveState => ({
+        ...state,
+        itSystemUsageArchiveLoading: false,
+        itSystemUsageArchive,
+      }),
+    ),
+    on(ITSystemUsageArchiveActions.getITSystemUsageArchiveError, (state): ITSystemUsageArchiveState => ({
+      ...state,
+      itSystemUsageArchiveLoading: false,
+    })),
   ),
 });

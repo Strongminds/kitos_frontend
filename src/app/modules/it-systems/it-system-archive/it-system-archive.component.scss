@@ -1,6 +1,0 @@
-@use "theme";
-@use "mixins";
-
-:host {
-  @include mixins.overview-flex-column-layout;
-}

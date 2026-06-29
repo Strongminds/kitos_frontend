@@ -66,3 +66,23 @@ export const selectUsageArchiveHasDeletePermission = createSelector(
   selectITSystemUsageArchiveState,
   () => true, // Allow delete for now; can be connected to actual permissions later
 );
+
+export const selectItSystemUsageArchive = createSelector(
+  selectITSystemUsageArchiveState,
+  (state) => state.itSystemUsageArchive,
+);
+
+export const selectItSystemUsageArchiveLegacyName = createSelector(
+  selectITSystemUsageArchiveState,
+  (state) => state.itSystemUsageArchive?.legacyName,
+);
+
+export const selectItSystemUsageArchiveUuid = createSelector(
+  selectITSystemUsageArchiveState,
+  (state) => state.itSystemUsageArchive?.uuid,
+);
+
+export const selectItSystemUsageArchiveLoading = createSelector(
+  selectITSystemUsageArchiveState,
+  (state) => state.itSystemUsageArchiveLoading,
+);

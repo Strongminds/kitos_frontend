@@ -12,13 +12,13 @@ import { TextBoxComponent } from 'src/app/shared/components/textbox/textbox.comp
 import { organizationNameWithCvr } from 'src/app/shared/helpers/string.helpers';
 import { SimpleLink } from 'src/app/shared/models/SimpleLink.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { selectItSystemArchive } from 'src/app/store/it-system-archive/selectors';
+import { selectItSystemUsageArchive } from 'src/app/store/it-system-usage-archive/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectItSystemName } from 'src/app/store/it-system/selectors';
 import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-url-section.component';
 
 @Component({
-  selector: 'app-it-system-archive-details-frontpage',
+  selector: 'app-it-system-usage-archive-details-frontpage',
   imports: [
     CardComponent,
     CardHeaderComponent,
@@ -29,11 +29,11 @@ import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-u
     ReactiveFormsModule,
     EditUrlSectionComponent,
   ],
-  templateUrl: './it-system-archive-details-frontpage.component.html',
-  styleUrl: './it-system-archive-details-frontpage.component.scss',
+  templateUrl: './it-system-usage-archive-details-frontpage.component.html',
+  styleUrl: './it-system-usage-archive-details-frontpage.component.scss',
 })
-export class ItSystemArchiveDetailsFrontpageComponent extends BaseComponent implements OnInit {
-  public readonly itSystemArchive$ = this.store.select(selectItSystemArchive).pipe(filterNullish());
+export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent implements OnInit {
+  public readonly itSystemUsageArchive$ = this.store.select(selectItSystemUsageArchive).pipe(filterNullish());
   public readonly currentItSystemName$ = this.store.select(selectItSystemName).pipe(filterNullish());
 
   public readonly archiveForm = new FormGroup({
@@ -69,32 +69,32 @@ export class ItSystemArchiveDetailsFrontpageComponent extends BaseComponent impl
 
   ngOnInit(): void {
     this.subscriptions.add(
-      this.itSystemArchive$
+      this.itSystemUsageArchive$
         .pipe(
-          map((systemArchive) => {
-            this.store.dispatch(ITSystemActions.getITSystem(systemArchive.itSystemUuid));
+          map((usageArchive) => {
+            this.store.dispatch(ITSystemActions.getITSystem(usageArchive.itSystemUuid));
           }),
         )
         .subscribe(),
     );
 
     this.subscriptions.add(
-      combineLatest([this.itSystemArchive$, this.currentItSystemName$]).subscribe(
-        ([systemArchive, currentItSystemName]) => {
+      combineLatest([this.itSystemUsageArchive$, this.currentItSystemName$]).subscribe(
+        ([usageArchive, currentItSystemName]) => {
           this.archiveForm.patchValue({
-            takenIntoUsageDate: systemArchive.takenIntoUsageDate
-              ? new Date(systemArchive.takenIntoUsageDate)
+            takenIntoUsageDate: usageArchive.takenIntoUsageDate
+              ? new Date(usageArchive.takenIntoUsageDate)
               : undefined,
-            archivingDate: systemArchive.archivingDate ? new Date(systemArchive.archivingDate) : undefined,
-            referenceName: systemArchive.referenceName,
-            note: systemArchive.note,
-            legacyName: systemArchive.legacyName,
-            localName: systemArchive.localName,
-            localId: systemArchive.localId,
-            organization: this.getOrganizationName(systemArchive.organization),
+            archivingDate: usageArchive.archivingDate ? new Date(usageArchive.archivingDate) : undefined,
+            referenceName: usageArchive.referenceName,
+            note: usageArchive.note,
+            legacyName: usageArchive.legacyName,
+            localName: usageArchive.localName,
+            localId: usageArchive.localId,
+            organization: this.getOrganizationName(usageArchive.organization),
             currentSystemName: currentItSystemName,
           });
-          this.setupArchiveReferenceFormGroups(systemArchive.archiveReferences ?? []);
+          this.setupArchiveReferenceFormGroups(usageArchive.archiveReferences ?? []);
         },
       ),
     );

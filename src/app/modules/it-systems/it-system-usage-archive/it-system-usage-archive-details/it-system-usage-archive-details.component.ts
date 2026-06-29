@@ -13,42 +13,44 @@ import {
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
-import { ITSystemArchiveActions } from 'src/app/store/it-system-archive/actions';
+import { ITSystemUsageArchiveActions } from 'src/app/store/it-system-usage-archive/actions';
 import {
-  selectItSystemArchive,
-  selectItSystemArchiveLegacyName,
-  selectItSystemArchiveLoading,
-  selectItSystemArchiveUuid,
-} from 'src/app/store/it-system-archive/selectors';
+  selectItSystemUsageArchive,
+  selectItSystemUsageArchiveLegacyName,
+  selectItSystemUsageArchiveLoading,
+  selectItSystemUsageArchiveUuid,
+} from 'src/app/store/it-system-usage-archive/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
 @Component({
-  selector: 'app-it-system-archive-details',
+  selector: 'app-it-system-usage-archive-details',
   imports: [AsyncPipe, BreadcrumbsComponent, LoadingComponent, NavigationDrawerComponent, RouterOutlet],
-  templateUrl: './it-system-archive-details.component.html',
-  styleUrl: './it-system-archive-details.component.scss',
+  templateUrl: './it-system-usage-archive-details.component.html',
+  styleUrl: './it-system-usage-archive-details.component.scss',
 })
-export class ItSystemArchiveDetailsComponent extends BaseComponent implements OnInit {
-  public readonly isLoading$ = this.store.select(selectItSystemArchiveLoading);
-  public readonly systemArchive$ = this.store.select(selectItSystemArchive);
-  public readonly systemArchiveLegacyName$ = this.store.select(selectItSystemArchiveLegacyName).pipe(filterNullish());
-  public readonly systemArchiveUuid$ = this.store.select(selectItSystemArchiveUuid).pipe(filterNullish());
+export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implements OnInit {
+  public readonly isLoading$ = this.store.select(selectItSystemUsageArchiveLoading);
+  public readonly usageArchive$ = this.store.select(selectItSystemUsageArchive);
+  public readonly usageArchiveLegacyName$ = this.store
+    .select(selectItSystemUsageArchiveLegacyName)
+    .pipe(filterNullish());
+  public readonly usageArchiveUuid$ = this.store.select(selectItSystemUsageArchiveUuid).pipe(filterNullish());
 
   public readonly organizationName$ = this.store.select(selectOrganizationName);
 
   public readonly breadCrumbs$ = combineLatest([
-    this.systemArchiveLegacyName$,
-    this.systemArchiveUuid$,
+    this.usageArchiveLegacyName$,
+    this.usageArchiveUuid$,
     this.organizationName$,
   ]).pipe(
-    map(([systemArchiveLegacyName, systemArchiveUuid, organizationName]): BreadCrumb[] => [
+    map(([usageArchiveLegacyName, usageArchiveUuid, organizationName]): BreadCrumb[] => [
       {
         text: $localize`Historik for IT Systemer i ${organizationName}`,
-        routerLink: `${AppPath.itSystems}/${AppPath.itSystemArchive}`,
+        routerLink: `${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`,
       },
       {
-        text: systemArchiveLegacyName,
-        routerLink: `${systemArchiveUuid}`,
+        text: usageArchiveLegacyName,
+        routerLink: `${usageArchiveUuid}`,
       },
     ]),
     filterNullish(),
@@ -76,8 +78,8 @@ export class ItSystemArchiveDetailsComponent extends BaseComponent implements On
           map((params) => params['uuid']),
           distinctUntilChanged(),
         )
-        .subscribe((systemArchiveUuid) =>
-          this.store.dispatch(ITSystemArchiveActions.getITSystemArchive(systemArchiveUuid)),
+        .subscribe((usageArchiveUuid) =>
+          this.store.dispatch(ITSystemUsageArchiveActions.getITSystemUsageArchive(usageArchiveUuid)),
         ),
     );
   }

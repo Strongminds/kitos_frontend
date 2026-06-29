@@ -18,5 +18,6 @@
   [exportToExcelName]="'Anvendelses historik Overblik'"
   i18n-exportToExcelName
   entityType="it-system-usage-archive"
+  (rowIdSelect)="rowIdSelect($event)"
   (stateChange)="stateChange($event)"
 ></app-grid>
