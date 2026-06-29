@@ -101,7 +101,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess)).subscribe(() => {
-        this.router.navigateByUrl(`/${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
+        this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`]);
       }),
     );
   }

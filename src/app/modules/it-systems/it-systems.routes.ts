@@ -111,6 +111,7 @@ const routes: Routes = [
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
+      { path: AppPath.itSystemUsageArchive, component: ItSystemUsageArchiveComponent },
       {
         path: `${AppPath.itSystemUsageArchive}/${AppPath.uuid}`,
         component: ItSystemUsageArchiveDetailsComponent,
@@ -119,7 +120,6 @@ const routes: Routes = [
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
-      { path: AppPath.itSystemUsageArchive, component: ItSystemUsageArchiveComponent },
       {
         path: AppPath.itInterfaces,
         component: ItSystemInterfacesComponent,
