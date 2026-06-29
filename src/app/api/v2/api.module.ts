@@ -102,6 +102,7 @@ import { ItSystemLocalTechnicalSystemTypesInternalV2Service } from './api/itSyst
 import { ItSystemUsageArchiveLocationTypeV2Service } from './api/itSystemUsageArchiveLocationTypeV2.service';
 import { ItSystemUsageArchiveTestLocationTypeV2Service } from './api/itSystemUsageArchiveTestLocationTypeV2.service';
 import { ItSystemUsageArchiveTypeV2Service } from './api/itSystemUsageArchiveTypeV2.service';
+import { ItSystemUsageArchiveV2Service } from './api/itSystemUsageArchiveV2.service';
 import { ItSystemUsageCriticalityLevelTypeV2Service } from './api/itSystemUsageCriticalityLevelTypeV2.service';
 import { ItSystemUsageDataClassificationTypeV2Service } from './api/itSystemUsageDataClassificationTypeV2.service';
 import { ItSystemUsageInternalV2Service } from './api/itSystemUsageInternalV2.service';
