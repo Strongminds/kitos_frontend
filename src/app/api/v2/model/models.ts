@@ -127,6 +127,7 @@ export * from './itSystemHierarchyNodeResponseDTO';
 export * from './itSystemPermissionsResponseDTO';
 export * from './itSystemResponseDTO';
 export * from './itSystemSearchResponseDTO';
+export * from './itSystemUsageArchiveResponseDTO';
 export * from './itSystemUsageMigrationPermissionsResponseDTO';
 export * from './itSystemUsageMigrationV2ResponseDTO';
 export * from './itSystemUsageRelationMigrationV2ResponseDTO';

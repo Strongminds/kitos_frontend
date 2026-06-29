@@ -9,4 +9,4 @@ export type RegistrationEntityTypes =
   | 'organization-user'
   | 'local-admin-organization'
   | 'global-admin-organization'
-  | 'it-system-archive';
+  | 'it-system-usage-archive';

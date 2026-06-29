@@ -167,10 +167,10 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
         if (takingIntoUse) {
           confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
         } else {
-          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(
+          confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
             organizationName,
-            this.handleArchiveClick.bind(this),
-          );
+            extraAction: this.handleArchiveClick.bind(this),
+          });
         }
 
         this.subscriptions.add(

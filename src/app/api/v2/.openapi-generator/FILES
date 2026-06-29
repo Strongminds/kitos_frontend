@@ -103,6 +103,7 @@ api/itSystemLocalTechnicalSystemTypesInternalV2.service.ts
 api/itSystemUsageArchiveLocationTypeV2.service.ts
 api/itSystemUsageArchiveTestLocationTypeV2.service.ts
 api/itSystemUsageArchiveTypeV2.service.ts
+api/itSystemUsageArchiveV2.service.ts
 api/itSystemUsageCriticalityLevelTypeV2.service.ts
 api/itSystemUsageDataClassificationTypeV2.service.ts
 api/itSystemUsageInternalV2.service.ts
@@ -265,6 +266,7 @@ model/itSystemHierarchyNodeResponseDTO.ts
 model/itSystemPermissionsResponseDTO.ts
 model/itSystemResponseDTO.ts
 model/itSystemSearchResponseDTO.ts
+model/itSystemUsageArchiveResponseDTO.ts
 model/itSystemUsageMigrationPermissionsResponseDTO.ts
 model/itSystemUsageMigrationV2ResponseDTO.ts
 model/itSystemUsageRelationMigrationV2ResponseDTO.ts

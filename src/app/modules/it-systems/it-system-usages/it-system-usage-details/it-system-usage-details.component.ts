@@ -252,10 +252,10 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
         .pipe(
           first(),
           tap((organizationName) => {
-            const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(
+            const confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
               organizationName,
-              this.handleArchiveClick.bind(this),
-            );
+              extraAction: this.handleArchiveClick.bind(this),
+            });
 
             this.subscriptions.add(
               this.actions$.pipe(ofType(ITSystemUsageActions.removeITSystemUsageSuccess), first()).subscribe(() => {

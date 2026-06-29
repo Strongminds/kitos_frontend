@@ -30,7 +30,7 @@ export class EntityStatusTextsService {
       trueString: $localize`Gyldig`,
       falseString: $localize`Ikke gyldig`,
     },
-    'it-system-archive': {
+    'it-system-usage-archive': {
       trueString: this.ACTIVE_TEXT,
       falseString: this.INACTIVE_TEXT,
     },

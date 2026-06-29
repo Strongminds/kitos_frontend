@@ -346,10 +346,9 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
 
   private handleTakeSystemOutOfUse(systemUuid: string) {
     this.componentStore.getSystemUsageUuidByItSystemAndOrganization(systemUuid);
-    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog(
-      undefined,
-      this.handleArchiveClick.bind(this),
-    );
+    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
+      extraAction: this.handleArchiveClick.bind(this),
+    });
     this.subscriptions.add(
       dialogRef.afterClosed().subscribe((result: boolean) => {
         if (result && systemUuid !== undefined) {
