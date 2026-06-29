@@ -6101,8 +6101,8 @@
       <trans-unit id="2137405200624328487" datatype="html">
         <source>Kommentar</source>
       </trans-unit>
-      <trans-unit id="3923222763855936652" datatype="html">
-        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
+      <trans-unit id="8785270844621556660" datatype="html">
+        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
       </trans-unit>
       <trans-unit id="4999037601378878230" datatype="html">
         <source>Systemanvendelsen blev arkiveret</source>
@@ -6113,9 +6113,6 @@
       <trans-unit id="8075189991660862448" datatype="html">
         <source>Tilføj flere referencer</source>
       </trans-unit>
-      <trans-unit id="8392952927003064457" datatype="html">
-        <source>Arkivér system</source>
-      </trans-unit>
       <trans-unit id="8881457969183282275" datatype="html">
         <source>Bevar historik</source>
       </trans-unit>
@@ -6124,6 +6121,9 @@
       </trans-unit>
       <trans-unit id="9158368026582482088" datatype="html">
         <source>Navngivning på ESDH sag</source>
+      </trans-unit>
+      <trans-unit id="3935383731107011054" datatype="html">
+        <source>Bevar historik system</source>
       </trans-unit>
     </body>
   </file>

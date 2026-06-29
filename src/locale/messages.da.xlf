@@ -7965,10 +7965,6 @@
         <source>Anvendelses historik</source>
         <target state="new">Anvendelses historik</target>
       </trans-unit>
-      <trans-unit id="8392952927003064457" datatype="html">
-        <source>Arkivér system</source>
-        <target state="new">Arkivér system</target>
-      </trans-unit>
       <trans-unit id="174474605473542575" datatype="html">
         <source>Udfasningsdato</source>
         <target state="new">Udfasningsdato</target>
@@ -7993,9 +7989,9 @@
         <source>Tilføj flere referencer</source>
         <target state="new">Tilføj flere referencer</target>
       </trans-unit>
-      <trans-unit id="3923222763855936652" datatype="html">
-        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
-        <target state="new">Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</target>
+      <trans-unit id="8785270844621556660" datatype="html">
+        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
+        <target state="new">Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</target>
       </trans-unit>
       <trans-unit id="8881457969183282275" datatype="html">
         <source>Bevar historik</source>
@@ -8008,6 +8004,10 @@
       <trans-unit id="5766947941131376694" datatype="html">
         <source>Systemanvendelsen kunne ikke arkiveres</source>
         <target state="new">Systemanvendelsen kunne ikke arkiveres</target>
+      </trans-unit>
+      <trans-unit id="3935383731107011054" datatype="html">
+        <source>Bevar historik system</source>
+        <target state="new">Bevar historik system</target>
       </trans-unit>
     </body>
   </file>
