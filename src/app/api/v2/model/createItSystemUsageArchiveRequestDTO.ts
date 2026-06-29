@@ -9,18 +9,22 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIArchiveReferenceWriteRequestDTO } from './archiveReferenceWriteRequestDTO';
+import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
 export interface APICreateItSystemUsageArchiveRequestDTO { 
     /**
-     * The date when the archive was created
+     * The date when the system usage was archived
      */
     archivingDate: string;
     /**
+     * The date when the system was taken into usage
+     */
+    takenIntoUsageDate?: string | null;
+    /**
      * A reference name for the archive
      */
-    referenceName: string | null;
+    referenceName?: string | null;
     /**
      * Notes about the archive
      */
@@ -28,6 +32,6 @@ export interface APICreateItSystemUsageArchiveRequestDTO {
     /**
      * References associated with the archive
      */
-    archiveReferences?: Array<APIArchiveReferenceWriteRequestDTO> | null;
+    archiveReferences?: Array<APISimpleLinkDTO> | null;
 }
 

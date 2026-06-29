@@ -13,7 +13,7 @@ import { APIArchiveReferenceResponseDTO } from './archiveReferenceResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
-export interface APIItSystemArchiveResponseDTO { 
+export interface APIItSystemUsageArchiveResponseDTO { 
     /**
      * Unique identifier for the archive
      */
@@ -25,7 +25,7 @@ export interface APIItSystemArchiveResponseDTO {
     /**
      * A reference name for the archive
      */
-    referenceName: string | null;
+    referenceName?: string | null;
     /**
      * Notes about the archive
      */
@@ -38,6 +38,10 @@ export interface APIItSystemArchiveResponseDTO {
      * System name from the snapshot at archive time
      */
     legacyName?: string | null;
+    /**
+     * Date system was taken into usage
+     */
+    takenIntoUsageDate?: string | null;
     /**
      * Local call name from the snapshot at archive time
      */

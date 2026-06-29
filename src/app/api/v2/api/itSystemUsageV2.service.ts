@@ -1367,7 +1367,7 @@ export class ItSystemUsageV2Service {
             }
         }
 
-        let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
+        let localVarPath = `/api/v2/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/archive`;
         return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
