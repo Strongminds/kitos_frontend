@@ -6243,10 +6243,6 @@
         <source>Vælg modtagere som mail eller rolle.</source>
         <target state="new">Vælg modtagere som mail eller rolle.</target>
       </trans-unit>
-      <trans-unit id="5088079663399937603" datatype="html">
-        <source>Dette sletter de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizatioName ?? &apos;kommunen&apos;"/>, men sletter ikke stamdata om systemet i IT System Kataloget.</source>
-        <target state="new">Dette sletter de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizatioName ?? &apos;kommunen&apos;"/>, men sletter ikke stamdata om systemet i IT System Kataloget.</target>
-      </trans-unit>
       <trans-unit id="3143168575358371654" datatype="html">
         <source>Omstrukturer</source>
         <target state="new">Omstrukturer</target>
@@ -7968,6 +7964,50 @@
       <trans-unit id="752345348010102991" datatype="html">
         <source>Anvendelses historik</source>
         <target state="new">Anvendelses historik</target>
+      </trans-unit>
+      <trans-unit id="8392952927003064457" datatype="html">
+        <source>Arkivér system</source>
+        <target state="new">Arkivér system</target>
+      </trans-unit>
+      <trans-unit id="174474605473542575" datatype="html">
+        <source>Udfasningsdato</source>
+        <target state="new">Udfasningsdato</target>
+      </trans-unit>
+      <trans-unit id="9011845971830514604" datatype="html">
+        <source> Udfasningsdato kan ikke være før ibrugtagningsdato </source>
+        <target state="new"> Udfasningsdato kan ikke være før ibrugtagningsdato </target>
+      </trans-unit>
+      <trans-unit id="9158368026582482088" datatype="html">
+        <source>Navngivning på ESDH sag</source>
+        <target state="new">Navngivning på ESDH sag</target>
+      </trans-unit>
+      <trans-unit id="2137405200624328487" datatype="html">
+        <source>Kommentar</source>
+        <target state="new">Kommentar</target>
+      </trans-unit>
+      <trans-unit id="1220374093016564303" datatype="html">
+        <source>Reference/link til ESDH</source>
+        <target state="new">Reference/link til ESDH</target>
+      </trans-unit>
+      <trans-unit id="8075189991660862448" datatype="html">
+        <source>Tilføj flere referencer</source>
+        <target state="new">Tilføj flere referencer</target>
+      </trans-unit>
+      <trans-unit id="3923222763855936652" datatype="html">
+        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
+        <target state="new">Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Arkivér&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</target>
+      </trans-unit>
+      <trans-unit id="8881457969183282275" datatype="html">
+        <source>Bevar historik</source>
+        <target state="new">Bevar historik</target>
+      </trans-unit>
+      <trans-unit id="4999037601378878230" datatype="html">
+        <source>Systemanvendelsen blev arkiveret</source>
+        <target state="new">Systemanvendelsen blev arkiveret</target>
+      </trans-unit>
+      <trans-unit id="5766947941131376694" datatype="html">
+        <source>Systemanvendelsen kunne ikke arkiveres</source>
+        <target state="new">Systemanvendelsen kunne ikke arkiveres</target>
       </trans-unit>
     </body>
   </file>
