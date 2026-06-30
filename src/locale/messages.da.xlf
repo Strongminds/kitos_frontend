@@ -8009,6 +8009,50 @@
         <source>Bevar historik system</source>
         <target state="new">Bevar historik system</target>
       </trans-unit>
+      <trans-unit id="8168174592145305555" datatype="html">
+        <source>Systemhistorik</source>
+        <target state="new">Systemhistorik</target>
+      </trans-unit>
+      <trans-unit id="6054002959930374150" datatype="html">
+        <source>Arkiveringsnavn</source>
+        <target state="new">Arkiveringsnavn</target>
+      </trans-unit>
+      <trans-unit id="3874266071933284498" datatype="html">
+        <source>Nuværende systemnavn</source>
+        <target state="new">Nuværende systemnavn</target>
+      </trans-unit>
+      <trans-unit id="6831205200632970410" datatype="html">
+        <source> Slet Systemhistorik </source>
+        <target state="new"> Slet Systemhistorik </target>
+      </trans-unit>
+      <trans-unit id="4079731210447899724" datatype="html">
+        <source>Historik for IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
+        <target state="new">Historik for IT Systemer i <x id="PH" equiv-text="organizationName"/></target>
+      </trans-unit>
+      <trans-unit id="8150379007210647345" datatype="html">
+        <source>Arkivforside</source>
+        <target state="new">Arkivforside</target>
+      </trans-unit>
+      <trans-unit id="879937313903791724" datatype="html">
+        <source>Du har ikke læseadgang til dette Anvendelses historik</source>
+        <target state="new">Du har ikke læseadgang til dette Anvendelses historik</target>
+      </trans-unit>
+      <trans-unit id="7832950813552866586" datatype="html">
+        <source>Anvendelses historik findes ikke</source>
+        <target state="new">Anvendelses historik findes ikke</target>
+      </trans-unit>
+      <trans-unit id="6026974096035419044" datatype="html">
+        <source>Er du sikker på du vil slette systemets historie?</source>
+        <target state="new">Er du sikker på du vil slette systemets historie?</target>
+      </trans-unit>
+      <trans-unit id="7138544597137982663" datatype="html">
+        <source>Systemets historie blev slettet</source>
+        <target state="new">Systemets historie blev slettet</target>
+      </trans-unit>
+      <trans-unit id="8168990326741274594" datatype="html">
+        <source>Systemets historie kunne ikke slettes</source>
+        <target state="new">Systemets historie kunne ikke slettes</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

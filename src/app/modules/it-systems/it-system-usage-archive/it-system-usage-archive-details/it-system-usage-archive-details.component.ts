@@ -4,7 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, distinctUntilChanged, first, map } from 'rxjs';
+import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { BreadcrumbsComponent } from 'src/app/shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
@@ -17,6 +17,7 @@ import {
 import { AppPath } from 'src/app/shared/enums/app-path';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 import { ITSystemUsageArchiveActions } from 'src/app/store/it-system-usage-archive/actions';
 import {
   selectItSystemUsageArchive,
@@ -24,6 +25,7 @@ import {
   selectItSystemUsageArchiveLoading,
   selectItSystemUsageArchiveUuid,
   selectUsageArchiveHasDeletePermission,
+  selectUsageArchiveHasReadPermission,
 } from 'src/app/store/it-system-usage-archive/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
 
@@ -83,6 +85,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
     private readonly dialog: MatDialog,
     private readonly actions$: Actions,
     private readonly router: Router,
+    private readonly notificationService: NotificationService,
   ) {
     super();
   }
@@ -101,7 +104,26 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
 
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess)).subscribe(() => {
-        this.router.navigate([`/${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`]);
+        this.router.navigate([`${AppPath.itSystemUsageArchive}`]);
+      }),
+    );
+
+    // Navigate to IT System Usages if user does not have read persmission to ressource
+    this.subscriptions.add(
+      this.store
+        .select(selectUsageArchiveHasReadPermission)
+        .pipe(filter((hasReadPermission) => hasReadPermission === false))
+        .subscribe(() => {
+          this.notificationService.showError($localize`Du har ikke læseadgang til dette Anvendelses historik`);
+          this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+        }),
+    );
+
+    // Navigate to IT System Usages if ressource does not exist
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageArchiveActions.getITSystemUsageArchiveError)).subscribe(() => {
+        this.notificationService.showError($localize`Anvendelses historik findes ikke`);
+        this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
       }),
     );
   }
