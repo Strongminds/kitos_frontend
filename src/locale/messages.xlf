@@ -6155,6 +6155,9 @@
       <trans-unit id="698209411636094619" datatype="html">
         <source> Slet Anvendelseshistorik </source>
       </trans-unit>
+      <trans-unit id="3170301101563316667" datatype="html">
+        <source>Udfaset af</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

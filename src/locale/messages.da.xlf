@@ -8049,6 +8049,10 @@
         <source> Slet Anvendelseshistorik </source>
         <target state="new"> Slet Anvendelseshistorik </target>
       </trans-unit>
+      <trans-unit id="3170301101563316667" datatype="html">
+        <source>Udfaset af</source>
+        <target state="new">Udfaset af</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
