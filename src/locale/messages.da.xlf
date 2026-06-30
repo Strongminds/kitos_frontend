@@ -7949,9 +7949,9 @@
         <source>IT System UUID</source>
         <target state="new">IT System UUID</target>
       </trans-unit>
-      <trans-unit id="5310239090588489405" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelses historik</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelses historik</target>
+      <trans-unit id="5584606577235934124" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelseshistorik</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelseshistorik</target>
       </trans-unit>
       <trans-unit id="2193029653870382707" datatype="html">
         <source>Lokalt systemnavn</source>
@@ -8033,17 +8033,13 @@
         <source>Arkivforside</source>
         <target state="new">Arkivforside</target>
       </trans-unit>
-      <trans-unit id="879937313903791724" datatype="html">
-        <source>Du har ikke læseadgang til dette Anvendelses historik</source>
-        <target state="new">Du har ikke læseadgang til dette Anvendelses historik</target>
+      <trans-unit id="1280193355564271597" datatype="html">
+        <source>Du har ikke læseadgang til denne anvendelseshistorik</source>
+        <target state="new">Du har ikke læseadgang til denne anvendelseshistorik</target>
       </trans-unit>
-      <trans-unit id="7832950813552866586" datatype="html">
-        <source>Anvendelses historik findes ikke</source>
-        <target state="new">Anvendelses historik findes ikke</target>
-      </trans-unit>
-      <trans-unit id="6026974096035419044" datatype="html">
-        <source>Er du sikker på du vil slette systemets historie?</source>
-        <target state="new">Er du sikker på du vil slette systemets historie?</target>
+      <trans-unit id="662410450618468717" datatype="html">
+        <source>Anvendelseshistorik findes ikke</source>
+        <target state="new">Anvendelseshistorik findes ikke</target>
       </trans-unit>
       <trans-unit id="7138544597137982663" datatype="html">
         <source>Systemets historie blev slettet</source>
@@ -8052,6 +8048,10 @@
       <trans-unit id="8168990326741274594" datatype="html">
         <source>Systemets historie kunne ikke slettes</source>
         <target state="new">Systemets historie kunne ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="1268578739531541653" datatype="html">
+        <source>Er du sikker på du vil slette anvendelseshistorikken?</source>
+        <target state="new">Er du sikker på du vil slette anvendelseshistorikken?</target>
       </trans-unit>
     </body>
   </file>
