@@ -102,30 +102,10 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
         }),
     );
 
-    // Navigate to IT System Usages if user does not have read persmission to ressource
-    this.subscriptions.add(
-      this.store
-        .select(selectUsageArchiveHasReadPermission)
-        .pipe(filter((hasReadPermission) => hasReadPermission === false))
-        .subscribe(() => {
-          this.notificationService.showError($localize`Du har ikke læseadgang til dette Anvendelses historik`);
-          this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
-        }),
-    );
+    this.verifyReadPermissions();
 
-    // Navigate to IT System Usages if ressource does not exist
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageArchiveActions.getITSystemUsageArchiveError)).subscribe(() => {
-        this.notificationService.showError($localize`Anvendelses historik findes ikke`);
-        this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
-      }),
-    );
-
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess)).subscribe(() => {
-        this.router.navigateByUrl(`/${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
-      }),
-    );
+    this.navigateToRootIfArchiveNotFound();
+    this.navigateToRootOnSuccessfulDelete();
   }
 
   public showDeleteDialog(): void {
@@ -142,6 +122,34 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
           if (result === true) {
             this.store.dispatch(ITSystemUsageArchiveActions.deleteITSystemUsageArchive());
           }
+        }),
+    );
+  }
+  private navigateToRootOnSuccessfulDelete() {
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess)).subscribe(() => {
+        this.router.navigateByUrl(`/${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
+      }),
+    );
+  }
+
+  private navigateToRootIfArchiveNotFound() {
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageArchiveActions.getITSystemUsageArchiveError)).subscribe(() => {
+        this.notificationService.showError($localize`Anvendelses historik findes ikke`);
+        this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
+      }),
+    );
+  }
+
+  private verifyReadPermissions() {
+    this.subscriptions.add(
+      this.store
+        .select(selectUsageArchiveHasReadPermission)
+        .pipe(filter((hasReadPermission) => hasReadPermission === false))
+        .subscribe(() => {
+          this.notificationService.showError($localize`Du har ikke læseadgang til dette Anvendelses historik`);
+          this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
         }),
     );
   }
