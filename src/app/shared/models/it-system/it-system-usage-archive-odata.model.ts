@@ -9,6 +9,7 @@ export interface ItSystemUsageArchiveOData {
   LocalId: string | null;
   SystemName: string | null;
   SystemUuid: string | null;
+  ArchivedByFullName: string | null;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,10 +22,11 @@ export const adaptItSystemUsageArchive = (value: any): ItSystemUsageArchiveOData
     ArchivingDate: value.ArchivingDate,
     ReferenceName: value.ReferenceName ?? null,
     Note: value.Note ?? null,
-    LegacyName: value.LegacyName ?? null,
-    LocalName: value.LocalName ?? null,
-    LocalId: value.LocalId ?? null,
+    LegacyName: value.Snapshot?.LegacyName ?? null,
+    LocalName: value.Snapshot?.LocalName ?? null,
+    LocalId: value.Snapshot?.LocalId ?? null,
     SystemUuid: value.Snapshot?.ItSystem?.Uuid ?? null,
     SystemName: value.Snapshot?.ItSystem?.Name ?? null,
+    ArchivedByFullName: `${value.ArchivedByUser?.Name ?? ''} ${value.ArchivedByUser?.LastName ?? ''}`.trim() || null,
   };
 };

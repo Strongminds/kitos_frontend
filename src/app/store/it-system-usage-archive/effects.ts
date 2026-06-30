@@ -45,7 +45,7 @@ export class ITSystemUsageArchiveEffects {
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState);
         return this.httpClient
           .get<OData>(
-            `/odata/ItSystemUsageArchives?organizationUuid=${organizationUuid}&$expand=Snapshot($expand=ItSystem($select=Name,Uuid))&${cacheableOdataString}&$count=true`,
+            `/odata/ItSystemUsageArchives?organizationUuid=${organizationUuid}&$expand=Snapshot($select=LegacyName,LocalName,LocalId;$expand=ItSystem($select=Name,Uuid)),ArchivedByUser($select=Name,LastName)&${cacheableOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {

@@ -50,6 +50,20 @@ export class ItSystemUsageArchiveComponent extends BaseOverviewComponent impleme
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
+      field: 'SystemName',
+      title: $localize`Systemnavn`,
+      style: 'primary',
+      section: this.systemSectionName,
+      hidden: false,
+    },
+    {
+      field: 'LegacyName',
+      title: $localize`Arkiveringsnavn`,
+      style: 'primary',
+      section: this.systemSectionName,
+      hidden: false,
+    },
+    {
       field: 'ArchivingDate',
       title: $localize`Arkiveringsdato`,
       section: this.systemSectionName,
@@ -70,9 +84,8 @@ export class ItSystemUsageArchiveComponent extends BaseOverviewComponent impleme
       hidden: false,
     },
     {
-      field: 'SystemName',
-      title: $localize`Systemnavn`,
-      style: 'primary',
+      field: 'ArchivedByFullName',
+      title: $localize`Udfaset af`,
       section: this.systemSectionName,
       hidden: false,
     },
