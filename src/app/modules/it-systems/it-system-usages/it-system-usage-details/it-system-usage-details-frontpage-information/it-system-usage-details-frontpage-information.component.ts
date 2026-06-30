@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, filter, map } from 'rxjs';
 import {
@@ -124,7 +124,7 @@ import { EditUrlSectionComponent } from '../edit-url-section/edit-url-section.co
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
-      purpose: new FormControl(''),
+      purpose: new FormControl('', Validators.maxLength(250)),
       localCallName: new FormControl(''),
       localSystemId: new FormControl(''),
       systemVersion: new FormControl(''),
@@ -513,6 +513,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public patchGeneral(general: APIGeneralDataUpdateRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
+    }
+  }
+
+  public patchGeneralWithFormGroupValidation(general: APIGeneralDataUpdateRequestDTO, formGroupToValidate?: FormGroup) {
+    if (formGroupToValidate?.invalid) {
+      this.notificationService.showError($localize`Ændringen er ugyldig`);
     } else {
       this.store.dispatch(ITSystemUsageActions.patchITSystemUsage({ general }));
     }
