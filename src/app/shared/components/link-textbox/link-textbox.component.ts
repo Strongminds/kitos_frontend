@@ -32,7 +32,6 @@ export class LinkTextboxComponent extends BaseComponent {
   @Input() public simpleLink$!: Observable<SimpleLink | undefined>;
   @Input() isDisabled = false;
   @Input() public isLinkOnly = false;
-  @Input() public canClickLinkIfInputDisabled = false;
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public placeholder: string | undefined = undefined;
   @Output() public iconClick = new EventEmitter<void>();
@@ -48,12 +47,6 @@ export class LinkTextboxComponent extends BaseComponent {
     if (url) {
       openUrlInNewTab(url);
     }
-  }
-
-  public disableClickingLink() {
-    if (!this.isDisabled) return false;
-    if (!this.canClickLinkIfInputDisabled) return true;
-    return false;
   }
 
   public getLinkText() {

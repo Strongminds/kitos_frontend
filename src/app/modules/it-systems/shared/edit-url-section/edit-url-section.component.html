@@ -7,7 +7,6 @@
       [simpleLink$]="simpleLink$"
       placeholder="Fortegnelse"
       i18n-placeholder
-      [canClickLinkIfInputDisabled]="canClickLinkIfInputDisabled"
       (iconClick)="openDirectoryUrlDialog(simpleLink)"
       (clearClick)="clearSimpleLink()"
     ></app-link-textbox>
@@ -17,7 +16,6 @@
       [title]="title"
       i18n-title
       [isDisabled]="isDisabled"
-      [canClickLinkIfInputDisabled]="canClickLinkIfInputDisabled"
       (iconClick)="openDirectoryUrlDialog()"
       [simpleLink$]="simpleLink$"
     ></app-link-textbox>

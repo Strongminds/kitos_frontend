@@ -9,7 +9,7 @@
               matInput
               type="text"
               class="link-input-style"
-              [disabled]="disableClickingLink()"
+              [disabled]="isDisabled"
               data-cy="link-textbox-input"
               [value]="getLinkText() | async"
               />
