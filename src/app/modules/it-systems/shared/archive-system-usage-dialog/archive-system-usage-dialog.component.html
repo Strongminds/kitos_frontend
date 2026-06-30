@@ -73,7 +73,7 @@
   </app-standard-vertical-content-grid>
 
   <app-dialog-actions class="dialog-actions-margin">
-    <app-button buttonStyle="secondary" (click)="onCancel()">Fortryd</app-button>
-    <app-button buttonStyle="primary" (click)="onConfirm()" [disabled]="formIsInvalid()">Bekræft</app-button>
+    <app-button buttonStyle="secondary" (buttonClick)="onCancel()">Fortryd</app-button>
+    <app-button buttonStyle="primary" (buttonClick)="onConfirm()" [disabled]="formIsInvalid()">Bekræft</app-button>
   </app-dialog-actions>
 </app-scrollbar-dialog>
