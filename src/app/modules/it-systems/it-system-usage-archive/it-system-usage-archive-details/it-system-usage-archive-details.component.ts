@@ -137,7 +137,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageArchiveActions.getITSystemUsageArchiveError)).subscribe(() => {
         this.notificationService.showError($localize`Anvendelseshistorik findes ikke`);
-        this.router.navigateByUrl(`/${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
+        this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
       }),
     );
   }
@@ -149,7 +149,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til denne anvendelseshistorik`);
-          this.router.navigateByUrl(`/${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
+          this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
         }),
     );
   }
