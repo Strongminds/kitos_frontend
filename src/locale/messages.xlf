@@ -6128,14 +6128,11 @@
       <trans-unit id="3874266071933284498" datatype="html">
         <source>Nuværende systemnavn</source>
       </trans-unit>
-      <trans-unit id="4079731210447899724" datatype="html">
-        <source>Historik for IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
+      <trans-unit id="7064956610519919142" datatype="html">
+        <source>Anvendelseshistorik for IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
       </trans-unit>
       <trans-unit id="6054002959930374150" datatype="html">
         <source>Arkiveringsnavn</source>
-      </trans-unit>
-      <trans-unit id="6831205200632970410" datatype="html">
-        <source> Slet Systemhistorik </source>
       </trans-unit>
       <trans-unit id="7138544597137982663" datatype="html">
         <source>Systemets historie blev slettet</source>
@@ -6143,20 +6140,20 @@
       <trans-unit id="662410450618468717" datatype="html">
         <source>Anvendelseshistorik findes ikke</source>
       </trans-unit>
-      <trans-unit id="8150379007210647345" datatype="html">
-        <source>Arkivforside</source>
-      </trans-unit>
-      <trans-unit id="8168174592145305555" datatype="html">
-        <source>Systemhistorik</source>
-      </trans-unit>
       <trans-unit id="8168990326741274594" datatype="html">
         <source>Systemets historie kunne ikke slettes</source>
       </trans-unit>
       <trans-unit id="1280193355564271597" datatype="html">
         <source>Du har ikke læseadgang til denne anvendelseshistorik</source>
       </trans-unit>
-      <trans-unit id="1268578739531541653" datatype="html">
-        <source>Er du sikker på du vil slette anvendelseshistorikken?</source>
+      <trans-unit id="2330794348019688932" datatype="html">
+        <source>Er du sikker på, at du vil slette anvendelseshistorikken?</source>
+      </trans-unit>
+      <trans-unit id="1210105962379318163" datatype="html">
+        <source>Anvendelseshistorik</source>
+      </trans-unit>
+      <trans-unit id="698209411636094619" datatype="html">
+        <source> Slet Anvendelseshistorik </source>
       </trans-unit>
     </body>
   </file>
