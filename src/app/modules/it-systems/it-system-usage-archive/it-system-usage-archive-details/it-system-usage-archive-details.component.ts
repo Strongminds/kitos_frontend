@@ -102,12 +102,6 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
         }),
     );
 
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess)).subscribe(() => {
-        this.router.navigate([`${AppPath.itSystemUsageArchive}`]);
-      }),
-    );
-
     // Navigate to IT System Usages if user does not have read persmission to ressource
     this.subscriptions.add(
       this.store
@@ -115,7 +109,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til dette Anvendelses historik`);
-          this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+          this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
         }),
     );
 
@@ -123,7 +117,13 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageArchiveActions.getITSystemUsageArchiveError)).subscribe(() => {
         this.notificationService.showError($localize`Anvendelses historik findes ikke`);
-        this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
+        this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
+      }),
+    );
+
+    this.subscriptions.add(
+      this.actions$.pipe(ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess)).subscribe(() => {
+        this.router.navigateByUrl(`/${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
       }),
     );
   }
