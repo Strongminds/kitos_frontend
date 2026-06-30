@@ -13,6 +13,7 @@ import { GlobalAdminPublicMessageActions } from 'src/app/store/global-admin/publ
 import { GlobalAdminSystemIntegratorActions } from 'src/app/store/global-admin/system-integrators/actions';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { ITInterfaceActions } from 'src/app/store/it-system-interfaces/actions';
+import { ITSystemUsageArchiveActions } from 'src/app/store/it-system-usage-archive/actions';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { KLEActions } from 'src/app/store/kle/actions';
@@ -440,6 +441,14 @@ export class NotificationService implements OnDestroy {
     this.subscribeAsError(
       ITSystemUsageActions.archiveItSystemUsageError,
       $localize`Systemanvendelsen kunne ikke arkiveres`,
+    );
+    this.subscribeAsDefault(
+      ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess,
+      $localize`Systemets historie blev slettet`,
+    );
+    this.subscribeAsError(
+      ITSystemUsageArchiveActions.deleteITSystemUsageArchiveError,
+      $localize`Systemets historie kunne ikke slettes`,
     );
 
     this.subscriptions.add(

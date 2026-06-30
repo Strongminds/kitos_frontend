@@ -14,7 +14,7 @@ import { GridColumnStorageService } from 'src/app/shared/services/grid-column-st
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid } from '../user-store/selectors';
 import { ITSystemUsageArchiveActions } from './actions';
-import { selectUsageArchivePreviousGridState } from './selectors';
+import { selectItSystemUsageArchiveUuid, selectUsageArchivePreviousGridState } from './selectors';
 
 @Injectable()
 export class ITSystemUsageArchiveEffects {
@@ -82,13 +82,23 @@ export class ITSystemUsageArchiveEffects {
   deleteArchive$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITSystemUsageArchiveActions.deleteITSystemUsageArchive),
-      switchMap(({ archiveUuid }) =>
+      concatLatestFrom(() => this.store.select(selectItSystemUsageArchiveUuid).pipe(filterNullish())),
+      switchMap(([_, archiveUuid]) =>
         this.archiveService.deleteSingleItSystemUsageArchiveV2Delete({ archiveUuid }).pipe(
-          map(() => {
-            this.gridDataCacheService.reset();
-            return ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess();
-          }),
+          map(() => ITSystemUsageArchiveActions.deleteITSystemUsageArchiveSuccess()),
           catchError(() => of(ITSystemUsageArchiveActions.deleteITSystemUsageArchiveError())),
+        ),
+      ),
+    );
+  });
+
+  getPermissions$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageArchiveActions.getITSystemUsageArchivePermissions),
+      switchMap(({ archiveUuid }) =>
+        this.archiveService.getSingleItSystemUsageArchiveV2GetItSystemUsageArchivePermissions({ archiveUuid }).pipe(
+          map((permissions) => ITSystemUsageArchiveActions.getITSystemUsageArchivePermissionsSuccess(permissions)),
+          catchError(() => of(ITSystemUsageArchiveActions.getITSystemUsageArchivePermissionsError())),
         ),
       ),
     );
@@ -107,6 +117,20 @@ export class ITSystemUsageArchiveEffects {
             ),
             catchError(() => of(ITSystemUsageArchiveActions.getITSystemUsageArchiveCollectionPermissionsError())),
           ),
+      ),
+    );
+  });
+
+  getArchive$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageArchiveActions.getITSystemUsageArchive),
+      switchMap(({ itSystemUsageArchiveUuid }) =>
+        this.archiveService.getSingleItSystemUsageArchiveV2Get({ archiveUuid: itSystemUsageArchiveUuid }).pipe(
+          map((itSystemUsageArchive) =>
+            ITSystemUsageArchiveActions.getITSystemUsageArchiveSuccess(itSystemUsageArchive),
+          ),
+          catchError(() => of(ITSystemUsageArchiveActions.getITSystemUsageArchiveError())),
+        ),
       ),
     );
   });

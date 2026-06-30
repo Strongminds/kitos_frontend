@@ -7949,9 +7949,9 @@
         <source>IT System UUID</source>
         <target state="new">IT System UUID</target>
       </trans-unit>
-      <trans-unit id="5310239090588489405" datatype="html">
-        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelses historik</source>
-        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelses historik</target>
+      <trans-unit id="5584606577235934124" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelseshistorik</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Anvendelseshistorik</target>
       </trans-unit>
       <trans-unit id="2193029653870382707" datatype="html">
         <source>Lokalt systemnavn</source>
@@ -8008,6 +8008,46 @@
       <trans-unit id="3935383731107011054" datatype="html">
         <source>Bevar historik system</source>
         <target state="new">Bevar historik system</target>
+      </trans-unit>
+      <trans-unit id="6054002959930374150" datatype="html">
+        <source>Arkiveringsnavn</source>
+        <target state="new">Arkiveringsnavn</target>
+      </trans-unit>
+      <trans-unit id="3874266071933284498" datatype="html">
+        <source>Nuværende systemnavn</source>
+        <target state="new">Nuværende systemnavn</target>
+      </trans-unit>
+      <trans-unit id="7064956610519919142" datatype="html">
+        <source>Anvendelseshistorik for IT Systemer i <x id="PH" equiv-text="organizationName"/></source>
+        <target state="new">Anvendelseshistorik for IT Systemer i <x id="PH" equiv-text="organizationName"/></target>
+      </trans-unit>
+      <trans-unit id="1280193355564271597" datatype="html">
+        <source>Du har ikke læseadgang til denne anvendelseshistorik</source>
+        <target state="new">Du har ikke læseadgang til denne anvendelseshistorik</target>
+      </trans-unit>
+      <trans-unit id="662410450618468717" datatype="html">
+        <source>Anvendelseshistorik findes ikke</source>
+        <target state="new">Anvendelseshistorik findes ikke</target>
+      </trans-unit>
+      <trans-unit id="7138544597137982663" datatype="html">
+        <source>Systemets historie blev slettet</source>
+        <target state="new">Systemets historie blev slettet</target>
+      </trans-unit>
+      <trans-unit id="8168990326741274594" datatype="html">
+        <source>Systemets historie kunne ikke slettes</source>
+        <target state="new">Systemets historie kunne ikke slettes</target>
+      </trans-unit>
+      <trans-unit id="2330794348019688932" datatype="html">
+        <source>Er du sikker på, at du vil slette anvendelseshistorikken?</source>
+        <target state="new">Er du sikker på, at du vil slette anvendelseshistorikken?</target>
+      </trans-unit>
+      <trans-unit id="1210105962379318163" datatype="html">
+        <source>Anvendelseshistorik</source>
+        <target state="new">Anvendelseshistorik</target>
+      </trans-unit>
+      <trans-unit id="698209411636094619" datatype="html">
+        <source> Slet Anvendelseshistorik </source>
+        <target state="new"> Slet Anvendelseshistorik </target>
       </trans-unit>
     </body>
   </file>

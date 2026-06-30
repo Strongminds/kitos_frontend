@@ -3,7 +3,7 @@ import { APIBusinessRoleDTO } from 'src/app/api/v1';
 import {
   APIColumnConfigurationRequestDTO,
   APICreateItSystemUsageArchiveRequestDTO,
-  APIItSystemArchiveResponseDTO,
+  APIItSystemArchiveResponseDTO as APIItSystemUsageArchiveResponseDTO,
   APIItSystemUsageResponseDTO,
   APIJournalPeriodDTO,
   APIOrganizationGridConfigurationResponseDTO,
@@ -175,7 +175,7 @@ export const ITSystemUsageActions = createActionGroup({
       itSystemUsageUuid: string,
       archiveRequestDto?: APICreateItSystemUsageArchiveRequestDTO,
     ) => ({ itSystemUsageUuid, archiveRequestDto }),
-    'Archive It System Usage Success': (archive: APIItSystemArchiveResponseDTO) => ({ archive }),
+    'Archive It System Usage Success': (archive: APIItSystemUsageArchiveResponseDTO) => ({ archive }),
     'Archive It System Usage Error': emptyProps(),
 
     'Delete It System Usage By It System And Organization': (itSystemUuid: string) => ({ itSystemUuid }),
