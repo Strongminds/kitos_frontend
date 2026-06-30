@@ -60,7 +60,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
   ]).pipe(
     map(([usageArchiveLegacyName, usageArchiveUuid, organizationName]): BreadCrumb[] => [
       {
-        text: $localize`Historik for IT Systemer i ${organizationName}`,
+        text: $localize`Anvendelseshistorik for IT Systemer i ${organizationName}`,
         routerLink: `${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`,
       },
       {
@@ -73,7 +73,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
 
   public readonly navigationItems: NavigationDrawerItem[] = [
     {
-      label: $localize`Arkivforside`,
+      label: $localize`Forside`,
       iconType: 'document',
       route: AppPath.frontpage,
     },
@@ -111,7 +111,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
   public showDeleteDialog(): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette anvendelseshistorikken?`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på, at du vil slette anvendelseshistorikken?`;
     confirmationDialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(
