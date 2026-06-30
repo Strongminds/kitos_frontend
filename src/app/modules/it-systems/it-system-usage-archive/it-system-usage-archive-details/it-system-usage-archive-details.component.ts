@@ -111,7 +111,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
   public showDeleteDialog(): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette systemets historie?`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette anvendelseshistorikken?`;
     confirmationDialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(
@@ -136,7 +136,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
   private navigateToRootIfArchiveNotFound() {
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITSystemUsageArchiveActions.getITSystemUsageArchiveError)).subscribe(() => {
-        this.notificationService.showError($localize`Anvendelses historik findes ikke`);
+        this.notificationService.showError($localize`Anvendelseshistorik findes ikke`);
         this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
       }),
     );
@@ -148,7 +148,7 @@ export class ItSystemUsageArchiveDetailsComponent extends BaseComponent implemen
         .select(selectUsageArchiveHasReadPermission)
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
-          this.notificationService.showError($localize`Du har ikke læseadgang til dette Anvendelses historik`);
+          this.notificationService.showError($localize`Du har ikke læseadgang til denne anvendelseshistorik`);
           this.router.navigateByUrl(`${AppPath.itSystems}/${AppPath.itSystemUsageArchive}`);
         }),
     );
