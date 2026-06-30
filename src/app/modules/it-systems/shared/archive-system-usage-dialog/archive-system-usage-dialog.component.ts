@@ -170,8 +170,8 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
       .filter(({ name, url }) => Boolean(name.trim() || url.trim()));
 
     const dto: APICreateItSystemUsageArchiveRequestDTO = {
-      archivingDate: this.toISOStringOrEmptyString(controls.archivingDate?.value),
-      takenIntoUsageDate: this.toISOStringOrEmptyString(controls.takenIntoUsageDate?.value),
+      archivingDate: this.toISOStringOrNull(controls.archivingDate?.value),
+      takenIntoUsageDate: this.toISOStringOrNull(controls.takenIntoUsageDate?.value),
       referenceName: controls.referenceName.value || '',
       note: controls.note.value || '',
       archiveReferences: validArchiveReferences,
@@ -184,8 +184,8 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
     this.dialogRef.close();
   }
 
-  private toISOStringOrEmptyString(date: Date | undefined | null): string {
-    return date ? date.toISOString() : '';
+  private toISOStringOrNull(date: Date | undefined | null): string | null {
+    return date ? date.toISOString() : null;
   }
 
   private createReferenceFormGroup() {
