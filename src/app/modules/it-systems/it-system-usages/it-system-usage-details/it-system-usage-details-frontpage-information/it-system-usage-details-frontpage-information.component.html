@@ -112,7 +112,7 @@
         i18n-text
         [formGroup]="itSystemInformationForm"
         formName="purpose"
-        (valueChange)="patchGeneralWithFormGroupValidation({ purpose: $event }, itSystemInformationForm)"
+        (validatedValueChange)="patchGeneral({ purpose: $event.value }, $event)"
         [autosizeMinRows]="2"
       ></app-textarea>
     }
