@@ -36,8 +36,7 @@
           }
         ],
         "@angular-eslint/prefer-inject": ["off"],
-        "@angular-eslint/use-lifecycle-interface": ["off"],
-        "@typescript-eslint/no-explicit-any": ["off"]
+        "@angular-eslint/use-lifecycle-interface": ["off"]
       }
     },
     {
