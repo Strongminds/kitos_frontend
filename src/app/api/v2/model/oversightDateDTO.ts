@@ -22,6 +22,11 @@ export interface APIOversightDateDTO {
      */
     remark?: string | null;
     oversightReportLink?: APISimpleLinkDTO;
+    /**
+     * Optional UUID for the oversight option
+     */
+    oversightOptionUuid?: string | null;
     uuid?: string;
+    oversightOptionName?: string | null;
 }
 
