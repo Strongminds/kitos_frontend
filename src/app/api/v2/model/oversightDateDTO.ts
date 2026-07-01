@@ -9,10 +9,12 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 
 
 export interface APIOversightDateDTO { 
+    uuid?: string;
     /**
      * Date of oversight completion (Supplier Field)
      */
@@ -22,11 +24,6 @@ export interface APIOversightDateDTO {
      */
     remark?: string | null;
     oversightReportLink?: APISimpleLinkDTO;
-    /**
-     * Optional UUID for the oversight option
-     */
-    oversightOptionUuid?: string | null;
-    uuid?: string;
-    oversightOptionName?: string | null;
+    oversightOption?: APIIdentityNamePairResponseDTO;
 }
 
