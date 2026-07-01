@@ -4,7 +4,6 @@ import { Observable, of } from 'rxjs';
 import { ArchiveSystemUsageDialogComponent } from 'src/app/modules/it-systems/shared/archive-system-usage-dialog/archive-system-usage-dialog.component';
 import { DeleteUserDialogComponent } from 'src/app/modules/organization/organization-users/delete-user-dialog/delete-user-dialog.component';
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
-import { HasSubscriptions } from '../base/hasSubscriptions';
 import { BulkActionDialogComponent } from '../components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { IconConfirmationDialogComponent } from '../components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { GlobalOptionTypeDialogComponent } from '../components/global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
@@ -28,10 +27,8 @@ type TakeSystemOutOfUseDialogOptions = {
   providedIn: 'root',
 })
 // This service is useful if you need to open the same or similar dialogs multiple places, which need setup/configuration.
-export class DialogOpenerService extends HasSubscriptions {
-  constructor(private dialog: MatDialog) {
-    super();
-  }
+export class DialogOpenerService {
+  constructor(private dialog: MatDialog) {}
 
   public openEditUserDialog(
     user: ODataOrganizationUser,
@@ -74,7 +71,10 @@ export class DialogOpenerService extends HasSubscriptions {
     confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
     if (extraAction) {
       confirmationDialogInstance.hasExtraAction = true;
-      this.subscriptions.add(confirmationDialogInstance.extraActionClick.subscribe(() => extraAction()));
+      const extraActionSubscription = confirmationDialogInstance.extraActionClick.subscribe(() => extraAction());
+      dialogRef.afterClosed().subscribe(() => {
+        extraActionSubscription.unsubscribe();
+      });
       confirmationDialogInstance.extraActionText = $localize`Bevar historik`;
     }
 
