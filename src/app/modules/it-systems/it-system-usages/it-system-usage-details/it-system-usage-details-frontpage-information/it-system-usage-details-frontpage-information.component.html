@@ -113,7 +113,7 @@
         [formGroup]="itSystemInformationForm"
         formName="purpose"
         (validatedValueChange)="patchGeneral({ purpose: $event.value }, $event)"
-        [autosizeMinRows]="2"
+        [autosizeMinRows]="1"
       ></app-textarea>
     }
     @if (descriptionEnabled$ | async) {
