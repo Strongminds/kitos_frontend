@@ -215,7 +215,7 @@ export class WriteOversightDateDialogComponent extends BaseComponent implements 
     this.isBusy = true;
 
     const request: APIModifyOversightDateDTO = {
-      completedAt: this.oversightDateFormGroup.value.date?.toISOString() ?? undefined,
+      completedAt: this.oversightDateFormGroup.value.date!.toISOString(),
       remark: this.oversightDateFormGroup.value.notes ?? '',
       oversightReportLink: {
         url: this.oversightDateFormGroup.value.reportLinkUrl ?? undefined,
