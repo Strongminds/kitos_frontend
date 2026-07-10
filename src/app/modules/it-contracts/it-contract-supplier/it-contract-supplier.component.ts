@@ -2,7 +2,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first } from 'rxjs';
+import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import {
   CONTRACT_SUPPLIERS_COLUMNS_ID,
@@ -42,7 +42,30 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
 })
 export class ItContractSupplierComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSupplierIsLoading);
-  public readonly gridData$ = this.store.select(selectSupplierGridData);
+  //public readonly gridData$ = this.store.select(selectSupplierGridData);
+public readonly gridData$ = of({
+  total: 1,
+  data: [{
+   id: 1,
+   organizationId: 42,
+   organizationUuid: 'a1b2c3d4-e5f6-4a5b-9c8d-7e6f5a4b3c2d',
+   organizationName: 'Copenhagen Municipality',
+   supplierId: 123,
+   isInternalContract: false,
+   supplierUuid: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+   supplierName: 'TechCorp A/S',
+   supplierCvr: '12345678',
+   isSupplierDisabled: false,
+   highestCriticalityUuid: 'c9036a3e-ae3e-42b9-8cb3-12c905f15f20',
+   highestCriticalityName: 'Critical',
+   highestCriticalityRank: 1,
+   contractsAtHighestCriticalityCsv: 'Contract A, Contract B',
+   contractsAtHighestCriticality: [
+     { uuid: '550e8400-e29b-41d4-a716-111111111111', name: 'SLA Contract 2024' },
+     { uuid: '550e8400-e29b-41d4-a716-222222222222', name: 'Maintenance Agreement' }
+   ],
+ } ]
+})
   public readonly gridState$ = this.store.select(selectSupplierGridState);
   public readonly gridColumns$ = this.store.select(selectSupplierGridColumns);
 
@@ -101,7 +124,6 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
   constructor(
     store: Store,
     private gridColumnStorageService: GridColumnStorageService,
-    private actions$: Actions,
   ) {
     super(store, 'it-contract-supplier');
   }
