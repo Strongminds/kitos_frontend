@@ -2,12 +2,13 @@ import { createActionGroup, emptyProps } from '@ngrx/store';
 import { APIResourceCollectionPermissionsResponseDTO } from 'src/app/api/v2';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { ITContractSupplier } from 'src/app/shared/models/it-contract/it-contract-supplier.model';
 
 export const ITContractSupplierActions = createActionGroup({
   source: 'ITContractSupplier',
   events: {
     'Get Suppliers': (gridState: GridState) => ({ gridState }),
-    'Get Suppliers Success': (suppliers: any[], total: number) => ({ suppliers, total }),
+    'Get Suppliers Success': (suppliers: ITContractSupplier[], total: number) => ({ suppliers, total }),
     'Get Suppliers Error': emptyProps(),
 
     'Update Grid State': (gridState: GridState) => ({ gridState }),
@@ -15,9 +16,9 @@ export const ITContractSupplierActions = createActionGroup({
     'Update Grid Columns Success': (gridColumns: GridColumn[]) => ({ gridColumns }),
 
     'Get Supplier Collection Permissions': emptyProps(),
-    'Get Supplier Collection Permissions Success': (
-      permissions?: APIResourceCollectionPermissionsResponseDTO,
-    ) => ({ permissions }),
+    'Get Supplier Collection Permissions Success': (permissions?: APIResourceCollectionPermissionsResponseDTO) => ({
+      permissions,
+    }),
     'Get Supplier Collection Permissions Error': emptyProps(),
 
     'Delete Supplier Success': emptyProps(),

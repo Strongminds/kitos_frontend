@@ -1,10 +1,8 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import {
@@ -95,8 +93,6 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
 
   constructor(
     store: Store,
-    private router: Router,
-    private route: ActivatedRoute,
     private gridColumnStorageService: GridColumnStorageService,
     private actions$: Actions,
   ) {
@@ -135,10 +131,6 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
 
   public onGridColumnsUpdated(gridColumns: GridColumn[]): void {
     this.store.dispatch(ITContractSupplierActions.updateGridColumnsSuccess(gridColumns));
-  }
-
-  public override rowIdSelect(event: CellClickEvent): void {
-    super.rowIdSelect(event, this.router, this.route);
   }
 
   public override onExcelExport = (exportAllColumns: boolean) => {
