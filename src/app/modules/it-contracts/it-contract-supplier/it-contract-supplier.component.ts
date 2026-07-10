@@ -119,7 +119,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       orderedGridColumns,
       localStorageColumns,
       ITContractSupplierActions.updateGridColumns,
-      () => ITContractSupplierActions.resetToOrganizationITContractSupplierColumnConfiguration(),
+      () => ITContractSupplierActions.resetToOrganizationITContractSuppliersColumnConfiguration(),
     );
 
     this.subscriptions.add(
