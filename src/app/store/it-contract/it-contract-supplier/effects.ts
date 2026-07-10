@@ -61,47 +61,4 @@ export class ITContractSupplierEffects {
       }),
     );
   });
-
-  resetToOrganizationalITContractColumnConfiguration$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITContractSupplierActions.resetToOrganizationITContractSuppliersColumnConfiguration),
-      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      switchMap(([{ disablePopupNotification }, organizationUuid]) =>
-        this.apiV2organizationalGridInternalService
-          .getSingleOrganizationGridInternalV2GetGridConfiguration({
-            organizationUuid,
-            overviewType: 'ItContract',
-          })
-          .pipe(
-            map((response) =>
-              ITContractSupplierActions.resetToOrganizationITContractSuppliersColumnConfigurationSuccess(
-                response,
-                disablePopupNotification,
-              ),
-            ),
-            catchError(() =>
-              of(
-                ITContractSupplierActions.resetToOrganizationITContractSuppliersColumnConfigurationError(
-                  disablePopupNotification,
-                ),
-              ),
-            ),
-          ),
-      ),
-    );
-  });
-
-  resetToOrganizationITContractColumnConfigurationSuccess$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITContractSupplierActions.resetToOrganizationITContractSuppliersColumnConfigurationSuccess),
-      concatLatestFrom(() => [this.store.select(selectSupplierGridColumns)]),
-      map(([{ response }, columns]) => {
-        const configColumns = response?.visibleColumns;
-        if (!configColumns)
-          return ITContractSupplierActions.resetToOrganizationITContractSuppliersColumnConfigurationError();
-        const newColumns = getNewGridColumnsBasedOnConfig(configColumns, columns);
-        return ITContractSupplierActions.updateGridColumns(newColumns);
-      }),
-    );
-  });
 }

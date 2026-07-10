@@ -1,9 +1,9 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { defaultODataGridState } from 'src/app/shared/models/grid-state.model';
 import { ITContractSupplierActions } from './actions';
-import { ITContractSupplierState } from './state';
+import { ITContractSuppliersState } from './state';
 
-export const itContractSupplierInitialState: ITContractSupplierState = {
+export const itContractSupplierInitialState: ITContractSuppliersState = {
   suppliers: [],
   total: 0,
   isLoading: false,
@@ -17,13 +17,10 @@ export const itContractSupplierFeature = createFeature({
   name: 'ITContractSupplier',
   reducer: createReducer(
     itContractSupplierInitialState,
-    on(
-      ITContractSupplierActions.getSuppliers,
-      (state): ITContractSupplierState => ({ ...state, isLoading: true }),
-    ),
+    on(ITContractSupplierActions.getSuppliers, (state): ITContractSuppliersState => ({ ...state, isLoading: true })),
     on(
       ITContractSupplierActions.getSuppliersSuccess,
-      (state, { suppliers, total }): ITContractSupplierState => ({
+      (state, { suppliers, total }): ITContractSuppliersState => ({
         ...state,
         suppliers,
         total,
@@ -32,14 +29,14 @@ export const itContractSupplierFeature = createFeature({
     ),
     on(
       ITContractSupplierActions.getSuppliersError,
-      (state): ITContractSupplierState => ({
+      (state): ITContractSuppliersState => ({
         ...state,
         isLoading: false,
       }),
     ),
     on(
       ITContractSupplierActions.updateGridState,
-      (state, { gridState }): ITContractSupplierState => ({
+      (state, { gridState }): ITContractSuppliersState => ({
         ...state,
         isLoading: true,
         gridState,
@@ -48,10 +45,10 @@ export const itContractSupplierFeature = createFeature({
     ),
     on(
       ITContractSupplierActions.updateGridColumnsSuccess,
-      (state, { gridColumns }): ITContractSupplierState => ({
+      (state, { gridColumns }): ITContractSuppliersState => ({
         ...state,
         gridColumns,
       }),
-    )
+
   ),
 });
