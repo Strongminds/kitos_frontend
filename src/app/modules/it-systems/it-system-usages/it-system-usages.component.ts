@@ -559,7 +559,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraData: riskAssessmentResultOptionsGrid,
       hidden: true,
       width: 330,
-      persistId: 'LatestRiskAssessmentResult',
+      persistId: 'latestRiskAssessmentResult',
     },
     {
       field: GridFields.RiskAssessmentDate,
