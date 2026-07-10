@@ -52,13 +52,6 @@ export const itContractSupplierFeature = createFeature({
         ...state,
         gridColumns,
       }),
-    ),
-    on(
-      ITContractSupplierActions.getSupplierCollectionPermissionsSuccess,
-      (state, { permissions }): ITContractSupplierState => ({
-        ...state,
-        collectionPermissions: permissions,
-      }),
-    ),
+    )
   ),
 });
