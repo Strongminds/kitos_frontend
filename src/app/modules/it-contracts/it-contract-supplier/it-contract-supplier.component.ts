@@ -1,13 +1,12 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { Actions, ofType } from '@ngrx/effects';
-import { concatLatestFrom } from '@ngrx/operators';
+import { Actions } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import {
-  CONTRACT_SUPPLIER_COLUMNS_ID,
-  CONTRACT_SUPPLIER_SECTION_NAME,
+  CONTRACT_SUPPLIERS_COLUMNS_ID,
+  CONTRACT_SUPPLIERS_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
@@ -47,7 +46,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
   public readonly gridState$ = this.store.select(selectSupplierGridState);
   public readonly gridColumns$ = this.store.select(selectSupplierGridColumns);
 
-  private readonly supplierSectionName = CONTRACT_SUPPLIER_SECTION_NAME;
+  private readonly supplierSectionName = CONTRACT_SUPPLIERS_SECTION_NAME;
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
@@ -108,35 +107,28 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
   }
 
   ngOnInit(): void {
-    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
+    const existingColumns = this.gridColumnStorageService.getColumns(
+      CONTRACT_SUPPLIERS_COLUMNS_ID,
+      this.defaultGridColumns,
+    );
+    console.log('existingColumns', existingColumns);
+    if (existingColumns) {
+      console.log('dispatching existingColumns', existingColumns);
+      this.store.dispatch(ITContractSupplierActions.updateGridColumns(existingColumns));
+    } else {
+      const columns = this.mapColumnOrder(this.defaultGridColumns);
+      console.log('dispatching defaultGridColumns', columns);
+      this.store.dispatch(ITContractSupplierActions.updateGridColumns(columns));
+    }
 
-    const orderedGridColumns = this.mapColumnOrder(this.defaultGridColumns);
-    const localStorageColumns = this.gridColumnStorageService.getColumns(
-      CONTRACT_SUPPLIER_COLUMNS_ID,
-      orderedGridColumns,
-    );
-    this.updateLocalOrDefaultGridColumns(
-      orderedGridColumns,
-      localStorageColumns,
-      ITContractSupplierActions.updateGridColumns,
-      () => ITContractSupplierActions.resetToOrganizationITContractSuppliersColumnConfiguration(),
-    );
+    this.gridColumns$.pipe(first()).subscribe((columns) => {
+      console.log('gridColumns observable has value', columns);
+    })
 
     this.subscriptions.add(
       this.gridState$.pipe(first()).subscribe((state) => {
         this.store.dispatch(ITContractSupplierActions.getSuppliers(state));
       }),
-    );
-
-    this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(ITContractSupplierActions.deleteSupplierSuccess),
-          concatLatestFrom(() => this.gridState$),
-        )
-        .subscribe(([_, gridState]) => {
-          this.store.dispatch(ITContractSupplierActions.getSuppliers(gridState));
-        }),
     );
   }
 

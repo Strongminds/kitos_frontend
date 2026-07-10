@@ -33,5 +33,11 @@ export const itContractSupplierFeature = createFeature({
         isLoading: false,
       }),
     ),
+    on(ITContractSupplierActions.updateGridColumnsSuccess, (state, { gridColumns }): ITContractSuppliersState => {
+      return {
+        ...state,
+        gridColumns,
+      };
+    }),
   ),
 });

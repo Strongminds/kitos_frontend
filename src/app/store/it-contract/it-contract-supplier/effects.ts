@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { OrganizationGridInternalV2Service } from 'src/app/api/v2';
+import { CONTRACT_SUPPLIERS_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { adaptITContractSupplier } from 'src/app/shared/models/it-contract/it-contract-supplier.model';
 import { OData } from 'src/app/shared/models/odata.model';
+import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { ITContractSupplierActions } from './actions';
@@ -20,8 +21,7 @@ export class ITContractSupplierEffects {
     private store: Store,
     private gridDataCacheService: GridDataCacheService,
     private httpClient: HttpClient,
-    @Inject(OrganizationGridInternalV2Service)
-    private apiV2organizationalGridInternalService: OrganizationGridInternalV2Service,
+    private gridColumnStorageService: GridColumnStorageService,
   ) {}
 
   getSuppliers$ = createEffect(() => {
@@ -56,6 +56,16 @@ export class ITContractSupplierEffects {
             }),
             catchError(() => of(ITContractSupplierActions.getSuppliersError())),
           );
+      }),
+    );
+  });
+
+  updateGridColumns$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractSupplierActions.updateGridColumns),
+      map(({ gridColumns }) => {
+        this.gridColumnStorageService.setColumns(CONTRACT_SUPPLIERS_COLUMNS_ID, gridColumns);
+        return ITContractSupplierActions.updateGridColumnsSuccess(gridColumns);
       }),
     );
   });
