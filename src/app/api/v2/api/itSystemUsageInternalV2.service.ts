@@ -21,14 +21,6 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
-import { APIExtendedRoleAssignmentResponseDTO } from '../model/aPIExtendedRoleAssignmentResponseDTO';
-// @ts-ignore
-import { APIGeneralSystemRelationResponseDTO } from '../model/aPIGeneralSystemRelationResponseDTO';
-// @ts-ignore
-import { APIItSystemUsageSearchResultResponseDTO } from '../model/aPIItSystemUsageSearchResultResponseDTO';
-// @ts-ignore
-import { APIOutgoingSystemRelationResponseDTO } from '../model/aPIOutgoingSystemRelationResponseDTO';
-// @ts-ignore
 import { APISystemRelationWriteRequestDTO } from '../model/aPISystemRelationWriteRequestDTO';
 
 // @ts-ignore
@@ -43,7 +35,7 @@ export interface DeleteSingleItSystemUsageInternalV2DeleteItSystemUsageByOrganiz
     systemUuid: string;
 }
 
-export interface GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams {
+export interface GetSingleItSystemUsageInternalV2GetItSystemUsagesRequestParams {
     /** Required organization filter */
     organizationUuid?: string;
     /** Query by systems with outgoing relations related to another system */
@@ -65,16 +57,16 @@ export interface GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams {
     pageSize?: number;
 }
 
-export interface GetManyItSystemUsageInternalV2GetRelationsRequestParams {
+export interface GetSingleItSystemUsageInternalV2GetRelationsRequestParams {
     contractUuid: string;
 }
 
-export interface GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams {
+export interface GetSingleItSystemUsageInternalV2GetRoleAssignmentsRequestParams {
     /** UUID of the system usage */
     systemUsageUuid: string;
 }
 
-export interface PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams {
+export interface PostSingleItSystemUsageInternalV2PostSystemUsageRelationsRequestParams {
     systemUsageUuid: string;
     aPISystemRelationWriteRequestDTO: Array<APISystemRelationWriteRequestDTO>;
 }
@@ -219,10 +211,10 @@ export class ItSystemUsageInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemUsageInternalV2GetItSystemUsages(requestParameters: GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItSystemUsageSearchResultResponseDTO>>;
-    public getManyItSystemUsageInternalV2GetItSystemUsages(requestParameters: GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItSystemUsageSearchResultResponseDTO>>>;
-    public getManyItSystemUsageInternalV2GetItSystemUsages(requestParameters: GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItSystemUsageSearchResultResponseDTO>>>;
-    public getManyItSystemUsageInternalV2GetItSystemUsages(requestParameters: GetManyItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageInternalV2GetItSystemUsages(requestParameters: GetSingleItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItSystemUsageInternalV2GetItSystemUsages(requestParameters: GetSingleItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemUsageInternalV2GetItSystemUsages(requestParameters: GetSingleItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageInternalV2GetItSystemUsages(requestParameters: GetSingleItSystemUsageInternalV2GetItSystemUsagesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         const relatedToSystemUuid = requestParameters.relatedToSystemUuid;
         const relatedToSystemUsageUuid = requestParameters.relatedToSystemUsageUuid;
@@ -315,7 +307,7 @@ export class ItSystemUsageInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-system-usages/search`;
-        return this.httpClient.request<Array<APIItSystemUsageSearchResultResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -333,13 +325,13 @@ export class ItSystemUsageInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemUsageInternalV2GetRelations(requestParameters: GetManyItSystemUsageInternalV2GetRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGeneralSystemRelationResponseDTO>>;
-    public getManyItSystemUsageInternalV2GetRelations(requestParameters: GetManyItSystemUsageInternalV2GetRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGeneralSystemRelationResponseDTO>>>;
-    public getManyItSystemUsageInternalV2GetRelations(requestParameters: GetManyItSystemUsageInternalV2GetRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGeneralSystemRelationResponseDTO>>>;
-    public getManyItSystemUsageInternalV2GetRelations(requestParameters: GetManyItSystemUsageInternalV2GetRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageInternalV2GetRelations(requestParameters: GetSingleItSystemUsageInternalV2GetRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItSystemUsageInternalV2GetRelations(requestParameters: GetSingleItSystemUsageInternalV2GetRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemUsageInternalV2GetRelations(requestParameters: GetSingleItSystemUsageInternalV2GetRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageInternalV2GetRelations(requestParameters: GetSingleItSystemUsageInternalV2GetRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItSystemUsageInternalV2GetRelations.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItSystemUsageInternalV2GetRelations.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -381,7 +373,7 @@ export class ItSystemUsageInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-system-usages/relations/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<Array<APIGeneralSystemRelationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -399,13 +391,13 @@ export class ItSystemUsageInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
-    public getManyItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetManyItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetSingleItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetSingleItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetSingleItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemUsageInternalV2GetRoleAssignments(requestParameters: GetSingleItSystemUsageInternalV2GetRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getManyItSystemUsageInternalV2GetRoleAssignments.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling getSingleItSystemUsageInternalV2GetRoleAssignments.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -447,7 +439,7 @@ export class ItSystemUsageInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
-        return this.httpClient.request<Array<APIExtendedRoleAssignmentResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -464,17 +456,17 @@ export class ItSystemUsageInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIOutgoingSystemRelationResponseDTO>>;
-    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIOutgoingSystemRelationResponseDTO>>>;
-    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIOutgoingSystemRelationResponseDTO>>>;
-    public postManyItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostManyItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostSingleItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public postSingleItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostSingleItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostSingleItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemUsageInternalV2PostSystemUsageRelations(requestParameters: PostSingleItSystemUsageInternalV2PostSystemUsageRelationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const systemUsageUuid = requestParameters.systemUsageUuid;
         if (systemUsageUuid === null || systemUsageUuid === undefined) {
-            throw new Error('Required parameter systemUsageUuid was null or undefined when calling postManyItSystemUsageInternalV2PostSystemUsageRelations.');
+            throw new Error('Required parameter systemUsageUuid was null or undefined when calling postSingleItSystemUsageInternalV2PostSystemUsageRelations.');
         }
         const aPISystemRelationWriteRequestDTO = requestParameters.aPISystemRelationWriteRequestDTO;
         if (aPISystemRelationWriteRequestDTO === null || aPISystemRelationWriteRequestDTO === undefined) {
-            throw new Error('Required parameter aPISystemRelationWriteRequestDTO was null or undefined when calling postManyItSystemUsageInternalV2PostSystemUsageRelations.');
+            throw new Error('Required parameter aPISystemRelationWriteRequestDTO was null or undefined when calling postSingleItSystemUsageInternalV2PostSystemUsageRelations.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -525,7 +517,7 @@ export class ItSystemUsageInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-system-usages/${this.configuration.encodeParam({name: "systemUsageUuid", value: systemUsageUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/system-relations`;
-        return this.httpClient.request<Array<APIOutgoingSystemRelationResponseDTO>>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPISystemRelationWriteRequestDTO,

@@ -19,16 +19,6 @@ import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
 // @ts-ignore
-import { APIAppliedProcurementPlanResponseDTO } from '../model/aPIAppliedProcurementPlanResponseDTO';
-// @ts-ignore
-import { APIExtendedRoleAssignmentResponseDTO } from '../model/aPIExtendedRoleAssignmentResponseDTO';
-// @ts-ignore
-import { APIIdentityNamePairResponseDTO } from '../model/aPIIdentityNamePairResponseDTO';
-// @ts-ignore
-import { APIItContractHierarchyNodeResponseDTO } from '../model/aPIItContractHierarchyNodeResponseDTO';
-// @ts-ignore
-import { APIItContractResponseDTO } from '../model/aPIItContractResponseDTO';
-// @ts-ignore
 import { APIMultipleContractsRequestDto } from '../model/aPIMultipleContractsRequestDto';
 // @ts-ignore
 import { APIRoleAssignmentRequestDTO } from '../model/aPIRoleAssignmentRequestDTO';
@@ -43,26 +33,26 @@ export interface DeleteSingleItContractInternalV2DeleteItContractWithChildrenReq
     contractUuid: string;
 }
 
-export interface GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams {
+export interface GetSingleItContractInternalV2GetAddRoleAssignmentsRequestParams {
     /**  */
     contractUuid: string;
 }
 
-export interface GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams {
+export interface GetSingleItContractInternalV2GetAppliedProcurementPlansRequestParams {
     organizationUuid: string;
 }
 
-export interface GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams {
+export interface GetSingleItContractInternalV2GetDataProcessingRegistrationsRequestParams {
     contractUuid: string;
     nameQuery?: string;
     pageSize?: number;
 }
 
-export interface GetManyItContractInternalV2GetHierarchyRequestParams {
+export interface GetSingleItContractInternalV2GetHierarchyRequestParams {
     contractUuid: string;
 }
 
-export interface GetManyItContractInternalV2GetSubHierarchyRequestParams {
+export interface GetSingleItContractInternalV2GetSubHierarchyRequestParams {
     contractUuid: string;
 }
 
@@ -221,13 +211,13 @@ export class ItContractInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetAddRoleAssignments(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
-    public getManyItContractInternalV2GetAddRoleAssignments(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyItContractInternalV2GetAddRoleAssignments(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyItContractInternalV2GetAddRoleAssignments(requestParameters: GetManyItContractInternalV2GetAddRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractInternalV2GetAddRoleAssignments(requestParameters: GetSingleItContractInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItContractInternalV2GetAddRoleAssignments(requestParameters: GetSingleItContractInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractInternalV2GetAddRoleAssignments(requestParameters: GetSingleItContractInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractInternalV2GetAddRoleAssignments(requestParameters: GetSingleItContractInternalV2GetAddRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetAddRoleAssignments.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItContractInternalV2GetAddRoleAssignments.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -269,7 +259,7 @@ export class ItContractInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
-        return this.httpClient.request<Array<APIExtendedRoleAssignmentResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -286,13 +276,13 @@ export class ItContractInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIAppliedProcurementPlanResponseDTO>>;
-    public getManyItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIAppliedProcurementPlanResponseDTO>>>;
-    public getManyItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIAppliedProcurementPlanResponseDTO>>>;
-    public getManyItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetManyItContractInternalV2GetAppliedProcurementPlansRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetSingleItContractInternalV2GetAppliedProcurementPlansRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetSingleItContractInternalV2GetAppliedProcurementPlansRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetSingleItContractInternalV2GetAppliedProcurementPlansRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractInternalV2GetAppliedProcurementPlans(requestParameters: GetSingleItContractInternalV2GetAppliedProcurementPlansRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItContractInternalV2GetAppliedProcurementPlans.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItContractInternalV2GetAppliedProcurementPlans.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -334,7 +324,7 @@ export class ItContractInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/applied-procurement-plans/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<Array<APIAppliedProcurementPlanResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -351,13 +341,13 @@ export class ItContractInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
-    public getManyItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetManyItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetSingleItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetSingleItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetSingleItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractInternalV2GetDataProcessingRegistrations(requestParameters: GetSingleItContractInternalV2GetDataProcessingRegistrationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetDataProcessingRegistrations.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItContractInternalV2GetDataProcessingRegistrations.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -411,7 +401,7 @@ export class ItContractInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/data-processing-registrations`;
-        return this.httpClient.request<Array<APIIdentityNamePairResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -429,13 +419,13 @@ export class ItContractInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItContractHierarchyNodeResponseDTO>>;
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItContractHierarchyNodeResponseDTO>>>;
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItContractHierarchyNodeResponseDTO>>>;
-    public getManyItContractInternalV2GetHierarchy(requestParameters: GetManyItContractInternalV2GetHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractInternalV2GetHierarchy(requestParameters: GetSingleItContractInternalV2GetHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItContractInternalV2GetHierarchy(requestParameters: GetSingleItContractInternalV2GetHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractInternalV2GetHierarchy(requestParameters: GetSingleItContractInternalV2GetHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractInternalV2GetHierarchy(requestParameters: GetSingleItContractInternalV2GetHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetHierarchy.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItContractInternalV2GetHierarchy.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -477,7 +467,7 @@ export class ItContractInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/hierarchy`;
-        return this.httpClient.request<Array<APIItContractHierarchyNodeResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -494,13 +484,13 @@ export class ItContractInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractInternalV2GetSubHierarchy(requestParameters: GetManyItContractInternalV2GetSubHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIItContractHierarchyNodeResponseDTO>>;
-    public getManyItContractInternalV2GetSubHierarchy(requestParameters: GetManyItContractInternalV2GetSubHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIItContractHierarchyNodeResponseDTO>>>;
-    public getManyItContractInternalV2GetSubHierarchy(requestParameters: GetManyItContractInternalV2GetSubHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIItContractHierarchyNodeResponseDTO>>>;
-    public getManyItContractInternalV2GetSubHierarchy(requestParameters: GetManyItContractInternalV2GetSubHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractInternalV2GetSubHierarchy(requestParameters: GetSingleItContractInternalV2GetSubHierarchyRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItContractInternalV2GetSubHierarchy(requestParameters: GetSingleItContractInternalV2GetSubHierarchyRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractInternalV2GetSubHierarchy(requestParameters: GetSingleItContractInternalV2GetSubHierarchyRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractInternalV2GetSubHierarchy(requestParameters: GetSingleItContractInternalV2GetSubHierarchyRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
-            throw new Error('Required parameter contractUuid was null or undefined when calling getManyItContractInternalV2GetSubHierarchy.');
+            throw new Error('Required parameter contractUuid was null or undefined when calling getSingleItContractInternalV2GetSubHierarchy.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -542,7 +532,7 @@ export class ItContractInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sub-hierarchy`;
-        return this.httpClient.request<Array<APIItContractHierarchyNodeResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -560,9 +550,9 @@ export class ItContractInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public patchSingleItContractInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchAddRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
@@ -619,7 +609,7 @@ export class ItContractInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/add`;
-        return this.httpClient.request<APIItContractResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIRoleAssignmentRequestDTO,
@@ -638,9 +628,9 @@ export class ItContractInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIItContractResponseDTO>;
-    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIItContractResponseDTO>>;
-    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIItContractResponseDTO>>;
+    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public patchSingleItContractInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleItContractInternalV2PatchRemoveRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const contractUuid = requestParameters.contractUuid;
         if (contractUuid === null || contractUuid === undefined) {
@@ -697,7 +687,7 @@ export class ItContractInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contracts/${this.configuration.encodeParam({name: "contractUuid", value: contractUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/remove`;
-        return this.httpClient.request<APIItContractResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIRoleAssignmentRequestDTO,

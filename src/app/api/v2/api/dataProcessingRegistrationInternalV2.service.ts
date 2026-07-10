@@ -21,45 +21,37 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APICommonOrderByProperty } from '../model/aPICommonOrderByProperty';
 // @ts-ignore
-import { APIDataProcessingRegistrationResponseDTO } from '../model/aPIDataProcessingRegistrationResponseDTO';
-// @ts-ignore
-import { APIExtendedRoleAssignmentResponseDTO } from '../model/aPIExtendedRoleAssignmentResponseDTO';
-// @ts-ignore
-import { APIIdentityNamePairResponseDTO } from '../model/aPIIdentityNamePairResponseDTO';
-// @ts-ignore
 import { APIRoleAssignmentRequestDTO } from '../model/aPIRoleAssignmentRequestDTO';
-// @ts-ignore
-import { APIShallowOrganizationResponseDTO } from '../model/aPIShallowOrganizationResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
 import { Configuration }                                     from '../configuration';
 
 
-export interface GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams {
+export interface GetSingleDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams {
     /**  */
     dprUuid: string;
 }
 
-export interface GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams {
+export interface GetSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams {
     dprUuid: string;
     nameQuery?: string;
     pageSize?: number;
 }
 
-export interface GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams {
+export interface GetSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams {
     dprUuid: string;
     nameQuery?: string;
     pageSize?: number;
 }
 
-export interface GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams {
+export interface GetSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams {
     dprUuid: string;
     nameQuery?: string;
     pageSize?: number;
 }
 
-export interface GetManyDataProcessingRegistrationInternalV2GetItSystemsRequestParams {
+export interface GetSingleDataProcessingRegistrationInternalV2GetItSystemsRequestParams {
     organizationUuid?: string;
     /** Include only dprs with a name that contains the content in the parameter */
     nameContains?: string;
@@ -156,13 +148,13 @@ export class DataProcessingRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIExtendedRoleAssignmentResponseDTO>>;
-    public getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIExtendedRoleAssignmentResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetAddRoleAssignments(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAddRoleAssignmentsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
-            throw new Error('Required parameter dprUuid was null or undefined when calling getManyDataProcessingRegistrationInternalV2GetAddRoleAssignments.');
+            throw new Error('Required parameter dprUuid was null or undefined when calling getSingleDataProcessingRegistrationInternalV2GetAddRoleAssignments.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -204,7 +196,7 @@ export class DataProcessingRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles`;
-        return this.httpClient.request<Array<APIExtendedRoleAssignmentResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -221,13 +213,13 @@ export class DataProcessingRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
-            throw new Error('Required parameter dprUuid was null or undefined when calling getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors.');
+            throw new Error('Required parameter dprUuid was null or undefined when calling getSingleDataProcessingRegistrationInternalV2GetAvailableDataProcessors.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -281,7 +273,7 @@ export class DataProcessingRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/data-processors/available`;
-        return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -299,13 +291,13 @@ export class DataProcessingRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
-            throw new Error('Required parameter dprUuid was null or undefined when calling getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors.');
+            throw new Error('Required parameter dprUuid was null or undefined when calling getSingleDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -359,7 +351,7 @@ export class DataProcessingRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sub-data-processors/available`;
-        return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -377,13 +369,13 @@ export class DataProcessingRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIIdentityNamePairResponseDTO>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIIdentityNamePairResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIIdentityNamePairResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsages(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
-            throw new Error('Required parameter dprUuid was null or undefined when calling getManyDataProcessingRegistrationInternalV2GetAvailableSystemUsages.');
+            throw new Error('Required parameter dprUuid was null or undefined when calling getSingleDataProcessingRegistrationInternalV2GetAvailableSystemUsages.');
         }
         const nameQuery = requestParameters.nameQuery;
         const pageSize = requestParameters.pageSize;
@@ -437,7 +429,7 @@ export class DataProcessingRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/system-usages/available`;
-        return this.httpClient.request<Array<APIIdentityNamePairResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -456,10 +448,10 @@ export class DataProcessingRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDataProcessingRegistrationInternalV2GetItSystems(requestParameters: GetManyDataProcessingRegistrationInternalV2GetItSystemsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIDataProcessingRegistrationResponseDTO>>;
-    public getManyDataProcessingRegistrationInternalV2GetItSystems(requestParameters: GetManyDataProcessingRegistrationInternalV2GetItSystemsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIDataProcessingRegistrationResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetItSystems(requestParameters: GetManyDataProcessingRegistrationInternalV2GetItSystemsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIDataProcessingRegistrationResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetItSystems(requestParameters: GetManyDataProcessingRegistrationInternalV2GetItSystemsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleDataProcessingRegistrationInternalV2GetItSystems(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetItSystemsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleDataProcessingRegistrationInternalV2GetItSystems(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetItSystemsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetItSystems(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetItSystemsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleDataProcessingRegistrationInternalV2GetItSystems(requestParameters: GetSingleDataProcessingRegistrationInternalV2GetItSystemsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         const nameContains = requestParameters.nameContains;
         const orderByProperty = requestParameters.orderByProperty;
@@ -527,7 +519,7 @@ export class DataProcessingRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/search`;
-        return this.httpClient.request<Array<APIDataProcessingRegistrationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -546,9 +538,9 @@ export class DataProcessingRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
-    public patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
-    public patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
+    public patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public patchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchAddRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
@@ -605,7 +597,7 @@ export class DataProcessingRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/add`;
-        return this.httpClient.request<APIDataProcessingRegistrationResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIRoleAssignmentRequestDTO,
@@ -624,9 +616,9 @@ export class DataProcessingRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIDataProcessingRegistrationResponseDTO>;
-    public patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIDataProcessingRegistrationResponseDTO>>;
-    public patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIDataProcessingRegistrationResponseDTO>>;
+    public patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignmentRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public patchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignment(requestParameters: PatchSingleDataProcessingRegistrationInternalV2PatchRemoveRoleAssignmentRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
@@ -683,7 +675,7 @@ export class DataProcessingRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/roles/remove`;
-        return this.httpClient.request<APIDataProcessingRegistrationResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIRoleAssignmentRequestDTO,

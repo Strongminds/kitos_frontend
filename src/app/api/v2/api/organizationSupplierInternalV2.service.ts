@@ -18,8 +18,6 @@ import { HttpClient, HttpHeaders, HttpParams,
 import { CustomHttpParameterCodec }                          from '../encoder';
 import { Observable }                                        from 'rxjs';
 
-// @ts-ignore
-import { APIShallowOrganizationResponseDTO } from '../model/aPIShallowOrganizationResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -31,15 +29,15 @@ export interface DeleteSingleOrganizationSupplierInternalV2DeleteSupplierRequest
     supplierUuid: string;
 }
 
-export interface GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams {
+export interface GetSingleOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams {
     organizationUuid: string;
 }
 
-export interface GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams {
+export interface GetSingleOrganizationSupplierInternalV2GetSuppliersRequestParams {
     organizationUuid: string;
 }
 
-export interface GetManyOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams {
+export interface GetSingleOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams {
     supplierUuid: string;
 }
 
@@ -186,13 +184,13 @@ export class OrganizationSupplierInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
-    public getManyOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetSingleOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetSingleOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetSingleOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleOrganizationSupplierInternalV2GetAvailableSuppliers(requestParameters: GetSingleOrganizationSupplierInternalV2GetAvailableSuppliersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationSupplierInternalV2GetAvailableSuppliers.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationSupplierInternalV2GetAvailableSuppliers.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -234,7 +232,7 @@ export class OrganizationSupplierInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/suppliers/available`;
-        return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -251,13 +249,13 @@ export class OrganizationSupplierInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
-    public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetManyOrganizationSupplierInternalV2GetSuppliersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetSingleOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetSingleOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetSingleOrganizationSupplierInternalV2GetSuppliersRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleOrganizationSupplierInternalV2GetSuppliers(requestParameters: GetSingleOrganizationSupplierInternalV2GetSuppliersRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyOrganizationSupplierInternalV2GetSuppliers.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleOrganizationSupplierInternalV2GetSuppliers.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -299,7 +297,7 @@ export class OrganizationSupplierInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/suppliers`;
-        return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -316,13 +314,13 @@ export class OrganizationSupplierInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyOrganizationSupplierInternalV2GetUsingOrganizations(requestParameters: GetManyOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
-    public getManyOrganizationSupplierInternalV2GetUsingOrganizations(requestParameters: GetManyOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyOrganizationSupplierInternalV2GetUsingOrganizations(requestParameters: GetManyOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyOrganizationSupplierInternalV2GetUsingOrganizations(requestParameters: GetManyOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleOrganizationSupplierInternalV2GetUsingOrganizations(requestParameters: GetSingleOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleOrganizationSupplierInternalV2GetUsingOrganizations(requestParameters: GetSingleOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleOrganizationSupplierInternalV2GetUsingOrganizations(requestParameters: GetSingleOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleOrganizationSupplierInternalV2GetUsingOrganizations(requestParameters: GetSingleOrganizationSupplierInternalV2GetUsingOrganizationsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const supplierUuid = requestParameters.supplierUuid;
         if (supplierUuid === null || supplierUuid === undefined) {
-            throw new Error('Required parameter supplierUuid was null or undefined when calling getManyOrganizationSupplierInternalV2GetUsingOrganizations.');
+            throw new Error('Required parameter supplierUuid was null or undefined when calling getSingleOrganizationSupplierInternalV2GetUsingOrganizations.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -364,7 +362,7 @@ export class OrganizationSupplierInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/suppliers/${this.configuration.encodeParam({name: "supplierUuid", value: supplierUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/using-organizations`;
-        return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -381,9 +379,9 @@ export class OrganizationSupplierInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIShallowOrganizationResponseDTO>;
-    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIShallowOrganizationResponseDTO>>;
-    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIShallowOrganizationResponseDTO>>;
+    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleOrganizationSupplierInternalV2AddSupplier(requestParameters: PostSingleOrganizationSupplierInternalV2AddSupplierRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -433,7 +431,7 @@ export class OrganizationSupplierInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/suppliers/${this.configuration.encodeParam({name: "supplierUuid", value: supplierUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIShallowOrganizationResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,

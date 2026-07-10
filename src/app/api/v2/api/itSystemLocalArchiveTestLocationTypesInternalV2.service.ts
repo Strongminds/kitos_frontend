@@ -21,8 +21,6 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
-import { APILocalRegularOptionResponseDTO } from '../model/aPILocalRegularOptionResponseDTO';
-// @ts-ignore
 import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -30,27 +28,27 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams {
+export interface DeleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams {
+export interface GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams {
+export interface GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams {
     organizationUuid: string;
 }
 
-export interface PatchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams {
+export interface PatchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     aPILocalRegularOptionUpdateRequestDTO?: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams {
+export interface PostSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams {
     organizationUuid: string;
     aPILocalOptionCreateRequestDTO?: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +123,17 @@ export class ItSystemLocalArchiveTestLocationTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType(requestParameters: DeleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType(requestParameters: DeleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType(requestParameters: DeleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType(requestParameters: DeleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType(requestParameters: DeleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType(requestParameters: DeleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType(requestParameters: DeleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType(requestParameters: DeleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteManyItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItSystemLocalArchiveTestLocationTypesInternalV2DeleteLocalArchiveTestLocationType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -193,17 +191,17 @@ export class ItSystemLocalArchiveTestLocationTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId(requestParameters: GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId(requestParameters: GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId(requestParameters: GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId(requestParameters: GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId(requestParameters: GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId(requestParameters: GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId(requestParameters: GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId(requestParameters: GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypeByOptionId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -245,7 +243,7 @@ export class ItSystemLocalArchiveTestLocationTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/archive-test-location-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -262,13 +260,13 @@ export class ItSystemLocalArchiveTestLocationTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(requestParameters: GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(requestParameters: GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(requestParameters: GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(requestParameters: GetManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(requestParameters: GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(requestParameters: GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(requestParameters: GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes(requestParameters: GetSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemLocalArchiveTestLocationTypesInternalV2GetLocalArchiveTestLocationTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -310,7 +308,7 @@ export class ItSystemLocalArchiveTestLocationTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/archive-test-location-types`;
-        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -327,17 +325,17 @@ export class ItSystemLocalArchiveTestLocationTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(requestParameters: PatchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public patchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(requestParameters: PatchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public patchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(requestParameters: PatchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public patchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(requestParameters: PatchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(requestParameters: PatchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public patchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(requestParameters: PatchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public patchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(requestParameters: PatchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType(requestParameters: PatchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchManyItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalArchiveTestLocationTypesInternalV2PatchLocalArchiveTestLocationType.');
         }
         const aPILocalRegularOptionUpdateRequestDTO = requestParameters.aPILocalRegularOptionUpdateRequestDTO;
 
@@ -390,7 +388,7 @@ export class ItSystemLocalArchiveTestLocationTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/archive-test-location-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalRegularOptionUpdateRequestDTO,
@@ -408,13 +406,13 @@ export class ItSystemLocalArchiveTestLocationTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(requestParameters: PostManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public postManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(requestParameters: PostManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public postManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(requestParameters: PostManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public postManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(requestParameters: PostManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(requestParameters: PostSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public postSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(requestParameters: PostSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(requestParameters: PostSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType(requestParameters: PostSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postManyItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalArchiveTestLocationTypesInternalV2CreateLocalArchiveTestLocationType.');
         }
         const aPILocalOptionCreateRequestDTO = requestParameters.aPILocalOptionCreateRequestDTO;
 
@@ -466,7 +464,7 @@ export class ItSystemLocalArchiveTestLocationTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/archive-test-location-types`;
-        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalOptionCreateRequestDTO,

@@ -21,15 +21,7 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIConnectToStsOrganizationRequestDTO } from '../model/aPIConnectToStsOrganizationRequestDTO';
 // @ts-ignore
-import { APIConnectionUpdateConsequencesResponseDTO } from '../model/aPIConnectionUpdateConsequencesResponseDTO';
-// @ts-ignore
 import { APIDisconnectFromStsOrganizationRequestDTO } from '../model/aPIDisconnectFromStsOrganizationRequestDTO';
-// @ts-ignore
-import { APIStsOrganizationChangeLogResponseDTO } from '../model/aPIStsOrganizationChangeLogResponseDTO';
-// @ts-ignore
-import { APIStsOrganizationOrgUnitDTO } from '../model/aPIStsOrganizationOrgUnitDTO';
-// @ts-ignore
-import { APIStsOrganizationSynchronizationDetailsResponseDTO } from '../model/aPIStsOrganizationSynchronizationDetailsResponseDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -45,7 +37,7 @@ export interface DeleteSingleStsOrganizationSynchronizationInternalV2DisconnectR
     aPIDisconnectFromStsOrganizationRequestDTO?: APIDisconnectFromStsOrganizationRequestDTO;
 }
 
-export interface GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams {
+export interface GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams {
     organizationUuid: string;
     numberOfChangeLogs?: number;
 }
@@ -283,13 +275,13 @@ export class StsOrganizationSynchronizationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIStsOrganizationChangeLogResponseDTO>>;
-    public getManyStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIStsOrganizationChangeLogResponseDTO>>>;
-    public getManyStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIStsOrganizationChangeLogResponseDTO>>>;
-    public getManyStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetManyStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetChangeLogsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyStsOrganizationSynchronizationInternalV2GetChangeLogs.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleStsOrganizationSynchronizationInternalV2GetChangeLogs.');
         }
         const numberOfChangeLogs = requestParameters.numberOfChangeLogs;
 
@@ -338,7 +330,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sts-organization-synchronization/connection/change-log`;
-        return this.httpClient.request<Array<APIStsOrganizationChangeLogResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -356,9 +348,9 @@ export class StsOrganizationSynchronizationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganization(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIStsOrganizationOrgUnitDTO>;
-    public getSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganization(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIStsOrganizationOrgUnitDTO>>;
-    public getSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganization(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIStsOrganizationOrgUnitDTO>>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganization(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganizationRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganization(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganizationRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganization(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganizationRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public getSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganization(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSnapshotFromStsOrganizationRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -411,7 +403,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sts-organization-synchronization/snapshot`;
-        return this.httpClient.request<APIStsOrganizationOrgUnitDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -429,9 +421,9 @@ export class StsOrganizationSynchronizationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatus(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatusRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIStsOrganizationSynchronizationDetailsResponseDTO>;
-    public getSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatus(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatusRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIStsOrganizationSynchronizationDetailsResponseDTO>>;
-    public getSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatus(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatusRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIStsOrganizationSynchronizationDetailsResponseDTO>>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatus(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatusRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatus(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatusRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatus(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatusRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public getSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatus(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetSynchronizationStatusRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -477,7 +469,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sts-organization-synchronization/connection-status`;
-        return this.httpClient.request<APIStsOrganizationSynchronizationDetailsResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -494,9 +486,9 @@ export class StsOrganizationSynchronizationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequences(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIConnectionUpdateConsequencesResponseDTO>;
-    public getSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequences(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIConnectionUpdateConsequencesResponseDTO>>;
-    public getSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequences(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIConnectionUpdateConsequencesResponseDTO>>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequences(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequencesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequences(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequencesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequences(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequencesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public getSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequences(requestParameters: GetSingleStsOrganizationSynchronizationInternalV2GetUpdateConsequencesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
@@ -549,7 +541,7 @@ export class StsOrganizationSynchronizationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/organizations/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sts-organization-synchronization/connection/update`;
-        return this.httpClient.request<APIConnectionUpdateConsequencesResponseDTO>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

@@ -21,8 +21,6 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APIGlobalRegularOptionCreateRequestDTO } from '../model/aPIGlobalRegularOptionCreateRequestDTO';
 // @ts-ignore
-import { APIGlobalRegularOptionResponseDTO } from '../model/aPIGlobalRegularOptionResponseDTO';
-// @ts-ignore
 import { APIGlobalRegularOptionUpdateRequestDTO } from '../model/aPIGlobalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -108,10 +106,10 @@ export class ItContractGlobalAgreementElementTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIGlobalRegularOptionResponseDTO>>;
-    public getManyItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIGlobalRegularOptionResponseDTO>>>;
-    public getManyItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIGlobalRegularOptionResponseDTO>>>;
-    public getManyItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes(observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes(observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes(observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItContractGlobalAgreementElementTypesInternalV2GetGlobalAgreementElementTypes(observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
 
         let localVarHeaders = this.defaultHeaders;
 
@@ -152,7 +150,7 @@ export class ItContractGlobalAgreementElementTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/agreement-element-types`;
-        return this.httpClient.request<Array<APIGlobalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -169,9 +167,9 @@ export class ItContractGlobalAgreementElementTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public patchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementType(requestParameters: PatchSingleItContractGlobalAgreementElementTypesInternalV2PatchGlobalAgreementElementTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
@@ -228,7 +226,7 @@ export class ItContractGlobalAgreementElementTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/agreement-element-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionUpdateRequestDTO,
@@ -246,9 +244,9 @@ export class ItContractGlobalAgreementElementTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(requestParameters: PostSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<APIGlobalRegularOptionResponseDTO>;
-    public postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(requestParameters: PostSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<APIGlobalRegularOptionResponseDTO>>;
-    public postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(requestParameters: PostSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<APIGlobalRegularOptionResponseDTO>>;
+    public postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(requestParameters: PostSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(requestParameters: PostSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(requestParameters: PostSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
     public postSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementType(requestParameters: PostSingleItContractGlobalAgreementElementTypesInternalV2CreateGlobalAgreementElementTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const aPIGlobalRegularOptionCreateRequestDTO = requestParameters.aPIGlobalRegularOptionCreateRequestDTO;
 
@@ -300,7 +298,7 @@ export class ItContractGlobalAgreementElementTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-contract/global-option-types/agreement-element-types`;
-        return this.httpClient.request<APIGlobalRegularOptionResponseDTO>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPIGlobalRegularOptionCreateRequestDTO,

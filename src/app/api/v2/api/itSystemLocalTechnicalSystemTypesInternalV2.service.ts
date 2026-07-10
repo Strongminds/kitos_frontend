@@ -21,8 +21,6 @@ import { Observable }                                        from 'rxjs';
 // @ts-ignore
 import { APILocalOptionCreateRequestDTO } from '../model/aPILocalOptionCreateRequestDTO';
 // @ts-ignore
-import { APILocalRegularOptionResponseDTO } from '../model/aPILocalRegularOptionResponseDTO';
-// @ts-ignore
 import { APILocalRegularOptionUpdateRequestDTO } from '../model/aPILocalRegularOptionUpdateRequestDTO';
 
 // @ts-ignore
@@ -30,27 +28,27 @@ import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables'
 import { Configuration }                                     from '../configuration';
 
 
-export interface DeleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams {
+export interface DeleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams {
+export interface GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams {
     organizationUuid: string;
     optionUuid: string;
 }
 
-export interface GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams {
+export interface GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams {
     organizationUuid: string;
 }
 
-export interface PatchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams {
+export interface PatchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams {
     organizationUuid: string;
     optionUuid: string;
     aPILocalRegularOptionUpdateRequestDTO?: APILocalRegularOptionUpdateRequestDTO;
 }
 
-export interface PostManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams {
+export interface PostSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams {
     organizationUuid: string;
     aPILocalOptionCreateRequestDTO?: APILocalOptionCreateRequestDTO;
 }
@@ -125,17 +123,17 @@ export class ItSystemLocalTechnicalSystemTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public deleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType(requestParameters: DeleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
-    public deleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType(requestParameters: DeleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
-    public deleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType(requestParameters: DeleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
-    public deleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType(requestParameters: DeleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
+    public deleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType(requestParameters: DeleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any>;
+    public deleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType(requestParameters: DeleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpResponse<any>>;
+    public deleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType(requestParameters: DeleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<HttpEvent<any>>;
+    public deleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType(requestParameters: DeleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: undefined, context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling deleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling deleteManyItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling deleteSingleItSystemLocalTechnicalSystemTypesInternalV2DeleteTechnicalSystemType.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -193,17 +191,17 @@ export class ItSystemLocalTechnicalSystemTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId(requestParameters: GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId(requestParameters: GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId(requestParameters: GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId(requestParameters: GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId(requestParameters: GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId(requestParameters: GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId(requestParameters: GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId(requestParameters: GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionIdRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypeByOptionId.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -245,7 +243,7 @@ export class ItSystemLocalTechnicalSystemTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/technical-system-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -262,13 +260,13 @@ export class ItSystemLocalTechnicalSystemTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes(requestParameters: GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes(requestParameters: GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes(requestParameters: GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes(requestParameters: GetManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes(requestParameters: GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes(requestParameters: GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes(requestParameters: GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes(requestParameters: GetSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypesRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling getManyItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling getSingleItSystemLocalTechnicalSystemTypesInternalV2GetLocalTechnicalSystemTypes.');
         }
 
         let localVarHeaders = this.defaultHeaders;
@@ -310,7 +308,7 @@ export class ItSystemLocalTechnicalSystemTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/technical-system-types`;
-        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 responseType: <any>responseType_,
@@ -327,17 +325,17 @@ export class ItSystemLocalTechnicalSystemTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public patchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public patchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public patchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public patchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public patchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public patchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public patchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public patchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType(requestParameters: PatchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling patchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling patchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType.');
         }
         const optionUuid = requestParameters.optionUuid;
         if (optionUuid === null || optionUuid === undefined) {
-            throw new Error('Required parameter optionUuid was null or undefined when calling patchManyItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType.');
+            throw new Error('Required parameter optionUuid was null or undefined when calling patchSingleItSystemLocalTechnicalSystemTypesInternalV2PatchTechnicalSystemType.');
         }
         const aPILocalRegularOptionUpdateRequestDTO = requestParameters.aPILocalRegularOptionUpdateRequestDTO;
 
@@ -390,7 +388,7 @@ export class ItSystemLocalTechnicalSystemTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/technical-system-types/${this.configuration.encodeParam({name: "optionUuid", value: optionUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}`;
-        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('patch', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('patch', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalRegularOptionUpdateRequestDTO,
@@ -408,13 +406,13 @@ export class ItSystemLocalTechnicalSystemTypesInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public postManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APILocalRegularOptionResponseDTO>>;
-    public postManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APILocalRegularOptionResponseDTO>>>;
-    public postManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APILocalRegularOptionResponseDTO>>>;
-    public postManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
+    public postSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any>;
+    public postSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<any>>;
+    public postSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<any>>;
+    public postSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType(requestParameters: PostSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemTypeRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const organizationUuid = requestParameters.organizationUuid;
         if (organizationUuid === null || organizationUuid === undefined) {
-            throw new Error('Required parameter organizationUuid was null or undefined when calling postManyItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType.');
+            throw new Error('Required parameter organizationUuid was null or undefined when calling postSingleItSystemLocalTechnicalSystemTypesInternalV2CreateTechnicalSystemType.');
         }
         const aPILocalOptionCreateRequestDTO = requestParameters.aPILocalOptionCreateRequestDTO;
 
@@ -466,7 +464,7 @@ export class ItSystemLocalTechnicalSystemTypesInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/it-systems/${this.configuration.encodeParam({name: "organizationUuid", value: organizationUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/local-option-types/technical-system-types`;
-        return this.httpClient.request<Array<APILocalRegularOptionResponseDTO>>('post', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<any>('post', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 body: aPILocalOptionCreateRequestDTO,
