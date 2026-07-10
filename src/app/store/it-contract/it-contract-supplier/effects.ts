@@ -40,7 +40,7 @@ export class ITContractSupplierEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata/ItContractSupplierOverviewReadModels?organizationUuid=${organizationUuid}&$expand=Organization($select=Name,Uuid)&${cacheableOdataString}&$count=true`,
+            `/odata/Organizations(${organizationUuid})/ItContractSupplierOverviewReadModels?$expand=Organization($select=Name,Uuid)&${cacheableOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {

@@ -51,43 +51,51 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
-      field: 'IsExternal',
+      field: 'isInternalContract',
       title: $localize`Intern/Ekstern`,
       style: 'chip',
       section: this.supplierSectionName,
       hidden: false,
       filter: 'boolean',
+      extraData: [
+        { name: $localize`Intern`, value: true },
+        { name: $localize`Ekstern`, value: false },
+      ],
+      persistId: 'isInternal',
     },
     {
-      field: 'Name',
+      field: 'supplierName',
       title: $localize`Leverandørnavn`,
       style: 'primary',
       section: this.supplierSectionName,
       hidden: false,
+      persistId: 'supplierName',
     },
     {
-      field: 'CVR',
+      field: 'supplierCvr',
       title: $localize`CVR`,
       section: this.supplierSectionName,
       hidden: false,
+      persistId: 'supplierCvr',
     },
     {
-      field: 'CalculatedCriticality',
+      field: 'highestCriticalityName',
       title: $localize`Beregnet kritikalitet`,
       style: 'enum',
       section: this.supplierSectionName,
       hidden: false,
-      extraFilter: 'enum',
+      persistId: 'criticality',
     },
     {
-      field: 'ContractsWithCriticality',
+      field: 'contractsAtHighestCriticality',
       title: $localize`Kontrakter med kritikalitet`,
       style: 'page-link-array',
-      idField: 'Uuid',
-      dataField: 'ContractNumber',
+      idField: 'uuid',
+      dataField: 'name',
       section: this.supplierSectionName,
       hidden: false,
       sortable: false,
+      persistId: 'contracts',
     },
   ];
 
@@ -100,10 +108,19 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
   }
 
   ngOnInit(): void {
-    const columnId = CONTRACT_SUPPLIER_COLUMNS_ID;
-    const localStorageColumns =
-      this.gridColumnStorageService.getColumns(columnId, this.defaultGridColumns) || this.defaultGridColumns;
-    this.store.dispatch(ITContractSupplierActions.updateGridColumns(localStorageColumns));
+    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
+
+    const orderedGridColumns = this.mapColumnOrder(this.defaultGridColumns);
+    const localStorageColumns = this.gridColumnStorageService.getColumns(
+      CONTRACT_SUPPLIER_COLUMNS_ID,
+      orderedGridColumns,
+    );
+    this.updateLocalOrDefaultGridColumns(
+      orderedGridColumns,
+      localStorageColumns,
+      ITContractSupplierActions.updateGridColumns,
+      () => ITContractSupplierActions.resetToOrganizationITContractSupplierColumnConfiguration(),
+    );
 
     this.subscriptions.add(
       this.gridState$.pipe(first()).subscribe((state) => {
@@ -125,10 +142,6 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
 
   public stateChange(newState: GridState): void {
     this.store.dispatch(ITContractSupplierActions.updateGridState(newState));
-  }
-
-  public onGridColumnsUpdated(gridColumns: GridColumn[]): void {
-    this.store.dispatch(ITContractSupplierActions.updateGridColumnsSuccess(gridColumns));
   }
 
   public override onExcelExport = (exportAllColumns: boolean) => {

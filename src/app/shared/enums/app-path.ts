@@ -16,6 +16,7 @@ export enum AppPath {
   frontpage = 'frontpage',
   passwordReset = 'reset-password',
   contracts = 'contracts',
+  suppliers = 'suppliers',
 
   itContracts = 'it-contracts',
   itContractDetails = 'it-contracts/:uuid',
