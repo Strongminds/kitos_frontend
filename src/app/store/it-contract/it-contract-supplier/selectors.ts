@@ -9,20 +9,16 @@ export const selectSupplierGridData = createSelector(
   (state): GridData => ({ data: state.suppliers, total: state.total }),
 );
 
-export const selectSupplierIsLoading = createSelector(
+export const selectSupplierIsLoading = createSelector(selectITContractSupplierState, (state) => state.isLoading);
+
+export const selectSupplierGridState = createSelector(selectITContractSupplierState, (state) => state.gridState);
+
+export const selectSupplierPreviousGridState = createSelector(
   selectITContractSupplierState,
-  (state) => state.isLoading,
+  (state) => state.previousGridState,
 );
 
-export const selectSupplierGridState = createSelector(
-  selectITContractSupplierState,
-  (state) => state.gridState,
-);
-
-export const selectSupplierGridColumns = createSelector(
-  selectITContractSupplierState,
-  (state) => state.gridColumns,
-);
+export const selectSupplierGridColumns = createSelector(selectITContractSupplierState, (state) => state.gridColumns);
 
 export const selectSupplierCollectionPermissions = createSelector(
   selectITContractSupplierState,
