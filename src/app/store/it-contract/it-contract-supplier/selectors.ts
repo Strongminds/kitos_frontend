@@ -19,8 +19,3 @@ export const selectSupplierPreviousGridState = createSelector(
 );
 
 export const selectSupplierGridColumns = createSelector(selectITContractSupplierState, (state) => state.gridColumns);
-
-export const selectSupplierCollectionPermissions = createSelector(
-  selectITContractSupplierState,
-  (state) => state.collectionPermissions,
-);

@@ -10,7 +10,6 @@ export const itContractSupplierInitialState: ITContractSuppliersState = {
   gridState: defaultODataGridState,
   previousGridState: defaultODataGridState,
   gridColumns: [],
-  collectionPermissions: undefined,
 };
 
 export const itContractSupplierFeature = createFeature({
@@ -34,21 +33,5 @@ export const itContractSupplierFeature = createFeature({
         isLoading: false,
       }),
     ),
-    on(
-      ITContractSupplierActions.updateGridState,
-      (state, { gridState }): ITContractSuppliersState => ({
-        ...state,
-        isLoading: true,
-        gridState,
-        previousGridState: state.gridState,
-      }),
-    ),
-    on(
-      ITContractSupplierActions.updateGridColumnsSuccess,
-      (state, { gridColumns }): ITContractSuppliersState => ({
-        ...state,
-        gridColumns,
-      }),
-
   ),
 });

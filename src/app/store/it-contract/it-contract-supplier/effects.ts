@@ -8,12 +8,10 @@ import { catchError, map, of, switchMap } from 'rxjs';
 import { OrganizationGridInternalV2Service } from 'src/app/api/v2';
 import { adaptITContractSupplier } from 'src/app/shared/models/it-contract/it-contract-supplier.model';
 import { OData } from 'src/app/shared/models/odata.model';
-import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
-import { getNewGridColumnsBasedOnConfig } from '../../helpers/grid-config-helper';
 import { selectOrganizationUuid } from '../../user-store/selectors';
 import { ITContractSupplierActions } from './actions';
-import { selectSupplierGridColumns, selectSupplierPreviousGridState } from './selectors';
+import { selectSupplierPreviousGridState } from './selectors';
 
 @Injectable()
 export class ITContractSupplierEffects {
