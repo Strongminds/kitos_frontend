@@ -121,8 +121,6 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
           this.store.dispatch(ITContractSupplierActions.getSuppliers(gridState));
         }),
     );
-
-    this.store.dispatch(ITContractSupplierActions.getSupplierCollectionPermissions());
   }
 
   public stateChange(newState: GridState): void {
