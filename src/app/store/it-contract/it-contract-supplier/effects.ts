@@ -1,11 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Inject, Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { compact } from 'lodash';
 import { catchError, map, of, switchMap } from 'rxjs';
-import { ItContractSupplierOverviewReadModelsService } from 'src/app/api/v1';
 import { adaptITContractSupplier } from 'src/app/shared/models/it-contract/it-contract-supplier.model';
 import { OData } from 'src/app/shared/models/odata.model';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
@@ -18,8 +17,6 @@ export class ITContractSupplierEffects {
   constructor(
     private actions$: Actions,
     private store: Store,
-    @Inject(ItContractSupplierOverviewReadModelsService)
-    private supplierService: ItContractSupplierOverviewReadModelsService,
     private gridDataCacheService: GridDataCacheService,
     private httpClient: HttpClient,
   ) {}
@@ -57,13 +54,6 @@ export class ITContractSupplierEffects {
             catchError(() => of(ITContractSupplierActions.getSuppliersError())),
           );
       }),
-    );
-  });
-
-  getSupplierCollectionPermissions$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(ITContractSupplierActions.getSupplierCollectionPermissions),
-      map(() => ITContractSupplierActions.getSupplierCollectionPermissionsSuccess(undefined)),
     );
   });
 }
