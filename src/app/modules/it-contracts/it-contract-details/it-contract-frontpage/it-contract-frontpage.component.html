@@ -263,6 +263,28 @@
           formName="supplierSignedAt"
           (valueChange)="patchFrontPage({ supplier: { signedAt: $event?.toDateString() } })"
         ></app-datepicker>
+
+        <app-textbox
+          text="Leverandørens kontaktperson"
+          i18n-text
+          [formGroup]="supplierFormGroup"
+          formName="supplierContactPersonName"
+        ></app-textbox>
+
+        <app-textbox
+          text="Telefonnummer"
+          i18n-text
+          [formGroup]="supplierFormGroup"
+          formName="supplierContactPersonPhone"
+        ></app-textbox>
+
+        <app-textbox
+          text="Email"
+          i18n-text
+          [formGroup]="supplierFormGroup"
+          formName="supplierContactPersonEmail"
+        ></app-textbox>
+
         <app-checkbox
           text="Underskrevet"
           i18n-text
@@ -272,6 +294,15 @@
           formName="supplierSigned"
           (valueChange)="patchFrontPage({ supplier: { signed: $event } })"
         ></app-checkbox>
+
+        <app-checkbox
+          text="Kontraktunderskriver er kontaktperson"
+          i18n-text
+          [formGroup]="supplierFormGroup"
+          formName="supplierContactPersonIsSameAsSigner"
+          labelPosition="after"
+        >
+        </app-checkbox>
       }
     </app-form-grid>
   </app-card>

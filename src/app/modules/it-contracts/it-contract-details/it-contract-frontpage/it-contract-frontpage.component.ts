@@ -183,6 +183,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     supplierSignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     supplierSignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     supplierSigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
+    supplierContactPersonIsSameAsSigner: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
+    supplierContactPersonName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    supplierContactPersonPhone: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    supplierContactPersonEmail: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly procurementFormGroup = new FormGroup({
@@ -278,6 +282,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.subscribeToItContract();
   }
 
+  //TODO add patch actions to the new supplier fields
   public patchFrontPage(frontpage: APIUpdateContractRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
@@ -405,6 +410,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       supplierSignedBy: contract.supplier.signedBy,
       supplierSignedAt: optionalNewDate(contract.supplier.signedAt ?? undefined),
       supplierSigned: contract.supplier.signed,
+      //TODO add new supplier contact person fields
     });
   }
 
