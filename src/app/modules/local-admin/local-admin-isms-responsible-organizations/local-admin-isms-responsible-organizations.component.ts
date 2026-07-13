@@ -27,7 +27,7 @@ import { selectOrganizationHasModifyPermission } from 'src/app/store/organizatio
   selector: 'app-local-admin-isms-responsible-organizations',
   imports: [CardComponent, LocalGridComponent, AsyncPipe, OverviewHeaderComponent, ButtonComponent],
   templateUrl: './local-admin-isms-responsible-organizations.component.html',
-  styleUrl: './local-admin-isms-responsible-organizations.component.scss',
+  styleUrls: ['./local-admin-isms-responsible-organizations.component.scss'],
 })
 export class LocalAdminIsmsResponsibleOrganizationsComponent extends BaseComponent implements OnInit {
   constructor(

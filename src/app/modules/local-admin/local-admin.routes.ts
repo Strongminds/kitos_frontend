@@ -4,7 +4,7 @@ import { AppPath } from 'src/app/shared/enums/app-path';
 import { LocalAdminDprComponent } from './local-admin-dpr/local-admin-dpr.component';
 import { LocalAdminImportComponent } from './local-admin-import/local-admin-import.component';
 import { LocalAdminInformationComponent } from './local-admin-information/local-admin-information.component';
-import { LocalAdminIsmsResponsibleOrganizationsComponent } from './local-admin-isms-responsible-organizations/local-admin-isms-responsible-organizations';
+import { LocalAdminIsmsResponsibleOrganizationsComponent } from './local-admin-isms-responsible-organizations/local-admin-isms-responsible-organizations.component';
 import { LocalAdminItContractComponent } from './local-admin-it-contract/local-admin-it-contract.component';
 import { LocalAdminItSystemUsageComponent } from './local-admin-it-system-usage/local-admin-it-system-usage.component';
 import { LocalAdminOrganizationComponent } from './local-admin-organization/local-admin-organization.component';
