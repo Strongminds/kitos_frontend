@@ -37,7 +37,7 @@ const routes: Routes = [
         canActivate: [AuthGuardService],
       },
       {
-        path: AppPath.itContracts,
+        path: AppPath.itContractsModule,
         loadChildren: () => import('./modules/it-contracts/it-contracts.routes').then((m) => m.ITContractsRouterModule),
         canActivate: [AuthGuardService],
       },

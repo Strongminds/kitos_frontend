@@ -21,12 +21,12 @@ const routes: Routes = [
     component: ItContractsRootComponent,
     children: [
       {
-        path: AppPath.suppliers,
-        component: ItContractSupplierComponent,
+        path: AppPath.itContracts,
+        component: ITContractsComponent,
       },
       {
-        path: AppPath.root,
-        component: ITContractsComponent,
+        path: AppPath.suppliers,
+        component: ItContractSupplierComponent,
       },
       {
         path: AppPath.uuid,
@@ -44,6 +44,7 @@ const routes: Routes = [
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
+      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itContracts },
     ],
   },
 ];

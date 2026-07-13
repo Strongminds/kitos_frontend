@@ -34,7 +34,7 @@ export class ItContractsRootComponent extends BaseComponent implements OnInit {
         .subscribe(() =>
           this.router
             .navigateByUrl(AppPath.root, { skipLocationChange: true })
-            .then(() => this.router.navigate([AppPath.itContracts])),
+            .then(() => this.router.navigate([AppPath.itContractsModule])),
         ),
     );
 

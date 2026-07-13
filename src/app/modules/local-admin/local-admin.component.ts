@@ -48,7 +48,10 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
   public currentTabPathSegment$: Observable<string> = of('');
   public currentTabModuleKey$: Observable<UIModuleConfigKey | undefined> = of(undefined);
 
-  constructor(private store: Store, private router: Router) {
+  constructor(
+    private store: Store,
+    private router: Router,
+  ) {
     super();
   }
 
@@ -72,7 +75,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     {
       label: $localize`IT Kontrakt`,
       iconType: 'clipboard',
-      route: AppPath.itContracts,
+      route: AppPath.itContractsModule,
     },
     {
       label: $localize`Databehandling`,
@@ -102,7 +105,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     switch (urlSegment) {
       case AppPath.localAdminSystemUsages:
         return of(UIModuleConfigKey.ItSystemUsage);
-      case AppPath.itContracts:
+      case AppPath.itContractsModule:
         return of(UIModuleConfigKey.ItContract);
       case AppPath.dataProcessing:
         return of(UIModuleConfigKey.DataProcessingRegistrations);
@@ -116,7 +119,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       this.currentTabModuleKey$.subscribe((moduleKey) => {
         const moduleTabInfo = this.getModuleTabInfo(moduleKey);
         this.store.dispatch(OrganizationActions.patchUIRootConfig({ dto: { [moduleTabInfo.dtoFieldName]: $event } }));
-      })
+      }),
     );
   }
 
@@ -134,7 +137,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItSystemUsage }));
     this.store.dispatch(UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.ItContract }));
     this.store.dispatch(
-      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations })
+      UIModuleConfigActions.getUIModuleConfig({ module: UIModuleConfigKey.DataProcessingRegistrations }),
     );
   }
 
@@ -143,13 +146,13 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       filter((event) => event instanceof NavigationEnd),
       map((navigationEnd) => this.extractLastUrlSegment(navigationEnd.urlAfterRedirects)),
       startWith(this.extractLastUrlSegment(this.router.url)),
-      distinctUntilChanged()
+      distinctUntilChanged(),
     );
     this.subscriptions.add(
       this.currentTabPathSegment$.subscribe((segment) => {
         this.currentTabModuleKey$ = this.getCurrentTabModuleKey(segment);
         this.helpText = this.getCurrentTabHelpText(segment);
-      })
+      }),
     );
   }
 
@@ -161,7 +164,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
         return 'org';
       case AppPath.localAdminSystemUsages:
         return 'system';
-      case AppPath.itContracts:
+      case AppPath.itContractsModule:
         return 'contract';
       case AppPath.dataProcessing:
         return 'data-processing';

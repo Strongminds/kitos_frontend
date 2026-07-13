@@ -302,7 +302,7 @@ export class UserEffects {
       case APIDefaultUserStartPreferenceChoice.ItSystemUsage:
         return `${AppPath.itSystems}/${AppPath.itSystemUsages}`;
       case APIDefaultUserStartPreferenceChoice.ItContract:
-        return AppPath.itContracts;
+        return AppPath.itContractsModule;
       case APIDefaultUserStartPreferenceChoice.DataProcessing:
         return AppPath.dataProcessing;
       default:

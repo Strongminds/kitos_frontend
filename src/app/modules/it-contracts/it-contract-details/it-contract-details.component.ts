@@ -1,3 +1,4 @@
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -30,12 +31,11 @@ import {
   selectItContractEnableItSystems,
   selectItContractEnableReferences,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { DeleteContractDialogComponent } from './delete-contract-dialog/delete-contract-dialog.component';
-import { AsyncPipe } from '@angular/common';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
-import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
+import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { DeleteContractDialogComponent } from './delete-contract-dialog/delete-contract-dialog.component';
 
 @Component({
   selector: 'app-it-contract-details',
@@ -47,8 +47,8 @@ import { LoadingComponent } from '../../../shared/components/loading/loading.com
     NavigationDrawerComponent,
     RouterOutlet,
     LoadingComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class ItContractDetailsComponent extends BaseComponent implements OnInit, OnDestroy {
   public readonly AppPath = AppPath;
@@ -63,7 +63,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     map(([contractName, contractUuid]): BreadCrumb[] => [
       {
         text: $localize`IT Kontrakt`,
-        routerLink: `${AppPath.itContracts}`,
+        routerLink: `${AppPath.itContractsModule}`,
       },
       {
         text: contractName,
@@ -159,7 +159,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.deleteITContractSuccess)).subscribe(() => {
         this.dialog.closeAll();
-        this.router.navigate([`${AppPath.itContracts}`]);
+        this.router.navigate([`${AppPath.itContractsModule}`]);
       }),
     );
   }
@@ -190,7 +190,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til denne IT Kontrakt`);
-          this.router.navigate([`${AppPath.itContracts}`]);
+          this.router.navigate([`${AppPath.itContractsModule}`]);
         }),
     );
   }
@@ -199,7 +199,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.getITContractError)).subscribe(() => {
         this.notificationService.showError($localize`IT Kontrakt findes ikke`);
-        this.router.navigate([`${AppPath.itContracts}`]);
+        this.router.navigate([`${AppPath.itContractsModule}`]);
       }),
     );
   }
