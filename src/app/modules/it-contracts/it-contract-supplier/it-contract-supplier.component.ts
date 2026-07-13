@@ -47,22 +47,22 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
     data: [
       {
         id: 1,
-        organizationId: 42,
-        organizationUuid: 'a1b2c3d4-e5f6-4a5b-9c8d-7e6f5a4b3c2d',
-        organizationName: 'Copenhagen Municipality',
-        supplierId: 123,
-        isInternalContract: false,
-        supplierUuid: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-        supplierName: 'TechCorp A/S',
-        supplierCvr: '12345678',
-        isSupplierDisabled: false,
-        highestCriticalityUuid: 'faef6c18-3a11-4412-af60-8db3fd1fdb15',
-        highestCriticalityName: 'Kritikalitet 1',
-        highestCriticalityRank: 1,
-        contractsAtHighestCriticalityCsv: 'Contract A, Contract B',
-        contractsAtHighestCriticality: [
-          { uuid: '550e8400-e29b-41d4-a716-111111111111', name: 'SLA Contract 2024' },
-          { uuid: '550e8400-e29b-41d4-a716-222222222222', name: 'Maintenance Agreement' },
+        OrganizationId: 42,
+        OrganizationUuid: 'a1b2c3d4-e5f6-4a5b-9c8d-7e6f5a4b3c2d',
+        OrganizationName: 'Copenhagen Municipality',
+        SupplierId: 123,
+        IsInternalContract: false,
+        SupplierUuid: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
+        SupplierName: 'TechCorp A/S',
+        SupplierCvr: '12345678',
+        IsSupplierDisabled: false,
+        HighestCriticalityUuid: 'faef6c18-3a11-4412-af60-8db3fd1fdb15',
+        HighestCriticalityName: 'Kritikalitet 1',
+        HighestCriticalityRank: 1,
+        ContractsAtHighestCriticalityCsv: 'Contract A, Contract B',
+        ContractsAtHighestCriticality: [
+          { id: 'bbed4548-b391-4343-a9a1-1b152c18252e', value: 'DefaultTestItContract' },
+          { id: '550e8400-e29b-41d4-a716-222222222222', value: 'Contract B' },
         ],
       },
     ],
@@ -74,7 +74,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
-      field: 'isInternalContract',
+      field: 'IsInternalContract',
       title: $localize`Intern/Ekstern`,
       style: 'chip',
       section: this.supplierSectionName,
@@ -87,7 +87,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       persistId: 'isInternal',
     },
     {
-      field: 'supplierName',
+      field: 'SupplierName',
       title: $localize`Leverandørnavn`,
       style: 'primary',
       section: this.supplierSectionName,
@@ -95,15 +95,15 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       persistId: 'supplierName',
     },
     {
-      field: 'supplierCvr',
+      field: 'SupplierCvr',
       title: $localize`CVR`,
       section: this.supplierSectionName,
       hidden: false,
       persistId: 'supplierCvr',
     },
     {
-      field: 'highestCriticalityUuid',
-      dataField: 'highestCriticalityName',
+      field: 'HighestCriticalityUuid',
+      dataField: 'HighestCriticalityName',
       title: $localize`Beregnet kritikalitet`,
       style: 'uuid-to-name',
       section: this.supplierSectionName,
@@ -113,15 +113,15 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       extraData: 'it-contract_criticality-type',
     },
     {
-      field: 'contractsAtHighestCriticality',
+      field: 'ContractsAtHighestCriticality',
       title: $localize`Kontrakter med kritikalitet`,
       style: 'page-link-array',
-      idField: 'uuid',
-      dataField: 'name',
+      dataField: 'ContractsAtHighestCriticality',
+      entityType: 'it-contract',
       section: this.supplierSectionName,
       hidden: false,
-      sortable: false,
-      persistId: 'contracts',
+      width: 320,
+      persistId: 'contractsAtHighestCriticality',
     },
   ];
 
@@ -143,6 +143,8 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       const columns = this.mapColumnOrder(this.defaultGridColumns);
       this.store.dispatch(ITContractSupplierActions.updateGridColumns(columns));
     }
+
+    this.updateUnclickableColumns(this.defaultGridColumns);
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_criticality-type'));
 
