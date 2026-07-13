@@ -38,9 +38,11 @@
           <app-menu title="IT Kontrakter" [path]="AppPath.itContractsModule" i18n-title>
             <app-menu-item [path]="AppPath.itContracts" [parentPath]="AppPath.itContractsModule" i18n
               ><app-table-icon></app-table-icon>IT Kontrakter</app-menu-item>
-              <app-menu-item [path]="AppPath.suppliers" [parentPath]="AppPath.itContractsModule" i18n
+              @if (enableContractSupplier$ | async) {
+                <app-menu-item [path]="AppPath.suppliers" [parentPath]="AppPath.itContractsModule" i18n
                 ><app-table-icon></app-table-icon>Kontraktleverandører</app-menu-item
-              >
+                >
+              }
             </app-menu>
         }
         @if (uiRootConfig.showDataProcessing) {
