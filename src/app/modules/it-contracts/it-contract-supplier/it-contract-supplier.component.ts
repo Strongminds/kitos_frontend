@@ -1,5 +1,6 @@
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { first, of } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
@@ -126,6 +127,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
   constructor(
     store: Store,
     private gridColumnStorageService: GridColumnStorageService,
+    private actions$: Actions,
   ) {
     super(store, 'it-contract-supplier');
   }
@@ -151,10 +153,20 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
         this.store.dispatch(ITContractSupplierActions.getSuppliers(state));
       }),
     );
+
+    this.subscriptions.add(
+      this.actions$
+        .pipe(ofType(ITContractSupplierActions.resetGridConfiguration))
+        .subscribe(() => this.useDefaultColumns()),
+    );
+  }
+
+  private useDefaultColumns(): void {
+    this.store.dispatch(ITContractSupplierActions.updateGridColumns(this.defaultGridColumns));
   }
 
   public stateChange(newState: GridState): void {
-    //this.store.dispatch(ITContractSupplierActions.updateGridState(newState));
+    //this.store.dispatch(ITContractSupplierActions.updateGridState(newState)); //TODO implement
   }
 
   public override onExcelExport = (exportAllColumns: boolean) => {

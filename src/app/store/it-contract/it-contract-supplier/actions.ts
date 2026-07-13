@@ -17,5 +17,6 @@ export const ITContractSupplierActions = createActionGroup({
 
     'Save IT Contract Suppliers Filter': (localStoreKey: string) => ({ localStoreKey }),
     'Apply IT Contract Suppliers Filter': (state: SavedFilterState) => ({ state }),
+    'Reset grid configuration': emptyProps(),
   },
 });
