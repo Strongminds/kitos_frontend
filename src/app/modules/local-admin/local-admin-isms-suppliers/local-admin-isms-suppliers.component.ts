@@ -97,7 +97,7 @@ export class LocalAdminIsmsSuppliersComponent extends BaseComponent implements O
   public removeSupplier($event: ShallowOrganization) {
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
-    dialogInstance.bodyText = $localize`Er du sikker på, at du vil fjerne ISMS leverandøren "${$event.name}"?`;
+    dialogInstance.bodyText = $localize`Er du sikker på, at du vil fjerne den ISMS ansvarlige "${$event.name}"?`;
     dialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(
