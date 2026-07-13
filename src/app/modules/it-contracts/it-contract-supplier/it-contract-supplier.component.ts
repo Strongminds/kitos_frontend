@@ -9,6 +9,7 @@ import {
 } from 'src/app/shared/constants/persistent-state-constants';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { itContractSupplierTypeOptions } from 'src/app/shared/models/it-contract/it-contract-supplier-type';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridActions } from 'src/app/store/grid/actions';
 import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
@@ -51,7 +52,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
         OrganizationUuid: 'a1b2c3d4-e5f6-4a5b-9c8d-7e6f5a4b3c2d',
         OrganizationName: 'Copenhagen Municipality',
         SupplierId: 123,
-        IsInternalContract: false,
+        SupplierType: { name: $localize`Intern`, id: 0 },
         SupplierUuid: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
         SupplierName: 'TechCorp A/S',
         SupplierCvr: '12345678',
@@ -74,17 +75,14 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
 
   public readonly defaultGridColumns: GridColumn[] = [
     {
-      field: 'IsInternalContract',
+      field: 'SupplierType',
       title: $localize`Intern/Ekstern`,
-      style: 'chip',
       section: this.supplierSectionName,
       hidden: false,
-      filter: 'boolean',
-      extraData: [
-        { name: $localize`Intern`, value: true },
-        { name: $localize`Ekstern`, value: false },
-      ],
-      persistId: 'isInternal',
+      extraFilter: 'enum',
+      style: 'enum',
+      extraData: itContractSupplierTypeOptions,
+      persistId: 'supplierType',
     },
     {
       field: 'SupplierName',

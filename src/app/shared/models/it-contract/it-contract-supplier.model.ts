@@ -1,10 +1,12 @@
+import { ITContractSupplierType, mapITContractSupplierType } from './it-contract-supplier-type';
+
 export interface ITContractSupplier {
   id: number;
   OrganizationId: number;
   OrganizationUuid: string;
   OrganizationName: string;
   SupplierId: number;
-  IsInternalContract: boolean;
+  SupplierType: ITContractSupplierType | undefined;
   SupplierUuid: string;
   SupplierName: string;
   SupplierCvr: string;
@@ -26,7 +28,7 @@ export const adaptITContractSupplier = (value: any): ITContractSupplier | undefi
     OrganizationUuid: value.Organization.Uuid,
     OrganizationName: value.Organization.Name,
     SupplierId: value.SupplierId,
-    IsInternalContract: value.IsInternalContract,
+    SupplierType: mapITContractSupplierType(value.SupplierType),
     SupplierUuid: value.SupplierUuid,
     SupplierName: value.SupplierName,
     SupplierCvr: value.SupplierCvr,
