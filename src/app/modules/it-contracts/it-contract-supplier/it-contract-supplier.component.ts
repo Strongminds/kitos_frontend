@@ -144,8 +144,6 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       this.store.dispatch(ITContractSupplierActions.updateGridColumns(columns));
     }
 
-    this.updateUnclickableColumns(this.defaultGridColumns);
-
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_criticality-type'));
 
     this.subscriptions.add(
