@@ -29,7 +29,7 @@ const routes: Routes = [
         component: ItContractSupplierComponent,
       },
       {
-        path: AppPath.uuid,
+        path: AppPath.itContractDetails,
         component: ItContractDetailsComponent,
         children: [
           { path: AppPath.frontpage, component: ItContractFrontpageComponent },
