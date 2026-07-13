@@ -5093,11 +5093,11 @@
       <trans-unit id="9044278666187230003" datatype="html">
         <source>Dette udfald er obligatorisk og kan kun deaktiveres af OS2Kitos sekretariatet</source>
       </trans-unit>
-      <trans-unit id="1642240908531913708" datatype="html">
-        <source>Dette felt styres af en leverandør og kan ikke ændres her – Lokal admin indstilling.</source>
+      <trans-unit id="43984547879855906" datatype="html">
+        <source>Dette felt styres af en ISMS ansvarlig og kan ikke ændres her – Lokal admin indstilling.</source>
       </trans-unit>
-      <trans-unit id="1419758105713365334" datatype="html">
-        <source>Denne handling styres af en leverandør og kan ikke udføres her – Lokal admin indstilling.</source>
+      <trans-unit id="6596801199448210208" datatype="html">
+        <source>Denne handling styres af en ISMS ansvarlig og kan ikke udføres her – Lokal admin indstilling.</source>
       </trans-unit>
       <trans-unit id="8930394023973882411" datatype="html">
         <source>Webadressen er ugyldig. Sørg for, at den begynder med én af disse: &quot;http://&quot;, &quot;https://&quot;, &quot;kmdedhvis:&quot;, &quot;kmdsageraabn:&quot;, eller &quot;sbsyslauncher:&quot;</source>
