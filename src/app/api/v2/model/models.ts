@@ -139,6 +139,8 @@ export * from './journalPeriodDTO';
 export * from './journalPeriodResponseDTO';
 export * from './journalPeriodUpdateRequestDTO';
 export * from './kLEDetailsDTO';
+export * from './kLEDetailsDTOIEnumerableVersionedKLEResponseDTO';
+export * from './kLEDetailsDTOVersionedKLEResponseDTO';
 export * from './kLEStatusResponseDTO';
 export * from './kLEUpdateResponseDTO';
 export * from './kLEUpdateStatusChoice';
