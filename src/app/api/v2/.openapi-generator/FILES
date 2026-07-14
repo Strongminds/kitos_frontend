@@ -277,6 +277,8 @@ model/journalPeriodDTO.ts
 model/journalPeriodResponseDTO.ts
 model/journalPeriodUpdateRequestDTO.ts
 model/kLEDetailsDTO.ts
+model/kLEDetailsDTOIEnumerableVersionedKLEResponseDTO.ts
+model/kLEDetailsDTOVersionedKLEResponseDTO.ts
 model/kLEStatusResponseDTO.ts
 model/kLEUpdateResponseDTO.ts
 model/kLEUpdateStatusChoice.ts
