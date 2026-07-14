@@ -12,7 +12,6 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { itContractSupplierTypeOptions } from 'src/app/shared/models/it-contract/it-contract-supplier-type';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
-import { GridActions } from 'src/app/store/grid/actions';
 import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
 import {
   selectSupplierGridColumns,
@@ -144,11 +143,4 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
     this.store.dispatch(ITContractSupplierActions.updateGridState(newState));
   }
 
-  public override onExcelExport = (exportAllColumns: boolean) => {
-    this.gridState$.pipe(first()).subscribe((gridState) => {
-      this.store.dispatch(
-        GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, 'it-contract-supplier'),
-      );
-    });
-  };
 }

@@ -1,6 +1,7 @@
 import { Action, ActionReducer } from '@ngrx/store';
 import { DataProcessingActions } from '../data-processing/actions';
 import { ITContractActions } from '../it-contract/actions';
+import { ITContractSupplierActions } from '../it-contract/it-contract-supplier/actions';
 import { ITInterfaceActions } from '../it-system-interfaces/actions';
 import { ITSystemUsageActions } from '../it-system-usage/actions';
 import { ITSystemActions } from '../it-system/actions';
@@ -17,6 +18,7 @@ export function exportReadyMetaReducer(reducer: ActionReducer<any>): ActionReduc
       action.type === ITSystemActions.getITSystemsSuccess.type ||
       action.type === DataProcessingActions.getDataProcessingsSuccess.type ||
       action.type === ITContractActions.getITContractsSuccess.type ||
+      action.type === ITContractSupplierActions.getSuppliersSuccess.type ||
       action.type === ITSystemUsageArchiveActions.getITSystemUsageArchivesSuccess.type ||
       action.type === OrganizationUserActions.getOrganizationUsersSuccess.type ||
       action.type === OrganizationActions.getOrganizationsSuccess.type

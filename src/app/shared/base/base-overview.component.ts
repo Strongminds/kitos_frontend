@@ -6,6 +6,7 @@ import { first } from 'rxjs';
 import { selectDataProcessingGridState } from 'src/app/store/data-processing/selectors';
 import { GridActions } from 'src/app/store/grid/actions';
 import { selectContractGridState } from 'src/app/store/it-contract/selectors';
+import { selectSupplierGridState } from 'src/app/store/it-contract/it-contract-supplier/selectors';
 import { selectInterfaceGridState } from 'src/app/store/it-system-interfaces/selectors';
 import { selectGridState } from 'src/app/store/it-system-usage/selectors';
 import { selectSystemGridState } from 'src/app/store/it-system/selectors';
@@ -110,6 +111,8 @@ export class BaseOverviewComponent extends BaseComponent {
       case 'global-admin-organization':
       case 'local-admin-organization':
         return selectOrganizationGridState;
+      case 'it-contract-supplier':
+        return selectSupplierGridState;
       default:
         throw new Error('Invalid entity type');
     }
