@@ -2,7 +2,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first, of } from 'rxjs';
+import { first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import {
   CONTRACT_SUPPLIERS_COLUMNS_ID,
@@ -16,6 +16,7 @@ import { GridActions } from 'src/app/store/grid/actions';
 import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
 import {
   selectSupplierGridColumns,
+  selectSupplierGridData,
   selectSupplierGridState,
   selectSupplierIsLoading,
 } from 'src/app/store/it-contract/it-contract-supplier/selectors';
@@ -43,7 +44,8 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
 })
 export class ItContractSupplierComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSupplierIsLoading);
-  //public readonly gridData$ = this.store.select(selectSupplierGridData);
+  public readonly gridData$ = this.store.select(selectSupplierGridData);
+  /*
   public readonly gridData$ = of({
     total: 1,
     data: [
@@ -69,6 +71,8 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       },
     ],
   });
+
+  */
   public readonly gridState$ = this.store.select(selectSupplierGridState);
   public readonly gridColumns$ = this.store.select(selectSupplierGridColumns);
 
@@ -164,7 +168,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
   }
 
   public stateChange(newState: GridState): void {
-    //this.store.dispatch(ITContractSupplierActions.updateGridState(newState)); //TODO implement
+    this.store.dispatch(ITContractSupplierActions.updateGridState(newState));
   }
 
   public override onExcelExport = (exportAllColumns: boolean) => {
