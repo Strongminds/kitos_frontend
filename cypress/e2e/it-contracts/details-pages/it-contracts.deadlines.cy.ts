@@ -4,7 +4,7 @@ describe('it-contracts.deadlines', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupContractIntercepts();
-    cy.setup(true, 'it-contracts');
+    cy.setup(true, 'it-contracts-module');
   });
 
   it('Duration is reset and disabled when IsContinous is true', () => {
