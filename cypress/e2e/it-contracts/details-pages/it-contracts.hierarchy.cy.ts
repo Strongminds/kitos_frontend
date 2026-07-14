@@ -5,7 +5,7 @@ import { TestRunner } from 'cypress/support/test-runner';
 function setupTest() {
   cy.requireIntercept();
   cy.setupContractIntercepts();
-  cy.setup(true, 'it-contracts');
+  cy.setup(true, 'it-contracts-module');
 }
 
 describe('it-contracts.hierarchy', () => {
