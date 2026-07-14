@@ -10,6 +10,7 @@ import { adaptITContractSupplier } from 'src/app/shared/models/it-contract/it-co
 import { OData } from 'src/app/shared/models/odata.model';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { GridDataCacheService } from 'src/app/shared/services/grid-data-cache.service';
+import { selectOrganizationUuid } from '../../user-store/selectors';
 import { ITContractSupplierActions } from './actions';
 import { selectSupplierPreviousGridState } from './selectors';
 
@@ -26,8 +27,11 @@ export class ITContractSupplierEffects {
   getSuppliers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractSupplierActions.getSuppliers),
-      concatLatestFrom(() => [this.store.select(selectSupplierPreviousGridState)]),
-      switchMap(([{ gridState }, previousGridState]) => {
+      concatLatestFrom(() => [
+        this.store.select(selectSupplierPreviousGridState),
+        this.store.select(selectOrganizationUuid),
+      ]),
+      switchMap(([{ gridState }, previousGridState, organizationUuid]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
         const cachedRange = this.gridDataCacheService.get(gridState);
@@ -39,7 +43,7 @@ export class ITContractSupplierEffects {
 
         return this.httpClient
           .get<OData>(
-            `/odata//ItContractSupplierOverviewReadModels?$expand=Organization($select=Name,Uuid)&${cacheableOdataString}&$count=true`,
+            `/odata//ItContractSupplierOverviewReadModels?organizationUuid=${organizationUuid}&$expand=Organization($select=Name,Uuid)&${cacheableOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
