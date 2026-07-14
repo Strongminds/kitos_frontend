@@ -40,10 +40,10 @@ export class ITContractSupplierEffects {
         }
 
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState);
-
+        const fixedOdataString = applyQueryFixes(cacheableOdataString);
         return this.httpClient
           .get<OData>(
-            `/odata//ItContractSupplierOverviewReadModels?organizationUuid=${organizationUuid}&$expand=Organization($select=Name,Uuid)&${cacheableOdataString}&$count=true`,
+            `/odata//ItContractSupplierOverviewReadModels?organizationUuid=${organizationUuid}&$expand=Organization($select=Name,Uuid)&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -76,4 +76,8 @@ export class ITContractSupplierEffects {
       }),
     );
   });
+}
+
+function applyQueryFixes(odataString: string) {
+  return odataString.replace(/HighestCriticalityUuid eq '([\w-]+)'/, 'HighestCriticalityUuid eq $1');
 }
