@@ -44,7 +44,7 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
 export class ItContractSupplierComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSupplierIsLoading);
   public readonly gridData$ = this.store.select(selectSupplierGridData);
-  
+
   public readonly gridState$ = this.store.select(selectSupplierGridState);
   public readonly gridColumns$ = this.store.select(selectSupplierGridColumns);
 
@@ -142,5 +142,4 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
   public stateChange(newState: GridState): void {
     this.store.dispatch(ITContractSupplierActions.updateGridState(newState));
   }
-
 }

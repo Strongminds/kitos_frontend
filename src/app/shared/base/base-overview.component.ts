@@ -5,8 +5,8 @@ import { CellClickEvent } from '@progress/kendo-angular-grid';
 import { first } from 'rxjs';
 import { selectDataProcessingGridState } from 'src/app/store/data-processing/selectors';
 import { GridActions } from 'src/app/store/grid/actions';
-import { selectContractGridState } from 'src/app/store/it-contract/selectors';
 import { selectSupplierGridState } from 'src/app/store/it-contract/it-contract-supplier/selectors';
+import { selectContractGridState } from 'src/app/store/it-contract/selectors';
 import { selectInterfaceGridState } from 'src/app/store/it-system-interfaces/selectors';
 import { selectGridState } from 'src/app/store/it-system-usage/selectors';
 import { selectSystemGridState } from 'src/app/store/it-system/selectors';
@@ -28,7 +28,7 @@ export class BaseOverviewComponent extends BaseComponent {
 
   constructor(
     protected store: Store,
-    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes
+    @Inject('RegistrationEntityTypes') protected entityType: RegistrationEntityTypes,
   ) {
     super();
     this.store.dispatch(UserActions.getUserGridPermissions());
@@ -69,7 +69,7 @@ export class BaseOverviewComponent extends BaseComponent {
       .pipe(first())
       .subscribe((gridState) => {
         this.store.dispatch(
-          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType)
+          GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, this.entityType),
         );
       });
   };
@@ -78,7 +78,7 @@ export class BaseOverviewComponent extends BaseComponent {
     defaultColumnsAndRoles: GridColumn[],
     localStorageColumns: GridColumn[] | null,
     updateColumnsAction: (columns: GridColumn[]) => Action,
-    resetToOrgConfigAction: (disablePopupNotification: boolean) => Action
+    resetToOrgConfigAction: (disablePopupNotification: boolean) => Action,
   ) {
     const columnsToUse = localStorageColumns ?? defaultColumnsAndRoles;
     this.store.dispatch(updateColumnsAction(columnsToUse));
