@@ -88,7 +88,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   private readonly systemSectionName = USAGE_SECTION_NAME;
-
   private readonly activeInactiveData = [
     {
       name: $localize`Aktivt`,
