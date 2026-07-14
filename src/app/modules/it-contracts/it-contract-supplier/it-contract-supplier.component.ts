@@ -152,7 +152,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
 
     this.subscriptions.add(
       this.gridState$.pipe(first()).subscribe((state) => {
-        this.store.dispatch(ITContractSupplierActions.getSuppliers(state));
+        this.stateChange(state);
       }),
     );
 

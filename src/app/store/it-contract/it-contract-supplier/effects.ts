@@ -56,6 +56,13 @@ export class ITContractSupplierEffects {
     );
   });
 
+  updateGridState$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractSupplierActions.updateGridState),
+      map(({ gridState }) => ITContractSupplierActions.getSuppliers(gridState)),
+    );
+  });
+
   updateGridColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractSupplierActions.updateGridColumns),
