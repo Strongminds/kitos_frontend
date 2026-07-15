@@ -242,7 +242,7 @@
           [includeItemDescription]="true"
           itemDescriptionField="cvr"
           (filterChange)="searchOrganizations($event)"
-          (valueChange)="patchFrontPage({ supplier: { organizationUuid: $event } })"
+          (valueChange)="patchSupplierOrganization($event)"
         ></app-connected-dropdown>
       }
       <app-slide-toggle

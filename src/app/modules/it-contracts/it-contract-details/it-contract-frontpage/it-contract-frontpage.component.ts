@@ -49,6 +49,7 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CheckboxComponent } from '../../../../shared/components/checkbox/checkbox.component';
@@ -93,6 +94,10 @@ import { ItContractFrontpageComponentStore } from './it-contract-frontpage.compo
   ],
 })
 export class ItContractFrontpageComponent extends BaseComponent implements OnInit {
+  private isSyncingSupplierOrganization = false;
+  private currentOrganizationUuid?: string;
+  private currentOrganization?: APIShallowOrganizationResponseDTO;
+
   public readonly contractTemplates$ = this.store
     .select(selectRegularOptionTypes('it-contract_contract-template-type'))
     .pipe(filterNullish());
@@ -283,8 +288,34 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_procurement-strategy-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_purchase-form-type'));
 
+    this.setupSupplierOrganizationRules();
     this.setupContactPersonIsNotSignerRules();
     this.subscribeToItContract();
+  }
+
+  private setupSupplierOrganizationRules() {
+    this.subscriptions.add(
+      this.organizations$
+        .pipe(combineLatestWith(this.store.select(selectOrganizationUuid).pipe(filterNullish())))
+        .subscribe(([organizations, organizationUuid]) => {
+          this.currentOrganizationUuid = organizationUuid;
+          this.currentOrganization = organizations.find((organization) => organization.uuid === organizationUuid);
+
+          if (this.supplierFormGroup.controls.isInternal.value) {
+            this.syncSupplierOrganizationToCurrentOrganization(true);
+          }
+        }),
+    );
+
+    this.subscriptions.add(
+      this.supplierFormGroup.controls.isInternal.valueChanges.subscribe((isInternal) => {
+        if (this.isSyncingSupplierOrganization) {
+          return;
+        }
+
+        this.syncSupplierOrganizationToCurrentOrganization(isInternal === true);
+      }),
+    );
   }
 
   private setupContactPersonIsNotSignerRules() {
@@ -301,6 +332,33 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         }
       }),
     );
+  }
+
+  public patchSupplierOrganization(valueUuid: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+      return;
+    }
+
+    const isCurrentOrganization = valueUuid !== undefined && valueUuid === this.currentOrganizationUuid;
+    const selectedOrganization = isCurrentOrganization ? this.currentOrganization : undefined;
+
+    this.store.dispatch(
+      ITContractActions.patchITContract({
+        supplier: {
+          organizationUuid: valueUuid,
+          isInternal: isCurrentOrganization,
+        },
+      }),
+    );
+
+    this.supplierFormGroup.controls.isInternal.setValue(isCurrentOrganization, { emitEvent: false });
+
+    if (selectedOrganization && isCurrentOrganization) {
+      this.supplierFormGroup.controls.supplierOrganization.setValue(selectedOrganization, { emitEvent: false });
+    }
+
+    this.syncSupplierOrganizationToCurrentOrganization(isCurrentOrganization);
   }
 
   patchSignedBy(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
@@ -464,6 +522,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   }
 
   private patchSupplierFormGroup(contract: APIItContractResponseDTO) {
+    this.isSyncingSupplierOrganization = true;
+
     this.supplierFormGroup.patchValue({
       supplierOrganization: contract.supplier.organization,
       supplierSignedBy: contract.supplier.signedBy,
@@ -475,11 +535,37 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       contactPhoneNumber: contract.supplier.contactPhoneNumber,
       contactEmail: contract.supplier.contactEmail,
     });
+
+    this.syncSupplierOrganizationToCurrentOrganization(contract.supplier.isInternal === true);
+    this.isSyncingSupplierOrganization = false;
   }
 
   private getSignerIsNotContact(value: boolean | undefined): boolean {
     if (value === undefined) return true;
     return !value;
+  }
+
+  private syncSupplierOrganizationToCurrentOrganization(isInternal: boolean) {
+    const supplierOrganizationControl = this.supplierFormGroup.controls.supplierOrganization;
+
+    if (isInternal) {
+      if (this.currentOrganization && supplierOrganizationControl.value?.uuid !== this.currentOrganization.uuid) {
+        supplierOrganizationControl.setValue(this.currentOrganization, { emitEvent: false });
+        this.store.dispatch(
+          ITContractActions.patchITContract({
+            supplier: {
+              organizationUuid: this.currentOrganizationUuid,
+              isInternal: true,
+            },
+          }),
+        );
+      }
+
+      supplierOrganizationControl.disable({ emitEvent: false });
+      return;
+    }
+
+    supplierOrganizationControl.enable({ emitEvent: false });
   }
 
   private patchProcurementFormGroup(contract: APIItContractResponseDTO) {
@@ -514,6 +600,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     if (this.supplierFormGroup.controls.signerIsNotContact.value !== true) {
       this.supplierFormGroup.controls.contactPerson.disable();
     }
+
+    this.syncSupplierOrganizationToCurrentOrganization(this.supplierFormGroup.controls.isInternal.value === true);
   }
 
   private enableParentContractForm() {
