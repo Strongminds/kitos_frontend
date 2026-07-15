@@ -17,7 +17,7 @@ const routes: Routes = [
         component: NotificationDetailsItSystemUsagesComponent,
       },
       {
-        path: AppPath.itContractsModule,
+        path: AppPath.itContracts,
         component: NotificationDetailsItContractsComponent,
       },
       {
