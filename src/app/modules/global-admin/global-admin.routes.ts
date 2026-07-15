@@ -43,7 +43,7 @@ const routes: Routes = [
         component: GlobalAdminItSystemComponent,
       },
       {
-        path: AppPath.itContractsModule,
+        path: AppPath.itContracts,
         component: GlobalAdminItContractComponent,
       },
       {

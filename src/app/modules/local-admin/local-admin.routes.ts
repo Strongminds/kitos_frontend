@@ -37,7 +37,7 @@ const routes: Routes = [
         component: LocalAdminDprComponent,
       },
       {
-        path: AppPath.itContractsModule,
+        path: AppPath.itContracts,
         component: LocalAdminItContractComponent,
       },
       { path: AppPath.import, component: LocalAdminImportComponent },

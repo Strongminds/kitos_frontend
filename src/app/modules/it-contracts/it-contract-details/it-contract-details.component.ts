@@ -63,7 +63,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     map(([contractName, contractUuid]): BreadCrumb[] => [
       {
         text: $localize`IT Kontrakt`,
-        routerLink: `${AppPath.itContractsModule}`,
+        routerLink: `${AppPath.itContracts}`,
       },
       {
         text: contractName,
@@ -159,7 +159,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.deleteITContractSuccess)).subscribe(() => {
         this.dialog.closeAll();
-        this.router.navigate([`${AppPath.itContractsModule}`]);
+        this.router.navigate([`${AppPath.itContracts}`]);
       }),
     );
   }
@@ -190,7 +190,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
           this.notificationService.showError($localize`Du har ikke læseadgang til denne IT Kontrakt`);
-          this.router.navigate([`${AppPath.itContractsModule}`]);
+          this.router.navigate([`${AppPath.itContracts}`]);
         }),
     );
   }
@@ -199,7 +199,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     this.subscriptions.add(
       this.actions$.pipe(ofType(ITContractActions.getITContractError)).subscribe(() => {
         this.notificationService.showError($localize`IT Kontrakt findes ikke`);
-        this.router.navigate([`${AppPath.itContractsModule}`]);
+        this.router.navigate([`${AppPath.itContracts}`]);
       }),
     );
   }

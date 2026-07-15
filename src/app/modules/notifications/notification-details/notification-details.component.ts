@@ -28,7 +28,7 @@ export class NotificationDetailsComponent {
     {
       label: $localize`IT Kontrakt`,
       iconType: 'clipboard',
-      route: AppPath.itContractsModule,
+      route: AppPath.itContracts,
       enabled$: this.store.select(selectShowItContractModule),
     },
     {
