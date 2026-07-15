@@ -187,7 +187,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     supplierSigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     isInternal: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     supplierContactPersonIsSameAsSigner: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
-    useSignedByForContact: new FormControl<boolean>({ value: true, disabled: true }),
+    signerIsNotContact: new FormControl<boolean>({ value: true, disabled: true }),
     contactPerson: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     contactPhoneNumber: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     contactEmail: new FormControl<string | undefined>({ value: undefined, disabled: true }),
@@ -291,6 +291,15 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
       this.store.dispatch(ITContractActions.patchITContract(frontpage));
+    }
+  }
+
+  public patchUseSignedByForContact(value: boolean | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      const reversedValue = this.getSignerIsNotContact(value);
+      this.store.dispatch(ITContractActions.patchITContract({ supplier: { useSignedByForContact: reversedValue } }));
     }
   }
 
@@ -414,11 +423,16 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       supplierSignedAt: optionalNewDate(contract.supplier.signedAt ?? undefined),
       supplierSigned: contract.supplier.signed,
       isInternal: contract.supplier.isInternal,
-      useSignedByForContact: contract.supplier.useSignedByForContact,
+      signerIsNotContact: this.getSignerIsNotContact(contract.supplier.useSignedByForContact),
       contactPerson: contract.supplier.contactPerson,
       contactPhoneNumber: contract.supplier.contactPhoneNumber,
       contactEmail: contract.supplier.contactEmail,
     });
+  }
+
+  private getSignerIsNotContact(value: boolean | undefined): boolean {
+    if (value === undefined) return true;
+    return !value;
   }
 
   private patchProcurementFormGroup(contract: APIItContractResponseDTO) {

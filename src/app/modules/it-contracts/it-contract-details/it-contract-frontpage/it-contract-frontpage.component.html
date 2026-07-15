@@ -251,6 +251,7 @@
         labelPosition="after"
         [formGroup]="supplierFormGroup"
         formName="isInternal"
+        class="input-two-thirds-column-width"
         (valueChange)="patchFrontPage({ supplier: { isInternal: $event } })"
       ></app-slide-toggle>
       @if (contractExternalSignerEnabled$ | async) {
@@ -269,16 +270,17 @@
           data-cy="contract-supplier-date"
           [formGroup]="supplierFormGroup"
           formName="supplierSignedAt"
+          class="input-two-thirds-column-width"
           (valueChange)="patchFrontPage({ supplier: { signedAt: $event?.toDateString() } })"
         ></app-datepicker>
 
         <app-checkbox
-          text="Brug underskriver som kontaktperson"
+          text="Underskriver er ikke kontaktperson"
           i18n-text
           labelPosition="after"
           [formGroup]="supplierFormGroup"
           formName="useSignedByForContact"
-          (valueChange)="patchFrontPage({ supplier: { useSignedByForContact: $event } })"
+          (valueChange)="patchUseSignedByForContact( $event)"
         ></app-checkbox>
 
         <app-textbox
@@ -314,15 +316,6 @@
           formName="supplierSigned"
           (valueChange)="patchFrontPage({ supplier: { signed: $event } })"
         ></app-checkbox>
-
-        <app-checkbox
-          text="Kontraktunderskriver er kontaktperson"
-          i18n-text
-          [formGroup]="supplierFormGroup"
-          formName="supplierContactPersonIsSameAsSigner"
-          labelPosition="after"
-        >
-        </app-checkbox>
       }
     </app-form-grid>
   </app-card>
