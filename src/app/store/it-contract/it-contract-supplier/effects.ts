@@ -28,10 +28,10 @@ export class ITContractSupplierEffects {
     return this.actions$.pipe(
       ofType(ITContractSupplierActions.getSuppliers),
       concatLatestFrom(() => [
-        this.store.select(selectOrganizationUuid),
         this.store.select(selectSupplierPreviousGridState),
+        this.store.select(selectOrganizationUuid),
       ]),
-      switchMap(([{ gridState }, organizationUuid, previousGridState]) => {
+      switchMap(([{ gridState }, previousGridState, organizationUuid]) => {
         this.gridDataCacheService.tryResetOnGridStateChange(gridState, previousGridState);
 
         const cachedRange = this.gridDataCacheService.get(gridState);
@@ -40,10 +40,10 @@ export class ITContractSupplierEffects {
         }
 
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(gridState);
-
+        const fixedOdataString = applyQueryFixes(cacheableOdataString);
         return this.httpClient
           .get<OData>(
-            `/odata/Organizations(${organizationUuid})/ItContractSupplierOverviewReadModels?$expand=Organization($select=Name,Uuid)&${cacheableOdataString}&$count=true`,
+            `/odata//ItContractSupplierOverviewReadModels?organizationUuid=${organizationUuid}&$expand=Organization($select=Name,Uuid),ContractsAtHighestCriticality($select=ContractUuid,ContractName)&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -60,6 +60,13 @@ export class ITContractSupplierEffects {
     );
   });
 
+  updateGridState$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITContractSupplierActions.updateGridState),
+      map(({ gridState }) => ITContractSupplierActions.getSuppliers(gridState)),
+    );
+  });
+
   updateGridColumns$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(ITContractSupplierActions.updateGridColumns),
@@ -69,4 +76,8 @@ export class ITContractSupplierEffects {
       }),
     );
   });
+}
+
+function applyQueryFixes(odataString: string) {
+  return odataString.replace(/HighestCriticalityUuid eq '([\w-]+)'/, 'HighestCriticalityUuid eq $1');
 }

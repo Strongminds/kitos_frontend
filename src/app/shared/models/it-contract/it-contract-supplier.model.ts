@@ -38,9 +38,9 @@ export const adaptITContractSupplier = (value: any): ITContractSupplier | undefi
     HighestCriticalityRank: value.HighestCriticalityRank,
     ContractsAtHighestCriticalityCsv: value.ContractsAtHighestCriticalityCsv,
     ContractsAtHighestCriticality: (value.ContractsAtHighestCriticality || []).map(
-      (contract: { Uuid: string; Name: string }) => ({
-        id: contract.Uuid,
-        value: contract.Name,
+      (relation: { ContractUuid: string; ContractName: string }) => ({
+        id: relation.ContractUuid,
+        value: relation.ContractName,
       }),
     ),
   };
