@@ -8057,6 +8057,46 @@
         <source>Tilsynsmulighed</source>
         <target state="new">Tilsynsmulighed</target>
       </trans-unit>
+      <trans-unit id="2104255059383970781" datatype="html">
+        <source>Kontraktleverandøroverblik</source>
+        <target state="new">Kontraktleverandøroverblik</target>
+      </trans-unit>
+      <trans-unit id="4664622852831567042" datatype="html">
+        <source>Intern</source>
+        <target state="new">Intern</target>
+      </trans-unit>
+      <trans-unit id="6121630261857070709" datatype="html">
+        <source>Intern/Ekstern</source>
+        <target state="new">Intern/Ekstern</target>
+      </trans-unit>
+      <trans-unit id="7943900294399424872" datatype="html">
+        <source>Leverandørnavn</source>
+        <target state="new">Leverandørnavn</target>
+      </trans-unit>
+      <trans-unit id="8848231426257184109" datatype="html">
+        <source>Beregnet kritikalitet</source>
+        <target state="new">Beregnet kritikalitet</target>
+      </trans-unit>
+      <trans-unit id="1887192367982958175" datatype="html">
+        <source>Kontrakter med kritikalitet</source>
+        <target state="new">Kontrakter med kritikalitet</target>
+      </trans-unit>
+      <trans-unit id="2216578951027165690" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Kontrakter</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Kontrakter</target>
+      </trans-unit>
+      <trans-unit id="4489780584984050676" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Kontraktleverandører</source>
+        <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Kontraktleverandører</target>
+      </trans-unit>
+      <trans-unit id="6738836393343834673" datatype="html">
+        <source>IT Kontraktleverandører</source>
+        <target state="new">IT Kontraktleverandører</target>
+      </trans-unit>
+      <trans-unit id="6659779351647970674" datatype="html">
+        <source>Ekstern</source>
+        <target state="new">Ekstern</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

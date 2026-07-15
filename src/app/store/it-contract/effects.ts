@@ -20,8 +20,10 @@ import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-c
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { contractsGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
-import { replaceQueryByMultiplePropertyContains } from 'src/app/shared/helpers/odata-query.helpers';
-import { addSecondaryContainsField } from 'src/app/shared/helpers/odata-query.helpers';
+import {
+  addSecondaryContainsField,
+  replaceQueryByMultiplePropertyContains,
+} from 'src/app/shared/helpers/odata-query.helpers';
 import { adaptITContract } from 'src/app/shared/models/it-contract/it-contract.model';
 import { PaymentTypes } from 'src/app/shared/models/it-contract/payment-types.model';
 import { OData } from 'src/app/shared/models/odata.model';
@@ -146,7 +148,7 @@ export class ITContractEffects {
         if (hasValidCache(cache.cacheTime)) {
           return of(ITContractActions.getItContractOverviewRolesSuccess(cache.value));
         }
-        return this.apiRoleService.getSingleGridLocalItContractRolesV2GetByOrganizationUuid({ organizationUuid }).pipe(
+        return this.apiRoleService.getManyGridLocalItContractRolesV2GetByOrganizationUuid({ organizationUuid }).pipe(
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           map((contractRoles: any) => ITContractActions.getItContractOverviewRolesSuccess(contractRoles)),
           catchError(() => of(ITContractActions.getItContractOverviewRolesError())),
@@ -702,7 +704,7 @@ export class ITContractEffects {
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       switchMap(([_, organizationUuid]) => {
         return this.apiInternalItContractService
-          .getSingleItContractInternalV2GetAppliedProcurementPlans({ organizationUuid })
+          .getManyItContractInternalV2GetAppliedProcurementPlans({ organizationUuid })
           .pipe(
             map((response) => ITContractActions.getAppliedProcurementPlansSuccess(response)),
             catchError(() => of(ITContractActions.getAppliedProcurementPlansError())),

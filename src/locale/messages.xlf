@@ -6161,6 +6161,36 @@
       <trans-unit id="6695689715467154620" datatype="html">
         <source>Tilsynsmulighed</source>
       </trans-unit>
+      <trans-unit id="1887192367982958175" datatype="html">
+        <source>Kontrakter med kritikalitet</source>
+      </trans-unit>
+      <trans-unit id="2104255059383970781" datatype="html">
+        <source>Kontraktleverandøroverblik</source>
+      </trans-unit>
+      <trans-unit id="2216578951027165690" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Kontrakter</source>
+      </trans-unit>
+      <trans-unit id="4489780584984050676" datatype="html">
+        <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>Kontraktleverandører</source>
+      </trans-unit>
+      <trans-unit id="4664622852831567042" datatype="html">
+        <source>Intern</source>
+      </trans-unit>
+      <trans-unit id="6121630261857070709" datatype="html">
+        <source>Intern/Ekstern</source>
+      </trans-unit>
+      <trans-unit id="6659779351647970674" datatype="html">
+        <source>Ekstern</source>
+      </trans-unit>
+      <trans-unit id="6738836393343834673" datatype="html">
+        <source>IT Kontraktleverandører</source>
+      </trans-unit>
+      <trans-unit id="7943900294399424872" datatype="html">
+        <source>Leverandørnavn</source>
+      </trans-unit>
+      <trans-unit id="8848231426257184109" datatype="html">
+        <source>Beregnet kritikalitet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
