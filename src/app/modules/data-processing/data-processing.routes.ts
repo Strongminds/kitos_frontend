@@ -31,7 +31,7 @@ const routes: Routes = [
           { path: AppPath.notifications, component: DataProcessingNotificationsComponent },
           { path: AppPath.itSystems, component: DataProcessingItSystemsComponent },
           { path: AppPath.externalReferences, component: DataProcessingReferencesComponent },
-          { path: AppPath.itContractsModule, component: DataProcessingItContractsComponent },
+          { path: AppPath.itContracts, component: DataProcessingItContractsComponent },
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },

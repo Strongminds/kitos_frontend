@@ -43,7 +43,7 @@ export class ITContractSupplierEffects {
         const fixedOdataString = applyQueryFixes(cacheableOdataString);
         return this.httpClient
           .get<OData>(
-            `/odata//ItContractSupplierOverviewReadModels?organizationUuid=${organizationUuid}&$expand=Organization($select=Name,Uuid),ContractsAtHighestCriticality($select=ContractUuid,ContractName)&${fixedOdataString}&$count=true`,
+            `/odata/ItContractSupplierOverviewReadModels?organizationUuid=${organizationUuid}&$expand=Organization($select=Name,Uuid),ContractsAtHighestCriticality($select=ContractUuid,ContractName)&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {
@@ -79,5 +79,10 @@ export class ITContractSupplierEffects {
 }
 
 function applyQueryFixes(odataString: string) {
-  return odataString.replace(/HighestCriticalityUuid eq '([\w-]+)'/, 'HighestCriticalityUuid eq $1');
+  return odataString
+    .replace(/HighestCriticalityUuid eq '([\w-]+)'/, 'HighestCriticalityUuid eq $1')
+    .replace(
+      /contains\(ContractsAtHighestCriticality,\s*([^)]*)\)/g,
+      'ContractsAtHighestCriticality/any(c: contains(c/ContractName,$1))',
+    );
 }

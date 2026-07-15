@@ -96,7 +96,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     {
       label: $localize`IT Kontrakter`,
       iconType: 'folder-important',
-      route: AppPath.itContractsModule,
+      route: AppPath.itContracts,
       enabled$: combineAND([this.itContractsModuleEnabled$, this.itContractsEnabled$]),
     },
     {
