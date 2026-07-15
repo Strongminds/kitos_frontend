@@ -116,7 +116,6 @@ export * from './isDataProcessingAgreementRequiredChoice';
 export * from './itContractHierarchyNodeResponseDTO';
 export * from './itContractPermissionsResponseDTO';
 export * from './itContractResponseDTO';
-export * from './itContractSupplierTypeChoice';
 export * from './itContractValidationErrorChoice';
 export * from './itInterfaceDataRequestDTO';
 export * from './itInterfaceDataResponseDTO';

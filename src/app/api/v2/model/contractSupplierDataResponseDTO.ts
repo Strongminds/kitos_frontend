@@ -9,13 +9,14 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
-import { APIItContractSupplierTypeChoice } from './itContractSupplierTypeChoice';
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
 export interface APIContractSupplierDataResponseDTO { 
     organization?: APIShallowOrganizationResponseDTO;
-    supplierType?: APIItContractSupplierTypeChoice;
+    organizationUnit?: APIIdentityNamePairResponseDTO;
+    isInternal?: boolean | null;
     /**
      * Determines if the contract has been signed by the supplier
      */
@@ -28,5 +29,9 @@ export interface APIContractSupplierDataResponseDTO {
      * Which date was the contract signed by the supplier
      */
     signedAt?: string | null;
+    contactPerson?: string | null;
+    useSignedByForContact?: boolean;
+    contactPhoneNumber?: string | null;
+    contactEmail?: string | null;
 }
 
