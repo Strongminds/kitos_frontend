@@ -6197,6 +6197,9 @@
       <trans-unit id="3251340841049392439" datatype="html">
         <source>Underskriver er ikke kontaktperson</source>
       </trans-unit>
+      <trans-unit id="6503850834342268312" datatype="html">
+        <source>Leverandørens enhed</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

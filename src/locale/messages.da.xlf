@@ -8105,6 +8105,10 @@
         <source>Underskriver er ikke kontaktperson</source>
         <target state="new">Underskriver er ikke kontaktperson</target>
       </trans-unit>
+      <trans-unit id="6503850834342268312" datatype="html">
+        <source>Leverandørens enhed</source>
+        <target state="new">Leverandørens enhed</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
