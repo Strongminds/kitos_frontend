@@ -59,9 +59,9 @@ import { OptionTypeDropdownComponent } from '../../../../shared/components/dropd
 import { FormGridComponent } from '../../../../shared/components/form-grid/form-grid.component';
 import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-select/org-unit-select.component';
 import { RadioButtonsComponent } from '../../../../shared/components/radio-buttons/radio-buttons.component';
+import { SlideToggleComponent } from '../../../../shared/components/slide-toggle/slide-toggle.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
-import { SlideToggleComponent } from '../../../../shared/components/slide-toggle/slide-toggle.component';
 import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
