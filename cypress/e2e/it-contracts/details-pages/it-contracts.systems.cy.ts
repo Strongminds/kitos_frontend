@@ -17,7 +17,7 @@ function setupTest() {
   cy.intercept('/api/v2/internal/it-system-usages/relations/*', {
     fixture: './it-contracts/it-contract-system-relations.json',
   });
-  cy.setup(true, 'it-contracts-module');
+  cy.setup(true, 'it-contracts');
 }
 
 describe('it-contracts.systems', () => {
