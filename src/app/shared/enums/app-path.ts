@@ -15,11 +15,12 @@ export enum AppPath {
 
   frontpage = 'frontpage',
   passwordReset = 'reset-password',
+
   itContracts = 'it-contracts',
+  contracts = 'contracts',
+  contractDetails = 'contracts/:uuid',
   suppliers = 'suppliers',
 
-  itContractsModule = 'it-contracts-module',
-  itContractDetails = 'it-contracts/:uuid',
   itInterfaces = 'it-interfaces',
   itInterfacesDetails = 'it-interfaces/:uuid',
   hierarchy = 'hierarchy',

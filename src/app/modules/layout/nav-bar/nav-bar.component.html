@@ -35,11 +35,11 @@
           </app-menu>
         }
         @if (uiRootConfig.showItContractModule) {
-          <app-menu title="IT Kontrakter" [path]="AppPath.itContractsModule" i18n-title>
-            <app-menu-item [path]="AppPath.itContracts" [parentPath]="AppPath.itContractsModule" i18n
+          <app-menu title="IT Kontrakter" [path]="AppPath.itContracts" i18n-title>
+            <app-menu-item [path]="AppPath.contracts" [parentPath]="AppPath.itContracts" i18n
               ><app-table-icon></app-table-icon>IT Kontrakter</app-menu-item>
               @if (enableContractSupplier$ | async) {
-                <app-menu-item [path]="AppPath.suppliers" [parentPath]="AppPath.itContractsModule" i18n
+                <app-menu-item [path]="AppPath.suppliers" [parentPath]="AppPath.itContracts" i18n
                 ><app-table-icon></app-table-icon>Kontraktleverandører</app-menu-item
                 >
               }

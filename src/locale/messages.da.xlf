@@ -8061,38 +8061,6 @@
         <source>Ekstern</source>
         <target state="new">Ekstern</target>
       </trans-unit>
-      <trans-unit id="1946395520925013052" datatype="html">
-        <source>ISMS ansvarlig</source>
-        <target state="new">ISMS ansvarlig</target>
-      </trans-unit>
-      <trans-unit id="8072818207840328941" datatype="html">
-        <source>ISMS ansvarlige</source>
-        <target state="new">ISMS ansvarlige</target>
-      </trans-unit>
-      <trans-unit id="3029670321689161185" datatype="html">
-        <source>Den ISMS ansvarlige blev tilføjet</source>
-        <target state="new">Den ISMS ansvarlige blev tilføjet</target>
-      </trans-unit>
-      <trans-unit id="6344394057577656318" datatype="html">
-        <source>Kunne ikke tilføje den ISMS ansvarlige</source>
-        <target state="new">Kunne ikke tilføje den ISMS ansvarlige</target>
-      </trans-unit>
-      <trans-unit id="2007804322541437177" datatype="html">
-        <source>Den ISMS ansvarlige blev fjernet</source>
-        <target state="new">Den ISMS ansvarlige blev fjernet</target>
-      </trans-unit>
-      <trans-unit id="8990563193595515538" datatype="html">
-        <source>Kunne ikke fjerne den ISMS ansvarlige</source>
-        <target state="new">Kunne ikke fjerne den ISMS ansvarlige</target>
-      </trans-unit>
-      <trans-unit id="8233870924322599793" datatype="html">
-        <source>Kunne ikke hente ISMS ansvarlige</source>
-        <target state="new">Kunne ikke hente ISMS ansvarlige</target>
-      </trans-unit>
-      <trans-unit id="900101206118530852" datatype="html">
-        <source>Kunne ikke hente tilgængelige ISMS ansvarlige</source>
-        <target state="new">Kunne ikke hente tilgængelige ISMS ansvarlige</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>
