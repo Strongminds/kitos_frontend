@@ -294,7 +294,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
     this.subscriptions.add(
       signerIsNotContactControl.valueChanges.subscribe((signerIsNotContact) => {
-        console.log('signerIsNotContact', signerIsNotContact);
         if (signerIsNotContact) {
           contactPersonControl.enable();
         } else {
@@ -302,8 +301,23 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
         }
       }),
     );
+  }
 
-    //todo on valuechanges of signer, check if signerIsNotContact, and use that to branch on setting the val of contact and dispatching frontpageUpdate
+  patchSignedBy(value: string | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      var dto: APIUpdateContractRequestDTO = { supplier: { signedBy: value } };
+
+      const signerIsNotContact = this.supplierFormGroup.controls.signerIsNotContact.value;
+      const contactPersonControl = this.supplierFormGroup.controls.contactPerson;
+      if (!signerIsNotContact && value !== contactPersonControl.value) {
+        contactPersonControl.setValue(value);
+        dto = { supplier: { ...dto.supplier, contactPerson: value } };
+      }
+
+      this.store.dispatch(ITContractActions.patchITContract(dto));
+    }
   }
 
   public patchFrontPage(frontpage: APIUpdateContractRequestDTO, valueChange?: ValidatedValueChange<unknown>) {

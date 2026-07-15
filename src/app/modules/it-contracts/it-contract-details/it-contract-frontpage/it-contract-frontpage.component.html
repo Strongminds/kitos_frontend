@@ -261,7 +261,7 @@
           data-cy="contract-supplier-signer"
           [formGroup]="supplierFormGroup"
           formName="supplierSignedBy"
-          (valueChange)="patchFrontPage({ supplier: { signedBy: $event } })"
+          (valueChange)="patchSignedBy($event)"
           >
         </app-textbox>
         <app-datepicker
