@@ -1,13 +1,17 @@
+import { APIItContractSupplierTypeChoice } from 'src/app/api/v2/model/models';
+
 export interface ITContractSupplierType {
   name: string;
-  id: number; //TODO use a real backend enum
+  value: APIItContractSupplierTypeChoice;
 }
 
 export const itContractSupplierTypeOptions: ITContractSupplierType[] = [
-  { name: $localize`Intern`, id: 0 },
-  { name: $localize`Ekstern`, id: 1 },
+  { name: $localize`Intern`, value: APIItContractSupplierTypeChoice.Internal },
+  { name: $localize`Ekstern`, value: APIItContractSupplierTypeChoice.External },
 ];
 
-export const mapITContractSupplierType = (value?: number): ITContractSupplierType | undefined => {
-  return itContractSupplierTypeOptions.find((option) => option.id === value);
+export const mapITContractSupplierType = (
+  value?: APIItContractSupplierTypeChoice,
+): ITContractSupplierType | undefined => {
+  return itContractSupplierTypeOptions.find((option) => option.value === value);
 };

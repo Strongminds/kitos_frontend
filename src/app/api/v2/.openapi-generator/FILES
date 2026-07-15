@@ -254,6 +254,7 @@ model/isDataProcessingAgreementRequiredChoice.ts
 model/itContractHierarchyNodeResponseDTO.ts
 model/itContractPermissionsResponseDTO.ts
 model/itContractResponseDTO.ts
+model/itContractSupplierTypeChoice.ts
 model/itContractValidationErrorChoice.ts
 model/itInterfaceDataRequestDTO.ts
 model/itInterfaceDataResponseDTO.ts

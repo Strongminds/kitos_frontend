@@ -2,7 +2,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { first, of } from 'rxjs';
+import { first } from 'rxjs';
 import { BaseOverviewComponent } from 'src/app/shared/base/base-overview.component';
 import {
   CONTRACT_SUPPLIERS_COLUMNS_ID,
@@ -12,10 +12,10 @@ import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { itContractSupplierTypeOptions } from 'src/app/shared/models/it-contract/it-contract-supplier-type';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
-import { GridActions } from 'src/app/store/grid/actions';
 import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract-supplier/actions';
 import {
   selectSupplierGridColumns,
+  selectSupplierGridData,
   selectSupplierGridState,
   selectSupplierIsLoading,
 } from 'src/app/store/it-contract/it-contract-supplier/selectors';
@@ -43,32 +43,8 @@ import { OverviewHeaderComponent } from '../../../shared/components/overview-hea
 })
 export class ItContractSupplierComponent extends BaseOverviewComponent implements OnInit {
   public readonly isLoading$ = this.store.select(selectSupplierIsLoading);
-  //public readonly gridData$ = this.store.select(selectSupplierGridData);
-  public readonly gridData$ = of({
-    total: 1,
-    data: [
-      {
-        id: 1,
-        OrganizationId: 42,
-        OrganizationUuid: 'a1b2c3d4-e5f6-4a5b-9c8d-7e6f5a4b3c2d',
-        OrganizationName: 'Copenhagen Municipality',
-        SupplierId: 123,
-        SupplierType: { name: $localize`Intern`, id: 0 },
-        SupplierUuid: 'f47ac10b-58cc-4372-a567-0e02b2c3d479',
-        SupplierName: 'TechCorp A/S',
-        SupplierCvr: '12345678',
-        IsSupplierDisabled: false,
-        HighestCriticalityUuid: 'faef6c18-3a11-4412-af60-8db3fd1fdb15',
-        HighestCriticalityName: 'Kritikalitet 1',
-        HighestCriticalityRank: 1,
-        ContractsAtHighestCriticalityCsv: 'Contract A, Contract B',
-        ContractsAtHighestCriticality: [
-          { id: 'bbed4548-b391-4343-a9a1-1b152c18252e', value: 'DefaultTestItContract' },
-          { id: '550e8400-e29b-41d4-a716-222222222222', value: 'Contract B' },
-        ],
-      },
-    ],
-  });
+  public readonly gridData$ = this.store.select(selectSupplierGridData);
+
   public readonly gridState$ = this.store.select(selectSupplierGridState);
   public readonly gridColumns$ = this.store.select(selectSupplierGridColumns);
 
@@ -148,7 +124,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
 
     this.subscriptions.add(
       this.gridState$.pipe(first()).subscribe((state) => {
-        this.store.dispatch(ITContractSupplierActions.getSuppliers(state));
+        this.stateChange(state);
       }),
     );
 
@@ -164,14 +140,6 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
   }
 
   public stateChange(newState: GridState): void {
-    //this.store.dispatch(ITContractSupplierActions.updateGridState(newState)); //TODO implement
+    this.store.dispatch(ITContractSupplierActions.updateGridState(newState));
   }
-
-  public override onExcelExport = (exportAllColumns: boolean) => {
-    this.gridState$.pipe(first()).subscribe((gridState) => {
-      this.store.dispatch(
-        GridActions.exportDataFetch(exportAllColumns, { ...gridState, all: true }, 'it-contract-supplier'),
-      );
-    });
-  };
 }
