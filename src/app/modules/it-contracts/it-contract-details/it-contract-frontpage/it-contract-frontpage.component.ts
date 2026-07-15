@@ -187,6 +187,10 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       value: undefined,
       disabled: true,
     }),
+    supplierOrganizationUnit: new FormControl<APIIdentityNamePairResponseDTO | undefined>({
+      value: undefined,
+      disabled: true,
+    }),
     supplierSignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     supplierSignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     supplierSigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
@@ -526,6 +530,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
     this.supplierFormGroup.patchValue({
       supplierOrganization: contract.supplier.organization,
+      supplierOrganizationUnit: contract.supplier.organizationUnit,
       supplierSignedBy: contract.supplier.signedBy,
       supplierSignedAt: optionalNewDate(contract.supplier.signedAt ?? undefined),
       supplierSigned: contract.supplier.signed,

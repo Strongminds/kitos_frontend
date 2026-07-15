@@ -229,6 +229,26 @@
   <app-card>
     <app-card-header title="Leverandør" i18n-title helpTextKey="it-contract.edit.supplier"></app-card-header>
     <app-form-grid [formGroup]="supplierFormGroup">
+      <app-slide-toggle
+        text="Intern leverandør"
+        i18n-text
+        labelPosition="after"
+        [formGroup]="supplierFormGroup"
+        formName="isInternal"
+        class="input-two-thirds-column-width"
+        (valueChange)="patchFrontPage({ supplier: { isInternal: $event } })"
+      ></app-slide-toggle>
+
+      @if (supplierFormGroup.controls.isInternal.value === true) {
+        <app-org-unit-select
+          text="Leverandørens enhed"
+          i18n-text
+          [formGroup]="supplierFormGroup"
+          formName="supplierOrganizationUnit"
+          (valueChange)="patchFrontPage({ supplier: { organizationUnitUuid: $event } })"
+        ></app-org-unit-select>
+      }
+
       @if (contractSupplierEnabled$ | async) {
         <app-connected-dropdown
           text="Leverandør"
@@ -245,15 +265,7 @@
           (valueChange)="patchSupplierOrganization($event)"
         ></app-connected-dropdown>
       }
-      <app-slide-toggle
-        text="Intern leverandør"
-        i18n-text
-        labelPosition="after"
-        [formGroup]="supplierFormGroup"
-        formName="isInternal"
-        class="input-two-thirds-column-width"
-        (valueChange)="patchFrontPage({ supplier: { isInternal: $event } })"
-      ></app-slide-toggle>
+
       @if (contractExternalSignerEnabled$ | async) {
         <app-textbox
           text="Leverandørens kontraktunderskriver"
