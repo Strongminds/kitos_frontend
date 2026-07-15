@@ -19,7 +19,7 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectItSystemUsageArchive } from 'src/app/store/it-system-usage-archive/selectors';
 import { ITSystemActions } from 'src/app/store/it-system/actions';
 import { selectItSystemName } from 'src/app/store/it-system/selectors';
-import { selectITSystemUsageDisableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-it-system-usage-archive-details-frontpage',
@@ -43,7 +43,7 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
   public readonly itSystemUsageArchive$ = this.store.select(selectItSystemUsageArchive).pipe(filterNullish());
   public readonly currentItSystemName$ = this.store.select(selectItSystemName).pipe(filterNullish());
   public archiveReferenceItems: SimpleLink[] = [];
-  public readonly usageArchiveDisabled$ = this.store.select(selectITSystemUsageDisableUsageArchive);
+  public readonly usageArchiveEnabled$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   public readonly archiveForm = new FormGroup({
     takenIntoUsageDate: new FormControl<Date | undefined>({ value: undefined, disabled: true }),

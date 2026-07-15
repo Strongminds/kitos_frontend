@@ -105,10 +105,7 @@ export const selectITSystemUsageEnableTabHierarchy = createItSystemUsageTabEnabl
 export const selectITSystemUsageEnableTabLocalKle = createItSystemUsageTabEnabledSelector('localKle');
 export const selectITSystemUsageEnableTabNotifications = createItSystemUsageTabEnabledSelector('advice');
 export const selectITSystemUsageEnableLocalReferences = createItSystemUsageTabEnabledSelector('localReferences');
-export const selectITSystemUsageDisableUsageArchive = createSelector(
-  createItSystemUsageTabEnabledSelector('usageArchive'),
-  (enabled) => !enabled,
-);
+export const selectITSystemUsageEnableUsageArchive = createItSystemUsageTabEnabledSelector('usageArchive');
 
 //IT System Usage > frontpage
 const createItSystemUsageFrontPageFieldSelector = (fieldKey: string) =>

@@ -30,7 +30,7 @@ import {
   selectItSystemUuid,
 } from 'src/app/store/it-system/selectors';
 import { selectOrganizationName } from 'src/app/store/user-store/selectors';
-import { selectITSystemUsageDisableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
+import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
 import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { DetailsHeaderComponent } from '../../../../shared/components/details-header/details-header.component';
@@ -69,7 +69,7 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
 
   public readonly hasUsageDeletePermission$ = this.componentStore.usageModifyPermission$;
   public readonly systemUsageUuid$ = this.componentStore.systemUsageUuid$;
-  public readonly disableUsageArchive$ = this.store.select(selectITSystemUsageDisableUsageArchive);
+  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   public readonly breadCrumbs$ = combineLatest([this.itSystemName$, this.itSystemUuid$]).pipe(
     map(([itSystemName, systemUuid]): BreadCrumb[] => [
@@ -164,15 +164,15 @@ export class ItSystemCatalogDetailsComponent extends BaseComponent implements On
 
   public showChangeInUseStateDialog(takingIntoUse: boolean): void {
     this.subscriptions.add(
-      combineLatest([this.organizationName$.pipe(first()), this.disableUsageArchive$.pipe(first())]).subscribe(
-        ([organizationName, disableUsageArchive]) => {
+      combineLatest([this.organizationName$.pipe(first()), this.enableUsageArchive$.pipe(first())]).subscribe(
+        ([organizationName, enableUsageArchive]) => {
           let confirmationDialogRef;
           if (takingIntoUse) {
             confirmationDialogRef = this.dialogOpenerService.openTakeSystemIntoUseDialog();
           } else {
             confirmationDialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
               organizationName,
-              extraAction: !disableUsageArchive ? this.handleArchiveClick.bind(this) : undefined,
+              extraAction: enableUsageArchive ? this.handleArchiveClick.bind(this) : undefined,
             });
           }
 

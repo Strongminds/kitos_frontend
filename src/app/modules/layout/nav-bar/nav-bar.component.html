@@ -26,7 +26,7 @@
             <app-menu-item [path]="AppPath.itSystemCatalog" [parentPath]="AppPath.itSystems" i18n
               ><app-table-icon></app-table-icon>IT Systemkatalog</app-menu-item
             >
-            @if (!(disableUsageArchive$ | async)) {
+            @if (enableUsageArchive$ | async) {
               <app-menu-item [path]="AppPath.itSystemUsageArchive" [parentPath]="AppPath.itSystems" i18n
                 ><app-table-icon></app-table-icon>Anvendelseshistorik</app-menu-item
               >

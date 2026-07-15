@@ -1,4 +1,4 @@
-@if (!(usageArchiveDisabled$ | async)) {
+@if (usageArchiveEnabled$ | async) {
   <app-card>
     <app-card-header title="Anvendelseshistorik" helpTextKey="it-system.archive.main" i18n-title> </app-card-header>
 
