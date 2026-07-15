@@ -75,7 +75,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     {
       label: $localize`IT Kontrakt`,
       iconType: 'clipboard',
-      route: AppPath.itContractsModule,
+      route: AppPath.itContracts,
     },
     {
       label: $localize`Databehandling`,
@@ -105,7 +105,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
     switch (urlSegment) {
       case AppPath.localAdminSystemUsages:
         return of(UIModuleConfigKey.ItSystemUsage);
-      case AppPath.itContractsModule:
+      case AppPath.itContracts:
         return of(UIModuleConfigKey.ItContract);
       case AppPath.dataProcessing:
         return of(UIModuleConfigKey.DataProcessingRegistrations);
@@ -164,7 +164,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
         return 'org';
       case AppPath.localAdminSystemUsages:
         return 'system';
-      case AppPath.itContractsModule:
+      case AppPath.itContracts:
         return 'contract';
       case AppPath.dataProcessing:
         return 'data-processing';

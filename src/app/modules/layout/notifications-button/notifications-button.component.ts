@@ -49,7 +49,7 @@ export class NotificationsButtonComponent {
     const moduleRoute = this.getModuleRoute();
     switch (moduleRoute) {
       case AppPath.itSystems:
-      case AppPath.itContractsModule:
+      case AppPath.itContracts:
       case AppPath.dataProcessing:
         return moduleRoute;
       default:
@@ -69,7 +69,7 @@ export class NotificationsButtonComponent {
     return combineLatest([this.itSystemsEnabled$, this.itContractsEnabled$, this.dataProcessingEnabled$]).pipe(
       map(([itSystemsEnabled, itContractsEnabled, dataProcessingEnabled]) => {
         if (itSystemsEnabled) return AppPath.itSystems;
-        if (itContractsEnabled) return AppPath.itContractsModule;
+        if (itContractsEnabled) return AppPath.itContracts;
         if (dataProcessingEnabled) return AppPath.dataProcessing;
         return AppPath.root;
       }),

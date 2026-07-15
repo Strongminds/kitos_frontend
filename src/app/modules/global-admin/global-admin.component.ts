@@ -40,7 +40,7 @@ export class GlobalAdminComponent {
     {
       label: $localize`IT Kontrakt`,
       iconType: 'clipboard',
-      route: AppPath.itContractsModule,
+      route: AppPath.itContracts,
     },
     {
       label: $localize`Databehandling`,

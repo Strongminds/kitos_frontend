@@ -153,7 +153,7 @@ export class NotificationsTableDialogComponent extends BaseComponent implements 
       case 'DataProcessingRegistration':
         return AppPath.dataProcessing;
       case 'ItContract':
-        return AppPath.itContractsModule;
+        return AppPath.itContracts;
     }
   }
 

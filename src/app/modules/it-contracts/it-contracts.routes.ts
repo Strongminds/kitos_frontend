@@ -21,7 +21,7 @@ const routes: Routes = [
     component: ItContractsRootComponent,
     children: [
       {
-        path: AppPath.itContracts,
+        path: AppPath.contracts,
         component: ITContractsComponent,
       },
       {
@@ -29,7 +29,7 @@ const routes: Routes = [
         component: ItContractSupplierComponent,
       },
       {
-        path: AppPath.itContractDetails,
+        path: AppPath.contractDetails,
         component: ItContractDetailsComponent,
         children: [
           { path: AppPath.frontpage, component: ItContractFrontpageComponent },
@@ -44,7 +44,7 @@ const routes: Routes = [
           { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.frontpage },
         ],
       },
-      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.itContracts },
+      { path: AppPath.root, pathMatch: 'full', redirectTo: AppPath.contracts },
     ],
   },
 ];
