@@ -62,7 +62,7 @@ export class DialogOpenerService {
     const confirmationDialogInstance = dialogRef.componentInstance as IconConfirmationDialogComponent;
     confirmationDialogInstance.confirmationType = 'Custom';
     confirmationDialogInstance.title = $localize`Er du sikker på, at du vil fjerne den lokale anvendelse af systemet?`;
-    const baseBodyText = $localize`Tryk "Bekræft" for at slette de lokale registreringer vedrørerende systemet i ${organizationName ?? 'kommunen'}.`;
+    const baseBodyText = $localize`Tryk "Bekræft" for at slette de lokale registreringer vedrørende systemet i ${organizationName ?? 'kommunen'}.`;
     const archiveBodyText =
       baseBodyText +
       $localize` \n Tryk "Bevar historik" for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen.
