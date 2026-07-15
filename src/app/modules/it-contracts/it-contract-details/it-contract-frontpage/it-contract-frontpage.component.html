@@ -229,25 +229,7 @@
   <app-card>
     <app-card-header title="Leverandør" i18n-title helpTextKey="it-contract.edit.supplier"></app-card-header>
     <app-form-grid [formGroup]="supplierFormGroup">
-      <app-slide-toggle
-        text="Intern leverandør"
-        i18n-text
-        labelPosition="after"
-        [formGroup]="supplierFormGroup"
-        formName="isInternal"
-        class="input-two-thirds-column-width"
-        (valueChange)="patchIsInternal($event)"
-      ></app-slide-toggle>
 
-      @if (supplierFormGroup.controls.isInternal.value === true) {
-        <app-org-unit-select
-          text="Leverandørens enhed"
-          i18n-text
-          [formGroup]="supplierFormGroup"
-          formName="supplierOrganizationUnit"
-          (valueChange)="patchFrontPage({ supplier: { organizationUnitUuid: $event } })"
-        ></app-org-unit-select>
-      }
 
       @if (contractSupplierEnabled$ | async) {
         <app-connected-dropdown
@@ -266,6 +248,33 @@
         ></app-connected-dropdown>
       }
 
+      <div class="center-vertically">
+      <app-slide-toggle
+        text="Intern leverandør"
+        i18n-text
+        labelPosition="after"
+        [formGroup]="supplierFormGroup"
+        formName="isInternal"
+        (valueChange)="patchIsInternal($event)"
+        textSize="medium"
+      ></app-slide-toggle>
+      </div>
+
+
+      @if (supplierFormGroup.controls.isInternal.value === true) {
+        <app-org-unit-select
+          text="Leverandørens enhed"
+          i18n-text
+          [formGroup]="supplierFormGroup"
+          formName="supplierOrganizationUnit"
+          (valueChange)="patchFrontPage({ supplier: { organizationUnitUuid: $event } })"
+        ></app-org-unit-select>
+      }
+
+      @if(supplierFormGroup.controls.isInternal.value !== true){
+        <div></div>
+      }
+
       @if (contractExternalSignerEnabled$ | async) {
         <app-textbox
           text="Leverandørens kontraktunderskriver"
@@ -282,18 +291,20 @@
           data-cy="contract-supplier-date"
           [formGroup]="supplierFormGroup"
           formName="supplierSignedAt"
-          class="input-two-thirds-column-width"
           (valueChange)="patchFrontPage({ supplier: { signedAt: $event?.toDateString() } })"
         ></app-datepicker>
 
+      <div class="center-vertically">
         <app-checkbox
-          text="Underskriver er ikke kontaktperson"
+          text="Underskrevet"
           i18n-text
           labelPosition="after"
+          data-cy="contract-supplier-signed"
           [formGroup]="supplierFormGroup"
-          formName="signerIsNotContact"
-          (valueChange)="patchUseSignedByForContact( $event)"
+          formName="supplierSigned"
+          (valueChange)="patchFrontPage({ supplier: { signed: $event } })"
         ></app-checkbox>
+        </div>
 
         <app-textbox
           text="Leverandørens kontaktperson"
@@ -320,13 +331,12 @@
         ></app-textbox>
 
         <app-checkbox
-          text="Underskrevet"
+          text="Underskriver er ikke kontaktperson"
           i18n-text
           labelPosition="after"
-          data-cy="contract-supplier-signed"
           [formGroup]="supplierFormGroup"
-          formName="supplierSigned"
-          (valueChange)="patchFrontPage({ supplier: { signed: $event } })"
+          formName="signerIsNotContact"
+          (valueChange)="patchUseSignedByForContact( $event)"
         ></app-checkbox>
       }
     </app-form-grid>
