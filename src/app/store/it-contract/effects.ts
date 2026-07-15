@@ -389,7 +389,7 @@ export class ITContractEffects {
         return this.externalReferencesApiService
           .addExternalReference<APIItContractResponseDTO>(
             newExternalReference.externalReference,
-            externalReferences,
+            externalReferences ?? undefined,
             contractUuid,
             'it-contract',
           )
@@ -410,7 +410,7 @@ export class ITContractEffects {
       ]),
       mergeMap(([editData, externalReferences, contractUuid]) => {
         return this.externalReferencesApiService
-          .editExternalReference<APIItContractResponseDTO>(editData, externalReferences, contractUuid, 'it-contract')
+          .editExternalReference<APIItContractResponseDTO>(editData, externalReferences ?? undefined, contractUuid, 'it-contract')
           .pipe(
             map((response) => ITContractActions.editExternalReferenceSuccess(response)),
             catchError(() => of(ITContractActions.editExternalReferenceError())),
@@ -430,7 +430,7 @@ export class ITContractEffects {
         return this.externalReferencesApiService
           .deleteExternalReference<APIItContractResponseDTO>(
             referenceUuid.referenceUuid,
-            externalReferences,
+            externalReferences ?? undefined,
             contractUuid,
             'it-contract',
           )
