@@ -290,13 +290,13 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   private setupContactPersonIsNotSignerRules() {
     const signerIsNotContactControl = this.supplierFormGroup.controls.signerIsNotContact;
     const contactPersonControl = this.supplierFormGroup.controls.contactPerson;
-    const signerControl = this.supplierFormGroup.controls.supplierSignedBy;
 
     this.subscriptions.add(
       signerIsNotContactControl.valueChanges.subscribe((signerIsNotContact) => {
         if (signerIsNotContact) {
           contactPersonControl.enable();
         } else {
+          contactPersonControl.setValue(this.supplierFormGroup.controls.supplierSignedBy.value);
           contactPersonControl.disable();
         }
       }),
@@ -332,8 +332,21 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      const reversedValue = this.getSignerIsNotContact(value);
-      this.store.dispatch(ITContractActions.patchITContract({ supplier: { useSignedByForContact: reversedValue } }));
+      const signerIsNotContact = value ?? true;
+      const signedByValue = this.supplierFormGroup.controls.supplierSignedBy.value;
+
+      if (!signerIsNotContact) {
+        this.supplierFormGroup.controls.contactPerson.setValue(signedByValue, { emitEvent: false });
+      }
+
+      this.store.dispatch(
+        ITContractActions.patchITContract({
+          supplier: {
+            useSignedByForContact: !signerIsNotContact,
+            ...(signerIsNotContact ? {} : { contactPerson: signedByValue }),
+          },
+        }),
+      );
     }
   }
 
