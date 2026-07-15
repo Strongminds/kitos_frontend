@@ -43,7 +43,7 @@ export class ITContractSupplierEffects {
         const fixedOdataString = applyQueryFixes(cacheableOdataString);
         return this.httpClient
           .get<OData>(
-            `/odata//ItContractSupplierOverviewReadModels?organizationUuid=${organizationUuid}&$expand=Organization($select=Name,Uuid),ContractsAtHighestCriticality($select=ContractUuid,ContractName)&${fixedOdataString}&$count=true`,
+            `/odata/ItContractSupplierOverviewReadModels?organizationUuid=${organizationUuid}&$expand=Organization($select=Name,Uuid),ContractsAtHighestCriticality($select=ContractUuid,ContractName)&${fixedOdataString}&$count=true`,
           )
           .pipe(
             map((data) => {

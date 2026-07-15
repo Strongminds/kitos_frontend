@@ -88,7 +88,7 @@ export class LocalAdminComponent extends BaseComponent implements OnInit {
       route: AppPath.import,
     },
     {
-      label: $localize`ISMS leverandører`,
+      label: $localize`ISMS ansvarlige`,
       iconType: 'multiple-users',
       route: AppPath.ismsSuppliers,
     },
