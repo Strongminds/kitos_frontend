@@ -313,11 +313,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
     this.subscriptions.add(
       this.supplierFormGroup.controls.isInternal.valueChanges.subscribe((isInternal) => {
-        if (this.isSyncingSupplierOrganization) {
-          return;
+        if (!this.isSyncingSupplierOrganization) {
+          this.syncSupplierOrganizationToCurrentOrganization(isInternal === true);
         }
-
-        this.syncSupplierOrganizationToCurrentOrganization(isInternal === true);
       }),
     );
   }

@@ -249,17 +249,16 @@
       }
 
       <div class="center-vertically">
-      <app-slide-toggle
-        text="Intern leverandør"
-        i18n-text
-        labelPosition="after"
-        [formGroup]="supplierFormGroup"
-        formName="isInternal"
-        (valueChange)="patchIsInternal($event)"
-        textSize="medium"
-      ></app-slide-toggle>
+        <app-slide-toggle
+          text="Intern leverandør"
+          i18n-text
+          labelPosition="after"
+          [formGroup]="supplierFormGroup"
+          formName="isInternal"
+          (valueChange)="patchIsInternal($event)"
+          textSize="medium"
+        ></app-slide-toggle>
       </div>
-
 
       @if (supplierFormGroup.controls.isInternal.value === true) {
         <app-org-unit-select
@@ -304,7 +303,7 @@
           formName="supplierSigned"
           (valueChange)="patchFrontPage({ supplier: { signed: $event } })"
         ></app-checkbox>
-        </div>
+      </div>
 
         <app-textbox
           text="Leverandørens kontaktperson"
