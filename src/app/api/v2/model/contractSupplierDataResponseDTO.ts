@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIItContractSupplierTypeChoice } from './itContractSupplierTypeChoice';
 import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
 
 
@@ -17,6 +18,7 @@ export interface APIContractSupplierDataResponseDTO {
     organization?: APIShallowOrganizationResponseDTO;
     organizationUnit?: APIIdentityNamePairResponseDTO;
     isInternal?: boolean | null;
+    supplierType?: APIItContractSupplierTypeChoice;
     /**
      * Determines if the contract has been signed by the supplier
      */
