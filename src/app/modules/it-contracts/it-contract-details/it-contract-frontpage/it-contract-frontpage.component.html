@@ -236,7 +236,7 @@
         [formGroup]="supplierFormGroup"
         formName="isInternal"
         class="input-two-thirds-column-width"
-        (valueChange)="patchFrontPage({ supplier: { isInternal: $event } })"
+        (valueChange)="patchIsInternal($event)"
       ></app-slide-toggle>
 
       @if (supplierFormGroup.controls.isInternal.value === true) {

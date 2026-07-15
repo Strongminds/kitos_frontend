@@ -369,7 +369,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
-      var dto: APIUpdateContractRequestDTO = { supplier: { signedBy: value } };
+      let dto: APIUpdateContractRequestDTO = { supplier: { signedBy: value } };
 
       const signerIsNotContact = this.supplierFormGroup.controls.signerIsNotContact.value;
       const contactPersonControl = this.supplierFormGroup.controls.contactPerson;
@@ -387,6 +387,20 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
     } else {
       this.store.dispatch(ITContractActions.patchITContract(frontpage));
+    }
+  }
+
+  public patchIsInternal(value: boolean | undefined, valueChange?: ValidatedValueChange<unknown>) {
+    if (valueChange && !valueChange.valid) {
+      this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
+    } else {
+      let dto: APIUpdateContractRequestDTO = { supplier: { isInternal: value } };
+
+      if (!value) {
+        dto = { supplier: { ...dto.supplier, organizationUnitUuid: undefined } };
+      }
+
+      this.store.dispatch(ITContractActions.patchITContract(dto));
     }
   }
 
