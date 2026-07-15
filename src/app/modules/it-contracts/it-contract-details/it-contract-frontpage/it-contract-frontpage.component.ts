@@ -61,6 +61,7 @@ import { OrgUnitSelectComponent } from '../../../../shared/components/org-unit-s
 import { RadioButtonsComponent } from '../../../../shared/components/radio-buttons/radio-buttons.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { StatusChipComponent } from '../../../../shared/components/status-chip/status-chip.component';
+import { SlideToggleComponent } from '../../../../shared/components/slide-toggle/slide-toggle.component';
 import { TextAreaComponent } from '../../../../shared/components/textarea/textarea.component';
 import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.component';
 import { ItContractFrontpageComponentStore } from './it-contract-frontpage.component-store';
@@ -87,6 +88,7 @@ import { ItContractFrontpageComponentStore } from './it-contract-frontpage.compo
     ConnectedDropdownComponent,
     OrgUnitSelectComponent,
     RadioButtonsComponent,
+    SlideToggleComponent,
     AsyncPipe,
   ],
 })
@@ -183,10 +185,12 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     supplierSignedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     supplierSignedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),
     supplierSigned: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
+    isInternal: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
     supplierContactPersonIsSameAsSigner: new FormControl<boolean | undefined>({ value: undefined, disabled: true }),
-    supplierContactPersonName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    supplierContactPersonPhone: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    supplierContactPersonEmail: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    useSignedByForContact: new FormControl<boolean>({ value: true, disabled: true }),
+    contactPerson: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    contactPhoneNumber: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    contactEmail: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
 
   public readonly procurementFormGroup = new FormGroup({
@@ -282,7 +286,6 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.subscribeToItContract();
   }
 
-  //TODO add patch actions to the new supplier fields
   public patchFrontPage(frontpage: APIUpdateContractRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
@@ -410,7 +413,11 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       supplierSignedBy: contract.supplier.signedBy,
       supplierSignedAt: optionalNewDate(contract.supplier.signedAt ?? undefined),
       supplierSigned: contract.supplier.signed,
-      //TODO add new supplier contact person fields
+      isInternal: contract.supplier.isInternal,
+      useSignedByForContact: contract.supplier.useSignedByForContact,
+      contactPerson: contract.supplier.contactPerson,
+      contactPhoneNumber: contract.supplier.contactPhoneNumber,
+      contactEmail: contract.supplier.contactEmail,
     });
   }
 

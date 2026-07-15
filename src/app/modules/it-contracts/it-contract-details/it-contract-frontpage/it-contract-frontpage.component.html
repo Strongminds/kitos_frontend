@@ -245,6 +245,14 @@
           (valueChange)="patchFrontPage({ supplier: { organizationUuid: $event } })"
         ></app-connected-dropdown>
       }
+      <app-slide-toggle
+        text="Intern leverandør"
+        i18n-text
+        labelPosition="after"
+        [formGroup]="supplierFormGroup"
+        formName="isInternal"
+        (valueChange)="patchFrontPage({ supplier: { isInternal: $event } })"
+      ></app-slide-toggle>
       @if (contractExternalSignerEnabled$ | async) {
         <app-textbox
           text="Leverandørens kontraktunderskriver"
@@ -264,25 +272,37 @@
           (valueChange)="patchFrontPage({ supplier: { signedAt: $event?.toDateString() } })"
         ></app-datepicker>
 
+        <app-checkbox
+          text="Brug underskriver som kontaktperson"
+          i18n-text
+          labelPosition="after"
+          [formGroup]="supplierFormGroup"
+          formName="useSignedByForContact"
+          (valueChange)="patchFrontPage({ supplier: { useSignedByForContact: $event } })"
+        ></app-checkbox>
+
         <app-textbox
           text="Leverandørens kontaktperson"
           i18n-text
           [formGroup]="supplierFormGroup"
-          formName="supplierContactPersonName"
+          formName="contactPerson"
+          (valueChange)="patchFrontPage({ supplier: { contactPerson: $event } })"
         ></app-textbox>
 
         <app-textbox
           text="Telefonnummer"
           i18n-text
           [formGroup]="supplierFormGroup"
-          formName="supplierContactPersonPhone"
+          formName="contactPhoneNumber"
+          (valueChange)="patchFrontPage({ supplier: { contactPhoneNumber: $event } })"
         ></app-textbox>
 
         <app-textbox
           text="Email"
           i18n-text
           [formGroup]="supplierFormGroup"
-          formName="supplierContactPersonEmail"
+          formName="contactEmail"
+          (valueChange)="patchFrontPage({ supplier: { contactEmail: $event } })"
         ></app-textbox>
 
         <app-checkbox
