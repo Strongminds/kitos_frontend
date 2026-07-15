@@ -283,7 +283,27 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_procurement-strategy-type'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_purchase-form-type'));
 
+    this.setupContactPersonIsNotSignerRules();
     this.subscribeToItContract();
+  }
+
+  private setupContactPersonIsNotSignerRules() {
+    const signerIsNotContactControl = this.supplierFormGroup.controls.signerIsNotContact;
+    const contactPersonControl = this.supplierFormGroup.controls.contactPerson;
+    const signerControl = this.supplierFormGroup.controls.supplierSignedBy;
+
+    this.subscriptions.add(
+      signerIsNotContactControl.valueChanges.subscribe((signerIsNotContact) => {
+        console.log('signerIsNotContact', signerIsNotContact);
+        if (signerIsNotContact) {
+          contactPersonControl.enable();
+        } else {
+          contactPersonControl.disable();
+        }
+      }),
+    );
+
+    //todo on valuechanges of signer, check if signerIsNotContact, and use that to branch on setting the val of contact and dispatching frontpageUpdate
   }
 
   public patchFrontPage(frontpage: APIUpdateContractRequestDTO, valueChange?: ValidatedValueChange<unknown>) {
@@ -464,6 +484,9 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       this.procurementFormGroup.enable();
     }
     this.frontpageFormGroup.controls.status.disable();
+    if (this.supplierFormGroup.controls.signerIsNotContact.value !== true) {
+      this.supplierFormGroup.controls.contactPerson.disable();
+    }
   }
 
   private enableParentContractForm() {
