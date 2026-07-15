@@ -4,7 +4,7 @@ describe('it-contracts.frontpage', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupContractIntercepts();
-    cy.setup(true, 'it-contracts-module');
+    cy.setup(true, 'it-contracts');
   });
 
   // 20240820 MHS - Test is flaky and disabled - datepicker problem
