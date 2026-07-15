@@ -558,7 +558,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   }
 
   private getSignerIsNotContact(value: boolean | undefined): boolean {
-    if (value === undefined) return true;
+    if (value === undefined) return false;
     return !value;
   }
 
