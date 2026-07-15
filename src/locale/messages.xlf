@@ -6191,8 +6191,11 @@
       <trans-unit id="7099734686819055563" datatype="html">
         <source>Leverandørens kontaktperson</source>
       </trans-unit>
-      <trans-unit id="7372504898051109533" datatype="html">
-        <source>Kontraktunderskriver er kontaktperson</source>
+      <trans-unit id="2911297811675301799" datatype="html">
+        <source>Intern leverandør</source>
+      </trans-unit>
+      <trans-unit id="3251340841049392439" datatype="html">
+        <source>Underskriver er ikke kontaktperson</source>
       </trans-unit>
     </body>
   </file>

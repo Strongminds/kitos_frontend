@@ -8097,9 +8097,13 @@
         <source>Leverandørens kontaktperson</source>
         <target state="new">Leverandørens kontaktperson</target>
       </trans-unit>
-      <trans-unit id="7372504898051109533" datatype="html">
-        <source>Kontraktunderskriver er kontaktperson</source>
-        <target state="new">Kontraktunderskriver er kontaktperson</target>
+      <trans-unit id="2911297811675301799" datatype="html">
+        <source>Intern leverandør</source>
+        <target state="new">Intern leverandør</target>
+      </trans-unit>
+      <trans-unit id="3251340841049392439" datatype="html">
+        <source>Underskriver er ikke kontaktperson</source>
+        <target state="new">Underskriver er ikke kontaktperson</target>
       </trans-unit>
     </body>
   </file>
