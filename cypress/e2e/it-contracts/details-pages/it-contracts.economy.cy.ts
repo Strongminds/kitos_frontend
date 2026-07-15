@@ -4,7 +4,7 @@ describe('it-contracts.economy', () => {
   beforeEach(() => {
     cy.requireIntercept();
     cy.setupContractIntercepts();
-    cy.setup(true, 'it-contracts-module');
+    cy.setup(true, 'it-contracts');
   });
 
   it('Organization unit is required', () => {
