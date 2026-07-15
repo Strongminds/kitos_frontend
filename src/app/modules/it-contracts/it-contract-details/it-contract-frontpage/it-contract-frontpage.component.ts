@@ -395,7 +395,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
       let dto: APIUpdateContractRequestDTO = { supplier: { isInternal: value } };
 
       if (!value) {
-        dto = { supplier: { ...dto.supplier, organizationUnitUuid: undefined } };
+        dto = { supplier: { ...dto.supplier, organizationUnitUuid: null, organizationUuid: null } };
       }
 
       this.store.dispatch(ITContractActions.patchITContract(dto));
