@@ -79,5 +79,10 @@ export class ITContractSupplierEffects {
 }
 
 function applyQueryFixes(odataString: string) {
-  return odataString.replace(/HighestCriticalityUuid eq '([\w-]+)'/, 'HighestCriticalityUuid eq $1');
+  return odataString
+    .replace(/HighestCriticalityUuid eq '([\w-]+)'/, 'HighestCriticalityUuid eq $1')
+    .replace(
+      /contains\(ContractsAtHighestCriticality,\s*([^)]*)\)/g,
+      'ContractsAtHighestCriticality/any(c: contains(c/ContractName,$1))',
+    );
 }
