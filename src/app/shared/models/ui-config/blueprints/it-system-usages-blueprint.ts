@@ -85,6 +85,10 @@ export const ItSystemUsageUiBluePrint = {
         hostedAt: {
           text: $localize`IT-Systemet driftes`,
         },
+        licensingAndCodeModels: {
+          text: $localize`Licens- og kodegrundlag`,
+          disableByDefault: true,
+        },
       },
     },
     contracts: {
@@ -237,6 +241,9 @@ export const ItSystemUsageUiBluePrint = {
     },
     localReferences: {
       text: $localize`Lokale referencer`,
+    },
+    usageArchive: {
+      text: $localize`Anvendelseshistorik`,
     },
   },
 };

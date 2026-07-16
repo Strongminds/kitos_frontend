@@ -31,6 +31,7 @@ import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/
 import { isDataProcessingAgreementRequiredOptions } from 'src/app/shared/models/it-system-usage/gdpr/is-data-processing-agreement-required.model';
 import { riskAssessmentResultOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
+import { licensingAndCodeModelOptions } from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
 import { yesNoBooleanOptions } from 'src/app/shared/models/yes-no-boolean-options.model';
@@ -87,7 +88,6 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
   public readonly hasCreatePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
 
   private readonly systemSectionName = USAGE_SECTION_NAME;
-
   private readonly activeInactiveData = [
     {
       name: $localize`Aktivt`,
@@ -530,12 +530,14 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Snitflade ID'er`,
       section: RELATIONS_SECTION_NAME,
       hidden: true,
+      persistId: 'itInterfaceIds',
     },
     {
       field: GridFields.ItInterfaceVersionsAsCsv,
       title: $localize`Snitflade versioner`,
       section: RELATIONS_SECTION_NAME,
       hidden: true,
+      persistId: 'itInterfaceVersions',
     },
     {
       field: GridFields.AssociatedContractsNamesCsv,
@@ -556,6 +558,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraData: riskAssessmentResultOptionsGrid,
       hidden: true,
       width: 330,
+      persistId: 'latestRiskAssessmentResult',
     },
     {
       field: GridFields.RiskAssessmentDate,
@@ -586,6 +589,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       extraData: yesNoDontKnowIrrelevantOptionsGrid,
       hidden: true,
+      persistId: 'riskAssessmentConducted',
     },
     {
       field: GridFields.Note,
@@ -716,6 +720,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       style: 'enum',
       extraData: yesNoDontKnowOptions,
+      persistId: 'isSociallyCritical',
     },
     {
       field: GridFields.CriticalityFieldsLastChanged,
@@ -725,6 +730,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'date',
       filter: 'date',
       width: 350,
+      persistId: 'criticalityFieldsLastChanged',
     },
     {
       field: GridFields.IsDataProcessingAgreementRequired,
@@ -734,6 +740,17 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       extraFilter: 'enum',
       style: 'enum',
       extraData: isDataProcessingAgreementRequiredOptions,
+      persistId: 'isDataProcessingAgreementRequired',
+    },
+    {
+      field: GridFields.LicensingAndCodeModels,
+      title: $localize`Licens- og kodegrundlag`,
+      section: this.systemSectionName,
+      hidden: true,
+      style: 'enum-array',
+      extraFilter: 'enum',
+      extraData: licensingAndCodeModelOptions,
+      persistId: 'licensingAndCodeModels',
     },
   ];
 

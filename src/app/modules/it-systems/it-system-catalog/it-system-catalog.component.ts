@@ -23,7 +23,7 @@ import { GridState } from 'src/app/shared/models/grid-state.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { ITSystem } from 'src/app/shared/models/it-system/it-system.model';
-import { licensingAndCodeModelOptions } from 'src/app/shared/models/it-system/licensing-and-code-model.model';
+import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
@@ -39,15 +39,19 @@ import {
   selectSystemGridLoading,
   selectSystemGridState,
 } from 'src/app/store/it-system/selectors';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { selectITSystemUsageEnableUsageArchive } from 'src/app/store/organization/ui-module-customization/selectors';
 import { ExportMenuButtonComponent } from '../../../shared/components/buttons/export-menu-button/export-menu-button.component';
 import { CreateEntityButtonComponent } from '../../../shared/components/entity-creation/create-entity-button/create-entity-button.component';
 import { GridOptionsButtonComponent } from '../../../shared/components/grid-options-button/grid-options-button.component';
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
+import { ITSystemCatalogComponentStore } from './it-system-catalog.component-store';
 
 @Component({
   templateUrl: './it-system-catalog.component.html',
+  providers: [ITSystemCatalogComponentStore],
   styleUrl: './it-system-catalog.component.scss',
   imports: [
     OverviewHeaderComponent,
@@ -68,6 +72,9 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
   public readonly hasCreatePermission$ = this.store.select(selectITSystemHasCreateCollectionPermission);
   public readonly hasCreateUsagePermission$ = this.store.select(selectITSystemUsageHasCreateCollectionPermission);
   public readonly isCreatingUsage$ = this.store.select(selectItSystemUsageIsCreating);
+  public readonly organizationUuid$ = this.store.select(selectOrganizationUuid);
+  public readonly systemUsageUuid$ = this.componentStore.systemUsageUuid$;
+  public readonly enableUsageArchive$ = this.store.select(selectITSystemUsageEnableUsageArchive);
 
   private readonly systemSectionName = CATALOG_SECTION_NAME;
   public readonly defaultGridColumns: GridColumn[] = [
@@ -258,15 +265,6 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
       section: this.systemSectionName,
       hidden: true,
     },
-    {
-      field: CatalogFields.LICENSING_AND_CODE_MODELS,
-      title: $localize`Licens- og kodegrundlag`,
-      section: this.systemSectionName,
-      hidden: true,
-      style: 'enum-array',
-      extraFilter: 'enum',
-      extraData: licensingAndCodeModelOptions,
-    },
   ];
 
   constructor(
@@ -276,6 +274,7 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     private readonly actions$: Actions,
     private readonly gridColumnStorageService: GridColumnStorageService,
     private readonly dialogOpenerService: DialogOpenerService,
+    private readonly componentStore: ITSystemCatalogComponentStore,
   ) {
     super(store, 'it-system');
   }
@@ -339,25 +338,48 @@ export class ItSystemCatalogComponent extends BaseOverviewComponent implements O
     );
   }
 
-  private handleTakeSystemOutOfUse(systemUuid: string) {
-    const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog();
+  public handleArchiveClick() {
     this.subscriptions.add(
-      dialogRef.afterClosed().subscribe((result: boolean) => {
-        if (result && systemUuid !== undefined) {
-          this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
-        }
+      this.systemUsageUuid$.pipe(filterNullish(), first()).subscribe((usageUuid) => {
+        this.dialogOpenerService.openArchiveSystemUsageDialog(usageUuid);
       }),
     );
+  }
 
+  private handleTakeSystemOutOfUse(systemUuid: string) {
+    this.componentStore.getSystemUsageUuidByItSystemAndOrganization(systemUuid);
     this.subscriptions.add(
-      this.actions$
-        .pipe(
-          ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
-          first(),
-          debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
-          concatLatestFrom(() => this.gridState$),
-        )
-        .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
+      this.enableUsageArchive$
+        .pipe(first())
+        .subscribe((enableUsageArchive) => {
+          const dialogRef = this.dialogOpenerService.openTakeSystemOutOfUseDialog({
+            extraAction: enableUsageArchive ? this.handleArchiveClick.bind(this) : undefined,
+          });
+          this.subscriptions.add(
+            dialogRef.afterClosed().subscribe((result: boolean) => {
+              if (result && systemUuid !== undefined) {
+                this.store.dispatch(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganization(systemUuid));
+              }
+            }),
+          );
+
+          this.subscriptions.add(
+            this.actions$.pipe(ofType(ITSystemUsageActions.archiveItSystemUsageSuccess), first()).subscribe(() => {
+              dialogRef.close();
+            }),
+          );
+
+          this.subscriptions.add(
+            this.actions$
+              .pipe(
+                ofType(ITSystemUsageActions.deleteItSystemUsageByItSystemAndOrganizationSuccess),
+                first(),
+                debounceTime(DEFAULT_INPUT_DEBOUNCE_TIME),
+                concatLatestFrom(() => this.gridState$),
+              )
+              .subscribe(([_, gridState]) => this.dispatchGetSystemsOnDataUpdate(gridState)),
+          );
+        }),
     );
   }
 

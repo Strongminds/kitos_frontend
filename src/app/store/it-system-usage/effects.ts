@@ -17,8 +17,7 @@ import { USAGE_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-cons
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { usageGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
 import { findUnitParentUuids } from 'src/app/shared/helpers/hierarchy.helpers';
-import { castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
-import { addSecondaryContainsField } from 'src/app/shared/helpers/odata-query.helpers';
+import { addSecondaryContainsField, castContainsFieldToString } from 'src/app/shared/helpers/odata-query.helpers';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { convertDataSensitivityLevelStringToNumberMap } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { adaptITSystemUsage, ITSystemUsage } from 'src/app/shared/models/it-system-usage/it-system-usage.model';
@@ -170,6 +169,25 @@ export class ITSystemUsageEffects {
           map(() => ITSystemUsageActions.removeITSystemUsageSuccess()),
           catchError(() => of(ITSystemUsageActions.removeITSystemUsageError())),
         );
+      }),
+    );
+  });
+
+  archiveItSystemUsage$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(ITSystemUsageActions.archiveItSystemUsage),
+      switchMap(({ itSystemUsageUuid, archiveRequestDto }) => {
+        if (!itSystemUsageUuid) return of(ITSystemUsageActions.archiveItSystemUsageError());
+
+        return this.apiV2ItSystemUsageService
+          .postSingleItSystemUsageV2ArchiveItSystemUsage({
+            systemUsageUuid: itSystemUsageUuid,
+            aPICreateItSystemUsageArchiveRequestDTO: archiveRequestDto,
+          })
+          .pipe(
+            map((archiveResponse) => ITSystemUsageActions.archiveItSystemUsageSuccess(archiveResponse)),
+            catchError(() => of(ITSystemUsageActions.archiveItSystemUsageError())),
+          );
       }),
     );
   });
@@ -837,6 +855,7 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     .replace(/SystemUsageCriticalityLevelUuid eq '([\w-]+)'/, 'SystemUsageCriticalityLevelUuid eq $1')
     .replace(/TechnicalSystemTypeUuid eq '([\w-]+)'/, 'TechnicalSystemTypeUuid eq $1')
     .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1')
+    .replace(/LicensingAndCodeModels eq '([^']+)'/g, "LicensingAndCodeModels/any(l: l eq '$1')")
     .replace(
       new RegExp(`DataProcessingRegistrationsConcludedAsCsv eq ('[^']+')`, 'i'),
       'contains(DataProcessingRegistrationsConcludedAsCsv, $1)',
