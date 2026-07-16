@@ -391,14 +391,11 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public patchIsInternal(value: boolean | undefined, valueChange?: ValidatedValueChange<unknown>) {
     if (valueChange && !valueChange.valid) {
       this.notificationService.showError($localize`"${valueChange.text}" er ugyldig`);
-    } else {
-      let dto: APIUpdateContractRequestDTO = { supplier: { isInternal: value } };
-
-      if (!value) {
-        dto = { supplier: { ...dto.supplier, organizationUnitUuid: null, organizationUuid: null } };
-      }
-
+    } else if (!value) {
+      const dto = { supplier: { isInternal: value, organizationUnitUuid: null, organizationUuid: null } };
       this.store.dispatch(ITContractActions.patchITContract(dto));
+    } else {
+      this.syncSupplierOrganizationToCurrentOrganization(value ?? false);
     }
   }
 
