@@ -113,12 +113,9 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       CONTRACT_SUPPLIERS_COLUMNS_ID,
       this.defaultGridColumns,
     );
-    if (existingColumns) {
-      this.store.dispatch(ITContractSupplierActions.updateGridColumns(existingColumns));
-    } else {
-      const columns = this.mapColumnOrder(this.defaultGridColumns);
-      this.store.dispatch(ITContractSupplierActions.updateGridColumns(columns));
-    }
+    this.store.dispatch(
+      ITContractSupplierActions.updateGridColumns(existingColumns ?? this.defaultGridColumns),
+    );
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_criticality-type'));
 
