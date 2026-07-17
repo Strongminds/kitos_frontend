@@ -29,6 +29,11 @@ const routes: Routes = [
         component: ItContractSupplierComponent,
       },
       {
+        path: AppPath.uuid,
+        pathMatch: 'full',
+        redirectTo: AppPath.contractDetails,
+      },
+      {
         path: AppPath.contractDetails,
         component: ItContractDetailsComponent,
         children: [
