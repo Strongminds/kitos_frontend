@@ -5293,10 +5293,6 @@
         <source>Lokal tilpasning af roller</source>
         <target state="new">Lokal tilpasning af roller</target>
       </trans-unit>
-      <trans-unit id="8276868235175330138" datatype="html">
-        <source> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </source>
-        <target state="new"> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </target>
-      </trans-unit>
       <trans-unit id="2457952418192472950" datatype="html">
         <source>IT-Systemer i anvendelse</source>
         <target state="new">IT-Systemer i anvendelse</target>
@@ -7925,10 +7921,6 @@
         <source>Lokalt system ID</source>
         <target state="new">Lokalt system ID</target>
       </trans-unit>
-      <trans-unit id="752345348010102991" datatype="html">
-        <source>Anvendelses historik</source>
-        <target state="new">Anvendelses historik</target>
-      </trans-unit>
       <trans-unit id="174474605473542575" datatype="html">
         <source>Udfasningsdato</source>
         <target state="new">Udfasningsdato</target>
@@ -7952,10 +7944,6 @@
       <trans-unit id="8075189991660862448" datatype="html">
         <source>Tilføj flere referencer</source>
         <target state="new">Tilføj flere referencer</target>
-      </trans-unit>
-      <trans-unit id="8785270844621556660" datatype="html">
-        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
-        <target state="new">Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</target>
       </trans-unit>
       <trans-unit id="8881457969183282275" datatype="html">
         <source>Bevar historik</source>
@@ -8108,6 +8096,26 @@
       <trans-unit id="3251340841049392439" datatype="html">
         <source>Underskriver er ikke kontaktperson</source>
         <target state="new">Underskriver er ikke kontaktperson</target>
+      </trans-unit>
+      <trans-unit id="6877831071382783768" datatype="html">
+        <source> Tilpasning på feltniveau er endnu ikke muligt for dette <x id="INTERPOLATION" equiv-text="{{ noChildrenLabel() }}"/>. </source>
+        <target state="new"> Tilpasning på feltniveau er endnu ikke muligt for dette <x id="INTERPOLATION" equiv-text="{{ noChildrenLabel() }}"/>. </target>
+      </trans-unit>
+      <trans-unit id="8841697561528871723" datatype="html">
+        <source>undermodul</source>
+        <target state="new">undermodul</target>
+      </trans-unit>
+      <trans-unit id="2330713002282166720" datatype="html">
+        <source>faneblad</source>
+        <target state="new">faneblad</target>
+      </trans-unit>
+      <trans-unit id="8166587301539797710" datatype="html">
+        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>.</source>
+        <target state="new">Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>.</target>
+      </trans-unit>
+      <trans-unit id="5473319657165590488" datatype="html">
+        <source> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
+        <target state="new"> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</target>
       </trans-unit>
     </body>
   </file>

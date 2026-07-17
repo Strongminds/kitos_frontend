@@ -4230,9 +4230,6 @@
       <trans-unit id="8666131066916332987" datatype="html">
         <source>Ukendt modul</source>
       </trans-unit>
-      <trans-unit id="8276868235175330138" datatype="html">
-        <source> Tilpasning på feltniveau er endnu ikke muligt for dette faneblad. </source>
-      </trans-unit>
       <trans-unit id="9117861173318709156" datatype="html">
         <source>Notifikationer</source>
       </trans-unit>
@@ -6062,9 +6059,6 @@
       <trans-unit id="3231887773453065724" datatype="html">
         <source>Lokalt system ID</source>
       </trans-unit>
-      <trans-unit id="752345348010102991" datatype="html">
-        <source>Anvendelses historik</source>
-      </trans-unit>
       <trans-unit id="1220374093016564303" datatype="html">
         <source>Reference/link til ESDH</source>
       </trans-unit>
@@ -6073,9 +6067,6 @@
       </trans-unit>
       <trans-unit id="2137405200624328487" datatype="html">
         <source>Kommentar</source>
-      </trans-unit>
-      <trans-unit id="8785270844621556660" datatype="html">
-        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørerende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>. Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
       </trans-unit>
       <trans-unit id="4999037601378878230" datatype="html">
         <source>Systemanvendelsen blev arkiveret</source>
@@ -6199,6 +6190,21 @@
       </trans-unit>
       <trans-unit id="7099734686819055563" datatype="html">
         <source>Leverandørens kontaktperson</source>
+      </trans-unit>
+      <trans-unit id="2330713002282166720" datatype="html">
+        <source>faneblad</source>
+      </trans-unit>
+      <trans-unit id="5473319657165590488" datatype="html">
+        <source> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
+      </trans-unit>
+      <trans-unit id="6877831071382783768" datatype="html">
+        <source> Tilpasning på feltniveau er endnu ikke muligt for dette <x id="INTERPOLATION" equiv-text="{{ noChildrenLabel() }}"/>. </source>
+      </trans-unit>
+      <trans-unit id="8166587301539797710" datatype="html">
+        <source>Tryk &quot;Bekræft&quot; for at slette de lokale registreringer vedrørende systemet i <x id="PH" equiv-text="organizationName ?? &apos;kommunen&apos;"/>.</source>
+      </trans-unit>
+      <trans-unit id="8841697561528871723" datatype="html">
+        <source>undermodul</source>
       </trans-unit>
     </body>
   </file>
