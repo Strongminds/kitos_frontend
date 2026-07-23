@@ -22,4 +22,4 @@ cat > /tmp/proxy.conf.json <<EOF
 }
 EOF
 
-DOCKER=true yarn ng serve --configuration=docker --port=4200 --poll=2000 --proxy-config=/tmp/proxy.conf.json
+yarn ng serve --configuration=docker --port=4200 --poll=2000 --proxy-config=/tmp/proxy.conf.json
