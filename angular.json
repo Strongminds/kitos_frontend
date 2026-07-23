@@ -199,8 +199,7 @@
             },
             "docker": {
               "buildTarget": "kitos-web:build:development,da",
-              "host": "0.0.0.0",
-              "disableHostCheck": true
+              "host": "0.0.0.0"
             }
           },
           "defaultConfiguration": "development"
