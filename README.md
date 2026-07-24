@@ -12,30 +12,22 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 ### Running in Docker
 
-Use Docker Compose for a containerized development server with hot reload:
+Build and run the production container (Angular production build + nginx static file serving):
 
+Bash:
+`BACKEND_URL=http://host.docker.internal:5000 docker compose up --build`
+
+PowerShell:
+`$env:BACKEND_URL="http://host.docker.internal:5000"`
 `docker compose up --build`
 
 Then open `http://localhost:4200/`.
 
-To start the frontend against a specific environment run:
-
-The container startup reads `BACKEND_URL` and configures the API proxy from it (also when run in Kubernetes). If `BACKEND_URL` is not set, it defaults to `https://kitos-dev.strongminds.dk/`.
-
-Bash:
-`BACKEND_URL=http://host.docker.internal:5000/ docker compose up --build`
-
-Powershell:
-`$env:BACKEND_URL=http://host.docker.internal:5000/`
-`docker compose up --build`
-
-Or use one command (PowerShell), which sets `BACKEND_URL=http://host.docker.internal:5000/` and starts compose:
-`yarn docker:up:local`
+In Docker, nginx serves the SPA on `/` and proxies `/api`, `/odata`, and `/LoginHandler.ashx` to `BACKEND_URL`.
 
 Stop the container with:
 
 `docker compose down`
-
 `yarn start:local` runs the development server with a local backend, by changing the values in `src/proxy.conf.json`. This requires a local backend running on `https://localhost:44300`. After terminating, the proxy settings return to the default.
 
 `yarn start:docker` runs the development server with a Docker backend, by changing the values in `src/proxy.conf.json` to `http://localhost:5000`. After terminating, the proxy settings return to the default.
