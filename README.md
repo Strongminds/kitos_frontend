@@ -10,24 +10,7 @@ Make sure you have installed [Node.js](https://nodejs.org/en/) (preferable using
 
 `yarn start` for a development server. Navigate to `http://localhost:4200/` or `http://127.0.0.1:4200/`. The app will automatically reload if you change any of the source files.
 
-### Running in Docker
-
-Build and run the production container (Angular production build + nginx static file serving):
-
-Bash:
-`BACKEND_URL=http://host.docker.internal:5000 docker compose up --build`
-
-PowerShell:
-`$env:BACKEND_URL="http://host.docker.internal:5000"`
-`docker compose up --build`
-
-Then open `http://localhost:4200/`.
-
-In Docker, nginx serves the SPA on `/` and proxies `/api`, `/odata`, and `/LoginHandler.ashx` to `BACKEND_URL`.
-
-Stop the container with:
-
-`docker compose down`
+### Running in Docker`r`n`r`nBuild and run the production container (Angular production build + nginx static file serving):`r`n`r`nBash:`r`n`BACKEND_URL=http://host.docker.internal:5000 docker compose up --build``r`n`r`nPowerShell:`r`n`$env:BACKEND_URL="http://host.docker.internal:5000"``r`n`docker compose up --build``r`n`r`nThen open `http://localhost:4200/`.`r`n`r`nIn Docker, nginx serves the SPA on `/` and proxies `/api`, `/odata`, and `/LoginHandler.ashx` to `BACKEND_URL`.`r`n`r`nStop the container with:`r`n`r`n`docker compose down`
 `yarn start:local` runs the development server with a local backend, by changing the values in `src/proxy.conf.json`. This requires a local backend running on `https://localhost:44300`. After terminating, the proxy settings return to the default.
 
 `yarn start:docker` runs the development server with a Docker backend, by changing the values in `src/proxy.conf.json` to `http://localhost:5000`. After terminating, the proxy settings return to the default.
