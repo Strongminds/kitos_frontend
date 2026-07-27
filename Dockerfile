@@ -7,7 +7,7 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile
 
 COPY . .
-RUN yarn ng build --configuration production --base-href / --localize false
+RUN NODE_OPTIONS=--max_old_space_size=5048 yarn ng build --configuration production --base-href / --localize false
 
 FROM nginx:1.27-alpine
 
