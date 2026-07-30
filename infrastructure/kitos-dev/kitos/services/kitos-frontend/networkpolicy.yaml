@@ -39,7 +39,7 @@ spec:
   - from:
     - podSelector: {}
     ports:
-    - port: 4200
+    - port: 80
       protocol: TCP
   podSelector:
     matchLabels:
@@ -70,7 +70,7 @@ spec:
         matchLabels:
           app.kubernetes.io/name: traefik
     ports:
-    - port: 4200
+    - port: 80
       protocol: TCP
   podSelector:
     matchLabels:

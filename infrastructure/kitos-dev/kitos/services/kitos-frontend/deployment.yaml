@@ -29,7 +29,7 @@ spec:
         image: ghcr.io/strongminds/kitos_frontend-kitos-frontend:sha-16995d777f7d8b7dd488e208a5994a925eb8949b
         name: kitos-frontend
         ports:
-        - containerPort: 4200
+        - containerPort: 80
           name: http
           protocol: TCP
         resources:
