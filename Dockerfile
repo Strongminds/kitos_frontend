@@ -17,3 +17,4 @@ COPY docker/nginx.conf /etc/nginx/templates/default.conf.template
 COPY --from=build /app/dist/kitos-web/ /usr/share/nginx/html/
 
 EXPOSE 80
+EXPOSE 443
