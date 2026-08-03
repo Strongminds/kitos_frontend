@@ -9,7 +9,7 @@ export interface ITContractSupplier {
   SupplierType: ITContractSupplierType | undefined;
   SupplierUuid: string;
   SupplierName: string;
-  SupplierCvr: string;
+  SupplierCvr: string | null;
   IsSupplierDisabled: boolean;
   HighestCriticalityUuid: string | null;
   HighestCriticalityName: string | null;
@@ -31,7 +31,7 @@ export const adaptITContractSupplier = (value: any): ITContractSupplier | undefi
     SupplierType: mapITContractSupplierType(value.SupplierType),
     SupplierUuid: value.SupplierUuid,
     SupplierName: value.SupplierName,
-    SupplierCvr: value.SupplierCvr,
+    SupplierCvr: value.SupplierCvr || value.SupplierForeignCvr || null,
     IsSupplierDisabled: value.IsSupplierDisabled,
     HighestCriticalityUuid: value.HighestCriticalityUuid,
     HighestCriticalityName: value.HighestCriticalityName,
