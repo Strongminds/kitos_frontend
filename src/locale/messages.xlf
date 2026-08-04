@@ -6125,9 +6125,6 @@
       <trans-unit id="6695689715467154620" datatype="html">
         <source>Tilsynsmulighed</source>
       </trans-unit>
-      <trans-unit id="1887192367982958175" datatype="html">
-        <source>Kontrakter med kritikalitet</source>
-      </trans-unit>
       <trans-unit id="2104255059383970781" datatype="html">
         <source>Kontraktleverandøroverblik</source>
       </trans-unit>
@@ -6205,6 +6202,15 @@
       </trans-unit>
       <trans-unit id="8841697561528871723" datatype="html">
         <source>undermodul</source>
+      </trans-unit>
+      <trans-unit id="2642788272406240118" datatype="html">
+        <source>Orden</source>
+      </trans-unit>
+      <trans-unit id="5735709314762678717" datatype="html">
+        <source>En højere værdi angiver en lavere kritikalitet.</source>
+      </trans-unit>
+      <trans-unit id="8819444938310265564" datatype="html">
+        <source>Udslagsgivende kontrakter</source>
       </trans-unit>
     </body>
   </file>

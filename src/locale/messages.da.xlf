@@ -8029,10 +8029,6 @@
         <source>Beregnet kritikalitet</source>
         <target state="new">Beregnet kritikalitet</target>
       </trans-unit>
-      <trans-unit id="1887192367982958175" datatype="html">
-        <source>Kontrakter med kritikalitet</source>
-        <target state="new">Kontrakter med kritikalitet</target>
-      </trans-unit>
       <trans-unit id="2216578951027165690" datatype="html">
         <source><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Kontrakter</source>
         <target state="new"><x id="START_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;app-table-icon&gt;"/><x id="CLOSE_TAG_APP_TABLE_ICON" ctype="x-app_table_icon" equiv-text="&lt;/app-table-icon&gt;"/>IT Kontrakter</target>
@@ -8116,6 +8112,18 @@
       <trans-unit id="5473319657165590488" datatype="html">
         <source> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
         <target state="new"> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</target>
+      </trans-unit>
+      <trans-unit id="5735709314762678717" datatype="html">
+        <source>En højere værdi angiver en lavere kritikalitet.</source>
+        <target state="new">En højere værdi angiver en lavere kritikalitet.</target>
+      </trans-unit>
+      <trans-unit id="8819444938310265564" datatype="html">
+        <source>Udslagsgivende kontrakter</source>
+        <target state="new">Udslagsgivende kontrakter</target>
+      </trans-unit>
+      <trans-unit id="2642788272406240118" datatype="html">
+        <source>Orden</source>
+        <target state="new">Orden</target>
       </trans-unit>
     </body>
   </file>
