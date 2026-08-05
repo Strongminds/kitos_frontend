@@ -139,18 +139,5 @@ export class ITSystemUsageArchiveEffects {
 }
 
 function applyQueryFixes(odataString: string): string {
-  const normalizedArchivedByUserContains = odataString.replace(
-    /contains\(ArchivedByUser,'([^']*)'\)/gi,
-    (_match, value: string) => {
-      const decoded = decodeURIComponent(value).replaceAll('+', ' ');
-      return `contains(ArchivedByUser,'${decoded}')`;
-    },
-  );
-
-  return replaceQueryByMultiplePropertyContains(
-    normalizedArchivedByUserContains,
-    'ArchivedByUser',
-    'ArchivedByUser',
-    ['Name', 'LastName'],
-  );
+  return replaceQueryByMultiplePropertyContains(odataString, 'ArchivedByUser', 'ArchivedByUser', ['Name', 'LastName']);
 }
