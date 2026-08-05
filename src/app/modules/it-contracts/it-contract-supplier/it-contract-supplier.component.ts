@@ -89,7 +89,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
     },
     {
       field: 'ContractsAtHighestCriticality',
-      title: $localize`Kontrakter med kritikalitet`,
+      title: $localize`Udslagsgivende kontrakter`,
       style: 'page-link-array',
       dataField: 'ContractsAtHighestCriticality',
       entityType: 'it-contract',
@@ -113,9 +113,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       CONTRACT_SUPPLIERS_COLUMNS_ID,
       this.defaultGridColumns,
     );
-    this.store.dispatch(
-      ITContractSupplierActions.updateGridColumns(existingColumns ?? this.defaultGridColumns),
-    );
+    this.store.dispatch(ITContractSupplierActions.updateGridColumns(existingColumns ?? this.defaultGridColumns));
 
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_criticality-type'));
 
