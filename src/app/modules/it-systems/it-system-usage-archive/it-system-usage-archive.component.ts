@@ -84,7 +84,7 @@ export class ItSystemUsageArchiveComponent extends BaseOverviewComponent impleme
       hidden: false,
     },
     {
-      field: 'ArchivedByUser.Name',
+      field: 'ArchivedByUser',
       title: $localize`Udfaset af`,
       section: this.systemSectionName,
       hidden: false,
