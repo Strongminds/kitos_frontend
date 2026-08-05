@@ -8125,6 +8125,10 @@
         <source>Orden</source>
         <target state="new">Orden</target>
       </trans-unit>
+      <trans-unit id="7951043978617668941" datatype="html">
+        <source>Kritikalitetsprioritet</source>
+        <target state="new">Kritikalitetsprioritet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

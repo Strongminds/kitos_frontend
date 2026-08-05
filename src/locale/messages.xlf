@@ -6212,6 +6212,9 @@
       <trans-unit id="8819444938310265564" datatype="html">
         <source>Udslagsgivende kontrakter</source>
       </trans-unit>
+      <trans-unit id="7951043978617668941" datatype="html">
+        <source>Kritikalitetsprioritet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
