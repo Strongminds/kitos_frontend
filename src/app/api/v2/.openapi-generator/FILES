@@ -223,6 +223,7 @@ model/emailRecipientResponseDTO.ts
 model/emailRecipientWriteRequestDTO.ts
 model/expectedUsersIntervalDTO.ts
 model/extendedRoleAssignmentResponseDTO.ts
+model/externalOrganizationUnitResponseDTO.ts
 model/externalReferenceDataResponseDTO.ts
 model/externalReferenceDataWriteRequestDTO.ts
 model/externalReferenceWithLastChangedResponseDTO.ts
@@ -419,7 +420,6 @@ model/updateScheduledNotificationWriteRequestDTO.ts
 model/updateUserRequestDTO.ts
 model/userCollectionEditPermissionsResponseDTO.ts
 model/userCollectionPermissionsResponseDTO.ts
-model/userDefaultUnitResponseDTO.ts
 model/userIsPartOfCurrentOrgResponseDTO.ts
 model/userReferenceResponseDTO.ts
 model/userReferenceWithOrganizationResponseDTO.ts

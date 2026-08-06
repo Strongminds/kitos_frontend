@@ -9,9 +9,11 @@
  * https://openapi-generator.tech
  * Do not edit the class manually.
  */
+import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
+import { APIOrganizationUnitOriginChoice } from './organizationUnitOriginChoice';
 
 
-export interface APIRoleOptionResponseDTO { 
+export interface APIExternalOrganizationUnitResponseDTO { 
     /**
      * UUID which is unique within collection of entities of the same type
      */
@@ -20,21 +22,16 @@ export interface APIRoleOptionResponseDTO {
      * Human readable name of the entity
      */
     name: string;
+    parentOrganizationUnit?: APIIdentityNamePairResponseDTO;
     /**
-     * Extended description of the choice
+     * Optional EAN number for the organization unit.
      */
-    description: string;
+    ean?: number | null;
     /**
-     * Determines if this role grants write access to the entity through which it has been created
+     * Optional Organization Unit Id
      */
-    writeAccess?: boolean;
-    /**
-     * Determines if this role is used by any existing entities
-     */
-    isExternallyAvailable?: boolean;
-    /**
-     * Description about this roles usage externally
-     */
-    externallyAvailableDescription: string | null;
+    unitId?: string | null;
+    origin?: APIOrganizationUnitOriginChoice;
+    externalOriginUuid?: string | null;
 }
 

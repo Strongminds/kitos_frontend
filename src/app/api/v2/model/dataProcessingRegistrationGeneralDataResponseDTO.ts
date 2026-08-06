@@ -22,12 +22,12 @@ export interface APIDataProcessingRegistrationGeneralDataResponseDTO {
     /**
      * Additional remark related to the data responsible
      */
-    dataResponsibleRemark?: string | null;
+    dataResponsibleRemark: string | null;
     isAgreementConcluded?: APIYesNoIrrelevantChoice;
     /**
      * Remark related to whether or not an agreement has been concluded
      */
-    isAgreementConcludedRemark?: string | null;
+    isAgreementConcludedRemark: string | null;
     /**
      * Describes the date when the data processing agreement was concluded
      */

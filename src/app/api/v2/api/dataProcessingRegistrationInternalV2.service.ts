@@ -42,24 +42,34 @@ export interface GetManyDataProcessingRegistrationInternalV2GetAddRoleAssignment
 }
 
 export interface GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams {
+    /** UUID of the data processing registration */
     dprUuid: string;
+    /** Optional name query to filter the data processors */
     nameQuery?: string;
+    /** Number of results to return */
     pageSize?: number;
 }
 
 export interface GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams {
+    /** UUID of the data processing registration */
     dprUuid: string;
+    /** Optional name query to filter the sub-data processors */
     nameQuery?: string;
+    /** Number of results to return */
     pageSize?: number;
 }
 
 export interface GetManyDataProcessingRegistrationInternalV2GetAvailableSystemUsagesRequestParams {
+    /** UUID of the data processing registration */
     dprUuid: string;
+    /** Optional name query to filter the system usages */
     nameQuery?: string;
+    /** Number of results to return */
     pageSize?: number;
 }
 
 export interface GetManyDataProcessingRegistrationInternalV2GetItSystemsRequestParams {
+    /** UUID of the organization to filter the data processing registrations */
     organizationUuid?: string;
     /** Include only dprs with a name that contains the content in the parameter */
     nameContains?: string;
@@ -217,6 +227,7 @@ export class DataProcessingRegistrationInternalV2Service {
     }
 
     /**
+     * Get all available data processors which can be assigned to the data processing registration
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -295,6 +306,7 @@ export class DataProcessingRegistrationInternalV2Service {
     }
 
     /**
+     * Get all available sub-data processors which can be assigned to the data processing registration
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
@@ -373,6 +385,7 @@ export class DataProcessingRegistrationInternalV2Service {
     }
 
     /**
+     * Get all available system usages which can be assigned to the data processing registration
      * @param requestParameters
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
