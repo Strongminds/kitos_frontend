@@ -62,8 +62,8 @@ import { NotificationsTableComponentStore } from './notifications-table.componen
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
     LoadingComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class NotificationsTableComponent extends BaseComponent implements OnInit {
   @Input() entityUuid!: string;
@@ -191,7 +191,7 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     roleRecipients: APIRoleRecipientResponseDTO[] | undefined,
   ) {
     const emailRecipientEmails = emailRecipients?.map((recipient) => recipient.email);
-    const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name);
+    const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name) ?? [];
     return emailRecipientEmails?.concat(roleRecipientNames).join(', ');
   }
 
