@@ -46,12 +46,16 @@ export class UIConfigService {
       fullKey: nodeFullKey,
       isObligatory: node.isObligatory ?? false,
       isEnabled: !node.disableByDefault,
+      isRecommended: false,
       disableIfSubtreeDisabled: node.disableIfSubtreeDisabled,
     };
 
     const nodeCustomization = this.findCustomizedUINode(uiNodeCustomizations, nodeFullKey);
     if (nodeCustomization && nodeCustomization.enabled !== undefined) {
       nodeViewModel.isEnabled = nodeCustomization.enabled;
+    }
+    if (nodeCustomization && nodeCustomization.recommended !== undefined) {
+      nodeViewModel.isRecommended = nodeCustomization.recommended;
     }
     return nodeViewModel;
   }

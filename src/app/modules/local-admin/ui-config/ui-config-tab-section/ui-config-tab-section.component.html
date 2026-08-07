@@ -6,41 +6,57 @@
   [checkboxDisabled]="(checkboxDisabled() | async) ?? false"
   (checkboxChanged)="onCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })"
   [tooltipText]="(checkboxDisabled() | async) ? tabViewModel.helpText : undefined"
-  >
+>
   <app-divider></app-divider>
 
   <div class="form-section-top-padding">
     @if (!tabViewModelHasChildren()) {
       <app-paragraph class="center-no-fields-text" i18n>
-      Tilpasning på feltniveau er endnu ikke muligt for dette {{ noChildrenLabel() }}.
-    </app-paragraph>
+        Tilpasning på feltniveau er endnu ikke muligt for dette {{ noChildrenLabel() }}.
+      </app-paragraph>
     }
 
     <app-standard-vertical-content-grid [numColumns]="3">
       @for (fieldViewModel of tabViewModel.children; track fieldViewModel) {
-        <app-checkbox-button
-          i18n-text
-          labelPosition="after"
-          class="button-flex"
-          [value]="fieldViewModel.isEnabled ?? false"
-          [disabled]="
-            fieldViewModel.isObligatory ||
-            !tabViewModel.isEnabled ||
-            (moduleEnabled$ | async) === false ||
-            (loading$ | async) === true
-          "
-          (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
-          data-cy="field-checkbox"
+        <div class="field-config-option">
+          <app-checkbox-button
+            i18n-text
+            labelPosition="after"
+            class="button-flex"
+            [value]="fieldViewModel.isEnabled ?? false"
+            [disabled]="
+              fieldViewModel.isObligatory ||
+              !tabViewModel.isEnabled ||
+              (moduleEnabled$ | async) === false ||
+              (loading$ | async) === true
+            "
+            (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
+            data-cy="field-checkbox"
           >
-          <app-paragraph class="wrap-text">
-            {{ fieldViewModel.text }}
-          </app-paragraph>
-          @if (fieldViewModel.helpText !== undefined) {
-            <app-tooltip [text]="fieldViewModel.helpText" class="tooltip-margin">
-              <app-info-icon></app-info-icon>
-            </app-tooltip>
-          }
-        </app-checkbox-button>
+            <app-paragraph class="wrap-text">
+              {{ fieldViewModel.text }}
+            </app-paragraph>
+            @if (fieldViewModel.helpText !== undefined) {
+              <app-tooltip [text]="fieldViewModel.helpText" class="tooltip-margin">
+                <app-info-icon></app-info-icon>
+              </app-tooltip>
+            }
+          </app-checkbox-button>
+          <app-checkbox
+            i18n-text
+            text="Obligatorisk"
+            class="recommended-checkbox"
+            labelPosition="after"
+            [value]="fieldViewModel.isRecommended ?? false"
+            [disabled]="
+              !fieldViewModel.isEnabled ||
+              !tabViewModel.isEnabled ||
+              (moduleEnabled$ | async) === false ||
+              (loading$ | async) === true
+            "
+            (valueChange)="onCheckboxChanged({ recommended: $event, fullKey: fieldViewModel.fullKey })"
+          ></app-checkbox>
+        </div>
       }
     </app-standard-vertical-content-grid>
   </div>

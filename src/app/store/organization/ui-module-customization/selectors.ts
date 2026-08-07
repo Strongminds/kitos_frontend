@@ -47,6 +47,15 @@ const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: st
     return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
 
+const createFieldOrGroupEnabledAndRecommendedSelector = (module: UIModuleConfigKey, tabKey: string, fieldKey: string) =>
+  createSelector(selectModuleConfig(module), (moduleConfig) => {
+    const moduleConfigViewModels = moduleConfig?.moduleConfigViewModel;
+    if (!moduleConfigViewModels) return { enabled: true, recommended: false };
+
+    const fullKey = [module, tabKey].join('.');
+    return fieldOrGroupIsEnabledAndRecommended(moduleConfigViewModels, fullKey, fieldKey);
+  });
+
 //Data processing
 const createDprTabEnabledSelector = (tabKey: string) =>
   createTabEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, tabKey);
@@ -144,6 +153,8 @@ export const selectITSystemUsageEnableTechnicalSystemType =
   createItSystemUsageFrontPageFieldSelector('technicalSystemType');
 export const selectITSystemUsageEnableLicensingAndCodeModels =
   createItSystemUsageFrontPageFieldSelector('licensingAndCodeModels');
+export const selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItSystemUsage, 'frontPage', 'licensingAndCodeModels');
 
 //IT System Usage > Contracts
 const createItSystemUsageContractsFieldSelector = (fieldKey: string) =>
@@ -295,6 +306,20 @@ function fieldOrGroupIsEnabled(
   const fieldFullKey = [tabFullKey, fieldKey].join('.');
   const fieldViewModel = tabViewModelChildren.find((vm) => vm.fullKey === fieldFullKey);
   return fieldViewModel?.isEnabled ?? true;
+}
+
+function fieldOrGroupIsEnabledAndRecommended(
+  uiConfigViewModels: UIConfigNodeViewModel,
+  tabFullKey: string,
+  fieldKey: string,
+): { enabled: boolean; recommended: boolean } {
+  const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
+  const tabViewModelChildren = tabViewModel?.children;
+  if (!tabViewModelChildren) return { enabled: true, recommended: false };
+
+  const fieldFullKey = [tabFullKey, fieldKey].join('.');
+  const fieldViewModel = tabViewModelChildren.find((vm) => vm.fullKey === fieldFullKey);
+  return { enabled: fieldViewModel?.isEnabled ?? true, recommended: fieldViewModel?.isRecommended ?? false };
 }
 
 function getTabViewModelFromModule(
