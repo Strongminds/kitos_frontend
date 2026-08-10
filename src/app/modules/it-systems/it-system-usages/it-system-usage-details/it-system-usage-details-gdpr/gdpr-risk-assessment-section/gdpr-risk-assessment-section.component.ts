@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { concatLatestFrom } from '@ngrx/operators';
@@ -25,8 +25,8 @@ import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectITSystemUsageFieldPermissions, selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprConductedRiskAssessment,
-  selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
+  selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment,
+  selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AccordionComponent } from '../../../../../../shared/components/accordion/accordion.component';
 import { DatePickerComponent } from '../../../../../../shared/components/datepicker/datepicker.component';
@@ -72,10 +72,10 @@ export class GdprRiskAssessmentSectionComponent extends BaseAccordionComponent i
   public disableDirectoryDocumentationControl = false;
 
   public readonly enablePlannedRiskAssessmentDateField$ = this.store.select(
-    selectITSystemUsageEnableGdprPlannedRiskAssessmentDate,
+    selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
   );
   public readonly conductedRiskAssessmentEnabled$ = this.store.select(
-    selectITSystemUsageEnableGdprConductedRiskAssessment,
+    selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment,
   );
 
   public readonly yesNoDontKnowIrrelevantOptions = yesNoDontKnowIrrelevantOptions;

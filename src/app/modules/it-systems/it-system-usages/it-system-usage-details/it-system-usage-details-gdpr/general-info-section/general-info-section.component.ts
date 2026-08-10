@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -18,9 +18,9 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import { selectItSystemUsageGdpr } from 'src/app/store/it-system-usage/selectors';
 import {
-  selectITSystemUsageEnableGdprDocumentation,
-  selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
-  selectITSystemUsageEnableGdprPurpose,
+  selectITSystemUsageEnableAndRecommendedGdprDocumentation,
+  selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
+  selectITSystemUsageEnableAndRecommendedGdprPurpose,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { CardHeaderComponent } from '../../../../../../shared/components/card-header/card-header.component';
 import { CardComponent } from '../../../../../../shared/components/card/card.component';
@@ -28,6 +28,7 @@ import { DropdownComponent } from '../../../../../../shared/components/dropdowns
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
 import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-general-info-section',
@@ -69,10 +70,10 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public disableDirectoryDocumentationControl = false;
   public isDataProcessingAgreementRequiredOptions = isDataProcessingAgreementRequiredOptions;
 
-  public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableGdprPurpose);
-  public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableGdprDocumentation);
+  public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprPurpose).pipe(mapUIConfigStatusToEnabled());
+  public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprDocumentation).pipe(mapUIConfigStatusToEnabled());
   public readonly isDataProcessingAgreementRequiredEnabled$ = this.store.select(
-    selectITSystemUsageEnableGdprIsDataProcessingAgreementRequired,
+    selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
   );
 
   constructor(

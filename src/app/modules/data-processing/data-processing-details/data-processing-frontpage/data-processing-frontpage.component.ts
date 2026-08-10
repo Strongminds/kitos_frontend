@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -29,16 +29,16 @@ import {
   selectDataProcessingIsValid,
 } from 'src/app/store/data-processing/selectors';
 import {
-  selectDprEnableAgreementConcluded,
-  selectDprEnableDataResponsible,
-  selectDprEnableEnforceInvalidity,
-  selectDprEnableLastChangedAt,
-  selectDprEnableLastChangedBy,
-  selectDprEnableProcessors,
-  selectDprEnableResponsibleOrgUnit,
-  selectDprEnableStatus,
-  selectDprEnableSubProcessors,
-  selectDprEnableTransferBasis,
+  selectDprEnableAndRecommendedAgreementConcluded,
+  selectDprEnableAndRecommendedDataResponsible,
+  selectDprEnableAndRecommendedEnforceInvalidity,
+  selectDprEnableAndRecommendedLastChangedAt,
+  selectDprEnableAndRecommendedLastChangedBy,
+  selectDprEnableAndRecommendedProcessors,
+  selectDprEnableAndRecommendedResponsibleOrgUnit,
+  selectDprEnableAndRecommendedStatus,
+  selectDprEnableAndRecommendedSubProcessors,
+  selectDprEnableAndRecommendedTransferBasis,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -56,6 +56,7 @@ import { TextBoxComponent } from '../../../../shared/components/textbox/textbox.
 import { ProcessorsTableComponent } from './processors-table/processors-table.component';
 import { SubProcessorsTableComponent } from './sub-processors-table/sub-processors-table.component';
 import { ThirdCountriesTableComponent } from './third-countries-table/third-countries-table.component';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-data-processing-frontpage',
@@ -134,16 +135,16 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
     transferBasis: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
   });
 
-  public readonly dataResponsibleEnabled$ = this.store.select(selectDprEnableDataResponsible);
-  public readonly statusEnabled$ = this.store.select(selectDprEnableStatus);
-  public readonly lastChangedByEnabled$ = this.store.select(selectDprEnableLastChangedBy);
-  public readonly lastChangedAtEnabled$ = this.store.select(selectDprEnableLastChangedAt);
-  public readonly agreementConcludedEnabled$ = this.store.select(selectDprEnableAgreementConcluded);
-  public readonly transferBasisEnabled$ = this.store.select(selectDprEnableTransferBasis);
-  public readonly processorsEnabled$ = this.store.select(selectDprEnableProcessors);
-  public readonly subProcessorsEnabled$ = this.store.select(selectDprEnableSubProcessors);
-  public readonly responsibleUnitEnabled$ = this.store.select(selectDprEnableResponsibleOrgUnit);
-  public readonly enforceInvalidityEnabled$ = this.store.select(selectDprEnableEnforceInvalidity);
+  public readonly dataResponsibleEnabled$ = this.store.select(selectDprEnableAndRecommendedDataResponsible).pipe(mapUIConfigStatusToEnabled());
+  public readonly statusEnabled$ = this.store.select(selectDprEnableAndRecommendedStatus).pipe(mapUIConfigStatusToEnabled());
+  public readonly lastChangedByEnabled$ = this.store.select(selectDprEnableAndRecommendedLastChangedBy).pipe(mapUIConfigStatusToEnabled());
+  public readonly lastChangedAtEnabled$ = this.store.select(selectDprEnableAndRecommendedLastChangedAt).pipe(mapUIConfigStatusToEnabled());
+  public readonly agreementConcludedEnabled$ = this.store.select(selectDprEnableAndRecommendedAgreementConcluded).pipe(mapUIConfigStatusToEnabled());
+  public readonly transferBasisEnabled$ = this.store.select(selectDprEnableAndRecommendedTransferBasis).pipe(mapUIConfigStatusToEnabled());
+  public readonly processorsEnabled$ = this.store.select(selectDprEnableAndRecommendedProcessors).pipe(mapUIConfigStatusToEnabled());
+  public readonly subProcessorsEnabled$ = this.store.select(selectDprEnableAndRecommendedSubProcessors).pipe(mapUIConfigStatusToEnabled());
+  public readonly responsibleUnitEnabled$ = this.store.select(selectDprEnableAndRecommendedResponsibleOrgUnit).pipe(mapUIConfigStatusToEnabled());
+  public readonly enforceInvalidityEnabled$ = this.store.select(selectDprEnableAndRecommendedEnforceInvalidity).pipe(mapUIConfigStatusToEnabled());
 
   constructor(
     private store: Store,
