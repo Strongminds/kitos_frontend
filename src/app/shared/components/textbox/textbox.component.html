@@ -3,7 +3,7 @@
     <mat-label>
       {{ text }}
       @if (recommended) {
-        <span class="recommended-badge" i18n>Anbefalet</span>
+        <span [class.filled]="value" class="recommended-badge" i18n>Anbefalet</span>
       }
     </mat-label>
     <input
@@ -42,7 +42,7 @@
     <mat-label>
       {{ text }}
       @if (recommended) {
-        <span class="recommended-badge" i18n>Anbefalet</span>
+        <span [class.filled]="value" class="recommended-badge" i18n>Anbefalet</span>
       }
     </mat-label>
     <input

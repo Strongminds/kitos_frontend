@@ -712,6 +712,12 @@
   margin-left: 6px;
   vertical-align: text-bottom;
   line-height: 1.2;
+
+  &.filled {
+    background-color: lighten(theme.$color-positive, 35%);
+    color: darken(theme.$color-positive, 20%);
+    border-color: theme.$color-positive;
+  }
 }
 
 .recommended-badge {
