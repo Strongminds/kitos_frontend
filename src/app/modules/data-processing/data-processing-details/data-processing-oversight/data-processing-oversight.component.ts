@@ -13,7 +13,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { DropdownDialogComponent } from 'src/app/shared/components/dialogs/dropdown-dialog/dropdown-dialog.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
-import { combineOR, mapUIConfigStatusToEnabled} from 'src/app/shared/helpers/observable-helpers';
+import { combineOR, mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import {
   mapToOversightInterval,
   OversightInterval,
@@ -114,8 +114,11 @@ export class DataProcessingOversightComponent extends BaseComponent implements O
   );
 
   public readonly oversightIntervalEnabled$ = this.store.select(selectDprEnableAndRecommendedOversightInterval).pipe(mapUIConfigStatusToEnabled());
+  public readonly oversightIntervalRecommended$ = this.store.select(selectDprEnableAndRecommendedOversightInterval).pipe(mapUIConfigStatusToRecommended());
   public readonly nextOversightEnabled$ = this.store.select(selectDprEnableAndRecommendedScheduledInspectionDate).pipe(mapUIConfigStatusToEnabled());
+  public readonly nextOversightRecommended$ = this.store.select(selectDprEnableAndRecommendedScheduledInspectionDate).pipe(mapUIConfigStatusToRecommended());
   public readonly oversightOptionsEnabled$ = this.store.select(selectDprEnableAndRecommendedOversightOptions).pipe(mapUIConfigStatusToEnabled());
+  public readonly oversightOptionsRecommended$ = this.store.select(selectDprEnableAndRecommendedOversightOptions).pipe(mapUIConfigStatusToRecommended());
   public readonly oversightsEnabled$ = this.store.select(selectDprEnableAndRecommendedOversights).pipe(mapUIConfigStatusToEnabled());
 
   public readonly intervalCardEnabled$ = combineOR([

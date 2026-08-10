@@ -27,7 +27,7 @@ import {
   selectItContractsEnableAndRecommendedAgreementDeadlines,
   selectItContractsEnableAndRecommendedTermination,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
@@ -90,7 +90,9 @@ export class ItContractDeadlinesComponent extends BaseComponent implements OnIni
   });
 
   public readonly agreementDeadlinesEnabled$ = this.store.select(selectItContractsEnableAndRecommendedAgreementDeadlines).pipe(mapUIConfigStatusToEnabled());
+  public readonly agreementDeadlinesRecommended$ = this.store.select(selectItContractsEnableAndRecommendedAgreementDeadlines).pipe(mapUIConfigStatusToRecommended());
   public readonly terminationEnabled$ = this.store.select(selectItContractsEnableAndRecommendedTermination).pipe(mapUIConfigStatusToEnabled());
+  public readonly terminationRecommended$ = this.store.select(selectItContractsEnableAndRecommendedTermination).pipe(mapUIConfigStatusToRecommended());
 
   @ViewChild('durationMonthsInput') durationYearsInput!: NumericInputComponent;
   @ViewChild('durationMonthsInput') durationMonthsInput!: NumericInputComponent;

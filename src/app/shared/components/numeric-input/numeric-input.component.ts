@@ -14,6 +14,7 @@ import { MatFormField, MatLabel } from '@angular/material/select';
   imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput],
 })
 export class NumericInputComponent extends BaseFormComponent<number | undefined> implements AfterViewInit, OnDestroy {
+  @Input() public recommended = false;
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public minLength = 0;
   @Input() public maxLength = Number.MAX_SAFE_INTEGER;

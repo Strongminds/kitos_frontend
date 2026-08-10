@@ -14,6 +14,7 @@ import { ConnectedDropdownBaseComponent } from '../connected-dropdown-base/conne
 })
 export class ConnectedDropdownComponent<T> extends ConnectedDropdownBaseComponent implements OnInit {
   @Input() public data$?: Observable<T[]>;
+  @Input() public recommended = false;
   @Output() public valueChange = new EventEmitter<string>();
 
   public onValueChange(selectedUuid?: string) {

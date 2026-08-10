@@ -28,7 +28,7 @@ import { DropdownComponent } from '../../../../../../shared/components/dropdowns
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
 import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
-import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-general-info-section',
@@ -71,10 +71,14 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public isDataProcessingAgreementRequiredOptions = isDataProcessingAgreementRequiredOptions;
 
   public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprPurpose).pipe(mapUIConfigStatusToEnabled());
+  public readonly purposeRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprPurpose).pipe(mapUIConfigStatusToRecommended());
   public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprDocumentation).pipe(mapUIConfigStatusToEnabled());
   public readonly isDataProcessingAgreementRequiredEnabled$ = this.store.select(
     selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
-  );
+  ).pipe(mapUIConfigStatusToEnabled());
+  public readonly isDataProcessingAgreementRequiredRecommended$ = this.store.select(
+    selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
+  ).pipe(mapUIConfigStatusToRecommended());
 
   constructor(
     private readonly store: Store,

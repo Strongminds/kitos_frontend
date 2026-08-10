@@ -12,6 +12,7 @@
           i18n-text
           [formGroup]="riskAssessmentFormGroup"
           formName="plannedDateControl"
+          [recommended]="(plannedRiskAssessmentDateRecommended$ | async) === true"
           (valueChange)="patchGdpr({ plannedRiskAssessmentDate: $event?.toDateString() })"
           data-cy="planned-date-datepicker"
           >
@@ -24,6 +25,7 @@
           [formGroup]="riskAssessmentFormGroup"
           formName="riskAssessmentConductedControl"
           [data]="yesNoDontKnowIrrelevantOptions"
+          [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
           (valueChange)="patchGdpr({ riskAssessmentConducted: $event })"
           data-cy="risk-assessment-dropdown"
         ></app-dropdown>
@@ -34,6 +36,7 @@
           [formGroup]="riskAssessmentFormGroup"
           formName="conductedDateControl"
           data-cy="conducted-date-datepicker"
+          [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
           (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toDateString() })"
           >
         </app-datepicker>
@@ -52,6 +55,7 @@
             formName="assessmentResultControl"
             [data]="riskAssessmentResultOptions"
             data-cy="assessment-result-dropdown"
+            [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
             (valueChange)="patchGdpr({ riskAssessmentResult: $event })"
             ></app-dropdown
           ></app-tooltip>
@@ -70,6 +74,7 @@
             [formGroup]="riskAssessmentFormGroup"
             formName="notesControl"
             data-cy="assessment-notes"
+            [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
             (valueChange)="patchGdpr({ riskAssessmentNotes: $event })"
             >
           </app-textarea>

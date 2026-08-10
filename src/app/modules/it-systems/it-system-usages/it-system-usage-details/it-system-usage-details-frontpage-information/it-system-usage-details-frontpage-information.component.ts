@@ -175,21 +175,39 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly technicalSystemTypeEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedTechnicalSystemType)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly technicalSystemTypeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedTechnicalSystemType)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly purposeEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedGeneralPurpose)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly purposeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGeneralPurpose)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly hostedAtEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedGeneralHostedAt)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly hostedAtRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGeneralHostedAt)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly amountOfUsersEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedAmountOfUsers)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly amountOfUsersRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedAmountOfUsers)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly dataClassificationEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedDataClassification)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly dataClassificationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDataClassification)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly descriptionEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedDescription)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly descriptionRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDescription)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly takenIntoUsageByEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedTakenIntoUsageBy)
     .pipe(mapUIConfigStatusToEnabled());
@@ -208,9 +226,15 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly statusEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedStatus)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly statusRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedStatus)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly containsAITechnologyEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedContainsAITechnology)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly containsAITechnologyRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedContainsAITechnology)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly webAccessiblityEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedWebAccessibility)
     .pipe(mapUIConfigStatusToEnabled());
@@ -223,9 +247,15 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly licensingAndCodeModelsEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly licensingAndCodeModelsRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly criticalityFieldsLastChangedEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedCriticalityFieldsLastChanged)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly criticalityFieldsLastChangedRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedCriticalityFieldsLastChanged)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly criticalityLevelDocumentationEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedCriticalityLevelDocumentation)
     .pipe(mapUIConfigStatusToEnabled());
@@ -245,6 +275,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly systemUsageCriticalityEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly systemUsageCriticalityRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel)
+    .pipe(mapUIConfigStatusToRecommended());
 
   public readonly systemUsageCriticalityModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.systemUsageCriticalityLevel),

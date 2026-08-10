@@ -41,6 +41,7 @@
           formName="type"
           [data]="archiveTypes$ | async"
           [showDescription]="true"
+          [recommended]="(archiveTypeRecommended$ | async) === true"
           (valueChange)="patchArchiving({ typeUuid: $event })"
         ></app-dropdown>
       }
@@ -53,6 +54,7 @@
           formName="location"
           [data]="archiveLocationTypes$ | async"
           [showDescription]="true"
+          [recommended]="(archiveLocationRecommended$ | async) === true"
           (valueChange)="patchArchiving({ locationUuid: $event })"
         ></app-dropdown>
       }
@@ -64,6 +66,7 @@
           [formGroup]="archiveForm"
           formName="supplier"
           [data$]="supplierOrganizations$"
+          [recommended]="(archiveSupplierRecommended$ | async) === true"
           (filterChange)="supplierFilterChange($event)"
           (valueChange)="patchArchiving({ supplierOrganizationUuid: $event })"
         ></app-connected-dropdown>
@@ -77,6 +80,7 @@
           formName="testLocation"
           [data]="archiveLocationTestTypes$ | async"
           [showDescription]="true"
+          [recommended]="(archiveTestLocationRecommended$ | async) === true"
           (valueChange)="patchArchiving({ testLocationUuid: $event })"
         ></app-dropdown>
       }
@@ -86,6 +90,7 @@
           i18n-text
           [formGroup]="archiveForm"
           formName="frequencyInMonths"
+          [recommended]="(archiveFrequencyRecommended$ | async) === true"
           (valueChange)="patchJournalFrequency({ frequencyInMonths: $event })"
           [placeholder]="journalFrequencyPlaceholder()"
         ></app-numeric-input>
@@ -121,6 +126,7 @@
           i18n-text
           [formGroup]="archiveForm"
           formName="notes"
+          [recommended]="(notesRecommended$ | async) === true"
           (valueChange)="patchArchiving({ notes: $event })"
         ></app-textarea>
       }

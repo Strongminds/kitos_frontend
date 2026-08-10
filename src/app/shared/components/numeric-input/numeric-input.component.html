@@ -1,6 +1,9 @@
 @if (formGroup) {
   <mat-form-field [formGroup]="formGroup" class="{{ size }}">
     <mat-label>{{ text }}</mat-label>
+    @if (recommended) {
+      <span [class.filled]="formName && formGroup.controls[formName].value" class="recommended-badge" i18n>Anbefalet</span>
+    }
     <input
       matInput
       type="text"
@@ -17,6 +20,9 @@
 @if (!formGroup) {
   <mat-form-field class="{{ size }}">
     <mat-label>{{ text }}</mat-label>
+    @if (recommended) {
+      <span [class.filled]="value !== undefined && value !== null" class="recommended-badge" i18n>Anbefalet</span>
+    }
     <input
       matInput
       type="text"

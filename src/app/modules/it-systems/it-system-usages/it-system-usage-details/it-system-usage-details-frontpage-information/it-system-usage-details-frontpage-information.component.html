@@ -46,6 +46,7 @@
         i18n-text
         [data]="technicalSystemTypeDropdownOptions$ | async"
         [initialSelectedValues]="initialSelectedTechnicalSystemTypes"
+        [recommended]="(technicalSystemTypeRecommended$ | async) === true"
         [disabled]="!(hasModifyPermission$ | async)"
         (selectedEvent)="patchTechnicalSystemTypes($event)"
       ></app-multi-select-dropdown>
@@ -57,6 +58,7 @@
         [formGroup]="itSystemInformationForm"
         formName="hostedAt"
         [data]="hostedAtOptions"
+        [recommended]="(hostedAtRecommended$ | async) === true"
         (valueChange)="patchGeneral({ hostedAt: $event })"
       ></app-dropdown>
     }
@@ -67,6 +69,7 @@
         [formGroup]="itSystemInformationForm"
         formName="numberOfExpectedUsers"
         [data]="numberOfExpectedUsersOptions"
+        [recommended]="(amountOfUsersRecommended$ | async) === true"
         (valueChange)="patchGeneral({ numberOfExpectedUsers: $event })"
       ></app-dropdown>
     }
@@ -79,6 +82,7 @@
         formName="dataClassification"
         [data]="dataClassificationTypes$ | async"
         [showDescription]="true"
+        [recommended]="(dataClassificationRecommended$ | async) === true"
         (valueChange)="patchGeneral({ dataClassificationUuid: $event })"
       ></app-dropdown>
     }
@@ -92,6 +96,7 @@
           formName="aiTechnology"
           (valueChange)="patchGeneral({ containsAITechnology: $event })"
           [data]="aiTechnologyOptions"
+          [recommended]="(containsAITechnologyRecommended$ | async) === true"
         >
         </app-dropdown
       ></app-tooltip>
@@ -102,6 +107,7 @@
         i18n-text
         [data]="licensingAndCodeModelDropdownOptions$ | async"
         [initialSelectedValues]="initialSelectedLicensingAndCodeModels"
+        [recommended]="(licensingAndCodeModelsRecommended$ | async) === true"
         [disabled]="!(hasModifyPermission$ | async)"
         (selectedEvent)="patchLicensingAndCodeModels($event)"
       ></app-multi-select-dropdown>
@@ -113,6 +119,7 @@
         i18n-text
         [formGroup]="itSystemInformationForm"
         formName="purpose"
+        [recommended]="(purposeRecommended$ | async) === true"
         (validatedValueChange)="patchGeneral({ purpose: $event.value }, $event)"
         [autosizeMinRows]="1"
       ></app-textarea>
@@ -124,6 +131,7 @@
         i18n-text
         [formGroup]="itSystemInformationForm"
         formName="notes"
+        [recommended]="(descriptionRecommended$ | async) === true"
         (valueChange)="patchGeneral({ notes: $event })"
       ></app-textarea>
     }
@@ -153,6 +161,7 @@
           text="Systemkritikalitet sidst opdateret"
           formName="criticalityFieldsLastChanged"
           [formGroup]="itSystemCriticalityForm"
+          [recommended]="(criticalityFieldsLastChangedRecommended$ | async) === true"
         >
         </app-datepicker>
       }
@@ -181,6 +190,7 @@
             formName="systemUsageCriticalityLevel"
             (valueChange)="patchGeneral({ systemUsageCriticalityLevelUuid: $event })"
             [showDescription]="true"
+            [recommended]="(systemUsageCriticalityRecommended$ | async) === true"
             i18n-toolTipText
             toolTipText="Bruges til kommunens egen vurdering af systemets betydning for driften"
           ></app-dropdown>
@@ -264,6 +274,7 @@
           [formGroup]="itSystemApplicationForm"
           formName="valid"
           [info]="invalidReason$ | async"
+          [recommended]="(statusRecommended$ | async) === true"
         ></app-textbox>
       }
     </form>
@@ -304,6 +315,7 @@
         text="Noter"
         i18n-text
         data-cy="web-accessibility-notes"
+        [recommended]="(webAccessiblityEnabled$ | async) === true"
       ></app-textarea>
     </form>
   </app-card>

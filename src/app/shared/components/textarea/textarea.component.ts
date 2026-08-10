@@ -13,6 +13,7 @@ import { BaseFormComponent } from '../../base/base-form.component';
   imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, CdkTextareaAutosize, NgClass],
 })
 export class TextAreaComponent extends BaseFormComponent<string> implements AfterViewInit {
+  @Input() public recommended = false;
   @Input() public autosizeMinRows = 4;
   @Input() public autosizeMaxRows = 20;
 

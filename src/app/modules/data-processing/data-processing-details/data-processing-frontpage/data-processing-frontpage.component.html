@@ -31,6 +31,7 @@
           [formGroup]="frontpageFormGroup"
           formName="dataResponsible"
           [data]="dataResponsibleTypes$ | async"
+          [recommended]="(dataResponsibleRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ general: { dataResponsibleUuid: $event } })"
           >
         </app-dropdown>
@@ -41,6 +42,7 @@
           data-cy="dpr-notes"
           [formGroup]="frontpageFormGroup"
           formName="dataResponsibleRemarks"
+          [recommended]="(dataResponsibleRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ general: { dataResponsibleRemark: $event } })"
         ></app-textarea>
       }
@@ -52,6 +54,7 @@
             data-cy="dpr-status"
             [formGroup]="frontpageFormGroup"
             formName="status"
+            [recommended]="(statusRecommended$ | async) === true"
           ></app-textbox>
 
         @if (enforceInvalidityEnabled$ | async) {
@@ -73,6 +76,7 @@
           data-cy="dpr-last-changed-by"
           [formGroup]="frontpageFormGroup"
           formName="lastChangedBy"
+          [recommended]="(lastChangedByRecommended$ | async) === true"
           >
         </app-textbox>
       }
@@ -83,6 +87,7 @@
           data-cy="dpr-last-changed-at"
           [formGroup]="frontpageFormGroup"
           formName="lastChangedAt"
+          [recommended]="(lastChangedAtRecommended$ | async) === true"
           >
         </app-datepicker>
       }
@@ -95,6 +100,7 @@
           (valueChange)="patchFrontPage({ general: { responsibleOrganizationUnitUuid: $event } })"
           formName="responsibleOrgUnit"
           data-cy="responsible-unit-select"
+          [recommended]="(responsibleUnitRecommended$ | async) === true"
           >
         </app-org-unit-select>
       }
@@ -106,6 +112,7 @@
           [formGroup]="frontpageFormGroup"
           formName="agreementConcluded"
           [data]="yesNoIrrelevantOptions"
+          [recommended]="(agreementConcludedRecommended$ | async) === true"
           (valueChange)="patchAgreementConcluded($event)"
         ></app-dropdown>
         <app-datepicker
@@ -123,6 +130,7 @@
           data-cy="dpr-agreement-concluded-notes"
           [formGroup]="frontpageFormGroup"
           formName="agreementRemarks"
+          [recommended]="(agreementConcludedRecommended$ | async) === true"
           (valueChange)="patchFrontPage({ general: { isAgreementConcludedRemark: $event } })"
         ></app-textarea>
       }
@@ -147,6 +155,7 @@
             [formGroup]="transferBasisFormGroup"
             formName="transferBasis"
             [data]="basisForTransferTypes$ | async"
+            [recommended]="(transferBasisRecommended$ | async) === true"
             (valueChange)="patchFrontPage({ general: { basisForTransferUuid: $event } })"
             >
           </app-dropdown>

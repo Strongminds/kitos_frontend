@@ -22,7 +22,7 @@ import {
   selectItContractsEnableAndRecommendedInternalPayment,
   selectItContractsEnableAndRecommendedPaymentModel,
 } from 'src/app/store/organization/ui-module-customization/selectors';
-import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
@@ -71,6 +71,7 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
   });
 
   public readonly paymentModelEnabled$ = this.store.select(selectItContractsEnableAndRecommendedPaymentModel).pipe(mapUIConfigStatusToEnabled());
+  public readonly paymentModelRecommended$ = this.store.select(selectItContractsEnableAndRecommendedPaymentModel).pipe(mapUIConfigStatusToRecommended());
   public readonly externalPaymentEnabled$ = this.store.select(selectItContractsEnableAndRecommendedExternalPayment).pipe(mapUIConfigStatusToEnabled());
   public readonly internalPaymentEnabled$ = this.store.select(selectItContractsEnableAndRecommendedInternalPayment).pipe(mapUIConfigStatusToEnabled());
 

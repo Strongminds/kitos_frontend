@@ -10,6 +10,7 @@
         [formGroup]="generalInformationForm"
         formName="purpose"
         [maxLength]="250"
+        [recommended]="(purposeRecommended$ | async) === true"
         (valueChange)="patchGdpr({ processingPurpose: $event })"
       ></app-textbox>
     }
@@ -31,6 +32,7 @@
       [formGroup]="generalInformationForm"
       formName="isDataProcessingAgreementRequired"
       [data]="isDataProcessingAgreementRequiredOptions"
+      [recommended]="(isDataProcessingAgreementRequiredRecommended$ | async) === true"
       (valueChange)="patchGdpr({ isDataProcessingAgreementRequired: $event })"
     >
     </app-dropdown>
