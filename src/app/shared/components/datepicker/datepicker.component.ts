@@ -53,6 +53,7 @@ import { BaseFormComponent } from '../../base/base-form.component';
   ],
 })
 export class DatePickerComponent extends BaseFormComponent<Date | undefined> implements AfterViewInit, OnDestroy {
+  @Input() public recommended = false;
   @Input() public icon?: 'search';
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public pickerAlignmentY: 'above' | 'below' = 'above';

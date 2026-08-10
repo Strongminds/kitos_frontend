@@ -6,7 +6,7 @@
   >
   <form [formGroup]="riskAssessmentFormGroup">
     <app-standard-vertical-content-grid>
-      @if ((enablePlannedRiskAssessmentDateField$ | async) !== false) {
+      @if (enablePlannedRiskAssessmentDateField$ | async) {
         <app-datepicker
           text="Dato for planlagt risikovurdering"
           i18n-text

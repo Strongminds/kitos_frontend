@@ -52,6 +52,7 @@
               !fieldViewModel.isEnabled ||
               !tabViewModel.isEnabled ||
               (moduleEnabled$ | async) === false ||
+              fieldViewModel.isObligatory ||
               (loading$ | async) === true
             "
             (valueChange)="onCheckboxChanged({ recommended: $event, fullKey: fieldViewModel.fullKey })"

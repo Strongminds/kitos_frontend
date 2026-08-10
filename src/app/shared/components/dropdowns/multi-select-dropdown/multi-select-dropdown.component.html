@@ -1,3 +1,9 @@
+@if (recommended) {
+  <div class="recommended-label-row">
+    <span class="recommended-label-text">{{ text }}</span>
+    <span class="recommended-badge" i18n>Anbefalet</span>
+  </div>
+}
 <ng-select
   #selectDropdown
   class="{{ size }} "

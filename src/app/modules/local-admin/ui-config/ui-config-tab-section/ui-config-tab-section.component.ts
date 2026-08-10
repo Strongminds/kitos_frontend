@@ -56,6 +56,7 @@ export class UiConfigTabSectionComponent {
       key: $event.fullKey,
       recommended: $event.recommended,
     };
+
     this.store.dispatch(
       UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto }),
     );

@@ -32,6 +32,7 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
 ],
 })
 export class TextBoxComponent extends BaseFormComponent<string> {
+  @Input() public recommended = false;
   @Input() public clearable = false;
   @Input() public type: 'text' | 'email' | 'password' = 'text';
   @Input() public maxLength = 2000;

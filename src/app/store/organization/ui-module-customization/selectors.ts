@@ -181,6 +181,7 @@ const createItSystemUsageFrontPageFieldEnableAndRecommendedSelector = (fieldKey:
 
 export const selectITSystemUsageEnableName = createItSystemUsageFrontPageFieldSelector('name');
 export const selectITSystemUsageEnableAndRecommendedName = createItSystemUsageFrontPageFieldEnableAndRecommendedSelector('name');
+export const selectITSystemUsageEnableAndRecommendedLocalCallName = createItSystemUsageFrontPageFieldEnableAndRecommendedSelector('localCallName');
 export const selectITSystemUsageEnabledSystemId = createItSystemUsageFrontPageFieldSelector('systemId');
 export const selectITSystemUsageEnableAndRecommendedSystemId = createItSystemUsageFrontPageFieldEnableAndRecommendedSelector('systemId');
 export const selectITSystemUsageEnableVersion = createItSystemUsageFrontPageFieldSelector('version');

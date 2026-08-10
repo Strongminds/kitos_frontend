@@ -78,6 +78,7 @@ export class UIModuleCustomizationEffects {
                 existingUICustomization,
                 updatedNodeRequest,
               );
+              console.log('onCheckboxChanged', requestDto);
 
               return this.organizationInternalService
                 .putSingleOrganizationsInternalV2PutUIModuleCustomization({
@@ -217,7 +218,10 @@ export class UIModuleCustomizationEffects {
     const allNodes = this.uiConfigService.getAllNodesOfBlueprint(module);
     const existingKeys = new Set(response.map((node) => node.key));
     const missingNodes = allNodes.filter((node) => node.fullKey !== undefined && !existingKeys.has(node.fullKey));
-    const nodesToAdd = missingNodes.map((node) => ({ key: node.fullKey!, enabled: !node.disableByDefault }));
+    const nodesToAdd = missingNodes.map((node) => ({
+      key: node.fullKey!,
+      enabled: !node.disableByDefault,
+    }));
     return [...response, ...nodesToAdd];
   }
 }

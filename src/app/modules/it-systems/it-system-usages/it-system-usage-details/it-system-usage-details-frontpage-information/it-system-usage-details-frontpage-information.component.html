@@ -35,6 +35,7 @@
         [formGroup]="itSystemInformationForm"
         formName="systemVersion"
         [maxLength]="100"
+        [recommended]="(versionRecommended$ | async) === true"
         (valueChange)="patchGeneral({ systemVersion: $event })"
       ></app-textbox>
     }

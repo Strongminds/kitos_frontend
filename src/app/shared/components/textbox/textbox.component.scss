@@ -45,3 +45,18 @@ input {
 input.medium {
   padding-top: 3px;
 }
+
+.recommended-badge {
+  display: inline-flex;
+  align-items: center;
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffc107;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  margin-left: 6px;
+  vertical-align: baseline;
+  line-height: 1;
+}
