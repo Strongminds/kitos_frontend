@@ -142,15 +142,17 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
     if (!this.cellIsClickableStyleOrEmpty(event)) return;
     const dataItem = event.dataItem;
     const contracts = dataItem.ContractsAtHighestCriticality;
+    
     if (!contracts || contracts.length === 0) return;
-    if (contracts.length === 1) {
-      const newTabResult = verifyClickAndOpenNewTab(
-        event.originalEvent,
-        this.router.serializeUrl(this.router.createUrlTree([AppPath.itContracts, AppPath.contracts, contracts[0].id])),
-      );
-      if (newTabResult) return;
-      this.router.navigate([AppPath.itContracts, AppPath.contracts, contracts[0].id]);
-    } else this.dialogOpenerService.openSupplierContractsDialog(dataItem.SupplierName, contracts);
+    if (contracts.length > 1){
+      this.dialogOpenerService.openSupplierContractsDialog(dataItem.SupplierName, contracts);
+      return;
+    }
+
+    const url = this.router.createUrlTree([AppPath.itContracts, AppPath.contracts, contracts[0].id]);
+    const newTabResult = verifyClickAndOpenNewTab(event.originalEvent, this.router.serializeUrl(url));
+    if (newTabResult) return;
+    this.router.navigateByUrl(url);
   }
 
   private useDefaultColumns(): void {
