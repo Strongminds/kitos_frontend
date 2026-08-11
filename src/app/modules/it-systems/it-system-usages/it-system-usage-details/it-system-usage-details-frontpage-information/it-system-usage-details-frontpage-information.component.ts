@@ -166,6 +166,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly systemIdEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedSystemId)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly systemIdRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSystemId)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly versionEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedVersion)
     .pipe(mapUIConfigStatusToEnabled());

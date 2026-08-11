@@ -8129,6 +8129,10 @@
         <source>Kritikalitetsprioritet</source>
         <target state="new">Kritikalitetsprioritet</target>
       </trans-unit>
+      <trans-unit id="2023668919263536036" datatype="html">
+        <source>Anbefalet</source>
+        <target state="new">Anbefalet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

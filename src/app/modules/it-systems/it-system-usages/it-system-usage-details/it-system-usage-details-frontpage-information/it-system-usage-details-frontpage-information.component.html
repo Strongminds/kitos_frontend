@@ -25,6 +25,7 @@
         [formGroup]="itSystemInformationForm"
         formName="localSystemId"
         [maxLength]="200"
+        [recommended]="(systemIdRecommended$ | async) === true"
         (valueChange)="patchGeneral({ localSystemId: $event })"
       ></app-textbox>
     }
