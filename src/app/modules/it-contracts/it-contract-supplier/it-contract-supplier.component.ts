@@ -119,8 +119,9 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
       CONTRACT_SUPPLIERS_COLUMNS_ID,
       this.defaultGridColumns,
     );
-    this.store.dispatch(ITContractSupplierActions.updateGridColumns(existingColumns ?? this.defaultGridColumns));
-
+    const columns = existingColumns ?? this.defaultGridColumns;
+    this.store.dispatch(ITContractSupplierActions.updateGridColumns(columns));
+    this.subscriptions.add(this.gridColumns$.subscribe((columns) => this.updateUnclickableColumns(columns)));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract_criticality-type'));
 
     this.subscriptions.add(
@@ -137,6 +138,7 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
   }
 
   override rowIdSelect(event: CellClickEvent): void {
+    if (!this.cellIsClickableStyleOrEmpty(event)) return;
     const dataItem = event.dataItem;
     const contracts = dataItem.ContractsAtHighestCriticality;
     if (!contracts || contracts.length === 0) return;
