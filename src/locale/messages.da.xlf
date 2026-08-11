@@ -8129,6 +8129,18 @@
         <source>Kritikalitetsprioritet</source>
         <target state="new">Kritikalitetsprioritet</target>
       </trans-unit>
+      <trans-unit id="1122304114460972965" datatype="html">
+        <source>Ingen kontrakter fundet</source>
+        <target state="new">Ingen kontrakter fundet</target>
+      </trans-unit>
+      <trans-unit id="46376569860723432" datatype="html">
+        <source>Luk</source>
+        <target state="new">Luk</target>
+      </trans-unit>
+      <trans-unit id="2334804090064535327" datatype="html">
+        <source>Kontrakter for leverandøren <x id="PH" equiv-text="this.supplierName"/></source>
+        <target state="new">Kontrakter for leverandøren <x id="PH" equiv-text="this.supplierName"/></target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
