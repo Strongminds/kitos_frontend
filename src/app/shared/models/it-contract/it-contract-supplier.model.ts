@@ -1,5 +1,8 @@
 import { ITContractSupplierType, mapITContractSupplierType } from './it-contract-supplier-type';
 
+export interface SupplierContract 
+{ id: string; value: string }
+
 export interface ITContractSupplier {
   id: number;
   OrganizationId: number;
@@ -15,7 +18,7 @@ export interface ITContractSupplier {
   HighestCriticalityName: string | null;
   HighestCriticalityRank: number | null;
   ContractsAtHighestCriticalityCsv: string | null;
-  ContractsAtHighestCriticality: { id: string; value: string }[];
+  ContractsAtHighestCriticality: SupplierContract[];
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

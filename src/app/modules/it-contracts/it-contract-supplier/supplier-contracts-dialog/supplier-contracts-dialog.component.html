@@ -1,0 +1,15 @@
+<app-dialog [title]="getTitle()" i18n-title overflow="none">
+  <app-standard-vertical-content-grid>
+    @for (contract of contracts; track contract) {
+      <app-details-page-link
+      itemType="it-contract"
+      [itemPath]="contract.id"
+      >{{ contract.value }}</app-details-page-link>
+    } @empty {
+      <app-paragraph i18n>Ingen kontrakter fundet</app-paragraph>
+    }
+  </app-standard-vertical-content-grid>
+  <app-dialog-actions>
+    <app-button buttonStyle="secondary" (buttonClick)="onClose()" i18n>Luk</app-button>
+  </app-dialog-actions>
+</app-dialog>
