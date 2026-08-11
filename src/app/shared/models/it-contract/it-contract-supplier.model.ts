@@ -1,8 +1,9 @@
 import { ITContractSupplierType, mapITContractSupplierType } from './it-contract-supplier-type';
 
-export interface SupplierContract 
-{ id: string; value: string }
-
+export interface SupplierContract {
+  id: string;
+  value: string;
+}
 export interface ITContractSupplier {
   id: number;
   OrganizationId: number;
