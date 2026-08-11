@@ -4,6 +4,7 @@
       <app-details-page-link
       itemType="it-contract"
       [itemPath]="contract.id"
+      appCtrlClick
       >{{ contract.value }}</app-details-page-link>
     } @empty {
       <app-paragraph i18n>Ingen kontrakter fundet</app-paragraph>

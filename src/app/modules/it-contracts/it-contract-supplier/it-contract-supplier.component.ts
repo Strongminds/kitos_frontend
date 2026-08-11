@@ -11,6 +11,7 @@ import {
   CONTRACT_SUPPLIERS_SECTION_NAME,
 } from 'src/app/shared/constants/persistent-state-constants';
 import { AppPath } from 'src/app/shared/enums/app-path';
+import { verifyClickAndOpenNewTab } from 'src/app/shared/helpers/navigation/ctrl-click.helpers';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { itContractSupplierTypeOptions } from 'src/app/shared/models/it-contract/it-contract-supplier-type';
@@ -142,8 +143,14 @@ export class ItContractSupplierComponent extends BaseOverviewComponent implement
     const dataItem = event.dataItem;
     const contracts = dataItem.ContractsAtHighestCriticality;
     if (!contracts || contracts.length === 0) return;
-    if (contracts.length === 1) this.router.navigate([AppPath.itContracts, AppPath.contracts, contracts[0].id]);
-    else this.dialogOpenerService.openSupplierContractsDialog(dataItem.SupplierName, contracts);
+    if (contracts.length === 1) {
+      const newTabResult = verifyClickAndOpenNewTab(
+        event.originalEvent,
+        this.router.serializeUrl(this.router.createUrlTree([AppPath.itContracts, AppPath.contracts, contracts[0].id])),
+      );
+      if (newTabResult) return;
+      this.router.navigate([AppPath.itContracts, AppPath.contracts, contracts[0].id]);
+    } else this.dialogOpenerService.openSupplierContractsDialog(dataItem.SupplierName, contracts);
   }
 
   private useDefaultColumns(): void {
