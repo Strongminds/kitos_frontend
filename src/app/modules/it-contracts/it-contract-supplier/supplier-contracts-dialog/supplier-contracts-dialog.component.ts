@@ -8,7 +8,6 @@ import { ScrollbarDialogComponent } from 'src/app/shared/components/dialogs/dial
 import { ArrowRightIconComponent } from 'src/app/shared/components/icons/arrow-right-icon.component';
 import { NativeTableComponent } from 'src/app/shared/components/native-table/native-table.component';
 import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
-import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { getDetailsPageLink } from 'src/app/shared/helpers/link.helpers';
 import { SupplierContract } from 'src/app/shared/models/it-contract/it-contract-supplier.model';
 
@@ -38,10 +37,6 @@ export class SupplierContractsDialogComponent extends BaseComponent implements O
 
   ngOnInit(): void {
     this.subscriptions.add(this.router.events.subscribe(() => this.dialogRef.close()));
-  }
-
-  public getTitle() {
-    return $localize`Udslagsgivende kontrakter for leverandøren ${this.supplierName}`;
   }
 
   public onLinkClick(contractId: string) {

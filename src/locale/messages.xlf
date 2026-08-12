@@ -6218,9 +6218,6 @@
       <trans-unit id="1122304114460972965" datatype="html">
         <source>Ingen kontrakter fundet</source>
       </trans-unit>
-      <trans-unit id="6858538075945907362" datatype="html">
-        <source>Udslagsgivende kontrakter for leverandøren <x id="PH" equiv-text="this.supplierName"/></source>
-      </trans-unit>
     </body>
   </file>
 </xliff>

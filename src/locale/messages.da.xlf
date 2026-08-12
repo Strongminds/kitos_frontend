@@ -8133,10 +8133,6 @@
         <source>Ingen kontrakter fundet</source>
         <target state="new">Ingen kontrakter fundet</target>
       </trans-unit>
-      <trans-unit id="6858538075945907362" datatype="html">
-        <source>Udslagsgivende kontrakter for leverandøren <x id="PH" equiv-text="this.supplierName"/></source>
-        <target state="new">Udslagsgivende kontrakter for leverandøren <x id="PH" equiv-text="this.supplierName"/></target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

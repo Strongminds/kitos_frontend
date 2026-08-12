@@ -1,6 +1,7 @@
-<app-scrollbar-dialog [title]="getTitle()" [closable]="true" overflow="none" i18n-title>
+<app-scrollbar-dialog title="Udslagsgivende kontrakter" [closable]="true" overflow="none" i18n-title>
   <app-native-table>
-    <tbody>
+    <tbody>     
+        <th>{{ supplierName }}</th>
       @for (contract of contracts; track contract) {
         <tr>
           <td>
