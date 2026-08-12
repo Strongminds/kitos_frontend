@@ -2,18 +2,26 @@ import { Component, Input, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
-import { DetailsPageLinkComponent } from 'src/app/shared/components/details-page-link/details-page-link.component';
-import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
-import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
+import { IconButtonComponent } from 'src/app/shared/components/buttons/icon-button/icon-button.component';
+import { ContentSpaceBetweenComponent } from 'src/app/shared/components/content-space-between/content-space-between.component';
+import { ScrollbarDialogComponent } from 'src/app/shared/components/dialogs/dialog/scrollbar-dialog/scrollbar-dialog.component';
+import { ArrowRightIconComponent } from 'src/app/shared/components/icons/arrow-right-icon.component';
+import { NativeTableComponent } from 'src/app/shared/components/native-table/native-table.component';
 import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
+import { getDetailsPageLink } from 'src/app/shared/helpers/link.helpers';
 import { SupplierContract } from 'src/app/shared/models/it-contract/it-contract-supplier.model';
-
 
 @Component({
   selector: 'app-supplier-contracts-dialog',
-  imports: [DialogComponent, DialogActionsComponent, ButtonComponent, StandardVerticalContentGridComponent, DetailsPageLinkComponent, ParagraphComponent],
+  imports: [
+    ScrollbarDialogComponent,
+    ParagraphComponent,
+    NativeTableComponent,
+    ArrowRightIconComponent,
+    IconButtonComponent,
+    ContentSpaceBetweenComponent,
+  ],
   templateUrl: './supplier-contracts-dialog.component.html',
   styleUrl: './supplier-contracts-dialog.component.scss',
 })
@@ -29,13 +37,18 @@ export class SupplierContractsDialogComponent extends BaseComponent implements O
   }
 
   ngOnInit(): void {
-    this.subscriptions.add(
-      this.router.events.subscribe(() => this.dialogRef.close())
-    );
+    this.subscriptions.add(this.router.events.subscribe(() => this.dialogRef.close()));
   }
 
   public getTitle() {
-    return $localize`Kontrakter for leverandøren ${this.supplierName}`;
+    return $localize`Udslagsgivende kontrakter for leverandøren ${this.supplierName}`;
+  }
+
+  public onLinkClick(contractId: string) {
+    const path = getDetailsPageLink(contractId, 'it-contract', undefined, false);
+    if (path) {
+      this.router.navigate([path]);
+    }
   }
 
   public onClose() {
