@@ -8129,6 +8129,10 @@
         <source>Kritikalitetsprioritet</source>
         <target state="new">Kritikalitetsprioritet</target>
       </trans-unit>
+      <trans-unit id="1122304114460972965" datatype="html">
+        <source>Ingen kontrakter fundet</source>
+        <target state="new">Ingen kontrakter fundet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

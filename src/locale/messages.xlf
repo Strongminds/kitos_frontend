@@ -6215,6 +6215,9 @@
       <trans-unit id="7951043978617668941" datatype="html">
         <source>Kritikalitetsprioritet</source>
       </trans-unit>
+      <trans-unit id="1122304114460972965" datatype="html">
+        <source>Ingen kontrakter fundet</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
