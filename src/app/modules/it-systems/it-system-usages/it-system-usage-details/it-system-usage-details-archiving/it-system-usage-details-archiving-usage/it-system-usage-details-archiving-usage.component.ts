@@ -15,6 +15,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { ARCHIVE_TEXT } from 'src/app/shared/constants/constants';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import {
   ArchiveDutyChoice,
   archiveDutyChoiceOptions,
@@ -34,6 +35,7 @@ import {
 import { selectItSystemRecomendedArchiveDutyComment } from 'src/app/store/it-system/selectors';
 import {
   selectITSystemUsageEnableAndRecommendedActive,
+  selectITSystemUsageEnableAndRecommendedArchiveDuty,
   selectITSystemUsageEnableAndRecommendedArchiveFrequency,
   selectITSystemUsageEnableAndRecommendedArchiveLocation,
   selectITSystemUsageEnableAndRecommendedArchiveSupplier,
@@ -71,7 +73,6 @@ import { TextBoxInfoComponent } from '../../../../../../shared/components/textbo
 import { AppDatePipe } from '../../../../../../shared/pipes/app-date.pipe';
 import { ItSystemUsageDetailsArchivingComponentStore } from '../it-system-usage-details-archiving.component-store';
 import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from '../write-dialog/it-system-usage-details-journal-period-write-dialog.component';
-import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-system-usage-details-archiving-usage',
@@ -158,23 +159,64 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
 
   public readonly nationalArchivesText = ARCHIVE_TEXT;
 
-  public readonly archiveTypeEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveType).pipe(mapUIConfigStatusToEnabled());
-  public readonly archiveTypeRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveType).pipe(mapUIConfigStatusToRecommended());
-  public readonly archiveLocationEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveLocation).pipe(mapUIConfigStatusToEnabled());
-  public readonly archiveLocationRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveLocation).pipe(mapUIConfigStatusToRecommended());
-  public readonly archiveSupplierEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveSupplier).pipe(mapUIConfigStatusToEnabled());
-  public readonly archiveSupplierRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveSupplier).pipe(mapUIConfigStatusToRecommended());
-  public readonly archiveTestLocationEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveTestLocation).pipe(mapUIConfigStatusToEnabled());
-  public readonly archiveTestLocationRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveTestLocation).pipe(mapUIConfigStatusToRecommended());
-  public readonly archiveFrequencyEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveFrequency).pipe(mapUIConfigStatusToEnabled());
-  public readonly archiveFrequencyRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedArchiveFrequency).pipe(mapUIConfigStatusToRecommended());
-  public readonly documentBearingEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedDocumentBearing).pipe(mapUIConfigStatusToEnabled());
-  public readonly activeEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedActive).pipe(mapUIConfigStatusToEnabled());
-  public readonly notesEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedNotes).pipe(mapUIConfigStatusToEnabled());
-  public readonly notesRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedNotes).pipe(mapUIConfigStatusToRecommended());
-  public readonly journalPeriodsEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedJournalPeriods).pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveDutyRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveDuty)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveTypeEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveType)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveTypeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveType)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveLocationEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveLocation)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveLocationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveLocation)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveSupplierEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveSupplier)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveSupplierRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveSupplier)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveTestLocationEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveTestLocation)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveTestLocationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveTestLocation)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly archiveFrequencyEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveFrequency)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly archiveFrequencyRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedArchiveFrequency)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly documentBearingEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDocumentBearing)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly documentBearingRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedDocumentBearing)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly activeEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedActive)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly activeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedActive)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly notesEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedNotes)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly notesRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedNotes)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly journalPeriodsEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedJournalPeriods)
+    .pipe(mapUIConfigStatusToEnabled());
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
-  public readonly catalogArchiveDutyEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty).pipe(mapUIConfigStatusToEnabled());
+  public readonly catalogArchiveDutyEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty)
+    .pipe(mapUIConfigStatusToEnabled());
   public readonly catalogArchiveDutyCommentEnabled$ = this.store.select(
     selectITSystemUsageEnableAndRecommendedCatalogArchiveDutyComment,
   );

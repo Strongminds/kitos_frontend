@@ -9,6 +9,7 @@
         formName="archiveDuty"
         [data]="archiveDutyChoice"
         [showDescription]="true"
+        [recommended]="(archiveDutyRecommended$ | async) === true"
         (valueChange)="patchArchiving({ archiveDuty: $event })"
       ></app-dropdown>
       <app-textbox-info>
