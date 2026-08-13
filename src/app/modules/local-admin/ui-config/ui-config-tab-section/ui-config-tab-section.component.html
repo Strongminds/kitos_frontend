@@ -42,7 +42,8 @@
               </app-tooltip>
             }
           </app-checkbox-button>
-          <app-checkbox
+          @if (!fieldViewModel.cannotBeRecommended) {
+            <app-checkbox
             i18n-text
             text="Anbefalet"
             class="recommended-checkbox"
@@ -56,6 +57,7 @@
             "
             (valueChange)="onCheckboxChanged({ recommended: $event, fullKey: fieldViewModel.fullKey })"
           ></app-checkbox>
+          }
         </div>
       }
     </app-standard-vertical-content-grid>

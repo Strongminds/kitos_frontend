@@ -46,6 +46,7 @@ export class UIConfigService {
       fullKey: nodeFullKey,
       isObligatory: node.isObligatory ?? false,
       isEnabled: !node.disableByDefault,
+      cannotBeRecommended: node.cannotBeRecommended,
       isRecommended: false,
       disableIfSubtreeDisabled: node.disableIfSubtreeDisabled,
     };

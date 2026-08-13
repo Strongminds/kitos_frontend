@@ -36,9 +36,11 @@ export const DataProcessingUiBluePrint = {
         },
         processors: {
           text: $localize`Databehandlere`,
+          cannotBeRecommended: true,
         },
         subProcessors: {
           text: $localize`Underdatabehandlere`,
+          cannotBeRecommended: true,
         },
         responsibleOrgUnit: {
           text: $localize`Ansvarlig enhed`,
@@ -62,6 +64,7 @@ export const DataProcessingUiBluePrint = {
         },
         associatedContracts: {
           text: $localize`Tilknyttede kontrakter`,
+          cannotBeRecommended: true,
         },
       },
     },
