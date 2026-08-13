@@ -17,6 +17,7 @@
       [formGroup]="frontpageFormGroup"
       formName="name"
       (valueChange)="patchName($event)"
+      [recommended]="(nameRecommended$ | async) === true"
     ></app-textbox>
     @if (contractIdEnabled$ | async) {
       <app-textbox

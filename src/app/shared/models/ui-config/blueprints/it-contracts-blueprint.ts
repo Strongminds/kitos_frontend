@@ -42,6 +42,7 @@ export const ItContractsUiBluePrint = {
         },
         parentContract: {
           text: $localize`Overordnet kontrakt`,
+          cannotBeRecommended: true,
         },
         useParentValidity: {
           text: $localize`Nedarv overordnet kontrakts gyldighed`,

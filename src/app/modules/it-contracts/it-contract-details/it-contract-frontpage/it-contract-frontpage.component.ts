@@ -13,7 +13,11 @@ import {
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { RadioButtonOption } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
-import { combineOR, mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
+import {
+  combineOR,
+  mapUIConfigStatusToEnabled,
+  mapUIConfigStatusToRecommended,
+} from 'src/app/shared/helpers/observable-helpers';
 import { toBulletPoints } from 'src/app/shared/helpers/string.helpers';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -26,17 +30,17 @@ import {
   selectItContractValidity,
 } from 'src/app/store/it-contract/selectors';
 import {
-  selectItContractsEnableAndRecommendedSupplier,
   selectItContractEnableAndRecommendedContractId,
+  selectItContractEnableAndRecommendName,
   selectItContractsEnableAndRecommendedAgreementPeriod,
   selectItContractsEnableAndRecommendedContractType,
-  selectItContractsEnableAndRecommendedCriticality,
   selectItContractsEnableAndRecommendedCreatedBy,
-  selectItContractsEnableAndRecommendedlastModifedBy,
-  selectItContractsEnableAndRecommendedlastModifedDate,
+  selectItContractsEnableAndRecommendedCriticality,
   selectItContractsEnableAndRecommendedExternalSigner,
   selectItContractsEnableAndRecommendedInternalSigner,
   selectItContractsEnableAndRecommendedIsActive,
+  selectItContractsEnableAndRecommendedlastModifedBy,
+  selectItContractsEnableAndRecommendedlastModifedDate,
   selectItContractsEnableAndRecommendedNotes,
   selectItContractsEnableAndRecommendedParentContract,
   selectItContractsEnableAndRecommendedProcurementInitiated,
@@ -44,6 +48,7 @@ import {
   selectItContractsEnableAndRecommendedProcurementStrategy,
   selectItContractsEnableAndRecommendedPurchaseForm,
   selectItContractsEnableAndRecommendedResponsibleUnit,
+  selectItContractsEnableAndRecommendedSupplier,
   selectItContractsEnableAndRecommendedTemplate,
   selectItContractsEnableAndRecommendedUseParentValidity,
 } from 'src/app/store/organization/ui-module-customization/selectors';
@@ -227,53 +232,122 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     { id: APIYesNoUndecidedChoice.No, label: 'Nej' },
   ];
 
-  public readonly contractIdEnabled$ = this.store.select(selectItContractEnableAndRecommendedContractId).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractIdRecommended$ = this.store.select(selectItContractEnableAndRecommendedContractId).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractTypeEnabled$ = this.store.select(selectItContractsEnableAndRecommendedContractType).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractTypeRecommended$ = this.store.select(selectItContractsEnableAndRecommendedContractType).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractTemplateEnabled$ = this.store.select(selectItContractsEnableAndRecommendedTemplate).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractTemplateRecommended$ = this.store.select(selectItContractsEnableAndRecommendedTemplate).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractCriticalityEnabled$ = this.store.select(selectItContractsEnableAndRecommendedCriticality).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractCriticalityRecommended$ = this.store.select(selectItContractsEnableAndRecommendedCriticality).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractPurchaseFormEnabled$ = this.store.select(selectItContractsEnableAndRecommendedPurchaseForm).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractPurchaseFormRecommended$ = this.store.select(selectItContractsEnableAndRecommendedPurchaseForm).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractIsActiveEnabled$ = this.store.select(selectItContractsEnableAndRecommendedIsActive).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractAgreementPeriodEnabled$ = this.store.select(selectItContractsEnableAndRecommendedAgreementPeriod).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractAgreementPeriodRecommended$ = this.store.select(selectItContractsEnableAndRecommendedAgreementPeriod).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractNotesEnabled$ = this.store.select(selectItContractsEnableAndRecommendedNotes).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractNotesRecommended$ = this.store.select(selectItContractsEnableAndRecommendedNotes).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractParentContractEnabled$ = this.store.select(selectItContractsEnableAndRecommendedParentContract).pipe(mapUIConfigStatusToEnabled());
-  public readonly useParentValidityEnabled$ = this.store.select(selectItContractsEnableAndRecommendedUseParentValidity).pipe(mapUIConfigStatusToEnabled());
+  public readonly nameRecommended$ = this.store
+    .select(selectItContractEnableAndRecommendName)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractIdEnabled$ = this.store
+    .select(selectItContractEnableAndRecommendedContractId)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractIdRecommended$ = this.store
+    .select(selectItContractEnableAndRecommendedContractId)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractTypeEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedContractType)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractTypeRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedContractType)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractTemplateEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedTemplate)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractTemplateRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedTemplate)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractCriticalityEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedCriticality)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractCriticalityRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedCriticality)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractPurchaseFormEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedPurchaseForm)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractPurchaseFormRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedPurchaseForm)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractIsActiveEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedIsActive)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractAgreementPeriodEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedAgreementPeriod)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractAgreementPeriodRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedAgreementPeriod)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractNotesEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedNotes)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractNotesRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedNotes)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractParentContractEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedParentContract)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly useParentValidityEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedUseParentValidity)
+    .pipe(mapUIConfigStatusToEnabled());
 
-  public readonly contractResponsibleUnitEnabled$ = this.store.select(selectItContractsEnableAndRecommendedResponsibleUnit).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractResponsibleUnitRecommended$ = this.store.select(selectItContractsEnableAndRecommendedResponsibleUnit).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractInternalSignerEnabled$ = this.store.select(selectItContractsEnableAndRecommendedInternalSigner).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractInternalSignerRecommended$ = this.store.select(selectItContractsEnableAndRecommendedInternalSigner).pipe(mapUIConfigStatusToRecommended());
+  public readonly contractResponsibleUnitEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedResponsibleUnit)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractResponsibleUnitRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedResponsibleUnit)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractInternalSignerEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedInternalSigner)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractInternalSignerRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedInternalSigner)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly showResponsibleCard$ = combineOR([
     this.contractResponsibleUnitEnabled$,
     this.contractInternalSignerEnabled$,
   ]);
 
-  public readonly contractSupplierEnabled$ = this.store.select(selectItContractsEnableAndRecommendedSupplier).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractSupplierRecommended$ = this.store.select(selectItContractsEnableAndRecommendedSupplier).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractExternalSignerEnabled$ = this.store.select(selectItContractsEnableAndRecommendedExternalSigner).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractExternalSignerRecommended$ = this.store.select(selectItContractsEnableAndRecommendedExternalSigner).pipe(mapUIConfigStatusToRecommended());
+  public readonly contractSupplierEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedSupplier)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractSupplierRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedSupplier)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractExternalSignerEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedExternalSigner)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractExternalSignerRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedExternalSigner)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly showSupplierCard$ = combineOR([this.contractSupplierEnabled$, this.contractExternalSignerEnabled$]);
 
-  public readonly contractProcurementStrategyEnabled$ = this.store.select(selectItContractsEnableAndRecommendedProcurementStrategy).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractProcurementStrategyRecommended$ = this.store.select(selectItContractsEnableAndRecommendedProcurementStrategy).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractProcurementPlanEnabled$ = this.store.select(selectItContractsEnableAndRecommendedProcurementPlan).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractProcurementPlanRecommended$ = this.store.select(selectItContractsEnableAndRecommendedProcurementPlan).pipe(mapUIConfigStatusToRecommended());
-  public readonly contractProcurementInitiatedEnabled$ = this.store.select(selectItContractsEnableAndRecommendedProcurementInitiated).pipe(mapUIConfigStatusToEnabled());
+  public readonly contractProcurementStrategyEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedProcurementStrategy)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractProcurementStrategyRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedProcurementStrategy)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractProcurementPlanEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedProcurementPlan)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractProcurementPlanRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedProcurementPlan)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractProcurementInitiatedEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedProcurementInitiated)
+    .pipe(mapUIConfigStatusToEnabled());
   public readonly showProcurementCard$ = combineOR([
     this.contractProcurementStrategyEnabled$,
     this.contractProcurementPlanEnabled$,
     this.contractProcurementInitiatedEnabled$,
   ]);
 
-  public readonly contractsCreatedByEnabled$ = this.store.select(selectItContractsEnableAndRecommendedCreatedBy).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractsLastModifiedByEnabled$ = this.store.select(selectItContractsEnableAndRecommendedlastModifedBy).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractsLastModifiedDateEnabled$ = this.store.select(selectItContractsEnableAndRecommendedlastModifedDate).pipe(mapUIConfigStatusToEnabled());
+  public readonly contractsCreatedByEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedCreatedBy)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractsLastModifiedByEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedlastModifedBy)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractsLastModifiedDateEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedlastModifedDate)
+    .pipe(mapUIConfigStatusToEnabled());
   public readonly showHistoryCard$ = combineOR([
     this.contractsCreatedByEnabled$,
     this.contractsLastModifiedByEnabled$,
