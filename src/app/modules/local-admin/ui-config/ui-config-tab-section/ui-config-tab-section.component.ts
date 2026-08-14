@@ -51,12 +51,12 @@ export class UiConfigTabSectionComponent {
   }
 
   public onCheckboxChanged($event: UINodeCustomization) {
+    const enabled = $event.enabled ?? false;
     const dto: APICustomizedUINodeResponseDTO = {
-      enabled: $event.enabled,
+      enabled: enabled,
       key: $event.fullKey,
-      recommended: $event.recommended,
+      recommended: enabled ? $event.recommended : false,
     };
-
     this.store.dispatch(
       UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto }),
     );
