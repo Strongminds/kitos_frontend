@@ -1,3 +1,8 @@
+@if (recommended) {
+  <div class="recommended-label-row">
+    <span [class.filled]="formGroup ? (formName && formGroup.controls[formName].value) : value" class="recommended-badge" i18n>Anbefalet</span>
+  </div>
+}
 @if (itemParentIdsDictionary && sortedData) {
   @if (formGroup) {
     <ng-container [formGroup]="formGroup">
