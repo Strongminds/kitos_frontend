@@ -61,6 +61,7 @@ export const DataProcessingUiBluePrint = {
       children: {
         mainContract: {
           text: $localize`Hvilken kontrakt skal angive om databehandlingen er aktiv`,
+          cannotBeRecommended: true,
         },
         associatedContracts: {
           text: $localize`Tilknyttede kontrakter`,

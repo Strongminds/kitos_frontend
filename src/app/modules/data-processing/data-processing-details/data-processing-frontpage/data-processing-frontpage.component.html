@@ -18,6 +18,7 @@
         [formGroup]="frontpageFormGroup"
         formName="name"
         (valueChange)="patchName($event)"
+        [recommended]="(nameRecommended$ | async) === true"
       ></app-textbox>
       @if (dataResponsibleEnabled$ | async) {
         <!-- The column should span 2/3rds since it contains long data that is partially hidden if the input is smaller
