@@ -30,8 +30,8 @@ import {
   selectItContractValidity,
 } from 'src/app/store/it-contract/selectors';
 import {
+  selectItContractEnableAndRecommendContractName,
   selectItContractEnableAndRecommendedContractId,
-  selectItContractEnableAndRecommendName,
   selectItContractsEnableAndRecommendedAgreementPeriod,
   selectItContractsEnableAndRecommendedContractType,
   selectItContractsEnableAndRecommendedCreatedBy,
@@ -233,7 +233,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   ];
 
   public readonly nameRecommended$ = this.store
-    .select(selectItContractEnableAndRecommendName)
+    .select(selectItContractEnableAndRecommendContractName)
     .pipe(mapUIConfigStatusToRecommended());
   public readonly contractIdEnabled$ = this.store
     .select(selectItContractEnableAndRecommendedContractId)

@@ -476,8 +476,8 @@ const createItContractFrontpageFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'frontPage', fieldKey);
 const createItContractFrontpageFieldEnableAndRecommendedSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'frontPage', fieldKey);
-export const selectItContractEnableAndRecommendName =
-  createItContractFrontpageFieldEnableAndRecommendedSelector('name');
+export const selectItContractEnableAndRecommendContractName =
+  createItContractFrontpageFieldEnableAndRecommendedSelector('contractName');
 export const selectItContractEnableContractId = createItContractFrontpageFieldSelector('contractId');
 export const selectItContractEnableAndRecommendedContractId =
   createItContractFrontpageFieldEnableAndRecommendedSelector('contractId');
