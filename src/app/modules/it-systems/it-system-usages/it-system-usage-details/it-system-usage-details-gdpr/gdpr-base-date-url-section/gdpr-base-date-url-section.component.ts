@@ -53,6 +53,8 @@ export class GdprBaseDateUrlSectionComponent extends BaseAccordionComponent impl
 
   @Input() disableLinkControl: boolean = false;
 
+  @Input() choiceTypeRecommended: boolean = false;
+
   @Output() patchGdprEvent = new EventEmitter();
 
   public readonly yesNoDontKnowOptions = yesNoDontKnowOptions;

@@ -14,6 +14,7 @@
         formName="yesNoDontKnowControl"
         [data]="yesNoDontKnowOptions"
         data-cy="retention-period-dropdown"
+        [recommended]="(retentionPeriodRecommended$ | async) === true"
         (valueChange)="patchGdpr({ retentionPeriodDefined: $event })"
       ></app-dropdown>
       <app-datepicker

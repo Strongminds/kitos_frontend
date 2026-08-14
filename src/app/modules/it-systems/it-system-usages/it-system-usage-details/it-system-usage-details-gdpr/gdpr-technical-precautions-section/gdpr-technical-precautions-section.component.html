@@ -14,6 +14,7 @@
         [data]="yesNoDontKnowOptions"
         (valueChange)="patchGdpr({ technicalPrecautionsInPlace: $event })"
         data-cy="technical-precautions-dropdown"
+        [recommended]="(technicalPrecautionsRecommended$ | async) === true"
       ></app-dropdown>
       <app-paragraph paragraphSize="x-small" [bold]="true" i18n>Hvad består de af?</app-paragraph>
       @for (option of technicalPrecautionsOptions; track option) {

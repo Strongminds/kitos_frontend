@@ -11,6 +11,7 @@
       [data]="yesNoDontKnowOptions"
       (valueChange)="preparePatch(choiceTypePropertyName, $event)"
       data-cy="url-section-dropdown"
+      [recommended]="choiceTypeRecommended"
     ></app-dropdown>
     <app-datepicker
       [text]="dateTitle"
