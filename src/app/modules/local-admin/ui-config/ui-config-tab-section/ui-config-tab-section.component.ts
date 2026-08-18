@@ -50,32 +50,38 @@ export class UiConfigTabSectionComponent {
     return this.tabViewModel.fullKey.endsWith('.usageArchive') ? $localize`undermodul` : $localize`faneblad`;
   }
 
-  public onEnabledCheckboxChanged($event: UINodeCustomization) {
-    const enabled = $event.enabled ?? false;
-    const fullKey = $event.fullKey;
-    const fieldViewModel = this.tabViewModel.children?.find((x) => x.fullKey === fullKey);
-    const dto: APICustomizedUINodeResponseDTO = {
-      enabled: enabled,
-      key: fullKey,
-      recommended: enabled ? (fieldViewModel?.isRecommended ?? false) : false,
-    };
+  private findFieldViewModel(fullKey: string): UIConfigNodeViewModel | undefined {
+    return this.tabViewModel.children?.find((x) => x.fullKey === fullKey);
+  }
+
+  private dispatchPut(dto: APICustomizedUINodeResponseDTO) {
     this.store.dispatch(
       UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto }),
     );
   }
 
+  public onEnabledCheckboxChanged($event: UINodeCustomization) {
+    const enabled = $event.enabled ?? false;
+    const fullKey = $event.fullKey;
+    const fieldViewModel = this.findFieldViewModel(fullKey);
+    const fieldViewModelRecommended = fieldViewModel?.isRecommended ?? false;
+    const dto: APICustomizedUINodeResponseDTO = {
+      enabled: enabled,
+      key: fullKey,
+      recommended: enabled ? fieldViewModelRecommended : false,
+    };
+    this.dispatchPut(dto);
+  }
+
   public onRecommendedCheckboxChanged($event: UINodeCustomization) {
     const fullKey = $event.fullKey;
-    const fieldViewModel = this.tabViewModel.children?.find((x) => x.fullKey === fullKey);
-    console.log('reco' + JSON.stringify(fieldViewModel));
+    const fieldViewModel = this.findFieldViewModel(fullKey);
     const dto: APICustomizedUINodeResponseDTO = {
       enabled: fieldViewModel?.isEnabled ?? false,
       key: fullKey,
       recommended: $event.recommended,
     };
-    this.store.dispatch(
-      UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto }),
-    );
+    this.dispatchPut(dto);
   }
 
   public checkboxDisabled(): Observable<boolean> {
