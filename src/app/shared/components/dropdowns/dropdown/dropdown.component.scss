@@ -22,7 +22,30 @@ ng-select {
   margin-bottom: 2px;
 }
 
-.recommended-label-text {
-  font-size: 12px;
-  color: rgba(0, 0, 0, 0.6);
+.align-items-vertically {
+  display: flex;
+}
+
+.has-recommended {
+  ::ng-deep ng-select:not(.ng-select-focused):not(.ng-select-opened) .ng-select-container:not(.ng-has-value) {
+    .ng-placeholder {
+      display: flex;
+      align-items: center;
+
+      &::after {
+        content: 'Anbefalet';
+        display: inline-block;
+        background-color: lighten(theme.$color-warning, 30%);
+        color: darken(theme.$color-warning, 15%);
+        border: 1px solid theme.$color-warning;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 600;
+        padding: 2px 7px;
+        margin-left: 6px;
+        line-height: 1.2;
+        white-space: nowrap;
+      }
+    }
+  }
 }
