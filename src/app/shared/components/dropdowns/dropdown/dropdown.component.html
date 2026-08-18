@@ -1,6 +1,6 @@
 
 @if (formGroup) {
-<div [formGroup]="formGroup" [class.has-recommended]="recommended">
+<div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended">
   <ng-select
     class="{{ size }}"
     [formControlName]="formName"
@@ -31,7 +31,6 @@
     <span [class.filled]="formName && formGroup.controls[formName].value" class="recommended-badge" i18n>Anbefalet</span>
   </div>
   }
-
       </span>
     </ng-template>
     <ng-template ng-option-tmp let-item="item">

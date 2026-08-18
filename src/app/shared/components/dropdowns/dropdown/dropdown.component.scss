@@ -15,28 +15,3 @@ ng-select {
 }
 
 @include mixins.ng-select-medium-styles;
-
-.recommended-label-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 2px;
-}
-
-.align-items-vertically {
-  display: flex;
-}
-
-.has-recommended {
-  ::ng-deep ng-select:not(.ng-select-focused):not(.ng-select-opened) .ng-select-container:not(.ng-has-value) {
-    .ng-placeholder {
-      display: flex;
-      align-items: center;
-
-      &::after {
-        content: 'Anbefalet';
-        white-space: nowrap;
-        @include mixins.recommended-badge;
-      }
-    }
-  }
-}

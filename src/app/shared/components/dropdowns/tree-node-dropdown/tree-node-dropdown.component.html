@@ -1,6 +1,6 @@
 @if (itemParentIdsDictionary && sortedData) {
   @if (formGroup) {
-    <div [formGroup]="formGroup" [class.has-recommended]="recommended">
+    <div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended">
       <ng-select
         class="{{ size }}"
         [clearable]="clearable"
