@@ -78,7 +78,6 @@ export class UIModuleCustomizationEffects {
                 existingUICustomization,
                 updatedNodeRequest,
               );
-              console.log('onCheckboxChanged', requestDto);
 
               return this.organizationInternalService
                 .putSingleOrganizationsInternalV2PutUIModuleCustomization({
