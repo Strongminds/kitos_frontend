@@ -4,7 +4,7 @@ import { Dictionary } from '../../../models/primitives/dictionary.model';
 import { TreeNodeModel } from '../../../models/tree-node.model';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgSelectComponent, NgOptionTemplateDirective } from '@ng-select/ng-select';
+import { NgSelectComponent, NgOptionTemplateDirective, NgLabelTemplateDirective } from '@ng-select/ng-select';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { LoadingComponent } from '../../loading/loading.component';
 
@@ -17,6 +17,7 @@ import { LoadingComponent } from '../../loading/loading.component';
     ReactiveFormsModule,
     NgSelectComponent,
     NgOptionTemplateDirective,
+    NgLabelTemplateDirective,
     ParagraphComponent,
     LoadingComponent
 ],

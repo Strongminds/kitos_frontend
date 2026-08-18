@@ -1,11 +1,6 @@
-@if (recommended) {
-  <div class="recommended-label-row">
-    <span [class.filled]="formGroup ? (formName && formGroup.controls[formName].value) : value" class="recommended-badge" i18n>Anbefalet</span>
-  </div>
-}
 @if (itemParentIdsDictionary && sortedData) {
   @if (formGroup) {
-    <ng-container [formGroup]="formGroup">
+    <div [formGroup]="formGroup" [class.has-recommended]="recommended">
       <ng-select
         class="{{ size }}"
         [clearable]="clearable"
@@ -24,7 +19,18 @@
         (search)="filter$.next($event.term)"
         (change)="formSelectionChange($event)"
         (clear)="filter$.next('')"
-        ><ng-template ng-option-tmp let-item="item">
+        >
+            <ng-template ng-label-tmp let-item="item">
+      <span class="ng-value-label align-items-vertically">{{ item.name }}
+          @if (recommended) {
+  <div class="recommended-label-row">
+    <span [class.filled]="formName && formGroup.controls[formName].value" class="recommended-badge" i18n>Anbefalet</span>
+  </div>
+  }
+      </span>
+    </ng-template>
+
+        <ng-template ng-option-tmp let-item="item">
         @if (!item.description || !showDescription) {
           <div
           [style.text-indent]="
@@ -51,7 +57,7 @@
         }
       </ng-template></ng-select
       >
-    </ng-container>
+    </div>
   }
   @if (!formGroup) {
     <ng-select
