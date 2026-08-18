@@ -4,7 +4,7 @@
   [checkboxInTitle]="true"
   [checkboxValue]="tabViewModel.isEnabled ?? false"
   [checkboxDisabled]="(checkboxDisabled() | async) ?? false"
-  (checkboxChanged)="onCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })"
+  (checkboxChanged)="onEnabledCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })"
   [tooltipText]="(checkboxDisabled() | async) ? tabViewModel.helpText : undefined"
 >
   <app-divider></app-divider>
@@ -30,7 +30,7 @@
               (moduleEnabled$ | async) === false ||
               (loading$ | async) === true
             "
-            (valueChange)="onCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
+            (valueChange)="onEnabledCheckboxChanged({ enabled: $event, fullKey: fieldViewModel.fullKey })"
             data-cy="field-checkbox"
           >
             <app-paragraph class="wrap-text">
@@ -55,7 +55,7 @@
               (moduleEnabled$ | async) === false ||
               (loading$ | async) === true
             "
-            (valueChange)="onCheckboxChanged({ recommended: $event, fullKey: fieldViewModel.fullKey })"
+            (valueChange)="onRecommendedCheckboxChanged({ recommended: $event, fullKey: fieldViewModel.fullKey })"
           ></app-checkbox>
           }
         </div>

@@ -50,12 +50,28 @@ export class UiConfigTabSectionComponent {
     return this.tabViewModel.fullKey.endsWith('.usageArchive') ? $localize`undermodul` : $localize`faneblad`;
   }
 
-  public onCheckboxChanged($event: UINodeCustomization) {
+  public onEnabledCheckboxChanged($event: UINodeCustomization) {
     const enabled = $event.enabled ?? false;
+    const fullKey = $event.fullKey;
+    const fieldViewModel = this.tabViewModel.children?.find((x) => x.fullKey === fullKey);
     const dto: APICustomizedUINodeResponseDTO = {
       enabled: enabled,
-      key: $event.fullKey,
-      recommended: enabled ? $event.recommended : false,
+      key: fullKey,
+      recommended: enabled ? (fieldViewModel?.isRecommended ?? false) : false,
+    };
+    this.store.dispatch(
+      UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto }),
+    );
+  }
+
+  public onRecommendedCheckboxChanged($event: UINodeCustomization) {
+    const fullKey = $event.fullKey;
+    const fieldViewModel = this.tabViewModel.children?.find((x) => x.fullKey === fullKey);
+    console.log('reco' + JSON.stringify(fieldViewModel));
+    const dto: APICustomizedUINodeResponseDTO = {
+      enabled: fieldViewModel?.isEnabled ?? false,
+      key: fullKey,
+      recommended: $event.recommended,
     };
     this.store.dispatch(
       UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto }),
