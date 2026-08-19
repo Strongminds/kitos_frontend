@@ -19,8 +19,8 @@ import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.m
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
-import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-badge.component';
+import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 
 @Component({
   selector: 'app-multi-select-dropdown',

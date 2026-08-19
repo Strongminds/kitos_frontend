@@ -53,10 +53,11 @@
     </div>
   </ng-template>
   <ng-template ng-multi-label-tmp let-items="items">
-    <div class="value-textbox-margin ng-value">
+    <div class="value-textbox-margin ng-value align-items-vertically">
       @for (item of items; track item; let isLast = $last) {
       <span class="ng-value-label">{{ item[textField] }}@if (!isLast) {,&nbsp; }</span>
       }
+      <app-recommended-badge [visible]="recommended" [filled]="selectedValuesModel.length > 0"></app-recommended-badge>
     </div>
 
   </ng-template>
