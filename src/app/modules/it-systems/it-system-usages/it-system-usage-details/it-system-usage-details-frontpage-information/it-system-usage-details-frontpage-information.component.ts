@@ -229,9 +229,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly statusEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedStatus)
     .pipe(mapUIConfigStatusToEnabled());
-  public readonly statusRecommended$ = this.store
-    .select(selectITSystemUsageEnableAndRecommendedStatus)
-    .pipe(mapUIConfigStatusToRecommended());
   public readonly containsAITechnologyEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedContainsAITechnology)
     .pipe(mapUIConfigStatusToEnabled());
@@ -259,9 +256,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly criticalityFieldsLastChangedEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedCriticalityFieldsLastChanged)
     .pipe(mapUIConfigStatusToEnabled());
-  public readonly criticalityFieldsLastChangedRecommended$ = this.store
-    .select(selectITSystemUsageEnableAndRecommendedCriticalityFieldsLastChanged)
-    .pipe(mapUIConfigStatusToRecommended());
   public readonly criticalityLevelDocumentationEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedCriticalityLevelDocumentation)
     .pipe(mapUIConfigStatusToEnabled());
