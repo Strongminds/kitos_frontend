@@ -6,6 +6,7 @@ import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ISMS_RESPONSIBLE_DISABLED_MESSAGE } from 'src/app/shared/constants/constants';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import {
   IsDataProcessingAgreementRequired,
   isDataProcessingAgreementRequiredOptions,
@@ -28,7 +29,6 @@ import { DropdownComponent } from '../../../../../../shared/components/dropdowns
 import { FormGridComponent } from '../../../../../../shared/components/form-grid/form-grid.component';
 import { TextBoxComponent } from '../../../../../../shared/components/textbox/textbox.component';
 import { EditUrlSectionComponent } from '../../../../shared/edit-url-section/edit-url-section.component';
-import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-general-info-section',
@@ -70,15 +70,24 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   public disableDirectoryDocumentationControl = false;
   public isDataProcessingAgreementRequiredOptions = isDataProcessingAgreementRequiredOptions;
 
-  public readonly purposeEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprPurpose).pipe(mapUIConfigStatusToEnabled());
-  public readonly purposeRecommended$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprPurpose).pipe(mapUIConfigStatusToRecommended());
-  public readonly documentationEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdprDocumentation).pipe(mapUIConfigStatusToEnabled());
-  public readonly isDataProcessingAgreementRequiredEnabled$ = this.store.select(
-    selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
-  ).pipe(mapUIConfigStatusToEnabled());
-  public readonly isDataProcessingAgreementRequiredRecommended$ = this.store.select(
-    selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
-  ).pipe(mapUIConfigStatusToRecommended());
+  public readonly purposeEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprPurpose)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly purposeRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprPurpose)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly documentationEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprDocumentation)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly documentationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprDocumentation)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly isDataProcessingAgreementRequiredEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly isDataProcessingAgreementRequiredRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired)
+    .pipe(mapUIConfigStatusToRecommended());
 
   constructor(
     private readonly store: Store,

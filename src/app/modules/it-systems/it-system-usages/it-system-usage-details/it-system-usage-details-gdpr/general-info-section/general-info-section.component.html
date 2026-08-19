@@ -23,6 +23,7 @@
         (submitMethod)="patchSimpleLink($event)"
         (clearClick)="resetSimpleLink()"
         [isDisabled]="disableDirectoryDocumentationControl"
+        [recommended]="(documentationRecommended$ | async) === true"
       ></app-edit-url-section>
     }
     @if (isDataProcessingAgreementRequiredEnabled$ | async) {

@@ -34,6 +34,7 @@ export class LinkTextboxComponent extends BaseComponent {
   @Input() public isLinkOnly = false;
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public placeholder: string | undefined = undefined;
+  @Input() public recommended: boolean = false;
   @Output() public iconClick = new EventEmitter<void>();
   @Output() public clearClick = new EventEmitter<void>();
 
