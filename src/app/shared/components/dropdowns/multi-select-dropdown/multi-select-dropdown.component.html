@@ -1,9 +1,4 @@
-@if (recommended) {
-  <div class="recommended-label-row">
-    <span class="recommended-label-text">{{ text }}</span>
-    <app-recommended-badge [visible]="recommended" [filled]="(selectedValuesModel && selectedValuesModel.length > 0) === true"></app-recommended-badge>
-  </div>
-}
+<div [class.dropdown-has-recommended]="recommended">
 <ng-select
   #selectDropdown
   class="{{ size }} "
@@ -63,6 +58,7 @@
       <span class="ng-value-label">{{ item[textField] }}@if (!isLast) {,&nbsp; }</span>
       }
     </div>
+
   </ng-template>
 </ng-select>
 
@@ -71,3 +67,5 @@
   <app-paragraph paragraphSize="x-small">{{ descriptionLabelTitle }} {{ descriptions.join(", ") }}</app-paragraph>
 </app-textbox-info>
 }
+</div>
+
