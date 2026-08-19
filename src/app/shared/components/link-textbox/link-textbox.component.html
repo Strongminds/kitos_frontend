@@ -5,7 +5,7 @@
         <mat-form-field class="{{ size }}">
           <mat-label>{{ title }}
            @if (recommended) {
-          <span class="recommended-badge" i18n>Anbefalet</span>
+          <span [class.filled]="true" class="recommended-badge" i18n>Anbefalet</span>
           }
           </mat-label>
           <div (click)="openLink(simpleLink.url)">
@@ -46,7 +46,7 @@
           <span class="recommended-badge" i18n>Anbefalet</span>
           }
           {{ title }}
-          <span class="incorrect-link-color" i18n> (ugyldigt link) </span>
+          <span [class.filled]="false" class="incorrect-link-color" i18n> (ugyldigt link) </span>
         </mat-label>
         <input
           matInput
