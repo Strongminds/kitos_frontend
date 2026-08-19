@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
 import { MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
 
 import { IconButtonComponent } from '../../buttons/icon-button/icon-button.component';
 import { PencilIconComponent } from '../../icons/pencil-icon.compnent';
@@ -15,6 +15,7 @@ export class ReadonlyLinkTextboxComponent {
   @Input() public title!: string;
   @Input() isDisabled = false;
   @Input() public size: 'medium' | 'large' = 'large';
+  @Input() recommended: boolean = false;
 
   @Output() public iconClick = new EventEmitter<void>();
 
