@@ -298,6 +298,7 @@
         (valueChange)="patchGeneral({ webAccessibilityCompliance: $event })"
         i18n-text
         data-cy="web-accessibility-compliance"
+        [recommended]="(webAccessiblityRecommended$ | async) === true"
       ></app-dropdown>
       <app-datepicker
         [formGroup]="webAccessibilityForm"
@@ -307,6 +308,7 @@
         class="two-thirds-column-width"
         i18n-text
         data-cy="last-web-accessibility-check"
+        [recommended]="(webAccessiblityRecommended$ | async) === true"
       ></app-datepicker>
       <app-textarea
         [formGroup]="webAccessibilityForm"
@@ -316,7 +318,7 @@
         text="Noter"
         i18n-text
         data-cy="web-accessibility-notes"
-        [recommended]="(webAccessiblityEnabled$ | async) === true"
+        [recommended]="(webAccessiblityRecommended$ | async) === true"
       ></app-textarea>
     </form>
   </app-card>

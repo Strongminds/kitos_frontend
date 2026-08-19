@@ -241,6 +241,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly webAccessiblityEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedWebAccessibility)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly webAccessiblityRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedWebAccessibility)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly isSociallyCriticalEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedIsSociallyCritical)
     .pipe(mapUIConfigStatusToEnabled());
