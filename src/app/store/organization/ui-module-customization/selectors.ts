@@ -1,4 +1,4 @@
-﻿/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSelector, MemoizedSelector } from '@ngrx/store';
 import { memoize } from 'lodash';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
