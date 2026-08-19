@@ -5,6 +5,7 @@
       {{ text }}
       @if (recommended) {
         <span [class.filled]="formName && formGroup.controls[formName].value" class="recommended-badge" i18n>Anbefalet</span>
+        <app-recommended-badge [visible]="recommended" [filled]="(formName && formGroup.controls[formName].value) === true"></app-recommended-badge>
       }
     </mat-label>
     <input
@@ -39,9 +40,7 @@
     <mat-form-field class="{{ size }}">
       <mat-label>
         {{ text }}
-        @if (recommended) {
-          <span [class.filled]="value" class="recommended-badge" i18n>Anbefalet</span>
-        }
+        <app-recommended-badge [visible]="recommended" [filled]="value !== undefined"></app-recommended-badge>
       </mat-label>
       <input
         matInput

@@ -15,6 +15,7 @@ import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
+import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badge.component';
 
 @Component({
   selector: 'app-datepicker',
@@ -32,7 +33,8 @@ import { BaseFormComponent } from '../../base/base-form.component';
     MatSuffix,
     MatDatepickerToggleIcon,
     MatDatepickerModule,
-    MatMomentDateModule
+    MatMomentDateModule,
+    RecommendedBadgeComponent,
 ],
   providers: [
     provideMomentDateAdapter(),

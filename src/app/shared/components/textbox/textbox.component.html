@@ -2,9 +2,7 @@
   <mat-form-field [formGroup]="formGroup" class="{{ size }}">
     <mat-label>
       {{ text }}
-      @if (recommended) {
-        <span [class.filled]="value" class="recommended-badge" i18n>Anbefalet</span>
-      }
+      <app-recommended-badge [visible]="recommended" [filled]="(value && value !== '') === true"></app-recommended-badge>
     </mat-label>
     <input
       matInput

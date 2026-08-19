@@ -1,4 +1,3 @@
-
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
@@ -9,6 +8,7 @@ import { InfoIconComponent } from '../icons/info-icon.component';
 import { SearchIconComponent } from '../icons/search-icon.component';
 import { TrashcanIconComponent } from '../icons/trashcan-icon.component';
 import { XIconComponent } from '../icons/x-icon.component';
+import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badge.component';
 import { TooltipComponent } from '../tooltip/tooltip.component';
 
 @Component({
@@ -28,8 +28,9 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
     TrashcanIconComponent,
     XIconComponent,
     TooltipComponent,
-    InfoIconComponent
-],
+    InfoIconComponent,
+    RecommendedBadgeComponent,
+  ],
 })
 export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public recommended = false;
