@@ -1,5 +1,6 @@
 @use "@angular/material" as mat;
 @use "theme";
+@use "sass:color";
 
 @mixin input-background-white {
   background-color: white;
@@ -702,8 +703,8 @@
 
 @mixin recommended-badge {
   display: inline-block;
-  background-color: lighten(theme.$color-warning, 30%);
-  color: darken(theme.$color-warning, 15%);
+  background-color: color.adjust(theme.$color-warning, $lightness: 30%);
+  color: color.adjust(theme.$color-warning, $lightness: -15%);
   border: 1px solid theme.$color-warning;
   border-radius: 4px;
   font-size: 12px;
@@ -714,8 +715,8 @@
   line-height: 1.2;
 
   &.filled {
-    background-color: lighten(theme.$color-positive, 35%);
-    color: darken(theme.$color-positive, 20%);
+    background-color: color.adjust(theme.$color-positive, $lightness: 35%);
+    color: color.adjust(theme.$color-positive, $lightness: -20%);
     border-color: theme.$color-positive;
   }
 }
@@ -756,6 +757,7 @@
     }
   }
 }
+
 .dropdown-has-recommended {
   @include dropdown-has-recommended;
 }
