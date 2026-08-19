@@ -20,6 +20,7 @@ import { NotificationService } from 'src/app/shared/services/notification.servic
 
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
+import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-badge.component';
 
 @Component({
   selector: 'app-multi-select-dropdown',
@@ -32,6 +33,7 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
     ParagraphComponent,
     NgMultiLabelTemplateDirective,
     TextBoxInfoComponent,
+    RecommendedBadgeComponent,
   ],
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {

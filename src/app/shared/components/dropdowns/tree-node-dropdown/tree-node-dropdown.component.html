@@ -24,7 +24,7 @@
       <span class="ng-value-label align-items-vertically">{{ item.name }}
           @if (recommended) {
   <div class="recommended-label-row">
-    <span [class.filled]="formName && formGroup.controls[formName].value" class="recommended-badge" i18n>Anbefalet</span>
+    <app-recommended-badge [visible]="recommended" [filled]="(formName && formGroup.controls[formName].value !== undefined) === true"></app-recommended-badge>
   </div>
   }
       </span>

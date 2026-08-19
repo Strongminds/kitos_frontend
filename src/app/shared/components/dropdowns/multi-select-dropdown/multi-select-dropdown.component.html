@@ -1,7 +1,7 @@
 @if (recommended) {
   <div class="recommended-label-row">
     <span class="recommended-label-text">{{ text }}</span>
-    <span [class.filled]="selectedValuesModel && selectedValuesModel.length > 0" class="recommended-badge" i18n>Anbefalet</span>
+    <app-recommended-badge [visible]="recommended" [filled]="(selectedValuesModel && selectedValuesModel.length > 0) === true"></app-recommended-badge>
   </div>
 }
 <ng-select

@@ -4,12 +4,21 @@ import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
 
 import { IconButtonComponent } from '../../buttons/icon-button/icon-button.component';
 import { PencilIconComponent } from '../../icons/pencil-icon.compnent';
+import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-badge.component';
 
 @Component({
   selector: 'app-readonly-link-textbox',
   templateUrl: './readonly-link-textbox.component.html',
   styleUrl: './readonly-link-textbox.component.scss',
-  imports: [MatFormField, MatLabel, MatInput, IconButtonComponent, MatSuffix, PencilIconComponent],
+  imports: [
+    MatFormField,
+    MatLabel,
+    MatInput,
+    IconButtonComponent,
+    MatSuffix,
+    PencilIconComponent,
+    RecommendedBadgeComponent,
+  ],
 })
 export class ReadonlyLinkTextboxComponent {
   @Input() public title!: string;

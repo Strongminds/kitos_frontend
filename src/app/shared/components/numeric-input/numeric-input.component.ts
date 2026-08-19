@@ -1,17 +1,17 @@
 import { AfterViewInit, Component, Input, OnDestroy, ViewChild, ViewContainerRef } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { ONLY_DIGITS_REGEX } from '../../constants/regex-constants';
-
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel } from '@angular/material/select';
+import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badge.component';
 
 @Component({
   selector: 'app-numeric-input',
   templateUrl: './numeric-input.component.html',
   styleUrls: ['./numeric-input.component.scss'],
-  imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput],
+  imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, RecommendedBadgeComponent],
 })
 export class NumericInputComponent extends BaseFormComponent<number | undefined> implements AfterViewInit, OnDestroy {
   @Input() public recommended = false;
