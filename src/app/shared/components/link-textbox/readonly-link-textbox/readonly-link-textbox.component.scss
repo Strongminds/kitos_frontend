@@ -11,6 +11,11 @@ mat-form-field {
   align-items: center;
 }
 
+.align-horizontally {
+  display: flex;
+  flex-direction: column;
+}
+
 app-x-icon {
   width: 30px;
   height: 15px;
@@ -21,6 +26,12 @@ app-x-icon {
 input {
   font-size: 14px !important;
   font-weight: bold !important;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 :host ::ng-deep mat-form-field {
@@ -43,6 +54,13 @@ input {
   color: theme.$color-negative;
 }
 
+.suffix-icons {
+  display: flex;
+  align-items: center;
+  gap: theme.$padding-medium;
+  font-weight: 300;
+}
+
 span {
   color: theme.$color-neutral-80;
 }
@@ -50,11 +68,4 @@ span {
 span:hover {
   color: theme.$color-neutral-dark;
   cursor: pointer;
-}
-
-.suffix-icons {
-  display: flex;
-  align-items: center;
-  gap: theme.$padding-medium;
-  font-weight: 300;
 }
