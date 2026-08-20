@@ -32,7 +32,7 @@ export const DataProcessingUiBluePrint = {
           cannotBeRecommended: true,
         },
         agreementConcluded: {
-          text: $localize`Databehandler afftale indgået`,
+          text: $localize`Databehandler aftale indgået`,
         },
         transferBasis: {
           text: $localize`Overførselsgrundlag`,
