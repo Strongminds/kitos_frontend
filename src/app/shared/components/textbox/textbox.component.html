@@ -2,7 +2,7 @@
   <mat-form-field [formGroup]="formGroup" class="{{ size }}">
     <mat-label>
       {{ text }}
-      <app-recommended-badge [visible]="recommended" [filled]="(value && value !== '') === true"></app-recommended-badge>
+      <app-recommended-badge [visible]="recommended" [filled]="(formName && formGroup.controls[formName].value && formGroup.controls[formName].value !== '') === true"></app-recommended-badge>
     </mat-label>
     <input
       matInput
