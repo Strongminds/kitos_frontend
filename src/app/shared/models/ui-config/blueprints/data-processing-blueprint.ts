@@ -21,12 +21,15 @@ export const DataProcessingUiBluePrint = {
         },
         status: {
           text: $localize`Status`,
+          cannotBeRecommended: true,
         },
         lastChangedBy: {
           text: $localize`Sidst redigeret af bruger`,
+          cannotBeRecommended: true,
         },
         lastChangedAt: {
           text: $localize`Sidst redigeret dato`,
+          cannotBeRecommended: true,
         },
         agreementConcluded: {
           text: $localize`Databehandler afftale indgået`,

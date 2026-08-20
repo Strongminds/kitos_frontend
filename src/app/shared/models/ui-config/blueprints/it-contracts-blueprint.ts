@@ -33,6 +33,7 @@ export const ItContractsUiBluePrint = {
         },
         isActive: {
           text: $localize`Status`,
+          cannotBeRecommended: true,
         },
         agreementPeriod: {
           text: $localize`Gyldig fra/til`,
@@ -75,9 +76,11 @@ export const ItContractsUiBluePrint = {
         },
         lastModifiedBy: {
           text: $localize`Sidst redigeret (bruger)`,
+          cannotBeRecommended: true,
         },
         lastModifiedDate: {
           text: $localize`Sidst redigeret (dato)`,
+          cannotBeRecommended: true,
         },
       },
     },
