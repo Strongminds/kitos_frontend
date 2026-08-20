@@ -4,7 +4,7 @@
     <mat-label>
       {{ text }}
       @if (recommended) {
-        <app-recommended-badge [visible]="recommended" [filled]="(formName && formGroup.controls[formName].value) === true"></app-recommended-badge>
+        <app-recommended-badge [visible]="recommended" [filled]="(formName && formGroup.controls[formName].value !== undefined) === true"></app-recommended-badge>
       }
     </mat-label>
     <input
