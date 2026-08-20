@@ -150,9 +150,10 @@
           [formGroup]="itSystemCriticalityForm"
           formName="isBusinessCritical"
           [data]="isBusinessCriticalOptions"
-          (valueChange)="patchGeneral({ isBusinessCritical: $event })"
           toolTipText="Definitionen fra fællesoffentlig IT kritikalitet: driftsforstyrrelser rammer størstedelen af organisationens evne til at arbejde"
           i18n-toolTipText
+          [recommended]="(isBusinessCriticalRecommended$ | async) === true"
+          (valueChange)="patchGeneral({ isBusinessCritical: $event })"
         ></app-dropdown>
       }
 
@@ -172,10 +173,11 @@
           i18n-text
           [formGroup]="itSystemCriticalityForm"
           formName="isSociallyCritical"
-          (valueChange)="patchGeneral({ isSociallyCritical: $event })"
           [data]="isSociallyCriticalOptions"
           toolTipText="Understøtter systemet funktioner, hvor nedbrud kan medføre alvorlige konsekvenser for samfundets generelle funktionsdygtighed?"
           i18n-toolTipText
+          [recommended]="(isSociallyCriticalRecommended$ | async) === true"
+          (valueChange)="patchGeneral({ isSociallyCritical: $event })"
         ></app-dropdown>
       }
 
@@ -203,8 +205,9 @@
           [simpleLink$]="selectCriticalityLevelDocumentation$"
           i18n-title
           (submitMethod)="patchCriticalityLevelDocumentation($event)"
-          (clearClick)="resetCriticalityLevelDocumentation()"
           [isDisabled]="disableCriticalityLevelDocumentationControl"
+          [recommended]="(criticalityLevelDocumentationRecommended$ | async) === true"
+          (clearClick)="resetCriticalityLevelDocumentation()"
         ></app-edit-url-section>
       }
     </form>
@@ -246,6 +249,7 @@
           [formGroup]="itSystemApplicationForm"
           formName="lifeCycleStatus"
           [data]="lifeCycleStatusOptions"
+          [recommended]="(lifeCycleStatusRecommended$ | async) === true"
           (valueChange)="patchGeneral({ validity: { lifeCycleStatus: $event } })"
         ></app-dropdown>
       }
@@ -255,6 +259,7 @@
           i18n-text
           [formGroup]="itSystemApplicationForm"
           formName="validFrom"
+          [recommended]="(usagePeriodRecommended$ | async) === true"
           (validatedValueChange)="patchGeneral({ validity: { validFrom: $event.value?.toDateString() } }, $event)"
         ></app-datepicker>
       }
@@ -264,6 +269,7 @@
           i18n-text
           [formGroup]="itSystemApplicationForm"
           formName="validTo"
+          [recommended]="(usagePeriodRecommended$ | async) === true"
           (validatedValueChange)="patchGeneral({ validity: { validTo: $event.value?.toDateString() } }, $event)"
         ></app-datepicker>
       }

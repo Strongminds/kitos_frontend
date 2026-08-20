@@ -1,4 +1,4 @@
-﻿import { AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -223,9 +223,15 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly lifeCycleStatusEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedLifeCycleStatus)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly lifeCycleStatusRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLifeCycleStatus)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly usagePeriodEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly usagePeriodRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly statusEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedStatus)
     .pipe(mapUIConfigStatusToEnabled());
@@ -244,9 +250,15 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly isSociallyCriticalEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedIsSociallyCritical)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly isSociallyCriticalRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedIsSociallyCritical)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly isBusinessCriticalEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedIsBusinessCritical)
     .pipe(mapUIConfigStatusToEnabled());
+   public readonly isBusinessCriticalRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedIsBusinessCritical)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly licensingAndCodeModelsEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels)
     .pipe(mapUIConfigStatusToEnabled());
@@ -259,6 +271,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly criticalityLevelDocumentationEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedCriticalityLevelDocumentation)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly criticalityLevelDocumentationRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedCriticalityLevelDocumentation)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly containsAITechnologyModifyEnabled$ = this.store.select(
     selectITSystemUsageFieldPermissions(itSystemUsageFields.containsAITechnology),
   );
