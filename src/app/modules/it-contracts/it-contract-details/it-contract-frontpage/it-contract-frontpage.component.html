@@ -208,6 +208,7 @@
           [data$]="users$"
           [isLoading$]="usersIsLoading$"
           [addTag]="true"
+          [recommended]="(contractInternalSignerRecommended$ | async) === true"
           (filterChange)="searchUsers($event)"
           (valueChange)="patchFrontPage({ responsible: { signedBy: $event } })"
         ></app-connected-dropdown>
