@@ -1483,9 +1483,9 @@
         <source>Kryptering</source>
         <target state="new">Kryptering</target>
       </trans-unit>
-      <trans-unit id="3479549752860605077" datatype="html">
-        <source>Pseudonomisering</source>
-        <target state="new">Pseudonomisering</target>
+      <trans-unit id="2655152388017872668" datatype="html">
+        <source>Pseudonymisering</source>
+        <target state="new">Pseudonymisering</target>
       </trans-unit>
       <trans-unit id="8121760203222953890" datatype="html">
         <source>Adgangsstyring</source>
