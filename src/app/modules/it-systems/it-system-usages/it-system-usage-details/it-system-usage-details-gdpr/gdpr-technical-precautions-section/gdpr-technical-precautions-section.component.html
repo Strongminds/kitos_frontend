@@ -32,8 +32,9 @@
         [simpleLink$]="selectTechnicalDocumentation$"
         [isDisabled]="(isTechnicalPrecautionsFalse$ | async) !== false"
         data-cy="technical-precautions-documentation-link"
-        (submitMethod)="patchGdpr({ technicalPrecautionsDocumentation: $event })"
         [isDisabled]="disableDirectoryDocumentationControl"
+        [recommended]="(technicalPrecautionsRecommended$ | async) === true"
+        (submitMethod)="patchGdpr({ technicalPrecautionsDocumentation: $event })"
       ></app-edit-url-section>
     </app-standard-vertical-content-grid>
   </form>

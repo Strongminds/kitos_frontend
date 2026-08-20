@@ -65,8 +65,9 @@
             [simpleLink$]="selectRiskDocumentation$"
             [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
             data-cy="risk-documentation-link"
-            (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
             [isDisabled]="disableDirectoryDocumentationControl"
+            [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
+            (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
           ></app-edit-url-section>
           <app-textarea
             text="Bemærkninger"
