@@ -16,6 +16,7 @@
       [formGroup]="itSystemInformationForm"
       formName="localCallName"
       [maxLength]="100"
+      [recommended]="(nameRecommended$ | async) === true"
       (valueChange)="patchGeneral({ localCallName: $event })"
     ></app-textbox>
     @if (systemIdEnabled$ | async) {

@@ -91,7 +91,7 @@ import {
   selectITSystemUsageEnableAndRecommendedTakenIntoUsageBy,
   selectITSystemUsageEnableAndRecommendedTechnicalSystemType,
   selectITSystemUsageEnableAndRecommendedVersion,
-  selectITSystemUsageEnableAndRecommendedWebAccessibility,
+  selectITSystemUsageEnableAndRecommendedWebAccessibility
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -160,9 +160,10 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly aiTechnologyOptions = yesNoOptions;
   public readonly isSociallyCriticalOptions = yesNoDontKnowOptions;
   public readonly isBusinessCriticalOptions = yesNoDontKnowOptions;
-  public readonly nameEnabled$ = this.store
+
+  public readonly nameRecommended$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedName)
-    .pipe(mapUIConfigStatusToEnabled());
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly systemIdEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedSystemId)
     .pipe(mapUIConfigStatusToEnabled());
@@ -256,7 +257,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   public readonly isBusinessCriticalEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedIsBusinessCritical)
     .pipe(mapUIConfigStatusToEnabled());
-   public readonly isBusinessCriticalRecommended$ = this.store
+  public readonly isBusinessCriticalRecommended$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedIsBusinessCritical)
     .pipe(mapUIConfigStatusToRecommended());
   public readonly licensingAndCodeModelsEnabled$ = this.store
