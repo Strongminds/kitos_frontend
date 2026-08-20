@@ -122,6 +122,7 @@
           data-cy="dpr-agreement-concluded-date"
           [formGroup]="frontpageFormGroup"
           formName="agreementConclusionDate"
+          [recommended]="((agreementConcludedRecommended$ | async) && (isAgreementConcluded$ | async)) === true"
           (valueChange)="patchFrontPage({ general: { agreementConcludedAt: $event?.toDateString() } })"
         ></app-datepicker>
         <app-textarea
