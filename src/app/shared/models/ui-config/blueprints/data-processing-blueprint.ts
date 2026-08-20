@@ -84,7 +84,6 @@ export const DataProcessingUiBluePrint = {
         },
         oversightOptions: {
           text: $localize`Tilsynsmuligheder`,
-          cannotBeRecommended: true,
         },
         oversights: {
           text: $localize`Gennemførte og kommende tilsyn`,
