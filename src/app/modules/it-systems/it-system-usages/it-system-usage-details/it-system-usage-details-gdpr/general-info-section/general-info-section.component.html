@@ -32,6 +32,7 @@
       i18n-text
       [formGroup]="generalInformationForm"
       formName="isDataProcessingAgreementRequired"
+      class="two-thirds-column-width"
       [data]="isDataProcessingAgreementRequiredOptions"
       [recommended]="(isDataProcessingAgreementRequiredRecommended$ | async) === true"
       (valueChange)="patchGdpr({ isDataProcessingAgreementRequired: $event })"
