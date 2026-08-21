@@ -22,11 +22,6 @@
         >
             <ng-template ng-label-tmp let-item="item">
       <span class="ng-value-label align-items-vertically">{{ item.name }}
-          @if (recommended) {
-          <div class="recommended-label-row">
-            <app-recommended-badge [visible]="recommended" [filled]="(formName && formGroup.controls[formName].value !== undefined) === true"></app-recommended-badge>
-          </div>
-          }
       </span>
     </ng-template>
 

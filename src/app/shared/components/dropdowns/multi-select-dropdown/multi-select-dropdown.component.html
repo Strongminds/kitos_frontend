@@ -57,7 +57,6 @@
       @for (item of items; track item; let isLast = $last) {
       <span class="ng-value-label">{{ item[textField] }}@if (!isLast) {,&nbsp; }</span>
       }
-      <app-recommended-badge [visible]="recommended" [filled]="selectedValuesModel.length > 0"></app-recommended-badge>
     </div>
 
   </ng-template>
