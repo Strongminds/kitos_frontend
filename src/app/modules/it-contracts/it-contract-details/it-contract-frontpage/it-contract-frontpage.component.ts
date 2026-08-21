@@ -1,4 +1,4 @@
-﻿import { AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
@@ -32,6 +32,8 @@ import {
 import {
   selectItContractEnableAndRecommendContractName,
   selectItContractEnableAndRecommendedContractId,
+  selectItContractEnableAndRecommendExternalContactPersonEmail,
+  selectItContractEnableAndRecommendExternalContactPersonPhone,
   selectItContractsEnableAndRecommendedAgreementPeriod,
   selectItContractsEnableAndRecommendedContractType,
   selectItContractsEnableAndRecommendedCreatedBy,
@@ -51,6 +53,7 @@ import {
   selectItContractsEnableAndRecommendedSupplier,
   selectItContractsEnableAndRecommendedTemplate,
   selectItContractsEnableAndRecommendedUseParentValidity,
+  selectItContractEnableAndRecommendExternalContactPerson
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -303,7 +306,18 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
     this.contractResponsibleUnitEnabled$,
     this.contractInternalSignerEnabled$,
   ]);
-
+  public readonly externalContactPersonEnabled$ = this.store.select(selectItContractEnableAndRecommendExternalContactPerson)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly externalContactPersonRecommended$ = this.store.select(selectItContractEnableAndRecommendExternalContactPerson)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly externalContactPersonPhoneEnabled$ = this.store.select(selectItContractEnableAndRecommendExternalContactPersonPhone)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly externalContactPersonPhoneRecommended$ = this.store.select(selectItContractEnableAndRecommendExternalContactPersonPhone)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly externalContactPersonEmailEnabled$ = this.store.select(selectItContractEnableAndRecommendExternalContactPersonEmail)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly externalContactPersonEmailRecommended$ = this.store.select(selectItContractEnableAndRecommendExternalContactPersonEmail)
+  .pipe(mapUIConfigStatusToRecommended());
   public readonly contractSupplierEnabled$ = this.store
     .select(selectItContractsEnableAndRecommendedSupplier)
     .pipe(mapUIConfigStatusToEnabled());

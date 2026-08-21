@@ -320,6 +320,7 @@
         ></app-checkbox>
       </div>
 
+      @if (externalContactPersonEnabled$ | async) {
         <app-textbox
           text="Leverandørens kontaktperson"
           i18n-text
@@ -328,6 +329,7 @@
           (valueChange)="patchFrontPage({ supplier: { contactPerson: $event } })"
         ></app-textbox>
 
+        @if (externalContactPersonPhoneEnabled$ | async) {
         <app-textbox
           text="Telefonnummer"
           i18n-text
@@ -335,14 +337,18 @@
           formName="contactPhoneNumber"
           (valueChange)="patchFrontPage({ supplier: { contactPhoneNumber: $event } })"
         ></app-textbox>
+        }
 
-        <app-textbox
+        @if (externalContactPersonEmailEnabled$ | async){
+          <app-textbox
           text="Email"
           i18n-text
           [formGroup]="supplierFormGroup"
           formName="contactEmail"
           (valueChange)="patchFrontPage({ supplier: { contactEmail: $event } })"
         ></app-textbox>
+        }
+      }
 
         <app-checkbox
           text="Underskriver er ikke kontaktperson"

@@ -62,6 +62,15 @@ export const ItContractsUiBluePrint = {
           text: $localize`Leverandørs underskrift`,
           helpText: "Herunder: 'Underskriver', 'Underskrevet' og 'Dato'",
         },
+        externalContactPerson: {
+          text: $localize`Leverandørens kontaktperson`,
+        },
+        externalContactPersonPhone: {
+          text: $localize`Leverandørens kontaktperson (telefon)`,
+        },
+        externalContactPersonEmail: {
+          text: $localize`Leverandørens kontaktperson (email)`,
+        },
         procurementStrategy: {
           text: $localize`Genanskaffelsesstrategi`,
         },

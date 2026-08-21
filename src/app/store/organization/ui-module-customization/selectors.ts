@@ -476,6 +476,12 @@ const createItContractFrontpageFieldEnableAndRecommendedSelector = (fieldKey: st
   createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'frontPage', fieldKey);
 export const selectItContractEnableAndRecommendContractName =
   createItContractFrontpageFieldEnableAndRecommendedSelector('contractName');
+export const selectItContractEnableAndRecommendExternalContactPerson =
+  createItContractFrontpageFieldEnableAndRecommendedSelector('externalContactPerson');
+export const selectItContractEnableAndRecommendExternalContactPersonPhone =
+  createItContractFrontpageFieldEnableAndRecommendedSelector('externalContactPersonPhone');
+export const selectItContractEnableAndRecommendExternalContactPersonEmail =
+  createItContractFrontpageFieldEnableAndRecommendedSelector('externalContactPersonEmail');
 export const selectItContractEnableContractId = createItContractFrontpageFieldSelector('contractId');
 export const selectItContractEnableAndRecommendedContractId =
   createItContractFrontpageFieldEnableAndRecommendedSelector('contractId');
