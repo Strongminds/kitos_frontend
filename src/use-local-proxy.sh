@@ -10,24 +10,24 @@ replace_proxy() {
 }
 
 cleanup_start() {
-  replace_proxy "http://localhost:58943" "https://kitos-dev.strongminds.easyhosting.strongminds\\.dev" "src/proxy.conf.json"
+  replace_proxy "http://localhost:58943" "https://kitos-dev.strongminds\\.dk" "src/proxy.conf.json"
 }
 
 cleanup_swagger() {
-  replace_proxy "http://localhost:58943" "https://kitos-dev.strongminds.easyhosting.strongminds\\.dev" "openapitools.json"
+  replace_proxy "http://localhost:58943" "https://kitos-dev.strongminds\\.dk" "openapitools.json"
 }
 
 
 if [ "$1" = "start" ]; then
   trap cleanup_start EXIT
 
-  replace_proxy "https://kitos-dev\\.strongminds\\.easyhosting\\.strongminds\\.dev" "http://localhost:58943" "src/proxy.conf.json"
+  replace_proxy "https://kitos-dev\\.strongminds\\.dk" "http://localhost:58943" "src/proxy.conf.json"
   yarn start
 fi
 
  if [ "$1" = "swagger" ]; then
    trap cleanup_swagger EXIT
 
-   replace_proxy "https://kitos-dev\\.strongminds\\.easyhosting\\.strongminds\\.dev" "http://localhost:58943" "openapitools.json"
+   replace_proxy "https://kitos-dev\\.strongminds\\.dk" "http://localhost:58943" "openapitools.json"
    yarn swagger
  fi
