@@ -701,6 +701,10 @@
   grid-column: span 2;
 }
 
+@mixin full-column-width {
+  grid-column: span 3;
+}
+
 @mixin recommended-badge-filled {
   background-color: color.adjust(theme.$color-positive, $lightness: 35%);
   color: color.adjust(theme.$color-positive, $lightness: -20%);

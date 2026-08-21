@@ -11,12 +11,14 @@
       [data]="yesNoDontKnowOptions"
       (valueChange)="preparePatch(choiceTypePropertyName, $event)"
       data-cy="url-section-dropdown"
+      class="full-width-column"
       [recommended]="choiceTypeRecommended"
     ></app-dropdown>
     <app-datepicker
       [text]="dateTitle"
       [formGroup]="formGroup"
       formName="dateControl"
+      class="full-width-column"
       [recommended]="choiceTypeRecommended"
       (valueChange)="preparePatch(datePropertyName, $event?.toDateString())"
     >
