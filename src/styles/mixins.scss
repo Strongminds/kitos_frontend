@@ -701,6 +701,12 @@
   grid-column: span 2;
 }
 
+@mixin recommended-badge-filled {
+  background-color: color.adjust(theme.$color-positive, $lightness: 35%);
+  color: color.adjust(theme.$color-positive, $lightness: -20%);
+  border-color: theme.$color-positive;
+}
+
 @mixin recommended-badge {
   display: inline-block;
   background-color: color.adjust(theme.$color-warning, $lightness: 30%);
@@ -715,9 +721,7 @@
   line-height: 1.2;
 
   &.filled {
-    background-color: color.adjust(theme.$color-positive, $lightness: 35%);
-    color: color.adjust(theme.$color-positive, $lightness: -20%);
-    border-color: theme.$color-positive;
+    @include recommended-badge-filled;
   }
 }
 
@@ -744,7 +748,7 @@
 }
 
 @mixin dropdown-has-recommended {
-  ::ng-deep ng-select:not(.ng-select-focused):not(.ng-select-opened) .ng-select-container:not(.ng-has-value) {
+  ::ng-deep ng-select:not(.ng-select-focused):not(.ng-select-opened) .ng-select-container {
     .ng-placeholder {
       display: flex;
       align-items: center;
@@ -753,6 +757,12 @@
         content: 'Anbefalet';
         white-space: nowrap;
         @include recommended-badge;
+      }
+    }
+
+    &.ng-has-value {
+      .ng-placeholder::after {
+        @include recommended-badge-filled;
       }
     }
   }
