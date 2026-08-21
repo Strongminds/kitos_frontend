@@ -7,7 +7,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { LoadingComponent } from '../../loading/loading.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
-import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-badge.component';
 
 @Component({
   selector: 'app-tree-node-dropdown',
@@ -21,7 +20,6 @@ import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-b
     NgLabelTemplateDirective,
     ParagraphComponent,
     LoadingComponent,
-    RecommendedBadgeComponent,
   ],
 })
 export class TreeNodeDropdownComponent extends BaseDropdownComponent<TreeNodeModel> implements OnInit {

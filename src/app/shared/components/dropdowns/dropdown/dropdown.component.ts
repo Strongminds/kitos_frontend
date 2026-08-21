@@ -14,7 +14,6 @@ import { addExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { BaseDropdownComponent } from '../../../base/base-dropdown.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
-import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-badge.component';
 
 @Component({
   selector: 'app-dropdown',
@@ -30,7 +29,6 @@ import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-b
     NgFooterTemplateDirective,
     TextBoxInfoComponent,
     AsyncPipe,
-    RecommendedBadgeComponent,
   ],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
