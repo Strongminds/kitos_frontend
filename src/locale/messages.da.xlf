@@ -6147,9 +6147,9 @@
         <source>Sidst redigeret dato</source>
         <target state="new">Sidst redigeret dato</target>
       </trans-unit>
-      <trans-unit id="3604722267089766233" datatype="html">
-        <source>Databehandler afftale indgået</source>
-        <target state="new">Databehandler afftale indgået</target>
+      <trans-unit id="4745265311701888438" datatype="html">
+        <source>Databehandler aftale indgået</source>
+        <target state="new">Databehandler aftale indgået</target>
       </trans-unit>
       <trans-unit id="4743129658174909579" datatype="html">
         <source>Søg efter enhed</source>
@@ -8132,6 +8132,18 @@
       <trans-unit id="1122304114460972965" datatype="html">
         <source>Ingen kontrakter fundet</source>
         <target state="new">Ingen kontrakter fundet</target>
+      </trans-unit>
+      <trans-unit id="2023668919263536036" datatype="html">
+        <source>Anbefalet</source>
+        <target state="new">Anbefalet</target>
+      </trans-unit>
+      <trans-unit id="8144839271710808705" datatype="html">
+        <source>Leverandørens kontaktperson (telefon)</source>
+        <target state="new">Leverandørens kontaktperson (telefon)</target>
+      </trans-unit>
+      <trans-unit id="7916092021353581046" datatype="html">
+        <source>Leverandørens kontaktperson (email)</source>
+        <target state="new">Leverandørens kontaktperson (email)</target>
       </trans-unit>
     </body>
   </file>
