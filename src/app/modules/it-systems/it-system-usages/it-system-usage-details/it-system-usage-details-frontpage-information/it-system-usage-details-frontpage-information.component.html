@@ -207,6 +207,7 @@
           i18n-title
           (submitMethod)="patchCriticalityLevelDocumentation($event)"
           [isDisabled]="disableCriticalityLevelDocumentationControl"
+          class="two-thirds-column-width"
           [recommended]="(criticalityLevelDocumentationRecommended$ | async) === true"
           (clearClick)="resetCriticalityLevelDocumentation()"
         ></app-edit-url-section>
