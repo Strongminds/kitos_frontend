@@ -289,7 +289,7 @@
 
       @if (contractExternalSignerEnabled$ | async) {
         <app-textbox
-          text="Leverandørens kontraktunderskriver"
+          text="Kontraktunderskriver"
           i18n-text
           data-cy="contract-supplier-signer"
           [formGroup]="supplierFormGroup"
@@ -322,7 +322,7 @@
 
       @if (externalContactPersonEnabled$ | async) {
         <app-textbox
-          text="Leverandørens kontaktperson"
+          text="Kontaktperson"
           i18n-text
           [formGroup]="supplierFormGroup"
           formName="contactPerson"
