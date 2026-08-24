@@ -443,7 +443,7 @@
   }
 
   .k-grid {
-  --kendo-color-border-alt: transparent !important;
+    --kendo-color-border-alt: transparent !important;
   }
 
   :host ::ng-deep {
@@ -709,6 +709,7 @@
   background-color: color.adjust(theme.$color-positive, $lightness: 35%);
   color: color.adjust(theme.$color-positive, $lightness: -20%);
   border-color: theme.$color-positive;
+  margin-bottom: 2px;
 }
 
 @mixin recommended-badge {
@@ -746,7 +747,7 @@
       align-items: center;
 
       &::after {
-        content: 'Anbefalet';
+        content: "Anbefalet";
         white-space: nowrap;
         @include recommended-badge;
       }
@@ -759,4 +760,3 @@
     }
   }
 }
-
