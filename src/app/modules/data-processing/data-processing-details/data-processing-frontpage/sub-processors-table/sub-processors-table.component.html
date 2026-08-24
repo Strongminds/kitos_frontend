@@ -22,11 +22,13 @@
             </td>
             <td>
               @if (
-                subprocessor.transferToInsecureThirdCountry && subprocessor.transferToInsecureThirdCountry !== 'Undecided'
-                ) {
-                <app-paragraph
-                  paragraphSize="medium"
-                  ><app-boolean-circle [value]="subprocessor.transferToInsecureThirdCountry === 'Yes'"></app-boolean-circle
+                subprocessor.transferToInsecureThirdCountry &&
+                subprocessor.transferToInsecureThirdCountry !== "Undecided"
+              ) {
+                <app-paragraph paragraphSize="medium"
+                  ><app-boolean-circle
+                    [value]="subprocessor.transferToInsecureThirdCountry === 'Yes'"
+                  ></app-boolean-circle
                 ></app-paragraph>
               }
             </td>
@@ -37,7 +39,7 @@
                 }}</app-paragraph>
                 @if ((hasModifyPermissions$ | async) === true) {
                   <app-table-row-actions>
-                    <app-icon-button (buttonClick)="onEdit(subprocessor.dataProcessorOrganization.uuid)" data-cy="edit-payment-button"
+                    <app-icon-button (buttonClick)="onEdit(subprocessor)" data-cy="edit-payment-button"
                       ><app-pencil-icon></app-pencil-icon
                     ></app-icon-button>
                     <app-icon-button
@@ -55,11 +57,7 @@
     </app-native-table>
   }
   @if ((anySubProcessors$ | async) === false) {
-    <app-empty-state
-      text="Ingen underdatabehandlere tilføjet endnu"
-      context="emptyTable"
-      i18n-text
-    ></app-empty-state>
+    <app-empty-state text="Ingen underdatabehandlere tilføjet endnu" context="emptyTable" i18n-text></app-empty-state>
   }
   @if ((hasModifyPermissions$ | async) === true) {
     <app-collection-extension-button
