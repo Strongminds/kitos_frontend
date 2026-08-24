@@ -11,7 +11,7 @@
  */
 
 
-export interface APIUserWithCrossOrganizationalRightsResponseDTO { 
+export interface APIShallowOrganizationResponseWithDisabledStateDTO { 
     /**
      * UUID which is unique within collection of entities of the same type
      */
@@ -20,9 +20,13 @@ export interface APIUserWithCrossOrganizationalRightsResponseDTO {
      * Human readable name of the entity
      */
     name: string;
-    email: string;
-    apiAccess?: boolean;
-    stakeholderAccess?: boolean;
-    organizationsWhereActive: Array<string> | null;
+    /**
+     * Organizational CVR identifier, if any
+     */
+    cvr?: string | null;
+    /**
+     * Indicates whether the organization is disabled or not.
+     */
+    disabled?: boolean;
 }
 
