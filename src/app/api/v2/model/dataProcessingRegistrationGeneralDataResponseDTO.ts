@@ -14,7 +14,7 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoUndecidedChoice } from './yesNoUndecidedChoice';
 import { APIYesNoIrrelevantChoice } from './yesNoIrrelevantChoice';
 import { APIDataProcessingRegistrationValidityDTO } from './dataProcessingRegistrationValidityDTO';
-import { APIShallowOrganizationResponseDTO } from './shallowOrganizationResponseDTO';
+import { APIShallowOrganizationResponseWithDisabledStateDTO } from './shallowOrganizationResponseWithDisabledStateDTO';
 
 
 export interface APIDataProcessingRegistrationGeneralDataResponseDTO { 
@@ -41,7 +41,7 @@ export interface APIDataProcessingRegistrationGeneralDataResponseDTO {
     /**
      * UUID\'s of the organization entities selected as data processors
      */
-    dataProcessors: Array<APIShallowOrganizationResponseDTO> | null;
+    dataProcessors: Array<APIShallowOrganizationResponseWithDisabledStateDTO> | null;
     hasSubDataProcessors?: APIYesNoUndecidedChoice;
     /**
      * UUID\'s of the organization entities selected as sub data processors

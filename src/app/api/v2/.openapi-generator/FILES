@@ -386,6 +386,7 @@ model/scheduledNotificationWriteRequestDTO.ts
 model/sentNotificationResponseDTO.ts
 model/shallowItSystemUsageResponseDTO.ts
 model/shallowOrganizationResponseDTO.ts
+model/shallowOrganizationResponseWithDisabledStateDTO.ts
 model/simpleConflictResponseDTO.ts
 model/simpleLinkDTO.ts
 model/stsOrganizationAccessStatusResponseDTO.ts

@@ -29,7 +29,7 @@ import { APIIdentityNamePairResponseDTO } from '../model/aPIIdentityNamePairResp
 // @ts-ignore
 import { APIRoleAssignmentRequestDTO } from '../model/aPIRoleAssignmentRequestDTO';
 // @ts-ignore
-import { APIShallowOrganizationResponseDTO } from '../model/aPIShallowOrganizationResponseDTO';
+import { APIShallowOrganizationResponseWithDisabledStateDTO } from '../model/aPIShallowOrganizationResponseWithDisabledStateDTO';
 
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS }                     from '../variables';
@@ -232,9 +232,9 @@ export class DataProcessingRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
+    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseWithDisabledStateDTO>>;
+    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseWithDisabledStateDTO>>>;
+    public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseWithDisabledStateDTO>>>;
     public getManyDataProcessingRegistrationInternalV2GetAvailableDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableDataProcessorsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
@@ -292,7 +292,7 @@ export class DataProcessingRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/data-processors/available`;
-        return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIShallowOrganizationResponseWithDisabledStateDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,
@@ -311,9 +311,9 @@ export class DataProcessingRegistrationInternalV2Service {
      * @param observe set whether or not to return the data Observable as the body, response or events. defaults to returning the body.
      * @param reportProgress flag to report request and response progress.
      */
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseDTO>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseDTO>>>;
-    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseDTO>>>;
+    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'body', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<Array<APIShallowOrganizationResponseWithDisabledStateDTO>>;
+    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'response', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpResponse<Array<APIShallowOrganizationResponseWithDisabledStateDTO>>>;
+    public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe?: 'events', reportProgress?: boolean, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<HttpEvent<Array<APIShallowOrganizationResponseWithDisabledStateDTO>>>;
     public getManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessors(requestParameters: GetManyDataProcessingRegistrationInternalV2GetAvailableSubDataProcessorsRequestParams, observe: any = 'body', reportProgress: boolean = false, options?: {httpHeaderAccept?: 'application/json', context?: HttpContext}): Observable<any> {
         const dprUuid = requestParameters.dprUuid;
         if (dprUuid === null || dprUuid === undefined) {
@@ -371,7 +371,7 @@ export class DataProcessingRegistrationInternalV2Service {
         }
 
         let localVarPath = `/api/v2/internal/data-processing-registrations/${this.configuration.encodeParam({name: "dprUuid", value: dprUuid, in: "path", style: "simple", explode: false, dataType: "string", dataFormat: "uuid"})}/sub-data-processors/available`;
-        return this.httpClient.request<Array<APIShallowOrganizationResponseDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
+        return this.httpClient.request<Array<APIShallowOrganizationResponseWithDisabledStateDTO>>('get', `${this.configuration.basePath}${localVarPath}`,
             {
                 context: localVarHttpContext,
                 params: localVarQueryParameters,

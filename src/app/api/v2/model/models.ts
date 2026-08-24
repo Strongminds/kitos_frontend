@@ -247,6 +247,7 @@ export * from './scheduledNotificationWriteRequestDTO';
 export * from './sentNotificationResponseDTO';
 export * from './shallowItSystemUsageResponseDTO';
 export * from './shallowOrganizationResponseDTO';
+export * from './shallowOrganizationResponseWithDisabledStateDTO';
 export * from './simpleConflictResponseDTO';
 export * from './simpleLinkDTO';
 export * from './stsOrganizationAccessStatusResponseDTO';
