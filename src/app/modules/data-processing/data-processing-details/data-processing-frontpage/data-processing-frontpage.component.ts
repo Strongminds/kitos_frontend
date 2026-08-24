@@ -165,7 +165,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
           this.frontpageFormGroup.patchValue({
             name: dpr.name,
             status: dpr.general.validity.valid ? `Aktiv` : `Inaktiv`,
-            lastChangedBy: dpr.lastModifiedBy.name,
+            lastChangedBy: dpr.lastModifiedBy?.name,
             lastChangedAt: optionalNewDate(dpr.lastModified),
             dataResponsible: dpr.general.dataResponsible,
             dataResponsibleRemarks: dpr.general.dataResponsibleRemark,

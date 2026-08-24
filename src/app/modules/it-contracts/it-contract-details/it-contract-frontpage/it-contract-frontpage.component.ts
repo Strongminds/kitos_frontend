@@ -596,8 +596,8 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
 
   private patchHistoryFormGroup(contract: APIItContractResponseDTO) {
     this.historyFormGroup.patchValue({
-      createdBy: contract.createdBy.name,
-      lastModifiedBy: contract.lastModifiedBy.name,
+      createdBy: contract.createdBy?.name,
+      lastModifiedBy: contract.lastModifiedBy?.name,
       lastModified: new Date(contract.lastModified),
     });
   }
