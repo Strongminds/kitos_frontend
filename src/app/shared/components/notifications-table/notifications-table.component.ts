@@ -190,9 +190,9 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
     emailRecipients: APIEmailRecipientResponseDTO[] | undefined,
     roleRecipients: APIRoleRecipientResponseDTO[] | undefined,
   ) {
-    const emailRecipientEmails = emailRecipients?.map((recipient) => recipient.email);
-    const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name);
-    return emailRecipientEmails?.concat(roleRecipientNames).join(', ');
+    const emailRecipientEmails = emailRecipients?.map((recipient) => recipient.email) ?? [];
+    const roleRecipientNames = roleRecipients?.map((recipient) => recipient.role?.name) ?? [];
+    return emailRecipientEmails.concat(roleRecipientNames).join(', ');
   }
 
   public onDialogActionComplete() {

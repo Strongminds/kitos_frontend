@@ -37,7 +37,7 @@
                 }}</app-paragraph>
                 @if ((hasModifyPermissions$ | async) === true) {
                   <app-table-row-actions>
-                    <app-icon-button (buttonClick)="onEdit(subprocessor)" data-cy="edit-payment-button"
+                    <app-icon-button (buttonClick)="onEdit(subprocessor.dataProcessorOrganization.uuid)" data-cy="edit-payment-button"
                       ><app-pencil-icon></app-pencil-icon
                     ></app-icon-button>
                     <app-icon-button

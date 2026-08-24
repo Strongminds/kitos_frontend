@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, first } from 'rxjs';
-import { APIDataProcessorRegistrationSubDataProcessorResponseDTO } from 'src/app/api/v2';
+import { combineLatestWith, first, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
+import { addOptionalExpiredText } from 'src/app/shared/helpers/option-type.helper';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
@@ -42,13 +42,25 @@ import { CollectionExtensionButtonComponent } from '../../../../../shared/compon
     TrashcanIconComponent,
     EmptyStateComponent,
     CollectionExtensionButtonComponent,
-    AsyncPipe
-],
+    AsyncPipe,
+  ],
 })
 export class SubProcessorsTableComponent extends BaseComponent {
-  public readonly subprocessors$ = this.store.select(selectDataProcessingSubProcessors).pipe(filterNullish());
-  public readonly anySubProcessors$ = this.subprocessors$.pipe(matchNonEmptyArray());
+  private readonly rawSubprocessors$ = this.store.select(selectDataProcessingSubProcessors).pipe(filterNullish());
 
+  public readonly subprocessors$ = this.rawSubprocessors$.pipe(
+    map((subprocessors) =>
+      subprocessors.map((sp) => ({
+        ...sp,
+        dataProcessorOrganization: {
+          ...sp.dataProcessorOrganization,
+          name: addOptionalExpiredText(sp.dataProcessorOrganization.name, sp.dataProcessorOrganization.disabled),
+        },
+      })),
+    ),
+  );
+
+  public readonly anySubProcessors$ = this.rawSubprocessors$.pipe(matchNonEmptyArray());
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);
 
   constructor(
@@ -74,13 +86,17 @@ export class SubProcessorsTableComponent extends BaseComponent {
         }),
     );
   }
+
   onAddNewSubProcessor() {
     this.dialog.open(CreateSubProcessorDialogComponent);
   }
 
-  onEdit(subprocessor: APIDataProcessorRegistrationSubDataProcessorResponseDTO) {
-    const dialogRef = this.dialog.open(CreateSubProcessorDialogComponent);
-    const dialogInstance = dialogRef.componentInstance;
-    dialogInstance.subprocessor = subprocessor;
+  onEdit(orgUuid: string) {
+    this.rawSubprocessors$.pipe(first()).subscribe((rawSubprocessors) => {
+      const raw = rawSubprocessors.find((sp) => sp.dataProcessorOrganization.uuid === orgUuid);
+      if (!raw) return;
+      const dialogRef = this.dialog.open(CreateSubProcessorDialogComponent);
+      dialogRef.componentInstance.subprocessor = raw;
+    });
   }
 }
