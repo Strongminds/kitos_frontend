@@ -729,26 +729,14 @@
   }
 }
 
-.recommended-badge {
-  @include recommended-badge;
-}
-
 @mixin recommended-label-row {
   display: flex;
   align-items: center;
   margin-bottom: 2px;
 }
 
-.recommended-label-row {
-  @include recommended-label-row;
-}
-
 @mixin align-items-vertically {
   display: flex;
-}
-
-.align-items-vertically {
-  @include align-items-vertically;
 }
 
 @mixin dropdown-has-recommended {
@@ -772,6 +760,3 @@
   }
 }
 
-.dropdown-has-recommended {
-  @include dropdown-has-recommended;
-}
