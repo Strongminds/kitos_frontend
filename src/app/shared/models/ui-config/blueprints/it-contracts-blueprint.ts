@@ -33,6 +33,7 @@ export const ItContractsUiBluePrint = {
         },
         isActive: {
           text: $localize`Status`,
+          cannotBeRecommended: true,
         },
         agreementPeriod: {
           text: $localize`Gyldig fra/til`,
@@ -42,6 +43,7 @@ export const ItContractsUiBluePrint = {
         },
         parentContract: {
           text: $localize`Overordnet kontrakt`,
+          cannotBeRecommended: true,
         },
         useParentValidity: {
           text: $localize`Nedarv overordnet kontrakts gyldighed`,
@@ -60,6 +62,15 @@ export const ItContractsUiBluePrint = {
           text: $localize`Leverandørs underskrift`,
           helpText: "Herunder: 'Underskriver', 'Underskrevet' og 'Dato'",
         },
+        externalContactPerson: {
+          text: $localize`Leverandørens kontaktperson`,
+        },
+        externalContactPersonPhone: {
+          text: $localize`Leverandørens kontaktperson (telefon)`,
+        },
+        externalContactPersonEmail: {
+          text: $localize`Leverandørens kontaktperson (email)`,
+        },
         procurementStrategy: {
           text: $localize`Genanskaffelsesstrategi`,
         },
@@ -74,9 +85,11 @@ export const ItContractsUiBluePrint = {
         },
         lastModifiedBy: {
           text: $localize`Sidst redigeret (bruger)`,
+          cannotBeRecommended: true,
         },
         lastModifiedDate: {
           text: $localize`Sidst redigeret (dato)`,
+          cannotBeRecommended: true,
         },
       },
     },
@@ -86,12 +99,15 @@ export const ItContractsUiBluePrint = {
       children: {
         agreementElements: {
           text: $localize`Aftaleelementer`,
+          cannotBeRecommended: true,
         },
         systemUsages: {
           text: $localize`IT Systemer`,
+          cannotBeRecommended: true,
         },
         relations: {
           text: $localize`Relationer`,
+          cannotBeRecommended: true,
         },
       },
     },
@@ -121,9 +137,11 @@ export const ItContractsUiBluePrint = {
         },
         extPayment: {
           text: $localize`Ekstern betaling`,
+          cannotBeRecommended: true,
         },
         intPayment: {
           text: $localize`Intern betaling`,
+          cannotBeRecommended: true,
         },
       },
     },

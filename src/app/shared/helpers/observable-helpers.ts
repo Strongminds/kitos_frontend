@@ -52,3 +52,17 @@ export function filterByValidCache<T>(cached$: Observable<Cached<T>>) {
 export function mapArray<T, U>(fn: (item: T) => U): OperatorFunction<T[], U[]> {
   return map((arr: T[]) => arr.map(fn));
 }
+
+/**
+ * Maps an observable of `{ enabled: boolean; recommended: boolean }` to an observable of `boolean` (the `enabled` field).
+ */
+export function mapUIConfigStatusToEnabled(): OperatorFunction<{ enabled: boolean; recommended: boolean }, boolean> {
+  return map(({ enabled }) => enabled);
+}
+
+/**
+ * Maps an observable of `{ enabled: boolean; recommended: boolean }` to an observable of `boolean` (the `recommended` field).
+ */
+export function mapUIConfigStatusToRecommended(): OperatorFunction<{ enabled: boolean; recommended: boolean }, boolean> {
+  return map(({ recommended }) => recommended);
+}

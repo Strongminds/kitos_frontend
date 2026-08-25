@@ -152,16 +152,22 @@ export class UIModuleCustomizationEffects {
     rootToUpdate: APICustomizedUINodeResponseDTO,
   ): APIUIModuleCustomizationRequestDTO {
     const newEnabledState = updatedNode.enabled;
+    const newRecommendedState = updatedNode.recommended;
     if (rootToUpdate) {
-      rootToUpdate.enabled = newEnabledState;
+      if (newEnabledState !== undefined) {
+        rootToUpdate.enabled = newEnabledState;
+      }
+      if (newRecommendedState !== undefined) {
+        rootToUpdate.recommended = newRecommendedState;
+      }
     }
 
     const rootToUpdateKey = rootToUpdate?.key;
-    if (this.uiConfigService.isTab(rootToUpdateKey)) {
+    if (newEnabledState !== undefined && this.uiConfigService.isTab(rootToUpdateKey)) {
       return {
         nodes: this.updateChildrenInRequestDto(rootToUpdateKey, newEnabledState, existingNodes),
       };
-    } else if (this.uiConfigService.isField(rootToUpdateKey)) {
+    } else if (newEnabledState !== undefined && this.uiConfigService.isField(rootToUpdateKey)) {
       const parent = this.findParentNode(rootToUpdateKey, existingNodes)!;
       const children = this.getChildrenOfTab(parent.key, existingNodes);
       if (this.allChildrenHasSameValue(newEnabledState, children)) {
@@ -211,7 +217,10 @@ export class UIModuleCustomizationEffects {
     const allNodes = this.uiConfigService.getAllNodesOfBlueprint(module);
     const existingKeys = new Set(response.map((node) => node.key));
     const missingNodes = allNodes.filter((node) => node.fullKey !== undefined && !existingKeys.has(node.fullKey));
-    const nodesToAdd = missingNodes.map((node) => ({ key: node.fullKey!, enabled: !node.disableByDefault }));
+    const nodesToAdd = missingNodes.map((node) => ({
+      key: node.fullKey!,
+      enabled: !node.disableByDefault,
+    }));
     return [...response, ...nodesToAdd];
   }
 }

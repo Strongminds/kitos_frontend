@@ -21,24 +21,29 @@ export const DataProcessingUiBluePrint = {
         },
         status: {
           text: $localize`Status`,
+          cannotBeRecommended: true,
         },
         lastChangedBy: {
           text: $localize`Sidst redigeret af bruger`,
+          cannotBeRecommended: true,
         },
         lastChangedAt: {
           text: $localize`Sidst redigeret dato`,
+          cannotBeRecommended: true,
         },
         agreementConcluded: {
-          text: $localize`Databehandler afftale indgået`,
+          text: $localize`Databehandler aftale indgået`,
         },
         transferBasis: {
           text: $localize`Overførselsgrundlag`,
         },
         processors: {
           text: $localize`Databehandlere`,
+          cannotBeRecommended: true,
         },
         subProcessors: {
           text: $localize`Underdatabehandlere`,
+          cannotBeRecommended: true,
         },
         responsibleOrgUnit: {
           text: $localize`Ansvarlig enhed`,
@@ -59,9 +64,11 @@ export const DataProcessingUiBluePrint = {
       children: {
         mainContract: {
           text: $localize`Hvilken kontrakt skal angive om databehandlingen er aktiv`,
+          cannotBeRecommended: true,
         },
         associatedContracts: {
           text: $localize`Tilknyttede kontrakter`,
+          cannotBeRecommended: true,
         },
       },
     },
@@ -80,6 +87,7 @@ export const DataProcessingUiBluePrint = {
         },
         oversights: {
           text: $localize`Gennemførte og kommende tilsyn`,
+          cannotBeRecommended: true,
         },
       },
     },

@@ -40,12 +40,15 @@ export const ItSystemUsageUiBluePrint = {
         },
         takenIntoUsageBy: {
           text: $localize`Taget i anvendelse af`,
+          cannotBeRecommended: true,
         },
         lastEditedBy: {
           text: $localize`Sidst redigeret (bruger)`,
+          cannotBeRecommended: true,
         },
         lastEditedAt: {
           text: $localize`Sidst redigeret (dato)`,
+          cannotBeRecommended: true,
         },
         lifeCycleStatus: {
           text: $localize`Livscyklus`,
@@ -56,6 +59,7 @@ export const ItSystemUsageUiBluePrint = {
         },
         status: {
           text: $localize`Status`,
+          cannotBeRecommended: true,
         },
         containsAITechnology: {
           text: $localize`Indeholder AI-teknologi`,
@@ -73,6 +77,7 @@ export const ItSystemUsageUiBluePrint = {
         criticalityFieldsLastChanged: {
           text: $localize`Systemkritikalitet sidst opdateret`,
           disableByDefault: true,
+          cannotBeRecommended: true,
         },
         systemUsageCriticalityLevel: {
           text: $localize`Kritikalitet`,
@@ -161,9 +166,11 @@ export const ItSystemUsageUiBluePrint = {
       children: {
         outgoing: {
           text: $localize`Relationer til andre systemer`,
+          cannotBeRecommended: true,
         },
         incoming: {
           text: $localize`Relationer fra andre systemer`,
+          cannotBeRecommended: true,
         },
       },
     },
@@ -213,6 +220,7 @@ export const ItSystemUsageUiBluePrint = {
         },
         journalPeriods: {
           text: $localize`Journalperioder`,
+          cannotBeRecommended: true,
         },
         catalogArchiveDuty: {
           text: $localize`Rigsarkivets vejledning til arkivering`,
@@ -230,9 +238,11 @@ export const ItSystemUsageUiBluePrint = {
       children: {
         inheritedKle: {
           text: $localize`Nedarvede opgaver (Data fra IT Systemkataloget)`,
+          cannotBeRecommended: true,
         },
         localKle: {
           text: $localize`Lokale tilknyttede opgaver`,
+          cannotBeRecommended: true,
         },
       },
     },

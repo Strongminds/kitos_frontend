@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { map, Observable } from 'rxjs';
 import { APICustomizedUINodeResponseDTO } from 'src/app/api/v2';
+import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { UIConfigNodeViewModel } from 'src/app/shared/models/ui-config/ui-config-node-view-model.model';
 import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-customization';
@@ -28,6 +29,7 @@ import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.
     CheckboxButtonComponent,
     TooltipComponent,
     InfoIconComponent,
+    CheckboxComponent,
     AsyncPipe,
   ],
 })
@@ -48,11 +50,38 @@ export class UiConfigTabSectionComponent {
     return this.tabViewModel.fullKey.endsWith('.usageArchive') ? $localize`undermodul` : $localize`faneblad`;
   }
 
-  public onCheckboxChanged($event: UINodeCustomization) {
-    const dto: APICustomizedUINodeResponseDTO = { enabled: $event.enabled, key: $event.fullKey };
+  private findFieldViewModel(fullKey: string): UIConfigNodeViewModel | undefined {
+    return this.tabViewModel.children?.find((x) => x.fullKey === fullKey);
+  }
+
+  private dispatchPut(dto: APICustomizedUINodeResponseDTO) {
     this.store.dispatch(
       UIModuleConfigActions.putUIModuleCustomization({ module: this.moduleKey, updatedNodeRequest: dto }),
     );
+  }
+
+  public onEnabledCheckboxChanged($event: UINodeCustomization) {
+    const enabled = $event.enabled ?? false;
+    const fullKey = $event.fullKey;
+    const fieldViewModel = this.findFieldViewModel(fullKey);
+    const fieldViewModelRecommended = fieldViewModel?.isRecommended ?? false;
+    const dto: APICustomizedUINodeResponseDTO = {
+      enabled: enabled,
+      key: fullKey,
+      recommended: enabled ? fieldViewModelRecommended : false,
+    };
+    this.dispatchPut(dto);
+  }
+
+  public onRecommendedCheckboxChanged($event: UINodeCustomization) {
+    const fullKey = $event.fullKey;
+    const fieldViewModel = this.findFieldViewModel(fullKey);
+    const dto: APICustomizedUINodeResponseDTO = {
+      enabled: fieldViewModel?.isEnabled ?? false,
+      key: fullKey,
+      recommended: $event.recommended,
+    };
+    this.dispatchPut(dto);
   }
 
   public checkboxDisabled(): Observable<boolean> {

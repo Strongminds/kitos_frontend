@@ -36,6 +36,7 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
 })
 export class MultiSelectDropdownComponent<T> extends BaseComponent implements OnInit, AfterViewInit {
   @Input() public text = '';
+  @Input() public recommended = false;
   @Input() public disabled = false;
   @Input() public textField = 'name';
   @Input() public valueField = 'value';

@@ -10,6 +10,7 @@ import { isEmptyOrUndefined } from '../../helpers/string.helpers';
 import { SimpleLink } from '../../models/SimpleLink.model';
 import { IconButtonComponent } from '../buttons/icon-button/icon-button.component';
 import { PencilIconComponent } from '../icons/pencil-icon.compnent';
+import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badge.component';
 import { ReadonlyLinkTextboxComponent } from './readonly-link-textbox/readonly-link-textbox.component';
 
 @Component({
@@ -25,6 +26,7 @@ import { ReadonlyLinkTextboxComponent } from './readonly-link-textbox/readonly-l
     PencilIconComponent,
     ReadonlyLinkTextboxComponent,
     AsyncPipe,
+    RecommendedBadgeComponent,
   ],
 })
 export class LinkTextboxComponent extends BaseComponent {
@@ -34,6 +36,7 @@ export class LinkTextboxComponent extends BaseComponent {
   @Input() public isLinkOnly = false;
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public placeholder: string | undefined = undefined;
+  @Input() public recommended: boolean = false;
   @Output() public iconClick = new EventEmitter<void>();
   @Output() public clearClick = new EventEmitter<void>();
 
