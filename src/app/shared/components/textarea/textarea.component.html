@@ -3,7 +3,7 @@
 <mat-form-field [formGroup]="formGroup">
   <mat-label>
     {{ text }}
-    <app-recommended-badge [visible]="recommended" [filled]="(formName && formGroup.controls[formName].value && formGroup.controls[formName].value !== '') === true"></app-recommended-badge>
+    <app-recommended-badge [visible]="recommended" [filled]="hasContent(formName ? formGroup.controls[formName].value : undefined)"></app-recommended-badge>
   </mat-label>
   <textarea
     #autosizeTextarea
@@ -23,7 +23,7 @@
 <mat-form-field>
   <mat-label>
     {{ text }}
-    <app-recommended-badge [visible]="recommended" [filled]="value !== undefined && value !== null"></app-recommended-badge>
+    <app-recommended-badge [visible]="recommended" [filled]="hasContent(value)"></app-recommended-badge>
   </mat-label>
   <textarea
     #autosizeTextarea

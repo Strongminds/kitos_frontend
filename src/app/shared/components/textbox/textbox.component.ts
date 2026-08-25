@@ -44,6 +44,10 @@ export class TextBoxComponent extends BaseFormComponent<string> {
   @Input() public pattern: string = '';
   @Output() public iconClick = new EventEmitter<void>();
 
+  public hasContent(value: string | null | undefined): boolean {
+    return !!value?.trim();
+  }
+
   public onIconClick(): void {
     this.iconClick.emit();
   }

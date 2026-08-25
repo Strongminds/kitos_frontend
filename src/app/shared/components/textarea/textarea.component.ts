@@ -20,6 +20,10 @@ export class TextAreaComponent extends BaseFormComponent<string> implements Afte
 
   public initialized = false;
 
+  public hasContent(value: string | null | undefined): boolean {
+    return !!value?.trim();
+  }
+
   ngAfterViewInit(): void {
     //This fix ensures that cdkTextareaAutosize is ready to perform correct autosizing.
     //Without this delay, the autosizing will not correctly autosize on load (will add additional spacing below the text)
