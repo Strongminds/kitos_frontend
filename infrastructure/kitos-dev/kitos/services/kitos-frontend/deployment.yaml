@@ -26,7 +26,7 @@ spec:
       - env:
         - name: BACKEND_URL
           value: http://kitos-api.kitos
-        image: ghcr.io/strongminds/kitos_frontend-kitos-frontend:sha-2ab08de81f7575e3e5f10e8b9da4dc4663245036
+        image: ghcr.io/strongminds/kitos_frontend-kitos-frontend:sha-8242719dcf893bdef8e1df5dabe32cbbc027f93d
         name: kitos-frontend
         ports:
         - containerPort: 80
