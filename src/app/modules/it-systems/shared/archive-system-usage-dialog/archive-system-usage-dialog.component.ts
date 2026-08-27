@@ -167,7 +167,7 @@ export class ArchiveSystemUsageDialogComponent extends BaseComponent implements 
 
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.`;
+    confirmationDialogInstance.bodyText = $localize`Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.`;
     confirmationDialogInstance.customConfirmText = $localize`Bekræft`;
     confirmationDialogInstance.customDeclineText = $localize`Fortryd`;
     confirmationDialogInstance.confirmationType = 'Custom';

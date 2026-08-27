@@ -53,7 +53,6 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
     legacyName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     localName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     localId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    organization: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     currentSystemName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     archivedByFullName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
   });
@@ -93,7 +92,6 @@ export class ItSystemUsageArchiveDetailsFrontpageComponent extends BaseComponent
             legacyName: usageArchive.legacyName,
             localName: usageArchive.localName,
             localId: usageArchive.localId,
-            organization: this.getOrganizationName(usageArchive.organization),
             currentSystemName: currentItSystemName,
             archivedByFullName: usageArchive.archivedByFullName,
           });
