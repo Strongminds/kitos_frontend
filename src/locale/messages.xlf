@@ -3011,9 +3011,6 @@
       <trans-unit id="4502831876543718290" datatype="html">
         <source>Leverandør</source>
       </trans-unit>
-      <trans-unit id="5430552859159538909" datatype="html">
-        <source>Leverandørens kontraktunderskriver</source>
-      </trans-unit>
       <trans-unit id="7344965017322024752" datatype="html">
         <source>Genanskaffelse</source>
       </trans-unit>
@@ -5213,8 +5210,8 @@
       <trans-unit id="6784575836143814833" datatype="html">
         <source>Kryptering</source>
       </trans-unit>
-      <trans-unit id="3479549752860605077" datatype="html">
-        <source>Pseudonomisering</source>
+      <trans-unit id="2655152388017872668" datatype="html">
+        <source>Pseudonymisering</source>
       </trans-unit>
       <trans-unit id="8121760203222953890" datatype="html">
         <source>Adgangsstyring</source>
@@ -5354,8 +5351,8 @@
       <trans-unit id="4106659631682454209" datatype="html">
         <source>Sidst redigeret dato</source>
       </trans-unit>
-      <trans-unit id="3604722267089766233" datatype="html">
-        <source>Databehandler afftale indgået</source>
+      <trans-unit id="4745265311701888438" datatype="html">
+        <source>Databehandler aftale indgået</source>
       </trans-unit>
       <trans-unit id="7985556487871369485" datatype="html">
         <source>Ansvarlig enhed</source>
@@ -6215,11 +6212,20 @@
       <trans-unit id="1122304114460972965" datatype="html">
         <source>Ingen kontrakter fundet</source>
       </trans-unit>
+      <trans-unit id="2023668919263536036" datatype="html">
+        <source>Anbefalet</source>
+      </trans-unit>
+      <trans-unit id="7916092021353581046" datatype="html">
+        <source>Leverandørens kontaktperson (email)</source>
+      </trans-unit>
+      <trans-unit id="8144839271710808705" datatype="html">
+        <source>Leverandørens kontaktperson (telefon)</source>
+      </trans-unit>
       <trans-unit id="1243158065978007867" datatype="html">
         <source>ESDH Sag</source>
       </trans-unit>
-      <trans-unit id="1717063696039311004" datatype="html">
-        <source>Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</source>
+      <trans-unit id="1288360675901164126" datatype="html">
+        <source>Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</source>
       </trans-unit>
     </body>
   </file>

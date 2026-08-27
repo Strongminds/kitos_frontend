@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -9,7 +9,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { combineAND } from 'src/app/shared/helpers/observable-helpers';
+import { combineAND, mapUIConfigStatusToEnabled} from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -23,12 +23,12 @@ import {
 } from 'src/app/store/data-processing/selectors';
 import { selectShowItContractModule, selectShowItSystemModule } from 'src/app/store/organization/selectors';
 import {
-  selectDprEnableItContracts,
-  selectDprEnableItSystems,
-  selectDprEnableNotifications,
-  selectDprEnableOversight,
-  selectDprEnableReferences,
-  selectDprEnableRoles,
+  selectDprEnableAndRecommendedItContracts,
+  selectDprEnableAndRecommendedItSystems,
+  selectDprEnableAndRecommendedNotifications,
+  selectDprEnableAndRecommendedOversight,
+  selectDprEnableAndRecommendedReferences,
+  selectDprEnableAndRecommendedRoles,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
@@ -57,12 +57,12 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
 
   public readonly hasDeletePermission$ = this.store.select(selectDataProcessingHasDeletePermissions);
 
-  public readonly itSystemsEnabled$ = this.store.select(selectDprEnableItSystems);
-  public readonly itContractsEnabled$ = this.store.select(selectDprEnableItContracts);
-  public readonly oversightEnabled$ = this.store.select(selectDprEnableOversight);
-  public readonly dprRolesEnabled$ = this.store.select(selectDprEnableRoles);
-  public readonly dprNotificationsEnabled$ = this.store.select(selectDprEnableNotifications);
-  public readonly dprReferencesEnabled$ = this.store.select(selectDprEnableReferences);
+  public readonly itSystemsEnabled$ = this.store.select(selectDprEnableAndRecommendedItSystems).pipe(mapUIConfigStatusToEnabled());
+  public readonly itContractsEnabled$ = this.store.select(selectDprEnableAndRecommendedItContracts).pipe(mapUIConfigStatusToEnabled());
+  public readonly oversightEnabled$ = this.store.select(selectDprEnableAndRecommendedOversight).pipe(mapUIConfigStatusToEnabled());
+  public readonly dprRolesEnabled$ = this.store.select(selectDprEnableAndRecommendedRoles).pipe(mapUIConfigStatusToEnabled());
+  public readonly dprNotificationsEnabled$ = this.store.select(selectDprEnableAndRecommendedNotifications).pipe(mapUIConfigStatusToEnabled());
+  public readonly dprReferencesEnabled$ = this.store.select(selectDprEnableAndRecommendedReferences).pipe(mapUIConfigStatusToEnabled());
 
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);

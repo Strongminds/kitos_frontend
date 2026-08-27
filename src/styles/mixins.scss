@@ -1,5 +1,6 @@
 @use "@angular/material" as mat;
 @use "theme";
+@use "sass:color";
 
 @mixin input-background-white {
   background-color: white;
@@ -442,7 +443,7 @@
   }
 
   .k-grid {
-  --kendo-color-border-alt: transparent !important;
+    --kendo-color-border-alt: transparent !important;
   }
 
   :host ::ng-deep {
@@ -698,4 +699,65 @@
 
 @mixin two-thirds-column-width {
   grid-column: span 2;
+}
+
+@mixin full-column-width {
+  grid-column: span 3;
+}
+
+@mixin recommended-badge-filled {
+  background-color: color.adjust(theme.$color-positive, $lightness: 35%);
+  color: color.adjust(theme.$color-positive, $lightness: -20%);
+  border-color: theme.$color-positive;
+  margin-bottom: 2px;
+}
+
+@mixin recommended-badge {
+  display: inline-block;
+  background-color: color.adjust(theme.$color-warning, $lightness: 30%);
+  color: color.adjust(theme.$color-warning, $lightness: -15%);
+  border: 1px solid theme.$color-warning;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 7px;
+  margin-left: 6px;
+  margin-bottom: 2px;
+  vertical-align: text-bottom;
+  line-height: 1.2;
+
+  &.filled {
+    @include recommended-badge-filled;
+  }
+}
+
+@mixin recommended-label-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 2px;
+}
+
+@mixin align-items-vertically {
+  display: flex;
+}
+
+@mixin dropdown-has-recommended {
+  ::ng-deep ng-select:not(.ng-select-focused):not(.ng-select-opened) .ng-select-container {
+    .ng-placeholder {
+      display: flex;
+      align-items: center;
+
+      &::after {
+        content: "Anbefalet";
+        white-space: nowrap;
+        @include recommended-badge;
+      }
+    }
+
+    &.ng-has-value {
+      .ng-placeholder::after {
+        @include recommended-badge-filled;
+      }
+    }
+  }
 }

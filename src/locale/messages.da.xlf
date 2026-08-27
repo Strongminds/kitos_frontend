@@ -205,10 +205,6 @@
         <source>Leverandør</source>
         <target state="new">Leverandør</target>
       </trans-unit>
-      <trans-unit id="5430552859159538909" datatype="html">
-        <source>Leverandørens kontraktunderskriver</source>
-        <target state="new">Leverandørens kontraktunderskriver</target>
-      </trans-unit>
       <trans-unit id="7344965017322024752" datatype="html">
         <source>Genanskaffelse</source>
         <target state="new">Genanskaffelse</target>
@@ -1483,9 +1479,9 @@
         <source>Kryptering</source>
         <target state="new">Kryptering</target>
       </trans-unit>
-      <trans-unit id="3479549752860605077" datatype="html">
-        <source>Pseudonomisering</source>
-        <target state="new">Pseudonomisering</target>
+      <trans-unit id="2655152388017872668" datatype="html">
+        <source>Pseudonymisering</source>
+        <target state="new">Pseudonymisering</target>
       </trans-unit>
       <trans-unit id="8121760203222953890" datatype="html">
         <source>Adgangsstyring</source>
@@ -6147,9 +6143,9 @@
         <source>Sidst redigeret dato</source>
         <target state="new">Sidst redigeret dato</target>
       </trans-unit>
-      <trans-unit id="3604722267089766233" datatype="html">
-        <source>Databehandler afftale indgået</source>
-        <target state="new">Databehandler afftale indgået</target>
+      <trans-unit id="4745265311701888438" datatype="html">
+        <source>Databehandler aftale indgået</source>
+        <target state="new">Databehandler aftale indgået</target>
       </trans-unit>
       <trans-unit id="4743129658174909579" datatype="html">
         <source>Søg efter enhed</source>
@@ -8129,13 +8125,25 @@
         <source>Ingen kontrakter fundet</source>
         <target state="new">Ingen kontrakter fundet</target>
       </trans-unit>
+      <trans-unit id="2023668919263536036" datatype="html">
+        <source>Anbefalet</source>
+        <target state="new">Anbefalet</target>
+      </trans-unit>
+      <trans-unit id="8144839271710808705" datatype="html">
+        <source>Leverandørens kontaktperson (telefon)</source>
+        <target state="new">Leverandørens kontaktperson (telefon)</target>
+      </trans-unit>
+      <trans-unit id="7916092021353581046" datatype="html">
+        <source>Leverandørens kontaktperson (email)</source>
+        <target state="new">Leverandørens kontaktperson (email)</target>
+      </trans-unit>
       <trans-unit id="1243158065978007867" datatype="html">
         <source>ESDH Sag</source>
         <target state="new">ESDH Sag</target>
       </trans-unit>
-      <trans-unit id="1717063696039311004" datatype="html">
-        <source>Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</source>
-        <target state="new">Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</target>
+      <trans-unit id="1288360675901164126" datatype="html">
+        <source>Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</source>
+        <target state="new">Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</target>
       </trans-unit>
     </body>
   </file>
