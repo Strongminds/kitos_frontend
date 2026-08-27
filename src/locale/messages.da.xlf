@@ -8141,9 +8141,9 @@
         <source>ESDH Sag</source>
         <target state="new">ESDH Sag</target>
       </trans-unit>
-      <trans-unit id="1717063696039311004" datatype="html">
-        <source>Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</source>
-        <target state="new">Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</target>
+      <trans-unit id="1288360675901164126" datatype="html">
+        <source>Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</source>
+        <target state="new">Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</target>
       </trans-unit>
     </body>
   </file>
