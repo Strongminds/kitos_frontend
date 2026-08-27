@@ -1,4 +1,4 @@
-import { AsyncPipe } from '@angular/common';
+﻿import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -8,7 +8,7 @@ import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { combineAND } from 'src/app/shared/helpers/observable-helpers';
+import { combineAND, mapUIConfigStatusToEnabled} from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -22,14 +22,14 @@ import {
 } from 'src/app/store/it-contract/selectors';
 import { selectShowDataProcessingRegistrations, selectShowItSystemModule } from 'src/app/store/organization/selectors';
 import {
-  selectItContractEnableAdvis,
-  selectItContractEnableContractRoles,
-  selectItContractEnableDataProcessing,
-  selectItContractEnableDeadlines,
-  selectItContractEnableEconomy,
-  selectItContractEnableHierarchy,
-  selectItContractEnableItSystems,
-  selectItContractEnableReferences,
+  selectItContractEnableAndRecommendedAdvis,
+  selectItContractEnableAndRecommendedContractRoles,
+  selectItContractEnableAndRecommendedDataProcessing,
+  selectItContractEnableAndRecommendedDeadlines,
+  selectItContractEnableAndRecommendedEconomy,
+  selectItContractEnableAndRecommendedHierarchy,
+  selectItContractEnableAndRecommendedItSystems,
+  selectItContractEnableAndRecommendedReferences,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/breadcrumbs.component';
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
@@ -72,14 +72,14 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     ]),
     filterNullish(),
   );
-  public readonly itSystemsTabEnabled$ = this.store.select(selectItContractEnableItSystems);
-  public readonly dataProcessingTabEnabled$ = this.store.select(selectItContractEnableDataProcessing);
-  public readonly agreementDeadlinesTabEnabled$ = this.store.select(selectItContractEnableDeadlines);
-  public readonly economyTabEnabled$ = this.store.select(selectItContractEnableEconomy);
-  public readonly contractRolesTabEnabled$ = this.store.select(selectItContractEnableContractRoles);
-  public readonly hierarchyTabEnabled$ = this.store.select(selectItContractEnableHierarchy);
-  public readonly notificationsTabEnabled$ = this.store.select(selectItContractEnableAdvis);
-  public readonly referenceTabEnabled$ = this.store.select(selectItContractEnableReferences);
+  public readonly itSystemsTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedItSystems).pipe(mapUIConfigStatusToEnabled());
+  public readonly dataProcessingTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedDataProcessing).pipe(mapUIConfigStatusToEnabled());
+  public readonly agreementDeadlinesTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedDeadlines).pipe(mapUIConfigStatusToEnabled());
+  public readonly economyTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedEconomy).pipe(mapUIConfigStatusToEnabled());
+  public readonly contractRolesTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedContractRoles).pipe(mapUIConfigStatusToEnabled());
+  public readonly hierarchyTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedHierarchy).pipe(mapUIConfigStatusToEnabled());
+  public readonly notificationsTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedAdvis).pipe(mapUIConfigStatusToEnabled());
+  public readonly referenceTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedReferences).pipe(mapUIConfigStatusToEnabled());
 
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);

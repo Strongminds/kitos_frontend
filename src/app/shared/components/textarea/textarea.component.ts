@@ -5,18 +5,24 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/select';
 import { BaseFormComponent } from '../../base/base-form.component';
+import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badge.component';
 
 @Component({
   selector: 'app-textarea',
   templateUrl: 'textarea.component.html',
   styleUrls: ['textarea.component.scss'],
-  imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, CdkTextareaAutosize, NgClass],
+  imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, CdkTextareaAutosize, NgClass, RecommendedBadgeComponent],
 })
 export class TextAreaComponent extends BaseFormComponent<string> implements AfterViewInit {
+  @Input() public recommended = false;
   @Input() public autosizeMinRows = 4;
   @Input() public autosizeMaxRows = 20;
 
   public initialized = false;
+
+  public hasContent(value: string | null | undefined): boolean {
+    return !!value?.trim();
+  }
 
   ngAfterViewInit(): void {
     //This fix ensures that cdkTextareaAutosize is ready to perform correct autosizing.

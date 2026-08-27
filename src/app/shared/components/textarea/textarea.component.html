@@ -1,7 +1,10 @@
 @if(initialized){ @if(formGroup){
 
 <mat-form-field [formGroup]="formGroup">
-  <mat-label>{{ text }}</mat-label>
+  <mat-label>
+    {{ text }}
+    <app-recommended-badge [visible]="recommended" [filled]="hasContent(formName ? formGroup.controls[formName].value : undefined)"></app-recommended-badge>
+  </mat-label>
   <textarea
     #autosizeTextarea
     matInput
@@ -18,7 +21,10 @@
 </mat-form-field>
 } @else {
 <mat-form-field>
-  <mat-label>{{ text }}</mat-label>
+  <mat-label>
+    {{ text }}
+    <app-recommended-badge [visible]="recommended" [filled]="hasContent(value)"></app-recommended-badge>
+  </mat-label>
   <textarea
     #autosizeTextarea
     matInput

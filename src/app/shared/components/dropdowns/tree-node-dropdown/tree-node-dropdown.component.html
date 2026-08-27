@@ -1,6 +1,6 @@
 @if (itemParentIdsDictionary && sortedData) {
   @if (formGroup) {
-    <ng-container [formGroup]="formGroup">
+    <div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended">
       <ng-select
         class="{{ size }}"
         [clearable]="clearable"
@@ -19,7 +19,13 @@
         (search)="filter$.next($event.term)"
         (change)="formSelectionChange($event)"
         (clear)="filter$.next('')"
-        ><ng-template ng-option-tmp let-item="item">
+        >
+            <ng-template ng-label-tmp let-item="item">
+      <span class="ng-value-label align-items-vertically">{{ item.name }}
+      </span>
+    </ng-template>
+
+        <ng-template ng-option-tmp let-item="item">
         @if (!item.description || !showDescription) {
           <div
           [style.text-indent]="
@@ -46,7 +52,7 @@
         }
       </ng-template></ng-select
       >
-    </ng-container>
+    </div>
   }
   @if (!formGroup) {
     <ng-select

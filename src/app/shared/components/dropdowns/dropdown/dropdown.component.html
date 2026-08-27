@@ -1,5 +1,6 @@
+
 @if (formGroup) {
-<div [formGroup]="formGroup">
+<div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended">
   <ng-select
     class="{{ size }}"
     [formControlName]="formName"
@@ -24,7 +25,7 @@
     (blur)="onBlur()"
   >
     <ng-template ng-label-tmp let-item="item">
-      <span class="ng-value-label">{{ getItemLabel(item) }}</span>
+      <span class="ng-value-label align-items-vertically">{{ getItemLabel(item) }}</span>
     </ng-template>
     <ng-template ng-option-tmp let-item="item">
       @if (!showDescription || !item[itemDescriptionField]) {

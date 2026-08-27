@@ -3,7 +3,10 @@
     @if (validateSimpleLinkUrl(simpleLink.url) === true) {
       @if (!isUrlEmpty(simpleLink.url)) {
         <mat-form-field class="{{ size }}">
-          <mat-label>{{ title }}</mat-label>
+          <mat-label>
+            {{ title }}
+           <app-recommended-badge [visible]="recommended" [filled]="true"></app-recommended-badge>
+          </mat-label>
           <div (click)="openLink(simpleLink.url)">
             <input
               matInput
@@ -37,7 +40,11 @@
     }
     @if (validateSimpleLinkUrl(simpleLink.url) !== true) {
       <mat-form-field class="{{ size }}">
-        <mat-label>{{ title }}<span class="incorrect-link-color" i18n> (ugyldigt link) </span></mat-label>
+        <mat-label>
+          {{ title }}
+          <app-recommended-badge [visible]="recommended" [filled]="true"></app-recommended-badge>
+          <span [class.filled]="false" class="incorrect-link-color" i18n> (ugyldigt link) </span>
+        </mat-label>
         <input
           matInput
           type="text"
@@ -67,6 +74,7 @@
     [size]="size"
     [title]="title"
     [isDisabled]="isDisabled"
+    [recommended]="recommended"
     (iconClick)="onIconClick()"
   ></app-readonly-link-textbox>
 }
