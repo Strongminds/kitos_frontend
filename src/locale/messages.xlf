@@ -6050,9 +6050,6 @@
       <trans-unit id="7550982890201476053" datatype="html">
         <source>Arkiveringsdato</source>
       </trans-unit>
-      <trans-unit id="9106425744426550513" datatype="html">
-        <source>Referencenavn</source>
-      </trans-unit>
       <trans-unit id="2193029653870382707" datatype="html">
         <source>Lokalt systemnavn</source>
       </trans-unit>
@@ -6217,6 +6214,12 @@
       </trans-unit>
       <trans-unit id="1122304114460972965" datatype="html">
         <source>Ingen kontrakter fundet</source>
+      </trans-unit>
+      <trans-unit id="1243158065978007867" datatype="html">
+        <source>ESDH Sag</source>
+      </trans-unit>
+      <trans-unit id="1717063696039311004" datatype="html">
+        <source>Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</source>
       </trans-unit>
     </body>
   </file>

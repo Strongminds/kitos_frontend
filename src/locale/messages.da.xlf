@@ -7901,10 +7901,6 @@
         <source>Arkiveringsdato</source>
         <target state="new">Arkiveringsdato</target>
       </trans-unit>
-      <trans-unit id="9106425744426550513" datatype="html">
-        <source>Referencenavn</source>
-        <target state="new">Referencenavn</target>
-      </trans-unit>
       <trans-unit id="505788991318317980" datatype="html">
         <source>IT System UUID</source>
         <target state="new">IT System UUID</target>
@@ -8132,6 +8128,14 @@
       <trans-unit id="1122304114460972965" datatype="html">
         <source>Ingen kontrakter fundet</source>
         <target state="new">Ingen kontrakter fundet</target>
+      </trans-unit>
+      <trans-unit id="1243158065978007867" datatype="html">
+        <source>ESDH Sag</source>
+        <target state="new">ESDH Sag</target>
+      </trans-unit>
+      <trans-unit id="1717063696039311004" datatype="html">
+        <source>Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</source>
+        <target state="new">Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</target>
       </trans-unit>
     </body>
   </file>
