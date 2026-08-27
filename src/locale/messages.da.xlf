@@ -205,10 +205,6 @@
         <source>Leverandør</source>
         <target state="new">Leverandør</target>
       </trans-unit>
-      <trans-unit id="5430552859159538909" datatype="html">
-        <source>Leverandørens kontraktunderskriver</source>
-        <target state="new">Leverandørens kontraktunderskriver</target>
-      </trans-unit>
       <trans-unit id="7344965017322024752" datatype="html">
         <source>Genanskaffelse</source>
         <target state="new">Genanskaffelse</target>
@@ -7901,10 +7897,6 @@
         <source>Arkiveringsdato</source>
         <target state="new">Arkiveringsdato</target>
       </trans-unit>
-      <trans-unit id="9106425744426550513" datatype="html">
-        <source>Referencenavn</source>
-        <target state="new">Referencenavn</target>
-      </trans-unit>
       <trans-unit id="505788991318317980" datatype="html">
         <source>IT System UUID</source>
         <target state="new">IT System UUID</target>
@@ -8144,6 +8136,14 @@
       <trans-unit id="7916092021353581046" datatype="html">
         <source>Leverandørens kontaktperson (email)</source>
         <target state="new">Leverandørens kontaktperson (email)</target>
+      </trans-unit>
+      <trans-unit id="1243158065978007867" datatype="html">
+        <source>ESDH Sag</source>
+        <target state="new">ESDH Sag</target>
+      </trans-unit>
+      <trans-unit id="1717063696039311004" datatype="html">
+        <source>Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</source>
+        <target state="new">Du tager nu systemet ud af anvendelse og arkivere anvendelses historikken.</target>
       </trans-unit>
     </body>
   </file>
