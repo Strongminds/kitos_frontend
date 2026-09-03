@@ -3,7 +3,11 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { map } from 'rxjs';
-import { APIFieldControlStateChoice, APISupplierAssociatedFieldConfigurationResponseDTO } from 'src/app/api/v2';
+import {
+  APIFieldControlStateChoice,
+  APISupplierAssociatedFieldConfigurationRequestDTO,
+  APISupplierAssociatedFieldConfigurationResponseDTO,
+} from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
@@ -91,9 +95,15 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
   }
 
   protected onSave(): void {
-    const formValue = this.selectedByFieldForm.getRawValue();
-    this.componentStore.submit(formValue);
-    this.dialogRef.close(formValue);
+    const formValue = this.selectedByFieldForm.getRawValue() as Record<string, APIFieldControlStateChoice>;
+    const requestDto: APISupplierAssociatedFieldConfigurationRequestDTO = {
+      configurations: Object.entries(formValue).map(([fieldKey, controlState]) => ({
+        fieldKey,
+        controlState,
+      })),
+    };
+    this.componentStore.submit(requestDto);
+    this.dialogRef.close(requestDto);
   }
 
   protected fieldTrackBy(_: number, field: APISupplierAssociatedFieldConfigurationResponseDTO): string {

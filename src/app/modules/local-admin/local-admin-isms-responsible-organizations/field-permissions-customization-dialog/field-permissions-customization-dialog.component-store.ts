@@ -4,6 +4,7 @@ import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
 import { switchMap, tap } from 'rxjs';
 import {
+  APISupplierAssociatedFieldConfigurationRequestDTO,
   APISupplierAssociatedFieldConfigurationResponseDTO,
   OrganizationSupplierInternalV2Service,
 } from 'src/app/api/v2';
@@ -63,13 +64,29 @@ export class FieldPermissionsCustomizationDialogComponentStore extends Component
     ),
   );
 
-  public submit = this.effect<Record<string, string>>((formValue$) =>
-    formValue$.pipe(
-      tap((formValue) => {
-        // TODO: Replace mock submit with backend integration when endpoint is ready.
-        console.log('Mock submit field authorizations', formValue);
-        this.notificationService.showDefault($localize`Feltrettigheder gemt (mock)`);
-      }),
+  public submit = this.effect<APISupplierAssociatedFieldConfigurationRequestDTO>((request$) =>
+    request$.pipe(
+      tap(() => this.setLoading(true)),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([request, organizationUuid]) =>
+        this.organizationSupplierInternalV2Service
+          .putManyOrganizationSupplierInternalV2PutSupplierFields({
+            organizationUuid,
+            aPISupplierAssociatedFieldConfigurationRequestDTO: request,
+          })
+          .pipe(
+            tapResponse({
+              next: (fields) => {
+                this.setFields(fields);
+                this.setLoading(false);
+              },
+              error: () => {
+                this.notificationService.showError($localize`Kunne ikke indlæse felter`);
+                this.setLoading(false);
+              },
+            }),
+          ),
+      ),
     ),
   );
 }
