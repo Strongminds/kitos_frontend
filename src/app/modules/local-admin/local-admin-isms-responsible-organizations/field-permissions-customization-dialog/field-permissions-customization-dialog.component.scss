@@ -29,6 +29,10 @@
   grid-column: 2 / span 3;
 }
 
+.group-spacer {
+  grid-column: 2 / span 3;
+}
+
 .field-options ::ng-deep mat-radio-group {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));

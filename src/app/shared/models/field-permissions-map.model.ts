@@ -21,12 +21,12 @@ export const itSystemUsageFields = {
 };
 
 const oversightLabelByKey: Record<string, string> = {
-  'DataProcessingRegistration.IsOversightCompleted': $localize`IsOversightCompleted`,
-  'DataProcessingRegistrationOversightDate.OversightDate': $localize`OversightDate`,
-  'DataProcessingRegistrationOversightDate.OversightRemark': $localize`OversightRemark`,
-  'DataProcessingRegistrationOversightDate.OversightReportLinkName': $localize`OversightReportLinkName`,
-  'DataProcessingRegistrationOversightDate.OversightReportLink': $localize`OversightReportLink`,
-  'DataProcessingRegistrationOversightDate.OversightOptionId': $localize`OversightOption`,
+  'DataProcessingRegistration.IsOversightCompleted': $localize`Gennemførte og kommende tilsyn`,
+  'DataProcessingRegistrationOversightDate.OversightDate': $localize`Dato for tilsyn`,
+  'DataProcessingRegistrationOversightDate.OversightRemark': $localize`Tilsyn bemærkninger`,
+  'DataProcessingRegistrationOversightDate.OversightReportLinkName': $localize`Tilsyn rapport link navn`,
+  'DataProcessingRegistrationOversightDate.OversightReportLink': $localize`Tilsyn rapport link`,
+  'DataProcessingRegistrationOversightDate.OversightOptionId': $localize`Tilsynmulighed`,
   'ItSystemUsage.ContainsAITechnology': $localize`ContainsAITechnology`,
   'ItSystemUsage.SystemUsageCriticalityLevel': $localize`SystemUsageCriticalityLevel`,
   'ItSystemUsage.riskAssessment': $localize`RiskAssessment`,

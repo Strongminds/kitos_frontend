@@ -1,4 +1,4 @@
-<app-dialog [title]="title" overflow="none">
+<app-dialog i18n-title title="Indstil felter" overflow="none">
   <div class="dialog-content">
     <form [formGroup]="selectedByFieldForm">
       <div class="authorization-grid">
@@ -7,10 +7,35 @@
         <div class="grid-header role-column">{{ municipalityLabel }}</div>
         <div class="grid-header role-column">{{ sharedLabel }}</div>
 
+        <div class="field-label">
+          <strong i18n>Databehandling</strong>
+        </div>
+        <div class="group-spacer"></div>
+
         @for (field of fields$ | async; track fieldTrackBy($index, field)) {
-          @if (field.fieldKey) {
+          @if (field.fieldKey && field.fieldKey.includes("DataProcessingRegistration")) {
             <div class="field-label">
-              <strong>{{ getLabelFromFieldKey(field.fieldKey) }}</strong>
+              {{ getLabelFromFieldKey(field.fieldKey) }}
+            </div>
+            <app-radio-buttons
+              class="field-options"
+              [formGroup]="selectedByFieldForm"
+              [formName]="field.fieldKey"
+              [options]="controlStateOptions"
+            >
+            </app-radio-buttons>
+          }
+        }
+
+        <div class="field-label">
+          <strong i18n>It Systemer</strong>
+        </div>
+        <div class="group-spacer"></div>
+
+        @for (field of fields$ | async; track fieldTrackBy($index, field)) {
+          @if (field.fieldKey && field.fieldKey.includes("ItSystemUsage")) {
+            <div class="field-label">
+              {{ getLabelFromFieldKey(field.fieldKey) }}
             </div>
             <app-radio-buttons
               class="field-options"

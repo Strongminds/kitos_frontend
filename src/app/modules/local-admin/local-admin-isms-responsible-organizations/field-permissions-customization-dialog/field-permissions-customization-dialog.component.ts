@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { map } from 'rxjs';
 import { APIFieldControlStateChoice, APISupplierAssociatedFieldConfigurationResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
@@ -30,6 +31,31 @@ import { FieldPermissionsCustomizationDialogComponentStore } from './field-permi
 })
 export class FieldPermissionsCustomizationDialogComponent extends BaseComponent implements OnInit {
   protected readonly fields$ = this.componentStore.fields$;
+  protected readonly groupedFields$ = this.fields$.pipe(
+    map((fields) =>
+      fields.flatMap((field) => {
+        const fieldKey = field.fieldKey;
+        const groupTitle = fieldKey?.includes('DataProcessingRegistration')
+          ? 'Data processing registration'
+          : fieldKey?.includes('ItSystemUsage')
+            ? 'IT system usage'
+            : null;
+        return [
+          { type: 'title' as const, title: groupTitle },
+          { type: 'field' as const, field },
+        ];
+      }),
+    ),
+    map((items) =>
+      items.filter((item, index, array) => {
+        if (item.type !== 'title' || !item.title) {
+          return item.type !== 'title';
+        }
+        const previousTitle = index > 0 ? array[index - 1] : null;
+        return previousTitle?.type !== 'title' || previousTitle.title !== item.title;
+      }),
+    ),
+  );
   protected readonly selectedByFieldForm = new FormGroup({});
 
   constructor(
@@ -50,7 +76,7 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
     );
   }
 
-  protected readonly suppliersLabel = 'Ansvarlige';
+  protected readonly suppliersLabel = 'Leverandør';
   protected readonly municipalityLabel = 'Kommune';
   protected readonly sharedLabel = 'Delte';
   protected readonly controlStateOptions: RadioButtonOption<APIFieldControlStateChoice>[] = [
