@@ -1,0 +1,51 @@
+<app-dialog [title]="title" overflow="none">
+  <div class="dialog-content">
+    <form [formGroup]="selectedByFieldForm">
+      <div class="authorization-grid">
+        <div class="grid-header field-column">Felt</div>
+        <div class="grid-header role-column">{{ suppliers }}</div>
+        <div class="grid-header role-column">{{ users }}</div>
+        <div class="grid-header role-column">{{ shared }}</div>
+
+        @for (field of fields$ | async; track fieldTrackBy($index, field)) {
+          @if (field.fieldKey) {
+            <div class="field-label">
+              <strong>{{ field.fieldKey }}</strong>
+            </div>
+            <label class="radio-cell">
+              <input
+                type="radio"
+                [name]="field.fieldKey"
+                [value]="suppliers"
+                [formControl]="getFieldControl(field.fieldKey)"
+              />
+            </label>
+            <label class="radio-cell">
+              <input
+                type="radio"
+                [name]="field.fieldKey"
+                [value]="users"
+                [formControl]="getFieldControl(field.fieldKey)"
+              />
+            </label>
+            <label class="radio-cell">
+              <input
+                type="radio"
+                [name]="field.fieldKey"
+                [value]="shared"
+                [formControl]="getFieldControl(field.fieldKey)"
+              />
+            </label>
+          }
+        }
+      </div>
+    </form>
+  </div>
+
+  <div class="dialog-actions">
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+      <app-button (buttonClick)="onSave()" i18n>Gem</app-button>
+    </app-dialog-actions>
+  </div>
+</app-dialog>
