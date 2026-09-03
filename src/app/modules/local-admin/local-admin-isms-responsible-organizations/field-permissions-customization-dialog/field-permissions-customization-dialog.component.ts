@@ -2,19 +2,27 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import {
-  APIFieldControlStateChoice,
-  APISupplierAssociatedFieldConfigurationResponseDTO,
-} from 'src/app/api/v2';
+import { APIFieldControlStateChoice, APISupplierAssociatedFieldConfigurationResponseDTO } from 'src/app/api/v2';
+import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { DialogActionsComponent } from 'src/app/shared/components/dialogs/dialog-actions/dialog-actions.component';
 import { DialogComponent } from 'src/app/shared/components/dialogs/dialog/dialog.component';
-import { BaseComponent } from 'src/app/shared/base/base.component';
+import {
+  RadioButtonOption,
+  RadioButtonsComponent,
+} from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { FieldPermissionsCustomizationDialogComponentStore } from './field-permissions-customization-dialog.component-store';
 
 @Component({
   selector: 'app-field-permisisons-customization-dialog',
-  imports: [CommonModule, ReactiveFormsModule, DialogComponent, DialogActionsComponent, ButtonComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    DialogComponent,
+    DialogActionsComponent,
+    ButtonComponent,
+    RadioButtonsComponent,
+  ],
   templateUrl: './field-permissions-customization-dialog.component.html',
   styleUrl: './field-permissions-customization-dialog.component.scss',
   providers: [FieldPermissionsCustomizationDialogComponentStore],
@@ -41,9 +49,14 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
     );
   }
 
-  protected readonly suppliers = APIFieldControlStateChoice.Supplier;
-  protected readonly users = APIFieldControlStateChoice.Organization;
-  protected readonly shared = APIFieldControlStateChoice.Shared;
+  protected readonly suppliersLabel = 'Ansvarlige';
+  protected readonly municipalityLabel = 'Kommune';
+  protected readonly sharedLabel = 'Delte';
+  protected readonly controlStateOptions: RadioButtonOption<APIFieldControlStateChoice>[] = [
+    { id: APIFieldControlStateChoice.Supplier, label: '' },
+    { id: APIFieldControlStateChoice.Organization, label: '' },
+    { id: APIFieldControlStateChoice.Shared, label: '' },
+  ];
   protected readonly title = $localize`Field authorization customization`;
 
   protected onCancel(): void {
@@ -76,7 +89,7 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
 
       this.selectedByFieldForm.addControl(
         field.fieldKey,
-        new FormControl(field.controlState ?? this.shared, { nonNullable: true }),
+        new FormControl(field.controlState ?? APIFieldControlStateChoice.Supplier, { nonNullable: true }),
       );
     });
   }
