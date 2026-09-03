@@ -11,6 +11,7 @@ import {
   RadioButtonOption,
   RadioButtonsComponent,
 } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
+import { getLabelFromFieldKey } from 'src/app/shared/models/field-permissions-map.model';
 import { FieldPermissionsCustomizationDialogComponentStore } from './field-permissions-customization-dialog.component-store';
 
 @Component({
@@ -75,6 +76,10 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
 
   protected getFieldControl(fieldKey: string): FormControl<APIFieldControlStateChoice> {
     return this.selectedByFieldForm.get(fieldKey) as FormControl<APIFieldControlStateChoice>;
+  }
+
+  protected getLabelFromFieldKey(fieldKey: string | null): string {
+    return getLabelFromFieldKey(fieldKey);
   }
 
   private rebuildForm(fields: APISupplierAssociatedFieldConfigurationResponseDTO[]): void {

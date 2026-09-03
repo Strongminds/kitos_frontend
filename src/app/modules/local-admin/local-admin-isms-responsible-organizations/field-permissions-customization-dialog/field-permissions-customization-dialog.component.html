@@ -10,7 +10,7 @@
         @for (field of fields$ | async; track fieldTrackBy($index, field)) {
           @if (field.fieldKey) {
             <div class="field-label">
-              <strong>{{ field.fieldKey }}</strong>
+              <strong>{{ getLabelFromFieldKey(field.fieldKey) }}</strong>
             </div>
             <app-radio-buttons
               class="field-options"
