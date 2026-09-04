@@ -8105,9 +8105,9 @@
         <source> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</source>
         <target state="new"> Tryk &quot;Bevar historik&quot; for at slette de lokale registreringer og udfylde arkivinformation om systemanvendelsen. Disse handlinger påvirker ikke stamdata om systemet i IT System Kataloget.</target>
       </trans-unit>
-      <trans-unit id="5735709314762678717" datatype="html">
-        <source>En højere værdi angiver en lavere kritikalitet.</source>
-        <target state="new">En højere værdi angiver en lavere kritikalitet.</target>
+      <trans-unit id="2341326261110130680" datatype="html">
+        <source>En lavere værdi angiver en lavere kritikalitet.</source>
+        <target state="new">En lavere værdi angiver en lavere kritikalitet.</target>
       </trans-unit>
       <trans-unit id="8819444938310265564" datatype="html">
         <source>Udslagsgivende kontrakter</source>
@@ -8144,6 +8144,62 @@
       <trans-unit id="1288360675901164126" datatype="html">
         <source>Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</source>
         <target state="new">Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</target>
+      </trans-unit>
+      <trans-unit id="1292871686016142444" datatype="html">
+        <source>Kunne ikke indlæse felter</source>
+        <target state="new">Kunne ikke indlæse felter</target>
+      </trans-unit>
+      <trans-unit id="838918169902639312" datatype="html">
+        <source>Indstil felter</source>
+        <target state="new">Indstil felter</target>
+      </trans-unit>
+      <trans-unit id="1525646804357117160" datatype="html">
+        <source>Felt</source>
+        <target state="new">Felt</target>
+      </trans-unit>
+      <trans-unit id="1799559380089021507" datatype="html">
+        <source>Delte</source>
+        <target state="new">Delte</target>
+      </trans-unit>
+      <trans-unit id="3965072850039100257" datatype="html">
+        <source>Databehandling - Tilsyn</source>
+        <target state="new">Databehandling - Tilsyn</target>
+      </trans-unit>
+      <trans-unit id="5855504890663238850" datatype="html">
+        <source>It Systemer</source>
+        <target state="new">It Systemer</target>
+      </trans-unit>
+      <trans-unit id="5007043623745180231" datatype="html">
+        <source>Field authorization customization</source>
+        <target state="new">Field authorization customization</target>
+      </trans-unit>
+      <trans-unit id="6888355800188498364" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Indstil felter<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+        <target state="new"><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Indstil felter<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></target>
+      </trans-unit>
+      <trans-unit id="900172157446252135" datatype="html">
+        <source>Tilsyn bemærkninger</source>
+        <target state="new">Tilsyn bemærkninger</target>
+      </trans-unit>
+      <trans-unit id="3269755482736792393" datatype="html">
+        <source>Tilsyn rapport link navn</source>
+        <target state="new">Tilsyn rapport link navn</target>
+      </trans-unit>
+      <trans-unit id="8161236629757029716" datatype="html">
+        <source>Tilsyn rapport link</source>
+        <target state="new">Tilsyn rapport link</target>
+      </trans-unit>
+      <trans-unit id="6663759333219791704" datatype="html">
+        <source>Tilsynmulighed</source>
+        <target state="new">Tilsynmulighed</target>
+      </trans-unit>
+      <trans-unit id="6181422202096188207" datatype="html">
+        <source>GDPR Foretaget risikovurdering</source>
+        <target state="new">GDPR Foretaget risikovurdering</target>
+      </trans-unit>
+      <trans-unit id="6707403893965762451" datatype="html">
+        <source>GDPR Hvad viste den seneste risikovurdering?</source>
+        <target state="new">GDPR Hvad viste den seneste risikovurdering?</target>
       </trans-unit>
     </body>
   </file>
