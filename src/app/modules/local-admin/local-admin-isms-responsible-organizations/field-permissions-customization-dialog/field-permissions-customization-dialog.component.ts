@@ -80,9 +80,6 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
     );
   }
 
-  protected readonly suppliersLabel = 'Leverandør';
-  protected readonly municipalityLabel = 'Kommune';
-  protected readonly sharedLabel = 'Delte';
   protected readonly controlStateOptions: RadioButtonOption<APIFieldControlStateChoice>[] = [
     { id: APIFieldControlStateChoice.Supplier, label: '' },
     { id: APIFieldControlStateChoice.Organization, label: '' },
