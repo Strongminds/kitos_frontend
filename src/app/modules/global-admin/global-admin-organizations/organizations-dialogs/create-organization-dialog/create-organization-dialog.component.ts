@@ -8,12 +8,11 @@ import { BehaviorSubject, first } from 'rxjs';
 import { APIOrganizationCreateRequestDTO } from 'src/app/api/v2';
 import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
-import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
+import { enableISMSResponsibleField, mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import { ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import {
   defaultOrganizationType,
   OrganizationType,
-  OrganizationTypeEnum,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';
@@ -85,7 +84,7 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
   }
 
   public enableISMSResponsibleField() {
-    return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
+    return enableISMSResponsibleField(this.formGroup.controls['organizationType'].value?.value);
   }
 
   public toggleIsSupplierField() {
