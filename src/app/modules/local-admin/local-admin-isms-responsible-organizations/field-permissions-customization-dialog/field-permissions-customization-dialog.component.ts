@@ -34,6 +34,9 @@ import { FieldPermissionsCustomizationDialogComponentStore } from './field-permi
   providers: [FieldPermissionsCustomizationDialogComponentStore],
 })
 export class FieldPermissionsCustomizationDialogComponent extends BaseComponent implements OnInit {
+  protected readonly dataProcessingOversightCompletedFieldKey = 'DataProcessingRegistration.IsOversightCompleted';
+  protected readonly dataProcessingOversightReportLinkNameFieldKey =
+    'DataProcessingRegistrationOversightDate.OversightReportLinkName';
   protected readonly fields$ = this.componentStore.fields$;
   protected readonly groupedFields$ = this.fields$.pipe(
     map((fields) =>
@@ -93,6 +96,18 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
 
   protected onSave(): void {
     const formValue = this.selectedByFieldForm.getRawValue() as Record<string, APIFieldControlStateChoice>;
+    const oversightCompletedState = formValue[this.dataProcessingOversightCompletedFieldKey];
+    if (oversightCompletedState) {
+      Object.keys(formValue).forEach((fieldKey) => {
+        if (
+          fieldKey.includes('DataProcessingRegistration') &&
+          fieldKey !== this.dataProcessingOversightCompletedFieldKey &&
+          fieldKey !== this.dataProcessingOversightReportLinkNameFieldKey
+        ) {
+          formValue[fieldKey] = oversightCompletedState;
+        }
+      });
+    }
     const requestDto: APISupplierAssociatedFieldConfigurationRequestDTO = {
       configurations: Object.entries(formValue).map(([fieldKey, controlState]) => ({
         fieldKey,
