@@ -15,7 +15,9 @@ export const itSystemUsageFields = {
   containsAITechnology: 'ItSystemUsage.ContainsAITechnology',
   systemUsageCriticalityLevel: 'ItSystemUsage.SystemUsageCriticalityLevel',
   gdpr: {
-    riskAssessment: 'ItSystemUsage.preriskAssessment',
+    //Foretaget risikovurdering
+    riskAssessment: 'ItSystemUsage.riskAssessment',
+    //Hvad viste den seneste risikovurdering?
     preriskAssessment: 'ItSystemUsage.preriskAssessment',
   },
 };
@@ -27,10 +29,10 @@ const oversightLabelByKey: Record<string, string> = {
   'DataProcessingRegistrationOversightDate.OversightReportLinkName': $localize`Tilsyn rapport link navn`,
   'DataProcessingRegistrationOversightDate.OversightReportLink': $localize`Tilsyn rapport link`,
   'DataProcessingRegistrationOversightDate.OversightOptionId': $localize`Tilsynmulighed`,
-  'ItSystemUsage.ContainsAITechnology': $localize`ContainsAITechnology`,
-  'ItSystemUsage.SystemUsageCriticalityLevel': $localize`SystemUsageCriticalityLevel`,
-  'ItSystemUsage.riskAssessment': $localize`RiskAssessment`,
-  'ItSystemUsage.preriskAssessment': $localize`PreriskAssessment`,
+  'ItSystemUsage.ContainsAITechnology': $localize`Indeholder AI-teknologi?`,
+  'ItSystemUsage.SystemUsageCriticalityLevel': $localize`Kritikalitet`,
+  'ItSystemUsage.riskAssessment': $localize`GDPR Foretaget risikovurdering`,
+  'ItSystemUsage.preriskAssessment': $localize`GDPR Hvad viste den seneste risikovurdering?`,
 };
 
 export const getLabelFromFieldKey = (key: string | null): string => oversightLabelByKey[key ?? ''] ?? key ?? '';
