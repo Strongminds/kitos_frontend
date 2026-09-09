@@ -1,3 +1,3 @@
 @if (visible) {
-        <span [class.filled]="filled" class="recommended-badge" i18n>Anbefalet</span>
+  <span [class.filled]="filled" [class.warning]="!filled" class="recommended-badge">{{ filled ? '✓' : '!' }}</span>
 }
