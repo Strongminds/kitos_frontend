@@ -15,6 +15,10 @@ ng-select {
   flex: 1;
 }
 
+:host ::ng-deep .dropdown-has-recommended {
+  @include mixins.dropdown-has-recommended;
+}
+
 :host ::ng-deep ng-select {
   padding-bottom: 0;
 
