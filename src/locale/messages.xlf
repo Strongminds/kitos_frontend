@@ -6200,8 +6200,8 @@
       <trans-unit id="2642788272406240118" datatype="html">
         <source>Orden</source>
       </trans-unit>
-      <trans-unit id="5735709314762678717" datatype="html">
-        <source>En højere værdi angiver en lavere kritikalitet.</source>
+      <trans-unit id="2341326261110130680" datatype="html">
+        <source>En lavere værdi angiver en lavere kritikalitet.</source>
       </trans-unit>
       <trans-unit id="8819444938310265564" datatype="html">
         <source>Udslagsgivende kontrakter</source>
@@ -6226,6 +6226,48 @@
       </trans-unit>
       <trans-unit id="1288360675901164126" datatype="html">
         <source>Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</source>
+      </trans-unit>
+      <trans-unit id="1292871686016142444" datatype="html">
+        <source>Kunne ikke indlæse felter</source>
+      </trans-unit>
+      <trans-unit id="1525646804357117160" datatype="html">
+        <source>Felt</source>
+      </trans-unit>
+      <trans-unit id="1799559380089021507" datatype="html">
+        <source>Delte</source>
+      </trans-unit>
+      <trans-unit id="3269755482736792393" datatype="html">
+        <source>Tilsyn rapport link navn</source>
+      </trans-unit>
+      <trans-unit id="3965072850039100257" datatype="html">
+        <source>Databehandling - Tilsyn</source>
+      </trans-unit>
+      <trans-unit id="5007043623745180231" datatype="html">
+        <source>Field authorization customization</source>
+      </trans-unit>
+      <trans-unit id="5855504890663238850" datatype="html">
+        <source>It Systemer</source>
+      </trans-unit>
+      <trans-unit id="6181422202096188207" datatype="html">
+        <source>GDPR Foretaget risikovurdering</source>
+      </trans-unit>
+      <trans-unit id="6663759333219791704" datatype="html">
+        <source>Tilsynmulighed</source>
+      </trans-unit>
+      <trans-unit id="6707403893965762451" datatype="html">
+        <source>GDPR Hvad viste den seneste risikovurdering?</source>
+      </trans-unit>
+      <trans-unit id="6888355800188498364" datatype="html">
+        <source><x id="START_TAG_SPAN" ctype="x-span" equiv-text="&lt;span&gt;"/>Indstil felter<x id="CLOSE_TAG_SPAN" ctype="x-span" equiv-text="&lt;/span&gt;"/></source>
+      </trans-unit>
+      <trans-unit id="8161236629757029716" datatype="html">
+        <source>Tilsyn rapport link</source>
+      </trans-unit>
+      <trans-unit id="838918169902639312" datatype="html">
+        <source>Indstil felter</source>
+      </trans-unit>
+      <trans-unit id="900172157446252135" datatype="html">
+        <source>Tilsyn bemærkninger</source>
       </trans-unit>
     </body>
   </file>

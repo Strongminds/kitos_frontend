@@ -1,0 +1,62 @@
+<app-dialog i18n-title title="Indstil felter" overflow="none">
+  <div class="dialog-content">
+    <form [formGroup]="selectedByFieldForm">
+      <div class="authorization-grid">
+        <div class="grid-header field-column" i18n>Felt</div>
+        <div class="grid-header role-column" i18n>Leverandør</div>
+        <div class="grid-header role-column" i18n>Kommune</div>
+        <div class="grid-header role-column" i18n>Delte</div>
+
+        <div class="field-label">
+          <strong i18n>Databehandling - Tilsyn</strong>
+        </div>
+        <div class="group-spacer"></div>
+
+        @for (field of fields$ | async; track fieldTrackBy($index, field)) {
+          @if (
+            field.fieldKey === dataProcessingOversightCompletedFieldKey ||
+            field.fieldKey === dataProcessingOversightReportLinkNameFieldKey
+          ) {
+            <div class="field-label">
+              {{ getLabelFromFieldKey(field.fieldKey) }}
+            </div>
+            <app-radio-buttons
+              class="field-options"
+              [formGroup]="selectedByFieldForm"
+              [formName]="field.fieldKey"
+              [options]="controlStateOptions"
+            >
+            </app-radio-buttons>
+          }
+        }
+
+        <div class="field-label">
+          <strong i18n>It Systemer</strong>
+        </div>
+        <div class="group-spacer"></div>
+
+        @for (field of fields$ | async; track fieldTrackBy($index, field)) {
+          @if (field.fieldKey && field.fieldKey.includes("ItSystemUsage")) {
+            <div class="field-label">
+              {{ getLabelFromFieldKey(field.fieldKey) }}
+            </div>
+            <app-radio-buttons
+              class="field-options"
+              [formGroup]="selectedByFieldForm"
+              [formName]="field.fieldKey"
+              [options]="controlStateOptions"
+            >
+            </app-radio-buttons>
+          }
+        }
+      </div>
+    </form>
+  </div>
+
+  <div class="dialog-actions">
+    <app-dialog-actions>
+      <app-button buttonStyle="secondary" (buttonClick)="onCancel()" i18n>Annuller</app-button>
+      <app-button (buttonClick)="onSave()" i18n>Gem</app-button>
+    </app-dialog-actions>
+  </div>
+</app-dialog>

@@ -22,6 +22,7 @@ import {
   selectOrganizationSuppliersLoading,
 } from 'src/app/store/organization/organization-suppliers/selectors';
 import { selectOrganizationHasModifyPermission } from 'src/app/store/organization/selectors';
+import { FieldPermissionsCustomizationDialogComponent } from './field-permissions-customization-dialog/field-permissions-customization-dialog.component';
 
 @Component({
   selector: 'app-local-admin-isms-responsible-organizations',
@@ -77,6 +78,13 @@ export class LocalAdminIsmsResponsibleOrganizationsComponent extends BaseCompone
     dialogInstance.onOpen = () => this.onOpenAddDialog();
     dialogInstance.save.subscribe(($event: any) => {
       this.saveSupplier($event);
+    });
+  }
+
+  public openFieldCustomizationDialog() {
+    this.dialog.open(FieldPermissionsCustomizationDialogComponent, {
+      width: '980px',
+      maxWidth: '95vw',
     });
   }
 

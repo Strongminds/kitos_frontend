@@ -9,7 +9,7 @@ import { APIOrganizationUpdateRequestDTO } from 'src/app/api/v2';
 import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 import { InfoIconComponent } from 'src/app/shared/components/icons/info-icon.component';
 import { TooltipComponent } from 'src/app/shared/components/tooltip/tooltip.component';
-import { mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
+import { enableISMSResponsibleField, mapOrgTypeToDtoType } from 'src/app/shared/helpers/organization-type.helpers';
 import { adaptShallowOptionTypeFromOData, ShallowOptionType } from 'src/app/shared/models/options/option-type.model';
 import {
   defaultOrganizationType,
@@ -49,8 +49,8 @@ import { OrganizationsDialogComponentStore } from '../organizations-dialog.compo
     AsyncPipe,
     CheckboxComponent,
     TooltipComponent,
-    InfoIconComponent
-],
+    InfoIconComponent,
+  ],
 })
 export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDialogBaseComponent implements OnInit {
   @Input() organization!: OrganizationOData;
@@ -70,7 +70,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
     private dialogRef: MatDialogRef<EditOrganizationDialogComponent>,
     private store: Store,
     private actions$: Actions,
-    componentStore: OrganizationsDialogComponentStore
+    componentStore: OrganizationsDialogComponentStore,
   ) {
     super(componentStore);
   }
@@ -107,7 +107,7 @@ export class EditOrganizationDialogComponent extends GlobalAdminOrganizationsDia
   }
 
   public enableISMSResponsibleField() {
-    return this.formGroup.controls['organizationType'].value?.value === OrganizationTypeEnum.Company;
+    return enableISMSResponsibleField(this.formGroup.controls['organizationType'].value?.value);
   }
 
   public onEditOrganization(): void {

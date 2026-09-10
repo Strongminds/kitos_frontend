@@ -227,6 +227,7 @@ model/externalOrganizationUnitResponseDTO.ts
 model/externalReferenceDataResponseDTO.ts
 model/externalReferenceDataWriteRequestDTO.ts
 model/externalReferenceWithLastChangedResponseDTO.ts
+model/fieldControlStateChoice.ts
 model/fieldPermissionsResponseDTO.ts
 model/gDPRPersonalDataChoice.ts
 model/gDPRRegistrationsResponseDTO.ts
@@ -394,6 +395,9 @@ model/stsOrganizationChangeLogOriginOption.ts
 model/stsOrganizationChangeLogResponseDTO.ts
 model/stsOrganizationOrgUnitDTO.ts
 model/stsOrganizationSynchronizationDetailsResponseDTO.ts
+model/supplierAssociatedFieldConfigurationItemDTO.ts
+model/supplierAssociatedFieldConfigurationRequestDTO.ts
+model/supplierAssociatedFieldConfigurationResponseDTO.ts
 model/systemDeletionConflict.ts
 model/systemRelationWriteRequestDTO.ts
 model/systemWithUsageOutsideOrganizationConflictResponseDTO.ts
