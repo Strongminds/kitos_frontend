@@ -10,6 +10,21 @@ Function Load-Environment-Secrets-From-Aws([String] $envName) {
   $Env:MsDeployPassword = $parameters["MsDeployPassword"]
   $Env:MsDeployUrl = $parameters["MsDeployUrl"]
 
+  # When the DB provider is Postgres, override deployment target with values from
+  # the Postgres-specific SSM path (e.g. /kitos/postgres-dev/) so the frontend is
+  # deployed to the server that hosts the PostgreSQL-backed environment.
+  if ($Env:KitosDbProvider -eq "Postgres") {
+    $pgEnvName = "postgres-$envName"
+    Write-Host "KitosDbProvider is Postgres - loading deployment config from SSM path: /kitos/$pgEnvName/"
+    $pgParameters = Get-SSM-Parameters -environmentName "$pgEnvName"
+
+    if ($pgParameters.Count -eq 0) {
+      throw "No parameters found for Postgres environment $pgEnvName"
+    }
+
+    $Env:MsDeployUrl = $pgParameters["MsDeployUrl"]
+  }
+
   Write-Host "Finished loading environment configuration from SSM"
 }
 
