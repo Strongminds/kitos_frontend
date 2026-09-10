@@ -55,6 +55,7 @@
     </div>
   }
   @if (!formGroup) {
+    <div [class.dropdown-has-recommended]="recommended">
     <ng-select
       class="{{ size }}"
       [clearable]="clearable"
@@ -83,6 +84,7 @@
       </div>
     </ng-template>
   </ng-select>
+  </div>
 }
 }
 @if (!itemParentIdsDictionary || !sortedData) {
