@@ -9,8 +9,10 @@ export default defineConfig({
     viewportHeight: 1000,
     defaultCommandTimeout: 10000,
     pageLoadTimeout: 60000,
+    // Root causes of flakiness (fixed waits, intercept-ordering races) have been fixed;
+    // keep 1 retry as a safety net for genuine environment-level flakiness, not to mask bugs.
     retries: {
-      runMode: 2,
+      runMode: 1,
     },
 
     setupNodeEvents(on, config) {

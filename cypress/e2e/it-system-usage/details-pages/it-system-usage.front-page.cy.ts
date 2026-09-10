@@ -80,7 +80,7 @@ describe('it-system-usage frontpage', () => {
       });
   });
 
-  it.only('can edit hosted at status', () => {
+  it('can edit hosted at status', () => {
     cy.intercept('PATCH', '/api/v2/it-system-usages/*', {
       fixture: './it-system-usage/it-system-usage-updated.json',
     }).as('patch');
@@ -139,15 +139,19 @@ describe('it-system-usage frontpage', () => {
   it('can remove IT system usage', () => {
     cy.contains('System 3').click();
 
+    cy.intercept('DELETE', '/api/v2/it-system-usages/*', { statusCode: 200, body: {} }).as('deleteUsage');
+
     cy.contains('Fjern anvendelse').click();
 
     cy.get('app-dialog').within(() => {
       cy.contains('Fortryd');
-      cy.contains('Bekræft').click();
+      cy.get('app-dialog-actions').contains('Bekræft').click();
     });
 
-    cy.contains('IT Systemer i Fælles Kommune');
+    cy.wait('@deleteUsage');
+
     cy.contains('Systemanvendelsen blev slettet');
+    cy.contains('IT Systemer i Fælles Kommune');
   });
 
   it('hides and disables input for IT system usage when user does not have rights', () => {
