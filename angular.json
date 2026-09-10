@@ -119,7 +119,8 @@
                 "input": "node_modules/@progress/kendo-theme-default/dist/all.css"
               },
               "src/styles/styles.scss",
-              "src/styles/recommended.scss"
+              "src/styles/recommended.scss",
+              "src/styles/ng-select-shared.scss"
             ],
             "scripts": [
               "node_modules/tinymce/tinymce.min.js"
@@ -133,7 +134,7 @@
               {
                 "type": "anyComponentStyle",
                 "maximumWarning": "2kb",
-                "maximumError": "7kb"
+                "maximumError": "5kb"
               }
             ],
             "localize": [
