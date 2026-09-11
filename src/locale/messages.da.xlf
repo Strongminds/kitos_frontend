@@ -8145,6 +8145,10 @@
         <source>Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</source>
         <target state="new">Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</target>
       </trans-unit>
+      <trans-unit id="6022090443019833090" datatype="html">
+        <source>Felt skal være udfyldt</source>
+        <target state="new">Felt skal være udfyldt</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
