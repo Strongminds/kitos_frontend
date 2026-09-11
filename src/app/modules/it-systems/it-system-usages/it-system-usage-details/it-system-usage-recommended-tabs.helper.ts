@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   APIArchivingRegistrationsResponseDTO,
+  APIYesNoDontKnowChoice,
   APIGDPRRegistrationsResponseDTO,
   APIGeneralDataResponseDTO,
 } from 'src/app/api/v2';
@@ -60,6 +61,10 @@ function hasText(value: string | null | undefined): boolean {
 
 function hasValue<T>(value: T | null | undefined): boolean {
   return value !== null && value !== undefined;
+}
+
+function hasDependentGdprValue(choice: string | null | undefined, filled: boolean): boolean {
+  return choice === APIYesNoDontKnowChoice.Yes ? filled : hasValue(choice);
 }
 
 function hasItems<T>(value: Array<T> | null | undefined): boolean {
@@ -153,38 +158,38 @@ export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsag
       hasValue(g?.riskAssessmentConducted),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment, (g) =>
-      hasValue(g?.riskAssessmentConductedDate),
+      hasDependentGdprValue(g?.riskAssessmentConducted, hasValue(g?.riskAssessmentConductedDate)),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment, (g) =>
-      hasValue(g?.riskAssessmentResult),
+      hasDependentGdprValue(g?.riskAssessmentConducted, hasValue(g?.riskAssessmentResult)),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment, (g) =>
-      hasValue(g?.riskAssessmentDocumentation),
+      hasDependentGdprValue(g?.riskAssessmentConducted, hasValue(g?.riskAssessmentDocumentation)),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment, (g) =>
-      hasText(g?.riskAssessmentNotes),
+      hasDependentGdprValue(g?.riskAssessmentConducted, hasText(g?.riskAssessmentNotes)),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprTechnicalPrecautions, (g) =>
       hasValue(g?.technicalPrecautionsInPlace),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprTechnicalPrecautions, (g) =>
-      hasValue(g?.technicalPrecautionsDocumentation),
+      hasDependentGdprValue(g?.technicalPrecautionsInPlace, hasValue(g?.technicalPrecautionsDocumentation)),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprUserSupervision, (g) => hasValue(g?.userSupervision)),
-    gdprField(selectITSystemUsageEnableAndRecommendedGdprUserSupervision, (g) => hasValue(g?.userSupervisionDate)),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprUserSupervision, (g) => hasDependentGdprValue(g?.userSupervision, hasValue(g?.userSupervisionDate))),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprUserSupervision, (g) =>
-      hasValue(g?.userSupervisionDocumentation),
+      hasDependentGdprValue(g?.userSupervision, hasValue(g?.userSupervisionDocumentation)),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod, (g) => hasValue(g?.retentionPeriodDefined)),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod, (g) =>
-      hasValue(g?.nextDataRetentionEvaluationDate),
+      hasDependentGdprValue(g?.retentionPeriodDefined, hasValue(g?.nextDataRetentionEvaluationDate)),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod, (g) =>
-      hasValue(g?.dataRetentionEvaluationFrequencyInMonths),
+      hasDependentGdprValue(g?.retentionPeriodDefined, hasValue(g?.dataRetentionEvaluationFrequencyInMonths)),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasValue(g?.dpiaConducted)),
-    gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasValue(g?.dpiaDate)),
-    gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasValue(g?.dpiaDocumentation)),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasDependentGdprValue(g?.dpiaConducted, hasValue(g?.dpiaDate))),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasDependentGdprValue(g?.dpiaConducted, hasValue(g?.dpiaDocumentation))),
   ]);
 
   const archivingTab$ = combineRecommendedBadgeState([

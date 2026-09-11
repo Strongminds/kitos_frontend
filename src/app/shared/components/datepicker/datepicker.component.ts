@@ -55,6 +55,8 @@ import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badg
   ],
 })
 export class DatePickerComponent extends BaseFormComponent<Date | undefined> implements AfterViewInit, OnDestroy {
+  // Undefined preserves the badge state derived from this field.
+  @Input() public recommendedFilled: boolean | undefined;
   @Input() public recommended = false;
   @Input() public icon?: 'search';
   @Input() public size: 'medium' | 'large' = 'large';

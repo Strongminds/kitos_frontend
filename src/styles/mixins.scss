@@ -773,4 +773,16 @@
       }
     }
   }
+  &.recommended-filled ::ng-deep ng-select .ng-select-container .ng-placeholder::after {
+    content: "✓";
+    font-size: 12px;
+    @include recommended-badge-filled;
+  }
+
+  &.recommended-unfilled ::ng-deep ng-select .ng-select-container .ng-placeholder::after {
+    @include recommended-badge;
+    content: "!";
+    font-size: 14px;
+  }
+
 }

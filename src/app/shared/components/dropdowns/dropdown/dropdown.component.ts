@@ -32,6 +32,8 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
   ],
 })
 export class DropdownComponent<T> extends BaseDropdownComponent<T | null> implements OnInit, OnChanges {
+  // Undefined preserves the badge state derived from this field.
+  @Input() public recommendedFilled: boolean | undefined;
   @Input() public considerCurrentValueObsoleteIfNotPresentInData = true;
   @Input() public appendTo: string = '';
   @Input() public clearable: boolean = true;

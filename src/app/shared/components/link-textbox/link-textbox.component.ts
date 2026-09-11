@@ -30,6 +30,8 @@ import { ReadonlyLinkTextboxComponent } from './readonly-link-textbox/readonly-l
   ],
 })
 export class LinkTextboxComponent extends BaseComponent {
+  // Undefined preserves the badge state derived from this field.
+  @Input() public recommendedFilled: boolean | undefined;
   @Input() public title!: string;
   @Input() public simpleLink$!: Observable<SimpleLink | undefined>;
   @Input() isDisabled = false;

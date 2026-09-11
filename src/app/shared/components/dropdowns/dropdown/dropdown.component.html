@@ -1,5 +1,7 @@
 @if (formGroup) {
-  <div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended">
+  <div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended"
+    [class.recommended-filled]="recommendedFilled === true"
+    [class.recommended-unfilled]="recommendedFilled === false">
     <ng-select
       class="{{ size }}"
       [formControlName]="formName"
@@ -47,7 +49,9 @@
   </div>
 }
 @if (!formGroup) {
-  <div [class.dropdown-has-recommended]="recommended">
+  <div [class.dropdown-has-recommended]="recommended"
+    [class.recommended-filled]="recommendedFilled === true"
+    [class.recommended-unfilled]="recommendedFilled === false">
     <ng-select
       class="{{ size }}"
       [placeholder]="text"
