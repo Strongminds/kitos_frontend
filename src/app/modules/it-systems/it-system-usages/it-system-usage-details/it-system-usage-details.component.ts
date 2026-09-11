@@ -46,6 +46,7 @@ import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { getItSystemUsageRecommendedTabBadges } from './it-system-usage-recommended-tabs.helper';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -85,6 +86,8 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
+  private readonly recommendedTabBadges = getItSystemUsageRecommendedTabBadges(this.store);
+
   public readonly breadCrumbs$ = combineLatest([
     this.organizationName$,
     this.itSystemUsageName$,
@@ -108,6 +111,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Systemforside`,
       iconType: 'document',
       route: AppPath.frontpage,
+      recommendedBadge$: this.recommendedTabBadges.frontpage$,
     },
     {
       label: $localize`Kontrakter`,
@@ -126,6 +130,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       iconType: 'lock',
       route: AppPath.gdpr,
       enabled$: this.enableGdprTab$,
+      recommendedBadge$: this.recommendedTabBadges.gdpr$,
     },
     {
       label: $localize`Systemroller`,
@@ -156,6 +161,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       iconType: 'archive',
       route: AppPath.archiving,
       enabled$: this.enableArchivingTab$,
+      recommendedBadge$: this.recommendedTabBadges.archiving$,
     },
     {
       label: $localize`Hierarki`,

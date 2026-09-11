@@ -6227,6 +6227,9 @@
       <trans-unit id="1288360675901164126" datatype="html">
         <source>Du tager nu systemet ud af anvendelse og arkiverer anvendelseshistorikken.</source>
       </trans-unit>
+      <trans-unit id="6022090443019833090" datatype="html">
+        <source>Felt skal være udfyldt</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

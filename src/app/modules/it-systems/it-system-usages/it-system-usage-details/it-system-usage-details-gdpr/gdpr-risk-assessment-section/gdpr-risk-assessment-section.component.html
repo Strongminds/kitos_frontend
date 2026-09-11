@@ -36,6 +36,9 @@
           [formGroup]="riskAssessmentFormGroup"
           formName="conductedDateControl"
           data-cy="conducted-date-datepicker"
+          [recommendedFilled]="
+            riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value?.value === 'Yes' ? undefined : !!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value
+          "
           [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
           (valueChange)="patchGdpr({ riskAssessmentConductedDate: $event?.toDateString() })"
           >
@@ -55,6 +58,9 @@
             formName="assessmentResultControl"
             [data]="riskAssessmentResultOptions"
             data-cy="assessment-result-dropdown"
+            [recommendedFilled]="
+              riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value?.value === 'Yes' ? undefined : !!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value
+            "
             [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
             (valueChange)="patchGdpr({ riskAssessmentResult: $event })"
             ></app-dropdown
@@ -66,6 +72,9 @@
             [isDisabled]="(isRiskAssessmentFalse$ | async) !== false"
             data-cy="risk-documentation-link"
             [isDisabled]="disableDirectoryDocumentationControl"
+            [recommendedFilled]="
+              riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value?.value === 'Yes' ? undefined : !!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value
+            "
             [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
             (submitMethod)="patchGdpr({ riskAssessmentDocumentation: $event })"
           ></app-edit-url-section>
@@ -75,6 +84,9 @@
             [formGroup]="riskAssessmentFormGroup"
             formName="notesControl"
             data-cy="assessment-notes"
+            [recommendedFilled]="
+              riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value?.value === 'Yes' ? undefined : !!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value
+            "
             [recommended]="(conductedRiskAssessmentRecommended$ | async) === true"
             (valueChange)="patchGdpr({ riskAssessmentNotes: $event })"
             >

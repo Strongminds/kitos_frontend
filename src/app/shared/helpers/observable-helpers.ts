@@ -1,5 +1,5 @@
 import { concatLatestFrom } from '@ngrx/operators';
-import { Observable, OperatorFunction, combineLatest } from 'rxjs';
+import { Observable, OperatorFunction, combineLatest, of } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { Cached } from '../models/cache-item.model';
 import { hasValidCache } from './date.helpers';
@@ -65,4 +65,39 @@ export function mapUIConfigStatusToEnabled(): OperatorFunction<{ enabled: boolea
  */
 export function mapUIConfigStatusToRecommended(): OperatorFunction<{ enabled: boolean; recommended: boolean }, boolean> {
   return map(({ recommended }) => recommended);
+}
+
+/**
+ * Aggregate recommended-badge state for a group of fields (e.g. all recommended fields shown on a single details tab).
+ */
+export interface RecommendedBadgeState {
+  /** True if at least one field in the group is recommended (i.e. the badge should be shown at all). */
+  visible: boolean;
+  /** True if every recommended field in the group is filled in. Fields that are not recommended never block this. */
+  filled: boolean;
+}
+
+/**
+ * Combines the recommended/filled state of a set of fields into a single tab-level recommended badge state.
+ * @param fields - Array of `{ recommended$, filled$ }` pairs, one per recommended-capable field on the tab.
+ * @returns An Observable of `RecommendedBadgeState` where `visible` is true if any field is recommended, and
+ * `filled` is true if every recommended field is filled in (non-recommended fields are ignored).
+ */
+export function combineRecommendedBadgeState(
+  fields: { recommended$: Observable<boolean>; filled$: Observable<boolean> }[],
+): Observable<RecommendedBadgeState> {
+  if (fields.length === 0) {
+    return of({ visible: false, filled: false });
+  }
+
+  const fieldStates$ = fields.map(({ recommended$, filled$ }) =>
+    combineLatest([recommended$, filled$]).pipe(map(([recommended, filled]) => ({ recommended, filled }))),
+  );
+
+  return combineLatest(fieldStates$).pipe(
+    map((states) => ({
+      visible: states.some((state) => state.recommended),
+      filled: states.every((state) => !state.recommended || state.filled),
+    })),
+  );
 }

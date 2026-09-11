@@ -21,6 +21,8 @@ import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-b
   ],
 })
 export class ReadonlyLinkTextboxComponent {
+  // Undefined preserves the badge state derived from this field.
+  @Input() public recommendedFilled: boolean | undefined;
   @Input() public title!: string;
   @Input() isDisabled = false;
   @Input() public size: 'medium' | 'large' = 'large';

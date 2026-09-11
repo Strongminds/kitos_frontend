@@ -33,6 +33,9 @@
         [isDisabled]="(isTechnicalPrecautionsFalse$ | async) !== false"
         data-cy="technical-precautions-documentation-link"
         [isDisabled]="disableDirectoryDocumentationControl"
+        [recommendedFilled]="
+          mainFormGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!mainFormGroup.controls.yesNoDontKnowControl.value
+        "
         [recommended]="(technicalPrecautionsRecommended$ | async) === true"
         (submitMethod)="patchGdpr({ technicalPrecautionsDocumentation: $event })"
       ></app-edit-url-section>

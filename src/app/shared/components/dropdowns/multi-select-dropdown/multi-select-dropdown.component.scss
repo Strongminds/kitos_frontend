@@ -17,10 +17,6 @@ ng-select {
   flex: 1;
 }
 
-:host ::ng-deep .dropdown-has-recommended {
-  @include mixins.dropdown-has-recommended;
-}
-
 @include mixins.ng-select-medium-styles;
 
 input[type="checkbox"] {

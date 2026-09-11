@@ -180,10 +180,12 @@ export const ItSystemUsageUiBluePrint = {
         itInterfaceIds: {
           text: $localize`Snitflade ID'er`,
           disableByDefault: true,
+          cannotBeRecommended: true,
         },
         itInterfaceVersions: {
           text: $localize`Snitflade versioner`,
           disableByDefault: true,
+          cannotBeRecommended: true,
         },
       },
     },
@@ -211,6 +213,7 @@ export const ItSystemUsageUiBluePrint = {
         },
         documentBearing: {
           text: $localize`Dokumentbærende`,
+          cannotBeRecommended: true,
         },
         active: {
           text: $localize`Er der arkiveret fra systemet?`,

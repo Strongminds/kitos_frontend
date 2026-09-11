@@ -713,21 +713,31 @@
 }
 
 @mixin recommended-badge {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   background-color: color.adjust(theme.$color-warning, $lightness: 30%);
   color: color.adjust(theme.$color-warning, $lightness: -15%);
   border: 1px solid theme.$color-warning;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 600;
-  padding: 2px 7px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  width: 22px;
+  height: 22px;
+  padding: 0;
   margin-left: 6px;
   margin-bottom: 2px;
-  vertical-align: text-bottom;
-  line-height: 1.2;
+  vertical-align: middle;
+  line-height: 1;
+  font-variant-ligatures: none;
 
   &.filled {
     @include recommended-badge-filled;
+  }
+
+  &.warning {
+    font-size: 14px;
   }
 }
 
@@ -742,22 +752,17 @@
 }
 
 @mixin dropdown-has-recommended {
-  ::ng-deep ng-select .ng-select-container {
-    .ng-placeholder {
-      display: flex;
-      align-items: center;
+  ::ng-deep ng-select .ng-select-container .ng-placeholder {
+    display: flex;
+    align-items: center;
+    // Keep the badge above the empty dropdown's search input, while allowing
+    // clicks on the label to reach that input.
+    z-index: 1;
+    pointer-events: none;
 
-      &::after {
-        content: "Anbefalet";
-        white-space: nowrap;
-        @include recommended-badge;
-      }
+    app-recommended-badge {
+      pointer-events: auto;
     }
 
-    &.ng-has-value {
-      .ng-placeholder::after {
-        @include recommended-badge-filled;
-      }
-    }
   }
 }
