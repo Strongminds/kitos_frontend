@@ -4,8 +4,9 @@ import { Dictionary } from '../../../models/primitives/dictionary.model';
 import { TreeNodeModel } from '../../../models/tree-node.model';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import { NgPlaceholderTemplateDirective, NgLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { LoadingComponent } from '../../loading/loading.component';
+import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-badge.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 
 @Component({
@@ -13,6 +14,8 @@ import { ParagraphComponent } from '../../paragraph/paragraph.component';
   templateUrl: './tree-node-dropdown.component.html',
   styleUrls: ['./tree-node-dropdown.component.scss'],
   imports: [
+    NgPlaceholderTemplateDirective,
+    RecommendedBadgeComponent,
     FormsModule,
     ReactiveFormsModule,
     NgSelectComponent,

@@ -11,13 +11,14 @@ import {
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { NgMultiLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
+import { NgPlaceholderTemplateDirective, NgMultiLabelTemplateDirective, NgOptionTemplateDirective, NgSelectComponent } from '@ng-select/ng-select';
 import { debounceTime, filter, map, Subject } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { DEFAULT_INPUT_DEBOUNCE_TIME, EMAIL_REGEX_PATTERN } from 'src/app/shared/constants/constants';
 import { MultiSelectDropdownItem } from 'src/app/shared/models/dropdown-option.model';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 
+import { RecommendedBadgeComponent } from '../../recommended-badge/recommended-badge.component';
 import { ParagraphComponent } from '../../paragraph/paragraph.component';
 import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component';
 
@@ -26,6 +27,8 @@ import { TextBoxInfoComponent } from '../../textbox-info/textbox-info.component'
   templateUrl: './multi-select-dropdown.component.html',
   styleUrl: './multi-select-dropdown.component.scss',
   imports: [
+    NgPlaceholderTemplateDirective,
+    RecommendedBadgeComponent,
     NgSelectComponent,
     FormsModule,
     NgOptionTemplateDirective,

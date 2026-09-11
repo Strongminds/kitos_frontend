@@ -1,8 +1,7 @@
 @if (formGroup) {
-  <div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended"
-    [class.recommended-filled]="recommendedFilled === true"
-    [class.recommended-unfilled]="recommendedFilled === false">
+  <div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended">
     <ng-select
+      #recommendedSelect
       class="{{ size }}"
       [formControlName]="formName"
       [placeholder]="text"
@@ -25,6 +24,13 @@
       (open)="onOpen()"
       (blur)="onBlur()"
     >
+      <ng-template ng-placeholder-tmp>
+        <div class="ng-placeholder">
+          {{ text }}
+          <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? recommendedSelect.hasValue"></app-recommended-badge>
+        </div>
+      </ng-template>
+
       <ng-template ng-label-tmp let-item="item">
         <span class="ng-value-label align-items-vertically">{{ getItemLabel(item) }}</span>
       </ng-template>
@@ -49,10 +55,9 @@
   </div>
 }
 @if (!formGroup) {
-  <div [class.dropdown-has-recommended]="recommended"
-    [class.recommended-filled]="recommendedFilled === true"
-    [class.recommended-unfilled]="recommendedFilled === false">
+  <div [class.dropdown-has-recommended]="recommended">
     <ng-select
+      #recommendedSelect
       class="{{ size }}"
       [placeholder]="text"
       [fixedPlaceholder]="true"
@@ -71,6 +76,13 @@
       [searchFn]="searchFn"
       (clear)="onClear()"
     >
+      <ng-template ng-placeholder-tmp>
+        <div class="ng-placeholder">
+          {{ text }}
+          <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? recommendedSelect.hasValue"></app-recommended-badge>
+        </div>
+      </ng-template>
+
       <ng-template ng-label-tmp let-item="item">
         <span class="ng-value-label">{{ getItemLabel(item) }}</span>
       </ng-template>

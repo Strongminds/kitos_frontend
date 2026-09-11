@@ -752,37 +752,20 @@
 }
 
 @mixin dropdown-has-recommended {
-  ::ng-deep ng-select .ng-select-container {
-    .ng-placeholder {
-      display: flex;
-      align-items: center;
+  ::ng-deep ng-select .ng-select-container .ng-placeholder {
+    display: flex;
+    align-items: center;
+    // Keep the badge above the empty dropdown's search input, while allowing
+    // clicks on the label to reach that input.
+    z-index: 1;
+    pointer-events: none;
 
-      &::after {
-        content: "!";
-        white-space: nowrap;
-        @include recommended-badge;
-        font-size: 14px;
-      }
+    app-recommended-badge {
+      pointer-events: auto;
     }
 
-    &.ng-has-value {
-      .ng-placeholder::after {
-        content: "✓";
-        font-size: 12px;
-        @include recommended-badge-filled;
-      }
+    .recommended-badge.warning {
+      font-size: 14px;
     }
   }
-  &.recommended-filled ::ng-deep ng-select .ng-select-container .ng-placeholder::after {
-    content: "✓";
-    font-size: 12px;
-    @include recommended-badge-filled;
-  }
-
-  &.recommended-unfilled ::ng-deep ng-select .ng-select-container .ng-placeholder::after {
-    @include recommended-badge;
-    content: "!";
-    font-size: 14px;
-  }
-
 }
