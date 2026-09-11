@@ -10,5 +10,6 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
 export class RecommendedBadgeComponent {
   @Input() public visible: boolean = false;
   @Input() public filled: boolean = false;
+  @Input() public showTooltip: boolean = true;
 
 }

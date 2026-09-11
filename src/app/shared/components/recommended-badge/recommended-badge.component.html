@@ -1,5 +1,9 @@
 @if (visible) {
-  <app-tooltip text="Felt skal være udfyldt" i18n-text [matchContentWidth]="true">
+  @if (showTooltip) {
+    <app-tooltip text="Felt skal være udfyldt" i18n-text [matchContentWidth]="true">
+      <span [class.filled]="filled" [class.warning]="!filled" class="recommended-badge">{{ filled ? '✓' : '!' }}</span>
+    </app-tooltip>
+  } @else {
     <span [class.filled]="filled" [class.warning]="!filled" class="recommended-badge">{{ filled ? '✓' : '!' }}</span>
-  </app-tooltip>
+  }
 }
