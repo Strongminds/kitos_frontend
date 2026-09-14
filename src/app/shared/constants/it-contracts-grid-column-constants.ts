@@ -4,6 +4,7 @@ export const ParentContractName = 'ParentContractName';
 export const Name = 'Name';
 export const Concluded = 'Concluded';
 export const ExpirationDate = 'ExpirationDate';
+export const Note = 'Note';
 export const CriticalityUuid = 'CriticalityUuid';
 export const ResponsibleOrgUnitName = 'ResponsibleOrgUnitName';
 export const SupplierName = 'SupplierName';
