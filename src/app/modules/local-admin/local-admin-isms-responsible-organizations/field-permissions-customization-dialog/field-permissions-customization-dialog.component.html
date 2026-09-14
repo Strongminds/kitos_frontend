@@ -6,18 +6,16 @@
         <div class="grid-header role-column" i18n>Leverandør</div>
         <div class="grid-header role-column" i18n>Kommune</div>
         <div class="grid-header role-column" i18n>Delte</div>
+        <div class="header-divider"></div>
 
-        <div class="field-label">
-          <strong i18n>Databehandling - Tilsyn</strong>
-        </div>
-        <div class="group-spacer"></div>
+        <div class="group-header" i18n>Databehandling - Tilsyn</div>
 
         @for (field of fields$ | async; track fieldTrackBy($index, field)) {
           @if (
             field.fieldKey === dataProcessingOversightCompletedFieldKey ||
             field.fieldKey === dataProcessingOversightReportLinkNameFieldKey
           ) {
-            <div class="field-label">
+            <div class="field-label field-label--sub">
               {{ getLabelFromFieldKey(field.fieldKey) }}
             </div>
             <app-radio-buttons
@@ -30,14 +28,11 @@
           }
         }
 
-        <div class="field-label">
-          <strong i18n>It Systemer</strong>
-        </div>
-        <div class="group-spacer"></div>
+        <div class="group-header" i18n>IT Systemer</div>
 
         @for (field of fields$ | async; track fieldTrackBy($index, field)) {
           @if (field.fieldKey && field.fieldKey.includes("ItSystemUsage")) {
-            <div class="field-label">
+            <div class="field-label field-label--sub">
               {{ getLabelFromFieldKey(field.fieldKey) }}
             </div>
             <app-radio-buttons
