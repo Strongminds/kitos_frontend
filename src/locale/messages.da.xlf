@@ -6991,22 +6991,6 @@
         <source>IT System: Anvendes af organisationer</source>
         <target state="new">IT System: Anvendes af organisationer</target>
       </trans-unit>
-      <trans-unit id="4789455191486047781" datatype="html">
-        <source>Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</source>
-        <target state="new">Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</target>
-      </trans-unit>
-      <trans-unit id="5075260696326393711" datatype="html">
-        <source>Databehandling - Tilsyn - Gennemførte og kommende tilsyn</source>
-        <target state="new">Databehandling - Tilsyn - Gennemførte og kommende tilsyn</target>
-      </trans-unit>
-      <trans-unit id="7857124855661066958" datatype="html">
-        <source>IT Systemer - Systemforside - Indeholder AI-teknologi?</source>
-        <target state="new">IT Systemer - Systemforside - Indeholder AI-teknologi?</target>
-      </trans-unit>
-      <trans-unit id="6192599242508017517" datatype="html">
-        <source>IT Systemer - GDPR - Hvad viste den seneste risikovurdering?</source>
-        <target state="new">IT Systemer - GDPR - Hvad viste den seneste risikovurdering?</target>
-      </trans-unit>
       <trans-unit id="9169283032104147432" datatype="html">
         <source>Udgående relationer</source>
         <target state="new">Udgående relationer</target>
@@ -7777,10 +7761,6 @@
         <source>Reference for kritikalitetsvurdering</source>
         <target state="new">Reference for kritikalitetsvurdering</target>
       </trans-unit>
-      <trans-unit id="5717990299723971305" datatype="html">
-        <source>IT Systemer - Systemforside - Kritikalitet</source>
-        <target state="new">IT Systemer - Systemforside - Kritikalitet</target>
-      </trans-unit>
       <trans-unit id="6778544494529637057" datatype="html">
         <source>Under afprøvning</source>
         <target state="new">Under afprøvning</target>
@@ -8165,10 +8145,6 @@
         <source>Databehandling - Tilsyn</source>
         <target state="new">Databehandling - Tilsyn</target>
       </trans-unit>
-      <trans-unit id="5855504890663238850" datatype="html">
-        <source>It Systemer</source>
-        <target state="new">It Systemer</target>
-      </trans-unit>
       <trans-unit id="5007043623745180231" datatype="html">
         <source>Field authorization customization</source>
         <target state="new">Field authorization customization</target>
@@ -8200,6 +8176,10 @@
       <trans-unit id="6707403893965762451" datatype="html">
         <source>GDPR Hvad viste den seneste risikovurdering?</source>
         <target state="new">GDPR Hvad viste den seneste risikovurdering?</target>
+      </trans-unit>
+      <trans-unit id="8881692073958525088" datatype="html">
+        <source>Udvalgte organisationer vil have adgang til de tildelte felter i Kitos</source>
+        <target state="new">Udvalgte organisationer vil have adgang til de tildelte felter i Kitos</target>
       </trans-unit>
     </body>
   </file>

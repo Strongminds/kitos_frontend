@@ -4188,21 +4188,6 @@
       <trans-unit id="984734426874401647" datatype="html">
         <source>Tilføj leverandør</source>
       </trans-unit>
-      <trans-unit id="4789455191486047781" datatype="html">
-        <source>Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:</source>
-      </trans-unit>
-      <trans-unit id="5075260696326393711" datatype="html">
-        <source>Databehandling - Tilsyn - Gennemførte og kommende tilsyn</source>
-      </trans-unit>
-      <trans-unit id="7857124855661066958" datatype="html">
-        <source>IT Systemer - Systemforside - Indeholder AI-teknologi?</source>
-      </trans-unit>
-      <trans-unit id="5717990299723971305" datatype="html">
-        <source>IT Systemer - Systemforside - Kritikalitet</source>
-      </trans-unit>
-      <trans-unit id="6192599242508017517" datatype="html">
-        <source>IT Systemer - GDPR - Hvad viste den seneste risikovurdering?</source>
-      </trans-unit>
       <trans-unit id="2633970024634511367" datatype="html">
         <source>Vælg leverandør</source>
       </trans-unit>
@@ -6245,9 +6230,6 @@
       <trans-unit id="5007043623745180231" datatype="html">
         <source>Field authorization customization</source>
       </trans-unit>
-      <trans-unit id="5855504890663238850" datatype="html">
-        <source>It Systemer</source>
-      </trans-unit>
       <trans-unit id="6181422202096188207" datatype="html">
         <source>GDPR Foretaget risikovurdering</source>
       </trans-unit>
@@ -6268,6 +6250,9 @@
       </trans-unit>
       <trans-unit id="900172157446252135" datatype="html">
         <source>Tilsyn bemærkninger</source>
+      </trans-unit>
+      <trans-unit id="8881692073958525088" datatype="html">
+        <source>Udvalgte organisationer vil have adgang til de tildelte felter i Kitos</source>
       </trans-unit>
     </body>
   </file>
