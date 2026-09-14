@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
 import { concatLatestFrom, tapResponse } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { switchMap, tap } from 'rxjs';
+import { Subject, switchMap, tap } from 'rxjs';
 import {
   APISupplierAssociatedFieldConfigurationRequestDTO,
   APISupplierAssociatedFieldConfigurationResponseDTO,
@@ -21,6 +21,8 @@ interface State {
 export class FieldPermissionsCustomizationDialogComponentStore extends ComponentStore<State> {
   public readonly fields$ = this.select((state) => state.fields);
   public readonly loading$ = this.select((state) => state.loading);
+  private readonly savedSubject = new Subject<APISupplierAssociatedFieldConfigurationRequestDTO>();
+  public readonly saved$ = this.savedSubject.asObservable();
 
   constructor(
     @Inject(OrganizationSupplierInternalV2Service)
@@ -79,6 +81,7 @@ export class FieldPermissionsCustomizationDialogComponentStore extends Component
               next: (fields) => {
                 this.setFields(fields);
                 this.setLoading(false);
+                this.savedSubject.next(request);
               },
               error: () => {
                 this.notificationService.showError($localize`Kunne ikke indlæse felter`);

@@ -38,6 +38,7 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
   protected readonly dataProcessingOversightReportLinkNameFieldKey =
     'DataProcessingRegistrationOversightDate.OversightReportLinkName';
   protected readonly fields$ = this.componentStore.fields$;
+  protected readonly loading$ = this.componentStore.loading$;
   protected readonly groupedFields$ = this.fields$.pipe(
     map((fields) =>
       fields.flatMap((field) => {
@@ -74,6 +75,7 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
   }
 
   ngOnInit(): void {
+    this.subscriptions.add(this.componentStore.saved$.subscribe((request) => this.dialogRef.close(request)));
     this.componentStore.getFields();
     this.subscriptions.add(
       this.componentStore.fields$.subscribe((fields) => {
@@ -115,7 +117,6 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
       })),
     };
     this.componentStore.submit(requestDto);
-    this.dialogRef.close(requestDto);
   }
 
   protected fieldTrackBy(_: number, field: APISupplierAssociatedFieldConfigurationResponseDTO): string {

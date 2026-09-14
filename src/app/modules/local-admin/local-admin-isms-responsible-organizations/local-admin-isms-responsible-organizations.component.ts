@@ -64,13 +64,7 @@ export class LocalAdminIsmsResponsibleOrganizationsComponent extends BaseCompone
     const dialogRef = this.dialog.open(DropdownDialogComponent);
     const dialogInstance = dialogRef.componentInstance;
     dialogInstance.title = $localize`Tilføj leverandør`;
-    dialogInstance.description = $localize`Når kommunen har en eller flere leverandører tilknyttet, deaktiveres redigering af følgende felter i Kitos:`;
-    dialogInstance.bulletPoints = [
-      $localize`Databehandling - Tilsyn - Gennemførte og kommende tilsyn`,
-      $localize`IT Systemer - Systemforside - Indeholder AI-teknologi?`,
-      $localize`IT Systemer - Systemforside - Kritikalitet`,
-      $localize`IT Systemer - GDPR - Hvad viste den seneste risikovurdering?`,
-    ];
+    dialogInstance.description = $localize`Udvalgte organisationer vil have adgang til de tildelte felter i Kitos`;
     dialogInstance.data$ = this.availableSuppliers$;
     dialogInstance.valueField = 'uuid';
     dialogInstance.textField = 'name';
