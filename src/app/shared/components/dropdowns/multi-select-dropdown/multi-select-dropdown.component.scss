@@ -1,7 +1,4 @@
 @use "theme";
-@use "mixins";
-
-@include mixins.ng-select-default-style;
 
 .description {
   margin-top: theme.$padding-small;
@@ -12,16 +9,6 @@
 ng-select {
   font-size: large;
 }
-
-:host {
-  flex: 1;
-}
-
-:host ::ng-deep .dropdown-has-recommended {
-  @include mixins.dropdown-has-recommended;
-}
-
-@include mixins.ng-select-medium-styles;
 
 input[type="checkbox"] {
   stroke-width: 1px; // Adjust this to change the thickness of the check
