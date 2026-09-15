@@ -76,10 +76,11 @@ export class CreateUserDialogComponent extends BaseUserDialogComponent implement
   ]).pipe(map(([isLoadingAlreadyExists, isLoading]) => isLoadingAlreadyExists || isLoading));
 
   public createForm = new FormGroup({
-    firstName: new FormControl<string | undefined>(undefined, [requiredIfDirtyValidator()]),
-    lastName: new FormControl<string | undefined>(undefined, [requiredIfDirtyValidator()]),
-    email: new FormControl<string | undefined>(undefined, [requiredIfDirtyValidator(), Validators.email]),
+    firstName: new FormControl<string | undefined>(undefined, [Validators.maxLength(100), requiredIfDirtyValidator()]),
+    lastName: new FormControl<string | undefined>(undefined, [Validators.maxLength(100), requiredIfDirtyValidator()]),
+    email: new FormControl<string | undefined>(undefined, [Validators.maxLength(100), requiredIfDirtyValidator(), Validators.email]),
     repeatEmail: new FormControl<string | undefined>(undefined, [
+      Validators.maxLength(100),
       requiredIfDirtyValidator(),
       Validators.email,
       this.emailMatchValidator.bind(this),

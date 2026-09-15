@@ -91,6 +91,7 @@
           i18n-text
           [formGroup]="archiveForm"
           formName="frequencyInMonths"
+          [maxLength]="journalFrequencyInputUpperLimit"
           [recommended]="(archiveFrequencyRecommended$ | async) === true"
           (valueChange)="patchJournalFrequency({ frequencyInMonths: $event })"
           [placeholder]="journalFrequencyPlaceholder()"

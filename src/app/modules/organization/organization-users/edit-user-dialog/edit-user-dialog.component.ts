@@ -82,9 +82,10 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
   private readonly hasModifyFieldsPermission$ = this.store.select(selectOrganizationUserCanModifyFieldsPermissions);
 
   public createForm = new FormGroup({
-    firstName: new FormControl<string | undefined>(undefined, Validators.required),
-    lastName: new FormControl<string | undefined>(undefined, Validators.required),
+    firstName: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(100)]),
+    lastName: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(100)]),
     email: new FormControl<string | undefined>(undefined, [
+      Validators.maxLength(100),
       Validators.required,
       Validators.email,
       requiredIfDirtyValidator(),

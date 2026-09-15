@@ -36,7 +36,7 @@ export class CreateAndAssociateContractDialogComponent extends BaseComponent imp
   @Input() public usageToAssociateUuid!: string;
 
   public readonly formGroup = new FormGroup({
-    contractName: new FormControl<string | undefined>(undefined, Validators.required),
+    contractName: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(200)]),
   });
 
   public readonly loading$ = this.componentStore.isLoading$;

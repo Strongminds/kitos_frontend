@@ -18,6 +18,9 @@
     (blur)="focus(false)"
     [ngClass]="{ disabled: disabled }"
   ></textarea>
+    @if (formName && formGroup.controls[formName].getError('maxlength'); as error) {
+      <mat-error i18n>Maksimalt {{ error.requiredLength }} tegn.</mat-error>
+    }
 </mat-form-field>
 } @else {
 <mat-form-field>

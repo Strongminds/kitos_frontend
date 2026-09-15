@@ -34,6 +34,7 @@
         [disabled]="(isRetentionPeriodFalse$ | async) !== false"
         [formGroup]="formGroup"
         formName="frequencyControl"
+        [maxLength]="2147483647"
         data-cy="retention-period-numeric-input"
         [recommended]="(retentionPeriodRecommended$ | async) === true"
         (valueChange)="patchGdpr({ dataRetentionEvaluationFrequencyInMonths: $event })"

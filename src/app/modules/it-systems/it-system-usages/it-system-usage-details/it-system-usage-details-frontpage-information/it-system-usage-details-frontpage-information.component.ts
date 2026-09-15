@@ -128,10 +128,10 @@ import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-u
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
-      purpose: new FormControl('', Validators.maxLength(250)),
-      localCallName: new FormControl(''),
-      localSystemId: new FormControl(''),
-      systemVersion: new FormControl(''),
+      purpose: new FormControl('', Validators.maxLength(200)),
+      localCallName: new FormControl('', Validators.maxLength(100)),
+      localSystemId: new FormControl('', Validators.maxLength(200)),
+      systemVersion: new FormControl('', Validators.maxLength(100)),
       technicalSystemTypes: new FormControl<MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] | undefined>(
         undefined,
       ),
