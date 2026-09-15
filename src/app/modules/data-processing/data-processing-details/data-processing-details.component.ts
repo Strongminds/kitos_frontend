@@ -34,6 +34,7 @@ import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/bre
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
+import { getDataProcessingRecommendedTabBadges } from './data-processing-recommended-tabs.helper';
 
 @Component({
   selector: 'app-data-processing-details',
@@ -67,6 +68,8 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
 
+  private readonly recommendedTabBadges = getDataProcessingRecommendedTabBadges(this.store);
+
   public readonly breadCrumbs$ = combineLatest([this.dprName$, this.dprUuid$]).pipe(
     map(([dprName, dprUuid]): BreadCrumb[] => [
       {
@@ -86,6 +89,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`Forside`,
       iconType: 'document',
       route: AppPath.frontpage,
+      recommendedBadge$: this.recommendedTabBadges.frontpage$,
     },
     {
       label: $localize`IT Systemer`,
@@ -104,6 +108,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       iconType: 'clipboard',
       route: AppPath.oversight,
       enabled$: this.oversightEnabled$,
+      recommendedBadge$: this.recommendedTabBadges.oversight$,
     },
     {
       label: $localize`Databehandlingsroller`,

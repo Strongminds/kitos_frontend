@@ -24,6 +24,9 @@
         [formGroup]="formGroup"
         formName="dateControl"
         data-cy="retention-period-datepicker"
+        [recommendedFilled]="
+          formGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!formGroup.controls.yesNoDontKnowControl.value
+        "
         [recommended]="(retentionPeriodRecommended$ | async) === true"
         (valueChange)="patchGdpr({ nextDataRetentionEvaluationDate: $event?.toDateString() })"
       >
@@ -35,6 +38,9 @@
         [formGroup]="formGroup"
         formName="frequencyControl"
         data-cy="retention-period-numeric-input"
+        [recommendedFilled]="
+          formGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!formGroup.controls.yesNoDontKnowControl.value
+        "
         [recommended]="(retentionPeriodRecommended$ | async) === true"
         (valueChange)="patchGdpr({ dataRetentionEvaluationFrequencyInMonths: $event })"
       >

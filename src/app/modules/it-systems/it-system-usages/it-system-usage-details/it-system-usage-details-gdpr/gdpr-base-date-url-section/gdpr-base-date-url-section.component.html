@@ -20,6 +20,9 @@
         [formGroup]="formGroup"
         formName="dateControl"
         class="full-width-column"
+        [recommendedFilled]="
+          formGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!formGroup.controls.yesNoDontKnowControl.value
+        "
         [recommended]="choiceTypeRecommended"
         (valueChange)="preparePatch(datePropertyName, $event?.toDateString())"
       >
@@ -29,6 +32,9 @@
         [simpleLink$]="documentation$"
         [isDisabled]="(isYesNoDontKnowFalse$ | async) !== false"
         data-cy="base-date-url-section-selector"
+        [recommendedFilled]="
+          formGroup.controls.yesNoDontKnowControl.value?.value === 'Yes' ? undefined : !!formGroup.controls.yesNoDontKnowControl.value
+        "
         [recommended]="choiceTypeRecommended"
         [isDisabled]="disableLinkControl"
         (submitMethod)="patchSimpleLink($event)"

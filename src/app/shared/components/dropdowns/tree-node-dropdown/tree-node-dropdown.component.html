@@ -2,6 +2,7 @@
   @if (formGroup) {
     <div [formGroup]="formGroup" [class.dropdown-has-recommended]="recommended">
       <ng-select
+        #recommendedSelect
         class="{{ size }}"
         [clearable]="clearable"
         [formControlName]="formName"
@@ -20,6 +21,13 @@
         (change)="formSelectionChange($event)"
         (clear)="filter$.next('')"
         >
+      <ng-template ng-placeholder-tmp>
+        <div class="ng-placeholder">
+          {{ text }}
+          <app-recommended-badge [visible]="recommended" [filled]="recommendedSelect.hasValue"></app-recommended-badge>
+        </div>
+      </ng-template>
+
             <ng-template ng-label-tmp let-item="item">
       <span class="ng-value-label align-items-vertically">{{ item.name }}
       </span>
@@ -57,6 +65,7 @@
   @if (!formGroup) {
     <div [class.dropdown-has-recommended]="recommended">
     <ng-select
+      #recommendedSelect
       class="{{ size }}"
       [clearable]="clearable"
       [placeholder]="text"
@@ -74,7 +83,14 @@
       (search)="filter$.next($event.term)"
       (change)="valueChange.emit($event)"
       (clear)="filter$.next('')"
-      ><ng-template ng-option-tmp let-item="item">
+      >
+      <ng-template ng-placeholder-tmp>
+        <div class="ng-placeholder">
+          {{ text }}
+          <app-recommended-badge [visible]="recommended" [filled]="recommendedSelect.hasValue"></app-recommended-badge>
+        </div>
+      </ng-template>
+      <ng-template ng-option-tmp let-item="item">
       <div
         [style.text-indent]="
           itemParentIdsDictionary[item.id] ? (itemParentIdsDictionary[item.id]!.length - 1) * 10 + 'px' : '0px'

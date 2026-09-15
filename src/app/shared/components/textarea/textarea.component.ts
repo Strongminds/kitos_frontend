@@ -14,6 +14,8 @@ import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badg
   imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, CdkTextareaAutosize, NgClass, RecommendedBadgeComponent],
 })
 export class TextAreaComponent extends BaseFormComponent<string> implements AfterViewInit {
+  // Undefined preserves the badge state derived from this field.
+  @Input() public recommendedFilled: boolean | undefined;
   @Input() public recommended = false;
   @Input() public autosizeMinRows = 4;
   @Input() public autosizeMaxRows = 20;

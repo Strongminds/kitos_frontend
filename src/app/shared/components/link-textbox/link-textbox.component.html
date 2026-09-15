@@ -5,7 +5,7 @@
         <mat-form-field class="{{ size }}">
           <mat-label>
             {{ title }}
-           <app-recommended-badge [visible]="recommended" [filled]="true"></app-recommended-badge>
+           <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? (true)"></app-recommended-badge>
           </mat-label>
           <div (click)="openLink(simpleLink.url)">
             <input
@@ -31,6 +31,8 @@
       }
       @if (isUrlEmpty(simpleLink.url)) {
         <app-readonly-link-textbox
+          [recommended]="recommended"
+          [recommendedFilled]="recommendedFilled"
           [size]="size"
           [title]="title"
           [isDisabled]="isDisabled"
@@ -42,7 +44,7 @@
       <mat-form-field class="{{ size }}">
         <mat-label>
           {{ title }}
-          <app-recommended-badge [visible]="recommended" [filled]="true"></app-recommended-badge>
+          <app-recommended-badge [visible]="recommended" [filled]="recommendedFilled ?? (true)"></app-recommended-badge>
           <span [class.filled]="false" class="incorrect-link-color" i18n> (ugyldigt link) </span>
         </mat-label>
         <input
@@ -71,6 +73,7 @@
 
 @if (hasNoLink() | async) {
   <app-readonly-link-textbox
+    [recommendedFilled]="recommendedFilled"
     [size]="size"
     [title]="title"
     [isDisabled]="isDisabled"
