@@ -66,17 +66,21 @@ export class UIModuleCustomizationEffects {
 
   putUIModuleCustomization$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UIModuleConfigActions.putUIModuleCustomization),
+      ofType(UIModuleConfigActions.putUIModuleCustomization, UIModuleConfigActions.putUIModuleCustomizations),
+      map((action) => ({
+        module: action.module,
+        updatedNodeRequests: 'updatedNodeRequests' in action ? action.updatedNodeRequests : [action.updatedNodeRequest],
+      })),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
-      concatMap(([{ module: moduleName, updatedNodeRequest }, organizationUuid]) =>
+      concatMap(([{ module: moduleName, updatedNodeRequests }, organizationUuid]) =>
         this.organizationInternalService
           .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
           .pipe(
             map((nodes) => this.addMissingNodes(nodes.nodes, moduleName)),
             switchMap((existingUICustomization) => {
-              const requestDto = this.getUIModuleCustomizationUpdateRequestDto(
-                existingUICustomization,
-                updatedNodeRequest,
+              const requestDto = updatedNodeRequests.reduce<APIUIModuleCustomizationRequestDTO>(
+                (request, updatedNode) => this.getUIModuleCustomizationUpdateRequestDto(request.nodes, updatedNode),
+                { nodes: existingUICustomization },
               );
 
               return this.organizationInternalService
