@@ -8189,9 +8189,9 @@
         <source>Markér alle som anbefalet</source>
         <target state="new">Markér alle som anbefalet</target>
       </trans-unit>
-      <trans-unit id="6022090443019833090" datatype="html">
-        <source>Felt skal være udfyldt</source>
-        <target state="new">Felt skal være udfyldt</target>
+      <trans-unit id="5756290135695444914" datatype="html">
+        <source>Skal udfyldes</source>
+        <target state="new">Skal udfyldes</target>
       </trans-unit>
     </body>
   </file>

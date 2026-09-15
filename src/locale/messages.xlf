@@ -6257,11 +6257,11 @@
       <trans-unit id="3461232292795380025" datatype="html">
         <source>Markér alle som anbefalet</source>
       </trans-unit>
-      <trans-unit id="6022090443019833090" datatype="html">
-        <source>Felt skal være udfyldt</source>
-      </trans-unit>
       <trans-unit id="6298921017590905716" datatype="html">
         <source>Fjern alle anbefalinger</source>
+      </trans-unit>
+      <trans-unit id="5756290135695444914" datatype="html">
+        <source>Skal udfyldes</source>
       </trans-unit>
     </body>
   </file>
