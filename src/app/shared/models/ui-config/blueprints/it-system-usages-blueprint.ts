@@ -217,6 +217,7 @@ export const ItSystemUsageUiBluePrint = {
         },
         active: {
           text: $localize`Er der arkiveret fra systemet?`,
+          cannotBeRecommended: true,
         },
         notes: {
           text: $localize`Arkiveringsbemærkninger`,
