@@ -8149,6 +8149,14 @@
         <source>Felt skal være udfyldt</source>
         <target state="new">Felt skal være udfyldt</target>
       </trans-unit>
+      <trans-unit id="6298921017590905716" datatype="html">
+        <source>Fjern alle anbefalinger</source>
+        <target state="new">Fjern alle anbefalinger</target>
+      </trans-unit>
+      <trans-unit id="3461232292795380025" datatype="html">
+        <source>Markér alle som anbefalet</source>
+        <target state="new">Markér alle som anbefalet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
