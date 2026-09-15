@@ -66,11 +66,45 @@ export class UIModuleCustomizationEffects {
 
   putUIModuleCustomization$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(UIModuleConfigActions.putUIModuleCustomization, UIModuleConfigActions.putUIModuleCustomizations),
-      map((action) => ({
-        module: action.module,
-        updatedNodeRequests: 'updatedNodeRequests' in action ? action.updatedNodeRequests : [action.updatedNodeRequest],
-      })),
+      ofType(UIModuleConfigActions.putUIModuleCustomization),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      concatMap(([{ module: moduleName, updatedNodeRequest }, organizationUuid]) =>
+        this.organizationInternalService
+          .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
+          .pipe(
+            map((nodes) => this.addMissingNodes(nodes.nodes, moduleName)),
+            switchMap((existingUICustomization) => {
+              const requestDto = this.getUIModuleCustomizationUpdateRequestDto(
+                existingUICustomization,
+                updatedNodeRequest,
+              );
+
+              return this.organizationInternalService
+                .putSingleOrganizationsInternalV2PutUIModuleCustomization({
+                  organizationUuid,
+                  moduleName,
+                  aPIUIModuleCustomizationRequestDTO: requestDto,
+                })
+                .pipe(
+                  map((uiModuleCustomizationDto) =>
+                    this.combineBlueprintWithCustomizationDto(
+                      uiModuleCustomizationDto,
+                      moduleName,
+                      UIModuleConfigActions.putUIModuleCustomizationSuccess,
+                    ),
+                  ),
+                  catchError(() => of(UIModuleConfigActions.putUIModuleCustomizationError())),
+                );
+            }),
+            catchError(() => of(UIModuleConfigActions.getUIModuleConfigError())),
+          ),
+      ),
+    );
+  });
+
+  putUIModuleCustomizations$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UIModuleConfigActions.putUIModuleCustomizations),
       concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
       concatMap(([{ module: moduleName, updatedNodeRequests }, organizationUuid]) =>
         this.organizationInternalService
