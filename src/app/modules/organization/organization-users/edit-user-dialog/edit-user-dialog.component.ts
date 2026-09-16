@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { debounceTime, of } from 'rxjs';
 import { APIOrganizationRoleChoice, APIUpdateUserRequestDTO } from 'src/app/api/v2';
 import { notDirtyAndEmptyStringValidator } from 'src/app/shared/validators/not-dirty-and-empty-string-validator';
+import { setControlError } from 'src/app/shared/helpers/form.helpers';
 import { requiredIfDirtyValidator } from 'src/app/shared/validators/required-if-dirty.validator';
 import { CreateUserDialogComponentStore } from '../create-user-dialog/create-user-dialog.component-store';
 
@@ -138,11 +139,7 @@ export class EditUserDialogComponent extends BaseUserDialogComponent implements 
 
     this.subscriptions.add(
       this.alreadyExists$.subscribe((alreadyExists) => {
-        if (alreadyExists) {
-          this.getEmailControl()?.setErrors({ alreadyExists: true });
-        } else {
-          this.getEmailControl()?.setErrors(null);
-        }
+        setControlError(this.getEmailControl(), 'alreadyExists', alreadyExists);
       }),
     );
 
