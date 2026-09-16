@@ -6254,6 +6254,9 @@
       <trans-unit id="8881692073958525088" datatype="html">
         <source>Udvalgte organisationer vil have adgang til de tildelte felter i Kitos</source>
       </trans-unit>
+      <trans-unit id="6101777371996107225" datatype="html">
+        <source>Maksimalt <x id="INTERPOLATION" equiv-text="{{ error.requiredLength }}"/> tegn.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
