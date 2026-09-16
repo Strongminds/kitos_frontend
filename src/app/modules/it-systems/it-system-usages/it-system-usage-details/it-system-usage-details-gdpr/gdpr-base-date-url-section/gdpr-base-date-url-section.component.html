@@ -1,4 +1,11 @@
 <app-accordion
+  [recommended]="choiceTypeRecommended"
+  [recommendedFilled]="
+    !!formGroup.controls.yesNoDontKnowControl.value &&
+    (formGroup.controls.yesNoDontKnowControl.value.value !== 'Yes' ||
+    (!!formGroup.controls.dateControl.value &&
+    !!(documentation$ | async)))
+  "
   [title]="title"
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"

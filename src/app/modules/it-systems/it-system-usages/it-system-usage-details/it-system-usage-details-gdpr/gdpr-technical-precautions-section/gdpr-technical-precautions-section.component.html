@@ -1,4 +1,10 @@
 <app-accordion
+  [recommended]="(technicalPrecautionsRecommended$ | async) === true"
+  [recommendedFilled]="
+    !!mainFormGroup.controls.yesNoDontKnowControl.value &&
+    (mainFormGroup.controls.yesNoDontKnowControl.value.value !== 'Yes' ||
+    !!(selectTechnicalDocumentation$ | async))
+  "
   title="Implementeret passende tekniske foranstaltninger"
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"

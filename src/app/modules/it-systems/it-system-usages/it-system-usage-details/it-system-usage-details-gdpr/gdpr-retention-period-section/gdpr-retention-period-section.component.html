@@ -1,4 +1,11 @@
 <app-accordion
+  [recommended]="(retentionPeriodRecommended$ | async) === true"
+  [recommendedFilled]="
+    !!formGroup.controls.yesNoDontKnowControl.value &&
+    (formGroup.controls.yesNoDontKnowControl.value.value !== 'Yes' ||
+    (!!formGroup.controls.dateControl.value &&
+    (formGroup.controls.frequencyControl.value ?? null) !== null))
+  "
   title="Er der bevaringsfrist på data inden de må slettes?"
   data-cy="retention-period-accordion"
   [isExpanded]="(isExpanded$ | async) ?? false"

@@ -1,4 +1,23 @@
 <app-accordion
+  [recommended]="
+    ((enablePlannedRiskAssessmentDateField$ | async) === true &&
+      (plannedRiskAssessmentDateRecommended$ | async) === true) ||
+    ((conductedRiskAssessmentEnabled$ | async) === true &&
+      (conductedRiskAssessmentRecommended$ | async) === true)
+  "
+  [recommendedFilled]="
+    ((enablePlannedRiskAssessmentDateField$ | async) !== true ||
+      (plannedRiskAssessmentDateRecommended$ | async) !== true ||
+      !!riskAssessmentFormGroup.controls.plannedDateControl.value) &&
+    ((conductedRiskAssessmentEnabled$ | async) !== true ||
+      (conductedRiskAssessmentRecommended$ | async) !== true ||
+      (!!riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value &&
+        (riskAssessmentFormGroup.controls.riskAssessmentConductedControl.value.value !== 'Yes' ||
+          (!!riskAssessmentFormGroup.controls.conductedDateControl.value &&
+            !!riskAssessmentFormGroup.controls.assessmentResultControl.value &&
+            !!(selectRiskDocumentation$ | async) &&
+            !!riskAssessmentFormGroup.controls.notesControl.value?.trim()))))
+  "
   title="Risikovurdering"
   [isExpanded]="(isExpanded$ | async) ?? false"
   (expandedChanged)="onExpandedChanged($event)"
