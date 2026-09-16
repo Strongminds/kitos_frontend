@@ -91,7 +91,7 @@ import {
   selectITSystemUsageEnableAndRecommendedTakenIntoUsageBy,
   selectITSystemUsageEnableAndRecommendedTechnicalSystemType,
   selectITSystemUsageEnableAndRecommendedVersion,
-  selectITSystemUsageEnableAndRecommendedWebAccessibility
+  selectITSystemUsageEnableAndRecommendedWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -418,6 +418,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .subscribe(() => {
           this.itSystemInformationForm.disable();
           this.itSystemApplicationForm.disable();
+          this.itSystemCriticalityForm.disable();
           this.webAccessibilityForm.disable();
         }),
     );
