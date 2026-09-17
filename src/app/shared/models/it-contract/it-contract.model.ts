@@ -56,6 +56,7 @@ export interface ITContract {
   LastEditedAtDate: Date;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
+  Note: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -132,5 +133,6 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     LastEditedAtDate: value.LastEditedAtDate,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
+    Note: value.Note,
   };
 };

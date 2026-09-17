@@ -176,7 +176,7 @@ export class GridUIConfigService {
       this.store
         .select(selectItContractsEnableAndRecommendedAgreementPeriod)
         .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.Concluded, ContractFields.ExpirationDate])),
-      this.store.select(selectItContractsEnableAndRecommendedNotes).pipe(mapUIConfigStatusToEnabled(), shouldEnable([])),
+      this.store.select(selectItContractsEnableAndRecommendedNotes).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.Note])),
 
       this.store.select(selectItContractsEnableAndRecommendedParentContract).pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.ParentContractName])),
 

@@ -47,6 +47,7 @@ export const uiModuleConfigFeature = createFeature({
     on(
       UIModuleConfigActions.getUIModuleConfig,
       UIModuleConfigActions.putUIModuleCustomization,
+      UIModuleConfigActions.putUIModuleCustomizations,
       (state): UIModuleConfigState => {
         return {
           ...state,

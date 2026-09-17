@@ -102,6 +102,44 @@ export class UIModuleCustomizationEffects {
     );
   });
 
+  putUIModuleCustomizations$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(UIModuleConfigActions.putUIModuleCustomizations),
+      concatLatestFrom(() => [this.store.select(selectOrganizationUuid).pipe(filterNullish())]),
+      concatMap(([{ module: moduleName, updatedNodeRequests }, organizationUuid]) =>
+        this.organizationInternalService
+          .getSingleOrganizationsInternalV2GetUIModuleCustomization({ moduleName, organizationUuid })
+          .pipe(
+            map((nodes) => this.addMissingNodes(nodes.nodes, moduleName)),
+            switchMap((existingUICustomization) => {
+              const requestDto = updatedNodeRequests.reduce<APIUIModuleCustomizationRequestDTO>(
+                (request, updatedNode) => this.getUIModuleCustomizationUpdateRequestDto(request.nodes, updatedNode),
+                { nodes: existingUICustomization },
+              );
+
+              return this.organizationInternalService
+                .putSingleOrganizationsInternalV2PutUIModuleCustomization({
+                  organizationUuid,
+                  moduleName,
+                  aPIUIModuleCustomizationRequestDTO: requestDto,
+                })
+                .pipe(
+                  map((uiModuleCustomizationDto) =>
+                    this.combineBlueprintWithCustomizationDto(
+                      uiModuleCustomizationDto,
+                      moduleName,
+                      UIModuleConfigActions.putUIModuleCustomizationSuccess,
+                    ),
+                  ),
+                  catchError(() => of(UIModuleConfigActions.putUIModuleCustomizationError())),
+                );
+            }),
+            catchError(() => of(UIModuleConfigActions.getUIModuleConfigError())),
+          ),
+      ),
+    );
+  });
+
   private getUIModuleConfigFromApi(moduleName: UIModuleConfigKey, organizationUuid: string) {
     return this.organizationInternalService
       .getSingleOrganizationsInternalV2GetUIModuleCustomization({

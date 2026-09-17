@@ -17,8 +17,4 @@ ng-select {
   background-color: theme.$color-white;
 }
 
-:host ::ng-deep .dropdown-has-recommended {
-  @include mixins.dropdown-has-recommended;
-}
-
 @include mixins.ng-select-medium-styles;
