@@ -91,7 +91,7 @@ import {
   selectITSystemUsageEnableAndRecommendedTakenIntoUsageBy,
   selectITSystemUsageEnableAndRecommendedTechnicalSystemType,
   selectITSystemUsageEnableAndRecommendedVersion,
-  selectITSystemUsageEnableAndRecommendedWebAccessibility
+  selectITSystemUsageEnableAndRecommendedWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
 import { selectRegularOptionTypes } from 'src/app/store/regular-option-type-store/selectors';
@@ -128,10 +128,10 @@ import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-u
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
-      purpose: new FormControl('', Validators.maxLength(250)),
-      localCallName: new FormControl(''),
-      localSystemId: new FormControl(''),
-      systemVersion: new FormControl(''),
+      purpose: new FormControl('', Validators.maxLength(200)),
+      localCallName: new FormControl('', Validators.maxLength(100)),
+      localSystemId: new FormControl('', Validators.maxLength(200)),
+      systemVersion: new FormControl('', Validators.maxLength(100)),
       technicalSystemTypes: new FormControl<MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] | undefined>(
         undefined,
       ),
@@ -418,6 +418,7 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
         .subscribe(() => {
           this.itSystemInformationForm.disable();
           this.itSystemApplicationForm.disable();
+          this.itSystemCriticalityForm.disable();
           this.webAccessibilityForm.disable();
         }),
     );
