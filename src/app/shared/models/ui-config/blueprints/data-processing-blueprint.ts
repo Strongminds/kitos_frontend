@@ -51,6 +51,7 @@ export const DataProcessingUiBluePrint = {
         enforceInvalidity: {
           text: $localize`Gennemtving deaktivering`,
           disableByDefault: true,
+          cannotBeRecommended: true,
         },
       },
     },
