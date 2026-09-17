@@ -14,6 +14,8 @@ import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badg
   imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, RecommendedBadgeComponent],
 })
 export class NumericInputComponent extends BaseFormComponent<number | undefined> implements AfterViewInit, OnDestroy {
+  // Undefined preserves the badge state derived from this field.
+  @Input() public recommendedFilled: boolean | undefined;
   @Input() public recommended = false;
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public minLength = 0;

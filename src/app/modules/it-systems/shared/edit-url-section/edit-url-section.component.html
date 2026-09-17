@@ -7,6 +7,7 @@
       placeholder="Fortegnelse"
       i18n-placeholder
       [recommended]="recommended"
+      [recommendedFilled]="recommendedFilled"
       (iconClick)="openDirectoryUrlDialog(simpleLink)"
       (clearClick)="clearSimpleLink()"
     ></app-link-textbox>
@@ -17,6 +18,7 @@
       i18n-title
       [isDisabled]="isDisabled"
       [recommended]="recommended"
+      [recommendedFilled]="recommendedFilled"
       (iconClick)="openDirectoryUrlDialog()"
       [simpleLink$]="simpleLink$"
     ></app-link-textbox>

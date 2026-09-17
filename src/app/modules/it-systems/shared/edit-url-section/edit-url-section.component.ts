@@ -16,6 +16,8 @@ import { EditSimpleLinkDialogComponent } from '../edit-url-dialog/edit-url-dialo
   imports: [LinkTextboxComponent, AsyncPipe],
 })
 export class EditUrlSectionComponent extends BaseComponent {
+  // Undefined preserves the badge state derived from this field.
+  @Input() recommendedFilled: boolean | undefined;
   @Input() title!: string;
   @Input() simpleLink$!: Observable<SimpleLink | undefined>;
   @Input() isDisabled = false;

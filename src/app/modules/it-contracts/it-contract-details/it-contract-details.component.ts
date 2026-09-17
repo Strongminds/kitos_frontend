@@ -36,6 +36,7 @@ import { ButtonComponent } from '../../../shared/components/buttons/button/butto
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
 import { DeleteContractDialogComponent } from './delete-contract-dialog/delete-contract-dialog.component';
+import { getItContractRecommendedTabBadges } from './it-contract-recommended-tabs.helper';
 
 @Component({
   selector: 'app-it-contract-details',
@@ -84,11 +85,14 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
 
+  private readonly recommendedTabBadges = getItContractRecommendedTabBadges(this.store);
+
   public readonly navigationItems: NavigationDrawerItem[] = [
     {
       label: $localize`Kontraktforside`,
       iconType: 'document',
       route: AppPath.frontpage,
+      recommendedBadge$: this.recommendedTabBadges.frontpage$,
     },
     {
       label: $localize`IT Systemer`,
@@ -107,12 +111,14 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       iconType: 'clipboard',
       route: AppPath.agreementDeadlines,
       enabled$: this.agreementDeadlinesTabEnabled$,
+      recommendedBadge$: this.recommendedTabBadges.deadlines$,
     },
     {
       label: $localize`Økonomi`,
       iconType: 'money',
       route: AppPath.economy,
       enabled$: this.economyTabEnabled$,
+      recommendedBadge$: this.recommendedTabBadges.economy$,
     },
     {
       label: $localize`Kontraktroller`,

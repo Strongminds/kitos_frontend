@@ -7,6 +7,23 @@
   (checkboxChanged)="onEnabledCheckboxChanged({ enabled: $event, fullKey: tabViewModel.fullKey })"
   [tooltipText]="(checkboxDisabled() | async) ? tabViewModel.helpText : undefined"
 >
+  <app-accordion-header class="recommendation-actions">
+    <app-button
+      buttonStyle="secondary"
+      size="x-small"
+      [disabled]="!tabViewModel.isEnabled || recommendableFields().length === 0 || (moduleEnabled$ | async) === false || (loading$ | async) === true"
+      (click)="$event.stopPropagation()"
+      (keydown)="$event.stopPropagation()"
+      (buttonClick)="toggleAllRecommended()"
+      data-cy="toggle-all-recommended"
+    >
+      @if (hasRecommendedFields()) {
+        <span i18n>Fjern alle anbefalinger</span>
+      } @else {
+        <span i18n>Markér alle som anbefalet</span>
+      }
+    </app-button>
+  </app-accordion-header>
   <app-divider></app-divider>
 
   <div class="form-section-top-padding">
