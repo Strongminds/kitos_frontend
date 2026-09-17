@@ -26,7 +26,7 @@ import { ItSystemKleOverviewComponent } from '../../../shared/it-system-kle-over
 import { StandardVerticalContentGridComponent } from '../../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { EmptyStateComponent } from '../../../../../shared/components/empty-states/empty-state.component';
 import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
-import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-system-usage-details-kle',
@@ -59,8 +59,19 @@ export class ItSystemUsageDetailsKleComponent extends BaseComponent implements O
     .select(selectItSystemUsageLocallyRemovedKleUuids)
     .pipe(filterNullish());
 
+  public readonly anyRelevantInheritedKle$ = combineLatest([
+    this.systemContextKleUuids$,
+    this.inheritedKleMarkedAsIrrelevantUuids$,
+  ]).pipe(map(([uuids, removed]) => uuids.some((uuid) => !removed.includes(uuid))));
+
   public readonly inheritedKleEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedInheritedKle).pipe(mapUIConfigStatusToEnabled());
+  public readonly inheritedKleRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedInheritedKle)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly localKleEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedLocalKle).pipe(mapUIConfigStatusToEnabled());
+  public readonly localKleRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLocalKle)
+    .pipe(mapUIConfigStatusToRecommended());
 
   constructor(
     private readonly store: Store,

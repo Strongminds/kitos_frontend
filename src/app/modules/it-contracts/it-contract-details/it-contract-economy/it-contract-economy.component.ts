@@ -71,9 +71,17 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
   });
 
   public readonly paymentModelEnabled$ = this.store.select(selectItContractsEnableAndRecommendedPaymentModel).pipe(mapUIConfigStatusToEnabled());
-  public readonly paymentModelRecommended$ = this.store.select(selectItContractsEnableAndRecommendedPaymentModel).pipe(mapUIConfigStatusToRecommended());
+  public readonly paymentModelRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedPaymentModel)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly externalPaymentEnabled$ = this.store.select(selectItContractsEnableAndRecommendedExternalPayment).pipe(mapUIConfigStatusToEnabled());
+  public readonly externalPaymentRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedExternalPayment)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly internalPaymentEnabled$ = this.store.select(selectItContractsEnableAndRecommendedInternalPayment).pipe(mapUIConfigStatusToEnabled());
+  public readonly internalPaymentRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedInternalPayment)
+    .pipe(mapUIConfigStatusToRecommended());
 
   constructor(
     private store: Store,

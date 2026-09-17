@@ -78,6 +78,7 @@ export class UiConfigTabSectionComponent {
   }
 
   private findFieldViewModel(fullKey: string): UIConfigNodeViewModel | undefined {
+    if (this.tabViewModel.fullKey === fullKey) return this.tabViewModel;
     return this.tabViewModel.children?.find((x) => x.fullKey === fullKey);
   }
 
@@ -104,9 +105,10 @@ export class UiConfigTabSectionComponent {
     const fullKey = $event.fullKey;
     const fieldViewModel = this.findFieldViewModel(fullKey);
     const dto: APICustomizedUINodeResponseDTO = {
-      enabled: fieldViewModel?.isEnabled ?? false,
       key: fullKey,
-      recommended: $event.recommended,
+      recommended: fieldViewModel?.isEnabled && !fieldViewModel.cannotBeRecommended
+        ? $event.recommended
+        : false,
     };
     this.dispatchPut(dto);
   }

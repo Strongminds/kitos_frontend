@@ -178,9 +178,15 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly processorsEnabled$ = this.store
     .select(selectDprEnableAndRecommendedProcessors)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly processorsRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedProcessors)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly subProcessorsEnabled$ = this.store
     .select(selectDprEnableAndRecommendedSubProcessors)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly subProcessorsRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedSubProcessors)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly responsibleUnitEnabled$ = this.store
     .select(selectDprEnableAndRecommendedResponsibleOrgUnit)
     .pipe(mapUIConfigStatusToEnabled());

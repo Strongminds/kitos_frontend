@@ -101,6 +101,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`IT Kontrakter`,
       iconType: 'folder-important',
       route: AppPath.itContracts,
+      recommendedBadge$: this.recommendedTabBadges.itContracts$,
       enabled$: combineAND([this.itContractsModuleEnabled$, this.itContractsEnabled$]),
     },
     {

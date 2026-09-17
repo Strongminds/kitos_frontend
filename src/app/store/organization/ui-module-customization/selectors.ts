@@ -56,6 +56,7 @@ const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: st
     return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
 
+// eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createFieldOrGroupEnabledAndRecommendedSelector = (module: UIModuleConfigKey, tabKey: string, fieldKey: string) =>
   createSelector(selectModuleConfig(module), (moduleConfig) => {
     const moduleConfigViewModels = moduleConfig?.moduleConfigViewModel;
@@ -628,7 +629,11 @@ function fieldOrGroupIsEnabledAndRecommended(
 
   const fieldFullKey = [tabFullKey, fieldKey].join('.');
   const fieldViewModel = tabViewModelChildren.find((vm) => vm.fullKey === fieldFullKey);
-  return { enabled: fieldViewModel?.isEnabled ?? true, recommended: fieldViewModel?.isRecommended ?? false };
+  return {
+    enabled: fieldViewModel?.isEnabled ?? true,
+    recommended: uiConfigViewModels.isEnabled !== false && tabViewModel?.isEnabled !== false &&
+      !fieldViewModel?.cannotBeRecommended && fieldViewModel?.isRecommended === true,
+  };
 }
 
 function getTabViewModelFromModule(

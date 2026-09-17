@@ -1,15 +1,23 @@
+import { inject } from '@angular/core';
 import { Selector, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { APIItContractResponseDTO } from 'src/app/api/v2';
+import { APIItContractResponseDTO, ItSystemUsageInternalV2Service } from 'src/app/api/v2';
 import {
   RecommendedBadgeState,
+  recommendedCollectionFilled,
   combineRecommendedBadgeState,
   mapUIConfigStatusToRecommended,
 } from 'src/app/shared/helpers/observable-helpers';
 import { selectContract } from 'src/app/store/it-contract/selectors';
 import {
   selectItContractEnableAndRecommendContractName,
+  selectItContractEnableAndRecommendedAgreementElements,
+  selectItContractEnableAndRecommendedSystemUsages,
+  selectItContractEnableAndRecommendedRelations,
+  selectItContractsEnableAndRecommendedExternalPayment,
+  selectItContractsEnableAndRecommendedInternalPayment,
+
   selectItContractEnableAndRecommendedContractId,
   selectItContractEnableAndRecommendExternalContactPerson,
   selectItContractEnableAndRecommendExternalContactPersonEmail,
@@ -45,6 +53,7 @@ export interface ItContractRecommendedTabBadges {
   frontpage$: Observable<RecommendedBadgeState>;
   deadlines$: Observable<RecommendedBadgeState>;
   economy$: Observable<RecommendedBadgeState>;
+  itSystems$: Observable<RecommendedBadgeState>;
 }
 
 /**
@@ -54,6 +63,7 @@ export interface ItContractRecommendedTabBadges {
  */
 export function getItContractRecommendedTabBadges(store: Store): ItContractRecommendedTabBadges {
   const contract$ = store.select(selectContract);
+  const relationsApi = inject(ItSystemUsageInternalV2Service);
 
   const field = (
     recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,
@@ -99,11 +109,25 @@ export function getItContractRecommendedTabBadges(store: Store): ItContractRecom
   ]);
 
   const economy$ = combineRecommendedBadgeState([
+    field(selectItContractsEnableAndRecommendedExternalPayment, (c) => !!c?.payments.external?.length),
+    field(selectItContractsEnableAndRecommendedInternalPayment, (c) => !!c?.payments.internal?.length),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.operationsRemunerationStartedAt)),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.paymentFrequency)),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.paymentModel)),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.priceRegulation)),
   ]);
 
-  return { frontpage$, deadlines$, economy$ };
+  const relationsRecommended$ = store.select(selectItContractEnableAndRecommendedRelations)
+    .pipe(mapUIConfigStatusToRecommended());
+  const itSystems$ = combineRecommendedBadgeState([
+    field(selectItContractEnableAndRecommendedAgreementElements, (c) => !!c?.general.agreementElements?.length),
+    field(selectItContractEnableAndRecommendedSystemUsages, (c) => !!c?.systemUsages?.length),
+    {
+      recommended$: relationsRecommended$,
+      filled$: recommendedCollectionFilled(contract$, relationsRecommended$, (c) =>
+        relationsApi.getManyItSystemUsageInternalV2GetRelations({ contractUuid: c.uuid })),
+    },
+  ]);
+
+  return { frontpage$, deadlines$, economy$, itSystems$ };
 }

@@ -117,6 +117,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Kontrakter`,
       iconType: 'clipboard',
       route: AppPath.itContracts,
+      recommendedBadge$: this.recommendedTabBadges.contracts$,
       enabled$: combineAND([this.itContractsModuleEnabled$, this.enabledContractsTab$]),
     },
     {
@@ -148,6 +149,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Relationer`,
       iconType: 'intersect',
       route: AppPath.relations,
+      recommendedBadge$: this.recommendedTabBadges.relations$,
       enabled$: this.enableSystemRelationsTab$,
     },
     {
@@ -173,6 +175,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Lokale KLE`,
       iconType: 'table',
       route: AppPath.kle,
+      recommendedBadge$: this.recommendedTabBadges.localKle$,
       enabled$: this.enableLocalKleTab$,
     },
     {

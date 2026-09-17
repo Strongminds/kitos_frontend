@@ -5,6 +5,8 @@
     <app-card-header
       title="'{{ usageName$ | async }}' har følgende relationer til andre systemer/snitflader"
       helpTextKey="it-system.usage.relation"
+      [recommended]="(outgoingRelationsRecommended$ | async) === true"
+      [recommendedFilled]="((usageRelations$ | async)?.length ?? 0) > 0"
       i18n-title
       >
     </app-card-header>
@@ -42,6 +44,8 @@
     <app-card-header
       title="Andre systemer har følgende relationer til '{{ usageName$ | async }}'"
       helpTextKey="it-system.usage.relations-used-by"
+      [recommended]="(incomingRelationsRecommended$ | async) === true"
+      [recommendedFilled]="((incomingRelations$ | async)?.length ?? 0) > 0"
       i18n-title
       >
     </app-card-header>

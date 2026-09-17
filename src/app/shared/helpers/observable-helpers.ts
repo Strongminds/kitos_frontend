@@ -1,5 +1,5 @@
 import { concatLatestFrom } from '@ngrx/operators';
-import { Observable, OperatorFunction, combineLatest, of } from 'rxjs';
+import { Observable, OperatorFunction, combineLatest, of, defer, catchError, shareReplay, startWith, switchMap } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 import { Cached } from '../models/cache-item.model';
 import { hasValidCache } from './date.helpers';
@@ -64,7 +64,7 @@ export function mapUIConfigStatusToEnabled(): OperatorFunction<{ enabled: boolea
  * Maps an observable of `{ enabled: boolean; recommended: boolean }` to an observable of `boolean` (the `recommended` field).
  */
 export function mapUIConfigStatusToRecommended(): OperatorFunction<{ enabled: boolean; recommended: boolean }, boolean> {
-  return map(({ recommended }) => recommended);
+  return map(({ enabled, recommended }) => enabled && recommended);
 }
 
 /**
@@ -99,5 +99,21 @@ export function combineRecommendedBadgeState(
       visible: states.some((state) => state.recommended),
       filled: states.every((state) => !state.recommended || state.filled),
     })),
+  );
+}
+
+/** Load collections missing from the detail response only when their badge needs them. */
+export function recommendedCollectionFilled<T>(
+  entity$: Observable<T | undefined>,
+  recommended$: Observable<boolean>,
+  load: (entity: T) => Observable<unknown[]>,
+): Observable<boolean> {
+  return combineLatest([entity$, recommended$]).pipe(
+    switchMap(([entity, recommended]) =>
+      entity && recommended
+        ? defer(() => load(entity)).pipe(map((items) => items.length > 0), startWith(false), catchError(() => of(false)))
+        : of(false),
+    ),
+    shareReplay({ bufferSize: 1, refCount: true }),
   );
 }

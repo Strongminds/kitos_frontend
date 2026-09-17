@@ -1,20 +1,32 @@
+import { inject } from '@angular/core';
 import { Selector, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   APIArchivingRegistrationsResponseDTO,
+  ItSystemUsageV2Service,
+  ItContractV2Service,
   APIYesNoDontKnowChoice,
   APIGDPRRegistrationsResponseDTO,
   APIGeneralDataResponseDTO,
 } from 'src/app/api/v2';
 import {
   RecommendedBadgeState,
+  recommendedCollectionFilled,
   combineRecommendedBadgeState,
   mapUIConfigStatusToRecommended,
 } from 'src/app/shared/helpers/observable-helpers';
-import { selectItSystemUsageArchiving, selectItSystemUsageGdpr, selectItSystemUsageGeneral } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsage, selectItSystemUsageArchiving, selectItSystemUsageGdpr, selectItSystemUsageGeneral } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystem } from 'src/app/store/it-system/selectors';
 import {
   selectITSystemUsageEnableAndRecommendedActive,
+  selectITSystemUsageEnableAndRecommendedAssociatedContracts,
+  selectITSystemUsageEnableAndRecommendedIncomingRelations,
+  selectITSystemUsageEnableAndRecommendedOutgoingRelations,
+  selectITSystemUsageEnableAndRecommendedInheritedKle,
+  selectITSystemUsageEnableAndRecommendedLocalKle,
+  selectITSystemUsageEnableAndRecommendedJournalPeriods,
+
   selectITSystemUsageEnableAndRecommendedAmountOfUsers,
   selectITSystemUsageEnableAndRecommendedArchiveDuty,
   selectITSystemUsageEnableAndRecommendedArchiveFrequency,
@@ -75,6 +87,9 @@ export interface ItSystemUsageRecommendedTabBadges {
   frontpage$: Observable<RecommendedBadgeState>;
   gdpr$: Observable<RecommendedBadgeState>;
   archiving$: Observable<RecommendedBadgeState>;
+  contracts$: Observable<RecommendedBadgeState>;
+  relations$: Observable<RecommendedBadgeState>;
+  localKle$: Observable<RecommendedBadgeState>;
 }
 
 /**
@@ -83,6 +98,9 @@ export interface ItSystemUsageRecommendedTabBadges {
  * entity, so this works even for tabs the user has not (yet) navigated to.
  */
 export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsageRecommendedTabBadges {
+  const usage$ = store.select(selectItSystemUsage);
+  const usageApi = inject(ItSystemUsageV2Service);
+  const contractsApi = inject(ItContractV2Service);
   const general$ = store.select(selectItSystemUsageGeneral);
   const gdpr$ = store.select(selectItSystemUsageGdpr);
   const archiving$ = store.select(selectItSystemUsageArchiving);
@@ -193,6 +211,7 @@ export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsag
   ]);
 
   const archivingTab$ = combineRecommendedBadgeState([
+    archivingField(selectITSystemUsageEnableAndRecommendedJournalPeriods, (a) => hasItems(a?.journalPeriods)),
     archivingField(selectITSystemUsageEnableAndRecommendedArchiveDuty, (a) => hasValue(a?.archiveDuty)),
     archivingField(selectITSystemUsageEnableAndRecommendedArchiveType, (a) => hasValue(a?.type)),
     archivingField(selectITSystemUsageEnableAndRecommendedArchiveLocation, (a) => hasValue(a?.location)),
@@ -204,5 +223,39 @@ export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsag
     archivingField(selectITSystemUsageEnableAndRecommendedNotes, (a) => hasText(a?.notes)),
   ]);
 
-  return { frontpage$, gdpr$: gdprTab$, archiving$: archivingTab$ };
+  const recommended = (selector: Selector<object, { enabled: boolean; recommended: boolean }>) =>
+    store.select(selector).pipe(mapUIConfigStatusToRecommended());
+  const contractsRecommended$ = recommended(selectITSystemUsageEnableAndRecommendedAssociatedContracts);
+  const incomingRecommended$ = recommended(selectITSystemUsageEnableAndRecommendedIncomingRelations);
+  const contracts$ = combineRecommendedBadgeState([{
+    recommended$: contractsRecommended$,
+    filled$: recommendedCollectionFilled(usage$, contractsRecommended$, (usage) =>
+      contractsApi.getManyItContractV2GetItContracts({ systemUsageUuid: usage.uuid, pageSize: 1 })),
+  }]);
+  const relations$ = combineRecommendedBadgeState([
+    {
+      recommended$: recommended(selectITSystemUsageEnableAndRecommendedOutgoingRelations),
+      filled$: usage$.pipe(map((usage) => hasItems(usage?.outgoingSystemRelations))),
+    },
+    {
+      recommended$: incomingRecommended$,
+      filled$: recommendedCollectionFilled(usage$, incomingRecommended$, (usage) =>
+        usageApi.getManyItSystemUsageV2GetIncomingSystemRelations({ systemUsageUuid: usage.uuid })),
+    },
+  ]);
+  const localKle$ = combineRecommendedBadgeState([
+    {
+      recommended$: recommended(selectITSystemUsageEnableAndRecommendedLocalKle),
+      filled$: usage$.pipe(map((usage) => hasItems(usage?.localKLEDeviations.addedKLE))),
+    },
+    {
+      recommended$: recommended(selectITSystemUsageEnableAndRecommendedInheritedKle),
+      filled$: combineLatest([usage$, store.select(selectItSystem)]).pipe(
+        map(([usage, system]) => system?.uuid === usage?.systemContext.uuid &&
+          (system?.kle.some((kle) => !usage?.localKLEDeviations.removedKLE.some((removed) => removed.uuid === kle.uuid)) ?? false)),
+      ),
+    },
+  ]);
+
+  return { frontpage$, gdpr$: gdprTab$, archiving$: archivingTab$, contracts$, relations$, localKle$ };
 }
