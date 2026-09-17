@@ -99,15 +99,12 @@ export const ItContractsUiBluePrint = {
       children: {
         agreementElements: {
           text: $localize`Aftaleelementer`,
-          cannotBeRecommended: true,
         },
         systemUsages: {
           text: $localize`IT Systemer`,
-          cannotBeRecommended: true,
         },
         relations: {
           text: $localize`Relationer`,
-          cannotBeRecommended: true,
         },
       },
     },
@@ -137,11 +134,9 @@ export const ItContractsUiBluePrint = {
         },
         extPayment: {
           text: $localize`Ekstern betaling`,
-          cannotBeRecommended: true,
         },
         intPayment: {
           text: $localize`Intern betaling`,
-          cannotBeRecommended: true,
         },
       },
     },

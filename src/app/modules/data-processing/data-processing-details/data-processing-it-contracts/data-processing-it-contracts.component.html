@@ -37,6 +37,8 @@
         title="Tilknyttede kontrakter"
         i18n-title
         helpTextKey="data-processing.edit-registration.contracts"
+        [recommended]="(associatedContractsRecommended$ | async) === true"
+        [recommendedFilled]="(anyAssociatedContracts$ | async) === true"
       ></app-card-header>
       <app-standard-vertical-content-grid>
         @if (anyAssociatedContracts$ | async) {

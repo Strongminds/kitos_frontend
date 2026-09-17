@@ -173,6 +173,8 @@
       title="Databehandlere"
       i18n-title
       helpTextKey="data-processing.edit-registration.processors"
+      [recommended]="(processorsRecommended$ | async) === true"
+      [recommendedFilled]="((dataProcessing$ | async)?.general?.dataProcessors?.length ?? 0) > 0"
     ></app-card-header>
     <app-processors-table></app-processors-table>
   </app-card>
@@ -184,6 +186,8 @@
       title="Underdatabehandlere"
       i18n-title
       helpTextKey="data-processing.edit-registration.subprocessors"
+      [recommended]="(subProcessorsRecommended$ | async) === true"
+      [recommendedFilled]="((dataProcessing$ | async)?.general?.subDataProcessors?.length ?? 0) > 0"
     ></app-card-header>
     <app-standard-vertical-content-grid>
       <app-sub-processors-table></app-sub-processors-table>
