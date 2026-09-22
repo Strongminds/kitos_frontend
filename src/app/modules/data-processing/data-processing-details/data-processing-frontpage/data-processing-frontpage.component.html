@@ -123,6 +123,7 @@
         [formGroup]="frontpageFormGroup"
         formName="agreementConclusionDate"
         class="input-two-thirds-column-width"
+        [recommended]="(agreementConclusionDateRecommended$ | async) === true"
         (valueChange)="patchFrontPage({ general: { agreementConcludedAt: $event?.toDateString() } })"
       ></app-datepicker>
       <app-textarea

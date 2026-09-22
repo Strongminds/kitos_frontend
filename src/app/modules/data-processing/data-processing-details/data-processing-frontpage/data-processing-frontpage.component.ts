@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatestWith, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, combineLatestWith, map } from 'rxjs';
 import {
   APIDataProcessingRegistrationValidationErrorChoice,
   APIIdentityNamePairResponseDTO,
@@ -169,6 +169,10 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly agreementConcludedRecommended$ = this.store
     .select(selectDprEnableAndRecommendedAgreementConcluded)
     .pipe(mapUIConfigStatusToRecommended());
+  public readonly agreementConclusionDateRecommended$ = combineLatest([
+    this.agreementConcludedRecommended$,
+    this.isAgreementConcluded$,
+  ]).pipe(map(([recommended, isAgreementConcluded]) => recommended && isAgreementConcluded));
   public readonly transferBasisEnabled$ = this.store
     .select(selectDprEnableAndRecommendedTransferBasis)
     .pipe(mapUIConfigStatusToEnabled());
