@@ -21,6 +21,7 @@ import { selectItSystem } from 'src/app/store/it-system/selectors';
 import {
   selectITSystemUsageEnableAndRecommendedActive,
   selectITSystemUsageEnableAndRecommendedAssociatedContracts,
+  selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive,
   selectITSystemUsageEnableAndRecommendedIncomingRelations,
   selectITSystemUsageEnableAndRecommendedOutgoingRelations,
   selectITSystemUsageEnableAndRecommendedInheritedKle,
@@ -227,11 +228,16 @@ export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsag
     store.select(selector).pipe(mapUIConfigStatusToRecommended());
   const contractsRecommended$ = recommended(selectITSystemUsageEnableAndRecommendedAssociatedContracts);
   const incomingRecommended$ = recommended(selectITSystemUsageEnableAndRecommendedIncomingRelations);
-  const contracts$ = combineRecommendedBadgeState([{
-    recommended$: contractsRecommended$,
-    filled$: recommendedCollectionFilled(usage$, contractsRecommended$, (usage) =>
-      contractsApi.getManyItContractV2GetItContracts({ systemUsageUuid: usage.uuid, pageSize: 1 })),
-  }]);
+  const contracts$ = combineRecommendedBadgeState([
+    {
+      recommended$: contractsRecommended$,
+      filled$: recommendedCollectionFilled(usage$, contractsRecommended$, (usage) =>
+        contractsApi.getManyItContractV2GetItContracts({ systemUsageUuid: usage.uuid, pageSize: 1 })),
+    },
+    generalField(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive, (g) =>
+      hasValue(g?.mainContract),
+    ),
+  ]);
   const relations$ = combineRecommendedBadgeState([
     {
       recommended$: recommended(selectITSystemUsageEnableAndRecommendedOutgoingRelations),

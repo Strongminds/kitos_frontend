@@ -124,6 +124,12 @@ export const selectDprEnableEnforceInvalidity = createDprFrontPageFieldSelector(
 export const selectDprEnableAndRecommendedEnforceInvalidity =
   createDprFrontPageFieldEnableAndRecommendedSelector('enforceInvalidity');
 
+//DPR -> IT Systems
+const createDprItSystemsFieldEnableAndRecommendedSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.DataProcessingRegistrations, 'itSystems', fieldKey);
+export const selectDprEnableAndRecommendedSystemUsages =
+  createDprItSystemsFieldEnableAndRecommendedSelector('systemUsages');
+
 //DPR -> IT Contract
 const createDprItContractsFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.DataProcessingRegistrations, 'itContracts', fieldKey);
@@ -563,6 +569,12 @@ export const selectItContractEnableAndRecommendedSystemUsages =
 export const selectItContractEnableRelations = createItContractsItSystemsFieldSelector('relations');
 export const selectItContractEnableAndRecommendedRelations =
   createItContractsItSystemsFieldEnableAndRecommendedSelector('relations');
+
+// Contracts > Data processing
+const createItContractsDataProcessingFieldEnableAndRecommendedSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'dataProcessing', fieldKey);
+export const selectItContractEnableAndRecommendedDataProcessingRegistrations =
+  createItContractsDataProcessingFieldEnableAndRecommendedSelector('dataProcessingRegistrations');
 
 //Contracts > Deadlines
 const createItContractsDeadlinesFieldSelector = (fieldKey: string) =>

@@ -111,6 +111,12 @@ export const ItContractsUiBluePrint = {
     dataProcessing: {
       text: $localize`Databehandling`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      children: {
+        dataProcessingRegistrations: {
+          text: $localize`Tilknyttede databehandlinger`,
+          isObligatory: true,
+        },
+      },
     },
     deadlines: {
       text: $localize`Aftalefrister`,

@@ -3,6 +3,8 @@
     title="IT Kontrakten gælder flg. databehandlingsregisteringer"
     i18n-title
     helpTextKey="it-contract.edit.data-processing"
+    [recommended]="(dataProcessingRegistrationsRecommended$ | async) === true"
+    [recommendedFilled]="(anyDataProcessingRegistrations$ | async) === true"
   ></app-card-header>
 
   <app-standard-vertical-content-grid>

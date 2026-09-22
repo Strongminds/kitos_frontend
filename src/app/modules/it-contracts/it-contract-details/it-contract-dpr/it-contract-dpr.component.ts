@@ -7,11 +7,13 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/c
 import { ConnectedDropdownDialogComponent } from 'src/app/shared/components/dialogs/connected-dropdown-dialog/connected-dropdown-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
+import { mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
   selectItContractDataProcessingRegistrations,
   selectItContractHasModifyPermissions,
 } from 'src/app/store/it-contract/selectors';
+import { selectItContractEnableAndRecommendedDataProcessingRegistrations } from 'src/app/store/organization/ui-module-customization/selectors';
 import { ItContractDataProcessingRegistrationsComponentStore } from './it-contract-dpr.component-store';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
@@ -49,6 +51,9 @@ export class ItContractDprComponent extends BaseComponent {
     .select(selectItContractDataProcessingRegistrations)
     .pipe(filterNullish());
   public readonly anyDataProcessingRegistrations$ = this.dataProcessingRegistrations$.pipe(matchNonEmptyArray());
+  public readonly dataProcessingRegistrationsRecommended$ = this.store
+    .select(selectItContractEnableAndRecommendedDataProcessingRegistrations)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
 
   constructor(

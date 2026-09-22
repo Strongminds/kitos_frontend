@@ -61,10 +61,10 @@ export class DataProcessingItContractsComponent extends BaseComponent implements
   });
 
   public readonly mainContractEnabled$ = this.store.select(selectDprEnableAndRecommendedMainContract).pipe(mapUIConfigStatusToEnabled());
-  public readonly associatedContractsEnabled$ = this.store.select(selectDprEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled());
-  public readonly associatedContractsRecommended$ = this.store
-    .select(selectDprEnableAndRecommendedAssociatedContracts)
+  public readonly mainContractRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedMainContract)
     .pipe(mapUIConfigStatusToRecommended());
+  public readonly associatedContractsEnabled$ = this.store.select(selectDprEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled());
 
   constructor(private store: Store) {
     super();

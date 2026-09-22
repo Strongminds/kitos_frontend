@@ -13,6 +13,7 @@ import { selectContract } from 'src/app/store/it-contract/selectors';
 import {
   selectItContractEnableAndRecommendContractName,
   selectItContractEnableAndRecommendedAgreementElements,
+  selectItContractEnableAndRecommendedDataProcessingRegistrations,
   selectItContractEnableAndRecommendedSystemUsages,
   selectItContractEnableAndRecommendedRelations,
   selectItContractsEnableAndRecommendedExternalPayment,
@@ -54,6 +55,7 @@ export interface ItContractRecommendedTabBadges {
   deadlines$: Observable<RecommendedBadgeState>;
   economy$: Observable<RecommendedBadgeState>;
   itSystems$: Observable<RecommendedBadgeState>;
+  dataProcessing$: Observable<RecommendedBadgeState>;
 }
 
 /**
@@ -129,5 +131,12 @@ export function getItContractRecommendedTabBadges(store: Store): ItContractRecom
     },
   ]);
 
-  return { frontpage$, deadlines$, economy$, itSystems$ };
+  const dataProcessing$ = combineRecommendedBadgeState([
+    field(
+      selectItContractEnableAndRecommendedDataProcessingRegistrations,
+      (c) => !!c?.dataProcessingRegistrations?.length,
+    ),
+  ]);
+
+  return { frontpage$, deadlines$, economy$, itSystems$, dataProcessing$ };
 }

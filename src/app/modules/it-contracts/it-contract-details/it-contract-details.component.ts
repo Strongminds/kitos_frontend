@@ -105,6 +105,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`Databehandling`,
       iconType: 'folder-important',
       route: AppPath.dataProcessing,
+      recommendedBadge$: this.recommendedTabBadges.dataProcessing$,
       enabled$: combineAND([this.dataProcessingModuleEnabled$, this.dataProcessingTabEnabled$]),
     },
     {

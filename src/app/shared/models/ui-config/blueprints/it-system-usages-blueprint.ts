@@ -240,6 +240,7 @@ export const ItSystemUsageUiBluePrint = {
       children: {
         inheritedKle: {
           text: $localize`Nedarvede opgaver (Data fra IT Systemkataloget)`,
+          cannotBeRecommended: true,
         },
         localKle: {
           text: $localize`Lokale tilknyttede opgaver`,

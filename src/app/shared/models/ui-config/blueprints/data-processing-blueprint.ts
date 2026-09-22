@@ -56,6 +56,12 @@ export const DataProcessingUiBluePrint = {
     itSystems: {
       text: $localize`IT Systemer`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      children: {
+        systemUsages: {
+          text: $localize`IT Systemer`,
+          isObligatory: true,
+        },
+      },
     },
     itContracts: {
       text: $localize`IT Kontrakter`,
@@ -63,10 +69,10 @@ export const DataProcessingUiBluePrint = {
       children: {
         mainContract: {
           text: $localize`Hvilken kontrakt skal angive om databehandlingen er aktiv`,
-          cannotBeRecommended: true,
         },
         associatedContracts: {
           text: $localize`Tilknyttede kontrakter`,
+          cannotBeRecommended: true,
         },
       },
     },

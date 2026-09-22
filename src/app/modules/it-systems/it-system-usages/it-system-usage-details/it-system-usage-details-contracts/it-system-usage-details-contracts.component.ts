@@ -86,9 +86,12 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   public readonly associatedContractsRecommended$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedAssociatedContracts)
     .pipe(mapUIConfigStatusToRecommended());
-  public readonly contractToDetermineIsActiveEnabled$ = this.store.select(
-    selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive,
-  );
+  public readonly contractToDetermineIsActiveEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractToDetermineIsActiveRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive)
+    .pipe(mapUIConfigStatusToRecommended());
 
   public readonly contractCreationPermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 

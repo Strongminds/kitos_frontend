@@ -107,6 +107,7 @@
             formName="mainContract"
             [formGroup]="contractSelectionForm"
             [data]="availableContractsForSelection$ | async"
+            [recommended]="(contractToDetermineIsActiveRecommended$ | async) === true"
             (valueChange)="patchMainContract($event)"
           ></app-dropdown>
           @if (mainContract$ | async) {

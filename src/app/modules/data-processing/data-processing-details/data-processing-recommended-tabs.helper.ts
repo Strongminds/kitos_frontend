@@ -13,16 +13,17 @@ import {
   selectDprEnableAndRecommendedDataResponsible,
   selectDprEnableAndRecommendedLastChangedAt,
   selectDprEnableAndRecommendedLastChangedBy,
+  selectDprEnableAndRecommendedMainContract,
   selectDprEnableAndRecommendedName,
   selectDprEnableAndRecommendedProcessors,
   selectDprEnableAndRecommendedSubProcessors,
-  selectDprEnableAndRecommendedAssociatedContracts,
   selectDprEnableAndRecommendedOversights,
   selectDprEnableAndRecommendedOversightInterval,
   selectDprEnableAndRecommendedOversightOptions,
   selectDprEnableAndRecommendedResponsibleOrgUnit,
   selectDprEnableAndRecommendedScheduledInspectionDate,
   selectDprEnableAndRecommendedStatus,
+  selectDprEnableAndRecommendedSystemUsages,
   selectDprEnableAndRecommendedTransferBasis,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
@@ -40,6 +41,7 @@ export interface DataProcessingRecommendedTabBadges {
   frontpage$: Observable<RecommendedBadgeState>;
   oversight$: Observable<RecommendedBadgeState>;
   itContracts$: Observable<RecommendedBadgeState>;
+  itSystems$: Observable<RecommendedBadgeState>;
 }
 
 /**
@@ -107,8 +109,12 @@ export function getDataProcessingRecommendedTabBadges(store: Store): DataProcess
   ]);
 
   const itContracts$ = combineRecommendedBadgeState([
-    field(selectDprEnableAndRecommendedAssociatedContracts, (dpr) => !!dpr?.general.associatedContracts?.length),
+    field(selectDprEnableAndRecommendedMainContract, (dpr) => hasValue(dpr?.general.mainContract)),
   ]);
 
-  return { frontpage$, oversight$, itContracts$ };
+  const itSystems$ = combineRecommendedBadgeState([
+    field(selectDprEnableAndRecommendedSystemUsages, (dpr) => !!dpr?.systemUsages?.length),
+  ]);
+
+  return { frontpage$, oversight$, itContracts$, itSystems$ };
 }

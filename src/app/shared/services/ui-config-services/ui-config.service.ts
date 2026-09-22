@@ -16,11 +16,32 @@ import { UINodeCustomization } from '../../models/ui-config/ui-node-customizatio
 export class UIConfigService {
   public buildUIModuleConfig(uiModuleCustomizations: UINodeCustomization[], module: UIModuleConfigKey): UIModuleConfig {
     const blueprint = this.getUIBlueprintWithFullKeys(module);
+    const normalizedCustomizations = this.normalizeLegacyRecommendations(uiModuleCustomizations, module);
     const moduleConfigViewModel: UIConfigNodeViewModel | undefined = this.buildUIConfigNodeViewModels(
       blueprint,
-      uiModuleCustomizations,
+      normalizedCustomizations,
     );
     return { module, moduleConfigViewModel, cacheTime: undefined };
+  }
+
+  private normalizeLegacyRecommendations(
+    customizations: UINodeCustomization[],
+    module: UIModuleConfigKey,
+  ): UINodeCustomization[] {
+    if (module !== UIModuleConfigKey.DataProcessingRegistrations) return customizations;
+
+    const mainContractKey = `${module}.itContracts.mainContract`;
+    const associatedContractsKey = `${module}.itContracts.associatedContracts`;
+    const mainContract = customizations.find((node) => node.fullKey === mainContractKey);
+    const associatedContracts = customizations.find((node) => node.fullKey === associatedContractsKey);
+
+    if (mainContract?.recommended !== undefined || associatedContracts?.recommended !== true) return customizations;
+
+    if (!mainContract) return [...customizations, { fullKey: mainContractKey, recommended: true }];
+
+    return customizations.map((node) =>
+      node.fullKey === mainContractKey ? { ...node, recommended: true } : node,
+    );
   }
 
   public getAllNodesOfBlueprint(moduleKey: UIModuleConfigKey): SimpleUINodeBlueprint[] {

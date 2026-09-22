@@ -25,7 +25,8 @@ import { NativeTableComponent } from '../../../../shared/components/native-table
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { CreateDprSystemUsageComponent } from './create-dpr-system-usage/create-dpr-system-usage.component';
 import { selectITSystemUsageEnableAndRecommendedStatus } from 'src/app/store/organization/ui-module-customization/selectors';
-import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
+import { selectDprEnableAndRecommendedSystemUsages } from 'src/app/store/organization/ui-module-customization/selectors';
 
 @Component({
   selector: 'app-data-processing-it-systems',
@@ -49,6 +50,9 @@ import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-he
 export class DataProcessingItSystemsComponent extends BaseComponent {
   public readonly systemUsages$ = this.store.select(selectDataProcessingSystems).pipe(filterNullish());
   public readonly anySystemUsages$ = this.systemUsages$.pipe(matchNonEmptyArray());
+  public readonly systemUsagesRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedSystemUsages)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly systemUsageStatusEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedStatus).pipe(mapUIConfigStatusToEnabled());
 
   public readonly hasModifyPermissions$ = this.store.select(selectDataProcessingHasModifyPermissions);

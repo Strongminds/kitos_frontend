@@ -95,6 +95,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
+      recommendedBadge$: this.recommendedTabBadges.itSystems$,
       enabled$: combineAND([this.itSystemsModuleEnabled$, this.itSystemsEnabled$]),
     },
     {
