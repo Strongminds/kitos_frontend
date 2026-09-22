@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map, tap } from 'rxjs';
+import { ItContractV2Service } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -86,7 +87,10 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
-  private readonly recommendedTabBadges = getItSystemUsageRecommendedTabBadges(this.store);
+  private readonly recommendedTabBadges = getItSystemUsageRecommendedTabBadges(
+    this.store,
+    this.contractsApi,
+  );
 
   public readonly breadCrumbs$ = combineLatest([
     this.organizationName$,
@@ -199,6 +203,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     private actions$: Actions,
     private notificationService: NotificationService,
     private dialogOpenerService: DialogOpenerService,
+    private contractsApi: ItContractV2Service,
   ) {
     super();
   }

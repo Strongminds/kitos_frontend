@@ -1,4 +1,3 @@
-import { inject } from '@angular/core';
 import { Selector, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -63,9 +62,11 @@ export interface ItContractRecommendedTabBadges {
  * recommended fields are filled in - read directly from the loaded contract, so this works
  * even for tabs the user has not (yet) navigated to.
  */
-export function getItContractRecommendedTabBadges(store: Store): ItContractRecommendedTabBadges {
+export function getItContractRecommendedTabBadges(
+  store: Store,
+  relationsApi: ItSystemUsageInternalV2Service,
+): ItContractRecommendedTabBadges {
   const contract$ = store.select(selectContract);
-  const relationsApi = inject(ItSystemUsageInternalV2Service);
 
   const field = (
     recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,

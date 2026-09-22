@@ -5,6 +5,7 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
+import { ItSystemUsageInternalV2Service } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -85,7 +86,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
 
-  private readonly recommendedTabBadges = getItContractRecommendedTabBadges(this.store);
+  private readonly recommendedTabBadges = getItContractRecommendedTabBadges(this.store, this.relationsApi);
 
   public readonly navigationItems: NavigationDrawerItem[] = [
     {
@@ -155,6 +156,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     private notificationService: NotificationService,
     private actions$: Actions,
     private dialog: MatDialog,
+    private relationsApi: ItSystemUsageInternalV2Service,
   ) {
     super();
   }

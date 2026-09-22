@@ -1,10 +1,8 @@
-import { inject } from '@angular/core';
 import { Selector, Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
   APIArchivingRegistrationsResponseDTO,
-  ItSystemUsageV2Service,
   ItContractV2Service,
   APIYesNoDontKnowChoice,
   APIGDPRRegistrationsResponseDTO,
@@ -22,7 +20,6 @@ import {
   selectITSystemUsageEnableAndRecommendedActive,
   selectITSystemUsageEnableAndRecommendedAssociatedContracts,
   selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive,
-  selectITSystemUsageEnableAndRecommendedIncomingRelations,
   selectITSystemUsageEnableAndRecommendedOutgoingRelations,
   selectITSystemUsageEnableAndRecommendedInheritedKle,
   selectITSystemUsageEnableAndRecommendedLocalKle,
@@ -98,10 +95,11 @@ export interface ItSystemUsageRecommendedTabBadges {
  * recommended fields are filled in - read directly from the loaded it-system usage
  * entity, so this works even for tabs the user has not (yet) navigated to.
  */
-export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsageRecommendedTabBadges {
+export function getItSystemUsageRecommendedTabBadges(
+  store: Store,
+  contractsApi: ItContractV2Service,
+): ItSystemUsageRecommendedTabBadges {
   const usage$ = store.select(selectItSystemUsage);
-  const usageApi = inject(ItSystemUsageV2Service);
-  const contractsApi = inject(ItContractV2Service);
   const general$ = store.select(selectItSystemUsageGeneral);
   const gdpr$ = store.select(selectItSystemUsageGdpr);
   const archiving$ = store.select(selectItSystemUsageArchiving);
@@ -227,7 +225,6 @@ export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsag
   const recommended = (selector: Selector<object, { enabled: boolean; recommended: boolean }>) =>
     store.select(selector).pipe(mapUIConfigStatusToRecommended());
   const contractsRecommended$ = recommended(selectITSystemUsageEnableAndRecommendedAssociatedContracts);
-  const incomingRecommended$ = recommended(selectITSystemUsageEnableAndRecommendedIncomingRelations);
   const contracts$ = combineRecommendedBadgeState([
     {
       recommended$: contractsRecommended$,
@@ -242,11 +239,6 @@ export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsag
     {
       recommended$: recommended(selectITSystemUsageEnableAndRecommendedOutgoingRelations),
       filled$: usage$.pipe(map((usage) => hasItems(usage?.outgoingSystemRelations))),
-    },
-    {
-      recommended$: incomingRecommended$,
-      filled$: recommendedCollectionFilled(usage$, incomingRecommended$, (usage) =>
-        usageApi.getManyItSystemUsageV2GetIncomingSystemRelations({ systemUsageUuid: usage.uuid })),
     },
   ]);
   const localKle$ = combineRecommendedBadgeState([
