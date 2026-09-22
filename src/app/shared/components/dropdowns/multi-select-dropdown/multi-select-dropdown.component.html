@@ -1,5 +1,6 @@
 <div [class.dropdown-has-recommended]="recommended">
 <ng-select
+      #recommendedSelect
   #selectDropdown
   class="{{ size }} "
   [placeholder]="text"
@@ -26,6 +27,13 @@
   [addTag]="includeAddTag ? onCreateNew : false"
   data-cy="multi-select-dropdown"
 >
+      <ng-template ng-placeholder-tmp>
+        <div class="ng-placeholder">
+          {{ text }}
+          <app-recommended-badge [visible]="recommended" [filled]="recommendedSelect.hasValue"></app-recommended-badge>
+        </div>
+      </ng-template>
+
   <ng-template ng-option-tmp let-item="item" let-item$="item$">
     <div class="select-option-row" [attr.data-cy]="item.dataCy">
       <input

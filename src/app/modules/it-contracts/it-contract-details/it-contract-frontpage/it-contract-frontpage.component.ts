@@ -161,7 +161,7 @@ export class ItContractFrontpageComponent extends BaseComponent implements OnIni
   public readonly validParentContracts$ = this.componentStore.validParentContracts$;
 
   public readonly frontpageFormGroup = new FormGroup({
-    name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
+    name: new FormControl<string>({ value: '', disabled: true }, [Validators.required, Validators.maxLength(200)]),
     contractId: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     contractType: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
     contractTemplate: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),

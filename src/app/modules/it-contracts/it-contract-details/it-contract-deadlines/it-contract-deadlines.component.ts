@@ -56,7 +56,7 @@ import { NumericInputComponent as NumericInputComponent_1 } from '../../../../sh
   ],
 })
 export class ItContractDeadlinesComponent extends BaseComponent implements OnInit {
-  private readonly deadlineDurationYearsUpperLimit = 100;
+  public readonly deadlineDurationYearsUpperLimit = 100;
 
   public readonly extendTypes$ = this.store.select(selectRegularOptionTypes('it-contract-extend-types'));
   public readonly terminationPeriodTypes$ = this.store

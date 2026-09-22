@@ -10,6 +10,8 @@ import { UINodeCustomization } from 'src/app/shared/models/ui-config/ui-node-cus
 import { UIModuleConfigActions } from 'src/app/store/organization/ui-module-customization/actions';
 import { selectUIConfigLoading } from 'src/app/store/organization/ui-module-customization/selectors';
 import { AccordionComponent } from '../../../../shared/components/accordion/accordion.component';
+import { AccordionHeaderComponent } from '../../../../shared/components/accordion-header/accordion-header.component';
+import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { CheckboxButtonComponent } from '../../../../shared/components/buttons/checkbox-button/checkbox-button.component';
 import { DividerComponent } from '../../../../shared/components/divider/divider.component';
 import { InfoIconComponent } from '../../../../shared/components/icons/info-icon.component';
@@ -23,6 +25,8 @@ import { TooltipComponent } from '../../../../shared/components/tooltip/tooltip.
   styleUrl: './ui-config-tab-section.component.scss',
   imports: [
     AccordionComponent,
+    AccordionHeaderComponent,
+    ButtonComponent,
     DividerComponent,
     ParagraphComponent,
     StandardVerticalContentGridComponent,
@@ -48,6 +52,29 @@ export class UiConfigTabSectionComponent {
 
   public noChildrenLabel(): string {
     return this.tabViewModel.fullKey.endsWith('.usageArchive') ? $localize`undermodul` : $localize`faneblad`;
+  }
+
+  public recommendableFields(): UIConfigNodeViewModel[] {
+    return this.tabViewModel.children?.filter((field) => !field.cannotBeRecommended && field.isEnabled) ?? [];
+  }
+
+  public hasRecommendedFields(): boolean {
+    return this.recommendableFields().some((field) => field.isRecommended);
+  }
+
+  public toggleAllRecommended(): void {
+    if (!this.tabViewModel.isEnabled) return;
+
+    const recommended = !this.hasRecommendedFields();
+    const updatedNodeRequests = this.recommendableFields()
+      .filter((field) => (field.isRecommended ?? false) !== recommended)
+      .map((field) => ({ key: field.fullKey, recommended }));
+
+    if (updatedNodeRequests.length === 0) return;
+
+    this.store.dispatch(
+      UIModuleConfigActions.putUIModuleCustomizations({ module: this.moduleKey, updatedNodeRequests }),
+    );
   }
 
   private findFieldViewModel(fullKey: string): UIConfigNodeViewModel | undefined {

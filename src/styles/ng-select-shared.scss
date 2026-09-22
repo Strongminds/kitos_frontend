@@ -63,14 +63,12 @@ app-tree-node-dropdown ng-select.ng-select.medium {
     display: flex;
     align-items: center;
 
-    &::after {
-      content: "Anbefalet";
-      white-space: nowrap;
-      @include mixins.recommended-badge;
-    }
-  }
+    // Keep the badge clickable above the empty dropdown's search input.
+    z-index: 1;
+    pointer-events: none;
 
-  &.ng-has-value .ng-placeholder::after {
-    @include mixins.recommended-badge-filled;
+    app-recommended-badge {
+      pointer-events: auto;
+    }
   }
 }
