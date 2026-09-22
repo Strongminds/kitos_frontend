@@ -7,7 +7,6 @@
     <input
       matInput
       [type]="type"
-      [maxlength]="maxLength"
       [formControlName]="formName"
       [pattern]="pattern"
       (input)="formInputValueChange($event)"
@@ -31,6 +30,9 @@
       <app-tooltip [text]="info" matSuffix>
         <app-info-icon></app-info-icon>
       </app-tooltip>
+    }
+    @if (formName && formGroup.controls[formName].getError('maxlength'); as error) {
+      <mat-error i18n>Maksimalt {{ error.requiredLength }} tegn.</mat-error>
     }
   </mat-form-field>
 }

@@ -15,7 +15,6 @@
       i18n-text
       [formGroup]="itSystemInformationForm"
       formName="localCallName"
-      [maxLength]="100"
       [recommended]="(nameRecommended$ | async) === true"
       (valueChange)="patchGeneral({ localCallName: $event })"
     ></app-textbox>
@@ -25,7 +24,6 @@
         i18n-text
         [formGroup]="itSystemInformationForm"
         formName="localSystemId"
-        [maxLength]="200"
         [recommended]="(systemIdRecommended$ | async) === true"
         (valueChange)="patchGeneral({ localSystemId: $event })"
       ></app-textbox>
@@ -36,7 +34,6 @@
         i18n-text
         [formGroup]="itSystemInformationForm"
         formName="systemVersion"
-        [maxLength]="100"
         [recommended]="(versionRecommended$ | async) === true"
         (valueChange)="patchGeneral({ systemVersion: $event })"
       ></app-textbox>

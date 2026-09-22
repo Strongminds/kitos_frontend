@@ -15,6 +15,7 @@ export const ItSystemUsageUiBluePrint = {
         name: {
           text: $localize`Navn`,
           isObligatory: true,
+          cannotBeRecommended: true,
         },
         systemId: {
           text: $localize`System ID`,

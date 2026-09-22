@@ -144,6 +144,14 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       defaultDateFilterOperator: 'lte',
     },
     {
+      field: GridFields.Note,
+      title: $localize`Bemærkninger`,
+      section: this.contractSection,
+      style: 'default-wrap',
+      hidden: true,
+      persistId: 'note',
+    },
+    {
       field: GridFields.CriticalityUuid,
       dataField: 'CriticalityName',
       title: $localize`Kritikalitet`,

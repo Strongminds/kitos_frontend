@@ -97,7 +97,7 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
   public readonly archiveDutyRecommendationOptions = archiveDutyRecommendationChoiceOptions;
 
   public readonly itSystemFrontpageFormGroup = new FormGroup({
-    name: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.required),
+    name: new FormControl<string | undefined>({ value: undefined, disabled: true }, [Validators.required, Validators.maxLength(100)]),
     parentSystem: new FormControl<APIIdentityNamePairResponseDTO | undefined>({ value: undefined, disabled: true }),
     formerName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     rightsHolder: new FormControl<APIShallowOrganizationResponseDTO | undefined>({ value: undefined, disabled: true }),
@@ -115,8 +115,8 @@ export class ItSystemCatalogDetailsFrontpageComponent extends BaseComponent impl
       disabled: true,
     }),
     description: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    legalName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
-    legalDataProcessorName: new FormControl<string | undefined>({ value: undefined, disabled: true }),
+    legalName: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.maxLength(100)),
+    legalDataProcessorName: new FormControl<string | undefined>({ value: undefined, disabled: true }, Validators.maxLength(100)),
   });
 
   public readonly nationalArchivesText = ARCHIVE_TEXT;

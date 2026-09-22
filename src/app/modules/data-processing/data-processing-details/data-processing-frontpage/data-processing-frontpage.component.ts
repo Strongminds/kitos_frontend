@@ -119,7 +119,7 @@ export class DataProcessingFrontpageComponent extends BaseComponent implements O
   public readonly isValid$ = this.store.select(selectDataProcessingIsValid);
 
   public readonly frontpageFormGroup = new FormGroup({
-    name: new FormControl<string>({ value: '', disabled: true }, Validators.required),
+    name: new FormControl<string>({ value: '', disabled: true }, [Validators.required, Validators.maxLength(200)]),
     status: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     lastChangedBy: new FormControl<string | undefined>({ value: undefined, disabled: true }),
     lastChangedAt: new FormControl<Date | undefined>({ value: undefined, disabled: true }),

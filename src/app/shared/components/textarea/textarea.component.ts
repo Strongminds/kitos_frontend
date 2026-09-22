@@ -2,6 +2,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { NgClass } from '@angular/common';
 import { AfterViewInit, Component, Input } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatFormField, MatLabel } from '@angular/material/select';
 import { BaseFormComponent } from '../../base/base-form.component';
@@ -11,7 +12,17 @@ import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badg
   selector: 'app-textarea',
   templateUrl: 'textarea.component.html',
   styleUrls: ['textarea.component.scss'],
-  imports: [MatFormField, FormsModule, ReactiveFormsModule, MatLabel, MatInput, CdkTextareaAutosize, NgClass, RecommendedBadgeComponent],
+  imports: [
+    MatError,
+    MatFormField,
+    FormsModule,
+    ReactiveFormsModule,
+    MatLabel,
+    MatInput,
+    CdkTextareaAutosize,
+    NgClass,
+    RecommendedBadgeComponent,
+  ],
 })
 export class TextAreaComponent extends BaseFormComponent<string> implements AfterViewInit {
   // Undefined preserves the badge state derived from this field.

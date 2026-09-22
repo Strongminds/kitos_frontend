@@ -52,8 +52,8 @@ export class CreateOrganizationDialogComponent extends GlobalAdminOrganizationsD
 
   public readonly organizationTypeOptions = organizationTypeOptions;
   public formGroup = new FormGroup({
-    name: new FormControl<string | undefined>(undefined, Validators.required),
-    cvr: new FormControl<string | undefined>(undefined, cvrValidator()),
+    name: new FormControl<string | undefined>(undefined, [Validators.required, Validators.maxLength(100)]),
+    cvr: new FormControl<string | undefined>(undefined, [cvrValidator(), Validators.maxLength(10)]),
     organizationType: new FormControl<OrganizationType>(defaultOrganizationType, Validators.required),
     foreignCountryCode: new FormControl<ShallowOptionType | undefined>(undefined),
     isSupplier: new FormControl<boolean | undefined>(undefined),
