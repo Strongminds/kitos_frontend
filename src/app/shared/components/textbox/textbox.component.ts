@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatError } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { MatFormField, MatLabel, MatPrefix, MatSuffix } from '@angular/material/select';
@@ -16,6 +17,7 @@ import { TooltipComponent } from '../tooltip/tooltip.component';
   templateUrl: 'textbox.component.html',
   styleUrls: ['textbox.component.scss'],
   imports: [
+    MatError,
     MatFormField,
     FormsModule,
     ReactiveFormsModule,

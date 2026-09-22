@@ -108,7 +108,7 @@ import { ItSystemUsageDetailsJournalPeriodWriteDialogComponent } from '../write-
   ],
 })
 export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent implements OnInit {
-  private readonly journalFrequencyInputUpperLimit = 100;
+  public readonly journalFrequencyInputUpperLimit = 100;
 
   public readonly archiveForm = new FormGroup(
     {

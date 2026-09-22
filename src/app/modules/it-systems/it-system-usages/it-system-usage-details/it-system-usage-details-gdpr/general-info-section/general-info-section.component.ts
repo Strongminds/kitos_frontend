@@ -1,6 +1,6 @@
 ﻿import { AsyncPipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { Observable, map } from 'rxjs';
 import { APIGDPRWriteRequestDTO } from 'src/app/api/v2';
@@ -62,7 +62,7 @@ export class GeneralInfoSectionComponent extends BaseComponent implements OnInit
   );
   public readonly generalInformationForm = new FormGroup(
     {
-      purpose: new FormControl(''),
+      purpose: new FormControl('', Validators.maxLength(250)),
       isDataProcessingAgreementRequired: new FormControl<IsDataProcessingAgreementRequired | undefined>(undefined),
     },
     { updateOn: 'blur' },
