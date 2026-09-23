@@ -5,15 +5,15 @@ import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
-import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { combineAND, mapUIConfigStatusToEnabled} from 'src/app/shared/helpers/observable-helpers';
+import { combineAND, mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessingHasDeletePermissions,
@@ -58,12 +58,24 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
 
   public readonly hasDeletePermission$ = this.store.select(selectDataProcessingHasDeletePermissions);
 
-  public readonly itSystemsEnabled$ = this.store.select(selectDprEnableAndRecommendedItSystems).pipe(mapUIConfigStatusToEnabled());
-  public readonly itContractsEnabled$ = this.store.select(selectDprEnableAndRecommendedItContracts).pipe(mapUIConfigStatusToEnabled());
-  public readonly oversightEnabled$ = this.store.select(selectDprEnableAndRecommendedOversight).pipe(mapUIConfigStatusToEnabled());
-  public readonly dprRolesEnabled$ = this.store.select(selectDprEnableAndRecommendedRoles).pipe(mapUIConfigStatusToEnabled());
-  public readonly dprNotificationsEnabled$ = this.store.select(selectDprEnableAndRecommendedNotifications).pipe(mapUIConfigStatusToEnabled());
-  public readonly dprReferencesEnabled$ = this.store.select(selectDprEnableAndRecommendedReferences).pipe(mapUIConfigStatusToEnabled());
+  public readonly itSystemsEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedItSystems)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly itContractsEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedItContracts)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly oversightEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedOversight)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly dprRolesEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedRoles)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly dprNotificationsEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedNotifications)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly dprReferencesEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedReferences)
+    .pipe(mapUIConfigStatusToEnabled());
 
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
@@ -162,7 +174,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
   public showDeleteDialog(): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker p� du vil slette registeringen?`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette registeringen?`;
     confirmationDialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(
@@ -198,7 +210,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
         .select(selectDataProcessingHasReadPermissions)
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
-          this.notificationService.showError($localize`Du har ikke l�seadgang til denne Databehandling`);
+          this.notificationService.showError($localize`Du har ikke læseadgang til denne Databehandling`);
           this.router.navigate([`${AppPath.dataProcessing}`]);
         }),
     );
