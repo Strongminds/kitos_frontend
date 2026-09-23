@@ -93,7 +93,7 @@ export class SubProcessorsTableComponent extends BaseComponent {
   }
 
   onEdit(subprocessor: APIDataProcessorRegistrationSubDataProcessorResponseDTO) {
-    this.rawSubprocessors$.pipe(first()).subscribe((rawSubprocessors) => {
+    this.rawSubprocessors$.pipe(first()).subscribe(() => {
       const dialogRef = this.dialog.open(CreateSubProcessorDialogComponent);
       const dialogInstance = dialogRef.componentInstance;
       dialogInstance.subprocessor = subprocessor;

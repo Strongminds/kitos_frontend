@@ -1,10 +1,10 @@
-﻿import { AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map, tap } from 'rxjs';
-import { ItContractV2Service } from 'src/app/api/v2';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
@@ -47,7 +47,6 @@ import { BreadcrumbsComponent } from '../../../../shared/components/breadcrumbs/
 import { ButtonComponent } from '../../../../shared/components/buttons/button/button.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../../shared/components/navigation-drawer/navigation-drawer.component';
-import { getItSystemUsageRecommendedTabBadges } from './it-system-usage-recommended-tabs.helper';
 
 @Component({
   templateUrl: 'it-system-usage-details.component.html',
@@ -87,10 +86,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
 
-  private readonly recommendedTabBadges = getItSystemUsageRecommendedTabBadges(
-    this.store,
-    this.contractsApi,
-  );
+  private readonly recommendedTabBadges = this.recommendedBadgesService.usage;
 
   public readonly breadCrumbs$ = combineLatest([
     this.organizationName$,
@@ -141,6 +137,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Systemroller`,
       iconType: 'roles',
       route: AppPath.roles,
+      recommendedBadge$: this.recommendedTabBadges.roles$,
       enabled$: this.enableSystemRolesTab$,
     },
     {
@@ -186,12 +183,14 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
+      recommendedBadge$: this.recommendedTabBadges.notifications$,
       enabled$: this.enableNotificationsTab$,
     },
     {
       label: $localize`Lokale referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
+      recommendedBadge$: this.recommendedTabBadges.references$,
       enabled$: this.enableLocalReferencesTab$,
     },
   ];
@@ -203,7 +202,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
     private actions$: Actions,
     private notificationService: NotificationService,
     private dialogOpenerService: DialogOpenerService,
-    private contractsApi: ItContractV2Service,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }
@@ -227,7 +226,7 @@ export class ITSystemUsageDetailsComponent extends BaseComponent implements OnIn
         .select(selectITSystemUsageHasReadPermission)
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
-          this.notificationService.showError($localize`Du har ikke læseadgang til dette IT System`);
+          this.notificationService.showError($localize`Du har ikke l�seadgang til dette IT System`);
           this.router.navigate([`${AppPath.itSystems}/${AppPath.itSystemUsages}`]);
         }),
     );

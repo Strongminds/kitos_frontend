@@ -1,3 +1,4 @@
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -7,13 +8,11 @@ import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/c
 import { ConnectedDropdownDialogComponent } from 'src/app/shared/components/dialogs/connected-dropdown-dialog/connected-dropdown-dialog.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
-import { mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
   selectItContractDataProcessingRegistrations,
   selectItContractHasModifyPermissions,
 } from 'src/app/store/it-contract/selectors';
-import { selectItContractEnableAndRecommendedDataProcessingRegistrations } from 'src/app/store/organization/ui-module-customization/selectors';
 import { ItContractDataProcessingRegistrationsComponentStore } from './it-contract-dpr.component-store';
 import { CardComponent } from '../../../../shared/components/card/card.component';
 import { CardHeaderComponent } from '../../../../shared/components/card-header/card-header.component';
@@ -47,19 +46,19 @@ import { CollectionExtensionButtonComponent } from '../../../../shared/component
 ],
 })
 export class ItContractDprComponent extends BaseComponent {
+  public readonly recommendedBadge$ = this.recommendedBadgesService.contract.dataProcessing$;
+
   public readonly dataProcessingRegistrations$ = this.store
     .select(selectItContractDataProcessingRegistrations)
     .pipe(filterNullish());
   public readonly anyDataProcessingRegistrations$ = this.dataProcessingRegistrations$.pipe(matchNonEmptyArray());
-  public readonly dataProcessingRegistrationsRecommended$ = this.store
-    .select(selectItContractEnableAndRecommendedDataProcessingRegistrations)
-    .pipe(mapUIConfigStatusToRecommended());
   public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
 
   constructor(
     private readonly store: Store,
     private readonly dialog: MatDialog,
     private readonly componentStore: ItContractDataProcessingRegistrationsComponentStore,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }

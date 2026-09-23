@@ -99,6 +99,7 @@ export function combineRecommendedBadgeState(
       visible: states.some((state) => state.recommended),
       filled: states.every((state) => !state.recommended || state.filled),
     })),
+    shareReplay({ bufferSize: 1, refCount: true }),
   );
 }
 

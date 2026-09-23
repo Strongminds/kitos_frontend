@@ -1,10 +1,10 @@
 <app-card>
   <app-card-header
+    [recommended]="(recommendedBadge$ | async)?.visible ?? false"
+    [recommendedFilled]="(recommendedBadge$ | async)?.filled ?? false"
     title="IT Kontrakten gælder flg. databehandlingsregisteringer"
     i18n-title
     helpTextKey="it-contract.edit.data-processing"
-    [recommended]="(dataProcessingRegistrationsRecommended$ | async) === true"
-    [recommendedFilled]="(anyDataProcessingRegistrations$ | async) === true"
   ></app-card-header>
 
   <app-standard-vertical-content-grid>

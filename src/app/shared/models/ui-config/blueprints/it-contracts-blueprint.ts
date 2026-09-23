@@ -148,6 +148,12 @@ export const ItContractsUiBluePrint = {
     },
     contractRoles: {
       text: $localize`Kontraktroller`,
+      children: {
+        roles: {
+          text: $localize`Kontraktroller`,
+          isObligatory: true,
+        },
+      },
     },
     hierarchy: {
       text: $localize`Hierarki`,
@@ -155,10 +161,22 @@ export const ItContractsUiBluePrint = {
     },
     advice: {
       text: $localize`Advis`,
+      children: {
+        notifications: {
+          text: $localize`Advis`,
+          isObligatory: true,
+        },
+      },
     },
     references: {
       text: $localize`Referencer`,
       helpText: uiConfigHelpTexts.cannotChangeTab,
+      children: {
+        references: {
+          text: $localize`Referencer`,
+          isObligatory: true,
+        },
+      },
     },
   },
 };

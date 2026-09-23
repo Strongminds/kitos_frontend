@@ -96,12 +96,30 @@ export const DataProcessingUiBluePrint = {
     },
     roles: {
       text: $localize`Databehandlingsroller`,
+      children: {
+        roles: {
+          text: $localize`Databehandlingsroller`,
+          isObligatory: true,
+        },
+      },
     },
     notifications: {
       text: $localize`Advis`,
+      children: {
+        notifications: {
+          text: $localize`Advis`,
+          isObligatory: true,
+        },
+      },
     },
     references: {
       text: $localize`Referencer`,
+      children: {
+        references: {
+          text: $localize`Referencer`,
+          isObligatory: true,
+        },
+      },
     },
   },
 };

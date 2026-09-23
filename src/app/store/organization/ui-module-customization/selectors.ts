@@ -603,6 +603,26 @@ export const selectItContractsEnableInternalPayment = createItContractsEconomyFi
 export const selectItContractsEnableAndRecommendedInternalPayment =
   createItContractsEconomyFieldEnableAndRecommendedSelector('intPayment');
 
+// Shared registration collections (required fields within their tabs)
+export const selectItContractEnableAndRecommendedRoleAssignments =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'contractRoles', 'roles');
+export const selectItContractEnableAndRecommendedNotificationCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'advice', 'notifications');
+export const selectItContractEnableAndRecommendedReferenceCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'references', 'references');
+export const selectDprEnableAndRecommendedRoleAssignments =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.DataProcessingRegistrations, 'roles', 'roles');
+export const selectDprEnableAndRecommendedNotificationCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.DataProcessingRegistrations, 'notifications', 'notifications');
+export const selectDprEnableAndRecommendedReferenceCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.DataProcessingRegistrations, 'references', 'references');
+export const selectITSystemUsageEnableAndRecommendedRoleAssignments =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItSystemUsage, 'systemRoles', 'roles');
+export const selectITSystemUsageEnableAndRecommendedNotificationCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItSystemUsage, 'advice', 'notifications');
+export const selectITSystemUsageEnableAndRecommendedReferenceCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItSystemUsage, 'localReferences', 'references');
+
 function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: string): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
   return tabViewModel?.isEnabled ?? true;

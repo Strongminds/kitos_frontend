@@ -1,10 +1,11 @@
-﻿import { AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { combineLatest, distinctUntilChanged, filter, first, map } from 'rxjs';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
@@ -34,7 +35,6 @@ import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/bre
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
-import { getDataProcessingRecommendedTabBadges } from './data-processing-recommended-tabs.helper';
 
 @Component({
   selector: 'app-data-processing-details',
@@ -68,7 +68,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
 
-  private readonly recommendedTabBadges = getDataProcessingRecommendedTabBadges(this.store);
+  private readonly recommendedTabBadges = this.recommendedBadgesService.dataProcessing;
 
   public readonly breadCrumbs$ = combineLatest([this.dprName$, this.dprUuid$]).pipe(
     map(([dprName, dprUuid]): BreadCrumb[] => [
@@ -116,18 +116,21 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`Databehandlingsroller`,
       iconType: 'roles',
       route: AppPath.roles,
+      recommendedBadge$: this.recommendedTabBadges.roles$,
       enabled$: this.dprRolesEnabled$,
     },
     {
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
+      recommendedBadge$: this.recommendedTabBadges.notifications$,
       enabled$: this.dprNotificationsEnabled$,
     },
     {
       label: $localize`Referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
+      recommendedBadge$: this.recommendedTabBadges.references$,
       enabled$: this.dprReferencesEnabled$,
     },
   ];
@@ -139,6 +142,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     private notificationService: NotificationService,
     private actions$: Actions,
     private dialog: MatDialog,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }
@@ -158,7 +162,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
   public showDeleteDialog(): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent);
     const confirmationDialogInstance = confirmationDialogRef.componentInstance as ConfirmationDialogComponent;
-    confirmationDialogInstance.bodyText = $localize`Er du sikker på du vil slette registeringen?`;
+    confirmationDialogInstance.bodyText = $localize`Er du sikker p� du vil slette registeringen?`;
     confirmationDialogInstance.confirmColor = 'warn';
 
     this.subscriptions.add(
@@ -194,7 +198,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
         .select(selectDataProcessingHasReadPermissions)
         .pipe(filter((hasReadPermission) => hasReadPermission === false))
         .subscribe(() => {
-          this.notificationService.showError($localize`Du har ikke læseadgang til denne Databehandling`);
+          this.notificationService.showError($localize`Du har ikke l�seadgang til denne Databehandling`);
           this.router.navigate([`${AppPath.dataProcessing}`]);
         }),
     );

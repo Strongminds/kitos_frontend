@@ -1,12 +1,10 @@
+import { RegistrationRecommendedBadges, recommendedField, hasText, hasValue } from 'src/app/shared/helpers/registration-recommended-badges.helper';
 import { Selector, Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  APIArchivingRegistrationsResponseDTO,
   ItContractV2Service,
   APIYesNoDontKnowChoice,
-  APIGDPRRegistrationsResponseDTO,
-  APIGeneralDataResponseDTO,
 } from 'src/app/api/v2';
 import {
   RecommendedBadgeState,
@@ -61,17 +59,6 @@ import {
   selectITSystemUsageEnableAndRecommendedWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
-type General = APIGeneralDataResponseDTO | undefined;
-type Gdpr = APIGDPRRegistrationsResponseDTO | undefined;
-type Archiving = APIArchivingRegistrationsResponseDTO | undefined;
-
-function hasText(value: string | null | undefined): boolean {
-  return !!value?.trim();
-}
-
-function hasValue<T>(value: T | null | undefined): boolean {
-  return value !== null && value !== undefined;
-}
 
 function hasDependentGdprValue(choice: string | null | undefined, filled: boolean): boolean {
   return choice === APIYesNoDontKnowChoice.Yes ? filled : hasValue(choice);
@@ -81,7 +68,7 @@ function hasItems<T>(value: Array<T> | null | undefined): boolean {
   return !!value && value.length > 0;
 }
 
-export interface ItSystemUsageRecommendedTabBadges {
+export interface ItSystemUsageRecommendedTabBadges extends RegistrationRecommendedBadges {
   frontpage$: Observable<RecommendedBadgeState>;
   gdpr$: Observable<RecommendedBadgeState>;
   archiving$: Observable<RecommendedBadgeState>;
@@ -91,42 +78,25 @@ export interface ItSystemUsageRecommendedTabBadges {
 }
 
 /**
- * Computes, per tab, whether the tab has any recommended field and whether all of its
- * recommended fields are filled in - read directly from the loaded it-system usage
- * entity, so this works even for tabs the user has not (yet) navigated to.
+ * Combines module-specific tab rules with the shared roles, advis and references
+ * streams. Badge state is available even before the user visits a tab; collections
+ * absent from the loaded registration are fetched only when recommended.
  */
 export function getItSystemUsageRecommendedTabBadges(
   store: Store,
   contractsApi: ItContractV2Service,
+  registrationBadges: RegistrationRecommendedBadges,
 ): ItSystemUsageRecommendedTabBadges {
   const usage$ = store.select(selectItSystemUsage);
   const general$ = store.select(selectItSystemUsageGeneral);
   const gdpr$ = store.select(selectItSystemUsageGdpr);
   const archiving$ = store.select(selectItSystemUsageArchiving);
 
-  const generalField = (
-    recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,
-    filled: (general: General) => boolean,
-  ) => ({
-    recommended$: store.select(recommendedSelector).pipe(mapUIConfigStatusToRecommended()),
-    filled$: general$.pipe(map(filled)),
-  });
+  const generalField = recommendedField(store, general$);
 
-  const gdprField = (
-    recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,
-    filled: (gdpr: Gdpr) => boolean,
-  ) => ({
-    recommended$: store.select(recommendedSelector).pipe(mapUIConfigStatusToRecommended()),
-    filled$: gdpr$.pipe(map(filled)),
-  });
+  const gdprField = recommendedField(store, gdpr$);
 
-  const archivingField = (
-    recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,
-    filled: (archiving: Archiving) => boolean,
-  ) => ({
-    recommended$: store.select(recommendedSelector).pipe(mapUIConfigStatusToRecommended()),
-    filled$: archiving$.pipe(map(filled)),
-  });
+  const archivingField = recommendedField(store, archiving$);
 
   const frontpage$ = combineRecommendedBadgeState([
     generalField(selectITSystemUsageEnableAndRecommendedName, (g) => hasText(g?.localCallName)),
@@ -255,5 +225,5 @@ export function getItSystemUsageRecommendedTabBadges(
     },
   ]);
 
-  return { frontpage$, gdpr$: gdprTab$, archiving$: archivingTab$, contracts$, relations$, localKle$ };
+  return { ...registrationBadges, frontpage$, gdpr$: gdprTab$, archiving$: archivingTab$, contracts$, relations$, localKle$ };
 }

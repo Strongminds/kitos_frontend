@@ -3,10 +3,10 @@
 @if ((outgoingRelationsEnabled$ | async) && selected === ItSystemUsageRelationSegmentOption.Outgoing) {
   <app-card>
     <app-card-header
+    [recommended]="(recommendedBadge$ | async)?.visible ?? false"
+    [recommendedFilled]="(recommendedBadge$ | async)?.filled ?? false"
       title="'{{ usageName$ | async }}' har følgende relationer til andre systemer/snitflader"
       helpTextKey="it-system.usage.relation"
-      [recommended]="(outgoingRelationsRecommended$ | async) === true"
-      [recommendedFilled]="((usageRelations$ | async)?.length ?? 0) > 0"
       i18n-title
       >
     </app-card-header>

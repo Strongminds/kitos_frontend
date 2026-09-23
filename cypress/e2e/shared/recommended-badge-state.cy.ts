@@ -1,4 +1,4 @@
-import { BehaviorSubject, firstValueFrom, of, Subject } from 'rxjs';
+import { BehaviorSubject, defer, finalize, firstValueFrom, of, Subject } from 'rxjs';
 import {
   combineRecommendedBadgeState,
   mapUIConfigStatusToRecommended,
@@ -6,6 +6,34 @@ import {
 } from '../../../src/app/shared/helpers/observable-helpers';
 
 describe('Recommendation badge state', () => {
+  it('Shares badge subscriptions between navigation and headers and releases them when unused', () => {
+    const filled$ = new BehaviorSubject(false);
+    let subscriptions = 0;
+    let teardowns = 0;
+    const badge$ = combineRecommendedBadgeState([{
+      recommended$: of(true),
+      filled$: defer(() => {
+        subscriptions++;
+        return filled$.pipe(finalize(() => teardowns++));
+      }),
+    }]);
+    const navigation: unknown[] = [];
+    const header: unknown[] = [];
+    const first = badge$.subscribe(state => navigation.push(state));
+    const second = badge$.subscribe(state => header.push(state));
+    expect(subscriptions).to.equal(1);
+    filled$.next(true);
+    expect(header).to.deep.equal(navigation);
+    expect(header[1]).to.deep.equal({ visible: true, filled: true });
+    first.unsubscribe();
+    expect(teardowns).to.equal(0);
+    second.unsubscribe();
+    expect(teardowns).to.equal(1);
+    const next = badge$.subscribe();
+    expect(subscriptions).to.equal(2);
+    next.unsubscribe();
+  });
+
   const field = (recommended: boolean, filled: boolean) => ({ recommended$: of(recommended), filled$: of(filled) });
 
   it('Ignores empty children which are not recommended', async () => {

@@ -70,7 +70,7 @@ export class LocalAdminIsmsResponsibleOrganizationsComponent extends BaseCompone
     dialogInstance.textField = 'name';
     dialogInstance.dropdownText = $localize`Vælg leverandør`;
     dialogInstance.onOpen = () => this.onOpenAddDialog();
-    dialogInstance.save.subscribe(($event: any) => {
+    dialogInstance.save.subscribe(($event: ShallowOrganization) => {
       this.saveSupplier($event);
     });
   }

@@ -1,7 +1,8 @@
-import { Selector, Store } from '@ngrx/store';
+import { RegistrationRecommendedBadges, recommendedField, hasText, hasValue } from 'src/app/shared/helpers/registration-recommended-badges.helper';
+import { Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { APIDataProcessingRegistrationResponseDTO, APIYesNoIrrelevantChoice } from 'src/app/api/v2';
+import { APIYesNoIrrelevantChoice } from 'src/app/api/v2';
 import {
   RecommendedBadgeState,
   combineRecommendedBadgeState,
@@ -27,17 +28,8 @@ import {
   selectDprEnableAndRecommendedTransferBasis,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
-type DataProcessing = APIDataProcessingRegistrationResponseDTO | undefined;
 
-function hasText(value: string | null | undefined): boolean {
-  return !!value?.trim();
-}
-
-function hasValue<T>(value: T | null | undefined): boolean {
-  return value !== null && value !== undefined;
-}
-
-export interface DataProcessingRecommendedTabBadges {
+export interface DataProcessingRecommendedTabBadges extends RegistrationRecommendedBadges {
   frontpage$: Observable<RecommendedBadgeState>;
   oversight$: Observable<RecommendedBadgeState>;
   itContracts$: Observable<RecommendedBadgeState>;
@@ -45,20 +37,17 @@ export interface DataProcessingRecommendedTabBadges {
 }
 
 /**
- * Computes, per tab, whether the tab has any recommended field and whether all of its
- * recommended fields are filled in - read directly from the loaded data processing
- * registration, so this works even for tabs the user has not (yet) navigated to.
+ * Combines module-specific tab rules with the shared roles, advis and references
+ * streams. Badge state is available even before the user visits a tab; collections
+ * absent from the loaded registration are fetched only when recommended.
  */
-export function getDataProcessingRecommendedTabBadges(store: Store): DataProcessingRecommendedTabBadges {
+export function getDataProcessingRecommendedTabBadges(
+  store: Store,
+  registrationBadges: RegistrationRecommendedBadges,
+): DataProcessingRecommendedTabBadges {
   const dpr$ = store.select(selectDataProcessing);
 
-  const field = (
-    recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,
-    filled: (dpr: DataProcessing) => boolean,
-  ) => ({
-    recommended$: store.select(recommendedSelector).pipe(mapUIConfigStatusToRecommended()),
-    filled$: dpr$.pipe(map(filled)),
-  });
+  const field = recommendedField(store, dpr$);
 
   const agreementConcludedRecommended$ = store
     .select(selectDprEnableAndRecommendedAgreementConcluded)
@@ -116,5 +105,5 @@ export function getDataProcessingRecommendedTabBadges(store: Store): DataProcess
     field(selectDprEnableAndRecommendedSystemUsages, (dpr) => !!dpr?.systemUsages?.length),
   ]);
 
-  return { frontpage$, oversight$, itContracts$, itSystems$ };
+  return { ...registrationBadges, frontpage$, oversight$, itContracts$, itSystems$ };
 }

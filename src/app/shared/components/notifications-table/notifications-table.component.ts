@@ -122,7 +122,10 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
             ownerResourceType: this.ownerResourceType,
             notificationUuid: notification.uuid,
             ownerResourceUuid: this.entityUuid,
-            onComplete: () => this.getNotifications(),
+            onComplete: () => {
+              this.store.dispatch(UserNotificationActions.notificationChanged(this.ownerResourceType));
+              this.getNotifications();
+            },
           });
         } else {
           this.notificationService.showError($localize`Fejl: kan ikke deaktivere en advis uden uuid.`);
@@ -141,7 +144,10 @@ export class NotificationsTableComponent extends BaseComponent implements OnInit
             ownerResourceType: this.ownerResourceType,
             notificationUuid: notification.uuid,
             ownerResourceUuid: this.entityUuid,
-            onComplete: () => this.getNotifications(),
+            onComplete: () => {
+              this.store.dispatch(UserNotificationActions.notificationChanged(this.ownerResourceType));
+              this.getNotifications();
+            },
           });
         } else {
           this.notificationService.showError($localize`Fejl: kan ikke slette en advis uden uuid.`);

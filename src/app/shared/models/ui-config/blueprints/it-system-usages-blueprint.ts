@@ -157,6 +157,12 @@ export const ItSystemUsageUiBluePrint = {
     },
     systemRoles: {
       text: $localize`Systemroller`,
+      children: {
+        roles: {
+          text: $localize`Systemroller`,
+          isObligatory: true,
+        },
+      },
     },
     organization: {
       text: $localize`Organisation`,
@@ -249,9 +255,21 @@ export const ItSystemUsageUiBluePrint = {
     },
     advice: {
       text: $localize`Advis`,
+      children: {
+        notifications: {
+          text: $localize`Advis`,
+          isObligatory: true,
+        },
+      },
     },
     localReferences: {
       text: $localize`Lokale referencer`,
+      children: {
+        references: {
+          text: $localize`Lokale referencer`,
+          isObligatory: true,
+        },
+      },
     },
     usageArchive: {
       text: $localize`Anvendelseshistorik`,

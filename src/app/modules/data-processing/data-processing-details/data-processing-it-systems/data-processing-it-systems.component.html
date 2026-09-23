@@ -1,10 +1,10 @@
 <app-card>
   <app-card-header
+    [recommended]="(recommendedBadge$ | async)?.visible ?? false"
+    [recommendedFilled]="(recommendedBadge$ | async)?.filled ?? false"
     title="IT System"
     i18n-title
     helpTextKey="data-processing.edit-registration.it-systems"
-    [recommended]="(systemUsagesRecommended$ | async) === true"
-    [recommendedFilled]="(anySystemUsages$ | async) === true"
   ></app-card-header>
 
   <app-standard-vertical-content-grid>
