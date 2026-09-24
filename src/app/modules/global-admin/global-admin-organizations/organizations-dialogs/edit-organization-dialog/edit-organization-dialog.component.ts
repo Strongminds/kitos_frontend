@@ -16,7 +16,6 @@ import {
   getOrganizationType,
   OrganizationOData,
   OrganizationType,
-  OrganizationTypeEnum,
   organizationTypeOptions,
 } from 'src/app/shared/models/organization/organization-odata.model';
 import { cvrValidator } from 'src/app/shared/validators/cvr.validator';

@@ -1,20 +1,28 @@
+import { RegistrationRecommendedBadges, recommendedField, hasText, hasValue } from 'src/app/shared/helpers/registration-recommended-badges.helper';
 import { Selector, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  APIArchivingRegistrationsResponseDTO,
+  ItContractV2Service,
   APIYesNoDontKnowChoice,
-  APIGDPRRegistrationsResponseDTO,
-  APIGeneralDataResponseDTO,
 } from 'src/app/api/v2';
 import {
   RecommendedBadgeState,
+  recommendedCollectionFilled,
   combineRecommendedBadgeState,
   mapUIConfigStatusToRecommended,
 } from 'src/app/shared/helpers/observable-helpers';
-import { selectItSystemUsageArchiving, selectItSystemUsageGdpr, selectItSystemUsageGeneral } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystemUsage, selectItSystemUsageArchiving, selectItSystemUsageGdpr, selectItSystemUsageGeneral } from 'src/app/store/it-system-usage/selectors';
+import { selectItSystem } from 'src/app/store/it-system/selectors';
 import {
   selectITSystemUsageEnableAndRecommendedActive,
+  selectITSystemUsageEnableAndRecommendedAssociatedContracts,
+  selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive,
+  selectITSystemUsageEnableAndRecommendedOutgoingRelations,
+  selectITSystemUsageEnableAndRecommendedInheritedKle,
+  selectITSystemUsageEnableAndRecommendedLocalKle,
+  selectITSystemUsageEnableAndRecommendedJournalPeriods,
+
   selectITSystemUsageEnableAndRecommendedAmountOfUsers,
   selectITSystemUsageEnableAndRecommendedArchiveDuty,
   selectITSystemUsageEnableAndRecommendedArchiveFrequency,
@@ -51,17 +59,6 @@ import {
   selectITSystemUsageEnableAndRecommendedWebAccessibility,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
-type General = APIGeneralDataResponseDTO | undefined;
-type Gdpr = APIGDPRRegistrationsResponseDTO | undefined;
-type Archiving = APIArchivingRegistrationsResponseDTO | undefined;
-
-function hasText(value: string | null | undefined): boolean {
-  return !!value?.trim();
-}
-
-function hasValue<T>(value: T | null | undefined): boolean {
-  return value !== null && value !== undefined;
-}
 
 function hasDependentGdprValue(choice: string | null | undefined, filled: boolean): boolean {
   return choice === APIYesNoDontKnowChoice.Yes ? filled : hasValue(choice);
@@ -71,45 +68,35 @@ function hasItems<T>(value: Array<T> | null | undefined): boolean {
   return !!value && value.length > 0;
 }
 
-export interface ItSystemUsageRecommendedTabBadges {
+export interface ItSystemUsageRecommendedTabBadges extends RegistrationRecommendedBadges {
   frontpage$: Observable<RecommendedBadgeState>;
   gdpr$: Observable<RecommendedBadgeState>;
   archiving$: Observable<RecommendedBadgeState>;
+  contracts$: Observable<RecommendedBadgeState>;
+  relations$: Observable<RecommendedBadgeState>;
+  localKle$: Observable<RecommendedBadgeState>;
 }
 
 /**
- * Computes, per tab, whether the tab has any recommended field and whether all of its
- * recommended fields are filled in - read directly from the loaded it-system usage
- * entity, so this works even for tabs the user has not (yet) navigated to.
+ * Combines module-specific tab rules with the shared roles, advis and references
+ * streams. Badge state is available even before the user visits a tab; collections
+ * absent from the loaded registration are fetched only when recommended.
  */
-export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsageRecommendedTabBadges {
+export function getItSystemUsageRecommendedTabBadges(
+  store: Store,
+  contractsApi: ItContractV2Service,
+  registrationBadges: RegistrationRecommendedBadges,
+): ItSystemUsageRecommendedTabBadges {
+  const usage$ = store.select(selectItSystemUsage);
   const general$ = store.select(selectItSystemUsageGeneral);
   const gdpr$ = store.select(selectItSystemUsageGdpr);
   const archiving$ = store.select(selectItSystemUsageArchiving);
 
-  const generalField = (
-    recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,
-    filled: (general: General) => boolean,
-  ) => ({
-    recommended$: store.select(recommendedSelector).pipe(mapUIConfigStatusToRecommended()),
-    filled$: general$.pipe(map(filled)),
-  });
+  const generalField = recommendedField(store, general$);
 
-  const gdprField = (
-    recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,
-    filled: (gdpr: Gdpr) => boolean,
-  ) => ({
-    recommended$: store.select(recommendedSelector).pipe(mapUIConfigStatusToRecommended()),
-    filled$: gdpr$.pipe(map(filled)),
-  });
+  const gdprField = recommendedField(store, gdpr$);
 
-  const archivingField = (
-    recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,
-    filled: (archiving: Archiving) => boolean,
-  ) => ({
-    recommended$: store.select(recommendedSelector).pipe(mapUIConfigStatusToRecommended()),
-    filled$: archiving$.pipe(map(filled)),
-  });
+  const archivingField = recommendedField(store, archiving$);
 
   const frontpage$ = combineRecommendedBadgeState([
     generalField(selectITSystemUsageEnableAndRecommendedName, (g) => hasText(g?.localCallName)),
@@ -193,6 +180,7 @@ export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsag
   ]);
 
   const archivingTab$ = combineRecommendedBadgeState([
+    archivingField(selectITSystemUsageEnableAndRecommendedJournalPeriods, (a) => hasItems(a?.journalPeriods)),
     archivingField(selectITSystemUsageEnableAndRecommendedArchiveDuty, (a) => hasValue(a?.archiveDuty)),
     archivingField(selectITSystemUsageEnableAndRecommendedArchiveType, (a) => hasValue(a?.type)),
     archivingField(selectITSystemUsageEnableAndRecommendedArchiveLocation, (a) => hasValue(a?.location)),
@@ -204,5 +192,38 @@ export function getItSystemUsageRecommendedTabBadges(store: Store): ItSystemUsag
     archivingField(selectITSystemUsageEnableAndRecommendedNotes, (a) => hasText(a?.notes)),
   ]);
 
-  return { frontpage$, gdpr$: gdprTab$, archiving$: archivingTab$ };
+  const recommended = (selector: Selector<object, { enabled: boolean; recommended: boolean }>) =>
+    store.select(selector).pipe(mapUIConfigStatusToRecommended());
+  const contractsRecommended$ = recommended(selectITSystemUsageEnableAndRecommendedAssociatedContracts);
+  const contracts$ = combineRecommendedBadgeState([
+    {
+      recommended$: contractsRecommended$,
+      filled$: recommendedCollectionFilled(usage$, contractsRecommended$, (usage) =>
+        contractsApi.getManyItContractV2GetItContracts({ systemUsageUuid: usage.uuid, pageSize: 1 })),
+    },
+    generalField(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive, (g) =>
+      hasValue(g?.mainContract),
+    ),
+  ]);
+  const relations$ = combineRecommendedBadgeState([
+    {
+      recommended$: recommended(selectITSystemUsageEnableAndRecommendedOutgoingRelations),
+      filled$: usage$.pipe(map((usage) => hasItems(usage?.outgoingSystemRelations))),
+    },
+  ]);
+  const localKle$ = combineRecommendedBadgeState([
+    {
+      recommended$: recommended(selectITSystemUsageEnableAndRecommendedLocalKle),
+      filled$: usage$.pipe(map((usage) => hasItems(usage?.localKLEDeviations.addedKLE))),
+    },
+    {
+      recommended$: recommended(selectITSystemUsageEnableAndRecommendedInheritedKle),
+      filled$: combineLatest([usage$, store.select(selectItSystem)]).pipe(
+        map(([usage, system]) => system?.uuid === usage?.systemContext.uuid &&
+          (system?.kle.some((kle) => !usage?.localKLEDeviations.removedKLE.some((removed) => removed.uuid === kle.uuid)) ?? false)),
+      ),
+    },
+  ]);
+
+  return { ...registrationBadges, frontpage$, gdpr$: gdprTab$, archiving$: archivingTab$, contracts$, relations$, localKle$ };
 }

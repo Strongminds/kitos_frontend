@@ -1,15 +1,23 @@
-import { Selector, Store } from '@ngrx/store';
+import { RegistrationRecommendedBadges, recommendedField, hasText, hasValue } from 'src/app/shared/helpers/registration-recommended-badges.helper';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { APIItContractResponseDTO } from 'src/app/api/v2';
+import { ItSystemUsageInternalV2Service } from 'src/app/api/v2';
 import {
   RecommendedBadgeState,
+  recommendedCollectionFilled,
   combineRecommendedBadgeState,
   mapUIConfigStatusToRecommended,
 } from 'src/app/shared/helpers/observable-helpers';
 import { selectContract } from 'src/app/store/it-contract/selectors';
 import {
   selectItContractEnableAndRecommendContractName,
+  selectItContractEnableAndRecommendedAgreementElements,
+  selectItContractEnableAndRecommendedDataProcessingRegistrations,
+  selectItContractEnableAndRecommendedSystemUsages,
+  selectItContractEnableAndRecommendedRelations,
+  selectItContractsEnableAndRecommendedExternalPayment,
+  selectItContractsEnableAndRecommendedInternalPayment,
+
   selectItContractEnableAndRecommendedContractId,
   selectItContractEnableAndRecommendExternalContactPerson,
   selectItContractEnableAndRecommendExternalContactPersonEmail,
@@ -31,37 +39,28 @@ import {
   selectItContractsEnableAndRecommendedTermination,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 
-type Contract = APIItContractResponseDTO | undefined;
 
-function hasText(value: string | null | undefined): boolean {
-  return !!value?.trim();
-}
-
-function hasValue<T>(value: T | null | undefined): boolean {
-  return value !== null && value !== undefined;
-}
-
-export interface ItContractRecommendedTabBadges {
+export interface ItContractRecommendedTabBadges extends RegistrationRecommendedBadges {
   frontpage$: Observable<RecommendedBadgeState>;
   deadlines$: Observable<RecommendedBadgeState>;
   economy$: Observable<RecommendedBadgeState>;
+  itSystems$: Observable<RecommendedBadgeState>;
+  dataProcessing$: Observable<RecommendedBadgeState>;
 }
 
 /**
- * Computes, per tab, whether the tab has any recommended field and whether all of its
- * recommended fields are filled in - read directly from the loaded contract, so this works
- * even for tabs the user has not (yet) navigated to.
+ * Combines module-specific tab rules with the shared roles, advis and references
+ * streams. Badge state is available even before the user visits a tab; collections
+ * absent from the loaded registration are fetched only when recommended.
  */
-export function getItContractRecommendedTabBadges(store: Store): ItContractRecommendedTabBadges {
+export function getItContractRecommendedTabBadges(
+  store: Store,
+  relationsApi: ItSystemUsageInternalV2Service,
+  registrationBadges: RegistrationRecommendedBadges,
+): ItContractRecommendedTabBadges {
   const contract$ = store.select(selectContract);
 
-  const field = (
-    recommendedSelector: Selector<object, { enabled: boolean; recommended: boolean }>,
-    filled: (contract: Contract) => boolean,
-  ) => ({
-    recommended$: store.select(recommendedSelector).pipe(mapUIConfigStatusToRecommended()),
-    filled$: contract$.pipe(map(filled)),
-  });
+  const field = recommendedField(store, contract$);
 
   const frontpage$ = combineRecommendedBadgeState([
     field(selectItContractEnableAndRecommendContractName, (c) => hasText(c?.name)),
@@ -99,11 +98,32 @@ export function getItContractRecommendedTabBadges(store: Store): ItContractRecom
   ]);
 
   const economy$ = combineRecommendedBadgeState([
+    field(selectItContractsEnableAndRecommendedExternalPayment, (c) => !!c?.payments.external?.length),
+    field(selectItContractsEnableAndRecommendedInternalPayment, (c) => !!c?.payments.internal?.length),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.operationsRemunerationStartedAt)),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.paymentFrequency)),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.paymentModel)),
     field(selectItContractsEnableAndRecommendedPaymentModel, (c) => hasValue(c?.paymentModel.priceRegulation)),
   ]);
 
-  return { frontpage$, deadlines$, economy$ };
+  const relationsRecommended$ = store.select(selectItContractEnableAndRecommendedRelations)
+    .pipe(mapUIConfigStatusToRecommended());
+  const itSystems$ = combineRecommendedBadgeState([
+    field(selectItContractEnableAndRecommendedAgreementElements, (c) => !!c?.general.agreementElements?.length),
+    field(selectItContractEnableAndRecommendedSystemUsages, (c) => !!c?.systemUsages?.length),
+    {
+      recommended$: relationsRecommended$,
+      filled$: recommendedCollectionFilled(contract$, relationsRecommended$, (c) =>
+        relationsApi.getManyItSystemUsageInternalV2GetRelations({ contractUuid: c.uuid })),
+    },
+  ]);
+
+  const dataProcessing$ = combineRecommendedBadgeState([
+    field(
+      selectItContractEnableAndRecommendedDataProcessingRegistrations,
+      (c) => !!c?.dataProcessingRegistrations?.length,
+    ),
+  ]);
+
+  return { ...registrationBadges, frontpage$, deadlines$, economy$, itSystems$, dataProcessing$ };
 }

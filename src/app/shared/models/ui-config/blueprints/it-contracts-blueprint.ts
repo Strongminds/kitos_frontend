@@ -99,21 +99,24 @@ export const ItContractsUiBluePrint = {
       children: {
         agreementElements: {
           text: $localize`Aftaleelementer`,
-          cannotBeRecommended: true,
         },
         systemUsages: {
           text: $localize`IT Systemer`,
-          cannotBeRecommended: true,
         },
         relations: {
           text: $localize`Relationer`,
-          cannotBeRecommended: true,
         },
       },
     },
     dataProcessing: {
       text: $localize`Databehandling`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      children: {
+        dataProcessingRegistrations: {
+          text: $localize`Tilknyttede databehandlinger`,
+          isObligatory: true,
+        },
+      },
     },
     deadlines: {
       text: $localize`Aftalefrister`,
@@ -137,16 +140,20 @@ export const ItContractsUiBluePrint = {
         },
         extPayment: {
           text: $localize`Ekstern betaling`,
-          cannotBeRecommended: true,
         },
         intPayment: {
           text: $localize`Intern betaling`,
-          cannotBeRecommended: true,
         },
       },
     },
     contractRoles: {
       text: $localize`Kontraktroller`,
+      children: {
+        roles: {
+          text: $localize`Kontraktroller`,
+          isObligatory: true,
+        },
+      },
     },
     hierarchy: {
       text: $localize`Hierarki`,
@@ -154,10 +161,22 @@ export const ItContractsUiBluePrint = {
     },
     advice: {
       text: $localize`Advis`,
+      children: {
+        notifications: {
+          text: $localize`Advis`,
+          isObligatory: true,
+        },
+      },
     },
     references: {
       text: $localize`Referencer`,
       helpText: uiConfigHelpTexts.cannotChangeTab,
+      children: {
+        references: {
+          text: $localize`Referencer`,
+          isObligatory: true,
+        },
+      },
     },
   },
 };

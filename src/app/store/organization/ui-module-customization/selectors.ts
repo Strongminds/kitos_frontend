@@ -56,6 +56,7 @@ const createFieldOrGroupEnabledSelector = (module: UIModuleConfigKey, tabKey: st
     return fieldOrGroupIsEnabled(moduleConfigViewModels, fullKey, fieldKey);
   });
 
+// eslint-disable-next-line @ngrx/prefix-selectors-with-select
 const createFieldOrGroupEnabledAndRecommendedSelector = (module: UIModuleConfigKey, tabKey: string, fieldKey: string) =>
   createSelector(selectModuleConfig(module), (moduleConfig) => {
     const moduleConfigViewModels = moduleConfig?.moduleConfigViewModel;
@@ -122,6 +123,12 @@ export const selectDprEnableAndRecommendedResponsibleOrgUnit =
 export const selectDprEnableEnforceInvalidity = createDprFrontPageFieldSelector('enforceInvalidity');
 export const selectDprEnableAndRecommendedEnforceInvalidity =
   createDprFrontPageFieldEnableAndRecommendedSelector('enforceInvalidity');
+
+//DPR -> IT Systems
+const createDprItSystemsFieldEnableAndRecommendedSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.DataProcessingRegistrations, 'itSystems', fieldKey);
+export const selectDprEnableAndRecommendedSystemUsages =
+  createDprItSystemsFieldEnableAndRecommendedSelector('systemUsages');
 
 //DPR -> IT Contract
 const createDprItContractsFieldSelector = (fieldKey: string) =>
@@ -563,6 +570,12 @@ export const selectItContractEnableRelations = createItContractsItSystemsFieldSe
 export const selectItContractEnableAndRecommendedRelations =
   createItContractsItSystemsFieldEnableAndRecommendedSelector('relations');
 
+// Contracts > Data processing
+const createItContractsDataProcessingFieldEnableAndRecommendedSelector = (fieldKey: string) =>
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'dataProcessing', fieldKey);
+export const selectItContractEnableAndRecommendedDataProcessingRegistrations =
+  createItContractsDataProcessingFieldEnableAndRecommendedSelector('dataProcessingRegistrations');
+
 //Contracts > Deadlines
 const createItContractsDeadlinesFieldSelector = (fieldKey: string) =>
   createFieldOrGroupEnabledSelector(UIModuleConfigKey.ItContract, 'deadlines', fieldKey);
@@ -589,6 +602,26 @@ export const selectItContractsEnableAndRecommendedExternalPayment =
 export const selectItContractsEnableInternalPayment = createItContractsEconomyFieldSelector('intPayment');
 export const selectItContractsEnableAndRecommendedInternalPayment =
   createItContractsEconomyFieldEnableAndRecommendedSelector('intPayment');
+
+// Shared registration collections (required fields within their tabs)
+export const selectItContractEnableAndRecommendedRoleAssignments =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'contractRoles', 'roles');
+export const selectItContractEnableAndRecommendedNotificationCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'advice', 'notifications');
+export const selectItContractEnableAndRecommendedReferenceCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItContract, 'references', 'references');
+export const selectDprEnableAndRecommendedRoleAssignments =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.DataProcessingRegistrations, 'roles', 'roles');
+export const selectDprEnableAndRecommendedNotificationCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.DataProcessingRegistrations, 'notifications', 'notifications');
+export const selectDprEnableAndRecommendedReferenceCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.DataProcessingRegistrations, 'references', 'references');
+export const selectITSystemUsageEnableAndRecommendedRoleAssignments =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItSystemUsage, 'systemRoles', 'roles');
+export const selectITSystemUsageEnableAndRecommendedNotificationCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItSystemUsage, 'advice', 'notifications');
+export const selectITSystemUsageEnableAndRecommendedReferenceCollection =
+  createFieldOrGroupEnabledAndRecommendedSelector(UIModuleConfigKey.ItSystemUsage, 'localReferences', 'references');
 
 function tabIsEnabled(uiConfigViewModels: UIConfigNodeViewModel, tabFullKey: string): boolean {
   const tabViewModel = getTabViewModelFromModule(uiConfigViewModels, tabFullKey);
@@ -628,7 +661,11 @@ function fieldOrGroupIsEnabledAndRecommended(
 
   const fieldFullKey = [tabFullKey, fieldKey].join('.');
   const fieldViewModel = tabViewModelChildren.find((vm) => vm.fullKey === fieldFullKey);
-  return { enabled: fieldViewModel?.isEnabled ?? true, recommended: fieldViewModel?.isRecommended ?? false };
+  return {
+    enabled: fieldViewModel?.isEnabled ?? true,
+    recommended: uiConfigViewModels.isEnabled !== false && tabViewModel?.isEnabled !== false &&
+      !fieldViewModel?.cannotBeRecommended && fieldViewModel?.isRecommended === true,
+  };
 }
 
 function getTabViewModelFromModule(

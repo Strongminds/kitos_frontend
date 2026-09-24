@@ -1,4 +1,4 @@
-﻿import { AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -8,10 +8,11 @@ import { combineLatest, distinctUntilChanged, filter, map } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { combineAND, mapUIConfigStatusToEnabled} from 'src/app/shared/helpers/observable-helpers';
+import { combineAND, mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import {
   selectContractLoading,
@@ -36,7 +37,6 @@ import { ButtonComponent } from '../../../shared/components/buttons/button/butto
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
 import { DeleteContractDialogComponent } from './delete-contract-dialog/delete-contract-dialog.component';
-import { getItContractRecommendedTabBadges } from './it-contract-recommended-tabs.helper';
 
 @Component({
   selector: 'app-it-contract-details',
@@ -73,19 +73,35 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     ]),
     filterNullish(),
   );
-  public readonly itSystemsTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedItSystems).pipe(mapUIConfigStatusToEnabled());
-  public readonly dataProcessingTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedDataProcessing).pipe(mapUIConfigStatusToEnabled());
-  public readonly agreementDeadlinesTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedDeadlines).pipe(mapUIConfigStatusToEnabled());
-  public readonly economyTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedEconomy).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractRolesTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedContractRoles).pipe(mapUIConfigStatusToEnabled());
-  public readonly hierarchyTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedHierarchy).pipe(mapUIConfigStatusToEnabled());
-  public readonly notificationsTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedAdvis).pipe(mapUIConfigStatusToEnabled());
-  public readonly referenceTabEnabled$ = this.store.select(selectItContractEnableAndRecommendedReferences).pipe(mapUIConfigStatusToEnabled());
+  public readonly itSystemsTabEnabled$ = this.store
+    .select(selectItContractEnableAndRecommendedItSystems)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly dataProcessingTabEnabled$ = this.store
+    .select(selectItContractEnableAndRecommendedDataProcessing)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly agreementDeadlinesTabEnabled$ = this.store
+    .select(selectItContractEnableAndRecommendedDeadlines)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly economyTabEnabled$ = this.store
+    .select(selectItContractEnableAndRecommendedEconomy)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractRolesTabEnabled$ = this.store
+    .select(selectItContractEnableAndRecommendedContractRoles)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly hierarchyTabEnabled$ = this.store
+    .select(selectItContractEnableAndRecommendedHierarchy)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly notificationsTabEnabled$ = this.store
+    .select(selectItContractEnableAndRecommendedAdvis)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly referenceTabEnabled$ = this.store
+    .select(selectItContractEnableAndRecommendedReferences)
+    .pipe(mapUIConfigStatusToEnabled());
 
   public readonly dataProcessingModuleEnabled$ = this.store.select(selectShowDataProcessingRegistrations);
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
 
-  private readonly recommendedTabBadges = getItContractRecommendedTabBadges(this.store);
+  private readonly recommendedTabBadges = this.recommendedBadgesService.contract;
 
   public readonly navigationItems: NavigationDrawerItem[] = [
     {
@@ -98,12 +114,14 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
+      recommendedBadge$: this.recommendedTabBadges.itSystems$,
       enabled$: combineAND([this.itSystemsModuleEnabled$, this.itSystemsTabEnabled$]),
     },
     {
       label: $localize`Databehandling`,
       iconType: 'folder-important',
       route: AppPath.dataProcessing,
+      recommendedBadge$: this.recommendedTabBadges.dataProcessing$,
       enabled$: combineAND([this.dataProcessingModuleEnabled$, this.dataProcessingTabEnabled$]),
     },
     {
@@ -124,6 +142,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`Kontraktroller`,
       iconType: 'roles',
       route: AppPath.roles,
+      recommendedBadge$: this.recommendedTabBadges.roles$,
       enabled$: this.contractRolesTabEnabled$,
     },
     {
@@ -136,12 +155,14 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
+      recommendedBadge$: this.recommendedTabBadges.notifications$,
       enabled$: this.notificationsTabEnabled$,
     },
     {
       label: $localize`Referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
+      recommendedBadge$: this.recommendedTabBadges.references$,
       enabled$: this.referenceTabEnabled$,
     },
   ];
@@ -153,6 +174,7 @@ export class ItContractDetailsComponent extends BaseComponent implements OnInit,
     private notificationService: NotificationService,
     private actions$: Actions,
     private dialog: MatDialog,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }

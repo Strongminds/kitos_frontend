@@ -158,6 +158,12 @@ export const ItSystemUsageUiBluePrint = {
     },
     systemRoles: {
       text: $localize`Systemroller`,
+      children: {
+        roles: {
+          text: $localize`Systemroller`,
+          isObligatory: true,
+        },
+      },
     },
     organization: {
       text: $localize`Organisation`,
@@ -167,7 +173,6 @@ export const ItSystemUsageUiBluePrint = {
       children: {
         outgoing: {
           text: $localize`Relationer til andre systemer`,
-          cannotBeRecommended: true,
         },
         incoming: {
           text: $localize`Relationer fra andre systemer`,
@@ -225,7 +230,6 @@ export const ItSystemUsageUiBluePrint = {
         },
         journalPeriods: {
           text: $localize`Journalperioder`,
-          cannotBeRecommended: true,
         },
         catalogArchiveDuty: {
           text: $localize`Rigsarkivets vejledning til arkivering`,
@@ -247,15 +251,26 @@ export const ItSystemUsageUiBluePrint = {
         },
         localKle: {
           text: $localize`Lokale tilknyttede opgaver`,
-          cannotBeRecommended: true,
         },
       },
     },
     advice: {
       text: $localize`Advis`,
+      children: {
+        notifications: {
+          text: $localize`Advis`,
+          isObligatory: true,
+        },
+      },
     },
     localReferences: {
       text: $localize`Lokale referencer`,
+      children: {
+        references: {
+          text: $localize`Lokale referencer`,
+          isObligatory: true,
+        },
+      },
     },
     usageArchive: {
       text: $localize`Anvendelseshistorik`,

@@ -1,4 +1,4 @@
-﻿import { AsyncPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
@@ -9,10 +9,11 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { NavigationDrawerItem } from 'src/app/shared/components/navigation-drawer/navigation-drawer.component';
 import { AppPath } from 'src/app/shared/enums/app-path';
-import { combineAND, mapUIConfigStatusToEnabled} from 'src/app/shared/helpers/observable-helpers';
+import { combineAND, mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 import { BreadCrumb } from 'src/app/shared/models/breadcrumbs/breadcrumb.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { DataProcessingActions } from 'src/app/store/data-processing/actions';
 import {
   selectDataProcessingHasDeletePermissions,
@@ -34,7 +35,6 @@ import { BreadcrumbsComponent } from '../../../shared/components/breadcrumbs/bre
 import { ButtonComponent } from '../../../shared/components/buttons/button/button.component';
 import { LoadingComponent } from '../../../shared/components/loading/loading.component';
 import { NavigationDrawerComponent } from '../../../shared/components/navigation-drawer/navigation-drawer.component';
-import { getDataProcessingRecommendedTabBadges } from './data-processing-recommended-tabs.helper';
 
 @Component({
   selector: 'app-data-processing-details',
@@ -58,17 +58,29 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
 
   public readonly hasDeletePermission$ = this.store.select(selectDataProcessingHasDeletePermissions);
 
-  public readonly itSystemsEnabled$ = this.store.select(selectDprEnableAndRecommendedItSystems).pipe(mapUIConfigStatusToEnabled());
-  public readonly itContractsEnabled$ = this.store.select(selectDprEnableAndRecommendedItContracts).pipe(mapUIConfigStatusToEnabled());
-  public readonly oversightEnabled$ = this.store.select(selectDprEnableAndRecommendedOversight).pipe(mapUIConfigStatusToEnabled());
-  public readonly dprRolesEnabled$ = this.store.select(selectDprEnableAndRecommendedRoles).pipe(mapUIConfigStatusToEnabled());
-  public readonly dprNotificationsEnabled$ = this.store.select(selectDprEnableAndRecommendedNotifications).pipe(mapUIConfigStatusToEnabled());
-  public readonly dprReferencesEnabled$ = this.store.select(selectDprEnableAndRecommendedReferences).pipe(mapUIConfigStatusToEnabled());
+  public readonly itSystemsEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedItSystems)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly itContractsEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedItContracts)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly oversightEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedOversight)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly dprRolesEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedRoles)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly dprNotificationsEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedNotifications)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly dprReferencesEnabled$ = this.store
+    .select(selectDprEnableAndRecommendedReferences)
+    .pipe(mapUIConfigStatusToEnabled());
 
   public readonly itSystemsModuleEnabled$ = this.store.select(selectShowItSystemModule);
   public readonly itContractsModuleEnabled$ = this.store.select(selectShowItContractModule);
 
-  private readonly recommendedTabBadges = getDataProcessingRecommendedTabBadges(this.store);
+  private readonly recommendedTabBadges = this.recommendedBadgesService.dataProcessing;
 
   public readonly breadCrumbs$ = combineLatest([this.dprName$, this.dprUuid$]).pipe(
     map(([dprName, dprUuid]): BreadCrumb[] => [
@@ -95,12 +107,14 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`IT Systemer`,
       iconType: 'systems',
       route: AppPath.itSystems,
+      recommendedBadge$: this.recommendedTabBadges.itSystems$,
       enabled$: combineAND([this.itSystemsModuleEnabled$, this.itSystemsEnabled$]),
     },
     {
       label: $localize`IT Kontrakter`,
       iconType: 'folder-important',
       route: AppPath.itContracts,
+      recommendedBadge$: this.recommendedTabBadges.itContracts$,
       enabled$: combineAND([this.itContractsModuleEnabled$, this.itContractsEnabled$]),
     },
     {
@@ -114,18 +128,21 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
       label: $localize`Databehandlingsroller`,
       iconType: 'roles',
       route: AppPath.roles,
+      recommendedBadge$: this.recommendedTabBadges.roles$,
       enabled$: this.dprRolesEnabled$,
     },
     {
       label: $localize`Advis`,
       iconType: 'notification',
       route: AppPath.notifications,
+      recommendedBadge$: this.recommendedTabBadges.notifications$,
       enabled$: this.dprNotificationsEnabled$,
     },
     {
       label: $localize`Referencer`,
       iconType: 'bookmark',
       route: AppPath.externalReferences,
+      recommendedBadge$: this.recommendedTabBadges.references$,
       enabled$: this.dprReferencesEnabled$,
     },
   ];
@@ -137,6 +154,7 @@ export class DataProcessingDetailsComponent extends BaseComponent implements OnI
     private notificationService: NotificationService,
     private actions$: Actions,
     private dialog: MatDialog,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }

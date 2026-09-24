@@ -41,7 +41,7 @@ import { EmptyStateComponent } from '../../../../../shared/components/empty-stat
 import { CollectionExtensionButtonComponent } from '../../../../../shared/components/collection-extension-button/collection-extension-button.component';
 import { DropdownComponent } from '../../../../../shared/components/dropdowns/dropdown/dropdown.component';
 import { AppDatePipe } from '../../../../../shared/pipes/app-date.pipe';
-import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   templateUrl: 'it-system-usage-details-contracts.component.html',
@@ -83,9 +83,15 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   });
 
   public readonly associatedContractsEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled());
-  public readonly contractToDetermineIsActiveEnabled$ = this.store.select(
-    selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive,
-  );
+  public readonly associatedContractsRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedAssociatedContracts)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly contractToDetermineIsActiveEnabled$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly contractToDetermineIsActiveRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive)
+    .pipe(mapUIConfigStatusToRecommended());
 
   public readonly contractCreationPermission$ = this.store.select(selectItContractHasCollectionCreatePermissions);
 

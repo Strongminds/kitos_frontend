@@ -39,11 +39,9 @@ export const DataProcessingUiBluePrint = {
         },
         processors: {
           text: $localize`Databehandlere`,
-          cannotBeRecommended: true,
         },
         subProcessors: {
           text: $localize`Underdatabehandlere`,
-          cannotBeRecommended: true,
         },
         responsibleOrgUnit: {
           text: $localize`Ansvarlig enhed`,
@@ -58,6 +56,12 @@ export const DataProcessingUiBluePrint = {
     itSystems: {
       text: $localize`IT Systemer`,
       helpText: uiConfigHelpTexts.cannotChangeTabOnlyThroughModuleConfig,
+      children: {
+        systemUsages: {
+          text: $localize`IT Systemer`,
+          isObligatory: true,
+        },
+      },
     },
     itContracts: {
       text: $localize`IT Kontrakter`,
@@ -65,7 +69,6 @@ export const DataProcessingUiBluePrint = {
       children: {
         mainContract: {
           text: $localize`Hvilken kontrakt skal angive om databehandlingen er aktiv`,
-          cannotBeRecommended: true,
         },
         associatedContracts: {
           text: $localize`Tilknyttede kontrakter`,
@@ -88,18 +91,35 @@ export const DataProcessingUiBluePrint = {
         },
         oversights: {
           text: $localize`Gennemførte og kommende tilsyn`,
-          cannotBeRecommended: true,
         },
       },
     },
     roles: {
       text: $localize`Databehandlingsroller`,
+      children: {
+        roles: {
+          text: $localize`Databehandlingsroller`,
+          isObligatory: true,
+        },
+      },
     },
     notifications: {
       text: $localize`Advis`,
+      children: {
+        notifications: {
+          text: $localize`Advis`,
+          isObligatory: true,
+        },
+      },
     },
     references: {
       text: $localize`Referencer`,
+      children: {
+        references: {
+          text: $localize`Referencer`,
+          isObligatory: true,
+        },
+      },
     },
   },
 };

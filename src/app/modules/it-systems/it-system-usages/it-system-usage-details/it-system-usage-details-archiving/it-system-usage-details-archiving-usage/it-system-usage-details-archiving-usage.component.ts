@@ -213,6 +213,9 @@ export class ItSystemUsageDetailsArchivingUsageComponent extends BaseComponent i
   public readonly journalPeriodsEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedJournalPeriods)
     .pipe(mapUIConfigStatusToEnabled());
+  public readonly journalPeriodsRecommended$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedJournalPeriods)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly itSystemCatalogItemUuid$ = this.store.select(selectItSystemUsageSystemContextUuid);
   public readonly catalogArchiveDutyEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedCatalogArchiveDuty)
