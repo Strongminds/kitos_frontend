@@ -8197,6 +8197,10 @@
         <source>Maksimalt <x id="INTERPOLATION" equiv-text="{{ error.requiredLength }}"/> tegn.</source>
         <target state="new">Maksimalt <x id="INTERPOLATION" equiv-text="{{ error.requiredLength }}"/> tegn.</target>
       </trans-unit>
+      <trans-unit id="8567762121583906121" datatype="html">
+        <source>Faktureringsperiode</source>
+        <target state="new">Faktureringsperiode</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
