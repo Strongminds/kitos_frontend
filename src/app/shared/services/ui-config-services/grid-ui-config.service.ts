@@ -228,7 +228,7 @@ export class GridUIConfigService {
 
       this.store
         .select(selectItContractsEnableAndRecommendedTermination)
-        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt])),
+        .pipe(mapUIConfigStatusToEnabled(), shouldEnable([ContractFields.TerminationDeadlineUuid, ContractFields.TerminatedAt, ContractFields.ByEnding])),
 
       //Economy
       this.store
