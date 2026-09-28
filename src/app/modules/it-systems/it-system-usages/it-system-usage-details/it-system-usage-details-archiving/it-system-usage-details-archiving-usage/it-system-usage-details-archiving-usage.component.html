@@ -136,7 +136,13 @@
   </app-card>
   @if (journalPeriodsEnabled$ | async) {
     <app-card>
-      <app-card-header title="Journalperioder" helpTextKey="it-system.usage.archiving.periods" i18n-title></app-card-header>
+      <app-card-header
+        title="Journalperioder"
+        helpTextKey="it-system.usage.archiving.periods"
+        [recommended]="(journalPeriodsRecommended$ | async) === true"
+        [recommendedFilled]="(anyJournalPeriods$ | async) === true"
+        i18n-title
+      ></app-card-header>
       <app-standard-vertical-content-grid>
         @if (anyJournalPeriods$ | async) {
           <app-native-table>

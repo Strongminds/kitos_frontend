@@ -57,6 +57,7 @@
     [payments$]="externalPayments$"
     [anyPayments$]="anyExternalPayments$"
     paymentType="external"
+    [recommended]="(externalPaymentRecommended$ | async) === true"
   ></app-payment-table>
 }
 @if (internalPaymentEnabled$ | async) {
@@ -66,5 +67,6 @@
     [payments$]="internalPayments$"
     [anyPayments$]="anyInternalPayments$"
     paymentType="internal"
+    [recommended]="(internalPaymentRecommended$ | async) === true"
   ></app-payment-table>
 }

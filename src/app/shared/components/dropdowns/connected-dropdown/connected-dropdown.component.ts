@@ -17,7 +17,7 @@ export class ConnectedDropdownComponent<T> extends ConnectedDropdownBaseComponen
   @Input() public recommended = false;
   @Output() public valueChange = new EventEmitter<string>();
 
-  public onValueChange(selectedUuid?: string) {
-    this.valueChange.emit(selectedUuid);
+  public onValueChange(selectedUuid: unknown) {
+    this.valueChange.emit(typeof selectedUuid === 'string' ? selectedUuid : undefined);
   }
 }

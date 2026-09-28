@@ -57,6 +57,8 @@
     title="Tilsynsmuligheder"
     i18n-title
     helpTextKey="data-processing.edit-oversight.options"
+    [recommended]="(oversightOptionsRecommended$ | async) === true"
+    [recommendedFilled]="(anyOversightOptions$ | async) === true"
   ></app-card-header>
   <app-standard-vertical-content-grid>
     @if (anyOversightOptions$ | async) {
@@ -103,6 +105,8 @@
     title="Gennemførte og kommende tilsyn"
     i18n-title
     helpTextKey="data-processing.edit-oversight.oversights"
+    [recommended]="(oversightsRecommended$ | async) === true"
+    [recommendedFilled]="((collectionOversights$ | async)?.length ?? 0) > 0"
   >
   </app-card-header>
   <app-standard-vertical-content-grid>

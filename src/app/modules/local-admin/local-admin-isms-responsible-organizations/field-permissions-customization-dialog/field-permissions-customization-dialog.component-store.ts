@@ -33,12 +33,12 @@ export class FieldPermissionsCustomizationDialogComponentStore extends Component
     super({ fields: [], loading: false });
   }
 
-  private setFields = this.updater((state, fields: APISupplierAssociatedFieldConfigurationResponseDTO[]) => ({
+  private setFields = this.updater((state, fields: APISupplierAssociatedFieldConfigurationResponseDTO[]): State => ({
     ...state,
     fields,
   }));
 
-  private setLoading = this.updater((state, loading: boolean) => ({
+  private setLoading = this.updater((state, loading: boolean): State => ({
     ...state,
     loading,
   }));

@@ -126,7 +126,13 @@ export class MultiSelectDropdownComponent<T> extends BaseComponent implements On
       this.formValueSubject$
         .pipe(filter(() => this.showDescription))
         .subscribe((formValue: MultiSelectDropdownItem<T>[]) => {
-          this.descriptions = formValue.map((x: any) => x?.value?.[this.itemDescriptionField]).filter(Boolean);
+          this.descriptions = formValue
+            .map((item) => {
+              const value = item?.value;
+              if (value == null || typeof value !== 'object') return undefined;
+              return (value as Record<string, unknown>)[this.itemDescriptionField];
+            })
+            .filter((description): description is string => typeof description === 'string' && description.length > 0);
         })
     );
   }

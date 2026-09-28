@@ -1,4 +1,5 @@
-﻿import { AsyncPipe } from '@angular/common';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
+import { AsyncPipe } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
@@ -47,6 +48,8 @@ import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-he
   ],
 })
 export class DataProcessingItSystemsComponent extends BaseComponent {
+  public readonly recommendedBadge$ = this.recommendedBadgesService.dataProcessing.itSystems$;
+
   public readonly systemUsages$ = this.store.select(selectDataProcessingSystems).pipe(filterNullish());
   public readonly anySystemUsages$ = this.systemUsages$.pipe(matchNonEmptyArray());
   public readonly systemUsageStatusEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedStatus).pipe(mapUIConfigStatusToEnabled());
@@ -56,6 +59,7 @@ export class DataProcessingItSystemsComponent extends BaseComponent {
   constructor(
     private store: Store,
     private dialog: MatDialog,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }

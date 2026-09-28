@@ -27,7 +27,7 @@ import { StandardVerticalContentGridComponent } from '../../../../shared/compone
 import { NativeTableComponent } from '../../../../shared/components/native-table/native-table.component';
 import { DetailsPageLinkComponent } from '../../../../shared/components/details-page-link/details-page-link.component';
 import { EmptyStateComponent } from '../../../../shared/components/empty-states/empty-state.component';
-import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-data-processing-it-contracts',
@@ -61,6 +61,9 @@ export class DataProcessingItContractsComponent extends BaseComponent implements
   });
 
   public readonly mainContractEnabled$ = this.store.select(selectDprEnableAndRecommendedMainContract).pipe(mapUIConfigStatusToEnabled());
+  public readonly mainContractRecommended$ = this.store
+    .select(selectDprEnableAndRecommendedMainContract)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly associatedContractsEnabled$ = this.store.select(selectDprEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled());
 
   constructor(private store: Store) {

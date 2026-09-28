@@ -35,7 +35,7 @@ import { CollectionExtensionButtonComponent } from '../../../../shared/component
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { ExternalPageLinkComponent } from '../../../../shared/components/external-page-link/external-page-link.component';
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
-import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
+import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   selector: 'app-it-contract-systems',
@@ -72,8 +72,17 @@ export class ItContractSystemsComponent extends BaseComponent implements OnInit 
   public readonly hasModifyPermission$ = this.store.select(selectItContractHasModifyPermissions);
 
   public readonly agreementElementsEnabled$ = this.store.select(selectItContractEnableAndRecommendedAgreementElements).pipe(mapUIConfigStatusToEnabled());
+  public readonly agreementElementsRecommended$ = this.store
+    .select(selectItContractEnableAndRecommendedAgreementElements)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly systemUsagesEnabled$ = this.store.select(selectItContractEnableAndRecommendedSystemUsages).pipe(mapUIConfigStatusToEnabled());
+  public readonly systemUsagesRecommended$ = this.store
+    .select(selectItContractEnableAndRecommendedSystemUsages)
+    .pipe(mapUIConfigStatusToRecommended());
   public readonly systemRelationsEnabled$ = this.store.select(selectItContractEnableAndRecommendedRelations).pipe(mapUIConfigStatusToEnabled());
+  public readonly systemRelationsRecommended$ = this.store
+    .select(selectItContractEnableAndRecommendedRelations)
+    .pipe(mapUIConfigStatusToRecommended());
 
   constructor(
     private readonly store: Store,
