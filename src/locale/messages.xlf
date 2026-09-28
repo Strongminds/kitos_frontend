@@ -6266,6 +6266,9 @@
       <trans-unit id="6101777371996107225" datatype="html">
         <source>Maksimalt <x id="INTERPOLATION" equiv-text="{{ error.requiredLength }}"/> tegn.</source>
       </trans-unit>
+      <trans-unit id="8567762121583906121" datatype="html">
+        <source>Faktureringsperiode</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

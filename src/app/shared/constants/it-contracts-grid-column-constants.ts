@@ -34,6 +34,7 @@ export const OptionExtendUuid = 'OptionExtendUuid';
 export const TerminationDeadlineUuid = 'TerminationDeadlineUuid';
 export const IrrevocableTo = 'IrrevocableTo';
 export const TerminatedAt = 'TerminatedAt';
+export const ByEnding = 'ByEnding';
 export const LastEditedByUserName = 'LastEditedByUserName';
 export const LastEditedAtDate = 'LastEditedAtDate';
 export const ItSystemUsageUuidsAsCsv = 'ItSystemUsageUuidsAsCsv';
