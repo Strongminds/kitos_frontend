@@ -6269,6 +6269,12 @@
       <trans-unit id="8567762121583906121" datatype="html">
         <source>Faktureringsperiode</source>
       </trans-unit>
+      <trans-unit id="3567053018374354690" datatype="html">
+        <source>Gem delte felter</source>
+      </trans-unit>
+      <trans-unit id="5815910713095274021" datatype="html">
+        <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
