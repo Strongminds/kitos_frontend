@@ -262,6 +262,7 @@ export * from './stsOrganizationChangeLogOriginOption';
 export * from './stsOrganizationChangeLogResponseDTO';
 export * from './stsOrganizationOrgUnitDTO';
 export * from './stsOrganizationSynchronizationDetailsResponseDTO';
+export * from './stsOrganizationUserSynchronizationDetailsResponseDTO';
 export * from './supplierAssociatedFieldConfigurationItemDTO';
 export * from './supplierAssociatedFieldConfigurationRequestDTO';
 export * from './supplierAssociatedFieldConfigurationResponseDTO';
