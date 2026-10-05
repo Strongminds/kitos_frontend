@@ -17,6 +17,7 @@ import {
   RadioButtonsComponent,
 } from 'src/app/shared/components/radio-buttons/radio-buttons.component';
 import { getLabelFromFieldKey } from 'src/app/shared/models/field-permissions-map.model';
+import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { FieldPermissionsCustomizationDialogComponentStore } from './field-permissions-customization-dialog.component-store';
 
 @Component({
@@ -70,6 +71,7 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
     private readonly dialogRef: MatDialogRef<FieldPermissionsCustomizationDialogComponent>,
     private readonly componentStore: FieldPermissionsCustomizationDialogComponentStore,
     private readonly cdr: ChangeDetectorRef,
+    private readonly confirmActionService: ConfirmActionService,
   ) {
     super();
   }
@@ -116,6 +118,16 @@ export class FieldPermissionsCustomizationDialogComponent extends BaseComponent 
         controlState,
       })),
     };
+    if (requestDto.configurations?.some(({ controlState }) => controlState === APIFieldControlStateChoice.Shared)) {
+      this.confirmActionService.confirmAction({
+        category: ConfirmActionCategory.Neutral,
+        title: $localize`Gem delte felter`,
+        message: $localize`Et eller flere felter er indstillet til "Delte". Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?`,
+        onConfirm: () => this.componentStore.submit(requestDto),
+      });
+      return;
+    }
+
     this.componentStore.submit(requestDto);
   }
 

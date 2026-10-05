@@ -8201,6 +8201,14 @@
         <source>Faktureringsperiode</source>
         <target state="new">Faktureringsperiode</target>
       </trans-unit>
+      <trans-unit id="3567053018374354690" datatype="html">
+        <source>Gem delte felter</source>
+        <target state="new">Gem delte felter</target>
+      </trans-unit>
+      <trans-unit id="5815910713095274021" datatype="html">
+        <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
+        <target state="new">Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
