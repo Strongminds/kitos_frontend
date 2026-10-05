@@ -6269,6 +6269,12 @@
       <trans-unit id="8567762121583906121" datatype="html">
         <source>Faktureringsperiode</source>
       </trans-unit>
+      <trans-unit id="3567053018374354690" datatype="html">
+        <source>Gem delte felter</source>
+      </trans-unit>
+      <trans-unit id="5815910713095274021" datatype="html">
+        <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
+      </trans-unit>
       <trans-unit id="1021926317874357818" datatype="html">
         <source>Ekstern bruger-id</source>
       </trans-unit>
@@ -6302,6 +6308,9 @@
       <trans-unit id="2983288200207126931" datatype="html">
         <source>Eksterne brugerændringer</source>
       </trans-unit>
+      <trans-unit id="3171728705481280102" datatype="html">
+        <source> Organisationen er ikke forbundet til FK Organisation. Opret først forbindelsen under Masseopret &gt; Organisation. </source>
+      </trans-unit>
       <trans-unit id="3446180049529788726" datatype="html">
         <source> Afvis </source>
       </trans-unit>
@@ -6313,6 +6322,9 @@
       </trans-unit>
       <trans-unit id="3868407871277184440" datatype="html">
         <source>Kunne ikke hente detaljerne for ændringen</source>
+      </trans-unit>
+      <trans-unit id="3896319102182559250" datatype="html">
+        <source>Eksterne sletninger (<x id="PH" equiv-text="this.pendingExternalChangeCount"/>)</source>
       </trans-unit>
       <trans-unit id="4003556064442802085" datatype="html">
         <source> Anvend sletninger </source>
@@ -6359,6 +6371,9 @@
       <trans-unit id="5896009722467251030" datatype="html">
         <source> Detaljer </source>
       </trans-unit>
+      <trans-unit id="5935349689405908645" datatype="html">
+        <source>Eksterne sletninger</source>
+      </trans-unit>
       <trans-unit id="6064698219446518110" datatype="html">
         <source>De valgte brugerændringer kunne ikke behandles</source>
       </trans-unit>
@@ -6373,6 +6388,9 @@
       </trans-unit>
       <trans-unit id="6762129443779647779" datatype="html">
         <source>valgt</source>
+      </trans-unit>
+      <trans-unit id="6899956125763028526" datatype="html">
+        <source>Tjek forbindelsen igen</source>
       </trans-unit>
       <trans-unit id="6947221824772680006" datatype="html">
         <source>Adgang fjernet</source>
@@ -6437,6 +6455,9 @@
       <trans-unit id="9144497604817990323" datatype="html">
         <source>Visning af brugerændringer</source>
       </trans-unit>
+      <trans-unit id="9182774870464178151" datatype="html">
+        <source>Excel-import</source>
+      </trans-unit>
       <trans-unit id="923999356526386479" datatype="html">
         <source>Filtrering og handlinger</source>
       </trans-unit>
@@ -6445,21 +6466,6 @@
       </trans-unit>
       <trans-unit id="977243372196262463" datatype="html">
         <source>Henter brugerændringer...</source>
-      </trans-unit>
-      <trans-unit id="3896319102182559250" datatype="html">
-        <source>Eksterne sletninger (<x id="PH" equiv-text="this.pendingExternalChangeCount"/>)</source>
-      </trans-unit>
-      <trans-unit id="5935349689405908645" datatype="html">
-        <source>Eksterne sletninger</source>
-      </trans-unit>
-      <trans-unit id="9182774870464178151" datatype="html">
-        <source>Excel-import</source>
-      </trans-unit>
-      <trans-unit id="3171728705481280102" datatype="html">
-        <source> Organisationen er ikke forbundet til FK Organisation. Opret først forbindelsen under Masseopret &gt; Organisation. </source>
-      </trans-unit>
-      <trans-unit id="6899956125763028526" datatype="html">
-        <source>Tjek forbindelsen igen</source>
       </trans-unit>
     </body>
   </file>

@@ -8201,6 +8201,14 @@
         <source>Faktureringsperiode</source>
         <target state="new">Faktureringsperiode</target>
       </trans-unit>
+      <trans-unit id="3567053018374354690" datatype="html">
+        <source>Gem delte felter</source>
+        <target state="new">Gem delte felter</target>
+      </trans-unit>
+      <trans-unit id="5815910713095274021" datatype="html">
+        <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
+        <target state="new">Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</target>
+      </trans-unit>
       <trans-unit id="2983288200207126931" datatype="html">
         <source>Eksterne brugerændringer</source>
         <target state="new">Eksterne brugerændringer</target>
@@ -8433,6 +8441,14 @@
         <source>Du har ikke tilladelse til at udføre denne handling.</source>
         <target state="new">Du har ikke tilladelse til at udføre denne handling.</target>
       </trans-unit>
+      <trans-unit id="3171728705481280102" datatype="html">
+        <source> Organisationen er ikke forbundet til FK Organisation. Opret først forbindelsen under Masseopret &gt; Organisation. </source>
+        <target state="new"> Organisationen er ikke forbundet til FK Organisation. Opret først forbindelsen under Masseopret &gt; Organisation. </target>
+      </trans-unit>
+      <trans-unit id="6899956125763028526" datatype="html">
+        <source>Tjek forbindelsen igen</source>
+        <target state="new">Tjek forbindelsen igen</target>
+      </trans-unit>
       <trans-unit id="8111671234435835717" datatype="html">
         <source>Kunne ikke hente antallet af eksterne brugerændringer</source>
         <target state="new">Kunne ikke hente antallet af eksterne brugerændringer</target>
@@ -8448,14 +8464,6 @@
       <trans-unit id="9182774870464178151" datatype="html">
         <source>Excel-import</source>
         <target state="new">Excel-import</target>
-      </trans-unit>
-      <trans-unit id="3171728705481280102" datatype="html">
-        <source> Organisationen er ikke forbundet til FK Organisation. Opret først forbindelsen under Masseopret &gt; Organisation. </source>
-        <target state="new"> Organisationen er ikke forbundet til FK Organisation. Opret først forbindelsen under Masseopret &gt; Organisation. </target>
-      </trans-unit>
-      <trans-unit id="6899956125763028526" datatype="html">
-        <source>Tjek forbindelsen igen</source>
-        <target state="new">Tjek forbindelsen igen</target>
       </trans-unit>
     </body>
   </file>
