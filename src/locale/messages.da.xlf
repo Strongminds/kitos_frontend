@@ -8201,6 +8201,262 @@
         <source>Faktureringsperiode</source>
         <target state="new">Faktureringsperiode</target>
       </trans-unit>
+      <trans-unit id="2983288200207126931" datatype="html">
+        <source>Eksterne brugerændringer</source>
+        <target state="new">Eksterne brugerændringer</target>
+      </trans-unit>
+      <trans-unit id="936113023496134632" datatype="html">
+        <source>Gennemgå eksternt rapporterede sletninger af brugere, før de anvendes på organisationen.</source>
+        <target state="new">Gennemgå eksternt rapporterede sletninger af brugere, før de anvendes på organisationen.</target>
+      </trans-unit>
+      <trans-unit id="5017871392701148430" datatype="html">
+        <source>afventer behandling</source>
+        <target state="new">afventer behandling</target>
+      </trans-unit>
+      <trans-unit id="9144497604817990323" datatype="html">
+        <source>Visning af brugerændringer</source>
+        <target state="new">Visning af brugerændringer</target>
+      </trans-unit>
+      <trans-unit id="3611731382659966122" datatype="html">
+        <source>Afventer</source>
+        <target state="new">Afventer</target>
+      </trans-unit>
+      <trans-unit id="4959176361540103861" datatype="html">
+        <source> Behandlede </source>
+        <target state="new"> Behandlede </target>
+      </trans-unit>
+      <trans-unit id="923999356526386479" datatype="html">
+        <source>Filtrering og handlinger</source>
+        <target state="new">Filtrering og handlinger</target>
+      </trans-unit>
+      <trans-unit id="4196195453590699503" datatype="html">
+        <source>Søg efter navn eller email</source>
+        <target state="new">Søg efter navn eller email</target>
+      </trans-unit>
+      <trans-unit id="6762129443779647779" datatype="html">
+        <source>valgt</source>
+        <target state="new">valgt</target>
+      </trans-unit>
+      <trans-unit id="4003556064442802085" datatype="html">
+        <source> Anvend sletninger </source>
+        <target state="new"> Anvend sletninger </target>
+      </trans-unit>
+      <trans-unit id="1801200885716061794" datatype="html">
+        <source> Afvis ændringer </source>
+        <target state="new"> Afvis ændringer </target>
+      </trans-unit>
+      <trans-unit id="288488215766814357" datatype="html">
+        <source>Resultat for valgte ændringer</source>
+        <target state="new">Resultat for valgte ændringer</target>
+      </trans-unit>
+      <trans-unit id="7040601894550873102" datatype="html">
+        <source>Vælg alle synlige ændringer</source>
+        <target state="new">Vælg alle synlige ændringer</target>
+      </trans-unit>
+      <trans-unit id="7991060055794732804" datatype="html">
+        <source> Bruger <x id="START_BLOCK_IF" equiv-text="@if (querySort() === &apos;userName&apos;) {"/> <x id="INTERPOLATION" equiv-text="{{ queryDescending() ? &apos;↓&apos; : &apos;↑&apos; }}"/> <x id="CLOSE_BLOCK_IF" equiv-text="}"/></source>
+        <target state="new"> Bruger <x id="START_BLOCK_IF" equiv-text="@if (querySort() === &apos;userName&apos;) {"/> <x id="INTERPOLATION" equiv-text="{{ queryDescending() ? &apos;↓&apos; : &apos;↑&apos; }}"/> <x id="CLOSE_BLOCK_IF" equiv-text="}"/></target>
+      </trans-unit>
+      <trans-unit id="768711881578628076" datatype="html">
+        <source> Status <x id="START_BLOCK_IF" equiv-text="@if (querySort() === &apos;status&apos;) {"/> <x id="INTERPOLATION" equiv-text="{{ queryDescending() ? &apos;↓&apos; : &apos;↑&apos; }}"/> <x id="CLOSE_BLOCK_IF" equiv-text="}"/></source>
+        <target state="new"> Status <x id="START_BLOCK_IF" equiv-text="@if (querySort() === &apos;status&apos;) {"/> <x id="INTERPOLATION" equiv-text="{{ queryDescending() ? &apos;↓&apos; : &apos;↑&apos; }}"/> <x id="CLOSE_BLOCK_IF" equiv-text="}"/></target>
+      </trans-unit>
+      <trans-unit id="1232216843970187806" datatype="html">
+        <source> Modtaget <x id="START_BLOCK_IF" equiv-text="@if (querySort() === &apos;receivedAt&apos;) {"/> <x id="INTERPOLATION" equiv-text="{{ queryDescending() ? &apos;↓&apos; : &apos;↑&apos; }}"/> <x id="CLOSE_BLOCK_IF" equiv-text="}"/></source>
+        <target state="new"> Modtaget <x id="START_BLOCK_IF" equiv-text="@if (querySort() === &apos;receivedAt&apos;) {"/> <x id="INTERPOLATION" equiv-text="{{ queryDescending() ? &apos;↓&apos; : &apos;↑&apos; }}"/> <x id="CLOSE_BLOCK_IF" equiv-text="}"/></target>
+      </trans-unit>
+      <trans-unit id="8705437266958788833" datatype="html">
+        <source>Hændelse indtruffet</source>
+        <target state="new">Hændelse indtruffet</target>
+      </trans-unit>
+      <trans-unit id="1826484890569705847" datatype="html">
+        <source>Handling</source>
+        <target state="new">Handling</target>
+      </trans-unit>
+      <trans-unit id="977243372196262463" datatype="html">
+        <source>Henter brugerændringer...</source>
+        <target state="new">Henter brugerændringer...</target>
+      </trans-unit>
+      <trans-unit id="4858020240009540561" datatype="html">
+        <source>Listen kunne ikke hentes.</source>
+        <target state="new">Listen kunne ikke hentes.</target>
+      </trans-unit>
+      <trans-unit id="7916199398956405662" datatype="html">
+        <source>Prøv igen</source>
+        <target state="new">Prøv igen</target>
+      </trans-unit>
+      <trans-unit id="3652080303005400680" datatype="html">
+        <source>Ingen brugerændringer fundet.</source>
+        <target state="new">Ingen brugerændringer fundet.</target>
+      </trans-unit>
+      <trans-unit id="5896009722467251030" datatype="html">
+        <source> Detaljer </source>
+        <target state="new"> Detaljer </target>
+      </trans-unit>
+      <trans-unit id="5282046193109027726" datatype="html">
+        <source> Anvend </source>
+        <target state="new"> Anvend </target>
+      </trans-unit>
+      <trans-unit id="3446180049529788726" datatype="html">
+        <source> Afvis </source>
+        <target state="new"> Afvis </target>
+      </trans-unit>
+      <trans-unit id="7184812563447930587" datatype="html">
+        <source>Henter detaljer...</source>
+        <target state="new">Henter detaljer...</target>
+      </trans-unit>
+      <trans-unit id="1021926317874357818" datatype="html">
+        <source>Ekstern bruger-id</source>
+        <target state="new">Ekstern bruger-id</target>
+      </trans-unit>
+      <trans-unit id="2598588888860123854" datatype="html">
+        <source>Lokalt bruger-id</source>
+        <target state="new">Lokalt bruger-id</target>
+      </trans-unit>
+      <trans-unit id="5513573328838662246" datatype="html">
+        <source>Ekstern besked-id</source>
+        <target state="new">Ekstern besked-id</target>
+      </trans-unit>
+      <trans-unit id="1791274936188065719" datatype="html">
+        <source>Ændringstype</source>
+        <target state="new">Ændringstype</target>
+      </trans-unit>
+      <trans-unit id="8885816468280957117" datatype="html">
+        <source>Sletning</source>
+        <target state="new">Sletning</target>
+      </trans-unit>
+      <trans-unit id="611148656500703125" datatype="html">
+        <source>Behandlet</source>
+        <target state="new">Behandlet</target>
+      </trans-unit>
+      <trans-unit id="145187520600049701" datatype="html">
+        <source>Behandlet af bruger-id</source>
+        <target state="new">Behandlet af bruger-id</target>
+      </trans-unit>
+      <trans-unit id="4877786002494369428" datatype="html">
+        <source>Rækker pr. side</source>
+        <target state="new">Rækker pr. side</target>
+      </trans-unit>
+      <trans-unit id="7858070509196633484" datatype="html">
+        <source>Forrige side</source>
+        <target state="new">Forrige side</target>
+      </trans-unit>
+      <trans-unit id="2293938707574918956" datatype="html">
+        <source>Næste side</source>
+        <target state="new">Næste side</target>
+      </trans-unit>
+      <trans-unit id="8726989787543506079" datatype="html">
+        <source>Kunne ikke hente eksterne brugerændringer</source>
+        <target state="new">Kunne ikke hente eksterne brugerændringer</target>
+      </trans-unit>
+      <trans-unit id="7667083193803866408" datatype="html">
+        <source>Du kan højst vælge 100 ændringer ad gangen</source>
+        <target state="new">Du kan højst vælge 100 ændringer ad gangen</target>
+      </trans-unit>
+      <trans-unit id="3868407871277184440" datatype="html">
+        <source>Kunne ikke hente detaljerne for ændringen</source>
+        <target state="new">Kunne ikke hente detaljerne for ændringen</target>
+      </trans-unit>
+      <trans-unit id="4270994179095597619" datatype="html">
+        <source>ukendt bruger</source>
+        <target state="new">ukendt bruger</target>
+      </trans-unit>
+      <trans-unit id="7204069716504296943" datatype="html">
+        <source>Fjern brugerens adgang</source>
+        <target state="new">Fjern brugerens adgang</target>
+      </trans-unit>
+      <trans-unit id="6608188644742580127" datatype="html">
+        <source>Hvis du anvender denne sletning, mister <x id="PH" equiv-text="name"/> sin adgang til organisationen. Vil du fortsætte?</source>
+        <target state="new">Hvis du anvender denne sletning, mister <x id="PH" equiv-text="name"/> sin adgang til organisationen. Vil du fortsætte?</target>
+      </trans-unit>
+      <trans-unit id="78008570145308603" datatype="html">
+        <source>Fjern brugernes adgang</source>
+        <target state="new">Fjern brugernes adgang</target>
+      </trans-unit>
+      <trans-unit id="517175276917005250" datatype="html">
+        <source>Hvis du anvender disse sletninger, mister <x id="PH" equiv-text="changeUuids.length"/> valgte brugere deres adgang til organisationen. Vil du fortsætte?</source>
+        <target state="new">Hvis du anvender disse sletninger, mister <x id="PH" equiv-text="changeUuids.length"/> valgte brugere deres adgang til organisationen. Vil du fortsætte?</target>
+      </trans-unit>
+      <trans-unit id="6947221824772680006" datatype="html">
+        <source>Adgang fjernet</source>
+        <target state="new">Adgang fjernet</target>
+      </trans-unit>
+      <trans-unit id="9108597421142236409" datatype="html">
+        <source>Afvist</source>
+        <target state="new">Afvist</target>
+      </trans-unit>
+      <trans-unit id="7281109430207838772" datatype="html">
+        <source>Ukendt</source>
+        <target state="new">Ukendt</target>
+      </trans-unit>
+      <trans-unit id="6281936396040937438" datatype="html">
+        <source>Brugerens adgang blev fjernet</source>
+        <target state="new">Brugerens adgang blev fjernet</target>
+      </trans-unit>
+      <trans-unit id="4857975940354636319" datatype="html">
+        <source>Ændringen blev afvist</source>
+        <target state="new">Ændringen blev afvist</target>
+      </trans-unit>
+      <trans-unit id="4427256041592283049" datatype="html">
+        <source>Brugerændringen kunne ikke behandles</source>
+        <target state="new">Brugerændringen kunne ikke behandles</target>
+      </trans-unit>
+      <trans-unit id="6064698219446518110" datatype="html">
+        <source>De valgte brugerændringer kunne ikke behandles</source>
+        <target state="new">De valgte brugerændringer kunne ikke behandles</target>
+      </trans-unit>
+      <trans-unit id="5869245544850834141" datatype="html">
+        <source>Resultatet kunne ikke bekræftes</source>
+        <target state="new">Resultatet kunne ikke bekræftes</target>
+      </trans-unit>
+      <trans-unit id="8491045830088642658" datatype="html">
+        <source><x id="PH" equiv-text="results.length - failures"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet; se resultatet for hver bruger.</source>
+        <target state="new"><x id="PH" equiv-text="results.length - failures"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet; se resultatet for hver bruger.</target>
+      </trans-unit>
+      <trans-unit id="7672270251668328440" datatype="html">
+        <source>Alle valgte brugerændringer blev anvendt</source>
+        <target state="new">Alle valgte brugerændringer blev anvendt</target>
+      </trans-unit>
+      <trans-unit id="4789947961544069960" datatype="html">
+        <source>Alle valgte ændringer blev afvist</source>
+        <target state="new">Alle valgte ændringer blev afvist</target>
+      </trans-unit>
+      <trans-unit id="8817511356753895092" datatype="html">
+        <source>Ændringen afventer stadig behandling</source>
+        <target state="new">Ændringen afventer stadig behandling</target>
+      </trans-unit>
+      <trans-unit id="8646320435327639331" datatype="html">
+        <source>Ændringen har status &quot;<x id="PH" equiv-text="this.statusLabel(response.status)"/>&quot;</source>
+        <target state="new">Ændringen har status &quot;<x id="PH" equiv-text="this.statusLabel(response.status)"/>&quot;</target>
+      </trans-unit>
+      <trans-unit id="1293998052022896075" datatype="html">
+        <source>Du har ikke tilladelse til at udføre denne handling.</source>
+        <target state="new">Du har ikke tilladelse til at udføre denne handling.</target>
+      </trans-unit>
+      <trans-unit id="8111671234435835717" datatype="html">
+        <source>Kunne ikke hente antallet af eksterne brugerændringer</source>
+        <target state="new">Kunne ikke hente antallet af eksterne brugerændringer</target>
+      </trans-unit>
+      <trans-unit id="3896319102182559250" datatype="html">
+        <source>Eksterne sletninger (<x id="PH" equiv-text="this.pendingExternalChangeCount"/>)</source>
+        <target state="new">Eksterne sletninger (<x id="PH" equiv-text="this.pendingExternalChangeCount"/>)</target>
+      </trans-unit>
+      <trans-unit id="5935349689405908645" datatype="html">
+        <source>Eksterne sletninger</source>
+        <target state="new">Eksterne sletninger</target>
+      </trans-unit>
+      <trans-unit id="9182774870464178151" datatype="html">
+        <source>Excel-import</source>
+        <target state="new">Excel-import</target>
+      </trans-unit>
+      <trans-unit id="3171728705481280102" datatype="html">
+        <source> Organisationen er ikke forbundet til FK Organisation. Opret først forbindelsen under Masseopret &gt; Organisation. </source>
+        <target state="new"> Organisationen er ikke forbundet til FK Organisation. Opret først forbindelsen under Masseopret &gt; Organisation. </target>
+      </trans-unit>
+      <trans-unit id="6899956125763028526" datatype="html">
+        <source>Tjek forbindelsen igen</source>
+        <target state="new">Tjek forbindelsen igen</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

@@ -5,10 +5,34 @@
   ></app-local-admin-import-organization>
 }
 @if (selected === 'users') {
-  <app-local-admin-base-excel-import
-    [type]="usersType"
-    [helpTextKey]="baseHelpTextKey + '.users'"
-  ></app-local-admin-base-excel-import>
+  <app-segment [buttons]="userTabs" [selected]="selectedUserTab" (selectedChange)="onUserTabChange($event)"></app-segment>
+  @if (selectedUserTab === 'excel') {
+    <app-local-admin-base-excel-import
+      [type]="usersType"
+      [helpTextKey]="baseHelpTextKey + '.users'"
+    ></app-local-admin-base-excel-import>
+  }
+  @if (selectedUserTab === 'externalChanges') {
+    @if (isCheckingFkOrgConnection) {
+      <app-loading></app-loading>
+    } @else if (fkOrgConnectionError) {
+      <app-paragraph color="error">{{ fkOrgConnectionError }}</app-paragraph>
+      <app-button (buttonClick)="retryFkOrgConnectionCheck()" i18n>Prøv igen</app-button>
+    } @else if (!isFkOrgConnected) {
+      <app-card i18n-title>
+        <app-card-header title="Eksterne sletninger"></app-card-header>
+        @if (accessError$ | async; as accessError) {
+          <app-paragraph color="error">{{ accessError }}</app-paragraph>
+        }
+        <app-paragraph i18n>
+          Organisationen er ikke forbundet til FK Organisation. Opret først forbindelsen under Masseopret &gt; Organisation.
+        </app-paragraph>
+        <app-button (buttonClick)="retryFkOrgConnectionCheck()" i18n>Tjek forbindelsen igen</app-button>
+      </app-card>
+    } @else {
+      <app-external-user-changes></app-external-user-changes>
+    }
+  }
 }
 @if (selected === 'contracts') {
   <app-local-admin-base-excel-import

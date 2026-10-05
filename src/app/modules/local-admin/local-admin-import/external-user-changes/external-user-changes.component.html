@@ -1,0 +1,177 @@
+<app-overview-header>
+  <h3 i18n>Eksterne brugerændringer</h3>
+</app-overview-header>
+
+<main class="external-changes-page">
+  <div class="intro">
+    <p i18n>Gennemgå eksternt rapporterede sletninger af brugere, før de anvendes på organisationen.</p>
+    <p class="pending-summary"><strong>{{ pendingCount }}</strong> <span i18n>afventer behandling</span></p>
+  </div>
+
+  <nav class="view-tabs" aria-label="Visning af brugerændringer" i18n-aria-label>
+    <button type="button" [class.active]="activeView === 'pending'" (click)="setView('pending')" data-cy="pending-tab">
+      <span i18n>Afventer</span>
+      <span class="tab-count">{{ pendingCount }}</span>
+    </button>
+    <button type="button" [class.active]="activeView === 'resolved'" (click)="setView('resolved')" data-cy="resolved-tab" i18n>
+      Behandlede
+    </button>
+  </nav>
+
+  <section class="toolbar" aria-label="Filtrering og handlinger" i18n-aria-label>
+    <label class="search-field">
+      <span i18n>Søg efter navn eller email</span>
+      <input type="search" [formControl]="searchControl" data-cy="external-change-search" />
+    </label>
+    @if (activeView === 'pending' && selectedChangeUuids.size > 0) {
+      <div class="bulk-actions">
+        <span>{{ selectedChangeUuids.size }} <ng-container i18n>valgt</ng-container></span>
+        <button type="button" class="danger-button" (click)="resolveSelected(true)" [disabled]="isResolving" data-cy="bulk-apply" i18n>
+          Anvend sletninger
+        </button>
+        <button type="button" (click)="resolveSelected(false)" [disabled]="isResolving" data-cy="bulk-dismiss" i18n>
+          Afvis ændringer
+        </button>
+      </div>
+    }
+  </section>
+
+  @if (actionResults.length > 0) {
+    <section class="action-results" aria-live="polite" data-cy="bulk-results">
+      <h4 i18n>Resultat for valgte ændringer</h4>
+      <ul>
+        @for (result of actionResults; track result.changeUuid) {
+          <li [class.failed]="!result.success">
+            <strong>{{ result.userName }}</strong>
+            <span>{{ result.message }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th class="selection-column">
+            @if (activeView === 'pending') {
+              <input
+                type="checkbox"
+                [checked]="isAllVisibleSelected()"
+                [disabled]="isResolving || items.length === 0"
+                (change)="toggleVisibleSelection()"
+                aria-label="Vælg alle synlige ændringer"
+                i18n-aria-label
+              />
+            }
+          </th>
+          <th>
+            <button type="button" (click)="sortBy('userName')" i18n>
+              Bruger
+              @if (querySort() === 'userName') { {{ queryDescending() ? '↓' : '↑' }} }
+            </button>
+          </th>
+          <th i18n>Email</th>
+          <th>
+            <button type="button" (click)="sortBy('status')" i18n>
+              Status
+              @if (querySort() === 'status') { {{ queryDescending() ? '↓' : '↑' }} }
+            </button>
+          </th>
+          <th>
+            <button type="button" (click)="sortBy('receivedAt')" i18n>
+              Modtaget
+              @if (querySort() === 'receivedAt') { {{ queryDescending() ? '↓' : '↑' }} }
+            </button>
+          </th>
+          <th i18n>Hændelse indtruffet</th>
+          <th class="actions-column" i18n>Handling</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if (isLoading) {
+          <tr><td colspan="7" class="empty-state" i18n>Henter brugerændringer...</td></tr>
+        } @else if (hasLoadError) {
+          <tr>
+            <td colspan="7" class="empty-state">
+              <span i18n>Listen kunne ikke hentes.</span>
+              <button type="button" (click)="refresh()" i18n>Prøv igen</button>
+            </td>
+          </tr>
+        } @else if (items.length === 0) {
+          <tr><td colspan="7" class="empty-state" i18n>Ingen brugerændringer fundet.</td></tr>
+        } @else {
+          @for (change of items; track change.uuid; let index = $index) {
+            <tr [class.expanded]="expandedChangeUuid === change.uuid">
+              <td class="selection-column">
+                @if (activeView === 'pending') {
+                  <input
+                    type="checkbox"
+                    [checked]="isSelected(change)"
+                    [disabled]="isResolving || change.status !== 'Pending' || (!isSelected(change) && selectedChangeUuids.size >= 100)"
+                    (change)="toggleSelection(change)"
+                    [attr.aria-label]="'Vælg ' + (change.userName || change.email || 'bruger')"
+                  />
+                }
+              </td>
+              <td>{{ change.userName || '—' }}</td>
+              <td>{{ change.email || '—' }}</td>
+              <td><span class="status" [class.pending]="change.status === 'Pending'">{{ statusLabel(change.status) }}</span></td>
+              <td>{{ change.receivedAt | date: 'short' }}</td>
+              <td>{{ change.occurredAt ? (change.occurredAt | date: 'short') : '—' }}</td>
+              <td class="row-actions">
+                <button type="button" (click)="toggleDetails(change)" [attr.aria-expanded]="expandedChangeUuid === change.uuid" [attr.data-cy]="'change-details-' + index" i18n>
+                  Detaljer
+                </button>
+                @if (activeView === 'pending' && change.status === 'Pending') {
+                  <button type="button" class="danger-text" (click)="resolveOne(change, true)" [disabled]="isResolving" [attr.data-cy]="'apply-change-' + index" i18n>
+                    Anvend
+                  </button>
+                  <button type="button" (click)="resolveOne(change, false)" [disabled]="isResolving" [attr.data-cy]="'dismiss-change-' + index" i18n>
+                    Afvis
+                  </button>
+                }
+              </td>
+            </tr>
+            @if (expandedChangeUuid === change.uuid) {
+              <tr class="details-row">
+                <td colspan="7">
+                  @if (detailLoading.has(change.uuid!)) {
+                    <span i18n>Henter detaljer...</span>
+                  } @else if (detailErrors.has(change.uuid!)) {
+                    <span class="error-text">{{ detailErrors.get(change.uuid!) }}</span>
+                  } @else if (details.get(change.uuid!); as detail) {
+                    <dl>
+                      <div><dt i18n>Ekstern bruger-id</dt><dd>{{ detail.externalUserUuid }}</dd></div>
+                      <div><dt i18n>Lokalt bruger-id</dt><dd>{{ detail.userUuid || '—' }}</dd></div>
+                      <div><dt i18n>Ekstern besked-id</dt><dd>{{ detail.externalMessageId || '—' }}</dd></div>
+                      <div><dt i18n>Ændringstype</dt><dd i18n>Sletning</dd></div>
+                      <div><dt i18n>Behandlet</dt><dd>{{ detail.resolvedAt ? (detail.resolvedAt | date: 'short') : '—' }}</dd></div>
+                      <div><dt i18n>Behandlet af bruger-id</dt><dd>{{ detail.resolvedByUserUuid || '—' }}</dd></div>
+                    </dl>
+                  }
+                </td>
+              </tr>
+            }
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  <footer class="pagination">
+    <span>{{ rangeStart() }}–{{ rangeEnd() }} <ng-container i18n>af</ng-container> {{ total }}</span>
+    <label>
+      <span i18n>Rækker pr. side</span>
+      <select [value]="queryTake()" (change)="setPageSize($event)" aria-label="Rækker pr. side" i18n-aria-label>
+        @for (size of pageSizes; track size) {
+          <option [value]="size">{{ size }}</option>
+        }
+      </select>
+    </label>
+    <button type="button" (click)="changePage(-1)" [disabled]="pageNumber() <= 1 || isLoading" aria-label="Forrige side" i18n-aria-label>‹</button>
+    <span>{{ pageNumber() }} <ng-container i18n>af</ng-container> {{ pageCount() }}</span>
+    <button type="button" (click)="changePage(1)" [disabled]="pageNumber() >= pageCount() || isLoading" aria-label="Næste side" i18n-aria-label>›</button>
+  </footer>
+</main>

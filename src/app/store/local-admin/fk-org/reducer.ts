@@ -54,6 +54,7 @@ export const fkOrgFeature = createFeature({
       (state): FkOrgState => ({
         ...state,
         accessError: handleAccessError(APICheckConnectionError.Unknown),
+        isLoadingConnectionStatus: false,
       }),
     ),
 
