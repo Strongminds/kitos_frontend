@@ -35,6 +35,7 @@ import {
   selectITSystemUsageEnableAndRecommendedDescription,
   selectITSystemUsageEnableAndRecommendedDocumentBearing,
   selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment,
+  selectITSystemUsageEnableAndRecommendedGdprDataTypes,
   selectITSystemUsageEnableAndRecommendedGdprDocumentation,
   selectITSystemUsageEnableAndRecommendedGdprDpiaConducted,
   selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
@@ -52,6 +53,7 @@ import {
   selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod,
   selectITSystemUsageEnableAndRecommendedName,
   selectITSystemUsageEnableAndRecommendedNotes,
+  selectITSystemUsageEnableAndRecommendedRegisteredCategories,
   selectITSystemUsageEnableAndRecommendedSystemId,
   selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel,
   selectITSystemUsageEnableAndRecommendedTechnicalSystemType,
@@ -133,6 +135,8 @@ export function getItSystemUsageRecommendedTabBadges(
   ]);
 
   const gdprTab$ = combineRecommendedBadgeState([
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprDataTypes, (g) => hasItems(g?.dataSensitivityLevels)),
+    gdprField(selectITSystemUsageEnableAndRecommendedRegisteredCategories, (g) => hasItems(g?.registeredDataCategories)),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprPurpose, (g) => hasText(g?.processingPurpose)),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprDocumentation, (g) => hasValue(g?.directoryDocumentation)),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired, (g) =>

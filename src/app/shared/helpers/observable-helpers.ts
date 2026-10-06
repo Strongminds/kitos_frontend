@@ -1,6 +1,6 @@
 import { concatLatestFrom } from '@ngrx/operators';
 import { Observable, OperatorFunction, combineLatest, of, defer, catchError, shareReplay, startWith, switchMap } from 'rxjs';
-import { filter, map, tap } from 'rxjs/operators';
+import { filter, map, scan, tap } from 'rxjs/operators';
 import { Cached } from '../models/cache-item.model';
 import { hasValidCache } from './date.helpers';
 
@@ -103,18 +103,32 @@ export function combineRecommendedBadgeState(
   );
 }
 
-/** Load collections missing from the detail response only when their badge needs them. */
-export function recommendedCollectionFilled<T>(
+/** Load recommended collections, retaining their badge state while refreshing the same registration. */
+export function recommendedCollectionFilled<T extends { uuid: string }>(
   entity$: Observable<T | undefined>,
   recommended$: Observable<boolean>,
   load: (entity: T) => Observable<unknown[]>,
 ): Observable<boolean> {
+  const initialState: { uuid: string | undefined; filled: boolean } = { uuid: undefined, filled: false };
   return combineLatest([entity$, recommended$]).pipe(
-    switchMap(([entity, recommended]) =>
-      entity && recommended
-        ? defer(() => load(entity)).pipe(map((items) => items.length > 0), startWith(false), catchError(() => of(false)))
-        : of(false),
+    switchMap(([entity, recommended]) => {
+      const uuid = entity?.uuid;
+      return entity && recommended
+        ? defer(() => load(entity)).pipe(
+          map((items) => ({ uuid, filled: items.length > 0 })),
+          startWith({ uuid, filled: undefined }),
+          catchError(() => of({ uuid, filled: false })),
+        )
+        : of({ uuid, filled: false });
+    }),
+    scan(
+      (previous, current) => ({
+        uuid: current.uuid,
+        filled: current.filled ?? (previous.uuid === current.uuid && previous.filled),
+      }),
+      initialState,
     ),
+    map(({ filled }) => filled),
     shareReplay({ bufferSize: 1, refCount: true }),
   );
 }
