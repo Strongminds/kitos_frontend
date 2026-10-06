@@ -1,0 +1,16 @@
+@use "mixins";
+@use "theme";
+
+:host {
+  @include mixins.page-flex-layout-max-width;
+}
+
+.action-buttons {
+  display: flex;
+  gap: theme.$padding-medium;
+}
+
+app-button {
+  width: auto;
+  display: inline-block;
+}

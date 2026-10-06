@@ -29,39 +29,59 @@ const changes = [
   },
 ];
 
-function setupTest(connectionStatusFixture = 'existing-connection-status.json'): void {
+const usersConnectionStatusUrl = /\/sts-organization-synchronization\/users\/connection-status$/;
+const usersConnectionUrl = /\/sts-organization-synchronization\/users\/connection$/;
+
+function interceptUsersConnectionStatus(fixture: string): void {
+  cy.intercept('GET', usersConnectionStatusUrl, { fixture: `./local-admin/fk-org/${fixture}` }).as(
+    'getUsersConnectionStatus',
+  );
+}
+
+function setupTest(usersConnectionStatusFixture: string): void {
   cy.requireIntercept();
   cy.intercept('api/v2/internal/organization/*/users/permissions', {
     fixture: './organizations/users/org-users-permissions.json',
   });
   cy.intercept('api/v2/internal/organizations/*/grid/permissions', { statusCode: 404, body: {} });
-  cy.intercept('GET', /\/users\/external-changes\/pending-count$/, { body: { pendingCount: 2 } }).as(
-    'getPendingExternalChangeCount',
-  );
   cy.intercept('GET', /\/users\/external-changes\?/, (request) => {
     request.reply({ body: { total: 2, pendingCount: 2, items: changes } });
   }).as('getExternalChanges');
-  cy.intercept(
-    'GET',
-    /\/sts-organization-synchronization\/connection-status$/,
-    { fixture: `./local-admin/fk-org/${connectionStatusFixture}` },
-  );
-  cy.intercept(
-    'GET',
-    /\/sts-organization-synchronization\/connection\/change-log\?numberOfChangeLogs=5$/,
-    { fixture: './local-admin/fk-org/changelog.json' },
-  );
+  cy.intercept('GET', /\/sts-organization-synchronization\/connection-status$/, {
+    fixture: './local-admin/fk-org/existing-connection-status.json',
+  });
+  cy.intercept('GET', /\/sts-organization-synchronization\/connection\/change-log\?numberOfChangeLogs=5$/, {
+    fixture: './local-admin/fk-org/changelog.json',
+  });
+  interceptUsersConnectionStatus(usersConnectionStatusFixture);
   cy.setup(true, 'local-admin/import');
 }
 
+function openUsersTab(): void {
+  cy.getByDataCy('import-users-tab').click();
+  cy.wait('@getUsersConnectionStatus');
+}
+
 describe('external-user-changes', () => {
-  const testRunner = new TestRunner(setupTest);
-  const disconnectedTestRunner = new TestRunner(() => setupTest('empty-connection-status.json'));
+  const connectedTestRunner = new TestRunner(() => setupTest('users-connection-status-connected.json'));
+  const notConnectedTestRunner = new TestRunner(() => setupTest('users-connection-status-not-connected.json'));
+  const accessErrorTestRunner = new TestRunner(() => setupTest('users-connection-status-access-error.json'));
+
+  it('shows the Excel import and FK Organisation cards with pending count when connected', () => {
+    connectedTestRunner.runTestWithSetup('Shows two cards on the users sub-tab', () => {
+      openUsersTab();
+      cy.contains('Via Excel').should('be.visible');
+      cy.wait('@getExternalChanges');
+      cy.getByDataCy('fk-org-users-card-header').should('contain', 'Via FK Organisation (2 afventer)');
+      cy.getByDataCy('fk-org-users-connected').should('be.visible');
+      cy.getByDataCy('fk-org-users-connect').should('not.exist');
+      cy.getByDataCy('fk-org-users-disconnect').should('be.visible');
+    });
+  });
 
   it('shows pending changes and displays per-item bulk resolution outcomes', () => {
-    testRunner.runTestWithSetup('Can review external user deletions', () => {
-      cy.getByDataCy('import-users-tab').click();
-      cy.getByDataCy('external-user-changes-tab').click();
+    connectedTestRunner.runTestWithSetup('Can review external user deletions', () => {
+      openUsersTab();
       cy.wait('@getExternalChanges');
       cy.contains('Test Bruger').should('be.visible');
       cy.contains('Eksempel Bruger').should('be.visible');
@@ -80,7 +100,8 @@ describe('external-user-changes', () => {
         });
       });
 
-      cy.get('thead input[type="checkbox"]').click();
+      cy.getByDataCy('select-all').click();
+      cy.getByDataCy('selection-count').should('contain', '2');
       cy.getByDataCy('bulk-apply').click();
       cy.getByDataCy('confirm-button').click();
 
@@ -92,27 +113,95 @@ describe('external-user-changes', () => {
     });
   });
 
-  it('searches and loads resolved changes using the supported query parameters', () => {
-    testRunner.runTestWithSetup('Can search and view resolved changes', () => {
-      cy.getByDataCy('import-users-tab').click();
-      cy.getByDataCy('external-user-changes-tab').click();
-      cy.wait('@getExternalChanges');
-      cy.getByDataCy('external-change-search').type('example');
-      cy.wait('@getExternalChanges').its('request.url').should('contain', 'search=example');
-      cy.getByDataCy('resolved-tab').click();
+  it('loads resolved changes and shows an empty grid without errors', () => {
+    connectedTestRunner.runTestWithSetup('Can view resolved changes', () => {
+      openUsersTab();
       cy.wait('@getExternalChanges').then(({ request }) => {
+        expect(request.query).to.have.property('status', 'Pending');
+      });
+      cy.intercept('GET', /\/users\/external-changes\?/, {
+        body: { total: 0, pendingCount: 2, items: { $type: 'System.Linq.Enumerable', $values: [] } },
+      }).as('getResolvedChanges');
+      cy.getByDataCy('resolved-tab').click();
+      cy.wait('@getResolvedChanges').then(({ request }) => {
         expect(request.query).to.have.property('resolvedOnly', 'true');
         expect(request.query).not.to.have.property('status');
       });
+      cy.getByDataCy('external-changes-load-error').should('not.exist');
+      cy.contains('Din søgning gav intet resultat').should('be.visible');
+      cy.getByDataCy('bulk-apply').should('not.exist');
     });
   });
 
-  it('does not request external changes when the organization is not connected to FK Org', () => {
-    disconnectedTestRunner.runTestWithSetup('Checks FK Org connection before loading user changes', () => {
+  it('can select a single change from the grid checkbox column', () => {
+    connectedTestRunner.runTestWithSetup('Can select a single change', () => {
+      openUsersTab();
+      cy.wait('@getExternalChanges');
+      cy.getByDataCy('grid-checkbox').first().click();
+      cy.getByDataCy('selection-count').should('contain', '1');
+      cy.getByDataCy('clear-selection').click();
+      cy.getByDataCy('selection-count').should('contain', '0');
+    });
+  });
+
+  it('hides external changes when not connected and can connect', () => {
+    notConnectedTestRunner.runTestWithSetup('Can connect users to FK Organisation', () => {
+      openUsersTab();
+      cy.getByDataCy('fk-org-users-not-connected').should('be.visible');
+      cy.getByDataCy('fk-org-users-disconnect').should('not.exist');
+      cy.getByDataCy('external-changes-grid').should('not.exist');
+      cy.get('@getExternalChanges.all').should('have.length', 0);
+
+      cy.intercept('POST', usersConnectionUrl, { statusCode: 204 }).as('createUsersConnection');
+      interceptUsersConnectionStatus('users-connection-status-connected.json');
+      cy.getByDataCy('fk-org-users-connect').click();
+      cy.getByDataCy('confirm-button').click();
+
+      cy.wait('@createUsersConnection');
+      cy.wait('@getUsersConnectionStatus');
+      cy.wait('@getExternalChanges');
+      cy.contains('Test Bruger').should('be.visible');
+    });
+  });
+
+  it('can disconnect and hides external changes afterwards', () => {
+    connectedTestRunner.runTestWithSetup('Can disconnect users from FK Organisation', () => {
+      openUsersTab();
+      cy.wait('@getExternalChanges');
+
+      cy.intercept('DELETE', usersConnectionUrl, { statusCode: 204 }).as('deleteUsersConnection');
+      interceptUsersConnectionStatus('users-connection-status-not-connected.json');
+      cy.getByDataCy('fk-org-users-disconnect').click();
+      cy.getByDataCy('confirm-button').click();
+
+      cy.wait('@deleteUsersConnection');
+      cy.wait('@getUsersConnectionStatus');
+      cy.getByDataCy('fk-org-users-not-connected').should('be.visible');
+      cy.getByDataCy('external-changes-grid').should('not.exist');
+      cy.getByDataCy('fk-org-users-card-header').should('not.contain', 'afventer');
+    });
+  });
+
+  it('shows the access error and prevents connecting when validation fails', () => {
+    accessErrorTestRunner.runTestWithSetup('Cannot connect without access', () => {
+      openUsersTab();
+      cy.getByDataCy('fk-org-users-access-error').should('contain', 'serviceaftale');
+      cy.getByDataCy('fk-org-users-connect').should('not.exist');
+      cy.get('@getExternalChanges.all').should('have.length', 0);
+    });
+  });
+
+  it('shows retry when the connection status cannot be loaded', () => {
+    notConnectedTestRunner.runTestWithSetup('Can retry loading connection status', () => {
+      cy.intercept('GET', usersConnectionStatusUrl, { statusCode: 500, body: {} }).as('failedUsersConnectionStatus');
       cy.getByDataCy('import-users-tab').click();
-      cy.getByDataCy('external-user-changes-tab').click();
-      cy.contains('Organisationen er ikke forbundet til FK Organisation').should('be.visible');
-      cy.get('@getPendingExternalChangeCount.all').should('have.length', 0);
+      cy.wait('@failedUsersConnectionStatus');
+      cy.getByDataCy('fk-org-users-access-error').should('be.visible');
+
+      interceptUsersConnectionStatus('users-connection-status-not-connected.json');
+      cy.getByDataCy('fk-org-users-retry').click();
+      cy.wait('@getUsersConnectionStatus');
+      cy.getByDataCy('fk-org-users-not-connected').should('be.visible');
     });
   });
 });

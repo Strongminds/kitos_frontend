@@ -6,6 +6,7 @@ export const DATA_PROCESSING_COLUMNS_ID = 'data-processing-grid-columns';
 export const CONTRACT_COLUMNS_ID = 'it-contract-grid-columns';
 export const CONTRACT_SUPPLIERS_COLUMNS_ID = 'it-contract-supplier-grid-columns';
 export const USAGE_ARCHIVE_COLUMNS_ID = 'it-system-usage-archive-grid-columns';
+export const EXTERNAL_USER_CHANGES_COLUMNS_ID = 'external-user-changes-grid-columns';
 
 export const CONTRACT_SECTION_NAME = $localize`IT Kontrakt`;
 export const CONTRACT_SUPPLIERS_SECTION_NAME = $localize`IT Kontraktleverandører`;

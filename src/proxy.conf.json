@@ -1,16 +1,16 @@
 {
   "/api": {
-    "target": "https://kitos-dev.strongminds.dk/",
+    "target": "http://localhost:58943/",
     "secure": false,
     "changeOrigin": true
   },
   "/odata": {
-    "target": "https://kitos-dev.strongminds.dk/",
+    "target": "http://localhost:58943/",
     "secure": false,
     "changeOrigin": true
   },
   "/LoginHandler.ashx": {
-    "target": "https://kitos-dev.strongminds.dk/",
+    "target": "http://localhost:58943/",
     "secure": false,
     "changeOrigin": true
   }
