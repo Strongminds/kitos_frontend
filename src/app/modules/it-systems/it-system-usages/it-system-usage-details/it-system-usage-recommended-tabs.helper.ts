@@ -35,6 +35,7 @@ import {
   selectITSystemUsageEnableAndRecommendedDescription,
   selectITSystemUsageEnableAndRecommendedDocumentBearing,
   selectITSystemUsageEnableAndRecommendedGdprConductedRiskAssessment,
+  selectITSystemUsageEnableAndRecommendedGdprDataTypes,
   selectITSystemUsageEnableAndRecommendedGdprDocumentation,
   selectITSystemUsageEnableAndRecommendedGdprDpiaConducted,
   selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
@@ -50,8 +51,10 @@ import {
   selectITSystemUsageEnableAndRecommendedLifeCycleStatus,
   selectITSystemUsageEnableAndRecommendedCriticalityLevelDocumentation,
   selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod,
+  selectITSystemUsageEnableAndRecommendedGeneralPurpose,
   selectITSystemUsageEnableAndRecommendedName,
   selectITSystemUsageEnableAndRecommendedNotes,
+  selectITSystemUsageEnableAndRecommendedRegisteredCategories,
   selectITSystemUsageEnableAndRecommendedSystemId,
   selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel,
   selectITSystemUsageEnableAndRecommendedTechnicalSystemType,
@@ -110,7 +113,7 @@ export function getItSystemUsageRecommendedTabBadges(
     generalField(selectITSystemUsageEnableAndRecommendedLicensingAndCodeModels, (g) =>
       hasItems(g?.licensingAndCodeModels),
     ),
-    generalField(selectITSystemUsageEnableAndRecommendedGdprPurpose, (g) => hasText(g?.purpose)),
+    generalField(selectITSystemUsageEnableAndRecommendedGeneralPurpose, (g) => hasText(g?.purpose)),
     generalField(selectITSystemUsageEnableAndRecommendedDescription, (g) => hasText(g?.notes)),
     generalField(selectITSystemUsageEnableAndRecommendedIsBusinessCritical, (g) => hasValue(g?.isBusinessCritical)),
     generalField(selectITSystemUsageEnableAndRecommendedIsSociallyCritical, (g) => hasValue(g?.isSociallyCritical)),
@@ -133,8 +136,12 @@ export function getItSystemUsageRecommendedTabBadges(
   ]);
 
   const gdprTab$ = combineRecommendedBadgeState([
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprDataTypes, (g) => hasItems(g?.dataSensitivityLevels)),
+    gdprField(selectITSystemUsageEnableAndRecommendedRegisteredCategories, (g) => hasItems(g?.registeredDataCategories)),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprPurpose, (g) => hasText(g?.processingPurpose)),
-    gdprField(selectITSystemUsageEnableAndRecommendedGdprDocumentation, (g) => hasValue(g?.directoryDocumentation)),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprDocumentation, (g) =>
+      hasText(g?.directoryDocumentation?.url),
+    ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired, (g) =>
       hasValue(g?.isDataProcessingAgreementRequired),
     ),
