@@ -23,6 +23,7 @@ export interface ITSystemUsageState extends EntityState<ITSystemUsage> {
 
   itSystemUsage: APIItSystemUsageResponseDTO | undefined;
   itSystemUsageLoading: boolean;
+  associatedContractUuidsByUsage: Record<string, string[] | undefined>;
   permissions: APICombinedPermissionsResponseDTO | undefined;
   collectionPermissions: APIResourceCollectionPermissionsResponseDTO | undefined;
 

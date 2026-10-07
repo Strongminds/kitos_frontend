@@ -7,6 +7,7 @@ import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { RegistrationRecommendedBadgesService } from 'src/app/shared/services/registration-recommended-badges.service';
 import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 import {
   selectITSystemUsageHasModifyPermission,
@@ -83,9 +84,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   });
 
   public readonly associatedContractsEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled());
-  public readonly associatedContractsRecommended$ = this.store
-    .select(selectITSystemUsageEnableAndRecommendedAssociatedContracts)
-    .pipe(mapUIConfigStatusToRecommended());
+  public readonly associatedContractsBadge$ = this.recommendedBadgesService.usage.associatedContracts$;
   public readonly contractToDetermineIsActiveEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive)
     .pipe(mapUIConfigStatusToEnabled());
@@ -101,6 +100,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     private readonly notificationService: NotificationService,
     private readonly dialog: MatDialog,
     private readonly actions$: Actions,
+    private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
   }

@@ -44,6 +44,15 @@ export const selectItSystemUsageMainContract = createSelector(
   selectItSystemUsageGeneral,
   (general) => general?.mainContract,
 );
+export const selectItSystemUsageHasAssociatedContracts = createSelector(
+  selectITSystemUsageState,
+  selectItSystemUsage,
+  (state, usage) => {
+    if (!usage) return false;
+    const contracts = state.associatedContractUuidsByUsage[usage.uuid];
+    return contracts !== undefined ? contracts.length > 0 : !!usage.general.mainContract;
+  },
+);
 export const selectItSystemUsageValid = createSelector(
   selectItSystemUsage,
   (itSystemUsage) => itSystemUsage?.general.validity.valid,

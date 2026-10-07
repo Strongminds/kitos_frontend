@@ -40,6 +40,10 @@ export const ITSystemUsageActions = createActionGroup({
     'Get IT System Usage': (systemUsageUuid: string) => ({ systemUsageUuid }),
     'Get IT System Usage Success ': (itSystemUsage?: APIItSystemUsageResponseDTO) => ({ itSystemUsage }),
     'Get IT System Usage Error': emptyProps(),
+    'Associated Contracts Loaded': (systemUsageUuid: string, contractUuids: string[]) => ({
+      systemUsageUuid,
+      contractUuids,
+    }),
 
     'Remove IT System Usage': emptyProps(),
     'Remove IT System Usage Success ': emptyProps(),

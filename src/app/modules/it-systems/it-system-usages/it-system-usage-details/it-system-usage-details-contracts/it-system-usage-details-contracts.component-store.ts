@@ -1,10 +1,12 @@
 import { Injectable, OnDestroy } from '@angular/core';
 import { ComponentStore } from '@ngrx/component-store';
+import { Store } from '@ngrx/store';
 import { tapResponse } from '@ngrx/operators';
 
 import { Observable, map, mergeMap } from 'rxjs';
 import { APIItContractResponseDTO, ItContractV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
+import { ITSystemUsageActions } from 'src/app/store/it-system-usage/actions';
 
 interface State {
   loading: boolean;
@@ -30,7 +32,7 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
     ),
   );
 
-  constructor(private contractsService: ItContractV2Service) {
+  constructor(private contractsService: ItContractV2Service, private store: Store) {
     super({ loading: false });
   }
 
@@ -56,7 +58,13 @@ export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<
           .getManyItContractV2GetItContracts({ systemUsageUuid: systemUsageUuid, orderByProperty: 'Name' })
           .pipe(
             tapResponse({
-              next: (associatedContracts) => this.updateAssociatedContracts(associatedContracts),
+              next: (associatedContracts) => {
+                this.updateAssociatedContracts(associatedContracts);
+                this.store.dispatch(ITSystemUsageActions.associatedContractsLoaded(
+                  systemUsageUuid,
+                  associatedContracts.map(({ uuid }) => uuid),
+                ));
+              },
               error: (e) => console.error(e),
               complete: () => this.updateAssociatedContractsIsLoading(false),
             }),
