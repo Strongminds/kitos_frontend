@@ -20,6 +20,7 @@ interface AssociatedContractRowViewModel extends APIItContractResponseDTO {
 @Injectable()
 export class ItSystemUsageDetailsContractsComponentStore extends ComponentStore<State> implements OnDestroy {
   public readonly associatedContracts$ = this.select((state) => state.contracts).pipe(filterNullish());
+  public readonly associatedContractsLoaded$ = this.select((state) => state.contracts !== undefined);
   public readonly associatedContractsIsLoading$ = this.select((state) => state.loading).pipe(filterNullish());
   public readonly contractRows$ = this.associatedContracts$.pipe(
     map((contracts: Array<APIItContractResponseDTO>) =>

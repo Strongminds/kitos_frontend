@@ -1,7 +1,7 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith, filter, first } from 'rxjs';
+import { combineLatest, combineLatestWith, filter, first, map } from 'rxjs';
 import { APIItContractResponseDTO } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -76,6 +76,7 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     .select(selectRegularOptionTypesDictionary('it-contract_contract-type'))
     .pipe(filterNullish());
   public readonly isLoading$ = this.contractsStore.associatedContractsIsLoading$;
+  public readonly associatedContractsLoaded$ = this.contractsStore.associatedContractsLoaded$;
   public readonly contractRows$ = this.contractsStore.contractRows$;
   public readonly anyContracts$ = this.contractRows$.pipe(matchNonEmptyArray());
 
@@ -84,7 +85,11 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
   });
 
   public readonly associatedContractsEnabled$ = this.store.select(selectITSystemUsageEnableAndRecommendedAssociatedContracts).pipe(mapUIConfigStatusToEnabled());
-  public readonly associatedContractsBadge$ = this.recommendedBadgesService.usage.associatedContracts$;
+  public readonly associatedContractsBadge$ = combineLatest([
+    this.recommendedBadgesService.usage.associatedContracts$,
+    this.isLoading$,
+    this.associatedContractsLoaded$,
+  ]).pipe(map(([badge, isLoading, loaded]) => ({ ...badge, visible: badge.visible && loaded && !isLoading })));
   public readonly contractToDetermineIsActiveEnabled$ = this.store
     .select(selectITSystemUsageEnableAndRecommendedSelectContractToDetermineIfItSystemIsActive)
     .pipe(mapUIConfigStatusToEnabled());
