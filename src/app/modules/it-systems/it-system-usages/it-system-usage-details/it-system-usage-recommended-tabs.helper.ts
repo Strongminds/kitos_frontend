@@ -1,14 +1,20 @@
 import { RegistrationRecommendedBadges, recommendedField, hasText, hasValue } from 'src/app/shared/helpers/registration-recommended-badges.helper';
 import { Selector, Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { APIYesNoDontKnowChoice } from 'src/app/api/v2';
+import { map } from 'rxjs/operators';
 import {
   RecommendedBadgeState,
   combineRecommendedBadgeState,
   mapUIConfigStatusToRecommended,
 } from 'src/app/shared/helpers/observable-helpers';
-import { selectItSystemUsage, selectItSystemUsageArchiving, selectItSystemUsageGdpr, selectItSystemUsageGeneral, selectItSystemUsageHasAssociatedContracts } from 'src/app/store/it-system-usage/selectors';
+import {
+  selectItSystemUsage,
+  selectItSystemUsageArchiving,
+  selectItSystemUsageGdpr,
+  selectItSystemUsageGeneral,
+  selectItSystemUsageHasAssociatedContracts,
+} from 'src/app/store/it-system-usage/selectors';
 import { selectItSystem } from 'src/app/store/it-system/selectors';
 import {
   selectITSystemUsageEnableAndRecommendedActive,
@@ -79,8 +85,8 @@ export interface ItSystemUsageRecommendedTabBadges extends RegistrationRecommend
 
 /**
  * Combines module-specific tab rules with the shared roles, advis and references
- * streams. Contract associations reuse overview data and the Contracts tab's normal
- * table load; badge subscriptions never fetch contracts.
+ * streams. Contract associations reuse overview data, detail initialization and
+ * the Contracts tab's normal table load; badge subscriptions never fetch contracts.
  */
 export function getItSystemUsageRecommendedTabBadges(
   store: Store,
@@ -200,7 +206,7 @@ export function getItSystemUsageRecommendedTabBadges(
   const contractsRecommended$ = recommended(selectITSystemUsageEnableAndRecommendedAssociatedContracts);
   const associatedContractsField = {
     recommended$: contractsRecommended$,
-    filled$: store.select(selectItSystemUsageHasAssociatedContracts),
+    filled$: store.select(selectItSystemUsageHasAssociatedContracts).pipe(map((hasContracts) => hasContracts === true)),
   };
   const associatedContracts$ = combineRecommendedBadgeState([associatedContractsField]);
   const contracts$ = combineRecommendedBadgeState([

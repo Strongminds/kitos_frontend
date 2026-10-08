@@ -24,7 +24,6 @@ import {
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateAndAssociateContractDialogComponent } from './create-and-associate-contract-dialog/create-and-associate-contract-dialog.component';
-import { Actions, ofType } from '@ngrx/effects';
 import { ITContractActions } from 'src/app/store/it-contract/actions';
 import { selectItContractHasCollectionCreatePermissions } from 'src/app/store/it-contract/selectors';
 import { AsyncPipe } from '@angular/common';
@@ -104,7 +103,6 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
     private readonly contractsStore: ItSystemUsageDetailsContractsComponentStore,
     private readonly notificationService: NotificationService,
     private readonly dialog: MatDialog,
-    private readonly actions$: Actions,
     private readonly recommendedBadgesService: RegistrationRecommendedBadgesService,
   ) {
     super();
@@ -139,12 +137,6 @@ export class ITSystemUsageDetailsContractsComponent extends BaseComponent implem
         .select(selectItSystemUsageUuid)
         .pipe(filterNullish())
         .subscribe((itSystemUsageUuid) => this.contractsStore.getAssociatedContracts(itSystemUsageUuid)),
-    );
-
-    this.subscriptions.add(
-      this.actions$.pipe(ofType(ITContractActions.createAndAssociateContractSuccess)).subscribe(({ usageUuid }) => {
-        this.contractsStore.getAssociatedContracts(usageUuid);
-      }),
     );
 
     // Disable forms if user does not have rights to modify

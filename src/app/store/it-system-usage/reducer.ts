@@ -23,6 +23,8 @@ export const itSystemUsageInitialState: ITSystemUsageState = itSystemUsageAdapte
   itSystemUsage: undefined,
   itSystemUsageLoading: false,
   associatedContractUuidsByUsage: {},
+  associatedContractsByUsage: {},
+  associatedContractsLoadingByUsage: {},
   permissions: undefined,
   collectionPermissions: undefined,
   isRemoving: false,
@@ -83,6 +85,32 @@ export const itSystemUsageFeature = createFeature({
     on(
       ITSystemUsageActions.getITSystemUsageError,
       (state): ITSystemUsageState => ({ ...state, itSystemUsageLoading: false }),
+    ),
+    on(
+      ITSystemUsageActions.getAssociatedContractsStarted,
+      (state, { systemUsageUuid }): ITSystemUsageState => ({
+        ...state,
+        associatedContractsLoadingByUsage: { ...state.associatedContractsLoadingByUsage, [systemUsageUuid]: true },
+      }),
+    ),
+    on(
+      ITSystemUsageActions.getAssociatedContractsSuccess,
+      (state, { systemUsageUuid, contracts }): ITSystemUsageState => ({
+        ...state,
+        associatedContractsByUsage: { ...state.associatedContractsByUsage, [systemUsageUuid]: contracts },
+        associatedContractUuidsByUsage: {
+          ...state.associatedContractUuidsByUsage,
+          [systemUsageUuid]: contracts.map(({ uuid }) => uuid),
+        },
+        associatedContractsLoadingByUsage: { ...state.associatedContractsLoadingByUsage, [systemUsageUuid]: false },
+      }),
+    ),
+    on(
+      ITSystemUsageActions.getAssociatedContractsError,
+      (state, { systemUsageUuid }): ITSystemUsageState => ({
+        ...state,
+        associatedContractsLoadingByUsage: { ...state.associatedContractsLoadingByUsage, [systemUsageUuid]: false },
+      }),
     ),
     on(
       ITSystemUsageActions.associatedContractsLoaded,
