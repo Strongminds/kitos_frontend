@@ -1,7 +1,8 @@
 import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { catchError, combineLatestWith, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, exhaustMap, map, mergeMap, of, switchMap } from 'rxjs';
 import { StsOrganizationSynchronizationInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
@@ -147,6 +148,47 @@ export class FkOrgEffects {
             map((response) => FkOrgActions.getChangelogSuccess(response)),
             catchError(() => of(FkOrgActions.getChangelogError())),
           ),
+      ),
+    );
+  });
+
+  getUserSynchronizationStatus$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FkOrgActions.getUserSynchronizationStatus),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      switchMap(([_, organizationUuid]) =>
+        this.apiService
+          .getSingleStsOrganizationSynchronizationInternalV2GetUsersSynchronizationStatus({ organizationUuid })
+          .pipe(
+            map((status) => FkOrgActions.getUserSynchronizationStatusSuccess(status)),
+            catchError(() => of(FkOrgActions.getUserSynchronizationStatusError())),
+          ),
+      ),
+    );
+  });
+
+  createUserConnection$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FkOrgActions.createUserConnection),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      exhaustMap(([_, organizationUuid]) =>
+        this.apiService.postSingleStsOrganizationSynchronizationInternalV2CreateUsersConnection({ organizationUuid }).pipe(
+          map(() => FkOrgActions.createUserConnectionSuccess()),
+          catchError(() => of(FkOrgActions.createUserConnectionError())),
+        ),
+      ),
+    );
+  });
+
+  deleteUserConnection$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(FkOrgActions.deleteUserConnection),
+      concatLatestFrom(() => this.store.select(selectOrganizationUuid).pipe(filterNullish())),
+      exhaustMap(([_, organizationUuid]) =>
+        this.apiService.deleteSingleStsOrganizationSynchronizationInternalV2DeleteUsersConnection({ organizationUuid }).pipe(
+          map(() => FkOrgActions.deleteUserConnectionSuccess()),
+          catchError(() => of(FkOrgActions.deleteUserConnectionError())),
+        ),
       ),
     );
   });

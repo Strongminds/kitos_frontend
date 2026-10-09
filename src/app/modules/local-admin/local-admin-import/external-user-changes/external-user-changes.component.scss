@@ -1,0 +1,63 @@
+:host {
+  display: block;
+}
+
+.intro {
+  margin: 0 0 1rem;
+}
+
+.toolbar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.selection-count {
+  margin-right: 0.5rem;
+}
+
+.action-results {
+  background: #f4f7f9;
+  border-left: 4px solid #0071bc;
+  margin: 0 0 1rem;
+  padding: 0.75rem 1rem;
+
+  h4 {
+    margin: 0 0 0.5rem;
+  }
+
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  li {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1rem;
+    padding: 0.3rem 0;
+  }
+
+  li.failed {
+    color: #a51d2d;
+  }
+}
+
+.load-error {
+  align-items: center;
+  color: #a51d2d;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}

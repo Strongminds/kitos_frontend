@@ -1,0 +1,88 @@
+<div class="external-changes">
+  <p class="intro" i18n>Gennemgå sletninger af brugere rapporteret af FK Organisation, før de anvendes på organisationen.</p>
+
+  <div class="toolbar">
+    <app-segment [buttons]="viewOptions" [selected]="activeView" (selectedChange)="setView($event)"></app-segment>
+
+    <div class="actions">
+      @if (activeView === 'pending') {
+        <span class="selection-count" data-cy="selection-count">
+          {{ selectedChangeUuids.size }} <ng-container i18n>valgt</ng-container>
+        </span>
+        <app-button
+          buttonStyle="secondary"
+          size="small"
+          [disabled]="isResolving || isLoading || rows.length === 0"
+          (buttonClick)="selectAll()"
+          data-cy="select-all"
+          i18n
+          >Vælg alle</app-button
+        >
+        <app-button
+          buttonStyle="secondary"
+          size="small"
+          [disabled]="isResolving || selectedChangeUuids.size === 0"
+          (buttonClick)="clearSelection()"
+          data-cy="clear-selection"
+          i18n
+          >Ryd valg</app-button
+        >
+        <app-button
+          color="warn"
+          size="small"
+          [disabled]="selectedChangeUuids.size === 0"
+          [loading]="isResolving"
+          (buttonClick)="resolveSelected(true)"
+          data-cy="bulk-apply"
+          i18n
+          >Anvend sletninger</app-button
+        >
+        <app-button
+          buttonStyle="secondary"
+          size="small"
+          [disabled]="selectedChangeUuids.size === 0 || isResolving"
+          (buttonClick)="resolveSelected(false)"
+          data-cy="bulk-dismiss"
+          i18n
+          >Afvis ændringer</app-button
+        >
+      }
+      <app-hide-show-button
+        [columns]="viewColumns"
+        [isSecondary]="true"
+        (columnsChange)="onColumnsChange($event)"
+      ></app-hide-show-button>
+    </div>
+  </div>
+
+  @if (actionResults.length > 0) {
+    <section class="action-results" aria-live="polite" data-cy="bulk-results">
+      <h4 i18n>Resultat for valgte ændringer</h4>
+      <ul>
+        @for (result of actionResults; track result.changeUuid) {
+          <li [class.failed]="!result.success">
+            <strong>{{ result.userName }}</strong>
+            <span>{{ result.message }}</span>
+          </li>
+        }
+      </ul>
+    </section>
+  }
+
+  @if (hasLoadError) {
+    <div class="load-error" data-cy="external-changes-load-error">
+      <span i18n>Listen kunne ikke hentes.</span>
+      <app-button buttonStyle="secondary" size="small" (buttonClick)="refresh()" i18n>Prøv igen</app-button>
+    </div>
+  }
+
+  <app-local-grid
+    [data]="rows"
+    [columns]="viewColumns"
+    [loading]="isLoading"
+    [createPermission]="true"
+    [withOutline]="true"
+    (checkboxChange)="onCheckboxChange($event)"
+    data-cy="external-changes-grid"
+  ></app-local-grid>
+</div>

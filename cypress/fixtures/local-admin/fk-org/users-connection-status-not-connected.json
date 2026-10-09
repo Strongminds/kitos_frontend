@@ -1,0 +1,7 @@
+{
+  "accessStatus": { "accessGranted": true, "error": null },
+  "connected": false,
+  "canCreateConnection": true,
+  "canDeleteConnection": false,
+  "connectedAt": null
+}
