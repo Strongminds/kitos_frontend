@@ -8,11 +8,12 @@ import { APIExternalUserChangeResponse } from 'src/app/api/v2/model/externalUser
 import { APIExternalUserChangeStatus } from 'src/app/api/v2/model/externalUserChangeStatus';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
+import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { HideShowButtonComponent } from 'src/app/shared/components/grid/hide-show-button/hide-show-button.component';
 import { LocalGridComponent } from 'src/app/shared/components/local-grid/local-grid.component';
-import { SegmentButtonOption, SegmentComponent } from 'src/app/shared/components/segment/segment.component';
 import { EXTERNAL_USER_CHANGES_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { PopupMessageType } from 'src/app/shared/enums/popup-message-type';
+import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
@@ -103,15 +104,16 @@ function toDate(value?: string | null): Date | null {
   selector: 'app-external-user-changes',
   templateUrl: './external-user-changes.component.html',
   styleUrl: './external-user-changes.component.scss',
-  imports: [LocalGridComponent, SegmentComponent, ButtonComponent, HideShowButtonComponent],
+  imports: [LocalGridComponent, DropdownComponent, ButtonComponent, HideShowButtonComponent],
 })
 export class ExternalUserChangesComponent extends BaseComponent implements OnInit {
   @Output() public readonly pendingCountChange = new EventEmitter<number>();
 
-  public readonly viewOptions: SegmentButtonOption<ViewState>[] = [
-    { text: $localize`Afventer`, value: 'pending', dataCy: 'pending-tab' },
-    { text: $localize`Behandlede`, value: 'resolved', dataCy: 'resolved-tab' },
+  public readonly viewOptions: DropdownOption<ViewState>[] = [
+    { name: $localize`Afventer`, value: 'pending' },
+    { name: $localize`Behandlede`, value: 'resolved' },
   ];
+  public selectedView = this.viewOptions[0];
 
   private readonly statusOptions = [
     { name: this.statusLabel('Pending'), value: 'Pending' },
@@ -216,12 +218,13 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     );
   }
 
-  public setView(view: ViewState): void {
-    if (this.activeView === view) return;
-    this.activeView = view;
+  public setView(option: DropdownOption<ViewState> | null | undefined): void {
+    if (!option || this.activeView === option.value) return;
+    this.activeView = option.value;
+    this.selectedView = option;
     this.actionResults = [];
     this.updateViewColumns();
-    this.view$.next(view);
+    this.view$.next(option.value);
   }
 
   public refresh(): void {

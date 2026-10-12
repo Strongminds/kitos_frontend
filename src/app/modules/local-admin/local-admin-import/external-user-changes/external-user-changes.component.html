@@ -2,7 +2,16 @@
   <p class="intro" i18n>Gennemgå sletninger af brugere rapporteret af FK Organisation, før de anvendes på organisationen.</p>
 
   <div class="toolbar">
-    <app-segment [buttons]="viewOptions" [selected]="activeView" (selectedChange)="setView($event)"></app-segment>
+    <app-dropdown
+      class="view-selector"
+      text="Vælg"
+      i18n-text
+      [data]="viewOptions"
+      [value]="selectedView"
+      [clearable]="false"
+      (valueChange)="setView($event)"
+      data-cy="external-changes-view"
+    ></app-dropdown>
 
     <div class="actions">
       @if (activeView === 'pending') {

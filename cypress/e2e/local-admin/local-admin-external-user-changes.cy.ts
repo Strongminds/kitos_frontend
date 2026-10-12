@@ -122,7 +122,7 @@ describe('external-user-changes', () => {
       cy.intercept('GET', /\/users\/external-changes\?/, {
         body: { total: 0, pendingCount: 2, items: { $type: 'System.Linq.Enumerable', $values: [] } },
       }).as('getResolvedChanges');
-      cy.getByDataCy('resolved-tab').click();
+      cy.dropdownByCy('external-changes-view', 'Behandlede', true);
       cy.wait('@getResolvedChanges').then(({ request }) => {
         expect(request.query).to.have.property('resolvedOnly', 'true');
         expect(request.query).not.to.have.property('status');
