@@ -47,7 +47,7 @@ describe('Recommendation badge state', () => {
   });
 
   it('Loads only recommended collections and discards results for the previous record', () => {
-    const record$ = new BehaviorSubject('first');
+    const record$ = new BehaviorSubject({ uuid: 'first' });
     const recommended$ = new BehaviorSubject(false);
     const first$ = new Subject<unknown[]>();
     const second$ = new Subject<unknown[]>();
@@ -55,13 +55,13 @@ describe('Recommendation badge state', () => {
     let filled = false;
     const subscription = recommendedCollectionFilled(record$, recommended$, (record) => {
       requests++;
-      return record === 'first' ? first$ : second$;
+      return record.uuid === 'first' ? first$ : second$;
     }).subscribe((value) => filled = value);
     expect(requests).to.equal(0);
     recommended$.next(true);
     first$.next([{}]);
     expect(filled).to.equal(true);
-    record$.next('second');
+    record$.next({ uuid: 'second' });
     expect(filled).to.equal(false);
     first$.next([{}]);
     expect(filled).to.equal(false);
@@ -70,6 +70,32 @@ describe('Recommendation badge state', () => {
     recommended$.next(false);
     expect(filled).to.equal(false);
     expect(requests).to.equal(2);
+    subscription.unsubscribe();
+  });
+
+  it('Keeps a filled collection green during same-record refreshes but applies the refreshed result', () => {
+    const record$ = new BehaviorSubject<{ uuid: string; name: string } | undefined>({ uuid: 'first', name: 'Old' });
+    const recommended$ = new BehaviorSubject(true);
+    const responses = [new Subject<unknown[]>(), new Subject<unknown[]>(), new Subject<unknown[]>()];
+    const states: boolean[] = [];
+    let requests = 0;
+    const subscription = recommendedCollectionFilled(record$, recommended$, () => responses[requests++])
+      .subscribe((filled) => states.push(filled));
+
+    responses[0].next([{}]);
+    expect(states).to.deep.equal([false, true]);
+    record$.next({ uuid: 'first', name: 'Edited' });
+    expect(states).to.deep.equal([false, true, true]);
+    responses[0].next([]);
+    expect(states).to.deep.equal([false, true, true]);
+    responses[1].next([]);
+    expect(states).to.deep.equal([false, true, true, false]);
+    record$.next({ uuid: 'first', name: 'Edited again' });
+    responses[2].next([{}]);
+    expect(states[states.length - 1]).to.equal(true);
+    record$.next(undefined);
+    expect(states[states.length - 1]).to.equal(false);
+    expect(requests).to.equal(3);
     subscription.unsubscribe();
   });
 });
