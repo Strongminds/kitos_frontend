@@ -1,8 +1,8 @@
 import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
-import { Subject, firstValueFrom, of } from 'rxjs';
-import { APIDataSensitivityLevelChoice, APIGDPRRegistrationsResponseDTO, APIItContractResponseDTO, APIItSystemUsageResponseDTO, ItContractV2Service } from '../../api/v2';
+import { firstValueFrom, of } from 'rxjs';
+import { APIDataSensitivityLevelChoice, APIGDPRRegistrationsResponseDTO, APIItSystemUsageResponseDTO, ItContractV2Service } from '../../api/v2';
 import { getItSystemUsageRecommendedTabBadges } from '../../modules/it-systems/it-system-usages/it-system-usage-details/it-system-usage-recommended-tabs.helper';
 import { selectItSystemUsageGdpr, selectItSystemUsageGeneral, selectItSystemUsageHasAssociatedContracts } from '../../store/it-system-usage/selectors';
 import { itSystemUsageFeature, itSystemUsageInitialState } from '../../store/it-system-usage/reducer';
@@ -172,7 +172,7 @@ describe('System usage tab recommendations', () => {
     );
     cy.fixture<APIItSystemUsageResponseDTO>('it-system-usage/it-system-usage-no-main-contract.json').then((usage) => {
       expect(selectItSystemUsageHasAssociatedContracts.projector(state, { ...usage, uuid: 'usage' })).to.equal(true);
-      expect(selectItSystemUsageHasAssociatedContracts.projector(state, { ...usage, uuid: 'another' })).to.equal(false);
+      expect(selectItSystemUsageHasAssociatedContracts.projector(state, { ...usage, uuid: 'another' })).to.equal(undefined);
       const refreshed = itSystemUsageFeature.reducer(state, ITSystemUsageActions.getITSystemUsage('usage'));
       expect(refreshed.associatedContractUuidsByUsage).to.equal(state.associatedContractUuidsByUsage);
       const emptied = itSystemUsageFeature.reducer(refreshed, ITSystemUsageActions.associatedContractsLoaded('usage', []));
@@ -196,20 +196,12 @@ describe('System usage tab recommendations', () => {
     expect(await firstValueFrom(tabBadges.contracts$)).to.deep.equal({ visible: true, filled: false });
   });
 
-  it('updates the badge store from the Contracts table request without a second request', () => {
-    const response$ = new Subject<APIItContractResponseDTO[]>();
-    const request = cy.stub(TestBed.inject(ItContractV2Service), 'getManyItContractV2GetItContracts').returns(response$);
+  it('requests associated contracts through NgRx without making a direct request', () => {
+    const request = cy.stub(TestBed.inject(ItContractV2Service), 'getManyItContractV2GetItContracts');
     const dispatch = cy.stub(store, 'dispatch');
-    const tableStore = new ItSystemUsageDetailsContractsComponentStore(TestBed.inject(ItContractV2Service), store);
+    const tableStore = new ItSystemUsageDetailsContractsComponentStore(store);
     tableStore.getAssociatedContracts('usage');
-    expect(request).to.have.been.calledOnce;
-    cy.fixture<APIItContractResponseDTO[]>('it-contracts/it-contracts-by-it-system-usage-uuid.json').then((contracts) => {
-      response$.next(contracts);
-      expect(dispatch).to.have.been.calledWith(ITSystemUsageActions.associatedContractsLoaded(
-        'usage', contracts.map(({ uuid }) => uuid),
-      ));
-      expect(request).to.have.been.calledOnce;
-      tableStore.ngOnDestroy();
-    });
+    expect(dispatch).to.have.been.calledOnceWithExactly(ITSystemUsageActions.getAssociatedContracts('usage'));
+    expect(request).not.to.have.been.called;
   });
 });
