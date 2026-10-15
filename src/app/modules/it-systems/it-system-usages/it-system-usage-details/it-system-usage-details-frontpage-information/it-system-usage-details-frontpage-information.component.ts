@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, filter, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, map } from 'rxjs';
 import {
   APIGeneralDataResponseDTO,
   APIGeneralDataUpdateRequestDTO,
@@ -461,11 +461,21 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
 
   private setupFormValueChangeSubscriptions() {
     this.subscriptions.add(
+      combineLatest([
+        this.store.select(selectItSystemUsageGeneral).pipe(filterNullish()),
+        this.technicalSystemTypeDropdownOptions$,
+      ]).subscribe(([general]) => {
+        const items = this.mapTechnicalSystemTypeDropdownItems(general.technicalSystemTypes ?? []);
+        this.itSystemInformationForm.controls.technicalSystemTypes.setValue(items);
+        this.setupTechnicalSystemTypesControl(items);
+      }),
+    );
+
+    this.subscriptions.add(
       this.store
         .select(selectItSystemUsageGeneral)
         .pipe(filterNullish())
         .subscribe((general) => {
-          const technicalSystemTypeItems = this.mapTechnicalSystemTypeDropdownItems(general.technicalSystemTypes ?? []);
           const licensingAndCodeModelItems = this.mapLicensingAndCodeModelDropdownItems(
             general.licensingAndCodeModels ?? [],
           );
@@ -475,7 +485,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             localCallName: general.localCallName,
             localSystemId: general.localSystemId,
             systemVersion: general.systemVersion,
-            technicalSystemTypes: technicalSystemTypeItems,
             numberOfExpectedUsers: mapNumberOfExpectedUsers(general.numberOfExpectedUsers ?? undefined),
             dataClassification: general.dataClassification,
             notes: general.notes,
@@ -484,7 +493,6 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
             licensingAndCodeModels: licensingAndCodeModelItems,
           });
 
-          this.setupTechnicalSystemTypesControl(technicalSystemTypeItems);
           this.setupLicensingAndCodeModelsControl(licensingAndCodeModelItems);
 
           this.itSystemCriticalityForm.patchValue({
@@ -649,7 +657,11 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   ): MultiSelectDropdownItem<APIRegularOptionResponseDTO>[] {
     return types.map((type) => ({
       name: type.name,
-      value: { uuid: type.uuid, name: type.name, description: '' } as APIRegularOptionResponseDTO,
+      value: this.technicalSystemTypeDropdownOptions$.value.find((item) => item.value.uuid === type.uuid)?.value ?? {
+        uuid: type.uuid,
+        name: type.name,
+        description: '',
+      },
       selected: true,
     }));
   }

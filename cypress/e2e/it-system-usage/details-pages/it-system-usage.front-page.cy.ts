@@ -17,6 +17,31 @@ describe('it-system-usage frontpage', () => {
     getKleRow(kleNumber).contains(name);
   }
 
+  it('shows technical system type descriptions, including saved selections loaded before the options', () => {
+    cy.intercept('GET', '/api/v2/it-system-usage-technical-system-types*', {
+      delay: 500,
+      body: [
+        {
+          uuid: '1a2b3c4d-0001-0001-0001-000000000001',
+          name: 'Fagsystem',
+          description: 'Description of Fagsystem',
+        },
+        {
+          uuid: '1a2b3c4d-0001-0001-0001-000000000002',
+          name: 'Infrastruktur',
+          description: 'Description of Infrastruktur',
+        },
+      ],
+    }).as('technicalTypes');
+    cy.contains('System 3').click();
+    cy.wait('@technicalTypes');
+    cy.contains('app-multi-select-dropdown', 'Tekniske systemtyper').within(() => {
+      cy.get('app-textbox-info').should('contain.text', 'Description of Fagsystem');
+      cy.get('.ng-select-container').click();
+      cy.get('.ng-option').should('contain.text', 'Description of Infrastruktur');
+    });
+  });
+
   it('can edit business critical status', () => {
     cy.intercept('/api/v2/it-system-usages/*', { fixture: './it-system-usage/it-system-usage.json' });
     cy.contains('System 3').click();
