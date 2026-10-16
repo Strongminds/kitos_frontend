@@ -17,8 +17,12 @@ export interface APIContractInvoiceDateDTO {
      */
     period?: number;
     /**
-     * Populated invoice date within the selected calendar year, half or quarter.  Different periods may use different years. Only the date component is stored.
+     * Invoice month (1-12). Must fall within the selected calendar year, half or quarter.
      */
-    date?: string;
+    month?: number;
+    /**
+     * Invoice day of month (1-31). Must be valid for the month (29 February is allowed).
+     */
+    day?: number;
 }
 
