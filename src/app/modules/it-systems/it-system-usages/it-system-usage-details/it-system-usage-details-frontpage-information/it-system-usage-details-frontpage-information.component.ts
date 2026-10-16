@@ -2,7 +2,7 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, filter, map } from 'rxjs';
+import { BehaviorSubject, combineLatest, filter, map, take } from 'rxjs';
 import {
   APIGeneralDataResponseDTO,
   APIGeneralDataUpdateRequestDTO,
@@ -462,11 +462,14 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   private setupFormValueChangeSubscriptions() {
     this.subscriptions.add(
       combineLatest([
-        this.store.select(selectItSystemUsageGeneral).pipe(filterNullish()),
+        // Later PATCH snapshots must not replace selections made while requests are pending.
+        this.store.select(selectItSystemUsageGeneral).pipe(filterNullish(), take(1)),
         this.technicalSystemTypeDropdownOptions$,
       ]).subscribe(([general]) => {
-        const items = this.mapTechnicalSystemTypeDropdownItems(general.technicalSystemTypes ?? []);
-        this.itSystemInformationForm.controls.technicalSystemTypes.setValue(items);
+        const control = this.itSystemInformationForm.controls.technicalSystemTypes;
+        const currentTypes = control.value?.map((item) => item.value) ?? general.technicalSystemTypes ?? [];
+        const items = this.mapTechnicalSystemTypeDropdownItems(currentTypes);
+        control.setValue(items);
         this.setupTechnicalSystemTypesControl(items);
       }),
     );
@@ -635,6 +638,9 @@ export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseCompo
   }
 
   public patchTechnicalSystemTypes(selectedOptions: APIRegularOptionResponseDTO[]) {
+    this.itSystemInformationForm.controls.technicalSystemTypes.setValue(
+      selectedOptions.map(mapRegularOptionToMultiSelectItem),
+    );
     const uuids = selectedOptions.map((option) => option.uuid);
     this.patchGeneral({ technicalSystemTypeUuids: uuids });
   }
