@@ -47,6 +47,36 @@
         (valueChange)="patchEconomy({ paymentModel: { priceRegulationUuid: $event } })"
         >
       </app-dropdown>
+      <app-dropdown
+        text="Faktureringsperiode"
+        i18n-text
+        data-cy="contract-invoice-frequency"
+        valueField="value"
+        [formGroup]="economyFormGroup"
+        formName="invoiceFrequency"
+        [data]="invoiceFrequencyOptions"
+        [clearable]="false"
+        (valueChange)="onInvoiceFrequencyChange($event)"
+      ></app-dropdown>
+      @for (period of invoicePeriods; track period.period) {
+        <div class="invoice-period-row">
+          <app-textbox
+            text="Periode"
+            i18n-text
+            [formGroup]="economyFormGroup"
+            [formName]="'invoicePeriod' + period.period"
+          ></app-textbox>
+          <app-datepicker
+            text="Dato"
+            i18n-text
+            [formGroup]="economyFormGroup"
+            [formName]="'invoiceDate' + period.period"
+            [dateFilter]="period.dateFilter"
+            [attr.data-cy]="'contract-invoice-date-' + period.period"
+            (valueChange)="onInvoiceDateChange(period.period, $event)"
+          ></app-datepicker>
+        </div>
+      }
     </app-form-grid>
   </app-card>
 }

@@ -6275,6 +6275,30 @@
       <trans-unit id="5815910713095274021" datatype="html">
         <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
       </trans-unit>
+      <trans-unit id="1652415162109819049" datatype="html">
+        <source>2. halvår</source>
+      </trans-unit>
+      <trans-unit id="1737040172648089902" datatype="html">
+        <source>1. kvartal</source>
+      </trans-unit>
+      <trans-unit id="2290459434294592835" datatype="html">
+        <source>Kvartalvis</source>
+      </trans-unit>
+      <trans-unit id="3259761554295941178" datatype="html">
+        <source>1. halvår</source>
+      </trans-unit>
+      <trans-unit id="6339334100637156659" datatype="html">
+        <source>4. kvartal</source>
+      </trans-unit>
+      <trans-unit id="8022668540811942972" datatype="html">
+        <source>3. kvartal</source>
+      </trans-unit>
+      <trans-unit id="8069764561178863516" datatype="html">
+        <source>2. kvartal</source>
+      </trans-unit>
+      <trans-unit id="8303345655270462799" datatype="html">
+        <source>Periode</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

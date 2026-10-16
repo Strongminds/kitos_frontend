@@ -8209,6 +8209,38 @@
         <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
         <target state="new">Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</target>
       </trans-unit>
+      <trans-unit id="8303345655270462799" datatype="html">
+        <source>Periode</source>
+        <target state="new">Periode</target>
+      </trans-unit>
+      <trans-unit id="2290459434294592835" datatype="html">
+        <source>Kvartalvis</source>
+        <target state="new">Kvartalvis</target>
+      </trans-unit>
+      <trans-unit id="3259761554295941178" datatype="html">
+        <source>1. halvår</source>
+        <target state="new">1. halvår</target>
+      </trans-unit>
+      <trans-unit id="1652415162109819049" datatype="html">
+        <source>2. halvår</source>
+        <target state="new">2. halvår</target>
+      </trans-unit>
+      <trans-unit id="1737040172648089902" datatype="html">
+        <source>1. kvartal</source>
+        <target state="new">1. kvartal</target>
+      </trans-unit>
+      <trans-unit id="8069764561178863516" datatype="html">
+        <source>2. kvartal</source>
+        <target state="new">2. kvartal</target>
+      </trans-unit>
+      <trans-unit id="8022668540811942972" datatype="html">
+        <source>3. kvartal</source>
+        <target state="new">3. kvartal</target>
+      </trans-unit>
+      <trans-unit id="6339334100637156659" datatype="html">
+        <source>4. kvartal</source>
+        <target state="new">4. kvartal</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
