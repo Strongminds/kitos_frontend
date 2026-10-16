@@ -26,6 +26,12 @@ export const fkOrgInitialState: FkOrgState = {
   isLoadingChangelogs: false,
   availableChangelogOptions: undefined,
   changelogDictionary: undefined,
+
+  userSynchronizationStatus: undefined,
+  userAccessError: undefined,
+  isLoadingUserConnectionStatus: false,
+  hasUserConnectionStatusFailed: false,
+  isUserConnectionActionLoading: false,
 };
 
 export const fkOrgFeature = createFeature({
@@ -54,6 +60,7 @@ export const fkOrgFeature = createFeature({
       (state): FkOrgState => ({
         ...state,
         accessError: handleAccessError(APICheckConnectionError.Unknown),
+        isLoadingConnectionStatus: false,
       }),
     ),
 
@@ -149,6 +156,50 @@ export const fkOrgFeature = createFeature({
       };
     }),
     on(FkOrgActions.getChangelogError, (state): FkOrgState => ({ ...state, isLoadingChangelogs: false })),
+
+    on(
+      FkOrgActions.getUserSynchronizationStatus,
+      (state): FkOrgState => ({
+        ...state,
+        userSynchronizationStatus: undefined,
+        userAccessError: undefined,
+        isLoadingUserConnectionStatus: true,
+        hasUserConnectionStatusFailed: false,
+      }),
+    ),
+    on(
+      FkOrgActions.getUserSynchronizationStatusSuccess,
+      (state, { userSynchronizationStatus }): FkOrgState => ({
+        ...state,
+        userSynchronizationStatus,
+        userAccessError:
+          userSynchronizationStatus.accessStatus?.error != null
+            ? handleAccessError(userSynchronizationStatus.accessStatus.error)
+            : undefined,
+        isLoadingUserConnectionStatus: false,
+      }),
+    ),
+    on(
+      FkOrgActions.getUserSynchronizationStatusError,
+      (state): FkOrgState => ({
+        ...state,
+        userAccessError: handleAccessError(APICheckConnectionError.Unknown),
+        isLoadingUserConnectionStatus: false,
+        hasUserConnectionStatusFailed: true,
+      }),
+    ),
+    on(
+      FkOrgActions.createUserConnection,
+      FkOrgActions.deleteUserConnection,
+      (state): FkOrgState => ({ ...state, isUserConnectionActionLoading: true }),
+    ),
+    on(
+      FkOrgActions.createUserConnectionSuccess,
+      FkOrgActions.createUserConnectionError,
+      FkOrgActions.deleteUserConnectionSuccess,
+      FkOrgActions.deleteUserConnectionError,
+      (state): FkOrgState => ({ ...state, isUserConnectionActionLoading: false }),
+    ),
   ),
 });
 

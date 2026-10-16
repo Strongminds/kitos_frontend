@@ -40,7 +40,8 @@ import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract
 export class HideShowDialogComponent implements OnInit {
   @Input() columns!: GridColumn[];
   @Input() uiConfigApplications?: UIConfigGridApplication[] | null = null;
-  @Input() entityType!: RegistrationEntityTypes;
+  @Input() entityType?: RegistrationEntityTypes;
+  @Input() columnsSaved?: (columns: GridColumn[]) => void;
 
   public columnsCopy: GridColumn[] = [];
   public uniqueSections: string[] = [];
@@ -69,6 +70,12 @@ export class HideShowDialogComponent implements OnInit {
 
   public save() {
     const updatedColumns = this.mergeColumnChanges();
+
+    if (this.columnsSaved) {
+      this.columnsSaved(updatedColumns);
+      this.close();
+      return;
+    }
 
     switch (this.entityType) {
       case 'it-system-usage':

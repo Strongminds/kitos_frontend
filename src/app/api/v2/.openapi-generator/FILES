@@ -25,6 +25,7 @@ api/dprLocalDataResponsibleTypesInternalV2.service.ts
 api/dprLocalOversightOptionTypesInternalV2.service.ts
 api/dprLocalRoleOptionTypesInternalV2.service.ts
 api/externalReferencesInternalV2.service.ts
+api/externalUserChangesInternalV2.service.ts
 api/gdprExportReportInternalV2.service.ts
 api/globalUserInternalV2.service.ts
 api/gridLocalItContractRolesV2.service.ts
@@ -150,6 +151,7 @@ model/baseOrganizationUnitRoleAssignmentRequestDTO.ts
 model/baseUserRequestDTO.ts
 model/boundedPaginationQuery.ts
 model/brokenExternalReferencesReportStatusResponseDTO.ts
+model/bulkResolutionRequest.ts
 model/bulkRoleAssignmentRequestDTO.ts
 model/changeOrganizationUnitRegistrationV2RequestDTO.ts
 model/changePaymentRegistrationV2RequestDTO.ts
@@ -227,6 +229,11 @@ model/externalOrganizationUnitResponseDTO.ts
 model/externalReferenceDataResponseDTO.ts
 model/externalReferenceDataWriteRequestDTO.ts
 model/externalReferenceWithLastChangedResponseDTO.ts
+model/externalUserChangeInput.ts
+model/externalUserChangePublication.ts
+model/externalUserChangeResponse.ts
+model/externalUserChangeStatus.ts
+model/externalUserChangeType.ts
 model/fieldControlStateChoice.ts
 model/fieldPermissionsResponseDTO.ts
 model/gDPRPersonalDataChoice.ts
@@ -395,6 +402,7 @@ model/stsOrganizationChangeLogOriginOption.ts
 model/stsOrganizationChangeLogResponseDTO.ts
 model/stsOrganizationOrgUnitDTO.ts
 model/stsOrganizationSynchronizationDetailsResponseDTO.ts
+model/stsOrganizationUserSynchronizationDetailsResponseDTO.ts
 model/supplierAssociatedFieldConfigurationItemDTO.ts
 model/supplierAssociatedFieldConfigurationRequestDTO.ts
 model/supplierAssociatedFieldConfigurationResponseDTO.ts
