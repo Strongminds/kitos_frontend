@@ -6275,6 +6275,12 @@
       <trans-unit id="5815910713095274021" datatype="html">
         <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
       </trans-unit>
+      <trans-unit id="4687159634256539615" datatype="html">
+        <source>It System (Anvender-system)</source>
+      </trans-unit>
+      <trans-unit id="7455685579320703716" datatype="html">
+        <source>It System (Udstiller-system)</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

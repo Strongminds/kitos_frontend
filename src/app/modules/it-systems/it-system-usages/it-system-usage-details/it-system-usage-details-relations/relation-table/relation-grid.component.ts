@@ -111,6 +111,15 @@ export class RelationGridComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.columns = this.columns.map((column) =>
+      column.field === 'systemUsage.name'
+        ? {
+            ...column,
+            title: this.isOutgoing ? $localize`It System (Udstiller-system)` : $localize`It System (Anvender-system)`,
+          }
+        : column,
+    );
+
     this.isLoading = false;
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-system_usage-relation-frequency-type'));
 
