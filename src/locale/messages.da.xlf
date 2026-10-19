@@ -8241,6 +8241,54 @@
         <source>4. kvartal</source>
         <target state="new">4. kvartal</target>
       </trans-unit>
+      <trans-unit id="8044499984033738120" datatype="html">
+        <source>Januar</source>
+        <target state="new">Januar</target>
+      </trans-unit>
+      <trans-unit id="7029265543969180461" datatype="html">
+        <source>Februar</source>
+        <target state="new">Februar</target>
+      </trans-unit>
+      <trans-unit id="6984012748233716251" datatype="html">
+        <source>Marts</source>
+        <target state="new">Marts</target>
+      </trans-unit>
+      <trans-unit id="1809521303476565743" datatype="html">
+        <source>April</source>
+        <target state="new">April</target>
+      </trans-unit>
+      <trans-unit id="8711689152676402182" datatype="html">
+        <source>Maj</source>
+        <target state="new">Maj</target>
+      </trans-unit>
+      <trans-unit id="5829316612883860294" datatype="html">
+        <source>Juni</source>
+        <target state="new">Juni</target>
+      </trans-unit>
+      <trans-unit id="1899381576479788257" datatype="html">
+        <source>Juli</source>
+        <target state="new">Juli</target>
+      </trans-unit>
+      <trans-unit id="3984618989093293779" datatype="html">
+        <source>August</source>
+        <target state="new">August</target>
+      </trans-unit>
+      <trans-unit id="5872622085239011307" datatype="html">
+        <source>September</source>
+        <target state="new">September</target>
+      </trans-unit>
+      <trans-unit id="1280165460303116228" datatype="html">
+        <source>Oktober</source>
+        <target state="new">Oktober</target>
+      </trans-unit>
+      <trans-unit id="1109977718843277527" datatype="html">
+        <source>November</source>
+        <target state="new">November</target>
+      </trans-unit>
+      <trans-unit id="124191049522509365" datatype="html">
+        <source>December</source>
+        <target state="new">December</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

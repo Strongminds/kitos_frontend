@@ -6299,6 +6299,42 @@
       <trans-unit id="8303345655270462799" datatype="html">
         <source>Periode</source>
       </trans-unit>
+      <trans-unit id="1109977718843277527" datatype="html">
+        <source>November</source>
+      </trans-unit>
+      <trans-unit id="124191049522509365" datatype="html">
+        <source>December</source>
+      </trans-unit>
+      <trans-unit id="1280165460303116228" datatype="html">
+        <source>Oktober</source>
+      </trans-unit>
+      <trans-unit id="1809521303476565743" datatype="html">
+        <source>April</source>
+      </trans-unit>
+      <trans-unit id="1899381576479788257" datatype="html">
+        <source>Juli</source>
+      </trans-unit>
+      <trans-unit id="3984618989093293779" datatype="html">
+        <source>August</source>
+      </trans-unit>
+      <trans-unit id="5829316612883860294" datatype="html">
+        <source>Juni</source>
+      </trans-unit>
+      <trans-unit id="5872622085239011307" datatype="html">
+        <source>September</source>
+      </trans-unit>
+      <trans-unit id="6984012748233716251" datatype="html">
+        <source>Marts</source>
+      </trans-unit>
+      <trans-unit id="7029265543969180461" datatype="html">
+        <source>Februar</source>
+      </trans-unit>
+      <trans-unit id="8044499984033738120" datatype="html">
+        <source>Januar</source>
+      </trans-unit>
+      <trans-unit id="8711689152676402182" datatype="html">
+        <source>Maj</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

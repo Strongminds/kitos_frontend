@@ -61,7 +61,6 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
   @Input() public icon?: 'search';
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public pickerAlignmentY: 'above' | 'below' = 'above';
-  @Input() public dateFilter?: (date: moment.Moment | null) => boolean;
   @Input() override value: Date | undefined = undefined;
 
   public formDateInputValueChange(event: MatDatepickerInputEvent<moment.Moment, unknown>) {

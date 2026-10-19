@@ -66,15 +66,28 @@
             [formGroup]="economyFormGroup"
             [formName]="'invoicePeriod' + period.period"
           ></app-textbox>
-          <app-datepicker
-            text="Dato"
+          <app-dropdown
+            text="Måned"
             i18n-text
             [formGroup]="economyFormGroup"
-            [formName]="'invoiceDate' + period.period"
-            [dateFilter]="period.dateFilter"
-            [attr.data-cy]="'contract-invoice-date-' + period.period"
-            (valueChange)="onInvoiceDateChange(period.period, $event)"
-          ></app-datepicker>
+            [formName]="'invoiceMonth' + period.period"
+            valueField="value"
+            [data]="period.monthOptions"
+            [clearable]="false"
+            [attr.data-cy]="'contract-invoice-month-' + period.period"
+            (valueChange)="onInvoiceMonthChange(period.period, $event)"
+          ></app-dropdown>
+          <app-dropdown
+            text="Dag"
+            i18n-text
+            [formGroup]="economyFormGroup"
+            [formName]="'invoiceDay' + period.period"
+            valueField="value"
+            [data]="period.dayOptions"
+            [clearable]="false"
+            [attr.data-cy]="'contract-invoice-day-' + period.period"
+            (valueChange)="onInvoiceDayChange(period.period, $event)"
+          ></app-dropdown>
         </div>
       }
     </app-form-grid>
