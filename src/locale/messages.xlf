@@ -6335,6 +6335,9 @@
       <trans-unit id="8711689152676402182" datatype="html">
         <source>Maj</source>
       </trans-unit>
+      <trans-unit id="8533769281350912693" datatype="html">
+        <source>Faktureringsdatoer</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

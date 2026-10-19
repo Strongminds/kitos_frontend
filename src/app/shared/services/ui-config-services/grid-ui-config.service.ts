@@ -257,6 +257,7 @@ export class GridUIConfigService {
             ContractFields.OperationRemunerationBegunDate,
             ContractFields.PaymentModelUuid,
             ContractFields.PaymentFrequencyUuid,
+            ContractFields.InvoiceDates,
           ]),
         ),
 

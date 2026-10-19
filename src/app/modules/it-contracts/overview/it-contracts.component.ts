@@ -381,6 +381,15 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       persistId: 'paymentFrequency',
     },
     {
+      field: GridFields.InvoiceDates,
+      title: $localize`Faktureringsdatoer`,
+      section: ECONOMY_SECTION_NAME,
+      filter: 'text',
+      style: 'default',
+      hidden: false,
+      persistId: 'invoiceDates',
+    },
+    {
       field: GridFields.LatestAuditDate,
       title: $localize`Audit dato`,
       section: ECONOMY_SECTION_NAME,

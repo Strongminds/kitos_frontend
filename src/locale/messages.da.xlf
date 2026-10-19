@@ -8289,6 +8289,10 @@
         <source>December</source>
         <target state="new">December</target>
       </trans-unit>
+      <trans-unit id="8533769281350912693" datatype="html">
+        <source>Faktureringsdatoer</source>
+        <target state="new">Faktureringsdatoer</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

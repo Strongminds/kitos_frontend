@@ -27,6 +27,7 @@ export const AccumulatedOtherCost = 'AccumulatedOtherCost';
 export const OperationRemunerationBegunDate = 'OperationRemunerationBegunDate';
 export const PaymentModelUuid = 'PaymentModelUuid';
 export const PaymentFrequencyUuid = 'PaymentFrequencyUuid';
+export const InvoiceDates = 'InvoiceDates';
 export const LatestAuditDate = 'LatestAuditDate';
 export const AuditStatus = 'AuditStatus';
 export const Duration = 'Duration';
