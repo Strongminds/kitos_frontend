@@ -4,10 +4,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Dictionary } from '@ngrx/entity';
 import { Store } from '@ngrx/store';
 import { first, Observable } from 'rxjs';
-import { APIIdentityNamePairResponseDTO, APIRegularOptionResponseDTO } from 'src/app/api/v2';
+import { APIIdentityNamePairResponseDTO, APIRegularOptionResponseDTO, APISystemRelationDirectionChoice } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ConfirmationDialogComponent } from 'src/app/shared/components/dialogs/confirmation-dialog/confirmation-dialog.component';
 import { addExpiredText } from 'src/app/shared/helpers/option-type.helper';
+import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { createGridActionColumn } from 'src/app/shared/models/grid-action-column.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
@@ -23,6 +24,7 @@ export interface SystemRelationModel {
   uuid: string;
   systemUsage: APIIdentityNamePairResponseDTO;
   relationInterface?: APIIdentityNamePairResponseDTO;
+  systemRelationDirection?: DropdownOption<APISystemRelationDirectionChoice>;
   associatedContract?: APIIdentityNamePairResponseDTO;
   relationFrequency?: APIIdentityNamePairResponseDTO;
   description?: string;
@@ -62,6 +64,12 @@ export class RelationGridComponent extends BaseComponent implements OnInit {
       hidden: false,
       entityType: 'it-interface',
       style: 'page-link',
+      width: 150,
+    },
+    {
+      field: 'systemRelationDirection.name',
+      title: $localize`Dataretning`,
+      hidden: false,
       width: 150,
     },
     {
