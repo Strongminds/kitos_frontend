@@ -401,6 +401,7 @@ model/supplierAssociatedFieldConfigurationItemDTO.ts
 model/supplierAssociatedFieldConfigurationRequestDTO.ts
 model/supplierAssociatedFieldConfigurationResponseDTO.ts
 model/systemDeletionConflict.ts
+model/systemRelationDirectionChoice.ts
 model/systemRelationWriteRequestDTO.ts
 model/systemWithUsageOutsideOrganizationConflictResponseDTO.ts
 model/technicalPrecautionChoice.ts

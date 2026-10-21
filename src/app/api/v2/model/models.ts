@@ -262,6 +262,7 @@ export * from './supplierAssociatedFieldConfigurationItemDTO';
 export * from './supplierAssociatedFieldConfigurationRequestDTO';
 export * from './supplierAssociatedFieldConfigurationResponseDTO';
 export * from './systemDeletionConflict';
+export * from './systemRelationDirectionChoice';
 export * from './systemRelationWriteRequestDTO';
 export * from './systemWithUsageOutsideOrganizationConflictResponseDTO';
 export * from './technicalPrecautionChoice';

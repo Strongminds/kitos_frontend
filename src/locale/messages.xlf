@@ -6275,29 +6275,23 @@
       <trans-unit id="5815910713095274021" datatype="html">
         <source>Et eller flere felter er indstillet til &quot;Delte&quot;. Både leverandøren og kommunen kan redigere disse felter og dermed overskrive hinandens ændringer. Vil du fortsætte med at gemme?</source>
       </trans-unit>
-      <trans-unit id="1652415162109819049" datatype="html">
-        <source>2. halvår</source>
+      <trans-unit id="4687159634256539615" datatype="html">
+        <source>It System (Anvender-system)</source>
       </trans-unit>
-      <trans-unit id="1737040172648089902" datatype="html">
-        <source>1. kvartal</source>
+      <trans-unit id="7455685579320703716" datatype="html">
+        <source>It System (Udstiller-system)</source>
       </trans-unit>
-      <trans-unit id="2290459434294592835" datatype="html">
-        <source>Kvartalvis</source>
+      <trans-unit id="1707896639004290879" datatype="html">
+        <source>Bidirektionel</source>
       </trans-unit>
-      <trans-unit id="3259761554295941178" datatype="html">
-        <source>1. halvår</source>
+      <trans-unit id="2701213138972309391" datatype="html">
+        <source>Dataretning</source>
       </trans-unit>
-      <trans-unit id="6339334100637156659" datatype="html">
-        <source>4. kvartal</source>
+      <trans-unit id="5156704320597349015" datatype="html">
+        <source>Indgående data</source>
       </trans-unit>
-      <trans-unit id="8022668540811942972" datatype="html">
-        <source>3. kvartal</source>
-      </trans-unit>
-      <trans-unit id="8069764561178863516" datatype="html">
-        <source>2. kvartal</source>
-      </trans-unit>
-      <trans-unit id="8303345655270462799" datatype="html">
-        <source>Periode</source>
+      <trans-unit id="7252824347282594899" datatype="html">
+        <source>Udgående data</source>
       </trans-unit>
       <trans-unit id="1109977718843277527" datatype="html">
         <source>November</source>
@@ -6308,11 +6302,23 @@
       <trans-unit id="1280165460303116228" datatype="html">
         <source>Oktober</source>
       </trans-unit>
+      <trans-unit id="1652415162109819049" datatype="html">
+        <source>2. halvår</source>
+      </trans-unit>
+      <trans-unit id="1737040172648089902" datatype="html">
+        <source>1. kvartal</source>
+      </trans-unit>
       <trans-unit id="1809521303476565743" datatype="html">
         <source>April</source>
       </trans-unit>
       <trans-unit id="1899381576479788257" datatype="html">
         <source>Juli</source>
+      </trans-unit>
+      <trans-unit id="2290459434294592835" datatype="html">
+        <source>Kvartalvis</source>
+      </trans-unit>
+      <trans-unit id="3259761554295941178" datatype="html">
+        <source>1. halvår</source>
       </trans-unit>
       <trans-unit id="3984618989093293779" datatype="html">
         <source>August</source>
@@ -6323,20 +6329,32 @@
       <trans-unit id="5872622085239011307" datatype="html">
         <source>September</source>
       </trans-unit>
+      <trans-unit id="6339334100637156659" datatype="html">
+        <source>4. kvartal</source>
+      </trans-unit>
       <trans-unit id="6984012748233716251" datatype="html">
         <source>Marts</source>
       </trans-unit>
       <trans-unit id="7029265543969180461" datatype="html">
         <source>Februar</source>
       </trans-unit>
+      <trans-unit id="8022668540811942972" datatype="html">
+        <source>3. kvartal</source>
+      </trans-unit>
       <trans-unit id="8044499984033738120" datatype="html">
         <source>Januar</source>
       </trans-unit>
-      <trans-unit id="8711689152676402182" datatype="html">
-        <source>Maj</source>
+      <trans-unit id="8069764561178863516" datatype="html">
+        <source>2. kvartal</source>
+      </trans-unit>
+      <trans-unit id="8303345655270462799" datatype="html">
+        <source>Periode</source>
       </trans-unit>
       <trans-unit id="8533769281350912693" datatype="html">
         <source>Faktureringsdatoer</source>
+      </trans-unit>
+      <trans-unit id="8711689152676402182" datatype="html">
+        <source>Maj</source>
       </trans-unit>
     </body>
   </file>
