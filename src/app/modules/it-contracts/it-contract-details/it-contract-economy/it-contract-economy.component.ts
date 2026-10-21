@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { combineLatestWith } from 'rxjs';
+import { combineLatestWith, map } from 'rxjs';
 import {
   APIContractInvoiceDateDTO,
   APIIdentityNamePairResponseDTO,
@@ -26,6 +26,7 @@ import {
   selectItContractsEnableAndRecommendedExternalPayment,
   selectItContractsEnableAndRecommendedInternalPayment,
   selectItContractsEnableAndRecommendedPaymentModel,
+  selectItContractsEnableAndRecommendedInvoiceFrequency,
 } from 'src/app/store/organization/ui-module-customization/selectors';
 import { mapUIConfigStatusToEnabled, mapUIConfigStatusToRecommended } from 'src/app/shared/helpers/observable-helpers';
 import { RegularOptionTypeActions } from 'src/app/store/regular-option-type-store/actions';
@@ -99,6 +100,9 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     { name: $localize`December`, value: 12 },
   ];
   public invoicePeriods: InvoicePeriodRow[] = [];
+  public readonly invoiceDatesFilled$ = this.store.select(selectItContractPaymentModel).pipe(
+    map((paymentModel) => !!paymentModel?.invoiceDates?.length),
+  );
 
   public readonly externalPayments$ = this.store.select(selectItContractExternalPayments).pipe(filterNullish());
   public readonly anyExternalPayments$ = this.externalPayments$.pipe(matchNonEmptyArray());
@@ -148,6 +152,12 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
   public readonly paymentModelEnabled$ = this.store.select(selectItContractsEnableAndRecommendedPaymentModel).pipe(mapUIConfigStatusToEnabled());
   public readonly paymentModelRecommended$ = this.store
     .select(selectItContractsEnableAndRecommendedPaymentModel)
+    .pipe(mapUIConfigStatusToRecommended());
+  public readonly invoiceFrequencyEnabled$ = this.store
+    .select(selectItContractsEnableAndRecommendedInvoiceFrequency)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly invoiceFrequencyRecommended$ = this.store
+    .select(selectItContractsEnableAndRecommendedInvoiceFrequency)
     .pipe(mapUIConfigStatusToRecommended());
   public readonly externalPaymentEnabled$ = this.store.select(selectItContractsEnableAndRecommendedExternalPayment).pipe(mapUIConfigStatusToEnabled());
   public readonly externalPaymentRecommended$ = this.store
@@ -202,7 +212,9 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
               ?.monthOptions.find(
                 (option) => option.value === (this.pendingInvoiceMonths[period - 1] ?? invoiceDate?.month),
               );
-            const day = this.getDayOptions(month?.value).find((option) => option.value === invoiceDate?.day);
+            const day = this.pendingInvoiceMonths[period - 1] === undefined
+              ? this.getDayOptions(month?.value).find((option) => option.value === invoiceDate?.day)
+              : undefined;
             this.setPeriodDayOptions(period, month?.value);
             this.getInvoiceMonthControl(period).setValue(month, { emitEvent: false });
             this.getInvoiceDayControl(period).setValue(day, { emitEvent: false });
