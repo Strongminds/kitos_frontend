@@ -10,6 +10,8 @@ import { GridColumn } from '../../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../../models/registrations/registration-entity-categories.model';
 import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
 import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
+import { IconButtonComponent } from '../../buttons/icon-button/icon-button.component';
+import { XIconComponent } from '../../icons/x-icon.component';
 import { ButtonComponent } from '../../buttons/button/button.component';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
@@ -27,7 +29,7 @@ interface RangeOption {
   selector: 'app-day-month-filter',
   templateUrl: './day-month-filter.component.html',
   styleUrls: ['./day-month-filter.component.scss'],
-  imports: [DropdownComponent, ButtonComponent, DialogActionsComponent, CdkConnectedOverlay, CdkOverlayOrigin, CdkTrapFocus],
+  imports: [IconButtonComponent, XIconComponent, DropdownComponent, ButtonComponent, DialogActionsComponent, CdkConnectedOverlay, CdkOverlayOrigin, CdkTrapFocus],
 })
 export class DayMonthFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
@@ -99,14 +101,27 @@ export class DayMonthFilterComponent extends AppBaseFilterCellComponent implemen
     this.applyDateFilter();
   }
 
+  public resetFilter(): void {
+    const hasAppliedFilter = !!this.getColumnFilter();
+    this.restoreFilter(undefined);
+    if (hasAppliedFilter) this.applyFilter(this.removeFilter(this.column.field));
+    this.filterButton?.focus();
+  }
+
+  public get canReset(): boolean {
+    return !!(this.day || this.month || this.getColumnFilter());
+  }
+
   private applyDateFilter(): void {
-    this.applyFilter(this.day && this.month
-      ? this.updateFilter({
+    // Incomplete selections are drafts; only a complete date triggers a request.
+    if (!this.day || !this.month) return;
+    this.applyFilter(
+      this.updateFilter({
         field: this.column.field,
         operator: this.chosenOption.operator,
         value: { month: this.month.value, day: this.day.value },
-      })
-      : this.removeFilter(this.column.field));
+      }),
+    );
   }
 
   private restoreFilter(filter: FilterDescriptor | null | undefined): void {

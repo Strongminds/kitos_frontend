@@ -3,6 +3,13 @@
 // eslint-disable-next-line @typescript-eslint/triple-slash-reference
 /// <reference path="../../../../../cypress/support/index.d.ts" />
 
+import { Actions } from '@ngrx/effects';
+import { firstValueFrom, of } from 'rxjs';
+import { ITContractEffects } from '../../../store/it-contract/effects';
+import { ITContractActions } from '../../../store/it-contract/actions';
+import { selectOrganizationUuid } from '../../../store/user-store/selectors';
+import { selectOverviewContractRoles } from '../../../store/it-contract/selectors';
+import { GridDataCacheService } from '../../../shared/services/grid-data-cache.service';
 import { filterBy } from '@progress/kendo-data-query';
 import { GridCellComponent } from '../../../shared/components/grid/grid-cell/grid-cell.component';
 import { formatInvoiceDate, prepareInvoiceDateQueryState } from '../../../shared/helpers/invoice-dates.helpers';
@@ -160,4 +167,37 @@ describe('Contract overview invoice periods', () => {
       expect(filterBy(rows, mapped.filter!)).to.deep.equal([rows[0]]);
     }
   });
+});
+
+describe('Contract invoice filters in the effects request', () => {
+  for (const all of [false, true]) {
+    it(`expands day/month values in the HTTP request (all=${all})`, async () => {
+      const state: GridState = {
+        all, skip: 0, take: 70,
+        filter: { logic: 'and', filters: [
+          { field: 'InvoiceDate1', operator: 'gte', value: { month: 3, day: 15 } },
+          { field: 'InvoiceDate4', operator: 'lte', value: { month: 9, day: 30 } },
+        ] },
+      };
+      const get = cy.stub().returns(of({ value: [], '@odata.count': 0 }));
+      const store = { select: (selector: unknown) => of(
+        selector === selectOrganizationUuid ? 'organization' :
+        selector === selectOverviewContractRoles ? [] : { skip: 0, take: 70 },
+      ) };
+      const dependencies = [
+        new Actions(of(ITContractActions.getITContracts(state, undefined))),
+        store, {}, {}, { get }, {}, {}, {}, {}, new GridDataCacheService(),
+      ] as unknown as ConstructorParameters<typeof ITContractEffects>;
+      const effects = new ITContractEffects(...dependencies);
+      await firstValueFrom(effects.getItContracts$);
+      expect(get).to.have.been.calledOnce;
+      const url = decodeURIComponent(get.firstCall.args[0]);
+      expect(url).to.contain('InvoiceDate1Month gt 3');
+      expect(url).to.contain('InvoiceDate1Month eq 3 and InvoiceDate1Day ge 15');
+      expect(url).to.contain('InvoiceDate4Month lt 9');
+      expect(url).to.contain('InvoiceDate4Month eq 9 and InvoiceDate4Day le 30');
+      expect(url).not.to.contain('[object Object]');
+      if (all) expect(url).not.to.contain('$top');
+    });
+  }
 });

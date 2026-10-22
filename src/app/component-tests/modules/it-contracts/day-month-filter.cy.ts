@@ -58,6 +58,30 @@ function selectPart(part: 'day' | 'month', value: string) {
 }
 
 describe('Invoice day/month filter', () => {
+  it('waits for a full value and resets a partial draft without sending a request', () => {
+    mountFilter();
+    cy.get('[data-cy="day-month-filter-toggle"] button').click();
+    selectPart('month', '06');
+    cy.get('[data-cy="day-month-filter-operator"] .ng-arrow-wrapper').click();
+    cy.contains('.ng-option', 'Til og med').click();
+    cy.get('@applyFilter').should('not.have.been.called');
+    cy.get('[data-cy="day-month-filter-close"] button').click();
+    cy.get('[data-cy="day-month-filter-toggle"] button').then(($opener) => {
+      const opener = $opener[0].getBoundingClientRect();
+      cy.get('[data-cy="day-month-filter-reset"] button').should(($reset) => {
+        const reset = $reset[0].getBoundingClientRect();
+        expect(reset.left).to.be.greaterThan(opener.left);
+        expect(reset.right).to.be.lessThan(opener.right);
+        expect(reset.top).to.be.greaterThan(opener.top);
+        expect(reset.bottom).to.be.lessThan(opener.bottom);
+      });
+    });
+    cy.get('[data-cy="day-month-filter-reset"] button').click();
+    cy.get('@applyFilter').should('not.have.been.called');
+    cy.get('[data-cy="day-month-filter-toggle"] button').click();
+    cy.get('[data-cy="day-month-filter-month"] .ng-value-label').should('not.exist');
+  });
+
   it('opens outside a narrow cell and closes with Escape or an outside click', () => {
     mountFilter();
     cy.get('[data-cy="day-month-filter-panel"]').should('not.exist');
@@ -87,7 +111,7 @@ describe('Invoice day/month filter', () => {
     mountFilter();
     cy.get('[data-cy="day-month-filter-toggle"] button').click();
     selectPart('day', '31');
-    cy.get('@applyFilter').should('have.been.calledWithMatch', { filters: [] });
+    cy.get('@applyFilter').should('not.have.been.called');
     selectPart('month', '03');
     cy.get('@applyFilter').should('have.been.calledWithMatch', {
       filters: [{ field: 'InvoiceDate1', operator: 'gte', value: { month: 3, day: 31 } }],
@@ -98,7 +122,13 @@ describe('Invoice day/month filter', () => {
       filters: [{ field: 'InvoiceDate1', operator: 'lte', value: { month: 3, day: 31 } }],
     });
     cy.get('[data-cy="day-month-filter-day"] .ng-clear-wrapper').click();
-    cy.get('@applyFilter').should('have.been.calledWithMatch', { filters: [] });
+    cy.get('@applyFilter').should('have.callCount', 2);
+    cy.get('[data-cy="day-month-filter-close"] button').click();
+    cy.get('[data-cy="day-month-filter-reset"] button').click();
+    cy.get('@applyFilter').should('have.callCount', 3).and('have.been.calledWithMatch', { filters: [] });
+    cy.get('[data-cy="day-month-filter-panel"]').should('not.exist');
+    cy.get('[data-cy="day-month-filter-toggle"] button').should('contain.text', 'Dato').and('be.focused');
+    cy.get('[data-cy="day-month-filter-reset"]').should('not.exist');
   });
 
   it('clears an invalid day when changing months and allows February 29', () => {
@@ -107,6 +137,7 @@ describe('Invoice day/month filter', () => {
     selectPart('day', '31');
     selectPart('month', '03');
     selectPart('month', '02');
+    cy.get('@applyFilter').should('have.been.calledOnce');
     cy.get('[data-cy="day-month-filter-day"] .ng-value-label').should('not.exist');
     cy.get('[data-cy="day-month-filter-day"] .ng-arrow-wrapper').click();
     cy.get('.ng-option').should('have.length', 29);
@@ -115,7 +146,7 @@ describe('Invoice day/month filter', () => {
       filters: [{ field: 'InvoiceDate1', operator: 'gte', value: { month: 2, day: 29 } }],
     });
     cy.get('[data-cy="day-month-filter-month"] .ng-clear-wrapper').click();
-    cy.get('@applyFilter').should('have.been.calledWithMatch', { filters: [] });
+    cy.get('@applyFilter').should('have.callCount', 2);
   });
 
   it('restores saved day, month and operator, and resets all controls', () => {

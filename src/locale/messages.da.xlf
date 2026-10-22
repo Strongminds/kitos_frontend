@@ -8313,9 +8313,33 @@
         <source>4. kvartal</source>
         <target state="new">4. kvartal</target>
       </trans-unit>
-      <trans-unit id="8533769281350912693" datatype="html">
-        <source>Faktureringsdatoer</source>
-        <target state="new">Faktureringsdatoer</target>
+      <trans-unit id="3790393484998374886" datatype="html">
+        <source>Faktureringsdato 1</source>
+        <target state="new">Faktureringsdato 1</target>
+      </trans-unit>
+      <trans-unit id="7981924121654091123" datatype="html">
+        <source>Faktureringsdato 2</source>
+        <target state="new">Faktureringsdato 2</target>
+      </trans-unit>
+      <trans-unit id="4616464535749922557" datatype="html">
+        <source>Faktureringsdato 3</source>
+        <target state="new">Faktureringsdato 3</target>
+      </trans-unit>
+      <trans-unit id="8026313393615040568" datatype="html">
+        <source>Faktureringsdato 4</source>
+        <target state="new">Faktureringsdato 4</target>
+      </trans-unit>
+      <trans-unit id="4021597295427293582" datatype="html">
+        <source>Nulstil datofilter</source>
+        <target state="new">Nulstil datofilter</target>
+      </trans-unit>
+      <trans-unit id="8549909986498732810" datatype="html">
+        <source>Datosammenligning</source>
+        <target state="new">Datosammenligning</target>
+      </trans-unit>
+      <trans-unit id="46376569860723432" datatype="html">
+        <source>Luk</source>
+        <target state="new">Luk</target>
       </trans-unit>
     </body>
   </file>

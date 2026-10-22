@@ -1,22 +1,35 @@
-<app-button
-  #filterButton
-  cdkOverlayOrigin
-  #origin="cdkOverlayOrigin"
-  class="filter-button"
-  data-cy="day-month-filter-toggle"
-  buttonStyle="secondary"
-  size="small"
-  iconType="calendar"
-  [alignStart]="true"
-  [backgroundWhite]="true"
-  [class.active]="day && month"
-  [ariaExpanded]="isOpen"
-  [ariaControls]="isOpen ? 'day-month-filter-' + column.field : null"
-  ariaHasPopup="dialog"
-  (buttonClick)="togglePanel()"
->
-  <span class="filter-label">{{ buttonLabel }}</span>
-</app-button>
+<div class="filter-controls" [class.has-value]="canReset">
+  <app-button
+    #filterButton
+    cdkOverlayOrigin
+    #origin="cdkOverlayOrigin"
+    class="filter-button"
+    data-cy="day-month-filter-toggle"
+    buttonStyle="secondary"
+    size="small"
+    iconType="calendar"
+    [alignStart]="true"
+    [backgroundWhite]="true"
+    [class.active]="day && month"
+    [ariaExpanded]="isOpen"
+    [ariaControls]="isOpen ? 'day-month-filter-' + column.field : null"
+    ariaHasPopup="dialog"
+    (buttonClick)="togglePanel()"
+  >
+    <span class="filter-label">{{ buttonLabel }}</span>
+  </app-button>
+  @if (canReset) {
+  <app-icon-button
+    data-cy="day-month-filter-reset"
+    tooltipText="Nulstil datofilter"
+    i18n-tooltipText
+    (buttonClick)="resetFilter()"
+  >
+    <app-x-icon aria-hidden="true"></app-x-icon>
+    <span class="cdk-visually-hidden" i18n>Nulstil datofilter</span>
+  </app-icon-button>
+  }
+</div>
 
 <ng-template
   cdkConnectedOverlay

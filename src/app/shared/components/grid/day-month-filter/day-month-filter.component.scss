@@ -7,9 +7,43 @@
   width: 100%;
 }
 
+.filter-controls {
+  position: relative;
+}
+
 .filter-button {
   display: block;
   width: 100%;
+  min-width: 0;
+}
+
+// Visually share the opener's outline without nesting interactive buttons.
+app-icon-button {
+  position: absolute;
+  right: theme.$padding-smaller;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+:host ::ng-deep .has-value .filter-button button {
+  padding-right: 44px;
+}
+
+// Match the dropdown clear control's muted colour and interaction states.
+:host ::ng-deep app-icon-button {
+  app-x-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  app-x-icon path {
+    stroke: rgb(0 0 0 / 54%);
+  }
+
+  button:hover app-x-icon path,
+  button:focus-visible app-x-icon path {
+    stroke: rgb(0 0 0 / 87%);
+  }
 }
 
 // Keep the shared button's appearance while allowing long dates in narrow columns.
@@ -17,7 +51,8 @@
   min-width: 0;
   max-width: 100%;
 
-  app-icon {
+  app-icon,
+  svg {
     flex-shrink: 0;
   }
 }

@@ -390,7 +390,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     },
     {
       field: GridFields.InvoiceDate1,
-      title: $localize`Faktureringsdato 1`,
+      title: $localize`Fakturerings startdato 1`,
       section: ECONOMY_SECTION_NAME,
       extraFilter: 'day-month',
       width: 320,
@@ -401,7 +401,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     },
     {
       field: GridFields.InvoiceDate2,
-      title: $localize`Faktureringsdato 2`,
+      title: $localize`Fakturerings startdato 2`,
       section: ECONOMY_SECTION_NAME,
       extraFilter: 'day-month',
       width: 320,
@@ -412,7 +412,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     },
     {
       field: GridFields.InvoiceDate3,
-      title: $localize`Faktureringsdato 3`,
+      title: $localize`Fakturerings startdato 3`,
       section: ECONOMY_SECTION_NAME,
       extraFilter: 'day-month',
       width: 320,
@@ -423,7 +423,7 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
     },
     {
       field: GridFields.InvoiceDate4,
-      title: $localize`Faktureringsdato 4`,
+      title: $localize`Fakturerings startdato 4`,
       section: ECONOMY_SECTION_NAME,
       extraFilter: 'day-month',
       width: 320,
