@@ -61,4 +61,27 @@ describe('it-contracts.frontpage', () => {
     cy.getByDataCy('require-valid-parent').find('input').click();
     cy.get('app-popup-message').should('exist');
   });
+
+  it('can clear the supplier and keep it cleared after reloading', () => {
+    cy.fixture('it-contracts/it-contract.json').then((contract) => {
+      cy.intercept('GET', `/api/v2/it-contracts/${contract.uuid}`, (request) => {
+        request.reply({ body: contract });
+      });
+      cy.intercept('PATCH', `/api/v2/it-contracts/${contract.uuid}`, (request) => {
+        expect(request.body.supplier).to.deep.equal({ organizationUuid: null, isInternal: false });
+        contract = { ...contract, supplier: { ...contract.supplier, organization: null, isInternal: false } };
+        request.reply({ body: contract });
+      }).as('clearSupplier');
+    });
+
+    cy.contains('Contract 1').click();
+    cy.getByDataCy('contract-supplier').should('contain', 'Organisation 1');
+    cy.getByDataCy('contract-supplier').find('.ng-clear-wrapper').click();
+    cy.wait('@clearSupplier');
+    cy.getByDataCy('contract-supplier').find('.ng-value').should('not.exist');
+
+    cy.reload();
+    cy.getByDataCy('contract-supplier').find('ng-select').should('be.visible');
+    cy.getByDataCy('contract-supplier').find('.ng-value').should('not.exist');
+  });
 });
