@@ -21,6 +21,7 @@ import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
+import { invoiceFrequencyChoiceOptions } from 'src/app/shared/models/it-contract/invoice-frequency-choice';
 import { yearSegmentChoiceOptions } from 'src/app/shared/models/it-contract/year-segment-choice';
 import { yesNoOptions } from 'src/app/shared/models/yes-no.model';
 import { GridDataKey } from 'src/app/shared/services/column-filter-data.service';
@@ -384,7 +385,8 @@ export class ITContractsComponent extends BaseOverviewComponent implements OnIni
       field: GridFields.InvoiceFrequency,
       title: $localize`Faktureringsperiode`,
       section: ECONOMY_SECTION_NAME,
-      noFilter: true,
+      extraFilter: 'enum',
+      extraData: invoiceFrequencyChoiceOptions,
       hidden: false,
       persistId: 'invoiceFrequency',
     },

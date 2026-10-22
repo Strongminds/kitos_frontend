@@ -1,5 +1,10 @@
 import { APIInvoiceFrequencyChoice } from 'src/app/api/v2';
 
+export const invoiceFrequencyChoiceOptions = Object.values(APIInvoiceFrequencyChoice).map((value) => ({
+  name: formatInvoiceFrequency(value),
+  value,
+}));
+
 export function formatInvoiceFrequency(value: APIInvoiceFrequencyChoice | null | undefined): string {
   switch (value) {
     case APIInvoiceFrequencyChoice.Yearly:

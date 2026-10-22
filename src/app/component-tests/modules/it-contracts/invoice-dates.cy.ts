@@ -32,6 +32,20 @@ function adaptPeriods(values: Record<string, unknown>) {
 }
 
 describe('Contract overview invoice periods', () => {
+  for (const frequency of ['Yearly', 'HalfYearly', 'Quarterly']) {
+    it(`preserves the ${frequency} enum filter in nested OData queries`, () => {
+      const state: GridState = { filter: { logic: 'and', filters: [
+        { field: 'ByEnding', operator: 'eq', value: 'EndOfCalendarYear' },
+        { logic: 'or', filters: [
+          { field: 'InvoiceFrequency', operator: 'eq', value: frequency },
+          { field: 'InvoiceFrequency', operator: 'isnull' },
+        ] },
+      ] } };
+      const query = toODataString(prepareInvoiceDateQueryState(state));
+      expect(query).to.contain(`ByEnding eq 'EndOfCalendarYear' and (InvoiceFrequency eq '${frequency}' or InvoiceFrequency eq null)`);
+    });
+  }
+
   it('restores saved full dates without converting day/month or numeric filter values', () => {
     const invoice = { field: 'InvoiceDate1', operator: 'gte', value: { month: 3, day: 31 } };
     const numeric = { field: 'AccumulatedOperationCost', operator: 'gte', value: 100 };
@@ -175,6 +189,7 @@ describe('Contract invoice filters in the effects request', () => {
       const state: GridState = {
         all, skip: 0, take: 70,
         filter: { logic: 'and', filters: [
+          { field: 'InvoiceFrequency', operator: 'eq', value: 'Quarterly' },
           { field: 'InvoiceDate1', operator: 'gte', value: { month: 3, day: 15 } },
           { field: 'InvoiceDate4', operator: 'lte', value: { month: 9, day: 30 } },
         ] },
@@ -192,6 +207,7 @@ describe('Contract invoice filters in the effects request', () => {
       await firstValueFrom(effects.getItContracts$);
       expect(get).to.have.been.calledOnce;
       const url = decodeURIComponent(get.firstCall.args[0]);
+      expect(url).to.contain("InvoiceFrequency eq 'Quarterly'");
       expect(url).to.contain('InvoiceDate1Month gt 3');
       expect(url).to.contain('InvoiceDate1Month eq 3 and InvoiceDate1Day ge 15');
       expect(url).to.contain('InvoiceDate4Month lt 9');

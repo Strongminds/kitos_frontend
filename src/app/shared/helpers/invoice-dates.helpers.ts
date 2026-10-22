@@ -1,7 +1,6 @@
 import { DayMonthFilterValue, isDayMonthFilterValue } from './day-month.helpers';
 import { CompositeFilterDescriptor, FilterDescriptor, isCompositeFilterDescriptor } from '@progress/kendo-data-query';
 import {
-  InvoiceFrequency,
   InvoiceDate1,
   InvoiceDate2,
   InvoiceDate3,
@@ -39,7 +38,6 @@ function mapInvoiceDateFilter(entry: CompositeFilterDescriptor | FilterDescripto
     const mapped = mapInvoiceDateFilters(entry);
     return mapped.filters.length ? [mapped] : [];
   }
-  if (entry.field === InvoiceFrequency) return []; // Frequency filtering is not enabled yet.
   if (typeof entry.field !== 'string' || !invoiceDateFields.includes(entry.field)) return [entry];
   if (!isDayMonthFilterValue(entry.value) || (entry.operator !== 'gte' && entry.operator !== 'lte')) return [];
   return [createInvoiceDateRangeFilter(entry.field, entry.value, entry.operator)];
