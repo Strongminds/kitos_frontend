@@ -68,6 +68,9 @@ describe('Invoice day/month filter', () => {
     cy.get('[data-cy="day-month-filter-panel"]').should('be.visible').and(($panel) => {
       expect($panel[0].getBoundingClientRect().width).to.be.greaterThan(120);
     });
+    cy.get('[data-cy="day-month-filter-panel"]').should('have.css', 'font-family').and('contain', 'Mulish');
+    cy.get('[data-cy="day-month-filter-day"] .ng-select-container').should('have.css', 'height', '56px');
+    cy.get('[data-cy="day-month-filter-close"] button').should('have.class', 'mat-mdc-button-base');
     selectPart('day', '15');
     selectPart('month', '06');
     cy.get('[data-cy="day-month-filter-close"] button').focus().type('{esc}');

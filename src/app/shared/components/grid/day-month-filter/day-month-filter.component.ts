@@ -9,6 +9,7 @@ import { getMonthDayCount, isDayMonthFilterValue } from '../../../helpers/day-mo
 import { GridColumn } from '../../../models/grid-column.model';
 import { RegistrationEntityTypes } from '../../../models/registrations/registration-entity-categories.model';
 import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
+import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../buttons/button/button.component';
 import { FilterIconComponent } from '../../icons/filter.component';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
@@ -27,7 +28,7 @@ interface RangeOption {
   selector: 'app-day-month-filter',
   templateUrl: './day-month-filter.component.html',
   styleUrls: ['./day-month-filter.component.scss'],
-  imports: [DropdownComponent, ButtonComponent, FilterIconComponent, CdkConnectedOverlay, CdkOverlayOrigin, CdkTrapFocus],
+  imports: [DropdownComponent, ButtonComponent, DialogActionsComponent, FilterIconComponent, CdkConnectedOverlay, CdkOverlayOrigin, CdkTrapFocus],
 })
 export class DayMonthFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;

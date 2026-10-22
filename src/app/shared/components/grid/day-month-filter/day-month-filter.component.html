@@ -28,7 +28,7 @@
   (detach)="closePanel()"
 >
   <section
-    class="filter-panel"
+    class="filter-panel mat-typography"
     data-cy="day-month-filter-panel"
     [id]="'day-month-filter-' + column.field"
     role="dialog"
@@ -40,7 +40,6 @@
       data-cy="day-month-filter-operator"
       text="Datosammenligning"
       i18n-text
-      size="medium"
       [data]="options"
       textField="text"
       valueField="operator"
@@ -53,7 +52,6 @@
         data-cy="day-month-filter-day"
         text="Dag"
         i18n-text
-        size="medium"
         [data]="days"
         [value]="day"
         (valueChange)="dayChange($event)"
@@ -62,12 +60,13 @@
         data-cy="day-month-filter-month"
         text="Måned"
         i18n-text
-        size="medium"
         [data]="months"
         [value]="month"
         (valueChange)="monthChange($event)"
       ></app-dropdown>
     </div>
-    <app-button class="close-button" data-cy="day-month-filter-close" buttonStyle="secondary" size="small" (buttonClick)="closePanel()" i18n>Luk</app-button>
+    <app-dialog-actions>
+      <app-button data-cy="day-month-filter-close" buttonStyle="secondary" (buttonClick)="closePanel()" i18n>Luk</app-button>
+    </app-dialog-actions>
   </section>
 </ng-template>
