@@ -64,9 +64,10 @@ describe('it-contracts.frontpage', () => {
 
   it('can clear the supplier and keep it cleared after reloading', () => {
     cy.fixture('it-contracts/it-contract.json').then((contract) => {
+      contract = { ...contract, uuid: 'aa4d6fd4-51c8-4744-afbf-6783fc16a565' };
       cy.intercept('GET', `/api/v2/it-contracts/${contract.uuid}`, (request) => {
         request.reply({ body: contract });
-      });
+      }).as('getSupplierContract');
       cy.intercept('PATCH', `/api/v2/it-contracts/${contract.uuid}`, (request) => {
         expect(request.body.supplier).to.deep.equal({ organizationUuid: null, isInternal: false });
         contract = { ...contract, supplier: { ...contract.supplier, organization: null, isInternal: false } };
@@ -75,12 +76,14 @@ describe('it-contracts.frontpage', () => {
     });
 
     cy.contains('Contract 1').click();
+    cy.wait('@getSupplierContract');
     cy.getByDataCy('contract-supplier').should('contain', 'Organisation 1');
     cy.getByDataCy('contract-supplier').find('.ng-clear-wrapper').click();
     cy.wait('@clearSupplier');
     cy.getByDataCy('contract-supplier').find('.ng-value').should('not.exist');
 
     cy.reload();
+    cy.wait('@getSupplierContract');
     cy.getByDataCy('contract-supplier').find('ng-select').should('be.visible');
     cy.getByDataCy('contract-supplier').find('.ng-value').should('not.exist');
   });
