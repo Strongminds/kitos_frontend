@@ -35,7 +35,7 @@ jobs:
 
       - name: Cypress run
         if: matrix.containers == 1 || env.CYPRESS_RECORD_KEY != ''
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7.4.6
         with:
           start: yarn start
           wait-on: "http://localhost:4200"
@@ -60,7 +60,7 @@ jobs:
           cache: "yarn"
 
       - name: Cypress Component Tests
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7.4.6
         with:
           command: yarn cypress run --component
         env:
