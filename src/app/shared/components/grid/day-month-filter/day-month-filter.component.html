@@ -1,0 +1,73 @@
+<button
+  #filterButton
+  cdkOverlayOrigin
+  #origin="cdkOverlayOrigin"
+  type="button"
+  class="filter-button"
+  data-cy="day-month-filter-toggle"
+  [class.active]="day && month"
+  [attr.aria-expanded]="isOpen"
+  [attr.aria-controls]="isOpen ? 'day-month-filter-' + column.field : null"
+  aria-haspopup="dialog"
+  (click)="togglePanel()"
+>
+  <span class="filter-icon" aria-hidden="true"><app-filter-icon></app-filter-icon></span>
+  <span>{{ buttonLabel }}</span>
+</button>
+
+<ng-template
+  cdkConnectedOverlay
+  [cdkConnectedOverlayOrigin]="origin"
+  [cdkConnectedOverlayOpen]="isOpen"
+  [cdkConnectedOverlayHasBackdrop]="true"
+  cdkConnectedOverlayBackdropClass="cdk-overlay-transparent-backdrop"
+  [cdkConnectedOverlayPush]="true"
+  [cdkConnectedOverlayViewportMargin]="12"
+  (backdropClick)="closePanel()"
+  (overlayKeydown)="onPanelKeydown($event)"
+  (detach)="closePanel()"
+>
+  <section
+    class="filter-panel"
+    data-cy="day-month-filter-panel"
+    [id]="'day-month-filter-' + column.field"
+    role="dialog"
+    [attr.aria-label]="column.title"
+    cdkTrapFocus
+    [cdkTrapFocusAutoCapture]="true"
+  >
+    <app-dropdown
+      data-cy="day-month-filter-operator"
+      text="Datosammenligning"
+      i18n-text
+      size="medium"
+      [data]="options"
+      textField="text"
+      valueField="operator"
+      [clearable]="false"
+      [value]="chosenOption"
+      (valueChange)="optionChange($event)"
+    ></app-dropdown>
+    <div class="date-parts">
+      <app-dropdown
+        data-cy="day-month-filter-day"
+        text="Dag"
+        i18n-text
+        size="medium"
+        [data]="days"
+        [value]="day"
+        (valueChange)="dayChange($event)"
+      ></app-dropdown>
+      <app-dropdown
+        data-cy="day-month-filter-month"
+        text="Måned"
+        i18n-text
+        size="medium"
+        [data]="months"
+        [value]="month"
+        (valueChange)="monthChange($event)"
+      ></app-dropdown>
+    </div>
+    <app-button class="close-button" data-cy="day-month-filter-close" buttonStyle="secondary" size="small" (buttonClick)="closePanel()" i18n>Luk</app-button>
+  </section>
+</ng-template>

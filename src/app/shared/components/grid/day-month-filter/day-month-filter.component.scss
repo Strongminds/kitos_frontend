@@ -1,0 +1,81 @@
+@use "theme";
+@use "mixins";
+
+:host {
+  display: block;
+  min-width: 0;
+  width: 100%;
+}
+
+.filter-button {
+  border: 1px solid theme.$color-neutral-40;
+  border-radius: theme.$radius-large;
+  background: theme.$color-white;
+  color: theme.$color-neutral-80;
+  font-family: theme.$app-font;
+  font-size: 14px;
+  text-align: left;
+  cursor: pointer;
+
+  &:hover,
+  &.active {
+    background: theme.$color-primary-10;
+    border-color: theme.$color-primary-80;
+  }
+
+  &:focus-visible {
+    outline: 2px solid theme.$color-primary-80;
+    outline-offset: 2px;
+  }
+
+  display: flex;
+  align-items: center;
+  gap: theme.$padding-small;
+  width: 100%;
+  min-height: 48px;
+  padding: theme.$padding-small theme.$padding-medium;
+
+  .filter-icon {
+    display: flex;
+    flex: 0 0 20px;
+    height: 20px;
+  }
+
+  span {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+.filter-panel {
+  box-sizing: border-box;
+  width: 340px;
+  max-width: calc(100vw - 24px);
+  display: flex;
+  flex-direction: column;
+  gap: theme.$padding-medium;
+  padding: theme.$padding-medium;
+  border: 1px solid theme.$color-neutral-40;
+  border-radius: theme.$radius-large;
+  background: theme.$color-white;
+  @include mixins.elevation;
+}
+
+.date-parts {
+  display: flex;
+  gap: theme.$padding-small;
+
+  app-dropdown {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+.close-button {
+  align-self: flex-end;
+}
+
+.filter-button.active {
+  color: theme.$color-neutral;
+}

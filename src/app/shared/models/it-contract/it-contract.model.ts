@@ -1,3 +1,4 @@
+import { formatInvoiceDate } from '../../helpers/invoice-dates.helpers';
 import { formatProcurementPlan } from '../../helpers/procurement-plan.helpers';
 import { organizationNameWithCvrAndAvailability } from '../../helpers/string.helpers';
 import {
@@ -7,6 +8,7 @@ import {
   RoleAssignmentsMap,
 } from '../helpers/read-model-role-assignments';
 import { mapToYesNoEnum } from '../yes-no.model';
+import { formatInvoiceFrequency } from './invoice-frequency-choice';
 import { OverviewAuditModel } from './audit-model';
 import { mapYearSegmentChoice } from './year-segment-choice';
 
@@ -59,7 +61,19 @@ export interface ITContract {
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
   Note: string;
-  InvoiceDates: string;
+  InvoiceFrequency: string;
+  InvoiceDate1Month: number | null;
+  InvoiceDate1Day: number | null;
+  InvoiceDate1: string;
+  InvoiceDate2Month: number | null;
+  InvoiceDate2Day: number | null;
+  InvoiceDate2: string;
+  InvoiceDate3Month: number | null;
+  InvoiceDate3Day: number | null;
+  InvoiceDate3: string;
+  InvoiceDate4Month: number | null;
+  InvoiceDate4Day: number | null;
+  InvoiceDate4: string;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -138,6 +152,18 @@ export const adaptITContract = (value: any): ITContract | undefined => {
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
     Note: value.Note,
-    InvoiceDates: value.InvoiceDates,
+    InvoiceFrequency: formatInvoiceFrequency(value.InvoiceFrequency),
+    InvoiceDate1Month: value.InvoiceDate1Month ?? null,
+    InvoiceDate1Day: value.InvoiceDate1Day ?? null,
+    InvoiceDate1: formatInvoiceDate(value.InvoiceDate1Month, value.InvoiceDate1Day),
+    InvoiceDate2Month: value.InvoiceDate2Month ?? null,
+    InvoiceDate2Day: value.InvoiceDate2Day ?? null,
+    InvoiceDate2: formatInvoiceDate(value.InvoiceDate2Month, value.InvoiceDate2Day),
+    InvoiceDate3Month: value.InvoiceDate3Month ?? null,
+    InvoiceDate3Day: value.InvoiceDate3Day ?? null,
+    InvoiceDate3: formatInvoiceDate(value.InvoiceDate3Month, value.InvoiceDate3Day),
+    InvoiceDate4Month: value.InvoiceDate4Month ?? null,
+    InvoiceDate4Day: value.InvoiceDate4Day ?? null,
+    InvoiceDate4: formatInvoiceDate(value.InvoiceDate4Month, value.InvoiceDate4Day),
   };
 };

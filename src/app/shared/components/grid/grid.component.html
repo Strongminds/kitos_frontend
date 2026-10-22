@@ -69,6 +69,13 @@
         [entityType]="entityType"
         class="overflow-hidden-container"
       ></app-string-filter>
+      } @if (columnConfig.extraFilter === 'day-month') {
+      <app-day-month-filter
+        [column]="columnFilter"
+        [filter]="filter"
+        [entityType]="entityType"
+        [columnConfig]="columnConfig"
+      ></app-day-month-filter>
       } @if (columnFilter.filter === 'numeric') {
       <app-numeric-filter
         [column]="columnFilter"

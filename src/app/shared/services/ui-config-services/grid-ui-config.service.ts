@@ -47,6 +47,7 @@ import {
   selectItContractsEnableAndRecommendedExternalPayment,
   selectItContractsEnableAndRecommendedExternalSigner,
   selectItContractsEnableAndRecommendedInternalPayment,
+  selectItContractsEnableAndRecommendedInvoiceFrequency,
   selectItContractsEnableAndRecommendedInternalSigner,
   selectItContractsEnableAndRecommendedIsActive,
   selectItContractsEnableAndRecommendedNotes,
@@ -257,7 +258,18 @@ export class GridUIConfigService {
             ContractFields.OperationRemunerationBegunDate,
             ContractFields.PaymentModelUuid,
             ContractFields.PaymentFrequencyUuid,
-            ContractFields.InvoiceDates,
+          ]),
+        ),
+      this.store
+        .select(selectItContractsEnableAndRecommendedInvoiceFrequency)
+        .pipe(
+          mapUIConfigStatusToEnabled(),
+          shouldEnable([
+            ContractFields.InvoiceFrequency,
+            ContractFields.InvoiceDate1,
+            ContractFields.InvoiceDate2,
+            ContractFields.InvoiceDate3,
+            ContractFields.InvoiceDate4,
           ]),
         ),
 
