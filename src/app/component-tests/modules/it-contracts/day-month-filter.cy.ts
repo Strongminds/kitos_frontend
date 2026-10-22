@@ -61,10 +61,12 @@ describe('Invoice day/month filter', () => {
   it('opens outside a narrow cell and closes with Escape or an outside click', () => {
     mountFilter();
     cy.get('[data-cy="day-month-filter-panel"]').should('not.exist');
-    cy.get('[data-cy="day-month-filter-toggle"] svg').should(($icon) => {
+    cy.get('[data-cy="day-month-filter-toggle"] button').should('have.class', 'mat-mdc-outlined-button');
+    cy.get('[data-cy="day-month-filter-toggle"] app-calendar-icon').should('exist');
+    cy.get('[data-cy="day-month-filter-toggle"] button svg').should(($icon) => {
       expect($icon[0].getBoundingClientRect().width).to.equal(20);
     });
-    cy.get('[data-cy="day-month-filter-toggle"]').should('have.attr', 'aria-expanded', 'false').click();
+    cy.get('[data-cy="day-month-filter-toggle"] button').should('have.attr', 'aria-expanded', 'false').click();
     cy.get('[data-cy="day-month-filter-panel"]').should('be.visible').and(($panel) => {
       expect($panel[0].getBoundingClientRect().width).to.be.greaterThan(120);
     });
@@ -75,7 +77,7 @@ describe('Invoice day/month filter', () => {
     selectPart('month', '06');
     cy.get('[data-cy="day-month-filter-close"] button').focus().type('{esc}');
     cy.get('[data-cy="day-month-filter-panel"]').should('not.exist');
-    cy.get('[data-cy="day-month-filter-toggle"]').should('be.focused').and('contain.text', '≥ 15-06').click();
+    cy.get('[data-cy="day-month-filter-toggle"] button').should('be.focused').and('contain.text', '≥ 15-06').click();
     cy.get('[data-cy="day-month-filter-day"] .ng-value-label').should('contain.text', '15');
     cy.get('.cdk-overlay-backdrop').click('bottomRight');
     cy.get('[data-cy="day-month-filter-panel"]').should('not.exist');
@@ -83,7 +85,7 @@ describe('Invoice day/month filter', () => {
 
   it('selects day and month, changes the inclusive operator, and clears the filter', () => {
     mountFilter();
-    cy.get('[data-cy="day-month-filter-toggle"]').click();
+    cy.get('[data-cy="day-month-filter-toggle"] button').click();
     selectPart('day', '31');
     cy.get('@applyFilter').should('have.been.calledWithMatch', { filters: [] });
     selectPart('month', '03');
@@ -101,7 +103,7 @@ describe('Invoice day/month filter', () => {
 
   it('clears an invalid day when changing months and allows February 29', () => {
     mountFilter();
-    cy.get('[data-cy="day-month-filter-toggle"]').click();
+    cy.get('[data-cy="day-month-filter-toggle"] button').click();
     selectPart('day', '31');
     selectPart('month', '03');
     selectPart('month', '02');
@@ -134,13 +136,13 @@ describe('Invoice day/month filter', () => {
       expect(component.day?.value).to.equal(30);
       expect(component.chosenOption.operator).to.equal('lte');
     });
-    cy.get('[data-cy="day-month-filter-toggle"]').should('contain.text', '≤ 30-09').click();
+    cy.get('[data-cy="day-month-filter-toggle"] button').should('contain.text', '≤ 30-09').click();
     cy.get('[data-cy="day-month-filter-day"] .ng-value-label').should('contain.text', '30');
     cy.get('[data-cy="day-month-filter-month"] .ng-value-label').should('contain.text', '09');
     cy.get('[data-cy="day-month-filter-panel"]').screenshot('day-month-filter-panel');
     cy.get('[data-cy="day-month-filter-close"] button').click();
     cy.get('[data-cy="day-month-filter-panel"]').should('not.exist');
-    cy.get('[data-cy="day-month-filter-toggle"]').should('be.focused').screenshot('day-month-filter-button');
+    cy.get('[data-cy="day-month-filter-toggle"] button').should('be.focused').screenshot('day-month-filter-button');
   });
 });
 

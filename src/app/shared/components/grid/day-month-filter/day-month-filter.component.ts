@@ -1,6 +1,6 @@
 import { CdkTrapFocus } from '@angular/cdk/a11y';
 import { CdkConnectedOverlay, CdkOverlayOrigin } from '@angular/cdk/overlay';
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Actions } from '@ngrx/effects';
 import { ColumnComponent, FilterService } from '@progress/kendo-angular-grid';
 import { CompositeFilterDescriptor, FilterDescriptor } from '@progress/kendo-data-query';
@@ -11,7 +11,6 @@ import { RegistrationEntityTypes } from '../../../models/registrations/registrat
 import { DropdownComponent } from '../../dropdowns/dropdown/dropdown.component';
 import { DialogActionsComponent } from '../../dialogs/dialog-actions/dialog-actions.component';
 import { ButtonComponent } from '../../buttons/button/button.component';
-import { FilterIconComponent } from '../../icons/filter.component';
 import { AppBaseFilterCellComponent } from '../app-base-filter-cell.component';
 
 interface DatePartOption {
@@ -28,7 +27,7 @@ interface RangeOption {
   selector: 'app-day-month-filter',
   templateUrl: './day-month-filter.component.html',
   styleUrls: ['./day-month-filter.component.scss'],
-  imports: [DropdownComponent, ButtonComponent, DialogActionsComponent, FilterIconComponent, CdkConnectedOverlay, CdkOverlayOrigin, CdkTrapFocus],
+  imports: [DropdownComponent, ButtonComponent, DialogActionsComponent, CdkConnectedOverlay, CdkOverlayOrigin, CdkTrapFocus],
 })
 export class DayMonthFilterComponent extends AppBaseFilterCellComponent implements OnInit {
   @Input() override filter!: CompositeFilterDescriptor;
@@ -36,7 +35,7 @@ export class DayMonthFilterComponent extends AppBaseFilterCellComponent implemen
   @Input() public entityType!: RegistrationEntityTypes;
   @Input() public columnConfig?: GridColumn;
 
-  @ViewChild('filterButton') private filterButton?: ElementRef<HTMLButtonElement>;
+  @ViewChild('filterButton') private filterButton?: ButtonComponent;
   public isOpen = false;
 
   public readonly months = this.createNumberOptions(12);
@@ -74,7 +73,7 @@ export class DayMonthFilterComponent extends AppBaseFilterCellComponent implemen
 
   public closePanel(): void {
     this.isOpen = false;
-    this.filterButton?.nativeElement.focus();
+    this.filterButton?.focus();
   }
 
   public onPanelKeydown(event: KeyboardEvent): void {

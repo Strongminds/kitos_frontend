@@ -1,19 +1,22 @@
-<button
+<app-button
   #filterButton
   cdkOverlayOrigin
   #origin="cdkOverlayOrigin"
-  type="button"
   class="filter-button"
   data-cy="day-month-filter-toggle"
+  buttonStyle="secondary"
+  size="small"
+  iconType="calendar"
+  [alignStart]="true"
+  [backgroundWhite]="true"
   [class.active]="day && month"
-  [attr.aria-expanded]="isOpen"
-  [attr.aria-controls]="isOpen ? 'day-month-filter-' + column.field : null"
-  aria-haspopup="dialog"
-  (click)="togglePanel()"
+  [ariaExpanded]="isOpen"
+  [ariaControls]="isOpen ? 'day-month-filter-' + column.field : null"
+  ariaHasPopup="dialog"
+  (buttonClick)="togglePanel()"
 >
-  <span class="filter-icon" aria-hidden="true"><app-filter-icon></app-filter-icon></span>
-  <span>{{ buttonLabel }}</span>
-</button>
+  <span class="filter-label">{{ buttonLabel }}</span>
+</app-button>
 
 <ng-template
   cdkConnectedOverlay

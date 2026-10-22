@@ -8,44 +8,24 @@
 }
 
 .filter-button {
-  border: 1px solid theme.$color-neutral-40;
-  border-radius: theme.$radius-large;
-  background: theme.$color-white;
-  color: theme.$color-neutral-80;
-  font-family: theme.$app-font;
-  font-size: 14px;
-  text-align: left;
-  cursor: pointer;
-
-  &:hover,
-  &.active {
-    background: theme.$color-primary-10;
-    border-color: theme.$color-primary-80;
-  }
-
-  &:focus-visible {
-    outline: 2px solid theme.$color-primary-80;
-    outline-offset: 2px;
-  }
-
-  display: flex;
-  align-items: center;
-  gap: theme.$padding-small;
+  display: block;
   width: 100%;
-  min-height: 48px;
-  padding: theme.$padding-small theme.$padding-medium;
+}
 
-  .filter-icon {
-    display: flex;
-    flex: 0 0 20px;
-    height: 20px;
-  }
+// Keep the shared button's appearance while allowing long dates in narrow columns.
+:host ::ng-deep .filter-button .mdc-button__label {
+  min-width: 0;
+  max-width: 100%;
 
-  span {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  app-icon {
+    flex-shrink: 0;
   }
+}
+
+.filter-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .filter-panel {
@@ -72,6 +52,3 @@
   }
 }
 
-.filter-button.active {
-  color: theme.$color-neutral;
-}
