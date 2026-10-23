@@ -8233,6 +8233,90 @@
         <source>Bidirektionel</source>
         <target state="translated">Bidirektionel</target>
       </trans-unit>
+      <trans-unit id="8747803947058043155" datatype="html">
+        <source>Sletning af persondata</source>
+        <target state="new">Sletning af persondata</target>
+      </trans-unit>
+      <trans-unit id="2379824252855133424" datatype="html">
+        <source>Kan persondata slettes?</source>
+        <target state="new">Kan persondata slettes?</target>
+      </trans-unit>
+      <trans-unit id="8485449892102039589" datatype="html">
+        <source>Ja, enkelte registreringer</source>
+        <target state="new">Ja, enkelte registreringer</target>
+      </trans-unit>
+      <trans-unit id="7662664617683372377" datatype="html">
+        <source>Ja, massesletning</source>
+        <target state="new">Ja, massesletning</target>
+      </trans-unit>
+      <trans-unit id="7097208152349340670" datatype="html">
+        <source>Slettemetode</source>
+        <target state="new">Slettemetode</target>
+      </trans-unit>
+      <trans-unit id="6322347453729475906" datatype="html">
+        <source>Sletning foretages automatisk i systemet</source>
+        <target state="new">Sletning foretages automatisk i systemet</target>
+      </trans-unit>
+      <trans-unit id="2395380589394563607" datatype="html">
+        <source>Sletning foretages manuelt i organisationen</source>
+        <target state="new">Sletning foretages manuelt i organisationen</target>
+      </trans-unit>
+      <trans-unit id="898941272447243743" datatype="html">
+        <source>Sletning foretages på bestilling hos leverandøren</source>
+        <target state="new">Sletning foretages på bestilling hos leverandøren</target>
+      </trans-unit>
+      <trans-unit id="494865761333054159" datatype="html">
+        <source>Slettefrist</source>
+        <target state="new">Slettefrist</target>
+      </trans-unit>
+      <trans-unit id="4575595402077148643" datatype="html">
+        <source>Frister for sletning af persondata</source>
+        <target state="new">Frister for sletning af persondata</target>
+      </trans-unit>
+      <trans-unit id="5034677918593162587" datatype="html">
+        <source>Link til sletteprocedure</source>
+        <target state="new">Link til sletteprocedure</target>
+      </trans-unit>
+      <trans-unit id="872088996901133837" datatype="html">
+        <source>Ansvarlig for sletning</source>
+        <target state="new">Ansvarlig for sletning</target>
+      </trans-unit>
+      <trans-unit id="2419441230244269918" datatype="html">
+        <source>Dato for seneste kontrol af sletning</source>
+        <target state="new">Dato for seneste kontrol af sletning</target>
+      </trans-unit>
+      <trans-unit id="6141737652590643919" datatype="html">
+        <source>Link til dokumentation for kontrol</source>
+        <target state="new">Link til dokumentation for kontrol</target>
+      </trans-unit>
+      <trans-unit id="9141896189283023591" datatype="html">
+        <source>Kan der slettes i systemet?</source>
+        <target state="new">Kan der slettes i systemet?</target>
+      </trans-unit>
+      <trans-unit id="4764560537955570992" datatype="html">
+        <source>Hvordan foregår sletning?</source>
+        <target state="new">Hvordan foregår sletning?</target>
+      </trans-unit>
+      <trans-unit id="8461338530544032144" datatype="html">
+        <source>Slettefrist for systemet</source>
+        <target state="new">Slettefrist for systemet</target>
+      </trans-unit>
+      <trans-unit id="8790425925199955404" datatype="html">
+        <source>Hvem er ansvarlig for sletning i systemet</source>
+        <target state="new">Hvem er ansvarlig for sletning i systemet</target>
+      </trans-unit>
+      <trans-unit id="9070188215340932036" datatype="html">
+        <source>Kontrol af at der er foretaget sletning</source>
+        <target state="new">Kontrol af at der er foretaget sletning</target>
+      </trans-unit>
+      <trans-unit id="4746850687225256015" datatype="html">
+        <source>Link til kontrol af sletning</source>
+        <target state="new">Link til kontrol af sletning</target>
+      </trans-unit>
+      <trans-unit id="3427178878099719643" datatype="html">
+        <source>Kan der slettes i systemet</source>
+        <target state="new">Kan der slettes i systemet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

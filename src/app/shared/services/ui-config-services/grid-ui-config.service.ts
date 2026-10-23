@@ -75,6 +75,7 @@ import {
   selectITSystemUsageEnableAndRecommendedGdprDataTypes,
   selectITSystemUsageEnableAndRecommendedGdprDocumentation,
   selectITSystemUsageEnableAndRecommendedGdprDpiaConducted,
+  selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion,
   selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableAndRecommendedGdprPurpose,
@@ -372,6 +373,7 @@ export class GridUIConfigService {
       this.store
         .select(selectITSystemUsageEnableAndRecommendedGdprDocumentation)
         .pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.LinkToDirectoryName])),
+      this.store.select(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.PersonalDataDeletionCapability, UsageFields.PersonalDataDeletionMethod, UsageFields.PersonalDataDeletionDeadlineTypeUuid, UsageFields.PersonalDataDeletionResponsibleUserName, UsageFields.PersonalDataDeletionVerifiedDate, UsageFields.PersonalDataDeletionProcedureDocumentationName, UsageFields.PersonalDataDeletionVerificationDocumentationName])),
       this.store.select(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted).pipe(mapUIConfigStatusToEnabled(), shouldEnable([UsageFields.DpiaConducted])),
       this.store
         .select(selectITSystemUsageEnableAndRecommendedSystemUsageCriticalityLevel)

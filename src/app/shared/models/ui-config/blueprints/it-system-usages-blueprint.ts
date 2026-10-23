@@ -154,6 +154,10 @@ export const ItSystemUsageUiBluePrint = {
           text: $localize`Kræver system databehandleraftale`,
           disableByDefault: true,
         },
+        personalDataDeletion: {
+          text: $localize`Kan der slettes i systemet`,
+          disableByDefault: true,
+        },
       },
     },
     systemRoles: {
