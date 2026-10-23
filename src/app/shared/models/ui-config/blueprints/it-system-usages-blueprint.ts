@@ -147,15 +147,15 @@ export const ItSystemUsageUiBluePrint = {
         dpiaConducted: {
           text: $localize`Gennemført DPIA / Konsekvensanalyse`,
         },
-        personalDataDeletion: {
-          text: $localize`Kan der slettes i systemet`,
-          disableByDefault: true,
-        },
         retentionPeriod: {
           text: $localize`Er der bevaringsfrist på data inden de må slettes?`,
         },
         isDataProcessingAgreementRequired: {
           text: $localize`Kræver system databehandleraftale`,
+          disableByDefault: true,
+        },
+        personalDataDeletion: {
+          text: $localize`Kan der slettes i systemet`,
           disableByDefault: true,
         },
       },
