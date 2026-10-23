@@ -6335,6 +6335,27 @@
       <trans-unit id="6141737652590643919" datatype="html">
         <source>Link til dokumentation for kontrol</source>
       </trans-unit>
+      <trans-unit id="3427178878099719643" datatype="html">
+        <source>Kan der slettes i systemet</source>
+      </trans-unit>
+      <trans-unit id="4746850687225256015" datatype="html">
+        <source>Link til kontrol af sletning</source>
+      </trans-unit>
+      <trans-unit id="4764560537955570992" datatype="html">
+        <source>Hvordan foregår sletning?</source>
+      </trans-unit>
+      <trans-unit id="8461338530544032144" datatype="html">
+        <source>Slettefrist for systemet</source>
+      </trans-unit>
+      <trans-unit id="8790425925199955404" datatype="html">
+        <source>Hvem er ansvarlig for sletning i systemet</source>
+      </trans-unit>
+      <trans-unit id="9070188215340932036" datatype="html">
+        <source>Kontrol af at der er foretaget sletning</source>
+      </trans-unit>
+      <trans-unit id="9141896189283023591" datatype="html">
+        <source>Kan der slettes i systemet?</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

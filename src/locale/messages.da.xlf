@@ -8289,6 +8289,34 @@
         <source>Link til dokumentation for kontrol</source>
         <target state="new">Link til dokumentation for kontrol</target>
       </trans-unit>
+      <trans-unit id="9141896189283023591" datatype="html">
+        <source>Kan der slettes i systemet?</source>
+        <target state="new">Kan der slettes i systemet?</target>
+      </trans-unit>
+      <trans-unit id="4764560537955570992" datatype="html">
+        <source>Hvordan foregår sletning?</source>
+        <target state="new">Hvordan foregår sletning?</target>
+      </trans-unit>
+      <trans-unit id="8461338530544032144" datatype="html">
+        <source>Slettefrist for systemet</source>
+        <target state="new">Slettefrist for systemet</target>
+      </trans-unit>
+      <trans-unit id="8790425925199955404" datatype="html">
+        <source>Hvem er ansvarlig for sletning i systemet</source>
+        <target state="new">Hvem er ansvarlig for sletning i systemet</target>
+      </trans-unit>
+      <trans-unit id="9070188215340932036" datatype="html">
+        <source>Kontrol af at der er foretaget sletning</source>
+        <target state="new">Kontrol af at der er foretaget sletning</target>
+      </trans-unit>
+      <trans-unit id="4746850687225256015" datatype="html">
+        <source>Link til kontrol af sletning</source>
+        <target state="new">Link til kontrol af sletning</target>
+      </trans-unit>
+      <trans-unit id="3427178878099719643" datatype="html">
+        <source>Kan der slettes i systemet</source>
+        <target state="new">Kan der slettes i systemet</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
