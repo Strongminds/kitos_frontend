@@ -5,7 +5,8 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { BehaviorSubject, combineLatest, map, switchMap, shareReplay } from 'rxjs';
+import { Actions, ofType } from '@ngrx/effects';
+import { BehaviorSubject, combineLatest, map, switchMap, shareReplay, withLatestFrom } from 'rxjs';
 import {
   APISimpleLinkDTO,
   APIGDPRRegistrationsResponseDTO,
@@ -71,6 +72,7 @@ export class GdprPersonalDataDeletionSectionComponent extends BaseAccordionCompo
   constructor(
     private readonly store: Store,
     private readonly organizationService: OrganizationV2Service,
+    private readonly actions$: Actions,
   ) {
     super();
   }
@@ -81,6 +83,20 @@ export class GdprPersonalDataDeletionSectionComponent extends BaseAccordionCompo
       combineLatest([this.gdpr$, this.store.select(selectITSystemUsageHasModifyPermission)])
         .subscribe(([gdpr, permission]) => this.applyGdprState(gdpr, permission === true)),
     );
+    this.subscribeToSaveFailures();
+  }
+
+  private subscribeToSaveFailures(): void {
+    this.subscriptions.add(
+      this.actions$.pipe(
+        ofType(ITSystemUsageActions.patchITSystemUsageError),
+        withLatestFrom(this.gdpr$, this.store.select(selectITSystemUsageHasModifyPermission)),
+      ).subscribe(([, gdpr, permission]) => this.applyGdprState(gdpr, permission === true)),
+    );
+  }
+
+  public externalSearch(): boolean {
+    return true;
   }
 
   private applyGdprState(gdpr: APIGDPRRegistrationsResponseDTO, canModify: boolean): void {

@@ -71,6 +71,7 @@
         valueField="uuid"
         [considerCurrentValueObsoleteIfNotPresentInData]="false"
         [data]="users$ | async"
+        [searchFn]="externalSearch"
         (filterChange)="userSearch$.next($event)"
         (valueChange)="patchGdpr({ personalDataDeletionResponsibleUserUuid: $event })"
         data-cy="deletion-responsible-user"
