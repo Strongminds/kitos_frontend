@@ -20,6 +20,11 @@
       (blur)="focus(false)"
       #input
       />
+      @if (clearable && formName && !formGroup.controls[formName].disabled && formGroup.controls[formName].value) {
+        <button type="button" class="clear-button" matIconSuffix (click)="clear()" aria-label="Ryd dato" i18n-aria-label>
+          <span class="clear-icon" aria-hidden="true">×</span>
+        </button>
+      }
       @if ((formName !== null && formGroup.controls[formName].disabled) === false) {
         <mat-datepicker-toggle
           [disableRipple]="true"
@@ -52,6 +57,11 @@
         class="{{ size }}"
         (dateChange)="dateInputChanged($event)"
         />
+        @if (!disabled && clearable && value) {
+          <button type="button" class="clear-button" matIconSuffix (click)="clear()" aria-label="Ryd dato" i18n-aria-label>
+            <span class="clear-icon" aria-hidden="true">×</span>
+          </button>
+        }
         @if (!disabled) {
           <mat-datepicker-toggle [disableRipple]="true" matIconSuffix [for]="picker">
             <mat-icon svgIcon="custom-mat-calendar-toggle-icon" matDatepickerToggleIcon data-cy="datepicker-toggle"></mat-icon>
