@@ -676,3 +676,6 @@ function getTabViewModelFromModule(
   if (!moduleConfigChildren) return undefined;
   return moduleConfigChildren.find((vm) => vm.fullKey === tabFullKey);
 }
+
+export const selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion =
+  createItSystemUsageGdprFieldEnableAndRecommendedSelector('personalDataDeletion');

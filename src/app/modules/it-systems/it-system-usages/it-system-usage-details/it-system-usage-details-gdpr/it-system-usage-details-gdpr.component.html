@@ -66,6 +66,10 @@
             (expandedChanged)="expandedSectionChanged($event, 'dpia-conducted')"
           ></app-gdpr-dpia-conducted-section>
         }
+        @if (showPersonalDataDeletion$ | async) {
+          <app-gdpr-personal-data-deletion-section [isExpanded$]="personalDataDeletionExpanded$"
+            (expandedChanged)="expandedSectionChanged($event, 'personal-data-deletion')" />
+        }
         @if (showRetentionPeriod$ | async) {
           <app-gdpr-retention-period-section
             (noPermissions)="disableFormsIfNoPermissions($event)"

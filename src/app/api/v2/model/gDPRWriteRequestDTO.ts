@@ -22,19 +22,19 @@ import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
 export interface APIGDPRWriteRequestDTO { 
-    personalDataDeletionCapability?: APIPersonalDataDeletionCapabilityChoice;
-    personalDataDeletionMethod?: APIPersonalDataDeletionMethodChoice;
+    personalDataDeletionCapability?: APIPersonalDataDeletionCapabilityChoice | null;
+    personalDataDeletionMethod?: APIPersonalDataDeletionMethodChoice | null;
     /**
      * Identifies a deadline choice available in the usage organization. An existing selection may be retained after it becomes unavailable.
      */
     personalDataDeletionDeadlineTypeUuid?: string | null;
-    personalDataDeletionProcedureDocumentation?: APISimpleLinkDTO;
+    personalDataDeletionProcedureDocumentation?: APISimpleLinkDTO | null;
     /**
      * Must identify an active member of the usage organization. Historical assignments are retained after departure or deletion.
      */
     personalDataDeletionResponsibleUserUuid?: string | null;
     personalDataDeletionVerifiedDate?: string | null;
-    personalDataDeletionVerificationDocumentation?: APISimpleLinkDTO;
+    personalDataDeletionVerificationDocumentation?: APISimpleLinkDTO | null;
     processingPurpose?: string | null;
     directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels?: Array<APIDataSensitivityLevelChoice> | null;

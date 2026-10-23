@@ -23,13 +23,13 @@ import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
 export interface APIGDPRRegistrationsResponseDTO { 
-    personalDataDeletionCapability?: APIPersonalDataDeletionCapabilityChoice;
-    personalDataDeletionMethod?: APIPersonalDataDeletionMethodChoice;
-    personalDataDeletionDeadlineType?: APIIdentityNamePairResponseDTO;
-    personalDataDeletionProcedureDocumentation?: APISimpleLinkDTO;
-    personalDataDeletionResponsibleUser?: APIIdentityNamePairResponseDTO;
+    personalDataDeletionCapability?: APIPersonalDataDeletionCapabilityChoice | null;
+    personalDataDeletionMethod?: APIPersonalDataDeletionMethodChoice | null;
+    personalDataDeletionDeadlineType?: APIIdentityNamePairResponseDTO | null;
+    personalDataDeletionProcedureDocumentation?: APISimpleLinkDTO | null;
+    personalDataDeletionResponsibleUser?: APIIdentityNamePairResponseDTO | null;
     personalDataDeletionVerifiedDate?: string | null;
-    personalDataDeletionVerificationDocumentation?: APISimpleLinkDTO;
+    personalDataDeletionVerificationDocumentation?: APISimpleLinkDTO | null;
     processingPurpose?: string | null;
     directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels: Array<APIDataSensitivityLevelChoice>;

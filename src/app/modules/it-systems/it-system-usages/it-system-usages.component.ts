@@ -1,4 +1,5 @@
-﻿import { AsyncPipe } from '@angular/common';
+import { personalDataDeletionCapabilityOptions, personalDataDeletionMethodOptions } from 'src/app/shared/models/it-system-usage/gdpr/personal-data-deletion.model';
+import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Actions, ofType } from '@ngrx/effects';
@@ -619,6 +620,72 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'uuid-to-name',
       hidden: true,
       persistId: 'itSystemCategoriesUuid',
+    },
+    {
+      field: GridFields.PersonalDataDeletionCapability,
+      title: $localize`Kan persondata slettes?`,
+      section: GDPR_SECTION_NAME,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: personalDataDeletionCapabilityOptions,
+      hidden: true,
+      persistId: 'personalDataDeletionCapability',
+    },
+    {
+      field: GridFields.PersonalDataDeletionMethod,
+      title: $localize`Slettemetode`,
+      section: GDPR_SECTION_NAME,
+      style: 'enum',
+      extraFilter: 'enum',
+      extraData: personalDataDeletionMethodOptions,
+      hidden: true,
+      persistId: 'personalDataDeletionMethod',
+    },
+    {
+      field: GridFields.PersonalDataDeletionDeadlineTypeUuid,
+      title: $localize`Slettefrist`,
+      section: GDPR_SECTION_NAME,
+      dataField: 'PersonalDataDeletionDeadlineTypeName',
+      style: 'uuid-to-name',
+      extraFilter: 'choice-type',
+      extraData: 'it-system-usage_personal-data-deletion-deadline-type',
+      hidden: true,
+      persistId: 'personalDataDeletionDeadlineTypeUuid',
+    },
+    {
+      field: GridFields.PersonalDataDeletionResponsibleUserName,
+      title: $localize`Ansvarlig for sletning`,
+      section: GDPR_SECTION_NAME,
+      style: 'default',
+      hidden: true,
+      persistId: 'personalDataDeletionResponsibleUserName',
+    },
+    {
+      field: GridFields.PersonalDataDeletionVerifiedDate,
+      title: $localize`Dato for seneste kontrol af sletning`,
+      section: GDPR_SECTION_NAME,
+      style: 'date',
+      filter: 'date',
+      hidden: true,
+      persistId: 'personalDataDeletionVerifiedDate',
+    },
+    {
+      field: GridFields.PersonalDataDeletionProcedureDocumentationName,
+      title: $localize`Link til sletteprocedure`,
+      section: GDPR_SECTION_NAME,
+      style: 'title-link',
+      idField: 'PersonalDataDeletionProcedureDocumentationUrl',
+      hidden: true,
+      persistId: 'personalDataDeletionProcedureDocumentationName',
+    },
+    {
+      field: GridFields.PersonalDataDeletionVerificationDocumentationName,
+      title: $localize`Link til dokumentation for kontrol`,
+      section: GDPR_SECTION_NAME,
+      style: 'title-link',
+      idField: 'PersonalDataDeletionVerificationDocumentationUrl',
+      hidden: true,
+      persistId: 'personalDataDeletionVerificationDocumentationName',
     },
     {
       field: GridFields.DpiaConducted,
