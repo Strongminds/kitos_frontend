@@ -22,7 +22,7 @@
           [data]="paymentFrequencyOptions$ | async"
           [recommended]="(paymentModelRecommended$ | async) === true"
           (valueChange)="patchEconomy({ paymentModel: { paymentFrequencyUuid: $event } })"
-          >
+        >
         </app-dropdown>
         <app-dropdown
           text="Betalingsmodel"
@@ -34,7 +34,7 @@
           [data]="paymentModelOptions$ | async"
           [recommended]="(paymentModelRecommended$ | async) === true"
           (valueChange)="patchEconomy({ paymentModel: { paymentModelUuid: $event } })"
-          >
+        >
         </app-dropdown>
         <app-dropdown
           text="Prisregulering"
@@ -46,7 +46,7 @@
           [data]="priceRegulationOptions$ | async"
           [recommended]="(paymentModelRecommended$ | async) === true"
           (valueChange)="patchEconomy({ paymentModel: { priceRegulationUuid: $event } })"
-          >
+        >
         </app-dropdown>
       }
       @if (invoiceFrequencyEnabled$ | async) {
@@ -71,7 +71,7 @@
               [formName]="'invoicePeriod' + period.period"
             ></app-textbox>
             <app-datepicker
-              text="Dato"
+              text="Startdato"
               i18n-text
               [formGroup]="economyFormGroup"
               [formName]="'invoiceDate' + period.period"
