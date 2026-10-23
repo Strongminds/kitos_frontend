@@ -13,16 +13,12 @@
 
 export interface APIContractInvoiceDateDTO { 
     /**
-     * Calendar period: 1 for Yearly, 1-2 for HalfYearly, 1-4 for Quarterly. Must be unique within the list.
+     * Invoice period: 1 for Yearly, 1-2 for HalfYearly, 1-4 for Quarterly. Must be unique within the list.
      */
     period?: number;
     /**
-     * Invoice month (1-12). Must fall within the selected calendar year, half or quarter.
+     * Full invoice date. The year does not need to match the selected invoice period.
      */
-    month?: number;
-    /**
-     * Invoice day of month (1-31). Must be valid for the month (29 February is allowed).
-     */
-    day?: number;
+    date?: string;
 }
 

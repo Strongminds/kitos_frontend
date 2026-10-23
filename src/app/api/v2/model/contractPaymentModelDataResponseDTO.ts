@@ -17,7 +17,7 @@ import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 export interface APIContractPaymentModelDataResponseDTO { 
     invoiceFrequency?: APIInvoiceFrequencyChoice;
     /**
-     * Populated invoice dates ordered by calendar period; empty when no dates are assigned.
+     * Full invoice dates ordered by period; empty when no dates are assigned.
      */
     invoiceDates?: Array<APIContractInvoiceDateDTO> | null;
     /**

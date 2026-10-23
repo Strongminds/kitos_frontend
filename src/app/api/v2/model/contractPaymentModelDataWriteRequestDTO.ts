@@ -16,7 +16,7 @@ import { APIInvoiceFrequencyChoice } from './invoiceFrequencyChoice';
 export interface APIContractPaymentModelDataWriteRequestDTO { 
     invoiceFrequency?: APIInvoiceFrequencyChoice;
     /**
-     * Optional replacement list of populated period/date pairs. Requires an invoice frequency.  Empty or null clears all dates. Omission preserves dates unless frequency changes (including PUT frequency reset).  Periods must be unique and dates must be within their calendar period.
+     * Optional replacement list of full-date/period pairs. Requires an invoice frequency.  Empty or null clears all dates. Omission preserves dates unless frequency changes (including PUT frequency reset).  Periods must be unique and within the selected frequency.
      */
     invoiceDates?: Array<APIContractInvoiceDateDTO> | null;
     /**
