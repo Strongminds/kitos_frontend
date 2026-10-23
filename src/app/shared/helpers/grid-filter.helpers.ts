@@ -134,8 +134,8 @@ function isTargetFilter(filter: CompositeFilterDescriptor | FilterDescriptor, fi
   return !isCompositeFilterDescriptor(filter) && filter.field === fieldName;
 }
 
-// Saved datepicker values are JSON strings. Day/month objects and numeric range
-// filters also use gte/lte and must retain their original values.
+// Saved datepicker values are JSON strings. Numeric range filters also use
+// gte/lte and must retain their original values.
 export function restoreGridFilterDates(filter: CompositeFilterDescriptor | undefined): CompositeFilterDescriptor | undefined {
   if (!filter) return undefined;
   return { ...filter, filters: filter.filters.map(restoreGridFilterDate) };

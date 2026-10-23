@@ -19,7 +19,6 @@ import {
 import { CONTRACT_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { hasValidCache } from 'src/app/shared/helpers/date.helpers';
 import { contractsGridStateToAction } from 'src/app/shared/helpers/grid-filter.helpers';
-import { prepareInvoiceDateQueryState } from 'src/app/shared/helpers/invoice-dates.helpers';
 import { filterByValidCache } from 'src/app/shared/helpers/observable-helpers';
 import {
   addSecondaryContainsField,
@@ -98,7 +97,7 @@ export class ITContractEffects {
         }
 
         const cacheableOdataString = this.gridDataCacheService.toChunkedODataString(
-          prepareInvoiceDateQueryState(gridState),
+          gridState,
           { utcDates: true },
         );
         const fixedOdataString = applyQueryFixes(cacheableOdataString, contractRoles);

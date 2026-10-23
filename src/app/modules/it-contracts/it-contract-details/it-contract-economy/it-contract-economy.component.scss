@@ -10,6 +10,6 @@
 .invoice-period-row {
   display: grid;
   grid-column: 1 / -1;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: theme.$padding-large;
 }

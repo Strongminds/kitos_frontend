@@ -70,34 +70,16 @@
               [formGroup]="economyFormGroup"
               [formName]="'invoicePeriod' + period.period"
             ></app-textbox>
-            <app-dropdown
-              text="Måned"
+            <app-datepicker
+              text="Dato"
               i18n-text
               [formGroup]="economyFormGroup"
-              [formName]="'invoiceMonth' + period.period"
-              valueField="value"
-              [data]="period.monthOptions"
-              [considerCurrentValueObsoleteIfNotPresentInData]="false"
+              [formName]="'invoiceDate' + period.period"
               [recommended]="(invoiceFrequencyRecommended$ | async) === true"
               [recommendedFilled]="(invoiceDatesFilled$ | async) === true"
-              [clearable]="false"
-              [attr.data-cy]="'contract-invoice-month-' + period.period"
-              (valueChange)="onInvoiceMonthChange(period.period, $event)"
-            ></app-dropdown>
-            <app-dropdown
-              text="Dag"
-              i18n-text
-              [formGroup]="economyFormGroup"
-              [formName]="'invoiceDay' + period.period"
-              valueField="value"
-              [data]="period.dayOptions"
-              [considerCurrentValueObsoleteIfNotPresentInData]="false"
-              [recommended]="(invoiceFrequencyRecommended$ | async) === true"
-              [recommendedFilled]="(invoiceDatesFilled$ | async) === true"
-              [clearable]="false"
-              [attr.data-cy]="'contract-invoice-day-' + period.period"
-              (valueChange)="onInvoiceDayChange(period.period, $event)"
-            ></app-dropdown>
+              [attr.data-cy]="'contract-invoice-date-' + period.period"
+              (valueChange)="onInvoiceDateChange(period.period, $event)"
+            ></app-datepicker>
           </div>
         }
       }

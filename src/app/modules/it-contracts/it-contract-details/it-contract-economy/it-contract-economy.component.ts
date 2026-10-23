@@ -44,17 +44,6 @@ interface InvoiceFrequencyOption {
   value: APIInvoiceFrequencyChoice;
 }
 
-interface InvoiceDateOption {
-  name: string;
-  value: number;
-}
-
-interface InvoicePeriodRow {
-  period: number;
-  monthOptions: InvoiceDateOption[];
-  dayOptions: InvoiceDateOption[];
-}
-
 @Component({
   selector: 'app-it-contract-economy',
   templateUrl: './it-contract-economy.component.html',
@@ -85,21 +74,7 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     { name: $localize`Halvårligt`, value: APIInvoiceFrequencyChoice.HalfYearly },
     { name: $localize`Kvartalvis`, value: APIInvoiceFrequencyChoice.Quarterly },
   ];
-  public readonly invoiceMonthOptions: InvoiceDateOption[] = [
-    { name: $localize`Januar`, value: 1 },
-    { name: $localize`Februar`, value: 2 },
-    { name: $localize`Marts`, value: 3 },
-    { name: $localize`April`, value: 4 },
-    { name: $localize`Maj`, value: 5 },
-    { name: $localize`Juni`, value: 6 },
-    { name: $localize`Juli`, value: 7 },
-    { name: $localize`August`, value: 8 },
-    { name: $localize`September`, value: 9 },
-    { name: $localize`Oktober`, value: 10 },
-    { name: $localize`November`, value: 11 },
-    { name: $localize`December`, value: 12 },
-  ];
-  public invoicePeriods: InvoicePeriodRow[] = [];
+  public invoicePeriods: { period: number }[] = [];
   public readonly invoiceDatesFilled$ = this.store.select(selectItContractPaymentModel).pipe(
     map((paymentModel) => !!paymentModel?.invoiceDates?.length),
   );
@@ -120,28 +95,17 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     invoicePeriod2: new FormControl({ value: '', disabled: true }, { nonNullable: true }),
     invoicePeriod3: new FormControl({ value: '', disabled: true }, { nonNullable: true }),
     invoicePeriod4: new FormControl({ value: '', disabled: true }, { nonNullable: true }),
-    invoiceMonth1: new FormControl<InvoiceDateOption | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
-    invoiceMonth2: new FormControl<InvoiceDateOption | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
-    invoiceMonth3: new FormControl<InvoiceDateOption | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
-    invoiceMonth4: new FormControl<InvoiceDateOption | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
-    invoiceDay1: new FormControl<InvoiceDateOption | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
-    invoiceDay2: new FormControl<InvoiceDateOption | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
-    invoiceDay3: new FormControl<InvoiceDateOption | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
-    invoiceDay4: new FormControl<InvoiceDateOption | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
+    invoiceDate1: new FormControl<Date | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
+    invoiceDate2: new FormControl<Date | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
+    invoiceDate3: new FormControl<Date | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
+    invoiceDate4: new FormControl<Date | undefined>({ value: undefined, disabled: true }, { nonNullable: true }),
   });
-  private readonly invoiceMonthControls = [
-    this.economyFormGroup.controls.invoiceMonth1,
-    this.economyFormGroup.controls.invoiceMonth2,
-    this.economyFormGroup.controls.invoiceMonth3,
-    this.economyFormGroup.controls.invoiceMonth4,
+  private readonly invoiceDateControls = [
+    this.economyFormGroup.controls.invoiceDate1,
+    this.economyFormGroup.controls.invoiceDate2,
+    this.economyFormGroup.controls.invoiceDate3,
+    this.economyFormGroup.controls.invoiceDate4,
   ];
-  private readonly invoiceDayControls = [
-    this.economyFormGroup.controls.invoiceDay1,
-    this.economyFormGroup.controls.invoiceDay2,
-    this.economyFormGroup.controls.invoiceDay3,
-    this.economyFormGroup.controls.invoiceDay4,
-  ];
-  private readonly pendingInvoiceMonths: (number | undefined)[] = [undefined, undefined, undefined, undefined];
   private readonly invoicePeriodControls = [
     this.economyFormGroup.controls.invoicePeriod1,
     this.economyFormGroup.controls.invoicePeriod2,
@@ -204,26 +168,7 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
             this.economyFormGroup.disable();
           }
 
-          const invoiceDates = paymentModel?.invoiceDates ?? [];
-          for (let period = 1; period <= 4; period++) {
-            const invoiceDate = invoiceDates.find((date) => date.period === period);
-            const month = this.invoicePeriods
-              .find((invoicePeriod) => invoicePeriod.period === period)
-              ?.monthOptions.find(
-                (option) => option.value === (this.pendingInvoiceMonths[period - 1] ?? invoiceDate?.month),
-              );
-            const day = this.pendingInvoiceMonths[period - 1] === undefined
-              ? this.getDayOptions(month?.value).find((option) => option.value === invoiceDate?.day)
-              : undefined;
-            this.setPeriodDayOptions(period, month?.value);
-            this.getInvoiceMonthControl(period).setValue(month, { emitEvent: false });
-            this.getInvoiceDayControl(period).setValue(day, { emitEvent: false });
-            if (!hasModifyPermission || !month) {
-              this.getInvoiceDayControl(period).disable({ emitEvent: false });
-            } else {
-              this.getInvoiceDayControl(period).enable({ emitEvent: false });
-            }
-          }
+          this.setInvoiceDates(paymentModel.invoiceDates ?? []);
 
           this.disableInvoicePeriodLabels();
         }),
@@ -242,67 +187,35 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     if (!frequency) return;
 
     this.setInvoicePeriods(frequency);
-    for (let period = 1; period <= 4; period++) {
-      this.pendingInvoiceMonths[period - 1] = undefined;
-      this.getInvoiceMonthControl(period).setValue(undefined, { emitEvent: false });
-      this.getInvoiceDayControl(period).setValue(undefined, { emitEvent: false });
-      this.getInvoiceDayControl(period).disable({ emitEvent: false });
-      this.setPeriodDayOptions(period, undefined);
-    }
+    this.setInvoiceDates([]);
 
     this.patchEconomy({ paymentModel: { invoiceFrequency: frequency, invoiceDates: [] } });
   }
 
-  public onInvoiceMonthChange(period: number, month: number | undefined): void {
-    const monthOption = this.invoicePeriods
-      .find((invoicePeriod) => invoicePeriod.period === period)
-      ?.monthOptions.find((option) => option.value === month);
-    const dayControl = this.getInvoiceDayControl(period);
-    const selectedDay = dayControl.value;
-    const dayOptions = this.getDayOptions(monthOption?.value);
-    const day = selectedDay && dayOptions.some((option) => option.value === selectedDay.value) ? selectedDay : undefined;
-
-    this.getInvoiceMonthControl(period).setValue(monthOption, { emitEvent: false });
-    dayControl.setValue(day, { emitEvent: false });
-    this.setPeriodDayOptions(period, monthOption?.value);
-    this.pendingInvoiceMonths[period - 1] = monthOption?.value;
-    if (monthOption) {
-      dayControl.enable({ emitEvent: false });
-    } else {
-      dayControl.disable({ emitEvent: false });
-    }
-    if (day) {
-      this.pendingInvoiceMonths[period - 1] = undefined;
-      this.saveInvoiceDates();
-    }
+  public onInvoiceDateChange(period: number, date: Date | undefined): void {
+    this.invoiceDateControls[period - 1].setValue(date, { emitEvent: false });
+    this.saveInvoiceDates();
   }
 
-  public onInvoiceDayChange(period: number, day: number | undefined): void {
-    const dayOption = this.getDayOptions(this.getInvoiceMonthControl(period).value?.value)
-      .find((option) => option.value === day);
-    this.getInvoiceDayControl(period).setValue(dayOption, { emitEvent: false });
-    if (dayOption) this.pendingInvoiceMonths[period - 1] = undefined;
-    this.saveInvoiceDates();
+  private setInvoiceDates(invoiceDates: APIContractInvoiceDateDTO[]): void {
+    this.invoiceDateControls.forEach((control, index) => {
+      const date = invoiceDates.find((invoiceDate) => invoiceDate.period === index + 1)?.date;
+      control.setValue(optionalNewDate(date), { emitEvent: false });
+    });
   }
 
   private saveInvoiceDates(): void {
     const frequency = this.economyFormGroup.controls.invoiceFrequency.value?.value;
     if (!frequency) return;
 
-    const invoiceDates: APIContractInvoiceDateDTO[] = [];
-    for (const invoicePeriod of this.invoicePeriods) {
-      const month = this.getInvoiceMonthControl(invoicePeriod.period).value?.value;
-      const day = this.getInvoiceDayControl(invoicePeriod.period).value?.value;
-      if (month !== undefined && day !== undefined) {
-        invoiceDates.push({
-          period: invoicePeriod.period,
-          month,
-          day,
-        });
-      }
-    }
+    this.patchEconomy({ paymentModel: { invoiceFrequency: frequency, invoiceDates: this.mapInvoiceDates() } });
+  }
 
-    this.patchEconomy({ paymentModel: { invoiceFrequency: frequency, invoiceDates } });
+  private mapInvoiceDates(): APIContractInvoiceDateDTO[] {
+    return this.invoicePeriods.flatMap(({ period }) => {
+      const date = this.invoiceDateControls[period - 1].value;
+      return date ? [{ period, date: date.toDateString() }] : [];
+    });
   }
 
   private setInvoicePeriods(frequency?: APIInvoiceFrequencyChoice): void {
@@ -315,13 +228,7 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
             ? [$localize`1. kvartal`, $localize`2. kvartal`, $localize`3. kvartal`, $localize`4. kvartal`]
             : [];
 
-    this.invoicePeriods = labels.map((_, index) => ({
-      period: index + 1,
-      monthOptions: this.invoiceMonthOptions.filter((option) =>
-        this.isInvoiceMonthValid(index + 1, option.value, frequency),
-      ),
-      dayOptions: [],
-    }));
+    this.invoicePeriods = labels.map((_, index) => ({ period: index + 1 }));
 
     for (let period = 1; period <= 4; period++) {
       this.getInvoicePeriodControl(period).setValue(labels[period - 1] ?? '', { emitEvent: false });
@@ -335,40 +242,7 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     }
   }
 
-  private getInvoiceMonthControl(period: number): FormControl<InvoiceDateOption | undefined> {
-    return this.invoiceMonthControls[period - 1];
-  }
-
-  private getInvoiceDayControl(period: number): FormControl<InvoiceDateOption | undefined> {
-    return this.invoiceDayControls[period - 1];
-  }
-
   private getInvoicePeriodControl(period: number): FormControl<string> {
     return this.invoicePeriodControls[period - 1];
-  }
-
-  private isInvoiceMonthValid(period: number, month: number, frequency?: APIInvoiceFrequencyChoice): boolean {
-    if (frequency === APIInvoiceFrequencyChoice.Yearly) return period === 1 && month >= 1 && month <= 12;
-    if (frequency === APIInvoiceFrequencyChoice.HalfYearly) {
-      return (period === 1 && month >= 1 && month <= 6) || (period === 2 && month >= 7 && month <= 12);
-    }
-    if (frequency === APIInvoiceFrequencyChoice.Quarterly) {
-      return Math.ceil(month / 3) === period;
-    }
-    return false;
-  }
-
-  private getDayOptions(month?: number): InvoiceDateOption[] {
-    if (month === undefined) return [];
-    const daysInMonth = month === 2 ? 29 : [4, 6, 9, 11].includes(month) ? 30 : 31;
-    return Array.from({ length: daysInMonth }, (_, index) => ({
-      name: String(index + 1),
-      value: index + 1,
-    }));
-  }
-
-  private setPeriodDayOptions(period: number, month?: number): void {
-    const row = this.invoicePeriods.find((invoicePeriod) => invoicePeriod.period === period);
-    if (row) row.dayOptions = this.getDayOptions(month);
   }
 }

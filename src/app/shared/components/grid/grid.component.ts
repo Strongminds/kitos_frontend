@@ -72,7 +72,6 @@ import { DateFilterComponent } from './date-filter/date-filter.component';
 import { DropdownColumnDataFilterComponent } from './dropdown-column-data-filter/dropdown-column-data-filter.component';
 import { DropdownFilterComponent } from './dropdown-filter/dropdown-filter.component';
 import { GridCellComponent } from './grid-cell/grid-cell.component';
-import { DayMonthFilterComponent } from './day-month-filter/day-month-filter.component';
 import { NumericFilterComponent } from './numeric-filter/numeric-filter.component';
 import { StringFilterComponent } from './string-filter/string-filter.component';
 import { UnitDropdownFilterComponent } from './unit-dropdown-filter/unit-dropdown-filter.component';
@@ -96,7 +95,6 @@ import { ITContractSupplierActions } from 'src/app/store/it-contract/it-contract
     StringFilterComponent,
     NumericFilterComponent,
     DateFilterComponent,
-    DayMonthFilterComponent,
     DropdownFilterComponent,
     UnitDropdownFilterComponent,
     ChoiceTypeDropdownFilterComponent,
