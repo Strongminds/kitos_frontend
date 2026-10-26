@@ -6422,6 +6422,66 @@
       <trans-unit id="8684495367591036108" datatype="html">
         <source>Ryd valg</source>
       </trans-unit>
+      <trans-unit id="1407866383632849818" datatype="html">
+        <source>Fakturerings startdato 3</source>
+      </trans-unit>
+      <trans-unit id="1652415162109819049" datatype="html">
+        <source>2. halvår</source>
+      </trans-unit>
+      <trans-unit id="1707896639004290879" datatype="html">
+        <source>Bidirektionel</source>
+      </trans-unit>
+      <trans-unit id="1737040172648089902" datatype="html">
+        <source>1. kvartal</source>
+      </trans-unit>
+      <trans-unit id="2290459434294592835" datatype="html">
+        <source>Kvartalvis</source>
+      </trans-unit>
+      <trans-unit id="2701213138972309391" datatype="html">
+        <source>Dataretning</source>
+      </trans-unit>
+      <trans-unit id="3259761554295941178" datatype="html">
+        <source>1. halvår</source>
+      </trans-unit>
+      <trans-unit id="4592332289462801654" datatype="html">
+        <source>Fakturerings startdato 2</source>
+      </trans-unit>
+      <trans-unit id="4687159634256539615" datatype="html">
+        <source>It System (Anvender-system)</source>
+      </trans-unit>
+      <trans-unit id="4905249546416313099" datatype="html">
+        <source>Ryd dato</source>
+      </trans-unit>
+      <trans-unit id="5156704320597349015" datatype="html">
+        <source>Indgående data</source>
+      </trans-unit>
+      <trans-unit id="5354629695177193755" datatype="html">
+        <source>Fakturerings startdato 4</source>
+      </trans-unit>
+      <trans-unit id="6339334100637156659" datatype="html">
+        <source>4. kvartal</source>
+      </trans-unit>
+      <trans-unit id="7252824347282594899" datatype="html">
+        <source>Udgående data</source>
+      </trans-unit>
+      <trans-unit id="7455685579320703716" datatype="html">
+        <source>It System (Udstiller-system)</source>
+      </trans-unit>
+      <trans-unit id="8022668540811942972" datatype="html">
+        <source>3. kvartal</source>
+      </trans-unit>
+      <trans-unit id="8069764561178863516" datatype="html">
+        <source>2. kvartal</source>
+      </trans-unit>
+      <trans-unit id="8303345655270462799" datatype="html">
+        <source>Periode</source>
+      </trans-unit>
+      <trans-unit id="8322469132685027868" datatype="html">
+        <source>Fakturerings startdato 1</source>
+      </trans-unit>
+      <trans-unit id="8705714423968353895" datatype="html">
+        <source>Angiv en gyldig dato inden for den tilladte periode.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
