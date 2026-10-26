@@ -8313,10 +8313,6 @@
         <source>Link til kontrol af sletning</source>
         <target state="new">Link til kontrol af sletning</target>
       </trans-unit>
-      <trans-unit id="3427178878099719643" datatype="html">
-        <source>Kan der slettes i systemet</source>
-        <target state="new">Kan der slettes i systemet</target>
-      </trans-unit>
     </body>
   </file>
 </xliff>

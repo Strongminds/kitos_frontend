@@ -155,7 +155,7 @@ export const ItSystemUsageUiBluePrint = {
           disableByDefault: true,
         },
         personalDataDeletion: {
-          text: $localize`Kan der slettes i systemet`,
+          text: $localize`Sletning af persondata`,
           disableByDefault: true,
         },
       },
