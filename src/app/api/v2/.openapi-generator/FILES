@@ -173,6 +173,7 @@ model/contractAgreementPeriodDataResponseDTO.ts
 model/contractAgreementPeriodDataWriteRequestDTO.ts
 model/contractGeneralDataResponseDTO.ts
 model/contractGeneralDataWriteRequestDTO.ts
+model/contractInvoiceDateDTO.ts
 model/contractPaymentModelDataResponseDTO.ts
 model/contractPaymentModelDataWriteRequestDTO.ts
 model/contractPaymentsDataResponseDTO.ts
@@ -255,6 +256,7 @@ model/identityNamePairWithDeactivatedStatusDTO.ts
 model/immediateNotificationWriteRequestDTO.ts
 model/incomingSystemRelationResponseDTO.ts
 model/interfacesExposedOutsideTheOrganizationResponseDTO.ts
+model/invoiceFrequencyChoice.ts
 model/isDataProcessingAgreementRequiredChoice.ts
 model/itContractHierarchyNodeResponseDTO.ts
 model/itContractPermissionsResponseDTO.ts
