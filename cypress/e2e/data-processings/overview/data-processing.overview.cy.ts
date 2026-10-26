@@ -25,14 +25,12 @@ describe('data-processing', () => {
   });
 
   it('shows whether a main contract is assigned and active', () => {
-    cy.intercept('/odata/DataProcessingRegistrationReadModels*', (request) => {
-      cy.fixture('./dpr/data-processings-odata.json').then((data) => {
-        data.value[0].SourceEntity = { MainContractId: null };
-        data.value[1].SourceEntity = { MainContractId: 1 };
-        data.value[2].SourceEntity = { MainContractId: 2 };
-        data.value[2].ActiveAccordingToMainContract = false;
-        request.reply(data);
-      });
+    cy.fixture('./dpr/data-processings-odata.json').then((data) => {
+      data.value[0].SourceEntity = { MainContractId: null };
+      data.value[1].SourceEntity = { MainContractId: 1 };
+      data.value[2].SourceEntity = { MainContractId: 2 };
+      data.value[2].ActiveAccordingToMainContract = false;
+      cy.intercept('/odata/DataProcessingRegistrationReadModels*', { body: data });
     });
     cy.setup(true, 'data-processing');
     cy.getByDataCy('column-config-button').click();

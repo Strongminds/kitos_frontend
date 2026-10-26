@@ -33,7 +33,10 @@ export class GridExportService {
       if (field) {
         switch (column.style) {
           case 'contract-status-chip':
-            transformedItem[field] = mainContractStatusOptions.find((option) => option.value === transformedItem[field])?.name ?? '';
+            transformedItem[field] =
+              mainContractStatusOptions.find((option) => option.value === transformedItem[field])?.name ??
+              transformedItem[field] ??
+              '';
             break;
           case 'chip':
             if (typeof transformedItem[field] === 'boolean') {
