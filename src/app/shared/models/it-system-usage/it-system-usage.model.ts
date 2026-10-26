@@ -29,6 +29,7 @@ export interface ITSystemUsage {
   PersonalDataDeletionMethod?: DropdownOption<string>;
   PersonalDataDeletionDeadlineTypeUuid?: string;
   PersonalDataDeletionDeadlineTypeName?: string;
+  PersonalDataDeletionResponsibleUserId?: number;
   PersonalDataDeletionResponsibleUserUuid?: string;
   PersonalDataDeletionResponsibleUserName?: string;
   PersonalDataDeletionVerifiedDate?: Date;
@@ -243,6 +244,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     PersonalDataDeletionMethod: personalDataDeletionMethodOptions.find(o => o.value === value.PersonalDataDeletionMethod),
     PersonalDataDeletionDeadlineTypeUuid: value.PersonalDataDeletionDeadlineTypeUuid,
     PersonalDataDeletionDeadlineTypeName: value.PersonalDataDeletionDeadlineTypeName,
+    PersonalDataDeletionResponsibleUserId: value.PersonalDataDeletionResponsibleUserId,
     PersonalDataDeletionResponsibleUserUuid: value.PersonalDataDeletionResponsibleUserUuid,
     PersonalDataDeletionResponsibleUserName: value.PersonalDataDeletionResponsibleUserName,
     PersonalDataDeletionVerifiedDate: value.PersonalDataDeletionVerifiedDate,

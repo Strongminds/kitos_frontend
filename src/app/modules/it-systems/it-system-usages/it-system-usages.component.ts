@@ -1,4 +1,3 @@
-import { personalDataDeletionCapabilityOptions, personalDataDeletionMethodOptions } from 'src/app/shared/models/it-system-usage/gdpr/personal-data-deletion.model';
 import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,12 +23,17 @@ import {
 } from 'src/app/shared/constants/persistent-state-constants';
 import { UIModuleConfigKey } from 'src/app/shared/enums/ui-module-config-key';
 import { getColumnsToShow } from 'src/app/shared/helpers/grid-config-helper';
+import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { GridState } from 'src/app/shared/models/grid-state.model';
 import { archiveDutyChoiceOptions } from 'src/app/shared/models/it-system-usage/archive-duty-choice.model';
 import { dataSensitivityLevelOptions } from 'src/app/shared/models/it-system-usage/gdpr/data-sensitivity-level.model';
 import { hostedAtOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/hosted-at.model';
 import { isDataProcessingAgreementRequiredOptions } from 'src/app/shared/models/it-system-usage/gdpr/is-data-processing-agreement-required.model';
+import {
+  personalDataDeletionCapabilityOptions,
+  personalDataDeletionMethodOptions,
+} from 'src/app/shared/models/it-system-usage/gdpr/personal-data-deletion.model';
 import { riskAssessmentResultOptionsGrid } from 'src/app/shared/models/it-system-usage/gdpr/risk-assessment-result';
 import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it-system/archive-duty-recommendation-choice.model';
 import { licensingAndCodeModelOptions } from 'src/app/shared/models/it-system/licensing-and-code-model.model';
@@ -64,7 +68,6 @@ import { GridOptionsButtonComponent } from '../../../shared/components/grid-opti
 import { GridComponent } from '../../../shared/components/grid/grid.component';
 import { HideShowButtonComponent } from '../../../shared/components/grid/hide-show-button/hide-show-button.component';
 import { OverviewHeaderComponent } from '../../../shared/components/overview-header/overview-header.component';
-import { mapUIConfigStatusToEnabled } from 'src/app/shared/helpers/observable-helpers';
 
 @Component({
   templateUrl: 'it-system-usages.component.html',
@@ -633,7 +636,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
     {
       field: GridFields.PersonalDataDeletionMethod,
-      title: $localize`Slettemetode`,
+      title: $localize`Hvordan foregår sletning?`,
       section: GDPR_SECTION_NAME,
       style: 'enum',
       extraFilter: 'enum',
@@ -645,7 +648,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       field: GridFields.PersonalDataDeletionDeadlineTypeUuid,
       title: $localize`Slettefrist`,
       section: GDPR_SECTION_NAME,
-      dataField: 'PersonalDataDeletionDeadlineTypeName',
+      dataField: GridFields.PersonalDataDeletionDeadlineTypeName,
       style: 'uuid-to-name',
       extraFilter: 'choice-type',
       extraData: 'it-system-usage_personal-data-deletion-deadline-type',
@@ -659,6 +662,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       style: 'default',
       hidden: true,
       persistId: 'personalDataDeletionResponsibleUserName',
+      filter: 'text',
     },
     {
       field: GridFields.PersonalDataDeletionVerifiedDate,
@@ -666,6 +670,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: GDPR_SECTION_NAME,
       style: 'date',
       filter: 'date',
+      width: 330,
       hidden: true,
       persistId: 'personalDataDeletionVerifiedDate',
     },
@@ -674,7 +679,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Link til sletteprocedure`,
       section: GDPR_SECTION_NAME,
       style: 'title-link',
-      idField: 'PersonalDataDeletionProcedureDocumentationUrl',
+      idField: GridFields.PersonalDataDeletionProcedureDocumentationUrl,
+      filter: 'text',
       hidden: true,
       persistId: 'personalDataDeletionProcedureDocumentationName',
     },
@@ -683,7 +689,8 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       title: $localize`Link til dokumentation for kontrol`,
       section: GDPR_SECTION_NAME,
       style: 'title-link',
-      idField: 'PersonalDataDeletionVerificationDocumentationUrl',
+      idField: GridFields.PersonalDataDeletionVerificationDocumentationUrl,
+      filter: 'text',
       hidden: true,
       persistId: 'personalDataDeletionVerificationDocumentationName',
     },
@@ -822,9 +829,15 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
     },
   ];
 
-  public readonly enableLifeCycleStatus$ = this.store.select(selectITSystemUsageEnableAndRecommendedLifeCycleStatus).pipe(mapUIConfigStatusToEnabled());
-  public readonly enableUsagePeriod$ = this.store.select(selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod).pipe(mapUIConfigStatusToEnabled());
-  public readonly enabledGdpr$ = this.store.select(selectITSystemUsageEnableAndRecommendedGdpr).pipe(mapUIConfigStatusToEnabled());
+  public readonly enableLifeCycleStatus$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedLifeCycleStatus)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enableUsagePeriod$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedFrontPageUsagePeriod)
+    .pipe(mapUIConfigStatusToEnabled());
+  public readonly enabledGdpr$ = this.store
+    .select(selectITSystemUsageEnableAndRecommendedGdpr)
+    .pipe(mapUIConfigStatusToEnabled());
 
   constructor(
     store: Store,
