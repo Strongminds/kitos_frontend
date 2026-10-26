@@ -37,9 +37,9 @@ describe('data-processing', () => {
     cy.contains('Status (Markeret kontrakt)').click();
     cy.getByDataCy('column-config-dialog-save-button').click();
 
-    cy.contains('tr', 'Dpa 1').find('app-contract-status-chip-cell').should('have.text', 'Ingen kontrakt');
-    cy.contains('tr', 'Dpa 2').find('app-contract-status-chip-cell').should('have.text', 'Aktiv');
-    cy.contains('tr', 'Dpa 3').find('app-contract-status-chip-cell').should('have.text', 'Ikke aktiv');
+    verifyMainContractStatus('Dpa 1', 'Ingen kontrakt');
+    verifyMainContractStatus('Dpa 2', 'Aktiv');
+    verifyMainContractStatus('Dpa 3', 'Ikke aktiv');
   });
 
   it('cant create if name already exists', () => {
@@ -72,3 +72,11 @@ describe('data-processing', () => {
     cy.contains('Ansvarlig org. enhed').should('not.exist');
   });
 });
+
+function verifyMainContractStatus(name: string, expectedStatus: string) {
+  cy.contains('tr', name)
+    .find('app-contract-status-chip-cell')
+    .should(($cell) => {
+      expect($cell.text().trim()).to.equal(expectedStatus);
+    });
+}
