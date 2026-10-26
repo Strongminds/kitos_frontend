@@ -75,6 +75,8 @@
               i18n-text
               [formGroup]="economyFormGroup"
               [formName]="'invoiceDate' + period.period"
+              [minDate]="getMinimumInvoiceDate(period.period)"
+              [maxDate]="getMaximumInvoiceDate(period.period)"
               [recommended]="(invoiceFrequencyRecommended$ | async) === true"
               [recommendedFilled]="(invoiceDatesFilled$ | async) === true"
               [attr.data-cy]="'contract-invoice-date-' + period.period"

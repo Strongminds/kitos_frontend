@@ -62,6 +62,7 @@ interface InvoiceFrequencyOption {
   ],
 })
 export class ItContractEconomyComponent extends BaseComponent implements OnInit {
+  public readonly latestInvoiceDate = this.createLatestInvoiceDate();
   public readonly paymentFrequencyOptions$ = this.store.select(
     selectRegularOptionTypes('it-contract-payment-frequency-types'),
   );
@@ -140,6 +141,7 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
   }
 
   ngOnInit(): void {
+    this.configureInvoiceDateValidation();
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract-payment-frequency-types'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract-payment-model-types'));
     this.store.dispatch(RegularOptionTypeActions.getOptions('it-contract-price-regulation-types'));
@@ -193,8 +195,55 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
   }
 
   public onInvoiceDateChange(period: number, date: Date | undefined): void {
+    if (this.invoiceDateControls[period - 1].hasError('matDatepickerParse')) return;
+
     this.invoiceDateControls[period - 1].setValue(date, { emitEvent: false });
+    this.validateInvoiceDates();
+    if (this.invoiceDateControls.some((control) => control.invalid)) return;
+
     this.saveInvoiceDates();
+  }
+
+  private createLatestInvoiceDate(): Date {
+    const maximumYearsAhead = 100;
+    const today = new Date();
+    return new Date(today.getFullYear() + maximumYearsAhead, today.getMonth(), today.getDate());
+  }
+
+  public getMinimumInvoiceDate(period: number): Date {
+    const dates = this.invoiceDateControls.slice(0, period - 1)
+      .map((control) => this.getCalendarDate(control.value)).filter((date) => date !== undefined);
+    const today = new Date().setHours(0, 0, 0, 0);
+    return new Date(Math.max(today, ...dates));
+  }
+
+  public getMaximumInvoiceDate(period: number): Date {
+    const dates = this.invoiceDateControls.slice(period, this.invoicePeriods.length)
+      .map((control) => this.getCalendarDate(control.value)).filter((date) => date !== undefined);
+    return new Date(Math.min(this.latestInvoiceDate.valueOf(), ...dates));
+  }
+
+  private configureInvoiceDateValidation(): void {
+    this.invoiceDateControls.forEach((control, index) => {
+      control.addValidators(() => {
+        const date = this.getCalendarDate(control.value);
+        if (date === undefined || date === null) return null;
+
+        const minimum = this.getMinimumInvoiceDate(index + 1)?.valueOf();
+        const maximum = this.getMaximumInvoiceDate(index + 1).valueOf();
+        return !Number.isFinite(date) || (minimum !== undefined && date < minimum) || date > maximum
+          ? { invoiceDateRange: true } : null;
+      });
+    });
+    this.subscriptions.add(this.economyFormGroup.valueChanges.subscribe(() => this.validateInvoiceDates()));
+  }
+
+  private validateInvoiceDates(): void {
+    this.invoiceDateControls.forEach((control) => control.updateValueAndValidity({ emitEvent: false }));
+  }
+
+  private getCalendarDate(date: Date | undefined): number | undefined {
+    return date ? new Date(date.valueOf()).setHours(0, 0, 0, 0) : undefined;
   }
 
   private setInvoiceDates(invoiceDates: APIContractInvoiceDateDTO[]): void {
@@ -202,6 +251,7 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
       const date = invoiceDates.find((invoiceDate) => invoiceDate.period === index + 1)?.date;
       control.setValue(optionalNewDate(date), { emitEvent: false });
     });
+    this.validateInvoiceDates();
   }
 
   private saveInvoiceDates(): void {

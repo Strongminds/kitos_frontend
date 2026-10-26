@@ -12,7 +12,7 @@ import {
 } from '@angular/material/datepicker';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
-import { MatFormField, MatLabel, MatSuffix } from '@angular/material/select';
+import { MatError, MatFormField, MatLabel, MatSuffix } from '@angular/material/form-field';
 import IMask from 'imask';
 import { BaseFormComponent } from '../../base/base-form.component';
 import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badge.component';
@@ -25,6 +25,7 @@ import { RecommendedBadgeComponent } from '../recommended-badge/recommended-badg
     FormsModule,
     ReactiveFormsModule,
     MatFormField,
+    MatError,
     MatIcon,
     MatInput,
     MatLabel,
@@ -59,6 +60,8 @@ export class DatePickerComponent extends BaseFormComponent<Date | undefined> imp
   @Input() public recommendedFilled: boolean | undefined;
   @Input() public recommended = false;
   @Input() public clearable = true;
+  @Input() public minDate?: Date;
+  @Input() public maxDate?: Date;
   @Input() public icon?: 'search';
   @Input() public size: 'medium' | 'large' = 'large';
   @Input() public pickerAlignmentY: 'above' | 'below' = 'above';

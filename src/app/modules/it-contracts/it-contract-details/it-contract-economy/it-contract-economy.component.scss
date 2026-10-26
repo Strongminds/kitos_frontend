@@ -10,6 +10,10 @@
 .invoice-period-row {
   display: grid;
   grid-column: 1 / -1;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  grid-template-columns: subgrid;
   gap: theme.$padding-large;
+}
+
+.invoice-period-row app-datepicker {
+  grid-column: 2;
 }

@@ -13,6 +13,8 @@
       placeholder="Dag-Måned-År (f.eks. 01-02-1980)"
       type="text"
       [matDatepicker]="picker"
+      [min]="minDate"
+      [max]="maxDate"
       [formControlName]="formName"
       (dateChange)="formDateInputValueChange($event)"
       class="{{ size }}"
@@ -36,6 +38,9 @@
         </mat-datepicker-toggle>
       }
       <mat-datepicker #picker (closed)="focus(false)" xPosition="end" [yPosition]="pickerAlignmentY"></mat-datepicker>
+      @if ((minDate || maxDate) && formName && formGroup.controls[formName].invalid) {
+        <mat-error i18n>Angiv en gyldig dato inden for den tilladte periode.</mat-error>
+      }
     </mat-form-field>
   }
 
@@ -52,6 +57,8 @@
         type="text"
         placeholder="Dag-Måned-År (f.eks. 01-02-1980)"
         [matDatepicker]="picker"
+        [min]="minDate"
+        [max]="maxDate"
         [disabled]="disabled"
         [value]="value"
         class="{{ size }}"
