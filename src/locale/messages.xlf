@@ -6332,6 +6332,9 @@
       <trans-unit id="4905249546416313099" datatype="html">
         <source>Ryd dato</source>
       </trans-unit>
+      <trans-unit id="8705714423968353895" datatype="html">
+        <source>Angiv en gyldig dato inden for den tilladte periode.</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>

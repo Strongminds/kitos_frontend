@@ -8285,6 +8285,10 @@
         <source>Ryd dato</source>
         <target state="new">Ryd dato</target>
       </trans-unit>
+      <trans-unit id="8705714423968353895" datatype="html">
+        <source>Angiv en gyldig dato inden for den tilladte periode.</source>
+        <target state="new">Angiv en gyldig dato inden for den tilladte periode.</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
