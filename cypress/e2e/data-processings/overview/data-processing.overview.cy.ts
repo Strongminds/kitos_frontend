@@ -24,6 +24,26 @@ describe('data-processing', () => {
     cy.contains('Dpa 3');
   });
 
+  it('shows whether a main contract is assigned and active', () => {
+    cy.intercept('/odata/DataProcessingRegistrationReadModels*', (request) => {
+      cy.fixture('./dpr/data-processings-odata.json').then((data) => {
+        data.value[0].SourceEntity = { MainContractId: null };
+        data.value[1].SourceEntity = { MainContractId: 1 };
+        data.value[2].SourceEntity = { MainContractId: 2 };
+        data.value[2].ActiveAccordingToMainContract = false;
+        request.reply(data);
+      });
+    });
+    cy.setup(true, 'data-processing');
+    cy.getByDataCy('column-config-button').click();
+    cy.contains('Status (Markeret kontrakt)').click();
+    cy.getByDataCy('column-config-dialog-save-button').click();
+
+    cy.contains('tr', 'Dpa 1').find('app-contract-status-chip-cell').should('have.text', 'Ingen kontrakt');
+    cy.contains('tr', 'Dpa 2').find('app-contract-status-chip-cell').should('have.text', 'Aktiv');
+    cy.contains('tr', 'Dpa 3').find('app-contract-status-chip-cell').should('have.text', 'Ikke aktiv');
+  });
+
   it('cant create if name already exists', () => {
     cy.setup(true, 'data-processing');
     cy.intercept('/api/v2/data-processing-registrations?nameEquals*', {
