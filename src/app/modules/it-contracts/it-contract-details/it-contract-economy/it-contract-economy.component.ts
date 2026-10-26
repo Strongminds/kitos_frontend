@@ -185,13 +185,14 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     }
   }
 
-  public onInvoiceFrequencyChange(frequency: APIInvoiceFrequencyChoice | undefined): void {
-    if (!frequency) return;
-
-    this.setInvoicePeriods(frequency);
+  public onInvoiceFrequencyChange(frequency: APIInvoiceFrequencyChoice | null | undefined): void {
+    this.setInvoicePeriods(frequency ?? undefined);
     this.setInvoiceDates([]);
 
-    this.patchEconomy({ paymentModel: { invoiceFrequency: frequency, invoiceDates: [] } });
+    // PATCH requires null to clear the value, although the generated DTO only declares undefined.
+    this.patchEconomy({
+      paymentModel: { invoiceFrequency: (frequency ?? null) as APIInvoiceFrequencyChoice, invoiceDates: [] },
+    });
   }
 
   public onInvoiceDateChange(period: number, date: Date | undefined): void {
