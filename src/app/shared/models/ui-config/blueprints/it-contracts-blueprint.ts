@@ -138,6 +138,10 @@ export const ItContractsUiBluePrint = {
           text: $localize`Betalingsmodel`,
           helpText: "Herunder: 'Driftsvederlag påbegyndt', 'Betalingsfrekvens', 'Betalingsmodel' og 'Prisregulering' ",
         },
+        invoiceFrequency: {
+          text: $localize`Faktureringsperiode`,
+          helpText: "Herunder: 'Faktureringsperiode' og mindst én faktureringsdato ('Måned' og 'Dag')",
+        },
         extPayment: {
           text: $localize`Ekstern betaling`,
         },
