@@ -6335,6 +6335,12 @@
       <trans-unit id="8705714423968353895" datatype="html">
         <source>Angiv en gyldig dato inden for den tilladte periode.</source>
       </trans-unit>
+      <trans-unit id="3968331875273171522" datatype="html">
+        <source>Nej, skal ikke udarbejdes</source>
+      </trans-unit>
+      <trans-unit id="5647051459859298679" datatype="html">
+        <source>Nej, skal udarbejdes</source>
+      </trans-unit>
     </body>
   </file>
 </xliff>
