@@ -1,3 +1,4 @@
+import { DpiaConductedOption, mapFromCapitalizedStringToDpiaConductedEnum } from '../dpia-conducted.model';
 import { AppPath } from '../../enums/app-path';
 import { entityWithUnavailableName, organizationNameWithCvr } from '../../helpers/string.helpers';
 import {
@@ -9,7 +10,7 @@ import {
 import { LicensingAndCodeModel, mapLicensingAndCodeModels } from '../it-system/licensing-and-code-model.model';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
-import { mapToYesNoDontKnowIrrelevantEnum, YesNoDontKnowIrrelevantOption } from '../yes-no-dont-know-irrelevant.model';
+import { mapToRiskAssessmentConductedEnum, RiskAssessmentConductedOption } from '../risk-assessment-conducted.model';
 import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
 import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
 import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
@@ -85,11 +86,11 @@ export interface ITSystemUsage {
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
   RiskAssessmentResult: RiskAssessmentResultGridOptions | undefined;
-  RiskAssessmentConducted: YesNoDontKnowIrrelevantOption | undefined;
+  RiskAssessmentConducted: RiskAssessmentConductedOption | undefined;
   UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
-  DpiaConducted: YesNoDontKnowOption | undefined;
+  DpiaConducted: DpiaConductedOption | undefined;
   IsBusinessCritical: YesNoDontKnowOption | undefined;
   ContainsAITechnology: YesNoOption | undefined;
   CatalogArchiveDuty: ArchiveDutyChoice | undefined;
@@ -178,7 +179,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ActiveArchivePeriodEndDate: value.ActiveArchivePeriodEndDate,
     RiskSupervisionDocumentationName: value.RiskSupervisionDocumentationName,
     RiskSupervisionDocumentationUrl: value.RiskSupervisionDocumentationUrl,
-    RiskAssessmentConducted: mapToYesNoDontKnowIrrelevantEnum(value.RiskAssessmentConducted),
+    RiskAssessmentConducted: mapToRiskAssessmentConductedEnum(value.RiskAssessmentConducted),
     LinkToDirectoryName: value.LinkToDirectoryName,
     LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
@@ -226,7 +227,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ItSystemCategoriesName: value.ItSystemCategoriesName,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
-    DpiaConducted: mapFromCapitalizedStringToYesNoDontKnowEnum(value.DPIAConducted),
+    DpiaConducted: mapFromCapitalizedStringToDpiaConductedEnum(value.DPIAConducted),
     IsBusinessCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsBusinessCritical),
     ContainsAITechnology: mapToYesNoEnum(value.ContainsAITechnology),
     CatalogArchiveDuty: mapArchiveDutyChoice(value.CatalogArchiveDuty),
