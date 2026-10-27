@@ -81,6 +81,7 @@
         i18n-text
         [formGroup]="formGroup"
         formName="verifiedDate"
+        [maxDate]="maximumVerifiedDate"
         [recommended]="(recommended$ | async) === true"
         [recommendedFilled]="formGroup.controls.capability.value?.value === 'No' ? true : undefined"
         (valueChange)="patchGdpr({ personalDataDeletionVerifiedDate: $event?.toDateString() ?? null })"

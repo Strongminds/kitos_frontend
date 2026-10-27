@@ -10,7 +10,7 @@ import {
   APIUpdateContractRequestDTO,
 } from 'src/app/api/v2';
 import { BaseComponent } from 'src/app/shared/base/base.component';
-import { optionalNewDate } from 'src/app/shared/helpers/date.helpers';
+import { getMaximumFutureDate, optionalNewDate } from 'src/app/shared/helpers/date.helpers';
 import { ValidatedValueChange } from 'src/app/shared/models/validated-value-change.model';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { matchNonEmptyArray } from 'src/app/shared/pipes/match-non-empty-array';
@@ -62,7 +62,7 @@ interface InvoiceFrequencyOption {
   ],
 })
 export class ItContractEconomyComponent extends BaseComponent implements OnInit {
-  public readonly latestInvoiceDate = this.createLatestInvoiceDate();
+  public readonly latestInvoiceDate = getMaximumFutureDate();
   public readonly paymentFrequencyOptions$ = this.store.select(
     selectRegularOptionTypes('it-contract-payment-frequency-types'),
   );
@@ -203,12 +203,6 @@ export class ItContractEconomyComponent extends BaseComponent implements OnInit 
     if (this.invoiceDateControls.some((control) => control.invalid)) return;
 
     this.saveInvoiceDates();
-  }
-
-  private createLatestInvoiceDate(): Date {
-    const maximumYearsAhead = 100;
-    const today = new Date();
-    return new Date(today.getFullYear() + maximumYearsAhead, today.getMonth(), today.getDate());
   }
 
   public getMinimumInvoiceDate(period: number): Date {

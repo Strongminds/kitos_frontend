@@ -20,6 +20,8 @@ import { BaseAccordionComponent } from 'src/app/shared/base/base-accordion.compo
 import { AccordionComponent } from 'src/app/shared/components/accordion/accordion.component';
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { DatePickerComponent } from 'src/app/shared/components/datepicker/datepicker.component';
+import { getMaximumFutureDate } from 'src/app/shared/helpers/date.helpers';
+import { dateLessThanOrEqualToDateValidator } from 'src/app/shared/helpers/form.helpers';
 import { StandardVerticalContentGridComponent } from 'src/app/shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import {
@@ -61,13 +63,14 @@ export class GdprPersonalDataDeletionSectionComponent extends BaseAccordionCompo
   public readonly procedure$ = this.gdpr$.pipe(map((g) => this.toSimpleLink(g.personalDataDeletionProcedureDocumentation)));
   public readonly verification$ = this.gdpr$.pipe(map((g) => this.toSimpleLink(g.personalDataDeletionVerificationDocumentation)));
   public detailsDisabled = true;
+  public readonly maximumVerifiedDate = getMaximumFutureDate();
   private canModify = false;
   public readonly formGroup = new FormGroup({
     capability: new FormControl<DropdownOption<APIPersonalDataDeletionCapabilityChoice> | undefined>(undefined),
     method: new FormControl<DropdownOption<APIPersonalDataDeletionMethodChoice> | undefined>(undefined),
     deadline: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
     responsibleUser: new FormControl<APIIdentityNamePairResponseDTO | undefined>(undefined),
-    verifiedDate: new FormControl<Date | undefined>(undefined),
+    verifiedDate: new FormControl<Date | undefined>(undefined, dateLessThanOrEqualToDateValidator(this.maximumVerifiedDate)),
   });
   constructor(
     private readonly store: Store,

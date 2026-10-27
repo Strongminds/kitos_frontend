@@ -3,7 +3,7 @@ import { DropdownOption } from '../../dropdown-option.model';
 
 export const personalDataDeletionCapabilityOptions: DropdownOption<APIPersonalDataDeletionCapabilityChoice>[] = [
   { value: 'No', name: $localize`Nej` },
-  { value: 'IndividualRecords', name: $localize`Ja, enkelte registreringer` },
+  { value: 'IndividualRecords', name: $localize`Ja, enkelte poster` },
   { value: 'BulkDeletion', name: $localize`Ja, massesletning` },
 ];
 export const personalDataDeletionMethodOptions: DropdownOption<APIPersonalDataDeletionMethodChoice>[] = [
