@@ -10,12 +10,13 @@
  * Do not edit the class manually.
  */
 import { APIIsDataProcessingAgreementRequiredChoice } from './isDataProcessingAgreementRequiredChoice';
+import { APIRiskAssessmentConductedChoice } from './riskAssessmentConductedChoice';
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
-import { APIYesNoDontKnowIrrelevantChoice } from './yesNoDontKnowIrrelevantChoice';
 import { APITechnicalPrecautionChoice } from './technicalPrecautionChoice';
 import { APIDataSensitivityLevelChoice } from './dataSensitivityLevelChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIGDPRPersonalDataChoice } from './gDPRPersonalDataChoice';
+import { APIDpiaConductedChoice } from './dpiaConductedChoice';
 import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
@@ -41,13 +42,13 @@ export interface APIGDPRWriteRequestDTO {
     userSupervision?: APIYesNoDontKnowChoice;
     userSupervisionDate?: string | null;
     userSupervisionDocumentation?: APISimpleLinkDTO;
-    riskAssessmentConducted?: APIYesNoDontKnowIrrelevantChoice;
+    riskAssessmentConducted?: APIRiskAssessmentConductedChoice;
     riskAssessmentConductedDate?: string | null;
     riskAssessmentResult?: APIRiskLevelChoice;
     plannedRiskAssessmentDate?: string | null;
     riskAssessmentDocumentation?: APISimpleLinkDTO;
     riskAssessmentNotes?: string | null;
-    dpiaConducted?: APIYesNoDontKnowChoice;
+    dpiaConducted?: APIDpiaConductedChoice;
     dpiaDate?: string | null;
     dpiaDocumentation?: APISimpleLinkDTO;
     retentionPeriodDefined?: APIYesNoDontKnowChoice;

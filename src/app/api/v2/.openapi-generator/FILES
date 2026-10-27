@@ -220,6 +220,7 @@ model/deactivationReasonRequestDTO.ts
 model/defaultUserStartPreferenceChoice.ts
 model/deleteOrganizationUnitRoleAssignmentRequestDTO.ts
 model/disconnectFromStsOrganizationRequestDTO.ts
+model/dpiaConductedChoice.ts
 model/emailRecipientResponseDTO.ts
 model/emailRecipientWriteRequestDTO.ts
 model/expectedUsersIntervalDTO.ts
@@ -378,6 +379,7 @@ model/rightsHolderItSystemResponseDTO.ts
 model/rightsHolderPartialUpdateItInterfaceRequestDTO.ts
 model/rightsHolderUpdateSystemPropertiesRequestDTO.ts
 model/rightsHolderWritableItInterfacePropertiesDTO.ts
+model/riskAssessmentConductedChoice.ts
 model/riskLevelChoice.ts
 model/roleAssignmentRequestDTO.ts
 model/roleAssignmentResponseDTO.ts
