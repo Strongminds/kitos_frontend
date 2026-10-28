@@ -31,7 +31,7 @@ export const mapFromCapitalizedStringToDpiaConductedEnum = (value?: string): Dpi
 };
 
 function fromCapitalizedString(value?: string): DpiaConductedEnum {
-  switch (value) {
+  switch (value?.toUpperCase()) {
     case 'YES':
       return DpiaConductedEnum.Yes;
     case 'NO':
@@ -42,7 +42,6 @@ function fromCapitalizedString(value?: string): DpiaConductedEnum {
       return DpiaConductedEnum.NoMustNotBePrepared;
     case 'DONTKNOW':
       return DpiaConductedEnum.DontKnow;
-    case null:
     case undefined:
     case 'UNDECIDED':
       return DpiaConductedEnum.Undecided;
