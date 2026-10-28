@@ -212,6 +212,8 @@ export * from './paymentAuditStatus';
 export * from './paymentRegistrationResponseDTO';
 export * from './paymentRequestDTO';
 export * from './paymentResponseDTO';
+export * from './personalDataDeletionCapabilityChoice';
+export * from './personalDataDeletionMethodChoice';
 export * from './procurementPlanDTO';
 export * from './publicMessageIconTypeChoice';
 export * from './publicMessageRequestDTO';

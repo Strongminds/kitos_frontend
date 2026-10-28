@@ -1,7 +1,7 @@
 import { RegistrationRecommendedBadges, recommendedField, hasText, hasValue } from 'src/app/shared/helpers/registration-recommended-badges.helper';
 import { Selector, Store } from '@ngrx/store';
 import { Observable, combineLatest } from 'rxjs';
-import { APIYesNoDontKnowChoice } from 'src/app/api/v2';
+import { APIPersonalDataDeletionCapabilityChoice, APIYesNoDontKnowChoice } from 'src/app/api/v2';
 import { map } from 'rxjs/operators';
 import {
   RecommendedBadgeState,
@@ -40,6 +40,7 @@ import {
   selectITSystemUsageEnableAndRecommendedGdprDataTypes,
   selectITSystemUsageEnableAndRecommendedGdprDocumentation,
   selectITSystemUsageEnableAndRecommendedGdprDpiaConducted,
+  selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion,
   selectITSystemUsageEnableAndRecommendedGdprIsDataProcessingAgreementRequired,
   selectITSystemUsageEnableAndRecommendedGdprPlannedRiskAssessmentDate,
   selectITSystemUsageEnableAndRecommendedGdprPurpose,
@@ -67,6 +68,10 @@ import {
 
 function hasDependentGdprValue(choice: string | null | undefined, filled: boolean): boolean {
   return choice === APIYesNoDontKnowChoice.Yes ? filled : hasValue(choice);
+}
+
+function hasDependentDeletionValue(choice: APIPersonalDataDeletionCapabilityChoice | null | undefined, filled: boolean): boolean {
+  return choice === 'No' || (hasValue(choice) && filled);
 }
 
 function hasItems<T>(value: Array<T> | null | undefined): boolean {
@@ -182,6 +187,25 @@ export function getItSystemUsageRecommendedTabBadges(
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprRetentionPeriod, (g) =>
       hasDependentGdprValue(g?.retentionPeriodDefined, hasValue(g?.dataRetentionEvaluationFrequencyInMonths)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) => hasValue(g?.personalDataDeletionCapability)),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionMethod)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionDeadlineType)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionProcedureDocumentation)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionResponsibleUser)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionVerifiedDate)),
+    ),
+    gdprField(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, (g) =>
+      hasDependentDeletionValue(g?.personalDataDeletionCapability, hasValue(g?.personalDataDeletionVerificationDocumentation)),
     ),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasValue(g?.dpiaConducted)),
     gdprField(selectITSystemUsageEnableAndRecommendedGdprDpiaConducted, (g) => hasDependentGdprValue(g?.dpiaConducted, hasValue(g?.dpiaDate))),

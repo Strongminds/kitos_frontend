@@ -10,16 +10,31 @@
  * Do not edit the class manually.
  */
 import { APIIsDataProcessingAgreementRequiredChoice } from './isDataProcessingAgreementRequiredChoice';
+import { APIPersonalDataDeletionMethodChoice } from './personalDataDeletionMethodChoice';
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIYesNoDontKnowIrrelevantChoice } from './yesNoDontKnowIrrelevantChoice';
 import { APITechnicalPrecautionChoice } from './technicalPrecautionChoice';
 import { APIDataSensitivityLevelChoice } from './dataSensitivityLevelChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIGDPRPersonalDataChoice } from './gDPRPersonalDataChoice';
+import { APIPersonalDataDeletionCapabilityChoice } from './personalDataDeletionCapabilityChoice';
 import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
 export interface APIGDPRWriteRequestDTO { 
+    personalDataDeletionCapability?: APIPersonalDataDeletionCapabilityChoice | null;
+    personalDataDeletionMethod?: APIPersonalDataDeletionMethodChoice | null;
+    /**
+     * Identifies a deadline choice available in the usage organization. An existing selection may be retained after it becomes unavailable.
+     */
+    personalDataDeletionDeadlineTypeUuid?: string | null;
+    personalDataDeletionProcedureDocumentation?: APISimpleLinkDTO | null;
+    /**
+     * Must identify an active member of the usage organization. Historical assignments are retained after departure or deletion.
+     */
+    personalDataDeletionResponsibleUserUuid?: string | null;
+    personalDataDeletionVerifiedDate?: string | null;
+    personalDataDeletionVerificationDocumentation?: APISimpleLinkDTO | null;
     processingPurpose?: string | null;
     directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels?: Array<APIDataSensitivityLevelChoice> | null;

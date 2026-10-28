@@ -10,6 +10,7 @@
  * Do not edit the class manually.
  */
 import { APIIsDataProcessingAgreementRequiredChoice } from './isDataProcessingAgreementRequiredChoice';
+import { APIPersonalDataDeletionMethodChoice } from './personalDataDeletionMethodChoice';
 import { APIYesNoDontKnowChoice } from './yesNoDontKnowChoice';
 import { APIIdentityNamePairResponseDTO } from './identityNamePairResponseDTO';
 import { APIYesNoDontKnowIrrelevantChoice } from './yesNoDontKnowIrrelevantChoice';
@@ -17,10 +18,18 @@ import { APITechnicalPrecautionChoice } from './technicalPrecautionChoice';
 import { APIDataSensitivityLevelChoice } from './dataSensitivityLevelChoice';
 import { APISimpleLinkDTO } from './simpleLinkDTO';
 import { APIGDPRPersonalDataChoice } from './gDPRPersonalDataChoice';
+import { APIPersonalDataDeletionCapabilityChoice } from './personalDataDeletionCapabilityChoice';
 import { APIRiskLevelChoice } from './riskLevelChoice';
 
 
 export interface APIGDPRRegistrationsResponseDTO { 
+    personalDataDeletionCapability?: APIPersonalDataDeletionCapabilityChoice | null;
+    personalDataDeletionMethod?: APIPersonalDataDeletionMethodChoice | null;
+    personalDataDeletionDeadlineType?: APIIdentityNamePairResponseDTO | null;
+    personalDataDeletionProcedureDocumentation?: APISimpleLinkDTO | null;
+    personalDataDeletionResponsibleUser?: APIIdentityNamePairResponseDTO | null;
+    personalDataDeletionVerifiedDate?: string | null;
+    personalDataDeletionVerificationDocumentation?: APISimpleLinkDTO | null;
     processingPurpose?: string | null;
     directoryDocumentation?: APISimpleLinkDTO;
     dataSensitivityLevels: Array<APIDataSensitivityLevelChoice>;

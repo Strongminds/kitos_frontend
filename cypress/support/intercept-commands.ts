@@ -85,6 +85,8 @@ Cypress.Commands.add('setupItSystemCatalogIntercepts', () => {
 });
 
 Cypress.Commands.add('setupItSystemUsageIntercepts', () => {
+  cy.intercept('/api/v2/it-system-usage-personal-data-deletion-deadline-types*', []);
+  cy.intercept('/api/v2/organizations/*/users', []);
   cy.intercept('/odata/ItSystemUsageOverviewReadModels*', { fixture: './it-system-usage/it-system-usages.json' });
   cy.intercept('/api/v1/itsystem-usage/options/overview/organizationUuid*', {
     fixture: './it-system-usage/options.json',
