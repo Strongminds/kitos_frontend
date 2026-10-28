@@ -140,7 +140,8 @@ export const ItContractsUiBluePrint = {
         },
         invoiceFrequency: {
           text: $localize`Faktureringsperiode`,
-          helpText: "Herunder: 'Faktureringsperiode' og mindst én faktureringsdato ('Måned' og 'Dag')",
+          disabledByDefault: true,
+          helpText: "Herunder: 'Faktureringsperiode' og mindst én faktureringsdato",
         },
         extPayment: {
           text: $localize`Ekstern betaling`,

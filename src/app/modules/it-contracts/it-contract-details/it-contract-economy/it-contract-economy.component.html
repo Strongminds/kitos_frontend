@@ -59,7 +59,6 @@
           formName="invoiceFrequency"
           [data]="invoiceFrequencyOptions"
           [recommended]="(invoiceFrequencyRecommended$ | async) === true"
-          [clearable]="false"
           (valueChange)="onInvoiceFrequencyChange($event)"
         ></app-dropdown>
         @for (period of invoicePeriods; track period.period) {

@@ -1,6 +1,7 @@
-import { DpiaConductedOption, mapFromCapitalizedStringToDpiaConductedEnum } from '../dpia-conducted.model';
 import { AppPath } from '../../enums/app-path';
 import { entityWithUnavailableName, organizationNameWithCvr } from '../../helpers/string.helpers';
+import { DpiaConductedOption, mapFromCapitalizedStringToDpiaConductedEnum } from '../dpia-conducted.model';
+import { DropdownOption } from '../dropdown-option.model';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -21,9 +22,25 @@ import {
   IsDataProcessingAgreementRequired,
   mapIsDataProcessingAgreementRequired,
 } from './gdpr/is-data-processing-agreement-required.model';
+import {
+  personalDataDeletionCapabilityOptions,
+  personalDataDeletionMethodOptions,
+} from './gdpr/personal-data-deletion.model';
 import { mapGridRiskAssessmentEnum, RiskAssessmentResultGridOptions } from './gdpr/risk-assessment-result';
 
 export interface ITSystemUsage {
+  PersonalDataDeletionCapability?: DropdownOption<string>;
+  PersonalDataDeletionMethod?: DropdownOption<string>;
+  PersonalDataDeletionDeadlineTypeUuid?: string;
+  PersonalDataDeletionDeadlineTypeName?: string;
+  PersonalDataDeletionResponsibleUserId?: number;
+  PersonalDataDeletionResponsibleUserUuid?: string;
+  PersonalDataDeletionResponsibleUserName?: string;
+  PersonalDataDeletionVerifiedDate?: Date;
+  PersonalDataDeletionProcedureDocumentationName?: string;
+  PersonalDataDeletionProcedureDocumentationUrl?: string;
+  PersonalDataDeletionVerificationDocumentationName?: string;
+  PersonalDataDeletionVerificationDocumentationUrl?: string;
   //ngrx requires the id field to have lowercase 'id' name
   id: string;
   SystemActive: boolean;
@@ -227,6 +244,22 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ItSystemCategoriesName: value.ItSystemCategoriesName,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
+    PersonalDataDeletionCapability: personalDataDeletionCapabilityOptions.find(
+      (o) => o.value === value.PersonalDataDeletionCapability,
+    ),
+    PersonalDataDeletionMethod: personalDataDeletionMethodOptions.find(
+      (o) => o.value === value.PersonalDataDeletionMethod,
+    ),
+    PersonalDataDeletionDeadlineTypeUuid: value.PersonalDataDeletionDeadlineTypeUuid,
+    PersonalDataDeletionDeadlineTypeName: value.PersonalDataDeletionDeadlineTypeName,
+    PersonalDataDeletionResponsibleUserId: value.PersonalDataDeletionResponsibleUserId,
+    PersonalDataDeletionResponsibleUserUuid: value.PersonalDataDeletionResponsibleUserUuid,
+    PersonalDataDeletionResponsibleUserName: value.PersonalDataDeletionResponsibleUserName,
+    PersonalDataDeletionVerifiedDate: value.PersonalDataDeletionVerifiedDate,
+    PersonalDataDeletionProcedureDocumentationName: value.PersonalDataDeletionProcedureDocumentationName,
+    PersonalDataDeletionProcedureDocumentationUrl: value.PersonalDataDeletionProcedureDocumentationUrl,
+    PersonalDataDeletionVerificationDocumentationName: value.PersonalDataDeletionVerificationDocumentationName,
+    PersonalDataDeletionVerificationDocumentationUrl: value.PersonalDataDeletionVerificationDocumentationUrl,
     DpiaConducted: mapFromCapitalizedStringToDpiaConductedEnum(value.DPIAConducted),
     IsBusinessCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsBusinessCritical),
     ContainsAITechnology: mapToYesNoEnum(value.ContainsAITechnology),

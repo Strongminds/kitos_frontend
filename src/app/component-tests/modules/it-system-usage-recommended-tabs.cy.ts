@@ -14,6 +14,7 @@ import {
   selectITSystemUsageEnableAndRecommendedGdprDataTypes,
   selectITSystemUsageEnableAndRecommendedGdprDocumentation,
   selectITSystemUsageEnableAndRecommendedGdprPurpose,
+  selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion,
   selectITSystemUsageEnableAndRecommendedGeneralPurpose,
   selectITSystemUsageEnableAndRecommendedRegisteredCategories,
   selectITSystemUsageEnableAndRecommendedAssociatedContracts,
@@ -61,7 +62,48 @@ describe('System usage tab recommendations', () => {
   };
   const badge = () => badges().gdpr$;
 
+  const deletionDetails: Partial<APIGDPRRegistrationsResponseDTO> = {
+    personalDataDeletionMethod: 'AutomaticallyBySystem',
+    personalDataDeletionDeadlineType: { uuid: 'deadline', name: 'Deadline' },
+    personalDataDeletionProcedureDocumentation: { url: 'https://example.com/procedure' },
+    personalDataDeletionResponsibleUser: { uuid: 'user', name: 'User' },
+    personalDataDeletionVerifiedDate: '2026-10-23',
+    personalDataDeletionVerificationDocumentation: { url: 'https://example.com/verification' },
+  };
+
+  for (const capability of ['IndividualRecords', 'BulkDeletion'] as const) {
+    it(`updates the GDPR badge as ${capability} deletion details are filled and cleared`, async () => {
+      store.overrideSelector(selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion, { enabled: true, recommended: true });
+      const gdprSelector = store.overrideSelector(selectItSystemUsageGdpr, {
+        ...emptyGdpr, personalDataDeletionCapability: capability,
+      });
+      const badge$ = badge();
+      expect(await firstValueFrom(badge$)).to.deep.equal({ visible: true, filled: false });
+      const complete = { ...emptyGdpr, ...deletionDetails, personalDataDeletionCapability: capability };
+      gdprSelector.setResult(complete);
+      store.refreshState();
+      expect(await firstValueFrom(badge$)).to.deep.equal({ visible: true, filled: true });
+
+      for (const field of Object.keys(deletionDetails)) {
+        gdprSelector.setResult({ ...complete, [field]: undefined });
+        store.refreshState();
+        expect((await firstValueFrom(badge$)).filled, field).to.equal(false);
+      }
+      gdprSelector.setResult({ ...emptyGdpr, personalDataDeletionCapability: 'No' });
+      store.refreshState();
+      expect(await firstValueFrom(badge$)).to.deep.equal({ visible: true, filled: true });
+      gdprSelector.setResult(emptyGdpr);
+      store.refreshState();
+      expect(await firstValueFrom(badge$)).to.deep.equal({ visible: true, filled: false });
+    });
+  }
+
   for (const section of [
+    {
+      name: 'personal data deletion',
+      selector: selectITSystemUsageEnableAndRecommendedGdprPersonalDataDeletion,
+      value: { personalDataDeletionCapability: 'No' as const },
+    },
     {
       name: 'data types',
       selector: selectITSystemUsageEnableAndRecommendedGdprDataTypes,
