@@ -39,8 +39,9 @@ import { archiveDutyRecommendationChoiceOptions } from 'src/app/shared/models/it
 import { licensingAndCodeModelOptions } from 'src/app/shared/models/it-system/licensing-and-code-model.model';
 import { lifeCycleStatusOptions } from 'src/app/shared/models/life-cycle-status.model';
 import { numberOfExpectedUsersOptionsGrid } from 'src/app/shared/models/number-of-expected-users.model';
+import { dpiaConductedOptions } from 'src/app/shared/models/dpia-conducted.model';
 import { yesNoBooleanOptions } from 'src/app/shared/models/yes-no-boolean-options.model';
-import { yesNoDontKnowIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-dont-know-irrelevant.model';
+import { riskAssessmentConductedOptionsGrid } from 'src/app/shared/models/risk-assessment-conducted.model';
 import { yesNoDontKnowOptions } from 'src/app/shared/models/yes-no-dont-know.model';
 import { yesNoIrrelevantOptionsGrid } from 'src/app/shared/models/yes-no-irrelevant.model';
 import { yesNoPartiallyOptions } from 'src/app/shared/models/yes-no-partially.model';
@@ -592,7 +593,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: GDPR_SECTION_NAME,
       style: 'enum',
       extraFilter: 'enum',
-      extraData: yesNoDontKnowIrrelevantOptionsGrid,
+      extraData: riskAssessmentConductedOptionsGrid,
       hidden: true,
       persistId: 'riskAssessmentConducted',
     },
@@ -700,7 +701,7 @@ export class ITSystemUsagesComponent extends BaseOverviewComponent implements On
       section: GDPR_SECTION_NAME,
       style: 'enum',
       extraFilter: 'enum',
-      extraData: yesNoDontKnowOptions,
+      extraData: dpiaConductedOptions,
       hidden: true,
       persistId: 'dpiaConducted',
     },

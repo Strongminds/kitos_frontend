@@ -1,7 +1,7 @@
-import { personalDataDeletionCapabilityOptions, personalDataDeletionMethodOptions } from './gdpr/personal-data-deletion.model';
-import { DropdownOption } from '../dropdown-option.model';
 import { AppPath } from '../../enums/app-path';
 import { entityWithUnavailableName, organizationNameWithCvr } from '../../helpers/string.helpers';
+import { DpiaConductedOption, mapFromCapitalizedStringToDpiaConductedEnum } from '../dpia-conducted.model';
+import { DropdownOption } from '../dropdown-option.model';
 import {
   mapRoleAssignmentsToEmails,
   mapRoleAssignmentsToUserFullNames,
@@ -11,7 +11,7 @@ import {
 import { LicensingAndCodeModel, mapLicensingAndCodeModels } from '../it-system/licensing-and-code-model.model';
 import { LifeCycleStatus, mapLifeCycleStatus } from '../life-cycle-status.model';
 import { mapGridNumberOfExpectedUsers, NumberOfExpectedUsersGrid } from '../number-of-expected-users.model';
-import { mapToYesNoDontKnowIrrelevantEnum, YesNoDontKnowIrrelevantOption } from '../yes-no-dont-know-irrelevant.model';
+import { mapToRiskAssessmentConductedEnum, RiskAssessmentConductedOption } from '../risk-assessment-conducted.model';
 import { mapFromCapitalizedStringToYesNoDontKnowEnum, YesNoDontKnowOption } from '../yes-no-dont-know.model';
 import { mapCapitalizedStringToYesNoIrrelevantEnum } from '../yes-no-irrelevant.model';
 import { mapToYesNoPartiallyEnum, YesNoPartiallyOption } from '../yes-no-partially.model';
@@ -22,6 +22,10 @@ import {
   IsDataProcessingAgreementRequired,
   mapIsDataProcessingAgreementRequired,
 } from './gdpr/is-data-processing-agreement-required.model';
+import {
+  personalDataDeletionCapabilityOptions,
+  personalDataDeletionMethodOptions,
+} from './gdpr/personal-data-deletion.model';
 import { mapGridRiskAssessmentEnum, RiskAssessmentResultGridOptions } from './gdpr/risk-assessment-result';
 
 export interface ITSystemUsage {
@@ -99,11 +103,11 @@ export interface ITSystemUsage {
   RiskAssessmentDate: Date;
   PlannedRiskAssessmentDate: Date;
   RiskAssessmentResult: RiskAssessmentResultGridOptions | undefined;
-  RiskAssessmentConducted: YesNoDontKnowIrrelevantOption | undefined;
+  RiskAssessmentConducted: RiskAssessmentConductedOption | undefined;
   UserCount: NumberOfExpectedUsersGrid | undefined;
   Roles: RoleAssignmentsMap;
   RoleEmails: RoleAssignmentEmailsMaps;
-  DpiaConducted: YesNoDontKnowOption | undefined;
+  DpiaConducted: DpiaConductedOption | undefined;
   IsBusinessCritical: YesNoDontKnowOption | undefined;
   ContainsAITechnology: YesNoOption | undefined;
   CatalogArchiveDuty: ArchiveDutyChoice | undefined;
@@ -192,7 +196,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ActiveArchivePeriodEndDate: value.ActiveArchivePeriodEndDate,
     RiskSupervisionDocumentationName: value.RiskSupervisionDocumentationName,
     RiskSupervisionDocumentationUrl: value.RiskSupervisionDocumentationUrl,
-    RiskAssessmentConducted: mapToYesNoDontKnowIrrelevantEnum(value.RiskAssessmentConducted),
+    RiskAssessmentConducted: mapToRiskAssessmentConductedEnum(value.RiskAssessmentConducted),
     LinkToDirectoryName: value.LinkToDirectoryName,
     LinkToDirectoryUrl: value.LinkToDirectoryUrl,
     HostedAt: mapGridHostedAt(value.HostedAt),
@@ -240,8 +244,12 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     ItSystemCategoriesName: value.ItSystemCategoriesName,
     Roles: mapRoleAssignmentsToUserFullNames(value.RoleAssignments),
     RoleEmails: mapRoleAssignmentsToEmails(value.RoleAssignments),
-    PersonalDataDeletionCapability: personalDataDeletionCapabilityOptions.find(o => o.value === value.PersonalDataDeletionCapability),
-    PersonalDataDeletionMethod: personalDataDeletionMethodOptions.find(o => o.value === value.PersonalDataDeletionMethod),
+    PersonalDataDeletionCapability: personalDataDeletionCapabilityOptions.find(
+      (o) => o.value === value.PersonalDataDeletionCapability,
+    ),
+    PersonalDataDeletionMethod: personalDataDeletionMethodOptions.find(
+      (o) => o.value === value.PersonalDataDeletionMethod,
+    ),
     PersonalDataDeletionDeadlineTypeUuid: value.PersonalDataDeletionDeadlineTypeUuid,
     PersonalDataDeletionDeadlineTypeName: value.PersonalDataDeletionDeadlineTypeName,
     PersonalDataDeletionResponsibleUserId: value.PersonalDataDeletionResponsibleUserId,
@@ -252,7 +260,7 @@ export const adaptITSystemUsage = (value: any): ITSystemUsage | undefined => {
     PersonalDataDeletionProcedureDocumentationUrl: value.PersonalDataDeletionProcedureDocumentationUrl,
     PersonalDataDeletionVerificationDocumentationName: value.PersonalDataDeletionVerificationDocumentationName,
     PersonalDataDeletionVerificationDocumentationUrl: value.PersonalDataDeletionVerificationDocumentationUrl,
-    DpiaConducted: mapFromCapitalizedStringToYesNoDontKnowEnum(value.DPIAConducted),
+    DpiaConducted: mapFromCapitalizedStringToDpiaConductedEnum(value.DPIAConducted),
     IsBusinessCritical: mapFromCapitalizedStringToYesNoDontKnowEnum(value.IsBusinessCritical),
     ContainsAITechnology: mapToYesNoEnum(value.ContainsAITechnology),
     CatalogArchiveDuty: mapArchiveDutyChoice(value.CatalogArchiveDuty),
