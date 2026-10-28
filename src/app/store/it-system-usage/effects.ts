@@ -907,6 +907,7 @@ function applyQueryFixes(odataString: string, systemRoles: APIBusinessRoleDTO[] 
     .replace(/(\w+\()AssociatedContractsNamesCsv(.*\))/, 'AssociatedContracts/any(h: $1h/ItContractName$2)')
     .replace(/ItSystemBusinessTypeUuid eq '([\w-]+)'/, 'ItSystemBusinessTypeUuid eq $1')
     .replace(/SystemUsageCriticalityLevelUuid eq '([\w-]+)'/, 'SystemUsageCriticalityLevelUuid eq $1')
+    .replace(/PersonalDataDeletionDeadlineTypeUuid eq '([\w-]+)'/g, 'PersonalDataDeletionDeadlineTypeUuid eq $1')
     .replace(/TechnicalSystemTypeUuid eq '([\w-]+)'/, 'TechnicalSystemTypeUuid eq $1')
     .replace(/ItSystemCategoriesUuid eq '([\w-]+)'/, 'ItSystemCategoriesUuid eq $1')
     .replace(/LicensingAndCodeModels eq '([^']+)'/g, "LicensingAndCodeModels/any(l: l eq '$1')")

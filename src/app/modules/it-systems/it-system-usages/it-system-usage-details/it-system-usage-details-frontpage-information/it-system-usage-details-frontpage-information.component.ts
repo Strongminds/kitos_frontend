@@ -128,7 +128,7 @@ import { EditUrlSectionComponent } from '../../../shared/edit-url-section/edit-u
 export class ITSystemUsageDetailsFrontpageInformationComponent extends BaseComponent implements OnInit {
   public readonly itSystemInformationForm = new FormGroup(
     {
-      purpose: new FormControl('', Validators.maxLength(200)),
+      purpose: new FormControl('', Validators.maxLength(1000)),
       localCallName: new FormControl('', Validators.maxLength(100)),
       localSystemId: new FormControl('', Validators.maxLength(200)),
       systemVersion: new FormControl('', Validators.maxLength(100)),
