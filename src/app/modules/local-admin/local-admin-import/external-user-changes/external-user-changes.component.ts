@@ -1,5 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
+import { AccordionComponent } from 'src/app/shared/components/accordion/accordion.component';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, EMPTY, Observable, Subject, combineLatest, from, of } from 'rxjs';
 import { catchError, expand, filter, map, mergeMap, reduce, startWith, switchMap, tap, toArray } from 'rxjs/operators';
@@ -11,6 +13,7 @@ import { ButtonComponent } from 'src/app/shared/components/buttons/button/button
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
 import { HideShowButtonComponent } from 'src/app/shared/components/grid/hide-show-button/hide-show-button.component';
 import { LocalGridComponent } from 'src/app/shared/components/local-grid/local-grid.component';
+import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
 import { EXTERNAL_USER_CHANGES_COLUMNS_ID } from 'src/app/shared/constants/persistent-state-constants';
 import { PopupMessageType } from 'src/app/shared/enums/popup-message-type';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
@@ -104,7 +107,15 @@ function toDate(value?: string | null): Date | null {
   selector: 'app-external-user-changes',
   templateUrl: './external-user-changes.component.html',
   styleUrl: './external-user-changes.component.scss',
-  imports: [LocalGridComponent, DropdownComponent, ButtonComponent, HideShowButtonComponent],
+  imports: [
+    LocalGridComponent,
+    DropdownComponent,
+    ButtonComponent,
+    HideShowButtonComponent,
+    CheckboxComponent,
+    AccordionComponent,
+    ParagraphComponent,
+  ],
 })
 export class ExternalUserChangesComponent extends BaseComponent implements OnInit {
   @Output() public readonly pendingCountChange = new EventEmitter<number>();
@@ -162,7 +173,6 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   public isResolving = false;
   public hasLoadError = false;
   public selectedChangeUuids = new Set<string>();
-  public actionResults: ChangeActionResult[] = [];
 
   private readonly view$ = new BehaviorSubject<ViewState>('pending');
   private readonly refresh$ = new Subject<void>();
@@ -222,7 +232,6 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     if (!option || this.activeView === option.value) return;
     this.activeView = option.value;
     this.selectedView = option;
-    this.actionResults = [];
     this.updateViewColumns();
     this.view$.next(option.value);
   }
@@ -248,6 +257,11 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
       nextSelection.delete(item.uuid);
     }
     this.applySelection(nextSelection);
+  }
+
+  public get allSelectableChangesSelected(): boolean {
+    const selectableCount = this.rows.filter((row) => row.status === 'Pending').length;
+    return selectableCount > 0 && this.selectedChangeUuids.size === Math.min(selectableCount, MAX_SELECTION);
   }
 
   public selectAll(): void {
@@ -359,7 +373,6 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     const organizationUuid = this.currentOrganizationUuid();
     this.isResolving = true;
     this.applySelection(this.selectedChangeUuids);
-    this.actionResults = [];
     this.subscriptions.add(
       this.api
         .postSingleExternalUserChangesInternalV2ResolveBatch({
@@ -383,22 +396,25 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
           }),
         )
         .subscribe((results) => {
-          this.actionResults = results;
-          const failures = results.filter((result) => !result.success).length;
-          if (failures) {
-            this.notificationService.showError(
-              $localize`${results.length - failures} af ${results.length} ændringer blev behandlet; se resultatet for hver bruger.`,
-            );
-          } else {
-            this.notificationService.show(
-              apply ? $localize`Alle valgte brugerændringer blev anvendt` : $localize`Alle valgte ændringer blev afvist`,
-              PopupMessageType.default,
-            );
-          }
+          this.showBatchResults(results, apply);
           this.isResolving = false;
           this.clearSelection();
           this.refresh();
         }),
+    );
+  }
+
+  private showBatchResults(results: ChangeActionResult[], apply: boolean): void {
+    const failures = results.filter((result) => !result.success);
+    if (failures.length > 0) {
+      const summary = $localize`${results.length - failures.length} af ${results.length} ændringer blev behandlet.`;
+      const details = failures.map((result) => `${result.userName}: ${result.message}`).join('; ');
+      this.notificationService.showError(`${summary} ${details}`);
+      return;
+    }
+    this.notificationService.show(
+      apply ? $localize`Alle valgte brugerændringer blev anvendt` : $localize`Alle valgte ændringer blev afvist`,
+      PopupMessageType.default,
     );
   }
 

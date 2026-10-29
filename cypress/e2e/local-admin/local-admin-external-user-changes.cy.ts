@@ -82,6 +82,7 @@ describe('external-user-changes', () => {
   it('shows pending changes and displays per-item bulk resolution outcomes', () => {
     connectedTestRunner.runTestWithSetup('Can review external user deletions', () => {
       openUsersTab();
+      cy.getByDataCy('external-changes-accordion').find('mat-expansion-panel-header').click();
       cy.wait('@getExternalChanges');
       cy.contains('Test Bruger').should('be.visible');
       cy.contains('Eksempel Bruger').should('be.visible');
@@ -108,14 +109,16 @@ describe('external-user-changes', () => {
       cy.wait('@resolveChanges').then(({ request }) => {
         expect(request.body).to.deep.equal({ changeUuids: ['change-1', 'change-2'], apply: true });
       });
-      cy.getByDataCy('bulk-results').should('contain', 'Adgang fjernet');
-      cy.getByDataCy('bulk-results').should('contain', 'Ændringen afventer stadig behandling');
+      cy.get('app-popup-message').should('contain', '1 af 2 ændringer blev behandlet.');
+      cy.get('app-popup-message').should('contain', 'Ændringen afventer stadig behandling');
+      cy.getByDataCy('bulk-results').should('not.exist');
     });
   });
 
   it('loads resolved changes and shows an empty grid without errors', () => {
     connectedTestRunner.runTestWithSetup('Can view resolved changes', () => {
       openUsersTab();
+      cy.getByDataCy('external-changes-accordion').find('mat-expansion-panel-header').click();
       cy.wait('@getExternalChanges').then(({ request }) => {
         expect(request.query).to.have.property('status', 'Pending');
       });
@@ -136,10 +139,15 @@ describe('external-user-changes', () => {
   it('can select a single change from the grid checkbox column', () => {
     connectedTestRunner.runTestWithSetup('Can select a single change', () => {
       openUsersTab();
+      cy.getByDataCy('external-changes-accordion').find('mat-expansion-panel-header').click();
       cy.wait('@getExternalChanges');
       cy.getByDataCy('grid-checkbox').first().click();
       cy.getByDataCy('selection-count').should('contain', '1');
-      cy.getByDataCy('clear-selection').click();
+      cy.getByDataCy('select-all').find('input').should('have.prop', 'indeterminate', true);
+      cy.getByDataCy('select-all').click();
+      cy.getByDataCy('selection-count').should('contain', '2');
+      cy.getByDataCy('select-all').find('input').should('be.checked');
+      cy.getByDataCy('select-all').click();
       cy.getByDataCy('selection-count').should('contain', '0');
     });
   });

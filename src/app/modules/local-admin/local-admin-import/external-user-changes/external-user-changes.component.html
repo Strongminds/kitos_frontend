@@ -1,5 +1,7 @@
-<div class="external-changes">
-  <p class="intro" i18n>Gennemgå sletninger af brugere rapporteret af FK Organisation, før de anvendes på organisationen.</p>
+<app-accordion title="Brugerændringer" i18n-title data-cy="external-changes-accordion">
+  <app-paragraph class="intro" i18n
+    >Gennemgå sletninger af brugere rapporteret af FK Organisation, før de anvendes på organisationen.</app-paragraph
+  >
 
   <div class="toolbar">
     <app-dropdown
@@ -18,24 +20,6 @@
         <span class="selection-count" data-cy="selection-count">
           {{ selectedChangeUuids.size }} <ng-container i18n>valgt</ng-container>
         </span>
-        <app-button
-          buttonStyle="secondary"
-          size="small"
-          [disabled]="isResolving || isLoading || rows.length === 0"
-          (buttonClick)="selectAll()"
-          data-cy="select-all"
-          i18n
-          >Vælg alle</app-button
-        >
-        <app-button
-          buttonStyle="secondary"
-          size="small"
-          [disabled]="isResolving || selectedChangeUuids.size === 0"
-          (buttonClick)="clearSelection()"
-          data-cy="clear-selection"
-          i18n
-          >Ryd valg</app-button
-        >
         <app-button
           color="warn"
           size="small"
@@ -64,20 +48,6 @@
     </div>
   </div>
 
-  @if (actionResults.length > 0) {
-    <section class="action-results" aria-live="polite" data-cy="bulk-results">
-      <h4 i18n>Resultat for valgte ændringer</h4>
-      <ul>
-        @for (result of actionResults; track result.changeUuid) {
-          <li [class.failed]="!result.success">
-            <strong>{{ result.userName }}</strong>
-            <span>{{ result.message }}</span>
-          </li>
-        }
-      </ul>
-    </section>
-  }
-
   @if (hasLoadError) {
     <div class="load-error" data-cy="external-changes-load-error">
       <span i18n>Listen kunne ikke hentes.</span>
@@ -85,13 +55,27 @@
     </div>
   }
 
+  <ng-template #selectionFilterCell>
+    <app-checkbox
+      class="selection-checkbox"
+      [value]="allSelectableChangesSelected"
+      [indeterminate]="selectedChangeUuids.size > 0 && !allSelectableChangesSelected"
+      [disabled]="isResolving || isLoading || rows.length === 0"
+      (valueChange)="$event ? selectAll() : clearSelection()"
+      ariaLabel="Vælg alle"
+      i18n-ariaLabel
+      data-cy="select-all"
+    ></app-checkbox>
+  </ng-template>
+
   <app-local-grid
     [data]="rows"
     [columns]="viewColumns"
+    [filterCellTemplates]="{ selected: selectionFilterCell }"
     [loading]="isLoading"
     [createPermission]="true"
     [withOutline]="true"
     (checkboxChange)="onCheckboxChange($event)"
     data-cy="external-changes-grid"
   ></app-local-grid>
-</div>
+</app-accordion>

@@ -2,7 +2,13 @@
   display: block;
 }
 
+.selection-checkbox {
+  display: flex;
+  justify-content: center;
+}
+
 .intro {
+  display: block;
   margin: 0 0 1rem;
 }
 
@@ -28,34 +34,6 @@
 
 .selection-count {
   margin-right: 0.5rem;
-}
-
-.action-results {
-  background: #f4f7f9;
-  border-left: 4px solid #0071bc;
-  margin: 0 0 1rem;
-  padding: 0.75rem 1rem;
-
-  h4 {
-    margin: 0 0 0.5rem;
-  }
-
-  ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-
-  li {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1rem;
-    padding: 0.3rem 0;
-  }
-
-  li.failed {
-    color: #a51d2d;
-  }
 }
 
 .load-error {
