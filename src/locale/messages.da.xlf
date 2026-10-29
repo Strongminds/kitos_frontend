@@ -8229,10 +8229,6 @@
         <source>Afvis ændringer</source>
         <target state="new">Afvis ændringer</target>
       </trans-unit>
-      <trans-unit id="288488215766814357" datatype="html">
-        <source>Resultat for valgte ændringer</source>
-        <target state="new">Resultat for valgte ændringer</target>
-      </trans-unit>
       <trans-unit id="8705437266958788833" datatype="html">
         <source>Hændelse indtruffet</source>
         <target state="new">Hændelse indtruffet</target>
@@ -8313,10 +8309,6 @@
         <source>Resultatet kunne ikke bekræftes</source>
         <target state="new">Resultatet kunne ikke bekræftes</target>
       </trans-unit>
-      <trans-unit id="8491045830088642658" datatype="html">
-        <source><x id="PH" equiv-text="results.length - failures"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet; se resultatet for hver bruger.</source>
-        <target state="new"><x id="PH" equiv-text="results.length - failures"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet; se resultatet for hver bruger.</target>
-      </trans-unit>
       <trans-unit id="7672270251668328440" datatype="html">
         <source>Alle valgte brugerændringer blev anvendt</source>
         <target state="new">Alle valgte brugerændringer blev anvendt</target>
@@ -8396,10 +8388,6 @@
       <trans-unit id="7072998270565507502" datatype="html">
         <source>Kunne ikke fjerne forbindelsen til FK Organisation for brugere</source>
         <target state="new">Kunne ikke fjerne forbindelsen til FK Organisation for brugere</target>
-      </trans-unit>
-      <trans-unit id="8684495367591036108" datatype="html">
-        <source>Ryd valg</source>
-        <target state="new">Ryd valg</target>
       </trans-unit>
       <trans-unit id="4175487231606706312" datatype="html">
         <source>Modtaget</source>
@@ -8568,6 +8556,14 @@
       <trans-unit id="7988877200428481492" datatype="html">
         <source>Ja, enkelte poster</source>
         <target state="new">Ja, enkelte poster</target>
+      </trans-unit>
+      <trans-unit id="1432186004985576448" datatype="html">
+        <source>Brugerændringer</source>
+        <target state="new">Brugerændringer</target>
+      </trans-unit>
+      <trans-unit id="5089165653399689980" datatype="html">
+        <source><x id="PH" equiv-text="results.length - failures.length"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet.</source>
+        <target state="new"><x id="PH" equiv-text="results.length - failures.length"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet.</target>
       </trans-unit>
     </body>
   </file>

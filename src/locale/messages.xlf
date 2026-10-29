@@ -6293,9 +6293,6 @@
       <trans-unit id="2598588888860123854" datatype="html">
         <source>Lokalt bruger-id</source>
       </trans-unit>
-      <trans-unit id="288488215766814357" datatype="html">
-        <source>Resultat for valgte ændringer</source>
-      </trans-unit>
       <trans-unit id="3611731382659966122" datatype="html">
         <source>Afventer</source>
       </trans-unit>
@@ -6349,9 +6346,6 @@
       </trans-unit>
       <trans-unit id="7916199398956405662" datatype="html">
         <source>Prøv igen</source>
-      </trans-unit>
-      <trans-unit id="8491045830088642658" datatype="html">
-        <source><x id="PH" equiv-text="results.length - failures"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet; se resultatet for hver bruger.</source>
       </trans-unit>
       <trans-unit id="8646320435327639331" datatype="html">
         <source>Ændringen har status &quot;<x id="PH" equiv-text="this.statusLabel(response.status)"/>&quot;</source>
@@ -6418,9 +6412,6 @@
       </trans-unit>
       <trans-unit id="4175487231606706312" datatype="html">
         <source>Modtaget</source>
-      </trans-unit>
-      <trans-unit id="8684495367591036108" datatype="html">
-        <source>Ryd valg</source>
       </trans-unit>
       <trans-unit id="1407866383632849818" datatype="html">
         <source>Fakturerings startdato 3</source>
@@ -6544,6 +6535,12 @@
       </trans-unit>
       <trans-unit id="7988877200428481492" datatype="html">
         <source>Ja, enkelte poster</source>
+      </trans-unit>
+      <trans-unit id="1432186004985576448" datatype="html">
+        <source>Brugerændringer</source>
+      </trans-unit>
+      <trans-unit id="5089165653399689980" datatype="html">
+        <source><x id="PH" equiv-text="results.length - failures.length"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet.</source>
       </trans-unit>
     </body>
   </file>
