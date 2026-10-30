@@ -23,7 +23,7 @@
         <app-button
           color="warn"
           size="small"
-          [disabled]="selectedChangeUuids.size === 0"
+          [disabled]="selectedChangeUuids.size === 0 || selectionDisabled"
           [loading]="isResolving"
           (buttonClick)="resolveSelected(true)"
           data-cy="bulk-apply"
@@ -33,7 +33,7 @@
         <app-button
           buttonStyle="secondary"
           size="small"
-          [disabled]="selectedChangeUuids.size === 0 || isResolving"
+          [disabled]="selectedChangeUuids.size === 0 || selectionDisabled"
           (buttonClick)="resolveSelected(false)"
           data-cy="bulk-dismiss"
           i18n
@@ -60,7 +60,7 @@
       class="selection-checkbox"
       [value]="allSelectableChangesSelected"
       [indeterminate]="selectedChangeUuids.size > 0 && !allSelectableChangesSelected"
-      [disabled]="isResolving || isLoading || rows.length === 0"
+      [disabled]="selectionDisabled || rows.length === 0"
       (valueChange)="$event ? selectAll() : clearSelection()"
       ariaLabel="Vælg alle"
       i18n-ariaLabel

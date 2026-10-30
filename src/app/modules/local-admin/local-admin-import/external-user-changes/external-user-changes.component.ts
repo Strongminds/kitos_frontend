@@ -1,10 +1,11 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 import { AccordionComponent } from 'src/app/shared/components/accordion/accordion.component';
 import { Store } from '@ngrx/store';
+import { process } from '@progress/kendo-data-query';
 import { BehaviorSubject, EMPTY, Observable, Subject, combineLatest, from, of } from 'rxjs';
-import { catchError, expand, filter, map, mergeMap, reduce, startWith, switchMap, tap, toArray } from 'rxjs/operators';
+import { catchError, expand, filter, map, mergeMap, reduce, startWith, switchMap, take, tap, toArray } from 'rxjs/operators';
 import { ExternalUserChangesInternalV2Service } from 'src/app/api/v2/api/externalUserChangesInternalV2.service';
 import { APIExternalUserChangeResponse } from 'src/app/api/v2/model/externalUserChangeResponse';
 import { APIExternalUserChangeStatus } from 'src/app/api/v2/model/externalUserChangeStatus';
@@ -118,6 +119,7 @@ function toDate(value?: string | null): Date | null {
   ],
 })
 export class ExternalUserChangesComponent extends BaseComponent implements OnInit {
+  @ViewChild(LocalGridComponent) private grid?: LocalGridComponent<ExternalUserChangeRow>;
   @Output() public readonly pendingCountChange = new EventEmitter<number>();
 
   public readonly viewOptions: DropdownOption<ViewState>[] = [
@@ -195,7 +197,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
 
     this.subscriptions.add(
       combineLatest([
-        this.store.select(selectOrganizationUuid).pipe(filter((uuid): uuid is string => !!uuid)),
+        this.store.select(selectOrganizationUuid).pipe(filter((uuid): uuid is string => !!uuid), take(1)),
         this.view$,
         this.refresh$.pipe(startWith(undefined)),
       ])
@@ -203,6 +205,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
           tap(() => {
             this.isLoading = true;
             this.hasLoadError = false;
+            this.clearSelection();
           }),
           switchMap(([organizationUuid, view]) =>
             this.loadAll(organizationUuid, view).pipe(
@@ -221,6 +224,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
         .subscribe(({ items, pendingCount }) => {
           this.clearSelection();
           this.rows = items.map((item) => this.toRow(item));
+          this.clampGridPage();
           this.pendingCount = pendingCount;
           this.pendingCountChange.emit(pendingCount);
           this.isLoading = false;
@@ -249,7 +253,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   }
 
   public onCheckboxChange({ value, item }: BooleanChange<ExternalUserChangeRow>): void {
-    if (this.isResolving || item.status !== 'Pending') return;
+    if (this.selectionDisabled || item.status !== 'Pending') return;
     const nextSelection = new Set(this.selectedChangeUuids);
     if (value) {
       nextSelection.add(item.uuid);
@@ -265,6 +269,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   }
 
   public selectAll(): void {
+    if (this.selectionDisabled) return;
     const selectable = this.rows.filter((row) => row.status === 'Pending').slice(0, MAX_SELECTION);
     this.applySelection(new Set(selectable.map((row) => row.uuid)));
     if (this.rows.filter((row) => row.status === 'Pending').length > MAX_SELECTION) {
@@ -278,7 +283,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
 
   public resolveSelected(apply: boolean): void {
     const changeUuids = [...this.selectedChangeUuids];
-    if (!changeUuids.length || this.isResolving) return;
+    if (!changeUuids.length || this.selectionDisabled) return;
     if (apply) {
       this.confirmActionService.confirmAction({
         category: ConfirmActionCategory.Warning,
@@ -360,13 +365,26 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     this.rows.forEach((row) => {
       row.selected = selection.has(row.uuid);
       row.notSelectable =
-        this.isResolving || row.status !== 'Pending' || (limitReached && !row.selected);
+        this.selectionDisabled || row.status !== 'Pending' || (limitReached && !row.selected);
     });
   }
 
   private updateViewColumns(): void {
     const excluded = this.activeView === 'pending' ? RESOLVED_ONLY_FIELDS : PENDING_ONLY_FIELDS;
     this.viewColumns = this.columns.filter((column) => !excluded.includes(column.field));
+  }
+
+  public get selectionDisabled(): boolean {
+    return this.isLoading || this.hasLoadError || this.isResolving;
+  }
+
+  private clampGridPage(): void {
+    if (!this.grid) return;
+    const state = this.grid.state;
+    const total = process(this.rows, { filter: state.filter }).total;
+    const take = state.all ? total : state.take;
+    const lastPageSkip = take ? Math.max(0, Math.ceil(total / take) - 1) * take : 0;
+    this.grid.onStateChange({ ...state, take, skip: Math.min(state.skip ?? 0, lastPageSkip) });
   }
 
   private resolveBatch(changeUuids: string[], apply: boolean): void {

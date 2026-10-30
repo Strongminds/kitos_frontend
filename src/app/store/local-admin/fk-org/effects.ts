@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { concatLatestFrom } from '@ngrx/operators';
 import { Store } from '@ngrx/store';
-import { catchError, combineLatestWith, exhaustMap, map, mergeMap, of, switchMap } from 'rxjs';
+import { catchError, combineLatestWith, exhaustMap, filter, map, mergeMap, of, switchMap, takeUntil } from 'rxjs';
 import { StsOrganizationSynchronizationInternalV2Service } from 'src/app/api/v2';
 import { filterNullish } from 'src/app/shared/pipes/filter-nullish';
 import { selectOrganizationUuid } from '../../user-store/selectors';
@@ -162,6 +162,7 @@ export class FkOrgEffects {
           .pipe(
             map((status) => FkOrgActions.getUserSynchronizationStatusSuccess(status)),
             catchError(() => of(FkOrgActions.getUserSynchronizationStatusError())),
+            takeUntil(this.store.select(selectOrganizationUuid).pipe(filter((uuid) => uuid !== organizationUuid))),
           ),
       ),
     );

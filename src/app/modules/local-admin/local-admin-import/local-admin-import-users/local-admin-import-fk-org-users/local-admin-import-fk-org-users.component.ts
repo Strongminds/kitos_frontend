@@ -2,6 +2,8 @@ import { AsyncPipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
+import { distinctUntilChanged, filter } from 'rxjs';
+import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { CardHeaderComponent } from 'src/app/shared/components/card-header/card-header.component';
@@ -63,7 +65,14 @@ export class LocalAdminImportFkOrgUsersComponent extends BaseComponent implement
   }
 
   ngOnInit(): void {
-    this.loadStatus();
+    this.subscriptions.add(
+      this.store.select(selectOrganizationUuid)
+        .pipe(
+          distinctUntilChanged(),
+          filter((uuid): uuid is string => !!uuid),
+        )
+        .subscribe(() => this.loadStatus()),
+    );
     this.subscriptions.add(
       this.actions$
         .pipe(ofType(FkOrgActions.createUserConnectionSuccess, FkOrgActions.deleteUserConnectionSuccess))

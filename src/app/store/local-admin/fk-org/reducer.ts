@@ -10,6 +10,7 @@ import { adaptFkOrganizationUnit } from 'src/app/shared/models/local-admin/fk-or
 import { getResponsibleEntityTextBasedOnOrigin } from '../../helpers/fk-org-helper';
 import { FkOrgActions } from './actions';
 import { FkOrgState } from './state';
+import { UserActions } from '../../user-store/actions';
 
 export const fkOrgInitialState: FkOrgState = {
   synchronizationStatus: undefined,
@@ -38,6 +39,14 @@ export const fkOrgFeature = createFeature({
   name: 'FkOrg',
   reducer: createReducer(
     fkOrgInitialState,
+    on(UserActions.resetOnOrganizationUpdate, (state): FkOrgState => ({
+      ...state,
+      userSynchronizationStatus: undefined,
+      userAccessError: undefined,
+      isLoadingUserConnectionStatus: false,
+      hasUserConnectionStatusFailed: false,
+      isUserConnectionActionLoading: false,
+    })),
     on(
       FkOrgActions.getSynchronizationStatus,
       (state): FkOrgState => ({
