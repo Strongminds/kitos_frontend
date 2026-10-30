@@ -24,6 +24,7 @@ import { DprLocalDataResponsibleTypesInternalV2Service } from './api/dprLocalDat
 import { DprLocalOversightOptionTypesInternalV2Service } from './api/dprLocalOversightOptionTypesInternalV2.service';
 import { DprLocalRoleOptionTypesInternalV2Service } from './api/dprLocalRoleOptionTypesInternalV2.service';
 import { ExternalReferencesInternalV2Service } from './api/externalReferencesInternalV2.service';
+import { ExternalUserChangesInternalV2Service } from './api/externalUserChangesInternalV2.service';
 import { GdprExportReportInternalV2Service } from './api/gdprExportReportInternalV2.service';
 import { GlobalUserInternalV2Service } from './api/globalUserInternalV2.service';
 import { GridLocalItContractRolesV2Service } from './api/gridLocalItContractRolesV2.service';

@@ -677,6 +677,23 @@ export class NotificationService implements OnDestroy {
       FkOrgActions.deleteConnectionError,
       $localize`Kunne ikke slette forbindelsen til Fk Organisation`,
     );
+
+    this.subscribeAsDefault(
+      FkOrgActions.createUserConnectionSuccess,
+      $localize`Forbindelse til FK Organisation for brugere blev oprettet`,
+    );
+    this.subscribeAsError(
+      FkOrgActions.createUserConnectionError,
+      $localize`Kunne ikke oprette forbindelsen til FK Organisation for brugere`,
+    );
+    this.subscribeAsDefault(
+      FkOrgActions.deleteUserConnectionSuccess,
+      $localize`Forbindelsen til FK Organisation for brugere blev fjernet`,
+    );
+    this.subscribeAsError(
+      FkOrgActions.deleteUserConnectionError,
+      $localize`Kunne ikke fjerne forbindelsen til FK Organisation for brugere`,
+    );
   }
 
   /**
