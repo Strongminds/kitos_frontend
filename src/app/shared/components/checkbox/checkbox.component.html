@@ -18,6 +18,8 @@
         <mat-checkbox
           data-cy="checkbox-input"
           [disabled]="disabled"
+          [indeterminate]="indeterminate"
+          [aria-label]="ariaLabel"
           [color]="color"
           [labelPosition]="labelPosition"
           [checked]="invertCheckedValue ? !value : value"

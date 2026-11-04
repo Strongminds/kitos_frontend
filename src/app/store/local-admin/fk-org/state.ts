@@ -1,4 +1,8 @@
-import { APIStsOrganizationOrgUnitDTO, APIStsOrganizationSynchronizationDetailsResponseDTO } from 'src/app/api/v2';
+import {
+  APIStsOrganizationOrgUnitDTO,
+  APIStsOrganizationSynchronizationDetailsResponseDTO,
+  APIStsOrganizationUserSynchronizationDetailsResponseDTO,
+} from 'src/app/api/v2';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { FkOrgChangeLogDictionary } from 'src/app/shared/models/local-admin/fk-org-change-log.dictionary';
 import { FkOrganizationUnit } from 'src/app/shared/models/local-admin/fk-org-consequence.model';
@@ -18,4 +22,10 @@ export interface FkOrgState {
   isLoadingChangelogs: boolean;
   availableChangelogOptions: DropdownOption<string>[] | undefined;
   changelogDictionary: FkOrgChangeLogDictionary | undefined;
+
+  userSynchronizationStatus: APIStsOrganizationUserSynchronizationDetailsResponseDTO | undefined;
+  userAccessError: string | undefined;
+  isLoadingUserConnectionStatus: boolean;
+  hasUserConnectionStatusFailed: boolean;
+  isUserConnectionActionLoading: boolean;
 }

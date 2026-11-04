@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, TemplateRef, ViewChild } from '@angular/core';
 import { Actions, ofType } from '@ngrx/effects';
 import { ExcelExportData } from '@progress/kendo-angular-excel-export';
 import {
@@ -90,6 +90,7 @@ export class LocalGridComponent<T> extends BaseComponent implements OnInit {
   @ViewChild(KendoGridComponent) grid?: KendoGridComponent;
   @Input() data!: T[];
   @Input() columns!: GridColumn[];
+  @Input() filterCellTemplates: Record<string, TemplateRef<unknown>> = {};
   @Input() loading: boolean | null = false;
   @Input() exportToExcelName?: string | null;
   @Input() createPermission?: boolean | null;

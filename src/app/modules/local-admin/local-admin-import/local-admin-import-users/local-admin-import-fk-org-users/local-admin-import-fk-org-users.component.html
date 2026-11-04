@@ -1,0 +1,64 @@
+<app-card>
+  <app-card-header [title]="title" data-cy="fk-org-users-card-header"></app-card-header>
+  @if (isLoading$ | async) {
+    <app-loading></app-loading>
+  } @else {
+    <app-standard-vertical-content-grid>
+      <div>
+        <app-paragraph [bold]="true" i18n>Adgang</app-paragraph>
+        @if (accessGranted$ | async) {
+          <app-paragraph i18n>KITOS har adgang til organisationens data via FK Organisation</app-paragraph>
+        } @else if ((hasStatusFailed$ | async) === false) {
+          <app-paragraph i18n
+            >KITOS har <strong>ikke</strong> adgang til organisationens data via FK Organisation</app-paragraph
+          >
+        }
+        @if (accessError$ | async; as accessError) {
+          <app-paragraph color="error" data-cy="fk-org-users-access-error">{{ accessError }}</app-paragraph>
+        }
+      </div>
+      <div>
+        <app-paragraph [bold]="true" i18n>Modtagelse af brugerændringer</app-paragraph>
+        @if (isConnected$ | async) {
+          <app-paragraph data-cy="fk-org-users-connected">
+            <ng-container i18n>Organisationen modtager brugerændringer fra FK Organisation</ng-container>
+            @if ((status$ | async)?.connectedAt; as connectedAt) {
+              <ng-container i18n>(forbundet {{ connectedAt | appDate }})</ng-container>
+            }
+          </app-paragraph>
+        } @else if ((hasStatusFailed$ | async) === false) {
+          <app-paragraph i18n data-cy="fk-org-users-not-connected"
+            >Organisationen er <strong>ikke</strong> forbundet til FK Organisation for brugere</app-paragraph
+          >
+        }
+      </div>
+      <div class="action-buttons">
+        @if (hasStatusFailed$ | async) {
+          <app-button (buttonClick)="loadStatus()" data-cy="fk-org-users-retry" i18n>Prøv igen</app-button>
+        }
+        @if (canCreateConnection$ | async) {
+          <app-button
+            (buttonClick)="connect()"
+            [disabled]="(accessError$ | async) !== undefined || (isActionLoading$ | async) === true"
+            data-cy="fk-org-users-connect"
+            i18n
+            >Forbind</app-button
+          >
+        }
+        @if (canDeleteConnection$ | async) {
+          <app-button
+            (buttonClick)="disconnect()"
+            [disabled]="(isActionLoading$ | async) === true"
+            color="warn"
+            data-cy="fk-org-users-disconnect"
+            i18n
+            >Bryd forbindelsen til FK Organisation</app-button
+          >
+        }
+      </div>
+      @if (isConnected$ | async) {
+        <app-external-user-changes (pendingCountChange)="onPendingCountChange($event)"></app-external-user-changes>
+      }
+    </app-standard-vertical-content-grid>
+  }
+</app-card>

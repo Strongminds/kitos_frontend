@@ -1,0 +1,81 @@
+<app-accordion title="Brugerændringer" i18n-title data-cy="external-changes-accordion">
+  <app-paragraph class="intro" i18n
+    >Gennemgå sletninger af brugere rapporteret af FK Organisation, før de anvendes på organisationen.</app-paragraph
+  >
+
+  <div class="toolbar">
+    <app-dropdown
+      class="view-selector"
+      text="Vælg"
+      i18n-text
+      [data]="viewOptions"
+      [value]="selectedView"
+      [clearable]="false"
+      (valueChange)="setView($event)"
+      data-cy="external-changes-view"
+    ></app-dropdown>
+
+    <div class="actions">
+      @if (activeView === 'pending') {
+        <span class="selection-count" data-cy="selection-count">
+          {{ selectedChangeUuids.size }} <ng-container i18n>valgt</ng-container>
+        </span>
+        <app-button
+          color="warn"
+          size="small"
+          [disabled]="selectedChangeUuids.size === 0 || selectionDisabled"
+          [loading]="isResolving"
+          (buttonClick)="resolveSelected(true)"
+          data-cy="bulk-apply"
+          i18n
+          >Anvend sletninger</app-button
+        >
+        <app-button
+          buttonStyle="secondary"
+          size="small"
+          [disabled]="selectedChangeUuids.size === 0 || selectionDisabled"
+          (buttonClick)="resolveSelected(false)"
+          data-cy="bulk-dismiss"
+          i18n
+          >Afvis ændringer</app-button
+        >
+      }
+      <app-hide-show-button
+        [columns]="viewColumns"
+        [isSecondary]="true"
+        (columnsChange)="onColumnsChange($event)"
+      ></app-hide-show-button>
+    </div>
+  </div>
+
+  @if (hasLoadError) {
+    <div class="load-error" data-cy="external-changes-load-error">
+      <span i18n>Listen kunne ikke hentes.</span>
+      <app-button buttonStyle="secondary" size="small" (buttonClick)="refresh()" i18n>Prøv igen</app-button>
+    </div>
+  }
+
+  <ng-template #selectionFilterCell>
+    <app-checkbox
+      class="selection-checkbox"
+      [value]="allSelectableChangesSelected"
+      [indeterminate]="selectedChangeUuids.size > 0 && !allSelectableChangesSelected"
+      [disabled]="selectionDisabled || rows.length === 0"
+      (valueChange)="$event ? selectAll() : clearSelection()"
+      ariaLabel="Vælg alle"
+      i18n-ariaLabel
+      data-cy="select-all"
+    ></app-checkbox>
+  </ng-template>
+
+  <app-local-grid
+    [data]="rows"
+    [columns]="viewColumns"
+    [filterCellTemplates]="{ selected: selectionFilterCell }"
+    [loading]="isLoading"
+    [createPermission]="true"
+    [withOutline]="true"
+    (checkboxChange)="onCheckboxChange($event)"
+    data-cy="external-changes-grid"
+  ></app-local-grid>
+</app-accordion>

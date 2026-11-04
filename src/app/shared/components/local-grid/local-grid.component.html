@@ -63,6 +63,9 @@
       </app-paragraph>
     </ng-template>
     <ng-template kendoGridFilterCellTemplate let-filter let-columnFilter="column">
+      @if (filterCellTemplates[columnConfig.field]; as customFilterCell) {
+      <ng-container [ngTemplateOutlet]="customFilterCell"></ng-container>
+      } @else {
       @if (!columnConfig.noFilter) { @if (columnFilter.filter === 'text' && !columnConfig.extraFilter) {
       <app-string-filter [column]="columnFilter" [filter]="filter"></app-string-filter>
       } @if ( columnFilter.filter === 'boolean' || (columnFilter.filter === 'text' && columnConfig.extraFilter === 'enum') ) {
@@ -84,6 +87,7 @@
       } @if (columnFilter.filter === 'date') {
       <app-date-filter [column]="columnFilter" [filter]="filter"></app-date-filter>
       } }
+      }
     </ng-template>
     <ng-template kendoGridCellTemplate let-dataItem>
       <app-grid-cell
