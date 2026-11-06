@@ -75,7 +75,7 @@ jobs:
           # Revalidate the license on every run while caching dependency installation.
           no-cache-filters: build
           secrets: |
-            "KENDO_UI_LICENSE=${{ secrets.KENDO_UI_LICENSE }}"
+            "KENDO_UI_LICENSE=${{ secrets.KENDO_UI_LICENSE_V2 }}"
           context: "./"
           file: "Dockerfile"
           push: true
