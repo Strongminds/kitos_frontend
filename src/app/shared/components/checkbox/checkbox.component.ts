@@ -17,6 +17,8 @@ export class CheckboxComponent extends BaseFormComponent<boolean> {
   @Input() tooltip: string = '';
   @Input() public color: ThemePalette = undefined;
   @Input() invertCheckedValue: boolean = false;
+  @Input() indeterminate: boolean = false;
+  @Input() ariaLabel: string = '';
 
   public toggle(value: boolean) {
     this.formValueChange(value);

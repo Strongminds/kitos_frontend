@@ -5,6 +5,7 @@ import {
   APIStsOrganizationChangeLogResponseDTO,
   APIStsOrganizationOrgUnitDTO,
   APIStsOrganizationSynchronizationDetailsResponseDTO,
+  APIStsOrganizationUserSynchronizationDetailsResponseDTO,
 } from 'src/app/api/v2';
 
 export const FkOrgActions = createActionGroup({
@@ -46,5 +47,19 @@ export const FkOrgActions = createActionGroup({
     'Get Changelog': (numberOfChangeLogs: number) => ({ numberOfChangeLogs }),
     'Get Changelog Success': (changelogs: APIStsOrganizationChangeLogResponseDTO[]) => ({ changelogs }),
     'Get Changelog Error': emptyProps(),
+
+    'Get User Synchronization Status': emptyProps(),
+    'Get User Synchronization Status Success': (
+      userSynchronizationStatus: APIStsOrganizationUserSynchronizationDetailsResponseDTO,
+    ) => ({ userSynchronizationStatus }),
+    'Get User Synchronization Status Error': emptyProps(),
+
+    'Create User Connection': emptyProps(),
+    'Create User Connection Success': emptyProps(),
+    'Create User Connection Error': emptyProps(),
+
+    'Delete User Connection': emptyProps(),
+    'Delete User Connection Success': emptyProps(),
+    'Delete User Connection Error': emptyProps(),
   },
 });

@@ -41,3 +41,34 @@ export const selectUpdateConsequences = createSelector(selectFkOrgState, (state)
 export const selectIsLoadingChangelogs = createSelector(selectFkOrgState, (state) => state.isLoadingChangelogs);
 export const selectAvailableChangeLogs = createSelector(selectFkOrgState, (state) => state.availableChangelogOptions);
 export const selectChangelogDictionary = createSelector(selectFkOrgState, (state) => state.changelogDictionary);
+
+export const selectUserSynchronizationStatus = createSelector(
+  selectFkOrgState,
+  (state) => state.userSynchronizationStatus,
+);
+export const selectUserAccessError = createSelector(selectFkOrgState, (state) => state.userAccessError);
+export const selectUserAccessGranted = createSelector(
+  selectUserSynchronizationStatus,
+  (status) => status?.accessStatus?.accessGranted,
+);
+export const selectIsUserConnected = createSelector(selectUserSynchronizationStatus, (status) => status?.connected);
+export const selectCanCreateUserConnection = createSelector(
+  selectUserSynchronizationStatus,
+  (status) => status?.canCreateConnection,
+);
+export const selectCanDeleteUserConnection = createSelector(
+  selectUserSynchronizationStatus,
+  (status) => status?.canDeleteConnection,
+);
+export const selectIsLoadingUserConnectionStatus = createSelector(
+  selectFkOrgState,
+  (state) => state.isLoadingUserConnectionStatus,
+);
+export const selectHasUserConnectionStatusFailed = createSelector(
+  selectFkOrgState,
+  (state) => state.hasUserConnectionStatusFailed,
+);
+export const selectIsUserConnectionActionLoading = createSelector(
+  selectFkOrgState,
+  (state) => state.isUserConnectionActionLoading,
+);

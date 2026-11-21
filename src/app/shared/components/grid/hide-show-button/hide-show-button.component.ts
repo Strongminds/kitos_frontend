@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { RegistrationEntityTypes } from 'src/app/shared/models/registrations/registration-entity-categories.model';
@@ -7,7 +7,7 @@ import { HideShowDialogComponent } from '../hide-show-dialog/hide-show-dialog.co
 import { ButtonComponent } from '../../buttons/button/button.component';
 
 @Component({
-  selector: 'app-hide-show-button[columns][entityType]',
+  selector: 'app-hide-show-button[columns]',
   templateUrl: './hide-show-button.component.html',
   styleUrl: './hide-show-button.component.scss',
   imports: [ButtonComponent],
@@ -15,8 +15,10 @@ import { ButtonComponent } from '../../buttons/button/button.component';
 export class HideShowButtonComponent {
   @Input() columns!: GridColumn[] | null;
   @Input() uiConfigApplications?: UIConfigGridApplication[] | null = null;
-  @Input() entityType!: RegistrationEntityTypes;
+  @Input() entityType?: RegistrationEntityTypes;
   @Input() isSecondary = false;
+  // When observed, saved columns are emitted here instead of being dispatched to an entity store
+  @Output() columnsChange = new EventEmitter<GridColumn[]>();
 
   constructor(private dialog: MatDialog) {}
 
@@ -28,5 +30,8 @@ export class HideShowButtonComponent {
     dialogInstance.columns = this.columns;
     dialogInstance.entityType = this.entityType;
     dialogInstance.uiConfigApplications = this.uiConfigApplications;
+    if (this.columnsChange.observed) {
+      dialogInstance.columnsSaved = (columns) => this.columnsChange.emit(columns);
+    }
   }
 }
