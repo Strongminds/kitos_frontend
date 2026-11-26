@@ -1,4 +1,4 @@
-name: Build and deploy strongminds/os2kitos-development/kitos-dev/kitos-frontend
+name: Build and deploy os2-kitos/dev/kitos-dev/kitos-frontend
 
 on:
   pull_request:
@@ -17,7 +17,7 @@ concurrency:
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: "strongminds/kitos_frontend-kitos-frontend"
-  DEPLOYMENT_MANIFEST: "infrastructure/os2kitos-development/kitos-dev/services/kitos-frontend/deployment.yaml"
+  DEPLOYMENT_MANIFEST: "infrastructure/dev/kitos-dev/services/kitos-frontend/deployment.yaml"
   RELEASE_DIRECTORY: ".easyhosting/releases/kitos-ci/kitos-frontend"
 
 jobs:
@@ -72,6 +72,9 @@ jobs:
           platforms: linux/amd64
           cache-from: type=registry,ref=${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
           cache-to: type=inline
+          no-cache-filters: build
+          secrets: |
+            "KENDO_UI_LICENSE=${{ secrets.KENDO_UI_LICENSE_V2 }}"
           context: "./"
           file: "Dockerfile"
           push: true
