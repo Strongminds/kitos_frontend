@@ -87,6 +87,9 @@ describe('external-user-changes', () => {
       cy.contains('Test Bruger').should('be.visible');
       cy.contains('Eksempel Bruger').should('be.visible');
 
+      cy.intercept('GET', /\/users\/external-changes\?/, {
+        body: { total: 1, pendingCount: 1, items: [changes[1]] },
+      }).as('refreshExternalChanges');
       cy.intercept('POST', '**/users/external-changes/resolve', {
         statusCode: 200,
         body: {},
@@ -112,6 +115,46 @@ describe('external-user-changes', () => {
       cy.get('app-popup-message').should('contain', '1 af 2 ændringer blev behandlet.');
       cy.get('app-popup-message').should('contain', 'Ændringen afventer stadig behandling');
       cy.getByDataCy('bulk-results').should('not.exist');
+      cy.wait('@refreshExternalChanges');
+      cy.getByDataCy('fk-org-users-card-header').should('contain', 'Via FK Organisation (1 afventer)');
+      cy.getByDataCy('external-changes-grid').should('not.contain', 'Test Bruger');
+    });
+  });
+
+  it('returns to the previous page when the last pending row on the current page is dismissed', () => {
+    connectedTestRunner.runTestWithSetup('Clamps the pending changes page after a dismissal', () => {
+      const pageSize = 100;
+      const firstPage = Array.from({ length: pageSize }, (_, index) => ({
+        ...changes[0],
+        uuid: `pending-${index}`,
+        userName: `Afventende bruger ${index}`,
+      }));
+      const lastChange = changes[1];
+      cy.intercept('GET', /\/users\/external-changes\?/, {
+        body: { total: pageSize + 1, pendingCount: pageSize + 1, items: [...firstPage, lastChange] },
+      }).as('getPaginatedChanges');
+      openUsersTab();
+      cy.getByDataCy('external-changes-accordion').find('mat-expansion-panel-header').click();
+      cy.wait('@getPaginatedChanges');
+      cy.getByDataCy('external-changes-grid').find('kendo-pager-next-buttons button').first().click();
+      cy.getByDataCy('external-changes-grid').should('contain', lastChange.userName);
+
+      cy.intercept('POST', '**/users/external-changes/resolve', { statusCode: 200, body: {} }).as('resolveChanges');
+      cy.intercept('GET', `**/users/external-changes/${lastChange.uuid}`, {
+        body: { ...lastChange, status: 'Dismissed' },
+      });
+      cy.intercept('GET', /\/users\/external-changes\?/, {
+        body: { total: pageSize, pendingCount: pageSize, items: firstPage },
+      }).as('refreshExternalChanges');
+
+      cy.getByDataCy('grid-checkbox').click();
+      cy.getByDataCy('bulk-dismiss').click();
+      cy.wait('@resolveChanges').its('request.body').should('deep.equal', {
+        changeUuids: [lastChange.uuid],
+        apply: false,
+      });
+      cy.wait('@refreshExternalChanges');
+      cy.getByDataCy('external-changes-grid').should('contain', firstPage[0].userName);
     });
   });
 
@@ -168,6 +211,7 @@ describe('external-user-changes', () => {
       cy.wait('@createUsersConnection');
       cy.wait('@getUsersConnectionStatus');
       cy.wait('@getExternalChanges');
+      cy.getByDataCy('external-changes-accordion').find('mat-expansion-panel-header').click();
       cy.contains('Test Bruger').should('be.visible');
     });
   });

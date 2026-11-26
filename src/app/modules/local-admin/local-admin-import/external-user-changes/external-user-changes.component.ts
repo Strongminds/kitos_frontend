@@ -5,7 +5,19 @@ import { AccordionComponent } from 'src/app/shared/components/accordion/accordio
 import { Store } from '@ngrx/store';
 import { process } from '@progress/kendo-data-query';
 import { BehaviorSubject, EMPTY, Observable, Subject, combineLatest, from, of } from 'rxjs';
-import { catchError, expand, filter, map, mergeMap, reduce, startWith, switchMap, take, tap, toArray } from 'rxjs/operators';
+import {
+  catchError,
+  expand,
+  filter,
+  map,
+  mergeMap,
+  reduce,
+  startWith,
+  switchMap,
+  takeUntil,
+  tap,
+  toArray,
+} from 'rxjs/operators';
 import { ExternalUserChangesInternalV2Service } from 'src/app/api/v2/api/externalUserChangesInternalV2.service';
 import { APIExternalUserChangeResponse } from 'src/app/api/v2/model/externalUserChangeResponse';
 import { APIExternalUserChangeStatus } from 'src/app/api/v2/model/externalUserChangeStatus';
@@ -178,6 +190,11 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
 
   private readonly view$ = new BehaviorSubject<ViewState>('pending');
   private readonly refresh$ = new Subject<void>();
+  private readonly currentOrganizationUuid = this.store.selectSignal(selectOrganizationUuid);
+  private readonly organizationUuid = this.currentOrganizationUuid();
+  private readonly organizationChanged$ = this.store
+    .select(selectOrganizationUuid)
+    .pipe(filter((uuid) => uuid !== this.organizationUuid));
 
   constructor(
     private readonly store: Store,
@@ -190,24 +207,23 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   }
 
   ngOnInit(): void {
+    const organizationUuid = this.organizationUuid;
+    if (!organizationUuid) return;
+
     this.columns =
       this.gridColumnStorageService.getColumns(EXTERNAL_USER_CHANGES_COLUMNS_ID, this.defaultColumns) ??
       this.defaultColumns;
     this.updateViewColumns();
 
     this.subscriptions.add(
-      combineLatest([
-        this.store.select(selectOrganizationUuid).pipe(filter((uuid): uuid is string => !!uuid), take(1)),
-        this.view$,
-        this.refresh$.pipe(startWith(undefined)),
-      ])
+      combineLatest([this.view$, this.refresh$.pipe(startWith(undefined))])
         .pipe(
           tap(() => {
             this.isLoading = true;
             this.hasLoadError = false;
             this.clearSelection();
           }),
-          switchMap(([organizationUuid, view]) =>
+          switchMap(([view]) =>
             this.loadAll(organizationUuid, view).pipe(
               catchError((error: unknown) => {
                 this.isLoading = false;
@@ -220,6 +236,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
               }),
             ),
           ),
+          takeUntil(this.organizationChanged$),
         )
         .subscribe(({ items, pendingCount }) => {
           this.clearSelection();
@@ -388,7 +405,17 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   }
 
   private resolveBatch(changeUuids: string[], apply: boolean): void {
-    const organizationUuid = this.currentOrganizationUuid();
+    const organizationUuid = this.organizationUuid;
+    if (
+      !organizationUuid ||
+      this.subscriptions.closed ||
+      this.currentOrganizationUuid() !== organizationUuid ||
+      this.selectionDisabled ||
+      !changeUuids.every((uuid) => this.selectedChangeUuids.has(uuid))
+    ) {
+      return;
+    }
+
     this.isResolving = true;
     this.applySelection(this.selectedChangeUuids);
     this.subscriptions.add(
@@ -412,6 +439,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
               })),
             );
           }),
+          takeUntil(this.organizationChanged$),
         )
         .subscribe((results) => {
           this.showBatchResults(results, apply);
@@ -475,12 +503,6 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
       ),
       toArray(),
     );
-  }
-
-  private currentOrganizationUuid(): string {
-    const organizationUuid = this.store.selectSignal(selectOrganizationUuid)();
-    if (!organizationUuid) throw new Error('Organization is not selected');
-    return organizationUuid;
   }
 
   private rowName(changeUuid: string): string {
