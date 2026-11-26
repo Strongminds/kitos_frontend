@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "releaseId": "sha256:a39b4be8e9ea39122b86256500d35cb53bc2fafd9ee42d00cbc0db396eb758f5",
+  "applicationId": "kitos-dev",
+  "serviceName": "kitos-frontend",
+  "repositoryUrl": "https://github.com/Strongminds/kitos_frontend",
+  "releaseStream": "kitos-ci/kitos-frontend",
+  "sourceRevision": {
+    "requestedKind": "DefaultBranch",
+    "requestedValue": "",
+    "resolvedCommitSha": "69c68135eb7a23f9179bbf1138c7017762380b51"
+  },
+  "image": {
+    "repository": "ghcr.io/strongminds/kitos_frontend-kitos-frontend",
+    "digest": "sha256:a39b4be8e9ea39122b86256500d35cb53bc2fafd9ee42d00cbc0db396eb758f5"
+  },
+  "build": {
+    "createdAt": "2026-11-10T10:51:13Z",
+    "runUrl": "https://github.com/Strongminds/kitos_frontend/actions/runs/42801452877"
+  }
+}
