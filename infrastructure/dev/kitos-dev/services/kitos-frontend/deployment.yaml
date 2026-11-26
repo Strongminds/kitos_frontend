@@ -36,7 +36,7 @@ spec:
             configMapKeyRef:
               key: KitosApiBaseUrlInternal
               name: user-variables
-        image: ghcr.io/strongminds/kitos_frontend-kitos-frontend@sha256:5c6c1ebbbee1dd9069c57e2dd09128b0cd505eab897161abc984a1fdb0c08523
+        image: ghcr.io/strongminds/kitos_frontend-kitos-frontend@sha256:6fe07d43fa31b1063e76e1f7f756811a9c721f1d4c6932500d42ede0a7037c19
         name: kitos-frontend
         ports:
         - containerPort: 80
