@@ -22,6 +22,7 @@ export interface APIUserResponseDTO {
     phoneNumber?: string | null;
     defaultUserStartPreference?: APIDefaultUserStartPreferenceChoice;
     hasApiAccess?: boolean | null;
+    isPubSubUser?: boolean;
     hasStakeHolderAccess?: boolean;
     roles?: Array<APIOrganizationRoleChoice> | null;
     defaultOrganizationUnit?: APIIdentityNamePairResponseDTO;

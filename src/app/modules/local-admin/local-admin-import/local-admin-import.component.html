@@ -5,10 +5,7 @@
   ></app-local-admin-import-organization>
 }
 @if (selected === 'users') {
-  <app-local-admin-base-excel-import
-    [type]="usersType"
-    [helpTextKey]="baseHelpTextKey + '.users'"
-  ></app-local-admin-base-excel-import>
+  <app-local-admin-import-users [helpTextKey]="baseHelpTextKey + '.users'"></app-local-admin-import-users>
 }
 @if (selected === 'contracts') {
   <app-local-admin-base-excel-import

@@ -1,0 +1,45 @@
+:host {
+  display: block;
+}
+
+.selection-checkbox {
+  display: flex;
+  justify-content: center;
+}
+
+.intro {
+  display: block;
+  margin: 0 0 1rem;
+}
+
+.view-selector {
+  flex: 0 0 15rem;
+}
+
+.toolbar {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.actions {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.selection-count {
+  margin-right: 0.5rem;
+}
+
+.load-error {
+  align-items: center;
+  color: #a51d2d;
+  display: flex;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
