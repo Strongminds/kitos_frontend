@@ -16,10 +16,10 @@
     ></app-dropdown>
 
     <div class="actions">
-      @if (activeView === 'pending') {
-        <span class="selection-count" data-cy="selection-count">
+      @if (isPendingView) {
+        <app-paragraph class="selection-count" data-cy="selection-count">
           {{ selectedChangeUuids.size }} <ng-container i18n>valgt</ng-container>
-        </span>
+        </app-paragraph>
         <app-button
           color="warn"
           size="small"
@@ -50,7 +50,7 @@
 
   @if (hasLoadError) {
     <div class="load-error" data-cy="external-changes-load-error">
-      <span i18n>Listen kunne ikke hentes.</span>
+      <app-paragraph color="error" i18n>Listen kunne ikke hentes.</app-paragraph>
       <app-button buttonStyle="secondary" size="small" (buttonClick)="refresh()" i18n>Prøv igen</app-button>
     </div>
   }

@@ -1,4 +1,48 @@
-@if (user$ | async; as user) {
+@if (review; as deletionReview) {
+  <app-dialog title="Slet bruger" helpText="org_user_delete_modal" i18n-title [nested]="nested">
+    @if (deletionReview.state$ | async; as state) {
+      <app-standard-vertical-content-grid>
+        @switch (state.status) {
+          @case ('loading') {
+            <app-loading></app-loading>
+          }
+          @case ('blocked') {
+            <app-paragraph data-cy="deletion-review-blocked" i18n>
+              Bruger og roller kunne ikke hentes for {{ deletionReview.userName }}. Sletningen kan ikke fortsætte.
+            </app-paragraph>
+          }
+          @case ('ready') {
+            <app-paragraph [displayFlex]="false" i18n>
+              Gennemgå sletningen af <strong>{{ getUserName(state.user) }}</strong> fra
+              <strong>{{ organizationName$ | async }}</strong>.
+            </app-paragraph>
+            @if (state.hasRoles) {
+              <app-paragraph i18n>Overførsler gemmes med det samme, også hvis du annullerer sletningen.</app-paragraph>
+            } @else {
+              <app-paragraph i18n>Brugeren har ingen roller, der kan overføres.</app-paragraph>
+            }
+          }
+        }
+      </app-standard-vertical-content-grid>
+      <app-dialog-actions class="review-actions">
+        <app-button #reviewCancel buttonStyle="secondary" (buttonClick)="onClose()" data-cy="cancel-button" i18n>
+          Annuller
+        </app-button>
+        @if (state.status === reviewStatus.Ready) {
+          @if (state.hasRoles) {
+            <app-button #reviewTransfer buttonStyle="secondary" (buttonClick)="openReviewTransfer()"
+              data-cy="transfer-roles-button" [ariaHasPopup]="'dialog'" i18n>Overfør roller</app-button>
+            <app-button color="warn" (buttonClick)="completeReview()" data-cy="complete-user-review" i18n>
+              Fortsæt uden at overføre resterende roller
+            </app-button>
+          } @else {
+            <app-button (buttonClick)="completeReview()" data-cy="complete-user-review" i18n>Fortsæt</app-button>
+          }
+        }
+      </app-dialog-actions>
+    }
+  </app-dialog>
+} @else if (user$ | async; as user) {
   <app-dialog title="Slet bruger" helpText="org_user_delete_modal" i18n-title [nested]="nested">
     @if (!isLoading) {
       <app-standard-vertical-content-grid>

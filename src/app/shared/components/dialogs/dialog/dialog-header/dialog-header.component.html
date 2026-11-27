@@ -1,7 +1,7 @@
 <ng-container>
   @if (title) {
     <div class="header" [ngClass]="{ nested: nested }">
-      @if (nested) {
+      @if (nested && closable) {
         <app-button class="arrow-button" buttonStyle="tertiary" (buttonClick)="close()">
           <app-arrow-left-icon></app-arrow-left-icon>
         </app-button>

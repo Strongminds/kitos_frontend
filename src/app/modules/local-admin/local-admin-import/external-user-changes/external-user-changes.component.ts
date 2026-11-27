@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MatDialogState } from '@angular/material/dialog';
 import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 import { AccordionComponent } from 'src/app/shared/components/accordion/accordion.component';
 import { Store } from '@ngrx/store';
@@ -19,8 +20,10 @@ import {
   toArray,
 } from 'rxjs/operators';
 import { ExternalUserChangesInternalV2Service } from 'src/app/api/v2/api/externalUserChangesInternalV2.service';
-import { APIExternalUserChangeResponse } from 'src/app/api/v2/model/externalUserChangeResponse';
+import type { APIExternalUserChangeResponse } from 'src/app/api/v2/model/externalUserChangeResponse';
 import { APIExternalUserChangeStatus } from 'src/app/api/v2/model/externalUserChangeStatus';
+import { APIExternalUserChangeType } from 'src/app/api/v2/model/externalUserChangeType';
+import { UserDeletionReviewService } from 'src/app/modules/organization/organization-users/delete-user-dialog/user-deletion-review.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
@@ -32,37 +35,19 @@ import { PopupMessageType } from 'src/app/shared/enums/popup-message-type';
 import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
+import {
+  type ExternalUserChangeRow,
+  type ExternalUserChangesListResult,
+  type ExternalUserChangesPage,
+  ExternalUserChangesView,
+} from 'src/app/shared/models/local-admin/external-user-changes.types';
+import { UserDeletionReviewDecision } from 'src/app/shared/models/organization/organization-user/user-deletion-review.types';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
-
-type ViewState = 'pending' | 'resolved';
-
-export interface ExternalUserChangeRow {
-  uuid: string;
-  userName: string;
-  email: string;
-  externalUserUuid: string;
-  userUuid: string;
-  externalMessageId: string;
-  changeTypeLabel: string;
-  status: APIExternalUserChangeStatus;
-  statusLabel: string;
-  receivedAt: Date | null;
-  occurredAt: Date | null;
-  resolvedAt: Date | null;
-  resolvedByUserUuid: string;
-  selected: boolean;
-  notSelectable: boolean;
-}
-
-interface ExternalChangesPage {
-  skip: number;
-  total: number;
-  pendingCount: number;
-  items: APIExternalUserChangeResponse[];
-}
+import { DeletionBatchReviewDialogComponent } from './deletion-batch-review-dialog.component';
 
 interface ChangeActionResult {
   changeUuid: string;
@@ -73,7 +58,7 @@ interface ChangeActionResult {
 
 const MAX_SELECTION = 100;
 const PAGE_SIZE = 200;
-const CHANGE_STATUSES: APIExternalUserChangeStatus[] = ['Pending', 'Applied', 'Dismissed'];
+const CHANGE_STATUSES = Object.values(APIExternalUserChangeStatus);
 const PENDING_ONLY_FIELDS = ['selected'];
 const RESOLVED_ONLY_FIELDS = ['resolvedAt', 'resolvedByUserUuid'];
 
@@ -87,7 +72,7 @@ function isExternalUserChange(value: unknown): value is APIExternalUserChangeRes
     typeof value['uuid'] === 'string' &&
     typeof value['externalUserUuid'] === 'string' &&
     typeof value['receivedAt'] === 'string' &&
-    CHANGE_STATUSES.includes(value['status'] as APIExternalUserChangeStatus)
+    CHANGE_STATUSES.some((status) => status === value['status'])
   );
 }
 
@@ -98,7 +83,7 @@ function unwrapArray(value: unknown): unknown[] | undefined {
   return undefined;
 }
 
-function parseExternalChangesPage(value: unknown, skip: number): ExternalChangesPage {
+function parseExternalChangesPage(value: unknown, skip: number): ExternalUserChangesPage {
   const items = isRecord(value) ? unwrapArray(value['items']) : undefined;
   if (!isRecord(value) || typeof value['total'] !== 'number' || !items || !items.every(isExternalUserChange)) {
     throw new Error('Invalid external user changes response');
@@ -106,7 +91,7 @@ function parseExternalChangesPage(value: unknown, skip: number): ExternalChanges
 
   return {
     skip,
-    total: value['total'] as number,
+    total: value['total'],
     pendingCount: typeof value['pendingCount'] === 'number' ? value['pendingCount'] : 0,
     items,
   };
@@ -134,17 +119,16 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   @ViewChild(LocalGridComponent) private grid?: LocalGridComponent<ExternalUserChangeRow>;
   @Output() public readonly pendingCountChange = new EventEmitter<number>();
 
-  public readonly viewOptions: DropdownOption<ViewState>[] = [
-    { name: $localize`Afventer`, value: 'pending' },
-    { name: $localize`Behandlede`, value: 'resolved' },
+  public readonly viewOptions: DropdownOption<ExternalUserChangesView>[] = [
+    { name: $localize`Afventer`, value: ExternalUserChangesView.Pending },
+    { name: $localize`Behandlede`, value: ExternalUserChangesView.Resolved },
   ];
   public selectedView = this.viewOptions[0];
 
-  private readonly statusOptions = [
-    { name: this.statusLabel('Pending'), value: 'Pending' },
-    { name: this.statusLabel('Applied'), value: 'Applied' },
-    { name: this.statusLabel('Dismissed'), value: 'Dismissed' },
-  ];
+  private readonly statusOptions = CHANGE_STATUSES.map((value) => ({
+    name: this.statusLabel(value),
+    value,
+  }));
 
   public readonly defaultColumns: GridColumn[] = [
     {
@@ -178,7 +162,6 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     { field: 'resolvedByUserUuid', title: $localize`Behandlet af bruger-id`, hidden: true },
   ];
 
-  public activeView: ViewState = 'pending';
   public columns: GridColumn[] = this.defaultColumns;
   public viewColumns: GridColumn[] = [];
   public rows: ExternalUserChangeRow[] = [];
@@ -187,8 +170,9 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   public isResolving = false;
   public hasLoadError = false;
   public selectedChangeUuids = new Set<string>();
+  private isReviewing = false;
 
-  private readonly view$ = new BehaviorSubject<ViewState>('pending');
+  private readonly view$ = new BehaviorSubject(this.selectedView.value);
   private readonly refresh$ = new Subject<void>();
   private readonly currentOrganizationUuid = this.store.selectSignal(selectOrganizationUuid);
   private readonly organizationUuid = this.currentOrganizationUuid();
@@ -200,6 +184,9 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     private readonly store: Store,
     private readonly api: ExternalUserChangesInternalV2Service,
     private readonly confirmActionService: ConfirmActionService,
+    private readonly dialog: MatDialog,
+    private readonly dialogOpener: DialogOpenerService,
+    private readonly deletionReview: UserDeletionReviewService,
     private readonly notificationService: NotificationService,
     private readonly gridColumnStorageService: GridColumnStorageService,
   ) {
@@ -249,9 +236,8 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     );
   }
 
-  public setView(option: DropdownOption<ViewState> | null | undefined): void {
-    if (!option || this.activeView === option.value) return;
-    this.activeView = option.value;
+  public setView(option: DropdownOption<ExternalUserChangesView> | null | undefined): void {
+    if (!option || this.selectedView.value === option.value) return;
     this.selectedView = option;
     this.updateViewColumns();
     this.view$.next(option.value);
@@ -270,7 +256,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   }
 
   public onCheckboxChange({ value, item }: BooleanChange<ExternalUserChangeRow>): void {
-    if (this.selectionDisabled || item.status !== 'Pending') return;
+    if (this.selectionDisabled || !this.isPendingChange(item)) return;
     const nextSelection = new Set(this.selectedChangeUuids);
     if (value) {
       nextSelection.add(item.uuid);
@@ -281,17 +267,25 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   }
 
   public get allSelectableChangesSelected(): boolean {
-    const selectableCount = this.rows.filter((row) => row.status === 'Pending').length;
+    const selectableCount = this.pendingRows.length;
     return selectableCount > 0 && this.selectedChangeUuids.size === Math.min(selectableCount, MAX_SELECTION);
   }
 
   public selectAll(): void {
     if (this.selectionDisabled) return;
-    const selectable = this.rows.filter((row) => row.status === 'Pending').slice(0, MAX_SELECTION);
-    this.applySelection(new Set(selectable.map((row) => row.uuid)));
-    if (this.rows.filter((row) => row.status === 'Pending').length > MAX_SELECTION) {
-      this.notificationService.showError($localize`Du kan højst vælge 100 ændringer ad gangen`);
+    const pendingRows = this.pendingRows;
+    this.applySelection(new Set(pendingRows.slice(0, MAX_SELECTION).map((row) => row.uuid)));
+    if (pendingRows.length > MAX_SELECTION) {
+      this.notificationService.showError($localize`Du kan højst vælge ${MAX_SELECTION} ændringer ad gangen`);
     }
+  }
+
+  private get pendingRows(): ExternalUserChangeRow[] {
+    return this.rows.filter((row) => this.isPendingChange(row));
+  }
+
+  private isPendingChange(row: ExternalUserChangeRow): boolean {
+    return row.status === APIExternalUserChangeStatus.Pending;
   }
 
   public clearSelection(): void {
@@ -300,26 +294,95 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
 
   public resolveSelected(apply: boolean): void {
     const changeUuids = [...this.selectedChangeUuids];
-    if (!changeUuids.length || this.selectionDisabled) return;
+    if (!changeUuids.length || this.selectionDisabled || this.isReviewing) return;
     if (apply) {
-      this.confirmActionService.confirmAction({
-        category: ConfirmActionCategory.Warning,
-        title: $localize`Fjern brugernes adgang`,
-        message: $localize`Hvis du anvender disse sletninger, mister ${changeUuids.length} valgte brugere deres adgang til organisationen. Vil du fortsætte?`,
-        onConfirm: () => this.resolveBatch(changeUuids, true),
-      });
+      this.reviewDeletions(changeUuids);
       return;
     }
     this.resolveBatch(changeUuids, false);
   }
 
+  private reviewDeletions(changeUuids: string[]): void {
+    const organizationUuid = this.currentOrganizationUuid();
+    if (!organizationUuid || organizationUuid !== this.organizationUuid) return;
+    const selectedRows = this.rows.filter((row) => this.selectedChangeUuids.has(row.uuid) && this.isPendingChange(row));
+    if (selectedRows.length !== changeUuids.length) return;
+
+    const users = selectedRows.map(({ userUuid, userName, email, uuid }) => ({
+      userUuid,
+      userName: userName || email || uuid,
+    }));
+    const reviews = this.deletionReview.createReviews(organizationUuid, users);
+    const reviewDialog = reviews.length === 1
+      ? this.dialogOpener.openUserDeletionReview(reviews[0])
+      : this.dialog.open<DeletionBatchReviewDialogComponent, typeof reviews, boolean>(DeletionBatchReviewDialogComponent, {
+          width: '980px',
+          maxWidth: '95vw',
+          maxHeight: '90vh',
+          data: reviews,
+          ariaLabel: $localize`Gennemgå sletninger`,
+        });
+
+    this.watchReviewDialog<boolean | UserDeletionReviewDecision>(reviewDialog, (decision) => {
+      if (this.isReviewApproved(decision) && this.isReviewedSelectionCurrent(organizationUuid, selectedRows)) {
+        this.confirmDeletions(organizationUuid, selectedRows, changeUuids);
+      }
+    });
+  }
+
+  private isReviewApproved(decision: boolean | UserDeletionReviewDecision | undefined): boolean {
+    return (
+      decision === true ||
+      decision === UserDeletionReviewDecision.Continue ||
+      decision === UserDeletionReviewDecision.ContinueWithoutRemainingRoles
+    );
+  }
+
+  private confirmDeletions(organizationUuid: string, selectedRows: ExternalUserChangeRow[], changeUuids: string[]): void {
+    const confirmation = this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      title: $localize`Fjern brugernes adgang`,
+      message: changeUuids.length === 1
+        ? $localize`Den valgte bruger mister sin adgang til organisationen. Vil du fortsætte?`
+        : $localize`De ${changeUuids.length} valgte brugere mister deres adgang til organisationen. Vil du fortsætte?`,
+      onConfirm: () => {
+        if (this.isReviewedSelectionCurrent(organizationUuid, selectedRows)) this.resolveBatch(changeUuids, true);
+      },
+    });
+    this.watchReviewDialog(confirmation);
+  }
+
+  private isReviewedSelectionCurrent(organizationUuid: string, selection: ExternalUserChangeRow[]): boolean {
+    return !this.subscriptions.closed && this.currentOrganizationUuid() === organizationUuid &&
+      this.isPendingView && !this.selectionDisabled &&
+      selection.length === this.selectedChangeUuids.size &&
+      selection.every((row) => this.selectedChangeUuids.has(row.uuid) && this.rows.includes(row) && this.isPendingChange(row));
+  }
+
+  private watchReviewDialog<Result>(
+    dialogRef: Pick<MatDialogRef<unknown, Result>, 'afterClosed' | 'close' | 'getState'>,
+    onClosed?: (result: Result | undefined) => void,
+  ): void {
+    this.isReviewing = true;
+    const subscription = dialogRef.afterClosed().pipe(takeUntil(this.organizationChanged$)).subscribe((result) => {
+      this.isReviewing = false;
+      onClosed?.(result);
+    });
+    subscription.add(() => {
+      if (dialogRef.getState() !== MatDialogState.OPEN) return;
+      this.isReviewing = false;
+      dialogRef.close();
+    });
+    this.subscriptions.add(subscription);
+  }
+
   public statusLabel(status?: APIExternalUserChangeStatus): string {
     switch (status) {
-      case 'Pending':
+      case APIExternalUserChangeStatus.Pending:
         return $localize`Afventer`;
-      case 'Applied':
+      case APIExternalUserChangeStatus.Applied:
         return $localize`Adgang fjernet`;
-      case 'Dismissed':
+      case APIExternalUserChangeStatus.Dismissed:
         return $localize`Afvist`;
       default:
         return $localize`Ukendt`;
@@ -328,14 +391,15 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
 
   private loadAll(
     organizationUuid: string,
-    view: ViewState,
-  ): Observable<{ items: APIExternalUserChangeResponse[]; pendingCount: number }> {
+    view: ExternalUserChangesView,
+  ): Observable<ExternalUserChangesListResult> {
+    const initialResult: ExternalUserChangesListResult = { items: [], pendingCount: 0 };
     const fetchPage = (skip: number) =>
       this.api
         .getSingleExternalUserChangesInternalV2List({
           organizationUuid,
-          status: view === 'pending' ? 'Pending' : undefined,
-          resolvedOnly: view === 'resolved',
+          status: view === ExternalUserChangesView.Pending ? APIExternalUserChangeStatus.Pending : undefined,
+          resolvedOnly: view === ExternalUserChangesView.Resolved,
           skip,
           take: PAGE_SIZE,
           sort: 'receivedAt',
@@ -350,13 +414,13 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
       }),
       reduce(
         (acc, page) => ({ items: [...acc.items, ...page.items], pendingCount: page.pendingCount }),
-        { items: [] as APIExternalUserChangeResponse[], pendingCount: 0 },
+        initialResult,
       ),
     );
   }
 
   private toRow(change: APIExternalUserChangeResponse): ExternalUserChangeRow {
-    const status = change.status ?? 'Pending';
+    const status = change.status ?? APIExternalUserChangeStatus.Pending;
     return {
       uuid: change.uuid ?? '',
       userName: change.userName ?? '',
@@ -364,7 +428,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
       externalUserUuid: change.externalUserUuid ?? '',
       userUuid: change.userUuid ?? '',
       externalMessageId: change.externalMessageId ?? '',
-      changeTypeLabel: change.changeType === 'Deleted' ? $localize`Sletning` : (change.changeType ?? ''),
+      changeTypeLabel: change.changeType === APIExternalUserChangeType.Deleted ? $localize`Sletning` : (change.changeType ?? ''),
       status,
       statusLabel: this.statusLabel(status),
       receivedAt: toDate(change.receivedAt),
@@ -372,7 +436,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
       resolvedAt: toDate(change.resolvedAt),
       resolvedByUserUuid: change.resolvedByUserUuid ?? '',
       selected: false,
-      notSelectable: status !== 'Pending',
+      notSelectable: status !== APIExternalUserChangeStatus.Pending,
     };
   }
 
@@ -382,13 +446,17 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     this.rows.forEach((row) => {
       row.selected = selection.has(row.uuid);
       row.notSelectable =
-        this.selectionDisabled || row.status !== 'Pending' || (limitReached && !row.selected);
+        this.selectionDisabled || !this.isPendingChange(row) || (limitReached && !row.selected);
     });
   }
 
   private updateViewColumns(): void {
-    const excluded = this.activeView === 'pending' ? RESOLVED_ONLY_FIELDS : PENDING_ONLY_FIELDS;
+    const excluded = this.isPendingView ? RESOLVED_ONLY_FIELDS : PENDING_ONLY_FIELDS;
     this.viewColumns = this.columns.filter((column) => !excluded.includes(column.field));
+  }
+
+  public get isPendingView(): boolean {
+    return this.selectedView.value === ExternalUserChangesView.Pending;
   }
 
   public get selectionDisabled(): boolean {
@@ -469,7 +537,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     changeUuids: string[],
     apply: boolean,
   ): Observable<ChangeActionResult[]> {
-    const expectedStatus: APIExternalUserChangeStatus = apply ? 'Applied' : 'Dismissed';
+    const expectedStatus = apply ? APIExternalUserChangeStatus.Applied : APIExternalUserChangeStatus.Dismissed;
     return from(changeUuids).pipe(
       mergeMap(
         (changeUuid) =>
@@ -485,7 +553,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
                   ? apply
                     ? $localize`Adgang fjernet`
                     : $localize`Ændringen blev afvist`
-                  : response.status === 'Pending'
+                  : response.status === APIExternalUserChangeStatus.Pending
                     ? $localize`Ændringen afventer stadig behandling`
                     : $localize`Ændringen har status "${this.statusLabel(response.status)}"`,
               };

@@ -1,13 +1,11 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { AsyncPipe } from '@angular/common';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Actions, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
-import { combineLatest, filter, first, map, Observable } from 'rxjs';
+import { combineLatest, filter, first, map, Observable, takeUntil } from 'rxjs';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import {
-  BulkActionButton,
   BulkActionDialogComponent,
   BulkActionResult,
 } from 'src/app/shared/components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
@@ -17,6 +15,11 @@ import {
   ODataOrganizationUser,
   Right,
 } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import {
+  type UserDeletionReview,
+  UserDeletionReviewDecision,
+  UserDeletionReviewStatus,
+} from 'src/app/shared/models/organization/organization-user/user-deletion-review.types';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
@@ -49,8 +52,12 @@ import { StandardVerticalContentGridComponent } from '../../../../shared/compone
 export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   @Input() user$!: Observable<ODataOrganizationUser>;
   @Input() nested: boolean = false;
+  @Input() review?: UserDeletionReview;
+  @ViewChild('reviewCancel') private reviewCancel?: ButtonComponent;
+  @ViewChild('reviewTransfer') private reviewTransfer?: ButtonComponent;
 
   public readonly organizationName$: Observable<string | undefined> = this.store.select(selectOrganizationName);
+  public readonly reviewStatus = UserDeletionReviewStatus;
   private readonly availableUnitRoles$ = this.store.select(selectRoleOptionTypes('organization-unit'));
   private readonly availableContractRoles$ = this.store.select(selectRoleOptionTypes('it-contract'));
   private readonly availableUsageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage'));
@@ -63,15 +70,22 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   constructor(
     private store: Store,
     private confirmActionService: ConfirmActionService,
-    private dialogRef: MatDialogRef<DeleteUserDialogComponent>,
+    private dialogRef: MatDialogRef<DeleteUserDialogComponent, UserDeletionReviewDecision>,
     private openerService: DialogOpenerService,
     private actions$: Actions,
-    private roleService: RoleOptionTypeService
+    private roleService: RoleOptionTypeService,
   ) {
     super();
   }
 
   ngOnInit(): void {
+    if (this.review) {
+      if (this.review.state$.value.status === UserDeletionReviewStatus.Loading) {
+        this.subscriptions.add(this.review.reload().pipe(takeUntil(this.dialogRef.beforeClosed())).subscribe());
+      }
+      return;
+    }
+
     this.hasRoles$ = combineLatest([
       this.user$,
       this.availableUnitRoles$,
@@ -104,6 +118,14 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     );
   }
 
+  public completeReview(): void {
+    const state = this.review?.state$.value;
+    if (state?.status !== UserDeletionReviewStatus.Ready) return;
+    this.dialogRef.close(
+      state.hasRoles ? UserDeletionReviewDecision.ContinueWithoutRemainingRoles : UserDeletionReviewDecision.Continue,
+    );
+  }
+
   public onDeleteUser(user: ODataOrganizationUser): void {
     this.confirmActionService.confirmAction({
       category: ConfirmActionCategory.Warning,
@@ -126,36 +148,39 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   }
 
   public openTransferDialog(user: ODataOrganizationUser): void {
-    const dialogRef = this.openerService.openUserRoleSelectionDialog(user);
-
-    const dialogActions = [
-      {
-        text: $localize`Overfør roller`,
-        color: 'secondary',
-        buttonStyle: 'secondary',
-        callback: (result) => this.transferRoles(result, user, dialogRef),
-      },
-    ] as BulkActionButton[];
-
-    const instance = dialogRef.componentInstance;
-    instance.title = $localize`Overfør roller`;
-    instance.dropdownTitle = $localize`Overfør roller til`;
-    instance.successActionTypes = OrganizationUserActions.transferRolesSuccess;
-    instance.errorActionTypes = OrganizationUserActions.transferRolesError;
-    instance.actionButtons = dialogActions;
-    instance.sections = getUserRoleSelectionDialogSections(
+    const sections = getUserRoleSelectionDialogSections(
       this.user$,
       this.availableUnitRoles$,
       this.availableContractRoles$,
       this.availableUsageRoles$,
       this.availableDprRoles$
     );
+    this.openerService.openUserRoleTransferDialog(user, sections, (result, dialogRef) =>
+      this.transferRoles(result, user, dialogRef),
+    );
+  }
+
+  public openReviewTransfer(): void {
+    if (!this.review) return;
+    const dialogRef = this.openerService.openDeletionReviewRoleTransfer(this.review);
+    if (!dialogRef) return;
+
+    this.subscriptions.add(this.dialogRef.beforeClosed().pipe(takeUntil(dialogRef.afterClosed())).subscribe(() => dialogRef.close()));
+    this.subscriptions.add(
+      dialogRef.afterClosed().pipe(takeUntil(this.dialogRef.beforeClosed())).subscribe(() => {
+        const state = this.review?.state$.value;
+        (state?.status === UserDeletionReviewStatus.Ready && state.hasRoles
+          ? this.reviewTransfer
+          : this.reviewCancel
+        )?.focus();
+      }),
+    );
   }
 
   private transferRoles(
     result: BulkActionResult,
     user: ODataOrganizationUser,
-    dialogRef: MatDialogRef<BulkActionDialogComponent<any>, any>
+    dialogRef: MatDialogRef<BulkActionDialogComponent<{ uuid: string }>>,
   ): void {
     const request = getRoleActionRequest(result, user);
 
@@ -167,7 +192,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     this.closeDialogIfNoRightsLeftAfterTransfer(dialogRef);
   }
 
-  private closeDialogIfNoRightsLeftAfterTransfer(dialogRef: MatDialogRef<BulkActionDialogComponent<any>, any>) {
+  private closeDialogIfNoRightsLeftAfterTransfer(dialogRef: MatDialogRef<BulkActionDialogComponent<{ uuid: string }>>) {
     const organizationUnitRights$ = this.user$.pipe(map((user) => user.OrganizationUnitRights));
     const itContractRights$ = this.user$.pipe(map((user) => user.ItContractRights));
     const itSystemRights$ = this.user$.pipe(map((user) => user.ItSystemRights));

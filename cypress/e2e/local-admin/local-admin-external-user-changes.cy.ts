@@ -2,12 +2,21 @@
 
 import { TestRunner } from 'cypress/support/test-runner';
 
+const firstUserUuid = 'd8a38b12-e702-48a8-962c-e97890b4be10';
+const secondUserUuid = '6dabde89-3452-41f9-8b86-a6ffdbbfa361';
+const recipientUuid = '7a2b9308-1e8f-4018-9250-760c847c4b53';
+const unitRole = { uuid: '071119f8-6c30-4aac-9d2b-12f66d8490dc', name: 'Chef' };
+const unitRights = [
+  { Id: 11, Role: { Uuid: unitRole.uuid, Name: unitRole.name }, Object: { Uuid: 'unit-1', Name: 'Enhed 1' } },
+  { Id: 12, Role: { Uuid: unitRole.uuid, Name: unitRole.name }, Object: { Uuid: 'unit-2', Name: 'Enhed 2' } },
+];
+
 const changes = [
   {
     uuid: 'change-1',
     externalMessageId: 'message-1',
     externalUserUuid: 'external-user-1',
-    userUuid: 'user-1',
+    userUuid: firstUserUuid,
     userName: 'Test Bruger',
     email: 'test@example.com',
     changeType: 'Deleted',
@@ -19,7 +28,7 @@ const changes = [
     uuid: 'change-2',
     externalMessageId: 'message-2',
     externalUserUuid: 'external-user-2',
-    userUuid: 'user-2',
+    userUuid: secondUserUuid,
     userName: 'Eksempel Bruger',
     email: 'example@example.com',
     changeType: 'Deleted',
@@ -53,6 +62,10 @@ function setupTest(usersConnectionStatusFixture: string): void {
   cy.intercept('GET', /\/sts-organization-synchronization\/connection\/change-log\?numberOfChangeLogs=5$/, {
     fixture: './local-admin/fk-org/changelog.json',
   });
+  cy.intercept('GET', /\/api\/v2\/(it-system-usage|it-contract|data-processing-registration)-role-types\?/, {
+    body: [],
+  });
+  cy.intercept('GET', '/api/v2/organization-unit-role-types*', { body: [unitRole] });
   interceptUsersConnectionStatus(usersConnectionStatusFixture);
   cy.setup(true, 'local-admin/import');
 }
@@ -60,6 +73,53 @@ function setupTest(usersConnectionStatusFixture: string): void {
 function openUsersTab(): void {
   cy.getByDataCy('import-users-tab').click();
   cy.wait('@getUsersConnectionStatus');
+}
+
+function openPendingChanges(): void {
+  openUsersTab();
+  cy.getByDataCy('external-changes-accordion').find('mat-expansion-panel-header').click();
+  cy.wait('@getExternalChanges');
+}
+
+function interceptReviewUsers(
+  firstUserRights: () => typeof unitRights,
+  options: { blockedUserUuid?: string; waitForLookups?: Promise<void> } = {},
+): void {
+  cy.intercept('GET', /\/odata\/GetUsersByUuid\(/, async (request) => {
+    await options.waitForLookups;
+    expect(request.query['$expand']).to.include('OrganizationUnitRights')
+      .and.to.include('ItSystemRights').and.to.include('ItContractRights')
+      .and.to.include('DataProcessingRegistrationRights');
+    const change = changes.find(({ userUuid }) => request.query['$filter'] === `Uuid eq ${userUuid}`);
+    if (!change) throw new Error('Expected lookup by the selected local user UUID');
+    if (change.userUuid === options.blockedUserUuid) {
+      request.alias = 'blockedLookup';
+      request.reply({ statusCode: 403, body: {} });
+      return;
+    }
+    const [Name, LastName] = change.userName.split(' ');
+    request.reply({
+      body: {
+        value: [{
+          Uuid: change.userUuid, Name, LastName, OrganizationRights: [],
+          OrganizationUnitRights: change.userUuid === firstUserUuid ? firstUserRights() : [],
+          ItSystemRights: [], ItContractRights: [], DataProcessingRegistrationRights: [],
+        }],
+      },
+    });
+  }).as('lookupReviewUser');
+}
+
+function interceptRecipient(): void {
+  cy.intercept('GET', /\/api\/v2\/organizations\/[^/]+\/users(?:\?|$)/, {
+    body: [{ uuid: recipientUuid, name: 'Modtager Bruger', email: 'recipient@example.com' }],
+  });
+}
+
+function transferSelectedRoles(): void {
+  cy.get('app-user-dropdown ng-select').click();
+  cy.get('ng-dropdown-panel').contains('Modtager Bruger').click();
+  cy.getByDataCy('bulk-action-dialog').find('.perform-action-button').click();
 }
 
 describe('external-user-changes', () => {
@@ -81,9 +141,17 @@ describe('external-user-changes', () => {
 
   it('shows pending changes and displays per-item bulk resolution outcomes', () => {
     connectedTestRunner.runTestWithSetup('Can review external user deletions', () => {
-      openUsersTab();
-      cy.getByDataCy('external-changes-accordion').find('mat-expansion-panel-header').click();
-      cy.wait('@getExternalChanges');
+      let firstUserRights = unitRights;
+      let releaseLookups!: () => void;
+      const waitForLookups = new Promise<void>((resolve) => { releaseLookups = resolve; });
+      interceptReviewUsers(() => firstUserRights, { waitForLookups });
+      interceptRecipient();
+      cy.intercept('POST', `**/users/${firstUserUuid}/transfer-roles/${recipientUuid}`, (request) => {
+        expect(request.body.unitRights.map((right: { roleId: number }) => right.roleId)).to.deep.equal([11]);
+        firstUserRights = [unitRights[1]];
+        request.reply({ statusCode: 200, body: {} });
+      }).as('transferRoles');
+      openPendingChanges();
       cy.contains('Test Bruger').should('be.visible');
       cy.contains('Eksempel Bruger').should('be.visible');
 
@@ -107,6 +175,36 @@ describe('external-user-changes', () => {
       cy.getByDataCy('select-all').click();
       cy.getByDataCy('selection-count').should('contain', '2');
       cy.getByDataCy('bulk-apply').click();
+      cy.getByDataCy('dialog-title').should('contain', 'Gennemgå sletninger');
+      cy.get('app-deletion-batch-review-dialog app-loading').should('be.visible');
+      cy.getByDataCy('complete-batch-review').find('button').should('be.disabled');
+      cy.then(() => releaseLookups());
+      cy.getByDataCy('deletion-review-row').contains('tr', 'Eksempel Bruger')
+        .find('app-chip .chip-success').should('contain', 'Klar');
+      cy.getByDataCy('deletion-review-row').contains('tr', 'Test Bruger')
+        .find('app-chip .chip-error').should('contain', 'Til gennemgang');
+      cy.getByDataCy('complete-batch-review').find('button').should('be.disabled');
+      cy.getByDataCy('deletion-review-row').contains('tr', 'Test Bruger').find('[data-cy="review-user"] button')
+        .should(($button) => expect($button).to.have.attr('aria-label', 'Gennemgå')).click();
+      cy.getByDataCy('bulk-action-dialog').should('contain', 'Overfør roller for Test Bruger');
+      cy.get('app-delete-user-dialog').should('not.exist');
+      cy.getByDataCy('bulk-action-checkbox').first().click();
+      transferSelectedRoles();
+      cy.wait('@transferRoles');
+      cy.getByDataCy('bulk-action-dialog').should('not.contain', 'Enhed 1').and('contain', 'Enhed 2');
+      cy.press(Cypress.Keyboard.Keys.ESC);
+      cy.getByDataCy('bulk-action-dialog').should('not.exist');
+      cy.focused().should('have.attr', 'aria-label', 'Gennemgå');
+      cy.getByDataCy('complete-batch-review').find('button').should('be.disabled');
+      cy.getByDataCy('skip-remaining-roles').find('button')
+        .should(($button) => expect($button).to.have.attr('aria-label', 'Spring roller over'))
+        .click();
+      cy.getByDataCy('deletion-review-row').contains('tr', 'Test Bruger')
+        .find('app-chip .chip-warning').should('contain', 'Roller fravalgt');
+      cy.focused().should('have.attr', 'aria-label', 'Gennemgå');
+      cy.getByDataCy('complete-batch-review').click();
+      cy.getByDataCy('confirm-dialog').should('contain', 'Fjern brugernes adgang');
+      cy.get('@resolveChanges.all').should('have.length', 0);
       cy.getByDataCy('confirm-button').click();
 
       cy.wait('@resolveChanges').then(({ request }) => {
@@ -118,6 +216,116 @@ describe('external-user-changes', () => {
       cy.wait('@refreshExternalChanges');
       cy.getByDataCy('fk-org-users-card-header').should('contain', 'Via FK Organisation (1 afventer)');
       cy.getByDataCy('external-changes-grid').should('not.contain', 'Test Bruger');
+      cy.get('@resolveChanges.all').should('have.length', 1);
+    });
+  });
+
+  it('reviews a single user directly and preserves a complete transfer when deletion is cancelled', () => {
+    connectedTestRunner.runTestWithSetup('Cancelling access removal preserves transfers', () => {
+      let firstUserRights = unitRights;
+      interceptReviewUsers(() => firstUserRights);
+      interceptRecipient();
+      cy.intercept('POST', '**/users/external-changes/resolve', { body: {} }).as('resolveChanges');
+      cy.intercept('POST', `**/users/${firstUserUuid}/transfer-roles/${recipientUuid}`, (request) => {
+        expect(request.body.unitRights.map((right: { roleId: number }) => right.roleId)).to.have.members([11, 12]);
+        firstUserRights = [];
+        request.reply({ statusCode: 200, body: {} });
+      }).as('transferRoles');
+      openPendingChanges();
+      cy.getByDataCy('grid-checkbox').first().click();
+      cy.getByDataCy('bulk-apply').click();
+      cy.getByDataCy('dialog-title').should('have.length', 1).and('contain', 'Slet bruger');
+      cy.contains('Overførsler gemmes med det samme').should('be.visible');
+      cy.getByDataCy('transfer-roles-button').click();
+      cy.getByDataCy('select-all-bulk-action-button').click();
+      transferSelectedRoles();
+      cy.wait('@transferRoles');
+      cy.getByDataCy('bulk-action-dialog').should('not.exist');
+      cy.getByDataCy('transfer-roles-button').should('not.exist');
+      cy.focused().should('contain.text', 'Annuller');
+      cy.getByDataCy('complete-user-review').click();
+      cy.getByDataCy('confirm-dialog').should('contain', 'Fjern brugernes adgang');
+      cy.press(Cypress.Keyboard.Keys.ESC);
+      cy.getByDataCy('confirm-dialog').should('not.exist');
+      cy.get('@resolveChanges.all').should('have.length', 0);
+      cy.getByDataCy('selection-count').should('contain', '1');
+      cy.getByDataCy('external-changes-grid').contains('tr', 'Test Bruger').should('contain', 'Afventer');
+      cy.getByDataCy('bulk-apply').click();
+      cy.contains('Brugeren har ingen roller, der kan overføres.').should('be.visible');
+      cy.get('@lookupReviewUser.all').should('have.length', 3);
+    });
+  });
+
+  it('blocks the batch when a local user lookup fails', () => {
+    connectedTestRunner.runTestWithSetup('A failed lookup prevents access removal', () => {
+      interceptReviewUsers(() => [], { blockedUserUuid: secondUserUuid });
+      cy.intercept('POST', '**/users/external-changes/resolve', { body: {} }).as('resolveChanges');
+      openPendingChanges();
+      cy.getByDataCy('select-all').click();
+      cy.getByDataCy('bulk-apply').click();
+      cy.wait('@blockedLookup');
+      cy.getByDataCy('deletion-review-row').contains('tr', 'Eksempel Bruger')
+        .find('app-chip .chip-error').should('contain', 'Blokeret');
+      cy.getByDataCy('complete-batch-review').find('button').should('be.disabled');
+      cy.getByDataCy('cancel-batch-review').click();
+      cy.getByDataCy('selection-count').should('contain', '2');
+      cy.get('@resolveChanges.all').should('have.length', 0);
+    });
+  });
+
+  it('invalidates final confirmation when the active organization changes', () => {
+    connectedTestRunner.runTestWithSetup('A review belongs to the active organization', () => {
+      interceptReviewUsers(() => []);
+      cy.intercept('POST', '**/users/external-changes/resolve', { body: {} }).as('resolveChanges');
+      openPendingChanges();
+      cy.getByDataCy('grid-checkbox').first().click();
+      cy.getByDataCy('bulk-apply').click();
+      cy.getByDataCy('complete-user-review').click();
+      cy.getByDataCy('confirm-dialog').should('contain', 'Fjern brugernes adgang');
+
+      cy.intercept('GET', '/api/v2/organizations?*', {
+        body: [{ uuid: '41438997-c99e-460a-9602-6a1d105a1a18', name: 'Anden Kommune', organizationType: 'Municipality' }],
+      });
+      // Open the organization picker while the confirmation owns keyboard focus.
+      cy.get('app-nav-bar').then(([element]) => {
+        const appWindow = element.ownerDocument.defaultView as Window & typeof globalThis & {
+          ng: { getComponent: (element: Element) => { showOrganizationDialog: () => void } };
+        };
+        appWindow.ng.getComponent(element).showOrganizationDialog();
+      });
+      cy.get('mat-dialog-container').last().find('app-dropdown ng-select').click();
+      cy.get('ng-dropdown-panel').contains('Anden Kommune').click();
+
+      cy.getByDataCy('confirm-dialog').should('not.exist');
+      cy.get('@resolveChanges.all').should('have.length', 0);
+      cy.getByDataCy('profile-menu').should('contain', 'Anden Kommune');
+    });
+  });
+
+  it('leaves roles available after a failed transfer', () => {
+    connectedTestRunner.runTestWithSetup('A failed transfer leaves the choice to the admin', () => {
+      interceptReviewUsers(() => unitRights);
+      interceptRecipient();
+      cy.intercept('POST', `**/users/${firstUserUuid}/transfer-roles/${recipientUuid}`, {
+        statusCode: 403, body: {},
+      }).as('transferRoles');
+      cy.intercept('POST', '**/users/external-changes/resolve', { body: {} }).as('resolveChanges');
+      openPendingChanges();
+      cy.getByDataCy('grid-checkbox').first().click();
+      cy.getByDataCy('bulk-apply').click();
+      cy.getByDataCy('transfer-roles-button').click();
+      cy.getByDataCy('select-all-bulk-action-button').click();
+      transferSelectedRoles();
+      cy.wait('@transferRoles');
+      cy.contains('Kunne ikke overføre roller').should('be.visible');
+      cy.getByDataCy('bulk-action-dialog').should('contain', 'Enhed 1').and('contain', 'Enhed 2');
+      cy.press(Cypress.Keyboard.Keys.ESC);
+      cy.getByDataCy('bulk-action-dialog').should('not.exist');
+      cy.getByDataCy('complete-user-review').should('contain', 'Fortsæt uden at overføre resterende roller');
+      cy.getByDataCy('cancel-button').click();
+      cy.get('@resolveChanges.all').should('have.length', 0);
+      cy.get('@lookupReviewUser.all').should('have.length', 1);
+      cy.getByDataCy('selection-count').should('contain', '1');
     });
   });
 

@@ -18,6 +18,7 @@ export declare type ExtendedThemePalette = ThemePalette | 'secondary';
 })
 export class ButtonComponent {
   @ViewChild(MatButton) private button?: MatButton;
+  @Input() public ariaLabel?: string;
   @Input() public ariaExpanded?: boolean;
   @Input() public ariaControls: string | null = null;
   @Input() public ariaHasPopup?: 'dialog' | 'menu' | 'listbox' | 'tree' | 'grid';

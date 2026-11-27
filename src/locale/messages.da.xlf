@@ -8273,9 +8273,9 @@
         <source>Kunne ikke hente eksterne brugerændringer</source>
         <target state="new">Kunne ikke hente eksterne brugerændringer</target>
       </trans-unit>
-      <trans-unit id="7667083193803866408" datatype="html">
-        <source>Du kan højst vælge 100 ændringer ad gangen</source>
-        <target state="new">Du kan højst vælge 100 ændringer ad gangen</target>
+      <trans-unit id="232323502805498331" datatype="html">
+        <source>Du kan højst vælge <x id="PH" equiv-text="MAX_SELECTION"/> ændringer ad gangen</source>
+        <target state="new">Du kan højst vælge <x id="PH" equiv-text="MAX_SELECTION"/> ændringer ad gangen</target>
       </trans-unit>
       <trans-unit id="78008570145308603" datatype="html">
         <source>Fjern brugernes adgang</source>
@@ -8564,6 +8564,78 @@
       <trans-unit id="5089165653399689980" datatype="html">
         <source><x id="PH" equiv-text="results.length - failures.length"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet.</source>
         <target state="new"><x id="PH" equiv-text="results.length - failures.length"/> af <x id="PH_1" equiv-text="results.length"/> ændringer blev behandlet.</target>
+      </trans-unit>
+      <trans-unit id="1375277369089733339" datatype="html">
+        <source>Den valgte bruger mister sin adgang til organisationen. Vil du fortsætte?</source>
+        <target state="new">Den valgte bruger mister sin adgang til organisationen. Vil du fortsætte?</target>
+      </trans-unit>
+      <trans-unit id="1826484890569705847" datatype="html">
+        <source>Handling</source>
+        <target state="new">Handling</target>
+      </trans-unit>
+      <trans-unit id="2444238208261905480" datatype="html">
+        <source> Gennemgå sletningen af <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ getUserName(state.user) }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ organizationName$ | async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>. </source>
+        <target state="new"> Gennemgå sletningen af <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION" equiv-text="{{ getUserName(state.user) }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/> fra <x id="START_TAG_STRONG" ctype="x-strong" equiv-text="&lt;strong&gt;"/><x id="INTERPOLATION_1" equiv-text="{{ organizationName$ | async }}"/><x id="CLOSE_TAG_STRONG" ctype="x-strong" equiv-text="&lt;/strong&gt;"/>. </target>
+      </trans-unit>
+      <trans-unit id="2761087092406413511" datatype="html">
+        <source>Overførsler gemmes med det samme, også hvis du annullerer sletningen.</source>
+        <target state="new">Overførsler gemmes med det samme, også hvis du annullerer sletningen.</target>
+      </trans-unit>
+      <trans-unit id="3107732452236053535" datatype="html">
+        <source> Bruger og roller kunne ikke hentes for <x id="INTERPOLATION" equiv-text="{{ deletionReview.userName }}"/>. Sletningen kan ikke fortsætte. </source>
+        <target state="new"> Bruger og roller kunne ikke hentes for <x id="INTERPOLATION" equiv-text="{{ deletionReview.userName }}"/>. Sletningen kan ikke fortsætte. </target>
+      </trans-unit>
+      <trans-unit id="3714615529233875129" datatype="html">
+        <source>Gennemgå sletninger</source>
+        <target state="new">Gennemgå sletninger</target>
+      </trans-unit>
+      <trans-unit id="5980549372622300807" datatype="html">
+        <source>De <x id="PH" equiv-text="changeUuids.length"/> valgte brugere mister deres adgang til organisationen. Vil du fortsætte?</source>
+        <target state="new">De <x id="PH" equiv-text="changeUuids.length"/> valgte brugere mister deres adgang til organisationen. Vil du fortsætte?</target>
+      </trans-unit>
+      <trans-unit id="6151843896213430665" datatype="html">
+        <source>Fortsæt</source>
+        <target state="new">Fortsæt</target>
+      </trans-unit>
+      <trans-unit id="6975535999352842656" datatype="html">
+        <source>Gennemgå</source>
+        <target state="new">Gennemgå</target>
+      </trans-unit>
+      <trans-unit id="7740790003787234595" datatype="html">
+        <source> Fortsæt uden at overføre resterende roller </source>
+        <target state="new"> Fortsæt uden at overføre resterende roller </target>
+      </trans-unit>
+      <trans-unit id="8234849400586729297" datatype="html">
+        <source>Brugeren har ingen roller, der kan overføres.</source>
+        <target state="new">Brugeren har ingen roller, der kan overføres.</target>
+      </trans-unit>
+      <trans-unit id="8828137349433590834" datatype="html">
+        <source>Overfør roller for <x id="PH" equiv-text="state.user.Name"/></source>
+        <target state="new">Overfør roller for <x id="PH" equiv-text="state.user.Name"/></target>
+      </trans-unit>
+      <trans-unit id="5637603729233766760" datatype="html">
+        <source>Klar</source>
+        <target state="new">Klar</target>
+      </trans-unit>
+      <trans-unit id="951577059019841356" datatype="html">
+        <source>Blokeret</source>
+        <target state="new">Blokeret</target>
+      </trans-unit>
+      <trans-unit id="8902824754657567010" datatype="html">
+        <source>Roller fravalgt</source>
+        <target state="new">Roller fravalgt</target>
+      </trans-unit>
+      <trans-unit id="2700853687585889831" datatype="html">
+        <source>Til gennemgang</source>
+        <target state="new">Til gennemgang</target>
+      </trans-unit>
+      <trans-unit id="6043494952126669986" datatype="html">
+        <source>Spring roller over</source>
+        <target state="new">Spring roller over</target>
+      </trans-unit>
+      <trans-unit id="1141957762005620665" datatype="html">
+        <source>Overførsler gemmes straks, også hvis du annullerer.</source>
+        <target state="new">Overførsler gemmes straks, også hvis du annullerer.</target>
       </trans-unit>
     </body>
   </file>

@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "theme";
 
 .chip {
@@ -28,6 +29,16 @@
     background-color: theme.$color-positive;
     border-radius: 50%;
     display: inline-block;
+  }
+
+  &.chip-warning {
+    border-color: theme.$color-warning;
+    background-color: color.mix(theme.$color-warning, theme.$color-white, $weight: 20%);
+    color: theme.$color-neutral-dark;
+
+    &:before {
+      background-color: theme.$color-warning;
+    }
   }
 
   &.chip-error {

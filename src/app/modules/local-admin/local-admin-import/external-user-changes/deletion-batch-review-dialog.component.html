@@ -1,0 +1,69 @@
+<app-scrollbar-dialog title="Gennemgå sletninger" i18n-title>
+  @if (isLoading) {
+    <app-loading></app-loading>
+  } @else {
+    <app-native-table>
+      <thead>
+        <tr>
+          <th scope="col"><app-paragraph color="primary-dark" [bold]="true" i18n>Bruger</app-paragraph></th>
+          <th scope="col"><app-paragraph color="primary-dark" [bold]="true" i18n>Status</app-paragraph></th>
+          <th scope="col"><app-paragraph color="primary-dark" [bold]="true" i18n>Handling</app-paragraph></th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (review of reviews; track $index) {
+          <tr data-cy="deletion-review-row">
+            <td>
+              <app-paragraph>{{ review.userName }}</app-paragraph>
+            </td>
+            <td aria-live="polite">
+              @if (statusChip(review); as status) {
+                <app-chip [state]="status.state">{{ status.label }}</app-chip>
+              }
+            </td>
+            <td>
+              @if (canReview(review)) {
+                <app-table-row-actions floatSide="left">
+                  <app-icon-button
+                    #reviewButton
+                    ariaHasPopup="dialog"
+                    [ariaLabel]="reviewLabel"
+                    [tooltipText]="reviewLabel"
+                    (buttonClick)="openReview(review, reviewButton)"
+                    data-cy="review-user"
+                  >
+                    <app-arrow-right-icon></app-arrow-right-icon>
+                  </app-icon-button>
+                  @if (canSkip(review)) {
+                    <app-icon-button
+                      [ariaLabel]="skipRemainingRolesLabel"
+                      [tooltipText]="skipRemainingRolesLabel"
+                      (buttonClick)="skipRemainingRoles(review, reviewButton)"
+                      data-cy="skip-remaining-roles"
+                    >
+                      <app-x-icon></app-x-icon>
+                    </app-icon-button>
+                  }
+                </app-table-row-actions>
+              }
+            </td>
+          </tr>
+        }
+      </tbody>
+    </app-native-table>
+  }
+  <app-dialog-actions>
+    <app-button #cancelButton buttonStyle="secondary" (buttonClick)="close()" data-cy="cancel-batch-review" i18n>
+      Annuller
+    </app-button>
+    <app-button
+      #continueButton
+      [disabled]="!canContinue"
+      [ariaHasPopup]="'dialog'"
+      (buttonClick)="continue()"
+      data-cy="complete-batch-review"
+      i18n
+      >Fortsæt</app-button
+    >
+  </app-dialog-actions>
+</app-scrollbar-dialog>
