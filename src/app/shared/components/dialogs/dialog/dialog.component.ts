@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { MatDialogRef } from '@angular/material/dialog';
+import { filter } from 'rxjs';
 import { LoadingComponent } from '../../loading/loading.component';
 import { DialogHeaderComponent } from './dialog-header/dialog-header.component';
 
@@ -26,14 +28,10 @@ export class DialogComponent {
   constructor(protected dialog: MatDialogRef<DialogComponent>) {
     // Prevent closing the dialog by clicking outside
     dialog.disableClose = true;
-  }
-
-  // Close the dialog when the escape key is pressed
-  @HostListener('document:keydown.escape', ['$event'])
-  onEsc(_: KeyboardEvent) {
-    if (this.closable) {
-      this.dialog.close();
-    }
+    dialog.keydownEvents().pipe(
+      filter((event) => event.key === 'Escape' && !event.defaultPrevented && this.closable),
+      takeUntilDestroyed(),
+    ).subscribe(() => dialog.close());
   }
   public close() {
     this.dialog.close();

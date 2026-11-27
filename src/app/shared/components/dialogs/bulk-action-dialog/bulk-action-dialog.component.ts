@@ -83,6 +83,7 @@ export class BulkActionDialogComponent<TDropdownOption extends { uuid: string }>
   @Input() public dropdownTitle!: string;
   @Input() public dropdownOptions?: TDropdownOption[];
   @Input() public allowEmptyDropdownSelection = false;
+  @Input() public lockWhileLoading = false;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   @Input() public successActionTypes!: any;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

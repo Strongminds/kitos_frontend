@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['chip.component.scss'],
 })
 export class ChipComponent {
-  @Input() public state: 'success' | 'error' | 'neutral' = 'success';
+  @Input() public state: 'success' | 'warning' | 'error' | 'neutral' = 'success';
 }

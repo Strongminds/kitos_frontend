@@ -45,6 +45,7 @@ export class ConfirmActionService {
           }
         }
       });
+    return confirmationDialogRef;
   }
   getConfirmButtonColor(category: ConfirmActionCategory): ThemePalette {
     switch (category) {

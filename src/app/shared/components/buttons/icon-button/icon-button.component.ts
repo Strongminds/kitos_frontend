@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { ButtonStyle } from 'src/app/shared/models/buttons/button-style.model';
 import { ButtonComponent } from '../button/button.component';
 
@@ -9,13 +9,20 @@ import { ButtonComponent } from '../button/button.component';
   imports: [ButtonComponent],
 })
 export class IconButtonComponent {
+  @ViewChild(ButtonComponent) private button?: ButtonComponent;
   @Input() public disabled = false;
   @Input() public loading: boolean | null = false;
   @Input() public type: 'button' | 'submit' = 'button';
   @Input() public buttonStyle: ButtonStyle = 'tertiary';
   @Input() public tooltipText?: string;
+  @Input() public ariaLabel?: string;
+  @Input() public ariaHasPopup?: ButtonComponent['ariaHasPopup'];
 
   @Output() buttonClick = new EventEmitter();
+
+  public focus(): void {
+    this.button?.focus();
+  }
 
   public onButtonClick() {
     if (!this.disabled && !this.loading) {

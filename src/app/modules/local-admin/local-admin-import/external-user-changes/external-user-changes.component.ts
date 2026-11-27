@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef, MatDialogState } from '@angular/material/dialog';
 import { CheckboxComponent } from 'src/app/shared/components/checkbox/checkbox.component';
 import { AccordionComponent } from 'src/app/shared/components/accordion/accordion.component';
 import { Store } from '@ngrx/store';
@@ -21,6 +22,7 @@ import {
 import { ExternalUserChangesInternalV2Service } from 'src/app/api/v2/api/externalUserChangesInternalV2.service';
 import { APIExternalUserChangeResponse } from 'src/app/api/v2/model/externalUserChangeResponse';
 import { APIExternalUserChangeStatus } from 'src/app/api/v2/model/externalUserChangeStatus';
+import { UserDeletionReviewService } from 'src/app/modules/organization/organization-users/delete-user-dialog/user-deletion-review.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { DropdownComponent } from 'src/app/shared/components/dropdowns/dropdown/dropdown.component';
@@ -33,9 +35,11 @@ import { DropdownOption } from 'src/app/shared/models/dropdown-option.model';
 import { GridColumn } from 'src/app/shared/models/grid-column.model';
 import { BooleanChange } from 'src/app/shared/models/grid/grid-events.model';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
+import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { GridColumnStorageService } from 'src/app/shared/services/grid-column-storage-service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
 import { selectOrganizationUuid } from 'src/app/store/user-store/selectors';
+import { DeletionBatchReviewDialogComponent } from './deletion-batch-review-dialog.component';
 
 type ViewState = 'pending' | 'resolved';
 
@@ -187,6 +191,7 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
   public isResolving = false;
   public hasLoadError = false;
   public selectedChangeUuids = new Set<string>();
+  private isReviewing = false;
 
   private readonly view$ = new BehaviorSubject<ViewState>('pending');
   private readonly refresh$ = new Subject<void>();
@@ -200,6 +205,9 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
     private readonly store: Store,
     private readonly api: ExternalUserChangesInternalV2Service,
     private readonly confirmActionService: ConfirmActionService,
+    private readonly dialog: MatDialog,
+    private readonly dialogOpener: DialogOpenerService,
+    private readonly deletionReview: UserDeletionReviewService,
     private readonly notificationService: NotificationService,
     private readonly gridColumnStorageService: GridColumnStorageService,
   ) {
@@ -300,17 +308,78 @@ export class ExternalUserChangesComponent extends BaseComponent implements OnIni
 
   public resolveSelected(apply: boolean): void {
     const changeUuids = [...this.selectedChangeUuids];
-    if (!changeUuids.length || this.selectionDisabled) return;
+    if (!changeUuids.length || this.selectionDisabled || this.isReviewing) return;
     if (apply) {
-      this.confirmActionService.confirmAction({
-        category: ConfirmActionCategory.Warning,
-        title: $localize`Fjern brugernes adgang`,
-        message: $localize`Hvis du anvender disse sletninger, mister ${changeUuids.length} valgte brugere deres adgang til organisationen. Vil du fortsætte?`,
-        onConfirm: () => this.resolveBatch(changeUuids, true),
-      });
+      this.reviewDeletions(changeUuids);
       return;
     }
     this.resolveBatch(changeUuids, false);
+  }
+
+  private reviewDeletions(changeUuids: string[]): void {
+    const organizationUuid = this.currentOrganizationUuid();
+    if (!organizationUuid || organizationUuid !== this.organizationUuid) return;
+    const selectedRows = this.rows.filter((row) => this.selectedChangeUuids.has(row.uuid) && row.status === 'Pending');
+    if (selectedRows.length !== changeUuids.length) return;
+
+    const users = selectedRows.map(({ userUuid, userName, email, uuid }) => ({
+      userUuid,
+      userName: userName || email || uuid,
+    }));
+    const reviews = this.deletionReview.createReviews(organizationUuid, users);
+    const reviewDialog = reviews.length === 1
+      ? this.dialogOpener.openUserDeletionReview(reviews[0])
+      : this.dialog.open<DeletionBatchReviewDialogComponent, typeof reviews, boolean>(DeletionBatchReviewDialogComponent, {
+          width: '980px',
+          maxWidth: '95vw',
+          maxHeight: '90vh',
+          data: reviews,
+          ariaLabel: $localize`Gennemgå sletninger`,
+        });
+
+    this.watchReviewDialog(reviewDialog, (decision) => {
+      if (decision && this.isReviewedSelectionCurrent(organizationUuid, selectedRows)) {
+        this.confirmDeletions(organizationUuid, selectedRows, changeUuids);
+      }
+    });
+  }
+
+  private confirmDeletions(organizationUuid: string, selectedRows: ExternalUserChangeRow[], changeUuids: string[]): void {
+    const confirmation = this.confirmActionService.confirmAction({
+      category: ConfirmActionCategory.Warning,
+      title: $localize`Fjern brugernes adgang`,
+      message: changeUuids.length === 1
+        ? $localize`Den valgte bruger mister sin adgang til organisationen. Vil du fortsætte?`
+        : $localize`De ${changeUuids.length} valgte brugere mister deres adgang til organisationen. Vil du fortsætte?`,
+      onConfirm: () => {
+        if (this.isReviewedSelectionCurrent(organizationUuid, selectedRows)) this.resolveBatch(changeUuids, true);
+      },
+    });
+    this.watchReviewDialog(confirmation);
+  }
+
+  private isReviewedSelectionCurrent(organizationUuid: string, selection: ExternalUserChangeRow[]): boolean {
+    return !this.subscriptions.closed && this.currentOrganizationUuid() === organizationUuid &&
+      this.activeView === 'pending' && !this.selectionDisabled &&
+      selection.length === this.selectedChangeUuids.size &&
+      selection.every((row) => this.selectedChangeUuids.has(row.uuid) && this.rows.includes(row) && row.status === 'Pending');
+  }
+
+  private watchReviewDialog(
+    dialogRef: Pick<MatDialogRef<unknown, unknown>, 'afterClosed' | 'close' | 'getState'>,
+    onClosed?: (result: unknown) => void,
+  ): void {
+    this.isReviewing = true;
+    const subscription = dialogRef.afterClosed().pipe(takeUntil(this.organizationChanged$)).subscribe((result) => {
+      this.isReviewing = false;
+      onClosed?.(result);
+    });
+    subscription.add(() => {
+      if (dialogRef.getState() !== MatDialogState.OPEN) return;
+      this.isReviewing = false;
+      dialogRef.close();
+    });
+    this.subscriptions.add(subscription);
   }
 
   public statusLabel(status?: APIExternalUserChangeStatus): string {

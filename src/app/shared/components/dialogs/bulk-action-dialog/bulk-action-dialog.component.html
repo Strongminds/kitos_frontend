@@ -1,6 +1,7 @@
 <app-scrollbar-dialog
   [title]="title"
   [nested]="true"
+  [closable]="!lockWhileLoading || !isLoading"
   [ngClass]="{ 'removed-padding': isAnySelected() }"
   data-cy="bulk-action-dialog"
   >
