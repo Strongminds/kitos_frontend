@@ -1,7 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { from, mergeMap, takeUntil } from 'rxjs';
-import { UserDeletionReview } from 'src/app/modules/organization/organization-users/delete-user-dialog/user-deletion-review.service';
 import { BaseComponent } from 'src/app/shared/base/base.component';
 import { ButtonComponent } from 'src/app/shared/components/buttons/button/button.component';
 import { IconButtonComponent } from 'src/app/shared/components/buttons/icon-button/icon-button.component';
@@ -14,6 +13,11 @@ import { LoadingComponent } from 'src/app/shared/components/loading/loading.comp
 import { NativeTableComponent } from 'src/app/shared/components/native-table/native-table.component';
 import { ParagraphComponent } from 'src/app/shared/components/paragraph/paragraph.component';
 import { TableRowActionsComponent } from 'src/app/shared/components/table-row-actions/table-row-actions.component';
+import {
+  type UserDeletionReview,
+  UserDeletionReviewStatus,
+} from 'src/app/shared/models/organization/organization-user/user-deletion-review.types';
+import { type ChipContent, ChipState } from 'src/app/shared/models/status/chip.types';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 
 const CONCURRENT_USER_LOOKUPS = 5;
@@ -40,6 +44,12 @@ export class DeletionBatchReviewDialogComponent extends BaseComponent implements
   @ViewChild('continueButton') private continueButton?: ButtonComponent;
   public readonly reviewLabel = $localize`Gennemgå`;
   public readonly skipRemainingRolesLabel = $localize`Spring roller over`;
+  private readonly statusChips = {
+    blocked: { state: ChipState.Error, label: $localize`Blokeret` },
+    ready: { state: ChipState.Success, label: $localize`Klar` },
+    rolesSkipped: { state: ChipState.Warning, label: $localize`Roller fravalgt` },
+    needsReview: { state: ChipState.Error, label: $localize`Til gennemgang` },
+  } satisfies Record<string, ChipContent>;
   private readonly skipped = new Set<UserDeletionReview>();
 
   constructor(
@@ -61,17 +71,18 @@ export class DeletionBatchReviewDialogComponent extends BaseComponent implements
 
   public canReview(review: UserDeletionReview): boolean {
     const state = review.state$.value;
-    return state.status === 'ready' && state.hasRoles;
+    return state.status === UserDeletionReviewStatus.Ready && state.hasRoles;
   }
 
   public get isLoading(): boolean {
-    return this.reviews.some((review) => review.state$.value.status === 'loading');
+    return this.reviews.some((review) => review.state$.value.status === UserDeletionReviewStatus.Loading);
   }
 
   public get canContinue(): boolean {
-    return this.reviews.every((review) =>
-      review.state$.value.status === 'ready' && (!this.canReview(review) || this.skipped.has(review)),
-    );
+    return this.reviews.every((review) => {
+      const state = review.state$.value;
+      return state.status === UserDeletionReviewStatus.Ready && (!state.hasRoles || this.skipped.has(review));
+    });
   }
 
   public canSkip(review: UserDeletionReview): boolean {
@@ -84,18 +95,16 @@ export class DeletionBatchReviewDialogComponent extends BaseComponent implements
     reviewButton.focus();
   }
 
-  public statusChip(review: UserDeletionReview): { state: ChipComponent['state']; label: string } | undefined {
+  public statusChip(review: UserDeletionReview): ChipContent | undefined {
     const state = review.state$.value;
     switch (state.status) {
-      case 'loading':
+      case UserDeletionReviewStatus.Loading:
         return undefined;
-      case 'blocked':
-        return { state: 'error', label: $localize`Blokeret` };
-      case 'ready':
-        if (!state.hasRoles) return { state: 'success', label: $localize`Klar` };
-        return this.skipped.has(review)
-          ? { state: 'warning', label: $localize`Roller fravalgt` }
-          : { state: 'error', label: $localize`Til gennemgang` };
+      case UserDeletionReviewStatus.Blocked:
+        return this.statusChips.blocked;
+      case UserDeletionReviewStatus.Ready:
+        if (!state.hasRoles) return this.statusChips.ready;
+        return this.skipped.has(review) ? this.statusChips.rolesSkipped : this.statusChips.needsReview;
     }
   }
 

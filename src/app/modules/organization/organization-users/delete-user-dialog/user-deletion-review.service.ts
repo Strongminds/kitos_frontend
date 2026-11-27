@@ -1,33 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, forkJoin, map, Observable, of, shareReplay, tap } from 'rxjs';
-import { APIRoleOptionResponseDTO } from 'src/app/api/v2';
 import { userHasAnyAvailableRights } from 'src/app/shared/helpers/user-role.helpers';
 import {
   adaptOrganizationUser,
   ODataOrganizationUser,
 } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import {
+  type TransferRoleOptions,
+  type UserDeletionReview,
+  type UserDeletionReviewState,
+  UserDeletionReviewStatus,
+} from 'src/app/shared/models/organization/organization-user/user-deletion-review.types';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
-
-interface TransferRoleOptions {
-  units: APIRoleOptionResponseDTO[];
-  systems: APIRoleOptionResponseDTO[];
-  contracts: APIRoleOptionResponseDTO[];
-  dataProcessing: APIRoleOptionResponseDTO[];
-}
-
-export type UserDeletionReviewState =
-  | { status: 'loading' | 'blocked' }
-  | { status: 'ready'; user: ODataOrganizationUser; options: TransferRoleOptions; hasRoles: boolean };
-
-export interface UserDeletionReview {
-  organizationUuid: string;
-  userName: string;
-  state$: BehaviorSubject<UserDeletionReviewState>;
-  reload: () => Observable<UserDeletionReviewState>;
-}
-
-export type UserDeletionReviewDecision = 'continue' | 'continue-without-remaining-roles';
 
 @Injectable({ providedIn: 'root' })
 export class UserDeletionReviewService {
@@ -43,7 +28,7 @@ export class UserDeletionReviewService {
       const existing = userUuid && reviews.get(userUuid);
       if (existing) return existing;
 
-      const state$ = new BehaviorSubject<UserDeletionReviewState>({ status: 'loading' });
+      const state$ = new BehaviorSubject<UserDeletionReviewState>({ status: UserDeletionReviewStatus.Loading });
       const review: UserDeletionReview = {
         organizationUuid,
         userName,
@@ -73,15 +58,15 @@ export class UserDeletionReviewService {
     userUuid: string,
     options$: Observable<TransferRoleOptions | null>,
   ): Observable<UserDeletionReviewState> {
-    if (!userUuid) return of({ status: 'blocked' });
+    if (!userUuid) return of({ status: UserDeletionReviewStatus.Blocked });
 
     return forkJoin({ user: this.lookupUser(organizationUuid, userUuid), options: options$ }).pipe(
       map(({ user, options }): UserDeletionReviewState => {
-        if (!user || !options) return { status: 'blocked' };
+        if (!user || !options) return { status: UserDeletionReviewStatus.Blocked };
         const hasRoles = userHasAnyAvailableRights(user, options.units, options.systems, options.contracts, options.dataProcessing);
-        return { status: 'ready', user, options, hasRoles };
+        return { status: UserDeletionReviewStatus.Ready, user, options, hasRoles };
       }),
-      catchError(() => of<UserDeletionReviewState>({ status: 'blocked' })),
+      catchError(() => of<UserDeletionReviewState>({ status: UserDeletionReviewStatus.Blocked })),
     );
   }
 

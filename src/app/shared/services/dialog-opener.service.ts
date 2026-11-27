@@ -5,8 +5,12 @@ import { filter, map, Observable, of, switchMap, takeUntil } from 'rxjs';
 import { UsersInternalV2Service } from 'src/app/api/v2';
 import { ArchiveSystemUsageDialogComponent } from 'src/app/modules/it-systems/shared/archive-system-usage-dialog/archive-system-usage-dialog.component';
 import { DeleteUserDialogComponent } from 'src/app/modules/organization/organization-users/delete-user-dialog/delete-user-dialog.component';
-import { UserDeletionReview, UserDeletionReviewDecision } from 'src/app/modules/organization/organization-users/delete-user-dialog/user-deletion-review.service';
 import { EditUserDialogComponent } from 'src/app/modules/organization/organization-users/edit-user-dialog/edit-user-dialog.component';
+import {
+  type UserDeletionReview,
+  type UserDeletionReviewDecision,
+  UserDeletionReviewStatus,
+} from '../models/organization/organization-user/user-deletion-review.types';
 import { BulkActionDialogComponent, BulkActionResult, BulkActionSection } from '../components/dialogs/bulk-action-dialog/bulk-action-dialog.component';
 import { IconConfirmationDialogComponent } from '../components/dialogs/icon-confirmation-dialog/icon-confirmation-dialog.component';
 import { GlobalOptionTypeDialogComponent } from '../components/global-option-type-view/global-option-type-dialog/global-option-type-dialog.component';
@@ -85,9 +89,9 @@ export class DialogOpenerService {
 
   public openDeletionReviewRoleTransfer(review: UserDeletionReview): UserRoleTransferDialogRef | undefined {
     const state = review.state$.value;
-    if (state.status !== 'ready' || !state.hasRoles) return;
+    if (state.status !== UserDeletionReviewStatus.Ready || !state.hasRoles) return;
 
-    const ready$ = review.state$.pipe(filter((value) => value.status === 'ready'));
+    const ready$ = review.state$.pipe(filter((value) => value.status === UserDeletionReviewStatus.Ready));
     const sections = getUserRoleSelectionDialogSections(
       ready$.pipe(map((value) => value.user)),
       ready$.pipe(map((value) => value.options.units)),
@@ -123,7 +127,7 @@ export class DialogOpenerService {
     ).subscribe({
       next: (state) => {
         this.store.dispatch(OrganizationUserActions.transferRolesSuccess());
-        if (state.status !== 'ready' || !state.hasRoles) dialogRef.close();
+        if (state.status !== UserDeletionReviewStatus.Ready || !state.hasRoles) dialogRef.close();
       },
       error: () => this.store.dispatch(OrganizationUserActions.transferRolesError()),
     });

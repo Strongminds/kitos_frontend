@@ -28,7 +28,7 @@
         <app-button #reviewCancel buttonStyle="secondary" (buttonClick)="onClose()" data-cy="cancel-button" i18n>
           Annuller
         </app-button>
-        @if (state.status === 'ready') {
+        @if (state.status === reviewStatus.Ready) {
           @if (state.hasRoles) {
             <app-button #reviewTransfer buttonStyle="secondary" (buttonClick)="openReviewTransfer()"
               data-cy="transfer-roles-button" [ariaHasPopup]="'dialog'" i18n>Overfør roller</app-button>

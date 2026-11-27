@@ -15,6 +15,11 @@ import {
   ODataOrganizationUser,
   Right,
 } from 'src/app/shared/models/organization/organization-user/organization-user.model';
+import {
+  type UserDeletionReview,
+  UserDeletionReviewDecision,
+  UserDeletionReviewStatus,
+} from 'src/app/shared/models/organization/organization-user/user-deletion-review.types';
 import { ConfirmActionCategory, ConfirmActionService } from 'src/app/shared/services/confirm-action.service';
 import { DialogOpenerService } from 'src/app/shared/services/dialog-opener.service';
 import { RoleOptionTypeService } from 'src/app/shared/services/role-option-type.service';
@@ -28,7 +33,6 @@ import { DialogComponent } from '../../../../shared/components/dialogs/dialog/di
 import { LoadingComponent } from '../../../../shared/components/loading/loading.component';
 import { ParagraphComponent } from '../../../../shared/components/paragraph/paragraph.component';
 import { StandardVerticalContentGridComponent } from '../../../../shared/components/standard-vertical-content-grid/standard-vertical-content-grid.component';
-import { UserDeletionReview, UserDeletionReviewDecision } from './user-deletion-review.service';
 
 @Component({
   selector: 'app-delete-user-dialog',
@@ -53,6 +57,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
   @ViewChild('reviewTransfer') private reviewTransfer?: ButtonComponent;
 
   public readonly organizationName$: Observable<string | undefined> = this.store.select(selectOrganizationName);
+  public readonly reviewStatus = UserDeletionReviewStatus;
   private readonly availableUnitRoles$ = this.store.select(selectRoleOptionTypes('organization-unit'));
   private readonly availableContractRoles$ = this.store.select(selectRoleOptionTypes('it-contract'));
   private readonly availableUsageRoles$ = this.store.select(selectRoleOptionTypes('it-system-usage'));
@@ -75,7 +80,7 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.review) {
-      if (this.review.state$.value.status === 'loading') {
+      if (this.review.state$.value.status === UserDeletionReviewStatus.Loading) {
         this.subscriptions.add(this.review.reload().pipe(takeUntil(this.dialogRef.beforeClosed())).subscribe());
       }
       return;
@@ -115,8 +120,10 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
 
   public completeReview(): void {
     const state = this.review?.state$.value;
-    if (state?.status !== 'ready') return;
-    this.dialogRef.close(state.hasRoles ? 'continue-without-remaining-roles' : 'continue');
+    if (state?.status !== UserDeletionReviewStatus.Ready) return;
+    this.dialogRef.close(
+      state.hasRoles ? UserDeletionReviewDecision.ContinueWithoutRemainingRoles : UserDeletionReviewDecision.Continue,
+    );
   }
 
   public onDeleteUser(user: ODataOrganizationUser): void {
@@ -162,7 +169,10 @@ export class DeleteUserDialogComponent extends BaseComponent implements OnInit {
     this.subscriptions.add(
       dialogRef.afterClosed().pipe(takeUntil(this.dialogRef.beforeClosed())).subscribe(() => {
         const state = this.review?.state$.value;
-        (state?.status === 'ready' && state.hasRoles ? this.reviewTransfer : this.reviewCancel)?.focus();
+        (state?.status === UserDeletionReviewStatus.Ready && state.hasRoles
+          ? this.reviewTransfer
+          : this.reviewCancel
+        )?.focus();
       }),
     );
   }

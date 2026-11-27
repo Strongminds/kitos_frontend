@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { ChipState } from '../../models/status/chip.types';
 
 @Component({
   selector: 'app-chip',
@@ -6,5 +7,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['chip.component.scss'],
 })
 export class ChipComponent {
-  @Input() public state: 'success' | 'warning' | 'error' | 'neutral' = 'success';
+  @Input() public state: ChipState = ChipState.Success;
 }
