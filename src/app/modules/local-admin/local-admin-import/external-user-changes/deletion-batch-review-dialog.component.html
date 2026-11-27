@@ -2,7 +2,6 @@
   @if (isLoading) {
     <app-loading></app-loading>
   } @else {
-    <app-paragraph i18n>Overførsler gemmes straks, også hvis du annullerer.</app-paragraph>
     <app-native-table>
       <thead>
         <tr>
@@ -14,7 +13,9 @@
       <tbody>
         @for (review of reviews; track $index) {
           <tr data-cy="deletion-review-row">
-            <td><app-paragraph>{{ review.userName }}</app-paragraph></td>
+            <td>
+              <app-paragraph>{{ review.userName }}</app-paragraph>
+            </td>
             <td aria-live="polite">
               @if (statusChip(review); as status) {
                 <app-chip [state]="status.state">{{ status.label }}</app-chip>
@@ -55,7 +56,14 @@
     <app-button #cancelButton buttonStyle="secondary" (buttonClick)="close()" data-cy="cancel-batch-review" i18n>
       Annuller
     </app-button>
-    <app-button #continueButton [disabled]="!canContinue" [ariaHasPopup]="'dialog'"
-      (buttonClick)="continue()" data-cy="complete-batch-review" i18n>Fortsæt</app-button>
+    <app-button
+      #continueButton
+      [disabled]="!canContinue"
+      [ariaHasPopup]="'dialog'"
+      (buttonClick)="continue()"
+      data-cy="complete-batch-review"
+      i18n
+      >Fortsæt</app-button
+    >
   </app-dialog-actions>
 </app-scrollbar-dialog>
