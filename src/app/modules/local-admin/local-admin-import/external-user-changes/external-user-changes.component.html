@@ -16,7 +16,7 @@
     ></app-dropdown>
 
     <div class="actions">
-      @if (activeView === 'pending') {
+      @if (isPendingView) {
         <app-paragraph class="selection-count" data-cy="selection-count">
           {{ selectedChangeUuids.size }} <ng-container i18n>valgt</ng-container>
         </app-paragraph>

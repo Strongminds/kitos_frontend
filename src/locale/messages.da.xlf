@@ -8273,9 +8273,9 @@
         <source>Kunne ikke hente eksterne brugerændringer</source>
         <target state="new">Kunne ikke hente eksterne brugerændringer</target>
       </trans-unit>
-      <trans-unit id="7667083193803866408" datatype="html">
-        <source>Du kan højst vælge 100 ændringer ad gangen</source>
-        <target state="new">Du kan højst vælge 100 ændringer ad gangen</target>
+      <trans-unit id="232323502805498331" datatype="html">
+        <source>Du kan højst vælge <x id="PH" equiv-text="MAX_SELECTION"/> ændringer ad gangen</source>
+        <target state="new">Du kan højst vælge <x id="PH" equiv-text="MAX_SELECTION"/> ændringer ad gangen</target>
       </trans-unit>
       <trans-unit id="78008570145308603" datatype="html">
         <source>Fjern brugernes adgang</source>

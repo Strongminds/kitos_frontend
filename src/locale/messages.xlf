@@ -6335,8 +6335,8 @@
       <trans-unit id="7281109430207838772" datatype="html">
         <source>Ukendt</source>
       </trans-unit>
-      <trans-unit id="7667083193803866408" datatype="html">
-        <source>Du kan højst vælge 100 ændringer ad gangen</source>
+      <trans-unit id="232323502805498331" datatype="html">
+        <source>Du kan højst vælge <x id="PH" equiv-text="MAX_SELECTION"/> ændringer ad gangen</source>
       </trans-unit>
       <trans-unit id="7672270251668328440" datatype="html">
         <source>Alle valgte brugerændringer blev anvendt</source>
